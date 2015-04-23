@@ -1,12 +1,12 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2014-10-01",
+    "apiVersion":"2015-03-01",
     "endpointPrefix":"ec2",
     "serviceAbbreviation":"Amazon EC2",
     "serviceFullName":"Amazon Elastic Compute Cloud",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://ec2.amazonaws.com/doc/2014-10-01",
+    "xmlNamespace":"http://ec2.amazonaws.com/doc/2015-03-01",
     "protocol":"ec2"
   },
   "documentation":"<fullname>Amazon Elastic Compute Cloud</fullname> <p>Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing capacity in the Amazon Web Services (AWS) cloud. Using Amazon EC2 eliminates your need to invest in hardware up front, so you can develop and deploy applications faster.</p>",
@@ -29,7 +29,7 @@
       },
       "input":{"shape":"AllocateAddressRequest"},
       "output":{"shape":"AllocateAddressResult"},
-      "documentation":"<p>Acquires an Elastic IP address.</p> <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Acquires an Elastic IP address.</p> <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "AssignPrivateIpAddresses":{
       "name":"AssignPrivateIpAddresses",
@@ -38,7 +38,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"AssignPrivateIpAddressesRequest"},
-      "documentation":"<p>Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>. For more information about Elastic IP addresses, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>AssignPrivateIpAddresses is available only in EC2-VPC.</p>"
+      "documentation":"<p>Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>AssignPrivateIpAddresses is available only in EC2-VPC.</p>"
     },
     "AssociateAddress":{
       "name":"AssociateAddress",
@@ -48,7 +48,7 @@
       },
       "input":{"shape":"AssociateAddressRequest"},
       "output":{"shape":"AssociateAddressResult"},
-      "documentation":"<p>Associates an Elastic IP address with an instance or a network interface.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>[EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance.</p> <p>[VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p>"
+      "documentation":"<p>Associates an Elastic IP address with an instance or a network interface.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance.</p> <p>[VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p>"
     },
     "AssociateDhcpOptions":{
       "name":"AssociateDhcpOptions",
@@ -109,7 +109,7 @@
         "shape":"VolumeAttachment",
         "locationName":"attachment"
       },
-      "documentation":"<p>Attaches an Amazon EBS volume to a running or stopped instance and exposes it to the instance with the specified device name.</p> <p>Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>For a list of supported device names, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html\">Attaching an Amazon EBS Volume to an Instance</a>. Any device names that aren't reserved for instance store volumes can be used for Amazon EBS volumes. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html\">Amazon EC2 Instance Store</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>If a volume has an AWS Marketplace product code:</p> <ul> <li>The volume can be attached only to a stopped instance.</li> <li>AWS Marketplace product codes are copied from the volume to the instance.</li> <li>You must be subscribed to the product.</li> <li>The instance type and operating system of the instance must support the product. For example, you can't detach a volume from a Windows instance and attach it to a Linux instance.</li> </ul> <p>For an overview of the AWS Marketplace, see <a href=\"https://aws.amazon.com/marketplace/help/200900000\">Introducing AWS Marketplace</a>.</p> <p>For more information about Amazon EBS volumes, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html\">Attaching Amazon EBS Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Attaches an Amazon EBS volume to a running or stopped instance and exposes it to the instance with the specified device name.</p> <p>Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For a list of supported device names, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html\">Attaching an Amazon EBS Volume to an Instance</a>. Any device names that aren't reserved for instance store volumes can be used for Amazon EBS volumes. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html\">Amazon EC2 Instance Store</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If a volume has an AWS Marketplace product code:</p> <ul> <li>The volume can be attached only to a stopped instance.</li> <li>AWS Marketplace product codes are copied from the volume to the instance.</li> <li>You must be subscribed to the product.</li> <li>The instance type and operating system of the instance must support the product. For example, you can't detach a volume from a Windows instance and attach it to a Linux instance.</li> </ul> <p>For an overview of the AWS Marketplace, see <a href=\"https://aws.amazon.com/marketplace/help/200900000\">Introducing AWS Marketplace</a>.</p> <p>For more information about Amazon EBS volumes, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html\">Attaching Amazon EBS Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "AttachVpnGateway":{
       "name":"AttachVpnGateway",
@@ -166,7 +166,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"CancelConversionRequest"},
-      "documentation":"<p>Cancels an active conversion task. The task can be the import of an instance or volume. The action removes all artifacts of the conversion, including a partially uploaded volume or instance. If the conversion is complete or is in the process of transferring the final disk image, the command fails and returns an exception.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Cancels an active conversion task. The task can be the import of an instance or volume. The action removes all artifacts of the conversion, including a partially uploaded volume or instance. If the conversion is complete or is in the process of transferring the final disk image, the command fails and returns an exception.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CancelExportTask":{
       "name":"CancelExportTask",
@@ -177,6 +177,16 @@
       "input":{"shape":"CancelExportTaskRequest"},
       "documentation":"<p>Cancels an active export task. The request removes all artifacts of the export, including any partially-created Amazon S3 objects. If the export task is complete or is in the process of transferring the final disk image, the command fails and returns an error.</p>"
     },
+    "CancelImportTask":{
+      "name":"CancelImportTask",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CancelImportTaskRequest"},
+      "output":{"shape":"CancelImportTaskResult"},
+      "documentation":"<p>Cancels an in-process import virtual machine or import snapshot task.</p>"
+    },
     "CancelReservedInstancesListing":{
       "name":"CancelReservedInstancesListing",
       "http":{
@@ -185,7 +195,7 @@
       },
       "input":{"shape":"CancelReservedInstancesListingRequest"},
       "output":{"shape":"CancelReservedInstancesListingResult"},
-      "documentation":"<p>Cancels the specified Reserved Instance listing in the Reserved Instance Marketplace.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Cancels the specified Reserved Instance listing in the Reserved Instance Marketplace.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CancelSpotInstanceRequests":{
       "name":"CancelSpotInstanceRequests",
@@ -195,7 +205,7 @@
       },
       "input":{"shape":"CancelSpotInstanceRequestsRequest"},
       "output":{"shape":"CancelSpotInstanceRequestsResult"},
-      "documentation":"<p>Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the bid price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <important> <p>Canceling a Spot Instance request does not terminate running Spot Instances associated with the request.</p> </important>"
+      "documentation":"<p>Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the bid price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <important> <p>Canceling a Spot Instance request does not terminate running Spot Instances associated with the request.</p> </important>"
     },
     "ConfirmProductInstance":{
       "name":"ConfirmProductInstance",
@@ -215,7 +225,7 @@
       },
       "input":{"shape":"CopyImageRequest"},
       "output":{"shape":"CopyImageResult"},
-      "documentation":"<p>Initiates the copy of an AMI from the specified source region to the current region. You specify the destination region by using its endpoint when making the request. AMIs that use encrypted Amazon EBS snapshots cannot be copied with this method.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Initiates the copy of an AMI from the specified source region to the current region. You specify the destination region by using its endpoint when making the request. AMIs that use encrypted Amazon EBS snapshots cannot be copied with this method.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CopySnapshot":{
       "name":"CopySnapshot",
@@ -225,7 +235,7 @@
       },
       "input":{"shape":"CopySnapshotRequest"},
       "output":{"shape":"CopySnapshotResult"},
-      "documentation":"<p>Copies a point-in-time snapshot of an Amazon EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create Amazon EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted Amazon EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted.</p> <note> <p>Copying snapshots that were encrypted with non-default AWS Key Management Service (KMS) master keys is not supported at this time. </p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Copies a point-in-time snapshot of an Amazon EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create Amazon EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted Amazon EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted.</p> <note> <p>Copying snapshots that were encrypted with non-default AWS Key Management Service (KMS) master keys is not supported at this time. </p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateCustomerGateway":{
       "name":"CreateCustomerGateway",
@@ -235,7 +245,7 @@
       },
       "input":{"shape":"CreateCustomerGatewayRequest"},
       "output":{"shape":"CreateCustomerGatewayResult"},
-      "documentation":"<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and can't be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> region, and 9059, which is reserved in the <code>eu-west-1</code> region.</p> </note> <p>For more information about VPN customer gateways, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">Adding a Hardware Virtual Private Gateway to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation":"<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and can't be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> region, and 9059, which is reserved in the <code>eu-west-1</code> region.</p> </note> <p>For more information about VPN customer gateways, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">Adding a Hardware Virtual Private Gateway to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <important> <p>You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. </p> </important>"
     },
     "CreateDhcpOptions":{
       "name":"CreateDhcpOptions",
@@ -255,7 +265,7 @@
       },
       "input":{"shape":"CreateImageRequest"},
       "output":{"shape":"CreateImageResult"},
-      "documentation":"<p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped.</p> <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating Amazon EBS-Backed Linux AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped.</p> <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating Amazon EBS-Backed Linux AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateInstanceExportTask":{
       "name":"CreateInstanceExportTask",
@@ -265,7 +275,7 @@
       },
       "input":{"shape":"CreateInstanceExportTaskRequest"},
       "output":{"shape":"CreateInstanceExportTaskResult"},
-      "documentation":"<p>Exports a running or stopped instance to an Amazon S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ExportingEC2Instances.html\">Exporting EC2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Exports a running or stopped instance to an Amazon S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ExportingEC2Instances.html\">Exporting EC2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateInternetGateway":{
       "name":"CreateInternetGateway",
@@ -289,7 +299,7 @@
         "documentation":"<p>Information about the key pair.</p>",
         "locationName":"keyPair"
       },
-      "documentation":"<p>Creates a 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#8 private key. If a key with the specified name already exists, Amazon EC2 returns an error.</p> <p>You can have up to five thousand key pairs per region.</p> <p>The key pair returned to you is available only in the region in which you create it. To create a key pair that is available in all regions, use <a>ImportKeyPair</a>.</p> <p>For more information about key pairs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates a 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#8 private key. If a key with the specified name already exists, Amazon EC2 returns an error.</p> <p>You can have up to five thousand key pairs per region.</p> <p>The key pair returned to you is available only in the region in which you create it. To create a key pair that is available in all regions, use <a>ImportKeyPair</a>.</p> <p>For more information about key pairs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateNetworkAcl":{
       "name":"CreateNetworkAcl",
@@ -318,7 +328,7 @@
       },
       "input":{"shape":"CreateNetworkInterfaceRequest"},
       "output":{"shape":"CreateNetworkInterfaceResult"},
-      "documentation":"<p>Creates a network interface in the specified subnet.</p> <p>For more information about network interfaces, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html\">Elastic Network Interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates a network interface in the specified subnet.</p> <p>For more information about network interfaces, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html\">Elastic Network Interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreatePlacementGroup":{
       "name":"CreatePlacementGroup",
@@ -327,7 +337,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"CreatePlacementGroupRequest"},
-      "documentation":"<p>Creates a placement group that you launch cluster instances into. You must give the group a name that's unique within the scope of your account.</p> <p>For more information about placement groups and cluster instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">Cluster Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates a placement group that you launch cluster instances into. You must give the group a name that's unique within the scope of your account.</p> <p>For more information about placement groups and cluster instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">Cluster Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateReservedInstancesListing":{
       "name":"CreateReservedInstancesListing",
@@ -337,7 +347,7 @@
       },
       "input":{"shape":"CreateReservedInstancesListingRequest"},
       "output":{"shape":"CreateReservedInstancesListingResult"},
-      "documentation":"<p>Creates a listing for Amazon EC2 Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Reserved Instance listing at a time. To get a list of your Reserved Instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <p>The Reserved Instance Marketplace matches sellers who want to resell Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. </p> <p>To sell your Reserved Instances, you must first register as a Seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Reserved Instances, and specify the upfront price to receive for them. Your Reserved Instance listings then become available for purchase. To view the details of your Reserved Instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates a listing for Amazon EC2 Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Reserved Instance listing at a time. To get a list of your Reserved Instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <p>The Reserved Instance Marketplace matches sellers who want to resell Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. </p> <p>To sell your Reserved Instances, you must first register as a Seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Reserved Instances, and specify the upfront price to receive for them. Your Reserved Instance listings then become available for purchase. To view the details of your Reserved Instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateRoute":{
       "name":"CreateRoute",
@@ -366,7 +376,7 @@
       },
       "input":{"shape":"CreateSecurityGroupRequest"},
       "output":{"shape":"CreateSecurityGroupResult"},
-      "documentation":"<p>Creates a security group.</p> <p>A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 Security Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i> and <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <important> <p>EC2-Classic: You can have up to 500 security groups.</p> <p>EC2-VPC: You can create up to 100 security groups per VPC.</p> </important> <p>When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name.</p> <p>You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other.</p> <p>You can add or remove rules from your security groups using <a>AuthorizeSecurityGroupIngress</a>, <a>AuthorizeSecurityGroupEgress</a>, <a>RevokeSecurityGroupIngress</a>, and <a>RevokeSecurityGroupEgress</a>.</p>"
+      "documentation":"<p>Creates a security group.</p> <p>A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 Security Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i> and <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <important> <p>EC2-Classic: You can have up to 500 security groups.</p> <p>EC2-VPC: You can create up to 100 security groups per VPC.</p> </important> <p>When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name.</p> <p>You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other.</p> <p>You can add or remove rules from your security groups using <a>AuthorizeSecurityGroupIngress</a>, <a>AuthorizeSecurityGroupEgress</a>, <a>RevokeSecurityGroupIngress</a>, and <a>RevokeSecurityGroupEgress</a>.</p>"
     },
     "CreateSnapshot":{
       "name":"CreateSnapshot",
@@ -379,7 +389,7 @@
         "shape":"Snapshot",
         "locationName":"snapshot"
       },
-      "documentation":"<p>Creates a snapshot of an Amazon EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of Amazon EBS volumes, and to save data before shutting down an instance.</p> <p>When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot.</p> <p>You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your Amazon EBS volume at the time the snapshot command is issued; this may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is <code>pending</code>.</p> <p>To create a snapshot for Amazon EBS volumes that serve as root devices, you should stop the instance before taking the snapshot.</p> <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon Elastic Block Store</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates a snapshot of an Amazon EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of Amazon EBS volumes, and to save data before shutting down an instance.</p> <p>When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot.</p> <p>You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your Amazon EBS volume at the time the snapshot command is issued; this may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is <code>pending</code>.</p> <p>To create a snapshot for Amazon EBS volumes that serve as root devices, you should stop the instance before taking the snapshot.</p> <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon Elastic Block Store</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateSpotDatafeedSubscription":{
       "name":"CreateSpotDatafeedSubscription",
@@ -389,7 +399,7 @@
       },
       "input":{"shape":"CreateSpotDatafeedSubscriptionRequest"},
       "output":{"shape":"CreateSpotDatafeedSubscriptionResult"},
-      "documentation":"<p>Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateSubnet":{
       "name":"CreateSubnet",
@@ -408,7 +418,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"CreateTagsRequest"},
-      "documentation":"<p>Adds or overwrites one or more tags for the specified Amazon EC2 resource or resources. Each resource can have a maximum of 10 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Adds or overwrites one or more tags for the specified Amazon EC2 resource or resources. Each resource can have a maximum of 10 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateVolume":{
       "name":"CreateVolume",
@@ -421,7 +431,7 @@
         "shape":"Volume",
         "locationName":"volume"
       },
-      "documentation":"<p>Creates an Amazon EBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the regional endpoint that you send the HTTP request to. For more information see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html\">Regions and Endpoints</a>.</p> <p>You can create a new empty volume or restore a volume from an Amazon EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated to the volume.</p> <p>You can create encrypted volumes with the <code>Encrypted</code> parameter. Encrypted volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html\">Creating or Restoring an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates an Amazon EBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the regional endpoint that you send the HTTP request to. For more information see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html\">Regions and Endpoints</a>.</p> <p>You can create a new empty volume or restore a volume from an Amazon EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated to the volume.</p> <p>You can create encrypted volumes with the <code>Encrypted</code> parameter. Encrypted volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html\">Creating or Restoring an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateVpc":{
       "name":"CreateVpc",
@@ -542,7 +552,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeletePlacementGroupRequest"},
-      "documentation":"<p>Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information about placement groups and cluster instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">Cluster Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information about placement groups and cluster instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">Cluster Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DeleteRoute":{
       "name":"DeleteRoute",
@@ -578,7 +588,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteSnapshotRequest"},
-      "documentation":"<p>Deletes the specified snapshot.</p> <p>When you make periodic snapshots of a volume, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the volume.</p> <p>You cannot delete a snapshot of the root device of an Amazon EBS volume used by a registered AMI. You must first de-register the AMI before you can delete the snapshot.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-snapshot.html\">Deleting an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Deletes the specified snapshot.</p> <p>When you make periodic snapshots of a volume, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the volume.</p> <p>You cannot delete a snapshot of the root device of an Amazon EBS volume used by a registered AMI. You must first de-register the AMI before you can delete the snapshot.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-snapshot.html\">Deleting an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DeleteSpotDatafeedSubscription":{
       "name":"DeleteSpotDatafeedSubscription",
@@ -587,7 +597,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteSpotDatafeedSubscriptionRequest"},
-      "documentation":"<p>Deletes the data feed for Spot Instances. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Deletes the data feed for Spot Instances. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DeleteSubnet":{
       "name":"DeleteSubnet",
@@ -605,7 +615,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteTagsRequest"},
-      "documentation":"<p>Deletes the specified set of tags from the specified set of resources. This call is designed to follow a <code>DescribeTags</code> request.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Deletes the specified set of tags from the specified set of resources. This call is designed to follow a <code>DescribeTags</code> request.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DeleteVolume":{
       "name":"DeleteVolume",
@@ -614,7 +624,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteVolumeRequest"},
-      "documentation":"<p>Deletes the specified Amazon EBS volume. The volume must be in the <code>available</code> state (not attached to an instance).</p> <note> <p>The volume may remain in the <code>deleting</code> state for several minutes.</p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html\">Deleting an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Deletes the specified Amazon EBS volume. The volume must be in the <code>available</code> state (not attached to an instance).</p> <note> <p>The volume may remain in the <code>deleting</code> state for several minutes.</p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html\">Deleting an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DeleteVpc":{
       "name":"DeleteVpc",
@@ -689,7 +699,7 @@
       },
       "input":{"shape":"DescribeAddressesRequest"},
       "output":{"shape":"DescribeAddressesResult"},
-      "documentation":"<p>Describes one or more of your Elastic IP addresses.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes one or more of your Elastic IP addresses.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeAvailabilityZones":{
       "name":"DescribeAvailabilityZones",
@@ -699,7 +709,7 @@
       },
       "input":{"shape":"DescribeAvailabilityZonesRequest"},
       "output":{"shape":"DescribeAvailabilityZonesResult"},
-      "documentation":"<p>Describes one or more of the Availability Zones that are available to you. The results include zones only for the region you're currently using. If there is an event impacting an Availability Zone, you can use this request to view the state and any provided message for that Availability Zone.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html\">Regions and Availability Zones</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes one or more of the Availability Zones that are available to you. The results include zones only for the region you're currently using. If there is an event impacting an Availability Zone, you can use this request to view the state and any provided message for that Availability Zone.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html\">Regions and Availability Zones</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeBundleTasks":{
       "name":"DescribeBundleTasks",
@@ -729,7 +739,7 @@
       },
       "input":{"shape":"DescribeConversionTasksRequest"},
       "output":{"shape":"DescribeConversionTasksResult"},
-      "documentation":"<p>Describes one or more of your conversion tasks. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes one or more of your conversion tasks. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeCustomerGateways":{
       "name":"DescribeCustomerGateways",
@@ -785,6 +795,26 @@
       "output":{"shape":"DescribeImagesResult"},
       "documentation":"<p>Describes one or more of the images (AMIs, AKIs, and ARIs) available to you. Images available to you include public images, private images that you own, and private images owned by other AWS accounts but for which you have explicit launch permissions.</p> <note><p>Deregistered images are included in the returned results for an unspecified interval after deregistration.</p></note>"
     },
+    "DescribeImportImageTasks":{
+      "name":"DescribeImportImageTasks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeImportImageTasksRequest"},
+      "output":{"shape":"DescribeImportImageTasksResult"},
+      "documentation":"<p>Displays details about an import virtual machine or import snapshot tasks that are already created.</p>"
+    },
+    "DescribeImportSnapshotTasks":{
+      "name":"DescribeImportSnapshotTasks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeImportSnapshotTasksRequest"},
+      "output":{"shape":"DescribeImportSnapshotTasksResult"},
+      "documentation":"<p>Displays details about an import snapshot tasks that is already created.</p>"
+    },
     "DescribeInstanceAttribute":{
       "name":"DescribeInstanceAttribute",
       "http":{
@@ -803,7 +833,7 @@
       },
       "input":{"shape":"DescribeInstanceStatusRequest"},
       "output":{"shape":"DescribeInstanceStatusResult"},
-      "documentation":"<p>Describes the status of one or more instances, including any scheduled events.</p> <p>Instance status has two main components:</p> <ul> <li> <p>System Status reports impaired functionality that stems from issues related to the systems that support an instance, such as such as hardware failures and network connectivity problems. This call reports such problems as impaired reachability.</p> </li> <li> <p>Instance Status reports impaired functionality that arises from problems internal to the instance. This call reports such problems as impaired reachability.</p> </li> </ul> <p>Instance status provides information about four types of scheduled events for an instance that may require your attention:</p> <ul> <li> <p>Scheduled Reboot: When Amazon EC2 determines that an instance must be rebooted, the instances status returns one of two event codes: <code>system-reboot</code> or <code>instance-reboot</code>. System reboot commonly occurs if certain maintenance or upgrade operations require a reboot of the underlying host that supports an instance. Instance reboot commonly occurs if the instance must be rebooted, rather than the underlying host. Rebooting events include a scheduled start and end time.</p> </li> <li> <p>System Maintenance: When Amazon EC2 determines that an instance requires maintenance that requires power or network impact, the instance status is the event code <code>system-maintenance</code>. System maintenance is either power maintenance or network maintenance. For power maintenance, your instance will be unavailable for a brief period of time and then rebooted. For network maintenance, your instance will experience a brief loss of network connectivity. System maintenance events include a scheduled start and end time. You will also be notified by email if one of your instances is set for system maintenance. The email message indicates when your instance is scheduled for maintenance.</p> </li> <li> <p>Scheduled Retirement: When Amazon EC2 determines that an instance must be shut down, the instance status is the event code <code>instance-retirement</code>. Retirement commonly occurs when the underlying host is degraded and must be replaced. Retirement events include a scheduled start and end time. You will also be notified by email if one of your instances is set to retiring. The email message indicates when your instance will be permanently retired.</p> </li> <li> <p>Scheduled Stop: When Amazon EC2 determines that an instance must be shut down, the instances status returns an event code called <code>instance-stop</code>. Stop events include a scheduled start and end time. You will also be notified by email if one of your instances is set to stop. The email message indicates when your instance will be stopped.</p> </li> </ul> <p>When your instance is retired, it will either be terminated (if its root device type is the instance-store) or stopped (if its root device type is an EBS volume). Instances stopped due to retirement will not be restarted, but you can do so manually. You can also avoid retirement of EBS-backed instances by manually restarting your instance when its event code is <code>instance-retirement</code>. This ensures that your instance is started on a different underlying host.</p> <p>For more information about failed status checks, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html\">Troubleshooting Instances with Failed Status Checks</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>. For more information about working with scheduled events, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html#schedevents_actions\">Working with an Instance That Has a Scheduled Event</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes the status of one or more instances, including any scheduled events.</p> <p>Instance status has two main components:</p> <ul> <li> <p>System Status reports impaired functionality that stems from issues related to the systems that support an instance, such as such as hardware failures and network connectivity problems. This call reports such problems as impaired reachability.</p> </li> <li> <p>Instance Status reports impaired functionality that arises from problems internal to the instance. This call reports such problems as impaired reachability.</p> </li> </ul> <p>Instance status provides information about four types of scheduled events for an instance that may require your attention:</p> <ul> <li> <p>Scheduled Reboot: When Amazon EC2 determines that an instance must be rebooted, the instances status returns one of two event codes: <code>system-reboot</code> or <code>instance-reboot</code>. System reboot commonly occurs if certain maintenance or upgrade operations require a reboot of the underlying host that supports an instance. Instance reboot commonly occurs if the instance must be rebooted, rather than the underlying host. Rebooting events include a scheduled start and end time.</p> </li> <li> <p>System Maintenance: When Amazon EC2 determines that an instance requires maintenance that requires power or network impact, the instance status is the event code <code>system-maintenance</code>. System maintenance is either power maintenance or network maintenance. For power maintenance, your instance will be unavailable for a brief period of time and then rebooted. For network maintenance, your instance will experience a brief loss of network connectivity. System maintenance events include a scheduled start and end time. You will also be notified by email if one of your instances is set for system maintenance. The email message indicates when your instance is scheduled for maintenance.</p> </li> <li> <p>Scheduled Retirement: When Amazon EC2 determines that an instance must be shut down, the instance status is the event code <code>instance-retirement</code>. Retirement commonly occurs when the underlying host is degraded and must be replaced. Retirement events include a scheduled start and end time. You will also be notified by email if one of your instances is set to retiring. The email message indicates when your instance will be permanently retired.</p> </li> <li> <p>Scheduled Stop: When Amazon EC2 determines that an instance must be shut down, the instances status returns an event code called <code>instance-stop</code>. Stop events include a scheduled start and end time. You will also be notified by email if one of your instances is set to stop. The email message indicates when your instance will be stopped.</p> </li> </ul> <p>When your instance is retired, it will either be terminated (if its root device type is the instance-store) or stopped (if its root device type is an EBS volume). Instances stopped due to retirement will not be restarted, but you can do so manually. You can also avoid retirement of EBS-backed instances by manually restarting your instance when its event code is <code>instance-retirement</code>. This ensures that your instance is started on a different underlying host.</p> <p>For more information about failed status checks, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html\">Troubleshooting Instances with Failed Status Checks</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about working with scheduled events, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html#schedevents_actions\">Working with an Instance That Has a Scheduled Event</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeInstances":{
       "name":"DescribeInstances",
@@ -833,7 +863,7 @@
       },
       "input":{"shape":"DescribeKeyPairsRequest"},
       "output":{"shape":"DescribeKeyPairsResult"},
-      "documentation":"<p>Describes one or more of your key pairs.</p> <p>For more information about key pairs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes one or more of your key pairs.</p> <p>For more information about key pairs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeNetworkAcls":{
       "name":"DescribeNetworkAcls",
@@ -873,7 +903,7 @@
       },
       "input":{"shape":"DescribePlacementGroupsRequest"},
       "output":{"shape":"DescribePlacementGroupsResult"},
-      "documentation":"<p>Describes one or more of your placement groups. For more information about placement groups and cluster instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">Cluster Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes one or more of your placement groups. For more information about placement groups and cluster instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">Cluster Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeRegions":{
       "name":"DescribeRegions",
@@ -893,7 +923,7 @@
       },
       "input":{"shape":"DescribeReservedInstancesRequest"},
       "output":{"shape":"DescribeReservedInstancesResult"},
-      "documentation":"<p>Describes one or more of the Reserved Instances that you purchased.</p> <p>For more information about Reserved Instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html\">Reserved Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes one or more of the Reserved Instances that you purchased.</p> <p>For more information about Reserved Instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html\">Reserved Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeReservedInstancesListings":{
       "name":"DescribeReservedInstancesListings",
@@ -903,7 +933,7 @@
       },
       "input":{"shape":"DescribeReservedInstancesListingsRequest"},
       "output":{"shape":"DescribeReservedInstancesListingsResult"},
-      "documentation":"<p>Describes your account's Reserved Instance listings in the Reserved Instance Marketplace.</p> <p>The Reserved Instance Marketplace matches sellers who want to resell Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. </p> <p>As a seller, you choose to list some or all of your Reserved Instances, and you specify the upfront price to receive for them. Your Reserved Instances are then listed in the Reserved Instance Marketplace and are available for purchase. </p> <p>As a buyer, you specify the configuration of the Reserved Instance to purchase, and the Marketplace matches what you're searching for with what's available. The Marketplace first sells the lowest priced Reserved Instances to you, and continues to sell available Reserved Instance listings to you until your demand is met. You are charged based on the total price of all of the listings that you purchase.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes your account's Reserved Instance listings in the Reserved Instance Marketplace.</p> <p>The Reserved Instance Marketplace matches sellers who want to resell Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. </p> <p>As a seller, you choose to list some or all of your Reserved Instances, and you specify the upfront price to receive for them. Your Reserved Instances are then listed in the Reserved Instance Marketplace and are available for purchase. </p> <p>As a buyer, you specify the configuration of the Reserved Instance to purchase, and the Marketplace matches what you're searching for with what's available. The Marketplace first sells the lowest priced Reserved Instances to you, and continues to sell available Reserved Instance listings to you until your demand is met. You are charged based on the total price of all of the listings that you purchase.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeReservedInstancesModifications":{
       "name":"DescribeReservedInstancesModifications",
@@ -913,7 +943,7 @@
       },
       "input":{"shape":"DescribeReservedInstancesModificationsRequest"},
       "output":{"shape":"DescribeReservedInstancesModificationsResult"},
-      "documentation":"<p>Describes the modifications made to your Reserved Instances. If no parameter is specified, information about all your Reserved Instances modification requests is returned. If a modification ID is specified, only information about the specific modification is returned.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide for Linux.</p>"
+      "documentation":"<p>Describes the modifications made to your Reserved Instances. If no parameter is specified, information about all your Reserved Instances modification requests is returned. If a modification ID is specified, only information about the specific modification is returned.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
     },
     "DescribeReservedInstancesOfferings":{
       "name":"DescribeReservedInstancesOfferings",
@@ -923,7 +953,7 @@
       },
       "input":{"shape":"DescribeReservedInstancesOfferingsRequest"},
       "output":{"shape":"DescribeReservedInstancesOfferingsResult"},
-      "documentation":"<p>Describes Reserved Instance offerings that are available for purchase. With Reserved Instances, you purchase the right to launch instances for a period of time. During that time period, you do not receive insufficient capacity errors, and you pay a lower usage rate than the rate charged for On-Demand instances for the actual time used.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes Reserved Instance offerings that are available for purchase. With Reserved Instances, you purchase the right to launch instances for a period of time. During that time period, you do not receive insufficient capacity errors, and you pay a lower usage rate than the rate charged for On-Demand instances for the actual time used.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeRouteTables":{
       "name":"DescribeRouteTables",
@@ -943,7 +973,7 @@
       },
       "input":{"shape":"DescribeSecurityGroupsRequest"},
       "output":{"shape":"DescribeSecurityGroupsResult"},
-      "documentation":"<p>Describes one or more of your security groups.</p> <p>A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 Security Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i> and <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation":"<p>Describes one or more of your security groups.</p> <p>A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 Security Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i> and <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "DescribeSnapshotAttribute":{
       "name":"DescribeSnapshotAttribute",
@@ -953,7 +983,7 @@
       },
       "input":{"shape":"DescribeSnapshotAttributeRequest"},
       "output":{"shape":"DescribeSnapshotAttributeResult"},
-      "documentation":"<p>Describes the specified attribute of the specified snapshot. You can specify only one attribute at a time.</p> <p>For more information about Amazon EBS snapshots, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html'>Amazon EBS Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes the specified attribute of the specified snapshot. You can specify only one attribute at a time.</p> <p>For more information about Amazon EBS snapshots, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html'>Amazon EBS Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeSnapshots":{
       "name":"DescribeSnapshots",
@@ -963,7 +993,7 @@
       },
       "input":{"shape":"DescribeSnapshotsRequest"},
       "output":{"shape":"DescribeSnapshotsResult"},
-      "documentation":"<p>Describes one or more of the Amazon EBS snapshots available to you. Available snapshots include public snapshots available for any AWS account to launch, private snapshots that you own, and private snapshots owned by another AWS account but for which you've been given explicit create volume permissions.</p> <p>The create volume permissions fall into the following categories:</p> <ul> <li> <i>public</i>: The owner of the snapshot granted create volume permissions for the snapshot to the <code>all</code> group. All AWS accounts have create volume permissions for these snapshots.</li> <li> <i>explicit</i>: The owner of the snapshot granted create volume permissions to a specific AWS account.</li> <li> <i>implicit</i>: An AWS account has implicit create volume permissions for all snapshots it owns.</li> </ul> <p>The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions.</p> <p>If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results.</p> <p>If you specify one or more snapshot owners, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, <code>amazon</code> for snapshots owned by Amazon, or <code>self</code> for snapshots that you own.</p> <p>If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), <code>self</code> for snapshots for which you own or have explicit permissions, or <code>all</code> for public snapshots.</p> <p>If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeSnapshots</code> request to retrieve the remaining results.</p> <p>For more information about Amazon EBS snapshots, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html'>Amazon EBS Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes one or more of the Amazon EBS snapshots available to you. Available snapshots include public snapshots available for any AWS account to launch, private snapshots that you own, and private snapshots owned by another AWS account but for which you've been given explicit create volume permissions.</p> <p>The create volume permissions fall into the following categories:</p> <ul> <li> <i>public</i>: The owner of the snapshot granted create volume permissions for the snapshot to the <code>all</code> group. All AWS accounts have create volume permissions for these snapshots.</li> <li> <i>explicit</i>: The owner of the snapshot granted create volume permissions to a specific AWS account.</li> <li> <i>implicit</i>: An AWS account has implicit create volume permissions for all snapshots it owns.</li> </ul> <p>The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions.</p> <p>If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results.</p> <p>If you specify one or more snapshot owners, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, <code>amazon</code> for snapshots owned by Amazon, or <code>self</code> for snapshots that you own.</p> <p>If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), <code>self</code> for snapshots for which you own or have explicit permissions, or <code>all</code> for public snapshots.</p> <p>If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeSnapshots</code> request to retrieve the remaining results.</p> <p>For more information about Amazon EBS snapshots, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html'>Amazon EBS Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeSpotDatafeedSubscription":{
       "name":"DescribeSpotDatafeedSubscription",
@@ -973,7 +1003,7 @@
       },
       "input":{"shape":"DescribeSpotDatafeedSubscriptionRequest"},
       "output":{"shape":"DescribeSpotDatafeedSubscriptionResult"},
-      "documentation":"<p>Describes the data feed for Spot Instances. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes the data feed for Spot Instances. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeSpotInstanceRequests":{
       "name":"DescribeSpotInstanceRequests",
@@ -983,7 +1013,7 @@
       },
       "input":{"shape":"DescribeSpotInstanceRequestsRequest"},
       "output":{"shape":"DescribeSpotInstanceRequestsResult"},
-      "documentation":"<p>Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>You can use <code>DescribeSpotInstanceRequests</code> to find a running Spot Instance by examining the response. If the status of the Spot Instance is <code>fulfilled</code>, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use <a>DescribeInstances</a> with a filter to look for instances where the instance lifecycle is <code>spot</code>.</p>"
+      "documentation":"<p>Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can use <code>DescribeSpotInstanceRequests</code> to find a running Spot Instance by examining the response. If the status of the Spot Instance is <code>fulfilled</code>, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use <a>DescribeInstances</a> with a filter to look for instances where the instance lifecycle is <code>spot</code>.</p>"
     },
     "DescribeSpotPriceHistory":{
       "name":"DescribeSpotPriceHistory",
@@ -993,7 +1023,7 @@
       },
       "input":{"shape":"DescribeSpotPriceHistoryRequest"},
       "output":{"shape":"DescribeSpotPriceHistoryResult"},
-      "documentation":"<p>Describes the Spot Price history. The prices returned are listed in chronological order, from the oldest to the most recent, for up to the past 90 days. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html\">Spot Instance Pricing History</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.</p>"
+      "documentation":"<p>Describes the Spot Price history. The prices returned are listed in chronological order, from the oldest to the most recent, for up to the past 90 days. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html\">Spot Instance Pricing History</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.</p>"
     },
     "DescribeSubnets":{
       "name":"DescribeSubnets",
@@ -1013,7 +1043,7 @@
       },
       "input":{"shape":"DescribeTagsRequest"},
       "output":{"shape":"DescribeTagsResult"},
-      "documentation":"<p>Describes one or more of the tags for your EC2 resources.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes one or more of the tags for your EC2 resources.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeVolumeAttribute":{
       "name":"DescribeVolumeAttribute",
@@ -1023,7 +1053,7 @@
       },
       "input":{"shape":"DescribeVolumeAttributeRequest"},
       "output":{"shape":"DescribeVolumeAttributeResult"},
-      "documentation":"<p>Describes the specified attribute of the specified volume. You can specify only one attribute at a time.</p> <p>For more information about Amazon EBS volumes, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html'>Amazon EBS Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes the specified attribute of the specified volume. You can specify only one attribute at a time.</p> <p>For more information about Amazon EBS volumes, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html'>Amazon EBS Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeVolumeStatus":{
       "name":"DescribeVolumeStatus",
@@ -1043,7 +1073,7 @@
       },
       "input":{"shape":"DescribeVolumesRequest"},
       "output":{"shape":"DescribeVolumesResult"},
-      "documentation":"<p>Describes the specified Amazon EBS volumes.</p> <p>If you are describing a long list of volumes, you can paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeVolumes</code> request to retrieve the remaining results.</p> <p>For more information about Amazon EBS volumes, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html'>Amazon EBS Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Describes the specified Amazon EBS volumes.</p> <p>If you are describing a long list of volumes, you can paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeVolumes</code> request to retrieve the remaining results.</p> <p>For more information about Amazon EBS volumes, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html'>Amazon EBS Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeVpcAttribute":{
       "name":"DescribeVpcAttribute",
@@ -1144,7 +1174,7 @@
         "shape":"VolumeAttachment",
         "locationName":"attachment"
       },
-      "documentation":"<p>Detaches an Amazon EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so results in the volume being stuck in a busy state while detaching.</p> <p>If an Amazon EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first.</p> <p>When a volume with an AWS Marketplace product code is detached from an instance, the product code is no longer associated with the instance.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html\">Detaching an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Detaches an Amazon EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so results in the volume being stuck in a busy state while detaching.</p> <p>If an Amazon EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first.</p> <p>When a volume with an AWS Marketplace product code is detached from an instance, the product code is no longer associated with the instance.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html\">Detaching an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DetachVpnGateway":{
       "name":"DetachVpnGateway",
@@ -1181,7 +1211,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"DisassociateAddressRequest"},
-      "documentation":"<p>Disassociates an Elastic IP address from the instance or network interface it's associated with.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p>"
+      "documentation":"<p>Disassociates an Elastic IP address from the instance or network interface it's associated with.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p>"
     },
     "DisassociateRouteTable":{
       "name":"DisassociateRouteTable",
@@ -1218,7 +1248,7 @@
       },
       "input":{"shape":"EnableVpcClassicLinkRequest"},
       "output":{"shape":"EnableVpcClassicLinkResult"},
-      "documentation":"<p>Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC's route tables have existing routes for address ranges within the <code>10.0.0.0/8</code> IP address range, excluding local routes for VPCs in the <code>10.0.0.0/16</code> and <code>10.1.0.0/16</code> IP address ranges. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the Amazon Elastic Compute Cloud User Guide for Linux.</p>"
+      "documentation":"<p>Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC's route tables have existing routes for address ranges within the <code>10.0.0.0/8</code> IP address range, excluding local routes for VPCs in the <code>10.0.0.0/16</code> and <code>10.1.0.0/16</code> IP address ranges. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
     },
     "GetConsoleOutput":{
       "name":"GetConsoleOutput",
@@ -1240,6 +1270,16 @@
       "output":{"shape":"GetPasswordDataResult"},
       "documentation":"<p>Retrieves the encrypted administrator password for an instance running Windows.</p> <p>The Windows password is generated at boot if the <code>EC2Config</code> service plugin, <code>Ec2SetPassword</code>, is enabled. This usually only happens the first time an AMI is launched, and then <code>Ec2SetPassword</code> is automatically disabled. The password is not generated for rebundled AMIs unless <code>Ec2SetPassword</code> is enabled before bundling.</p> <p>The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file.</p> <p>Password generation and encryption takes a few moments. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.</p>"
     },
+    "ImportImage":{
+      "name":"ImportImage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ImportImageRequest"},
+      "output":{"shape":"ImportImageResult"},
+      "documentation":"<p>Import single or multi-volume disk images or Amazon EBS snapshots into an Amazon Machine Image (AMI).</p>"
+    },
     "ImportInstance":{
       "name":"ImportInstance",
       "http":{
@@ -1248,7 +1288,7 @@
       },
       "input":{"shape":"ImportInstanceRequest"},
       "output":{"shape":"ImportInstanceResult"},
-      "documentation":"<p>Creates an import instance task using metadata from the specified disk image. After importing the image, you then upload it using the <code>ec2-import-volume</code> command in the EC2 command line tools. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates an import instance task using metadata from the specified disk image. ImportInstance only supports single-volume VMs. To import multi-volume VMs, use <a>ImportImage</a>. After importing the image, you then upload it using the <code>ec2-import-volume</code> command in the EC2 command line tools. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "ImportKeyPair":{
       "name":"ImportKeyPair",
@@ -1258,7 +1298,17 @@
       },
       "input":{"shape":"ImportKeyPairRequest"},
       "output":{"shape":"ImportKeyPairResult"},
-      "documentation":"<p>Imports the public key from an RSA key pair that you created with a third-party tool. Compare this with <a>CreateKeyPair</a>, in which AWS creates the key pair and gives the keys to you (AWS keeps a copy of the public key). With ImportKeyPair, you create the key pair and give AWS just the public key. The private key is never transferred between you and AWS.</p> <p>For more information about key pairs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Imports the public key from an RSA key pair that you created with a third-party tool. Compare this with <a>CreateKeyPair</a>, in which AWS creates the key pair and gives the keys to you (AWS keeps a copy of the public key). With ImportKeyPair, you create the key pair and give AWS just the public key. The private key is never transferred between you and AWS.</p> <p>For more information about key pairs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "ImportSnapshot":{
+      "name":"ImportSnapshot",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ImportSnapshotRequest"},
+      "output":{"shape":"ImportSnapshotResult"},
+      "documentation":"<p>Import a disk into an Amazon Elastic Block Store (Amazon EBS) snapshot.</p>"
     },
     "ImportVolume":{
       "name":"ImportVolume",
@@ -1268,7 +1318,7 @@
       },
       "input":{"shape":"ImportVolumeRequest"},
       "output":{"shape":"ImportVolumeResult"},
-      "documentation":"<p>Creates an import volume task using metadata from the specified disk image. After importing the image, you then upload it using the <code>ec2-import-volume</code> command in the Amazon EC2 command-line interface (CLI) tools. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates an import volume task using metadata from the specified disk image. After importing the image, you then upload it using the <code>ec2-import-volume</code> command in the Amazon EC2 command-line interface (CLI) tools. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "ModifyImageAttribute":{
       "name":"ModifyImageAttribute",
@@ -1286,7 +1336,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"ModifyInstanceAttributeRequest"},
-      "documentation":"<p>Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.</p> <p>To modify some attributes, the instance must be stopped. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html\">Modifying Attributes of a Stopped Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.</p> <p>To modify some attributes, the instance must be stopped. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html\">Modifying Attributes of a Stopped Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "ModifyNetworkInterfaceAttribute":{
       "name":"ModifyNetworkInterfaceAttribute",
@@ -1305,7 +1355,7 @@
       },
       "input":{"shape":"ModifyReservedInstancesRequest"},
       "output":{"shape":"ModifyReservedInstancesResult"},
-      "documentation":"<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide for Linux.</p>"
+      "documentation":"<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
     },
     "ModifySnapshotAttribute":{
       "name":"ModifySnapshotAttribute",
@@ -1314,7 +1364,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"ModifySnapshotAttributeRequest"},
-      "documentation":"<p>Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single API call. If you need to both add and remove account IDs for a snapshot, you must use multiple API calls.</p> <p>For more information on modifying snapshot permissions, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html\">Sharing Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <note> <p>Snapshots with AWS Marketplace product codes cannot be made public.</p> </note>"
+      "documentation":"<p>Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single API call. If you need to both add and remove account IDs for a snapshot, you must use multiple API calls.</p> <p>For more information on modifying snapshot permissions, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html\">Sharing Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <note> <p>Snapshots with AWS Marketplace product codes cannot be made public.</p> </note>"
     },
     "ModifySubnetAttribute":{
       "name":"ModifySubnetAttribute",
@@ -1351,7 +1401,7 @@
       },
       "input":{"shape":"MonitorInstancesRequest"},
       "output":{"shape":"MonitorInstancesResult"},
-      "documentation":"<p>Enables monitoring for a running instance. For more information about monitoring instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html\">Monitoring Your Instances and Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Enables monitoring for a running instance. For more information about monitoring instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html\">Monitoring Your Instances and Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "PurchaseReservedInstancesOffering":{
       "name":"PurchaseReservedInstancesOffering",
@@ -1361,7 +1411,7 @@
       },
       "input":{"shape":"PurchaseReservedInstancesOfferingRequest"},
       "output":{"shape":"PurchaseReservedInstancesOfferingResult"},
-      "documentation":"<p>Purchases a Reserved Instance for use with your account. With Amazon EC2 Reserved Instances, you obtain a capacity reservation for a certain instance configuration over a specified period of time. You pay a lower usage rate than with On-Demand instances for the time that you actually use the capacity reservation.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html\">Reserved Instances</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Purchases a Reserved Instance for use with your account. With Amazon EC2 Reserved Instances, you obtain a capacity reservation for a certain instance configuration over a specified period of time. You pay a lower usage rate than with On-Demand instances for the time that you actually use the capacity reservation.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html\">Reserved Instances</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "RebootInstances":{
       "name":"RebootInstances",
@@ -1370,7 +1420,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"RebootInstancesRequest"},
-      "documentation":"<p>Requests a reboot of one or more instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored.</p> <p>If a Linux/Unix instance does not cleanly shut down within four minutes, Amazon EC2 performs a hard reboot.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html\">Getting Console Output and Rebooting Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Requests a reboot of one or more instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored.</p> <p>If a Linux/Unix instance does not cleanly shut down within four minutes, Amazon EC2 performs a hard reboot.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html\">Getting Console Output and Rebooting Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "RegisterImage":{
       "name":"RegisterImage",
@@ -1380,7 +1430,7 @@
       },
       "input":{"shape":"RegisterImageRequest"},
       "output":{"shape":"RegisterImageResult"},
-      "documentation":"<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating Your Own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <note><p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers the AMI in a single request, so you don't have to register the AMI yourself.</p></note> <p>You can also use <code>RegisterImage</code> to create an Amazon EBS-backed AMI from a snapshot of a root device volume. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_LaunchingInstanceFromSnapshot.html\">Launching an Instance from a Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.</p> <note><p>You can't register an image where a secondary (non-root) snapshot has AWS Marketplace product codes.</p></note>"
+      "documentation":"<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating Your Own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <note><p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers the AMI in a single request, so you don't have to register the AMI yourself.</p></note> <p>You can also use <code>RegisterImage</code> to create an Amazon EBS-backed AMI from a snapshot of a root device volume. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_LaunchingInstanceFromSnapshot.html\">Launching an Instance from a Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.</p> <note><p>You can't register an image where a secondary (non-root) snapshot has AWS Marketplace product codes.</p></note>"
     },
     "RejectVpcPeeringConnection":{
       "name":"RejectVpcPeeringConnection",
@@ -1456,7 +1506,7 @@
       },
       "input":{"shape":"RequestSpotInstancesRequest"},
       "output":{"shape":"RequestSpotInstancesResult"},
-      "documentation":"<p>Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "ResetImageAttribute":{
       "name":"ResetImageAttribute",
@@ -1492,7 +1542,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"ResetSnapshotAttributeRequest"},
-      "documentation":"<p>Resets permission settings for the specified snapshot.</p> <p>For more information on modifying snapshot permissions, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html\">Sharing Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Resets permission settings for the specified snapshot.</p> <p>For more information on modifying snapshot permissions, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html\">Sharing Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "RevokeSecurityGroupEgress":{
       "name":"RevokeSecurityGroupEgress",
@@ -1524,7 +1574,7 @@
         "documentation":"<p>One or more reservations.</p>",
         "locationName":"reservation"
       },
-      "documentation":"<p>Launches the specified number of instances using an AMI for which you have permissions.</p> <p>When you launch an instance, it enters the <code>pending</code> state. After the instance is ready for you, it enters the <code>running</code> state. To check the state of your instance, call <a>DescribeInstances</a>.</p> <p>If you don't specify a security group when launching an instance, Amazon EC2 uses the default security group. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Security Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>You can provide optional user data when launching an instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html\">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>If any of the AMIs have a product code attached for which the user has not subscribed, <code>RunInstances</code> fails.</p> <p>T2 instance types can only be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID in the request, <code>RunInstances</code> fails.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html\">What To Do If An Instance Immediately Terminates</a>, and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html\">Troubleshooting Connecting to Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Launches the specified number of instances using an AMI for which you have permissions.</p> <p>When you launch an instance, it enters the <code>pending</code> state. After the instance is ready for you, it enters the <code>running</code> state. To check the state of your instance, call <a>DescribeInstances</a>.</p> <p>If you don't specify a security group when launching an instance, Amazon EC2 uses the default security group. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Security Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can provide optional user data when launching an instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html\">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If any of the AMIs have a product code attached for which the user has not subscribed, <code>RunInstances</code> fails.</p> <p>T2 instance types can only be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID in the request, <code>RunInstances</code> fails.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html\">What To Do If An Instance Immediately Terminates</a>, and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html\">Troubleshooting Connecting to Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "StartInstances":{
       "name":"StartInstances",
@@ -1534,7 +1584,7 @@
       },
       "input":{"shape":"StartInstancesRequest"},
       "output":{"shape":"StartInstancesResult"},
-      "documentation":"<p>Starts an Amazon EBS-backed AMI that you've previously stopped.</p> <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Each time you transition an instance from stopped to started, Amazon EC2 charges a full instance hour, even if transitions happen multiple times within a single hour.</p> <p>Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Performing this operation on an instance that uses an instance store as its root device returns an error.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html\">Stopping Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Starts an Amazon EBS-backed AMI that you've previously stopped.</p> <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Each time you transition an instance from stopped to started, Amazon EC2 charges a full instance hour, even if transitions happen multiple times within a single hour.</p> <p>Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Performing this operation on an instance that uses an instance store as its root device returns an error.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html\">Stopping Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "StopInstances":{
       "name":"StopInstances",
@@ -1544,7 +1594,7 @@
       },
       "input":{"shape":"StopInstancesRequest"},
       "output":{"shape":"StopInstancesResult"},
-      "documentation":"<p>Stops an Amazon EBS-backed instance. Each time you transition an instance from stopped to started, Amazon EC2 charges a full instance hour, even if transitions happen multiple times within a single hour.</p> <p>You can't start or stop Spot Instances.</p> <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time.</p> <p>Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Performing this operation on an instance that uses an instance store as its root device returns an error.</p> <p>You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between stopping and terminating instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html\">Troubleshooting Stopping Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Stops an Amazon EBS-backed instance. Each time you transition an instance from stopped to started, Amazon EC2 charges a full instance hour, even if transitions happen multiple times within a single hour.</p> <p>You can't start or stop Spot Instances.</p> <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time.</p> <p>Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Performing this operation on an instance that uses an instance store as its root device returns an error.</p> <p>You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between stopping and terminating instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html\">Troubleshooting Stopping Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "TerminateInstances":{
       "name":"TerminateInstances",
@@ -1554,7 +1604,7 @@
       },
       "input":{"shape":"TerminateInstancesRequest"},
       "output":{"shape":"TerminateInstancesResult"},
-      "documentation":"<p>Shuts down one or more instances. This operation is idempotent; if you terminate an instance more than once, each call succeeds.</p> <p>Terminated instances remain visible after termination (for approximately one hour).</p> <p>By default, Amazon EC2 deletes all Amazon EBS volumes that were attached when the instance launched. Volumes attached after instance launch continue running.</p> <p>You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between stopping and terminating instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html\">Troubleshooting Terminating Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Shuts down one or more instances. This operation is idempotent; if you terminate an instance more than once, each call succeeds.</p> <p>Terminated instances remain visible after termination (for approximately one hour).</p> <p>By default, Amazon EC2 deletes all Amazon EBS volumes that were attached when the instance launched. Volumes attached after instance launch continue running.</p> <p>You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between stopping and terminating instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html\">Troubleshooting Terminating Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "UnassignPrivateIpAddresses":{
       "name":"UnassignPrivateIpAddresses",
@@ -1573,7 +1623,7 @@
       },
       "input":{"shape":"UnmonitorInstancesRequest"},
       "output":{"shape":"UnmonitorInstancesResult"},
-      "documentation":"<p>Disables monitoring for a running instance. For more information about monitoring instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html\">Monitoring Your Instances and Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+      "documentation":"<p>Disables monitoring for a running instance. For more information about monitoring instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html\">Monitoring Your Instances and Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     }
   },
   "shapes":{
@@ -2435,6 +2485,40 @@
         }
       }
     },
+    "CancelImportTaskRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "ImportTaskId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the ImportImage or ImportSnapshot task to be cancelled.</p>"
+        },
+        "CancelReason":{
+          "shape":"String",
+          "documentation":"<p>The reason for canceling the task.</p>"
+        }
+      }
+    },
+    "CancelImportTaskResult":{
+      "type":"structure",
+      "members":{
+        "ImportTaskId":{
+          "shape":"String",
+          "documentation":"<p>The task ID of the ImportImage or ImportSnapshot task being canceled.</p>",
+          "locationName":"importTaskId"
+        },
+        "State":{
+          "shape":"String",
+          "documentation":"<p>The current state of the ImportImage or ImportSnapshot task being canceled.</p>",
+          "locationName":"state"
+        },
+        "PreviousState":{
+          "shape":"String",
+          "documentation":"<p>The current state of the ImportImage or ImportSnapshot task being canceled.</p>",
+          "locationName":"previousState"
+        }
+      }
+    },
     "CancelReservedInstancesListingRequest":{
       "type":"structure",
       "required":["ReservedInstancesListingId"],
@@ -2546,6 +2630,28 @@
         "shape":"ClassicLinkInstance",
         "locationName":"item"
       }
+    },
+    "ClientData":{
+      "type":"structure",
+      "members":{
+        "UploadStart":{
+          "shape":"DateTime",
+          "documentation":"<p>The time that the disk upload starts.</p>"
+        },
+        "UploadEnd":{
+          "shape":"DateTime",
+          "documentation":"<p>The time that the disk upload ends.</p>"
+        },
+        "UploadSize":{
+          "shape":"Double",
+          "documentation":"<p>The size of the uploaded disk image.</p>"
+        },
+        "Comment":{
+          "shape":"String",
+          "documentation":"<p>User-defined comment about the upload.</p>"
+        }
+      },
+      "documentation":"<p>Client-specific data.</p>"
     },
     "ConfirmProductInstanceRequest":{
       "type":"structure",
@@ -2672,7 +2778,7 @@
         },
         "ClientToken":{
           "shape":"String",
-          "documentation":"<p>Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+          "documentation":"<p>Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         }
       }
     },
@@ -3021,7 +3127,7 @@
         },
         "SecondaryPrivateIpAddressCount":{
           "shape":"Integer",
-          "documentation":"<p>The number of secondary private IP addresses to assign to a network interface. When you specify a number of secondary IP addresses, Amazon EC2 selects these IP addresses within the subnet range. You can't specify this option and specify more than one private IP address using <code>privateIpAddresses</code>.</p> <p>The number of IP addresses you can assign to a network interface varies by instance type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI\">Private IP Addresses Per ENI Per Instance Type</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>",
+          "documentation":"<p>The number of secondary private IP addresses to assign to a network interface. When you specify a number of secondary IP addresses, Amazon EC2 selects these IP addresses within the subnet range. You can't specify this option and specify more than one private IP address using <code>privateIpAddresses</code>.</p> <p>The number of IP addresses you can assign to a network interface varies by instance type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI\">Private IP Addresses Per ENI Per Instance Type</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName":"secondaryPrivateIpAddressCount"
         },
         "DryRun":{
@@ -3379,7 +3485,7 @@
         },
         "Encrypted":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the volume should be encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or vice versa. If your AMI uses encrypted volumes, you can only launch it on supported instance types. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>. </p>",
+          "documentation":"<p>Specifies whether the volume should be encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or vice versa. If your AMI uses encrypted volumes, you can only launch it on supported instance types. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>",
           "locationName":"encrypted"
         },
         "KmsKeyId":{
@@ -4285,6 +4391,82 @@
         }
       }
     },
+    "DescribeImportImageTasksRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "ImportTaskIds":{
+          "shape":"ImportTaskIdList",
+          "documentation":"<p>A list of ImportImage task IDs to describe.</p>",
+          "locationName":"ImportTaskId"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to get the next page of paginated describe requests.</p>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of results in a page.</p>"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>Filters to be applied on a describe request.</p>"
+        }
+      }
+    },
+    "DescribeImportImageTasksResult":{
+      "type":"structure",
+      "members":{
+        "ImportImageTasks":{
+          "shape":"ImportImageTaskList",
+          "documentation":"<p>A list of zero or more ImportImage tasks that are currently active or completed/cancelled in the previous 7 days.</p>",
+          "locationName":"importImageTaskSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to get the next page of paginated describe requests.</p>",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeImportSnapshotTasksRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "ImportTaskIds":{
+          "shape":"ImportTaskIdList",
+          "documentation":"<p>A list of IDs of the ImportSnapshot tasks to describe.</p>",
+          "locationName":"ImportTaskId"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to get to the next page of paginated describe requests.</p>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of results in a page.</p>"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>The filters to be applied on a describe request.</p>"
+        }
+      }
+    },
+    "DescribeImportSnapshotTasksResult":{
+      "type":"structure",
+      "members":{
+        "ImportSnapshotTasks":{
+          "shape":"ImportSnapshotTaskList",
+          "documentation":"<p>A list of zero or more ImportSnapshot tasks that are currently active or completed/cancelled in the previous 7 days.</p>",
+          "locationName":"importSnapshotTaskSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to get to the next page of paginated describe requests.</p>",
+          "locationName":"nextToken"
+        }
+      }
+    },
     "DescribeInstanceAttributeRequest":{
       "type":"structure",
       "required":[
@@ -4702,7 +4884,7 @@
         },
         "InstanceType":{
           "shape":"InstanceType",
-          "documentation":"<p>The instance type on which the Reserved Instance can be used. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>"
+          "documentation":"<p>The instance type on which the Reserved Instance can be used. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "AvailabilityZone":{
           "shape":"String",
@@ -4992,7 +5174,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone-group</code> - The Availability Zone group.</p> </li> <li> <p><code>create-time</code> - The time stamp when the Spot Instance request was created.</p> </li> <li> <p><code>fault-code</code> - The fault code related to the request.</p> </li> <li> <p><code>fault-message</code> - The fault message related to the request.</p> </li> <li> <p><code>instance-id</code> - The ID of the instance that fulfilled the request.</p> </li> <li> <p><code>launch-group</code> - The Spot Instance launch group.</p> </li> <li> <p><code>launch.block-device-mapping.delete-on-termination</code> - Indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p><code>launch.block-device-mapping.device-name</code> - The device name for the Amazon EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p><code>launch.block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the Amazon EBS volume.</p> </li> <li> <p><code>launch.block-device-mapping.volume-size</code> - The size of the Amazon EBS volume, in GiB.</p> </li> <li> <p><code>launch.block-device-mapping.volume-type</code> - The type of the Amazon EBS volume (<code>gp2</code> | <code>standard</code> | <code>io1</code>).</p> </li> <li> <p><code>launch.group-id</code> - The security group for the instance.</p> </li> <li> <p><code>launch.image-id</code> - The ID of the AMI.</p> </li> <li> <p><code>launch.instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p> </li> <li> <p><code>launch.kernel-id</code> - The kernel ID.</p> </li> <li> <p><code>launch.key-name</code> - The name of the key pair the instance launched with.</p> </li> <li> <p><code>launch.monitoring-enabled</code> - Whether monitoring is enabled for the Spot Instance.</p> </li> <li> <p><code>launch.ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p><code>network-interface.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p><code>network-interface.device-index</code> - The index of the device for the network interface attachment on the instance.</p> </li> <li> <p><code>network-interface.subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p><code>network-interface.description</code> - A description of the network interface.</p> </li> <li> <p><code>network-interface.private-ip-address</code> - The primary private IP address of the network interface.</p> </li> <li> <p><code>network-interface.delete-on-termination</code> - Indicates whether the network interface is deleted when the instance is terminated.</p> </li> <li> <p><code>network-interface.group-id</code> - The ID of the security group associated with the network interface.</p> </li> <li> <p><code>network-interface.group-name</code> - The name of the security group associated with the network interface.</p> </li> <li> <p><code>network-interface.addresses.primary</code> - Indicates whether the IP address is the primary private IP address.</p> </li> <li> <p><code>product-description</code> - The product description associated with the instance (<code>Linux/UNIX</code> | <code>Windows</code>).</p> </li> <li> <p><code>spot-instance-request-id</code> - The Spot Instance request ID.</p> </li> <li> <p><code>spot-price</code> - The maximum hourly price for any Spot Instance launched to fulfill the request.</p> </li> <li> <p><code>state</code> - The state of the Spot Instance request (<code>open</code> | <code>active</code> | <code>closed</code> | <code>cancelled</code> | <code>failed</code>). Spot bid status information can help you track your Amazon EC2 Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html\">Spot Bid Status</a> in the Amazon Elastic Compute Cloud User Guide for Linux.</p> </li> <li> <p><code>status-code</code> - The short code describing the most recent evaluation of your Spot Instance request.</p> </li> <li> <p><code>status-message</code> - The message explaining the status of the Spot Instance request.</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>type</code> - The type of Spot Instance request (<code>one-time</code> | <code>persistent</code>).</p> </li> <li> <p><code>launched-availability-zone</code> - The Availability Zone in which the bid is launched.</p> </li> <li> <p><code>valid-from</code> - The start date of the request.</p> </li> <li> <p><code>valid-until</code> - The end date of the request.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone-group</code> - The Availability Zone group.</p> </li> <li> <p><code>create-time</code> - The time stamp when the Spot Instance request was created.</p> </li> <li> <p><code>fault-code</code> - The fault code related to the request.</p> </li> <li> <p><code>fault-message</code> - The fault message related to the request.</p> </li> <li> <p><code>instance-id</code> - The ID of the instance that fulfilled the request.</p> </li> <li> <p><code>launch-group</code> - The Spot Instance launch group.</p> </li> <li> <p><code>launch.block-device-mapping.delete-on-termination</code> - Indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p><code>launch.block-device-mapping.device-name</code> - The device name for the Amazon EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p><code>launch.block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the Amazon EBS volume.</p> </li> <li> <p><code>launch.block-device-mapping.volume-size</code> - The size of the Amazon EBS volume, in GiB.</p> </li> <li> <p><code>launch.block-device-mapping.volume-type</code> - The type of the Amazon EBS volume (<code>gp2</code> | <code>standard</code> | <code>io1</code>).</p> </li> <li> <p><code>launch.group-id</code> - The security group for the instance.</p> </li> <li> <p><code>launch.image-id</code> - The ID of the AMI.</p> </li> <li> <p><code>launch.instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p> </li> <li> <p><code>launch.kernel-id</code> - The kernel ID.</p> </li> <li> <p><code>launch.key-name</code> - The name of the key pair the instance launched with.</p> </li> <li> <p><code>launch.monitoring-enabled</code> - Whether monitoring is enabled for the Spot Instance.</p> </li> <li> <p><code>launch.ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p><code>network-interface.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p><code>network-interface.device-index</code> - The index of the device for the network interface attachment on the instance.</p> </li> <li> <p><code>network-interface.subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p><code>network-interface.description</code> - A description of the network interface.</p> </li> <li> <p><code>network-interface.private-ip-address</code> - The primary private IP address of the network interface.</p> </li> <li> <p><code>network-interface.delete-on-termination</code> - Indicates whether the network interface is deleted when the instance is terminated.</p> </li> <li> <p><code>network-interface.group-id</code> - The ID of the security group associated with the network interface.</p> </li> <li> <p><code>network-interface.group-name</code> - The name of the security group associated with the network interface.</p> </li> <li> <p><code>network-interface.addresses.primary</code> - Indicates whether the IP address is the primary private IP address.</p> </li> <li> <p><code>product-description</code> - The product description associated with the instance (<code>Linux/UNIX</code> | <code>Windows</code>).</p> </li> <li> <p><code>spot-instance-request-id</code> - The Spot Instance request ID.</p> </li> <li> <p><code>spot-price</code> - The maximum hourly price for any Spot Instance launched to fulfill the request.</p> </li> <li> <p><code>state</code> - The state of the Spot Instance request (<code>open</code> | <code>active</code> | <code>closed</code> | <code>cancelled</code> | <code>failed</code>). Spot bid status information can help you track your Amazon EC2 Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html\">Spot Bid Status</a> in the Amazon Elastic Compute Cloud User Guide.</p> </li> <li> <p><code>status-code</code> - The short code describing the most recent evaluation of your Spot Instance request.</p> </li> <li> <p><code>status-message</code> - The message explaining the status of the Spot Instance request.</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>type</code> - The type of Spot Instance request (<code>one-time</code> | <code>persistent</code>).</p> </li> <li> <p><code>launched-availability-zone</code> - The Availability Zone in which the bid is launched.</p> </li> <li> <p><code>valid-from</code> - The start date of the request.</p> </li> <li> <p><code>valid-until</code> - The end date of the request.</p> </li> </ul>",
           "locationName":"Filter"
         }
       }
@@ -5831,7 +6013,7 @@
         },
         "Iops":{
           "shape":"Integer",
-          "documentation":"<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS (SSD) volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose (SSD) volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information on General Purpose (SSD) baseline performance, I/O credits, and bursting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>Constraint: Range is 100 to 20000 for Provisioned IOPS (SSD) volumes and 3 to 10000 for General Purpose (SSD) volumes.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>standard</code> or <code>gp2</code> volumes.</p>",
+          "documentation":"<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS (SSD) volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose (SSD) volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information on General Purpose (SSD) baseline performance, I/O credits, and bursting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraint: Range is 100 to 20000 for Provisioned IOPS (SSD) volumes and 3 to 10000 for General Purpose (SSD) volumes.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>standard</code> or <code>gp2</code> volumes.</p>",
           "locationName":"iops"
         },
         "Encrypted":{
@@ -6430,8 +6612,43 @@
         "ramdisk",
         "launchPermission",
         "productCodes",
-        "blockDeviceMapping"
+        "blockDeviceMapping",
+        "sriovNetSupport"
       ]
+    },
+    "ImageDiskContainer":{
+      "type":"structure",
+      "members":{
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>The description of the disk image (optional).</p>"
+        },
+        "Format":{
+          "shape":"String",
+          "documentation":"<p>The format of the disk image being imported (optional).</p>"
+        },
+        "Url":{
+          "shape":"String",
+          "documentation":"<p>The URL to the Amazon S3-based disk image being imported. The URL can either be a https URL (https://..) or an Amazon S3 URL (s3://..)</p>"
+        },
+        "UserBucket":{"shape":"UserBucket"},
+        "DeviceName":{
+          "shape":"String",
+          "documentation":"<p>The Amazon EBS block device mapping for the disk (optional).</p>"
+        },
+        "SnapshotId":{
+          "shape":"String",
+          "documentation":"<p>The Amazon EBS snapshot ID to be used for importing the snapshot.</p>"
+        }
+      },
+      "documentation":"<p>The disk container object for an ImportImage task.</p>"
+    },
+    "ImageDiskContainerList":{
+      "type":"list",
+      "member":{
+        "shape":"ImageDiskContainer",
+        "locationName":"item"
+      }
     },
     "ImageIdStringList":{
       "type":"list",
@@ -6462,6 +6679,173 @@
         "ramdisk"
       ]
     },
+    "ImportImageRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A description string for the import image task (optional).</p>"
+        },
+        "DiskContainers":{
+          "shape":"ImageDiskContainerList",
+          "locationName":"DiskContainer"
+        },
+        "LicenseType":{
+          "shape":"String",
+          "documentation":"<p>The license type to be used for the Amazon Machine Image (AMI) after importing (optional).</p> <p><b>Note:</b> You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html\">VM Import/Export Prerequisites</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Valid Values: AWS | BYOL</p>"
+        },
+        "Hypervisor":{
+          "shape":"String",
+          "documentation":"<p>The target hypervisor platform to use (optional).</p>"
+        },
+        "Architecture":{
+          "shape":"String",
+          "documentation":"<p>The architecture of the virtual machine being imported (optional).</p>"
+        },
+        "Platform":{
+          "shape":"String",
+          "documentation":"<p>The operating system of the virtual machine being imported (optional).</p>"
+        },
+        "ClientData":{
+          "shape":"ClientData",
+          "documentation":"<p>Client-specific data.</p>"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "documentation":"<p>The token to enable idempotency for VM import requests (optional).</p>"
+        },
+        "RoleName":{
+          "shape":"String",
+          "documentation":"<p>The name of the role to use when not using the default role name 'vmimport' (optional).</p>"
+        }
+      }
+    },
+    "ImportImageResult":{
+      "type":"structure",
+      "members":{
+        "ImportTaskId":{
+          "shape":"String",
+          "documentation":"<p>The task id of the ImportImage task.</p>",
+          "locationName":"importTaskId"
+        },
+        "Architecture":{
+          "shape":"String",
+          "documentation":"<p>Architecture of the virtual machine being imported.</p>",
+          "locationName":"architecture"
+        },
+        "LicenseType":{
+          "shape":"String",
+          "documentation":"<p>License type of the virtual machine being imported.</p>",
+          "locationName":"licenseType"
+        },
+        "Platform":{
+          "shape":"String",
+          "documentation":"<p>Operating system of the VM being imported.</p>",
+          "locationName":"platform"
+        },
+        "Hypervisor":{
+          "shape":"String",
+          "documentation":"<p>Target hypervisor of the import task.</p>",
+          "locationName":"hypervisor"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A description of the import task.</p>",
+          "locationName":"description"
+        },
+        "SnapshotDetails":{
+          "shape":"SnapshotDetailList",
+          "locationName":"snapshotDetailSet"
+        },
+        "ImageId":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Machine Image (AMI) ID created by the import task.</p>",
+          "locationName":"imageId"
+        },
+        "Progress":{
+          "shape":"String",
+          "documentation":"<p>The task's progress.</p>",
+          "locationName":"progress"
+        },
+        "StatusMessage":{
+          "shape":"String",
+          "documentation":"<p>A detailed status message of the import task.</p>",
+          "locationName":"statusMessage"
+        },
+        "Status":{
+          "shape":"String",
+          "documentation":"<p>A brief status of the task.</p>",
+          "locationName":"status"
+        }
+      }
+    },
+    "ImportImageTask":{
+      "type":"structure",
+      "members":{
+        "ImportTaskId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the import task.</p>",
+          "locationName":"importTaskId"
+        },
+        "Architecture":{
+          "shape":"String",
+          "documentation":"<p>Architecture of the VM being imported.</p>",
+          "locationName":"architecture"
+        },
+        "LicenseType":{
+          "shape":"String",
+          "documentation":"<p>License type of the VM being imported.</p>",
+          "locationName":"licenseType"
+        },
+        "Platform":{
+          "shape":"String",
+          "documentation":"<p>The description string for the import image task.</p>",
+          "locationName":"platform"
+        },
+        "Hypervisor":{
+          "shape":"String",
+          "documentation":"<p>Target hypervisor for the import task.</p>",
+          "locationName":"hypervisor"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>Description of the import task.</p>",
+          "locationName":"description"
+        },
+        "SnapshotDetails":{
+          "shape":"SnapshotDetailList",
+          "locationName":"snapshotDetailSet"
+        },
+        "ImageId":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Machine Image (AMI) ID of the imported virtual machine.</p>",
+          "locationName":"imageId"
+        },
+        "Progress":{
+          "shape":"String",
+          "documentation":"<p>The percentage of progress of the ImportImage task.</p>",
+          "locationName":"progress"
+        },
+        "StatusMessage":{
+          "shape":"String",
+          "documentation":"<p>A descriptive status message for the ImportImage task.</p>",
+          "locationName":"statusMessage"
+        },
+        "Status":{
+          "shape":"String",
+          "documentation":"<p>A brief status for the ImportImage task.</p>",
+          "locationName":"status"
+        }
+      }
+    },
+    "ImportImageTaskList":{
+      "type":"list",
+      "member":{
+        "shape":"ImportImageTask",
+        "locationName":"item"
+      }
+    },
     "ImportInstanceLaunchSpecification":{
       "type":"structure",
       "members":{
@@ -6491,7 +6875,7 @@
         },
         "InstanceType":{
           "shape":"InstanceType",
-          "documentation":"<p>The instance type. This is not supported for VMs imported into a VPC, which are assigned the default security group. After a VM is imported into a VPC, you can specify another security group using the AWS Management Console. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>. For more information about the Linux instance types you can import, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html\">Before You Get Started</a> in the Amazon Elastic Compute Cloud User Guide for Linux.</p>",
+          "documentation":"<p>The instance type. This is not supported for VMs imported into a VPC, which are assigned the default security group. After a VM is imported into a VPC, you can specify another security group using the AWS Management Console. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about the Linux instance types you can import, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html\">Before You Get Started</a> in the Amazon Elastic Compute Cloud User Guide.</p>",
           "locationName":"instanceType"
         },
         "Placement":{
@@ -6534,7 +6918,6 @@
         },
         "LaunchSpecification":{
           "shape":"ImportInstanceLaunchSpecification",
-          "documentation":"<p></p>",
           "locationName":"launchSpecification"
         },
         "DiskImages":{
@@ -6670,6 +7053,78 @@
           "documentation":"<p>The MD5 public key fingerprint as specified in section 4 of RFC 4716.</p>",
           "locationName":"keyFingerprint"
         }
+      }
+    },
+    "ImportSnapshotRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>The description string for the ImportSnapshot task.</p>"
+        },
+        "DiskContainer":{"shape":"SnapshotDiskContainer"},
+        "ClientData":{"shape":"ClientData"},
+        "ClientToken":{
+          "shape":"String",
+          "documentation":"<p>Token to enable idempotency for VM import requests (optional).</p>"
+        },
+        "RoleName":{
+          "shape":"String",
+          "documentation":"<p>The name of the role to use when not using the default role name 'vmimport' (optional).</p>"
+        }
+      }
+    },
+    "ImportSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "ImportTaskId":{
+          "shape":"String",
+          "documentation":"<p>Task ID of the ImportSnapshot task.</p>",
+          "locationName":"importTaskId"
+        },
+        "SnapshotTaskDetail":{
+          "shape":"SnapshotTaskDetail",
+          "locationName":"snapshotTaskDetail"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>Description of the import snapshot task.</p>",
+          "locationName":"description"
+        }
+      }
+    },
+    "ImportSnapshotTask":{
+      "type":"structure",
+      "members":{
+        "ImportTaskId":{
+          "shape":"String",
+          "documentation":"<p>The task ID of the ImportSnapshot task.</p>",
+          "locationName":"importTaskId"
+        },
+        "SnapshotTaskDetail":{
+          "shape":"SnapshotTaskDetail",
+          "locationName":"snapshotTaskDetail"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>Description for the import snapshot task.</p>",
+          "locationName":"description"
+        }
+      }
+    },
+    "ImportSnapshotTaskList":{
+      "type":"list",
+      "member":{
+        "shape":"ImportSnapshotTask",
+        "locationName":"item"
+      }
+    },
+    "ImportTaskIdList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"ImportTaskId"
       }
     },
     "ImportVolumeRequest":{
@@ -8002,7 +8457,7 @@
         },
         "BlockDeviceMappings":{
           "shape":"InstanceBlockDeviceMappingSpecificationList",
-          "documentation":"<p>Modifies the <code>DeleteOnTermination</code> attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for <code>DeleteOnTermination</code>, the default is <code>true</code> and the volume is deleted when the instance is terminated.</p> <p>To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM\">Updating the Block Device Mapping when Launching an Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>",
+          "documentation":"<p>Modifies the <code>DeleteOnTermination</code> attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for <code>DeleteOnTermination</code>, the default is <code>true</code> and the volume is deleted when the instance is terminated.</p> <p>To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM\">Updating the Block Device Mapping when Launching an Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName":"blockDeviceMapping"
         },
         "SourceDestCheck":{
@@ -8253,6 +8708,7 @@
       "type":"string",
       "enum":[
         "disabled",
+        "disabling",
         "enabled",
         "pending"
       ]
@@ -10303,7 +10759,7 @@
         },
         "InstanceType":{
           "shape":"InstanceType",
-          "documentation":"<p>The instance type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>Default: <code>m1.small</code></p>"
+          "documentation":"<p>The instance type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>m1.small</code></p>"
         },
         "Placement":{
           "shape":"Placement",
@@ -10311,11 +10767,11 @@
         },
         "KernelId":{
           "shape":"String",
-          "documentation":"<p>The ID of the kernel.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html\"> PV-GRUB</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> </important>"
+          "documentation":"<p>The ID of the kernel.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html\"> PV-GRUB</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </important>"
         },
         "RamdiskId":{
           "shape":"String",
-          "documentation":"<p>The ID of the RAM disk.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html\"> PV-GRUB</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> </important>"
+          "documentation":"<p>The ID of the RAM disk.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html\"> PV-GRUB</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </important>"
         },
         "BlockDeviceMappings":{
           "shape":"BlockDeviceMappingRequestList",
@@ -10549,6 +11005,87 @@
         "createVolumePermission"
       ]
     },
+    "SnapshotDetail":{
+      "type":"structure",
+      "members":{
+        "DiskImageSize":{
+          "shape":"Double",
+          "documentation":"<p>The size of the disk in the snapshot.</p>",
+          "locationName":"diskImageSize"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>Description for the snapshot.</p>",
+          "locationName":"description"
+        },
+        "Format":{
+          "shape":"String",
+          "documentation":"<p>The format of the disk image from which the snapshot is created.</p>",
+          "locationName":"format"
+        },
+        "Url":{
+          "shape":"String",
+          "documentation":"<p>The URL used to access the disk image.</p>",
+          "locationName":"url"
+        },
+        "UserBucket":{
+          "shape":"UserBucketDetails",
+          "locationName":"userBucket"
+        },
+        "DeviceName":{
+          "shape":"String",
+          "documentation":"<p>The Amazon EBS block device mapping for the snapshot.</p>",
+          "locationName":"deviceName"
+        },
+        "SnapshotId":{
+          "shape":"String",
+          "documentation":"<p>The snapshot ID of the disk being imported.</p>",
+          "locationName":"snapshotId"
+        },
+        "Progress":{
+          "shape":"String",
+          "documentation":"<p>The percentage of progress for the task.</p>",
+          "locationName":"progress"
+        },
+        "StatusMessage":{
+          "shape":"String",
+          "documentation":"<p>A detailed status message for the snapshot creation.</p>",
+          "locationName":"statusMessage"
+        },
+        "Status":{
+          "shape":"String",
+          "documentation":"<p>A brief status of the snapshot creation.</p>",
+          "locationName":"status"
+        }
+      },
+      "documentation":"<p>The details of the snapshot created from the imported disk.</p>"
+    },
+    "SnapshotDetailList":{
+      "type":"list",
+      "member":{
+        "shape":"SnapshotDetail",
+        "locationName":"item"
+      }
+    },
+    "SnapshotDiskContainer":{
+      "type":"structure",
+      "members":{
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>The description of the disk image being imported.</p>"
+        },
+        "Format":{
+          "shape":"String",
+          "documentation":"<p>The format of the disk image being imported.</p>"
+        },
+        "Url":{
+          "shape":"String",
+          "documentation":"<p>The URL to the Amazon S3-based disk image being imported. It can either be a https URL (https://..) or an Amazon S3 URL (s3://..).</p>"
+        },
+        "UserBucket":{"shape":"UserBucket"}
+      },
+      "documentation":"<p>The disk container object for the ImportSnapshot request.</p>"
+    },
     "SnapshotIdStringList":{
       "type":"list",
       "member":{
@@ -10570,6 +11107,56 @@
         "completed",
         "error"
       ]
+    },
+    "SnapshotTaskDetail":{
+      "type":"structure",
+      "members":{
+        "DiskImageSize":{
+          "shape":"Double",
+          "documentation":"<p>The size of the disk in the snapshot.</p>",
+          "locationName":"diskImageSize"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>The description of the snapshot.</p>",
+          "locationName":"description"
+        },
+        "Format":{
+          "shape":"String",
+          "documentation":"<p>The format of the disk image from which the snapshot is created.</p>",
+          "locationName":"format"
+        },
+        "Url":{
+          "shape":"String",
+          "documentation":"<p>The URL of the disk image from which the snapshot is created.</p>",
+          "locationName":"url"
+        },
+        "UserBucket":{
+          "shape":"UserBucketDetails",
+          "locationName":"userBucket"
+        },
+        "SnapshotId":{
+          "shape":"String",
+          "documentation":"<p>The snapshot ID of the disk being imported.</p>",
+          "locationName":"snapshotId"
+        },
+        "Progress":{
+          "shape":"String",
+          "documentation":"<p>The percentage of completion for the ImportSnapshot task.</p>",
+          "locationName":"progress"
+        },
+        "StatusMessage":{
+          "shape":"String",
+          "documentation":"<p>A detailed status message for the ImportSnapshot task.</p>",
+          "locationName":"statusMessage"
+        },
+        "Status":{
+          "shape":"String",
+          "documentation":"<p>A brief status for the ImportSnapshot task.</p>",
+          "locationName":"status"
+        }
+      },
+      "documentation":"<p>Details about the import snapshot task.</p>"
     },
     "SpotDatafeedSubscription":{
       "type":"structure",
@@ -10622,7 +11209,7 @@
         },
         "State":{
           "shape":"SpotInstanceState",
-          "documentation":"<p>The state of the Spot Instance request. Spot bid status information can help you track your Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html\">Spot Bid Status</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p>",
+          "documentation":"<p>The state of the Spot Instance request. Spot bid status information can help you track your Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html\">Spot Bid Status</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName":"state"
         },
         "Fault":{
@@ -11129,6 +11716,36 @@
         }
       }
     },
+    "UserBucket":{
+      "type":"structure",
+      "members":{
+        "S3Bucket":{
+          "shape":"String",
+          "documentation":"<p>The Amazon S3 bucket name where the disk image is located.</p>"
+        },
+        "S3Key":{
+          "shape":"String",
+          "documentation":"<p>The Amazon S3 Key for the disk image.</p>"
+        }
+      },
+      "documentation":"<p>User's Amazon S3 bucket details used to access the image.</p>"
+    },
+    "UserBucketDetails":{
+      "type":"structure",
+      "members":{
+        "S3Bucket":{
+          "shape":"String",
+          "documentation":"<p>The Amazon S3 bucket from which the disk image was created.</p>",
+          "locationName":"s3Bucket"
+        },
+        "S3Key":{
+          "shape":"String",
+          "documentation":"<p>The Amazon S3 key from which the disk image was created.</p>",
+          "locationName":"s3Key"
+        }
+      },
+      "documentation":"<p>User's Amazon S3 bucket details used to access the image.</p>"
+    },
     "UserData":{
       "type":"structure",
       "members":{
@@ -11281,7 +11898,7 @@
         },
         "Iops":{
           "shape":"Integer",
-          "documentation":"<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS (SSD) volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose (SSD) volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information on General Purpose (SSD) baseline performance, I/O credits, and bursting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux</i>.</p> <p>Constraint: Range is 100 to 20000 for Provisioned IOPS (SSD) volumes and 3 to 10000 for General Purpose (SSD) volumes.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>standard</code> or <code>gp2</code> volumes.</p>",
+          "documentation":"<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS (SSD) volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose (SSD) volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information on General Purpose (SSD) baseline performance, I/O credits, and bursting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraint: Range is 100 to 20000 for Provisioned IOPS (SSD) volumes and 3 to 10000 for General Purpose (SSD) volumes.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>standard</code> or <code>gp2</code> volumes.</p>",
           "locationName":"iops"
         },
         "Encrypted":{
