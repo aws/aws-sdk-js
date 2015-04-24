@@ -73,8 +73,8 @@ describe 'AWS.Config', ->
       expect(configure(sslEnabled: false).sslEnabled).to.equal(false)
 
   describe 'httpOptions', ->
-    it 'defaults to {timeout:120000}', ->
-      expect(configure().httpOptions).to.eql(timeout: 120000)
+    it 'defaults to {timeout:120000, disableProgressEvents:false}', ->
+      expect(configure().httpOptions).to.eql(timeout: 120000, disableProgressEvents: false)
 
   describe 'systemClockOffset', ->
     it 'defaults to 0', ->
