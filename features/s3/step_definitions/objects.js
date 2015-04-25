@@ -1,5 +1,16 @@
 module.exports = function () {
 
+  this.Given(/^I create a shared bucket$/, function(callback) {
+    if (this.sharedBucket) return callback();
+
+    this.sharedBucket = this.uniqueName('aws-sdk-js-shared-integration');
+    this.request('s3', 'createBucket', {Bucket: this.sharedBucket}, function(err, data) {
+      this.cacheBucketName(this.sharedBucket);
+      if (err) callback.fail(err);
+      else callback();
+    });
+  });
+
   this.When(/^I write (buffer )?"([^"]*)" to the key "([^"]*)"$/, function(buffer, contents, key, next) {
     var params = {Bucket: this.sharedBucket, Key: key, Body: buffer ? new Buffer(contents) : contents};
     this.request('s3', 'putObject', params, next);

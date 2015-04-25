@@ -2,7 +2,15 @@
 @s3 @buckets
 Feature: Working with Buckets
 
-  Scenario: CRUD buckets
+  Scenario: CRUD buckets using the classic endpoint
+    Given I am using the S3 "us-east-1" region
+    When I create a bucket
+    Then the bucket should exist
+    When I delete the bucket
+    Then the bucket should not exist
+
+  Scenario: CRUD buckets using a regional endpoint
+    Given I am using the S3 "us-west-2" region
     When I create a bucket
     Then the bucket should exist
     When I delete the bucket
@@ -37,7 +45,32 @@ Feature: Working with Buckets
     Then the first tag in the tag set should have key and value "KEY", "VALUE"
     Then I delete the bucket
 
-  # this test will exercise following 307 redirects
-#  Scenario: Creating a bucket with a location constraint
-#    When I create a bucket with the location constraint "EU"
-#    Then the bucket should have a location constraint of "EU"
+  Scenario: Access bucket following 307 redirects
+    Given I am using the S3 "us-east-1" region
+    When I create a bucket with the location constraint "EU"
+    Then the bucket should exist
+    Then the bucket should have a location constraint of "EU"
+    Then I delete the bucket
+
+  Scenario: Working with bucket names that contain '.'
+    When I create a bucket with a DNS compatible name that contains a dot
+    Then the bucket should exist
+    When I delete the bucket
+    Then the bucket should not exist
+
+  Scenario: Operating on a bucket using path style
+    Given I force path style requests
+    And I create a bucket
+    When I put "abc" to the key "hello"
+    Then the bucket name should be in the request path
+    And the bucket name should not be in the request host
+    Then I delete the object "hello"
+    Then I delete the bucket
+
+  Scenario: Follow 307 redirect on new buckets
+    Given I am using the S3 "us-east-1" region
+    When I create a bucket with the location constraint "us-west-2"
+    When I put a large object with key "largeobject"
+    Then the object with key "largeobject" should exist
+    Then I delete the object "largeobject"
+    Then I delete the bucket

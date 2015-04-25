@@ -2,10 +2,11 @@
 @s3 @objects
 Feature: Working with Objects in S3
 
-  As a user of S3
-  I need to be able to work with objects in a bucket.
+  As a user of S3 I need to be able to work with objects in a bucket.
 
-  @setup-bucket
+  Background:
+    Given I create a shared bucket
+
   Scenario: CRUD objects
     When I write "world" to the key "hello"
     Then the object with the key "hello" should exist
@@ -99,7 +100,7 @@ Feature: Working with Objects in S3
 
     And I teardown the local proxy server
 
-  @pagination @teardown-bucket
+  @pagination
   Scenario: Paginating responses
     Given I delete the object with the key "hello"
     And I write "data" to the key "obj0"

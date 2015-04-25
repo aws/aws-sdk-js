@@ -8,6 +8,43 @@ module.exports = function () {
     callback();
   });
 
+  /* Global S3 steps */
+  this.Given(/^I create a bucket$/, function(callback) {
+    this.bucket = this.uniqueName('aws-sdk-js-integration');
+    this.request('s3', 'createBucket', {Bucket: this.bucket}, callback);
+  });
+
+  this.When(/^I delete the bucket$/, function(callback) {
+    this.request('s3', 'deleteBucket', {Bucket: this.bucket}, callback);
+  });
+
+  this.Then(/^the bucket should exist$/, function(next) {
+    this.s3.waitFor('bucketExists', {Bucket: this.bucket}, next);
+  });
+
+  this.Then(/^the bucket should not exist$/, function(callback) {
+    this.s3.waitFor('bucketNotExists', {Bucket: this.bucket}, callback);
+  });
+
+  this.Then(/^I delete the object "([^"]*)"$/, function(key, callback) {
+    var params = {Bucket: this.bucket, Key: key};
+    this.request('s3', 'deleteObject', params, callback);
+  });
+
+  this.Then(/^the object with key "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
+    var params = { Bucket: this.bucket, Key: key };
+    this.eventually(next, function (retry) {
+      retry.condition = function() {
+        if (shouldNotExist) {
+          return this.error && this.error.code === 'NoSuchKey';
+        } else {
+          return !this.error;
+        }
+      };
+      this.request('s3', 'getObject', params, retry, false);
+    });
+  });
+
   /* Global error code steps */
 
   this.Given(/^I run the "([^"]*)" operation$/, function (operation, callback) {

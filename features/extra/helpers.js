@@ -4,7 +4,7 @@ module.exports = {
 
   uniqueName: function uniqueName(base, sep) {
     if (sep === undefined) sep = '-';
-    if (base === "") return "";
+    if (base === '') return '';
     return base + sep + new Date().getTime();
   },
 
@@ -66,7 +66,7 @@ module.exports = {
     var world = this;
 
     if (!svc) svc = this.service;
-    if (typeof svc == 'string') svc = this[svc];
+    if (typeof svc === 'string') svc = this[svc];
 
     svc[operation](params, function(err, data) {
       world.response = this;
@@ -109,6 +109,29 @@ module.exports = {
     var msg = resp.error.message;
     var err = 'Received unexpected error from ' + svc + '.' + op + ', ' + code + ': ' + msg;
     next.fail(new Error(err));
+  },
+
+  /**
+   * Cache bucket names used for cleanup after all features have run.
+   */
+  cacheBucketName: function(bucket) {
+    var fs = require('fs');
+    var path = require('path');
+    var filePath = path.resolve('integ.buckets.json');
+    var cache;
+    if (fs.existsSync(filePath)) {
+      try {
+        cache = JSON.parse(fs.readFileSync(filePath));
+        cache.buckets.push(bucket);
+        fs.writeFileSync(filePath, JSON.stringify(cache));
+      } catch (fileErr) {
+        throw fileErr;
+      }
+    } else {
+      cache = {};
+      cache.buckets = [bucket];
+      fs.writeFileSync(filePath, JSON.stringify(cache));
+    }
   }
 
 };
