@@ -5,7 +5,7 @@ var path = require('path');
 var AWS = require('../');
 var apis = require('../lib/api_loader');
 
-var defaultServices = 'cloudwatch,cognitoidentity,cognitosync,dynamodb,kinesis,elastictranscoder,lambda,mobileanalytics,s3,sqs,sns,sts';
+var defaultServices = 'cloudwatch,cognitoidentity,cognitosync,dynamodb,kinesis,elastictranscoder,lambda,mobileanalytics,machinelearning,s3,sqs,sns,sts';
 var sanitizeRegex = /[^a-zA-Z0-9,-]/;
 
 var serviceClasses = {};
