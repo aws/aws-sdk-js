@@ -476,12 +476,12 @@ describe 'AWS.S3', ->
 
   describe 'getBucketLocation', ->
 
-    it 'returns null for the location constraint when not present', ->
+    it 'returns empty string for the location constraint when not present', ->
       body = '<?xml version="1.0" encoding="UTF-8"?>\n<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/"/>'
       helpers.mockHttpResponse 200, {}, body
       s3.getBucketLocation (error, data) ->
         expect(error).to.equal(null)
-        expect(data).to.eql({})
+        expect(data).to.eql({LocationConstraint: ''})
 
     it 'parses the location constraint from the root xml', ->
       headers = { 'x-amz-request-id': 'abcxyz' }
