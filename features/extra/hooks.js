@@ -31,7 +31,7 @@ module.exports = function () {
     this.request('s3', 'deleteObject', params, callback);
   });
 
-  this.Then(/^the object with key "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
+  this.Then(/^the object "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
     var params = { Bucket: this.bucket, Key: key };
     this.eventually(next, function (retry) {
       retry.condition = function() {

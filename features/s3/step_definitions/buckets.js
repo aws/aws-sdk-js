@@ -154,7 +154,7 @@ module.exports = function() {
     callback();
   });
 
-  this.When(/^I put a large object with key "([^"]*)"$/, function(key, callback) {
+  this.When(/^I put a large object to the key "([^"]*)"$/, function(key, callback) {
     var buffer = new Buffer(1024 * 1024 * 200);
     var params = {
       Bucket: this.bucket,

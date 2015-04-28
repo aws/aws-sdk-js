@@ -70,7 +70,7 @@ Feature: Working with Buckets
   Scenario: Follow 307 redirect on new buckets
     Given I am using the S3 "us-east-1" region
     When I create a bucket with the location constraint "us-west-2"
-    When I put a large object with key "largeobject"
-    Then the object with key "largeobject" should exist
+    When I put a large object to the key "largeobject"
+    Then the object "largeobject" should exist
     Then I delete the object "largeobject"
     Then I delete the bucket
