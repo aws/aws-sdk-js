@@ -11,45 +11,53 @@ module.exports = function () {
     });
   });
 
-  this.When(/^I write (buffer )?"([^"]*)" to the key "([^"]*)"$/, function(buffer, contents, key, next) {
-    var params = {Bucket: this.sharedBucket, Key: key, Body: buffer ? new Buffer(contents) : contents};
-    this.request('s3', 'putObject', params, next);
-  });
-
-  this.When(/^I write (buffer )?"([^"]*)" to the invalid key "([^"]*)"$/, function(buffer, contents, key, next) {
-    var params = {Bucket: this.sharedBucket, Key: key, Body: buffer ? new Buffer(contents) : contents};
+  this.When(/^I put "([^"]*)" to the(?: invalid) key "([^"]*)"$/, function(data, key, next) {
+    var params = {Bucket: this.sharedBucket, Key: key, Body: data};
     this.request('s3', 'putObject', params, next, false);
   });
 
-  this.When(/^I write "([^"]*)" to the key "([^"]*)" with ContentLength (\d+)$/, function(contents, key, contentLength, next) {
+  this.When(/^I put (?:a |an )(empty|small|large|\d+KB|\d+MB) buffer to the key "([^"]*)"$/, function(size, key, next) {
+    var body = this.createBuffer(size);
+    var params = {Bucket: this.sharedBucket, Key: key, Body: body};
+    this.request('s3', 'putObject', params, next);
+  });
+
+  this.When(/^I put (?:a |an )(empty|small|large) file to the key "([^"]*)"$/, function(size, key, next) {
+    var fs = require('fs');
+    var filename = this.createFile(size, key);
+    var params = {Bucket: this.sharedBucket, Key: key, Body: fs.createReadStream(filename)};
+    this.request('s3', 'putObject', params, next);
+  });
+
+  this.When(/^I put "([^"]*)" to the key "([^"]*)" with ContentLength (\d+)$/, function(contents, key, contentLength, next) {
     var params = {Bucket: this.sharedBucket, Key: key, Body: contents, ContentLength: parseInt(contentLength)};
     this.s3nochecksums = new this.AWS.S3({computeChecksums: false});
     this.request('s3nochecksums', 'putObject', params, next);
   });
 
-  this.When(/^I write empty buffer to the key "([^"]*)"$/, function (key, next) {
-    var params = {Bucket: this.sharedBucket, Key: key, Body: new Buffer(0)};
-    this.request('s3', 'putObject', params, next);
-  });
-
-  this.Then(/^the object with the key "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
+  this.Then(/^the object "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
     this.assert.equal(this.data.Body.toString().replace('\n', ''), contents);
     next();
   });
 
-  this.When(/^I copy an object with the key "([^"]*)" to "([^"]*)"$/, function(key1, key2, next) {
+  this.Then(/^the HTTP response should have a content length of (\d+)$/, function(contentLength, next) {
+    this.assert.equal(this.response.httpResponse.body.length, parseInt(contentLength));
+    next();
+  });
+
+  this.When(/^I copy the object "([^"]*)" to "([^"]*)"$/, function(key1, key2, next) {
     var params = {
       Bucket: this.sharedBucket, Key: key2, CopySource: '/' + this.sharedBucket + '/' + key1
     };
     this.request('s3', 'copyObject', params, next);
   });
 
-  this.When(/^I delete the object with the key "([^"]*)"$/, function(key, next) {
+  this.When(/^I delete the object "([^"]*)"$/, function(key, next) {
     var params = {Bucket: this.sharedBucket, Key: key};
     this.request('s3', 'deleteObject', params, next);
   });
 
-  this.Then(/^the object with the key "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
+  this.Then(/^the object "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
     var params = { Bucket: this.sharedBucket, Key: key };
     this.eventually(next, function (retry) {
       retry.condition = function() {
@@ -61,14 +69,6 @@ module.exports = function () {
       };
       this.request('s3', 'getObject', params, retry, false);
     });
-  });
-
-  this.When(/^I write file "([^"]*)" to the key "([^"]*)"$/, function(filename, key, next) {
-    var fs = require('fs');
-    var path = require('path');
-    var params = {Bucket: this.sharedBucket, Key: key, Body:
-      fs.createReadStream(path.resolve('./features/extra/fixtures/' + filename))};
-    this.request('s3', 'putObject', params, next);
   });
 
   this.When(/^I stream key "([^"]*)"$/, function(key, callback) {
@@ -140,7 +140,7 @@ module.exports = function () {
     callback();
   });
 
-  this.Then(/^the HTTP response should contain "([^"]*)"$/, function(data, callback) {
+  this.Then(/^the HTTP response should contain "([^"]*|)"$/, function(data, callback) {
     this.assert.match(this.data, data);
     callback();
   });
@@ -152,9 +152,9 @@ module.exports = function () {
 
   // progress events
 
-  this.When(/^I write a (\d+)KB buffer to the key "([^"]*)" with progress events$/, function(kb, key, callback) {
+  this.When(/^I put (?:a |an )(empty|small|large|\d+KB|\d+MB) buffer to the key "([^"]*)" with progress events$/, function(size, key, callback) {
     var self = this;
-    var body = new Buffer(new Array(kb * 1024 + 1).join('x'));
+    var body = self.createBuffer(size);
     this.progress = [];
     var req = this.s3.putObject({Bucket: this.sharedBucket, Key: key, Body: body});
     req.on('httpUploadProgress', function (p) { self.progress.push(p); });
@@ -166,8 +166,8 @@ module.exports = function () {
     callback();
   });
 
-  this.Then(/^the "([^"]*)" value of the progress event should equal (\d+)KB$/, function(prop, kb, callback) {
-    this.assert.equal(this.progress[0][prop], kb * 1024);
+  this.Then(/^the "([^"]*)" value of the progress event should equal (\d+)MB$/, function(prop, mb, callback) {
+    this.assert.equal(this.progress[0][prop], mb * 1024 * 1024);
     callback();
   });
 
@@ -184,17 +184,56 @@ module.exports = function () {
     req.send(callback);
   });
 
-  this.When(/^I write "([^"]*)" to the public key "([^"]*)"$/, function(data, key, next) {
-    var params = {Bucket: this.sharedBucket, Key: key, Body: data, ACL: 'public-read'};
+  this.When(/^I put "([^"]*)" to the (public )?key "([^"]*)"$/, function(data, public, key, next) {
+    var acl = public === undefined ? 'private' : 'public-read';
+    var params = {Bucket: this.sharedBucket, Key: key, Body: data, ACL: acl};
     this.request('s3', 'putObject', params, next);
   });
 
-  this.Then(/^the unauthenticated request to read key "([^"]*)" should equal "([^"]*)"$/, function(key, body, next) {
+  this.When(/^I put "([^"]*)" to the key "([^"]*)" with an AES key$/, function(data, key, next) {
+    var params = {
+      Bucket: this.sharedBucket,
+      Key: key,
+      Body: data,
+      SSECustomerAlgorithm: 'AES256',
+      SSECustomerKey: 'aaaabbbbccccddddaaaabbbbccccdddd'
+    };
+    this.request('s3', 'putObject', params, next);
+  });
+
+  this.When(/^I read the object "([^"]*)" with the AES key$/, function(key, next) {
+    var params = {
+      Bucket: this.sharedBucket,
+      Key: key,
+      SSECustomerAlgorithm: 'AES256',
+      SSECustomerKey: 'aaaabbbbccccddddaaaabbbbccccdddd'
+    };
+    this.request('s3', 'getObject', params, next);
+  });
+
+  this.Then(/^I make an unauthenticated request to read object "([^"]*)"$/, function(key, next) {
     var params = {Bucket: this.sharedBucket, Key: key};
     this.s3.makeUnauthenticatedRequest('getObject', params, function (err, data) {
       if (err) return next(err);
-      this.assert.equal(data.Body.toString(), body);
+      this.data = data;
       next();
     }.bind(this));
+  });
+
+  this.Given(/^an empty bucket$/, function(next) {
+    var self = this;
+    var params = { Bucket: this.sharedBucket };
+    self.s3.listObjects(params, function(err, data) {
+      if (err) return next(err);
+      if (data.Contents.length > 0) {
+        params.Delete = { Objects: [] };
+        data.Contents.forEach(function (item) {
+          params.Delete.Objects.push({Key: item.Key});
+        });
+        self.request('s3', 'deleteObjects', params, next);
+      } else {
+        next();
+      }
+    });
   });
 };

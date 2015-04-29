@@ -132,6 +132,47 @@ module.exports = {
       cache.buckets = [bucket];
       fs.writeFileSync(filePath, JSON.stringify(cache));
     }
+  },
+
+  /**
+   * Creates a fixture file of given size and returns the path.
+   */
+  createFile: function(size, name) {
+    var fs = require('fs');
+    var path = require('path');
+    name = this.uniqueName(name);
+    // Cannot set this as a world property because the world
+    // is cleaned up before the AfterFeatures hook is fired.
+    var fixturePath = path.resolve('./features/extra/fixtures/tmp');
+    if (!fs.existsSync(fixturePath)) fs.mkdirSync(fixturePath);
+    var filename = path.join(fixturePath, name);
+    var body;
+    switch (size) {
+      case 'empty': body = new Buffer(0); break;
+      case 'small': body = new Buffer(1024 * 1024); break;
+      case 'large': body = new Buffer(1024 * 1024 * 500); break;
+    }
+    fs.writeFileSync(filename, body);
+    return filename;
+  },
+
+  /**
+   * Creates and returns a buffer of given size
+   */
+  createBuffer: function(size) {
+    var match;
+    if (match = size.match(/(\d+)KB/)) {
+      return new Buffer(parseInt(match[1]) * 1024);
+    } else if (match = size.match(/(\d+)MB/)) {
+      return new Buffer(parseInt(match[1]) * 1024 * 1024);
+    } else {
+      switch (size) {
+        case 'empty': return new Buffer(0);
+        case 'small': return new Buffer(1024 * 1024);
+        case 'large': return new Buffer(1024 * 1024 * 500);
+        default: return new Buffer(1024 * 1024);
+      }
+    }
   }
 
 };
