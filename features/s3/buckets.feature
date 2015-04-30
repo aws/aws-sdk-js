@@ -58,19 +58,20 @@ Feature: Working with Buckets
     When I delete the bucket
     Then the bucket should not exist
 
+  @path-style
   Scenario: Operating on a bucket using path style
     Given I force path style requests
     And I create a bucket
-    When I put "abc" to the key "hello"
+    When I put "abc" to the key "hello" in the bucket
     Then the bucket name should be in the request path
     And the bucket name should not be in the request host
-    Then I delete the object "hello"
+    Then I delete the object "hello" from the bucket
     Then I delete the bucket
 
   Scenario: Follow 307 redirect on new buckets
     Given I am using the S3 "us-east-1" region
     When I create a bucket with the location constraint "us-west-2"
-    When I put a large object to the key "largeobject"
-    Then the object "largeobject" should exist
-    Then I delete the object "largeobject"
+    And I put a large buffer to the key "largeobject" in the bucket
+    Then the object "largeobject" should exist in the bucket
+    Then I delete the object "largeobject" from the bucket
     Then I delete the bucket

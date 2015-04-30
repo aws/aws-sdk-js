@@ -1,19 +1,13 @@
 module.exports = function () {
 
-  this.Given(/^I create a shared bucket$/, function(callback) {
-    if (this.sharedBucket) return callback();
-
-    this.sharedBucket = this.uniqueName('aws-sdk-js-shared-integration');
-    this.request('s3', 'createBucket', {Bucket: this.sharedBucket}, function(err, data) {
-      this.cacheBucketName(this.sharedBucket);
-      if (err) callback.fail(err);
-      else callback();
-    });
-  });
-
-  this.When(/^I put "([^"]*)" to the(?: invalid) key "([^"]*)"$/, function(data, key, next) {
+  this.When(/^I put "([^"]*)" to the(?: invalid)? key "([^"]*)"$/, function(data, key, next) {
     var params = {Bucket: this.sharedBucket, Key: key, Body: data};
     this.request('s3', 'putObject', params, next, false);
+  });
+
+  this.When(/^I get the object "([^"]*)"$/, function(key, next) {
+    var params = {Bucket: this.sharedBucket, Key: key};
+    this.request('s3', 'getObject', params, next, false);
   });
 
   this.When(/^I put (?:a |an )(empty|small|large|\d+KB|\d+MB) buffer to the key "([^"]*)"$/, function(size, key, next) {
@@ -62,12 +56,12 @@ module.exports = function () {
     this.eventually(next, function (retry) {
       retry.condition = function() {
         if (shouldNotExist) {
-          return this.error && this.error.code === 'NoSuchKey';
+          return this.error && this.error.code === 'NotFound';
         } else {
           return !this.error;
         }
       };
-      this.request('s3', 'getObject', params, retry, false);
+      this.request('s3', 'headObject', params, retry, false);
     });
   });
 
@@ -94,6 +88,11 @@ module.exports = function () {
 
   this.Then(/^the streamed data should contain "([^"]*)"$/, function(data, callback) {
     this.assert.equal(this.result.replace('\n', ''), data);
+    callback();
+  });
+
+  this.Then(/^the streamed data content length should equal (\d+)$/, function(length, callback) {
+    this.assert.equal(this.result.length, length);
     callback();
   });
 
@@ -184,8 +183,10 @@ module.exports = function () {
     req.send(callback);
   });
 
-  this.When(/^I put "([^"]*)" to the (public )?key "([^"]*)"$/, function(data, public, key, next) {
-    var acl = public === undefined ? 'private' : 'public-read';
+  this.When(/^I put "([^"]*)" to the (public|private) key "([^"]*)"$/, function(data, access, key, next) {
+    var acl;
+    if (access === 'public') acl = 'public-read';
+    else if (access === 'private') acl = access;
     var params = {Bucket: this.sharedBucket, Key: key, Body: data, ACL: acl};
     this.request('s3', 'putObject', params, next);
   });

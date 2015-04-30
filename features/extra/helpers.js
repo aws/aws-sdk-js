@@ -161,18 +161,21 @@ module.exports = {
    */
   createBuffer: function(size) {
     var match;
+    var buffer;
     if (match = size.match(/(\d+)KB/)) {
-      return new Buffer(parseInt(match[1]) * 1024);
+      buffer = new Buffer(parseInt(match[1]) * 1024);
     } else if (match = size.match(/(\d+)MB/)) {
-      return new Buffer(parseInt(match[1]) * 1024 * 1024);
+      buffer = new Buffer(parseInt(match[1]) * 1024 * 1024);
     } else {
       switch (size) {
-        case 'empty': return new Buffer(0);
-        case 'small': return new Buffer(1024 * 1024);
-        case 'large': return new Buffer(1024 * 1024 * 500);
+        case 'empty': buffer = new Buffer(0); break;
+        case 'small': buffer = new Buffer(1024 * 1024); break;
+        case 'large': buffer = new Buffer(1024 * 1024 * 500); break;
         default: return new Buffer(1024 * 1024);
       }
     }
+    buffer.fill('x');
+    return buffer;
   }
 
 };

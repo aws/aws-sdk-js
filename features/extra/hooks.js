@@ -9,6 +9,17 @@ module.exports = function () {
   });
 
   /* Global S3 steps */
+  this.Given(/^I create a shared bucket$/, function(callback) {
+    if (this.sharedBucket) return callback();
+
+    this.sharedBucket = this.uniqueName('aws-sdk-js-shared-integration');
+    this.request('s3', 'createBucket', {Bucket: this.sharedBucket}, function(err, data) {
+      this.cacheBucketName(this.sharedBucket);
+      if (err) callback.fail(err);
+      else callback();
+    });
+  });
+
   this.Given(/^I create a bucket$/, function(callback) {
     this.bucket = this.uniqueName('aws-sdk-js-integration');
     this.request('s3', 'createBucket', {Bucket: this.bucket}, callback);
@@ -24,25 +35,6 @@ module.exports = function () {
 
   this.Then(/^the bucket should not exist$/, function(callback) {
     this.s3.waitFor('bucketNotExists', {Bucket: this.bucket}, callback);
-  });
-
-  this.Then(/^I delete the object "([^"]*)"$/, function(key, callback) {
-    var params = {Bucket: this.bucket, Key: key};
-    this.request('s3', 'deleteObject', params, callback);
-  });
-
-  this.Then(/^the object "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
-    var params = { Bucket: this.bucket, Key: key };
-    this.eventually(next, function (retry) {
-      retry.condition = function() {
-        if (shouldNotExist) {
-          return this.error && this.error.code === 'NoSuchKey';
-        } else {
-          return !this.error;
-        }
-      };
-      this.request('s3', 'getObject', params, retry, false);
-    });
   });
 
   /* Global error code steps */

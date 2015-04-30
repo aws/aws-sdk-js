@@ -133,15 +133,6 @@ module.exports = function() {
     callback();
   });
 
-  this.When(/^I put "([^"]*)" to the key "([^"]*)"$/, function(body, key, callback) {
-    var params = {
-      Bucket: this.bucket,
-      Key: key,
-      Body: body
-    };
-    this.request('s3', 'putObject', params, callback);
-  });
-
   this.Then(/^the bucket name should be in the request path$/, function(callback) {
     var path = this.response.request.httpRequest.path.split('/');
     this.assert.equal(path[1], this.bucket);
@@ -154,14 +145,35 @@ module.exports = function() {
     callback();
   });
 
-  this.When(/^I put a large object to the key "([^"]*)"$/, function(key, callback) {
-    var buffer = new Buffer(1024 * 1024 * 200);
-    var params = {
-      Bucket: this.bucket,
-      Key: key,
-      Body: buffer
-    };
-    this.request('s3', 'putObject', params, callback);
+  this.When(/^I put "([^"]*)" to the key "([^"]*)" in the bucket$/, function(data, key, next) {
+    var params = {Bucket: this.bucket, Key: key, Body: data};
+    this.request('s3', 'putObject', params, next, false);
   });
+
+  this.Then(/^I delete the object "([^"]*)" from the bucket$/, function(key, next) {
+    var params = {Bucket: this.bucket, Key: key};
+    this.request('s3', 'deleteObject', params, next);
+  });
+
+  this.When(/^I put a (small|large) buffer to the key "([^"]*)" in the bucket$/, function(size, key, next) {
+    var body = this.createBuffer(size);
+    var params = {Bucket: this.bucket, Key: key, Body: body};
+    this.request('s3', 'putObject', params, next);
+  });
+
+  this.Then(/^the object "([^"]*)" should (not )?exist in the bucket$/, function(key, shouldNotExist, next) {
+    var params = { Bucket: this.bucket, Key: key };
+    this.eventually(next, function (retry) {
+      retry.condition = function() {
+        if (shouldNotExist) {
+          return this.error && this.error.code === 'NotFound';
+        } else {
+          return !this.error;
+        }
+      };
+      this.request('s3', 'headObject', params, retry, false);
+    });
+  });
+
 
 };

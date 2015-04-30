@@ -1,9 +1,9 @@
 module.exports = function () {
 
-  this.When(/^I use S3 managed upload to upload a large buffer$/, function (callback) {
+  this.When(/^I use S3 managed upload to upload(?: a|an) (empty|small|large) buffer to the key "([^"]*)"$/, function (size, key, callback) {
     var self = this;
-    var buffer = new Buffer(1024 * 1024 * 12);
-    var params = {Bucket: self.sharedBucket, Key: 'largebuffer', Body: buffer};
+    var buffer = self.createBuffer(size);
+    var params = {Bucket: self.sharedBucket, Key: key, Body: buffer};
     self.s3.upload(params, function (err, data) {
       self.error = err;
       self.data = data;
@@ -17,10 +17,11 @@ module.exports = function () {
     callback();
   });
 
-  this.When(/^I use S3 managed upload to upload a large stream$/, function (callback) {
+  this.When(/^I use S3 managed upload to upload(?: a|an) (empty|small|large) stream to the key "([^"]*)"$/, function (size, key, callback) {
+    var fs = require('fs');
     var self = this;
-    var stream = this.AWS.util.buffer.toStream(new Buffer(1024 * 1024 * 10));
-    var params = {Bucket: self.sharedBucket, Key: 'largestream', Body: stream};
+    var fileName = self.createFile(size);
+    var params = {Bucket: self.sharedBucket, Key: key, Body: fs.createReadStream(fileName)};
 
     self.progressEvents = [];
     var progress = function(info) {
@@ -37,11 +38,6 @@ module.exports = function () {
   this.Then(/^I should get progress events$/, function (callback) {
     this.assert.compare(this.progressEvents.length, '>', 0);
     callback();
-  });
-
-  this.Then(/^I should head the managed upload object$/, function (callback) {
-    var params = {Bucket: this.sharedBucket, Key: 'largestream'};
-    this.request('s3', 'headObject', params, callback);
   });
 
   this.Then(/^the ContentLength should equal (\d+)$/, function (val, callback) {
