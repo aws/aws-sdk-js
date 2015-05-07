@@ -10,7 +10,7 @@
     "xmlNamespace":"https://sts.amazonaws.com/doc/2011-06-15/",
     "protocol":"query"
   },
-  "documentation":"<fullname>AWS Security Token Service</fullname> <p>The AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). This guide provides descriptions of the STS API. For more detailed information about using this service, go to <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/Welcome.html\" target=\"_blank\">Using Temporary Security Credentials</a>. </p> <note> As an alternative to using the API, you can use one of the AWS SDKs, which consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to STS. For example, the SDKs take care of cryptographically signing requests, managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services page</a>. </note> <p>For information about setting up signatures and authorization through the API, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html\" target=\"_blank\">Signing AWS API Requests</a> in the <i>AWS General Reference</i>. For general information about the Query API, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\" target=\"_blank\">Making Query Requests</a> in <i>Using IAM</i>. For information about using security tokens with other AWS products, go to <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/UsingTokens.html\">Using Temporary Security Credentials to Access AWS</a> in <i>Using Temporary Security Credentials</i>. </p> <p>If you're new to AWS and need additional technical information about a specific AWS product, you can find the product's technical documentation at <a href=\"http://aws.amazon.com/documentation/\" target=\"_blank\">http://aws.amazon.com/documentation/</a>. </p> <p> <b>Endpoints</b> </p> <p>For information about STS endpoints, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#sts_region\" target=\"_blank\">Regions and Endpoints</a> in the <i>AWS General Reference</i>.</p> <p> <b>Recording API requests</b> </p> <p>STS supports AWS CloudTrail, which is a service that records AWS calls for your AWS account and delivers log files to an Amazon S3 bucket. By using information collected by CloudTrail, you can determine what requests were successfully made to STS, who made the request, when it was made, and so on. To learn more about CloudTrail, including how to turn it on and find your log files, see the <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html\">AWS CloudTrail User Guide</a>.</p>",
+  "documentation":"<fullname>AWS Security Token Service</fullname> <p>The AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). This guide provides descriptions of the STS API. For more detailed information about using this service, go to <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/Welcome.html\" target=\"_blank\">Using Temporary Security Credentials</a>. </p> <note> As an alternative to using the API, you can use one of the AWS SDKs, which consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to STS. For example, the SDKs take care of cryptographically signing requests, managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services page</a>. </note> <p>For information about setting up signatures and authorization through the API, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html\" target=\"_blank\">Signing AWS API Requests</a> in the <i>AWS General Reference</i>. For general information about the Query API, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\" target=\"_blank\">Making Query Requests</a> in <i>Using IAM</i>. For information about using security tokens with other AWS products, go to <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/UsingTokens.html\">Using Temporary Security Credentials to Access AWS</a> in <i>Using Temporary Security Credentials</i>. </p> <p>If you're new to AWS and need additional technical information about a specific AWS product, you can find the product's technical documentation at <a href=\"http://aws.amazon.com/documentation/\" target=\"_blank\">http://aws.amazon.com/documentation/</a>. </p> <p> <b>Endpoints</b> </p> <p>The AWS Security Token Service (STS) has a default endpoint of https://sts.amazonaws.com that maps to the US East (N. Virginia) region. Additional regions are available, but must first be activated in the AWS Management Console before you can use a different region's endpoint. For more information about activating a region for STS see <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/sts-enableregions.html\">Activating STS in a New Region</a> in the <i>Using Temporary Security Credentials</i> guide. </p> <p>For information about STS endpoints, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#sts_region\">Regions and Endpoints</a> in the <i>AWS General Reference</i>.</p> <p> <b>Recording API requests</b> </p> <p>STS supports AWS CloudTrail, which is a service that records AWS calls for your AWS account and delivers log files to an Amazon S3 bucket. By using information collected by CloudTrail, you can determine what requests were successfully made to STS, who made the request, when it was made, and so on. To learn more about CloudTrail, including how to turn it on and find your log files, see the <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html\">AWS CloudTrail User Guide</a>.</p>",
   "operations":{
     "AssumeRole":{
       "name":"AssumeRole",
@@ -21,7 +21,7 @@
       "input":{"shape":"AssumeRoleRequest"},
       "output":{
         "shape":"AssumeRoleResponse",
-        "documentation":"<p>Contains the result of a successful call to the <a>AssumeRole</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>",
+        "documentation":"<p>Contains the response to a successful <a>AssumeRole</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>",
         "resultWrapper":"AssumeRoleResult"
       },
       "errors":[
@@ -57,7 +57,7 @@
       "input":{"shape":"AssumeRoleWithSAMLRequest"},
       "output":{
         "shape":"AssumeRoleWithSAMLResponse",
-        "documentation":"<p>Contains the result of a successful call to the <a>AssumeRoleWithSAML</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>",
+        "documentation":"<p>Contains the response to a successful <a>AssumeRoleWithSAML</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>",
         "resultWrapper":"AssumeRoleWithSAMLResult"
       },
       "errors":[
@@ -123,7 +123,7 @@
       "input":{"shape":"AssumeRoleWithWebIdentityRequest"},
       "output":{
         "shape":"AssumeRoleWithWebIdentityResponse",
-        "documentation":"<p>Contains the result of a successful call to the <a>AssumeRoleWithWebIdentity</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>",
+        "documentation":"<p>Contains the response to a successful <a>AssumeRoleWithWebIdentity</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>",
         "resultWrapper":"AssumeRoleWithWebIdentityResult"
       },
       "errors":[
@@ -225,7 +225,7 @@
       "input":{"shape":"GetFederationTokenRequest"},
       "output":{
         "shape":"GetFederationTokenResponse",
-        "documentation":"<p>Contains the result of a successful call to the <a>GetFederationToken</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>",
+        "documentation":"<p>Contains the response to a successful <a>GetFederationToken</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>",
         "resultWrapper":"GetFederationTokenResult"
       },
       "errors":[
@@ -261,7 +261,7 @@
       "input":{"shape":"GetSessionTokenRequest"},
       "output":{
         "shape":"GetSessionTokenResponse",
-        "documentation":"<p>Contains the result of a successful call to the <a>GetSessionToken</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>",
+        "documentation":"<p>Contains the response to a successful <a>GetSessionToken</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>",
         "resultWrapper":"GetSessionTokenResult"
       },
       "documentation":"<p>Returns a set of temporary credentials for an AWS account or IAM user. The credentials consist of an access key ID, a secret access key, and a security token. Typically, you use <code>GetSessionToken</code> if you want to use MFA to protect programmatic calls to specific AWS APIs like Amazon EC2 <code>StopInstances</code>. MFA-enabled IAM users would need to call <code>GetSessionToken</code> and submit an MFA code that is associated with their MFA device. Using the temporary security credentials that are returned from the call, IAM users can then make programmatic calls to APIs that require MFA authentication. </p> <p>The <code>GetSessionToken</code> action must be called by using the long-term AWS security credentials of the AWS account or an IAM user. Credentials that are created by IAM users are valid for the duration that you specify, between 900 seconds (15 minutes) and 129600 seconds (36 hours); credentials that are created by using account credentials have a maximum duration of 3600 seconds (1 hour). </p> <note> <p>We recommend that you do not call <code>GetSessionToken</code> with root account credentials. Instead, follow our <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html#create-iam-users\">best practices</a> by creating one or more IAM users, giving them the necessary permissions, and using IAM users for everyday interaction with AWS. </p> </note> <p>The permissions associated with the temporary security credentials returned by <code>GetSessionToken</code> are based on the permissions associated with account or IAM user whose credentials are used to call the action. If <code>GetSessionToken</code> is called using root account credentials, the temporary credentials have root account permissions. Similarly, if <code>GetSessionToken</code> is called using the credentials of an IAM user, the temporary credentials have the same permissions as the IAM user. </p> <p>For more information about using <code>GetSessionToken</code> to create temporary credentials, go to <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/CreatingSessionTokens.html\" target=\"_blank\">Creating Temporary Credentials to Enable Access for IAM Users</a> in <i>Using Temporary Security Credentials</i>. </p>"
@@ -293,15 +293,15 @@
         },
         "ExternalId":{
           "shape":"externalIdType",
-          "documentation":"<p>A unique identifier that is used by third parties to assume a role in their customers' accounts. For each role that the third party can assume, they should instruct their customers to create a role with the external ID that the third party generated. Each time the third party assumes the role, they must pass the customer's external ID. The external ID is useful in order to help third parties bind a role to the customer who created it. For more information about the external ID, see <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/sts-delegating-externalid.html\" target=\"_blank\">About the External ID</a> in <i>Using Temporary Security Credentials</i>. </p>"
+          "documentation":"<p>A unique identifier that is used by third parties to assume a role in their customers' accounts. For each role that the third party can assume, they should instruct their customers to create a role with the external ID that the third party generated. Each time the third party assumes the role, they must pass the customer's external ID. The external ID is useful in order to help third parties bind a role to the customer who created it. For more information about the external ID, see <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/sts-delegating-externalid.html\" target=\"_blank\">About the External ID</a> in <i>Using Temporary Security Credentials</i>.</p>"
         },
         "SerialNumber":{
           "shape":"serialNumberType",
-          "documentation":"<p>The identification number of the MFA device that is associated with the user who is making the <code>AssumeRole</code> call. Specify this value if the trust policy of the role being assumed includes a condition that requires MFA authentication. The value is either the serial number for a hardware device (such as <code>GAHT12345678</code>) or an Amazon Resource Name (ARN) for a virtual device (such as <code>arn:aws:iam::123456789012:mfa/user</code>). </p>"
+          "documentation":"<p>The identification number of the MFA device that is associated with the user who is making the <code>AssumeRole</code> call. Specify this value if the trust policy of the role being assumed includes a condition that requires MFA authentication. The value is either the serial number for a hardware device (such as <code>GAHT12345678</code>) or an Amazon Resource Name (ARN) for a virtual device (such as <code>arn:aws:iam::123456789012:mfa/user</code>).</p>"
         },
         "TokenCode":{
           "shape":"tokenCodeType",
-          "documentation":"<p>The value provided by the MFA device, if the trust policy of the role being assumed requires MFA (that is, if the policy includes a condition that tests for MFA). If the role being assumed requires MFA and if the <code>TokenCode</code> value is missing or expired, the <code>AssumeRole</code> call returns an \"access denied\" error. </p>"
+          "documentation":"<p>The value provided by the MFA device, if the trust policy of the role being assumed requires MFA (that is, if the policy includes a condition that tests for MFA). If the role being assumed requires MFA and if the <code>TokenCode</code> value is missing or expired, the <code>AssumeRole</code> call returns an \"access denied\" error.</p>"
         }
       }
     },
@@ -321,7 +321,7 @@
           "documentation":"<p>A percentage value that indicates the size of the policy in packed form. The service rejects any policy with a packed size greater than 100 percent, which means the policy exceeded the allowed space. </p>"
         }
       },
-      "documentation":"<p>Contains the result of a successful call to the <a>AssumeRole</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>"
+      "documentation":"<p>Contains the response to a successful <a>AssumeRole</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>"
     },
     "AssumeRoleWithSAMLRequest":{
       "type":"structure",
@@ -383,7 +383,7 @@
           "documentation":"<p>A hash value based on the concatenation of the <code>Issuer</code> response value, the AWS account ID, and the friendly name (the last part of the ARN) of the SAML provider in IAM. The combination of <code>NameQualifier</code> and <code>Subject</code> can be used to uniquely identify a federated user. </p> <p>The following pseudocode shows how the hash value is calculated:</p> <p> <code>BASE64 ( SHA1 ( \"https://example.com/saml\" + \"123456789012\" + \"/MySAMLIdP\" ) )</code> </p>"
         }
       },
-      "documentation":"<p>Contains the result of a successful call to the <a>AssumeRoleWithSAML</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>"
+      "documentation":"<p>Contains the response to a successful <a>AssumeRoleWithSAML</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>"
     },
     "AssumeRoleWithWebIdentityRequest":{
       "type":"structure",
@@ -447,7 +447,7 @@
           "documentation":"<p> The intended audience (also known as client ID) of the web identity token. This is traditionally the client identifier issued to the application that requested the web identity token.</p>"
         }
       },
-      "documentation":"<p>Contains the result of a successful call to the <a>AssumeRoleWithWebIdentity</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>"
+      "documentation":"<p>Contains the response to a successful <a>AssumeRoleWithWebIdentity</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>"
     },
     "AssumedRoleUser":{
       "type":"structure",
@@ -581,7 +581,7 @@
           "documentation":"<p>A percentage value indicating the size of the policy in packed form. The service rejects policies for which the packed size is greater than 100 percent of the allowed value. </p>"
         }
       },
-      "documentation":"<p>Contains the result of a successful call to the <a>GetFederationToken</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>"
+      "documentation":"<p>Contains the response to a successful <a>GetFederationToken</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>"
     },
     "GetSessionTokenRequest":{
       "type":"structure",
@@ -608,7 +608,7 @@
           "documentation":"<p>The session credentials for API authentication. </p>"
         }
       },
-      "documentation":"<p>Contains the result of a successful call to the <a>GetSessionToken</a> action, including temporary AWS credentials that can be used to make AWS requests. </p>"
+      "documentation":"<p>Contains the response to a successful <a>GetSessionToken</a> request, including temporary AWS credentials that can be used to make AWS requests. </p>"
     },
     "IDPCommunicationErrorException":{
       "type":"structure",
@@ -639,10 +639,7 @@
     "InvalidAuthorizationMessageException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"invalidAuthorizationMessage",
-          "documentation":"<p>The error message associated with the error.</p>"
-        }
+        "message":{"shape":"invalidAuthorizationMessage"}
       },
       "error":{
         "code":"InvalidAuthorizationMessageException",
@@ -739,8 +736,8 @@
     "externalIdType":{
       "type":"string",
       "min":2,
-      "max":96,
-      "pattern":"[\\w+=,.@:-]*"
+      "max":1224,
+      "pattern":"[\\w+=,.@:\\/-]*"
     },
     "federatedIdType":{
       "type":"string",
