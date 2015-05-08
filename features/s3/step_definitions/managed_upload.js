@@ -1,6 +1,6 @@
 module.exports = function () {
 
-  this.When(/^I use S3 managed upload to upload(?: a|an) (empty|small|large) buffer to the key "([^"]*)"$/, function (size, key, callback) {
+  this.When(/^I use S3 managed upload to upload(?: a| an) (empty|small|large) buffer to the key "([^"]*)"$/, function (size, key, callback) {
     var self = this;
     var buffer = self.createBuffer(size);
     var params = {Bucket: self.sharedBucket, Key: key, Body: buffer};
@@ -17,7 +17,7 @@ module.exports = function () {
     callback();
   });
 
-  this.When(/^I use S3 managed upload to upload(?: a|an) (empty|small|large) stream to the key "([^"]*)"$/, function (size, key, callback) {
+  this.When(/^I use S3 managed upload to upload(?: a| an) (empty|small|large) stream to the key "([^"]*)"$/, function (size, key, callback) {
     var fs = require('fs');
     var self = this;
     var fileName = self.createFile(size);
