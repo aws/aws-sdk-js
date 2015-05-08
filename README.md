@@ -51,7 +51,7 @@ bower install aws-sdk-js
 
 You can find a getting started guide at:
 
-http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/
+[http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/)
 
 ## Supported Services
 
