@@ -9,6 +9,7 @@ body = (size) ->
 
 smallbody = body(5)
 bigbody = body(36)
+zerobody = body(0)
 
 describe 'AWS.S3.ManagedUpload', ->
   s3 = new AWS.S3 maxRetries: 0, params: { Bucket: 'bucket', Key: 'key' }
@@ -154,6 +155,13 @@ describe 'AWS.S3.ManagedUpload', ->
         expect(reqs[1].params.ContentLength).to.equal(size)
         expect(reqs[2].params.ContentLength).to.equal(size)
 
+    it 'supports zero-byte body buffers', ->
+      reqs = helpers.mockResponses [data: ETag: 'ETAG']
+      upload = new AWS.S3.ManagedUpload params: { Body: zerobody }
+      upload.send ->
+        expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
+        expect(err).not.to.exist
+
     it 'errors if partSize is smaller than minPartSize', ->
       expect(-> new AWS.S3.ManagedUpload(partSize: 5)).to.throw(
         'partSize must be greater than 10')
@@ -228,6 +236,15 @@ describe 'AWS.S3.ManagedUpload', ->
       describe 'streaming', ->
         it 'sends a small stream in a single putObject', (done) ->
           stream = AWS.util.buffer.toStream(smallbody)
+          reqs = helpers.mockResponses [data: ETag: 'ETAG']
+          upload = new AWS.S3.ManagedUpload params: { Body: stream }
+          upload.send ->
+            expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
+            expect(err).not.to.exist
+            done()
+
+        it 'sends a zero byte stream', (done) ->
+          stream = AWS.util.buffer.toStream(zerobody)
           reqs = helpers.mockResponses [data: ETag: 'ETAG']
           upload = new AWS.S3.ManagedUpload params: { Body: stream }
           upload.send ->
