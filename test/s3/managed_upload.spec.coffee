@@ -155,6 +155,13 @@ describe 'AWS.S3.ManagedUpload', ->
         expect(reqs[1].params.ContentLength).to.equal(size)
         expect(reqs[2].params.ContentLength).to.equal(size)
 
+    it 'supports zero-byte body buffers', ->
+      reqs = helpers.mockResponses [data: ETag: 'ETAG']
+      upload = new AWS.S3.ManagedUpload params: { Body: zerobody }
+      upload.send ->
+        expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
+        expect(err).not.to.exist
+
     it 'errors if partSize is smaller than minPartSize', ->
       expect(-> new AWS.S3.ManagedUpload(partSize: 5)).to.throw(
         'partSize must be greater than 10')
