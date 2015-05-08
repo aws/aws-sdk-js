@@ -50,12 +50,6 @@ Feature: Working with Objects in S3
     And I make an unauthenticated request to read object "hello"
     Then the object "hello" should contain "world"
 
-  @sse
-  Scenario: Using server-side-encryption with customer-provided key
-    When I put "hello" to the key "cryptobject" with an AES key
-    And I read the object "cryptobject" with the AES key
-    Then the object "cryptobject" should contain "hello"
-
   @blank
   Scenario: Putting nothing to an object
     When I put "" to the key "blank"
@@ -105,6 +99,17 @@ Feature: Working with Objects in S3
     Then the object "largefile" should exist
     Then I get the object "largefile"
     And the HTTP response should have a content length of 524288000
+
+  @checksum
+  Scenario: Verifying data integrity
+    Given I generate the MD5 checksum of "SOME SAMPLE DATA"
+    Given I put "SOME SAMPLE DATA" to the key "checksummed_data"
+    Then the object "checksummed_data" should exist
+    When I get the object "checksummed_data"
+    Then the object "checksummed_data" should contain "SOME SAMPLE DATA"
+    Then the HTTP response should have a content length of 16
+    And the MD5 checksum of the response data should equal the generated checksum
+
 
   @presigned
   Scenario: Putting to a pre-signed URL

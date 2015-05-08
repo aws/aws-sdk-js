@@ -221,6 +221,17 @@ module.exports = function () {
     }.bind(this));
   });
 
+  this.Given(/^I generate the MD5 checksum of "([^"]*)"$/, function(data, next) {
+    this.sentContentMD5 = this.AWS.util.crypto.md5(data, 'base64');
+    next();
+  });
+
+  this.Then(/^the MD5 checksum of the response data should equal the generated checksum$/, function(next) {
+    var receivedContentMD5 = this.AWS.util.crypto.md5(this.data.Body.toString(), 'base64');
+    this.assert.equal(receivedContentMD5, this.sentContentMD5);
+    next();
+  });
+
   this.Given(/^an empty bucket$/, function(next) {
     var self = this;
     var params = { Bucket: this.sharedBucket };

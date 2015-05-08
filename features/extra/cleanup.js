@@ -8,10 +8,9 @@ module.exports = function() {
   this.registerHandler('AfterFeatures', function(event, callback) {
     var path = require('path');
     var fs = require('fs');
-    var filePath = path.resolve('integ.buckets.json');
-    if (!fs.existsSync(filePath)) return callback();
-
     try {
+      var filePath = path.resolve('integ.buckets.json');
+      if (!fs.existsSync(filePath)) return callback();
       deleteFixtures();
       var cache = JSON.parse(fs.readFileSync(filePath));
       var buckets = cache.buckets;
@@ -106,7 +105,9 @@ module.exports = function() {
   var bootSDK = function () {
     var path = require('path');
     var AWS = require(path.resolve('./'));
-    AWS.config.loadFromPath(path.resolve('configuration'));
+    AWS.config.update({
+      region: process.env['CONFIGURED_REGION']
+    });
     return AWS;
   };
 
