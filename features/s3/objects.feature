@@ -77,7 +77,7 @@ Feature: Working with Objects in S3
     When I put a large buffer to the key "largebuffer"
     Then the object "largebuffer" should exist
     Then I get the object "largebuffer"
-    And the HTTP response should have a content length of 524288000
+    And the HTTP response should have a content length of 52428800
 
   @file
   Scenario: Putting and getting an empty file
@@ -98,12 +98,12 @@ Feature: Working with Objects in S3
     When I put a large file to the key "largefile"
     Then the object "largefile" should exist
     Then I get the object "largefile"
-    And the HTTP response should have a content length of 524288000
+    And the HTTP response should have a content length of 52428800
 
   @checksum
   Scenario: Verifying data integrity
     Given I generate the MD5 checksum of "SOME SAMPLE DATA"
-    Given I put "SOME SAMPLE DATA" to the key "checksummed_data"
+    And I put "SOME SAMPLE DATA" to the key "checksummed_data"
     Then the object "checksummed_data" should exist
     When I get the object "checksummed_data"
     Then the object "checksummed_data" should contain "SOME SAMPLE DATA"
@@ -157,9 +157,9 @@ Feature: Working with Objects in S3
     Given I put a large buffer to the key "large_streaming_object"
     Then the object "large_streaming_object" should exist
     When I stream key "large_streaming_object"
-    Then the streamed data content length should equal 524288000
+    Then the streamed data content length should equal 52428800
     When I stream2 key "large_streaming_object"
-    Then the streamed data content length should equal 524288000
+    Then the streamed data content length should equal 52428800
 
   @progress
   Scenario: Progress events

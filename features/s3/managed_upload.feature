@@ -21,12 +21,11 @@ Feature: S3 Managed Upload
     When I use S3 managed upload to upload a large buffer to the key "large_upload_buffer"
     Then the multipart upload should succeed
     And the object "large_upload_buffer" should exist
-    And the ContentLength should equal 524288000
+    And the ContentLength should equal 52428800
 
   Scenario: Uploading an empty stream
     When I use S3 managed upload to upload an empty stream to the key "empty_upload_stream"
     Then the multipart upload should succeed
-    And I should get progress events
     Then the object "empty_upload_stream" should exist
     And the ContentLength should equal 0
 
@@ -42,4 +41,12 @@ Feature: S3 Managed Upload
     Then the multipart upload should succeed
     And I should get progress events
     Then the object "large_upload_stream" should exist
-    And the ContentLength should equal 524288000
+    And the ContentLength should equal 52428800
+
+  Scenario: Verifying uploaded data integrity
+    And I generate the MD5 checksum of a 50MB buffer
+    Given I use S3 managed upload to upload the buffer to the key "checksummed_data"
+    Then the object "checksummed_data" should exist
+    When I get the object "checksummed_data"
+    Then the HTTP response should have a content length of 52428800
+    And the MD5 checksum of the response data should equal the generated checksum

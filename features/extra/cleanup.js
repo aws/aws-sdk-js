@@ -71,7 +71,6 @@ module.exports = function() {
    * Delete bucket
    */
   var deleteBucket = function(bucket, callback) {
-    var AWS = bootSDK();
     var s3 = new AWS.S3({maxRetries: 100});
     s3.deleteBucket({Bucket: bucket}, function(err, data) {
       callback(err);
@@ -82,7 +81,6 @@ module.exports = function() {
    * Delete objects.
    */
   var deleteObjects = function(bucket, callback) {
-    var AWS = bootSDK();
     var s3 = new AWS.S3({maxRetries: 100});
     var params = {
       Bucket: bucket
@@ -104,11 +102,12 @@ module.exports = function() {
 
   var bootSDK = function () {
     var path = require('path');
-    var AWS = require(path.resolve('./'));
-    AWS.config.update({
+    var SDK = require(path.resolve('./'));
+    SDK.config.update({
       region: process.env['CONFIGURED_REGION']
     });
-    return AWS;
+    return SDK;
   };
 
+  var AWS = bootSDK();
 };
