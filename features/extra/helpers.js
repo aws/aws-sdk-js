@@ -150,7 +150,7 @@ module.exports = {
     switch (size) {
       case 'empty': body = new Buffer(0); break;
       case 'small': body = new Buffer(1024 * 1024); break;
-      case 'large': body = new Buffer(1024 * 1024 * 50); break;
+      case 'large': body = new Buffer(1024 * 1024 * 20); break;
     }
     fs.writeFileSync(filename, body);
     return filename;
@@ -170,7 +170,7 @@ module.exports = {
       switch (size) {
         case 'empty': buffer = new Buffer(0); break;
         case 'small': buffer = new Buffer(1024 * 1024); break;
-        case 'large': buffer = new Buffer(1024 * 1024 * 50); break;
+        case 'large': buffer = new Buffer(1024 * 1024 * 20); break;
         default: return new Buffer(1024 * 1024);
       }
     }

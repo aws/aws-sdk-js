@@ -77,7 +77,7 @@ Feature: Working with Objects in S3
     When I put a large buffer to the key "largebuffer"
     Then the object "largebuffer" should exist
     Then I get the object "largebuffer"
-    And the HTTP response should have a content length of 52428800
+    And the HTTP response should have a content length of 20971520
 
   @file
   Scenario: Putting and getting an empty file
@@ -98,7 +98,7 @@ Feature: Working with Objects in S3
     When I put a large file to the key "largefile"
     Then the object "largefile" should exist
     Then I get the object "largefile"
-    And the HTTP response should have a content length of 52428800
+    And the HTTP response should have a content length of 20971520
 
   @checksum
   Scenario: Verifying data integrity
@@ -157,9 +157,9 @@ Feature: Working with Objects in S3
     Given I put a large buffer to the key "large_streaming_object"
     Then the object "large_streaming_object" should exist
     When I stream key "large_streaming_object"
-    Then the streamed data content length should equal 52428800
+    Then the streamed data content length should equal 20971520
     When I stream2 key "large_streaming_object"
-    Then the streamed data content length should equal 52428800
+    Then the streamed data content length should equal 20971520
 
   @progress
   Scenario: Progress events
