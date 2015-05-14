@@ -1,0 +1,3 @@
+image: aws-sdk-js-ci
+script:
+  - npm run unit
