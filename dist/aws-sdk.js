@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.1.27
+// AWS SDK for JavaScript v2.1.28
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -24,7 +24,7 @@ AWS.apiLoader.services['cloudwatch']['2010-08-01'] = {"metadata":{"apiVersion":"
 AWS.apiLoader.services['cloudwatchlogs'] = {};
 AWS.CloudWatchLogs = AWS.Service.defineService('cloudwatchlogs', [ '2014-03-28' ]);
 
-AWS.apiLoader.services['cloudwatchlogs']['2014-03-28'] = {"version":"2.0","metadata":{"apiVersion":"2014-03-28","endpointPrefix":"logs","jsonVersion":"1.1","serviceFullName":"Amazon CloudWatch Logs","signatureVersion":"v4","targetPrefix":"Logs_20140328","protocol":"json"},"operations":{"CreateLogGroup":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{}}},"http":{}},"CreateLogStream":{"input":{"type":"structure","required":["logGroupName","logStreamName"],"members":{"logGroupName":{},"logStreamName":{}}},"http":{}},"DeleteLogGroup":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{}}},"http":{}},"DeleteLogStream":{"input":{"type":"structure","required":["logGroupName","logStreamName"],"members":{"logGroupName":{},"logStreamName":{}}},"http":{}},"DeleteMetricFilter":{"input":{"type":"structure","required":["logGroupName","filterName"],"members":{"logGroupName":{},"filterName":{}}},"http":{}},"DeleteRetentionPolicy":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{}}},"http":{}},"DescribeLogGroups":{"input":{"type":"structure","members":{"logGroupNamePrefix":{},"nextToken":{},"limit":{"type":"integer"}}},"output":{"type":"structure","members":{"logGroups":{"type":"list","member":{"type":"structure","members":{"logGroupName":{},"creationTime":{"type":"long"},"retentionInDays":{"type":"integer"},"metricFilterCount":{"type":"integer"},"arn":{},"storedBytes":{"type":"long"}}}},"nextToken":{}}},"http":{}},"DescribeLogStreams":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{},"logStreamNamePrefix":{},"orderBy":{},"descending":{"type":"boolean"},"nextToken":{},"limit":{"type":"integer"}}},"output":{"type":"structure","members":{"logStreams":{"type":"list","member":{"type":"structure","members":{"logStreamName":{},"creationTime":{"type":"long"},"firstEventTimestamp":{"type":"long"},"lastEventTimestamp":{"type":"long"},"lastIngestionTime":{"type":"long"},"uploadSequenceToken":{},"arn":{},"storedBytes":{"type":"long"}}}},"nextToken":{}}},"http":{}},"DescribeMetricFilters":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{},"filterNamePrefix":{},"nextToken":{},"limit":{"type":"integer"}}},"output":{"type":"structure","members":{"metricFilters":{"type":"list","member":{"type":"structure","members":{"filterName":{},"filterPattern":{},"metricTransformations":{"shape":"Sx"},"creationTime":{"type":"long"}}}},"nextToken":{}}},"http":{}},"GetLogEvents":{"input":{"type":"structure","required":["logGroupName","logStreamName"],"members":{"logGroupName":{},"logStreamName":{},"startTime":{"type":"long"},"endTime":{"type":"long"},"nextToken":{},"limit":{"type":"integer"},"startFromHead":{"type":"boolean"}}},"output":{"type":"structure","members":{"events":{"type":"list","member":{"type":"structure","members":{"timestamp":{"type":"long"},"message":{},"ingestionTime":{"type":"long"}}}},"nextForwardToken":{},"nextBackwardToken":{}}},"http":{}},"PutLogEvents":{"input":{"type":"structure","required":["logGroupName","logStreamName","logEvents"],"members":{"logGroupName":{},"logStreamName":{},"logEvents":{"type":"list","member":{"type":"structure","required":["timestamp","message"],"members":{"timestamp":{"type":"long"},"message":{}}}},"sequenceToken":{}}},"output":{"type":"structure","members":{"nextSequenceToken":{},"rejectedLogEventsInfo":{"type":"structure","members":{"tooNewLogEventStartIndex":{"type":"integer"},"tooOldLogEventEndIndex":{"type":"integer"},"expiredLogEventEndIndex":{"type":"integer"}}}}},"http":{}},"PutMetricFilter":{"input":{"type":"structure","required":["logGroupName","filterName","filterPattern","metricTransformations"],"members":{"logGroupName":{},"filterName":{},"filterPattern":{},"metricTransformations":{"shape":"Sx"}}},"http":{}},"PutRetentionPolicy":{"input":{"type":"structure","required":["logGroupName","retentionInDays"],"members":{"logGroupName":{},"retentionInDays":{"type":"integer"}}},"http":{}},"TestMetricFilter":{"input":{"type":"structure","required":["filterPattern","logEventMessages"],"members":{"filterPattern":{},"logEventMessages":{"type":"list","member":{}}}},"output":{"type":"structure","members":{"matches":{"type":"list","member":{"type":"structure","members":{"eventNumber":{"type":"long"},"eventMessage":{},"extractedValues":{"type":"map","key":{},"value":{}}}}}}},"http":{}}},"shapes":{"Sx":{"type":"list","member":{"type":"structure","required":["metricName","metricNamespace","metricValue"],"members":{"metricName":{},"metricNamespace":{},"metricValue":{}}}}},"paginators":{"DescribeLogGroups":{"input_token":"nextToken","output_token":"nextToken","limit_key":"limit","result_key":"logGroups"},"DescribeLogStreams":{"input_token":"nextToken","output_token":"nextToken","limit_key":"limit","result_key":"logStreams"},"DescribeMetricFilters":{"input_token":"nextToken","output_token":"nextToken","limit_key":"limit","result_key":"metricFilters"},"GetLogEvents":{"input_token":"nextToken","output_token":"nextForwardToken","limit_key":"limit","result_key":"events"}}};
+AWS.apiLoader.services['cloudwatchlogs']['2014-03-28'] = {"version":"2.0","metadata":{"apiVersion":"2014-03-28","endpointPrefix":"logs","jsonVersion":"1.1","serviceFullName":"Amazon CloudWatch Logs","signatureVersion":"v4","targetPrefix":"Logs_20140328","protocol":"json"},"operations":{"CreateLogGroup":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{}}},"http":{}},"CreateLogStream":{"input":{"type":"structure","required":["logGroupName","logStreamName"],"members":{"logGroupName":{},"logStreamName":{}}},"http":{}},"DeleteLogGroup":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{}}},"http":{}},"DeleteLogStream":{"input":{"type":"structure","required":["logGroupName","logStreamName"],"members":{"logGroupName":{},"logStreamName":{}}},"http":{}},"DeleteMetricFilter":{"input":{"type":"structure","required":["logGroupName","filterName"],"members":{"logGroupName":{},"filterName":{}}},"http":{}},"DeleteRetentionPolicy":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{}}},"http":{}},"DescribeLogGroups":{"input":{"type":"structure","members":{"logGroupNamePrefix":{},"nextToken":{},"limit":{"type":"integer"}}},"output":{"type":"structure","members":{"logGroups":{"type":"list","member":{"type":"structure","members":{"logGroupName":{},"creationTime":{"type":"long"},"retentionInDays":{"type":"integer"},"metricFilterCount":{"type":"integer"},"arn":{},"storedBytes":{"type":"long"}}}},"nextToken":{}}},"http":{}},"DescribeLogStreams":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{},"logStreamNamePrefix":{},"orderBy":{},"descending":{"type":"boolean"},"nextToken":{},"limit":{"type":"integer"}}},"output":{"type":"structure","members":{"logStreams":{"type":"list","member":{"type":"structure","members":{"logStreamName":{},"creationTime":{"type":"long"},"firstEventTimestamp":{"type":"long"},"lastEventTimestamp":{"type":"long"},"lastIngestionTime":{"type":"long"},"uploadSequenceToken":{},"arn":{},"storedBytes":{"type":"long"}}}},"nextToken":{}}},"http":{}},"DescribeMetricFilters":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{},"filterNamePrefix":{},"nextToken":{},"limit":{"type":"integer"}}},"output":{"type":"structure","members":{"metricFilters":{"type":"list","member":{"type":"structure","members":{"filterName":{},"filterPattern":{},"metricTransformations":{"shape":"Sx"},"creationTime":{"type":"long"}}}},"nextToken":{}}},"http":{}},"FilterLogEvents":{"input":{"type":"structure","required":["logGroupName"],"members":{"logGroupName":{},"logStreamNames":{"type":"list","member":{}},"startTime":{"type":"long"},"endTime":{"type":"long"},"filterPattern":{},"nextToken":{},"limit":{"type":"integer"},"interleaved":{"type":"boolean"}}},"output":{"type":"structure","members":{"events":{"type":"list","member":{"type":"structure","members":{"logStreamName":{},"timestamp":{"type":"long"},"message":{},"ingestionTime":{"type":"long"},"eventId":{}}}},"searchedLogStreams":{"type":"list","member":{"type":"structure","members":{"logStreamName":{},"searchedCompletely":{"type":"boolean"}}}},"nextToken":{}}},"http":{}},"GetLogEvents":{"input":{"type":"structure","required":["logGroupName","logStreamName"],"members":{"logGroupName":{},"logStreamName":{},"startTime":{"type":"long"},"endTime":{"type":"long"},"nextToken":{},"limit":{"type":"integer"},"startFromHead":{"type":"boolean"}}},"output":{"type":"structure","members":{"events":{"type":"list","member":{"type":"structure","members":{"timestamp":{"type":"long"},"message":{},"ingestionTime":{"type":"long"}}}},"nextForwardToken":{},"nextBackwardToken":{}}},"http":{}},"PutLogEvents":{"input":{"type":"structure","required":["logGroupName","logStreamName","logEvents"],"members":{"logGroupName":{},"logStreamName":{},"logEvents":{"type":"list","member":{"type":"structure","required":["timestamp","message"],"members":{"timestamp":{"type":"long"},"message":{}}}},"sequenceToken":{}}},"output":{"type":"structure","members":{"nextSequenceToken":{},"rejectedLogEventsInfo":{"type":"structure","members":{"tooNewLogEventStartIndex":{"type":"integer"},"tooOldLogEventEndIndex":{"type":"integer"},"expiredLogEventEndIndex":{"type":"integer"}}}}},"http":{}},"PutMetricFilter":{"input":{"type":"structure","required":["logGroupName","filterName","filterPattern","metricTransformations"],"members":{"logGroupName":{},"filterName":{},"filterPattern":{},"metricTransformations":{"shape":"Sx"}}},"http":{}},"PutRetentionPolicy":{"input":{"type":"structure","required":["logGroupName","retentionInDays"],"members":{"logGroupName":{},"retentionInDays":{"type":"integer"}}},"http":{}},"TestMetricFilter":{"input":{"type":"structure","required":["filterPattern","logEventMessages"],"members":{"filterPattern":{},"logEventMessages":{"type":"list","member":{}}}},"output":{"type":"structure","members":{"matches":{"type":"list","member":{"type":"structure","members":{"eventNumber":{"type":"long"},"eventMessage":{},"extractedValues":{"type":"map","key":{},"value":{}}}}}}},"http":{}}},"shapes":{"Sx":{"type":"list","member":{"type":"structure","required":["metricName","metricNamespace","metricValue"],"members":{"metricName":{},"metricNamespace":{},"metricValue":{}}}}},"paginators":{"DescribeLogGroups":{"input_token":"nextToken","output_token":"nextToken","limit_key":"limit","result_key":"logGroups"},"DescribeLogStreams":{"input_token":"nextToken","output_token":"nextToken","limit_key":"limit","result_key":"logStreams"},"DescribeMetricFilters":{"input_token":"nextToken","output_token":"nextToken","limit_key":"limit","result_key":"metricFilters"},"GetLogEvents":{"input_token":"nextToken","output_token":"nextForwardToken","limit_key":"limit","result_key":"events"}}};
 AWS.apiLoader.services['cognitoidentity'] = {};
 AWS.CognitoIdentity = AWS.Service.defineService('cognitoidentity', [ '2014-06-30' ]);
 require('./services/cognitoidentity');
@@ -268,7 +268,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.1.27',
+  VERSION: '2.1.28',
 
 
   Signers: {},
@@ -2559,7 +2559,7 @@ function populateBody(req) {
 
     if (payloadMember.type === 'structure') {
       var rootElement = payloadMember.name;
-      req.httpRequest.body = builder.toXML(params, payloadMember, rootElement);
+      req.httpRequest.body = builder.toXML(params, payloadMember, rootElement, true);
     } else { // non-xml payload
       req.httpRequest.body = params;
     }
@@ -3397,6 +3397,7 @@ AWS.Response = inherit({
 });
 
 },{"./core":3}],33:[function(require,module,exports){
+(function (Buffer){
 var AWS = require('../core');
 var byteLength = AWS.util.string.byteLength;
 
@@ -3466,7 +3467,7 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
       if (self.body instanceof Stream) {
         runFill = false;
         self.fillQueue = self.fillStream;
-        self.partBuffer = new AWS.util.Buffer(0);
+        self.partBuffers = [];
         self.body.
           on('readable', function() { self.fillQueue(); }).
           on('end', function() {
@@ -3568,12 +3569,23 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
   multipartReq: null,
 
 
-  partBuffer: null,
+  partBuffers: null,
+
+
+  partBufferLength: 0,
 
 
   fillBuffer: function fillBuffer() {
     var self = this;
     var bodyLen = byteLength(self.body);
+
+    if (bodyLen === 0) {
+      self.isDoneChunking = true;
+      self.numParts = 1;
+      self.nextChunk(self.body);
+      return;
+    }
+
     while (self.activeParts < self.queueSize && self.partPos < bodyLen) {
       var endPos = Math.min(self.partPos + self.partSize, bodyLen);
       var buf = self.sliceFn.call(self.body, self.partPos, endPos);
@@ -3592,23 +3604,40 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     var self = this;
     if (self.activeParts >= self.queueSize) return;
 
-    var buf = self.body.read(self.partSize - self.partBuffer.length) ||
+    var buf = self.body.read(self.partSize - self.partBufferLength) ||
               self.body.read();
     if (buf) {
-      self.partBuffer = AWS.util.Buffer.concat([self.partBuffer, buf]);
+      self.partBuffers.push(buf);
+      self.partBufferLength += buf.length;
       self.totalChunkedBytes += buf.length;
     }
 
-    if (self.partBuffer.length >= self.partSize) {
-      self.nextChunk(self.partBuffer.slice(0, self.partSize));
-      self.partBuffer = self.partBuffer.slice(self.partSize);
-    } else if (self.isDoneChunking) {
-      self.totalBytes = self.totalChunkedBytes;
-      if (self.partBuffer.length > 0) {
-        self.numParts++;
-        self.nextChunk(self.partBuffer);
+    if (self.partBufferLength >= self.partSize) {
+      var pbuf = Buffer.concat(self.partBuffers);
+      self.partBuffers = [];
+      self.partBufferLength = 0;
+
+      if (pbuf.length > self.partSize) {
+        var rest = pbuf.slice(self.partSize);
+        self.partBuffers.push(rest);
+        self.partBufferLength += rest.length;
+        pbuf = pbuf.slice(0, self.partSize);
       }
-      self.partBuffer = new AWS.util.Buffer(0);
+
+      self.nextChunk(pbuf);
+    }
+
+    if (self.isDoneChunking && !self.isDoneSending) {
+      pbuf = Buffer.concat(self.partBuffers);
+      self.partBuffers = [];
+      self.partBufferLength = 0;
+      self.totalBytes = self.totalChunkedBytes;
+      self.isDoneSending = true;
+
+      if (self.numParts === 0 || pbuf.length > 0) {
+        self.numParts++;
+        self.nextChunk(pbuf);
+      }
     }
 
     self.body.read(0);
@@ -3767,7 +3796,8 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
 AWS.util.mixin(AWS.S3.ManagedUpload, AWS.SequentialExecutor);
 module.exports = AWS.S3.ManagedUpload;
 
-},{"../core":3}],34:[function(require,module,exports){
+}).call(this,require("buffer").Buffer)
+},{"../core":3,"buffer":53}],34:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -6364,11 +6394,11 @@ var builder = require('xmlbuilder');
 
 function XmlBuilder() { }
 
-XmlBuilder.prototype.toXML = function(params, shape, rootElement) {
+XmlBuilder.prototype.toXML = function(params, shape, rootElement, noEmpty) {
   var xml = builder.create(rootElement);
   applyNamespaces(xml, shape);
   serialize(xml, params, shape);
-  return xml.children.length === 0 ? '' : xml.root().toString();
+  return xml.children.length > 0 || noEmpty ? xml.root().toString() : '';
 };
 
 function serialize(xml, value, shape) {
