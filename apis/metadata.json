@@ -50,6 +50,10 @@
   "directconnect": {
     "name": "DirectConnect"
   },
+  "directoryservice": {
+    "prefix": "ds",
+    "name": "DirectoryService"
+  },
   "dynamodb": {
     "name": "DynamoDB"
   },
