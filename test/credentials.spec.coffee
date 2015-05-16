@@ -619,6 +619,13 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.getStorage('id')).not.to.exist
       expect(creds.getStorage('providers')).not.to.exist
 
+    it 'should clear instance information', ->
+      creds.identityId = 'foo'
+      creds.params.IdentityId = 'foo'
+      creds.clearCachedId()
+      expect(creds.identityId).not.to.exist
+      expect(creds.params.IdentityId).not.to.exist
+
   describe 'createClients', ->
     beforeEach -> setupCreds()
 
