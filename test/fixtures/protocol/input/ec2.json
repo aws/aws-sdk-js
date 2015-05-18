@@ -352,7 +352,7 @@
         },
         "serialized": {
           "uri": "/",
-          "body": "Action=OperationName&Version=2014-01-01&TimeArg=2015-01-25T08%3A00%3A00.000Z"
+          "body": "Action=OperationName&Version=2014-01-01&TimeArg=2015-01-25T08%3A00%3A00Z"
         }
       }
     ]

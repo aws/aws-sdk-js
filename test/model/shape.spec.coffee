@@ -20,7 +20,7 @@ describe 'AWS.Model.Shape', ->
       it 'converts iso8601 timestamps', ->
         api = new AWS.Model.Api metadata: timestampFormat: 'iso8601'
         shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
-        date = shape.toType('1970-01-01T00:00:00.000Z')
+        date = shape.toType('1970-01-01T00:00:00Z')
         expect(date).to.eql(new Date(0))
 
       it 'converts rfc822 timestamps', ->
@@ -54,13 +54,13 @@ describe 'AWS.Model.Shape', ->
         api = new AWS.Model.Api metadata: protocol: 'rest-xml'
         shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
         date = shape.toWireFormat(new Date(12300000))
-        expect(date).to.equal('1970-01-01T03:25:00.000Z')
+        expect(date).to.equal('1970-01-01T03:25:00Z')
 
         # query
         api = new AWS.Model.Api metadata: protocol: 'query'
         shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
         date = shape.toWireFormat(new Date(12300000))
-        expect(date).to.equal('1970-01-01T03:25:00.000Z')
+        expect(date).to.equal('1970-01-01T03:25:00Z')
 
     describe 'BooleanShape', ->
       describe 'toType()', ->

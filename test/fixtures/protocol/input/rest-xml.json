@@ -610,7 +610,7 @@
         },
         "serialized": {
           "method": "POST",
-          "body": "<OperationRequest xmlns=\"https://foo/\"><StructureParam><t>2015-01-25T08:00:00.000Z</t><b>Zm9v</b></StructureParam></OperationRequest>",
+          "body": "<OperationRequest xmlns=\"https://foo/\"><StructureParam><t>2015-01-25T08:00:00Z</t><b>Zm9v</b></StructureParam></OperationRequest>",
           "uri": "/2014-01-01/hostedzone",
           "headers": {}
         }
