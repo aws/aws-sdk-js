@@ -107,17 +107,17 @@ describe 'AWS.util.date', ->
         expect(util.getDate().getTime()).to.equal(0)
 
   describe 'iso8601', ->
-    it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
+    it 'should return date formatted as YYYYMMDDTHHmmssZ', ->
       date = new Date(600000); date.setMilliseconds(0)
       helpers.spyOn(util, 'getDate').andCallFake -> date
-      expect(util.iso8601()).to.equal('1970-01-01T00:10:00.000Z')
+      expect(util.iso8601()).to.equal('1970-01-01T00:10:00Z')
 
     it 'should allow date parameter', ->
       date = new Date(660000); date.setMilliseconds(0)
-      expect(util.iso8601(date)).to.equal('1970-01-01T00:11:00.000Z')
+      expect(util.iso8601(date)).to.equal('1970-01-01T00:11:00Z')
 
   describe 'rfc822', ->
-    it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
+    it 'should return date formatted as YYYYMMDDTHHmmssZ', ->
       date = new Date(600000); date.setMilliseconds(0)
       helpers.spyOn(util, 'getDate').andCallFake -> date
       expect(util.rfc822()).to.match(/^Thu, 0?1 Jan 1970 00:10:00 (GMT|UTC)$/)
