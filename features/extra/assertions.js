@@ -22,7 +22,7 @@ assert.contains = function assertContains(list, matcher, message) {
 assert.compare = function assertComparison(actual, operator, expected, message) {
   var compare = actual + ' ' + operator + ' ' + expected;
   assert.ok(eval(compare), message || compare);
-}
+};
 
 module.exports = {
   assert: assert

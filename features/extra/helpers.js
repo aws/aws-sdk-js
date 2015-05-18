@@ -4,7 +4,7 @@ module.exports = {
 
   uniqueName: function uniqueName(base, sep) {
     if (sep === undefined) sep = '-';
-    if (base === "") return "";
+    if (base === '') return '';
     return base + sep + new Date().getTime();
   },
 
@@ -66,7 +66,7 @@ module.exports = {
     var world = this;
 
     if (!svc) svc = this.service;
-    if (typeof svc == 'string') svc = this[svc];
+    if (typeof svc === 'string') svc = this[svc];
 
     svc[operation](params, function(err, data) {
       world.response = this;
@@ -109,6 +109,73 @@ module.exports = {
     var msg = resp.error.message;
     var err = 'Received unexpected error from ' + svc + '.' + op + ', ' + code + ': ' + msg;
     next.fail(new Error(err));
+  },
+
+  /**
+   * Cache bucket names used for cleanup after all features have run.
+   */
+  cacheBucketName: function(bucket) {
+    var fs = require('fs');
+    var path = require('path');
+    var filePath = path.resolve('integ.buckets.json');
+    var cache;
+    if (fs.existsSync(filePath)) {
+      try {
+        cache = JSON.parse(fs.readFileSync(filePath));
+        cache.buckets.push(bucket);
+        fs.writeFileSync(filePath, JSON.stringify(cache));
+      } catch (fileErr) {
+        throw fileErr;
+      }
+    } else {
+      cache = {};
+      cache.buckets = [bucket];
+      fs.writeFileSync(filePath, JSON.stringify(cache));
+    }
+  },
+
+  /**
+   * Creates a fixture file of given size and returns the path.
+   */
+  createFile: function(size, name) {
+    var fs = require('fs');
+    var path = require('path');
+    name = this.uniqueName(name);
+    // Cannot set this as a world property because the world
+    // is cleaned up before the AfterFeatures hook is fired.
+    var fixturePath = path.resolve('./features/extra/fixtures/tmp');
+    if (!fs.existsSync(fixturePath)) fs.mkdirSync(fixturePath);
+    var filename = path.join(fixturePath, name);
+    var body;
+    switch (size) {
+      case 'empty': body = new Buffer(0); break;
+      case 'small': body = new Buffer(1024 * 1024); break;
+      case 'large': body = new Buffer(1024 * 1024 * 20); break;
+    }
+    fs.writeFileSync(filename, body);
+    return filename;
+  },
+
+  /**
+   * Creates and returns a buffer of given size
+   */
+  createBuffer: function(size) {
+    var match;
+    var buffer;
+    if (match = size.match(/(\d+)KB/)) {
+      buffer = new Buffer(parseInt(match[1]) * 1024);
+    } else if (match = size.match(/(\d+)MB/)) {
+      buffer = new Buffer(parseInt(match[1]) * 1024 * 1024);
+    } else {
+      switch (size) {
+        case 'empty': buffer = new Buffer(0); break;
+        case 'small': buffer = new Buffer(1024 * 1024); break;
+        case 'large': buffer = new Buffer(1024 * 1024 * 20); break;
+        default: return new Buffer(1024 * 1024);
+      }
+    }
+    buffer.fill('x');
+    return buffer;
   }
 
 };

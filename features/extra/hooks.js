@@ -1,24 +1,40 @@
 var util = require('util');
-var realExit = process.exit;
 
 module.exports = function () {
-  var world = require('./world.js').WorldInstance;
   this.World = require('./world.js').World;
-
-  world.cleanupTasks = new world.AWS.SequentialExecutor();
-
-  process.exit = function(code) {
-    var finalCallback = function() { realExit(code); };
-    world.cleanupTasks.emit('cleanup', [], finalCallback);
-  };
-
-  this.AfterAll = function(callback) {
-    world.cleanupTasks.onAsync('cleanup', callback.bind(world));
-  };
 
   this.Before(function(callback) {
     this.params = {};
     callback();
+  });
+
+  /* Global S3 steps */
+  this.Given(/^I create a shared bucket$/, function(callback) {
+    if (this.sharedBucket) return callback();
+
+    this.sharedBucket = this.uniqueName('aws-sdk-js-shared-integration');
+    this.request('s3', 'createBucket', {Bucket: this.sharedBucket}, function(err, data) {
+      this.cacheBucketName(this.sharedBucket);
+      if (err) callback.fail(err);
+      else callback();
+    });
+  });
+
+  this.Given(/^I create a bucket$/, function(callback) {
+    this.bucket = this.uniqueName('aws-sdk-js-integration');
+    this.request('s3', 'createBucket', {Bucket: this.bucket}, callback);
+  });
+
+  this.When(/^I delete the bucket$/, function(callback) {
+    this.request('s3', 'deleteBucket', {Bucket: this.bucket}, callback);
+  });
+
+  this.Then(/^the bucket should exist$/, function(next) {
+    this.s3.waitFor('bucketExists', {Bucket: this.bucket}, next);
+  });
+
+  this.Then(/^the bucket should not exist$/, function(callback) {
+    this.s3.waitFor('bucketNotExists', {Bucket: this.bucket}, callback);
   });
 
   /* Global error code steps */
@@ -85,7 +101,7 @@ module.exports = function () {
     callback();
   });
 
-  this.Given(/^I paginate the "([^"]*)" operation with limit (\d+)(?: and max pages (\d+))?$/, function(operation, limit, maxPages, callback) {
+  this.Given(/^I paginate the "([^"]*)" operation(?: with limit (\d+))?(?: and max pages (\d+))?$/, function(operation, limit, maxPages, callback) {
     limit = parseInt(limit);
     if (maxPages) maxPages = parseInt(maxPages);
 
