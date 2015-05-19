@@ -301,7 +301,6 @@ describe 'AWS.Request', ->
     describe 'domain support', ->
       domain = null
       beforeEach -> domain = require('domain').create()
-      afterEach -> domain.dispose()
 
       it 'supports domains', ->
         helpers.mockHttpResponse 200, {}, 'Success!'
