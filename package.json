@@ -48,10 +48,7 @@
       "url" : "http://github.com/aws/aws-sdk-js/issues",
       "mail" : ""
     },
-    "licenses": [{
-      "type": "Apache 2.0",
-      "url": "http://github.com/aws/aws-sdk-js/raw/master/LICENSE.txt"
-    }],
+    "license": "Apache-2.0",
     "keywords": [
       "api", "amazon","aws","ec2","simpledb","s3","sqs","ses","sns","route53","rds","elasticache","cloudfront","fps",
       "cloudformation","cloudwatch","dynamodb","iam","swf","autoscaling","cloudsearch","elb",
