@@ -69,9 +69,12 @@ module.exports = function () {
     var params = {Bucket: this.sharedBucket, Key: key};
     var world = this;
     this.result = '';
-    this.service.getObject(params).createReadStream().
-      on('end', function() { callback(); }).
-      on('data', function(d) { world.result += d.toString(); });
+    var s = this.service.getObject(params).createReadStream();
+
+    setTimeout(function() {
+      s.on('end', function() { callback(); });
+      s.on('data', function(d) { world.result += d.toString(); });
+    }, 2000); // delay streaming to ensure it is buffered
   });
 
   this.When(/^I stream2 key "([^"]*)"$/, function(key, callback) {
@@ -80,10 +83,12 @@ module.exports = function () {
     var world = this;
     this.result = '';
     var stream = this.service.getObject(params).createReadStream();
-    stream.on('end', function() { callback(); });
-    stream.on('readable', function() {
-      var v = stream.read(); if (v) world.result += v;
-    });
+    setTimeout(function() {
+      stream.on('end', function() { callback(); });
+      stream.on('readable', function() {
+        var v = stream.read(); if (v) world.result += v;
+      });
+    }, 2000); // delay streaming to ensure it is buffered
   });
 
   this.Then(/^the streamed data should contain "([^"]*)"$/, function(data, callback) {

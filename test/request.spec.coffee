@@ -159,9 +159,36 @@ describe 'AWS.Request', ->
 
   if AWS.util.isNode()
     describe 'createReadStream', ->
+      nstream = require('stream')
+
+      app = (req, resp) ->
+        resp.writeHead(200, {})
+        resp.write('FOOBARBAZQUX')
+        resp.end()
+
+      getport = (cb, startport) ->
+        port = startport or 45678
+        srv = require('net').createServer()
+        srv.on 'error', -> getport(cb, port + 1)
+        srv.listen port, ->
+          srv.once 'close', -> cb(port)
+          srv.close()
+
+      server = require('http').createServer (req, resp) ->
+        app(req, resp)
+
+      beforeEach (done) ->
+        getport (port) ->
+          server.listen(port)
+          service = new MockService(endpoint: 'http://localhost:' + port)
+          done()
+
+      afterEach ->
+        server.close()
+
       it 'streams data', (done) ->
         data = ''
-        helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+        helpers.spyOn(AWS.HttpClient, 'streamsApiVersion').andReturn 1
 
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
@@ -176,7 +203,6 @@ describe 'AWS.Request', ->
           return done()
 
         data = ''
-        helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', ->
@@ -195,7 +221,6 @@ describe 'AWS.Request', ->
           return done()
 
         data = ''
-        helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', null, null, 'BAZ', 'QUX']
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', ->
@@ -211,7 +236,10 @@ describe 'AWS.Request', ->
 
       it 'does not stream data on failures', (done) ->
         data = ''; error = null
-        helpers.mockHttpResponse 404, {}, ['No such file']
+        app = (req, resp) ->
+          resp.writeHead(404, {})
+          resp.end()
+
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'error', (error) ->
@@ -222,7 +250,14 @@ describe 'AWS.Request', ->
 
       it 'retries temporal errors and streams resulting successful response', (done) ->
         data = ''; error = null
-        helpers.mockIntermittentFailureResponse 2, 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+        errs = 0
+        app = (req, resp) ->
+          status = if errs < 2 then 500 else 200
+          errs += 1
+          resp.writeHead(status, {})
+          if status == 200
+            resp.write('FOOBARBAZQUX')
+          resp.end()
 
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
@@ -238,13 +273,20 @@ describe 'AWS.Request', ->
         helpers.spyOn(AWS.HttpClient, 'getInstance')
         AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
           req = new EventEmitter()
+          if AWS.HttpClient.streamsApiVersion == 2
+            req = new nstream.PassThrough()
           req.statusCode = 200
           req.headers = {}
-          cb(req)
-          req.emit('headers', 200, {})
-          AWS.util.arrayEach ['FOO', 'BAR', 'BAZ'], (str) ->
-            req.emit 'data', new Buffer(str)
-          errCb new Error('fail')
+          process.nextTick ->
+            cb(req)
+            req.emit('headers', 200, {})
+            AWS.util.arrayEach ['FOO', 'BAR', 'BAZ'], (str) ->
+              if AWS.HttpClient.streamsApiVersion < 2
+                process.nextTick ->  req.emit 'data', new Buffer(str)
+              else
+                req.push(new Buffer(str))
+                process.nextTick -> req.emit 'readable'
+            process.nextTick -> errCb new Error('fail')
           req
 
         request = service.makeRequest('mockMethod')
@@ -259,12 +301,14 @@ describe 'AWS.Request', ->
         s.on 'error', (e) -> error = e
         s.on 'data', (c) -> data += c.toString()
 
-      it 'fails if retry occurs in the middle of a failing stream', (done) ->
+      it 'fails if retry occurs in the middle of a successful stream', (done) ->
         data = ''; error = null; reqError = null; resp = null
         retryCount = 0
         helpers.spyOn(AWS.HttpClient, 'getInstance')
         AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
           req = new EventEmitter()
+          if AWS.HttpClient.streamsApiVersion == 2
+            req = new nstream.PassThrough()
           req.statusCode = 200
           req.headers = {}
           process.nextTick ->
@@ -277,7 +321,11 @@ describe 'AWS.Request', ->
                   errCb code: 'NetworkingError', message: 'FAIL!', retryable: true
                 return AWS.util.abort
               else
-                process.nextTick -> req.emit 'data', new Buffer(str)
+                if AWS.HttpClient.streamsApiVersion == 2
+                  req.push(new Buffer(str))
+                  process.nextTick -> req.emit 'readable'
+                else
+                  process.nextTick -> req.emit 'data', new Buffer(str)
             if retryCount >= 1
               process.nextTick -> req.emit('end')
           req
@@ -292,7 +340,7 @@ describe 'AWS.Request', ->
           expect(data).to.equal('FOOBAR')
           expect(error.code).to.equal('NetworkingError')
           expect(reqError.code).to.equal('NetworkingError')
-          expect(reqError.hostname).to.equal('mockservice.mock-region.amazonaws.com')
+          expect(reqError.hostname).to.equal('localhost')
           expect(reqError.region).to.equal('mock-region')
           expect(resp.retryCount).to.equal(0)
           done()
