@@ -109,6 +109,22 @@ integrationTests ->
         noData(data)
         done()
 
+  describe 'AWS.CloudWatchLogs', ->
+    it 'makes a request', (done) ->
+      cloudwatchlogs.describeLogGroups (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.logGroups)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        logGroupName: 'fake-group'
+        logStreamName: 'fake-stream'
+      cloudwatchlogs.getLogEvents params, (err, data) ->
+        assertError(err, 'ResourceNotFoundException')
+        noData(data)
+        done()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
       svc = svc || s3
