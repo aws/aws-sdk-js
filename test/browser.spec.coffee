@@ -4,14 +4,21 @@ config = {}
 try
   config = require('./configuration')
 
-s3 = new AWS.S3(AWS.util.merge(config, config.s3))
+cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
+cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs))
+cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
+cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
 dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
+elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
+kinesis = new AWS.Kinesis(AWS.util.merge(config, config.kinesis))
+lambda = new AWS.Lambda(AWS.util.merge(config, config.lambda))
+mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobileanalytics))
+machinelearning = new AWS.MachineLearning(AWS.util.merge(config, config.machinelearning))
+opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks))
+s3 = new AWS.S3(AWS.util.merge(config, config.s3))
 sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 sns = new AWS.SNS(AWS.util.merge(config, config.sns))
 sts = new AWS.STS(AWS.util.merge(config, config.sts))
-cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
-cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
-elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 
 uniqueName = (prefix) ->
   if prefix
@@ -24,7 +31,7 @@ eventually = (condition, next, done) ->
   delay = options.delay
   started = AWS.util.date.getDate()
   id = 0
-  nextFn = -> 
+  nextFn = ->
     now = AWS.util.date.getDate()
     if (now - started < options.maxTime * 1000)
       next (err, data) ->
@@ -39,6 +46,8 @@ eventually = (condition, next, done) ->
   nextFn()
 
 noError = (err) -> expect(err).to.equal(null)
+noData = (data) -> expect(data).to.equal(null)
+assertError = (err, code) -> expect(err.code).to.equal(code)
 
 integrationTests = (fn) ->
   if config.accessKeyId and AWS.util.isBrowser()
@@ -82,6 +91,23 @@ integrationTests ->
       expect(resp2.data.Body.toString()).to.equal('body')
       svc.deleteObject(Key: key).send()
       done()
+
+  describe 'AWS.CloudWatch', ->
+    it 'makes a request', (done) ->
+      cloudwatch.listMetrics (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Metrics)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        AlarmName: 'abc'
+        StateValue: 'efg'
+        StateReason: 'xyz'
+      cloudwatch.setAlarmState params, (err, data) ->
+        assertError(err, 'ValidationError')
+        noData(data)
+        done()
 
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
