@@ -268,6 +268,20 @@ integrationTests ->
         matchError(err, 'No BatchPrediction with id fake-id exists')
         done()
 
+  describe 'AWS.OpsWorks', ->
+    it 'makes a request', (done) ->
+      opsworks.describeStacks (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Stacks)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      opsworks.describeLayers {StackId: 'fake-id'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'Unable to find stack with ID fake-id')
+        done()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
       svc = svc || s3
