@@ -223,6 +223,37 @@ integrationTests ->
         matchError(err, 'function not found')
         done()
 
+  describe 'AWS.MobileAnalytics', ->
+    it 'makes a request', (done) ->
+      params =
+        'events': [ {
+          'eventType': '_session.start'
+          'timestamp': '2015-03-19T17:32:40.577Z'
+          'session':
+            'id': '715fc007-8c32-1e50-0cf2-c45311393281'
+          'startTimestamp': '2015-03-19T17:32:40.560Z'
+          'version': 'v2.0'
+          'attributes': {}
+          'metrics': {}
+        } ]
+        'clientContext': '{"client":{"client_id":"b4a5edf7-fbd4-6e8f-e0ba-8a5632c76191"},"env":{"platform":""},"services":{"mobile_analytics":{"app_id":"f94b9f4fd5004f94a31b66187a227610","sdk_name":"aws-sdk-mobile-analytics-js","sdk_version":"0.9.0"}},"custom":{}}'
+      mobileanalytics.putEvents params, (err, data) ->
+        noError(err)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        'events': [ {
+          'eventType': 'test'
+          'timestamp': 'test'
+        } ]
+        'clientContext': 'test'
+      mobileanalytics.putEvents params, (err, data) ->
+        noData(data)
+        assertError(err, 'BadRequestException')
+        matchError(err, 'Client context is malformed or missing')
+        done()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
       svc = svc || s3
