@@ -254,6 +254,20 @@ integrationTests ->
         matchError(err, 'Client context is malformed or missing')
         done()
 
+  describe 'AWS.MachineLearning', ->
+    it 'makes a request', (done) ->
+      machinelearning.describeMLModels (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Results)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      machinelearning.getBatchPrediction {BatchPredictionId: 'fake-id'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'No BatchPrediction with id fake-id exists')
+        done()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
       svc = svc || s3
