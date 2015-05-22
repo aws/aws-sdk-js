@@ -161,6 +161,23 @@ integrationTests ->
         noData(data)
         done()
 
+  describe 'AWS.DynamoDB', ->
+    it 'writes and reads from a table', (done) ->
+      key = uniqueName('test')
+      dynamodb.putItem {Item: {id: {S: key}, data: {S: 'ƒoo'}}}, (err, data) ->
+        noError(err)
+        dynamodb.getItem {Key: {id: {S: key}}}, (err, data) ->
+          noError(err)
+          expect(data.Item.data.S).to.equal('ƒoo')
+          dynamodb.deleteItem({Key: {id: {S: key}}}).send(done)
+
+    it 'handles errors', (done) ->
+      dynamodb.describeTable {TableName: 'fake-table'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'Requested resource not found: Table: fake-table not found')
+        done()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
       svc = svc || s3
@@ -239,15 +256,6 @@ integrationTests ->
             expect(progress[0].loaded > 10).to.equal(true)
             s3.deleteObject(Key: key).send(done)
 
-  describe 'AWS.DynamoDB', ->
-    it 'writes and reads from a table', (done) ->
-      key = uniqueName('test')
-      dynamodb.putItem {Item: {id: {S: key}, data: {S: 'ƒoo'}}}, (err, data) ->
-        noError(err)
-        dynamodb.getItem {Key: {id: {S: key}}}, (err, data) ->
-          noError(err)
-          expect(data.Item.data.S).to.equal('ƒoo')
-          dynamodb.deleteItem({Key: {id: {S: key}}}).send(done)
 
   describe 'AWS.STS', ->
     it 'gets a session token', (done) ->
