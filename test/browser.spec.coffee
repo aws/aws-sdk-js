@@ -208,6 +208,21 @@ integrationTests ->
         matchError(err, 'Stream fake-stream under account')
         done()
 
+  describe 'AWS.Lambda', ->
+    it 'makes a request', (done) ->
+      lambda.listFunctions (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Functions)).to.equal(true)
+        done()
+
+    # TODO This error code needs to be updated when the X-Amzn-ErrorType is whitelisted.
+    it 'handles errors', (done) ->
+      lambda.invoke {FunctionName: 'fake-function'}, (err, data) ->
+        noData(data)
+        assertError(err, 'UnknownError')
+        matchError(err, 'function not found')
+        done()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
       svc = svc || s3
