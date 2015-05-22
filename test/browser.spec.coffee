@@ -152,6 +152,7 @@ integrationTests ->
         expect(Array.isArray(data.IdentityPoolUsages)).to.equal(true)
         done()
 
+    # TODO This error code needs to be updated when the X-Amzn-ErrorType is whitelisted.
     it 'handles errors', (done) ->
       params =
         IdentityPoolId: 'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
@@ -176,6 +177,21 @@ integrationTests ->
         noData(data)
         assertError(err, 'ResourceNotFoundException')
         matchError(err, 'Requested resource not found: Table: fake-table not found')
+        done()
+
+  describe 'AWS.ElasticTranscoder', ->
+    it 'makes a request', (done) ->
+      elastictranscoder.listPipelines (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Pipelines)).to.equal(true)
+        done()
+
+    # TODO This error code needs to be updated when the X-Amzn-ErrorType is whitelisted.
+    it 'handles errors', (done) ->
+      elastictranscoder.readJob {Id: '3333333333333-abcde3'}, (err, data) ->
+        noData(data)
+        assertError(err, 'UnknownError')
+        matchError(err, 'The specified job was not found')
         done()
 
   describe 'AWS.S3', ->
@@ -293,8 +309,3 @@ integrationTests ->
           expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
           sns.deleteTopic(done)
 
-  describe 'AWS.ElasticTranscoder', ->
-    it 'lists pipelines', ->
-      elastictranscoder.listPipelines (err, data) ->
-        noError(err)
-        expect(Array.isArray(data.Pipelines)).to.equal(true)
