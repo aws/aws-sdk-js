@@ -48,6 +48,8 @@ eventually = (condition, next, done) ->
 noError = (err) -> expect(err).to.equal(null)
 noData = (data) -> expect(data).to.equal(null)
 assertError = (err, code) -> expect(err.code).to.equal(code)
+matchError = (err, message) ->
+  expect(! !err.message.match(new RegExp(message, 'gi'))).to.eql(true)
 
 integrationTests = (fn) ->
   if config.accessKeyId and AWS.util.isBrowser()
@@ -106,6 +108,7 @@ integrationTests ->
         StateReason: 'xyz'
       cloudwatch.setAlarmState params, (err, data) ->
         assertError(err, 'ValidationError')
+        matchError(err, 'failed to satisfy constraint')
         noData(data)
         done()
 
@@ -122,6 +125,23 @@ integrationTests ->
         logStreamName: 'fake-stream'
       cloudwatchlogs.getLogEvents params, (err, data) ->
         assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'The specified log group does not exist')
+        noData(data)
+        done()
+
+  describe 'AWS.CognitoIdentity', ->
+    it 'makes a request', (done) ->
+      cognitoidentity.listIdentityPools MaxResults: 10, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.IdentityPools)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        IdentityPoolId: 'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+      cognitoidentity.describeIdentityPool params, (err, data) ->
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'IdentityPool \'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee\' not found')
         noData(data)
         done()
 
@@ -249,11 +269,6 @@ integrationTests ->
           expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
           sns.deleteTopic(done)
 
-  describe 'AWS.CognitoIdentity', ->
-    it 'lists identity pools', ->
-      cognitoidentity.listIdentityPools MaxResults: 60, (err, data) ->
-        noError(err)
-        expect(Array.isArray(data.IdentityPools)).to.equal(true)
 
   describe 'AWS.CognitoSync', ->
     it 'lists identity pool usage', ->
