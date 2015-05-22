@@ -194,6 +194,20 @@ integrationTests ->
         matchError(err, 'The specified job was not found')
         done()
 
+  describe 'AWS.Kinesis', ->
+    it 'makes a request', (done) ->
+      kinesis.listStreams (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.StreamNames)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      kinesis.describeStream {StreamName: 'fake-stream'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'Stream fake-stream under account')
+        done()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
       svc = svc || s3
