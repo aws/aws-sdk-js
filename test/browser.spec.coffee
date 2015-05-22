@@ -145,6 +145,22 @@ integrationTests ->
         noData(data)
         done()
 
+  describe 'AWS.CognitoSync', ->
+    it 'makes a request', (done) ->
+      cognitosync.listIdentityPoolUsage (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.IdentityPoolUsages)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        IdentityPoolId: 'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+      cognitosync.describeIdentityPoolUsage params, (err, data) ->
+        assertError(err, 'UnknownError')
+        matchError(err, 'IdentityPool \'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee\' not found')
+        noData(data)
+        done()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
       svc = svc || s3
@@ -268,13 +284,6 @@ integrationTests ->
         sns.listTopics (err, data) ->
           expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
           sns.deleteTopic(done)
-
-
-  describe 'AWS.CognitoSync', ->
-    it 'lists identity pool usage', ->
-      cognitosync.listIdentityPoolUsage (err, data) ->
-        noError(err)
-        expect(Array.isArray(data.IdentityPoolUsages)).to.equal(true)
 
   describe 'AWS.ElasticTranscoder', ->
     it 'lists pipelines', ->
