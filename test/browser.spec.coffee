@@ -303,13 +303,13 @@ integrationTests ->
       svc = new AWS.S3(AWS.util.merge({signatureVersion: 'v4'}, config.s3))
       testWrite done, 'ƒoo', null, svc
 
-    it 'writes typed array data (no phantomjs)', (done) ->
+    it 'writes typed array data', (done) ->
       testWrite done, new Uint8Array([2, 4, 8]), (data) ->
         expect(data.Body[0]).to.equal(2)
         expect(data.Body[1]).to.equal(4)
         expect(data.Body[2]).to.equal(8)
 
-    it 'writes blobs (no phantomjs)', (done) ->
+    it 'writes blobs', (done) ->
       testWrite done, new Blob(['a', 'b', 'c']), (data) ->
         expect(data.Body[0]).to.equal(97)
         expect(data.Body[1]).to.equal(98)
@@ -326,7 +326,7 @@ integrationTests ->
             s3.deleteObject(Key: key).send(done)
 
     describe 'upload()', ->
-      it 'supports blobs using upload() (no phantomjs)', (done) ->
+      it 'supports blobs using upload()', (done) ->
         key = uniqueName('test')
         size = 100
         u = s3.upload(Key: key, Body: new Blob([new Uint8Array(size)]))
@@ -337,7 +337,7 @@ integrationTests ->
           done()
 
     describe 'progress events', ->
-      it 'emits http(Upload|Download)Progress events (no phantomjs)', (done) ->
+      it 'emits http(Upload|Download)Progress events', (done) ->
         data = []
         progress = []
         key = uniqueName('test')
@@ -347,8 +347,8 @@ integrationTests ->
         req.send (err, data) ->
           noError(err)
           expect(progress.length > 1).to.equal(true)
-          expect(progress[0].total).to.equal(body.size)
-          expect(progress[0].loaded > 10).to.equal(true)
+          expect(progress[progress.length - 1].total).to.equal(body.size)
+          expect(progress[progress.length - 1].loaded > 10).to.equal(true)
 
           progress = []
           req = s3.getObject(Key: key)

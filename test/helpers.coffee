@@ -11,12 +11,6 @@ else
 if global.jasmine
   global.jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000
 
-_it = it
-global.it = (label, fn) ->
-  if label.match(/\(no phantomjs\)/) and navigator and navigator.userAgent.match(/phantomjs/i)
-    return
-  _it(label, fn)
-
 EventEmitter = require('events').EventEmitter
 Buffer = AWS.util.Buffer
 
