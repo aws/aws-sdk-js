@@ -294,7 +294,7 @@ describe 'AWS.util.crypto', ->
           done()
 
     if AWS.util.isBrowser()
-      it 'handles Blobs', (done) ->
+      it 'handles Blobs (no phantomjs)', (done) ->
         result = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
         util.sha256 new Blob([1,2,3]), 'hex', (e, d) ->
           expect(e).to.eql(null)
