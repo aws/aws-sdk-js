@@ -64,6 +64,9 @@
   "ecs": {
     "name": "ECS"
   },
+  "efs": {
+    "name": "EFS"
+  },
   "elasticache": {
     "name": "ElastiCache",
     "versions": ["2012-11-15*", "2014-03-24*", "2014-07-15*", "2014-09-30*"]
