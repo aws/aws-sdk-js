@@ -19,7 +19,7 @@ module.exports = function() {
     ttl = (ttl - new Date().getTime()) / 1000;
     // Test time elapsed instead of actual time.
     var timeElapsed = Math.abs(duration - ttl);
-    this.assert.compare(timeElapsed, '<', 5);
+    this.assert.compare(timeElapsed, '<', 20);
     callback();
   });
 
