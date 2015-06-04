@@ -1003,6 +1003,7 @@
     "ContentLanguage":{"type":"string"},
     "ContentLength":{"type":"integer"},
     "ContentMD5":{"type":"string"},
+    "ContentRange":{"type":"string"},
     "ContentType":{"type":"string"},
     "CopyObjectOutput":{
       "type":"structure",
@@ -1199,7 +1200,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -1510,7 +1511,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -1828,6 +1829,7 @@
       "type":"string",
       "enum":[
         "s3:ReducedRedundancyLostObject",
+        "s3:ObjectCreated:*",
         "s3:ObjectCreated:Put",
         "s3:ObjectCreated:Post",
         "s3:ObjectCreated:Copy",
@@ -2216,6 +2218,12 @@
           "locationName":"Content-Language",
           "documentation":"The language the content is in."
         },
+        "ContentRange":{
+          "shape":"ContentRange",
+          "location":"header",
+          "locationName":"Content-Range",
+          "documentation":"The portion of the object returned in the response."
+        },
         "ContentType":{
           "shape":"ContentType",
           "location":"header",
@@ -2370,7 +2378,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -2692,7 +2700,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -4066,7 +4074,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -4638,7 +4646,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -4767,7 +4775,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
