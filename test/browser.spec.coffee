@@ -4,14 +4,21 @@ config = {}
 try
   config = require('./configuration')
 
-s3 = new AWS.S3(AWS.util.merge(config, config.s3))
+cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
+cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs))
+cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
+cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
 dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
+elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
+kinesis = new AWS.Kinesis(AWS.util.merge(config, config.kinesis))
+lambda = new AWS.Lambda(AWS.util.merge(config, config.lambda))
+mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobileanalytics))
+machinelearning = new AWS.MachineLearning(AWS.util.merge(config, config.machinelearning))
+opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks))
+s3 = new AWS.S3(AWS.util.merge(config, config.s3))
 sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 sns = new AWS.SNS(AWS.util.merge(config, config.sns))
 sts = new AWS.STS(AWS.util.merge(config, config.sts))
-cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
-cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
-elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 
 uniqueName = (prefix) ->
   if prefix
@@ -24,7 +31,7 @@ eventually = (condition, next, done) ->
   delay = options.delay
   started = AWS.util.date.getDate()
   id = 0
-  nextFn = -> 
+  nextFn = ->
     now = AWS.util.date.getDate()
     if (now - started < options.maxTime * 1000)
       next (err, data) ->
@@ -39,6 +46,10 @@ eventually = (condition, next, done) ->
   nextFn()
 
 noError = (err) -> expect(err).to.equal(null)
+noData = (data) -> expect(data).to.equal(null)
+assertError = (err, code) -> expect(err.code).to.equal(code)
+matchError = (err, message) ->
+  expect(! !err.message.match(new RegExp(message, 'gi'))).to.eql(true)
 
 integrationTests = (fn) ->
   if config.accessKeyId and AWS.util.isBrowser()
@@ -83,6 +94,194 @@ integrationTests ->
       svc.deleteObject(Key: key).send()
       done()
 
+  describe 'AWS.CloudWatch', ->
+    it 'makes a request', (done) ->
+      cloudwatch.listMetrics (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Metrics)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        AlarmName: 'abc'
+        StateValue: 'efg'
+        StateReason: 'xyz'
+      cloudwatch.setAlarmState params, (err, data) ->
+        assertError(err, 'ValidationError')
+        matchError(err, 'failed to satisfy constraint')
+        noData(data)
+        done()
+
+  describe 'AWS.CloudWatchLogs', ->
+    it 'makes a request', (done) ->
+      cloudwatchlogs.describeLogGroups (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.logGroups)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        logGroupName: 'fake-group'
+        logStreamName: 'fake-stream'
+      cloudwatchlogs.getLogEvents params, (err, data) ->
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'The specified log group does not exist')
+        noData(data)
+        done()
+
+  describe 'AWS.CognitoIdentity', ->
+    it 'makes a request', (done) ->
+      cognitoidentity.listIdentityPools MaxResults: 10, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.IdentityPools)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        IdentityPoolId: 'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+      cognitoidentity.describeIdentityPool params, (err, data) ->
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'IdentityPool \'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee\' not found')
+        noData(data)
+        done()
+
+  describe 'AWS.CognitoSync', ->
+    it 'makes a request', (done) ->
+      cognitosync.listIdentityPoolUsage (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.IdentityPoolUsages)).to.equal(true)
+        done()
+
+    # TODO This error code needs to be updated when the X-Amzn-ErrorType is whitelisted.
+    it 'handles errors', (done) ->
+      params =
+        IdentityPoolId: 'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+      cognitosync.describeIdentityPoolUsage params, (err, data) ->
+        assertError(err, 'UnknownError')
+        matchError(err, 'IdentityPool \'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee\' not found')
+        noData(data)
+        done()
+
+  describe 'AWS.DynamoDB', ->
+    it 'writes and reads from a table', (done) ->
+      key = uniqueName('test')
+      dynamodb.putItem {Item: {id: {S: key}, data: {S: 'ƒoo'}}}, (err, data) ->
+        noError(err)
+        dynamodb.getItem {Key: {id: {S: key}}}, (err, data) ->
+          noError(err)
+          expect(data.Item.data.S).to.equal('ƒoo')
+          dynamodb.deleteItem({Key: {id: {S: key}}}).send(done)
+
+    it 'handles errors', (done) ->
+      dynamodb.describeTable {TableName: 'fake-table'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'Requested resource not found: Table: fake-table not found')
+        done()
+
+  describe 'AWS.ElasticTranscoder', ->
+    it 'makes a request', (done) ->
+      elastictranscoder.listPipelines (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Pipelines)).to.equal(true)
+        done()
+
+    # TODO This error code needs to be updated when the X-Amzn-ErrorType is whitelisted.
+    it 'handles errors', (done) ->
+      elastictranscoder.readJob {Id: '3333333333333-abcde3'}, (err, data) ->
+        noData(data)
+        assertError(err, 'UnknownError')
+        matchError(err, 'The specified job was not found')
+        done()
+
+  describe 'AWS.Kinesis', ->
+    it 'makes a request', (done) ->
+      kinesis.listStreams (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.StreamNames)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      kinesis.describeStream {StreamName: 'fake-stream'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'Stream fake-stream under account')
+        done()
+
+  describe 'AWS.Lambda', ->
+    it 'makes a request', (done) ->
+      lambda.listFunctions (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Functions)).to.equal(true)
+        done()
+
+    # TODO This error code needs to be updated when the X-Amzn-ErrorType is whitelisted.
+    it 'handles errors', (done) ->
+      lambda.invoke {FunctionName: 'fake-function'}, (err, data) ->
+        noData(data)
+        assertError(err, 'UnknownError')
+        matchError(err, 'function not found')
+        done()
+
+  describe 'AWS.MobileAnalytics', ->
+    it 'makes a request', (done) ->
+      params =
+        'events': [ {
+          'eventType': '_session.start'
+          'timestamp': '2015-03-19T17:32:40.577Z'
+          'session':
+            'id': '715fc007-8c32-1e50-0cf2-c45311393281'
+          'startTimestamp': '2015-03-19T17:32:40.560Z'
+          'version': 'v2.0'
+          'attributes': {}
+          'metrics': {}
+        } ]
+        'clientContext': '{"client":{"client_id":"b4a5edf7-fbd4-6e8f-e0ba-8a5632c76191"},"env":{"platform":""},"services":{"mobile_analytics":{"app_id":"f94b9f4fd5004f94a31b66187a227610","sdk_name":"aws-sdk-mobile-analytics-js","sdk_version":"0.9.0"}},"custom":{}}'
+      mobileanalytics.putEvents params, (err, data) ->
+        noError(err)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        'events': [ {
+          'eventType': 'test'
+          'timestamp': 'test'
+        } ]
+        'clientContext': 'test'
+      mobileanalytics.putEvents params, (err, data) ->
+        noData(data)
+        assertError(err, 'BadRequestException')
+        matchError(err, 'Client context is malformed or missing')
+        done()
+
+  describe 'AWS.MachineLearning', ->
+    it 'makes a request', (done) ->
+      machinelearning.describeMLModels (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Results)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      machinelearning.getBatchPrediction {BatchPredictionId: 'fake-id'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'No BatchPrediction with id fake-id exists')
+        done()
+
+  describe 'AWS.OpsWorks', ->
+    it 'makes a request', (done) ->
+      opsworks.describeStacks (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Stacks)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      opsworks.describeLayers {StackId: 'fake-id'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ResourceNotFoundException')
+        matchError(err, 'Unable to find stack with ID fake-id')
+        done()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn, svc) ->
       svc = svc || s3
@@ -104,13 +303,13 @@ integrationTests ->
       svc = new AWS.S3(AWS.util.merge({signatureVersion: 'v4'}, config.s3))
       testWrite done, 'ƒoo', null, svc
 
-    it 'writes typed array data (no phantomjs)', (done) ->
+    it 'writes typed array data', (done) ->
       testWrite done, new Uint8Array([2, 4, 8]), (data) ->
         expect(data.Body[0]).to.equal(2)
         expect(data.Body[1]).to.equal(4)
         expect(data.Body[2]).to.equal(8)
 
-    it 'writes blobs (no phantomjs)', (done) ->
+    it 'writes blobs', (done) ->
       testWrite done, new Blob(['a', 'b', 'c']), (data) ->
         expect(data.Body[0]).to.equal(97)
         expect(data.Body[1]).to.equal(98)
@@ -127,7 +326,7 @@ integrationTests ->
             s3.deleteObject(Key: key).send(done)
 
     describe 'upload()', ->
-      it 'supports blobs using upload() (no phantomjs)', (done) ->
+      it 'supports blobs using upload()', (done) ->
         key = uniqueName('test')
         size = 100
         u = s3.upload(Key: key, Body: new Blob([new Uint8Array(size)]))
@@ -161,15 +360,6 @@ integrationTests ->
             expect(progress[0].loaded > 10).to.equal(true)
             s3.deleteObject(Key: key).send(done)
 
-  describe 'AWS.DynamoDB', ->
-    it 'writes and reads from a table', (done) ->
-      key = uniqueName('test')
-      dynamodb.putItem {Item: {id: {S: key}, data: {S: 'ƒoo'}}}, (err, data) ->
-        noError(err)
-        dynamodb.getItem {Key: {id: {S: key}}}, (err, data) ->
-          noError(err)
-          expect(data.Item.data.S).to.equal('ƒoo')
-          dynamodb.deleteItem({Key: {id: {S: key}}}).send(done)
 
   describe 'AWS.STS', ->
     it 'gets a session token', (done) ->
@@ -207,20 +397,3 @@ integrationTests ->
           expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
           sns.deleteTopic(done)
 
-  describe 'AWS.CognitoIdentity', ->
-    it 'lists identity pools', ->
-      cognitoidentity.listIdentityPools MaxResults: 60, (err, data) ->
-        noError(err)
-        expect(Array.isArray(data.IdentityPools)).to.equal(true)
-
-  describe 'AWS.CognitoSync', ->
-    it 'lists identity pool usage', ->
-      cognitosync.listIdentityPoolUsage (err, data) ->
-        noError(err)
-        expect(Array.isArray(data.IdentityPoolUsages)).to.equal(true)
-
-  describe 'AWS.ElasticTranscoder', ->
-    it 'lists pipelines', ->
-      elastictranscoder.listPipelines (err, data) ->
-        noError(err)
-        expect(Array.isArray(data.Pipelines)).to.equal(true)
