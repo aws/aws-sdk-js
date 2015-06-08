@@ -230,25 +230,49 @@ describe 'AWS.S3', ->
       req.build()
       expect(req.response.error.code).to.equal('ConfigError')
 
-    it 'encodes SSECustomerKey and fills in MD5', ->
-      req = s3.putObject
-        Bucket: 'bucket', Key: 'key', Body: 'data'
-        SSECustomerKey: 'KEY', SSECustomerAlgorithm: 'AES256'
-      req.build()
-      expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key']).
-        to.equal('S0VZ')
-      expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key-MD5']).
-        to.equal('O1lJ4MJrh3Z6R1Kidt6VcA==')
+    describe 'SSECustomerKey', ->
+      it 'encodes strings keys and fills in MD5', ->
+        req = s3.putObject
+          Bucket: 'bucket', Key: 'key', Body: 'data'
+          SSECustomerKey: 'KEY', SSECustomerAlgorithm: 'AES256'
+        req.build()
+        expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key']).
+          to.equal('S0VZ')
+        expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key-MD5']).
+          to.equal('O1lJ4MJrh3Z6R1Kidt6VcA==')
 
-    it 'encodes CopySourceSSECustomerKey and fills in MD5', ->
-      req = s3.copyObject
-        Bucket: 'bucket', Key: 'key', CopySource: 'bucket/oldkey', Body: 'data'
-        CopySourceSSECustomerKey: 'KEY', CopySourceSSECustomerAlgorithm: 'AES256'
-      req.build()
-      expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key']).
-        to.equal('S0VZ')
-      expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key-MD5']).
-        to.equal('O1lJ4MJrh3Z6R1Kidt6VcA==')
+      it 'encodes blob keys and fills in MD5', ->
+        req = s3.putObject
+          Bucket: 'bucket', Key: 'key', Body: 'data'
+          SSECustomerKey: new AWS.util.Buffer('098f6bcd4621d373cade4e832627b4f6', 'hex')
+          SSECustomerAlgorithm: 'AES256'
+        req.build()
+        expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key']).
+          to.equal('CY9rzUYh03PK3k6DJie09g==')
+        expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key-MD5']).
+          to.equal('YM1UqSjLvLtue1WVurRqng==')
+
+    describe 'CopySourceSSECustomerKey', ->
+      it 'encodes string keys and fills in MD5', ->
+        req = s3.copyObject
+          Bucket: 'bucket', Key: 'key', CopySource: 'bucket/oldkey', Body: 'data'
+          CopySourceSSECustomerKey: 'KEY', CopySourceSSECustomerAlgorithm: 'AES256'
+        req.build()
+        expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key']).
+          to.equal('S0VZ')
+        expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key-MD5']).
+          to.equal('O1lJ4MJrh3Z6R1Kidt6VcA==')
+
+      it 'encodes blob keys and fills in MD5', ->
+        req = s3.copyObject
+          Bucket: 'bucket', Key: 'key', CopySource: 'bucket/oldkey', Body: 'data'
+          CopySourceSSECustomerKey: new AWS.util.Buffer('098f6bcd4621d373cade4e832627b4f6', 'hex')
+          CopySourceSSECustomerAlgorithm: 'AES256'
+        req.build()
+        expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key']).
+          to.equal('CY9rzUYh03PK3k6DJie09g==')
+        expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key-MD5']).
+          to.equal('YM1UqSjLvLtue1WVurRqng==')
 
   describe 'retry behavior', ->
     it 'retries RequestTimeout errors', ->
