@@ -125,36 +125,6 @@ Feature: Working with Objects in S3
     And I access the URL via HTTP PUT with data "NOT CHECKSUMMED"
     Then the HTTP response should contain "SignatureDoesNotMatch"
 
-  @sse
-  Scenario: Server side encryption with string keys
-    Given I put "data" to the key "string_sse_object" with a string AES key
-    Then the encrypted object "string_sse_object" should exist
-    When I get the encrypted object "string_sse_object"
-    Then the object "string_sse_object" should contain "data"
-
-  @sse
-  Scenario: Server side encryption with blob keys
-    Given I put "data" to the key "blob_sse_object" with a blob AES key
-    Then the encrypted object "blob_sse_object" should exist
-    When I get the encrypted object "blob_sse_object"
-    Then the object "blob_sse_object" should contain "data"
-
-  @sse
-  Scenario: Server side encryption copy with string keys
-    Given I put "data" to the key "string_sse_object_source" with a string AES key
-    And I copy the encrypted object "string_sse_object_source" to the key "string_sse_object_copy" with a string AES key
-    Then the object "string_sse_object_copy" should exist
-    When I get the object "string_sse_object_copy"
-    Then the object "string_sse_object_copy" should contain "data"
-
-  @sse
-  Scenario: Server side encryption copy with blob keys
-    Given I put "data" to the key "blob_sse_object_source" with a string AES key
-    And I copy the encrypted object "blob_sse_object_source" to the key "blob_sse_object_copy" with a blob AES key
-    Then the object "blob_sse_object_copy" should exist
-    When I get the object "blob_sse_object_copy"
-    Then the object "blob_sse_object_copy" should contain "data"
-
   @streams
   Scenario: Streaming objects
     Given I put "STREAMING CONTENT" to the key "streaming_object"

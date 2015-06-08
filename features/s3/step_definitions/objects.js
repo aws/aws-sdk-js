@@ -237,45 +237,6 @@ module.exports = function () {
     next();
   });
 
-  this.When(/^I put "([^"]*)" to the key "([^"]*)" with a (string|blob) AES key$/, function(data, key, type, next) {
-    var sse = 'abcdabcdabcdabcdabcdabcdabcdabcd';
-    this.sseKey = type === 'blob' ? new this.AWS.util.Buffer(sse) : sse;
-    var params = {Bucket: this.sharedBucket, Key: key, Body: data, SSECustomerKey: this.sseKey, SSECustomerAlgorithm: 'AES256'};
-    this.request('s3', 'putObject', params, next, false);
-  });
-
-  this.When(/^I copy the encrypted object "([^"]*)" to the key "([^"]*)" with a (string|blob) AES key$/, function(source, dest, type, next) {
-    var sse = 'abcdabcdabcdabcdabcdabcdabcdabcd';
-    this.sseKey = type === 'blob' ? new this.AWS.util.Buffer(sse) : sse;
-    var params = {
-      Bucket: this.sharedBucket,
-      CopySource: this.sharedBucket + '/' + source,
-      Key: dest,
-      CopySourceSSECustomerKey: this.sseKey,
-      CopySourceSSECustomerAlgorithm: 'AES256'
-    };
-    this.request('s3', 'copyObject', params, next, false);
-  });
-
-  this.Then(/^the encrypted object "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
-    var params = { Bucket: this.sharedBucket, Key: key, SSECustomerKey: this.sseKey, SSECustomerAlgorithm: 'AES256'};
-    this.eventually(next, function (retry) {
-      retry.condition = function() {
-        if (shouldNotExist) {
-          return this.error && this.error.code === 'NotFound';
-        } else {
-          return !this.error;
-        }
-      };
-      this.request('s3', 'headObject', params, retry, false);
-    });
-  });
-
-  this.When(/^I get the encrypted object "([^"]*)"$/, function(key, next) {
-    var params = {Bucket: this.sharedBucket, Key: key, SSECustomerAlgorithm: 'AES256', SSECustomerKey: this.sseKey};
-    this.request('s3', 'getObject', params, next, false);
-  });
-
   this.Given(/^an empty bucket$/, function(next) {
     var self = this;
     var params = { Bucket: this.sharedBucket };
