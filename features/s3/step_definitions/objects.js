@@ -106,7 +106,7 @@ module.exports = function () {
     callback();
   });
 
-  this.When(/^I access the URL via HTTP GET$/, function(callback, verb) {
+  this.When(/^I access the URL via HTTP GET$/, function(callback) {
     var world = this;
     this.data = '';
     require('https').get(this.signedUrl, function (res) {
