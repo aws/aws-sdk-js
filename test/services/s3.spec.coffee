@@ -580,7 +580,7 @@ describe 'AWS.S3', ->
         s3 = new AWS.S3(signatureVersion: 'v4')
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream.Stream)
         req.send (err) ->
-          expect(err.originalError.message).to.contain('stream objects are not supported')
+          expect(err.message).to.contain('stream objects are not supported')
           done()
 
       it 'opens separate stream if a file object is provided', (done) ->
