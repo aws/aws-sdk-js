@@ -18,6 +18,7 @@
     "no-use-before-define": 0,
     "space-after-keywords": [2, "always"],
     "space-before-blocks": [2, "always"],
-    "no-trailing-spaces": 2
+    "no-trailing-spaces": 2,
+    "space-unary-ops": 0
   }
 }

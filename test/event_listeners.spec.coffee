@@ -49,7 +49,7 @@ describe 'AWS.EventListeners', ->
         expect(req).to.equal(request)
         throw "ERROR"
       response = request.send(->)
-      expect(response.error).to.equal("ERROR")
+      expect(response.error.message).to.equal("ERROR")
 
     it 'sends error event if credentials are not set', ->
       service.config.credentialProvider = null
@@ -111,7 +111,7 @@ describe 'AWS.EventListeners', ->
         expect(req).to.equal(request)
         throw "ERROR"
       response = request.send(->)
-      expect(response.error).to.equal("ERROR")
+      expect(response.error.message).to.equal("ERROR")
 
   describe 'afterBuild', ->
     request = null
@@ -158,7 +158,7 @@ describe 'AWS.EventListeners', ->
         expect(req).to.equal(request)
         throw "ERROR"
       response = request.send(->)
-      expect(response.error).to.equal("ERROR")
+      expect(response.error.message).to.equal("ERROR")
 
     it 'uses the api.signingName if provided', ->
       helpers.mockHttpResponse 200, {}, ''
@@ -541,7 +541,7 @@ describe 'AWS.EventListeners', ->
             expect(-> request.send()).not.to.throw()
             expect(completeHandler.calls.length).not.to.equal(0)
             expect(retryHandler.calls.length).to.equal(0)
-            expect(result.name).to.equal('ReferenceError')
+            expect(result.code).to.equal('ReferenceError')
             d.exit()
 
         it 'does not leak service error into domain', ->
@@ -571,12 +571,12 @@ describe 'AWS.EventListeners', ->
             innerDomain = createDomain()
             innerDomain.enter()
             innerDomain.add(request)
-            innerDomain.on 'error', ->
+            innerDomain.on 'error', (domErr) ->
               gotInnerError = true
               expect(gotOuterError).to.equal(false)
               expect(gotInnerError).to.equal(true)
-              expect(err.domainThrown).to.equal(false)
-              expect(err.domain).to.equal(innerDomain)
+              expect(domErr.domainThrown).to.equal(false)
+              expect(domErr.domain).to.equal(innerDomain)
               done()
 
             request.send ->
