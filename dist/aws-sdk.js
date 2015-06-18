@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.1.34
+// AWS SDK for JavaScript v2.1.35
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -273,7 +273,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.1.34',
+  VERSION: '2.1.35',
 
 
   Signers: {},
@@ -793,6 +793,7 @@ AWS.EventListeners = {
     });
 
     addAsync('COMPUTE_SHA256', 'afterBuild', function COMPUTE_SHA256(req, done) {
+      req.haltHandlersOnError();
       if (!req.service.api.signatureVersion) return done(); // none
       if (req.service.getSignerClass(req) === AWS.Signers.V4) {
         var body = req.httpRequest.body || '';
@@ -2862,26 +2863,28 @@ var fsm = new AcceptorStateMachine();
 fsm.setupStates = function() {
   var transition = function(_, done) {
     var self = this;
+    self._haltHandlersOnError = false;
 
-    try {
-      self.emit(self._asm.currentState, function() {
-        done(self.response.error);
-      });
-    } catch (err) {
-      if (isTerminalState(self)) {
-        if (domain && self.domain instanceof domain.Domain) {
-          err.domainEmitter = self;
-          err.domain = self.domain;
-          err.domainThrown = false;
-          self.domain.emit('error', err);
+    self.emit(self._asm.currentState, function(err) {
+      if (err) {
+        if (isTerminalState(self)) {
+          if (domain && self.domain instanceof domain.Domain) {
+            err.domainEmitter = self;
+            err.domain = self.domain;
+            err.domainThrown = false;
+            self.domain.emit('error', err);
+          } else {
+            throw err;
+          }
         } else {
-          throw err;
+          self.response.error = err;
+          done(err);
         }
       } else {
-        self.response.error = err;
-        done(err);
+        done(self.response.error);
       }
-    }
+    });
+
   };
 
   this.addState('validate', 'build', 'error', transition);
@@ -2920,6 +2923,7 @@ AWS.Request = inherit({
 
     this.response = new AWS.Response(this);
     this._asm = new AcceptorStateMachine(fsm.states, 'validate');
+    this._haltHandlersOnError = false;
 
     AWS.SequentialExecutor.call(this);
     this.emit = this.emitEvent;
@@ -3136,6 +3140,11 @@ AWS.Request = inherit({
 
     delete request.httpRequest.headers['Content-Length'];
     delete request.httpRequest.headers['Content-Type'];
+  },
+
+
+  haltHandlersOnError: function haltHandlersOnError() {
+    this._haltHandlersOnError = true;
   }
 });
 
@@ -3859,14 +3868,18 @@ AWS.SequentialExecutor = AWS.util.inherit({
   },
 
 
-  callListeners: function callListeners(listeners, args, doneCallback) {
+  callListeners: function callListeners(listeners, args, doneCallback, prevError) {
     var self = this;
+    var error = prevError || null;
+
     function callNextListener(err) {
       if (err) {
-        doneCallback.call(self, err);
-      } else {
-        self.callListeners(listeners, args, doneCallback);
+        error = AWS.util.error(error || new Error(), err);
+        if (self._haltHandlersOnError) {
+          return doneCallback.call(self, error);
+        }
       }
+      self.callListeners(listeners, args, doneCallback, error);
     }
 
     while (listeners.length > 0) {
@@ -3875,11 +3888,18 @@ AWS.SequentialExecutor = AWS.util.inherit({
         listener.apply(self, args.concat([callNextListener]));
         return; // stop here, callNextListener will continue
       } else { // synchronous listener
-        listener.apply(self, args);
+        try {
+          listener.apply(self, args);
+        } catch (err) {
+          error = AWS.util.error(error || new Error(), err);
+        }
+        if (error && self._haltHandlersOnError) {
+          doneCallback.call(self, error);
+          return;
+        }
       }
     }
-
-    doneCallback.call(self);
+    doneCallback.call(self, error);
   },
 
 
@@ -6128,8 +6148,12 @@ var util = {
 
     if (typeof options === 'string') {
       err.message = options;
-    } else {
+    } else if (typeof options === 'object') {
       util.update(err, options);
+      if (options.message)
+        err.message = options.message;
+      if (options.code || options.name)
+        err.code = options.code || options.name;
     }
 
     if (typeof Object.defineProperty === 'function') {
