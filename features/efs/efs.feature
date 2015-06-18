@@ -14,4 +14,4 @@ Feature: Amazon Elastic File System
     """
     { "FileSystemId": "fake-id" }
     """
-    Then the error code should be "ValidationException"
+    Then the error code should be "BadRequest"
