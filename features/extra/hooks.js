@@ -13,7 +13,7 @@ module.exports = function () {
     if (this.sharedBucket) return callback();
 
     this.sharedBucket = this.uniqueName('aws-sdk-js-shared-integration');
-    this.request('s3', 'createBucket', {Bucket: this.sharedBucket}, function(err, data) {
+    this.request('s3', 'createBucket', {Bucket: this.sharedBucket}, function(err) {
       this.cacheBucketName(this.sharedBucket);
       if (err) callback.fail(err);
       else callback();
@@ -133,6 +133,11 @@ module.exports = function () {
 
   this.Then(/^I should get more than one page$/, function(callback) {
     this.assert.compare(this.numPages, '>', 1);
+    callback();
+  });
+
+  this.Then(/^I should get at least one page$/, function(callback) {
+    this.assert.compare(this.numPages, '>=', 1);
     callback();
   });
 

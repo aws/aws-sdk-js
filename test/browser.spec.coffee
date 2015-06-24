@@ -95,6 +95,17 @@ integrationTests ->
       svc.deleteObject(Key: key).send()
       done()
 
+    it 'lower cases HTTP headers', ->
+      rawHeaders =
+      """
+      x-amzn-Foo: foo
+      x-amzn-Bar: bar
+      """
+      client = new AWS.XHRClient()
+      headers = client.parseHeaders(rawHeaders)
+      expect(headers['x-amzn-foo']).to.equal('foo')
+      expect(headers['x-amzn-bar']).to.equal('bar')
+
   describe 'AWS.CloudWatch', ->
     it 'makes a request', (done) ->
       cloudwatch.listMetrics (err, data) ->
@@ -158,7 +169,7 @@ integrationTests ->
       params =
         IdentityPoolId: 'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
       cognitosync.describeIdentityPoolUsage params, (err, data) ->
-        assertError(err, 'UnknownError')
+        assertError(err, 'ResourceNotFoundException')
         matchError(err, 'IdentityPool \'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee\' not found')
         noData(data)
         done()
