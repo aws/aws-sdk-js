@@ -150,6 +150,21 @@ describe 'AWS.EventListeners', ->
           sendRequest file, (err) ->
             done()
 
+  describe 'restart', ->
+    request = null
+
+    it 'constructs a fresh httpRequest object', ->
+      request = makeRequest()
+      httpRequest = request.httpRequest
+      request.on 'build', ->
+        if !@threwSimulatedError
+          @threwSimulatedError = true
+          err = new Error('simulated error')
+          err.retryable = true
+          throw err
+      request.build()
+      expect(request.httpRequest).not.to.eql(httpRequest)
+
   describe 'sign', ->
     it 'takes the request object as a parameter', ->
       helpers.mockHttpResponse 200, {}, ''
