@@ -1,7 +1,7 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2014-11-06",
+    "apiVersion":"2015-04-17",
     "endpointPrefix":"cloudfront",
     "globalEndpoint":"cloudfront.amazonaws.com",
     "serviceAbbreviation":"CloudFront",
@@ -11,10 +11,10 @@
   },
   "operations":{
     "CreateCloudFrontOriginAccessIdentity":{
-      "name":"CreateCloudFrontOriginAccessIdentity2014_11_06",
+      "name":"CreateCloudFrontOriginAccessIdentity2015_04_17",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-11-06/origin-access-identity/cloudfront",
+        "requestUri":"/2015-04-17/origin-access-identity/cloudfront",
         "responseCode":201
       },
       "input":{
@@ -60,10 +60,10 @@
       "documentation":"Create a new origin access identity."
     },
     "CreateDistribution":{
-      "name":"CreateDistribution2014_11_06",
+      "name":"CreateDistribution2015_04_17",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-11-06/distribution",
+        "requestUri":"/2015-04-17/distribution",
         "responseCode":201
       },
       "input":{
@@ -118,6 +118,11 @@
         },
         {
           "shape":"InvalidViewerCertificate",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        },
+        {
+          "shape":"InvalidMinimumProtocolVersion",
           "error":{"httpStatusCode":400},
           "exception":true
         },
@@ -240,15 +245,20 @@
           "error":{"httpStatusCode":400},
           "exception":true,
           "documentation":"You cannot specify SSLv3 as the minimum protocol version if you only want to support only clients that Support Server Name Indication (SNI)."
+        },
+        {
+          "shape":"InvalidTTLOrder",
+          "error":{"httpStatusCode":400},
+          "exception":true
         }
       ],
       "documentation":"Create a new distribution."
     },
     "CreateInvalidation":{
-      "name":"CreateInvalidation2014_11_06",
+      "name":"CreateInvalidation2015_04_17",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-11-06/distribution/{DistributionId}/invalidation",
+        "requestUri":"/2015-04-17/distribution/{DistributionId}/invalidation",
         "responseCode":201
       },
       "input":{
@@ -305,10 +315,10 @@
       "documentation":"Create a new invalidation."
     },
     "CreateStreamingDistribution":{
-      "name":"CreateStreamingDistribution2014_11_06",
+      "name":"CreateStreamingDistribution2015_04_17",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-11-06/streaming-distribution",
+        "requestUri":"/2015-04-17/streaming-distribution",
         "responseCode":201
       },
       "input":{
@@ -393,10 +403,10 @@
       "documentation":"Create a new streaming distribution."
     },
     "DeleteCloudFrontOriginAccessIdentity":{
-      "name":"DeleteCloudFrontOriginAccessIdentity2014_11_06",
+      "name":"DeleteCloudFrontOriginAccessIdentity2015_04_17",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}",
+        "requestUri":"/2015-04-17/origin-access-identity/cloudfront/{Id}",
         "responseCode":204
       },
       "input":{
@@ -437,10 +447,10 @@
       "documentation":"Delete an origin access identity."
     },
     "DeleteDistribution":{
-      "name":"DeleteDistribution2014_11_06",
+      "name":"DeleteDistribution2015_04_17",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-11-06/distribution/{Id}",
+        "requestUri":"/2015-04-17/distribution/{Id}",
         "responseCode":204
       },
       "input":{
@@ -481,10 +491,10 @@
       "documentation":"Delete a distribution."
     },
     "DeleteStreamingDistribution":{
-      "name":"DeleteStreamingDistribution2014_11_06",
+      "name":"DeleteStreamingDistribution2015_04_17",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-11-06/streaming-distribution/{Id}",
+        "requestUri":"/2015-04-17/streaming-distribution/{Id}",
         "responseCode":204
       },
       "input":{
@@ -525,10 +535,10 @@
       "documentation":"Delete a streaming distribution."
     },
     "GetCloudFrontOriginAccessIdentity":{
-      "name":"GetCloudFrontOriginAccessIdentity2014_11_06",
+      "name":"GetCloudFrontOriginAccessIdentity2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}"
+        "requestUri":"/2015-04-17/origin-access-identity/cloudfront/{Id}"
       },
       "input":{
         "shape":"GetCloudFrontOriginAccessIdentityRequest",
@@ -555,10 +565,10 @@
       "documentation":"Get the information about an origin access identity."
     },
     "GetCloudFrontOriginAccessIdentityConfig":{
-      "name":"GetCloudFrontOriginAccessIdentityConfig2014_11_06",
+      "name":"GetCloudFrontOriginAccessIdentityConfig2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2015-04-17/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{
         "shape":"GetCloudFrontOriginAccessIdentityConfigRequest",
@@ -585,10 +595,10 @@
       "documentation":"Get the configuration information about an origin access identity."
     },
     "GetDistribution":{
-      "name":"GetDistribution2014_11_06",
+      "name":"GetDistribution2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/distribution/{Id}"
+        "requestUri":"/2015-04-17/distribution/{Id}"
       },
       "input":{
         "shape":"GetDistributionRequest",
@@ -615,10 +625,10 @@
       "documentation":"Get the information about a distribution."
     },
     "GetDistributionConfig":{
-      "name":"GetDistributionConfig2014_11_06",
+      "name":"GetDistributionConfig2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/distribution/{Id}/config"
+        "requestUri":"/2015-04-17/distribution/{Id}/config"
       },
       "input":{
         "shape":"GetDistributionConfigRequest",
@@ -645,10 +655,10 @@
       "documentation":"Get the configuration information about a distribution."
     },
     "GetInvalidation":{
-      "name":"GetInvalidation2014_11_06",
+      "name":"GetInvalidation2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/distribution/{DistributionId}/invalidation/{Id}"
+        "requestUri":"/2015-04-17/distribution/{DistributionId}/invalidation/{Id}"
       },
       "input":{
         "shape":"GetInvalidationRequest",
@@ -681,10 +691,10 @@
       "documentation":"Get the information about an invalidation."
     },
     "GetStreamingDistribution":{
-      "name":"GetStreamingDistribution2014_11_06",
+      "name":"GetStreamingDistribution2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/streaming-distribution/{Id}"
+        "requestUri":"/2015-04-17/streaming-distribution/{Id}"
       },
       "input":{
         "shape":"GetStreamingDistributionRequest",
@@ -711,10 +721,10 @@
       "documentation":"Get the information about a streaming distribution."
     },
     "GetStreamingDistributionConfig":{
-      "name":"GetStreamingDistributionConfig2014_11_06",
+      "name":"GetStreamingDistributionConfig2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/streaming-distribution/{Id}/config"
+        "requestUri":"/2015-04-17/streaming-distribution/{Id}/config"
       },
       "input":{
         "shape":"GetStreamingDistributionConfigRequest",
@@ -741,10 +751,10 @@
       "documentation":"Get the configuration information about a streaming distribution."
     },
     "ListCloudFrontOriginAccessIdentities":{
-      "name":"ListCloudFrontOriginAccessIdentities2014_11_06",
+      "name":"ListCloudFrontOriginAccessIdentities2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/origin-access-identity/cloudfront"
+        "requestUri":"/2015-04-17/origin-access-identity/cloudfront"
       },
       "input":{
         "shape":"ListCloudFrontOriginAccessIdentitiesRequest",
@@ -765,10 +775,10 @@
       "documentation":"List origin access identities."
     },
     "ListDistributions":{
-      "name":"ListDistributions2014_11_06",
+      "name":"ListDistributions2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/distribution"
+        "requestUri":"/2015-04-17/distribution"
       },
       "input":{
         "shape":"ListDistributionsRequest",
@@ -789,10 +799,10 @@
       "documentation":"List distributions."
     },
     "ListInvalidations":{
-      "name":"ListInvalidations2014_11_06",
+      "name":"ListInvalidations2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/distribution/{DistributionId}/invalidation"
+        "requestUri":"/2015-04-17/distribution/{DistributionId}/invalidation"
       },
       "input":{
         "shape":"ListInvalidationsRequest",
@@ -825,10 +835,10 @@
       "documentation":"List invalidation batches."
     },
     "ListStreamingDistributions":{
-      "name":"ListStreamingDistributions2014_11_06",
+      "name":"ListStreamingDistributions2015_04_17",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-11-06/streaming-distribution"
+        "requestUri":"/2015-04-17/streaming-distribution"
       },
       "input":{
         "shape":"ListStreamingDistributionsRequest",
@@ -849,10 +859,10 @@
       "documentation":"List streaming distributions."
     },
     "UpdateCloudFrontOriginAccessIdentity":{
-      "name":"UpdateCloudFrontOriginAccessIdentity2014_11_06",
+      "name":"UpdateCloudFrontOriginAccessIdentity2015_04_17",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2015-04-17/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{
         "shape":"UpdateCloudFrontOriginAccessIdentityRequest",
@@ -915,10 +925,10 @@
       "documentation":"Update an origin access identity."
     },
     "UpdateDistribution":{
-      "name":"UpdateDistribution2014_11_06",
+      "name":"UpdateDistribution2015_04_17",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-11-06/distribution/{Id}/config"
+        "requestUri":"/2015-04-17/distribution/{Id}/config"
       },
       "input":{
         "shape":"UpdateDistributionRequest",
@@ -1028,6 +1038,11 @@
           "exception":true
         },
         {
+          "shape":"InvalidMinimumProtocolVersion",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        },
+        {
           "shape":"InvalidRequiredProtocol",
           "error":{"httpStatusCode":400},
           "exception":true,
@@ -1094,15 +1109,20 @@
           "shape":"InvalidGeoRestrictionParameter",
           "error":{"httpStatusCode":400},
           "exception":true
+        },
+        {
+          "shape":"InvalidTTLOrder",
+          "error":{"httpStatusCode":400},
+          "exception":true
         }
       ],
       "documentation":"Update a distribution."
     },
     "UpdateStreamingDistribution":{
-      "name":"UpdateStreamingDistribution2014_11_06",
+      "name":"UpdateStreamingDistribution2015_04_17",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-11-06/streaming-distribution/{Id}/config"
+        "requestUri":"/2015-04-17/streaming-distribution/{Id}/config"
       },
       "input":{
         "shape":"UpdateStreamingDistributionRequest",
@@ -1328,6 +1348,14 @@
         "SmoothStreaming":{
           "shape":"boolean",
           "documentation":"Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false."
+        },
+        "DefaultTTL":{
+          "shape":"long",
+          "documentation":"If you don't configure your origin to add a Cache-Control max-age directive or an Expires header, DefaultTTL is the default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin does not add HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. You can specify a value from 0 to 3,153,600,000 seconds (100 years)."
+        },
+        "MaxTTL":{
+          "shape":"long",
+          "documentation":"The maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. You can specify a value from 0 to 3,153,600,000 seconds (100 years)."
         }
       },
       "documentation":"A complex type that describes how CloudFront processes requests. You can create up to 10 cache behaviors.You must create at least as many cache behaviors (including the default cache behavior) as you have origins if you want CloudFront to distribute objects from all of the origins. Each cache behavior specifies the one origin from which you want CloudFront to get objects. If you have two origins and only the default cache behavior, the default cache behavior will cause CloudFront to get objects from one of the origins, but the other origin will never be used. If you don't want to specify any cache behaviors, include only an empty CacheBehaviors element. Don't include an empty CacheBehavior element, or CloudFront returns a MalformedXML error. To delete all cache behaviors in an existing distribution, update the distribution configuration and include only an empty CacheBehaviors element. To add, change, or remove one or more cache behaviors, update the distribution configuration and specify all of the cache behaviors that you want to include in the updated distribution."
@@ -1539,7 +1567,7 @@
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"The origin access identity's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2015-04-17/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         }
       },
@@ -1576,7 +1604,7 @@
         "DistributionConfig":{
           "shape":"DistributionConfig",
           "documentation":"The distribution's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2015-04-17/"},
           "locationName":"DistributionConfig"
         }
       },
@@ -1622,7 +1650,7 @@
         "InvalidationBatch":{
           "shape":"InvalidationBatch",
           "documentation":"The batch information for the invalidation.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2015-04-17/"},
           "locationName":"InvalidationBatch"
         }
       },
@@ -1653,7 +1681,7 @@
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
           "documentation":"The streaming distribution's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2015-04-17/"},
           "locationName":"StreamingDistributionConfig"
         }
       },
@@ -1785,6 +1813,14 @@
         "SmoothStreaming":{
           "shape":"boolean",
           "documentation":"Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false."
+        },
+        "DefaultTTL":{
+          "shape":"long",
+          "documentation":"If you don't configure your origin to add a Cache-Control max-age directive or an Expires header, DefaultTTL is the default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin does not add HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. You can specify a value from 0 to 3,153,600,000 seconds (100 years)."
+        },
+        "MaxTTL":{
+          "shape":"long",
+          "documentation":"The maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. You can specify a value from 0 to 3,153,600,000 seconds (100 years)."
         }
       },
       "documentation":"A complex type that describes the default cache behavior if you do not specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements.You must create exactly one default cache behavior."
@@ -2450,6 +2486,14 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "InvalidMinimumProtocolVersion":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"string"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "InvalidOrigin":{
       "type":"structure",
       "members":{
@@ -2496,6 +2540,14 @@
       "documentation":"This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the RequiredProtocols element from your distribution configuration."
     },
     "InvalidResponseCode":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"string"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "InvalidTTLOrder":{
       "type":"structure",
       "members":{
         "Message":{"shape":"string"}
@@ -3418,7 +3470,7 @@
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"The identity's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2015-04-17/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         },
         "Id":{
@@ -3464,7 +3516,7 @@
         "DistributionConfig":{
           "shape":"DistributionConfig",
           "documentation":"The distribution's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2015-04-17/"},
           "locationName":"DistributionConfig"
         },
         "Id":{
@@ -3510,7 +3562,7 @@
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
           "documentation":"The streaming distribution's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2015-04-17/"},
           "locationName":"StreamingDistributionConfig"
         },
         "Id":{
