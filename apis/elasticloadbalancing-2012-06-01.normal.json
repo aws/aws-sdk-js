@@ -789,7 +789,7 @@
           "documentation":"<p>The specified load balancer does not exist.</p>"
         }
       ],
-      "documentation":"<p>Describes the specified the load balancers. If no load balancers are specified, the call describes all of your load balancers.</p>"
+      "documentation":"<p>Describes the specified load balancers. If no load balancers are specified, the call describes all of your load balancers.</p>"
     },
     "DescribeTags":{
       "name":"DescribeTags",
