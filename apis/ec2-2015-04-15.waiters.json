@@ -165,12 +165,12 @@
     },
     "__SpotInstanceRequestState": {
       "operation": "DescribeSpotInstanceRequests",
-      "acceptor.path": "SpotInstanceRequests[].Status.Code"
+      "acceptor_path": "SpotInstanceRequests[].Status.Code"
     },
     "SpotInstanceRequestFulfilled": {
       "extends": "__SpotInstanceRequestState",
-      "success.value": "fulfilled",
-      "failure.value": [
+      "success_value": "fulfilled",
+      "failure_value": [
         "schedule-expired",
         "canceled-before-fulfillment",
         "bad-parameters",
