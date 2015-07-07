@@ -258,7 +258,7 @@
       },
       "input":{"shape":"CopySnapshotRequest"},
       "output":{"shape":"CopySnapshotResult"},
-      "documentation":"<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted.</p> <note> <p>Copying snapshots that were encrypted with non-default AWS Key Management Service (KMS) master keys is not supported at this time. </p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the <code>Encrypted</code> flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (KMS) Customer Master Key (CMK); however, you can specify a non-default CMK with the <code>KmsKeyId</code> parameter.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateCustomerGateway":{
       "name":"CreateCustomerGateway",
@@ -1071,7 +1071,7 @@
       },
       "input":{"shape":"DescribeRouteTablesRequest"},
       "output":{"shape":"DescribeRouteTablesResult"},
-      "documentation":"<p>Describes one or more of your route tables.</p> <p>For more information about route tables, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation":"<p>Describes one or more of your route tables. </p> <p>Each subnet in your VPC must be associated with a route table. If a subnet is not explicitly associated with any route table, it is implicitly associated with the main route table. This command does not return the subnet ID for implicit associations.</p> <p>For more information about route tables, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "DescribeSecurityGroups":{
       "name":"DescribeSecurityGroups",
@@ -3120,6 +3120,11 @@
           "shape":"String",
           "documentation":"<p>The AWS account ID of the instance owner. This is only present if the product code is attached to the instance.</p>",
           "locationName":"ownerId"
+        },
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>The return value of the request. Returns <code>true</code> if the specified product code is owned by the requester and associated with the specified instance.</p>",
+          "locationName":"return"
         }
       }
     },
@@ -3266,6 +3271,16 @@
           "shape":"String",
           "documentation":"<p>The pre-signed URL that facilitates copying an encrypted snapshot. This parameter is only required when copying an encrypted snapshot with the Amazon EC2 Query API; it is available as an optional parameter in all other cases. The <code>PresignedUrl</code> should use the snapshot source endpoint, the <code>CopySnapshot</code> action, and include the <code>SourceRegion</code>, <code>SourceSnapshotId</code>, and <code>DestinationRegion</code> parameters. The <code>PresignedUrl</code> must be signed using AWS Signature Version 4. Because EBS snapshots are stored in Amazon S3, the signing algorithm for this parameter uses the same logic that is described in <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\">Authenticating Requests by Using Query Parameters (AWS Signature Version 4)</a> in the <i>Amazon Simple Storage Service API Reference</i>. An invalid or improperly signed <code>PresignedUrl</code> will cause the copy operation to fail asynchronously, and the snapshot will move to an <code>error</code> state.</p>",
           "locationName":"presignedUrl"
+        },
+        "Encrypted":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether the destination snapshot should be encrypted. There is no way to create an unencrypted snapshot copy from an encrypted snapshot; however, you can encrypt a copy of an unencrypted snapshot with this flag. The default CMK for EBS is used unless a non-default AWS Key Management Service (KMS) CMK is specified with <code>KmsKeyId</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName":"encrypted"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) CMK to use when creating the snapshot copy. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. The ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>. The specified CMK must exist in the region that the snapshot is being copied to. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set.</p>",
+          "locationName":"kmsKeyId"
         }
       }
     },
@@ -4027,12 +4042,12 @@
         },
         "Encrypted":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the volume should be encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or vice versa. If your AMI uses encrypted volumes, you can only launch it on supported instance types. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>",
+          "documentation":"<p>Specifies whether the volume should be encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or vice versa. If your AMI uses encrypted volumes, you can only launch it on supported instance types. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName":"encrypted"
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) master key to use when creating the encrypted volume. This parameter is only required if you want to use a non-default master key; if this parameter is not specified, the default master key is used. The ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the master key, the AWS account ID of the master key owner, the <code>key</code> namespace, and then the master key ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p>"
+          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) Customer Master Key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. The ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set.</p>"
         }
       }
     },
@@ -5713,7 +5728,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone where the Reserved Instance can be used.</p> </li> <li> <p><code>duration</code> - The duration of the Reserved Instance (for example, one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p><code>fixed-price</code> - The purchase price of the Reserved Instance (for example, 9800.0).</p> </li> <li> <p><code>instance-type</code> - The instance type on which the Reserved Instance can be used.</p> </li> <li> <p><code>marketplace</code> - Set to <code>true</code> to show only Reserved Instance Marketplace offerings. When this filter is not used, which is the default behavior, all offerings from AWS and Reserved Instance Marketplace are listed.</p> </li> <li> <p><code>product-description</code> - The Reserved Instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code>) | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code> Windows with SQL Server Web (Amazon VPC))</code> </p> </li> <li> <p><code>reserved-instances-offering-id</code> - The Reserved Instances offering ID.</p> </li> <li> <p><code>usage-price</code> - The usage price of the Reserved Instance, per hour (for example, 0.84).</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone where the Reserved Instance can be used.</p> </li> <li> <p><code>duration</code> - The duration of the Reserved Instance (for example, one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p><code>fixed-price</code> - The purchase price of the Reserved Instance (for example, 9800.0).</p> </li> <li> <p><code>instance-type</code> - The instance type on which the Reserved Instance can be used.</p> </li> <li> <p><code>marketplace</code> - Set to <code>true</code> to show only Reserved Instance Marketplace offerings. When this filter is not used, which is the default behavior, all offerings from AWS and Reserved Instance Marketplace are listed.</p> </li> <li> <p><code>product-description</code> - The Reserved Instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code> Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>) </p> </li> <li> <p><code>reserved-instances-offering-id</code> - The Reserved Instances offering ID.</p> </li> <li> <p><code>usage-price</code> - The usage price of the Reserved Instance, per hour (for example, 0.84).</p> </li> </ul>",
           "locationName":"Filter"
         },
         "InstanceTenancy":{
@@ -5784,7 +5799,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone where the Reserved Instance can be used.</p> </li> <li> <p><code>duration</code> - The duration of the Reserved Instance (one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p><code>end</code> - The time when the Reserved Instance expires (for example, 2015-08-07T11:54:42.000Z).</p> </li> <li> <p><code>fixed-price</code> - The purchase price of the Reserved Instance (for example, 9800.0).</p> </li> <li> <p><code>instance-type</code> - The instance type on which the Reserved Instance can be used.</p> </li> <li> <p><code>product-description</code> - The Reserved Instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code>Windows with SQL Server Web (Amazon VPC)</code>).</p> </li> <li> <p><code>reserved-instances-id</code> - The ID of the Reserved Instance.</p> </li> <li> <p><code>start</code> - The time at which the Reserved Instance purchase request was placed (for example, 2014-08-07T11:54:42.000Z).</p> </li> <li> <p><code>state</code> - The state of the Reserved Instance (<code>payment-pending</code> | <code>active</code> | <code>payment-failed</code> | <code>retired</code>).</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>usage-price</code> - The usage price of the Reserved Instance, per hour (for example, 0.84).</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone where the Reserved Instance can be used.</p> </li> <li> <p><code>duration</code> - The duration of the Reserved Instance (one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p><code>end</code> - The time when the Reserved Instance expires (for example, 2015-08-07T11:54:42.000Z).</p> </li> <li> <p><code>fixed-price</code> - The purchase price of the Reserved Instance (for example, 9800.0).</p> </li> <li> <p><code>instance-type</code> - The instance type on which the Reserved Instance can be used.</p> </li> <li> <p><code>product-description</code> - The Reserved Instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code>Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>).</p> </li> <li> <p><code>reserved-instances-id</code> - The ID of the Reserved Instance.</p> </li> <li> <p><code>start</code> - The time at which the Reserved Instance purchase request was placed (for example, 2014-08-07T11:54:42.000Z).</p> </li> <li> <p><code>state</code> - The state of the Reserved Instance (<code>payment-pending</code> | <code>active</code> | <code>payment-failed</code> | <code>retired</code>).</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>usage-price</code> - The usage price of the Reserved Instance, per hour (for example, 0.84).</p> </li> </ul>",
           "locationName":"Filter"
         },
         "OfferingType":{
@@ -5829,7 +5844,7 @@
       "members":{
         "RouteTables":{
           "shape":"RouteTableList",
-          "documentation":"<p>Information about one or more route tables.</p>",
+          "documentation":"<p>Information about one or more route tables. </p>",
           "locationName":"routeTableSet"
         }
       }
@@ -9347,6 +9362,7 @@
         "t2.micro",
         "t2.small",
         "t2.medium",
+        "t2.large",
         "m2.xlarge",
         "m2.2xlarge",
         "m2.4xlarge",
@@ -9896,6 +9912,10 @@
         }
       }
     },
+    "ModifySnapshotAttributeName":{
+      "type":"string",
+      "enum":["createVolumePermission"]
+    },
     "ModifySnapshotAttributeRequest":{
       "type":"structure",
       "required":["SnapshotId"],
@@ -9910,7 +9930,7 @@
           "documentation":"<p>The ID of the snapshot.</p>"
         },
         "Attribute":{
-          "shape":"SnapshotAttributeName",
+          "shape":"ModifySnapshotAttributeName",
           "documentation":"<p>The snapshot attribute to modify.</p>"
         },
         "OperationType":{
@@ -11941,8 +11961,8 @@
           "documentation":"<p>The ID of the snapshot.</p>"
         },
         "Attribute":{
-          "shape":"SnapshotAttributeName",
-          "documentation":"<p>The attribute to reset (currently only the attribute for permission to create volumes can be reset).</p>"
+          "shape":"ModifySnapshotAttributeName",
+          "documentation":"<p>The attribute to reset. Currently, only the attribute for permission to create volumes can be reset.</p>"
         }
       }
     },
@@ -12228,7 +12248,7 @@
         },
         "SubnetId":{
           "shape":"String",
-          "documentation":"<p>The ID of the subnet.</p>",
+          "documentation":"<p>The ID of the subnet. A subnet ID is not returned for an implicit association.</p>",
           "locationName":"subnetId"
         },
         "Main":{
@@ -12550,7 +12570,7 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) master key that was used to protect the volume encryption key for the parent volume.</p>",
+          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) Customer Master Key (CMK) that was used to protect the volume encryption key for the parent volume.</p>",
           "locationName":"kmsKeyId"
         }
       },
@@ -13630,7 +13650,7 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) master key that was used to protect the volume encryption key for the volume.</p>",
+          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) Customer Master Key (CMK) that was used to protect the volume encryption key for the volume.</p>",
           "locationName":"kmsKeyId"
         }
       },
@@ -14118,7 +14138,7 @@
       "type":"structure",
       "members":{
         "Code":{
-          "shape":"String",
+          "shape":"VpcPeeringConnectionStateReasonCode",
           "documentation":"<p>The status of the VPC peering connection.</p>",
           "locationName":"code"
         },
@@ -14129,6 +14149,20 @@
         }
       },
       "documentation":"<p>Describes the status of a VPC peering connection.</p>"
+    },
+    "VpcPeeringConnectionStateReasonCode":{
+      "type":"string",
+      "enum":[
+        "initiating-request",
+        "pending-acceptance",
+        "active",
+        "deleted",
+        "rejected",
+        "failed",
+        "expired",
+        "provisioning",
+        "deleting"
+      ]
     },
     "VpcPeeringConnectionVpcInfo":{
       "type":"structure",
