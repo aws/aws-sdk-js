@@ -29,6 +29,23 @@
       },
       "documentation":"<p>Deletes the specified identity (email address or domain) from the list of verified identities.</p> <p>This action is throttled at one request per second.</p>"
     },
+    "DeleteIdentityPolicy":{
+      "name":"DeleteIdentityPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteIdentityPolicyRequest",
+        "documentation":"<p>Represents a request instructing the service to delete an authorization policy applying to an identity.</p> <p>This request succeeds regardless of whether the specified policy exists.</p>"
+      },
+      "output":{
+        "shape":"DeleteIdentityPolicyResponse",
+        "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
+        "resultWrapper":"DeleteIdentityPolicyResult"
+      },
+      "documentation":"<p>Deletes the specified sending authorization policy for the given identity (email address or domain). This API returns successfully even if a policy with the specified name does not exist.</p> <note>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
+    },
     "DeleteVerifiedEmailAddress":{
       "name":"DeleteVerifiedEmailAddress",
       "http":{
@@ -71,6 +88,23 @@
         "resultWrapper":"GetIdentityNotificationAttributesResult"
       },
       "documentation":"<p>Given a list of verified identities (email addresses and/or domains), returns a structure describing identity notification attributes.</p> <p>This action is throttled at one request per second and can only get notification attributes for up to 100 identities at a time.</p> <p>For more information about using notifications with Amazon SES, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "GetIdentityPolicies":{
+      "name":"GetIdentityPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"GetIdentityPoliciesRequest",
+        "documentation":"<p>Represents a request instructing the service to retrieve the text of a list of authorization policies applying to an identity. </p>"
+      },
+      "output":{
+        "shape":"GetIdentityPoliciesResponse",
+        "documentation":"<p>Represents a map of policy names to policies returned from a successful <code>GetIdentityPolicies</code> request. </p>",
+        "resultWrapper":"GetIdentityPoliciesResult"
+      },
+      "documentation":"<p>Returns the requested sending authorization policies for the given identity (email address or domain). The policies are returned as a map of policy names to policy contents. You can retrieve a maximum of 20 policies at a time.</p> <note>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
     "GetIdentityVerificationAttributes":{
       "name":"GetIdentityVerificationAttributes",
@@ -132,6 +166,23 @@
       },
       "documentation":"<p>Returns a list containing all of the identities (email addresses and domains) for a specific AWS Account, regardless of verification status.</p> <p>This action is throttled at one request per second.</p>"
     },
+    "ListIdentityPolicies":{
+      "name":"ListIdentityPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ListIdentityPoliciesRequest",
+        "documentation":"<p>Represents a request instructing the service to list all authorization policies, by name, applying to an identity.</p>"
+      },
+      "output":{
+        "shape":"ListIdentityPoliciesResponse",
+        "documentation":"<p>Represents a list of policy names returned from a successful <code>ListIdentityPolicies</code> request. </p>",
+        "resultWrapper":"ListIdentityPoliciesResult"
+      },
+      "documentation":"<p>Returns a list of sending authorization policies that are attached to the given identity (email address or domain). This API returns only a list. If you want the actual policy content, you can use <code>GetIdentityPolicies</code>.</p> <note>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
+    },
     "ListVerifiedEmailAddresses":{
       "name":"ListVerifiedEmailAddresses",
       "http":{
@@ -144,6 +195,35 @@
         "resultWrapper":"ListVerifiedEmailAddressesResult"
       },
       "documentation":"<p>Returns a list containing all of the email addresses that have been verified.</p> <important>The ListVerifiedEmailAddresses action is deprecated as of the May 15, 2012 release of Domain Verification. The ListIdentities action is now preferred.</important> <p>This action is throttled at one request per second.</p>"
+    },
+    "PutIdentityPolicy":{
+      "name":"PutIdentityPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"PutIdentityPolicyRequest",
+        "documentation":"<p>Represents a request instructing the service to apply an authorization policy to an identity.</p>"
+      },
+      "output":{
+        "shape":"PutIdentityPolicyResponse",
+        "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
+        "resultWrapper":"PutIdentityPolicyResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidPolicyException",
+          "error":{
+            "code":"InvalidPolicy",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Indicates that the provided policy is invalid. Check the error stack for more information about what caused the error."
+        }
+      ],
+      "documentation":"<p>Adds or updates a sending authorization policy for the specified identity (email address or domain).</p> <note>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
     "SendEmail":{
       "name":"SendEmail",
@@ -172,7 +252,7 @@
           "documentation":"Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error."
         }
       ],
-      "documentation":"<p>Composes an email message based on input data, and then immediately queues the message for sending. </p> <important> You can only send email from verified email addresses and domains. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>. </important> <p>The total size of the message cannot exceed 10 MB.</p> <p>Amazon SES has a limit on the total number of recipients per message: The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group. </p> <p>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your <i>sending quota</i> - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>. </p>"
+      "documentation":"<p>Composes an email message based on input data, and then immediately queues the message for sending. </p> <p>There are several important points to know about <code>SendEmail</code>:</p> <ul> <li>You can only send email from verified email addresses and domains; otherwise, you will get an \"Email address not verified\" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>.</li> <li>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</li> <li>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</li> <li>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>.</li> </ul>"
     },
     "SendRawEmail":{
       "name":"SendRawEmail",
@@ -201,7 +281,7 @@
           "documentation":"Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error."
         }
       ],
-      "documentation":"<p>Sends an email message, with header and content specified by the client. The <code>SendRawEmail</code> action is useful for sending multipart MIME emails. The raw text of the message must comply with Internet email standards; otherwise, the message cannot be sent. </p> <important> You can only send email from verified email addresses and domains. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>. </important> <p>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</p> <p>Amazon SES has a limit on the total number of recipients per message: The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group. </p> <p>The To:, CC:, and BCC: headers in the raw message can contain a group list. Note that each recipient in a group list counts towards the 50-recipient limit. </p> <p>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your <i>sending quota</i> - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>. </p>"
+      "documentation":"<p>Sends an email message, with header and content specified by the client. The <code>SendRawEmail</code> action is useful for sending multipart MIME emails. The raw text of the message must comply with Internet email standards; otherwise, the message cannot be sent. </p> <p>There are several important points to know about <code>SendRawEmail</code>:</p> <ul> <li>You can only send email from verified email addresses and domains; otherwise, you will get an \"Email address not verified\" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>.</li> <li>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</li> <li>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</li> <li>The To:, CC:, and BCC: headers in the raw message can contain a group list. Note that each recipient in a group list counts towards the 50-recipient limit.</li> <li>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>.</li> <li>If you are using sending authorization to send on behalf of another user, <code>SendRawEmail</code> enables you to specify the cross-account identity for the email's \"Source,\" \"From,\" and \"Return-Path\" parameters in one of two ways: you can pass optional parameters <code>SourceArn</code>, <code>FromArn</code>, and/or <code>ReturnPathArn</code> to the API, or you can include the following X-headers in the header of your raw email: <ul> <li><code>X-SES-SOURCE-ARN</code></li> <li><code>X-SES-FROM-ARN</code></li> <li><code>X-SES-RETURN-PATH-ARN</code></li> </ul> <important>Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.</important> For the most common sending authorization use case, we recommend that you specify the <code>SourceIdentityArn</code> and do not specify either the <code>FromIdentityArn</code> or <code>ReturnPathIdentityArn</code>. (The same note applies to the corresponding X-headers.) If you only specify the <code>SourceIdentityArn</code>, Amazon SES will simply set the \"From\" address and the \"Return Path\" address to the identity specified in <code>SourceIdentityArn</code>. For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</li> </ul>"
     },
     "SetIdentityDkimEnabled":{
       "name":"SetIdentityDkimEnabled",
@@ -321,6 +401,7 @@
       "type":"list",
       "member":{"shape":"Address"}
     },
+    "AmazonResourceName":{"type":"string"},
     "Body":{
       "type":"structure",
       "members":{
@@ -352,6 +433,30 @@
       "documentation":"<p>Represents textual data, plus an optional character set specification.</p> <p>By default, the text must be 7-bit ASCII, due to the constraints of the SMTP protocol. If the text must contain any other characters, then you must also specify a character set. Examples include UTF-8, ISO-8859-1, and Shift_JIS. </p>"
     },
     "Counter":{"type":"long"},
+    "DeleteIdentityPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "Identity",
+        "PolicyName"
+      ],
+      "members":{
+        "Identity":{
+          "shape":"Identity",
+          "documentation":"<p>The identity that is associated with the policy that you want to delete. You can specify the identity by using its name or by using its Amazon Resource Name (ARN). Examples: <code>user@example.com</code>, <code>example.com</code>, <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p> <p>To successfully call this API, you must own the identity.</p>"
+        },
+        "PolicyName":{
+          "shape":"PolicyName",
+          "documentation":"<p>The name of the policy to be deleted.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request instructing the service to delete an authorization policy applying to an identity.</p> <p>This request succeeds regardless of whether the specified policy exists.</p>"
+    },
+    "DeleteIdentityPolicyResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>"
+    },
     "DeleteIdentityRequest":{
       "type":"structure",
       "required":["Identity"],
@@ -433,7 +538,7 @@
       "members":{
         "Identities":{
           "shape":"IdentityList",
-          "documentation":"<p>A list of one or more identities.</p>"
+          "documentation":"<p>A list of one or more identities. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). Examples: <code>user@example.com</code>, <code>example.com</code>, <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p>"
         }
       }
     },
@@ -447,6 +552,35 @@
         }
       },
       "documentation":"<p>Describes whether an identity has Amazon Simple Notification Service (Amazon SNS) topics set for bounce, complaint, and/or delivery notifications, and specifies whether feedback forwarding is enabled for bounce and complaint notifications.</p>"
+    },
+    "GetIdentityPoliciesRequest":{
+      "type":"structure",
+      "required":[
+        "Identity",
+        "PolicyNames"
+      ],
+      "members":{
+        "Identity":{
+          "shape":"Identity",
+          "documentation":"<p>The identity for which the policies will be retrieved. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). Examples: <code>user@example.com</code>, <code>example.com</code>, <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p> <p>To successfully call this API, you must own the identity.</p>"
+        },
+        "PolicyNames":{
+          "shape":"PolicyNameList",
+          "documentation":"<p>A list of the names of policies to be retrieved. You can retrieve a maximum of 20 policies at a time. If you do not know the names of the policies that are attached to the identity, you can use <code>ListIdentityPolicies</code>.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request instructing the service to retrieve the text of a list of authorization policies applying to an identity. </p>"
+    },
+    "GetIdentityPoliciesResponse":{
+      "type":"structure",
+      "required":["Policies"],
+      "members":{
+        "Policies":{
+          "shape":"PolicyMap",
+          "documentation":"<p>A map of policy names to policies.</p>"
+        }
+      },
+      "documentation":"<p>Represents a map of policy names to policies returned from a successful <code>GetIdentityPolicies</code> request. </p>"
     },
     "GetIdentityVerificationAttributesRequest":{
       "type":"structure",
@@ -575,6 +709,18 @@
       },
       "documentation":"<p>Represents the verification attributes of a single identity.</p>"
     },
+    "InvalidPolicyException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidPolicy",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"Indicates that the provided policy is invalid. Check the error stack for more information about what caused the error."
+    },
     "ListIdentitiesRequest":{
       "type":"structure",
       "members":{
@@ -607,6 +753,28 @@
         }
       },
       "documentation":"<p>Represents a list of all verified identities for the AWS Account.</p>"
+    },
+    "ListIdentityPoliciesRequest":{
+      "type":"structure",
+      "required":["Identity"],
+      "members":{
+        "Identity":{
+          "shape":"Identity",
+          "documentation":"<p>The identity that is associated with the policy for which the policies will be listed. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). Examples: <code>user@example.com</code>, <code>example.com</code>, <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p> <p>To successfully call this API, you must own the identity.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request instructing the service to list all authorization policies, by name, applying to an identity.</p>"
+    },
+    "ListIdentityPoliciesResponse":{
+      "type":"structure",
+      "required":["PolicyNames"],
+      "members":{
+        "PolicyNames":{
+          "shape":"PolicyNameList",
+          "documentation":"<p>A list of names of policies that apply to the specified identity.</p>"
+        }
+      },
+      "documentation":"<p>Represents a list of policy names returned from a successful <code>ListIdentityPolicies</code> request. </p>"
     },
     "ListVerifiedEmailAddressesResponse":{
       "type":"structure",
@@ -668,13 +836,63 @@
         "Delivery"
       ]
     },
+    "Policy":{
+      "type":"string",
+      "min":1,
+      "documentation":"JSON representation of a valid policy."
+    },
+    "PolicyMap":{
+      "type":"map",
+      "key":{"shape":"PolicyName"},
+      "value":{"shape":"Policy"}
+    },
+    "PolicyName":{
+      "type":"string",
+      "min":1,
+      "max":64,
+      "pattern":"[^\\\\/\\?\\*\\s]+",
+      "documentation":"name of the policy."
+    },
+    "PolicyNameList":{
+      "type":"list",
+      "member":{"shape":"PolicyName"}
+    },
+    "PutIdentityPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "Identity",
+        "PolicyName",
+        "Policy"
+      ],
+      "members":{
+        "Identity":{
+          "shape":"Identity",
+          "documentation":"<p>The identity to which the policy will apply. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). Examples: <code>user@example.com</code>, <code>example.com</code>, <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p> <p>To successfully call this API, you must own the identity.</p>"
+        },
+        "PolicyName":{
+          "shape":"PolicyName",
+          "documentation":"<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>"
+        },
+        "Policy":{
+          "shape":"Policy",
+          "documentation":"<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p>For information about the syntax of sending authorization policies, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html\">Amazon SES Developer Guide</a>. </p>"
+        }
+      },
+      "documentation":"<p>Represents a request instructing the service to apply an authorization policy to an identity.</p>"
+    },
+    "PutIdentityPolicyResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>"
+    },
     "RawMessage":{
       "type":"structure",
       "required":["Data"],
       "members":{
         "Data":{
           "shape":"RawMessageData",
-          "documentation":"<p>The raw data of the message. The client must ensure that the message format complies with Internet email standards regarding email header fields, MIME types, MIME encoding, and base64 encoding (if necessary). </p> <p>The To:, CC:, and BCC: headers in the raw message can contain a group list. </p> <p>For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html\">Amazon SES Developer Guide</a>. </p>"
+          "documentation":"<p>The raw data of the message. The client must ensure that the message format complies with Internet email standards regarding email header fields, MIME types, MIME encoding, and base64 encoding (if necessary). </p> <p>The To:, CC:, and BCC: headers in the raw message can contain a group list. </p> <p>If you are using <code>SendRawEmail</code> with sending authorization, you can include X-headers in the raw message to specify the \"Source,\" \"From,\" and \"Return-Path\" addresses. For more information, see the documentation for <code>SendRawEmail</code>. </p> <important>Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.</important> <p>For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html\">Amazon SES Developer Guide</a>. </p>"
         }
       },
       "documentation":"<p>Represents the raw data of the message.</p>"
@@ -720,7 +938,7 @@
       "members":{
         "Source":{
           "shape":"Address",
-          "documentation":"<p>The identity's email address.</p> <p> By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: <code>=?charset?encoding?encoded-text?=</code>. For more information, see <a href=\"http://tools.ietf.org/html/rfc2047\">RFC 2047</a>. </p>"
+          "documentation":"<p>The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>.</p> <p>If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the <code>SourceArn</code> parameter. For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p> In all cases, the email address must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: <code>=?charset?encoding?encoded-text?=</code>. For more information, see <a href=\"http://tools.ietf.org/html/rfc2047\">RFC 2047</a>. </p>"
         },
         "Destination":{
           "shape":"Destination",
@@ -737,6 +955,14 @@
         "ReturnPath":{
           "shape":"Address",
           "documentation":"<p>The email address to which bounces and complaints are to be forwarded when feedback forwarding is enabled. If the message cannot be delivered to the recipient, then an error message will be returned from the recipient's ISP; this message will then be forwarded to the email address specified by the <code>ReturnPath</code> parameter. The <code>ReturnPath</code> parameter is never overwritten. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. </p>"
+        },
+        "SourceArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to send for the email address specified in the <code>Source</code> parameter.</p> <p>For example, if the owner of <code>example.com</code> (which has ARN <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>) attaches a policy to it that authorizes you to send from <code>user@example.com</code>, then you would specify the <code>SourceArn</code> to be <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>, and the <code>Source</code> to be <code>user@example.com</code>.</p> <p>For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>. </p>"
+        },
+        "ReturnPathArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>ReturnPath</code> parameter.</p> <p>For example, if the owner of <code>example.com</code> (which has ARN <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>) attaches a policy to it that authorizes you to use <code>feedback@example.com</code>, then you would specify the <code>ReturnPathArn</code> to be <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>, and the <code>ReturnPath</code> to be <code>feedback@example.com</code>.</p> <p>For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>. </p>"
         }
       },
       "documentation":"<p>Represents a request instructing the service to send a single email message.</p> <p>This datatype can be used in application code to compose a message consisting of source, destination, message, reply-to, and return-path parts. This object can then be sent using the <code>SendEmail</code> action. </p>"
@@ -767,6 +993,18 @@
         "RawMessage":{
           "shape":"RawMessage",
           "documentation":"<p>The raw text of the message. The client is responsible for ensuring the following:</p> <p> <ul> <li>Message must contain a header and a body, separated by a blank line.</li> <li>All required header fields must be present.</li> <li>Each part of a multipart MIME message must be formatted properly.</li> <li>MIME content types must be among those supported by Amazon SES. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html\">Amazon SES Developer Guide</a>. </li> <li>Content must be base64-encoded, if MIME requires it.</li> </ul> </p>"
+        },
+        "FromArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to specify a particular \"From\" address in the header of the raw email.</p> <p>Instead of using this parameter, you can use the X-header <code>X-SES-FROM-ARN</code> in the raw message of the email. If you use both the <code>FromArn</code> parameter and the corresponding X-header, Amazon SES uses the value of the <code>FromArn</code> parameter.</p> <note>For information about when to use this parameter, see the description of <code>SendRawEmail</code> in this guide, or see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html\">Amazon SES Developer Guide</a>. </note>"
+        },
+        "SourceArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to send for the email address specified in the <code>Source</code> parameter.</p> <p>For example, if the owner of <code>example.com</code> (which has ARN <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>) attaches a policy to it that authorizes you to send from <code>user@example.com</code>, then you would specify the <code>SourceArn</code> to be <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>, and the <code>Source</code> to be <code>user@example.com</code>.</p> <p>Instead of using this parameter, you can use the X-header <code>X-SES-SOURCE-ARN</code> in the raw message of the email. If you use both the <code>SourceArn</code> parameter and the corresponding X-header, Amazon SES uses the value of the <code>SourceArn</code> parameter.</p> <note>For information about when to use this parameter, see the description of <code>SendRawEmail</code> in this guide, or see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html\">Amazon SES Developer Guide</a>. </note>"
+        },
+        "ReturnPathArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>ReturnPath</code> parameter.</p> <p>For example, if the owner of <code>example.com</code> (which has ARN <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>) attaches a policy to it that authorizes you to use <code>feedback@example.com</code>, then you would specify the <code>ReturnPathArn</code> to be <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>, and the <code>ReturnPath</code> to be <code>feedback@example.com</code>.</p> <p>Instead of using this parameter, you can use the X-header <code>X-SES-RETURN-PATH-ARN</code> in the raw message of the email. If you use both the <code>ReturnPathArn</code> parameter and the corresponding X-header, Amazon SES uses the value of the <code>ReturnPathArn</code> parameter.</p> <note>For information about when to use this parameter, see the description of <code>SendRawEmail</code> in this guide, or see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html\">Amazon SES Developer Guide</a>. </note>"
         }
       },
       "documentation":"<p>Represents a request instructing the service to send a raw email message.</p> <p>This datatype can be used in application code to compose a message consisting of source, destination, and raw message text. This object can then be sent using the <code>SendRawEmail</code> action. </p>"
@@ -839,7 +1077,7 @@
       "members":{
         "Identity":{
           "shape":"Identity",
-          "documentation":"<p>The identity for which the Amazon SNS topic will be set. Examples: <code>user@example.com</code>, <code>example.com</code>.</p>"
+          "documentation":"<p>The identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). Examples: <code>user@example.com</code>, <code>example.com</code>, <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p>"
         },
         "NotificationType":{
           "shape":"NotificationType",
