@@ -389,15 +389,17 @@ class ShapeDocumentor
   def child_shape(rules, options = {})
     @visited[rules['shape']] += 1
     if @visited[rules['shape']] < 2
-      ShapeDocumentor.new(@api, rules, {
+      ret = ShapeDocumentor.new(@api, rules, {
         :prefix => prefix + '    ', :visited => @visited }.merge(options))
     else
-      OpenStruct.new({
+      ret = OpenStruct.new({
         :nested_lines => [], :lines => [],
         :type => @api['shapes'] ?
           ShapeDocumentor.type_for(@api['shapes'][rules['shape']]) :
           rules['shape']
       }.merge(options))
     end
+    @visited[rules['shape']] -= 1
+    ret
   end
 end
