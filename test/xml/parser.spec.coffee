@@ -46,6 +46,12 @@ describe 'AWS.XML.Parser', ->
       parse xml, rules, (data) ->
         expect(data).to.eql({Abc:'xyz'})
 
+    it 'converts hexadecimal xml entity to the correct unicode character', ->
+      xml = '<xml><Abc>&#x1f608;</Abc></xml>'
+      smilingFaceWithHornsEmoji = '\uD83D\uDE08'
+      parse xml, rules, (data) ->
+        expect(data).to.eql({Abc: smilingFaceWithHornsEmoji})
+
   describe 'structures', ->
 
     it 'returns empty objects as {}', ->
