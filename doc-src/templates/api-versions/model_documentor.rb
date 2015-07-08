@@ -1,4 +1,3 @@
-require 'nokogiri'
 require 'ostruct'
 
 module Documentor
