@@ -213,13 +213,13 @@
       "ListTypeMap": {
         "type": "list",
         "member": {
-          "shape": "StructType"
+          "shape": "MapType"
         }
       },
       "ListTypeStruct": {
         "type": "list",
         "member": {
-          "shape": "MapType"
+          "shape": "StructType"
         }
       },
       "StringType": {
