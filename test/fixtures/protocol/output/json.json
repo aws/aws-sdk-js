@@ -224,6 +224,22 @@
           "headers": {},
           "body": "{\"ListMember\": [\"a\", \"b\"]}"
         }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "ListMember": ["a", null]
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"ListMember\": [\"a\", null]}"
+        }
       }
     ]
   },
