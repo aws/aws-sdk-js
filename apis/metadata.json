@@ -29,6 +29,9 @@
     "prefix": "logs",
     "name": "CloudWatchLogs"
   },
+  "codecommit": {
+    "name": "CodeCommit"
+  },
   "codedeploy": {
     "name": "CodeDeploy"
   },

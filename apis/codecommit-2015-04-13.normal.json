@@ -1,0 +1,1213 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2015-04-13",
+    "endpointPrefix":"codecommit",
+    "jsonVersion":"1.1",
+    "serviceAbbreviation":"CodeCommit",
+    "serviceFullName":"AWS CodeCommit",
+    "signatureVersion":"v4",
+    "targetPrefix":"CodeCommit_20150413",
+    "protocol":"json"
+  },
+  "documentation":"<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the AWS CodeCommit API.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <ul> <li>Repositories</li> <li>Branches</li> <li>Commits</li> </ul> <p>For information about how to use AWS CodeCommit, see the <i>AWS CodeCommit User Guide</i>.</p>",
+  "operations":{
+    "BatchGetRepositories":{
+      "name":"BatchGetRepositories",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"BatchGetRepositoriesInput",
+        "documentation":"<p>Represents the input of a batch get repositories operation.</p>"
+      },
+      "output":{
+        "shape":"BatchGetRepositoriesOutput",
+        "documentation":"<p>Represents the output of a batch get repositories operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryNamesRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository names object is required but was not specified.</p>"
+        },
+        {
+          "shape":"MaximumRepositoryNamesExceededException",
+          "exception":true,
+          "documentation":"<p>The maximum number of allowed repository names was exceeded. Currently, this number is 25.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        },
+        {
+          "shape":"EncryptionIntegrityChecksFailedException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An encryption integrity check failed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyAccessDeniedException",
+          "exception":true,
+          "documentation":"<p>An encryption key could not be accessed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyDisabledException",
+          "exception":true,
+          "documentation":"<p>The encryption key is disabled.</p>"
+        },
+        {
+          "shape":"EncryptionKeyNotFoundException",
+          "exception":true,
+          "documentation":"<p>No encryption key was found.</p>"
+        },
+        {
+          "shape":"EncryptionKeyUnavailableException",
+          "exception":true,
+          "documentation":"<p>The encryption key is not available.</p>"
+        }
+      ],
+      "documentation":"<p>Gets information about one or more repositories.</p> <note><p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p></note>"
+    },
+    "CreateBranch":{
+      "name":"CreateBranch",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreateBranchInput",
+        "documentation":"<p>Represents the input of a create branch operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository name is required but was not specified.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        },
+        {
+          "shape":"RepositoryDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified repository does not exist.</p>"
+        },
+        {
+          "shape":"BranchNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A branch name is required but was not specified.</p>"
+        },
+        {
+          "shape":"BranchNameExistsException",
+          "exception":true,
+          "documentation":"<p>The specified branch name already exists.</p>"
+        },
+        {
+          "shape":"InvalidBranchNameException",
+          "exception":true,
+          "documentation":"<p>The specified branch name is not valid.</p>"
+        },
+        {
+          "shape":"CommitIdRequiredException",
+          "exception":true,
+          "documentation":"<p>A commit ID was not specified.</p>"
+        },
+        {
+          "shape":"CommitDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified commit does not exist or no commit was specified, and the specified repository has no default branch.</p>"
+        },
+        {
+          "shape":"InvalidCommitIdException",
+          "exception":true,
+          "documentation":"<p>The specified commit ID is not valid.</p>"
+        },
+        {
+          "shape":"EncryptionIntegrityChecksFailedException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An encryption integrity check failed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyAccessDeniedException",
+          "exception":true,
+          "documentation":"<p>An encryption key could not be accessed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyDisabledException",
+          "exception":true,
+          "documentation":"<p>The encryption key is disabled.</p>"
+        },
+        {
+          "shape":"EncryptionKeyNotFoundException",
+          "exception":true,
+          "documentation":"<p>No encryption key was found.</p>"
+        },
+        {
+          "shape":"EncryptionKeyUnavailableException",
+          "exception":true,
+          "documentation":"<p>The encryption key is not available.</p>"
+        }
+      ],
+      "documentation":"<p>Creates a new branch in a repository and points the branch to a commit.</p> <note>Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation.</note>"
+    },
+    "CreateRepository":{
+      "name":"CreateRepository",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreateRepositoryInput",
+        "documentation":"<p>Represents the input of a create repository operation.</p>"
+      },
+      "output":{
+        "shape":"CreateRepositoryOutput",
+        "documentation":"<p>Represents the output of a create repository operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryNameExistsException",
+          "exception":true,
+          "documentation":"<p>The specified repository name already exists.</p>"
+        },
+        {
+          "shape":"RepositoryNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository name is required but was not specified.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        },
+        {
+          "shape":"InvalidRepositoryDescriptionException",
+          "exception":true,
+          "documentation":"<p>The specified repository description is not valid.</p>"
+        },
+        {
+          "shape":"RepositoryLimitExceededException",
+          "exception":true,
+          "documentation":"<p>A repository resource limit was exceeded.</p>"
+        },
+        {
+          "shape":"EncryptionIntegrityChecksFailedException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An encryption integrity check failed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyAccessDeniedException",
+          "exception":true,
+          "documentation":"<p>An encryption key could not be accessed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyDisabledException",
+          "exception":true,
+          "documentation":"<p>The encryption key is disabled.</p>"
+        },
+        {
+          "shape":"EncryptionKeyNotFoundException",
+          "exception":true,
+          "documentation":"<p>No encryption key was found.</p>"
+        },
+        {
+          "shape":"EncryptionKeyUnavailableException",
+          "exception":true,
+          "documentation":"<p>The encryption key is not available.</p>"
+        }
+      ],
+      "documentation":"<p>Creates a new, empty repository.</p>"
+    },
+    "DeleteRepository":{
+      "name":"DeleteRepository",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteRepositoryInput",
+        "documentation":"<p>Represents the input of a delete repository operation.</p>"
+      },
+      "output":{
+        "shape":"DeleteRepositoryOutput",
+        "documentation":"<p>Represents the output of a delete repository operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository name is required but was not specified.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        },
+        {
+          "shape":"EncryptionIntegrityChecksFailedException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An encryption integrity check failed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyAccessDeniedException",
+          "exception":true,
+          "documentation":"<p>An encryption key could not be accessed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyDisabledException",
+          "exception":true,
+          "documentation":"<p>The encryption key is disabled.</p>"
+        },
+        {
+          "shape":"EncryptionKeyNotFoundException",
+          "exception":true,
+          "documentation":"<p>No encryption key was found.</p>"
+        },
+        {
+          "shape":"EncryptionKeyUnavailableException",
+          "exception":true,
+          "documentation":"<p>The encryption key is not available.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.</p> <important>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</important>"
+    },
+    "GetBranch":{
+      "name":"GetBranch",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"GetBranchInput",
+        "documentation":"<p>Represents the input of a get branch operation.</p>"
+      },
+      "output":{
+        "shape":"GetBranchOutput",
+        "documentation":"<p>Represents the output of a get branch operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository name is required but was not specified.</p>"
+        },
+        {
+          "shape":"RepositoryDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified repository does not exist.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        },
+        {
+          "shape":"BranchNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A branch name is required but was not specified.</p>"
+        },
+        {
+          "shape":"InvalidBranchNameException",
+          "exception":true,
+          "documentation":"<p>The specified branch name is not valid.</p>"
+        },
+        {
+          "shape":"BranchDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified branch does not exist.</p>"
+        },
+        {
+          "shape":"EncryptionIntegrityChecksFailedException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An encryption integrity check failed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyAccessDeniedException",
+          "exception":true,
+          "documentation":"<p>An encryption key could not be accessed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyDisabledException",
+          "exception":true,
+          "documentation":"<p>The encryption key is disabled.</p>"
+        },
+        {
+          "shape":"EncryptionKeyNotFoundException",
+          "exception":true,
+          "documentation":"<p>No encryption key was found.</p>"
+        },
+        {
+          "shape":"EncryptionKeyUnavailableException",
+          "exception":true,
+          "documentation":"<p>The encryption key is not available.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves information about a repository branch, including its name and the last commit ID.</p>"
+    },
+    "GetRepository":{
+      "name":"GetRepository",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"GetRepositoryInput",
+        "documentation":"<p>Represents the input of a get repository operation.</p>"
+      },
+      "output":{
+        "shape":"GetRepositoryOutput",
+        "documentation":"<p>Represents the output of a get repository operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository name is required but was not specified.</p>"
+        },
+        {
+          "shape":"RepositoryDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified repository does not exist.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        },
+        {
+          "shape":"EncryptionIntegrityChecksFailedException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An encryption integrity check failed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyAccessDeniedException",
+          "exception":true,
+          "documentation":"<p>An encryption key could not be accessed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyDisabledException",
+          "exception":true,
+          "documentation":"<p>The encryption key is disabled.</p>"
+        },
+        {
+          "shape":"EncryptionKeyNotFoundException",
+          "exception":true,
+          "documentation":"<p>No encryption key was found.</p>"
+        },
+        {
+          "shape":"EncryptionKeyUnavailableException",
+          "exception":true,
+          "documentation":"<p>The encryption key is not available.</p>"
+        }
+      ],
+      "documentation":"<p>Gets information about a repository.</p> <note><p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p></note>"
+    },
+    "ListBranches":{
+      "name":"ListBranches",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ListBranchesInput",
+        "documentation":"<p>Represents the input of a list branches operation.</p>"
+      },
+      "output":{
+        "shape":"ListBranchesOutput",
+        "documentation":"<p>Represents the output of a list branches operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository name is required but was not specified.</p>"
+        },
+        {
+          "shape":"RepositoryDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified repository does not exist.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        },
+        {
+          "shape":"EncryptionIntegrityChecksFailedException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An encryption integrity check failed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyAccessDeniedException",
+          "exception":true,
+          "documentation":"<p>An encryption key could not be accessed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyDisabledException",
+          "exception":true,
+          "documentation":"<p>The encryption key is disabled.</p>"
+        },
+        {
+          "shape":"EncryptionKeyNotFoundException",
+          "exception":true,
+          "documentation":"<p>No encryption key was found.</p>"
+        },
+        {
+          "shape":"EncryptionKeyUnavailableException",
+          "exception":true,
+          "documentation":"<p>The encryption key is not available.</p>"
+        },
+        {
+          "shape":"InvalidContinuationTokenException",
+          "exception":true,
+          "documentation":"<p>The specified continuation token is not valid.</p>"
+        }
+      ],
+      "documentation":"<p>Gets information about one or more branches in a repository.</p>"
+    },
+    "ListRepositories":{
+      "name":"ListRepositories",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ListRepositoriesInput",
+        "documentation":"<p>Represents the input of a list repositories operation.</p>"
+      },
+      "output":{
+        "shape":"ListRepositoriesOutput",
+        "documentation":"<p>Represents the output of a list repositories operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidSortByException",
+          "exception":true,
+          "documentation":"<p>The specified sort by value is not valid.</p>"
+        },
+        {
+          "shape":"InvalidOrderException",
+          "exception":true,
+          "documentation":"<p>The specified sort order is not valid.</p>"
+        },
+        {
+          "shape":"InvalidContinuationTokenException",
+          "exception":true,
+          "documentation":"<p>The specified continuation token is not valid.</p>"
+        }
+      ],
+      "documentation":"<p>Gets information about one or more repositories.</p>"
+    },
+    "UpdateDefaultBranch":{
+      "name":"UpdateDefaultBranch",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateDefaultBranchInput",
+        "documentation":"<p>Represents the input of an update default branch operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository name is required but was not specified.</p>"
+        },
+        {
+          "shape":"RepositoryDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified repository does not exist.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        },
+        {
+          "shape":"BranchNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A branch name is required but was not specified.</p>"
+        },
+        {
+          "shape":"InvalidBranchNameException",
+          "exception":true,
+          "documentation":"<p>The specified branch name is not valid.</p>"
+        },
+        {
+          "shape":"BranchDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified branch does not exist.</p>"
+        },
+        {
+          "shape":"EncryptionIntegrityChecksFailedException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An encryption integrity check failed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyAccessDeniedException",
+          "exception":true,
+          "documentation":"<p>An encryption key could not be accessed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyDisabledException",
+          "exception":true,
+          "documentation":"<p>The encryption key is disabled.</p>"
+        },
+        {
+          "shape":"EncryptionKeyNotFoundException",
+          "exception":true,
+          "documentation":"<p>No encryption key was found.</p>"
+        },
+        {
+          "shape":"EncryptionKeyUnavailableException",
+          "exception":true,
+          "documentation":"<p>The encryption key is not available.</p>"
+        }
+      ],
+      "documentation":"<p>Sets or changes the default branch name for the specified repository.</p> <note>If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.</note>"
+    },
+    "UpdateRepositoryDescription":{
+      "name":"UpdateRepositoryDescription",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateRepositoryDescriptionInput",
+        "documentation":"<p>Represents the input of an update repository description operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository name is required but was not specified.</p>"
+        },
+        {
+          "shape":"RepositoryDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified repository does not exist.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        },
+        {
+          "shape":"InvalidRepositoryDescriptionException",
+          "exception":true,
+          "documentation":"<p>The specified repository description is not valid.</p>"
+        },
+        {
+          "shape":"EncryptionIntegrityChecksFailedException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An encryption integrity check failed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyAccessDeniedException",
+          "exception":true,
+          "documentation":"<p>An encryption key could not be accessed.</p>"
+        },
+        {
+          "shape":"EncryptionKeyDisabledException",
+          "exception":true,
+          "documentation":"<p>The encryption key is disabled.</p>"
+        },
+        {
+          "shape":"EncryptionKeyNotFoundException",
+          "exception":true,
+          "documentation":"<p>No encryption key was found.</p>"
+        },
+        {
+          "shape":"EncryptionKeyUnavailableException",
+          "exception":true,
+          "documentation":"<p>The encryption key is not available.</p>"
+        }
+      ],
+      "documentation":"<p>Sets or changes the comment or description for a repository.</p> <note><p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p></note>"
+    },
+    "UpdateRepositoryName":{
+      "name":"UpdateRepositoryName",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateRepositoryNameInput",
+        "documentation":"<p>Represents the input of an update repository description operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"RepositoryDoesNotExistException",
+          "exception":true,
+          "documentation":"<p>The specified repository does not exist.</p>"
+        },
+        {
+          "shape":"RepositoryNameExistsException",
+          "exception":true,
+          "documentation":"<p>The specified repository name already exists.</p>"
+        },
+        {
+          "shape":"RepositoryNameRequiredException",
+          "exception":true,
+          "documentation":"<p>A repository name is required but was not specified.</p>"
+        },
+        {
+          "shape":"InvalidRepositoryNameException",
+          "exception":true,
+          "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+        }
+      ],
+      "documentation":"<p>Renames a repository.</p>"
+    }
+  },
+  "shapes":{
+    "AccountId":{"type":"string"},
+    "Arn":{"type":"string"},
+    "BatchGetRepositoriesInput":{
+      "type":"structure",
+      "required":["repositoryNames"],
+      "members":{
+        "repositoryNames":{
+          "shape":"RepositoryNameList",
+          "documentation":"<p>The names of the repositories to get information about.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a batch get repositories operation.</p>"
+    },
+    "BatchGetRepositoriesOutput":{
+      "type":"structure",
+      "members":{
+        "repositories":{
+          "shape":"RepositoryMetadataList",
+          "documentation":"<p>A list of repositories returned by the batch get repositories operation.</p>"
+        },
+        "repositoriesNotFound":{
+          "shape":"RepositoryNotFoundList",
+          "documentation":"<p>Returns a list of repository names for which information could not be found.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a batch get repositories operation.</p>"
+    },
+    "BranchDoesNotExistException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified branch does not exist.</p>"
+    },
+    "BranchInfo":{
+      "type":"structure",
+      "members":{
+        "branchName":{
+          "shape":"BranchName",
+          "documentation":"<p>The name of the branch.</p>"
+        },
+        "commitId":{
+          "shape":"CommitId",
+          "documentation":"<p>The ID of the last commit made to the branch.</p>"
+        }
+      },
+      "documentation":"<p>Returns information about a branch.</p>"
+    },
+    "BranchName":{
+      "type":"string",
+      "min":1,
+      "max":100
+    },
+    "BranchNameExistsException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified branch name already exists.</p>"
+    },
+    "BranchNameList":{
+      "type":"list",
+      "member":{"shape":"BranchName"}
+    },
+    "BranchNameRequiredException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>A branch name is required but was not specified.</p>"
+    },
+    "CloneUrlHttp":{"type":"string"},
+    "CloneUrlSsh":{"type":"string"},
+    "CommitDoesNotExistException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified commit does not exist or no commit was specified, and the specified repository has no default branch.</p>"
+    },
+    "CommitId":{"type":"string"},
+    "CommitIdRequiredException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>A commit ID was not specified.</p>"
+    },
+    "CreateBranchInput":{
+      "type":"structure",
+      "required":[
+        "repositoryName",
+        "branchName",
+        "commitId"
+      ],
+      "members":{
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository in which you want to create the new branch.</p>"
+        },
+        "branchName":{
+          "shape":"BranchName",
+          "documentation":"<p>The name of the new branch to create.</p>"
+        },
+        "commitId":{
+          "shape":"CommitId",
+          "documentation":"<p>The ID of the commit to point the new branch to.</p> <note>If this commit ID is not specified, the new branch will point to the commit that is pointed to by the repository's default branch.</note>"
+        }
+      },
+      "documentation":"<p>Represents the input of a create branch operation.</p>"
+    },
+    "CreateRepositoryInput":{
+      "type":"structure",
+      "required":["repositoryName"],
+      "members":{
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the new repository to be created.</p> <note>The repository name must be unique across the calling AWS account. In addition, repository names are restricted to alphanumeric characters. The suffix \".git\" is prohibited.</note>"
+        },
+        "repositoryDescription":{
+          "shape":"RepositoryDescription",
+          "documentation":"<p>A comment or description about the new repository.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a create repository operation.</p>"
+    },
+    "CreateRepositoryOutput":{
+      "type":"structure",
+      "members":{
+        "repositoryMetadata":{
+          "shape":"RepositoryMetadata",
+          "documentation":"<p>Information about the newly created repository.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a create repository operation.</p>"
+    },
+    "CreationDate":{"type":"timestamp"},
+    "DeleteRepositoryInput":{
+      "type":"structure",
+      "required":["repositoryName"],
+      "members":{
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a delete repository operation.</p>"
+    },
+    "DeleteRepositoryOutput":{
+      "type":"structure",
+      "members":{
+        "repositoryId":{
+          "shape":"RepositoryId",
+          "documentation":"<p>The ID of the repository that was deleted.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a delete repository operation.</p>"
+    },
+    "EncryptionIntegrityChecksFailedException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "fault":true,
+      "documentation":"<p>An encryption integrity check failed.</p>"
+    },
+    "EncryptionKeyAccessDeniedException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>An encryption key could not be accessed.</p>"
+    },
+    "EncryptionKeyDisabledException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The encryption key is disabled.</p>"
+    },
+    "EncryptionKeyNotFoundException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>No encryption key was found.</p>"
+    },
+    "EncryptionKeyUnavailableException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The encryption key is not available.</p>"
+    },
+    "GetBranchInput":{
+      "type":"structure",
+      "members":{
+        "repositoryName":{"shape":"RepositoryName"},
+        "branchName":{
+          "shape":"BranchName",
+          "documentation":"<p>The name of the branch for which you want to retrieve information.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a get branch operation.</p>"
+    },
+    "GetBranchOutput":{
+      "type":"structure",
+      "members":{
+        "branch":{
+          "shape":"BranchInfo",
+          "documentation":"<p>The name of the branch.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a get branch operation.</p>"
+    },
+    "GetRepositoryInput":{
+      "type":"structure",
+      "required":["repositoryName"],
+      "members":{
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository to get information about.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a get repository operation.</p>"
+    },
+    "GetRepositoryOutput":{
+      "type":"structure",
+      "members":{
+        "repositoryMetadata":{
+          "shape":"RepositoryMetadata",
+          "documentation":"<p>Information about the repository.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a get repository operation.</p>"
+    },
+    "InvalidBranchNameException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified branch name is not valid.</p>"
+    },
+    "InvalidCommitIdException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified commit ID is not valid.</p>"
+    },
+    "InvalidContinuationTokenException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified continuation token is not valid.</p>"
+    },
+    "InvalidOrderException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified sort order is not valid.</p>"
+    },
+    "InvalidRepositoryDescriptionException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified repository description is not valid.</p>"
+    },
+    "InvalidRepositoryNameException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>At least one specified repository name is not valid.</p> <note>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</note>"
+    },
+    "InvalidSortByException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified sort by value is not valid.</p>"
+    },
+    "LastModifiedDate":{"type":"timestamp"},
+    "ListBranchesInput":{
+      "type":"structure",
+      "required":["repositoryName"],
+      "members":{
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository that contains the branches.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>An enumeration token that allows the operation to batch the results. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a list branches operation.</p>"
+    },
+    "ListBranchesOutput":{
+      "type":"structure",
+      "members":{
+        "branches":{
+          "shape":"BranchNameList",
+          "documentation":"<p>The list of branch names.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>An enumeration token that returns the batch of the results. </p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a list branches operation.</p>"
+    },
+    "ListRepositoriesInput":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.</p>"
+        },
+        "sortBy":{
+          "shape":"SortByEnum",
+          "documentation":"<p>The criteria used to sort the results of a list repositories operation.</p>"
+        },
+        "order":{
+          "shape":"OrderEnum",
+          "documentation":"<p>The order in which to sort the results of a list repositories operation.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a list repositories operation.</p>"
+    },
+    "ListRepositoriesOutput":{
+      "type":"structure",
+      "members":{
+        "repositories":{
+          "shape":"RepositoryNameIdPairList",
+          "documentation":"<p>Lists the repositories called by the list repositories operation.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a list repositories operation.</p>"
+    },
+    "MaximumRepositoryNamesExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The maximum number of allowed repository names was exceeded. Currently, this number is 25.</p>"
+    },
+    "NextToken":{"type":"string"},
+    "OrderEnum":{
+      "type":"string",
+      "enum":[
+        "ascending",
+        "descending"
+      ]
+    },
+    "RepositoryDescription":{
+      "type":"string",
+      "max":1000
+    },
+    "RepositoryDoesNotExistException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified repository does not exist.</p>"
+    },
+    "RepositoryId":{"type":"string"},
+    "RepositoryLimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>A repository resource limit was exceeded.</p>"
+    },
+    "RepositoryMetadata":{
+      "type":"structure",
+      "members":{
+        "accountId":{
+          "shape":"AccountId",
+          "documentation":"<p>The ID of the AWS account associated with the repository.</p>"
+        },
+        "repositoryId":{
+          "shape":"RepositoryId",
+          "documentation":"<p>The ID of the repository.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The repository's name.</p>"
+        },
+        "repositoryDescription":{
+          "shape":"RepositoryDescription",
+          "documentation":"<p>A comment or description about the repository.</p>"
+        },
+        "defaultBranch":{
+          "shape":"BranchName",
+          "documentation":"<p>The repository's default branch name.</p>"
+        },
+        "lastModifiedDate":{
+          "shape":"LastModifiedDate",
+          "documentation":"<p>The date and time the repository was last modified, in timestamp format.</p>"
+        },
+        "creationDate":{
+          "shape":"CreationDate",
+          "documentation":"<p>The date and time the repository was created, in timestamp format.</p>"
+        },
+        "cloneUrlHttp":{
+          "shape":"CloneUrlHttp",
+          "documentation":"<p>The URL to use for cloning the repository over HTTPS.</p>"
+        },
+        "cloneUrlSsh":{
+          "shape":"CloneUrlSsh",
+          "documentation":"<p>The URL to use for cloning the repository over SSH.</p>"
+        },
+        "Arn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the repository.</p>"
+        }
+      },
+      "documentation":"<p>Information about a repository.</p>"
+    },
+    "RepositoryMetadataList":{
+      "type":"list",
+      "member":{"shape":"RepositoryMetadata"}
+    },
+    "RepositoryName":{
+      "type":"string",
+      "min":1,
+      "max":100,
+      "pattern":"[\\\\w\\\\.-]+",
+      "documentation":"Repository name is restricted to alphanumeric characters (a-z, A-Z, 0-9), \".\", \"_\", and \"-\". Additionally, the suffix \".git\" is prohibited in a repository name."
+    },
+    "RepositoryNameExistsException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The specified repository name already exists.</p>"
+    },
+    "RepositoryNameIdPair":{
+      "type":"structure",
+      "members":{
+        "repositoryName":{"shape":"RepositoryName"},
+        "repositoryId":{
+          "shape":"RepositoryId",
+          "documentation":"<p>The ID associated with the repository name.</p>"
+        }
+      },
+      "documentation":"<p>Information about a repository name and ID.</p>"
+    },
+    "RepositoryNameIdPairList":{
+      "type":"list",
+      "member":{"shape":"RepositoryNameIdPair"}
+    },
+    "RepositoryNameList":{
+      "type":"list",
+      "member":{"shape":"RepositoryName"}
+    },
+    "RepositoryNameRequiredException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>A repository name is required but was not specified.</p>"
+    },
+    "RepositoryNamesRequiredException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>A repository names object is required but was not specified.</p>"
+    },
+    "RepositoryNotFoundList":{
+      "type":"list",
+      "member":{"shape":"RepositoryName"}
+    },
+    "SortByEnum":{
+      "type":"string",
+      "enum":[
+        "repositoryName",
+        "lastModifiedDate"
+      ]
+    },
+    "UpdateDefaultBranchInput":{
+      "type":"structure",
+      "required":[
+        "repositoryName",
+        "defaultBranchName"
+      ],
+      "members":{
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository to set or change the default branch for.</p>"
+        },
+        "defaultBranchName":{
+          "shape":"BranchName",
+          "documentation":"<p>The name of the branch to set as the default.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of an update default branch operation.</p>"
+    },
+    "UpdateRepositoryDescriptionInput":{
+      "type":"structure",
+      "required":["repositoryName"],
+      "members":{
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository to set or change the comment or description for.</p>"
+        },
+        "repositoryDescription":{
+          "shape":"RepositoryDescription",
+          "documentation":"<p>The new comment or description for the specified repository.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of an update repository description operation.</p>"
+    },
+    "UpdateRepositoryNameInput":{
+      "type":"structure",
+      "required":[
+        "oldName",
+        "newName"
+      ],
+      "members":{
+        "oldName":{"shape":"RepositoryName"},
+        "newName":{"shape":"RepositoryName"}
+      },
+      "documentation":"<p>Represents the input of an update repository description operation.</p>"
+    }
+  }
+}
