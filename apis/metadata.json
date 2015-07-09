@@ -35,6 +35,9 @@
   "codedeploy": {
     "name": "CodeDeploy"
   },
+  "codepipeline": {
+    "name": "CodePipeline"
+  },
   "cognitoidentity": {
     "prefix": "cognito-identity",
     "name": "CognitoIdentity"
