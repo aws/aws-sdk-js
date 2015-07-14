@@ -53,6 +53,9 @@
   "datapipeline": {
     "name": "DataPipeline"
   },
+  "devicefarm": {
+    "name": "DeviceFarm"
+  },
   "directconnect": {
     "name": "DirectConnect"
   },
