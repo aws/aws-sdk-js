@@ -9,6 +9,7 @@ cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatch
 cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
 cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
 dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
+dynamodbstreams = new AWS.DynamoDBStreams(AWS.util.merge(config, config.dynamodbstreams))
 ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 kinesis = new AWS.Kinesis(AWS.util.merge(config, config.kinesis))
@@ -164,7 +165,6 @@ integrationTests ->
         expect(Array.isArray(data.IdentityPoolUsages)).to.equal(true)
         done()
 
-    # TODO This error code needs to be updated when the X-Amzn-ErrorType is whitelisted.
     it 'handles errors', (done) ->
       params =
         IdentityPoolId: 'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
@@ -189,6 +189,22 @@ integrationTests ->
         noData(data)
         assertError(err, 'ResourceNotFoundException')
         matchError(err, 'Requested resource not found: Table: fake-table not found')
+        done()
+
+  describe 'AWS.DynamoDBStreams', ->
+    it 'makes a request', (done) ->
+      dynamodbstreams.listStreams (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Streams)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        StreamArn: 'fake-stream'
+      dynamodbstreams.describeStream params, (err, data) ->
+        assertError(err, 'ValidationException')
+        matchError(err, 'Invalid StreamArn')
+        noData(data)
         done()
 
   describe 'AWS.EC2', ->
