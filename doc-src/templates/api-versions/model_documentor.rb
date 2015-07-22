@@ -80,7 +80,7 @@ class MethodDocumentor
 
   attr_reader :lines
 
-  def initialize(operation_name, operation, api, klass)
+  def initialize(operation_name, operation, api, klass, examples)
     desc = documentation(operation)
     desc ||= "Calls the #{method_name(operation_name, false)} API operation."
     desc = desc.gsub(/^\s+/, '').strip
@@ -93,11 +93,19 @@ class MethodDocumentor
     @lines += shapes(api, operation['input']).map {|line| "  " + line }
 
     ## @example tag
-
     @lines << "@example Calling the #{method_name(operation_name)} operation"
     @lines << generate_example(api, klass, method_name(operation_name),
                 operation['input']).split("\n").map {|line| "  " + line }
-    @lines << ""
+    if examples
+      examples.each do |example|
+        @lines << "@example Example: #{example['title']}"
+        @lines << ""
+        @lines << "  /* #{example['description']} */"
+        @lines << ""
+        @lines << generate_shared_example(example, klass, 
+                method_name(operation_name)).split("\n").map {|line| "  " + line }
+      end
+    end
 
     ## @callback tag
 
@@ -149,6 +157,81 @@ class MethodDocumentor
     ExampleShapeVisitor.new(api).example(klass, name, input)
   end
 
+  def generate_shared_example(example, klass, name)
+    SharedExampleVisitor.new(example, klass, name).example
+  end
+
+end
+
+class SharedExampleVisitor
+  def initialize(example, klass, name)
+    @example = example
+    @klass = klass
+    @name = name
+    @comments = example['comments']
+  end
+
+  def example
+    input = visit(@example['input'], "", [], @comments['input'])
+    lines = ["var params = #{input};"]
+    lines << "#{@klass.downcase}.#{@name}(params, function(err, data) {"
+    lines << "  if (err) console.log(err, err.stack); // an error occurred"
+    lines << "  else     console.log(data);           // successful response"
+
+    if output = visit(@example['output'], "  ", [], @comments['output'])
+      lines << "  /*"
+      lines << "  data = #{output}"
+      lines << "  */"
+    end
+
+    lines << "});"
+    lines.join("\n")
+  end
+
+  def visit(value, indent, path, comments)
+    case value
+    when Hash then obj(value, indent, path, comments)
+    when Array then list(value, indent, path, comments)
+    when String then value.inspect
+    else value
+    end
+  end
+
+  def obj(value, indent, path, comments)
+    lines = ["{"]
+    value.each do |key, val|
+      path << ".#{key}"
+      comment = apply_comment(path, comments)
+      shape_val = visit(val, "#{indent}  ", path, comments)
+
+      lines << "#{indent}  #{key}: #{shape_val}, #{comment}"
+      path.pop
+    end
+    lines << "#{indent}}"
+    lines.join("\n")
+  end
+
+  def list(value, indent, path, comments)
+    lines = ["["]
+    value.each_with_index do |member, index|
+      path << "[#{index}]"
+      comment = apply_comment(path, comments)
+      shape_val = visit(member, "#{indent}  ", path, comments)
+      lines << "#{indent}  #{shape_val}, #{comment}"
+      path.pop
+    end
+    lines << "#{indent}]"
+    lines.join("\n")
+  end
+
+  def apply_comment(path, comments)
+    key = path.join().sub(/^\./, '')
+    if comments && comments[key]
+      "// #{comments[key]}"
+    else
+      ""
+    end
+  end
 end
 
 class ExampleShapeVisitor
