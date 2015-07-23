@@ -93,12 +93,9 @@ class MethodDocumentor
     @lines += shapes(api, operation['input']).map {|line| "  " + line }
 
     ## @example tag
-    @lines << "@example Calling the #{method_name(operation_name)} operation"
-    @lines << generate_example(api, klass, method_name(operation_name),
-                operation['input']).split("\n").map {|line| "  " + line }
     if examples
       examples.each do |example|
-        @lines << "@example Example: #{example['title']}"
+        @lines << "@example #{example['title']}"
         @lines << ""
         @lines << "  /* #{example['description']} */"
         @lines << ""
@@ -106,6 +103,9 @@ class MethodDocumentor
                 method_name(operation_name)).split("\n").map {|line| "  " + line }
       end
     end
+    @lines << "@example Calling the #{method_name(operation_name)} operation"
+    @lines << generate_example(api, klass, method_name(operation_name),
+                operation['input']).split("\n").map {|line| "  " + line }
 
     ## @callback tag
 
