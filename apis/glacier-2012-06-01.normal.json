@@ -49,6 +49,45 @@
       ],
       "documentation":"<p>This operation aborts a multipart upload identified by the upload ID.</p> <p>After the Abort Multipart Upload request succeeds, you cannot upload any more parts to the multipart upload or complete the multipart upload. Aborting a completed upload fails. However, aborting an already-aborted upload will succeed, for a short time. For more information about uploading a part and completing a multipart upload, see <a>UploadMultipartPart</a> and <a>CompleteMultipartUpload</a>.</p> <p>This operation is idempotent.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in Amazon Glacier</a> and <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html\">Abort Multipart Upload</a> in the <i>Amazon Glacier Developer Guide</i>. </p>"
     },
+    "AbortVaultLock":{
+      "name":"AbortVaultLock",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/{accountId}/vaults/{vaultName}/lock-policy",
+        "responseCode":204
+      },
+      "input":{
+        "shape":"AbortVaultLockInput",
+        "documentation":"<p>The input values for <code>AbortVaultLock</code>.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>Returned if a parameter of the request is incorrectly specified. </p>"
+        },
+        {
+          "shape":"MissingParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>Returned if a required header or parameter is missing from the request.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>Returned if the service cannot complete the request.</p>"
+        }
+      ],
+      "documentation":"<p>This operation aborts the vault locking process if the vault lock is not in the <code>Locked</code> state. If the vault lock is in the <code>Locked</code> state when this operation is requested, the operation returns an <code>AccessDeniedException</code> error. Aborting the vault locking process removes the vault lock policy from the specified vault. </p> <p>A vault lock is put into the <code>InProgress</code> state by calling <a>InitiateVaultLock</a>. A vault lock is put into the <code>Locked</code> state by calling <a>CompleteVaultLock</a>. You can get the state of a vault lock by calling <a>GetVaultLock</a>. For more information about the vault locking process, see <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html\">Amazon Glacier Vault Lock</a>. For more information about vault lock policies, see <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html\">Amazon Glacier Access Control with Vault Lock Policies</a>. </p> <p>This operation is idempotent. You can successfully invoke this operation multiple times, if the vault lock is in the <code>InProgress</code> state or if there is no policy associated with the vault.</p>"
+    },
     "AddTagsToVault":{
       "name":"AddTagsToVault",
       "http":{
@@ -58,7 +97,7 @@
       },
       "input":{
         "shape":"AddTagsToVaultInput",
-        "documentation":"<p>The input value for <code>AddTagsToVault</code>.</p>"
+        "documentation":"<p>The input values for <code>AddTagsToVault</code>.</p>"
       },
       "errors":[
         {
@@ -136,6 +175,45 @@
         }
       ],
       "documentation":"<p>You call this operation to inform Amazon Glacier that all the archive parts have been uploaded and that Amazon Glacier can now assemble the archive from the uploaded parts. After assembling and saving the archive to the vault, Amazon Glacier returns the URI path of the newly created archive resource. Using the URI path, you can then access the archive. After you upload an archive, you should save the archive ID returned to retrieve the archive at a later point. You can also get the vault inventory to obtain a list of archive IDs in a vault. For more information, see <a>InitiateJob</a>.</p> <p>In the request, you must include the computed SHA256 tree hash of the entire archive you have uploaded. For information about computing a SHA256 tree hash, see <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing Checksums</a>. On the server side, Amazon Glacier also constructs the SHA256 tree hash of the assembled archive. If the values match, Amazon Glacier saves the archive to the vault; otherwise, it returns an error, and the operation fails. The <a>ListParts</a> operation returns a list of parts uploaded for a specific multipart upload. It includes checksum information for each uploaded part that can be used to debug a bad checksum issue.</p> <p>Additionally, Amazon Glacier also checks for any missing content ranges when assembling the archive, if missing content ranges are found, Amazon Glacier returns an error and the operation fails. </p> <p>Complete Multipart Upload is an idempotent operation. After your first successful complete multipart upload, if you call the operation again within a short period, the operation will succeed and return the same archive ID. This is useful in the event you experience a network issue that causes an aborted connection or receive a 500 server error, in which case you can repeat your Complete Multipart Upload request and get the same archive ID without creating duplicate archives. Note, however, that after the multipart upload completes, you cannot call the List Parts operation and the multipart upload will not appear in List Multipart Uploads response, even if idempotent complete is possible.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in Parts (Multipart Upload)</a> and <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html\">Complete Multipart Upload</a> in the <i>Amazon Glacier Developer Guide</i>. </p>"
+    },
+    "CompleteVaultLock":{
+      "name":"CompleteVaultLock",
+      "http":{
+        "method":"POST",
+        "requestUri":"/{accountId}/vaults/{vaultName}/lock-policy/{lockId}",
+        "responseCode":204
+      },
+      "input":{
+        "shape":"CompleteVaultLockInput",
+        "documentation":"<p>The input values for <code>CompleteVaultLock</code>.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>Returned if a parameter of the request is incorrectly specified. </p>"
+        },
+        {
+          "shape":"MissingParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>Returned if a required header or parameter is missing from the request.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>Returned if the service cannot complete the request.</p>"
+        }
+      ],
+      "documentation":"<p>This operation completes the vault locking process by transitioning the vault lock from the <code>InProgress</code> state to the <code>Locked</code> state, which causes the vault lock policy to become unchangeable. A vault lock is put into the <code>InProgress</code> state by calling <a>InitiateVaultLock</a>. You can obtain the state of the vault lock by calling <a>GetVaultLock</a>. For more information about the vault locking process, <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html\">Amazon Glacier Vault Lock</a>. </p> <p>This operation is idempotent. This request is always successful if the vault lock is in the <code>Locked</code> state and the provided lock ID matches the lock ID originally used to lock the vault.</p> <p>If an invalid lock ID is passed in the request when the vault lock is in the <code>Locked</code> state, the operation returns an <code>AccessDeniedException</code> error. If an invalid lock ID is passed in the request when the vault lock is in the <code>InProgress</code> state, the operation throws an <code>InvalidParameter</code> error.</p>"
     },
     "CreateVault":{
       "name":"CreateVault",
@@ -540,6 +618,48 @@
       ],
       "documentation":"<p>This operation retrieves the <code>access-policy</code> subresource set on the vault; for more information on setting this subresource, see <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html\">Set Vault Access Policy (PUT access-policy)</a>. If there is no access policy set on the vault, the operation returns a <code>404 Not found</code> error. For more information about vault access policies, see <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html\">Amazon Glacier Access Control with Vault Access Policies</a>.</p>"
     },
+    "GetVaultLock":{
+      "name":"GetVaultLock",
+      "http":{
+        "method":"GET",
+        "requestUri":"/{accountId}/vaults/{vaultName}/lock-policy"
+      },
+      "input":{
+        "shape":"GetVaultLockInput",
+        "documentation":"<p>The input values for <code>GetVaultLock</code>.</p>"
+      },
+      "output":{
+        "shape":"GetVaultLockOutput",
+        "documentation":"<p>Contains the Amazon Glacier response to your request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>Returned if a parameter of the request is incorrectly specified. </p>"
+        },
+        {
+          "shape":"MissingParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>Returned if a required header or parameter is missing from the request.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>Returned if the service cannot complete the request.</p>"
+        }
+      ],
+      "documentation":"<p>This operation retrieves the following attributes from the <code>lock-policy</code> subresource set on the specified vault: <ul> <li> <p>The vault lock policy set on the vault.</p> </li> <li> <p>The state of the vault lock, which is either <code>InProgess</code> or <code>Locked</code>.</p> </li> <li> <p>When the lock ID expires. The lock ID is used to complete the vault locking process.</p> </li> <li> <p>When the vault lock was initiated and put into the <code>InProgress</code> state.</p> </li> </ul> </p> <p>A vault lock is put into the <code>InProgress</code> state by calling <a>InitiateVaultLock</a>. A vault lock is put into the <code>Locked</code> state by calling <a>CompleteVaultLock</a>. You can abort the vault locking process by calling <a>AbortVaultLock</a>. For more information about the vault locking process, <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html\">Amazon Glacier Vault Lock</a>. </p> <p>If there is no vault lock policy set on the vault, the operation returns a <code>404 Not found</code> error. For more information about vault lock policies, <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html\">Amazon Glacier Access Control with Vault Lock Policies</a>. </p>"
+    },
     "GetVaultNotifications":{
       "name":"GetVaultNotifications",
       "http":{
@@ -673,6 +793,49 @@
         }
       ],
       "documentation":"<p>This operation initiates a multipart upload. Amazon Glacier creates a multipart upload resource and returns its ID in the response. The multipart upload ID is used in subsequent requests to upload parts of an archive (see <a>UploadMultipartPart</a>).</p> <p>When you initiate a multipart upload, you specify the part size in number of bytes. The part size must be a megabyte (1024 KB) multiplied by a power of 2-for example, 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB.</p> <p>Every part you upload to this resource (see <a>UploadMultipartPart</a>), except the last one, must have the same size. The last one can be the same size or smaller. For example, suppose you want to upload a 16.2 MB file. If you initiate the multipart upload with a part size of 4 MB, you will upload four parts of 4 MB each and one part of 0.2 MB. </p> <note><p>You don't need to know the size of the archive when you start a multipart upload because Amazon Glacier does not require you to specify the overall archive size.</p></note> <p>After you complete the multipart upload, Amazon Glacier removes the multipart upload resource referenced by the ID. Amazon Glacier also removes the multipart upload resource if you cancel the multipart upload or it may be removed if there is no activity for a period of 24 hours.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and underlying REST API, go to <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in Parts (Multipart Upload)</a> and <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html\">Initiate Multipart Upload</a> in the <i>Amazon Glacier Developer Guide</i>.</p>"
+    },
+    "InitiateVaultLock":{
+      "name":"InitiateVaultLock",
+      "http":{
+        "method":"POST",
+        "requestUri":"/{accountId}/vaults/{vaultName}/lock-policy",
+        "responseCode":201
+      },
+      "input":{
+        "shape":"InitiateVaultLockInput",
+        "documentation":"<p>The input values for <code>InitiateVaultLock</code>.</p>"
+      },
+      "output":{
+        "shape":"InitiateVaultLockOutput",
+        "documentation":"<p>Contains the Amazon Glacier response to your request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>Returned if a parameter of the request is incorrectly specified. </p>"
+        },
+        {
+          "shape":"MissingParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>Returned if a required header or parameter is missing from the request.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>Returned if the service cannot complete the request.</p>"
+        }
+      ],
+      "documentation":"<p>This operation initiates the vault locking process by doing the following: <ul> <li> <p>Installing a vault lock policy on the specified vault.</p> </li> <li> <p>Setting the lock state of vault lock to <code>InProgress</code>.</p> </li> <li> <p>Returning a lock ID, which is used to complete the vault locking process. </p> </li> </ul> </p> <p>You can set one vault lock policy for each vault and this policy can be up to 20 KB in size. For more information about vault lock policies, see <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html\">Amazon Glacier Access Control with Vault Lock Policies</a>. </p> <p>You must complete the vault locking process within 24 hours after the vault lock enters the <code>InProgress</code> state. After the 24 hour window ends, the lock ID expires, the vault automatically exits the <code>InProgress</code> state, and the vault lock policy is removed from the vault. You call <a>CompleteVaultLock</a> to complete the vault locking process by setting the state of the vault lock to <code>Locked</code>. </p> <p>After a vault lock is in the <code>Locked</code> state, you cannot initiate a new vault lock for the vault.</p> <p>You can abort the vault locking process by calling <a>AbortVaultLock</a>. You can get the state of the vault lock by calling <a>GetVaultLock</a>. For more information about the vault locking process, <a href=\"http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html\">Amazon Glacier Vault Lock</a>.</p> <p>If this operation is called when the vault lock is in the <code>InProgress</code> state, the operation returns an <code>AccessDeniedException</code> error. When the vault lock is in the <code>InProgress</code> state you must call <a>AbortVaultLock</a> before you can initiate a new vault lock policy. </p>"
     },
     "ListJobs":{
       "name":"ListJobs",
@@ -1163,6 +1326,28 @@
         "uploadId"
       ]
     },
+    "AbortVaultLockInput":{
+      "type":"structure",
+      "members":{
+        "accountId":{
+          "shape":"string",
+          "location":"uri",
+          "locationName":"accountId",
+          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (apos-apos) in the ID.</p>"
+        },
+        "vaultName":{
+          "shape":"string",
+          "location":"uri",
+          "locationName":"vaultName",
+          "documentation":"<p>The name of the vault.</p>"
+        }
+      },
+      "documentation":"<p>The input values for <code>AbortVaultLock</code>.</p>",
+      "required":[
+        "accountId",
+        "vaultName"
+      ]
+    },
     "ActionCode":{
       "type":"string",
       "enum":[
@@ -1190,7 +1375,7 @@
           "documentation":"<p>The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string.</p>"
         }
       },
-      "documentation":"<p>The input value for <code>AddTagsToVault</code>.</p>",
+      "documentation":"<p>The input values for <code>AddTagsToVault</code>.</p>",
       "required":[
         "accountId",
         "vaultName"
@@ -1261,6 +1446,35 @@
         "uploadId"
       ]
     },
+    "CompleteVaultLockInput":{
+      "type":"structure",
+      "members":{
+        "accountId":{
+          "shape":"string",
+          "location":"uri",
+          "locationName":"accountId",
+          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (apos-apos) in the ID.</p>"
+        },
+        "vaultName":{
+          "shape":"string",
+          "location":"uri",
+          "locationName":"vaultName",
+          "documentation":"<p>The name of the vault.</p>"
+        },
+        "lockId":{
+          "shape":"string",
+          "location":"uri",
+          "locationName":"lockId",
+          "documentation":"<p>The <code>lockId</code> value is the lock ID obtained from a <a>InitiateVaultLock</a> request.</p>"
+        }
+      },
+      "documentation":"<p>The input values for <code>CompleteVaultLock</code>.</p>",
+      "required":[
+        "accountId",
+        "vaultName",
+        "lockId"
+      ]
+    },
     "CreateVaultInput":{
       "type":"structure",
       "members":{
@@ -1268,7 +1482,7 @@
           "shape":"string",
           "location":"uri",
           "locationName":"accountId",
-          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include any hyphens (apos-apos) in the ID.</p>"
+          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (apos-apos) in the ID.</p>"
         },
         "vaultName":{
           "shape":"string",
@@ -1507,7 +1721,7 @@
           "shape":"string",
           "location":"uri",
           "locationName":"accountId",
-          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include any hyphens (apos-apos) in the ID. </p>"
+          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (apos-apos) in the ID. </p>"
         }
       },
       "documentation":"<p>Input for GetDataRetrievalPolicy.</p>",
@@ -1636,6 +1850,50 @@
       },
       "documentation":"<p>Output for GetVaultAccessPolicy.</p>",
       "payload":"policy"
+    },
+    "GetVaultLockInput":{
+      "type":"structure",
+      "members":{
+        "accountId":{
+          "shape":"string",
+          "location":"uri",
+          "locationName":"accountId",
+          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (apos-apos) in the ID.</p>"
+        },
+        "vaultName":{
+          "shape":"string",
+          "location":"uri",
+          "locationName":"vaultName",
+          "documentation":"<p>The name of the vault.</p>"
+        }
+      },
+      "documentation":"<p>The input values for <code>GetVaultLock</code>.</p>",
+      "required":[
+        "accountId",
+        "vaultName"
+      ]
+    },
+    "GetVaultLockOutput":{
+      "type":"structure",
+      "members":{
+        "Policy":{
+          "shape":"string",
+          "documentation":"<p>The vault lock policy as a JSON string, which uses \"\\\" as an escape character.</p>"
+        },
+        "State":{
+          "shape":"string",
+          "documentation":"<p>The state of the vault lock. <code>InProgress</code> or <code>Locked</code>.</p>"
+        },
+        "ExpirationDate":{
+          "shape":"string",
+          "documentation":"<p>The UTC date and time at which the lock ID expires. This value can be <code>null</code> if the vault lock is in a <code>Locked</code> state.</p>"
+        },
+        "CreationDate":{
+          "shape":"string",
+          "documentation":"<p>The UTC date and time at which the vault lock was put into the <code>InProgress</code> state.</p>"
+        }
+      },
+      "documentation":"<p>Contains the Amazon Glacier response to your request.</p>"
     },
     "GetVaultNotificationsInput":{
       "type":"structure",
@@ -1840,6 +2098,45 @@
         }
       },
       "documentation":"<p>The Amazon Glacier response to your request.</p>"
+    },
+    "InitiateVaultLockInput":{
+      "type":"structure",
+      "members":{
+        "accountId":{
+          "shape":"string",
+          "location":"uri",
+          "locationName":"accountId",
+          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (apos-apos) in the ID.</p>"
+        },
+        "vaultName":{
+          "shape":"string",
+          "location":"uri",
+          "locationName":"vaultName",
+          "documentation":"<p>The name of the vault.</p>"
+        },
+        "policy":{
+          "shape":"VaultLockPolicy",
+          "documentation":"<p>The vault lock policy as a JSON string, which uses \"\\\" as an escape character.</p>"
+        }
+      },
+      "documentation":"<p>The input values for <code>InitiateVaultLock</code>.</p>",
+      "required":[
+        "accountId",
+        "vaultName"
+      ],
+      "payload":"policy"
+    },
+    "InitiateVaultLockOutput":{
+      "type":"structure",
+      "members":{
+        "lockId":{
+          "shape":"string",
+          "location":"header",
+          "locationName":"x-amz-lock-id",
+          "documentation":"<p> The lock ID, which is used to complete the vault locking process.</p>"
+        }
+      },
+      "documentation":"<p>Contains the Amazon Glacier response to your request.</p>"
     },
     "InvalidParameterValueException":{
       "type":"structure",
@@ -2183,7 +2480,7 @@
           "shape":"string",
           "location":"uri",
           "locationName":"accountId",
-          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include any hyphens (apos-apos) in the ID.</p>"
+          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (apos-apos) in the ID.</p>"
         },
         "marker":{
           "shape":"string",
@@ -2359,7 +2656,7 @@
           "shape":"string",
           "location":"uri",
           "locationName":"accountId",
-          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include any hyphens (apos-apos) in the ID.</p>"
+          "documentation":"<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single apos<code>-</code>apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens (apos-apos) in the ID.</p>"
         },
         "Policy":{
           "shape":"DataRetrievalPolicy",
@@ -2588,6 +2885,16 @@
       "type":"list",
       "member":{"shape":"DescribeVaultOutput"}
     },
+    "VaultLockPolicy":{
+      "type":"structure",
+      "members":{
+        "Policy":{
+          "shape":"string",
+          "documentation":"<p>The vault lock policy.</p>"
+        }
+      },
+      "documentation":"<p>Contains the vault lock policy. </p>"
+    },
     "VaultNotificationConfig":{
       "type":"structure",
       "members":{
@@ -2606,5 +2913,7 @@
     "httpstatus":{"type":"integer"},
     "long":{"type":"long"},
     "string":{"type":"string"}
+  },
+  "examples":{
   }
 }
