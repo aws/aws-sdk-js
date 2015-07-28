@@ -163,8 +163,9 @@ AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY, AMAZON_SESSION_TOKEN (optional)
 #### Credentials from Disk
 
 You can also load configuration and credentials from disk using
-`AWS.config.loadFromPath` by passing a file to a JSON document
-containing the configuration data. For example, if you had a file
+`AWS.config.loadFromPath` by passing a path to a JSON document
+containing the configuration data. The path specified is relative
+to your process's current working directory. For example, if you had a file
 named 'config.json' with the contents:
 
 ```javascript
