@@ -976,7 +976,7 @@
         },
         "PartNumber":{
           "shape":"PartNumber",
-          "documentation":"Part number that identifies the part."
+          "documentation":"Part number that identifies the part. This is a positive integer between 1 and 10,000."
         }
       }
     },
@@ -1833,7 +1833,10 @@
         "s3:ObjectCreated:Put",
         "s3:ObjectCreated:Post",
         "s3:ObjectCreated:Copy",
-        "s3:ObjectCreated:CompleteMultipartUpload"
+        "s3:ObjectCreated:CompleteMultipartUpload",
+        "s3:ObjectRemoved:*",
+        "s3:ObjectRemoved:Delete",
+        "s3:ObjectRemoved:DeleteMarkerCreated"
       ],
       "documentation":"Bucket event for which to send notifications."
     },
@@ -2272,6 +2275,11 @@
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
           "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
         },
+        "StorageClass":{
+          "shape":"StorageClass",
+          "location":"header",
+          "locationName":"x-amz-storage-class"
+        },
         "RequestCharged":{
           "shape":"RequestCharged",
           "location":"header",
@@ -2630,6 +2638,11 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
           "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
+        },
+        "StorageClass":{
+          "shape":"StorageClass",
+          "location":"header",
+          "locationName":"x-amz-storage-class"
         },
         "RequestCharged":{
           "shape":"RequestCharged",
@@ -3438,7 +3451,7 @@
       "members":{
         "PartNumber":{
           "shape":"PartNumber",
-          "documentation":"Part number identifying the part."
+          "documentation":"Part number identifying the part. This is a positive integer between 1 and 10,000."
         },
         "LastModified":{
           "shape":"LastModified",
@@ -4395,14 +4408,18 @@
     },
     "ServerSideEncryption":{
       "type":"string",
-      "enum":["AES256"]
+      "enum":[
+        "AES256",
+        "aws:kms"
+      ]
     },
     "Size":{"type":"integer"},
     "StorageClass":{
       "type":"string",
       "enum":[
         "STANDARD",
-        "REDUCED_REDUNDANCY"
+        "REDUCED_REDUNDANCY",
+        "LT"
       ]
     },
     "Suffix":{"type":"string"},
@@ -4634,7 +4651,7 @@
           "shape":"PartNumber",
           "location":"querystring",
           "locationName":"partNumber",
-          "documentation":"Part number of part being copied."
+          "documentation":"Part number of part being copied. This is a positive integer between 1 and 10,000."
         },
         "UploadId":{
           "shape":"MultipartUploadId",
@@ -4763,7 +4780,7 @@
           "shape":"PartNumber",
           "location":"querystring",
           "locationName":"partNumber",
-          "documentation":"Part number of part being uploaded."
+          "documentation":"Part number of part being uploaded. This is a positive integer between 1 and 10,000."
         },
         "UploadId":{
           "shape":"MultipartUploadId",
@@ -4823,5 +4840,7 @@
       }
     },
     "WebsiteRedirectLocation":{"type":"string"}
+  },
+  "examples":{
   }
 }
