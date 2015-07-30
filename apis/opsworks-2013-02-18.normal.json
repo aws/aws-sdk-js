@@ -9,7 +9,7 @@
     "targetPrefix":"OpsWorks_20130218",
     "protocol":"json"
   },
-  "documentation":"<fullname>AWS OpsWorks</fullname> <p>Welcome to the <i>AWS OpsWorks API Reference</i>. This guide provides descriptions, syntax, and usage examples about AWS OpsWorks actions and data types, including common parameters and error codes. </p> <p>AWS OpsWorks is an application management service that provides an integrated experience for overseeing the complete application lifecycle. For information about this product, go to the <a href=\"http://aws.amazon.com/opsworks/\">AWS OpsWorks</a> details page. </p> <p> <b>SDKs and CLI</b> </p> <p>The most common way to use the AWS OpsWorks API is by using the AWS Command Line Interface (CLI) or by using one of the AWS SDKs to implement applications in your preferred language. For more information, see:</p> <ul> <li> <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html\">AWS CLI</a> </li> <li> <a href=\"http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html\">AWS SDK for Java</a> </li> <li> <a href=\"http://docs.aws.amazon.com/sdkfornet/latest/apidocs/html/N_Amazon_OpsWorks.htm\">AWS SDK for .NET</a> </li> <li> <a href=\"http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.OpsWorks.OpsWorksClient.html\">AWS SDK for PHP 2</a> </li> <li> <a href=\"http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/OpsWorks/Client.html\">AWS SDK for Ruby</a> </li> <li> <a href=\"http://aws.amazon.com/documentation/sdkforjavascript/\">AWS SDK for Node.js</a> </li> <li> <a href=\"http://docs.pythonboto.org/en/latest/ref/opsworks.html\">AWS SDK for Python(Boto)</a> </li> </ul> <p> <b>Endpoints</b> </p> <p>AWS OpsWorks supports only one endpoint, opsworks.us-east-1.amazonaws.com (HTTPS), so you must connect to that endpoint. You can then use the API to direct AWS OpsWorks to create stacks in any AWS Region.</p> <p> <b>Chef Versions</b> </p> <p>When you call <a>CreateStack</a>, <a>CloneStack</a>, or <a>UpdateStack</a> we recommend you use the <code>ConfigurationManager</code> parameter to specify the Chef version, 0.9, 11.4, or 11.10. The default value is currently 11.10. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-chef11.html\">Chef Versions</a>.</p> <note>You can still specify Chef 0.9 for your stack, but new features are not available for Chef 0.9 stacks, and support is scheduled to end on July 24, 2014. We do not recommend using Chef 0.9 for new stacks, and we recommend migrating your existing Chef 0.9 stacks to Chef 11.10 as soon as possible.</note>",
+  "documentation":"<fullname>AWS OpsWorks</fullname> <p>Welcome to the <i>AWS OpsWorks API Reference</i>. This guide provides descriptions, syntax, and usage examples about AWS OpsWorks actions and data types, including common parameters and error codes. </p> <p>AWS OpsWorks is an application management service that provides an integrated experience for overseeing the complete application lifecycle. For information about this product, go to the <a href=\"http://aws.amazon.com/opsworks/\">AWS OpsWorks</a> details page. </p> <p> <b>SDKs and CLI</b> </p> <p>The most common way to use the AWS OpsWorks API is by using the AWS Command Line Interface (CLI) or by using one of the AWS SDKs to implement applications in your preferred language. For more information, see:</p> <ul> <li> <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html\">AWS CLI</a> </li> <li> <a href=\"http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html\">AWS SDK for Java</a> </li> <li> <a href=\"http://docs.aws.amazon.com/sdkfornet/latest/apidocs/html/N_Amazon_OpsWorks.htm\">AWS SDK for .NET</a> </li> <li> <a href=\"http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.OpsWorks.OpsWorksClient.html\">AWS SDK for PHP 2</a> </li> <li> <a href=\"http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/OpsWorks/Client.html\">AWS SDK for Ruby</a> </li> <li> <a href=\"http://aws.amazon.com/documentation/sdkforjavascript/\">AWS SDK for Node.js</a> </li> <li> <a href=\"http://docs.pythonboto.org/en/latest/ref/opsworks.html\">AWS SDK for Python(Boto)</a> </li> </ul> <p> <b>Endpoints</b> </p> <p>AWS OpsWorks supports only one endpoint, opsworks.us-east-1.amazonaws.com (HTTPS), so you must connect to that endpoint. You can then use the API to direct AWS OpsWorks to create stacks in any AWS Region.</p> <p> <b>Chef Versions</b> </p> <p>When you call <a>CreateStack</a>, <a>CloneStack</a>, or <a>UpdateStack</a> we recommend you use the <code>ConfigurationManager</code> parameter to specify the Chef version. The recommended value for Linux stacks, which is also the default value, is currently 11.10. Windows stacks use Chef 12.2. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-chef11.html\">Chef Versions</a>.</p> <note>You can also specify Chef 11.4 or Chef 0.9 for your Linux stack. However, Chef 0.9 has been deprecated. We do not recommend using Chef 0.9 for new stacks, and we recommend migrating your existing Chef 0.9 stacks to Chef 11.10 as soon as possible.</note>",
   "operations":{
     "AssignInstance":{
       "name":"AssignInstance",
@@ -30,7 +30,7 @@
           "documentation":"<p>Indicates that a resource was not found.</p>"
         }
       ],
-      "documentation":"<p>Assign a registered instance to a layer.</p> <ul> <li>You can assign registered on-premises instances to any layer type.</li> <li>You can assign registered Amazon EC2 instances only to custom layers.</li> <li>You cannot use this action with instances that were created with AWS OpsWorks.</li> </ul> <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
+      "documentation":"<p>Assign a registered instance to a layer.</p> <ul> <li>You can assign registered on-premises instances to any layer type.</li> <li>You can assign registered Amazon EC2 instances only to custom layers.</li> <li>You cannot use this action with instances that were created with AWS OpsWorks.</li> </ul> <p><b>Required Permissions</b>: To use this action, an AWS Identity and Access Management (IAM) user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
     },
     "AssignVolume":{
       "name":"AssignVolume",
@@ -365,6 +365,27 @@
       ],
       "documentation":"<p>Deletes a user profile.</p> <p><b>Required Permissions</b>: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
     },
+    "DeregisterEcsCluster":{
+      "name":"DeregisterEcsCluster",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeregisterEcsClusterRequest"},
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true,
+          "documentation":"<p>Indicates that a request was invalid.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true,
+          "documentation":"<p>Indicates that a resource was not found.</p>"
+        }
+      ],
+      "documentation":"<p>Deregisters a specified Amazon ECS cluster from a stack. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete\"> Resource Management</a>.</p> <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\"></a>.</p>"
+    },
     "DeregisterElasticIp":{
       "name":"DeregisterElasticIp",
       "http":{
@@ -548,6 +569,31 @@
         }
       ],
       "documentation":"<p>Requests a description of a specified set of deployments.</p> <note> <p>You must specify at least one of the parameters.</p> </note> <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
+    },
+    "DescribeEcsClusters":{
+      "name":"DescribeEcsClusters",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeEcsClustersRequest"},
+      "output":{
+        "shape":"DescribeEcsClustersResult",
+        "documentation":"<p>Contains the response to a <code>DescribeEcsClusters</code> request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true,
+          "documentation":"<p>Indicates that a request was invalid.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true,
+          "documentation":"<p>Indicates that a resource was not found.</p>"
+        }
+      ],
+      "documentation":"<p>Describes Amazon ECS clusters that are registered with a stack. If you specify only a stack ID, you can use the <code>MaxResults</code> and <code>NextToken</code> parameters to paginate the response. However, AWS OpsWorks currently supports only one cluster per layer, so the result set has a maximum of one element.</p> <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permission. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
     },
     "DescribeElasticIps":{
       "name":"DescribeElasticIps",
@@ -1043,6 +1089,31 @@
         }
       ],
       "documentation":"<p>Reboots a specified instance. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html\">Starting, Stopping, and Rebooting Instances</a>.</p> <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
+    },
+    "RegisterEcsCluster":{
+      "name":"RegisterEcsCluster",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RegisterEcsClusterRequest"},
+      "output":{
+        "shape":"RegisterEcsClusterResult",
+        "documentation":"<p>Contains the response to a <code>RegisterEcsCluster</code> request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true,
+          "documentation":"<p>Indicates that a request was invalid.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true,
+          "documentation":"<p>Indicates that a resource was not found.</p>"
+        }
+      ],
+      "documentation":"<p>Registers a specified Amazon ECS cluster with a stack. You can register only one cluster with a stack. A cluster can be registered with only one stack. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html\"> Resource Management</a>.</p> <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\"> Managing User Permissions</a>.</p>"
     },
     "RegisterElasticIp":{
       "name":"RegisterElasticIp",
@@ -1605,12 +1676,14 @@
       "enum":[
         "DocumentRoot",
         "RailsEnv",
-        "AutoBundleOnDeploy"
+        "AutoBundleOnDeploy",
+        "AwsFlowRubySettings"
       ]
     },
     "AppType":{
       "type":"string",
       "enum":[
+        "aws-flow-ruby",
         "java",
         "rails",
         "php",
@@ -1810,11 +1883,11 @@
         },
         "DefaultInstanceProfileArn":{
           "shape":"String",
-          "documentation":"<p>The ARN of an IAM profile that is the default profile for all of the stack's EC2 instances. For more information about IAM ARNs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of an IAM profile that is the default profile for all of the stack's EC2 instances. For more information about IAM ARNs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>"
         },
         "DefaultOs":{
           "shape":"String",
-          "documentation":"<p>The stack's operating system, which must be set to one of the following.</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</li> </ul> <p>The default option is the parent stack's operating system. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p> <note>You can specify a different Linux operating system for the cloned stack, but you cannot change from Linux to Windows or Windows to Linux.</note>"
+          "documentation":"<p>The stack's operating system, which must be set to one of the following.</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Red Hat Enterprise Linux 7</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</li> </ul> <p>The default option is the parent stack's operating system. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p> <note>You can specify a different Linux operating system for the cloned stack, but you cannot change from Linux to Windows or Windows to Linux.</note>"
         },
         "HostnameTheme":{
           "shape":"String",
@@ -1846,7 +1919,7 @@
         },
         "UseOpsworksSecurityGroups":{
           "shape":"Boolean",
-          "documentation":"<p>Whether to associate the AWS OpsWorks built-in security groups with the stack's layers.</p> <p>AWS OpsWorks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default. With <code>UseOpsworksSecurityGroups</code> you can instead provide your own custom security groups. <code>UseOpsworksSecurityGroups</code> has the following settings: </p> <ul> <li>True - AWS OpsWorks automatically associates the appropriate built-in security group with each layer (default setting). You can associate additional security groups with a layer after you create it but you cannot delete the built-in security group. </li> <li>False - AWS OpsWorks does not associate built-in security groups with layers. You must create appropriate EC2 security groups and associate a security group with each layer that you create. However, you can still manually associate a built-in security group with a layer on creation; custom security groups are required only for those layers that need custom settings. </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html\">Create a New Stack</a>.</p>"
+          "documentation":"<p>Whether to associate the AWS OpsWorks built-in security groups with the stack's layers.</p> <p>AWS OpsWorks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default. With <code>UseOpsworksSecurityGroups</code> you can instead provide your own custom security groups. <code>UseOpsworksSecurityGroups</code> has the following settings: </p> <ul> <li>True - AWS OpsWorks automatically associates the appropriate built-in security group with each layer (default setting). You can associate additional security groups with a layer after you create it but you cannot delete the built-in security group. </li> <li>False - AWS OpsWorks does not associate built-in security groups with layers. You must create appropriate Amazon Elastic Compute Cloud (Amazon EC2) security groups and associate a security group with each layer that you create. However, you can still manually associate a built-in security group with a layer on creation; custom security groups are required only for those layers that need custom settings. </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html\">Create a New Stack</a>.</p>"
         },
         "CustomCookbooksSource":{"shape":"Source"},
         "DefaultSshKeyName":{
@@ -2072,7 +2145,7 @@
         },
         "Os":{
           "shape":"String",
-          "documentation":"<p>The instance's operating system, which must be set to one of the following.</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>.</li> </ul> <p>For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p> <p>The default option is the current Amazon Linux version. If you set this parameter to <code>Custom</code>, you must use the <a>CreateInstance</a> action's AmiId parameter to specify the custom AMI that you want to use. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">Operating Systems</a>For more information on how to use custom AMIs with AWS OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</p>"
+          "documentation":"<p>The instance's operating system, which must be set to one of the following.</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Red Hat Enterprise Linux 7</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>.</li> </ul> <p>For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p> <p>The default option is the current Amazon Linux version. If you set this parameter to <code>Custom</code>, you must use the <a>CreateInstance</a> action's AmiId parameter to specify the custom AMI that you want to use. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">Operating Systems</a>For more information on how to use custom AMIs with AWS OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</p>"
         },
         "AmiId":{
           "shape":"String",
@@ -2153,15 +2226,19 @@
         },
         "Shortname":{
           "shape":"String",
-          "documentation":"<p>For custom layers only, use this parameter to specify the layer's short name, which is used internally by AWS OpsWorks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters, which are limited to the alphanumeric characters, '-', '_', and '.'.</p> <p>The built-in layers' short names are defined by AWS OpsWorks. For more information, see the <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html\">Layer Reference</a></p>"
+          "documentation":"<p>For custom layers only, use this parameter to specify the layer's short name, which is used internally by AWS OpsWorks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters, which are limited to the alphanumeric characters, '-', '_', and '.'.</p> <p>The built-in layers' short names are defined by AWS OpsWorks. For more information, see the <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html\">Layer Reference</a>.</p>"
         },
         "Attributes":{
           "shape":"LayerAttributes",
-          "documentation":"<p>One or more user-defined key/value pairs to be added to the stack attributes.</p>"
+          "documentation":"<p>One or more user-defined key-value pairs to be added to the stack attributes.</p> <p>To create a cluster layer, set the <code>EcsClusterArn</code> attribute to the cluster's ARN.</p>"
         },
         "CustomInstanceProfileArn":{
           "shape":"String",
-          "documentation":"<p>The ARN of an IAM profile that to be used for the layer's EC2 instances. For more information about IAM ARNs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>"
+          "documentation":"<p>The ARN of an IAM profile to be used for the layer's EC2 instances. For more information about IAM ARNs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>"
+        },
+        "CustomJson":{
+          "shape":"String",
+          "documentation":"<p>A JSON-formatted string containing custom stack configuration and deployment attributes to be installed on the layer's instances. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html\"> Using Custom JSON</a>. </p>"
         },
         "CustomSecurityGroupIds":{
           "shape":"Strings",
@@ -2169,7 +2246,7 @@
         },
         "Packages":{
           "shape":"Strings",
-          "documentation":"<p>An array of <code>Package</code> objects that describe the layer packages.</p>"
+          "documentation":"<p>An array of <code>Package</code> objects that describes the layer packages.</p>"
         },
         "VolumeConfigurations":{
           "shape":"VolumeConfigurations",
@@ -2193,7 +2270,7 @@
         },
         "InstallUpdatesOnBoot":{
           "shape":"Boolean",
-          "documentation":"<p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>. To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances. </p> <note> <p>We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.</p> </note>"
+          "documentation":"<p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>. To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or by manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances. </p> <note> <p>To ensure that your instances have the latest security updates, we strongly recommend using the default value of <code>true</code>.</p> </note>"
         },
         "UseEbsOptimizedInstances":{
           "shape":"Boolean",
@@ -2201,7 +2278,7 @@
         },
         "LifecycleEventConfiguration":{
           "shape":"LifecycleEventConfiguration",
-          "documentation":"<p>A LifeCycleEventConfiguration object that you can use to configure the Shutdown event to specify an execution timeout and enable or disable Elastic Load Balancer connection draining.</p>"
+          "documentation":"<p>A <code>LifeCycleEventConfiguration</code> object that you can use to configure the Shutdown event to specify an execution timeout and enable or disable Elastic Load Balancer connection draining.</p>"
         }
       }
     },
@@ -2250,7 +2327,7 @@
         },
         "DefaultOs":{
           "shape":"String",
-          "documentation":"<p>The stack's default operating system, which is installed on every instance unless you specify a different operating system when you create the instance. You can specify one of the following.</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>. You specify the custom AMI you want to use when you create instances. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\"> Using Custom AMIs</a>.</li> </ul> <p>The default option is the current Amazon Linux version. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p>"
+          "documentation":"<p>The stack's default operating system, which is installed on every instance unless you specify a different operating system when you create the instance. You can specify one of the following.</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Red Hat Enterprise Linux 7</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>. You specify the custom AMI you want to use when you create instances. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\"> Using Custom AMIs</a>.</li> </ul> <p>The default option is the current Amazon Linux version. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p>"
         },
         "HostnameTheme":{
           "shape":"String",
@@ -2519,6 +2596,16 @@
       "type":"list",
       "member":{"shape":"Deployment"}
     },
+    "DeregisterEcsClusterRequest":{
+      "type":"structure",
+      "required":["EcsClusterArn"],
+      "members":{
+        "EcsClusterArn":{
+          "shape":"String",
+          "documentation":"<p>The cluster's ARN.</p>"
+        }
+      }
+    },
     "DeregisterElasticIpRequest":{
       "type":"structure",
       "required":["ElasticIp"],
@@ -2658,6 +2745,41 @@
         }
       },
       "documentation":"<p>Contains the response to a <code>DescribeDeployments</code> request.</p>"
+    },
+    "DescribeEcsClustersRequest":{
+      "type":"structure",
+      "members":{
+        "EcsClusterArns":{
+          "shape":"Strings",
+          "documentation":"<p>A list of ARNs, one for each cluster to be described.</p>"
+        },
+        "StackId":{
+          "shape":"String",
+          "documentation":"<p>A stack ID. <code>DescribeEcsClusters</code> returns a description of the cluster that is registered with the stack.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>If the previous paginated request did not return all of the remaining results, the response object's<code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>DescribeEcsClusters</code> again and assign that token to the request object's <code>NextToken</code> parameter. If there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.</p>"
+        }
+      }
+    },
+    "DescribeEcsClustersResult":{
+      "type":"structure",
+      "members":{
+        "EcsClusters":{
+          "shape":"EcsClusters",
+          "documentation":"<p>A list of <code>EcsCluster</code> objects containing the cluster descriptions.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>If a paginated request does not return all of the remaining results, this parameter is set to a token that you can assign to the request object's <code>NextToken</code> parameter to retrieve the next set of results. If the previous paginated request returned all of the remaining results, this parameter is set to <code>null</code>.</p>"
+        }
+      },
+      "documentation":"<p>Contains the response to a <code>DescribeEcsClusters</code> request.</p>"
     },
     "DescribeElasticIpsRequest":{
       "type":"structure",
@@ -3080,6 +3202,32 @@
       },
       "documentation":"<p>Describes an Amazon EBS volume. This data type maps directly to the Amazon EC2 <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html\">EbsBlockDevice</a> data type.</p>"
     },
+    "EcsCluster":{
+      "type":"structure",
+      "members":{
+        "EcsClusterArn":{
+          "shape":"String",
+          "documentation":"<p>The cluster's ARN.</p>"
+        },
+        "EcsClusterName":{
+          "shape":"String",
+          "documentation":"<p>The cluster name.</p>"
+        },
+        "StackId":{
+          "shape":"String",
+          "documentation":"<p>The stack ID.</p>"
+        },
+        "RegisteredAt":{
+          "shape":"DateTime",
+          "documentation":"<p>The time and date that the cluster was registered with the stack.</p>"
+        }
+      },
+      "documentation":"<p>Describes a registered Amazon ECS cluster.</p>"
+    },
+    "EcsClusters":{
+      "type":"list",
+      "member":{"shape":"EcsCluster"}
+    },
     "ElasticIp":{
       "type":"structure",
       "members":{
@@ -3269,6 +3417,14 @@
         "Ec2InstanceId":{
           "shape":"String",
           "documentation":"<p>The ID of the associated Amazon EC2 instance.</p>"
+        },
+        "EcsClusterArn":{
+          "shape":"String",
+          "documentation":"<p>For container instances, the Amazon ECS cluster's ARN.</p>"
+        },
+        "EcsContainerInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>For container instances, the instance's ARN.</p>"
         },
         "ElasticIp":{
           "shape":"String",
@@ -3514,11 +3670,15 @@
         },
         "Attributes":{
           "shape":"LayerAttributes",
-          "documentation":"<p>The layer attributes.</p> <note>For the <code>HaproxyStatsPassword</code>, <code>MysqlRootPassword</code>, and <code>GangliaPassword</code> attributes, AWS OpsWorks returns <code>*****FILTERED*****</code> instead of the actual value</note>"
+          "documentation":"<p>The layer attributes.</p> <p>For the <code>HaproxyStatsPassword</code>, <code>MysqlRootPassword</code>, and <code>GangliaPassword</code> attributes, AWS OpsWorks returns <code>*****FILTERED*****</code> instead of the actual value</p> <p>For an ECS Cluster layer, AWS OpsWorks the <code>EcsClusterArn</code> attribute is set to the cluster's ARN.</p>"
         },
         "CustomInstanceProfileArn":{
           "shape":"String",
           "documentation":"<p>The ARN of the default IAM profile to be used for the layer's EC2 instances. For more information about IAM ARNs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>"
+        },
+        "CustomJson":{
+          "shape":"String",
+          "documentation":"<p>A JSON formatted string containing the layer's custom stack configuration and deployment attributes.</p>"
         },
         "CustomSecurityGroupIds":{
           "shape":"Strings",
@@ -3580,6 +3740,7 @@
     "LayerAttributesKeys":{
       "type":"string",
       "enum":[
+        "EcsClusterArn",
         "EnableHaproxyStats",
         "HaproxyStatsUrl",
         "HaproxyStatsUser",
@@ -3609,6 +3770,8 @@
     "LayerType":{
       "type":"string",
       "enum":[
+        "aws-flow-ruby",
+        "ecs-cluster",
         "java-app",
         "lb",
         "web",
@@ -3845,6 +4008,33 @@
         }
       },
       "documentation":"<p>AWS OpsWorks supports five lifecycle events: <b>setup</b>, <b>configuration</b>, <b>deploy</b>, <b>undeploy</b>, and <b>shutdown</b>. For each layer, AWS OpsWorks runs a set of standard recipes for each event. In addition, you can provide custom recipes for any or all layers and events. AWS OpsWorks runs custom event recipes after the standard recipes. <code>LayerCustomRecipes</code> specifies the custom recipes for a particular layer to be run in response to each of the five events. </p> <p>To specify a recipe, use the cookbook's directory name in the repository followed by two colons and the recipe name, which is the recipe's file name without the .rb extension. For example: phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository's phpapp2 folder. </p>"
+    },
+    "RegisterEcsClusterRequest":{
+      "type":"structure",
+      "required":[
+        "EcsClusterArn",
+        "StackId"
+      ],
+      "members":{
+        "EcsClusterArn":{
+          "shape":"String",
+          "documentation":"<p>The cluster's ARN.</p>"
+        },
+        "StackId":{
+          "shape":"String",
+          "documentation":"<p>The stack ID.</p>"
+        }
+      }
+    },
+    "RegisterEcsClusterResult":{
+      "type":"structure",
+      "members":{
+        "EcsClusterArn":{
+          "shape":"String",
+          "documentation":"<p>The cluster's ARN.</p>"
+        }
+      },
+      "documentation":"<p>Contains the response to a <code>RegisterEcsCluster</code> request.</p>"
     },
     "RegisterElasticIpRequest":{
       "type":"structure",
@@ -4544,7 +4734,7 @@
         },
         "Os":{
           "shape":"String",
-          "documentation":"<p>The instance's operating system, which must be set to one of the following.</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>.</li> </ul> <p>For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p> <p>The default option is the current Amazon Linux version. If you set this parameter to <code>Custom</code>, you must use the AmiId parameter to specify the custom AMI that you want to use. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">Operating Systems</a>. For more information on how to use custom AMIs with OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</p> <note>You can specify a different Linux operating system for the updated stack, but you cannot change from Linux to Windows or Windows to Linux.</note>"
+          "documentation":"<p>The instance's operating system, which must be set to one of the following.</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Red Hat Enterprise Linux 7</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>.</li> </ul> <p>For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p> <p>The default option is the current Amazon Linux version. If you set this parameter to <code>Custom</code>, you must use the AmiId parameter to specify the custom AMI that you want to use. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">Operating Systems</a>. For more information on how to use custom AMIs with OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</p> <note>You can specify a different Linux operating system for the updated stack, but you cannot change from Linux to Windows or Windows to Linux.</note>"
         },
         "AmiId":{
           "shape":"String",
@@ -4595,6 +4785,10 @@
         "CustomInstanceProfileArn":{
           "shape":"String",
           "documentation":"<p>The ARN of an IAM profile to be used for all of the layer's EC2 instances. For more information about IAM ARNs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>"
+        },
+        "CustomJson":{
+          "shape":"String",
+          "documentation":"<p>A JSON-formatted string containing custom stack configuration and deployment attributes to be installed on the layer's instances. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html\"> Using Custom JSON</a>. </p>"
         },
         "CustomSecurityGroupIds":{
           "shape":"Strings",
@@ -4683,7 +4877,7 @@
         },
         "ServiceRoleArn":{
           "shape":"String",
-          "documentation":"<p>The stack IAM role, which allows AWS OpsWorks to work with AWS resources on your behalf. You must set this parameter to the ARN for an existing IAM role. For more information about IAM ARNs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p> <note> <p>There is no default value. You must set this parameter to a valid service role ARN or the action will fail. You can specify the stack's current service role ARN, if you prefer, but you must do so explicitly.</p> </note>"
+          "documentation":"<p>Do not use this parameter. You cannot update a stack's service role.</p>"
         },
         "DefaultInstanceProfileArn":{
           "shape":"String",
@@ -4691,7 +4885,7 @@
         },
         "DefaultOs":{
           "shape":"String",
-          "documentation":"<p>The stack's operating system, which must be set to one of the following:</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</li> </ul> <p>The default option is the stack's current operating system. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p>"
+          "documentation":"<p>The stack's operating system, which must be set to one of the following:</p> <ul> <li>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2015.03</code>, <code>Red Hat Enterprise Linux 7</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li> <code>Microsoft Windows Server 2012 R2 Base</code>.</li> <li>A custom AMI: <code>Custom</code>. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</li> </ul> <p>The default option is the stack's current operating system. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p>"
         },
         "HostnameTheme":{
           "shape":"String",
@@ -4977,5 +5171,7 @@
       },
       "documentation":"<p>Describes a time-based instance's auto scaling schedule. The schedule consists of a set of key-value pairs.</p> <ul> <li>The key is the time period (a UTC hour) and must be an integer from 0 - 23.</li> <li>The value indicates whether the instance should be online or offline for the specified period, and must be set to \"on\" or \"off\"</li> </ul> <p>The default setting for all time periods is off, so you use the following parameters primarily to specify the online periods. You don't have to explicitly specify offline periods unless you want to change an online period to an offline period. </p> <p>The following example specifies that the instance should be online for four hours, from UTC 1200 - 1600. It will be off for the remainder of the day.</p> <p> <code> { \"12\":\"on\", \"13\":\"on\", \"14\":\"on\", \"15\":\"on\" } </code> </p>"
     }
+  },
+  "examples":{
   }
 }
