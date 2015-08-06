@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2012-01-25",
     "endpointPrefix":"swf",
@@ -288,7 +289,7 @@
           "documentation":"<p>Returned when the caller does not have sufficient permissions to invoke the action.</p>"
         }
       ],
-      "documentation":"<p>Returns information about the specified <i>workflow type</i>. This includes configuration settings specified when the type was registered and other information such as creation date, current status, etc.</p> <p><b>Access Control</b></p> <p>You can use IAM policies to control this action's access to Amazon SWF resources as follows:</p> <ul> <li>Use a <code>Resource</code> element with the domain name to limit the action to only specified domains.</li> <li>Use an <code>Action</code> element to allow or deny permission to call this action.</li> <li>Constrain the following parameters by using a <code>Condition</code> element with the appropriate keys. <ul> <li><code>workflowType.name</code>: String constraint. The key is <code>swf:workflowType.name</code>.</li> <li><code>workflowType.version</code>: String constraint. The key is <code>swf:workflowType.version</code>.</li> </ul> </li> </ul> <p>If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's <b>cause</b> parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p>"
+      "documentation":"<p>Returns information about the specified <i>workflow type</i>. This includes configuration settings specified when the type was registered and other information such as creation date, current status, and so on.</p> <p><b>Access Control</b></p> <p>You can use IAM policies to control this action's access to Amazon SWF resources as follows:</p> <ul> <li>Use a <code>Resource</code> element with the domain name to limit the action to only specified domains.</li> <li>Use an <code>Action</code> element to allow or deny permission to call this action.</li> <li>Constrain the following parameters by using a <code>Condition</code> element with the appropriate keys. <ul> <li><code>workflowType.name</code>: String constraint. The key is <code>swf:workflowType.name</code>.</li> <li><code>workflowType.version</code>: String constraint. The key is <code>swf:workflowType.version</code>.</li> </ul> </li> </ul> <p>If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's <b>cause</b> parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p>"
     },
     "GetWorkflowExecutionHistory":{
       "name":"GetWorkflowExecutionHistory",
@@ -493,7 +494,7 @@
           "documentation":"<p>Returned by any operation if a system imposed limitation has been reached. To address this fault you should either clean up unused resources or increase the limit by contacting AWS.</p>"
         }
       ],
-      "documentation":"<p>Used by deciders to get a <a>DecisionTask</a> from the specified decision <code>taskList</code>. A decision task may be returned for any open workflow execution that is using the specified task list. The task includes a paginated view of the history of the workflow execution. The decider should use the workflow type and the history to determine how to properly handle the task.</p> <p>This action initiates a long poll, where the service holds the HTTP connection open and responds as soon a task becomes available. If no decision task is available in the specified task list before the timeout of 60 seconds expires, an empty result is returned. An empty result, in this context, means that a DecisionTask is returned, but that the value of taskToken is an empty string.</p> <important>Deciders should set their client side socket timeout to at least 70 seconds (10 seconds higher than the timeout).</important> <important>Because the number of workflow history events for a single workflow execution might be very large, the result returned might be split up across a number of pages. To retrieve subsequent pages, make additional calls to <code>PollForDecisionTask</code> using the <code>nextPageToken</code> returned by the initial call. Note that you do <b>not</b> call <code>GetWorkflowExecutionHistory</code> with this <code>nextPageToken</code>. Instead, call <code>PollForDecisionTask</code> again.</important> <p><b>Access Control</b></p> <p>You can use IAM policies to control this action's access to Amazon SWF resources as follows:</p> <ul> <li>Use a <code>Resource</code> element with the domain name to limit the action to only specified domains.</li> <li>Use an <code>Action</code> element to allow or deny permission to call this action.</li> <li>Constrain the <code>taskList.name</code> parameter by using a <b>Condition</b> element with the <code>swf:taskList.name</code> key to allow the action to access only certain task lists.</li> </ul> <p>If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's <b>cause</b> parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p>"
+      "documentation":"<p>Used by deciders to get a <a>DecisionTask</a> from the specified decision <code>taskList</code>. A decision task may be returned for any open workflow execution that is using the specified task list. The task includes a paginated view of the history of the workflow execution. The decider should use the workflow type and the history to determine how to properly handle the task.</p> <p>This action initiates a long poll, where the service holds the HTTP connection open and responds as soon a task becomes available. If no decision task is available in the specified task list before the timeout of 60 seconds expires, an empty result is returned. An empty result, in this context, means that a DecisionTask is returned, but that the value of <code>taskToken</code> is an empty string.</p> <important>Deciders should set their client-side socket timeout to at least 70 seconds (10 seconds higher than the timeout).</important> <important>Because the number of workflow history events for a single workflow execution might be very large, the result returned might be split up across a number of pages. To retrieve subsequent pages, make additional calls to <code>PollForDecisionTask</code> using the <code>nextPageToken</code> returned by the initial call. Note that you do <b>not</b> call <code>GetWorkflowExecutionHistory</code> with this <code>nextPageToken</code>. Instead, call <code>PollForDecisionTask</code> again.</important> <p><b>Access Control</b></p> <p>You can use IAM policies to control this action's access to Amazon SWF resources as follows:</p> <ul> <li>Use a <code>Resource</code> element with the domain name to limit the action to only specified domains.</li> <li>Use an <code>Action</code> element to allow or deny permission to call this action.</li> <li>Constrain the <code>taskList.name</code> parameter by using a <b>Condition</b> element with the <code>swf:taskList.name</code> key to allow the action to access only certain task lists.</li> </ul> <p>If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's <b>cause</b> parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p>"
     },
     "RecordActivityTaskHeartbeat":{
       "name":"RecordActivityTaskHeartbeat",
@@ -826,7 +827,7 @@
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>ActivityTaskStarted</code> event recorded in the history.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskStarted</code> event recorded in the history.</p>"
         },
         "workflowExecution":{
           "shape":"WorkflowExecution",
@@ -852,7 +853,7 @@
       "members":{
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RequestCancelActivityTask</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RequestCancelActivityTask</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "activityId":{
           "shape":"ActivityId",
@@ -874,15 +875,15 @@
         },
         "scheduledEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>ActivityTaskStarted</code> event recorded when this activity task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskStarted</code> event recorded when this activity task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "latestCancelRequestedEventId":{
           "shape":"EventId",
-          "documentation":"<p>If set, contains the Id of the last <code>ActivityTaskCancelRequested</code> event recorded for this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>If set, contains the ID of the last <code>ActivityTaskCancelRequested</code> event recorded for this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ActivityTaskCanceled</code> event.</p>"
@@ -900,11 +901,11 @@
         },
         "scheduledEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>ActivityTaskStarted</code> event recorded when this activity task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskStarted</code> event recorded when this activity task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ActivityTaskCompleted</code> event.</p>"
@@ -926,11 +927,11 @@
         },
         "scheduledEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>ActivityTaskStarted</code> event recorded when this activity task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskStarted</code> event recorded when this activity task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ActivityTaskFailed</code> event.</p>"
@@ -950,7 +951,7 @@
         },
         "activityId":{
           "shape":"ActivityId",
-          "documentation":"<p>The unique id of the activity task.</p>"
+          "documentation":"<p>The unique ID of the activity task.</p>"
         },
         "input":{
           "shape":"Data",
@@ -978,11 +979,11 @@
         },
         "taskPriority":{
           "shape":"TaskPriority",
-          "documentation":"<p><i>Optional.</i> The priority to assign to the scheduled activity task. This will override any default priority that was assigned when the activity type was registered. If not set, then the priority set on the activity type is used as the task priority.</p> <p>Valid values are integers that range from Java's <code>Integer.MIN_VALUE</code> (-2147483648) to <code>Integer.MAX_VALUE</code> (2147483647). Higher numbers indicate higher priority.</p> <p>For more information about setting task priority, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html\">Setting Task Priority</a> in the <i>Amazon Simple Workflow Developer Guide</i>.</p>"
+          "documentation":"<p><i>Optional.</i> The priority to assign to the scheduled activity task. If set, this will override any default priority value that was assigned when the activity type was registered.</p> <p>Valid values are integers that range from Java's <code>Integer.MIN_VALUE</code> (-2147483648) to <code>Integer.MAX_VALUE</code> (2147483647). Higher numbers indicate higher priority.</p> <p>For more information about setting task priority, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html\">Setting Task Priority</a> in the <i>Amazon Simple Workflow Developer Guide</i>.</p>"
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision that resulted in the scheduling of this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision that resulted in the scheduling of this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "heartbeatTimeout":{
           "shape":"DurationInSecondsOptional",
@@ -1001,7 +1002,7 @@
         },
         "scheduledEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ActivityTaskStarted</code> event.</p>"
@@ -1031,11 +1032,11 @@
         },
         "scheduledEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskScheduled</code> event that was recorded when this activity task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>ActivityTaskStarted</code> event recorded when this activity task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ActivityTaskStarted</code> event recorded when this activity task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "details":{
           "shape":"LimitedData",
@@ -1076,15 +1077,15 @@
       "members":{
         "defaultTaskStartToCloseTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p><i>Optional.</i> The default maximum duration for tasks of an activity type specified when registering the activity type. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p><i>Optional.</i> The default maximum duration for tasks of an activity type specified when registering the activity type. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         },
         "defaultTaskHeartbeatTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p><i>Optional.</i> The default maximum time, in seconds, before which a worker processing a task must report progress by calling <a>RecordActivityTaskHeartbeat</a>.</p> <p>You can specify this value only when <i>registering</i> an activity type. The registered default value can be overridden when you schedule a task through the <code>ScheduleActivityTask</code> <a>Decision</a>. If the activity worker subsequently attempts to record a heartbeat or returns a result, the activity worker receives an <code>UnknownResource</code> fault. In this case, Amazon SWF no longer considers the activity task to be valid; the activity worker should clean up the activity task.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p><i>Optional.</i> The default maximum time, in seconds, before which a worker processing a task must report progress by calling <a>RecordActivityTaskHeartbeat</a>.</p> <p>You can specify this value only when <i>registering</i> an activity type. The registered default value can be overridden when you schedule a task through the <code>ScheduleActivityTask</code> decision. If the activity worker subsequently attempts to record a heartbeat or returns a result, the activity worker receives an <code>UnknownResource</code> fault. In this case, Amazon SWF no longer considers the activity task to be valid; the activity worker should clean up the activity task.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         },
         "defaultTaskList":{
           "shape":"TaskList",
-          "documentation":"<p><i>Optional.</i> The default task list specified for this activity type at registration. This default is used if a task list is not provided when a task is scheduled through the <code>ScheduleActivityTask</code> <a>Decision</a>. You can override the default registered task list when scheduling a task through the <code>ScheduleActivityTask</code> <a>Decision</a>.</p>"
+          "documentation":"<p><i>Optional.</i> The default task list specified for this activity type at registration. This default is used if a task list is not provided when a task is scheduled through the <code>ScheduleActivityTask</code> decision. You can override the default registered task list when scheduling a task through the <code>ScheduleActivityTask</code> decision.</p>"
         },
         "defaultTaskPriority":{
           "shape":"TaskPriority",
@@ -1092,11 +1093,11 @@
         },
         "defaultTaskScheduleToStartTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p><i>Optional.</i> The default maximum duration, specified when registering the activity type, that a task of an activity type can wait before being assigned to a worker. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p><i>Optional.</i> The default maximum duration, specified when registering the activity type, that a task of an activity type can wait before being assigned to a worker. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         },
         "defaultTaskScheduleToCloseTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p><i>Optional.</i> The default maximum duration, specified when registering the activity type, for tasks of this activity type. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p><i>Optional.</i> The default maximum duration, specified when registering the activity type, for tasks of this activity type. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         }
       },
       "documentation":"<p>Configuration settings registered with the activity type.</p>"
@@ -1169,13 +1170,18 @@
       },
       "documentation":"<p>Contains a paginated list of activity type information structures.</p>"
     },
+    "Arn":{
+      "type":"string",
+      "min":1,
+      "max":1224
+    },
     "CancelTimerDecisionAttributes":{
       "type":"structure",
       "required":["timerId"],
       "members":{
         "timerId":{
           "shape":"TimerId",
-          "documentation":"<p><b>Required.</b> The unique Id of the timer to cancel.</p>"
+          "documentation":"<p><b>Required.</b> The unique ID of the timer to cancel.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>CancelTimer</code> decision.</p> <p><b>Access Control</b></p> <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p> <ul> <li>Use a <code>Resource</code> element with the domain name to limit the action to only specified domains.</li> <li>Use an <code>Action</code> element to allow or deny permission to call this action.</li> <li>You cannot use an IAM policy to constrain this action's parameters.</li> </ul> <p>If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's <b>cause</b> parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p>"
@@ -1205,7 +1211,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelTimer</code> decision to cancel this timer. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelTimer</code> decision to cancel this timer. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>CancelTimerFailed</code> event.</p>"
@@ -1240,12 +1246,16 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelWorkflowExecution</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelWorkflowExecution</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>CancelWorkflowExecutionFailed</code> event.</p>"
     },
     "Canceled":{"type":"boolean"},
+    "CauseMessage":{
+      "type":"string",
+      "max":1728
+    },
     "ChildPolicy":{
       "type":"string",
       "enum":[
@@ -1277,11 +1287,11 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provide details of the <code>ChildWorkflowExecutionCanceled</code> event.</p>"
@@ -1309,11 +1319,11 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ChildWorkflowExecutionCompleted</code> event.</p>"
@@ -1345,11 +1355,11 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ChildWorkflowExecutionFailed</code> event.</p>"
@@ -1372,7 +1382,7 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ChildWorkflowExecutionStarted</code> event.</p>"
@@ -1396,11 +1406,11 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ChildWorkflowExecutionTerminated</code> event.</p>"
@@ -1429,11 +1439,11 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>ChildWorkflowExecutionStarted</code> event recorded when this child workflow execution was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ChildWorkflowExecutionTimedOut</code> event.</p>"
@@ -1490,7 +1500,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CompleteWorkflowExecution</code> decision to complete this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CompleteWorkflowExecution</code> decision to complete this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>CompleteWorkflowExecutionFailed</code> event.</p>"
@@ -1523,7 +1533,11 @@
           "shape":"TagList",
           "documentation":"<p>The list of tags to associate with the new workflow execution. A maximum of 5 tags can be specified. You can list workflow executions with a specific tag by calling <a>ListOpenWorkflowExecutions</a> or <a>ListClosedWorkflowExecutions</a> and specifying a <a>TagFilter</a>.</p>"
         },
-        "workflowTypeVersion":{"shape":"Version"}
+        "workflowTypeVersion":{"shape":"Version"},
+        "lambdaRole":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of an IAM role that authorizes Amazon SWF to invoke AWS Lambda functions.</p> <note>In order for this workflow execution to invoke AWS Lambda functions, an appropriate IAM role must be specified either as a default for the workflow type or through this field.</note>"
+        }
       },
       "documentation":"<p>Provides details of the <code>ContinueAsNewWorkflowExecution</code> decision.</p> <p><b>Access Control</b></p> <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p> <ul> <li>Use a <code>Resource</code> element with the domain name to limit the action to only specified domains.</li> <li>Use an <code>Action</code> element to allow or deny permission to call this action.</li> <li>Constrain the following parameters by using a <code>Condition</code> element with the appropriate keys. <ul> <li> <code>tag</code>: <i>Optional.</i>. A tag used to identify the workflow execution</li> <li><code>taskList</code>: String constraint. The key is <code>swf:taskList.name</code>.</li> <li><code>workflowType.version</code>: String constraint. The key is <code>swf:workflowType.version</code>.</li> </ul> </li> </ul> <p>If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's <b>cause</b> parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p>"
     },
@@ -1554,7 +1568,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>ContinueAsNewWorkflowExecution</code> decision that started this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>ContinueAsNewWorkflowExecution</code> decision that started this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ContinueAsNewWorkflowExecutionFailed</code> event.</p>"
@@ -1719,9 +1733,10 @@
         "startChildWorkflowExecutionDecisionAttributes":{
           "shape":"StartChildWorkflowExecutionDecisionAttributes",
           "documentation":"<p>Provides details of the <code>StartChildWorkflowExecution</code> decision. It is not set for other decision types.</p>"
-        }
+        },
+        "scheduleLambdaFunctionDecisionAttributes":{"shape":"ScheduleLambdaFunctionDecisionAttributes"}
       },
-      "documentation":"<p>Specifies a decision made by the decider. A decision can be one of these types:</p> <ul> <li> <b>CancelTimer</b>: cancels a previously started timer and records a <code>TimerCanceled</code> event in the history.</li> <li> <b>CancelWorkflowExecution</b>: closes the workflow execution and records a <code>WorkflowExecutionCanceled</code> event in the history.</li> <li> <b>CompleteWorkflowExecution</b>: closes the workflow execution and records a <code>WorkflowExecutionCompleted</code> event in the history .</li> <li> <b>ContinueAsNewWorkflowExecution</b>: closes the workflow execution and starts a new workflow execution of the same type using the same workflow id and a unique run Id. A <code>WorkflowExecutionContinuedAsNew</code> event is recorded in the history.</li> <li> <b>FailWorkflowExecution</b>: closes the workflow execution and records a <code>WorkflowExecutionFailed</code> event in the history.</li> <li> <b>RecordMarker</b>: records a <code>MarkerRecorded</code> event in the history. Markers can be used for adding custom information in the history for instance to let deciders know that they do not need to look at the history beyond the marker event.</li> <li> <b>RequestCancelActivityTask</b>: attempts to cancel a previously scheduled activity task. If the activity task was scheduled but has not been assigned to a worker, then it will be canceled. If the activity task was already assigned to a worker, then the worker will be informed that cancellation has been requested in the response to <a>RecordActivityTaskHeartbeat</a>.</li> <li> <b>RequestCancelExternalWorkflowExecution</b>: requests that a request be made to cancel the specified external workflow execution and records a <code>RequestCancelExternalWorkflowExecutionInitiated</code> event in the history.</li> <li> <b>ScheduleActivityTask</b>: schedules an activity task.</li> <li> <b>SignalExternalWorkflowExecution</b>: requests a signal to be delivered to the specified external workflow execution and records a <code>SignalExternalWorkflowExecutionInitiated</code> event in the history.</li> <li> <b>StartChildWorkflowExecution</b>: requests that a child workflow execution be started and records a <code>StartChildWorkflowExecutionInitiated</code> event in the history. The child workflow execution is a separate workflow execution with its own history.</li> <li> <b>StartTimer</b>: starts a timer for this workflow execution and records a <code>TimerStarted</code> event in the history. This timer will fire after the specified delay and record a <code>TimerFired</code> event.</li> </ul> <p><b>Access Control</b></p> <p>If you grant permission to use <code>RespondDecisionTaskCompleted</code>, you can use IAM policies to express permissions for the list of decisions returned by this action as if they were members of the API. Treating decisions as a pseudo API maintains a uniform conceptual model and helps keep policies readable. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p> <p><b>Decision Failure</b></p> <p>Decisions can fail for several reasons</p> <ul> <li>The ordering of decisions should follow a logical flow. Some decisions might not make sense in the current context of the workflow execution and will therefore fail.</li> <li>A limit on your account was reached.</li> <li>The decision lacks sufficient permissions.</li> </ul> <p>One of the following events might be added to the history to indicate an error. The event attribute's <b>cause</b> parameter indicates the cause. If <b>cause</b> is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p> <ul> <li> <b>ScheduleActivityTaskFailed</b>: a ScheduleActivityTask decision failed. This could happen if the activity type specified in the decision is not registered, is in a deprecated state, or the decision is not properly configured.</li> <li> <b>RequestCancelActivityTaskFailed</b>: a RequestCancelActivityTask decision failed. This could happen if there is no open activity task with the specified activityId.</li> <li> <b>StartTimerFailed</b>: a StartTimer decision failed. This could happen if there is another open timer with the same timerId.</li> <li> <b>CancelTimerFailed</b>: a CancelTimer decision failed. This could happen if there is no open timer with the specified timerId.</li> <li> <b>StartChildWorkflowExecutionFailed</b>: a StartChildWorkflowExecution decision failed. This could happen if the workflow type specified is not registered, is deprecated, or the decision is not properly configured.</li> <li> <b>SignalExternalWorkflowExecutionFailed</b>: a SignalExternalWorkflowExecution decision failed. This could happen if the <code>workflowID</code> specified in the decision was incorrect.</li> <li> <b>RequestCancelExternalWorkflowExecutionFailed</b>: a RequestCancelExternalWorkflowExecution decision failed. This could happen if the <code>workflowID</code> specified in the decision was incorrect.</li> <li> <b>CancelWorkflowExecutionFailed</b>: a CancelWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution.</li> <li> <b>CompleteWorkflowExecutionFailed</b>: a CompleteWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution.</li> <li> <b>ContinueAsNewWorkflowExecutionFailed</b>: a ContinueAsNewWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution or the ContinueAsNewWorkflowExecution decision was not configured correctly.</li> <li> <b>FailWorkflowExecutionFailed</b>: a FailWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution.</li> </ul> <p>The preceding error events might occur due to an error in the decider logic, which might put the workflow execution in an unstable state The cause field in the event structure for the error event indicates the cause of the error.</p> <note>A workflow execution may be closed by the decider by returning one of the following decisions when completing a decision task: <code>CompleteWorkflowExecution</code>, <code>FailWorkflowExecution</code>, <code>CancelWorkflowExecution</code> and <code>ContinueAsNewWorkflowExecution</code>. An UnhandledDecision fault will be returned if a workflow closing decision is specified and a signal or activity event had been added to the history while the decision task was being performed by the decider. Unlike the above situations which are logic issues, this fault is always possible because of race conditions in a distributed system. The right action here is to call <a>RespondDecisionTaskCompleted</a> without any decisions. This would result in another decision task with these new events included in the history. The decider should handle the new events and may decide to close the workflow execution.</note> <p><b>How to Code a Decision</b></p> <p>You code a decision by first setting the decision type field to one of the above decision values, and then set the corresponding attributes field shown below:</p> <ul> <li> <a>ScheduleActivityTaskDecisionAttributes</a> </li> <li> <a>RequestCancelActivityTaskDecisionAttributes</a> </li> <li> <a>CompleteWorkflowExecutionDecisionAttributes</a> </li> <li> <a>FailWorkflowExecutionDecisionAttributes</a> </li> <li> <a>CancelWorkflowExecutionDecisionAttributes</a> </li> <li> <a>ContinueAsNewWorkflowExecutionDecisionAttributes</a> </li> <li> <a>RecordMarkerDecisionAttributes</a> </li> <li> <a>StartTimerDecisionAttributes</a> </li> <li> <a>CancelTimerDecisionAttributes</a> </li> <li> <a>SignalExternalWorkflowExecutionDecisionAttributes</a> </li> <li> <a>RequestCancelExternalWorkflowExecutionDecisionAttributes</a> </li> <li> <a>StartChildWorkflowExecutionDecisionAttributes</a> </li> </ul>"
+      "documentation":"<p>Specifies a decision made by the decider. A decision can be one of these types:</p> <ul> <li> <b>CancelTimer</b>: cancels a previously started timer and records a <code>TimerCanceled</code> event in the history.</li> <li> <b>CancelWorkflowExecution</b>: closes the workflow execution and records a <code>WorkflowExecutionCanceled</code> event in the history.</li> <li> <b>CompleteWorkflowExecution</b>: closes the workflow execution and records a <code>WorkflowExecutionCompleted</code> event in the history .</li> <li> <b>ContinueAsNewWorkflowExecution</b>: closes the workflow execution and starts a new workflow execution of the same type using the same workflow ID and a unique run ID. A <code>WorkflowExecutionContinuedAsNew</code> event is recorded in the history.</li> <li> <b>FailWorkflowExecution</b>: closes the workflow execution and records a <code>WorkflowExecutionFailed</code> event in the history.</li> <li> <b>RecordMarker</b>: records a <code>MarkerRecorded</code> event in the history. Markers can be used for adding custom information in the history for instance to let deciders know that they do not need to look at the history beyond the marker event.</li> <li> <b>RequestCancelActivityTask</b>: attempts to cancel a previously scheduled activity task. If the activity task was scheduled but has not been assigned to a worker, then it will be canceled. If the activity task was already assigned to a worker, then the worker will be informed that cancellation has been requested in the response to <a>RecordActivityTaskHeartbeat</a>.</li> <li> <b>RequestCancelExternalWorkflowExecution</b>: requests that a request be made to cancel the specified external workflow execution and records a <code>RequestCancelExternalWorkflowExecutionInitiated</code> event in the history.</li> <li> <b>ScheduleActivityTask</b>: schedules an activity task.</li> <li> <b>ScheduleLambdaFunction</b>: schedules a AWS Lambda function.</li> <li> <b>SignalExternalWorkflowExecution</b>: requests a signal to be delivered to the specified external workflow execution and records a <code>SignalExternalWorkflowExecutionInitiated</code> event in the history.</li> <li> <b>StartChildWorkflowExecution</b>: requests that a child workflow execution be started and records a <code>StartChildWorkflowExecutionInitiated</code> event in the history. The child workflow execution is a separate workflow execution with its own history.</li> <li> <b>StartTimer</b>: starts a timer for this workflow execution and records a <code>TimerStarted</code> event in the history. This timer will fire after the specified delay and record a <code>TimerFired</code> event.</li> </ul> <p><b>Access Control</b></p> <p>If you grant permission to use <code>RespondDecisionTaskCompleted</code>, you can use IAM policies to express permissions for the list of decisions returned by this action as if they were members of the API. Treating decisions as a pseudo API maintains a uniform conceptual model and helps keep policies readable. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p> <p><b>Decision Failure</b></p> <p>Decisions can fail for several reasons</p> <ul> <li>The ordering of decisions should follow a logical flow. Some decisions might not make sense in the current context of the workflow execution and will therefore fail.</li> <li>A limit on your account was reached.</li> <li>The decision lacks sufficient permissions.</li> </ul> <p>One of the following events might be added to the history to indicate an error. The event attribute's <b>cause</b> parameter indicates the cause. If <b>cause</b> is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p> <ul> <li> <b>ScheduleActivityTaskFailed</b>: a ScheduleActivityTask decision failed. This could happen if the activity type specified in the decision is not registered, is in a deprecated state, or the decision is not properly configured.</li> <li> <b>ScheduleLambdaFunctionFailed</b>: a ScheduleLambdaFunctionFailed decision failed. This could happen if the AWS Lambda function specified in the decision does not exist, or the AWS Lambda service's limits are exceeded.</li> <li> <b>RequestCancelActivityTaskFailed</b>: a RequestCancelActivityTask decision failed. This could happen if there is no open activity task with the specified activityId.</li> <li> <b>StartTimerFailed</b>: a StartTimer decision failed. This could happen if there is another open timer with the same timerId.</li> <li> <b>CancelTimerFailed</b>: a CancelTimer decision failed. This could happen if there is no open timer with the specified timerId.</li> <li> <b>StartChildWorkflowExecutionFailed</b>: a StartChildWorkflowExecution decision failed. This could happen if the workflow type specified is not registered, is deprecated, or the decision is not properly configured.</li> <li> <b>SignalExternalWorkflowExecutionFailed</b>: a SignalExternalWorkflowExecution decision failed. This could happen if the <code>workflowID</code> specified in the decision was incorrect.</li> <li> <b>RequestCancelExternalWorkflowExecutionFailed</b>: a RequestCancelExternalWorkflowExecution decision failed. This could happen if the <code>workflowID</code> specified in the decision was incorrect.</li> <li> <b>CancelWorkflowExecutionFailed</b>: a CancelWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution.</li> <li> <b>CompleteWorkflowExecutionFailed</b>: a CompleteWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution.</li> <li> <b>ContinueAsNewWorkflowExecutionFailed</b>: a ContinueAsNewWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution or the ContinueAsNewWorkflowExecution decision was not configured correctly.</li> <li> <b>FailWorkflowExecutionFailed</b>: a FailWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution.</li> </ul> <p>The preceding error events might occur due to an error in the decider logic, which might put the workflow execution in an unstable state The cause field in the event structure for the error event indicates the cause of the error.</p> <note>A workflow execution may be closed by the decider by returning one of the following decisions when completing a decision task: <code>CompleteWorkflowExecution</code>, <code>FailWorkflowExecution</code>, <code>CancelWorkflowExecution</code> and <code>ContinueAsNewWorkflowExecution</code>. An UnhandledDecision fault will be returned if a workflow closing decision is specified and a signal or activity event had been added to the history while the decision task was being performed by the decider. Unlike the above situations which are logic issues, this fault is always possible because of race conditions in a distributed system. The right action here is to call <a>RespondDecisionTaskCompleted</a> without any decisions. This would result in another decision task with these new events included in the history. The decider should handle the new events and may decide to close the workflow execution.</note> <p><b>How to code a decision</b></p> <p>You code a decision by first setting the decision type field to one of the above decision values, and then set the corresponding attributes field shown below:</p> <ul> <li> <a>ScheduleActivityTaskDecisionAttributes</a> </li> <li> <a>ScheduleLambdaFunctionDecisionAttributes</a> </li> <li> <a>RequestCancelActivityTaskDecisionAttributes</a> </li> <li> <a>CompleteWorkflowExecutionDecisionAttributes</a> </li> <li> <a>FailWorkflowExecutionDecisionAttributes</a> </li> <li> <a>CancelWorkflowExecutionDecisionAttributes</a> </li> <li> <a>ContinueAsNewWorkflowExecutionDecisionAttributes</a> </li> <li> <a>RecordMarkerDecisionAttributes</a> </li> <li> <a>StartTimerDecisionAttributes</a> </li> <li> <a>CancelTimerDecisionAttributes</a> </li> <li> <a>SignalExternalWorkflowExecutionDecisionAttributes</a> </li> <li> <a>RequestCancelExternalWorkflowExecutionDecisionAttributes</a> </li> <li> <a>StartChildWorkflowExecutionDecisionAttributes</a> </li> </ul>"
     },
     "DecisionList":{
       "type":"list",
@@ -1743,7 +1758,7 @@
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskStarted</code> event recorded in the history.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskStarted</code> event recorded in the history.</p>"
         },
         "workflowExecution":{
           "shape":"WorkflowExecution",
@@ -1763,7 +1778,7 @@
         },
         "previousStartedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the DecisionTaskStarted event of the previous decision task of this workflow execution that was processed by the decider. This can be used to determine the events in the history new since the last decision task received by the decider.</p>"
+          "documentation":"<p>The ID of the DecisionTaskStarted event of the previous decision task of this workflow execution that was processed by the decider. This can be used to determine the events in the history new since the last decision task received by the decider.</p>"
         }
       },
       "documentation":"<p>A structure that represents a decision task. Decision tasks are sent to deciders in order for them to make decisions.</p>"
@@ -1781,11 +1796,11 @@
         },
         "scheduledEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskScheduled</code> event that was recorded when this decision task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskScheduled</code> event that was recorded when this decision task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>DecisionTaskStarted</code> event recorded when this decision task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskStarted</code> event recorded when this decision task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>DecisionTaskCompleted</code> event.</p>"
@@ -1819,7 +1834,7 @@
         },
         "scheduledEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskScheduled</code> event that was recorded when this decision task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskScheduled</code> event that was recorded when this decision task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>DecisionTaskStarted</code> event.</p>"
@@ -1838,11 +1853,11 @@
         },
         "scheduledEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskScheduled</code> event that was recorded when this decision task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskScheduled</code> event that was recorded when this decision task was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The Id of the <code>DecisionTaskStarted</code> event recorded when this decision task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskStarted</code> event recorded when this decision task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>DecisionTaskTimedOut</code> event.</p>"
@@ -1865,7 +1880,8 @@
         "CancelTimer",
         "SignalExternalWorkflowExecution",
         "RequestCancelExternalWorkflowExecution",
-        "StartChildWorkflowExecution"
+        "StartChildWorkflowExecution",
+        "ScheduleLambdaFunction"
       ]
     },
     "DefaultUndefinedFault":{
@@ -2140,7 +2156,14 @@
         "ExternalWorkflowExecutionSignaled",
         "RequestCancelExternalWorkflowExecutionInitiated",
         "RequestCancelExternalWorkflowExecutionFailed",
-        "ExternalWorkflowExecutionCancelRequested"
+        "ExternalWorkflowExecutionCancelRequested",
+        "LambdaFunctionScheduled",
+        "LambdaFunctionStarted",
+        "LambdaFunctionCompleted",
+        "LambdaFunctionFailed",
+        "LambdaFunctionTimedOut",
+        "ScheduleLambdaFunctionFailed",
+        "StartLambdaFunctionFailed"
       ]
     },
     "ExecutionStatus":{
@@ -2178,7 +2201,7 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>RequestCancelExternalWorkflowExecutionInitiated</code> event corresponding to the <code>RequestCancelExternalWorkflowExecution</code> decision to cancel this external workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>RequestCancelExternalWorkflowExecutionInitiated</code> event corresponding to the <code>RequestCancelExternalWorkflowExecution</code> decision to cancel this external workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ExternalWorkflowExecutionCancelRequested</code> event.</p>"
@@ -2196,7 +2219,7 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>SignalExternalWorkflowExecutionInitiated</code> event corresponding to the <code>SignalExternalWorkflowExecution</code> decision to request this signal. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>SignalExternalWorkflowExecutionInitiated</code> event corresponding to the <code>SignalExternalWorkflowExecution</code> decision to request this signal. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p> Provides details of the <code>ExternalWorkflowExecutionSignaled</code> event.</p>"
@@ -2235,7 +2258,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>FailWorkflowExecution</code> decision to fail this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>FailWorkflowExecution</code> decision to fail this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>FailWorkflowExecutionFailed</code> event.</p>"
@@ -2243,6 +2266,21 @@
     "FailureReason":{
       "type":"string",
       "max":256
+    },
+    "FunctionId":{
+      "type":"string",
+      "min":1,
+      "max":256
+    },
+    "FunctionInput":{
+      "type":"string",
+      "min":1,
+      "max":32768
+    },
+    "FunctionName":{
+      "type":"string",
+      "min":1,
+      "max":64
     },
     "GetWorkflowExecutionHistoryInput":{
       "type":"structure",
@@ -2265,7 +2303,7 @@
         },
         "maximumPageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than 100.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than the maximum.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
         },
         "reverseOrder":{
           "shape":"ReverseOrder",
@@ -2306,7 +2344,7 @@
         },
         "eventId":{
           "shape":"EventId",
-          "documentation":"<p>The system generated id of the event. This id uniquely identifies the event with in the workflow execution history.</p>"
+          "documentation":"<p>The system generated ID of the event. This ID uniquely identifies the event with in the workflow execution history.</p>"
         },
         "workflowExecutionStartedEventAttributes":{
           "shape":"WorkflowExecutionStartedEventAttributes",
@@ -2495,9 +2533,16 @@
         "startChildWorkflowExecutionFailedEventAttributes":{
           "shape":"StartChildWorkflowExecutionFailedEventAttributes",
           "documentation":"<p>If the event is of type <code>StartChildWorkflowExecutionFailed</code> then this member is set and provides detailed information about the event. It is not set for other event types.</p>"
-        }
+        },
+        "lambdaFunctionScheduledEventAttributes":{"shape":"LambdaFunctionScheduledEventAttributes"},
+        "lambdaFunctionStartedEventAttributes":{"shape":"LambdaFunctionStartedEventAttributes"},
+        "lambdaFunctionCompletedEventAttributes":{"shape":"LambdaFunctionCompletedEventAttributes"},
+        "lambdaFunctionFailedEventAttributes":{"shape":"LambdaFunctionFailedEventAttributes"},
+        "lambdaFunctionTimedOutEventAttributes":{"shape":"LambdaFunctionTimedOutEventAttributes"},
+        "scheduleLambdaFunctionFailedEventAttributes":{"shape":"ScheduleLambdaFunctionFailedEventAttributes"},
+        "startLambdaFunctionFailedEventAttributes":{"shape":"StartLambdaFunctionFailedEventAttributes"}
       },
-      "documentation":"<p>Event within a workflow execution. A history event can be one of these types:</p> <ul> <li> <b>WorkflowExecutionStarted</b>: The workflow execution was started.</li> <li> <b>WorkflowExecutionCompleted</b>: The workflow execution was closed due to successful completion.</li> <li> <b>WorkflowExecutionFailed</b>: The workflow execution closed due to a failure.</li> <li> <b>WorkflowExecutionTimedOut</b>: The workflow execution was closed because a time out was exceeded.</li> <li> <b>WorkflowExecutionCanceled</b>: The workflow execution was successfully canceled and closed.</li> <li> <b>WorkflowExecutionTerminated</b>: The workflow execution was terminated.</li> <li> <b>WorkflowExecutionContinuedAsNew</b>: The workflow execution was closed and a new execution of the same type was created with the same workflowId.</li> <li> <b>WorkflowExecutionCancelRequested</b>: A request to cancel this workflow execution was made.</li> <li> <b>DecisionTaskScheduled</b>: A decision task was scheduled for the workflow execution.</li> <li> <b>DecisionTaskStarted</b>: The decision task was dispatched to a decider.</li> <li> <b>DecisionTaskCompleted</b>: The decider successfully completed a decision task by calling <a>RespondDecisionTaskCompleted</a>.</li> <li> <b>DecisionTaskTimedOut</b>: The decision task timed out.</li> <li> <b>ActivityTaskScheduled</b>: An activity task was scheduled for execution.</li> <li> <b>ScheduleActivityTaskFailed</b>: Failed to process ScheduleActivityTask decision. This happens when the decision is not configured properly, for example the activity type specified is not registered.</li> <li> <b>ActivityTaskStarted</b>: The scheduled activity task was dispatched to a worker.</li> <li> <b>ActivityTaskCompleted</b>: An activity worker successfully completed an activity task by calling <a>RespondActivityTaskCompleted</a>.</li> <li> <b>ActivityTaskFailed</b>: An activity worker failed an activity task by calling <a>RespondActivityTaskFailed</a>.</li> <li> <b>ActivityTaskTimedOut</b>: The activity task timed out.</li> <li> <b>ActivityTaskCanceled</b>: The activity task was successfully canceled.</li> <li> <b>ActivityTaskCancelRequested</b>: A <code>RequestCancelActivityTask</code> decision was received by the system.</li> <li> <b>RequestCancelActivityTaskFailed</b>: Failed to process RequestCancelActivityTask decision. This happens when the decision is not configured properly.</li> <li> <b>WorkflowExecutionSignaled</b>: An external signal was received for the workflow execution.</li> <li> <b>MarkerRecorded</b>: A marker was recorded in the workflow history as the result of a <code>RecordMarker</code> decision.</li> <li> <b>TimerStarted</b>: A timer was started for the workflow execution due to a <code>StartTimer</code> decision.</li> <li> <b>StartTimerFailed</b>: Failed to process StartTimer decision. This happens when the decision is not configured properly, for example a timer already exists with the specified timer Id.</li> <li> <b>TimerFired</b>: A timer, previously started for this workflow execution, fired.</li> <li> <b>TimerCanceled</b>: A timer, previously started for this workflow execution, was successfully canceled.</li> <li> <b>CancelTimerFailed</b>: Failed to process CancelTimer decision. This happens when the decision is not configured properly, for example no timer exists with the specified timer Id.</li> <li> <b>StartChildWorkflowExecutionInitiated</b>: A request was made to start a child workflow execution.</li> <li> <b>StartChildWorkflowExecutionFailed</b>: Failed to process StartChildWorkflowExecution decision. This happens when the decision is not configured properly, for example the workflow type specified is not registered.</li> <li> <b>ChildWorkflowExecutionStarted</b>: A child workflow execution was successfully started.</li> <li> <b>ChildWorkflowExecutionCompleted</b>: A child workflow execution, started by this workflow execution, completed successfully and was closed.</li> <li> <b>ChildWorkflowExecutionFailed</b>: A child workflow execution, started by this workflow execution, failed to complete successfully and was closed.</li> <li> <b>ChildWorkflowExecutionTimedOut</b>: A child workflow execution, started by this workflow execution, timed out and was closed.</li> <li> <b>ChildWorkflowExecutionCanceled</b>: A child workflow execution, started by this workflow execution, was canceled and closed.</li> <li> <b>ChildWorkflowExecutionTerminated</b>: A child workflow execution, started by this workflow execution, was terminated.</li> <li> <b>SignalExternalWorkflowExecutionInitiated</b>: A request to signal an external workflow was made.</li> <li> <b>ExternalWorkflowExecutionSignaled</b>: A signal, requested by this workflow execution, was successfully delivered to the target external workflow execution.</li> <li> <b>SignalExternalWorkflowExecutionFailed</b>: The request to signal an external workflow execution failed.</li> <li> <b>RequestCancelExternalWorkflowExecutionInitiated</b>: A request was made to request the cancellation of an external workflow execution.</li> <li> <b>ExternalWorkflowExecutionCancelRequested</b>: Request to cancel an external workflow execution was successfully delivered to the target execution.</li> <li> <b>RequestCancelExternalWorkflowExecutionFailed</b>: Request to cancel an external workflow execution failed.</li> </ul>"
+      "documentation":"<p>Event within a workflow execution. A history event can be one of these types:</p> <ul> <li> <b>WorkflowExecutionStarted</b>: The workflow execution was started.</li> <li> <b>WorkflowExecutionCompleted</b>: The workflow execution was closed due to successful completion.</li> <li> <b>WorkflowExecutionFailed</b>: The workflow execution closed due to a failure.</li> <li> <b>WorkflowExecutionTimedOut</b>: The workflow execution was closed because a time out was exceeded.</li> <li> <b>WorkflowExecutionCanceled</b>: The workflow execution was successfully canceled and closed.</li> <li> <b>WorkflowExecutionTerminated</b>: The workflow execution was terminated.</li> <li> <b>WorkflowExecutionContinuedAsNew</b>: The workflow execution was closed and a new execution of the same type was created with the same workflowId.</li> <li> <b>WorkflowExecutionCancelRequested</b>: A request to cancel this workflow execution was made.</li> <li> <b>DecisionTaskScheduled</b>: A decision task was scheduled for the workflow execution.</li> <li> <b>DecisionTaskStarted</b>: The decision task was dispatched to a decider.</li> <li> <b>DecisionTaskCompleted</b>: The decider successfully completed a decision task by calling <a>RespondDecisionTaskCompleted</a>.</li> <li> <b>DecisionTaskTimedOut</b>: The decision task timed out.</li> <li> <b>ActivityTaskScheduled</b>: An activity task was scheduled for execution.</li> <li> <b>ScheduleActivityTaskFailed</b>: Failed to process ScheduleActivityTask decision. This happens when the decision is not configured properly, for example the activity type specified is not registered.</li> <li> <b>ActivityTaskStarted</b>: The scheduled activity task was dispatched to a worker.</li> <li> <b>ActivityTaskCompleted</b>: An activity worker successfully completed an activity task by calling <a>RespondActivityTaskCompleted</a>.</li> <li> <b>ActivityTaskFailed</b>: An activity worker failed an activity task by calling <a>RespondActivityTaskFailed</a>.</li> <li> <b>ActivityTaskTimedOut</b>: The activity task timed out.</li> <li> <b>ActivityTaskCanceled</b>: The activity task was successfully canceled.</li> <li> <b>ActivityTaskCancelRequested</b>: A <code>RequestCancelActivityTask</code> decision was received by the system.</li> <li> <b>RequestCancelActivityTaskFailed</b>: Failed to process RequestCancelActivityTask decision. This happens when the decision is not configured properly.</li> <li> <b>WorkflowExecutionSignaled</b>: An external signal was received for the workflow execution.</li> <li> <b>MarkerRecorded</b>: A marker was recorded in the workflow history as the result of a <code>RecordMarker</code> decision.</li> <li> <b>TimerStarted</b>: A timer was started for the workflow execution due to a <code>StartTimer</code> decision.</li> <li> <b>StartTimerFailed</b>: Failed to process StartTimer decision. This happens when the decision is not configured properly, for example a timer already exists with the specified timer ID.</li> <li> <b>TimerFired</b>: A timer, previously started for this workflow execution, fired.</li> <li> <b>TimerCanceled</b>: A timer, previously started for this workflow execution, was successfully canceled.</li> <li> <b>CancelTimerFailed</b>: Failed to process CancelTimer decision. This happens when the decision is not configured properly, for example no timer exists with the specified timer ID.</li> <li> <b>StartChildWorkflowExecutionInitiated</b>: A request was made to start a child workflow execution.</li> <li> <b>StartChildWorkflowExecutionFailed</b>: Failed to process StartChildWorkflowExecution decision. This happens when the decision is not configured properly, for example the workflow type specified is not registered.</li> <li> <b>ChildWorkflowExecutionStarted</b>: A child workflow execution was successfully started.</li> <li> <b>ChildWorkflowExecutionCompleted</b>: A child workflow execution, started by this workflow execution, completed successfully and was closed.</li> <li> <b>ChildWorkflowExecutionFailed</b>: A child workflow execution, started by this workflow execution, failed to complete successfully and was closed.</li> <li> <b>ChildWorkflowExecutionTimedOut</b>: A child workflow execution, started by this workflow execution, timed out and was closed.</li> <li> <b>ChildWorkflowExecutionCanceled</b>: A child workflow execution, started by this workflow execution, was canceled and closed.</li> <li> <b>ChildWorkflowExecutionTerminated</b>: A child workflow execution, started by this workflow execution, was terminated.</li> <li> <b>SignalExternalWorkflowExecutionInitiated</b>: A request to signal an external workflow was made.</li> <li> <b>ExternalWorkflowExecutionSignaled</b>: A signal, requested by this workflow execution, was successfully delivered to the target external workflow execution.</li> <li> <b>SignalExternalWorkflowExecutionFailed</b>: The request to signal an external workflow execution failed.</li> <li> <b>RequestCancelExternalWorkflowExecutionInitiated</b>: A request was made to request the cancellation of an external workflow execution.</li> <li> <b>ExternalWorkflowExecutionCancelRequested</b>: Request to cancel an external workflow execution was successfully delivered to the target execution.</li> <li> <b>RequestCancelExternalWorkflowExecutionFailed</b>: Request to cancel an external workflow execution failed.</li> <li> <b>LambdaFunctionScheduled</b>: An AWS Lambda function was scheduled for execution.</li> <li> <b>LambdaFunctionStarted</b>: The scheduled function was invoked in the AWS Lambda service.</li> <li> <b>LambdaFunctionCompleted</b>: The AWS Lambda function successfully completed.</li> <li> <b>LambdaFunctionFailed</b>: The AWS Lambda function execution failed.</li> <li> <b>LambdaFunctionTimedOut</b>: The AWS Lambda function execution timed out.</li> <li> <b>ScheduleLambdaFunctionFailed</b>: Failed to process ScheduleLambdaFunction decision. This happens when the workflow execution does not have the proper IAM role attached to invoke AWS Lambda functions.</li> <li> <b>StartLambdaFunctionFailed</b>: Failed to invoke the scheduled function in the AWS Lambda service. This happens when the AWS Lambda service is not available in the current region, or received too many requests.</li> </ul>"
     },
     "HistoryEventList":{
       "type":"list",
@@ -2506,6 +2551,122 @@
     "Identity":{
       "type":"string",
       "max":256
+    },
+    "LambdaFunctionCompletedEventAttributes":{
+      "type":"structure",
+      "required":[
+        "scheduledEventId",
+        "startedEventId"
+      ],
+      "members":{
+        "scheduledEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>LambdaFunctionScheduled</code> event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+        },
+        "startedEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>LambdaFunctionStarted</code> event recorded in the history.</p>"
+        },
+        "result":{
+          "shape":"Data",
+          "documentation":"<p>The result of the function execution (if any).</p>"
+        }
+      },
+      "documentation":"<p>Provides details for the <code>LambdaFunctionCompleted</code> event.</p>"
+    },
+    "LambdaFunctionFailedEventAttributes":{
+      "type":"structure",
+      "required":[
+        "scheduledEventId",
+        "startedEventId"
+      ],
+      "members":{
+        "scheduledEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>LambdaFunctionScheduled</code> event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+        },
+        "startedEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>LambdaFunctionStarted</code> event recorded in the history.</p>"
+        },
+        "reason":{
+          "shape":"FailureReason",
+          "documentation":"<p>The reason provided for the failure (if any).</p>"
+        },
+        "details":{
+          "shape":"Data",
+          "documentation":"<p>The details of the failure (if any).</p>"
+        }
+      },
+      "documentation":"<p>Provides details for the <code>LambdaFunctionFailed</code> event.</p>"
+    },
+    "LambdaFunctionScheduledEventAttributes":{
+      "type":"structure",
+      "required":[
+        "id",
+        "name",
+        "decisionTaskCompletedEventId"
+      ],
+      "members":{
+        "id":{
+          "shape":"FunctionId",
+          "documentation":"<p>The unique Amazon SWF ID for the AWS Lambda task.</p>"
+        },
+        "name":{
+          "shape":"FunctionName",
+          "documentation":"<p>The name of the scheduled AWS Lambda function.</p>"
+        },
+        "input":{
+          "shape":"FunctionInput",
+          "documentation":"<p>Input provided to the AWS Lambda function.</p>"
+        },
+        "startToCloseTimeout":{
+          "shape":"DurationInSecondsOptional",
+          "documentation":"<p>The maximum time, in seconds, that the AWS Lambda function can take to execute from start to close before it is marked as failed.</p>"
+        },
+        "decisionTaskCompletedEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event for the decision that resulted in the scheduling of this AWS Lambda function. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+        }
+      },
+      "documentation":"<p>Provides details for the <code>LambdaFunctionScheduled</code> event.</p>"
+    },
+    "LambdaFunctionStartedEventAttributes":{
+      "type":"structure",
+      "required":["scheduledEventId"],
+      "members":{
+        "scheduledEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>LambdaFunctionScheduled</code> event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+        }
+      },
+      "documentation":"<p>Provides details for the <code>LambdaFunctionStarted</code> event.</p>"
+    },
+    "LambdaFunctionTimedOutEventAttributes":{
+      "type":"structure",
+      "required":[
+        "scheduledEventId",
+        "startedEventId"
+      ],
+      "members":{
+        "scheduledEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>LambdaFunctionScheduled</code> event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+        },
+        "startedEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>LambdaFunctionStarted</code> event recorded in the history.</p>"
+        },
+        "timeoutType":{
+          "shape":"LambdaFunctionTimeoutType",
+          "documentation":"<p>The type of the timeout that caused this event.</p>"
+        }
+      },
+      "documentation":"<p>Provides details for the <code>LambdaFunctionTimedOut</code> event.</p>"
+    },
+    "LambdaFunctionTimeoutType":{
+      "type":"string",
+      "enum":["START_TO_CLOSE"]
     },
     "LimitExceededFault":{
       "type":"structure",
@@ -2547,7 +2708,7 @@
         },
         "maximumPageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than 100.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than the maximum.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
         },
         "reverseOrder":{
           "shape":"ReverseOrder",
@@ -2573,7 +2734,7 @@
         },
         "executionFilter":{
           "shape":"WorkflowExecutionFilter",
-          "documentation":"<p>If specified, only workflow executions matching the workflow id specified in the filter are returned.</p> <note><code>closeStatusFilter</code>, <code>executionFilter</code>, <code>typeFilter</code> and <code>tagFilter</code> are mutually exclusive. You can specify at most one of these in a request.</note>"
+          "documentation":"<p>If specified, only workflow executions matching the workflow ID specified in the filter are returned.</p> <note><code>closeStatusFilter</code>, <code>executionFilter</code>, <code>typeFilter</code> and <code>tagFilter</code> are mutually exclusive. You can specify at most one of these in a request.</note>"
         },
         "closeStatusFilter":{
           "shape":"CloseStatusFilter",
@@ -2593,7 +2754,7 @@
         },
         "maximumPageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than 100.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than the maximum.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
         },
         "reverseOrder":{
           "shape":"ReverseOrder",
@@ -2615,7 +2776,7 @@
         },
         "maximumPageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than 100.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than the maximum.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
         },
         "reverseOrder":{
           "shape":"ReverseOrder",
@@ -2652,7 +2813,7 @@
         },
         "maximumPageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than 100.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than the maximum.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
         },
         "reverseOrder":{
           "shape":"ReverseOrder",
@@ -2660,7 +2821,7 @@
         },
         "executionFilter":{
           "shape":"WorkflowExecutionFilter",
-          "documentation":"<p>If specified, only workflow executions matching the workflow id specified in the filter are returned.</p> <note><code>executionFilter</code>, <code>typeFilter</code> and <code>tagFilter</code> are mutually exclusive. You can specify at most one of these in a request.</note>"
+          "documentation":"<p>If specified, only workflow executions matching the workflow ID specified in the filter are returned.</p> <note><code>executionFilter</code>, <code>typeFilter</code> and <code>tagFilter</code> are mutually exclusive. You can specify at most one of these in a request.</note>"
         }
       }
     },
@@ -2689,7 +2850,7 @@
         },
         "maximumPageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than 100.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than the maximum.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
         },
         "reverseOrder":{
           "shape":"ReverseOrder",
@@ -2719,7 +2880,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RecordMarker</code> decision that requested this marker. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RecordMarker</code> decision that requested this marker. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>MarkerRecorded</code> event.</p>"
@@ -2815,7 +2976,7 @@
         },
         "maximumPageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than 100.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextPageToken</code> can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size <i>smaller</i> than the maximum.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
         },
         "reverseOrder":{
           "shape":"ReverseOrder",
@@ -2874,7 +3035,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RecordMarkerFailed</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RecordMarkerFailed</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>RecordMarkerFailed</code> event.</p>"
@@ -2905,15 +3066,15 @@
         },
         "defaultTaskStartToCloseTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p>If set, specifies the default maximum duration that a worker can take to process tasks of this activity type. This default can be overridden when scheduling an activity task using the <code>ScheduleActivityTask</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p>If set, specifies the default maximum duration that a worker can take to process tasks of this activity type. This default can be overridden when scheduling an activity task using the <code>ScheduleActivityTask</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         },
         "defaultTaskHeartbeatTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p>If set, specifies the default maximum time before which a worker processing a task of this type must report progress by calling <a>RecordActivityTaskHeartbeat</a>. If the timeout is exceeded, the activity task is automatically timed out. This default can be overridden when scheduling an activity task using the <code>ScheduleActivityTask</code> <a>Decision</a>. If the activity worker subsequently attempts to record a heartbeat or returns a result, the activity worker receives an <code>UnknownResource</code> fault. In this case, Amazon SWF no longer considers the activity task to be valid; the activity worker should clean up the activity task.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p>If set, specifies the default maximum time before which a worker processing a task of this type must report progress by calling <a>RecordActivityTaskHeartbeat</a>. If the timeout is exceeded, the activity task is automatically timed out. This default can be overridden when scheduling an activity task using the <code>ScheduleActivityTask</code> decision. If the activity worker subsequently attempts to record a heartbeat or returns a result, the activity worker receives an <code>UnknownResource</code> fault. In this case, Amazon SWF no longer considers the activity task to be valid; the activity worker should clean up the activity task.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         },
         "defaultTaskList":{
           "shape":"TaskList",
-          "documentation":"<p>If set, specifies the default task list to use for scheduling tasks of this activity type. This default task list is used if a task list is not provided when a task is scheduled through the <code>ScheduleActivityTask</code> <a>Decision</a>.</p>"
+          "documentation":"<p>If set, specifies the default task list to use for scheduling tasks of this activity type. This default task list is used if a task list is not provided when a task is scheduled through the <code>ScheduleActivityTask</code> decision.</p>"
         },
         "defaultTaskPriority":{
           "shape":"TaskPriority",
@@ -2921,11 +3082,11 @@
         },
         "defaultTaskScheduleToStartTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p>If set, specifies the default maximum duration that a task of this activity type can wait before being assigned to a worker. This default can be overridden when scheduling an activity task using the <code>ScheduleActivityTask</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p>If set, specifies the default maximum duration that a task of this activity type can wait before being assigned to a worker. This default can be overridden when scheduling an activity task using the <code>ScheduleActivityTask</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         },
         "defaultTaskScheduleToCloseTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p>If set, specifies the default maximum duration for a task of this activity type. This default can be overridden when scheduling an activity task using the <code>ScheduleActivityTask</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p>If set, specifies the default maximum duration for a task of this activity type. This default can be overridden when scheduling an activity task using the <code>ScheduleActivityTask</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         }
       }
     },
@@ -2976,15 +3137,15 @@
         },
         "defaultTaskStartToCloseTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p>If set, specifies the default maximum duration of decision tasks for this workflow type. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p>If set, specifies the default maximum duration of decision tasks for this workflow type. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         },
         "defaultExecutionStartToCloseTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p>If set, specifies the default maximum duration for executions of this workflow type. You can override this default when starting an execution through the <a>StartWorkflowExecution</a> Action or <code>StartChildWorkflowExecution</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. Unlike some of the other timeout parameters in Amazon SWF, you cannot specify a value of \"NONE\" for <code>defaultExecutionStartToCloseTimeout</code>; there is a one-year max limit on the time that a workflow execution can run. Exceeding this limit will always cause the workflow execution to time out.</p>"
+          "documentation":"<p>If set, specifies the default maximum duration for executions of this workflow type. You can override this default when starting an execution through the <a>StartWorkflowExecution</a> action or <code>StartChildWorkflowExecution</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. Unlike some of the other timeout parameters in Amazon SWF, you cannot specify a value of \"NONE\" for <code>defaultExecutionStartToCloseTimeout</code>; there is a one-year max limit on the time that a workflow execution can run. Exceeding this limit will always cause the workflow execution to time out.</p>"
         },
         "defaultTaskList":{
           "shape":"TaskList",
-          "documentation":"<p>If set, specifies the default task list to use for scheduling decision tasks for executions of this workflow type. This default is used only if a task list is not provided when starting the execution through the <a>StartWorkflowExecution</a> Action or <code>StartChildWorkflowExecution</code> <a>Decision</a>.</p>"
+          "documentation":"<p>If set, specifies the default task list to use for scheduling decision tasks for executions of this workflow type. This default is used only if a task list is not provided when starting the execution through the <a>StartWorkflowExecution</a> action or <code>StartChildWorkflowExecution</code> decision.</p>"
         },
         "defaultTaskPriority":{
           "shape":"TaskPriority",
@@ -2992,7 +3153,11 @@
         },
         "defaultChildPolicy":{
           "shape":"ChildPolicy",
-          "documentation":"<p>If set, specifies the default policy to use for the child workflow executions when a workflow execution of this type is terminated, by calling the <a>TerminateWorkflowExecution</a> action explicitly or due to an expired timeout. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> <a>Decision</a>.</p> <p>The supported child policies are:</p> <ul> <li><b>TERMINATE:</b> the child executions will be terminated.</li> <li><b>REQUEST_CANCEL:</b> a request to cancel will be attempted for each child execution by recording a <code>WorkflowExecutionCancelRequested</code> event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.</li> <li><b>ABANDON:</b> no action will be taken. The child executions will continue to run.</li> </ul>"
+          "documentation":"<p>If set, specifies the default policy to use for the child workflow executions when a workflow execution of this type is terminated, by calling the <a>TerminateWorkflowExecution</a> action explicitly or due to an expired timeout. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> decision.</p> <p>The supported child policies are:</p> <ul> <li><b>TERMINATE:</b> the child executions will be terminated.</li> <li><b>REQUEST_CANCEL:</b> a request to cancel will be attempted for each child execution by recording a <code>WorkflowExecutionCancelRequested</code> event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.</li> <li><b>ABANDON:</b> no action will be taken. The child executions will continue to run.</li> </ul>"
+        },
+        "defaultLambdaRole":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the default IAM role to use when a workflow execution of this type invokes AWS Lambda functions.</p> <p>This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> and <code>ContinueAsNewWorkflowExecution</code> decision.</p>"
         }
       }
     },
@@ -3039,7 +3204,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RequestCancelActivityTask</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RequestCancelActivityTask</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>RequestCancelActivityTaskFailed</code> event.</p>"
@@ -3094,11 +3259,11 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>RequestCancelExternalWorkflowExecutionInitiated</code> event corresponding to the <code>RequestCancelExternalWorkflowExecution</code> decision to cancel this external workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>RequestCancelExternalWorkflowExecutionInitiated</code> event corresponding to the <code>RequestCancelExternalWorkflowExecution</code> decision to cancel this external workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RequestCancelExternalWorkflowExecution</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RequestCancelExternalWorkflowExecution</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "control":{"shape":"Data"}
       },
@@ -3121,7 +3286,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RequestCancelExternalWorkflowExecution</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>RequestCancelExternalWorkflowExecution</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "control":{
           "shape":"Data",
@@ -3207,7 +3372,7 @@
         },
         "decisions":{
           "shape":"DecisionList",
-          "documentation":"<p>The list of decisions (possibly empty) made by the decider while processing this decision task. See the docs for the <a>Decision</a> structure for details.</p>"
+          "documentation":"<p>The list of decisions (possibly empty) made by the decider while processing this decision task. See the docs for the decision structure for details.</p>"
         },
         "executionContext":{
           "shape":"Data",
@@ -3221,7 +3386,7 @@
       "members":{
         "runId":{
           "shape":"RunId",
-          "documentation":"<p>The <code>runId</code> of a workflow execution. This Id is generated by the service and can be used to uniquely identify the workflow execution within a domain.</p>"
+          "documentation":"<p>The <code>runId</code> of a workflow execution. This ID is generated by the service and can be used to uniquely identify the workflow execution within a domain.</p>"
         }
       },
       "documentation":"<p>Specifies the <code>runId</code> of a workflow execution.</p>"
@@ -3324,10 +3489,73 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision that resulted in the scheduling of this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision that resulted in the scheduling of this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>ScheduleActivityTaskFailed</code> event.</p>"
+    },
+    "ScheduleLambdaFunctionDecisionAttributes":{
+      "type":"structure",
+      "required":[
+        "id",
+        "name"
+      ],
+      "members":{
+        "id":{
+          "shape":"FunctionId",
+          "documentation":"<p><b>Required.</b> The SWF <code>id</code> of the AWS Lambda task.</p> <p>The specified string must not start or end with whitespace. It must not contain a <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control characters (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not contain the literal string quotarnquot.</p>"
+        },
+        "name":{
+          "shape":"FunctionName",
+          "documentation":"<p><b>Required.</b> The name of the AWS Lambda function to invoke.</p>"
+        },
+        "input":{
+          "shape":"FunctionInput",
+          "documentation":"<p>The input provided to the AWS Lambda function.</p>"
+        },
+        "startToCloseTimeout":{
+          "shape":"DurationInSecondsOptional",
+          "documentation":"<p>If set, specifies the maximum duration the function may take to execute.</p>"
+        }
+      },
+      "documentation":"<p>Provides details of the <code>ScheduleLambdaFunction</code> decision.</p> <p><b>Access Control</b></p> <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p> <ul> <li>Use a <code>Resource</code> element with the domain name to limit the action to only specified domains.</li> <li>Use an <code>Action</code> element to allow or deny permission to call this action.</li> <li>Constrain the following parameters by using a <code>Condition</code> element with the appropriate keys. <ul> <li><code>activityType.name</code>: String constraint. The key is <code>swf:activityType.name</code>.</li> <li><code>activityType.version</code>: String constraint. The key is <code>swf:activityType.version</code>.</li> <li><code>taskList</code>: String constraint. The key is <code>swf:taskList.name</code>.</li> </ul> </li> </ul> <p>If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's <b>cause</b> parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p>"
+    },
+    "ScheduleLambdaFunctionFailedCause":{
+      "type":"string",
+      "enum":[
+        "ID_ALREADY_IN_USE",
+        "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED",
+        "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED",
+        "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
+      ]
+    },
+    "ScheduleLambdaFunctionFailedEventAttributes":{
+      "type":"structure",
+      "required":[
+        "id",
+        "name",
+        "cause",
+        "decisionTaskCompletedEventId"
+      ],
+      "members":{
+        "id":{
+          "shape":"FunctionId",
+          "documentation":"<p>The unique Amazon SWF ID of the AWS Lambda task.</p>"
+        },
+        "name":{
+          "shape":"FunctionName",
+          "documentation":"<p>The name of the scheduled AWS Lambda function.</p>"
+        },
+        "cause":{
+          "shape":"ScheduleLambdaFunctionFailedCause",
+          "documentation":"<p>The cause of the failure. This information is generated by the system and can be useful for diagnostic purposes.</p> <note>If <b>cause</b> is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</note>"
+        },
+        "decisionTaskCompletedEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision that resulted in the scheduling of this AWS Lambda function. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+        }
+      },
+      "documentation":"<p>Provides details for the <code>ScheduleLambdaFunctionFailed</code> event.</p>"
     },
     "SignalExternalWorkflowExecutionDecisionAttributes":{
       "type":"structure",
@@ -3390,11 +3618,11 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>SignalExternalWorkflowExecutionInitiated</code> event corresponding to the <code>SignalExternalWorkflowExecution</code> decision to request this signal. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>SignalExternalWorkflowExecutionInitiated</code> event corresponding to the <code>SignalExternalWorkflowExecution</code> decision to request this signal. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>SignalExternalWorkflowExecution</code> decision for this signal. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>SignalExternalWorkflowExecution</code> decision for this signal. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "control":{"shape":"Data"}
       },
@@ -3426,7 +3654,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>SignalExternalWorkflowExecution</code> decision for this signal. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>SignalExternalWorkflowExecution</code> decision for this signal. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "control":{
           "shape":"Data",
@@ -3516,6 +3744,10 @@
         "tagList":{
           "shape":"TagList",
           "documentation":"<p>The list of tags to associate with the child workflow execution. A maximum of 5 tags can be specified. You can list workflow executions with a specific tag by calling <a>ListOpenWorkflowExecutions</a> or <a>ListClosedWorkflowExecutions</a> and specifying a <a>TagFilter</a>.</p>"
+        },
+        "lambdaRole":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of an IAM role that authorizes Amazon SWF to invoke AWS Lambda functions.</p> <note>In order for this workflow execution to invoke AWS Lambda functions, an appropriate IAM role must be specified either as a default for the workflow type or through this field.</note>"
         }
       },
       "documentation":"<p>Provides details of the <code>StartChildWorkflowExecution</code> decision.</p> <p><b>Access Control</b></p> <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p> <ul> <li>Use a <code>Resource</code> element with the domain name to limit the action to only specified domains.</li> <li>Use an <code>Action</code> element to allow or deny permission to call this action.</li> <li>Constrain the following parameters by using a <code>Condition</code> element with the appropriate keys. <ul> <li> <code>tagList.member.N</code>: The key is \"swf:tagList.N\" where N is the tag number from 0 to 4, inclusive.</li> <li><code>taskList</code>: String constraint. The key is <code>swf:taskList.name</code>.</li> <li><code>workflowType.name</code>: String constraint. The key is <code>swf:workflowType.name</code>.</li> <li><code>workflowType.version</code>: String constraint. The key is <code>swf:workflowType.version</code>.</li> </ul> </li> </ul> <p>If the caller does not have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's <b>cause</b> parameter will be set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</p>"
@@ -3548,7 +3780,7 @@
       "members":{
         "workflowType":{
           "shape":"WorkflowType",
-          "documentation":"<p>The workflow type provided in the <code>StartChildWorkflowExecution</code> <a>Decision</a> that failed.</p>"
+          "documentation":"<p>The workflow type provided in the <code>StartChildWorkflowExecution</code> decision that failed.</p>"
         },
         "cause":{
           "shape":"StartChildWorkflowExecutionFailedCause",
@@ -3560,11 +3792,11 @@
         },
         "initiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> decision to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartChildWorkflowExecution</code> <a>Decision</a> to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the cause of events.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartChildWorkflowExecution</code> decision to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the cause of events.</p>"
         },
         "control":{"shape":"Data"}
       },
@@ -3610,7 +3842,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartChildWorkflowExecution</code> <a>Decision</a> to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the cause of events.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartChildWorkflowExecution</code> decision to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the cause of events.</p>"
         },
         "childPolicy":{
           "shape":"ChildPolicy",
@@ -3623,9 +3855,35 @@
         "tagList":{
           "shape":"TagList",
           "documentation":"<p>The list of tags to associated with the child workflow execution.</p>"
+        },
+        "lambdaRole":{
+          "shape":"Arn",
+          "documentation":"<p>The IAM role attached to this workflow execution to use when invoking AWS Lambda functions.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>StartChildWorkflowExecutionInitiated</code> event.</p>"
+    },
+    "StartLambdaFunctionFailedCause":{
+      "type":"string",
+      "enum":["ASSUME_ROLE_FAILED"]
+    },
+    "StartLambdaFunctionFailedEventAttributes":{
+      "type":"structure",
+      "members":{
+        "scheduledEventId":{
+          "shape":"EventId",
+          "documentation":"<p>The ID of the <code>LambdaFunctionScheduled</code> event that was recorded when this AWS Lambda function was scheduled. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+        },
+        "cause":{
+          "shape":"StartLambdaFunctionFailedCause",
+          "documentation":"<p>The cause of the failure. This information is generated by the system and can be useful for diagnostic purposes.</p> <note>If <b>cause</b> is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see <a href=\"http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>.</note>"
+        },
+        "message":{
+          "shape":"CauseMessage",
+          "documentation":"<p>The error message (if any).</p>"
+        }
+      },
+      "documentation":"<p>Provides details for the <code>StartLambdaFunctionFailed</code> event.</p>"
     },
     "StartTimerDecisionAttributes":{
       "type":"structure",
@@ -3636,7 +3894,7 @@
       "members":{
         "timerId":{
           "shape":"TimerId",
-          "documentation":"<p><b>Required.</b> The unique Id of the timer.</p> <p>The specified string must not start or end with whitespace. It must not contain a <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control characters (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not contain the literal string quotarnquot.</p>"
+          "documentation":"<p><b>Required.</b> The unique ID of the timer.</p> <p>The specified string must not start or end with whitespace. It must not contain a <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control characters (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not contain the literal string quotarnquot.</p>"
         },
         "control":{
           "shape":"Data",
@@ -3676,7 +3934,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartTimer</code> decision for this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartTimer</code> decision for this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>StartTimerFailed</code> event.</p>"
@@ -3728,6 +3986,10 @@
         "childPolicy":{
           "shape":"ChildPolicy",
           "documentation":"<p>If set, specifies the policy to use for the child workflow executions of this workflow execution if it is terminated, by calling the <a>TerminateWorkflowExecution</a> action explicitly or due to an expired timeout. This policy overrides the default child policy specified when registering the workflow type using <a>RegisterWorkflowType</a>.</p> <p>The supported child policies are:</p> <ul> <li><b>TERMINATE:</b> the child executions will be terminated.</li> <li><b>REQUEST_CANCEL:</b> a request to cancel will be attempted for each child execution by recording a <code>WorkflowExecutionCancelRequested</code> event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.</li> <li><b>ABANDON:</b> no action will be taken. The child executions will continue to run.</li> </ul> <note>A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.</note>"
+        },
+        "lambdaRole":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of an IAM role that authorizes Amazon SWF to invoke AWS Lambda functions.</p> <note>In order for this workflow execution to invoke AWS Lambda functions, an appropriate IAM role must be specified either as a default for the workflow type or through this field.</note>"
         }
       }
     },
@@ -3819,15 +4081,15 @@
       "members":{
         "timerId":{
           "shape":"TimerId",
-          "documentation":"<p> The unique Id of the timer that was canceled. </p>"
+          "documentation":"<p> The unique ID of the timer that was canceled. </p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>TimerStarted</code> event that was recorded when this timer was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>TimerStarted</code> event that was recorded when this timer was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelTimer</code> decision to cancel this timer. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelTimer</code> decision to cancel this timer. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p> Provides details of the <code>TimerCanceled</code> event. </p>"
@@ -3841,11 +4103,11 @@
       "members":{
         "timerId":{
           "shape":"TimerId",
-          "documentation":"<p>The unique Id of the timer that fired.</p>"
+          "documentation":"<p>The unique ID of the timer that fired.</p>"
         },
         "startedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>TimerStarted</code> event that was recorded when this timer was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>TimerStarted</code> event that was recorded when this timer was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>TimerFired</code> event.</p>"
@@ -3865,7 +4127,7 @@
       "members":{
         "timerId":{
           "shape":"TimerId",
-          "documentation":"<p>The unique Id of the timer that was started.</p>"
+          "documentation":"<p>The unique ID of the timer that was started.</p>"
         },
         "control":{
           "shape":"Data",
@@ -3877,7 +4139,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartTimer</code> decision for this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartTimer</code> decision for this activity task. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>TimerStarted</code> event.</p>"
@@ -3968,7 +4230,7 @@
         },
         "externalInitiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>RequestCancelExternalWorkflowExecutionInitiated</code> event corresponding to the <code>RequestCancelExternalWorkflowExecution</code> decision to cancel this workflow execution.The source event with this Id can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>RequestCancelExternalWorkflowExecutionInitiated</code> event corresponding to the <code>RequestCancelExternalWorkflowExecution</code> decision to cancel this workflow execution.The source event with this ID can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "cause":{
           "shape":"WorkflowExecutionCancelRequestedCause",
@@ -3987,7 +4249,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelWorkflowExecution</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CancelWorkflowExecution</code> decision for this cancellation request. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>WorkflowExecutionCanceled</code> event.</p>"
@@ -4002,7 +4264,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CompleteWorkflowExecution</code> decision to complete this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>CompleteWorkflowExecution</code> decision to complete this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>WorkflowExecutionCompleted</code> event.</p>"
@@ -4035,6 +4297,10 @@
         "childPolicy":{
           "shape":"ChildPolicy",
           "documentation":"<p>The policy to use for the child workflow executions if this workflow execution is terminated, by calling the <a>TerminateWorkflowExecution</a> action explicitly or due to an expired timeout.</p> <p>The supported child policies are:</p> <ul> <li><b>TERMINATE:</b> the child executions will be terminated.</li> <li><b>REQUEST_CANCEL:</b> a request to cancel will be attempted for each child execution by recording a <code>WorkflowExecutionCancelRequested</code> event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.</li> <li><b>ABANDON:</b> no action will be taken. The child executions will continue to run.</li> </ul>"
+        },
+        "lambdaRole":{
+          "shape":"Arn",
+          "documentation":"<p>The IAM role used by this workflow execution when invoking AWS Lambda functions.</p>"
         }
       },
       "documentation":"<p>The configuration settings for a workflow execution including timeout values, tasklist etc. These configuration settings are determined from the defaults specified when registering the workflow type and those specified when starting the workflow execution.</p>"
@@ -4055,7 +4321,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>ContinueAsNewWorkflowExecution</code> decision that started this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>ContinueAsNewWorkflowExecution</code> decision that started this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         },
         "newExecutionRunId":{
           "shape":"RunId",
@@ -4079,7 +4345,11 @@
           "shape":"TagList",
           "documentation":"<p>The list of tags associated with the new workflow execution.</p>"
         },
-        "workflowType":{"shape":"WorkflowType"}
+        "workflowType":{"shape":"WorkflowType"},
+        "lambdaRole":{
+          "shape":"Arn",
+          "documentation":"<p>The IAM role attached to this workflow execution to use when invoking AWS Lambda functions.</p>"
+        }
       },
       "documentation":"<p>Provides details of the <code>WorkflowExecutionContinuedAsNew</code> event.</p>"
     },
@@ -4143,7 +4413,7 @@
         },
         "decisionTaskCompletedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>FailWorkflowExecution</code> decision to fail this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>FailWorkflowExecution</code> decision to fail this execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>WorkflowExecutionFailed</code> event.</p>"
@@ -4250,6 +4520,10 @@
         "openChildWorkflowExecutions":{
           "shape":"Count",
           "documentation":"<p>The count of child workflow executions whose status is OPEN.</p>"
+        },
+        "openLambdaFunctions":{
+          "shape":"Count",
+          "documentation":"<p>The count of AWS Lambda functions that are currently executing.</p>"
         }
       },
       "documentation":"<p>Contains the counts of open tasks, child workflow executions and timers for a workflow execution.</p>"
@@ -4272,7 +4546,7 @@
         },
         "externalInitiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>SignalExternalWorkflowExecutionInitiated</code> event corresponding to the <code>SignalExternalWorkflow</code> decision to signal this workflow execution.The source event with this Id can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event. This field is set only if the signal was initiated by another workflow execution.</p>"
+          "documentation":"<p>The ID of the <code>SignalExternalWorkflowExecutionInitiated</code> event corresponding to the <code>SignalExternalWorkflow</code> decision to signal this workflow execution.The source event with this ID can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event. This field is set only if the signal was initiated by another workflow execution.</p>"
         }
       },
       "documentation":"<p>Provides details of the <code>WorkflowExecutionSignaled</code> event.</p>"
@@ -4324,7 +4598,11 @@
         },
         "parentInitiatedEventId":{
           "shape":"EventId",
-          "documentation":"<p>The id of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> <a>Decision</a> to start this workflow execution. The source event with this Id can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+          "documentation":"<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> decision to start this workflow execution. The source event with this ID can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>"
+        },
+        "lambdaRole":{
+          "shape":"Arn",
+          "documentation":"<p>The IAM role attached to this workflow execution to use when invoking AWS Lambda functions.</p>"
         }
       },
       "documentation":"<p>Provides details of <code>WorkflowExecutionStarted</code> event.</p>"
@@ -4410,15 +4688,15 @@
       "members":{
         "defaultTaskStartToCloseTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p><i>Optional.</i> The default maximum duration, specified when registering the workflow type, that a decision task for executions of this workflow type might take before returning completion or failure. If the task does not close in the specified time then the task is automatically timed out and rescheduled. If the decider eventually reports a completion or failure, it is ignored. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p><i>Optional.</i> The default maximum duration, specified when registering the workflow type, that a decision task for executions of this workflow type might take before returning completion or failure. If the task does not close in the specified time then the task is automatically timed out and rescheduled. If the decider eventually reports a completion or failure, it is ignored. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         },
         "defaultExecutionStartToCloseTimeout":{
           "shape":"DurationInSecondsOptional",
-          "documentation":"<p><i>Optional.</i> The default maximum duration, specified when registering the workflow type, for executions of this workflow type. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> <a>Decision</a>.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
+          "documentation":"<p><i>Optional.</i> The default maximum duration, specified when registering the workflow type, for executions of this workflow type. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> decision.</p> <p>The duration is specified in seconds; an integer greater than or equal to 0. The value \"NONE\" can be used to specify unlimited duration.</p>"
         },
         "defaultTaskList":{
           "shape":"TaskList",
-          "documentation":"<p><i>Optional.</i> The default task list, specified when registering the workflow type, for decisions tasks scheduled for workflow executions of this type. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> <a>Decision</a>.</p>"
+          "documentation":"<p><i>Optional.</i> The default task list, specified when registering the workflow type, for decisions tasks scheduled for workflow executions of this type. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> decision.</p>"
         },
         "defaultTaskPriority":{
           "shape":"TaskPriority",
@@ -4426,7 +4704,11 @@
         },
         "defaultChildPolicy":{
           "shape":"ChildPolicy",
-          "documentation":"<p><i>Optional.</i> The default policy to use for the child workflow executions when a workflow execution of this type is terminated, by calling the <a>TerminateWorkflowExecution</a> action explicitly or due to an expired timeout. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> <a>Decision</a>.</p> <p>The supported child policies are:</p> <ul> <li><b>TERMINATE:</b> the child executions will be terminated.</li> <li><b>REQUEST_CANCEL:</b> a request to cancel will be attempted for each child execution by recording a <code>WorkflowExecutionCancelRequested</code> event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.</li> <li><b>ABANDON:</b> no action will be taken. The child executions will continue to run.</li> </ul>"
+          "documentation":"<p><i>Optional.</i> The default policy to use for the child workflow executions when a workflow execution of this type is terminated, by calling the <a>TerminateWorkflowExecution</a> action explicitly or due to an expired timeout. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> decision.</p> <p>The supported child policies are:</p> <ul> <li><b>TERMINATE:</b> the child executions will be terminated.</li> <li><b>REQUEST_CANCEL:</b> a request to cancel will be attempted for each child execution by recording a <code>WorkflowExecutionCancelRequested</code> event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.</li> <li><b>ABANDON:</b> no action will be taken. The child executions will continue to run.</li> </ul>"
+        },
+        "defaultLambdaRole":{
+          "shape":"Arn",
+          "documentation":"<p>The default IAM role to use when a workflow execution invokes a AWS Lambda function.</p>"
         }
       },
       "documentation":"<p>The configuration settings of a workflow type.</p>"
@@ -4514,5 +4796,7 @@
       },
       "documentation":"<p>Contains a paginated list of information structures about workflow types.</p>"
     }
+  },
+  "examples":{
   }
 }
