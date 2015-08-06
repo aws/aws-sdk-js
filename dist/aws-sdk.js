@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.1.43
+// AWS SDK for JavaScript v2.1.44
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -281,7 +281,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.1.43',
+  VERSION: '2.1.44',
 
 
   Signers: {},
@@ -4463,16 +4463,17 @@ AWS.util.update(AWS.EC2.prototype, {
   extractError: function extractError(resp) {
     var httpResponse = resp.httpResponse;
     var data = new AWS.XML.Parser().parse(httpResponse.body.toString() || '');
-    if (data.Errors)
+    if (data.Errors) {
       resp.error = AWS.util.error(new Error(), {
         code: data.Errors.Error.Code,
         message: data.Errors.Error.Message
       });
-    else
+    } else {
       resp.error = AWS.util.error(new Error(), {
         code: httpResponse.statusCode,
         message: null
       });
+    }
   }
 });
 
@@ -4694,10 +4695,11 @@ AWS.util.update(AWS.S3.prototype, {
     var req = resp.request;
     var httpResponse = resp.httpResponse;
     if (req.operation === 'completeMultipartUpload' &&
-        httpResponse.body.toString().match('<Error>'))
+        httpResponse.body.toString().match('<Error>')) {
       return false;
-    else
+    } else {
       return httpResponse.statusCode < 300;
+    }
   },
 
 
@@ -5207,10 +5209,11 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
         querystring = [];
         AWS.util.arrayEach(resources, function (res) {
-          if (res.value === undefined)
+          if (res.value === undefined) {
             querystring.push(res.name);
-          else
+          } else {
             querystring.push(res.name + '=' + res.value);
+          }
         });
 
         resource += '?' + querystring.join('&');
