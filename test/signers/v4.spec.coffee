@@ -155,3 +155,17 @@ describe 'AWS.Signers.V4', ->
     it 'should strip starting and end of line spaces', ->
       signer.request.headers = {'Header': ' \t   Value  \t  '}
       expect(signer.canonicalHeaders()).to.equal('header:Value')
+
+  describe 'presigned urls', ->
+
+    it 'hoists content-type to the query string', ->
+      req = new AWS.S3().putObject(Bucket: 'bucket', Key: 'key', ContentType: 'text/plain').build()
+      signer = new AWS.Signers.V4(req.httpRequest, 's3')
+      signer.updateForPresigned({}, '')
+      expect(signer.canonicalString().split('\n')[2]).to.contain('Content-Type=text%2Fplain')
+
+    it 'hoists content-md5 to the query string', ->
+      req = new AWS.S3().putObject(Bucket: 'bucket', Key: 'key', ContentMD5: 'foobar==').build()
+      signer = new AWS.Signers.V4(req.httpRequest, 's3')
+      signer.updateForPresigned({}, '')
+      expect(signer.canonicalString().split('\n')[2]).to.contain('Content-MD5=foobar%3D%3D')
