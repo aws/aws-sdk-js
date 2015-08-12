@@ -277,7 +277,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an an element in this activity.</p>"
+          "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an element in this activity.</p>"
         }
       ],
       "documentation":"<p> Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket. </p> <note>You cannot delete an application that has a running environment. </note>"
@@ -321,7 +321,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an an element in this activity.</p>"
+          "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an element in this activity.</p>"
         },
         {
           "shape":"S3LocationNotInServiceRegionException",
@@ -355,7 +355,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an an element in this activity.</p>"
+          "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an element in this activity.</p>"
         }
       ],
       "documentation":"<p>Deletes the specified configuration template.</p> <note>When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment.</note>"
@@ -440,6 +440,39 @@
       },
       "documentation":"<p> Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment. </p> <p> When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy. </p> <p>Related Topics</p> <ul> <li> <a>DeleteEnvironmentConfiguration</a> </li> </ul>"
     },
+    "DescribeEnvironmentHealth":{
+      "name":"DescribeEnvironmentHealth",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeEnvironmentHealthRequest",
+        "documentation":"<p>See the example below to learn how to create a request body.</p>"
+      },
+      "output":{
+        "shape":"DescribeEnvironmentHealthResult",
+        "documentation":"<p>See the example below for a sample response.</p>",
+        "resultWrapper":"DescribeEnvironmentHealthResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidRequestException",
+          "error":{
+            "code":"InvalidRequestException",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The request is invalid, please check parameters and their values</p>"
+        },
+        {
+          "shape":"ElasticBeanstalkServiceException",
+          "exception":true
+        }
+      ],
+      "documentation":"<p>Returns information about the overall health of the specified environment. The <b>DescribeEnvironmentHealth</b> operation is only available with AWS Elastic Beanstalk Enhanced Health.</p>"
+    },
     "DescribeEnvironmentResources":{
       "name":"DescribeEnvironmentResources",
       "http":{
@@ -502,6 +535,39 @@
         "resultWrapper":"DescribeEventsResult"
       },
       "documentation":"<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p> <note> This action returns the most recent 1,000 events from the specified <code>NextToken</code>. </note>"
+    },
+    "DescribeInstancesHealth":{
+      "name":"DescribeInstancesHealth",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeInstancesHealthRequest",
+        "documentation":"<p>See the example below to learn how to create a request body.</p>"
+      },
+      "output":{
+        "shape":"DescribeInstancesHealthResult",
+        "documentation":"<p>See the example below for a sample response.</p>",
+        "resultWrapper":"DescribeInstancesHealthResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidRequestException",
+          "error":{
+            "code":"InvalidRequestException",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The request is invalid, please check parameters and their values</p>"
+        },
+        {
+          "shape":"ElasticBeanstalkServiceException",
+          "exception":true
+        }
+      ],
+      "documentation":"<p>Returns more detailed information about the health of the specified instances (for example, CPU utilization, load average, and causes). The <b>DescribeInstancesHealth</b> operation is only available with AWS Elastic Beanstalk Enhanced Health.</p>"
     },
     "ListAvailableSolutionStacks":{
       "name":"ListAvailableSolutionStacks",
@@ -814,6 +880,28 @@
       },
       "documentation":"<p>Result message containing a list of application descriptions.</p>"
     },
+    "ApplicationMetrics":{
+      "type":"structure",
+      "members":{
+        "Duration":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The amount of time that the metrics cover (usually 10 seconds). For example, you might have 5 requests (<code>request_count</code>) within the most recent time slice of 10 seconds (<code>duration</code>).</p>"
+        },
+        "RequestCount":{
+          "shape":"RequestCount",
+          "documentation":"<p>Average number of requests handled by the web server per second over the last 10 seconds.</p>"
+        },
+        "StatusCodes":{
+          "shape":"StatusCodes",
+          "documentation":"<p>Represents the percentage of requests over the last 10 seconds that resulted in each type of status code response.</p>"
+        },
+        "Latency":{
+          "shape":"Latency",
+          "documentation":"<p>Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one milisecond resolution.</p>"
+        }
+      },
+      "documentation":"<p>Represents the application metrics for a specified environment.</p>"
+    },
     "ApplicationName":{
       "type":"string",
       "min":1,
@@ -900,6 +988,49 @@
       "type":"list",
       "member":{"shape":"SolutionStackName"}
     },
+    "CPUUtilization":{
+      "type":"structure",
+      "members":{
+        "User":{
+          "shape":"NullableDouble",
+          "documentation":"<p>Percentage of time that the CPU has spent in the <code>User</code> state over the last 10 seconds.</p>"
+        },
+        "Nice":{
+          "shape":"NullableDouble",
+          "documentation":"<p>Percentage of time that the CPU has spent in the <code>Nice</code> state over the last 10 seconds.</p>"
+        },
+        "System":{
+          "shape":"NullableDouble",
+          "documentation":"<p>Percentage of time that the CPU has spent in the <code>System</code> state over the last 10 seconds.</p>"
+        },
+        "Idle":{
+          "shape":"NullableDouble",
+          "documentation":"<p>Percentage of time that the CPU has spent in the <code>Idle</code> state over the last 10 seconds.</p>"
+        },
+        "IOWait":{
+          "shape":"NullableDouble",
+          "documentation":"<p>Percentage of time that the CPU has spent in the <code>I/O Wait</code> state over the last 10 seconds.</p>"
+        },
+        "IRQ":{
+          "shape":"NullableDouble",
+          "documentation":"<p>Percentage of time that the CPU has spent in the <code>IRQ</code> state over the last 10 seconds.</p>"
+        },
+        "SoftIRQ":{
+          "shape":"NullableDouble",
+          "documentation":"<p>Percentage of time that the CPU has spent in the <code>SoftIRQ</code> state over the last 10 seconds.</p>"
+        }
+      },
+      "documentation":"<p>Represents CPU utilization information from the specified instance that belongs to the AWS Elastic Beanstalk environment. Use the <code>instanceId</code> property to specify the application instance for which you'd like to return data.</p>"
+    },
+    "Cause":{
+      "type":"string",
+      "min":1,
+      "max":255
+    },
+    "Causes":{
+      "type":"list",
+      "member":{"shape":"Cause"}
+    },
     "CheckDNSAvailabilityMessage":{
       "type":"structure",
       "required":["CNAMEPrefix"],
@@ -960,7 +1091,7 @@
         },
         "ValueType":{
           "shape":"ConfigurationOptionValueType",
-          "documentation":"<p> An indication of which type of values this option has and whether it is allowable to select one or more than one of the possible values: </p> <enumValues> <value name=\"Scalar\"> <p> <code>Scalar</code> : Values for this option are a single selection from the possible values, or a unformatted string or numeric value governed by the MIN/MAX/Regex constraints: </p> </value> <value name=\"List\"> <p> <code>List</code> : Values for this option are multiple selections of the possible values. </p> </value> <value name=\"Boolean\"> <p> <code>Boolean</code> : Values for this option are either <code>true</code> or <code>false</code> . </p> </value> </enumValues> <p> <ul> <li> <code>Scalar</code> : Values for this option are a single selection from the possible values, or an unformatted string, or numeric value governed by the <code>MIN/MAX/Regex</code> constraints. </li> <li> <code>List</code> : Values for this option are multiple selections from the possible values. </li> <li> <code>Boolean</code> : Values for this option are either <code>true</code> or <code>false</code> . </li> </ul> </p>"
+          "documentation":"<p> An indication of which type of values this option has and whether it is allowable to select one or more than one of the possible values: </p> <enumValues> <value name=\"Scalar\"> <p> <code>Scalar</code> : Values for this option are a single selection from the possible values, or a unformatted string or numeric value governed by the MIN/MAX/Regex constraints: </p> </value> <value name=\"List\"> <p> <code>List</code> : Values for this option are multiple selections of the possible values. </p> </value> <value name=\"Boolean\"> <p> <code>Boolean</code> : Values for this option are either <code>true</code> or <code>false</code> . </p> </value> <value name=\"Json\"> <p> <code>Json</code> : Values for this option are a JSON representation of a <code>ConfigDocument</code>.</p> </value> </enumValues> <p> <ul> <li> <code>Scalar</code> : Values for this option are a single selection from the possible values, or an unformatted string, or numeric value governed by the <code>MIN/MAX/Regex</code> constraints. </li> <li> <code>List</code> : Values for this option are multiple selections from the possible values. </li> <li> <code>Boolean</code> : Values for this option are either <code>true</code> or <code>false</code> . </li> <li> <code>Json</code> : Values for this option are a JSON representation of a <code>ConfigDocument</code>. </li> </ul> </p>"
         },
         "ValueOptions":{
           "shape":"ConfigurationOptionPossibleValues",
@@ -1420,6 +1551,56 @@
       },
       "documentation":"<p>Result message containing all of the configuration settings for a specified solution stack or configuration template.</p>"
     },
+    "DescribeEnvironmentHealthRequest":{
+      "type":"structure",
+      "members":{
+        "EnvironmentName":{
+          "shape":"EnvironmentName",
+          "documentation":"<p>Specifies the AWS Elastic Beanstalk environment name.</p>"
+        },
+        "EnvironmentId":{
+          "shape":"EnvironmentId",
+          "documentation":"<p>Specifies the AWS Elastic Beanstalk environment ID.</p>"
+        },
+        "AttributeNames":{
+          "shape":"EnvironmentHealthAttributes",
+          "documentation":"<p>Specifies the response elements you wish to receive. If no attribute names are specified, AWS Elastic Beanstalk returns all response elements.</p>"
+        }
+      },
+      "documentation":"<p>See the example below to learn how to create a request body.</p>"
+    },
+    "DescribeEnvironmentHealthResult":{
+      "type":"structure",
+      "members":{
+        "EnvironmentName":{
+          "shape":"EnvironmentName",
+          "documentation":"<p>The AWS Elastic Beanstalk environment name.</p>"
+        },
+        "HealthStatus":{
+          "shape":"String",
+          "documentation":"<p>Contains the response body with information about the health of the environment.</p>"
+        },
+        "Status":{
+          "shape":"EnvironmentHealth",
+          "documentation":"<p>Returns the health status value of the environment. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">Health Colors and Statuses</a>.</p>"
+        },
+        "Color":{
+          "shape":"String",
+          "documentation":"<p>Returns the color indicator that tells you information about the health of the environment. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">Health Colors and Statuses</a>.</p>"
+        },
+        "Causes":{
+          "shape":"Causes",
+          "documentation":"<p>Returns potential causes for the reported status.</p>"
+        },
+        "ApplicationMetrics":{"shape":"ApplicationMetrics"},
+        "InstancesHealth":{"shape":"InstanceHealthSummary"},
+        "RefreshedAt":{
+          "shape":"RefreshedAt",
+          "documentation":"<p>The date and time the information was last refreshed.</p>"
+        }
+      },
+      "documentation":"<p>See the example below for a sample response.</p>"
+    },
     "DescribeEnvironmentResourcesMessage":{
       "type":"structure",
       "members":{
@@ -1514,11 +1695,58 @@
       },
       "documentation":"<p>This documentation target is not reported in the API reference.</p>"
     },
+    "DescribeInstancesHealthRequest":{
+      "type":"structure",
+      "members":{
+        "EnvironmentName":{
+          "shape":"EnvironmentName",
+          "documentation":"<p>Specifies the AWS Elastic Beanstalk environment name.</p>"
+        },
+        "EnvironmentId":{
+          "shape":"EnvironmentId",
+          "documentation":"<p>Specifies the AWS Elastic Beanstalk environment ID.</p>"
+        },
+        "AttributeNames":{
+          "shape":"InstancesHealthAttributes",
+          "documentation":"<p>Specifies the response elements you wish to receive. If no attribute names are specified, AWS Elastic Beanstalk returns all response elements.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>Specifies the next token of the request.</p>"
+        }
+      },
+      "documentation":"<p>See the example below to learn how to create a request body.</p>"
+    },
+    "DescribeInstancesHealthResult":{
+      "type":"structure",
+      "members":{
+        "InstanceHealthList":{
+          "shape":"InstanceHealthList",
+          "documentation":"<p>Contains the response body with information about the health of the instance.</p>"
+        },
+        "RefreshedAt":{
+          "shape":"RefreshedAt",
+          "documentation":"<p>The date and time the information was last refreshed.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The next token.</p>"
+        }
+      },
+      "documentation":"<p>See the example below for a sample response.</p>"
+    },
     "Description":{
       "type":"string",
       "max":200
     },
     "Ec2InstanceId":{"type":"string"},
+    "ElasticBeanstalkServiceException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "exception":true
+    },
     "EndpointURL":{"type":"string"},
     "EnvironmentDescription":{
       "type":"structure",
@@ -1579,6 +1807,10 @@
           "shape":"EnvironmentHealth",
           "documentation":"<p> Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment: </p> <enumValues> <value name=\"Red\"> <p> <code>Red</code> : Indicates the environment is not working. </p> </value> <value name=\"Yellow\"> <p> <code>Yellow</code>: Indicates that something is wrong, the application might not be available, but the instances appear running. </p> </value> <value name=\"Green\"> <p> <code>Green</code>: Indicates the environment is healthy and fully functional. </p> </value> </enumValues> <ul> <li> <code>Red</code>: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment. </li> <li> <code>Yellow</code>: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment. </li> <li> <code>Green</code>: Indicates the environment is healthy and fully functional. </li> <li> <code>Grey</code>: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an <code>UpdateEnvironment</code> or <code>RestartEnvironement</code> request. </li> </ul> <p> Default: <code>Grey</code> </p>"
         },
+        "HealthStatus":{
+          "shape":"EnvironmentHealthStatus",
+          "documentation":"<p>Returns the health status of the application running in your environment. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">Health Colors and Statuses</a>.</p>"
+        },
         "Resources":{
           "shape":"EnvironmentResourcesDescription",
           "documentation":"<p>The description of the AWS resources used by this environment.</p>"
@@ -1611,6 +1843,36 @@
         "Yellow",
         "Red",
         "Grey"
+      ]
+    },
+    "EnvironmentHealthAttribute":{
+      "type":"string",
+      "enum":[
+        "Status",
+        "Color",
+        "Causes",
+        "ApplicationMetrics",
+        "InstancesHealth",
+        "All",
+        "HealthStatus",
+        "RefreshedAt"
+      ]
+    },
+    "EnvironmentHealthAttributes":{
+      "type":"list",
+      "member":{"shape":"EnvironmentHealthAttribute"}
+    },
+    "EnvironmentHealthStatus":{
+      "type":"string",
+      "enum":[
+        "NoData",
+        "Unknown",
+        "Pending",
+        "Ok",
+        "Info",
+        "Warning",
+        "Degraded",
+        "Severe"
       ]
     },
     "EnvironmentId":{"type":"string"},
@@ -1811,6 +2073,7 @@
         "FATAL"
       ]
     },
+    "ExceptionMessage":{"type":"string"},
     "FileTypeExtension":{
       "type":"string",
       "min":1,
@@ -1828,9 +2091,73 @@
       },
       "documentation":"<p>The description of an Amazon EC2 instance.</p>"
     },
+    "InstanceHealthList":{
+      "type":"list",
+      "member":{"shape":"SingleInstanceHealth"}
+    },
+    "InstanceHealthSummary":{
+      "type":"structure",
+      "members":{
+        "NoData":{
+          "shape":"NullableInteger",
+          "documentation":"<p><b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting no data on an instance.</p>"
+        },
+        "Unknown":{
+          "shape":"NullableInteger",
+          "documentation":"<p><b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting an insufficient amount of data on an instance.</p>"
+        },
+        "Pending":{
+          "shape":"NullableInteger",
+          "documentation":"<p><b>Grey.</b> An operation is in progress on an instance within the command timeout.</p>"
+        },
+        "Ok":{
+          "shape":"NullableInteger",
+          "documentation":"<p><b>Green.</b> An instance is passing health checks and the health agent is not reporting any problems.</p>"
+        },
+        "Info":{
+          "shape":"NullableInteger",
+          "documentation":"<p><b>Green.</b> An operation is in progress on an instance.</p>"
+        },
+        "Warning":{
+          "shape":"NullableInteger",
+          "documentation":"<p><b>Yellow.</b> The health agent is reporting a moderate number of request failures or other issues for an instance or environment.</p>"
+        },
+        "Degraded":{
+          "shape":"NullableInteger",
+          "documentation":"<p><b>Red.</b> The health agent is reporting a high number of request failures or other issues for an instance or environment.</p>"
+        },
+        "Severe":{
+          "shape":"NullableInteger",
+          "documentation":"<p><b>Red.</b> The health agent is reporting a very high number of request failures or other issues for an instance or environment.</p>"
+        }
+      },
+      "documentation":"<p>Represents summary information about the health of an instance. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">Health Colors and Statuses</a>.</p>"
+    },
+    "InstanceId":{
+      "type":"string",
+      "min":1,
+      "max":255
+    },
     "InstanceList":{
       "type":"list",
       "member":{"shape":"Instance"}
+    },
+    "InstancesHealthAttribute":{
+      "type":"string",
+      "enum":[
+        "HealthStatus",
+        "Color",
+        "Causes",
+        "ApplicationMetrics",
+        "RefreshedAt",
+        "LaunchedAt",
+        "System",
+        "All"
+      ]
+    },
+    "InstancesHealthAttributes":{
+      "type":"list",
+      "member":{"shape":"InstancesHealthAttribute"}
     },
     "InsufficientPrivilegesException":{
       "type":"structure",
@@ -1845,6 +2172,56 @@
       "documentation":"<p>Unable to perform the specified operation because the user does not have enough privileges for one of more downstream aws services</p>"
     },
     "Integer":{"type":"integer"},
+    "InvalidRequestException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidRequestException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>The request is invalid, please check parameters and their values</p>"
+    },
+    "Latency":{
+      "type":"structure",
+      "members":{
+        "P999":{
+          "shape":"NullableDouble",
+          "documentation":"<p>The average latency for the slowest 0.1 percent of requests over the last 10 seconds.</p>"
+        },
+        "P99":{
+          "shape":"NullableDouble",
+          "documentation":"<p>The average latency for the slowest 1 percent of requests over the last 10 seconds.</p>"
+        },
+        "P95":{
+          "shape":"NullableDouble",
+          "documentation":"<p>The average latency for the slowest 5 percent of requests over the last 10 seconds.</p>"
+        },
+        "P90":{
+          "shape":"NullableDouble",
+          "documentation":"<p>The average latency for the slowest 10 percent of requests over the last 10 seconds.</p>"
+        },
+        "P85":{
+          "shape":"NullableDouble",
+          "documentation":"<p>The average latency for the slowest 15 percent of requests over the last 10 seconds.</p>"
+        },
+        "P75":{
+          "shape":"NullableDouble",
+          "documentation":"<p>The average latency for the slowest 25 percent of requests over the last 10 seconds.</p>"
+        },
+        "P50":{
+          "shape":"NullableDouble",
+          "documentation":"<p>The average latency for the slowest 50 percent of requests over the last 10 seconds.</p>"
+        },
+        "P10":{
+          "shape":"NullableDouble",
+          "documentation":"<p>The average latency for the slowest 90 percent of requests over the last 10 seconds.</p>"
+        }
+      },
+      "documentation":"<p>Represents the average latency for the slowest X percent of requests over the last 10 seconds.</p>"
+    },
     "LaunchConfiguration":{
       "type":"structure",
       "members":{
@@ -1859,6 +2236,7 @@
       "type":"list",
       "member":{"shape":"LaunchConfiguration"}
     },
+    "LaunchedAt":{"type":"timestamp"},
     "ListAvailableSolutionStacksResultMessage":{
       "type":"structure",
       "members":{
@@ -1887,6 +2265,11 @@
       },
       "documentation":"<p>Describes the properties of a Listener for the LoadBalancer.</p>"
     },
+    "LoadAverage":{
+      "type":"list",
+      "member":{"shape":"LoadAverageValue"}
+    },
+    "LoadAverageValue":{"type":"double"},
     "LoadBalancer":{
       "type":"structure",
       "members":{
@@ -1929,6 +2312,13 @@
       "max":1000
     },
     "Message":{"type":"string"},
+    "NextToken":{
+      "type":"string",
+      "min":1,
+      "max":100
+    },
+    "NullableDouble":{"type":"double"},
+    "NullableInteger":{"type":"integer"},
     "OperationInProgressException":{
       "type":"structure",
       "members":{
@@ -1939,7 +2329,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an an element in this activity.</p>"
+      "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an element in this activity.</p>"
     },
     "OptionNamespace":{"type":"string"},
     "OptionRestrictionMaxLength":{"type":"integer"},
@@ -2013,8 +2403,10 @@
       },
       "documentation":"<p></p>"
     },
+    "RefreshedAt":{"type":"timestamp"},
     "RegexLabel":{"type":"string"},
     "RegexPattern":{"type":"string"},
+    "RequestCount":{"type":"integer"},
     "RequestEnvironmentInfoMessage":{
       "type":"structure",
       "required":["InfoType"],
@@ -2131,6 +2523,34 @@
       "documentation":"<p>The caller does not have a subscription to Amazon S3.</p>"
     },
     "SampleTimestamp":{"type":"timestamp"},
+    "SingleInstanceHealth":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "documentation":"<p>The ID of the Amazon EC2 instance.</p>"
+        },
+        "HealthStatus":{
+          "shape":"String",
+          "documentation":"<p>Returns the health status of the specified instance. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\"></a>.</p>"
+        },
+        "Color":{
+          "shape":"String",
+          "documentation":"<p>Represents the color indicator that gives you information about the health of the EC2 instance. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">Health Colors and Statuses</a>.</p>"
+        },
+        "Causes":{
+          "shape":"Causes",
+          "documentation":"<p>Represents the causes, which provide more information about the current health status.</p>"
+        },
+        "LaunchedAt":{
+          "shape":"LaunchedAt",
+          "documentation":"<p>The time at which the EC2 instance was launched.</p>"
+        },
+        "ApplicationMetrics":{"shape":"ApplicationMetrics"},
+        "System":{"shape":"SystemStatus"}
+      },
+      "documentation":"<p>Represents health information from the specified instance that belongs to the AWS Elastic Beanstalk environment. Use the <code>InstanceId</code> property to specify the application instance for which you'd like to return data.</p>"
+    },
     "SolutionStackDescription":{
       "type":"structure",
       "members":{
@@ -2179,6 +2599,28 @@
       },
       "documentation":"<p>A specification for an environment configuration</p>"
     },
+    "StatusCodes":{
+      "type":"structure",
+      "members":{
+        "Status2xx":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The percentage of requests over the last 10 seconds that resulted in a 2xx (200, 201, etc.) status code.</p>"
+        },
+        "Status3xx":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The percentage of requests over the last 10 seconds that resulted in a 3xx (300, 301, etc.) status code.</p>"
+        },
+        "Status4xx":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The percentage of requests over the last 10 seconds that resulted in a 4xx (400, 401, etc.) status code.</p>"
+        },
+        "Status5xx":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The percentage of requests over the last 10 seconds that resulted in a 5xx (500, 501, etc.) status code.</p>"
+        }
+      },
+      "documentation":"<p>Represents the percentage of requests over the last 10 seconds that resulted in each type of status code response. For more information, see <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\">Status Code Definitions</a>.</p>"
+    },
     "String":{"type":"string"},
     "SwapEnvironmentCNAMEsMessage":{
       "type":"structure",
@@ -2201,6 +2643,17 @@
         }
       },
       "documentation":"<p>Swaps the CNAMEs of two environments.</p>"
+    },
+    "SystemStatus":{
+      "type":"structure",
+      "members":{
+        "CPUUtilization":{"shape":"CPUUtilization"},
+        "LoadAverage":{
+          "shape":"LoadAverage",
+          "documentation":"<p>Load average in the last 1-minute and 5-minute periods. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os\">Operating System Metrics</a>.</p>"
+        }
+      },
+      "documentation":"<p>Represents CPU utilization and load average information for applications running in the specified environment.</p>"
     },
     "Tag":{
       "type":"structure",
@@ -2502,5 +2955,7 @@
       "type":"list",
       "member":{"shape":"VersionLabel"}
     }
+  },
+  "examples":{
   }
 }
