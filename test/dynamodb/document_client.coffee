@@ -1,0 +1,382 @@
+helpers = require('../helpers')
+AWS = helpers.AWS
+Buffer = AWS.util.Buffer
+
+docClient = null
+
+beforeEach ->
+  docClient = new AWS.DynamoDB.DocumentClient()
+
+translateInput = (input) ->
+  request = docClient.put(input)
+  request.params
+
+describe 'AWS.DynamoDB.DocumentClient', ->
+
+  describe 'supports sets', ->
+
+    it 'detects type of sets', ->
+      expect(docClient.createSet(['1', '2', 'string']).type).to.equal('String')
+      expect(docClient.createSet([1, 2, 3]).type).to.equal('Number')
+      expect(docClient.createSet([new Buffer('foo'), new Buffer('bar')]).type).to.equal('Binary')
+  
+    it 'validates type of sets if validate: true', ->
+      expect(-> docClient.createSet([1, 2, 'string'], {validate: true})).to.throw('Number Set contains String value')
+      expect(-> docClient.createSet(['string', 'string', 2], {validate: true})).to.throw('String Set contains Number value')
+      expect(-> docClient.createSet([1, 2, new Buffer('foo')], {validate: true})).to.throw('Number Set contains Binary value')
+    
+    it 'does not validate type of set if validate: true unset', ->
+      expect(-> docClient.createSet([1, 2, 'string'])).to.not.throw('Number Set contains String value')
+      expect(-> docClient.createSet(['string', 'string', 2])).to.not.throw('String Set contains Number value')
+      expect(-> docClient.createSet([1, 2, new Buffer('foo')])).to.not.throw('Number Set contains Binary value')
+
+  describe 'translates input', ->
+
+    it 'strings', ->
+      input = Item:
+        foo: 'bar'
+      params = Item:
+        foo: S: 'bar'
+      expect(translateInput(input)).to.eql(params)
+    
+    it 'numbers', ->
+      input = Item:
+        foo: 1
+      params = Item:
+        foo: N: '1'
+      expect(translateInput(input)).to.eql(params)
+    
+    it 'booleans', ->
+      input = Item:
+        foo: true
+        bar: false
+      params = Item:
+        foo: BOOL: true
+        bar: BOOL: false
+      expect(translateInput(input)).to.eql(params)
+    
+    it 'null', ->
+      input = Item:
+        foo: null
+      params = Item:
+        foo: NULL: true
+      expect(translateInput(input)).to.eql(params)
+
+    it 'maps', ->
+      input = Item: foo:
+        bar: 'string'
+        baz: 'string'
+      params = Item: foo:
+        M:
+          bar: S: 'string'
+          baz: S: 'string'
+      expect(translateInput(input)).to.eql(params)
+    
+    it 'lists', ->
+      buffer = new Buffer 'quux'
+      input = Item: foo:
+        bar: ['string', 2, buffer]
+      params = Item: foo:
+        M:
+          bar: L: [
+            {S: 'string'},
+            {N: '2'},
+            {B: buffer}
+          ]
+      expect(translateInput(input)).to.eql(params)
+    
+    it 'string sets', ->
+      set  = docClient.createSet ['bar', 'baz', 'quux']
+      input = Item:
+        foo: set
+      params = Item:
+        foo:
+          'SS': ['bar', 'baz', 'quux']
+      expect(translateInput(input)).to.eql(params)
+    
+    it 'number sets', ->
+      set  = docClient.createSet [1, 2, 3]
+      input = Item:
+        foo: set
+      params = Item:
+        foo:
+          'NS': ['1', '2', '3']
+      expect(translateInput(input)).to.eql(params)
+
+    it 'binary sets', ->
+      bar = new Buffer('bar')
+      baz = new Buffer('baz')
+      quux = new Buffer('quux')
+      set  = docClient.createSet [bar, baz, quux]
+      input = Item:
+        foo: set
+      params = Item:
+        foo:
+          'BS': [bar, baz, quux]
+      expect(translateInput(input)).to.eql(params)
+
+    it 'recursive maps', ->
+      input = Item:
+        name:
+          first: 'foo'
+          last: 'bar'
+          aliases: [ 'alpha', 'beta', 'gamma' ]
+        address:
+          mailing: street: '123 foo bar'
+          billing: street: '456 baz quux'
+      params = Item:
+        name:
+          M:
+            first: 'S': 'foo'
+            last: 'S': 'bar'
+            aliases: 'L': [
+              {'S': 'alpha'},
+              {'S': 'beta'},
+              {'S': 'gamma'}
+            ]
+        address:
+          M:
+            mailing:
+              M:
+                street: 'S': '123 foo bar'
+            billing:
+              M:
+                street: 'S': '456 baz quux'
+      expect(translateInput(input)).to.eql(params)
+
+    it 'nested maps', ->
+      input = Item:
+        names: [
+          {
+            first: 'foo',
+            last: 'bar',
+            aliases: ['alpha', 'beta', 'gamma']
+          },
+          {
+            first: 'baz',
+            last: 'quux',
+            aliases: ['pi', 'rho', 'sigma']
+          }
+        ]
+      params = Item:
+        names:
+          L: [
+            {
+              M: {
+                first: 'S': 'foo'
+                last: 'S': 'bar'
+                aliases: 'L': [
+                  {S: 'alpha'},
+                  {S: 'beta'},
+                  {S: 'gamma'}
+                ]
+              }
+            },
+            {
+              M: {
+                first: 'S': 'baz'
+                last: 'S': 'quux'
+                aliases: 'L': [
+                  {S: 'pi'},
+                  {S: 'rho'},
+                  {S: 'sigma'}
+                ]
+              }
+            }
+          ]
+      expect(translateInput(input)).to.eql(params)
+
+    it 'recusive lists', ->
+      buffer = new Buffer('foo')
+      input = Item:
+        tags: [
+          ['alpha', 'beta', 'gamma', buffer],
+          [1, 2, 3, buffer],
+          [{moreTags: ['pi', 'rho', 'sigma', {
+            someMoreTags: ['bar', 'baz']
+          }]}]
+        ]
+      params = Item:
+        tags:
+          L:[
+            {L:[
+              {'S': 'alpha'},
+              {'S': 'beta'},
+              {'S': 'gamma'},
+              {'B': buffer},
+            ]},
+            {L:[
+              {'N': '1'},
+              {'N': '2'},
+              {'N': '3'},
+              {'B': buffer},
+            ]},
+            {L:[
+              {
+                'M': {
+                  moreTags: {
+                    'L': [
+                      {'S': 'pi'},
+                      {'S': 'rho'},
+                      {'S': 'sigma'},
+                      {
+                        'M': {
+                          someMoreTags: {
+                            'L': [
+                              {'S': 'bar'},
+                              {'S': 'baz'}
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+            ]}
+          ]
+      expect(translateInput(input)).to.eql(params)
+
+    it 'nested sets', ->
+      stringSet = docClient.createSet(['alpha', 'beta', 'gamma'])
+      numberSet = docClient.createSet([1, 2, 3])
+      input = Item:
+        name:
+          first: 'foo'
+          last: 'bar'
+          aliases: stringSet
+          scores: [
+            numberSet,
+            numberSet,
+            numberSet
+          ]
+      params = Item:
+        name:
+          M:
+            first: S: 'foo'
+            last: S: 'bar'
+            aliases: SS: [
+              'alpha',
+              'beta',
+              'gamma'
+            ]
+            scores:
+              L:[
+                {NS: ['1', '2', '3']},
+                {NS: ['1', '2', '3']},
+                {NS: ['1', '2', '3']}
+              ]
+      expect(translateInput(input)).to.eql(params)
+
+  describe 'translates output', ->
+      
+    it 'maps', (done) ->
+      wire = JSON.stringify(
+        Item: foo:
+          M:
+            bar: S: 'string'
+            baz: S: 'string'
+      )
+      output = Item: foo:
+        bar: 'string'
+        baz: 'string'
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'lists', (done) ->
+      buffer = new Buffer 'quux'
+      wire = JSON.stringify(
+        Item: foo:
+          M:
+            bar: L: [
+              {S: 'string'},
+              {N: '2'},
+              {B: buffer}
+            ]
+      )
+      output = Item: foo:
+        bar: ['string', 2, buffer]
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+    
+    it 'string sets', (done) ->
+      set  = docClient.createSet ['bar', 'baz', 'quux']
+      wire = JSON.stringify(
+        Item:
+          foo:
+            'SS': ['bar', 'baz', 'quux']
+      )
+      output = Item:
+        foo: set
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+    
+    it 'number sets', (done) ->
+      set  = docClient.createSet [1, 2, 3]
+      wire = JSON.stringify(Item:
+        foo:
+          'NS': ['1', '2', '3']
+      )
+      output = Item:
+        foo: set
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'binary sets', (done) ->
+      bar = new Buffer('bar')
+      baz = new Buffer('baz')
+      quux = new Buffer('quux')
+      set  = docClient.createSet [bar, baz, quux]
+      wire = JSON.stringify(
+        Item:
+          foo:
+            'BS': [bar, baz, quux]
+      )
+      output = Item:
+        foo: set
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'recursive maps', (done) ->
+      wire = JSON.stringify(
+        Item:
+          name:
+            M:
+              first: 'S': 'foo'
+              last: 'S': 'bar'
+              aliases: 'L': [
+                {'S': 'alpha'},
+                {'S': 'beta'},
+                {'S': 'gamma'}
+              ]
+          address:
+            M:
+              mailing:
+                M:
+                  street: 'S': '123 foo bar'
+              billing:
+                M:
+                  street: 'S': '456 baz quux'
+      )
+      output = Item:
+        name:
+          first: 'foo'
+          last: 'bar'
+          aliases: [ 'alpha', 'beta', 'gamma' ]
+        address:
+          mailing: street: '123 foo bar'
+          billing: street: '456 baz quux'
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
