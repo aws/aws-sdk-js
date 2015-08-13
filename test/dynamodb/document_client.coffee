@@ -13,40 +13,47 @@ translateInput = (input) ->
 
 describe 'AWS.DynamoDB.DocumentClient', ->
 
+  it 'returns a request', ->
+    request = docClient.get({ Key: foo: 1 })
+    expect(request instanceof AWS.Request).to.equal(true)
+
   describe 'supports sets', ->
+
+    it 'validates type of set', ->
+      expect(-> docClient.createSet([true, false, false])).to.throw('Sets can contain string, number, or binary values')
 
     it 'detects type of sets', ->
       expect(docClient.createSet(['1', '2', 'string']).type).to.equal('String')
       expect(docClient.createSet([1, 2, 3]).type).to.equal('Number')
       expect(docClient.createSet([new Buffer('foo'), new Buffer('bar')]).type).to.equal('Binary')
   
-    it 'validates type of sets if validate: true', ->
+    it 'validates set elements if validate: true', ->
       expect(-> docClient.createSet([1, 2, 'string'], {validate: true})).to.throw('Number Set contains String value')
       expect(-> docClient.createSet(['string', 'string', 2], {validate: true})).to.throw('String Set contains Number value')
       expect(-> docClient.createSet([1, 2, new Buffer('foo')], {validate: true})).to.throw('Number Set contains Binary value')
     
-    it 'does not validate type of set if validate: true unset', ->
+    it 'does not validate set elements if validate: true unset', ->
       expect(-> docClient.createSet([1, 2, 'string'])).to.not.throw('Number Set contains String value')
       expect(-> docClient.createSet(['string', 'string', 2])).to.not.throw('String Set contains Number value')
       expect(-> docClient.createSet([1, 2, new Buffer('foo')])).to.not.throw('Number Set contains Binary value')
 
-  describe 'translates input', ->
+  describe 'input', ->
 
-    it 'strings', ->
+    it 'translates strings', ->
       input = Item:
         foo: 'bar'
       params = Item:
         foo: S: 'bar'
       expect(translateInput(input)).to.eql(params)
-    
-    it 'numbers', ->
+
+    it 'translates numbers', ->
       input = Item:
         foo: 1
       params = Item:
         foo: N: '1'
       expect(translateInput(input)).to.eql(params)
-    
-    it 'booleans', ->
+
+    it 'translates booleans', ->
       input = Item:
         foo: true
         bar: false
@@ -54,15 +61,15 @@ describe 'AWS.DynamoDB.DocumentClient', ->
         foo: BOOL: true
         bar: BOOL: false
       expect(translateInput(input)).to.eql(params)
-    
-    it 'null', ->
+
+    it 'translates null', ->
       input = Item:
         foo: null
       params = Item:
         foo: NULL: true
       expect(translateInput(input)).to.eql(params)
 
-    it 'maps', ->
+    it 'translates maps', ->
       input = Item: foo:
         bar: 'string'
         baz: 'string'
@@ -72,7 +79,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
           baz: S: 'string'
       expect(translateInput(input)).to.eql(params)
     
-    it 'lists', ->
+    it 'translates lists', ->
       buffer = new Buffer 'quux'
       input = Item: foo:
         bar: ['string', 2, buffer]
@@ -85,7 +92,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
           ]
       expect(translateInput(input)).to.eql(params)
     
-    it 'string sets', ->
+    it 'translates string sets', ->
       set  = docClient.createSet ['bar', 'baz', 'quux']
       input = Item:
         foo: set
@@ -94,7 +101,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
           'SS': ['bar', 'baz', 'quux']
       expect(translateInput(input)).to.eql(params)
     
-    it 'number sets', ->
+    it 'translates number sets', ->
       set  = docClient.createSet [1, 2, 3]
       input = Item:
         foo: set
@@ -103,7 +110,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
           'NS': ['1', '2', '3']
       expect(translateInput(input)).to.eql(params)
 
-    it 'binary sets', ->
+    it 'translates binary sets', ->
       bar = new Buffer('bar')
       baz = new Buffer('baz')
       quux = new Buffer('quux')
@@ -115,7 +122,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
           'BS': [bar, baz, quux]
       expect(translateInput(input)).to.eql(params)
 
-    it 'recursive maps', ->
+    it 'translates recursive maps', ->
       input = Item:
         name:
           first: 'foo'
@@ -144,7 +151,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
                 street: 'S': '456 baz quux'
       expect(translateInput(input)).to.eql(params)
 
-    it 'nested maps', ->
+    it 'translates nested maps', ->
       input = Item:
         names: [
           {
@@ -186,7 +193,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
           ]
       expect(translateInput(input)).to.eql(params)
 
-    it 'recusive lists', ->
+    it 'translates recusive lists', ->
       buffer = new Buffer('foo')
       input = Item:
         tags: [
@@ -237,7 +244,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
           ]
       expect(translateInput(input)).to.eql(params)
 
-    it 'nested sets', ->
+    it 'translates nested sets', ->
       stringSet = docClient.createSet(['alpha', 'beta', 'gamma'])
       numberSet = docClient.createSet([1, 2, 3])
       input = Item:
@@ -268,9 +275,59 @@ describe 'AWS.DynamoDB.DocumentClient', ->
               ]
       expect(translateInput(input)).to.eql(params)
 
-  describe 'translates output', ->
-      
-    it 'maps', (done) ->
+  describe 'output', ->
+
+    it 'translates strings', (done) ->
+      wire = JSON.stringify(
+        Item:
+          foo: S: 'bar'
+      )
+      output = Item:
+        foo: 'bar'
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'translates numbers', (done) ->
+      wire = JSON.stringify(
+        Item:
+          foo: N: '1'
+      )
+      output = Item:
+        foo: 1
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'translates booleans', (done) ->
+      wire = JSON.stringify(
+        Item:
+          foo: BOOL: true
+          bar: BOOL: false
+      )
+      output = Item:
+        foo: true
+        bar: false
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'translates null', (done) ->
+      wire = JSON.stringify(
+        Item:
+          foo: NULL: true
+      )
+      output = Item:
+        foo: null
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'translates maps', (done) ->
       wire = JSON.stringify(
         Item: foo:
           M:
@@ -285,7 +342,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
         expect(data).to.eql(output)
         done()
 
-    it 'lists', (done) ->
+    it 'translates lists', (done) ->
       buffer = new Buffer 'quux'
       wire = JSON.stringify(
         Item: foo:
@@ -294,16 +351,17 @@ describe 'AWS.DynamoDB.DocumentClient', ->
               {S: 'string'},
               {N: '2'},
               {B: buffer}
+              {BOOL: true}
             ]
       )
       output = Item: foo:
-        bar: ['string', 2, buffer]
+        bar: ['string', 2, buffer, true]
       helpers.mockHttpResponse 200, {}, wire
       docClient.get {Key: foo: 1}, (err, data) ->
         expect(data).to.eql(output)
         done()
-    
-    it 'string sets', (done) ->
+
+    it 'translates string sets', (done) ->
       set  = docClient.createSet ['bar', 'baz', 'quux']
       wire = JSON.stringify(
         Item:
@@ -316,8 +374,8 @@ describe 'AWS.DynamoDB.DocumentClient', ->
       docClient.get {Key: foo: 1}, (err, data) ->
         expect(data).to.eql(output)
         done()
-    
-    it 'number sets', (done) ->
+
+    it 'translates number sets', (done) ->
       set  = docClient.createSet [1, 2, 3]
       wire = JSON.stringify(Item:
         foo:
@@ -330,7 +388,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
         expect(data).to.eql(output)
         done()
 
-    it 'binary sets', (done) ->
+    it 'translates binary sets', (done) ->
       bar = new Buffer('bar')
       baz = new Buffer('baz')
       quux = new Buffer('quux')
@@ -347,7 +405,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
         expect(data).to.eql(output)
         done()
 
-    it 'recursive maps', (done) ->
+    it 'translates recursive maps', (done) ->
       wire = JSON.stringify(
         Item:
           name:
@@ -376,6 +434,147 @@ describe 'AWS.DynamoDB.DocumentClient', ->
         address:
           mailing: street: '123 foo bar'
           billing: street: '456 baz quux'
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'translates nested maps', (done) ->
+      wire = JSON.stringify(
+        Item:
+          names:
+            L: [
+              {
+                M: {
+                  first: 'S': 'foo'
+                  last: 'S': 'bar'
+                  aliases: 'L': [
+                    {S: 'alpha'},
+                    {S: 'beta'},
+                    {S: 'gamma'}
+                  ]
+                }
+              },
+              {
+                M: {
+                  first: 'S': 'baz'
+                  last: 'S': 'quux'
+                  aliases: 'L': [
+                    {S: 'pi'},
+                    {S: 'rho'},
+                    {S: 'sigma'}
+                  ]
+                }
+              }
+            ]
+      )
+      output = Item:
+        names: [
+          {
+            first: 'foo',
+            last: 'bar',
+            aliases: ['alpha', 'beta', 'gamma']
+          },
+          {
+            first: 'baz',
+            last: 'quux',
+            aliases: ['pi', 'rho', 'sigma']
+          }
+        ]
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'translates recusive lists', (done) ->
+      buffer = new Buffer('foo')
+      wire = JSON.stringify(
+        Item:
+          tags:
+            L:[
+              {L:[
+                {'S': 'alpha'},
+                {'S': 'beta'},
+                {'S': 'gamma'},
+                {'B': buffer},
+              ]},
+              {L:[
+                {'N': '1'},
+                {'N': '2'},
+                {'N': '3'},
+                {'B': buffer},
+              ]},
+              {L:[
+                {
+                  'M': {
+                    moreTags: {
+                      'L': [
+                        {'S': 'pi'},
+                        {'S': 'rho'},
+                        {'S': 'sigma'},
+                        {
+                          'M': {
+                            someMoreTags: {
+                              'L': [
+                                {'S': 'bar'},
+                                {'S': 'baz'}
+                                {'N': '1'},
+                                {'BOOL': true},
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+              ]}
+            ]
+      )
+      output = Item:
+        tags: [
+          ['alpha', 'beta', 'gamma', buffer],
+          [1, 2, 3, buffer],
+          [{moreTags: ['pi', 'rho', 'sigma', {
+            someMoreTags: ['bar', 'baz', 1, true]
+          }]}]
+        ]
+      helpers.mockHttpResponse 200, {}, wire
+      docClient.get {Key: foo: 1}, (err, data) ->
+        expect(data).to.eql(output)
+        done()
+
+    it 'translates nested sets', (done) ->
+      stringSet = docClient.createSet(['alpha', 'beta', 'gamma'])
+      numberSet = docClient.createSet([1, 2, 3])
+      wire = JSON.stringify(
+        Item:
+          name:
+            M:
+              first: S: 'foo'
+              last: S: 'bar'
+              aliases: SS: [
+                'alpha',
+                'beta',
+                'gamma'
+              ]
+              scores:
+                L:[
+                  {NS: ['1', '2', '3']},
+                  {NS: ['1', '2', '3']},
+                  {NS: ['1', '2', '3']}
+                ]
+      )
+      output = Item:
+        name:
+          first: 'foo'
+          last: 'bar'
+          aliases: stringSet
+          scores: [
+            numberSet,
+            numberSet,
+            numberSet
+          ]
       helpers.mockHttpResponse 200, {}, wire
       docClient.get {Key: foo: 1}, (err, data) ->
         expect(data).to.eql(output)
