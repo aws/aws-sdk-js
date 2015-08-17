@@ -1,6 +1,7 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
 Buffer = AWS.util.Buffer
+encode = AWS.util.base64.encode
 
 docClient = null
 
@@ -350,7 +351,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
             bar: L: [
               {S: 'string'},
               {N: '2'},
-              {B: buffer}
+              {B: encode(buffer)}
               {BOOL: true}
             ]
       )
@@ -396,7 +397,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
       wire = JSON.stringify(
         Item:
           foo:
-            'BS': [bar, baz, quux]
+            'BS': [encode(bar), encode(baz), encode(quux)]
       )
       output = Item:
         foo: set
@@ -496,13 +497,13 @@ describe 'AWS.DynamoDB.DocumentClient', ->
                 {'S': 'alpha'},
                 {'S': 'beta'},
                 {'S': 'gamma'},
-                {'B': buffer},
+                {'B': encode(buffer)},
               ]},
               {L:[
                 {'N': '1'},
                 {'N': '2'},
                 {'N': '3'},
-                {'B': buffer},
+                {'B': encode(buffer)},
               ]},
               {L:[
                 {
