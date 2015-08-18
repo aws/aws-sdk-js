@@ -6,7 +6,6 @@ apis/*.normal.json
 configuration
 configuration.sample
 coverage
-dist
 doc
 doc-src
 eslint-rules
