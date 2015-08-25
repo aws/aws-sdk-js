@@ -1250,6 +1250,10 @@
         "location":{
           "shape":"ArtifactStoreLocation",
           "documentation":"<p>The location for storing the artifacts for a pipeline, such as an S3 bucket or folder.</p>"
+        },
+        "encryptionKey":{
+          "shape":"EncryptionKey",
+          "documentation":"<p>The AWS Key Management Service (AWS KMS) key used to encrypt the data in the artifact store. If this is undefined, the default key for Amazon S3 is used.</p>"
         }
       },
       "documentation":"<p>The Amazon S3 location where artifacts are stored for the pipeline. If this Amazon S3 bucket is created manually, it must meet the requirements for AWS CodePipeline. For more information, see the <ulink url=\"http://docs.aws.amazon.com/codepipeline/latest/UserGuide/concepts.html\">Concepts</ulink>.</p>"
@@ -1469,6 +1473,33 @@
       "documentation":"<p>Represents the input of an enable stage transition action.</p>"
     },
     "Enabled":{"type":"boolean"},
+    "EncryptionKey":{
+      "type":"structure",
+      "required":[
+        "id",
+        "type"
+      ],
+      "members":{
+        "id":{
+          "shape":"EncryptionKeyId",
+          "documentation":"<p>The ID of the AWS KMS key.</p>"
+        },
+        "type":{
+          "shape":"EncryptionKeyType",
+          "documentation":"<p>The type of AWS KMS key, such as a customer master key.</p>"
+        }
+      },
+      "documentation":"<p>Represents information about the AWS Key Management Service (AWS KMS) key used to encrypt data in the artifact store.</p>"
+    },
+    "EncryptionKeyId":{
+      "type":"string",
+      "min":1,
+      "max":100
+    },
+    "EncryptionKeyType":{
+      "type":"string",
+      "enum":["KMS"]
+    },
     "ErrorDetails":{
       "type":"structure",
       "members":{
@@ -1505,7 +1536,10 @@
     "ExecutionSummary":{"type":"string"},
     "FailureDetails":{
       "type":"structure",
-      "required":["type"],
+      "required":[
+        "type",
+        "message"
+      ],
       "members":{
         "type":{
           "shape":"FailureType",
@@ -1759,7 +1793,8 @@
         "continuationToken":{
           "shape":"ContinuationToken",
           "documentation":"<p>A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.</p>"
-        }
+        },
+        "encryptionKey":{"shape":"EncryptionKey"}
       },
       "documentation":"<p>Represents additional information about a job required for a job worker to complete the job. </p>"
     },
@@ -2357,6 +2392,10 @@
         "continuationToken":{
           "shape":"ContinuationToken",
           "documentation":"<p>A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.</p>"
+        },
+        "encryptionKey":{
+          "shape":"EncryptionKey",
+          "documentation":"<p>The AWS Key Management Service (AWS KMS) key used to encrypt and decrypt data in the artifact store for the pipeline.</p>"
         }
       },
       "documentation":"<p>Represents information about the job data for a partner action.</p>"
@@ -2455,5 +2494,7 @@
       "max":9,
       "pattern":"[0-9A-Za-z_-]+"
     }
+  },
+  "examples":{
   }
 }
