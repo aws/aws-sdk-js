@@ -80,23 +80,26 @@ class MethodDocumentor
 
   attr_reader :lines
 
-  def initialize(operation_name, operation, api, klass)
+  def initialize(operation_name, operation, api, klass, options = {})
     desc = documentation(operation)
     desc ||= "Calls the #{method_name(operation_name, false)} API operation."
     desc = desc.gsub(/^\s+/, '').strip
+
+    if options[:flatten_dynamodb_attrs]
+      desc = ""
+    end
 
     @lines = [desc, '']
 
     ## @param tags
 
     @lines << "@param params [Object]"
-    @lines += shapes(api, operation['input']).map {|line| "  " + line }
+    @lines += shapes(api, operation['input'], options).map {|line| "  " + line }
 
     ## @example tag
-
     @lines << "@example Calling the #{method_name(operation_name)} operation"
     @lines << generate_example(api, klass, method_name(operation_name),
-                operation['input']).split("\n").map {|line| "  " + line }
+                operation['input'], options).split("\n").map {|line| "  " + line }
     @lines << ""
 
     ## @callback tag
@@ -112,7 +115,7 @@ class MethodDocumentor
     @lines << "  @param data [Object] the de-serialized data returned from"
     @lines << "    the request. Set to `null` if a request error occurs."
 
-    output = shapes(api, operation['output'])
+    output = shapes(api, operation['output'], options)
     output = output.map {|line| "    " + line }
     if output.size > 0
       @lines << "    The `data` object has the following properties:"
@@ -131,30 +134,32 @@ class MethodDocumentor
     end
   end
 
-  def shapes(api, rules)
+  def shapes(api, rules, options = {})
     rules = api['shapes'][rules['shape']] if rules && rules['shape']
     if rules and rules['members']
       rules['members'].map do |name, member_rules|
         if member_rules['shape']
           member_rules = api['shapes'][member_rules['shape']].merge(member_rules)
         end
-        ShapeDocumentor.new(api, member_rules, :name => name).lines
+        opts = {:name => name}.merge(options)
+        ShapeDocumentor.new(api, member_rules, opts).lines
       end.flatten
     else
       []
     end
   end
 
-  def generate_example(api, klass, name, input)
-    ExampleShapeVisitor.new(api).example(klass, name, input)
+  def generate_example(api, klass, name, input, options = {})
+    ExampleShapeVisitor.new(api, options).example(klass, name, input)
   end
 
 end
 
 class ExampleShapeVisitor
-  def initialize(api, required_only = false)
+  def initialize(api, options = {})
     @api = api
-    @required_only = required_only
+    @required_only = options[:required_only] || false
+    @flatten_dynamodb_attrs = options[:flatten_dynamodb_attrs]
     @visited = Hash.new { 0 }
     @recursive = {}
   end
@@ -178,7 +183,10 @@ class ExampleShapeVisitor
     return "" if node.nil?
     result = ""
     @visited[node['shape']] += 1
-    if !node['shape'] || @visited[node['shape']] < 2
+
+    if @flatten_dynamodb_attrs && node['shape'] == "AttributeValue"
+      result = 'someValue /* "str" | 10 | true | false | null | [1, "a"] | {a: "b"} */'
+    elsif !node['shape'] || @visited[node['shape']] < 2
       node = @api['shapes'][node['shape']].merge(node) if node['shape']
       if (meth = "visit_" + (node['type'] || 'string')) && respond_to?(meth)
         result = send(meth, node, required)
@@ -321,6 +329,18 @@ class ShapeDocumentor
     @type = self.class.type_for(rules)
     @lines = []
     @nested_lines = []
+    @flatten_dynamodb_attrs = options[:flatten_dynamodb_attrs]
+
+    if @flatten_dynamodb_attrs && rules['shape'] == "AttributeValue"
+      desc = <<-doc_client.gsub(/\n/, '').strip
+&mdash; a serializable JavaScript object. 
+For information about the supported types see the 
+[DynamoDB Data Model](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html)
+doc_client
+      @lines = ["#{prefix}* `#{name}` #{desc}"]
+      @nested_lines += [desc]
+      return
+    end
 
     if structure?
       required_map = (rules['required'] || []).inject({}) {|h,k| h[k] = true; h }
@@ -340,7 +360,7 @@ class ShapeDocumentor
 
       # sanity check, I don't think this should ever raise, but if it
       # does we will have to document the key shape
-      key_child = child_shape(rules['key'] || {}, :prefix => prefix)
+      #key_child = child_shape(rules['key'] || {}, :prefix => prefix)
       #raise "unhandled map key type" if key_child.type != 'String'
 
       child = child_shape(rules['value'] || {}, :prefix => prefix)
@@ -378,7 +398,7 @@ class ShapeDocumentor
     else
       text << "&mdash; (`#{@type}`)"
     end
-    if docs = documentation(rules)
+    if docs = documentation(rules) && !@flatten_dynamodb_attrs
       text << " #{docs}"
     end
     text.join(' ')
@@ -390,7 +410,8 @@ class ShapeDocumentor
     @visited[rules['shape']] += 1
     if @visited[rules['shape']] < 2
       ret = ShapeDocumentor.new(@api, rules, {
-        :prefix => prefix + '    ', :visited => @visited }.merge(options))
+        :prefix => prefix + '    ', :visited => @visited,
+        :flatten_dynamodb_attrs => @flatten_dynamodb_attrs }.merge(options))
     else
       ret = OpenStruct.new({
         :nested_lines => [], :lines => [],

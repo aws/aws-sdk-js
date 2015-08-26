@@ -4,6 +4,7 @@ require_relative './model_documentor'
 $APIS_DIR = File.expand_path(File.dirname(__FILE__) +
                              "/../../../apis")
 $API_FILE_MATCH = /(?:^|\/)([^\/]+?)-(\d+-\d+-\d+)\.normal\.json$/
+$dynamodb_model = nil #Track model for documenting the document client additions
 
 YARD::Tags::Library.define_tag 'Service', :service
 YARD::Tags::Library.define_tag 'Waiter Resource States', :waiter
@@ -47,6 +48,20 @@ class WaiterObject < YARD::CodeObjects::Base
   def title; name.to_s end
 end
 
+YARD::Parser::SourceParser.after_parse_list do
+  $dynamodb_model['operations'].each do |op_name, operation|
+    next unless op_name =~ /^(?:Scan|Query|.+Item)$/
+    obj_name = op_name.sub(/Item$/, '').sub(/^./) {|m| m.downcase}
+    obj_path = "AWS.DynamoDB.DocumentClient.#{obj_name}"
+
+    if obj = YARD::Registry.at(obj_path)
+      docs = MethodDocumentor.new(obj_name, operation, $dynamodb_model,
+        'DocumentClient', flatten_dynamodb_attrs: true).lines.join("\n")
+      obj.docstring = obj.docstring.all + "\n" + docs
+    end
+  end
+end
+
 class ApiDocumentor
   def initialize(root = :root)
     @root = root
@@ -74,11 +89,11 @@ class ApiDocumentor
     _, klass, version = *file.match($API_FILE_MATCH)
     identifier, klass = *class_info_for(klass.downcase)
     name = version_suffix ? klass + '_' + version.gsub('-', '') : klass
-
     log.progress("Parsing AWS.#{klass} (#{version})")
     svc = YARD::CodeObjects::ClassObject.new(@root, name)
 
     model = load_model(file)
+    $dynamodb_model = model if klass == 'DynamoDB' && version == '2012-08-10'
     add_class_documentation(svc, klass, model, version)
     add_methods(svc, klass, model)
     add_waiters(svc, klass, model)
@@ -200,7 +215,7 @@ Waits for the `#{name}` state by periodically calling the underlying
 @see #{operation_name}
 eof
 
-      waiter_ex = ExampleShapeVisitor.new(model, true).example(
+      waiter_ex = ExampleShapeVisitor.new(model, required_only: true).example(
         service.name.to_s.downcase, 'waitFor', model['operations'][config['operation']]['input'])
       waiter_ex = waiter_ex.sub(/\.waitFor\(/, ".waitFor('#{name}', ")
       waiter_ex = waiter_ex.sub(/\{\s+\}/, "{\n  // ... input parameters ...\n}")
