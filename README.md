@@ -81,6 +81,7 @@ The SDK currently supports the following services:
     <tr><td>Amazon Cognito Identity</td><td>AWS.CognitoIdentity</td><td>2014-06-30</td></tr>
     <tr><td>Amazon Cognito Sync</td><td>AWS.CognitoSync</td><td>2014-06-30</td></tr>
     <tr><td>Amazon DynamoDB</td><td>AWS.DynamoDB</td><td>2012-08-10</td></tr>
+    <tr><td>Amazon EC2 Container Service</td><td>AWS.ECS</td><td>2014-11-13</td></tr>
     <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2014-10-01</td></tr>
     <tr><td>Amazon Elastic MapReduce</td><td>AWS.EMR</td><td>2009-03-31</td></tr>
     <tr><td>Amazon Elastic Transcoder</td><td>AWS.ElasticTranscoder</td><td>2012-09-25</td></tr>
