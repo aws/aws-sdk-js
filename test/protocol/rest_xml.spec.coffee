@@ -214,6 +214,7 @@ describe 'AWS.Protocol.RestXml', ->
         <Error>
           <Code>InvalidArgument</Code>
           <Message>Provided param is bad</Message>
+          <Region>eu-west-1</Region>
         </Error>
         """
       response.httpResponse.statusCode = 400
@@ -226,6 +227,10 @@ describe 'AWS.Protocol.RestXml', ->
       expect(response.error.code).to.equal('InvalidArgument')
       expect(response.error.message).to.equal('Provided param is bad')
       expect(response.data).to.equal(null)
+
+    it 'extracts the region', ->
+      extractError()
+      expect(response.error.region).to.equal('eu-west-1')
 
     it 'returns an empty error when the body is blank', ->
       extractError ''
