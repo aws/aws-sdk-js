@@ -65,6 +65,36 @@
       ],
       "documentation":"<p>This operation configures one or more gateway local disks as cache for a cached-volume gateway. This operation is supported only for the gateway-cached volume architecture (see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html\">Storage Gateway Concepts</a>).</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache. </p>"
     },
+    "AddTagsToResource":{
+      "name":"AddTagsToResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"AddTagsToResourceInput",
+        "documentation":"<p>AddTagsToResourceInput</p>"
+      },
+      "output":{
+        "shape":"AddTagsToResourceOutput",
+        "documentation":"<p>AddTagsToResourceOutput</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidGatewayRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
+        },
+        {
+          "shape":"InternalServerError",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
+        }
+      ],
+      "documentation":"<p>This operation adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:</p> <ul> <li><p>Storage gateways of all types</p></li> </ul> <ul> <li><p>Storage Volumes</p></li> </ul> <ul> <li><p>Virtual Tapes</p></li> </ul> <p>You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.</p>"
+    },
     "AddUploadBuffer":{
       "name":"AddUploadBuffer",
       "http":{
@@ -516,7 +546,7 @@
           "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
         }
       ],
-      "documentation":"<p>This operation delete the specified gateway volume that you previously created using the <a>CreateStorediSCSIVolume</a> API. For gateway-stored volumes, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume. </p> <p>Before you delete a gateway volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> <p>In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.</p>"
+      "documentation":"<p>This operation deletes the specified gateway volume that you previously created using the <a>CreateCachediSCSIVolume</a> or <a>CreateStorediSCSIVolume</a> API. For gateway-stored volumes, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume. </p> <p>Before you delete a gateway volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> <p>In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.</p>"
     },
     "DescribeBandwidthRateLimit":{
       "name":"DescribeBandwidthRateLimit",
@@ -998,6 +1028,36 @@
       ],
       "documentation":"<p>This operation returns a list of the gateway's local disks. To specify which gateway to describe, you use the Amazon Resource Name (ARN) of the gateway in the body of the request.</p> <p>The request returns a list of all disks, specifying which are configured as working storage, cache storage, or stored volume or not configured at all. The response includes a <code>DiskStatus</code> field. This field can have a value of present (the disk is available to use), missing (the disk is no longer connected to the gateway), or mismatch (the disk node is occupied by a disk that has incorrect metadata or the disk content is corrupted). </p>"
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ListTagsForResourceInput",
+        "documentation":"<p>ListTagsForResourceInput</p>"
+      },
+      "output":{
+        "shape":"ListTagsForResourceOutput",
+        "documentation":"<p>ListTagsForResourceOutput</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidGatewayRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
+        },
+        {
+          "shape":"InternalServerError",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
+        }
+      ],
+      "documentation":"<p>This operation lists the tags that have been added to the specified resource. </p>"
+    },
     "ListVolumeInitiators":{
       "name":"ListVolumeInitiators",
       "http":{
@@ -1078,6 +1138,36 @@
         }
       ],
       "documentation":"<p>This operation lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN. The response includes only the volume ARNs. If you want additional volume information, use the <a>DescribeStorediSCSIVolumes</a> API.</p> <p>The operation supports pagination. By default, the operation returns a maximum of up to 100 volumes. You can optionally specify the <code>Limit</code> field in the body to limit the number of volumes in the response. If the number of volumes returned in the response is truncated, the response includes a Marker field. You can use this Marker value in your subsequent request to retrieve the next set of volumes.</p>"
+    },
+    "RemoveTagsFromResource":{
+      "name":"RemoveTagsFromResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"RemoveTagsFromResourceInput",
+        "documentation":"<p>RemoveTagsFromResourceInput</p>"
+      },
+      "output":{
+        "shape":"RemoveTagsFromResourceOutput",
+        "documentation":"<p>RemoveTagsFromResourceOutput</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidGatewayRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
+        },
+        {
+          "shape":"InternalServerError",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
+        }
+      ],
+      "documentation":"<p>This operation removes one or more tags from the specified resource.</p>"
     },
     "ResetCache":{
       "name":"ResetCache",
@@ -1498,6 +1588,34 @@
         "GatewayARN":{"shape":"GatewayARN"}
       }
     },
+    "AddTagsToResourceInput":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "Tags"
+      ],
+      "members":{
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource you want to add tags to.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>The key-value pair that represents the tag you want to add to the resource. The value can be an empty string.</p> <note><p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @.</p></note>"
+        }
+      },
+      "documentation":"<p>AddTagsToResourceInput</p>"
+    },
+    "AddTagsToResourceOutput":{
+      "type":"structure",
+      "members":{
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource you want to add tags to.</p>"
+        }
+      },
+      "documentation":"<p>AddTagsToResourceOutput</p>"
+    },
     "AddUploadBufferInput":{
       "type":"structure",
       "required":[
@@ -1819,7 +1937,7 @@
       "members":{
         "TapeARNs":{
           "shape":"TapeARNs",
-          "documentation":"<p>A list of unique Amazon Resource Named (ARN) the represents the virtual tapes that were created.</p>"
+          "documentation":"<p>A list of unique Amazon Resource Named (ARN) that represents the virtual tapes that were created.</p>"
         }
       },
       "documentation":"<p>CreateTapeOutput</p>"
@@ -2072,6 +2190,10 @@
         "GatewayId":{
           "shape":"GatewayId",
           "documentation":"<p>The gateway ID.</p>"
+        },
+        "GatewayName":{
+          "shape":"string",
+          "documentation":"<p>The gateway name.</p>"
         },
         "GatewayTimezone":{
           "shape":"GatewayTimezone",
@@ -2494,7 +2616,8 @@
       "members":{
         "GatewayARN":{"shape":"GatewayARN"},
         "GatewayType":{"shape":"GatewayType"},
-        "GatewayOperationalState":{"shape":"GatewayOperationalState"}
+        "GatewayOperationalState":{"shape":"GatewayOperationalState"},
+        "GatewayName":{"shape":"string"}
       }
     },
     "GatewayName":{
@@ -2625,6 +2748,42 @@
         "Disks":{"shape":"Disks"}
       }
     },
+    "ListTagsForResourceInput":{
+      "type":"structure",
+      "members":{
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource for which you want to list tags.</p>"
+        },
+        "Marker":{
+          "shape":"Marker",
+          "documentation":"<p>An opaque string that indicates the position at which to begin returning the list of tags.</p>"
+        },
+        "Limit":{
+          "shape":"PositiveIntObject",
+          "documentation":"<p>Specifies that the list of tags returned be limited to the specified number of items.</p>"
+        }
+      },
+      "documentation":"<p>ListTagsForResourceInput</p>"
+    },
+    "ListTagsForResourceOutput":{
+      "type":"structure",
+      "members":{
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>he Amazon Resource Name (ARN) of the resource for which you want to list tags.</p>"
+        },
+        "Marker":{
+          "shape":"Marker",
+          "documentation":"<p>An opaque string that indicates the position at which to stop returning the list of tags.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>An array that contains the tags for the specified resource.</p>"
+        }
+      },
+      "documentation":"<p>ListTagsForResourceOutput</p>"
+    },
     "ListVolumeInitiatorsInput":{
       "type":"structure",
       "required":["VolumeARN"],
@@ -2745,6 +2904,30 @@
       "min":1,
       "max":25
     },
+    "RemoveTagsFromResourceInput":{
+      "type":"structure",
+      "members":{
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource you want to remove the tags from.</p>"
+        },
+        "TagKeys":{
+          "shape":"TagKeys",
+          "documentation":"<p>The keys of the tags you want to remove from the specified resource. A tag is composed of a key/value pair.</p>"
+        }
+      },
+      "documentation":"<p>RemoveTagsFromResourceInput</p>"
+    },
+    "RemoveTagsFromResourceOutput":{
+      "type":"structure",
+      "members":{
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource that the tags were removed from.</p>"
+        }
+      },
+      "documentation":"<p>RemoveTagsFromResourceOutput</p>"
+    },
     "ResetCacheInput":{
       "type":"structure",
       "required":["GatewayARN"],
@@ -2757,6 +2940,11 @@
       "members":{
         "GatewayARN":{"shape":"GatewayARN"}
       }
+    },
+    "ResourceARN":{
+      "type":"string",
+      "min":50,
+      "max":500
     },
     "RetrieveTapeArchiveInput":{
       "type":"structure",
@@ -2882,6 +3070,35 @@
     "StorediSCSIVolumes":{
       "type":"list",
       "member":{"shape":"StorediSCSIVolume"}
+    },
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "min":1,
+      "max":128,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "TagKeys":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256
+    },
+    "Tags":{
+      "type":"list",
+      "member":{"shape":"Tag"}
     },
     "Tape":{
       "type":"structure",
@@ -3092,7 +3309,8 @@
     "UpdateGatewayInformationOutput":{
       "type":"structure",
       "members":{
-        "GatewayARN":{"shape":"GatewayARN"}
+        "GatewayARN":{"shape":"GatewayARN"},
+        "GatewayName":{"shape":"string"}
       },
       "documentation":"<p>A JSON object containing the of the gateway that was updated.</p>"
     },
@@ -3123,7 +3341,7 @@
         "GatewayARN":{"shape":"GatewayARN"},
         "HourOfDay":{
           "shape":"HourOfDay",
-          "documentation":"<p>The hour component of the maintenance start time represented as <emphasis>hh</emphasis>, where <i>hh</i> is the hour (00 to 23). The hour of the day is in the time zone of the gateway.</p>"
+          "documentation":"<p>The hour component of the maintenance start time represented as <i>hh</i>, where <i>hh</i> is the hour (00 to 23). The hour of the day is in the time zone of the gateway.</p>"
         },
         "MinuteOfHour":{
           "shape":"MinuteOfHour",
@@ -3322,5 +3540,7 @@
     "integer":{"type":"integer"},
     "long":{"type":"long"},
     "string":{"type":"string"}
+  },
+  "examples":{
   }
 }
