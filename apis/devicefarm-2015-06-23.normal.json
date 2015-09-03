@@ -1682,7 +1682,7 @@
       "members":{
         "arn":{
           "shape":"AmazonResourceName",
-          "documentation":"<p>The artifacts' ARNs.</p>"
+          "documentation":"<p>The Run, Job, Suite, or Test ARN.</p>"
         },
         "type":{
           "shape":"ArtifactCategory",
