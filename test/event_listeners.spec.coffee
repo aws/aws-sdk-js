@@ -409,6 +409,20 @@ describe 'AWS.EventListeners', ->
       response = request.send()
       expect(response.retryCount).to.equal(service.config.maxRetries)
 
+    ['RequestTimeTooSkewed', 'RequestExpired', 'RequestInTheFuture',
+      'InvalidSignatureException', 'SignatureDoesNotMatch',
+      'AuthFailure'].forEach (code) ->
+      it 'retries clock skew errors', ->
+        helpers.mockHttpResponse 400, {}, ''
+
+        request = makeRequest()
+        request.on 'extractError', (resp) ->
+          resp.error =
+            code: code
+            message: 'Client clock is skewed'
+        response = request.send()
+        expect(response.retryCount).to.equal(service.config.maxRetries)
+
     it 'does not retry other signature errors', ->
       helpers.mockHttpResponse 403, {}, ''
 
