@@ -281,7 +281,7 @@
           "documentation":"<p>An error on the server occurred when trying to process a request.</p>"
         }
       ],
-      "documentation":"<p>Assigns the DELETED status to a <code>BatchPrediction</code>, rendering it unusable.</p> <p>After using the <code>DeleteBatchPrediction</code> operation, you can use the <a>GetBatchPrediction</a> operation to verify that the status of the <code>BatchPrediction</code> changed to DELETED.</p> <caution><title>Caution</title> <p>The result of the <code>DeleteBatchPrediction</code> operation is irreversible.</p></caution>"
+      "documentation":"<p>Assigns the DELETED status to a <code>BatchPrediction</code>, rendering it unusable.</p> <p>After using the <code>DeleteBatchPrediction</code> operation, you can use the <a>GetBatchPrediction</a> operation to verify that the status of the <code>BatchPrediction</code> changed to DELETED.</p> <p><b>Caution:</b> The result of the <code>DeleteBatchPrediction</code> operation is irreversible.</p>"
     },
     "DeleteDataSource":{
       "name":"DeleteDataSource",
@@ -315,7 +315,7 @@
           "documentation":"<p>An error on the server occurred when trying to process a request.</p>"
         }
       ],
-      "documentation":"<p>Assigns the DELETED status to a <code>DataSource</code>, rendering it unusable.</p> <p>After using the <code>DeleteDataSource</code> operation, you can use the <a>GetDataSource</a> operation to verify that the status of the <code>DataSource</code> changed to DELETED.</p> <caution><title>Caution</title> <p>The results of the <code>DeleteDataSource</code> operation are irreversible.</p></caution>"
+      "documentation":"<p>Assigns the DELETED status to a <code>DataSource</code>, rendering it unusable.</p> <p>After using the <code>DeleteDataSource</code> operation, you can use the <a>GetDataSource</a> operation to verify that the status of the <code>DataSource</code> changed to DELETED.</p> <p><b>Caution:</b> The results of the <code>DeleteDataSource</code> operation are irreversible.</p>"
     },
     "DeleteEvaluation":{
       "name":"DeleteEvaluation",
@@ -349,7 +349,7 @@
           "documentation":"<p>An error on the server occurred when trying to process a request.</p>"
         }
       ],
-      "documentation":"<p>Assigns the <code>DELETED</code> status to an <code>Evaluation</code>, rendering it unusable.</p> <p>After invoking the <code>DeleteEvaluation</code> operation, you can use the <a>GetEvaluation</a> operation to verify that the status of the <code>Evaluation</code> changed to <code>DELETED</code>.</p> <caution><title>Caution</title> <p>The results of the <code>DeleteEvaluation</code> operation are irreversible.</p></caution>"
+      "documentation":"<p>Assigns the <code>DELETED</code> status to an <code>Evaluation</code>, rendering it unusable.</p> <p>After invoking the <code>DeleteEvaluation</code> operation, you can use the <a>GetEvaluation</a> operation to verify that the status of the <code>Evaluation</code> changed to <code>DELETED</code>.</p> <p><b>Caution:</b> The results of the <code>DeleteEvaluation</code> operation are irreversible.</p>"
     },
     "DeleteMLModel":{
       "name":"DeleteMLModel",
@@ -383,7 +383,7 @@
           "documentation":"<p>An error on the server occurred when trying to process a request.</p>"
         }
       ],
-      "documentation":"<p>Assigns the DELETED status to an <code>MLModel</code>, rendering it unusable.</p> <p>After using the <code>DeleteMLModel</code> operation, you can use the <a>GetMLModel</a> operation to verify that the status of the <code>MLModel</code> changed to DELETED.</p> <caution><title>Caution</title> <p>The result of the <code>DeleteMLModel</code> operation is irreversible.</p></caution>"
+      "documentation":"<p>Assigns the DELETED status to an <code>MLModel</code>, rendering it unusable.</p> <p>After using the <code>DeleteMLModel</code> operation, you can use the <a>GetMLModel</a> operation to verify that the status of the <code>MLModel</code> changed to DELETED.</p> <p><b>Caution:</b> The result of the <code>DeleteMLModel</code> operation is irreversible.</p>"
     },
     "DeleteRealtimeEndpoint":{
       "name":"DeleteRealtimeEndpoint",
@@ -708,7 +708,7 @@
           "documentation":"<p>The exception is thrown when a predict request is made to an unmounted <code>MLModel</code>.</p>"
         }
       ],
-      "documentation":"<p>Generates a prediction for the observation using the specified <code>MLModel</code>.</p> <note><title>Note</title> <p>Not all response parameters will be populated because this is dependent on the type of requested model.</p></note>"
+      "documentation":"<p>Generates a prediction for the observation using the specified <code>ML Model</code>.</p> <note><title>Note</title> <p>Not all response parameters will be populated. Whether a response parameter is populated depends on the type of model requested.</p></note>"
     },
     "UpdateBatchPrediction":{
       "name":"UpdateBatchPrediction",
@@ -992,7 +992,7 @@
         },
         "RDSData":{
           "shape":"RDSDataSpec",
-          "documentation":"<p>The data specification of an Amazon RDS <code>DataSource</code>:</p> <ul> <li><p>DatabaseInformation - <ul> <li> <code>DatabaseName </code> - Name of the Amazon RDS database.</li> <li> <code> InstanceIdentifier </code> - Unique identifier for the Amazon RDS database instance.</li> </ul> </p></li> <li><p>DatabaseCredentials - AWS Identity and Access Management (IAM) credentials that are used to connect to the Amazon RDS database.</p></li> <li><p>ResourceRole - Role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic Compute Cloud (EC2) instance to carry out the copy task from Amazon RDS to Amazon S3. For more information, see <a href=\"http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html\">Role templates</a> for data pipelines.</p></li> <li><p>ServiceRole - Role (DataPipelineDefaultRole) assumed by the AWS Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon Simple Storage Service (S3). For more information, see <a href=\"http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html\">Role templates</a> for data pipelines.</p></li> <li><p>SecurityInfo - Security information to use to access an Amazon RDS instance. You need to set up appropriate ingress rules for the security entity IDs provided to allow access to the Amazon RDS instance. Specify a [<code>SubnetId</code>, <code>SecurityGroupIds</code>] pair for a VPC-based Amazon RDS instance.</p></li> <li><p>SelectSqlQuery - Query that is used to retrieve the observation data for the <code>Datasource</code>.</p></li> <li><p>S3StagingLocation - Amazon S3 location for staging RDS data. The data retrieved from Amazon RDS using <code>SelectSqlQuery</code> is stored in this location.</p></li> <li><p>DataSchemaUri - Amazon S3 location of the <code>DataSchema</code>.</p></li> <li><p>DataSchema - A JSON string representing the schema. This is not required if <code>DataSchemaUri</code> is specified. </p></li> <li> <p>DataRearrangement - A JSON string representing the splitting requirement of a <code>Datasource</code>. </p> <br> <p> Sample - <code> \"{\\\"randomSeed\\\":\\\"some-random-seed\\\", \\\"splitting\\\":{\\\"percentBegin\\\":10,\\\"percentEnd\\\":60}}\"</code> </p> </li> </ul>"
+          "documentation":"<p>The data specification of an Amazon RDS <code>DataSource</code>:</p> <ul> <li><p>DatabaseInformation - <ul> <li> <code>DatabaseName </code> - Name of the Amazon RDS database.</li> <li> <code> InstanceIdentifier </code> - Unique identifier for the Amazon RDS database instance.</li> </ul> </p></li> <li><p>DatabaseCredentials - AWS Identity and Access Management (IAM) credentials that are used to connect to the Amazon RDS database.</p></li> <li><p>ResourceRole - Role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic Compute Cloud (EC2) instance to carry out the copy task from Amazon RDS to Amazon S3. For more information, see <a href=\"http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html\">Role templates</a> for data pipelines.</p></li> <li><p>ServiceRole - Role (DataPipelineDefaultRole) assumed by the AWS Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon Simple Storage Service (S3). For more information, see <a href=\"http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html\">Role templates</a> for data pipelines.</p></li> <li><p>SecurityInfo - Security information to use to access an Amazon RDS instance. You need to set up appropriate ingress rules for the security entity IDs provided to allow access to the Amazon RDS instance. Specify a [<code>SubnetId</code>, <code>SecurityGroupIds</code>] pair for a VPC-based Amazon RDS instance.</p></li> <li><p>SelectSqlQuery - Query that is used to retrieve the observation data for the <code>Datasource</code>.</p></li> <li><p>S3StagingLocation - Amazon S3 location for staging RDS data. The data retrieved from Amazon RDS using <code>SelectSqlQuery</code> is stored in this location.</p></li> <li><p>DataSchemaUri - Amazon S3 location of the <code>DataSchema</code>.</p></li> <li><p>DataSchema - A JSON string representing the schema. This is not required if <code>DataSchemaUri</code> is specified. </p></li> <li> <p>DataRearrangement - A JSON string representing the splitting requirement of a <code>Datasource</code>. </p> <br> <p> Sample - <code> \"{\\\"splitting\\\":{\\\"percentBegin\\\":10,\\\"percentEnd\\\":60}}\"</code> </p> </li> </ul>"
         },
         "RoleARN":{
           "shape":"RoleARN",
@@ -1032,7 +1032,7 @@
         },
         "DataSpec":{
           "shape":"RedshiftDataSpec",
-          "documentation":"<p>The data specification of an Amazon Redshift <code>DataSource</code>:</p> <ul> <li><p>DatabaseInformation - <ul> <li> <code>DatabaseName </code> - Name of the Amazon Redshift database. </li> <li> <code> ClusterIdentifier </code> - Unique ID for the Amazon Redshift cluster.</li> </ul></p></li> <li><p>DatabaseCredentials - AWS Identity abd Access Management (IAM) credentials that are used to connect to the Amazon Redshift database.</p></li> <li><p>SelectSqlQuery - Query that is used to retrieve the observation data for the <code>Datasource</code>.</p></li> <li><p>S3StagingLocation - Amazon Simple Storage Service (Amazon S3) location for staging Amazon Redshift data. The data retrieved from Amazon Relational Database Service (Amazon RDS) using <code>SelectSqlQuery</code> is stored in this location.</p></li> <li><p>DataSchemaUri - Amazon S3 location of the <code>DataSchema</code>.</p></li> <li><p>DataSchema - A JSON string representing the schema. This is not required if <code>DataSchemaUri</code> is specified. </p></li> <li> <p>DataRearrangement - A JSON string representing the splitting requirement of a <code>Datasource</code>. </p> <br> <p> Sample - <code> \"{\\\"randomSeed\\\":\\\"some-random-seed\\\", \\\"splitting\\\":{\\\"percentBegin\\\":10,\\\"percentEnd\\\":60}}\"</code> </p> </li> </ul>"
+          "documentation":"<p>The data specification of an Amazon Redshift <code>DataSource</code>:</p> <ul> <li><p>DatabaseInformation - <ul> <li> <code>DatabaseName </code> - Name of the Amazon Redshift database. </li> <li> <code> ClusterIdentifier </code> - Unique ID for the Amazon Redshift cluster.</li> </ul></p></li> <li><p>DatabaseCredentials - AWS Identity abd Access Management (IAM) credentials that are used to connect to the Amazon Redshift database.</p></li> <li><p>SelectSqlQuery - Query that is used to retrieve the observation data for the <code>Datasource</code>.</p></li> <li><p>S3StagingLocation - Amazon Simple Storage Service (Amazon S3) location for staging Amazon Redshift data. The data retrieved from Amazon Relational Database Service (Amazon RDS) using <code>SelectSqlQuery</code> is stored in this location.</p></li> <li><p>DataSchemaUri - Amazon S3 location of the <code>DataSchema</code>.</p></li> <li><p>DataSchema - A JSON string representing the schema. This is not required if <code>DataSchemaUri</code> is specified. </p></li> <li> <p>DataRearrangement - A JSON string representing the splitting requirement of a <code>Datasource</code>. </p> <br> <p> Sample - <code> \"{\\\"splitting\\\":{\\\"percentBegin\\\":10,\\\"percentEnd\\\":60}}\"</code> </p> </li> </ul>"
         },
         "RoleARN":{
           "shape":"RoleARN",
@@ -1071,7 +1071,7 @@
         },
         "DataSpec":{
           "shape":"S3DataSpec",
-          "documentation":"<p>The data specification of a <code>DataSource</code>:</p> <ul> <li><p>DataLocationS3 - Amazon Simple Storage Service (Amazon S3) location of the observation data.</p></li> <li><p>DataSchemaLocationS3 - Amazon S3 location of the <code>DataSchema</code>.</p></li> <li><p>DataSchema - A JSON string representing the schema. This is not required if <code>DataSchemaUri</code> is specified. </p></li> <li> <p>DataRearrangement - A JSON string representing the splitting requirement of a <code>Datasource</code>. </p> <br> <p> Sample - <code> \"{\\\"randomSeed\\\":\\\"some-random-seed\\\", \\\"splitting\\\":{\\\"percentBegin\\\":10,\\\"percentEnd\\\":60}}\"</code> </p> </li> </ul>"
+          "documentation":"<p>The data specification of a <code>DataSource</code>:</p> <ul> <li><p>DataLocationS3 - Amazon Simple Storage Service (Amazon S3) location of the observation data.</p></li> <li><p>DataSchemaLocationS3 - Amazon S3 location of the <code>DataSchema</code>.</p></li> <li><p>DataSchema - A JSON string representing the schema. This is not required if <code>DataSchemaUri</code> is specified. </p></li> <li> <p>DataRearrangement - A JSON string representing the splitting requirement of a <code>Datasource</code>. </p> <br> <p> Sample - <code> \"{\\\"splitting\\\":{\\\"percentBegin\\\":10,\\\"percentEnd\\\":60}}\"</code> </p> </li> </ul>"
         },
         "ComputeStatistics":{
           "shape":"ComputeStatistics",
@@ -1201,7 +1201,7 @@
     "DataSchema":{
       "type":"string",
       "max":131071,
-      "documentation":"<p>The schema of a <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>. The DataSource schema is expressed in JSON format.</p> { \"version\": \"1.0\", \"recordAnnotationFieldName\": \"F1\", \"recordWeightFieldName\": \"F2\", \"targetFieldName\": \"F3\", \"dataFormat\": \"CSV\", \"dataFileContainsHeader\": true, \"variables\": [ { \"fieldName\": \"F1\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F2\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F3\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F4\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F5\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F6\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F7\", \"fieldType\": \"WEIGHTED_INT_SEQUENCE\" }, { \"fieldName\": \"F8\", \"fieldType\": \"WEIGHTED_STRING_SEQUENCE\" } ], \"excludedVariableNames\": [ \"F6\" ] }"
+      "documentation":"<p>The schema of a <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>. The DataSource schema is expressed in JSON format.</p> <p><code>DataSchema</code> is not required if you specify a <code>DataSchemaUri</code></p> <p>{ \"version\": \"1.0\", \"recordAnnotationFieldName\": \"F1\", \"recordWeightFieldName\": \"F2\", \"targetFieldName\": \"F3\", \"dataFormat\": \"CSV\", \"dataFileContainsHeader\": true, \"variables\": [ { \"fieldName\": \"F1\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F2\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F3\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F4\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F5\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F6\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F7\", \"fieldType\": \"WEIGHTED_INT_SEQUENCE\" }, { \"fieldName\": \"F8\", \"fieldType\": \"WEIGHTED_STRING_SEQUENCE\" } ], \"excludedVariableNames\": [ \"F6\" ] } </p>"
     },
     "DataSource":{
       "type":"structure",
@@ -2326,11 +2326,11 @@
         },
         "DataRearrangement":{
           "shape":"DataRearrangement",
-          "documentation":"<p>DataRearrangement - A JSON string that represents the splitting requirement of a <code>DataSource</code>. </p> <br> <p> Sample - <code> \"{\\\"randomSeed\\\":\\\"some-random-seed\\\", \\\"splitting\\\":{\\\"percentBegin\\\":10,\\\"percentEnd\\\":60}}\"</code> </p>"
+          "documentation":"<p>DataRearrangement - A JSON string that represents the splitting requirement of a <code>DataSource</code>. </p> <br> <p> Sample - <code> \"{\\\"splitting\\\":{\\\"percentBegin\\\":10,\\\"percentEnd\\\":60}}\"</code> </p>"
         },
         "DataSchema":{
           "shape":"DataSchema",
-          "documentation":"<p>A JSON string that represents the schema. This is not required if <code>DataSchemaUri</code> is specified. </p>"
+          "documentation":"<p>A JSON string that represents the schema for an Amazon RDS <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>.</p> <p>A <code>DataSchema</code> is not required if you specify a <code>DataSchemaUri</code></p> <p>Define your <code>DataSchema</code> as a series of key-value pairs. <code>attributes</code> and <code>excludedVariableNames</code> have an array of key-value pairs for their value. Use the following format to define your <code>DataSchema</code>.</p> <p>{ \"version\": \"1.0\",</p> <p> \"recordAnnotationFieldName\": \"F1\",</p> <p> \"recordWeightFieldName\": \"F2\",</p> <p> \"targetFieldName\": \"F3\",</p> <p> \"dataFormat\": \"CSV\",</p> <p> \"dataFileContainsHeader\": true,</p> <p> \"attributes\": [</p> <p> { \"fieldName\": \"F1\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F2\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F3\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F4\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F5\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F6\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F7\", \"fieldType\": \"WEIGHTED_INT_SEQUENCE\" }, { \"fieldName\": \"F8\", \"fieldType\": \"WEIGHTED_STRING_SEQUENCE\" } ],</p> <p> \"excludedVariableNames\": [ \"F6\" ] } </p> <?oxy_insert_end>"
         },
         "DataSchemaUri":{
           "shape":"S3Url",
@@ -2519,7 +2519,7 @@
         },
         "DataSchema":{
           "shape":"DataSchema",
-          "documentation":"<p>Describes the schema for an Amazon Redshift <code>DataSource</code>.</p>"
+          "documentation":"<p>A JSON string that represents the schema for an Amazon Redshift <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>.</p> <p>A <code>DataSchema</code> is not required if you specify a <code>DataSchemaUri</code>.</p> <p>Define your <code>DataSchema</code> as a series of key-value pairs. <code>attributes</code> and <code>excludedVariableNames</code> have an array of key-value pairs for their value. Use the following format to define your <code>DataSchema</code>.</p> <p>{ \"version\": \"1.0\",</p> <p> \"recordAnnotationFieldName\": \"F1\",</p> <p> \"recordWeightFieldName\": \"F2\",</p> <p> \"targetFieldName\": \"F3\",</p> <p> \"dataFormat\": \"CSV\",</p> <p> \"dataFileContainsHeader\": true,</p> <p> \"attributes\": [</p> <p> { \"fieldName\": \"F1\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F2\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F3\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F4\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F5\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F6\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F7\", \"fieldType\": \"WEIGHTED_INT_SEQUENCE\" }, { \"fieldName\": \"F8\", \"fieldType\": \"WEIGHTED_STRING_SEQUENCE\" } ],</p> <p> \"excludedVariableNames\": [ \"F6\" ] } </p>"
         },
         "DataSchemaUri":{
           "shape":"S3Url",
@@ -2581,7 +2581,7 @@
           "documentation":"<p> The SQL query that is specified during <a>CreateDataSourceFromRedshift</a>. Returns only if <code>Verbose</code> is true in GetDataSourceInput. </p>"
         }
       },
-      "documentation":"<p>Describes the <Code>DataSource</Code> details specific to Amazon Redshift.</p>"
+      "documentation":"<p>Describes the <code>DataSource</code> details specific to Amazon Redshift.</p>"
     },
     "RedshiftSelectSqlQuery":{
       "type":"string",
@@ -2619,7 +2619,7 @@
         },
         "DataSchema":{
           "shape":"DataSchema",
-          "documentation":"<p> Describes the schema for an Amazon S3 <code>DataSource</code>.</p>"
+          "documentation":"<p> A JSON string that represents the schema for an Amazon S3 <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>.</p> <p>Define your <code>DataSchema</code> as a series of key-value pairs. <code>attributes</code> and <code>excludedVariableNames</code> have an array of key-value pairs for their value. Use the following format to define your <code>DataSchema</code>.</p> <p>{ \"version\": \"1.0\",</p> <p> \"recordAnnotationFieldName\": \"F1\",</p> <p> \"recordWeightFieldName\": \"F2\",</p> <p> \"targetFieldName\": \"F3\",</p> <p> \"dataFormat\": \"CSV\",</p> <p> \"dataFileContainsHeader\": true,</p> <p> \"attributes\": [</p> <p> { \"fieldName\": \"F1\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F2\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F3\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F4\", \"fieldType\": \"NUMERIC\" }, { \"fieldName\": \"F5\", \"fieldType\": \"CATEGORICAL\" }, { \"fieldName\": \"F6\", \"fieldType\": \"TEXT\" }, { \"fieldName\": \"F7\", \"fieldType\": \"WEIGHTED_INT_SEQUENCE\" }, { \"fieldName\": \"F8\", \"fieldType\": \"WEIGHTED_STRING_SEQUENCE\" } ],</p> <p> \"excludedVariableNames\": [ \"F6\" ] } </p> <?oxy_insert_end>"
         },
         "DataSchemaLocationS3":{
           "shape":"S3Url",
@@ -2774,8 +2774,6 @@
     },
     "VariableValue":{
       "type":"string",
-      "max":1024,
-      "pattern":"[a-zA-Z0-9_]*",
       "documentation":"<p>The value of a variable. Currently it's used to specify values of the target value, weights, and tag variables and for filtering variable values.</p>"
     },
     "Verbose":{
@@ -2788,5 +2786,7 @@
       "pattern":"https://[a-zA-Z0-9-.]*\\.amazon(aws)?\\.com[/]?"
     },
     "floatLabel":{"type":"float"}
+  },
+  "examples":{
   }
 }
