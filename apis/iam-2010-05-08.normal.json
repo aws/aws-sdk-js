@@ -10,7 +10,7 @@
     "xmlNamespace":"https://iam.amazonaws.com/doc/2010-05-08/",
     "protocol":"query"
   },
-  "documentation":"<fullname>AWS Identity and Access Management</fullname> <p>AWS Identity and Access Management (IAM) is a web service that you can use to manage users and user permissions under your AWS account. This guide provides descriptions of IAM actions that you can call programmatically. For general information about IAM, see <a href=\"http://aws.amazon.com/iam/\">AWS Identity and Access Management (IAM)</a>. For the user guide for IAM, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/\">Using IAM</a>. </p> <note>AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to IAM and AWS. For example, the SDKs take care of tasks such as cryptographically signing requests (see below), managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a> page. </note> <p>We recommend that you use the AWS SDKs to make programmatic API calls to IAM. However, you can also use the IAM Query API to make direct calls to the IAM web service. To learn more about the IAM Query API, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>Using IAM</i> guide. IAM supports GET and POST requests for all actions. That is, the API does not require you to use GET for some actions and POST for others. However, GET requests are subject to the limitation size of a URL. Therefore, for operations that require larger sizes, use a POST request. </p> <p> <b>Signing Requests</b> </p> <p>Requests must be signed using an access key ID and a secret access key. We strongly recommend that you do not use your AWS account access key ID and secret access key for everyday work with IAM. You can use the access key ID and secret access key for an IAM user or you can use the AWS Security Token Service to generate temporary security credentials and use those to sign requests. </p> <p>To sign requests, we recommend that you use <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>. If you have an existing application that uses Signature Version 2, you do not have to update it to use Signature Version 4. However, some operations now require Signature Version 4. The documentation for operations that require version 4 indicate this requirement. </p> <p> <b>Additional Resources</b> </p> <p>For more information, see the following:</p> <ul> <li> <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html\">AWS Security Credentials</a>. This topic provides general information about the types of credentials used for accessing AWS. </li> <li> <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html\">IAM Best Practices</a>. This topic presents a list of suggestions for using the IAM service to help secure your AWS resources. </li> <li> <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/\">AWS Security Token Service</a>. This guide describes how to create and use temporary security credentials. </li> <li> <a href=\"http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html\">Signing AWS API Requests</a>. This set of topics walk you through the process of signing a request using an access key ID and secret access key. </li> </ul>",
+  "documentation":"<fullname>AWS Identity and Access Management</fullname> <p>AWS Identity and Access Management (IAM) is a web service that you can use to manage users and user permissions under your AWS account. This guide provides descriptions of IAM actions that you can call programmatically. For general information about IAM, see <a href=\"http://aws.amazon.com/iam/\">AWS Identity and Access Management (IAM)</a>. For the user guide for IAM, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/\">Using IAM</a>. </p> <note>AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to IAM and AWS. For example, the SDKs take care of tasks such as cryptographically signing requests (see below), managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a> page. </note> <p>We recommend that you use the AWS SDKs to make programmatic API calls to IAM. However, you can also use the IAM Query API to make direct calls to the IAM web service. To learn more about the IAM Query API, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>Using IAM</i> guide. IAM supports GET and POST requests for all actions. That is, the API does not require you to use GET for some actions and POST for others. However, GET requests are subject to the limitation size of a URL. Therefore, for operations that require larger sizes, use a POST request. </p> <p> <b>Signing Requests</b> </p> <p>Requests must be signed using an access key ID and a secret access key. We strongly recommend that you do not use your AWS account access key ID and secret access key for everyday work with IAM. You can use the access key ID and secret access key for an IAM user or you can use the AWS Security Token Service to generate temporary security credentials and use those to sign requests. </p> <p>To sign requests, we recommend that you use <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>. If you have an existing application that uses Signature Version 2, you do not have to update it to use Signature Version 4. However, some operations now require Signature Version 4. The documentation for operations that require version 4 indicate this requirement. </p> <p> <b>Additional Resources</b> </p> <p>For more information, see the following:</p> <ul> <li> <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html\">AWS Security Credentials</a>. This topic provides general information about the types of credentials used for accessing AWS. </li> <li> <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html\">IAM Best Practices</a>. This topic presents a list of suggestions for using the IAM service to help secure your AWS resources. </li> <li> <a href=\"http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html\">Signing AWS API Requests</a>. This set of topics walk you through the process of signing a request using an access key ID and secret access key. </li> </ul>",
   "operations":{
     "AddClientIDToOpenIDConnectProvider":{
       "name":"AddClientIDToOpenIDConnectProvider",
@@ -200,7 +200,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Attaches the specified managed policy to the specified group.</p> <p>You use this API to attach a managed policy to a group. To embed an inline policy in a group, use <a>PutGroupPolicy</a>. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Attaches the specified managed policy to the specified group.</p> <p>You use this API to attach a managed policy to a group. To embed an inline policy in a group, use <a>PutGroupPolicy</a>. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "AttachRolePolicy":{
       "name":"AttachRolePolicy",
@@ -250,7 +250,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Attaches the specified managed policy to the specified role.</p> <p>When you attach a managed policy to a role, the managed policy is used as the role's access (permissions) policy. You cannot use a managed policy as the role's trust policy. The role's trust policy is created at the same time as the role, using <a>CreateRole</a>. You can update a role's trust policy using <a>UpdateAssumeRolePolicy</a>. </p> <p>Use this API to attach a managed policy to a role. To embed an inline policy in a role, use <a>PutRolePolicy</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide.</p>"
+      "documentation":"<p>Attaches the specified managed policy to the specified role.</p> <p>When you attach a managed policy to a role, the managed policy is used as the role's access (permissions) policy. You cannot use a managed policy as the role's trust policy. The role's trust policy is created at the same time as the role, using <a>CreateRole</a>. You can update a role's trust policy using <a>UpdateAssumeRolePolicy</a>. </p> <p>Use this API to attach a managed policy to a role. To embed an inline policy in a role, use <a>PutRolePolicy</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>"
     },
     "AttachUserPolicy":{
       "name":"AttachUserPolicy",
@@ -300,7 +300,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Attaches the specified managed policy to the specified user.</p> <p>You use this API to attach a managed policy to a user. To embed an inline policy in a user, use <a>PutUserPolicy</a>. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Attaches the specified managed policy to the specified user.</p> <p>You use this API to attach a managed policy to a user. To embed an inline policy in a user, use <a>PutUserPolicy</a>. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "ChangePassword":{
       "name":"ChangePassword",
@@ -370,7 +370,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Changes the password of the IAM user who is calling this action. The root account password is not affected by this action. </p> <p>To change the password for a different user, see <a>UpdateLoginProfile</a>. For more information about modifying passwords, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html\">Managing Passwords</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Changes the password of the IAM user who is calling this action. The root account password is not affected by this action. </p> <p>To change the password for a different user, see <a>UpdateLoginProfile</a>. For more information about modifying passwords, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html\">Managing Passwords</a> in the <i>IAM User Guide</i>. </p>"
     },
     "CreateAccessKey":{
       "name":"CreateAccessKey",
@@ -415,7 +415,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p> Creates a new AWS secret access key and corresponding AWS access key ID for the specified user. The default status for new keys is <code>Active</code>. </p> <p> If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users. </p> <p> For information about limits on the number of keys you can create, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p> <important> To ensure the security of your AWS account, the secret access key is accessible only during key and user creation. You must save the key (for example, in a text file) if you want to be able to access it again. If a secret key is lost, you can delete the access keys for the associated user and then create new keys. </important>"
+      "documentation":"<p> Creates a new AWS secret access key and corresponding AWS access key ID for the specified user. The default status for new keys is <code>Active</code>. </p> <p> If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users. </p> <p> For information about limits on the number of keys you can create, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p> <important> To ensure the security of your AWS account, the secret access key is accessible only during key and user creation. You must save the key (for example, in a text file) if you want to be able to access it again. If a secret key is lost, you can delete the access keys for the associated user and then create new keys. </important>"
     },
     "CreateAccountAlias":{
       "name":"CreateAccountAlias",
@@ -455,7 +455,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Creates an alias for your AWS account. For information about using an AWS account alias, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html\">Using an Alias for Your AWS Account ID</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Creates an alias for your AWS account. For information about using an AWS account alias, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html\">Using an Alias for Your AWS Account ID</a> in the <i>IAM User Guide</i>. </p>"
     },
     "CreateGroup":{
       "name":"CreateGroup",
@@ -510,7 +510,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Creates a new group.</p> <p> For information about the number of groups you can create, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Creates a new group.</p> <p> For information about the number of groups you can create, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p>"
     },
     "CreateInstanceProfile":{
       "name":"CreateInstanceProfile",
@@ -555,7 +555,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p> Creates a new instance profile. For information about instance profiles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html\">About Instance Profiles</a>. </p> <p> For information about the number of instance profiles you can create, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p> Creates a new instance profile. For information about instance profiles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html\">About Instance Profiles</a>. </p> <p> For information about the number of instance profiles you can create, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p>"
     },
     "CreateLoginProfile":{
       "name":"CreateLoginProfile",
@@ -740,7 +740,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Creates a new managed policy for your AWS account. </p> <p>This operation creates a policy version with a version identifier of <code>v1</code> and sets v1 as the policy's default version. For more information about policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p> <p>For more information about managed policies in general, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Creates a new managed policy for your AWS account. </p> <p>This operation creates a policy version with a version identifier of <code>v1</code> and sets v1 as the policy's default version. For more information about policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>. </p> <p>For more information about managed policies in general, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "CreatePolicyVersion":{
       "name":"CreatePolicyVersion",
@@ -805,7 +805,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Creates a new version of the specified managed policy. To update a managed policy, you create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must delete an existing version using <a>DeletePolicyVersion</a> before you create a new version. </p> <p>Optionally, you can set the new version as the policy's default version. The default version is the operative version; that is, the version that is in effect for the IAM users, groups, and roles that the policy is attached to. </p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Creates a new version of the specified managed policy. To update a managed policy, you create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must delete an existing version using <a>DeletePolicyVersion</a> before you create a new version. </p> <p>Optionally, you can set the new version as the policy's default version. The default version is the operative version; that is, the version that is in effect for the IAM users, groups, and roles that the policy is attached to. </p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "CreateRole":{
       "name":"CreateRole",
@@ -860,7 +860,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Creates a new role for your AWS account. For more information about roles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html\">Working with Roles</a>. For information about limitations on role names and the number of roles you can create, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p> <p>The policy in the following example grants permission to an EC2 instance to assume the role.</p>"
+      "documentation":"<p>Creates a new role for your AWS account. For more information about roles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html\">Working with Roles</a>. For information about limitations on role names and the number of roles you can create, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p> <p>The policy in the following example grants permission to an EC2 instance to assume the role.</p>"
     },
     "CreateSAMLProvider":{
       "name":"CreateSAMLProvider",
@@ -915,7 +915,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Creates an IAM entity to describe an identity provider (IdP) that supports SAML 2.0.</p> <p> The SAML provider that you create with this operation can be used as a principal in a role's trust policy to establish a trust relationship between AWS and a SAML identity provider. You can create an IAM role that supports Web-based single sign-on (SSO) to the AWS Management Console or one that supports API access to AWS. </p> <p> When you create the SAML provider, you upload an a SAML metadata document that you get from your IdP and that includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that are received from the IdP. You must generate the metadata document using the identity management software that is used as your organization's IdP. </p> <note> This operation requires <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>. </note> <p> For more information, see <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/STSMgmtConsole-SAML.html\">Giving Console Access Using SAML</a> and <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/CreatingSAML.html\">Creating Temporary Security Credentials for SAML Federation</a> in the <i>Using Temporary Credentials</i> guide. </p>"
+      "documentation":"<p>Creates an IAM entity to describe an identity provider (IdP) that supports SAML 2.0.</p> <p> The SAML provider that you create with this operation can be used as a principal in a role's trust policy to establish a trust relationship between AWS and a SAML identity provider. You can create an IAM role that supports Web-based single sign-on (SSO) to the AWS Management Console or one that supports API access to AWS. </p> <p> When you create the SAML provider, you upload an a SAML metadata document that you get from your IdP and that includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that are received from the IdP. You must generate the metadata document using the identity management software that is used as your organization's IdP. </p> <note> This operation requires <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>. </note> <p> For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html\">Enabling SAML 2.0 Federated Users to Access the AWS Management Console</a> and <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html\">About SAML 2.0-based Federation</a> in the <i>IAM User Guide</i>. </p>"
     },
     "CreateUser":{
       "name":"CreateUser",
@@ -970,7 +970,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Creates a new user for your AWS account.</p> <p> For information about limitations on the number of users you can create, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Creates a new user for your AWS account.</p> <p> For information about limitations on the number of users you can create, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p>"
     },
     "CreateVirtualMFADevice":{
       "name":"CreateVirtualMFADevice",
@@ -1145,7 +1145,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p> Deletes the specified AWS account alias. For information about using an AWS account alias, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html\">Using an Alias for Your AWS Account ID</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p> Deletes the specified AWS account alias. For information about using an AWS account alias, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html\">Using an Alias for Your AWS Account ID</a> in the <i>IAM User Guide</i>. </p>"
     },
     "DeleteAccountPasswordPolicy":{
       "name":"DeleteAccountPasswordPolicy",
@@ -1274,7 +1274,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Deletes the specified inline policy that is embedded in the specified group.</p> <p>A group can also have managed policies attached to it. To detach a managed policy from a group, use <a>DetachGroupPolicy</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Deletes the specified inline policy that is embedded in the specified group.</p> <p>A group can also have managed policies attached to it. To detach a managed policy from a group, use <a>DetachGroupPolicy</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "DeleteInstanceProfile":{
       "name":"DeleteInstanceProfile",
@@ -1474,7 +1474,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Deletes the specified managed policy.</p> <p>Before you can delete a managed policy, you must detach the policy from all users, groups, and roles that it is attached to, and you must delete all of the policy's versions. The following steps describe the process for deleting a managed policy: <ol> <li>Detach the policy from all users, groups, and roles that the policy is attached to, using the <a>DetachUserPolicy</a>, <a>DetachGroupPolicy</a>, or <a>DetachRolePolicy</a> APIs. To list all the users, groups, and roles that a policy is attached to, use <a>ListEntitiesForPolicy</a>. </li> <li>Delete all versions of the policy using <a>DeletePolicyVersion</a>. To list the policy's versions, use <a>ListPolicyVersions</a>. You cannot use <a>DeletePolicyVersion</a> to delete the version that is marked as the default version. You delete the policy's default version in the next step of the process. </li> <li>Delete the policy (this automatically deletes the policy's default version) using this API. </li> </ol> </p> <p>For information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Deletes the specified managed policy.</p> <p>Before you can delete a managed policy, you must detach the policy from all users, groups, and roles that it is attached to, and you must delete all of the policy's versions. The following steps describe the process for deleting a managed policy: <ol> <li>Detach the policy from all users, groups, and roles that the policy is attached to, using the <a>DetachUserPolicy</a>, <a>DetachGroupPolicy</a>, or <a>DetachRolePolicy</a> APIs. To list all the users, groups, and roles that a policy is attached to, use <a>ListEntitiesForPolicy</a>. </li> <li>Delete all versions of the policy using <a>DeletePolicyVersion</a>. To list the policy's versions, use <a>ListPolicyVersions</a>. You cannot use <a>DeletePolicyVersion</a> to delete the version that is marked as the default version. You delete the policy's default version in the next step of the process. </li> <li>Delete the policy (this automatically deletes the policy's default version) using this API. </li> </ol> </p> <p>For information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "DeletePolicyVersion":{
       "name":"DeletePolicyVersion",
@@ -1534,7 +1534,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Deletes the specified version of the specified managed policy.</p> <p>You cannot delete the default version of a policy using this API. To delete the default version of a policy, use <a>DeletePolicy</a>. To find out which version of a policy is marked as the default version, use <a>ListPolicyVersions</a>. </p> <p>For information about versions for managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Deletes the specified version of the specified managed policy.</p> <p>You cannot delete the default version of a policy using this API. To delete the default version of a policy, use <a>DeletePolicy</a>. To find out which version of a policy is marked as the default version, use <a>ListPolicyVersions</a>. </p> <p>For information about versions for managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "DeleteRole":{
       "name":"DeleteRole",
@@ -1624,7 +1624,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Deletes the specified inline policy that is embedded in the specified role.</p> <p>A role can also have managed policies attached to it. To detach a managed policy from a role, use <a>DetachRolePolicy</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Deletes the specified inline policy that is embedded in the specified role.</p> <p>A role can also have managed policies attached to it. To detach a managed policy from a role, use <a>DetachRolePolicy</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "DeleteSAMLProvider":{
       "name":"DeleteSAMLProvider",
@@ -1875,7 +1875,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Deletes the specified inline policy that is embedded in the specified user.</p> <p>A user can also have managed policies attached to it. To detach a managed policy from a user, use <a>DetachUserPolicy</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Deletes the specified inline policy that is embedded in the specified user.</p> <p>A user can also have managed policies attached to it. To detach a managed policy from a user, use <a>DetachUserPolicy</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "DeleteVirtualMFADevice":{
       "name":"DeleteVirtualMFADevice",
@@ -1975,7 +1975,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Removes the specified managed policy from the specified group. </p> <p>A group can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteGroupPolicy</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Removes the specified managed policy from the specified group. </p> <p>A group can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteGroupPolicy</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "DetachRolePolicy":{
       "name":"DetachRolePolicy",
@@ -2025,7 +2025,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Removes the specified managed policy from the specified role. </p> <p>A role can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteRolePolicy</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Removes the specified managed policy from the specified role. </p> <p>A role can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteRolePolicy</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "DetachUserPolicy":{
       "name":"DetachUserPolicy",
@@ -2075,7 +2075,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Removes the specified managed policy from the specified user. </p> <p>A user can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteUserPolicy</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Removes the specified managed policy from the specified user. </p> <p>A user can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteUserPolicy</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "EnableMFADevice":{
       "name":"EnableMFADevice",
@@ -2179,7 +2179,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p> Generates a credential report for the AWS account. For more information about the credential report, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p> Generates a credential report for the AWS account. For more information about the credential report, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>IAM User Guide</i>. </p>"
     },
     "GetAccessKeyLastUsed":{
       "name":"GetAccessKeyLastUsed",
@@ -2230,7 +2230,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Retrieves information about all IAM users, groups, roles, and policies in your account, including their relationships to one another. Use this API to obtain a snapshot of the configuration of IAM permissions (users, groups, roles, and policies) in your account.</p> <p>You can optionally filter the results using the <code>Filter</code> parameter. You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>"
+      "documentation":"<p>Retrieves information about all IAM users, groups, roles, and policies in your account, including their relationships to one another. Use this API to obtain a snapshot of the configuration of IAM permissions (users, groups, roles, and policies) in your account.</p> <p>You can optionally filter the results using the <code>Filter</code> parameter. You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. </p>"
     },
     "GetAccountPasswordPolicy":{
       "name":"GetAccountPasswordPolicy",
@@ -2288,7 +2288,69 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Retrieves information about IAM entity usage and IAM quotas in the AWS account.</p> <p> For information about limitations on IAM entities, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Retrieves information about IAM entity usage and IAM quotas in the AWS account.</p> <p> For information about limitations on IAM entities, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p>"
+    },
+    "GetContextKeysForCustomPolicy":{
+      "name":"GetContextKeysForCustomPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetContextKeysForCustomPolicyRequest"},
+      "output":{
+        "shape":"GetContextKeysForPolicyResponse",
+        "documentation":"<p>Contains the response to a successful <a>GetContextKeysForPrincipalPolicy</a> or <a>GetContextKeysForCustomPolicy</a> request. </p>",
+        "resultWrapper":"GetContextKeysForCustomPolicyResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The request was rejected because an invalid or out-of-range value was supplied for an input parameter.</p>"
+        }
+      ],
+      "documentation":"<p>Gets a list of all of the context keys referenced in <code>Condition</code> elements in the input policies. The policies are supplied as a list of one or more strings. To get the context keys from policies associated with an IAM user, group, or role, use <a>GetContextKeysForPrincipalPolicy</a>.</p> <p>Context keys are variables maintained by AWS and its services that provide details about the context of an API query request, and can be evaluated by using the <code>Condition</code> element of an IAM policy. Use GetContextKeysForCustomPolicy to understand what key names and values you must supply when you call <a>SimulateCustomPolicy</a>. Note that all parameters are shown in unencoded form here for clarity, but must be URL encoded to be included as a part of a real HTML request.</p>"
+    },
+    "GetContextKeysForPrincipalPolicy":{
+      "name":"GetContextKeysForPrincipalPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetContextKeysForPrincipalPolicyRequest"},
+      "output":{
+        "shape":"GetContextKeysForPolicyResponse",
+        "documentation":"<p>Contains the response to a successful <a>GetContextKeysForPrincipalPolicy</a> or <a>GetContextKeysForCustomPolicy</a> request. </p>",
+        "resultWrapper":"GetContextKeysForPrincipalPolicyResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The request was rejected because it referenced an entity that does not exist. The error message describes the entity. </p>"
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The request was rejected because an invalid or out-of-range value was supplied for an input parameter.</p>"
+        }
+      ],
+      "documentation":"<p>Gets a list of all of the context keys referenced in <code>Condition</code> elements in all of the IAM policies attached to the specified IAM entity. The entity can be an IAM user, group, or role. If you specify a user, then the request also includes all of the policies attached to groups that the user is a member of.</p> <p>You can optionally include a list of one or more additional policies, specified as strings. If you want to include only a list of policies by string, use <a>GetContextKeysForCustomPolicy</a> instead.</p> <p><b>Note:</b> This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use <a>GetContextKeysForCustomPolicy</a> instead.</p> <p>Context keys are variables maintained by AWS and its services that provide details about the context of an API query request, and can be evaluated by using the <code>Condition</code> element of an IAM policy. Use GetContextKeysForPrincipalPolicy to understand what key names and values you must supply when you call <a>SimulatePrincipalPolicy</a>.</p>"
     },
     "GetCredentialReport":{
       "name":"GetCredentialReport",
@@ -2320,7 +2382,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>The request was rejected because the most recent credential report has expired. To generate a new credential report, use <a>GenerateCredentialReport</a>. For more information about credential report expiration, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>Using IAM</i> guide.</p>"
+          "documentation":"<p>The request was rejected because the most recent credential report has expired. To generate a new credential report, use <a>GenerateCredentialReport</a>. For more information about credential report expiration, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>IAM User Guide</i>.</p>"
         },
         {
           "shape":"CredentialReportNotReadyException",
@@ -2342,7 +2404,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p> Retrieves a credential report for the AWS account. For more information about the credential report, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p> Retrieves a credential report for the AWS account. For more information about the credential report, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>IAM User Guide</i>. </p>"
     },
     "GetGroup":{
       "name":"GetGroup",
@@ -2412,7 +2474,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Retrieves the specified inline policy document that is embedded in the specified group. </p> <p>A group can also have managed policies attached to it. To retrieve a managed policy document that is attached to a group, use <a>GetPolicy</a> to determine the policy's default version, then use <a>GetPolicyVersion</a> to retrieve the policy document. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Retrieves the specified inline policy document that is embedded in the specified group. </p> <p>A group can also have managed policies attached to it. To retrieve a managed policy document that is attached to a group, use <a>GetPolicy</a> to determine the policy's default version, then use <a>GetPolicyVersion</a> to retrieve the policy document. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "GetInstanceProfile":{
       "name":"GetInstanceProfile",
@@ -2572,7 +2634,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Retrieves information about the specified managed policy, including the policy's default version and the total number of users, groups, and roles that the policy is attached to. For a list of the specific users, groups, and roles that the policy is attached to, use the <a>ListEntitiesForPolicy</a> API. This API returns metadata about the policy. To retrieve the policy document for a specific version of the policy, use <a>GetPolicyVersion</a>. </p> <p>This API retrieves information about managed policies. To retrieve information about an inline policy that is embedded with a user, group, or role, use the <a>GetUserPolicy</a>, <a>GetGroupPolicy</a>, or <a>GetRolePolicy</a> API. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Retrieves information about the specified managed policy, including the policy's default version and the total number of users, groups, and roles that the policy is attached to. For a list of the specific users, groups, and roles that the policy is attached to, use the <a>ListEntitiesForPolicy</a> API. This API returns metadata about the policy. To retrieve the policy document for a specific version of the policy, use <a>GetPolicyVersion</a>. </p> <p>This API retrieves information about managed policies. To retrieve information about an inline policy that is embedded with a user, group, or role, use the <a>GetUserPolicy</a>, <a>GetGroupPolicy</a>, or <a>GetRolePolicy</a> API. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "GetPolicyVersion":{
       "name":"GetPolicyVersion",
@@ -2617,7 +2679,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Retrieves information about the specified version of the specified managed policy, including the policy document. </p> <p>To list the available versions for a policy, use <a>ListPolicyVersions</a>. </p> <p>This API retrieves information about managed policies. To retrieve information about an inline policy that is embedded in a user, group, or role, use the <a>GetUserPolicy</a>, <a>GetGroupPolicy</a>, or <a>GetRolePolicy</a> API. </p> <p>For more information about the types of policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Retrieves information about the specified version of the specified managed policy, including the policy document. </p> <p>To list the available versions for a policy, use <a>ListPolicyVersions</a>. </p> <p>This API retrieves information about managed policies. To retrieve information about an inline policy that is embedded in a user, group, or role, use the <a>GetUserPolicy</a>, <a>GetGroupPolicy</a>, or <a>GetRolePolicy</a> API. </p> <p>For more information about the types of policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "GetRole":{
       "name":"GetRole",
@@ -2687,7 +2749,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Retrieves the specified inline policy document that is embedded with the specified role. </p> <p>A role can also have managed policies attached to it. To retrieve a managed policy document that is attached to a role, use <a>GetPolicy</a> to determine the policy's default version, then use <a>GetPolicyVersion</a> to retrieve the policy document. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>For more information about roles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html\">Using Roles to Delegate Permissions and Federate Identities</a>. </p>"
+      "documentation":"<p>Retrieves the specified inline policy document that is embedded with the specified role. </p> <p>A role can also have managed policies attached to it. To retrieve a managed policy document that is attached to a role, use <a>GetPolicy</a> to determine the policy's default version, then use <a>GetPolicyVersion</a> to retrieve the policy document. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>For more information about roles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html\">Using Roles to Delegate Permissions and Federate Identities</a>. </p>"
     },
     "GetSAMLProvider":{
       "name":"GetSAMLProvider",
@@ -2873,7 +2935,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Retrieves the specified inline policy document that is embedded in the specified user. </p> <p>A user can also have managed policies attached to it. To retrieve a managed policy document that is attached to a user, use <a>GetPolicy</a> to determine the policy's default version, then use <a>GetPolicyVersion</a> to retrieve the policy document. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Retrieves the specified inline policy document that is embedded in the specified user. </p> <p>A user can also have managed policies attached to it. To retrieve a managed policy document that is attached to a user, use <a>GetPolicy</a> to determine the policy's default version, then use <a>GetPolicyVersion</a> to retrieve the policy document. </p> <p>For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "ListAccessKeys":{
       "name":"ListAccessKeys",
@@ -2933,7 +2995,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p> Lists the account aliases associated with the account. For information about using an AWS account alias, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html\">Using an Alias for Your AWS Account ID</a> in the <i>Using IAM</i> guide. </p> <p> You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. </p>"
+      "documentation":"<p> Lists the account aliases associated with the account. For information about using an AWS account alias, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html\">Using an Alias for Your AWS Account ID</a> in the <i>IAM User Guide</i>. </p> <p> You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. </p>"
     },
     "ListAttachedGroupPolicies":{
       "name":"ListAttachedGroupPolicies",
@@ -2978,7 +3040,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Lists all managed policies that are attached to the specified group.</p> <p>A group can also have inline policies embedded with it. To list the inline policies for a group, use the <a>ListGroupPolicies</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. You can use the <code>PathPrefix</code> parameter to limit the list of policies to only those matching the specified path prefix. If there are no policies attached to the specified group (or none that match the specified path prefix), the action returns an empty list. </p>"
+      "documentation":"<p>Lists all managed policies that are attached to the specified group.</p> <p>A group can also have inline policies embedded with it. To list the inline policies for a group, use the <a>ListGroupPolicies</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. You can use the <code>PathPrefix</code> parameter to limit the list of policies to only those matching the specified path prefix. If there are no policies attached to the specified group (or none that match the specified path prefix), the action returns an empty list. </p>"
     },
     "ListAttachedRolePolicies":{
       "name":"ListAttachedRolePolicies",
@@ -3023,7 +3085,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Lists all managed policies that are attached to the specified role. </p> <p>A role can also have inline policies embedded with it. To list the inline policies for a role, use the <a>ListRolePolicies</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. You can use the <code>PathPrefix</code> parameter to limit the list of policies to only those matching the specified path prefix. If there are no policies attached to the specified role (or none that match the specified path prefix), the action returns an empty list. </p>"
+      "documentation":"<p>Lists all managed policies that are attached to the specified role. </p> <p>A role can also have inline policies embedded with it. To list the inline policies for a role, use the <a>ListRolePolicies</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. You can use the <code>PathPrefix</code> parameter to limit the list of policies to only those matching the specified path prefix. If there are no policies attached to the specified role (or none that match the specified path prefix), the action returns an empty list. </p>"
     },
     "ListAttachedUserPolicies":{
       "name":"ListAttachedUserPolicies",
@@ -3068,7 +3130,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Lists all managed policies that are attached to the specified user. </p> <p>A user can also have inline policies embedded with it. To list the inline policies for a user, use the <a>ListUserPolicies</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. You can use the <code>PathPrefix</code> parameter to limit the list of policies to only those matching the specified path prefix. If there are no policies attached to the specified group (or none that match the specified path prefix), the action returns an empty list. </p>"
+      "documentation":"<p>Lists all managed policies that are attached to the specified user. </p> <p>A user can also have inline policies embedded with it. To list the inline policies for a user, use the <a>ListUserPolicies</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. You can use the <code>PathPrefix</code> parameter to limit the list of policies to only those matching the specified path prefix. If there are no policies attached to the specified group (or none that match the specified path prefix), the action returns an empty list. </p>"
     },
     "ListEntitiesForPolicy":{
       "name":"ListEntitiesForPolicy",
@@ -3148,7 +3210,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Lists the names of the inline policies that are embedded in the specified group. </p> <p>A group can also have managed policies attached to it. To list the managed policies that are attached to a group, use <a>ListAttachedGroupPolicies</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. If there are no inline policies embedded with the specified group, the action returns an empty list. </p>"
+      "documentation":"<p>Lists the names of the inline policies that are embedded in the specified group. </p> <p>A group can also have managed policies attached to it. To list the managed policies that are attached to a group, use <a>ListAttachedGroupPolicies</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. If there are no inline policies embedded with the specified group, the action returns an empty list. </p>"
     },
     "ListGroups":{
       "name":"ListGroups",
@@ -3353,7 +3415,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Lists all the managed policies that are available to your account, including your own customer managed policies and all AWS managed policies. </p> <p>You can filter the list of policies that is returned using the optional <code>OnlyAttached</code>, <code>Scope</code>, and <code>PathPrefix</code> parameters. For example, to list only the customer managed policies in your AWS account, set <code>Scope</code> to <code>Local</code>. To list only AWS managed policies, set <code>Scope</code> to <code>AWS</code>. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Lists all the managed policies that are available to your account, including your own customer managed policies and all AWS managed policies. </p> <p>You can filter the list of policies that is returned using the optional <code>OnlyAttached</code>, <code>Scope</code>, and <code>PathPrefix</code> parameters. For example, to list only the customer managed policies in your AWS account, set <code>Scope</code> to <code>Local</code>. To list only AWS managed policies, set <code>Scope</code> to <code>AWS</code>. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "ListPolicyVersions":{
       "name":"ListPolicyVersions",
@@ -3398,7 +3460,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Lists information about the versions of the specified managed policy, including the version that is set as the policy's default version. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Lists information about the versions of the specified managed policy, including the version that is set as the policy's default version. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
     },
     "ListRolePolicies":{
       "name":"ListRolePolicies",
@@ -3433,7 +3495,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Lists the names of the inline policies that are embedded in the specified role. </p> <p>A role can also have managed policies attached to it. To list the managed policies that are attached to a role, use <a>ListAttachedRolePolicies</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. If there are no inline policies embedded with the specified role, the action returns an empty list. </p>"
+      "documentation":"<p>Lists the names of the inline policies that are embedded in the specified role. </p> <p>A role can also have managed policies attached to it. To list the managed policies that are attached to a role, use <a>ListAttachedRolePolicies</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. If there are no inline policies embedded with the specified role, the action returns an empty list. </p>"
     },
     "ListRoles":{
       "name":"ListRoles",
@@ -3604,7 +3666,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Lists the names of the inline policies embedded in the specified user. </p> <p>A user can also have managed policies attached to it. To list the managed policies that are attached to a user, use <a>ListAttachedUserPolicies</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. If there are no inline policies embedded with the specified user, the action returns an empty list. </p>"
+      "documentation":"<p>Lists the names of the inline policies embedded in the specified user. </p> <p>A user can also have managed policies attached to it. To list the managed policies that are attached to a user, use <a>ListAttachedUserPolicies</a>. For more information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. If there are no inline policies embedded with the specified user, the action returns an empty list. </p>"
     },
     "ListUsers":{
       "name":"ListUsers",
@@ -3693,7 +3755,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Adds (or updates) an inline policy document that is embedded in the specified group. </p> <p>A user can also have managed policies attached to it. To attach a managed policy to a group, use <a>AttachGroupPolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>For information about limits on the number of inline policies that you can embed in a group, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p> <note>Because policy documents can be large, you should use POST rather than GET when calling <code>PutGroupPolicy</code>. For general information about using the Query API with IAM, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>Using IAM</i> guide. </note>"
+      "documentation":"<p>Adds (or updates) an inline policy document that is embedded in the specified group. </p> <p>A user can also have managed policies attached to it. To attach a managed policy to a group, use <a>AttachGroupPolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>For information about limits on the number of inline policies that you can embed in a group, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p> <note>Because policy documents can be large, you should use POST rather than GET when calling <code>PutGroupPolicy</code>. For general information about using the Query API with IAM, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>Using IAM</i> guide. </note>"
     },
     "PutRolePolicy":{
       "name":"PutRolePolicy",
@@ -3743,7 +3805,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Adds (or updates) an inline policy document that is embedded in the specified role. </p> <p>When you embed an inline policy in a role, the inline policy is used as the role's access (permissions) policy. The role's trust policy is created at the same time as the role, using <a>CreateRole</a>. You can update a role's trust policy using <a>UpdateAssumeRolePolicy</a>. For more information about roles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html\">Using Roles to Delegate Permissions and Federate Identities</a>. </p> <p>A role can also have a managed policy attached to it. To attach a managed policy to a role, use <a>AttachRolePolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>For information about limits on the number of inline policies that you can embed with a role, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p> <note>Because policy documents can be large, you should use POST rather than GET when calling <code>PutRolePolicy</code>. For general information about using the Query API with IAM, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>Using IAM</i> guide. </note>"
+      "documentation":"<p>Adds (or updates) an inline policy document that is embedded in the specified role. </p> <p>When you embed an inline policy in a role, the inline policy is used as the role's access (permissions) policy. The role's trust policy is created at the same time as the role, using <a>CreateRole</a>. You can update a role's trust policy using <a>UpdateAssumeRolePolicy</a>. For more information about roles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html\">Using Roles to Delegate Permissions and Federate Identities</a>. </p> <p>A role can also have a managed policy attached to it. To attach a managed policy to a role, use <a>AttachRolePolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>For information about limits on the number of inline policies that you can embed with a role, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p> <note>Because policy documents can be large, you should use POST rather than GET when calling <code>PutRolePolicy</code>. For general information about using the Query API with IAM, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>Using IAM</i> guide. </note>"
     },
     "PutUserPolicy":{
       "name":"PutUserPolicy",
@@ -3793,7 +3855,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Adds (or updates) an inline policy document that is embedded in the specified user. </p> <p>A user can also have a managed policy attached to it. To attach a managed policy to a user, use <a>AttachUserPolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p> <p>For information about limits on the number of inline policies that you can embed in a user, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p> <note>Because policy documents can be large, you should use POST rather than GET when calling <code>PutUserPolicy</code>. For general information about using the Query API with IAM, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>Using IAM</i> guide. </note>"
+      "documentation":"<p>Adds (or updates) an inline policy document that is embedded in the specified user. </p> <p>A user can also have a managed policy attached to it. To attach a managed policy to a user, use <a>AttachUserPolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p> <p>For information about limits on the number of inline policies that you can embed in a user, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p> <note>Because policy documents can be large, you should use POST rather than GET when calling <code>PutUserPolicy</code>. For general information about using the Query API with IAM, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>Using IAM</i> guide. </note>"
     },
     "RemoveClientIDFromOpenIDConnectProvider":{
       "name":"RemoveClientIDFromOpenIDConnectProvider",
@@ -4013,7 +4075,87 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Sets the specified version of the specified policy as the policy's default (operative) version. </p> <p>This action affects all users, groups, and roles that the policy is attached to. To list the users, groups, and roles that the policy is attached to, use the <a>ListEntitiesForPolicy</a> API. </p> <p>For information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Sets the specified version of the specified policy as the policy's default (operative) version. </p> <p>This action affects all users, groups, and roles that the policy is attached to. To list the users, groups, and roles that the policy is attached to, use the <a>ListEntitiesForPolicy</a> API. </p> <p>For information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>. </p>"
+    },
+    "SimulateCustomPolicy":{
+      "name":"SimulateCustomPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SimulateCustomPolicyRequest"},
+      "output":{
+        "shape":"SimulatePolicyResponse",
+        "documentation":"<p>Contains the response to a successful <a>SimulatePrincipalPolicy</a> or <a>SimulateCustomPolicy</a> request.</p>",
+        "resultWrapper":"SimulateCustomPolicyResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The request was rejected because an invalid or out-of-range value was supplied for an input parameter.</p>"
+        },
+        {
+          "shape":"PolicyEvaluationException",
+          "error":{
+            "code":"PolicyEvaluation",
+            "httpStatusCode":500
+          },
+          "exception":true,
+          "documentation":"<p>The request failed because a provided policy could not be successfully evaluated. An additional detail message indicates the source of the failure.</p>"
+        }
+      ],
+      "documentation":"<p>Simulate a set of IAM policies against a list of API actions and AWS resources to determine the policies' effective permissions. The policies are provided as a list of strings.</p> <p>The simulation does not perform the API actions, it only checks the authorization to determine if the simulated policies allow or deny the actions.</p> <p>If you want to simulate existing policies attached to an IAM user, group, or role, use <a>SimulatePrincipalPolicy</a> instead.</p> <p>Context keys are variables maintained by AWS and its services that provide details about the context of an API query request, and can be evaluated by using the <code>Condition</code> element of an IAM policy. To get the list of context keys required by the policies to simulate them correctly, use <a>GetContextKeysForCustomPolicy</a>.</p> <p>If the output is long, you can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>"
+    },
+    "SimulatePrincipalPolicy":{
+      "name":"SimulatePrincipalPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SimulatePrincipalPolicyRequest"},
+      "output":{
+        "shape":"SimulatePolicyResponse",
+        "documentation":"<p>Contains the response to a successful <a>SimulatePrincipalPolicy</a> or <a>SimulateCustomPolicy</a> request.</p>",
+        "resultWrapper":"SimulatePrincipalPolicyResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The request was rejected because it referenced an entity that does not exist. The error message describes the entity. </p>"
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The request was rejected because an invalid or out-of-range value was supplied for an input parameter.</p>"
+        },
+        {
+          "shape":"PolicyEvaluationException",
+          "error":{
+            "code":"PolicyEvaluation",
+            "httpStatusCode":500
+          },
+          "exception":true,
+          "documentation":"<p>The request failed because a provided policy could not be successfully evaluated. An additional detail message indicates the source of the failure.</p>"
+        }
+      ],
+      "documentation":"<p>Simulate the set of IAM policies attached to an IAM entity against a list of API actions and AWS resources to determine the policies' effective permissions. The entity can be an IAM user, group, or role. If you specify a user, then the simulation also includes all of the policies attached to groups that the user is a member of.</p> <p>You can optionally include a list of one or more additional policies specified as strings to include in the simulation. If you want to simulate only policies specified as strings, use <a>SimulateCustomPolicy</a> instead.</p> <p>The simulation does not perform the API actions, it only checks the authorization to determine if the simulated policies allow or deny the actions.</p> <p><b>Note:</b> This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use <a>SimulateCustomPolicy</a> instead.</p> <p>Context keys are variables maintained by AWS and its services that provide details about the context of an API query request, and can be evaluated by using the <code>Condition</code> element of an IAM policy. To get the list of context keys required by the policies to simulate them correctly, use <a>GetContextKeysForPrincipalPolicy</a>.</p> <p>If the output is long, you can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>"
     },
     "UpdateAccessKey":{
       "name":"UpdateAccessKey",
@@ -4053,7 +4195,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Changes the status of the specified access key from Active to Inactive, or vice versa. This action can be used to disable a user's key as part of a key rotation work flow. </p> <p>If the <code>UserName</code> field is not specified, the UserName is determined implicitly based on the AWS access key ID used to sign the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users. </p> <p>For information about rotating keys, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html\">Managing Keys and Certificates</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Changes the status of the specified access key from Active to Inactive, or vice versa. This action can be used to disable a user's key as part of a key rotation work flow. </p> <p>If the <code>UserName</code> field is not specified, the UserName is determined implicitly based on the AWS access key ID used to sign the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users. </p> <p>For information about rotating keys, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html\">Managing Keys and Certificates</a> in the <i>IAM User Guide</i>. </p>"
     },
     "UpdateAccountPasswordPolicy":{
       "name":"UpdateAccountPasswordPolicy",
@@ -4103,7 +4245,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Updates the password policy settings for the AWS account.</p> <note> <p>This action does not support partial updates. No parameters are required, but if you do not specify a parameter, that parameter's value reverts to its default value. See the <b>Request Parameters</b> section for each parameter's default value. </p> </note> <p> For more information about using a password policy, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html\">Managing an IAM Password Policy</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Updates the password policy settings for the AWS account.</p> <note> <p>This action does not support partial updates. No parameters are required, but if you do not specify a parameter, that parameter's value reverts to its default value. See the <b>Request Parameters</b> section for each parameter's default value. </p> </note> <p> For more information about using a password policy, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html\">Managing an IAM Password Policy</a> in the <i>IAM User Guide</i>. </p>"
     },
     "UpdateAssumeRolePolicy":{
       "name":"UpdateAssumeRolePolicy",
@@ -4203,7 +4345,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Updates the name and/or the path of the specified group.</p> <important> You should understand the implications of changing a group's path or name. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html\">Renaming Users and Groups</a> in the <i>Using IAM</i> guide. </important> <note>To change a group name the requester must have appropriate permissions on both the source object and the target object. For example, to change Managers to MGRs, the entity making the request must have permission on Managers and MGRs, or must have permission on all (*). For more information about permissions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html\" target=\"blank\">Permissions and Policies</a>. </note>"
+      "documentation":"<p>Updates the name and/or the path of the specified group.</p> <important> You should understand the implications of changing a group's path or name. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html\">Renaming Users and Groups</a> in the <i>IAM User Guide</i>. </important> <note>To change a group name the requester must have appropriate permissions on both the source object and the target object. For example, to change Managers to MGRs, the entity making the request must have permission on Managers and MGRs, or must have permission on all (*). For more information about permissions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html\" target=\"blank\">Permissions and Policies</a>. </note>"
     },
     "UpdateLoginProfile":{
       "name":"UpdateLoginProfile",
@@ -4263,7 +4405,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Changes the password for the specified user.</p> <p>Users can change their own passwords by calling <a>ChangePassword</a>. For more information about modifying passwords, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html\">Managing Passwords</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Changes the password for the specified user.</p> <p>Users can change their own passwords by calling <a>ChangePassword</a>. For more information about modifying passwords, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html\">Managing Passwords</a> in the <i>IAM User Guide</i>. </p>"
     },
     "UpdateOpenIDConnectProviderThumbprint":{
       "name":"UpdateOpenIDConnectProviderThumbprint",
@@ -4429,7 +4571,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Updates the name and/or the path of the specified server certificate.</p> <important> You should understand the implications of changing a server certificate's path or name. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingServerCerts.html\">Managing Server Certificates</a> in the <i>Using IAM</i> guide. </important> <note>To change a server certificate name the requester must have appropriate permissions on both the source object and the target object. For example, to change the name from ProductionCert to ProdCert, the entity making the request must have permission on ProductionCert and ProdCert, or must have permission on all (*). For more information about permissions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html\" target=\"blank\">Permissions and Policies</a>. </note>"
+      "documentation":"<p>Updates the name and/or the path of the specified server certificate.</p> <important> You should understand the implications of changing a server certificate's path or name. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingServerCerts.html\">Managing Server Certificates</a> in the <i>IAM User Guide</i>. </important> <note>To change a server certificate name the requester must have appropriate permissions on both the source object and the target object. For example, to change the name from ProductionCert to ProdCert, the entity making the request must have permission on ProductionCert and ProdCert, or must have permission on all (*). For more information about permissions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html\" target=\"blank\">Permissions and Policies</a>. </note>"
     },
     "UpdateSigningCertificate":{
       "name":"UpdateSigningCertificate",
@@ -4529,7 +4671,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Updates the name and/or the path of the specified user.</p> <important> You should understand the implications of changing a user's path or name. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html\">Renaming Users and Groups</a> in the <i>Using IAM</i> guide. </important> <note> To change a user name the requester must have appropriate permissions on both the source object and the target object. For example, to change Bob to Robert, the entity making the request must have permission on Bob and Robert, or must have permission on all (*). For more information about permissions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html\" target=\"blank\">Permissions and Policies</a>. </note>"
+      "documentation":"<p>Updates the name and/or the path of the specified user.</p> <important> You should understand the implications of changing a user's path or name. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html\">Renaming Users and Groups</a> in the <i>IAM User Guide</i>. </important> <note> To change a user name the requester must have appropriate permissions on both the source object and the target object. For example, to change Bob to Robert, the entity making the request must have permission on Bob and Robert, or must have permission on all (*). For more information about permissions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html\" target=\"blank\">Permissions and Policies</a>. </note>"
     },
     "UploadSSHPublicKey":{
       "name":"UploadSSHPublicKey",
@@ -4660,7 +4802,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Uploads a server certificate entity for the AWS account. The server certificate entity includes a public key certificate, a private key, and an optional certificate chain, which should all be PEM-encoded. </p> <p>For information about the number of server certificates you can upload, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p> <note>Because the body of the public key certificate, private key, and the certificate chain can be large, you should use POST rather than GET when calling <code>UploadServerCertificate</code>. For information about setting up signatures and authorization through the API, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html\">Signing AWS API Requests</a> in the <i>AWS General Reference</i>. For general information about using the Query API with IAM, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>Using IAM</i> guide. </note>"
+      "documentation":"<p>Uploads a server certificate entity for the AWS account. The server certificate entity includes a public key certificate, a private key, and an optional certificate chain, which should all be PEM-encoded. </p> <p>For information about the number of server certificates you can upload, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>. </p> <note>Because the body of the public key certificate, private key, and the certificate chain can be large, you should use POST rather than GET when calling <code>UploadServerCertificate</code>. For information about setting up signatures and authorization through the API, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html\">Signing AWS API Requests</a> in the <i>AWS General Reference</i>. For general information about using the Query API with IAM, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making Query Requests</a> in the <i>IAM User Guide</i>. </note>"
     },
     "UploadSigningCertificate":{
       "name":"UploadSigningCertificate",
@@ -4826,6 +4968,15 @@
       },
       "documentation":"<p>Contains information about an AWS access key, without its secret key.</p> <p>This data type is used as a response element in the <a>ListAccessKeys</a> action.</p>"
     },
+    "ActionNameListType":{
+      "type":"list",
+      "member":{"shape":"ActionNameType"}
+    },
+    "ActionNameType":{
+      "type":"string",
+      "min":3,
+      "max":128
+    },
     "AddClientIDToOpenIDConnectProviderRequest":{
       "type":"structure",
       "required":[
@@ -4951,6 +5102,60 @@
         }
       }
     },
+    "ColumnNumber":{"type":"integer"},
+    "ContextEntry":{
+      "type":"structure",
+      "members":{
+        "ContextKeyName":{
+          "shape":"ContextKeyNameType",
+          "documentation":"<p>The full name of a condition context key, including the service prefix. For example, <code>aws:SourceIp</code> or <code>s3:VersionId</code>.</p>"
+        },
+        "ContextKeyValues":{
+          "shape":"ContextKeyValueListType",
+          "documentation":"<p>The value (or values, if the condition context key supports multiple values) to provide to the simulation for use when the key is referenced by a <code>Condition</code> element in an input policy.</p>"
+        },
+        "ContextKeyType":{
+          "shape":"ContextKeyTypeEnum",
+          "documentation":"<p>The data type of the value (or values) specified in the <code>ContextKeyValues</code> parameter.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about a condition context key. It includes the name of the key and specifies the value (or values, if the context key supports multiple values) to use in the simulation. This information is used when evaluating the <code>Condition</code> elements of the input policies.</p> <p>This data type is used as an input parameter to <code><a>SimulatePolicy</a></code>.</p>"
+    },
+    "ContextEntryListType":{
+      "type":"list",
+      "member":{"shape":"ContextEntry"}
+    },
+    "ContextKeyNameType":{
+      "type":"string",
+      "min":5,
+      "max":256
+    },
+    "ContextKeyNamesResultListType":{
+      "type":"list",
+      "member":{"shape":"ContextKeyNameType"}
+    },
+    "ContextKeyTypeEnum":{
+      "type":"string",
+      "enum":[
+        "string",
+        "stringList",
+        "numeric",
+        "numericList",
+        "boolean",
+        "booleanList",
+        "ip",
+        "ipList",
+        "binary",
+        "binaryList",
+        "date",
+        "dateList"
+      ]
+    },
+    "ContextKeyValueListType":{
+      "type":"list",
+      "member":{"shape":"ContextKeyValueType"}
+    },
+    "ContextKeyValueType":{"type":"string"},
     "CreateAccessKeyRequest":{
       "type":"structure",
       "members":{
@@ -5080,7 +5285,7 @@
         },
         "ThumbprintList":{
           "shape":"thumbprintListType",
-          "documentation":"<p>A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). Typically this list includes only one entry. However, IAM lets you have up to five thumbprints for an OIDC provider. This lets you maintain multiple thumbprints if the identity provider is rotating certificates.</p> <p>The server certificate thumbprint is the hex-encoded SHA-1 hash value of the X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string. </p> <p>You must provide at least one thumbprint when creating an IAM OIDC provider. For example, if the OIDC provider is <code>server.example.com</code> and the provider stores its keys at \"https://keys.server.example.com/openid-connect\", the thumbprint string would be the hex-encoded SHA-1 hash value of the certificate used by https://keys.server.example.com. </p> <p>For more information about obtaining the OIDC provider's thumbprint, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html\">Obtaining the Thumbprint for an OpenID Connect Provider</a> in the <i>Using IAM</i> guide. </p>"
+          "documentation":"<p>A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). Typically this list includes only one entry. However, IAM lets you have up to five thumbprints for an OIDC provider. This lets you maintain multiple thumbprints if the identity provider is rotating certificates.</p> <p>The server certificate thumbprint is the hex-encoded SHA-1 hash value of the X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string. </p> <p>You must provide at least one thumbprint when creating an IAM OIDC provider. For example, if the OIDC provider is <code>server.example.com</code> and the provider stores its keys at \"https://keys.server.example.com/openid-connect\", the thumbprint string would be the hex-encoded SHA-1 hash value of the certificate used by https://keys.server.example.com. </p> <p>For more information about obtaining the OIDC provider's thumbprint, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html\">Obtaining the Thumbprint for an OpenID Connect Provider</a> in the <i>IAM User Guide</i>. </p>"
         }
       }
     },
@@ -5107,7 +5312,7 @@
         },
         "Path":{
           "shape":"policyPathType",
-          "documentation":"<p>The path for the policy. </p> <p>For more information about paths, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide. </p> <p>This parameter is optional. If it is not included, it defaults to a slash (/). </p>"
+          "documentation":"<p>The path for the policy. </p> <p>For more information about paths, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>IAM User Guide</i>. </p> <p>This parameter is optional. If it is not included, it defaults to a slash (/). </p>"
         },
         "PolicyDocument":{
           "shape":"policyDocumentType",
@@ -5143,7 +5348,7 @@
         },
         "SetAsDefault":{
           "shape":"booleanType",
-          "documentation":"<p>Specifies whether to set this version as the policy's default version.</p> <p>When this parameter is <code>true</code>, the new policy version becomes the operative version; that is, the version that is in effect for the IAM users, groups, and roles that the policy is attached to.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
+          "documentation":"<p>Specifies whether to set this version as the policy's default version.</p> <p>When this parameter is <code>true</code>, the new policy version becomes the operative version; that is, the version that is in effect for the IAM users, groups, and roles that the policy is attached to.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>. </p>"
         }
       }
     },
@@ -5198,7 +5403,7 @@
       "members":{
         "SAMLMetadataDocument":{
           "shape":"SAMLMetadataDocumentType",
-          "documentation":"<p>An XML document generated by an identity provider (IdP) that supports SAML 2.0. The document includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that are received from the IdP. You must generate the metadata document using the identity management software that is used as your organization's IdP. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/STS/latest/UsingSTS/CreatingSAML.html\">Creating Temporary Security Credentials for SAML Federation</a> in the <i>Using Temporary Security Credentials</i> guide. </p>"
+          "documentation":"<p>An XML document generated by an identity provider (IdP) that supports SAML 2.0. The document includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that are received from the IdP. You must generate the metadata document using the identity management software that is used as your organization's IdP. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html\">About SAML 2.0-based Federation</a> in the <i>IAM User Guide</i></p>"
         },
         "Name":{
           "shape":"SAMLProviderNameType",
@@ -5276,7 +5481,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>The request was rejected because the most recent credential report has expired. To generate a new credential report, use <a>GenerateCredentialReport</a>. For more information about credential report expiration, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>Using IAM</i> guide.</p>"
+      "documentation":"<p>The request was rejected because the most recent credential report has expired. To generate a new credential report, use <a>GenerateCredentialReport</a>. For more information about credential report expiration, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>IAM User Guide</i>.</p>"
     },
     "CredentialReportNotPresentException":{
       "type":"structure",
@@ -5432,7 +5637,7 @@
         "PolicyArn":{"shape":"arnType"},
         "VersionId":{
           "shape":"policyVersionIdType",
-          "documentation":"<p>The policy version to delete.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
+          "documentation":"<p>The policy version to delete.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>. </p>"
         }
       }
     },
@@ -5682,6 +5887,41 @@
         "AWSManagedPolicy"
       ]
     },
+    "EvaluationResult":{
+      "type":"structure",
+      "required":[
+        "EvalActionName",
+        "EvalResourceName",
+        "EvalDecision"
+      ],
+      "members":{
+        "EvalActionName":{
+          "shape":"ActionNameType",
+          "documentation":"<p>The name of the API action tested on the indicated resource.</p>"
+        },
+        "EvalResourceName":{
+          "shape":"ResourceNameType",
+          "documentation":"<p>The ARN of the resource that the indicated API action was tested on.</p>"
+        },
+        "EvalDecision":{
+          "shape":"PolicyEvaluationDecisionType",
+          "documentation":"<p>The result of the simulation.</p>"
+        },
+        "MatchedStatements":{
+          "shape":"StatementListType",
+          "documentation":"<p>A list of the statements in the input policies that determine the result for this scenario. Remember that even if multiple statements allow the action on the resource, if only one statement denies that action, then the explicit deny overrides any allow, and the deny statement is the only entry included in the result.</p>"
+        },
+        "MissingContextValues":{
+          "shape":"ContextKeyNamesResultListType",
+          "documentation":"<p>A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.</p> <caution> <p>If the response includes any keys in this list, then the reported results might be untrustworthy because the simulation could not completely evaluate all of the conditions specified in the policies that would occur in a real world request.</p> </caution>"
+        }
+      },
+      "documentation":"<p>Contains the results of a simulation.</p> <p>This data type is used by the return parameter of <code><a>SimulatePolicy</a></code>.</p>"
+    },
+    "EvaluationResultsListType":{
+      "type":"list",
+      "member":{"shape":"EvaluationResult"}
+    },
     "GenerateCredentialReportResponse":{
       "type":"structure",
       "members":{
@@ -5729,11 +5969,11 @@
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         }
       }
     },
@@ -5758,7 +5998,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -5784,6 +6024,40 @@
         }
       },
       "documentation":"<p>Contains the response to a successful <a>GetAccountSummary</a> request. </p>"
+    },
+    "GetContextKeysForCustomPolicyRequest":{
+      "type":"structure",
+      "required":["PolicyInputList"],
+      "members":{
+        "PolicyInputList":{
+          "shape":"SimulationPolicyListType",
+          "documentation":"<p>A list of policies for which you want list of context keys used in <code>Condition</code> elements.</p>"
+        }
+      }
+    },
+    "GetContextKeysForPolicyResponse":{
+      "type":"structure",
+      "members":{
+        "ContextKeyNames":{
+          "shape":"ContextKeyNamesResultListType",
+          "documentation":"<p>The list of context keys that are used in the <code>Condition</code> elements of the input policies.</p>"
+        }
+      },
+      "documentation":"<p>Contains the response to a successful <a>GetContextKeysForPrincipalPolicy</a> or <a>GetContextKeysForCustomPolicy</a> request. </p>"
+    },
+    "GetContextKeysForPrincipalPolicyRequest":{
+      "type":"structure",
+      "required":["PolicySourceArn"],
+      "members":{
+        "PolicySourceArn":{
+          "shape":"arnType",
+          "documentation":"<p>The ARN of a user, group, or role whose policies contain the context keys that you want listed. If you specify a user, the list includes context keys that are found in all policies attached to the user as well as to all groups that the user is a member of. If you pick a group or a role, then it includes only those context keys that are found in policies attached to that entity. Note that all parameters are shown in unencoded form here for clarity, but must be URL encoded to be included as a part of a real HTML request.</p>"
+        },
+        "PolicyInputList":{
+          "shape":"SimulationPolicyListType",
+          "documentation":"<p>A optional list of additional policies for which you want list of context keys used in <code>Condition</code> elements.</p>"
+        }
+      }
     },
     "GetCredentialReportResponse":{
       "type":"structure",
@@ -5853,11 +6127,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -5878,7 +6152,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -5997,7 +6271,7 @@
       "members":{
         "PolicyVersion":{
           "shape":"PolicyVersion",
-          "documentation":"<p>Information about the policy version.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
+          "documentation":"<p>Information about the policy version.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>. </p>"
         }
       },
       "documentation":"<p>Contains the response to a successful <a>GetPolicyVersion</a> request. </p>"
@@ -6397,6 +6671,7 @@
       "exception":true,
       "documentation":"<p>The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded. </p>"
     },
+    "LineNumber":{"type":"integer"},
     "ListAccessKeysRequest":{
       "type":"structure",
       "members":{
@@ -6406,11 +6681,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6424,7 +6699,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6438,11 +6713,11 @@
       "members":{
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6456,7 +6731,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6479,11 +6754,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6496,7 +6771,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6519,11 +6794,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6536,7 +6811,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6559,11 +6834,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6576,7 +6851,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6600,11 +6875,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6625,7 +6900,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6644,11 +6919,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6662,7 +6937,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6681,11 +6956,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6699,7 +6974,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6717,11 +6992,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6735,7 +7010,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6754,11 +7029,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6772,7 +7047,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6790,11 +7065,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6808,7 +7083,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6826,11 +7101,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6844,7 +7119,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6885,11 +7160,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6902,7 +7177,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6918,11 +7193,11 @@
         "PolicyArn":{"shape":"arnType"},
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6931,11 +7206,11 @@
       "members":{
         "Versions":{
           "shape":"policyDocumentVersionListType",
-          "documentation":"<p>A list of policy versions.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
+          "documentation":"<p>A list of policy versions.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>. </p>"
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6954,11 +7229,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6972,7 +7247,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -6990,11 +7265,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7008,7 +7283,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -7041,11 +7316,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7058,7 +7333,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -7076,11 +7351,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7094,7 +7369,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -7112,11 +7387,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7130,7 +7405,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -7149,11 +7424,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7167,7 +7442,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -7185,11 +7460,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7203,7 +7478,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -7221,11 +7496,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you have received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100.</p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7239,7 +7514,7 @@
         },
         "IsTruncated":{
           "shape":"booleanType",
-          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
         },
         "Marker":{
           "shape":"markerType",
@@ -7517,6 +7792,26 @@
       },
       "documentation":"<p>Contains information about an IAM policy, including the policy document.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>"
     },
+    "PolicyEvaluationDecisionType":{
+      "type":"string",
+      "enum":[
+        "allowed",
+        "explicitDeny",
+        "implicitDeny"
+      ]
+    },
+    "PolicyEvaluationException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"policyEvaluationErrorMessage"}
+      },
+      "error":{
+        "code":"PolicyEvaluation",
+        "httpStatusCode":500
+      },
+      "exception":true,
+      "documentation":"<p>The request failed because a provided policy could not be successfully evaluated. An additional detail message indicates the source of the failure.</p>"
+    },
     "PolicyGroup":{
       "type":"structure",
       "members":{
@@ -7531,6 +7826,7 @@
       "type":"list",
       "member":{"shape":"PolicyGroup"}
     },
+    "PolicyIdentifierType":{"type":"string"},
     "PolicyRole":{
       "type":"structure",
       "members":{
@@ -7544,6 +7840,17 @@
     "PolicyRoleListType":{
       "type":"list",
       "member":{"shape":"PolicyRole"}
+    },
+    "PolicySourceType":{
+      "type":"string",
+      "enum":[
+        "user",
+        "group",
+        "role",
+        "aws-managed",
+        "user-managed",
+        "none"
+      ]
     },
     "PolicyUser":{
       "type":"structure",
@@ -7580,6 +7887,20 @@
         }
       },
       "documentation":"<p>Contains information about a version of a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicyVersion</a>, <a>GetPolicyVersion</a>, <a>ListPolicyVersions</a>, and <a>GetAccountAuthorizationDetails</a> actions. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+    },
+    "Position":{
+      "type":"structure",
+      "members":{
+        "Line":{
+          "shape":"LineNumber",
+          "documentation":"<p>The line containing the specified position in the document.</p>"
+        },
+        "Column":{
+          "shape":"ColumnNumber",
+          "documentation":"<p>The column in the line containing the specified position in the document.</p>"
+        }
+      },
+      "documentation":"<p>Contains the row and column of a location of a <code>Statement</code> element in a policy document.</p> <p>This data type is used as a member of the <code><a>Statement</a></code> type.</p>"
     },
     "PutGroupPolicyRequest":{
       "type":"structure",
@@ -7711,6 +8032,15 @@
         "INPROGRESS",
         "COMPLETE"
       ]
+    },
+    "ResourceNameListType":{
+      "type":"list",
+      "member":{"shape":"ResourceNameType"}
+    },
+    "ResourceNameType":{
+      "type":"string",
+      "min":1,
+      "max":2048
     },
     "ResyncMFADeviceRequest":{
       "type":"structure",
@@ -7994,7 +8324,7 @@
         "PolicyArn":{"shape":"arnType"},
         "VersionId":{
           "shape":"policyVersionIdType",
-          "documentation":"<p>The version of the policy to set as the default (operative) version.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
+          "documentation":"<p>The version of the policy to set as the default (operative) version.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>. </p>"
         }
       }
     },
@@ -8029,6 +8359,124 @@
         }
       },
       "documentation":"<p>Contains information about an X.509 signing certificate.</p> <p>This data type is used as a response element in the <a>UploadSigningCertificate</a> and <a>ListSigningCertificates</a> actions. </p>"
+    },
+    "SimulateCustomPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "PolicyInputList",
+        "ActionNames"
+      ],
+      "members":{
+        "PolicyInputList":{
+          "shape":"SimulationPolicyListType",
+          "documentation":"<p>A list of policy documents to include in the simulation. Each document is specified as a string containing the complete, valid JSON text of an IAM policy.</p>"
+        },
+        "ActionNames":{
+          "shape":"ActionNameListType",
+          "documentation":"<p>A list of names of API actions to evaluate in the simulation. Each action is evaluated for each resource. Each action must include the service identifier, such as <code>iam:CreateUser</code>.</p>"
+        },
+        "ResourceArns":{
+          "shape":"ResourceNameListType",
+          "documentation":"<p>A list of ARNs of AWS resources to include in the simulation. If this parameter is not provided then the value defaults to <code>*</code> (all resources). Each API in the <code>ActionNames</code> parameter is evaluated for each resource in this list. The simulation determines the access result (allowed or denied) of each combination and reports it in the response.</p>"
+        },
+        "ContextEntries":{
+          "shape":"ContextEntryListType",
+          "documentation":"<p>A list of context keys and corresponding values that are used by the simulation. Whenever a context key is evaluated by a <code>Condition</code> element in one of the simulated IAM permission policies, the corresponding value is supplied.</p>"
+        },
+        "MaxItems":{
+          "shape":"maxItemsType",
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+        },
+        "Marker":{
+          "shape":"markerType",
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+        }
+      }
+    },
+    "SimulatePolicyResponse":{
+      "type":"structure",
+      "members":{
+        "EvaluationResults":{
+          "shape":"EvaluationResultsListType",
+          "documentation":"<p>The results of the simulation.</p>"
+        },
+        "IsTruncated":{
+          "shape":"booleanType",
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items. Note that IAM might return fewer than the <code>MaxItems</code> number of results even when there are more results available. We recommend that you check <code>IsTruncated</code> after every call to ensure that you receive all of your results.</p>"
+        },
+        "Marker":{
+          "shape":"markerType",
+          "documentation":"<p>When <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>"
+        }
+      },
+      "documentation":"<p>Contains the response to a successful <a>SimulatePrincipalPolicy</a> or <a>SimulateCustomPolicy</a> request.</p>"
+    },
+    "SimulatePrincipalPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "PolicySourceArn",
+        "ActionNames"
+      ],
+      "members":{
+        "PolicySourceArn":{
+          "shape":"arnType",
+          "documentation":"<p>The Amazon Resource Name (ARN) of a user, group, or role whose policies you want to include in the simulation. If you specify a user, group, or role, the simulation includes all policies associated with that entity. If you specify a user, the simulation also includes all policies attached to any groups the user is a member of.</p>"
+        },
+        "PolicyInputList":{
+          "shape":"SimulationPolicyListType",
+          "documentation":"<p>An optional list of additional policy documents to include in the simulation. Each document is specified as a string containing the complete, valid JSON text of an IAM policy.</p>"
+        },
+        "ActionNames":{
+          "shape":"ActionNameListType",
+          "documentation":"<p>A list of names of API actions to evaluate in the simulation. Each action is evaluated for each resource. Each action must include the service identifier, such as <code>iam:CreateUser</code>.</p>"
+        },
+        "ResourceArns":{
+          "shape":"ResourceNameListType",
+          "documentation":"<p>A list of ARNs of AWS resources to include in the simulation. If this parameter is not provided then the value defaults to <code>*</code> (all resources). Each API in the <code>ActionNames</code> parameter is evaluated for each resource in this list. The simulation determines the access result (allowed or denied) of each combination and reports it in the response.</p>"
+        },
+        "ContextEntries":{
+          "shape":"ContextEntryListType",
+          "documentation":"<p>A list of context keys and corresponding values that are used by the simulation. Whenever a context key is evaluated by a <code>Condition</code> element in one of the simulated IAM permission policies, the corresponding value is supplied.</p>"
+        },
+        "MaxItems":{
+          "shape":"maxItemsType",
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+        },
+        "Marker":{
+          "shape":"markerType",
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+        }
+      }
+    },
+    "SimulationPolicyListType":{
+      "type":"list",
+      "member":{"shape":"policyDocumentType"}
+    },
+    "Statement":{
+      "type":"structure",
+      "members":{
+        "SourcePolicyId":{
+          "shape":"PolicyIdentifierType",
+          "documentation":"<p>The identifier of the policy that was provided as an input.</p>"
+        },
+        "SourcePolicyType":{
+          "shape":"PolicySourceType",
+          "documentation":"<p>The type of the policy.</p>"
+        },
+        "StartPosition":{
+          "shape":"Position",
+          "documentation":"<p>The row and column of the beginning of the <code>Statement</code> in an IAM policy.</p>"
+        },
+        "EndPosition":{
+          "shape":"Position",
+          "documentation":"<p>The row and column of the end of a <code>Statement</code> in an IAM policy.</p>"
+        }
+      },
+      "documentation":"<p>Contains a reference to a <code>Statement</code> element in a policy document that determines the result of the simulation.</p> <p>This data type is used by the <code>MatchedStatements</code> member of the <code><a>EvaluationResult</a></code> type.</p>"
+    },
+    "StatementListType":{
+      "type":"list",
+      "member":{"shape":"Statement"}
     },
     "UnrecognizedPublicKeyEncodingException":{
       "type":"structure",
@@ -8089,7 +8537,7 @@
         },
         "AllowUsersToChangePassword":{
           "shape":"booleanType",
-          "documentation":"<p> Allows all IAM users in your account to use the AWS Management Console to change their own passwords. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html\">Letting IAM Users Change Their Own Passwords</a> in the <i>Using IAM</i> guide. </p> <p>Default value: false</p>"
+          "documentation":"<p> Allows all IAM users in your account to use the AWS Management Console to change their own passwords. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html\">Letting IAM Users Change Their Own Passwords</a> in the <i>IAM User Guide</i>. </p> <p>Default value: false</p>"
         },
         "MaxPasswordAge":{
           "shape":"maxPasswordAgeType",
@@ -8699,6 +9147,7 @@
       "type":"list",
       "member":{"shape":"PolicyVersion"}
     },
+    "policyEvaluationErrorMessage":{"type":"string"},
     "policyListType":{
       "type":"list",
       "member":{"shape":"Policy"}
@@ -8867,5 +9316,7 @@
       "min":1,
       "pattern":"[\\w+=,.@-]+"
     }
+  },
+  "examples":{
   }
 }
