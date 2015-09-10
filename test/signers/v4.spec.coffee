@@ -11,8 +11,8 @@ buildRequest = ->
   req.httpRequest.headers['X-Amz-User-Agent'] = 'aws-sdk-js/0.1'
   req.httpRequest
 
-buildSigner = (request) ->
-  return new AWS.Signers.V4(request || buildRequest(), 'dynamodb')
+buildSigner = (request, signatureCache) ->
+  return new AWS.Signers.V4(request || buildRequest(), 'dynamodb', signatureCache || true)
 
 describe 'AWS.Signers.V4', ->
   date = new Date(1935346573456)
@@ -80,6 +80,12 @@ describe 'AWS.Signers.V4', ->
         expect(calls.length).to.equal(callCount + 1)
         signer.signature(creds, datetime)
         expect(calls.length).to.equal(callCount + 2)
+
+      it 'busts cache if caching is disabled', ->
+        signer = buildSigner(null, false)
+        callCount = calls.length
+        signer.signature(creds, datetime)
+        expect(calls.length).to.equal(callCount + 5)
 
       it 'busts cache if region changes', ->
         signer.request.region = 'new-region'
