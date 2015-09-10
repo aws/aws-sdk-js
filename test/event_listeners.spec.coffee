@@ -228,10 +228,12 @@ describe 'AWS.EventListeners', ->
 
   describe 'httpHeaders', ->
 
+    afterEach ->
+      AWS.config.systemClockOffset = 0
+
     it 'applies clock skew offset when correcClockSkew is true', ->
       service = new MockService({maxRetries: 3, correctClockSkew: true})
-      serverDate = new Date()
-      serverDate.setTime(new Date().getTime() - 300000)
+      serverDate = new Date(new Date().getTime() - 300000)
       helpers.mockHttpResponse 200, {date: serverDate.toString()}, ''
       helpers.spyOn(AWS.util, 'isClockSkewed').andReturn true
       request = makeRequest()
