@@ -521,17 +521,17 @@
       "required":["jobIds"],
       "members":{
         "jobIds":{"shape":"JobIdList"},
-        "name":{"shape":"GenericString"},
-        "company":{"shape":"GenericString"},
-        "phoneNumber":{"shape":"GenericString"},
-        "country":{"shape":"GenericString"},
-        "stateOrProvince":{"shape":"GenericString"},
-        "city":{"shape":"GenericString"},
-        "postalCode":{"shape":"GenericString"},
-        "street1":{"shape":"GenericString"},
-        "street2":{"shape":"GenericString"},
-        "street3":{"shape":"GenericString"},
-        "APIVersion":{"shape":"GenericString"}
+        "name":{"shape":"name"},
+        "company":{"shape":"company"},
+        "phoneNumber":{"shape":"phoneNumber"},
+        "country":{"shape":"country"},
+        "stateOrProvince":{"shape":"stateOrProvince"},
+        "city":{"shape":"city"},
+        "postalCode":{"shape":"postalCode"},
+        "street1":{"shape":"street1"},
+        "street2":{"shape":"street2"},
+        "street3":{"shape":"street3"},
+        "APIVersion":{"shape":"APIVersion"}
       }
     },
     "GetShippingLabelOutput":{
@@ -849,6 +849,48 @@
     "WarningMessage":{
       "type":"string",
       "documentation":"An optional message notifying you of non-fatal issues with the job, such as use of an incompatible Amazon S3 bucket name."
+    },
+    "city":{
+      "type":"string",
+      "documentation":"Specifies the name of your city for the return address."
+    },
+    "company":{
+      "type":"string",
+      "documentation":"Specifies the name of the company that will ship this package."
+    },
+    "country":{
+      "type":"string",
+      "documentation":"Specifies the name of your country for the return address."
+    },
+    "name":{
+      "type":"string",
+      "documentation":"Specifies the name of the person responsible for shipping this package."
+    },
+    "phoneNumber":{
+      "type":"string",
+      "documentation":"Specifies the phone number of the person responsible for shipping this package."
+    },
+    "postalCode":{
+      "type":"string",
+      "documentation":"Specifies the postal code for the return address."
+    },
+    "stateOrProvince":{
+      "type":"string",
+      "documentation":"Specifies the name of your state or your province for the return address."
+    },
+    "street1":{
+      "type":"string",
+      "documentation":"Specifies the first part of the street address for the return address, for example 1234 Main Street."
+    },
+    "street2":{
+      "type":"string",
+      "documentation":"Specifies the optional second part of the street address for the return address, for example Suite 100."
+    },
+    "street3":{
+      "type":"string",
+      "documentation":"Specifies the optional third part of the street address for the return address, for example c/o Jane Doe."
     }
+  },
+  "examples":{
   }
 }
