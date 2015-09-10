@@ -398,7 +398,7 @@ doc_client
     else
       text << "&mdash; (`#{@type}`)"
     end
-    if docs = documentation(rules) && !@flatten_dynamodb_attrs
+    if (docs = documentation(rules)) && !@flatten_dynamodb_attrs
       text << " #{docs}"
     end
     text.join(' ')

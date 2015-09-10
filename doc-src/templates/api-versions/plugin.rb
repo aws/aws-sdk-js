@@ -56,7 +56,7 @@ YARD::Parser::SourceParser.after_parse_list do
 
     if obj = YARD::Registry.at(obj_path)
       docs = MethodDocumentor.new(obj_name, operation, $dynamodb_model,
-        'DocumentClient', flatten_dynamodb_attrs: true).lines.join("\n")
+        'DocumentClient', :flatten_dynamodb_attrs => true).lines.join("\n")
       obj.docstring = obj.docstring.all + "\n" + docs
     end
   end
@@ -215,7 +215,7 @@ Waits for the `#{name}` state by periodically calling the underlying
 @see #{operation_name}
 eof
 
-      waiter_ex = ExampleShapeVisitor.new(model, required_only: true).example(
+      waiter_ex = ExampleShapeVisitor.new(model, :required_only => true).example(
         service.name.to_s.downcase, 'waitFor', model['operations'][config['operation']]['input'])
       waiter_ex = waiter_ex.sub(/\.waitFor\(/, ".waitFor('#{name}', ")
       waiter_ex = waiter_ex.sub(/\{\s+\}/, "{\n  // ... input parameters ...\n}")
