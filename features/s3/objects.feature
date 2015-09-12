@@ -44,6 +44,15 @@ Feature: Working with Objects in S3
     Then the object "byebye" should contain "world"
     Then I delete the object "byebye"
 
+  @copy
+  Scenario: Copying an object with URL unsafe keys
+    Given I put "world" to the key "unsafe’"
+    When I copy the object "unsafe’" to "otherunsafe’"
+    Then the object "otherunsafe’" should exist
+    Then I get the object "otherunsafe’"
+    Then the object "byebye" should contain "world"
+    Then I delete the object "otherunsafe’"
+
   @unauthenticated
   Scenario: Unauthenticated requests
     When I put "world" to the public key "hello"
