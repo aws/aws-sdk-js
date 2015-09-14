@@ -128,7 +128,7 @@ describe 'AWS.Protocol.RestJson', ->
         expect(request.httpRequest.headers['x-amz-meta-abc']).to.equal('xyz')
 
     describe 'body', ->
-      ['GET', 'HEAD'].forEach (method) ->
+      ['GET', 'HEAD', 'DELETE'].forEach (method) ->
         it 'does not populate a body on a ' + method + ' request', ->
           request.params = Data: 'abc'
           defop
