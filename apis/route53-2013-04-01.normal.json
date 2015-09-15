@@ -6,7 +6,7 @@
     "globalEndpoint":"route53.amazonaws.com",
     "serviceAbbreviation":"Route 53",
     "serviceFullName":"Amazon Route 53",
-    "signatureVersion":"v3https",
+    "signatureVersion":"v4",
     "protocol":"rest-xml"
   },
   "operations":{
@@ -1283,6 +1283,14 @@
       "type":"list",
       "member":{"shape":"IPAddressCidr"}
     },
+    "ChildHealthCheckList":{
+      "type":"list",
+      "member":{
+        "shape":"HealthCheckId",
+        "locationName":"ChildHealthCheck"
+      },
+      "max":256
+    },
     "ConflictingDomainExists":{
       "type":"structure",
       "members":{
@@ -2022,6 +2030,22 @@
         "FailureThreshold":{
           "shape":"FailureThreshold",
           "documentation":"<p>The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current status of the endpoint from unhealthy to healthy or vice versa.</p> <p>Valid values are integers between 1 and 10. For more information, see \"How Amazon Route 53 Determines Whether an Endpoint Is Healthy\" in the Amazon Route 53 Developer Guide.</p>"
+        },
+        "MeasureLatency":{
+          "shape":"MeasureLatency",
+          "documentation":"<p>A Boolean value that indicates whether you want Route 53 to measure the latency between health checkers in multiple AWS regions and your endpoint and to display CloudWatch latency graphs in the Route 53 console.</p>"
+        },
+        "Inverted":{
+          "shape":"Inverted",
+          "documentation":"<p>A boolean value that indicates whether the status of health check should be inverted. For example, if a health check is healthy but <code>Inverted</code> is <code>True</code>, then Route 53 considers the health check to be unhealthy.</p>"
+        },
+        "HealthThreshold":{
+          "shape":"HealthThreshold",
+          "documentation":"<p>The minimum number of child health checks that must be healthy for Route 53 to consider the parent health check to be healthy. Valid values are integers between 0 and 256, inclusive.</p>"
+        },
+        "ChildHealthChecks":{
+          "shape":"ChildHealthCheckList",
+          "documentation":"<p>For a specified parent health check, a list of <code>HealthCheckId</code> values for the associated child health checks.</p>"
         }
       },
       "documentation":"<p>A complex type that contains the health check configuration.</p>"
@@ -2076,7 +2100,8 @@
         "HTTPS",
         "HTTP_STR_MATCH",
         "HTTPS_STR_MATCH",
-        "TCP"
+        "TCP",
+        "CALCULATED"
       ]
     },
     "HealthCheckVersion":{
@@ -2097,6 +2122,11 @@
         "shape":"HealthCheck",
         "locationName":"HealthCheck"
       }
+    },
+    "HealthThreshold":{
+      "type":"integer",
+      "min":0,
+      "max":256
     },
     "HostedZone":{
       "type":"structure",
@@ -2260,6 +2290,7 @@
       "exception":true,
       "documentation":"<p>The hosted zone you are trying to create for your VPC_ID does not belong to you. Route 53 returns this error when the VPC specified by <code>VPCId</code> does not belong to you.</p>"
     },
+    "Inverted":{"type":"boolean"},
     "IsPrivateZone":{"type":"boolean"},
     "LastVPCAssociation":{
       "type":"structure",
@@ -2703,6 +2734,7 @@
       },
       "documentation":"<p>A complex type containing tags for the specified resources.</p>"
     },
+    "MeasureLatency":{"type":"boolean"},
     "NoSuchChange":{
       "type":"structure",
       "members":{
@@ -3119,6 +3151,18 @@
         "FailureThreshold":{
           "shape":"FailureThreshold",
           "documentation":"<p>The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current status of the endpoint from unhealthy to healthy or vice versa.</p> <p>Valid values are integers between 1 and 10. For more information, see \"How Amazon Route 53 Determines Whether an Endpoint Is Healthy\" in the Amazon Route 53 Developer Guide.</p> <p>Specify this value only if you want to change it.</p>"
+        },
+        "Inverted":{
+          "shape":"Inverted",
+          "documentation":"<p>A boolean value that indicates whether the status of health check should be inverted. For example, if a health check is healthy but <code>Inverted</code> is <code>True</code>, then Route 53 considers the health check to be unhealthy.</p> <p>Specify this value only if you want to change it.</p>"
+        },
+        "HealthThreshold":{
+          "shape":"HealthThreshold",
+          "documentation":"<p>The minimum number of child health checks that must be healthy for Route 53 to consider the parent health check to be healthy. Valid values are integers between 0 and 256, inclusive.</p> <p>Specify this value only if you want to change it.</p>"
+        },
+        "ChildHealthChecks":{
+          "shape":"ChildHealthCheckList",
+          "documentation":"<p>For a specified parent health check, a list of <code>HealthCheckId</code> values for the associated child health checks.</p> <p>Specify this value only if you want to change it.</p>"
         }
       },
       "documentation":"<p>&gt;A complex type that contains information about the request to update a health check.</p>"
@@ -3205,5 +3249,7 @@
       "min":1,
       "documentation":"<p>A list of VPCs</p>"
     }
+  },
+  "examples":{
   }
 }
