@@ -228,7 +228,7 @@
         "shape":"CancelSpotInstanceRequestsResult",
         "documentation":"<p>Contains the output of CancelSpotInstanceRequests.</p>"
       },
-      "documentation":"<p>Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the bid price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <important> <p>Canceling a Spot Instance request does not terminate running Spot Instances associated with the request.</p> </important>"
+      "documentation":"<p>Cancels one or more Spot instance requests. Spot instances are instances that Amazon EC2 starts on your behalf when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot instance capacity and current Spot instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <important> <p>Canceling a Spot instance request does not terminate running Spot instances associated with the request.</p> </important>"
     },
     "ConfirmProductInstance":{
       "name":"ConfirmProductInstance",
@@ -440,7 +440,7 @@
         "shape":"CreateSpotDatafeedSubscriptionResult",
         "documentation":"<p>Contains the output of CreateSpotDatafeedSubscription.</p>"
       },
-      "documentation":"<p>Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Creates a data feed for Spot instances, enabling you to view Spot instance usage logs. You can create one data feed per AWS account. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateSubnet":{
       "name":"CreateSubnet",
@@ -662,7 +662,7 @@
         "shape":"DeleteSpotDatafeedSubscriptionRequest",
         "documentation":"<p>Contains the parameters for DeleteSpotDatafeedSubscription.</p>"
       },
-      "documentation":"<p>Deletes the data feed for Spot Instances. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Deletes the data feed for Spot instances.</p>"
     },
     "DeleteSubnet":{
       "name":"DeleteSubnet",
@@ -1117,7 +1117,7 @@
         "shape":"DescribeSpotDatafeedSubscriptionResult",
         "documentation":"<p>Contains the output of DescribeSpotDatafeedSubscription.</p>"
       },
-      "documentation":"<p>Describes the data feed for Spot Instances. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Describes the data feed for Spot instances. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance Data Feed</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeSpotFleetInstances":{
       "name":"DescribeSpotFleetInstances",
@@ -1181,7 +1181,7 @@
         "shape":"DescribeSpotInstanceRequestsResult",
         "documentation":"<p>Contains the output of DescribeSpotInstanceRequests.</p>"
       },
-      "documentation":"<p>Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can use <code>DescribeSpotInstanceRequests</code> to find a running Spot Instance by examining the response. If the status of the Spot Instance is <code>fulfilled</code>, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use <a>DescribeInstances</a> with a filter to look for instances where the instance lifecycle is <code>spot</code>.</p>"
+      "documentation":"<p>Describes the Spot instance requests that belong to your account. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot instance capacity and current Spot instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can use <code>DescribeSpotInstanceRequests</code> to find a running Spot instance by examining the response. If the status of the Spot instance is <code>fulfilled</code>, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use <a>DescribeInstances</a> with a filter to look for instances where the instance lifecycle is <code>spot</code>.</p>"
     },
     "DescribeSpotPriceHistory":{
       "name":"DescribeSpotPriceHistory",
@@ -1197,7 +1197,7 @@
         "shape":"DescribeSpotPriceHistoryResult",
         "documentation":"<p>Contains the output of DescribeSpotPriceHistory.</p>"
       },
-      "documentation":"<p>Describes the Spot Price history. The prices returned are listed in chronological order, from the oldest to the most recent, for up to the past 90 days. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html\">Spot Instance Pricing History</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.</p>"
+      "documentation":"<p>Describes the Spot price history. The prices returned are listed in chronological order, from the oldest to the most recent, for up to the past 90 days. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html\">Spot Instance Pricing History</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.</p>"
     },
     "DescribeSubnets":{
       "name":"DescribeSubnets",
@@ -1727,7 +1727,7 @@
         "shape":"RequestSpotFleetResponse",
         "documentation":"<p>Contains the output of RequestSpotFleet.</p>"
       },
-      "documentation":"<p>Creates a Spot fleet request.</p> <p>You can submit a single request that specifies multiple instance types, each with its own instance weighting that reflects its value to your application workload. Amazon EC2 computes the bid price for each launch specification and requests Spot Instances in the Spot pool where the price per unit is the lowest. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet.html\">Spot Fleets</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Creates a Spot fleet request.</p> <p>You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet.</p> <p>By default, the Spot fleet requests Spot instances in the Spot pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload.</p> <p>Alternatively, you can specify that the Spot fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot instances in your Spot fleet are in different Spot pools, you can improve the availability of your fleet.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html\">Spot Fleet Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "RequestSpotInstances":{
       "name":"RequestSpotInstances",
@@ -1743,7 +1743,7 @@
         "shape":"RequestSpotInstancesResult",
         "documentation":"<p>Contains the output of RequestSpotInstances.</p>"
       },
-      "documentation":"<p>Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Creates a Spot instance request. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot Instance capacity and current Spot instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "ResetImageAttribute":{
       "name":"ResetImageAttribute",
@@ -1969,7 +1969,7 @@
         },
         "SpotInstanceRequestId":{
           "shape":"String",
-          "documentation":"<p>The ID of the Spot Instance request.</p>",
+          "documentation":"<p>The ID of the Spot instance request.</p>",
           "locationName":"spotInstanceRequestId"
         }
       },
@@ -2075,6 +2075,13 @@
         "shape":"String",
         "locationName":"AllocationId"
       }
+    },
+    "AllocationStrategy":{
+      "type":"string",
+      "enum":[
+        "lowestPrice",
+        "diversified"
+      ]
     },
     "ArchitectureValues":{
       "type":"string",
@@ -2996,7 +3003,7 @@
         },
         "SpotInstanceRequestIds":{
           "shape":"SpotInstanceRequestIdList",
-          "documentation":"<p>One or more Spot Instance request IDs.</p>",
+          "documentation":"<p>One or more Spot instance request IDs.</p>",
           "locationName":"SpotInstanceRequestId"
         }
       },
@@ -3007,7 +3014,7 @@
       "members":{
         "CancelledSpotInstanceRequests":{
           "shape":"CancelledSpotInstanceRequestList",
-          "documentation":"<p>One or more Spot Instance requests.</p>",
+          "documentation":"<p>One or more Spot instance requests.</p>",
           "locationName":"spotInstanceRequestSet"
         }
       },
@@ -3018,16 +3025,16 @@
       "members":{
         "SpotInstanceRequestId":{
           "shape":"String",
-          "documentation":"<p>The ID of the Spot Instance request.</p>",
+          "documentation":"<p>The ID of the Spot instance request.</p>",
           "locationName":"spotInstanceRequestId"
         },
         "State":{
           "shape":"CancelSpotInstanceRequestState",
-          "documentation":"<p>The state of the Spot Instance request.</p>",
+          "documentation":"<p>The state of the Spot instance request.</p>",
           "locationName":"state"
         }
       },
-      "documentation":"<p>Describes a request to cancel a Spot Instance.</p>"
+      "documentation":"<p>Describes a request to cancel a Spot instance.</p>"
     },
     "CancelledSpotInstanceRequestList":{
       "type":"list",
@@ -3882,7 +3889,7 @@
         },
         "Bucket":{
           "shape":"String",
-          "documentation":"<p>The Amazon S3 bucket in which to store the Spot Instance data feed.</p>",
+          "documentation":"<p>The Amazon S3 bucket in which to store the Spot instance data feed.</p>",
           "locationName":"bucket"
         },
         "Prefix":{
@@ -3898,7 +3905,7 @@
       "members":{
         "SpotDatafeedSubscription":{
           "shape":"SpotDatafeedSubscription",
-          "documentation":"<p>The Spot Instance data feed subscription.</p>",
+          "documentation":"<p>The Spot instance data feed subscription.</p>",
           "locationName":"spotDatafeedSubscription"
         }
       },
@@ -5859,7 +5866,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>description</code> - The description of the security group.</p> </li> <li> <p><code>egress.ip-permission.prefix-list-id</code> - The ID (prefix) of the AWS service to which the security group allows access.</p> </li> <li> <p><code>group-id</code> - The ID of the security group. </p> </li> <li> <p><code>group-name</code> - The name of the security group.</p> </li> <li> <p><code>ip-permission.cidr</code> - A CIDR range that has been granted permission.</p> </li> <li> <p><code>ip-permission.from-port</code> - The start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p><code>ip-permission.group-id</code> - The ID of a security group that has been granted permission.</p> </li> <li> <p><code>ip-permission.group-name</code> - The name of a security group that has been granted permission.</p> </li> <li> <p><code>ip-permission.protocol</code> - The IP protocol for the permission (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p><code>ip-permission.to-port</code> - The end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p><code>ip-permission.user-id</code> - The ID of an AWS account that has been granted permission.</p> </li> <li> <p><code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the security group.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the security group.</p> </li> <li> <p><code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>",
+          "documentation":"<p>One or more filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p> <ul> <li> <p><code>description</code> - The description of the security group.</p> </li> <li> <p><code>egress.ip-permission.prefix-list-id</code> - The ID (prefix) of the AWS service to which the security group allows access.</p> </li> <li> <p><code>group-id</code> - The ID of the security group. </p> </li> <li> <p><code>group-name</code> - The name of the security group.</p> </li> <li> <p><code>ip-permission.cidr</code> - A CIDR range that has been granted permission.</p> </li> <li> <p><code>ip-permission.from-port</code> - The start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p><code>ip-permission.group-id</code> - The ID of a security group that has been granted permission.</p> </li> <li> <p><code>ip-permission.group-name</code> - The name of a security group that has been granted permission.</p> </li> <li> <p><code>ip-permission.protocol</code> - The IP protocol for the permission (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p><code>ip-permission.to-port</code> - The end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p><code>ip-permission.user-id</code> - The ID of an AWS account that has been granted permission.</p> </li> <li> <p><code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the security group.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the security group.</p> </li> <li> <p><code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>",
           "locationName":"Filter"
         }
       }
@@ -5985,7 +5992,7 @@
       "members":{
         "SpotDatafeedSubscription":{
           "shape":"SpotDatafeedSubscription",
-          "documentation":"<p>The Spot Instance data feed subscription.</p>",
+          "documentation":"<p>The Spot instance data feed subscription.</p>",
           "locationName":"spotDatafeedSubscription"
         }
       },
@@ -6173,12 +6180,12 @@
         },
         "SpotInstanceRequestIds":{
           "shape":"SpotInstanceRequestIdList",
-          "documentation":"<p>One or more Spot Instance request IDs.</p>",
+          "documentation":"<p>One or more Spot instance request IDs.</p>",
           "locationName":"SpotInstanceRequestId"
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone-group</code> - The Availability Zone group.</p> </li> <li> <p><code>create-time</code> - The time stamp when the Spot Instance request was created.</p> </li> <li> <p><code>fault-code</code> - The fault code related to the request.</p> </li> <li> <p><code>fault-message</code> - The fault message related to the request.</p> </li> <li> <p><code>instance-id</code> - The ID of the instance that fulfilled the request.</p> </li> <li> <p><code>launch-group</code> - The Spot Instance launch group.</p> </li> <li> <p><code>launch.block-device-mapping.delete-on-termination</code> - Indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p><code>launch.block-device-mapping.device-name</code> - The device name for the Amazon EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p><code>launch.block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the Amazon EBS volume.</p> </li> <li> <p><code>launch.block-device-mapping.volume-size</code> - The size of the Amazon EBS volume, in GiB.</p> </li> <li> <p><code>launch.block-device-mapping.volume-type</code> - The type of the Amazon EBS volume (<code>gp2</code> | <code>standard</code> | <code>io1</code>).</p> </li> <li> <p><code>launch.group-id</code> - The security group for the instance.</p> </li> <li> <p><code>launch.image-id</code> - The ID of the AMI.</p> </li> <li> <p><code>launch.instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p> </li> <li> <p><code>launch.kernel-id</code> - The kernel ID.</p> </li> <li> <p><code>launch.key-name</code> - The name of the key pair the instance launched with.</p> </li> <li> <p><code>launch.monitoring-enabled</code> - Whether monitoring is enabled for the Spot Instance.</p> </li> <li> <p><code>launch.ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p><code>network-interface.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p><code>network-interface.device-index</code> - The index of the device for the network interface attachment on the instance.</p> </li> <li> <p><code>network-interface.subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p><code>network-interface.description</code> - A description of the network interface.</p> </li> <li> <p><code>network-interface.private-ip-address</code> - The primary private IP address of the network interface.</p> </li> <li> <p><code>network-interface.delete-on-termination</code> - Indicates whether the network interface is deleted when the instance is terminated.</p> </li> <li> <p><code>network-interface.group-id</code> - The ID of the security group associated with the network interface.</p> </li> <li> <p><code>network-interface.group-name</code> - The name of the security group associated with the network interface.</p> </li> <li> <p><code>network-interface.addresses.primary</code> - Indicates whether the IP address is the primary private IP address.</p> </li> <li> <p><code>product-description</code> - The product description associated with the instance (<code>Linux/UNIX</code> | <code>Windows</code>).</p> </li> <li> <p><code>spot-instance-request-id</code> - The Spot Instance request ID.</p> </li> <li> <p><code>spot-price</code> - The maximum hourly price for any Spot Instance launched to fulfill the request.</p> </li> <li> <p><code>state</code> - The state of the Spot Instance request (<code>open</code> | <code>active</code> | <code>closed</code> | <code>cancelled</code> | <code>failed</code>). Spot bid status information can help you track your Amazon EC2 Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html\">Spot Bid Status</a> in the Amazon Elastic Compute Cloud User Guide.</p> </li> <li> <p><code>status-code</code> - The short code describing the most recent evaluation of your Spot Instance request.</p> </li> <li> <p><code>status-message</code> - The message explaining the status of the Spot Instance request.</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>type</code> - The type of Spot Instance request (<code>one-time</code> | <code>persistent</code>).</p> </li> <li> <p><code>launched-availability-zone</code> - The Availability Zone in which the bid is launched.</p> </li> <li> <p><code>valid-from</code> - The start date of the request.</p> </li> <li> <p><code>valid-until</code> - The end date of the request.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone-group</code> - The Availability Zone group.</p> </li> <li> <p><code>create-time</code> - The time stamp when the Spot instance request was created.</p> </li> <li> <p><code>fault-code</code> - The fault code related to the request.</p> </li> <li> <p><code>fault-message</code> - The fault message related to the request.</p> </li> <li> <p><code>instance-id</code> - The ID of the instance that fulfilled the request.</p> </li> <li> <p><code>launch-group</code> - The Spot instance launch group.</p> </li> <li> <p><code>launch.block-device-mapping.delete-on-termination</code> - Indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p><code>launch.block-device-mapping.device-name</code> - The device name for the Amazon EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p><code>launch.block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the Amazon EBS volume.</p> </li> <li> <p><code>launch.block-device-mapping.volume-size</code> - The size of the Amazon EBS volume, in GiB.</p> </li> <li> <p><code>launch.block-device-mapping.volume-type</code> - The type of the Amazon EBS volume (<code>gp2</code> | <code>standard</code> | <code>io1</code>).</p> </li> <li> <p><code>launch.group-id</code> - The security group for the instance.</p> </li> <li> <p><code>launch.image-id</code> - The ID of the AMI.</p> </li> <li> <p><code>launch.instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p> </li> <li> <p><code>launch.kernel-id</code> - The kernel ID.</p> </li> <li> <p><code>launch.key-name</code> - The name of the key pair the instance launched with.</p> </li> <li> <p><code>launch.monitoring-enabled</code> - Whether monitoring is enabled for the Spot instance.</p> </li> <li> <p><code>launch.ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p><code>network-interface.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p><code>network-interface.device-index</code> - The index of the device for the network interface attachment on the instance.</p> </li> <li> <p><code>network-interface.subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p><code>network-interface.description</code> - A description of the network interface.</p> </li> <li> <p><code>network-interface.private-ip-address</code> - The primary private IP address of the network interface.</p> </li> <li> <p><code>network-interface.delete-on-termination</code> - Indicates whether the network interface is deleted when the instance is terminated.</p> </li> <li> <p><code>network-interface.group-id</code> - The ID of the security group associated with the network interface.</p> </li> <li> <p><code>network-interface.group-name</code> - The name of the security group associated with the network interface.</p> </li> <li> <p><code>network-interface.addresses.primary</code> - Indicates whether the IP address is the primary private IP address.</p> </li> <li> <p><code>product-description</code> - The product description associated with the instance (<code>Linux/UNIX</code> | <code>Windows</code>).</p> </li> <li> <p><code>spot-instance-request-id</code> - The Spot instance request ID.</p> </li> <li> <p><code>spot-price</code> - The maximum hourly price for any Spot instance launched to fulfill the request.</p> </li> <li> <p><code>state</code> - The state of the Spot instance request (<code>open</code> | <code>active</code> | <code>closed</code> | <code>cancelled</code> | <code>failed</code>). Spot bid status information can help you track your Amazon EC2 Spot instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html\">Spot Bid Status</a> in the Amazon Elastic Compute Cloud User Guide.</p> </li> <li> <p><code>status-code</code> - The short code describing the most recent evaluation of your Spot instance request.</p> </li> <li> <p><code>status-message</code> - The message explaining the status of the Spot instance request.</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>type</code> - The type of Spot instance request (<code>one-time</code> | <code>persistent</code>).</p> </li> <li> <p><code>launched-availability-zone</code> - The Availability Zone in which the bid is launched.</p> </li> <li> <p><code>valid-from</code> - The start date of the request.</p> </li> <li> <p><code>valid-until</code> - The end date of the request.</p> </li> </ul>",
           "locationName":"Filter"
         }
       },
@@ -6189,7 +6196,7 @@
       "members":{
         "SpotInstanceRequests":{
           "shape":"SpotInstanceRequestList",
-          "documentation":"<p>One or more Spot Instance requests.</p>",
+          "documentation":"<p>One or more Spot instance requests.</p>",
           "locationName":"spotInstanceRequestSet"
         }
       },
@@ -6225,7 +6232,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone for which prices should be returned.</p> </li> <li> <p><code>instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p> </li> <li> <p><code>product-description</code> - The product description for the Spot Price (<code>Linux/UNIX</code> | <code>SUSE Linux</code> | <code>Windows</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Windows (Amazon VPC)</code>).</p> </li> <li> <p><code>spot-price</code> - The Spot Price. The value must match exactly (or use wildcards; greater than or less than comparison is not supported).</p> </li> <li> <p><code>timestamp</code> - The timestamp of the Spot Price history, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). You can use wildcards (* and ?). Greater than or less than comparison is not supported.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone for which prices should be returned.</p> </li> <li> <p><code>instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p> </li> <li> <p><code>product-description</code> - The product description for the Spot price (<code>Linux/UNIX</code> | <code>SUSE Linux</code> | <code>Windows</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Windows (Amazon VPC)</code>).</p> </li> <li> <p><code>spot-price</code> - The Spot price. The value must match exactly (or use wildcards; greater than or less than comparison is not supported).</p> </li> <li> <p><code>timestamp</code> - The timestamp of the Spot price history, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). You can use wildcards (* and ?). Greater than or less than comparison is not supported.</p> </li> </ul>",
           "locationName":"Filter"
         },
         "AvailabilityZone":{
@@ -6251,7 +6258,7 @@
       "members":{
         "SpotPriceHistory":{
           "shape":"SpotPriceHistoryList",
-          "documentation":"<p>The historical Spot Prices.</p>",
+          "documentation":"<p>The historical Spot prices.</p>",
           "locationName":"spotPriceHistorySet"
         },
         "NextToken":{
@@ -7260,7 +7267,7 @@
         },
         "EventSubType":{
           "shape":"String",
-          "documentation":"<p>The event.</p> <p>The following are the <code>error</code> events.</p> <ul> <li> <p><code>iamFleetRoleInvalid</code> - Spot fleet did not have the required permissions either to launch or terminate an instance.</p> </li> <li> <p><code>spotFleetRequestConfigurationInvalid</code> - The configuration is not valid. For more information, see the description.</p> </li> <li> <p><code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the number of Spot Instances that you can launch.</p> </li> </ul> <p>The following are the <code>fleetRequestChange</code> events.</p> <ul> <li> <p><code>active</code> - The Spot fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.</p> </li> <li> <p><code>cancelled</code> - The Spot fleet is canceled and has no running Spot Instances. The Spot fleet will be deleted two days after its instances were terminated.</p> </li> <li> <p><code>cancelled_running</code> - The Spot fleet is canceled and will not launch additional Spot Instances, but its existing Spot Instances will continue to run until they are interrupted or terminated.</p> </li> <li> <p><code>cancelled_terminating</code> - The Spot fleet is canceled and its Spot Instances are terminating.</p> </li> <li> <p><code>expired</code> - The Spot fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with <code>TerminateInstancesWithExpiration</code> set.</p> </li> <li> <p><code>price_update</code> - The bid price for a launch configuration was adjusted because it was too high. This change is permanent.</p> </li> <li> <p><code>submitted</code> - The Spot fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.</p> </li> </ul> <p>The following are the <code>instanceChange</code> events.</p> <ul> <li> <p><code>launched</code> - A bid was fulfilled and a new instance was launched.</p> </li> <li> <p><code>terminated</code> - An instance was terminated by the user.</p> </li> </ul>",
+          "documentation":"<p>The event.</p> <p>The following are the <code>error</code> events.</p> <ul> <li> <p><code>iamFleetRoleInvalid</code> - Spot fleet did not have the required permissions either to launch or terminate an instance.</p> </li> <li> <p><code>spotFleetRequestConfigurationInvalid</code> - The configuration is not valid. For more information, see the description.</p> </li> <li> <p><code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the number of Spot instances that you can launch.</p> </li> </ul> <p>The following are the <code>fleetRequestChange</code> events.</p> <ul> <li> <p><code>active</code> - The Spot fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot instances.</p> </li> <li> <p><code>cancelled</code> - The Spot fleet is canceled and has no running Spot instances. The Spot fleet will be deleted two days after its instances were terminated.</p> </li> <li> <p><code>cancelled_running</code> - The Spot fleet is canceled and will not launch additional Spot instances, but its existing Spot instances continue to run until they are interrupted or terminated.</p> </li> <li> <p><code>cancelled_terminating</code> - The Spot fleet is canceled and its Spot instances are terminating.</p> </li> <li> <p><code>expired</code> - The Spot fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with <code>TerminateInstancesWithExpiration</code> set.</p> </li> <li> <p><code>price_update</code> - The bid price for a launch configuration was adjusted because it was too high. This change is permanent.</p> </li> <li> <p><code>submitted</code> - The Spot fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot instances.</p> </li> </ul> <p>The following are the <code>instanceChange</code> events.</p> <ul> <li> <p><code>launched</code> - A bid was fulfilled and a new instance was launched.</p> </li> <li> <p><code>terminated</code> - An instance was terminated by the user.</p> </li> </ul>",
           "locationName":"eventSubType"
         },
         "EventDescription":{
@@ -11367,7 +11374,7 @@
         },
         "SpotPrice":{
           "shape":"String",
-          "documentation":"<p>The maximum hourly price (bid) for any Spot Instance launched to fulfill the request.</p>",
+          "documentation":"<p>The maximum hourly price (bid) for any Spot instance launched to fulfill the request.</p>",
           "locationName":"spotPrice"
         },
         "ClientToken":{
@@ -11377,12 +11384,12 @@
         },
         "InstanceCount":{
           "shape":"Integer",
-          "documentation":"<p>The maximum number of Spot Instances to launch.</p> <p>Default: 1</p>",
+          "documentation":"<p>The maximum number of Spot instances to launch.</p> <p>Default: 1</p>",
           "locationName":"instanceCount"
         },
         "Type":{
           "shape":"SpotInstanceType",
-          "documentation":"<p>The Spot Instance request type.</p> <p>Default: <code>one-time</code></p>",
+          "documentation":"<p>The Spot instance request type.</p> <p>Default: <code>one-time</code></p>",
           "locationName":"type"
         },
         "ValidFrom":{
@@ -11397,12 +11404,12 @@
         },
         "LaunchGroup":{
           "shape":"String",
-          "documentation":"<p>The instance launch group. Launch groups are Spot Instances that launch together and terminate together.</p> <p>Default: Instances are launched and terminated individually</p>",
+          "documentation":"<p>The instance launch group. Launch groups are Spot instances that launch together and terminate together.</p> <p>Default: Instances are launched and terminated individually</p>",
           "locationName":"launchGroup"
         },
         "AvailabilityZoneGroup":{
           "shape":"String",
-          "documentation":"<p>The user-specified name for a logical grouping of bids.</p> <p>When you specify an Availability Zone group in a Spot Instance request, all Spot Instances in the request are launched in the same Availability Zone. Instance proximity is maintained with this parameter, but the choice of Availability Zone is not. The group applies only to bids for Spot Instances of the same instance type. Any additional Spot Instance requests that are specified with the same Availability Zone group name are launched in that same Availability Zone, as long as at least one instance from the group is still active.</p> <p>If there is no active instance running in the Availability Zone group that you specify for a new Spot Instance request (all instances are terminated, the bid is expired, or the bid falls below current market), then Amazon EC2 launches the instance in any Availability Zone where the constraint can be met. Consequently, the subsequent set of Spot Instances could be placed in a different zone from the original request, even if you specified the same Availability Zone group.</p> <p>Default: Instances are launched in any available Availability Zone.</p>",
+          "documentation":"<p>The user-specified name for a logical grouping of bids.</p> <p>When you specify an Availability Zone group in a Spot Instance request, all Spot instances in the request are launched in the same Availability Zone. Instance proximity is maintained with this parameter, but the choice of Availability Zone is not. The group applies only to bids for Spot Instances of the same instance type. Any additional Spot instance requests that are specified with the same Availability Zone group name are launched in that same Availability Zone, as long as at least one instance from the group is still active.</p> <p>If there is no active instance running in the Availability Zone group that you specify for a new Spot instance request (all instances are terminated, the bid is expired, or the bid falls below current market), then Amazon EC2 launches the instance in any Availability Zone where the constraint can be met. Consequently, the subsequent set of Spot instances could be placed in a different zone from the original request, even if you specified the same Availability Zone group.</p> <p>Default: Instances are launched in any available Availability Zone.</p>",
           "locationName":"availabilityZoneGroup"
         },
         "LaunchSpecification":{"shape":"RequestSpotLaunchSpecification"}
@@ -11414,7 +11421,7 @@
       "members":{
         "SpotInstanceRequests":{
           "shape":"SpotInstanceRequestList",
-          "documentation":"<p>One or more Spot Instance requests.</p>",
+          "documentation":"<p>One or more Spot instance requests.</p>",
           "locationName":"spotInstanceRequestSet"
         }
       },
@@ -12508,18 +12515,23 @@
       "members":{
         "SnapshotId":{
           "shape":"String",
-          "documentation":"<p>The ID of the snapshot.</p>",
+          "documentation":"<p>The ID of the snapshot. Each snapshot receives a unique identifier when it is created.</p>",
           "locationName":"snapshotId"
         },
         "VolumeId":{
           "shape":"String",
-          "documentation":"<p>The ID of the volume.</p>",
+          "documentation":"<p>The ID of the volume that was used to create the snapshot.</p>",
           "locationName":"volumeId"
         },
         "State":{
           "shape":"SnapshotState",
           "documentation":"<p>The snapshot state.</p>",
           "locationName":"status"
+        },
+        "StateMessage":{
+          "shape":"String",
+          "documentation":"<p>Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy operation fails (for example, if the proper AWS Key Management Service (AWS KMS) permissions are not obtained) this field displays error state details to help you diagnose why the error occurred. This parameter is only returned by the <a>DescribeSnapshots</a> API operation.</p>",
+          "locationName":"statusMessage"
         },
         "StartTime":{
           "shape":"DateTime",
@@ -12565,6 +12577,11 @@
           "shape":"String",
           "documentation":"<p>The full ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the parent volume.</p>",
           "locationName":"kmsKeyId"
+        },
+        "DataEncryptionKeyId":{
+          "shape":"String",
+          "documentation":"<p>The data encryption key identifier for the snapshot. This value is a unique identifier that corresponds to the data encryption key that was used to encrypt the original volume or snapshot copy. Because data encryption keys are inherited by volumes created from snapshots, and vice versa, if snapshots share the same data encryption key identifier, then they belong to the same volume/snapshot lineage. This parameter is only returned by the <a>DescribeSnapshots</a> API operation.</p>",
+          "locationName":"dataEncryptionKeyId"
         }
       },
       "documentation":"<p>Describes a snapshot.</p>"
@@ -12740,7 +12757,7 @@
         },
         "Bucket":{
           "shape":"String",
-          "documentation":"<p>The Amazon S3 bucket where the Spot Instance data feed is located.</p>",
+          "documentation":"<p>The Amazon S3 bucket where the Spot instance data feed is located.</p>",
           "locationName":"bucket"
         },
         "Prefix":{
@@ -12750,16 +12767,16 @@
         },
         "State":{
           "shape":"DatafeedSubscriptionState",
-          "documentation":"<p>The state of the Spot Instance data feed subscription.</p>",
+          "documentation":"<p>The state of the Spot instance data feed subscription.</p>",
           "locationName":"state"
         },
         "Fault":{
           "shape":"SpotInstanceStateFault",
-          "documentation":"<p>The fault codes for the Spot Instance request, if any.</p>",
+          "documentation":"<p>The fault codes for the Spot instance request, if any.</p>",
           "locationName":"fault"
         }
       },
-      "documentation":"<p>Describes the data feed for a Spot Instance.</p>"
+      "documentation":"<p>Describes the data feed for a Spot instance.</p>"
     },
     "SpotFleetLaunchSpecification":{
       "type":"structure",
@@ -12850,7 +12867,7 @@
           "locationName":"spotPrice"
         }
       },
-      "documentation":"<p>Describes the launch specification for one or more Spot Instances.</p>"
+      "documentation":"<p>Describes the launch specification for one or more Spot instances.</p>"
     },
     "SpotFleetMonitoring":{
       "type":"structure",
@@ -12920,23 +12937,28 @@
         },
         "ValidUntil":{
           "shape":"DateTime",
-          "documentation":"<p>The end date and time of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). At this point, no new Spot Instance requests are placed or enabled to fulfill the request.</p>",
+          "documentation":"<p>The end date and time of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). At this point, no new Spot instance requests are placed or enabled to fulfill the request.</p>",
           "locationName":"validUntil"
         },
         "TerminateInstancesWithExpiration":{
           "shape":"Boolean",
-          "documentation":"<p>Indicates whether running instances should be terminated when the Spot fleet request expires.</p>",
+          "documentation":"<p>Indicates whether running Spot instances should be terminated when the Spot fleet request expires.</p>",
           "locationName":"terminateInstancesWithExpiration"
         },
         "IamFleetRole":{
           "shape":"String",
-          "documentation":"<p>Grants the Spot fleet service permission to terminate instances on your behalf when you cancel a Spot fleet request using <a>CancelSpotFleetRequests</a> or when the Spot fleet request expires, if you set <code>terminateInstancesWithExpiration</code>.</p>",
+          "documentation":"<p>Grants the Spot fleet permission to terminate Spot instances on your behalf when you cancel its Spot fleet request using <a>CancelSpotFleetRequests</a> or when the Spot fleet request expires, if you set <code>terminateInstancesWithExpiration</code>.</p>",
           "locationName":"iamFleetRole"
         },
         "LaunchSpecifications":{
           "shape":"LaunchSpecsList",
-          "documentation":"<p>Information about the launch specifications for the instances.</p>",
+          "documentation":"<p>Information about the launch specifications for the Spot fleet request.</p>",
           "locationName":"launchSpecifications"
+        },
+        "AllocationStrategy":{
+          "shape":"AllocationStrategy",
+          "documentation":"<p>Determines how to allocate the target capacity across the Spot pools specified by the Spot fleet request. The default is <code>lowestPrice</code>.</p>",
+          "locationName":"allocationStrategy"
         }
       },
       "documentation":"<p>Describes the configuration of a Spot fleet request.</p>"
@@ -12953,32 +12975,32 @@
       "members":{
         "SpotInstanceRequestId":{
           "shape":"String",
-          "documentation":"<p>The ID of the Spot Instance request.</p>",
+          "documentation":"<p>The ID of the Spot instance request.</p>",
           "locationName":"spotInstanceRequestId"
         },
         "SpotPrice":{
           "shape":"String",
-          "documentation":"<p>The maximum hourly price (bid) for any Spot Instance launched to fulfill the request.</p>",
+          "documentation":"<p>The maximum hourly price (bid) for any Spot instance launched to fulfill the request.</p>",
           "locationName":"spotPrice"
         },
         "Type":{
           "shape":"SpotInstanceType",
-          "documentation":"<p>The Spot Instance request type.</p>",
+          "documentation":"<p>The Spot instance request type.</p>",
           "locationName":"type"
         },
         "State":{
           "shape":"SpotInstanceState",
-          "documentation":"<p>The state of the Spot Instance request. Spot bid status information can help you track your Spot Instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html\">Spot Bid Status</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "documentation":"<p>The state of the Spot instance request. Spot bid status information can help you track your Spot instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html\">Spot Bid Status</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName":"state"
         },
         "Fault":{
           "shape":"SpotInstanceStateFault",
-          "documentation":"<p>The fault codes for the Spot Instance request, if any.</p>",
+          "documentation":"<p>The fault codes for the Spot instance request, if any.</p>",
           "locationName":"fault"
         },
         "Status":{
           "shape":"SpotInstanceStatus",
-          "documentation":"<p>The status code and status message describing the Spot Instance request.</p>",
+          "documentation":"<p>The status code and status message describing the Spot instance request.</p>",
           "locationName":"status"
         },
         "ValidFrom":{
@@ -12993,12 +13015,12 @@
         },
         "LaunchGroup":{
           "shape":"String",
-          "documentation":"<p>The instance launch group. Launch groups are Spot Instances that launch together and terminate together.</p>",
+          "documentation":"<p>The instance launch group. Launch groups are Spot instances that launch together and terminate together.</p>",
           "locationName":"launchGroup"
         },
         "AvailabilityZoneGroup":{
           "shape":"String",
-          "documentation":"<p>The Availability Zone group. If you specify the same Availability Zone group for all Spot Instance requests, all Spot Instances are launched in the same Availability Zone.</p>",
+          "documentation":"<p>The Availability Zone group. If you specify the same Availability Zone group for all Spot instance requests, all Spot instances are launched in the same Availability Zone.</p>",
           "locationName":"availabilityZoneGroup"
         },
         "LaunchSpecification":{
@@ -13008,17 +13030,17 @@
         },
         "InstanceId":{
           "shape":"String",
-          "documentation":"<p>The instance ID, if an instance has been launched to fulfill the Spot Instance request.</p>",
+          "documentation":"<p>The instance ID, if an instance has been launched to fulfill the Spot instance request.</p>",
           "locationName":"instanceId"
         },
         "CreateTime":{
           "shape":"DateTime",
-          "documentation":"<p>The date and time when the Spot Instance request was created, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).</p>",
+          "documentation":"<p>The date and time when the Spot instance request was created, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z).</p>",
           "locationName":"createTime"
         },
         "ProductDescription":{
           "shape":"RIProductDescription",
-          "documentation":"<p>The product description associated with the Spot Instance.</p>",
+          "documentation":"<p>The product description associated with the Spot instance.</p>",
           "locationName":"productDescription"
         },
         "Tags":{
@@ -13032,7 +13054,7 @@
           "locationName":"launchedAvailabilityZone"
         }
       },
-      "documentation":"<p>Describe a Spot Instance request.</p>"
+      "documentation":"<p>Describe a Spot instance request.</p>"
     },
     "SpotInstanceRequestIdList":{
       "type":"list",
@@ -13063,16 +13085,16 @@
       "members":{
         "Code":{
           "shape":"String",
-          "documentation":"<p>The reason code for the Spot Instance state change.</p>",
+          "documentation":"<p>The reason code for the Spot instance state change.</p>",
           "locationName":"code"
         },
         "Message":{
           "shape":"String",
-          "documentation":"<p>The message for the Spot Instance state change.</p>",
+          "documentation":"<p>The message for the Spot instance state change.</p>",
           "locationName":"message"
         }
       },
-      "documentation":"<p>Describes a Spot Instance state change.</p>"
+      "documentation":"<p>Describes a Spot instance state change.</p>"
     },
     "SpotInstanceStatus":{
       "type":"structure",
@@ -13093,7 +13115,7 @@
           "locationName":"message"
         }
       },
-      "documentation":"<p>Describes the status of a Spot Instance request.</p>"
+      "documentation":"<p>Describes the status of a Spot instance request.</p>"
     },
     "SpotInstanceType":{
       "type":"string",
@@ -13116,7 +13138,7 @@
           "locationName":"groupName"
         }
       },
-      "documentation":"<p>Describes Spot Instance placement.</p>"
+      "documentation":"<p>Describes Spot instance placement.</p>"
     },
     "SpotPrice":{
       "type":"structure",
@@ -13133,7 +13155,7 @@
         },
         "SpotPrice":{
           "shape":"String",
-          "documentation":"<p>The maximum price (bid) that you are willing to pay for a Spot Instance.</p>",
+          "documentation":"<p>The maximum price (bid) that you are willing to pay for a Spot instance.</p>",
           "locationName":"spotPrice"
         },
         "Timestamp":{
@@ -13147,7 +13169,7 @@
           "locationName":"availabilityZone"
         }
       },
-      "documentation":"<p>Describes the maximum hourly price (bid) for any Spot Instance launched to fulfill the request.</p>"
+      "documentation":"<p>Describes the maximum hourly price (bid) for any Spot instance launched to fulfill the request.</p>"
     },
     "SpotPriceHistoryList":{
       "type":"list",
