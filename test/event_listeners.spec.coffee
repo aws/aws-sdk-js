@@ -226,6 +226,21 @@ describe 'AWS.EventListeners', ->
       request.send()
       expect(signHandler.calls.length).to.equal(2)
 
+  describe 'httpHeaders', ->
+
+    afterEach ->
+      AWS.config.systemClockOffset = 0
+
+    it 'applies clock skew offset when correcClockSkew is true', ->
+      service = new MockService({maxRetries: 3, correctClockSkew: true})
+      serverDate = new Date(new Date().getTime() - 300000)
+      helpers.mockHttpResponse 200, {date: serverDate.toString()}, ''
+      helpers.spyOn(AWS.util, 'isClockSkewed').andReturn true
+      request = makeRequest()
+      response = request.send()
+      offset = Math.abs(AWS.config.systemClockOffset)
+      expect(offset > 299000 && offset < 310000).to.equal(true)
+
   describe 'httpData', ->
     beforeEach ->
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
@@ -409,9 +424,34 @@ describe 'AWS.EventListeners', ->
       response = request.send()
       expect(response.retryCount).to.equal(service.config.maxRetries)
 
-    it 'does not retry other signature errors', ->
-      helpers.mockHttpResponse 403, {}, ''
+    ['RequestTimeTooSkewed', 'RequestExpired', 'RequestInTheFuture',
+      'InvalidSignatureException', 'SignatureDoesNotMatch',
+      'AuthFailure'].forEach (code) ->
+      it 'retries clock skew errors', ->
+        helpers.mockHttpResponse 400, {}, ''
+        AWS.config.isClockSkewed = true
+        service = new MockService({maxRetries: 3, correctClockSkew: true})
+        request = makeRequest()
+        request.on 'extractError', (resp) ->
+          resp.error =
+            code: code
+            message: 'Client clock is skewed'
+        response = request.send()
+        expect(response.retryCount).to.equal(service.config.maxRetries)
 
+    it 'does not apply clock skew correction when correctClockSkew is false', ->
+      helpers.mockHttpResponse 400, {}, ''
+      AWS.config.isClockSkewed = true
+      request = makeRequest()
+      request.on 'extractError', (resp) ->
+        resp.error =
+          code: 'RequestTimeTooSkewed'
+          message: 'Client clock is skewed'
+      response = request.send()
+      expect(response.retryCount).to.equal(0)
+
+    it 'does not retry other signature errors if clock is not skewed', ->
+      helpers.mockHttpResponse 403, {}, ''
       request = makeRequest()
       request.on 'extractError', (resp) ->
         resp.error =

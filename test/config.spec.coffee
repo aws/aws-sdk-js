@@ -80,6 +80,10 @@ describe 'AWS.Config', ->
     it 'defaults to 0', ->
       expect(configure().systemClockOffset).to.equal(0)
 
+  describe 'correctClockSkew', ->
+    it 'defaults to false', ->
+      expect(configure().correctClockSkew).to.equal(false)
+
   describe 'set', ->
     it 'should set a default value for a key', ->
       config = new AWS.Config()
