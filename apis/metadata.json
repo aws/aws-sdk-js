@@ -78,6 +78,7 @@
     "name": "ECS"
   },
   "efs": {
+    "prefix": "elasticfilesystem",
     "name": "EFS"
   },
   "elasticache": {
