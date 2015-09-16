@@ -274,11 +274,10 @@ integrationTests ->
         expect(Array.isArray(data.Functions)).to.equal(true)
         done()
 
-    # TODO This error code needs to be updated when the X-Amzn-ErrorType is whitelisted.
     it 'handles errors', (done) ->
       lambda.invoke {FunctionName: 'fake-function'}, (err, data) ->
         noData(data)
-        assertError(err, 'UnknownError')
+        assertError(err, 'ResourceNotFoundException')
         matchError(err, 'function not found')
         done()
 
