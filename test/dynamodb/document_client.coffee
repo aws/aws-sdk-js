@@ -10,6 +10,7 @@ beforeEach ->
 
 translateInput = (input) ->
   request = docClient.put(input)
+  request.emit('validate', [request])
   request.params
 
 describe 'AWS.DynamoDB.DocumentClient', ->
