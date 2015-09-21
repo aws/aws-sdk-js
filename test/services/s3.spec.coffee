@@ -157,11 +157,6 @@ describe 'AWS.S3', ->
         req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer('body'), ContentType: 'image/png')
         expect(req.headers['Content-Type']).to.equal('image/png')
 
-    describe 'x-amz-copy-source header', ->
-      it 'is url-encoded', ->
-        req = build('copyObject', Bucket: 'bucket', Key: 'key', Body: 'body', CopySource: 'otherbucket/key==')
-        expect(req.headers['x-amz-copy-source']).to.equal('otherbucket/key%3D%3D')
-
     describe 'virtual-hosted vs path-style bucket requests', ->
 
       describe 'HTTPS', ->
