@@ -63,7 +63,7 @@
           "documentation":"Thrown when the total number of user pools has exceeded a preset limit."
         }
       ],
-      "documentation":"<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for <code>SupportedLoginProviders</code> are as follows: <ul> <li>Facebook: <code>graph.facebook.com</code> </li> <li>Google: <code>accounts.google.com</code> </li> <li>Amazon: <code>www.amazon.com</code> </li> <li>Twitter: <code>api.twitter.com</code> </li> <li>Digits: <code>www.digits.com</code> </li> </ul> You must use AWS Developer credentials to call this API.</p>"
     },
     "DeleteIdentities":{
       "name":"DeleteIdentities",
@@ -305,7 +305,7 @@
           "documentation":"<p>An exception thrown when a dependent service such as Facebook or Twitter is not responding</p>"
         }
       ],
-      "documentation":"<p>Returns credentials for the the provided identity ID. Any provided logins will be validated against supported login providers. If the token is for cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service with the appropriate role for the token.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
+      "documentation":"<p>Returns credentials for the provided identity ID. Any provided logins will be validated against supported login providers. If the token is for cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service with the appropriate role for the token.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
     },
     "GetId":{
       "name":"GetId",
@@ -371,7 +371,7 @@
           "documentation":"<p>An exception thrown when a dependent service such as Facebook or Twitter is not responding</p>"
         }
       ],
-      "documentation":"<p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account.</p> <p>token+\";\"+tokenSecret.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
+      "documentation":"<p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
     },
     "GetIdentityPoolRoles":{
       "name":"GetIdentityPoolRoles",
@@ -635,7 +635,7 @@
           "documentation":"Thrown when the service encounters an error during processing the request."
         }
       ],
-      "documentation":"<p>Lists all of the Cognito identity pools registered for your account.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
+      "documentation":"<p>Lists all of the Cognito identity pools registered for your account.</p> <p>You must use AWS Developer credentials to call this API.</p>"
     },
     "LookupDeveloperIdentity":{
       "name":"LookupDeveloperIdentity",
@@ -849,7 +849,7 @@
           "documentation":"Thrown when the service encounters an error during processing the request."
         }
       ],
-      "documentation":"<p>Unlinks a <code>DeveloperUserIdentifier</code> from an existing identity. Unlinked developer users will be considered new identities next time they are seen. If, for a given Cognito identity, you remove all federated identities as well as the developer user identifier, the Cognito identity becomes inaccessible.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
+      "documentation":"<p>Unlinks a <code>DeveloperUserIdentifier</code> from an existing identity. Unlinked developer users will be considered new identities next time they are seen. If, for a given Cognito identity, you remove all federated identities as well as the developer user identifier, the Cognito identity becomes inaccessible.</p> <p>You must use AWS Developer credentials to call this API.</p>"
     },
     "UnlinkIdentity":{
       "name":"UnlinkIdentity",
@@ -1043,7 +1043,7 @@
           "documentation":"<p>The date at which these credentials will expire.</p>"
         }
       },
-      "documentation":"<p>Credentials for the the provided identity ID.</p>"
+      "documentation":"<p>Credentials for the provided identity ID.</p>"
     },
     "DateType":{"type":"timestamp"},
     "DeleteIdentitiesInput":{
@@ -1171,7 +1171,7 @@
         },
         "Credentials":{
           "shape":"Credentials",
-          "documentation":"<p>Credentials for the the provided identity ID.</p>"
+          "documentation":"<p>Credentials for the provided identity ID.</p>"
         }
       },
       "documentation":"<p>Returned in response to a successful <code>GetCredentialsForIdentity</code> operation.</p>"
@@ -1190,7 +1190,7 @@
         },
         "Logins":{
           "shape":"LoginsMap",
-          "documentation":"<p>A set of optional name-value pairs that map provider names to provider tokens.</p> <p>The available provider names for <code>Logins</code> are as follows: <ul> <li>Facebook: <code>graph.facebook.com</code> </li> <li>Google: <code>accounts.google.com</code> </li> <li>Amazon: <code>www.amazon.com</code> </li> <li>Twitter: <code>www.twitter.com</code> </li> <li>Digits: <code>www.digits.com</code> </li> </ul> </p>"
+          "documentation":"<p>A set of optional name-value pairs that map provider names to provider tokens.</p> <p>The available provider names for <code>Logins</code> are as follows: <ul> <li>Facebook: <code>graph.facebook.com</code> </li> <li>Google: <code>accounts.google.com</code> </li> <li>Amazon: <code>www.amazon.com</code> </li> <li>Twitter: <code>api.twitter.com</code> </li> <li>Digits: <code>www.digits.com</code> </li> </ul> </p>"
         }
       },
       "documentation":"Input to the GetId action."
@@ -1329,7 +1329,7 @@
     "IdentityId":{
       "type":"string",
       "min":1,
-      "max":50,
+      "max":55,
       "pattern":"[\\w-]+:[0-9a-f-]+"
     },
     "IdentityIdList":{
@@ -1376,7 +1376,7 @@
     "IdentityPoolId":{
       "type":"string",
       "min":1,
-      "max":50,
+      "max":55,
       "pattern":"[\\w-]+:[0-9a-f-]+"
     },
     "IdentityPoolName":{
@@ -1811,5 +1811,7 @@
       "member":{"shape":"UnprocessedIdentityId"},
       "max":60
     }
+  },
+  "examples":{
   }
 }
