@@ -281,7 +281,7 @@ describe 'AWS.S3.ManagedUpload', ->
           expect(data.Location).to.equal('FINAL_LOCATION')
           done()
 
-    it 'returns an error when resuming on multipart buffer upload if leavePartsOnError is not set', (done) ->
+    it 'does not resume multipart buffer upload if leavePartsOnError is not set', (done) ->
       reqs = helpers.mockResponses [
         { data: UploadId: 'uploadId' }
         { data: ETag: 'ETAG1' }
