@@ -1,8 +1,9 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
+util = AWS.util
 
 sortQS = (body) ->
-  AWS.util.queryParamsToString(AWS.util.queryStringParse(body))
+  util.queryParamsToString(AWS.util.queryStringParse(body))
 
 protocols =
   ec2:
@@ -56,7 +57,11 @@ inputCase = (svc, _case, i, done) ->
   req.build()
 
   data = _case.serialized
-  expect(req.httpRequest.path).to.equal(data.uri)
+  reqUrl = util.urlParse(req.httpRequest.path)
+  dataUrl = util.urlParse(data.uri)
+  expect(reqUrl.pathname).to.equal(dataUrl.pathname)
+  expect(util.queryStringParse(reqUrl.query)).to.eql(util.queryStringParse(dataUrl.query))
+
 
   if svc.api.protocol == 'query' or svc.api.protocol == 'ec2'
     expect(sortQS(req.httpRequest.body)).to.equal(sortQS(data.body))
