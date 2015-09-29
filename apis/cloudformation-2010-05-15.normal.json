@@ -18,9 +18,9 @@
       },
       "input":{
         "shape":"CancelUpdateStackInput",
-        "documentation":"<p>The input for <a>CancelUpdateStack</a> action.</p>"
+        "documentation":"<p>The input for the <a>CancelUpdateStack</a> action.</p>"
       },
-      "documentation":"<p>Cancels an update on the specified stack. If the call completes successfully, the stack will roll back the update and revert to the previous stack configuration.</p> <note>Only stacks that are in the UPDATE_IN_PROGRESS state can be canceled.</note>"
+      "documentation":"<p>Cancels an update on the specified stack. If the call completes successfully, the stack rolls back the update and reverts to the previous stack configuration.</p> <note>You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.</note>"
     },
     "CreateStack":{
       "name":"CreateStack",
@@ -82,6 +82,23 @@
         "documentation":"<p>The input for <a>DeleteStack</a> action.</p>"
       },
       "documentation":"<p>Deletes a specified stack. Once the call completes successfully, stack deletion starts. Deleted stacks do not show up in the <a>DescribeStacks</a> API if the deletion has been completed successfully.</p>"
+    },
+    "DescribeAccountLimits":{
+      "name":"DescribeAccountLimits",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeAccountLimitsInput",
+        "documentation":"<p>The input for the <a>DescribeAccountLimits</a> action.</p>"
+      },
+      "output":{
+        "shape":"DescribeAccountLimitsOutput",
+        "documentation":"<p>The output for the <a>DescribeAccountLimits</a> action.</p>",
+        "resultWrapper":"DescribeAccountLimitsResult"
+      },
+      "documentation":"<p>Retrieves your account's AWS CloudFormation limits, such as the maximum number of stacks that you can create in your account.</p>"
     },
     "DescribeStackEvents":{
       "name":"DescribeStackEvents",
@@ -322,6 +339,24 @@
     }
   },
   "shapes":{
+    "AccountLimit":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"LimitName",
+          "documentation":"<p>The name of the account limit. Currently, the only account limit is <code>StackLimit</code>.</p>"
+        },
+        "Value":{
+          "shape":"LimitValue",
+          "documentation":"<p>The value that is associated with the account limit name.</p>"
+        }
+      },
+      "documentation":"<p>The AccountLimit data type.</p>"
+    },
+    "AccountLimitList":{
+      "type":"list",
+      "member":{"shape":"AccountLimit"}
+    },
     "AllowedValue":{"type":"string"},
     "AllowedValues":{
       "type":"list",
@@ -348,7 +383,7 @@
           "documentation":"<p>The name or the unique stack ID that is associated with the stack.</p>"
         }
       },
-      "documentation":"<p>The input for <a>CancelUpdateStack</a> action.</p>"
+      "documentation":"<p>The input for the <a>CancelUpdateStack</a> action.</p>"
     },
     "Capabilities":{
       "type":"list",
@@ -373,7 +408,7 @@
         },
         "TemplateURL":{
           "shape":"TemplateURL",
-          "documentation":"<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) located in an S3 bucket in the same region as the stack. For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>"
+          "documentation":"<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>"
         },
         "Parameters":{
           "shape":"Parameters",
@@ -394,6 +429,10 @@
         "Capabilities":{
           "shape":"Capabilities",
           "documentation":"<p>A list of capabilities that you must specify before AWS CloudFormation can create or update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter.</p> <p>Currently, the only valid value is <code>CAPABILITY_IAM</code>, which is required for the following resources: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\"> AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\"> AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\"> AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\"> AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\"> AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\"> AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\"> AWS::IAM::UserToGroupAddition</a>. If your stack template contains these resources, we recommend that you review any permissions associated with them. If you don't specify this parameter, this action returns an <code>InsufficientCapabilities</code> error.</p>"
+        },
+        "ResourceTypes":{
+          "shape":"ResourceTypes",
+          "documentation":"<p>The template resource types that you have permissions to work with for this create stack action, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or <code>Custom::MyCustomInstance</code>. Use the following syntax to describe template resource types: <code>AWS::*</code> (for all AWS resource), <code>Custom::*</code> (for all custom resources), <code>Custom::<i>logical_ID</i></code> (for a specific custom resource), <code>AWS::<i>service_name</i>::*</code> (for all resources of a particular AWS service), and <code>AWS::<i>service_name</i>::<i>resource_logical_ID</i></code> (for a specific AWS resource).</p> <p>If the list of resource types doesn't include a resource that you're creating, the stack creation fails. By default, AWS CloudFormation grants permissions to all resource types. AWS Identity and Access Management (IAM) uses this parameter for AWS CloudFormation-specific condition keys in IAM policies. For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html\">Controlling Access with AWS Identity and Access Management</a>.</p>"
         },
         "OnFailure":{
           "shape":"OnFailure",
@@ -437,6 +476,30 @@
       "documentation":"<p>The input for <a>DeleteStack</a> action.</p>"
     },
     "DeletionTime":{"type":"timestamp"},
+    "DescribeAccountLimitsInput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A string that identifies the next page of limits that you want to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>The input for the <a>DescribeAccountLimits</a> action.</p>"
+    },
+    "DescribeAccountLimitsOutput":{
+      "type":"structure",
+      "members":{
+        "AccountLimits":{
+          "shape":"AccountLimitList",
+          "documentation":"<p>An account limit structure that contain a list of AWS CloudFormation account limits and their values.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A string that identifies the next page of limits. If no additional page exists, this value is null.</p>"
+        }
+      },
+      "documentation":"<p>The output for the <a>DescribeAccountLimits</a> action.</p>"
+    },
     "DescribeStackEventsInput":{
       "type":"structure",
       "members":{
@@ -560,7 +623,7 @@
         },
         "TemplateURL":{
           "shape":"TemplateURL",
-          "documentation":"<p>Location of file containing the template body. The URL must point to a template located in an S3 bucket in the same region as the stack. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>"
+          "documentation":"<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>"
         },
         "Parameters":{
           "shape":"Parameters",
@@ -630,7 +693,7 @@
         },
         "TemplateURL":{
           "shape":"TemplateURL",
-          "documentation":"<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) located in an Amazon S3 bucket. For more information about templates, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>"
+          "documentation":"<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information about templates, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>"
         },
         "StackName":{
           "shape":"StackNameOrId",
@@ -657,6 +720,10 @@
         "CapabilitiesReason":{
           "shape":"CapabilitiesReason",
           "documentation":"<p>The list of resources that generated the values in the <code>Capabilities</code> response element.</p>"
+        },
+        "ResourceTypes":{
+          "shape":"ResourceTypes",
+          "documentation":"<p>A list of all the template resource types that are defined in the template, such as <code>AWS::EC2::Instance</code>, <code>AWS::Dynamo::Table</code>, and <code>Custom::MyCustomInstance</code>. Use the following syntax to describe template resource types: <code>AWS::*</code> (for all AWS resources), <code>Custom::*</code> (for all custom resources), <code>Custom::<i>logical_ID</i></code> (for a specific custom resource), <code>AWS::<i>service_name</i>::*</code> (for all resources of a particular AWS service), and <code>AWS::<i>service_name</i>::<i>resource_logical_ID</i></code> (for a specific AWS resource).</p>"
         },
         "Version":{
           "shape":"Version",
@@ -694,6 +761,8 @@
       "exception":true,
       "documentation":"<p>Quota for the resource has already been reached.</p>"
     },
+    "LimitName":{"type":"string"},
+    "LimitValue":{"type":"integer"},
     "ListStackResourcesInput":{
       "type":"structure",
       "required":["StackName"],
@@ -897,6 +966,10 @@
     },
     "ResourceStatusReason":{"type":"string"},
     "ResourceType":{"type":"string"},
+    "ResourceTypes":{
+      "type":"list",
+      "member":{"shape":"ResourceType"}
+    },
     "SetStackPolicyInput":{
       "type":"structure",
       "required":["StackName"],
@@ -962,7 +1035,7 @@
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>User defined description associated with the stack.</p>"
+          "documentation":"<p>A user-defined description associated with the stack.</p>"
         },
         "Parameters":{
           "shape":"Parameters",
@@ -970,7 +1043,7 @@
         },
         "CreationTime":{
           "shape":"CreationTime",
-          "documentation":"<p>Time at which the stack was created.</p>"
+          "documentation":"<p>The time at which the stack was created.</p>"
         },
         "LastUpdatedTime":{
           "shape":"LastUpdatedTime",
@@ -1390,7 +1463,7 @@
         },
         "TemplateURL":{
           "shape":"TemplateURL",
-          "documentation":"<p>Location of file containing the template body. The URL must point to a template located in an S3 bucket in the same region as the stack. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>"
+          "documentation":"<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>"
         },
         "UsePreviousTemplate":{
           "shape":"UsePreviousTemplate",
@@ -1411,6 +1484,10 @@
         "Capabilities":{
           "shape":"Capabilities",
           "documentation":"<p>A list of capabilities that you must specify before AWS CloudFormation can create or update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter. Currently, the only valid value is <code>CAPABILITY_IAM</code>, which is required for the following resources: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\"> AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\"> AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\"> AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\"> AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\"> AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\"> AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\"> AWS::IAM::UserToGroupAddition</a>. If your stack template contains these resources, we recommend that you review any permissions associated with them. If you don't specify this parameter, this action returns an InsufficientCapabilities error.</p>"
+        },
+        "ResourceTypes":{
+          "shape":"ResourceTypes",
+          "documentation":"<p>The template resource types that you have permissions to work with for this update stack action, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or <code>Custom::MyCustomInstance</code>.</p> <p>If the list of resource types doesn't include a resource that you're updating, the stack update fails. By default, AWS CloudFormation grants permissions to all resource types. AWS Identity and Access Management (IAM) uses this parameter for AWS CloudFormation-specific condition keys in IAM policies. For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html\">Controlling Access with AWS Identity and Access Management</a></p>"
         },
         "StackPolicyBody":{
           "shape":"StackPolicyBody",
@@ -1449,7 +1526,7 @@
         },
         "TemplateURL":{
           "shape":"TemplateURL",
-          "documentation":"<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) located in an S3 bucket in the same region as the stack. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>"
+          "documentation":"<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>"
         }
       },
       "documentation":"<p>The input for <a>ValidateTemplate</a> action.</p>"
@@ -1477,5 +1554,7 @@
       "documentation":"<p>The output for <a>ValidateTemplate</a> action.</p>"
     },
     "Version":{"type":"string"}
+  },
+  "examples":{
   }
 }
