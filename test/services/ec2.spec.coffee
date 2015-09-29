@@ -29,7 +29,7 @@ describe 'AWS.EC2', ->
             "%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3Dakid%252F19700101" +
             "%252Fsrc-region%252Fec2%252Faws4_request%26X-Amz-Date%3D19700101T000000Z" +
             "%26X-Amz-Expires%3D3600%26X-Amz-Security-Token%3Dsession" +
-            "%26X-Amz-Signature%3D832151cb132a395b654f922fe6c1143ecd1c8693593da75d8d487bf4c9a43249" +
+            "%26X-Amz-Signature%3D37f45901157b4599bfcd4bf42b26f958d503f357aed899488a78f494825d34be" +
             "%26X-Amz-SignedHeaders%3Dhost",
           'SourceRegion=src-region',
           'SourceSnapshotId=snap-123456789'
