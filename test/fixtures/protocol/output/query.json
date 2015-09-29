@@ -7,7 +7,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "Str": {
             "shape": "StringType"
@@ -68,6 +67,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -99,7 +99,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "Str": {
             "shape": "StringType"
@@ -120,6 +119,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -136,51 +136,12 @@
     ]
   },
   {
-    "description": "Custom result wrapper",
-    "metadata": {
-      "protocol": "query"
-    },
-    "shapes": {
-      "OutputShape": {
-        "type": "structure",
-        "resultWrapper": "Wrapper",
-        "members": {
-          "Str": {
-            "shape": "StringType"
-          }
-        }
-      },
-      "StringType": {
-        "type": "string"
-      }
-    },
-    "cases": [
-      {
-        "given": {
-          "output": {
-            "shape": "OutputShape"
-          },
-          "name": "OperationName"
-        },
-        "result": {
-          "Str": "myname"
-        },
-        "response": {
-          "status_code": 200,
-          "headers": {},
-          "body": "<OperationNameResponse><Wrapper><Str>myname</Str></Wrapper><ResponseMetadata><RequestId>request-id</RequestId></ResponseMetadata></OperationNameResponse>"
-        }
-      }
-    ]
-  },
-  {
     "description": "Blob",
     "metadata": {
       "protocol": "query"
     },
     "shapes": {
       "OutputShape": {
-        "resultWrapper": "OperationNameResult",
         "type": "structure",
         "members": {
           "Blob": {
@@ -196,6 +157,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -219,7 +181,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "ListMember": {
             "shape": "ListShape"
@@ -240,6 +201,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -263,7 +225,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "ListMember": {
             "shape": "ListShape"
@@ -285,6 +246,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -308,7 +270,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "ListMember": {
             "shape": "ListType"
@@ -330,6 +291,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -353,7 +315,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "ListMember": {
             "shape": "ListType"
@@ -375,6 +336,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -398,7 +360,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "List": {
             "shape": "ListOfStructs"
@@ -433,6 +394,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -515,7 +477,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "List": {
             "shape": "ListType"
@@ -538,6 +499,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -561,7 +523,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "Map": {
             "shape": "StringMap"
@@ -593,6 +554,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -728,7 +690,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "Map": {
             "shape": "MapType"
@@ -755,6 +716,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
