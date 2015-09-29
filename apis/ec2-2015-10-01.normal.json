@@ -1,12 +1,12 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2015-04-15",
+    "apiVersion":"2015-10-01",
     "endpointPrefix":"ec2",
     "serviceAbbreviation":"Amazon EC2",
     "serviceFullName":"Amazon Elastic Compute Cloud",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://ec2.amazonaws.com/doc/2015-04-15",
+    "xmlNamespace":"http://ec2.amazonaws.com/doc/2015-10-01",
     "protocol":"ec2"
   },
   "documentation":"<fullname>Amazon Elastic Compute Cloud</fullname> <p>Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing capacity in the Amazon Web Services (AWS) cloud. Using Amazon EC2 eliminates your need to invest in hardware up front, so you can develop and deploy applications faster.</p>",
@@ -212,7 +212,7 @@
         "shape":"CancelSpotFleetRequestsResponse",
         "documentation":"<p>Contains the output of CancelSpotFleetRequests.</p>"
       },
-      "documentation":"<p>Cancels the specified Spot fleet requests.</p>"
+      "documentation":"<p>Cancels the specified Spot fleet requests.</p> <p>After you cancel a Spot fleet request, the Spot fleet launches no new Spot instances. You must specify whether the Spot fleet should also terminate its Spot instances. If you terminate the instances, the Spot fleet request enters the <code>cancelled_terminating</code> state. Otherwise, the Spot fleet request enters the <code>cancelled_running</code> state and the instances continue to run until they are interrupted or you terminate them manually.</p>"
     },
     "CancelSpotInstanceRequests":{
       "name":"CancelSpotInstanceRequests",
@@ -1561,6 +1561,22 @@
       "input":{"shape":"ModifySnapshotAttributeRequest"},
       "documentation":"<p>Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single API call. If you need to both add and remove account IDs for a snapshot, you must use multiple API calls.</p> <p>For more information on modifying snapshot permissions, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html\">Sharing Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <note> <p>Snapshots with AWS Marketplace product codes cannot be made public.</p> </note>"
     },
+    "ModifySpotFleetRequest":{
+      "name":"ModifySpotFleetRequest",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ModifySpotFleetRequestRequest",
+        "documentation":"<p>Contains the parameters for ModifySpotFleetRequest.</p>"
+      },
+      "output":{
+        "shape":"ModifySpotFleetRequestResponse",
+        "documentation":"<p>Contains the output of ModifySpotFleetRequest.</p>"
+      },
+      "documentation":"<p>Modifies the specified Spot fleet request.</p> <p>While the Spot fleet request is being modified, it is in the <code>modifying</code> state.</p> <p>To scale up your Spot fleet, increase its target capacity. The Spot fleet launches the additional Spot instances according to the allocation strategy for the Spot fleet request. If the allocation strategy is <code>lowestPrice</code>, the Spot fleet launches instances using the Spot pool with the lowest price. If the allocation strategy is <code>diversified</code>, the Spot fleet distributes the instances across the Spot pools.</p> <p>To scale down your Spot fleet, decrease its target capacity. First, the Spot fleet cancels any open bids that exceed the new target capacity. You can request that the Spot fleet terminate Spot instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is <code>lowestPrice</code>, the Spot fleet terminates the instances with the highest price per unit. If the allocation strategy is <code>diversified</code>, the Spot fleet terminates instances across the Spot pools. Alternatively, you can request that the Spot fleet keep the fleet at its current size, but not replace any Spot instances that are interrupted or that you terminate manually.</p>"
+    },
     "ModifySubnetAttribute":{
       "name":"ModifySubnetAttribute",
       "http":{
@@ -2520,7 +2536,7 @@
         },
         "State":{
           "shape":"AvailabilityZoneState",
-          "documentation":"<p>The state of the Availability Zone (<code>available</code> | <code>impaired</code> | <code>unavailable</code>).</p>",
+          "documentation":"<p>The state of the Availability Zone.</p>",
           "locationName":"zoneState"
         },
         "RegionName":{
@@ -2563,7 +2579,12 @@
     },
     "AvailabilityZoneState":{
       "type":"string",
-      "enum":["available"]
+      "enum":[
+        "available",
+        "information",
+        "impaired",
+        "unavailable"
+      ]
     },
     "BatchState":{
       "type":"string",
@@ -2573,7 +2594,8 @@
         "cancelled",
         "failed",
         "cancelled_running",
-        "cancelled_terminating"
+        "cancelled_terminating",
+        "modifying"
       ]
     },
     "BlockDeviceMapping":{
@@ -4810,7 +4832,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>message</code> - Information about the Availability Zone.</p> </li> <li> <p><code>region-name</code> - The name of the region for the Availability Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p><code>state</code> - The state of the Availability Zone (<code>available</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p><code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>).</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>message</code> - Information about the Availability Zone.</p> </li> <li> <p><code>region-name</code> - The name of the region for the Availability Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p><code>state</code> - The state of the Availability Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p><code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>).</p> </li> </ul>",
           "locationName":"Filter"
         }
       }
@@ -7267,7 +7289,7 @@
         },
         "EventSubType":{
           "shape":"String",
-          "documentation":"<p>The event.</p> <p>The following are the <code>error</code> events.</p> <ul> <li> <p><code>iamFleetRoleInvalid</code> - Spot fleet did not have the required permissions either to launch or terminate an instance.</p> </li> <li> <p><code>spotFleetRequestConfigurationInvalid</code> - The configuration is not valid. For more information, see the description.</p> </li> <li> <p><code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the number of Spot instances that you can launch.</p> </li> </ul> <p>The following are the <code>fleetRequestChange</code> events.</p> <ul> <li> <p><code>active</code> - The Spot fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot instances.</p> </li> <li> <p><code>cancelled</code> - The Spot fleet is canceled and has no running Spot instances. The Spot fleet will be deleted two days after its instances were terminated.</p> </li> <li> <p><code>cancelled_running</code> - The Spot fleet is canceled and will not launch additional Spot instances, but its existing Spot instances continue to run until they are interrupted or terminated.</p> </li> <li> <p><code>cancelled_terminating</code> - The Spot fleet is canceled and its Spot instances are terminating.</p> </li> <li> <p><code>expired</code> - The Spot fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with <code>TerminateInstancesWithExpiration</code> set.</p> </li> <li> <p><code>price_update</code> - The bid price for a launch configuration was adjusted because it was too high. This change is permanent.</p> </li> <li> <p><code>submitted</code> - The Spot fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot instances.</p> </li> </ul> <p>The following are the <code>instanceChange</code> events.</p> <ul> <li> <p><code>launched</code> - A bid was fulfilled and a new instance was launched.</p> </li> <li> <p><code>terminated</code> - An instance was terminated by the user.</p> </li> </ul>",
+          "documentation":"<p>The event.</p> <p>The following are the <code>error</code> events.</p> <ul> <li> <p><code>iamFleetRoleInvalid</code> - The Spot fleet did not have the required permissions either to launch or terminate an instance.</p> </li> <li> <p><code>launchSpecTemporarilyBlacklisted</code> - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.</p> </li> <li> <p><code>spotFleetRequestConfigurationInvalid</code> - The configuration is not valid. For more information, see the description of the event.</p> </li> <li> <p><code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the number of Spot instances that you can launch.</p> </li> </ul> <p>The following are the <code>fleetRequestChange</code> events.</p> <ul> <li> <p><code>active</code> - The Spot fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot instances.</p> </li> <li> <p><code>cancelled</code> - The Spot fleet is canceled and has no running Spot instances. The Spot fleet will be deleted two days after its instances were terminated.</p> </li> <li> <p><code>cancelled_running</code> - The Spot fleet is canceled and will not launch additional Spot instances, but its existing Spot instances continue to run until they are interrupted or terminated.</p> </li> <li> <p><code>cancelled_terminating</code> - The Spot fleet is canceled and its Spot instances are terminating.</p> </li> <li> <p><code>expired</code> - The Spot fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with <code>TerminateInstancesWithExpiration</code> set.</p> </li> <li> <p><code>modify_in_progress</code> - A request to modify the Spot fleet request was accepted and is in progress.</p> </li> <li> <p><code>modify_successful</code> - The Spot fleet request was modified.</p> </li> <li> <p><code>price_update</code> - The bid price for a launch configuration was adjusted because it was too high. This change is permanent.</p> </li> <li> <p><code>submitted</code> - The Spot fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot instances.</p> </li> </ul> <p>The following are the <code>instanceChange</code> events.</p> <ul> <li> <p><code>launched</code> - A bid was fulfilled and a new instance was launched.</p> </li> <li> <p><code>terminated</code> - An instance was terminated by the user.</p> </li> </ul>",
           "locationName":"eventSubType"
         },
         "EventDescription":{
@@ -7284,6 +7306,13 @@
         "instanceChange",
         "fleetRequestChange",
         "error"
+      ]
+    },
+    "ExcessCapacityTerminationPolicy":{
+      "type":"string",
+      "enum":[
+        "noTermination",
+        "default"
       ]
     },
     "ExecutableByStringList":{
@@ -9617,7 +9646,7 @@
         },
         "SecurityGroups":{
           "shape":"GroupIdentifierList",
-          "documentation":"<p>One or more security groups. To request an instance in a nondefault VPC, you must specify the ID of the security group. To request an instance in EC2-Classic or a default VPC, you can specify the name or the ID of the security group.</p>",
+          "documentation":"<p>One or more security groups. When requesting instances in a VPC, you must specify the IDs of the security groups. When requesting instances in EC2-Classic, you can specify the names or the IDs of the security groups.</p>",
           "locationName":"groupSet"
         },
         "UserData":{
@@ -9945,6 +9974,39 @@
           "documentation":"<p>A JSON representation of the snapshot attribute modification.</p>"
         }
       }
+    },
+    "ModifySpotFleetRequestRequest":{
+      "type":"structure",
+      "required":["SpotFleetRequestId"],
+      "members":{
+        "SpotFleetRequestId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the Spot fleet request.</p>",
+          "locationName":"spotFleetRequestId"
+        },
+        "TargetCapacity":{
+          "shape":"Integer",
+          "documentation":"<p>The size of the fleet.</p>",
+          "locationName":"targetCapacity"
+        },
+        "ExcessCapacityTerminationPolicy":{
+          "shape":"ExcessCapacityTerminationPolicy",
+          "documentation":"<p>Indicates whether running Spot instances should be terminated if the target capacity of the Spot fleet request is decreased below the current size of the Spot fleet.</p>",
+          "locationName":"excessCapacityTerminationPolicy"
+        }
+      },
+      "documentation":"<p>Contains the parameters for ModifySpotFleetRequest.</p>"
+    },
+    "ModifySpotFleetRequestResponse":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>",
+          "locationName":"return"
+        }
+      },
+      "documentation":"<p>Contains the output of ModifySpotFleetRequest.</p>"
     },
     "ModifySubnetAttributeRequest":{
       "type":"structure",
@@ -12793,7 +12855,7 @@
         },
         "SecurityGroups":{
           "shape":"GroupIdentifierList",
-          "documentation":"<p>One or more security groups. To request an instance in a nondefault VPC, you must specify the ID of the security group. To request an instance in EC2-Classic or a default VPC, you can specify the name or the ID of the security group.</p>",
+          "documentation":"<p>One or more security groups. When requesting instances in a VPC, you must specify the IDs of the security groups. When requesting instances in EC2-Classic, you can specify the names or the IDs of the security groups.</p>",
           "locationName":"groupSet"
         },
         "UserData":{
@@ -12885,7 +12947,8 @@
       "required":[
         "SpotFleetRequestId",
         "SpotFleetRequestState",
-        "SpotFleetRequestConfig"
+        "SpotFleetRequestConfig",
+        "CreateTime"
       ],
       "members":{
         "SpotFleetRequestId":{
@@ -12902,6 +12965,11 @@
           "shape":"SpotFleetRequestConfigData",
           "documentation":"<p>Information about the configuration of the Spot fleet request.</p>",
           "locationName":"spotFleetRequestConfig"
+        },
+        "CreateTime":{
+          "shape":"DateTime",
+          "documentation":"<p>The creation date and time of the request.</p>",
+          "locationName":"createTime"
         }
       },
       "documentation":"<p>Describes a Spot fleet request.</p>"
@@ -12955,9 +13023,14 @@
           "documentation":"<p>Information about the launch specifications for the Spot fleet request.</p>",
           "locationName":"launchSpecifications"
         },
+        "ExcessCapacityTerminationPolicy":{
+          "shape":"ExcessCapacityTerminationPolicy",
+          "documentation":"<p>Indicates whether running Spot instances should be terminated if the target capacity of the Spot fleet request is decreased below the current size of the Spot fleet.</p>",
+          "locationName":"excessCapacityTerminationPolicy"
+        },
         "AllocationStrategy":{
           "shape":"AllocationStrategy",
-          "documentation":"<p>Determines how to allocate the target capacity across the Spot pools specified by the Spot fleet request. The default is <code>lowestPrice</code>.</p>",
+          "documentation":"<p>Indicates how to allocate the target capacity across the Spot pools specified by the Spot fleet request. The default is <code>lowestPrice</code>.</p>",
           "locationName":"allocationStrategy"
         }
       },
