@@ -197,6 +197,7 @@
       },
       "documentation":"<p>Contains information about the compute type of a WorkSpace bundle.</p>"
     },
+    "ComputerName":{"type":"string"},
     "CreateWorkspacesRequest":{
       "type":"structure",
       "required":["Workspaces"],
@@ -625,6 +626,7 @@
       },
       "documentation":"<p>Contains information about the user storage for a WorkSpace bundle.</p>"
     },
+    "VolumeEncryptionKey":{"type":"string"},
     "Workspace":{
       "type":"structure",
       "members":{
@@ -663,6 +665,22 @@
         "ErrorCode":{
           "shape":"WorkspaceErrorCode",
           "documentation":"<p>If the WorkSpace could not be created, this contains the error code.</p>"
+        },
+        "ComputerName":{
+          "shape":"ComputerName",
+          "documentation":"<p>The name of the WorkSpace as seen by the operating system.</p>"
+        },
+        "VolumeEncryptionKey":{
+          "shape":"VolumeEncryptionKey",
+          "documentation":"<p>The KMS key used to encrypt data stored on your WorkSpace.</p>"
+        },
+        "UserVolumeEncryptionEnabled":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Specifies whether the data stored on the user volume, or D: drive, is encrypted.</p>"
+        },
+        "RootVolumeEncryptionEnabled":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Specifies whether the data stored on the root volume, or C: drive, is encrypted.</p>"
         }
       },
       "documentation":"<p>Contains information about a WorkSpace.</p>"
@@ -802,6 +820,18 @@
         "BundleId":{
           "shape":"BundleId",
           "documentation":"<p>The identifier of the bundle to create the WorkSpace from. You can use the <a>DescribeWorkspaceBundles</a> operation to obtain a list of the bundles that are available.</p>"
+        },
+        "VolumeEncryptionKey":{
+          "shape":"VolumeEncryptionKey",
+          "documentation":"<p>The KMS key used to encrypt data stored on your WorkSpace.</p>"
+        },
+        "UserVolumeEncryptionEnabled":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Specifies whether the data stored on the user volume, or D: drive, is encrypted.</p>"
+        },
+        "RootVolumeEncryptionEnabled":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Specifies whether the data stored on the root volume, or C: drive, is encrypted.</p>"
         }
       },
       "documentation":"<p>Contains information about a WorkSpace creation request.</p>"
@@ -827,5 +857,7 @@
         "ERROR"
       ]
     }
+  },
+  "examples":{
   }
 }
