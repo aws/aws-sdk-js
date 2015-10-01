@@ -96,6 +96,9 @@
     "prefix": "elasticmapreduce",
     "name": "EMR"
   },
+  "es": {
+    "name": "ES"
+  },
   "elastictranscoder": {
     "name": "ElasticTranscoder"
   },
