@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.2.5
+// AWS SDK for JavaScript v2.2.6
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -282,7 +282,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.2.5',
+  VERSION: '2.2.6',
 
 
   Signers: {},
@@ -872,6 +872,18 @@ var DynamoDBSet = require('./set');
 AWS.DynamoDB.DocumentClient = AWS.util.inherit({
 
 
+  operations: {
+    batchGetItem: 'batchGet',
+    batchWriteItem: 'batchWrite',
+    putItem: 'put',
+    getItem: 'get',
+    deleteItem: 'delete',
+    updateItem: 'update',
+    scan: 'scan',
+    query: 'query'
+  },
+
+
   constructor: function DocumentClient(options) {
     var self = this;
     self.options = options || {};
@@ -903,14 +915,11 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
 
-  batchGet: function(input, callback) {
+  batchGet: function(params, callback) {
     var self = this;
-    var translator = self.getTranslator();
-    var inputShape = self.service.api.operations.batchGetItem.input;
-    var outputShape = self.service.api.operations.batchGetItem.output;
-    var params = translator.translateInput(input, inputShape);
     var request = self.service.batchGetItem(params);
-    self.setupRequest(request, outputShape, translator);
+    self.setupRequest(request);
+    self.setupResponse(request);
     if (typeof callback === 'function') {
       request.send(callback);
     }
@@ -918,14 +927,11 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
 
-  batchWrite: function(input, callback) {
+  batchWrite: function(params, callback) {
     var self = this;
-    var translator = self.getTranslator();
-    var inputShape = self.service.api.operations.batchWriteItem.input;
-    var outputShape = self.service.api.operations.batchWriteItem.output;
-    var params = translator.translateInput(input, inputShape);
     var request = self.service.batchWriteItem(params);
-    self.setupRequest(request, outputShape, translator);
+    self.setupRequest(request);
+    self.setupResponse(request);
     if (typeof callback === 'function') {
       request.send(callback);
     }
@@ -933,14 +939,11 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
 
-  delete: function(input, callback) {
+  delete: function(params, callback) {
     var self = this;
-    var translator = self.getTranslator();
-    var inputShape = self.service.api.operations.deleteItem.input;
-    var outputShape = self.service.api.operations.deleteItem.output;
-    var params = translator.translateInput(input, inputShape);
     var request = self.service.deleteItem(params);
-    self.setupRequest(request, outputShape, translator);
+    self.setupRequest(request);
+    self.setupResponse(request);
     if (typeof callback === 'function') {
       request.send(callback);
     }
@@ -948,14 +951,11 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
 
-  get: function(input, callback) {
+  get: function(params, callback) {
     var self = this;
-    var translator = self.getTranslator();
-    var inputShape = self.service.api.operations.getItem.input;
-    var outputShape = self.service.api.operations.getItem.output;
-    var params = translator.translateInput(input, inputShape);
     var request = self.service.getItem(params);
-    self.setupRequest(request, outputShape, translator);
+    self.setupRequest(request);
+    self.setupResponse(request);
     if (typeof callback === 'function') {
       request.send(callback);
     }
@@ -963,14 +963,11 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
 
-  put: function(input, callback) {
+  put: function put(params, callback) {
     var self = this;
-    var translator = self.getTranslator();
-    var inputShape = self.service.api.operations.putItem.input;
-    var outputShape = self.service.api.operations.putItem.output;
-    var params = translator.translateInput(input, inputShape);
     var request = self.service.putItem(params);
-    self.setupRequest(request, outputShape, translator);
+    self.setupRequest(request);
+    self.setupResponse(request);
     if (typeof callback === 'function') {
       request.send(callback);
     }
@@ -978,14 +975,11 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
 
-  update: function(input, callback) {
+  update: function(params, callback) {
     var self = this;
-    var translator = self.getTranslator();
-    var inputShape = self.service.api.operations.updateItem.input;
-    var outputShape = self.service.api.operations.updateItem.output;
-    var params = translator.translateInput(input, inputShape);
     var request = self.service.updateItem(params);
-    self.setupRequest(request, outputShape, translator);
+    self.setupRequest(request);
+    self.setupResponse(request);
     if (typeof callback === 'function') {
       request.send(callback);
     }
@@ -993,14 +987,11 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
 
-  scan: function(input, callback) {
+  scan: function(params, callback) {
     var self = this;
-    var translator = self.getTranslator();
-    var inputShape = self.service.api.operations.scan.input;
-    var outputShape = self.service.api.operations.scan.output;
-    var params = translator.translateInput(input, inputShape);
     var request = self.service.scan(params);
-    self.setupRequest(request, outputShape, translator);
+    self.setupRequest(request);
+    self.setupResponse(request);
     if (typeof callback === 'function') {
       request.send(callback);
     }
@@ -1008,14 +999,11 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
 
-  query: function(input, callback) {
+  query: function(params, callback) {
     var self = this;
-    var translator = self.getTranslator();
-    var inputShape = self.service.api.operations.query.input;
-    var outputShape = self.service.api.operations.query.output;
-    var params = translator.translateInput(input, inputShape);
     var request = self.service.query(params);
-    self.setupRequest(request, outputShape, translator);
+    self.setupRequest(request);
+    self.setupResponse(request);
     if (typeof callback === 'function') {
       request.send(callback);
     }
@@ -1034,11 +1022,55 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
   },
 
 
-  setupRequest: function(request, shape, translator) {
-    request.on('extractData', function(response) {
-      var output = translator.translateOutput(response.data, shape);
-      response.data = output;
+  setupRequest: function setupRequest(request) {
+    var self = this;
+    var translator = self.getTranslator();
+    var operation = request.operation;
+    var inputShape = request.service.api.operations[operation].input;
+    request._events.validate.unshift(function(req) {
+      req.rawParams = AWS.util.copy(req.params);
+      req.params = translator.translateInput(req.rawParams, inputShape);
     });
+  },
+
+
+  setupResponse: function setupResponse(request) {
+    var self = this;
+    var translator = self.getTranslator();
+    var outputShape = self.service.api.operations[request.operation].output;
+    request.on('extractData', function(response) {
+      response.data = translator.translateOutput(response.data, outputShape);
+    });
+
+    var response = request.response;
+    response.nextPage = function(cb) {
+      var resp = this;
+      var req = resp.request;
+      var config;
+      var service = req.service;
+      var operation = req.operation;
+      try {
+        config = service.paginationConfig(operation, true);
+      } catch (e) { resp.error = e; }
+
+      if (!resp.hasNextPage()) {
+        if (cb) cb(resp.error, null);
+        else if (resp.error) throw resp.error;
+        return null;
+      }
+
+      var params = AWS.util.copy(req.rawParams);
+      if (!resp.nextPageTokens) {
+        return cb ? cb(null, null) : null;
+      } else {
+        var inputTokens = config.inputToken;
+        if (typeof inputTokens === 'string') inputTokens = [inputTokens];
+        for (var i = 0; i < inputTokens.length; i++) {
+          params[inputTokens[i]] = resp.nextPageTokens[i];
+        }
+        return self[operation](params, cb);
+      }
+    };
   }
 
 });
@@ -4293,9 +4325,10 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
   finishSinglePart: function finishSinglePart(err, data) {
     var upload = this.request._managedUpload;
     var httpReq = this.request.httpRequest;
-    var url = AWS.util.urlFormat(httpReq.endpoint);
+    var endpoint = httpReq.endpoint;
     if (err) return upload.callback(err);
-    data.Location = url.substr(0, url.length - 1) + httpReq.path;
+    data.Location =
+      [endpoint.protocol, '//', endpoint.host, httpReq.path].join('');
     upload.callback(err, data);
   },
 
