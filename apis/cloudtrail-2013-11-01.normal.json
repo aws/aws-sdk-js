@@ -12,6 +12,104 @@
   },
   "documentation":"<fullname>AWS CloudTrail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <note> As an alternative to using the API, you can use one of the AWS SDKs, which consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to AWSCloudTrail. For example, the SDKs take care of cryptographically signing requests, managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services page</a>. </note> <p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>",
   "operations":{
+    "AddTags":{
+      "name":"AddTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"AddTagsRequest",
+        "documentation":"<p>Specifies the tags to add to a trail.</p>"
+      },
+      "output":{
+        "shape":"AddTagsResponse",
+        "documentation":"<p> Returns the objects or data listed below if successful. Otherwise, returns an error. </p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{
+            "code":"ResourceNotFound",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the specified resource is not found.</p>"
+        },
+        {
+          "shape":"CloudTrailARNInvalidException",
+          "error":{
+            "code":"CloudTrailARNInvalid",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>. </p>"
+        },
+        {
+          "shape":"ResourceTypeNotSupportedException",
+          "error":{
+            "code":"ResourceTypeNotSupported",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the specified resource type is not supported by CloudTrail.</p>"
+        },
+        {
+          "shape":"TagsLimitExceededException",
+          "error":{
+            "code":"TagsLimitExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>The number of tags per trail has exceeded the permitted amount. Currently, the limit is 10.</p>"
+        },
+        {
+          "shape":"InvalidTrailNameException",
+          "error":{
+            "code":"InvalidTrailName",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
+        },
+        {
+          "shape":"InvalidTagParameterException",
+          "error":{
+            "code":"InvalidTagParameter",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the key or value specified for the tag does not match the regular expression <code>^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$</code>.</p>"
+        },
+        {
+          "shape":"UnsupportedOperationException",
+          "error":{
+            "code":"UnsupportedOperation",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.</p>"
+        },
+        {
+          "shape":"OperationNotPermittedException",
+          "error":{
+            "code":"OperationNotPermitted",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not permitted.</p>"
+        }
+      ],
+      "documentation":"<p>Adds one or more tags to a trail, up to a limit of 10. Tags must be unique per trail. Overwrites an existing tag's value when a new value is specified for an existing tag key. If you specify a key without a value, the tag will be created with the specified key and a value of null.</p>"
+    },
     "CreateTrail":{
       "name":"CreateTrail",
       "http":{
@@ -78,6 +176,16 @@
           "documentation":"<p>This exception is thrown when the policy on the SNS topic is not sufficient.</p>"
         },
         {
+          "shape":"InsufficientEncryptionPolicyException",
+          "error":{
+            "code":"InsufficientEncryptionPolicy",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient."
+        },
+        {
           "shape":"InvalidS3BucketNameException",
           "error":{
             "code":"InvalidS3BucketName",
@@ -105,7 +213,17 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>This exception is thrown when the provided SNS topic name is not valid. </p>"
+          "documentation":"<p>This exception is thrown when the provided SNS topic name is not valid.</p>"
+        },
+        {
+          "shape":"InvalidKmsKeyIdException",
+          "error":{
+            "code":"InvalidKmsKeyId",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the KMS key ARN is invalid."
         },
         {
           "shape":"InvalidTrailNameException",
@@ -115,7 +233,37 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
+        },
+        {
+          "shape":"TrailNotProvidedException",
+          "error":{
+            "code":"TrailNotProvided",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is deprecated.</p>"
+        },
+        {
+          "shape":"KmsKeyNotFoundException",
+          "error":{
+            "code":"KmsKeyNotFound",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region."
+        },
+        {
+          "shape":"KmsKeyDisabledException",
+          "error":{
+            "code":"KmsKeyDisabled",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the KMS key is disabled.</p>"
         },
         {
           "shape":"InvalidCloudWatchLogsLogGroupArnException",
@@ -146,9 +294,29 @@
           },
           "exception":true,
           "documentation":"<p>Cannot set a CloudWatch Logs delivery for this region.</p>"
+        },
+        {
+          "shape":"UnsupportedOperationException",
+          "error":{
+            "code":"UnsupportedOperation",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.</p>"
+        },
+        {
+          "shape":"OperationNotPermittedException",
+          "error":{
+            "code":"OperationNotPermitted",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not permitted.</p>"
         }
       ],
-      "documentation":"<p>From the command line, use <code>create-subscription</code>. </p> <p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. </p>"
+      "documentation":"<p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. </p>"
     },
     "DeleteTrail":{
       "name":"DeleteTrail",
@@ -183,10 +351,10 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
         }
       ],
-      "documentation":"<p>Deletes a trail.</p>"
+      "documentation":"<p>Deletes a trail. This operation must be called from the region in which the trail was created.</p>"
     },
     "DescribeTrails":{
       "name":"DescribeTrails",
@@ -202,6 +370,28 @@
         "shape":"DescribeTrailsResponse",
         "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
       },
+      "errors":[
+        {
+          "shape":"UnsupportedOperationException",
+          "error":{
+            "code":"UnsupportedOperation",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.</p>"
+        },
+        {
+          "shape":"OperationNotPermittedException",
+          "error":{
+            "code":"OperationNotPermitted",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not permitted.</p>"
+        }
+      ],
       "documentation":"<p>Retrieves settings for the trail associated with the current region for your account.</p>"
     },
     "GetTrailStatus":{
@@ -237,10 +427,156 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
         }
       ],
-      "documentation":"<p>Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. </p>"
+      "documentation":"<p>Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.</p>"
+    },
+    "ListPublicKeys":{
+      "name":"ListPublicKeys",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ListPublicKeysRequest",
+        "documentation":"<p>Requests the public keys for a specified time range.</p>"
+      },
+      "output":{
+        "shape":"ListPublicKeysResponse",
+        "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
+      },
+      "errors":[
+        {
+          "shape":"InvalidTimeRangeException",
+          "error":{
+            "code":"InvalidTimeRange",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values. </p>"
+        },
+        {
+          "shape":"UnsupportedOperationException",
+          "error":{
+            "code":"UnsupportedOperation",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.</p>"
+        },
+        {
+          "shape":"OperationNotPermittedException",
+          "error":{
+            "code":"OperationNotPermitted",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not permitted.</p>"
+        },
+        {
+          "shape":"InvalidTokenException",
+          "error":{
+            "code":"InvalidToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>Reserved for future use.</p>"
+        }
+      ],
+      "documentation":"<p>Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.</p> <note>CloudTrail uses different private/public key pairs per region. Each digest file is signed with a private key unique to its region. Therefore, when you validate a digest file from a particular region, you must look in the same region for its corresponding public key.</note>"
+    },
+    "ListTags":{
+      "name":"ListTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"ListTagsRequest",
+        "documentation":"<p>Specifies a list of trail tags to return.</p>"
+      },
+      "output":{
+        "shape":"ListTagsResponse",
+        "documentation":"<p> Returns the objects or data listed below if successful. Otherwise, returns an error. </p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{
+            "code":"ResourceNotFound",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the specified resource is not found.</p>"
+        },
+        {
+          "shape":"CloudTrailARNInvalidException",
+          "error":{
+            "code":"CloudTrailARNInvalid",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>. </p>"
+        },
+        {
+          "shape":"ResourceTypeNotSupportedException",
+          "error":{
+            "code":"ResourceTypeNotSupported",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the specified resource type is not supported by CloudTrail.</p>"
+        },
+        {
+          "shape":"InvalidTrailNameException",
+          "error":{
+            "code":"InvalidTrailName",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
+        },
+        {
+          "shape":"UnsupportedOperationException",
+          "error":{
+            "code":"UnsupportedOperation",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.</p>"
+        },
+        {
+          "shape":"OperationNotPermittedException",
+          "error":{
+            "code":"OperationNotPermitted",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not permitted.</p>"
+        },
+        {
+          "shape":"InvalidTokenException",
+          "error":{
+            "code":"InvalidToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>Reserved for future use.</p>"
+        }
+      ],
+      "documentation":"<p>Lists the tags for the trail in the current region.</p>"
     },
     "LookupEvents":{
       "name":"LookupEvents",
@@ -298,7 +634,95 @@
           "documentation":"<p>Invalid token or token that was previously used in a request with different parameters. This exception is thrown if the token is invalid. </p>"
         }
       ],
-      "documentation":"<p>Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports five different attributes: time range (defined by a start time and end time), user name, event name, resource type, and resource name. All attributes are optional. The maximum number of attributes that can be specified in any one lookup request are time range and one other attribute. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results. The rate of lookup requests is limited to one per second per account.</p> <important>Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred.</important>"
+      "documentation":"<p>Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports five different attributes: time range (defined by a start time and end time), user name, event name, resource type, and resource name. All attributes are optional. The maximum number of attributes that can be specified in any one lookup request are time range and one other attribute. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results. </p> <important>The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs. </important> <important>Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred.</important>"
+    },
+    "RemoveTags":{
+      "name":"RemoveTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"RemoveTagsRequest",
+        "documentation":"<p>Specifies the tags to remove from a trail.</p>"
+      },
+      "output":{
+        "shape":"RemoveTagsResponse",
+        "documentation":"<p> Returns the objects or data listed below if successful. Otherwise, returns an error. </p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{
+            "code":"ResourceNotFound",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the specified resource is not found.</p>"
+        },
+        {
+          "shape":"CloudTrailARNInvalidException",
+          "error":{
+            "code":"CloudTrailARNInvalid",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>. </p>"
+        },
+        {
+          "shape":"ResourceTypeNotSupportedException",
+          "error":{
+            "code":"ResourceTypeNotSupported",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the specified resource type is not supported by CloudTrail.</p>"
+        },
+        {
+          "shape":"InvalidTrailNameException",
+          "error":{
+            "code":"InvalidTrailName",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
+        },
+        {
+          "shape":"InvalidTagParameterException",
+          "error":{
+            "code":"InvalidTagParameter",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the key or value specified for the tag does not match the regular expression <code>^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$</code>.</p>"
+        },
+        {
+          "shape":"UnsupportedOperationException",
+          "error":{
+            "code":"UnsupportedOperation",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.</p>"
+        },
+        {
+          "shape":"OperationNotPermittedException",
+          "error":{
+            "code":"OperationNotPermitted",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not permitted.</p>"
+        }
+      ],
+      "documentation":"<p>Removes the specified tags from a trail.</p>"
     },
     "StartLogging":{
       "name":"StartLogging",
@@ -333,10 +757,10 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
         }
       ],
-      "documentation":"<p>Starts the recording of AWS API calls and log file delivery for a trail.</p>"
+      "documentation":"<p>Starts the recording of AWS API calls and log file delivery for a trail. </p>"
     },
     "StopLogging":{
       "name":"StopLogging",
@@ -371,10 +795,10 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
         }
       ],
-      "documentation":"<p>Suspends the recording of AWS API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording.</p>"
+      "documentation":"<p>Suspends the recording of AWS API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. </p>"
     },
     "UpdateTrail":{
       "name":"UpdateTrail",
@@ -422,6 +846,16 @@
           "documentation":"<p>This exception is thrown when the policy on the SNS topic is not sufficient.</p>"
         },
         {
+          "shape":"InsufficientEncryptionPolicyException",
+          "error":{
+            "code":"InsufficientEncryptionPolicy",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient."
+        },
+        {
           "shape":"TrailNotFoundException",
           "error":{
             "code":"TrailNotFound",
@@ -459,7 +893,17 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>This exception is thrown when the provided SNS topic name is not valid. </p>"
+          "documentation":"<p>This exception is thrown when the provided SNS topic name is not valid.</p>"
+        },
+        {
+          "shape":"InvalidKmsKeyIdException",
+          "error":{
+            "code":"InvalidKmsKeyId",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the KMS key ARN is invalid."
         },
         {
           "shape":"InvalidTrailNameException",
@@ -469,7 +913,37 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
+        },
+        {
+          "shape":"TrailNotProvidedException",
+          "error":{
+            "code":"TrailNotProvided",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is deprecated.</p>"
+        },
+        {
+          "shape":"KmsKeyNotFoundException",
+          "error":{
+            "code":"KmsKeyNotFound",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region."
+        },
+        {
+          "shape":"KmsKeyDisabledException",
+          "error":{
+            "code":"KmsKeyDisabled",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the KMS key is disabled.</p>"
         },
         {
           "shape":"InvalidCloudWatchLogsLogGroupArnException",
@@ -500,13 +974,67 @@
           },
           "exception":true,
           "documentation":"<p>Cannot set a CloudWatch Logs delivery for this region.</p>"
+        },
+        {
+          "shape":"UnsupportedOperationException",
+          "error":{
+            "code":"UnsupportedOperation",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.</p>"
+        },
+        {
+          "shape":"OperationNotPermittedException",
+          "error":{
+            "code":"OperationNotPermitted",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown when the requested operation is not permitted.</p>"
         }
       ],
-      "documentation":"<p>From the command line, use <code>update-subscription</code>.</p> <p>Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. </p>"
+      "documentation":"<p>Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. </p>"
     }
   },
   "shapes":{
+    "AddTagsRequest":{
+      "type":"structure",
+      "required":["ResourceId"],
+      "members":{
+        "ResourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+        },
+        "TagsList":{
+          "shape":"TagsList",
+          "documentation":"<p>Contains a list of CloudTrail tags, up to a limit of 10.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the tags to add to a trail.</p>"
+    },
+    "AddTagsResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p> Returns the objects or data listed below if successful. Otherwise, returns an error. </p>"
+    },
     "Boolean":{"type":"boolean"},
+    "ByteBuffer":{"type":"blob"},
+    "CloudTrailARNInvalidException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"CloudTrailARNInvalid",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>. </p>"
+    },
     "CloudWatchLogsDeliveryUnavailableException":{
       "type":"structure",
       "members":{
@@ -528,23 +1056,27 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the trail.</p>"
+          "documentation":"<p>Specifies the name of the trail. The name must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
         },
         "S3BucketName":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon S3 bucket designated for publishing log files.</p>"
+          "documentation":"<p>Specifies the name of the Amazon S3 bucket designated for publishing log files. See <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html\">Amazon S3 Bucket Naming Requirements</a>.</p>"
         },
         "S3KeyPrefix":{
           "shape":"String",
-          "documentation":"<p>Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.</p>"
+          "documentation":"<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html\">Finding Your CloudTrail Log Files</a>. The maximum length is 200 characters.</p>"
         },
         "SnsTopicName":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery.</p>"
+          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.</p>"
         },
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+        },
+        "EnableLogFileValidation":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether log file integrity validation is enabled. The default is false.</p> <note>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</note>"
         },
         "CloudWatchLogsLogGroupArn":{
           "shape":"String",
@@ -552,7 +1084,11 @@
         },
         "CloudWatchLogsRoleArn":{
           "shape":"String",
-          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be a an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li>alias/MyAliasName</li> <li>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</li> <li>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</li> <li>12345678-1234-1234-1234-123456789012</li> </ul>"
         }
       },
       "documentation":"<p>Specifies the settings for each trail.</p>"
@@ -570,7 +1106,7 @@
         },
         "S3KeyPrefix":{
           "shape":"String",
-          "documentation":"<p>Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.</p>"
+          "documentation":"<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html\">Finding Your CloudTrail Log Files</a>.</p>"
         },
         "SnsTopicName":{
           "shape":"String",
@@ -580,13 +1116,25 @@
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
         },
+        "TrailARN":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ARN of the trail that was created.</p>"
+        },
+        "LogFileValidationEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether log file integrity validation is enabled.</p>"
+        },
         "CloudWatchLogsLogGroupArn":{
           "shape":"String",
           "documentation":"<p>Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs will be delivered.</p>"
         },
         "CloudWatchLogsRoleArn":{
           "shape":"String",
-          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code>"
         }
       },
       "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
@@ -598,7 +1146,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of a trail to be deleted.</p>"
+          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail to be deleted. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
         }
       },
       "documentation":"<a>The request that specifies the name of a trail to delete.</a>"
@@ -614,7 +1162,7 @@
       "members":{
         "trailNameList":{
           "shape":"TrailNameList",
-          "documentation":"<p>The trail returned.</p>"
+          "documentation":"<p>Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>. If an empty list is specified, information for the trail in the current region is returned.</p>"
         }
       },
       "documentation":"<p>Returns information about the trail.</p>"
@@ -624,7 +1172,7 @@
       "members":{
         "trailList":{
           "shape":"TrailList",
-          "documentation":"<p>The list of trails.</p>"
+          "documentation":"<p>The list of trail objects.</p>"
         }
       },
       "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
@@ -669,7 +1217,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of the trail for which you are requesting the current status.</p>"
+          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
         }
       },
       "documentation":"<p>The name of a trail about which you want the current status.</p>"
@@ -683,7 +1231,7 @@
         },
         "LatestDeliveryError":{
           "shape":"String",
-          "documentation":"<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver log files to the designated bucket. For more information see the topic <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error Responses</a> in the Amazon S3 API Reference. </p>"
+          "documentation":"<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver log files to the designated bucket. For more information see the topic <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error Responses</a> in the Amazon S3 API Reference. </p> <note>This error occurs only when there is a problem with the destination S3 bucket and will not occur for timeouts. To resolve the issue, create a new bucket and call <code>UpdateTrail</code> to specify the new bucket, or fix the existing objects so that CloudTrail can again write to the bucket. </note>"
         },
         "LatestNotificationError":{
           "shape":"String",
@@ -712,9 +1260,53 @@
         "LatestCloudWatchLogsDeliveryTime":{
           "shape":"Date",
           "documentation":"<p>Displays the most recent date and time when CloudTrail delivered logs to CloudWatch Logs.</p>"
+        },
+        "LatestDigestDeliveryTime":{
+          "shape":"Date",
+          "documentation":"<p>Specifies the date and time that CloudTrail last delivered a digest file to an account's Amazon S3 bucket.</p>"
+        },
+        "LatestDigestDeliveryError":{
+          "shape":"String",
+          "documentation":"<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver a digest file to the designated bucket. For more information see the topic <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error Responses</a> in the Amazon S3 API Reference. </p> <note>This error occurs only when there is a problem with the destination S3 bucket and will not occur for timeouts. To resolve the issue, create a new bucket and call <code>UpdateTrail</code> to specify the new bucket, or fix the existing objects so that CloudTrail can again write to the bucket. </note>"
+        },
+        "LatestDeliveryAttemptTime":{
+          "shape":"String",
+          "documentation":"<p>This field is deprecated.</p>"
+        },
+        "LatestNotificationAttemptTime":{
+          "shape":"String",
+          "documentation":"<p>This field is deprecated.</p>"
+        },
+        "LatestNotificationAttemptSucceeded":{
+          "shape":"String",
+          "documentation":"<p>This field is deprecated.</p>"
+        },
+        "LatestDeliveryAttemptSucceeded":{
+          "shape":"String",
+          "documentation":"<p>This field is deprecated.</p>"
+        },
+        "TimeLoggingStarted":{
+          "shape":"String",
+          "documentation":"<p>This field is deprecated.</p>"
+        },
+        "TimeLoggingStopped":{
+          "shape":"String",
+          "documentation":"<p>This field is deprecated.</p>"
         }
       },
       "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
+    },
+    "InsufficientEncryptionPolicyException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InsufficientEncryptionPolicy",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient."
     },
     "InsufficientS3BucketPolicyException":{
       "type":"structure",
@@ -763,6 +1355,18 @@
       },
       "exception":true,
       "documentation":"<p>This exception is thrown when the provided role is not valid.</p>"
+    },
+    "InvalidKmsKeyIdException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidKmsKeyId",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"This exception is thrown when the KMS key ARN is invalid."
     },
     "InvalidLookupAttributesException":{
       "type":"structure",
@@ -834,7 +1438,19 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>This exception is thrown when the provided SNS topic name is not valid. </p>"
+      "documentation":"<p>This exception is thrown when the provided SNS topic name is not valid.</p>"
+    },
+    "InvalidTagParameterException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidTagParameter",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>This exception is thrown when the key or value specified for the tag does not match the regular expression <code>^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$</code>.</p>"
     },
     "InvalidTimeRangeException":{
       "type":"structure",
@@ -848,6 +1464,18 @@
       "exception":true,
       "documentation":"<p>Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values. </p>"
     },
+    "InvalidTokenException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidToken",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>Reserved for future use.</p>"
+    },
     "InvalidTrailNameException":{
       "type":"structure",
       "members":{
@@ -858,7 +1486,89 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
+      "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
+    },
+    "KmsKeyDisabledException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"KmsKeyDisabled",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>This exception is thrown when the KMS key is disabled.</p>"
+    },
+    "KmsKeyNotFoundException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"KmsKeyNotFound",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region."
+    },
+    "ListPublicKeysRequest":{
+      "type":"structure",
+      "members":{
+        "StartTime":{
+          "shape":"Date",
+          "documentation":"<p>Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used, and the current public key is returned. </p>"
+        },
+        "EndTime":{
+          "shape":"Date",
+          "documentation":"<p>Optionally specifies, in UTC, the end of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used. </p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>Reserved for future use.</p>"
+        }
+      },
+      "documentation":"<p>Requests the public keys for a specified time range.</p>"
+    },
+    "ListPublicKeysResponse":{
+      "type":"structure",
+      "members":{
+        "PublicKeyList":{
+          "shape":"PublicKeyList",
+          "documentation":"<p>Contains an array of PublicKey objects.</p> <note>The returned public keys may have validity time ranges that overlap.</note>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>Reserved for future use.</p>"
+        }
+      },
+      "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
+    },
+    "ListTagsRequest":{
+      "type":"structure",
+      "required":["ResourceIdList"],
+      "members":{
+        "ResourceIdList":{
+          "shape":"ResourceIdList",
+          "documentation":"<p>Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>Reserved for future use.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a list of trail tags to return.</p>"
+    },
+    "ListTagsResponse":{
+      "type":"structure",
+      "members":{
+        "ResourceTagList":{"shape":"ResourceTagList"},
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p> Reserved for future use. </p>"
+        }
+      },
+      "documentation":"<p> Returns the objects or data listed below if successful. Otherwise, returns an error. </p>"
     },
     "LookupAttribute":{
       "type":"structure",
@@ -950,6 +1660,65 @@
       "documentation":"<p>This exception is thrown when the maximum number of trails is reached.</p>"
     },
     "NextToken":{"type":"string"},
+    "OperationNotPermittedException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"OperationNotPermitted",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>This exception is thrown when the requested operation is not permitted.</p>"
+    },
+    "PublicKey":{
+      "type":"structure",
+      "members":{
+        "Value":{
+          "shape":"ByteBuffer",
+          "documentation":"<p>The DER encoded public key value in PKCS#1 format.</p>"
+        },
+        "ValidityStartTime":{
+          "shape":"Date",
+          "documentation":"<p>The starting time of validity of the public key.</p>"
+        },
+        "ValidityEndTime":{
+          "shape":"Date",
+          "documentation":"<p>The ending time of validity of the public key.</p>"
+        },
+        "Fingerprint":{
+          "shape":"String",
+          "documentation":"<p>The fingerprint of the public key.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about a returned public key.</p>"
+    },
+    "PublicKeyList":{
+      "type":"list",
+      "member":{"shape":"PublicKey"}
+    },
+    "RemoveTagsRequest":{
+      "type":"structure",
+      "required":["ResourceId"],
+      "members":{
+        "ResourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+        },
+        "TagsList":{
+          "shape":"TagsList",
+          "documentation":"<p>Specifies a list of tags to be removed. </p>"
+        }
+      },
+      "documentation":"<p>Specifies the tags to remove from a trail.</p>"
+    },
+    "RemoveTagsResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p> Returns the objects or data listed below if successful. Otherwise, returns an error. </p>"
+    },
     "Resource":{
       "type":"structure",
       "members":{
@@ -964,10 +1733,54 @@
       },
       "documentation":"<p>Specifies the type and name of a resource referenced by an event.</p>"
     },
+    "ResourceIdList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "ResourceList":{
       "type":"list",
       "member":{"shape":"Resource"},
       "documentation":"<p>A list of resources referenced by the event returned.</p>"
+    },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"ResourceNotFound",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>This exception is thrown when the specified resource is not found.</p>"
+    },
+    "ResourceTag":{
+      "type":"structure",
+      "members":{
+        "ResourceId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ARN of the resource.</p>"
+        },
+        "TagsList":{"shape":"TagsList"}
+      },
+      "documentation":"<p>A resource tag.</p>"
+    },
+    "ResourceTagList":{
+      "type":"list",
+      "member":{"shape":"ResourceTag"},
+      "documentation":"<p>A list of resource tags.</p>"
+    },
+    "ResourceTypeNotSupportedException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"ResourceTypeNotSupported",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>This exception is thrown when the specified resource type is not supported by CloudTrail.</p>"
     },
     "S3BucketDoesNotExistException":{
       "type":"structure",
@@ -987,7 +1800,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of the trail for which CloudTrail logs AWS API calls.</p>"
+          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
         }
       },
       "documentation":"<p>The request to CloudTrail to start logging AWS API calls for an account.</p>"
@@ -1004,7 +1817,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Communicates to CloudTrail the name of the trail for which to stop logging AWS API calls.</p>"
+          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging AWS API calls. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
         }
       },
       "documentation":"<p>Passes the request to CloudTrail to stop logging AWS API calls for the specified account.</p>"
@@ -1016,28 +1829,68 @@
       "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
     },
     "String":{"type":"string"},
+    "Tag":{
+      "type":"structure",
+      "required":["Key"],
+      "members":{
+        "Key":{
+          "shape":"String",
+          "documentation":"<p>The key in a key-value pair. The key must be must be no longer than 128 Unicode characters. The key must be unique for the resource to which it applies.</p>"
+        },
+        "Value":{
+          "shape":"String",
+          "documentation":"<p>The value in a key-value pair of a tag. The value must be no longer than 256 Unicode characters.</p>"
+        }
+      },
+      "documentation":"<p>A custom key-value pair associated with a resource such as a CloudTrail trail.</p>"
+    },
+    "TagsLimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"TagsLimitExceeded",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>The number of tags per trail has exceeded the permitted amount. Currently, the limit is 10.</p>"
+    },
+    "TagsList":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "documentation":"<p>A list of tags.</p>"
+    },
     "Trail":{
       "type":"structure",
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Name of the trail set by calling <a>CreateTrail</a>.</p>"
+          "documentation":"<p>Name of the trail set by calling <a>CreateTrail</a>. The maximum length is 128 characters.</p>"
         },
         "S3BucketName":{
           "shape":"String",
-          "documentation":"<p>Name of the Amazon S3 bucket into which CloudTrail delivers your trail files. </p>"
+          "documentation":"<p>Name of the Amazon S3 bucket into which CloudTrail delivers your trail files. See <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html\">Amazon S3 Bucket Naming Requirements</a>.</p>"
         },
         "S3KeyPrefix":{
           "shape":"String",
-          "documentation":"<p>Value of the Amazon S3 prefix.</p>"
+          "documentation":"<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html\">Finding Your CloudTrail Log Files</a>.The maximum length is 200 characters.</p>"
         },
         "SnsTopicName":{
           "shape":"String",
-          "documentation":"<p>Name of the existing Amazon SNS topic that CloudTrail uses to notify the account owner when new CloudTrail log files have been delivered. </p>"
+          "documentation":"<p>Name of the existing Amazon SNS topic that CloudTrail uses to notify the account owner when new CloudTrail log files have been delivered. The maximum length is 256 characters.</p>"
         },
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
           "documentation":"<p>Set to <b>True</b> to include AWS API calls from AWS global services such as IAM. Otherwise, <b>False</b>.</p>"
+        },
+        "TrailARN":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name of the trail. The <code>TrailARN</code> format is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+        },
+        "LogFileValidationEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether log file validation is enabled.</p>"
         },
         "CloudWatchLogsLogGroupArn":{
           "shape":"String",
@@ -1045,7 +1898,11 @@
         },
         "CloudWatchLogsRoleArn":{
           "shape":"String",
-          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code>"
         }
       },
       "documentation":"<p>The settings for a trail.</p>"
@@ -1082,29 +1939,57 @@
       "exception":true,
       "documentation":"<p>This exception is thrown when the trail with the given name is not found.</p>"
     },
+    "TrailNotProvidedException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"TrailNotProvided",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>This exception is deprecated.</p>"
+    },
+    "UnsupportedOperationException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"UnsupportedOperation",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.</p>"
+    },
     "UpdateTrailRequest":{
       "type":"structure",
       "required":["Name"],
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the trail.</p>"
+          "documentation":"<p>Specifies the name of the trail or trail ARN. If <code>Name</code> is a trail name, the string must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul> <p>If <code>Name</code> is a trail ARN, it must be in the format <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
         },
         "S3BucketName":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon S3 bucket designated for publishing log files.</p>"
+          "documentation":"<p>Specifies the name of the Amazon S3 bucket designated for publishing log files. See <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html\">Amazon S3 Bucket Naming Requirements</a>.</p>"
         },
         "S3KeyPrefix":{
           "shape":"String",
-          "documentation":"<p>Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.</p>"
+          "documentation":"<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html\">Finding Your CloudTrail Log Files</a>. The maximum length is 200 characters.</p>"
         },
         "SnsTopicName":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery.</p>"
+          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.</p>"
         },
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+        },
+        "EnableLogFileValidation":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether log file validation is enabled. The default is false.</p> <note>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</note>"
         },
         "CloudWatchLogsLogGroupArn":{
           "shape":"String",
@@ -1112,7 +1997,11 @@
         },
         "CloudWatchLogsRoleArn":{
           "shape":"String",
-          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be a an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li>alias/MyAliasName</li> <li>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</li> <li>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</li> <li>12345678-1234-1234-1234-123456789012</li> </ul>"
         }
       },
       "documentation":"<p>Specifies settings to update for the trail.</p>"
@@ -1130,7 +2019,7 @@
         },
         "S3KeyPrefix":{
           "shape":"String",
-          "documentation":"<p>Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.</p>"
+          "documentation":"<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html\">Finding Your CloudTrail Log Files</a>.</p>"
         },
         "SnsTopicName":{
           "shape":"String",
@@ -1140,16 +2029,30 @@
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
         },
+        "TrailARN":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ARN of the trail that was updated.</p>"
+        },
+        "LogFileValidationEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether log file integrity validation is enabled.</p>"
+        },
         "CloudWatchLogsLogGroupArn":{
           "shape":"String",
           "documentation":"<p>Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs will be delivered.</p>"
         },
         "CloudWatchLogsRoleArn":{
           "shape":"String",
-          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code>"
         }
       },
       "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
     }
+  },
+  "examples":{
   }
 }
