@@ -11474,6 +11474,11 @@
           "documentation":"<p>The user-specified name for a logical grouping of bids.</p> <p>When you specify an Availability Zone group in a Spot Instance request, all Spot instances in the request are launched in the same Availability Zone. Instance proximity is maintained with this parameter, but the choice of Availability Zone is not. The group applies only to bids for Spot Instances of the same instance type. Any additional Spot instance requests that are specified with the same Availability Zone group name are launched in that same Availability Zone, as long as at least one instance from the group is still active.</p> <p>If there is no active instance running in the Availability Zone group that you specify for a new Spot instance request (all instances are terminated, the bid is expired, or the bid falls below current market), then Amazon EC2 launches the instance in any Availability Zone where the constraint can be met. Consequently, the subsequent set of Spot instances could be placed in a different zone from the original request, even if you specified the same Availability Zone group.</p> <p>Default: Instances are launched in any available Availability Zone.</p>",
           "locationName":"availabilityZoneGroup"
         },
+        "BlockDurationMinutes":{
+          "shape":"Integer",
+          "documentation":"<p>The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).</p> <p>The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.</p> <p>Note that you can't specify an Availability Zone group or a launch group if you specify a required duration.</p>",
+          "locationName":"blockDurationMinutes"
+        },
         "LaunchSpecification":{"shape":"RequestSpotLaunchSpecification"}
       },
       "documentation":"<p>Contains the parameters for RequestSpotInstances.</p>"
@@ -13053,7 +13058,7 @@
         },
         "SpotPrice":{
           "shape":"String",
-          "documentation":"<p>The maximum hourly price (bid) for any Spot instance launched to fulfill the request.</p>",
+          "documentation":"<p>The maximum hourly price (bid) for the Spot instance launched to fulfill the request.</p>",
           "locationName":"spotPrice"
         },
         "Type":{
@@ -13078,12 +13083,12 @@
         },
         "ValidFrom":{
           "shape":"DateTime",
-          "documentation":"<p>The start date of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.</p>",
+          "documentation":"<p>The start date of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). The request becomes active at this date and time.</p>",
           "locationName":"validFrom"
         },
         "ValidUntil":{
           "shape":"DateTime",
-          "documentation":"<p>The end date of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). If this is a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date is reached.</p>",
+          "documentation":"<p>The end date of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). If this is a one-time request, it remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date is reached.</p>",
           "locationName":"validUntil"
         },
         "LaunchGroup":{
@@ -13116,6 +13121,16 @@
           "documentation":"<p>The product description associated with the Spot instance.</p>",
           "locationName":"productDescription"
         },
+        "BlockDurationMinutes":{
+          "shape":"Integer",
+          "documentation":"<p>The required duration for the Spot instance, in minutes.</p>",
+          "locationName":"blockDurationMinutes"
+        },
+        "ActualBlockHourlyPrice":{
+          "shape":"String",
+          "documentation":"<p>If you specified a required duration and your request was fulfilled, this is the fixed hourly price in effect for the Spot instance while it runs.</p>",
+          "locationName":"actualBlockHourlyPrice"
+        },
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>Any tags assigned to the resource.</p>",
@@ -13127,7 +13142,7 @@
           "locationName":"launchedAvailabilityZone"
         }
       },
-      "documentation":"<p>Describe a Spot instance request.</p>"
+      "documentation":"<p>Describes a Spot instance request.</p>"
     },
     "SpotInstanceRequestIdList":{
       "type":"list",
