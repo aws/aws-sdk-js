@@ -19,6 +19,7 @@
       "signatureVersion": "v3https",
       "globalEndpoint": true
     },
+    "*/waf": "globalSSL",
     "us-gov-*/iam": "globalGovCloud",
     "us-gov-*/sts": {
       "endpoint": "{service}.{region}.amazonaws.com"
