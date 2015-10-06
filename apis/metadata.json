@@ -111,6 +111,9 @@
   "importexport": {
     "name": "ImportExport"
   },
+  "inspector": {
+    "name": "Inspector"
+  },
   "kinesis": {
     "name": "Kinesis"
   },
