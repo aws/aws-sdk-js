@@ -4,13 +4,13 @@
 
 ## Supported Services
 
-By default, the SDK ships with support for 19 AWS services. Each service object
+By default, the SDK ships with support for 20 AWS services. Each service object
 in the SDK currently provides low-level access to every API call in the
 respective AWS service. The full list of methods and their parameters are
 documented in the complete API reference documentation (linked from each
 service name in the list below).
 
-The 19 services that come with the default hosted package of the SDK are:
+The 20 services that come with the default hosted package of the SDK are:
 
 * [AWS.CloudWatch](/AWSJavaScriptSDK/latest/AWS/CloudWatch.html)
 * [AWS.CloudWatchLogs](/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html)
@@ -21,6 +21,7 @@ The 19 services that come with the default hosted package of the SDK are:
 * [AWS.DynamoDBStreams](/AWSJavaScriptSDK/latest/AWS/DynamoDBStreams.html)
 * [AWS.EC2](/AWSJavaScriptSDK/latest/AWS/EC2.html)
 * [AWS.ElasticTranscoder](/AWSJavaScriptSDK/latest/AWS/ElasticTranscoder.html)
+* [AWS.Firehose](/AWSJavaScriptSDK/latest/AWS/Firehose.html)
 * [AWS.Kinesis](/AWSJavaScriptSDK/latest/AWS/Kinesis.html)
 * [AWS.Lambda](/AWSJavaScriptSDK/latest/AWS/Lambda.html)
 * [AWS.MobileAnalytics](/AWSJavaScriptSDK/latest/AWS/MobileAnalytics.html)

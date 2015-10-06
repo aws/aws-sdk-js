@@ -102,6 +102,9 @@
   "elastictranscoder": {
     "name": "ElasticTranscoder"
   },
+  "firehose": {
+    "name": "Firehose"
+  },
   "glacier": {
     "name": "Glacier"
   },
