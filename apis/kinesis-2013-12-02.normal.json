@@ -26,12 +26,12 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"ResourceInUseException",
           "exception":true,
-          "documentation":"<p>The resource is not available for this operation. For example, you attempted to split a shard but the stream is not in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The resource is not available for this operation. For successful operation, the resource needs to be in the <code>ACTIVE</code> state.</p>"
         },
         {
           "shape":"InvalidArgumentException",
@@ -60,7 +60,7 @@
         {
           "shape":"ResourceInUseException",
           "exception":true,
-          "documentation":"<p>The resource is not available for this operation. For example, you attempted to split a shard but the stream is not in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The resource is not available for this operation. For successful operation, the resource needs to be in the <code>ACTIVE</code> state.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -75,6 +75,40 @@
       ],
       "documentation":"<p>Creates a Amazon Kinesis stream. A stream captures and transports data records that are continuously emitted from different data sources or <i>producers</i>. Scale-out within an Amazon Kinesis stream is explicitly supported by means of shards, which are uniquely identified groups of data records in an Amazon Kinesis stream.</p> <p>You specify and control the number of shards that a stream is composed of. Each shard can support reads up to 5 transactions per second, up to a maximum data read total of 2 MB per second. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second. You can add shards to a stream if the amount of data input increases and you can remove shards if the amount of data input decreases.</p> <p>The stream name identifies the stream. The name is scoped to the AWS account used by the application. It is also scoped by region. That is, two streams in two different accounts can have the same name, and two streams in the same account, but in two different regions, can have the same name. </p> <p><code>CreateStream</code> is an asynchronous operation. Upon receiving a <code>CreateStream</code> request, Amazon Kinesis immediately returns and sets the stream status to <code>CREATING</code>. After the stream is created, Amazon Kinesis sets the stream status to <code>ACTIVE</code>. You should perform read and write operations only on an <code>ACTIVE</code> stream. </p> <p>You receive a <code>LimitExceededException</code> when making a <code>CreateStream</code> request if you try to do one of the following:</p> <ul> <li>Have more than five streams in the <code>CREATING</code> state at any point in time.</li> <li>Create more shards than are authorized for your account.</li> </ul> <p>For the default shard limit for an AWS account, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Amazon Kinesis Limits</a>. If you need to increase this limit, <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact AWS Support</a>.</p> <p>You can use <code>DescribeStream</code> to check the stream status, which is returned in <code>StreamStatus</code>.</p> <p><a>CreateStream</a> has a limit of 5 transactions per second per account.</p>"
     },
+    "DecreaseStreamRetentionPeriod":{
+      "name":"DecreaseStreamRetentionPeriod",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DecreaseStreamRetentionPeriodInput",
+        "documentation":"<p>Represents the input for <a>DecreaseStreamRetentionPeriod</a>.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceInUseException",
+          "exception":true,
+          "documentation":"<p>The resource is not available for this operation. For successful operation, the resource needs to be in the <code>ACTIVE</code> state.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true,
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed (5).</p>"
+        },
+        {
+          "shape":"InvalidArgumentException",
+          "exception":true,
+          "documentation":"<p>A specified parameter exceeds its restrictions, is not supported, or can't be used. For more information, see the returned message.</p>"
+        }
+      ],
+      "documentation":"<p>Decreases the stream's retention period, which is the length of time data records are accessible after they are added to the stream. The minimum value of a stream’s retention period is 24 hours. </p> <p>This operation may result in lost data. For example, if the stream's retention period is 48 hours and is decreased to 24 hours, any data already in the stream that is older than 24 hours is inaccessible.</p>"
+    },
     "DeleteStream":{
       "name":"DeleteStream",
       "http":{
@@ -83,13 +117,13 @@
       },
       "input":{
         "shape":"DeleteStreamInput",
-        "documentation":"<p>Represents the input for <code>DeleteStream</code>.</p>"
+        "documentation":"<p>Represents the input for <a>DeleteStream</a>.</p>"
       },
       "errors":[
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -117,7 +151,7 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -145,7 +179,7 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"InvalidArgumentException",
@@ -183,7 +217,7 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"InvalidArgumentException",
@@ -197,6 +231,40 @@
         }
       ],
       "documentation":"<p>Gets a shard iterator. A shard iterator expires five minutes after it is returned to the requester.</p> <p>A shard iterator specifies the position in the shard from which to start reading data records sequentially. A shard iterator specifies this position using the sequence number of a data record in a shard. A sequence number is the identifier associated with every record ingested in the Amazon Kinesis stream. The sequence number is assigned when a record is put into the stream. </p> <p>You must specify the shard iterator type. For example, you can set the <code>ShardIteratorType</code> parameter to read exactly from the position denoted by a specific sequence number by using the <code>AT_SEQUENCE_NUMBER</code> shard iterator type, or right after the sequence number by using the <code>AFTER_SEQUENCE_NUMBER</code> shard iterator type, using sequence numbers returned by earlier calls to <a>PutRecord</a>, <a>PutRecords</a>, <a>GetRecords</a>, or <a>DescribeStream</a>. You can specify the shard iterator type <code>TRIM_HORIZON</code> in the request to cause <code>ShardIterator</code> to point to the last untrimmed record in the shard in the system, which is the oldest data record in the shard. Or you can point to just after the most recent record in the shard, by using the shard iterator type <code>LATEST</code>, so that you always read the most recent data in the shard. </p> <p>When you repeatedly read from an Amazon Kinesis stream use a <a>GetShardIterator</a> request to get the first shard iterator for use in your first <a>GetRecords</a> request and then use the shard iterator returned by the <a>GetRecords</a> request in <code>NextShardIterator</code> for subsequent reads. A new shard iterator is returned by every <a>GetRecords</a> request in <code>NextShardIterator</code>, which you use in the <code>ShardIterator</code> parameter of the next <a>GetRecords</a> request. </p> <p>If a <a>GetShardIterator</a> request is made too often, you receive a <code>ProvisionedThroughputExceededException</code>. For more information about throughput limits, see <a>GetRecords</a>.</p> <p>If the shard is closed, the iterator can't return more data, and <a>GetShardIterator</a> returns <code>null</code> for its <code>ShardIterator</code>. A shard can be closed using <a>SplitShard</a> or <a>MergeShards</a>.</p> <p><a>GetShardIterator</a> has a limit of 5 transactions per second per account per open shard.</p>"
+    },
+    "IncreaseStreamRetentionPeriod":{
+      "name":"IncreaseStreamRetentionPeriod",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"IncreaseStreamRetentionPeriodInput",
+        "documentation":"<p>Represents the input for <a>IncreaseStreamRetentionPeriod</a>.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceInUseException",
+          "exception":true,
+          "documentation":"<p>The resource is not available for this operation. For successful operation, the resource needs to be in the <code>ACTIVE</code> state.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true,
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed (5).</p>"
+        },
+        {
+          "shape":"InvalidArgumentException",
+          "exception":true,
+          "documentation":"<p>A specified parameter exceeds its restrictions, is not supported, or can't be used. For more information, see the returned message.</p>"
+        }
+      ],
+      "documentation":"<p>Increases the stream's retention period, which is the length of time data records are accessible after they are added to the stream. The maximum value of a stream’s retention period is 168 hours (7 days).</p> <p>Upon choosing a longer stream retention period, this operation will increase the time period records are accessible that have not yet expired. However, it will not make previous data that has expired (older than the stream’s previous retention period) accessible after the operation has been called. For example, if a stream’s retention period is set to 24 hours and is increased to 168 hours, any data that is older than 24 hours will remain inaccessible to consumer applications.</p>"
     },
     "ListStreams":{
       "name":"ListStreams",
@@ -239,7 +307,7 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"InvalidArgumentException",
@@ -268,12 +336,12 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"ResourceInUseException",
           "exception":true,
-          "documentation":"<p>The resource is not available for this operation. For example, you attempted to split a shard but the stream is not in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The resource is not available for this operation. For successful operation, the resource needs to be in the <code>ACTIVE</code> state.</p>"
         },
         {
           "shape":"InvalidArgumentException",
@@ -306,7 +374,7 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"InvalidArgumentException",
@@ -319,7 +387,7 @@
           "documentation":"<p>The request rate is too high, or the requested data is too large for the available throughput. Reduce the frequency or size of your requests. For more information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/api-retries.html\" target=\"_blank\">Error Retries and Exponential Backoff in AWS</a> in the <i>AWS General Reference</i>.</p>"
         }
       ],
-      "documentation":"<p>Writes a single data record from a producer into an Amazon Kinesis stream. Call <code>PutRecord</code> to send data from the producer into the Amazon Kinesis stream for real-time ingestion and subsequent processing, one record at a time. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; a partition key; and the data blob itself.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis to distribute data across shards. Amazon Kinesis segregates the data records that belong to a data stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to. </p> <p>Partition keys are Unicode strings, with a maximum length limit of 256 characters for each key. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards using the hash key ranges of the shards. You can override hashing the partition key to determine the shard by explicitly specifying a hash value using the <code>ExplicitHashKey</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p><code>PutRecord</code> returns the shard ID of where the data record was placed and the sequence number that was assigned to the data record.</p> <p>Sequence numbers generally increase over time. To guarantee strictly increasing ordering, use the <code>SequenceNumberForOrdering</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p>If a <code>PutRecord</code> request cannot be processed because of insufficient provisioned throughput on the shard involved in the request, <code>PutRecord</code> throws <code>ProvisionedThroughputExceededException</code>. </p> <p>Data records are accessible for only 24 hours from the time that they are added to an Amazon Kinesis stream.</p>"
+      "documentation":"<p>Writes a single data record from a producer into an Amazon Kinesis stream. Call <code>PutRecord</code> to send data from the producer into the Amazon Kinesis stream for real-time ingestion and subsequent processing, one record at a time. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; a partition key; and the data blob itself.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis to distribute data across shards. Amazon Kinesis segregates the data records that belong to a data stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to. </p> <p>Partition keys are Unicode strings, with a maximum length limit of 256 characters for each key. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards using the hash key ranges of the shards. You can override hashing the partition key to determine the shard by explicitly specifying a hash value using the <code>ExplicitHashKey</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p><code>PutRecord</code> returns the shard ID of where the data record was placed and the sequence number that was assigned to the data record.</p> <p>Sequence numbers generally increase over time. To guarantee strictly increasing ordering, use the <code>SequenceNumberForOrdering</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p>If a <code>PutRecord</code> request cannot be processed because of insufficient provisioned throughput on the shard involved in the request, <code>PutRecord</code> throws <code>ProvisionedThroughputExceededException</code>. </p> <p>By default, data records are accessible for only 24 hours from the time that they are added to an Amazon Kinesis stream. This retention period can be modified using the <a>DecreaseStreamRetentionPeriod</a> and <a>IncreaseStreamRetentionPeriod</a> operations.</p>"
     },
     "PutRecords":{
       "name":"PutRecords",
@@ -339,7 +407,7 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"InvalidArgumentException",
@@ -352,7 +420,7 @@
           "documentation":"<p>The request rate is too high, or the requested data is too large for the available throughput. Reduce the frequency or size of your requests. For more information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/api-retries.html\" target=\"_blank\">Error Retries and Exponential Backoff in AWS</a> in the <i>AWS General Reference</i>.</p>"
         }
       ],
-      "documentation":"<p>Writes multiple data records from a producer into an Amazon Kinesis stream in a single call (also referred to as a <code>PutRecords</code> request). Use this operation to send data from a data producer into the Amazon Kinesis stream for data ingestion and processing. </p> <p>Each <code>PutRecords</code> request can support up to 500 records. Each record in the request can be as large as 1 MB, up to a limit of 5 MB for the entire request, including partition keys. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; and an array of request <code>Records</code>, with each record in the array requiring a partition key and data blob. The record size limit applies to the total size of the partition key and data blob.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis as input to a hash function that maps the partition key and associated data to a specific shard. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p>Each record in the <code>Records</code> array may include an optional parameter, <code>ExplicitHashKey</code>, which overrides the partition key to shard mapping. This parameter allows a data producer to determine explicitly the shard where the record is stored. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p>The <code>PutRecords</code> response includes an array of response <code>Records</code>. Each record in the response array directly correlates with a record in the request array using natural ordering, from the top to the bottom of the request and response. The response <code>Records</code> array always includes the same number of records as the request array.</p> <p>The response <code>Records</code> array includes both successfully and unsuccessfully processed records. Amazon Kinesis attempts to process all records in each <code>PutRecords</code> request. A single record failure does not stop the processing of subsequent records.</p> <p>A successfully-processed record includes <code>ShardId</code> and <code>SequenceNumber</code> values. The <code>ShardId</code> parameter identifies the shard in the stream where the record is stored. The <code>SequenceNumber</code> parameter is an identifier assigned to the put record, unique to all records in the stream.</p> <p>An unsuccessfully-processed record includes <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error and can be one of the following values: <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed information about the <code>ProvisionedThroughputExceededException</code> exception including the account ID, stream name, and shard ID of the record that was throttled. For more information about partially successful responses, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p>Data records are accessible for only 24 hours from the time that they are added to an Amazon Kinesis stream.</p>"
+      "documentation":"<p>Writes multiple data records from a producer into an Amazon Kinesis stream in a single call (also referred to as a <code>PutRecords</code> request). Use this operation to send data from a data producer into the Amazon Kinesis stream for data ingestion and processing. </p> <p>Each <code>PutRecords</code> request can support up to 500 records. Each record in the request can be as large as 1 MB, up to a limit of 5 MB for the entire request, including partition keys. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; and an array of request <code>Records</code>, with each record in the array requiring a partition key and data blob. The record size limit applies to the total size of the partition key and data blob.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis as input to a hash function that maps the partition key and associated data to a specific shard. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p>Each record in the <code>Records</code> array may include an optional parameter, <code>ExplicitHashKey</code>, which overrides the partition key to shard mapping. This parameter allows a data producer to determine explicitly the shard where the record is stored. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p>The <code>PutRecords</code> response includes an array of response <code>Records</code>. Each record in the response array directly correlates with a record in the request array using natural ordering, from the top to the bottom of the request and response. The response <code>Records</code> array always includes the same number of records as the request array.</p> <p>The response <code>Records</code> array includes both successfully and unsuccessfully processed records. Amazon Kinesis attempts to process all records in each <code>PutRecords</code> request. A single record failure does not stop the processing of subsequent records.</p> <p>A successfully-processed record includes <code>ShardId</code> and <code>SequenceNumber</code> values. The <code>ShardId</code> parameter identifies the shard in the stream where the record is stored. The <code>SequenceNumber</code> parameter is an identifier assigned to the put record, unique to all records in the stream.</p> <p>An unsuccessfully-processed record includes <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error and can be one of the following values: <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed information about the <code>ProvisionedThroughputExceededException</code> exception including the account ID, stream name, and shard ID of the record that was throttled. For more information about partially successful responses, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis Developer Guide</i>.</p> <p>By default, data records are accessible for only 24 hours from the time that they are added to an Amazon Kinesis stream. This retention period can be modified using the <a>DecreaseStreamRetentionPeriod</a> and <a>IncreaseStreamRetentionPeriod</a> operations.</p>"
     },
     "RemoveTagsFromStream":{
       "name":"RemoveTagsFromStream",
@@ -368,12 +436,12 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"ResourceInUseException",
           "exception":true,
-          "documentation":"<p>The resource is not available for this operation. For example, you attempted to split a shard but the stream is not in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The resource is not available for this operation. For successful operation, the resource needs to be in the <code>ACTIVE</code> state.</p>"
         },
         {
           "shape":"InvalidArgumentException",
@@ -402,12 +470,12 @@
         {
           "shape":"ResourceNotFoundException",
           "exception":true,
-          "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
         },
         {
           "shape":"ResourceInUseException",
           "exception":true,
-          "documentation":"<p>The resource is not available for this operation. For example, you attempted to split a shard but the stream is not in the <code>ACTIVE</code> state.</p>"
+          "documentation":"<p>The resource is not available for this operation. For successful operation, the resource needs to be in the <code>ACTIVE</code> state.</p>"
         },
         {
           "shape":"InvalidArgumentException",
@@ -467,6 +535,24 @@
       "min":0,
       "max":1048576
     },
+    "DecreaseStreamRetentionPeriodInput":{
+      "type":"structure",
+      "required":[
+        "StreamName",
+        "RetentionPeriodHours"
+      ],
+      "members":{
+        "StreamName":{
+          "shape":"StreamName",
+          "documentation":"<p>The name of the stream to modify.</p>"
+        },
+        "RetentionPeriodHours":{
+          "shape":"RetentionPeriodHours",
+          "documentation":"<p>The new retention period of the stream, in hours. Must be less than the current retention period.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for <a>DecreaseStreamRetentionPeriod</a>.</p>"
+    },
     "DeleteStreamInput":{
       "type":"structure",
       "required":["StreamName"],
@@ -476,7 +562,7 @@
           "documentation":"<p>The name of the stream to delete.</p>"
         }
       },
-      "documentation":"<p>Represents the input for <code>DeleteStream</code>.</p>"
+      "documentation":"<p>Represents the input for <a>DeleteStream</a>.</p>"
     },
     "DescribeStreamInput":{
       "type":"structure",
@@ -623,6 +709,24 @@
         }
       },
       "documentation":"<p>The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.</p>"
+    },
+    "IncreaseStreamRetentionPeriodInput":{
+      "type":"structure",
+      "required":[
+        "StreamName",
+        "RetentionPeriodHours"
+      ],
+      "members":{
+        "StreamName":{
+          "shape":"StreamName",
+          "documentation":"<p>The name of the stream to modify.</p>"
+        },
+        "RetentionPeriodHours":{
+          "shape":"RetentionPeriodHours",
+          "documentation":"<p>The new retention period of the stream, in hours. Must be more than the current retention period.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for <a>IncreaseStreamRetentionPeriod</a>.</p>"
     },
     "InvalidArgumentException":{
       "type":"structure",
@@ -969,7 +1073,7 @@
         }
       },
       "exception":true,
-      "documentation":"<p>The resource is not available for this operation. For example, you attempted to split a shard but the stream is not in the <code>ACTIVE</code> state.</p>"
+      "documentation":"<p>The resource is not available for this operation. For successful operation, the resource needs to be in the <code>ACTIVE</code> state.</p>"
     },
     "ResourceNotFoundException":{
       "type":"structure",
@@ -980,7 +1084,12 @@
         }
       },
       "exception":true,
-      "documentation":"<p>The requested resource could not be found. It might not be specified correctly, or it might not be in the <code>ACTIVE</code> state.</p>"
+      "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>"
+    },
+    "RetentionPeriodHours":{
+      "type":"integer",
+      "min":24,
+      "max":168
     },
     "SequenceNumber":{
       "type":"string",
@@ -1087,7 +1196,8 @@
         "StreamARN",
         "StreamStatus",
         "Shards",
-        "HasMoreShards"
+        "HasMoreShards",
+        "RetentionPeriodHours"
       ],
       "members":{
         "StreamName":{
@@ -1109,9 +1219,13 @@
         "HasMoreShards":{
           "shape":"BooleanObject",
           "documentation":"<p>If set to <code>true</code>, more shards in the stream are available to describe.</p>"
+        },
+        "RetentionPeriodHours":{
+          "shape":"RetentionPeriodHours",
+          "documentation":"<p>The current retention period, in hours.</p>"
         }
       },
-      "documentation":"<p>Represents the output for <code>DescribeStream</code>.</p>"
+      "documentation":"<p>Represents the output for <a>DescribeStream</a>.</p>"
     },
     "StreamName":{
       "type":"string",
