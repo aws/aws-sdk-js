@@ -22,6 +22,7 @@ s3 = new AWS.S3(AWS.util.merge(config, config.s3))
 sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 sns = new AWS.SNS(AWS.util.merge(config, config.sns))
 sts = new AWS.STS(AWS.util.merge(config, config.sts))
+waf = new AWS.WAF(AWS.util.merge(config, config.waf))
 
 uniqueName = (prefix) ->
   if prefix
@@ -455,3 +456,19 @@ integrationTests ->
           expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
           sns.deleteTopic(done)
 
+  describe 'AWS.WAF', ->
+    it 'makes a request', (done) ->
+      params =
+        Limit: 20
+      waf.listRules params, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Rules)).to.equal(true)
+        done()
+    it 'handles errors', (done) ->
+      params =
+        Name: 'fake_name'
+        ChangeToken: 'fake_token'
+      waf.createSqlInjectionMatchSet params, (err, data) ->
+        assertError(err, 'WAFStaleDataException')
+        noData(data)
+        done()

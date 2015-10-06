@@ -53,7 +53,7 @@
       "api", "amazon","aws","ec2","simpledb","s3","sqs","ses","sns","route53","rds","elasticache","cloudfront","fps",
       "cloudformation","cloudwatch","dynamodb","iam","swf","autoscaling","cloudsearch","elb",
       "loadbalancing","emr","mapreduce","importexport","storagegateway","workflow","ebs","vpc","beanstalk",
-      "glacier","kinesis","cloudtrail"
+      "glacier","kinesis","cloudtrail", "waf"
     ],
     "scripts" : {
       "test" : "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
