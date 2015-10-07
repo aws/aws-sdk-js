@@ -12,6 +12,22 @@
   },
   "documentation":"<fullname>AWS Config</fullname> <p>AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an Elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported AWS Resources</a>.</p> <p>You can access and manage AWS Config through the AWS Management Console, the AWS Command Line Interface (AWS CLI), the AWS Config API, or the AWS SDKs for AWS Config</p> <p>This reference guide contains documentation for the AWS Config API and the AWS CLI commands that you can use to manage AWS Config.</p> <p>The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p> <p>For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html\">What Is AWS Config?</a> in the <i>AWS Config Developer Guide</i>.</p>",
   "operations":{
+    "DeleteConfigRule":{
+      "name":"DeleteConfigRule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteConfigRuleRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchConfigRuleException",
+          "exception":true,
+          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes the specified AWS Config rule and all of its evaluation results.</p> <p>AWS Config sets the state of a rule to <code>DELETING</code> until the deletion is complete. You cannot update a rule while it is in this state. If you make a <code>PutConfigRule</code> request for the rule, you will receive a <code>ResourceInUseException</code>.</p> <p>You can check the state of a rule by using the <code>DescribeConfigRules</code> request.</p>"
+    },
     "DeleteDeliveryChannel":{
       "name":"DeleteDeliveryChannel",
       "http":{
@@ -68,6 +84,84 @@
         }
       ],
       "documentation":"<p>Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel. After the delivery has started, AWS Config sends following notifications using an Amazon SNS topic that you have specified.</p> <ul> <li>Notification of starting the delivery.</li> <li>Notification of delivery completed, if the delivery was successfully completed.</li> <li>Notification of delivery failure, if the delivery failed to complete.</li> </ul>"
+    },
+    "DescribeComplianceByConfigRule":{
+      "name":"DescribeComplianceByConfigRule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeComplianceByConfigRuleRequest"},
+      "output":{"shape":"DescribeComplianceByConfigRuleResponse"},
+      "errors":[
+        {
+          "shape":"InvalidParameterValueException",
+          "exception":true,
+          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
+        },
+        {
+          "shape":"NoSuchConfigRuleException",
+          "exception":true,
+          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
+        }
+      ],
+      "documentation":"<p>Indicates whether the specified AWS Config rules are compliant. If a rule is noncompliant, this action returns the number of AWS resources that do not comply with the rule.</p> <p>A rule is compliant if all of the evaluated resources comply with it, and it is noncompliant if any of these resources do not comply. </p> <p>If AWS Config has no current evaluation results for the rule, it returns <code>InsufficientData</code>. This result might indicate one of the following conditions: <ul> <li>AWS Config has never invoked an evaluation for the rule. To check whether it has, use the <code>DescribeConfigRuleEvaluationStatus</code> action to get the <code>LastSuccessfulInvocationTime</code> and <code>LastFailedInvocationTime</code>.</li> <li>The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the <code>config:PutEvaluations</code> permission. If the rule is a customer managed rule, verify that the AWS Lambda execution role includes the <code>config:PutEvaluations</code> permission.</li> <li>The rule's AWS Lambda function has returned <code>NOT_APPLICABLE</code> for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.</li> </ul></p>"
+    },
+    "DescribeComplianceByResource":{
+      "name":"DescribeComplianceByResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeComplianceByResourceRequest"},
+      "output":{"shape":"DescribeComplianceByResourceResponse"},
+      "errors":[
+        {
+          "shape":"InvalidParameterValueException",
+          "exception":true,
+          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
+        },
+        {
+          "shape":"InvalidNextTokenException",
+          "exception":true,
+          "documentation":"<p>The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.</p>"
+        }
+      ],
+      "documentation":"<p>Indicates whether the specified AWS resources are compliant. If a resource is noncompliant, this action returns the number of AWS Config rules that the resource does not comply with. </p> <p>A resource is compliant if it complies with all the AWS Config rules that evaluate it. It is noncompliant if it does not comply with one or more of these rules.</p> <p>If AWS Config has no current evaluation results for the resource, it returns <code>InsufficientData</code>. This result might indicate one of the following conditions about the rules that evaluate the resource: <ul> <li>AWS Config has never invoked an evaluation for the rule. To check whether it has, use the <code>DescribeConfigRuleEvaluationStatus</code> action to get the <code>LastSuccessfulInvocationTime</code> and <code>LastFailedInvocationTime</code>.</li> <li>The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the <code>config:PutEvaluations</code> permission. If the rule is a customer managed rule, verify that the AWS Lambda execution role includes the <code>config:PutEvaluations</code> permission.</li> <li>The rule's AWS Lambda function has returned <code>NOT_APPLICABLE</code> for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.</li> </ul></p>"
+    },
+    "DescribeConfigRuleEvaluationStatus":{
+      "name":"DescribeConfigRuleEvaluationStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeConfigRuleEvaluationStatusRequest"},
+      "output":{"shape":"DescribeConfigRuleEvaluationStatusResponse"},
+      "errors":[
+        {
+          "shape":"NoSuchConfigRuleException",
+          "exception":true,
+          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
+        }
+      ],
+      "documentation":"<p>Returns status information for each of your AWS managed Config rules. The status includes information such as the last time AWS Config invoked the rule, the last time AWS Config failed to invoke the rule, and the related error for the last failure.</p>"
+    },
+    "DescribeConfigRules":{
+      "name":"DescribeConfigRules",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeConfigRulesRequest"},
+      "output":{"shape":"DescribeConfigRulesResponse"},
+      "errors":[
+        {
+          "shape":"NoSuchConfigRuleException",
+          "exception":true,
+          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
+        }
+      ],
+      "documentation":"<p>Returns details about your AWS Config rules.</p>"
     },
     "DescribeConfigurationRecorderStatus":{
       "name":"DescribeConfigurationRecorderStatus",
@@ -159,7 +253,77 @@
           "documentation":"<p>You have specified a delivery channel that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Returns details about the specified delivery channel. If a delivery channel is not specified, this action returns the details of all delivery channels associated with the account. </p> <note> <p>Currently, you can specify only one delivery channel per account.</p></note>"
+      "documentation":"<p>Returns details about the specified delivery channel. If a delivery channel is not specified, this action returns the details of all delivery channels associated with the account. </p> <note> <p>Currently, you can specify only one delivery channel per account.</p> </note>"
+    },
+    "GetComplianceDetailsByConfigRule":{
+      "name":"GetComplianceDetailsByConfigRule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetComplianceDetailsByConfigRuleRequest"},
+      "output":{"shape":"GetComplianceDetailsByConfigRuleResponse"},
+      "errors":[
+        {
+          "shape":"InvalidParameterValueException",
+          "exception":true,
+          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
+        },
+        {
+          "shape":"InvalidNextTokenException",
+          "exception":true,
+          "documentation":"<p>The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.</p>"
+        },
+        {
+          "shape":"NoSuchConfigRuleException",
+          "exception":true,
+          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
+        }
+      ],
+      "documentation":"<p>Returns the evaluation results for the specified AWS Config rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.</p>"
+    },
+    "GetComplianceDetailsByResource":{
+      "name":"GetComplianceDetailsByResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetComplianceDetailsByResourceRequest"},
+      "output":{"shape":"GetComplianceDetailsByResourceResponse"},
+      "errors":[
+        {
+          "shape":"InvalidParameterValueException",
+          "exception":true,
+          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
+        }
+      ],
+      "documentation":"<p>Returns the evaluation results for the specified AWS resource. The results indicate which AWS Config rules were used to evaluate the resource, when each rule was last used, and whether the resource complies with each rule.</p>"
+    },
+    "GetComplianceSummaryByConfigRule":{
+      "name":"GetComplianceSummaryByConfigRule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{"shape":"GetComplianceSummaryByConfigRuleResponse"},
+      "documentation":"<p>Returns the number of AWS Config rules that are compliant and noncompliant, up to a maximum of 25 for each.</p>"
+    },
+    "GetComplianceSummaryByResourceType":{
+      "name":"GetComplianceSummaryByResourceType",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetComplianceSummaryByResourceTypeRequest"},
+      "output":{"shape":"GetComplianceSummaryByResourceTypeResponse"},
+      "errors":[
+        {
+          "shape":"InvalidParameterValueException",
+          "exception":true,
+          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
+        }
+      ],
+      "documentation":"<p>Returns the number of resources that are compliant and the number that are noncompliant. You can specify one or more resource types to get these numbers for each resource type. The maximum number returned is 100.</p>"
     },
     "GetResourceConfigHistory":{
       "name":"GetResourceConfigHistory",
@@ -241,6 +405,32 @@
       ],
       "documentation":"<p>Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that AWS Config has discovered, including those that AWS Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.</p> <note>You can specify either resource IDs or a resource name but not both in the same request.</note> <p>The response is paginated, and by default AWS Config lists 100 resource identifiers on each page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string, and to get the next page of results, run the request again and enter this string for the <code>nextToken</code> parameter.</p>"
     },
+    "PutConfigRule":{
+      "name":"PutConfigRule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutConfigRuleRequest"},
+      "errors":[
+        {
+          "shape":"InvalidParameterValueException",
+          "exception":true,
+          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
+        },
+        {
+          "shape":"MaxNumberOfConfigRulesExceededException",
+          "exception":true,
+          "documentation":"<p>Failed to add the AWS Config rule because the account already contains the maximum number of 25 rules. Consider deleting any deactivated rules before adding new rules.</p>"
+        },
+        {
+          "shape":"ResourceInUseException",
+          "exception":true,
+          "documentation":"<p>The rule is currently being deleted. Wait for a while and try again.</p>"
+        }
+      ],
+      "documentation":"<p>Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. </p> <p>You can use this action for customer managed Config rules and AWS managed Config rules. A customer managed Config rule is a custom rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that is provided by AWS Config.</p> <p>If you are adding a new customer managed Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the <code>PutConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the <code>SourceIdentifier</code> key. This key is part of the <code>Source</code> object, which is part of the <code>ConfigRule</code> object. </p> <p>If you are adding a new AWS managed Config rule, specify the rule's identifier for the <code>SourceIdentifier</code> key. To reference AWS managed Config rule identifiers, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">Using AWS Managed Config Rules</a>.</p> <p>For any new rule that you add, specify the <code>ConfigRuleName</code> in the <code>ConfigRule</code> object. Do not specify the <code>ConfigRuleArn</code> or the <code>ConfigRuleId</code>. These values are generated by AWS Config for new rules.</p> <p>If you are updating a rule that you have added previously, specify the rule's <code>ConfigRuleName</code>, <code>ConfigRuleId</code>, or <code>ConfigRuleArn</code> in the <code>ConfigRule</code> data type that you use in this request.</p> <p>The maximum number of rules that AWS Config supports is 25.</p> <p>For more information about developing and using AWS Config rules, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html\">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p> <p></p>"
+    },
     "PutConfigurationRecorder":{
       "name":"PutConfigurationRecorder",
       "http":{
@@ -273,7 +463,7 @@
           "documentation":"<p>AWS Config throws an exception if the recording group does not contain a valid list of resource types. Invalid values could also be incorrectly formatted.</p>"
         }
       ],
-      "documentation":"<p>Creates a new configuration recorder to record the selected resource configurations. </p> <p>You can use this action to change the role <code>roleARN</code> and/or the <code>recordingGroup</code> of an existing recorder. To change the role, call the action on the existing configuration recorder and specify a role.</p> <note> <p>Currently, you can specify only one configuration recorder per account.</p> <p>If <code>ConfigurationRecorder</code> does not have the <b>recordingGroup</b> parameter specified, the default is to record all supported resource types.</p> </note>"
+      "documentation":"<p>Creates a new configuration recorder to record the selected resource configurations.</p> <p>You can use this action to change the role <code>roleARN</code> and/or the <code>recordingGroup</code> of an existing recorder. To change the role, call the action on the existing configuration recorder and specify a role.</p> <note> <p>Currently, you can specify only one configuration recorder per account.</p> <p>If <code>ConfigurationRecorder</code> does not have the <b>recordingGroup</b> parameter specified, the default is to record all supported resource types.</p> </note>"
     },
     "PutDeliveryChannel":{
       "name":"PutDeliveryChannel",
@@ -324,6 +514,33 @@
       ],
       "documentation":"<p>Creates a new delivery channel object to deliver the configuration information to an Amazon S3 bucket, and to an Amazon SNS topic. </p> <p>You can use this action to change the Amazon S3 bucket or an Amazon SNS topic of the existing delivery channel. To change the Amazon S3 bucket or an Amazon SNS topic, call this action and specify the changed values for the S3 bucket and the SNS topic. If you specify a different value for either the S3 bucket or the SNS topic, this action will keep the existing value for the parameter that is not changed. </p> <note> <p>Currently, you can specify only one delivery channel per account.</p> </note>"
     },
+    "PutEvaluations":{
+      "name":"PutEvaluations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutEvaluationsRequest"},
+      "output":{"shape":"PutEvaluationsResponse"},
+      "errors":[
+        {
+          "shape":"InvalidParameterValueException",
+          "exception":true,
+          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
+        },
+        {
+          "shape":"InvalidResultTokenException",
+          "exception":true,
+          "documentation":"<p>The result token is invalid.</p>"
+        },
+        {
+          "shape":"NoSuchConfigRuleException",
+          "exception":true,
+          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
+        }
+      ],
+      "documentation":"<p>Used by an AWS Lambda function to deliver evaluation results to AWS Config. This action is required in every AWS Lambda function that is invoked by an AWS Config rule.</p>"
+    },
     "StartConfigurationRecorder":{
       "name":"StartConfigurationRecorder",
       "http":{
@@ -356,7 +573,7 @@
       },
       "input":{
         "shape":"StopConfigurationRecorderRequest",
-        "documentation":"<p><p>The input for the <a>StopConfigurationRecorder</a> action.</p></p>"
+        "documentation":"<p> <p>The input for the <a>StopConfigurationRecorder</a> action.</p> </p>"
       },
       "errors":[
         {
@@ -387,6 +604,131 @@
         "Forward"
       ]
     },
+    "Compliance":{
+      "type":"structure",
+      "members":{
+        "ComplianceType":{
+          "shape":"ComplianceType",
+          "documentation":"<p>Indicates whether an AWS resource or AWS Config rule is compliant.</p> <p>A resource is compliant if it complies with all of the AWS Config rules that evaluate it, and it is noncompliant if it does not comply with one or more of these rules.</p> <p>A rule is compliant if all of the resources that the rule evaluates comply with it, and it is noncompliant if any of these resources do not comply.</p>"
+        },
+        "ComplianceContributorCount":{
+          "shape":"ComplianceContributorCount",
+          "documentation":"<p>The number of AWS resources or AWS Config rules that cause a result of <code>NON_COMPLIANT</code>, up to a maximum of 25.</p>"
+        }
+      },
+      "documentation":"<p>Indicates whether an AWS resource or AWS Config rule is compliant and provides the number of contributors that affect the compliance.</p>"
+    },
+    "ComplianceByConfigRule":{
+      "type":"structure",
+      "members":{
+        "ConfigRuleName":{
+          "shape":"StringWithCharLimit64",
+          "documentation":"<p>The name of the AWS Config rule.</p>"
+        },
+        "Compliance":{
+          "shape":"Compliance",
+          "documentation":"<p>Indicates whether the AWS Config rule is compliant.</p>"
+        }
+      },
+      "documentation":"<p>Indicates whether an AWS Config rule is compliant. A rule is compliant if all of the resources that the rule evaluated comply with it, and it is noncompliant if any of these resources do not comply. </p>"
+    },
+    "ComplianceByConfigRules":{
+      "type":"list",
+      "member":{"shape":"ComplianceByConfigRule"}
+    },
+    "ComplianceByResource":{
+      "type":"structure",
+      "members":{
+        "ResourceType":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The type of the AWS resource that was evaluated.</p>"
+        },
+        "ResourceId":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The ID of the AWS resource that was evaluated.</p>"
+        },
+        "Compliance":{
+          "shape":"Compliance",
+          "documentation":"<p>Indicates whether the AWS resource complies with all of the AWS Config rules that evaluated it.</p>"
+        }
+      },
+      "documentation":"<p>Indicates whether an AWS resource that is evaluated according to one or more AWS Config rules is compliant. A resource is compliant if it complies with all of the rules that evaluate it, and it is noncompliant if it does not comply with one or more of these rules. </p>"
+    },
+    "ComplianceByResources":{
+      "type":"list",
+      "member":{"shape":"ComplianceByResource"}
+    },
+    "ComplianceContributorCount":{
+      "type":"structure",
+      "members":{
+        "CappedCount":{
+          "shape":"Integer",
+          "documentation":"<p>The number of AWS resources or AWS Config rules responsible for the current compliance of the item.</p>"
+        },
+        "CapExceeded":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether the maximum count is reached.</p>"
+        }
+      },
+      "documentation":"<p>The number of AWS resources or AWS Config rules responsible for the current compliance of the item, up to a maximum number. </p>"
+    },
+    "ComplianceResourceTypes":{
+      "type":"list",
+      "member":{"shape":"StringWithCharLimit256"},
+      "min":0,
+      "max":100
+    },
+    "ComplianceSummariesByResourceType":{
+      "type":"list",
+      "member":{"shape":"ComplianceSummaryByResourceType"}
+    },
+    "ComplianceSummary":{
+      "type":"structure",
+      "members":{
+        "CompliantResourceCount":{
+          "shape":"ComplianceContributorCount",
+          "documentation":"<p>The number of AWS Config rules or AWS resources that are compliant, up to a maximum of 25 for rules and 100 for resources.</p>"
+        },
+        "NonCompliantResourceCount":{
+          "shape":"ComplianceContributorCount",
+          "documentation":"<p>The number of AWS Config rules or AWS resources that are noncompliant, up to a maximum of 25 for rules and 100 for resources.</p>"
+        },
+        "ComplianceSummaryTimestamp":{
+          "shape":"Date",
+          "documentation":"<p>The time that AWS Config created the compliance summary.</p>"
+        }
+      },
+      "documentation":"<p>The number of AWS Config rules or AWS resources that are compliant and noncompliant, up to a maximum.</p>"
+    },
+    "ComplianceSummaryByResourceType":{
+      "type":"structure",
+      "members":{
+        "ResourceType":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The type of AWS resource.</p>"
+        },
+        "ComplianceSummary":{
+          "shape":"ComplianceSummary",
+          "documentation":"<p>The number of AWS resources that are compliant or noncompliant, up to a maximum of 100 for each compliance.</p>"
+        }
+      },
+      "documentation":"<p>The number of AWS resources of a specific type that are compliant or noncompliant, up to a maximum of 100 for each compliance.</p>"
+    },
+    "ComplianceType":{
+      "type":"string",
+      "enum":[
+        "COMPLIANT",
+        "NON_COMPLIANT",
+        "NOT_APPLICABLE",
+        "INSUFFICIENT_DATA"
+      ]
+    },
+    "ComplianceTypes":{
+      "type":"list",
+      "member":{"shape":"ComplianceType"},
+      "min":0,
+      "max":3
+    },
     "ConfigExportDeliveryInfo":{
       "type":"structure",
       "members":{
@@ -409,9 +751,125 @@
         "lastSuccessfulTime":{
           "shape":"Date",
           "documentation":"<p>The time of the last successful delivery.</p>"
+        },
+        "nextDeliveryTime":{
+          "shape":"Date",
+          "documentation":"<p>The time that the next delivery occurs.</p>"
         }
       },
       "documentation":"<p>A list that contains the status of the delivery of either the snapshot or the configuration history to the specified Amazon S3 bucket.</p>"
+    },
+    "ConfigRule":{
+      "type":"structure",
+      "required":["Source"],
+      "members":{
+        "ConfigRuleName":{
+          "shape":"StringWithCharLimit64",
+          "documentation":"<p>The name that you assign to the AWS Config rule. The name is required if you are adding a new rule.</p>"
+        },
+        "ConfigRuleArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Config rule.</p>"
+        },
+        "ConfigRuleId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the AWS Config rule.</p>"
+        },
+        "Description":{
+          "shape":"EmptiableStringWithCharLimit256",
+          "documentation":"<p>The description that you provide for the AWS Config rule.</p>"
+        },
+        "Scope":{
+          "shape":"Scope",
+          "documentation":"<p>Defines which resources the AWS Config rule evaluates. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one or more resource IDs. Specify a scope to constrain the resources that are evaluated. If you do not specify a scope, the AWS Config Rule evaluates all resources in the recording group.</p>"
+        },
+        "Source":{
+          "shape":"Source",
+          "documentation":"<p>Provides the rule owner (AWS or customer), the rule identifier, and the events that cause the function to evaluate your AWS resources.</p>"
+        },
+        "InputParameters":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>A string in JSON format that is passed to the AWS Config rule Lambda function.</p>"
+        },
+        "MaximumExecutionFrequency":{
+          "shape":"MaximumExecutionFrequency",
+          "documentation":"<p>The maximum frequency at which the AWS Config rule runs evaluations.</p> <p>If your rule is periodic, meaning it runs an evaluation when AWS Config delivers a configuration snapshot, then it cannot run evaluations more frequently than AWS Config delivers the snapshots. For periodic rules, set the value of the <code>MaximumExecutionFrequency</code> key to be equal to or greater than the value of the <code>deliveryFrequency</code> key, which is part of <code>ConfigSnapshotDeliveryProperties</code>. To update the frequency with which AWS Config delivers your snapshots, use the <code>PutDeliveryChannel</code> action.</p>"
+        },
+        "ConfigRuleState":{
+          "shape":"ConfigRuleState",
+          "documentation":"<p>Indicates whether the AWS Config rule is active or currently being deleted by AWS Config.</p> <p>AWS Config sets the state of a rule to <code>DELETING</code> temporarily after you use the <code>DeleteConfigRule</code> request to delete the rule. After AWS Config finishes deleting a rule, the rule and all of its evaluations are erased and no longer available.</p> <p>You cannot add a rule to AWS Config that has the state set to <code>DELETING</code>. If you want to delete a rule, you must use the <code>DeleteConfigRule</code> request.</p>"
+        }
+      },
+      "documentation":"<p>An AWS Lambda function that evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change or delivers a configuration snapshot. This function can evaluate any resource in the recording group. To define which of these are evaluated, specify a value for the <code>Scope</code> key.</p> <p>For more information about developing and using AWS Config rules, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html\">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>"
+    },
+    "ConfigRuleEvaluationStatus":{
+      "type":"structure",
+      "members":{
+        "ConfigRuleName":{
+          "shape":"StringWithCharLimit64",
+          "documentation":"<p>The name of the AWS Config rule.</p>"
+        },
+        "ConfigRuleArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS Config rule.</p>"
+        },
+        "ConfigRuleId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the AWS Config rule.</p>"
+        },
+        "LastSuccessfulInvocationTime":{
+          "shape":"Date",
+          "documentation":"<p>The time that AWS Config last successfully invoked the AWS Config rule to evaluate your AWS resources.</p>"
+        },
+        "LastFailedInvocationTime":{
+          "shape":"Date",
+          "documentation":"<p>The time that AWS Config last failed to invoke the AWS Config rule to evaluate your AWS resources.</p>"
+        },
+        "FirstActivatedTime":{
+          "shape":"Date",
+          "documentation":"<p>The time that you first activated the AWS Config rule.</p>"
+        },
+        "LastErrorCode":{
+          "shape":"String",
+          "documentation":"<p>The error code that AWS Config returned when the rule last failed.</p>"
+        },
+        "LastErrorMessage":{
+          "shape":"String",
+          "documentation":"<p>The error message that AWS Config returned when the rule last failed.</p>"
+        }
+      },
+      "documentation":"<p>Status information for your AWS managed Config rules. The status includes information such as the last time the rule ran, the last time it failed, and the related error for the last failure.</p> <p>This action does not return status information about customer managed Config rules.</p>"
+    },
+    "ConfigRuleEvaluationStatusList":{
+      "type":"list",
+      "member":{"shape":"ConfigRuleEvaluationStatus"}
+    },
+    "ConfigRuleNames":{
+      "type":"list",
+      "member":{"shape":"StringWithCharLimit64"},
+      "min":0,
+      "max":25
+    },
+    "ConfigRuleState":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "DELETING"
+      ]
+    },
+    "ConfigRules":{
+      "type":"list",
+      "member":{"shape":"ConfigRule"}
+    },
+    "ConfigSnapshotDeliveryProperties":{
+      "type":"structure",
+      "members":{
+        "deliveryFrequency":{
+          "shape":"MaximumExecutionFrequency",
+          "documentation":"<p>The frequency with which a AWS Config recurringly delivers configuration snapshots.</p>"
+        }
+      },
+      "documentation":"<p>Options for how AWS Config delivers configuration snapshots to the Amazon S3 bucket in your delivery channel.</p>"
     },
     "ConfigStreamDeliveryInfo":{
       "type":"structure",
@@ -508,7 +966,7 @@
           "documentation":"<p>The description of the resource configuration.</p>"
         }
       },
-      "documentation":"<p>A list that contains detailed configurations of a specified resource.</p> <note> <p>Currently, the list does not contain information about non-AWS components (for example, applications on your Amazon EC2 instances). </p> </note>"
+      "documentation":"<p>A list that contains detailed configurations of a specified resource.</p> <note> <p>Currently, the list does not contain information about non-AWS components (for example, applications on your Amazon EC2 instances).</p> </note>"
     },
     "ConfigurationItemCaptureTime":{"type":"timestamp"},
     "ConfigurationItemList":{
@@ -595,6 +1053,16 @@
     },
     "ConfigurationStateId":{"type":"string"},
     "Date":{"type":"timestamp"},
+    "DeleteConfigRuleRequest":{
+      "type":"structure",
+      "required":["ConfigRuleName"],
+      "members":{
+        "ConfigRuleName":{
+          "shape":"StringWithCharLimit64",
+          "documentation":"<p>The name of the AWS Config rule that you want to delete.</p>"
+        }
+      }
+    },
     "DeleteDeliveryChannelRequest":{
       "type":"structure",
       "required":["DeliveryChannelName"],
@@ -645,7 +1113,8 @@
         "snsTopicARN":{
           "shape":"String",
           "documentation":"<p>The Amazon Resource Name (ARN) of the SNS topic that AWS Config delivers notifications to.</p>"
-        }
+        },
+        "configSnapshotDeliveryProperties":{"shape":"ConfigSnapshotDeliveryProperties"}
       },
       "documentation":"<p>A logical container used for storing the configuration changes of an AWS resource.</p>"
     },
@@ -690,6 +1159,118 @@
         "Failure",
         "Not_Applicable"
       ]
+    },
+    "DescribeComplianceByConfigRuleRequest":{
+      "type":"structure",
+      "members":{
+        "ConfigRuleNames":{
+          "shape":"ConfigRuleNames",
+          "documentation":"<p>Specify one or more AWS Config rule names to filter the results by rule.</p>"
+        },
+        "ComplianceTypes":{
+          "shape":"ComplianceTypes",
+          "documentation":"<p>Filters the results by compliance. The valid values are <code>Compliant</code> and <code>NonCompliant</code>.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "DescribeComplianceByConfigRuleResponse":{
+      "type":"structure",
+      "members":{
+        "ComplianceByConfigRules":{
+          "shape":"ComplianceByConfigRules",
+          "documentation":"<p>Indicates whether each of the specified AWS Config rules is compliant.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The string that you use in a subsequent request to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "DescribeComplianceByResourceRequest":{
+      "type":"structure",
+      "members":{
+        "ResourceType":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The types of AWS resources for which you want compliance information; for example, <code>AWS::EC2::Instance</code>. For this action, you can specify that the resource type is an AWS account by specifying <code>AWS::::Account</code>.</p>"
+        },
+        "ResourceId":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The ID of the AWS resource for which you want compliance information. You can specify only one resource ID. If you specify a resource ID, you must also specify a type for <code>ResourceType</code>.</p>"
+        },
+        "ComplianceTypes":{
+          "shape":"ComplianceTypes",
+          "documentation":"<p>Filters the results by compliance. The valid values are <code>Compliant</code> and <code>NonCompliant</code>.</p>"
+        },
+        "Limit":{
+          "shape":"Limit",
+          "documentation":"<p>The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a limit greater than 100. If you specify 0, AWS Config uses the default.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "DescribeComplianceByResourceResponse":{
+      "type":"structure",
+      "members":{
+        "ComplianceByResources":{
+          "shape":"ComplianceByResources",
+          "documentation":"<p>Indicates whether the specified AWS resource complies with all of the AWS Config rules that evaluate it.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The string that you use in a subsequent request to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "DescribeConfigRuleEvaluationStatusRequest":{
+      "type":"structure",
+      "members":{
+        "ConfigRuleNames":{
+          "shape":"ConfigRuleNames",
+          "documentation":"<p>The name of the AWS managed Config rules for which you want status information. If you do not specify any names, AWS Config returns status information for all AWS managed Config rules that you use. </p>"
+        }
+      }
+    },
+    "DescribeConfigRuleEvaluationStatusResponse":{
+      "type":"structure",
+      "members":{
+        "ConfigRulesEvaluationStatus":{
+          "shape":"ConfigRuleEvaluationStatusList",
+          "documentation":"<p>Status information about your AWS managed Config rules.</p>"
+        }
+      }
+    },
+    "DescribeConfigRulesRequest":{
+      "type":"structure",
+      "members":{
+        "ConfigRuleNames":{
+          "shape":"ConfigRuleNames",
+          "documentation":"<p>The names of the AWS Config rules for which you want details. If you do not specify any names, AWS Config returns details for all your rules.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "DescribeConfigRulesResponse":{
+      "type":"structure",
+      "members":{
+        "ConfigRules":{
+          "shape":"ConfigRules",
+          "documentation":"<p>The details about your AWS Config rules.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The string that you use in a subsequent request to get the next page of results in a paginated response.</p>"
+        }
+      }
     },
     "DescribeConfigurationRecorderStatusRequest":{
       "type":"structure",
@@ -772,6 +1353,219 @@
       "documentation":"<p>The output for the <a>DescribeDeliveryChannels</a> action.</p>"
     },
     "EarlierTime":{"type":"timestamp"},
+    "EmptiableStringWithCharLimit256":{
+      "type":"string",
+      "min":0,
+      "max":256
+    },
+    "Evaluation":{
+      "type":"structure",
+      "required":[
+        "ComplianceResourceType",
+        "ComplianceResourceId",
+        "ComplianceType",
+        "OrderingTimestamp"
+      ],
+      "members":{
+        "ComplianceResourceType":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The type of AWS resource that was evaluated.</p>"
+        },
+        "ComplianceResourceId":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The ID of the AWS resource that was evaluated.</p>"
+        },
+        "ComplianceType":{
+          "shape":"ComplianceType",
+          "documentation":"<p>Indicates whether the AWS resource complies with the AWS Config rule that it was evaluated against.</p>"
+        },
+        "Annotation":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>Supplementary information about how the evaluation determined the compliance.</p>"
+        },
+        "OrderingTimestamp":{
+          "shape":"OrderingTimestamp",
+          "documentation":"<p>The time of the event in AWS Config that triggered the evaluation. For event-based evaluations, the time indicates when AWS Config created the configuration item that triggered the evaluation. For periodic evaluations, the time indicates when AWS Config delivered the configuration snapshot that triggered the evaluation.</p>"
+        }
+      },
+      "documentation":"<p>Identifies an AWS resource and indicates whether it complies with the AWS Config rule that it was evaluated against.</p>"
+    },
+    "EvaluationResult":{
+      "type":"structure",
+      "members":{
+        "EvaluationResultIdentifier":{
+          "shape":"EvaluationResultIdentifier",
+          "documentation":"<p>Uniquely identifies the evaluation result.</p>"
+        },
+        "ComplianceType":{
+          "shape":"ComplianceType",
+          "documentation":"<p>Indicates whether the AWS resource complies with the AWS Config rule that evaluated it.</p>"
+        },
+        "ResultRecordedTime":{
+          "shape":"Date",
+          "documentation":"<p>The time when AWS Config recorded the evaluation result.</p>"
+        },
+        "ConfigRuleInvokedTime":{
+          "shape":"Date",
+          "documentation":"<p>The time when the AWS Config rule evaluated the AWS resource.</p>"
+        },
+        "Annotation":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>Supplementary information about how the evaluation determined the compliance.</p>"
+        },
+        "ResultToken":{
+          "shape":"String",
+          "documentation":"<p>An encrypted token that associates an evaluation with an AWS Config rule. The token identifies the rule, the AWS resource being evaluated, and the event that triggered the evaluation.</p>"
+        }
+      },
+      "documentation":"<p>The details of an AWS Config evaluation. Provides the AWS resource that was evaluated, the compliance of the resource, related timestamps, and supplementary information. </p>"
+    },
+    "EvaluationResultIdentifier":{
+      "type":"structure",
+      "members":{
+        "EvaluationResultQualifier":{
+          "shape":"EvaluationResultQualifier",
+          "documentation":"<p>Identifies an AWS Config rule used to evaluate an AWS resource, and provides the type and ID of the evaluated resource.</p>"
+        },
+        "OrderingTimestamp":{
+          "shape":"Date",
+          "documentation":"<p>The time of the event that triggered the evaluation of your AWS resources. The time can indicate when AWS Config delivered a configuration item change notification, or it can indicate when AWS Config delivered the configuration snapshot, depending on which event triggered the evaluation.</p>"
+        }
+      },
+      "documentation":"<p>Uniquely identifies an evaluation result.</p>"
+    },
+    "EvaluationResultQualifier":{
+      "type":"structure",
+      "members":{
+        "ConfigRuleName":{
+          "shape":"StringWithCharLimit64",
+          "documentation":"<p>The name of the AWS Config rule that was used in the evaluation.</p>"
+        },
+        "ResourceType":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The type of AWS resource that was evaluated.</p>"
+        },
+        "ResourceId":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The ID of the evaluated AWS resource.</p>"
+        }
+      },
+      "documentation":"<p>Identifies an AWS Config rule that evaluated an AWS resource, and provides the type and ID of the resource that the rule evaluated.</p>"
+    },
+    "EvaluationResults":{
+      "type":"list",
+      "member":{"shape":"EvaluationResult"}
+    },
+    "Evaluations":{
+      "type":"list",
+      "member":{"shape":"Evaluation"},
+      "min":0,
+      "max":100
+    },
+    "EventSource":{
+      "type":"string",
+      "enum":["aws.config"]
+    },
+    "GetComplianceDetailsByConfigRuleRequest":{
+      "type":"structure",
+      "required":["ConfigRuleName"],
+      "members":{
+        "ConfigRuleName":{
+          "shape":"StringWithCharLimit64",
+          "documentation":"<p>The name of the AWS Config rule for which you want compliance information.</p>"
+        },
+        "ComplianceTypes":{
+          "shape":"ComplianceTypes",
+          "documentation":"<p>Specify to filter the results by compliance. The valid values are <code>Compliant</code>, <code>NonCompliant</code>, and <code>NotApplicable</code>.</p>"
+        },
+        "Limit":{
+          "shape":"Limit",
+          "documentation":"<p>The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a limit greater than 100. If you specify 0, AWS Config uses the default.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "GetComplianceDetailsByConfigRuleResponse":{
+      "type":"structure",
+      "members":{
+        "EvaluationResults":{
+          "shape":"EvaluationResults",
+          "documentation":"<p>Indicates whether the AWS resource complies with the specified AWS Config rule.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The string that you use in a subsequent request to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "GetComplianceDetailsByResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceType",
+        "ResourceId"
+      ],
+      "members":{
+        "ResourceType":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The type of the AWS resource for which you want compliance information.</p>"
+        },
+        "ResourceId":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The ID of the AWS resource for which you want compliance information.</p>"
+        },
+        "ComplianceTypes":{
+          "shape":"ComplianceTypes",
+          "documentation":"<p>Specify to filter the results by compliance. The valid values are <code>Compliant</code>, <code>NonCompliant</code>, and <code>NotApplicable</code>.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "GetComplianceDetailsByResourceResponse":{
+      "type":"structure",
+      "members":{
+        "EvaluationResults":{
+          "shape":"EvaluationResults",
+          "documentation":"<p>Indicates whether the specified AWS resource complies each AWS Config rule.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The string that you use in a subsequent request to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "GetComplianceSummaryByConfigRuleResponse":{
+      "type":"structure",
+      "members":{
+        "ComplianceSummary":{
+          "shape":"ComplianceSummary",
+          "documentation":"<p>The number of AWS Config rules that are compliant and the number that are noncompliant, up to a maximum of 25 for each.</p>"
+        }
+      }
+    },
+    "GetComplianceSummaryByResourceTypeRequest":{
+      "type":"structure",
+      "members":{
+        "ResourceTypes":{
+          "shape":"ResourceTypes",
+          "documentation":"<p>Specify one or more resource types to get the number of resources that are compliant and the number that are noncompliant for each resource type.</p> <p>For this request, you can specify an AWS resource type such as <code>AWS::EC2::Instance</code>, and you can specify that the resource type is an AWS account by specifying <code>AWS::::Account</code>.</p>"
+        }
+      }
+    },
+    "GetComplianceSummaryByResourceTypeResponse":{
+      "type":"structure",
+      "members":{
+        "ComplianceSummariesByResourceType":{
+          "shape":"ComplianceSummariesByResourceType",
+          "documentation":"<p>The number of resources that are compliant and the number that are noncompliant. If one or more resource types were provided with the request, the numbers are returned for each resource type. The maximum number returned is 100.</p>"
+        }
+      }
+    },
     "GetResourceConfigHistoryRequest":{
       "type":"structure",
       "required":[
@@ -831,6 +1625,7 @@
       "exception":true,
       "documentation":"<p>Your Amazon S3 bucket policy does not permit AWS Config to write to it.</p>"
     },
+    "Integer":{"type":"integer"},
     "InvalidConfigurationRecorderNameException":{
       "type":"structure",
       "members":{
@@ -859,12 +1654,26 @@
       "exception":true,
       "documentation":"<p>The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.</p>"
     },
+    "InvalidParameterValueException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
+    },
     "InvalidRecordingGroupException":{
       "type":"structure",
       "members":{
       },
       "exception":true,
       "documentation":"<p>AWS Config throws an exception if the recording group does not contain a valid list of resource types. Invalid values could also be incorrectly formatted.</p>"
+    },
+    "InvalidResultTokenException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The result token is invalid.</p>"
     },
     "InvalidRoleException":{
       "type":"structure",
@@ -950,6 +1759,13 @@
         }
       }
     },
+    "MaxNumberOfConfigRulesExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>Failed to add the AWS Config rule because the account already contains the maximum number of 25 rules. Consider deleting any deactivated rules before adding new rules.</p>"
+    },
     "MaxNumberOfConfigurationRecordersExceededException":{
       "type":"structure",
       "members":{
@@ -963,6 +1779,23 @@
       },
       "exception":true,
       "documentation":"<p>You have reached the limit on the number of delivery channels you can create.</p>"
+    },
+    "MaximumExecutionFrequency":{
+      "type":"string",
+      "enum":[
+        "One_Hour",
+        "Three_Hours",
+        "Six_Hours",
+        "Twelve_Hours",
+        "TwentyFour_Hours"
+      ]
+    },
+    "MessageType":{
+      "type":"string",
+      "enum":[
+        "ConfigurationItemChangeNotification",
+        "ConfigurationSnapshotDeliveryCompleted"
+      ]
     },
     "Name":{"type":"string"},
     "NextToken":{"type":"string"},
@@ -994,6 +1827,13 @@
       "exception":true,
       "documentation":"<p>The specified Amazon S3 bucket does not exist.</p>"
     },
+    "NoSuchConfigRuleException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
+    },
     "NoSuchConfigurationRecorderException":{
       "type":"structure",
       "members":{
@@ -1007,6 +1847,21 @@
       },
       "exception":true,
       "documentation":"<p>You have specified a delivery channel that does not exist.</p>"
+    },
+    "OrderingTimestamp":{"type":"timestamp"},
+    "Owner":{
+      "type":"string",
+      "enum":[
+        "CUSTOM_LAMBDA",
+        "AWS"
+      ]
+    },
+    "PutConfigRuleRequest":{
+      "type":"structure",
+      "required":["ConfigRule"],
+      "members":{
+        "ConfigRule":{"shape":"ConfigRule"}
+      }
     },
     "PutConfigurationRecorderRequest":{
       "type":"structure",
@@ -1029,6 +1884,29 @@
         }
       },
       "documentation":"<p>The input for the <a>PutDeliveryChannel</a> action.</p>"
+    },
+    "PutEvaluationsRequest":{
+      "type":"structure",
+      "required":["ResultToken"],
+      "members":{
+        "Evaluations":{
+          "shape":"Evaluations",
+          "documentation":"<p>The assessments that the AWS Lambda function performs. Each evaluation identifies an AWS resource and indicates whether it complies with the AWS Config rule that invokes the AWS Lambda function.</p>"
+        },
+        "ResultToken":{
+          "shape":"String",
+          "documentation":"<p>An encrypted token that associates an evaluation with an AWS Config rule. Identifies the rule and the event that triggered the evaluation</p>"
+        }
+      }
+    },
+    "PutEvaluationsResponse":{
+      "type":"structure",
+      "members":{
+        "FailedEvaluations":{
+          "shape":"Evaluations",
+          "documentation":"<p>Requests that failed because of a client or server error.</p>"
+        }
+      }
     },
     "RecorderName":{
       "type":"string",
@@ -1122,6 +2000,13 @@
       "type":"list",
       "member":{"shape":"ResourceIdentifier"}
     },
+    "ResourceInUseException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true,
+      "documentation":"<p>The rule is currently being deleted. Wait for a while and try again.</p>"
+    },
     "ResourceName":{"type":"string"},
     "ResourceNotDiscoveredException":{
       "type":"structure",
@@ -1153,6 +2038,72 @@
       "type":"list",
       "member":{"shape":"ResourceType"}
     },
+    "ResourceTypes":{
+      "type":"list",
+      "member":{"shape":"StringWithCharLimit256"},
+      "min":0,
+      "max":100
+    },
+    "Scope":{
+      "type":"structure",
+      "members":{
+        "ComplianceResourceTypes":{
+          "shape":"ComplianceResourceTypes",
+          "documentation":"<p>The resource types of only those AWS resources that you want AWS Config to evaluate against the rule. You can specify only one type if you also specify resource IDs for <code>ComplianceResourceId</code>.</p>"
+        },
+        "TagKey":{
+          "shape":"StringWithCharLimit128",
+          "documentation":"<p>The tag key that is applied to only those AWS resources that you want AWS Config to evaluate against the rule.</p>"
+        },
+        "TagValue":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The tag value applied to only those AWS resources that you want AWS Config to evaluate against the rule. If you specify a value for <code>TagValue</code>, you must also specify a value for <code>TagKey</code>.</p>"
+        },
+        "ComplianceResourceId":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>The IDs of only those AWS resources that you want AWS Config to evaluate against the rule. If you specify a resource ID, you must specify one resource type for <code>ComplianceResourceTypes</code>.</p>"
+        }
+      },
+      "documentation":"<p>Defines which resources AWS Config evaluates against a rule. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one or more resource IDs. Specify a scope to constrain the resources to be evaluated. If you do not specify a scope, all resources in your recording group are evaluated against the rule. </p>"
+    },
+    "Source":{
+      "type":"structure",
+      "members":{
+        "Owner":{
+          "shape":"Owner",
+          "documentation":"<p>Indicates whether AWS or the customer owns and manages the AWS Config rule.</p>"
+        },
+        "SourceIdentifier":{
+          "shape":"StringWithCharLimit256",
+          "documentation":"<p>For AWS managed Config rules, a pre-defined identifier from a list. To reference the list, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">Using AWS Managed Config Rules</a>.</p> <p>For customer managed Config rules, the identifier is the Amazon Resource Name (ARN) of the rule's AWS Lambda function.</p>"
+        },
+        "SourceDetails":{
+          "shape":"SourceDetails",
+          "documentation":"<p>Provides the source and type of the event that causes AWS Config to evaluate your AWS resources.</p>"
+        }
+      },
+      "documentation":"<p>Provides the AWS Config rule owner (AWS or customer), the rule identifier, and the events that trigger the evaluation of your AWS resources.</p>"
+    },
+    "SourceDetail":{
+      "type":"structure",
+      "members":{
+        "EventSource":{
+          "shape":"EventSource",
+          "documentation":"<p>The source of the event, such as an AWS service, that triggers AWS Config to evaluate your AWS resources.</p>"
+        },
+        "MessageType":{
+          "shape":"MessageType",
+          "documentation":"<p>The type of SNS message that triggers AWS Config to run an evaluation. For evaluations that are initiated when AWS Config delivers a configuration item change notification, you must use <code>ConfigurationItemChangeNotification</code>. For evaluations that are initiated when AWS Config delivers a configuration snapshot, you must use <code>ConfigurationSnapshotDeliveryCompleted</code>. </p>"
+        }
+      },
+      "documentation":"<p>Provides the source and type of the event that triggers AWS Config to evaluate your AWS resources against a rule.</p>"
+    },
+    "SourceDetails":{
+      "type":"list",
+      "member":{"shape":"SourceDetail"},
+      "min":0,
+      "max":25
+    },
     "StartConfigurationRecorderRequest":{
       "type":"structure",
       "required":["ConfigurationRecorderName"],
@@ -1173,9 +2124,24 @@
           "documentation":"<p>The name of the recorder object that records each configuration change made to the resources.</p>"
         }
       },
-      "documentation":"<p><p>The input for the <a>StopConfigurationRecorder</a> action.</p></p>"
+      "documentation":"<p> <p>The input for the <a>StopConfigurationRecorder</a> action.</p> </p>"
     },
     "String":{"type":"string"},
+    "StringWithCharLimit128":{
+      "type":"string",
+      "min":1,
+      "max":128
+    },
+    "StringWithCharLimit256":{
+      "type":"string",
+      "min":1,
+      "max":256
+    },
+    "StringWithCharLimit64":{
+      "type":"string",
+      "min":1,
+      "max":64
+    },
     "Tags":{
       "type":"map",
       "key":{"shape":"Name"},
