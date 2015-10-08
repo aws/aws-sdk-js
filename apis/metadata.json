@@ -50,13 +50,6 @@
     "prefix": "config",
     "name": "ConfigService"
   },
-  "iot": {
-    "name": "IoT"
-  },
-  "iotdata": {
-    "prefix": "iot-data",
-    "name": "IoTData"
-  },
   "datapipeline": {
     "name": "DataPipeline"
   },
@@ -123,6 +116,13 @@
   },
   "inspector": {
     "name": "Inspector"
+  },
+  "iot": {
+    "name": "Iot"
+  },
+  "iotdata": {
+    "prefix": "iot-data",
+    "name": "IotData"
   },
   "kinesis": {
     "name": "Kinesis"
