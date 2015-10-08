@@ -2212,10 +2212,7 @@
       },
       "documentation":"<p>Information about a certificate.</p>"
     },
-    "CertificateArn":{
-      "type":"string",
-      "pattern":"arn:aws:iot:[a-z]{2}-[a-z]{4}-\\d{1}:\\d{12}:cert/?(0x)?[a-fA-F0-9]+"
-    },
+    "CertificateArn":{"type":"string"},
     "CertificateDescription":{
       "type":"structure",
       "members":{
@@ -3145,6 +3142,16 @@
       "type":"structure",
       "required":["principal"],
       "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
         "principal":{
           "shape":"Principal",
           "location":"header",
@@ -3348,10 +3355,7 @@
       },
       "documentation":"<p>Describes an AWS IoT policy.</p>"
     },
-    "PolicyArn":{
-      "type":"string",
-      "pattern":"arn:aws:iot:[a-z]{2}-[a-z]{4}-\\d{1}:\\d{12}:policy/?[a-zA-Z0-9]+"
-    },
+    "PolicyArn":{"type":"string"},
     "PolicyDocument":{"type":"string"},
     "PolicyName":{
       "type":"string",
@@ -3386,10 +3390,7 @@
       "member":{"shape":"PolicyVersion"}
     },
     "Principal":{"type":"string"},
-    "PrincipalArn":{
-      "type":"string",
-      "pattern":"arn:aws:iot:[a-z]{2}-[a-z]{4}-\\d{1}:\\d{12}:[a-zA-Z0-9]+/?[a-zA-Z0-9]+"
-    },
+    "PrincipalArn":{"type":"string"},
     "Principals":{
       "type":"list",
       "member":{"shape":"PrincipalArn"}
@@ -3613,10 +3614,7 @@
     },
     "StreamName":{"type":"string"},
     "TableName":{"type":"string"},
-    "ThingArn":{
-      "type":"string",
-      "pattern":"arn:aws:iot:[a-z]{2}-[a-z]{4}-\\d{1}:\\d{12}:thing/?[a-zA-Z0-9]+"
-    },
+    "ThingArn":{"type":"string"},
     "ThingAttribute":{
       "type":"structure",
       "members":{
