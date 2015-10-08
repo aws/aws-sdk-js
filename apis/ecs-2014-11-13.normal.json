@@ -10,7 +10,7 @@
     "targetPrefix":"AmazonEC2ContainerServiceV20141113",
     "protocol":"json"
   },
-  "documentation":"<p></p> <p>Amazon EC2 Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes it easy to run, stop, and manage Docker containers on a cluster of Amazon EC2 instances. Amazon ECS lets you launch and stop container-enabled applications with simple API calls, allows you to get the state of your cluster from a centralized service, and gives you access to many familiar Amazon EC2 features like security groups, Amazon EBS volumes, and IAM roles.</p> <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs, isolation policies, and availability requirements. Amazon EC2 Container Service eliminates the need for you to operate your own cluster management and configuration management systems or worry about scaling your management infrastructure.</p>",
+  "documentation":"<p>Amazon EC2 Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes it easy to run, stop, and manage Docker containers on a cluster of EC2 instances. Amazon ECS lets you launch and stop container-enabled applications with simple API calls, allows you to get the state of your cluster from a centralized service, and gives you access to many familiar Amazon EC2 features like security groups, Amazon EBS volumes, and IAM roles.</p> <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs, isolation policies, and availability requirements. Amazon EC2 Container Service eliminates the need for you to operate your own cluster management and configuration management systems or worry about scaling your management infrastructure.</p>",
   "operations":{
     "CreateCluster":{
       "name":"CreateCluster",
@@ -25,12 +25,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -38,7 +38,7 @@
           "documentation":"<p>The specified parameter is invalid. Review the available parameters for the API request.</p>"
         }
       ],
-      "documentation":"<p>Creates a new Amazon ECS cluster. By default, your account will receive a <code>default</code> cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the <code>CreateCluster</code> action.</p>"
+      "documentation":"<p>Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code> cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the <code>CreateCluster</code> action.</p>"
     },
     "CreateService":{
       "name":"CreateService",
@@ -53,12 +53,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -71,7 +71,7 @@
           "documentation":"<p>The specified cluster could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon ECS clusters are region-specific.</p>"
         }
       ],
-      "documentation":"<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS will spawn another instantiation of the task in the specified cluster.</p>"
+      "documentation":"<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS spawns another instantiation of the task in the specified cluster.</p>"
     },
     "DeleteCluster":{
       "name":"DeleteCluster",
@@ -86,12 +86,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -129,12 +129,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -167,12 +167,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -185,7 +185,7 @@
           "documentation":"<p>The specified cluster could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon ECS clusters are region-specific.</p>"
         }
       ],
-      "documentation":"<p>Deregisters an Amazon ECS container instance from the specified cluster. This instance will no longer be available to run tasks.</p> <p>If you intend to use the container instance for some other purpose after deregistration, you should stop all of the tasks running on the container instance before deregistration to avoid any orphaned tasks from consuming resources.</p> <p>Deregistering a container instance removes the instance from a cluster, but it does not terminate the EC2 instance; if you are finished using the instance, be sure to terminate it in the Amazon EC2 console to stop billing.</p> <note><p>When you terminate a container instance, it is automatically deregistered from your cluster.</p></note>"
+      "documentation":"<p>Deregisters an Amazon ECS container instance from the specified cluster. This instance is no longer available to run tasks.</p> <p>If you intend to use the container instance for some other purpose after deregistration, you should stop all of the tasks running on the container instance before deregistration to avoid any orphaned tasks from consuming resources.</p> <p>Deregistering a container instance removes the instance from a cluster, but it does not terminate the EC2 instance; if you are finished using the instance, be sure to terminate it in the Amazon EC2 console to stop billing.</p> <note><p>When you terminate a container instance, it is automatically deregistered from your cluster.</p></note>"
     },
     "DeregisterTaskDefinition":{
       "name":"DeregisterTaskDefinition",
@@ -200,12 +200,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -228,12 +228,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -256,12 +256,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -289,12 +289,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -322,12 +322,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -335,7 +335,7 @@
           "documentation":"<p>The specified parameter is invalid. Review the available parameters for the API request.</p>"
         }
       ],
-      "documentation":"<p>Describes a task definition. You can specify a <code>family</code> and <code>revision</code> to find information on a specific task definition, or you can simply specify the family to find the latest <code>ACTIVE</code> revision in that family.</p> <note> <p>You can only describe <code>INACTIVE</code> task definitions while an active task or service references them.</p> </note>"
+      "documentation":"<p>Describes a task definition. You can specify a <code>family</code> and <code>revision</code> to find information about a specific task definition, or you can simply specify the family to find the latest <code>ACTIVE</code> revision in that family.</p> <note> <p>You can only describe <code>INACTIVE</code> task definitions while an active task or service references them.</p> </note>"
     },
     "DescribeTasks":{
       "name":"DescribeTasks",
@@ -350,12 +350,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -383,12 +383,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Returns an endpoint for the Amazon EC2 Container Service agent to poll for updates.</p>"
@@ -406,12 +406,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -434,12 +434,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -467,12 +467,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -500,12 +500,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -528,12 +528,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -556,12 +556,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -572,6 +572,11 @@
           "shape":"ClusterNotFoundException",
           "exception":true,
           "documentation":"<p>The specified cluster could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon ECS clusters are region-specific.</p>"
+        },
+        {
+          "shape":"ServiceNotFoundException",
+          "exception":true,
+          "documentation":"<p>The specified service could not be found. You can view your available services with <a>ListServices</a>. Amazon ECS services are cluster-specific and region-specific.</p>"
         }
       ],
       "documentation":"<p>Returns a list of tasks for a specified cluster. You can filter the results by family name, by a particular container instance, or by the desired status of the task with the <code>family</code>, <code>containerInstance</code>, and <code>desiredStatus</code> parameters.</p>"
@@ -589,15 +594,15 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         }
       ],
-      "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Registers an Amazon EC2 instance into the specified cluster. This instance will become available to place containers on.</p>"
+      "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Registers an EC2 instance into the specified cluster. This instance becomes available to place containers on.</p>"
     },
     "RegisterTaskDefinition":{
       "name":"RegisterTaskDefinition",
@@ -612,12 +617,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -625,7 +630,7 @@
           "documentation":"<p>The specified parameter is invalid. Review the available parameters for the API request.</p>"
         }
       ],
-      "documentation":"<p>Registers a new task definition from the supplied <code>family</code> and <code>containerDefinitions</code>. Optionally, you can add data volumes to your containers with the <code>volumes</code> parameter. For more information on task definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+      "documentation":"<p>Registers a new task definition from the supplied <code>family</code> and <code>containerDefinitions</code>. Optionally, you can add data volumes to your containers with the <code>volumes</code> parameter. For more information about task definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
     },
     "RunTask":{
       "name":"RunTask",
@@ -640,12 +645,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -658,7 +663,7 @@
           "documentation":"<p>The specified cluster could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon ECS clusters are region-specific.</p>"
         }
       ],
-      "documentation":"<p>Start a task using random placement and the default Amazon ECS scheduler. If you want to use your own scheduler or place a task on a specific container instance, use <code>StartTask</code> instead.</p> <important> <p>The <code>count</code> parameter is limited to 10 tasks per call.</p> </important>"
+      "documentation":"<p>Start a task using random placement and the default Amazon ECS scheduler. To use your own scheduler or place a task on a specific container instance, use <code>StartTask</code> instead.</p> <important> <p>The <code>count</code> parameter is limited to 10 tasks per call.</p> </important>"
     },
     "StartTask":{
       "name":"StartTask",
@@ -673,12 +678,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -691,7 +696,7 @@
           "documentation":"<p>The specified cluster could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon ECS clusters are region-specific.</p>"
         }
       ],
-      "documentation":"<p>Starts a new task from the specified task definition on the specified container instance or instances. If you want to use the default Amazon ECS scheduler to place your task, use <code>RunTask</code> instead.</p> <important> <p>The list of container instances to start tasks on is limited to 10.</p> </important>"
+      "documentation":"<p>Starts a new task from the specified task definition on the specified container instance or instances. To use the default Amazon ECS scheduler to place your task, use <code>RunTask</code> instead.</p> <important> <p>The list of container instances to start tasks on is limited to 10.</p> </important>"
     },
     "StopTask":{
       "name":"StopTask",
@@ -706,12 +711,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -724,7 +729,7 @@
           "documentation":"<p>The specified cluster could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon ECS clusters are region-specific.</p>"
         }
       ],
-      "documentation":"<p>Stops a running task.</p>"
+      "documentation":"<p>Stops a running task.</p> <p>When <a>StopTask</a> is called on a task, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p>"
     },
     "SubmitContainerStateChange":{
       "name":"SubmitContainerStateChange",
@@ -739,12 +744,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Sent to acknowledge that a container changed states.</p>"
@@ -762,12 +767,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Sent to acknowledge that a task changed states.</p>"
@@ -785,12 +790,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -805,7 +810,7 @@
         {
           "shape":"UpdateInProgressException",
           "exception":true,
-          "documentation":"<p>There is already a current Amazon ECS container agent update in progress on the specified container instance. If the container agent becomes disconnected while it is in a transitional stage, such as <code>PENDING</code> or <code>STAGING</code>, the update process can get stuck in that state. However, when the agent reconnects, it will resume where it stopped previously.</p>"
+          "documentation":"<p>There is already a current Amazon ECS container agent update in progress on the specified container instance. If the container agent becomes disconnected while it is in a transitional stage, such as <code>PENDING</code> or <code>STAGING</code>, the update process can get stuck in that state. However, when the agent reconnects, it resumes where it stopped previously.</p>"
         },
         {
           "shape":"NoUpdateAvailableException",
@@ -833,12 +838,12 @@
           "shape":"ServerException",
           "exception":true,
           "fault":true,
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+          "documentation":"<p>These errors are usually caused by a server issue.</p>"
         },
         {
           "shape":"ClientException",
           "exception":true,
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+          "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
         },
         {
           "shape":"InvalidParameterException",
@@ -858,10 +863,10 @@
         {
           "shape":"ServiceNotActiveException",
           "exception":true,
-          "documentation":"<p>The specified service is not active. You cannot update a service that is not active. If you have previously deleted a service, you can recreate it with <a>CreateService</a>.</p>"
+          "documentation":"<p>The specified service is not active. You cannot update a service that is not active. If you have previously deleted a service, you can re-create it with <a>CreateService</a>.</p>"
         }
       ],
-      "documentation":"<p>Modify the desired count or task definition used in a service.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>You can use <code>UpdateService</code> to modify your task definition and deploy a new version of your service, one task at a time. If you modify the task definition with <code>UpdateService</code>, Amazon ECS spawns a task with the new version of the task definition and then stops an old task after the new version is running. Because <code>UpdateService</code> starts a new version of the task before stopping an old version, your cluster must have capacity to support one more instantiation of the task when <code>UpdateService</code> is run. If your cluster cannot support another instantiation of the task used in your service, you can reduce the desired count of your service by one before modifying the task definition.</p>"
+      "documentation":"<p>Modify the desired count or task definition used in a service.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>You can use <code>UpdateService</code> to modify your task definition and deploy a new version of your service, one task at a time. If you modify the task definition with <code>UpdateService</code>, Amazon ECS spawns a task with the new version of the task definition and then stops an old task after the new version is running. Because <code>UpdateService</code> starts a new version of the task before stopping an old version, your cluster must have capacity to support one more instantiation of the task when <code>UpdateService</code> is run. If your cluster cannot support another instantiation of the task used in your service, you can reduce the desired count of your service by one before modifying the task definition.</p> <p>When <a>UpdateService</a> replaces a task during an update, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p>"
     }
   },
   "shapes":{
@@ -875,6 +880,25 @@
         "UPDATED",
         "FAILED"
       ]
+    },
+    "Attribute":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the container instance attribute.</p>"
+        },
+        "value":{
+          "shape":"String",
+          "documentation":"<p>The value of the container instance attribute.</p>"
+        }
+      },
+      "documentation":"<p>The attributes applicable to a container instance when it is registered.</p>"
+    },
+    "Attributes":{
+      "type":"list",
+      "member":{"shape":"Attribute"}
     },
     "Boolean":{"type":"boolean"},
     "BoxedBoolean":{
@@ -891,7 +915,7 @@
         "message":{"shape":"String"}
       },
       "exception":true,
-      "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+      "documentation":"<p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specifying an identifier that is not valid.</p>"
     },
     "Cluster":{
       "type":"structure",
@@ -902,7 +926,7 @@
         },
         "clusterName":{
           "shape":"String",
-          "documentation":"<p>A user-generated string that you can use to identify your cluster.</p>"
+          "documentation":"<p>A user-generated string that you use to identify your cluster.</p>"
         },
         "status":{
           "shape":"String",
@@ -984,58 +1008,110 @@
           "documentation":"<p>The network bindings associated with the container.</p>"
         }
       },
-      "documentation":"<p>A docker container that is part of a task.</p>"
+      "documentation":"<p>A Docker container that is part of a task.</p>"
     },
     "ContainerDefinition":{
       "type":"structure",
       "members":{
         "name":{
           "shape":"String",
-          "documentation":"<p>The name of a container. If you are linking multiple containers together in a task definition, the <code>name</code> of one container can be entered in the <code>links</code> of another container to connect the containers.</p>"
+          "documentation":"<p>The name of a container. If you are linking multiple containers together in a task definition, the <code>name</code> of one container can be entered in the <code>links</code> of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This parameter maps to <code>name</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--name</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
         },
         "image":{
           "shape":"String",
-          "documentation":"<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with <code><i>repository-url</i>/<i>image</i>:<i>tag</i></code>.</p>"
+          "documentation":"<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with <code><i>repository-url</i>/<i>image</i>:<i>tag</i></code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
         },
         "cpu":{
           "shape":"Integer",
-          "documentation":"<p>The number of <code>cpu</code> units reserved for the container. A container instance has 1,024 <code>cpu</code> units for every CPU core. This parameter specifies the minimum amount of CPU to reserve for a container, and containers share unallocated CPU units with other containers on the instance with the same ratio as their allocated amount.</p> <p>For example, if you run a single-container task on a single-core instance type with 512 CPU units specified for that container, and that is the only task running on the container instance, that container could use the full 1,024 CPU unit share at any given time. However, if you launched another copy of the same task on that container instance, each task would be guaranteed a minimum of 512 CPU units when needed, and each container could float to higher CPU usage if the other container was not using it, but if both tasks were 100% active all of the time, they would be limited to 512 CPU units.</p> <p>The Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. For more information, see <a href=\"https://docs.docker.com/reference/run/#cpu-share-constraint\">CPU share constraint</a> in the Docker documentation. The minimum valid CPU share value that the Linux kernel will allow is 2; however, the CPU parameter is not required, and you can use CPU values below 2 in your container definitions. For CPU values below 2 (including null), the behavior varies based on your Amazon ECS container agent version:</p> <ul> <li> <b>Agent versions less than or equal to 1.1.0:</b> Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to 2 CPU shares.</li> <li> <b>Agent versions greater than or equal to 1.2.0:</b> Null, zero, and CPU values of 1 are passed to Docker as 2.</li> </ul>"
+          "documentation":"<p>The number of <code>cpu</code> units reserved for the container. A container instance has 1,024 <code>cpu</code> units for every CPU core. This parameter specifies the minimum amount of CPU to reserve for a container, and containers share unallocated CPU units with other containers on the instance with the same ratio as their allocated amount. This parameter maps to <code>CpuShares</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <note> <p>You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instances</a> detail page by 1,024.</p> </note> <p>For example, if you run a single-container task on a single-core instance type with 512 CPU units specified for that container, and that is the only task running on the container instance, that container could use the full 1,024 CPU unit share at any given time. However, if you launched another copy of the same task on that container instance, each task would be guaranteed a minimum of 512 CPU units when needed, and each container could float to higher CPU usage if the other container was not using it, but if both tasks were 100% active all of the time, they would be limited to 512 CPU units.</p> <p>The Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. For more information, see <a href=\"https://docs.docker.com/reference/run/#cpu-share-constraint\">CPU share constraint</a> in the Docker documentation. The minimum valid CPU share value that the Linux kernel allows is 2; however, the CPU parameter is not required, and you can use CPU values below 2 in your container definitions. For CPU values below 2 (including null), the behavior varies based on your Amazon ECS container agent version:</p> <ul> <li> <b>Agent versions less than or equal to 1.1.0:</b> Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to 2 CPU shares.</li> <li> <b>Agent versions greater than or equal to 1.2.0:</b> Null, zero, and CPU values of 1 are passed to Docker as 2.</li> </ul>"
         },
         "memory":{
           "shape":"Integer",
-          "documentation":"<p>The number of MiB of memory reserved for the container. If your container attempts to exceed the memory allocated here, the container is killed.</p>"
+          "documentation":"<p>The number of MiB of memory reserved for the container. If your container attempts to exceed the memory allocated here, the container is killed. This parameter maps to <code>Memory</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--memory</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
         },
         "links":{
           "shape":"StringList",
-          "documentation":"<p>The <code>link</code> parameter allows containers to communicate with each other without the need for port mappings, using the <code>name</code> parameter. The <code>name:internalName</code> construct is analogous to <code>name:alias</code> in Docker links. For more information on linking Docker containers, see <a href=\"https://docs.docker.com/userguide/dockerlinks/\">https://docs.docker.com/userguide/dockerlinks/</a>.</p> <important> <p>Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.</p> </important>"
+          "documentation":"<p>The <code>link</code> parameter allows containers to communicate with each other without the need for port mappings, using the <code>name</code> parameter and optionally, an <code>alias</code> for the link. This construct is analogous to <code>name:alias</code> in Docker links. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed for each <code>name</code> and <code>alias</code>. For more information on linking Docker containers, see <a href=\"https://docs.docker.com/userguide/dockerlinks/\">https://docs.docker.com/userguide/dockerlinks/</a>. This parameter maps to <code>Links</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--link</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\"><code>docker run</code></a>.</p> <important> <p>Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.</p> </important>"
         },
         "portMappings":{
           "shape":"PortMappingList",
-          "documentation":"<p>The list of port mappings for the container.</p>"
+          "documentation":"<p>The list of port mappings for the container. Port mappings allow containers to access ports on the host container instance to send or receive traffic. This parameter maps to <code>PortBindings</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--publish</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
         },
         "essential":{
           "shape":"BoxedBoolean",
-          "documentation":"<p>If the <code>essential</code> parameter of a container is marked as <code>true</code>, the failure of that container will stop the task. If the <code>essential</code> parameter of a container is marked as <code>false</code>, then its failure will not affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential.</p> <note> <p>All tasks must have at least one essential container.</p> </note>"
+          "documentation":"<p>If the <code>essential</code> parameter of a container is marked as <code>true</code>, the failure of that container stops the task. If the <code>essential</code> parameter of a container is marked as <code>false</code>, then its failure does not affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential.</p> <note> <p>All tasks must have at least one essential container.</p> </note>"
         },
         "entryPoint":{
           "shape":"StringList",
-          "documentation":"<important> <p>Early versions of the Amazon ECS container agent do not properly handle <code>entryPoint</code> parameters. If you have problems using <code>entryPoint</code>, update your container agent or enter your commands and arguments as <code>command</code> array items instead.</p> </important> <p>The <code>ENTRYPOINT</code> that is passed to the container. For more information on the Docker <code>ENTRYPOINT</code> parameter, see <a href=\"https://docs.docker.com/reference/builder/#entrypoint\">https://docs.docker.com/reference/builder/#entrypoint</a>.</p>"
+          "documentation":"<important> <p>Early versions of the Amazon ECS container agent do not properly handle <code>entryPoint</code> parameters. If you have problems using <code>entryPoint</code>, update your container agent or enter your commands and arguments as <code>command</code> array items instead.</p> </important> <p>The entry point that is passed to the container. This parameter maps to <code>Entrypoint</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--entrypoint</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. For more information, see <a href=\"https://docs.docker.com/reference/builder/#entrypoint\">https://docs.docker.com/reference/builder/#entrypoint</a>.</p>"
         },
         "command":{
           "shape":"StringList",
-          "documentation":"<p>The <code>CMD</code> that is passed to the container. For more information on the Docker <code>CMD</code> parameter, see <a href=\"https://docs.docker.com/reference/builder/#cmd\">https://docs.docker.com/reference/builder/#cmd</a>.</p>"
+          "documentation":"<p>The command that is passed to the container. This parameter maps to <code>Cmd</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>COMMAND</code> parameter to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. For more information, see <a href=\"https://docs.docker.com/reference/builder/#cmd\">https://docs.docker.com/reference/builder/#cmd</a>.</p>"
         },
         "environment":{
           "shape":"EnvironmentVariables",
-          "documentation":"<p>The environment variables to pass to a container.</p>"
+          "documentation":"<p>The environment variables to pass to a container. This parameter maps to <code>Env</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--env</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
         },
         "mountPoints":{
           "shape":"MountPointList",
-          "documentation":"<p>The mount points for data volumes in your container.</p>"
+          "documentation":"<p>The mount points for data volumes in your container. This parameter maps to <code>Volumes</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--volume</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
         },
         "volumesFrom":{
           "shape":"VolumeFromList",
-          "documentation":"<p>Data volumes to mount from another container.</p>"
+          "documentation":"<p>Data volumes to mount from another container. This parameter maps to <code>VolumesFrom</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--volumes-from</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+        },
+        "hostname":{
+          "shape":"String",
+          "documentation":"<p>The hostname to use for your container. This parameter maps to <code>Hostname</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--hostname</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+        },
+        "user":{
+          "shape":"String",
+          "documentation":"<p>The user name to use inside the container. This parameter maps to <code>User</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--user</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+        },
+        "workingDirectory":{
+          "shape":"String",
+          "documentation":"<p>The working directory in which to run commands inside the container. This parameter maps to <code>WorkingDir</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--workdir</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+        },
+        "disableNetworking":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>When this parameter is true, networking is disabled within the container. This parameter maps to <code>NetworkDisabled</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a>.</p>"
+        },
+        "privileged":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>When this parameter is true, the container is given elevated privileges on the host container instance (similar to the <code>root</code> user). This parameter maps to <code>Privileged</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--privileged</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+        },
+        "readonlyRootFilesystem":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>When this parameter is true, the container is given read-only access to its root file system. This parameter maps to <code>ReadonlyRootfs</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--read-only</code> option to <code>docker run</code>.</p>"
+        },
+        "dnsServers":{
+          "shape":"StringList",
+          "documentation":"<p>A list of DNS servers that are presented to the container. This parameter maps to <code>Dns</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--dns</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+        },
+        "dnsSearchDomains":{
+          "shape":"StringList",
+          "documentation":"<p>A list of DNS search domains that are presented to the container. This parameter maps to <code>DnsSearch</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--dns-search</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+        },
+        "extraHosts":{
+          "shape":"HostEntryList",
+          "documentation":"<p>A list of hostnames and IP address mappings to append to the <code>/etc/hosts</code> file on the container. This parameter maps to <code>ExtraHosts</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--add-host</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+        },
+        "dockerSecurityOptions":{
+          "shape":"StringList",
+          "documentation":"<p>A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems. This parameter maps to <code>SecurityOpt</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--security-opt</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <note> <p>The Amazon ECS container agent running on a container instance must register with the <code>ECS_SELINUX_CAPABLE=true</code> or <code>ECS_APPARMOR_CAPABLE=true</code> environment variables before containers placed on that instance can use these security options. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>"
+        },
+        "dockerLabels":{
+          "shape":"DockerLabelsMap",
+          "documentation":"<p>A key/value map of labels to add to the container. This parameter maps to <code>Labels</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--label</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p>"
+        },
+        "ulimits":{
+          "shape":"UlimitList",
+          "documentation":"<p>A list of <code>ulimits</code> to set in the container. This parameter maps to <code>Ulimits</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. Valid naming values are displayed in the <a>Ulimit</a> data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code></p>"
+        },
+        "logConfiguration":{
+          "shape":"LogConfiguration",
+          "documentation":"<p>The log configuration specification for the container. This parameter maps to <code>LogConfig</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--log-driver</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. Valid log drivers are displayed in the <a>LogConfiguration</a> data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code></p> <note> <p>The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the <code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before containers placed on that instance can use these log configuration options. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>"
         }
       },
       "documentation":"<p>Container definitions are used in task definitions to describe the different containers that are launched as part of a task.</p>"
@@ -1049,11 +1125,11 @@
       "members":{
         "containerInstanceArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance UUID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_UUID</i>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_ID</i>.</p>"
         },
         "ec2InstanceId":{
           "shape":"String",
-          "documentation":"<p>The Amazon EC2 instance ID of the container instance.</p>"
+          "documentation":"<p>The EC2 instance ID of the container instance.</p>"
         },
         "versionInfo":{
           "shape":"VersionInfo",
@@ -1073,7 +1149,7 @@
         },
         "agentConnected":{
           "shape":"Boolean",
-          "documentation":"<p>This parameter returns <code>true</code> if the agent is actually connected to Amazon ECS. Registered instances with an agent that may be unhealthy or stopped will return <code>false</code>, and instances without a connected agent cannot accept placement request.</p>"
+          "documentation":"<p>This parameter returns <code>true</code> if the agent is actually connected to Amazon ECS. Registered instances with an agent that may be unhealthy or stopped return <code>false</code>, and instances without a connected agent cannot accept placement requests.</p>"
         },
         "runningTasksCount":{
           "shape":"Integer",
@@ -1086,9 +1162,13 @@
         "agentUpdateStatus":{
           "shape":"AgentUpdateStatus",
           "documentation":"<p>The status of the most recent agent update. If an update has never been requested, this value is <code>NULL</code>.</p>"
+        },
+        "attributes":{
+          "shape":"Attributes",
+          "documentation":"<p>The attributes set for the container instance by the Amazon ECS container agent at instance registration.</p>"
         }
       },
-      "documentation":"<p>An Amazon EC2 instance that is running the Amazon ECS agent and has been registered with a cluster.</p>"
+      "documentation":"<p>An EC2 instance that is running the Amazon ECS agent and has been registered with a cluster.</p>"
     },
     "ContainerInstances":{
       "type":"list",
@@ -1125,7 +1205,7 @@
       "members":{
         "clusterName":{
           "shape":"String",
-          "documentation":"<p>The name of your cluster. If you do not specify a name for your cluster, you will create a cluster named <code>default</code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.</p>"
+          "documentation":"<p>The name of your cluster. If you do not specify a name for your cluster, you create a cluster named <code>default</code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.</p>"
         }
       }
     },
@@ -1148,7 +1228,7 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that you want to run your service on. If you do not specify a cluster, the default cluster is assumed.</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster on which to run your service. If you do not specify a cluster, the default cluster is assumed.</p>"
         },
         "serviceName":{
           "shape":"String",
@@ -1156,7 +1236,7 @@
         },
         "taskDefinition":{
           "shape":"String",
-          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition that you want to run in your service. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used.</p>"
+          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition to run in your service. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used.</p>"
         },
         "loadBalancers":{
           "shape":"LoadBalancers",
@@ -1164,7 +1244,7 @@
         },
         "desiredCount":{
           "shape":"BoxedInteger",
-          "documentation":"<p>The number of instantiations of the specified task definition that you would like to place and keep running on your cluster.</p>"
+          "documentation":"<p>The number of instantiations of the specified task definition to place and keep running on your cluster.</p>"
         },
         "clientToken":{
           "shape":"String",
@@ -1191,7 +1271,7 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that you want to delete.</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster to delete.</p>"
         }
       }
     },
@@ -1210,18 +1290,21 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The name of the cluster that hosts the service you want to delete.</p>"
+          "documentation":"<p>The name of the cluster that hosts the service to delete. If you do not specify a cluster, the default cluster is assumed.</p>"
         },
         "service":{
           "shape":"String",
-          "documentation":"<p>The name of the service you want to delete.</p>"
+          "documentation":"<p>The name of the service to delete.</p>"
         }
       }
     },
     "DeleteServiceResponse":{
       "type":"structure",
       "members":{
-        "service":{"shape":"Service"}
+        "service":{
+          "shape":"Service",
+          "documentation":"<p>The full description of the deleted service.</p>"
+        }
       }
     },
     "Deployment":{
@@ -1241,7 +1324,7 @@
         },
         "desiredCount":{
           "shape":"Integer",
-          "documentation":"<p>The most recent desired count of tasks that was specified for the service to deploy and/or maintain.</p>"
+          "documentation":"<p>The most recent desired count of tasks that was specified for the service to deploy or maintain.</p>"
         },
         "pendingCount":{
           "shape":"Integer",
@@ -1272,15 +1355,15 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance you want to deregister. If you do not specify a cluster, the default cluster is assumed.</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to deregister. If you do not specify a cluster, the default cluster is assumed.</p>"
         },
         "containerInstance":{
           "shape":"String",
-          "documentation":"<p>The container instance UUID or full Amazon Resource Name (ARN) of the container instance you want to deregister. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance UUID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_UUID</i>.</p>"
+          "documentation":"<p>The container instance ID or full Amazon Resource Name (ARN) of the container instance to deregister. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_ID</i>.</p>"
         },
         "force":{
           "shape":"BoxedBoolean",
-          "documentation":"<p>Force the deregistration of the container instance. If you have tasks running on the container instance when you deregister it with the <code>force</code> option, these tasks remain running and they will continue to pass Elastic Load Balancing load balancer health checks until you terminate the instance or the tasks stop through some other means, but they are orphaned (no longer monitored or accounted for by Amazon ECS). If an orphaned task on your container instance is part of an Amazon ECS service, then the service scheduler will start another copy of that task on a different container instance if possible.</p>"
+          "documentation":"<p>Forces the deregistration of the container instance. If you have tasks running on the container instance when you deregister it with the <code>force</code> option, these tasks remain running and they continue to pass Elastic Load Balancing load balancer health checks until you terminate the instance or the tasks stop through some other means, but they are orphaned (no longer monitored or accounted for by Amazon ECS). If an orphaned task on your container instance is part of an Amazon ECS service, then the service scheduler starts another copy of that task, on a different container instance if possible.</p>"
         }
       }
     },
@@ -1296,7 +1379,7 @@
       "members":{
         "taskDefinition":{
           "shape":"String",
-          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition that you want to deregister. You must specify a <code>revision</code>.</p>"
+          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition to deregister. You must specify a <code>revision</code>.</p>"
         }
       }
     },
@@ -1325,7 +1408,10 @@
           "shape":"Clusters",
           "documentation":"<p>The list of clusters.</p>"
         },
-        "failures":{"shape":"Failures"}
+        "failures":{
+          "shape":"Failures",
+          "documentation":"<p>Any failures associated with the call.</p>"
+        }
       }
     },
     "DescribeContainerInstancesRequest":{
@@ -1334,11 +1420,11 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances you want to describe. If you do not specify a cluster, the default cluster is assumed.</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to describe. If you do not specify a cluster, the default cluster is assumed.</p>"
         },
         "containerInstances":{
           "shape":"StringList",
-          "documentation":"<p>A space-separated list of container instance UUIDs or full Amazon Resource Name (ARN) entries.</p>"
+          "documentation":"<p>A space-separated list of container instance IDs or full Amazon Resource Name (ARN) entries.</p>"
         }
       }
     },
@@ -1349,7 +1435,10 @@
           "shape":"ContainerInstances",
           "documentation":"<p>The list of container instances.</p>"
         },
-        "failures":{"shape":"Failures"}
+        "failures":{
+          "shape":"Failures",
+          "documentation":"<p>Any failures associated with the call.</p>"
+        }
       }
     },
     "DescribeServicesRequest":{
@@ -1358,11 +1447,11 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The name of the cluster that hosts the service you want to describe.</p>"
+          "documentation":"<p>The name of the cluster that hosts the service to describe. If you do not specify a cluster, the default cluster is assumed.</p>"
         },
         "services":{
           "shape":"StringList",
-          "documentation":"<p>A list of services you want to describe.</p>"
+          "documentation":"<p>A list of services to describe.</p>"
         }
       }
     },
@@ -1385,7 +1474,7 @@
       "members":{
         "taskDefinition":{
           "shape":"String",
-          "documentation":"<p>The <code>family</code> for the latest <code>ACTIVE</code> revision, <code>family</code> and <code>revision</code> (<code>family:revision</code>) for a specific revision in the family, or full Amazon Resource Name (ARN) of the task definition that you want to describe.</p>"
+          "documentation":"<p>The <code>family</code> for the latest <code>ACTIVE</code> revision, <code>family</code> and <code>revision</code> (<code>family:revision</code>) for a specific revision in the family, or full Amazon Resource Name (ARN) of the task definition to describe.</p>"
         }
       }
     },
@@ -1404,11 +1493,11 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task you want to describe. If you do not specify a cluster, the default cluster is assumed.</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task to describe. If you do not specify a cluster, the default cluster is assumed.</p>"
         },
         "tasks":{
           "shape":"StringList",
-          "documentation":"<p>A space-separated list of task UUIDs or full Amazon Resource Name (ARN) entries.</p>"
+          "documentation":"<p>A space-separated list of task IDs or full Amazon Resource Name (ARN) entries.</p>"
         }
       }
     },
@@ -1419,7 +1508,10 @@
           "shape":"Tasks",
           "documentation":"<p>The list of tasks.</p>"
         },
-        "failures":{"shape":"Failures"}
+        "failures":{
+          "shape":"Failures",
+          "documentation":"<p>Any failures associated with the call.</p>"
+        }
       }
     },
     "DesiredStatus":{
@@ -1435,7 +1527,7 @@
       "members":{
         "containerInstance":{
           "shape":"String",
-          "documentation":"<p>The container instance UUID or full Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance UUID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_UUID</i>.</p>"
+          "documentation":"<p>The container instance ID or full Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_ID</i>.</p>"
         },
         "cluster":{
           "shape":"String",
@@ -1455,6 +1547,14 @@
           "documentation":"<p>The telemetry endpoint for the Amazon ECS agent.</p>"
         }
       }
+    },
+    "DockerLabelsMap":{
+      "type":"map",
+      "key":{
+        "shape":"String",
+        "required":true
+      },
+      "value":{"shape":"String"}
     },
     "Double":{"type":"double"},
     "EnvironmentVariables":{
@@ -1478,6 +1578,28 @@
     "Failures":{
       "type":"list",
       "member":{"shape":"Failure"}
+    },
+    "HostEntry":{
+      "type":"structure",
+      "required":[
+        "hostname",
+        "ipAddress"
+      ],
+      "members":{
+        "hostname":{
+          "shape":"String",
+          "documentation":"<p>The hostname to use in the <code>/etc/hosts</code> entry.</p>"
+        },
+        "ipAddress":{
+          "shape":"String",
+          "documentation":"<p>The IP address to use in the <code>/etc/hosts</code> entry.</p>"
+        }
+      },
+      "documentation":"<p>Hostnames and IP address entries that are added to the <code>/etc/hosts</code> file of a container via the <code>extraHosts</code> parameter of its <a>ContainerDefinition</a>. </p>"
+    },
+    "HostEntryList":{
+      "type":"list",
+      "member":{"shape":"HostEntry"}
     },
     "HostVolumeProperties":{
       "type":"structure",
@@ -1542,7 +1664,7 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances you want to list. If you do not specify a cluster, the default cluster is assumed..</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to list. If you do not specify a cluster, the default cluster is assumed..</p>"
         },
         "nextToken":{
           "shape":"String",
@@ -1559,7 +1681,7 @@
       "members":{
         "containerInstanceArns":{
           "shape":"StringList",
-          "documentation":"<p>The list of container instance full Amazon Resource Name (ARN) entries for each container instance associated with the specified cluster.</p>"
+          "documentation":"<p>The list of container instances with full Amazon Resource Name (ARN) entries for each container instance associated with the specified cluster.</p>"
         },
         "nextToken":{
           "shape":"String",
@@ -1572,7 +1694,7 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the services you want to list. If you do not specify a cluster, the default cluster is assumed..</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the services to list. If you do not specify a cluster, the default cluster is assumed..</p>"
         },
         "nextToken":{
           "shape":"String",
@@ -1632,11 +1754,11 @@
       "members":{
         "familyPrefix":{
           "shape":"String",
-          "documentation":"<p>The full family name that you want to filter the <code>ListTaskDefinitions</code> results with. Specifying a <code>familyPrefix</code> will limit the listed task definitions to task definition revisions that belong to that family.</p>"
+          "documentation":"<p>The full family name with which to filter the <code>ListTaskDefinitions</code> results. Specifying a <code>familyPrefix</code> limits the listed task definitions to task definition revisions that belong to that family.</p>"
         },
         "status":{
           "shape":"TaskDefinitionStatus",
-          "documentation":"<p>The task definition status that you want to filter the <code>ListTaskDefinitions</code> results with. By default, only <code>ACTIVE</code> task definitions are listed. By setting this parameter to <code>INACTIVE</code>, you can view task definitions that are <code>INACTIVE</code> as long as an active task or service still references them. If you paginate the resulting output, be sure to keep the <code>status</code> value constant in each subsequent request.</p>"
+          "documentation":"<p>The task definition status with which to filter the <code>ListTaskDefinitions</code> results. By default, only <code>ACTIVE</code> task definitions are listed. By setting this parameter to <code>INACTIVE</code>, you can view task definitions that are <code>INACTIVE</code> as long as an active task or service still references them. If you paginate the resulting output, be sure to keep the <code>status</code> value constant in each subsequent request.</p>"
         },
         "sort":{
           "shape":"SortOrder",
@@ -1657,7 +1779,7 @@
       "members":{
         "taskDefinitionArns":{
           "shape":"StringList",
-          "documentation":"<p>The list of task definition Amazon Resource Name (ARN) entries for the <code>ListTaskDefintions</code> request.</p>"
+          "documentation":"<p>The list of task definition Amazon Resource Name (ARN) entries for the <code>ListTaskDefinitions</code> request.</p>"
         },
         "nextToken":{
           "shape":"String",
@@ -1670,15 +1792,15 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the tasks you want to list. If you do not specify a cluster, the default cluster is assumed..</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the tasks to list. If you do not specify a cluster, the default cluster is assumed..</p>"
         },
         "containerInstance":{
           "shape":"String",
-          "documentation":"<p>The container instance UUID or full Amazon Resource Name (ARN) of the container instance that you want to filter the <code>ListTasks</code> results with. Specifying a <code>containerInstance</code> will limit the results to tasks that belong to that container instance.</p>"
+          "documentation":"<p>The container instance ID or full Amazon Resource Name (ARN) of the container instance with which to filter the <code>ListTasks</code> results. Specifying a <code>containerInstance</code> limits the results to tasks that belong to that container instance.</p>"
         },
         "family":{
           "shape":"String",
-          "documentation":"<p>The name of the family that you want to filter the <code>ListTasks</code> results with. Specifying a <code>family</code> will limit the results to tasks that belong to that family.</p>"
+          "documentation":"<p>The name of the family with which to filter the <code>ListTasks</code> results. Specifying a <code>family</code> limits the results to tasks that belong to that family.</p>"
         },
         "nextToken":{
           "shape":"String",
@@ -1690,15 +1812,15 @@
         },
         "startedBy":{
           "shape":"String",
-          "documentation":"<p>The <code>startedBy</code> value that you want to filter the task results with. Specifying a <code>startedBy</code> value will limit the results to tasks that were started with that value.</p>"
+          "documentation":"<p>The <code>startedBy</code> value with which to filter the task results. Specifying a <code>startedBy</code> value limits the results to tasks that were started with that value.</p>"
         },
         "serviceName":{
           "shape":"String",
-          "documentation":"<p>The name of the service that you want to filter the <code>ListTasks</code> results with. Specifying a <code>serviceName</code> will limit the results to tasks that belong to that service.</p>"
+          "documentation":"<p>The name of the service with which to filter the <code>ListTasks</code> results. Specifying a <code>serviceName</code> limits the results to tasks that belong to that service.</p>"
         },
         "desiredStatus":{
           "shape":"DesiredStatus",
-          "documentation":"<p>The task status that you want to filter the <code>ListTasks</code> results with. Specifying a <code>desiredStatus</code> of <code>STOPPED</code> will limit the results to tasks that are in the <code>STOPPED</code> status, which can be useful for debugging tasks that are not starting properly or have died or finished. The default status filter is <code>RUNNING</code>.</p>"
+          "documentation":"<p>The task status with which to filter the <code>ListTasks</code> results. Specifying a <code>desiredStatus</code> of <code>STOPPED</code> limits the results to tasks that are in the <code>STOPPED</code> status, which can be useful for debugging tasks that are not starting properly or have died or finished. The default status filter is <code>RUNNING</code>.</p>"
         }
       }
     },
@@ -1736,6 +1858,39 @@
     "LoadBalancers":{
       "type":"list",
       "member":{"shape":"LoadBalancer"}
+    },
+    "LogConfiguration":{
+      "type":"structure",
+      "required":["logDriver"],
+      "members":{
+        "logDriver":{
+          "shape":"LogDriver",
+          "documentation":"<p>The log driver to use for the container. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code></p>"
+        },
+        "options":{
+          "shape":"LogConfigurationOptionsMap",
+          "documentation":"<p>The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code></p>"
+        }
+      },
+      "documentation":"<p>Log configuration options to send to a custom log driver for the container.</p>"
+    },
+    "LogConfigurationOptionsMap":{
+      "type":"map",
+      "key":{
+        "shape":"String",
+        "required":true
+      },
+      "value":{"shape":"String"}
+    },
+    "LogDriver":{
+      "type":"string",
+      "enum":[
+        "json-file",
+        "syslog",
+        "journald",
+        "gelf",
+        "fluentd"
+      ]
     },
     "Long":{"type":"long"},
     "MissingVersionException":{
@@ -1787,7 +1942,7 @@
           "documentation":"<p>The protocol used for the network binding.</p>"
         }
       },
-      "documentation":"<p>Details on the network bindings between a container and its host container instance.</p>"
+      "documentation":"<p>Details on the network bindings between a container and its host container instance. After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.</p>"
     },
     "NetworkBindings":{
       "type":"list",
@@ -1805,18 +1960,18 @@
       "members":{
         "containerPort":{
           "shape":"Integer",
-          "documentation":"<p>The port number on the container that is bound to the user-specified or automatically assigned host port. If you specify a container port and not a host port, your container will automatically receive a host port in the ephemeral port range (for more information, see <code>hostPort</code>).</p>"
+          "documentation":"<p>The port number on the container that is bound to the user-specified or automatically assigned host port. If you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range (for more information, see <code>hostPort</code>).</p>"
         },
         "hostPort":{
           "shape":"Integer",
-          "documentation":"<p>The port number on the container instance to reserve for your container. You can specify a non-reserved host port for your container port mapping, or you can omit the <code>hostPort</code> (or set it to <code>0</code>) while specifying a <code>containerPort</code> and your container will automatically receive a port in the ephemeral port range for your container instance operating system and Docker version.</p> <p>The default ephemeral port range is 49153 to 65535, and this range is used for Docker versions prior to 1.6.0. For Docker version 1.6.0 and later, the Docker daemon tries to read the ephemeral port range from <code>/proc/sys/net/ipv4/ip_local_port_range</code>; if this kernel parameter is unavailable, the default ephemeral port range is used. You should not attempt to specify a host port in the ephemeral port range, since these are reserved for automatic assignment. In general, ports below 32768 are outside of the ephemeral port range.</p> <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS Container Agent port 51678. Any host port that was previously specified in a running task is also reserved while the task is running (once a task stops, the host port is released).The current reserved ports are displayed in the <code>remainingResources</code> of <a>DescribeContainerInstances</a> output, and a container instance may have up to 50 reserved ports at a time, including the default reserved ports (automatically assigned ports do not count toward this limit).</p>"
+          "documentation":"<p>The port number on the container instance to reserve for your container. You can specify a non-reserved host port for your container port mapping, or you can omit the <code>hostPort</code> (or set it to <code>0</code>) while specifying a <code>containerPort</code> and your container automatically receives a port in the ephemeral port range for your container instance operating system and Docker version.</p> <p>The default ephemeral port range is 49153 to 65535, and this range is used for Docker versions prior to 1.6.0. For Docker version 1.6.0 and later, the Docker daemon tries to read the ephemeral port range from <code>/proc/sys/net/ipv4/ip_local_port_range</code>; if this kernel parameter is unavailable, the default ephemeral port range is used. You should not attempt to specify a host port in the ephemeral port range, because these are reserved for automatic assignment. In general, ports below 32768 are outside of the ephemeral port range.</p> <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS container agent port 51678. Any host port that was previously specified in a running task is also reserved while the task is running (after a task stops, the host port is released).The current reserved ports are displayed in the <code>remainingResources</code> of <a>DescribeContainerInstances</a> output, and a container instance may have up to 50 reserved ports at a time, including the default reserved ports (automatically assigned ports do not count toward this limit).</p>"
         },
         "protocol":{
           "shape":"TransportProtocol",
           "documentation":"<p>The protocol used for the port mapping. Valid values are <code>tcp</code> and <code>udp</code>. The default is <code>tcp</code>.</p>"
         }
       },
-      "documentation":"<p>Port mappings allow containers to access ports on the host container instance to send or receive traffic. Port mappings are specified as part of the container definition.</p>"
+      "documentation":"<p>Port mappings allow containers to access ports on the host container instance to send or receive traffic. Port mappings are specified as part of the container definition. After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.</p>"
     },
     "PortMappingList":{
       "type":"list",
@@ -1827,15 +1982,15 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that you want to register your container instance with. If you do not specify a cluster, the default cluster is assumed..</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster with which to register your container instance. If you do not specify a cluster, the default cluster is assumed..</p>"
         },
         "instanceIdentityDocument":{
           "shape":"String",
-          "documentation":"<p>The instance identity document for the Amazon EC2 instance to register. This document can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/document/</code></p>"
+          "documentation":"<p>The instance identity document for the EC2 instance to register. This document can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/document/</code></p>"
         },
         "instanceIdentityDocumentSignature":{
           "shape":"String",
-          "documentation":"<p>The instance identity document signature for the Amazon EC2 instance to register. This signature can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/signature/</code></p>"
+          "documentation":"<p>The instance identity document signature for the EC2 instance to register. This signature can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/signature/</code></p>"
         },
         "totalResources":{
           "shape":"Resources",
@@ -1848,6 +2003,10 @@
         "containerInstanceArn":{
           "shape":"String",
           "documentation":"<p>The Amazon Resource Name (ARN) of the container instance (if it was previously registered).</p>"
+        },
+        "attributes":{
+          "shape":"Attributes",
+          "documentation":"<p>The container instance attributes that this container instance supports.</p>"
         }
       }
     },
@@ -1866,7 +2025,7 @@
       "members":{
         "family":{
           "shape":"String",
-          "documentation":"<p>You must specify a <code>family</code> for a task definition, which allows you to track multiple versions of the same task definition. You can think of the <code>family</code> as a name for your task definition. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.</p>"
+          "documentation":"<p>You must specify a <code>family</code> for a task definition, which allows you to track multiple versions of the same task definition. The <code>family</code> is used as a name for your task definition. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.</p>"
         },
         "containerDefinitions":{
           "shape":"ContainerDefinitions",
@@ -1881,8 +2040,15 @@
     "RegisterTaskDefinitionResponse":{
       "type":"structure",
       "members":{
-        "taskDefinition":{"shape":"TaskDefinition"}
+        "taskDefinition":{
+          "shape":"TaskDefinition",
+          "documentation":"<p>The full description of the registered task definition.</p>"
+        }
       }
+    },
+    "RequiresAttributes":{
+      "type":"list",
+      "member":{"shape":"Attribute"}
     },
     "Resource":{
       "type":"structure",
@@ -1924,11 +2090,11 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that you want to run your task on. If you do not specify a cluster, the default cluster is assumed..</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster on which to run your task. If you do not specify a cluster, the default cluster is assumed..</p>"
         },
         "taskDefinition":{
           "shape":"String",
-          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition that you want to run. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used.</p>"
+          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition to run. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used.</p>"
         },
         "overrides":{
           "shape":"TaskOverride",
@@ -1936,7 +2102,7 @@
         },
         "count":{
           "shape":"BoxedInteger",
-          "documentation":"<p>The number of instantiations of the specified task that you would like to place on your cluster.</p> <important> <p>The <code>count</code> parameter is limited to 10 tasks per call.</p> </important>"
+          "documentation":"<p>The number of instantiations of the specified task to place on your cluster.</p> <important> <p>The <code>count</code> parameter is limited to 10 tasks per call.</p> </important>"
         },
         "startedBy":{
           "shape":"String",
@@ -1949,11 +2115,11 @@
       "members":{
         "tasks":{
           "shape":"Tasks",
-          "documentation":"<p>A full description of the tasks that were run. Each task that was successfully placed on your cluster will be described here.</p>"
+          "documentation":"<p>A full description of the tasks that were run. Each task that was successfully placed on your cluster are described here.</p>"
         },
         "failures":{
           "shape":"Failures",
-          "documentation":"<p>Any failed tasks from your <code>RunTask</code> action are listed here.</p>"
+          "documentation":"<p>Any failures associated with the call.</p>"
         }
       }
     },
@@ -1964,7 +2130,7 @@
       },
       "exception":true,
       "fault":true,
-      "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+      "documentation":"<p>These errors are usually caused by a server issue.</p>"
     },
     "Service":{
       "type":"structure",
@@ -2047,7 +2213,7 @@
       "members":{
       },
       "exception":true,
-      "documentation":"<p>The specified service is not active. You cannot update a service that is not active. If you have previously deleted a service, you can recreate it with <a>CreateService</a>.</p>"
+      "documentation":"<p>The specified service is not active. You cannot update a service that is not active. If you have previously deleted a service, you can re-create it with <a>CreateService</a>.</p>"
     },
     "ServiceNotFoundException":{
       "type":"structure",
@@ -2076,11 +2242,11 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that you want to start your task on. If you do not specify a cluster, the default cluster is assumed..</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster on which to start your task. If you do not specify a cluster, the default cluster is assumed..</p>"
         },
         "taskDefinition":{
           "shape":"String",
-          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition that you want to start. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used.</p>"
+          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition to start. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used.</p>"
         },
         "overrides":{
           "shape":"TaskOverride",
@@ -2088,7 +2254,7 @@
         },
         "containerInstances":{
           "shape":"StringList",
-          "documentation":"<p>The container instance UUIDs or full Amazon Resource Name (ARN) entries for the container instances on which you would like to place your task.</p> <important> <p>The list of container instances to start tasks on is limited to 10.</p> </important>"
+          "documentation":"<p>The container instance IDs or full Amazon Resource Name (ARN) entries for the container instances on which you would like to place your task.</p> <important> <p>The list of container instances to start tasks on is limited to 10.</p> </important>"
         },
         "startedBy":{
           "shape":"String",
@@ -2101,11 +2267,11 @@
       "members":{
         "tasks":{
           "shape":"Tasks",
-          "documentation":"<p>A full description of the tasks that were started. Each task that was successfully placed on your container instances will be described here.</p>"
+          "documentation":"<p>A full description of the tasks that were started. Each task that was successfully placed on your container instances are described here.</p>"
         },
         "failures":{
           "shape":"Failures",
-          "documentation":"<p>Any failed tasks from your <code>StartTask</code> action are listed here.</p>"
+          "documentation":"<p>Any failures associated with the call.</p>"
         }
       }
     },
@@ -2115,11 +2281,11 @@
       "members":{
         "cluster":{
           "shape":"String",
-          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task you want to stop. If you do not specify a cluster, the default cluster is assumed..</p>"
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task to stop. If you do not specify a cluster, the default cluster is assumed..</p>"
         },
         "task":{
           "shape":"String",
-          "documentation":"<p>The task UUIDs or full Amazon Resource Name (ARN) entry of the task you would like to stop.</p>"
+          "documentation":"<p>The task ID or full Amazon Resource Name (ARN) entry of the task to stop.</p>"
         }
       }
     },
@@ -2143,7 +2309,7 @@
         },
         "task":{
           "shape":"String",
-          "documentation":"<p>The task UUID or full Amazon Resource Name (ARN) of the task that hosts the container.</p>"
+          "documentation":"<p>The task ID or full Amazon Resource Name (ARN) of the task that hosts the container.</p>"
         },
         "containerName":{
           "shape":"String",
@@ -2185,7 +2351,7 @@
         },
         "task":{
           "shape":"String",
-          "documentation":"<p>The task UUID or full Amazon Resource Name (ARN) of the task in the state change request.</p>"
+          "documentation":"<p>The task ID or full Amazon Resource Name (ARN) of the task in the state change request.</p>"
         },
         "status":{
           "shape":"String",
@@ -2257,23 +2423,27 @@
         },
         "containerDefinitions":{
           "shape":"ContainerDefinitions",
-          "documentation":"<p>A list of container definitions in JSON format that describe the different containers that make up your task. For more information on container definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+          "documentation":"<p>A list of container definitions in JSON format that describe the different containers that make up your task. For more information about container definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
         },
         "family":{
           "shape":"String",
-          "documentation":"<p>The family of your task definition. You can think of the <code>family</code> as the name of your task definition.</p>"
+          "documentation":"<p>The family of your task definition, used as the definition name.</p>"
         },
         "revision":{
           "shape":"Integer",
-          "documentation":"<p>The revision of the task in a particular family. You can think of the revision as a version number of a task definition in a family. When you register a task definition for the first time, the revision is <code>1</code>, and each time you register a new revision of a task definition in the same family, the revision value always increases by one (even if you have deregistered previous revisions in this family).</p>"
+          "documentation":"<p>The revision of the task in a particular family. The revision is a version number of a task definition in a family. When you register a task definition for the first time, the revision is <code>1</code>; each time you register a new revision of a task definition in the same family, the revision value always increases by one (even if you have deregistered previous revisions in this family).</p>"
         },
         "volumes":{
           "shape":"VolumeList",
-          "documentation":"<p>The list of volumes in a task. For more information on volume definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+          "documentation":"<p>The list of volumes in a task. For more information about volume definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
         },
         "status":{
           "shape":"TaskDefinitionStatus",
           "documentation":"<p>The status of the task definition.</p>"
+        },
+        "requiresAttributes":{
+          "shape":"RequiresAttributes",
+          "documentation":"<p>The container instance attributes required by your task.</p>"
         }
       },
       "documentation":"<p>Details of a task definition.</p>"
@@ -2307,6 +2477,53 @@
         "udp"
       ]
     },
+    "Ulimit":{
+      "type":"structure",
+      "required":[
+        "name",
+        "softLimit",
+        "hardLimit"
+      ],
+      "members":{
+        "name":{
+          "shape":"UlimitName",
+          "documentation":"<p>The <code>type</code> of the <code>ulimit</code>.</p>"
+        },
+        "softLimit":{
+          "shape":"Integer",
+          "documentation":"<p>The soft limit for the ulimit type.</p>"
+        },
+        "hardLimit":{
+          "shape":"Integer",
+          "documentation":"<p>The hard limit for the ulimit type.</p>"
+        }
+      },
+      "documentation":"<p>The <code>ulimit</code> settings to pass to the container.</p>"
+    },
+    "UlimitList":{
+      "type":"list",
+      "member":{"shape":"Ulimit"}
+    },
+    "UlimitName":{
+      "type":"string",
+      "enum":[
+        "core",
+        "cpu",
+        "data",
+        "fsize",
+        "locks",
+        "memlock",
+        "msgqueue",
+        "nice",
+        "nofile",
+        "nproc",
+        "rss",
+        "rtprio",
+        "rttime",
+        "sigpending",
+        "stack"
+      ]
+    },
     "UpdateContainerAgentRequest":{
       "type":"structure",
       "required":["containerInstance"],
@@ -2317,7 +2534,7 @@
         },
         "containerInstance":{
           "shape":"String",
-          "documentation":"<p>The container instance UUID or full Amazon Resource Name (ARN) entries for the container instance on which you would like to update the Amazon ECS container agent.</p>"
+          "documentation":"<p>The container instance ID or full Amazon Resource Name (ARN) entries for the container instance on which you would like to update the Amazon ECS container agent.</p>"
         }
       }
     },
@@ -2332,7 +2549,7 @@
       "members":{
       },
       "exception":true,
-      "documentation":"<p>There is already a current Amazon ECS container agent update in progress on the specified container instance. If the container agent becomes disconnected while it is in a transitional stage, such as <code>PENDING</code> or <code>STAGING</code>, the update process can get stuck in that state. However, when the agent reconnects, it will resume where it stopped previously.</p>"
+      "documentation":"<p>There is already a current Amazon ECS container agent update in progress on the specified container instance. If the container agent becomes disconnected while it is in a transitional stage, such as <code>PENDING</code> or <code>STAGING</code>, the update process can get stuck in that state. However, when the agent reconnects, it resumes where it stopped previously.</p>"
     },
     "UpdateServiceRequest":{
       "type":"structure",
@@ -2344,15 +2561,15 @@
         },
         "service":{
           "shape":"String",
-          "documentation":"<p>The name of the service that you want to update.</p>"
+          "documentation":"<p>The name of the service to update.</p>"
         },
         "desiredCount":{
           "shape":"BoxedInteger",
-          "documentation":"<p>The number of instantiations of the task that you would like to place and keep running in your service.</p>"
+          "documentation":"<p>The number of instantiations of the task to place and keep running in your service.</p>"
         },
         "taskDefinition":{
           "shape":"String",
-          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition that you want to run in your service. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used. If you modify the task definition with <code>UpdateService</code>, Amazon ECS spawns a task with the new version of the task definition and then stops an old task after the new version is running.</p>"
+          "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition to run in your service. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used. If you modify the task definition with <code>UpdateService</code>, Amazon ECS spawns a task with the new version of the task definition and then stops an old task after the new version is running.</p>"
         }
       }
     },
@@ -2381,7 +2598,7 @@
           "documentation":"<p>The Docker version running on the container instance.</p>"
         }
       },
-      "documentation":"<p>The Docker and Amazon ECS container agent version information on a container instance.</p>"
+      "documentation":"<p>The Docker and Amazon ECS container agent version information about a container instance.</p>"
     },
     "Volume":{
       "type":"structure",
@@ -2419,5 +2636,7 @@
       "type":"list",
       "member":{"shape":"Volume"}
     }
+  },
+  "examples":{
   }
 }
