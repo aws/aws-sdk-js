@@ -50,6 +50,13 @@
     "prefix": "config",
     "name": "ConfigService"
   },
+  "iot": {
+    "name": "IoT"
+  },
+  "iotdata": {
+    "prefix": "iot-data",
+    "name": "IoTData"
+  },
   "datapipeline": {
     "name": "DataPipeline"
   },

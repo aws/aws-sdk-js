@@ -63,7 +63,7 @@ try {
 for (var key in AWS) {
   var id = AWS[key].serviceIdentifier;
   if (id) {
-    if (id === 'cloudsearchdomain') continue; // this required an explicit endpoint
+    if (id === 'cloudsearchdomain' || id === 'iotdata') continue; // this required an explicit endpoint
 
     var svcClass = AWS[key];
     var svc = new svcClass(defaultOptions);
