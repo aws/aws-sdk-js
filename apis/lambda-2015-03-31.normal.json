@@ -13,7 +13,7 @@
       "name":"AddPermission",
       "http":{
         "method":"POST",
-        "requestUri":"/2015-03-31/functions/{FunctionName}/versions/HEAD/policy",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/policy",
         "responseCode":201
       },
       "input":{"shape":"AddPermissionRequest"},
@@ -55,7 +55,52 @@
           "exception":true
         }
       ],
-      "documentation":"<p>Adds a permission to the access policy associated with the specified AWS Lambda function. In a \"push event\" model, the access policy attached to the Lambda function grants Amazon S3 or a user application permission for the Lambda <code>lambda:Invoke</code> action. For information about the push model, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a>. Each Lambda function has one access policy associated with it. You can use the <code>AddPermission</code> API to add a permission to the policy. You have one access policy but it can have multiple permission statements.</p> <p>This operation requires permission for the <code>lambda:AddPermission</code> action.</p>"
+      "documentation":"<p>Adds a permission to the resource policy associated with the specified AWS Lambda function. You use resource policies to grant permissions to event sources that use \"push\" model. In \"push\" model, event sources (such as Amazon S3 and custom applications) invoke your Lambda function. Each permission you add to the resource policy allows an event source, permission to invoke the Lambda function. </p> <p>For information about the push model, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a>. </p> <p>If you are using versioning feature (see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases-v2.html\">AWS Lambda Function Versioning and Aliases</a>), a Lambda function can have multiple ARNs that can be used to invoke the function. Note that, each permission you add to resource policy using this API is specific to an ARN, specified using the <code>Qualifier</code> parameter</p> <p>This operation requires permission for the <code>lambda:AddPermission</code> action.</p>"
+    },
+    "CreateAlias":{
+      "name":"CreateAlias",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/aliases",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateAliasRequest"},
+      "output":{
+        "shape":"AliasConfiguration",
+        "documentation":"<p>Provides configuration information about a Lambda function version alias.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ServiceException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>The AWS Lambda service encountered an internal error.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.</p>"
+        },
+        {
+          "shape":"ResourceConflictException",
+          "error":{"httpStatusCode":409},
+          "exception":true,
+          "documentation":"<p>The resource already exists.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{"httpStatusCode":429},
+          "exception":true
+        }
+      ],
+      "documentation":"<p>Creates an alias to the specified Lambda function version. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-v2-intro-aliases.html\">Introduction to AWS Lambda Aliases</a></p> <p>This requires permission for the lambda:CreateAlias action.</p>"
     },
     "CreateEventSourceMapping":{
       "name":"CreateEventSourceMapping",
@@ -141,10 +186,40 @@
         {
           "shape":"CodeStorageExceededException",
           "error":{"httpStatusCode":400},
-          "exception":true
+          "exception":true,
+          "documentation":"<p>You have exceeded your maximum total code size per account. <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">Limits</a> </p>"
         }
       ],
       "documentation":"<p>Creates a new Lambda function. The function metadata is created from the request parameters, and the code for the function is provided by a .zip file in the request body. If the function name already exists, the operation will fail. Note that the function name is case-sensitive. </p> <p>This operation requires permission for the <code>lambda:CreateFunction</code> action.</p>"
+    },
+    "DeleteAlias":{
+      "name":"DeleteAlias",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/aliases/{Name}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteAliasRequest"},
+      "errors":[
+        {
+          "shape":"ServiceException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>The AWS Lambda service encountered an internal error.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{"httpStatusCode":429},
+          "exception":true
+        }
+      ],
+      "documentation":"<p>Deletes specified Lambda function alias. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-v2-intro-aliases.html\">Introduction to AWS Lambda Aliases</a></p> <p>This requires permission for the lambda:DeleteAlias action.</p>"
     },
     "DeleteEventSourceMapping":{
       "name":"DeleteEventSourceMapping",
@@ -210,9 +285,60 @@
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
           "exception":true
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
+        },
+        {
+          "shape":"ResourceConflictException",
+          "error":{"httpStatusCode":409},
+          "exception":true,
+          "documentation":"<p>The resource already exists.</p>"
         }
       ],
-      "documentation":"<p>Deletes the specified Lambda function code and configuration.</p> <p>When you delete a function the associated access policy is also deleted. You will need to delete the event source mappings explicitly.</p> <p>This operation requires permission for the <code>lambda:DeleteFunction</code> action.</p>"
+      "documentation":"<p>Deletes the specified Lambda function code and configuration.</p> <p>If you don't specify a function version, AWS Lambda will delete the function, including all its versions, and any aliases pointing to the function versions.</p> <p>When you delete a function the associated resource policy is also deleted. You will need to delete the event source mappings explicitly.</p> <p>For information about function versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases-v2.html\">AWS Lambda Function Versioning and Aliases</a>.</p> <p>This operation requires permission for the <code>lambda:DeleteFunction</code> action.</p>"
+    },
+    "GetAlias":{
+      "name":"GetAlias",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/aliases/{Name}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetAliasRequest"},
+      "output":{
+        "shape":"AliasConfiguration",
+        "documentation":"<p>Provides configuration information about a Lambda function version alias.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ServiceException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>The AWS Lambda service encountered an internal error.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{"httpStatusCode":429},
+          "exception":true
+        }
+      ],
+      "documentation":"<p>Returns the specified alias information such as the alias ARN, description, and function version it is pointing to. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-v2-intro-aliases.html\">Introduction to AWS Lambda Aliases</a></p> <p>This requires permission for the lambda:GetAlias action.</p>"
     },
     "GetEventSourceMapping":{
       "name":"GetEventSourceMapping",
@@ -257,7 +383,7 @@
       "name":"GetFunction",
       "http":{
         "method":"GET",
-        "requestUri":"/2015-03-31/functions/{FunctionName}/versions/HEAD",
+        "requestUri":"/2015-03-31/functions/{FunctionName}",
         "responseCode":200
       },
       "input":{"shape":"GetFunctionRequest"},
@@ -282,15 +408,21 @@
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
           "exception":true
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
         }
       ],
-      "documentation":"<p>Returns the configuration information of the Lambda function and a presigned URL link to the .zip file you uploaded with <a>CreateFunction</a> so you can download the .zip file. Note that the URL is valid for up to 10 minutes. The configuration information is the same information you provided as parameters when uploading the function.</p> <p>This operation requires permission for the <code>lambda:GetFunction</code> action.</p>"
+      "documentation":"<p>Returns the configuration information of the Lambda function and a presigned URL link to the .zip file you uploaded with <a>CreateFunction</a> so you can download the .zip file. Note that the URL is valid for up to 10 minutes. The configuration information is the same information you provided as parameters when uploading the function.</p> <p>Using the optional <code>Qualifier</code> parameter, you can specify a specific function version for which you want this information. If you don't specify this parameter, the API uses unqualified function ARN which return information about the $LATEST version of the Lambda function. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases-v2.html\">AWS Lambda Function Versioning and Aliases</a>.</p> <p>This operation requires permission for the <code>lambda:GetFunction</code> action.</p>"
     },
     "GetFunctionConfiguration":{
       "name":"GetFunctionConfiguration",
       "http":{
         "method":"GET",
-        "requestUri":"/2015-03-31/functions/{FunctionName}/versions/HEAD/configuration",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/configuration",
         "responseCode":200
       },
       "input":{"shape":"GetFunctionConfigurationRequest"},
@@ -315,15 +447,21 @@
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
           "exception":true
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
         }
       ],
-      "documentation":"<p>Returns the configuration information of the Lambda function. This the same information you provided as parameters when uploading the function by using <a>CreateFunction</a>.</p> <p>This operation requires permission for the <code>lambda:GetFunctionConfiguration</code> operation.</p>"
+      "documentation":"<p>Returns the configuration information of the Lambda function. This the same information you provided as parameters when uploading the function by using <a>CreateFunction</a>.</p> <p>You can use the optional <code>Qualifier</code> parameter to retrieve configuration information for a specific Lambda function version. If you don't provide it, the API returns information about the $LATEST version of the function. For more information about versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases-v2.html\">AWS Lambda Function Versioning and Aliases</a>.</p> <p>This operation requires permission for the <code>lambda:GetFunctionConfiguration</code> operation.</p>"
     },
     "GetPolicy":{
       "name":"GetPolicy",
       "http":{
         "method":"GET",
-        "requestUri":"/2015-03-31/functions/{FunctionName}/versions/HEAD/policy",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/policy",
         "responseCode":200
       },
       "input":{"shape":"GetPolicyRequest"},
@@ -345,9 +483,15 @@
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
           "exception":true
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
         }
       ],
-      "documentation":"<p>Returns the access policy, containing a list of permissions granted via the <code>AddPermission</code> API, associated with the specified bucket.</p> <p>You need permission for the <code>lambda:GetPolicy action.</code></p>"
+      "documentation":"<p>Returns the resource policy, containing a list of permissions that apply to a specific to an ARN that you specify via the <code>Qualifier</code> paramter. </p> <p>For informration about adding permissions, see <a>AddPermission</a>.</p> <p>You need permission for the <code>lambda:GetPolicy action.</code></p>"
     },
     "Invoke":{
       "name":"Invoke",
@@ -382,20 +526,28 @@
         {
           "shape":"RequestTooLargeException",
           "error":{"httpStatusCode":413},
-          "exception":true
+          "exception":true,
+          "documentation":"<p>The request payload exceeded the <code>Invoke</code> request body JSON input limit. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">Limits</a> </p>"
         },
         {
           "shape":"UnsupportedMediaTypeException",
           "error":{"httpStatusCode":415},
-          "exception":true
+          "exception":true,
+          "documentation":"<p>The content type of the <code>Invoke</code> request body is not JSON.</p>"
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
           "exception":true
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
         }
       ],
-      "documentation":"<p> Invokes a specified Lambda function. </p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>"
+      "documentation":"<p> Invokes a specific Lambda function version. </p> <p>If you don't provide the <code>Qualifier</code> parameter, it uses the unqualified function ARN which results in invocation of the $LATEST version of the Lambda function (when you create a Lambda function, the $LATEST is the version). The AWS Lambda versioning and aliases feature allows you to publish multiple versions of a Lambda function and also create aliases for each function version. So each your Lambda function version can be invoked using multiple ARNs. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases-v2.html\">AWS Lambda Function Versioning and Aliases</a>. Using the <code>Qualifier</code> parameter, you can specify a function version or alias name to invoke specific function version. If you specify function version, the API uses the qualified function ARN to invoke a specific function version. If you specify alias name, the API uses the alias ARN to invoke the function version to which the alias points.</p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>"
     },
     "InvokeAsync":{
       "name":"InvokeAsync",
@@ -435,6 +587,42 @@
       ],
       "deprecated":true,
       "documentation":"<important>This API is deprecated. We recommend you use <code>Invoke</code> API (see <a>Invoke</a>).</important> <p>Submits an invocation request to AWS Lambda. Upon receiving the request, Lambda executes the specified function asynchronously. To see the logs generated by the Lambda function execution, see the CloudWatch logs console.</p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>"
+    },
+    "ListAliases":{
+      "name":"ListAliases",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/aliases",
+        "responseCode":200
+      },
+      "input":{"shape":"ListAliasesRequest"},
+      "output":{"shape":"ListAliasesResponse"},
+      "errors":[
+        {
+          "shape":"ServiceException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>The AWS Lambda service encountered an internal error.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{"httpStatusCode":429},
+          "exception":true
+        }
+      ],
+      "documentation":"<p>Returns list of aliases created for a Lambda function. For each alias, the response includes information such as the alias ARN, description, alias name, and the function version to which it points. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-v2-intro-aliases.html\">Introduction to AWS Lambda Aliases</a></p> <p>This requires permission for the lambda:ListAliases action.</p>"
     },
     "ListEventSourceMappings":{
       "name":"ListEventSourceMappings",
@@ -502,11 +690,92 @@
       ],
       "documentation":"<p>Returns a list of your Lambda functions. For each function, the response includes the function configuration information. You must use <a>GetFunction</a> to retrieve the code for your function.</p> <p>This operation requires permission for the <code>lambda:ListFunctions</code> action.</p>"
     },
+    "ListVersionsByFunction":{
+      "name":"ListVersionsByFunction",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/versions",
+        "responseCode":200
+      },
+      "input":{"shape":"ListVersionsByFunctionRequest"},
+      "output":{"shape":"ListVersionsByFunctionResponse"},
+      "errors":[
+        {
+          "shape":"ServiceException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>The AWS Lambda service encountered an internal error.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{"httpStatusCode":429},
+          "exception":true
+        }
+      ],
+      "documentation":"<p>List all versions of a function.</p>"
+    },
+    "PublishVersion":{
+      "name":"PublishVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/versions",
+        "responseCode":201
+      },
+      "input":{"shape":"PublishVersionRequest"},
+      "output":{
+        "shape":"FunctionConfiguration",
+        "documentation":"<p>A complex type that describes function metadata.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ServiceException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>The AWS Lambda service encountered an internal error.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{"httpStatusCode":429},
+          "exception":true
+        },
+        {
+          "shape":"CodeStorageExceededException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>You have exceeded your maximum total code size per account. <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">Limits</a> </p>"
+        }
+      ],
+      "documentation":"<p>Publishes a version of your function from the current snapshot of HEAD. That is, AWS Lambda takes a snapshot of the function code and configuration information from HEAD and publishes a new version. The code and <code>handler</code> of this specific Lambda function version cannot be modified after publication, but you can modify the configuration information. </p>"
+    },
     "RemovePermission":{
       "name":"RemovePermission",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2015-03-31/functions/{FunctionName}/versions/HEAD/policy/{StatementId}",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/policy/{StatementId}",
         "responseCode":204
       },
       "input":{"shape":"RemovePermissionRequest"},
@@ -524,12 +793,57 @@
           "documentation":"<p>The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.</p>"
         },
         {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
+        },
+        {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
           "exception":true
         }
       ],
-      "documentation":"<p>You can remove individual permissions from an access policy associated with a Lambda function by providing a Statement ID. </p> <p>Note that removal of a permission will cause an active event source to lose permission to the function. </p> <p>You need permission for the <code>lambda:RemovePermission</code> action.</p>"
+      "documentation":"<p>You can remove individual permissions from an resource policy associated with a Lambda function by providing a statement ID that you provided when you addded the permission. The API removes corresponding permission that is associated with the specific ARN identified by the <code>Qualifier</code> parameter.</p> <p>Note that removal of a permission will cause an active event source to lose permission to the function. </p> <p>You need permission for the <code>lambda:RemovePermission</code> action.</p>"
+    },
+    "UpdateAlias":{
+      "name":"UpdateAlias",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/aliases/{Name}",
+        "responseCode":200
+      },
+      "input":{"shape":"UpdateAliasRequest"},
+      "output":{
+        "shape":"AliasConfiguration",
+        "documentation":"<p>Provides configuration information about a Lambda function version alias.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ServiceException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>The AWS Lambda service encountered an internal error.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The resource (for example, a Lambda function or access policy statement) specified in the request does not exist.</p>"
+        },
+        {
+          "shape":"InvalidParameterValueException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. </p>"
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{"httpStatusCode":429},
+          "exception":true
+        }
+      ],
+      "documentation":"<p>Using this API you can update function version to which the alias points to and alias description. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-v2-intro-aliases.html\">Introduction to AWS Lambda Aliases</a></p> <p>This requires permission for the lambda:UpdateAlias action.</p>"
     },
     "UpdateEventSourceMapping":{
       "name":"UpdateEventSourceMapping",
@@ -566,6 +880,12 @@
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
           "exception":true
+        },
+        {
+          "shape":"ResourceConflictException",
+          "error":{"httpStatusCode":409},
+          "exception":true,
+          "documentation":"<p>The resource already exists.</p>"
         }
       ],
       "documentation":"<p>You can update an event source mapping. This is useful if you want to change the parameters of the existing mapping without losing your position in the stream. You can change which function will receive the stream records, but to change the stream itself, you must create a new mapping. </p> <p>This operation requires permission for the <code>lambda:UpdateEventSourceMapping</code> action.</p>"
@@ -574,7 +894,7 @@
       "name":"UpdateFunctionCode",
       "http":{
         "method":"PUT",
-        "requestUri":"/2015-03-31/functions/{FunctionName}/versions/HEAD/code",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/code",
         "responseCode":200
       },
       "input":{"shape":"UpdateFunctionCodeRequest"},
@@ -609,7 +929,8 @@
         {
           "shape":"CodeStorageExceededException",
           "error":{"httpStatusCode":400},
-          "exception":true
+          "exception":true,
+          "documentation":"<p>You have exceeded your maximum total code size per account. <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">Limits</a> </p>"
         }
       ],
       "documentation":"<p> Updates the code for the specified Lambda function. This operation must only be used on an existing Lambda function and cannot be used to update the function configuration. </p> <p>This operation requires permission for the <code>lambda:UpdateFunctionCode</code> action.</p>"
@@ -618,7 +939,7 @@
       "name":"UpdateFunctionConfiguration",
       "http":{
         "method":"PUT",
-        "requestUri":"/2015-03-31/functions/{FunctionName}/versions/HEAD/configuration",
+        "requestUri":"/2015-03-31/functions/{FunctionName}/configuration",
         "responseCode":200
       },
       "input":{"shape":"UpdateFunctionConfigurationRequest"},
@@ -672,7 +993,7 @@
           "shape":"FunctionName",
           "location":"uri",
           "locationName":"FunctionName",
-          "documentation":"<p>Name of the Lambda function whose access policy you are updating by adding a new permission.</p> <p> You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
+          "documentation":"<p>Name of the Lambda function whose resource policy you are updating by adding a new permission.</p> <p> You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
         },
         "StatementId":{
           "shape":"StatementId",
@@ -693,6 +1014,12 @@
         "SourceAccount":{
           "shape":"SourceOwner",
           "documentation":"<p>The AWS account ID (without a hyphen) of the source owner. For example, if the <code>SourceArn</code> identifies a bucket, then this is the bucket owner's account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don't specify the <code>SourceArn</code>) owned by a specific account. </p>"
+        },
+        "Qualifier":{
+          "shape":"Qualifier",
+          "location":"querystring",
+          "locationName":"Qualifier",
+          "documentation":"<p>You can specify this optional query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN. For example, if you specify function version 2 as the qualifier, then permission applies only when request is made using qualified function ARN: </p> <p><code>arn:aws:lambda:aws-region:acct-id:function:function-name:2</code></p> <p>If you specify alias name, for example \"PROD\", then the permission is valid only for requests made using the alias ARN:</p> <p><code>arn:aws:lambda:aws-region:acct-id:function:function-name:PROD</code></p> <p>If the qualifier is not specified, the permission is valid only when requests is made using unqualified function ARN. </p> <p><code>arn:aws:lambda:aws-region:acct-id:function:function-name</code></p>"
         }
       }
     },
@@ -704,6 +1031,38 @@
           "documentation":"<p>The permission statement you specified in the request. The response returns the same as a string using \"\\\" as an escape character in the JSON. </p>"
         }
       }
+    },
+    "Alias":{
+      "type":"string",
+      "min":1,
+      "max":128,
+      "pattern":"(?!^[0-9]+$)([a-zA-Z0-9-_]+)"
+    },
+    "AliasConfiguration":{
+      "type":"structure",
+      "members":{
+        "AliasArn":{
+          "shape":"FunctionArn",
+          "documentation":"<p>Lambda function ARN that is qualified using alias name as the suffix. For example, if you create an alias \"BETA\" pointing to a helloworld function version, the ARN is <code>arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA</code>.</p>"
+        },
+        "Name":{
+          "shape":"Alias",
+          "documentation":"<p>Alias name.</p>"
+        },
+        "FunctionVersion":{
+          "shape":"Version",
+          "documentation":"<p>Function version to which the alias points.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>Alias description.</p>"
+        }
+      },
+      "documentation":"<p>Provides configuration information about a Lambda function version alias.</p>"
+    },
+    "AliasList":{
+      "type":"list",
+      "member":{"shape":"AliasConfiguration"}
     },
     "Arn":{
       "type":"string",
@@ -719,6 +1078,7 @@
       "type":"blob",
       "streaming":true
     },
+    "Boolean":{"type":"boolean"},
     "CodeStorageExceededException":{
       "type":"structure",
       "members":{
@@ -726,7 +1086,36 @@
         "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true
+      "exception":true,
+      "documentation":"<p>You have exceeded your maximum total code size per account. <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">Limits</a> </p>"
+    },
+    "CreateAliasRequest":{
+      "type":"structure",
+      "required":[
+        "FunctionName",
+        "Name",
+        "FunctionVersion"
+      ],
+      "members":{
+        "FunctionName":{
+          "shape":"FunctionName",
+          "location":"uri",
+          "locationName":"FunctionName",
+          "documentation":"<p>Name of the Lambda function for which you want to create an alias. </p>"
+        },
+        "Name":{
+          "shape":"Alias",
+          "documentation":"<p>Name for the alias your creating.</p>"
+        },
+        "FunctionVersion":{
+          "shape":"Version",
+          "documentation":"<p>Lambda function version for which you are creating the alias.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>Description of the alias.</p>"
+        }
+      }
     },
     "CreateEventSourceMappingRequest":{
       "type":"structure",
@@ -746,7 +1135,7 @@
         },
         "Enabled":{
           "shape":"Enabled",
-          "documentation":"<p>Indicates whether AWS Lambda should begin polling the event source, the default is not enabled. </p>"
+          "documentation":"<p>Indicates whether AWS Lambda should begin polling the event source. By default, <code>Enabled</code> is true. </p>"
         },
         "BatchSize":{
           "shape":"BatchSize",
@@ -784,6 +1173,10 @@
           "shape":"Handler",
           "documentation":"<p>The function within your code that Lambda calls to begin execution. For Node.js, it is the <i>module-name</i>.<i>export</i> value in your function. For Java, it can be <code>package.class-name::handler</code> or <code>package.class-name</code>. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-handler-types.html\">Lambda Function Handler (Java)</a>. </p>"
         },
+        "Code":{
+          "shape":"FunctionCode",
+          "documentation":"<p>The code for the Lambda function. </p>"
+        },
         "Description":{
           "shape":"Description",
           "documentation":"<p>A short, user-defined function description. Lambda does not use this value. Assign a meaningful description as you see fit.</p>"
@@ -796,13 +1189,34 @@
           "shape":"MemorySize",
           "documentation":"<p>The amount of memory, in MB, your Lambda function is given. Lambda uses this memory size to infer the amount of CPU and memory allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.</p>"
         },
-        "Code":{
-          "shape":"FunctionCode",
-          "documentation":"<p>The code for the Lambda function. </p>"
+        "Publish":{
+          "shape":"Boolean",
+          "documentation":"<p>This boolean parameter can be used to request AWS Lambda to create the Lambda function and publish a version as an atomic operation. </p>"
         }
       }
     },
     "Date":{"type":"timestamp"},
+    "DeleteAliasRequest":{
+      "type":"structure",
+      "required":[
+        "FunctionName",
+        "Name"
+      ],
+      "members":{
+        "FunctionName":{
+          "shape":"FunctionName",
+          "location":"uri",
+          "locationName":"FunctionName",
+          "documentation":"<p>The Lambda function name for which the alias is created.</p>"
+        },
+        "Name":{
+          "shape":"Alias",
+          "location":"uri",
+          "locationName":"Name",
+          "documentation":"<p>Name of the alias to delete.</p>"
+        }
+      }
+    },
     "DeleteEventSourceMappingRequest":{
       "type":"structure",
       "required":["UUID"],
@@ -824,6 +1238,12 @@
           "location":"uri",
           "locationName":"FunctionName",
           "documentation":"<p>The Lambda function to delete.</p> <p> You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
+        },
+        "Qualifier":{
+          "shape":"Qualifier",
+          "location":"querystring",
+          "locationName":"Qualifier",
+          "documentation":"<p>Using this optional parameter you can specify a function version (but not the $LATEST version) to direct AWS Lambda to delete a specific function version. If the function version has one or more aliases pointing to it, you will get an error because you cannot have aliases pointing to it. You can delete any function version but not the $LATEST, that is, you cannot specify $LATEST as the value of this parameter. The $LATEST version can be deleted only when you want to delete all the function versions and aliases.</p> <p>You can only specify a function version and not alias name using this parameter. You cannot delete a function version using its alias.</p> <p>If you don't specify this parameter, AWS Lambda will delete the function, including all its versions and aliases.</p>"
         }
       }
     },
@@ -884,7 +1304,7 @@
     },
     "FunctionArn":{
       "type":"string",
-      "pattern":"arn:aws:lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?"
+      "pattern":"arn:aws:lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?"
     },
     "FunctionCode":{
       "type":"structure",
@@ -964,6 +1384,14 @@
         "LastModified":{
           "shape":"Timestamp",
           "documentation":"<p>The timestamp of the last time you updated the function.</p>"
+        },
+        "CodeSha256":{
+          "shape":"String",
+          "documentation":"<p>It is the SHA256 hash of your function deployment package.</p>"
+        },
+        "Version":{
+          "shape":"Version",
+          "documentation":"<p>The version of the Lambda function.</p>"
         }
       },
       "documentation":"<p>A complex type that describes function metadata.</p>"
@@ -975,8 +1403,29 @@
     "FunctionName":{
       "type":"string",
       "min":1,
-      "max":111,
-      "pattern":"(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)"
+      "max":140,
+      "pattern":"(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"
+    },
+    "GetAliasRequest":{
+      "type":"structure",
+      "required":[
+        "FunctionName",
+        "Name"
+      ],
+      "members":{
+        "FunctionName":{
+          "shape":"FunctionName",
+          "location":"uri",
+          "locationName":"FunctionName",
+          "documentation":"<p>Function name for which the alias is created. An alias is a subresource that exists only in the context of an existing Lambda function. So you must specify the function name.</p>"
+        },
+        "Name":{
+          "shape":"Alias",
+          "location":"uri",
+          "locationName":"Name",
+          "documentation":"<p>Name of the alias for which you want to retrieve information.</p>"
+        }
+      }
     },
     "GetEventSourceMappingRequest":{
       "type":"structure",
@@ -999,6 +1448,12 @@
           "location":"uri",
           "locationName":"FunctionName",
           "documentation":"<p>The name of the Lambda function for which you want to retrieve the configuration information.</p> <p> You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
+        },
+        "Qualifier":{
+          "shape":"Qualifier",
+          "location":"querystring",
+          "locationName":"Qualifier",
+          "documentation":"<p>Using this optional parameter you can specify function version or alias name. If you specify function version, the API uses qualified function ARN and returns information about the specific function version. if you specify alias name, the API uses alias ARN and returns information about the function version to which the alias points.</p> <p>If you don't specify this parameter, the API uses unqualified function ARN, and returns information about the $LATEST function version.</p>"
         }
       }
     },
@@ -1011,6 +1466,12 @@
           "location":"uri",
           "locationName":"FunctionName",
           "documentation":"<p>The Lambda function name. </p> <p> You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
+        },
+        "Qualifier":{
+          "shape":"Qualifier",
+          "location":"querystring",
+          "locationName":"Qualifier",
+          "documentation":"<p>Using this optional parameter to specify a function version or alias name. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version. If you specify alias name, the API uses alias ARN and returns information about the function version to which the alias points. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the $LATEST version of the Lambda function.</p>"
         }
       }
     },
@@ -1030,7 +1491,11 @@
           "shape":"FunctionName",
           "location":"uri",
           "locationName":"FunctionName",
-          "documentation":"<p>Function name whose access policy you want to retrieve. </p> <p> You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
+          "documentation":"<p>Function name whose resource policy you want to retrieve. </p> <p> You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
+        },
+        "Qualifier":{
+          "shape":"Qualifier",
+          "documentation":"<p>You can specify this optional query parameter to specify function version or alias name in which case this API will return all permissions associated with the specific ARN. If you don't provide this parameter, the API will return permissions that apply to the unqualified function ARN. </p>"
         }
       }
     },
@@ -1039,7 +1504,7 @@
       "members":{
         "Policy":{
           "shape":"String",
-          "documentation":"<p>The access policy associated with the specified function. The response returns the same as a string using \"\\\" as an escape character in the JSON. </p>"
+          "documentation":"<p>The resource policy associated with the specified function. The response returns the same as a string using \"\\\" as an escape character in the JSON. </p>"
         }
       }
     },
@@ -1101,6 +1566,12 @@
         "Payload":{
           "shape":"Blob",
           "documentation":"<p>JSON that you want to provide to your Lambda function as input.</p>"
+        },
+        "Qualifier":{
+          "shape":"Qualifier",
+          "location":"querystring",
+          "locationName":"Qualifier",
+          "documentation":"<p>You can use this optional paramter to specify a Lambda function version or alias name. If you specify function version, the API uses qualified function ARN to invoke a specific Lambda function. If you specify alias name, the API uses the alias ARN to invoke the Lambda function version to which the alias points.</p> <p>If you don't provide this parameter, then the API uses unqualified function ARN which results in invocation of the $LATEST version.</p>"
         }
       },
       "payload":"Payload"
@@ -1173,6 +1644,49 @@
       },
       "deprecated":true,
       "documentation":"<p>Upon success, it returns empty response. Otherwise, throws an exception.</p>"
+    },
+    "ListAliasesRequest":{
+      "type":"structure",
+      "required":["FunctionName"],
+      "members":{
+        "FunctionName":{
+          "shape":"FunctionName",
+          "location":"uri",
+          "locationName":"FunctionName",
+          "documentation":"<p>Lambda function name for which the alias is created.</p>"
+        },
+        "FunctionVersion":{
+          "shape":"Version",
+          "location":"querystring",
+          "locationName":"FunctionVersion",
+          "documentation":"<p>If you specify this optional parameter, the API returns only the aliases pointing to the specific Lambda function version, otherwise returns all aliases created for the Lambda function.</p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"Marker",
+          "documentation":"<p>Optional string. An opaque pagination token returned from a previous ListAliases operation. If present, indicates where to continue the listing.</p>"
+        },
+        "MaxItems":{
+          "shape":"MaxListItems",
+          "location":"querystring",
+          "locationName":"MaxItems",
+          "documentation":"<p>Optional integer. Specifies the maximum number of aliases to return in response. This parameter value must be greater than 0.</p>"
+        }
+      }
+    },
+    "ListAliasesResponse":{
+      "type":"structure",
+      "members":{
+        "NextMarker":{
+          "shape":"String",
+          "documentation":"<p>A string, present if there are more aliases.</p>"
+        },
+        "Aliases":{
+          "shape":"AliasList",
+          "documentation":"<p>An list of alises.</p>"
+        }
+      }
     },
     "ListEventSourceMappingsRequest":{
       "type":"structure",
@@ -1248,6 +1762,43 @@
       },
       "documentation":"<p>Contains a list of AWS Lambda function configurations (see <a>FunctionConfiguration</a>.</p>"
     },
+    "ListVersionsByFunctionRequest":{
+      "type":"structure",
+      "required":["FunctionName"],
+      "members":{
+        "FunctionName":{
+          "shape":"FunctionName",
+          "location":"uri",
+          "locationName":"FunctionName",
+          "documentation":"<p>Function name whose versions to list. You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"Marker",
+          "documentation":"<p> Optional string. An opaque pagination token returned from a previous <code>ListVersionsByFunction</code> operation. If present, indicates where to continue the listing. </p>"
+        },
+        "MaxItems":{
+          "shape":"MaxListItems",
+          "location":"querystring",
+          "locationName":"MaxItems",
+          "documentation":"<p> Optional integer. Specifies the maximum number of AWS Lambda function versions to return in response. This parameter value must be greater than 0. </p>"
+        }
+      }
+    },
+    "ListVersionsByFunctionResponse":{
+      "type":"structure",
+      "members":{
+        "NextMarker":{
+          "shape":"String",
+          "documentation":"<p>A string, present if there are more function versions.</p>"
+        },
+        "Versions":{
+          "shape":"FunctionList",
+          "documentation":"<p>A list of Lambda function versions.</p>"
+        }
+      }
+    },
     "LogType":{
       "type":"string",
       "enum":[
@@ -1280,6 +1831,32 @@
       "type":"string",
       "pattern":".*"
     },
+    "PublishVersionRequest":{
+      "type":"structure",
+      "required":["FunctionName"],
+      "members":{
+        "FunctionName":{
+          "shape":"FunctionName",
+          "location":"uri",
+          "locationName":"FunctionName",
+          "documentation":"<p>The Lambda function name. You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
+        },
+        "CodeSha256":{
+          "shape":"String",
+          "documentation":"<p>The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter value must match the SHA256 of the HEAD version for the publication to succeed. </p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p> The description for the version you are publishing. If not provided, AWS Lambda copies the description from the HEAD version. </p>"
+        }
+      }
+    },
+    "Qualifier":{
+      "type":"string",
+      "min":1,
+      "max":128,
+      "pattern":"(|[a-zA-Z0-9$_]+)"
+    },
     "RemovePermissionRequest":{
       "type":"structure",
       "required":[
@@ -1291,13 +1868,19 @@
           "shape":"FunctionName",
           "location":"uri",
           "locationName":"FunctionName",
-          "documentation":"<p>Lambda function whose access policy you want to remove a permission from.</p> <p> You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
+          "documentation":"<p>Lambda function whose resource policy you want to remove a permission from.</p> <p> You can specify an unqualified function name (for example, \"Thumbnail\") or you can specify Amazon Resource Name (ARN) of the function (for example, \"arn:aws:lambda:us-west-2:account-id:function:ThumbNail\"). AWS Lambda also allows you to specify only the account ID qualifier (for example, \"account-id:Thumbnail\"). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length. </p>"
         },
         "StatementId":{
           "shape":"StatementId",
           "location":"uri",
           "locationName":"StatementId",
           "documentation":"<p>Statement ID of the permission to remove.</p>"
+        },
+        "Qualifier":{
+          "shape":"Qualifier",
+          "location":"querystring",
+          "locationName":"Qualifier",
+          "documentation":"<p>You can specify this optional parameter to remove permission associated with a specific function version or function alias. The value of this paramter is the function version or alias name. If you don't specify this parameter, the API removes permission associated with the unqualified function ARN.</p>"
         }
       }
     },
@@ -1308,7 +1891,8 @@
         "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":413},
-      "exception":true
+      "exception":true,
+      "documentation":"<p>The request payload exceeded the <code>Invoke</code> request body JSON input limit. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">Limits</a> </p>"
     },
     "ResourceConflictException":{
       "type":"structure",
@@ -1338,7 +1922,8 @@
       "type":"string",
       "enum":[
         "nodejs",
-        "java8"
+        "java8",
+        "python2.7"
       ]
     },
     "S3Bucket":{
@@ -1380,8 +1965,7 @@
     "String":{"type":"string"},
     "Timeout":{
       "type":"integer",
-      "min":1,
-      "max":60
+      "min":1
     },
     "Timestamp":{"type":"string"},
     "TooManyRequestsException":{
@@ -1406,7 +1990,37 @@
         "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":415},
-      "exception":true
+      "exception":true,
+      "documentation":"<p>The content type of the <code>Invoke</code> request body is not JSON.</p>"
+    },
+    "UpdateAliasRequest":{
+      "type":"structure",
+      "required":[
+        "FunctionName",
+        "Name"
+      ],
+      "members":{
+        "FunctionName":{
+          "shape":"FunctionName",
+          "location":"uri",
+          "locationName":"FunctionName",
+          "documentation":"<p>The function name for which the alias is created.</p>"
+        },
+        "Name":{
+          "shape":"Alias",
+          "location":"uri",
+          "locationName":"Name",
+          "documentation":"<p>The alias name.</p>"
+        },
+        "FunctionVersion":{
+          "shape":"Version",
+          "documentation":"<p>Using this parameter you can optionally change the Lambda function version to which the alias to points to.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>You can optionally change the description of the alias using this parameter.</p>"
+        }
+      }
     },
     "UpdateEventSourceMappingRequest":{
       "type":"structure",
@@ -1457,6 +2071,10 @@
         "S3ObjectVersion":{
           "shape":"S3ObjectVersion",
           "documentation":"<p>The Amazon S3 object (the deployment package) version you want to upload.</p>"
+        },
+        "Publish":{
+          "shape":"Boolean",
+          "documentation":"<p>This boolean parameter can be used to request AWS Lambda to update the Lambda function and publish a version as an atomic operation. </p>"
         }
       }
     },
@@ -1491,6 +2109,14 @@
           "documentation":"<p>The amount of memory, in MB, your Lambda function is given. AWS Lambda uses this memory size to infer the amount of CPU allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.</p>"
         }
       }
+    },
+    "Version":{
+      "type":"string",
+      "min":1,
+      "max":1024,
+      "pattern":"(\\$LATEST|[0-9]+)"
     }
+  },
+  "examples":{
   }
 }
