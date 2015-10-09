@@ -553,12 +553,14 @@ describe 'AWS.S3', ->
       willCompute 'deleteObjects', computeChecksums: true
       willCompute 'putBucketCors', computeChecksums: true
       willCompute 'putBucketLifecycle', computeChecksums: true
+      willCompute 'putBucketLifecycleConfiguration', computeChecksums: true
       willCompute 'putBucketTagging', computeChecksums: true
 
     it 'computes checksums if computeChecksums is off and operation requires it', ->
       willCompute 'deleteObjects', computeChecksums: false
       willCompute 'putBucketCors', computeChecksums: false
       willCompute 'putBucketLifecycle', computeChecksums: false
+      willCompute 'putBucketLifecycleConfiguration', computeChecksums: false
       willCompute 'putBucketTagging', computeChecksums: false
 
     it 'does not compute checksums if computeChecksums is off', ->
