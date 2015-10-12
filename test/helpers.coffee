@@ -168,6 +168,7 @@ setupMockResponse = (cb) ->
   AWS.events.on 'validate', (req) ->
     ['sign', 'send'].forEach (evt) -> req.removeAllListeners(evt)
     req.removeListener('extractData', AWS.EventListeners.CorePost.EXTRACT_REQUEST_ID)
+    req.removeListener('extractError', AWS.EventListeners.CorePost.EXTRACT_REQUEST_ID)
     Object.keys(AWS.EventListeners).forEach (ns) ->
       if AWS.EventListeners[ns].EXTRACT_DATA
         req.removeListener('extractData', AWS.EventListeners[ns].EXTRACT_DATA)
