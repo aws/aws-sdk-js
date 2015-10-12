@@ -652,3 +652,33 @@ describe 'AWS.util.hoistPayloadMember', ->
     req.send()
     hoist(req.response)
     expect(req.response.data.Stream.toString()).to.eql('abc')
+
+describe 'AWS.util.extractRequestId', ->
+  api =
+    'metadata': 'protocol': 'rest-xml'
+    'operations': 'sample': 'output': 'shape': 'OutputShape'
+    'shapes':
+      'OutputShape':
+        'type': 'structure'
+        'payload': 'Data'
+        'members':
+          'Data': 'shape': 'SingleStructure'
+      'StringType': 'type': 'string'
+      'SingleStructure':
+        'type': 'structure'
+        'members': 'Foo': 'shape': 'StringType'
+  service = new AWS.Service endpoint: 'http://localhost', apiConfig: api
+
+  it 'sets requestId on the response when requestId is valid', ->
+    helpers.mockHttpResponse 200, {'x-amz-request-id': 'RequestId1'}, {}
+    req = service.sample()
+    req.send()
+    AWS.util.extractRequestId(req.response)
+    expect(req.response.requestId).to.equal('RequestId1')
+
+  it 'sets requestId on the response on error status codes', ->
+    helpers.mockHttpResponse 403, {'x-amz-request-id': 'RequestId1'}
+    req = service.sample()
+    req.send()
+    AWS.util.extractRequestId(req.response)
+    expect(req.response.requestId).to.equal('RequestId1')
