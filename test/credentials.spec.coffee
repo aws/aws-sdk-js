@@ -860,6 +860,6 @@ describe 'AWS.CognitoIdentityCredentials', ->
           expect(creds.getStorage('id')).to.equal('IDENTITY-ID2')
         setupCreds({LoginId: 'LOGINIDB'})
         expect(creds.getStorage('id')).not.to.equal('IDENTITY-ID2')
-        setupCreds({LoginId: 'LOGINIDA'})
+        creds.params.LoginId = 'LOGINIDA'
         creds.clearCachedId()
 
