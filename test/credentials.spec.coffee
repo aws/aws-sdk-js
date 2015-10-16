@@ -600,6 +600,14 @@ describe 'AWS.CognitoIdentityCredentials', ->
       setupCreds(Logins: {provider1: 'Token1', provider3: 'Token3'})
       expect(creds.params.IdentityId).to.equal('MYID')
 
+    it 'uses IdentityId if it is cached with the same LoginId', ->
+      setupCreds({LoginId: 'LOGINID1'})
+      creds.setStorage('id', 'MYID1')
+      creds.loadCachedId()
+      expect(creds.params.IdentityId).to.equal('MYID1')
+      setupCreds({LoginId: 'LOGINID2'})
+      expect(creds.params.IdentityId).not.to.equal('MYID1')
+
     it 'ignores IdentityId if it is not cached against any of Logins', ->
       creds.setStorage('id', 'MYID')
       creds.setStorage('providers', 'provider4,provider5')
@@ -832,3 +840,26 @@ describe 'AWS.CognitoIdentityCredentials', ->
         creds.getId (err, id) ->
           expect(id).to.equal('IDENTITY-ID2')
           expect(creds.getStorage('id')).to.equal('IDENTITY-ID2')
+
+      it 'returns cached id in getId call with LoginId', ->
+        setupClients LoginId: 'LOGINIDA'
+        helpers.mockResponses [
+          {data: {IdentityId: 'IDENTITY-ID1'}, error: null},
+          {data: {TOKEN: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
+        ]
+        helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
+          creds.webIdentityCredentials.data =
+            Credentials:
+              AccessKeyId: 'KEY'
+              SecretAccessKey: 'SECRET'
+              SessionToken: 'TOKEN'
+          cb null
+        creds.refresh(->)
+        creds.getId (err, id) ->
+          expect(id).to.equal('IDENTITY-ID2')
+          expect(creds.getStorage('id')).to.equal('IDENTITY-ID2')
+        setupCreds({LoginId: 'LOGINIDB'})
+        expect(creds.getStorage('id')).not.to.equal('IDENTITY-ID2')
+        creds.params.LoginId = 'LOGINIDA'
+        creds.clearCachedId()
+
