@@ -4110,7 +4110,7 @@
           "documentation":"<p>The request failed because a provided policy could not be successfully evaluated. An additional detail message indicates the source of the failure.</p>"
         }
       ],
-      "documentation":"<p>Simulate a set of IAM policies against a list of API actions and AWS resources to determine the policies' effective permissions. The policies are provided as a list of strings.</p> <p>The simulation does not perform the API actions, it only checks the authorization to determine if the simulated policies allow or deny the actions.</p> <p>If you want to simulate existing policies attached to an IAM user, group, or role, use <a>SimulatePrincipalPolicy</a> instead.</p> <p>Context keys are variables maintained by AWS and its services that provide details about the context of an API query request, and can be evaluated by using the <code>Condition</code> element of an IAM policy. To get the list of context keys required by the policies to simulate them correctly, use <a>GetContextKeysForCustomPolicy</a>.</p> <p>If the output is long, you can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>"
+      "documentation":"<p>Simulate how a set of IAM policies and optionally a resource-based policy works with a list of API actions and AWS resources to determine the policies' effective permissions. The policies are provided as strings.</p> <p>The simulation does not perform the API actions; it only checks the authorization to determine if the simulated policies allow or deny the actions.</p> <p>If you want to simulate existing policies attached to an IAM user, group, or role, use <a>SimulatePrincipalPolicy</a> instead.</p> <p>Context keys are variables maintained by AWS and its services that provide details about the context of an API query request. You can use the <code>Condition</code> element of an IAM policy to evaluate context keys. To get the list of context keys that the policies require for correct simulation, use <a>GetContextKeysForCustomPolicy</a>.</p> <p>If the output is long, you can use <code>MaxItems</code> and <code>Marker</code> parameters to paginate the results.</p>"
     },
     "SimulatePrincipalPolicy":{
       "name":"SimulatePrincipalPolicy",
@@ -4155,7 +4155,7 @@
           "documentation":"<p>The request failed because a provided policy could not be successfully evaluated. An additional detail message indicates the source of the failure.</p>"
         }
       ],
-      "documentation":"<p>Simulate the set of IAM policies attached to an IAM entity against a list of API actions and AWS resources to determine the policies' effective permissions. The entity can be an IAM user, group, or role. If you specify a user, then the simulation also includes all of the policies attached to groups that the user is a member of.</p> <p>You can optionally include a list of one or more additional policies specified as strings to include in the simulation. If you want to simulate only policies specified as strings, use <a>SimulateCustomPolicy</a> instead.</p> <p>The simulation does not perform the API actions, it only checks the authorization to determine if the simulated policies allow or deny the actions.</p> <p><b>Note:</b> This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use <a>SimulateCustomPolicy</a> instead.</p> <p>Context keys are variables maintained by AWS and its services that provide details about the context of an API query request, and can be evaluated by using the <code>Condition</code> element of an IAM policy. To get the list of context keys required by the policies to simulate them correctly, use <a>GetContextKeysForPrincipalPolicy</a>.</p> <p>If the output is long, you can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>"
+      "documentation":"<p>Simulate how a set of IAM policies attached to an IAM entity works with a list of API actions and AWS resources to determine the policies' effective permissions. The entity can be an IAM user, group, or role. If you specify a user, then the simulation also includes all of the policies that are attached to groups that the user belongs to .</p> <p>You can optionally include a list of one or more additional policies specified as strings to include in the simulation. If you want to simulate only policies specified as strings, use <a>SimulateCustomPolicy</a> instead.</p> <p>You can also optionally include one resource-based policy to be evaluated with each of the resources included in the simulation.</p> <p>The simulation does not perform the API actions, it only checks the authorization to determine if the simulated policies allow or deny the actions.</p> <p><b>Note:</b> This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use <a>SimulateCustomPolicy</a> instead.</p> <p>Context keys are variables maintained by AWS and its services that provide details about the context of an API query request. You can use the <code>Condition</code> element of an IAM policy to evaluate context keys. To get the list of context keys that the policies require for correct simulation, use <a>GetContextKeysForPrincipalPolicy</a>.</p> <p>If the output is long, you can use the <code>MaxItems</code> and <code>Marker</code> parameters to paginate the results.</p>"
     },
     "UpdateAccessKey":{
       "name":"UpdateAccessKey",
@@ -5887,6 +5887,16 @@
         "AWSManagedPolicy"
       ]
     },
+    "EvalDecisionDetailsType":{
+      "type":"map",
+      "key":{"shape":"EvalDecisionSourceType"},
+      "value":{"shape":"PolicyEvaluationDecisionType"}
+    },
+    "EvalDecisionSourceType":{
+      "type":"string",
+      "min":3,
+      "max":256
+    },
     "EvaluationResult":{
       "type":"structure",
       "required":[
@@ -5914,6 +5924,10 @@
         "MissingContextValues":{
           "shape":"ContextKeyNamesResultListType",
           "documentation":"<p>A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.</p> <caution> <p>If the response includes any keys in this list, then the reported results might be untrustworthy because the simulation could not completely evaluate all of the conditions specified in the policies that would occur in a real world request.</p> </caution>"
+        },
+        "EvalDecisionDetails":{
+          "shape":"EvalDecisionDetailsType",
+          "documentation":"<p>Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller's IAM policy must grant access. See <ulink href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html\">How IAM Roles Differ from Resource-based Policies</ulink></p>"
         }
       },
       "documentation":"<p>Contains the results of a simulation.</p> <p>This data type is used by the return parameter of <code><a>SimulatePolicy</a></code>.</p>"
@@ -5969,11 +5983,11 @@
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         }
       }
     },
@@ -6127,11 +6141,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6681,11 +6695,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6713,11 +6727,11 @@
       "members":{
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6754,11 +6768,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6794,11 +6808,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6834,11 +6848,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6875,11 +6889,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6919,11 +6933,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6956,11 +6970,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -6992,11 +7006,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7029,11 +7043,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7065,11 +7079,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7101,11 +7115,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7160,11 +7174,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7193,11 +7207,11 @@
         "PolicyArn":{"shape":"arnType"},
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7229,11 +7243,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7265,11 +7279,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7316,11 +7330,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7351,11 +7365,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7387,11 +7401,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7424,11 +7438,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7460,11 +7474,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7496,11 +7510,11 @@
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         }
       }
     },
@@ -7849,6 +7863,7 @@
         "role",
         "aws-managed",
         "user-managed",
+        "resource",
         "none"
       ]
     },
@@ -8369,27 +8384,39 @@
       "members":{
         "PolicyInputList":{
           "shape":"SimulationPolicyListType",
-          "documentation":"<p>A list of policy documents to include in the simulation. Each document is specified as a string containing the complete, valid JSON text of an IAM policy.</p>"
+          "documentation":"<p>A list of policy documents to include in the simulation. Each document is specified as a string containing the complete, valid JSON text of an IAM policy. Do not include any resource-based policies in this parameter. Any resource-based policy must be submitted with the <code>ResourcePolicy</code> parameter. The policies cannot be \"scope-down\" policies, such as you could include in a call to <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html\">GetFederationToken</a> or one of the <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> APIs to restrict what a user can do while using the temporary credentials.</p>"
         },
         "ActionNames":{
           "shape":"ActionNameListType",
-          "documentation":"<p>A list of names of API actions to evaluate in the simulation. Each action is evaluated for each resource. Each action must include the service identifier, such as <code>iam:CreateUser</code>.</p>"
+          "documentation":"<p>A list of names of API actions to evaluate in the simulation. Each action is evaluated against each resource. Each action must include the service identifier, such as <code>iam:CreateUser</code>.</p>"
         },
         "ResourceArns":{
           "shape":"ResourceNameListType",
-          "documentation":"<p>A list of ARNs of AWS resources to include in the simulation. If this parameter is not provided then the value defaults to <code>*</code> (all resources). Each API in the <code>ActionNames</code> parameter is evaluated for each resource in this list. The simulation determines the access result (allowed or denied) of each combination and reports it in the response.</p>"
+          "documentation":"<p>A list of ARNs of AWS resources to include in the simulation. If this parameter is not provided then the value defaults to <code>*</code> (all resources). Each API in the <code>ActionNames</code> parameter is evaluated for each resource in this list. The simulation determines the access result (allowed or denied) of each combination and reports it in the response.</p> <p>The simulation does not automatically retrieve policies for the specified resources. If you want to include a resource policy in the simulation, then you must include the policy as a string in the <code>ResourcePolicy</code> parameter.</p> <p>If you include a <code>ResourcePolicy</code>, then it must be applicable to all of the resources included in the simulation or you receive an invalid input error.</p>"
+        },
+        "ResourcePolicy":{
+          "shape":"policyDocumentType",
+          "documentation":"<p>A resource-based policy to include in the simulation provided as a string. Each resource in the simulation is treated as if it had this policy attached. You can include only one resource-based policy in a simulation.</p>"
+        },
+        "ResourceOwner":{
+          "shape":"ResourceNameType",
+          "documentation":"<p>An AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN, such as an S3 bucket or object. If <code>ResourceOwner</code> is specified, it is also used as the account owner of any <code>ResourcePolicy</code> included in the simulation. If the <code>ResourceOwner</code> parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in <code>CallerArn</code>. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user <code>CallerArn</code>.</p>"
+        },
+        "CallerArn":{
+          "shape":"ResourceNameType",
+          "documentation":"<p>The ARN of the user that you want to use as the simulated caller of the APIs. <code>CallerArn</code> is required if you include a <code>ResourcePolicy</code> so that the policy's <code>Principal</code> element has a value to use in evaluating the policy.</p> <p>You can specify only the ARN of an IAM user. You cannot specify the ARN of an assumed role, federated user, or a service principal.</p>"
         },
         "ContextEntries":{
           "shape":"ContextEntryListType",
-          "documentation":"<p>A list of context keys and corresponding values that are used by the simulation. Whenever a context key is evaluated by a <code>Condition</code> element in one of the simulated IAM permission policies, the corresponding value is supplied.</p>"
+          "documentation":"<p>A list of context keys and corresponding values for the simulation to use. Whenever a context key is evaluated by a <code>Condition</code> element in one of the simulated IAM permission policies, the corresponding value is supplied.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         }
       }
     },
@@ -8420,7 +8447,7 @@
       "members":{
         "PolicySourceArn":{
           "shape":"arnType",
-          "documentation":"<p>The Amazon Resource Name (ARN) of a user, group, or role whose policies you want to include in the simulation. If you specify a user, group, or role, the simulation includes all policies associated with that entity. If you specify a user, the simulation also includes all policies attached to any groups the user is a member of.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of a user, group, or role whose policies you want to include in the simulation. If you specify a user, group, or role, the simulation includes all policies that are associated with that entity. If you specify a user, the simulation also includes all policies that are attached to any groups the user belongs to.</p>"
         },
         "PolicyInputList":{
           "shape":"SimulationPolicyListType",
@@ -8432,19 +8459,31 @@
         },
         "ResourceArns":{
           "shape":"ResourceNameListType",
-          "documentation":"<p>A list of ARNs of AWS resources to include in the simulation. If this parameter is not provided then the value defaults to <code>*</code> (all resources). Each API in the <code>ActionNames</code> parameter is evaluated for each resource in this list. The simulation determines the access result (allowed or denied) of each combination and reports it in the response.</p>"
+          "documentation":"<p>A list of ARNs of AWS resources to include in the simulation. If this parameter is not provided then the value defaults to <code>*</code> (all resources). Each API in the <code>ActionNames</code> parameter is evaluated for each resource in this list. The simulation determines the access result (allowed or denied) of each combination and reports it in the response.</p> <p>The simulation does not automatically retrieve policies for the specified resources. If you want to include a resource policy in the simulation, then you must include the policy as a string in the <code>ResourcePolicy</code> parameter.</p>"
+        },
+        "ResourcePolicy":{
+          "shape":"policyDocumentType",
+          "documentation":"<p>A resource-based policy to include in the simulation provided as a string. Each resource in the simulation is treated as if it had this policy attached. You can include only one resource-based policy in a simulation.</p>"
+        },
+        "ResourceOwner":{
+          "shape":"ResourceNameType",
+          "documentation":"<p>An AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN, such as an S3 bucket or object. If <code>ResourceOwner</code> is specified, it is also used as the account owner of any <code>ResourcePolicy</code> included in the simulation. If the <code>ResourceOwner</code> parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in <code>CallerArn</code>. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user <code>CallerArn</code>.</p>"
+        },
+        "CallerArn":{
+          "shape":"ResourceNameType",
+          "documentation":"<p>The ARN of the user that you want to specify as the simulated caller of the APIs. If you do not specify a <code>CallerArn</code>, it defaults to the ARN of the user that you specify in <code>PolicySourceArn</code>, if you specified a user. If you include both a <code>PolicySourceArn</code> (for example, <code>arn:aws:iam::123456789012:user/David</code>) and a <code>CallerArn</code> (for example, <code>arn:aws:iam::123456789012:user/Bob</code>), the result is that you simulate calling the APIs as Bob, as if Bob had David's policies.</p> <p>You can specify only the ARN of an IAM user. You cannot specify the ARN of an assumed role, federated user, or a service principal.</p> <p><code>CallerArn</code> is required if you include a <code>ResourcePolicy</code> and the <code>PolicySourceArn</code> is not the ARN for an IAM user. This is required so that the resource-based policy's <code>Principal</code> element has a value to use in evaluating the policy.</p>"
         },
         "ContextEntries":{
           "shape":"ContextEntryListType",
-          "documentation":"<p>A list of context keys and corresponding values that are used by the simulation. Whenever a context key is evaluated by a <code>Condition</code> element in one of the simulated IAM permission policies, the corresponding value is supplied.</p>"
+          "documentation":"<p>A list of context keys and corresponding values for the simulation to use. Whenever a context key is evaluated by a <code>Condition</code> element in one of the simulated policies, the corresponding value is supplied.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
-          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. If this is the case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
         },
         "Marker":{
           "shape":"markerType",
-          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response you received to inform the next call about where to start.</p>"
+          "documentation":"<p>Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the <code>Marker</code> element in the response that you received to indicate where the next call should start.</p>"
         }
       }
     },
