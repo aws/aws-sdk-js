@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.2.10
+// AWS SDK for JavaScript v2.2.11
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -266,7 +266,8 @@ AWS.Config = AWS.util.inherit({
     correctClockSkew: false,
     dynamoDbCrc32: true,
     systemClockOffset: 0,
-    signatureVersion: null
+    signatureVersion: null,
+    signatureCache: true
   },
 
 
@@ -294,7 +295,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.2.10',
+  VERSION: '2.2.11',
 
 
   Signers: {},
@@ -462,8 +463,9 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     delete this.params.IdentityId;
 
     var poolId = this.params.IdentityPoolId;
-    delete this.storage[this.localStorageKey.id + poolId];
-    delete this.storage[this.localStorageKey.providers + poolId];
+    var loginId = this.params.LoginId || '';
+    delete this.storage[this.localStorageKey.id + poolId + loginId];
+    delete this.storage[this.localStorageKey.providers + poolId + loginId];
   },
 
 
@@ -580,13 +582,13 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 
   getStorage: function getStorage(key) {
-    return this.storage[this.localStorageKey[key] + this.params.IdentityPoolId];
+    return this.storage[this.localStorageKey[key] + this.params.IdentityPoolId + (this.params.LoginId || '')];
   },
 
 
   setStorage: function setStorage(key, val) {
     try {
-      this.storage[this.localStorageKey[key] + this.params.IdentityPoolId] = val;
+      this.storage[this.localStorageKey[key] + this.params.IdentityPoolId + (this.params.LoginId || '')] = val;
     } catch (_) {}
   },
 
@@ -1364,7 +1366,8 @@ AWS.EventListeners = {
           var date = AWS.util.date.getDate();
           var SignerClass = req.service.getSignerClass(req);
           var signer = new SignerClass(req.httpRequest,
-            req.service.api.signingName || req.service.api.endpointPrefix);
+            req.service.api.signingName || req.service.api.endpointPrefix,
+            req.service.config.signatureCache);
 
           delete req.httpRequest.headers['Authorization'];
           delete req.httpRequest.headers['Date'];
@@ -5543,6 +5546,9 @@ function signedUrlSigner(request) {
 
   AWS.util.each(request.httpRequest.headers, function (key, value) {
     if (key === expiresHeader) key = 'Expires';
+    if (key.indexOf('x-amz-') === 0) {
+      key = key.toLowerCase();
+    }
     queryParams[key] = value;
   });
   delete request.httpRequest.headers[expiresHeader];
@@ -5936,9 +5942,10 @@ var expiresHeader = 'presigned-expires';
 
 
 AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
-  constructor: function V4(request, serviceName) {
+  constructor: function V4(request, serviceName, signatureCache) {
     AWS.Signers.RequestSigner.call(this, request);
     this.serviceName = serviceName;
+    this.signatureCache = signatureCache;
   },
 
   algorithm: 'AWS4-HMAC-SHA256',
@@ -6007,17 +6014,27 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
   },
 
   signature: function signature(credentials, datetime) {
-    var cache = cachedSecret[this.serviceName];
+    var cache = null;
+    if (this.signatureCache) {
+      var cache = cachedSecret[this.serviceName];
+    }
     var date = datetime.substr(0, 8);
+
     if (!cache ||
         cache.akid !== credentials.accessKeyId ||
         cache.region !== this.request.region ||
         cache.date !== date) {
+
       var kSecret = credentials.secretAccessKey;
       var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, date, 'buffer');
       var kRegion = AWS.util.crypto.hmac(kDate, this.request.region, 'buffer');
       var kService = AWS.util.crypto.hmac(kRegion, this.serviceName, 'buffer');
       var kCredentials = AWS.util.crypto.hmac(kService, 'aws4_request', 'buffer');
+
+      if (!this.signatureCache) {
+        return AWS.util.crypto.hmac(kCredentials, this.stringToSign(datetime), 'hex');
+      }
+
       cachedSecret[this.serviceName] = {
         region: this.request.region, date: date,
         key: kCredentials, akid: credentials.accessKeyId
@@ -10320,7 +10337,7 @@ exports.format = function(f) {
   var args = arguments;
   var len = args.length;
   var str = String(f).replace(formatRegExp, function(x) {
-    if (x === '%%') return '%';
+    if (x === '%') return '%';
     if (i >= len) return x;
     switch (x) {
       case '%s': return String(args[i++]);
