@@ -42,6 +42,10 @@
           },
           "Char": {
             "shape": "CharType"
+          },
+          "ImaStringLocation": {
+            "shape": "StringType",
+            "locationName": "stringLocation"
           }
         }
       },
@@ -93,7 +97,8 @@
           "Float": 1.2,
           "Double": 1.3,
           "Long": 200,
-          "Char": "a"
+          "Char": "a",
+          "ImaStringLocation": "myloc"
         },
         "response": {
           "status_code": 200,
@@ -101,7 +106,7 @@
             "ImaHeader": "test",
             "X-Foo": "abc"
           },
-          "body": "{\"Str\": \"myname\", \"Num\": 123, \"FalseBool\": false, \"TrueBool\": true, \"Float\": 1.2, \"Double\": 1.3, \"Long\": 200, \"Char\": \"a\"}"
+          "body": "{\"Str\": \"myname\", \"Num\": 123, \"FalseBool\": false, \"TrueBool\": true, \"Float\": 1.2, \"Double\": 1.3, \"Long\": 200, \"Char\": \"a\", \"stringLocation\": \"myloc\"}"
         }
       }
     ]
@@ -408,6 +413,115 @@
           "status_code": 200,
           "headers": {},
           "body": "{\"MapMember\": {\"a\": 1398796238, \"b\": 1398796238}}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Complex Outputs with locationName members",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "ListMembers": {
+            "shape": "SingleStruct",
+            "locationName": "ListMember"
+          },
+          "Num": {
+            "shape": "IntegerType",
+            "locationName": "num"
+          },
+          "FalseBool": {
+            "shape": "BooleanType",
+            "locationName": "falseBool"
+          },
+          "TrueBool": {
+            "shape": "BooleanType",
+            "locationName": "trueBool"
+          },
+          "Float": {
+            "shape": "FloatType",
+            "locationName": "float"
+          },
+          "Double": {
+            "shape": "DoubleType",
+            "locationName": "double"
+          },
+          "Long": {
+            "shape": "LongType",
+            "locationName": "long"
+          },
+          "Char": {
+            "shape": "CharType",
+            "locationName": "char"
+          }
+        }
+      },
+      "ListType": {
+        "type": "list",
+        "member": {
+          "shape": "SingleStruct"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      },
+      "IntegerType": {
+        "type": "integer"
+      },
+      "BooleanType": {
+        "type": "boolean"
+      },
+      "FloatType": {
+        "type": "float"
+      },
+      "DoubleType": {
+        "type": "double"
+      },
+      "LongType": {
+        "type": "long"
+      },
+      "CharType": {
+        "type": "character"
+      },
+      "SingleStruct": {
+        "type": "structure",
+        "members": {
+          "Foo": {
+            "shape": "StringType",
+            "locationName": "foo"
+          }
+        }
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "ListMembers": [{"Foo": "a"}, {"Foo": "b"}],
+          "Num": 123,
+          "FalseBool": false,
+          "TrueBool": true,
+          "Float": 1.2,
+          "Double": 1.3,
+          "Long": 200,
+          "Char": "a"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {
+            "ImaHeader": "test",
+            "X-Foo": "abc"
+          },
+          "body": "{\"ListMember\": [{\"foo\": \"a\"}, {\"foo\": \"b\"}], \"num\": 123, \"falseBool\": false, \"trueBool\": true, \"float\": 1.2, \"double\": 1.3, \"long\": 200, \"char\": \"a\"}"
         }
       }
     ]

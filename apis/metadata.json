@@ -1,4 +1,7 @@
 {
+  "apigateway": {
+    "name": "APIGateway"
+  },
   "autoscaling": {
     "name": "AutoScaling"
   },
