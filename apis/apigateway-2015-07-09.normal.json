@@ -4122,11 +4122,18 @@
         },
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>Specifies a put integration HTTP method.</p>"
+          "location":"uri",
+          "locationName":"http_method",
+          "documentation":"<p>Specifies a put integration request's HTTP method.</p>"
         },
         "type":{
           "shape":"IntegrationType",
           "documentation":"<p>Specifies a put integration input's type.</p>"
+        },
+        "integrationHttpMethod":{
+          "shape":"String",
+          "documentation":"<p>Specifies a put integration HTTP method.</p>",
+          "locationName":"httpMethod"
         },
         "uri":{
           "shape":"String",
