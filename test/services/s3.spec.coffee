@@ -330,6 +330,17 @@ describe 'AWS.S3', ->
       expect(error.code).to.equal('NotFound')
       expect(error.message).to.equal(null)
 
+    it 'extracts the region', ->
+      body = """
+        <Error>
+          <Code>InvalidArgument</Code>
+          <Message>Provided param is bad</Message>
+          <Region>eu-west-1</Region>
+        </Error>
+        """
+      error = extractError(400, body)
+      expect(error.region).to.equal('eu-west-1')
+
     it 'misc errors not known to return an empty body', ->
       error = extractError(412) # made up
       expect(error.code).to.equal(412)
@@ -345,6 +356,15 @@ describe 'AWS.S3', ->
       error = extractError(403, body)
       expect(error.code).to.equal('ErrorCode')
       expect(error.message).to.equal('ErrorMessage')
+
+  describe 'retryableError', ->
+
+    it 'should retry on authorization header with updated region', ->
+      err = {code: 'AuthorizationHeaderMalformed', statusCode:400, region: "eu-west-1"}
+      req = request()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal("eu-west-1")
 
   # tests from this point on are "special cases" for specific aws operations
 
@@ -588,7 +608,7 @@ describe 'AWS.S3', ->
       it 'opens separate stream if a file object is provided', (done) ->
         hash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
         helpers.mockResponse data: ETag: 'etag'
-        
+
         fs = require('fs')
         mock = helpers.spyOn(fs, 'createReadStream').andCallFake ->
           tr = new Stream.Transform
