@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.2.12
+// AWS SDK for JavaScript v2.2.13
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -295,7 +295,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.2.12',
+  VERSION: '2.2.13',
 
 
   Signers: {},
@@ -1930,9 +1930,9 @@ function translateStructure(structure, shape) {
     var memberShape = shape.members[name];
     if (memberShape) {
       if (memberShape.location !== 'body') return;
-
+      var locationName = memberShape.isLocationName ? memberShape.name : name;
       var result = translate(value, memberShape);
-      if (result !== undefined) struct[name] = result;
+      if (result !== undefined) struct[locationName] = result;
     }
   });
   return struct;
@@ -5265,6 +5265,10 @@ AWS.util.update(AWS.S3.prototype, {
       return true;
     } else if (error && error.code === 'RequestTimeout') {
       return true;
+    } else if (error && error.code === 'AuthorizationHeaderMalformed' &&
+        error.region && error.region != request.httpRequest.region) {
+      request.httpRequest.region = error.region;
+      return true;
     } else {
       var _super = AWS.Service.prototype.retryableError;
       return _super.call(this, error, request);
@@ -5305,7 +5309,8 @@ AWS.util.update(AWS.S3.prototype, {
       var data = new AWS.XML.Parser().parse(body.toString());
       resp.error = AWS.util.error(new Error(), {
         code: data.Code || code,
-        message: data.Message || null
+        message: data.Message || null,
+        region: data.Region || null
       });
     }
   },
