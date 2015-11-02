@@ -2995,7 +2995,7 @@
           "documentation":"<p>The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p> Lists the account aliases associated with the account. For information about using an AWS account alias, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html\">Using an Alias for Your AWS Account ID</a> in the <i>IAM User Guide</i>. </p> <p> You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters. </p>"
+      "documentation":"<p> Lists the account alias associated with the account (Note: you can have only one). For information about using an AWS account alias, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html\">Using an Alias for Your AWS Account ID</a> in the <i>IAM User Guide</i>. </p>"
     },
     "ListAttachedGroupPolicies":{
       "name":"ListAttachedGroupPolicies",
@@ -5901,7 +5901,6 @@
       "type":"structure",
       "required":[
         "EvalActionName",
-        "EvalResourceName",
         "EvalDecision"
       ],
       "members":{
@@ -5927,7 +5926,11 @@
         },
         "EvalDecisionDetails":{
           "shape":"EvalDecisionDetailsType",
-          "documentation":"<p>Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller's IAM policy must grant access. See <ulink href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html\">How IAM Roles Differ from Resource-based Policies</ulink></p>"
+          "documentation":"<p>Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller's IAM policy must grant access. See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html\">How IAM Roles Differ from Resource-based Policies</a></p>"
+        },
+        "ResourceSpecificResults":{
+          "shape":"ResourceSpecificResultListType",
+          "documentation":"<p>The individual results of the simulation of the API action specified in EvalActionName on each resource.</p>"
         }
       },
       "documentation":"<p>Contains the results of a simulation.</p> <p>This data type is used by the return parameter of <code><a>SimulatePolicy</a></code>.</p>"
@@ -6045,7 +6048,7 @@
       "members":{
         "PolicyInputList":{
           "shape":"SimulationPolicyListType",
-          "documentation":"<p>A list of policies for which you want list of context keys used in <code>Condition</code> elements.</p>"
+          "documentation":"<p>A list of policies for which you want list of context keys used in <code>Condition</code> elements. Each document is specified as a string containing the complete, valid JSON text of an IAM policy.</p>"
         }
       }
     },
@@ -6741,7 +6744,7 @@
       "members":{
         "AccountAliases":{
           "shape":"accountAliasListType",
-          "documentation":"<p>A list of aliases associated with the account.</p>"
+          "documentation":"<p>A list of aliases associated with the account. AWS supports only one alias per account.</p>"
         },
         "IsTruncated":{
           "shape":"booleanType",
@@ -7719,7 +7722,7 @@
         },
         "ExpirePasswords":{
           "shape":"booleanType",
-          "documentation":"<p>Specifies whether IAM users are required to change their password after a specified number of days.</p>"
+          "documentation":"<p>Indicates whether passwords in the account expire. Returns true if MaxPasswordAge is contains a value greater than 0. Returns false if MaxPasswordAge is 0 or not present.</p>"
         },
         "MaxPasswordAge":{
           "shape":"maxPasswordAgeType",
@@ -8048,6 +8051,11 @@
         "COMPLETE"
       ]
     },
+    "ResourceHandlingOptionType":{
+      "type":"string",
+      "min":1,
+      "max":64
+    },
     "ResourceNameListType":{
       "type":"list",
       "member":{"shape":"ResourceNameType"}
@@ -8056,6 +8064,40 @@
       "type":"string",
       "min":1,
       "max":2048
+    },
+    "ResourceSpecificResult":{
+      "type":"structure",
+      "required":[
+        "EvalResourceName",
+        "EvalResourceDecision"
+      ],
+      "members":{
+        "EvalResourceName":{
+          "shape":"ResourceNameType",
+          "documentation":"<p>The name of the simulated resource, in Amazon Resource Name (ARN) format.</p>"
+        },
+        "EvalResourceDecision":{
+          "shape":"PolicyEvaluationDecisionType",
+          "documentation":"<p>The result of the simulation of the simulated API action on the resource specified in <code>EvalResourceName</code>.</p>"
+        },
+        "MatchedStatements":{
+          "shape":"StatementListType",
+          "documentation":"<p>A list of the statements in the input policies that determine the result for this part of the simulation. Remember that even if multiple statements allow the action on the resource, if <i>any</i> statement denies that action, then the explicit deny overrides any allow, and the deny statement is the only entry included in the result.</p>"
+        },
+        "MissingContextValues":{
+          "shape":"ContextKeyNamesResultListType",
+          "documentation":"<p>A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.</p>"
+        },
+        "EvalDecisionDetails":{
+          "shape":"EvalDecisionDetailsType",
+          "documentation":"<p>Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller's IAM policy must grant access.</p>"
+        }
+      },
+      "documentation":"<p>Contains the result of the simulation of a single API action call on a single resource.</p> <p>This data type is used by a member of the <a>EvaluationResult</a> data type.</p>"
+    },
+    "ResourceSpecificResultListType":{
+      "type":"list",
+      "member":{"shape":"ResourceSpecificResult"}
     },
     "ResyncMFADeviceRequest":{
       "type":"structure",
@@ -8410,6 +8452,10 @@
           "shape":"ContextEntryListType",
           "documentation":"<p>A list of context keys and corresponding values for the simulation to use. Whenever a context key is evaluated by a <code>Condition</code> element in one of the simulated IAM permission policies, the corresponding value is supplied.</p>"
         },
+        "ResourceHandlingOption":{
+          "shape":"ResourceHandlingOptionType",
+          "documentation":"<p>Specifies the type of simulation to run. Different APIs that support resource-based policies require different combinations of resources. By specifying the type of simulation to run, you enable the policy simulator to enforce the presence of the required resources to ensure reliable simulation results. If your simulation does not match one of the following scenarios, then you can omit this parameter. The following list shows each of the supported scenario values and the resources that you must define to run the simulation.</p> <p>Each of the EC2 scenarios requires that you specify instance, image, and security-group resources. If your scenario includes an EBS volume, then you must specify that volume as a resource. If the EC2 scenario includes VPC, then you must supply the network-interface resource. If it includes an IP subnet, then you must specify the subnet resource. For more information on the EC2 scenario options, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html\">Supported Platforms</a> in the <i>AWS EC2 User Guide</i>.</p> <ul> <li><p><b>EC2-Classic-InstanceStore</b></p> <p>instance, image, security-group</p> </li> <li><p><b>EC2-Classic-EBS</b></p> <p>instance, image, security-group, volume</p> </li> <li><p><b>EC2-VPC-InstanceStore</b></p> <p>instance, image, security-group, network-interface</p> </li> <li><p><b>EC2-VPC-InstanceStore-Subnet</b></p> <p>instance, image, security-group, network-interface, subnet</p> </li> <li><p><b>EC2-VPC-EBS</b></p> <p>instance, image, security-group, network-interface, volume</p> </li> <li><p><b>EC2-VPC-EBS-Subnet</b></p> <p>instance, image, security-group, network-interface, subnet, volume</p> </li> </ul>"
+        },
         "MaxItems":{
           "shape":"maxItemsType",
           "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If additional items exist beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p> <p>This parameter is optional. If you do not include it, it defaults to 100. Note that IAM might return fewer results, even when there are more results available. In that case, the <code>IsTruncated</code> response element returns <code>true</code> and <code>Marker</code> contains a value to include in the subsequent call that tells the service where to continue from. </p>"
@@ -8476,6 +8522,10 @@
         "ContextEntries":{
           "shape":"ContextEntryListType",
           "documentation":"<p>A list of context keys and corresponding values for the simulation to use. Whenever a context key is evaluated by a <code>Condition</code> element in one of the simulated policies, the corresponding value is supplied.</p>"
+        },
+        "ResourceHandlingOption":{
+          "shape":"ResourceHandlingOptionType",
+          "documentation":"<p>Specifies the type of simulation to run. Different APIs that support resource-based policies require different combinations of resources. By specifying the type of simulation to run, you enable the policy simulator to enforce the presence of the required resources to ensure reliable simulation results. If your simulation does not match one of the following scenarios, then you can omit this parameter. The following list shows each of the supported scenario values and the resources that you must define to run the simulation.</p> <p>Each of the EC2 scenarios requires that you specify instance, image, and security-group resources. If your scenario includes an EBS volume, then you must specify that volume as a resource. If the EC2 scenario includes VPC, then you must supply the network-interface resource. If it includes an IP subnet, then you must specify the subnet resource. For more information on the EC2 scenario options, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html\">Supported Platforms</a> in the <i>AWS EC2 User Guide</i>.</p> <ul> <li><p><b>EC2-Classic-InstanceStore</b></p> <p>instance, image, security-group</p> </li> <li><p><b>EC2-Classic-EBS</b></p> <p>instance, image, security-group, volume</p> </li> <li><p><b>EC2-VPC-InstanceStore</b></p> <p>instance, image, security-group, network-interface</p> </li> <li><p><b>EC2-VPC-InstanceStore-Subnet</b></p> <p>instance, image, security-group, network-interface, subnet</p> </li> <li><p><b>EC2-VPC-EBS</b></p> <p>instance, image, security-group, network-interface, volume</p> </li> <li><p><b>EC2-VPC-EBS-Subnet</b></p> <p>instance, image, security-group, network-interface, subnet, volume</p> </li> </ul>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
