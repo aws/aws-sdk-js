@@ -125,6 +125,158 @@
       ],
       "documentation":"<p>Uploads an app or test scripts.</p>"
     },
+    "DeleteDevicePool":{
+      "name":"DeleteDevicePool",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteDevicePoolRequest",
+        "documentation":"<p>Represents a request to the delete device pool operation.</p>"
+      },
+      "output":{
+        "shape":"DeleteDevicePoolResult",
+        "documentation":"<p>Represents the result of a delete device pool request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ArgumentException",
+          "exception":true,
+          "documentation":"<p>An invalid argument was specified.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>The specified entity was not found.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>A limit was exceeded.</p>"
+        },
+        {
+          "shape":"ServiceAccountException",
+          "exception":true,
+          "documentation":"<p>There was a problem with the service account.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.</p>"
+    },
+    "DeleteProject":{
+      "name":"DeleteProject",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteProjectRequest",
+        "documentation":"<p>Represents a request to the delete project operation.</p>"
+      },
+      "output":{
+        "shape":"DeleteProjectResult",
+        "documentation":"<p>Represents the result of a delete project request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ArgumentException",
+          "exception":true,
+          "documentation":"<p>An invalid argument was specified.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>The specified entity was not found.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>A limit was exceeded.</p>"
+        },
+        {
+          "shape":"ServiceAccountException",
+          "exception":true,
+          "documentation":"<p>There was a problem with the service account.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes an AWS Device Farm project, given the project ARN.</p> <p><b>Note</b> Deleting this resource does not stop an in-progress run.</p>"
+    },
+    "DeleteRun":{
+      "name":"DeleteRun",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteRunRequest",
+        "documentation":"<p>Represents a request to the delete run operation.</p>"
+      },
+      "output":{
+        "shape":"DeleteRunResult",
+        "documentation":"<p>Represents the result of a delete run request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ArgumentException",
+          "exception":true,
+          "documentation":"<p>An invalid argument was specified.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>The specified entity was not found.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>A limit was exceeded.</p>"
+        },
+        {
+          "shape":"ServiceAccountException",
+          "exception":true,
+          "documentation":"<p>There was a problem with the service account.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes the run, given the run ARN.</p> <p><b>Note</b> Deleting this resource does not stop an in-progress run.</p>"
+    },
+    "DeleteUpload":{
+      "name":"DeleteUpload",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteUploadRequest",
+        "documentation":"<p>Represents a request to the delete upload operation.</p>"
+      },
+      "output":{
+        "shape":"DeleteUploadResult",
+        "documentation":"<p>Represents the result of a delete upload request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ArgumentException",
+          "exception":true,
+          "documentation":"<p>An invalid argument was specified.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>The specified entity was not found.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>A limit was exceeded.</p>"
+        },
+        {
+          "shape":"ServiceAccountException",
+          "exception":true,
+          "documentation":"<p>There was a problem with the service account.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes an upload given the upload ARN.</p>"
+    },
     "GetAccountSettings":{
       "name":"GetAccountSettings",
       "http":{
@@ -959,6 +1111,82 @@
         }
       ],
       "documentation":"<p>Schedules a run.</p>"
+    },
+    "UpdateDevicePool":{
+      "name":"UpdateDevicePool",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateDevicePoolRequest",
+        "documentation":"<p>Represents a request to the update device pool operation.</p>"
+      },
+      "output":{
+        "shape":"UpdateDevicePoolResult",
+        "documentation":"<p>Represents the result of an update device pool request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ArgumentException",
+          "exception":true,
+          "documentation":"<p>An invalid argument was specified.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>The specified entity was not found.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>A limit was exceeded.</p>"
+        },
+        {
+          "shape":"ServiceAccountException",
+          "exception":true,
+          "documentation":"<p>There was a problem with the service account.</p>"
+        }
+      ],
+      "documentation":"<p>Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).</p>"
+    },
+    "UpdateProject":{
+      "name":"UpdateProject",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateProjectRequest",
+        "documentation":"<p>Represents a request to the update project operation.</p>"
+      },
+      "output":{
+        "shape":"UpdateProjectResult",
+        "documentation":"<p>Represents the result of an update project request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ArgumentException",
+          "exception":true,
+          "documentation":"<p>An invalid argument was specified.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>The specified entity was not found.</p>"
+        },
+        {
+          "shape":"LimitExceededException",
+          "exception":true,
+          "documentation":"<p>A limit was exceeded.</p>"
+        },
+        {
+          "shape":"ServiceAccountException",
+          "exception":true,
+          "documentation":"<p>There was a problem with the service account.</p>"
+        }
+      ],
+      "documentation":"<p>Modifies the specified project name, given the project ARN and a new name.</p>"
     }
   },
   "shapes":{
@@ -1052,7 +1280,10 @@
         "AUTOMATION_OUTPUT",
         "APPIUM_SERVER_OUTPUT",
         "APPIUM_JAVA_OUTPUT",
-        "APPIUM_JAVA_XML_OUTPUT"
+        "APPIUM_JAVA_XML_OUTPUT",
+        "EXPLORER_EVENT_LOG",
+        "EXPLORER_SUMMARY_LOG",
+        "APPLICATION_CRASH_REPORT"
       ]
     },
     "Artifacts":{
@@ -1220,6 +1451,74 @@
       "documentation":"<p>Represents the result of a create upload request.</p>"
     },
     "DateTime":{"type":"timestamp"},
+    "DeleteDevicePoolRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>Represents the Amazon Resource Name (ARN) of the Device Farm device pool you wish to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to the delete device pool operation.</p>"
+    },
+    "DeleteDevicePoolResult":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Represents the result of a delete device pool request.</p>"
+    },
+    "DeleteProjectRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>Represents the Amazon Resource Name (ARN) of the Device Farm project you wish to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to the delete project operation.</p>"
+    },
+    "DeleteProjectResult":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Represents the result of a delete project request.</p>"
+    },
+    "DeleteRunRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the run you wish to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to the delete run operation.</p>"
+    },
+    "DeleteRunResult":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Represents the result of a delete run request.</p>"
+    },
+    "DeleteUploadRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>Represents the Amazon Resource Name (ARN) of the Device Farm upload you wish to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to the delete upload operation.</p>"
+    },
+    "DeleteUploadResult":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Represents the result of a delete upload request.</p>"
+    },
     "Device":{
       "type":"structure",
       "members":{
@@ -1294,6 +1593,24 @@
         "PHONE",
         "TABLET"
       ]
+    },
+    "DeviceMinutes":{
+      "type":"structure",
+      "members":{
+        "total":{
+          "shape":"Double",
+          "documentation":"<p>When specified, represents the total minutes used by the resource to run tests.</p>"
+        },
+        "metered":{
+          "shape":"Double",
+          "documentation":"<p>When specified, represents only the sum of metered minutes used by the resource to run tests.</p>"
+        },
+        "unmetered":{
+          "shape":"Double",
+          "documentation":"<p>When specified, represents only the sum of unmetered minutes used by the resource to run tests.</p>"
+        }
+      },
+      "documentation":"<p>Represents the total (metered or unmetered) minutes used by the resource to run tests. Contains the sum of minutes consumed by all children.</p>"
     },
     "DevicePlatform":{
       "type":"string",
@@ -1654,7 +1971,11 @@
           "shape":"Message",
           "documentation":"<p>A message about the job's result.</p>"
         },
-        "device":{"shape":"Device"}
+        "device":{"shape":"Device"},
+        "deviceMinutes":{
+          "shape":"DeviceMinutes",
+          "documentation":"<p>Represents the total (metered or unmetered) minutes used by the job.</p>"
+        }
       },
       "documentation":"<p>Represents a device.</p>"
     },
@@ -2256,6 +2577,10 @@
         "billingMethod":{
           "shape":"BillingMethod",
           "documentation":"<p>Specifies the billing method for a test run: <code>metered</code> or <code>unmetered</code>. If the parameter is not specified, the default value is <code>unmetered</code>.</p>"
+        },
+        "deviceMinutes":{
+          "shape":"DeviceMinutes",
+          "documentation":"<p>Represents the total (metered or unmetered) minutes used by the test run.</p>"
         }
       },
       "documentation":"<p>Represents an app on a set of devices with a specific test and configuration.</p>"
@@ -2465,6 +2790,10 @@
         "message":{
           "shape":"Message",
           "documentation":"<p>A message about the suite's result.</p>"
+        },
+        "deviceMinutes":{
+          "shape":"DeviceMinutes",
+          "documentation":"<p>Represents the total (metered or unmetered) minutes used by the test suite.</p>"
         }
       },
       "documentation":"<p>Represents a collection of one or more tests.</p>"
@@ -2515,6 +2844,10 @@
         "message":{
           "shape":"Message",
           "documentation":"<p>A message about the test's result.</p>"
+        },
+        "deviceMinutes":{
+          "shape":"DeviceMinutes",
+          "documentation":"<p>Represents the total (metered or unmetered) minutes used by the test.</p>"
         }
       },
       "documentation":"<p>Represents a condition that is evaluated.</p>"
@@ -2569,6 +2902,58 @@
       "type":"map",
       "key":{"shape":"ExecutionResult"},
       "value":{"shape":"UniqueProblems"}
+    },
+    "UpdateDevicePoolRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resourc Name (ARN) of the Device Farm device pool you wish to update.</p>"
+        },
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>A string representing the name of the device pool you wish to update.</p>"
+        },
+        "description":{
+          "shape":"Message",
+          "documentation":"<p>A description of the device pool you wish to update.</p>"
+        },
+        "rules":{
+          "shape":"Rules",
+          "documentation":"<p>Represents the rules you wish to modify for the device pool. Updating rules is optional; however, if you choose to update rules for your request, the update will replace the existing rules.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to the update device pool operation.</p>"
+    },
+    "UpdateDevicePoolResult":{
+      "type":"structure",
+      "members":{
+        "devicePool":{"shape":"DevicePool"}
+      },
+      "documentation":"<p>Represents the result of an update device pool request.</p>"
+    },
+    "UpdateProjectRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the project whose name you wish to update.</p>"
+        },
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>A string representing the new name of the project that you are updating.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to the update project operation.</p>"
+    },
+    "UpdateProjectResult":{
+      "type":"structure",
+      "members":{
+        "project":{"shape":"Project"}
+      },
+      "documentation":"<p>Represents the result of an update project request.</p>"
     },
     "Upload":{
       "type":"structure",
