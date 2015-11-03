@@ -626,6 +626,58 @@
     ]
   },
   {
+    "description": "List payload",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "payload": "ListData",
+        "members": {
+          "Header": {
+            "shape": "StringType",
+            "location": "header",
+            "locationName": "X-Foo"
+          },
+          "ListData": {
+            "shape": "ListType"
+          }
+        }
+      },
+      "ListType": {
+        "type": "list",
+        "member": {
+          "shape": "StringType"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Header": "baz",
+          "ListData": ["a", "b", "c"]
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {
+            "X-Foo": "baz"
+          },
+          "body": "[\"a\", \"b\", \"c\"]"
+        }
+      }
+    ]
+  },
+  {
     "description": "JSON payload",
     "metadata": {
       "protocol": "rest-json"
