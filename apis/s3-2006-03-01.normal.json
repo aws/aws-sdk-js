@@ -4974,11 +4974,6 @@
           "locationName":"uploadId",
           "documentation":"Upload ID identifying the multipart upload whose part is being uploaded."
         },
-        "ServerSideEncryption":{
-          "shape":"UploadPartRequestServerSideEncryption",
-          "location":"header",
-          "locationName":"x-amz-server-side-encryption"
-        },
         "SSECustomerAlgorithm":{
           "shape":"SSECustomerAlgorithm",
           "location":"header",
@@ -5004,11 +4999,6 @@
         }
       },
       "payload":"Body"
-    },
-    "UploadPartRequestServerSideEncryption":{
-      "type":"string",
-      "enum":["AES256"],
-      "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256)."
     },
     "Value":{"type":"string"},
     "VersionIdMarker":{"type":"string"},
