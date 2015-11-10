@@ -2662,6 +2662,10 @@
         "cacheClusterSize":{
           "shape":"CacheClusterSize",
           "documentation":"<p>Specifies the cache cluster size for the <a>Stage</a> resource specified in the input, if a cache cluster is enabled.</p>"
+        },
+        "variables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A map that defines the stage variables for the <a>Stage</a> resource that is associated with the new deployment. Variable names can have alphabetic characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+</p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to create a <a>Deployment</a> resource.</p>"
@@ -2811,6 +2815,10 @@
         "cacheClusterSize":{
           "shape":"CacheClusterSize",
           "documentation":"<p>The stage's cache cluster size.</p>"
+        },
+        "variables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A map that defines the stage variables for the new <a>Stage</a> resource. Variable names can have alphabetic characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+</p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to create a <a>Stage</a> resource.</p>"
@@ -4435,6 +4443,10 @@
           "shape":"MapOfMethodSettings",
           "documentation":"<p>A map that defines the method settings for a <a>Stage</a> resource. Keys are defined as <code>{resource_path}/{http_method}</code> for an individual method override, or <code>\\*/\\*</code> for the settings applied to all methods in the stage.</p>"
         },
+        "variables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A map that defines the stage variables for a <a>Stage</a> resource. Variable names can have alphabetic characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+</p>"
+        },
         "createdDate":{
           "shape":"Timestamp",
           "documentation":"<p>The date and time that the stage was created, in <a target=\"_blank\" href=\"http://www.iso.org/iso/home/standards/iso8601.htm\">ISO 8601 format</a>.</p>"
@@ -4512,7 +4524,8 @@
         "pathWithQueryString":{"shape":"String"},
         "body":{"shape":"String"},
         "headers":{"shape":"MapOfHeaderValues"},
-        "clientCertificateId":{"shape":"String"}
+        "clientCertificateId":{"shape":"String"},
+        "stageVariables":{"shape":"MapOfStringToString"}
       }
     },
     "TestInvokeMethodResponse":{
