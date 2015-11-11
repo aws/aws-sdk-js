@@ -67,6 +67,23 @@ describe 'AWS.S3.ManagedUpload', ->
         expect(reqs[0].params.ContentEncoding).to.equal('encoding')
         done()
 
+    it 'can not use provided ContentMD5 for a multipart upload', (done) ->
+      send Body: bigbody, ContentMD5: 'MD5HASH', ->
+        expect(data).not.to.exist
+        expect(err.code).to.equal('InvalidDigest')
+        done()
+
+    it 'can use provided ContentMD5 for single part upload', (done) ->
+      reqs = helpers.mockResponses [
+        data: ETag: 'ETAG'
+      ]
+
+      send Body: smallbody, ContentMD5: 'MD5HASH', ->
+        expect(err).not.to.exist
+        expect(data.ETag).to.equal('ETAG')
+        expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
+        done()
+
     it 'can fail a single part', ->
       reqs = helpers.mockResponses [
         data: null
