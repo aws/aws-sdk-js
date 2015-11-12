@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2013-01-10",
     "endpointPrefix":"rds",
@@ -285,7 +286,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -335,7 +336,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -442,7 +443,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -492,7 +493,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1054,7 +1055,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1118,7 +1119,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1313,7 +1314,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1440,7 +1441,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1684,7 +1685,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1763,7 +1764,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1923,7 +1924,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -2276,7 +2277,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -2316,7 +2317,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -2436,7 +2437,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -2476,7 +2477,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -3648,7 +3649,7 @@
       },
       "error":{
         "code":"DBSubnetGroupNotFoundFault",
-        "httpStatusCode":400,
+        "httpStatusCode":404,
         "senderFault":true
       },
       "exception":true,
@@ -4898,7 +4899,7 @@
       },
       "error":{
         "code":"OptionGroupNotFoundFault",
-        "httpStatusCode":400,
+        "httpStatusCode":404,
         "senderFault":true
       },
       "exception":true,
@@ -6070,5 +6071,7 @@
         "DBSecurityGroup":{"shape":"DBSecurityGroup"}
       }
     }
+  },
+  "examples":{
   }
 }

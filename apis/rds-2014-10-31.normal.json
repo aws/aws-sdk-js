@@ -9,7 +9,7 @@
     "xmlNamespace":"http://rds.amazonaws.com/doc/2014-10-31/",
     "protocol":"query"
   },
-  "documentation":"<fullname>Amazon Relational Database Service</fullname> <p> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique. </p> <p> Amazon RDS gives you access to the capabilities of a MySQL, PostgreSQL, Microsoft SQL Server, Oracle, or Aurora database server. This means the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your database instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use. </p> <p> This is an interface reference for Amazon RDS. It contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. For a summary of the Amazon RDS interfaces, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>. </p>",
+  "documentation":"<fullname>Amazon Relational Database Service</fullname> <p> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique. </p> <p> Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, or Aurora database server. This means the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your database instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use. </p> <p> This is an interface reference for Amazon RDS. It contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. For a summary of the Amazon RDS interfaces, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>. </p>",
   "operations":{
     "AddSourceIdentifierToSubscription":{
       "name":"AddSourceIdentifierToSubscription",
@@ -333,7 +333,7 @@
           "documentation":"<p> Request would result in user exceeding the allowed number of DB snapshots. </p>"
         }
       ],
-      "documentation":"<p> Copies the specified DBSnapshot. The source DBSnapshot must be in the \"available\" state. </p>"
+      "documentation":"<p> Copies the specified DBSnapshot. The source DB snapshot must be in the \"available\" state. </p> <p>If you are copying from a shared manual DB snapshot, the <code>SourceDBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
     },
     "CopyOptionGroup":{
       "name":"CopyOptionGroup",
@@ -501,6 +501,16 @@
           },
           "exception":true,
           "documentation":"<p> <i>DBClusterParameterGroupName</i> does not refer to an existing DB Cluster parameter group. </p>"
+        },
+        {
+          "shape":"KMSKeyNotAccessibleFault",
+          "error":{
+            "code":"KMSKeyNotAccessibleFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p> Error accessing KMS key. </p>"
         }
       ],
       "documentation":"<p>Creates a new Amazon Aurora DB cluster. For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i></p>"
@@ -990,7 +1000,7 @@
           "documentation":"<p> Error accessing KMS key. </p>"
         }
       ],
-      "documentation":"<p> Creates a DB instance for a DB instance running MySQL or PostgreSQL that acts as a Read Replica of a source DB instance. </p> <p> All Read Replica DB instances are created as Single-AZ deployments with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified below. </p> <important> <p> The source DB instance must have backup retention enabled. </p> </important>"
+      "documentation":"<p> Creates a DB instance for a DB instance running MySQL, MariaDB, or PostgreSQL that acts as a Read Replica of a source DB instance. </p> <p> All Read Replica DB instances are created as Single-AZ deployments with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified below. </p> <important> <p> The source DB instance must have backup retention enabled. </p> </important>"
     },
     "CreateDBParameterGroup":{
       "name":"CreateDBParameterGroup",
@@ -2060,6 +2070,33 @@
       ],
       "documentation":"<p> Returns a list of <code>DBSecurityGroup</code> descriptions. If a <code>DBSecurityGroupName</code> is specified, the list will contain only the descriptions of the specified DB security group. </p>"
     },
+    "DescribeDBSnapshotAttributes":{
+      "name":"DescribeDBSnapshotAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeDBSnapshotAttributesMessage"},
+      "output":{
+        "shape":"DescribeDBSnapshotAttributesResult",
+        "wrapper":true,
+        "documentation":"<p>Contains the results of a successful call to the <a>DescribeDBSnapshotAttributes</a> API.</p> <p>Manual DB snapshot attributes are used to authorize other AWS accounts to copy or restore a manual DB snapshot. For more information, see the <a>ModifyDBSnapshotAttribute</a> API.</p>",
+        "resultWrapper":"DescribeDBSnapshotAttributesResult"
+      },
+      "errors":[
+        {
+          "shape":"DBSnapshotNotFoundFault",
+          "error":{
+            "code":"DBSnapshotNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
+        }
+      ],
+      "documentation":"<p>Returns a list of DB snapshot attribute names and values for a manual DB snapshot.</p> <p>When sharing snapshots with other AWS accounts, <code>DescribeDBSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of the AWS account ids that are authorized to copy or restore the manual DB snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual DB snapshot is public and can be copied or restored by all AWS accounts.</p> <p>To add or remove access for an AWS account to copy or restore a manual DB snapshot, or to make the manual DB snapshot public or private, use the <a>ModifyDBSnapshotAttribute</a> API.</p>"
+    },
     "DescribeDBSnapshots":{
       "name":"DescribeDBSnapshots",
       "http":{
@@ -2863,6 +2900,53 @@
       ],
       "documentation":"<p> Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <note> <p> Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect. </p> </note> <important> <p>After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href=\"https://console.aws.amazon.com/rds/\">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>"
     },
+    "ModifyDBSnapshotAttribute":{
+      "name":"ModifyDBSnapshotAttribute",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyDBSnapshotAttributeMessage"},
+      "output":{
+        "shape":"ModifyDBSnapshotAttributeResult",
+        "wrapper":true,
+        "documentation":"<p>Contains the results of a successful call to the <a>DescribeDBSnapshotAttributes</a> API.</p> <p>Manual DB snapshot attributes are used to authorize other AWS accounts to copy or restore a manual DB snapshot. For more information, see the <a>ModifyDBSnapshotAttribute</a> API.</p>",
+        "resultWrapper":"ModifyDBSnapshotAttributeResult"
+      },
+      "errors":[
+        {
+          "shape":"DBSnapshotNotFoundFault",
+          "error":{
+            "code":"DBSnapshotNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
+        },
+        {
+          "shape":"InvalidDBSnapshotStateFault",
+          "error":{
+            "code":"InvalidDBSnapshotState",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p> The state of the DB snapshot does not allow deletion. </p>"
+        },
+        {
+          "shape":"SharedSnapshotQuotaExceededFault",
+          "error":{
+            "code":"SharedSnapshotQuotaExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>You have exceeded the maximum number of account ids that you can share a manual DB snapshot with.</p>"
+        }
+      ],
+      "documentation":"<p>Adds an attribute and values to, or removes an attibute and values from a manual DB snapshot.</p> <p>To share a manual DB snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of the AWS account ids that are authorized to retore the manual DB snapshot. Uses the value <code>all</code> to make the manual DB snapshot public and can by copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB snapshots that contain private information that you do not want to be available to all AWS accounts.</p> <p>To view which AWS accounts have access to copy or restore a manual DB snapshot, or whether a manual DB snapshot public or private, use the <a>DescribeDBSnapshotAttributes</a> API.</p> <p>If the manual DB snapshot is encrypted, it cannot be shared.</p>"
+    },
     "ModifyDBSubnetGroup":{
       "name":"ModifyDBSubnetGroup",
       "http":{
@@ -3511,6 +3595,16 @@
           },
           "exception":true,
           "documentation":"<p> The specified option group could not be found. </p>"
+        },
+        {
+          "shape":"KMSKeyNotAccessibleFault",
+          "error":{
+            "code":"KMSKeyNotAccessibleFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p> Error accessing KMS key. </p>"
         }
       ],
       "documentation":"<p>Creates a new DB cluster from a DB cluster snapshot. The target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group. </p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i></p>"
@@ -3681,6 +3775,16 @@
           },
           "exception":true,
           "documentation":"<p> The specified option group could not be found. </p>"
+        },
+        {
+          "shape":"KMSKeyNotAccessibleFault",
+          "error":{
+            "code":"KMSKeyNotAccessibleFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p> Error accessing KMS key. </p>"
         }
       ],
       "documentation":"<p> Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. </p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i></p>"
@@ -3873,7 +3977,7 @@
           "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
         }
       ],
-      "documentation":"<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration, but in a system chosen availability zone with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment. </p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS does not allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p>"
+      "documentation":"<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration, but in a system chosen availability zone with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment. </p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS does not allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
     },
     "RestoreDBInstanceToPointInTime":{
       "name":"RestoreDBInstanceToPointInTime",
@@ -4229,6 +4333,13 @@
       },
       "documentation":"<p></p>"
     },
+    "AttributeValueList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"AttributeValue"
+      }
+    },
     "AuthorizationAlreadyExistsFault":{
       "type":"structure",
       "members":{
@@ -4445,7 +4556,7 @@
       "members":{
         "SourceDBSnapshotIdentifier":{
           "shape":"String",
-          "documentation":"<p> The identifier for the source DB snapshot. </p> <p>Constraints:</p> <ul> <li>Must specify a valid system snapshot in the \"available\" state.</li> <li>If the source snapshot is in the same region as the copy, specify a valid DB snapshot identifier.</li> <li>If the source snapshot is in a different region than the copy, specify a valid DB snapshot ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html\"> Copying a DB Snapshot</a>.</li> </ul> <p>Example: <code>rds:mydb-2012-04-02-00-01</code></p> <p>Example: <code>arn:aws:rds:rr-regn-1:123456789012:snapshot:mysql-instance1-snapshot-20130805</code></p>"
+          "documentation":"<p> The identifier for the source DB snapshot. </p> <p>If you are copying from a shared manual DB snapshot, this must be the ARN of the shared DB snapshot.</p> <p>Constraints:</p> <ul> <li>Must specify a valid system snapshot in the \"available\" state.</li> <li>If the source snapshot is in the same region as the copy, specify a valid DB snapshot identifier.</li> <li>If the source snapshot is in a different region than the copy, specify a valid DB snapshot ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html\"> Copying a DB Snapshot</a>.</li> </ul> <p>Example: <code>rds:mydb-2012-04-02-00-01</code></p> <p>Example: <code>arn:aws:rds:rr-regn-1:123456789012:snapshot:mysql-instance1-snapshot-20130805</code></p>"
         },
         "TargetDBSnapshotIdentifier":{
           "shape":"String",
@@ -4498,7 +4609,7 @@
         },
         "BackupRetentionPeriod":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. </p> <p>Default: 1 </p> <p>Constraints:</p> <ul> <li>Must be a value from 0 to 35</li> </ul>"
+          "documentation":"<p>The number of days for which automated backups are retained. You must specify a minimum value of 1. </p> <p>Default: 1 </p> <p>Constraints:</p> <ul> <li>Must be a value from 1 to 35</li> </ul>"
         },
         "CharacterSetName":{
           "shape":"String",
@@ -4616,7 +4727,7 @@
       "members":{
         "DBName":{
           "shape":"String",
-          "documentation":"<p>The meaning of this parameter differs according to the database engine you use.</p> <p>Type: String</p> <p> <b>MySQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 64 alphanumeric characters</li> <li>Cannot be a word reserved by the specified database engine</li> </ul> <p> <b>PostgreSQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter is not specified, the default \"postgres\" database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 63 alphanumeric characters</li> <li>Must begin with a letter or an underscore. Subsequent characters can be letters, underscores, or digits (0-9).</li> <li>Cannot be a word reserved by the specified database engine</li> </ul> <p> <b>Oracle</b> </p> <p> The Oracle System ID (SID) of the created DB instance. </p> <p>Default: <code>ORCL</code></p> <p>Constraints:</p> <ul> <li>Cannot be longer than 8 characters</li> </ul> <p> <b>SQL Server</b> </p> <p>Not applicable. Must be null.</p> <p> <b>Amazon Aurora</b> </p> <p>The name of the database to create when the primary instance of the DB cluster is created. If this parameter is not specified, no database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 64 alphanumeric characters</li> <li>Cannot be a word reserved by the specified database engine</li> </ul>"
+          "documentation":"<p>The meaning of this parameter differs according to the database engine you use.</p> <p>Type: String</p> <p> <b>MySQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 64 alphanumeric characters</li> <li>Cannot be a word reserved by the specified database engine</li> </ul> <p> <b>MariaDB</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 64 alphanumeric characters</li> <li>Cannot be a word reserved by the specified database engine</li> </ul> <p> <b>PostgreSQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter is not specified, the default \"postgres\" database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 63 alphanumeric characters</li> <li>Must begin with a letter or an underscore. Subsequent characters can be letters, underscores, or digits (0-9).</li> <li>Cannot be a word reserved by the specified database engine</li> </ul> <p> <b>Oracle</b> </p> <p> The Oracle System ID (SID) of the created DB instance. </p> <p>Default: <code>ORCL</code></p> <p>Constraints:</p> <ul> <li>Cannot be longer than 8 characters</li> </ul> <p> <b>SQL Server</b> </p> <p>Not applicable. Must be null.</p> <p> <b>Amazon Aurora</b> </p> <p>The name of the database to create when the primary instance of the DB cluster is created. If this parameter is not specified, no database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 64 alphanumeric characters</li> <li>Cannot be a word reserved by the specified database engine</li> </ul>"
         },
         "DBInstanceIdentifier":{
           "shape":"String",
@@ -4624,23 +4735,23 @@
         },
         "AllocatedStorage":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The amount of storage (in gigabytes) to be initially allocated for the database instance. </p> <p> Type: Integer</p> <p> <b>MySQL</b> </p> <p> Constraints: Must be an integer from 5 to 6144.</p> <p> <b>PostgreSQL</b> </p> <p> Constraints: Must be an integer from 5 to 6144.</p> <p> <b>Oracle</b> </p> <p> Constraints: Must be an integer from 10 to 6144.</p> <p> <b>SQL Server</b> </p> <p> Constraints: Must be an integer from 200 to 4096 (Standard Edition and Enterprise Edition) or from 20 to 4096 (Express Edition and Web Edition)</p>"
+          "documentation":"<p> The amount of storage (in gigabytes) to be initially allocated for the database instance. </p> <p> Type: Integer</p> <p> <b>MySQL</b> </p> <p> Constraints: Must be an integer from 5 to 6144.</p> <p> <b>MariaDB</b> </p> <p> Constraints: Must be an integer from 5 to 6144.</p> <p> <b>PostgreSQL</b> </p> <p> Constraints: Must be an integer from 5 to 6144.</p> <p> <b>Oracle</b> </p> <p> Constraints: Must be an integer from 10 to 6144.</p> <p> <b>SQL Server</b> </p> <p> Constraints: Must be an integer from 200 to 4096 (Standard Edition and Enterprise Edition) or from 20 to 4096 (Express Edition and Web Edition)</p>"
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The compute and memory capacity of the DB instance. </p> <p> Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p>"
+          "documentation":"<p> The compute and memory capacity of the DB instance. </p> <p> Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p>"
         },
         "Engine":{
           "shape":"String",
-          "documentation":"<p> The name of the database engine to be used for this instance. </p> <p> Valid Values: <code>MySQL</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code></p> <p> Not every database engine is available for every AWS region. </p>"
+          "documentation":"<p> The name of the database engine to be used for this instance. </p> <p> Valid Values: <code>MySQL</code> | <code>mariadb</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code></p> <p> Not every database engine is available for every AWS region. </p>"
         },
         "MasterUsername":{
           "shape":"String",
-          "documentation":"<p> The name of master user for the client DB instance. </p> <p> <b>MySQL</b> </p> <p>Constraints:</p> <ul> <li>Must be 1 to 16 alphanumeric characters.</li> <li>First character must be a letter.</li> <li>Cannot be a reserved word for the chosen database engine.</li> </ul> <p>Type: String</p> <p> <b>Oracle</b> </p> <p>Constraints:</p> <ul> <li>Must be 1 to 30 alphanumeric characters.</li> <li>First character must be a letter.</li> <li>Cannot be a reserved word for the chosen database engine.</li> </ul> <p> <b>SQL Server</b> </p> <p>Constraints:</p> <ul> <li>Must be 1 to 128 alphanumeric characters.</li> <li>First character must be a letter.</li> <li>Cannot be a reserved word for the chosen database engine.</li> </ul> <p> <b>PostgreSQL</b> </p> <p>Constraints:</p> <ul> <li>Must be 1 to 63 alphanumeric characters.</li> <li>First character must be a letter.</li> <li>Cannot be a reserved word for the chosen database engine.</li> </ul>"
+          "documentation":"<p> The name of master user for the client DB instance. </p> <p> <b>MySQL</b> </p> <p>Constraints:</p> <ul> <li>Must be 1 to 16 alphanumeric characters.</li> <li>First character must be a letter.</li> <li>Cannot be a reserved word for the chosen database engine.</li> </ul> <p> <b>MariaDB</b> </p> <p>Constraints:</p> <ul> <li>Must be 1 to 16 alphanumeric characters.</li> <li>Cannot be a reserved word for the chosen database engine.</li> </ul> <p>Type: String</p> <p> <b>Oracle</b> </p> <p>Constraints:</p> <ul> <li>Must be 1 to 30 alphanumeric characters.</li> <li>First character must be a letter.</li> <li>Cannot be a reserved word for the chosen database engine.</li> </ul> <p> <b>SQL Server</b> </p> <p>Constraints:</p> <ul> <li>Must be 1 to 128 alphanumeric characters.</li> <li>First character must be a letter.</li> <li>Cannot be a reserved word for the chosen database engine.</li> </ul> <p> <b>PostgreSQL</b> </p> <p>Constraints:</p> <ul> <li>Must be 1 to 63 alphanumeric characters.</li> <li>First character must be a letter.</li> <li>Cannot be a reserved word for the chosen database engine.</li> </ul>"
         },
         "MasterUserPassword":{
           "shape":"String",
-          "documentation":"<p> The password for the master database user. Can be any printable ASCII character except \"/\", \"\"\", or \"@\". </p> <p>Type: String</p> <p> <b>MySQL</b> </p> <p> Constraints: Must contain from 8 to 41 characters. </p> <p> <b>Oracle</b> </p> <p> Constraints: Must contain from 8 to 30 characters. </p> <p> <b>SQL Server</b> </p> <p> Constraints: Must contain from 8 to 128 characters. </p> <p> <b>PostgreSQL</b> </p> <p> Constraints: Must contain from 8 to 128 characters. </p> <p> <b>Amazon Aurora</b> </p> <p> Constraints: Must contain from 8 to 41 characters. </p>"
+          "documentation":"<p> The password for the master database user. Can be any printable ASCII character except \"/\", \"\"\", or \"@\". </p> <p>Type: String</p> <p> <b>MySQL</b> </p> <p> Constraints: Must contain from 8 to 41 characters. </p> <p> <b>MariaDB</b> </p> <p> Constraints: Must contain from 8 to 41 characters. </p> <p> <b>Oracle</b> </p> <p> Constraints: Must contain from 8 to 30 characters. </p> <p> <b>SQL Server</b> </p> <p> Constraints: Must contain from 8 to 128 characters. </p> <p> <b>PostgreSQL</b> </p> <p> Constraints: Must contain from 8 to 128 characters. </p> <p> <b>Amazon Aurora</b> </p> <p> Constraints: Must contain from 8 to 41 characters. </p>"
         },
         "DBSecurityGroups":{
           "shape":"DBSecurityGroupNameList",
@@ -4676,7 +4787,7 @@
         },
         "Port":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The port number on which the database accepts connections. </p> <p> <b>MySQL</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p>Type: Integer </p> <p> <b>PostgreSQL</b> </p> <p> Default: <code>5432</code></p> <p> Valid Values: <code>1150-65535</code></p> <p>Type: Integer </p> <p> <b>Oracle</b> </p> <p> Default: <code>1521</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>SQL Server</b> </p> <p> Default: <code>1433</code></p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code>, <code>3389</code>, <code>47001</code>, <code>49152</code>, and <code>49152</code> through <code>49156</code>. </p> <p> <b>Amazon Aurora</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p>Type: Integer </p>"
+          "documentation":"<p> The port number on which the database accepts connections. </p> <p> <b>MySQL</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p>Type: Integer </p> <p> <b>MariaDB</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p>Type: Integer </p> <p> <b>PostgreSQL</b> </p> <p> Default: <code>5432</code></p> <p> Valid Values: <code>1150-65535</code></p> <p>Type: Integer </p> <p> <b>Oracle</b> </p> <p> Default: <code>1521</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>SQL Server</b> </p> <p> Default: <code>1433</code></p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code>, <code>3389</code>, <code>47001</code>, <code>49152</code>, and <code>49152</code> through <code>49156</code>. </p> <p> <b>Amazon Aurora</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p>Type: Integer </p>"
         },
         "MultiAZ":{
           "shape":"BooleanOptional",
@@ -4684,7 +4795,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p> The version number of the database engine to use. </p> <p> The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS region. </p> <p><b>MySQL</b></p> <ul> <li> <b>Version 5.1 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 5.1.73a | 5.1.73b</code> </li> <li> <b>Version 5.5 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 5.5.40 | 5.5.40a</code> </li> <li> <b>Version 5.5 (Available in all regions):</b> <code> 5.5.40b | 5.5.41 | 5.5.42</code> </li> <li> <b>Version 5.6 (Available in all regions):</b> <code> 5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b | 5.6.22 | 5.6.23</code> </li> </ul> <p><b>Oracle Database Enterprise Edition (oracle-ee)</b></p> <ul> <li> <b>Version 11.2 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code> </li> <li> <b>Version 11.2 (Available in all regions):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </li> <li> <b>Version 12.1 (Available in all regions):</b> <code>12.1.0.1.v1 | 12.1.0.1.v2 | 12.1.0.2.v1 </code> </li> </ul> <p><b>Oracle Database Standard Edition (oracle-se)</b></p> <ul> <li> <b>Version 11.2 (Only available in the following regions: us-west-1):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code> </li> <li> <b>Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </li> <li> <b>Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):</b> <code>12.1.0.1.v1 | 12.1.0.1.v2</code> </li> </ul> <p><b>Oracle Database Standard Edition One (oracle-se1)</b></p> <ul> <li> <b>Version 11.2 (Only available in the following regions: us-west-1):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code> </li> <li> <b>Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </li> <li> <b>Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code> </li> </ul> <p><b>PostgreSQL</b></p> <ul> <li> <b>Version 9.3 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 9.3.1 | 9.3.2</code> </li> <li> <b>Version 9.3 (Available in all regions):</b> <code> 9.3.3 | 9.3.5 | 9.3.6</code> </li> <li> <b>Version 9.4 (Available in all regions):</b> <code> 9.4.1</code> </li> </ul> <p><b>Microsoft SQL Server Enterprise Edition (sqlserver-ee)</b></p> <ul> <li> <b>Version 10.50 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 10.50.2789.0.v1</code> </li> <li> <b>Version 11.00 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 11.00.2100.60.v1</code> </li> </ul> <p><b>Microsoft SQL Server Express Edition (sqlserver-ex)</b></p> <ul> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code> </li> </ul> <p><b>Microsoft SQL Server Standard Edition (sqlserver-se)</b></p> <ul> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code> </li> </ul> <p><b>Microsoft SQL Server Web Edition (sqlserver-web)</b></p> <ul> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code> </li> </ul>"
+          "documentation":"<p> The version number of the database engine to use. </p> <p> The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS region. </p> <p><b>MySQL</b></p> <ul> <li> <b>Version 5.1 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 5.1.73a | 5.1.73b</code> </li> <li> <b>Version 5.5 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 5.5.40 | 5.5.40a</code> </li> <li> <b>Version 5.5 (Available in all regions):</b> <code> 5.5.40b | 5.5.41 | 5.5.42</code> </li> <li> <b>Version 5.6 (Available in all regions):</b> <code> 5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b | 5.6.22 | 5.6.23</code> </li> </ul> <p><b>MariaDB</b></p> <ul> <li> <b>Version 10.0 (Available in all regions except AWS GovCloud (US) Region (us-gov-west-1)):</b> <code> 10.0.17 </code> </li> </ul> <p><b>Oracle Database Enterprise Edition (oracle-ee)</b></p> <ul> <li> <b>Version 11.2 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code> </li> <li> <b>Version 11.2 (Available in all regions):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </li> <li> <b>Version 12.1 (Available in all regions):</b> <code>12.1.0.1.v1 | 12.1.0.1.v2 | 12.1.0.2.v1 </code> </li> </ul> <p><b>Oracle Database Standard Edition (oracle-se)</b></p> <ul> <li> <b>Version 11.2 (Only available in the following regions: us-west-1):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code> </li> <li> <b>Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </li> <li> <b>Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):</b> <code>12.1.0.1.v1 | 12.1.0.1.v2</code> </li> </ul> <p><b>Oracle Database Standard Edition One (oracle-se1)</b></p> <ul> <li> <b>Version 11.2 (Only available in the following regions: us-west-1):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code> </li> <li> <b>Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </li> <li> <b>Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code> </li> </ul> <p><b>PostgreSQL</b></p> <ul> <li> <b>Version 9.3 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 9.3.1 | 9.3.2</code> </li> <li> <b>Version 9.3 (Available in all regions):</b> <code> 9.3.3 | 9.3.5 | 9.3.6</code> </li> <li> <b>Version 9.4 (Available in all regions):</b> <code> 9.4.1</code> </li> </ul> <p><b>Microsoft SQL Server Enterprise Edition (sqlserver-ee)</b></p> <ul> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code> </li> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code> </li> </ul> <p><b>Microsoft SQL Server Express Edition (sqlserver-ex)</b></p> <ul> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code> </li> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code> </li> <li> <b>Version 12.00 (Available in all regions):</b> <code> 12.00.4422.0.v1</code> </li> </ul> <p><b>Microsoft SQL Server Standard Edition (sqlserver-se)</b></p> <ul> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code> </li> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code> </li> <li> <b>Version 12.00 (Available in all regions):</b> <code> 12.00.4422.0.v1</code> </li> </ul> <p><b>Microsoft SQL Server Web Edition (sqlserver-web)</b></p> <ul> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code> </li> <li> <b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code> </li> <li> <b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code> </li> <li> <b>Version 12.00 (Available in all regions):</b> <code> 12.00.4422.0.v1</code> </li> </ul>"
         },
         "AutoMinorVersionUpgrade":{
           "shape":"BooleanOptional",
@@ -4733,7 +4844,7 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p> The KMS key identifier for an encrypted DB instance. </p> <p>The KMS key identifier is the Amazon Resoure Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same AWS account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key.</p> <p>If the <code>StorageEncrypted</code> parameter is true, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.</p>"
+          "documentation":"<p> The KMS key identifier for an encrypted DB instance. </p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same AWS account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key.</p> <p>If the <code>StorageEncrypted</code> parameter is true, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.</p>"
         },
         "CopyTagsToSnapshot":{
           "shape":"BooleanOptional",
@@ -4755,11 +4866,11 @@
         },
         "SourceDBInstanceIdentifier":{
           "shape":"String",
-          "documentation":"<p> The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas. </p> <p>Constraints:</p> <ul> <li>Must be the identifier of an existing DB instance.</li> <li>Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6.</li> <li>Can specify a DB instance that is a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5.</li> <li>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</li> <li>If the source DB instance is in the same region as the Read Replica, specify a valid DB instance identifier.</li> <li>If the source DB instance is in a different region than the Read Replica, specify a valid DB instance ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing a Amazon RDS Amazon Resource Name (ARN)</a>.</li> </ul>"
+          "documentation":"<p> The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas. </p> <p>Constraints:</p> <ul> <li>Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL DB instance.</li> <li>Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6.</li> <li>Can specify a DB instance that is a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5.</li> <li>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</li> <li>If the source DB instance is in the same region as the Read Replica, specify a valid DB instance identifier.</li> <li>If the source DB instance is in a different region than the Read Replica, specify a valid DB instance ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing a Amazon RDS Amazon Resource Name (ARN)</a>.</li> </ul>"
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The compute and memory capacity of the Read Replica. </p> <p> Valid Values: <code>db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p> <p>Default: Inherits from the source DB instance.</p>"
+          "documentation":"<p> The compute and memory capacity of the Read Replica. </p> <p> Valid Values: <code>db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p> <p>Default: Inherits from the source DB instance.</p>"
         },
         "AvailabilityZone":{
           "shape":"String",
@@ -5040,6 +5151,10 @@
         "VpcSecurityGroups":{
           "shape":"VpcSecurityGroupMembershipList",
           "documentation":"<p> Provides a list of VPC security groups that the DB cluster belongs to. </p>"
+        },
+        "HostedZoneId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.</p>"
         }
       },
       "wrapper":true,
@@ -5421,7 +5536,7 @@
         },
         "DBName":{
           "shape":"String",
-          "documentation":"<p>The meaning of this parameter differs according to the database engine you use. For example, this value returns either MySQL or PostgreSQL information when returning values from CreateDBInstanceReadReplica since Read Replicas are only supported for MySQL and PostgreSQL.</p> <p> <b>MySQL, SQL Server, PostgreSQL, Amazon Aurora</b> </p> <p> Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. </p> <p>Type: String</p> <p> <b>Oracle</b> </p> <p> Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance. </p>"
+          "documentation":"<p>The meaning of this parameter differs according to the database engine you use. For example, this value returns MySQL, MariaDB, or PostgreSQL information when returning values from CreateDBInstanceReadReplica since Read Replicas are only supported for these engines.</p> <p> <b>MySQL, MariaDB, SQL Server, PostgreSQL, Amazon Aurora</b> </p> <p> Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. </p> <p>Type: String</p> <p> <b>Oracle</b> </p> <p> Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance. </p>"
         },
         "Endpoint":{
           "shape":"Endpoint",
@@ -6008,6 +6123,43 @@
       },
       "exception":true,
       "documentation":"<p> <i>DBSnapshotIdentifier</i> is already used by an existing snapshot. </p>"
+    },
+    "DBSnapshotAttribute":{
+      "type":"structure",
+      "members":{
+        "AttributeName":{
+          "shape":"String",
+          "documentation":"<p>The name of the manual DB snapshot attribute.</p> <p>An attribute name of <code>restore</code> applies to the list of AWS accounts that have permission to copy or restore the manual DB snapshot.</p>"
+        },
+        "AttributeValues":{
+          "shape":"AttributeValueList",
+          "documentation":"<p>The value(s) for the manual DB snapshot attribute.</p> <p>If the <code>AttributeName</code> field is <code>restore</code>, then this field returns a list of AWS account ids that are authorized to copy or restore the manual DB snapshot. If a value of <code>all</code> is in the list, then the manual DB snapshot is public and available for any AWS account to copy or restore.</p>"
+        }
+      },
+      "wrapper":true,
+      "documentation":"<p>Contains the name and values of a manual DB snapshot attribute</p> <p>Manual DB snapshot attributes are used to authorize other AWS accounts to restore a manual DB snapshot. For more information, see the <a>ModifyDBSnapshotAttribute</a> API.</p>"
+    },
+    "DBSnapshotAttributeList":{
+      "type":"list",
+      "member":{
+        "shape":"DBSnapshotAttribute",
+        "locationName":"DBSnapshotAttribute"
+      }
+    },
+    "DBSnapshotAttributesResult":{
+      "type":"structure",
+      "members":{
+        "DBSnapshotIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the manual DB snapshot that the attributes apply to.</p>"
+        },
+        "DBSnapshotAttributes":{
+          "shape":"DBSnapshotAttributeList",
+          "documentation":"<p>The list of attributes and values for the manual DB snapshot.</p>"
+        }
+      },
+      "wrapper":true,
+      "documentation":"<p>Contains the results of a successful call to the <a>DescribeDBSnapshotAttributes</a> API.</p> <p>Manual DB snapshot attributes are used to authorize other AWS accounts to copy or restore a manual DB snapshot. For more information, see the <a>ModifyDBSnapshotAttribute</a> API.</p>"
     },
     "DBSnapshotList":{
       "type":"list",
@@ -6632,6 +6784,15 @@
       },
       "documentation":"<p></p>"
     },
+    "DescribeDBSnapshotAttributesMessage":{
+      "type":"structure",
+      "members":{
+        "DBSnapshotIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The identifier for the DB snapshot to modify the attributes for.</p>"
+        }
+      }
+    },
     "DescribeDBSnapshotsMessage":{
       "type":"structure",
       "members":{
@@ -6645,7 +6806,7 @@
         },
         "SnapshotType":{
           "shape":"String",
-          "documentation":"<p> The type of snapshots that will be returned. Values can be \"automated\" or \"manual.\" If not specified, the returned results will include all snapshots types. </p>"
+          "documentation":"<p>The type of snapshots that will be returned. You can specify one of the following values:</p> <ul> <li> <code>automated</code> - Return all DB snapshots that have been automatically taken by Amazon RDS for my AWS account.</li> <li> <code>manual</code> - Return all DB snapshots that have been taken by my AWS account.</li> <li> <code>shared</code> - Return all manual DB snapshots that have been shared to my AWS account.</li> <li> <code>public</code> - Return all DB snapshots that have been marked as public.</li> </ul> <p>If you do not specify a <code>SnapshotType</code>, then both automated and manual snapshots are returned. You can include shared snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public snapshots with these results by setting the <code>IncludePublic</code> parameter to <code>true</code>.</p> <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters do not apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> paramter does not apply when <code>SnapshotType</code> is set to <code>shared</code>. the <code>IncludeShared</code> parameter does not apply when <code>SnapshotType</code> is set to <code>public</code>.</p>"
         },
         "Filters":{
           "shape":"FilterList",
@@ -6658,6 +6819,14 @@
         "Marker":{
           "shape":"String",
           "documentation":"<p> An optional pagination token provided by a previous <code>DescribeDBSnapshots</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "IncludeShared":{
+          "shape":"Boolean",
+          "documentation":"<p>True to include shared manual DB snapshots from other AWS accounts that this AWS account has been given permission to copy or restore; otherwise false. The default is false.</p> <p>An AWS account is given permission to restore a manual DB snapshot from another AWS account by the <a>ModifyDBSnapshotAttribute</a> API.</p>"
+        },
+        "IncludePublic":{
+          "shape":"Boolean",
+          "documentation":"<p>True to include manual DB snapshots that are public and can be copied or restored by any AWS account; otherwise false. The default is false.</p> <p>An manual DB snapshot is shared as public by the <a>ModifyDBSnapshotAttribute</a> API.</p>"
         }
       },
       "documentation":"<p></p>"
@@ -7098,6 +7267,10 @@
         "Port":{
           "shape":"Integer",
           "documentation":"<p> Specifies the port that the database engine is listening on. </p>"
+        },
+        "HostedZoneId":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.</p>"
         }
       },
       "documentation":"<p> This data type is used as a response element in the following actions: </p> <ul> <li> <a>CreateDBInstance</a> </li> <li> <a>DescribeDBInstances</a> </li> <li> <a>DeleteDBInstance</a> </li> </ul>"
@@ -7613,7 +7786,7 @@
         },
         "BackupRetentionPeriod":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. </p> <p>Default: 1 </p> <p>Constraints:</p> <ul> <li>Must be a value from 0 to 35</li> </ul>"
+          "documentation":"<p>The number of days for which automated backups are retained. You must specify a minimum value of 1. </p> <p>Default: 1 </p> <p>Constraints:</p> <ul> <li>Must be a value from 1 to 35</li> </ul>"
         },
         "DBClusterParameterGroupName":{
           "shape":"String",
@@ -7674,11 +7847,11 @@
         },
         "AllocatedStorage":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The new storage capacity of the RDS instance. Changing this setting does not result in an outage and the change is applied during the next maintenance window unless <code>ApplyImmediately</code> is set to <code>true</code> for this request. </p> <p> <b>MySQL</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>PostgreSQL</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>Oracle</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 10-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p> <b>SQL Server</b> </p> <p>Cannot be modified.</p> <p> If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance. </p>"
+          "documentation":"<p> The new storage capacity of the RDS instance. Changing this setting does not result in an outage and the change is applied during the next maintenance window unless <code>ApplyImmediately</code> is set to <code>true</code> for this request. </p> <p> <b>MySQL</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>MariaDB</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>PostgreSQL</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>Oracle</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 10-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p> <b>SQL Server</b> </p> <p>Cannot be modified.</p> <p> If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance. </p>"
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The new compute and memory capacity of the DB instance. To determine the instance classes that are available for a particular DB engine, use the <a>DescribeOrderableDBInstanceOptions</a> action. </p> <p> Passing a value for this setting causes an outage during the change and is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p>"
+          "documentation":"<p> The new compute and memory capacity of the DB instance. To determine the instance classes that are available for a particular DB engine, use the <a>DescribeOrderableDBInstanceOptions</a> action. </p> <p> Passing a value for this setting causes an outage during the change and is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p>"
         },
         "DBSecurityGroups":{
           "shape":"DBSecurityGroupNameList",
@@ -7694,7 +7867,7 @@
         },
         "MasterUserPassword":{
           "shape":"String",
-          "documentation":"<p> The new password for the DB instance master user. Can be any printable ASCII character except \"/\", \"\"\", or \"@\".</p> <p> Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <p>Default: Uses existing setting</p> <p>Constraints: Must be 8 to 41 alphanumeric characters (MySQL and Amazon Aurora), 8 to 30 alphanumeric characters (Oracle), or 8 to 128 alphanumeric characters (SQL Server).</p> <note> Amazon RDS API actions never return the password, so this action provides a way to regain access to a primary instance user if the password is lost. This includes restoring privileges that might have been accidentally revoked. </note>"
+          "documentation":"<p> The new password for the DB instance master user. Can be any printable ASCII character except \"/\", \"\"\", or \"@\".</p> <p> Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <p>Default: Uses existing setting</p> <p>Constraints: Must be 8 to 41 alphanumeric characters (MySQL, MariaDB, and Amazon Aurora), 8 to 30 alphanumeric characters (Oracle), or 8 to 128 alphanumeric characters (SQL Server).</p> <note> Amazon RDS API actions never return the password, so this action provides a way to regain access to a primary instance user if the password is lost. This includes restoring privileges that might have been accidentally revoked. </note>"
         },
         "DBParameterGroupName":{
           "shape":"String",
@@ -7759,6 +7932,10 @@
         "CopyTagsToSnapshot":{
           "shape":"BooleanOptional",
           "documentation":"<p>True to copy all tags from the DB instance to snapshots of the DB instance; otherwise false. The default is false.</p>"
+        },
+        "PubliclyAccessible":{
+          "shape":"BooleanOptional",
+          "documentation":"<p>True to make the DB instance Internet-facing with a publicly resolvable DNS name, which resolves to a public IP address. False to make the DB instance internal with a DNS name that resolves to a private IP address. </p> <p><code>PubliclyAccessible</code> only applies to DB instances in a VPC. The DB instance must be part of a public subnet and <code>PubliclyAccessible</code> must be true in order for it to be publicly accessible. </p> <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p> Default: false </p>"
         }
       },
       "documentation":"<p></p>"
@@ -7780,6 +7957,28 @@
         }
       },
       "documentation":"<p></p>"
+    },
+    "ModifyDBSnapshotAttributeMessage":{
+      "type":"structure",
+      "required":["DBSnapshotIdentifier"],
+      "members":{
+        "DBSnapshotIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The identifier for the DB snapshot to modify the attributes for.</p>"
+        },
+        "AttributeName":{
+          "shape":"String",
+          "documentation":"<p>The name of the DB snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB snapshot, this value is <code>restore</code>.</p>"
+        },
+        "ValuesToAdd":{
+          "shape":"AttributeValueList",
+          "documentation":"<p>A list of DB snapshot attributes to add to the attribute specified by <code>AttributeName</code>.</p> <p>To authorize other AWS Accounts to copy or restore a manual snapshot, this is one or more AWS account identifiers, or <code>all</code> to make the manual DB snapshot restorable by any AWS account. Do not add the <code>all</code> value for any manual DB snapshots that contain private information that you do not want to be available to all AWS accounts.</p>"
+        },
+        "ValuesToRemove":{
+          "shape":"AttributeValueList",
+          "documentation":"<p>A list of DB snapshot attributes to remove from the attribute specified by <code>AttributeName</code>.</p> <p>To remove authorization for other AWS Accounts to copy or restore a manual snapshot, this is one or more AWS account identifiers, or <code>all</code> to remove authorization for any AWS account to copy or restore the DB snapshot. If you specify <code>all</code>, AWS accounts that have their account identifier explicitly added to the <code>restore</code> attribute can still copy or restore the manual DB snapshot.</p>"
+        }
+      }
     },
     "ModifyDBSubnetGroupMessage":{
       "type":"structure",
@@ -8827,7 +9026,7 @@
         },
         "Parameters":{
           "shape":"ParametersList",
-          "documentation":"<p> An array of parameter names, values, and the apply method for the parameter update. At least one parameter name, value, and apply method must be supplied; subsequent arguments are optional. A maximum of 20 parameters can be modified in a single request. </p> <p> <b>MySQL</b> </p> <p>Valid Values (for Apply method): <code>immediate</code> | <code>pending-reboot</code></p> <p>You can use the immediate value with dynamic parameters only. You can use the <code>pending-reboot</code> value for both dynamic and static parameters, and changes are applied when DB instance reboots.</p> <p> <b>Oracle</b> </p> <p>Valid Values (for Apply method): <code>pending-reboot</code></p>"
+          "documentation":"<p> An array of parameter names, values, and the apply method for the parameter update. At least one parameter name, value, and apply method must be supplied; subsequent arguments are optional. A maximum of 20 parameters can be modified in a single request. </p> <p> <b>MySQL</b> </p> <p>Valid Values (for Apply method): <code>immediate</code> | <code>pending-reboot</code></p> <p>You can use the immediate value with dynamic parameters only. You can use the <code>pending-reboot</code> value for both dynamic and static parameters, and changes are applied when DB instance reboots.</p> <p> <b>MariaDB</b> </p> <p>Valid Values (for Apply method): <code>immediate</code> | <code>pending-reboot</code></p> <p>You can use the immediate value with dynamic parameters only. You can use the <code>pending-reboot</code> value for both dynamic and static parameters, and changes are applied when DB instance reboots.</p> <p> <b>Oracle</b> </p> <p>Valid Values (for Apply method): <code>pending-reboot</code></p>"
         }
       },
       "documentation":"<p></p>"
@@ -8970,11 +9169,11 @@
         },
         "DBSnapshotIdentifier":{
           "shape":"String",
-          "documentation":"<p> The identifier for the DB snapshot to restore from. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 255 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
+          "documentation":"<p> The identifier for the DB snapshot to restore from. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 255 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The compute and memory capacity of the Amazon RDS DB instance. </p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p>"
+          "documentation":"<p> The compute and memory capacity of the Amazon RDS DB instance. </p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p>"
         },
         "Port":{
           "shape":"IntegerOptional",
@@ -9006,11 +9205,11 @@
         },
         "DBName":{
           "shape":"String",
-          "documentation":"<p> The database name for the restored DB instance. </p> <note> <p>This parameter doesn't apply to the MySQL engine.</p> </note>"
+          "documentation":"<p> The database name for the restored DB instance. </p> <note> <p>This parameter doesn't apply to the MySQL or MariaDB engines.</p> </note>"
         },
         "Engine":{
           "shape":"String",
-          "documentation":"<p> The database engine to use for the new instance. </p> <p>Default: The same as source</p> <p>Constraint: Must be compatible with the engine of the source</p> <p> Valid Values: <code>MySQL</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code></p>"
+          "documentation":"<p> The database engine to use for the new instance. </p> <p>Default: The same as source</p> <p>Constraint: Must be compatible with the engine of the source</p> <p> Valid Values: <code>MySQL</code> | <code>mariadb</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code></p>"
         },
         "Iops":{
           "shape":"IntegerOptional",
@@ -9065,7 +9264,7 @@
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The compute and memory capacity of the Amazon RDS DB instance. </p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p> <p>Default: The same DBInstanceClass as the original DB instance.</p>"
+          "documentation":"<p> The compute and memory capacity of the Amazon RDS DB instance. </p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code></p> <p>Default: The same DBInstanceClass as the original DB instance.</p>"
         },
         "Port":{
           "shape":"IntegerOptional",
@@ -9097,11 +9296,11 @@
         },
         "DBName":{
           "shape":"String",
-          "documentation":"<p> The database name for the restored DB instance. </p> <note> <p>This parameter is not used for the MySQL engine.</p> </note>"
+          "documentation":"<p> The database name for the restored DB instance. </p> <note> <p>This parameter is not used for the MySQL or MariaDB engines.</p> </note>"
         },
         "Engine":{
           "shape":"String",
-          "documentation":"<p> The database engine to use for the new instance. </p> <p>Default: The same as source</p> <p>Constraint: Must be compatible with the engine of the source</p> <p> Valid Values: <code>MySQL</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code></p>"
+          "documentation":"<p> The database engine to use for the new instance. </p> <p>Default: The same as source</p> <p>Constraint: Must be compatible with the engine of the source</p> <p> Valid Values: <code>MySQL</code> | <code>mariadb</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code></p>"
         },
         "Iops":{
           "shape":"IntegerOptional",
@@ -9194,6 +9393,18 @@
       "exception":true,
       "documentation":"<p>The SNS topic ARN does not exist.</p>"
     },
+    "SharedSnapshotQuotaExceededFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"SharedSnapshotQuotaExceeded",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>You have exceeded the maximum number of account ids that you can share a manual DB snapshot with.</p>"
+    },
     "SnapshotQuotaExceededFault":{
       "type":"structure",
       "members":{
@@ -9231,6 +9442,7 @@
         "db-instance",
         "db-parameter-group",
         "db-security-group",
+        "db-snapshot",
         "db-cluster",
         "db-cluster-snapshot"
       ]
@@ -9576,6 +9788,12 @@
         "EventSubscription":{"shape":"EventSubscription"}
       }
     },
+    "DescribeDBSnapshotAttributesResult":{
+      "type":"structure",
+      "members":{
+        "DBSnapshotAttributesResult":{"shape":"DBSnapshotAttributesResult"}
+      }
+    },
     "DescribeEngineDefaultClusterParametersResult":{
       "type":"structure",
       "members":{
@@ -9604,6 +9822,12 @@
       "type":"structure",
       "members":{
         "DBInstance":{"shape":"DBInstance"}
+      }
+    },
+    "ModifyDBSnapshotAttributeResult":{
+      "type":"structure",
+      "members":{
+        "DBSnapshotAttributesResult":{"shape":"DBSnapshotAttributesResult"}
       }
     },
     "ModifyDBSubnetGroupResult":{

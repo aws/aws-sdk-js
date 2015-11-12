@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2013-02-12",
     "endpointPrefix":"rds",
@@ -285,7 +286,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -335,7 +336,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -442,7 +443,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -492,7 +493,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1054,7 +1055,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1118,7 +1119,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1342,7 +1343,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1469,7 +1470,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1578,6 +1579,16 @@
           },
           "exception":true,
           "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
+        },
+        {
+          "shape":"DBLogFileNotFoundFault",
+          "error":{
+            "code":"DBLogFileNotFoundFault",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p><i>LogFileName</i> does not refer to an existing DB log file.</p>"
         }
       ],
       "documentation":"<p> Downloads the last line of the specified log file. </p>"
@@ -1742,7 +1753,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1821,7 +1832,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -1981,7 +1992,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -2334,7 +2345,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -2374,7 +2385,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -2494,7 +2505,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -2534,7 +2545,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true,
@@ -3283,6 +3294,18 @@
       "exception":true,
       "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
     },
+    "DBLogFileNotFoundFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"DBLogFileNotFoundFault",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p><i>LogFileName</i> does not refer to an existing DB log file.</p>"
+    },
     "DBParameterGroup":{
       "type":"structure",
       "members":{
@@ -3719,7 +3742,7 @@
       },
       "error":{
         "code":"DBSubnetGroupNotFoundFault",
-        "httpStatusCode":400,
+        "httpStatusCode":404,
         "senderFault":true
       },
       "exception":true,
@@ -5100,7 +5123,7 @@
       },
       "error":{
         "code":"OptionGroupNotFoundFault",
-        "httpStatusCode":400,
+        "httpStatusCode":404,
         "senderFault":true
       },
       "exception":true,
@@ -6388,5 +6411,7 @@
         "DBSecurityGroup":{"shape":"DBSecurityGroup"}
       }
     }
+  },
+  "examples":{
   }
 }
