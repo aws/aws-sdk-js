@@ -28,12 +28,16 @@ describe 'AWS.DynamoDB.DocumentClient', ->
       expect(docClient.createSet(['1', '2', 'string']).type).to.equal('String')
       expect(docClient.createSet([1, 2, 3]).type).to.equal('Number')
       expect(docClient.createSet([new Buffer('foo'), new Buffer('bar')]).type).to.equal('Binary')
-  
+
+    it 'supports sets with falsy values', ->
+      expect(docClient.createSet([0]).type).to.equal('Number')
+      expect(docClient.createSet(['']).type).to.equal('String')
+
     it 'validates set elements if validate: true', ->
       expect(-> docClient.createSet([1, 2, 'string'], {validate: true})).to.throw('Number Set contains String value')
       expect(-> docClient.createSet(['string', 'string', 2], {validate: true})).to.throw('String Set contains Number value')
       expect(-> docClient.createSet([1, 2, new Buffer('foo')], {validate: true})).to.throw('Number Set contains Binary value')
-    
+
     it 'does not validate set elements if validate: true unset', ->
       expect(-> docClient.createSet([1, 2, 'string'])).to.not.throw('Number Set contains String value')
       expect(-> docClient.createSet(['string', 'string', 2])).to.not.throw('String Set contains Number value')
@@ -80,7 +84,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
           bar: S: 'string'
           baz: S: 'string'
       expect(translateInput(input)).to.eql(params)
-    
+
     it 'translates lists', ->
       buffer = new Buffer 'quux'
       input = Item: foo:
@@ -93,7 +97,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
             {B: buffer}
           ]
       expect(translateInput(input)).to.eql(params)
-    
+
     it 'translates string sets', ->
       set  = docClient.createSet ['bar', 'baz', 'quux']
       input = Item:
@@ -102,7 +106,7 @@ describe 'AWS.DynamoDB.DocumentClient', ->
         foo:
           'SS': ['bar', 'baz', 'quux']
       expect(translateInput(input)).to.eql(params)
-    
+
     it 'translates number sets', ->
       set  = docClient.createSet [1, 2, 3]
       input = Item:
