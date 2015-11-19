@@ -86,3 +86,8 @@ describe 'AWS.EC2', ->
           expect(error.message).to.equal(null)
           expect(data).to.equal(null)
 
+      it 'extracts the request id', ->
+        parse (error, data) ->
+          expect(error.requestId).to.equal('ab123mno-6432-dceb-asdf-123mno543123')
+          expect(data).to.equal(null)
+

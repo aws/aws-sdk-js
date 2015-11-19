@@ -307,6 +307,7 @@ describe 'AWS.S3', ->
       resp = new AWS.Response(req)
       resp.httpResponse.body = new Buffer(body || '')
       resp.httpResponse.statusCode = statusCode
+      resp.httpResponse.headers = {'x-amz-request-id': 'RequestId', 'x-amz-id-2': 'ExtendedRequestId'}
       req.emit('extractError', [resp])
       resp.error
 
@@ -340,6 +341,11 @@ describe 'AWS.S3', ->
         """
       error = extractError(400, body)
       expect(error.region).to.equal('eu-west-1')
+
+    it 'extracts the request ids', ->
+      error = extractError(400)
+      expect(error.requestId).to.equal('RequestId')
+      expect(error.extendedRequestId).to.equal('ExtendedRequestId')
 
     it 'misc errors not known to return an empty body', ->
       error = extractError(412) # made up
