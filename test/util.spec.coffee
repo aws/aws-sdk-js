@@ -682,3 +682,10 @@ describe 'AWS.util.extractRequestId', ->
     req.send()
     AWS.util.extractRequestId(req.response)
     expect(req.response.requestId).to.equal('RequestId1')
+
+  it 'sets requestId on the error on error status codes', ->
+    helpers.mockHttpResponse 403, {'x-amz-request-id': 'RequestId1'}
+    req = service.sample()
+    req.send()
+    AWS.util.extractRequestId(req.response)
+    expect(req.response.error.requestId).to.equal('RequestId1')
