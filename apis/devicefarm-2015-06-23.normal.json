@@ -4,12 +4,11 @@
     "apiVersion":"2015-06-23",
     "endpointPrefix":"devicefarm",
     "jsonVersion":"1.1",
+    "protocol":"json",
     "serviceFullName":"AWS Device Farm",
     "signatureVersion":"v4",
-    "targetPrefix":"DeviceFarm_20150623",
-    "protocol":"json"
+    "targetPrefix":"DeviceFarm_20150623"
   },
-  "documentation":"<p>AWS Device Farm is a service that enables mobile app developers to test Android, iOS, and Fire OS apps on physical phones, tablets, and other devices in the cloud.</p>",
   "operations":{
     "CreateDevicePool":{
       "name":"CreateDevicePool",
@@ -17,35 +16,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDevicePoolRequest",
-        "documentation":"<p>Represents a request to the create device pool operation.</p>"
-      },
-      "output":{
-        "shape":"CreateDevicePoolResult",
-        "documentation":"<p>Represents the result of a create device pool request.</p>"
-      },
+      "input":{"shape":"CreateDevicePoolRequest"},
+      "output":{"shape":"CreateDevicePoolResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Creates a device pool.</p>"
     },
@@ -55,35 +32,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateProjectRequest",
-        "documentation":"<p>Represents a request to the create project operation.</p>"
-      },
-      "output":{
-        "shape":"CreateProjectResult",
-        "documentation":"<p>Represents the result of a create project request.</p>"
-      },
+      "input":{"shape":"CreateProjectRequest"},
+      "output":{"shape":"CreateProjectResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Creates a new project.</p>"
     },
@@ -93,35 +48,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateUploadRequest",
-        "documentation":"<p>Represents a request to the create upload operation.</p>"
-      },
-      "output":{
-        "shape":"CreateUploadResult",
-        "documentation":"<p>Represents the result of a create upload request.</p>"
-      },
+      "input":{"shape":"CreateUploadRequest"},
+      "output":{"shape":"CreateUploadResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Uploads an app or test scripts.</p>"
     },
@@ -131,35 +64,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDevicePoolRequest",
-        "documentation":"<p>Represents a request to the delete device pool operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteDevicePoolResult",
-        "documentation":"<p>Represents the result of a delete device pool request.</p>"
-      },
+      "input":{"shape":"DeleteDevicePoolRequest"},
+      "output":{"shape":"DeleteDevicePoolResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.</p>"
     },
@@ -169,35 +80,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteProjectRequest",
-        "documentation":"<p>Represents a request to the delete project operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteProjectResult",
-        "documentation":"<p>Represents the result of a delete project request.</p>"
-      },
+      "input":{"shape":"DeleteProjectRequest"},
+      "output":{"shape":"DeleteProjectResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Deletes an AWS Device Farm project, given the project ARN.</p> <p><b>Note</b> Deleting this resource does not stop an in-progress run.</p>"
     },
@@ -207,35 +96,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteRunRequest",
-        "documentation":"<p>Represents a request to the delete run operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteRunResult",
-        "documentation":"<p>Represents the result of a delete run request.</p>"
-      },
+      "input":{"shape":"DeleteRunRequest"},
+      "output":{"shape":"DeleteRunResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Deletes the run, given the run ARN.</p> <p><b>Note</b> Deleting this resource does not stop an in-progress run.</p>"
     },
@@ -245,35 +112,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteUploadRequest",
-        "documentation":"<p>Represents a request to the delete upload operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteUploadResult",
-        "documentation":"<p>Represents the result of a delete upload request.</p>"
-      },
+      "input":{"shape":"DeleteUploadRequest"},
+      "output":{"shape":"DeleteUploadResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Deletes an upload given the upload ARN.</p>"
     },
@@ -286,26 +131,10 @@
       "input":{"shape":"GetAccountSettingsRequest"},
       "output":{"shape":"GetAccountSettingsResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Returns the number of unmetered iOS and/or unmetered Android devices that have been purchased by the account.</p>"
     },
@@ -315,35 +144,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetDeviceRequest",
-        "documentation":"<p>Represents a request to the get device request.</p>"
-      },
-      "output":{
-        "shape":"GetDeviceResult",
-        "documentation":"<p>Represents the result of a get device request.</p>"
-      },
+      "input":{"shape":"GetDeviceRequest"},
+      "output":{"shape":"GetDeviceResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about a unique device type.</p>"
     },
@@ -353,35 +160,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetDevicePoolRequest",
-        "documentation":"<p>Represents a request to the get device pool operation.</p>"
-      },
-      "output":{
-        "shape":"GetDevicePoolResult",
-        "documentation":"<p>Represents the result of a get device pool request.</p>"
-      },
+      "input":{"shape":"GetDevicePoolRequest"},
+      "output":{"shape":"GetDevicePoolResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about a device pool.</p>"
     },
@@ -391,35 +176,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetDevicePoolCompatibilityRequest",
-        "documentation":"<p>Represents a request to the get device pool compatibility operation.</p>"
-      },
-      "output":{
-        "shape":"GetDevicePoolCompatibilityResult",
-        "documentation":"<p>Represents the result of describe device pool compatibility request.</p>"
-      },
+      "input":{"shape":"GetDevicePoolCompatibilityRequest"},
+      "output":{"shape":"GetDevicePoolCompatibilityResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about compatibility with a device pool.</p>"
     },
@@ -429,35 +192,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetJobRequest",
-        "documentation":"<p>Represents a request to the get job operation.</p>"
-      },
-      "output":{
-        "shape":"GetJobResult",
-        "documentation":"<p>Represents the result of a get job request.</p>"
-      },
+      "input":{"shape":"GetJobRequest"},
+      "output":{"shape":"GetJobResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about a job.</p>"
     },
@@ -467,35 +208,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetProjectRequest",
-        "documentation":"<p>Represents a request to the get project operation.</p>"
-      },
-      "output":{
-        "shape":"GetProjectResult",
-        "documentation":"<p>Represents the result of a get project request.</p>"
-      },
+      "input":{"shape":"GetProjectRequest"},
+      "output":{"shape":"GetProjectResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about a project.</p>"
     },
@@ -505,35 +224,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetRunRequest",
-        "documentation":"<p>Represents a request to the get run operation.</p>"
-      },
-      "output":{
-        "shape":"GetRunResult",
-        "documentation":"<p>Represents the result of a get run request.</p>"
-      },
+      "input":{"shape":"GetRunRequest"},
+      "output":{"shape":"GetRunResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about a run.</p>"
     },
@@ -543,35 +240,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetSuiteRequest",
-        "documentation":"<p>Represents a request to the get suite operation.</p>"
-      },
-      "output":{
-        "shape":"GetSuiteResult",
-        "documentation":"<p>Represents the result of a get suite request.</p>"
-      },
+      "input":{"shape":"GetSuiteRequest"},
+      "output":{"shape":"GetSuiteResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about a suite.</p>"
     },
@@ -581,35 +256,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetTestRequest",
-        "documentation":"<p>Represents a request to the get test operation.</p>"
-      },
-      "output":{
-        "shape":"GetTestResult",
-        "documentation":"<p>Represents the result of a get test request.</p>"
-      },
+      "input":{"shape":"GetTestRequest"},
+      "output":{"shape":"GetTestResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about a test.</p>"
     },
@@ -619,35 +272,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetUploadRequest",
-        "documentation":"<p>Represents a request to the get upload operation.</p>"
-      },
-      "output":{
-        "shape":"GetUploadResult",
-        "documentation":"<p>Represents the result of a get upload request.</p>"
-      },
+      "input":{"shape":"GetUploadRequest"},
+      "output":{"shape":"GetUploadResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about an upload.</p>"
     },
@@ -657,35 +288,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListArtifactsRequest",
-        "documentation":"<p>Represents a request to the list artifacts operation.</p>"
-      },
-      "output":{
-        "shape":"ListArtifactsResult",
-        "documentation":"<p>Represents the result of a list artifacts operation.</p>"
-      },
+      "input":{"shape":"ListArtifactsRequest"},
+      "output":{"shape":"ListArtifactsResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about artifacts.</p>"
     },
@@ -695,35 +304,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListDevicePoolsRequest",
-        "documentation":"<p>Represents the result of a list device pools request.</p>"
-      },
-      "output":{
-        "shape":"ListDevicePoolsResult",
-        "documentation":"<p>Represents the result of a list device pools request.</p>"
-      },
+      "input":{"shape":"ListDevicePoolsRequest"},
+      "output":{"shape":"ListDevicePoolsResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about device pools.</p>"
     },
@@ -733,35 +320,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListDevicesRequest",
-        "documentation":"<p>Represents the result of a list devices request.</p>"
-      },
-      "output":{
-        "shape":"ListDevicesResult",
-        "documentation":"<p>Represents the result of a list devices operation.</p>"
-      },
+      "input":{"shape":"ListDevicesRequest"},
+      "output":{"shape":"ListDevicesResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about unique device types.</p>"
     },
@@ -771,35 +336,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListJobsRequest",
-        "documentation":"<p>Represents a request to the list jobs operation.</p>"
-      },
-      "output":{
-        "shape":"ListJobsResult",
-        "documentation":"<p>Represents the result of a list jobs request.</p>"
-      },
+      "input":{"shape":"ListJobsRequest"},
+      "output":{"shape":"ListJobsResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about jobs.</p>"
     },
@@ -809,35 +352,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListProjectsRequest",
-        "documentation":"<p>Represents a request to the list projects operation.</p>"
-      },
-      "output":{
-        "shape":"ListProjectsResult",
-        "documentation":"<p>Represents the result of a list projects request.</p>"
-      },
+      "input":{"shape":"ListProjectsRequest"},
+      "output":{"shape":"ListProjectsResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about projects.</p>"
     },
@@ -847,35 +368,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListRunsRequest",
-        "documentation":"<p>Represents a request to the list runs operation.</p>"
-      },
-      "output":{
-        "shape":"ListRunsResult",
-        "documentation":"<p>Represents the result of a list runs request.</p>"
-      },
+      "input":{"shape":"ListRunsRequest"},
+      "output":{"shape":"ListRunsResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about runs.</p>"
     },
@@ -885,35 +384,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListSamplesRequest",
-        "documentation":"<p>Represents a request to the list samples operation.</p>"
-      },
-      "output":{
-        "shape":"ListSamplesResult",
-        "documentation":"<p>Represents the result of a list samples request.</p>"
-      },
+      "input":{"shape":"ListSamplesRequest"},
+      "output":{"shape":"ListSamplesResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about samples.</p>"
     },
@@ -923,35 +400,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListSuitesRequest",
-        "documentation":"<p>Represents a request to the list suites operation.</p>"
-      },
-      "output":{
-        "shape":"ListSuitesResult",
-        "documentation":"<p>Represents the result of a list suites request.</p>"
-      },
+      "input":{"shape":"ListSuitesRequest"},
+      "output":{"shape":"ListSuitesResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about suites.</p>"
     },
@@ -961,35 +416,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListTestsRequest",
-        "documentation":"<p>Represents a request to the list tests operation.</p>"
-      },
-      "output":{
-        "shape":"ListTestsResult",
-        "documentation":"<p>Represents the result of a list tests request.</p>"
-      },
+      "input":{"shape":"ListTestsRequest"},
+      "output":{"shape":"ListTestsResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about tests.</p>"
     },
@@ -999,35 +432,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListUniqueProblemsRequest",
-        "documentation":"<p>Represents a request to the list unique problems operation.</p>"
-      },
-      "output":{
-        "shape":"ListUniqueProblemsResult",
-        "documentation":"<p>Represents the result of a list unique problems request.</p>"
-      },
+      "input":{"shape":"ListUniqueProblemsRequest"},
+      "output":{"shape":"ListUniqueProblemsResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about unique problems.</p>"
     },
@@ -1037,35 +448,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListUploadsRequest",
-        "documentation":"<p>Represents a request to the list uploads operation.</p>"
-      },
-      "output":{
-        "shape":"ListUploadsResult",
-        "documentation":"<p>Represents the result of a list uploads request.</p>"
-      },
+      "input":{"shape":"ListUploadsRequest"},
+      "output":{"shape":"ListUploadsResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about uploads.</p>"
     },
@@ -1075,40 +464,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ScheduleRunRequest",
-        "documentation":"<p>Represents a request to the schedule run operation.</p>"
-      },
-      "output":{
-        "shape":"ScheduleRunResult",
-        "documentation":"<p>Represents the result of a schedule run request.</p>"
-      },
+      "input":{"shape":"ScheduleRunRequest"},
+      "output":{"shape":"ScheduleRunResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"IdempotencyException",
-          "exception":true,
-          "documentation":"<p>An entity with the same name already exists.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"IdempotencyException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Schedules a run.</p>"
     },
@@ -1118,35 +481,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateDevicePoolRequest",
-        "documentation":"<p>Represents a request to the update device pool operation.</p>"
-      },
-      "output":{
-        "shape":"UpdateDevicePoolResult",
-        "documentation":"<p>Represents the result of an update device pool request.</p>"
-      },
+      "input":{"shape":"UpdateDevicePoolRequest"},
+      "output":{"shape":"UpdateDevicePoolResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).</p>"
     },
@@ -1156,35 +497,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateProjectRequest",
-        "documentation":"<p>Represents a request to the update project operation.</p>"
-      },
-      "output":{
-        "shape":"UpdateProjectResult",
-        "documentation":"<p>Represents the result of an update project request.</p>"
-      },
+      "input":{"shape":"UpdateProjectRequest"},
+      "output":{"shape":"UpdateProjectResult"},
       "errors":[
-        {
-          "shape":"ArgumentException",
-          "exception":true,
-          "documentation":"<p>An invalid argument was specified.</p>"
-        },
-        {
-          "shape":"NotFoundException",
-          "exception":true,
-          "documentation":"<p>The specified entity was not found.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "exception":true,
-          "documentation":"<p>A limit was exceeded.</p>"
-        },
-        {
-          "shape":"ServiceAccountException",
-          "exception":true,
-          "documentation":"<p>There was a problem with the service account.</p>"
-        }
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Modifies the specified project name, given the project ARN and a new name.</p>"
     }
@@ -1192,8 +511,8 @@
   "shapes":{
     "AWSAccountNumber":{
       "type":"string",
-      "min":2,
-      "max":16
+      "max":16,
+      "min":2
     },
     "AccountSettings":{
       "type":"structure",
@@ -1225,8 +544,8 @@
           "documentation":"<p>Any additional information about the exception.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>An invalid argument was specified.</p>"
+      "documentation":"<p>An invalid argument was specified.</p>",
+      "exception":true
     },
     "Artifact":{
       "type":"structure",
@@ -1271,6 +590,7 @@
         "MESSAGE_LOG",
         "RESULT_LOG",
         "SERVICE_LOG",
+        "WEBKIT_LOG",
         "INSTRUMENTATION_OUTPUT",
         "EXERCISER_MONKEY_OUTPUT",
         "CALABASH_JSON_OUTPUT",
@@ -1318,8 +638,8 @@
     },
     "ContentType":{
       "type":"string",
-      "min":0,
-      "max":64
+      "max":64,
+      "min":0
     },
     "Counters":{
       "type":"structure",
@@ -1431,7 +751,7 @@
         },
         "type":{
           "shape":"UploadType",
-          "documentation":"<p>The upload's upload type.</p> <p>Must be one of the following values:</p> <ul> <li><p>ANDROID_APP: An Android upload.</p></li> <li><p>IOS_APP: An iOS upload.</p></li> <li><p>EXTERNAL_DATA: An external data upload.</p></li> <li><p>APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p></li> <li><p>APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p></li> <li><p>CALABASH_TEST_PACKAGE: A Calabash test package upload.</p></li> <li><p>INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.</p></li> <li><p>UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.</p></li> <li><p>XCTEST_TEST_PACKAGE: An XCode test package upload.</p></li> </ul>"
+          "documentation":"<p>The upload's upload type.</p> <p>Must be one of the following values:</p> <ul> <li><p>ANDROID_APP: An Android upload.</p></li> <li><p>IOS_APP: An iOS upload.</p></li> <li><p>EXTERNAL_DATA: An external data upload.</p></li> <li><p>APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p></li> <li><p>APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p></li> <li><p>CALABASH_TEST_PACKAGE: A Calabash test package upload.</p></li> <li><p>INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.</p></li> <li><p>UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.</p></li> <li><p>XCTEST_TEST_PACKAGE: An XCode test package upload.</p></li> <li><p>APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p></li> <li><p>APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p></li> </ul> <p><b>Note</b> If you call <code>CreateUpload</code> with <code>WEB_APP</code> specified, AWS Device Farm throws an <a>ArgumentException</a> error.</p>"
         },
         "contentType":{
           "shape":"ContentType",
@@ -1704,8 +1024,8 @@
     },
     "Filter":{
       "type":"string",
-      "min":0,
-      "max":1024
+      "max":1024,
+      "min":0
     },
     "GetAccountSettingsRequest":{
       "type":"structure",
@@ -1720,10 +1040,7 @@
     },
     "GetDevicePoolCompatibilityRequest":{
       "type":"structure",
-      "required":[
-        "devicePoolArn",
-        "appArn"
-      ],
+      "required":["devicePoolArn"],
       "members":{
         "devicePoolArn":{
           "shape":"AmazonResourceName",
@@ -1906,8 +1223,8 @@
           "documentation":"<p>Any additional information about the exception.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>An entity with the same name already exists.</p>"
+      "documentation":"<p>An entity with the same name already exists.</p>",
+      "exception":true
     },
     "IncompatibilityMessage":{
       "type":"structure",
@@ -1991,8 +1308,8 @@
           "documentation":"<p>Any additional information about the exception.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>A limit was exceeded.</p>"
+      "documentation":"<p>A limit was exceeded.</p>",
+      "exception":true
     },
     "ListArtifactsRequest":{
       "type":"structure",
@@ -2343,18 +1660,18 @@
     "Long":{"type":"long"},
     "Message":{
       "type":"string",
-      "min":0,
-      "max":8192
+      "max":8192,
+      "min":0
     },
     "Metadata":{
       "type":"string",
-      "min":0,
-      "max":1024
+      "max":1024,
+      "min":0
     },
     "Name":{
       "type":"string",
-      "min":0,
-      "max":256
+      "max":256,
+      "min":0
     },
     "NotFoundException":{
       "type":"structure",
@@ -2364,13 +1681,13 @@
           "documentation":"<p>Any additional information about the exception.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>The specified entity was not found.</p>"
+      "documentation":"<p>The specified entity was not found.</p>",
+      "exception":true
     },
     "PaginationToken":{
       "type":"string",
-      "min":4,
-      "max":1024
+      "max":1024,
+      "min":4
     },
     "Problem":{
       "type":"structure",
@@ -2671,7 +1988,6 @@
       "type":"structure",
       "required":[
         "projectArn",
-        "appArn",
         "devicePoolArn",
         "test"
       ],
@@ -2744,8 +2060,8 @@
           "documentation":"<p>Any additional information about the exception.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>There was a problem with the service account.</p>"
+      "documentation":"<p>There was a problem with the service account.</p>",
+      "exception":true
     },
     "String":{"type":"string"},
     "Suite":{
@@ -2864,6 +2180,8 @@
         "BUILTIN_EXPLORER",
         "APPIUM_JAVA_JUNIT",
         "APPIUM_JAVA_TESTNG",
+        "APPIUM_WEB_JAVA_JUNIT",
+        "APPIUM_WEB_JAVA_TESTNG",
         "CALABASH",
         "INSTRUMENTATION",
         "UIAUTOMATION",
@@ -2877,8 +2195,8 @@
     },
     "URL":{
       "type":"string",
-      "min":0,
-      "max":2048
+      "max":2048,
+      "min":0
     },
     "UniqueProblem":{
       "type":"structure",
@@ -2972,7 +2290,7 @@
         },
         "type":{
           "shape":"UploadType",
-          "documentation":"<p>The upload's type.</p> <p>Must be one of the following values:</p> <ul> <li><p>ANDROID_APP: An Android upload.</p></li> <li><p>IOS_APP: An iOS upload.</p></li> <li><p>EXTERNAL_DATA: An external data upload.</p></li> <li><p>APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p></li> <li><p>APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p></li> <li><p>CALABASH_TEST_PACKAGE: A Calabash test package upload.</p></li> <li><p>INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.</p></li> <li><p>UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.</p></li> <li><p>XCTEST_TEST_PACKAGE: An XCode test package upload.</p></li> </ul>"
+          "documentation":"<p>The upload's type.</p> <p>Must be one of the following values:</p> <ul> <li><p>ANDROID_APP: An Android upload.</p></li> <li><p>IOS_APP: An iOS upload.</p></li> <li><p>EXTERNAL_DATA: An external data upload.</p></li> <li><p>APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p></li> <li><p>APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p></li> <li><p>CALABASH_TEST_PACKAGE: A Calabash test package upload.</p></li> <li><p>INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.</p></li> <li><p>UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.</p></li> <li><p>XCTEST_TEST_PACKAGE: An XCode test package upload.</p></li> <li><p>APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.</p></li> <li><p>APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.</p></li> </ul>"
         },
         "status":{
           "shape":"UploadStatus",
@@ -3011,9 +2329,12 @@
       "enum":[
         "ANDROID_APP",
         "IOS_APP",
+        "WEB_APP",
         "EXTERNAL_DATA",
         "APPIUM_JAVA_JUNIT_TEST_PACKAGE",
         "APPIUM_JAVA_TESTNG_TEST_PACKAGE",
+        "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE",
+        "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE",
         "CALABASH_TEST_PACKAGE",
         "INSTRUMENTATION_TEST_PACKAGE",
         "UIAUTOMATION_TEST_PACKAGE",
@@ -3026,6 +2347,5 @@
       "member":{"shape":"Upload"}
     }
   },
-  "examples":{
-  }
+  "documentation":"<p>AWS Device Farm is a service that enables mobile app developers to test Android, iOS, and Fire OS apps on physical phones, tablets, and other devices in the cloud.</p>"
 }
