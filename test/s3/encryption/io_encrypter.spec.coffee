@@ -16,6 +16,10 @@ describe 'AWS.S3.Encryption.IOEncrypter', ->
   #cipher.key = key
   #cipher.iv = iv
 
+  double = ( obj ) ->
+    if (obj == null || (typeof obj != 'object'))
+      return obj;
+
   it 'encrypts an IO object', (done) ->
     io = new AWS.S3.Encryption.IOEncrypter(cipher, plain_text)
     expect(io.read).to eq(cipher_text)
@@ -31,7 +35,7 @@ describe 'AWS.S3.Encryption.IOEncrypter', ->
     done()
 
   it 'caches the cipher-text of large objects to disk', (done) ->
-    tempfile = double('tempfile').as_null_object
+    tempfile = double('tempfile') #.as_null_object
     expect(tempfile).to.receive(write)
     expect(tempfile).to.receive(binmode)
     #allow(Tempfile).to.receive(new).andReturn(tempfile)
