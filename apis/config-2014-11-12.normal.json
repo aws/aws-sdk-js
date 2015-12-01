@@ -4,13 +4,12 @@
     "apiVersion":"2014-11-12",
     "endpointPrefix":"config",
     "jsonVersion":"1.1",
+    "protocol":"json",
     "serviceAbbreviation":"Config Service",
     "serviceFullName":"AWS Config",
     "signatureVersion":"v4",
-    "targetPrefix":"StarlingDoveService",
-    "protocol":"json"
+    "targetPrefix":"StarlingDoveService"
   },
-  "documentation":"<fullname>AWS Config</fullname> <p>AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an Elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported AWS Resources</a>.</p> <p>You can access and manage AWS Config through the AWS Management Console, the AWS Command Line Interface (AWS CLI), the AWS Config API, or the AWS SDKs for AWS Config</p> <p>This reference guide contains documentation for the AWS Config API and the AWS CLI commands that you can use to manage AWS Config.</p> <p>The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p> <p>For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html\">What Is AWS Config?</a> in the <i>AWS Config Developer Guide</i>.</p>",
   "operations":{
     "DeleteConfigRule":{
       "name":"DeleteConfigRule",
@@ -20,11 +19,7 @@
       },
       "input":{"shape":"DeleteConfigRuleRequest"},
       "errors":[
-        {
-          "shape":"NoSuchConfigRuleException",
-          "exception":true,
-          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
-        }
+        {"shape":"NoSuchConfigRuleException"}
       ],
       "documentation":"<p>Deletes the specified AWS Config rule and all of its evaluation results.</p> <p>AWS Config sets the state of a rule to <code>DELETING</code> until the deletion is complete. You cannot update a rule while it is in this state. If you make a <code>PutConfigRule</code> request for the rule, you will receive a <code>ResourceInUseException</code>.</p> <p>You can check the state of a rule by using the <code>DescribeConfigRules</code> request.</p>"
     },
@@ -34,21 +29,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDeliveryChannelRequest",
-        "documentation":"<p> The input for the <a>DeleteDeliveryChannel</a> action. The action accepts the following data in JSON format. </p>"
-      },
+      "input":{"shape":"DeleteDeliveryChannelRequest"},
       "errors":[
-        {
-          "shape":"NoSuchDeliveryChannelException",
-          "exception":true,
-          "documentation":"<p>You have specified a delivery channel that does not exist.</p>"
-        },
-        {
-          "shape":"LastDeliveryChannelDeleteFailedException",
-          "exception":true,
-          "documentation":"<p>You cannot delete the delivery channel you specified because the configuration recorder is running.</p>"
-        }
+        {"shape":"NoSuchDeliveryChannelException"},
+        {"shape":"LastDeliveryChannelDeleteFailedException"}
       ],
       "documentation":"<p>Deletes the specified delivery channel.</p> <p>The delivery channel cannot be deleted if it is the only delivery channel and the configuration recorder is still running. To delete the delivery channel, stop the running configuration recorder using the <a>StopConfigurationRecorder</a> action.</p>"
     },
@@ -58,30 +42,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeliverConfigSnapshotRequest",
-        "documentation":"<p> The input for the <a>DeliverConfigSnapshot</a> action. </p>"
-      },
-      "output":{
-        "shape":"DeliverConfigSnapshotResponse",
-        "documentation":"<p> The output for the <a>DeliverConfigSnapshot</a> action in JSON format. </p>"
-      },
+      "input":{"shape":"DeliverConfigSnapshotRequest"},
+      "output":{"shape":"DeliverConfigSnapshotResponse"},
       "errors":[
-        {
-          "shape":"NoSuchDeliveryChannelException",
-          "exception":true,
-          "documentation":"<p>You have specified a delivery channel that does not exist.</p>"
-        },
-        {
-          "shape":"NoAvailableConfigurationRecorderException",
-          "exception":true,
-          "documentation":"<p>There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.</p>"
-        },
-        {
-          "shape":"NoRunningConfigurationRecorderException",
-          "exception":true,
-          "documentation":"<p>There is no configuration recorder running.</p>"
-        }
+        {"shape":"NoSuchDeliveryChannelException"},
+        {"shape":"NoAvailableConfigurationRecorderException"},
+        {"shape":"NoRunningConfigurationRecorderException"}
       ],
       "documentation":"<p>Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel. After the delivery has started, AWS Config sends following notifications using an Amazon SNS topic that you have specified.</p> <ul> <li>Notification of starting the delivery.</li> <li>Notification of delivery completed, if the delivery was successfully completed.</li> <li>Notification of delivery failure, if the delivery failed to complete.</li> </ul>"
     },
@@ -94,18 +60,10 @@
       "input":{"shape":"DescribeComplianceByConfigRuleRequest"},
       "output":{"shape":"DescribeComplianceByConfigRuleResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterValueException",
-          "exception":true,
-          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
-        },
-        {
-          "shape":"NoSuchConfigRuleException",
-          "exception":true,
-          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
-        }
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"NoSuchConfigRuleException"}
       ],
-      "documentation":"<p>Indicates whether the specified AWS Config rules are compliant. If a rule is noncompliant, this action returns the number of AWS resources that do not comply with the rule.</p> <p>A rule is compliant if all of the evaluated resources comply with it, and it is noncompliant if any of these resources do not comply. </p> <p>If AWS Config has no current evaluation results for the rule, it returns <code>InsufficientData</code>. This result might indicate one of the following conditions: <ul> <li>AWS Config has never invoked an evaluation for the rule. To check whether it has, use the <code>DescribeConfigRuleEvaluationStatus</code> action to get the <code>LastSuccessfulInvocationTime</code> and <code>LastFailedInvocationTime</code>.</li> <li>The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the <code>config:PutEvaluations</code> permission. If the rule is a customer managed rule, verify that the AWS Lambda execution role includes the <code>config:PutEvaluations</code> permission.</li> <li>The rule's AWS Lambda function has returned <code>NOT_APPLICABLE</code> for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.</li> </ul></p>"
+      "documentation":"<p>Indicates whether the specified AWS Config rules are compliant. If a rule is noncompliant, this action returns the number of AWS resources that do not comply with the rule.</p> <p>A rule is compliant if all of the evaluated resources comply with it, and it is noncompliant if any of these resources do not comply. </p> <p>If AWS Config has no current evaluation results for the rule, it returns <code>InsufficientData</code>. This result might indicate one of the following conditions: <ul> <li>AWS Config has never invoked an evaluation for the rule. To check whether it has, use the <code>DescribeConfigRuleEvaluationStatus</code> action to get the <code>LastSuccessfulInvocationTime</code> and <code>LastFailedInvocationTime</code>.</li> <li>The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the <code>config:PutEvaluations</code> permission. If the rule is a customer managed rule, verify that the AWS Lambda execution role includes the <code>config:PutEvaluations</code> permission.</li> <li>The rule's AWS Lambda function has returned <code>NOT_APPLICABLE</code> for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.</li></ul></p>"
     },
     "DescribeComplianceByResource":{
       "name":"DescribeComplianceByResource",
@@ -116,18 +74,10 @@
       "input":{"shape":"DescribeComplianceByResourceRequest"},
       "output":{"shape":"DescribeComplianceByResourceResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterValueException",
-          "exception":true,
-          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.</p>"
-        }
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p>Indicates whether the specified AWS resources are compliant. If a resource is noncompliant, this action returns the number of AWS Config rules that the resource does not comply with. </p> <p>A resource is compliant if it complies with all the AWS Config rules that evaluate it. It is noncompliant if it does not comply with one or more of these rules.</p> <p>If AWS Config has no current evaluation results for the resource, it returns <code>InsufficientData</code>. This result might indicate one of the following conditions about the rules that evaluate the resource: <ul> <li>AWS Config has never invoked an evaluation for the rule. To check whether it has, use the <code>DescribeConfigRuleEvaluationStatus</code> action to get the <code>LastSuccessfulInvocationTime</code> and <code>LastFailedInvocationTime</code>.</li> <li>The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the <code>config:PutEvaluations</code> permission. If the rule is a customer managed rule, verify that the AWS Lambda execution role includes the <code>config:PutEvaluations</code> permission.</li> <li>The rule's AWS Lambda function has returned <code>NOT_APPLICABLE</code> for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.</li> </ul></p>"
+      "documentation":"<p>Indicates whether the specified AWS resources are compliant. If a resource is noncompliant, this action returns the number of AWS Config rules that the resource does not comply with. </p> <p>A resource is compliant if it complies with all the AWS Config rules that evaluate it. It is noncompliant if it does not comply with one or more of these rules.</p> <p>If AWS Config has no current evaluation results for the resource, it returns <code>InsufficientData</code>. This result might indicate one of the following conditions about the rules that evaluate the resource: <ul> <li>AWS Config has never invoked an evaluation for the rule. To check whether it has, use the <code>DescribeConfigRuleEvaluationStatus</code> action to get the <code>LastSuccessfulInvocationTime</code> and <code>LastFailedInvocationTime</code>.</li> <li>The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the <code>config:PutEvaluations</code> permission. If the rule is a customer managed rule, verify that the AWS Lambda execution role includes the <code>config:PutEvaluations</code> permission.</li> <li>The rule's AWS Lambda function has returned <code>NOT_APPLICABLE</code> for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.</li></ul></p>"
     },
     "DescribeConfigRuleEvaluationStatus":{
       "name":"DescribeConfigRuleEvaluationStatus",
@@ -138,11 +88,7 @@
       "input":{"shape":"DescribeConfigRuleEvaluationStatusRequest"},
       "output":{"shape":"DescribeConfigRuleEvaluationStatusResponse"},
       "errors":[
-        {
-          "shape":"NoSuchConfigRuleException",
-          "exception":true,
-          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
-        }
+        {"shape":"NoSuchConfigRuleException"}
       ],
       "documentation":"<p>Returns status information for each of your AWS managed Config rules. The status includes information such as the last time AWS Config invoked the rule, the last time AWS Config failed to invoke the rule, and the related error for the last failure.</p>"
     },
@@ -155,11 +101,7 @@
       "input":{"shape":"DescribeConfigRulesRequest"},
       "output":{"shape":"DescribeConfigRulesResponse"},
       "errors":[
-        {
-          "shape":"NoSuchConfigRuleException",
-          "exception":true,
-          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
-        }
+        {"shape":"NoSuchConfigRuleException"}
       ],
       "documentation":"<p>Returns details about your AWS Config rules.</p>"
     },
@@ -169,20 +111,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeConfigurationRecorderStatusRequest",
-        "documentation":"<p>The input for the <a>DescribeConfigurationRecorderStatus</a> action.</p>"
-      },
-      "output":{
-        "shape":"DescribeConfigurationRecorderStatusResponse",
-        "documentation":"<p>The output for the <a>DescribeConfigurationRecorderStatus</a> action in JSON format.</p>"
-      },
+      "input":{"shape":"DescribeConfigurationRecorderStatusRequest"},
+      "output":{"shape":"DescribeConfigurationRecorderStatusResponse"},
       "errors":[
-        {
-          "shape":"NoSuchConfigurationRecorderException",
-          "exception":true,
-          "documentation":"<p>You have specified a configuration recorder that does not exist.</p>"
-        }
+        {"shape":"NoSuchConfigurationRecorderException"}
       ],
       "documentation":"<p>Returns the current status of the specified configuration recorder. If a configuration recorder is not specified, this action returns the status of all configuration recorder associated with the account.</p> <note>Currently, you can specify only one configuration recorder per account.</note>"
     },
@@ -192,20 +124,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeConfigurationRecordersRequest",
-        "documentation":"<p>The input for the <a>DescribeConfigurationRecorders</a> action.</p>"
-      },
-      "output":{
-        "shape":"DescribeConfigurationRecordersResponse",
-        "documentation":"<p>The output for the <a>DescribeConfigurationRecorders</a> action.</p>"
-      },
+      "input":{"shape":"DescribeConfigurationRecordersRequest"},
+      "output":{"shape":"DescribeConfigurationRecordersResponse"},
       "errors":[
-        {
-          "shape":"NoSuchConfigurationRecorderException",
-          "exception":true,
-          "documentation":"<p>You have specified a configuration recorder that does not exist.</p>"
-        }
+        {"shape":"NoSuchConfigurationRecorderException"}
       ],
       "documentation":"<p>Returns the name of one or more specified configuration recorders. If the recorder name is not specified, this action returns the names of all the configuration recorders associated with the account. </p> <note> <p>Currently, you can specify only one configuration recorder per account.</p> </note>"
     },
@@ -215,20 +137,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeDeliveryChannelStatusRequest",
-        "documentation":"<p>The input for the <a>DeliveryChannelStatus</a> action.</p>"
-      },
-      "output":{
-        "shape":"DescribeDeliveryChannelStatusResponse",
-        "documentation":"<p>The output for the <a>DescribeDeliveryChannelStatus</a> action.</p>"
-      },
+      "input":{"shape":"DescribeDeliveryChannelStatusRequest"},
+      "output":{"shape":"DescribeDeliveryChannelStatusResponse"},
       "errors":[
-        {
-          "shape":"NoSuchDeliveryChannelException",
-          "exception":true,
-          "documentation":"<p>You have specified a delivery channel that does not exist.</p>"
-        }
+        {"shape":"NoSuchDeliveryChannelException"}
       ],
       "documentation":"<p>Returns the current status of the specified delivery channel. If a delivery channel is not specified, this action returns the current status of all delivery channels associated with the account. </p> <note>Currently, you can specify only one delivery channel per account.</note>"
     },
@@ -238,20 +150,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeDeliveryChannelsRequest",
-        "documentation":"<p>The input for the <a>DescribeDeliveryChannels</a> action.</p>"
-      },
-      "output":{
-        "shape":"DescribeDeliveryChannelsResponse",
-        "documentation":"<p>The output for the <a>DescribeDeliveryChannels</a> action.</p>"
-      },
+      "input":{"shape":"DescribeDeliveryChannelsRequest"},
+      "output":{"shape":"DescribeDeliveryChannelsResponse"},
       "errors":[
-        {
-          "shape":"NoSuchDeliveryChannelException",
-          "exception":true,
-          "documentation":"<p>You have specified a delivery channel that does not exist.</p>"
-        }
+        {"shape":"NoSuchDeliveryChannelException"}
       ],
       "documentation":"<p>Returns details about the specified delivery channel. If a delivery channel is not specified, this action returns the details of all delivery channels associated with the account. </p> <note> <p>Currently, you can specify only one delivery channel per account.</p> </note>"
     },
@@ -264,21 +166,9 @@
       "input":{"shape":"GetComplianceDetailsByConfigRuleRequest"},
       "output":{"shape":"GetComplianceDetailsByConfigRuleResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterValueException",
-          "exception":true,
-          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.</p>"
-        },
-        {
-          "shape":"NoSuchConfigRuleException",
-          "exception":true,
-          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
-        }
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"NoSuchConfigRuleException"}
       ],
       "documentation":"<p>Returns the evaluation results for the specified AWS Config rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.</p>"
     },
@@ -291,11 +181,7 @@
       "input":{"shape":"GetComplianceDetailsByResourceRequest"},
       "output":{"shape":"GetComplianceDetailsByResourceResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterValueException",
-          "exception":true,
-          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
-        }
+        {"shape":"InvalidParameterValueException"}
       ],
       "documentation":"<p>Returns the evaluation results for the specified AWS resource. The results indicate which AWS Config rules were used to evaluate the resource, when each rule was last used, and whether the resource complies with each rule.</p>"
     },
@@ -317,11 +203,7 @@
       "input":{"shape":"GetComplianceSummaryByResourceTypeRequest"},
       "output":{"shape":"GetComplianceSummaryByResourceTypeResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterValueException",
-          "exception":true,
-          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
-        }
+        {"shape":"InvalidParameterValueException"}
       ],
       "documentation":"<p>Returns the number of resources that are compliant and the number that are noncompliant. You can specify one or more resource types to get these numbers for each resource type. The maximum number returned is 100.</p>"
     },
@@ -331,45 +213,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetResourceConfigHistoryRequest",
-        "documentation":"<p>The input for the <a>GetResourceConfigHistory</a> action.</p>"
-      },
-      "output":{
-        "shape":"GetResourceConfigHistoryResponse",
-        "documentation":"<p>The output for the <a>GetResourceConfigHistory</a> action.</p>"
-      },
+      "input":{"shape":"GetResourceConfigHistoryRequest"},
+      "output":{"shape":"GetResourceConfigHistoryResponse"},
       "errors":[
-        {
-          "shape":"ValidationException",
-          "exception":true,
-          "documentation":"<p>The requested action is not valid.</p>"
-        },
-        {
-          "shape":"InvalidTimeRangeException",
-          "exception":true,
-          "documentation":"<p>The specified time range is not valid. The earlier time is not chronologically before the later time.</p>"
-        },
-        {
-          "shape":"InvalidLimitException",
-          "exception":true,
-          "documentation":"<p>The specified limit is outside the allowable range.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.</p>"
-        },
-        {
-          "shape":"NoAvailableConfigurationRecorderException",
-          "exception":true,
-          "documentation":"<p>There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.</p>"
-        },
-        {
-          "shape":"ResourceNotDiscoveredException",
-          "exception":true,
-          "documentation":"<p>You have specified a resource that is either unknown or has not been discovered.</p>"
-        }
+        {"shape":"ValidationException"},
+        {"shape":"InvalidTimeRangeException"},
+        {"shape":"InvalidLimitException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"NoAvailableConfigurationRecorderException"},
+        {"shape":"ResourceNotDiscoveredException"}
       ],
       "documentation":"<p>Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval.</p> <p>The response is paginated, and by default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string, and to get the next page of results, run the request again and enter this string for the <code>nextToken</code> parameter.</p> <note> <p>Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified <code>limit</code>. In such cases, you can make another call, using the <code>nextToken</code>.</p> </note>"
     },
@@ -382,26 +234,10 @@
       "input":{"shape":"ListDiscoveredResourcesRequest"},
       "output":{"shape":"ListDiscoveredResourcesResponse"},
       "errors":[
-        {
-          "shape":"ValidationException",
-          "exception":true,
-          "documentation":"<p>The requested action is not valid.</p>"
-        },
-        {
-          "shape":"InvalidLimitException",
-          "exception":true,
-          "documentation":"<p>The specified limit is outside the allowable range.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.</p>"
-        },
-        {
-          "shape":"NoAvailableConfigurationRecorderException",
-          "exception":true,
-          "documentation":"<p>There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.</p>"
-        }
+        {"shape":"ValidationException"},
+        {"shape":"InvalidLimitException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"NoAvailableConfigurationRecorderException"}
       ],
       "documentation":"<p>Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that AWS Config has discovered, including those that AWS Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.</p> <note>You can specify either resource IDs or a resource name but not both in the same request.</note> <p>The response is paginated, and by default AWS Config lists 100 resource identifiers on each page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string, and to get the next page of results, run the request again and enter this string for the <code>nextToken</code> parameter.</p>"
     },
@@ -413,23 +249,11 @@
       },
       "input":{"shape":"PutConfigRuleRequest"},
       "errors":[
-        {
-          "shape":"InvalidParameterValueException",
-          "exception":true,
-          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
-        },
-        {
-          "shape":"MaxNumberOfConfigRulesExceededException",
-          "exception":true,
-          "documentation":"<p>Failed to add the AWS Config rule because the account already contains the maximum number of 25 rules. Consider deleting any deactivated rules before adding new rules.</p>"
-        },
-        {
-          "shape":"ResourceInUseException",
-          "exception":true,
-          "documentation":"<p>The rule is currently being deleted. Wait for a while and try again.</p>"
-        }
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"MaxNumberOfConfigRulesExceededException"},
+        {"shape":"ResourceInUseException"}
       ],
-      "documentation":"<p>Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. </p> <p>You can use this action for customer managed Config rules and AWS managed Config rules. A customer managed Config rule is a custom rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that is provided by AWS Config.</p> <p>If you are adding a new customer managed Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the <code>PutConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the <code>SourceIdentifier</code> key. This key is part of the <code>Source</code> object, which is part of the <code>ConfigRule</code> object. </p> <p>If you are adding a new AWS managed Config rule, specify the rule's identifier for the <code>SourceIdentifier</code> key. To reference AWS managed Config rule identifiers, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">Using AWS Managed Config Rules</a>.</p> <p>For any new rule that you add, specify the <code>ConfigRuleName</code> in the <code>ConfigRule</code> object. Do not specify the <code>ConfigRuleArn</code> or the <code>ConfigRuleId</code>. These values are generated by AWS Config for new rules.</p> <p>If you are updating a rule that you have added previously, specify the rule's <code>ConfigRuleName</code>, <code>ConfigRuleId</code>, or <code>ConfigRuleArn</code> in the <code>ConfigRule</code> data type that you use in this request.</p> <p>The maximum number of rules that AWS Config supports is 25.</p> <p>For more information about developing and using AWS Config rules, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html\">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p> <p></p>"
+      "documentation":"<p>Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. </p> <p>You can use this action for customer managed Config rules and AWS managed Config rules. A customer managed Config rule is a custom rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that is provided by AWS Config.</p> <p>If you are adding a new customer managed Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the <code>PutConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the <code>SourceIdentifier</code> key. This key is part of the <code>Source</code> object, which is part of the <code>ConfigRule</code> object. </p> <p>If you are adding a new AWS managed Config rule, specify the rule's identifier for the <code>SourceIdentifier</code> key. To reference AWS managed Config rule identifiers, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">Using AWS Managed Config Rules</a>.</p> <p>For any new rule that you add, specify the <code>ConfigRuleName</code> in the <code>ConfigRule</code> object. Do not specify the <code>ConfigRuleArn</code> or the <code>ConfigRuleId</code>. These values are generated by AWS Config for new rules.</p> <p>If you are updating a rule that you have added previously, specify the rule's <code>ConfigRuleName</code>, <code>ConfigRuleId</code>, or <code>ConfigRuleArn</code> in the <code>ConfigRule</code> data type that you use in this request.</p> <p>The maximum number of rules that AWS Config supports is 25.</p> <p>For more information about developing and using AWS Config rules, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html\">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p> <p/>"
     },
     "PutConfigurationRecorder":{
       "name":"PutConfigurationRecorder",
@@ -437,31 +261,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"PutConfigurationRecorderRequest",
-        "documentation":"<p>The input for the <a>PutConfigurationRecorder</a> action.</p>"
-      },
+      "input":{"shape":"PutConfigurationRecorderRequest"},
       "errors":[
-        {
-          "shape":"MaxNumberOfConfigurationRecordersExceededException",
-          "exception":true,
-          "documentation":"<p>You have reached the limit on the number of recorders you can create.</p>"
-        },
-        {
-          "shape":"InvalidConfigurationRecorderNameException",
-          "exception":true,
-          "documentation":"<p>You have provided a configuration recorder name that is not valid.</p>"
-        },
-        {
-          "shape":"InvalidRoleException",
-          "exception":true,
-          "documentation":"<p>You have provided a null or empty role ARN.</p>"
-        },
-        {
-          "shape":"InvalidRecordingGroupException",
-          "exception":true,
-          "documentation":"<p>AWS Config throws an exception if the recording group does not contain a valid list of resource types. Invalid values could also be incorrectly formatted.</p>"
-        }
+        {"shape":"MaxNumberOfConfigurationRecordersExceededException"},
+        {"shape":"InvalidConfigurationRecorderNameException"},
+        {"shape":"InvalidRoleException"},
+        {"shape":"InvalidRecordingGroupException"}
       ],
       "documentation":"<p>Creates a new configuration recorder to record the selected resource configurations.</p> <p>You can use this action to change the role <code>roleARN</code> and/or the <code>recordingGroup</code> of an existing recorder. To change the role, call the action on the existing configuration recorder and specify a role.</p> <note> <p>Currently, you can specify only one configuration recorder per account.</p> <p>If <code>ConfigurationRecorder</code> does not have the <b>recordingGroup</b> parameter specified, the default is to record all supported resource types.</p> </note>"
     },
@@ -471,46 +276,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"PutDeliveryChannelRequest",
-        "documentation":"<p>The input for the <a>PutDeliveryChannel</a> action.</p>"
-      },
+      "input":{"shape":"PutDeliveryChannelRequest"},
       "errors":[
-        {
-          "shape":"MaxNumberOfDeliveryChannelsExceededException",
-          "exception":true,
-          "documentation":"<p>You have reached the limit on the number of delivery channels you can create.</p>"
-        },
-        {
-          "shape":"NoAvailableConfigurationRecorderException",
-          "exception":true,
-          "documentation":"<p>There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.</p>"
-        },
-        {
-          "shape":"InvalidDeliveryChannelNameException",
-          "exception":true,
-          "documentation":"<p>The specified delivery channel name is not valid.</p>"
-        },
-        {
-          "shape":"NoSuchBucketException",
-          "exception":true,
-          "documentation":"<p>The specified Amazon S3 bucket does not exist.</p>"
-        },
-        {
-          "shape":"InvalidS3KeyPrefixException",
-          "exception":true,
-          "documentation":"<p>The specified Amazon S3 key prefix is not valid.</p>"
-        },
-        {
-          "shape":"InvalidSNSTopicARNException",
-          "exception":true,
-          "documentation":"<p>The specified Amazon SNS topic does not exist.</p>"
-        },
-        {
-          "shape":"InsufficientDeliveryPolicyException",
-          "exception":true,
-          "documentation":"<p>Your Amazon S3 bucket policy does not permit AWS Config to write to it.</p>"
-        }
+        {"shape":"MaxNumberOfDeliveryChannelsExceededException"},
+        {"shape":"NoAvailableConfigurationRecorderException"},
+        {"shape":"InvalidDeliveryChannelNameException"},
+        {"shape":"NoSuchBucketException"},
+        {"shape":"InvalidS3KeyPrefixException"},
+        {"shape":"InvalidSNSTopicARNException"},
+        {"shape":"InsufficientDeliveryPolicyException"}
       ],
       "documentation":"<p>Creates a new delivery channel object to deliver the configuration information to an Amazon S3 bucket, and to an Amazon SNS topic. </p> <p>You can use this action to change the Amazon S3 bucket or an Amazon SNS topic of the existing delivery channel. To change the Amazon S3 bucket or an Amazon SNS topic, call this action and specify the changed values for the S3 bucket and the SNS topic. If you specify a different value for either the S3 bucket or the SNS topic, this action will keep the existing value for the parameter that is not changed. </p> <note> <p>Currently, you can specify only one delivery channel per account.</p> </note>"
     },
@@ -523,21 +297,9 @@
       "input":{"shape":"PutEvaluationsRequest"},
       "output":{"shape":"PutEvaluationsResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterValueException",
-          "exception":true,
-          "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
-        },
-        {
-          "shape":"InvalidResultTokenException",
-          "exception":true,
-          "documentation":"<p>The result token is invalid.</p>"
-        },
-        {
-          "shape":"NoSuchConfigRuleException",
-          "exception":true,
-          "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
-        }
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidResultTokenException"},
+        {"shape":"NoSuchConfigRuleException"}
       ],
       "documentation":"<p>Used by an AWS Lambda function to deliver evaluation results to AWS Config. This action is required in every AWS Lambda function that is invoked by an AWS Config rule.</p>"
     },
@@ -547,21 +309,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"StartConfigurationRecorderRequest",
-        "documentation":"<p>The input for the <a>StartConfigurationRecorder</a> action.</p>"
-      },
+      "input":{"shape":"StartConfigurationRecorderRequest"},
       "errors":[
-        {
-          "shape":"NoSuchConfigurationRecorderException",
-          "exception":true,
-          "documentation":"<p>You have specified a configuration recorder that does not exist.</p>"
-        },
-        {
-          "shape":"NoAvailableDeliveryChannelException",
-          "exception":true,
-          "documentation":"<p>There is no delivery channel available to record configurations.</p>"
-        }
+        {"shape":"NoSuchConfigurationRecorderException"},
+        {"shape":"NoAvailableDeliveryChannelException"}
       ],
       "documentation":"<p>Starts recording configurations of the AWS resources you have selected to record in your AWS account.</p> <p>You must have created at least one delivery channel to successfully start the configuration recorder.</p>"
     },
@@ -571,16 +322,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"StopConfigurationRecorderRequest",
-        "documentation":"<p> <p>The input for the <a>StopConfigurationRecorder</a> action.</p> </p>"
-      },
+      "input":{"shape":"StopConfigurationRecorderRequest"},
       "errors":[
-        {
-          "shape":"NoSuchConfigurationRecorderException",
-          "exception":true,
-          "documentation":"<p>You have specified a configuration recorder that does not exist.</p>"
-        }
+        {"shape":"NoSuchConfigurationRecorderException"}
       ],
       "documentation":"<p>Stops recording configurations of the AWS resources you have selected to record in your AWS account.</p>"
     }
@@ -594,8 +338,8 @@
     "Boolean":{"type":"boolean"},
     "ChannelName":{
       "type":"string",
-      "min":1,
-      "max":256
+      "max":256,
+      "min":1
     },
     "ChronologicalOrder":{
       "type":"string",
@@ -675,8 +419,8 @@
     "ComplianceResourceTypes":{
       "type":"list",
       "member":{"shape":"StringWithCharLimit256"},
-      "min":0,
-      "max":100
+      "max":100,
+      "min":0
     },
     "ComplianceSummariesByResourceType":{
       "type":"list",
@@ -726,8 +470,8 @@
     "ComplianceTypes":{
       "type":"list",
       "member":{"shape":"ComplianceType"},
-      "min":0,
-      "max":3
+      "max":3,
+      "min":0
     },
     "ConfigExportDeliveryInfo":{
       "type":"structure",
@@ -847,8 +591,8 @@
     "ConfigRuleNames":{
       "type":"list",
       "member":{"shape":"StringWithCharLimit64"},
-      "min":0,
-      "max":25
+      "max":25,
+      "min":0
     },
     "ConfigRuleState":{
       "type":"string",
@@ -919,7 +663,7 @@
         },
         "configurationItemMD5Hash":{
           "shape":"ConfigurationItemMD5Hash",
-          "documentation":"<p>Unique MD5 hash that represents the configuration item's state.</p> <p>You can use MD5 hash to compare the states of two or more configuration items that are associated with the same resource.</p>"
+          "documentation":"<p>Unique MD5 hash that represents the configuration item&apos;s state.</p> <p>You can use MD5 hash to compare the states of two or more configuration items that are associated with the same resource.</p>"
         },
         "arn":{
           "shape":"ARN",
@@ -988,7 +732,7 @@
       "members":{
         "name":{
           "shape":"RecorderName",
-          "documentation":"<p>The name of the recorder. By default, AWS Config automatically assigns the name \"default\" when creating the configuration recorder. You cannot change the assigned name.</p>"
+          "documentation":"<p>The name of the recorder. By default, AWS Config automatically assigns the name &quot;default&quot; when creating the configuration recorder. You cannot change the assigned name.</p>"
         },
         "roleARN":{
           "shape":"String",
@@ -1100,7 +844,7 @@
       "members":{
         "name":{
           "shape":"ChannelName",
-          "documentation":"<p>The name of the delivery channel. By default, AWS Config automatically assigns the name \"default\" when creating the delivery channel. You cannot change the assigned name. </p>"
+          "documentation":"<p>The name of the delivery channel. By default, AWS Config automatically assigns the name &quot;default&quot; when creating the delivery channel. You cannot change the assigned name. </p>"
         },
         "s3BucketName":{
           "shape":"String",
@@ -1355,8 +1099,8 @@
     "EarlierTime":{"type":"timestamp"},
     "EmptiableStringWithCharLimit256":{
       "type":"string",
-      "min":0,
-      "max":256
+      "max":256,
+      "min":0
     },
     "Evaluation":{
       "type":"structure",
@@ -1459,8 +1203,8 @@
     "Evaluations":{
       "type":"list",
       "member":{"shape":"Evaluation"},
-      "min":0,
-      "max":100
+      "max":100,
+      "min":0
     },
     "EventSource":{
       "type":"string",
@@ -1622,99 +1366,99 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>Your Amazon S3 bucket policy does not permit AWS Config to write to it.</p>"
+      "documentation":"<p>Your Amazon S3 bucket policy does not permit AWS Config to write to it.</p>",
+      "exception":true
     },
     "Integer":{"type":"integer"},
     "InvalidConfigurationRecorderNameException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>You have provided a configuration recorder name that is not valid.</p>"
+      "documentation":"<p>You have provided a configuration recorder name that is not valid.</p>",
+      "exception":true
     },
     "InvalidDeliveryChannelNameException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified delivery channel name is not valid.</p>"
+      "documentation":"<p>The specified delivery channel name is not valid.</p>",
+      "exception":true
     },
     "InvalidLimitException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified limit is outside the allowable range.</p>"
+      "documentation":"<p>The specified limit is outside the allowable range.</p>",
+      "exception":true
     },
     "InvalidNextTokenException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.</p>"
+      "documentation":"<p>The specified next token is invalid. Specify the <code>nextToken</code> string that was returned in the previous response to get the next page of results.</p>",
+      "exception":true
     },
     "InvalidParameterValueException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>"
+      "documentation":"<p>One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.</p>",
+      "exception":true
     },
     "InvalidRecordingGroupException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>AWS Config throws an exception if the recording group does not contain a valid list of resource types. Invalid values could also be incorrectly formatted.</p>"
+      "documentation":"<p>AWS Config throws an exception if the recording group does not contain a valid list of resource types. Invalid values could also be incorrectly formatted.</p>",
+      "exception":true
     },
     "InvalidResultTokenException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The result token is invalid.</p>"
+      "documentation":"<p>The result token is invalid.</p>",
+      "exception":true
     },
     "InvalidRoleException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>You have provided a null or empty role ARN.</p>"
+      "documentation":"<p>You have provided a null or empty role ARN.</p>",
+      "exception":true
     },
     "InvalidS3KeyPrefixException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified Amazon S3 key prefix is not valid.</p>"
+      "documentation":"<p>The specified Amazon S3 key prefix is not valid.</p>",
+      "exception":true
     },
     "InvalidSNSTopicARNException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified Amazon SNS topic does not exist.</p>"
+      "documentation":"<p>The specified Amazon SNS topic does not exist.</p>",
+      "exception":true
     },
     "InvalidTimeRangeException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified time range is not valid. The earlier time is not chronologically before the later time.</p>"
+      "documentation":"<p>The specified time range is not valid. The earlier time is not chronologically before the later time.</p>",
+      "exception":true
     },
     "LastDeliveryChannelDeleteFailedException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>You cannot delete the delivery channel you specified because the configuration recorder is running.</p>"
+      "documentation":"<p>You cannot delete the delivery channel you specified because the configuration recorder is running.</p>",
+      "exception":true
     },
     "LaterTime":{"type":"timestamp"},
     "Limit":{
       "type":"integer",
-      "min":0,
-      "max":100
+      "max":100,
+      "min":0
     },
     "ListDiscoveredResourcesRequest":{
       "type":"structure",
@@ -1763,22 +1507,22 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>Failed to add the AWS Config rule because the account already contains the maximum number of 25 rules. Consider deleting any deactivated rules before adding new rules.</p>"
+      "documentation":"<p>Failed to add the AWS Config rule because the account already contains the maximum number of 25 rules. Consider deleting any deactivated rules before adding new rules.</p>",
+      "exception":true
     },
     "MaxNumberOfConfigurationRecordersExceededException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>You have reached the limit on the number of recorders you can create.</p>"
+      "documentation":"<p>You have reached the limit on the number of recorders you can create.</p>",
+      "exception":true
     },
     "MaxNumberOfDeliveryChannelsExceededException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>You have reached the limit on the number of delivery channels you can create.</p>"
+      "documentation":"<p>You have reached the limit on the number of delivery channels you can create.</p>",
+      "exception":true
     },
     "MaximumExecutionFrequency":{
       "type":"string",
@@ -1803,50 +1547,50 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.</p>"
+      "documentation":"<p>There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.</p>",
+      "exception":true
     },
     "NoAvailableDeliveryChannelException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>There is no delivery channel available to record configurations.</p>"
+      "documentation":"<p>There is no delivery channel available to record configurations.</p>",
+      "exception":true
     },
     "NoRunningConfigurationRecorderException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>There is no configuration recorder running.</p>"
+      "documentation":"<p>There is no configuration recorder running.</p>",
+      "exception":true
     },
     "NoSuchBucketException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified Amazon S3 bucket does not exist.</p>"
+      "documentation":"<p>The specified Amazon S3 bucket does not exist.</p>",
+      "exception":true
     },
     "NoSuchConfigRuleException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>"
+      "documentation":"<p>One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.</p>",
+      "exception":true
     },
     "NoSuchConfigurationRecorderException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>You have specified a configuration recorder that does not exist.</p>"
+      "documentation":"<p>You have specified a configuration recorder that does not exist.</p>",
+      "exception":true
     },
     "NoSuchDeliveryChannelException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>You have specified a delivery channel that does not exist.</p>"
+      "documentation":"<p>You have specified a delivery channel that does not exist.</p>",
+      "exception":true
     },
     "OrderingTimestamp":{"type":"timestamp"},
     "Owner":{
@@ -1910,8 +1654,8 @@
     },
     "RecorderName":{
       "type":"string",
-      "min":1,
-      "max":256
+      "max":256,
+      "min":1
     },
     "RecorderStatus":{
       "type":"string",
@@ -2004,22 +1748,23 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The rule is currently being deleted. Wait for a while and try again.</p>"
+      "documentation":"<p>The rule is currently being deleted. Wait for a while and try again.</p>",
+      "exception":true
     },
     "ResourceName":{"type":"string"},
     "ResourceNotDiscoveredException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>You have specified a resource that is either unknown or has not been discovered.</p>"
+      "documentation":"<p>You have specified a resource that is either unknown or has not been discovered.</p>",
+      "exception":true
     },
     "ResourceType":{
       "type":"string",
       "enum":[
         "AWS::EC2::CustomerGateway",
         "AWS::EC2::EIP",
+        "AWS::EC2::Host",
         "AWS::EC2::Instance",
         "AWS::EC2::InternetGateway",
         "AWS::EC2::NetworkAcl",
@@ -2041,8 +1786,8 @@
     "ResourceTypes":{
       "type":"list",
       "member":{"shape":"StringWithCharLimit256"},
-      "min":0,
-      "max":100
+      "max":100,
+      "min":0
     },
     "Scope":{
       "type":"structure",
@@ -2101,8 +1846,8 @@
     "SourceDetails":{
       "type":"list",
       "member":{"shape":"SourceDetail"},
-      "min":0,
-      "max":25
+      "max":25,
+      "min":0
     },
     "StartConfigurationRecorderRequest":{
       "type":"structure",
@@ -2129,18 +1874,18 @@
     "String":{"type":"string"},
     "StringWithCharLimit128":{
       "type":"string",
-      "min":1,
-      "max":128
+      "max":128,
+      "min":1
     },
     "StringWithCharLimit256":{
       "type":"string",
-      "min":1,
-      "max":256
+      "max":256,
+      "min":1
     },
     "StringWithCharLimit64":{
       "type":"string",
-      "min":1,
-      "max":64
+      "max":64,
+      "min":1
     },
     "Tags":{
       "type":"map",
@@ -2151,12 +1896,11 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The requested action is not valid.</p>"
+      "documentation":"<p>The requested action is not valid.</p>",
+      "exception":true
     },
     "Value":{"type":"string"},
     "Version":{"type":"string"}
   },
-  "examples":{
-  }
+  "documentation":"<fullname>AWS Config</fullname> <p>AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an Elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported AWS Resources</a>.</p> <p>You can access and manage AWS Config through the AWS Management Console, the AWS Command Line Interface (AWS CLI), the AWS Config API, or the AWS SDKs for AWS Config</p> <p>This reference guide contains documentation for the AWS Config API and the AWS CLI commands that you can use to manage AWS Config.</p> <p>The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p> <p>For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html\">What Is AWS Config?</a> in the <i>AWS Config Developer Guide</i>.</p>"
 }
