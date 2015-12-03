@@ -3,13 +3,12 @@
   "metadata":{
     "apiVersion":"2013-01-10",
     "endpointPrefix":"rds",
+    "protocol":"query",
     "serviceAbbreviation":"Amazon RDS",
     "serviceFullName":"Amazon Relational Database Service",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://rds.amazonaws.com/doc/2013-01-10/",
-    "protocol":"query"
+    "xmlNamespace":"http://rds.amazonaws.com/doc/2013-01-10/"
   },
-  "documentation":"<fullname>Amazon Relational Database Service</fullname> <p> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique. </p> <p> Amazon RDS gives you access to the capabilities of a familiar MySQL or Oracle database server. This means the code, applications, and tools you already use today with your existing MySQL or Oracle databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB Instance. Amazon RDS is flexible: you can scale your database instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use. </p> <p> This is the <i>Amazon RDS API Reference</i>. It contains a comprehensive description of all Amazon RDS Query APIs and data types. Note that this API is asynchronous and some actions may require polling to determine when an action has been applied. See the parameter description to determine if a change is applied immediately or on the next instance reboot or during the maintenance window. To get started with Amazon RDS, go to the <a href=\"http://docs.amazonwebservices.com/AmazonRDS/latest/GettingStartedGuide/\">Amazon RDS Getting Started Guide</a>. For more information on Amazon RDS concepts and usage scenarios, go to the <a href=\"http://docs.amazonwebservices.com/AmazonRDS/latest/UserGuide/\">Amazon RDS User Guide</a>. </p>",
   "operations":{
     "AddSourceIdentifierToSubscription":{
       "name":"AddSourceIdentifierToSubscription",
@@ -17,37 +16,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddSourceIdentifierToSubscriptionMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"AddSourceIdentifierToSubscriptionMessage"},
       "output":{
         "shape":"AddSourceIdentifierToSubscriptionResult",
-        "wrapper":true,
-        "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>",
         "resultWrapper":"AddSourceIdentifierToSubscriptionResult"
       },
       "errors":[
-        {
-          "shape":"SubscriptionNotFoundFault",
-          "error":{
-            "code":"SubscriptionNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The subscription name does not exist.</p>"
-        },
-        {
-          "shape":"SourceNotFoundFault",
-          "error":{
-            "code":"SourceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested source could not be found.</p>"
-        }
+        {"shape":"SubscriptionNotFoundFault"},
+        {"shape":"SourceNotFoundFault"}
       ],
       "documentation":"<p>Adds a source identifier to an existing RDS event notification subscription.</p>"
     },
@@ -57,31 +33,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddTagsToResourceMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"AddTagsToResourceMessage"},
       "errors":[
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        },
-        {
-          "shape":"DBSnapshotNotFoundFault",
-          "error":{
-            "code":"DBSnapshotNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
-        }
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"DBSnapshotNotFoundFault"}
       ],
       "documentation":"<p> Adds metadata tags to a DB Instance. These tags can also be used with cost allocation reporting to track cost associated with a DB Instance.</p> <p>For an overview on tagging DB Instances, see <a href=\"http://docs.amazonwebservices.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">DB Instance Tags.</a></p>"
     },
@@ -91,57 +46,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AuthorizeDBSecurityGroupIngressMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"AuthorizeDBSecurityGroupIngressMessage"},
       "output":{
         "shape":"AuthorizeDBSecurityGroupIngressResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>DescribeDBSecurityGroups</a></li> <li><a>AuthorizeDBSecurityGroupIngress</a></li> <li><a>CreateDBSecurityGroup</a></li> <li><a>RevokeDBSecurityGroupIngress</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSecurityGroups</a> action.</p>",
         "resultWrapper":"AuthorizeDBSecurityGroupIngressResult"
       },
       "errors":[
-        {
-          "shape":"DBSecurityGroupNotFoundFault",
-          "error":{
-            "code":"DBSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
-        },
-        {
-          "shape":"InvalidDBSecurityGroupStateFault",
-          "error":{
-            "code":"InvalidDBSecurityGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The state of the DB security group does not allow deletion. </p>"
-        },
-        {
-          "shape":"AuthorizationAlreadyExistsFault",
-          "error":{
-            "code":"AuthorizationAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified CIDRIP or EC2 security group is already authorized for the specified DB security group. </p>"
-        },
-        {
-          "shape":"AuthorizationQuotaExceededFault",
-          "error":{
-            "code":"AuthorizationQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> DB security group authorization quota has been reached. </p>"
-        }
+        {"shape":"DBSecurityGroupNotFoundFault"},
+        {"shape":"InvalidDBSecurityGroupStateFault"},
+        {"shape":"AuthorizationAlreadyExistsFault"},
+        {"shape":"AuthorizationQuotaExceededFault"}
       ],
       "documentation":"<p> Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC Security Groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC). </p> <note> You cannot authorize ingress from an EC2 security group in one Region to an Amazon RDS DB Instance in another. You cannot authorize ingress from a VPC security group in one VPC to an Amazon RDS DB Instance in another. </note> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>"
     },
@@ -151,57 +65,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CopyDBSnapshotMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"CopyDBSnapshotMessage"},
       "output":{
         "shape":"CopyDBSnapshotResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBSnapshot</a></li> <li><a>DeleteDBSnapshot</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action.</p>",
         "resultWrapper":"CopyDBSnapshotResult"
       },
       "errors":[
-        {
-          "shape":"DBSnapshotAlreadyExistsFault",
-          "error":{
-            "code":"DBSnapshotAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> is already used by an existing snapshot. </p>"
-        },
-        {
-          "shape":"DBSnapshotNotFoundFault",
-          "error":{
-            "code":"DBSnapshotNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
-        },
-        {
-          "shape":"InvalidDBSnapshotStateFault",
-          "error":{
-            "code":"InvalidDBSnapshotState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The state of the DB snapshot does not allow deletion. </p>"
-        },
-        {
-          "shape":"SnapshotQuotaExceededFault",
-          "error":{
-            "code":"SnapshotQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB snapshots. </p>"
-        }
+        {"shape":"DBSnapshotAlreadyExistsFault"},
+        {"shape":"DBSnapshotNotFoundFault"},
+        {"shape":"InvalidDBSnapshotStateFault"},
+        {"shape":"SnapshotQuotaExceededFault"}
       ],
       "documentation":"<p> Copies the specified DBSnapshot. The source DBSnapshot must be in the \"available\" state. </p>"
     },
@@ -211,137 +84,24 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDBInstanceMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"CreateDBInstanceMessage"},
       "output":{
         "shape":"CreateDBInstanceResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
         "resultWrapper":"CreateDBInstanceResult"
       },
       "errors":[
-        {
-          "shape":"DBInstanceAlreadyExistsFault",
-          "error":{
-            "code":"DBInstanceAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> User already has a DB instance with the given identifier. </p>"
-        },
-        {
-          "shape":"InsufficientDBInstanceCapacityFault",
-          "error":{
-            "code":"InsufficientDBInstanceCapacity",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Specified DB instance class is not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"DBParameterGroupNotFoundFault",
-          "error":{
-            "code":"DBParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
-        },
-        {
-          "shape":"DBSecurityGroupNotFoundFault",
-          "error":{
-            "code":"DBSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
-        },
-        {
-          "shape":"InstanceQuotaExceededFault",
-          "error":{
-            "code":"InstanceQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB instances. </p>"
-        },
-        {
-          "shape":"StorageQuotaExceededFault",
-          "error":{
-            "code":"StorageQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed amount of storage available across all DB instances. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupNotFoundFault",
-          "error":{
-            "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupDoesNotCoverEnoughAZs",
-          "error":{
-            "code":"DBSubnetGroupDoesNotCoverEnoughAZs",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
-        },
-        {
-          "shape":"InvalidSubnet",
-          "error":{
-            "code":"InvalidSubnet",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. </p>"
-        },
-        {
-          "shape":"InvalidVPCNetworkStateFault",
-          "error":{
-            "code":"InvalidVPCNetworkStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> DB subnet group does not cover all Availability Zones after it is created because users' change. </p>"
-        },
-        {
-          "shape":"ProvisionedIopsNotAvailableInAZFault",
-          "error":{
-            "code":"ProvisionedIopsNotAvailableInAZFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Provisioned IOPS not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"OptionGroupNotFoundFault",
-          "error":{
-            "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified option group could not be found. </p>"
-        }
+        {"shape":"DBInstanceAlreadyExistsFault"},
+        {"shape":"InsufficientDBInstanceCapacityFault"},
+        {"shape":"DBParameterGroupNotFoundFault"},
+        {"shape":"DBSecurityGroupNotFoundFault"},
+        {"shape":"InstanceQuotaExceededFault"},
+        {"shape":"StorageQuotaExceededFault"},
+        {"shape":"DBSubnetGroupNotFoundFault"},
+        {"shape":"DBSubnetGroupDoesNotCoverEnoughAZs"},
+        {"shape":"InvalidSubnet"},
+        {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"ProvisionedIopsNotAvailableInAZFault"},
+        {"shape":"OptionGroupNotFoundFault"}
       ],
       "documentation":"<p> Creates a new DB instance. </p>"
     },
@@ -354,151 +114,23 @@
       "input":{"shape":"CreateDBInstanceReadReplicaMessage"},
       "output":{
         "shape":"CreateDBInstanceReadReplicaResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
         "resultWrapper":"CreateDBInstanceReadReplicaResult"
       },
       "errors":[
-        {
-          "shape":"DBInstanceAlreadyExistsFault",
-          "error":{
-            "code":"DBInstanceAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> User already has a DB instance with the given identifier. </p>"
-        },
-        {
-          "shape":"InsufficientDBInstanceCapacityFault",
-          "error":{
-            "code":"InsufficientDBInstanceCapacity",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Specified DB instance class is not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"DBParameterGroupNotFoundFault",
-          "error":{
-            "code":"DBParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
-        },
-        {
-          "shape":"DBSecurityGroupNotFoundFault",
-          "error":{
-            "code":"DBSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
-        },
-        {
-          "shape":"InstanceQuotaExceededFault",
-          "error":{
-            "code":"InstanceQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB instances. </p>"
-        },
-        {
-          "shape":"StorageQuotaExceededFault",
-          "error":{
-            "code":"StorageQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed amount of storage available across all DB instances. </p>"
-        },
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        },
-        {
-          "shape":"InvalidDBInstanceStateFault",
-          "error":{
-            "code":"InvalidDBInstanceState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupNotFoundFault",
-          "error":{
-            "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupDoesNotCoverEnoughAZs",
-          "error":{
-            "code":"DBSubnetGroupDoesNotCoverEnoughAZs",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
-        },
-        {
-          "shape":"InvalidSubnet",
-          "error":{
-            "code":"InvalidSubnet",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. </p>"
-        },
-        {
-          "shape":"InvalidVPCNetworkStateFault",
-          "error":{
-            "code":"InvalidVPCNetworkStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> DB subnet group does not cover all Availability Zones after it is created because users' change. </p>"
-        },
-        {
-          "shape":"ProvisionedIopsNotAvailableInAZFault",
-          "error":{
-            "code":"ProvisionedIopsNotAvailableInAZFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Provisioned IOPS not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"OptionGroupNotFoundFault",
-          "error":{
-            "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified option group could not be found. </p>"
-        }
+        {"shape":"DBInstanceAlreadyExistsFault"},
+        {"shape":"InsufficientDBInstanceCapacityFault"},
+        {"shape":"DBParameterGroupNotFoundFault"},
+        {"shape":"DBSecurityGroupNotFoundFault"},
+        {"shape":"InstanceQuotaExceededFault"},
+        {"shape":"StorageQuotaExceededFault"},
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"DBSubnetGroupNotFoundFault"},
+        {"shape":"DBSubnetGroupDoesNotCoverEnoughAZs"},
+        {"shape":"InvalidSubnet"},
+        {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"ProvisionedIopsNotAvailableInAZFault"},
+        {"shape":"OptionGroupNotFoundFault"}
       ],
       "documentation":"<p> Creates a DB Instance that acts as a Read Replica of a source DB Instance. </p> <p> All Read Replica DB Instances are created as Single-AZ deployments with backups disabled. All other DB Instance attributes (including DB Security Groups and DB Parameter Groups) are inherited from the source DB Instance, except as specified below. </p> <important> <p> The source DB Instance must have backup retention enabled. </p> </important>"
     },
@@ -508,37 +140,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDBParameterGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"CreateDBParameterGroupMessage"},
       "output":{
         "shape":"CreateDBParameterGroupResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the <a>CreateDBParameterGroup</a> action. </p> <p> This data type is used as a request parameter in the <a>DeleteDBParameterGroup</a> action, and as a response element in the <a>DescribeDBParameterGroups</a> action. </p>",
         "resultWrapper":"CreateDBParameterGroupResult"
       },
       "errors":[
-        {
-          "shape":"DBParameterGroupQuotaExceededFault",
-          "error":{
-            "code":"DBParameterGroupQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB parameter groups. </p>"
-        },
-        {
-          "shape":"DBParameterGroupAlreadyExistsFault",
-          "error":{
-            "code":"DBParameterGroupAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> A DB parameter group with the same name exists. </p>"
-        }
+        {"shape":"DBParameterGroupQuotaExceededFault"},
+        {"shape":"DBParameterGroupAlreadyExistsFault"}
       ],
       "documentation":"<p> Creates a new DB Parameter Group. </p> <p> A DB Parameter Group is initially created with the default parameters for the database engine used by the DB Instance. To provide custom values for any of the parameters, you must modify the group after creating it using <i>ModifyDBParameterGroup</i>. Once you've created a DB Parameter Group, you need to associate it with your DB Instance using <i>ModifyDBInstance</i>. When you associate a new DB Parameter Group with a running DB Instance, you need to reboot the DB Instance for the new DB Parameter Group and associated settings to take effect. </p>"
     },
@@ -548,47 +157,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDBSecurityGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"CreateDBSecurityGroupMessage"},
       "output":{
         "shape":"CreateDBSecurityGroupResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>DescribeDBSecurityGroups</a></li> <li><a>AuthorizeDBSecurityGroupIngress</a></li> <li><a>CreateDBSecurityGroup</a></li> <li><a>RevokeDBSecurityGroupIngress</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSecurityGroups</a> action.</p>",
         "resultWrapper":"CreateDBSecurityGroupResult"
       },
       "errors":[
-        {
-          "shape":"DBSecurityGroupAlreadyExistsFault",
-          "error":{
-            "code":"DBSecurityGroupAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> A DB security group with the name specified in <i>DBSecurityGroupName</i> already exists. </p>"
-        },
-        {
-          "shape":"DBSecurityGroupQuotaExceededFault",
-          "error":{
-            "code":"QuotaExceeded.DBSecurityGroup",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB security groups. </p>"
-        },
-        {
-          "shape":"DBSecurityGroupNotSupportedFault",
-          "error":{
-            "code":"DBSecurityGroupNotSupported",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> A DB security group is not allowed for this action. </p>"
-        }
+        {"shape":"DBSecurityGroupAlreadyExistsFault"},
+        {"shape":"DBSecurityGroupQuotaExceededFault"},
+        {"shape":"DBSecurityGroupNotSupportedFault"}
       ],
       "documentation":"<p> Creates a new DB Security Group. DB Security Groups control access to a DB Instance. </p>"
     },
@@ -598,57 +175,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDBSnapshotMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"CreateDBSnapshotMessage"},
       "output":{
         "shape":"CreateDBSnapshotResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBSnapshot</a></li> <li><a>DeleteDBSnapshot</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action.</p>",
         "resultWrapper":"CreateDBSnapshotResult"
       },
       "errors":[
-        {
-          "shape":"DBSnapshotAlreadyExistsFault",
-          "error":{
-            "code":"DBSnapshotAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> is already used by an existing snapshot. </p>"
-        },
-        {
-          "shape":"InvalidDBInstanceStateFault",
-          "error":{
-            "code":"InvalidDBInstanceState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>"
-        },
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        },
-        {
-          "shape":"SnapshotQuotaExceededFault",
-          "error":{
-            "code":"SnapshotQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB snapshots. </p>"
-        }
+        {"shape":"DBSnapshotAlreadyExistsFault"},
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"SnapshotQuotaExceededFault"}
       ],
       "documentation":"<p> Creates a DBSnapshot. The source DBInstance must be in \"available\" state. </p>"
     },
@@ -658,67 +194,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDBSubnetGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"CreateDBSubnetGroupMessage"},
       "output":{
         "shape":"CreateDBSubnetGroupResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBSubnetGroup</a></li> <li><a>ModifyDBSubnetGroup</a></li> <li><a>DescribeDBSubnetGroups</a></li> <li><a>DeleteDBSubnetGroup</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action.</p>",
         "resultWrapper":"CreateDBSubnetGroupResult"
       },
       "errors":[
-        {
-          "shape":"DBSubnetGroupAlreadyExistsFault",
-          "error":{
-            "code":"DBSubnetGroupAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSubnetGroupName</i> is already used by an existing DB subnet group. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupQuotaExceededFault",
-          "error":{
-            "code":"DBSubnetGroupQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB subnet groups. </p>"
-        },
-        {
-          "shape":"DBSubnetQuotaExceededFault",
-          "error":{
-            "code":"DBSubnetQuotaExceededFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of subnets in a DB subnet groups. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupDoesNotCoverEnoughAZs",
-          "error":{
-            "code":"DBSubnetGroupDoesNotCoverEnoughAZs",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
-        },
-        {
-          "shape":"InvalidSubnet",
-          "error":{
-            "code":"InvalidSubnet",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. </p>"
-        }
+        {"shape":"DBSubnetGroupAlreadyExistsFault"},
+        {"shape":"DBSubnetGroupQuotaExceededFault"},
+        {"shape":"DBSubnetQuotaExceededFault"},
+        {"shape":"DBSubnetGroupDoesNotCoverEnoughAZs"},
+        {"shape":"InvalidSubnet"}
       ],
       "documentation":"<p> Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region. </p>"
     },
@@ -728,87 +214,19 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateEventSubscriptionMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"CreateEventSubscriptionMessage"},
       "output":{
         "shape":"CreateEventSubscriptionResult",
-        "wrapper":true,
-        "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>",
         "resultWrapper":"CreateEventSubscriptionResult"
       },
       "errors":[
-        {
-          "shape":"EventSubscriptionQuotaExceededFault",
-          "error":{
-            "code":"EventSubscriptionQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You have reached the maximum number of event subscriptions.</p>"
-        },
-        {
-          "shape":"SubscriptionAlreadyExistFault",
-          "error":{
-            "code":"SubscriptionAlreadyExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The supplied subscription name already exists.</p>"
-        },
-        {
-          "shape":"SNSInvalidTopicFault",
-          "error":{
-            "code":"SNSInvalidTopic",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>SNS has responded that there is a problem with the SND topic specified.</p>"
-        },
-        {
-          "shape":"SNSNoAuthorizationFault",
-          "error":{
-            "code":"SNSNoAuthorization",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You do not have permission to publish to the SNS topic ARN.</p>"
-        },
-        {
-          "shape":"SNSTopicArnNotFoundFault",
-          "error":{
-            "code":"SNSTopicArnNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The SNS topic ARN does not exist.</p>"
-        },
-        {
-          "shape":"SubscriptionCategoryNotFoundFault",
-          "error":{
-            "code":"SubscriptionCategoryNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The supplied category does not exist.</p>"
-        },
-        {
-          "shape":"SourceNotFoundFault",
-          "error":{
-            "code":"SourceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested source could not be found.</p>"
-        }
+        {"shape":"EventSubscriptionQuotaExceededFault"},
+        {"shape":"SubscriptionAlreadyExistFault"},
+        {"shape":"SNSInvalidTopicFault"},
+        {"shape":"SNSNoAuthorizationFault"},
+        {"shape":"SNSTopicArnNotFoundFault"},
+        {"shape":"SubscriptionCategoryNotFoundFault"},
+        {"shape":"SourceNotFoundFault"}
       ],
       "documentation":"<p>Creates an RDS event notification subscription. This action requires a topic ARN (Amazon Resource Name) created by either the RDS console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the type of source (SourceType) you want to be notified of, provide a list of RDS sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup.</p> <p>If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you will be notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you will receive notice of the events for that source type for all your RDS sources. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all RDS sources belonging to your customer account.</p>"
     },
@@ -818,37 +236,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateOptionGroupMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"CreateOptionGroupMessage"},
       "output":{
         "shape":"CreateOptionGroupResult",
-        "wrapper":true,
-        "documentation":"<p> </p>",
         "resultWrapper":"CreateOptionGroupResult"
       },
       "errors":[
-        {
-          "shape":"OptionGroupAlreadyExistsFault",
-          "error":{
-            "code":"OptionGroupAlreadyExistsFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The option group you are trying to create already exists. </p>"
-        },
-        {
-          "shape":"OptionGroupQuotaExceededFault",
-          "error":{
-            "code":"OptionGroupQuotaExceededFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The quota of 20 option groups was exceeded for this AWS account. </p>"
-        }
+        {"shape":"OptionGroupAlreadyExistsFault"},
+        {"shape":"OptionGroupQuotaExceededFault"}
       ],
       "documentation":"<p> Creates a new Option Group. </p>"
     },
@@ -858,57 +253,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDBInstanceMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DeleteDBInstanceMessage"},
       "output":{
         "shape":"DeleteDBInstanceResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
         "resultWrapper":"DeleteDBInstanceResult"
       },
       "errors":[
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        },
-        {
-          "shape":"InvalidDBInstanceStateFault",
-          "error":{
-            "code":"InvalidDBInstanceState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>"
-        },
-        {
-          "shape":"DBSnapshotAlreadyExistsFault",
-          "error":{
-            "code":"DBSnapshotAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> is already used by an existing snapshot. </p>"
-        },
-        {
-          "shape":"SnapshotQuotaExceededFault",
-          "error":{
-            "code":"SnapshotQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB snapshots. </p>"
-        }
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"DBSnapshotAlreadyExistsFault"},
+        {"shape":"SnapshotQuotaExceededFault"}
       ],
       "documentation":"<p> The DeleteDBInstance API deletes a previously provisioned RDS instance. A successful response from the web service indicates the request was received correctly. If a final DBSnapshot is requested the status of the RDS instance will be \"deleting\" until the DBSnapshot is created. DescribeDBInstance is used to monitor the status of this operation. This cannot be canceled or reverted once submitted. </p>"
     },
@@ -918,31 +272,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDBParameterGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DeleteDBParameterGroupMessage"},
       "errors":[
-        {
-          "shape":"InvalidDBParameterGroupStateFault",
-          "error":{
-            "code":"InvalidDBParameterGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The DB parameter group cannot be deleted because it is in use. </p>"
-        },
-        {
-          "shape":"DBParameterGroupNotFoundFault",
-          "error":{
-            "code":"DBParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
-        }
+        {"shape":"InvalidDBParameterGroupStateFault"},
+        {"shape":"DBParameterGroupNotFoundFault"}
       ],
       "documentation":"<p> Deletes a specified DBParameterGroup. The DBParameterGroup cannot be associated with any RDS instances to be deleted. </p> <note> The specified DB Parameter Group cannot be associated with any DB Instances. </note>"
     },
@@ -952,31 +285,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDBSecurityGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DeleteDBSecurityGroupMessage"},
       "errors":[
-        {
-          "shape":"InvalidDBSecurityGroupStateFault",
-          "error":{
-            "code":"InvalidDBSecurityGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The state of the DB security group does not allow deletion. </p>"
-        },
-        {
-          "shape":"DBSecurityGroupNotFoundFault",
-          "error":{
-            "code":"DBSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
-        }
+        {"shape":"InvalidDBSecurityGroupStateFault"},
+        {"shape":"DBSecurityGroupNotFoundFault"}
       ],
       "documentation":"<p> Deletes a DB Security Group. </p> <note>The specified DB Security Group must not be associated with any DB Instances.</note>"
     },
@@ -986,37 +298,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDBSnapshotMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DeleteDBSnapshotMessage"},
       "output":{
         "shape":"DeleteDBSnapshotResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBSnapshot</a></li> <li><a>DeleteDBSnapshot</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action.</p>",
         "resultWrapper":"DeleteDBSnapshotResult"
       },
       "errors":[
-        {
-          "shape":"InvalidDBSnapshotStateFault",
-          "error":{
-            "code":"InvalidDBSnapshotState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The state of the DB snapshot does not allow deletion. </p>"
-        },
-        {
-          "shape":"DBSnapshotNotFoundFault",
-          "error":{
-            "code":"DBSnapshotNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
-        }
+        {"shape":"InvalidDBSnapshotStateFault"},
+        {"shape":"DBSnapshotNotFoundFault"}
       ],
       "documentation":"<p> Deletes a DBSnapshot. </p> <note>The DBSnapshot must be in the <code>available</code> state to be deleted.</note>"
     },
@@ -1026,41 +315,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDBSubnetGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DeleteDBSubnetGroupMessage"},
       "errors":[
-        {
-          "shape":"InvalidDBSubnetGroupStateFault",
-          "error":{
-            "code":"InvalidDBSubnetGroupStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The DB subnet group cannot be deleted because it is in use. </p>"
-        },
-        {
-          "shape":"InvalidDBSubnetStateFault",
-          "error":{
-            "code":"InvalidDBSubnetStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The DB subnet is not in the <i>available</i> state. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupNotFoundFault",
-          "error":{
-            "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>"
-        }
+        {"shape":"InvalidDBSubnetGroupStateFault"},
+        {"shape":"InvalidDBSubnetStateFault"},
+        {"shape":"DBSubnetGroupNotFoundFault"}
       ],
       "documentation":"<p> Deletes a DB subnet group. </p> <note>The specified database subnet group must not be associated with any DB instances.</note>"
     },
@@ -1070,37 +329,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteEventSubscriptionMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"DeleteEventSubscriptionMessage"},
       "output":{
         "shape":"DeleteEventSubscriptionResult",
-        "wrapper":true,
-        "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>",
         "resultWrapper":"DeleteEventSubscriptionResult"
       },
       "errors":[
-        {
-          "shape":"SubscriptionNotFoundFault",
-          "error":{
-            "code":"SubscriptionNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The subscription name does not exist.</p>"
-        },
-        {
-          "shape":"InvalidEventSubscriptionStateFault",
-          "error":{
-            "code":"InvalidEventSubscriptionState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>This error can occur if someone else is modifying a subscription. You should retry the action.</p>"
-        }
+        {"shape":"SubscriptionNotFoundFault"},
+        {"shape":"InvalidEventSubscriptionStateFault"}
       ],
       "documentation":"<p>Deletes an RDS event notification subscription.</p>"
     },
@@ -1110,31 +346,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteOptionGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DeleteOptionGroupMessage"},
       "errors":[
-        {
-          "shape":"OptionGroupNotFoundFault",
-          "error":{
-            "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified option group could not be found. </p>"
-        },
-        {
-          "shape":"InvalidOptionGroupStateFault",
-          "error":{
-            "code":"InvalidOptionGroupStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The option group is not in the <i>available</i> state. </p>"
-        }
+        {"shape":"OptionGroupNotFoundFault"},
+        {"shape":"InvalidOptionGroupStateFault"}
       ],
       "documentation":"<p> Deletes an existing Option Group. </p>"
     },
@@ -1147,7 +362,6 @@
       "input":{"shape":"DescribeDBEngineVersionsMessage"},
       "output":{
         "shape":"DBEngineVersionMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeDBEngineVersions</a> action. </p>",
         "resultWrapper":"DescribeDBEngineVersionsResult"
       },
       "documentation":"<p> Returns a list of the available DB engines. </p>"
@@ -1158,26 +372,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeDBInstancesMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeDBInstancesMessage"},
       "output":{
         "shape":"DBInstanceMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeDBInstances</a> action. </p>",
         "resultWrapper":"DescribeDBInstancesResult"
       },
       "errors":[
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        }
+        {"shape":"DBInstanceNotFoundFault"}
       ],
       "documentation":"<p> Returns information about provisioned RDS instances. This API supports pagination. </p>"
     },
@@ -1187,26 +388,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeDBParameterGroupsMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeDBParameterGroupsMessage"},
       "output":{
         "shape":"DBParameterGroupsMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeDBParameterGroups</a> action. </p>",
         "resultWrapper":"DescribeDBParameterGroupsResult"
       },
       "errors":[
-        {
-          "shape":"DBParameterGroupNotFoundFault",
-          "error":{
-            "code":"DBParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
-        }
+        {"shape":"DBParameterGroupNotFoundFault"}
       ],
       "documentation":"<p> Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified DBParameterGroup. </p>"
     },
@@ -1219,20 +407,10 @@
       "input":{"shape":"DescribeDBParametersMessage"},
       "output":{
         "shape":"DBParameterGroupDetails",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeDBParameters</a> action. </p>",
         "resultWrapper":"DescribeDBParametersResult"
       },
       "errors":[
-        {
-          "shape":"DBParameterGroupNotFoundFault",
-          "error":{
-            "code":"DBParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
-        }
+        {"shape":"DBParameterGroupNotFoundFault"}
       ],
       "documentation":"<p> Returns the detailed parameter list for a particular DBParameterGroup. </p>"
     },
@@ -1242,26 +420,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeDBSecurityGroupsMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeDBSecurityGroupsMessage"},
       "output":{
         "shape":"DBSecurityGroupMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeDBSecurityGroups</a> action. </p>",
         "resultWrapper":"DescribeDBSecurityGroupsResult"
       },
       "errors":[
-        {
-          "shape":"DBSecurityGroupNotFoundFault",
-          "error":{
-            "code":"DBSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
-        }
+        {"shape":"DBSecurityGroupNotFoundFault"}
       ],
       "documentation":"<p> Returns a list of DBSecurityGroup descriptions. If a DBSecurityGroupName is specified, the list will contain only the descriptions of the specified DBSecurityGroup. </p> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>"
     },
@@ -1271,26 +436,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeDBSnapshotsMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeDBSnapshotsMessage"},
       "output":{
         "shape":"DBSnapshotMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeDBSnapshots</a> action. </p>",
         "resultWrapper":"DescribeDBSnapshotsResult"
       },
       "errors":[
-        {
-          "shape":"DBSnapshotNotFoundFault",
-          "error":{
-            "code":"DBSnapshotNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
-        }
+        {"shape":"DBSnapshotNotFoundFault"}
       ],
       "documentation":"<p> Returns information about DBSnapshots. This API supports pagination. </p>"
     },
@@ -1300,26 +452,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeDBSubnetGroupsMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeDBSubnetGroupsMessage"},
       "output":{
         "shape":"DBSubnetGroupMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeDBSubnetGroups</a> action. </p>",
         "resultWrapper":"DescribeDBSubnetGroupsResult"
       },
       "errors":[
-        {
-          "shape":"DBSubnetGroupNotFoundFault",
-          "error":{
-            "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>"
-        }
+        {"shape":"DBSubnetGroupNotFoundFault"}
       ],
       "documentation":"<p> Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup. </p> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>"
     },
@@ -1329,14 +468,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeEngineDefaultParametersMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeEngineDefaultParametersMessage"},
       "output":{
         "shape":"DescribeEngineDefaultParametersResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeEngineDefaultParameters</a> action. </p>",
         "resultWrapper":"DescribeEngineDefaultParametersResult"
       },
       "documentation":"<p> Returns the default engine and system parameter information for the specified database engine. </p>"
@@ -1347,13 +481,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeEventCategoriesMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"DescribeEventCategoriesMessage"},
       "output":{
         "shape":"EventCategoriesMessage",
-        "documentation":"<p>Data returned from the <b>DescribeEventCategories</b> action.</p>",
         "resultWrapper":"DescribeEventCategoriesResult"
       },
       "documentation":"<p>Displays a list of categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in the <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\"> Events</a> topic in the Amazon RDS User Guide.</p>"
@@ -1364,26 +494,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeEventSubscriptionsMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"DescribeEventSubscriptionsMessage"},
       "output":{
         "shape":"EventSubscriptionsMessage",
-        "documentation":"<p>Data returned by the <b>DescribeEventSubscriptions</b> action.</p>",
         "resultWrapper":"DescribeEventSubscriptionsResult"
       },
       "errors":[
-        {
-          "shape":"SubscriptionNotFoundFault",
-          "error":{
-            "code":"SubscriptionNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The subscription name does not exist.</p>"
-        }
+        {"shape":"SubscriptionNotFoundFault"}
       ],
       "documentation":"<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status. </p> <p>If you specify a SubscriptionName, lists the description for that subscription.</p>"
     },
@@ -1393,13 +510,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeEventsMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeEventsMessage"},
       "output":{
         "shape":"EventsMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeEvents</a> action. </p>",
         "resultWrapper":"DescribeEventsResult"
       },
       "documentation":"<p> Returns events related to DB instances, DB security groups, DB Snapshots, and DB parameter groups for the past 14 days. Events specific to a particular DB Iinstance, DB security group, DB Snapshot, or DB parameter group can be obtained by providing the source identifier as a parameter. By default, the past hour of events are returned. </p> <p>You can see a list of event categories and source types in the <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events </a> topic in the Amazon RDS User Guide.</p>"
@@ -1410,13 +523,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeOptionGroupOptionsMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeOptionGroupOptionsMessage"},
       "output":{
         "shape":"OptionGroupOptionsMessage",
-        "documentation":"<p> </p>",
         "resultWrapper":"DescribeOptionGroupOptionsResult"
       },
       "documentation":"<p> Describes all available options. </p>"
@@ -1427,26 +536,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeOptionGroupsMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeOptionGroupsMessage"},
       "output":{
         "shape":"OptionGroups",
-        "documentation":"<p> List of option groups. </p>",
         "resultWrapper":"DescribeOptionGroupsResult"
       },
       "errors":[
-        {
-          "shape":"OptionGroupNotFoundFault",
-          "error":{
-            "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified option group could not be found. </p>"
-        }
+        {"shape":"OptionGroupNotFoundFault"}
       ],
       "documentation":"<p> Describes the available option groups. </p>"
     },
@@ -1456,13 +552,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeOrderableDBInstanceOptionsMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeOrderableDBInstanceOptionsMessage"},
       "output":{
         "shape":"OrderableDBInstanceOptionsMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeOrderableDBInstanceOptions</a> action. </p>",
         "resultWrapper":"DescribeOrderableDBInstanceOptionsResult"
       },
       "documentation":"<p> Returns a list of orderable DB Instance options for the specified engine. </p>"
@@ -1473,26 +565,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeReservedDBInstancesMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeReservedDBInstancesMessage"},
       "output":{
         "shape":"ReservedDBInstanceMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeReservedDBInstances</a> action. </p>",
         "resultWrapper":"DescribeReservedDBInstancesResult"
       },
       "errors":[
-        {
-          "shape":"ReservedDBInstanceNotFoundFault",
-          "error":{
-            "code":"ReservedDBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified reserved DB Instance not found. </p>"
-        }
+        {"shape":"ReservedDBInstanceNotFoundFault"}
       ],
       "documentation":"<p> Returns information about reserved DB Instances for this account, or about a specified reserved DB Instance. </p>"
     },
@@ -1502,26 +581,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeReservedDBInstancesOfferingsMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"DescribeReservedDBInstancesOfferingsMessage"},
       "output":{
         "shape":"ReservedDBInstancesOfferingMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeReservedDBInstancesOfferings</a> action. </p>",
         "resultWrapper":"DescribeReservedDBInstancesOfferingsResult"
       },
       "errors":[
-        {
-          "shape":"ReservedDBInstancesOfferingNotFoundFault",
-          "error":{
-            "code":"ReservedDBInstancesOfferingNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Specified offering does not exist. </p>"
-        }
+        {"shape":"ReservedDBInstancesOfferingNotFoundFault"}
       ],
       "documentation":"<p> Lists available reserved DB Instance offerings. </p>"
     },
@@ -1531,36 +597,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListTagsForResourceMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"ListTagsForResourceMessage"},
       "output":{
         "shape":"TagListMessage",
-        "documentation":"<p></p>",
         "resultWrapper":"ListTagsForResourceResult"
       },
       "errors":[
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        },
-        {
-          "shape":"DBSnapshotNotFoundFault",
-          "error":{
-            "code":"DBSnapshotNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
-        }
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"DBSnapshotNotFoundFault"}
       ],
       "documentation":"<p> Lists all tags on a DB Instance.</p> <p>For an overview on tagging DB Instances, see <a href=\"http://docs.amazonwebservices.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">DB Instance Tags.</a></p>"
     },
@@ -1570,137 +614,24 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyDBInstanceMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"ModifyDBInstanceMessage"},
       "output":{
         "shape":"ModifyDBInstanceResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
         "resultWrapper":"ModifyDBInstanceResult"
       },
       "errors":[
-        {
-          "shape":"InvalidDBInstanceStateFault",
-          "error":{
-            "code":"InvalidDBInstanceState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>"
-        },
-        {
-          "shape":"InvalidDBSecurityGroupStateFault",
-          "error":{
-            "code":"InvalidDBSecurityGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The state of the DB security group does not allow deletion. </p>"
-        },
-        {
-          "shape":"DBInstanceAlreadyExistsFault",
-          "error":{
-            "code":"DBInstanceAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> User already has a DB instance with the given identifier. </p>"
-        },
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        },
-        {
-          "shape":"DBSecurityGroupNotFoundFault",
-          "error":{
-            "code":"DBSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
-        },
-        {
-          "shape":"DBParameterGroupNotFoundFault",
-          "error":{
-            "code":"DBParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
-        },
-        {
-          "shape":"InsufficientDBInstanceCapacityFault",
-          "error":{
-            "code":"InsufficientDBInstanceCapacity",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Specified DB instance class is not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"StorageQuotaExceededFault",
-          "error":{
-            "code":"StorageQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed amount of storage available across all DB instances. </p>"
-        },
-        {
-          "shape":"InvalidVPCNetworkStateFault",
-          "error":{
-            "code":"InvalidVPCNetworkStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> DB subnet group does not cover all Availability Zones after it is created because users' change. </p>"
-        },
-        {
-          "shape":"ProvisionedIopsNotAvailableInAZFault",
-          "error":{
-            "code":"ProvisionedIopsNotAvailableInAZFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Provisioned IOPS not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"OptionGroupNotFoundFault",
-          "error":{
-            "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified option group could not be found. </p>"
-        },
-        {
-          "shape":"DBUpgradeDependencyFailureFault",
-          "error":{
-            "code":"DBUpgradeDependencyFailure",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The DB upgrade failed because a resource the DB depends on could not be modified. </p>"
-        }
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"InvalidDBSecurityGroupStateFault"},
+        {"shape":"DBInstanceAlreadyExistsFault"},
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"DBSecurityGroupNotFoundFault"},
+        {"shape":"DBParameterGroupNotFoundFault"},
+        {"shape":"InsufficientDBInstanceCapacityFault"},
+        {"shape":"StorageQuotaExceededFault"},
+        {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"ProvisionedIopsNotAvailableInAZFault"},
+        {"shape":"OptionGroupNotFoundFault"},
+        {"shape":"DBUpgradeDependencyFailureFault"}
       ],
       "documentation":"<p> Modify settings for a DB Instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. </p>"
     },
@@ -1710,36 +641,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyDBParameterGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"ModifyDBParameterGroupMessage"},
       "output":{
         "shape":"DBParameterGroupNameMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>ModifyDBParameterGroup</a> or <a>ResetDBParameterGroup</a> action. </p>",
         "resultWrapper":"ModifyDBParameterGroupResult"
       },
       "errors":[
-        {
-          "shape":"DBParameterGroupNotFoundFault",
-          "error":{
-            "code":"DBParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
-        },
-        {
-          "shape":"InvalidDBParameterGroupStateFault",
-          "error":{
-            "code":"InvalidDBParameterGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The DB parameter group cannot be deleted because it is in use. </p>"
-        }
+        {"shape":"DBParameterGroupNotFoundFault"},
+        {"shape":"InvalidDBParameterGroupStateFault"}
       ],
       "documentation":"<p> Modifies the parameters of a DBParameterGroup. To modify more than one parameter submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request. </p> <note> <p> The <code>apply-immediate</code> method can be used only for dynamic parameters; the <code>pending-reboot</code> method can be used with MySQL and Oracle DB Instances for either dynamic or static parameters. For Microsoft SQL Server DB Instances, the <code>pending-reboot</code> method can be used only for static parameters. </p> </note>"
     },
@@ -1749,67 +658,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyDBSubnetGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"ModifyDBSubnetGroupMessage"},
       "output":{
         "shape":"ModifyDBSubnetGroupResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBSubnetGroup</a></li> <li><a>ModifyDBSubnetGroup</a></li> <li><a>DescribeDBSubnetGroups</a></li> <li><a>DeleteDBSubnetGroup</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action.</p>",
         "resultWrapper":"ModifyDBSubnetGroupResult"
       },
       "errors":[
-        {
-          "shape":"DBSubnetGroupNotFoundFault",
-          "error":{
-            "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>"
-        },
-        {
-          "shape":"DBSubnetQuotaExceededFault",
-          "error":{
-            "code":"DBSubnetQuotaExceededFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of subnets in a DB subnet groups. </p>"
-        },
-        {
-          "shape":"SubnetAlreadyInUse",
-          "error":{
-            "code":"SubnetAlreadyInUse",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The DB subnet is already in use in the Availability Zone. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupDoesNotCoverEnoughAZs",
-          "error":{
-            "code":"DBSubnetGroupDoesNotCoverEnoughAZs",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
-        },
-        {
-          "shape":"InvalidSubnet",
-          "error":{
-            "code":"InvalidSubnet",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. </p>"
-        }
+        {"shape":"DBSubnetGroupNotFoundFault"},
+        {"shape":"DBSubnetQuotaExceededFault"},
+        {"shape":"SubnetAlreadyInUse"},
+        {"shape":"DBSubnetGroupDoesNotCoverEnoughAZs"},
+        {"shape":"InvalidSubnet"}
       ],
       "documentation":"<p> Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region. </p>"
     },
@@ -1819,77 +678,18 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyEventSubscriptionMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"ModifyEventSubscriptionMessage"},
       "output":{
         "shape":"ModifyEventSubscriptionResult",
-        "wrapper":true,
-        "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>",
         "resultWrapper":"ModifyEventSubscriptionResult"
       },
       "errors":[
-        {
-          "shape":"EventSubscriptionQuotaExceededFault",
-          "error":{
-            "code":"EventSubscriptionQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You have reached the maximum number of event subscriptions.</p>"
-        },
-        {
-          "shape":"SubscriptionNotFoundFault",
-          "error":{
-            "code":"SubscriptionNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The subscription name does not exist.</p>"
-        },
-        {
-          "shape":"SNSInvalidTopicFault",
-          "error":{
-            "code":"SNSInvalidTopic",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>SNS has responded that there is a problem with the SND topic specified.</p>"
-        },
-        {
-          "shape":"SNSNoAuthorizationFault",
-          "error":{
-            "code":"SNSNoAuthorization",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You do not have permission to publish to the SNS topic ARN.</p>"
-        },
-        {
-          "shape":"SNSTopicArnNotFoundFault",
-          "error":{
-            "code":"SNSTopicArnNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The SNS topic ARN does not exist.</p>"
-        },
-        {
-          "shape":"SubscriptionCategoryNotFoundFault",
-          "error":{
-            "code":"SubscriptionCategoryNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The supplied category does not exist.</p>"
-        }
+        {"shape":"EventSubscriptionQuotaExceededFault"},
+        {"shape":"SubscriptionNotFoundFault"},
+        {"shape":"SNSInvalidTopicFault"},
+        {"shape":"SNSNoAuthorizationFault"},
+        {"shape":"SNSTopicArnNotFoundFault"},
+        {"shape":"SubscriptionCategoryNotFoundFault"}
       ],
       "documentation":"<p>Modifies an existing RDS event notification subscription. Note that you cannot modify the source identifiers using this call; to change source identifiers for a subscription, use the <a>AddSourceIdentifierToSubscription</a> and <a>RemoveSourceIdentifierFromSubscription</a> calls.</p> <p>You can see a list of the event categories for a given SourceType in the <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events</a> topic in the Amazon RDS User Guide or by using the <b>DescribeEventCategories</b> action.</p>"
     },
@@ -1899,37 +699,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyOptionGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"ModifyOptionGroupMessage"},
       "output":{
         "shape":"ModifyOptionGroupResult",
-        "wrapper":true,
-        "documentation":"<p> </p>",
         "resultWrapper":"ModifyOptionGroupResult"
       },
       "errors":[
-        {
-          "shape":"InvalidOptionGroupStateFault",
-          "error":{
-            "code":"InvalidOptionGroupStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The option group is not in the <i>available</i> state. </p>"
-        },
-        {
-          "shape":"OptionGroupNotFoundFault",
-          "error":{
-            "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified option group could not be found. </p>"
-        }
+        {"shape":"InvalidOptionGroupStateFault"},
+        {"shape":"OptionGroupNotFoundFault"}
       ],
       "documentation":"<p> Modifies an existing Option Group. </p>"
     },
@@ -1939,37 +716,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"PromoteReadReplicaMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"PromoteReadReplicaMessage"},
       "output":{
         "shape":"PromoteReadReplicaResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
         "resultWrapper":"PromoteReadReplicaResult"
       },
       "errors":[
-        {
-          "shape":"InvalidDBInstanceStateFault",
-          "error":{
-            "code":"InvalidDBInstanceState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>"
-        },
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        }
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"DBInstanceNotFoundFault"}
       ],
       "documentation":"<p> Promotes a Read Replica DB Instance to a standalone DB Instance. </p>"
     },
@@ -1979,47 +733,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"PurchaseReservedDBInstancesOfferingMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"PurchaseReservedDBInstancesOfferingMessage"},
       "output":{
         "shape":"PurchaseReservedDBInstancesOfferingResult",
-        "wrapper":true,
-        "documentation":"<p> This data type is used as a response element in the <a>DescribeReservedDBInstances</a> and <a>PurchaseReservedDBInstancesOffering</a> actions. </p>",
         "resultWrapper":"PurchaseReservedDBInstancesOfferingResult"
       },
       "errors":[
-        {
-          "shape":"ReservedDBInstancesOfferingNotFoundFault",
-          "error":{
-            "code":"ReservedDBInstancesOfferingNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Specified offering does not exist. </p>"
-        },
-        {
-          "shape":"ReservedDBInstanceAlreadyExistsFault",
-          "error":{
-            "code":"ReservedDBInstanceAlreadyExists",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> User already has a reservation with the given identifier. </p>"
-        },
-        {
-          "shape":"ReservedDBInstanceQuotaExceededFault",
-          "error":{
-            "code":"ReservedDBInstanceQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would exceed the user's DB Instance quota. </p>"
-        }
+        {"shape":"ReservedDBInstancesOfferingNotFoundFault"},
+        {"shape":"ReservedDBInstanceAlreadyExistsFault"},
+        {"shape":"ReservedDBInstanceQuotaExceededFault"}
       ],
       "documentation":"<p> Purchases a reserved DB Instance offering. </p>"
     },
@@ -2029,37 +751,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RebootDBInstanceMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"RebootDBInstanceMessage"},
       "output":{
         "shape":"RebootDBInstanceResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
         "resultWrapper":"RebootDBInstanceResult"
       },
       "errors":[
-        {
-          "shape":"InvalidDBInstanceStateFault",
-          "error":{
-            "code":"InvalidDBInstanceState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>"
-        },
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        }
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"DBInstanceNotFoundFault"}
       ],
       "documentation":"<p> Reboots a previously provisioned RDS instance. This API results in the application of modified DBParameterGroup parameters with ApplyStatus of pending-reboot to the RDS instance. This action is taken as soon as possible, and results in a momentary outage to the RDS instance during which the RDS instance status is set to rebooting. If the RDS instance is configured for MultiAZ, it is possible that the reboot will be conducted through a failover. A DBInstance event is created when the reboot is completed. </p>"
     },
@@ -2069,37 +768,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RemoveSourceIdentifierFromSubscriptionMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"RemoveSourceIdentifierFromSubscriptionMessage"},
       "output":{
         "shape":"RemoveSourceIdentifierFromSubscriptionResult",
-        "wrapper":true,
-        "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>",
         "resultWrapper":"RemoveSourceIdentifierFromSubscriptionResult"
       },
       "errors":[
-        {
-          "shape":"SubscriptionNotFoundFault",
-          "error":{
-            "code":"SubscriptionNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The subscription name does not exist.</p>"
-        },
-        {
-          "shape":"SourceNotFoundFault",
-          "error":{
-            "code":"SourceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested source could not be found.</p>"
-        }
+        {"shape":"SubscriptionNotFoundFault"},
+        {"shape":"SourceNotFoundFault"}
       ],
       "documentation":"<p>Removes a source identifier from an existing RDS event notification subscription.</p>"
     },
@@ -2109,31 +785,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RemoveTagsFromResourceMessage",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"RemoveTagsFromResourceMessage"},
       "errors":[
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        },
-        {
-          "shape":"DBSnapshotNotFoundFault",
-          "error":{
-            "code":"DBSnapshotNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
-        }
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"DBSnapshotNotFoundFault"}
       ],
       "documentation":"<p> Removes metadata tags from a DB Instance.</p> <p>For an overview on tagging DB Instances, see <a href=\"http://docs.amazonwebservices.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">DB Instance Tags.</a></p>"
     },
@@ -2143,36 +798,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ResetDBParameterGroupMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"ResetDBParameterGroupMessage"},
       "output":{
         "shape":"DBParameterGroupNameMessage",
-        "documentation":"<p> Contains the result of a successful invocation of the <a>ModifyDBParameterGroup</a> or <a>ResetDBParameterGroup</a> action. </p>",
         "resultWrapper":"ResetDBParameterGroupResult"
       },
       "errors":[
-        {
-          "shape":"InvalidDBParameterGroupStateFault",
-          "error":{
-            "code":"InvalidDBParameterGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The DB parameter group cannot be deleted because it is in use. </p>"
-        },
-        {
-          "shape":"DBParameterGroupNotFoundFault",
-          "error":{
-            "code":"DBParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
-        }
+        {"shape":"InvalidDBParameterGroupStateFault"},
+        {"shape":"DBParameterGroupNotFoundFault"}
       ],
       "documentation":"<p> Modifies the parameters of a DBParameterGroup to the engine/system default value. To reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the entire DBParameterGroup specify the DBParameterGroup name and ResetAllParameters parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. </p>"
     },
@@ -2182,147 +815,25 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RestoreDBInstanceFromDBSnapshotMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"RestoreDBInstanceFromDBSnapshotMessage"},
       "output":{
         "shape":"RestoreDBInstanceFromDBSnapshotResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
         "resultWrapper":"RestoreDBInstanceFromDBSnapshotResult"
       },
       "errors":[
-        {
-          "shape":"DBInstanceAlreadyExistsFault",
-          "error":{
-            "code":"DBInstanceAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> User already has a DB instance with the given identifier. </p>"
-        },
-        {
-          "shape":"DBSnapshotNotFoundFault",
-          "error":{
-            "code":"DBSnapshotNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
-        },
-        {
-          "shape":"InstanceQuotaExceededFault",
-          "error":{
-            "code":"InstanceQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB instances. </p>"
-        },
-        {
-          "shape":"InsufficientDBInstanceCapacityFault",
-          "error":{
-            "code":"InsufficientDBInstanceCapacity",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Specified DB instance class is not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"InvalidDBSnapshotStateFault",
-          "error":{
-            "code":"InvalidDBSnapshotState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The state of the DB snapshot does not allow deletion. </p>"
-        },
-        {
-          "shape":"StorageQuotaExceededFault",
-          "error":{
-            "code":"StorageQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed amount of storage available across all DB instances. </p>"
-        },
-        {
-          "shape":"InvalidVPCNetworkStateFault",
-          "error":{
-            "code":"InvalidVPCNetworkStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> DB subnet group does not cover all Availability Zones after it is created because users' change. </p>"
-        },
-        {
-          "shape":"InvalidRestoreFault",
-          "error":{
-            "code":"InvalidRestoreFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Cannot restore from vpc backup to non-vpc DB instance. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupNotFoundFault",
-          "error":{
-            "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupDoesNotCoverEnoughAZs",
-          "error":{
-            "code":"DBSubnetGroupDoesNotCoverEnoughAZs",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
-        },
-        {
-          "shape":"InvalidSubnet",
-          "error":{
-            "code":"InvalidSubnet",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. </p>"
-        },
-        {
-          "shape":"ProvisionedIopsNotAvailableInAZFault",
-          "error":{
-            "code":"ProvisionedIopsNotAvailableInAZFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Provisioned IOPS not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"OptionGroupNotFoundFault",
-          "error":{
-            "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified option group could not be found. </p>"
-        }
+        {"shape":"DBInstanceAlreadyExistsFault"},
+        {"shape":"DBSnapshotNotFoundFault"},
+        {"shape":"InstanceQuotaExceededFault"},
+        {"shape":"InsufficientDBInstanceCapacityFault"},
+        {"shape":"InvalidDBSnapshotStateFault"},
+        {"shape":"StorageQuotaExceededFault"},
+        {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"InvalidRestoreFault"},
+        {"shape":"DBSubnetGroupNotFoundFault"},
+        {"shape":"DBSubnetGroupDoesNotCoverEnoughAZs"},
+        {"shape":"InvalidSubnet"},
+        {"shape":"ProvisionedIopsNotAvailableInAZFault"},
+        {"shape":"OptionGroupNotFoundFault"}
       ],
       "documentation":"<p> Creates a new DB Instance from a DB snapshot. The target database is created from the source database restore point with the same configuration as the original source database, except that the new RDS instance is created with the default security group. </p>"
     },
@@ -2332,157 +843,26 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RestoreDBInstanceToPointInTimeMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"RestoreDBInstanceToPointInTimeMessage"},
       "output":{
         "shape":"RestoreDBInstanceToPointInTimeResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
         "resultWrapper":"RestoreDBInstanceToPointInTimeResult"
       },
       "errors":[
-        {
-          "shape":"DBInstanceAlreadyExistsFault",
-          "error":{
-            "code":"DBInstanceAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> User already has a DB instance with the given identifier. </p>"
-        },
-        {
-          "shape":"DBInstanceNotFoundFault",
-          "error":{
-            "code":"DBInstanceNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
-        },
-        {
-          "shape":"InstanceQuotaExceededFault",
-          "error":{
-            "code":"InstanceQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed number of DB instances. </p>"
-        },
-        {
-          "shape":"InsufficientDBInstanceCapacityFault",
-          "error":{
-            "code":"InsufficientDBInstanceCapacity",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Specified DB instance class is not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"InvalidDBInstanceStateFault",
-          "error":{
-            "code":"InvalidDBInstanceState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>"
-        },
-        {
-          "shape":"PointInTimeRestoreNotEnabledFault",
-          "error":{
-            "code":"PointInTimeRestoreNotEnabled",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>SourceDBInstanceIdentifier</i> refers to a DB instance with <i>BackupRetentionPeriod</i> equal to 0. </p>"
-        },
-        {
-          "shape":"StorageQuotaExceededFault",
-          "error":{
-            "code":"StorageQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Request would result in user exceeding the allowed amount of storage available across all DB instances. </p>"
-        },
-        {
-          "shape":"InvalidVPCNetworkStateFault",
-          "error":{
-            "code":"InvalidVPCNetworkStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> DB subnet group does not cover all Availability Zones after it is created because users' change. </p>"
-        },
-        {
-          "shape":"InvalidRestoreFault",
-          "error":{
-            "code":"InvalidRestoreFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Cannot restore from vpc backup to non-vpc DB instance. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupNotFoundFault",
-          "error":{
-            "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>"
-        },
-        {
-          "shape":"DBSubnetGroupDoesNotCoverEnoughAZs",
-          "error":{
-            "code":"DBSubnetGroupDoesNotCoverEnoughAZs",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
-        },
-        {
-          "shape":"InvalidSubnet",
-          "error":{
-            "code":"InvalidSubnet",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. </p>"
-        },
-        {
-          "shape":"ProvisionedIopsNotAvailableInAZFault",
-          "error":{
-            "code":"ProvisionedIopsNotAvailableInAZFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Provisioned IOPS not available in the specified Availability Zone. </p>"
-        },
-        {
-          "shape":"OptionGroupNotFoundFault",
-          "error":{
-            "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The specified option group could not be found. </p>"
-        }
+        {"shape":"DBInstanceAlreadyExistsFault"},
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"InstanceQuotaExceededFault"},
+        {"shape":"InsufficientDBInstanceCapacityFault"},
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"PointInTimeRestoreNotEnabledFault"},
+        {"shape":"StorageQuotaExceededFault"},
+        {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"InvalidRestoreFault"},
+        {"shape":"DBSubnetGroupNotFoundFault"},
+        {"shape":"DBSubnetGroupDoesNotCoverEnoughAZs"},
+        {"shape":"InvalidSubnet"},
+        {"shape":"ProvisionedIopsNotAvailableInAZFault"},
+        {"shape":"OptionGroupNotFoundFault"}
       ],
       "documentation":"<p> Restores a DB Instance to an arbitrary point-in-time. Users can restore to any point in time before the latestRestorableTime for up to backupRetentionPeriod days. The target database is created from the source database with the same configuration as the original database except that the DB instance is created with the default DB security group. </p>"
     },
@@ -2492,47 +872,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RevokeDBSecurityGroupIngressMessage",
-        "documentation":"<p> </p>"
-      },
+      "input":{"shape":"RevokeDBSecurityGroupIngressMessage"},
       "output":{
         "shape":"RevokeDBSecurityGroupIngressResult",
-        "wrapper":true,
-        "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>DescribeDBSecurityGroups</a></li> <li><a>AuthorizeDBSecurityGroupIngress</a></li> <li><a>CreateDBSecurityGroup</a></li> <li><a>RevokeDBSecurityGroupIngress</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSecurityGroups</a> action.</p>",
         "resultWrapper":"RevokeDBSecurityGroupIngressResult"
       },
       "errors":[
-        {
-          "shape":"DBSecurityGroupNotFoundFault",
-          "error":{
-            "code":"DBSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
-        },
-        {
-          "shape":"AuthorizationNotFoundFault",
-          "error":{
-            "code":"AuthorizationNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>"
-        },
-        {
-          "shape":"InvalidDBSecurityGroupStateFault",
-          "error":{
-            "code":"InvalidDBSecurityGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The state of the DB security group does not allow deletion. </p>"
-        }
+        {"shape":"DBSecurityGroupNotFoundFault"},
+        {"shape":"AuthorizationNotFoundFault"},
+        {"shape":"InvalidDBSecurityGroupStateFault"}
       ],
       "documentation":"<p> Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or EC2 or VPC Security Groups. Required parameters for this API are one of CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId). </p>"
     }
@@ -2554,7 +902,13 @@
           "documentation":"<p> The identifier of the event source to be added. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens. </p> <p>Constraints:</p> <ul> <li>If the source type is a DB instance, then a DBInstanceIdentifier must be supplied.</li> <li>If the source type is a DB security group, a DBSecurityGroupName must be supplied.</li> <li>If the source type is a DB parameter group, a DBParameterGroupName must be supplied.</li> <li>If the source type is a DB Snapshot, a DBSnapshotIdentifier must be supplied.</li> </ul>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
+    },
+    "AddSourceIdentifierToSubscriptionResult":{
+      "type":"structure",
+      "members":{
+        "EventSubscription":{"shape":"EventSubscription"}
+      }
     },
     "AddTagsToResourceMessage":{
       "type":"structure",
@@ -2572,7 +926,7 @@
           "documentation":"<p>The tags to be assigned to the DB Instance.</p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
     },
     "ApplyMethod":{
       "type":"string",
@@ -2585,37 +939,37 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The specified CIDRIP or EC2 security group is already authorized for the specified DB security group. </p>",
       "error":{
         "code":"AuthorizationAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The specified CIDRIP or EC2 security group is already authorized for the specified DB security group. </p>"
+      "exception":true
     },
     "AuthorizationNotFoundFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>",
       "error":{
         "code":"AuthorizationNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>"
+      "exception":true
     },
     "AuthorizationQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> DB security group authorization quota has been reached. </p>",
       "error":{
         "code":"AuthorizationQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> DB security group authorization quota has been reached. </p>"
+      "exception":true
     },
     "AuthorizeDBSecurityGroupIngressMessage":{
       "type":"structure",
@@ -2644,6 +998,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "AuthorizeDBSecurityGroupIngressResult":{
+      "type":"structure",
+      "members":{
+        "DBSecurityGroup":{"shape":"DBSecurityGroup"}
+      }
+    },
     "AvailabilityZone":{
       "type":"structure",
       "members":{
@@ -2656,8 +1016,8 @@
           "documentation":"<p> True indicates the availability zone is capable of provisioned IOPs. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> Contains Availability Zone information. </p> <p> This data type is used as an element in the following data type: <ul> <li><a>OrderableDBInstanceOption</a></li> </ul> </p>"
+      "documentation":"<p> Contains Availability Zone information. </p> <p> This data type is used as an element in the following data type: <ul> <li><a>OrderableDBInstanceOption</a></li> </ul> </p>",
+      "wrapper":true
     },
     "AvailabilityZoneList":{
       "type":"list",
@@ -2699,6 +1059,12 @@
         }
       },
       "documentation":"<p> </p>"
+    },
+    "CopyDBSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "DBSnapshot":{"shape":"DBSnapshot"}
+      }
     },
     "CreateDBInstanceMessage":{
       "type":"structure",
@@ -2757,7 +1123,7 @@
         },
         "PreferredMaintenanceWindow":{
           "shape":"String",
-          "documentation":"<p> The weekly time range (in UTC) during which system maintenance can occur. </p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p> Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. The following list shows the time blocks for each region from which the default maintenance windows are assigned. </p> <ul> <li> <b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li> <li> <b>US-West (Northern California) Region:</b> 06:00-14:00 UTC</li> <li> <b>EU (Ireland) Region:</b> 22:00-06:00 UTC</li> <li> <b>Asia Pacific (Singapore) Region:</b> 14:00-22:00 UTC</li> <li> <b>Asia Pacific (Tokyo) Region: </b> 17:00-03:00 UTC</li> </ul> <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
+          "documentation":"<p> The weekly time range (in UTC) during which system maintenance can occur. </p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p> Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. The following list shows the time blocks for each region from which the default maintenance windows are assigned. </p> <ul> <li><b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li> <li><b>US-West (Northern California) Region:</b> 06:00-14:00 UTC</li> <li><b>EU (Ireland) Region:</b> 22:00-06:00 UTC</li> <li><b>Asia Pacific (Singapore) Region:</b> 14:00-22:00 UTC</li> <li><b>Asia Pacific (Tokyo) Region: </b> 17:00-03:00 UTC</li> </ul> <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
         },
         "DBParameterGroupName":{
           "shape":"String",
@@ -2769,7 +1135,7 @@
         },
         "PreferredBackupWindow":{
           "shape":"String",
-          "documentation":"<p> The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p> Default: A 30-minute window selected at random from an 8-hour block of time per region. The following list shows the time blocks for each region from which the default backup windows are assigned. </p> <ul> <li> <b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li> <li> <b>US-West (Northern California) Region:</b> 06:00-14:00 UTC</li> <li> <b>EU (Ireland) Region:</b> 22:00-06:00 UTC</li> <li> <b>Asia Pacific (Singapore) Region:</b> 14:00-22:00 UTC</li> <li> <b>Asia Pacific (Tokyo) Region: </b> 17:00-03:00 UTC</li> </ul> <p> Constraints: Must be in the format <code>hh24:mi-hh24:mi</code>. Times should be Universal Time Coordinated (UTC). Must not conflict with the preferred maintenance window. Must be at least 30 minutes. </p>"
+          "documentation":"<p> The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p> Default: A 30-minute window selected at random from an 8-hour block of time per region. The following list shows the time blocks for each region from which the default backup windows are assigned. </p> <ul> <li><b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li> <li><b>US-West (Northern California) Region:</b> 06:00-14:00 UTC</li> <li><b>EU (Ireland) Region:</b> 22:00-06:00 UTC</li> <li><b>Asia Pacific (Singapore) Region:</b> 14:00-22:00 UTC</li> <li><b>Asia Pacific (Tokyo) Region: </b> 17:00-03:00 UTC</li> </ul> <p> Constraints: Must be in the format <code>hh24:mi-hh24:mi</code>. Times should be Universal Time Coordinated (UTC). Must not conflict with the preferred maintenance window. Must be at least 30 minutes. </p>"
         },
         "Port":{
           "shape":"IntegerOptional",
@@ -2849,6 +1215,18 @@
         "PubliclyAccessible":{"shape":"BooleanOptional"}
       }
     },
+    "CreateDBInstanceReadReplicaResult":{
+      "type":"structure",
+      "members":{
+        "DBInstance":{"shape":"DBInstance"}
+      }
+    },
+    "CreateDBInstanceResult":{
+      "type":"structure",
+      "members":{
+        "DBInstance":{"shape":"DBInstance"}
+      }
+    },
     "CreateDBParameterGroupMessage":{
       "type":"structure",
       "required":[
@@ -2872,6 +1250,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "CreateDBParameterGroupResult":{
+      "type":"structure",
+      "members":{
+        "DBParameterGroup":{"shape":"DBParameterGroup"}
+      }
+    },
     "CreateDBSecurityGroupMessage":{
       "type":"structure",
       "required":[
@@ -2890,6 +1274,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "CreateDBSecurityGroupResult":{
+      "type":"structure",
+      "members":{
+        "DBSecurityGroup":{"shape":"DBSecurityGroup"}
+      }
+    },
     "CreateDBSnapshotMessage":{
       "type":"structure",
       "required":[
@@ -2907,6 +1297,12 @@
         }
       },
       "documentation":"<p> </p>"
+    },
+    "CreateDBSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "DBSnapshot":{"shape":"DBSnapshot"}
+      }
     },
     "CreateDBSubnetGroupMessage":{
       "type":"structure",
@@ -2930,6 +1326,12 @@
         }
       },
       "documentation":"<p> </p>"
+    },
+    "CreateDBSubnetGroupResult":{
+      "type":"structure",
+      "members":{
+        "DBSubnetGroup":{"shape":"DBSubnetGroup"}
+      }
     },
     "CreateEventSubscriptionMessage":{
       "type":"structure",
@@ -2963,7 +1365,13 @@
           "documentation":"<p> A Boolean value; set to <b>true</b> to activate the subscription, set to <b>false</b> to create the subscription but not active it. </p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
+    },
+    "CreateEventSubscriptionResult":{
+      "type":"structure",
+      "members":{
+        "EventSubscription":{"shape":"EventSubscription"}
+      }
     },
     "CreateOptionGroupMessage":{
       "type":"structure",
@@ -2991,7 +1399,13 @@
           "documentation":"<p> The description of the option group. </p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
+    },
+    "CreateOptionGroupResult":{
+      "type":"structure",
+      "members":{
+        "OptionGroup":{"shape":"OptionGroup"}
+      }
     },
     "DBEngineVersion":{
       "type":"structure",
@@ -3169,20 +1583,20 @@
         },
         "PubliclyAccessible":{"shape":"Boolean"}
       },
-      "wrapper":true,
-      "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>"
+      "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBInstance</a></li> <li><a>DeleteDBInstance</a></li> <li><a>ModifyDBInstance</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
+      "wrapper":true
     },
     "DBInstanceAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> User already has a DB instance with the given identifier. </p>",
       "error":{
         "code":"DBInstanceAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> User already has a DB instance with the given identifier. </p>"
+      "exception":true
     },
     "DBInstanceList":{
       "type":"list",
@@ -3209,13 +1623,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>",
       "error":{
         "code":"DBInstanceNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
+      "exception":true
     },
     "DBParameterGroup":{
       "type":"structure",
@@ -3233,20 +1647,20 @@
           "documentation":"<p> Provides the customer-specified description for this DB Parameter Group. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> Contains the result of a successful invocation of the <a>CreateDBParameterGroup</a> action. </p> <p> This data type is used as a request parameter in the <a>DeleteDBParameterGroup</a> action, and as a response element in the <a>DescribeDBParameterGroups</a> action. </p>"
+      "documentation":"<p> Contains the result of a successful invocation of the <a>CreateDBParameterGroup</a> action. </p> <p> This data type is used as a request parameter in the <a>DeleteDBParameterGroup</a> action, and as a response element in the <a>DescribeDBParameterGroups</a> action. </p>",
+      "wrapper":true
     },
     "DBParameterGroupAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> A DB parameter group with the same name exists. </p>",
       "error":{
         "code":"DBParameterGroupAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> A DB parameter group with the same name exists. </p>"
+      "exception":true
     },
     "DBParameterGroupDetails":{
       "type":"structure",
@@ -3283,25 +1697,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>",
       "error":{
         "code":"DBParameterGroupNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
+      "exception":true
     },
     "DBParameterGroupQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Request would result in user exceeding the allowed number of DB parameter groups. </p>",
       "error":{
         "code":"DBParameterGroupQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Request would result in user exceeding the allowed number of DB parameter groups. </p>"
+      "exception":true
     },
     "DBParameterGroupStatus":{
       "type":"structure",
@@ -3366,20 +1780,20 @@
           "documentation":"<p> Contains a list of <a>IPRange</a> elements. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>DescribeDBSecurityGroups</a></li> <li><a>AuthorizeDBSecurityGroupIngress</a></li> <li><a>CreateDBSecurityGroup</a></li> <li><a>RevokeDBSecurityGroupIngress</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSecurityGroups</a> action.</p>"
+      "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>DescribeDBSecurityGroups</a></li> <li><a>AuthorizeDBSecurityGroupIngress</a></li> <li><a>CreateDBSecurityGroup</a></li> <li><a>RevokeDBSecurityGroupIngress</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSecurityGroups</a> action.</p>",
+      "wrapper":true
     },
     "DBSecurityGroupAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> A DB security group with the name specified in <i>DBSecurityGroupName</i> already exists. </p>",
       "error":{
         "code":"DBSecurityGroupAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> A DB security group with the name specified in <i>DBSecurityGroupName</i> already exists. </p>"
+      "exception":true
     },
     "DBSecurityGroupMembership":{
       "type":"structure",
@@ -3427,37 +1841,37 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>",
       "error":{
         "code":"DBSecurityGroupNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
+      "exception":true
     },
     "DBSecurityGroupNotSupportedFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> A DB security group is not allowed for this action. </p>",
       "error":{
         "code":"DBSecurityGroupNotSupported",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> A DB security group is not allowed for this action. </p>"
+      "exception":true
     },
     "DBSecurityGroupQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Request would result in user exceeding the allowed number of DB security groups. </p>",
       "error":{
         "code":"QuotaExceeded.DBSecurityGroup",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Request would result in user exceeding the allowed number of DB security groups. </p>"
+      "exception":true
     },
     "DBSecurityGroups":{
       "type":"list",
@@ -3530,20 +1944,20 @@
           "documentation":"<p> Specifies the Provisioned IOPS (I/O operations per second) value of the DB Instance at the time of the snapshot. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBSnapshot</a></li> <li><a>DeleteDBSnapshot</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action.</p>"
+      "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBSnapshot</a></li> <li><a>DeleteDBSnapshot</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action.</p>",
+      "wrapper":true
     },
     "DBSnapshotAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> <i>DBSnapshotIdentifier</i> is already used by an existing snapshot. </p>",
       "error":{
         "code":"DBSnapshotAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> <i>DBSnapshotIdentifier</i> is already used by an existing snapshot. </p>"
+      "exception":true
     },
     "DBSnapshotList":{
       "type":"list",
@@ -3570,13 +1984,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>",
       "error":{
         "code":"DBSnapshotNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
+      "exception":true
     },
     "DBSubnetGroup":{
       "type":"structure",
@@ -3602,32 +2016,32 @@
           "documentation":"<p> Contains a list of <a>Subnet</a> elements. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBSubnetGroup</a></li> <li><a>ModifyDBSubnetGroup</a></li> <li><a>DescribeDBSubnetGroups</a></li> <li><a>DeleteDBSubnetGroup</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action.</p>"
+      "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li><a>CreateDBSubnetGroup</a></li> <li><a>ModifyDBSubnetGroup</a></li> <li><a>DescribeDBSubnetGroups</a></li> <li><a>DeleteDBSubnetGroup</a></li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action.</p>",
+      "wrapper":true
     },
     "DBSubnetGroupAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> <i>DBSubnetGroupName</i> is already used by an existing DB subnet group. </p>",
       "error":{
         "code":"DBSubnetGroupAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> <i>DBSubnetGroupName</i> is already used by an existing DB subnet group. </p>"
+      "exception":true
     },
     "DBSubnetGroupDoesNotCoverEnoughAZs":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>",
       "error":{
         "code":"DBSubnetGroupDoesNotCoverEnoughAZs",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
+      "exception":true
     },
     "DBSubnetGroupMessage":{
       "type":"structure",
@@ -3647,25 +2061,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>",
       "error":{
         "code":"DBSubnetGroupNotFoundFault",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>"
+      "exception":true
     },
     "DBSubnetGroupQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Request would result in user exceeding the allowed number of DB subnet groups. </p>",
       "error":{
         "code":"DBSubnetGroupQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Request would result in user exceeding the allowed number of DB subnet groups. </p>"
+      "exception":true
     },
     "DBSubnetGroups":{
       "type":"list",
@@ -3678,25 +2092,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Request would result in user exceeding the allowed number of subnets in a DB subnet groups. </p>",
       "error":{
         "code":"DBSubnetQuotaExceededFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Request would result in user exceeding the allowed number of subnets in a DB subnet groups. </p>"
+      "exception":true
     },
     "DBUpgradeDependencyFailureFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The DB upgrade failed because a resource the DB depends on could not be modified. </p>",
       "error":{
         "code":"DBUpgradeDependencyFailure",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The DB upgrade failed because a resource the DB depends on could not be modified. </p>"
+      "exception":true
     },
     "DeleteDBInstanceMessage":{
       "type":"structure",
@@ -3716,6 +2130,12 @@
         }
       },
       "documentation":"<p> </p>"
+    },
+    "DeleteDBInstanceResult":{
+      "type":"structure",
+      "members":{
+        "DBInstance":{"shape":"DBInstance"}
+      }
     },
     "DeleteDBParameterGroupMessage":{
       "type":"structure",
@@ -3750,6 +2170,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "DeleteDBSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "DBSnapshot":{"shape":"DBSnapshot"}
+      }
+    },
     "DeleteDBSubnetGroupMessage":{
       "type":"structure",
       "required":["DBSubnetGroupName"],
@@ -3770,7 +2196,13 @@
           "documentation":"<p>The name of the RDS event notification subscription you want to delete.</p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
+    },
+    "DeleteEventSubscriptionResult":{
+      "type":"structure",
+      "members":{
+        "EventSubscription":{"shape":"EventSubscription"}
+      }
     },
     "DeleteOptionGroupMessage":{
       "type":"structure",
@@ -3955,6 +2387,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "DescribeEngineDefaultParametersResult":{
+      "type":"structure",
+      "members":{
+        "EngineDefaults":{"shape":"EngineDefaults"}
+      }
+    },
     "DescribeEventCategoriesMessage":{
       "type":"structure",
       "members":{
@@ -3963,7 +2401,7 @@
           "documentation":"<p> The type of source that will be generating the events. </p> <p>Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot</p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
     },
     "DescribeEventSubscriptionsMessage":{
       "type":"structure",
@@ -3981,7 +2419,7 @@
           "documentation":"<p> An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . </p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
     },
     "DescribeEventsMessage":{
       "type":"structure",
@@ -4245,8 +2683,8 @@
           "documentation":"<p> Contains a list of engine default parameters. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeEngineDefaultParameters</a> action. </p>"
+      "documentation":"<p> Contains the result of a successful invocation of the <a>DescribeEngineDefaultParameters</a> action. </p>",
+      "wrapper":true
     },
     "Event":{
       "type":"structure",
@@ -4293,8 +2731,8 @@
           "documentation":"<p>The event categories for the specified source type</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventCategories</a> action.</p>"
+      "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventCategories</a> action.</p>",
+      "wrapper":true
     },
     "EventCategoriesMapList":{
       "type":"list",
@@ -4364,20 +2802,20 @@
           "documentation":"<p>A Boolean value indicating if the subscription is enabled. True indicates the subscription is enabled.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>"
+      "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>",
+      "wrapper":true
     },
     "EventSubscriptionQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>You have reached the maximum number of event subscriptions.</p>",
       "error":{
         "code":"EventSubscriptionQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>You have reached the maximum number of event subscriptions.</p>"
+      "exception":true
     },
     "EventSubscriptionsList":{
       "type":"list",
@@ -4439,25 +2877,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Request would result in user exceeding the allowed number of DB instances. </p>",
       "error":{
         "code":"InstanceQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Request would result in user exceeding the allowed number of DB instances. </p>"
+      "exception":true
     },
     "InsufficientDBInstanceCapacityFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Specified DB instance class is not available in the specified Availability Zone. </p>",
       "error":{
         "code":"InsufficientDBInstanceCapacity",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Specified DB instance class is not available in the specified Availability Zone. </p>"
+      "exception":true
     },
     "Integer":{"type":"integer"},
     "IntegerOptional":{"type":"integer"},
@@ -4465,133 +2903,133 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>",
       "error":{
         "code":"InvalidDBInstanceState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The specified DB instance is not in the <i>available</i> state. </p>"
+      "exception":true
     },
     "InvalidDBParameterGroupStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The DB parameter group cannot be deleted because it is in use. </p>",
       "error":{
         "code":"InvalidDBParameterGroupState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The DB parameter group cannot be deleted because it is in use. </p>"
+      "exception":true
     },
     "InvalidDBSecurityGroupStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The state of the DB security group does not allow deletion. </p>",
       "error":{
         "code":"InvalidDBSecurityGroupState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The state of the DB security group does not allow deletion. </p>"
+      "exception":true
     },
     "InvalidDBSnapshotStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The state of the DB snapshot does not allow deletion. </p>",
       "error":{
         "code":"InvalidDBSnapshotState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The state of the DB snapshot does not allow deletion. </p>"
+      "exception":true
     },
     "InvalidDBSubnetGroupStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The DB subnet group cannot be deleted because it is in use. </p>",
       "error":{
         "code":"InvalidDBSubnetGroupStateFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The DB subnet group cannot be deleted because it is in use. </p>"
+      "exception":true
     },
     "InvalidDBSubnetStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The DB subnet is not in the <i>available</i> state. </p>",
       "error":{
         "code":"InvalidDBSubnetStateFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The DB subnet is not in the <i>available</i> state. </p>"
+      "exception":true
     },
     "InvalidEventSubscriptionStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>This error can occur if someone else is modifying a subscription. You should retry the action.</p>",
       "error":{
         "code":"InvalidEventSubscriptionState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>This error can occur if someone else is modifying a subscription. You should retry the action.</p>"
+      "exception":true
     },
     "InvalidOptionGroupStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The option group is not in the <i>available</i> state. </p>",
       "error":{
         "code":"InvalidOptionGroupStateFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The option group is not in the <i>available</i> state. </p>"
+      "exception":true
     },
     "InvalidRestoreFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Cannot restore from vpc backup to non-vpc DB instance. </p>",
       "error":{
         "code":"InvalidRestoreFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Cannot restore from vpc backup to non-vpc DB instance. </p>"
+      "exception":true
     },
     "InvalidSubnet":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. </p>",
       "error":{
         "code":"InvalidSubnet",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. </p>"
+      "exception":true
     },
     "InvalidVPCNetworkStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> DB subnet group does not cover all Availability Zones after it is created because users' change. </p>",
       "error":{
         "code":"InvalidVPCNetworkStateFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> DB subnet group does not cover all Availability Zones after it is created because users' change. </p>"
+      "exception":true
     },
     "KeyList":{
       "type":"list",
@@ -4606,7 +3044,7 @@
           "documentation":"<p>The DB Instance with tags to be listed.</p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
     },
     "ModifyDBInstanceMessage":{
       "type":"structure",
@@ -4687,6 +3125,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "ModifyDBInstanceResult":{
+      "type":"structure",
+      "members":{
+        "DBInstance":{"shape":"DBInstance"}
+      }
+    },
     "ModifyDBParameterGroupMessage":{
       "type":"structure",
       "required":[
@@ -4727,6 +3171,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "ModifyDBSubnetGroupResult":{
+      "type":"structure",
+      "members":{
+        "DBSubnetGroup":{"shape":"DBSubnetGroup"}
+      }
+    },
     "ModifyEventSubscriptionMessage":{
       "type":"structure",
       "required":["SubscriptionName"],
@@ -4752,7 +3202,13 @@
           "documentation":"<p> A Boolean value; set to <b>true</b> to activate the subscription. </p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
+    },
+    "ModifyEventSubscriptionResult":{
+      "type":"structure",
+      "members":{
+        "EventSubscription":{"shape":"EventSubscription"}
+      }
     },
     "ModifyOptionGroupMessage":{
       "type":"structure",
@@ -4776,6 +3232,12 @@
         }
       },
       "documentation":"<p> </p>"
+    },
+    "ModifyOptionGroupResult":{
+      "type":"structure",
+      "members":{
+        "OptionGroup":{"shape":"OptionGroup"}
+      }
     },
     "Option":{
       "type":"structure",
@@ -4865,20 +3327,20 @@
           "documentation":"<p> If AllowsVpcAndNonVpcInstanceMemberships is 'false', this field is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true' and this field is blank, then this option group can be applied to both VPC and non-VPC instances. If this field contains a value, then this option group can only be applied to instances that are in the VPC indicated by this field. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> </p>"
+      "documentation":"<p> </p>",
+      "wrapper":true
     },
     "OptionGroupAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The option group you are trying to create already exists. </p>",
       "error":{
         "code":"OptionGroupAlreadyExistsFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The option group you are trying to create already exists. </p>"
+      "exception":true
     },
     "OptionGroupMembership":{
       "type":"structure",
@@ -4897,13 +3359,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The specified option group could not be found. </p>",
       "error":{
         "code":"OptionGroupNotFoundFault",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The specified option group could not be found. </p>"
+      "exception":true
     },
     "OptionGroupOption":{
       "type":"structure",
@@ -4966,13 +3428,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The quota of 20 option groups was exceeded for this AWS account. </p>",
       "error":{
         "code":"OptionGroupQuotaExceededFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The quota of 20 option groups was exceeded for this AWS account. </p>"
+      "exception":true
     },
     "OptionGroups":{
       "type":"structure",
@@ -5046,8 +3508,8 @@
           "documentation":"<p> Indicates whether this is a VPC orderable DB Instance. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> Contains a list of available options for a DB Instance </p> <p> This data type is used as a response element in the <a>DescribeOrderableDBInstanceOptions</a> action. </p>"
+      "documentation":"<p> Contains a list of available options for a DB Instance </p> <p> This data type is used as a response element in the <a>DescribeOrderableDBInstanceOptions</a> action. </p>",
+      "wrapper":true
     },
     "OrderableDBInstanceOptionsList":{
       "type":"list",
@@ -5169,13 +3631,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> <i>SourceDBInstanceIdentifier</i> refers to a DB instance with <i>BackupRetentionPeriod</i> equal to 0. </p>",
       "error":{
         "code":"PointInTimeRestoreNotEnabled",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> <i>SourceDBInstanceIdentifier</i> refers to a DB instance with <i>BackupRetentionPeriod</i> equal to 0. </p>"
+      "exception":true
     },
     "PromoteReadReplicaMessage":{
       "type":"structure",
@@ -5191,22 +3653,28 @@
         },
         "PreferredBackupWindow":{
           "shape":"String",
-          "documentation":"<p> The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p> Default: A 30-minute window selected at random from an 8-hour block of time per region. The following list shows the time blocks for each region from which the default backup windows are assigned. </p> <ul> <li> <b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li> <li> <b>US-West (Northern California) Region:</b> 06:00-14:00 UTC</li> <li> <b>EU (Ireland) Region:</b> 22:00-06:00 UTC</li> <li> <b>Asia Pacific (Singapore) Region:</b> 14:00-22:00 UTC</li> <li> <b>Asia Pacific (Tokyo) Region: </b> 17:00-03:00 UTC</li> </ul> <p> Constraints: Must be in the format <code>hh24:mi-hh24:mi</code>. Times should be Universal Time Coordinated (UTC). Must not conflict with the preferred maintenance window. Must be at least 30 minutes. </p>"
+          "documentation":"<p> The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p> Default: A 30-minute window selected at random from an 8-hour block of time per region. The following list shows the time blocks for each region from which the default backup windows are assigned. </p> <ul> <li><b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li> <li><b>US-West (Northern California) Region:</b> 06:00-14:00 UTC</li> <li><b>EU (Ireland) Region:</b> 22:00-06:00 UTC</li> <li><b>Asia Pacific (Singapore) Region:</b> 14:00-22:00 UTC</li> <li><b>Asia Pacific (Tokyo) Region: </b> 17:00-03:00 UTC</li> </ul> <p> Constraints: Must be in the format <code>hh24:mi-hh24:mi</code>. Times should be Universal Time Coordinated (UTC). Must not conflict with the preferred maintenance window. Must be at least 30 minutes. </p>"
         }
       },
       "documentation":"<p> </p>"
+    },
+    "PromoteReadReplicaResult":{
+      "type":"structure",
+      "members":{
+        "DBInstance":{"shape":"DBInstance"}
+      }
     },
     "ProvisionedIopsNotAvailableInAZFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Provisioned IOPS not available in the specified Availability Zone. </p>",
       "error":{
         "code":"ProvisionedIopsNotAvailableInAZFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Provisioned IOPS not available in the specified Availability Zone. </p>"
+      "exception":true
     },
     "PurchaseReservedDBInstancesOfferingMessage":{
       "type":"structure",
@@ -5226,6 +3694,12 @@
         }
       },
       "documentation":"<p> </p>"
+    },
+    "PurchaseReservedDBInstancesOfferingResult":{
+      "type":"structure",
+      "members":{
+        "ReservedDBInstance":{"shape":"ReservedDBInstance"}
+      }
     },
     "ReadReplicaDBInstanceIdentifierList":{
       "type":"list",
@@ -5249,6 +3723,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "RebootDBInstanceResult":{
+      "type":"structure",
+      "members":{
+        "DBInstance":{"shape":"DBInstance"}
+      }
+    },
     "RecurringCharge":{
       "type":"structure",
       "members":{
@@ -5261,8 +3741,8 @@
           "documentation":"<p> The frequency of the recurring charge. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> This data type is used as a response element in the <a>DescribeReservedDBInstances</a> and <a>DescribeReservedDBInstancesOfferings</a> actions. </p>"
+      "documentation":"<p> This data type is used as a response element in the <a>DescribeReservedDBInstances</a> and <a>DescribeReservedDBInstancesOfferings</a> actions. </p>",
+      "wrapper":true
     },
     "RecurringChargeList":{
       "type":"list",
@@ -5287,7 +3767,13 @@
           "documentation":"<p> The source identifier to be removed from the subscription, such as the <b>DB instance identifier</b> for a DB instance or the name of a security group. </p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
+    },
+    "RemoveSourceIdentifierFromSubscriptionResult":{
+      "type":"structure",
+      "members":{
+        "EventSubscription":{"shape":"EventSubscription"}
+      }
     },
     "RemoveTagsFromResourceMessage":{
       "type":"structure",
@@ -5305,7 +3791,7 @@
           "documentation":"<p>The tag key (name) of the tag to be removed.</p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
     },
     "ReservedDBInstance":{
       "type":"structure",
@@ -5367,20 +3853,20 @@
           "documentation":"<p> The recurring price charged to run this reserved DB Instance. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> This data type is used as a response element in the <a>DescribeReservedDBInstances</a> and <a>PurchaseReservedDBInstancesOffering</a> actions. </p>"
+      "documentation":"<p> This data type is used as a response element in the <a>DescribeReservedDBInstances</a> and <a>PurchaseReservedDBInstancesOffering</a> actions. </p>",
+      "wrapper":true
     },
     "ReservedDBInstanceAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> User already has a reservation with the given identifier. </p>",
       "error":{
         "code":"ReservedDBInstanceAlreadyExists",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> User already has a reservation with the given identifier. </p>"
+      "exception":true
     },
     "ReservedDBInstanceList":{
       "type":"list",
@@ -5407,25 +3893,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The specified reserved DB Instance not found. </p>",
       "error":{
         "code":"ReservedDBInstanceNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The specified reserved DB Instance not found. </p>"
+      "exception":true
     },
     "ReservedDBInstanceQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Request would exceed the user's DB Instance quota. </p>",
       "error":{
         "code":"ReservedDBInstanceQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Request would exceed the user's DB Instance quota. </p>"
+      "exception":true
     },
     "ReservedDBInstancesOffering":{
       "type":"structure",
@@ -5471,8 +3957,8 @@
           "documentation":"<p> The recurring price charged to run this reserved DB Instance. </p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p> This data type is used as a response element in the <a>DescribeReservedDBInstancesOfferings</a> action. </p>"
+      "documentation":"<p> This data type is used as a response element in the <a>DescribeReservedDBInstancesOfferings</a> action. </p>",
+      "wrapper":true
     },
     "ReservedDBInstancesOfferingList":{
       "type":"list",
@@ -5499,13 +3985,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Specified offering does not exist. </p>",
       "error":{
         "code":"ReservedDBInstancesOfferingNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Specified offering does not exist. </p>"
+      "exception":true
     },
     "ResetDBParameterGroupMessage":{
       "type":"structure",
@@ -5586,6 +4072,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "RestoreDBInstanceFromDBSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "DBInstance":{"shape":"DBInstance"}
+      }
+    },
     "RestoreDBInstanceToPointInTimeMessage":{
       "type":"structure",
       "required":[
@@ -5654,6 +4146,12 @@
       },
       "documentation":"<p> </p>"
     },
+    "RestoreDBInstanceToPointInTimeResult":{
+      "type":"structure",
+      "members":{
+        "DBInstance":{"shape":"DBInstance"}
+      }
+    },
     "RevokeDBSecurityGroupIngressMessage":{
       "type":"structure",
       "required":["DBSecurityGroupName"],
@@ -5681,53 +4179,59 @@
       },
       "documentation":"<p> </p>"
     },
+    "RevokeDBSecurityGroupIngressResult":{
+      "type":"structure",
+      "members":{
+        "DBSecurityGroup":{"shape":"DBSecurityGroup"}
+      }
+    },
     "SNSInvalidTopicFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>SNS has responded that there is a problem with the SND topic specified.</p>",
       "error":{
         "code":"SNSInvalidTopic",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>SNS has responded that there is a problem with the SND topic specified.</p>"
+      "exception":true
     },
     "SNSNoAuthorizationFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>You do not have permission to publish to the SNS topic ARN.</p>",
       "error":{
         "code":"SNSNoAuthorization",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>You do not have permission to publish to the SNS topic ARN.</p>"
+      "exception":true
     },
     "SNSTopicArnNotFoundFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The SNS topic ARN does not exist.</p>",
       "error":{
         "code":"SNSTopicArnNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The SNS topic ARN does not exist.</p>"
+      "exception":true
     },
     "SnapshotQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Request would result in user exceeding the allowed number of DB snapshots. </p>",
       "error":{
         "code":"SnapshotQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Request would result in user exceeding the allowed number of DB snapshots. </p>"
+      "exception":true
     },
     "SourceIdsList":{
       "type":"list",
@@ -5740,13 +4244,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested source could not be found.</p>",
       "error":{
         "code":"SourceNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested source could not be found.</p>"
+      "exception":true
     },
     "SourceType":{
       "type":"string",
@@ -5761,13 +4265,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> Request would result in user exceeding the allowed amount of storage available across all DB instances. </p>",
       "error":{
         "code":"StorageQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> Request would result in user exceeding the allowed amount of storage available across all DB instances. </p>"
+      "exception":true
     },
     "String":{"type":"string"},
     "Subnet":{
@@ -5789,13 +4293,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The DB subnet is already in use in the Availability Zone. </p>",
       "error":{
         "code":"SubnetAlreadyInUse",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The DB subnet is already in use in the Availability Zone. </p>"
+      "exception":true
     },
     "SubnetIdentifierList":{
       "type":"list",
@@ -5815,37 +4319,37 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The supplied subscription name already exists.</p>",
       "error":{
         "code":"SubscriptionAlreadyExist",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The supplied subscription name already exists.</p>"
+      "exception":true
     },
     "SubscriptionCategoryNotFoundFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The supplied category does not exist.</p>",
       "error":{
         "code":"SubscriptionCategoryNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The supplied category does not exist.</p>"
+      "exception":true
     },
     "SubscriptionNotFoundFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The subscription name does not exist.</p>",
       "error":{
         "code":"SubscriptionNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The subscription name does not exist.</p>"
+      "exception":true
     },
     "SupportedCharacterSetsList":{
       "type":"list",
@@ -5885,7 +4389,7 @@
           "documentation":"<p>List of tags returned by the ListTagsForResource operation.</p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
     },
     "VpcSecurityGroupIdList":{
       "type":"list",
@@ -5914,164 +4418,7 @@
         "shape":"VpcSecurityGroupMembership",
         "locationName":"VpcSecurityGroupMembership"
       }
-    },
-    "AddSourceIdentifierToSubscriptionResult":{
-      "type":"structure",
-      "members":{
-        "EventSubscription":{"shape":"EventSubscription"}
-      }
-    },
-    "AuthorizeDBSecurityGroupIngressResult":{
-      "type":"structure",
-      "members":{
-        "DBSecurityGroup":{"shape":"DBSecurityGroup"}
-      }
-    },
-    "CopyDBSnapshotResult":{
-      "type":"structure",
-      "members":{
-        "DBSnapshot":{"shape":"DBSnapshot"}
-      }
-    },
-    "CreateDBInstanceResult":{
-      "type":"structure",
-      "members":{
-        "DBInstance":{"shape":"DBInstance"}
-      }
-    },
-    "CreateDBInstanceReadReplicaResult":{
-      "type":"structure",
-      "members":{
-        "DBInstance":{"shape":"DBInstance"}
-      }
-    },
-    "CreateDBParameterGroupResult":{
-      "type":"structure",
-      "members":{
-        "DBParameterGroup":{"shape":"DBParameterGroup"}
-      }
-    },
-    "CreateDBSecurityGroupResult":{
-      "type":"structure",
-      "members":{
-        "DBSecurityGroup":{"shape":"DBSecurityGroup"}
-      }
-    },
-    "CreateDBSnapshotResult":{
-      "type":"structure",
-      "members":{
-        "DBSnapshot":{"shape":"DBSnapshot"}
-      }
-    },
-    "CreateDBSubnetGroupResult":{
-      "type":"structure",
-      "members":{
-        "DBSubnetGroup":{"shape":"DBSubnetGroup"}
-      }
-    },
-    "CreateEventSubscriptionResult":{
-      "type":"structure",
-      "members":{
-        "EventSubscription":{"shape":"EventSubscription"}
-      }
-    },
-    "CreateOptionGroupResult":{
-      "type":"structure",
-      "members":{
-        "OptionGroup":{"shape":"OptionGroup"}
-      }
-    },
-    "DeleteDBInstanceResult":{
-      "type":"structure",
-      "members":{
-        "DBInstance":{"shape":"DBInstance"}
-      }
-    },
-    "DeleteDBSnapshotResult":{
-      "type":"structure",
-      "members":{
-        "DBSnapshot":{"shape":"DBSnapshot"}
-      }
-    },
-    "DeleteEventSubscriptionResult":{
-      "type":"structure",
-      "members":{
-        "EventSubscription":{"shape":"EventSubscription"}
-      }
-    },
-    "DescribeEngineDefaultParametersResult":{
-      "type":"structure",
-      "members":{
-        "EngineDefaults":{"shape":"EngineDefaults"}
-      }
-    },
-    "ModifyDBInstanceResult":{
-      "type":"structure",
-      "members":{
-        "DBInstance":{"shape":"DBInstance"}
-      }
-    },
-    "ModifyDBSubnetGroupResult":{
-      "type":"structure",
-      "members":{
-        "DBSubnetGroup":{"shape":"DBSubnetGroup"}
-      }
-    },
-    "ModifyEventSubscriptionResult":{
-      "type":"structure",
-      "members":{
-        "EventSubscription":{"shape":"EventSubscription"}
-      }
-    },
-    "ModifyOptionGroupResult":{
-      "type":"structure",
-      "members":{
-        "OptionGroup":{"shape":"OptionGroup"}
-      }
-    },
-    "PromoteReadReplicaResult":{
-      "type":"structure",
-      "members":{
-        "DBInstance":{"shape":"DBInstance"}
-      }
-    },
-    "PurchaseReservedDBInstancesOfferingResult":{
-      "type":"structure",
-      "members":{
-        "ReservedDBInstance":{"shape":"ReservedDBInstance"}
-      }
-    },
-    "RebootDBInstanceResult":{
-      "type":"structure",
-      "members":{
-        "DBInstance":{"shape":"DBInstance"}
-      }
-    },
-    "RemoveSourceIdentifierFromSubscriptionResult":{
-      "type":"structure",
-      "members":{
-        "EventSubscription":{"shape":"EventSubscription"}
-      }
-    },
-    "RestoreDBInstanceFromDBSnapshotResult":{
-      "type":"structure",
-      "members":{
-        "DBInstance":{"shape":"DBInstance"}
-      }
-    },
-    "RestoreDBInstanceToPointInTimeResult":{
-      "type":"structure",
-      "members":{
-        "DBInstance":{"shape":"DBInstance"}
-      }
-    },
-    "RevokeDBSecurityGroupIngressResult":{
-      "type":"structure",
-      "members":{
-        "DBSecurityGroup":{"shape":"DBSecurityGroup"}
-      }
     }
   },
-  "examples":{
-  }
+  "documentation":"<fullname>Amazon Relational Database Service</fullname> <p> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique. </p> <p> Amazon RDS gives you access to the capabilities of a familiar MySQL or Oracle database server. This means the code, applications, and tools you already use today with your existing MySQL or Oracle databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB Instance. Amazon RDS is flexible: you can scale your database instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use. </p> <p> This is the <i>Amazon RDS API Reference</i>. It contains a comprehensive description of all Amazon RDS Query APIs and data types. Note that this API is asynchronous and some actions may require polling to determine when an action has been applied. See the parameter description to determine if a change is applied immediately or on the next instance reboot or during the maintenance window. To get started with Amazon RDS, go to the <a href=\"http://docs.amazonwebservices.com/AmazonRDS/latest/GettingStartedGuide/\">Amazon RDS Getting Started Guide</a>. For more information on Amazon RDS concepts and usage scenarios, go to the <a href=\"http://docs.amazonwebservices.com/AmazonRDS/latest/UserGuide/\">Amazon RDS User Guide</a>. </p>"
 }
