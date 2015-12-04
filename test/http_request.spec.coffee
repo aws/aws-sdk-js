@@ -25,6 +25,12 @@ describe 'AWS.HttpRequest', ->
       headers[agentHeader] = AWS.util.userAgent()
       expect(request.headers).to.eql(headers)
 
+    it 'adds the customUserAgent to the user agent header if provided as string', ->
+      headers = {}
+      headers[agentHeader] = AWS.util.userAgent() + ' custom'
+      request = new AWS.HttpRequest('http://domain.com', '', 'custom')
+      expect(request.headers).to.eql(headers)
+
     it 'defaults body to empty string', ->
       expect(request.body).to.equal('')
 
