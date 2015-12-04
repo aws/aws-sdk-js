@@ -4,13 +4,12 @@
     "apiVersion":"2015-04-16",
     "endpointPrefix":"ds",
     "jsonVersion":"1.1",
+    "protocol":"json",
     "serviceAbbreviation":"Directory Service",
     "serviceFullName":"AWS Directory Service",
     "signatureVersion":"v4",
-    "targetPrefix":"DirectoryService_20150416",
-    "protocol":"json"
+    "targetPrefix":"DirectoryService_20150416"
   },
-  "documentation":"<fullname>AWS Directory Service</fullname> <p>This is the <i>AWS Directory Service API Reference</i>. This guide provides detailed information about AWS Directory Service operations, data types, parameters, and errors.</p>",
   "operations":{
     "ConnectDirectory":{
       "name":"ConnectDirectory",
@@ -18,38 +17,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ConnectDirectoryRequest",
-        "documentation":"<p>Contains the inputs for the <a>ConnectDirectory</a> operation.</p>"
-      },
-      "output":{
-        "shape":"ConnectDirectoryResult",
-        "documentation":"<p>Contains the results of the <a>ConnectDirectory</a> operation.</p>"
-      },
+      "input":{"shape":"ConnectDirectoryRequest"},
+      "output":{"shape":"ConnectDirectoryResult"},
       "errors":[
-        {
-          "shape":"DirectoryLimitExceededException",
-          "exception":true,
-          "documentation":"<p>The maximum number of directories in the region has been reached. You can use the <a>GetDirectoryLimits</a> operation to determine your directory limits in the region.</p>"
-        },
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"DirectoryLimitExceededException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Creates an AD Connector to connect an on-premises directory.</p>"
+      "documentation":"<p>Creates an AD Connector to connect to an on-premises directory.</p>"
     },
     "CreateAlias":{
       "name":"CreateAlias",
@@ -57,43 +33,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateAliasRequest",
-        "documentation":"<p>Contains the inputs for the <a>CreateAlias</a> operation.</p>"
-      },
-      "output":{
-        "shape":"CreateAliasResult",
-        "documentation":"<p>Contains the results of the <a>CreateAlias</a> operation.</p>"
-      },
+      "input":{"shape":"CreateAliasRequest"},
+      "output":{"shape":"CreateAliasResult"},
       "errors":[
-        {
-          "shape":"EntityAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>The specified entity already exists.</p>"
-        },
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityAlreadyExistsException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Creates an alias for a directory and assigns the alias to the directory. The alias is used to construct the access URL for the directory, such as <code>http://&#x3C;alias&#x3E;.awsapps.com</code>.</p> <important> <p>After an alias has been created, it cannot be deleted or reused, so this operation should only be used when absolutely necessary.</p> </important>"
+      "documentation":"<p>Creates an alias for a directory and assigns the alias to the directory. The alias is used to construct the access URL for the directory, such as <code>http://<![CDATA[&#x3C;]]>alias<![CDATA[&#x3E;]]>.awsapps.com</code>.</p> <important> <p>After an alias has been created, it cannot be deleted or reused, so this operation should only be used when absolutely necessary.</p> </important>"
     },
     "CreateComputer":{
       "name":"CreateComputer",
@@ -101,56 +50,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateComputerRequest",
-        "documentation":"<p>Contains the inputs for the <a>CreateComputer</a> operation.</p>"
-      },
-      "output":{
-        "shape":"CreateComputerResult",
-        "documentation":"<p>Contains the results for the <a>CreateComputer</a> operation.</p>"
-      },
+      "input":{"shape":"CreateComputerRequest"},
+      "output":{"shape":"CreateComputerResult"},
       "errors":[
-        {
-          "shape":"AuthenticationFailedException",
-          "exception":true,
-          "documentation":"<p>An authentication error occurred.</p>"
-        },
-        {
-          "shape":"DirectoryUnavailableException",
-          "exception":true,
-          "documentation":"<p>The specified directory is unavailable or could not be found.</p>"
-        },
-        {
-          "shape":"EntityAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>The specified entity already exists.</p>"
-        },
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"UnsupportedOperationException",
-          "exception":true,
-          "documentation":"<p>The operation is not supported.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"AuthenticationFailedException"},
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"EntityAlreadyExistsException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Creates a computer account in the specified directory, and joins the computer to the directory.</p>"
     },
@@ -160,38 +70,32 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDirectoryRequest",
-        "documentation":"<p>Contains the inputs for the <a>CreateDirectory</a> operation. </p>"
-      },
-      "output":{
-        "shape":"CreateDirectoryResult",
-        "documentation":"<p>Contains the results of the <a>CreateDirectory</a> operation.</p>"
-      },
+      "input":{"shape":"CreateDirectoryRequest"},
+      "output":{"shape":"CreateDirectoryResult"},
       "errors":[
-        {
-          "shape":"DirectoryLimitExceededException",
-          "exception":true,
-          "documentation":"<p>The maximum number of directories in the region has been reached. You can use the <a>GetDirectoryLimits</a> operation to determine your directory limits in the region.</p>"
-        },
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"DirectoryLimitExceededException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Creates a Simple AD directory.</p>"
+    },
+    "CreateMicrosoftAD":{
+      "name":"CreateMicrosoftAD",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateMicrosoftADRequest"},
+      "output":{"shape":"CreateMicrosoftADResult"},
+      "errors":[
+        {"shape":"DirectoryLimitExceededException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"},
+        {"shape":"UnsupportedOperationException"}
+      ],
+      "documentation":"Creates a Microsoft AD in the AWS cloud."
     },
     "CreateSnapshot":{
       "name":"CreateSnapshot",
@@ -199,43 +103,34 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateSnapshotRequest",
-        "documentation":"<p>Contains the inputs for the <a>CreateSnapshot</a> operation.</p>"
-      },
-      "output":{
-        "shape":"CreateSnapshotResult",
-        "documentation":"<p>Contains the results of the <a>CreateSnapshot</a> operation.</p>"
-      },
+      "input":{"shape":"CreateSnapshotRequest"},
+      "output":{"shape":"CreateSnapshotResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"SnapshotLimitExceededException",
-          "exception":true,
-          "documentation":"<p>The maximum number of manual snapshots for the directory has been reached. You can use the <a>GetSnapshotLimits</a> operation to determine the snapshot limits for a directory.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"SnapshotLimitExceededException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Creates a snapshot of an existing directory.</p> <p>You cannot take snapshots of extended or connected directories.</p>"
+      "documentation":"<p>Creates a snapshot of a Simple AD directory.</p> <note> <p>You cannot take snapshots of AD Connector directories.</p> </note>"
+    },
+    "CreateTrust":{
+      "name":"CreateTrust",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTrustRequest"},
+      "output":{"shape":"CreateTrustResult"},
+      "errors":[
+        {"shape":"EntityAlreadyExistsException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"},
+        {"shape":"UnsupportedOperationException"}
+      ],
+      "documentation":"<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p><p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>"
     },
     "DeleteDirectory":{
       "name":"DeleteDirectory",
@@ -243,31 +138,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDirectoryRequest",
-        "documentation":"<p>Contains the inputs for the <a>DeleteDirectory</a> operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteDirectoryResult",
-        "documentation":"<p>Contains the results of the <a>DeleteDirectory</a> operation.</p>"
-      },
+      "input":{"shape":"DeleteDirectoryRequest"},
+      "output":{"shape":"DeleteDirectoryResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Deletes an AWS Directory Service directory.</p>"
     },
@@ -277,38 +153,32 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteSnapshotRequest",
-        "documentation":"<p>Contains the inputs for the <a>DeleteSnapshot</a> operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteSnapshotResult",
-        "documentation":"<p>Contains the results of the <a>DeleteSnapshot</a> operation.</p>"
-      },
+      "input":{"shape":"DeleteSnapshotRequest"},
+      "output":{"shape":"DeleteSnapshotResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Deletes a directory snapshot.</p>"
+    },
+    "DeleteTrust":{
+      "name":"DeleteTrust",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTrustRequest"},
+      "output":{"shape":"DeleteTrustResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"},
+        {"shape":"UnsupportedOperationException"}
+      ],
+      "documentation":"Deletes an existing trust relationship between your Microsoft AD in the AWS cloud and an external domain."
     },
     "DescribeDirectories":{
       "name":"DescribeDirectories",
@@ -316,41 +186,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeDirectoriesRequest",
-        "documentation":"<p>Contains the inputs for the <a>DescribeDirectories</a> operation.</p>"
-      },
-      "output":{
-        "shape":"DescribeDirectoriesResult",
-        "documentation":"<p>Contains the results of the <a>DescribeDirectories</a> operation.</p>"
-      },
+      "input":{"shape":"DescribeDirectoriesRequest"},
+      "output":{"shape":"DescribeDirectoriesResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The <i>NextToken</i> value is not valid.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <i>DirectoryIds</i> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeDirectoriesResult.NextToken</i> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>"
     },
@@ -360,43 +203,34 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeSnapshotsRequest",
-        "documentation":"<p>Contains the inputs for the <a>DescribeSnapshots</a> operation.</p>"
-      },
-      "output":{
-        "shape":"DescribeSnapshotsResult",
-        "documentation":"<p>Contains the results of the <a>DescribeSnapshots</a> operation.</p>"
-      },
+      "input":{"shape":"DescribeSnapshotsRequest"},
+      "output":{"shape":"DescribeSnapshotsResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The <i>NextToken</i> value is not valid.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Obtains information about the directory snapshots that belong to this account.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeSnapshots.NextToken</i> member contains a token that you pass in the next call to <a>DescribeSnapshots</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>"
+    },
+    "DescribeTrusts":{
+      "name":"DescribeTrusts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTrustsRequest"},
+      "output":{"shape":"DescribeTrustsResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"},
+        {"shape":"UnsupportedOperationException"}
+      ],
+      "documentation":"<p>Obtains information about the trust relationships for this account.</p> <p>If no input parameters are provided, such as DirectoryId or TrustIds, this request describes all the trust relationships belonging to the account.</p>"
     },
     "DisableRadius":{
       "name":"DisableRadius",
@@ -404,33 +238,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DisableRadiusRequest",
-        "documentation":"<p>Contains the inputs for the <a>DisableRadius</a> operation.</p>"
-      },
-      "output":{
-        "shape":"DisableRadiusResult",
-        "documentation":"<p>Contains the results of the <a>DisableRadius</a> operation.</p>"
-      },
+      "input":{"shape":"DisableRadiusRequest"},
+      "output":{"shape":"DisableRadiusResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Disables multi-factor authentication (MFA) with Remote Authentication Dial In User Service (RADIUS) for an AD Connector directory.</p>"
+      "documentation":"<p>Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.</p>"
     },
     "DisableSso":{
       "name":"DisableSso",
@@ -438,41 +253,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DisableSsoRequest",
-        "documentation":"<p>Contains the inputs for the <a>DisableSso</a> operation.</p>"
-      },
-      "output":{
-        "shape":"DisableSsoResult",
-        "documentation":"<p>Contains the results of the <a>DisableSso</a> operation.</p>"
-      },
+      "input":{"shape":"DisableSsoRequest"},
+      "output":{"shape":"DisableSsoResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"InsufficientPermissionsException",
-          "exception":true,
-          "documentation":"<p>The account does not have sufficient permission to perform the operation.</p>"
-        },
-        {
-          "shape":"AuthenticationFailedException",
-          "exception":true,
-          "documentation":"<p>An authentication error occurred.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InsufficientPermissionsException"},
+        {"shape":"AuthenticationFailedException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Disables single-sign on for a directory.</p>"
     },
@@ -482,43 +270,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"EnableRadiusRequest",
-        "documentation":"<p>Contains the inputs for the <a>EnableRadius</a> operation.</p>"
-      },
-      "output":{
-        "shape":"EnableRadiusResult",
-        "documentation":"<p>Contains the results of the <a>EnableRadius</a> operation.</p>"
-      },
+      "input":{"shape":"EnableRadiusRequest"},
+      "output":{"shape":"EnableRadiusResult"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"EntityAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>The specified entity already exists.</p>"
-        },
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"EntityAlreadyExistsException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Enables multi-factor authentication (MFA) with Remote Authentication Dial In User Service (RADIUS) for an AD Connector directory.</p>"
+      "documentation":"<p>Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.</p>"
     },
     "EnableSso":{
       "name":"EnableSso",
@@ -526,41 +287,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"EnableSsoRequest",
-        "documentation":"<p>Contains the inputs for the <a>EnableSso</a> operation.</p>"
-      },
-      "output":{
-        "shape":"EnableSsoResult",
-        "documentation":"<p>Contains the results of the <a>EnableSso</a> operation.</p>"
-      },
+      "input":{"shape":"EnableSsoRequest"},
+      "output":{"shape":"EnableSsoResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"InsufficientPermissionsException",
-          "exception":true,
-          "documentation":"<p>The account does not have sufficient permission to perform the operation.</p>"
-        },
-        {
-          "shape":"AuthenticationFailedException",
-          "exception":true,
-          "documentation":"<p>An authentication error occurred.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InsufficientPermissionsException"},
+        {"shape":"AuthenticationFailedException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Enables single-sign on for a directory.</p>"
     },
@@ -570,31 +304,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetDirectoryLimitsRequest",
-        "documentation":"<p>Contains the inputs for the <a>GetDirectoryLimits</a> operation.</p>"
-      },
-      "output":{
-        "shape":"GetDirectoryLimitsResult",
-        "documentation":"<p>Contains the results of the <a>GetDirectoryLimits</a> operation.</p>"
-      },
+      "input":{"shape":"GetDirectoryLimitsRequest"},
+      "output":{"shape":"GetDirectoryLimitsResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Obtains directory limit information for the current region.</p>"
     },
@@ -604,31 +319,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetSnapshotLimitsRequest",
-        "documentation":"<p>Contains the inputs for the <a>GetSnapshotLimits</a> operation.</p>"
-      },
-      "output":{
-        "shape":"GetSnapshotLimitsResult",
-        "documentation":"<p>Contains the results of the <a>GetSnapshotLimits</a> operation.</p>"
-      },
+      "input":{"shape":"GetSnapshotLimitsRequest"},
+      "output":{"shape":"GetSnapshotLimitsResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Obtains the manual snapshot limits for a directory.</p>"
     },
@@ -638,36 +334,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RestoreFromSnapshotRequest",
-        "documentation":"<p>An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.</p>"
-      },
-      "output":{
-        "shape":"RestoreFromSnapshotResult",
-        "documentation":"<p>Contains the results of the <a>RestoreFromSnapshot</a> operation.</p>"
-      },
+      "input":{"shape":"RestoreFromSnapshotRequest"},
+      "output":{"shape":"RestoreFromSnapshotResult"},
       "errors":[
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Restores a directory using an existing directory snapshot.</p> <p>When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten.</p> <p>This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the <a>DescribeDirectories</a> operation with the directory identifier. When the <b>DirectoryDescription.Stage</b> value changes to <code>Active</code>, the restore operation is complete.</p>"
     },
@@ -677,50 +350,44 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateRadiusRequest",
-        "documentation":"<p>Contains the inputs for the <a>UpdateRadius</a> operation.</p>"
-      },
-      "output":{
-        "shape":"UpdateRadiusResult",
-        "documentation":"<p>Contains the results of the <a>UpdateRadius</a> operation.</p>"
-      },
+      "input":{"shape":"UpdateRadiusRequest"},
+      "output":{"shape":"UpdateRadiusResult"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "exception":true,
-          "documentation":"<p>One or more parameters are not valid.</p>"
-        },
-        {
-          "shape":"EntityDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified entity could not be found.</p>"
-        },
-        {
-          "shape":"ClientException",
-          "exception":true,
-          "documentation":"<p>A client exception has occurred.</p>"
-        },
-        {
-          "shape":"ServiceException",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
       ],
       "documentation":"<p>Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector directory.</p>"
+    },
+    "VerifyTrust":{
+      "name":"VerifyTrust",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"VerifyTrustRequest"},
+      "output":{"shape":"VerifyTrustResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"},
+        {"shape":"UnsupportedOperationException"}
+      ],
+      "documentation":"<p>AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships. </p><p>This action verifies a trust relationship between your Microsoft AD in the AWS cloud and an external domain.</p>"
     }
   },
   "shapes":{
     "AccessUrl":{
       "type":"string",
-      "min":1,
-      "max":128
+      "max":128,
+      "min":1
     },
     "AliasName":{
       "type":"string",
-      "min":1,
       "max":62,
+      "min":1,
       "pattern":"^(?!d-)([\\da-zA-Z]+)([-]*[\\da-zA-Z])*"
     },
     "Attribute":{
@@ -758,8 +425,8 @@
           "documentation":"<p>The identifier of the request that caused the exception.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>An authentication error occurred.</p>"
+      "documentation":"<p>An authentication error occurred.</p>",
+      "exception":true
     },
     "AvailabilityZone":{"type":"string"},
     "AvailabilityZones":{
@@ -772,8 +439,8 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>A client exception has occurred.</p>"
+      "documentation":"<p>A client exception has occurred.</p>",
+      "exception":true
     },
     "CloudOnlyDirectoriesLimitReached":{"type":"boolean"},
     "Computer":{
@@ -789,20 +456,20 @@
         },
         "ComputerAttributes":{
           "shape":"Attributes",
-          "documentation":"<p>An array of <a>Attribute</a> objects that contain the LDAP attributes that belong to the computer account.</p>"
+          "documentation":"<p>An array of <a>Attribute</a> objects containing the LDAP attributes that belong to the computer account.</p>"
         }
       },
       "documentation":"<p>Contains information about a computer account in a directory.</p>"
     },
     "ComputerName":{
       "type":"string",
-      "min":1,
-      "max":15
+      "max":15,
+      "min":1
     },
     "ComputerPassword":{
       "type":"string",
-      "min":8,
       "max":64,
+      "min":8,
       "pattern":"[\\u0020-\\u00FF]+",
       "sensitive":true
     },
@@ -854,8 +521,8 @@
     },
     "ConnectPassword":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "sensitive":true
     },
     "ConnectedDirectoriesLimitReached":{"type":"boolean"},
@@ -868,11 +535,11 @@
       "members":{
         "DirectoryId":{
           "shape":"DirectoryId",
-          "documentation":"<p>The identifier of the directory to create the alias for.</p>"
+          "documentation":"<p>The identifier of the directory for which to create the alias.</p>"
         },
         "Alias":{
           "shape":"AliasName",
-          "documentation":"<p>The requested alias.</p> <p>The alias must be unique amongst all aliases in AWS. This operation will throw an <code>EntityAlreadyExistsException</code> if this alias already exists.</p>"
+          "documentation":"<p>The requested alias.</p> <p>The alias must be unique amongst all aliases in AWS. This operation throws an <code>EntityAlreadyExistsException</code> error if the alias already exists.</p>"
         }
       },
       "documentation":"<p>Contains the inputs for the <a>CreateAlias</a> operation.</p>"
@@ -901,7 +568,7 @@
       "members":{
         "DirectoryId":{
           "shape":"DirectoryId",
-          "documentation":"<p>The identifier of the directory to create the computer account in.</p>"
+          "documentation":"<p>The identifier of the directory in which to create the computer account.</p>"
         },
         "ComputerName":{
           "shape":"ComputerName",
@@ -927,7 +594,7 @@
       "members":{
         "Computer":{
           "shape":"Computer",
-          "documentation":"<p>A Computer object the represents the computer account.</p>"
+          "documentation":"<p>A <a>Computer</a> object that represents the computer account.</p>"
         }
       },
       "documentation":"<p>Contains the results for the <a>CreateComputer</a> operation.</p>"
@@ -977,6 +644,43 @@
       },
       "documentation":"<p>Contains the results of the <a>CreateDirectory</a> operation.</p>"
     },
+    "CreateMicrosoftADRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Password",
+        "VpcSettings"
+      ],
+      "members":{
+        "Name":{
+          "shape":"DirectoryName",
+          "documentation":"<p>The fully qualified domain name for the directory, such as <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need to be publicly resolvable.</p>"
+        },
+        "ShortName":{
+          "shape":"DirectoryShortName",
+          "documentation":"<p>The NetBIOS name for your domain. A short identifier for your domain, such as <code>CORP</code>. If you don't specify a NetBIOS name, it will default to the first part of your directory DNS. For example, <code>CORP</code> for the directory DNS <code>corp.example.com</code>. </p>"
+        },
+        "Password":{
+          "shape":"Password",
+          "documentation":"<p>The password for the default administrative user named <code>Admin</code>.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>A textual description for the directory. This label will appear on the AWS console <code>Directory Details</code> page after the directory is created.</p>"
+        },
+        "VpcSettings":{"shape":"DirectoryVpcSettings"}
+      },
+      "documentation":"Creates a Microsoft AD in the AWS cloud."
+    },
+    "CreateMicrosoftADResult":{
+      "type":"structure",
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"The identifier of the directory that was created."
+        }
+      }
+    },
     "CreateSnapshotRequest":{
       "type":"structure",
       "required":["DirectoryId"],
@@ -1002,6 +706,48 @@
       },
       "documentation":"<p>Contains the results of the <a>CreateSnapshot</a> operation.</p>"
     },
+    "CreateTrustRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "RemoteDomainName",
+        "TrustPassword",
+        "TrustDirection"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"The Directory ID of the Microsoft AD in the AWS cloud for which to establish the trust relationship."
+        },
+        "RemoteDomainName":{
+          "shape":"RemoteDomainName",
+          "documentation":"The Fully Qualified Domain Name (FQDN) of the external domain for which to create the trust relationship."
+        },
+        "TrustPassword":{
+          "shape":"TrustPassword",
+          "documentation":"The trust password. The must be the same password that was used when creating the trust relationship on the external domain."
+        },
+        "TrustDirection":{
+          "shape":"TrustDirection",
+          "documentation":"The direction of the trust relationship."
+        },
+        "TrustType":{
+          "shape":"TrustType",
+          "documentation":"The trust relationship type."
+        }
+      },
+      "documentation":"<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p><p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>"
+    },
+    "CreateTrustResult":{
+      "type":"structure",
+      "members":{
+        "TrustId":{
+          "shape":"TrustId",
+          "documentation":"A unique identifier for the trust relationship that was created."
+        }
+      }
+    },
+    "CreatedDateTime":{"type":"timestamp"},
     "DeleteDirectoryRequest":{
       "type":"structure",
       "required":["DirectoryId"],
@@ -1044,12 +790,32 @@
       },
       "documentation":"<p>Contains the results of the <a>DeleteSnapshot</a> operation.</p>"
     },
+    "DeleteTrustRequest":{
+      "type":"structure",
+      "required":["TrustId"],
+      "members":{
+        "TrustId":{
+          "shape":"TrustId",
+          "documentation":"The Trust ID of the trust relationship to be deleted."
+        }
+      },
+      "documentation":"Deletes the local side of an existing trust relationship between the Microsoft AD in the AWS cloud and the external domain."
+    },
+    "DeleteTrustResult":{
+      "type":"structure",
+      "members":{
+        "TrustId":{
+          "shape":"TrustId",
+          "documentation":"The Trust ID of the trust relationship that was deleted."
+        }
+      }
+    },
     "DescribeDirectoriesRequest":{
       "type":"structure",
       "members":{
         "DirectoryIds":{
           "shape":"DirectoryIds",
-          "documentation":"<p>A list of identifiers of the directories to obtain the information for. If this member is null, all directories that belong to the current account are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>"
+          "documentation":"<p>A list of identifiers of the directories for which to obtain the information. If this member is null, all directories that belong to the current account are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -1081,7 +847,7 @@
       "members":{
         "DirectoryId":{
           "shape":"DirectoryId",
-          "documentation":"<p>The identifier of the directory to retrieve snapshot information for.</p>"
+          "documentation":"<p>The identifier of the directory for which to retrieve snapshot information.</p>"
         },
         "SnapshotIds":{
           "shape":"SnapshotIds",
@@ -1112,10 +878,45 @@
       },
       "documentation":"<p>Contains the results of the <a>DescribeSnapshots</a> operation.</p>"
     },
+    "DescribeTrustsRequest":{
+      "type":"structure",
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"The Directory ID of the AWS directory that is a part of the requested trust relationship."
+        },
+        "TrustIds":{
+          "shape":"TrustIds",
+          "documentation":"<p>A list of identifiers of the trust relationships for which to obtain the information. If this member is null, all trust relationships that belong to the current account are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <i>DescribeTrustsResult.NextToken</i> value from a previous call to <a>DescribeTrusts</a>. Pass null if this is the first call.</p>"
+        },
+        "Limit":{
+          "shape":"Limit",
+          "documentation":"The maximum number of objects to return."
+        }
+      },
+      "documentation":"Describes the trust relationships for a particular Microsoft AD in the AWS cloud. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships."
+    },
+    "DescribeTrustsResult":{
+      "type":"structure",
+      "members":{
+        "Trusts":{
+          "shape":"Trusts",
+          "documentation":"<p>The list of Trust objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeTrusts</a> to retrieve the next set of items.</p>"
+        }
+      }
+    },
     "Description":{
       "type":"string",
-      "min":0,
       "max":128,
+      "min":0,
       "pattern":"^([a-zA-Z0-9_])[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$"
     },
     "DirectoryConnectSettings":{
@@ -1129,11 +930,11 @@
       "members":{
         "VpcId":{
           "shape":"VpcId",
-          "documentation":"<p>The identifier of the VPC that the AD Connector is created in.</p>"
+          "documentation":"<p>The identifier of the VPC in which the AD Connector is created.</p>"
         },
         "SubnetIds":{
           "shape":"SubnetIds",
-          "documentation":"<p>A list of subnet identifiers in the VPC that the AD Connector is created in.</p>"
+          "documentation":"<p>A list of subnet identifiers in the VPC in which the AD Connector is created.</p>"
         },
         "CustomerDnsIps":{
           "shape":"DnsIpAddrs",
@@ -1197,11 +998,11 @@
         },
         "Alias":{
           "shape":"AliasName",
-          "documentation":"<p>The alias for the directory.</p>"
+          "documentation":"<p>The alias for the directory. If no alias has been created for the directory, the alias is the directory identifier, such as <code>d-XXXXXXXXXX</code>.</p>"
         },
         "AccessUrl":{
           "shape":"AccessUrl",
-          "documentation":"<p>The access URL for the directory, such as <code>http://&#x3C;alias&#x3E;.awsapps.com</code>.</p>"
+          "documentation":"<p>The access URL for the directory, such as <code>http://<![CDATA[&#x3C;]]>alias<![CDATA[&#x3E;]]>.awsapps.com</code>. If no alias has been created for the directory, <code><![CDATA[&#x3C;]]>alias<![CDATA[&#x3E;]]></code> is the directory identifier, such as <code>d-XXXXXXXXXX</code>.</p>"
         },
         "Description":{
           "shape":"Description",
@@ -1209,7 +1010,7 @@
         },
         "DnsIpAddrs":{
           "shape":"DnsIpAddrs",
-          "documentation":"<p>The IP addresses of the DNS servers for the directory. For a Simple AD directory, these are the IP addresses of the Simple AD directory servers. For an AD Connector directory, these are the IP addresses of the DNS servers or domain controllers in the on-premises directory that the AD Connector is connected to.</p>"
+          "documentation":"<p>The IP addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD directory, these are the IP addresses of the Simple AD or Microsoft AD directory servers. For an AD Connector directory, these are the IP addresses of the DNS servers or domain controllers in the on-premises directory to which the AD Connector is connected.</p>"
         },
         "Stage":{
           "shape":"DirectoryStage",
@@ -1229,7 +1030,7 @@
         },
         "VpcSettings":{
           "shape":"DirectoryVpcSettingsDescription",
-          "documentation":"<p>A <a>DirectoryVpcSettingsDescription</a> object that contains additional information about a Simple AD directory. This member is only present if the directory is a Simple AD directory.</p>"
+          "documentation":"<p>A <a>DirectoryVpcSettingsDescription</a> object that contains additional information about a directory. This member is only present if the directory is a Simple AD or Managed AD directory.</p>"
         },
         "ConnectSettings":{
           "shape":"DirectoryConnectSettingsDescription",
@@ -1274,8 +1075,8 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>The maximum number of directories in the region has been reached. You can use the <a>GetDirectoryLimits</a> operation to determine your directory limits in the region.</p>"
+      "documentation":"<p>The maximum number of directories in the region has been reached. You can use the <a>GetDirectoryLimits</a> operation to determine your directory limits in the region.</p>",
+      "exception":true
     },
     "DirectoryLimits":{
       "type":"structure",
@@ -1291,6 +1092,18 @@
         "CloudOnlyDirectoriesLimitReached":{
           "shape":"CloudOnlyDirectoriesLimitReached",
           "documentation":"<p>Indicates if the cloud directory limit has been reached.</p>"
+        },
+        "CloudOnlyMicrosoftADLimit":{
+          "shape":"Limit",
+          "documentation":"The maximum number of Microsoft AD directories allowed in the region."
+        },
+        "CloudOnlyMicrosoftADCurrentCount":{
+          "shape":"Limit",
+          "documentation":"The current number of Microsoft AD directories in the region."
+        },
+        "CloudOnlyMicrosoftADLimitReached":{
+          "shape":"CloudOnlyDirectoriesLimitReached",
+          "documentation":"Indicates if the Microsoft AD directory limit has been reached."
         },
         "ConnectedDirectoriesLimit":{
           "shape":"Limit",
@@ -1342,7 +1155,8 @@
       "type":"string",
       "enum":[
         "SimpleAD",
-        "ADConnector"
+        "ADConnector",
+        "MicrosoftAD"
       ]
     },
     "DirectoryUnavailableException":{
@@ -1351,8 +1165,8 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>The specified directory is unavailable or could not be found.</p>"
+      "documentation":"<p>The specified directory is unavailable or could not be found.</p>",
+      "exception":true
     },
     "DirectoryVpcSettings":{
       "type":"structure",
@@ -1363,14 +1177,14 @@
       "members":{
         "VpcId":{
           "shape":"VpcId",
-          "documentation":"<p>The identifier of the VPC to create the Simple AD directory in.</p>"
+          "documentation":"<p>The identifier of the VPC in which to create the directory.</p>"
         },
         "SubnetIds":{
           "shape":"SubnetIds",
           "documentation":"<p>The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service creates a directory server and a DNS server in each of these subnets.</p>"
         }
       },
-      "documentation":"<p>Contains information for the <a>CreateDirectory</a> operation when a Simple AD directory is being created.</p>"
+      "documentation":"<p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>"
     },
     "DirectoryVpcSettingsDescription":{
       "type":"structure",
@@ -1385,14 +1199,14 @@
         },
         "SecurityGroupId":{
           "shape":"SecurityGroupId",
-          "documentation":"<p>The security group identifier for the directory.</p>"
+          "documentation":"<p>The security group identifier for the directory. If the directory was created before 8/1/2014, this is the identifier of the directory members security group that was created when the directory was created. If the directory was created after this date, this value is null.</p>"
         },
         "AvailabilityZones":{
           "shape":"AvailabilityZones",
           "documentation":"<p>The list of Availability Zones that the directory is in.</p>"
         }
       },
-      "documentation":"<p>Contains information about a Simple AD directory.</p>"
+      "documentation":"<p>Contains information about the directory.</p>"
     },
     "DisableRadiusRequest":{
       "type":"structure",
@@ -1400,7 +1214,7 @@
       "members":{
         "DirectoryId":{
           "shape":"DirectoryId",
-          "documentation":"<p>The identifier of the directory to disable MFA for.</p>"
+          "documentation":"<p>The identifier of the directory for which to disable MFA.</p>"
         }
       },
       "documentation":"<p>Contains the inputs for the <a>DisableRadius</a> operation.</p>"
@@ -1417,15 +1231,15 @@
       "members":{
         "DirectoryId":{
           "shape":"DirectoryId",
-          "documentation":"<p>The identifier of the directory to disable single-sign on for.</p>"
+          "documentation":"<p>The identifier of the directory for which to disable single-sign on.</p>"
         },
         "UserName":{
           "shape":"UserName",
-          "documentation":"<p>The username of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. This account must have privileges to remove a service principle name. </p> <p>If the AD Connector service account does not have privileges to remove a service principle name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to disable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>"
+          "documentation":"<p>The username of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. This account must have privileges to remove a service principal name. </p> <p>If the AD Connector service account does not have privileges to remove a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to disable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>"
         },
         "Password":{
           "shape":"ConnectPassword",
-          "documentation":"<p>The password of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. See the <i>UserName</i> parameter for more information.</p>"
+          "documentation":"<p>The password of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.</p>"
         }
       },
       "documentation":"<p>Contains the inputs for the <a>DisableSso</a> operation.</p>"
@@ -1449,7 +1263,7 @@
       "members":{
         "DirectoryId":{
           "shape":"DirectoryId",
-          "documentation":"<p>The identifier of the directory to enable MFA for.</p>"
+          "documentation":"<p>The identifier of the directory for which to enable MFA.</p>"
         },
         "RadiusSettings":{
           "shape":"RadiusSettings",
@@ -1470,15 +1284,15 @@
       "members":{
         "DirectoryId":{
           "shape":"DirectoryId",
-          "documentation":"<p>The identifier of the directory to enable single-sign on for.</p>"
+          "documentation":"<p>The identifier of the directory for which to enable single-sign on.</p>"
         },
         "UserName":{
           "shape":"UserName",
-          "documentation":"<p>The username of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. This account must have privileges to add a service principle name. </p> <p>If the AD Connector service account does not have privileges to add a service principle name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to enable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>"
+          "documentation":"<p>The username of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. This account must have privileges to add a service principal name. </p> <p>If the AD Connector service account does not have privileges to add a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to enable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>"
         },
         "Password":{
           "shape":"ConnectPassword",
-          "documentation":"<p>The password of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. See the <i>UserName</i> parameter for more information.</p>"
+          "documentation":"<p>The password of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.</p>"
         }
       },
       "documentation":"<p>Contains the inputs for the <a>EnableSso</a> operation.</p>"
@@ -1495,8 +1309,8 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>The specified entity already exists.</p>"
+      "documentation":"<p>The specified entity already exists.</p>",
+      "exception":true
     },
     "EntityDoesNotExistException":{
       "type":"structure",
@@ -1504,8 +1318,8 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>The specified entity could not be found.</p>"
+      "documentation":"<p>The specified entity could not be found.</p>",
+      "exception":true
     },
     "ExceptionMessage":{
       "type":"string",
@@ -1554,8 +1368,8 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>The account does not have sufficient permission to perform the operation.</p>"
+      "documentation":"<p>The account does not have sufficient permission to perform the operation.</p>",
+      "exception":true
     },
     "InvalidNextTokenException":{
       "type":"structure",
@@ -1563,8 +1377,8 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>The <i>NextToken</i> value is not valid.</p>"
+      "documentation":"<p>The <i>NextToken</i> value is not valid.</p>",
+      "exception":true
     },
     "InvalidParameterException":{
       "type":"structure",
@@ -1572,8 +1386,8 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>One or more parameters are not valid.</p>"
+      "documentation":"<p>One or more parameters are not valid.</p>",
+      "exception":true
     },
     "IpAddr":{
       "type":"string",
@@ -1593,18 +1407,18 @@
     "NextToken":{"type":"string"},
     "OrganizationalUnitDN":{
       "type":"string",
-      "min":1,
-      "max":2000
+      "max":2000,
+      "min":1
     },
     "Password":{
       "type":"string",
-      "pattern":"(?=^.{8,64}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*",
+      "pattern":"(?=^.{8,64}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9\\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\\s]))^.*",
       "sensitive":true
     },
     "PortNumber":{
       "type":"integer",
-      "min":1025,
-      "max":65535
+      "max":65535,
+      "min":1025
     },
     "RadiusAuthenticationProtocol":{
       "type":"string",
@@ -1617,13 +1431,13 @@
     },
     "RadiusDisplayLabel":{
       "type":"string",
-      "min":1,
-      "max":64
+      "max":64,
+      "min":1
     },
     "RadiusRetries":{
       "type":"integer",
-      "min":0,
-      "max":10
+      "max":10,
+      "min":0
     },
     "RadiusSettings":{
       "type":"structure",
@@ -1665,8 +1479,8 @@
     },
     "RadiusSharedSecret":{
       "type":"string",
-      "min":8,
       "max":512,
+      "min":8,
       "sensitive":true
     },
     "RadiusStatus":{
@@ -1679,13 +1493,17 @@
     },
     "RadiusTimeout":{
       "type":"integer",
-      "min":1,
-      "max":20
+      "max":20,
+      "min":1
+    },
+    "RemoteDomainName":{
+      "type":"string",
+      "pattern":"^([a-zA-Z0-9]+[\\\\.-])+([a-zA-Z0-9])+[.]?$"
     },
     "RequestId":{
       "type":"string",
-      "pattern":"^([A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12})$",
-      "documentation":"<p>The AWS request identifier.</p>"
+      "documentation":"<p>The AWS request identifier.</p>",
+      "pattern":"^([A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12})$"
     },
     "RestoreFromSnapshotRequest":{
       "type":"structure",
@@ -1706,8 +1524,8 @@
     },
     "SID":{
       "type":"string",
-      "min":1,
       "max":256,
+      "min":1,
       "pattern":"[&\\w+-.@]+"
     },
     "SecurityGroupId":{
@@ -1716,8 +1534,8 @@
     },
     "Server":{
       "type":"string",
-      "min":1,
-      "max":256
+      "max":256,
+      "min":1
     },
     "Servers":{
       "type":"list",
@@ -1729,9 +1547,9 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
+      "documentation":"<p>An exception has occurred in AWS Directory Service.</p>",
       "exception":true,
-      "fault":true,
-      "documentation":"<p>An exception has occurred in AWS Directory Service.</p>"
+      "fault":true
     },
     "Snapshot":{
       "type":"structure",
@@ -1778,8 +1596,8 @@
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>The maximum number of manual snapshots for the directory has been reached. You can use the <a>GetSnapshotLimits</a> operation to determine the snapshot limits for a directory.</p>"
+      "documentation":"<p>The maximum number of manual snapshots for the directory has been reached. You can use the <a>GetSnapshotLimits</a> operation to determine the snapshot limits for a directory.</p>",
+      "exception":true
     },
     "SnapshotLimits":{
       "type":"structure",
@@ -1801,8 +1619,8 @@
     },
     "SnapshotName":{
       "type":"string",
-      "min":0,
       "max":128,
+      "min":0,
       "pattern":"^([a-zA-Z0-9_])[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$"
     },
     "SnapshotStatus":{
@@ -1828,6 +1646,7 @@
     "SsoEnabled":{"type":"boolean"},
     "StageReason":{"type":"string"},
     "StartTime":{"type":"timestamp"},
+    "StateLastUpdatedDateTime":{"type":"timestamp"},
     "SubnetId":{
       "type":"string",
       "pattern":"^(subnet-[0-9a-f]{8})$"
@@ -1836,14 +1655,99 @@
       "type":"list",
       "member":{"shape":"SubnetId"}
     },
+    "Trust":{
+      "type":"structure",
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"The Directory ID of the AWS directory involved in the trust relationship."
+        },
+        "TrustId":{
+          "shape":"TrustId",
+          "documentation":"The unique ID of the trust relationship."
+        },
+        "RemoteDomainName":{
+          "shape":"RemoteDomainName",
+          "documentation":"The Fully Qualified Domain Name (FQDN) of the external domain involved in the trust relationship."
+        },
+        "TrustType":{
+          "shape":"TrustType",
+          "documentation":"The trust relationship type."
+        },
+        "TrustDirection":{
+          "shape":"TrustDirection",
+          "documentation":"The trust relationship direction."
+        },
+        "TrustState":{
+          "shape":"TrustState",
+          "documentation":"The trust relationship state."
+        },
+        "CreatedDateTime":{
+          "shape":"CreatedDateTime",
+          "documentation":"The date and time that the trust relationship was created."
+        },
+        "LastUpdatedDateTime":{
+          "shape":"LastUpdatedDateTime",
+          "documentation":"The date and time that the trust relationship was last updated."
+        },
+        "StateLastUpdatedDateTime":{
+          "shape":"StateLastUpdatedDateTime",
+          "documentation":"The date and time that the TrustState was last updated."
+        }
+      },
+      "documentation":"Describes a trust relationship between an Microsoft AD in the AWS cloud and an external domain."
+    },
+    "TrustDirection":{
+      "type":"string",
+      "enum":[
+        "One-Way: Outgoing",
+        "One-Way: Incoming",
+        "Two-Way"
+      ]
+    },
+    "TrustId":{
+      "type":"string",
+      "pattern":"^t-[0-9a-f]{10}$"
+    },
+    "TrustIds":{
+      "type":"list",
+      "member":{"shape":"TrustId"}
+    },
+    "TrustPassword":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "sensitive":true
+    },
+    "TrustState":{
+      "type":"string",
+      "enum":[
+        "Creating",
+        "Created",
+        "Verifying",
+        "VerifyFailed",
+        "Verified",
+        "Deleting",
+        "Deleted",
+        "Failed"
+      ]
+    },
+    "TrustType":{
+      "type":"string",
+      "enum":["Forest"]
+    },
+    "Trusts":{
+      "type":"list",
+      "member":{"shape":"Trust"}
+    },
     "UnsupportedOperationException":{
       "type":"structure",
       "members":{
         "Message":{"shape":"ExceptionMessage"},
         "RequestId":{"shape":"RequestId"}
       },
-      "exception":true,
-      "documentation":"<p>The operation is not supported.</p>"
+      "documentation":"<p>The operation is not supported.</p>",
+      "exception":true
     },
     "UpdateRadiusRequest":{
       "type":"structure",
@@ -1854,7 +1758,7 @@
       "members":{
         "DirectoryId":{
           "shape":"DirectoryId",
-          "documentation":"<p>The identifier of the directory to update the RADIUS server information for.</p>"
+          "documentation":"<p>The identifier of the directory for which to update the RADIUS server information.</p>"
         },
         "RadiusSettings":{
           "shape":"RadiusSettings",
@@ -1875,9 +1779,30 @@
       "min":1,
       "pattern":"[a-zA-Z0-9._-]+"
     },
+    "VerifyTrustRequest":{
+      "type":"structure",
+      "required":["TrustId"],
+      "members":{
+        "TrustId":{
+          "shape":"TrustId",
+          "documentation":"The unique Trust ID of the trust relationship to verify."
+        }
+      },
+      "documentation":"Initiates the verification of an existing trust relationship between a Microsoft AD in the AWS cloud and an external domain."
+    },
+    "VerifyTrustResult":{
+      "type":"structure",
+      "members":{
+        "TrustId":{
+          "shape":"TrustId",
+          "documentation":"The unique Trust ID of the trust relationship that was verified."
+        }
+      }
+    },
     "VpcId":{
       "type":"string",
       "pattern":"^(vpc-[0-9a-f]{8})$"
     }
-  }
+  },
+  "documentation":"<fullname>AWS Directory Service</fullname> <p>This is the <i>AWS Directory Service API Reference</i>. This guide provides detailed information about AWS Directory Service operations, data types, parameters, and errors.</p>"
 }
