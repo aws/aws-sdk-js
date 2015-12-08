@@ -3,12 +3,11 @@
   "metadata":{
     "apiVersion":"2011-01-01",
     "endpointPrefix":"autoscaling",
+    "protocol":"query",
     "serviceFullName":"Auto Scaling",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://autoscaling.amazonaws.com/doc/2011-01-01/",
-    "protocol":"query"
+    "xmlNamespace":"http://autoscaling.amazonaws.com/doc/2011-01-01/"
   },
-  "documentation":"<fullname>Auto Scaling</fullname> <p>Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined policies, schedules, and health checks. Use this service in conjunction with the Amazon CloudWatch and Elastic Load Balancing services.</p>",
   "operations":{
     "AttachInstances":{
       "name":"AttachInstances",
@@ -18,18 +17,9 @@
       },
       "input":{"shape":"AttachInstancesQuery"},
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Attaches one or more EC2 instances to the specified Auto Scaling group.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-instance-asg.html\">Attach EC2 Instances to Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+      "documentation":"<p>Attaches one or more EC2 instances to the specified Auto Scaling group.</p> <p>When you attach instances, Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-instance-asg.html\">Attach EC2 Instances to Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
     "AttachLoadBalancers":{
       "name":"AttachLoadBalancers",
@@ -43,16 +33,7 @@
         "resultWrapper":"AttachLoadBalancersResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Attaches one or more load balancers to the specified Auto Scaling group.</p> <p>To describe the load balancers for an Auto Scaling group, use <a>DescribeLoadBalancers</a>. To detach the load balancer from the Auto Scaling group, use <a>DetachLoadBalancers</a>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-load-balancer-asg.html\">Attach a Load Balancer to Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -68,18 +49,9 @@
         "resultWrapper":"CompleteLifecycleActionResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Completes the lifecycle action for the associated token initiated under the given lifecycle hook with the specified result. </p> <p>This operation is a part of the basic sequence for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li>Create a notification target. A target can be either an Amazon SQS queue or an Amazon SNS topic.</li> <li>Create an IAM role. This role allows Auto Scaling to publish lifecycle notifications to the designated SQS queue or SNS topic.</li> <li>Create the lifecycle hook. You can create a hook that acts when instances launch or when instances terminate.</li> <li>If necessary, record the lifecycle action heartbeat to keep the instance in a pending state.</li> <li> <b>Complete the lifecycle action</b>.</li> </ol> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingPendingState.html\">Auto Scaling Pending State</a> and <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingTerminatingState.html\">Auto Scaling Terminating State</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+      "documentation":"<p>Completes the lifecycle action for the associated token initiated under the given lifecycle hook with the specified result. </p> <p>This operation is a part of the basic sequence for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li>Create a notification target. A target can be either an Amazon SQS queue or an Amazon SNS topic.</li> <li>Create an IAM role. This role allows Auto Scaling to publish lifecycle notifications to the designated SQS queue or SNS topic.</li> <li>Create the lifecycle hook. You can create a hook that acts when instances launch or when instances terminate.</li> <li>If necessary, record the lifecycle action heartbeat to keep the instance in a pending state.</li> <li><b>Complete the lifecycle action</b>.</li> </ol> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingPendingState.html\">Auto Scaling Pending State</a> and <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingTerminatingState.html\">Auto Scaling Terminating State</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
     "CreateAutoScalingGroup":{
       "name":"CreateAutoScalingGroup",
@@ -89,36 +61,9 @@
       },
       "input":{"shape":"CreateAutoScalingGroupType"},
       "errors":[
-        {
-          "shape":"AlreadyExistsFault",
-          "error":{
-            "code":"AlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have an Auto Scaling group or launch configuration with this name.</p>"
-        },
-        {
-          "shape":"LimitExceededFault",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"AlreadyExistsFault"},
+        {"shape":"LimitExceededFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Creates an Auto Scaling group with the specified name and attributes.</p> <p>If you exceed your maximum limit of Auto Scaling groups, which by default is 20 per region, the call fails. For information about viewing and updating this limit, see <a>DescribeAccountLimits</a>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroup.html\">Auto Scaling Groups</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -130,36 +75,9 @@
       },
       "input":{"shape":"CreateLaunchConfigurationType"},
       "errors":[
-        {
-          "shape":"AlreadyExistsFault",
-          "error":{
-            "code":"AlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have an Auto Scaling group or launch configuration with this name.</p>"
-        },
-        {
-          "shape":"LimitExceededFault",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"AlreadyExistsFault"},
+        {"shape":"LimitExceededFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Creates a launch configuration.</p> <p>If you exceed your maximum limit of launch configurations, which by default is 100 per region, the call fails. For information about viewing and updating this limit, see <a>DescribeAccountLimits</a>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/LaunchConfiguration.html\">Launch Configurations</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -171,36 +89,9 @@
       },
       "input":{"shape":"CreateOrUpdateTagsType"},
       "errors":[
-        {
-          "shape":"LimitExceededFault",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.</p>"
-        },
-        {
-          "shape":"AlreadyExistsFault",
-          "error":{
-            "code":"AlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have an Auto Scaling group or launch configuration with this name.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"LimitExceededFault"},
+        {"shape":"AlreadyExistsFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Creates or updates tags for the specified Auto Scaling group.</p> <p>A tag is defined by its resource ID, resource type, key, value, and propagate flag. The value and the propagate flag are optional parameters. The only supported resource type is <code>auto-scaling-group</code>, and the resource ID must be the name of the group. The <code>PropagateAtLaunch</code> flag determines whether the tag is added to instances launched in the group. Valid values are <code>true</code> or <code>false</code>.</p> <p>When you specify a tag with a key that already exists, the operation overwrites the previous tag definition, and you do not get an error message.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html\">Tagging Auto Scaling Groups and Instances</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -212,38 +103,11 @@
       },
       "input":{"shape":"DeleteAutoScalingGroupType"},
       "errors":[
-        {
-          "shape":"ScalingActivityInProgressFault",
-          "error":{
-            "code":"ScalingActivityInProgress",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group can't be deleted because there are scaling activities in progress.</p>"
-        },
-        {
-          "shape":"ResourceInUseFault",
-          "error":{
-            "code":"ResourceInUse",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group or launch configuration can't be deleted because it is in use.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ScalingActivityInProgressFault"},
+        {"shape":"ResourceInUseFault"},
+        {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Deletes the specified Auto Scaling group.</p> <p>The group must have no instances and no scaling activities in progress.</p> <p>To remove all instances before calling <code>DeleteAutoScalingGroup</code>, call <a>UpdateAutoScalingGroup</a> to set the minimum and maximum size of the Auto Scaling group to zero.</p>"
+      "documentation":"<p>Deletes the specified Auto Scaling group.</p> <p>If the group has instances or scaling activities in progress, you must specify the option to force the deletion in order for it to succeed.</p> <p>If the group has policies, deleting the group deletes the policies, the underlying alarm actions, and any alarm that no longer has an associated action.</p> <p>To remove instances from the Auto Scaling group before deleting it, call <a>DetachInstances</a> with the list of instances and the option to decrement the desired capacity so that Auto Scaling does not launch replacement instances.</p> <p>To terminate all instances before deleting the Auto Scaling group, call <a>UpdateAutoScalingGroup</a> and set the minimum size and desired capacity of the Auto Scaling group to zero.</p>"
     },
     "DeleteLaunchConfiguration":{
       "name":"DeleteLaunchConfiguration",
@@ -253,26 +117,8 @@
       },
       "input":{"shape":"LaunchConfigurationNameType"},
       "errors":[
-        {
-          "shape":"ResourceInUseFault",
-          "error":{
-            "code":"ResourceInUse",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group or launch configuration can't be deleted because it is in use.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceInUseFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Deletes the specified launch configuration.</p> <p>The launch configuration must not be attached to an Auto Scaling group. When this call completes, the launch configuration is no longer available for use.</p>"
     },
@@ -288,16 +134,7 @@
         "resultWrapper":"DeleteLifecycleHookResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Deletes the specified lifecycle hook.</p> <p>If there are any outstanding lifecycle actions, they are completed first (<code>ABANDON</code> for launching instances, <code>CONTINUE</code> for terminating instances).</p>"
     },
@@ -309,16 +146,7 @@
       },
       "input":{"shape":"DeleteNotificationConfigurationType"},
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Deletes the specified notification.</p>"
     },
@@ -328,23 +156,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeletePolicyType",
-        "documentation":"<p></p>"
-      },
+      "input":{"shape":"DeletePolicyType"},
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Deletes the specified Auto Scaling policy.</p>"
+      "documentation":"<p>Deletes the specified Auto Scaling policy.</p> <p>Deleting a policy deletes the underlying alarm action, but does not delete the alarm, even if it no longer has an associated action.</p>"
     },
     "DeleteScheduledAction":{
       "name":"DeleteScheduledAction",
@@ -354,16 +170,7 @@
       },
       "input":{"shape":"DeleteScheduledActionType"},
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Deletes the specified scheduled action.</p>"
     },
@@ -375,16 +182,7 @@
       },
       "input":{"shape":"DeleteTagsType"},
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Deletes the specified tags.</p>"
     },
@@ -399,16 +197,7 @@
         "resultWrapper":"DescribeAccountLimitsResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the current Auto Scaling resource limits for your AWS account.</p> <p>For information about requesting an increase in these limits, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">AWS Service Limits</a> in the <i>Amazon Web Services General Reference</i>.</p>"
     },
@@ -423,16 +212,7 @@
         "resultWrapper":"DescribeAdjustmentTypesResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the policy adjustment types for use with <a>PutScalingPolicy</a>.</p>"
     },
@@ -448,26 +228,8 @@
         "resultWrapper":"DescribeAutoScalingGroupsResult"
       },
       "errors":[
-        {
-          "shape":"InvalidNextToken",
-          "error":{
-            "code":"InvalidNextToken",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The <code>NextToken</code> value is not valid.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"InvalidNextToken"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes one or more Auto Scaling groups. If a list of names is not provided, the call describes all Auto Scaling groups.</p>"
     },
@@ -483,26 +245,8 @@
         "resultWrapper":"DescribeAutoScalingInstancesResult"
       },
       "errors":[
-        {
-          "shape":"InvalidNextToken",
-          "error":{
-            "code":"InvalidNextToken",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The <code>NextToken</code> value is not valid.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"InvalidNextToken"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes one or more Auto Scaling instances. If a list is not provided, the call describes all instances.</p>"
     },
@@ -517,16 +261,7 @@
         "resultWrapper":"DescribeAutoScalingNotificationTypesResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the notification types that are supported by Auto Scaling.</p>"
     },
@@ -542,26 +277,8 @@
         "resultWrapper":"DescribeLaunchConfigurationsResult"
       },
       "errors":[
-        {
-          "shape":"InvalidNextToken",
-          "error":{
-            "code":"InvalidNextToken",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The <code>NextToken</code> value is not valid.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"InvalidNextToken"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes one or more launch configurations. If you omit the list of names, then the call describes all launch configurations.</p>"
     },
@@ -576,16 +293,7 @@
         "resultWrapper":"DescribeLifecycleHookTypesResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the available types of lifecycle hooks.</p>"
     },
@@ -601,16 +309,7 @@
         "resultWrapper":"DescribeLifecycleHooksResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the lifecycle hooks for the specified Auto Scaling group.</p>"
     },
@@ -626,16 +325,7 @@
         "resultWrapper":"DescribeLoadBalancersResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the load balancers for the specified Auto Scaling group.</p>"
     },
@@ -650,16 +340,7 @@
         "resultWrapper":"DescribeMetricCollectionTypesResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the available CloudWatch metrics for Auto Scaling.</p> <p>Note that the <code>GroupStandbyInstances</code> metric is not returned by default. You must explicitly request this metric when calling <a>EnableMetricsCollection</a>.</p>"
     },
@@ -675,26 +356,8 @@
         "resultWrapper":"DescribeNotificationConfigurationsResult"
       },
       "errors":[
-        {
-          "shape":"InvalidNextToken",
-          "error":{
-            "code":"InvalidNextToken",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The <code>NextToken</code> value is not valid.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"InvalidNextToken"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the notification actions associated with the specified Auto Scaling group.</p>"
     },
@@ -710,26 +373,8 @@
         "resultWrapper":"DescribePoliciesResult"
       },
       "errors":[
-        {
-          "shape":"InvalidNextToken",
-          "error":{
-            "code":"InvalidNextToken",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The <code>NextToken</code> value is not valid.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"InvalidNextToken"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the policies for the specified Auto Scaling group.</p>"
     },
@@ -745,26 +390,8 @@
         "resultWrapper":"DescribeScalingActivitiesResult"
       },
       "errors":[
-        {
-          "shape":"InvalidNextToken",
-          "error":{
-            "code":"InvalidNextToken",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The <code>NextToken</code> value is not valid.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"InvalidNextToken"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes one or more scaling activities for the specified Auto Scaling group. If you omit the <code>ActivityIds</code>, the call returns all activities from the past six weeks. Activities are sorted by the start time. Activities still in progress appear first on the list.</p>"
     },
@@ -779,16 +406,7 @@
         "resultWrapper":"DescribeScalingProcessTypesResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the scaling process types for use with <a>ResumeProcesses</a> and <a>SuspendProcesses</a>.</p>"
     },
@@ -804,26 +422,8 @@
         "resultWrapper":"DescribeScheduledActionsResult"
       },
       "errors":[
-        {
-          "shape":"InvalidNextToken",
-          "error":{
-            "code":"InvalidNextToken",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The <code>NextToken</code> value is not valid.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"InvalidNextToken"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the actions scheduled for your Auto Scaling group that haven't run. To describe the actions that have already run, use <a>DescribeScalingActivities</a>.</p>"
     },
@@ -839,26 +439,8 @@
         "resultWrapper":"DescribeTagsResult"
       },
       "errors":[
-        {
-          "shape":"InvalidNextToken",
-          "error":{
-            "code":"InvalidNextToken",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The <code>NextToken</code> value is not valid.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"InvalidNextToken"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the specified tags.</p> <p>You can use filters to limit the results. For example, you can query for the tags for a specific Auto Scaling group. You can specify multiple values for a filter. A tag must match at least one of the specified values for it to be included in the results.</p> <p>You can also specify multiple filters. The result includes information for a particular tag only if it matches all the filters. If there's no match, no special message is returned.</p>"
     },
@@ -873,16 +455,7 @@
         "resultWrapper":"DescribeTerminationPolicyTypesResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Describes the termination policies supported by Auto Scaling.</p>"
     },
@@ -898,18 +471,9 @@
         "resultWrapper":"DetachInstancesResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Removes one or more instances from the specified Auto Scaling group. After the instances are detached, you can manage them independently from the rest of the Auto Scaling group.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/detach-instance-asg.html\">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+      "documentation":"<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independently from the rest of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/detach-instance-asg.html\">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
     "DetachLoadBalancers":{
       "name":"DetachLoadBalancers",
@@ -923,16 +487,7 @@
         "resultWrapper":"DetachLoadBalancersResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Removes one or more load balancers from the specified Auto Scaling group.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using <a>DescribeLoadBalancers</a>. Note that the instances remain running.</p>"
     },
@@ -944,16 +499,7 @@
       },
       "input":{"shape":"DisableMetricsCollectionQuery"},
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Disables monitoring of the specified metrics for the specified Auto Scaling group.</p>"
     },
@@ -965,16 +511,7 @@
       },
       "input":{"shape":"EnableMetricsCollectionQuery"},
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Enables monitoring of the specified metrics for the specified Auto Scaling group.</p> <p>You can only enable metrics collection if <code>InstanceMonitoring</code> in the launch configuration for the group is set to <code>True</code>.</p>"
     },
@@ -990,16 +527,7 @@
         "resultWrapper":"EnterStandbyResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Moves the specified instances into <code>Standby</code> mode.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingInServiceState.html\">Auto Scaling InService State</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -1011,26 +539,8 @@
       },
       "input":{"shape":"ExecutePolicyType"},
       "errors":[
-        {
-          "shape":"ScalingActivityInProgressFault",
-          "error":{
-            "code":"ScalingActivityInProgress",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group can't be deleted because there are scaling activities in progress.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ScalingActivityInProgressFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Executes the specified policy.</p>"
     },
@@ -1046,16 +556,7 @@
         "resultWrapper":"ExitStandbyResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Moves the specified instances out of <code>Standby</code> mode.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingInServiceState.html\">Auto Scaling InService State</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -1071,26 +572,8 @@
         "resultWrapper":"PutLifecycleHookResult"
       },
       "errors":[
-        {
-          "shape":"LimitExceededFault",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"LimitExceededFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Creates or updates a lifecycle hook for the specified Auto Scaling Group.</p> <p>A lifecycle hook tells Auto Scaling that you want to perform an action on an instance that is not actively in service; for example, either when the instance launches or before the instance terminates.</p> <p>This operation is a part of the basic sequence for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li>Create a notification target. A target can be either an Amazon SQS queue or an Amazon SNS topic.</li> <li>Create an IAM role. This role allows Auto Scaling to publish lifecycle notifications to the designated SQS queue or SNS topic.</li> <li><b>Create the lifecycle hook. You can create a hook that acts when instances launch or when instances terminate.</b></li> <li>If necessary, record the lifecycle action heartbeat to keep the instance in a pending state.</li> <li>Complete the lifecycle action.</li> </ol> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingPendingState.html\">Auto Scaling Pending State</a> and <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingTerminatingState.html\">Auto Scaling Terminating State</a> in the <i>Auto Scaling Developer Guide</i>.</p> <p>If you exceed your maximum limit of lifecycle hooks, which by default is 50 per region, the call fails. For information about updating this limit, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">AWS Service Limits</a> in the <i>Amazon Web Services General Reference</i>.</p>"
     },
@@ -1102,26 +585,8 @@
       },
       "input":{"shape":"PutNotificationConfigurationType"},
       "errors":[
-        {
-          "shape":"LimitExceededFault",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"LimitExceededFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p> Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to this topic can have messages for events delivered to an endpoint such as a web server or email address. </p> <p>For more information see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASGettingNotifications.html\">Getting Notifications When Your Auto Scaling Group Changes</a> in the <i>Auto Scaling Developer Guide</i>.</p> <p>This configuration overwrites an existing configuration.</p>"
     },
@@ -1137,26 +602,8 @@
         "resultWrapper":"PutScalingPolicyResult"
       },
       "errors":[
-        {
-          "shape":"LimitExceededFault",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"LimitExceededFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Creates or updates a policy for an Auto Scaling group. To update an existing policy, use the existing policy name and set the parameters you want to change. Any existing parameter not changed in an update to an existing policy is not changed in this update request.</p> <p>If you exceed your maximum limit of step adjustments, which by default is 20 per region, the call fails. For information about updating this limit, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">AWS Service Limits</a> in the <i>Amazon Web Services General Reference</i>.</p>"
     },
@@ -1168,36 +615,9 @@
       },
       "input":{"shape":"PutScheduledUpdateGroupActionType"},
       "errors":[
-        {
-          "shape":"AlreadyExistsFault",
-          "error":{
-            "code":"AlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have an Auto Scaling group or launch configuration with this name.</p>"
-        },
-        {
-          "shape":"LimitExceededFault",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"AlreadyExistsFault"},
+        {"shape":"LimitExceededFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p> Creates or updates a scheduled scaling action for an Auto Scaling group. When updating a scheduled scaling action, if you leave a parameter unspecified, the corresponding value remains unchanged in the affected Auto Scaling group. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/schedule_time.html\">Scheduled Scaling</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -1213,16 +633,7 @@
         "resultWrapper":"RecordLifecycleActionHeartbeatResult"
       },
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Records a heartbeat for the lifecycle action associated with a specific token. This extends the timeout by the length of time defined by the <code>HeartbeatTimeout</code> parameter of <a>PutLifecycleHook</a>.</p> <p>This operation is a part of the basic sequence for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li>Create a notification target. A target can be either an Amazon SQS queue or an Amazon SNS topic.</li> <li>Create an IAM role. This role allows Auto Scaling to publish lifecycle notifications to the designated SQS queue or SNS topic.</li> <li>Create the lifecycle hook. You can create a hook that acts when instances launch or when instances terminate.</li> <li><b>If necessary, record the lifecycle action heartbeat to keep the instance in a pending state.</b></li> <li>Complete the lifecycle action.</li> </ol> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingPendingState.html\">Auto Scaling Pending State</a> and <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingTerminatingState.html\">Auto Scaling Terminating State</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -1234,26 +645,8 @@
       },
       "input":{"shape":"ScalingProcessQuery"},
       "errors":[
-        {
-          "shape":"ResourceInUseFault",
-          "error":{
-            "code":"ResourceInUse",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group or launch configuration can't be deleted because it is in use.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceInUseFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Resumes the specified suspended Auto Scaling processes for the specified Auto Scaling group. To resume specific processes, use the <code>ScalingProcesses</code> parameter. To resume all processes, omit the <code>ScalingProcesses</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html\">Suspend and Resume Auto Scaling Processes</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -1265,26 +658,8 @@
       },
       "input":{"shape":"SetDesiredCapacityType"},
       "errors":[
-        {
-          "shape":"ScalingActivityInProgressFault",
-          "error":{
-            "code":"ScalingActivityInProgress",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group can't be deleted because there are scaling activities in progress.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ScalingActivityInProgressFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Sets the size of the specified Auto Scaling group.</p> <p>For more information about desired capacity, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/WhatIsAutoScaling.html\">What Is Auto Scaling?</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -1296,18 +671,26 @@
       },
       "input":{"shape":"SetInstanceHealthQuery"},
       "errors":[
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Sets the health status of the specified instance.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html\">Health Checks</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+    },
+    "SetInstanceProtection":{
+      "name":"SetInstanceProtection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SetInstanceProtectionQuery"},
+      "output":{
+        "shape":"SetInstanceProtectionAnswer",
+        "resultWrapper":"SetInstanceProtectionResult"
+      },
+      "errors":[
+        {"shape":"LimitExceededFault"},
+        {"shape":"ResourceContentionFault"}
+      ],
+      "documentation":"<p>Updates the instance protection settings of the specified instances.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html#instance-protection\">Instance Protection</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
     "SuspendProcesses":{
       "name":"SuspendProcesses",
@@ -1317,26 +700,8 @@
       },
       "input":{"shape":"ScalingProcessQuery"},
       "errors":[
-        {
-          "shape":"ResourceInUseFault",
-          "error":{
-            "code":"ResourceInUse",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group or launch configuration can't be deleted because it is in use.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ResourceInUseFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Suspends the specified Auto Scaling processes for the specified Auto Scaling group. To suspend specific processes, use the <code>ScalingProcesses</code> parameter. To suspend all processes, omit the <code>ScalingProcesses</code> parameter.</p> <p>Note that if you suspend either the <code>Launch</code> or <code>Terminate</code> process types, it can prevent other process types from functioning properly.</p> <p>To resume processes that have been suspended, use <a>ResumeProcesses</a>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html\">Suspend and Resume Auto Scaling Processes</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
     },
@@ -1352,26 +717,8 @@
         "resultWrapper":"TerminateInstanceInAutoScalingGroupResult"
       },
       "errors":[
-        {
-          "shape":"ScalingActivityInProgressFault",
-          "error":{
-            "code":"ScalingActivityInProgress",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group can't be deleted because there are scaling activities in progress.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ScalingActivityInProgressFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Terminates the specified instance and optionally adjusts the desired group size.</p> <p>This call simply makes a termination request. The instance is not terminated immediately.</p>"
     },
@@ -1383,26 +730,8 @@
       },
       "input":{"shape":"UpdateAutoScalingGroupType"},
       "errors":[
-        {
-          "shape":"ScalingActivityInProgressFault",
-          "error":{
-            "code":"ScalingActivityInProgress",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group can't be deleted because there are scaling activities in progress.</p>"
-        },
-        {
-          "shape":"ResourceContentionFault",
-          "error":{
-            "code":"ResourceContention",
-            "httpStatusCode":500,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
-        }
+        {"shape":"ScalingActivityInProgressFault"},
+        {"shape":"ResourceContentionFault"}
       ],
       "documentation":"<p>Updates the configuration for the specified Auto Scaling group.</p> <p>To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to <code>False</code>, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using <a>DisableMetricsCollection</a>.</p> <p>The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Scaling activities that are currently in progress aren't affected.</p> <p>Note the following:</p> <ul> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MinSize</code>.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MaxSize</code>.</p> </li> <li> <p>All other optional parameters are left unchanged if not specified.</p> </li> </ul>"
     }
@@ -1529,18 +858,18 @@
       "members":{
         "message":{"shape":"XmlStringMaxLen255"}
       },
+      "documentation":"<p>You already have an Auto Scaling group or launch configuration with this name.</p>",
       "error":{
         "code":"AlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>You already have an Auto Scaling group or launch configuration with this name.</p>"
+      "exception":true
     },
     "AsciiStringMaxLen255":{
       "type":"string",
-      "min":1,
       "max":255,
+      "min":1,
       "pattern":"[A-Za-z0-9\\-_\\/]+"
     },
     "AssociatePublicIpAddress":{"type":"boolean"},
@@ -1580,7 +909,6 @@
       "type":"structure",
       "required":[
         "AutoScalingGroupName",
-        "LaunchConfigurationName",
         "MinSize",
         "MaxSize",
         "DesiredCapacity",
@@ -1616,7 +944,7 @@
         },
         "DefaultCooldown":{
           "shape":"Cooldown",
-          "documentation":"<p>The number of seconds after a scaling activity completes before any further scaling activities can start.</p>"
+          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes before another scaling activity can start.</p>"
         },
         "AvailabilityZones":{
           "shape":"AvailabilityZones",
@@ -1628,11 +956,11 @@
         },
         "HealthCheckType":{
           "shape":"XmlStringMaxLen32",
-          "documentation":"<p>The service of interest for the health status check, which can be either <code>EC2</code> for Amazon EC2 or <code>ELB</code> for Elastic Load Balancing.</p>"
+          "documentation":"<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>.</p>"
         },
         "HealthCheckGracePeriod":{
           "shape":"HealthCheckGracePeriod",
-          "documentation":"<p>The amount of time that Auto Scaling waits before checking an instance's health status. The grace period begins when an instance comes into service.</p>"
+          "documentation":"<p>The amount of time, in seconds, that Auto Scaling waits before checking the health status of an EC2 instance that has come into service.</p>"
         },
         "Instances":{
           "shape":"Instances",
@@ -1669,6 +997,10 @@
         "TerminationPolicies":{
           "shape":"TerminationPolicies",
           "documentation":"<p>The termination policies for the group.</p>"
+        },
+        "NewInstancesProtectedFromScaleIn":{
+          "shape":"InstanceProtected",
+          "documentation":"<p>Indicates whether newly launched instances are protected from termination by Auto Scaling when scaling in.</p>"
         }
       },
       "documentation":"<p>Describes an Auto Scaling group.</p>"
@@ -1723,11 +1055,12 @@
         "AvailabilityZone",
         "LifecycleState",
         "HealthStatus",
-        "LaunchConfigurationName"
+        "LaunchConfigurationName",
+        "ProtectedFromScaleIn"
       ],
       "members":{
         "InstanceId":{
-          "shape":"XmlStringMaxLen16",
+          "shape":"XmlStringMaxLen19",
           "documentation":"<p>The ID of the instance.</p>"
         },
         "AutoScalingGroupName":{
@@ -1749,6 +1082,10 @@
         "LaunchConfigurationName":{
           "shape":"XmlStringMaxLen255",
           "documentation":"<p>The launch configuration associated with the instance.</p>"
+        },
+        "ProtectedFromScaleIn":{
+          "shape":"InstanceProtected",
+          "documentation":"<p>Indicates whether the instance is protected from termination by Auto Scaling when scaling in.</p>"
         }
       },
       "documentation":"<p>Describes an EC2 instance associated with an Auto Scaling group.</p>"
@@ -1783,18 +1120,18 @@
     "BlockDeviceEbsEncrypted":{"type":"boolean"},
     "BlockDeviceEbsIops":{
       "type":"integer",
-      "min":100,
-      "max":20000
+      "max":20000,
+      "min":100
     },
     "BlockDeviceEbsVolumeSize":{
       "type":"integer",
-      "min":1,
-      "max":16384
+      "max":16384,
+      "min":1
     },
     "BlockDeviceEbsVolumeType":{
       "type":"string",
-      "min":1,
-      "max":255
+      "max":255,
+      "min":1
     },
     "BlockDeviceMapping":{
       "type":"structure",
@@ -1877,7 +1214,7 @@
           "documentation":"<p>The name of the launch configuration. Alternatively, use the <code>InstanceId</code> parameter to specify an EC2 instance instead of a launch configuration.</p>"
         },
         "InstanceId":{
-          "shape":"XmlStringMaxLen16",
+          "shape":"XmlStringMaxLen19",
           "documentation":"<p>The ID of the EC2 instance used to create a launch configuration for the group. Alternatively, use the <code>LaunchConfigurationName</code> parameter to specify a launch configuration instead of an EC2 instance.</p> <p>When you specify an ID of an instance, Auto Scaling creates a new launch configuration and associates it with the group. This launch configuration derives its attributes from the specified instance, with the exception of the block device mapping.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-asg-from-instance.html\">Create an Auto Scaling Group from an EC2 Instance</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
         },
         "MinSize":{
@@ -1894,7 +1231,7 @@
         },
         "DefaultCooldown":{
           "shape":"Cooldown",
-          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes before another scaling activity can start.</p> <p>The default is 300. For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html\">Understanding Auto Scaling Cooldowns</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes before another scaling activity can start. The default is 300.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html\">Understanding Auto Scaling Cooldowns</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
         },
         "AvailabilityZones":{
           "shape":"AvailabilityZones",
@@ -1910,7 +1247,7 @@
         },
         "HealthCheckGracePeriod":{
           "shape":"HealthCheckGracePeriod",
-          "documentation":"<p>The amount of time, in seconds, after an EC2 instance comes into service that Auto Scaling starts checking its health. During this time, any health check failures for the instance are ignored.</p> <p>This parameter is required if you are adding an <code>ELB</code> health check. Frequently, new instances need to warm up, briefly, before they can pass a health check. To provide ample warm-up time, set the health check grace period of the group to match the expected startup period of your application.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-add-elb-healthcheck.html\">Add an Elastic Load Balancing Health Check to Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+          "documentation":"<p>The amount of time, in seconds, that Auto Scaling waits before checking the health status of an EC2 instance that has come into service. During this time, any health check failures for the instance are ignored. The default is 300.</p> <p>This parameter is required if you are adding an <code>ELB</code> health check.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html\">Health Checks for Auto Scaling Instances</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
         },
         "PlacementGroup":{
           "shape":"XmlStringMaxLen255",
@@ -1923,6 +1260,10 @@
         "TerminationPolicies":{
           "shape":"TerminationPolicies",
           "documentation":"<p>One or more termination policies used to select the instance to terminate. These policies are executed in the order that they are listed.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html\">Choosing a Termination Policy for Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+        },
+        "NewInstancesProtectedFromScaleIn":{
+          "shape":"InstanceProtected",
+          "documentation":"<p>Indicates whether newly launched instances are protected from termination by Auto Scaling when scaling in.</p>"
         },
         "Tags":{
           "shape":"Tags",
@@ -1963,7 +1304,7 @@
           "documentation":"<p>The user data to make available to the launched EC2 instances. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>At this time, launch configurations don't support compressed (zipped) user data files.</p>"
         },
         "InstanceId":{
-          "shape":"XmlStringMaxLen16",
+          "shape":"XmlStringMaxLen19",
           "documentation":"<p>The ID of the EC2 instance to use to create the launch configuration.</p> <p>The new launch configuration derives attributes from the instance, with the exception of the block device mapping.</p> <p>To create a launch configuration with a block device mapping or override any other instance attributes, specify them as part of the same request.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-lc-with-instanceID.html\">Create a Launch Configuration Using an EC2 Instance</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
         },
         "InstanceType":{
@@ -2084,7 +1425,7 @@
           "documentation":"<p>The name or Amazon Resource Name (ARN) of the policy.</p>"
         }
       },
-      "documentation":"<p></p>"
+      "documentation":"<p/>"
     },
     "DeleteScheduledActionType":{
       "type":"structure",
@@ -2120,6 +1461,14 @@
         "MaxNumberOfLaunchConfigurations":{
           "shape":"MaxNumberOfLaunchConfigurations",
           "documentation":"<p>The maximum number of launch configurations allowed for your AWS account. The default limit is 100 per region.</p>"
+        },
+        "NumberOfAutoScalingGroups":{
+          "shape":"NumberOfAutoScalingGroups",
+          "documentation":"<p>The current number of groups for your AWS account.</p>"
+        },
+        "NumberOfLaunchConfigurations":{
+          "shape":"NumberOfLaunchConfigurations",
+          "documentation":"<p>The current number of launch configurations for your AWS account.</p>"
         }
       }
     },
@@ -2608,11 +1957,12 @@
         "AvailabilityZone",
         "LifecycleState",
         "HealthStatus",
-        "LaunchConfigurationName"
+        "LaunchConfigurationName",
+        "ProtectedFromScaleIn"
       ],
       "members":{
         "InstanceId":{
-          "shape":"XmlStringMaxLen16",
+          "shape":"XmlStringMaxLen19",
           "documentation":"<p>The ID of the instance.</p>"
         },
         "AvailabilityZone":{
@@ -2630,13 +1980,17 @@
         "LaunchConfigurationName":{
           "shape":"XmlStringMaxLen255",
           "documentation":"<p>The launch configuration associated with the instance.</p>"
+        },
+        "ProtectedFromScaleIn":{
+          "shape":"InstanceProtected",
+          "documentation":"<p>Indicates whether the instance is protected from termination by Auto Scaling when scaling in.</p>"
         }
       },
       "documentation":"<p>Describes an EC2 instance.</p>"
     },
     "InstanceIds":{
       "type":"list",
-      "member":{"shape":"XmlStringMaxLen16"}
+      "member":{"shape":"XmlStringMaxLen19"}
     },
     "InstanceMonitoring":{
       "type":"structure",
@@ -2648,6 +2002,7 @@
       },
       "documentation":"<p>Describes whether instance monitoring is enabled.</p>"
     },
+    "InstanceProtected":{"type":"boolean"},
     "Instances":{
       "type":"list",
       "member":{"shape":"Instance"}
@@ -2657,13 +2012,13 @@
       "members":{
         "message":{"shape":"XmlStringMaxLen255"}
       },
+      "documentation":"<p>The <code>NextToken</code> value is not valid.</p>",
       "error":{
         "code":"InvalidNextToken",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The <code>NextToken</code> value is not valid.</p>"
+      "exception":true
     },
     "LaunchConfiguration":{
       "type":"structure",
@@ -2805,8 +2160,8 @@
     "LifecycleActionResult":{"type":"string"},
     "LifecycleActionToken":{
       "type":"string",
-      "min":36,
-      "max":36
+      "max":36,
+      "min":36
     },
     "LifecycleHook":{
       "type":"structure",
@@ -2882,13 +2237,13 @@
       "members":{
         "message":{"shape":"XmlStringMaxLen255"}
       },
+      "documentation":"<p>You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.</p>",
       "error":{
         "code":"LimitExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.</p>"
+      "exception":true
     },
     "LoadBalancerNames":{
       "type":"list",
@@ -2977,6 +2332,8 @@
       "type":"list",
       "member":{"shape":"NotificationConfiguration"}
     },
+    "NumberOfAutoScalingGroups":{"type":"integer"},
+    "NumberOfLaunchConfigurations":{"type":"integer"},
     "PoliciesType":{
       "type":"structure",
       "members":{
@@ -3038,6 +2395,7 @@
     },
     "Progress":{"type":"integer"},
     "PropagateAtLaunch":{"type":"boolean"},
+    "ProtectedFromScaleIn":{"type":"boolean"},
     "PutLifecycleHookAnswer":{
       "type":"structure",
       "members":{
@@ -3068,7 +2426,7 @@
         },
         "NotificationTargetARN":{
           "shape":"ResourceName",
-          "documentation":"<p>The ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic. </p> <p>This parameter is required for new lifecycle hooks, but optional when updating existing hooks.</p> <p>The notification message sent to the target will include:</p> <ul> <li> <b>LifecycleActionToken</b>. The Lifecycle action token.</li> <li> <b>AccountId</b>. The user account ID.</li> <li> <b>AutoScalingGroupName</b>. The name of the Auto Scaling group.</li> <li> <b>LifecycleHookName</b>. The lifecycle hook name.</li> <li> <b>EC2InstanceId</b>. The EC2 instance ID.</li> <li> <b>LifecycleTransition</b>. The lifecycle transition.</li> <li> <b>NotificationMetadata</b>. The notification metadata.</li> </ul> <p>This operation uses the JSON format when sending notifications to an Amazon SQS queue, and an email key/value pair format when sending notifications to an Amazon SNS topic.</p> <p>When you call this operation, a test message is sent to the notification target. This test message contains an additional key/value pair: <code>Event:autoscaling:TEST_NOTIFICATION</code>.</p>"
+          "documentation":"<p>The ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic. </p> <p>This parameter is required for new lifecycle hooks, but optional when updating existing hooks.</p> <p>The notification message sent to the target will include:</p> <ul> <li><b>LifecycleActionToken</b>. The Lifecycle action token.</li> <li><b>AccountId</b>. The user account ID.</li> <li><b>AutoScalingGroupName</b>. The name of the Auto Scaling group.</li> <li><b>LifecycleHookName</b>. The lifecycle hook name.</li> <li><b>EC2InstanceId</b>. The EC2 instance ID.</li> <li><b>LifecycleTransition</b>. The lifecycle transition.</li> <li><b>NotificationMetadata</b>. The notification metadata.</li> </ul> <p>This operation uses the JSON format when sending notifications to an Amazon SQS queue, and an email key/value pair format when sending notifications to an Amazon SNS topic.</p> <p>When you call this operation, a test message is sent to the notification target. This test message contains an additional key/value pair: <code>Event:autoscaling:TEST_NOTIFICATION</code>.</p>"
         },
         "NotificationMetadata":{
           "shape":"XmlStringMaxLen1023",
@@ -3237,31 +2595,31 @@
       "members":{
         "message":{"shape":"XmlStringMaxLen255"}
       },
+      "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>",
       "error":{
         "code":"ResourceContention",
         "httpStatusCode":500,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).</p>"
+      "exception":true
     },
     "ResourceInUseFault":{
       "type":"structure",
       "members":{
         "message":{"shape":"XmlStringMaxLen255"}
       },
+      "documentation":"<p>The Auto Scaling group or launch configuration can't be deleted because it is in use.</p>",
       "error":{
         "code":"ResourceInUse",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The Auto Scaling group or launch configuration can't be deleted because it is in use.</p>"
+      "exception":true
     },
     "ResourceName":{
       "type":"string",
-      "min":1,
       "max":1600,
+      "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "ScalingActivityInProgressFault":{
@@ -3269,17 +2627,18 @@
       "members":{
         "message":{"shape":"XmlStringMaxLen255"}
       },
+      "documentation":"<p>The Auto Scaling group can't be deleted because there are scaling activities in progress.</p>",
       "error":{
         "code":"ScalingActivityInProgress",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The Auto Scaling group can't be deleted because there are scaling activities in progress.</p>"
+      "exception":true
     },
     "ScalingActivityStatusCode":{
       "type":"string",
       "enum":[
+        "PendingSpotBidPlacement",
         "WaitingForSpotInstanceRequestId",
         "WaitingForSpotInstanceId",
         "WaitingForInstanceId",
@@ -3469,7 +2828,7 @@
       ],
       "members":{
         "InstanceId":{
-          "shape":"XmlStringMaxLen16",
+          "shape":"XmlStringMaxLen19",
           "documentation":"<p>The ID of the EC2 instance.</p>"
         },
         "HealthStatus":{
@@ -3482,12 +2841,39 @@
         }
       }
     },
+    "SetInstanceProtectionAnswer":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "SetInstanceProtectionQuery":{
+      "type":"structure",
+      "required":[
+        "InstanceIds",
+        "AutoScalingGroupName",
+        "ProtectedFromScaleIn"
+      ],
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIds",
+          "documentation":"<p>One or more instance IDs.</p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the group.</p>"
+        },
+        "ProtectedFromScaleIn":{
+          "shape":"ProtectedFromScaleIn",
+          "documentation":"<p>Indicates whether the instance is protected from termination by Auto Scaling when scaling in.</p>"
+        }
+      }
+    },
     "ShouldDecrementDesiredCapacity":{"type":"boolean"},
     "ShouldRespectGracePeriod":{"type":"boolean"},
     "SpotPrice":{
       "type":"string",
-      "min":1,
-      "max":255
+      "max":255,
+      "min":1
     },
     "StepAdjustment":{
       "type":"structure",
@@ -3589,14 +2975,14 @@
     },
     "TagKey":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "TagValue":{
       "type":"string",
-      "min":0,
       "max":256,
+      "min":0,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "Tags":{
@@ -3624,7 +3010,7 @@
       ],
       "members":{
         "InstanceId":{
-          "shape":"XmlStringMaxLen16",
+          "shape":"XmlStringMaxLen19",
           "documentation":"<p>The ID of the EC2 instance.</p>"
         },
         "ShouldDecrementDesiredCapacity":{
@@ -3664,7 +3050,7 @@
         },
         "DefaultCooldown":{
           "shape":"Cooldown",
-          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes before another scaling activity can start. For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html\">Understanding Auto Scaling Cooldowns</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes before another scaling activity can start. The default is 300.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html\">Understanding Auto Scaling Cooldowns</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
         },
         "AvailabilityZones":{
           "shape":"AvailabilityZones",
@@ -3672,11 +3058,11 @@
         },
         "HealthCheckType":{
           "shape":"XmlStringMaxLen32",
-          "documentation":"<p>The type of health check for the instances in the Auto Scaling group. The health check type can either be <code>EC2</code> for Amazon EC2 or <code>ELB</code> for Elastic Load Balancing. </p>"
+          "documentation":"<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>.</p>"
         },
         "HealthCheckGracePeriod":{
           "shape":"HealthCheckGracePeriod",
-          "documentation":"<p>The amount of time, in seconds, that Auto Scaling waits before checking the health status of an instance. The grace period begins when the instance passes the system status and instance status checks from Amazon EC2. For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html\">Health Checks</a> in the <i>Auto Scaling Developer Guide</i>. </p>"
+          "documentation":"<p>The amount of time, in seconds, that Auto Scaling waits before checking the health status of an EC2 instance that has come into service. The default is 300.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html\">Health Checks For Auto Scaling Instances</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
         },
         "PlacementGroup":{
           "shape":"XmlStringMaxLen255",
@@ -3684,11 +3070,15 @@
         },
         "VPCZoneIdentifier":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>The ID of the subnet, if you are launching into a VPC. You can specify several subnets in a comma-separated list.</p> <p>When you specify <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, ensure that the subnets' Availability Zones match the values you specify for <code>AvailabilityZones</code>. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling and Amazon Virtual Private Cloud</a> in the <i>Auto Scaling Developer Guide</i>. </p>"
+          "documentation":"<p>The ID of the subnet, if you are launching into a VPC. You can specify several subnets in a comma-separated list.</p> <p>When you specify <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, ensure that the subnets' Availability Zones match the values you specify for <code>AvailabilityZones</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling and Amazon Virtual Private Cloud</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
         },
         "TerminationPolicies":{
           "shape":"TerminationPolicies",
-          "documentation":"<p> A standalone termination policy or a list of termination policies used to select the instance to terminate. The policies are executed in the order that they are listed. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html\">Choosing a Termination Policy for Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+          "documentation":"<p>A standalone termination policy or a list of termination policies used to select the instance to terminate. The policies are executed in the order that they are listed.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html\">Choosing a Termination Policy for Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+        },
+        "NewInstancesProtectedFromScaleIn":{
+          "shape":"InstanceProtected",
+          "documentation":"<p>Indicates whether newly launched instances are protected from termination by Auto Scaling when scaling in.</p>"
         }
       }
     },
@@ -3702,38 +3092,38 @@
     },
     "XmlStringMaxLen1023":{
       "type":"string",
-      "min":1,
       "max":1023,
-      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
-    },
-    "XmlStringMaxLen16":{
-      "type":"string",
       "min":1,
-      "max":16,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "XmlStringMaxLen1600":{
       "type":"string",
-      "min":1,
       "max":1600,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMaxLen19":{
+      "type":"string",
+      "max":19,
+      "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "XmlStringMaxLen255":{
       "type":"string",
-      "min":1,
       "max":255,
+      "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "XmlStringMaxLen32":{
       "type":"string",
-      "min":1,
       "max":32,
+      "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "XmlStringMaxLen64":{
       "type":"string",
-      "min":1,
       "max":64,
+      "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "XmlStringUserData":{
@@ -3742,6 +3132,5 @@
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     }
   },
-  "examples":{
-  }
+  "documentation":"<fullname>Auto Scaling</fullname> <p>Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined policies, schedules, and health checks. Use this service in conjunction with the Amazon CloudWatch and Elastic Load Balancing services.</p>"
 }
