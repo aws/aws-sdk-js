@@ -1892,7 +1892,15 @@
           "shape":"String",
           "documentation":"<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). </p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code></p> <p>Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. To see the time blocks available, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html\"> Adjusting the Preferred Maintenance Window</a> in the <i>Amazon RDS User Guide.</i> </p> <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
         },
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "StorageEncrypted":{
+          "shape":"BooleanOptional",
+          "documentation":"<p>Specifies whether the DB cluster is encrypted.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>The KMS key identifier for an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KM encryption key.</p> <p>If the <code>StorageEncrypted</code> parameter is true, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.</p>"
+        }
       },
       "documentation":"<p/>"
     },
@@ -2446,6 +2454,18 @@
         "HostedZoneId":{
           "shape":"String",
           "documentation":"<p>Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.</p>"
+        },
+        "StorageEncrypted":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whetehr the DB cluster is encrypted.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>If <code>StorageEncrypted</code> is true, the KMS key identifier for the encrypted DB cluster.</p>"
+        },
+        "DbClusterResourceId":{
+          "shape":"String",
+          "documentation":"<p>If <code>StorageEncrypted</code> is true, the region-unique, immutable identifier for the encrypted DB cluster. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB cluster is accessed. </p>"
         }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions: </p> <ul> <li> <a>CreateDBCluster</a> </li> <li> <a>DeleteDBCluster</a> </li> <li> <a>FailoverDBCluster</a> </li> <li> <a>ModifyDBCluster</a> </li> <li> <a>RestoreDBClusterFromSnapshot</a> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action.</p>",
@@ -2693,6 +2713,14 @@
         "PercentProgress":{
           "shape":"Integer",
           "documentation":"<p>Specifies the percentage of the estimated data that has been transferred. </p>"
+        },
+        "StorageEncrypted":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether the DB cluster snapshot is encrypted.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>If <code>StorageEncrypted</code> is true, the KMS key identifier for the encrypted DB cluster snapshot.</p>"
         }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions: </p> <ul> <li> <a>CreateDBClusterSnapshot</a> </li> <li> <a>DeleteDBClusterSnapshot</a> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBClusterSnapshots</a> action.</p>",
@@ -5286,7 +5314,7 @@
         },
         "DBPortNumber":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The port number on which the database accepts connections. </p> <p> <b>MySQL</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>MariaDB</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>PostgreSQL</b> </p> <p> Default: <code>5432</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>Oracle</b> </p> <p> Default: <code>1521</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>SQL Server</b> </p> <p> Default: <code>1433</code></p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code>, <code>3389</code>, <code>47001</code>, <code>49152</code>, and <code>49152</code> through <code>49156</code>. </p> <p> <b>Amazon Aurora</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p>"
+          "documentation":"<p> The port number on which the database accepts connections. </p> <p>The value of the <code>DBPortNumber</code> parameter must not match any of the port values specified for options in the option group for the DB instance.</p> <p>Your database will restart when you change the <code>DBPortNumber</code> value regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p> <b>MySQL</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>MariaDB</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>PostgreSQL</b> </p> <p> Default: <code>5432</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>Oracle</b> </p> <p> Default: <code>1521</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>SQL Server</b> </p> <p> Default: <code>1433</code></p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code>, <code>3389</code>, <code>47001</code>, <code>49152</code>, and <code>49152</code> through <code>49156</code>. </p> <p> <b>Amazon Aurora</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p>"
         },
         "PubliclyAccessible":{
           "shape":"BooleanOptional",
@@ -6518,6 +6546,10 @@
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>The tags to be assigned to the restored DB cluster. </p>"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>The KMS key identifier to use when restoring an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>"
         }
       },
       "documentation":"<p/>"
@@ -6567,7 +6599,11 @@
           "shape":"VpcSecurityGroupIdList",
           "documentation":"<p> A lst of VPC security groups that the new DB cluster belongs to. </p>"
         },
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>The KMS key identifier to use when restoring an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>"
+        }
       },
       "documentation":"<p/>"
     },
