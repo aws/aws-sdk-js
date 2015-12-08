@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.2.21
+// AWS SDK for JavaScript v2.2.22
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -264,6 +264,7 @@ AWS.Config = AWS.util.inherit({
     computeChecksums: true,
     convertResponseTypes: true,
     correctClockSkew: false,
+    customUserAgent: null,
     dynamoDbCrc32: true,
     systemClockOffset: 0,
     signatureVersion: null,
@@ -295,7 +296,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.2.21',
+  VERSION: '2.2.22',
 
 
   Signers: {},
@@ -1720,7 +1721,7 @@ AWS.Endpoint = inherit({
 AWS.HttpRequest = inherit({
 
 
-  constructor: function HttpRequest(endpoint, region) {
+  constructor: function HttpRequest(endpoint, region, customUserAgent) {
     endpoint = new AWS.Endpoint(endpoint);
     this.method = 'POST';
     this.path = endpoint.path || '/';
@@ -1728,13 +1729,17 @@ AWS.HttpRequest = inherit({
     this.body = '';
     this.endpoint = endpoint;
     this.region = region;
-    this.setUserAgent();
+    this.setUserAgent(customUserAgent);
   },
 
 
-  setUserAgent: function setUserAgent() {
+  setUserAgent: function setUserAgent(customUserAgent) {
     var prefix = AWS.util.isBrowser() ? 'X-Amz-' : '';
-    this.headers[prefix + 'User-Agent'] = AWS.util.userAgent();
+    var customSuffix = '';
+    if (typeof customUserAgent === 'string' && customUserAgent) {
+      customSuffix += ' ' + customUserAgent;
+    }
+    this.headers[prefix + 'User-Agent'] = AWS.util.userAgent() + customSuffix;
   },
 
 
@@ -3459,6 +3464,7 @@ AWS.Request = inherit({
   constructor: function Request(service, operation, params) {
     var endpoint = service.endpoint;
     var region = service.config.region;
+    var customUserAgent = service.config.customUserAgent;
 
     if (service.isGlobalEndpoint) region = 'us-east-1';
 
@@ -3466,7 +3472,7 @@ AWS.Request = inherit({
     this.service = service;
     this.operation = operation;
     this.params = params || {};
-    this.httpRequest = new AWS.HttpRequest(endpoint, region);
+    this.httpRequest = new AWS.HttpRequest(endpoint, region, customUserAgent);
     this.startTime = AWS.util.date.getDate();
 
     this.response = new AWS.Response(this);
