@@ -42,41 +42,42 @@ describe 'AWS.STS', ->
   describe 'assumeRoleWithWebIdentity', ->
     service = new AWS.STS
 
-    it 'sends an unsigned GET request (params in query string)', ->
+    it 'sends an unsigned POST request', ->
       helpers.mockHttpResponse 200, {}, '{}'
       params = RoleArn: 'ARN', RoleSessionName: 'NAME', WebIdentityToken: 'TOK'
       service.assumeRoleWithWebIdentity params, ->
         hr = this.request.httpRequest
-        expect(hr.method).to.equal('GET')
-        expect(hr.body).to.equal('')
+        expect(hr.method).to.equal('POST')
+        expect(hr.body).to.equal('Action=AssumeRoleWithWebIdentity&' +
+            'RoleArn=ARN&RoleSessionName=NAME&Version=' +
+            service.api.apiVersion + '&WebIdentityToken=TOK')
         expect(hr.headers['Authorization']).to.equal(undefined)
-        expect(hr.headers['Content-Type']).to.equal(undefined)
-        expect(hr.path).to.equal('/?Action=AssumeRoleWithWebIdentity&' +
-          'RoleArn=ARN&RoleSessionName=NAME&Version=' +
-          service.api.apiVersion + '&WebIdentityToken=TOK')
+        expect(hr.headers['Content-Type']).to.equal('application/x-www-form-urlencoded; charset=utf-8')
+        expect(hr.path).to.equal('/')
 
-    it 'can build a get request on a mounted path (custom endpoint)', ->
+    it 'can build a post request on a mounted path (custom endpoint)', ->
       helpers.mockHttpResponse 200, {}, '{}'
       service = new AWS.STS(endpoint: 'http://localhost/foo/bar')
       params = RoleArn: 'ARN', RoleSessionName: 'NAME', WebIdentityToken: 'TOK'
       service.assumeRoleWithWebIdentity params, ->
         hr = this.request.httpRequest
-        expect(hr.path).to.equal('/foo/bar?Action=AssumeRoleWithWebIdentity&' +
+        expect(hr.path).to.equal('/foo/bar')
+        expect(hr.body).to.equal('Action=AssumeRoleWithWebIdentity&' +
           'RoleArn=ARN&RoleSessionName=NAME&Version=' +
           service.api.apiVersion + '&WebIdentityToken=TOK')
 
   describe 'assumeRoleWithSAML', ->
     service = new AWS.STS
 
-    it 'sends an unsigned GET request (params in query string)', ->
+    it 'sends an unsigned POST request', ->
       helpers.mockHttpResponse 200, {}, '{}'
       params = RoleArn: 'ARN', PrincipalArn: 'PARN', SAMLAssertion: 'OK'
       service.assumeRoleWithSAML params, ->
         hr = this.request.httpRequest
-        expect(hr.method).to.equal('GET')
-        expect(hr.body).to.equal('')
+        expect(hr.method).to.equal('POST')
+        expect(hr.body).to.equal('Action=AssumeRoleWithSAML&' +
+            'PrincipalArn=PARN&RoleArn=ARN&SAMLAssertion=OK&' +
+            'Version=' + service.api.apiVersion)
         expect(hr.headers['Authorization']).to.equal(undefined)
-        expect(hr.headers['Content-Type']).to.equal(undefined)
-        expect(hr.path).to.equal('/?Action=AssumeRoleWithSAML&' +
-          'PrincipalArn=PARN&RoleArn=ARN&SAMLAssertion=OK&' +
-          'Version=' + service.api.apiVersion)
+        expect(hr.headers['Content-Type']).to.equal('application/x-www-form-urlencoded; charset=utf-8')
+        expect(hr.path).to.equal('/')
