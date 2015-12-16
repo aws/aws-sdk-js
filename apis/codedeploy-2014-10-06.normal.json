@@ -4,14 +4,13 @@
     "apiVersion":"2014-10-06",
     "endpointPrefix":"codedeploy",
     "jsonVersion":"1.1",
-    "serviceAbbreviation":"codedeploy",
+    "protocol":"json",
+    "serviceAbbreviation":"CodeDeploy",
     "serviceFullName":"AWS CodeDeploy",
     "signatureVersion":"v4",
     "targetPrefix":"CodeDeploy_20141006",
-    "timestampFormat":"unixTimestamp",
-    "protocol":"json"
+    "timestampFormat":"unixTimestamp"
   },
-  "documentation":"<fullname>AWS CodeDeploy</fullname> <b>Overview</b> <p>This is the AWS CodeDeploy API Reference. This guide provides descriptions of the AWS CodeDeploy APIs. For additional information, see the <a href=\"http://docs.aws.amazon.com/codedeploy/latest/userguide\">AWS CodeDeploy User Guide</a>.</p> <b>Using the APIs</b> <p>You can use the AWS CodeDeploy APIs to work with the following items:</p> <ul> <li> <p>Applications are unique identifiers that AWS CodeDeploy uses to ensure that the correct combinations of revisions, deployment configurations, and deployment groups are being referenced during deployments.</p> <p>You can use the AWS CodeDeploy APIs to create, delete, get, list, and update applications.</p> </li> <li> <p>Deployment configurations are sets of deployment rules and deployment success and failure conditions that AWS CodeDeploy uses during deployments.</p> <p>You can use the AWS CodeDeploy APIs to create, delete, get, and list deployment configurations.</p> </li> <li> <p>Deployment groups are groups of instances to which application revisions can be deployed.</p> <p>You can use the AWS CodeDeploy APIs to create, delete, get, list, and update deployment groups.</p> </li> <li> <p>Instances represent Amazon EC2 instances to which application revisions are deployed. Instances are identified by their Amazon EC2 tags or Auto Scaling group names. Instances belong to deployment groups.</p> <p>You can use the AWS CodeDeploy APIs to get and list instances.</p> </li> <li> <p>Deployments represent the process of deploying revisions to instances.</p> <p>You can use the AWS CodeDeploy APIs to create, get, list, and stop deployments.</p> </li> <li> <p>Application revisions are archive files that are stored in Amazon S3 buckets or GitHub repositories. These revisions contain source content (such as source code, web pages, executable files, any deployment scripts, and similar) along with an Application Specification file (AppSpec file). (The AppSpec file is unique to AWS CodeDeploy; it defines a series of deployment actions that you want AWS CodeDeploy to execute.) An application revision is uniquely identified by its Amazon S3 object key and its ETag, version, or both (for application revisions that are stored in Amazon S3 buckets) or by its repository name and commit ID (for applications revisions that are stored in GitHub repositories). Application revisions are deployed through deployment groups.</p> <p>You can use the AWS CodeDeploy APIs to get, list, and register application revisions.</p> </li> </ul>",
   "operations":{
     "AddTagsToOnPremisesInstances":{
       "name":"AddTagsToOnPremisesInstances",
@@ -19,41 +18,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddTagsToOnPremisesInstancesInput",
-        "documentation":"<p>Represents the input of an adds tags to on-premises instance operation.</p>"
-      },
+      "input":{"shape":"AddTagsToOnPremisesInstancesInput"},
       "errors":[
-        {
-          "shape":"InstanceNameRequiredException",
-          "exception":true,
-          "documentation":"<p>An on-premises instance name was not specified.</p>"
-        },
-        {
-          "shape":"TagRequiredException",
-          "exception":true,
-          "documentation":"<p>A tag was not specified.</p>"
-        },
-        {
-          "shape":"InvalidTagException",
-          "exception":true,
-          "documentation":"<p>The specified tag was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"TagLimitExceededException",
-          "exception":true,
-          "documentation":"<p>The maximum allowed number of tags was exceeded.</p>"
-        },
-        {
-          "shape":"InstanceLimitExceededException",
-          "exception":true,
-          "documentation":"<p>The maximum number of allowed on-premises instances in a single call was exceeded.</p>"
-        },
-        {
-          "shape":"InstanceNotRegisteredException",
-          "exception":true,
-          "documentation":"<p>The specified on-premises instance is not registered.</p>"
-        }
+        {"shape":"InstanceNameRequiredException"},
+        {"shape":"TagRequiredException"},
+        {"shape":"InvalidTagException"},
+        {"shape":"TagLimitExceededException"},
+        {"shape":"InstanceLimitExceededException"},
+        {"shape":"InstanceNotRegisteredException"}
       ],
       "documentation":"<p>Adds tags to on-premises instances.</p>"
     },
@@ -63,30 +35,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"BatchGetApplicationsInput",
-        "documentation":"<p>Represents the input of a batch get applications operation.</p>"
-      },
-      "output":{
-        "shape":"BatchGetApplicationsOutput",
-        "documentation":"<p>Represents the output of a batch get applications operation.</p>"
-      },
+      "input":{"shape":"BatchGetApplicationsInput"},
+      "output":{"shape":"BatchGetApplicationsOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationDoesNotExistException"}
       ],
       "documentation":"<p>Gets information about one or more applications.</p>"
     },
@@ -96,25 +50,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"BatchGetDeploymentsInput",
-        "documentation":"<p>Represents the input of a batch get deployments operation.</p>"
-      },
-      "output":{
-        "shape":"BatchGetDeploymentsOutput",
-        "documentation":"<p>Represents the output of a batch get deployments operation.</p>"
-      },
+      "input":{"shape":"BatchGetDeploymentsInput"},
+      "output":{"shape":"BatchGetDeploymentsOutput"},
       "errors":[
-        {
-          "shape":"DeploymentIdRequiredException",
-          "exception":true,
-          "documentation":"<p>At least one deployment ID must be specified.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentIdException",
-          "exception":true,
-          "documentation":"<p>At least one of the deployment IDs was specified in an invalid format.</p>"
-        }
+        {"shape":"DeploymentIdRequiredException"},
+        {"shape":"InvalidDeploymentIdException"}
       ],
       "documentation":"<p>Gets information about one or more deployments.</p>"
     },
@@ -124,25 +64,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"BatchGetOnPremisesInstancesInput",
-        "documentation":"<p>Represents the input of a batch get on-premises instances operation.</p>"
-      },
-      "output":{
-        "shape":"BatchGetOnPremisesInstancesOutput",
-        "documentation":"<p>Represents the output of a batch get on-premises instances operation.</p>"
-      },
+      "input":{"shape":"BatchGetOnPremisesInstancesInput"},
+      "output":{"shape":"BatchGetOnPremisesInstancesOutput"},
       "errors":[
-        {
-          "shape":"InstanceNameRequiredException",
-          "exception":true,
-          "documentation":"<p>An on-premises instance name was not specified.</p>"
-        },
-        {
-          "shape":"InvalidInstanceNameException",
-          "exception":true,
-          "documentation":"<p>The specified on-premises instance name was specified in an invalid format.</p>"
-        }
+        {"shape":"InstanceNameRequiredException"},
+        {"shape":"InvalidInstanceNameException"}
       ],
       "documentation":"<p>Gets information about one or more on-premises instances.</p>"
     },
@@ -152,35 +78,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateApplicationInput",
-        "documentation":"<p>Represents the input of a create application operation.</p>"
-      },
-      "output":{
-        "shape":"CreateApplicationOutput",
-        "documentation":"<p>Represents the output of a create application operation.</p>"
-      },
+      "input":{"shape":"CreateApplicationInput"},
+      "output":{"shape":"CreateApplicationOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>An application with the specified name already exists with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"ApplicationLimitExceededException",
-          "exception":true,
-          "documentation":"<p>More applications were attempted to be created than were allowed.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationAlreadyExistsException"},
+        {"shape":"ApplicationLimitExceededException"}
       ],
       "documentation":"<p>Creates a new application.</p>"
     },
@@ -190,75 +94,21 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDeploymentInput",
-        "documentation":"<p>Represents the input of a create deployment operation.</p>"
-      },
-      "output":{
-        "shape":"CreateDeploymentOutput",
-        "documentation":"<p>Represents the output of a create deployment operation.</p>"
-      },
+      "input":{"shape":"CreateDeploymentInput"},
+      "output":{"shape":"CreateDeploymentOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"DeploymentGroupNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was not specified.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentGroupNameException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentGroupDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The named deployment group does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"RevisionRequiredException",
-          "exception":true,
-          "documentation":"<p>The revision ID was not specified.</p>"
-        },
-        {
-          "shape":"InvalidRevisionException",
-          "exception":true,
-          "documentation":"<p>The revision was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentConfigNameException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentConfigDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"DescriptionTooLongException",
-          "exception":true,
-          "documentation":"<p>The description that was provided is too long.</p>"
-        },
-        {
-          "shape":"DeploymentLimitExceededException",
-          "exception":true,
-          "documentation":"<p>The number of allowed deployments was exceeded.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"DeploymentGroupNameRequiredException"},
+        {"shape":"InvalidDeploymentGroupNameException"},
+        {"shape":"DeploymentGroupDoesNotExistException"},
+        {"shape":"RevisionRequiredException"},
+        {"shape":"InvalidRevisionException"},
+        {"shape":"InvalidDeploymentConfigNameException"},
+        {"shape":"DeploymentConfigDoesNotExistException"},
+        {"shape":"DescriptionTooLongException"},
+        {"shape":"DeploymentLimitExceededException"}
       ],
       "documentation":"<p>Deploys an application revision through the specified deployment group.</p>"
     },
@@ -268,40 +118,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDeploymentConfigInput",
-        "documentation":"<p>Represents the input of a create deployment configuration operation.</p>"
-      },
-      "output":{
-        "shape":"CreateDeploymentConfigOutput",
-        "documentation":"<p>Represents the output of a create deployment configuration operation.</p>"
-      },
+      "input":{"shape":"CreateDeploymentConfigInput"},
+      "output":{"shape":"CreateDeploymentConfigOutput"},
       "errors":[
-        {
-          "shape":"InvalidDeploymentConfigNameException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentConfigNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration name was not specified.</p>"
-        },
-        {
-          "shape":"DeploymentConfigAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>A deployment configuration with the specified name already exists with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"InvalidMinimumHealthyHostValueException",
-          "exception":true,
-          "documentation":"<p>The minimum healthy instances value was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentConfigLimitExceededException",
-          "exception":true,
-          "documentation":"<p>The deployment configurations limit was exceeded.</p>"
-        }
+        {"shape":"InvalidDeploymentConfigNameException"},
+        {"shape":"DeploymentConfigNameRequiredException"},
+        {"shape":"DeploymentConfigAlreadyExistsException"},
+        {"shape":"InvalidMinimumHealthyHostValueException"},
+        {"shape":"DeploymentConfigLimitExceededException"}
       ],
       "documentation":"<p>Creates a new deployment configuration.</p>"
     },
@@ -311,85 +135,23 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateDeploymentGroupInput",
-        "documentation":"<p>Represents the input of a create deployment group operation.</p>"
-      },
-      "output":{
-        "shape":"CreateDeploymentGroupOutput",
-        "documentation":"<p>Represents the output of a create deployment group operation.</p>"
-      },
+      "input":{"shape":"CreateDeploymentGroupInput"},
+      "output":{"shape":"CreateDeploymentGroupOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"DeploymentGroupNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was not specified.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentGroupNameException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentGroupAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>A deployment group with the specified name already exists with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"InvalidEC2TagException",
-          "exception":true,
-          "documentation":"<p>The tag was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidTagException",
-          "exception":true,
-          "documentation":"<p>The specified tag was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidAutoScalingGroupException",
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group was specified in an invalid format or does not exist.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentConfigNameException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentConfigDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"RoleRequiredException",
-          "exception":true,
-          "documentation":"<p>The role ID was not specified.</p>"
-        },
-        {
-          "shape":"InvalidRoleException",
-          "exception":true,
-          "documentation":"<p>The service role ARN was specified in an invalid format. Or, if an Auto Scaling group was specified, the specified service role does not grant the appropriate permissions to Auto Scaling.</p>"
-        },
-        {
-          "shape":"DeploymentGroupLimitExceededException",
-          "exception":true,
-          "documentation":"<p> The deployment groups limit was exceeded.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"DeploymentGroupNameRequiredException"},
+        {"shape":"InvalidDeploymentGroupNameException"},
+        {"shape":"DeploymentGroupAlreadyExistsException"},
+        {"shape":"InvalidEC2TagException"},
+        {"shape":"InvalidTagException"},
+        {"shape":"InvalidAutoScalingGroupException"},
+        {"shape":"InvalidDeploymentConfigNameException"},
+        {"shape":"DeploymentConfigDoesNotExistException"},
+        {"shape":"RoleRequiredException"},
+        {"shape":"InvalidRoleException"},
+        {"shape":"DeploymentGroupLimitExceededException"}
       ],
       "documentation":"<p>Creates a new deployment group for application revisions to be deployed to.</p>"
     },
@@ -399,21 +161,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteApplicationInput",
-        "documentation":"<p>Represents the input of a delete application operation.</p>"
-      },
+      "input":{"shape":"DeleteApplicationInput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"}
       ],
       "documentation":"<p>Deletes an application.</p>"
     },
@@ -423,31 +174,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDeploymentConfigInput",
-        "documentation":"<p>Represents the input of a delete deployment configuration operation.</p>"
-      },
+      "input":{"shape":"DeleteDeploymentConfigInput"},
       "errors":[
-        {
-          "shape":"InvalidDeploymentConfigNameException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentConfigNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration name was not specified.</p>"
-        },
-        {
-          "shape":"DeploymentConfigInUseException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration is still in use.</p>"
-        },
-        {
-          "shape":"InvalidOperationException",
-          "exception":true,
-          "documentation":"<p>An invalid operation was detected.</p>"
-        }
+        {"shape":"InvalidDeploymentConfigNameException"},
+        {"shape":"DeploymentConfigNameRequiredException"},
+        {"shape":"DeploymentConfigInUseException"},
+        {"shape":"InvalidOperationException"}
       ],
       "documentation":"<p>Deletes a deployment configuration.</p> <note>A deployment configuration cannot be deleted if it is currently in use. Also, predefined configurations cannot be deleted.</note>"
     },
@@ -457,40 +189,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteDeploymentGroupInput",
-        "documentation":"<p>Represents the input of a delete deployment group operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteDeploymentGroupOutput",
-        "documentation":"<p>Represents the output of a delete deployment group operation.</p>"
-      },
+      "input":{"shape":"DeleteDeploymentGroupInput"},
+      "output":{"shape":"DeleteDeploymentGroupOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentGroupNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was not specified.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentGroupNameException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidRoleException",
-          "exception":true,
-          "documentation":"<p>The service role ARN was specified in an invalid format. Or, if an Auto Scaling group was specified, the specified service role does not grant the appropriate permissions to Auto Scaling.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"DeploymentGroupNameRequiredException"},
+        {"shape":"InvalidDeploymentGroupNameException"},
+        {"shape":"InvalidRoleException"}
       ],
       "documentation":"<p>Deletes a deployment group.</p>"
     },
@@ -500,21 +206,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeregisterOnPremisesInstanceInput",
-        "documentation":"<p>Represents the input of a deregister on-premises instance operation.</p>"
-      },
+      "input":{"shape":"DeregisterOnPremisesInstanceInput"},
       "errors":[
-        {
-          "shape":"InstanceNameRequiredException",
-          "exception":true,
-          "documentation":"<p>An on-premises instance name was not specified.</p>"
-        },
-        {
-          "shape":"InvalidInstanceNameException",
-          "exception":true,
-          "documentation":"<p>The specified on-premises instance name was specified in an invalid format.</p>"
-        }
+        {"shape":"InstanceNameRequiredException"},
+        {"shape":"InvalidInstanceNameException"}
       ],
       "documentation":"<p>Deregisters an on-premises instance.</p>"
     },
@@ -524,30 +219,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetApplicationInput",
-        "documentation":"<p>Represents the input of a get application operation.</p>"
-      },
-      "output":{
-        "shape":"GetApplicationOutput",
-        "documentation":"<p>Represents the output of a get application operation.</p>"
-      },
+      "input":{"shape":"GetApplicationInput"},
+      "output":{"shape":"GetApplicationOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationDoesNotExistException"}
       ],
       "documentation":"<p>Gets information about an application.</p>"
     },
@@ -557,45 +234,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetApplicationRevisionInput",
-        "documentation":"<p>Represents the input of a get application revision operation.</p>"
-      },
-      "output":{
-        "shape":"GetApplicationRevisionOutput",
-        "documentation":"<p>Represents the output of a get application revision operation.</p>"
-      },
+      "input":{"shape":"GetApplicationRevisionInput"},
+      "output":{"shape":"GetApplicationRevisionOutput"},
       "errors":[
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"RevisionDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The named revision does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"RevisionRequiredException",
-          "exception":true,
-          "documentation":"<p>The revision ID was not specified.</p>"
-        },
-        {
-          "shape":"InvalidRevisionException",
-          "exception":true,
-          "documentation":"<p>The revision was specified in an invalid format.</p>"
-        }
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"RevisionDoesNotExistException"},
+        {"shape":"RevisionRequiredException"},
+        {"shape":"InvalidRevisionException"}
       ],
       "documentation":"<p>Gets information about an application revision.</p>"
     },
@@ -605,30 +252,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetDeploymentInput",
-        "documentation":"<p>Represents the input of a get deployment operation.</p>"
-      },
-      "output":{
-        "shape":"GetDeploymentOutput",
-        "documentation":"<p>Represents the output of a get deployment operation.</p>"
-      },
+      "input":{"shape":"GetDeploymentInput"},
+      "output":{"shape":"GetDeploymentOutput"},
       "errors":[
-        {
-          "shape":"DeploymentIdRequiredException",
-          "exception":true,
-          "documentation":"<p>At least one deployment ID must be specified.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentIdException",
-          "exception":true,
-          "documentation":"<p>At least one of the deployment IDs was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The deployment does not exist with the applicable IAM user or AWS account.</p>"
-        }
+        {"shape":"DeploymentIdRequiredException"},
+        {"shape":"InvalidDeploymentIdException"},
+        {"shape":"DeploymentDoesNotExistException"}
       ],
       "documentation":"<p>Gets information about a deployment.</p>"
     },
@@ -638,30 +267,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetDeploymentConfigInput",
-        "documentation":"<p>Represents the input of a get deployment configuration operation.</p>"
-      },
-      "output":{
-        "shape":"GetDeploymentConfigOutput",
-        "documentation":"<p>Represents the output of a get deployment configuration operation.</p>"
-      },
+      "input":{"shape":"GetDeploymentConfigInput"},
+      "output":{"shape":"GetDeploymentConfigOutput"},
       "errors":[
-        {
-          "shape":"InvalidDeploymentConfigNameException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentConfigNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration name was not specified.</p>"
-        },
-        {
-          "shape":"DeploymentConfigDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration does not exist with the applicable IAM user or AWS account.</p>"
-        }
+        {"shape":"InvalidDeploymentConfigNameException"},
+        {"shape":"DeploymentConfigNameRequiredException"},
+        {"shape":"DeploymentConfigDoesNotExistException"}
       ],
       "documentation":"<p>Gets information about a deployment configuration.</p>"
     },
@@ -671,45 +282,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetDeploymentGroupInput",
-        "documentation":"<p>Represents the input of a get deployment group operation.</p>"
-      },
-      "output":{
-        "shape":"GetDeploymentGroupOutput",
-        "documentation":"<p>Represents the output of a get deployment group operation.</p>"
-      },
+      "input":{"shape":"GetDeploymentGroupInput"},
+      "output":{"shape":"GetDeploymentGroupOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"DeploymentGroupNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was not specified.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentGroupNameException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentGroupDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The named deployment group does not exist with the applicable IAM user or AWS account.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"DeploymentGroupNameRequiredException"},
+        {"shape":"InvalidDeploymentGroupNameException"},
+        {"shape":"DeploymentGroupDoesNotExistException"}
       ],
       "documentation":"<p>Gets information about a deployment group.</p>"
     },
@@ -719,40 +300,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetDeploymentInstanceInput",
-        "documentation":"<p>Represents the input of a get deployment instance operation.</p>"
-      },
-      "output":{
-        "shape":"GetDeploymentInstanceOutput",
-        "documentation":"<p>Represents the output of a get deployment instance operation.</p>"
-      },
+      "input":{"shape":"GetDeploymentInstanceInput"},
+      "output":{"shape":"GetDeploymentInstanceOutput"},
       "errors":[
-        {
-          "shape":"DeploymentIdRequiredException",
-          "exception":true,
-          "documentation":"<p>At least one deployment ID must be specified.</p>"
-        },
-        {
-          "shape":"DeploymentDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The deployment does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"InstanceIdRequiredException",
-          "exception":true,
-          "documentation":"<p>The instance ID was not specified.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentIdException",
-          "exception":true,
-          "documentation":"<p>At least one of the deployment IDs was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InstanceDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The specified instance does not exist in the deployment group.</p>"
-        }
+        {"shape":"DeploymentIdRequiredException"},
+        {"shape":"DeploymentDoesNotExistException"},
+        {"shape":"InstanceIdRequiredException"},
+        {"shape":"InvalidDeploymentIdException"},
+        {"shape":"InstanceDoesNotExistException"}
       ],
       "documentation":"<p>Gets information about an instance as part of a deployment.</p>"
     },
@@ -762,30 +317,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetOnPremisesInstanceInput",
-        "documentation":"<p>Represents the input of a get on-premises instance operation.</p>"
-      },
-      "output":{
-        "shape":"GetOnPremisesInstanceOutput",
-        "documentation":"<p>Represents the output of a get on-premises instance operation.</p>"
-      },
+      "input":{"shape":"GetOnPremisesInstanceInput"},
+      "output":{"shape":"GetOnPremisesInstanceOutput"},
       "errors":[
-        {
-          "shape":"InstanceNameRequiredException",
-          "exception":true,
-          "documentation":"<p>An on-premises instance name was not specified.</p>"
-        },
-        {
-          "shape":"InstanceNotRegisteredException",
-          "exception":true,
-          "documentation":"<p>The specified on-premises instance is not registered.</p>"
-        },
-        {
-          "shape":"InvalidInstanceNameException",
-          "exception":true,
-          "documentation":"<p>The specified on-premises instance name was specified in an invalid format.</p>"
-        }
+        {"shape":"InstanceNameRequiredException"},
+        {"shape":"InstanceNotRegisteredException"},
+        {"shape":"InvalidInstanceNameException"}
       ],
       "documentation":"<p>Gets information about an on-premises instance.</p>"
     },
@@ -795,65 +332,19 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListApplicationRevisionsInput",
-        "documentation":"<p>Represents the input of a list application revisions operation.</p>"
-      },
-      "output":{
-        "shape":"ListApplicationRevisionsOutput",
-        "documentation":"<p>Represents the output of a list application revisions operation.</p>"
-      },
+      "input":{"shape":"ListApplicationRevisionsInput"},
+      "output":{"shape":"ListApplicationRevisionsOutput"},
       "errors":[
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidSortByException",
-          "exception":true,
-          "documentation":"<p>The column name to sort by is either not present or was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidSortOrderException",
-          "exception":true,
-          "documentation":"<p>The sort order was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidBucketNameFilterException",
-          "exception":true,
-          "documentation":"<p>The bucket name either doesn't exist or was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidKeyPrefixFilterException",
-          "exception":true,
-          "documentation":"<p>The specified key prefix filter was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"BucketNameFilterRequiredException",
-          "exception":true,
-          "documentation":"<p>A bucket name is required but was not provided.</p>"
-        },
-        {
-          "shape":"InvalidDeployedStateFilterException",
-          "exception":true,
-          "documentation":"<p>The deployed state filter was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The next token was specified in an invalid format.</p>"
-        }
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"InvalidSortByException"},
+        {"shape":"InvalidSortOrderException"},
+        {"shape":"InvalidBucketNameFilterException"},
+        {"shape":"InvalidKeyPrefixFilterException"},
+        {"shape":"BucketNameFilterRequiredException"},
+        {"shape":"InvalidDeployedStateFilterException"},
+        {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Lists information about revisions for an application.</p>"
     },
@@ -863,20 +354,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListApplicationsInput",
-        "documentation":"<p>Represents the input of a list applications operation.</p>"
-      },
-      "output":{
-        "shape":"ListApplicationsOutput",
-        "documentation":"<p>Represents the output of a list applications operation.</p>"
-      },
+      "input":{"shape":"ListApplicationsInput"},
+      "output":{"shape":"ListApplicationsOutput"},
       "errors":[
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The next token was specified in an invalid format.</p>"
-        }
+        {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Lists the applications registered with the applicable IAM user or AWS account.</p>"
     },
@@ -886,20 +367,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListDeploymentConfigsInput",
-        "documentation":"<p>Represents the input of a list deployment configurations operation.</p>"
-      },
-      "output":{
-        "shape":"ListDeploymentConfigsOutput",
-        "documentation":"<p>Represents the output of a list deployment configurations operation.</p>"
-      },
+      "input":{"shape":"ListDeploymentConfigsInput"},
+      "output":{"shape":"ListDeploymentConfigsOutput"},
       "errors":[
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The next token was specified in an invalid format.</p>"
-        }
+        {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Lists the deployment configurations with the applicable IAM user or AWS account.</p>"
     },
@@ -909,35 +380,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListDeploymentGroupsInput",
-        "documentation":"<p>Represents the input of a list deployment groups operation.</p>"
-      },
-      "output":{
-        "shape":"ListDeploymentGroupsOutput",
-        "documentation":"<p>Represents the output of a list deployment groups operation.</p>"
-      },
+      "input":{"shape":"ListDeploymentGroupsInput"},
+      "output":{"shape":"ListDeploymentGroupsOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The next token was specified in an invalid format.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Lists the deployment groups for an application registered with the applicable IAM user or AWS account.</p>"
     },
@@ -947,45 +396,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListDeploymentInstancesInput",
-        "documentation":"<p>Represents the input of a list deployment instances operation.</p>"
-      },
-      "output":{
-        "shape":"ListDeploymentInstancesOutput",
-        "documentation":"<p>Represents the output of a list deployment instances operation.</p>"
-      },
+      "input":{"shape":"ListDeploymentInstancesInput"},
+      "output":{"shape":"ListDeploymentInstancesOutput"},
       "errors":[
-        {
-          "shape":"DeploymentIdRequiredException",
-          "exception":true,
-          "documentation":"<p>At least one deployment ID must be specified.</p>"
-        },
-        {
-          "shape":"DeploymentDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The deployment does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"DeploymentNotStartedException",
-          "exception":true,
-          "documentation":"<p>The specified deployment has not started.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The next token was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentIdException",
-          "exception":true,
-          "documentation":"<p>At least one of the deployment IDs was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidInstanceStatusException",
-          "exception":true,
-          "documentation":"<p>The specified instance status does not exist.</p>"
-        }
+        {"shape":"DeploymentIdRequiredException"},
+        {"shape":"DeploymentDoesNotExistException"},
+        {"shape":"DeploymentNotStartedException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"InvalidDeploymentIdException"},
+        {"shape":"InvalidInstanceStatusException"}
       ],
       "documentation":"<p>Lists the instances for a deployment associated with the applicable IAM user or AWS account.</p>"
     },
@@ -995,60 +414,18 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListDeploymentsInput",
-        "documentation":"<p>Represents the input of a list deployments operation.</p>"
-      },
-      "output":{
-        "shape":"ListDeploymentsOutput",
-        "documentation":"<p>Represents the output of a list deployments operation.</p>"
-      },
+      "input":{"shape":"ListDeploymentsInput"},
+      "output":{"shape":"ListDeploymentsOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentGroupNameException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentGroupDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The named deployment group does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"DeploymentGroupNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was not specified.</p>"
-        },
-        {
-          "shape":"InvalidTimeRangeException",
-          "exception":true,
-          "documentation":"<p>The specified time range was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentStatusException",
-          "exception":true,
-          "documentation":"<p>The specified deployment status doesn't exist or cannot be determined.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The next token was specified in an invalid format.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"InvalidDeploymentGroupNameException"},
+        {"shape":"DeploymentGroupDoesNotExistException"},
+        {"shape":"DeploymentGroupNameRequiredException"},
+        {"shape":"InvalidTimeRangeException"},
+        {"shape":"InvalidDeploymentStatusException"},
+        {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Lists the deployments within a deployment group for an application registered with the applicable IAM user or AWS account.</p>"
     },
@@ -1058,30 +435,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListOnPremisesInstancesInput",
-        "documentation":"<p>Represents the input of a list on-premises instances operation.</p>."
-      },
-      "output":{
-        "shape":"ListOnPremisesInstancesOutput",
-        "documentation":"<p>Represents the output of list on-premises instances operation.</p>"
-      },
+      "input":{"shape":"ListOnPremisesInstancesInput"},
+      "output":{"shape":"ListOnPremisesInstancesOutput"},
       "errors":[
-        {
-          "shape":"InvalidRegistrationStatusException",
-          "exception":true,
-          "documentation":"<p>The registration status was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidTagFilterException",
-          "exception":true,
-          "documentation":"<p>The specified tag filter was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidNextTokenException",
-          "exception":true,
-          "documentation":"<p>The next token was specified in an invalid format.</p>"
-        }
+        {"shape":"InvalidRegistrationStatusException"},
+        {"shape":"InvalidTagFilterException"},
+        {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Gets a list of one or more on-premises instance names.</p> <p>Unless otherwise specified, both registered and deregistered on-premises instance names will be listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.</p>"
     },
@@ -1091,41 +450,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RegisterApplicationRevisionInput",
-        "documentation":"<p>Represents the input of a register application revision operation.</p>"
-      },
+      "input":{"shape":"RegisterApplicationRevisionInput"},
       "errors":[
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DescriptionTooLongException",
-          "exception":true,
-          "documentation":"<p>The description that was provided is too long.</p>"
-        },
-        {
-          "shape":"RevisionRequiredException",
-          "exception":true,
-          "documentation":"<p>The revision ID was not specified.</p>"
-        },
-        {
-          "shape":"InvalidRevisionException",
-          "exception":true,
-          "documentation":"<p>The revision was specified in an invalid format.</p>"
-        }
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"DescriptionTooLongException"},
+        {"shape":"RevisionRequiredException"},
+        {"shape":"InvalidRevisionException"}
       ],
       "documentation":"<p>Registers with AWS CodeDeploy a revision for the specified application.</p>"
     },
@@ -1135,41 +467,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RegisterOnPremisesInstanceInput",
-        "documentation":"<p>Represents the input of register on-premises instance operation.</p>"
-      },
+      "input":{"shape":"RegisterOnPremisesInstanceInput"},
       "errors":[
-        {
-          "shape":"InstanceNameAlreadyRegisteredException",
-          "exception":true,
-          "documentation":"<p>The specified on-premises instance name is already registered.</p>"
-        },
-        {
-          "shape":"IamUserArnAlreadyRegisteredException",
-          "exception":true,
-          "documentation":"<p>The specified IAM user ARN is already registered with an on-premises instance.</p>"
-        },
-        {
-          "shape":"InstanceNameRequiredException",
-          "exception":true,
-          "documentation":"<p>An on-premises instance name was not specified.</p>"
-        },
-        {
-          "shape":"IamUserArnRequiredException",
-          "exception":true,
-          "documentation":"<p>An IAM user ARN was not specified.</p>"
-        },
-        {
-          "shape":"InvalidInstanceNameException",
-          "exception":true,
-          "documentation":"<p>The specified on-premises instance name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidIamUserArnException",
-          "exception":true,
-          "documentation":"<p>The IAM user ARN was specified in an invalid format.</p>"
-        }
+        {"shape":"InstanceNameAlreadyRegisteredException"},
+        {"shape":"IamUserArnAlreadyRegisteredException"},
+        {"shape":"InstanceNameRequiredException"},
+        {"shape":"IamUserArnRequiredException"},
+        {"shape":"InvalidInstanceNameException"},
+        {"shape":"InvalidIamUserArnException"}
       ],
       "documentation":"<p>Registers an on-premises instance.</p>"
     },
@@ -1179,41 +484,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RemoveTagsFromOnPremisesInstancesInput",
-        "documentation":"<p>Represents the input of a remove tags from on-premises instances operation.</p>"
-      },
+      "input":{"shape":"RemoveTagsFromOnPremisesInstancesInput"},
       "errors":[
-        {
-          "shape":"InstanceNameRequiredException",
-          "exception":true,
-          "documentation":"<p>An on-premises instance name was not specified.</p>"
-        },
-        {
-          "shape":"TagRequiredException",
-          "exception":true,
-          "documentation":"<p>A tag was not specified.</p>"
-        },
-        {
-          "shape":"InvalidTagException",
-          "exception":true,
-          "documentation":"<p>The specified tag was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"TagLimitExceededException",
-          "exception":true,
-          "documentation":"<p>The maximum allowed number of tags was exceeded.</p>"
-        },
-        {
-          "shape":"InstanceLimitExceededException",
-          "exception":true,
-          "documentation":"<p>The maximum number of allowed on-premises instances in a single call was exceeded.</p>"
-        },
-        {
-          "shape":"InstanceNotRegisteredException",
-          "exception":true,
-          "documentation":"<p>The specified on-premises instance is not registered.</p>"
-        }
+        {"shape":"InstanceNameRequiredException"},
+        {"shape":"TagRequiredException"},
+        {"shape":"InvalidTagException"},
+        {"shape":"TagLimitExceededException"},
+        {"shape":"InstanceLimitExceededException"},
+        {"shape":"InstanceNotRegisteredException"}
       ],
       "documentation":"<p>Removes one or more tags from one or more on-premises instances.</p>"
     },
@@ -1223,35 +501,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"StopDeploymentInput",
-        "documentation":"<p>Represents the input of a stop deployment operation.</p>"
-      },
-      "output":{
-        "shape":"StopDeploymentOutput",
-        "documentation":"<p>Represents the output of a stop deployment operation.</p>"
-      },
+      "input":{"shape":"StopDeploymentInput"},
+      "output":{"shape":"StopDeploymentOutput"},
       "errors":[
-        {
-          "shape":"DeploymentIdRequiredException",
-          "exception":true,
-          "documentation":"<p>At least one deployment ID must be specified.</p>"
-        },
-        {
-          "shape":"DeploymentDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The deployment does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"DeploymentAlreadyCompletedException",
-          "exception":true,
-          "documentation":"<p>The deployment is already completed.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentIdException",
-          "exception":true,
-          "documentation":"<p>At least one of the deployment IDs was specified in an invalid format.</p>"
-        }
+        {"shape":"DeploymentIdRequiredException"},
+        {"shape":"DeploymentDoesNotExistException"},
+        {"shape":"DeploymentAlreadyCompletedException"},
+        {"shape":"InvalidDeploymentIdException"}
       ],
       "documentation":"<p>Attempts to stop an ongoing deployment.</p>"
     },
@@ -1261,31 +517,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateApplicationInput",
-        "documentation":"<p>Represents the input of an update application operation.</p>"
-      },
+      "input":{"shape":"UpdateApplicationInput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>An application with the specified name already exists with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationAlreadyExistsException"},
+        {"shape":"ApplicationDoesNotExistException"}
       ],
       "documentation":"<p>Changes an existing application's name.</p>"
     },
@@ -1295,80 +532,22 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateDeploymentGroupInput",
-        "documentation":"<p>Represents the input of an update deployment group operation.</p>"
-      },
-      "output":{
-        "shape":"UpdateDeploymentGroupOutput",
-        "documentation":"<p>Represents the output of an update deployment group operation.</p>"
-      },
+      "input":{"shape":"UpdateDeploymentGroupInput"},
+      "output":{"shape":"UpdateDeploymentGroupOutput"},
       "errors":[
-        {
-          "shape":"ApplicationNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The minimum number of required application names was not specified.</p>"
-        },
-        {
-          "shape":"InvalidApplicationNameException",
-          "exception":true,
-          "documentation":"<p>The application name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"ApplicationDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentGroupNameException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentGroupAlreadyExistsException",
-          "exception":true,
-          "documentation":"<p>A deployment group with the specified name already exists with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"DeploymentGroupNameRequiredException",
-          "exception":true,
-          "documentation":"<p>The deployment group name was not specified.</p>"
-        },
-        {
-          "shape":"DeploymentGroupDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The named deployment group does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"InvalidEC2TagException",
-          "exception":true,
-          "documentation":"<p>The tag was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidTagException",
-          "exception":true,
-          "documentation":"<p>The specified tag was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"InvalidAutoScalingGroupException",
-          "exception":true,
-          "documentation":"<p>The Auto Scaling group was specified in an invalid format or does not exist.</p>"
-        },
-        {
-          "shape":"InvalidDeploymentConfigNameException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration name was specified in an invalid format.</p>"
-        },
-        {
-          "shape":"DeploymentConfigDoesNotExistException",
-          "exception":true,
-          "documentation":"<p>The deployment configuration does not exist with the applicable IAM user or AWS account.</p>"
-        },
-        {
-          "shape":"InvalidRoleException",
-          "exception":true,
-          "documentation":"<p>The service role ARN was specified in an invalid format. Or, if an Auto Scaling group was specified, the specified service role does not grant the appropriate permissions to Auto Scaling.</p>"
-        }
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"InvalidDeploymentGroupNameException"},
+        {"shape":"DeploymentGroupAlreadyExistsException"},
+        {"shape":"DeploymentGroupNameRequiredException"},
+        {"shape":"DeploymentGroupDoesNotExistException"},
+        {"shape":"InvalidEC2TagException"},
+        {"shape":"InvalidTagException"},
+        {"shape":"InvalidAutoScalingGroupException"},
+        {"shape":"InvalidDeploymentConfigNameException"},
+        {"shape":"DeploymentConfigDoesNotExistException"},
+        {"shape":"InvalidRoleException"}
       ],
       "documentation":"<p>Changes information about an existing deployment group.</p>"
     }
@@ -1396,15 +575,15 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>An application with the specified name already exists with the applicable IAM user or AWS account.</p>"
+      "documentation":"<p>An application with the specified name already exists with the applicable IAM user or AWS account.</p>",
+      "exception":true
     },
     "ApplicationDoesNotExistException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>"
+      "documentation":"<p>The application does not exist with the applicable IAM user or AWS account.</p>",
+      "exception":true
     },
     "ApplicationId":{"type":"string"},
     "ApplicationInfo":{
@@ -1433,20 +612,20 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>More applications were attempted to be created than were allowed.</p>"
+      "documentation":"<p>More applications were attempted to be created than were allowed.</p>",
+      "exception":true
     },
     "ApplicationName":{
       "type":"string",
-      "min":1,
-      "max":100
+      "max":100,
+      "min":1
     },
     "ApplicationNameRequiredException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The minimum number of required application names was not specified.</p>"
+      "documentation":"<p>The minimum number of required application names was not specified.</p>",
+      "exception":true
     },
     "ApplicationRevisionSortBy":{
       "type":"string",
@@ -1553,8 +732,8 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>A bucket name is required but was not provided.</p>"
+      "documentation":"<p>A bucket name is required but was not provided.</p>",
+      "exception":true
     },
     "BundleType":{
       "type":"string",
@@ -1755,30 +934,30 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployment is already completed.</p>"
+      "documentation":"<p>The deployment is already completed.</p>",
+      "exception":true
     },
     "DeploymentConfigAlreadyExistsException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>A deployment configuration with the specified name already exists with the applicable IAM user or AWS account.</p>"
+      "documentation":"<p>A deployment configuration with the specified name already exists with the applicable IAM user or AWS account.</p>",
+      "exception":true
     },
     "DeploymentConfigDoesNotExistException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployment configuration does not exist with the applicable IAM user or AWS account.</p>"
+      "documentation":"<p>The deployment configuration does not exist with the applicable IAM user or AWS account.</p>",
+      "exception":true
     },
     "DeploymentConfigId":{"type":"string"},
     "DeploymentConfigInUseException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployment configuration is still in use.</p>"
+      "documentation":"<p>The deployment configuration is still in use.</p>",
+      "exception":true
     },
     "DeploymentConfigInfo":{
       "type":"structure",
@@ -1806,20 +985,20 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployment configurations limit was exceeded.</p>"
+      "documentation":"<p>The deployment configurations limit was exceeded.</p>",
+      "exception":true
     },
     "DeploymentConfigName":{
       "type":"string",
-      "min":1,
-      "max":100
+      "max":100,
+      "min":1
     },
     "DeploymentConfigNameRequiredException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployment configuration name was not specified.</p>"
+      "documentation":"<p>The deployment configuration name was not specified.</p>",
+      "exception":true
     },
     "DeploymentConfigsList":{
       "type":"list",
@@ -1836,22 +1015,22 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployment does not exist with the applicable IAM user or AWS account.</p>"
+      "documentation":"<p>The deployment does not exist with the applicable IAM user or AWS account.</p>",
+      "exception":true
     },
     "DeploymentGroupAlreadyExistsException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>A deployment group with the specified name already exists with the applicable IAM user or AWS account.</p>"
+      "documentation":"<p>A deployment group with the specified name already exists with the applicable IAM user or AWS account.</p>",
+      "exception":true
     },
     "DeploymentGroupDoesNotExistException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The named deployment group does not exist with the applicable IAM user or AWS account.</p>"
+      "documentation":"<p>The named deployment group does not exist with the applicable IAM user or AWS account.</p>",
+      "exception":true
     },
     "DeploymentGroupId":{"type":"string"},
     "DeploymentGroupInfo":{
@@ -1900,20 +1079,20 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p> The deployment groups limit was exceeded.</p>"
+      "documentation":"<p> The deployment groups limit was exceeded.</p>",
+      "exception":true
     },
     "DeploymentGroupName":{
       "type":"string",
-      "min":1,
-      "max":100
+      "max":100,
+      "min":1
     },
     "DeploymentGroupNameRequiredException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployment group name was not specified.</p>"
+      "documentation":"<p>The deployment group name was not specified.</p>",
+      "exception":true
     },
     "DeploymentGroupsList":{
       "type":"list",
@@ -1924,8 +1103,8 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>At least one deployment ID must be specified.</p>"
+      "documentation":"<p>At least one deployment ID must be specified.</p>",
+      "exception":true
     },
     "DeploymentInfo":{
       "type":"structure",
@@ -1993,15 +1172,15 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The number of allowed deployments was exceeded.</p>"
+      "documentation":"<p>The number of allowed deployments was exceeded.</p>",
+      "exception":true
     },
     "DeploymentNotStartedException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified deployment has not started.</p>"
+      "documentation":"<p>The specified deployment has not started.</p>",
+      "exception":true
     },
     "DeploymentOverview":{
       "type":"structure",
@@ -2068,8 +1247,8 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The description that was provided is too long.</p>"
+      "documentation":"<p>The description that was provided is too long.</p>",
+      "exception":true
     },
     "Diagnostics":{
       "type":"structure",
@@ -2378,15 +1557,15 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified IAM user ARN is already registered with an on-premises instance.</p>"
+      "documentation":"<p>The specified IAM user ARN is already registered with an on-premises instance.</p>",
+      "exception":true
     },
     "IamUserArnRequiredException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>An IAM user ARN was not specified.</p>"
+      "documentation":"<p>An IAM user ARN was not specified.</p>",
+      "exception":true
     },
     "InstanceArn":{"type":"string"},
     "InstanceCount":{"type":"long"},
@@ -2394,16 +1573,16 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified instance does not exist in the deployment group.</p>"
+      "documentation":"<p>The specified instance does not exist in the deployment group.</p>",
+      "exception":true
     },
     "InstanceId":{"type":"string"},
     "InstanceIdRequiredException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The instance ID was not specified.</p>"
+      "documentation":"<p>The instance ID was not specified.</p>",
+      "exception":true
     },
     "InstanceInfo":{
       "type":"structure",
@@ -2443,16 +1622,16 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The maximum number of allowed on-premises instances in a single call was exceeded.</p>"
+      "documentation":"<p>The maximum number of allowed on-premises instances in a single call was exceeded.</p>",
+      "exception":true
     },
     "InstanceName":{"type":"string"},
     "InstanceNameAlreadyRegisteredException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified on-premises instance name is already registered.</p>"
+      "documentation":"<p>The specified on-premises instance name is already registered.</p>",
+      "exception":true
     },
     "InstanceNameList":{
       "type":"list",
@@ -2462,15 +1641,15 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>An on-premises instance name was not specified.</p>"
+      "documentation":"<p>An on-premises instance name was not specified.</p>",
+      "exception":true
     },
     "InstanceNotRegisteredException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified on-premises instance is not registered.</p>"
+      "documentation":"<p>The specified on-premises instance is not registered.</p>",
+      "exception":true
     },
     "InstanceStatus":{
       "type":"string",
@@ -2521,169 +1700,169 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The application name was specified in an invalid format.</p>"
+      "documentation":"<p>The application name was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidAutoScalingGroupException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The Auto Scaling group was specified in an invalid format or does not exist.</p>"
+      "documentation":"<p>The Auto Scaling group was specified in an invalid format or does not exist.</p>",
+      "exception":true
     },
     "InvalidBucketNameFilterException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The bucket name either doesn't exist or was specified in an invalid format.</p>"
+      "documentation":"<p>The bucket name either doesn't exist or was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidDeployedStateFilterException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployed state filter was specified in an invalid format.</p>"
+      "documentation":"<p>The deployed state filter was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidDeploymentConfigNameException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployment configuration name was specified in an invalid format.</p>"
+      "documentation":"<p>The deployment configuration name was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidDeploymentGroupNameException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The deployment group name was specified in an invalid format.</p>"
+      "documentation":"<p>The deployment group name was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidDeploymentIdException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>At least one of the deployment IDs was specified in an invalid format.</p>"
+      "documentation":"<p>At least one of the deployment IDs was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidDeploymentStatusException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified deployment status doesn't exist or cannot be determined.</p>"
+      "documentation":"<p>The specified deployment status doesn't exist or cannot be determined.</p>",
+      "exception":true
     },
     "InvalidEC2TagException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The tag was specified in an invalid format.</p>"
+      "documentation":"<p>The tag was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidIamUserArnException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The IAM user ARN was specified in an invalid format.</p>"
+      "documentation":"<p>The IAM user ARN was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidInstanceNameException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified on-premises instance name was specified in an invalid format.</p>"
+      "documentation":"<p>The specified on-premises instance name was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidInstanceStatusException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified instance status does not exist.</p>"
+      "documentation":"<p>The specified instance status does not exist.</p>",
+      "exception":true
     },
     "InvalidKeyPrefixFilterException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified key prefix filter was specified in an invalid format.</p>"
+      "documentation":"<p>The specified key prefix filter was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidMinimumHealthyHostValueException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The minimum healthy instances value was specified in an invalid format.</p>"
+      "documentation":"<p>The minimum healthy instances value was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidNextTokenException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The next token was specified in an invalid format.</p>"
+      "documentation":"<p>The next token was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidOperationException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>An invalid operation was detected.</p>"
+      "documentation":"<p>An invalid operation was detected.</p>",
+      "exception":true
     },
     "InvalidRegistrationStatusException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The registration status was specified in an invalid format.</p>"
+      "documentation":"<p>The registration status was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidRevisionException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The revision was specified in an invalid format.</p>"
+      "documentation":"<p>The revision was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidRoleException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The service role ARN was specified in an invalid format. Or, if an Auto Scaling group was specified, the specified service role does not grant the appropriate permissions to Auto Scaling.</p>"
+      "documentation":"<p>The service role ARN was specified in an invalid format. Or, if an Auto Scaling group was specified, the specified service role does not grant the appropriate permissions to Auto Scaling.</p>",
+      "exception":true
     },
     "InvalidSortByException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The column name to sort by is either not present or was specified in an invalid format.</p>"
+      "documentation":"<p>The column name to sort by is either not present or was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidSortOrderException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The sort order was specified in an invalid format.</p>"
+      "documentation":"<p>The sort order was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidTagException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified tag was specified in an invalid format.</p>"
+      "documentation":"<p>The specified tag was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidTagFilterException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified tag filter was specified in an invalid format.</p>"
+      "documentation":"<p>The specified tag filter was specified in an invalid format.</p>",
+      "exception":true
     },
     "InvalidTimeRangeException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The specified time range was specified in an invalid format.</p>"
+      "documentation":"<p>The specified time range was specified in an invalid format.</p>",
+      "exception":true
     },
     "Key":{"type":"string"},
     "LifecycleErrorCode":{
@@ -3078,8 +2257,8 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The named revision does not exist with the applicable IAM user or AWS account.</p>"
+      "documentation":"<p>The named revision does not exist with the applicable IAM user or AWS account.</p>",
+      "exception":true
     },
     "RevisionLocation":{
       "type":"structure",
@@ -3108,16 +2287,16 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The revision ID was not specified.</p>"
+      "documentation":"<p>The revision ID was not specified.</p>",
+      "exception":true
     },
     "Role":{"type":"string"},
     "RoleRequiredException":{
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The role ID was not specified.</p>"
+      "documentation":"<p>The role ID was not specified.</p>",
+      "exception":true
     },
     "S3Bucket":{"type":"string"},
     "S3Key":{"type":"string"},
@@ -3235,8 +2414,8 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>The maximum allowed number of tags was exceeded.</p>"
+      "documentation":"<p>The maximum allowed number of tags was exceeded.</p>",
+      "exception":true
     },
     "TagList":{
       "type":"list",
@@ -3246,8 +2425,8 @@
       "type":"structure",
       "members":{
       },
-      "exception":true,
-      "documentation":"<p>A tag was not specified.</p>"
+      "documentation":"<p>A tag was not specified.</p>",
+      "exception":true
     },
     "TimeRange":{
       "type":"structure",
@@ -3332,5 +2511,6 @@
     },
     "Value":{"type":"string"},
     "VersionId":{"type":"string"}
-  }
+  },
+  "documentation":"<fullname>AWS CodeDeploy</fullname> <b>Overview</b> <p>This is the AWS CodeDeploy API Reference. This guide provides descriptions of the AWS CodeDeploy APIs. For additional information, see the <a href=\"http://docs.aws.amazon.com/codedeploy/latest/userguide\">AWS CodeDeploy User Guide</a>.</p> <b>Using the APIs</b> <p>You can use the AWS CodeDeploy APIs to work with the following items:</p> <ul> <li> <p>Applications are unique identifiers that AWS CodeDeploy uses to ensure that the correct combinations of revisions, deployment configurations, and deployment groups are being referenced during deployments.</p> <p>You can use the AWS CodeDeploy APIs to create, delete, get, list, and update applications.</p> </li> <li> <p>Deployment configurations are sets of deployment rules and deployment success and failure conditions that AWS CodeDeploy uses during deployments.</p> <p>You can use the AWS CodeDeploy APIs to create, delete, get, and list deployment configurations.</p> </li> <li> <p>Deployment groups are groups of instances to which application revisions can be deployed.</p> <p>You can use the AWS CodeDeploy APIs to create, delete, get, list, and update deployment groups.</p> </li> <li> <p>Instances represent Amazon EC2 instances to which application revisions are deployed. Instances are identified by their Amazon EC2 tags or Auto Scaling group names. Instances belong to deployment groups.</p> <p>You can use the AWS CodeDeploy APIs to get and list instances.</p> </li> <li> <p>Deployments represent the process of deploying revisions to instances.</p> <p>You can use the AWS CodeDeploy APIs to create, get, list, and stop deployments.</p> </li> <li> <p>Application revisions are archive files that are stored in Amazon S3 buckets or GitHub repositories. These revisions contain source content (such as source code, web pages, executable files, any deployment scripts, and similar) along with an Application Specification file (AppSpec file). (The AppSpec file is unique to AWS CodeDeploy; it defines a series of deployment actions that you want AWS CodeDeploy to execute.) An application revision is uniquely identified by its Amazon S3 object key and its ETag, version, or both (for application revisions that are stored in Amazon S3 buckets) or by its repository name and commit ID (for applications revisions that are stored in GitHub repositories). Application revisions are deployed through deployment groups.</p> <p>You can use the AWS CodeDeploy APIs to get, list, and register application revisions.</p> </li> </ul>"
 }
