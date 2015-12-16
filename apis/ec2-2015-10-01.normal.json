@@ -138,7 +138,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"AuthorizeSecurityGroupEgressRequest"},
-      "documentation":"<p>Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination CIDR IP address ranges, or to one or more destination security groups for the same VPC.</p> <important> <p>You can have up to 50 rules per security group (covering both ingress and egress rules).</p> </important> <p>A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.</p> <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p>"
+      "documentation":"<p>[EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination CIDR IP address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <important> <p>You can have up to 50 rules per security group (covering both ingress and egress rules).</p> </important> <p>Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.</p> <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p>"
     },
     "AuthorizeSecurityGroupIngress":{
       "name":"AuthorizeSecurityGroupIngress",
@@ -377,7 +377,7 @@
       },
       "input":{"shape":"CreateReservedInstancesListingRequest"},
       "output":{"shape":"CreateReservedInstancesListingResult"},
-      "documentation":"<p>Creates a listing for Amazon EC2 Reserved instances to be sold in the Reserved Instance Marketplace. You can submit one Reserved instance listing at a time. To get a list of your Reserved instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <p>The Reserved Instance Marketplace matches sellers who want to resell Reserved instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved instances bought and sold through the Reserved Instance Marketplace work like any other Reserved instances. </p> <p>To sell your Reserved instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Reserved Instances, and specify the upfront price to receive for them. Your Reserved instance listings then become available for purchase. To view the details of your Reserved instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Creates a listing for Amazon EC2 Reserved instances to be sold in the Reserved Instance Marketplace. You can submit one Reserved instance listing at a time. To get a list of your Reserved instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <p>The Reserved Instance Marketplace matches sellers who want to resell Reserved instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved instances bought and sold through the Reserved Instance Marketplace work like any other Reserved instances.</p> <p>To sell your Reserved instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Reserved instances, and specify the upfront price to receive for them. Your Reserved instance listings then become available for purchase. To view the details of your Reserved instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateRoute":{
       "name":"CreateRoute",
@@ -852,7 +852,7 @@
       },
       "input":{"shape":"DescribeHostsRequest"},
       "output":{"shape":"DescribeHostsResult"},
-      "documentation":"<p>Describes one or more of your Dedicated hosts.</p> <p>The results describe only the Dedicated hosts in the region you're currently using. All listed instances consume capacity on your Dedicated host. Dedicated hosts that have recently been released will be listed with the status \"released\".</p>"
+      "documentation":"<p>Describes one or more of your Dedicated hosts.</p> <p>The results describe only the Dedicated hosts in the region you're currently using. All listed instances consume capacity on your Dedicated host. Dedicated hosts that have recently been released will be listed with the state <code>released</code>.</p>"
     },
     "DescribeIdFormat":{
       "name":"DescribeIdFormat",
@@ -1059,7 +1059,7 @@
       },
       "input":{"shape":"DescribeReservedInstancesModificationsRequest"},
       "output":{"shape":"DescribeReservedInstancesModificationsResult"},
-      "documentation":"<p>Describes the modifications made to your Reserved instances. If no parameter is specified, information about all your Reserved Instances modification requests is returned. If a modification ID is specified, only information about the specific modification is returned.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
+      "documentation":"<p>Describes the modifications made to your Reserved instances. If no parameter is specified, information about all your Reserved instances modification requests is returned. If a modification ID is specified, only information about the specific modification is returned.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
     },
     "DescribeReservedInstancesOfferings":{
       "name":"DescribeReservedInstancesOfferings",
@@ -1069,7 +1069,7 @@
       },
       "input":{"shape":"DescribeReservedInstancesOfferingsRequest"},
       "output":{"shape":"DescribeReservedInstancesOfferingsResult"},
-      "documentation":"<p>Describes Reserved instance offerings that are available for purchase. With Reserved instances, you purchase the right to launch instances for a period of time. During that time period, you do not receive insufficient capacity errors, and you pay a lower usage rate than the rate charged for On-Demand instances for the actual time used.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Describes Reserved instance offerings that are available for purchase. With Reserved instances, you purchase the right to launch instances for a period of time. During that time period, you do not receive insufficient capacity errors, and you pay a lower usage rate than the rate charged for On-Demand instances for the actual time used.</p> <p>If you have listed your own Reserved instances for sale in the Reserved Instance Marketplace, they will be excluded from these results. This is to ensure that you do not purchase your own Reserved instances.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeRouteTables":{
       "name":"DescribeRouteTables",
@@ -1551,7 +1551,7 @@
       },
       "input":{"shape":"ModifyReservedInstancesRequest"},
       "output":{"shape":"ModifyReservedInstancesResult"},
-      "documentation":"<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
+      "documentation":"<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved instances. The Reserved instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
     },
     "ModifySnapshotAttribute":{
       "name":"ModifySnapshotAttribute",
@@ -1685,7 +1685,7 @@
       },
       "input":{"shape":"ReleaseHostsRequest"},
       "output":{"shape":"ReleaseHostsResult"},
-      "documentation":"<p>When you no longer want to use a Dedicated host it can be released. On-Demand billing is stopped and the host goes into \"released\" state. The host ID of Dedicated hosts that have been released can no longer be specified in another request, e.g., ModifyHosts. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated hosts are released, it make take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated hosts. Try waiting a few minutes, and then try again. </p> <p>Released hosts will still appear in a DescribeHosts response.</p>"
+      "documentation":"<p>When you no longer want to use a Dedicated host it can be released. On-Demand billing is stopped and the host goes into <code>released</code> state. The host ID of Dedicated hosts that have been released can no longer be specified in another request, e.g., ModifyHosts. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated hosts are released, it make take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated hosts. Try waiting a few minutes, and then try again. </p> <p>Released hosts will still appear in a DescribeHosts response.</p>"
     },
     "ReplaceNetworkAclAssociation":{
       "name":"ReplaceNetworkAclAssociation",
@@ -1807,7 +1807,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"RevokeSecurityGroupEgressRequest"},
-      "documentation":"<p>Removes one or more egress rules from a security group for EC2-VPC. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be revoked.</p> <p>Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>"
+      "documentation":"<p>[EC2-VPC only] Removes one or more egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be revoked.</p> <p>Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>"
     },
     "RevokeSecurityGroupIngress":{
       "name":"RevokeSecurityGroupIngress",
@@ -2510,22 +2510,22 @@
         },
         "IpProtocol":{
           "shape":"String",
-          "documentation":"<p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number (see <a href=\"http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers</a>). Use <code>-1</code> to specify all.</p>",
+          "documentation":"<p>The IP protocol name or number. We recommend that you specify the protocol in a set of IP permissions instead.</p>",
           "locationName":"ipProtocol"
         },
         "FromPort":{
           "shape":"Integer",
-          "documentation":"<p>The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use <code>-1</code> to specify all ICMP types.</p>",
+          "documentation":"<p>The start of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.</p>",
           "locationName":"fromPort"
         },
         "ToPort":{
           "shape":"Integer",
-          "documentation":"<p>The end of port range for the TCP and UDP protocols, or an ICMP code number. For the ICMP code number, use <code>-1</code> to specify all ICMP codes for the ICMP type.</p>",
+          "documentation":"<p>The end of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.</p>",
           "locationName":"toPort"
         },
         "CidrIp":{
           "shape":"String",
-          "documentation":"<p>The CIDR IP address range. You can't specify this parameter when specifying a source security group.</p>",
+          "documentation":"<p>The CIDR IP address range. We recommend that you specify the CIDR range in a set of IP permissions instead.</p>",
           "locationName":"cidrIp"
         },
         "IpPermissions":{
@@ -2661,7 +2661,8 @@
           "documentation":"<p>The number of vCPUs available on the Dedicated host.</p>",
           "locationName":"availableVCpus"
         }
-      }
+      },
+      "documentation":"<p>The capacity information for instances launched onto the Dedicated host.</p>"
     },
     "AvailableInstanceCapacityList":{
       "type":"list",
@@ -3348,6 +3349,16 @@
         "ClientToken":{
           "shape":"String",
           "documentation":"<p>Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        },
+        "Encrypted":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether the destination snapshots of the copied image should be encrypted. The default CMK for EBS is used unless a non-default AWS Key Management Service (AWS KMS) CMK is specified with <code>KmsKeyId</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName":"encrypted"
+        },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>The full ARN of the AWS Key Management Service (AWS KMS) CMK to use when encrypting the snapshots of an image during a copy operation. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. The ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>. The specified CMK must exist in the region that the snapshot is being copied to. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set.</p>",
+          "locationName":"kmsKeyId"
         }
       }
     },
@@ -5460,7 +5471,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>architecture</code> - The instance architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p><code>availability-zone</code> - The Availability Zone of the instance.</p> </li> <li> <p><code>block-device-mapping.attach-time</code> - The attach time for an EBS volume mapped to the instance, for example, <code>2010-09-15T17:15:20.000Z</code>.</p> </li> <li> <p><code>block-device-mapping.delete-on-termination</code> - A Boolean that indicates whether the EBS volume is deleted on instance termination.</p> </li> <li> <p><code>block-device-mapping.device-name</code> - The device name for the EBS volume (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p><code>block-device-mapping.status</code> - The status for the EBS volume (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p><code>block-device-mapping.volume-id</code> - The volume ID of the EBS volume.</p> </li> <li> <p><code>client-token</code> - The idempotency token you provided when you launched the instance.</p> </li> <li> <p><code>dns-name</code> - The public DNS name of the instance.</p> </li> <li> <p><code>group-id</code> - The ID of the security group for the instance. EC2-Classic only.</p> </li> <li> <p><code>group-name</code> - The name of the security group for the instance. EC2-Classic only.</p> </li> <li> <p><code>hypervisor</code> - The hypervisor type of the instance (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p><code>iam-instance-profile.arn</code> - The instance profile associated with the instance. Specified as an ARN.</p> </li> <li> <p><code>image-id</code> - The ID of the image used to launch the instance.</p> </li> <li> <p><code>instance-id</code> - The ID of the instance.</p> </li> <li> <p><code>instance-lifecycle</code> - Indicates whether this is a Spot Instance (<code>spot</code>).</p> </li> <li> <p><code>instance-state-code</code> - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p> </li> <li> <p><code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p> </li> <li> <p><code>instance-type</code> - The type of instance (for example, <code>t2.micro</code>).</p> </li> <li> <p><code>instance.group-id</code> - The ID of the security group for the instance. </p> </li> <li> <p><code>instance.group-name</code> - The name of the security group for the instance. </p> </li> <li> <p><code>ip-address</code> - The public IP address of the instance.</p> </li> <li> <p><code>kernel-id</code> - The kernel ID.</p> </li> <li> <p><code>key-name</code> - The name of the key pair used when the instance was launched.</p> </li> <li> <p><code>launch-index</code> - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on). </p> </li> <li> <p><code>launch-time</code> - The time when the instance was launched.</p> </li> <li> <p><code>monitoring-state</code> - Indicates whether monitoring is enabled for the instance (<code>disabled</code> | <code>enabled</code>).</p> </li> <li> <p><code>owner-id</code> - The AWS account ID of the instance owner.</p> </li> <li> <p><code>placement-group-name</code> - The name of the placement group for the instance.</p> </li> <li> <p><code>platform</code> - The platform. Use <code>windows</code> if you have Windows instances; otherwise, leave blank.</p> </li> <li> <p><code>private-dns-name</code> - The private DNS name of the instance.</p> </li> <li> <p><code>private-ip-address</code> - The private IP address of the instance.</p> </li> <li> <p><code>product-code</code> - The product code associated with the AMI used to launch the instance.</p> </li> <li> <p><code>product-code.type</code> - The type of product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p><code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p><code>reason</code> - The reason for the current state of the instance (for example, shows \"User Initiated [date]\" when you stop or terminate the instance). Similar to the state-reason-code filter.</p> </li> <li> <p><code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p><code>reservation-id</code> - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.</p> </li> <li> <p><code>root-device-name</code> - The name of the root device for the instance (for example, <code>/dev/sda1</code> or <code>/dev/xvda</code>).</p> </li> <li> <p><code>root-device-type</code> - The type of root device that the instance uses (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p><code>source-dest-check</code> - Indicates whether the instance performs source/destination checking. A value of <code>true</code> means that checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the instance to perform network address translation (NAT) in your VPC. </p> </li> <li> <p><code>spot-instance-request-id</code> - The ID of the Spot instance request.</p> </li> <li> <p><code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p><code>state-reason-message</code> - A message that describes the state change.</p> </li> <li> <p><code>subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource, where <code>tag</code>:<i>key</i> is the tag's key. </p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> | <code>default</code>).</p> </li> <li> <p><code>virtualization-type</code> - The virtualization type of the instance (<code>paravirtual</code> | <code>hvm</code>).</p> </li> <li> <p><code>vpc-id</code> - The ID of the VPC that the instance is running in.</p> </li> <li> <p><code>network-interface.description</code> - The description of the network interface.</p> </li> <li> <p><code>network-interface.subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p><code>network-interface.vpc-id</code> - The ID of the VPC for the network interface.</p> </li> <li> <p><code>network-interface.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p><code>network-interface.owner-id</code> - The ID of the owner of the network interface.</p> </li> <li> <p><code>network-interface.availability-zone</code> - The Availability Zone for the network interface.</p> </li> <li> <p><code>network-interface.requester-id</code> - The requester ID for the network interface.</p> </li> <li> <p><code>network-interface.requester-managed</code> - Indicates whether the network interface is being managed by AWS.</p> </li> <li> <p><code>network-interface.status</code> - The status of the network interface (<code>available</code>) | <code>in-use</code>).</p> </li> <li> <p><code>network-interface.mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p><code>network-interface-private-dns-name</code> - The private DNS name of the network interface.</p> </li> <li> <p><code>network-interface.source-dest-check</code> - Whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC.</p> </li> <li> <p><code>network-interface.group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p><code>network-interface.group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p><code>network-interface.attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p><code>network-interface.attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p><code>network-interface.attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p><code>network-interface.addresses.private-ip-address</code> - The private IP address associated with the network interface.</p> </li> <li> <p><code>network-interface.attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p><code>network-interface.attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p><code>network-interface.attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p><code>network-interface.attachment.delete-on-termination</code> - Specifies whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p><code>network-interface.addresses.primary</code> - Specifies whether the IP address of the network interface is the primary private IP address.</p> </li> <li> <p><code>network-interface.addresses.association.public-ip</code> - The ID of the association of an Elastic IP address with a network interface.</p> </li> <li> <p><code>network-interface.addresses.association.ip-owner-id</code> - The owner ID of the private IP address associated with the network interface.</p> </li> <li> <p><code>association.public-ip</code> - The address of the Elastic IP address bound to the network interface.</p> </li> <li> <p><code>association.ip-owner-id</code> - The owner of the Elastic IP address associated with the network interface.</p> </li> <li> <p><code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address for your network interface.</p> </li> <li> <p><code>association.association-id</code> - The association ID returned when the network interface was associated with an IP address.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>affinity</code> - The affinity setting for an instance running on a Dedicated host (<code>default</code> | <code>host</code>).</p> </li> <li> <p><code>architecture</code> - The instance architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p><code>availability-zone</code> - The Availability Zone of the instance.</p> </li> <li> <p><code>block-device-mapping.attach-time</code> - The attach time for an EBS volume mapped to the instance, for example, <code>2010-09-15T17:15:20.000Z</code>.</p> </li> <li> <p><code>block-device-mapping.delete-on-termination</code> - A Boolean that indicates whether the EBS volume is deleted on instance termination.</p> </li> <li> <p><code>block-device-mapping.device-name</code> - The device name for the EBS volume (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p><code>block-device-mapping.status</code> - The status for the EBS volume (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p><code>block-device-mapping.volume-id</code> - The volume ID of the EBS volume.</p> </li> <li> <p><code>client-token</code> - The idempotency token you provided when you launched the instance.</p> </li> <li> <p><code>dns-name</code> - The public DNS name of the instance.</p> </li> <li> <p><code>group-id</code> - The ID of the security group for the instance. EC2-Classic only.</p> </li> <li> <p><code>group-name</code> - The name of the security group for the instance. EC2-Classic only.</p> </li> <li> <p><code>host-Id</code> - The ID of the Dedicated host on which the instance is running, if applicable.</p> </li> <li> <p><code>hypervisor</code> - The hypervisor type of the instance (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p><code>iam-instance-profile.arn</code> - The instance profile associated with the instance. Specified as an ARN.</p> </li> <li> <p><code>image-id</code> - The ID of the image used to launch the instance.</p> </li> <li> <p><code>instance-id</code> - The ID of the instance.</p> </li> <li> <p><code>instance-lifecycle</code> - Indicates whether this is a Spot Instance (<code>spot</code>).</p> </li> <li> <p><code>instance-state-code</code> - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p> </li> <li> <p><code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p> </li> <li> <p><code>instance-type</code> - The type of instance (for example, <code>t2.micro</code>).</p> </li> <li> <p><code>instance.group-id</code> - The ID of the security group for the instance. </p> </li> <li> <p><code>instance.group-name</code> - The name of the security group for the instance. </p> </li> <li> <p><code>ip-address</code> - The public IP address of the instance.</p> </li> <li> <p><code>kernel-id</code> - The kernel ID.</p> </li> <li> <p><code>key-name</code> - The name of the key pair used when the instance was launched.</p> </li> <li> <p><code>launch-index</code> - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on). </p> </li> <li> <p><code>launch-time</code> - The time when the instance was launched.</p> </li> <li> <p><code>monitoring-state</code> - Indicates whether monitoring is enabled for the instance (<code>disabled</code> | <code>enabled</code>).</p> </li> <li> <p><code>owner-id</code> - The AWS account ID of the instance owner.</p> </li> <li> <p><code>placement-group-name</code> - The name of the placement group for the instance.</p> </li> <li> <p><code>platform</code> - The platform. Use <code>windows</code> if you have Windows instances; otherwise, leave blank.</p> </li> <li> <p><code>private-dns-name</code> - The private DNS name of the instance.</p> </li> <li> <p><code>private-ip-address</code> - The private IP address of the instance.</p> </li> <li> <p><code>product-code</code> - The product code associated with the AMI used to launch the instance.</p> </li> <li> <p><code>product-code.type</code> - The type of product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p><code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p><code>reason</code> - The reason for the current state of the instance (for example, shows \"User Initiated [date]\" when you stop or terminate the instance). Similar to the state-reason-code filter.</p> </li> <li> <p><code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p><code>reservation-id</code> - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.</p> </li> <li> <p><code>root-device-name</code> - The name of the root device for the instance (for example, <code>/dev/sda1</code> or <code>/dev/xvda</code>).</p> </li> <li> <p><code>root-device-type</code> - The type of root device that the instance uses (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p><code>source-dest-check</code> - Indicates whether the instance performs source/destination checking. A value of <code>true</code> means that checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the instance to perform network address translation (NAT) in your VPC. </p> </li> <li> <p><code>spot-instance-request-id</code> - The ID of the Spot instance request.</p> </li> <li> <p><code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p><code>state-reason-message</code> - A message that describes the state change.</p> </li> <li> <p><code>subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource, where <code>tag</code>:<i>key</i> is the tag's key. </p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> | <code>default</code> | <code>host</code>).</p> </li> <li> <p><code>virtualization-type</code> - The virtualization type of the instance (<code>paravirtual</code> | <code>hvm</code>).</p> </li> <li> <p><code>vpc-id</code> - The ID of the VPC that the instance is running in.</p> </li> <li> <p><code>network-interface.description</code> - The description of the network interface.</p> </li> <li> <p><code>network-interface.subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p><code>network-interface.vpc-id</code> - The ID of the VPC for the network interface.</p> </li> <li> <p><code>network-interface.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p><code>network-interface.owner-id</code> - The ID of the owner of the network interface.</p> </li> <li> <p><code>network-interface.availability-zone</code> - The Availability Zone for the network interface.</p> </li> <li> <p><code>network-interface.requester-id</code> - The requester ID for the network interface.</p> </li> <li> <p><code>network-interface.requester-managed</code> - Indicates whether the network interface is being managed by AWS.</p> </li> <li> <p><code>network-interface.status</code> - The status of the network interface (<code>available</code>) | <code>in-use</code>).</p> </li> <li> <p><code>network-interface.mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p><code>network-interface-private-dns-name</code> - The private DNS name of the network interface.</p> </li> <li> <p><code>network-interface.source-dest-check</code> - Whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC.</p> </li> <li> <p><code>network-interface.group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p><code>network-interface.group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p><code>network-interface.attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p><code>network-interface.attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p><code>network-interface.attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p><code>network-interface.addresses.private-ip-address</code> - The private IP address associated with the network interface.</p> </li> <li> <p><code>network-interface.attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p><code>network-interface.attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p><code>network-interface.attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p><code>network-interface.attachment.delete-on-termination</code> - Specifies whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p><code>network-interface.addresses.primary</code> - Specifies whether the IP address of the network interface is the primary private IP address.</p> </li> <li> <p><code>network-interface.addresses.association.public-ip</code> - The ID of the association of an Elastic IP address with a network interface.</p> </li> <li> <p><code>network-interface.addresses.association.ip-owner-id</code> - The owner ID of the private IP address associated with the network interface.</p> </li> <li> <p><code>association.public-ip</code> - The address of the Elastic IP address bound to the network interface.</p> </li> <li> <p><code>association.ip-owner-id</code> - The owner of the Elastic IP address associated with the network interface.</p> </li> <li> <p><code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address for your network interface.</p> </li> <li> <p><code>association.association-id</code> - The association ID returned when the network interface was associated with an IP address.</p> </li> </ul>",
           "locationName":"Filter"
         },
         "NextToken":{
@@ -5888,7 +5899,7 @@
         },
         "InstanceType":{
           "shape":"InstanceType",
-          "documentation":"<p>The instance type on which the Reserved instance can be used. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation":"<p>The instance type that the reservation will cover (for example, <code>m1.small</code>). For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "AvailabilityZone":{
           "shape":"String",
@@ -5900,12 +5911,12 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone where the Reserved instance can be used.</p> </li> <li> <p><code>duration</code> - The duration of the Reserved instance (for example, one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p><code>fixed-price</code> - The purchase price of the Reserved instance (for example, 9800.0).</p> </li> <li> <p><code>instance-type</code> - The instance type on which the Reserved instance can be used.</p> </li> <li> <p><code>marketplace</code> - Set to <code>true</code> to show only Reserved Instance Marketplace offerings. When this filter is not used, which is the default behavior, all offerings from AWS and Reserved Instance Marketplace are listed.</p> </li> <li> <p><code>product-description</code> - The Reserved instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code> Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>) </p> </li> <li> <p><code>reserved-instances-offering-id</code> - The Reserved instances offering ID.</p> </li> <li> <p><code>usage-price</code> - The usage price of the Reserved instance, per hour (for example, 0.84).</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone where the Reserved instance can be used.</p> </li> <li> <p><code>duration</code> - The duration of the Reserved instance (for example, one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p><code>fixed-price</code> - The purchase price of the Reserved instance (for example, 9800.0).</p> </li> <li> <p><code>instance-type</code> - The instance type that is covered by the reservation.</p> </li> <li> <p><code>marketplace</code> - Set to <code>true</code> to show only Reserved Instance Marketplace offerings. When this filter is not used, which is the default behavior, all offerings from both AWS and the Reserved Instance Marketplace are listed.</p> </li> <li> <p><code>product-description</code> - The Reserved instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code> Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>) </p> </li> <li> <p><code>reserved-instances-offering-id</code> - The Reserved instances' offering ID.</p> </li> <li> <p><code>usage-price</code> - The usage price of the Reserved instance, per hour (for example, 0.84).</p> </li> </ul>",
           "locationName":"Filter"
         },
         "InstanceTenancy":{
           "shape":"Tenancy",
-          "documentation":"<p>The tenancy of the Reserved instance offering. A Reserved instance with <code>dedicated</code> tenancy is applied to instances that run on single-tenant hardware and can only be launched within a VPC.</p> <p>Default: <code>default</code></p>",
+          "documentation":"<p>The tenancy of the instances covered by the reservation. A Reserved instance with a tenancy of <code>dedicated</code> is applied to instances that run in a VPC on single-tenant hardware (i.e., Dedicated instances).</p> <p>Default: <code>default</code></p>",
           "locationName":"instanceTenancy"
         },
         "OfferingType":{
@@ -5971,7 +5982,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone where the Reserved instance can be used.</p> </li> <li> <p><code>duration</code> - The duration of the Reserved instance (one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p><code>end</code> - The time when the Reserved instance expires (for example, 2015-08-07T11:54:42.000Z).</p> </li> <li> <p><code>fixed-price</code> - The purchase price of the Reserved instance (for example, 9800.0).</p> </li> <li> <p><code>instance-type</code> - The instance type on which the Reserved instance can be used.</p> </li> <li> <p><code>product-description</code> - The Reserved instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code>Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>).</p> </li> <li> <p><code>reserved-instances-id</code> - The ID of the Reserved instance.</p> </li> <li> <p><code>start</code> - The time at which the Reserved instance purchase request was placed (for example, 2014-08-07T11:54:42.000Z).</p> </li> <li> <p><code>state</code> - The state of the Reserved instance (<code>payment-pending</code> | <code>active</code> | <code>payment-failed</code> | <code>retired</code>).</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>usage-price</code> - The usage price of the Reserved instance, per hour (for example, 0.84).</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>availability-zone</code> - The Availability Zone where the Reserved instance can be used.</p> </li> <li> <p><code>duration</code> - The duration of the Reserved instance (one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p><code>end</code> - The time when the Reserved instance expires (for example, 2015-08-07T11:54:42.000Z).</p> </li> <li> <p><code>fixed-price</code> - The purchase price of the Reserved instance (for example, 9800.0).</p> </li> <li> <p><code>instance-type</code> - The instance type that is covered by the reservation.</p> </li> <li> <p><code>product-description</code> - The Reserved instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code>Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>).</p> </li> <li> <p><code>reserved-instances-id</code> - The ID of the Reserved instance.</p> </li> <li> <p><code>start</code> - The time at which the Reserved instance purchase request was placed (for example, 2014-08-07T11:54:42.000Z).</p> </li> <li> <p><code>state</code> - The state of the Reserved instance (<code>payment-pending</code> | <code>active</code> | <code>payment-failed</code> | <code>retired</code>).</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>usage-price</code> - The usage price of the Reserved instance, per hour (for example, 0.84).</p> </li> </ul>",
           "locationName":"Filter"
         },
         "OfferingType":{
@@ -6643,7 +6654,10 @@
     },
     "DescribeVpcAttributeRequest":{
       "type":"structure",
-      "required":["VpcId"],
+      "required":[
+        "VpcId",
+        "Attribute"
+      ],
       "members":{
         "DryRun":{
           "shape":"Boolean",
@@ -7664,7 +7678,7 @@
         },
         "DeliverLogsErrorMessage":{
           "shape":"String",
-          "documentation":"<p>Information about the error that occurred. <code>Rate limited</code> indicates that CloudWatch logs throttling has been applied for one or more network interfaces. <code>Access error</code> indicates that the IAM role associated with the flow log does not have sufficient permissions to publish to CloudWatch Logs. <code>Unknown error</code> indicates an internal error.</p>",
+          "documentation":"<p>Information about the error that occurred. <code>Rate limited</code> indicates that CloudWatch logs throttling has been applied for one or more network interfaces, or that you've reached the limit on the number of CloudWatch Logs log groups that you can create. <code>Access error</code> indicates that the IAM role associated with the flow log does not have sufficient permissions to publish to CloudWatch Logs. <code>Unknown error</code> indicates an internal error.</p>",
           "locationName":"deliverLogsErrorMessage"
         },
         "DeliverLogsPermissionArn":{
@@ -7849,7 +7863,7 @@
         },
         "HostReservationId":{
           "shape":"String",
-          "documentation":"<p>The reservation ID of the Dedicated host. This returns a \"null\" response if the Dedicated host doesn't have an associated reservation.</p>",
+          "documentation":"<p>The reservation ID of the Dedicated host. This returns a <code>null</code> response if the Dedicated host doesn't have an associated reservation.</p>",
           "locationName":"hostReservationId"
         },
         "ClientToken":{
@@ -7864,7 +7878,7 @@
         },
         "State":{
           "shape":"AllocationState",
-          "documentation":"<p>The Dedicated host's state. Can be \"available\", \"under assessment, or \"released\".</p>",
+          "documentation":"<p>The Dedicated host's state.</p>",
           "locationName":"state"
         },
         "AvailabilityZone":{
@@ -7882,7 +7896,8 @@
           "documentation":"<p>The number of new instances that can be launched onto the Dedicated host.</p>",
           "locationName":"availableCapacity"
         }
-      }
+      },
+      "documentation":"<p>Describes the properties of the Dedicated host.</p>"
     },
     "HostInstance":{
       "type":"structure",
@@ -9198,7 +9213,8 @@
           "documentation":"<p>The total number of instances that can be launched onto the Dedicated host.</p>",
           "locationName":"totalCapacity"
         }
-      }
+      },
+      "documentation":"<p>Information about the instance type that the Dedicated host supports.</p>"
     },
     "InstanceCount":{
       "type":"structure",
@@ -9806,7 +9822,7 @@
       "members":{
         "IpProtocol":{
           "shape":"String",
-          "documentation":"<p>The protocol.</p> <p>When you call <a>DescribeSecurityGroups</a>, the protocol value returned is the number. Exception: For TCP, UDP, and ICMP, the value returned is the name (for example, <code>tcp</code>, <code>udp</code>, or <code>icmp</code>). For a list of protocol numbers, see <a href=\"http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers</a>. (VPC only) When you call <a>AuthorizeSecurityGroupIngress</a>, you can use <code>-1</code> to specify all.</p>",
+          "documentation":"<p>The IP protocol name (for <code>tcp</code>, <code>udp</code>, and <code>icmp</code>) or number (see <a href=\"http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers</a>). </p> <p>[EC2-VPC only] When you authorize or revoke security group rules, you can use <code>-1</code> to specify all.</p>",
           "locationName":"ipProtocol"
         },
         "FromPort":{
@@ -10269,7 +10285,7 @@
       "members":{
         "Return":{
           "shape":"Boolean",
-          "documentation":"<p>Is <c>true</c> if the request succeeds, and an error otherwise.</p>",
+          "documentation":"<p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>",
           "locationName":"return"
         }
       }
@@ -11195,7 +11211,7 @@
         },
         "Active":{
           "shape":"Boolean",
-          "documentation":"<p>The current price schedule, as determined by the term remaining for the Reserved Instance in the listing.</p> <p>A specific price schedule is always in effect, but only one price schedule can be active at any time. Take, for example, a Reserved Instance listing that has five months remaining in its term. When you specify price schedules for five months and two months, this means that schedule 1, covering the first three months of the remaining term, will be active during months 5, 4, and 3. Then schedule 2, covering the last two months of the term, will be active for months 2 and 1.</p>",
+          "documentation":"<p>The current price schedule, as determined by the term remaining for the Reserved instance in the listing.</p> <p>A specific price schedule is always in effect, but only one price schedule can be active at any time. Take, for example, a Reserved instance listing that has five months remaining in its term. When you specify price schedules for five months and two months, this means that schedule 1, covering the first three months of the remaining term, will be active during months 5, 4, and 3. Then schedule 2, covering the last two months of the term, will be active for months 2 and 1.</p>",
           "locationName":"active"
         }
       },
@@ -11246,7 +11262,7 @@
         },
         "Count":{
           "shape":"Integer",
-          "documentation":"<p>The number of instances available for the price.</p>",
+          "documentation":"<p>The number of reservations available for the price.</p>",
           "locationName":"count"
         }
       },
@@ -12154,7 +12170,7 @@
         },
         "InstanceCount":{
           "shape":"Integer",
-          "documentation":"<p>The number of Reserved instances purchased.</p>",
+          "documentation":"<p>The number of reservations purchased.</p>",
           "locationName":"instanceCount"
         },
         "ProductDescription":{
@@ -12679,22 +12695,22 @@
         },
         "IpProtocol":{
           "shape":"String",
-          "documentation":"<p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number (see <a href=\"http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers</a>). Use <code>-1</code> to specify all.</p>",
+          "documentation":"<p>The IP protocol name or number. We recommend that you specify the protocol in a set of IP permissions instead.</p>",
           "locationName":"ipProtocol"
         },
         "FromPort":{
           "shape":"Integer",
-          "documentation":"<p>The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use <code>-1</code> to specify all ICMP types.</p>",
+          "documentation":"<p>The start of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.</p>",
           "locationName":"fromPort"
         },
         "ToPort":{
           "shape":"Integer",
-          "documentation":"<p>The end of port range for the TCP and UDP protocols, or an ICMP code number. For the ICMP code number, use <code>-1</code> to specify all ICMP codes for the ICMP type.</p>",
+          "documentation":"<p>The end of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.</p>",
           "locationName":"toPort"
         },
         "CidrIp":{
           "shape":"String",
-          "documentation":"<p>The CIDR IP address range. You can't specify this parameter when specifying a source security group.</p>",
+          "documentation":"<p>The CIDR IP address range. We recommend that you specify the CIDR range in a set of IP permissions instead.</p>",
           "locationName":"cidrIp"
         },
         "IpPermissions":{
@@ -13464,7 +13480,7 @@
         },
         "SubnetId":{
           "shape":"String",
-          "documentation":"<p>The ID of the subnet in which to launch the instances.</p>",
+          "documentation":"<p>The ID of the subnet in which to launch the instances. To specify multiple subnets, separate them using commas; for example, \"subnet-a61dafcf, subnet-65ea5f08\".</p>",
           "locationName":"subnetId"
         },
         "NetworkInterfaces":{
@@ -13776,7 +13792,7 @@
       "members":{
         "AvailabilityZone":{
           "shape":"String",
-          "documentation":"<p>The Availability Zone.</p>",
+          "documentation":"<p>The Availability Zones. To specify multiple Availability Zones, separate them using commas; for example, \"us-west-2a, us-west-2b\".</p>",
           "locationName":"availabilityZone"
         },
         "GroupName":{
@@ -14180,15 +14196,15 @@
       "type":"structure",
       "required":["Error"],
       "members":{
-        "Error":{
-          "shape":"UnsuccessfulItemError",
-          "documentation":"<p>Information about the error.</p>",
-          "locationName":"error"
-        },
         "ResourceId":{
           "shape":"String",
           "documentation":"<p>The ID of the resource.</p>",
           "locationName":"resourceId"
+        },
+        "Error":{
+          "shape":"UnsuccessfulItemError",
+          "documentation":"<p>Information about the error.</p>",
+          "locationName":"error"
         }
       },
       "documentation":"<p>Information about items that were not successfully processed in a batch call.</p>"
