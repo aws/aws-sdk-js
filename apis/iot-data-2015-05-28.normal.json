@@ -3,12 +3,11 @@
   "metadata":{
     "apiVersion":"2015-05-28",
     "endpointPrefix":"data.iot",
+    "protocol":"rest-json",
     "serviceFullName":"AWS IoT Data Plane",
     "signatureVersion":"v4",
-    "signingName":"iotdata",
-    "protocol":"rest-json"
+    "signingName":"iotdata"
   },
-  "documentation":"<fullname>AWS IoT (Beta)</fullname> <p><b>AWS IoT is considered a beta service as defined in the Service Terms</b></p> <p>AWS IoT-Data enables secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. It implements a broker for applications and things to publish messages over HTTP (Publish) and retrieve, update, and delete thing shadows. A thing shadow is a persistent representation of your things and their state in the AWS cloud.</p>",
   "operations":{
     "DeleteThingShadow":{
       "name":"DeleteThingShadow",
@@ -16,65 +15,17 @@
         "method":"DELETE",
         "requestUri":"/things/{thingName}/shadow"
       },
-      "input":{
-        "shape":"DeleteThingShadowRequest",
-        "documentation":"<p>The input for the DeleteThingShadow operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteThingShadowResponse",
-        "documentation":"<p>The output from the DeleteThingShadow operation.</p>"
-      },
+      "input":{"shape":"DeleteThingShadowRequest"},
+      "output":{"shape":"DeleteThingShadowResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"MethodNotAllowedException",
-          "error":{"httpStatusCode":405},
-          "exception":true,
-          "documentation":"<p>The specified combination of HTTP verb and URI is not supported.</p>"
-        },
-        {
-          "shape":"UnsupportedDocumentEncodingException",
-          "error":{"httpStatusCode":415},
-          "exception":true,
-          "documentation":"<p>The document encoding is not supported.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"MethodNotAllowedException"},
+        {"shape":"UnsupportedDocumentEncodingException"}
       ],
       "documentation":"<p>Deletes the thing shadow for the specified thing.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html\">DeleteThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>"
     },
@@ -84,65 +35,17 @@
         "method":"GET",
         "requestUri":"/things/{thingName}/shadow"
       },
-      "input":{
-        "shape":"GetThingShadowRequest",
-        "documentation":"<p>The input for the GetThingShadow operation.</p>"
-      },
-      "output":{
-        "shape":"GetThingShadowResponse",
-        "documentation":"<p>The output from the GetThingShadow operation.</p>"
-      },
+      "input":{"shape":"GetThingShadowRequest"},
+      "output":{"shape":"GetThingShadowResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"MethodNotAllowedException",
-          "error":{"httpStatusCode":405},
-          "exception":true,
-          "documentation":"<p>The specified combination of HTTP verb and URI is not supported.</p>"
-        },
-        {
-          "shape":"UnsupportedDocumentEncodingException",
-          "error":{"httpStatusCode":415},
-          "exception":true,
-          "documentation":"<p>The document encoding is not supported.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"MethodNotAllowedException"},
+        {"shape":"UnsupportedDocumentEncodingException"}
       ],
       "documentation":"<p>Gets the thing shadow for the specified thing.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html\">GetThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>"
     },
@@ -152,36 +55,12 @@
         "method":"POST",
         "requestUri":"/topics/{topic}"
       },
-      "input":{
-        "shape":"PublishRequest",
-        "documentation":"<p>The input for the Publish operation.</p>"
-      },
+      "input":{"shape":"PublishRequest"},
       "errors":[
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"MethodNotAllowedException",
-          "error":{"httpStatusCode":405},
-          "exception":true,
-          "documentation":"<p>The specified combination of HTTP verb and URI is not supported.</p>"
-        }
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"MethodNotAllowedException"}
       ],
       "documentation":"<p>Publishes state information.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http\">HTTP Protocol</a> in the <i>AWS IoT Developer Guide</i>.</p>"
     },
@@ -191,71 +70,18 @@
         "method":"POST",
         "requestUri":"/things/{thingName}/shadow"
       },
-      "input":{
-        "shape":"UpdateThingShadowRequest",
-        "documentation":"<p>The input for the UpdateThingShadow operation.</p>"
-      },
-      "output":{
-        "shape":"UpdateThingShadowResponse",
-        "documentation":"<p>The output from the UpdateThingShadow operation.</p>"
-      },
+      "input":{"shape":"UpdateThingShadowRequest"},
+      "output":{"shape":"UpdateThingShadowResponse"},
       "errors":[
-        {
-          "shape":"ConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>The specified version does not match the version of the document.</p>"
-        },
-        {
-          "shape":"RequestEntityTooLargeException",
-          "error":{"httpStatusCode":413},
-          "exception":true,
-          "documentation":"<p>The payload exceeds the maximum size allowed.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"MethodNotAllowedException",
-          "error":{"httpStatusCode":405},
-          "exception":true,
-          "documentation":"<p>The specified combination of HTTP verb and URI is not supported.</p>"
-        },
-        {
-          "shape":"UnsupportedDocumentEncodingException",
-          "error":{"httpStatusCode":415},
-          "exception":true,
-          "documentation":"<p>The document encoding is not supported.</p>"
-        }
+        {"shape":"ConflictException"},
+        {"shape":"RequestEntityTooLargeException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"MethodNotAllowedException"},
+        {"shape":"UnsupportedDocumentEncodingException"}
       ],
       "documentation":"<p>Updates the thing shadow for the specified thing.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html\">UpdateThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>"
     }
@@ -269,9 +95,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The specified version does not match the version of the document.</p>",
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"<p>The specified version does not match the version of the document.</p>"
+      "exception":true
     },
     "DeleteThingShadowRequest":{
       "type":"structure",
@@ -279,9 +105,9 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing.</p>"
+          "locationName":"thingName"
         }
       },
       "documentation":"<p>The input for the DeleteThingShadow operation.</p>"
@@ -305,9 +131,9 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing.</p>"
+          "locationName":"thingName"
         }
       },
       "documentation":"<p>The input for the GetThingShadow operation.</p>"
@@ -331,10 +157,10 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>An unexpected error has occurred.</p>",
       "error":{"httpStatusCode":500},
       "exception":true,
-      "fault":true,
-      "documentation":"<p>An unexpected error has occurred.</p>"
+      "fault":true
     },
     "InvalidRequestException":{
       "type":"structure",
@@ -344,9 +170,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The request is not valid.</p>",
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>The request is not valid.</p>"
+      "exception":true
     },
     "JsonDocument":{"type":"blob"},
     "MethodNotAllowedException":{
@@ -357,25 +183,26 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The specified combination of HTTP verb and URI is not supported.</p>",
       "error":{"httpStatusCode":405},
-      "exception":true,
-      "documentation":"<p>The specified combination of HTTP verb and URI is not supported.</p>"
+      "exception":true
     },
     "Payload":{"type":"blob"},
     "PublishRequest":{
       "type":"structure",
+      "required":["topic"],
       "members":{
         "topic":{
           "shape":"Topic",
+          "documentation":"<p>The name of the MQTT topic.</p>",
           "location":"uri",
-          "locationName":"topic",
-          "documentation":"<p>The name of the MQTT topic.</p>"
+          "locationName":"topic"
         },
         "qos":{
           "shape":"Qos",
+          "documentation":"<p>The Quality of Service (QoS) level.</p>",
           "location":"querystring",
-          "locationName":"qos",
-          "documentation":"<p>The Quality of Service (QoS) level.</p>"
+          "locationName":"qos"
         },
         "payload":{
           "shape":"Payload",
@@ -383,13 +210,12 @@
         }
       },
       "documentation":"<p>The input for the Publish operation.</p>",
-      "required":["topic"],
       "payload":"payload"
     },
     "Qos":{
       "type":"integer",
-      "min":0,
-      "max":1
+      "max":1,
+      "min":0
     },
     "RequestEntityTooLargeException":{
       "type":"structure",
@@ -399,9 +225,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The payload exceeds the maximum size allowed.</p>",
       "error":{"httpStatusCode":413},
-      "exception":true,
-      "documentation":"<p>The payload exceeds the maximum size allowed.</p>"
+      "exception":true
     },
     "ResourceNotFoundException":{
       "type":"structure",
@@ -411,9 +237,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The specified resource does not exist.</p>",
       "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"<p>The specified resource does not exist.</p>"
+      "exception":true
     },
     "ServiceUnavailableException":{
       "type":"structure",
@@ -423,15 +249,15 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The service is temporarily unavailable.</p>",
       "error":{"httpStatusCode":503},
       "exception":true,
-      "fault":true,
-      "documentation":"<p>The service is temporarily unavailable.</p>"
+      "fault":true
     },
     "ThingName":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "pattern":"[a-zA-Z0-9_-]+"
     },
     "ThrottlingException":{
@@ -442,9 +268,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The rate exceeds the limit.</p>",
       "error":{"httpStatusCode":429},
-      "exception":true,
-      "documentation":"<p>The rate exceeds the limit.</p>"
+      "exception":true
     },
     "Topic":{"type":"string"},
     "UnauthorizedException":{
@@ -455,9 +281,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>You are not authorized to perform this operation.</p>",
       "error":{"httpStatusCode":401},
-      "exception":true,
-      "documentation":"<p>You are not authorized to perform this operation.</p>"
+      "exception":true
     },
     "UnsupportedDocumentEncodingException":{
       "type":"structure",
@@ -467,9 +293,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The document encoding is not supported.</p>",
       "error":{"httpStatusCode":415},
-      "exception":true,
-      "documentation":"<p>The document encoding is not supported.</p>"
+      "exception":true
     },
     "UpdateThingShadowRequest":{
       "type":"structure",
@@ -480,9 +306,9 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing.</p>"
+          "locationName":"thingName"
         },
         "payload":{
           "shape":"JsonDocument",
@@ -505,6 +331,5 @@
     },
     "errorMessage":{"type":"string"}
   },
-  "examples":{
-  }
+  "documentation":"<fullname>AWS IoT</fullname> <p>AWS IoT-Data enables secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. It implements a broker for applications and things to publish messages over HTTP (Publish) and retrieve, update, and delete thing shadows. A thing shadow is a persistent representation of your things and their state in the AWS cloud.</p>"
 }
