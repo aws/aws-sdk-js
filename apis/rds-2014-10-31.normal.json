@@ -2100,6 +2100,14 @@
         "CopyTagsToSnapshot":{
           "shape":"BooleanOptional",
           "documentation":"<p>True to copy all tags from the DB instance to snapshots of the DB instance; otherwise false. The default is false.</p>"
+        },
+        "MonitoringInterval":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 60.</p> <p>If <code>MonitoringRoleArn</code> is specified, then you must also set <code>MonitoringInterval</code> to a value other than 0.</p> <p>Valid Values: <code>0, 1, 5, 10, 15, 30, 60</code></p>"
+        },
+        "MonitoringRoleArn":{
+          "shape":"String",
+          "documentation":"<p>The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole\">To create an IAM role for Amazon RDS Enhanced Monitoring</a>.</p> <p>If <code>MonitoringInterval</code> is set to a value other than 0, then you must supply a <code>MonitoringRoleArn</code> value.</p>"
         }
       },
       "documentation":"<p/>"
@@ -2159,6 +2167,14 @@
         "CopyTagsToSnapshot":{
           "shape":"BooleanOptional",
           "documentation":"<p>True to copy all tags from the Read Replica to snapshots of the Read Replica; otherwise false. The default is false.</p>"
+        },
+        "MonitoringInterval":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the Read Replica. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 60.</p> <p>If <code>MonitoringRoleArn</code> is specified, then you must also set <code>MonitoringInterval</code> to a value other than 0.</p> <p>Valid Values: <code>0, 1, 5, 10, 15, 30, 60</code></p>"
+        },
+        "MonitoringRoleArn":{
+          "shape":"String",
+          "documentation":"<p>The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole\">To create an IAM role for Amazon RDS Enhanced Monitoring</a>.</p> <p>If <code>MonitoringInterval</code> is set to a value other than 0, then you must supply a <code>MonitoringRoleArn</code> value.</p>"
         }
       }
     },
@@ -2457,7 +2473,7 @@
         },
         "StorageEncrypted":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whetehr the DB cluster is encrypted.</p>"
+          "documentation":"<p>Specifies whether the DB cluster is encrypted.</p>"
         },
         "KmsKeyId":{
           "shape":"String",
@@ -2992,6 +3008,18 @@
         "CopyTagsToSnapshot":{
           "shape":"Boolean",
           "documentation":"<p>Specifies whether tags are copied from the DB instance to snapshots of the DB instance.</p>"
+        },
+        "MonitoringInterval":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance.</p>"
+        },
+        "EnhancedMonitoringResourceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log stream that receives the Enhanced Monitoring metrics data for the DB instance.</p>"
+        },
+        "MonitoringRoleArn":{
+          "shape":"String",
+          "documentation":"<p>The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics to CloudWatch Logs.</p>"
         }
       },
       "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li> <a>CreateDBInstance</a> </li> <li> <a>DeleteDBInstance</a> </li> <li> <a>ModifyDBInstance</a> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
@@ -5312,6 +5340,10 @@
           "shape":"BooleanOptional",
           "documentation":"<p>True to copy all tags from the DB instance to snapshots of the DB instance; otherwise false. The default is false.</p>"
         },
+        "MonitoringInterval":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 60.</p> <p>If <code>MonitoringRoleArn</code> is specified, then you must also set <code>MonitoringInterval</code> to a value other than 0.</p> <p>Valid Values: <code>0, 1, 5, 10, 15, 30, 60</code></p>"
+        },
         "DBPortNumber":{
           "shape":"IntegerOptional",
           "documentation":"<p> The port number on which the database accepts connections. </p> <p>The value of the <code>DBPortNumber</code> parameter must not match any of the port values specified for options in the option group for the DB instance.</p> <p>Your database will restart when you change the <code>DBPortNumber</code> value regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p> <b>MySQL</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>MariaDB</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>PostgreSQL</b> </p> <p> Default: <code>5432</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>Oracle</b> </p> <p> Default: <code>1521</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>SQL Server</b> </p> <p> Default: <code>1433</code></p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code>, <code>3389</code>, <code>47001</code>, <code>49152</code>, and <code>49152</code> through <code>49156</code>. </p> <p> <b>Amazon Aurora</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p>"
@@ -5319,6 +5351,10 @@
         "PubliclyAccessible":{
           "shape":"BooleanOptional",
           "documentation":"<p>True to make the DB instance Internet-facing with a publicly resolvable DNS name, which resolves to a public IP address. False to make the DB instance internal with a DNS name that resolves to a private IP address. </p> <p><code>PubliclyAccessible</code> only applies to DB instances in a VPC. The DB instance must be part of a public subnet and <code>PubliclyAccessible</code> must be true in order for it to be publicly accessible. </p> <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p> Default: false </p>"
+        },
+        "MonitoringRoleArn":{
+          "shape":"String",
+          "documentation":"<p>The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole\">To create an IAM role for Amazon RDS Enhanced Monitoring</a>.</p> <p>If <code>MonitoringInterval</code> is set to a value other than 0, then you must supply a <code>MonitoringRoleArn</code> value.</p>"
         }
       },
       "documentation":"<p/>"
@@ -5876,6 +5912,10 @@
         "SupportsIops":{
           "shape":"Boolean",
           "documentation":"<p> Indicates whether this orderable DB instance supports provisioned IOPS. </p>"
+        },
+        "SupportsEnhancedMonitoring":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether the DB instance supports enhanced monitoring at intervals from 1 to 60 seconds.</p>"
         }
       },
       "documentation":"<p> Contains a list of available options for a DB instance </p> <p> This data type is used as a response element in the <a>DescribeOrderableDBInstanceOptions</a> action. </p>",
@@ -6549,7 +6589,7 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>The KMS key identifier to use when restoring an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>"
+          "documentation":"<p>The KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster snapshot.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following will occur:</p> <ul> <li>If the DB cluster snapshot is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the DB cluster snapshot.</li> <li>If the DB cluster snapshot is not encrypted, then the restored DB cluster is not encrypted.</li> </ul> <p>If <code>SnapshotIdentifier</code> refers to a DB cluster snapshot that is not encrypted, and you specify a value for the <code>KmsKeyId</code> parameter, then the restore request is rejected.</p>"
         }
       },
       "documentation":"<p/>"
@@ -6602,7 +6642,7 @@
         "Tags":{"shape":"TagList"},
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>The KMS key identifier to use when restoring an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>"
+          "documentation":"<p>The KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>You can restore to a new DB cluster and encrypt the new DB cluster with a KMS key that is different than the KMS key used to encrypt the source DB cluster. The new DB cluster will be encrypted with the KMS key identified by the <code>KmsKeyId</code> parameter.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following will occur:</p> <ul> <li>If the DB cluster is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the source DB cluster.</li> </ul> <li>If the DB cluster is not encrypted, then the restored DB cluster is not encrypted.</li> <p>If <code>DBClusterIdentifier</code> refers to a DB cluster that is note encrypted, then the restore request is rejected.</p>"
         }
       },
       "documentation":"<p/>"
