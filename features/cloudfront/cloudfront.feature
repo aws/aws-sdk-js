@@ -22,7 +22,3 @@ Feature: Amazon CloudFront
   Scenario: Error handling
     Given I create a CloudFront distribution with name prefix ""
     Then the error code should be "InvalidArgument"
-    And the error message should be:
-    """
-    The parameter CallerReference is too small.
-    """
