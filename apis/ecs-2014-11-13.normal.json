@@ -40,7 +40,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ClusterNotFoundException"}
       ],
-      "documentation":"<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS spawns another instantiation of the task in the specified cluster. To update an existing service, see <a>UpdateService</a>.</p> <p>When the service scheduler launches new tasks, it attempts to balance them across the Availability Zones in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul>"
+      "documentation":"<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS spawns another instantiation of the task in the specified cluster. To update an existing service, see <a>UpdateService</a>.</p> <p>You can optionally specify a deployment configuration for your service. During a deployment (which is triggered by changing the task definition of a service with an <a>UpdateService</a> operation), the service scheduler uses the <code>minimumHealthyPercent</code> and <code>maximumPercent</code> parameters to determine the deployment strategy.</p> <p>If the <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore the <code>desiredCount</code> temporarily during a deployment. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>minimumHealthyPercent</code> of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance it is hosted on is reported as healthy by the load balancer. The default value for <code>minimumHealthyPercent</code> is 50% in the console and 100% for the AWS CLI, the AWS SDKs, and the APIs.</p> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>maximumPercent</code> value of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for <code>maximumPercent</code> is 200%.</p> <p>When the service scheduler launches new tasks, it attempts to balance them across the Availability Zones in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul>"
     },
     "DeleteCluster":{
       "name":"DeleteCluster",
@@ -434,7 +434,7 @@
         {"shape":"ServiceNotFoundException"},
         {"shape":"ServiceNotActiveException"}
       ],
-      "documentation":"<p>Modify the desired count or task definition used in a service.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>You can use <code>UpdateService</code> to modify your task definition and deploy a new version of your service, one task at a time. If you modify the task definition with <code>UpdateService</code>, Amazon ECS spawns a task with the new version of the task definition and then stops an old task after the new version is running. Because <code>UpdateService</code> starts a new version of the task before stopping an old version, your cluster must have capacity to support one more instantiation of the task when <code>UpdateService</code> is run. If your cluster cannot support another instantiation of the task used in your service, you can reduce the desired count of your service by one before modifying the task definition.</p> <p>When <a>UpdateService</a> replaces a task during an update, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <p>When the service scheduler launches new tasks, it attempts to balance them across the Availability Zones in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul>"
+      "documentation":"<p>Modifies the desired count, deployment configuration, or task definition used in a service.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>You can use <a>UpdateService</a> to modify your task definition and deploy a new version of your service.</p> <p>You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, <code>minimumHealthyPercent</code> and <code>maximumPercent</code>, to determine the deployment strategy.</p> <p>If the <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore the <code>desiredCount</code> temporarily during a deployment. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>minimumHealthyPercent</code> of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance it is hosted on is reported as healthy by the load balancer.</p> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>maximumPercent</code> value of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).</p> <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <p>When the service scheduler launches new tasks, it attempts to balance them across the Availability Zones in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul>"
     }
   },
   "shapes":{
@@ -459,7 +459,7 @@
         },
         "value":{
           "shape":"String",
-          "documentation":"<p>The value of the container instance attribute.</p>"
+          "documentation":"<p>The value of the container instance attribute (at this time, the value here is <code>Null</code>, but this could change in future revisions for expandability).</p>"
         }
       },
       "documentation":"<p>The attributes applicable to a container instance when it is registered.</p>"
@@ -583,11 +583,11 @@
       "members":{
         "name":{
           "shape":"String",
-          "documentation":"<p>The name of a container. If you are linking multiple containers together in a task definition, the <code>name</code> of one container can be entered in the <code>links</code> of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This parameter maps to <code>name</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--name</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+          "documentation":"<p>The name of a container. If you are linking multiple containers together in a task definition, the <code>name</code> of one container can be entered in the <code>links</code> of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This parameter maps to <code>name</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--name</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. </p>"
         },
         "image":{
           "shape":"String",
-          "documentation":"<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with <code><i>repository-url</i>/<i>image</i>:<i>tag</i></code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+          "documentation":"<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with <code><i>repository-url</i>/<i>image</i>:<i>tag</i></code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <ul> <li>Images in official repositories on Docker Hub use a single name (for example, <code>ubuntu</code> or <code>mongo</code>).</li> <li>Images in other repositories on Docker Hub are qualified with an organization name (for example, <code>amazon/amazon-ecs-agent</code>).</li> <li>Images in other online repositories are qualified further by a domain name (for example, <code>quay.io/assemblyline/ubuntu</code>).</li> </ul>"
         },
         "cpu":{
           "shape":"Integer",
@@ -603,7 +603,7 @@
         },
         "portMappings":{
           "shape":"PortMappingList",
-          "documentation":"<p>The list of port mappings for the container. Port mappings allow containers to access ports on the host container instance to send or receive traffic. This parameter maps to <code>PortBindings</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--publish</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p>"
+          "documentation":"<p>The list of port mappings for the container. Port mappings allow containers to access ports on the host container instance to send or receive traffic. This parameter maps to <code>PortBindings</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--publish</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <note> <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <b>Network Bindings</b> section of a container description of a selected task in the Amazon ECS console, or the <code>networkBindings</code> section <a>DescribeTasks</a> responses.</p> </note>"
         },
         "essential":{
           "shape":"BoxedBoolean",
@@ -821,6 +821,10 @@
         "role":{
           "shape":"String",
           "documentation":"<p>The name or full Amazon Resource Name (ARN) of the IAM role that allows your Amazon ECS container agent to make calls to your load balancer on your behalf. This parameter is only required if you are using a load balancer with your service.</p>"
+        },
+        "deploymentConfiguration":{
+          "shape":"DeploymentConfiguration",
+          "documentation":"<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks. </p>"
         }
       }
     },
@@ -912,6 +916,20 @@
         }
       },
       "documentation":"<p>The details of an Amazon ECS service deployment.</p>"
+    },
+    "DeploymentConfiguration":{
+      "type":"structure",
+      "members":{
+        "maximumPercent":{
+          "shape":"BoxedInteger",
+          "documentation":"<p>The upper limit (as a percentage of the service's <code>desiredCount</code>) of the number of running tasks that can be running in a service during a deployment. The maximum number of tasks during a deployment is the <code>desiredCount</code> multiplied by the <code>maximumPercent</code>/100, rounded down to the nearest integer value.</p>"
+        },
+        "minimumHealthyPercent":{
+          "shape":"BoxedInteger",
+          "documentation":"<p>The lower limit (as a percentage of the service's <code>desiredCount</code>) of the number of running tasks that must remain running and healthy in a service during a deployment. The minimum healthy tasks during a deployment is the <code>desiredCount</code> multiplied by the <code>minimumHealthyPercent</code>/100, rounded up to the nearest integer value.</p>"
+        }
+      },
+      "documentation":"<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.</p>"
     },
     "Deployments":{
       "type":"list",
@@ -1171,7 +1189,7 @@
       "members":{
         "sourcePath":{
           "shape":"String",
-          "documentation":"<p>The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you.</p>"
+          "documentation":"<p>The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If the <code>host</code> parameter contains a <code>sourcePath</code> file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the <code>sourcePath</code> value does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.</p>"
         }
       },
       "documentation":"<p>Details on a container instance host volume.</p>"
@@ -1411,7 +1429,7 @@
         },
         "containerName":{
           "shape":"String",
-          "documentation":"<p>The name of the container to associate with the load balancer.</p>"
+          "documentation":"<p>The name of the container (as it appears in a container definition) to associate with the load balancer.</p>"
         },
         "containerPort":{
           "shape":"BoxedInteger",
@@ -1703,7 +1721,7 @@
         },
         "serviceName":{
           "shape":"String",
-          "documentation":"<p>A user-generated string that you can use to identify your service.</p>"
+          "documentation":"<p>The name of your service. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a region or across multiple regions.</p>"
         },
         "clusterArn":{
           "shape":"String",
@@ -1732,6 +1750,10 @@
         "taskDefinition":{
           "shape":"String",
           "documentation":"<p>The task definition to use for tasks in the service. This value is specified when the service is created with <a>CreateService</a>, and it can be modified with <a>UpdateService</a>.</p>"
+        },
+        "deploymentConfiguration":{
+          "shape":"DeploymentConfiguration",
+          "documentation":"<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.</p>"
         },
         "deployments":{
           "shape":"Deployments",
@@ -2152,6 +2174,10 @@
         "taskDefinition":{
           "shape":"String",
           "documentation":"<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition to run in your service. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used. If you modify the task definition with <code>UpdateService</code>, Amazon ECS spawns a task with the new version of the task definition and then stops an old task after the new version is running.</p>"
+        },
+        "deploymentConfiguration":{
+          "shape":"DeploymentConfiguration",
+          "documentation":"<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks. </p>"
         }
       }
     },
@@ -2187,11 +2213,11 @@
       "members":{
         "name":{
           "shape":"String",
-          "documentation":"<p>The name of the volume. This name is referenced in the <code>sourceVolume</code> parameter of container definition <code>mountPoints</code>.</p>"
+          "documentation":"<p>The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This name is referenced in the <code>sourceVolume</code> parameter of container definition <code>mountPoints</code>.</p>"
         },
         "host":{
           "shape":"HostVolumeProperties",
-          "documentation":"<p>The path on the host container instance that is presented to the containers which access the volume. If this parameter is empty, then the Docker daemon assigns a host path for you.</p>"
+          "documentation":"<p>The contents of the <code>host</code> parameter determine whether your data volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume, but the data is not guaranteed to persist after the containers associated with it stop running.</p>"
         }
       },
       "documentation":"<p>A data volume used in a task definition.</p>"
