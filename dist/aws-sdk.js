@@ -4357,7 +4357,6 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     var upload = this._managedUpload;
     if (this.operation === 'putObject') {
       info.part = 1;
-      info.key = this.params.Key;
     } else {
       upload.totalUploadedBytes += info.loaded - this._lastUploadedBytes;
       this._lastUploadedBytes = info.loaded;
