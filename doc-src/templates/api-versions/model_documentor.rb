@@ -196,21 +196,31 @@ class SharedExampleVisitor
 
   def example
     operation = @name[0].upcase + @name[1..-1]
-    input_shape_name = @api['operations'][operation]['input']['shape']
-    input_shape = @api['shapes'][input_shape_name]
-    input = visit(input_shape, @example['input'], "", [], @comments['input'])
+    operation_input = @api['operations'][operation]['input']
+    if operation_input
+      input_shape_name = operation_input['shape']
+      input_shape = @api['shapes'][input_shape_name]
+      input = visit(input_shape, @example['input'], "", [], @comments['input'])
+    else
+      input = "{}"
+    end
+
     lines = ["var params = #{input};"]
     lines << "#{@klass.downcase}.#{@name}(params, function(err, data) {"
     lines << "  if (err) console.log(err, err.stack); // an error occurred"
     lines << "  else     console.log(data);           // successful response"
 
-    output_shape_name = @api['operations'][operation]['output']['shape']
-    output_shape = @api['shapes'][output_shape_name]
-    if output = visit(output_shape, @example['output'], "  ", [], @comments['output'])
-      lines << "  /*"
-      lines << "  data = #{output}"
-      lines << "  */"
+    operation_output = @api['operations'][operation]['output']
+    if operation_output
+      output_shape_name = operation_output['shape']
+      output_shape = @api['shapes'][output_shape_name]
+      if output = visit(output_shape, @example['output'], "  ", [], @comments['output'])
+        lines << "  /*"
+        lines << "  data = #{output}"
+        lines << "  */"
+      end
     end
+
 
     lines << "});"
     lines.join("\n")
@@ -221,7 +231,9 @@ class SharedExampleVisitor
       when 'StructureShape' then structure(shape, value, indent, path, comments)
       when 'MapShape' then map(shape, value, indent, path, comments)
       when 'ListShape' then list(shape, value, indent, path, comments)
-      when 'StringShape', 'BinaryShape', 'TimestampShape' then value.inspect
+      when 'StringShape' then value.inspect
+      when 'TimestampShape' then "<Date Representation>"
+      when 'BinaryShape' then "<Binary String>"
       else value
     end
   end
@@ -264,12 +276,16 @@ class SharedExampleVisitor
 
   def list(shape, value, indent, path, comments)
     lines = ["["]
+    value_length = value.length
     value.each_with_index do |member, index|
       path << "[#{index}]"
       comment = apply_comment(path, comments)
-      shape_name = shape['members'][key]['shape']
+      shape_name = shape['member']['shape']
       shape_val = visit(@api['shapes'][shape_name], member, "#{indent} ", path, comments)
-      lines << "#{indent}   #{shape_val}, #{comment}"
+      if index < value_length - 1 then
+        comment = ", " + comment
+      end
+      lines << "#{indent}   #{shape_val}#{comment}"
       path.pop
     end
     lines << "#{indent}]"
