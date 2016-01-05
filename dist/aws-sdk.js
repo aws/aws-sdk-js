@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.2.26
+// AWS SDK for JavaScript v2.2.27
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -296,7 +296,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.2.26',
+  VERSION: '2.2.27',
 
 
   Signers: {},
@@ -2581,12 +2581,10 @@ AWS.ParamValidator = AWS.util.inherit({
 
     if (this.errors.length > 1) {
       var msg = this.errors.join('\n* ');
-      if (this.errors.length > 1) {
-        msg = 'There were ' + this.errors.length +
-              ' validation errors:\n* ' + msg;
-        throw AWS.util.error(new Error(msg),
-          {code: 'MultipleValidationErrors', errors: this.errors});
-      }
+      msg = 'There were ' + this.errors.length +
+        ' validation errors:\n* ' + msg;
+      throw AWS.util.error(new Error(msg),
+        {code: 'MultipleValidationErrors', errors: this.errors});
     } else if (this.errors.length === 1) {
       throw this.errors[0];
     } else {
@@ -4349,6 +4347,7 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     if (err) return upload.callback(err);
     data.Location =
       [endpoint.protocol, '//', endpoint.host, httpReq.path].join('');
+    data.key = this.request.params.Key;
     upload.callback(err, data);
   },
 
@@ -4357,6 +4356,7 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     var upload = this._managedUpload;
     if (this.operation === 'putObject') {
       info.part = 1;
+      info.key = this.params.Key;
     } else {
       upload.totalUploadedBytes += info.loaded - this._lastUploadedBytes;
       this._lastUploadedBytes = info.loaded;
@@ -6698,7 +6698,7 @@ var util = {
 
   each: function each(object, iterFunction) {
     for (var key in object) {
-      if (object.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
         var ret = iterFunction.call(this, key, object[key]);
         if (ret === util.abort) break;
       }
