@@ -21,6 +21,7 @@ opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks))
 s3 = new AWS.S3(AWS.util.merge(config, config.s3))
 sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 sns = new AWS.SNS(AWS.util.merge(config, config.sns))
+ssm = new AWS.SSM(AWS.util.merge(config, config.ssm))
 sts = new AWS.STS(AWS.util.merge(config, config.sts))
 waf = new AWS.WAF(AWS.util.merge(config, config.waf))
 
@@ -455,6 +456,20 @@ integrationTests ->
         sns.listTopics (err, data) ->
           expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
           sns.deleteTopic(done)
+
+  describe 'AWS.SSM', ->
+    it 'makes a request', (done) ->
+      ssm.listCommands {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Commands)).to.equal(true)
+        done()
+    it 'handles errors', (done) ->
+      params =
+        Name: 'fake_name'
+      ssm.describeDocument params, (err, data) ->
+        assertError(err, 'InvalidDocument')
+        noData(data)
+        done()
 
   describe 'AWS.WAF', ->
     it 'makes a request', (done) ->
