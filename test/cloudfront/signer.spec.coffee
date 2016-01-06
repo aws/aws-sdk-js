@@ -18,67 +18,47 @@ customPolicy = JSON.stringify({
 
 
 describe 'AWS.CloudFront.Signer', ->
-  it 'can generate signed URLs with a canned policy', (done) ->
-    signer = new AWS.CloudFront.Signer(keyPairId, privateKey)
-    opts =
-      url: 'https://example-distribution.cloudfront.net/a/protected/file.ext'
-      expires: (new Date(2020, 11, 11)).valueOf() / 1000
-    signer.getSignedUrl(opts, (err, signedUrl) ->
-      done(err) if err
-      try
-        query = url.parse(signedUrl, true).query
-        expect(query).to.include.keys('Expires')
-        expect(query).to.include.keys('Signature')
-        expect(query).to.include.keys('Key-Pair-Id')
-        done()
-      catch error
-        done(error)
-    )
+  it 'can generate signed URLs with a canned policy', () ->
+    if AWS.util.isNode()
+      signer = new AWS.CloudFront.Signer(keyPairId, privateKey)
+      opts =
+        url: 'https://example-distribution.cloudfront.net/a/protected/file.ext'
+        expires: (new Date(2020, 11, 11)).valueOf() / 1000
+      signedUrl = signer.getSignedUrl(opts)
+      query = url.parse(signedUrl, true).query
+      expect(query).to.include.keys('Expires')
+      expect(query).to.include.keys('Signature')
+      expect(query).to.include.keys('Key-Pair-Id')
 
-  it 'can generate signed URLs with a custom policy', (done) ->
-    signer = new AWS.CloudFront.Signer(keyPairId, privateKey)
-    opts =
-      url: 'https://example-distribution.cloudfront.net/a/protected/file.ext'
-      policy: customPolicy
-    signer.getSignedUrl(opts, (err, signedUrl) ->
-      done(err) if err
-      try
-        query = url.parse(signedUrl, true).query
-        expect(query).to.include.keys('Policy')
-        expect(query).to.include.keys('Signature')
-        expect(query).to.include.keys('Key-Pair-Id')
-        done()
-      catch error
-        done(error)
-    )
+  it 'can generate signed URLs with a custom policy', () ->
+    if AWS.util.isNode()
+      signer = new AWS.CloudFront.Signer(keyPairId, privateKey)
+      opts =
+        url: 'https://example-distribution.cloudfront.net/a/protected/file.ext'
+        policy: customPolicy
+      signedUrl = signer.getSignedUrl(opts)
+      query = url.parse(signedUrl, true).query
+      expect(query).to.include.keys('Policy')
+      expect(query).to.include.keys('Signature')
+      expect(query).to.include.keys('Key-Pair-Id')
 
-  it 'can generate signed cookies with a canned policy', (done) ->
-    signer = new AWS.CloudFront.Signer(keyPairId, privateKey)
-    opts =
-      url: 'https://example-distribution.cloudfront.net/a/protected/file.ext'
-      expires: (new Date(2020, 11, 11)).valueOf() / 1000
-    signer.getSignedCookie(opts, (err, cookieHash) ->
-      done(err) if err
-      try
-        expect(cookieHash).to.include.keys('CloudFront-Expires')
-        expect(cookieHash).to.include.keys('CloudFront-Signature')
-        expect(cookieHash).to.include.keys('CloudFront-Key-Pair-Id')
-        done()
-      catch error
-        done(error)
-    )
+  it 'can generate signed cookies with a canned policy', () ->
+    if AWS.util.isNode()
+      signer = new AWS.CloudFront.Signer(keyPairId, privateKey)
+      opts =
+        url: 'https://example-distribution.cloudfront.net/a/protected/file.ext'
+        expires: (new Date(2020, 11, 11)).valueOf() / 1000
+      cookieHash = signer.getSignedCookie(opts)
+      expect(cookieHash).to.include.keys('CloudFront-Expires')
+      expect(cookieHash).to.include.keys('CloudFront-Signature')
+      expect(cookieHash).to.include.keys('CloudFront-Key-Pair-Id')
 
-  it 'can generate signed cookies with a custom policy', (done) ->
-    signer = new AWS.CloudFront.Signer(keyPairId, privateKey)
-    opts =
-      policy: customPolicy
-    signer.getSignedCookie(opts, (err, cookieHash) ->
-      done(err) if err
-      try
-        expect(cookieHash).to.include.keys('CloudFront-Policy')
-        expect(cookieHash).to.include.keys('CloudFront-Signature')
-        expect(cookieHash).to.include.keys('CloudFront-Key-Pair-Id')
-        done()
-      catch error
-        done(error)
-    )
+  it 'can generate signed cookies with a custom policy', () ->
+    if AWS.util.isNode()
+      signer = new AWS.CloudFront.Signer(keyPairId, privateKey)
+      opts =
+        policy: customPolicy
+      cookieHash = signer.getSignedCookie(opts)
+      expect(cookieHash).to.include.keys('CloudFront-Policy')
+      expect(cookieHash).to.include.keys('CloudFront-Signature')
+      expect(cookieHash).to.include.keys('CloudFront-Key-Pair-Id')
