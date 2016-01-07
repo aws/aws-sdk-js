@@ -62,6 +62,10 @@ describe 'AWS.Config', ->
     it 'defaults to true', ->
       expect(configure().paramValidation).to.equal(true)
 
+  describe 'strictParamValidation', ->
+    it 'defaults to false', ->
+      expect(configure().strictParamValidation).to.equal(false)
+
   describe 'computeChecksums', ->
     it 'defaults to true', ->
       expect(configure().computeChecksums).to.equal(true)
