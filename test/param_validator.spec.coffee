@@ -498,79 +498,82 @@ describe 'AWS.ParamValidator', ->
               min: 2
               max: 4
 
-    it 'ignores range violations when strict is disabled', ->
-      expectValid {number: 1000}
+    it 'ignores max violations when max is disabled', ->
+      expectValid {number: 1000}, max: false
 
-    it 'accepts numbers at minimum', ->
-      expectValid {number: 2}, true
-
-    it 'accepts numbers above minimum', ->
-      expectValid {number: 3}, true
+    it 'ignores min violations when min is disabled', ->
+      expectValid {number: 1}, min: false
 
     it 'accepts numbers at maximum', ->
-      expectValid {number: 10}, true
-
-    it 'rejects numbers below minimum', ->
-      expectError 'Expected numeric value >= 2, but found 1',
-        {number: 1}, true
+      expectValid {number: 10}, max: true
 
     it 'rejects numbers above maximum', ->
-      expectError 'Expected numeric value <= 10, but found 11',
-        {number: 11}, true
+      expectError 'Expected numeric value <= 10, but found 11 for ' +
+        'params.number', {number: 11}, max: true
+
+    it 'accepts numbers at minimum', ->
+      expectValid {number: 2}, min: true
+
+    it 'accepts numbers above minimum', ->
+      expectValid {number: 3}, min: true
+
+    it 'rejects numbers below minimum', ->
+      expectError 'Expected numeric value >= 2, but found 1 for params.number',
+        {number: 1}, min: true
 
     it 'accepts strings at minimum', ->
-      expectValid {str: '123'}, true
+      expectValid {str: '123'}, min: true
 
     it 'accepts strings above minimum', ->
-      expectValid {str: '12345'}, true
-
-    it 'accepts strings at maximum', ->
-      expectValid {str: '123456'}, true
+      expectValid {str: '12345'}, min: true
 
     it 'rejects strings below minimum', ->
-      expectError 'Expected string length >= 3, but found 2',
-        {str: '12'}, true
+      expectError 'Expected string length >= 3, but found 2 for params.str',
+        {str: '12'}, min: true
+
+    it 'accepts strings at maximum', ->
+      expectValid {str: '123456'}, max: true
 
     it 'rejects strings above maximum', ->
-      expectError 'Expected string length <= 6, but found 9',
-        {str: '123456789'}, true
+      expectError 'Expected string length <= 6, but found 9 for params.str',
+        {str: '123456789'}, max: true
 
     it 'accepts lists at minimum', ->
-      expectValid {list: ['a', 'b']}, true
+      expectValid {list: ['a', 'b']}, min: true
 
     it 'accepts lists above minimum', ->
-      expectValid {list: ['a', 'b', 'c']}, true
+      expectValid {list: ['a', 'b', 'c']}, min: true
 
     it 'accepts lists at maximum', ->
-      expectValid {list: ['a', 'b', 'c', 'd']}, true
+      expectValid {list: ['a', 'b', 'c', 'd']}, max: true
 
     it 'rejects lists below minimum', ->
-      expectError 'Expected list member count >= 2, but found 1',
-        {list: ['a']}, true
-      expectError 'Expected list member count >= 2, but found 0',
-        {list: []}, true
+      expectError 'Expected list member count >= 2, but found 1 ' +
+        'for params.list', {list: ['a']}, min: true
+      expectError 'Expected list member count >= 2, but found 0 for ' +
+        'params.list', {list: []}, min: true
 
     it 'rejects lists above maximum', ->
-      expectError 'Expected list member count <= 4, but found 5',
-        {list: ['a', 'b', 'c', 'd', 'e']}, true
+      expectError 'Expected list member count <= 4, but found 5 ' +
+        'for params.list', {list: ['a', 'b', 'c', 'd', 'e']}, max: true
 
     it 'accepts maps at minimum', ->
-      expectValid {map: {ab: '1', cd: '2'}}, true
+      expectValid {map: {ab: '1', cd: '2'}}, min: true
 
     it 'accepts maps at maximum', ->
-      expectValid {map: {ab: '1', cd: '2', de: '3'}}, true
+      expectValid {map: {ab: '1', cd: '2', de: '3'}}, max: true
 
     it 'rejects maps below minimum', ->
-      expectError 'Expected map member count >= 2, but found 1',
-        {map: {ab: '1'}}, true
+      expectError 'Expected map member count >= 2, but found 1 ' +
+        'for params.map', {map: {ab: '1'}}, min: true
 
     it 'rejects maps above maximum member count', ->
-      expectError 'Expected map member count <= 3, but found 4',
-        {map: {ab: '1', cd: '2', de: '3', ef: '4'}}, true
+      expectError 'Expected map member count <= 3, but found 4 for params.map',
+        {map: {ab: '1', cd: '2', de: '3', ef: '4'}}, max: true
 
     it 'rejects maps where key is out of range', ->
-      expectError 'Expected string length <= 4, but found 5',
-        {map: {abcde: '1', fg: '2'}}, true
+      expectError 'Expected string length <= 4, but found 5 for params.map',
+        {map: {abcde: '1', fg: '2'}}, max: true
 
   describe 'strict enum validation', ->
     beforeEach ->
@@ -587,31 +590,31 @@ describe 'AWS.ParamValidator', ->
               type: 'string'
               enum: ['old', 'man', 'sea']
 
+    it 'ignores enum violations when strict is disabled', ->
+      expectValid {str: 'Dickens'}, enum: false
+
     it 'accepts strings matching first enum value', ->
-      expectValid str: 'Hemingway', true
+      expectValid {str: 'Hemingway'}, enum: true
 
     it 'accepts strings matching last enum value', ->
-      expectValid str: 'Poe', true
-
-    it 'ignores enum violations when strict is disabled', ->
-      expectValid str: 'Dickens'
+      expectValid {str: 'Poe'}, enum: true
 
     it 'rejects strings not in enum list', ->
       expectError 'Found string value of Shakespeare, but expected ' +
-        'Hemingway|Faulkner|Twain|Poe',
-        str: 'Shakespeare', true
+        'Hemingway|Faulkner|Twain|Poe for params.str',
+        {str: 'Shakespeare'}, enum: true
 
     it 'rejects strings not exactly in enum list', ->
       expectError 'Found string value of twain, but expected ' +
-        'Hemingway|Faulkner|Twain|Poe',
-        str: 'twain', true
+        'Hemingway|Faulkner|Twain|Poe for params.str',
+        {str: 'twain'}, enum: true
 
     it 'accepts map keys found in enum trait', ->
-      expectValid {map: {old: 'abc'}}, true
+      expectValid {map: {old: 'abc'}}, enum: true
 
     it 'rejects map keys not found in enum trait', ->
-      expectError 'Found string value of the, but expected old|man|sea',
-        {map: {the: 'abc'}}, true
+      expectError 'Found string value of the, but expected old|man|sea ' +
+        'for params.map[key=\'the\']', {map: {the: 'abc'}}, enum: true
 
   describe 'strict pattern validation', ->
     beforeEach ->
@@ -621,12 +624,13 @@ describe 'AWS.ParamValidator', ->
             type: 'string'
             pattern: '^[0-9a-f]{8,63}$'
 
+    it 'ignores pattern violations when strict is disabled', ->
+      expectValid {str: 'foobazbar'}, pattern: false
+
     it 'accepts strings matching pattern', ->
-      expectValid str: '1234aaee', true
+      expectValid {str: '1234aaee'}, pattern: true
 
     it 'rejects strings that do not match pattern', ->
       expectError 'Provided value "foobazbar" does not match ' +
-        'regex pattern /^[0-9a-f]{8,63}$/', str: 'foobazbar', true
-
-    it 'ignores pattern violations when strict is disabled', ->
-      expectValid str: 'foobazbar'
+        'regex pattern /^[0-9a-f]{8,63}$/ for params.str',
+        {str: 'foobazbar'}, pattern: true
