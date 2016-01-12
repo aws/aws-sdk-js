@@ -7,6 +7,7 @@ try
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
 cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs))
 cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
+codepipeline = new AWS.CodePipeline(AWS.util.merge(config, config.codepipeline))
 cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
 devicefarm = new AWS.DeviceFarm(AWS.util.merge(config, config.devicefarm))
 dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
@@ -142,6 +143,21 @@ integrationTests ->
       cloudwatchlogs.getLogEvents params, (err, data) ->
         assertError(err, 'ResourceNotFoundException')
         matchError(err, 'The specified log group does not exist')
+        noData(data)
+        done()
+
+  describe 'AWS.CodePipeline', ->
+    it 'makes a request', (done) ->
+      codepipeline.listPipelines {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.pipelines)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        name: 'fake-pipeline'
+      codepipeline.getPipeline params, (err, data) ->
+        assertError(err, 'PipelineNotFoundException')
         noData(data)
         done()
 
