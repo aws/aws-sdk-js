@@ -185,7 +185,7 @@ with the serialized response data from the service.
 For example:
 
 ```javascript
-s3.listBuckets().done(function(response) {
+s3.listBuckets().on('success', function(response) {
   console.log(response.data);
 }).send();
 ```
@@ -214,7 +214,7 @@ as the first parameter to the event:
 
 ```javascript
 s3.config.credentials.accessKeyId = 'invalid';
-s3.listBuckets().fail(function(error, response) {
+s3.listBuckets().on('error', function(error, response) {
   console.log(error);
   // or:
   console.log(response.error);
