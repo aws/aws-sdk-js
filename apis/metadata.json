@@ -28,6 +28,10 @@
     "prefix": "monitoring",
     "name": "CloudWatch"
   },
+  "cloudwatchevents": {
+    "prefix": "events",
+    "name": "CloudWatchEvents"
+  },
   "cloudwatchlogs": {
     "prefix": "logs",
     "name": "CloudWatchLogs"
