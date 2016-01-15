@@ -682,6 +682,12 @@ describe 'AWS.S3', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', Body: 'body')
       expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Content-MD5=hBotaJrYa9FhFEdFPCLG%2FA%3D%3D&Expires=900&Signature=4ycA2tpHKxfFnNCdqnK1d5BG8gc%3D&x-amz-security-token=session')
 
+    it 'gets a signed URL for putObject with CacheControl', ->
+      s3 = new AWS.S3
+        signatureVersion: 'v4'
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', CacheControl: 'max-age=10000')
+      expect(url).to.equal('https://bucket.s3.mock-region.amazonaws.com/key?Cache-Control=max-age%3D10000&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fmock-region%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=39ad1f8dc3aa377c2b184a0be7657dfb606628c74796c1a48394ef134ff6233a&X-Amz-SignedHeaders=cache-control%3Bhost')
+
     it 'gets a signed URL and appends to existing query parameters', ->
       url = s3.getSignedUrl('listObjects', Bucket: 'bucket', Prefix: 'prefix')
       expect(url).to.equal('https://bucket.s3.amazonaws.com/?AWSAccessKeyId=akid&Expires=900&Signature=8W3pwZPfgucCyPNg1MsoYq8h5zw%3D&prefix=prefix&x-amz-security-token=session')
