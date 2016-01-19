@@ -601,6 +601,8 @@
         "APPIUM_SERVER_OUTPUT",
         "APPIUM_JAVA_OUTPUT",
         "APPIUM_JAVA_XML_OUTPUT",
+        "APPIUM_PYTHON_OUTPUT",
+        "APPIUM_PYTHON_XML_OUTPUT",
         "EXPLORER_EVENT_LOG",
         "EXPLORER_SUMMARY_LOG",
         "APPLICATION_CRASH_REPORT"
@@ -1024,7 +1026,7 @@
     },
     "Filter":{
       "type":"string",
-      "max":1024,
+      "max":8192,
       "min":0
     },
     "GetAccountSettingsRequest":{
@@ -1665,7 +1667,7 @@
     },
     "Metadata":{
       "type":"string",
-      "max":1024,
+      "max":8192,
       "min":0
     },
     "Name":{
@@ -2180,8 +2182,10 @@
         "BUILTIN_EXPLORER",
         "APPIUM_JAVA_JUNIT",
         "APPIUM_JAVA_TESTNG",
+        "APPIUM_PYTHON",
         "APPIUM_WEB_JAVA_JUNIT",
         "APPIUM_WEB_JAVA_TESTNG",
+        "APPIUM_WEB_PYTHON",
         "CALABASH",
         "INSTRUMENTATION",
         "UIAUTOMATION",
@@ -2333,8 +2337,10 @@
         "EXTERNAL_DATA",
         "APPIUM_JAVA_JUNIT_TEST_PACKAGE",
         "APPIUM_JAVA_TESTNG_TEST_PACKAGE",
+        "APPIUM_PYTHON_TEST_PACKAGE",
         "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE",
         "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE",
+        "APPIUM_WEB_PYTHON_TEST_PACKAGE",
         "CALABASH_TEST_PACKAGE",
         "INSTRUMENTATION_TEST_PACKAGE",
         "UIAUTOMATION_TEST_PACKAGE",
