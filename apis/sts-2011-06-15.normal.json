@@ -137,7 +137,7 @@
         },
         "RoleSessionName":{
           "shape":"roleSessionNameType",
-          "documentation":"<p>An identifier for the assumed role session. </p> <p>Use the role session name to uniquely identity a session when the same role is assumed by different principals or for different reasons. In cross-account scenarios, the role session name is visible to, and can be logged by the account that owns the role. The role session name is also used in the ARN of the assumed role principal. This means that subsequent cross-account API requests using the temporary security credentials will expose the role session name to the external account in their CloudTrail logs.</p>"
+          "documentation":"<p>An identifier for the assumed role session. </p> <p>Use the role session name to uniquely identify a session when the same role is assumed by different principals or for different reasons. In cross-account scenarios, the role session name is visible to, and can be logged by the account that owns the role. The role session name is also used in the ARN of the assumed role principal. This means that subsequent cross-account API requests using the temporary security credentials will expose the role session name to the external account in their CloudTrail logs.</p>"
         },
         "Policy":{
           "shape":"sessionPolicyDocumentType",
@@ -554,7 +554,7 @@
       "members":{
         "message":{"shape":"regionDisabledMessage"}
       },
-      "documentation":"<p>STS is not activated in the requested region for the account that is being asked to create temporary credentials. The account administrator must activate STS in that region using the IAM Console.</p>",
+      "documentation":"<p>STS is not activated in the requested region for the account that is being asked to create temporary credentials. The account administrator must activate STS in that region using the IAM Console. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>Using IAM</i>.</p>",
       "error":{
         "code":"RegionDisabledException",
         "httpStatusCode":403,
