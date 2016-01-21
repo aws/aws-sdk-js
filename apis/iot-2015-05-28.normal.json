@@ -1073,6 +1073,86 @@
       ],
       "documentation":"<p>Detaches the specified principal from the specified thing.</p>"
     },
+    "DisableTopicRule":{
+      "name":"DisableTopicRule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/rules/{ruleName}/disable"
+      },
+      "input":{
+        "shape":"DisableTopicRuleRequest",
+        "documentation":"<p>The input for the DisableTopicRuleRequest operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An unexpected error has occurred.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":503},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service is temporarily unavailable.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "error":{"httpStatusCode":401},
+          "exception":true,
+          "documentation":"<p>You are not authorized to perform this operation.</p>"
+        }
+      ],
+      "documentation":"<p>Disables the specified rule</p>"
+    },
+    "EnableTopicRule":{
+      "name":"EnableTopicRule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/rules/{ruleName}/enable"
+      },
+      "input":{
+        "shape":"EnableTopicRuleRequest",
+        "documentation":"<p>The input for the EnableTopicRuleRequest operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An unexpected error has occurred.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":503},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service is temporarily unavailable.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "error":{"httpStatusCode":401},
+          "exception":true,
+          "documentation":"<p>You are not authorized to perform this operation.</p>"
+        }
+      ],
+      "documentation":"<p>Enables the specified rule.</p>"
+    },
     "GetLoggingOptions":{
       "name":"GetLoggingOptions",
       "http":{
@@ -2091,7 +2171,10 @@
           "shape":"S3Action",
           "documentation":"<p>Write to an S3 bucket.</p>"
         },
-        "firehose":{"shape":"FirehoseAction"}
+        "firehose":{
+          "shape":"FirehoseAction",
+          "documentation":"<p>Write to a Kinesis Firehose stream.</p>"
+        }
       },
       "documentation":"<p>Describes the actions associated with a rule.</p>"
     },
@@ -2720,6 +2803,19 @@
       },
       "documentation":"<p>The output from the DetachThingPrincipal operation.</p>"
     },
+    "DisableTopicRuleRequest":{
+      "type":"structure",
+      "required":["ruleName"],
+      "members":{
+        "ruleName":{
+          "shape":"RuleName",
+          "location":"uri",
+          "locationName":"ruleName",
+          "documentation":"<p>The name of the rule to disable.</p>"
+        }
+      },
+      "documentation":"<p>The input for the DisableTopicRuleRequest operation.</p>"
+    },
     "DynamoDBAction":{
       "type":"structure",
       "required":[
@@ -2737,7 +2833,7 @@
         },
         "roleArn":{
           "shape":"AwsArn",
-          "documentation":"<p>The ARN of the IAM role that grants access.</p>"
+          "documentation":"<p>The ARN of the IAM role that grants access to the DynamoDB table.</p>"
         },
         "hashKeyField":{
           "shape":"HashKeyField",
@@ -2762,6 +2858,19 @@
       },
       "documentation":"<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any expression that's valid in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p><code>\"hashKeyValue\": \"${topic(3)}\"</code></p> <p>The following field uses the timestamp:</p> <p><code>\"rangeKeyValue\": \"${timestamp()}\"</code></p>"
     },
+    "EnableTopicRuleRequest":{
+      "type":"structure",
+      "required":["ruleName"],
+      "members":{
+        "ruleName":{
+          "shape":"RuleName",
+          "location":"uri",
+          "locationName":"ruleName",
+          "documentation":"<p>The name of the topic rule to enable.</p>"
+        }
+      },
+      "documentation":"<p>The input for the EnableTopicRuleRequest operation.</p>"
+    },
     "EndpointAddress":{"type":"string"},
     "FirehoseAction":{
       "type":"structure",
@@ -2770,9 +2879,16 @@
         "deliveryStreamName"
       ],
       "members":{
-        "roleArn":{"shape":"AwsArn"},
-        "deliveryStreamName":{"shape":"DeliveryStreamName"}
-      }
+        "roleArn":{
+          "shape":"AwsArn",
+          "documentation":"<p>The IAM role that grants access to the firehose stream.</p>"
+        },
+        "deliveryStreamName":{
+          "shape":"DeliveryStreamName",
+          "documentation":"<p>The delivery stream name.</p>"
+        }
+      },
+      "documentation":"<p>Describes an action that writes data to a Kinesis Firehose stream.</p>"
     },
     "FunctionArn":{"type":"string"},
     "GetLoggingOptionsRequest":{
@@ -2894,6 +3010,10 @@
     "GetTopicRuleResponse":{
       "type":"structure",
       "members":{
+        "ruleArn":{
+          "shape":"RuleArn",
+          "documentation":"<p>The rule ARN.</p>"
+        },
         "rule":{
           "shape":"TopicRule",
           "documentation":"<p>The rule.</p>"
@@ -2967,7 +3087,7 @@
       "members":{
         "roleArn":{
           "shape":"AwsArn",
-          "documentation":"<p>The ARN of the IAM role that grants access.</p>"
+          "documentation":"<p>The ARN of the IAM role that grants access to the Kinesis stream.</p>"
         },
         "streamName":{
           "shape":"StreamName",
@@ -3154,7 +3274,8 @@
         "nextToken":{
           "shape":"NextToken",
           "location":"querystring",
-          "locationName":"nextToken"
+          "locationName":"nextToken",
+          "documentation":"<p>A token used to retrieve the next value.</p>"
         },
         "maxResults":{
           "shape":"MaxResults",
@@ -3493,6 +3614,7 @@
       "exception":true,
       "documentation":"<p>The specified resource does not exist.</p>"
     },
+    "RuleArn":{"type":"string"},
     "RuleName":{
       "type":"string",
       "min":1,
@@ -3562,6 +3684,7 @@
     },
     "SetLoggingOptionsRequest":{
       "type":"structure",
+      "required":["loggingOptionsPayload"],
       "members":{
         "loggingOptionsPayload":{
           "shape":"LoggingOptionsPayload",
@@ -3705,6 +3828,10 @@
     "TopicRuleListItem":{
       "type":"structure",
       "members":{
+        "ruleArn":{
+          "shape":"RuleArn",
+          "documentation":"<p>The rule ARN.</p>"
+        },
         "ruleName":{
           "shape":"RuleName",
           "documentation":"<p>The name of the rule.</p>"
@@ -3835,7 +3962,7 @@
           "shape":"CertificateStatus",
           "location":"querystring",
           "locationName":"newStatus",
-          "documentation":"<p>The new status.</p>"
+          "documentation":"<p>The new status.</p> <p>Note: setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT and is not meant to be used by developers.</p>"
         }
       },
       "documentation":"<p>The input for the UpdateCertificate operation.</p>"
