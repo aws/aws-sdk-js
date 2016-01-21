@@ -1,4 +1,7 @@
 {
+  "acm": {
+    "name": "ACM"
+  },
   "apigateway": {
     "name": "APIGateway"
   },
