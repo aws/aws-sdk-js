@@ -19,6 +19,7 @@ lambda = new AWS.Lambda(AWS.util.merge(config, config.lambda))
 mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobileanalytics))
 machinelearning = new AWS.MachineLearning(AWS.util.merge(config, config.machinelearning))
 opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks))
+route53 = new AWS.Route53(AWS.util.merge(config, config.route53))
 s3 = new AWS.S3(AWS.util.merge(config, config.s3))
 sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 sns = new AWS.SNS(AWS.util.merge(config, config.sns))
@@ -356,6 +357,19 @@ integrationTests ->
         noData(data)
         assertError(err, 'ResourceNotFoundException')
         matchError(err, 'Unable to find stack with ID fake-id')
+        done()
+
+  describe 'AWS.Route53', ->
+    it 'makes a request', (done) ->
+      route53.listHostedZones (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.HostedZones)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      route53.createHostedZone {Name: 'fake-name', 'CallerReference': 'fake-ref'}, (err, data) ->
+        noData(data)
+        assertError(err, 'InvalidDomainName')
         done()
 
   describe 'AWS.S3', ->
