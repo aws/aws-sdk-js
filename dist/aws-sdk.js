@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.2.32
+// AWS SDK for JavaScript v2.2.33
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -89,6 +89,11 @@ AWS.apiLoader.services['opsworks'] = {};
 AWS.OpsWorks = AWS.Service.defineService('opsworks', [ '2013-02-18' ]);
 
 AWS.apiLoader.services['opsworks']['2013-02-18'] = {"version":"2.0","metadata":{"apiVersion":"2013-02-18","endpointPrefix":"opsworks","jsonVersion":"1.1","protocol":"json","serviceFullName":"AWS OpsWorks","signatureVersion":"v4","targetPrefix":"OpsWorks_20130218"},"operations":{"AssignInstance":{"input":{"type":"structure","required":["InstanceId","LayerIds"],"members":{"InstanceId":{},"LayerIds":{"shape":"S3"}}},"http":{}},"AssignVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"VolumeId":{},"InstanceId":{}}},"http":{}},"AssociateElasticIp":{"input":{"type":"structure","required":["ElasticIp"],"members":{"ElasticIp":{},"InstanceId":{}}},"http":{}},"AttachElasticLoadBalancer":{"input":{"type":"structure","required":["ElasticLoadBalancerName","LayerId"],"members":{"ElasticLoadBalancerName":{},"LayerId":{}}},"http":{}},"CloneStack":{"input":{"type":"structure","required":["SourceStackId","ServiceRoleArn"],"members":{"SourceStackId":{},"Name":{},"Region":{},"VpcId":{},"Attributes":{"shape":"S8"},"ServiceRoleArn":{},"DefaultInstanceProfileArn":{},"DefaultOs":{},"HostnameTheme":{},"DefaultAvailabilityZone":{},"DefaultSubnetId":{},"CustomJson":{},"ConfigurationManager":{"shape":"Sa"},"ChefConfiguration":{"shape":"Sb"},"UseCustomCookbooks":{"type":"boolean"},"UseOpsworksSecurityGroups":{"type":"boolean"},"CustomCookbooksSource":{"shape":"Sd"},"DefaultSshKeyName":{},"ClonePermissions":{"type":"boolean"},"CloneAppIds":{"shape":"S3"},"DefaultRootDeviceType":{},"AgentVersion":{}}},"output":{"type":"structure","members":{"StackId":{}}},"http":{}},"CreateApp":{"input":{"type":"structure","required":["StackId","Name","Type"],"members":{"StackId":{},"Shortname":{},"Name":{},"Description":{},"DataSources":{"shape":"Si"},"Type":{},"AppSource":{"shape":"Sd"},"Domains":{"shape":"S3"},"EnableSsl":{"type":"boolean"},"SslConfiguration":{"shape":"Sl"},"Attributes":{"shape":"Sm"},"Environment":{"shape":"So"}}},"output":{"type":"structure","members":{"AppId":{}}},"http":{}},"CreateDeployment":{"input":{"type":"structure","required":["StackId","Command"],"members":{"StackId":{},"AppId":{},"InstanceIds":{"shape":"S3"},"Command":{"shape":"Ss"},"Comment":{},"CustomJson":{}}},"output":{"type":"structure","members":{"DeploymentId":{}}},"http":{}},"CreateInstance":{"input":{"type":"structure","required":["StackId","LayerIds","InstanceType"],"members":{"StackId":{},"LayerIds":{"shape":"S3"},"InstanceType":{},"AutoScalingType":{},"Hostname":{},"Os":{},"AmiId":{},"SshKeyName":{},"AvailabilityZone":{},"VirtualizationType":{},"SubnetId":{},"Architecture":{},"RootDeviceType":{},"BlockDeviceMappings":{"shape":"Sz"},"InstallUpdatesOnBoot":{"type":"boolean"},"EbsOptimized":{"type":"boolean"},"AgentVersion":{}}},"output":{"type":"structure","members":{"InstanceId":{}}},"http":{}},"CreateLayer":{"input":{"type":"structure","required":["StackId","Type","Name","Shortname"],"members":{"StackId":{},"Type":{},"Name":{},"Shortname":{},"Attributes":{"shape":"S17"},"CustomInstanceProfileArn":{},"CustomJson":{},"CustomSecurityGroupIds":{"shape":"S3"},"Packages":{"shape":"S3"},"VolumeConfigurations":{"shape":"S19"},"EnableAutoHealing":{"type":"boolean"},"AutoAssignElasticIps":{"type":"boolean"},"AutoAssignPublicIps":{"type":"boolean"},"CustomRecipes":{"shape":"S1b"},"InstallUpdatesOnBoot":{"type":"boolean"},"UseEbsOptimizedInstances":{"type":"boolean"},"LifecycleEventConfiguration":{"shape":"S1c"}}},"output":{"type":"structure","members":{"LayerId":{}}},"http":{}},"CreateStack":{"input":{"type":"structure","required":["Name","Region","ServiceRoleArn","DefaultInstanceProfileArn"],"members":{"Name":{},"Region":{},"VpcId":{},"Attributes":{"shape":"S8"},"ServiceRoleArn":{},"DefaultInstanceProfileArn":{},"DefaultOs":{},"HostnameTheme":{},"DefaultAvailabilityZone":{},"DefaultSubnetId":{},"CustomJson":{},"ConfigurationManager":{"shape":"Sa"},"ChefConfiguration":{"shape":"Sb"},"UseCustomCookbooks":{"type":"boolean"},"UseOpsworksSecurityGroups":{"type":"boolean"},"CustomCookbooksSource":{"shape":"Sd"},"DefaultSshKeyName":{},"DefaultRootDeviceType":{},"AgentVersion":{}}},"output":{"type":"structure","members":{"StackId":{}}},"http":{}},"CreateUserProfile":{"input":{"type":"structure","required":["IamUserArn"],"members":{"IamUserArn":{},"SshUsername":{},"SshPublicKey":{},"AllowSelfManagement":{"type":"boolean"}}},"output":{"type":"structure","members":{"IamUserArn":{}}},"http":{}},"DeleteApp":{"input":{"type":"structure","required":["AppId"],"members":{"AppId":{}}},"http":{}},"DeleteInstance":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{},"DeleteElasticIp":{"type":"boolean"},"DeleteVolumes":{"type":"boolean"}}},"http":{}},"DeleteLayer":{"input":{"type":"structure","required":["LayerId"],"members":{"LayerId":{}}},"http":{}},"DeleteStack":{"input":{"type":"structure","required":["StackId"],"members":{"StackId":{}}},"http":{}},"DeleteUserProfile":{"input":{"type":"structure","required":["IamUserArn"],"members":{"IamUserArn":{}}},"http":{}},"DeregisterEcsCluster":{"input":{"type":"structure","required":["EcsClusterArn"],"members":{"EcsClusterArn":{}}},"http":{}},"DeregisterElasticIp":{"input":{"type":"structure","required":["ElasticIp"],"members":{"ElasticIp":{}}},"http":{}},"DeregisterInstance":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{}}},"http":{}},"DeregisterRdsDbInstance":{"input":{"type":"structure","required":["RdsDbInstanceArn"],"members":{"RdsDbInstanceArn":{}}},"http":{}},"DeregisterVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"VolumeId":{}}},"http":{}},"DescribeAgentVersions":{"input":{"type":"structure","members":{"StackId":{},"ConfigurationManager":{"shape":"Sa"}}},"output":{"type":"structure","members":{"AgentVersions":{"type":"list","member":{"type":"structure","members":{"Version":{},"ConfigurationManager":{"shape":"Sa"}}}}}},"http":{}},"DescribeApps":{"input":{"type":"structure","members":{"StackId":{},"AppIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"Apps":{"type":"list","member":{"type":"structure","members":{"AppId":{},"StackId":{},"Shortname":{},"Name":{},"Description":{},"DataSources":{"shape":"Si"},"Type":{},"AppSource":{"shape":"Sd"},"Domains":{"shape":"S3"},"EnableSsl":{"type":"boolean"},"SslConfiguration":{"shape":"Sl"},"Attributes":{"shape":"Sm"},"CreatedAt":{},"Environment":{"shape":"So"}}}}}},"http":{}},"DescribeCommands":{"input":{"type":"structure","members":{"DeploymentId":{},"InstanceId":{},"CommandIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"Commands":{"type":"list","member":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"DeploymentId":{},"CreatedAt":{},"AcknowledgedAt":{},"CompletedAt":{},"Status":{},"ExitCode":{"type":"integer"},"LogUrl":{},"Type":{}}}}}},"http":{}},"DescribeDeployments":{"input":{"type":"structure","members":{"StackId":{},"AppId":{},"DeploymentIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"Deployments":{"type":"list","member":{"type":"structure","members":{"DeploymentId":{},"StackId":{},"AppId":{},"CreatedAt":{},"CompletedAt":{},"Duration":{"type":"integer"},"IamUserArn":{},"Comment":{},"Command":{"shape":"Ss"},"Status":{},"CustomJson":{},"InstanceIds":{"shape":"S3"}}}}}},"http":{}},"DescribeEcsClusters":{"input":{"type":"structure","members":{"EcsClusterArns":{"shape":"S3"},"StackId":{},"NextToken":{},"MaxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"EcsClusters":{"type":"list","member":{"type":"structure","members":{"EcsClusterArn":{},"EcsClusterName":{},"StackId":{},"RegisteredAt":{}}}},"NextToken":{}}},"http":{}},"DescribeElasticIps":{"input":{"type":"structure","members":{"InstanceId":{},"StackId":{},"Ips":{"shape":"S3"}}},"output":{"type":"structure","members":{"ElasticIps":{"type":"list","member":{"type":"structure","members":{"Ip":{},"Name":{},"Domain":{},"Region":{},"InstanceId":{}}}}}},"http":{}},"DescribeElasticLoadBalancers":{"input":{"type":"structure","members":{"StackId":{},"LayerIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"ElasticLoadBalancers":{"type":"list","member":{"type":"structure","members":{"ElasticLoadBalancerName":{},"Region":{},"DnsName":{},"StackId":{},"LayerId":{},"VpcId":{},"AvailabilityZones":{"shape":"S3"},"SubnetIds":{"shape":"S3"},"Ec2InstanceIds":{"shape":"S3"}}}}}},"http":{}},"DescribeInstances":{"input":{"type":"structure","members":{"StackId":{},"LayerId":{},"InstanceIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"Instances":{"type":"list","member":{"type":"structure","members":{"AgentVersion":{},"AmiId":{},"Architecture":{},"AutoScalingType":{},"AvailabilityZone":{},"BlockDeviceMappings":{"shape":"Sz"},"CreatedAt":{},"EbsOptimized":{"type":"boolean"},"Ec2InstanceId":{},"EcsClusterArn":{},"EcsContainerInstanceArn":{},"ElasticIp":{},"Hostname":{},"InfrastructureClass":{},"InstallUpdatesOnBoot":{"type":"boolean"},"InstanceId":{},"InstanceProfileArn":{},"InstanceType":{},"LastServiceErrorId":{},"LayerIds":{"shape":"S3"},"Os":{},"Platform":{},"PrivateDns":{},"PrivateIp":{},"PublicDns":{},"PublicIp":{},"RegisteredBy":{},"ReportedAgentVersion":{},"ReportedOs":{"type":"structure","members":{"Family":{},"Name":{},"Version":{}}},"RootDeviceType":{},"RootDeviceVolumeId":{},"SecurityGroupIds":{"shape":"S3"},"SshHostDsaKeyFingerprint":{},"SshHostRsaKeyFingerprint":{},"SshKeyName":{},"StackId":{},"Status":{},"SubnetId":{},"VirtualizationType":{}}}}}},"http":{}},"DescribeLayers":{"input":{"type":"structure","members":{"StackId":{},"LayerIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"Layers":{"type":"list","member":{"type":"structure","members":{"StackId":{},"LayerId":{},"Type":{},"Name":{},"Shortname":{},"Attributes":{"shape":"S17"},"CustomInstanceProfileArn":{},"CustomJson":{},"CustomSecurityGroupIds":{"shape":"S3"},"DefaultSecurityGroupNames":{"shape":"S3"},"Packages":{"shape":"S3"},"VolumeConfigurations":{"shape":"S19"},"EnableAutoHealing":{"type":"boolean"},"AutoAssignElasticIps":{"type":"boolean"},"AutoAssignPublicIps":{"type":"boolean"},"DefaultRecipes":{"shape":"S1b"},"CustomRecipes":{"shape":"S1b"},"CreatedAt":{},"InstallUpdatesOnBoot":{"type":"boolean"},"UseEbsOptimizedInstances":{"type":"boolean"},"LifecycleEventConfiguration":{"shape":"S1c"}}}}}},"http":{}},"DescribeLoadBasedAutoScaling":{"input":{"type":"structure","required":["LayerIds"],"members":{"LayerIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"LoadBasedAutoScalingConfigurations":{"type":"list","member":{"type":"structure","members":{"LayerId":{},"Enable":{"type":"boolean"},"UpScaling":{"shape":"S30"},"DownScaling":{"shape":"S30"}}}}}},"http":{}},"DescribeMyUserProfile":{"output":{"type":"structure","members":{"UserProfile":{"type":"structure","members":{"IamUserArn":{},"Name":{},"SshUsername":{},"SshPublicKey":{}}}}},"http":{}},"DescribePermissions":{"input":{"type":"structure","members":{"IamUserArn":{},"StackId":{}}},"output":{"type":"structure","members":{"Permissions":{"type":"list","member":{"type":"structure","members":{"StackId":{},"IamUserArn":{},"AllowSsh":{"type":"boolean"},"AllowSudo":{"type":"boolean"},"Level":{}}}}}},"http":{}},"DescribeRaidArrays":{"input":{"type":"structure","members":{"InstanceId":{},"StackId":{},"RaidArrayIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"RaidArrays":{"type":"list","member":{"type":"structure","members":{"RaidArrayId":{},"InstanceId":{},"Name":{},"RaidLevel":{"type":"integer"},"NumberOfDisks":{"type":"integer"},"Size":{"type":"integer"},"Device":{},"MountPoint":{},"AvailabilityZone":{},"CreatedAt":{},"StackId":{},"VolumeType":{},"Iops":{"type":"integer"}}}}}},"http":{}},"DescribeRdsDbInstances":{"input":{"type":"structure","required":["StackId"],"members":{"StackId":{},"RdsDbInstanceArns":{"shape":"S3"}}},"output":{"type":"structure","members":{"RdsDbInstances":{"type":"list","member":{"type":"structure","members":{"RdsDbInstanceArn":{},"DbInstanceIdentifier":{},"DbUser":{},"DbPassword":{},"Region":{},"Address":{},"Engine":{},"StackId":{},"MissingOnRds":{"type":"boolean"}}}}}},"http":{}},"DescribeServiceErrors":{"input":{"type":"structure","members":{"StackId":{},"InstanceId":{},"ServiceErrorIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"ServiceErrors":{"type":"list","member":{"type":"structure","members":{"ServiceErrorId":{},"StackId":{},"InstanceId":{},"Type":{},"Message":{},"CreatedAt":{}}}}}},"http":{}},"DescribeStackProvisioningParameters":{"input":{"type":"structure","required":["StackId"],"members":{"StackId":{}}},"output":{"type":"structure","members":{"AgentInstallerUrl":{},"Parameters":{"type":"map","key":{},"value":{}}}},"http":{}},"DescribeStackSummary":{"input":{"type":"structure","required":["StackId"],"members":{"StackId":{}}},"output":{"type":"structure","members":{"StackSummary":{"type":"structure","members":{"StackId":{},"Name":{},"Arn":{},"LayersCount":{"type":"integer"},"AppsCount":{"type":"integer"},"InstancesCount":{"type":"structure","members":{"Assigning":{"type":"integer"},"Booting":{"type":"integer"},"ConnectionLost":{"type":"integer"},"Deregistering":{"type":"integer"},"Online":{"type":"integer"},"Pending":{"type":"integer"},"Rebooting":{"type":"integer"},"Registered":{"type":"integer"},"Registering":{"type":"integer"},"Requested":{"type":"integer"},"RunningSetup":{"type":"integer"},"SetupFailed":{"type":"integer"},"ShuttingDown":{"type":"integer"},"StartFailed":{"type":"integer"},"Stopped":{"type":"integer"},"Stopping":{"type":"integer"},"Terminated":{"type":"integer"},"Terminating":{"type":"integer"},"Unassigning":{"type":"integer"}}}}}}},"http":{}},"DescribeStacks":{"input":{"type":"structure","members":{"StackIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"Stacks":{"type":"list","member":{"type":"structure","members":{"StackId":{},"Name":{},"Arn":{},"Region":{},"VpcId":{},"Attributes":{"shape":"S8"},"ServiceRoleArn":{},"DefaultInstanceProfileArn":{},"DefaultOs":{},"HostnameTheme":{},"DefaultAvailabilityZone":{},"DefaultSubnetId":{},"CustomJson":{},"ConfigurationManager":{"shape":"Sa"},"ChefConfiguration":{"shape":"Sb"},"UseCustomCookbooks":{"type":"boolean"},"UseOpsworksSecurityGroups":{"type":"boolean"},"CustomCookbooksSource":{"shape":"Sd"},"DefaultSshKeyName":{},"CreatedAt":{},"DefaultRootDeviceType":{},"AgentVersion":{}}}}}},"http":{}},"DescribeTimeBasedAutoScaling":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"TimeBasedAutoScalingConfigurations":{"type":"list","member":{"type":"structure","members":{"InstanceId":{},"AutoScalingSchedule":{"shape":"S40"}}}}}},"http":{}},"DescribeUserProfiles":{"input":{"type":"structure","members":{"IamUserArns":{"shape":"S3"}}},"output":{"type":"structure","members":{"UserProfiles":{"type":"list","member":{"type":"structure","members":{"IamUserArn":{},"Name":{},"SshUsername":{},"SshPublicKey":{},"AllowSelfManagement":{"type":"boolean"}}}}}},"http":{}},"DescribeVolumes":{"input":{"type":"structure","members":{"InstanceId":{},"StackId":{},"RaidArrayId":{},"VolumeIds":{"shape":"S3"}}},"output":{"type":"structure","members":{"Volumes":{"type":"list","member":{"type":"structure","members":{"VolumeId":{},"Ec2VolumeId":{},"Name":{},"RaidArrayId":{},"InstanceId":{},"Status":{},"Size":{"type":"integer"},"Device":{},"MountPoint":{},"Region":{},"AvailabilityZone":{},"VolumeType":{},"Iops":{"type":"integer"}}}}}},"http":{}},"DetachElasticLoadBalancer":{"input":{"type":"structure","required":["ElasticLoadBalancerName","LayerId"],"members":{"ElasticLoadBalancerName":{},"LayerId":{}}},"http":{}},"DisassociateElasticIp":{"input":{"type":"structure","required":["ElasticIp"],"members":{"ElasticIp":{}}},"http":{}},"GetHostnameSuggestion":{"input":{"type":"structure","required":["LayerId"],"members":{"LayerId":{}}},"output":{"type":"structure","members":{"LayerId":{},"Hostname":{}}},"http":{}},"GrantAccess":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{},"ValidForInMinutes":{"type":"integer"}}},"output":{"type":"structure","members":{"TemporaryCredential":{"type":"structure","members":{"Username":{},"Password":{},"ValidForInMinutes":{"type":"integer"},"InstanceId":{}}}}},"http":{}},"RebootInstance":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{}}},"http":{}},"RegisterEcsCluster":{"input":{"type":"structure","required":["EcsClusterArn","StackId"],"members":{"EcsClusterArn":{},"StackId":{}}},"output":{"type":"structure","members":{"EcsClusterArn":{}}},"http":{}},"RegisterElasticIp":{"input":{"type":"structure","required":["ElasticIp","StackId"],"members":{"ElasticIp":{},"StackId":{}}},"output":{"type":"structure","members":{"ElasticIp":{}}},"http":{}},"RegisterInstance":{"input":{"type":"structure","required":["StackId"],"members":{"StackId":{},"Hostname":{},"PublicIp":{},"PrivateIp":{},"RsaPublicKey":{},"RsaPublicKeyFingerprint":{},"InstanceIdentity":{"type":"structure","members":{"Document":{},"Signature":{}}}}},"output":{"type":"structure","members":{"InstanceId":{}}},"http":{}},"RegisterRdsDbInstance":{"input":{"type":"structure","required":["StackId","RdsDbInstanceArn","DbUser","DbPassword"],"members":{"StackId":{},"RdsDbInstanceArn":{},"DbUser":{},"DbPassword":{}}},"http":{}},"RegisterVolume":{"input":{"type":"structure","required":["StackId"],"members":{"Ec2VolumeId":{},"StackId":{}}},"output":{"type":"structure","members":{"VolumeId":{}}},"http":{}},"SetLoadBasedAutoScaling":{"input":{"type":"structure","required":["LayerId"],"members":{"LayerId":{},"Enable":{"type":"boolean"},"UpScaling":{"shape":"S30"},"DownScaling":{"shape":"S30"}}},"http":{}},"SetPermission":{"input":{"type":"structure","required":["StackId","IamUserArn"],"members":{"StackId":{},"IamUserArn":{},"AllowSsh":{"type":"boolean"},"AllowSudo":{"type":"boolean"},"Level":{}}},"http":{}},"SetTimeBasedAutoScaling":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{},"AutoScalingSchedule":{"shape":"S40"}}},"http":{}},"StartInstance":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{}}},"http":{}},"StartStack":{"input":{"type":"structure","required":["StackId"],"members":{"StackId":{}}},"http":{}},"StopInstance":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{}}},"http":{}},"StopStack":{"input":{"type":"structure","required":["StackId"],"members":{"StackId":{}}},"http":{}},"UnassignInstance":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{}}},"http":{}},"UnassignVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"VolumeId":{}}},"http":{}},"UpdateApp":{"input":{"type":"structure","required":["AppId"],"members":{"AppId":{},"Name":{},"Description":{},"DataSources":{"shape":"Si"},"Type":{},"AppSource":{"shape":"Sd"},"Domains":{"shape":"S3"},"EnableSsl":{"type":"boolean"},"SslConfiguration":{"shape":"Sl"},"Attributes":{"shape":"Sm"},"Environment":{"shape":"So"}}},"http":{}},"UpdateElasticIp":{"input":{"type":"structure","required":["ElasticIp"],"members":{"ElasticIp":{},"Name":{}}},"http":{}},"UpdateInstance":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{},"LayerIds":{"shape":"S3"},"InstanceType":{},"AutoScalingType":{},"Hostname":{},"Os":{},"AmiId":{},"SshKeyName":{},"Architecture":{},"InstallUpdatesOnBoot":{"type":"boolean"},"EbsOptimized":{"type":"boolean"},"AgentVersion":{}}},"http":{}},"UpdateLayer":{"input":{"type":"structure","required":["LayerId"],"members":{"LayerId":{},"Name":{},"Shortname":{},"Attributes":{"shape":"S17"},"CustomInstanceProfileArn":{},"CustomJson":{},"CustomSecurityGroupIds":{"shape":"S3"},"Packages":{"shape":"S3"},"VolumeConfigurations":{"shape":"S19"},"EnableAutoHealing":{"type":"boolean"},"AutoAssignElasticIps":{"type":"boolean"},"AutoAssignPublicIps":{"type":"boolean"},"CustomRecipes":{"shape":"S1b"},"InstallUpdatesOnBoot":{"type":"boolean"},"UseEbsOptimizedInstances":{"type":"boolean"},"LifecycleEventConfiguration":{"shape":"S1c"}}},"http":{}},"UpdateMyUserProfile":{"input":{"type":"structure","members":{"SshPublicKey":{}}},"http":{}},"UpdateRdsDbInstance":{"input":{"type":"structure","required":["RdsDbInstanceArn"],"members":{"RdsDbInstanceArn":{},"DbUser":{},"DbPassword":{}}},"http":{}},"UpdateStack":{"input":{"type":"structure","required":["StackId"],"members":{"StackId":{},"Name":{},"Attributes":{"shape":"S8"},"ServiceRoleArn":{},"DefaultInstanceProfileArn":{},"DefaultOs":{},"HostnameTheme":{},"DefaultAvailabilityZone":{},"DefaultSubnetId":{},"CustomJson":{},"ConfigurationManager":{"shape":"Sa"},"ChefConfiguration":{"shape":"Sb"},"UseCustomCookbooks":{"type":"boolean"},"CustomCookbooksSource":{"shape":"Sd"},"DefaultSshKeyName":{},"DefaultRootDeviceType":{},"UseOpsworksSecurityGroups":{"type":"boolean"},"AgentVersion":{}}},"http":{}},"UpdateUserProfile":{"input":{"type":"structure","required":["IamUserArn"],"members":{"IamUserArn":{},"SshUsername":{},"SshPublicKey":{},"AllowSelfManagement":{"type":"boolean"}}},"http":{}},"UpdateVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"VolumeId":{},"Name":{},"MountPoint":{}}},"http":{}}},"shapes":{"S3":{"type":"list","member":{}},"S8":{"type":"map","key":{},"value":{}},"Sa":{"type":"structure","members":{"Name":{},"Version":{}}},"Sb":{"type":"structure","members":{"ManageBerkshelf":{"type":"boolean"},"BerkshelfVersion":{}}},"Sd":{"type":"structure","members":{"Type":{},"Url":{},"Username":{},"Password":{},"SshKey":{},"Revision":{}}},"Si":{"type":"list","member":{"type":"structure","members":{"Type":{},"Arn":{},"DatabaseName":{}}}},"Sl":{"type":"structure","required":["Certificate","PrivateKey"],"members":{"Certificate":{},"PrivateKey":{},"Chain":{}}},"Sm":{"type":"map","key":{},"value":{}},"So":{"type":"list","member":{"type":"structure","required":["Key","Value"],"members":{"Key":{},"Value":{},"Secure":{"type":"boolean"}}}},"Ss":{"type":"structure","required":["Name"],"members":{"Name":{},"Args":{"type":"map","key":{},"value":{"shape":"S3"}}}},"Sz":{"type":"list","member":{"type":"structure","members":{"DeviceName":{},"NoDevice":{},"VirtualName":{},"Ebs":{"type":"structure","members":{"SnapshotId":{},"Iops":{"type":"integer"},"VolumeSize":{"type":"integer"},"VolumeType":{},"DeleteOnTermination":{"type":"boolean"}}}}}},"S17":{"type":"map","key":{},"value":{}},"S19":{"type":"list","member":{"type":"structure","required":["MountPoint","NumberOfDisks","Size"],"members":{"MountPoint":{},"RaidLevel":{"type":"integer"},"NumberOfDisks":{"type":"integer"},"Size":{"type":"integer"},"VolumeType":{},"Iops":{"type":"integer"}}}},"S1b":{"type":"structure","members":{"Setup":{"shape":"S3"},"Configure":{"shape":"S3"},"Deploy":{"shape":"S3"},"Undeploy":{"shape":"S3"},"Shutdown":{"shape":"S3"}}},"S1c":{"type":"structure","members":{"Shutdown":{"type":"structure","members":{"ExecutionTimeout":{"type":"integer"},"DelayUntilElbConnectionsDrained":{"type":"boolean"}}}}},"S30":{"type":"structure","members":{"InstanceCount":{"type":"integer"},"ThresholdsWaitTime":{"type":"integer"},"IgnoreMetricsTime":{"type":"integer"},"CpuThreshold":{"type":"double"},"MemoryThreshold":{"type":"double"},"LoadThreshold":{"type":"double"},"Alarms":{"shape":"S3"}}},"S40":{"type":"structure","members":{"Monday":{"shape":"S41"},"Tuesday":{"shape":"S41"},"Wednesday":{"shape":"S41"},"Thursday":{"shape":"S41"},"Friday":{"shape":"S41"},"Saturday":{"shape":"S41"},"Sunday":{"shape":"S41"}}},"S41":{"type":"map","key":{},"value":{}}},"paginators":{"DescribeApps":{"result_key":"Apps"},"DescribeCommands":{"result_key":"Commands"},"DescribeDeployments":{"result_key":"Deployments"},"DescribeEcsClusters":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"EcsClusters"},"DescribeElasticIps":{"result_key":"ElasticIps"},"DescribeElasticLoadBalancers":{"result_key":"ElasticLoadBalancers"},"DescribeInstances":{"result_key":"Instances"},"DescribeLayers":{"result_key":"Layers"},"DescribeLoadBasedAutoScaling":{"result_key":"LoadBasedAutoScalingConfigurations"},"DescribePermissions":{"result_key":"Permissions"},"DescribeRaidArrays":{"result_key":"RaidArrays"},"DescribeServiceErrors":{"result_key":"ServiceErrors"},"DescribeStacks":{"result_key":"Stacks"},"DescribeTimeBasedAutoScaling":{"result_key":"TimeBasedAutoScalingConfigurations"},"DescribeUserProfiles":{"result_key":"UserProfiles"},"DescribeVolumes":{"result_key":"Volumes"}}};
+AWS.apiLoader.services['route53'] = {};
+AWS.Route53 = AWS.Service.defineService('route53', [ '2013-04-01' ]);
+require('./services/route53');
+
+AWS.apiLoader.services['route53']['2013-04-01'] = {"version":"2.0","metadata":{"apiVersion":"2013-04-01","endpointPrefix":"route53","globalEndpoint":"route53.amazonaws.com","protocol":"rest-xml","serviceAbbreviation":"Route 53","serviceFullName":"Amazon Route 53","signatureVersion":"v4"},"operations":{"AssociateVPCWithHostedZone":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}/associatevpc"},"input":{"locationName":"AssociateVPCWithHostedZoneRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","VPC"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"VPC":{"shape":"S3"},"Comment":{}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"ChangeResourceRecordSets":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}/rrset/"},"input":{"locationName":"ChangeResourceRecordSetsRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","ChangeBatch"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"ChangeBatch":{"type":"structure","required":["Changes"],"members":{"Comment":{},"Changes":{"shape":"Se"}}}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"ChangeTagsForResource":{"http":{"requestUri":"/2013-04-01/tags/{ResourceType}/{ResourceId}"},"input":{"locationName":"ChangeTagsForResourceRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["ResourceType","ResourceId"],"members":{"ResourceType":{"location":"uri","locationName":"ResourceType"},"ResourceId":{"location":"uri","locationName":"ResourceId"},"AddTags":{"shape":"S14"},"RemoveTagKeys":{"type":"list","member":{"locationName":"Key"}}}},"output":{"type":"structure","members":{}}},"CreateHealthCheck":{"http":{"requestUri":"/2013-04-01/healthcheck","responseCode":201},"input":{"locationName":"CreateHealthCheckRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["CallerReference","HealthCheckConfig"],"members":{"CallerReference":{},"HealthCheckConfig":{"shape":"S1c"}}},"output":{"type":"structure","required":["HealthCheck","Location"],"members":{"HealthCheck":{"shape":"S1q"},"Location":{"location":"header","locationName":"Location"}}}},"CreateHostedZone":{"http":{"requestUri":"/2013-04-01/hostedzone","responseCode":201},"input":{"locationName":"CreateHostedZoneRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Name","CallerReference"],"members":{"Name":{},"VPC":{"shape":"S3"},"CallerReference":{},"HostedZoneConfig":{"shape":"S1v"},"DelegationSetId":{}}},"output":{"type":"structure","required":["HostedZone","ChangeInfo","DelegationSet","Location"],"members":{"HostedZone":{"shape":"S1y"},"ChangeInfo":{"shape":"S8"},"DelegationSet":{"shape":"S20"},"VPC":{"shape":"S3"},"Location":{"location":"header","locationName":"Location"}}}},"CreateReusableDelegationSet":{"http":{"requestUri":"/2013-04-01/delegationset","responseCode":201},"input":{"locationName":"CreateReusableDelegationSetRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["CallerReference"],"members":{"CallerReference":{},"HostedZoneId":{}}},"output":{"type":"structure","required":["DelegationSet","Location"],"members":{"DelegationSet":{"shape":"S20"},"Location":{"location":"header","locationName":"Location"}}}},"CreateTrafficPolicy":{"http":{"requestUri":"/2013-04-01/trafficpolicy","responseCode":201},"input":{"locationName":"CreateTrafficPolicyRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Name","Document"],"members":{"Name":{},"Document":{},"Comment":{}}},"output":{"type":"structure","required":["TrafficPolicy","Location"],"members":{"TrafficPolicy":{"shape":"S29"},"Location":{"location":"header","locationName":"Location"}}}},"CreateTrafficPolicyInstance":{"http":{"requestUri":"/2013-04-01/trafficpolicyinstance","responseCode":201},"input":{"locationName":"CreateTrafficPolicyInstanceRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","Name","TTL","TrafficPolicyId","TrafficPolicyVersion"],"members":{"HostedZoneId":{},"Name":{},"TTL":{"type":"long"},"TrafficPolicyId":{},"TrafficPolicyVersion":{"type":"integer"}}},"output":{"type":"structure","required":["TrafficPolicyInstance","Location"],"members":{"TrafficPolicyInstance":{"shape":"S2e"},"Location":{"location":"header","locationName":"Location"}}}},"CreateTrafficPolicyVersion":{"http":{"requestUri":"/2013-04-01/trafficpolicy/{Id}","responseCode":201},"input":{"locationName":"CreateTrafficPolicyVersionRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id","Document"],"members":{"Id":{"location":"uri","locationName":"Id"},"Document":{},"Comment":{}}},"output":{"type":"structure","required":["TrafficPolicy","Location"],"members":{"TrafficPolicy":{"shape":"S29"},"Location":{"location":"header","locationName":"Location"}}}},"DeleteHealthCheck":{"http":{"method":"DELETE","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","members":{}}},"DeleteHostedZone":{"http":{"method":"DELETE","requestUri":"/2013-04-01/hostedzone/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"DeleteReusableDelegationSet":{"http":{"method":"DELETE","requestUri":"/2013-04-01/delegationset/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"DeleteTrafficPolicy":{"http":{"method":"DELETE","requestUri":"/2013-04-01/trafficpolicy/{Id}/{Version}"},"input":{"type":"structure","required":["Id","Version"],"members":{"Id":{"location":"uri","locationName":"Id"},"Version":{"location":"uri","locationName":"Version","type":"integer"}}},"output":{"type":"structure","members":{}}},"DeleteTrafficPolicyInstance":{"http":{"method":"DELETE","requestUri":"/2013-04-01/trafficpolicyinstance/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"DisassociateVPCFromHostedZone":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}/disassociatevpc"},"input":{"locationName":"DisassociateVPCFromHostedZoneRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","VPC"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"VPC":{"shape":"S3"},"Comment":{}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"GetChange":{"http":{"method":"GET","requestUri":"/2013-04-01/change/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"GetChangeDetails":{"http":{"method":"GET","requestUri":"/2013-04-01/changedetails/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["ChangeBatchRecord"],"members":{"ChangeBatchRecord":{"shape":"S30"}}}},"GetCheckerIpRanges":{"http":{"method":"GET","requestUri":"/2013-04-01/checkeripranges"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["CheckerIpRanges"],"members":{"CheckerIpRanges":{"type":"list","member":{}}}}},"GetGeoLocation":{"http":{"method":"GET","requestUri":"/2013-04-01/geolocation"},"input":{"type":"structure","members":{"ContinentCode":{"location":"querystring","locationName":"continentcode"},"CountryCode":{"location":"querystring","locationName":"countrycode"},"SubdivisionCode":{"location":"querystring","locationName":"subdivisioncode"}}},"output":{"type":"structure","required":["GeoLocationDetails"],"members":{"GeoLocationDetails":{"shape":"S38"}}}},"GetHealthCheck":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","required":["HealthCheck"],"members":{"HealthCheck":{"shape":"S1q"}}}},"GetHealthCheckCount":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheckcount"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["HealthCheckCount"],"members":{"HealthCheckCount":{"type":"long"}}}},"GetHealthCheckLastFailureReason":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}/lastfailurereason"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","required":["HealthCheckObservations"],"members":{"HealthCheckObservations":{"shape":"S3j"}}}},"GetHealthCheckStatus":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}/status"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","required":["HealthCheckObservations"],"members":{"HealthCheckObservations":{"shape":"S3j"}}}},"GetHostedZone":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["HostedZone"],"members":{"HostedZone":{"shape":"S1y"},"DelegationSet":{"shape":"S20"},"VPCs":{"type":"list","member":{"shape":"S3","locationName":"VPC"}}}}},"GetHostedZoneCount":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzonecount"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["HostedZoneCount"],"members":{"HostedZoneCount":{"type":"long"}}}},"GetReusableDelegationSet":{"http":{"method":"GET","requestUri":"/2013-04-01/delegationset/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["DelegationSet"],"members":{"DelegationSet":{"shape":"S20"}}}},"GetTrafficPolicy":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicy/{Id}/{Version}"},"input":{"type":"structure","required":["Id","Version"],"members":{"Id":{"location":"uri","locationName":"Id"},"Version":{"location":"uri","locationName":"Version","type":"integer"}}},"output":{"type":"structure","required":["TrafficPolicy"],"members":{"TrafficPolicy":{"shape":"S29"}}}},"GetTrafficPolicyInstance":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstance/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["TrafficPolicyInstance"],"members":{"TrafficPolicyInstance":{"shape":"S2e"}}}},"GetTrafficPolicyInstanceCount":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstancecount"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["TrafficPolicyInstanceCount"],"members":{"TrafficPolicyInstanceCount":{"type":"integer"}}}},"ListChangeBatchesByHostedZone":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}/changes"},"input":{"type":"structure","required":["HostedZoneId","StartDate","EndDate"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"StartDate":{"location":"querystring","locationName":"startDate"},"EndDate":{"location":"querystring","locationName":"endDate"},"MaxItems":{"location":"querystring","locationName":"maxItems"},"Marker":{"location":"querystring","locationName":"marker"}}},"output":{"type":"structure","required":["MaxItems","Marker","ChangeBatchRecords"],"members":{"MaxItems":{},"Marker":{},"IsTruncated":{"type":"boolean"},"ChangeBatchRecords":{"shape":"S4a"},"NextMarker":{}}}},"ListChangeBatchesByRRSet":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}/rrsChanges"},"input":{"type":"structure","required":["HostedZoneId","Name","Type","StartDate","EndDate"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"Name":{"location":"querystring","locationName":"rrSet_name"},"Type":{"location":"querystring","locationName":"type"},"SetIdentifier":{"location":"querystring","locationName":"identifier"},"StartDate":{"location":"querystring","locationName":"startDate"},"EndDate":{"location":"querystring","locationName":"endDate"},"MaxItems":{"location":"querystring","locationName":"maxItems"},"Marker":{"location":"querystring","locationName":"marker"}}},"output":{"type":"structure","required":["MaxItems","Marker","ChangeBatchRecords"],"members":{"MaxItems":{},"Marker":{},"IsTruncated":{"type":"boolean"},"ChangeBatchRecords":{"shape":"S4a"},"NextMarker":{}}}},"ListGeoLocations":{"http":{"method":"GET","requestUri":"/2013-04-01/geolocations"},"input":{"type":"structure","members":{"StartContinentCode":{"location":"querystring","locationName":"startcontinentcode"},"StartCountryCode":{"location":"querystring","locationName":"startcountrycode"},"StartSubdivisionCode":{"location":"querystring","locationName":"startsubdivisioncode"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["GeoLocationDetailsList","IsTruncated","MaxItems"],"members":{"GeoLocationDetailsList":{"type":"list","member":{"shape":"S38","locationName":"GeoLocationDetails"}},"IsTruncated":{"type":"boolean"},"NextContinentCode":{},"NextCountryCode":{},"NextSubdivisionCode":{},"MaxItems":{}}}},"ListHealthChecks":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck"},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"marker"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["HealthChecks","Marker","IsTruncated","MaxItems"],"members":{"HealthChecks":{"type":"list","member":{"shape":"S1q","locationName":"HealthCheck"}},"Marker":{},"IsTruncated":{"type":"boolean"},"NextMarker":{},"MaxItems":{}}}},"ListHostedZones":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone"},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"marker"},"MaxItems":{"location":"querystring","locationName":"maxitems"},"DelegationSetId":{"location":"querystring","locationName":"delegationsetid"}}},"output":{"type":"structure","required":["HostedZones","Marker","IsTruncated","MaxItems"],"members":{"HostedZones":{"shape":"S4l"},"Marker":{},"IsTruncated":{"type":"boolean"},"NextMarker":{},"MaxItems":{}}}},"ListHostedZonesByName":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzonesbyname"},"input":{"type":"structure","members":{"DNSName":{"location":"querystring","locationName":"dnsname"},"HostedZoneId":{"location":"querystring","locationName":"hostedzoneid"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["HostedZones","IsTruncated","MaxItems"],"members":{"HostedZones":{"shape":"S4l"},"DNSName":{},"HostedZoneId":{},"IsTruncated":{"type":"boolean"},"NextDNSName":{},"NextHostedZoneId":{},"MaxItems":{}}}},"ListResourceRecordSets":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}/rrset"},"input":{"type":"structure","required":["HostedZoneId"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"StartRecordName":{"location":"querystring","locationName":"name"},"StartRecordType":{"location":"querystring","locationName":"type"},"StartRecordIdentifier":{"location":"querystring","locationName":"identifier"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["ResourceRecordSets","IsTruncated","MaxItems"],"members":{"ResourceRecordSets":{"type":"list","member":{"shape":"Sh","locationName":"ResourceRecordSet"}},"IsTruncated":{"type":"boolean"},"NextRecordName":{},"NextRecordType":{},"NextRecordIdentifier":{},"MaxItems":{}}}},"ListReusableDelegationSets":{"http":{"method":"GET","requestUri":"/2013-04-01/delegationset"},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"marker"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["DelegationSets","Marker","IsTruncated","MaxItems"],"members":{"DelegationSets":{"type":"list","member":{"shape":"S20","locationName":"DelegationSet"}},"Marker":{},"IsTruncated":{"type":"boolean"},"NextMarker":{},"MaxItems":{}}}},"ListTagsForResource":{"http":{"method":"GET","requestUri":"/2013-04-01/tags/{ResourceType}/{ResourceId}"},"input":{"type":"structure","required":["ResourceType","ResourceId"],"members":{"ResourceType":{"location":"uri","locationName":"ResourceType"},"ResourceId":{"location":"uri","locationName":"ResourceId"}}},"output":{"type":"structure","required":["ResourceTagSet"],"members":{"ResourceTagSet":{"shape":"S4w"}}}},"ListTagsForResources":{"http":{"requestUri":"/2013-04-01/tags/{ResourceType}"},"input":{"locationName":"ListTagsForResourcesRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["ResourceType","ResourceIds"],"members":{"ResourceType":{"location":"uri","locationName":"ResourceType"},"ResourceIds":{"type":"list","member":{"locationName":"ResourceId"}}}},"output":{"type":"structure","required":["ResourceTagSets"],"members":{"ResourceTagSets":{"type":"list","member":{"shape":"S4w","locationName":"ResourceTagSet"}}}}},"ListTrafficPolicies":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicies"},"input":{"type":"structure","members":{"TrafficPolicyIdMarker":{"location":"querystring","locationName":"trafficpolicyid"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicySummaries","IsTruncated","TrafficPolicyIdMarker","MaxItems"],"members":{"TrafficPolicySummaries":{"type":"list","member":{"locationName":"TrafficPolicySummary","type":"structure","required":["Id","Name","Type","LatestVersion","TrafficPolicyCount"],"members":{"Id":{},"Name":{},"Type":{},"LatestVersion":{"type":"integer"},"TrafficPolicyCount":{"type":"integer"}}}},"IsTruncated":{"type":"boolean"},"TrafficPolicyIdMarker":{},"MaxItems":{}}}},"ListTrafficPolicyInstances":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstances"},"input":{"type":"structure","members":{"HostedZoneIdMarker":{"location":"querystring","locationName":"hostedzoneid"},"TrafficPolicyInstanceNameMarker":{"location":"querystring","locationName":"trafficpolicyinstancename"},"TrafficPolicyInstanceTypeMarker":{"location":"querystring","locationName":"trafficpolicyinstancetype"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicyInstances","IsTruncated","MaxItems"],"members":{"TrafficPolicyInstances":{"shape":"S57"},"HostedZoneIdMarker":{},"TrafficPolicyInstanceNameMarker":{},"TrafficPolicyInstanceTypeMarker":{},"IsTruncated":{"type":"boolean"},"MaxItems":{}}}},"ListTrafficPolicyInstancesByHostedZone":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstances/hostedzone"},"input":{"type":"structure","required":["HostedZoneId"],"members":{"HostedZoneId":{"location":"querystring","locationName":"id"},"TrafficPolicyInstanceNameMarker":{"location":"querystring","locationName":"trafficpolicyinstancename"},"TrafficPolicyInstanceTypeMarker":{"location":"querystring","locationName":"trafficpolicyinstancetype"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicyInstances","IsTruncated","MaxItems"],"members":{"TrafficPolicyInstances":{"shape":"S57"},"TrafficPolicyInstanceNameMarker":{},"TrafficPolicyInstanceTypeMarker":{},"IsTruncated":{"type":"boolean"},"MaxItems":{}}}},"ListTrafficPolicyInstancesByPolicy":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstances/trafficpolicy"},"input":{"type":"structure","required":["TrafficPolicyId","TrafficPolicyVersion"],"members":{"TrafficPolicyId":{"location":"querystring","locationName":"id"},"TrafficPolicyVersion":{"location":"querystring","locationName":"version","type":"integer"},"HostedZoneIdMarker":{"location":"querystring","locationName":"hostedzoneid"},"TrafficPolicyInstanceNameMarker":{"location":"querystring","locationName":"trafficpolicyinstancename"},"TrafficPolicyInstanceTypeMarker":{"location":"querystring","locationName":"trafficpolicyinstancetype"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicyInstances","IsTruncated","MaxItems"],"members":{"TrafficPolicyInstances":{"shape":"S57"},"HostedZoneIdMarker":{},"TrafficPolicyInstanceNameMarker":{},"TrafficPolicyInstanceTypeMarker":{},"IsTruncated":{"type":"boolean"},"MaxItems":{}}}},"ListTrafficPolicyVersions":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicies/{Id}/versions"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"},"TrafficPolicyVersionMarker":{"location":"querystring","locationName":"trafficpolicyversion"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicies","IsTruncated","TrafficPolicyVersionMarker","MaxItems"],"members":{"TrafficPolicies":{"type":"list","member":{"shape":"S29","locationName":"TrafficPolicy"}},"IsTruncated":{"type":"boolean"},"TrafficPolicyVersionMarker":{},"MaxItems":{}}}},"UpdateHealthCheck":{"http":{"requestUri":"/2013-04-01/healthcheck/{HealthCheckId}"},"input":{"locationName":"UpdateHealthCheckRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"},"HealthCheckVersion":{"type":"long"},"IPAddress":{},"Port":{"type":"integer"},"ResourcePath":{},"FullyQualifiedDomainName":{},"SearchString":{},"FailureThreshold":{"type":"integer"},"Inverted":{"type":"boolean"},"HealthThreshold":{"type":"integer"},"ChildHealthChecks":{"shape":"S1o"}}},"output":{"type":"structure","required":["HealthCheck"],"members":{"HealthCheck":{"shape":"S1q"}}}},"UpdateHostedZoneComment":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}"},"input":{"locationName":"UpdateHostedZoneCommentRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"},"Comment":{}}},"output":{"type":"structure","required":["HostedZone"],"members":{"HostedZone":{"shape":"S1y"}}}},"UpdateTrafficPolicyComment":{"http":{"requestUri":"/2013-04-01/trafficpolicy/{Id}/{Version}"},"input":{"locationName":"UpdateTrafficPolicyCommentRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id","Version","Comment"],"members":{"Id":{"location":"uri","locationName":"Id"},"Version":{"location":"uri","locationName":"Version","type":"integer"},"Comment":{}}},"output":{"type":"structure","required":["TrafficPolicy"],"members":{"TrafficPolicy":{"shape":"S29"}}}},"UpdateTrafficPolicyInstance":{"http":{"requestUri":"/2013-04-01/trafficpolicyinstance/{Id}"},"input":{"locationName":"UpdateTrafficPolicyInstanceRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id","TTL","TrafficPolicyId","TrafficPolicyVersion"],"members":{"Id":{"location":"uri","locationName":"Id"},"TTL":{"type":"long"},"TrafficPolicyId":{},"TrafficPolicyVersion":{"type":"integer"}}},"output":{"type":"structure","required":["TrafficPolicyInstance"],"members":{"TrafficPolicyInstance":{"shape":"S2e"}}}}},"shapes":{"S3":{"type":"structure","members":{"VPCRegion":{},"VPCId":{}}},"S8":{"type":"structure","required":["Id","Status","SubmittedAt"],"members":{"Id":{},"Status":{},"SubmittedAt":{"type":"timestamp"},"Comment":{}}},"Se":{"type":"list","member":{"locationName":"Change","type":"structure","required":["Action","ResourceRecordSet"],"members":{"Action":{},"ResourceRecordSet":{"shape":"Sh"}}}},"Sh":{"type":"structure","required":["Name","Type"],"members":{"Name":{},"Type":{},"SetIdentifier":{},"Weight":{"type":"long"},"Region":{},"GeoLocation":{"type":"structure","members":{"ContinentCode":{},"CountryCode":{},"SubdivisionCode":{}}},"Failover":{},"TTL":{"type":"long"},"ResourceRecords":{"type":"list","member":{"locationName":"ResourceRecord","type":"structure","required":["Value"],"members":{"Value":{}}}},"AliasTarget":{"type":"structure","required":["HostedZoneId","DNSName","EvaluateTargetHealth"],"members":{"HostedZoneId":{},"DNSName":{},"EvaluateTargetHealth":{"type":"boolean"}}},"HealthCheckId":{},"TrafficPolicyInstanceId":{}}},"S14":{"type":"list","member":{"locationName":"Tag","type":"structure","members":{"Key":{},"Value":{}}}},"S1c":{"type":"structure","required":["Type"],"members":{"IPAddress":{},"Port":{"type":"integer"},"Type":{},"ResourcePath":{},"FullyQualifiedDomainName":{},"SearchString":{},"RequestInterval":{"type":"integer"},"FailureThreshold":{"type":"integer"},"MeasureLatency":{"type":"boolean"},"Inverted":{"type":"boolean"},"HealthThreshold":{"type":"integer"},"ChildHealthChecks":{"shape":"S1o"}}},"S1o":{"type":"list","member":{"locationName":"ChildHealthCheck"}},"S1q":{"type":"structure","required":["Id","CallerReference","HealthCheckConfig","HealthCheckVersion"],"members":{"Id":{},"CallerReference":{},"HealthCheckConfig":{"shape":"S1c"},"HealthCheckVersion":{"type":"long"}}},"S1v":{"type":"structure","members":{"Comment":{},"PrivateZone":{"type":"boolean"}}},"S1y":{"type":"structure","required":["Id","Name","CallerReference"],"members":{"Id":{},"Name":{},"CallerReference":{},"Config":{"shape":"S1v"},"ResourceRecordSetCount":{"type":"long"}}},"S20":{"type":"structure","required":["NameServers"],"members":{"Id":{},"CallerReference":{},"NameServers":{"type":"list","member":{"locationName":"NameServer"}}}},"S29":{"type":"structure","required":["Id","Version","Name","Type","Document"],"members":{"Id":{},"Version":{"type":"integer"},"Name":{},"Type":{},"Document":{},"Comment":{}}},"S2e":{"type":"structure","required":["Id","HostedZoneId","Name","TTL","State","Message","TrafficPolicyId","TrafficPolicyVersion","TrafficPolicyType"],"members":{"Id":{},"HostedZoneId":{},"Name":{},"TTL":{"type":"long"},"State":{},"Message":{},"TrafficPolicyId":{},"TrafficPolicyVersion":{"type":"integer"},"TrafficPolicyType":{}}},"S30":{"type":"structure","required":["Id","Status"],"members":{"Id":{},"SubmittedAt":{"type":"timestamp"},"Status":{},"Comment":{},"Submitter":{},"Changes":{"shape":"Se"}}},"S38":{"type":"structure","members":{"ContinentCode":{},"ContinentName":{},"CountryCode":{},"CountryName":{},"SubdivisionCode":{},"SubdivisionName":{}}},"S3j":{"type":"list","member":{"locationName":"HealthCheckObservation","type":"structure","members":{"IPAddress":{},"StatusReport":{"type":"structure","members":{"Status":{},"CheckedTime":{"type":"timestamp"}}}}}},"S4a":{"type":"list","member":{"shape":"S30","locationName":"ChangeBatchRecord"}},"S4l":{"type":"list","member":{"shape":"S1y","locationName":"HostedZone"}},"S4w":{"type":"structure","members":{"ResourceType":{},"ResourceId":{},"Tags":{"shape":"S14"}}},"S57":{"type":"list","member":{"shape":"S2e","locationName":"TrafficPolicyInstance"}}},"paginators":{"ListHealthChecks":{"input_token":"Marker","output_token":"NextMarker","more_results":"IsTruncated","limit_key":"MaxItems","result_key":"HealthChecks"},"ListHostedZones":{"input_token":"Marker","output_token":"NextMarker","more_results":"IsTruncated","limit_key":"MaxItems","result_key":"HostedZones"},"ListResourceRecordSets":{"more_results":"IsTruncated","limit_key":"MaxItems","result_key":"ResourceRecordSets","input_token":["StartRecordName","StartRecordType","StartRecordIdentifier"],"output_token":["NextRecordName","NextRecordType","NextRecordIdentifier"]}}};
 AWS.apiLoader.services['s3'] = {};
 AWS.S3 = AWS.Service.defineService('s3', [ '2006-03-01' ]);
 require('./services/s3');
@@ -106,7 +111,7 @@ AWS.apiLoader.services['sqs']['2012-11-05'] = {"version":"2.0","metadata":{"apiV
 AWS.apiLoader.services['ssm'] = {};
 AWS.SSM = AWS.Service.defineService('ssm', [ '2014-11-06' ]);
 
-AWS.apiLoader.services['ssm']['2014-11-06'] = {"version":"2.0","metadata":{"apiVersion":"2014-11-06","endpointPrefix":"ssm","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"Amazon SSM","serviceFullName":"Amazon Simple Systems Management Service","signatureVersion":"v4","targetPrefix":"AmazonSSM"},"operations":{"CancelCommand":{"input":{"type":"structure","required":["CommandId"],"members":{"CommandId":{},"InstanceIds":{"shape":"S3"}}},"output":{"type":"structure","members":{}},"http":{}},"CreateAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{},"Parameters":{"shape":"S8"}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Sd"}}},"http":{}},"CreateAssociationBatch":{"input":{"type":"structure","required":["Entries"],"members":{"Entries":{"type":"list","member":{"shape":"Sl","locationName":"entries"}}}},"output":{"type":"structure","members":{"Successful":{"type":"list","member":{"shape":"Sd","locationName":"AssociationDescription"}},"Failed":{"type":"list","member":{"locationName":"FailedCreateAssociationEntry","type":"structure","members":{"Entry":{"shape":"Sl"},"Message":{},"Fault":{}}}}}},"http":{}},"CreateDocument":{"input":{"type":"structure","required":["Content","Name"],"members":{"Content":{},"Name":{}}},"output":{"type":"structure","members":{"DocumentDescription":{"shape":"Sv"}}},"http":{}},"DeleteAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{}}},"output":{"type":"structure","members":{}},"http":{}},"DeleteDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{}},"http":{}},"DescribeAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Sd"}}},"http":{}},"DescribeDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{"Document":{"shape":"Sv"}}},"http":{}},"DescribeInstanceInformation":{"input":{"type":"structure","members":{"InstanceInformationFilterList":{"type":"list","member":{"locationName":"InstanceInformationFilter","type":"structure","required":["key","valueSet"],"members":{"key":{},"valueSet":{"type":"list","member":{"locationName":"InstanceInformationFilterValue"}}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"InstanceInformationList":{"type":"list","member":{"locationName":"InstanceInformation","type":"structure","members":{"InstanceId":{},"PingStatus":{},"LastPingDateTime":{"type":"timestamp"},"AgentVersion":{},"IsLatestVersion":{"type":"boolean"},"PlatformType":{},"PlatformName":{},"PlatformVersion":{}}}},"NextToken":{}}},"http":{}},"GetDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{"Name":{},"Content":{}}},"http":{}},"ListAssociations":{"input":{"type":"structure","required":["AssociationFilterList"],"members":{"AssociationFilterList":{"type":"list","member":{"locationName":"AssociationFilter","type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Associations":{"type":"list","member":{"locationName":"Association","type":"structure","members":{"Name":{},"InstanceId":{}}}},"NextToken":{}}},"http":{}},"ListCommandInvocations":{"input":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"MaxResults":{"type":"integer"},"NextToken":{},"Filters":{"shape":"S27"},"Details":{"type":"boolean"}}},"output":{"type":"structure","members":{"CommandInvocations":{"type":"list","member":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"Comment":{},"DocumentName":{},"RequestedDateTime":{"type":"timestamp"},"Status":{},"TraceOutput":{},"CommandPlugins":{"type":"list","member":{"type":"structure","members":{"Name":{},"Status":{},"ResponseCode":{"type":"integer"},"ResponseStartDateTime":{"type":"timestamp"},"ResponseFinishDateTime":{"type":"timestamp"},"Output":{},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}}}}}},"NextToken":{}}},"http":{}},"ListCommands":{"input":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"MaxResults":{"type":"integer"},"NextToken":{},"Filters":{"shape":"S27"}}},"output":{"type":"structure","members":{"Commands":{"type":"list","member":{"shape":"S2s"}},"NextToken":{}}},"http":{}},"ListDocuments":{"input":{"type":"structure","members":{"DocumentFilterList":{"type":"list","member":{"locationName":"DocumentFilter","type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"DocumentIdentifiers":{"type":"list","member":{"locationName":"DocumentIdentifier","type":"structure","members":{"Name":{},"PlatformTypes":{"shape":"S15"}}}},"NextToken":{}}},"http":{}},"SendCommand":{"input":{"type":"structure","required":["InstanceIds","DocumentName"],"members":{"InstanceIds":{"shape":"S3"},"DocumentName":{},"TimeoutSeconds":{"type":"integer"},"Comment":{},"Parameters":{"shape":"S8"},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}},"output":{"type":"structure","members":{"Command":{"shape":"S2s"}}},"http":{}},"UpdateAssociationStatus":{"input":{"type":"structure","required":["Name","InstanceId","AssociationStatus"],"members":{"Name":{},"InstanceId":{},"AssociationStatus":{"shape":"Sf"}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Sd"}}},"http":{}}},"shapes":{"S3":{"type":"list","member":{}},"S8":{"type":"map","key":{},"value":{"type":"list","member":{}}},"Sd":{"type":"structure","members":{"Name":{},"InstanceId":{},"Date":{"type":"timestamp"},"Status":{"shape":"Sf"},"Parameters":{"shape":"S8"}}},"Sf":{"type":"structure","required":["Date","Name","Message"],"members":{"Date":{"type":"timestamp"},"Name":{},"Message":{},"AdditionalInfo":{}}},"Sl":{"type":"structure","members":{"Name":{},"InstanceId":{},"Parameters":{"shape":"S8"}}},"Sv":{"type":"structure","members":{"Sha1":{},"Name":{},"CreatedDate":{"type":"timestamp"},"Status":{},"Description":{},"Parameters":{"type":"list","member":{"locationName":"DocumentParameter","type":"structure","members":{"Name":{},"Type":{},"Description":{},"DefaultValue":{}}}},"PlatformTypes":{"shape":"S15"}}},"S15":{"type":"list","member":{"locationName":"PlatformType"}},"S27":{"type":"list","member":{"type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"S2s":{"type":"structure","members":{"CommandId":{},"DocumentName":{},"Comment":{},"ExpiresAfter":{"type":"timestamp"},"Parameters":{"shape":"S8"},"InstanceIds":{"shape":"S3"},"RequestedDateTime":{"type":"timestamp"},"Status":{},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}}}};
+AWS.apiLoader.services['ssm']['2014-11-06'] = {"version":"2.0","metadata":{"apiVersion":"2014-11-06","endpointPrefix":"ssm","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"Amazon SSM","serviceFullName":"Amazon Simple Systems Management Service","signatureVersion":"v4","targetPrefix":"AmazonSSM"},"operations":{"CancelCommand":{"input":{"type":"structure","required":["CommandId"],"members":{"CommandId":{},"InstanceIds":{"shape":"S3"}}},"output":{"type":"structure","members":{}},"http":{}},"CreateAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{},"Parameters":{"shape":"S8"}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Sd"}}},"http":{}},"CreateAssociationBatch":{"input":{"type":"structure","required":["Entries"],"members":{"Entries":{"type":"list","member":{"shape":"Sl","locationName":"entries"}}}},"output":{"type":"structure","members":{"Successful":{"type":"list","member":{"shape":"Sd","locationName":"AssociationDescription"}},"Failed":{"type":"list","member":{"locationName":"FailedCreateAssociationEntry","type":"structure","members":{"Entry":{"shape":"Sl"},"Message":{},"Fault":{}}}}}},"http":{}},"CreateDocument":{"input":{"type":"structure","required":["Content","Name"],"members":{"Content":{},"Name":{}}},"output":{"type":"structure","members":{"DocumentDescription":{"shape":"Sv"}}},"http":{}},"DeleteAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{}}},"output":{"type":"structure","members":{}},"http":{}},"DeleteDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{}},"http":{}},"DescribeAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Sd"}}},"http":{}},"DescribeDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{"Document":{"shape":"Sv"}}},"http":{}},"DescribeInstanceInformation":{"input":{"type":"structure","members":{"InstanceInformationFilterList":{"type":"list","member":{"locationName":"InstanceInformationFilter","type":"structure","required":["key","valueSet"],"members":{"key":{},"valueSet":{"type":"list","member":{"locationName":"InstanceInformationFilterValue"}}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"InstanceInformationList":{"type":"list","member":{"locationName":"InstanceInformation","type":"structure","members":{"InstanceId":{},"PingStatus":{},"LastPingDateTime":{"type":"timestamp"},"AgentVersion":{},"IsLatestVersion":{"type":"boolean"},"PlatformType":{},"PlatformName":{},"PlatformVersion":{}}}},"NextToken":{}}},"http":{}},"GetDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{"Name":{},"Content":{}}},"http":{}},"ListAssociations":{"input":{"type":"structure","required":["AssociationFilterList"],"members":{"AssociationFilterList":{"type":"list","member":{"locationName":"AssociationFilter","type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Associations":{"type":"list","member":{"locationName":"Association","type":"structure","members":{"Name":{},"InstanceId":{}}}},"NextToken":{}}},"http":{}},"ListCommandInvocations":{"input":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"MaxResults":{"type":"integer"},"NextToken":{},"Filters":{"shape":"S27"},"Details":{"type":"boolean"}}},"output":{"type":"structure","members":{"CommandInvocations":{"type":"list","member":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"Comment":{},"DocumentName":{},"RequestedDateTime":{"type":"timestamp"},"Status":{},"TraceOutput":{},"CommandPlugins":{"type":"list","member":{"type":"structure","members":{"Name":{},"Status":{},"ResponseCode":{"type":"integer"},"ResponseStartDateTime":{"type":"timestamp"},"ResponseFinishDateTime":{"type":"timestamp"},"Output":{},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}}}}}},"NextToken":{}}},"http":{}},"ListCommands":{"input":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"MaxResults":{"type":"integer"},"NextToken":{},"Filters":{"shape":"S27"}}},"output":{"type":"structure","members":{"Commands":{"type":"list","member":{"shape":"S2s"}},"NextToken":{}}},"http":{}},"ListDocuments":{"input":{"type":"structure","members":{"DocumentFilterList":{"type":"list","member":{"locationName":"DocumentFilter","type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"DocumentIdentifiers":{"type":"list","member":{"locationName":"DocumentIdentifier","type":"structure","members":{"Name":{},"PlatformTypes":{"shape":"S15"}}}},"NextToken":{}}},"http":{}},"SendCommand":{"input":{"type":"structure","required":["InstanceIds","DocumentName"],"members":{"InstanceIds":{"shape":"S3"},"DocumentName":{},"TimeoutSeconds":{"type":"integer"},"Comment":{},"Parameters":{"shape":"S8"},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}},"output":{"type":"structure","members":{"Command":{"shape":"S2s"}}},"http":{}},"UpdateAssociationStatus":{"input":{"type":"structure","required":["Name","InstanceId","AssociationStatus"],"members":{"Name":{},"InstanceId":{},"AssociationStatus":{"shape":"Sf"}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Sd"}}},"http":{}}},"shapes":{"S3":{"type":"list","member":{}},"S8":{"type":"map","key":{},"value":{"type":"list","member":{}}},"Sd":{"type":"structure","members":{"Name":{},"InstanceId":{},"Date":{"type":"timestamp"},"Status":{"shape":"Sf"},"Parameters":{"shape":"S8"}}},"Sf":{"type":"structure","required":["Date","Name","Message"],"members":{"Date":{"type":"timestamp"},"Name":{},"Message":{},"AdditionalInfo":{}}},"Sl":{"type":"structure","members":{"Name":{},"InstanceId":{},"Parameters":{"shape":"S8"}}},"Sv":{"type":"structure","members":{"Sha1":{},"Name":{},"CreatedDate":{"type":"timestamp"},"Status":{},"Description":{},"Parameters":{"type":"list","member":{"locationName":"DocumentParameter","type":"structure","members":{"Name":{},"Type":{},"Description":{},"DefaultValue":{}}}},"PlatformTypes":{"shape":"S15"}}},"S15":{"type":"list","member":{"locationName":"PlatformType"}},"S27":{"type":"list","member":{"type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"S2s":{"type":"structure","members":{"CommandId":{},"DocumentName":{},"Comment":{},"ExpiresAfter":{"type":"timestamp"},"Parameters":{"shape":"S8"},"InstanceIds":{"shape":"S3"},"RequestedDateTime":{"type":"timestamp"},"Status":{},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}}},"paginators":{"ListAssociations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"Associations"},"ListCommandInvocations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"CommandInvocations"},"ListCommands":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"Commands"},"ListDocuments":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"DocumentIdentifiers"}}};
 AWS.apiLoader.services['sts'] = {};
 AWS.STS = AWS.Service.defineService('sts', [ '2011-06-15' ]);
 require('./services/sts');
@@ -115,9 +120,9 @@ AWS.apiLoader.services['sts']['2011-06-15'] = {"version":"2.0","metadata":{"apiV
 AWS.apiLoader.services['waf'] = {};
 AWS.WAF = AWS.Service.defineService('waf', [ '2015-08-24' ]);
 
-AWS.apiLoader.services['waf']['2015-08-24'] = {"version":"2.0","metadata":{"apiVersion":"2015-08-24","endpointPrefix":"waf","jsonVersion":"1.1","serviceAbbreviation":"WAF","serviceFullName":"AWS WAF","signatureVersion":"v4","targetPrefix":"AWSWAF_20150824","protocol":"json"},"operations":{"CreateByteMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"},"ChangeToken":{}}},"http":{}},"CreateIPSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"},"ChangeToken":{}}},"http":{}},"CreateRule":{"input":{"type":"structure","required":["Name","MetricName","ChangeToken"],"members":{"Name":{},"MetricName":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"},"ChangeToken":{}}},"http":{}},"CreateSqlInjectionMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"Sx"},"ChangeToken":{}}},"http":{}},"CreateWebACL":{"input":{"type":"structure","required":["Name","MetricName","DefaultAction","ChangeToken"],"members":{"Name":{},"MetricName":{},"DefaultAction":{"shape":"S11"},"ChangeToken":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S14"},"ChangeToken":{}}},"http":{}},"DeleteByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken"],"members":{"ByteMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken"],"members":{"IPSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteRule":{"input":{"type":"structure","required":["RuleId","ChangeToken"],"members":{"RuleId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId"],"members":{"ByteMatchSetId":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"}}},"http":{}},"GetChangeToken":{"input":{"type":"structure","members":{}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetChangeTokenStatus":{"input":{"type":"structure","required":["ChangeToken"],"members":{"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeTokenStatus":{}}},"http":{}},"GetIPSet":{"input":{"type":"structure","required":["IPSetId"],"members":{"IPSetId":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"}}},"http":{}},"GetRule":{"input":{"type":"structure","required":["RuleId"],"members":{"RuleId":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"}}},"http":{}},"GetSampledRequests":{"input":{"type":"structure","required":["WebAclId","RuleId","TimeWindow","MaxItems"],"members":{"WebAclId":{},"RuleId":{},"TimeWindow":{"shape":"S1u"},"MaxItems":{"type":"long"}}},"output":{"type":"structure","members":{"SampledRequests":{"type":"list","member":{"type":"structure","required":["Request","Weight"],"members":{"Request":{"type":"structure","members":{"ClientIP":{},"Country":{},"URI":{},"Method":{},"HTTPVersion":{},"Headers":{"type":"list","member":{"type":"structure","members":{"Name":{},"Value":{}}}}}},"Weight":{"type":"long"},"Timestamp":{"type":"timestamp"},"Action":{}}}},"PopulationSize":{"type":"long"},"TimeWindow":{"shape":"S1u"}}},"http":{}},"GetSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId"],"members":{"SqlInjectionMatchSetId":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"Sx"}}},"http":{}},"GetWebACL":{"input":{"type":"structure","required":["WebACLId"],"members":{"WebACLId":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S14"}}},"http":{}},"ListByteMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"ByteMatchSets":{"type":"list","member":{"type":"structure","required":["ByteMatchSetId","Name"],"members":{"ByteMatchSetId":{},"Name":{}}}}}},"http":{}},"ListIPSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"IPSets":{"type":"list","member":{"type":"structure","required":["IPSetId","Name"],"members":{"IPSetId":{},"Name":{}}}}}},"http":{}},"ListRules":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"Rules":{"type":"list","member":{"type":"structure","required":["RuleId","Name"],"members":{"RuleId":{},"Name":{}}}}}},"http":{}},"ListSqlInjectionMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"SqlInjectionMatchSets":{"type":"list","member":{"type":"structure","required":["SqlInjectionMatchSetId","Name"],"members":{"SqlInjectionMatchSetId":{},"Name":{}}}}}},"http":{}},"ListWebACLs":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"WebACLs":{"type":"list","member":{"type":"structure","required":["WebACLId","Name"],"members":{"WebACLId":{},"Name":{}}}}}},"http":{}},"UpdateByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken","Updates"],"members":{"ByteMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ByteMatchTuple"],"members":{"Action":{},"ByteMatchTuple":{"shape":"S8"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken","Updates"],"members":{"IPSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","IPSetDescriptor"],"members":{"Action":{},"IPSetDescriptor":{"shape":"Sj"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateRule":{"input":{"type":"structure","required":["RuleId","ChangeToken","Updates"],"members":{"RuleId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","Predicate"],"members":{"Action":{},"Predicate":{"shape":"Sr"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken","Updates"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","SqlInjectionMatchTuple"],"members":{"Action":{},"SqlInjectionMatchTuple":{"shape":"Sz"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ActivatedRule"],"members":{"Action":{},"ActivatedRule":{"shape":"S16"}}}},"DefaultAction":{"shape":"S11"}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}}},"shapes":{"S5":{"type":"structure","required":["ByteMatchSetId","ByteMatchTuples"],"members":{"ByteMatchSetId":{},"Name":{},"ByteMatchTuples":{"type":"list","member":{"shape":"S8"}}}},"S8":{"type":"structure","required":["FieldToMatch","TargetString","TextTransformation","PositionalConstraint"],"members":{"FieldToMatch":{"shape":"S9"},"TargetString":{"type":"blob"},"TextTransformation":{},"PositionalConstraint":{}}},"S9":{"type":"structure","required":["Type"],"members":{"Type":{},"Data":{}}},"Sh":{"type":"structure","required":["IPSetId","IPSetDescriptors"],"members":{"IPSetId":{},"Name":{},"IPSetDescriptors":{"type":"list","member":{"shape":"Sj"}}}},"Sj":{"type":"structure","required":["Type","Value"],"members":{"Type":{},"Value":{}}},"Sp":{"type":"structure","required":["RuleId","Predicates"],"members":{"RuleId":{},"Name":{},"MetricName":{},"Predicates":{"type":"list","member":{"shape":"Sr"}}}},"Sr":{"type":"structure","required":["Negated","Type","DataId"],"members":{"Negated":{"type":"boolean"},"Type":{},"DataId":{}}},"Sx":{"type":"structure","required":["SqlInjectionMatchSetId","SqlInjectionMatchTuples"],"members":{"SqlInjectionMatchSetId":{},"Name":{},"SqlInjectionMatchTuples":{"type":"list","member":{"shape":"Sz"}}}},"Sz":{"type":"structure","required":["FieldToMatch","TextTransformation"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{}}},"S11":{"type":"structure","required":["Type"],"members":{"Type":{}}},"S14":{"type":"structure","required":["WebACLId","DefaultAction","Rules"],"members":{"WebACLId":{},"Name":{},"MetricName":{},"DefaultAction":{"shape":"S11"},"Rules":{"type":"list","member":{"shape":"S16"}}}},"S16":{"type":"structure","required":["Priority","RuleId","Action"],"members":{"Priority":{"type":"integer"},"RuleId":{},"Action":{"shape":"S11"}}},"S1u":{"type":"structure","required":["StartTime","EndTime"],"members":{"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"}}}},"examples":{}};
+AWS.apiLoader.services['waf']['2015-08-24'] = {"version":"2.0","metadata":{"apiVersion":"2015-08-24","endpointPrefix":"waf","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"WAF","serviceFullName":"AWS WAF","signatureVersion":"v4","targetPrefix":"AWSWAF_20150824"},"operations":{"CreateByteMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"},"ChangeToken":{}}},"http":{}},"CreateIPSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"},"ChangeToken":{}}},"http":{}},"CreateRule":{"input":{"type":"structure","required":["Name","MetricName","ChangeToken"],"members":{"Name":{},"MetricName":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"},"ChangeToken":{}}},"http":{}},"CreateSizeConstraintSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"SizeConstraintSet":{"shape":"Sw"},"ChangeToken":{}}},"http":{}},"CreateSqlInjectionMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"S13"},"ChangeToken":{}}},"http":{}},"CreateWebACL":{"input":{"type":"structure","required":["Name","MetricName","DefaultAction","ChangeToken"],"members":{"Name":{},"MetricName":{},"DefaultAction":{"shape":"S17"},"ChangeToken":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S1a"},"ChangeToken":{}}},"http":{}},"DeleteByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken"],"members":{"ByteMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken"],"members":{"IPSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteRule":{"input":{"type":"structure","required":["RuleId","ChangeToken"],"members":{"RuleId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId","ChangeToken"],"members":{"SizeConstraintSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId"],"members":{"ByteMatchSetId":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"}}},"http":{}},"GetChangeToken":{"input":{"type":"structure","members":{}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetChangeTokenStatus":{"input":{"type":"structure","required":["ChangeToken"],"members":{"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeTokenStatus":{}}},"http":{}},"GetIPSet":{"input":{"type":"structure","required":["IPSetId"],"members":{"IPSetId":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"}}},"http":{}},"GetRule":{"input":{"type":"structure","required":["RuleId"],"members":{"RuleId":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"}}},"http":{}},"GetSampledRequests":{"input":{"type":"structure","required":["WebAclId","RuleId","TimeWindow","MaxItems"],"members":{"WebAclId":{},"RuleId":{},"TimeWindow":{"shape":"S22"},"MaxItems":{"type":"long"}}},"output":{"type":"structure","members":{"SampledRequests":{"type":"list","member":{"type":"structure","required":["Request","Weight"],"members":{"Request":{"type":"structure","members":{"ClientIP":{},"Country":{},"URI":{},"Method":{},"HTTPVersion":{},"Headers":{"type":"list","member":{"type":"structure","members":{"Name":{},"Value":{}}}}}},"Weight":{"type":"long"},"Timestamp":{"type":"timestamp"},"Action":{}}}},"PopulationSize":{"type":"long"},"TimeWindow":{"shape":"S22"}}},"http":{}},"GetSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId"],"members":{"SizeConstraintSetId":{}}},"output":{"type":"structure","members":{"SizeConstraintSet":{"shape":"Sw"}}},"http":{}},"GetSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId"],"members":{"SqlInjectionMatchSetId":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"S13"}}},"http":{}},"GetWebACL":{"input":{"type":"structure","required":["WebACLId"],"members":{"WebACLId":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S1a"}}},"http":{}},"ListByteMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"ByteMatchSets":{"type":"list","member":{"type":"structure","required":["ByteMatchSetId","Name"],"members":{"ByteMatchSetId":{},"Name":{}}}}}},"http":{}},"ListIPSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"IPSets":{"type":"list","member":{"type":"structure","required":["IPSetId","Name"],"members":{"IPSetId":{},"Name":{}}}}}},"http":{}},"ListRules":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"Rules":{"type":"list","member":{"type":"structure","required":["RuleId","Name"],"members":{"RuleId":{},"Name":{}}}}}},"http":{}},"ListSizeConstraintSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"SizeConstraintSets":{"type":"list","member":{"type":"structure","required":["SizeConstraintSetId","Name"],"members":{"SizeConstraintSetId":{},"Name":{}}}}}},"http":{}},"ListSqlInjectionMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"SqlInjectionMatchSets":{"type":"list","member":{"type":"structure","required":["SqlInjectionMatchSetId","Name"],"members":{"SqlInjectionMatchSetId":{},"Name":{}}}}}},"http":{}},"ListWebACLs":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"WebACLs":{"type":"list","member":{"type":"structure","required":["WebACLId","Name"],"members":{"WebACLId":{},"Name":{}}}}}},"http":{}},"UpdateByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken","Updates"],"members":{"ByteMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ByteMatchTuple"],"members":{"Action":{},"ByteMatchTuple":{"shape":"S8"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken","Updates"],"members":{"IPSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","IPSetDescriptor"],"members":{"Action":{},"IPSetDescriptor":{"shape":"Sj"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateRule":{"input":{"type":"structure","required":["RuleId","ChangeToken","Updates"],"members":{"RuleId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","Predicate"],"members":{"Action":{},"Predicate":{"shape":"Sr"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId","ChangeToken","Updates"],"members":{"SizeConstraintSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","SizeConstraint"],"members":{"Action":{},"SizeConstraint":{"shape":"Sy"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken","Updates"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","SqlInjectionMatchTuple"],"members":{"Action":{},"SqlInjectionMatchTuple":{"shape":"S15"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ActivatedRule"],"members":{"Action":{},"ActivatedRule":{"shape":"S1c"}}}},"DefaultAction":{"shape":"S17"}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}}},"shapes":{"S5":{"type":"structure","required":["ByteMatchSetId","ByteMatchTuples"],"members":{"ByteMatchSetId":{},"Name":{},"ByteMatchTuples":{"type":"list","member":{"shape":"S8"}}}},"S8":{"type":"structure","required":["FieldToMatch","TargetString","TextTransformation","PositionalConstraint"],"members":{"FieldToMatch":{"shape":"S9"},"TargetString":{"type":"blob"},"TextTransformation":{},"PositionalConstraint":{}}},"S9":{"type":"structure","required":["Type"],"members":{"Type":{},"Data":{}}},"Sh":{"type":"structure","required":["IPSetId","IPSetDescriptors"],"members":{"IPSetId":{},"Name":{},"IPSetDescriptors":{"type":"list","member":{"shape":"Sj"}}}},"Sj":{"type":"structure","required":["Type","Value"],"members":{"Type":{},"Value":{}}},"Sp":{"type":"structure","required":["RuleId","Predicates"],"members":{"RuleId":{},"Name":{},"MetricName":{},"Predicates":{"type":"list","member":{"shape":"Sr"}}}},"Sr":{"type":"structure","required":["Negated","Type","DataId"],"members":{"Negated":{"type":"boolean"},"Type":{},"DataId":{}}},"Sw":{"type":"structure","required":["SizeConstraintSetId","SizeConstraints"],"members":{"SizeConstraintSetId":{},"Name":{},"SizeConstraints":{"type":"list","member":{"shape":"Sy"}}}},"Sy":{"type":"structure","required":["FieldToMatch","TextTransformation","ComparisonOperator","Size"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{},"ComparisonOperator":{},"Size":{"type":"long"}}},"S13":{"type":"structure","required":["SqlInjectionMatchSetId","SqlInjectionMatchTuples"],"members":{"SqlInjectionMatchSetId":{},"Name":{},"SqlInjectionMatchTuples":{"type":"list","member":{"shape":"S15"}}}},"S15":{"type":"structure","required":["FieldToMatch","TextTransformation"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{}}},"S17":{"type":"structure","required":["Type"],"members":{"Type":{}}},"S1a":{"type":"structure","required":["WebACLId","DefaultAction","Rules"],"members":{"WebACLId":{},"Name":{},"MetricName":{},"DefaultAction":{"shape":"S17"},"Rules":{"type":"list","member":{"shape":"S1c"}}}},"S1c":{"type":"structure","required":["Priority","RuleId","Action"],"members":{"Priority":{"type":"integer"},"RuleId":{},"Action":{"shape":"S17"}}},"S22":{"type":"structure","required":["StartTime","EndTime"],"members":{"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"}}}}};
 
-},{"./core":3,"./http/xhr":17,"./services/cognitoidentity":41,"./services/dynamodb":42,"./services/ec2":43,"./services/machinelearning":44,"./services/s3":45,"./services/sqs":46,"./services/sts":47,"./xml/browser_parser":57}],2:[function(require,module,exports){
+},{"./core":3,"./http/xhr":17,"./services/cognitoidentity":41,"./services/dynamodb":42,"./services/ec2":43,"./services/machinelearning":44,"./services/route53":45,"./services/s3":46,"./services/sqs":47,"./services/sts":48,"./xml/browser_parser":58}],2:[function(require,module,exports){
 var AWS = require('./core');
 require('./credentials');
 require('./credentials/credential_provider_chain');
@@ -304,7 +309,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.2.32',
+  VERSION: '2.2.33',
 
 
   Signers: {},
@@ -367,7 +372,7 @@ require('./param_validator');
 
 AWS.events = new AWS.SequentialExecutor();
 
-},{"./config":2,"./credentials":4,"./credentials/cognito_identity_credentials":5,"./credentials/credential_provider_chain":6,"./credentials/saml_credentials":7,"./credentials/temporary_credentials":8,"./credentials/web_identity_credentials":9,"./event_listeners":15,"./http":16,"./json/builder":18,"./json/parser":19,"./model/api":20,"./model/operation":22,"./model/paginator":23,"./model/resource_waiter":24,"./model/shape":25,"./param_validator":26,"./protocol/json":27,"./protocol/query":28,"./protocol/rest":29,"./protocol/rest_json":30,"./protocol/rest_xml":31,"./request":35,"./resource_waiter":36,"./response":37,"./sequential_executor":39,"./service":40,"./signers/request_signer":49,"./util":56,"./xml/builder":58}],4:[function(require,module,exports){
+},{"./config":2,"./credentials":4,"./credentials/cognito_identity_credentials":5,"./credentials/credential_provider_chain":6,"./credentials/saml_credentials":7,"./credentials/temporary_credentials":8,"./credentials/web_identity_credentials":9,"./event_listeners":15,"./http":16,"./json/builder":18,"./json/parser":19,"./model/api":20,"./model/operation":22,"./model/paginator":23,"./model/resource_waiter":24,"./model/shape":25,"./param_validator":26,"./protocol/json":27,"./protocol/query":28,"./protocol/rest":29,"./protocol/rest_json":30,"./protocol/rest_xml":31,"./request":35,"./resource_waiter":36,"./response":37,"./sequential_executor":39,"./service":40,"./signers/request_signer":50,"./util":57,"./xml/builder":59}],4:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -1692,7 +1697,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":3,"./protocol/json":27,"./protocol/query":28,"./protocol/rest":29,"./protocol/rest_json":30,"./protocol/rest_xml":31,"./sequential_executor":39,"util":77}],16:[function(require,module,exports){
+},{"./core":3,"./protocol/json":27,"./protocol/query":28,"./protocol/rest":29,"./protocol/rest_json":30,"./protocol/rest_xml":31,"./sequential_executor":39,"util":78}],16:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -1916,7 +1921,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
 
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":3,"../http":16,"events":68}],18:[function(require,module,exports){
+},{"../core":3,"../http":16,"events":69}],18:[function(require,module,exports){
 var util = require('../util');
 
 function JsonBuilder() { }
@@ -1974,7 +1979,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonBuilder;
 
-},{"../util":56}],19:[function(require,module,exports){
+},{"../util":57}],19:[function(require,module,exports){
 var util = require('../util');
 
 function JsonParser() { }
@@ -2040,7 +2045,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonParser;
 
-},{"../util":56}],20:[function(require,module,exports){
+},{"../util":57}],20:[function(require,module,exports){
 var Collection = require('./collection');
 var Operation = require('./operation');
 var Shape = require('./shape');
@@ -2105,7 +2110,7 @@ function Api(api, options) {
 
 module.exports = Api;
 
-},{"../util":56,"./collection":21,"./operation":22,"./paginator":23,"./resource_waiter":24,"./shape":25}],21:[function(require,module,exports){
+},{"../util":57,"./collection":21,"./operation":22,"./paginator":23,"./resource_waiter":24,"./shape":25}],21:[function(require,module,exports){
 var memoizedProperty = require('../util').memoizedProperty;
 
 function memoize(name, value, fn, nameTr) {
@@ -2127,7 +2132,7 @@ function Collection(iterable, options, fn, nameTr) {
 
 module.exports = Collection;
 
-},{"../util":56}],22:[function(require,module,exports){
+},{"../util":57}],22:[function(require,module,exports){
 var Shape = require('./shape');
 
 var util = require('../util');
@@ -2181,7 +2186,7 @@ function Operation(name, operation, options) {
 
 module.exports = Operation;
 
-},{"../util":56,"./shape":25}],23:[function(require,module,exports){
+},{"../util":57,"./shape":25}],23:[function(require,module,exports){
 var property = require('../util').property;
 
 function Paginator(name, paginator) {
@@ -2194,7 +2199,7 @@ function Paginator(name, paginator) {
 
 module.exports = Paginator;
 
-},{"../util":56}],24:[function(require,module,exports){
+},{"../util":57}],24:[function(require,module,exports){
 var util = require('../util');
 var property = util.property;
 
@@ -2245,7 +2250,7 @@ function ResourceWaiter(name, waiter, options) {
 
 module.exports = ResourceWaiter;
 
-},{"../util":56}],25:[function(require,module,exports){
+},{"../util":57}],25:[function(require,module,exports){
 var Collection = require('./collection');
 
 var util = require('../util');
@@ -2583,7 +2588,7 @@ Shape.shapes = {
 
 module.exports = Shape;
 
-},{"../util":56,"./collection":21}],26:[function(require,module,exports){
+},{"../util":57,"./collection":21}],26:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -2877,7 +2882,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":18,"../json/parser":19,"../util":56}],28:[function(require,module,exports){
+},{"../json/builder":18,"../json/parser":19,"../util":57}],28:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var QueryParamSerializer = require('../query/query_param_serializer');
@@ -2973,7 +2978,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":3,"../model/shape":25,"../query/query_param_serializer":32,"../util":56}],29:[function(require,module,exports){
+},{"../core":3,"../model/shape":25,"../query/query_param_serializer":32,"../util":57}],29:[function(require,module,exports){
 var util = require('../util');
 
 function populateMethod(req) {
@@ -3104,7 +3109,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../util":56}],30:[function(require,module,exports){
+},{"../util":57}],30:[function(require,module,exports){
 var util = require('../util');
 var Rest = require('./rest');
 var Json = require('./json');
@@ -3172,7 +3177,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":18,"../json/parser":19,"../util":56,"./json":27,"./rest":29}],31:[function(require,module,exports){
+},{"../json/builder":18,"../json/parser":19,"../util":57,"./json":27,"./rest":29}],31:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var Rest = require('./rest');
@@ -3260,7 +3265,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":3,"../util":56,"./rest":29}],32:[function(require,module,exports){
+},{"../core":3,"../util":57,"./rest":29}],32:[function(require,module,exports){
 var util = require('../util');
 
 function QueryParamSerializer() {
@@ -3342,7 +3347,7 @@ function serializeMember(name, value, rules, fn) {
 
 module.exports = QueryParamSerializer;
 
-},{"../util":56}],33:[function(require,module,exports){
+},{"../util":57}],33:[function(require,module,exports){
 var util = require('./util');
 var regionConfig = require('./region_config.json');
 
@@ -3404,7 +3409,7 @@ function configureEndpoint(service) {
 
 module.exports = configureEndpoint;
 
-},{"./region_config.json":34,"./util":56}],34:[function(require,module,exports){
+},{"./region_config.json":34,"./util":57}],34:[function(require,module,exports){
 module.exports={
   "rules": {
     "*/*": {
@@ -3775,7 +3780,7 @@ AWS.Request = inherit({
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require("FWaASH"))
-},{"./core":3,"./state_machine":55,"FWaASH":70}],36:[function(require,module,exports){
+},{"./core":3,"./state_machine":56,"FWaASH":71}],36:[function(require,module,exports){
 
 
 var AWS = require('./core');
@@ -4447,7 +4452,7 @@ AWS.util.mixin(AWS.S3.ManagedUpload, AWS.SequentialExecutor);
 module.exports = AWS.S3.ManagedUpload;
 
 }).call(this,require("buffer").Buffer)
-},{"../core":3,"buffer":59}],39:[function(require,module,exports){
+},{"../core":3,"buffer":60}],39:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -5145,6 +5150,22 @@ AWS.util.update(AWS.MachineLearning.prototype, {
 },{"../core":3}],45:[function(require,module,exports){
 var AWS = require('../core');
 
+AWS.util.update(AWS.Route53.prototype, {
+
+  setupRequestListeners: function setupRequestListeners(request) {
+    request.on('build', this.sanitizeUrl);
+  },
+
+
+  sanitizeUrl: function sanitizeUrl(request) {
+    var path = request.httpRequest.path;
+    request.httpRequest.path = path.replace(/\/%2F\w+%2F/, '/');
+  }
+});
+
+},{"../core":3}],46:[function(require,module,exports){
+var AWS = require('../core');
+
 require('../s3/managed_upload');
 
 AWS.util.update(AWS.S3.prototype, {
@@ -5460,7 +5481,7 @@ AWS.util.update(AWS.S3.prototype, {
   }
 });
 
-},{"../core":3,"../s3/managed_upload":38}],46:[function(require,module,exports){
+},{"../core":3,"../s3/managed_upload":38}],47:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.SQS.prototype, {
@@ -5575,7 +5596,7 @@ AWS.util.update(AWS.SQS.prototype, {
   }
 });
 
-},{"../core":3}],47:[function(require,module,exports){
+},{"../core":3}],48:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.STS.prototype, {
@@ -5600,7 +5621,7 @@ AWS.util.update(AWS.STS.prototype, {
   }
 });
 
-},{"../core":3}],48:[function(require,module,exports){
+},{"../core":3}],49:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -5703,7 +5724,7 @@ AWS.Signers.Presign = inherit({
 
 module.exports = AWS.Signers.Presign;
 
-},{"../core":3}],49:[function(require,module,exports){
+},{"../core":3}],50:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -5732,7 +5753,7 @@ require('./v4');
 require('./s3');
 require('./presign');
 
-},{"../core":3,"./presign":48,"./s3":50,"./v2":51,"./v3":52,"./v3https":53,"./v4":54}],50:[function(require,module,exports){
+},{"../core":3,"./presign":49,"./s3":51,"./v2":52,"./v3":53,"./v3https":54,"./v4":55}],51:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -5889,7 +5910,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":3}],51:[function(require,module,exports){
+},{"../core":3}],52:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -5934,7 +5955,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":3}],52:[function(require,module,exports){
+},{"../core":3}],53:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6008,7 +6029,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":3}],53:[function(require,module,exports){
+},{"../core":3}],54:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6030,7 +6051,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":3,"./v3":52}],54:[function(require,module,exports){
+},{"../core":3,"./v3":53}],55:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6241,7 +6262,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":3}],55:[function(require,module,exports){
+},{"../core":3}],56:[function(require,module,exports){
 function AcceptorStateMachine(states, state) {
   this.currentState = state || null;
   this.states = states || {};
@@ -6285,7 +6306,7 @@ AcceptorStateMachine.prototype.addState = function addState(name, acceptState, f
 
 module.exports = AcceptorStateMachine;
 
-},{}],56:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 (function (process){
 
 
@@ -7022,7 +7043,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require("FWaASH"))
-},{"./core":3,"FWaASH":70,"buffer":59,"crypto":63,"querystring":74,"url":75}],57:[function(require,module,exports){
+},{"./core":3,"FWaASH":71,"buffer":60,"crypto":64,"querystring":75,"url":76}],58:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -7188,7 +7209,7 @@ function parseUnknown(xml) {
 
 module.exports = DomXmlParser;
 
-},{"../model/shape":25,"../util":56}],58:[function(require,module,exports){
+},{"../model/shape":25,"../util":57}],59:[function(require,module,exports){
 var util = require('../util');
 var builder = require('xmlbuilder');
 
@@ -7276,7 +7297,7 @@ function applyNamespaces(xml, shape) {
 
 module.exports = XmlBuilder;
 
-},{"../util":56,"xmlbuilder":80}],59:[function(require,module,exports){
+},{"../util":57,"xmlbuilder":81}],60:[function(require,module,exports){
 
 
 var base64 = require('base64-js')
@@ -8321,7 +8342,7 @@ function assert (test, message) {
   if (!test) throw new Error(message || 'Failed assertion')
 }
 
-},{"base64-js":60,"ieee754":61}],60:[function(require,module,exports){
+},{"base64-js":61,"ieee754":62}],61:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -8438,7 +8459,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],61:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -8524,7 +8545,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],62:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 var Buffer = require('buffer').Buffer;
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -8561,7 +8582,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 
 module.exports = { hash: hash };
 
-},{"buffer":59}],63:[function(require,module,exports){
+},{"buffer":60}],64:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -8659,7 +8680,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":64,"./rng":65,"./sha":66,"./sha256":67,"buffer":59}],64:[function(require,module,exports){
+},{"./md5":65,"./rng":66,"./sha":67,"./sha256":68,"buffer":60}],65:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -8806,7 +8827,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":62}],65:[function(require,module,exports){
+},{"./helpers":63}],66:[function(require,module,exports){
 (function() {
   var _global = this;
 
@@ -8836,7 +8857,7 @@ module.exports = function md5(buf) {
 
 }())
 
-},{}],66:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -8920,7 +8941,7 @@ module.exports = function sha1(buf) {
   return helpers.hash(buf, core_sha1, 20, true);
 };
 
-},{"./helpers":62}],67:[function(require,module,exports){
+},{"./helpers":63}],68:[function(require,module,exports){
 
 
 
@@ -8995,7 +9016,7 @@ module.exports = function sha256(buf) {
   return helpers.hash(buf, core_sha256, 32, true);
 };
 
-},{"./helpers":62}],68:[function(require,module,exports){
+},{"./helpers":63}],69:[function(require,module,exports){
 
 function EventEmitter() {
   this._events = this._events || {};
@@ -9259,7 +9280,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],69:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   module.exports = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor
@@ -9282,7 +9303,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],70:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 
 var process = module.exports = {};
 
@@ -9345,7 +9366,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],71:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 (function (global){
 
 ;(function(root) {
@@ -9718,7 +9739,7 @@ process.chdir = function (dir) {
 }(this));
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],72:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 
 'use strict';
 
@@ -9780,7 +9801,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],73:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 
 'use strict';
 
@@ -9847,13 +9868,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],74:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":72,"./encode":73}],75:[function(require,module,exports){
+},{"./decode":73,"./encode":74}],76:[function(require,module,exports){
 
 var punycode = require('punycode');
 
@@ -10420,14 +10441,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":71,"querystring":74}],76:[function(require,module,exports){
+},{"punycode":72,"querystring":75}],77:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],77:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 (function (process,global){
 
 var formatRegExp = /%[sdj%]/g;
@@ -10947,7 +10968,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require("FWaASH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":76,"FWaASH":70,"inherits":69}],78:[function(require,module,exports){
+},{"./support/isBuffer":77,"FWaASH":71,"inherits":70}],79:[function(require,module,exports){
 (function() {
   var XMLBuilder, XMLFragment;
 
@@ -11067,7 +11088,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLFragment":79}],79:[function(require,module,exports){
+},{"./XMLFragment":80}],80:[function(require,module,exports){
 (function() {
   var XMLFragment,
     __hasProp = {}.hasOwnProperty;
@@ -11490,7 +11511,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{}],80:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 (function() {
   var XMLBuilder;
 
@@ -11506,4 +11527,4 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLBuilder":78}]},{},[1])
+},{"./XMLBuilder":79}]},{},[1])
