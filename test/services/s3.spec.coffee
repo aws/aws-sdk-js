@@ -547,11 +547,42 @@ describe 'AWS.S3', ->
       loc = null
       s3 = new AWS.S3(region:'eu-west-1')
       s3.makeRequest = (op, params) ->
+        expect(params).to['be'].a('object')
         loc = params.CreateBucketConfiguration.LocationConstraint
       s3.createBucket(Bucket:'name')
       expect(loc).to.equal('eu-west-1')
 
-    it 'correctly builds the xml', ->
+    it 'auto-populates the LocationConstraint based on the region when using bound params', ->
+      loc = null
+      s3 = new AWS.S3(region:'eu-west-1', Bucket:'name')
+      s3.makeRequest = (op, params) ->
+        expect(params).to['be'].a('object')
+        loc = params.CreateBucketConfiguration.LocationConstraint
+      s3.createBucket(AWS.util.fn.noop)
+      expect(loc).to.equal('eu-west-1')
+
+    it 'auto-populates the LocationConstraint based on the region when using invalid params', ->
+      loc = null
+      s3 = new AWS.S3(region:'eu-west-1', Bucket:'name')
+      s3.makeRequest = (op, params) ->
+        expect(params).to['be'].a('object')
+        loc = params.CreateBucketConfiguration.LocationConstraint
+      s3.createBucket(null)
+      expect(loc).to.equal('eu-west-1')
+      s3.createBucket(undefined)
+      expect(loc).to.equal('eu-west-1')
+
+    it 'auto-populates the LocationConstraint based on the region when using invalid params and a valid callback', ->
+      loc = null
+      s3 = new AWS.S3(region:'eu-west-1', Bucket:'name')
+      s3.makeRequest = (op, params, cb) ->
+        expect(params).to['be'].a('object')
+        loc = params.CreateBucketConfiguration.LocationConstraint
+        cb() if typeof cb == 'function'
+      called = 0
+      s3.createBucket(undefined, () -> called = 1)
+      expect(loc).to.equal('eu-west-1')
+      expect(called).to.equal(1)
 
   AWS.util.each AWS.S3.prototype.computableChecksumOperations, (operation) ->
     describe operation, ->
