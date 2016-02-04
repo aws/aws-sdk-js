@@ -52,7 +52,7 @@ function build(options, callback) {
     options = {};
   }
 
-  var img = require('browserify/node_modules/insert-module-globals');
+  var img = require('insert-module-globals');
   img.vars.process = function() { return '{browser:true}'; };
 
   if (options.services) process.env.AWS_SERVICES = options.services;

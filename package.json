@@ -24,7 +24,8 @@
       "mocha": "*",
       "chai": "*",
       "istanbul": "*",
-      "coveralls": "2.x"
+      "coveralls": "2.x",
+      "insert-module-globals": "^7.0.0"
     },
     "dependencies": {
       "sax": "0.5.3",
