@@ -612,13 +612,22 @@ describe 'AWS.XML.Parser', ->
         error = e
       expect(error.code).to.equal('XMLParserError')
 
-    if AWS.util.isNode()
-      it 'throws an error when xml is incomplete or does not close all tags', ->
-        xml = '<Content><Member>MemberText</Member><Subcontent><Submember>SubMemberText'
-        rules = {}
-        error = {}
-        try
-          new AWS.XML.Parser().parse(xml, rules)
-        catch e
-          error = e
-        expect(error.code).to.equal('XMLParserError')
+    it 'throws an error when xml is incomplete or does not close all tags', ->
+      xml = '<Content><Member>MemberText</Member><Subcontent><Submember>SubMemberText'
+      rules = {}
+      error = {}
+      try
+        new AWS.XML.Parser().parse(xml, rules)
+      catch e
+        error = e
+      expect(error.code).to.equal('XMLParserError')
+
+    it 'xml parser errors are retryable', ->
+      xml = '<Content><Member>MemberText</Member><Subcontent><Submember>SubMemberText'
+      rules = {}
+      error = {}
+      try
+        new AWS.XML.Parser().parse(xml, rules)
+      catch e
+        error = e
+      expect(error.retryable).to.be.true
