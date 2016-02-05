@@ -29,7 +29,7 @@
     },
     "dependencies": {
       "sax": "0.5.3",
-      "xml2js": "0.2.8",
+      "xml2js": "0.4.9",
       "xmlbuilder": "0.4.2"
     },
     "main": "lib/aws.js",
