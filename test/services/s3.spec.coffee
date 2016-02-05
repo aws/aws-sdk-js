@@ -713,6 +713,18 @@ describe 'AWS.S3', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', Body: 'body')
       expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Content-MD5=hBotaJrYa9FhFEdFPCLG%2FA%3D%3D&Expires=900&Signature=4ycA2tpHKxfFnNCdqnK1d5BG8gc%3D&x-amz-security-token=session')
 
+    it 'gets a signed URL for putObject with a sse-c algorithm', ->
+      s3 = new AWS.S3
+        signatureVersion: 'v4'
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', SSECustomerAlgorithm: 'AES256')
+      expect(url).to.equal('https://bucket.s3.mock-region.amazonaws.com/key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fmock-region%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=60b08f91f820fa1c698ac477fec7b5e3cec7b682e09e769e1a55a4d5a3b99077&X-Amz-SignedHeaders=host%3Bx-amz-server-side-encryption-customer-algorithm&x-amz-server-side-encryption-customer-algorithm=AES256');
+
+    it 'gets a signed URL for putObject with a sse-c key', ->
+      s3 = new AWS.S3
+        signatureVersion: 'v4'
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', SSECustomerAlgorithm: 'AES256', SSECustomerKey: 'c2FtcGxlIGtleXNhbXBsZSBrZXlzYW1wbGUga2V5c2E=')
+      expect(url).to.equal('https://bucket.s3.mock-region.amazonaws.com/key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fmock-region%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=e4f57734798fdadc0b2b43ca5a5e1f28824786c3ac74c30d7abb77d6ef59b0da&X-Amz-SignedHeaders=host%3Bx-amz-server-side-encryption-customer-algorithm%3Bx-amz-server-side-encryption-customer-key%3Bx-amz-server-side-encryption-customer-key-md5&x-amz-server-side-encryption-customer-algorithm=AES256&x-amz-server-side-encryption-customer-key=YzJGdGNHeGxJR3RsZVhOaGJYQnNaU0JyWlhsellXMXdiR1VnYTJWNWMyRT0%3D&x-amz-server-side-encryption-customer-key-MD5=VzaXhwL7H9upBc%2Fb9UqH8g%3D%3D');
+
     it 'gets a signed URL for putObject with CacheControl', ->
       s3 = new AWS.S3
         signatureVersion: 'v4'
