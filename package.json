@@ -28,9 +28,9 @@
       "insert-module-globals": "^7.0.0"
     },
     "dependencies": {
-      "sax": "0.5.3",
-      "xml2js": "0.2.8",
-      "xmlbuilder": "0.4.2"
+      "sax": "1.1.5",
+      "xml2js": "0.4.16",
+      "xmlbuilder": "4.2.1"
     },
     "main": "lib/aws.js",
     "browser": "lib/browser.js",
