@@ -14,6 +14,7 @@ dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
 dynamodbstreams = new AWS.DynamoDBStreams(AWS.util.merge(config, config.dynamodbstreams))
 ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
+inspector = new AWS.Inspector(AWS.util.merge(config, config.inspector))
 kinesis = new AWS.Kinesis(AWS.util.merge(config, config.kinesis))
 lambda = new AWS.Lambda(AWS.util.merge(config, config.lambda))
 mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobileanalytics))
@@ -270,6 +271,19 @@ integrationTests ->
         noData(data)
         assertError(err, 'UnknownError')
         matchError(err, 'The specified job was not found')
+        done()
+
+  describe 'AWS.Inspector', ->
+    it 'makes a request', (done) ->
+      inspector.listApplications (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.applicationArnList)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      inspector.describeApplication {applicationArn: 'fake-arn'}, (err, data) ->
+        noData(data)
+        assertError(err, 'InvalidInputException')
         done()
 
   describe 'AWS.Kinesis', ->
