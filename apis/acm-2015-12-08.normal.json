@@ -10,7 +10,7 @@
     "targetPrefix":"CertificateManager",
     "protocol":"json"
   },
-  "documentation":"<fullname>AWS Certificate Manager</fullname> <p>Welcome to the AWS Certificate Manager (ACM) CLI Command Reference. This guide provides descriptions, syntax, and usage examples for each ACM CLI command. You can use AWS Certificate Manager to request ACM Certificates for your AWS-based websites and applications. For general information about using ACM and for more information about using the console, see the <a href=\"url-acm-ug;acm-overview.html\">AWS Certificate Manager User Guide</a>. For more information about using the ACM API, see the <a href=\"http://docs.aws.amazon.com/acm/latest/APIReference/Welcome.html\"> AWS Certificate Manager API Reference</a>. </p>",
+  "documentation":"<fullname>AWS Certificate Manager</fullname> <p>Welcome to the AWS Certificate Manager (ACM) Command Reference. This guide provides descriptions, syntax, and usage examples for each ACM command. You can use AWS Certificate Manager to request ACM Certificates for your AWS-based websites and applications. For general information about using ACM and for more information about using the console, see the <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html\">AWS Certificate Manager User Guide</a>. For more information about using the ACM API, see the <a href=\"http://docs.aws.amazon.com/acm/latest/APIReference/Welcome.html\"> AWS Certificate Manager API Reference</a>. </p>",
   "operations":{
     "DeleteCertificate":{
       "name":"DeleteCertificate",
@@ -499,7 +499,7 @@
         },
         "DomainValidationOptions":{
           "shape":"DomainValidationOptionList",
-          "documentation":"<p> The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>www.example.com</code> and specify <b>DomainValidationOptions</b> of <code>example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses: <ul> <li>admin@example.com</li> <li>administrator@example.com</li> <li>hostmaster@example.com</li> <li>postmaster@example.com</li> <li>webmaster@example.com</li> </ul> </p>"
+          "documentation":"<p> The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>test.example.com</code> and specify <b>DomainValidationOptions</b> of <code>example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses: <ul> <li>admin@example.com</li> <li>administrator@example.com</li> <li>hostmaster@example.com</li> <li>postmaster@example.com</li> <li>webmaster@example.com</li> </ul> </p>"
         }
       }
     },
