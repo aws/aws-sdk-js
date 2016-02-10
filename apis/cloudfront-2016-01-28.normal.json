@@ -2976,13 +2976,17 @@
     "ViewerCertificate":{
       "type":"structure",
       "members":{
-        "Certificate":{
-          "shape":"string",
-          "documentation":"If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), you can use your own IAM or ACM certificate. For ACM, set to the ACM certificate ARN. For IAM, set to the IAM certificate identifier."
+        "CloudFrontDefaultCertificate":{
+          "shape":"boolean",
+          "documentation":"If you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg), set to true. Omit this value if you are setting an ACMCertificateArn or IAMCertificateId."
         },
-        "CertificateSource":{
-          "shape":"CertificateSource",
-          "documentation":"If you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg), set to \"cloudfront\". If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), you can use your own IAM or ACM certificate. To use an ACM certificate, set to \"acm\" and update the Certificate to the ACM certificate ARN. To use an IAM certificate, set to \"iam\" and update the Certificate to the IAM certificate identifier."
+        "IAMCertificateId":{
+          "shape":"string",
+          "documentation":"If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), specify the IAM certificate identifier of the custom viewer certificate for this distribution. Specify either this value, ACMCertificateArn, or CloudFrontDefaultCertificate."
+        },
+        "ACMCertificateArn":{
+          "shape":"string",
+          "documentation":"If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), specify the ACM certificate ARN of the custom viewer certificate for this distribution. Specify either this value, IAMCertificateId, or CloudFrontDefaultCertificate."
         },
         "SSLSupportMethod":{
           "shape":"SSLSupportMethod",
@@ -2992,14 +2996,14 @@
           "shape":"MinimumProtocolVersion",
           "documentation":"Specify the minimum version of the SSL protocol that you want CloudFront to use, SSLv3 or TLSv1, for HTTPS connections. CloudFront will serve your objects only to browsers or devices that support at least the SSL version that you specify. The TLSv1 protocol is more secure, so we recommend that you specify SSLv3 only if your users are using browsers or devices that don't support TLSv1. If you're using a custom certificate (if you specify a value for IAMCertificateId) and if you're using dedicated IP (if you specify vip for SSLSupportMethod), you can choose SSLv3 or TLSv1 as the MinimumProtocolVersion. If you're using a custom certificate (if you specify a value for IAMCertificateId) and if you're using SNI (if you specify sni-only for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion."
         },
-        "IAMCertificateId":{
+        "Certificate":{
           "shape":"string",
-          "documentation":"Note: this field is deprecated. Please use \"iam\" as CertificateSource and specify the IAM certificate Id as the Certificate. If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), specify the IAM certificate identifier of the custom viewer certificate for this distribution. Specify either this value or CloudFrontDefaultCertificate.",
+          "documentation":"Note: this field is deprecated. Please use one of [ACMCertificateArn, IAMCertificateId, CloudFrontDefaultCertificate].",
           "deprecated":true
         },
-        "CloudFrontDefaultCertificate":{
-          "shape":"boolean",
-          "documentation":"Note: this field is deprecated. Please use \"cloudfront\" as CertificateSource and omit specifying a Certificate. If you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg), set to true. Omit this value if you are setting an IAMCertificateId.",
+        "CertificateSource":{
+          "shape":"CertificateSource",
+          "documentation":"Note: this field is deprecated. Please use one of [ACMCertificateArn, IAMCertificateId, CloudFrontDefaultCertificate].",
           "deprecated":true
         }
       },
