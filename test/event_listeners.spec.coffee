@@ -353,6 +353,27 @@ describe 'AWS.EventListeners', ->
       makeRequest(->)
       expect(delays).to.eql([30, 60, 120])
 
+    it 'retries with falloff using custom base', ->
+      service.config.update(retryDelayOptions: {base: 100})
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      makeRequest(->)
+      expect(delays).to.eql([100, 200, 400])
+
+    it 'retries with falloff using custom backoff', ->
+      service.config.update(retryDelayOptions: {customBackoff: (retryCount) -> 2 * retryCount })
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      makeRequest(->)
+      expect(delays).to.eql([0, 2, 4])
+
+    it 'retries with falloff using custom backoff instead of base', ->
+      service.config.update(retryDelayOptions: {base: 100, customBackoff: (retryCount) -> 2 * retryCount })
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      makeRequest(->)
+      expect(delays).to.eql([0, 2, 4])
+
     it 'uses retry from error.retryDelay property', ->
       helpers.mockHttpResponse
         code: 'NetworkingError', message: 'Cannot connect'
