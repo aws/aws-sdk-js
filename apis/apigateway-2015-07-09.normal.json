@@ -3646,6 +3646,12 @@
           "location":"querystring",
           "locationName":"limit",
           "documentation":"<p>The maximum number of <a>Resource</a> resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.</p>"
+        },
+        "embed":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"embed",
+          "documentation":"<p>Embeds methods for <a>RestApi</a> resources.</p>"
         }
       },
       "documentation":"<p>Request to list information about a collection of resources.</p>"
