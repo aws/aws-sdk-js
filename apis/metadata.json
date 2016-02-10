@@ -118,6 +118,9 @@
   "firehose": {
     "name": "Firehose"
   },
+  "gamelift": {
+    "name": "GameLift"
+  },
   "glacier": {
     "name": "Glacier"
   },
