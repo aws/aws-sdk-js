@@ -27,8 +27,9 @@ describe 'AWS.DynamoDB', ->
   describe 'retryDelays', ->
 
     it 'has a custom backoff function', ->
-      delays = [ 0, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800 ]
-      expect(ddb().retryDelays()).to.eql(delays)
+      expectedDelays = [ 0, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800 ]
+      actualDelays = (ddb().retryDelays(i) for i in [0..ddb().numRetries()-1])
+      expect(actualDelays).to.eql(expectedDelays)
 
   describe 'CRC32 check', ->
     dynamo = null
