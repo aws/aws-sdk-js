@@ -58,6 +58,12 @@ describe 'AWS.Config', ->
     it 'can be set to an integer', ->
       expect(configure(maxRetries: 2).maxRetries).to.equal(2)
 
+  describe 'retryDelayOptions', ->
+    it 'defaults to "base: 100"', ->
+      expect(configure().retryDelayOptions).to.eql({base: 100})
+    it 'can set "base" to an integer', ->
+      expect(configure(retryDelayOptions: {base: 30}).retryDelayOptions).to.eql({base: 30})
+
   describe 'paramValidation', ->
     it 'defaults to true', ->
       expect(configure().paramValidation).to.equal(true)

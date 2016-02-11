@@ -5,9 +5,10 @@ MockService = helpers.MockService
 describe 'AWS.EventListeners', ->
 
   oldSetTimeout = setTimeout
+  oldMathRandom = Math.random
   config = null; service = null; totalWaited = null; delays = []
   successHandler = null; errorHandler = null; completeHandler = null
-  retryHandler = null
+  retryHandler = null; randomValues = []
 
   beforeEach ->
     # Mock the timer manually
@@ -22,6 +23,15 @@ describe 'AWS.EventListeners', ->
     service = new MockService(maxRetries: 3)
     service.config.credentials = AWS.util.copy(service.config.credentials)
 
+    #Mock the random method
+    `Math.random = helpers.createSpy('random');`
+    Math.random.andCallFake () ->
+      val = oldMathRandom()
+      randomValues.push(val)
+      val
+
+    randomValues = []
+
     # Helpful handlers
     successHandler = helpers.createSpy('success')
     errorHandler = helpers.createSpy('error')
@@ -29,7 +39,7 @@ describe 'AWS.EventListeners', ->
     retryHandler = helpers.createSpy('retry')
 
   # Safely tear down setTimeout hack
-  afterEach -> `setTimeout = oldSetTimeout`
+  afterEach -> `setTimeout = oldSetTimeout; Math.random = oldMathRandom`
 
   makeRequest = (callback) ->
     request = service.makeRequest('mockMethod', foo: 'bar')
@@ -351,7 +361,32 @@ describe 'AWS.EventListeners', ->
       helpers.mockHttpResponse
         code: 'NetworkingError', message: 'Cannot connect'
       makeRequest(->)
-      expect(delays).to.eql([30, 60, 120])
+      baseDelays = [100, 200, 400]
+      expectedDelays = ((baseDelays[i] * randomValues[i]) for i in [0..service.numRetries()-1])
+      expect(delays).to.eql(expectedDelays)
+
+    it 'retries with falloff using custom base', ->
+      service.config.update(retryDelayOptions: {base: 30})
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      makeRequest(->)
+      baseDelays = [30, 60, 120]
+      expectedDelays = ((baseDelays[i] * randomValues[i]) for i in [0..service.numRetries()-1])
+      expect(delays).to.eql(expectedDelays)
+
+    it 'retries with falloff using custom backoff', ->
+      service.config.update(retryDelayOptions: {customBackoff: (retryCount) -> 2 * retryCount })
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      makeRequest(->)
+      expect(delays).to.eql([0, 2, 4])
+
+    it 'retries with falloff using custom backoff instead of base', ->
+      service.config.update(retryDelayOptions: {base: 100, customBackoff: (retryCount) -> 2 * retryCount })
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      makeRequest(->)
+      expect(delays).to.eql([0, 2, 4])
 
     it 'uses retry from error.retryDelay property', ->
       helpers.mockHttpResponse
@@ -377,7 +412,9 @@ describe 'AWS.EventListeners', ->
 
       response = makeRequest(->)
 
-      expect(totalWaited).to.equal(90)
+      baseDelays = [100, 200]
+      expectedDelays = ((baseDelays[i] * randomValues[i]) for i in [0..delays.length-1])
+      expect(totalWaited).to.equal(expectedDelays.reduce (a, b) -> a + b)
       expect(response.retryCount).to.be.lessThan(service.config.maxRetries)
       expect(response.data).to.equal('foo')
       expect(errorHandler.calls.length).to.equal(0)
