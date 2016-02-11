@@ -16,6 +16,7 @@ ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 inspector = new AWS.Inspector(AWS.util.merge(config, config.inspector))
 kinesis = new AWS.Kinesis(AWS.util.merge(config, config.kinesis))
+kms = new AWS.KMS(AWS.util.merge(config, config.kms))
 lambda = new AWS.Lambda(AWS.util.merge(config, config.lambda))
 mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobileanalytics))
 machinelearning = new AWS.MachineLearning(AWS.util.merge(config, config.machinelearning))
@@ -298,6 +299,19 @@ integrationTests ->
         noData(data)
         assertError(err, 'ResourceNotFoundException')
         matchError(err, 'Stream fake-stream under account')
+        done()
+
+  describe 'AWS.KMS', ->
+    it 'lists keys', (done) ->
+      kms.listKeys (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Keys)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      kms.createAlias {AliasName: 'fake-alias', TargetKeyId: 'non-existent'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ValidationException')
         done()
 
   describe 'AWS.Lambda', ->
