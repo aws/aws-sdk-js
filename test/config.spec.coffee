@@ -94,6 +94,10 @@ describe 'AWS.Config', ->
     it 'defaults to null', ->
       expect(configure().customUserAgent).to.equal(null)
 
+  describe 'useAccelerateEndpoint', ->
+    it 'defaults to false', ->
+      expect(configure().useAccelerateEndpoint).to.equal(false)
+
   describe 'set', ->
     it 'should set a default value for a key', ->
       config = new AWS.Config()

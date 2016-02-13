@@ -95,6 +95,33 @@ describe 'AWS.S3', ->
       req = s3.listBuckets().build()
       expect(req.response.error.code).to.equal('ConfigError')
 
+    describe 'with useAccelerateEndpoint set to true', ->
+      beforeEach ->
+        s3 = new AWS.S3(useAccelerateEndpoint: true)
+
+      it 'changes the hostname to use s3-accelerate for dns-comaptible buckets', ->
+        req = build('getObject', {Bucket: 'foo', Key: 'bar'})
+        expect(req.endpoint.hostname).to.equal('foo.s3-accelerate.amazonaws.com')
+
+      it 'overrides s3BucketEndpoint configuration when s3BucketEndpoint is set', ->
+        s3 = new AWS.S3(useAccelerateEndpoint: true, s3BucketEndpoint: true, endpoint: 'foo.region.amazonaws.com')
+        req = build('getObject', {Bucket: 'foo', Key: 'baz'})
+        expect(req.endpoint.hostname).to.equal('foo.s3-accelerate.amazonaws.com')
+
+      describe 'does not use s3-accelerate', ->
+        it 'on dns-incompatible buckets', ->
+          req = build('getObject', {Bucket: 'foo.baz', Key: 'bar'})
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+
+        it 'on excluded operations', ->
+          req = build('listBuckets')
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+          req = build('createBucket', {Bucket: 'foo'})
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+          req = build('deleteBucket', {Bucket: 'foo'})
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+
+
     describe 'uri escaped params', ->
       it 'uri-escapes path and querystring params', ->
         # bucket param ends up as part of the hostname
