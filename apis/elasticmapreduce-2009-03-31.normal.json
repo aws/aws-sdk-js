@@ -361,6 +361,7 @@
       "member":{"shape":"Application"}
     },
     "Boolean":{"type":"boolean"},
+    "BooleanObject":{"type":"boolean"},
     "BootstrapActionConfig":{
       "type":"structure",
       "required":[
@@ -703,6 +704,68 @@
       "type":"list",
       "member":{"shape":"InstanceId"}
     },
+    "EbsBlockDevice":{
+      "type":"structure",
+      "members":{
+        "VolumeSpecification":{
+          "shape":"VolumeSpecification",
+          "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+        },
+        "Device":{
+          "shape":"String",
+          "documentation":"<p>The device name that is exposed to the instance, such as /dev/sdh.</p>"
+        }
+      },
+      "documentation":"<p>Configuration of requested EBS block device associated with the instance group.</p>"
+    },
+    "EbsBlockDeviceConfig":{
+      "type":"structure",
+      "required":["VolumeSpecification"],
+      "members":{
+        "VolumeSpecification":{
+          "shape":"VolumeSpecification",
+          "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+        },
+        "VolumesPerInstance":{
+          "shape":"Integer",
+          "documentation":"<p>Number of EBS volumes with specific volume configuration, that will be associated with every instance in the instance group </p>"
+        }
+      },
+      "documentation":"<p>Configuration of requested EBS block device associated with the instance group with count of volumes that will be associated to every instance.</p>"
+    },
+    "EbsBlockDeviceConfigList":{
+      "type":"list",
+      "member":{"shape":"EbsBlockDeviceConfig"}
+    },
+    "EbsBlockDeviceList":{
+      "type":"list",
+      "member":{"shape":"EbsBlockDevice"}
+    },
+    "EbsConfiguration":{
+      "type":"structure",
+      "members":{
+        "EbsBlockDeviceConfigs":{"shape":"EbsBlockDeviceConfigList"},
+        "EbsOptimized":{"shape":"BooleanObject"}
+      }
+    },
+    "EbsVolume":{
+      "type":"structure",
+      "members":{
+        "Device":{
+          "shape":"String",
+          "documentation":"<p>The device name that is exposed to the instance, such as /dev/sdh.</p>"
+        },
+        "VolumeId":{
+          "shape":"String",
+          "documentation":"<p>The volume identifier of the EBS volume.</p>"
+        }
+      },
+      "documentation":"<p>EBS block device that's attached to an EC2 instance.</p>"
+    },
+    "EbsVolumeList":{
+      "type":"list",
+      "member":{"shape":"EbsVolume"}
+    },
     "Ec2InstanceAttributes":{
       "type":"structure",
       "members":{
@@ -826,6 +889,14 @@
         "Status":{
           "shape":"InstanceStatus",
           "documentation":"<p>The current status of the instance.</p>"
+        },
+        "InstanceGroupId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the instance group to which this instance belongs.</p>"
+        },
+        "EbsVolumes":{
+          "shape":"EbsVolumeList",
+          "documentation":"<p>The list of EBS volumes that are attached to this instance.</p>"
         }
       },
       "documentation":"<p>Represents an EC2 instance provisioned as part of cluster.</p>"
@@ -872,6 +943,14 @@
         "Configurations":{
           "shape":"ConfigurationList",
           "documentation":"<note><p>Amazon EMR releases 4.x or later.</p></note> <p>The list of configurations supplied for an EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).</p>"
+        },
+        "EbsBlockDevices":{
+          "shape":"EbsBlockDeviceList",
+          "documentation":"<p>The EBS block devices that are mapped to this instance group.</p>"
+        },
+        "EbsOptimized":{
+          "shape":"BooleanObject",
+          "documentation":"<p>If the instance group is EBS-optimized. An Amazon EBS–optimized instance uses an optimized configuration stack and provides additional, dedicated capacity for Amazon EBS I/O. </p>"
         }
       },
       "documentation":"<p>This entity represents an instance group, which is a group of instances that have common purpose. For example, CORE instance group is used for HDFS.</p>"
@@ -911,6 +990,10 @@
         "Configurations":{
           "shape":"ConfigurationList",
           "documentation":"<note><p>Amazon EMR releases 4.x or later.</p></note> <p>The list of configurations supplied for an EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).</p>"
+        },
+        "EbsConfiguration":{
+          "shape":"EbsConfiguration",
+          "documentation":"<p>EBS configurations that will be attached to each Amazon EC2 instance in the instance group. </p>"
         }
       },
       "documentation":"<p>Configuration defining a new instance group.</p>"
@@ -2140,6 +2223,28 @@
         }
       },
       "documentation":"<p> Input to the <a>TerminateJobFlows</a> operation. </p>"
+    },
+    "VolumeSpecification":{
+      "type":"structure",
+      "required":[
+        "VolumeType",
+        "SizeInGB"
+      ],
+      "members":{
+        "VolumeType":{
+          "shape":"String",
+          "documentation":"<p>The volume type. Volume types supported are gp2, io1, standard. </p>"
+        },
+        "Iops":{
+          "shape":"Integer",
+          "documentation":"<p>The number of I/O operations per second (IOPS) that the volume supports. </p>"
+        },
+        "SizeInGB":{
+          "shape":"Integer",
+          "documentation":"<p>The volume size, in gibibytes (GiB). This can be a number from 1 – 1024. If the volume type is EBS-optimized, the minimum value is 10. </p>"
+        }
+      },
+      "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster. </p>"
     },
     "XmlString":{
       "type":"string",
