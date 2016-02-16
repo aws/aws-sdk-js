@@ -16,7 +16,7 @@
       "repl.history": "*",
       "semver": "*",
       "coffee-script": "1.6.3",
-      "eslint": "*",
+      "eslint": "1.x",
       "cucumber": "*",
       "coffeeify": "*",
       "browserify": "3.x",
