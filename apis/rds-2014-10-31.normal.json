@@ -1359,7 +1359,7 @@
         {"shape":"KMSKeyNotAccessibleFault"},
         {"shape":"DBSecurityGroupNotFoundFault"}
       ],
-      "documentation":"<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration, but in a system chosen availability zone with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment. </p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS does not allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
+      "documentation":"<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration with the default security group and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment. </p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS does not allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
     },
     "RestoreDBInstanceToPointInTime":{
       "name":"RestoreDBInstanceToPointInTime",
@@ -1392,7 +1392,7 @@
         {"shape":"KMSKeyNotAccessibleFault"},
         {"shape":"DBSecurityGroupNotFoundFault"}
       ],
-      "documentation":"<p> Restores a DB instance to an arbitrary point-in-time. Users can restore to any point in time before the LatestRestorableTime for up to BackupRetentionPeriod days. The target database is created with the most of original configuration, but in a system chosen availability zone with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment. </p>"
+      "documentation":"<p> Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p> The target database is created with most of the original configuration, but in a system-selected availability zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment. </p>"
     },
     "RevokeDBSecurityGroupIngress":{
       "name":"RevokeDBSecurityGroupIngress",
@@ -1775,6 +1775,10 @@
           "shape":"String",
           "documentation":"<p> The identifier for the copied snapshot. </p> <p>Constraints:</p> <ul> <li>Cannot be null, empty, or blank</li> <li>Must contain from 1 to 255 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul> <p>Example: <code>my-db-snapshot</code></p>"
         },
+        "KmsKeyId":{
+          "shape":"String",
+          "documentation":"<p>The AWS Key Management Service (AWS KMS) key identifier for an encrypted DB snapshot. The KMS key identifier is the Amazon Resource Name (ARN) or the KMS key alias for the KMS encryption key. </p> <p>If you copy an unencrypted DB snapshot and specify a value for the <code>KmsKeyId</code> parameter, Amazon RDS encrypts the target DB snapshot using the specified KMS encryption key.</p> <p>If you copy an encrypted DB snapshot from your AWS account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you don't specify a value for <code>KmsKeyId</code> then the copy of the DB snapshot is encrypted with the same KMS key as the source DB snapshot. </p> <p>If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for <code>KmsKeyId</code>.</p>"
+        },
         "Tags":{"shape":"TagList"},
         "CopyTags":{
           "shape":"BooleanOptional",
@@ -2058,7 +2062,7 @@
         },
         "Iops":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. </p> <p> Constraints: To use PIOPS, this value must be an integer greater than 1000.</p>"
+          "documentation":"<p> The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. </p> <p>Constraints: Must be a multiple between 3 and 10 of the storage amount for the DB instance. Must also be an integer multiple of 1000. For example, if the size of your DB instance is 500 GB, then your <code>Iops</code> value can be 2000, 3000, 4000, or 5000. </p>"
         },
         "OptionGroupName":{
           "shape":"String",
@@ -2481,7 +2485,7 @@
         },
         "DbClusterResourceId":{
           "shape":"String",
-          "documentation":"<p>If <code>StorageEncrypted</code> is true, the region-unique, immutable identifier for the encrypted DB cluster. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB cluster is accessed. </p>"
+          "documentation":"<p>The region-unique, immutable identifier for the DB cluster. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB cluster is accessed. </p>"
         }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions: </p> <ul> <li> <a>CreateDBCluster</a> </li> <li> <a>DeleteDBCluster</a> </li> <li> <a>FailoverDBCluster</a> </li> <li> <a>ModifyDBCluster</a> </li> <li> <a>RestoreDBClusterFromSnapshot</a> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action.</p>",
@@ -2999,7 +3003,7 @@
         },
         "DbiResourceId":{
           "shape":"String",
-          "documentation":"<p> If <code>StorageEncrypted</code> is true, the region-unique, immutable identifier for the encrypted DB instance. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB instance is accessed. </p>"
+          "documentation":"<p>The region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB instance is accessed. </p>"
         },
         "CACertificateIdentifier":{
           "shape":"String",
@@ -5629,7 +5633,7 @@
         },
         "Status":{
           "shape":"String",
-          "documentation":"<p> The status of the DB instance's option group membership (e.g. in-sync, pending, pending-maintenance, applying). </p>"
+          "documentation":"<p>The status of the DB instance's option group membership. Valid values are: <code>in-sync</code>, <code>pending-apply</code>, <code>pending-removal</code>, <code>pending-maintenance-apply</code>, <code>pending-maintenance-removal</code>, <code>applying</code>, <code>removing</code>, and <code>failed</code>. </p>"
         }
       },
       "documentation":"<p> Provides information on the option groups the DB instance is a member of. </p>"
