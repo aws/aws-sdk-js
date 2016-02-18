@@ -7,6 +7,7 @@ try
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
 cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs))
 cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
+codecommit = new AWS.CodeCommit(AWS.util.merge(config, config.codecommit))
 codepipeline = new AWS.CodePipeline(AWS.util.merge(config, config.codepipeline))
 cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
 devicefarm = new AWS.DeviceFarm(AWS.util.merge(config, config.devicefarm))
@@ -148,6 +149,21 @@ integrationTests ->
         matchError(err, 'The specified log group does not exist')
         noData(data)
         done()
+
+    describe 'AWS.CodeCommit', ->
+      it 'makes a request', (done) ->
+        codecommit.listRepositories {}, (err, data) ->
+          noError(err)
+          expect(Array.isArray(data.repositories)).to.equal(true)
+          done()
+
+      it 'handles errors', (done) ->
+        params =
+          repositoryName: 'fake-repo'
+        codecommit.listBranches params, (err, data) ->
+          assertError(err, 'RepositoryDoesNotExistException')
+          noData(data)
+          done()
 
   describe 'AWS.CodePipeline', ->
     it 'makes a request', (done) ->
