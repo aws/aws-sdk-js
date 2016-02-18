@@ -29,6 +29,24 @@
       ],
       "documentation":"<p>Adds tags to on-premises instances.</p>"
     },
+    "BatchGetApplicationRevisions":{
+      "name":"BatchGetApplicationRevisions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchGetApplicationRevisionsInput"},
+      "output":{"shape":"BatchGetApplicationRevisionsOutput"},
+      "errors":[
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"ApplicationNameRequiredException"},
+        {"shape":"InvalidApplicationNameException"},
+        {"shape":"RevisionRequiredException"},
+        {"shape":"InvalidRevisionException"},
+        {"shape":"BatchLimitExceededException"}
+      ],
+      "documentation":"<p>Gets information about one or more application revisions.</p>"
+    },
     "BatchGetApplications":{
       "name":"BatchGetApplications",
       "http":{
@@ -40,9 +58,28 @@
       "errors":[
         {"shape":"ApplicationNameRequiredException"},
         {"shape":"InvalidApplicationNameException"},
-        {"shape":"ApplicationDoesNotExistException"}
+        {"shape":"ApplicationDoesNotExistException"},
+        {"shape":"BatchLimitExceededException"}
       ],
       "documentation":"<p>Gets information about one or more applications.</p>"
+    },
+    "BatchGetDeploymentInstances":{
+      "name":"BatchGetDeploymentInstances",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchGetDeploymentInstancesInput"},
+      "output":{"shape":"BatchGetDeploymentInstancesOutput"},
+      "errors":[
+        {"shape":"DeploymentIdRequiredException"},
+        {"shape":"DeploymentDoesNotExistException"},
+        {"shape":"InstanceIdRequiredException"},
+        {"shape":"InvalidDeploymentIdException"},
+        {"shape":"InvalidInstanceNameException"},
+        {"shape":"BatchLimitExceededException"}
+      ],
+      "documentation":"<p>Gets information about one or more instances that are part of a deployment group.</p>"
     },
     "BatchGetDeployments":{
       "name":"BatchGetDeployments",
@@ -54,7 +91,8 @@
       "output":{"shape":"BatchGetDeploymentsOutput"},
       "errors":[
         {"shape":"DeploymentIdRequiredException"},
-        {"shape":"InvalidDeploymentIdException"}
+        {"shape":"InvalidDeploymentIdException"},
+        {"shape":"BatchLimitExceededException"}
       ],
       "documentation":"<p>Gets information about one or more deployments.</p>"
     },
@@ -68,7 +106,8 @@
       "output":{"shape":"BatchGetOnPremisesInstancesOutput"},
       "errors":[
         {"shape":"InstanceNameRequiredException"},
-        {"shape":"InvalidInstanceNameException"}
+        {"shape":"InvalidInstanceNameException"},
+        {"shape":"BatchLimitExceededException"}
       ],
       "documentation":"<p>Gets information about one or more on-premises instances.</p>"
     },
@@ -151,7 +190,10 @@
         {"shape":"DeploymentConfigDoesNotExistException"},
         {"shape":"RoleRequiredException"},
         {"shape":"InvalidRoleException"},
-        {"shape":"DeploymentGroupLimitExceededException"}
+        {"shape":"DeploymentGroupLimitExceededException"},
+        {"shape":"LifecycleHookLimitExceededException"},
+        {"shape":"InvalidTriggerConfigException"},
+        {"shape":"TriggerTargetsLimitExceededException"}
       ],
       "documentation":"<p>Creates a new deployment group for application revisions to be deployed to.</p>"
     },
@@ -307,7 +349,8 @@
         {"shape":"DeploymentDoesNotExistException"},
         {"shape":"InstanceIdRequiredException"},
         {"shape":"InvalidDeploymentIdException"},
-        {"shape":"InstanceDoesNotExistException"}
+        {"shape":"InstanceDoesNotExistException"},
+        {"shape":"InvalidInstanceNameException"}
       ],
       "documentation":"<p>Gets information about an instance as part of a deployment.</p>"
     },
@@ -547,7 +590,10 @@
         {"shape":"InvalidAutoScalingGroupException"},
         {"shape":"InvalidDeploymentConfigNameException"},
         {"shape":"DeploymentConfigDoesNotExistException"},
-        {"shape":"InvalidRoleException"}
+        {"shape":"InvalidRoleException"},
+        {"shape":"LifecycleHookLimitExceededException"},
+        {"shape":"InvalidTriggerConfigException"},
+        {"shape":"TriggerTargetsLimitExceededException"}
       ],
       "documentation":"<p>Changes information about an existing deployment group.</p>"
     }
@@ -569,7 +615,7 @@
           "documentation":"<p>The names of the on-premises instances to add tags to.</p>"
         }
       },
-      "documentation":"<p>Represents the input of an adds tags to on-premises instance operation.</p>"
+      "documentation":"<p>Represents the input of and adds tags to on-premises instance operation.</p>"
     },
     "ApplicationAlreadyExistsException":{
       "type":"structure",
@@ -667,6 +713,42 @@
       "type":"list",
       "member":{"shape":"AutoScalingGroupName"}
     },
+    "BatchGetApplicationRevisionsInput":{
+      "type":"structure",
+      "required":[
+        "applicationName",
+        "revisions"
+      ],
+      "members":{
+        "applicationName":{
+          "shape":"ApplicationName",
+          "documentation":"<p>The name of an existing AWS CodeDeploy application to get revision information about.</p>"
+        },
+        "revisions":{
+          "shape":"RevisionLocationList",
+          "documentation":"<p>Information to get about the application revisions, including revision type and location.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a batch get application revisions operation.</p>"
+    },
+    "BatchGetApplicationRevisionsOutput":{
+      "type":"structure",
+      "members":{
+        "applicationName":{
+          "shape":"ApplicationName",
+          "documentation":"<p>The name of the application that corresponds to the revisions.</p>"
+        },
+        "errorMessage":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>Information about errors that may have occurred during the API call.</p>"
+        },
+        "revisions":{
+          "shape":"RevisionInfoList",
+          "documentation":"<p>Additional information about the revisions, including the revision type and location.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a batch get application revisions operation.</p>"
+    },
     "BatchGetApplicationsInput":{
       "type":"structure",
       "members":{
@@ -686,6 +768,38 @@
         }
       },
       "documentation":"<p>Represents the output of a batch get applications operation.</p>"
+    },
+    "BatchGetDeploymentInstancesInput":{
+      "type":"structure",
+      "required":[
+        "deploymentId",
+        "instanceIds"
+      ],
+      "members":{
+        "deploymentId":{
+          "shape":"DeploymentId",
+          "documentation":"<p>The unique ID of a deployment.</p>"
+        },
+        "instanceIds":{
+          "shape":"InstancesList",
+          "documentation":"<p>The unique IDs of instances in the deployment's deployment group.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a batch get deployment instances operation.</p>"
+    },
+    "BatchGetDeploymentInstancesOutput":{
+      "type":"structure",
+      "members":{
+        "instancesSummary":{
+          "shape":"InstanceSummaryList",
+          "documentation":"<p>Information about the instances.</p>"
+        },
+        "errorMessage":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>Information about errors that may have occurred during the API call.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a batch get deployment instances operation.</p>"
     },
     "BatchGetDeploymentsInput":{
       "type":"structure",
@@ -726,6 +840,13 @@
         }
       },
       "documentation":"<p>Represents the output of a batch get on-premises instances operation.</p>"
+    },
+    "BatchLimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The maximum number of names or IDs allowed for this request (100) was exceeded.</p>",
+      "exception":true
     },
     "Boolean":{"type":"boolean"},
     "BucketNameFilterRequiredException":{
@@ -804,11 +925,11 @@
         },
         "deploymentGroupName":{
           "shape":"DeploymentGroupName",
-          "documentation":"<p>The name of an existing deployment group for the specified application.</p>"
+          "documentation":"<p>The name of a new deployment group for the specified application.</p>"
         },
         "deploymentConfigName":{
           "shape":"DeploymentConfigName",
-          "documentation":"<p>If specified, the deployment configuration name must be one of the predefined values, or it can be a custom deployment configuration:</p> <ul> <li>CodeDeployDefault.AllAtOnce deploys an application revision to up to all of the instances at once. The overall deployment succeeds if the application revision deploys to at least one of the instances. The overall deployment fails after the application revision fails to deploy to all of the instances. For example, for 9 instances, deploy to up to all 9 instances at once. The overall deployment succeeds if any of the 9 instances is successfully deployed to, and it fails if all 9 instances fail to be deployed to.</li> <li>CodeDeployDefault.HalfAtATime deploys to up to half of the instances at a time (with fractions rounded down). The overall deployment succeeds if the application revision deploys to at least half of the instances (with fractions rounded up); otherwise, the deployment fails. For example, for 9 instances, deploy to up to 4 instances at a time. The overall deployment succeeds if 5 or more instances are successfully deployed to; otherwise, the deployment fails. Note that the deployment may successfully deploy to some instances, even if the overall deployment fails.</li> <li>CodeDeployDefault.OneAtATime deploys the application revision to only one of the instances at a time. The overall deployment succeeds if the application revision deploys to all of the instances. The overall deployment fails after the application revision first fails to deploy to any one instances. For example, for 9 instances, deploy to one instance at a time. The overall deployment succeeds if all 9 instances are successfully deployed to, and it fails if any of one of the 9 instances fail to be deployed to. Note that the deployment may successfully deploy to some instances, even if the overall deployment fails. This is the default deployment configuration if a configuration isn't specified for either the deployment or the deployment group.</li> </ul> <p>To create a custom deployment configuration, call the create deployment configuration operation.</p>"
+          "documentation":"<p>If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy, or a custom deployment configuration that you created by calling the create deployment configuration operation.</p> <note> <p>CodeDeployDefault.OneAtATime is the default deployment configuration that is used if a configuration isn't specified for either the deployment or the deployment group.</p> </note> <p>The predefined deployment configurations including the following:</p> <ul> <li> <p><b>CodeDeployDefault.AllAtOnce</b> attempts to deploy an application revision to as many instances as possible at once. The status of the overall deployment will be displayed as <b>Succeeded</b> if the application revision is deployed to one or more of the instances. The status of the overall deployment will be displayed as <b>Failed</b> if the application revision is not deployed to any of the instances. Using an example of nine instances, CodeDeployDefault.AllAtOnce will attempt to deploy to all nine instances at once. The overall deployment will succeed if deployment to even a single instance is successful; it will fail only if deployments to all nine instances fail. </p> </li> <li> <p><b>CodeDeployDefault.HalfAtATime</b> deploys to up to half of the instances at a time (with fractions rounded down). The overall deployment succeeds if the application revision deploys to at least half of the instances (with fractions rounded up); otherwise, the deployment fails. For example, for nine instances, deploy to up to four instances at a time. The overall deployment succeeds if deployment to five or more instances succeed; otherwise, the deployment fails. Note that the deployment may successfully deploy to some instances, even if the overall deployment fails.</p> </li> <li> <p><b>CodeDeployDefault.OneAtATime</b> deploys the application revision to only one instance at a time.</p> <p>For deployment groups that contain more than one instance:</p> <ul> <li> <p>The overall deployment succeeds if the application revision deploys to all of the instances. The exception to this rule is that if deployment to the last instance fails, the overall deployment still succeeds. This is because AWS CodeDeploy allows only one instance to be taken offline at a time with the CodeDeployDefault.OneAtATime configuration.</p> </li> <li> <p>The overall deployment fails as soon as the application revision fails to deploy to any but the last instance. Note that the deployment may successfully deploy to some instances, even if the overall deployment fails.</p> </li> <li> <p>Example: For nine instances, deploy to one instance at a time. The overall deployment succeeds if the first eight instances are successfully deployed to, but it fails if deployment to any of the first eight instances fails.</p> </li> </ul> <p>For deployment groups that contain only one instance, the overall deployment is of course successful only if deployment to the single instance succeeds.</p> </li> </ul>"
         },
         "ec2TagFilters":{
           "shape":"EC2TagFilterList",
@@ -825,6 +946,10 @@
         "serviceRoleArn":{
           "shape":"Role",
           "documentation":"<p>A service role ARN that allows AWS CodeDeploy to act on the user's behalf when interacting with AWS services.</p>"
+        },
+        "triggerConfigurations":{
+          "shape":"TriggerConfigList",
+          "documentation":"<p>Information about triggers to create when the deployment group is created.</p>"
         }
       },
       "documentation":"<p>Represents the input of a create deployment group operation.</p>"
@@ -1071,6 +1196,10 @@
         "targetRevision":{
           "shape":"RevisionLocation",
           "documentation":"<p>Information about the deployment group's target revision, including the revision's type and its location.</p>"
+        },
+        "triggerConfigurations":{
+          "shape":"TriggerConfigList",
+          "documentation":"<p>A list of associated triggers. </p>"
         }
       },
       "documentation":"<p>Information about a deployment group.</p>"
@@ -1267,7 +1396,7 @@
         },
         "logTail":{
           "shape":"LogTail",
-          "documentation":"<p>The last portion of the associated diagnostic log.</p>"
+          "documentation":"<p>The last portion of the associated diagnostic log.</p> <p>If available, AWS CodeDeploy returns up to the last 4 KB of the associated diagnostic log.</p>"
         }
       },
       "documentation":"<p>Diagnostic information about executable scripts that are part of a deployment.</p>"
@@ -1345,7 +1474,7 @@
         },
         "deploymentGroups":{
           "shape":"DeploymentGroupsList",
-          "documentation":"<p>A list of deployment groups that use this revision.</p>"
+          "documentation":"<p>The deployment groups where this is the current target revision.</p>"
         },
         "firstUsedTime":{
           "shape":"Timestamp",
@@ -1543,11 +1672,11 @@
       "members":{
         "repository":{
           "shape":"Repository",
-          "documentation":"<p>The GitHub account and repository pair that stores a reference to the commit that represents the bundled artifacts for the application revision.</p> <p>Specified as account/repository.</p>"
+          "documentation":"<p>The GitHub account and repository pair that stores a reference to the commit that represents the bundled artifacts for the application revision. </p> <p>Specified as account/repository.</p>"
         },
         "commitId":{
           "shape":"CommitId",
-          "documentation":"<p>The SHA1 commit ID of the GitHub commit that references the that represents the bundled artifacts for the application revision.</p>"
+          "documentation":"<p>The SHA1 commit ID of the GitHub commit that represents the bundled artifacts for the application revision.</p>"
         }
       },
       "documentation":"<p>Information about the location of application artifacts that are stored in GitHub.</p>"
@@ -1691,6 +1820,10 @@
         }
       },
       "documentation":"<p>Information about an instance in a deployment.</p>"
+    },
+    "InstanceSummaryList":{
+      "type":"list",
+      "member":{"shape":"InstanceSummary"}
     },
     "InstancesList":{
       "type":"list",
@@ -1864,6 +1997,13 @@
       "documentation":"<p>The specified time range was specified in an invalid format.</p>",
       "exception":true
     },
+    "InvalidTriggerConfigException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The trigger was specified in an invalid format.</p>",
+      "exception":true
+    },
     "Key":{"type":"string"},
     "LifecycleErrorCode":{
       "type":"string",
@@ -1917,6 +2057,13 @@
         "Skipped",
         "Unknown"
       ]
+    },
+    "LifecycleHookLimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The limit for lifecycle hooks was exceeded.</p>",
+      "exception":true
     },
     "LifecycleMessage":{"type":"string"},
     "ListApplicationRevisionsInput":{
@@ -2173,7 +2320,7 @@
         },
         "type":{
           "shape":"MinimumHealthyHostsType",
-          "documentation":"<p>The minimum healthy instances type:</p> <ul> <li>HOST_COUNT: The minimum number of healthy instances, as an absolute value.</li> <li>FLEET_PERCENT: The minimum number of healthy instances, as a percentage of the total number of instances in the deployment.</li> </ul> <p>For example, for 9 instances, if a HOST_COUNT of 6 is specified, deploy to up to 3 instances at a time. The deployment succeeds if 6 or more instances are successfully deployed to; otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to 5 instances at a time. The deployment succeeds if 4 or more instances are successfully deployed to; otherwise, the deployment fails.</p> <note>In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime will return a minimum healthy instances type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instances at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.)</note>"
+          "documentation":"<p>The minimum healthy instances type:</p> <ul> <li>HOST_COUNT: The minimum number of healthy instances, as an absolute value.</li> <li>FLEET_PERCENT: The minimum number of healthy instances, as a percentage of the total number of instances in the deployment.</li> </ul> <p>For example, for 9 instances, if a HOST_COUNT of 6 is specified, deploy to up to 3 instances at a time. The deployment succeeds if 6 or more instances are successfully deployed to; otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to 5 instances at a time. The deployment succeeds if 4 or more instances are successfully deployed to; otherwise, the deployment fails.</p> <note>In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime will return a minimum healthy instances type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy will try to ensure that all but one instance are kept in healthy states during the deployment operation. While this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment still succeeds.</note>"
         }
       },
       "documentation":"<p>Information about minimum healthy instances.</p>"
@@ -2259,6 +2406,18 @@
       },
       "documentation":"<p>The named revision does not exist with the applicable IAM user or AWS account.</p>",
       "exception":true
+    },
+    "RevisionInfo":{
+      "type":"structure",
+      "members":{
+        "revisionLocation":{"shape":"RevisionLocation"},
+        "genericRevisionInfo":{"shape":"GenericRevisionInfo"}
+      },
+      "documentation":"<p>Information about an application revision.</p>"
+    },
+    "RevisionInfoList":{
+      "type":"list",
+      "member":{"shape":"RevisionInfo"}
     },
     "RevisionLocation":{
       "type":"structure",
@@ -2443,6 +2602,53 @@
       "documentation":"<p>Information about a time range.</p>"
     },
     "Timestamp":{"type":"timestamp"},
+    "TriggerConfig":{
+      "type":"structure",
+      "members":{
+        "triggerName":{
+          "shape":"TriggerName",
+          "documentation":"<para>The name of the notification trigger.</para>"
+        },
+        "triggerTargetArn":{
+          "shape":"TriggerTargetArn",
+          "documentation":"<p>The arn of the Amazon Simple Notification Service topic through which notifications about deployment or instance events are sent.</p>"
+        },
+        "triggerEvents":{
+          "shape":"TriggerEventTypeList",
+          "documentation":"<p>The event type or types for which notifications are triggered.</p> <p>The following event type values are supported:</p> <ul> <li>DEPLOYMENT_START</li> <li>DEPLOYMENT_SUCCESS</li> <li>DEPLOYMENT_FAILURE</li> <li>DEPLOYMENT_STOP</li> <li>INSTANCE_START</li> <li>INSTANCE_SUCCESS</li> <li>INSTANCE_FAILURE</li> </ul>"
+        }
+      },
+      "documentation":"<p>Information about notification triggers for the deployment group.</p>"
+    },
+    "TriggerConfigList":{
+      "type":"list",
+      "member":{"shape":"TriggerConfig"}
+    },
+    "TriggerEventType":{
+      "type":"string",
+      "enum":[
+        "DeploymentStart",
+        "DeploymentSuccess",
+        "DeploymentFailure",
+        "DeploymentStop",
+        "InstanceStart",
+        "InstanceSuccess",
+        "InstanceFailure"
+      ]
+    },
+    "TriggerEventTypeList":{
+      "type":"list",
+      "member":{"shape":"TriggerEventType"}
+    },
+    "TriggerName":{"type":"string"},
+    "TriggerTargetArn":{"type":"string"},
+    "TriggerTargetsLimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The maximum allowed number of triggers was exceeded.</p>",
+      "exception":true
+    },
     "UpdateApplicationInput":{
       "type":"structure",
       "members":{
@@ -2482,19 +2688,23 @@
         },
         "ec2TagFilters":{
           "shape":"EC2TagFilterList",
-          "documentation":"<p>The replacement set of Amazon EC2 tags to filter on, if you want to change them.</p>"
+          "documentation":"<p>The replacement set of Amazon EC2 tags to filter on, if you want to change them. To keep the existing tags, enter their names. To remove tags, do not enter any tag names.</p>"
         },
         "onPremisesInstanceTagFilters":{
           "shape":"TagFilterList",
-          "documentation":"<p>The replacement set of on-premises instance tags for filter on, if you want to change them.</p>"
+          "documentation":"<p>The replacement set of on-premises instance tags for filter on, if you want to change them. To keep the existing tags, enter their names. To remove tags, do not enter any tag names.</p>"
         },
         "autoScalingGroups":{
           "shape":"AutoScalingGroupNameList",
-          "documentation":"<p>The replacement list of Auto Scaling groups to be included in the deployment group, if you want to change them.</p>"
+          "documentation":"<p>The replacement list of Auto Scaling groups to be included in the deployment group, if you want to change them. To keep the existing Auto Scaling groups, enter their names. To remove Auto Scaling groups, do not enter any Auto Scaling group names.</p>"
         },
         "serviceRoleArn":{
           "shape":"Role",
           "documentation":"<p>A replacement service role's ARN, if you want to change it.</p>"
+        },
+        "triggerConfigurations":{
+          "shape":"TriggerConfigList",
+          "documentation":"<p>Information about triggers to change when the deployment group is updated.</p>"
         }
       },
       "documentation":"<p>Represents the input of an update deployment group operation.</p>"
