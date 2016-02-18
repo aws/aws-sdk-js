@@ -4,12 +4,11 @@
     "apiVersion":"2013-06-30",
     "endpointPrefix":"storagegateway",
     "jsonVersion":"1.1",
+    "protocol":"json",
     "serviceFullName":"AWS Storage Gateway",
     "signatureVersion":"v4",
-    "targetPrefix":"StorageGateway_20130630",
-    "protocol":"json"
+    "targetPrefix":"StorageGateway_20130630"
   },
-  "documentation":"<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and AWS's storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayHTTPRequestsHeaders.html\">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</li> <li> <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewaySigningRequests.html\">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</li> <li> <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/APIErrorResponses.html\">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</li> <li> <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPIOperations.html\">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</li> <li> <a href=\"http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html\">AWS Storage Gateway Regions and Endpoints</a>: Provides a list of each of the regions and endpoints available for use with AWS Storage Gateway. </li> </ul>",
   "operations":{
     "ActivateGateway":{
       "name":"ActivateGateway",
@@ -17,27 +16,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ActivateGatewayInput",
-        "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>ActivateGatewayInput$ActivationKey</a> </li> <li> <a>GatewayName</a> </li> <li> <a>ActivateGatewayInput$GatewayRegion</a> </li> <li> <a>ActivateGatewayInput$GatewayTimezone</a> </li> <li> <a>ActivateGatewayInput$GatewayType</a> </li> <li> <a>ActivateGatewayInput$TapeDriveType</a> </li> <li> <a>ActivateGatewayInput$MediumChangerType</a> </li> </ul>"
-      },
-      "output":{
-        "shape":"ActivateGatewayOutput",
-        "documentation":"<p>AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It is a string made of information such as your account, gateway name, and region. This ARN is used to reference the gateway in other API operations as well as resource-based authorization.</p>"
-      },
+      "input":{"shape":"ActivateGatewayInput"},
+      "output":{"shape":"ActivateGatewayOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation activates the gateway you previously deployed on your host. For more information, see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedActivateGateway-common.html\"> Activate the AWS Storage Gateway</a>. In the activation process, you specify information such as the region you want to use for storing snapshots, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account; for more information, see <a>UpdateGatewayInformation</a>.</p> <note>You must turn on the gateway VM before you can activate your gateway.</note>"
     },
@@ -50,18 +33,8 @@
       "input":{"shape":"AddCacheInput"},
       "output":{"shape":"AddCacheOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation configures one or more gateway local disks as cache for a cached-volume gateway. This operation is supported only for the gateway-cached volume architecture (see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html\">Storage Gateway Concepts</a>).</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache. </p>"
     },
@@ -71,27 +44,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddTagsToResourceInput",
-        "documentation":"<p>AddTagsToResourceInput</p>"
-      },
-      "output":{
-        "shape":"AddTagsToResourceOutput",
-        "documentation":"<p>AddTagsToResourceOutput</p>"
-      },
+      "input":{"shape":"AddTagsToResourceInput"},
+      "output":{"shape":"AddTagsToResourceOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:</p> <ul> <li><p>Storage gateways of all types</p></li> </ul> <ul> <li><p>Storage Volumes</p></li> </ul> <ul> <li><p>Virtual Tapes</p></li> </ul> <p>You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.</p>"
     },
@@ -104,18 +61,8 @@
       "input":{"shape":"AddUploadBufferInput"},
       "output":{"shape":"AddUploadBufferOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for both the gateway-stored and gateway-cached volume architectures. </p> <p> In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.</p>"
     },
@@ -125,27 +72,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddWorkingStorageInput",
-        "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>AddWorkingStorageInput$DiskIds</a> </li> </ul>"
-      },
-      "output":{
-        "shape":"AddWorkingStorageOutput",
-        "documentation":"<p>A JSON object containing the of the gateway for which working storage was configured.</p>"
-      },
+      "input":{"shape":"AddWorkingStorageInput"},
+      "output":{"shape":"AddWorkingStorageOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation configures one or more gateway local disks as working storage for a gateway. This operation is supported only for the gateway-stored volume architecture. This operation is deprecated method in cached-volumes API version (20120630). Use AddUploadBuffer instead.</p> <note><p>Working storage is also referred to as upload buffer. You can also use the <a>AddUploadBuffer</a> operation to add upload buffer to a stored-volume gateway.</p></note> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add working storage, and one or more disk IDs that you want to configure as working storage.</p>"
     },
@@ -155,27 +86,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CancelArchivalInput",
-        "documentation":"<p>CancelArchivalInput</p>"
-      },
-      "output":{
-        "shape":"CancelArchivalOutput",
-        "documentation":"<p>CancelArchivalOutput</p>"
-      },
+      "input":{"shape":"CancelArchivalInput"},
+      "output":{"shape":"CancelArchivalOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving process is initiated. </p>"
     },
@@ -185,27 +100,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CancelRetrievalInput",
-        "documentation":"<p>CancelRetrievalInput</p>"
-      },
-      "output":{
-        "shape":"CancelRetrievalOutput",
-        "documentation":"<p>CancelRetrievalOutput</p>"
-      },
+      "input":{"shape":"CancelRetrievalInput"},
+      "output":{"shape":"CancelRetrievalOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to a gateway after the retrieval process is initiated. The virtual tape is returned to the VTS.</p>"
     },
@@ -218,18 +117,8 @@
       "input":{"shape":"CreateCachediSCSIVolumeInput"},
       "output":{"shape":"CreateCachediSCSIVolumeOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation creates a cached volume on a specified cached gateway. This operation is supported only for the gateway-cached volume architecture.</p> <note>Cache storage must be allocated to the gateway before you can create a cached volume. Use the <a>AddCache</a> operation to add cache storage to a gateway. </note> <p>In the request, you must specify the gateway, size of the volume in bytes, the iSCSI target name, an IP address on which to expose the target, and a unique client token. In response, AWS Storage Gateway creates the volume and returns information about it such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.</p>"
     },
@@ -239,27 +128,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateSnapshotInput",
-        "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>CreateSnapshotInput$SnapshotDescription</a> </li> <li> <a>CreateSnapshotInput$VolumeARN</a> </li> </ul>"
-      },
-      "output":{
-        "shape":"CreateSnapshotOutput",
-        "documentation":"<p>A JSON object containing the following fields:</p>"
-      },
+      "input":{"shape":"CreateSnapshotInput"},
+      "output":{"shape":"CreateSnapshotOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad-hoc basis. This API enables you to take ad-hoc snapshot. For more information, see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/WorkingWithSnapshots.html\">Working With Snapshots in the AWS Storage Gateway Console</a>.</p> <p>In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot.</p> <note>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Operations.html\">EC2 API reference</a>.</note>"
     },
@@ -272,18 +145,8 @@
       "input":{"shape":"CreateSnapshotFromVolumeRecoveryPointInput"},
       "output":{"shape":"CreateSnapshotFromVolumeRecoveryPointOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation initiates a snapshot of a gateway from a volume recovery point. This operation is supported only for the gateway-cached volume architecture (see ).</p> <p>A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot. To get a list of volume recovery point for gateway-cached volumes, use <a>ListVolumeRecoveryPoints</a>.</p> <p>In the <code>CreateSnapshotFromVolumeRecoveryPoint</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide a description for the snapshot. When AWS Storage Gateway takes a snapshot of the specified volume, the snapshot and its description appear in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, in <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>"
     },
@@ -293,29 +156,27 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateStorediSCSIVolumeInput",
-        "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>CreateStorediSCSIVolumeInput$DiskId</a> </li> <li> <a>CreateStorediSCSIVolumeInput$NetworkInterfaceId</a> </li> <li> <a>CreateStorediSCSIVolumeInput$PreserveExistingData</a> </li> <li> <a>CreateStorediSCSIVolumeInput$SnapshotId</a> </li> <li> <a>CreateStorediSCSIVolumeInput$TargetName</a> </li> </ul>"
-      },
-      "output":{
-        "shape":"CreateStorediSCSIVolumeOutput",
-        "documentation":"<p>A JSON object containing the following fields:</p>"
-      },
+      "input":{"shape":"CreateStorediSCSIVolumeInput"},
+      "output":{"shape":"CreateStorediSCSIVolumeOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation creates a volume on a specified gateway. This operation is supported only for the gateway-stored volume architecture. </p> <p>The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased.</p> <p>In the request you must specify the gateway and the disk information on which you are creating the volume. In response, AWS Storage Gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.</p>"
+    },
+    "CreateTapeWithBarcode":{
+      "name":"CreateTapeWithBarcode",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTapeWithBarcodeInput"},
+      "output":{"shape":"CreateTapeWithBarcodeOutput"},
+      "errors":[
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape.</p> <note>Cache storage must be allocated to the gateway before you can create a virtual tape. Use the <a>AddCache</a> operation to add cache storage to a gateway.</note>"
     },
     "CreateTapes":{
       "name":"CreateTapes",
@@ -323,27 +184,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateTapesInput",
-        "documentation":"<p>CreateTapesInput</p>"
-      },
-      "output":{
-        "shape":"CreateTapesOutput",
-        "documentation":"<p>CreateTapeOutput</p>"
-      },
+      "input":{"shape":"CreateTapesInput"},
+      "output":{"shape":"CreateTapesOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Creates one or more virtual tapes. You write data to the virtual tapes and then archive the tapes.</p> <note>Cache storage must be allocated to the gateway before you can create virtual tapes. Use the <a>AddCache</a> operation to add cache storage to a gateway. </note>"
     },
@@ -354,23 +199,10 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteBandwidthRateLimitInput"},
-      "output":{
-        "shape":"DeleteBandwidthRateLimitOutput",
-        "documentation":"<p>A JSON object containing the of the gateway whose bandwidth rate information was deleted.</p>"
-      },
+      "output":{"shape":"DeleteBandwidthRateLimitOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
@@ -380,27 +212,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteChapCredentialsInput",
-        "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>DeleteChapCredentialsInput$InitiatorName</a> </li> <li> <a>DeleteChapCredentialsInput$TargetARN</a> </li> </ul>"
-      },
-      "output":{
-        "shape":"DeleteChapCredentialsOutput",
-        "documentation":"<p>A JSON object containing the following fields:</p>"
-      },
+      "input":{"shape":"DeleteChapCredentialsInput"},
+      "output":{"shape":"DeleteChapCredentialsOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair.</p>"
     },
@@ -410,27 +226,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteGatewayInput",
-        "documentation":"<p>A JSON object containing the id of the gateway to delete.</p>"
-      },
-      "output":{
-        "shape":"DeleteGatewayOutput",
-        "documentation":"<p>A JSON object containing the id of the deleted gateway.</p>"
-      },
+      "input":{"shape":"DeleteGatewayInput"},
+      "output":{"shape":"DeleteGatewayOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation deletes a gateway. To specify which gateway to delete, use the Amazon Resource Name (ARN) of the gateway in your request. The operation deletes the gateway; however, it does not delete the gateway virtual machine (VM) from your host computer.</p> <p>After you delete a gateway, you cannot reactivate it. Completed snapshots of the gateway volumes are not deleted upon deleting the gateway, however, pending snapshots will not complete. After you delete a gateway, your next step is to remove it from your environment.</p> <important> <p>You no longer pay software charges after the gateway is deleted; however, your existing Amazon EBS snapshots persist and you will continue to be billed for these snapshots. You can choose to remove all remaining Amazon EBS snapshots by canceling your Amazon EC2 subscription.  If you prefer not to cancel your Amazon EC2 subscription, you can delete your snapshots using the Amazon EC2 console. For more information, see the <a href=\"http://aws.amazon.com/storagegateway\"> AWS Storage Gateway Detail Page</a>. </p> </important>"
     },
@@ -443,18 +243,8 @@
       "input":{"shape":"DeleteSnapshotScheduleInput"},
       "output":{"shape":"DeleteSnapshotScheduleOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p> This operation deletes a snapshot of a volume. </p> <p> You can take snapshots of your gateway volumes on a scheduled or ad-hoc basis. This API enables you to delete a snapshot schedule for a volume. For more information, see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/WorkingWithSnapshots.html\">Working with Snapshots</a>. In the <code>DeleteSnapshotSchedule</code> request, you identify the volume by providing its Amazon Resource Name (ARN). </p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. in <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>"
     },
@@ -464,27 +254,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteTapeInput",
-        "documentation":"<p>DeleteTapeInput</p>"
-      },
-      "output":{
-        "shape":"DeleteTapeOutput",
-        "documentation":"<p>DeleteTapeOutput</p>"
-      },
+      "input":{"shape":"DeleteTapeInput"},
+      "output":{"shape":"DeleteTapeOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Deletes the specified virtual tape.</p>"
     },
@@ -494,27 +268,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteTapeArchiveInput",
-        "documentation":"<p>DeleteTapeArchiveInput</p>"
-      },
-      "output":{
-        "shape":"DeleteTapeArchiveOutput",
-        "documentation":"<p>DeleteTapeArchiveOutput</p>"
-      },
+      "input":{"shape":"DeleteTapeArchiveInput"},
+      "output":{"shape":"DeleteTapeArchiveOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Deletes the specified virtual tape from the virtual tape shelf (VTS).</p>"
     },
@@ -524,27 +282,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteVolumeInput",
-        "documentation":"<p>A JSON object containing the <a>DeleteVolumeInput$VolumeARN</a> to delete.</p>"
-      },
-      "output":{
-        "shape":"DeleteVolumeOutput",
-        "documentation":"<p>A JSON object containing the of the storage volume that was deleted</p>"
-      },
+      "input":{"shape":"DeleteVolumeInput"},
+      "output":{"shape":"DeleteVolumeOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation deletes the specified gateway volume that you previously created using the <a>CreateCachediSCSIVolume</a> or <a>CreateStorediSCSIVolume</a> API. For gateway-stored volumes, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume. </p> <p>Before you delete a gateway volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> <p>In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.</p>"
     },
@@ -554,27 +296,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeBandwidthRateLimitInput",
-        "documentation":"<p>A JSON object containing the of the gateway.</p>"
-      },
-      "output":{
-        "shape":"DescribeBandwidthRateLimitOutput",
-        "documentation":"<p>A JSON object containing the following fields:</p>"
-      },
+      "input":{"shape":"DescribeBandwidthRateLimitInput"},
+      "output":{"shape":"DescribeBandwidthRateLimitOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect.</p> <p>This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
@@ -587,18 +313,8 @@
       "input":{"shape":"DescribeCacheInput"},
       "output":{"shape":"DescribeCacheOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns information about the cache of a gateway. This operation is supported only for the gateway-cached volume architecture. </p> <p> The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used. </p>"
     },
@@ -609,23 +325,10 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeCachediSCSIVolumesInput"},
-      "output":{
-        "shape":"DescribeCachediSCSIVolumesOutput",
-        "documentation":"<p>A JSON object containing the following fields:</p>"
-      },
+      "output":{"shape":"DescribeCachediSCSIVolumesOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns a description of the gateway volumes specified in the request. This operation is supported only for the gateway-cached volume architecture.</p> <p> The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN). </p>"
     },
@@ -635,27 +338,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeChapCredentialsInput",
-        "documentation":"<p>A JSON object containing the Amazon Resource Name (ARN) of the iSCSI volume target.</p>"
-      },
-      "output":{
-        "shape":"DescribeChapCredentialsOutput",
-        "documentation":"<p>A JSON object containing a .</p>"
-      },
+      "input":{"shape":"DescribeChapCredentialsInput"},
+      "output":{"shape":"DescribeChapCredentialsOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair.</p>"
     },
@@ -665,27 +352,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeGatewayInformationInput",
-        "documentation":"<p>A JSON object containing the id of the gateway.</p>"
-      },
-      "output":{
-        "shape":"DescribeGatewayInformationOutput",
-        "documentation":"<p>A JSON object containing the following fields:</p>"
-      },
+      "input":{"shape":"DescribeGatewayInformationInput"},
+      "output":{"shape":"DescribeGatewayInformationOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns metadata about a gateway such as its name, network interfaces, configured time zone, and the state (whether the gateway is running or not). To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
@@ -695,24 +366,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeMaintenanceStartTimeInput",
-        "documentation":"<p>A JSON object containing the of the gateway.</p>"
-      },
+      "input":{"shape":"DescribeMaintenanceStartTimeInput"},
       "output":{"shape":"DescribeMaintenanceStartTimeOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns your gateway's weekly maintenance start time including the day and time of the week. Note that values are in terms of the gateway's time zone.</p>"
     },
@@ -722,24 +380,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeSnapshotScheduleInput",
-        "documentation":"<p>A JSON object containing the <a>DescribeSnapshotScheduleInput$VolumeARN</a> of the volume.</p>"
-      },
+      "input":{"shape":"DescribeSnapshotScheduleInput"},
       "output":{"shape":"DescribeSnapshotScheduleOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation describes the snapshot schedule for the specified gateway volume. The snapshot schedule information includes intervals at which snapshots are automatically initiated on the volume.</p>"
     },
@@ -749,24 +394,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeStorediSCSIVolumesInput",
-        "documentation":"<p>A JSON Object containing a list of <a>DescribeStorediSCSIVolumesInput$VolumeARNs</a>.</p>"
-      },
+      "input":{"shape":"DescribeStorediSCSIVolumesInput"},
       "output":{"shape":"DescribeStorediSCSIVolumesOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns the description of the gateway volumes specified in the request. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume ARNs.</p>"
     },
@@ -776,27 +408,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeTapeArchivesInput",
-        "documentation":"<p>DescribeTapeArchivesInput</p>"
-      },
-      "output":{
-        "shape":"DescribeTapeArchivesOutput",
-        "documentation":"<p>DescribeTapeArchivesOutput</p>"
-      },
+      "input":{"shape":"DescribeTapeArchivesInput"},
+      "output":{"shape":"DescribeTapeArchivesOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Returns a description of specified virtual tapes in the virtual tape shelf (VTS). </p> <p>If a specific <code>TapeARN</code> is not specified, AWS Storage Gateway returns a description of all virtual tapes found in the VTS associated with your account.</p>"
     },
@@ -806,27 +422,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeTapeRecoveryPointsInput",
-        "documentation":"<p>DescribeTapeRecoveryPointsInput</p>"
-      },
-      "output":{
-        "shape":"DescribeTapeRecoveryPointsOutput",
-        "documentation":"<p>DescribeTapeRecoveryPointsOutput</p>"
-      },
+      "input":{"shape":"DescribeTapeRecoveryPointsInput"},
+      "output":{"shape":"DescribeTapeRecoveryPointsOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Returns a list of virtual tape recovery points that are available for the specified gateway-VTL.</p> <p>A recovery point is a point in time view of a virtual tape at which all the data on the virtual tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway.</p>"
     },
@@ -836,27 +436,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeTapesInput",
-        "documentation":"<p>DescribeTapesInput</p>"
-      },
-      "output":{
-        "shape":"DescribeTapesOutput",
-        "documentation":"<p>DescribeTapesOutput</p>"
-      },
+      "input":{"shape":"DescribeTapesInput"},
+      "output":{"shape":"DescribeTapesOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes. If a <code>TapeARN</code> is not specified, returns a description of all virtual tapes associated with the specified gateway.</p>"
     },
@@ -869,18 +453,8 @@
       "input":{"shape":"DescribeUploadBufferInput"},
       "output":{"shape":"DescribeUploadBufferOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns information about the upload buffer of a gateway. This operation is supported for both the gateway-stored and gateway-cached volume architectures. </p> <p> The response includes disk IDs that are configured as upload buffer space, and it includes the amount of upload buffer space allocated and used.</p>"
     },
@@ -890,27 +464,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeVTLDevicesInput",
-        "documentation":"<p>DescribeVTLDevicesInput</p>"
-      },
-      "output":{
-        "shape":"DescribeVTLDevicesOutput",
-        "documentation":"<p>DescribeVTLDevicesOutput</p>"
-      },
+      "input":{"shape":"DescribeVTLDevicesInput"},
+      "output":{"shape":"DescribeVTLDevicesOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Returns a description of virtual tape library (VTL) devices for the specified gateway. In the response, AWS Storage Gateway returns VTL device information. </p> <p>The list of VTL devices must be from one gateway.</p>"
     },
@@ -920,27 +478,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeWorkingStorageInput",
-        "documentation":"<p>A JSON object containing the of the gateway.</p>"
-      },
-      "output":{
-        "shape":"DescribeWorkingStorageOutput",
-        "documentation":"<p>A JSON object containing the following fields:</p>"
-      },
+      "input":{"shape":"DescribeWorkingStorageInput"},
+      "output":{"shape":"DescribeWorkingStorageOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns information about the working storage of a gateway. This operation is supported only for the gateway-stored volume architecture. This operation is deprecated in cached-volumes API version (20120630). Use DescribeUploadBuffer instead.</p> <note><p>Working storage is also referred to as upload buffer. You can also use the DescribeUploadBuffer operation to add upload buffer to a stored-volume gateway.</p></note> <p>The response includes disk IDs that are configured as working storage, and it includes the amount of working storage allocated and used.</p>"
     },
@@ -950,27 +492,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DisableGatewayInput",
-        "documentation":"<p>DisableGatewayInput</p>"
-      },
-      "output":{
-        "shape":"DisableGatewayOutput",
-        "documentation":"<p>DisableGatewayOutput</p>"
-      },
+      "input":{"shape":"DisableGatewayInput"},
+      "output":{"shape":"DisableGatewayOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Disables a gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes. </p> <p>Use this operation for a gateway-VTL that is not reachable or not functioning.</p> <important>Once a gateway is disabled it cannot be enabled.</important>"
     },
@@ -980,24 +506,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListGatewaysInput",
-        "documentation":"<p>A JSON object containing zero or more of the following fields:</p> <ul> <li> <a>ListGatewaysInput$Limit</a> </li> <li> <a>ListGatewaysInput$Marker</a> </li> </ul>"
-      },
+      "input":{"shape":"ListGatewaysInput"},
       "output":{"shape":"ListGatewaysOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation lists gateways owned by an AWS account in a region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN).</p> <p>By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response.</p> <p>If you have more gateways than are returned in a response-that is, the response returns only a truncated list of your gateways-the response contains a marker that you can specify in your next request to fetch the next page of gateways.</p>"
     },
@@ -1007,24 +520,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListLocalDisksInput",
-        "documentation":"<p>A JSON object containing the of the gateway.</p>"
-      },
+      "input":{"shape":"ListLocalDisksInput"},
       "output":{"shape":"ListLocalDisksOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation returns a list of the gateway's local disks. To specify which gateway to describe, you use the Amazon Resource Name (ARN) of the gateway in the body of the request.</p> <p>The request returns a list of all disks, specifying which are configured as working storage, cache storage, or stored volume or not configured at all. The response includes a <code>DiskStatus</code> field. This field can have a value of present (the disk is available to use), missing (the disk is no longer connected to the gateway), or mismatch (the disk node is occupied by a disk that has incorrect metadata or the disk content is corrupted). </p>"
     },
@@ -1034,27 +534,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListTagsForResourceInput",
-        "documentation":"<p>ListTagsForResourceInput</p>"
-      },
-      "output":{
-        "shape":"ListTagsForResourceOutput",
-        "documentation":"<p>ListTagsForResourceOutput</p>"
-      },
+      "input":{"shape":"ListTagsForResourceInput"},
+      "output":{"shape":"ListTagsForResourceOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation lists the tags that have been added to the specified resource. </p>"
     },
@@ -1064,27 +548,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListVolumeInitiatorsInput",
-        "documentation":"<p>ListVolumeInitiatorsInput</p>"
-      },
-      "output":{
-        "shape":"ListVolumeInitiatorsOutput",
-        "documentation":"<p>ListVolumeInitiatorsOutput</p>"
-      },
+      "input":{"shape":"ListVolumeInitiatorsInput"},
+      "output":{"shape":"ListVolumeInitiatorsOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation lists iSCSI initiators that are connected to a volume. You can use this operation to determine whether a volume is being used or not.</p>"
     },
@@ -1097,18 +565,8 @@
       "input":{"shape":"ListVolumeRecoveryPointsInput"},
       "output":{"shape":"ListVolumeRecoveryPointsOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation lists the recovery points for a specified gateway. This operation is supported only for the gateway-cached volume architecture.</p> <p>Each gateway-cached volume has one recovery point. A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot. To create a snapshot from a volume recovery point use the <a>CreateSnapshotFromVolumeRecoveryPoint</a> operation.</p>"
     },
@@ -1118,24 +576,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListVolumesInput",
-        "documentation":"<p>A JSON object that contains one or more of the following fields:</p> <ul> <li> <a>ListVolumesInput$Limit</a> </li> <li> <a>ListVolumesInput$Marker</a> </li> </ul>"
-      },
+      "input":{"shape":"ListVolumesInput"},
       "output":{"shape":"ListVolumesOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN. The response includes only the volume ARNs. If you want additional volume information, use the <a>DescribeStorediSCSIVolumes</a> API.</p> <p>The operation supports pagination. By default, the operation returns a maximum of up to 100 volumes. You can optionally specify the <code>Limit</code> field in the body to limit the number of volumes in the response. If the number of volumes returned in the response is truncated, the response includes a Marker field. You can use this Marker value in your subsequent request to retrieve the next set of volumes.</p>"
     },
@@ -1145,27 +590,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RemoveTagsFromResourceInput",
-        "documentation":"<p>RemoveTagsFromResourceInput</p>"
-      },
-      "output":{
-        "shape":"RemoveTagsFromResourceOutput",
-        "documentation":"<p>RemoveTagsFromResourceOutput</p>"
-      },
+      "input":{"shape":"RemoveTagsFromResourceInput"},
+      "output":{"shape":"RemoveTagsFromResourceOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation removes one or more tags from the specified resource.</p>"
     },
@@ -1178,18 +607,8 @@
       "input":{"shape":"ResetCacheInput"},
       "output":{"shape":"ResetCacheOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. </p> <important> <p>If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly.</p> </important>"
     },
@@ -1199,27 +618,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RetrieveTapeArchiveInput",
-        "documentation":"<p>RetrieveTapeArchiveInput</p>"
-      },
-      "output":{
-        "shape":"RetrieveTapeArchiveOutput",
-        "documentation":"<p>RetrieveTapeArchiveOutput</p>"
-      },
+      "input":{"shape":"RetrieveTapeArchiveInput"},
+      "output":{"shape":"RetrieveTapeArchiveOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a gateway-VTL. Virtual tapes archived in the VTS are not associated with any gateway. However after a tape is retrieved, it is associated with a gateway, even though it is also listed in the VTS.</p> <p>Once a tape is successfully retrieved to a gateway, it cannot be retrieved again to another gateway. You must archive the tape again before you can retrieve it to another gateway.</p>"
     },
@@ -1229,27 +632,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RetrieveTapeRecoveryPointInput",
-        "documentation":"<p>RetrieveTapeRecoveryPointInput</p>"
-      },
-      "output":{
-        "shape":"RetrieveTapeRecoveryPointOutput",
-        "documentation":"<p>RetrieveTapeRecoveryPointOutput</p>"
-      },
+      "input":{"shape":"RetrieveTapeRecoveryPointInput"},
+      "output":{"shape":"RetrieveTapeRecoveryPointOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Retrieves the recovery point for the specified virtual tape.</p> <p>A recovery point is a point in time view of a virtual tape at which all the data on the tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway.</p> <note>The virtual tape can be retrieved to only one gateway. The retrieved tape is read-only. The virtual tape can be retrieved to only a gateway-VTL. There is no charge for retrieving recovery points.</note>"
     },
@@ -1259,27 +646,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ShutdownGatewayInput",
-        "documentation":"<p>A JSON object containing the of the gateway to shut down.</p>"
-      },
-      "output":{
-        "shape":"ShutdownGatewayOutput",
-        "documentation":"<p>A JSON object containing the of the gateway that was shut down.</p>"
-      },
+      "input":{"shape":"ShutdownGatewayInput"},
+      "output":{"shape":"ShutdownGatewayOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation shuts down a gateway. To specify which gateway to shut down, use the Amazon Resource Name (ARN) of the gateway in the body of your request.</p> <p>The operation shuts down the gateway service component running in the storage gateway's virtual machine (VM) and not the VM.</p> <note>If you want to shut down the VM, it is recommended that you first shut down the gateway component in the VM to avoid unpredictable conditions.</note> <p>After the gateway is shutdown, you cannot call any other API except <a>StartGateway</a>, <a>DescribeGatewayInformation</a>, and <a>ListGateways</a>. For more information, see <a>ActivateGateway</a>. Your applications cannot read from or write to the gateway's storage volumes, and there are no snapshots taken.</p> <note>When you make a shutdown request, you will get a <code>200 OK</code> success response immediately. However, it might take some time for the gateway to shut down. You can call the <a>DescribeGatewayInformation</a> API to check the status. For more information, see <a>ActivateGateway</a>.</note> <p>If do not intend to use the gateway again, you must delete the gateway (using <a>DeleteGateway</a>) to no longer pay software charges associated with the gateway.</p>"
     },
@@ -1289,27 +660,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"StartGatewayInput",
-        "documentation":"<p>A JSON object containing the of the gateway to start.</p>"
-      },
-      "output":{
-        "shape":"StartGatewayOutput",
-        "documentation":"<p>A JSON object containing the of the gateway that was restarted.</p>"
-      },
+      "input":{"shape":"StartGatewayInput"},
+      "output":{"shape":"StartGatewayOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation starts a gateway that you previously shut down (see <a>ShutdownGateway</a>). After the gateway starts, you can then make other API calls, your applications can read from or write to the gateway's storage volumes and you will be able to take snapshot backups.</p> <note>When you make a request, you will get a 200 OK success response immediately. However, it might take some time for the gateway to be ready. You should call <a>DescribeGatewayInformation</a> and check the status before making any additional API calls. For more information, see <a>ActivateGateway</a>.</note> <p>To specify which gateway to start, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
@@ -1319,27 +674,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateBandwidthRateLimitInput",
-        "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec</a> </li> <li> <a>UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec</a> </li> </ul>"
-      },
-      "output":{
-        "shape":"UpdateBandwidthRateLimitOutput",
-        "documentation":"<p>A JSON object containing the of the gateway whose throttle information was updated.</p>"
-      },
+      "input":{"shape":"UpdateBandwidthRateLimitInput"},
+      "output":{"shape":"UpdateBandwidthRateLimitOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains.</p> <p>By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth.</p> <p>To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
@@ -1349,27 +688,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateChapCredentialsInput",
-        "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>UpdateChapCredentialsInput$InitiatorName</a> </li> <li> <a>UpdateChapCredentialsInput$SecretToAuthenticateInitiator</a> </li> <li> <a>UpdateChapCredentialsInput$SecretToAuthenticateTarget</a> </li> <li> <a>UpdateChapCredentialsInput$TargetARN</a> </li> </ul>"
-      },
-      "output":{
-        "shape":"UpdateChapCredentialsOutput",
-        "documentation":"<p>A JSON object containing the following fields:</p>"
-      },
+      "input":{"shape":"UpdateChapCredentialsInput"},
+      "output":{"shape":"UpdateChapCredentialsOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it.</p> <important> <p>When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials.</p> </important>"
     },
@@ -1380,25 +703,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"UpdateGatewayInformationInput"},
-      "output":{
-        "shape":"UpdateGatewayInformationOutput",
-        "documentation":"<p>A JSON object containing the of the gateway that was updated.</p>"
-      },
+      "output":{"shape":"UpdateGatewayInformationOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>This operation updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
+      "documentation":"<p>This operation updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p> <note>For Gateways activated after September 02, 2015, the gateway's ARN contains the gateway id rather than the gateway name. However changing the name of the gateway has no effect on the gateway's ARN.</note>"
     },
     "UpdateGatewaySoftwareNow":{
       "name":"UpdateGatewaySoftwareNow",
@@ -1406,27 +716,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateGatewaySoftwareNowInput",
-        "documentation":"<p>A JSON object containing the of the gateway to update.</p>"
-      },
-      "output":{
-        "shape":"UpdateGatewaySoftwareNowOutput",
-        "documentation":"<p>A JSON object containing the of the gateway that was updated.</p>"
-      },
+      "input":{"shape":"UpdateGatewaySoftwareNowInput"},
+      "output":{"shape":"UpdateGatewaySoftwareNowOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation updates the gateway virtual machine (VM) software. The request immediately triggers the software update. </p> <note>When you make this request, you get a <code>200 OK</code> success response immediately. However, it might take some time for the update to complete. You can call <a>DescribeGatewayInformation</a> to verify the gateway is in the <code>STATE_RUNNING</code> state.</note> <important>A software update forces a system restart of your gateway. You can minimize the chance of any disruption to your applications by increasing your iSCSI Initiators' timeouts. For more information about increasing iSCSI Initiator timeouts for Windows and Linux, see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings\">Customizing Your Windows iSCSI Settings</a> and <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings\">Customizing Your Linux iSCSI Settings</a>, respectively.</important>"
     },
@@ -1436,27 +730,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateMaintenanceStartTimeInput",
-        "documentation":"<p>A JSON object containing the following fields:</p> <ul> <li> <a>UpdateMaintenanceStartTimeInput$DayOfWeek</a> </li> <li> <a>UpdateMaintenanceStartTimeInput$HourOfDay</a> </li> <li> <a>UpdateMaintenanceStartTimeInput$MinuteOfHour</a> </li> </ul>"
-      },
-      "output":{
-        "shape":"UpdateMaintenanceStartTimeOutput",
-        "documentation":"<p>A JSON object containing the of the gateway whose maintenance start time is updated.</p>"
-      },
+      "input":{"shape":"UpdateMaintenanceStartTimeInput"},
+      "output":{"shape":"UpdateMaintenanceStartTimeOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation updates a gateway's weekly maintenance start time information, including day and time of the week. The maintenance time is the time in your gateway's time zone.</p>"
     },
@@ -1466,27 +744,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateSnapshotScheduleInput",
-        "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>UpdateSnapshotScheduleInput$Description</a> </li> <li> <a>UpdateSnapshotScheduleInput$RecurrenceInHours</a> </li> <li> <a>UpdateSnapshotScheduleInput$StartAt</a> </li> <li> <a>UpdateSnapshotScheduleInput$VolumeARN</a> </li> </ul>"
-      },
-      "output":{
-        "shape":"UpdateSnapshotScheduleOutput",
-        "documentation":"<p>A JSON object containing the of the updated storage volume.</p>"
-      },
+      "input":{"shape":"UpdateSnapshotScheduleInput"},
+      "output":{"shape":"UpdateSnapshotScheduleOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation updates a snapshot schedule configured for a gateway volume.</p> <p>The default snapshot schedule for volume is once every 24 hours, starting at the creation time of the volume. You can use this API to change the snapshot schedule configured for the volume.</p> <p>In the request you must identify the gateway volume whose snapshot schedule you want to update, and the schedule information, including when you want the snapshot to begin on a day and the frequency (in hours) of snapshots.</p>"
     },
@@ -1496,27 +758,11 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateVTLDeviceTypeInput",
-        "documentation":"<p>UpdateVTLDeviceTypeInput</p>"
-      },
-      "output":{
-        "shape":"UpdateVTLDeviceTypeOutput",
-        "documentation":"<p>UpdateVTLDeviceTypeOutput</p>"
-      },
+      "input":{"shape":"UpdateVTLDeviceTypeInput"},
+      "output":{"shape":"UpdateVTLDeviceTypeOutput"},
       "errors":[
-        {
-          "shape":"InvalidGatewayRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
-        },
-        {
-          "shape":"InternalServerError",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
-        }
+        {"shape":"InvalidGatewayRequestException"},
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>This operation updates the type of medium changer in a gateway-VTL. When you activate a gateway-VTL, you select a medium changer type for the gateway-VTL. This operation enables you to select a different type of medium changer after a gateway-VTL is activated.</p>"
     }
@@ -1535,18 +781,21 @@
           "shape":"ActivationKey",
           "documentation":"<p>Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter <code>activationKey</code>. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the <code>ActivateGateway</code> API call determine the actual configuration of your gateway.</p>"
         },
-        "GatewayName":{"shape":"GatewayName"},
+        "GatewayName":{
+          "shape":"GatewayName",
+          "documentation":"<p>The name you configured for your gateway.</p>"
+        },
         "GatewayTimezone":{
           "shape":"GatewayTimezone",
-          "documentation":"<p>One of the values that indicates the time zone you want to set for the gateway. The time zone is used, for example, for scheduling snapshots and your gateway's maintenance schedule.</p>"
+          "documentation":"<p>A value that indicates the time zone you want to set for the gateway. The time zone is used, for example, for scheduling snapshots and your gateway's maintenance schedule.</p>"
         },
         "GatewayRegion":{
           "shape":"RegionId",
-          "documentation":"<p>One of the values that indicates the region where you want to store the snapshot backups. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region\">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p> <p><i>Valid Values</i>: \"us-east-1\", \"us-west-1\", \"us-west-2\", \"eu-west-1\", \"eu-central-1\", \"ap-northeast-1\", \"ap-southeast-1\", \"ap-southeast-2\", \"sa-east-1\"</p>"
+          "documentation":"<p>A value that indicates the region where you want to store the snapshot backups. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region\">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p> <p><i>Valid Values</i>: \"us-east-1\", \"us-west-1\", \"us-west-2\", \"eu-west-1\", \"eu-central-1\", \"ap-northeast-1\", \"ap-southeast-1\", \"ap-southeast-2\", \"sa-east-1\"</p>"
         },
         "GatewayType":{
           "shape":"GatewayType",
-          "documentation":"<p>One of the values that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is <code>STORED</code>. </p>"
+          "documentation":"<p>A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is <code>STORED</code>. </p>"
         },
         "TapeDriveType":{
           "shape":"TapeDriveType",
@@ -1557,19 +806,19 @@
           "documentation":"<p>The value that indicates the type of medium changer to use for gateway-VTL. This field is optional.</p> <p><i>Valid Values</i>: \"STK-L700\", \"AWS-Gateway-VTL\"</p>"
         }
       },
-      "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>ActivateGatewayInput$ActivationKey</a> </li> <li> <a>GatewayName</a> </li> <li> <a>ActivateGatewayInput$GatewayRegion</a> </li> <li> <a>ActivateGatewayInput$GatewayTimezone</a> </li> <li> <a>ActivateGatewayInput$GatewayType</a> </li> <li> <a>ActivateGatewayInput$TapeDriveType</a> </li> <li> <a>ActivateGatewayInput$MediumChangerType</a> </li> </ul>"
+      "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>ActivateGatewayInput$ActivationKey</a> </li> <li> <a>ActivateGatewayInput$GatewayName</a> </li> <li> <a>ActivateGatewayInput$GatewayRegion</a> </li> <li> <a>ActivateGatewayInput$GatewayTimezone</a> </li> <li> <a>ActivateGatewayInput$GatewayType</a> </li> <li> <a>ActivateGatewayInput$TapeDriveType</a> </li> <li> <a>ActivateGatewayInput$MediumChangerType</a> </li> </ul>"
     },
     "ActivateGatewayOutput":{
       "type":"structure",
       "members":{
         "GatewayARN":{"shape":"GatewayARN"}
       },
-      "documentation":"<p>AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It is a string made of information such as your account, gateway name, and region. This ARN is used to reference the gateway in other API operations as well as resource-based authorization.</p>"
+      "documentation":"<p>AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It is a string made of information such as your account, gateway name, and region. This ARN is used to reference the gateway in other API operations as well as resource-based authorization.</p> <note>For Gateways activated prior to September 02, 2015 the gateway ARN contains the gateway name rather than the gateway id. Changing the name of the gateway has no effect on the gateway ARN.</note>"
     },
     "ActivationKey":{
       "type":"string",
-      "min":1,
-      "max":50
+      "max":50,
+      "min":1
     },
     "AddCacheInput":{
       "type":"structure",
@@ -1661,8 +910,8 @@
     },
     "BandwidthType":{
       "type":"string",
-      "min":3,
-      "max":25
+      "max":25,
+      "min":3
     },
     "BandwidthUploadRateLimit":{
       "type":"long",
@@ -1763,13 +1012,13 @@
     },
     "ChapSecret":{
       "type":"string",
-      "min":1,
-      "max":100
+      "max":100,
+      "min":1
     },
     "ClientToken":{
       "type":"string",
-      "min":5,
-      "max":100
+      "max":100,
+      "min":5
     },
     "CreateCachediSCSIVolumeInput":{
       "type":"structure",
@@ -1872,7 +1121,7 @@
         },
         "TargetName":{
           "shape":"TargetName",
-          "documentation":"<p>The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of arn:aws:storagegateway:us-east-1:111122223333:gateway/mygateway/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.</p>"
+          "documentation":"<p>The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.</p>"
         },
         "NetworkInterfaceId":{
           "shape":"NetworkInterfaceId",
@@ -1899,6 +1148,39 @@
       },
       "documentation":"<p>A JSON object containing the following fields:</p>"
     },
+    "CreateTapeWithBarcodeInput":{
+      "type":"structure",
+      "required":[
+        "GatewayARN",
+        "TapeSizeInBytes",
+        "TapeBarcode"
+      ],
+      "members":{
+        "GatewayARN":{
+          "shape":"GatewayARN",
+          "documentation":"<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.</p>"
+        },
+        "TapeSizeInBytes":{
+          "shape":"TapeSize",
+          "documentation":"<p>The size, in bytes, of the virtual tape that you want to create.</p> <note>The size must be aligned by gigabyte (1024*1024*1024 byte).</note>"
+        },
+        "TapeBarcode":{
+          "shape":"TapeBarcode",
+          "documentation":"<p>The barcode that you want to assign to the tape.</p>"
+        }
+      },
+      "documentation":"<p>CreateTapeWithBarcodeInput</p>"
+    },
+    "CreateTapeWithBarcodeOutput":{
+      "type":"structure",
+      "members":{
+        "TapeARN":{
+          "shape":"TapeARN",
+          "documentation":"<p>A unique Amazon Resource Name (ARN) that represents the virtual tape that was created.</p>"
+        }
+      },
+      "documentation":"<p>CreateTapeOutput</p>"
+    },
     "CreateTapesInput":{
       "type":"structure",
       "required":[
@@ -1911,11 +1193,11 @@
       "members":{
         "GatewayARN":{
           "shape":"GatewayARN",
-          "documentation":"<p>The unique Amazon Resource Name(ARN) that represents the gateway to associate the virtual tapes with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.</p>"
+          "documentation":"<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tapes with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.</p>"
         },
         "TapeSizeInBytes":{
           "shape":"TapeSize",
-          "documentation":"<p>The size, in bytes, of the virtual tapes you want to create.</p> <note>The size must be gigabyte (1024*1024*1024 byte) aligned.</note>"
+          "documentation":"<p>The size, in bytes, of the virtual tapes that you want to create.</p> <note>The size must be aligned by gigabyte (1024*1024*1024 byte).</note>"
         },
         "ClientToken":{
           "shape":"ClientToken",
@@ -1923,11 +1205,11 @@
         },
         "NumTapesToCreate":{
           "shape":"NumTapesToCreate",
-          "documentation":"<p>The number of virtual tapes you want to create.</p>"
+          "documentation":"<p>The number of virtual tapes that you want to create.</p>"
         },
         "TapeBarcodePrefix":{
           "shape":"TapeBarcodePrefix",
-          "documentation":"<p>A prefix you append to the barcode of the virtual tape you are creating. This makes a barcode unique.</p> <note>The prefix must be 1 to 4 characters in length and must be upper-case letters A-Z.</note>"
+          "documentation":"<p>A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.</p> <note>The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z.</note>"
         }
       },
       "documentation":"<p>CreateTapesInput</p>"
@@ -1937,15 +1219,15 @@
       "members":{
         "TapeARNs":{
           "shape":"TapeARNs",
-          "documentation":"<p>A list of unique Amazon Resource Named (ARN) that represents the virtual tapes that were created.</p>"
+          "documentation":"<p>A list of unique Amazon Resource Names (ARNs) that represents the virtual tapes that were created.</p>"
         }
       },
       "documentation":"<p>CreateTapeOutput</p>"
     },
     "DayOfWeek":{
       "type":"integer",
-      "min":0,
-      "max":6
+      "max":6,
+      "min":0
     },
     "DeleteBandwidthRateLimitInput":{
       "type":"structure",
@@ -2189,19 +1471,19 @@
         "GatewayARN":{"shape":"GatewayARN"},
         "GatewayId":{
           "shape":"GatewayId",
-          "documentation":"<p>The gateway ID.</p>"
+          "documentation":"<p>The unique identifier assigned to your gateway during activation. This id becomes part of the gateway Amazon Resources Name (ARN) which you use as input for other operations.</p>"
         },
         "GatewayName":{
           "shape":"string",
-          "documentation":"<p>The gateway name.</p>"
+          "documentation":"<p>The name you configured for your gateway.</p>"
         },
         "GatewayTimezone":{
           "shape":"GatewayTimezone",
-          "documentation":"<p>One of the values that indicates the time zone configured for the gateway.</p>"
+          "documentation":"<p>A value that indicates the time zone configured for the gateway.</p>"
         },
         "GatewayState":{
           "shape":"GatewayState",
-          "documentation":"<p>One of the values that indicates the operating state of the gateway.</p>"
+          "documentation":"<p>A value that indicates the operating state of the gateway.</p>"
         },
         "GatewayNetworkInterfaces":{
           "shape":"GatewayNetworkInterfaces",
@@ -2455,13 +1737,13 @@
     },
     "Description":{
       "type":"string",
-      "min":1,
-      "max":255
+      "max":255,
+      "min":1
     },
     "DeviceType":{
       "type":"string",
-      "min":2,
-      "max":50
+      "max":50,
+      "min":2
     },
     "DeviceiSCSIAttributes":{
       "type":"structure",
@@ -2517,13 +1799,13 @@
     },
     "DiskAllocationType":{
       "type":"string",
-      "min":3,
-      "max":100
+      "max":100,
+      "min":3
     },
     "DiskId":{
       "type":"string",
-      "min":1,
-      "max":300
+      "max":300,
+      "min":1
     },
     "DiskIds":{
       "type":"list",
@@ -2602,14 +1884,14 @@
     },
     "GatewayARN":{
       "type":"string",
-      "min":50,
+      "documentation":"<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.</p>",
       "max":500,
-      "documentation":"<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.</p>"
+      "min":50
     },
     "GatewayId":{
       "type":"string",
-      "min":12,
-      "max":30
+      "max":30,
+      "min":12
     },
     "GatewayInfo":{
       "type":"structure",
@@ -2622,10 +1904,10 @@
     },
     "GatewayName":{
       "type":"string",
-      "min":2,
+      "documentation":"<p>The name you configured for your gateway.</p>",
       "max":255,
-      "pattern":"^[ -\\.0-\\[\\]-~]*[!-\\.0-\\[\\]-~][ -\\.0-\\[\\]-~]*$",
-      "documentation":"<p>A unique identifier for your gateway. This name becomes part of the gateway Amazon Resources Name (ARN) which is what you use as an input to other operations.</p>"
+      "min":2,
+      "pattern":"^[ -\\.0-\\[\\]-~]*[!-\\.0-\\[\\]-~][ -\\.0-\\[\\]-~]*$"
     },
     "GatewayNetworkInterfaces":{
       "type":"list",
@@ -2633,23 +1915,23 @@
     },
     "GatewayOperationalState":{
       "type":"string",
-      "min":2,
-      "max":25
+      "max":25,
+      "min":2
     },
     "GatewayState":{
       "type":"string",
-      "min":2,
-      "max":25
+      "max":25,
+      "min":2
     },
     "GatewayTimezone":{
       "type":"string",
-      "min":3,
-      "max":10
+      "max":10,
+      "min":3
     },
     "GatewayType":{
       "type":"string",
-      "min":2,
-      "max":20
+      "max":20,
+      "min":2
     },
     "Gateways":{
       "type":"list",
@@ -2657,13 +1939,13 @@
     },
     "HourOfDay":{
       "type":"integer",
-      "min":0,
-      "max":23
+      "max":23,
+      "min":0
     },
     "Initiator":{
       "type":"string",
-      "min":1,
-      "max":50
+      "max":50,
+      "min":1
     },
     "Initiators":{
       "type":"list",
@@ -2681,9 +1963,8 @@
           "documentation":"<p>A <a>StorageGatewayError</a> that provides more detail about the cause of the error.</p>"
         }
       },
-      "error":{"httpStatusCode":500},
-      "exception":true,
-      "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
+      "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>",
+      "exception":true
     },
     "InvalidGatewayRequestException":{
       "type":"structure",
@@ -2697,20 +1978,19 @@
           "documentation":"<p>A <a>StorageGatewayError</a> that provides more detail about the cause of the error.</p>"
         }
       },
-      "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
+      "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>",
+      "exception":true
     },
     "IqnName":{
       "type":"string",
-      "min":1,
       "max":255,
+      "min":1,
       "pattern":"[0-9a-z:.-]+"
     },
     "LastSoftwareUpdate":{
       "type":"string",
-      "min":1,
-      "max":25
+      "max":25,
+      "min":1
     },
     "ListGatewaysInput":{
       "type":"structure",
@@ -2750,6 +2030,7 @@
     },
     "ListTagsForResourceInput":{
       "type":"structure",
+      "required":["ResourceARN"],
       "members":{
         "ResourceARN":{
           "shape":"ResourceARN",
@@ -2845,18 +2126,18 @@
     },
     "Marker":{
       "type":"string",
-      "min":1,
-      "max":1000
+      "max":1000,
+      "min":1
     },
     "MediumChangerType":{
       "type":"string",
-      "min":2,
-      "max":50
+      "max":50,
+      "min":2
     },
     "MinuteOfHour":{
       "type":"integer",
-      "min":0,
-      "max":59
+      "max":59,
+      "min":0
     },
     "NetworkInterface":{
       "type":"structure",
@@ -2882,13 +2163,13 @@
     },
     "NextUpdateAvailabilityDate":{
       "type":"string",
-      "min":1,
-      "max":25
+      "max":25,
+      "min":1
     },
     "NumTapesToCreate":{
       "type":"integer",
-      "min":1,
-      "max":10
+      "max":10,
+      "min":1
     },
     "PositiveIntObject":{
       "type":"integer",
@@ -2896,16 +2177,20 @@
     },
     "RecurrenceInHours":{
       "type":"integer",
-      "min":1,
-      "max":24
+      "max":24,
+      "min":1
     },
     "RegionId":{
       "type":"string",
-      "min":1,
-      "max":25
+      "max":25,
+      "min":1
     },
     "RemoveTagsFromResourceInput":{
       "type":"structure",
+      "required":[
+        "ResourceARN",
+        "TagKeys"
+      ],
       "members":{
         "ResourceARN":{
           "shape":"ResourceARN",
@@ -2943,8 +2228,8 @@
     },
     "ResourceARN":{
       "type":"string",
-      "min":50,
-      "max":500
+      "max":500,
+      "min":50
     },
     "RetrieveTapeArchiveInput":{
       "type":"structure",
@@ -3016,8 +2301,8 @@
     },
     "SnapshotDescription":{
       "type":"string",
-      "min":1,
-      "max":255
+      "max":255,
+      "min":1
     },
     "SnapshotId":{
       "type":"string",
@@ -3084,8 +2369,8 @@
     },
     "TagKey":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
     },
     "TagKeys":{
@@ -3132,8 +2417,8 @@
     },
     "TapeARN":{
       "type":"string",
-      "min":50,
-      "max":500
+      "max":500,
+      "min":50
     },
     "TapeARNs":{
       "type":"list",
@@ -3176,20 +2461,20 @@
     },
     "TapeBarcode":{
       "type":"string",
-      "min":7,
       "max":16,
+      "min":7,
       "pattern":"^[A-Z0-9]*$"
     },
     "TapeBarcodePrefix":{
       "type":"string",
-      "min":1,
       "max":4,
+      "min":1,
       "pattern":"^[A-Z]*$"
     },
     "TapeDriveType":{
       "type":"string",
-      "min":2,
-      "max":50
+      "max":50,
+      "min":2
     },
     "TapeRecoveryPointInfo":{
       "type":"structure",
@@ -3223,13 +2508,13 @@
     },
     "TargetARN":{
       "type":"string",
-      "min":50,
-      "max":800
+      "max":800,
+      "min":50
     },
     "TargetName":{
       "type":"string",
-      "min":1,
       "max":200,
+      "min":1,
       "pattern":"^[-\\.;a-z0-9]+$"
     },
     "Time":{"type":"timestamp"},
@@ -3312,7 +2597,7 @@
         "GatewayARN":{"shape":"GatewayARN"},
         "GatewayName":{"shape":"string"}
       },
-      "documentation":"<p>A JSON object containing the of the gateway that was updated.</p>"
+      "documentation":"<p>A JSON object containing the ARN of the gateway that was updated.</p>"
     },
     "UpdateGatewaySoftwareNowInput":{
       "type":"structure",
@@ -3442,8 +2727,8 @@
     },
     "VTLDeviceARN":{
       "type":"string",
-      "min":50,
-      "max":500
+      "max":500,
+      "min":50
     },
     "VTLDeviceARNs":{
       "type":"list",
@@ -3458,8 +2743,8 @@
     },
     "VolumeARN":{
       "type":"string",
-      "min":50,
-      "max":500
+      "max":500,
+      "min":50
     },
     "VolumeARNs":{
       "type":"list",
@@ -3467,8 +2752,8 @@
     },
     "VolumeId":{
       "type":"string",
-      "min":12,
-      "max":30
+      "max":30,
+      "min":12
     },
     "VolumeInfo":{
       "type":"structure",
@@ -3496,13 +2781,13 @@
     },
     "VolumeStatus":{
       "type":"string",
-      "min":3,
-      "max":50
+      "max":50,
+      "min":3
     },
     "VolumeType":{
       "type":"string",
-      "min":3,
-      "max":100
+      "max":100,
+      "min":3
     },
     "VolumeiSCSIAttributes":{
       "type":"structure",
@@ -3541,6 +2826,5 @@
     "long":{"type":"long"},
     "string":{"type":"string"}
   },
-  "examples":{
-  }
+  "documentation":"<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and AWS's storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li><a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayHTTPRequestsHeaders.html\">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</li> <li><a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewaySigningRequests.html\">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</li> <li><a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/APIErrorResponses.html\">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</li> <li><a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPIOperations.html\">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</li> <li><a href=\"http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html\">AWS Storage Gateway Regions and Endpoints</a>: Provides a list of each of the regions and endpoints available for use with AWS Storage Gateway. </li> </ul> <note>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be vol-1122AABB. When you use this ID with the EC2 API, you must change it to vol-1122aabb. Otherwise, the EC2 API might not behave as expected.</note>"
 }
