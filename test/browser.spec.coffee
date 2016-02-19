@@ -16,6 +16,8 @@ dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
 dynamodbstreams = new AWS.DynamoDBStreams(AWS.util.merge(config, config.dynamodbstreams))
 ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
+config.inspector = config.inspector || {}
+config.inspector.region = 'us-west-2'
 inspector = new AWS.Inspector(AWS.util.merge(config, config.inspector))
 kinesis = new AWS.Kinesis(AWS.util.merge(config, config.kinesis))
 kms = new AWS.KMS(AWS.util.merge(config, config.kms))
@@ -120,7 +122,7 @@ integrationTests ->
     it 'makes a request', (done) ->
       cloudfront.listDistributions {}, (err, data) ->
         noError(err)
-        expect(Array.isArray(data.DistributionList)).to.equal(true)
+        expect(Array.isArray(data.DistributionList.Items)).to.equal(true)
         done()
 
     it 'handles errors', (done) ->
@@ -298,12 +300,10 @@ integrationTests ->
         expect(Array.isArray(data.Pipelines)).to.equal(true)
         done()
 
-    # TODO This error code needs to be updated when the X-Amzn-ErrorType is whitelisted.
     it 'handles errors', (done) ->
       elastictranscoder.readJob {Id: '3333333333333-abcde3'}, (err, data) ->
         noData(data)
-        assertError(err, 'UnknownError')
-        matchError(err, 'The specified job was not found')
+        assertError(err, 'ResourceNotFoundException')
         done()
 
   describe 'AWS.Inspector', ->
