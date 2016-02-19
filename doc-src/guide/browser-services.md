@@ -4,14 +4,15 @@
 
 ## Supported Services
 
-By default, the SDK ships with support for 27 AWS services. Each service object
+By default, the SDK ships with support for 28 AWS services. Each service object
 in the SDK currently provides low-level access to every API call in the
 respective AWS service. The full list of methods and their parameters are
 documented in the complete API reference documentation (linked from each
 service name in the list below).
 
-The 27 services that come with the default hosted package of the SDK are:
+The 28 services that come with the default hosted package of the SDK are:
 
+* [AWS.CloudFront](/AWSJavaScriptSDK/latest/AWS/CloudFront.html)
 * [AWS.CloudWatch](/AWSJavaScriptSDK/latest/AWS/CloudWatch.html)
 * [AWS.CloudWatchLogs](/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html)
 * [AWS.CodeCommit](/AWSJavaScriptSDK/latest/AWS/CodeCommit.html)

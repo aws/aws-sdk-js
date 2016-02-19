@@ -4,6 +4,7 @@ config = {}
 try
   config = require('./configuration')
 
+cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront))
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
 cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs))
 cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
@@ -114,6 +115,21 @@ integrationTests ->
       headers = client.parseHeaders(rawHeaders)
       expect(headers['x-amzn-foo']).to.equal('foo')
       expect(headers['x-amzn-bar']).to.equal('bar')
+
+  describe 'AWS.CloudFront', ->
+    it 'makes a request', (done) ->
+      cloudfront.listDistributions {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.DistributionList)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        Id: 'fake-distro'
+      cloudfront.getDistribution params, (err, data) ->
+        assertError(err, 'NoSuchDistribution')
+        noData(data)
+        done()
 
   describe 'AWS.CloudWatch', ->
     it 'makes a request', (done) ->
