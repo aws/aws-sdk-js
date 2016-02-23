@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.2.37
+// AWS SDK for JavaScript v2.2.38
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -17,6 +17,7 @@ require('./http/xhr');
 
 if (typeof window !== 'undefined') window.AWS = AWS;
 if (typeof module !== 'undefined') module.exports = AWS;
+if (typeof self !== 'undefined') self.AWS = AWS;
 AWS.apiLoader.services['cloudfront'] = {};
 AWS.CloudFront = AWS.Service.defineService('cloudfront', [ '2016-01-28' ]);
 require('./services/cloudfront');
@@ -110,7 +111,7 @@ AWS.apiLoader.services['route53'] = {};
 AWS.Route53 = AWS.Service.defineService('route53', [ '2013-04-01' ]);
 require('./services/route53');
 
-AWS.apiLoader.services['route53']['2013-04-01'] = {"version":"2.0","metadata":{"apiVersion":"2013-04-01","endpointPrefix":"route53","globalEndpoint":"route53.amazonaws.com","protocol":"rest-xml","serviceAbbreviation":"Route 53","serviceFullName":"Amazon Route 53","signatureVersion":"v4"},"operations":{"AssociateVPCWithHostedZone":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}/associatevpc"},"input":{"locationName":"AssociateVPCWithHostedZoneRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","VPC"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"VPC":{"shape":"S3"},"Comment":{}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"ChangeResourceRecordSets":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}/rrset/"},"input":{"locationName":"ChangeResourceRecordSetsRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","ChangeBatch"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"ChangeBatch":{"type":"structure","required":["Changes"],"members":{"Comment":{},"Changes":{"shape":"Se"}}}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"ChangeTagsForResource":{"http":{"requestUri":"/2013-04-01/tags/{ResourceType}/{ResourceId}"},"input":{"locationName":"ChangeTagsForResourceRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["ResourceType","ResourceId"],"members":{"ResourceType":{"location":"uri","locationName":"ResourceType"},"ResourceId":{"location":"uri","locationName":"ResourceId"},"AddTags":{"shape":"S14"},"RemoveTagKeys":{"type":"list","member":{"locationName":"Key"}}}},"output":{"type":"structure","members":{}}},"CreateHealthCheck":{"http":{"requestUri":"/2013-04-01/healthcheck","responseCode":201},"input":{"locationName":"CreateHealthCheckRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["CallerReference","HealthCheckConfig"],"members":{"CallerReference":{},"HealthCheckConfig":{"shape":"S1c"}}},"output":{"type":"structure","required":["HealthCheck","Location"],"members":{"HealthCheck":{"shape":"S1q"},"Location":{"location":"header","locationName":"Location"}}}},"CreateHostedZone":{"http":{"requestUri":"/2013-04-01/hostedzone","responseCode":201},"input":{"locationName":"CreateHostedZoneRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Name","CallerReference"],"members":{"Name":{},"VPC":{"shape":"S3"},"CallerReference":{},"HostedZoneConfig":{"shape":"S1v"},"DelegationSetId":{}}},"output":{"type":"structure","required":["HostedZone","ChangeInfo","DelegationSet","Location"],"members":{"HostedZone":{"shape":"S1y"},"ChangeInfo":{"shape":"S8"},"DelegationSet":{"shape":"S20"},"VPC":{"shape":"S3"},"Location":{"location":"header","locationName":"Location"}}}},"CreateReusableDelegationSet":{"http":{"requestUri":"/2013-04-01/delegationset","responseCode":201},"input":{"locationName":"CreateReusableDelegationSetRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["CallerReference"],"members":{"CallerReference":{},"HostedZoneId":{}}},"output":{"type":"structure","required":["DelegationSet","Location"],"members":{"DelegationSet":{"shape":"S20"},"Location":{"location":"header","locationName":"Location"}}}},"CreateTrafficPolicy":{"http":{"requestUri":"/2013-04-01/trafficpolicy","responseCode":201},"input":{"locationName":"CreateTrafficPolicyRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Name","Document"],"members":{"Name":{},"Document":{},"Comment":{}}},"output":{"type":"structure","required":["TrafficPolicy","Location"],"members":{"TrafficPolicy":{"shape":"S29"},"Location":{"location":"header","locationName":"Location"}}}},"CreateTrafficPolicyInstance":{"http":{"requestUri":"/2013-04-01/trafficpolicyinstance","responseCode":201},"input":{"locationName":"CreateTrafficPolicyInstanceRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","Name","TTL","TrafficPolicyId","TrafficPolicyVersion"],"members":{"HostedZoneId":{},"Name":{},"TTL":{"type":"long"},"TrafficPolicyId":{},"TrafficPolicyVersion":{"type":"integer"}}},"output":{"type":"structure","required":["TrafficPolicyInstance","Location"],"members":{"TrafficPolicyInstance":{"shape":"S2e"},"Location":{"location":"header","locationName":"Location"}}}},"CreateTrafficPolicyVersion":{"http":{"requestUri":"/2013-04-01/trafficpolicy/{Id}","responseCode":201},"input":{"locationName":"CreateTrafficPolicyVersionRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id","Document"],"members":{"Id":{"location":"uri","locationName":"Id"},"Document":{},"Comment":{}}},"output":{"type":"structure","required":["TrafficPolicy","Location"],"members":{"TrafficPolicy":{"shape":"S29"},"Location":{"location":"header","locationName":"Location"}}}},"DeleteHealthCheck":{"http":{"method":"DELETE","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","members":{}}},"DeleteHostedZone":{"http":{"method":"DELETE","requestUri":"/2013-04-01/hostedzone/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"DeleteReusableDelegationSet":{"http":{"method":"DELETE","requestUri":"/2013-04-01/delegationset/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"DeleteTrafficPolicy":{"http":{"method":"DELETE","requestUri":"/2013-04-01/trafficpolicy/{Id}/{Version}"},"input":{"type":"structure","required":["Id","Version"],"members":{"Id":{"location":"uri","locationName":"Id"},"Version":{"location":"uri","locationName":"Version","type":"integer"}}},"output":{"type":"structure","members":{}}},"DeleteTrafficPolicyInstance":{"http":{"method":"DELETE","requestUri":"/2013-04-01/trafficpolicyinstance/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"DisassociateVPCFromHostedZone":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}/disassociatevpc"},"input":{"locationName":"DisassociateVPCFromHostedZoneRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","VPC"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"VPC":{"shape":"S3"},"Comment":{}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"GetChange":{"http":{"method":"GET","requestUri":"/2013-04-01/change/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"GetChangeDetails":{"http":{"method":"GET","requestUri":"/2013-04-01/changedetails/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["ChangeBatchRecord"],"members":{"ChangeBatchRecord":{"shape":"S30"}}}},"GetCheckerIpRanges":{"http":{"method":"GET","requestUri":"/2013-04-01/checkeripranges"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["CheckerIpRanges"],"members":{"CheckerIpRanges":{"type":"list","member":{}}}}},"GetGeoLocation":{"http":{"method":"GET","requestUri":"/2013-04-01/geolocation"},"input":{"type":"structure","members":{"ContinentCode":{"location":"querystring","locationName":"continentcode"},"CountryCode":{"location":"querystring","locationName":"countrycode"},"SubdivisionCode":{"location":"querystring","locationName":"subdivisioncode"}}},"output":{"type":"structure","required":["GeoLocationDetails"],"members":{"GeoLocationDetails":{"shape":"S38"}}}},"GetHealthCheck":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","required":["HealthCheck"],"members":{"HealthCheck":{"shape":"S1q"}}}},"GetHealthCheckCount":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheckcount"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["HealthCheckCount"],"members":{"HealthCheckCount":{"type":"long"}}}},"GetHealthCheckLastFailureReason":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}/lastfailurereason"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","required":["HealthCheckObservations"],"members":{"HealthCheckObservations":{"shape":"S3j"}}}},"GetHealthCheckStatus":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}/status"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","required":["HealthCheckObservations"],"members":{"HealthCheckObservations":{"shape":"S3j"}}}},"GetHostedZone":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["HostedZone"],"members":{"HostedZone":{"shape":"S1y"},"DelegationSet":{"shape":"S20"},"VPCs":{"type":"list","member":{"shape":"S3","locationName":"VPC"}}}}},"GetHostedZoneCount":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzonecount"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["HostedZoneCount"],"members":{"HostedZoneCount":{"type":"long"}}}},"GetReusableDelegationSet":{"http":{"method":"GET","requestUri":"/2013-04-01/delegationset/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["DelegationSet"],"members":{"DelegationSet":{"shape":"S20"}}}},"GetTrafficPolicy":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicy/{Id}/{Version}"},"input":{"type":"structure","required":["Id","Version"],"members":{"Id":{"location":"uri","locationName":"Id"},"Version":{"location":"uri","locationName":"Version","type":"integer"}}},"output":{"type":"structure","required":["TrafficPolicy"],"members":{"TrafficPolicy":{"shape":"S29"}}}},"GetTrafficPolicyInstance":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstance/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["TrafficPolicyInstance"],"members":{"TrafficPolicyInstance":{"shape":"S2e"}}}},"GetTrafficPolicyInstanceCount":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstancecount"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["TrafficPolicyInstanceCount"],"members":{"TrafficPolicyInstanceCount":{"type":"integer"}}}},"ListChangeBatchesByHostedZone":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}/changes"},"input":{"type":"structure","required":["HostedZoneId","StartDate","EndDate"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"StartDate":{"location":"querystring","locationName":"startDate"},"EndDate":{"location":"querystring","locationName":"endDate"},"MaxItems":{"location":"querystring","locationName":"maxItems"},"Marker":{"location":"querystring","locationName":"marker"}}},"output":{"type":"structure","required":["MaxItems","Marker","ChangeBatchRecords"],"members":{"MaxItems":{},"Marker":{},"IsTruncated":{"type":"boolean"},"ChangeBatchRecords":{"shape":"S4a"},"NextMarker":{}}}},"ListChangeBatchesByRRSet":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}/rrsChanges"},"input":{"type":"structure","required":["HostedZoneId","Name","Type","StartDate","EndDate"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"Name":{"location":"querystring","locationName":"rrSet_name"},"Type":{"location":"querystring","locationName":"type"},"SetIdentifier":{"location":"querystring","locationName":"identifier"},"StartDate":{"location":"querystring","locationName":"startDate"},"EndDate":{"location":"querystring","locationName":"endDate"},"MaxItems":{"location":"querystring","locationName":"maxItems"},"Marker":{"location":"querystring","locationName":"marker"}}},"output":{"type":"structure","required":["MaxItems","Marker","ChangeBatchRecords"],"members":{"MaxItems":{},"Marker":{},"IsTruncated":{"type":"boolean"},"ChangeBatchRecords":{"shape":"S4a"},"NextMarker":{}}}},"ListGeoLocations":{"http":{"method":"GET","requestUri":"/2013-04-01/geolocations"},"input":{"type":"structure","members":{"StartContinentCode":{"location":"querystring","locationName":"startcontinentcode"},"StartCountryCode":{"location":"querystring","locationName":"startcountrycode"},"StartSubdivisionCode":{"location":"querystring","locationName":"startsubdivisioncode"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["GeoLocationDetailsList","IsTruncated","MaxItems"],"members":{"GeoLocationDetailsList":{"type":"list","member":{"shape":"S38","locationName":"GeoLocationDetails"}},"IsTruncated":{"type":"boolean"},"NextContinentCode":{},"NextCountryCode":{},"NextSubdivisionCode":{},"MaxItems":{}}}},"ListHealthChecks":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck"},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"marker"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["HealthChecks","Marker","IsTruncated","MaxItems"],"members":{"HealthChecks":{"type":"list","member":{"shape":"S1q","locationName":"HealthCheck"}},"Marker":{},"IsTruncated":{"type":"boolean"},"NextMarker":{},"MaxItems":{}}}},"ListHostedZones":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone"},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"marker"},"MaxItems":{"location":"querystring","locationName":"maxitems"},"DelegationSetId":{"location":"querystring","locationName":"delegationsetid"}}},"output":{"type":"structure","required":["HostedZones","Marker","IsTruncated","MaxItems"],"members":{"HostedZones":{"shape":"S4l"},"Marker":{},"IsTruncated":{"type":"boolean"},"NextMarker":{},"MaxItems":{}}}},"ListHostedZonesByName":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzonesbyname"},"input":{"type":"structure","members":{"DNSName":{"location":"querystring","locationName":"dnsname"},"HostedZoneId":{"location":"querystring","locationName":"hostedzoneid"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["HostedZones","IsTruncated","MaxItems"],"members":{"HostedZones":{"shape":"S4l"},"DNSName":{},"HostedZoneId":{},"IsTruncated":{"type":"boolean"},"NextDNSName":{},"NextHostedZoneId":{},"MaxItems":{}}}},"ListResourceRecordSets":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}/rrset"},"input":{"type":"structure","required":["HostedZoneId"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"StartRecordName":{"location":"querystring","locationName":"name"},"StartRecordType":{"location":"querystring","locationName":"type"},"StartRecordIdentifier":{"location":"querystring","locationName":"identifier"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["ResourceRecordSets","IsTruncated","MaxItems"],"members":{"ResourceRecordSets":{"type":"list","member":{"shape":"Sh","locationName":"ResourceRecordSet"}},"IsTruncated":{"type":"boolean"},"NextRecordName":{},"NextRecordType":{},"NextRecordIdentifier":{},"MaxItems":{}}}},"ListReusableDelegationSets":{"http":{"method":"GET","requestUri":"/2013-04-01/delegationset"},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"marker"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["DelegationSets","Marker","IsTruncated","MaxItems"],"members":{"DelegationSets":{"type":"list","member":{"shape":"S20","locationName":"DelegationSet"}},"Marker":{},"IsTruncated":{"type":"boolean"},"NextMarker":{},"MaxItems":{}}}},"ListTagsForResource":{"http":{"method":"GET","requestUri":"/2013-04-01/tags/{ResourceType}/{ResourceId}"},"input":{"type":"structure","required":["ResourceType","ResourceId"],"members":{"ResourceType":{"location":"uri","locationName":"ResourceType"},"ResourceId":{"location":"uri","locationName":"ResourceId"}}},"output":{"type":"structure","required":["ResourceTagSet"],"members":{"ResourceTagSet":{"shape":"S4w"}}}},"ListTagsForResources":{"http":{"requestUri":"/2013-04-01/tags/{ResourceType}"},"input":{"locationName":"ListTagsForResourcesRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["ResourceType","ResourceIds"],"members":{"ResourceType":{"location":"uri","locationName":"ResourceType"},"ResourceIds":{"type":"list","member":{"locationName":"ResourceId"}}}},"output":{"type":"structure","required":["ResourceTagSets"],"members":{"ResourceTagSets":{"type":"list","member":{"shape":"S4w","locationName":"ResourceTagSet"}}}}},"ListTrafficPolicies":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicies"},"input":{"type":"structure","members":{"TrafficPolicyIdMarker":{"location":"querystring","locationName":"trafficpolicyid"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicySummaries","IsTruncated","TrafficPolicyIdMarker","MaxItems"],"members":{"TrafficPolicySummaries":{"type":"list","member":{"locationName":"TrafficPolicySummary","type":"structure","required":["Id","Name","Type","LatestVersion","TrafficPolicyCount"],"members":{"Id":{},"Name":{},"Type":{},"LatestVersion":{"type":"integer"},"TrafficPolicyCount":{"type":"integer"}}}},"IsTruncated":{"type":"boolean"},"TrafficPolicyIdMarker":{},"MaxItems":{}}}},"ListTrafficPolicyInstances":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstances"},"input":{"type":"structure","members":{"HostedZoneIdMarker":{"location":"querystring","locationName":"hostedzoneid"},"TrafficPolicyInstanceNameMarker":{"location":"querystring","locationName":"trafficpolicyinstancename"},"TrafficPolicyInstanceTypeMarker":{"location":"querystring","locationName":"trafficpolicyinstancetype"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicyInstances","IsTruncated","MaxItems"],"members":{"TrafficPolicyInstances":{"shape":"S57"},"HostedZoneIdMarker":{},"TrafficPolicyInstanceNameMarker":{},"TrafficPolicyInstanceTypeMarker":{},"IsTruncated":{"type":"boolean"},"MaxItems":{}}}},"ListTrafficPolicyInstancesByHostedZone":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstances/hostedzone"},"input":{"type":"structure","required":["HostedZoneId"],"members":{"HostedZoneId":{"location":"querystring","locationName":"id"},"TrafficPolicyInstanceNameMarker":{"location":"querystring","locationName":"trafficpolicyinstancename"},"TrafficPolicyInstanceTypeMarker":{"location":"querystring","locationName":"trafficpolicyinstancetype"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicyInstances","IsTruncated","MaxItems"],"members":{"TrafficPolicyInstances":{"shape":"S57"},"TrafficPolicyInstanceNameMarker":{},"TrafficPolicyInstanceTypeMarker":{},"IsTruncated":{"type":"boolean"},"MaxItems":{}}}},"ListTrafficPolicyInstancesByPolicy":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstances/trafficpolicy"},"input":{"type":"structure","required":["TrafficPolicyId","TrafficPolicyVersion"],"members":{"TrafficPolicyId":{"location":"querystring","locationName":"id"},"TrafficPolicyVersion":{"location":"querystring","locationName":"version","type":"integer"},"HostedZoneIdMarker":{"location":"querystring","locationName":"hostedzoneid"},"TrafficPolicyInstanceNameMarker":{"location":"querystring","locationName":"trafficpolicyinstancename"},"TrafficPolicyInstanceTypeMarker":{"location":"querystring","locationName":"trafficpolicyinstancetype"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicyInstances","IsTruncated","MaxItems"],"members":{"TrafficPolicyInstances":{"shape":"S57"},"HostedZoneIdMarker":{},"TrafficPolicyInstanceNameMarker":{},"TrafficPolicyInstanceTypeMarker":{},"IsTruncated":{"type":"boolean"},"MaxItems":{}}}},"ListTrafficPolicyVersions":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicies/{Id}/versions"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"},"TrafficPolicyVersionMarker":{"location":"querystring","locationName":"trafficpolicyversion"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicies","IsTruncated","TrafficPolicyVersionMarker","MaxItems"],"members":{"TrafficPolicies":{"type":"list","member":{"shape":"S29","locationName":"TrafficPolicy"}},"IsTruncated":{"type":"boolean"},"TrafficPolicyVersionMarker":{},"MaxItems":{}}}},"UpdateHealthCheck":{"http":{"requestUri":"/2013-04-01/healthcheck/{HealthCheckId}"},"input":{"locationName":"UpdateHealthCheckRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"},"HealthCheckVersion":{"type":"long"},"IPAddress":{},"Port":{"type":"integer"},"ResourcePath":{},"FullyQualifiedDomainName":{},"SearchString":{},"FailureThreshold":{"type":"integer"},"Inverted":{"type":"boolean"},"HealthThreshold":{"type":"integer"},"ChildHealthChecks":{"shape":"S1o"}}},"output":{"type":"structure","required":["HealthCheck"],"members":{"HealthCheck":{"shape":"S1q"}}}},"UpdateHostedZoneComment":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}"},"input":{"locationName":"UpdateHostedZoneCommentRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"},"Comment":{}}},"output":{"type":"structure","required":["HostedZone"],"members":{"HostedZone":{"shape":"S1y"}}}},"UpdateTrafficPolicyComment":{"http":{"requestUri":"/2013-04-01/trafficpolicy/{Id}/{Version}"},"input":{"locationName":"UpdateTrafficPolicyCommentRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id","Version","Comment"],"members":{"Id":{"location":"uri","locationName":"Id"},"Version":{"location":"uri","locationName":"Version","type":"integer"},"Comment":{}}},"output":{"type":"structure","required":["TrafficPolicy"],"members":{"TrafficPolicy":{"shape":"S29"}}}},"UpdateTrafficPolicyInstance":{"http":{"requestUri":"/2013-04-01/trafficpolicyinstance/{Id}"},"input":{"locationName":"UpdateTrafficPolicyInstanceRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id","TTL","TrafficPolicyId","TrafficPolicyVersion"],"members":{"Id":{"location":"uri","locationName":"Id"},"TTL":{"type":"long"},"TrafficPolicyId":{},"TrafficPolicyVersion":{"type":"integer"}}},"output":{"type":"structure","required":["TrafficPolicyInstance"],"members":{"TrafficPolicyInstance":{"shape":"S2e"}}}}},"shapes":{"S3":{"type":"structure","members":{"VPCRegion":{},"VPCId":{}}},"S8":{"type":"structure","required":["Id","Status","SubmittedAt"],"members":{"Id":{},"Status":{},"SubmittedAt":{"type":"timestamp"},"Comment":{}}},"Se":{"type":"list","member":{"locationName":"Change","type":"structure","required":["Action","ResourceRecordSet"],"members":{"Action":{},"ResourceRecordSet":{"shape":"Sh"}}}},"Sh":{"type":"structure","required":["Name","Type"],"members":{"Name":{},"Type":{},"SetIdentifier":{},"Weight":{"type":"long"},"Region":{},"GeoLocation":{"type":"structure","members":{"ContinentCode":{},"CountryCode":{},"SubdivisionCode":{}}},"Failover":{},"TTL":{"type":"long"},"ResourceRecords":{"type":"list","member":{"locationName":"ResourceRecord","type":"structure","required":["Value"],"members":{"Value":{}}}},"AliasTarget":{"type":"structure","required":["HostedZoneId","DNSName","EvaluateTargetHealth"],"members":{"HostedZoneId":{},"DNSName":{},"EvaluateTargetHealth":{"type":"boolean"}}},"HealthCheckId":{},"TrafficPolicyInstanceId":{}}},"S14":{"type":"list","member":{"locationName":"Tag","type":"structure","members":{"Key":{},"Value":{}}}},"S1c":{"type":"structure","required":["Type"],"members":{"IPAddress":{},"Port":{"type":"integer"},"Type":{},"ResourcePath":{},"FullyQualifiedDomainName":{},"SearchString":{},"RequestInterval":{"type":"integer"},"FailureThreshold":{"type":"integer"},"MeasureLatency":{"type":"boolean"},"Inverted":{"type":"boolean"},"HealthThreshold":{"type":"integer"},"ChildHealthChecks":{"shape":"S1o"}}},"S1o":{"type":"list","member":{"locationName":"ChildHealthCheck"}},"S1q":{"type":"structure","required":["Id","CallerReference","HealthCheckConfig","HealthCheckVersion"],"members":{"Id":{},"CallerReference":{},"HealthCheckConfig":{"shape":"S1c"},"HealthCheckVersion":{"type":"long"}}},"S1v":{"type":"structure","members":{"Comment":{},"PrivateZone":{"type":"boolean"}}},"S1y":{"type":"structure","required":["Id","Name","CallerReference"],"members":{"Id":{},"Name":{},"CallerReference":{},"Config":{"shape":"S1v"},"ResourceRecordSetCount":{"type":"long"}}},"S20":{"type":"structure","required":["NameServers"],"members":{"Id":{},"CallerReference":{},"NameServers":{"type":"list","member":{"locationName":"NameServer"}}}},"S29":{"type":"structure","required":["Id","Version","Name","Type","Document"],"members":{"Id":{},"Version":{"type":"integer"},"Name":{},"Type":{},"Document":{},"Comment":{}}},"S2e":{"type":"structure","required":["Id","HostedZoneId","Name","TTL","State","Message","TrafficPolicyId","TrafficPolicyVersion","TrafficPolicyType"],"members":{"Id":{},"HostedZoneId":{},"Name":{},"TTL":{"type":"long"},"State":{},"Message":{},"TrafficPolicyId":{},"TrafficPolicyVersion":{"type":"integer"},"TrafficPolicyType":{}}},"S30":{"type":"structure","required":["Id","Status"],"members":{"Id":{},"SubmittedAt":{"type":"timestamp"},"Status":{},"Comment":{},"Submitter":{},"Changes":{"shape":"Se"}}},"S38":{"type":"structure","members":{"ContinentCode":{},"ContinentName":{},"CountryCode":{},"CountryName":{},"SubdivisionCode":{},"SubdivisionName":{}}},"S3j":{"type":"list","member":{"locationName":"HealthCheckObservation","type":"structure","members":{"IPAddress":{},"StatusReport":{"type":"structure","members":{"Status":{},"CheckedTime":{"type":"timestamp"}}}}}},"S4a":{"type":"list","member":{"shape":"S30","locationName":"ChangeBatchRecord"}},"S4l":{"type":"list","member":{"shape":"S1y","locationName":"HostedZone"}},"S4w":{"type":"structure","members":{"ResourceType":{},"ResourceId":{},"Tags":{"shape":"S14"}}},"S57":{"type":"list","member":{"shape":"S2e","locationName":"TrafficPolicyInstance"}}},"paginators":{"ListHealthChecks":{"input_token":"Marker","output_token":"NextMarker","more_results":"IsTruncated","limit_key":"MaxItems","result_key":"HealthChecks"},"ListHostedZones":{"input_token":"Marker","output_token":"NextMarker","more_results":"IsTruncated","limit_key":"MaxItems","result_key":"HostedZones"},"ListResourceRecordSets":{"more_results":"IsTruncated","limit_key":"MaxItems","result_key":"ResourceRecordSets","input_token":["StartRecordName","StartRecordType","StartRecordIdentifier"],"output_token":["NextRecordName","NextRecordType","NextRecordIdentifier"]}}};
+AWS.apiLoader.services['route53']['2013-04-01'] = {"version":"2.0","metadata":{"apiVersion":"2013-04-01","endpointPrefix":"route53","globalEndpoint":"route53.amazonaws.com","protocol":"rest-xml","serviceAbbreviation":"Route 53","serviceFullName":"Amazon Route 53","signatureVersion":"v4"},"operations":{"AssociateVPCWithHostedZone":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}/associatevpc"},"input":{"locationName":"AssociateVPCWithHostedZoneRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","VPC"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"VPC":{"shape":"S3"},"Comment":{}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"ChangeResourceRecordSets":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}/rrset/"},"input":{"locationName":"ChangeResourceRecordSetsRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","ChangeBatch"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"ChangeBatch":{"type":"structure","required":["Changes"],"members":{"Comment":{},"Changes":{"shape":"Se"}}}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"ChangeTagsForResource":{"http":{"requestUri":"/2013-04-01/tags/{ResourceType}/{ResourceId}"},"input":{"locationName":"ChangeTagsForResourceRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["ResourceType","ResourceId"],"members":{"ResourceType":{"location":"uri","locationName":"ResourceType"},"ResourceId":{"location":"uri","locationName":"ResourceId"},"AddTags":{"shape":"S14"},"RemoveTagKeys":{"type":"list","member":{"locationName":"Key"}}}},"output":{"type":"structure","members":{}}},"CreateHealthCheck":{"http":{"requestUri":"/2013-04-01/healthcheck","responseCode":201},"input":{"locationName":"CreateHealthCheckRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["CallerReference","HealthCheckConfig"],"members":{"CallerReference":{},"HealthCheckConfig":{"shape":"S1c"}}},"output":{"type":"structure","required":["HealthCheck","Location"],"members":{"HealthCheck":{"shape":"S1r"},"Location":{"location":"header","locationName":"Location"}}}},"CreateHostedZone":{"http":{"requestUri":"/2013-04-01/hostedzone","responseCode":201},"input":{"locationName":"CreateHostedZoneRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Name","CallerReference"],"members":{"Name":{},"VPC":{"shape":"S3"},"CallerReference":{},"HostedZoneConfig":{"shape":"S1w"},"DelegationSetId":{}}},"output":{"type":"structure","required":["HostedZone","ChangeInfo","DelegationSet","Location"],"members":{"HostedZone":{"shape":"S1z"},"ChangeInfo":{"shape":"S8"},"DelegationSet":{"shape":"S21"},"VPC":{"shape":"S3"},"Location":{"location":"header","locationName":"Location"}}}},"CreateReusableDelegationSet":{"http":{"requestUri":"/2013-04-01/delegationset","responseCode":201},"input":{"locationName":"CreateReusableDelegationSetRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["CallerReference"],"members":{"CallerReference":{},"HostedZoneId":{}}},"output":{"type":"structure","required":["DelegationSet","Location"],"members":{"DelegationSet":{"shape":"S21"},"Location":{"location":"header","locationName":"Location"}}}},"CreateTrafficPolicy":{"http":{"requestUri":"/2013-04-01/trafficpolicy","responseCode":201},"input":{"locationName":"CreateTrafficPolicyRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Name","Document"],"members":{"Name":{},"Document":{},"Comment":{}}},"output":{"type":"structure","required":["TrafficPolicy","Location"],"members":{"TrafficPolicy":{"shape":"S2a"},"Location":{"location":"header","locationName":"Location"}}}},"CreateTrafficPolicyInstance":{"http":{"requestUri":"/2013-04-01/trafficpolicyinstance","responseCode":201},"input":{"locationName":"CreateTrafficPolicyInstanceRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","Name","TTL","TrafficPolicyId","TrafficPolicyVersion"],"members":{"HostedZoneId":{},"Name":{},"TTL":{"type":"long"},"TrafficPolicyId":{},"TrafficPolicyVersion":{"type":"integer"}}},"output":{"type":"structure","required":["TrafficPolicyInstance","Location"],"members":{"TrafficPolicyInstance":{"shape":"S2f"},"Location":{"location":"header","locationName":"Location"}}}},"CreateTrafficPolicyVersion":{"http":{"requestUri":"/2013-04-01/trafficpolicy/{Id}","responseCode":201},"input":{"locationName":"CreateTrafficPolicyVersionRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id","Document"],"members":{"Id":{"location":"uri","locationName":"Id"},"Document":{},"Comment":{}}},"output":{"type":"structure","required":["TrafficPolicy","Location"],"members":{"TrafficPolicy":{"shape":"S2a"},"Location":{"location":"header","locationName":"Location"}}}},"DeleteHealthCheck":{"http":{"method":"DELETE","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","members":{}}},"DeleteHostedZone":{"http":{"method":"DELETE","requestUri":"/2013-04-01/hostedzone/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"DeleteReusableDelegationSet":{"http":{"method":"DELETE","requestUri":"/2013-04-01/delegationset/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"DeleteTrafficPolicy":{"http":{"method":"DELETE","requestUri":"/2013-04-01/trafficpolicy/{Id}/{Version}"},"input":{"type":"structure","required":["Id","Version"],"members":{"Id":{"location":"uri","locationName":"Id"},"Version":{"location":"uri","locationName":"Version","type":"integer"}}},"output":{"type":"structure","members":{}}},"DeleteTrafficPolicyInstance":{"http":{"method":"DELETE","requestUri":"/2013-04-01/trafficpolicyinstance/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"DisassociateVPCFromHostedZone":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}/disassociatevpc"},"input":{"locationName":"DisassociateVPCFromHostedZoneRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HostedZoneId","VPC"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"VPC":{"shape":"S3"},"Comment":{}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"GetChange":{"http":{"method":"GET","requestUri":"/2013-04-01/change/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["ChangeInfo"],"members":{"ChangeInfo":{"shape":"S8"}}}},"GetChangeDetails":{"http":{"method":"GET","requestUri":"/2013-04-01/changedetails/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}},"deprecated":true},"output":{"type":"structure","required":["ChangeBatchRecord"],"members":{"ChangeBatchRecord":{"shape":"S31"}},"deprecated":true},"deprecated":true},"GetCheckerIpRanges":{"http":{"method":"GET","requestUri":"/2013-04-01/checkeripranges"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["CheckerIpRanges"],"members":{"CheckerIpRanges":{"type":"list","member":{}}}}},"GetGeoLocation":{"http":{"method":"GET","requestUri":"/2013-04-01/geolocation"},"input":{"type":"structure","members":{"ContinentCode":{"location":"querystring","locationName":"continentcode"},"CountryCode":{"location":"querystring","locationName":"countrycode"},"SubdivisionCode":{"location":"querystring","locationName":"subdivisioncode"}}},"output":{"type":"structure","required":["GeoLocationDetails"],"members":{"GeoLocationDetails":{"shape":"S39"}}}},"GetHealthCheck":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","required":["HealthCheck"],"members":{"HealthCheck":{"shape":"S1r"}}}},"GetHealthCheckCount":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheckcount"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["HealthCheckCount"],"members":{"HealthCheckCount":{"type":"long"}}}},"GetHealthCheckLastFailureReason":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}/lastfailurereason"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","required":["HealthCheckObservations"],"members":{"HealthCheckObservations":{"shape":"S3k"}}}},"GetHealthCheckStatus":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck/{HealthCheckId}/status"},"input":{"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"}}},"output":{"type":"structure","required":["HealthCheckObservations"],"members":{"HealthCheckObservations":{"shape":"S3k"}}}},"GetHostedZone":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["HostedZone"],"members":{"HostedZone":{"shape":"S1z"},"DelegationSet":{"shape":"S21"},"VPCs":{"type":"list","member":{"shape":"S3","locationName":"VPC"}}}}},"GetHostedZoneCount":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzonecount"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["HostedZoneCount"],"members":{"HostedZoneCount":{"type":"long"}}}},"GetReusableDelegationSet":{"http":{"method":"GET","requestUri":"/2013-04-01/delegationset/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["DelegationSet"],"members":{"DelegationSet":{"shape":"S21"}}}},"GetTrafficPolicy":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicy/{Id}/{Version}"},"input":{"type":"structure","required":["Id","Version"],"members":{"Id":{"location":"uri","locationName":"Id"},"Version":{"location":"uri","locationName":"Version","type":"integer"}}},"output":{"type":"structure","required":["TrafficPolicy"],"members":{"TrafficPolicy":{"shape":"S2a"}}}},"GetTrafficPolicyInstance":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstance/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","required":["TrafficPolicyInstance"],"members":{"TrafficPolicyInstance":{"shape":"S2f"}}}},"GetTrafficPolicyInstanceCount":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstancecount"},"input":{"type":"structure","members":{}},"output":{"type":"structure","required":["TrafficPolicyInstanceCount"],"members":{"TrafficPolicyInstanceCount":{"type":"integer"}}}},"ListChangeBatchesByHostedZone":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}/changes"},"input":{"type":"structure","required":["HostedZoneId","StartDate","EndDate"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"StartDate":{"shape":"S46","location":"querystring","locationName":"startDate"},"EndDate":{"shape":"S46","location":"querystring","locationName":"endDate"},"MaxItems":{"location":"querystring","locationName":"maxItems"},"Marker":{"location":"querystring","locationName":"marker"}},"deprecated":true},"output":{"type":"structure","required":["MaxItems","Marker","ChangeBatchRecords"],"members":{"MaxItems":{},"Marker":{},"IsTruncated":{"type":"boolean"},"ChangeBatchRecords":{"shape":"S4b"},"NextMarker":{}},"deprecated":true},"deprecated":true},"ListChangeBatchesByRRSet":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}/rrsChanges"},"input":{"type":"structure","required":["HostedZoneId","Name","Type","StartDate","EndDate"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"Name":{"location":"querystring","locationName":"rrSet_name"},"Type":{"location":"querystring","locationName":"type"},"SetIdentifier":{"location":"querystring","locationName":"identifier"},"StartDate":{"shape":"S46","location":"querystring","locationName":"startDate"},"EndDate":{"shape":"S46","location":"querystring","locationName":"endDate"},"MaxItems":{"location":"querystring","locationName":"maxItems"},"Marker":{"location":"querystring","locationName":"marker"}},"deprecated":true},"output":{"type":"structure","required":["MaxItems","Marker","ChangeBatchRecords"],"members":{"MaxItems":{},"Marker":{},"IsTruncated":{"type":"boolean"},"ChangeBatchRecords":{"shape":"S4b"},"NextMarker":{}},"deprecated":true},"deprecated":true},"ListGeoLocations":{"http":{"method":"GET","requestUri":"/2013-04-01/geolocations"},"input":{"type":"structure","members":{"StartContinentCode":{"location":"querystring","locationName":"startcontinentcode"},"StartCountryCode":{"location":"querystring","locationName":"startcountrycode"},"StartSubdivisionCode":{"location":"querystring","locationName":"startsubdivisioncode"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["GeoLocationDetailsList","IsTruncated","MaxItems"],"members":{"GeoLocationDetailsList":{"type":"list","member":{"shape":"S39","locationName":"GeoLocationDetails"}},"IsTruncated":{"type":"boolean"},"NextContinentCode":{},"NextCountryCode":{},"NextSubdivisionCode":{},"MaxItems":{}}}},"ListHealthChecks":{"http":{"method":"GET","requestUri":"/2013-04-01/healthcheck"},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"marker"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["HealthChecks","Marker","IsTruncated","MaxItems"],"members":{"HealthChecks":{"type":"list","member":{"shape":"S1r","locationName":"HealthCheck"}},"Marker":{},"IsTruncated":{"type":"boolean"},"NextMarker":{},"MaxItems":{}}}},"ListHostedZones":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone"},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"marker"},"MaxItems":{"location":"querystring","locationName":"maxitems"},"DelegationSetId":{"location":"querystring","locationName":"delegationsetid"}}},"output":{"type":"structure","required":["HostedZones","Marker","IsTruncated","MaxItems"],"members":{"HostedZones":{"shape":"S4m"},"Marker":{},"IsTruncated":{"type":"boolean"},"NextMarker":{},"MaxItems":{}}}},"ListHostedZonesByName":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzonesbyname"},"input":{"type":"structure","members":{"DNSName":{"location":"querystring","locationName":"dnsname"},"HostedZoneId":{"location":"querystring","locationName":"hostedzoneid"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["HostedZones","IsTruncated","MaxItems"],"members":{"HostedZones":{"shape":"S4m"},"DNSName":{},"HostedZoneId":{},"IsTruncated":{"type":"boolean"},"NextDNSName":{},"NextHostedZoneId":{},"MaxItems":{}}}},"ListResourceRecordSets":{"http":{"method":"GET","requestUri":"/2013-04-01/hostedzone/{Id}/rrset"},"input":{"type":"structure","required":["HostedZoneId"],"members":{"HostedZoneId":{"location":"uri","locationName":"Id"},"StartRecordName":{"location":"querystring","locationName":"name"},"StartRecordType":{"location":"querystring","locationName":"type"},"StartRecordIdentifier":{"location":"querystring","locationName":"identifier"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["ResourceRecordSets","IsTruncated","MaxItems"],"members":{"ResourceRecordSets":{"type":"list","member":{"shape":"Sh","locationName":"ResourceRecordSet"}},"IsTruncated":{"type":"boolean"},"NextRecordName":{},"NextRecordType":{},"NextRecordIdentifier":{},"MaxItems":{}}}},"ListReusableDelegationSets":{"http":{"method":"GET","requestUri":"/2013-04-01/delegationset"},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"marker"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["DelegationSets","Marker","IsTruncated","MaxItems"],"members":{"DelegationSets":{"type":"list","member":{"shape":"S21","locationName":"DelegationSet"}},"Marker":{},"IsTruncated":{"type":"boolean"},"NextMarker":{},"MaxItems":{}}}},"ListTagsForResource":{"http":{"method":"GET","requestUri":"/2013-04-01/tags/{ResourceType}/{ResourceId}"},"input":{"type":"structure","required":["ResourceType","ResourceId"],"members":{"ResourceType":{"location":"uri","locationName":"ResourceType"},"ResourceId":{"location":"uri","locationName":"ResourceId"}}},"output":{"type":"structure","required":["ResourceTagSet"],"members":{"ResourceTagSet":{"shape":"S4x"}}}},"ListTagsForResources":{"http":{"requestUri":"/2013-04-01/tags/{ResourceType}"},"input":{"locationName":"ListTagsForResourcesRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["ResourceType","ResourceIds"],"members":{"ResourceType":{"location":"uri","locationName":"ResourceType"},"ResourceIds":{"type":"list","member":{"locationName":"ResourceId"}}}},"output":{"type":"structure","required":["ResourceTagSets"],"members":{"ResourceTagSets":{"type":"list","member":{"shape":"S4x","locationName":"ResourceTagSet"}}}}},"ListTrafficPolicies":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicies"},"input":{"type":"structure","members":{"TrafficPolicyIdMarker":{"location":"querystring","locationName":"trafficpolicyid"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicySummaries","IsTruncated","TrafficPolicyIdMarker","MaxItems"],"members":{"TrafficPolicySummaries":{"type":"list","member":{"locationName":"TrafficPolicySummary","type":"structure","required":["Id","Name","Type","LatestVersion","TrafficPolicyCount"],"members":{"Id":{},"Name":{},"Type":{},"LatestVersion":{"type":"integer"},"TrafficPolicyCount":{"type":"integer"}}}},"IsTruncated":{"type":"boolean"},"TrafficPolicyIdMarker":{},"MaxItems":{}}}},"ListTrafficPolicyInstances":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstances"},"input":{"type":"structure","members":{"HostedZoneIdMarker":{"location":"querystring","locationName":"hostedzoneid"},"TrafficPolicyInstanceNameMarker":{"location":"querystring","locationName":"trafficpolicyinstancename"},"TrafficPolicyInstanceTypeMarker":{"location":"querystring","locationName":"trafficpolicyinstancetype"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicyInstances","IsTruncated","MaxItems"],"members":{"TrafficPolicyInstances":{"shape":"S58"},"HostedZoneIdMarker":{},"TrafficPolicyInstanceNameMarker":{},"TrafficPolicyInstanceTypeMarker":{},"IsTruncated":{"type":"boolean"},"MaxItems":{}}}},"ListTrafficPolicyInstancesByHostedZone":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstances/hostedzone"},"input":{"type":"structure","required":["HostedZoneId"],"members":{"HostedZoneId":{"location":"querystring","locationName":"id"},"TrafficPolicyInstanceNameMarker":{"location":"querystring","locationName":"trafficpolicyinstancename"},"TrafficPolicyInstanceTypeMarker":{"location":"querystring","locationName":"trafficpolicyinstancetype"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicyInstances","IsTruncated","MaxItems"],"members":{"TrafficPolicyInstances":{"shape":"S58"},"TrafficPolicyInstanceNameMarker":{},"TrafficPolicyInstanceTypeMarker":{},"IsTruncated":{"type":"boolean"},"MaxItems":{}}}},"ListTrafficPolicyInstancesByPolicy":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicyinstances/trafficpolicy"},"input":{"type":"structure","required":["TrafficPolicyId","TrafficPolicyVersion"],"members":{"TrafficPolicyId":{"location":"querystring","locationName":"id"},"TrafficPolicyVersion":{"location":"querystring","locationName":"version","type":"integer"},"HostedZoneIdMarker":{"location":"querystring","locationName":"hostedzoneid"},"TrafficPolicyInstanceNameMarker":{"location":"querystring","locationName":"trafficpolicyinstancename"},"TrafficPolicyInstanceTypeMarker":{"location":"querystring","locationName":"trafficpolicyinstancetype"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicyInstances","IsTruncated","MaxItems"],"members":{"TrafficPolicyInstances":{"shape":"S58"},"HostedZoneIdMarker":{},"TrafficPolicyInstanceNameMarker":{},"TrafficPolicyInstanceTypeMarker":{},"IsTruncated":{"type":"boolean"},"MaxItems":{}}}},"ListTrafficPolicyVersions":{"http":{"method":"GET","requestUri":"/2013-04-01/trafficpolicies/{Id}/versions"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"},"TrafficPolicyVersionMarker":{"location":"querystring","locationName":"trafficpolicyversion"},"MaxItems":{"location":"querystring","locationName":"maxitems"}}},"output":{"type":"structure","required":["TrafficPolicies","IsTruncated","TrafficPolicyVersionMarker","MaxItems"],"members":{"TrafficPolicies":{"type":"list","member":{"shape":"S2a","locationName":"TrafficPolicy"}},"IsTruncated":{"type":"boolean"},"TrafficPolicyVersionMarker":{},"MaxItems":{}}}},"UpdateHealthCheck":{"http":{"requestUri":"/2013-04-01/healthcheck/{HealthCheckId}"},"input":{"locationName":"UpdateHealthCheckRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["HealthCheckId"],"members":{"HealthCheckId":{"location":"uri","locationName":"HealthCheckId"},"HealthCheckVersion":{"type":"long"},"IPAddress":{},"Port":{"type":"integer"},"ResourcePath":{},"FullyQualifiedDomainName":{},"SearchString":{},"FailureThreshold":{"type":"integer"},"Inverted":{"type":"boolean"},"HealthThreshold":{"type":"integer"},"ChildHealthChecks":{"shape":"S1o"},"EnableSNI":{"type":"boolean"}}},"output":{"type":"structure","required":["HealthCheck"],"members":{"HealthCheck":{"shape":"S1r"}}}},"UpdateHostedZoneComment":{"http":{"requestUri":"/2013-04-01/hostedzone/{Id}"},"input":{"locationName":"UpdateHostedZoneCommentRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"},"Comment":{}}},"output":{"type":"structure","required":["HostedZone"],"members":{"HostedZone":{"shape":"S1z"}}}},"UpdateTrafficPolicyComment":{"http":{"requestUri":"/2013-04-01/trafficpolicy/{Id}/{Version}"},"input":{"locationName":"UpdateTrafficPolicyCommentRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id","Version","Comment"],"members":{"Id":{"location":"uri","locationName":"Id"},"Version":{"location":"uri","locationName":"Version","type":"integer"},"Comment":{}}},"output":{"type":"structure","required":["TrafficPolicy"],"members":{"TrafficPolicy":{"shape":"S2a"}}}},"UpdateTrafficPolicyInstance":{"http":{"requestUri":"/2013-04-01/trafficpolicyinstance/{Id}"},"input":{"locationName":"UpdateTrafficPolicyInstanceRequest","xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},"type":"structure","required":["Id","TTL","TrafficPolicyId","TrafficPolicyVersion"],"members":{"Id":{"location":"uri","locationName":"Id"},"TTL":{"type":"long"},"TrafficPolicyId":{},"TrafficPolicyVersion":{"type":"integer"}}},"output":{"type":"structure","required":["TrafficPolicyInstance"],"members":{"TrafficPolicyInstance":{"shape":"S2f"}}}}},"shapes":{"S3":{"type":"structure","members":{"VPCRegion":{},"VPCId":{}}},"S8":{"type":"structure","required":["Id","Status","SubmittedAt"],"members":{"Id":{},"Status":{},"SubmittedAt":{"type":"timestamp"},"Comment":{}}},"Se":{"type":"list","member":{"locationName":"Change","type":"structure","required":["Action","ResourceRecordSet"],"members":{"Action":{},"ResourceRecordSet":{"shape":"Sh"}}}},"Sh":{"type":"structure","required":["Name","Type"],"members":{"Name":{},"Type":{},"SetIdentifier":{},"Weight":{"type":"long"},"Region":{},"GeoLocation":{"type":"structure","members":{"ContinentCode":{},"CountryCode":{},"SubdivisionCode":{}}},"Failover":{},"TTL":{"type":"long"},"ResourceRecords":{"type":"list","member":{"locationName":"ResourceRecord","type":"structure","required":["Value"],"members":{"Value":{}}}},"AliasTarget":{"type":"structure","required":["HostedZoneId","DNSName","EvaluateTargetHealth"],"members":{"HostedZoneId":{},"DNSName":{},"EvaluateTargetHealth":{"type":"boolean"}}},"HealthCheckId":{},"TrafficPolicyInstanceId":{}}},"S14":{"type":"list","member":{"locationName":"Tag","type":"structure","members":{"Key":{},"Value":{}}}},"S1c":{"type":"structure","required":["Type"],"members":{"IPAddress":{},"Port":{"type":"integer"},"Type":{},"ResourcePath":{},"FullyQualifiedDomainName":{},"SearchString":{},"RequestInterval":{"type":"integer"},"FailureThreshold":{"type":"integer"},"MeasureLatency":{"type":"boolean"},"Inverted":{"type":"boolean"},"HealthThreshold":{"type":"integer"},"ChildHealthChecks":{"shape":"S1o"},"EnableSNI":{"type":"boolean"}}},"S1o":{"type":"list","member":{"locationName":"ChildHealthCheck"}},"S1r":{"type":"structure","required":["Id","CallerReference","HealthCheckConfig","HealthCheckVersion"],"members":{"Id":{},"CallerReference":{},"HealthCheckConfig":{"shape":"S1c"},"HealthCheckVersion":{"type":"long"}}},"S1w":{"type":"structure","members":{"Comment":{},"PrivateZone":{"type":"boolean"}}},"S1z":{"type":"structure","required":["Id","Name","CallerReference"],"members":{"Id":{},"Name":{},"CallerReference":{},"Config":{"shape":"S1w"},"ResourceRecordSetCount":{"type":"long"}}},"S21":{"type":"structure","required":["NameServers"],"members":{"Id":{},"CallerReference":{},"NameServers":{"type":"list","member":{"locationName":"NameServer"}}}},"S2a":{"type":"structure","required":["Id","Version","Name","Type","Document"],"members":{"Id":{},"Version":{"type":"integer"},"Name":{},"Type":{},"Document":{},"Comment":{}}},"S2f":{"type":"structure","required":["Id","HostedZoneId","Name","TTL","State","Message","TrafficPolicyId","TrafficPolicyVersion","TrafficPolicyType"],"members":{"Id":{},"HostedZoneId":{},"Name":{},"TTL":{"type":"long"},"State":{},"Message":{},"TrafficPolicyId":{},"TrafficPolicyVersion":{"type":"integer"},"TrafficPolicyType":{}}},"S31":{"type":"structure","required":["Id","Status"],"members":{"Id":{},"SubmittedAt":{"type":"timestamp"},"Status":{},"Comment":{},"Submitter":{},"Changes":{"shape":"Se"}},"deprecated":true},"S39":{"type":"structure","members":{"ContinentCode":{},"ContinentName":{},"CountryCode":{},"CountryName":{},"SubdivisionCode":{},"SubdivisionName":{}}},"S3k":{"type":"list","member":{"locationName":"HealthCheckObservation","type":"structure","members":{"IPAddress":{},"StatusReport":{"type":"structure","members":{"Status":{},"CheckedTime":{"type":"timestamp"}}}}}},"S46":{"type":"string","deprecated":true},"S4b":{"type":"list","member":{"shape":"S31","locationName":"ChangeBatchRecord"},"deprecated":true},"S4m":{"type":"list","member":{"shape":"S1z","locationName":"HostedZone"}},"S4x":{"type":"structure","members":{"ResourceType":{},"ResourceId":{},"Tags":{"shape":"S14"}}},"S58":{"type":"list","member":{"shape":"S2f","locationName":"TrafficPolicyInstance"}}},"paginators":{"ListHealthChecks":{"input_token":"Marker","output_token":"NextMarker","more_results":"IsTruncated","limit_key":"MaxItems","result_key":"HealthChecks"},"ListHostedZones":{"input_token":"Marker","output_token":"NextMarker","more_results":"IsTruncated","limit_key":"MaxItems","result_key":"HostedZones"},"ListResourceRecordSets":{"more_results":"IsTruncated","limit_key":"MaxItems","result_key":"ResourceRecordSets","input_token":["StartRecordName","StartRecordType","StartRecordIdentifier"],"output_token":["NextRecordName","NextRecordType","NextRecordIdentifier"]}}};
 AWS.apiLoader.services['s3'] = {};
 AWS.S3 = AWS.Service.defineService('s3', [ '2006-03-01' ]);
 require('./services/s3');
@@ -484,7 +485,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.2.37',
+  VERSION: '2.2.38',
 
 
   Signers: {},
@@ -13053,30 +13054,24 @@ function baseAssign(object, source) {
 module.exports = baseAssign;
 
 },{"./_copyObject":139,"./keys":200}],117:[function(require,module,exports){
-var isArray = require('./isArray'),
-    stringToPath = require('./_stringToPath');
-
-
-function baseCastPath(value) {
-  return isArray(value) ? value : stringToPath(value);
-}
-
-module.exports = baseCastPath;
-
-},{"./_stringToPath":179,"./isArray":188}],118:[function(require,module,exports){
 var isObject = require('./isObject');
 
 
-var objectCreate = Object.create;
-
-
-function baseCreate(proto) {
-  return isObject(proto) ? objectCreate(proto) : {};
-}
+var baseCreate = (function() {
+  function object() {}
+  return function(prototype) {
+    if (isObject(prototype)) {
+      object.prototype = prototype;
+      var result = new object;
+      object.prototype = undefined;
+    }
+    return result || {};
+  };
+}());
 
 module.exports = baseCreate;
 
-},{"./isObject":195}],119:[function(require,module,exports){
+},{"./isObject":195}],118:[function(require,module,exports){
 var baseForOwn = require('./_baseForOwn'),
     createBaseEach = require('./_createBaseEach');
 
@@ -13085,7 +13080,7 @@ var baseEach = createBaseEach(baseForOwn);
 
 module.exports = baseEach;
 
-},{"./_baseForOwn":122,"./_createBaseEach":142}],120:[function(require,module,exports){
+},{"./_baseForOwn":121,"./_createBaseEach":142}],119:[function(require,module,exports){
 var baseEach = require('./_baseEach');
 
 
@@ -13100,7 +13095,7 @@ function baseEvery(collection, predicate) {
 
 module.exports = baseEvery;
 
-},{"./_baseEach":119}],121:[function(require,module,exports){
+},{"./_baseEach":118}],120:[function(require,module,exports){
 var createBaseFor = require('./_createBaseFor');
 
 
@@ -13108,7 +13103,7 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"./_createBaseFor":143}],122:[function(require,module,exports){
+},{"./_createBaseFor":143}],121:[function(require,module,exports){
 var baseFor = require('./_baseFor'),
     keys = require('./keys');
 
@@ -13119,13 +13114,13 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"./_baseFor":121,"./keys":200}],123:[function(require,module,exports){
-var baseCastPath = require('./_baseCastPath'),
+},{"./_baseFor":120,"./keys":200}],122:[function(require,module,exports){
+var baseToPath = require('./_baseToPath'),
     isKey = require('./_isKey');
 
 
 function baseGet(object, path) {
-  path = isKey(path, object) ? [path + ''] : baseCastPath(path);
+  path = isKey(path, object) ? [path + ''] : baseToPath(path);
 
   var index = 0,
       length = path.length;
@@ -13138,7 +13133,7 @@ function baseGet(object, path) {
 
 module.exports = baseGet;
 
-},{"./_baseCastPath":117,"./_isKey":160}],124:[function(require,module,exports){
+},{"./_baseToPath":137,"./_isKey":160}],123:[function(require,module,exports){
 
 var objectProto = Object.prototype;
 
@@ -13156,7 +13151,7 @@ function baseHas(object, key) {
 
 module.exports = baseHas;
 
-},{}],125:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 
 function baseHasIn(object, key) {
   return key in Object(object);
@@ -13164,7 +13159,7 @@ function baseHasIn(object, key) {
 
 module.exports = baseHasIn;
 
-},{}],126:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 var baseIsEqualDeep = require('./_baseIsEqualDeep'),
     isObject = require('./isObject'),
     isObjectLike = require('./isObjectLike');
@@ -13182,7 +13177,7 @@ function baseIsEqual(value, other, customizer, bitmask, stack) {
 
 module.exports = baseIsEqual;
 
-},{"./_baseIsEqualDeep":127,"./isObject":195,"./isObjectLike":196}],127:[function(require,module,exports){
+},{"./_baseIsEqualDeep":126,"./isObject":195,"./isObjectLike":196}],126:[function(require,module,exports){
 var Stack = require('./_Stack'),
     equalArrays = require('./_equalArrays'),
     equalByTag = require('./_equalByTag'),
@@ -13254,7 +13249,7 @@ function baseIsEqualDeep(object, other, equalFunc, customizer, bitmask, stack) {
 
 module.exports = baseIsEqualDeep;
 
-},{"./_Stack":102,"./_equalArrays":144,"./_equalByTag":145,"./_equalObjects":146,"./_getTag":150,"./_isHostObject":157,"./isArray":188,"./isTypedArray":199}],128:[function(require,module,exports){
+},{"./_Stack":102,"./_equalArrays":144,"./_equalByTag":145,"./_equalObjects":146,"./_getTag":150,"./_isHostObject":157,"./isArray":188,"./isTypedArray":199}],127:[function(require,module,exports){
 var Stack = require('./_Stack'),
     baseIsEqual = require('./_baseIsEqual');
 
@@ -13308,7 +13303,7 @@ function baseIsMatch(object, source, matchData, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"./_Stack":102,"./_baseIsEqual":126}],129:[function(require,module,exports){
+},{"./_Stack":102,"./_baseIsEqual":125}],128:[function(require,module,exports){
 var baseMatches = require('./_baseMatches'),
     baseMatchesProperty = require('./_baseMatchesProperty'),
     identity = require('./identity'),
@@ -13334,7 +13329,7 @@ function baseIteratee(value) {
 
 module.exports = baseIteratee;
 
-},{"./_baseMatches":131,"./_baseMatchesProperty":132,"./identity":186,"./isArray":188,"./property":202}],130:[function(require,module,exports){
+},{"./_baseMatches":130,"./_baseMatchesProperty":131,"./identity":186,"./isArray":188,"./property":202}],129:[function(require,module,exports){
 
 var nativeKeys = Object.keys;
 
@@ -13345,7 +13340,7 @@ function baseKeys(object) {
 
 module.exports = baseKeys;
 
-},{}],131:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 var baseIsMatch = require('./_baseIsMatch'),
     getMatchData = require('./_getMatchData');
 
@@ -13371,7 +13366,7 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"./_baseIsMatch":128,"./_getMatchData":148}],132:[function(require,module,exports){
+},{"./_baseIsMatch":127,"./_getMatchData":148}],131:[function(require,module,exports){
 var baseIsEqual = require('./_baseIsEqual'),
     get = require('./get'),
     hasIn = require('./hasIn');
@@ -13392,7 +13387,7 @@ function baseMatchesProperty(path, srcValue) {
 
 module.exports = baseMatchesProperty;
 
-},{"./_baseIsEqual":126,"./get":184,"./hasIn":185}],133:[function(require,module,exports){
+},{"./_baseIsEqual":125,"./get":184,"./hasIn":185}],132:[function(require,module,exports){
 
 function baseProperty(key) {
   return function(object) {
@@ -13402,7 +13397,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],134:[function(require,module,exports){
+},{}],133:[function(require,module,exports){
 var baseGet = require('./_baseGet');
 
 
@@ -13414,7 +13409,7 @@ function basePropertyDeep(path) {
 
 module.exports = basePropertyDeep;
 
-},{"./_baseGet":123}],135:[function(require,module,exports){
+},{"./_baseGet":122}],134:[function(require,module,exports){
 
 function baseSlice(array, start, end) {
   var index = -1,
@@ -13439,7 +13434,7 @@ function baseSlice(array, start, end) {
 
 module.exports = baseSlice;
 
-},{}],136:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 
 function baseTimes(n, iteratee) {
   var index = -1,
@@ -13453,7 +13448,7 @@ function baseTimes(n, iteratee) {
 
 module.exports = baseTimes;
 
-},{}],137:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 var arrayMap = require('./_arrayMap');
 
 
@@ -13465,7 +13460,18 @@ function baseToPairs(object, props) {
 
 module.exports = baseToPairs;
 
-},{"./_arrayMap":108}],138:[function(require,module,exports){
+},{"./_arrayMap":108}],137:[function(require,module,exports){
+var isArray = require('./isArray'),
+    stringToPath = require('./_stringToPath');
+
+
+function baseToPath(value) {
+  return isArray(value) ? value : stringToPath(value);
+}
+
+module.exports = baseToPath;
+
+},{"./_stringToPath":179,"./isArray":188}],138:[function(require,module,exports){
 
 function checkGlobal(value) {
   return (value && value.Object === Object) ? value : null;
@@ -13494,11 +13500,8 @@ function copyObjectWith(source, props, object, customizer) {
       length = props.length;
 
   while (++index < length) {
-    var key = props[index];
-
-    var newValue = customizer
-      ? customizer(object[key], source[key], key, object, source)
-      : source[key];
+    var key = props[index],
+        newValue = customizer ? customizer(object[key], source[key], key, object, source) : source[key];
 
     assignValue(object, key, newValue);
   }
@@ -13519,10 +13522,7 @@ function createAssigner(assigner) {
         customizer = length > 1 ? sources[length - 1] : undefined,
         guard = length > 2 ? sources[2] : undefined;
 
-    customizer = typeof customizer == 'function'
-      ? (length--, customizer)
-      : undefined;
-
+    customizer = typeof customizer == 'function' ? (length--, customizer) : undefined;
     if (guard && isIterateeCall(sources[0], sources[1], guard)) {
       customizer = length < 3 ? undefined : customizer;
       length = 1;
@@ -13785,7 +13785,7 @@ function equalObjects(object, other, equalFunc, customizer, bitmask, stack) {
 
 module.exports = equalObjects;
 
-},{"./_baseHas":124,"./keys":200}],147:[function(require,module,exports){
+},{"./_baseHas":123,"./keys":200}],147:[function(require,module,exports){
 var baseProperty = require('./_baseProperty');
 
 
@@ -13793,7 +13793,7 @@ var getLength = baseProperty('length');
 
 module.exports = getLength;
 
-},{"./_baseProperty":133}],148:[function(require,module,exports){
+},{"./_baseProperty":132}],148:[function(require,module,exports){
 var isStrictComparable = require('./_isStrictComparable'),
     toPairs = require('./toPairs');
 
@@ -13873,7 +13873,7 @@ if ((Map && getTag(new Map) != mapTag) ||
 module.exports = getTag;
 
 },{"./_Map":99,"./_Set":101,"./_WeakMap":105}],151:[function(require,module,exports){
-var baseCastPath = require('./_baseCastPath'),
+var baseToPath = require('./_baseToPath'),
     isArguments = require('./isArguments'),
     isArray = require('./isArray'),
     isIndex = require('./_isIndex'),
@@ -13890,7 +13890,7 @@ function hasPath(object, path, hasFunc) {
   }
   var result = hasFunc(object, path);
   if (!result && !isKey(path)) {
-    path = baseCastPath(path);
+    path = baseToPath(path);
     object = parent(object, path);
     if (object != null) {
       path = last(path);
@@ -13906,7 +13906,7 @@ function hasPath(object, path, hasFunc) {
 
 module.exports = hasPath;
 
-},{"./_baseCastPath":117,"./_isIndex":158,"./_isKey":160,"./_parent":171,"./isArguments":187,"./isArray":188,"./isLength":193,"./isString":197,"./last":201}],152:[function(require,module,exports){
+},{"./_baseToPath":137,"./_isIndex":158,"./_isKey":160,"./_parent":171,"./isArguments":187,"./isArray":188,"./isLength":193,"./isString":197,"./last":201}],152:[function(require,module,exports){
 var hashHas = require('./_hashHas');
 
 
@@ -13987,7 +13987,7 @@ function indexKeys(object) {
 
 module.exports = indexKeys;
 
-},{"./_baseTimes":136,"./isArguments":187,"./isArray":188,"./isLength":193,"./isString":197}],157:[function(require,module,exports){
+},{"./_baseTimes":135,"./isArguments":187,"./isArray":188,"./isLength":193,"./isString":197}],157:[function(require,module,exports){
 
 function isHostObject(value) {
   var result = false;
@@ -14063,7 +14063,7 @@ module.exports = isKey;
 function isKeyable(value) {
   var type = typeof value;
   return type == 'number' || type == 'boolean' ||
-    (type == 'string' && value != '__proto__') || value == null;
+    (type == 'string' && value !== '__proto__') || value == null;
 }
 
 module.exports = isKeyable;
@@ -14098,11 +14098,7 @@ var Hash = require('./_Hash'),
 
 
 function mapClear() {
-  this.__data__ = {
-    'hash': new Hash,
-    'map': Map ? new Map : [],
-    'string': new Hash
-  };
+  this.__data__ = { 'hash': new Hash, 'map': Map ? new Map : [], 'string': new Hash };
 }
 
 module.exports = mapClear;
@@ -14212,7 +14208,7 @@ function parent(object, path) {
 
 module.exports = parent;
 
-},{"./_baseSlice":135,"./get":184}],172:[function(require,module,exports){
+},{"./_baseSlice":134,"./get":184}],172:[function(require,module,exports){
 (function (global){
 var checkGlobal = require('./_checkGlobal');
 
@@ -14223,14 +14219,10 @@ var objectTypes = {
 };
 
 
-var freeExports = (objectTypes[typeof exports] && exports && !exports.nodeType)
-  ? exports
-  : undefined;
+var freeExports = (objectTypes[typeof exports] && exports && !exports.nodeType) ? exports : null;
 
 
-var freeModule = (objectTypes[typeof module] && module && !module.nodeType)
-  ? module
-  : undefined;
+var freeModule = (objectTypes[typeof module] && module && !module.nodeType) ? module : null;
 
 
 var freeGlobal = checkGlobal(freeExports && freeModule && typeof global == 'object' && global);
@@ -14245,9 +14237,7 @@ var freeWindow = checkGlobal(objectTypes[typeof window] && window);
 var thisGlobal = checkGlobal(objectTypes[typeof this] && this);
 
 
-var root = freeGlobal ||
-  ((freeWindow !== (thisGlobal && thisGlobal.window)) && freeWindow) ||
-    freeSelf || thisGlobal || Function('return this')();
+var root = freeGlobal || ((freeWindow !== (thisGlobal && thisGlobal.window)) && freeWindow) || freeSelf || thisGlobal || Function('return this')();
 
 module.exports = root;
 
@@ -14386,7 +14376,7 @@ function create(prototype, properties) {
 
 module.exports = create;
 
-},{"./_baseAssign":116,"./_baseCreate":118}],182:[function(require,module,exports){
+},{"./_baseAssign":116,"./_baseCreate":117}],182:[function(require,module,exports){
 
 function eq(value, other) {
   return value === other || (value !== value && other !== other);
@@ -14412,7 +14402,7 @@ function every(collection, predicate, guard) {
 
 module.exports = every;
 
-},{"./_arrayEvery":107,"./_baseEvery":120,"./_baseIteratee":129,"./_isIterateeCall":159,"./isArray":188}],184:[function(require,module,exports){
+},{"./_arrayEvery":107,"./_baseEvery":119,"./_baseIteratee":128,"./_isIterateeCall":159,"./isArray":188}],184:[function(require,module,exports){
 var baseGet = require('./_baseGet');
 
 
@@ -14423,7 +14413,7 @@ function get(object, path, defaultValue) {
 
 module.exports = get;
 
-},{"./_baseGet":123}],185:[function(require,module,exports){
+},{"./_baseGet":122}],185:[function(require,module,exports){
 var baseHasIn = require('./_baseHasIn'),
     hasPath = require('./_hasPath');
 
@@ -14434,7 +14424,7 @@ function hasIn(object, path) {
 
 module.exports = hasIn;
 
-},{"./_baseHasIn":125,"./_hasPath":151}],186:[function(require,module,exports){
+},{"./_baseHasIn":124,"./_hasPath":151}],186:[function(require,module,exports){
 
 function identity(value) {
   return value;
@@ -14514,8 +14504,7 @@ var hasOwnProperty = objectProto.hasOwnProperty;
 
 function isEmpty(value) {
   if (isArrayLike(value) &&
-      (isArray(value) || isString(value) ||
-        isFunction(value.splice) || isArguments(value))) {
+      (isArray(value) || isString(value) || isFunction(value.splice) || isArguments(value))) {
     return !value.length;
   }
   for (var key in value) {
@@ -14555,8 +14544,7 @@ var MAX_SAFE_INTEGER = 9007199254740991;
 
 
 function isLength(value) {
-  return typeof value == 'number' &&
-    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
 }
 
 module.exports = isLength;
@@ -14712,8 +14700,7 @@ var objectToString = objectProto.toString;
 
 
 function isTypedArray(value) {
-  return isObjectLike(value) &&
-    isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
+  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[objectToString.call(value)];
 }
 
 module.exports = isTypedArray;
@@ -14749,7 +14736,7 @@ function keys(object) {
 
 module.exports = keys;
 
-},{"./_baseHas":124,"./_baseKeys":130,"./_indexKeys":156,"./_isIndex":158,"./_isPrototype":162,"./isArrayLike":189}],201:[function(require,module,exports){
+},{"./_baseHas":123,"./_baseKeys":129,"./_indexKeys":156,"./_isIndex":158,"./_isPrototype":162,"./isArrayLike":189}],201:[function(require,module,exports){
 
 function last(array) {
   var length = array ? array.length : 0;
@@ -14770,7 +14757,7 @@ function property(path) {
 
 module.exports = property;
 
-},{"./_baseProperty":133,"./_basePropertyDeep":134,"./_isKey":160}],203:[function(require,module,exports){
+},{"./_baseProperty":132,"./_basePropertyDeep":133,"./_isKey":160}],203:[function(require,module,exports){
 var apply = require('./_apply'),
     toInteger = require('./toInteger');
 
@@ -14886,7 +14873,7 @@ function toPairs(object) {
 
 module.exports = toPairs;
 
-},{"./_baseToPairs":137,"./keys":200}],207:[function(require,module,exports){
+},{"./_baseToPairs":136,"./keys":200}],207:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     isSymbol = require('./isSymbol');
 
