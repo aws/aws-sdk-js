@@ -3,14 +3,13 @@
   "metadata":{
     "apiVersion":"2010-12-01",
     "endpointPrefix":"email",
+    "protocol":"query",
     "serviceAbbreviation":"Amazon SES",
     "serviceFullName":"Amazon Simple Email Service",
     "signatureVersion":"v4",
     "signingName":"ses",
-    "xmlNamespace":"http://ses.amazonaws.com/doc/2010-12-01/",
-    "protocol":"query"
+    "xmlNamespace":"http://ses.amazonaws.com/doc/2010-12-01/"
   },
-  "documentation":"<fullname>Amazon Simple Email Service</fullname> <p> This is the API Reference for Amazon Simple Email Service (Amazon SES). This documentation is intended to be used in conjunction with the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html\">Amazon SES Developer Guide</a>. </p> <note>For a list of Amazon SES endpoints to use in service requests, see <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html\">Regions and Amazon SES</a> in the Amazon SES Developer Guide. </note>",
   "operations":{
     "CloneReceiptRuleSet":{
       "name":"CloneReceiptRuleSet",
@@ -24,36 +23,9 @@
         "resultWrapper":"CloneReceiptRuleSetResult"
       },
       "errors":[
-        {
-          "shape":"RuleSetDoesNotExistException",
-          "error":{
-            "code":"RuleSetDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
-        },
-        {
-          "shape":"AlreadyExistsException",
-          "error":{
-            "code":"AlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that a resource could not be created due to a naming conflict.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that a resource could not be created due to service limits. For a list of Amazon SES limits, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html\">Amazon SES Developer Guide</a>.</p>"
-        }
+        {"shape":"RuleSetDoesNotExistException"},
+        {"shape":"AlreadyExistsException"},
+        {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Creates a receipt rule set by cloning an existing one. All receipt rules and configurations are copied to the new receipt rule set and are completely independent of the source rule set.</p> <p>For information about setting up rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -69,26 +41,8 @@
         "resultWrapper":"CreateReceiptFilterResult"
       },
       "errors":[
-        {
-          "shape":"LimitExceededException",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that a resource could not be created due to service limits. For a list of Amazon SES limits, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html\">Amazon SES Developer Guide</a>.</p>"
-        },
-        {
-          "shape":"AlreadyExistsException",
-          "error":{
-            "code":"AlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that a resource could not be created due to a naming conflict.</p>"
-        }
+        {"shape":"LimitExceededException"},
+        {"shape":"AlreadyExistsException"}
       ],
       "documentation":"<p>Creates a new IP address filter.</p> <p>For information about setting up IP address filters, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -104,76 +58,13 @@
         "resultWrapper":"CreateReceiptRuleResult"
       },
       "errors":[
-        {
-          "shape":"InvalidSnsTopicException",
-          "error":{
-            "code":"InvalidSnsTopic",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES could not publish to the topic, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>"
-        },
-        {
-          "shape":"InvalidS3ConfigurationException",
-          "error":{
-            "code":"InvalidS3Configuration",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided Amazon S3 bucket or AWS KMS encryption key is invalid, or that Amazon SES could not publish to the bucket, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>"
-        },
-        {
-          "shape":"InvalidLambdaFunctionException",
-          "error":{
-            "code":"InvalidLambdaFunction",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided AWS Lambda function is invalid, or that Amazon SES could not execute the provided function, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>"
-        },
-        {
-          "shape":"AlreadyExistsException",
-          "error":{
-            "code":"AlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that a resource could not be created due to a naming conflict.</p>"
-        },
-        {
-          "shape":"RuleDoesNotExistException",
-          "error":{
-            "code":"RuleDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule does not exist.</p>"
-        },
-        {
-          "shape":"RuleSetDoesNotExistException",
-          "error":{
-            "code":"RuleSetDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that a resource could not be created due to service limits. For a list of Amazon SES limits, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html\">Amazon SES Developer Guide</a>.</p>"
-        }
+        {"shape":"InvalidSnsTopicException"},
+        {"shape":"InvalidS3ConfigurationException"},
+        {"shape":"InvalidLambdaFunctionException"},
+        {"shape":"AlreadyExistsException"},
+        {"shape":"RuleDoesNotExistException"},
+        {"shape":"RuleSetDoesNotExistException"},
+        {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Creates a receipt rule.</p> <p>For information about setting up receipt rules, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -189,26 +80,8 @@
         "resultWrapper":"CreateReceiptRuleSetResult"
       },
       "errors":[
-        {
-          "shape":"AlreadyExistsException",
-          "error":{
-            "code":"AlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that a resource could not be created due to a naming conflict.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that a resource could not be created due to service limits. For a list of Amazon SES limits, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html\">Amazon SES Developer Guide</a>.</p>"
-        }
+        {"shape":"AlreadyExistsException"},
+        {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Creates an empty receipt rule set.</p> <p>For information about setting up receipt rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -218,13 +91,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteIdentityRequest",
-        "documentation":"<p>Represents a request instructing the service to delete an identity from the list of identities for the AWS Account.</p>"
-      },
+      "input":{"shape":"DeleteIdentityRequest"},
       "output":{
         "shape":"DeleteIdentityResponse",
-        "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
         "resultWrapper":"DeleteIdentityResult"
       },
       "documentation":"<p>Deletes the specified identity (email address or domain) from the list of verified identities.</p> <p>This action is throttled at one request per second.</p>"
@@ -235,13 +104,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteIdentityPolicyRequest",
-        "documentation":"<p>Represents a request instructing the service to delete an authorization policy applying to an identity.</p> <p>This request succeeds regardless of whether the specified policy exists.</p>"
-      },
+      "input":{"shape":"DeleteIdentityPolicyRequest"},
       "output":{
         "shape":"DeleteIdentityPolicyResponse",
-        "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
         "resultWrapper":"DeleteIdentityPolicyResult"
       },
       "documentation":"<p>Deletes the specified sending authorization policy for the given identity (email address or domain). This API returns successfully even if a policy with the specified name does not exist.</p> <note>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
@@ -271,16 +136,7 @@
         "resultWrapper":"DeleteReceiptRuleResult"
       },
       "errors":[
-        {
-          "shape":"RuleSetDoesNotExistException",
-          "error":{
-            "code":"RuleSetDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
-        }
+        {"shape":"RuleSetDoesNotExistException"}
       ],
       "documentation":"<p>Deletes the specified receipt rule.</p> <p>For information about managing receipt rules, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -296,16 +152,7 @@
         "resultWrapper":"DeleteReceiptRuleSetResult"
       },
       "errors":[
-        {
-          "shape":"CannotDeleteException",
-          "error":{
-            "code":"CannotDelete",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the delete operation could not be completed.</p>"
-        }
+        {"shape":"CannotDeleteException"}
       ],
       "documentation":"<p>Deletes the specified receipt rule set and all of the receipt rules it contains.</p> <note>The currently active rule set cannot be deleted.</note> <p>For information about managing receipt rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -315,10 +162,7 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteVerifiedEmailAddressRequest",
-        "documentation":"<p>Represents a request instructing the service to delete an address from the list of verified email addresses.</p>"
-      },
+      "input":{"shape":"DeleteVerifiedEmailAddressRequest"},
       "documentation":"<p>Deletes the specified email address from the list of verified addresses.</p> <important>The DeleteVerifiedEmailAddress action is deprecated as of the May 15, 2012 release of Domain Verification. The DeleteIdentity action is now preferred.</important> <p>This action is throttled at one request per second.</p>"
     },
     "DescribeActiveReceiptRuleSet":{
@@ -346,26 +190,8 @@
         "resultWrapper":"DescribeReceiptRuleResult"
       },
       "errors":[
-        {
-          "shape":"RuleDoesNotExistException",
-          "error":{
-            "code":"RuleDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule does not exist.</p>"
-        },
-        {
-          "shape":"RuleSetDoesNotExistException",
-          "error":{
-            "code":"RuleSetDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
-        }
+        {"shape":"RuleDoesNotExistException"},
+        {"shape":"RuleSetDoesNotExistException"}
       ],
       "documentation":"<p>Returns the details of the specified receipt rule.</p> <p>For information about setting up receipt rules, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -381,16 +207,7 @@
         "resultWrapper":"DescribeReceiptRuleSetResult"
       },
       "errors":[
-        {
-          "shape":"RuleSetDoesNotExistException",
-          "error":{
-            "code":"RuleSetDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
-        }
+        {"shape":"RuleSetDoesNotExistException"}
       ],
       "documentation":"<p>Returns the details of the specified receipt rule set.</p> <p>For information about managing receipt rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -400,13 +217,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetIdentityDkimAttributesRequest",
-        "documentation":"<p>Given a list of verified identities, describes their DKIM attributes. The DKIM attributes of an email address identity includes whether DKIM signing is individually enabled or disabled for that address. The DKIM attributes of a domain name identity includes whether DKIM signing is enabled, as well as the DNS records (tokens) that must remain published in the domain name's DNS.</p>"
-      },
+      "input":{"shape":"GetIdentityDkimAttributesRequest"},
       "output":{
         "shape":"GetIdentityDkimAttributesResponse",
-        "documentation":"<p>Represents a list of all the DKIM attributes for the specified identity.</p>",
         "resultWrapper":"GetIdentityDkimAttributesResult"
       },
       "documentation":"<p>Returns the current status of Easy DKIM signing for an entity. For domain name identities, this action also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published.</p> <p>This action takes a list of identities as input and returns the following information for each:</p> <ul> <li>Whether Easy DKIM signing is enabled or disabled.</li> <li>A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.</li> <li>Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.</li> </ul> <p>This action is throttled at one request per second and can only get DKIM attributes for up to 100 identities at a time.</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html\">Amazon SES Developer Guide</a>.</p>"
@@ -420,7 +233,6 @@
       "input":{"shape":"GetIdentityNotificationAttributesRequest"},
       "output":{
         "shape":"GetIdentityNotificationAttributesResponse",
-        "documentation":"<p>Describes whether an identity has Amazon Simple Notification Service (Amazon SNS) topics set for bounce, complaint, and/or delivery notifications, and specifies whether feedback forwarding is enabled for bounce and complaint notifications.</p>",
         "resultWrapper":"GetIdentityNotificationAttributesResult"
       },
       "documentation":"<p>Given a list of verified identities (email addresses and/or domains), returns a structure describing identity notification attributes.</p> <p>This action is throttled at one request per second and can only get notification attributes for up to 100 identities at a time.</p> <p>For more information about using notifications with Amazon SES, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html\">Amazon SES Developer Guide</a>.</p>"
@@ -431,13 +243,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetIdentityPoliciesRequest",
-        "documentation":"<p>Represents a request instructing the service to retrieve the text of a list of authorization policies applying to an identity. </p>"
-      },
+      "input":{"shape":"GetIdentityPoliciesRequest"},
       "output":{
         "shape":"GetIdentityPoliciesResponse",
-        "documentation":"<p>Represents a map of policy names to policies returned from a successful <code>GetIdentityPolicies</code> request. </p>",
         "resultWrapper":"GetIdentityPoliciesResult"
       },
       "documentation":"<p>Returns the requested sending authorization policies for the given identity (email address or domain). The policies are returned as a map of policy names to policy contents. You can retrieve a maximum of 20 policies at a time.</p> <note>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
@@ -448,13 +256,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetIdentityVerificationAttributesRequest",
-        "documentation":"<p>Represents a request instructing the service to provide the verification attributes for a list of identities.</p>"
-      },
+      "input":{"shape":"GetIdentityVerificationAttributesRequest"},
       "output":{
         "shape":"GetIdentityVerificationAttributesResponse",
-        "documentation":"<p>Represents the verification attributes for a list of identities.</p>",
         "resultWrapper":"GetIdentityVerificationAttributesResult"
       },
       "documentation":"<p>Given a list of identities (email addresses and/or domains), returns the verification status and (for domain identities) the verification token for each identity.</p> <p>This action is throttled at one request per second and can only get verification attributes for up to 100 identities at a time.</p>"
@@ -467,7 +271,6 @@
       },
       "output":{
         "shape":"GetSendQuotaResponse",
-        "documentation":"<p>Represents the user's current activity limits returned from a successful <code>GetSendQuota</code> request. </p>",
         "resultWrapper":"GetSendQuotaResult"
       },
       "documentation":"<p>Returns the user's current sending limits.</p> <p>This action is throttled at one request per second.</p>"
@@ -480,7 +283,6 @@
       },
       "output":{
         "shape":"GetSendStatisticsResponse",
-        "documentation":"<p>Represents a list of <code>SendDataPoint</code> items returned from a successful <code>GetSendStatistics</code> request. This list contains aggregated data from the previous two weeks of sending activity. </p>",
         "resultWrapper":"GetSendStatisticsResult"
       },
       "documentation":"<p>Returns the user's sending statistics. The result is a list of data points, representing the last two weeks of sending activity. </p> <p>Each data point in the list contains statistics for a 15-minute interval.</p> <p>This action is throttled at one request per second.</p>"
@@ -491,13 +293,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListIdentitiesRequest",
-        "documentation":"<p>Represents a request instructing the service to list all identities for the AWS Account.</p>"
-      },
+      "input":{"shape":"ListIdentitiesRequest"},
       "output":{
         "shape":"ListIdentitiesResponse",
-        "documentation":"<p>Represents a list of all verified identities for the AWS Account.</p>",
         "resultWrapper":"ListIdentitiesResult"
       },
       "documentation":"<p>Returns a list containing all of the identities (email addresses and domains) for a specific AWS Account, regardless of verification status.</p> <p>This action is throttled at one request per second.</p>"
@@ -508,13 +306,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListIdentityPoliciesRequest",
-        "documentation":"<p>Represents a request instructing the service to list all authorization policies, by name, applying to an identity.</p>"
-      },
+      "input":{"shape":"ListIdentityPoliciesRequest"},
       "output":{
         "shape":"ListIdentityPoliciesResponse",
-        "documentation":"<p>Represents a list of policy names returned from a successful <code>ListIdentityPolicies</code> request. </p>",
         "resultWrapper":"ListIdentityPoliciesResult"
       },
       "documentation":"<p>Returns a list of sending authorization policies that are attached to the given identity (email address or domain). This API returns only a list. If you want the actual policy content, you can use <code>GetIdentityPolicies</code>.</p> <note>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
@@ -553,7 +347,6 @@
       },
       "output":{
         "shape":"ListVerifiedEmailAddressesResponse",
-        "documentation":"<p>Represents a list of all the email addresses verified for the current user.</p>",
         "resultWrapper":"ListVerifiedEmailAddressesResult"
       },
       "documentation":"<p>Returns a list containing all of the email addresses that have been verified.</p> <important>The ListVerifiedEmailAddresses action is deprecated as of the May 15, 2012 release of Domain Verification. The ListIdentities action is now preferred.</important> <p>This action is throttled at one request per second.</p>"
@@ -564,26 +357,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"PutIdentityPolicyRequest",
-        "documentation":"<p>Represents a request instructing the service to apply an authorization policy to an identity.</p>"
-      },
+      "input":{"shape":"PutIdentityPolicyRequest"},
       "output":{
         "shape":"PutIdentityPolicyResponse",
-        "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
         "resultWrapper":"PutIdentityPolicyResult"
       },
       "errors":[
-        {
-          "shape":"InvalidPolicyException",
-          "error":{
-            "code":"InvalidPolicy",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided policy is invalid. Check the error stack for more information about what caused the error.</p>"
-        }
+        {"shape":"InvalidPolicyException"}
       ],
       "documentation":"<p>Adds or updates a sending authorization policy for the specified identity (email address or domain).</p> <note>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -599,28 +379,10 @@
         "resultWrapper":"ReorderReceiptRuleSetResult"
       },
       "errors":[
-        {
-          "shape":"RuleSetDoesNotExistException",
-          "error":{
-            "code":"RuleSetDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
-        },
-        {
-          "shape":"RuleDoesNotExistException",
-          "error":{
-            "code":"RuleDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule does not exist.</p>"
-        }
+        {"shape":"RuleSetDoesNotExistException"},
+        {"shape":"RuleDoesNotExistException"}
       ],
-      "documentation":"<p>Reorders the receipt rules within a receipt rule set.</p> <note>All of the rules in the rule set must be represented in this request. That is, this API will return an error if the reorder request doesn’t explicitly position all of the rules.</note> <p>For information about managing receipt rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
+      "documentation":"<p>Reorders the receipt rules within a receipt rule set.</p> <note>All of the rules in the rule set must be represented in this request. That is, this API will return an error if the reorder request doesn't explicitly position all of the rules.</note> <p>For information about managing receipt rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
     "SendBounce":{
       "name":"SendBounce",
@@ -628,25 +390,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"SendBounceRequest",
-        "documentation":"<p>Request object for sending a simple/complex bounce. It contains all of the information needed to generate a basic DSN or a fully-customized DSN.</p>"
-      },
+      "input":{"shape":"SendBounceRequest"},
       "output":{
         "shape":"SendBounceResponse",
         "resultWrapper":"SendBounceResult"
       },
       "errors":[
-        {
-          "shape":"MessageRejected",
-          "error":{
-            "code":"MessageRejected",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error.</p>"
-        }
+        {"shape":"MessageRejected"}
       ],
       "documentation":"<p>Generates and sends a bounce message to the sender of an email you received through Amazon SES. You can only use this API on an email up to 24 hours after you receive it.</p> <note>You cannot use this API to send generic bounces for mail that was not received by Amazon SES.</note> <p>For information about receiving email through Amazon SES, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -656,26 +406,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"SendEmailRequest",
-        "documentation":"<p>Represents a request instructing the service to send a single email message.</p> <p>This datatype can be used in application code to compose a message consisting of source, destination, message, reply-to, and return-path parts. This object can then be sent using the <code>SendEmail</code> action. </p>"
-      },
+      "input":{"shape":"SendEmailRequest"},
       "output":{
         "shape":"SendEmailResponse",
-        "documentation":"<p>Represents a unique message ID returned from a successful <code>SendEmail</code> request. </p>",
         "resultWrapper":"SendEmailResult"
       },
       "errors":[
-        {
-          "shape":"MessageRejected",
-          "error":{
-            "code":"MessageRejected",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error.</p>"
-        }
+        {"shape":"MessageRejected"}
       ],
       "documentation":"<p>Composes an email message based on input data, and then immediately queues the message for sending. </p> <p>There are several important points to know about <code>SendEmail</code>:</p> <ul> <li>You can only send email from verified email addresses and domains; otherwise, you will get an \"Email address not verified\" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>.</li> <li>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</li> <li>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</li> <li>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>.</li> </ul>"
     },
@@ -685,26 +422,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"SendRawEmailRequest",
-        "documentation":"<p>Represents a request instructing the service to send a raw email message.</p> <p>This datatype can be used in application code to compose a message consisting of source, destination, and raw message text. This object can then be sent using the <code>SendRawEmail</code> action. </p>"
-      },
+      "input":{"shape":"SendRawEmailRequest"},
       "output":{
         "shape":"SendRawEmailResponse",
-        "documentation":"<p>Represents a unique message ID returned from a successful <code>SendRawEmail</code> request. </p>",
         "resultWrapper":"SendRawEmailResult"
       },
       "errors":[
-        {
-          "shape":"MessageRejected",
-          "error":{
-            "code":"MessageRejected",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error.</p>"
-        }
+        {"shape":"MessageRejected"}
       ],
       "documentation":"<p>Sends an email message, with header and content specified by the client. The <code>SendRawEmail</code> action is useful for sending multipart MIME emails. The raw text of the message must comply with Internet email standards; otherwise, the message cannot be sent. </p> <p>There are several important points to know about <code>SendRawEmail</code>:</p> <ul> <li>You can only send email from verified email addresses and domains; otherwise, you will get an \"Email address not verified\" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>.</li> <li>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</li> <li>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</li> <li>The To:, CC:, and BCC: headers in the raw message can contain a group list. Note that each recipient in a group list counts towards the 50-recipient limit.</li> <li>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>.</li> <li>If you are using sending authorization to send on behalf of another user, <code>SendRawEmail</code> enables you to specify the cross-account identity for the email's \"Source,\" \"From,\" and \"Return-Path\" parameters in one of two ways: you can pass optional parameters <code>SourceArn</code>, <code>FromArn</code>, and/or <code>ReturnPathArn</code> to the API, or you can include the following X-headers in the header of your raw email: <ul> <li><code>X-SES-SOURCE-ARN</code></li> <li><code>X-SES-FROM-ARN</code></li> <li><code>X-SES-RETURN-PATH-ARN</code></li> </ul> <important>Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.</important> For the most common sending authorization use case, we recommend that you specify the <code>SourceIdentityArn</code> and do not specify either the <code>FromIdentityArn</code> or <code>ReturnPathIdentityArn</code>. (The same note applies to the corresponding X-headers.) If you only specify the <code>SourceIdentityArn</code>, Amazon SES will simply set the \"From\" address and the \"Return Path\" address to the identity specified in <code>SourceIdentityArn</code>. For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</li> </ul>"
     },
@@ -720,16 +444,7 @@
         "resultWrapper":"SetActiveReceiptRuleSetResult"
       },
       "errors":[
-        {
-          "shape":"RuleSetDoesNotExistException",
-          "error":{
-            "code":"RuleSetDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
-        }
+        {"shape":"RuleSetDoesNotExistException"}
       ],
       "documentation":"<p>Sets the specified receipt rule set as the active receipt rule set.</p> <note>To disable your email-receiving through Amazon SES completely, you can call this API with RuleSetName set to null.</note> <p>For information about managing receipt rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -739,13 +454,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"SetIdentityDkimEnabledRequest",
-        "documentation":"<p>Represents a request instructing the service to enable or disable DKIM signing for an identity.</p>"
-      },
+      "input":{"shape":"SetIdentityDkimEnabledRequest"},
       "output":{
         "shape":"SetIdentityDkimEnabledResponse",
-        "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
         "resultWrapper":"SetIdentityDkimEnabledResult"
       },
       "documentation":"<p>Enables or disables Easy DKIM signing of email sent from an identity:</p> <ul> <li>If Easy DKIM signing is enabled for a domain name identity (e.g., <code>example.com</code>), then Amazon SES will DKIM-sign all email sent by addresses under that domain name (e.g., <code>user@example.com</code>).</li> <li>If Easy DKIM signing is enabled for an email address, then Amazon SES will DKIM-sign all email sent by that email address.</li> </ul> <p>For email addresses (e.g., <code>user@example.com</code>), you can only enable Easy DKIM signing if the corresponding domain (e.g., <code>example.com</code>) has been set up for Easy DKIM using the AWS Console or the <code>VerifyDomainDkim</code> action.</p> <p>This action is throttled at one request per second.</p> <p>For more information about Easy DKIM signing, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Amazon SES Developer Guide</a>.</p>"
@@ -759,7 +470,6 @@
       "input":{"shape":"SetIdentityFeedbackForwardingEnabledRequest"},
       "output":{
         "shape":"SetIdentityFeedbackForwardingEnabledResponse",
-        "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
         "resultWrapper":"SetIdentityFeedbackForwardingEnabledResult"
       },
       "documentation":"<p>Given an identity (email address or domain), enables or disables whether Amazon SES forwards bounce and complaint notifications as email. Feedback forwarding can only be disabled when Amazon Simple Notification Service (Amazon SNS) topics are specified for both bounces and complaints.</p> <note>Feedback forwarding does not apply to delivery notifications. Delivery notifications are only available through Amazon SNS.</note> <p>This action is throttled at one request per second.</p> <p>For more information about using notifications with Amazon SES, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html\">Amazon SES Developer Guide</a>.</p>"
@@ -770,13 +480,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"SetIdentityNotificationTopicRequest",
-        "documentation":"<p>Represents a request to set or clear an identity's notification topic.</p>"
-      },
+      "input":{"shape":"SetIdentityNotificationTopicRequest"},
       "output":{
         "shape":"SetIdentityNotificationTopicResponse",
-        "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
         "resultWrapper":"SetIdentityNotificationTopicResult"
       },
       "documentation":"<p>Given an identity (email address or domain), sets the Amazon Simple Notification Service (Amazon SNS) topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with that identity as the <code>Source</code>.</p> <note>Unless feedback forwarding is enabled, you must specify Amazon SNS topics for bounce and complaint notifications. For more information, see <code>SetIdentityFeedbackForwardingEnabled</code>. </note> <p>This action is throttled at one request per second.</p> <p>For more information about feedback notification, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html\">Amazon SES Developer Guide</a>.</p>"
@@ -793,26 +499,8 @@
         "resultWrapper":"SetReceiptRulePositionResult"
       },
       "errors":[
-        {
-          "shape":"RuleSetDoesNotExistException",
-          "error":{
-            "code":"RuleSetDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
-        },
-        {
-          "shape":"RuleDoesNotExistException",
-          "error":{
-            "code":"RuleDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule does not exist.</p>"
-        }
+        {"shape":"RuleSetDoesNotExistException"},
+        {"shape":"RuleDoesNotExistException"}
       ],
       "documentation":"<p>Sets the position of the specified receipt rule in the receipt rule set.</p> <p>For information about managing receipt rules, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -828,66 +516,12 @@
         "resultWrapper":"UpdateReceiptRuleResult"
       },
       "errors":[
-        {
-          "shape":"InvalidSnsTopicException",
-          "error":{
-            "code":"InvalidSnsTopic",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES could not publish to the topic, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>"
-        },
-        {
-          "shape":"InvalidS3ConfigurationException",
-          "error":{
-            "code":"InvalidS3Configuration",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided Amazon S3 bucket or AWS KMS encryption key is invalid, or that Amazon SES could not publish to the bucket, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>"
-        },
-        {
-          "shape":"InvalidLambdaFunctionException",
-          "error":{
-            "code":"InvalidLambdaFunction",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided AWS Lambda function is invalid, or that Amazon SES could not execute the provided function, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>"
-        },
-        {
-          "shape":"RuleSetDoesNotExistException",
-          "error":{
-            "code":"RuleSetDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
-        },
-        {
-          "shape":"RuleDoesNotExistException",
-          "error":{
-            "code":"RuleDoesNotExist",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that the provided receipt rule does not exist.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Indicates that a resource could not be created due to service limits. For a list of Amazon SES limits, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html\">Amazon SES Developer Guide</a>.</p>"
-        }
+        {"shape":"InvalidSnsTopicException"},
+        {"shape":"InvalidS3ConfigurationException"},
+        {"shape":"InvalidLambdaFunctionException"},
+        {"shape":"RuleSetDoesNotExistException"},
+        {"shape":"RuleDoesNotExistException"},
+        {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Updates a receipt rule.</p> <p>For information about managing receipt rules, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
@@ -897,13 +531,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"VerifyDomainDkimRequest",
-        "documentation":"<p>Represents a request instructing the service to begin DKIM verification for a domain.</p>"
-      },
+      "input":{"shape":"VerifyDomainDkimRequest"},
       "output":{
         "shape":"VerifyDomainDkimResponse",
-        "documentation":"<p>Represents the DNS records that must be published in the domain name's DNS to complete DKIM setup.</p>",
         "resultWrapper":"VerifyDomainDkimResult"
       },
       "documentation":"<p>Returns a set of DKIM tokens for a domain. DKIM <i>tokens</i> are character strings that represent your domain's identity. Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign email originating from that domain.</p> <p>This action is throttled at one request per second.</p> <p>To enable or disable Easy DKIM signing for a domain, use the <code>SetIdentityDkimEnabled</code> action.</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html\">Amazon SES Developer Guide</a>.</p>"
@@ -914,13 +544,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"VerifyDomainIdentityRequest",
-        "documentation":"<p>Represents a request instructing the service to begin domain verification.</p>"
-      },
+      "input":{"shape":"VerifyDomainIdentityRequest"},
       "output":{
         "shape":"VerifyDomainIdentityResponse",
-        "documentation":"<p>Represents a token used for domain ownership verification.</p>",
         "resultWrapper":"VerifyDomainIdentityResult"
       },
       "documentation":"<p>Verifies a domain.</p> <p>This action is throttled at one request per second.</p>"
@@ -931,10 +557,7 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"VerifyEmailAddressRequest",
-        "documentation":"<p>Represents a request instructing the service to begin email address verification.</p>"
-      },
+      "input":{"shape":"VerifyEmailAddressRequest"},
       "documentation":"<p>Verifies an email address. This action causes a confirmation email message to be sent to the specified address.</p> <important>The VerifyEmailAddress action is deprecated as of the May 15, 2012 release of Domain Verification. The VerifyEmailIdentity action is now preferred.</important> <p>This action is throttled at one request per second.</p>"
     },
     "VerifyEmailIdentity":{
@@ -943,13 +566,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"VerifyEmailIdentityRequest",
-        "documentation":"<p>Represents a request instructing the service to begin email address verification.</p>"
-      },
+      "input":{"shape":"VerifyEmailIdentityRequest"},
       "output":{
         "shape":"VerifyEmailIdentityResponse",
-        "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
         "resultWrapper":"VerifyEmailIdentityResult"
       },
       "documentation":"<p>Verifies an email address. This action causes a confirmation email message to be sent to the specified address.</p> <p>This action is throttled at one request per second.</p>"
@@ -984,13 +603,13 @@
       "members":{
         "Name":{"shape":"RuleOrRuleSetName"}
       },
+      "documentation":"<p>Indicates that a resource could not be created due to a naming conflict.</p>",
       "error":{
         "code":"AlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that a resource could not be created due to a naming conflict.</p>"
+      "exception":true
     },
     "AmazonResourceName":{"type":"string"},
     "ArrivalDate":{"type":"timestamp"},
@@ -1085,13 +704,13 @@
       "members":{
         "Name":{"shape":"RuleOrRuleSetName"}
       },
+      "documentation":"<p>Indicates that the delete operation could not be completed.</p>",
       "error":{
         "code":"CannotDelete",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that the delete operation could not be completed.</p>"
+      "exception":true
     },
     "Charset":{"type":"string"},
     "Cidr":{"type":"string"},
@@ -1204,14 +823,12 @@
           "shape":"PolicyName",
           "documentation":"<p>The name of the policy to be deleted.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to delete an authorization policy applying to an identity.</p> <p>This request succeeds regardless of whether the specified policy exists.</p>"
+      }
     },
     "DeleteIdentityPolicyResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>"
+      }
     },
     "DeleteIdentityRequest":{
       "type":"structure",
@@ -1221,14 +838,12 @@
           "shape":"Identity",
           "documentation":"<p>The identity to be removed from the list of identities for the AWS Account.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to delete an identity from the list of identities for the AWS Account.</p>"
+      }
     },
     "DeleteIdentityResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>"
+      }
     },
     "DeleteReceiptFilterRequest":{
       "type":"structure",
@@ -1290,8 +905,7 @@
           "shape":"Address",
           "documentation":"<p>An email address to be removed from the list of verified addresses.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to delete an address from the list of verified email addresses.</p>"
+      }
     },
     "DescribeActiveReceiptRuleSetRequest":{
       "type":"structure",
@@ -1430,8 +1044,7 @@
           "shape":"IdentityList",
           "documentation":"<p>A list of one or more verified identities - email addresses, domains, or both.</p>"
         }
-      },
-      "documentation":"<p>Given a list of verified identities, describes their DKIM attributes. The DKIM attributes of an email address identity includes whether DKIM signing is individually enabled or disabled for that address. The DKIM attributes of a domain name identity includes whether DKIM signing is enabled, as well as the DNS records (tokens) that must remain published in the domain name's DNS.</p>"
+      }
     },
     "GetIdentityDkimAttributesResponse":{
       "type":"structure",
@@ -1441,8 +1054,7 @@
           "shape":"DkimAttributes",
           "documentation":"<p>The DKIM attributes for an email address or a domain. </p>"
         }
-      },
-      "documentation":"<p>Represents a list of all the DKIM attributes for the specified identity.</p>"
+      }
     },
     "GetIdentityNotificationAttributesRequest":{
       "type":"structure",
@@ -1462,8 +1074,7 @@
           "shape":"NotificationAttributes",
           "documentation":"<p>A map of Identity to IdentityNotificationAttributes.</p>"
         }
-      },
-      "documentation":"<p>Describes whether an identity has Amazon Simple Notification Service (Amazon SNS) topics set for bounce, complaint, and/or delivery notifications, and specifies whether feedback forwarding is enabled for bounce and complaint notifications.</p>"
+      }
     },
     "GetIdentityPoliciesRequest":{
       "type":"structure",
@@ -1480,8 +1091,7 @@
           "shape":"PolicyNameList",
           "documentation":"<p>A list of the names of policies to be retrieved. You can retrieve a maximum of 20 policies at a time. If you do not know the names of the policies that are attached to the identity, you can use <code>ListIdentityPolicies</code>.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to retrieve the text of a list of authorization policies applying to an identity. </p>"
+      }
     },
     "GetIdentityPoliciesResponse":{
       "type":"structure",
@@ -1491,8 +1101,7 @@
           "shape":"PolicyMap",
           "documentation":"<p>A map of policy names to policies.</p>"
         }
-      },
-      "documentation":"<p>Represents a map of policy names to policies returned from a successful <code>GetIdentityPolicies</code> request. </p>"
+      }
     },
     "GetIdentityVerificationAttributesRequest":{
       "type":"structure",
@@ -1502,8 +1111,7 @@
           "shape":"IdentityList",
           "documentation":"<p>A list of identities.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to provide the verification attributes for a list of identities.</p>"
+      }
     },
     "GetIdentityVerificationAttributesResponse":{
       "type":"structure",
@@ -1513,8 +1121,7 @@
           "shape":"VerificationAttributes",
           "documentation":"<p>A map of Identities to IdentityVerificationAttributes objects.</p>"
         }
-      },
-      "documentation":"<p>Represents the verification attributes for a list of identities.</p>"
+      }
     },
     "GetSendQuotaResponse":{
       "type":"structure",
@@ -1531,8 +1138,7 @@
           "shape":"SentLast24Hours",
           "documentation":"<p>The number of emails sent during the previous 24 hours.</p>"
         }
-      },
-      "documentation":"<p>Represents the user's current activity limits returned from a successful <code>GetSendQuota</code> request. </p>"
+      }
     },
     "GetSendStatisticsResponse":{
       "type":"structure",
@@ -1541,8 +1147,7 @@
           "shape":"SendDataPointList",
           "documentation":"<p>A list of data points, each of which represents 15 minutes of activity.</p>"
         }
-      },
-      "documentation":"<p>Represents a list of <code>SendDataPoint</code> items returned from a successful <code>GetSendStatistics</code> request. This list contains aggregated data from the previous two weeks of sending activity. </p>"
+      }
     },
     "HeaderName":{"type":"string"},
     "HeaderValue":{"type":"string"},
@@ -1628,51 +1233,51 @@
       "members":{
         "FunctionArn":{"shape":"AmazonResourceName"}
       },
+      "documentation":"<p>Indicates that the provided AWS Lambda function is invalid, or that Amazon SES could not execute the provided function, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>",
       "error":{
         "code":"InvalidLambdaFunction",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that the provided AWS Lambda function is invalid, or that Amazon SES could not execute the provided function, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>"
+      "exception":true
     },
     "InvalidPolicyException":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>Indicates that the provided policy is invalid. Check the error stack for more information about what caused the error.</p>",
       "error":{
         "code":"InvalidPolicy",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that the provided policy is invalid. Check the error stack for more information about what caused the error.</p>"
+      "exception":true
     },
     "InvalidS3ConfigurationException":{
       "type":"structure",
       "members":{
         "Bucket":{"shape":"S3BucketName"}
       },
+      "documentation":"<p>Indicates that the provided Amazon S3 bucket or AWS KMS encryption key is invalid, or that Amazon SES could not publish to the bucket, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>",
       "error":{
         "code":"InvalidS3Configuration",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that the provided Amazon S3 bucket or AWS KMS encryption key is invalid, or that Amazon SES could not publish to the bucket, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>"
+      "exception":true
     },
     "InvalidSnsTopicException":{
       "type":"structure",
       "members":{
         "Topic":{"shape":"AmazonResourceName"}
       },
+      "documentation":"<p>Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES could not publish to the topic, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>",
       "error":{
         "code":"InvalidSnsTopic",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES could not publish to the topic, possibly due to permissions issues. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p>"
+      "exception":true
     },
     "InvocationType":{
       "type":"string",
@@ -1705,13 +1310,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>Indicates that a resource could not be created due to service limits. For a list of Amazon SES limits, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html\">Amazon SES Developer Guide</a>.</p>",
       "error":{
         "code":"LimitExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that a resource could not be created due to service limits. For a list of Amazon SES limits, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html\">Amazon SES Developer Guide</a>.</p>"
+      "exception":true
     },
     "ListIdentitiesRequest":{
       "type":"structure",
@@ -1728,8 +1333,7 @@
           "shape":"MaxItems",
           "documentation":"<p>The maximum number of identities per page. Possible values are 1-1000 inclusive.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to list all identities for the AWS Account.</p>"
+      }
     },
     "ListIdentitiesResponse":{
       "type":"structure",
@@ -1743,8 +1347,7 @@
           "shape":"NextToken",
           "documentation":"<p>The token used for pagination.</p>"
         }
-      },
-      "documentation":"<p>Represents a list of all verified identities for the AWS Account.</p>"
+      }
     },
     "ListIdentityPoliciesRequest":{
       "type":"structure",
@@ -1754,8 +1357,7 @@
           "shape":"Identity",
           "documentation":"<p>The identity that is associated with the policy for which the policies will be listed. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). Examples: <code>user@example.com</code>, <code>example.com</code>, <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p> <p>To successfully call this API, you must own the identity.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to list all authorization policies, by name, applying to an identity.</p>"
+      }
     },
     "ListIdentityPoliciesResponse":{
       "type":"structure",
@@ -1765,8 +1367,7 @@
           "shape":"PolicyNameList",
           "documentation":"<p>A list of names of policies that apply to the specified identity.</p>"
         }
-      },
-      "documentation":"<p>Represents a list of policy names returned from a successful <code>ListIdentityPolicies</code> request. </p>"
+      }
     },
     "ListReceiptFiltersRequest":{
       "type":"structure",
@@ -1811,8 +1412,7 @@
           "shape":"AddressList",
           "documentation":"<p>A list of email addresses that have been verified.</p>"
         }
-      },
-      "documentation":"<p>Represents a list of all the email addresses verified for the current user.</p>"
+      }
     },
     "Max24HourSend":{"type":"double"},
     "MaxItems":{"type":"integer"},
@@ -1860,13 +1460,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error.</p>",
       "error":{
         "code":"MessageRejected",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error.</p>"
+      "exception":true
     },
     "NextToken":{"type":"string"},
     "NotificationAttributes":{
@@ -1885,8 +1485,7 @@
     },
     "Policy":{
       "type":"string",
-      "min":1,
-      "documentation":"JSON representation of a valid policy."
+      "min":1
     },
     "PolicyMap":{
       "type":"map",
@@ -1895,9 +1494,8 @@
     },
     "PolicyName":{
       "type":"string",
-      "min":1,
       "max":64,
-      "documentation":"Name of the policy."
+      "min":1
     },
     "PolicyNameList":{
       "type":"list",
@@ -1923,14 +1521,12 @@
           "shape":"Policy",
           "documentation":"<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p>For information about the syntax of sending authorization policies, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html\">Amazon SES Developer Guide</a>. </p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to apply an authorization policy to an identity.</p>"
+      }
     },
     "PutIdentityPolicyResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>"
+      }
     },
     "RawMessage":{
       "type":"structure",
@@ -2161,13 +1757,13 @@
       "members":{
         "Name":{"shape":"RuleOrRuleSetName"}
       },
+      "documentation":"<p>Indicates that the provided receipt rule does not exist.</p>",
       "error":{
         "code":"RuleDoesNotExist",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that the provided receipt rule does not exist.</p>"
+      "exception":true
     },
     "RuleOrRuleSetName":{"type":"string"},
     "RuleSetDoesNotExistException":{
@@ -2175,13 +1771,13 @@
       "members":{
         "Name":{"shape":"RuleOrRuleSetName"}
       },
+      "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>",
       "error":{
         "code":"RuleSetDoesNotExist",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Indicates that the provided receipt rule set does not exist.</p>"
+      "exception":true
     },
     "S3Action":{
       "type":"structure",
@@ -2215,9 +1811,20 @@
         "TopicArn":{
           "shape":"AmazonResourceName",
           "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href=\"http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html\">Amazon SNS Developer Guide</a>.</p>"
+        },
+        "Encoding":{
+          "shape":"SNSActionEncoding",
+          "documentation":"<p>The encoding to use for the email within the Amazon SNS notification. UTF-8 is easier to use, but may not preserve all special characters when a message was encoded with a different encoding format. Base64 preserves all special characters. The default value is Base64.</p>"
         }
       },
       "documentation":"<p>When included in a receipt rule, this action publishes a notification to Amazon Simple Notification Service (Amazon SNS). This action includes a complete copy of the email content in the Amazon SNS notifications. Amazon SNS notifications for all other actions simply provide information about the email. They do not include the email content itself.</p> <p>If you own the Amazon SNS topic, you don't need to do anything to give Amazon SES permission to publish emails to it. However, if you don't own the Amazon SNS topic, you need to attach a policy to the topic to give Amazon SES permissions to access it. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p> <important>You can only publish emails that are 150 KB or less (including the header) to Amazon SNS. Larger emails will bounce. If you anticipate emails larger than 150 KB, use the S3 action instead.</important> <p>For information about using a receipt rule to publish an Amazon SNS notification, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "SNSActionEncoding":{
+      "type":"string",
+      "enum":[
+        "UTF-8",
+        "Base64"
+      ]
     },
     "SendBounceRequest":{
       "type":"structure",
@@ -2251,8 +1858,7 @@
           "shape":"AmazonResourceName",
           "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the address in the \"From\" header of the bounce. For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p>"
         }
-      },
-      "documentation":"<p>Request object for sending a simple/complex bounce. It contains all of the information needed to generate a basic DSN or a fully-customized DSN.</p>"
+      }
     },
     "SendBounceResponse":{
       "type":"structure",
@@ -2329,8 +1935,7 @@
           "shape":"AmazonResourceName",
           "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>ReturnPath</code> parameter.</p> <p>For example, if the owner of <code>example.com</code> (which has ARN <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>) attaches a policy to it that authorizes you to use <code>feedback@example.com</code>, then you would specify the <code>ReturnPathArn</code> to be <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>, and the <code>ReturnPath</code> to be <code>feedback@example.com</code>.</p> <p>For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>. </p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to send a single email message.</p> <p>This datatype can be used in application code to compose a message consisting of source, destination, message, reply-to, and return-path parts. This object can then be sent using the <code>SendEmail</code> action. </p>"
+      }
     },
     "SendEmailResponse":{
       "type":"structure",
@@ -2340,8 +1945,7 @@
           "shape":"MessageId",
           "documentation":"<p>The unique message identifier returned from the <code>SendEmail</code> action. </p>"
         }
-      },
-      "documentation":"<p>Represents a unique message ID returned from a successful <code>SendEmail</code> request. </p>"
+      }
     },
     "SendRawEmailRequest":{
       "type":"structure",
@@ -2371,8 +1975,7 @@
           "shape":"AmazonResourceName",
           "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>ReturnPath</code> parameter.</p> <p>For example, if the owner of <code>example.com</code> (which has ARN <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>) attaches a policy to it that authorizes you to use <code>feedback@example.com</code>, then you would specify the <code>ReturnPathArn</code> to be <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>, and the <code>ReturnPath</code> to be <code>feedback@example.com</code>.</p> <p>Instead of using this parameter, you can use the X-header <code>X-SES-RETURN-PATH-ARN</code> in the raw message of the email. If you use both the <code>ReturnPathArn</code> parameter and the corresponding X-header, Amazon SES uses the value of the <code>ReturnPathArn</code> parameter.</p> <note>For information about when to use this parameter, see the description of <code>SendRawEmail</code> in this guide, or see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html\">Amazon SES Developer Guide</a>. </note>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to send a raw email message.</p> <p>This datatype can be used in application code to compose a message consisting of source, destination, and raw message text. This object can then be sent using the <code>SendRawEmail</code> action. </p>"
+      }
     },
     "SendRawEmailResponse":{
       "type":"structure",
@@ -2382,8 +1985,7 @@
           "shape":"MessageId",
           "documentation":"<p>The unique message identifier returned from the <code>SendRawEmail</code> action. </p>"
         }
-      },
-      "documentation":"<p>Represents a unique message ID returned from a successful <code>SendRawEmail</code> request. </p>"
+      }
     },
     "SentLast24Hours":{"type":"double"},
     "SetActiveReceiptRuleSetRequest":{
@@ -2415,14 +2017,12 @@
           "shape":"Enabled",
           "documentation":"<p>Sets whether DKIM signing is enabled for an identity. Set to <code>true</code> to enable DKIM signing for this identity; <code>false</code> to disable it. </p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to enable or disable DKIM signing for an identity.</p>"
+      }
     },
     "SetIdentityDkimEnabledResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>"
+      }
     },
     "SetIdentityFeedbackForwardingEnabledRequest":{
       "type":"structure",
@@ -2444,8 +2044,7 @@
     "SetIdentityFeedbackForwardingEnabledResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>"
+      }
     },
     "SetIdentityNotificationTopicRequest":{
       "type":"structure",
@@ -2466,14 +2065,12 @@
           "shape":"NotificationTopic",
           "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon SNS topic. If the parameter is omitted from the request or a null value is passed, <code>SnsTopic</code> is cleared and publishing is disabled.</p>"
         }
-      },
-      "documentation":"<p>Represents a request to set or clear an identity's notification topic.</p>"
+      }
     },
     "SetIdentityNotificationTopicResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>"
+      }
     },
     "SetReceiptRulePositionRequest":{
       "type":"structure",
@@ -2578,8 +2175,7 @@
           "shape":"Domain",
           "documentation":"<p>The name of the domain to be verified for Easy DKIM signing.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to begin DKIM verification for a domain.</p>"
+      }
     },
     "VerifyDomainDkimResponse":{
       "type":"structure",
@@ -2589,8 +2185,7 @@
           "shape":"VerificationTokenList",
           "documentation":"<p>A set of character strings that represent the domain's identity. If the identity is an email address, the tokens represent the domain of that address.</p> <p>Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign emails originating from that domain.</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html\">Amazon SES Developer Guide</a>.</p>"
         }
-      },
-      "documentation":"<p>Represents the DNS records that must be published in the domain name's DNS to complete DKIM setup.</p>"
+      }
     },
     "VerifyDomainIdentityRequest":{
       "type":"structure",
@@ -2600,8 +2195,7 @@
           "shape":"Domain",
           "documentation":"<p>The domain to be verified.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to begin domain verification.</p>"
+      }
     },
     "VerifyDomainIdentityResponse":{
       "type":"structure",
@@ -2611,8 +2205,7 @@
           "shape":"VerificationToken",
           "documentation":"<p>A TXT record that must be placed in the DNS settings for the domain, in order to complete domain verification.</p>"
         }
-      },
-      "documentation":"<p>Represents a token used for domain ownership verification.</p>"
+      }
     },
     "VerifyEmailAddressRequest":{
       "type":"structure",
@@ -2622,8 +2215,7 @@
           "shape":"Address",
           "documentation":"<p>The email address to be verified.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to begin email address verification.</p>"
+      }
     },
     "VerifyEmailIdentityRequest":{
       "type":"structure",
@@ -2633,14 +2225,12 @@
           "shape":"Address",
           "documentation":"<p>The email address to be verified.</p>"
         }
-      },
-      "documentation":"<p>Represents a request instructing the service to begin email address verification.</p>"
+      }
     },
     "VerifyEmailIdentityResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>An empty element. Receiving this element indicates that the request completed successfully.</p>"
+      }
     },
     "WorkmailAction":{
       "type":"structure",
@@ -2658,6 +2248,5 @@
       "documentation":"<p>When included in a receipt rule, this action calls Amazon WorkMail and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS). You will typically not use this action directly because Amazon WorkMail adds the rule automatically during its setup procedure.</p> <p>For information using a receipt rule to call Amazon WorkMail, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html\">Amazon SES Developer Guide</a>.</p>"
     }
   },
-  "examples":{
-  }
+  "documentation":"<fullname>Amazon Simple Email Service</fullname> <p> This is the API Reference for Amazon Simple Email Service (Amazon SES). This documentation is intended to be used in conjunction with the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html\">Amazon SES Developer Guide</a>. </p> <note>For a list of Amazon SES endpoints to use in service requests, see <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html\">Regions and Amazon SES</a> in the Amazon SES Developer Guide. </note>"
 }
