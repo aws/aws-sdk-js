@@ -5,6 +5,7 @@ try
   config = require('./configuration')
 
 cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront))
+cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail))
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
 cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs))
 cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
@@ -131,6 +132,19 @@ integrationTests ->
       cloudfront.getDistribution params, (err, data) ->
         assertError(err, 'NoSuchDistribution')
         noData(data)
+        done()
+
+  describe 'AWS.CloudTrail', ->
+    it 'makes a request', (done) ->
+      cloudtrail.listPublicKeys (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.PublicKeyList)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      cloudtrail.listTags {ResourceIdList: ['fake-arn']}, (err, data) ->
+        noData(data)
+        assertError(err, 'CloudTrailARNInvalidException')
         done()
 
   describe 'AWS.CloudWatch', ->
