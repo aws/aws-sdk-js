@@ -386,6 +386,22 @@
       ],
       "documentation":"<p>Deletes a <a>Stage</a> resource.</p>"
     },
+    "FlushStageAuthorizersCache":{
+      "name":"FlushStageAuthorizersCache",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/stages/{stage_name}/cache/authorizers",
+        "responseCode":202
+      },
+      "input":{"shape":"FlushStageAuthorizersCacheRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Flushes all authorizer cache entries on a stage.</p>"
+    },
     "FlushStageCache":{
       "name":"FlushStageCache",
       "http":{
@@ -456,6 +472,7 @@
       "input":{"shape":"GetApiKeysRequest"},
       "output":{"shape":"ApiKeys"},
       "errors":[
+        {"shape":"BadRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"}
       ],
@@ -545,6 +562,7 @@
       "input":{"shape":"GetClientCertificatesRequest"},
       "output":{"shape":"ClientCertificates"},
       "errors":[
+        {"shape":"BadRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"}
       ]
@@ -574,6 +592,7 @@
       "input":{"shape":"GetDeploymentsRequest"},
       "output":{"shape":"Deployments"},
       "errors":[
+        {"shape":"BadRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"ServiceUnavailableException"}
@@ -605,6 +624,7 @@
       "input":{"shape":"GetDomainNamesRequest"},
       "output":{"shape":"DomainNames"},
       "errors":[
+        {"shape":"BadRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"}
       ],
@@ -726,6 +746,7 @@
       "input":{"shape":"GetModelsRequest"},
       "output":{"shape":"Models"},
       "errors":[
+        {"shape":"BadRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
@@ -756,6 +777,7 @@
       "input":{"shape":"GetResourcesRequest"},
       "output":{"shape":"Resources"},
       "errors":[
+        {"shape":"BadRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
@@ -786,6 +808,7 @@
       "input":{"shape":"GetRestApisRequest"},
       "output":{"shape":"RestApis"},
       "errors":[
+        {"shape":"BadRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"}
       ],
@@ -909,6 +932,21 @@
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Adds a <a>MethodResponse</a> to an existing <a>Method</a> resource.</p>"
+    },
+    "TestInvokeAuthorizer":{
+      "name":"TestInvokeAuthorizer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/authorizers/{authorizer_id}"
+      },
+      "input":{"shape":"TestInvokeAuthorizerRequest"},
+      "output":{"shape":"TestInvokeAuthorizerResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ]
     },
     "TestInvokeMethod":{
       "name":"TestInvokeMethod",
@@ -2066,6 +2104,28 @@
       },
       "payload":"body"
     },
+    "FlushStageAuthorizersCacheRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "stageName"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The API identifier of the stage to flush.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The name of the stage to flush.</p>",
+          "location":"uri",
+          "locationName":"stage_name"
+        }
+      },
+      "documentation":"<p>Request to flush authorizer cache entries on a specified stage.</p>"
+    },
     "FlushStageCacheRequest":{
       "type":"structure",
       "required":[
@@ -2890,6 +2950,11 @@
       "key":{"shape":"String"},
       "value":{"shape":"NullableBoolean"}
     },
+    "MapOfStringToList":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"ListOfString"}
+    },
     "MapOfStringToString":{
       "type":"map",
       "key":{"shape":"String"},
@@ -2985,6 +3050,14 @@
         "cacheDataEncrypted":{
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the cached responses are encrypted. The PATCH path for this setting is <code>/{method_setting_key}/caching/dataEncrypted</code>, and the value is a Boolean.</p>"
+        },
+        "requireAuthorizationForCacheControl":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether authorization is required for a cache invalidation request. The PATCH path for this setting is <code>/{method_setting_key}/caching/requireAuthorizationForCacheControl</code>, and the value is a Boolean.</p>"
+        },
+        "unauthorizedCacheControlHeaderStrategy":{
+          "shape":"UnauthorizedCacheControlHeaderStrategy",
+          "documentation":"<p>Specifies the strategy on how to handle the unauthorized requests for cache invalidation. The PATCH path for this setting is <code>/{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy</code>, and the available values are <code>FAIL_WITH_403</code>, <code>SUCCEED_WITH_RESPONSE_HEADER</code>, <code>SUCCEED_WITHOUT_RESPONSE_HEADER</code>.</p>"
         }
       },
       "documentation":"<p>Specifies the method setting properties.</p>"
@@ -3111,12 +3184,12 @@
         },
         "integrationHttpMethod":{
           "shape":"String",
-          "documentation":"<p>Specifies a put integration HTTP method.</p>",
+          "documentation":"<p>Specifies a put integration HTTP method. When the integration type is HTTP or AWS, this field is required.</p>",
           "locationName":"httpMethod"
         },
         "uri":{
           "shape":"String",
-          "documentation":"<p>Specifies a put integration input's Uniform Resource Identifier (URI).</p>"
+          "documentation":"<p>Specifies a put integration input's Uniform Resource Identifier (URI). When the integration type is HTTP or AWS, this field is required.</p>"
         },
         "credentials":{
           "shape":"String",
@@ -3473,6 +3546,57 @@
       },
       "documentation":"<p>Represents a mapping template used to transform a payload.</p>"
     },
+    "TestInvokeAuthorizerRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "authorizerId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "authorizerId":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"authorizer_id"
+        },
+        "headers":{"shape":"MapOfHeaderValues"},
+        "pathWithQueryString":{"shape":"String"},
+        "body":{"shape":"String"},
+        "stageVariables":{"shape":"MapOfStringToString"},
+        "additionalContext":{"shape":"MapOfStringToString"}
+      }
+    },
+    "TestInvokeAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+        "clientStatus":{
+          "shape":"Integer",
+          "documentation":"<p>The HTTP status code that the client would have received. Value is 0 if the authorizer succeeded.</p>"
+        },
+        "log":{
+          "shape":"String",
+          "documentation":"<p>The Amazon API Gateway execution log for the test authorizer request.</p>"
+        },
+        "latency":{
+          "shape":"Long",
+          "documentation":"<p>The execution latency of the test authorizer request</p>"
+        },
+        "principalId":{
+          "shape":"String",
+          "documentation":"<p>The principal identity returned by the <a>Authorizer</a></p>"
+        },
+        "policy":{
+          "shape":"String",
+          "documentation":"<p>The policy JSON document returned by the <a>Authorizer</a></p>"
+        },
+        "authorization":{"shape":"MapOfStringToList"}
+      },
+      "documentation":"<p>Represents the response of the test invoke request in for a custom <a>Authorizer</a></p>"
+    },
     "TestInvokeMethodRequest":{
       "type":"structure",
       "required":[
@@ -3556,6 +3680,14 @@
       },
       "error":{"httpStatusCode":429},
       "exception":true
+    },
+    "UnauthorizedCacheControlHeaderStrategy":{
+      "type":"string",
+      "enum":[
+        "FAIL_WITH_403",
+        "SUCCEED_WITH_RESPONSE_HEADER",
+        "SUCCEED_WITHOUT_RESPONSE_HEADER"
+      ]
     },
     "UnauthorizedException":{
       "type":"structure",
