@@ -30,7 +30,7 @@
     "dependencies": {
       "sax": "1.1.5",
       "xml2js": "0.4.15",
-      "xmlbuilder": "4.2.1"
+      "xmlbuilder": "2.6.2"
     },
     "main": "lib/aws.js",
     "browser": "lib/browser.js",
