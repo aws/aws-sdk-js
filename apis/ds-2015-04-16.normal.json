@@ -112,7 +112,7 @@
         {"shape":"ClientException"},
         {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Creates a snapshot of a Simple AD directory.</p> <note> <p>You cannot take snapshots of AD Connector directories.</p> </note>"
+      "documentation":"<p>Creates a snapshot of a Simple AD or Microsoft AD directory in the AWS cloud.</p> <note> <p>You cannot take snapshots of AD Connector directories.</p> </note>"
     },
     "CreateTrust":{
       "name":"CreateTrust",
@@ -180,6 +180,22 @@
       ],
       "documentation":"Deletes an existing trust relationship between your Microsoft AD in the AWS cloud and an external domain."
     },
+    "DeregisterEventTopic":{
+      "name":"DeregisterEventTopic",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeregisterEventTopicRequest"},
+      "output":{"shape":"DeregisterEventTopicResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Removes the specified directory as a publisher to the specified SNS topic.</p>"
+    },
     "DescribeDirectories":{
       "name":"DescribeDirectories",
       "http":{
@@ -196,6 +212,22 @@
         {"shape":"ServiceException"}
       ],
       "documentation":"<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <i>DirectoryIds</i> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeDirectoriesResult.NextToken</i> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>"
+    },
+    "DescribeEventTopics":{
+      "name":"DescribeEventTopics",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeEventTopicsRequest"},
+      "output":{"shape":"DescribeEventTopicsResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Obtains information about which SNS topics receive status messages from the specified directory.</p> <p>If no input parameters are provided, such as DirectoryId or TopicName, this request describes all of the associations in the account.</p>"
     },
     "DescribeSnapshots":{
       "name":"DescribeSnapshots",
@@ -327,6 +359,22 @@
         {"shape":"ServiceException"}
       ],
       "documentation":"<p>Obtains the manual snapshot limits for a directory.</p>"
+    },
+    "RegisterEventTopic":{
+      "name":"RegisterEventTopic",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RegisterEventTopicRequest"},
+      "output":{"shape":"RegisterEventTopicResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Associates a directory with an SNS topic. This establishes the directory as a publisher to the specified SNS topic. You can then receive email or text (SMS) messages when the status of your directory changes. You get notified if your directory goes from an Active status to an Impaired or Inoperable status. You also receive a notification when the directory returns to an Active status. </p>"
     },
     "RestoreFromSnapshot":{
       "name":"RestoreFromSnapshot",
@@ -687,7 +735,7 @@
       "members":{
         "DirectoryId":{
           "shape":"DirectoryId",
-          "documentation":"<p>The identifier of the directory to take a snapshot of.</p>"
+          "documentation":"<p>The identifier of the directory of which to take a snapshot.</p>"
         },
         "Name":{
           "shape":"SnapshotName",
@@ -810,6 +858,29 @@
         }
       }
     },
+    "DeregisterEventTopicRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "TopicName"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The Directory ID to remove as a publisher. This directory will no longer send messages to the specified SNS topic.</p>"
+        },
+        "TopicName":{
+          "shape":"TopicName",
+          "documentation":"<p>The name of the SNS topic from which to remove the directory as a publisher.</p>"
+        }
+      },
+      "documentation":"<p>Removes the specified directory as a publisher to the specified SNS topic.</p>"
+    },
+    "DeregisterEventTopicResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DescribeDirectoriesRequest":{
       "type":"structure",
       "members":{
@@ -841,6 +912,28 @@
         }
       },
       "documentation":"<p>Contains the results of the <a>DescribeDirectories</a> operation.</p>"
+    },
+    "DescribeEventTopicsRequest":{
+      "type":"structure",
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The Directory ID for which to get the list of associated SNS topics. If this member is null, associations for all Directory IDs are returned.</p>"
+        },
+        "TopicNames":{
+          "shape":"TopicNames",
+          "documentation":"<p>A list of SNS topic names for which to obtain the information. If this member is null, all associations for the specified Directory ID are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>"
+        }
+      }
+    },
+    "DescribeEventTopicsResult":{
+      "type":"structure",
+      "members":{
+        "EventTopics":{
+          "shape":"EventTopics",
+          "documentation":"<p>A list of SNS topic names that receive status messages from the specified Directory ID.</p>"
+        }
+      }
     },
     "DescribeSnapshotsRequest":{
       "type":"structure",
@@ -1321,6 +1414,36 @@
       "documentation":"<p>The specified entity could not be found.</p>",
       "exception":true
     },
+    "EventTopic":{
+      "type":"structure",
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The Directory ID of an AWS Directory Service directory that will publish status messages to an SNS topic.</p>"
+        },
+        "TopicName":{
+          "shape":"TopicName",
+          "documentation":"<p>The name of an AWS SNS topic the receives status messages from the directory.</p>"
+        },
+        "TopicArn":{
+          "shape":"TopicArn",
+          "documentation":"<p>The SNS topic ARN (Amazon Resource Name).</p>"
+        },
+        "CreatedDateTime":{
+          "shape":"CreatedDateTime",
+          "documentation":"<p>The date and time of when you associated your directory with the SNS topic.</p>"
+        },
+        "Status":{
+          "shape":"TopicStatus",
+          "documentation":"<p>The topic registration status.</p>"
+        }
+      },
+      "documentation":"<p>Information about SNS topic and AWS Directory Service directory associations.</p>"
+    },
+    "EventTopics":{
+      "type":"list",
+      "member":{"shape":"EventTopic"}
+    },
     "ExceptionMessage":{
       "type":"string",
       "documentation":"<p>The descriptive message for the exception.</p>"
@@ -1496,6 +1619,28 @@
       "max":20,
       "min":1
     },
+    "RegisterEventTopicRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "TopicName"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The Directory ID that will publish status messages to the SNS topic.</p>"
+        },
+        "TopicName":{
+          "shape":"TopicName",
+          "documentation":"<p>The SNS topic name to which the directory will publish status messages. This SNS topic must be in the same region as the specified Directory ID.</p>"
+        }
+      }
+    },
+    "RegisterEventTopicResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "RemoteDomainName":{
       "type":"string",
       "pattern":"^([a-zA-Z0-9]+[\\\\.-])+([a-zA-Z0-9])+[.]?$"
@@ -1654,6 +1799,26 @@
     "SubnetIds":{
       "type":"list",
       "member":{"shape":"SubnetId"}
+    },
+    "TopicArn":{"type":"string"},
+    "TopicName":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
+    "TopicNames":{
+      "type":"list",
+      "member":{"shape":"TopicName"}
+    },
+    "TopicStatus":{
+      "type":"string",
+      "enum":[
+        "Registered",
+        "Topic not found",
+        "Failed",
+        "Deleted"
+      ]
     },
     "Trust":{
       "type":"structure",
