@@ -207,8 +207,8 @@ eof
       obj.operation.docstring.add_tag YARD::Tags::Tag.new(:waiter, "{#{obj.path}}")
       obj.docstring = <<-eof
 Waits for the `#{name}` state by periodically calling the underlying
-{#{operation_name}} operation every #{config['interval']} seconds
-(at most #{config['max_attempts']} times).
+{#{operation_name}} operation every #{config['delay']} seconds
+(at most #{config['maxAttempts']} times).
 
 @callback (see #{obj.operation.path})
 @param (see #{obj.operation.path})
@@ -245,7 +245,7 @@ eof
   def load_model(file)
     json = JSON.parse(File.read(file))
 
-    waiters_file = file.sub(/\.normal\.json$/, '.waiters.json')
+    waiters_file = file.sub(/\.normal\.json$/, '.waiters2.json')
     if File.exist? waiters_file
       json = json.merge(JSON.parse(File.read(waiters_file)))
     end
