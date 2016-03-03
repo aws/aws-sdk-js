@@ -18,22 +18,6 @@ describe 'AWS.ResourceWaiter', ->
       expect(data.Table.TableStatus).to.equal('ACTIVE')
       expect(resp.retryCount).to.equal(2)
 
-    it 'can override the final state', ->
-      err = null; data = null; resp = null
-      db = new AWS.DynamoDB
-      helpers.mockResponses [
-        {data: {Table: TableStatus: 'LOADING'}},
-        {data: {Table: TableStatus: 'LOADING'}},
-        {data: {Table: TableStatus: 'ACTIVE'}},
-        {data: {Table: TableStatus: 'FOO'}}
-      ]
-
-      waiter = new AWS.ResourceWaiter(db, {tableExists: 'FOO'})
-      waiter.wait (e, d) -> resp = this; err = e; data = d
-      expect(err).to.equal(null)
-      expect(data.Table.TableStatus).to.equal('FOO')
-      expect(resp.retryCount).to.equal(3)
-
     it 'throws an error if terminal state is not configured', ->
       try
         new AWS.ResourceWaiter(new AWS.DynamoDB, 'invalidState')
@@ -105,3 +89,44 @@ describe 'AWS.ResourceWaiter', ->
       expect(data).to.equal(null)
       expect(err.code).to.equal('ResourceNotReady')
       expect(resp.retryCount).to.equal(3)
+
+    it 'retries or fails depending on whether error is thrown when no acceptors match', ->
+      err = null; data = null; resp = null
+      db = new AWS.DynamoDB
+      helpers.mockResponses [
+        {data: {Table: TableStatus: 'ACTIVE'}},
+        {error: {code: 'WrongErrorCode'}}
+      ]
+
+      waiter = new AWS.ResourceWaiter(db, 'tableNotExists')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(data).to.equal(null)
+      expect(err.code).to.equal('ResourceNotReady')
+      expect(resp.retryCount).to.equal(1)
+
+    it 'fully supports jmespath expressions', ->
+      err = null; data = null; resp = null
+      as = new AWS.AutoScaling
+      helpers.mockResponses [
+        {data: {AutoScalingGroups: [{MinSize: 1, Instances: [{LifecycleState: 'InService'}]}, {MinSize: 1, Instances: [{LifecycleState: 'Pending'}]}]}},
+        {data: {AutoScalingGroups: [{MinSize: 1, Instances: [{LifecycleState: 'InService'}]}]}}
+      ]
+
+      waiter = new AWS.ResourceWaiter(as, 'groupInService')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(err).to.equal(null)
+      expect(data).to.not.eql(null)
+      expect(resp.retryCount).to.equal(1)
+
+      err = null; data = null; resp = null
+      ecs = new AWS.ECS
+      helpers.mockResponses [
+        {data: {services: [{desiredCount: 1, runningCount: 1, deployments: []}, {desiredCount: 1, runningCount: 1, deployments: [{}]}]}},
+        {data: {services: [{desiredCount: 1, runningCount: 0, deployments: [{}]}, {desiredCount: 1, runningCount: 1, deployments: [{}]}]}},
+        {data: {services: [{desiredCount: 1, runningCount: 1, deployments: [{}]}, {desiredCount: 1, runningCount: 1, deployments: [{}]}]}}
+      ]
+      waiter = new AWS.ResourceWaiter(ecs, 'servicesStable')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(err).to.equal(null)
+      expect(data).to.not.eql(null)
+      expect(resp.retryCount).to.equal(2)
