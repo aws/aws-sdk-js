@@ -106,19 +106,6 @@ describe 'AWS.ResourceWaiter', ->
 
     it 'fully supports jmespath expressions', ->
       err = null; data = null; resp = null
-      as = new AWS.AutoScaling
-      helpers.mockResponses [
-        {data: {AutoScalingGroups: [{MinSize: 1, Instances: [{LifecycleState: 'InService'}]}, {MinSize: 1, Instances: [{LifecycleState: 'Pending'}]}]}},
-        {data: {AutoScalingGroups: [{MinSize: 1, Instances: [{LifecycleState: 'InService'}]}]}}
-      ]
-
-      waiter = new AWS.ResourceWaiter(as, 'groupInService')
-      waiter.wait (e, d) -> resp = this; err = e; data = d
-      expect(err).to.equal(null)
-      expect(data).to.not.eql(null)
-      expect(resp.retryCount).to.equal(1)
-
-      err = null; data = null; resp = null
       ecs = new AWS.ECS
       helpers.mockResponses [
         {data: {services: [{desiredCount: 1, runningCount: 1, deployments: []}, {desiredCount: 1, runningCount: 1, deployments: [{}]}]}},
