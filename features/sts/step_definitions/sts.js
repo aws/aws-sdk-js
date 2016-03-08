@@ -14,15 +14,6 @@ module.exports = function() {
     callback();
   });
 
-  this.Then(/^the TTL on the session token credentials should be less than (\d+)$/, function(duration, callback) {
-    var ttl = this.data.Credentials.Expiration.getTime();
-    ttl = (ttl - new Date().getTime()) / 1000;
-    // Test time elapsed instead of actual time.
-    var timeElapsed = Math.abs(duration - ttl);
-    this.assert.compare(timeElapsed, '<', 20);
-    callback();
-  });
-
   this.Given(/^I try to assume role with web identity$/, function(callback) {
     var params = {RoleArn: 'arn:aws:iam::123456789:role/WebIdentity', RoleSessionName: 'name', WebIdentityToken: 'token'};
     this.request(null, 'assumeRoleWithWebIdentity', params, callback, false);

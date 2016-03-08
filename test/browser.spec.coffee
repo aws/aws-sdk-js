@@ -4,6 +4,7 @@ config = {}
 try
   config = require('./configuration')
 
+acm = new AWS.ACM(AWS.util.merge(config, config.acm))
 cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront))
 cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail))
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
@@ -118,6 +119,21 @@ integrationTests ->
       headers = client.parseHeaders(rawHeaders)
       expect(headers['x-amzn-foo']).to.equal('foo')
       expect(headers['x-amzn-bar']).to.equal('bar')
+
+  describe 'AWS.ACM', ->
+    it 'makes a request', (done) ->
+      acm.listCertificates {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.CertificateSummaryList)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        CertificateArn: 'fake-arn'
+      acm.describeCertificate params, (err, data) ->
+        assertError(err, 'ValidationException')
+        noData(data)
+        done()
 
   describe 'AWS.CloudFront', ->
     it 'makes a request', (done) ->
