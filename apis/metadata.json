@@ -33,7 +33,8 @@
   },
   "cloudwatchevents": {
     "prefix": "events",
-    "name": "CloudWatchEvents"
+    "name": "CloudWatchEvents",
+    "versions": ["2014-02-03*"]
   },
   "cloudwatchlogs": {
     "prefix": "logs",

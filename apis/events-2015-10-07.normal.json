@@ -1,7 +1,7 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2014-02-03",
+    "apiVersion":"2015-10-07",
     "endpointPrefix":"events",
     "jsonVersion":"1.1",
     "serviceFullName":"Amazon CloudWatch Events",
@@ -34,7 +34,7 @@
           "documentation":"<p>This exception occurs due to unexpected causes.</p>"
         }
       ],
-      "documentation":"<p>Deletes a rule. You must remove all targets from a rule using <a>RemoveTargets</a> before you can delete the rule.</p> <p> <b>Note:</b> When you make a change with this action, incoming events might still continue to match to the deleted rule. Please allow a short period of time for changes to take effect. </p>"
+      "documentation":"<p>Deletes a rule. You must remove all targets from a rule using <a>RemoveTargets</a> before you can delete the rule.</p> <p> <b>Note:</b> When you delete a rule, incoming events might still continue to match to the deleted rule. Please allow a short period of time for changes to take effect. </p>"
     },
     "DescribeRule":{
       "name":"DescribeRule",
@@ -93,7 +93,7 @@
           "documentation":"<p>This exception occurs due to unexpected causes.</p>"
         }
       ],
-      "documentation":"<p>Disables a rule. A disabled rule won't match any events, and won't self-trigger if it has a schedule expression.</p> <p> <b>Note:</b> When you make a change with this action, incoming events might still continue to match to the disabled rule. Please allow a short period of time for changes to take effect. </p>"
+      "documentation":"<p>Disables a rule. A disabled rule won't match any events, and won't self-trigger if it has a schedule expression.</p> <p> <b>Note:</b> When you disable a rule, incoming events might still continue to match to the disabled rule. Please allow a short period of time for changes to take effect. </p>"
     },
     "EnableRule":{
       "name":"EnableRule",
@@ -123,7 +123,7 @@
           "documentation":"<p>This exception occurs due to unexpected causes.</p>"
         }
       ],
-      "documentation":"<p>Enables a rule. If the rule does not exist, the operation fails.</p> <p> <b>Note:</b> When you make a change with this action, incoming events might not immediately start matching to a newly enabled rule. Please allow a short period of time for changes to take effect. </p>"
+      "documentation":"<p>Enables a rule. If the rule does not exist, the operation fails.</p> <p> <b>Note:</b> When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Please allow a short period of time for changes to take effect. </p>"
     },
     "ListRuleNamesByTarget":{
       "name":"ListRuleNamesByTarget",
@@ -147,7 +147,7 @@
           "documentation":"<p>This exception occurs due to unexpected causes.</p>"
         }
       ],
-      "documentation":"<p>Lists the names of the rules that the given target is put to. Using this action, you can find out which of the rules in Amazon CloudWatch Events can invoke a specific target in your account. If you have more rules in your account than the given limit, the results will be paginated. In that case, use the next token returned in the response and repeat the ListRulesByTarget action until the NextToken in the response is returned as null.</p>"
+      "documentation":"<p>Lists the names of the rules that the given target is put to. You can see which of the rules in Amazon CloudWatch Events can invoke a specific target in your account. If you have more rules in your account than the given limit, the results will be paginated. In that case, use the next token returned in the response and repeat ListRulesByTarget until the NextToken in the response is returned as null.</p>"
     },
     "ListRules":{
       "name":"ListRules",
@@ -171,7 +171,7 @@
           "documentation":"<p>This exception occurs due to unexpected causes.</p>"
         }
       ],
-      "documentation":"<p>Lists the Amazon CloudWatch Events rules in your account. You can either list all the rules or you can provide a prefix to match to the rule names. If you have more rules in your account than the given limit, the results will be paginated. In that case, use the next token returned in the response and repeat the ListRules action until the NextToken in the response is returned as null.</p>"
+      "documentation":"<p>Lists the Amazon CloudWatch Events rules in your account. You can either list all the rules or you can provide a prefix to match to the rule names. If you have more rules in your account than the given limit, the results will be paginated. In that case, use the next token returned in the response and repeat ListRules until the NextToken in the response is returned as null.</p>"
     },
     "ListTargetsByRule":{
       "name":"ListTargetsByRule",
@@ -263,7 +263,7 @@
           "documentation":"<p>This exception occurs due to unexpected causes.</p>"
         }
       ],
-      "documentation":"<p>Creates or updates a rule. Rules are enabled by default, or based on value of the State parameter. You can disable a rule using <a>DisableRule</a>.</p> <p> <b>Note:</b> When you make a change with this action, incoming events might not immediately start matching to new or updated rules. Please allow a short period of time for changes to take effect.</p> <p>A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule will trigger on matching events as well as on a schedule.</p> <p> <b>Note:</b> Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. </p>"
+      "documentation":"<p>Creates or updates a rule. Rules are enabled by default, or based on value of the State parameter. You can disable a rule using <a>DisableRule</a>.</p> <p> <b>Note:</b> When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Please allow a short period of time for changes to take effect.</p> <p>A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule will trigger on matching events as well as on a schedule.</p> <p> <b>Note:</b> Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. </p>"
     },
     "PutTargets":{
       "name":"PutTargets",
@@ -302,7 +302,7 @@
           "documentation":"<p>This exception occurs due to unexpected causes.</p>"
         }
       ],
-      "documentation":"<p>Adds target(s) to a rule. Updates the target(s) if they are already associated with the role. In other words, if there is already a target with the given target ID, then the target associated with that ID is updated.</p> <p> <b>Note:</b> When you make a change with this action, when the associated rule triggers, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect. </p>"
+      "documentation":"<p>Adds target(s) to a rule. Targets are the resources that can be invoked when a rule is triggered. For example, AWS Lambda functions, Amazon Kinesis streams, and built-in targets. Updates the target(s) if they are already associated with the role. In other words, if there is already a target with the given target ID, then the target associated with that ID is updated.</p> <p>In order to be able to make API calls against the resources you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For Amazon Kinesis streams, CloudWatch Events relies on IAM roles. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/EventsTargetPermissions.html\">Permissions for Sending Events to Targets</a> in the <b><i>Amazon CloudWatch Developer Guide</i></b>.</p> <p><b>Input</b> and <b>InputPath</b> are mutually-exclusive and optional parameters of a target. When a rule is triggered due to a matched event, if for a target:</p> <ul> <li>Neither <b>Input</b> nor <b>InputPath</b> is specified, then the entire event is passed to the target in JSON form.</li> <li> <b>InputPath</b> is specified in the form of JSONPath (e.g. <b>$.detail</b>), then only the part of the event specified in the path is passed to the target (e.g. only the detail part of the event is passed). </li> <li> <b>Input</b> is specified in the form of a valid JSON, then the matched event is overridden with this constant.</li> </ul> <p> <b>Note:</b> When you add targets to a rule, when the associated rule triggers, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect. </p>"
     },
     "RemoveTargets":{
       "name":"RemoveTargets",
@@ -336,7 +336,7 @@
           "documentation":"<p>This exception occurs due to unexpected causes.</p>"
         }
       ],
-      "documentation":"<p>Removes target(s) from a rule so that when the rule is triggered, those targets will no longer be invoked.</p> <p> <b>Note:</b> When you make a change with this action, when the associated rule triggers, removed targets might still continue to be invoked. Please allow a short period of time for changes to take effect. </p>"
+      "documentation":"<p>Removes target(s) from a rule so that when the rule is triggered, those targets will no longer be invoked.</p> <p> <b>Note:</b> When you remove a target, when the associated rule triggers, removed targets might still continue to be invoked. Please allow a short period of time for changes to take effect. </p>"
     },
     "TestEventPattern":{
       "name":"TestEventPattern",
@@ -634,7 +634,7 @@
           "documentation":"<p>In the JSON sense, an object containing fields, which may also contain nested sub-objects. No constraints are imposed on its contents.</p>"
         }
       },
-      "documentation":"<p>Contains information about the event to be used in the PutEvents action.</p>"
+      "documentation":"<p>Contains information about the event to be used in PutEvents.</p>"
     },
     "PutEventsRequestEntryList":{
       "type":"list",
