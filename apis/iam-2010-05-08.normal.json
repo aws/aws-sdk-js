@@ -1778,7 +1778,7 @@
         {"shape":"EntityTemporarilyUnmodifiableException"},
         {"shape":"ServiceFailureException"}
       ],
-      "documentation":"<p>Updates the name and/or the path of the specified user.</p> <important> You should understand the implications of changing a user's path or name. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html\">Renaming Users and Groups</a> in the <i>IAM User Guide</i>. </important> <note> To change a user name the requester must have appropriate permissions on both the source object and the target object. For example, to change Bob to Robert, the entity making the request must have permission on Bob and Robert, or must have permission on all (*). For more information about permissions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html\" target=\"blank\">Permissions and Policies</a>. </note>"
+      "documentation":"<p>Updates the name and/or the path of the specified user.</p> <important> You should understand the implications of changing a user's path or name. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_renaming\">Renaming an IAM User</a> and <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_rename.html\">Renaming an IAM Group</a> in the <i>IAM User Guide</i>. </important> <note> To change a user name the requester must have appropriate permissions on both the source object and the target object. For example, to change Bob to Robert, the entity making the request must have permission on Bob and Robert, or must have permission on all (*). For more information about permissions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html\" target=\"blank\">Permissions and Policies</a>. </note>"
     },
     "UploadSSHPublicKey":{
       "name":"UploadSSHPublicKey",
@@ -2875,7 +2875,7 @@
         },
         "MissingContextValues":{
           "shape":"ContextKeyNamesResultListType",
-          "documentation":"<p>A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.</p> <caution> <p>If the response includes any keys in this list, then the reported results might be untrustworthy because the simulation could not completely evaluate all of the conditions specified in the policies that would occur in a real world request.</p> </caution>"
+          "documentation":"<p>A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. This list is used when the resource in a simulation is \"*\", either explicitly, or when the <code>ResourceArns</code> parameter blank. If you include a list of resources, then any missing context values are instead included under the <code>ResourceSpecificResults</code> section. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.</p> <caution> <p>If the response includes any keys in this list, then the reported results might be untrustworthy because the simulation could not completely evaluate all of the conditions specified in the policies that would occur in a real world request.</p> </caution>"
         },
         "EvalDecisionDetails":{
           "shape":"EvalDecisionDetailsType",
@@ -4788,6 +4788,10 @@
         "GroupName":{
           "shape":"groupNameType",
           "documentation":"<p>The name (friendly name, not ARN) identifying the group.</p>"
+        },
+        "GroupId":{
+          "shape":"idType",
+          "documentation":"<p>The stable and unique string identifying the group. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p>"
         }
       },
       "documentation":"<p>Contains information about a group that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> action. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
@@ -4803,6 +4807,10 @@
         "RoleName":{
           "shape":"roleNameType",
           "documentation":"<p>The name (friendly name, not ARN) identifying the role.</p>"
+        },
+        "RoleId":{
+          "shape":"idType",
+          "documentation":"<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p>"
         }
       },
       "documentation":"<p>Contains information about a role that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> action. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
@@ -4829,6 +4837,10 @@
         "UserName":{
           "shape":"userNameType",
           "documentation":"<p>The name (friendly name, not ARN) identifying the user.</p>"
+        },
+        "UserId":{
+          "shape":"idType",
+          "documentation":"<p>The stable and unique string identifying the user. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p>"
         }
       },
       "documentation":"<p>Contains information about a user that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> action. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
@@ -5039,7 +5051,7 @@
         },
         "MissingContextValues":{
           "shape":"ContextKeyNamesResultListType",
-          "documentation":"<p>A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.</p>"
+          "documentation":"<p>A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. This list is used when a list of ARNs is included in the <code>ResourceArns</code> parameter instead of \"*\". If you do not specify individual resources, by setting <code>ResourceArns</code> to \"*\" or by not including the <code>ResourceArns</code> parameter, then any missing context values are instead included under the <code>EvaluationResults</code> section. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.</p>"
         },
         "EvalDecisionDetails":{
           "shape":"EvalDecisionDetailsType",
