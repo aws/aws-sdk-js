@@ -612,6 +612,7 @@ describe 'AWS.S3', ->
       willCompute 'putBucketLifecycle', computeChecksums: true
       willCompute 'putBucketLifecycleConfiguration', computeChecksums: true
       willCompute 'putBucketTagging', computeChecksums: true
+      willCompute 'putBucketReplication', computeChecksums: true
 
     it 'computes checksums if computeChecksums is off and operation requires it', ->
       willCompute 'deleteObjects', computeChecksums: false
@@ -619,6 +620,7 @@ describe 'AWS.S3', ->
       willCompute 'putBucketLifecycle', computeChecksums: false
       willCompute 'putBucketLifecycleConfiguration', computeChecksums: false
       willCompute 'putBucketTagging', computeChecksums: false
+      willCompute 'putBucketReplication', computeChecksums: false
 
     it 'does not compute checksums if computeChecksums is off', ->
       willCompute 'putObject', computeChecksums: false, hash: null
