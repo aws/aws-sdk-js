@@ -9,7 +9,7 @@
     "targetPrefix":"GameLift",
     "protocol":"json"
   },
-  "documentation":"<fullname>Amazon GameLift Service</fullname> <p>Welcome to the <i>Amazon GameLift API Reference</i>. Amazon GameLift is a managed Amazon Web Services (AWS) service for developers who need a scalable, server-based solution for multiplayer games. Amazon GameLift provides setup and deployment of game servers, and handles infrastructure scaling and session management. For more information about the GameLift service, including a feature overview, getting started guide, and tutorial, see the accompanying <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a>.</p> <p>This reference describes the low-level service API for GameLift. You can call this API directly or use the <a href=\"https://aws.amazon.com/tools/\">AWS SDK</a> for your preferred language. The AWS SDK includes a set of high-level GameLift actions multiplayer game sessions. Alternatively, you can use the <a href=\"https://aws.amazon.com/cli/\">AWS command-line interface</a> (CLI) tool, which includes commands for GameLift. For administrative actions, you can use the Amazon GameLift console. </p> <p><b>Setting Up Your Game Servers</b></p> <p>Use these administrative actions to configure GameLift to host your game servers. When configuring GameLift, you'll need to (1) configure a build for your game and provide build files, and (2) set up one or more fleets to host game sessions.</p> <ul> <li> <b>Build actions:</b> <ul> <li><a>ListBuilds</a></li> <li><a>CreateBuild</a></li> <li><a>DescribeBuild</a></li> <li><a>UpdateBuild</a></li> <li><a>DeleteBuild</a></li> <li><a>RequestUploadCredentials</a></li> </ul> </li> <li> <b>Fleet actions:</b> <ul> <li><a>ListFleets</a></li> <li><a>CreateFleet</a></li> <li>Describe fleet actions: <ul> <li><a>DescribeFleetAttributes</a></li> <li><a>DescribeFleetCapacity</a></li> <li><a>DescribeFleetPortSettings</a></li> <li><a>DescribeFleetUtilization</a></li> <li><a>DescribeEC2InstanceLimits</a></li> <li><a>DescribeFleetEvents</a></li> </ul> </li> <li>Update fleet actions: <ul> <li><a>UpdateFleetAttributes</a></li> <li><a>UpdateFleetCapacity</a></li> <li><a>UpdateFleetPortSettings</a></li> </ul> </li> <li><a>DeleteFleet</a></li> </ul> </li> <li> <b>Alias actions:</b> <ul> <li><a>ListAliases</a></li> <li><a>CreateAlias</a></li> <li><a>DescribeAlias</a></li> <li><a>UpdateAlias</a></li> <li><a>DeleteAlias</a></li> <li><a>ResolveAlias</a></li> </ul> </li> </ul> <p><b>Managing Game and Player Sessions Through GameLift</b></p> <p>Call these actions from your game clients and/or services to create and manage multiplayer game sessions.</p> <ul> <li> <b>Game sessions</b> <ul> <li><a>CreateGameSession</a></li> <li><a>DescribeGameSessions</a></li> <li><a>UpdateGameSession</a></li> </ul> </li> <li> <b>Player sessions</b> <ul> <li><a>CreatePlayerSession</a></li> <li><a>CreatePlayerSessions</a></li> <li><a>DescribePlayerSessions</a></li> </ul> </li> <li> <b>Other actions:</b> <ul> <li><a>GetGameSessionLogUrl</a></li> </ul> </li> </ul>",
+  "documentation":"<fullname>Amazon GameLift Service</fullname> <p>Welcome to the <i>Amazon GameLift API Reference</i>. Amazon GameLift is a managed Amazon Web Services (AWS) service for developers who need a scalable, server-based solution for multiplayer games. Amazon GameLift provides setup and deployment of game servers, and handles infrastructure scaling and session management. For more information about the GameLift service, including a feature overview, getting started guide, and tutorial, see the accompanying <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a>.</p> <p>This reference describes the low-level service API for GameLift. You can call this API directly or use the <a href=\"https://aws.amazon.com/tools/\">AWS SDK</a> for your preferred language. The AWS SDK includes a set of high-level GameLift actions multiplayer game sessions. Alternatively, you can use the <a href=\"https://aws.amazon.com/cli/\">AWS command-line interface</a> (CLI) tool, which includes commands for GameLift. For administrative actions, you can use the Amazon GameLift console. </p> <p><b>Managing Game and Player Sessions Through GameLift</b></p> <p>Call these actions from your game clients and/or services to create and manage multiplayer game sessions.</p> <ul> <li> <b>Game sessions</b> <ul> <li><a>CreateGameSession</a></li> <li><a>DescribeGameSessions</a></li> <li><a>DescribeGameSessionDetails</a></li> <li><a>UpdateGameSession</a></li> </ul> </li> <li> <b>Player sessions</b> <ul> <li><a>CreatePlayerSession</a></li> <li><a>CreatePlayerSessions</a></li> <li><a>DescribePlayerSessions</a></li> </ul> </li> <li> <b>Other actions:</b> <ul> <li><a>GetGameSessionLogUrl</a></li> </ul> </li> </ul> <p><b>Setting Up Game Servers</b></p> <p>Use these administrative actions to configure GameLift to host your game servers. When configuring GameLift, you'll need to (1) configure a build for your game and provide build files, and (2) set up one or more fleets to host game sessions.</p> <ul> <li> <b>Build actions:</b> <ul> <li><a>ListBuilds</a></li> <li><a>CreateBuild</a></li> <li><a>DescribeBuild</a></li> <li><a>UpdateBuild</a></li> <li><a>DeleteBuild</a></li> <li><a>RequestUploadCredentials</a></li> </ul> </li> <li> <b>Fleet actions:</b> <ul> <li><a>ListFleets</a></li> <li><a>CreateFleet</a></li> <li>Describe fleet actions: <ul> <li><a>DescribeFleetAttributes</a></li> <li><a>DescribeFleetCapacity</a></li> <li><a>DescribeFleetPortSettings</a></li> <li><a>DescribeFleetUtilization</a></li> <li><a>DescribeEC2InstanceLimits</a></li> <li><a>DescribeFleetEvents</a></li> </ul> </li> <li>Update fleet actions: <ul> <li><a>UpdateFleetAttributes</a></li> <li><a>UpdateFleetCapacity</a></li> <li><a>UpdateFleetPortSettings</a></li> </ul> </li> <li><a>DeleteFleet</a></li> </ul> </li> <li> <b>Alias actions:</b> <ul> <li><a>ListAliases</a></li> <li><a>CreateAlias</a></li> <li><a>DescribeAlias</a></li> <li><a>UpdateAlias</a></li> <li><a>DeleteAlias</a></li> <li><a>ResolveAlias</a></li> </ul> </li> <li> <b>Scaling policy actions:</b> <ul> <li><a>PutScalingPolicy</a></li> <li><a>DescribeScalingPolicies</a></li> <li><a>DeleteScalingPolicy</a></li> </ul> </li> </ul>",
   "operations":{
     "CreateAlias":{
       "name":"CreateAlias",
@@ -141,7 +141,7 @@
           "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
         }
       ],
-      "documentation":"<p>Creates a new fleet to host game servers. A fleet consists of a set of Amazon Elastic Compute Cloud (Amazon EC2) instances of a certain type, which defines the CPU, memory, storage, and networking capacity of each host in the fleet. See <a href=\"https://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for more information. Each instance in the fleet hosts a game server created from the specified game build. Once a fleet is in an ACTIVE state, it can begin hosting game sessions.</p> <p>To create a new fleet, provide a name and the EC2 instance type for the new fleet, and specify the build and server launch path. Builds must be in a READY state before they can be used to build fleets. When configuring the new fleet, you can optionally (1) provide a set of launch parameters to be passed to a game server when activated; (2) limit incoming traffic to a specified range of IP addresses and port numbers; and (3) configure Amazon GameLift to store game session logs by specifying the path to the logs stored in your game server files. If the call is successful, Amazon GameLift performs the following tasks:</p> <ul> <li>Creates a fleet record and sets the state to NEW.</li> <li>Sets the fleet's capacity to 1 \"desired\" and 1 \"active\" EC2 instance count.</li> <li>Creates an EC2 instance and begins the process of initializing the fleet and activating a game server on the instance.</li> <li>Begins writing events to the fleet event log, which can be accessed in the GameLift console.</li> </ul> <p>Once a fleet is created, use the following actions to change certain fleet properties (server launch parameters and log paths cannot be changed):</p> <ul> <li> <a>UpdateFleetAttributes</a> -- Update fleet metadata, including name and description.</li> <li> <a>UpdateFleetCapacity</a> -- Increase or decrease the number of instances you want the fleet to maintain.</li> <li> <a>UpdateFleetPortSettings</a> -- Change the IP addresses and ports that allow access to incoming traffic.</li> </ul>"
+      "documentation":"<p>Creates a new fleet to host game servers. A fleet consists of a set of Amazon Elastic Compute Cloud (Amazon EC2) instances of a certain type, which defines the CPU, memory, storage, and networking capacity of each host in the fleet. See <a href=\"https://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for more information. Each instance in the fleet hosts a game server created from the specified game build. Once a fleet is in an ACTIVE state, it can begin hosting game sessions.</p> <p>To create a new fleet, provide a name and the EC2 instance type for the new fleet, and specify the build and server launch path. Builds must be in a READY state before they can be used to build fleets. When configuring the new fleet, you can optionally (1) provide a set of launch parameters to be passed to a game server when activated; (2) limit incoming traffic to a specified range of IP addresses and port numbers; (3) set game session protection for all instances in the fleet, and (4) configure Amazon GameLift to store game session logs by specifying the path to the logs stored in your game server files. If the call is successful, Amazon GameLift performs the following tasks:</p> <ul> <li>Creates a fleet record and sets the state to NEW.</li> <li>Sets the fleet's capacity to 1 \"desired\" and 1 \"active\" EC2 instance count.</li> <li>Creates an EC2 instance and begins the process of initializing the fleet and activating a game server on the instance.</li> <li>Begins writing events to the fleet event log, which can be accessed in the GameLift console.</li> </ul> <p>Once a fleet is created, use the following actions to change certain fleet properties (server launch parameters and log paths cannot be changed):</p> <ul> <li> <a>UpdateFleetAttributes</a> -- Update fleet metadata, including name and description.</li> <li> <a>UpdateFleetCapacity</a> -- Increase or decrease the number of instances you want the fleet to maintain.</li> <li> <a>UpdateFleetPortSettings</a> -- Change the IP addresses and ports that allow access to incoming traffic.</li> </ul>"
     },
     "CreateGameSession":{
       "name":"CreateGameSession",
@@ -425,6 +425,41 @@
       ],
       "documentation":"<p>Deletes everything related to a fleet. Before deleting a fleet, you must set the fleet's desired capacity to zero. See <a>UpdateFleetCapacity</a>.</p> <p>This action removes the fleet's resources and the fleet record. Once a fleet is deleted, you can no longer use that fleet.</p>"
     },
+    "DeleteScalingPolicy":{
+      "name":"DeleteScalingPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteScalingPolicyInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes a fleet scaling policy. This action means that the policy is no longer in force and removes all record of it. To delete a scaling policy, specify both the scaling policy name and the fleet ID it is associated with. </p>"
+    },
     "DescribeAlias":{
       "name":"DescribeAlias",
       "http":{
@@ -535,7 +570,7 @@
           "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
         }
       ],
-      "documentation":"<p>Retrieves the maximum number of instances allowed, per AWS account, for each specified EC2 instance type. The current usage level for the AWS account is also retrieved.</p>"
+      "documentation":"<p>Retrieves the following information for the specified EC2 instance type:</p> <ul> <li>maximum number of instances allowed per AWS account (service limit)</li> <li>current usage level for the AWS account </li> </ul> <p>Service limits vary depending on region. Available regions for GameLift can be found in the AWS Management Console for GameLift (see the drop-down list in the upper right corner).</p>"
     },
     "DescribeFleetAttributes":{
       "name":"DescribeFleetAttributes",
@@ -732,6 +767,50 @@
       ],
       "documentation":"<p>Retrieves utilization statistics for one or more fleets. You can request utilization data for all fleets, or specify a list of one or more fleet IDs. When requesting all fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>FleetUtilization</a> object is returned for each requested fleet ID. When specifying a list of fleet IDs, utilization objects are returned only for fleets that currently exist. </p> <note><p>Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.</p></note>"
     },
+    "DescribeGameSessionDetails":{
+      "name":"DescribeGameSessionDetails",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeGameSessionDetailsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeGameSessionDetailsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true,
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+        }
+      ],
+      "documentation":"<p>Retrieves properties, including the protection policy in force, for one or more game sessions. This action can be used in several ways: (1) provide a <i>GameSessionId</i> to request details for a specific game session; (2) provide either a <i>FleetId</i> or an <i>AliasId</i> to request properties for all game sessions running on a fleet. </p> <p>To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>GameSessionDetail</a> object is returned for each session matching the request.</p>"
+    },
     "DescribeGameSessions":{
       "name":"DescribeGameSessions",
       "http":{
@@ -774,7 +853,7 @@
           "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
         }
       ],
-      "documentation":"<p>Retrieves properties for one or more game sessions. This action can be used in several ways: (1) provide a <i>GameSessionId</i> parameter to request properties for a specific game session; (2) provide a <i>FleetId</i> or <i>AliasId</i> parameter to request properties for all game sessions running on a fleet. </p> <p>To get game session record(s), specify only one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>GameSession</a> object is returned for each session matching the request.</p>"
+      "documentation":"<p>Retrieves properties for one or more game sessions. This action can be used in several ways: (1) provide a <i>GameSessionId</i> to request properties for a specific game session; (2) provide a <i>FleetId</i> or an <i>AliasId</i> to request properties for all game sessions running on a fleet. </p> <p>To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>GameSession</a> object is returned for each session matching the request.</p>"
     },
     "DescribePlayerSessions":{
       "name":"DescribePlayerSessions",
@@ -814,6 +893,45 @@
         }
       ],
       "documentation":"<p>Retrieves properties for one or more player sessions. This action can be used in several ways: (1) provide a <i>PlayerSessionId</i> parameter to request properties for a specific player session; (2) provide a <i>GameSessionId</i> parameter to request properties for all player sessions in the specified game session; (3) provide a <i>PlayerId</i> parameter to request properties for all player sessions of a specified player. </p> <p>To get game session record(s), specify only one of the following: a player session ID, a game session ID, or a player ID. You can filter this request by player session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>PlayerSession</a> object is returned for each session matching the request.</p>"
+    },
+    "DescribeScalingPolicies":{
+      "name":"DescribeScalingPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeScalingPoliciesInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"DescribeScalingPoliciesOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        }
+      ],
+      "documentation":"<p>Retrieves all scaling policies applied to a fleet. </p> <p>To get a fleet's scaling policies, specify the fleet ID. You can filter this request by policy status, such as to retrieve only active scaling policies. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, set of <a>ScalingPolicy</a> objects is returned for the fleet.</p>"
     },
     "GetGameSessionLogUrl":{
       "name":"GetGameSessionLogUrl",
@@ -960,6 +1078,45 @@
         }
       ],
       "documentation":"<p>Retrieves a collection of fleet records for this AWS account. You can filter the result set by build ID. Use the pagination parameters to retrieve results in sequential pages. </p> <note><p>Fleet records are not listed in any particular order.</p></note>"
+    },
+    "PutScalingPolicy":{
+      "name":"PutScalingPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"PutScalingPolicyInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"PutScalingPolicyOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Such requests can be retried by clients, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Such requests should not be retried by clients.</p>"
+        }
+      ],
+      "documentation":"<p>Creates or updates a scaling policy for a fleet. An active scaling policy prompts GameLift to track a certain metric for a fleet and automatically change the fleet's capacity in specific circumstances. Each scaling policy contains one rule statement. Fleets can have multiple scaling policies in force simultaneously.</p> <p>A scaling policy rule statement has the following structure:</p> <p>If <i>[MetricName]</i> is <i>[ComparisonOperator]</i> <i>[Threshold]</i> for <i>[EvaluationPeriods]</i> minutes, then <i>[ScalingAdjustmentType]</i> to/by <i>[ScalingAdjustment]</i>.</p> <p>For example, this policy: \"If the number of idle instances exceeds 20 for more than 15 minutes, then reduce the fleet capacity by 10 instances\" could be implemented as the following rule statement: </p> <p>If [IdleInstances] is [GreaterThanOrEqualToThreshold] [20] for [15] minutes, then [ChangeInCapacity] by [-10]. </p> <p>To create or update a scaling policy, specify a unique combination of name and fleet ID, and set the rule values. All parameters for this action are required. If successful, the policy name is returned. Scaling policies cannot be suspended or made inactive. To stop enforcing a scaling policy, call <a>DeleteScalingPolicy</a>.</p>"
     },
     "RequestUploadCredentials":{
       "name":"RequestUploadCredentials",
@@ -1228,7 +1385,7 @@
           "documentation":"<p>The client failed authentication. Such requests should not be retried without valid authentication credentials.</p>"
         }
       ],
-      "documentation":"<p>Updates capacity settings for a fleet. Use this action to specify the number of EC2 instances (hosts) you want this fleet to contain. Before calling this action, you may want to call <a>DescribeEC2InstanceLimits</a> to get the maximum capacity based on the fleet's EC2 instance type.</p> <p>To update fleet capacity, specify the fleet ID and the desired number of instances. If successful, Amazon GameLift starts or terminates instances so that the fleet's active instance count matches the desired instance count. You can view a fleet's current capacity information by calling <a>DescribeFleetCapacity</a>. If the desired instance count is higher than the instance type's limit, the \"Limit Exceeded\" exception will occur.</p>"
+      "documentation":"<p>Updates capacity settings for a fleet. Use this action to specify the number of EC2 instances (hosts) you want this fleet to contain. Before calling this action, you may want to call <a>DescribeEC2InstanceLimits</a> to get the maximum capacity based on the fleet's EC2 instance type.</p> <p>If you're using auto-scaling (see <a>PutScalingPolicy</a>), you may want to specify a minimum and/or maximum capacity. If you don't provide these boundaries, auto-scaling can set capacity anywhere between zero and the <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift\">service limits</a>.</p> <p>To update fleet capacity, specify the fleet ID and the desired number of instances. If successful, Amazon GameLift starts or terminates instances so that the fleet's active instance count matches the desired instance count. You can view a fleet's current capacity information by calling <a>DescribeFleetCapacity</a>. If the desired instance count is higher than the instance type's limit, the \"Limit Exceeded\" exception will occur.</p>"
     },
     "UpdateFleetPortSettings":{
       "name":"UpdateFleetPortSettings",
@@ -1331,7 +1488,7 @@
           "documentation":"<p>One or more parameters specified as part of the request are invalid. Please correct the invalid parameters before retrying.</p>"
         }
       ],
-      "documentation":"<p>Updates game session properties. This includes the session name, maximum player count and the player session creation policy, which either allows or denies new players from joining the session. To update a game session, specify the game session ID and the values you want to change. If successful, an updated <a>GameSession</a> object is returned. </p>"
+      "documentation":"<p>Updates game session properties. This includes the session name, maximum player count, protection policy, which controls whether or not an active game session can be terminated during a scale-down event, and the player session creation policy, which controls whether or not new players can join the session. To update a game session, specify the game session ID and the values you want to change. If successful, an updated <a>GameSession</a> object is returned. </p>"
     }
   },
   "shapes":{
@@ -1435,6 +1592,15 @@
         "FAILED"
       ]
     },
+    "ComparisonOperatorType":{
+      "type":"string",
+      "enum":[
+        "GreaterThanOrEqualToThreshold",
+        "GreaterThanThreshold",
+        "LessThanThreshold",
+        "LessThanOrEqualToThreshold"
+      ]
+    },
     "ConflictException":{
       "type":"structure",
       "members":{
@@ -1445,7 +1611,10 @@
     },
     "CreateAliasInput":{
       "type":"structure",
-      "required":["Name"],
+      "required":[
+        "Name",
+        "RoutingStrategy"
+      ],
       "members":{
         "Name":{
           "shape":"NonZeroAndMaxString",
@@ -1482,7 +1651,8 @@
         "Version":{
           "shape":"NonZeroAndMaxString",
           "documentation":"<p>Version associated with this build. Version strings do not need to be unique to a build. A build version can be changed later using <a>UpdateBuild</a>.</p>"
-        }
+        },
+        "StorageLocation":{"shape":"S3Location"}
       },
       "documentation":"<p>Represents the input for a request action.</p>"
     },
@@ -1544,6 +1714,10 @@
         "EC2InboundPermissions":{
           "shape":"IpPermissionsList",
           "documentation":"<p>Access limits for incoming traffic. Setting these values limits game server access to incoming traffic using specified IP ranges and port numbers. Some ports in a range may be restricted. You can provide one or more sets of permissions for the fleet.</p>"
+        },
+        "NewGameSessionProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Game session protection policy to apply to all instances created in this fleet. If this parameter is not set, new instances in this fleet will default to no protection. Protection can be set for individual instances using <a>UpdateGameSession</a>. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
         }
       },
       "documentation":"<p>Represents the input for a request action.</p>"
@@ -1680,6 +1854,24 @@
         "FleetId":{
           "shape":"FleetId",
           "documentation":"<p>Unique identifier for the fleet you want to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DeleteScalingPolicyInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "FleetId"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this scaling policy. Policy names do not need to be unique.</p>"
+        },
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet.</p>"
         }
       },
       "documentation":"<p>Represents the input for a request action.</p>"
@@ -1904,6 +2096,50 @@
       },
       "documentation":"<p>Represents the returned data in response to a request action.</p>"
     },
+    "DescribeGameSessionDetailsInput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet. Specify a fleet to retrieve information on all game sessions active on the fleet.</p>"
+        },
+        "GameSessionId":{
+          "shape":"GameSessionId",
+          "documentation":"<p>Unique identifier for a game session. Specify the game session to retrieve information on.</p>"
+        },
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for a fleet alias. Specify an alias to retrieve information on all game sessions active on the fleet.</p>"
+        },
+        "StatusFilter":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Game session status to filter results on. Possible game session states include ACTIVE, TERMINATED, ACTIVATING and TERMINATING (the last two are transitory). </p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeGameSessionDetailsOutput":{
+      "type":"structure",
+      "members":{
+        "GameSessionDetails":{
+          "shape":"GameSessionDetailList",
+          "documentation":"<p>Collection of objects containing game session properties and the protection policy currently in force for each session matching the request.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
     "DescribeGameSessionsInput":{
       "type":"structure",
       "members":{
@@ -1992,12 +2228,58 @@
       },
       "documentation":"<p>Represents the returned data in response to a request action.</p>"
     },
+    "DescribeScalingPoliciesInput":{
+      "type":"structure",
+      "required":["FleetId"],
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet. Specify the fleet to retrieve scaling policies for.</p>"
+        },
+        "StatusFilter":{
+          "shape":"ScalingStatusType",
+          "documentation":"<p>Game session status to filter results on. A scaling policy is only in force when in an Active state. <ul> <li>ACTIVE: The scaling policy is currently in force.</li> <li>UPDATEREQUESTED: A request to update the scaling policy has been received.</li> <li>UPDATING: A change is being made to the scaling policy.</li> <li>DELETEREQUESTED: A request to delete the scaling policy has been received.</li> <li>DELETING: The scaling policy is being deleted.</li> <li>DELETED: The scaling policy has been deleted.</li> <li>ERROR: An error occurred in creating the policy. It should be removed and recreated.</li> </ul></p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. You can use this parameter with <i>NextToken</i> to get results as a set of sequential pages.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "DescribeScalingPoliciesOutput":{
+      "type":"structure",
+      "members":{
+        "ScalingPolicies":{
+          "shape":"ScalingPolicyList",
+          "documentation":"<p>Collection of objects containing the scaling policies matching the request.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note><p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p></note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
+    "Double":{"type":"double"},
     "EC2InstanceCounts":{
       "type":"structure",
       "members":{
         "DESIRED":{
           "shape":"WholeNumber",
           "documentation":"<p>Ideal number of active instances in the fleet.</p>"
+        },
+        "MINIMUM":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Minimum value allowed for the fleet's instance count.</p>"
+        },
+        "MAXIMUM":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Maximum value allowed for the fleet's instance count.</p>"
         },
         "PENDING":{
           "shape":"WholeNumber",
@@ -2006,6 +2288,10 @@
         "ACTIVE":{
           "shape":"WholeNumber",
           "documentation":"<p>Actual number of active instances in the fleet.</p>"
+        },
+        "IDLE":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Number of active instances in the fleet that are not currently hosting a game session.</p>"
         },
         "TERMINATING":{
           "shape":"WholeNumber",
@@ -2114,7 +2400,8 @@
         "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE",
         "FLEET_VALIDATION_TIMED_OUT",
         "FLEET_ACTIVATION_FAILED",
-        "FLEET_ACTIVATION_FAILED_NO_INSTANCES"
+        "FLEET_ACTIVATION_FAILED_NO_INSTANCES",
+        "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"
       ]
     },
     "EventList":{
@@ -2163,6 +2450,10 @@
         "LogPaths":{
           "shape":"StringList",
           "documentation":"<p>Path to game-session log files generated by your game server. Once a game session has been terminated, Amazon GameLift captures and stores the logs on Amazon S3. Use the GameLift console to access the stored logs.</p>"
+        },
+        "NewGameSessionProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Type of game session protection to set for all new instances started in the fleet. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
         }
       },
       "documentation":"<p>General properties describing a fleet.</p>"
@@ -2326,6 +2617,21 @@
       },
       "documentation":"<p>Properties describing a game session.</p>"
     },
+    "GameSessionDetail":{
+      "type":"structure",
+      "members":{
+        "GameSession":{"shape":"GameSession"},
+        "ProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Current status of protection for the game session. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
+        }
+      },
+      "documentation":"<p>A game session's properties and the protection policy currently in force.</p>"
+    },
+    "GameSessionDetailList":{
+      "type":"list",
+      "member":{"shape":"GameSessionDetail"}
+    },
     "GameSessionFullException":{
       "type":"structure",
       "members":{
@@ -2372,6 +2678,7 @@
       },
       "documentation":"<p>Represents the returned data in response to a request action.</p>"
     },
+    "Integer":{"type":"integer"},
     "InternalServiceException":{
       "type":"structure",
       "members":{
@@ -2554,6 +2861,17 @@
       },
       "documentation":"<p>Represents the returned data in response to a request action.</p>"
     },
+    "MetricName":{
+      "type":"string",
+      "enum":[
+        "ActivatingGameSessions",
+        "ActiveGameSessions",
+        "ActiveInstances",
+        "AvailablePlayerSessions",
+        "CurrentPlayerSessions",
+        "IdleInstances"
+      ]
+    },
     "NonBlankString":{
       "type":"string",
       "pattern":"[^\\s]+"
@@ -2656,6 +2974,71 @@
       "type":"long",
       "min":1
     },
+    "ProtectionPolicy":{
+      "type":"string",
+      "enum":[
+        "NoProtection",
+        "FullProtection"
+      ]
+    },
+    "PutScalingPolicyInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "FleetId",
+        "ScalingAdjustment",
+        "ScalingAdjustmentType",
+        "Threshold",
+        "ComparisonOperator",
+        "EvaluationPeriods",
+        "MetricName"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this scaling policy. Policy names do not need to be unique. A fleet can have only one scaling policy with the same name.</p>"
+        },
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identity for the fleet to scale with this policy.</p>"
+        },
+        "ScalingAdjustment":{
+          "shape":"Integer",
+          "documentation":"<p>Amount of adjustment to make, based on the scaling adjustment type.</p>"
+        },
+        "ScalingAdjustmentType":{
+          "shape":"ScalingAdjustmentType",
+          "documentation":"<p>Type of adjustment to make to a fleet's instance count (see <a>FleetCapacity</a>): <ul> <li>ChangeInCapacity: add (or subtract) the scaling adjustment value from the current instance count. Positive values scale up while negative values scale down.</li> <li>ExactCapacity: set the instance count to the scaling adjustment value.</li> <li>PercentChangeInCapacity: increase or reduce the current instance count by the scaling adjustment, read as a percentage. Positive values scale up while negative values scale down; for example, a value of \"-10\" scales the fleet down by 10%.</li> </ul></p>"
+        },
+        "Threshold":{
+          "shape":"Double",
+          "documentation":"<p>Metric value used to trigger a scaling event.</p>"
+        },
+        "ComparisonOperator":{
+          "shape":"ComparisonOperatorType",
+          "documentation":"<p>Comparison operator to use when measuring the metric against the threshold value. </p>"
+        },
+        "EvaluationPeriods":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>Name of the Service-defined metric that is used to trigger an adjustment. <ul> <li>ActivatingGameSessions: number of game sessions in the process of being created (game session status = ACTIVATING).</li> <li>ActiveGameSessions: number of game sessions currently running (game session status = ACTIVE).</li> <li>CurrentPlayerSessions: number of active or reserved player sessions (player session status = ACTIVE or RESERVED). </li> <li>AvailablePlayerSessions: number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number includes game sessions that are not currently accepting players (game session PlayerSessionCreationPolicy = DENY_ALL).</li> <li>ActiveInstances: number of instances currently running a game session.</li> <li>IdleInstances: number of instances not currently running a game session.</li> </ul></p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "PutScalingPolicyOutput":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this scaling policy. Policy names do not need to be unique.</p>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
+    },
     "RequestUploadCredentialsInput":{
       "type":"structure",
       "required":["BuildId"],
@@ -2737,9 +3120,76 @@
         "Key":{
           "shape":"NonEmptyString",
           "documentation":"<p>Amazon S3 bucket key.</p>"
-        }
+        },
+        "RoleArn":{"shape":"NonEmptyString"}
       },
       "documentation":"<p>Location in Amazon Simple Storage Service (Amazon S3) where a build's files are stored. This location is assigned in response to a <a>CreateBuild</a> call, and is always in the same region as the service used to create the build. For more details see the <a href=\"http://aws.amazon.com/documentation/s3/\">Amazon S3 documentation</a>.</p>"
+    },
+    "ScalingAdjustmentType":{
+      "type":"string",
+      "enum":[
+        "ChangeInCapacity",
+        "ExactCapacity",
+        "PercentChangeInCapacity"
+      ]
+    },
+    "ScalingPolicy":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identity for the fleet associated with this scaling policy.</p>"
+        },
+        "Name":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Descriptive label associated with this scaling policy. Policy names do not need to be unique.</p>"
+        },
+        "Status":{
+          "shape":"ScalingStatusType",
+          "documentation":"<p>Current status of the scaling policy. The scaling policy is only in force when in an Active state. <ul> <li>ACTIVE: The scaling policy is currently in force.</li> <li>UPDATEREQUESTED: A request to update the scaling policy has been received.</li> <li>UPDATING: A change is being made to the scaling policy.</li> <li>DELETEREQUESTED: A request to delete the scaling policy has been received.</li> <li>DELETING: The scaling policy is being deleted.</li> <li>DELETED: The scaling policy has been deleted.</li> <li>ERROR: An error occurred in creating the policy. It should be removed and recreated.</li> </ul></p>"
+        },
+        "ScalingAdjustment":{
+          "shape":"Integer",
+          "documentation":"<p>Amount of adjustment to make, based on the scaling adjustment type.</p>"
+        },
+        "ScalingAdjustmentType":{
+          "shape":"ScalingAdjustmentType",
+          "documentation":"<p>Type of adjustment to make to a fleet's instance count (see <a>FleetCapacity</a>): <ul> <li>ChangeInCapacity: add (or subtract) the scaling adjustment value from the current instance count. Positive values scale up while negative values scale down.</li> <li>ExactCapacity: set the instance count to the scaling adjustment value.</li> <li>PercentChangeInCapacity: increase or reduce the current instance count by the scaling adjustment, read as a percentage. Positive values scale up while negative values scale down.</li> </ul></p>"
+        },
+        "ComparisonOperator":{
+          "shape":"ComparisonOperatorType",
+          "documentation":"<p>Comparison operator to use when measuring a metric against the threshold value. </p>"
+        },
+        "Threshold":{
+          "shape":"Double",
+          "documentation":"<p>Metric value used to trigger a scaling event.</p>"
+        },
+        "EvaluationPeriods":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>Name of the GameLift-defined metric that is used to trigger an adjustment. <ul> <li>ActivatingGameSessions: number of game sessions in the process of being created (game session status = ACTIVATING).</li> <li>ActiveGameSessions: number of game sessions currently running (game session status = ACTIVE).</li> <li>CurrentPlayerSessions: number of active or reserved player sessions (player session status = ACTIVE or RESERVED). </li> <li>AvailablePlayerSessions: number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number does include game sessions that are not currently accepting players (game session PlayerSessionCreationPolicy = DENY_ALL).</li> <li>ActiveInstances: number of instances currently running a game session.</li> <li>IdleInstances: number of instances not currently running a game session.</li> </ul></p>"
+        }
+      },
+      "documentation":"<p>Rule that controls how a fleet is scaled. Scaling policies are uniquely identified by the combination of name and fleet ID.</p>"
+    },
+    "ScalingPolicyList":{
+      "type":"list",
+      "member":{"shape":"ScalingPolicy"}
+    },
+    "ScalingStatusType":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "UPDATE_REQUESTED",
+        "UPDATING",
+        "DELETE_REQUESTED",
+        "DELETING",
+        "DELETED",
+        "ERROR"
+      ]
     },
     "StringList":{
       "type":"list",
@@ -2839,6 +3289,10 @@
         "Description":{
           "shape":"NonZeroAndMaxString",
           "documentation":"<p>Human-readable description of the fleet.</p>"
+        },
+        "NewGameSessionProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Game session protection policy to apply to all new instances created in this fleet. Instances that already exist will not be affected. You can set protection for individual instances using <a>UpdateGameSession</a>. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
         }
       },
       "documentation":"<p>Represents the input for a request action.</p>"
@@ -2855,10 +3309,7 @@
     },
     "UpdateFleetCapacityInput":{
       "type":"structure",
-      "required":[
-        "FleetId",
-        "DesiredInstances"
-      ],
+      "required":["FleetId"],
       "members":{
         "FleetId":{
           "shape":"FleetId",
@@ -2867,6 +3318,14 @@
         "DesiredInstances":{
           "shape":"WholeNumber",
           "documentation":"<p>Number of EC2 instances you want this fleet to host.</p>"
+        },
+        "MinSize":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Minimum value allowed for the fleet's instance count. Default if not set is 0.</p>"
+        },
+        "MaxSize":{
+          "shape":"WholeNumber",
+          "documentation":"<p>Maximum value allowed for the fleet's instance count. Default if not set is 1.</p>"
         }
       },
       "documentation":"<p>Represents the input for a request action.</p>"
@@ -2929,6 +3388,10 @@
         "PlayerSessionCreationPolicy":{
           "shape":"PlayerSessionCreationPolicy",
           "documentation":"<p>Policy determining whether or not the game session accepts new players.</p>"
+        },
+        "ProtectionPolicy":{
+          "shape":"ProtectionPolicy",
+          "documentation":"<p>Game session protection policy to apply to this game session only. <ul><li>NoProtection: The game session can be terminated during a scale-down event.</li> <li>FullProtection: If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.</li></ul></p>"
         }
       },
       "documentation":"<p>Represents the input for a request action.</p>"
