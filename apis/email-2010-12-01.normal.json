@@ -224,6 +224,19 @@
       },
       "documentation":"<p>Returns the current status of Easy DKIM signing for an entity. For domain name identities, this action also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published.</p> <p>This action takes a list of identities as input and returns the following information for each:</p> <ul> <li>Whether Easy DKIM signing is enabled or disabled.</li> <li>A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.</li> <li>Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.</li> </ul> <p>This action is throttled at one request per second and can only get DKIM attributes for up to 100 identities at a time.</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html\">Amazon SES Developer Guide</a>.</p>"
     },
+    "GetIdentityMailFromDomainAttributes":{
+      "name":"GetIdentityMailFromDomainAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetIdentityMailFromDomainAttributesRequest"},
+      "output":{
+        "shape":"GetIdentityMailFromDomainAttributesResponse",
+        "resultWrapper":"GetIdentityMailFromDomainAttributesResult"
+      },
+      "documentation":"<p>Returns the custom MAIL FROM attributes for a list of identities (email addresses and/or domains).</p> <p>This action is throttled at one request per second and can only get custom MAIL FROM attributes for up to 100 identities at a time.</p>"
+    },
     "GetIdentityNotificationAttributes":{
       "name":"GetIdentityNotificationAttributes",
       "http":{
@@ -412,7 +425,8 @@
         "resultWrapper":"SendEmailResult"
       },
       "errors":[
-        {"shape":"MessageRejected"}
+        {"shape":"MessageRejected"},
+        {"shape":"MailFromDomainNotVerifiedException"}
       ],
       "documentation":"<p>Composes an email message based on input data, and then immediately queues the message for sending. </p> <p>There are several important points to know about <code>SendEmail</code>:</p> <ul> <li>You can only send email from verified email addresses and domains; otherwise, you will get an \"Email address not verified\" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>.</li> <li>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</li> <li>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</li> <li>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>.</li> </ul>"
     },
@@ -428,7 +442,8 @@
         "resultWrapper":"SendRawEmailResult"
       },
       "errors":[
-        {"shape":"MessageRejected"}
+        {"shape":"MessageRejected"},
+        {"shape":"MailFromDomainNotVerifiedException"}
       ],
       "documentation":"<p>Sends an email message, with header and content specified by the client. The <code>SendRawEmail</code> action is useful for sending multipart MIME emails. The raw text of the message must comply with Internet email standards; otherwise, the message cannot be sent. </p> <p>There are several important points to know about <code>SendRawEmail</code>:</p> <ul> <li>You can only send email from verified email addresses and domains; otherwise, you will get an \"Email address not verified\" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>.</li> <li>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</li> <li>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</li> <li>The To:, CC:, and BCC: headers in the raw message can contain a group list. Note that each recipient in a group list counts towards the 50-recipient limit.</li> <li>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>.</li> <li>If you are using sending authorization to send on behalf of another user, <code>SendRawEmail</code> enables you to specify the cross-account identity for the email's \"Source,\" \"From,\" and \"Return-Path\" parameters in one of two ways: you can pass optional parameters <code>SourceArn</code>, <code>FromArn</code>, and/or <code>ReturnPathArn</code> to the API, or you can include the following X-headers in the header of your raw email: <ul> <li><code>X-SES-SOURCE-ARN</code></li> <li><code>X-SES-FROM-ARN</code></li> <li><code>X-SES-RETURN-PATH-ARN</code></li> </ul> <important>Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.</important> For the most common sending authorization use case, we recommend that you specify the <code>SourceIdentityArn</code> and do not specify either the <code>FromIdentityArn</code> or <code>ReturnPathIdentityArn</code>. (The same note applies to the corresponding X-headers.) If you only specify the <code>SourceIdentityArn</code>, Amazon SES will simply set the \"From\" address and the \"Return Path\" address to the identity specified in <code>SourceIdentityArn</code>. For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</li> </ul>"
     },
@@ -473,6 +488,19 @@
         "resultWrapper":"SetIdentityFeedbackForwardingEnabledResult"
       },
       "documentation":"<p>Given an identity (email address or domain), enables or disables whether Amazon SES forwards bounce and complaint notifications as email. Feedback forwarding can only be disabled when Amazon Simple Notification Service (Amazon SNS) topics are specified for both bounces and complaints.</p> <note>Feedback forwarding does not apply to delivery notifications. Delivery notifications are only available through Amazon SNS.</note> <p>This action is throttled at one request per second.</p> <p>For more information about using notifications with Amazon SES, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "SetIdentityMailFromDomain":{
+      "name":"SetIdentityMailFromDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SetIdentityMailFromDomainRequest"},
+      "output":{
+        "shape":"SetIdentityMailFromDomainResponse",
+        "resultWrapper":"SetIdentityMailFromDomainResult"
+      },
+      "documentation":"<p>Enables or disables the custom MAIL FROM domain setup for a verified identity (email address or domain). </p> <important>To send emails using the specified MAIL FROM domain, you must add an MX record to your MAIL FROM domain's DNS settings. If you want your emails to pass Sender Policy Framework (SPF) checks, you must also add or update an SPF record. For more information, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-set.html\">Amazon SES Developer Guide</a>.</important> <p>This action is throttled at one request per second.</p>"
     },
     "SetIdentityNotificationTopic":{
       "name":"SetIdentityNotificationTopic",
@@ -613,6 +641,13 @@
     },
     "AmazonResourceName":{"type":"string"},
     "ArrivalDate":{"type":"timestamp"},
+    "BehaviorOnMXFailure":{
+      "type":"string",
+      "enum":[
+        "UseDefaultValue",
+        "RejectMessage"
+      ]
+    },
     "Body":{
       "type":"structure",
       "members":{
@@ -807,6 +842,15 @@
       "type":"structure",
       "members":{
       }
+    },
+    "CustomMailFromStatus":{
+      "type":"string",
+      "enum":[
+        "Pending",
+        "Success",
+        "Failed",
+        "TemporaryFailure"
+      ]
     },
     "DeleteIdentityPolicyRequest":{
       "type":"structure",
@@ -1056,6 +1100,26 @@
         }
       }
     },
+    "GetIdentityMailFromDomainAttributesRequest":{
+      "type":"structure",
+      "required":["Identities"],
+      "members":{
+        "Identities":{
+          "shape":"IdentityList",
+          "documentation":"<p>A list of one or more identities.</p>"
+        }
+      }
+    },
+    "GetIdentityMailFromDomainAttributesResponse":{
+      "type":"structure",
+      "required":["MailFromDomainAttributes"],
+      "members":{
+        "MailFromDomainAttributes":{
+          "shape":"MailFromDomainAttributes",
+          "documentation":"<p>A map of identities to custom MAIL FROM attributes.</p>"
+        }
+      }
+    },
     "GetIdentityNotificationAttributesRequest":{
       "type":"structure",
       "required":["Identities"],
@@ -1177,6 +1241,29 @@
     "IdentityList":{
       "type":"list",
       "member":{"shape":"Identity"}
+    },
+    "IdentityMailFromDomainAttributes":{
+      "type":"structure",
+      "required":[
+        "MailFromDomain",
+        "MailFromDomainStatus",
+        "BehaviorOnMXFailure"
+      ],
+      "members":{
+        "MailFromDomain":{
+          "shape":"MailFromDomainName",
+          "documentation":"<p>The custom MAIL FROM domain that the identity is configured to use.</p>"
+        },
+        "MailFromDomainStatus":{
+          "shape":"CustomMailFromStatus",
+          "documentation":"<p>The state that indicates whether Amazon SES has successfully read the MX record required for custom MAIL FROM domain setup. If the state is <code>Success</code>, Amazon SES uses the specified custom MAIL FROM domain when the verified identity sends an email. All other states indicate that Amazon SES takes the action described by <code>BehaviorOnMXFailure</code>.</p>"
+        },
+        "BehaviorOnMXFailure":{
+          "shape":"BehaviorOnMXFailure",
+          "documentation":"<p>The action that Amazon SES takes if it cannot successfully read the required MX record when you send an email. A value of <code>UseDefaultValue</code> indicates that if Amazon SES cannot read the required MX record, it uses amazonses.com (or a subdomain of that) as the MAIL FROM domain. A value of <code>RejectMessage</code> indicates that if Amazon SES cannot read the required MX record, Amazon SES returns a <code>MailFromDomainNotVerified</code> error and does not send the email.</p> <p>The custom MAIL FROM setup states that result in this behavior are <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>.</p>"
+        }
+      },
+      "documentation":"<p>Represents the custom MAIL FROM domain attributes of a verified identity (email address or domain).</p>"
     },
     "IdentityNotificationAttributes":{
       "type":"structure",
@@ -1414,6 +1501,24 @@
         }
       }
     },
+    "MailFromDomainAttributes":{
+      "type":"map",
+      "key":{"shape":"Identity"},
+      "value":{"shape":"IdentityMailFromDomainAttributes"}
+    },
+    "MailFromDomainName":{"type":"string"},
+    "MailFromDomainNotVerifiedException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p> Indicates that the message could not be sent because Amazon SES could not read the MX record required to use the specified MAIL FROM domain. For information about editing the custom MAIL FROM domain settings for an identity, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html\">Amazon SES Developer Guide</a>.</p>",
+      "error":{
+        "code":"MailFromDomainNotVerifiedException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "Max24HourSend":{"type":"double"},
     "MaxItems":{"type":"integer"},
     "MaxSendRate":{"type":"double"},
@@ -1636,7 +1741,7 @@
         },
         "Enabled":{
           "shape":"Enabled",
-          "documentation":"<p>If <code>true</code>, the receipt rule is active. The default value is true.</p>"
+          "documentation":"<p>If <code>true</code>, the receipt rule is active. The default value is <code>false</code>.</p>"
         },
         "TlsPolicy":{
           "shape":"TlsPolicy",
@@ -1652,7 +1757,7 @@
         },
         "ScanEnabled":{
           "shape":"Enabled",
-          "documentation":"<p>If <code>true</code>, then messages to which this receipt rule applies are scanned for spam and viruses. The default value is <code>true</code>.</p>"
+          "documentation":"<p>If <code>true</code>, then messages to which this receipt rule applies are scanned for spam and viruses. The default value is <code>false</code>.</p>"
         }
       },
       "documentation":"<p>Receipt rules enable you to specify which actions Amazon SES should take when it receives mail on behalf of one or more email addresses or domains that you own.</p> <p>Each receipt rule defines a set of email addresses or domains to which it applies. If the email addresses or domains match at least one recipient address of the message, Amazon SES executes all of the receipt rule's actions on the message.</p> <p>For information about setting up receipt rules, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html\">Amazon SES Developer Guide</a>.</p>"
@@ -1814,7 +1919,7 @@
         },
         "Encoding":{
           "shape":"SNSActionEncoding",
-          "documentation":"<p>The encoding to use for the email within the Amazon SNS notification. UTF-8 is easier to use, but may not preserve all special characters when a message was encoded with a different encoding format. Base64 preserves all special characters. The default value is Base64.</p>"
+          "documentation":"<p>The encoding to use for the email within the Amazon SNS notification. UTF-8 is easier to use, but may not preserve all special characters when a message was encoded with a different encoding format. Base64 preserves all special characters. The default value is UTF-8.</p>"
         }
       },
       "documentation":"<p>When included in a receipt rule, this action publishes a notification to Amazon Simple Notification Service (Amazon SNS). This action includes a complete copy of the email content in the Amazon SNS notifications. Amazon SNS notifications for all other actions simply provide information about the email. They do not include the email content itself.</p> <p>If you own the Amazon SNS topic, you don't need to do anything to give Amazon SES permission to publish emails to it. However, if you don't own the Amazon SNS topic, you need to attach a policy to the topic to give Amazon SES permissions to access it. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p> <important>You can only publish emails that are 150 KB or less (including the header) to Amazon SNS. Larger emails will bounce. If you anticipate emails larger than 150 KB, use the S3 action instead.</important> <p>For information about using a receipt rule to publish an Amazon SNS notification, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html\">Amazon SES Developer Guide</a>.</p>"
@@ -2042,6 +2147,29 @@
       }
     },
     "SetIdentityFeedbackForwardingEnabledResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "SetIdentityMailFromDomainRequest":{
+      "type":"structure",
+      "required":["Identity"],
+      "members":{
+        "Identity":{
+          "shape":"Identity",
+          "documentation":"<p>The verified identity for which you want to enable or disable the specified custom MAIL FROM domain.</p>"
+        },
+        "MailFromDomain":{
+          "shape":"MailFromDomainName",
+          "documentation":"<p>The custom MAIL FROM domain that you want the verified identity to use. The MAIL FROM domain must 1) be a subdomain of the verified identity, 2) not be used in a \"From\" address if the MAIL FROM domain is the destination of email feedback forwarding (for more information, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html\">Amazon SES Developer Guide</a>), and 3) not be used to receive emails. A value of <code>null</code> disables the custom MAIL FROM setting for the identity.</p>"
+        },
+        "BehaviorOnMXFailure":{
+          "shape":"BehaviorOnMXFailure",
+          "documentation":"<p>The action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. If you choose <code>UseDefaultValue</code>, Amazon SES will use amazonses.com (or a subdomain of that) as the MAIL FROM domain. If you choose <code>RejectMessage</code>, Amazon SES will return a <code>MailFromDomainNotVerified</code> error and not send the email.</p> <p>The action specified in <code>BehaviorOnMXFailure</code> is taken when the custom MAIL FROM domain setup is in the <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code> states.</p>"
+        }
+      }
+    },
+    "SetIdentityMailFromDomainResponse":{
       "type":"structure",
       "members":{
       }
