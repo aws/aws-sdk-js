@@ -57,21 +57,6 @@ describe 'AWS.ResourceWaiter', ->
       expect(resp.httpResponse.statusCode).to.equal(404)
       expect(resp.retryCount).to.equal(2)
 
-    it 'supports error codes as error state', ->
-      err = null; data = null; resp = null
-      db = new AWS.DynamoDB
-      helpers.mockResponses [
-        {data: {Table: TableStatus: 'ACTIVE'}},
-        {data: {Table: TableStatus: 'ACTIVE'}},
-        {error: {code: 'ResourceNotFoundException'}}
-      ]
-
-      waiter = new AWS.ResourceWaiter(db, 'tableNotExists')
-      waiter.wait (e, d) -> resp = this; err = e; data = d
-      expect(err).to.equal(null)
-      expect(data).to.eql({})
-      expect(resp.retryCount).to.equal(2)
-
     it 'fails fast if failure value is found', ->
       err = null; data = null; resp = null
       ec2 = new AWS.EC2
@@ -113,6 +98,94 @@ describe 'AWS.ResourceWaiter', ->
         {data: {services: [{desiredCount: 1, runningCount: 1, deployments: [{}]}, {desiredCount: 1, runningCount: 1, deployments: [{}]}]}}
       ]
       waiter = new AWS.ResourceWaiter(ecs, 'servicesStable')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(err).to.equal(null)
+      expect(data).to.not.eql(null)
+      expect(resp.retryCount).to.equal(2)
+
+    it 'supports status matcher', ->
+      err = null; data = null; resp = null
+      s3 = new AWS.S3
+      helpers.mockResponses [
+        {httpResponse: {statusCode: 201}, error: null, data: {}},
+        {httpResponse: {statusCode: 404}, error: {code: 404}, data: null}
+        {httpResponse: {statusCode: 301}, error: null, data: {}},
+      ]
+
+      waiter = new AWS.ResourceWaiter(s3, 'bucketExists')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(err).to.equal(null)
+      expect(data).to.eql({})
+      expect(resp.retryCount).to.equal(2)
+
+    it 'supports error matcher', ->
+      err = null; data = null; resp = null
+      db = new AWS.DynamoDB
+      helpers.mockResponses [
+        {data: {Table: TableStatus: 'ACTIVE'}},
+        {data: {Table: TableStatus: 'ACTIVE'}},
+        {error: {code: 'ResourceNotFoundException'}}
+      ]
+
+      waiter = new AWS.ResourceWaiter(db, 'tableNotExists')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(err).to.equal(null)
+      expect(data).to.eql({})
+      expect(resp.retryCount).to.equal(2)
+
+    it 'supports path matcher', ->
+      err = null; data = null; resp = null
+      cf = new AWS.CloudFront
+      helpers.mockResponses [
+        {data: {Distribution: Status: 'Pending'}},
+        {data: {Distribution: Status: 'Deployed'}}
+      ]
+
+      waiter = new AWS.ResourceWaiter(cf, 'distributionDeployed')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(err).to.equal(null)
+      expect(data).to.not.eql(null)
+      expect(resp.retryCount).to.equal(1)
+
+    it 'supports pathAny matcher', ->
+      err = null; data = null; resp = null
+      elb = new AWS.ELB
+      helpers.mockResponses [
+        {data: {InstanceStates: [{State: 'Pending'},{State: 'Stopped'}]}},
+        {data: {InstanceStates: [{State: 'Pending'},{State: 'InService'}]}}
+      ]
+
+      waiter = new AWS.ResourceWaiter(elb, 'anyInstanceInService')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(err).to.equal(null)
+      expect(data).to.not.eql(null)
+      expect(resp.retryCount).to.equal(1)
+
+    it 'supports pathAll matcher', ->
+      err = null; data = null; resp = null
+      elb = new AWS.ELB
+      helpers.mockResponses [
+        {data: {InstanceStates: [{State: 'Pending'},{State: 'Stopped'}]}},
+        {data: {InstanceStates: [{State: 'Pending'},{State: 'InService'}]}},
+        {data: {InstanceStates: [{State: 'InService'},{State: 'InService'}]}}
+      ]
+
+      waiter = new AWS.ResourceWaiter(elb, 'instanceInService')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(err).to.equal(null)
+      expect(data).to.not.eql(null)
+      expect(resp.retryCount).to.equal(2)
+
+    it 'supports acceptors of mixed matcher types', ->
+      err = null; data = null; resp = null
+      rs = new AWS.Redshift
+      helpers.mockResponses [
+        {error: {code: 'ClusterNotFound'}},
+        {data: {Clusters: [{ClusterStatus: 'pending'},{ClusterStatus: 'available'}]}},
+        {data: {Clusters: [{ClusterStatus: 'available'},{ClusterStatus: 'available'}]}},
+      ]
+
+      waiter = new AWS.ResourceWaiter(rs, 'clusterAvailable')
       waiter.wait (e, d) -> resp = this; err = e; data = d
       expect(err).to.equal(null)
       expect(data).to.not.eql(null)
