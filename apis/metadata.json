@@ -74,6 +74,9 @@
     "prefix": "ds",
     "name": "DirectoryService"
   },
+  "dms": {
+    "name": "DMS"
+  },
   "dynamodb": {
     "name": "DynamoDB"
   },
