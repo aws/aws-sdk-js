@@ -10,6 +10,7 @@ cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail))
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
 cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs))
 cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
+configservice = new AWS.ConfigService(AWS.util.merge(config, config.configservice))
 codecommit = new AWS.CodeCommit(AWS.util.merge(config, config.codecommit))
 codepipeline = new AWS.CodePipeline(AWS.util.merge(config, config.codepipeline))
 cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
@@ -257,6 +258,21 @@ integrationTests ->
       cognitosync.describeIdentityPoolUsage params, (err, data) ->
         assertError(err, 'ResourceNotFoundException')
         matchError(err, 'IdentityPool \'us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee\' not found')
+        noData(data)
+        done()
+
+  describe 'AWS.ConfigService', ->
+    it 'makes a request', (done) ->
+      configservice.describeDeliveryChannels {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.DeliveryChannels)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        DeliveryChannel: {name: ''}
+      configservice.putDeliveryChannel params, (err, data) ->
+        assertError(err, 'ValidationException')
         noData(data)
         done()
 
