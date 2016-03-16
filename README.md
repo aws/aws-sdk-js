@@ -26,6 +26,13 @@ HTML pages:
 
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.44.min.js"></script>
 
+You can also build a custom browser SDK with your specified set of AWS services.
+This can allow you to reduce the SDK's size, specify different API versions of
+services, or use AWS services that don't currently support CORS if you are
+working in an environment that does not enforce CORS. To get started:
+
+http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-building.html
+
 The AWS SDK is also compatible with [browserify](http://browserify.org).
 
 ### In Node.js
