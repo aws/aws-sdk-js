@@ -159,6 +159,10 @@
   "marketplacecommerceanalytics": {
     "name": "MarketplaceCommerceAnalytics"
   },
+  "marketplacemetering": {
+      "prefix": "meteringmarketplace",
+      "name": "MarketplaceMetering"
+  },
   "mobileanalytics": {
     "name": "MobileAnalytics"
   },
