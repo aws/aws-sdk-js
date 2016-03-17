@@ -61,7 +61,8 @@
       "input":{"shape":"CreateBucketRequest"},
       "output":{"shape":"CreateBucketOutput"},
       "errors":[
-        {"shape":"BucketAlreadyExists"}
+        {"shape":"BucketAlreadyExists"},
+        {"shape":"BucketAlreadyOwnedByYou"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html",
       "documentation":"Creates a new bucket.",
@@ -125,7 +126,8 @@
         "method":"DELETE",
         "requestUri":"/{Bucket}?replication"
       },
-      "input":{"shape":"DeleteBucketReplicationRequest"}
+      "input":{"shape":"DeleteBucketReplicationRequest"},
+      "documentation":"Deletes the replication configuration from the bucket."
     },
     "DeleteBucketTagging":{
       "name":"DeleteBucketTagging",
@@ -276,7 +278,8 @@
         "requestUri":"/{Bucket}?replication"
       },
       "input":{"shape":"GetBucketReplicationRequest"},
-      "output":{"shape":"GetBucketReplicationOutput"}
+      "output":{"shape":"GetBucketReplicationOutput"},
+      "documentation":"Deprecated, see the GetBucketReplicationConfiguration operation."
     },
     "GetBucketRequestPayment":{
       "name":"GetBucketRequestPayment",
@@ -641,6 +644,17 @@
     }
   },
   "shapes":{
+    "AbortDate":{"type":"timestamp"},
+    "AbortIncompleteMultipartUpload":{
+      "type":"structure",
+      "members":{
+        "DaysAfterInitiation":{
+          "shape":"DaysAfterInitiation",
+          "documentation":"Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload."
+        }
+      },
+      "documentation":"Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload."
+    },
     "AbortMultipartUploadOutput":{
       "type":"structure",
       "members":{
@@ -681,6 +695,7 @@
         }
       }
     },
+    "AbortRuleId":{"type":"string"},
     "AcceptRanges":{"type":"string"},
     "AccessControlPolicy":{
       "type":"structure",
@@ -730,6 +745,12 @@
       "members":{
       },
       "documentation":"The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.",
+      "exception":true
+    },
+    "BucketAlreadyOwnedByYou":{
+      "type":"structure",
+      "members":{
+      },
       "exception":true
     },
     "BucketCannedACL":{
@@ -1355,6 +1376,18 @@
     "CreateMultipartUploadOutput":{
       "type":"structure",
       "members":{
+        "AbortDate":{
+          "shape":"AbortDate",
+          "documentation":"Date when multipart upload will become eligible for abort operation by lifecycle.",
+          "location":"header",
+          "locationName":"x-amz-abort-date"
+        },
+        "AbortRuleId":{
+          "shape":"AbortRuleId",
+          "documentation":"Id of the lifecycle rule that makes a multipart upload eligible for abort operation.",
+          "location":"header",
+          "locationName":"x-amz-abort-rule-id"
+        },
         "Bucket":{
           "shape":"BucketName",
           "documentation":"Name of the bucket to which the multipart upload was initiated.",
@@ -1543,6 +1576,7 @@
       "timestampFormat":"iso8601"
     },
     "Days":{"type":"integer"},
+    "DaysAfterInitiation":{"type":"integer"},
     "Delete":{
       "type":"structure",
       "required":["Objects"],
@@ -1856,6 +1890,7 @@
         "Disabled"
       ]
     },
+    "ExpiredObjectDeleteMarker":{"type":"boolean"},
     "Expires":{"type":"timestamp"},
     "ExposeHeader":{"type":"string"},
     "ExposeHeaders":{
@@ -2010,7 +2045,7 @@
       "members":{
         "Bucket":{
           "shape":"BucketName",
-          "documentation":"Name of the buket to get the notification configuration for.",
+          "documentation":"Name of the bucket to get the notification configuration for.",
           "location":"uri",
           "locationName":"Bucket"
         }
@@ -2866,6 +2901,10 @@
         "Days":{
           "shape":"Days",
           "documentation":"Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
+        },
+        "ExpiredObjectDeleteMarker":{
+          "shape":"ExpiredObjectDeleteMarker",
+          "documentation":"Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy."
         }
       }
     },
@@ -2897,7 +2936,8 @@
           "shape":"NoncurrentVersionTransitionList",
           "locationName":"NoncurrentVersionTransition"
         },
-        "NoncurrentVersionExpiration":{"shape":"NoncurrentVersionExpiration"}
+        "NoncurrentVersionExpiration":{"shape":"NoncurrentVersionExpiration"},
+        "AbortIncompleteMultipartUpload":{"shape":"AbortIncompleteMultipartUpload"}
       }
     },
     "LifecycleRules":{
@@ -3157,6 +3197,18 @@
     "ListPartsOutput":{
       "type":"structure",
       "members":{
+        "AbortDate":{
+          "shape":"AbortDate",
+          "documentation":"Date when multipart upload will become eligible for abort operation by lifecycle.",
+          "location":"header",
+          "locationName":"x-amz-abort-date"
+        },
+        "AbortRuleId":{
+          "shape":"AbortRuleId",
+          "documentation":"Id of the lifecycle rule that makes a multipart upload eligible for abort operation.",
+          "location":"header",
+          "locationName":"x-amz-abort-rule-id"
+        },
         "Bucket":{
           "shape":"BucketName",
           "documentation":"Name of the bucket to which the multipart upload was initiated."
@@ -4104,6 +4156,7 @@
         },
         "Bucket":{
           "shape":"BucketName",
+          "documentation":"Name of the bucket to which the PUT operation was initiated.",
           "location":"uri",
           "locationName":"Bucket"
         },
@@ -4139,6 +4192,7 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
+          "documentation":"The base64-encoded 128-bit MD5 digest of the part data.",
           "location":"header",
           "locationName":"Content-MD5"
         },
@@ -4180,6 +4234,7 @@
         },
         "Key":{
           "shape":"ObjectKey",
+          "documentation":"Object key for which the PUT operation was initiated.",
           "location":"uri",
           "locationName":"Key"
         },
@@ -4513,7 +4568,8 @@
         },
         "Transition":{"shape":"Transition"},
         "NoncurrentVersionTransition":{"shape":"NoncurrentVersionTransition"},
-        "NoncurrentVersionExpiration":{"shape":"NoncurrentVersionExpiration"}
+        "NoncurrentVersionExpiration":{"shape":"NoncurrentVersionExpiration"},
+        "AbortIncompleteMultipartUpload":{"shape":"AbortIncompleteMultipartUpload"}
       }
     },
     "Rules":{
@@ -4897,10 +4953,12 @@
       "members":{
         "Body":{
           "shape":"Body",
+          "documentation":"Object data.",
           "streaming":true
         },
         "Bucket":{
           "shape":"BucketName",
+          "documentation":"Name of the bucket to which the multipart upload was initiated.",
           "location":"uri",
           "locationName":"Bucket"
         },
@@ -4912,11 +4970,13 @@
         },
         "ContentMD5":{
           "shape":"ContentMD5",
+          "documentation":"The base64-encoded 128-bit MD5 digest of the part data.",
           "location":"header",
           "locationName":"Content-MD5"
         },
         "Key":{
           "shape":"ObjectKey",
+          "documentation":"Object key for which the multipart upload was initiated.",
           "location":"uri",
           "locationName":"Key"
         },
