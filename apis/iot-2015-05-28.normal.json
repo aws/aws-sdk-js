@@ -31,7 +31,7 @@
           "shape":"TransferAlreadyCompletedException",
           "error":{"httpStatusCode":410},
           "exception":true,
-          "documentation":"<p>You can't revert the certificate transfer because it has already completed.</p>"
+          "documentation":"<p>You can't revert the certificate transfer because the transfer is already complete.</p>"
         },
         {
           "shape":"InvalidRequestException",
@@ -203,7 +203,7 @@
           "shape":"TransferAlreadyCompletedException",
           "error":{"httpStatusCode":410},
           "exception":true,
-          "documentation":"<p>You can't revert the certificate transfer because it has already completed.</p>"
+          "documentation":"<p>You can't revert the certificate transfer because the transfer is already complete.</p>"
         },
         {
           "shape":"InvalidRequestException",
@@ -238,7 +238,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Cancels a pending transfer for the specified certificate.</p> <p><b>Note</b> Only the transfer source account can use this operation to cancel a transfer (transfer destinations can use <a>RejectCertificateTransfer</a> instead). After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. Once the destination account has accepted the transfer, the transfer may no longer be cancelled.</p> <p>After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.</p>"
+      "documentation":"<p>Cancels a pending transfer for the specified certificate.</p> <p><b>Note</b> Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use <a>RejectCertificateTransfer</a> instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled.</p> <p>After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.</p>"
     },
     "CreateCertificateFromCsr":{
       "name":"CreateCertificateFromCsr",
@@ -288,7 +288,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p><b>Note</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>You can create multiple certificates in a batch by creating a directory and copying multiple .csr files into that directory and specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. </p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p>&gt; <p>On Linux and OSX, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p> This command lists all of the CSRs in my-csr-directory and pipes each CSR filename to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. </p> <p> The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: </p> <p> $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} </p> <p> On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} </p> <p> On Windows Command Prompt, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path\"</p>"
+      "documentation":"<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p><b>Note</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. </p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p>&gt; <p>On Linux and OS X, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p> This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. </p> <p> The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: </p> <p> $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} </p> <p> On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} </p> <p> On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path\"</p>"
     },
     "CreateKeysAndCertificate":{
       "name":"CreateKeysAndCertificate",
@@ -338,7 +338,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Creates a 2048 bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p><b>Note</b> This is the only time AWS IoT issues the private key for this certificate. It is important to keep track of the private key.</p>"
+      "documentation":"<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p><b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>"
     },
     "CreatePolicy":{
       "name":"CreatePolicy",
@@ -468,7 +468,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must delete an existing version using <a>DeletePolicyVersion</a> before you create a new version.</p> <p>Optionally, you can set the new version as the policy's default version. The default version is the operative version; that is, the version that is in effect for the certificates that the policy is attached to.</p>"
+      "documentation":"<p>Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use <a>DeletePolicyVersion</a> to delete an existing version before you create a new one.</p> <p>Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).</p>"
     },
     "CreateThing":{
       "name":"CreateThing",
@@ -524,7 +524,7 @@
           "documentation":"<p>The resource already exists.</p>"
         }
       ],
-      "documentation":"<p>Creates a thing in the thing registry.</p>"
+      "documentation":"<p>Creates a thing in the Thing Registry.</p>"
     },
     "CreateTopicRule":{
       "name":"CreateTopicRule",
@@ -570,7 +570,7 @@
           "documentation":"<p>The service is temporarily unavailable.</p>"
         }
       ],
-      "documentation":"<p>Creates a rule.</p>"
+      "documentation":"<p>Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.</p>"
     },
     "DeleteCertificate":{
       "name":"DeleteCertificate",
@@ -602,7 +602,7 @@
           "documentation":"<p>The certificate operation is not allowed.</p>"
         }
       ],
-      "documentation":"<p>Deletes the specified certificate.</p> <p>A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first detach all policies using the <a>DetachPrincipalPolicy</a> API. Next use the <a>UpdateCertificate</a> API to set the certificate to the INACTIVE status.</p>"
+      "documentation":"<p>Deletes the specified certificate.</p> <p>A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the <a>DetachPrincipalPolicy</a> API to detach all policies. Next, use the <a>UpdateCertificate</a> API to set the certificate to the INACTIVE status.</p>"
     },
     "DeletePolicy":{
       "name":"DeletePolicy",
@@ -660,7 +660,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Deletes the specified policy.</p> <p>A policy cannot be deleted if it has non-default versions and/or it is attached to any certificate.</p> <p>To delete a policy, delete all non-default versions of the policy using the DeletePolicyVersion API, detach the policy from any certificate using the DetachPrincipalPolicy API, and then use the DeletePolicy API to delete the policy.</p> <p>When a policy is deleted using DeletePolicy, its default version is deleted with it.</p>"
+      "documentation":"<p>Deletes the specified policy.</p> <p>A policy cannot be deleted if it has non-default versions or it is attached to any certificate.</p> <p>To delete a policy, use the DeletePolicyVersion API to delete all non-default versions of the policy; use the DetachPrincipalPolicy API to detach the policy from any certificate; and then use the DeletePolicy API to delete the policy.</p> <p>When a policy is deleted using DeletePolicy, its default version is deleted with it.</p>"
     },
     "DeletePolicyVersion":{
       "name":"DeletePolicyVersion",
@@ -1111,7 +1111,7 @@
           "documentation":"<p>You are not authorized to perform this operation.</p>"
         }
       ],
-      "documentation":"<p>Disables the specified rule</p>"
+      "documentation":"<p>Disables the specified rule.</p>"
     },
     "EnableTopicRule":{
       "name":"EnableTopicRule",
@@ -1395,7 +1395,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Lists your certificates.</p> <p>The results are paginated with a default page size of 25. You can retrieve additional results using the returned marker.</p>"
+      "documentation":"<p>Lists your certificates.</p> <p>The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.</p>"
     },
     "ListPolicies":{
       "name":"ListPolicies",
@@ -1557,7 +1557,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Lists the policies attached to the specified principal. If you use an Amazon Cognito identity, the ID needs to be in <a href=\"http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">Amazon Cognito Identity format</a>.</p>"
+      "documentation":"<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p>"
     },
     "ListPrincipalThings":{
       "name":"ListPrincipalThings",
@@ -1707,7 +1707,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Lists your things. You can pass an AttributeName and/or AttributeValue to filter your things. For example: \"ListThings where AttributeName=Color and AttributeValue=Red\"</p>"
+      "documentation":"<p>Lists your things. You can pass an AttributeName or AttributeValue to filter your things (for example, \"ListThings where AttributeName=Color and AttributeValue=Red\").</p>"
     },
     "ListTopicRules":{
       "name":"ListTopicRules",
@@ -1768,7 +1768,7 @@
           "shape":"TransferAlreadyCompletedException",
           "error":{"httpStatusCode":410},
           "exception":true,
-          "documentation":"<p>You can't revert the certificate transfer because it has already completed.</p>"
+          "documentation":"<p>You can't revert the certificate transfer because the transfer is already complete.</p>"
         },
         {
           "shape":"InvalidRequestException",
@@ -1803,7 +1803,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from <b>PENDING_TRANFER</b> to <b>INACTIVE</b>.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p> <p>This operation can only be called by the transfer destination. Once called, the certificate will be returned to the source's account in the INACTIVE state.</p>"
+      "documentation":"<p>Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from <b>PENDING_TRANFER</b> to <b>INACTIVE</b>.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p> <p>This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.</p>"
     },
     "ReplaceTopicRule":{
       "name":"ReplaceTopicRule",
@@ -1849,7 +1849,7 @@
           "documentation":"<p>You are not authorized to perform this operation.</p>"
         }
       ],
-      "documentation":"<p>Replaces the specified rule. You must specify all parameters for the new rule.</p>"
+      "documentation":"<p>Replaces the specified rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.</p>"
     },
     "SetDefaultPolicyVersion":{
       "name":"SetDefaultPolicyVersion",
@@ -1901,7 +1901,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Sets the specified version of the specified policy as the policy's default (operative) version. This action affects all certificates that the policy is attached to. To list the principals the policy is attached to, use the ListPrincipalPolicy API.</p>"
+      "documentation":"<p>Sets the specified version of the specified policy as the policy's default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicy API.</p>"
     },
     "SetLoggingOptions":{
       "name":"SetLoggingOptions",
@@ -1974,7 +1974,7 @@
           "shape":"TransferConflictException",
           "error":{"httpStatusCode":409},
           "exception":true,
-          "documentation":"<p>You can't transfer the the certificate because authorization policies are still attached.</p>"
+          "documentation":"<p>You can't transfer the certificate because authorization policies are still attached.</p>"
         },
         {
           "shape":"ThrottlingException",
@@ -2003,7 +2003,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Transfers the specified certificate to the specified AWS account.</p> <p>You can cancel the transfer until it is acknowledged by the recipient.</p> <p>No notification is sent to the transfer destination's account, it is up to the caller to notify the transfer target.</p> <p>The certificate being transferred must not be in the ACTIVE state. It can be deactivated using the UpdateCertificate API.</p> <p>The certificate must not have any policies attached to it. These can be detached using the DetachPrincipalPolicy API.</p>"
+      "documentation":"<p>Transfers the specified certificate to the specified AWS account.</p> <p>You can cancel the transfer until it is acknowledged by the recipient.</p> <p>No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target.</p> <p>The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it.</p> <p>The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.</p>"
     },
     "UpdateCertificate":{
       "name":"UpdateCertificate",
@@ -2061,7 +2061,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a cert from the ACTIVE state (including REVOKED) will NOT disconnect currently-connected devices, although these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>"
+      "documentation":"<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>"
     },
     "UpdateThing":{
       "name":"UpdateThing",
@@ -2153,15 +2153,15 @@
         },
         "sns":{
           "shape":"SnsAction",
-          "documentation":"<p>Publish to an SNS topic.</p>"
+          "documentation":"<p>Publish to an Amazon SNS topic.</p>"
         },
         "sqs":{
           "shape":"SqsAction",
-          "documentation":"<p>Publish to an SQS queue.</p>"
+          "documentation":"<p>Publish to an Amazon SQS queue.</p>"
         },
         "kinesis":{
           "shape":"KinesisAction",
-          "documentation":"<p>Write data to a Kinesis stream.</p>"
+          "documentation":"<p>Write data to an Amazon Kinesis stream.</p>"
         },
         "republish":{
           "shape":"RepublishAction",
@@ -2169,11 +2169,23 @@
         },
         "s3":{
           "shape":"S3Action",
-          "documentation":"<p>Write to an S3 bucket.</p>"
+          "documentation":"<p>Write to an Amazon S3 bucket.</p>"
         },
         "firehose":{
           "shape":"FirehoseAction",
-          "documentation":"<p>Write to a Kinesis Firehose stream.</p>"
+          "documentation":"<p>Write to an Amazon Kinesis Firehose stream.</p>"
+        },
+        "cloudwatchMetric":{
+          "shape":"CloudwatchMetricAction",
+          "documentation":"<p>Capture a CloudWatch metric.</p>"
+        },
+        "cloudwatchAlarm":{
+          "shape":"CloudwatchAlarmAction",
+          "documentation":"<p>Change the state of a CloudWatch alarm.</p>"
+        },
+        "elasticsearch":{
+          "shape":"ElasticsearchAction",
+          "documentation":"<p>Write data to an Amazon Elasticsearch Service; domain.</p>"
         }
       },
       "documentation":"<p>Describes the actions associated with a rule.</p>"
@@ -2184,6 +2196,7 @@
       "min":0,
       "max":10
     },
+    "AlarmName":{"type":"string"},
     "AscendingOrder":{"type":"boolean"},
     "AttachPrincipalPolicyRequest":{
       "type":"structure",
@@ -2202,7 +2215,7 @@
           "shape":"Principal",
           "location":"header",
           "locationName":"x-amzn-iot-principal",
-          "documentation":"<p>The principal which can be a certificate ARN (as returned from the CreateCertificate operation) or a Cognito ID.</p>"
+          "documentation":"<p>The principal, which can be a certificate ARN (as returned from the CreateCertificate operation) or an Amazon Cognito ID.</p>"
         }
       },
       "documentation":"<p>The input for the AttachPrincipalPolicy operation.</p>"
@@ -2245,10 +2258,10 @@
       "members":{
         "attributes":{
           "shape":"Attributes",
-          "documentation":"<p>A JSON string containing up to three key-value pair in JSON format.</p> <p>For example: {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</p>"
+          "documentation":"<p>A JSON string containing up to three key-value pair in JSON format (for example, {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}).</p>"
         }
       },
-      "documentation":"<p>The attribute payload, a JSON string containing up to three key-value pairs.</p> <p>For example: {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</p>"
+      "documentation":"<p>The attribute payload, a JSON string containing up to three key-value pairs (for example, {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}).</p>"
     },
     "AttributeValue":{
       "type":"string",
@@ -2376,6 +2389,71 @@
       "member":{"shape":"Certificate"}
     },
     "ClientId":{"type":"string"},
+    "CloudwatchAlarmAction":{
+      "type":"structure",
+      "required":[
+        "roleArn",
+        "alarmName",
+        "stateReason",
+        "stateValue"
+      ],
+      "members":{
+        "roleArn":{
+          "shape":"AwsArn",
+          "documentation":"<p>The IAM role that allows access to the CloudWatch alarm.</p>"
+        },
+        "alarmName":{
+          "shape":"AlarmName",
+          "documentation":"<p>The CloudWatch alarm name.</p>"
+        },
+        "stateReason":{
+          "shape":"StateReason",
+          "documentation":"<p>The reason for the alarm change.</p>"
+        },
+        "stateValue":{
+          "shape":"StateValue",
+          "documentation":"<p>The value of the alarm state. Acceptable values are: OK, ALARM, INSUFFICIENT_DATA.</p>"
+        }
+      },
+      "documentation":"<p>Describes an action that updates a CloudWatch alarm.</p>"
+    },
+    "CloudwatchMetricAction":{
+      "type":"structure",
+      "required":[
+        "roleArn",
+        "metricNamespace",
+        "metricName",
+        "metricValue",
+        "metricUnit"
+      ],
+      "members":{
+        "roleArn":{
+          "shape":"AwsArn",
+          "documentation":"<p>The IAM role that allows access to the CloudWatch metric.</p>"
+        },
+        "metricNamespace":{
+          "shape":"MetricNamespace",
+          "documentation":"<p>The CloudWatch metric namespace name.</p>"
+        },
+        "metricName":{
+          "shape":"MetricName",
+          "documentation":"<p>The CloudWatch metric name.</p>"
+        },
+        "metricValue":{
+          "shape":"MetricValue",
+          "documentation":"<p>The CloudWatch metric value.</p>"
+        },
+        "metricUnit":{
+          "shape":"MetricUnit",
+          "documentation":"<p>The <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit\">metric unit</a> supported by CloudWatch.</p>"
+        },
+        "metricTimestamp":{
+          "shape":"MetricTimestamp",
+          "documentation":"<p>An optional <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp\">Unix timestamp</a>.</p>"
+        }
+      },
+      "documentation":"<p>Describes an action that captures a CloudWatch metric.</p>"
+    },
     "CreateCertificateFromCsrRequest":{
       "type":"structure",
       "required":["certificateSigningRequest"],
@@ -2432,7 +2510,7 @@
         },
         "certificateId":{
           "shape":"CertificateId",
-          "documentation":"<p>The ID of the certificate. AWS IoT issues a default subject name for the certificate (e.g., AWS IoT Certificate).</p>"
+          "documentation":"<p>The ID of the certificate. AWS IoT issues a default subject name for the certificate (for example, AWS IoT Certificate).</p>"
         },
         "certificatePem":{
           "shape":"CertificatePem",
@@ -2460,7 +2538,7 @@
         },
         "policyDocument":{
           "shape":"PolicyDocument",
-          "documentation":"<p>The JSON document that describes the policy. The length of the <b>policyDocument</b> must be a minimum length of 1, with a maximum length of 2048, excluding whitespace.</p>"
+          "documentation":"<p>The JSON document that describes the policy. <b>policyDocument</b> must have a minimum length of 1, with a maximum length of 2048, excluding whitespace.</p>"
         }
       },
       "documentation":"<p>The input for the CreatePolicy operation.</p>"
@@ -2502,13 +2580,13 @@
         },
         "policyDocument":{
           "shape":"PolicyDocument",
-          "documentation":"<p>The JSON document that describes the policy. Minimum length of 1. Maximum length of 2048 excluding whitespaces</p>"
+          "documentation":"<p>The JSON document that describes the policy. Minimum length of 1. Maximum length of 2048, excluding whitespaces</p>"
         },
         "setAsDefault":{
           "shape":"SetAsDefault",
           "location":"querystring",
           "locationName":"setAsDefault",
-          "documentation":"<p>Specifies whether the policy version is set as the default. When this parameter is true, the new policy version becomes the operative version; that is, the version that is in effect for the certificates that the policy is attached to.</p>"
+          "documentation":"<p>Specifies whether the policy version is set as the default. When this parameter is true, the new policy version becomes the operative version (that is, the version that is in effect for the certificates to which the policy is attached).</p>"
         }
       },
       "documentation":"<p>The input for the CreatePolicyVersion operation.</p>"
@@ -2547,7 +2625,7 @@
         },
         "attributePayload":{
           "shape":"AttributePayload",
-          "documentation":"<p>The attribute payload. Which consists of up to 3 name/value pairs in a JSON document. For example: {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</p>"
+          "documentation":"<p>The attribute payload, which consists of up to 3 name/value pairs in a JSON document (for example, {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}).</p>"
         }
       },
       "documentation":"<p>The input for the CreateThing operation.</p>"
@@ -2747,7 +2825,7 @@
         },
         "attributes":{
           "shape":"Attributes",
-          "documentation":"<p>The attributes which are name/value pairs in JSON format. For example: </p> <p>{\\\"attributes\\\":{\\\"some-name1\\\":\\\"some-value1\\\"}, {\\\"some-name2\\\":\\\"some-value2\\\"}, {\\\"some-name3\\\":\\\"some-value3\\\"}}</p>"
+          "documentation":"<p>The attributes, which are name/value pairs in JSON format (for example: {\\\"attributes\\\":{\\\"some-name1\\\":\\\"some-value1\\\"}, {\\\"some-name2\\\":\\\"some-value2\\\"}, {\\\"some-name3\\\":\\\"some-value3\\\"}})</p>"
         }
       },
       "documentation":"<p>The output from the DescribeThing operation.</p>"
@@ -2770,7 +2848,7 @@
           "shape":"Principal",
           "location":"header",
           "locationName":"x-amzn-iot-principal",
-          "documentation":"<p>The principal</p> <p>If the principal is a certificate, specify the certificate ARN. If the principal is a Cognito identity specify the identity ID.</p>"
+          "documentation":"<p>The principal.</p> <p>If the principal is a certificate, specify the certificate ARN. If the principal is an Amazon Cognito identity, specify the identity ID.</p>"
         }
       },
       "documentation":"<p>The input for the DetachPrincipalPolicy operation.</p>"
@@ -2853,11 +2931,51 @@
         },
         "payloadField":{
           "shape":"PayloadField",
-          "documentation":"<p>The action payload, this name can be customized.</p>"
+          "documentation":"<p>The action payload. This name can be customized.</p>"
         }
       },
-      "documentation":"<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any expression that's valid in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p><code>\"hashKeyValue\": \"${topic(3)}\"</code></p> <p>The following field uses the timestamp:</p> <p><code>\"rangeKeyValue\": \"${timestamp()}\"</code></p>"
+      "documentation":"<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p><code>\"hashKeyValue\": \"${topic(3)}\"</code></p> <p>The following field uses the timestamp:</p> <p><code>\"rangeKeyValue\": \"${timestamp()}\"</code></p>"
     },
+    "ElasticsearchAction":{
+      "type":"structure",
+      "required":[
+        "roleArn",
+        "endpoint",
+        "index",
+        "type",
+        "id"
+      ],
+      "members":{
+        "roleArn":{
+          "shape":"AwsArn",
+          "documentation":"<p>The IAM role ARN that has access to Elasticsearch.</p>"
+        },
+        "endpoint":{
+          "shape":"ElasticsearchEndpoint",
+          "documentation":"<p>The endpoint of your Elasticsearch domain.</p>"
+        },
+        "index":{
+          "shape":"ElasticsearchIndex",
+          "documentation":"<p>The Elasticsearch index where you want to store your data.</p>"
+        },
+        "type":{
+          "shape":"ElasticsearchType",
+          "documentation":"<p>The type of document you are storing.</p>"
+        },
+        "id":{
+          "shape":"ElasticsearchId",
+          "documentation":"<p>The unique identifier for the document you are storing.</p>"
+        }
+      },
+      "documentation":"<p>Describes an action that writes data to an Amazon Elasticsearch Service; domain.</p>"
+    },
+    "ElasticsearchEndpoint":{
+      "type":"string",
+      "pattern":"https?://.*"
+    },
+    "ElasticsearchId":{"type":"string"},
+    "ElasticsearchIndex":{"type":"string"},
+    "ElasticsearchType":{"type":"string"},
     "EnableTopicRuleRequest":{
       "type":"structure",
       "required":["ruleName"],
@@ -2881,14 +2999,14 @@
       "members":{
         "roleArn":{
           "shape":"AwsArn",
-          "documentation":"<p>The IAM role that grants access to the firehose stream.</p>"
+          "documentation":"<p>The IAM role that grants access to the Amazon Kinesis Firehost stream.</p>"
         },
         "deliveryStreamName":{
           "shape":"DeliveryStreamName",
           "documentation":"<p>The delivery stream name.</p>"
         }
       },
-      "documentation":"<p>Describes an action that writes data to a Kinesis Firehose stream.</p>"
+      "documentation":"<p>Describes an action that writes data to an Amazon Kinesis Firehose stream.</p>"
     },
     "FunctionArn":{"type":"string"},
     "GetLoggingOptionsRequest":{
@@ -3087,11 +3205,11 @@
       "members":{
         "roleArn":{
           "shape":"AwsArn",
-          "documentation":"<p>The ARN of the IAM role that grants access to the Kinesis stream.</p>"
+          "documentation":"<p>The ARN of the IAM role that grants access to the Amazon Kinesis stream.</p>"
         },
         "streamName":{
           "shape":"StreamName",
-          "documentation":"<p>The name of the Kinesis stream.</p>"
+          "documentation":"<p>The name of the Amazon Kinesis stream.</p>"
         },
         "partitionKey":{
           "shape":"PartitionKey",
@@ -3109,7 +3227,7 @@
           "documentation":"<p>The ARN of the Lambda function.</p>"
         }
       },
-      "documentation":"<p>Describes an action to invoke a Lamdba function.</p>"
+      "documentation":"<p>Describes an action to invoke a Lambda function.</p>"
     },
     "LimitExceededException":{
       "type":"structure",
@@ -3460,6 +3578,18 @@
       "min":1,
       "max":10000
     },
+    "MessageFormat":{
+      "type":"string",
+      "enum":[
+        "RAW",
+        "JSON"
+      ]
+    },
+    "MetricName":{"type":"string"},
+    "MetricNamespace":{"type":"string"},
+    "MetricTimestamp":{"type":"string"},
+    "MetricUnit":{"type":"string"},
+    "MetricValue":{"type":"string"},
     "NextToken":{"type":"string"},
     "PageSize":{
       "type":"integer",
@@ -3635,7 +3765,7 @@
         },
         "bucketName":{
           "shape":"BucketName",
-          "documentation":"<p>The S3 bucket.</p>"
+          "documentation":"<p>The Amazon S3 bucket.</p>"
         },
         "key":{
           "shape":"Key",
@@ -3708,6 +3838,10 @@
         "roleArn":{
           "shape":"AwsArn",
           "documentation":"<p>The ARN of the IAM role that grants access.</p>"
+        },
+        "messageFormat":{
+          "shape":"MessageFormat",
+          "documentation":"<p>The message format of the message to publish. Optional. Accepted values are \"JSON\" and \"RAW\". The default value of the attribute is \"RAW\". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href=\"http://docs.aws.amazon.com/sns/latest/dg/json-formats.html\"></a> refer to their official documentation.</p>"
         }
       },
       "documentation":"<p>Describes an action to publish to an Amazon SNS topic.</p>"
@@ -3744,8 +3878,10 @@
           "documentation":"<p>Specifies whether to use Base64 encoding.</p>"
         }
       },
-      "documentation":"<p>Describes an action to publish data to an SQS queue.</p>"
+      "documentation":"<p>Describes an action to publish data to an Amazon SQS queue.</p>"
     },
+    "StateReason":{"type":"string"},
+    "StateValue":{"type":"string"},
     "StreamName":{"type":"string"},
     "TableName":{"type":"string"},
     "ThingArn":{"type":"string"},
@@ -3800,7 +3936,7 @@
         },
         "sql":{
           "shape":"SQL",
-          "documentation":"<p>The SQL statement used to query the topic. When using a SQL query with multiple lines, be sure to escape the newline characters properly.</p>"
+          "documentation":"<p>The SQL statement used to query the topic. When using a SQL query with multiple lines, be sure to escape the newline characters.</p>"
         },
         "description":{
           "shape":"Description",
@@ -3887,7 +4023,7 @@
       },
       "error":{"httpStatusCode":410},
       "exception":true,
-      "documentation":"<p>You can't revert the certificate transfer because it has already completed.</p>"
+      "documentation":"<p>You can't revert the certificate transfer because the transfer is already complete.</p>"
     },
     "TransferCertificateRequest":{
       "type":"structure",
@@ -3931,7 +4067,7 @@
       },
       "error":{"httpStatusCode":409},
       "exception":true,
-      "documentation":"<p>You can't transfer the the certificate because authorization policies are still attached.</p>"
+      "documentation":"<p>You can't transfer the certificate because authorization policies are still attached.</p>"
     },
     "UnauthorizedException":{
       "type":"structure",
@@ -3962,7 +4098,7 @@
           "shape":"CertificateStatus",
           "location":"querystring",
           "locationName":"newStatus",
-          "documentation":"<p>The new status.</p> <p>Note: setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT and is not meant to be used by developers.</p>"
+          "documentation":"<p>The new status.</p> <p><b>Note:</b> Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.</p>"
         }
       },
       "documentation":"<p>The input for the UpdateCertificate operation.</p>"
@@ -3982,7 +4118,7 @@
         },
         "attributePayload":{
           "shape":"AttributePayload",
-          "documentation":"<p>The attribute payload, a JSON string containing up to three key-value pairs.</p> <p>For example: {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</p>"
+          "documentation":"<p>The attribute payload, a JSON string containing up to three key-value pairs (for example, {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}).</p>"
         }
       },
       "documentation":"<p>The input for the UpdateThing operation.</p>"
