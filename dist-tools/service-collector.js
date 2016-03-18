@@ -5,7 +5,7 @@ var path = require('path');
 var AWS = require('../');
 var apis = require('../lib/api_loader');
 
-var defaultServices = 'acm,cloudfront,cloudtrail,cloudwatch,cloudwatchlogs,codecommit,codepipeline,cognitoidentity,cognitosync,configservice,devicefarm,dynamodb,dynamodbstreams,ec2,elastictranscoder,firehose,inspector,kinesis,kms,lambda,marketplacecommerceanalytics,mobileanalytics,machinelearning,opsworks,route53,s3,sqs,sns,ssm,sts,waf';
+var defaultServices = 'acm,cloudfront,cloudtrail,cloudwatch,cloudwatchlogs,codecommit,codepipeline,cognitoidentity,cognitosync,configservice,devicefarm,dynamodb,dynamodbstreams,ec2,elastictranscoder,firehose,inspector,kinesis,kms,lambda,marketplacecommerceanalytics,mobileanalytics,machinelearning,opsworks,route53,route53domains,s3,sqs,sns,ssm,sts,waf';
 var sanitizeRegex = /[^a-zA-Z0-9,-]/;
 
 var serviceClasses = {};

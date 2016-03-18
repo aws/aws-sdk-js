@@ -29,6 +29,7 @@ mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobilean
 machinelearning = new AWS.MachineLearning(AWS.util.merge(config, config.machinelearning))
 opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks))
 route53 = new AWS.Route53(AWS.util.merge(config, config.route53))
+route53domains = new AWS.Route53Domains(AWS.util.merge(config, config.route53domains))
 s3 = new AWS.S3(AWS.util.merge(config, config.s3))
 sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 sns = new AWS.SNS(AWS.util.merge(config, config.sns))
@@ -476,6 +477,19 @@ integrationTests ->
       route53.createHostedZone {Name: 'fake-name', 'CallerReference': 'fake-ref'}, (err, data) ->
         noData(data)
         assertError(err, 'InvalidDomainName')
+        done()
+
+  describe 'AWS.Route53Domains', ->
+    it 'makes a request', (done) ->
+      route53domains.listDomains (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Domains)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      route53domains.registerDomain {DomainName: 'example.com', DurationInYears: '1', AdminContact: {}, RegistrantContact: {}, TechContact: {}}, (err, data) ->
+        noData(data)
+        assertError(err, 'InvalidInput')
         done()
 
   describe 'AWS.S3', ->
