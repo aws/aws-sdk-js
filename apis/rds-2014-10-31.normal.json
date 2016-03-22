@@ -73,7 +73,7 @@
         {"shape":"AuthorizationAlreadyExistsFault"},
         {"shape":"AuthorizationQuotaExceededFault"}
       ],
-      "documentation":"<p> Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC security groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC). </p> <note> You cannot authorize ingress from an EC2 security group in one region to an Amazon RDS DB instance in another. You cannot authorize ingress from a VPC security group in one VPC to an Amazon RDS DB instance in another. </note> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>"
+      "documentation":"<p> Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC security groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC). </p> <note> <p>You cannot authorize ingress from an EC2 security group in one region to an Amazon RDS DB instance in another. You cannot authorize ingress from a VPC security group in one VPC to an Amazon RDS DB instance in another. </p> </note> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>"
     },
     "CopyDBClusterSnapshot":{
       "name":"CopyDBClusterSnapshot",
@@ -128,7 +128,7 @@
         {"shape":"InvalidDBSnapshotStateFault"},
         {"shape":"SnapshotQuotaExceededFault"}
       ],
-      "documentation":"<p> Copies the specified DBSnapshot. The source DB snapshot must be in the \"available\" state. </p> <p>If you are copying from a shared manual DB snapshot, the <code>SourceDBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
+      "documentation":"<p> Copies the specified DB Snapshot. The source DB snapshot must be in the \"available\" state. </p> <p>If you are copying from a shared manual DB snapshot, the <code>SourceDBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
     },
     "CopyOptionGroup":{
       "name":"CopyOptionGroup",
@@ -1090,7 +1090,7 @@
         {"shape":"InvalidDBSnapshotStateFault"},
         {"shape":"SharedSnapshotQuotaExceededFault"}
       ],
-      "documentation":"<p>Adds an attribute and values to, or removes an attribute and values from a manual DB snapshot.</p> <p>To share a manual DB snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of the AWS account ids that are authorized to retore the manual DB snapshot. Uses the value <code>all</code> to make the manual DB snapshot public and can by copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB snapshots that contain private information that you do not want to be available to all AWS accounts.</p> <p>To view which AWS accounts have access to copy or restore a manual DB snapshot, or whether a manual DB snapshot public or private, use the <a>DescribeDBSnapshotAttributes</a> API.</p> <p>If the manual DB snapshot is encrypted, it cannot be shared.</p>"
+      "documentation":"<p>Adds an attribute and values to, or removes an attribute and values from a manual DB snapshot.</p> <p>To share a manual DB snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of the AWS account ids that are authorized to restore the manual DB snapshot. Uses the value <code>all</code> to make the manual DB snapshot public and can by copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB snapshots that contain private information that you do not want to be available to all AWS accounts.</p> <p>To view which AWS accounts have access to copy or restore a manual DB snapshot, or whether a manual DB snapshot public or private, use the <a>DescribeDBSnapshotAttributes</a> API.</p> <p>If the manual DB snapshot is encrypted, it cannot be shared.</p>"
     },
     "ModifyDBSubnetGroup":{
       "name":"ModifyDBSubnetGroup",
@@ -1513,7 +1513,7 @@
         },
         "ApplyAction":{
           "shape":"String",
-          "documentation":"<p>The pending maintenance action to apply to this resource.</p>"
+          "documentation":"<p>The pending maintenance action to apply to this resource.</p> <p>Valid values: <code>system-update</code>, <code>db-upgrade</code></p>"
         },
         "OptInType":{
           "shape":"String",
@@ -1862,7 +1862,7 @@
         },
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p>A DB subnet group to associate with this DB cluster. </p>"
+          "documentation":"<p>A DB subnet group to associate with this DB cluster. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         },
         "Engine":{
           "shape":"String",
@@ -2050,7 +2050,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p> The version number of the database engine to use. </p> <p> The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS region. </p> <p><b>MySQL</b></p> <ul> <li><b>Version 5.1 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 5.1.73a | 5.1.73b</code></li> <li><b>Version 5.5 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 5.5.40 | 5.5.40a</code></li> <li><b>Version 5.5 (Available in all regions):</b> <code> 5.5.40b | 5.5.41 | 5.5.42</code></li> <li><b>Version 5.6 (Available in all regions):</b> <code> 5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b | 5.6.22 | 5.6.23</code></li> </ul> <p><b>MariaDB</b></p> <ul> <li><b>Version 10.0 (Available in all regions except AWS GovCloud (US) Region (us-gov-west-1)):</b> <code> 10.0.17 </code></li> </ul> <p><b>Oracle Database Enterprise Edition (oracle-ee)</b></p> <ul> <li><b>Version 11.2 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code></li> <li><b>Version 11.2 (Available in all regions):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code></li> <li><b>Version 12.1 (Available in all regions):</b> <code>12.1.0.1.v1 | 12.1.0.1.v2 | 12.1.0.2.v1 </code></li> </ul> <p><b>Oracle Database Standard Edition (oracle-se)</b></p> <ul> <li><b>Version 11.2 (Only available in the following regions: us-west-1):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code></li> <li><b>Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code></li> <li><b>Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):</b> <code>12.1.0.1.v1 | 12.1.0.1.v2</code></li> </ul> <p><b>Oracle Database Standard Edition One (oracle-se1)</b></p> <ul> <li><b>Version 11.2 (Only available in the following regions: us-west-1):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code></li> <li><b>Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code></li> <li><b>Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code></li> </ul> <p><b>PostgreSQL</b></p> <ul> <li><b>Version 9.3 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 9.3.1 | 9.3.2</code></li> <li><b>Version 9.3 (Available in all regions):</b> <code> 9.3.3 | 9.3.5 | 9.3.6 | 9.3.9 | 9.3.10</code></li> <li><b>Version 9.4 (Available in all regions):</b> <code> 9.4.1 | 9.4.4 | 9.4.5</code></li> </ul> <p><b>Microsoft SQL Server Enterprise Edition (sqlserver-ee)</b></p> <ul> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code></li> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code></li> </ul> <p><b>Microsoft SQL Server Express Edition (sqlserver-ex)</b></p> <ul> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code></li> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code></li> <li><b>Version 12.00 (Available in all regions):</b> <code> 12.00.4422.0.v1</code></li> </ul> <p><b>Microsoft SQL Server Standard Edition (sqlserver-se)</b></p> <ul> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code></li> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code></li> <li><b>Version 12.00 (Available in all regions):</b> <code> 12.00.4422.0.v1</code></li> </ul> <p><b>Microsoft SQL Server Web Edition (sqlserver-web)</b></p> <ul> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code></li> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code></li> <li><b>Version 12.00 (Available in all regions):</b> <code> 12.00.4422.0.v1</code></li> </ul>"
+          "documentation":"<p> The version number of the database engine to use. </p> <p> The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS region. </p> <p><b>MySQL</b></p> <ul> <li><b>Version 5.1 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 5.1.73a | 5.1.73b</code></li> <li><b>Version 5.5 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 5.5.40 | 5.5.40a</code></li> <li><b>Version 5.5 (Available in all regions):</b> <code> 5.5.40b | 5.5.41 | 5.5.42</code></li> <li><b>Version 5.6 (Available in all regions):</b> <code> 5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b | 5.6.22 | 5.6.23 | 5.6.27</code></li> <li><b>Version 5.7 (Available in all regions):</b> <code> 5.7.10</code></li> </ul> <p><b>MariaDB</b></p> <ul> <li><b>Version 10.0 (Available in all regions except AWS GovCloud (US) Region (us-gov-west-1)):</b> <code> 10.0.17 </code></li> </ul> <p><b>Oracle Database Enterprise Edition (oracle-ee)</b></p> <ul> <li><b>Version 11.2 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code></li> <li><b>Version 11.2 (Available in all regions):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code></li> <li><b>Version 12.1 (Available in all regions):</b> <code>12.1.0.1.v1 | 12.1.0.1.v2 | 12.1.0.2.v1 </code></li> </ul> <p><b>Oracle Database Standard Edition (oracle-se)</b></p> <ul> <li><b>Version 11.2 (Only available in the following regions: us-west-1):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code></li> <li><b>Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code></li> <li><b>Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):</b> <code>12.1.0.1.v1 | 12.1.0.1.v2</code></li> </ul> <p><b>Oracle Database Standard Edition One (oracle-se1)</b></p> <ul> <li><b>Version 11.2 (Only available in the following regions: us-west-1):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code></li> <li><b>Version 11.2 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3 | 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code></li> <li><b>Version 12.1 (Only available in the following regions: eu-central-1, us-west-1):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code></li> </ul> <p><b>PostgreSQL</b></p> <ul> <li><b>Version 9.3 (Only available in the following regions: ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-west-1, us-west-2):</b> <code> 9.3.1 | 9.3.2</code></li> <li><b>Version 9.3 (Available in all regions):</b> <code> 9.3.3 | 9.3.5 | 9.3.6 | 9.3.9 | 9.3.10</code></li> <li><b>Version 9.4 (Available in all regions):</b> <code> 9.4.1 | 9.4.4 | 9.4.5</code></li> </ul> <p><b>Microsoft SQL Server Enterprise Edition (sqlserver-ee)</b></p> <ul> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code></li> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code></li> </ul> <p><b>Microsoft SQL Server Express Edition (sqlserver-ex)</b></p> <ul> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code></li> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code></li> <li><b>Version 12.00 (Available in all regions):</b> <code> 12.00.4422.0.v1</code></li> </ul> <p><b>Microsoft SQL Server Standard Edition (sqlserver-se)</b></p> <ul> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code></li> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code></li> <li><b>Version 12.00 (Available in all regions):</b> <code> 12.00.4422.0.v1</code></li> </ul> <p><b>Microsoft SQL Server Web Edition (sqlserver-web)</b></p> <ul> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.2789.0.v1</code></li> <li><b>Version 10.50 (Available in all regions):</b> <code> 10.50.6000.34.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.2100.60.v1</code></li> <li><b>Version 11.00 (Available in all regions):</b> <code> 11.00.5058.0.v1</code></li> <li><b>Version 12.00 (Available in all regions):</b> <code> 12.00.4422.0.v1</code></li> </ul>"
         },
         "AutoMinorVersionUpgrade":{
           "shape":"BooleanOptional",
@@ -2112,6 +2112,10 @@
         "MonitoringRoleArn":{
           "shape":"String",
           "documentation":"<p>The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole\">To create an IAM role for Amazon RDS Enhanced Monitoring</a>.</p> <p>If <code>MonitoringInterval</code> is set to a value other than 0, then you must supply a <code>MonitoringRoleArn</code> value.</p>"
+        },
+        "PromotionTier":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance\"> Fault Tolerance for an Aurora DB Cluster</a>. </p> <p>Default: 1</p> <p>Valid Values: 0 - 15</p>"
         }
       },
       "documentation":"<p/>"
@@ -2162,7 +2166,7 @@
         "Tags":{"shape":"TagList"},
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> Specifies a DB subnet group for the DB instance. The new DB instance will be created in the VPC associated with the DB subnet group. If no DB subnet group is specified, then the new DB instance is not created in a VPC. </p> <p>Constraints:</p> <ul> <li>Can only be specified if the source DB instance identifier specifies a DB instance in another region.</li> <li>The specified DB subnet group must be in the same region in which the operation is running.</li> <li> All Read Replicas in one region that are created from the same source DB instance must either: <ul><li>Specify DB subnet groups from the same VPC. All these Read Replicas will be created in the same VPC.</li><li>Not specify a DB subnet group. All these Read Replicas will be created outside of any VPC.</li></ul></li> </ul>"
+          "documentation":"<p> Specifies a DB subnet group for the DB instance. The new DB instance will be created in the VPC associated with the DB subnet group. If no DB subnet group is specified, then the new DB instance is not created in a VPC. </p> <p>Constraints:</p> <ul> <li>Can only be specified if the source DB instance identifier specifies a DB instance in another region.</li> <li>The specified DB subnet group must be in the same region in which the operation is running.</li> <li> All Read Replicas in one region that are created from the same source DB instance must either: <ul><li>Specify DB subnet groups from the same VPC. All these Read Replicas will be created in the same VPC.</li><li>Not specify a DB subnet group. All these Read Replicas will be created outside of any VPC.</li></ul></li> </ul> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         },
         "StorageType":{
           "shape":"String",
@@ -2284,7 +2288,7 @@
       "members":{
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> The name for the DB subnet group. This value is stored as a lowercase string. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
+          "documentation":"<p> The name for the DB subnet group. This value is stored as a lowercase string. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         },
         "DBSubnetGroupDescription":{
           "shape":"String",
@@ -2524,6 +2528,10 @@
         "DBClusterParameterGroupStatus":{
           "shape":"String",
           "documentation":"<p>Specifies the status of the DB cluster parameter group for this member of the DB cluster. </p>"
+        },
+        "PromotionTier":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance\"> Fault Tolerance for an Aurora DB Cluster</a>. </p>"
         }
       },
       "documentation":"<p>Contains information about an instance that is part of a DB cluster.</p>",
@@ -3024,6 +3032,10 @@
         "MonitoringRoleArn":{
           "shape":"String",
           "documentation":"<p>The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics to CloudWatch Logs.</p>"
+        },
+        "PromotionTier":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance\"> Fault Tolerance for an Aurora DB Cluster</a>. </p>"
         }
       },
       "documentation":"<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li> <a>CreateDBInstance</a> </li> <li> <a>DeleteDBInstance</a> </li> <li> <a>ModifyDBInstance</a> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
@@ -3550,7 +3562,7 @@
       "members":{
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> Specifies the name of the DB subnet group. </p>"
+          "documentation":"<p> The name of the DB subnet group. </p>"
         },
         "DBSubnetGroupDescription":{
           "shape":"String",
@@ -3800,7 +3812,7 @@
       "members":{
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> The name of the database subnet group to delete. </p> <note>You cannot delete the default subnet group.</note> <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
+          "documentation":"<p> The name of the database subnet group to delete. </p> <note>You cannot delete the default subnet group.</note> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         }
       },
       "documentation":"<p/>"
@@ -4622,7 +4634,7 @@
         },
         "NumberOfLines":{
           "shape":"Integer",
-          "documentation":"<p> The number of lines to download. If the number of lines specified results in a file over 1 MB in size, the file will be truncated at 1 MB in size. </p> <p>If the NumberOfLines parameter is specified, then the block of lines returned can be from the beginning or the end of the log file, depending on the value of the Marker parameter. <ul><li><p>If neither Marker or NumberOfLines are specified, the entire log file is returned.</p></li><li><p>If NumberOfLines is specified and Marker is not specified, then the most recent lines from the end of the log file are returned.</p></li><li><p>If Marker is specified as \"0\", then the specified number of lines from the beginning of the log file are returned.</p></li><li><p>You can download the log file in blocks of lines by specifying the size of the block using the NumberOfLines parameter, and by specifying a value of \"0\" for the Marker parameter in your first request. Include the Marker value returned in the response as the Marker value for the next request, continuing until the AdditionalDataPending response element returns false.</p></li></ul></p>"
+          "documentation":"<p> The number of lines to download. If the number of lines specified results in a file over 1 MB in size, the file will be truncated at 1 MB in size. </p> <p>If the NumberOfLines parameter is specified, then the block of lines returned can be from the beginning or the end of the log file, depending on the value of the Marker parameter. <ul><li><p>If neither Marker or NumberOfLines are specified, the entire log file is returned up to a maximum of 10000 lines, starting with the most recent log entries first.</p></li><li><p>If NumberOfLines is specified and Marker is not specified, then the most recent lines from the end of the log file are returned.</p></li><li><p>If Marker is specified as \"0\", then the specified number of lines from the beginning of the log file are returned.</p></li><li><p>You can download the log file in blocks of lines by specifying the size of the block using the NumberOfLines parameter, and by specifying a value of \"0\" for the Marker parameter in your first request. Include the Marker value returned in the response as the Marker value for the next request, continuing until the AdditionalDataPending response element returns false.</p></li></ul></p>"
         }
       },
       "documentation":"<p/>"
@@ -5187,7 +5199,7 @@
         },
         "ApplyImmediately":{
           "shape":"Boolean",
-          "documentation":"<p>A value that specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB cluster. </p> <p>If this parameter is set to <code>false</code>, changes to the DB cluster are applied during the next maintenance window.</p> <p>Default: <code>false</code></p>"
+          "documentation":"<p>A value that specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB cluster. If this parameter is set to <code>false</code>, changes to the DB cluster are applied during the next maintenance window.</p> <p>The <code>ApplyImmediately</code> parameter only affects the <code>NewDBClusterIdentifier</code> and <code>MasterUserPassword</code> values. If you set the <code>ApplyImmediately</code> parameter value to false, then changes to the <code>NewDBClusterIdentifier</code> and <code>MasterUserPassword</code> values are applied during the next maintenance window. All other changes are applied immediately, regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p>Default: <code>false</code></p>"
         },
         "BackupRetentionPeriod":{
           "shape":"IntegerOptional",
@@ -5274,7 +5286,7 @@
         },
         "ApplyImmediately":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p> If this parameter is set to <code>false</code>, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and will be applied on the next call to <a>RebootDBInstance</a>, or the next failure reboot. Review the table of parameters in <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html\">Modifying a DB Instance and Using the Apply Immediately Parameter</a> to see the impact that setting <code>ApplyImmediately</code> to <code>true</code> or <code>false</code> has for each modified parameter and to determine when the changes will be applied. </p> <p>Default: <code>false</code></p>"
+          "documentation":"<p>Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p>If this parameter is set to <code>false</code>, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and will be applied on the next call to <a>RebootDBInstance</a>, or the next failure reboot. Review the table of parameters in <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html\">Modifying a DB Instance and Using the Apply Immediately Parameter</a> to see the impact that setting <code>ApplyImmediately</code> to <code>true</code> or <code>false</code> has for each modified parameter and to determine when the changes will be applied. </p> <p>Default: <code>false</code></p>"
         },
         "MasterUserPassword":{
           "shape":"String",
@@ -5354,11 +5366,15 @@
         },
         "PubliclyAccessible":{
           "shape":"BooleanOptional",
-          "documentation":"<p>True to make the DB instance Internet-facing with a publicly resolvable DNS name, which resolves to a public IP address. False to make the DB instance internal with a DNS name that resolves to a private IP address. </p> <p><code>PubliclyAccessible</code> only applies to DB instances in a VPC. The DB instance must be part of a public subnet and <code>PubliclyAccessible</code> must be true in order for it to be publicly accessible. </p> <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p> Default: false </p>"
+          "documentation":"<p>Boolean value that indicates if the DB instance has a publicly resolvable DNS name. Set to <code>True</code> to make the DB instance Internet-facing with a publicly resolvable DNS name, which resolves to a public IP address. Set to <code>False</code> to make the DB instance internal with a DNS name that resolves to a private IP address. </p> <p><code>PubliclyAccessible</code> only applies to DB instances in a VPC. The DB instance must be part of a public subnet and <code>PubliclyAccessible</code> must be true in order for it to be publicly accessible. </p> <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p> Default: false </p>"
         },
         "MonitoringRoleArn":{
           "shape":"String",
           "documentation":"<p>The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole\">To create an IAM role for Amazon RDS Enhanced Monitoring</a>.</p> <p>If <code>MonitoringInterval</code> is set to a value other than 0, then you must supply a <code>MonitoringRoleArn</code> value.</p>"
+        },
+        "PromotionTier":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance\"> Fault Tolerance for an Aurora DB Cluster</a>. </p> <p>Default: 1</p> <p>Valid Values: 0 - 15</p>"
         }
       },
       "documentation":"<p/>"
@@ -5424,7 +5440,7 @@
       "members":{
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> The name for the DB subnet group. This value is stored as a lowercase string. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Must not be \"Default\".</p> <p>Example: <code>mySubnetgroup</code></p>"
+          "documentation":"<p> The name for the DB subnet group. This value is stored as a lowercase string. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be \"default\".</p> <p>Example: <code>mySubnetgroup</code></p>"
         },
         "DBSubnetGroupDescription":{
           "shape":"String",
@@ -6573,7 +6589,7 @@
         },
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p>The name of the DB subnet group to use for the new DB cluster. </p>"
+          "documentation":"<p>The name of the DB subnet group to use for the new DB cluster. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         },
         "DatabaseName":{
           "shape":"String",
@@ -6633,7 +6649,7 @@
         },
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> The DB subnet group name to use for the new DB cluster. </p>"
+          "documentation":"<p> The DB subnet group name to use for the new DB cluster. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         },
         "OptionGroupName":{
           "shape":"String",
@@ -6686,7 +6702,7 @@
         },
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> The DB subnet group name to use for the new instance. </p>"
+          "documentation":"<p> The DB subnet group name to use for the new instance. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         },
         "MultiAZ":{
           "shape":"BooleanOptional",
@@ -6783,7 +6799,7 @@
         },
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> The DB subnet group name to use for the new instance. </p>"
+          "documentation":"<p> The DB subnet group name to use for the new instance. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         },
         "MultiAZ":{
           "shape":"BooleanOptional",
@@ -6807,7 +6823,7 @@
         },
         "Engine":{
           "shape":"String",
-          "documentation":"<p> The database engine to use for the new instance. </p> <p>Default: The same as source</p> <p>Constraint: Must be compatible with the engine of the source</p> <p> Valid Values: <code>MySQL</code> | <code>mariadb</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code>| <code>aurora</code></p>"
+          "documentation":"<p> The database engine to use for the new instance. </p> <p>Default: The same as source</p> <p>Constraint: Must be compatible with the engine of the source</p> <p> Valid Values: <code>MySQL</code> | <code>mariadb</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code> | <code>aurora</code></p>"
         },
         "Iops":{
           "shape":"IntegerOptional",
@@ -7170,5 +7186,5 @@
       }
     }
   },
-  "documentation":"<fullname>Amazon Relational Database Service</fullname> <p> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique. </p> <p> Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, or Aurora database server. This means the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your database instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use. </p> <p> This is an interface reference for Amazon RDS. It contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. For a summary of the Amazon RDS interfaces, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>. </p>"
+  "documentation":"<fullname>Amazon Relational Database Service</fullname> <p> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique. </p> <p> Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, or Amazon Aurora database server. These capabilities mean that the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your database instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use. </p> <p> This interface reference for Amazon RDS contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. The reference structure is as follows, and we list following some related topics from the user guide. </p> <p><b>Amazon RDS API Reference</b></p> <ul> <li><p>For the alphabetical list of API actions, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html\">API Actions</a>.</p></li> <li><p>For the alphabetical list of data types, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Types.html\">Data Types</a>.</p></li> <li><p>For a list of common query parameters, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonParameters.html\">Common Parameters</a>.</p></li> <li><p>For descriptions of the error codes, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p></li> </ul> <p><b>Amazon RDS User Guide</b></p> <ul> <li><p>For a summary of the Amazon RDS interfaces, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>.</p></li> <li><p>For more information about how to use the Query API, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html\">Using the Query API</a>.</p></li> </ul>"
 }
