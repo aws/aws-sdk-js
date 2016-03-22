@@ -202,6 +202,23 @@
       ],
       "documentation":"<p>Gets information about a job.</p>"
     },
+    "GetOfferingStatus":{
+      "name":"GetOfferingStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetOfferingStatusRequest"},
+      "output":{"shape":"GetOfferingStatusResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"NotEligibleException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Gets the current status and future status of all offerings purchased by an AWS account. The response indicates how many offerings are currently available and the offerings that will be available in the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href=\"mailto:aws-devicefarm-support@amazon.com\">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.</p>"
+    },
     "GetProject":{
       "name":"GetProject",
       "http":{
@@ -346,6 +363,40 @@
       ],
       "documentation":"<p>Gets information about jobs.</p>"
     },
+    "ListOfferingTransactions":{
+      "name":"ListOfferingTransactions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListOfferingTransactionsRequest"},
+      "output":{"shape":"ListOfferingTransactionsResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"NotEligibleException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href=\"mailto:aws-devicefarm-support@amazon.com\">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.</p>"
+    },
+    "ListOfferings":{
+      "name":"ListOfferings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListOfferingsRequest"},
+      "output":{"shape":"ListOfferingsResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"NotEligibleException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href=\"mailto:aws-devicefarm-support@amazon.com\">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.</p>"
+    },
     "ListProjects":{
       "name":"ListProjects",
       "http":{
@@ -458,6 +509,40 @@
       ],
       "documentation":"<p>Gets information about uploads.</p>"
     },
+    "PurchaseOffering":{
+      "name":"PurchaseOffering",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PurchaseOfferingRequest"},
+      "output":{"shape":"PurchaseOfferingResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"NotEligibleException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href=\"mailto:aws-devicefarm-support@amazon.com\">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.</p>"
+    },
+    "RenewOffering":{
+      "name":"RenewOffering",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RenewOfferingRequest"},
+      "output":{"shape":"RenewOfferingResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"NotEligibleException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Explicitly sets the quantity of devices to renew for an offering, starting from the <code>effectiveDate</code> of the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href=\"mailto:aws-devicefarm-support@amazon.com\">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.</p>"
+    },
     "ScheduleRun":{
       "name":"ScheduleRun",
       "http":{
@@ -474,6 +559,22 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Schedules a run.</p>"
+    },
+    "StopRun":{
+      "name":"StopRun",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopRunRequest"},
+      "output":{"shape":"StopRunResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Initiates a stop request for the current test run. AWS Device Farm will immediately stop the run on devices where tests have not started executing, and you will not be billed for these devices. On devices where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on those devices. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.</p>"
     },
     "UpdateDevicePool":{
       "name":"UpdateDevicePool",
@@ -773,6 +874,10 @@
       },
       "documentation":"<p>Represents the result of a create upload request.</p>"
     },
+    "CurrencyCode":{
+      "type":"string",
+      "enum":["USD"]
+    },
     "DateTime":{"type":"timestamp"},
     "DeleteDevicePoolRequest":{
       "type":"structure",
@@ -1022,7 +1127,8 @@
         "PROCESSING",
         "SCHEDULING",
         "RUNNING",
-        "COMPLETED"
+        "COMPLETED",
+        "STOPPING"
       ]
     },
     "Filter":{
@@ -1033,13 +1139,15 @@
     "GetAccountSettingsRequest":{
       "type":"structure",
       "members":{
-      }
+      },
+      "documentation":"<p>Represents the request sent to retrieve the account settings.</p>"
     },
     "GetAccountSettingsResult":{
       "type":"structure",
       "members":{
         "accountSettings":{"shape":"AccountSettings"}
-      }
+      },
+      "documentation":"<p>Represents the account settings return values from the <code>GetAccountSettings</code> request.</p>"
     },
     "GetDevicePoolCompatibilityRequest":{
       "type":"structure",
@@ -1127,6 +1235,34 @@
         "job":{"shape":"Job"}
       },
       "documentation":"<p>Represents the result of a get job request.</p>"
+    },
+    "GetOfferingStatusRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to retrieve the offering status for the specified customer or account.</p>"
+    },
+    "GetOfferingStatusResult":{
+      "type":"structure",
+      "members":{
+        "current":{
+          "shape":"OfferingStatusMap",
+          "documentation":"<p>When specified, gets the offering status for the current period.</p>"
+        },
+        "nextPeriod":{
+          "shape":"OfferingStatusMap",
+          "documentation":"<p>When specified, gets the offering status for the next period.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      },
+      "documentation":"<p>Returns the status result for a device offering.</p>"
     },
     "GetProjectRequest":{
       "type":"structure",
@@ -1440,6 +1576,54 @@
       },
       "documentation":"<p>Represents the result of a list jobs request.</p>"
     },
+    "ListOfferingTransactionsRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to list the offering transaction history.</p>"
+    },
+    "ListOfferingTransactionsResult":{
+      "type":"structure",
+      "members":{
+        "offeringTransactions":{
+          "shape":"OfferingTransactions",
+          "documentation":"<p>The audit log of subscriptions you have purchased and modified through AWS Device Farm.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      },
+      "documentation":"<p>Returns the transaction log of the specified offerings.</p>"
+    },
+    "ListOfferingsRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to list all offerings.</p>"
+    },
+    "ListOfferingsResult":{
+      "type":"structure",
+      "members":{
+        "offerings":{
+          "shape":"Offerings",
+          "documentation":"<p>A value representing the list offering results.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents the return values of the list of offerings.</p>"
+    },
     "ListProjectsRequest":{
       "type":"structure",
       "members":{
@@ -1663,7 +1847,7 @@
     "Long":{"type":"long"},
     "Message":{
       "type":"string",
-      "max":8192,
+      "max":16384,
       "min":0
     },
     "Metadata":{
@@ -1671,10 +1855,35 @@
       "max":8192,
       "min":0
     },
+    "MonetaryAmount":{
+      "type":"structure",
+      "members":{
+        "amount":{
+          "shape":"Double",
+          "documentation":"<p>The numerical amount of an offering or transaction.</p>"
+        },
+        "currencyCode":{
+          "shape":"CurrencyCode",
+          "documentation":"<p>The currency code of a monetary amount. For example, <code>USD</code> means \"U.S. dollars.\"</p>"
+        }
+      },
+      "documentation":"<p>A number representing the monetary amount for an offering or transaction.</p>"
+    },
     "Name":{
       "type":"string",
       "max":256,
       "min":0
+    },
+    "NotEligibleException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"Message",
+          "documentation":"<p>The HTTP response code of a Not Eligible exception.</p>"
+        }
+      },
+      "documentation":"<p>Exception gets thrown when a user is not eligible to perform the specified transaction.</p>",
+      "exception":true
     },
     "NotFoundException":{
       "type":"structure",
@@ -1686,6 +1895,105 @@
       },
       "documentation":"<p>The specified entity was not found.</p>",
       "exception":true
+    },
+    "Offering":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"OfferingIdentifier",
+          "documentation":"<p>The ID that corresponds to a device offering.</p>"
+        },
+        "description":{
+          "shape":"Message",
+          "documentation":"<p>A string describing the offering.</p>"
+        },
+        "type":{
+          "shape":"OfferingType",
+          "documentation":"<p>The type of offering (e.g., \"RECURRING\") for a device.</p>"
+        },
+        "platform":{
+          "shape":"DevicePlatform",
+          "documentation":"<p>The platform of the device (e.g., ANDROID or IOS).</p>"
+        },
+        "recurringCharges":{
+          "shape":"RecurringCharges",
+          "documentation":"<p>Specifies whether there are recurring charges for the offering.</p>"
+        }
+      },
+      "documentation":"<p>Represents the metadata of a device offering.</p>"
+    },
+    "OfferingIdentifier":{
+      "type":"string",
+      "min":32
+    },
+    "OfferingStatus":{
+      "type":"structure",
+      "members":{
+        "type":{
+          "shape":"OfferingTransactionType",
+          "documentation":"<p>The type specified for the offering status.</p>"
+        },
+        "offering":{
+          "shape":"Offering",
+          "documentation":"<p>Represents the metadata of an offering status.</p>"
+        },
+        "quantity":{
+          "shape":"Integer",
+          "documentation":"<p>The number of available devices in the offering.</p>"
+        },
+        "effectiveOn":{
+          "shape":"DateTime",
+          "documentation":"<p>The date on which the offering is effective.</p>"
+        }
+      },
+      "documentation":"<p>The status of the offering.</p>"
+    },
+    "OfferingStatusMap":{
+      "type":"map",
+      "key":{"shape":"OfferingIdentifier"},
+      "value":{"shape":"OfferingStatus"}
+    },
+    "OfferingTransaction":{
+      "type":"structure",
+      "members":{
+        "offeringStatus":{
+          "shape":"OfferingStatus",
+          "documentation":"<p>The status of an offering transaction.</p>"
+        },
+        "transactionId":{
+          "shape":"TransactionIdentifier",
+          "documentation":"<p>The transaction ID of the offering transaction.</p>"
+        },
+        "createdOn":{
+          "shape":"DateTime",
+          "documentation":"<p>The date on which an offering transaction was created.</p>"
+        },
+        "cost":{
+          "shape":"MonetaryAmount",
+          "documentation":"<p>The cost of an offering transaction.</p>"
+        }
+      },
+      "documentation":"<p>Represents the metadata of an offering transaction.</p>"
+    },
+    "OfferingTransactionType":{
+      "type":"string",
+      "enum":[
+        "PURCHASE",
+        "RENEW",
+        "SYSTEM"
+      ]
+    },
+    "OfferingTransactions":{
+      "type":"list",
+      "member":{"shape":"OfferingTransaction"}
+    },
+    "OfferingType":{
+      "type":"string",
+      "enum":["RECURRING"]
+    },
+    "Offerings":{
+      "type":"list",
+      "member":{"shape":"Offering"}
     },
     "PaginationToken":{
       "type":"string",
@@ -1766,6 +2074,30 @@
       "type":"list",
       "member":{"shape":"Project"}
     },
+    "PurchaseOfferingRequest":{
+      "type":"structure",
+      "members":{
+        "offeringId":{
+          "shape":"OfferingIdentifier",
+          "documentation":"<p>The ID of the offering.</p>"
+        },
+        "quantity":{
+          "shape":"Integer",
+          "documentation":"<p>The number of device slots you wish to purchase in an offering request.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request for a purchase offering.</p>"
+    },
+    "PurchaseOfferingResult":{
+      "type":"structure",
+      "members":{
+        "offeringTransaction":{
+          "shape":"OfferingTransaction",
+          "documentation":"<p>Represents the offering transaction for the purchase result.</p>"
+        }
+      },
+      "documentation":"<p>The result of the purchase offering (e.g., success or failure).</p>"
+    },
     "PurchasedDevicesMap":{
       "type":"map",
       "key":{"shape":"DevicePlatform"},
@@ -1793,6 +2125,52 @@
       },
       "documentation":"<p>Represents the set of radios and their states on a device. Examples of radios include Wi-Fi, GPS, Bluetooth, and NFC.</p>"
     },
+    "RecurringCharge":{
+      "type":"structure",
+      "members":{
+        "cost":{
+          "shape":"MonetaryAmount",
+          "documentation":"<p>The cost of the recurring charge.</p>"
+        },
+        "frequency":{
+          "shape":"RecurringChargeFrequency",
+          "documentation":"<p>The frequency in which charges will recur.</p>"
+        }
+      },
+      "documentation":"<p>Specifies whether charges for devices will be recurring.</p>"
+    },
+    "RecurringChargeFrequency":{
+      "type":"string",
+      "enum":["MONTHLY"]
+    },
+    "RecurringCharges":{
+      "type":"list",
+      "member":{"shape":"RecurringCharge"}
+    },
+    "RenewOfferingRequest":{
+      "type":"structure",
+      "members":{
+        "offeringId":{
+          "shape":"OfferingIdentifier",
+          "documentation":"<p>The ID of a request to renew an offering.</p>"
+        },
+        "quantity":{
+          "shape":"Integer",
+          "documentation":"<p>The quantity requested in an offering renewal.</p>"
+        }
+      },
+      "documentation":"<p>A request representing an offering renewal.</p>"
+    },
+    "RenewOfferingResult":{
+      "type":"structure",
+      "members":{
+        "offeringTransaction":{
+          "shape":"OfferingTransaction",
+          "documentation":"<p>Represents the status of the offering transaction for the renewal.</p>"
+        }
+      },
+      "documentation":"<p>The result of a renewal offering.</p>"
+    },
     "Resolution":{
       "type":"structure",
       "members":{
@@ -1812,7 +2190,7 @@
       "members":{
         "attribute":{
           "shape":"DeviceAttribute",
-          "documentation":"<p>The rule's attribute.</p> <p>Allowed values include:</p> <ul> <li><p>ARN: The ARN.</p></li> <li><p>FORM_FACTOR: The form factor (for example, phone or tablet).</p></li> <li><p>MANUFACTURER: The manufacturer.</p></li> <li><p>PLATFORM: The platform (for example, Android or iOS).</p></li> </ul>"
+          "documentation":"<p>The rule's stringified attribute. For example, specify the value as <code>\"\\\"abc\\\"\"</code>.</p> <p>Allowed values include:</p> <ul> <li><p>ARN: The ARN.</p></li> <li><p>FORM_FACTOR: The form factor (for example, phone or tablet).</p></li> <li><p>MANUFACTURER: The manufacturer.</p></li> <li><p>PLATFORM: The platform (for example, Android or iOS).</p></li> </ul>"
         },
         "operator":{
           "shape":"RuleOperator",
@@ -2066,6 +2444,24 @@
       "documentation":"<p>There was a problem with the service account.</p>",
       "exception":true
     },
+    "StopRunRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>Represents the Amazon Resource Name (ARN) of the Device Farm run you wish to stop.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to stop a specific run.</p>"
+    },
+    "StopRunResult":{
+      "type":"structure",
+      "members":{
+        "run":{"shape":"Run"}
+      },
+      "documentation":"<p>Represents the results of your stop run attempt.</p>"
+    },
     "String":{"type":"string"},
     "Suite":{
       "type":"structure",
@@ -2198,6 +2594,10 @@
     "Tests":{
       "type":"list",
       "member":{"shape":"Test"}
+    },
+    "TransactionIdentifier":{
+      "type":"string",
+      "min":32
     },
     "URL":{
       "type":"string",
