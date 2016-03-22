@@ -31,9 +31,10 @@ opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks))
 route53 = new AWS.Route53(AWS.util.merge(config, config.route53))
 route53domains = new AWS.Route53Domains(AWS.util.merge(config, config.route53domains))
 s3 = new AWS.S3(AWS.util.merge(config, config.s3))
-sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 sns = new AWS.SNS(AWS.util.merge(config, config.sns))
+sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 ssm = new AWS.SSM(AWS.util.merge(config, config.ssm))
+storagegateway = new AWS.StorageGateway(AWS.util.merge(config, config.storagegateway))
 sts = new AWS.STS(AWS.util.merge(config, config.sts))
 waf = new AWS.WAF(AWS.util.merge(config, config.waf))
 
@@ -570,13 +571,16 @@ integrationTests ->
             expect(progress[0].loaded > 10).to.equal(true)
             s3.deleteObject(Key: key).send(done)
 
-
-  describe 'AWS.STS', ->
-    it 'gets a session token', (done) ->
-      sts.getSessionToken (err, data) ->
+  describe 'AWS.SNS', ->
+    it 'creates and deletes topics', (done) ->
+      sns.createTopic {Name: uniqueName('aws-sdk-js')}, (err, data) ->
         noError(err)
-        expect(data.Credentials.AccessKeyId).not.to.equal('')
-        done()
+        arn = data.TopicArn
+        sns = new AWS.SNS(sns.config)
+        sns.config.params = TopicArn: arn
+        sns.listTopics (err, data) ->
+          expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
+          sns.deleteTopic(done)
 
   describe 'AWS.SQS', ->
     it 'posts and receives messages on a queue', (done) ->
@@ -596,17 +600,6 @@ integrationTests ->
                   expect(data.Messages[0].MD5OfBody).to.equal(AWS.util.crypto.md5(msg, 'hex'))
                   sqs.deleteQueue(done)
 
-  describe 'AWS.SNS', ->
-    it 'creates and deletes topics', (done) ->
-      sns.createTopic {Name: uniqueName('aws-sdk-js')}, (err, data) ->
-        noError(err)
-        arn = data.TopicArn
-        sns = new AWS.SNS(sns.config)
-        sns.config.params = TopicArn: arn
-        sns.listTopics (err, data) ->
-          expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
-          sns.deleteTopic(done)
-
   describe 'AWS.SSM', ->
     it 'makes a request', (done) ->
       ssm.listCommands {}, (err, data) ->
@@ -615,10 +608,31 @@ integrationTests ->
         done()
     it 'handles errors', (done) ->
       params =
-        Name: 'fake_name'
+        Name: 'fake-name'
       ssm.describeDocument params, (err, data) ->
         assertError(err, 'InvalidDocument')
         noData(data)
+        done()
+
+    describe 'AWS.StorageGateway', ->
+    it 'makes a request', (done) ->
+      storagegateway.listGateways {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Gateways)).to.equal(true)
+        done()
+    it 'handles errors', (done) ->
+      params =
+        GatewayARN: 'fake-arn'
+      storagegateway.describeGatewayInformation params, (err, data) ->
+        assertError(err, 'ValidationException')
+        noData(data)
+        done()
+
+  describe 'AWS.STS', ->
+    it 'gets a session token', (done) ->
+      sts.getSessionToken (err, data) ->
+        noError(err)
+        expect(data.Credentials.AccessKeyId).not.to.equal('')
         done()
 
   describe 'AWS.WAF', ->
@@ -631,8 +645,8 @@ integrationTests ->
         done()
     it 'handles errors', (done) ->
       params =
-        Name: 'fake_name'
-        ChangeToken: 'fake_token'
+        Name: 'fake-name'
+        ChangeToken: 'fake-token'
       waf.createSqlInjectionMatchSet params, (err, data) ->
         assertError(err, 'WAFStaleDataException')
         noData(data)
