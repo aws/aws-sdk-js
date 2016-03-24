@@ -126,9 +126,10 @@
         {"shape":"DBSnapshotAlreadyExistsFault"},
         {"shape":"DBSnapshotNotFoundFault"},
         {"shape":"InvalidDBSnapshotStateFault"},
-        {"shape":"SnapshotQuotaExceededFault"}
+        {"shape":"SnapshotQuotaExceededFault"},
+        {"shape":"KMSKeyNotAccessibleFault"}
       ],
-      "documentation":"<p> Copies the specified DB Snapshot. The source DB snapshot must be in the \"available\" state. </p> <p>If you are copying from a shared manual DB snapshot, the <code>SourceDBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
+      "documentation":"<p> Copies the specified DB snapshot. The source DB snapshot must be in the \"available\" state. </p> <p>If you are copying from a shared manual DB snapshot, the <code>SourceDBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
     },
     "CopyOptionGroup":{
       "name":"CopyOptionGroup",
@@ -170,7 +171,8 @@
         {"shape":"InvalidDBSubnetGroupStateFault"},
         {"shape":"InvalidSubnet"},
         {"shape":"DBClusterParameterGroupNotFoundFault"},
-        {"shape":"KMSKeyNotAccessibleFault"}
+        {"shape":"KMSKeyNotAccessibleFault"},
+        {"shape":"DBClusterNotFoundFault"}
       ],
       "documentation":"<p>Creates a new Amazon Aurora DB cluster. For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i></p>"
     },
@@ -206,7 +208,8 @@
         {"shape":"DBClusterSnapshotAlreadyExistsFault"},
         {"shape":"InvalidDBClusterStateFault"},
         {"shape":"DBClusterNotFoundFault"},
-        {"shape":"SnapshotQuotaExceededFault"}
+        {"shape":"SnapshotQuotaExceededFault"},
+        {"shape":"InvalidDBClusterSnapshotStateFault"}
       ],
       "documentation":"<p>Creates a snapshot of a DB cluster. For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i></p>"
     },
@@ -238,7 +241,8 @@
         {"shape":"DBClusterNotFoundFault"},
         {"shape":"StorageTypeNotSupportedFault"},
         {"shape":"AuthorizationNotFoundFault"},
-        {"shape":"KMSKeyNotAccessibleFault"}
+        {"shape":"KMSKeyNotAccessibleFault"},
+        {"shape":"DomainNotFoundFault"}
       ],
       "documentation":"<p> Creates a new DB instance. </p>"
     },
@@ -401,7 +405,10 @@
       },
       "errors":[
         {"shape":"DBClusterNotFoundFault"},
-        {"shape":"InvalidDBClusterStateFault"}
+        {"shape":"InvalidDBClusterStateFault"},
+        {"shape":"DBClusterSnapshotAlreadyExistsFault"},
+        {"shape":"SnapshotQuotaExceededFault"},
+        {"shape":"InvalidDBClusterSnapshotStateFault"}
       ],
       "documentation":"<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. A successful response from the web service indicates the request was received correctly. When you delete a DB cluster, all automated backups for that DB cluster are deleted and cannot be recovered. Manual DB cluster snapshots of the DB cluster to be deleted are not deleted. </p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i></p>"
     },
@@ -450,7 +457,8 @@
         {"shape":"DBInstanceNotFoundFault"},
         {"shape":"InvalidDBInstanceStateFault"},
         {"shape":"DBSnapshotAlreadyExistsFault"},
-        {"shape":"SnapshotQuotaExceededFault"}
+        {"shape":"SnapshotQuotaExceededFault"},
+        {"shape":"InvalidDBClusterStateFault"}
       ],
       "documentation":"<p> The DeleteDBInstance action deletes a previously provisioned DB instance. A successful response from the web service indicates the request was received correctly. When you delete a DB instance, all automated backups for that instance are deleted and cannot be recovered. Manual DB snapshots of the DB instance to be deleted are not deleted. </p> <p> If a final DB snapshot is requested the status of the RDS instance will be \"deleting\" until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action cannot be canceled or reverted once submitted. </p> <p>Note that when a DB instance is in a failure state and has a status of 'failed', 'incompatible-restore', or 'incompatible-network', it can only be deleted when the SkipFinalSnapshot parameter is set to \"true\".</p>"
     },
@@ -982,7 +990,7 @@
         {"shape":"DBInstanceNotFoundFault"},
         {"shape":"DBSnapshotNotFoundFault"}
       ],
-      "documentation":"<p> Lists all tags on an Amazon RDS resource.</p> <p>For an overview on tagging an Amazon RDS resource, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">Tagging Amazon RDS Resources</a>.</p>"
+      "documentation":"<p>Lists all tags on an Amazon RDS resource.</p> <p>For an overview on tagging an Amazon RDS resource, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">Tagging Amazon RDS Resources</a>.</p>"
     },
     "ModifyDBCluster":{
       "name":"ModifyDBCluster",
@@ -1053,7 +1061,8 @@
         {"shape":"DBUpgradeDependencyFailureFault"},
         {"shape":"StorageTypeNotSupportedFault"},
         {"shape":"AuthorizationNotFoundFault"},
-        {"shape":"CertificateNotFoundFault"}
+        {"shape":"CertificateNotFoundFault"},
+        {"shape":"DomainNotFoundFault"}
       ],
       "documentation":"<p> Modify settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. </p>"
     },
@@ -1357,7 +1366,8 @@
         {"shape":"StorageTypeNotSupportedFault"},
         {"shape":"AuthorizationNotFoundFault"},
         {"shape":"KMSKeyNotAccessibleFault"},
-        {"shape":"DBSecurityGroupNotFoundFault"}
+        {"shape":"DBSecurityGroupNotFoundFault"},
+        {"shape":"DomainNotFoundFault"}
       ],
       "documentation":"<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration with the default security group and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment. </p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS does not allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p>"
     },
@@ -1390,7 +1400,8 @@
         {"shape":"StorageTypeNotSupportedFault"},
         {"shape":"AuthorizationNotFoundFault"},
         {"shape":"KMSKeyNotAccessibleFault"},
-        {"shape":"DBSecurityGroupNotFoundFault"}
+        {"shape":"DBSecurityGroupNotFoundFault"},
+        {"shape":"DomainNotFoundFault"}
       ],
       "documentation":"<p> Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p> The target database is created with most of the original configuration, but in a system-selected availability zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment. </p>"
     },
@@ -2101,6 +2112,10 @@
           "shape":"String",
           "documentation":"<p> The KMS key identifier for an encrypted DB instance. </p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same AWS account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key.</p> <p>If the <code>StorageEncrypted</code> parameter is true, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.</p>"
         },
+        "Domain":{
+          "shape":"String",
+          "documentation":"<p> Specify the Active Directory Domain to create the instance in. </p>"
+        },
         "CopyTagsToSnapshot":{
           "shape":"BooleanOptional",
           "documentation":"<p>True to copy all tags from the DB instance to snapshots of the DB instance; otherwise false. The default is false.</p>"
@@ -2112,6 +2127,10 @@
         "MonitoringRoleArn":{
           "shape":"String",
           "documentation":"<p>The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole\">To create an IAM role for Amazon RDS Enhanced Monitoring</a>.</p> <p>If <code>MonitoringInterval</code> is set to a value other than 0, then you must supply a <code>MonitoringRoleArn</code> value.</p>"
+        },
+        "DomainIAMRoleName":{
+          "shape":"String",
+          "documentation":"<p> Specify the name of the IAM role to be used when making API calls to the Directory Service. </p>"
         },
         "PromotionTier":{
           "shape":"IntegerOptional",
@@ -3017,6 +3036,10 @@
           "shape":"String",
           "documentation":"<p>The identifier of the CA certificate for this DB instance.</p>"
         },
+        "DomainMemberships":{
+          "shape":"DomainMembershipList",
+          "documentation":"<p>The Active Directory Domain membership records associated with the DB instance.</p>"
+        },
         "CopyTagsToSnapshot":{
           "shape":"Boolean",
           "documentation":"<p>Specifies whether tags are copied from the DB instance to snapshots of the DB instance.</p>"
@@ -3812,7 +3835,7 @@
       "members":{
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> The name of the database subnet group to delete. </p> <note>You cannot delete the default subnet group.</note> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
+          "documentation":"<p> The name of the database subnet group to delete. </p> <note>You cannot delete the default subnet group.</note> <p> Constraints: </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         }
       },
       "documentation":"<p/>"
@@ -4594,6 +4617,47 @@
       },
       "documentation":"<p/>"
     },
+    "DomainMembership":{
+      "type":"structure",
+      "members":{
+        "Domain":{
+          "shape":"String",
+          "documentation":"<p> The identifier of the Active Directory Domain. </p>"
+        },
+        "Status":{
+          "shape":"String",
+          "documentation":"<p> The status of the DB instance's Active Directory Domain membership, such as joined, pending-join, failed etc). </p>"
+        },
+        "FQDN":{
+          "shape":"String",
+          "documentation":"<p> The fully qualified domain name of the Active Directory Domain. </p>"
+        },
+        "IAMRoleName":{
+          "shape":"String",
+          "documentation":"<p> The name of the IAM role to be used when making API calls to the Directory Service. </p>"
+        }
+      },
+      "documentation":"<p> An Active Directory Domain membership record associated with the DB instance. </p>"
+    },
+    "DomainMembershipList":{
+      "type":"list",
+      "member":{
+        "shape":"DomainMembership",
+        "locationName":"DomainMembership"
+      },
+      "documentation":"<p> List of Active Directory Domain membership records associated with a DB instance. </p>"
+    },
+    "DomainNotFoundFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"DomainNotFoundFault",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "Double":{"type":"double"},
     "DownloadDBLogFilePortionDetails":{
       "type":"structure",
@@ -5286,7 +5350,7 @@
         },
         "ApplyImmediately":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p>If this parameter is set to <code>false</code>, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and will be applied on the next call to <a>RebootDBInstance</a>, or the next failure reboot. Review the table of parameters in <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html\">Modifying a DB Instance and Using the Apply Immediately Parameter</a> to see the impact that setting <code>ApplyImmediately</code> to <code>true</code> or <code>false</code> has for each modified parameter and to determine when the changes will be applied. </p> <p>Default: <code>false</code></p>"
+          "documentation":"<p>Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p> If this parameter is set to <code>false</code>, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and will be applied on the next call to <a>RebootDBInstance</a>, or the next failure reboot. Review the table of parameters in <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html\">Modifying a DB Instance and Using the Apply Immediately Parameter</a> to see the impact that setting <code>ApplyImmediately</code> to <code>true</code> or <code>false</code> has for each modified parameter and to determine when the changes will be applied. </p> <p>Default: <code>false</code></p>"
         },
         "MasterUserPassword":{
           "shape":"String",
@@ -5352,6 +5416,10 @@
           "shape":"String",
           "documentation":"<p> Indicates the certificate that needs to be associated with the instance. </p>"
         },
+        "Domain":{
+          "shape":"String",
+          "documentation":"<p> Specify the Active Directory Domain to move the instance to. </p> <p>The specified Active Directory Domain must be created prior to this operation. Currently only a SQL Server instance can be created in a Active Directory Domain.</p>"
+        },
         "CopyTagsToSnapshot":{
           "shape":"BooleanOptional",
           "documentation":"<p>True to copy all tags from the DB instance to snapshots of the DB instance; otherwise false. The default is false.</p>"
@@ -5362,7 +5430,7 @@
         },
         "DBPortNumber":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The port number on which the database accepts connections. </p> <p>The value of the <code>DBPortNumber</code> parameter must not match any of the port values specified for options in the option group for the DB instance.</p> <p>Your database will restart when you change the <code>DBPortNumber</code> value regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p> <b>MySQL</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>MariaDB</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>PostgreSQL</b> </p> <p> Default: <code>5432</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>Oracle</b> </p> <p> Default: <code>1521</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>SQL Server</b> </p> <p> Default: <code>1433</code></p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code>, <code>3389</code>, <code>47001</code>, <code>49152</code>, and <code>49152</code> through <code>49156</code>. </p> <p> <b>Amazon Aurora</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p>"
+          "documentation":"<p> The port number on which the database accepts connections. </p> <p>The value of the <code>DBPortNumber</code> parameter must not match any of the port values specified for options in the option group for the DB instance.</p> <p>Your database will restart when you change the <code>DBPortNumber</code> value regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p> <b>MySQL</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>MariaDB</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>PostgreSQL</b> </p> <p> Default: <code>5432</code></p> <p> Valid Values: <code>1150-65535</code></p> <p>Type: Integer </p> <p> <b>Oracle</b> </p> <p> Default: <code>1521</code></p> <p> Valid Values: <code>1150-65535</code></p> <p> <b>SQL Server</b> </p> <p> Default: <code>1433</code></p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code>, <code>3389</code>, <code>47001</code>, <code>49152</code>, and <code>49152</code> through <code>49156</code>. </p> <p> <b>Amazon Aurora</b> </p> <p> Default: <code>3306</code></p> <p> Valid Values: <code>1150-65535</code></p>"
         },
         "PubliclyAccessible":{
           "shape":"BooleanOptional",
@@ -5371,6 +5439,10 @@
         "MonitoringRoleArn":{
           "shape":"String",
           "documentation":"<p>The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. For example, <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole\">To create an IAM role for Amazon RDS Enhanced Monitoring</a>.</p> <p>If <code>MonitoringInterval</code> is set to a value other than 0, then you must supply a <code>MonitoringRoleArn</code> value.</p>"
+        },
+        "DomainIAMRoleName":{
+          "shape":"String",
+          "documentation":"<p> Specify the name of the IAM role to be used when making API calls to the Directory Service. </p>"
         },
         "PromotionTier":{
           "shape":"IntegerOptional",
@@ -5440,7 +5512,7 @@
       "members":{
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> The name for the DB subnet group. This value is stored as a lowercase string. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be \"default\".</p> <p>Example: <code>mySubnetgroup</code></p>"
+          "documentation":"<p> The name for the DB subnet group. This value is stored as a lowercase string. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code></p>"
         },
         "DBSubnetGroupDescription":{
           "shape":"String",
@@ -6749,9 +6821,17 @@
           "shape":"String",
           "documentation":"<p> The password for the given ARN from the Key Store in order to access the device. </p>"
         },
+        "Domain":{
+          "shape":"String",
+          "documentation":"<p> Specify the Active Directory Domain to restore the instance in. </p>"
+        },
         "CopyTagsToSnapshot":{
           "shape":"BooleanOptional",
           "documentation":"<p>True to copy all tags from the restored DB instance to snapshots of the DB instance; otherwise false. The default is false.</p>"
+        },
+        "DomainIAMRoleName":{
+          "shape":"String",
+          "documentation":"<p> Specify the name of the IAM role to be used when making API calls to the Directory Service. </p>"
         }
       },
       "documentation":"<p/>"
@@ -6849,6 +6929,14 @@
         "TdeCredentialPassword":{
           "shape":"String",
           "documentation":"<p> The password for the given ARN from the Key Store in order to access the device. </p>"
+        },
+        "Domain":{
+          "shape":"String",
+          "documentation":"<p> Specify the Active Directory Domain to restore the instance in. </p>"
+        },
+        "DomainIAMRoleName":{
+          "shape":"String",
+          "documentation":"<p> Specify the name of the IAM role to be used when making API calls to the Directory Service. </p>"
         }
       },
       "documentation":"<p/>"
