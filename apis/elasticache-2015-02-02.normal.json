@@ -3,12 +3,11 @@
   "metadata":{
     "apiVersion":"2015-02-02",
     "endpointPrefix":"elasticache",
+    "protocol":"query",
     "serviceFullName":"Amazon ElastiCache",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://elasticache.amazonaws.com/doc/2015-02-02/",
-    "protocol":"query"
+    "xmlNamespace":"http://elasticache.amazonaws.com/doc/2015-02-02/"
   },
-  "documentation":"<fullname>Amazon ElastiCache</fullname> <p>Amazon ElastiCache is a web service that makes it easier to set up, operate, and scale a distributed cache in the cloud.</p> <p>With ElastiCache, customers gain all of the benefits of a high-performance, in-memory cache with far less of the administrative burden of launching and managing a distributed cache. The service makes setup, scaling, and cluster failure handling much simpler than in a self-managed cache deployment.</p> <p>In addition, through integration with Amazon CloudWatch, customers get enhanced visibility into the key performance statistics associated with their cache and can receive alarms if a part of their cache runs hot.</p>",
   "operations":{
     "AddTagsToResource":{
       "name":"AddTagsToResource",
@@ -16,56 +15,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddTagsToResourceMessage",
-        "documentation":"<p>Represents the input of an <i>AddTagsToResource</i> action.</p>"
-      },
+      "input":{"shape":"AddTagsToResourceMessage"},
       "output":{
         "shape":"TagListMessage",
-        "documentation":"<p>Represents the output from the <i>AddTagsToResource</i>, <i>ListTagsOnResource</i>, and <i>RemoveTagsFromResource</i> actions.</p>",
         "resultWrapper":"AddTagsToResourceResult"
       },
       "errors":[
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"SnapshotNotFoundFault",
-          "error":{
-            "code":"SnapshotNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested snapshot name does not refer to an existing snapshot.</p>"
-        },
-        {
-          "shape":"TagQuotaPerResourceExceeded",
-          "error":{
-            "code":"TagQuotaPerResourceExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would cause the resource to have more than the allowed number of tags. The maximum number of tags permitted on a resource is 10.</p>"
-        },
-        {
-          "shape":"InvalidARNFault",
-          "error":{
-            "code":"InvalidARN",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>"
-        }
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"SnapshotNotFoundFault"},
+        {"shape":"TagQuotaPerResourceExceeded"},
+        {"shape":"InvalidARNFault"}
       ],
       "documentation":"<p>The <i>AddTagsToResource</i> action adds up to 10 cost allocation tags to the named resource. A <i>cost allocation tag</i> is a key-value pair where the key and value are case-sensitive. Cost allocation tags can be used to categorize and track your AWS costs.</p> <p> When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Tagging.html\">Using Cost Allocation Tags in Amazon ElastiCache</a>.</p>"
     },
@@ -75,67 +34,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AuthorizeCacheSecurityGroupIngressMessage",
-        "documentation":"<p>Represents the input of an <i>AuthorizeCacheSecurityGroupIngress</i> action.</p>"
-      },
+      "input":{"shape":"AuthorizeCacheSecurityGroupIngressMessage"},
       "output":{
         "shape":"AuthorizeCacheSecurityGroupIngressResult",
-        "wrapper":true,
-        "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>AuthorizeCacheSecurityGroupIngress</i> </li> <li> <i>CreateCacheSecurityGroup</i> </li> <li> <i>RevokeCacheSecurityGroupIngress</i> </li> </ul>",
         "resultWrapper":"AuthorizeCacheSecurityGroupIngressResult"
       },
       "errors":[
-        {
-          "shape":"CacheSecurityGroupNotFoundFault",
-          "error":{
-            "code":"CacheSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>"
-        },
-        {
-          "shape":"InvalidCacheSecurityGroupStateFault",
-          "error":{
-            "code":"InvalidCacheSecurityGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the cache security group does not allow deletion.</p>"
-        },
-        {
-          "shape":"AuthorizationAlreadyExistsFault",
-          "error":{
-            "code":"AuthorizationAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The specified Amazon EC2 security group is already authorized for the specified cache security group.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheSecurityGroupNotFoundFault"},
+        {"shape":"InvalidCacheSecurityGroupStateFault"},
+        {"shape":"AuthorizationAlreadyExistsFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>AuthorizeCacheSecurityGroupIngress</i> action allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are used as the authorization mechanism.</p> <note>You cannot authorize ingress from an Amazon EC2 security group in one region to an ElastiCache cluster in another region. </note>"
     },
@@ -145,77 +54,18 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CopySnapshotMessage",
-        "documentation":"<p>Represents the input of a <i>CopySnapshotMessage</i> action.</p>"
-      },
+      "input":{"shape":"CopySnapshotMessage"},
       "output":{
         "shape":"CopySnapshotResult",
-        "wrapper":true,
-        "documentation":"<p>Represents a copy of an entire cache cluster as of the time when the snapshot was taken.</p>",
         "resultWrapper":"CopySnapshotResult"
       },
       "errors":[
-        {
-          "shape":"SnapshotAlreadyExistsFault",
-          "error":{
-            "code":"SnapshotAlreadyExistsFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a snapshot with the given name.</p>"
-        },
-        {
-          "shape":"SnapshotNotFoundFault",
-          "error":{
-            "code":"SnapshotNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested snapshot name does not refer to an existing snapshot.</p>"
-        },
-        {
-          "shape":"SnapshotQuotaExceededFault",
-          "error":{
-            "code":"SnapshotQuotaExceededFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the maximum number of snapshots.</p>"
-        },
-        {
-          "shape":"InvalidSnapshotStateFault",
-          "error":{
-            "code":"InvalidSnapshotState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the snapshot does not allow the requested action to occur.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"SnapshotAlreadyExistsFault"},
+        {"shape":"SnapshotNotFoundFault"},
+        {"shape":"SnapshotQuotaExceededFault"},
+        {"shape":"InvalidSnapshotStateFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>CopySnapshot</i> action makes a copy of an existing snapshot.</p>"
     },
@@ -225,157 +75,26 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateCacheClusterMessage",
-        "documentation":"<p>Represents the input of a <i>CreateCacheCluster</i> action.</p>"
-      },
+      "input":{"shape":"CreateCacheClusterMessage"},
       "output":{
         "shape":"CreateCacheClusterResult",
-        "wrapper":true,
-        "documentation":"<p>Contains all of the attributes of a specific cache cluster.</p>",
         "resultWrapper":"CreateCacheClusterResult"
       },
       "errors":[
-        {
-          "shape":"ReplicationGroupNotFoundFault",
-          "error":{
-            "code":"ReplicationGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The specified replication group does not exist.</p>"
-        },
-        {
-          "shape":"InvalidReplicationGroupStateFault",
-          "error":{
-            "code":"InvalidReplicationGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested replication group is not in the <i>available</i> state.</p>"
-        },
-        {
-          "shape":"CacheClusterAlreadyExistsFault",
-          "error":{
-            "code":"CacheClusterAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a cache cluster with the given identifier.</p>"
-        },
-        {
-          "shape":"InsufficientCacheClusterCapacityFault",
-          "error":{
-            "code":"InsufficientCacheClusterCapacity",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache node type is not available in the specified Availability Zone.</p>"
-        },
-        {
-          "shape":"CacheSecurityGroupNotFoundFault",
-          "error":{
-            "code":"CacheSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>"
-        },
-        {
-          "shape":"CacheSubnetGroupNotFoundFault",
-          "error":{
-            "code":"CacheSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache subnet group name does not refer to an existing cache subnet group.</p>"
-        },
-        {
-          "shape":"ClusterQuotaForCustomerExceededFault",
-          "error":{
-            "code":"ClusterQuotaForCustomerExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache clusters per customer.</p>"
-        },
-        {
-          "shape":"NodeQuotaForClusterExceededFault",
-          "error":{
-            "code":"NodeQuotaForClusterExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes in a single cache cluster.</p>"
-        },
-        {
-          "shape":"NodeQuotaForCustomerExceededFault",
-          "error":{
-            "code":"NodeQuotaForCustomerExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes per customer. </p>"
-        },
-        {
-          "shape":"CacheParameterGroupNotFoundFault",
-          "error":{
-            "code":"CacheParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
-        },
-        {
-          "shape":"InvalidVPCNetworkStateFault",
-          "error":{
-            "code":"InvalidVPCNetworkStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The VPC network is in an invalid state.</p>"
-        },
-        {
-          "shape":"TagQuotaPerResourceExceeded",
-          "error":{
-            "code":"TagQuotaPerResourceExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would cause the resource to have more than the allowed number of tags. The maximum number of tags permitted on a resource is 10.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"ReplicationGroupNotFoundFault"},
+        {"shape":"InvalidReplicationGroupStateFault"},
+        {"shape":"CacheClusterAlreadyExistsFault"},
+        {"shape":"InsufficientCacheClusterCapacityFault"},
+        {"shape":"CacheSecurityGroupNotFoundFault"},
+        {"shape":"CacheSubnetGroupNotFoundFault"},
+        {"shape":"ClusterQuotaForCustomerExceededFault"},
+        {"shape":"NodeQuotaForClusterExceededFault"},
+        {"shape":"NodeQuotaForCustomerExceededFault"},
+        {"shape":"CacheParameterGroupNotFoundFault"},
+        {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"TagQuotaPerResourceExceeded"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>CreateCacheCluster</i> action creates a cache cluster. All nodes in the cache cluster run the same protocol-compliant cache engine software, either Memcached or Redis.</p>"
     },
@@ -385,67 +104,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateCacheParameterGroupMessage",
-        "documentation":"<p>Represents the input of a <i>CreateCacheParameterGroup</i> action.</p>"
-      },
+      "input":{"shape":"CreateCacheParameterGroupMessage"},
       "output":{
         "shape":"CreateCacheParameterGroupResult",
-        "wrapper":true,
-        "documentation":"<p>Represents the output of a <i>CreateCacheParameterGroup</i> action.</p>",
         "resultWrapper":"CreateCacheParameterGroupResult"
       },
       "errors":[
-        {
-          "shape":"CacheParameterGroupQuotaExceededFault",
-          "error":{
-            "code":"CacheParameterGroupQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the maximum number of cache security groups.</p>"
-        },
-        {
-          "shape":"CacheParameterGroupAlreadyExistsFault",
-          "error":{
-            "code":"CacheParameterGroupAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>A cache parameter group with the requested name already exists.</p>"
-        },
-        {
-          "shape":"InvalidCacheParameterGroupStateFault",
-          "error":{
-            "code":"InvalidCacheParameterGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the cache parameter group does not allow the requested action to occur. </p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheParameterGroupQuotaExceededFault"},
+        {"shape":"CacheParameterGroupAlreadyExistsFault"},
+        {"shape":"InvalidCacheParameterGroupStateFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>CreateCacheParameterGroup</i> action creates a new cache parameter group. A cache parameter group is a collection of parameters that you apply to all of the nodes in a cache cluster.</p>"
     },
@@ -455,57 +124,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateCacheSecurityGroupMessage",
-        "documentation":"<p>Represents the input of a <i>CreateCacheSecurityGroup</i> action.</p>"
-      },
+      "input":{"shape":"CreateCacheSecurityGroupMessage"},
       "output":{
         "shape":"CreateCacheSecurityGroupResult",
-        "wrapper":true,
-        "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>AuthorizeCacheSecurityGroupIngress</i> </li> <li> <i>CreateCacheSecurityGroup</i> </li> <li> <i>RevokeCacheSecurityGroupIngress</i> </li> </ul>",
         "resultWrapper":"CreateCacheSecurityGroupResult"
       },
       "errors":[
-        {
-          "shape":"CacheSecurityGroupAlreadyExistsFault",
-          "error":{
-            "code":"CacheSecurityGroupAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>A cache security group with the specified name already exists.</p>"
-        },
-        {
-          "shape":"CacheSecurityGroupQuotaExceededFault",
-          "error":{
-            "code":"QuotaExceeded.CacheSecurityGroup",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache security groups.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheSecurityGroupAlreadyExistsFault"},
+        {"shape":"CacheSecurityGroupQuotaExceededFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>CreateCacheSecurityGroup</i> action creates a new cache security group. Use a cache security group to control access to one or more cache clusters.</p> <p>Cache security groups are only used when you are creating a cache cluster outside of an Amazon Virtual Private Cloud (VPC). If you are creating a cache cluster inside of a VPC, use a cache subnet group instead. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html\">CreateCacheSubnetGroup</a>.</p>"
     },
@@ -515,57 +143,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateCacheSubnetGroupMessage",
-        "documentation":"<p>Represents the input of a <i>CreateCacheSubnetGroup</i> action.</p>"
-      },
+      "input":{"shape":"CreateCacheSubnetGroupMessage"},
       "output":{
         "shape":"CreateCacheSubnetGroupResult",
-        "wrapper":true,
-        "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>CreateCacheSubnetGroup</i> </li> <li> <i>ModifyCacheSubnetGroup</i> </li> </ul>",
         "resultWrapper":"CreateCacheSubnetGroupResult"
       },
       "errors":[
-        {
-          "shape":"CacheSubnetGroupAlreadyExistsFault",
-          "error":{
-            "code":"CacheSubnetGroupAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache subnet group name is already in use by an existing cache subnet group.</p>"
-        },
-        {
-          "shape":"CacheSubnetGroupQuotaExceededFault",
-          "error":{
-            "code":"CacheSubnetGroupQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache subnet groups.</p>"
-        },
-        {
-          "shape":"CacheSubnetQuotaExceededFault",
-          "error":{
-            "code":"CacheSubnetQuotaExceededFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of subnets in a cache subnet group.</p>"
-        },
-        {
-          "shape":"InvalidSubnet",
-          "error":{
-            "code":"InvalidSubnet",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>An invalid subnet identifier was specified.</p>"
-        }
+        {"shape":"CacheSubnetGroupAlreadyExistsFault"},
+        {"shape":"CacheSubnetGroupQuotaExceededFault"},
+        {"shape":"CacheSubnetQuotaExceededFault"},
+        {"shape":"InvalidSubnet"}
       ],
       "documentation":"<p>The <i>CreateCacheSubnetGroup</i> action creates a new cache subnet group.</p> <p>Use this parameter only when you are creating a cluster in an Amazon Virtual Private Cloud (VPC).</p>"
     },
@@ -575,157 +162,26 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateReplicationGroupMessage",
-        "documentation":"<p>Represents the input of a <i>CreateReplicationGroup</i> action.</p>"
-      },
+      "input":{"shape":"CreateReplicationGroupMessage"},
       "output":{
         "shape":"CreateReplicationGroupResult",
-        "wrapper":true,
-        "documentation":"<p>Contains all of the attributes of a specific replication group.</p>",
         "resultWrapper":"CreateReplicationGroupResult"
       },
       "errors":[
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"InvalidCacheClusterStateFault",
-          "error":{
-            "code":"InvalidCacheClusterState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster is not in the <i>available</i> state.</p>"
-        },
-        {
-          "shape":"ReplicationGroupAlreadyExistsFault",
-          "error":{
-            "code":"ReplicationGroupAlreadyExists",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The specified replication group already exists.</p>"
-        },
-        {
-          "shape":"InsufficientCacheClusterCapacityFault",
-          "error":{
-            "code":"InsufficientCacheClusterCapacity",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache node type is not available in the specified Availability Zone.</p>"
-        },
-        {
-          "shape":"CacheSecurityGroupNotFoundFault",
-          "error":{
-            "code":"CacheSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>"
-        },
-        {
-          "shape":"CacheSubnetGroupNotFoundFault",
-          "error":{
-            "code":"CacheSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache subnet group name does not refer to an existing cache subnet group.</p>"
-        },
-        {
-          "shape":"ClusterQuotaForCustomerExceededFault",
-          "error":{
-            "code":"ClusterQuotaForCustomerExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache clusters per customer.</p>"
-        },
-        {
-          "shape":"NodeQuotaForClusterExceededFault",
-          "error":{
-            "code":"NodeQuotaForClusterExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes in a single cache cluster.</p>"
-        },
-        {
-          "shape":"NodeQuotaForCustomerExceededFault",
-          "error":{
-            "code":"NodeQuotaForCustomerExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes per customer. </p>"
-        },
-        {
-          "shape":"CacheParameterGroupNotFoundFault",
-          "error":{
-            "code":"CacheParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
-        },
-        {
-          "shape":"InvalidVPCNetworkStateFault",
-          "error":{
-            "code":"InvalidVPCNetworkStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The VPC network is in an invalid state.</p>"
-        },
-        {
-          "shape":"TagQuotaPerResourceExceeded",
-          "error":{
-            "code":"TagQuotaPerResourceExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would cause the resource to have more than the allowed number of tags. The maximum number of tags permitted on a resource is 10.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"InvalidCacheClusterStateFault"},
+        {"shape":"ReplicationGroupAlreadyExistsFault"},
+        {"shape":"InsufficientCacheClusterCapacityFault"},
+        {"shape":"CacheSecurityGroupNotFoundFault"},
+        {"shape":"CacheSubnetGroupNotFoundFault"},
+        {"shape":"ClusterQuotaForCustomerExceededFault"},
+        {"shape":"NodeQuotaForClusterExceededFault"},
+        {"shape":"NodeQuotaForCustomerExceededFault"},
+        {"shape":"CacheParameterGroupNotFoundFault"},
+        {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"TagQuotaPerResourceExceeded"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>CreateReplicationGroup</i> action creates a replication group. A replication group is a collection of cache clusters, where one of the cache clusters is a read/write primary and the others are read-only replicas. Writes to the primary are automatically propagated to the replicas.</p> <p>When you create a replication group, you must specify an existing cache cluster that is in the primary role. When the replication group has been successfully created, you can add one or more read replica replicas to it, up to a total of five read replicas.</p> <p><b>Note:</b> This action is valid only for Redis.</p>"
     },
@@ -735,87 +191,19 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateSnapshotMessage",
-        "documentation":"<p>Represents the input of a <i>CreateSnapshot</i> action.</p>"
-      },
+      "input":{"shape":"CreateSnapshotMessage"},
       "output":{
         "shape":"CreateSnapshotResult",
-        "wrapper":true,
-        "documentation":"<p>Represents a copy of an entire cache cluster as of the time when the snapshot was taken.</p>",
         "resultWrapper":"CreateSnapshotResult"
       },
       "errors":[
-        {
-          "shape":"SnapshotAlreadyExistsFault",
-          "error":{
-            "code":"SnapshotAlreadyExistsFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a snapshot with the given name.</p>"
-        },
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"InvalidCacheClusterStateFault",
-          "error":{
-            "code":"InvalidCacheClusterState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster is not in the <i>available</i> state.</p>"
-        },
-        {
-          "shape":"SnapshotQuotaExceededFault",
-          "error":{
-            "code":"SnapshotQuotaExceededFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the maximum number of snapshots.</p>"
-        },
-        {
-          "shape":"SnapshotFeatureNotSupportedFault",
-          "error":{
-            "code":"SnapshotFeatureNotSupportedFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You attempted one of the following actions:</p> <ul> <li> <p>Creating a snapshot of a Redis cache cluster running on a <i>t1.micro</i> cache node.</p> </li> <li> <p>Creating a snapshot of a cache cluster that is running Memcached rather than Redis.</p> </li> </ul> <p>Neither of these are supported by ElastiCache.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        }
+        {"shape":"SnapshotAlreadyExistsFault"},
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"InvalidCacheClusterStateFault"},
+        {"shape":"SnapshotQuotaExceededFault"},
+        {"shape":"SnapshotFeatureNotSupportedFault"},
+        {"shape":"InvalidParameterCombinationException"},
+        {"shape":"InvalidParameterValueException"}
       ],
       "documentation":"<p>The <i>CreateSnapshot</i> action creates a copy of an entire cache cluster at a specific moment in time.</p>"
     },
@@ -825,87 +213,19 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteCacheClusterMessage",
-        "documentation":"<p>Represents the input of a <i>DeleteCacheCluster</i> action.</p>"
-      },
+      "input":{"shape":"DeleteCacheClusterMessage"},
       "output":{
         "shape":"DeleteCacheClusterResult",
-        "wrapper":true,
-        "documentation":"<p>Contains all of the attributes of a specific cache cluster.</p>",
         "resultWrapper":"DeleteCacheClusterResult"
       },
       "errors":[
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"InvalidCacheClusterStateFault",
-          "error":{
-            "code":"InvalidCacheClusterState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster is not in the <i>available</i> state.</p>"
-        },
-        {
-          "shape":"SnapshotAlreadyExistsFault",
-          "error":{
-            "code":"SnapshotAlreadyExistsFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a snapshot with the given name.</p>"
-        },
-        {
-          "shape":"SnapshotFeatureNotSupportedFault",
-          "error":{
-            "code":"SnapshotFeatureNotSupportedFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You attempted one of the following actions:</p> <ul> <li> <p>Creating a snapshot of a Redis cache cluster running on a <i>t1.micro</i> cache node.</p> </li> <li> <p>Creating a snapshot of a cache cluster that is running Memcached rather than Redis.</p> </li> </ul> <p>Neither of these are supported by ElastiCache.</p>"
-        },
-        {
-          "shape":"SnapshotQuotaExceededFault",
-          "error":{
-            "code":"SnapshotQuotaExceededFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the maximum number of snapshots.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"InvalidCacheClusterStateFault"},
+        {"shape":"SnapshotAlreadyExistsFault"},
+        {"shape":"SnapshotFeatureNotSupportedFault"},
+        {"shape":"SnapshotQuotaExceededFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DeleteCacheCluster</i> action deletes a previously provisioned cache cluster. <i>DeleteCacheCluster</i> deletes all associated cache nodes, node endpoints and the cache cluster itself. When you receive a successful response from this action, Amazon ElastiCache immediately begins deleting the cache cluster; you cannot cancel or revert this action.</p> <p>This API cannot be used to delete a cache cluster that is the last read replica of a replication group that has Multi-AZ mode enabled.</p>"
     },
@@ -915,51 +235,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteCacheParameterGroupMessage",
-        "documentation":"<p>Represents the input of a <i>DeleteCacheParameterGroup</i> action.</p>"
-      },
+      "input":{"shape":"DeleteCacheParameterGroupMessage"},
       "errors":[
-        {
-          "shape":"InvalidCacheParameterGroupStateFault",
-          "error":{
-            "code":"InvalidCacheParameterGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the cache parameter group does not allow the requested action to occur. </p>"
-        },
-        {
-          "shape":"CacheParameterGroupNotFoundFault",
-          "error":{
-            "code":"CacheParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"InvalidCacheParameterGroupStateFault"},
+        {"shape":"CacheParameterGroupNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DeleteCacheParameterGroup</i> action deletes the specified cache parameter group. You cannot delete a cache parameter group if it is associated with any cache clusters.</p>"
     },
@@ -969,51 +250,12 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteCacheSecurityGroupMessage",
-        "documentation":"<p>Represents the input of a <i>DeleteCacheSecurityGroup</i> action.</p>"
-      },
+      "input":{"shape":"DeleteCacheSecurityGroupMessage"},
       "errors":[
-        {
-          "shape":"InvalidCacheSecurityGroupStateFault",
-          "error":{
-            "code":"InvalidCacheSecurityGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the cache security group does not allow deletion.</p>"
-        },
-        {
-          "shape":"CacheSecurityGroupNotFoundFault",
-          "error":{
-            "code":"CacheSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"InvalidCacheSecurityGroupStateFault"},
+        {"shape":"CacheSecurityGroupNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DeleteCacheSecurityGroup</i> action deletes a cache security group.</p> <note>You cannot delete a cache security group if it is associated with any cache clusters.</note>"
     },
@@ -1023,31 +265,10 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteCacheSubnetGroupMessage",
-        "documentation":"<p>Represents the input of a <i>DeleteCacheSubnetGroup</i> action.</p>"
-      },
+      "input":{"shape":"DeleteCacheSubnetGroupMessage"},
       "errors":[
-        {
-          "shape":"CacheSubnetGroupInUse",
-          "error":{
-            "code":"CacheSubnetGroupInUse",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache subnet group is currently in use.</p>"
-        },
-        {
-          "shape":"CacheSubnetGroupNotFoundFault",
-          "error":{
-            "code":"CacheSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache subnet group name does not refer to an existing cache subnet group.</p>"
-        }
+        {"shape":"CacheSubnetGroupInUse"},
+        {"shape":"CacheSubnetGroupNotFoundFault"}
       ],
       "documentation":"<p>The <i>DeleteCacheSubnetGroup</i> action deletes a cache subnet group.</p> <note>You cannot delete a cache subnet group if it is associated with any cache clusters.</note>"
     },
@@ -1057,87 +278,19 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteReplicationGroupMessage",
-        "documentation":"<p>Represents the input of a <i>DeleteReplicationGroup</i> action.</p>"
-      },
+      "input":{"shape":"DeleteReplicationGroupMessage"},
       "output":{
         "shape":"DeleteReplicationGroupResult",
-        "wrapper":true,
-        "documentation":"<p>Contains all of the attributes of a specific replication group.</p>",
         "resultWrapper":"DeleteReplicationGroupResult"
       },
       "errors":[
-        {
-          "shape":"ReplicationGroupNotFoundFault",
-          "error":{
-            "code":"ReplicationGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The specified replication group does not exist.</p>"
-        },
-        {
-          "shape":"InvalidReplicationGroupStateFault",
-          "error":{
-            "code":"InvalidReplicationGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested replication group is not in the <i>available</i> state.</p>"
-        },
-        {
-          "shape":"SnapshotAlreadyExistsFault",
-          "error":{
-            "code":"SnapshotAlreadyExistsFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a snapshot with the given name.</p>"
-        },
-        {
-          "shape":"SnapshotFeatureNotSupportedFault",
-          "error":{
-            "code":"SnapshotFeatureNotSupportedFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You attempted one of the following actions:</p> <ul> <li> <p>Creating a snapshot of a Redis cache cluster running on a <i>t1.micro</i> cache node.</p> </li> <li> <p>Creating a snapshot of a cache cluster that is running Memcached rather than Redis.</p> </li> </ul> <p>Neither of these are supported by ElastiCache.</p>"
-        },
-        {
-          "shape":"SnapshotQuotaExceededFault",
-          "error":{
-            "code":"SnapshotQuotaExceededFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the maximum number of snapshots.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"ReplicationGroupNotFoundFault"},
+        {"shape":"InvalidReplicationGroupStateFault"},
+        {"shape":"SnapshotAlreadyExistsFault"},
+        {"shape":"SnapshotFeatureNotSupportedFault"},
+        {"shape":"SnapshotQuotaExceededFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DeleteReplicationGroup</i> action deletes an existing replication group. By default, this action deletes the entire replication group, including the primary cluster and all of the read replicas. You can optionally delete only the read replicas, while retaining the primary cluster.</p> <p>When you receive a successful response from this action, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this action.</p>"
     },
@@ -1147,57 +300,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteSnapshotMessage",
-        "documentation":"<p>Represents the input of a <i>DeleteSnapshot</i> action.</p>"
-      },
+      "input":{"shape":"DeleteSnapshotMessage"},
       "output":{
         "shape":"DeleteSnapshotResult",
-        "wrapper":true,
-        "documentation":"<p>Represents a copy of an entire cache cluster as of the time when the snapshot was taken.</p>",
         "resultWrapper":"DeleteSnapshotResult"
       },
       "errors":[
-        {
-          "shape":"SnapshotNotFoundFault",
-          "error":{
-            "code":"SnapshotNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested snapshot name does not refer to an existing snapshot.</p>"
-        },
-        {
-          "shape":"InvalidSnapshotStateFault",
-          "error":{
-            "code":"InvalidSnapshotState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the snapshot does not allow the requested action to occur.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"SnapshotNotFoundFault"},
+        {"shape":"InvalidSnapshotStateFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DeleteSnapshot</i> action deletes an existing snapshot. When you receive a successful response from this action, ElastiCache immediately begins deleting the snapshot; you cannot cancel or revert this action.</p>"
     },
@@ -1207,46 +319,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeCacheClustersMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeCacheClusters</i> action.</p>"
-      },
+      "input":{"shape":"DescribeCacheClustersMessage"},
       "output":{
         "shape":"CacheClusterMessage",
-        "documentation":"<p>Represents the output of a <i>DescribeCacheClusters</i> action.</p>",
         "resultWrapper":"DescribeCacheClustersResult"
       },
       "errors":[
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeCacheClusters</i> action returns information about all provisioned cache clusters if no cache cluster identifier is specified, or about a specific cache cluster if a cache cluster identifier is supplied.</p> <p>By default, abbreviated information about the cache clusters(s) will be returned. You can use the optional <i>ShowDetails</i> flag to retrieve detailed information about the cache nodes associated with the cache clusters. These details include the DNS address and port for the cache node endpoint.</p> <p>If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned.</p> <p>If the cluster is in the DELETING state, only cluster level information will be displayed.</p> <p>If cache nodes are currently being added to the cache cluster, node endpoint information and creation time for the additional nodes will not be displayed until they are completely provisioned. When the cache cluster state is <i>available</i>, the cluster is ready for use.</p> <p>If cache nodes are currently being removed from the cache cluster, no endpoint information for the removed nodes is displayed.</p>"
     },
@@ -1256,13 +337,9 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeCacheEngineVersionsMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeCacheEngineVersions</i> action.</p>"
-      },
+      "input":{"shape":"DescribeCacheEngineVersionsMessage"},
       "output":{
         "shape":"CacheEngineVersionMessage",
-        "documentation":"<p>Represents the output of a <a>DescribeCacheEngineVersions</a> action.</p>",
         "resultWrapper":"DescribeCacheEngineVersionsResult"
       },
       "documentation":"<p>The <i>DescribeCacheEngineVersions</i> action returns a list of the available cache engines and their versions.</p>"
@@ -1273,46 +350,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeCacheParameterGroupsMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeCacheParameterGroups</i> action.</p>"
-      },
+      "input":{"shape":"DescribeCacheParameterGroupsMessage"},
       "output":{
         "shape":"CacheParameterGroupsMessage",
-        "documentation":"<p>Represents the output of a <i>DescribeCacheParameterGroups</i> action.</p>",
         "resultWrapper":"DescribeCacheParameterGroupsResult"
       },
       "errors":[
-        {
-          "shape":"CacheParameterGroupNotFoundFault",
-          "error":{
-            "code":"CacheParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheParameterGroupNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeCacheParameterGroups</i> action returns a list of cache parameter group descriptions. If a cache parameter group name is specified, the list will contain only the descriptions for that group.</p>"
     },
@@ -1322,46 +368,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeCacheParametersMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeCacheParameters</i> action.</p>"
-      },
+      "input":{"shape":"DescribeCacheParametersMessage"},
       "output":{
         "shape":"CacheParameterGroupDetails",
-        "documentation":"<p>Represents the output of a <i>DescribeCacheParameters</i> action.</p>",
         "resultWrapper":"DescribeCacheParametersResult"
       },
       "errors":[
-        {
-          "shape":"CacheParameterGroupNotFoundFault",
-          "error":{
-            "code":"CacheParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheParameterGroupNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeCacheParameters</i> action returns the detailed parameter list for a particular cache parameter group.</p>"
     },
@@ -1371,46 +386,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeCacheSecurityGroupsMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeCacheSecurityGroups</i> action.</p>"
-      },
+      "input":{"shape":"DescribeCacheSecurityGroupsMessage"},
       "output":{
         "shape":"CacheSecurityGroupMessage",
-        "documentation":"<p>Represents the output of a <i>DescribeCacheSecurityGroups</i> action.</p>",
         "resultWrapper":"DescribeCacheSecurityGroupsResult"
       },
       "errors":[
-        {
-          "shape":"CacheSecurityGroupNotFoundFault",
-          "error":{
-            "code":"CacheSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheSecurityGroupNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeCacheSecurityGroups</i> action returns a list of cache security group descriptions. If a cache security group name is specified, the list will contain only the description of that group.</p>"
     },
@@ -1420,26 +404,13 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeCacheSubnetGroupsMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeCacheSubnetGroups</i> action.</p>"
-      },
+      "input":{"shape":"DescribeCacheSubnetGroupsMessage"},
       "output":{
         "shape":"CacheSubnetGroupMessage",
-        "documentation":"<p>Represents the output of a <i>DescribeCacheSubnetGroups</i> action.</p>",
         "resultWrapper":"DescribeCacheSubnetGroupsResult"
       },
       "errors":[
-        {
-          "shape":"CacheSubnetGroupNotFoundFault",
-          "error":{
-            "code":"CacheSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache subnet group name does not refer to an existing cache subnet group.</p>"
-        }
+        {"shape":"CacheSubnetGroupNotFoundFault"}
       ],
       "documentation":"<p>The <i>DescribeCacheSubnetGroups</i> action returns a list of cache subnet group descriptions. If a subnet group name is specified, the list will contain only the description of that group.</p>"
     },
@@ -1449,37 +420,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeEngineDefaultParametersMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeEngineDefaultParameters</i> action.</p>"
-      },
+      "input":{"shape":"DescribeEngineDefaultParametersMessage"},
       "output":{
         "shape":"DescribeEngineDefaultParametersResult",
-        "wrapper":true,
-        "documentation":"<p>Represents the output of a <i>DescribeEngineDefaultParameters</i> action.</p>",
         "resultWrapper":"DescribeEngineDefaultParametersResult"
       },
       "errors":[
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeEngineDefaultParameters</i> action returns the default engine and system parameter information for the specified cache engine.</p>"
     },
@@ -1489,36 +437,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeEventsMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeEvents</i> action.</p>"
-      },
+      "input":{"shape":"DescribeEventsMessage"},
       "output":{
         "shape":"EventsMessage",
-        "documentation":"<p>Represents the output of a <i>DescribeEvents</i> action.</p>",
         "resultWrapper":"DescribeEventsResult"
       },
       "errors":[
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeEvents</i> action returns events related to cache clusters, cache security groups, and cache parameter groups. You can obtain events specific to a particular cache cluster, cache security group, or cache parameter group by providing the name as a parameter.</p> <p>By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.</p>"
     },
@@ -1528,46 +454,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeReplicationGroupsMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeReplicationGroups</i> action.</p>"
-      },
+      "input":{"shape":"DescribeReplicationGroupsMessage"},
       "output":{
         "shape":"ReplicationGroupMessage",
-        "documentation":"<p>Represents the output of a <i>DescribeReplicationGroups</i> action.</p>",
         "resultWrapper":"DescribeReplicationGroupsResult"
       },
       "errors":[
-        {
-          "shape":"ReplicationGroupNotFoundFault",
-          "error":{
-            "code":"ReplicationGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The specified replication group does not exist.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"ReplicationGroupNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeReplicationGroups</i> action returns information about a particular replication group. If no identifier is specified, <i>DescribeReplicationGroups</i> returns information about all replication groups.</p>"
     },
@@ -1577,46 +472,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeReservedCacheNodesMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeReservedCacheNodes</i> action.</p>"
-      },
+      "input":{"shape":"DescribeReservedCacheNodesMessage"},
       "output":{
         "shape":"ReservedCacheNodeMessage",
-        "documentation":"<p>Represents the output of a <i>DescribeReservedCacheNodes</i> action.</p>",
         "resultWrapper":"DescribeReservedCacheNodesResult"
       },
       "errors":[
-        {
-          "shape":"ReservedCacheNodeNotFoundFault",
-          "error":{
-            "code":"ReservedCacheNodeNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested reserved cache node was not found.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"ReservedCacheNodeNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeReservedCacheNodes</i> action returns information about reserved cache nodes for this account, or about a specified reserved cache node.</p>"
     },
@@ -1626,46 +490,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeReservedCacheNodesOfferingsMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeReservedCacheNodesOfferings</i> action.</p>"
-      },
+      "input":{"shape":"DescribeReservedCacheNodesOfferingsMessage"},
       "output":{
         "shape":"ReservedCacheNodesOfferingMessage",
-        "documentation":"<p>Represents the output of a <i>DescribeReservedCacheNodesOfferings</i> action.</p>",
         "resultWrapper":"DescribeReservedCacheNodesOfferingsResult"
       },
       "errors":[
-        {
-          "shape":"ReservedCacheNodesOfferingNotFoundFault",
-          "error":{
-            "code":"ReservedCacheNodesOfferingNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache node offering does not exist.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"ReservedCacheNodesOfferingNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeReservedCacheNodesOfferings</i> action lists available reserved cache node offerings.</p>"
     },
@@ -1675,58 +508,37 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeSnapshotsMessage",
-        "documentation":"<p>Represents the input of a <i>DescribeSnapshotsMessage</i> action.</p>"
-      },
+      "input":{"shape":"DescribeSnapshotsMessage"},
       "output":{
         "shape":"DescribeSnapshotsListMessage",
-        "documentation":"<p>Represents the output of a <i>DescribeSnapshots</i> action.</p>",
         "resultWrapper":"DescribeSnapshotsResult"
       },
       "errors":[
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"SnapshotNotFoundFault",
-          "error":{
-            "code":"SnapshotNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested snapshot name does not refer to an existing snapshot.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"SnapshotNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>DescribeSnapshots</i> action returns information about cache cluster snapshots. By default, <i>DescribeSnapshots</i> lists all of your snapshots; it can optionally describe a single snapshot, or just the snapshots associated with a particular cache cluster.</p>"
+    },
+    "ListAllowedNodeTypeModifications":{
+      "name":"ListAllowedNodeTypeModifications",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListAllowedNodeTypeModificationsMessage"},
+      "output":{
+        "shape":"AllowedNodeTypeModificationsMessage",
+        "resultWrapper":"ListAllowedNodeTypeModificationsResult"
+      },
+      "errors":[
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"ReplicationGroupNotFoundFault"},
+        {"shape":"InvalidParameterCombinationException"},
+        {"shape":"InvalidParameterValueException"}
+      ],
+      "documentation":"<p>The <code>ListAllowedNodeTypeModifications</code> action lists all available node types that you can scale your Redis cluster's or replication group's current node type up to.</p> <p>When you use the <code>ModifyCacheCluster</code> or <code>ModifyReplicationGroup</code> APIs to scale up your cluster or replication group, the value of the <i>CacheNodeType</i> parameter must be one of the node types returned by this action.</p>"
     },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
@@ -1734,46 +546,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListTagsForResourceMessage",
-        "documentation":"<p>The input parameters for the <i>ListTagsForResource</i> action.</p>"
-      },
+      "input":{"shape":"ListTagsForResourceMessage"},
       "output":{
         "shape":"TagListMessage",
-        "documentation":"<p>Represents the output from the <i>AddTagsToResource</i>, <i>ListTagsOnResource</i>, and <i>RemoveTagsFromResource</i> actions.</p>",
         "resultWrapper":"ListTagsForResourceResult"
       },
       "errors":[
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"SnapshotNotFoundFault",
-          "error":{
-            "code":"SnapshotNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested snapshot name does not refer to an existing snapshot.</p>"
-        },
-        {
-          "shape":"InvalidARNFault",
-          "error":{
-            "code":"InvalidARN",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>"
-        }
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"SnapshotNotFoundFault"},
+        {"shape":"InvalidARNFault"}
       ],
       "documentation":"<p>The <i>ListTagsForResource</i> action lists all cost allocation tags currently on the named resource. A <i>cost allocation tag</i> is a key-value pair where the key is case-sensitive and the value is optional. Cost allocation tags can be used to categorize and track your AWS costs.</p> <p>You can have a maximum of 10 cost allocation tags on an ElastiCache resource. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/BestPractices.html\">Using Cost Allocation Tags in Amazon ElastiCache</a>.</p>"
     },
@@ -1783,127 +564,23 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyCacheClusterMessage",
-        "documentation":"<p>Represents the input of a <i>ModifyCacheCluster</i> action.</p>"
-      },
+      "input":{"shape":"ModifyCacheClusterMessage"},
       "output":{
         "shape":"ModifyCacheClusterResult",
-        "wrapper":true,
-        "documentation":"<p>Contains all of the attributes of a specific cache cluster.</p>",
         "resultWrapper":"ModifyCacheClusterResult"
       },
       "errors":[
-        {
-          "shape":"InvalidCacheClusterStateFault",
-          "error":{
-            "code":"InvalidCacheClusterState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster is not in the <i>available</i> state.</p>"
-        },
-        {
-          "shape":"InvalidCacheSecurityGroupStateFault",
-          "error":{
-            "code":"InvalidCacheSecurityGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the cache security group does not allow deletion.</p>"
-        },
-        {
-          "shape":"InsufficientCacheClusterCapacityFault",
-          "error":{
-            "code":"InsufficientCacheClusterCapacity",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache node type is not available in the specified Availability Zone.</p>"
-        },
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"NodeQuotaForClusterExceededFault",
-          "error":{
-            "code":"NodeQuotaForClusterExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes in a single cache cluster.</p>"
-        },
-        {
-          "shape":"NodeQuotaForCustomerExceededFault",
-          "error":{
-            "code":"NodeQuotaForCustomerExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes per customer. </p>"
-        },
-        {
-          "shape":"CacheSecurityGroupNotFoundFault",
-          "error":{
-            "code":"CacheSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>"
-        },
-        {
-          "shape":"CacheParameterGroupNotFoundFault",
-          "error":{
-            "code":"CacheParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
-        },
-        {
-          "shape":"InvalidVPCNetworkStateFault",
-          "error":{
-            "code":"InvalidVPCNetworkStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The VPC network is in an invalid state.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"InvalidCacheClusterStateFault"},
+        {"shape":"InvalidCacheSecurityGroupStateFault"},
+        {"shape":"InsufficientCacheClusterCapacityFault"},
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"NodeQuotaForClusterExceededFault"},
+        {"shape":"NodeQuotaForCustomerExceededFault"},
+        {"shape":"CacheSecurityGroupNotFoundFault"},
+        {"shape":"CacheParameterGroupNotFoundFault"},
+        {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>ModifyCacheCluster</i> action modifies the settings for a cache cluster. You can use this action to change one or more cluster configuration parameters by specifying the parameters and the new values.</p>"
     },
@@ -1913,56 +590,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyCacheParameterGroupMessage",
-        "documentation":"<p>Represents the input of a <i>ModifyCacheParameterGroup</i> action.</p>"
-      },
+      "input":{"shape":"ModifyCacheParameterGroupMessage"},
       "output":{
         "shape":"CacheParameterGroupNameMessage",
-        "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>ModifyCacheParameterGroup</i> </li> <li> <i>ResetCacheParameterGroup</i> </li> </ul>",
         "resultWrapper":"ModifyCacheParameterGroupResult"
       },
       "errors":[
-        {
-          "shape":"CacheParameterGroupNotFoundFault",
-          "error":{
-            "code":"CacheParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
-        },
-        {
-          "shape":"InvalidCacheParameterGroupStateFault",
-          "error":{
-            "code":"InvalidCacheParameterGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the cache parameter group does not allow the requested action to occur. </p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheParameterGroupNotFoundFault"},
+        {"shape":"InvalidCacheParameterGroupStateFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>ModifyCacheParameterGroup</i> action modifies the parameters of a cache parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.</p>"
     },
@@ -1972,57 +609,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyCacheSubnetGroupMessage",
-        "documentation":"<p>Represents the input of a <i>ModifyCacheSubnetGroup</i> action.</p>"
-      },
+      "input":{"shape":"ModifyCacheSubnetGroupMessage"},
       "output":{
         "shape":"ModifyCacheSubnetGroupResult",
-        "wrapper":true,
-        "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>CreateCacheSubnetGroup</i> </li> <li> <i>ModifyCacheSubnetGroup</i> </li> </ul>",
         "resultWrapper":"ModifyCacheSubnetGroupResult"
       },
       "errors":[
-        {
-          "shape":"CacheSubnetGroupNotFoundFault",
-          "error":{
-            "code":"CacheSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache subnet group name does not refer to an existing cache subnet group.</p>"
-        },
-        {
-          "shape":"CacheSubnetQuotaExceededFault",
-          "error":{
-            "code":"CacheSubnetQuotaExceededFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of subnets in a cache subnet group.</p>"
-        },
-        {
-          "shape":"SubnetInUse",
-          "error":{
-            "code":"SubnetInUse",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested subnet is being used by another cache subnet group.</p>"
-        },
-        {
-          "shape":"InvalidSubnet",
-          "error":{
-            "code":"InvalidSubnet",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>An invalid subnet identifier was specified.</p>"
-        }
+        {"shape":"CacheSubnetGroupNotFoundFault"},
+        {"shape":"CacheSubnetQuotaExceededFault"},
+        {"shape":"SubnetInUse"},
+        {"shape":"InvalidSubnet"}
       ],
       "documentation":"<p>The <i>ModifyCacheSubnetGroup</i> action modifies an existing cache subnet group.</p>"
     },
@@ -2032,147 +628,25 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ModifyReplicationGroupMessage",
-        "documentation":"<p>Represents the input of a <i>ModifyReplicationGroups</i> action.</p>"
-      },
+      "input":{"shape":"ModifyReplicationGroupMessage"},
       "output":{
         "shape":"ModifyReplicationGroupResult",
-        "wrapper":true,
-        "documentation":"<p>Contains all of the attributes of a specific replication group.</p>",
         "resultWrapper":"ModifyReplicationGroupResult"
       },
       "errors":[
-        {
-          "shape":"ReplicationGroupNotFoundFault",
-          "error":{
-            "code":"ReplicationGroupNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The specified replication group does not exist.</p>"
-        },
-        {
-          "shape":"InvalidReplicationGroupStateFault",
-          "error":{
-            "code":"InvalidReplicationGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested replication group is not in the <i>available</i> state.</p>"
-        },
-        {
-          "shape":"InvalidCacheClusterStateFault",
-          "error":{
-            "code":"InvalidCacheClusterState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster is not in the <i>available</i> state.</p>"
-        },
-        {
-          "shape":"InvalidCacheSecurityGroupStateFault",
-          "error":{
-            "code":"InvalidCacheSecurityGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the cache security group does not allow deletion.</p>"
-        },
-        {
-          "shape":"InsufficientCacheClusterCapacityFault",
-          "error":{
-            "code":"InsufficientCacheClusterCapacity",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache node type is not available in the specified Availability Zone.</p>"
-        },
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"NodeQuotaForClusterExceededFault",
-          "error":{
-            "code":"NodeQuotaForClusterExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes in a single cache cluster.</p>"
-        },
-        {
-          "shape":"NodeQuotaForCustomerExceededFault",
-          "error":{
-            "code":"NodeQuotaForCustomerExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes per customer. </p>"
-        },
-        {
-          "shape":"CacheSecurityGroupNotFoundFault",
-          "error":{
-            "code":"CacheSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>"
-        },
-        {
-          "shape":"CacheParameterGroupNotFoundFault",
-          "error":{
-            "code":"CacheParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
-        },
-        {
-          "shape":"InvalidVPCNetworkStateFault",
-          "error":{
-            "code":"InvalidVPCNetworkStateFault",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The VPC network is in an invalid state.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"ReplicationGroupNotFoundFault"},
+        {"shape":"InvalidReplicationGroupStateFault"},
+        {"shape":"InvalidCacheClusterStateFault"},
+        {"shape":"InvalidCacheSecurityGroupStateFault"},
+        {"shape":"InsufficientCacheClusterCapacityFault"},
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"NodeQuotaForClusterExceededFault"},
+        {"shape":"NodeQuotaForCustomerExceededFault"},
+        {"shape":"CacheSecurityGroupNotFoundFault"},
+        {"shape":"CacheParameterGroupNotFoundFault"},
+        {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>ModifyReplicationGroup</i> action modifies the settings for a replication group.</p>"
     },
@@ -2182,67 +656,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"PurchaseReservedCacheNodesOfferingMessage",
-        "documentation":"<p>Represents the input of a <i>PurchaseReservedCacheNodesOffering</i> action.</p>"
-      },
+      "input":{"shape":"PurchaseReservedCacheNodesOfferingMessage"},
       "output":{
         "shape":"PurchaseReservedCacheNodesOfferingResult",
-        "wrapper":true,
-        "documentation":"<p>Represents the output of a <i>PurchaseReservedCacheNodesOffering</i> action.</p>",
         "resultWrapper":"PurchaseReservedCacheNodesOfferingResult"
       },
       "errors":[
-        {
-          "shape":"ReservedCacheNodesOfferingNotFoundFault",
-          "error":{
-            "code":"ReservedCacheNodesOfferingNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache node offering does not exist.</p>"
-        },
-        {
-          "shape":"ReservedCacheNodeAlreadyExistsFault",
-          "error":{
-            "code":"ReservedCacheNodeAlreadyExists",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>You already have a reservation with the given identifier.</p>"
-        },
-        {
-          "shape":"ReservedCacheNodeQuotaExceededFault",
-          "error":{
-            "code":"ReservedCacheNodeQuotaExceeded",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The request cannot be processed because it would exceed the user's cache node quota.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"ReservedCacheNodesOfferingNotFoundFault"},
+        {"shape":"ReservedCacheNodeAlreadyExistsFault"},
+        {"shape":"ReservedCacheNodeQuotaExceededFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>PurchaseReservedCacheNodesOffering</i> action allows you to purchase a reserved cache node offering.</p>"
     },
@@ -2252,37 +676,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RebootCacheClusterMessage",
-        "documentation":"<p>Represents the input of a <i>RebootCacheCluster</i> action.</p>"
-      },
+      "input":{"shape":"RebootCacheClusterMessage"},
       "output":{
         "shape":"RebootCacheClusterResult",
-        "wrapper":true,
-        "documentation":"<p>Contains all of the attributes of a specific cache cluster.</p>",
         "resultWrapper":"RebootCacheClusterResult"
       },
       "errors":[
-        {
-          "shape":"InvalidCacheClusterStateFault",
-          "error":{
-            "code":"InvalidCacheClusterState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster is not in the <i>available</i> state.</p>"
-        },
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        }
+        {"shape":"InvalidCacheClusterStateFault"},
+        {"shape":"CacheClusterNotFoundFault"}
       ],
       "documentation":"<p>The <i>RebootCacheCluster</i> action reboots some, or all, of the cache nodes within a provisioned cache cluster. This API will apply any modified cache parameter groups to the cache cluster. The reboot action takes place as soon as possible, and results in a momentary outage to the cache cluster. During the reboot, the cache cluster status is set to REBOOTING.</p> <p>The reboot causes the contents of the cache (for each cache node being rebooted) to be lost.</p> <p>When the reboot is complete, a cache cluster event is created.</p>"
     },
@@ -2292,56 +693,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RemoveTagsFromResourceMessage",
-        "documentation":"<p>Represents the input of a <i>RemoveTagsFromResource</i> action.</p>"
-      },
+      "input":{"shape":"RemoveTagsFromResourceMessage"},
       "output":{
         "shape":"TagListMessage",
-        "documentation":"<p>Represents the output from the <i>AddTagsToResource</i>, <i>ListTagsOnResource</i>, and <i>RemoveTagsFromResource</i> actions.</p>",
         "resultWrapper":"RemoveTagsFromResourceResult"
       },
       "errors":[
-        {
-          "shape":"CacheClusterNotFoundFault",
-          "error":{
-            "code":"CacheClusterNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
-        },
-        {
-          "shape":"SnapshotNotFoundFault",
-          "error":{
-            "code":"SnapshotNotFoundFault",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested snapshot name does not refer to an existing snapshot.</p>"
-        },
-        {
-          "shape":"InvalidARNFault",
-          "error":{
-            "code":"InvalidARN",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>"
-        },
-        {
-          "shape":"TagNotFoundFault",
-          "error":{
-            "code":"TagNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The requested tag was not found on this resource.</p>"
-        }
+        {"shape":"CacheClusterNotFoundFault"},
+        {"shape":"SnapshotNotFoundFault"},
+        {"shape":"InvalidARNFault"},
+        {"shape":"TagNotFoundFault"}
       ],
       "documentation":"<p>The <i>RemoveTagsFromResource</i> action removes the tags identified by the <code>TagKeys</code> list from the named resource.</p>"
     },
@@ -2351,56 +712,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ResetCacheParameterGroupMessage",
-        "documentation":"<p>Represents the input of a <i>ResetCacheParameterGroup</i> action.</p>"
-      },
+      "input":{"shape":"ResetCacheParameterGroupMessage"},
       "output":{
         "shape":"CacheParameterGroupNameMessage",
-        "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>ModifyCacheParameterGroup</i> </li> <li> <i>ResetCacheParameterGroup</i> </li> </ul>",
         "resultWrapper":"ResetCacheParameterGroupResult"
       },
       "errors":[
-        {
-          "shape":"InvalidCacheParameterGroupStateFault",
-          "error":{
-            "code":"InvalidCacheParameterGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the cache parameter group does not allow the requested action to occur. </p>"
-        },
-        {
-          "shape":"CacheParameterGroupNotFoundFault",
-          "error":{
-            "code":"CacheParameterGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"InvalidCacheParameterGroupStateFault"},
+        {"shape":"CacheParameterGroupNotFoundFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>ResetCacheParameterGroup</i> action modifies the parameters of a cache parameter group to the engine or system default value. You can reset specific parameters by submitting a list of parameter names. To reset the entire cache parameter group, specify the <i>ResetAllParameters</i> and <i>CacheParameterGroupName</i> parameters.</p>"
     },
@@ -2410,67 +731,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"RevokeCacheSecurityGroupIngressMessage",
-        "documentation":"<p>Represents the input of a <i>RevokeCacheSecurityGroupIngress</i> action.</p>"
-      },
+      "input":{"shape":"RevokeCacheSecurityGroupIngressMessage"},
       "output":{
         "shape":"RevokeCacheSecurityGroupIngressResult",
-        "wrapper":true,
-        "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>AuthorizeCacheSecurityGroupIngress</i> </li> <li> <i>CreateCacheSecurityGroup</i> </li> <li> <i>RevokeCacheSecurityGroupIngress</i> </li> </ul>",
         "resultWrapper":"RevokeCacheSecurityGroupIngressResult"
       },
       "errors":[
-        {
-          "shape":"CacheSecurityGroupNotFoundFault",
-          "error":{
-            "code":"CacheSecurityGroupNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>"
-        },
-        {
-          "shape":"AuthorizationNotFoundFault",
-          "error":{
-            "code":"AuthorizationNotFound",
-            "httpStatusCode":404,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The specified Amazon EC2 security group is not authorized for the specified cache security group.</p>"
-        },
-        {
-          "shape":"InvalidCacheSecurityGroupStateFault",
-          "error":{
-            "code":"InvalidCacheSecurityGroupState",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The current state of the cache security group does not allow deletion.</p>"
-        },
-        {
-          "shape":"InvalidParameterValueException",
-          "error":{
-            "code":"InvalidParameterValue",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>The value for a parameter is invalid.</p>"
-        },
-        {
-          "shape":"InvalidParameterCombinationException",
-          "error":{
-            "code":"InvalidParameterCombination",
-            "httpStatusCode":400,
-            "senderFault":true
-          },
-          "exception":true,
-          "documentation":"<p>Two or more incompatible parameters were specified.</p>"
-        }
+        {"shape":"CacheSecurityGroupNotFoundFault"},
+        {"shape":"AuthorizationNotFoundFault"},
+        {"shape":"InvalidCacheSecurityGroupStateFault"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>The <i>RevokeCacheSecurityGroupIngress</i> action revokes ingress from a cache security group. Use this action to disallow access from an Amazon EC2 security group that had been previously authorized.</p>"
     }
@@ -2492,7 +763,7 @@
       "members":{
         "ResourceName":{
           "shape":"String",
-          "documentation":"<p>The name of the resource to which the tags are to be added, for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource to which the tags are to be added, for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p> <p>For more information on ARNs, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
         },
         "Tags":{
           "shape":"TagList",
@@ -2501,29 +772,39 @@
       },
       "documentation":"<p>Represents the input of an <i>AddTagsToResource</i> action.</p>"
     },
+    "AllowedNodeTypeModificationsMessage":{
+      "type":"structure",
+      "members":{
+        "ScaleUpModifications":{
+          "shape":"NodeTypeList",
+          "documentation":"<p>A string list, each element of which specifies a cache node type which you can use to scale your cache cluster or replication group.</p> <p>When scaling up a Redis cluster or replication group using <code>ModifyCacheCluster</code> or <code>ModifyReplicationGroup</code>, use a value from this list for the <i>CacheNodeType</i> parameter.</p>"
+        }
+      },
+      "documentation":"<p>Represents the allowed node types you can use to modify your cache cluster or replication group.</p>"
+    },
     "AuthorizationAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The specified Amazon EC2 security group is already authorized for the specified cache security group.</p>",
       "error":{
         "code":"AuthorizationAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The specified Amazon EC2 security group is already authorized for the specified cache security group.</p>"
+      "exception":true
     },
     "AuthorizationNotFoundFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The specified Amazon EC2 security group is not authorized for the specified cache security group.</p>",
       "error":{
         "code":"AuthorizationNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The specified Amazon EC2 security group is not authorized for the specified cache security group.</p>"
+      "exception":true
     },
     "AuthorizeCacheSecurityGroupIngressMessage":{
       "type":"structure",
@@ -2548,6 +829,12 @@
       },
       "documentation":"<p>Represents the input of an <i>AuthorizeCacheSecurityGroupIngress</i> action.</p>"
     },
+    "AuthorizeCacheSecurityGroupIngressResult":{
+      "type":"structure",
+      "members":{
+        "CacheSecurityGroup":{"shape":"CacheSecurityGroup"}
+      }
+    },
     "AutomaticFailoverStatus":{
       "type":"string",
       "enum":[
@@ -2565,8 +852,8 @@
           "documentation":"<p>The name of the Availability Zone.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Describes an Availability Zone in which the cache cluster is launched.</p>"
+      "documentation":"<p>Describes an Availability Zone in which the cache cluster is launched.</p>",
+      "wrapper":true
     },
     "AvailabilityZonesList":{
       "type":"list",
@@ -2600,7 +887,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p>The version of the cache engine version that is used in this cache cluster.</p>"
+          "documentation":"<p>The version of the cache engine that is used in this cache cluster.</p>"
         },
         "CacheClusterStatus":{
           "shape":"String",
@@ -2612,7 +899,7 @@
         },
         "PreferredAvailabilityZone":{
           "shape":"String",
-          "documentation":"<p>The name of the Availability Zone in which the cache cluster is located or \"Multiple\" if the cache nodes are located in different Availability Zones.</p>"
+          "documentation":"<p>The name of the Availability Zone in which the cache cluster is located or &quot;Multiple&quot; if the cache nodes are located in different Availability Zones.</p>"
         },
         "CacheClusterCreateTime":{
           "shape":"TStamp",
@@ -2651,27 +938,27 @@
         },
         "SnapshotRetentionLimit":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set <i>SnapshotRetentionLimit</i> to 5, then a snapshot that was taken today will be retained for 5 days before being deleted.</p> <p><b>Important</b><br>If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.</p>"
+          "documentation":"<p>The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set <i>SnapshotRetentionLimit</i> to 5, then a snapshot that was taken today will be retained for 5 days before being deleted.</p> <p><b>Important</b><br/>If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.</p>"
         },
         "SnapshotWindow":{
           "shape":"String",
           "documentation":"<p>The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster.</p> <p>Example: <code>05:00-09:00</code></p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Contains all of the attributes of a specific cache cluster.</p>"
+      "documentation":"<p>Contains all of the attributes of a specific cache cluster.</p>",
+      "wrapper":true
     },
     "CacheClusterAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>You already have a cache cluster with the given identifier.</p>",
       "error":{
         "code":"CacheClusterAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>You already have a cache cluster with the given identifier.</p>"
+      "exception":true
     },
     "CacheClusterList":{
       "type":"list",
@@ -2698,13 +985,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>",
       "error":{
         "code":"CacheClusterNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested cache cluster ID does not refer to an existing cache cluster.</p>"
+      "exception":true
     },
     "CacheEngineVersion":{
       "type":"structure",
@@ -2883,20 +1170,20 @@
           "documentation":"<p>The description for this cache parameter group.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Represents the output of a <i>CreateCacheParameterGroup</i> action.</p>"
+      "documentation":"<p>Represents the output of a <i>CreateCacheParameterGroup</i> action.</p>",
+      "wrapper":true
     },
     "CacheParameterGroupAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>A cache parameter group with the requested name already exists.</p>",
       "error":{
         "code":"CacheParameterGroupAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>A cache parameter group with the requested name already exists.</p>"
+      "exception":true
     },
     "CacheParameterGroupDetails":{
       "type":"structure",
@@ -2937,25 +1224,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>",
       "error":{
         "code":"CacheParameterGroupNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The requested cache parameter group name does not refer to an existing cache parameter group.</p>"
+      "exception":true
     },
     "CacheParameterGroupQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would exceed the maximum number of cache security groups.</p>",
       "error":{
         "code":"CacheParameterGroupQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would exceed the maximum number of cache security groups.</p>"
+      "exception":true
     },
     "CacheParameterGroupStatus":{
       "type":"structure",
@@ -3009,20 +1296,20 @@
           "documentation":"<p>A list of Amazon EC2 security groups that are associated with this cache security group.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>AuthorizeCacheSecurityGroupIngress</i> </li> <li> <i>CreateCacheSecurityGroup</i> </li> <li> <i>RevokeCacheSecurityGroupIngress</i> </li> </ul>"
+      "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>AuthorizeCacheSecurityGroupIngress</i> </li> <li> <i>CreateCacheSecurityGroup</i> </li> <li> <i>RevokeCacheSecurityGroupIngress</i> </li> </ul>",
+      "wrapper":true
     },
     "CacheSecurityGroupAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>A cache security group with the specified name already exists.</p>",
       "error":{
         "code":"CacheSecurityGroupAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>A cache security group with the specified name already exists.</p>"
+      "exception":true
     },
     "CacheSecurityGroupMembership":{
       "type":"structure",
@@ -3070,25 +1357,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>",
       "error":{
         "code":"CacheSecurityGroupNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The requested cache security group name does not refer to an existing cache security group.</p>"
+      "exception":true
     },
     "CacheSecurityGroupQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache security groups.</p>",
       "error":{
         "code":"QuotaExceeded.CacheSecurityGroup",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache security groups.</p>"
+      "exception":true
     },
     "CacheSecurityGroups":{
       "type":"list",
@@ -3117,32 +1404,32 @@
           "documentation":"<p>A list of subnets associated with the cache subnet group.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>CreateCacheSubnetGroup</i> </li> <li> <i>ModifyCacheSubnetGroup</i> </li> </ul>"
+      "documentation":"<p>Represents the output of one of the following actions:</p> <ul> <li> <i>CreateCacheSubnetGroup</i> </li> <li> <i>ModifyCacheSubnetGroup</i> </li> </ul>",
+      "wrapper":true
     },
     "CacheSubnetGroupAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p> The requested cache subnet group name is already in use by an existing cache subnet group.</p>",
       "error":{
         "code":"CacheSubnetGroupAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p> The requested cache subnet group name is already in use by an existing cache subnet group.</p>"
+      "exception":true
     },
     "CacheSubnetGroupInUse":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested cache subnet group is currently in use.</p>",
       "error":{
         "code":"CacheSubnetGroupInUse",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested cache subnet group is currently in use.</p>"
+      "exception":true
     },
     "CacheSubnetGroupMessage":{
       "type":"structure",
@@ -3162,25 +1449,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested cache subnet group name does not refer to an existing cache subnet group.</p>",
       "error":{
         "code":"CacheSubnetGroupNotFoundFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested cache subnet group name does not refer to an existing cache subnet group.</p>"
+      "exception":true
     },
     "CacheSubnetGroupQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache subnet groups.</p>",
       "error":{
         "code":"CacheSubnetGroupQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache subnet groups.</p>"
+      "exception":true
     },
     "CacheSubnetGroups":{
       "type":"list",
@@ -3193,13 +1480,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of subnets in a cache subnet group.</p>",
       "error":{
         "code":"CacheSubnetQuotaExceededFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of subnets in a cache subnet group.</p>"
+      "exception":true
     },
     "ClusterIdList":{
       "type":"list",
@@ -3212,13 +1499,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache clusters per customer.</p>",
       "error":{
         "code":"ClusterQuotaForCustomerExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache clusters per customer.</p>"
+      "exception":true
     },
     "CopySnapshotMessage":{
       "type":"structure",
@@ -3234,9 +1521,16 @@
         "TargetSnapshotName":{
           "shape":"String",
           "documentation":"<p>A name for the copied snapshot.</p>"
-        }
+        },
+        "TargetBucket":{"shape":"String"}
       },
       "documentation":"<p>Represents the input of a <i>CopySnapshotMessage</i> action.</p>"
+    },
+    "CopySnapshotResult":{
+      "type":"structure",
+      "members":{
+        "Snapshot":{"shape":"Snapshot"}
+      }
     },
     "CreateCacheClusterMessage":{
       "type":"structure",
@@ -3252,7 +1546,7 @@
         },
         "AZMode":{
           "shape":"AZMode",
-          "documentation":"<p>Specifies whether the nodes in this Memcached node group are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region.</p> <p>This parameter is only supported for Memcached cache clusters.</p> <p>If the <code>AZMode</code> and <code>PreferredAvailabilityZones</code> are not specified, ElastiCache assumes <code>single-az</code> mode.</p>"
+          "documentation":"<p>Specifies whether the nodes in this Memcached node group are created in a single Availability Zone or created across multiple Availability Zones in the cluster&apos;s region.</p> <p>This parameter is only supported for Memcached cache clusters.</p> <p>If the <code>AZMode</code> and <code>PreferredAvailabilityZones</code> are not specified, ElastiCache assumes <code>single-az</code> mode.</p>"
         },
         "PreferredAvailabilityZone":{
           "shape":"String",
@@ -3260,7 +1554,7 @@
         },
         "PreferredAvailabilityZones":{
           "shape":"PreferredAvailabilityZoneList",
-          "documentation":"<p>A list of the Availability Zones in which cache nodes will be created. The order of the zones in the list is not important.</p> <p>This option is only supported on Memcached.</p> <note> <p>If you are creating your cache cluster in an Amazon VPC (recommended) you can only locate nodes in Availability Zones that are associated with the subnets in the selected subnet group.</p> <p>The number of Availability Zones listed must equal the value of <code>NumCacheNodes</code>.</p> </note> <p>If you want all the nodes in the same Availability Zone, use <code>PreferredAvailabilityZone</code> instead, or repeat the Availability Zone multiple times in the list.</p> <p>Default: System chosen Availability Zones.</p> <p>Example: One Memcached node in each of three different Availability Zones: <code>PreferredAvailabilityZones.member.1=us-west-2a&amp;PreferredAvailabilityZones.member.2=us-west-2b&amp;PreferredAvailabilityZones.member.3=us-west-2c</code></p> <p>Example: All three Memcached nodes in one Availability Zone: <code>PreferredAvailabilityZones.member.1=us-west-2a&amp;PreferredAvailabilityZones.member.2=us-west-2a&amp;PreferredAvailabilityZones.member.3=us-west-2a</code></p>"
+          "documentation":"<p>A list of the Availability Zones in which cache nodes will be created. The order of the zones in the list is not important.</p> <p>This option is only supported on Memcached.</p> <note> <p>If you are creating your cache cluster in an Amazon VPC (recommended) you can only locate nodes in Availability Zones that are associated with the subnets in the selected subnet group.</p> <p>The number of Availability Zones listed must equal the value of <code>NumCacheNodes</code>.</p> </note> <p>If you want all the nodes in the same Availability Zone, use <code>PreferredAvailabilityZone</code> instead, or repeat the Availability Zone multiple times in the list.</p> <p>Default: System chosen Availability Zones.</p> <p>Example: One Memcached node in each of three different Availability Zones: <code><![CDATA[PreferredAvailabilityZones.member.1=us-west-2a&amp;PreferredAvailabilityZones.member.2=us-west-2b&amp;PreferredAvailabilityZones.member.3=us-west-2c]]></code></p> <p>Example: All three Memcached nodes in one Availability Zone: <code><![CDATA[PreferredAvailabilityZones.member.1=us-west-2a&amp;PreferredAvailabilityZones.member.2=us-west-2a&amp;PreferredAvailabilityZones.member.3=us-west-2a]]></code></p>"
         },
         "NumCacheNodes":{
           "shape":"IntegerOptional",
@@ -3276,7 +1570,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p>The version number of the cache engine to be used for this cache cluster. To view the supported cache engine versions, use the <i>DescribeCacheEngineVersions</i> action.</p>"
+          "documentation":"<p>The version number of the cache engine to be used for this cache cluster. To view the supported cache engine versions, use the <i>DescribeCacheEngineVersions</i> action.</p> <p><b>Important:</b> You can upgrade to a newer engine version (see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement\">Selecting a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cache cluster or replication group and create it anew with the earlier engine version. </p>"
         },
         "CacheParameterGroupName":{
           "shape":"String",
@@ -3333,6 +1627,12 @@
       },
       "documentation":"<p>Represents the input of a <i>CreateCacheCluster</i> action.</p>"
     },
+    "CreateCacheClusterResult":{
+      "type":"structure",
+      "members":{
+        "CacheCluster":{"shape":"CacheCluster"}
+      }
+    },
     "CreateCacheParameterGroupMessage":{
       "type":"structure",
       "required":[
@@ -3356,6 +1656,12 @@
       },
       "documentation":"<p>Represents the input of a <i>CreateCacheParameterGroup</i> action.</p>"
     },
+    "CreateCacheParameterGroupResult":{
+      "type":"structure",
+      "members":{
+        "CacheParameterGroup":{"shape":"CacheParameterGroup"}
+      }
+    },
     "CreateCacheSecurityGroupMessage":{
       "type":"structure",
       "required":[
@@ -3365,7 +1671,7 @@
       "members":{
         "CacheSecurityGroupName":{
           "shape":"String",
-          "documentation":"<p>A name for the cache security group. This value is stored as a lowercase string.</p> <p>Constraints: Must contain no more than 255 alphanumeric characters. Cannot be the word \"Default\".</p> <p>Example: <code>mysecuritygroup</code></p>"
+          "documentation":"<p>A name for the cache security group. This value is stored as a lowercase string.</p> <p>Constraints: Must contain no more than 255 alphanumeric characters. Cannot be the word &quot;Default\".</p> <p>Example: <code>mysecuritygroup</code></p>"
         },
         "Description":{
           "shape":"String",
@@ -3373,6 +1679,12 @@
         }
       },
       "documentation":"<p>Represents the input of a <i>CreateCacheSecurityGroup</i> action.</p>"
+    },
+    "CreateCacheSecurityGroupResult":{
+      "type":"structure",
+      "members":{
+        "CacheSecurityGroup":{"shape":"CacheSecurityGroup"}
+      }
     },
     "CreateCacheSubnetGroupMessage":{
       "type":"structure",
@@ -3396,6 +1708,12 @@
         }
       },
       "documentation":"<p>Represents the input of a <i>CreateCacheSubnetGroup</i> action.</p>"
+    },
+    "CreateCacheSubnetGroupResult":{
+      "type":"structure",
+      "members":{
+        "CacheSubnetGroup":{"shape":"CacheSubnetGroup"}
+      }
     },
     "CreateReplicationGroupMessage":{
       "type":"structure",
@@ -3426,7 +1744,7 @@
         },
         "PreferredCacheClusterAZs":{
           "shape":"AvailabilityZonesList",
-          "documentation":"<p>A list of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not important.</p> <note>If you are creating your replication group in an Amazon VPC (recommended), you can only locate cache clusters in availability zones associated with the subnets in the selected subnet group. <p>The number of availability zones listed must equal the value of <i>NumCacheClusters</i>.</p></note> <p>Default: system chosen availability zones.</p> <p>Example: One Redis cache cluster in each of three availability zones. PreferredAvailabilityZones.member.1=us-west-2a PreferredAvailabilityZones.member.2=us-west-2c PreferredAvailabilityZones.member.3=us-west-2c</p>"
+          "documentation":"<p>A list of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not important.</p> <note>If you are creating your replication group in an Amazon VPC (recommended), you can only locate cache clusters in availability zones associated with the subnets in the selected subnet group. <p>The number of availability zones listed must equal the value of <i>NumCacheClusters</i>.</p></note> <p>Default: system chosen availability zones.</p> <p>Example: One Redis cache cluster in each of three availability zones. <![CDATA[PreferredAvailabilityZones.member.1=us-west-2a PreferredAvailabilityZones.member.2=us-west-2c PreferredAvailabilityZones.member.3=us-west-2c]]></p>"
         },
         "CacheNodeType":{
           "shape":"String",
@@ -3438,7 +1756,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p>The version number of the cache engine to be used for the cache clusters in this replication group. To view the supported cache engine versions, use the <i>DescribeCacheEngineVersions</i> action.</p>"
+          "documentation":"<p>The version number of the cache engine to be used for the cache clusters in this replication group. To view the supported cache engine versions, use the <i>DescribeCacheEngineVersions</i> action.</p> <p><b>Important:</b> You can upgrade to a newer engine version (see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement\">Selecting a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cache cluster or replication group and create it anew with the earlier engine version. </p>"
         },
         "CacheParameterGroupName":{
           "shape":"String",
@@ -3495,6 +1813,12 @@
       },
       "documentation":"<p>Represents the input of a <i>CreateReplicationGroup</i> action.</p>"
     },
+    "CreateReplicationGroupResult":{
+      "type":"structure",
+      "members":{
+        "ReplicationGroup":{"shape":"ReplicationGroup"}
+      }
+    },
     "CreateSnapshotMessage":{
       "type":"structure",
       "required":[
@@ -3513,6 +1837,12 @@
       },
       "documentation":"<p>Represents the input of a <i>CreateSnapshot</i> action.</p>"
     },
+    "CreateSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "Snapshot":{"shape":"Snapshot"}
+      }
+    },
     "DeleteCacheClusterMessage":{
       "type":"structure",
       "required":["CacheClusterId"],
@@ -3527,6 +1857,12 @@
         }
       },
       "documentation":"<p>Represents the input of a <i>DeleteCacheCluster</i> action.</p>"
+    },
+    "DeleteCacheClusterResult":{
+      "type":"structure",
+      "members":{
+        "CacheCluster":{"shape":"CacheCluster"}
+      }
     },
     "DeleteCacheParameterGroupMessage":{
       "type":"structure",
@@ -3580,6 +1916,12 @@
       },
       "documentation":"<p>Represents the input of a <i>DeleteReplicationGroup</i> action.</p>"
     },
+    "DeleteReplicationGroupResult":{
+      "type":"structure",
+      "members":{
+        "ReplicationGroup":{"shape":"ReplicationGroup"}
+      }
+    },
     "DeleteSnapshotMessage":{
       "type":"structure",
       "required":["SnapshotName"],
@@ -3590,6 +1932,12 @@
         }
       },
       "documentation":"<p>Represents the input of a <i>DeleteSnapshot</i> action.</p>"
+    },
+    "DeleteSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "Snapshot":{"shape":"Snapshot"}
+      }
     },
     "DescribeCacheClustersMessage":{
       "type":"structure",
@@ -3739,6 +2087,12 @@
       },
       "documentation":"<p>Represents the input of a <i>DescribeEngineDefaultParameters</i> action.</p>"
     },
+    "DescribeEngineDefaultParametersResult":{
+      "type":"structure",
+      "members":{
+        "EngineDefaults":{"shape":"EngineDefaults"}
+      }
+    },
     "DescribeEventsMessage":{
       "type":"structure",
       "members":{
@@ -3816,7 +2170,7 @@
         },
         "OfferingType":{
           "shape":"String",
-          "documentation":"<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid values: <code>\"Light Utilization\"|\"Medium Utilization\"|\"Heavy Utilization\"</code></p>"
+          "documentation":"<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid values: <code>&quot;Light Utilization&quot;|&quot;Medium Utilization&quot;|&quot;Heavy Utilization&quot;</code></p>"
         },
         "MaxRecords":{
           "shape":"IntegerOptional",
@@ -3850,7 +2204,7 @@
         },
         "OfferingType":{
           "shape":"String",
-          "documentation":"<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid Values: <code>\"Light Utilization\"|\"Medium Utilization\"|\"Heavy Utilization\"</code></p>"
+          "documentation":"<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid Values: <code>&quot;Light Utilization&quot;|&quot;Medium Utilization&quot;|&quot;Heavy Utilization&quot;</code></p>"
         },
         "MaxRecords":{
           "shape":"IntegerOptional",
@@ -3963,8 +2317,8 @@
           "documentation":"<p>A list of parameters specific to a particular cache node type. Each element in the list contains detailed information about one parameter.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Represents the output of a <i>DescribeEngineDefaultParameters</i> action.</p>"
+      "documentation":"<p>Represents the output of a <i>DescribeEngineDefaultParameters</i> action.</p>",
+      "wrapper":true
     },
     "Event":{
       "type":"structure",
@@ -4013,13 +2367,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested cache node type is not available in the specified Availability Zone.</p>",
       "error":{
         "code":"InsufficientCacheClusterCapacity",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested cache node type is not available in the specified Availability Zone.</p>"
+      "exception":true
     },
     "Integer":{"type":"integer"},
     "IntegerOptional":{"type":"integer"},
@@ -4027,49 +2381,49 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>",
       "error":{
         "code":"InvalidARN",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>"
+      "exception":true
     },
     "InvalidCacheClusterStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested cache cluster is not in the <i>available</i> state.</p>",
       "error":{
         "code":"InvalidCacheClusterState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested cache cluster is not in the <i>available</i> state.</p>"
+      "exception":true
     },
     "InvalidCacheParameterGroupStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The current state of the cache parameter group does not allow the requested action to occur. </p>",
       "error":{
         "code":"InvalidCacheParameterGroupState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The current state of the cache parameter group does not allow the requested action to occur. </p>"
+      "exception":true
     },
     "InvalidCacheSecurityGroupStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The current state of the cache security group does not allow deletion.</p>",
       "error":{
         "code":"InvalidCacheSecurityGroupState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The current state of the cache security group does not allow deletion.</p>"
+      "exception":true
     },
     "InvalidParameterCombinationException":{
       "type":"structure",
@@ -4079,13 +2433,13 @@
           "documentation":"<p>Two or more parameters that must not be used together were used together.</p>"
         }
       },
+      "documentation":"<p>Two or more incompatible parameters were specified.</p>",
       "error":{
         "code":"InvalidParameterCombination",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>Two or more incompatible parameters were specified.</p>"
+      "exception":true
     },
     "InvalidParameterValueException":{
       "type":"structure",
@@ -4095,65 +2449,79 @@
           "documentation":"<p>A parameter value is invalid.</p>"
         }
       },
+      "documentation":"<p>The value for a parameter is invalid.</p>",
       "error":{
         "code":"InvalidParameterValue",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The value for a parameter is invalid.</p>"
+      "exception":true
     },
     "InvalidReplicationGroupStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested replication group is not in the <i>available</i> state.</p>",
       "error":{
         "code":"InvalidReplicationGroupState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested replication group is not in the <i>available</i> state.</p>"
+      "exception":true
     },
     "InvalidSnapshotStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The current state of the snapshot does not allow the requested action to occur.</p>",
       "error":{
         "code":"InvalidSnapshotState",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The current state of the snapshot does not allow the requested action to occur.</p>"
+      "exception":true
     },
     "InvalidSubnet":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>An invalid subnet identifier was specified.</p>",
       "error":{
         "code":"InvalidSubnet",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>An invalid subnet identifier was specified.</p>"
+      "exception":true
     },
     "InvalidVPCNetworkStateFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The VPC network is in an invalid state.</p>",
       "error":{
         "code":"InvalidVPCNetworkStateFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The VPC network is in an invalid state.</p>"
+      "exception":true
     },
     "KeyList":{
       "type":"list",
       "member":{"shape":"String"}
+    },
+    "ListAllowedNodeTypeModificationsMessage":{
+      "type":"structure",
+      "members":{
+        "CacheClusterId":{
+          "shape":"String",
+          "documentation":"<p>The name of the cache cluster you want to scale up to a larger node instanced type. ElastiCache uses the cluster id to identify the current node type of this cluster and from that to to create a list of node types you can scale up to.</p> <p><b>Important:</b><br/> You must provide a value for either the <i>CacheClusterId</i> or the <i>ReplicationGroupId</i>.</p>"
+        },
+        "ReplicationGroupId":{
+          "shape":"String",
+          "documentation":"<p>The name of the replication group want to scale up to a larger node type. ElastiCache uses the replication group id to identify the current node type being used by this replication group, and from that to create a list of node types you can scale up to.</p> <p><b>Important:</b><br/> You must provide a value for either the <i>CacheClusterId</i> or the <i>ReplicationGroupId</i>.</p>"
+        }
+      },
+      "documentation":"<p>The input parameters for the <i>ListAllowedNodeTypeModifications</i> action.</p>"
     },
     "ListTagsForResourceMessage":{
       "type":"structure",
@@ -4161,7 +2529,7 @@
       "members":{
         "ResourceName":{
           "shape":"String",
-          "documentation":"<p>The name of the resource for which you want the list of tags, for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags, for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p> <p>For more information on ARNs, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
         }
       },
       "documentation":"<p>The input parameters for the <i>ListTagsForResource</i> action.</p>"
@@ -4176,7 +2544,7 @@
         },
         "NumCacheNodes":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of cache nodes that the cache cluster should have. If the value for <code>NumCacheNodes</code> is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), then more nodes will be added. If the value is less than the number of existing cache nodes, then nodes will be removed. If the value is equal to the number of current cache nodes, then any pending add or remove requests are canceled.</p> <p>If you are removing cache nodes, you must use the <code>CacheNodeIdsToRemove</code> parameter to provide the IDs of the specific cache nodes to remove.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p> <p><b>Note:</b><br>Adding or removing Memcached cache nodes can be applied immediately or as a pending action. See <code>ApplyImmediately</code>.<br> A pending action to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending actions to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending action to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending action to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending action to add nodes. The customer can modify the previous pending action to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending actions to modify the number of cache nodes in a cluster, use the <code>ModifyCacheCluster</code> request and set <i>NumCacheNodes</i> equal to the number of cache nodes currently in the cache cluster.</p>"
+          "documentation":"<p>The number of cache nodes that the cache cluster should have. If the value for <code>NumCacheNodes</code> is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), then more nodes will be added. If the value is less than the number of existing cache nodes, then nodes will be removed. If the value is equal to the number of current cache nodes, then any pending add or remove requests are canceled.</p> <p>If you are removing cache nodes, you must use the <code>CacheNodeIdsToRemove</code> parameter to provide the IDs of the specific cache nodes to remove.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p> <p><b>Note:</b><br/>Adding or removing Memcached cache nodes can be applied immediately or as a pending action. See <code>ApplyImmediately</code>.<br/> A pending action to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending actions to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending action to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending action to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending action to add nodes. The customer can modify the previous pending action to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending actions to modify the number of cache nodes in a cluster, use the <code>ModifyCacheCluster</code> request and set <i>NumCacheNodes</i> equal to the number of cache nodes currently in the cache cluster.</p>"
         },
         "CacheNodeIdsToRemove":{
           "shape":"CacheNodeIdsList",
@@ -4188,11 +2556,11 @@
         },
         "NewAvailabilityZones":{
           "shape":"PreferredAvailabilityZoneList",
-          "documentation":"<p>The list of Availability Zones where the new Memcached cache nodes will be created.</p> <p>This parameter is only valid when <i>NumCacheNodes</i> in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request.</p> <p>This option is only supported on Memcached clusters.</p> <p>Scenarios: <ul> <li> <b>Scenario 1:</b> You have 3 active nodes and wish to add 2 nodes.<br> Specify <code>NumCacheNodes=5</code> (3 + 2) and optionally specify two Availability Zones for the two new nodes.</li> <li> <b>Scenario 2:</b> You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node.<br> Specify <code>NumCacheNodes=6</code> ((3 + 2) + 1)</li> and optionally specify an Availability Zone for the new node. <li> <b>Scenario 3:</b> You want to cancel all pending actions.<br> Specify <code>NumCacheNodes=3</code> to cancel all pending actions.</li> </ul> </p> <p>The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting <code>NumCacheNodes</code> to the number of current nodes.</p> <p>If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the <b>Availability Zone Considerations</b> section of <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html\">Cache Node Considerations for Memcached</a>.</p> <p><b>Impact of new add/remove requests upon pending requests</b></p> <table> <tr> <th>Scenarios</th> <th>Pending action</th> <th>New Request</th> <th>Results</th> </tr> <tr> <td>Scenario-1</td> <td>Delete</td> <td>Delete</td> <td>The new delete, pending or immediate, replaces the pending delete.</td> </tr> <tr> <td>Scenario-2</td> <td>Delete</td> <td>Create</td> <td>The new create, pending or immediate, replaces the pending delete.</td> </tr> <tr> <td>Scenario-3</td> <td>Create</td> <td>Delete</td> <td>The new delete, pending or immediate, replaces the pending create.</td> </tr> <tr> <td>Scenario-4</td> <td>Create</td> <td>Create</td> <td>The new create is added to the pending create.<br/> <b>Important:</b><br/>If the new create request is <b>Apply Immediately - Yes</b>, all creates are performed immediately. If the new create request is <b>Apply Immediately - No</b>, all creates are pending.</td> </tr> </table> <p>Example: <code>NewAvailabilityZones.member.1=us-west-2a&amp;NewAvailabilityZones.member.2=us-west-2b&amp;NewAvailabilityZones.member.3=us-west-2c</code></p>"
+          "documentation":"<p>The list of Availability Zones where the new Memcached cache nodes will be created.</p> <p>This parameter is only valid when <i>NumCacheNodes</i> in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request.</p> <p>This option is only supported on Memcached clusters.</p> <p>Scenarios: <ul> <li><b>Scenario 1:</b> You have 3 active nodes and wish to add 2 nodes.<br/> Specify <code>NumCacheNodes=5</code> (3 + 2) and optionally specify two Availability Zones for the two new nodes.</li> <li><b>Scenario 2:</b> You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node.<br/> Specify <code>NumCacheNodes=6</code> ((3 + 2) + 1)</li> and optionally specify an Availability Zone for the new node. <li><b>Scenario 3:</b> You want to cancel all pending actions.<br/> Specify <code>NumCacheNodes=3</code> to cancel all pending actions.</li> </ul> </p> <p>The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting <code>NumCacheNodes</code> to the number of current nodes.</p> <p>If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the <b>Availability Zone Considerations</b> section of <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html\">Cache Node Considerations for Memcached</a>.</p> <p><b>Impact of new add/remove requests upon pending requests</b></p> <ul> <li>Scenario-1 <ul> <li>Pending Action: Delete</li> <li>New Request: Delete</li> <li>Result: The new delete, pending or immediate, replaces the pending delete.</li> </ul></li> <li>Scenario-2 <ul> <li>Pending Action: Delete</li> <li>New Request: Create</li> <li>Result: The new create, pending or immediate, replaces the pending delete.</li> </ul></li> <li>Scenario-3 <ul> <li>Pending Action: Create</li> <li>New Request: Delete</li> <li>Result: The new delete, pending or immediate, replaces the pending create.</li> </ul></li> <li>Scenario-4 <ul> <li>Pending Action: Create</li> <li>New Request: Create</li> <li>Result: The new create is added to the pending create. <b>Important:</b><br/>If the new create request is <b>Apply Immediately - Yes</b>, all creates are performed immediately.<br/> If the new create request is <b>Apply Immediately - No</b>, all creates are pending.</li> </ul></li> </ul> <p>Example: <code><![CDATA[NewAvailabilityZones.member.1=us-west-2a&amp;NewAvailabilityZones.member.2=us-west-2b&amp;NewAvailabilityZones.member.3=us-west-2c]]></code></p>"
         },
         "CacheSecurityGroupNames":{
           "shape":"CacheSecurityGroupNameList",
-          "documentation":"<p>A list of cache security group names to authorize on this cache cluster. This change is asynchronously applied as soon as possible.</p> <p>This parameter can be used only with clusters that are created outside of an Amazon Virtual Private Cloud (VPC).</p> <p>Constraints: Must contain no more than 255 alphanumeric characters. Must not be \"Default\".</p>"
+          "documentation":"<p>A list of cache security group names to authorize on this cache cluster. This change is asynchronously applied as soon as possible.</p> <p>This parameter can be used only with clusters that are created outside of an Amazon Virtual Private Cloud (VPC).</p> <p>Constraints: Must contain no more than 255 alphanumeric characters. Must not be &quot;Default\".</p>"
         },
         "SecurityGroupIds":{
           "shape":"SecurityGroupIdsList",
@@ -4220,7 +2588,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p>The upgraded version of the cache engine to be run on the cache nodes.</p>"
+          "documentation":"<p>The upgraded version of the cache engine to be run on the cache nodes.</p> <p><b>Important:</b> You can upgrade to a newer engine version (see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement\">Selecting a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cache cluster and create it anew with the earlier engine version. </p>"
         },
         "AutoMinorVersionUpgrade":{
           "shape":"BooleanOptional",
@@ -4228,14 +2596,24 @@
         },
         "SnapshotRetentionLimit":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set <i>SnapshotRetentionLimit</i> to 5, then a snapshot that was taken today will be retained for 5 days before being deleted.</p> <p><b>Important</b><br>If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.</p>"
+          "documentation":"<p>The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set <i>SnapshotRetentionLimit</i> to 5, then a snapshot that was taken today will be retained for 5 days before being deleted.</p> <p><b>Important</b><br/>If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.</p>"
         },
         "SnapshotWindow":{
           "shape":"String",
           "documentation":"<p>The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. </p>"
+        },
+        "CacheNodeType":{
+          "shape":"String",
+          "documentation":"<p>A valid cache node type that you want to scale this cache cluster to. The value of this parameter must be one of the <i>ScaleUpModifications</i> values returned by the <code>ListAllowedCacheNodeTypeModification</code> action.</p>"
         }
       },
       "documentation":"<p>Represents the input of a <i>ModifyCacheCluster</i> action.</p>"
+    },
+    "ModifyCacheClusterResult":{
+      "type":"structure",
+      "members":{
+        "CacheCluster":{"shape":"CacheCluster"}
+      }
     },
     "ModifyCacheParameterGroupMessage":{
       "type":"structure",
@@ -4274,6 +2652,12 @@
       },
       "documentation":"<p>Represents the input of a <i>ModifyCacheSubnetGroup</i> action.</p>"
     },
+    "ModifyCacheSubnetGroupResult":{
+      "type":"structure",
+      "members":{
+        "CacheSubnetGroup":{"shape":"CacheSubnetGroup"}
+      }
+    },
     "ModifyReplicationGroupMessage":{
       "type":"structure",
       "required":["ReplicationGroupId"],
@@ -4288,7 +2672,7 @@
         },
         "PrimaryClusterId":{
           "shape":"String",
-          "documentation":"<p>If this parameter is specified, ElastiCache will promote each of the cache clusters in the specified replication group to the primary role. The nodes of all other cache clusters in the replication group will be read replicas.</p>"
+          "documentation":"<p>If this parameter is specified, ElastiCache will promote the specified cluster in the specified replication group to the primary role. The nodes of all other clusters in the replication group will be read replicas.</p>"
         },
         "SnapshottingClusterId":{
           "shape":"String",
@@ -4300,7 +2684,7 @@
         },
         "CacheSecurityGroupNames":{
           "shape":"CacheSecurityGroupNameList",
-          "documentation":"<p>A list of cache security group names to authorize for the clusters in this replication group. This change is asynchronously applied as soon as possible.</p> <p>This parameter can be used only with replication group containing cache clusters running outside of an Amazon Virtual Private Cloud (VPC).</p> <p>Constraints: Must contain no more than 255 alphanumeric characters. Must not be \"Default\".</p>"
+          "documentation":"<p>A list of cache security group names to authorize for the clusters in this replication group. This change is asynchronously applied as soon as possible.</p> <p>This parameter can be used only with replication group containing cache clusters running outside of an Amazon Virtual Private Cloud (VPC).</p> <p>Constraints: Must contain no more than 255 alphanumeric characters. Must not be &quot;Default\".</p>"
         },
         "SecurityGroupIds":{
           "shape":"SecurityGroupIdsList",
@@ -4328,7 +2712,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p>The upgraded version of the cache engine to be run on the cache clusters in the replication group.</p>"
+          "documentation":"<p>The upgraded version of the cache engine to be run on the cache clusters in the replication group.</p> <p><b>Important:</b> You can upgrade to a newer engine version (see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement\">Selecting a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing replication group and create it anew with the earlier engine version. </p>"
         },
         "AutoMinorVersionUpgrade":{
           "shape":"BooleanOptional",
@@ -4336,14 +2720,24 @@
         },
         "SnapshotRetentionLimit":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of days for which ElastiCache will retain automatic node group snapshots before deleting them. For example, if you set <i>SnapshotRetentionLimit</i> to 5, then a snapshot that was taken today will be retained for 5 days before being deleted.</p> <p><b>Important</b><br>If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.</p>"
+          "documentation":"<p>The number of days for which ElastiCache will retain automatic node group snapshots before deleting them. For example, if you set <i>SnapshotRetentionLimit</i> to 5, then a snapshot that was taken today will be retained for 5 days before being deleted.</p> <p><b>Important</b><br/>If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.</p>"
         },
         "SnapshotWindow":{
           "shape":"String",
           "documentation":"<p>The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of the node group specified by <i>SnapshottingClusterId</i>.</p> <p>Example: <code>05:00-09:00</code></p> <p>If you do not specify this parameter, then ElastiCache will automatically choose an appropriate time range.</p>"
+        },
+        "CacheNodeType":{
+          "shape":"String",
+          "documentation":"<p>A valid cache node type that you want to scale this replication group to. The value of this parameter must be one of the <i>ScaleUpModifications</i> values returned by the <code>ListAllowedCacheNodeTypeModification</code> action.</p>"
         }
       },
       "documentation":"<p>Represents the input of a <i>ModifyReplicationGroups</i> action.</p>"
+    },
+    "ModifyReplicationGroupResult":{
+      "type":"structure",
+      "members":{
+        "ReplicationGroup":{"shape":"ReplicationGroup"}
+      }
     },
     "NodeGroup":{
       "type":"structure",
@@ -4405,25 +2799,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes in a single cache cluster.</p>",
       "error":{
         "code":"NodeQuotaForClusterExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes in a single cache cluster.</p>"
+      "exception":true
     },
     "NodeQuotaForCustomerExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes per customer. </p>",
       "error":{
         "code":"NodeQuotaForCustomerExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would exceed the allowed number of cache nodes per customer. </p>"
+      "exception":true
     },
     "NodeSnapshot":{
       "type":"structure",
@@ -4445,8 +2839,8 @@
           "documentation":"<p>The date and time when the source node's metadata and cache data set was obtained for the snapshot.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Represents an individual cache node in a snapshot of a cache cluster.</p>"
+      "documentation":"<p>Represents an individual cache node in a snapshot of a cache cluster.</p>",
+      "wrapper":true
     },
     "NodeSnapshotList":{
       "type":"list",
@@ -4454,6 +2848,10 @@
         "shape":"NodeSnapshot",
         "locationName":"NodeSnapshot"
       }
+    },
+    "NodeTypeList":{
+      "type":"list",
+      "member":{"shape":"String"}
     },
     "NotificationConfiguration":{
       "type":"structure",
@@ -4556,6 +2954,10 @@
         "EngineVersion":{
           "shape":"String",
           "documentation":"<p>The new cache engine version that the cache cluster will run.</p>"
+        },
+        "CacheNodeType":{
+          "shape":"String",
+          "documentation":"<p>The cache node type that this cache cluster or replication group will be scaled to.</p>"
         }
       },
       "documentation":"<p>A group of settings that will be applied to the cache cluster in the future, or that are currently being applied.</p>"
@@ -4577,7 +2979,7 @@
         },
         "ReservedCacheNodeId":{
           "shape":"String",
-          "documentation":"<p>A customer-specified identifier to track this reservation.</p> <p>Example: myreservationID</p>"
+          "documentation":"<p>A customer-specified identifier to track this reservation.</p> <p><b>Note:</b><br/>The Reserved Cache Node ID is an unique customer-specified identifier to track this reservation. If this parameter is not specified, ElastiCache automatically generates an identifier for the reservation.</p> <p>Example: myreservationID</p>"
         },
         "CacheNodeCount":{
           "shape":"IntegerOptional",
@@ -4585,6 +2987,12 @@
         }
       },
       "documentation":"<p>Represents the input of a <i>PurchaseReservedCacheNodesOffering</i> action.</p>"
+    },
+    "PurchaseReservedCacheNodesOfferingResult":{
+      "type":"structure",
+      "members":{
+        "ReservedCacheNode":{"shape":"ReservedCacheNode"}
+      }
     },
     "RebootCacheClusterMessage":{
       "type":"structure",
@@ -4604,6 +3012,12 @@
       },
       "documentation":"<p>Represents the input of a <i>RebootCacheCluster</i> action.</p>"
     },
+    "RebootCacheClusterResult":{
+      "type":"structure",
+      "members":{
+        "CacheCluster":{"shape":"CacheCluster"}
+      }
+    },
     "RecurringCharge":{
       "type":"structure",
       "members":{
@@ -4616,8 +3030,8 @@
           "documentation":"<p>The frequency of the recurring charge.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Contains the specific price and frequency of a recurring charges for a reserved cache node, or for a reserved cache node offering.</p>"
+      "documentation":"<p>Contains the specific price and frequency of a recurring charges for a reserved cache node, or for a reserved cache node offering.</p>",
+      "wrapper":true
     },
     "RecurringChargeList":{
       "type":"list",
@@ -4635,7 +3049,7 @@
       "members":{
         "ResourceName":{
           "shape":"String",
-          "documentation":"<p>The name of the ElastiCache resource from which you want the listed tags removed, for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource from which you want the tags removed, for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p> <p>For more information on ARNs, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
         },
         "TagKeys":{
           "shape":"KeyList",
@@ -4680,20 +3094,20 @@
           "documentation":"<p>Indicates the status of Multi-AZ for this replication group.</p> <note><p>ElastiCache Multi-AZ replication groups are not supported on:</p> <ul> <li>Redis versions earlier than 2.8.6.</li> <li>T1 and T2 cache node types.</li> </ul> </note>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Contains all of the attributes of a specific replication group.</p>"
+      "documentation":"<p>Contains all of the attributes of a specific replication group.</p>",
+      "wrapper":true
     },
     "ReplicationGroupAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The specified replication group already exists.</p>",
       "error":{
         "code":"ReplicationGroupAlreadyExists",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The specified replication group already exists.</p>"
+      "exception":true
     },
     "ReplicationGroupList":{
       "type":"list",
@@ -4720,13 +3134,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The specified replication group does not exist.</p>",
       "error":{
         "code":"ReplicationGroupNotFoundFault",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The specified replication group does not exist.</p>"
+      "exception":true
     },
     "ReplicationGroupPendingModifiedValues":{
       "type":"structure",
@@ -4794,20 +3208,20 @@
           "documentation":"<p>The recurring price charged to run this reserved cache node.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Represents the output of a <i>PurchaseReservedCacheNodesOffering</i> action.</p>"
+      "documentation":"<p>Represents the output of a <i>PurchaseReservedCacheNodesOffering</i> action.</p>",
+      "wrapper":true
     },
     "ReservedCacheNodeAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>You already have a reservation with the given identifier.</p>",
       "error":{
         "code":"ReservedCacheNodeAlreadyExists",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>You already have a reservation with the given identifier.</p>"
+      "exception":true
     },
     "ReservedCacheNodeList":{
       "type":"list",
@@ -4834,25 +3248,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested reserved cache node was not found.</p>",
       "error":{
         "code":"ReservedCacheNodeNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested reserved cache node was not found.</p>"
+      "exception":true
     },
     "ReservedCacheNodeQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would exceed the user's cache node quota.</p>",
       "error":{
         "code":"ReservedCacheNodeQuotaExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would exceed the user's cache node quota.</p>"
+      "exception":true
     },
     "ReservedCacheNodesOffering":{
       "type":"structure",
@@ -4890,8 +3304,8 @@
           "documentation":"<p>The recurring price charged to run this reserved cache node.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Describes all of the attributes of a reserved cache node offering.</p>"
+      "documentation":"<p>Describes all of the attributes of a reserved cache node offering.</p>",
+      "wrapper":true
     },
     "ReservedCacheNodesOfferingList":{
       "type":"list",
@@ -4918,20 +3332,17 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested cache node offering does not exist.</p>",
       "error":{
         "code":"ReservedCacheNodesOfferingNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested cache node offering does not exist.</p>"
+      "exception":true
     },
     "ResetCacheParameterGroupMessage":{
       "type":"structure",
-      "required":[
-        "CacheParameterGroupName",
-        "ParameterNameValues"
-      ],
+      "required":["CacheParameterGroupName"],
       "members":{
         "CacheParameterGroupName":{
           "shape":"String",
@@ -4970,6 +3381,12 @@
         }
       },
       "documentation":"<p>Represents the input of a <i>RevokeCacheSecurityGroupIngress</i> action.</p>"
+    },
+    "RevokeCacheSecurityGroupIngressResult":{
+      "type":"structure",
+      "members":{
+        "CacheSecurityGroup":{"shape":"CacheSecurityGroup"}
+      }
     },
     "SecurityGroupIdsList":{
       "type":"list",
@@ -5069,7 +3486,7 @@
         },
         "SnapshotRetentionLimit":{
           "shape":"IntegerOptional",
-          "documentation":"<p>For an automatic snapshot, the number of days for which ElastiCache will retain the snapshot before deleting it.</p> <p>For manual snapshots, this field reflects the <i>SnapshotRetentionLimit</i> for the source cache cluster when the snapshot was created. This field is otherwise ignored: Manual snapshots do not expire, and can only be deleted using the <i>DeleteSnapshot</i> action. </p> <p><b>Important</b><br>If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.</p>"
+          "documentation":"<p>For an automatic snapshot, the number of days for which ElastiCache will retain the snapshot before deleting it.</p> <p>For manual snapshots, this field reflects the <i>SnapshotRetentionLimit</i> for the source cache cluster when the snapshot was created. This field is otherwise ignored: Manual snapshots do not expire, and can only be deleted using the <i>DeleteSnapshot</i> action. </p> <p><b>Important</b><br/>If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.</p>"
         },
         "SnapshotWindow":{
           "shape":"String",
@@ -5080,20 +3497,20 @@
           "documentation":"<p>A list of the cache nodes in the source cache cluster.</p>"
         }
       },
-      "wrapper":true,
-      "documentation":"<p>Represents a copy of an entire cache cluster as of the time when the snapshot was taken.</p>"
+      "documentation":"<p>Represents a copy of an entire cache cluster as of the time when the snapshot was taken.</p>",
+      "wrapper":true
     },
     "SnapshotAlreadyExistsFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>You already have a snapshot with the given name.</p>",
       "error":{
         "code":"SnapshotAlreadyExistsFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>You already have a snapshot with the given name.</p>"
+      "exception":true
     },
     "SnapshotArnsList":{
       "type":"list",
@@ -5106,13 +3523,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>You attempted one of the following actions:</p> <ul> <li> <p>Creating a snapshot of a Redis cache cluster running on a <i>t1.micro</i> cache node.</p> </li> <li> <p>Creating a snapshot of a cache cluster that is running Memcached rather than Redis.</p> </li> </ul> <p>Neither of these are supported by ElastiCache.</p>",
       "error":{
         "code":"SnapshotFeatureNotSupportedFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>You attempted one of the following actions:</p> <ul> <li> <p>Creating a snapshot of a Redis cache cluster running on a <i>t1.micro</i> cache node.</p> </li> <li> <p>Creating a snapshot of a cache cluster that is running Memcached rather than Redis.</p> </li> </ul> <p>Neither of these are supported by ElastiCache.</p>"
+      "exception":true
     },
     "SnapshotList":{
       "type":"list",
@@ -5125,25 +3542,25 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested snapshot name does not refer to an existing snapshot.</p>",
       "error":{
         "code":"SnapshotNotFoundFault",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested snapshot name does not refer to an existing snapshot.</p>"
+      "exception":true
     },
     "SnapshotQuotaExceededFault":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would exceed the maximum number of snapshots.</p>",
       "error":{
         "code":"SnapshotQuotaExceededFault",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would exceed the maximum number of snapshots.</p>"
+      "exception":true
     },
     "SourceType":{
       "type":"string",
@@ -5180,13 +3597,13 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested subnet is being used by another cache subnet group.</p>",
       "error":{
         "code":"SubnetInUse",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested subnet is being used by another cache subnet group.</p>"
+      "exception":true
     },
     "SubnetList":{
       "type":"list",
@@ -5205,7 +3622,7 @@
         },
         "Value":{
           "shape":"String",
-          "documentation":"<p>The tag's value. May not be null.</p>"
+          "documentation":"<p>The tag&apos;s value. May not be null.</p>"
         }
       },
       "documentation":"<p>A cost allocation Tag that can be added to an ElastiCache cluster or replication group. Tags are composed of a Key/Value pair. A tag with a null Value is permitted.</p>"
@@ -5231,133 +3648,26 @@
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The requested tag was not found on this resource.</p>",
       "error":{
         "code":"TagNotFound",
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The requested tag was not found on this resource.</p>"
+      "exception":true
     },
     "TagQuotaPerResourceExceeded":{
       "type":"structure",
       "members":{
       },
+      "documentation":"<p>The request cannot be processed because it would cause the resource to have more than the allowed number of tags. The maximum number of tags permitted on a resource is 10.</p>",
       "error":{
         "code":"TagQuotaPerResourceExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"<p>The request cannot be processed because it would cause the resource to have more than the allowed number of tags. The maximum number of tags permitted on a resource is 10.</p>"
-    },
-    "AuthorizeCacheSecurityGroupIngressResult":{
-      "type":"structure",
-      "members":{
-        "CacheSecurityGroup":{"shape":"CacheSecurityGroup"}
-      }
-    },
-    "CopySnapshotResult":{
-      "type":"structure",
-      "members":{
-        "Snapshot":{"shape":"Snapshot"}
-      }
-    },
-    "CreateCacheClusterResult":{
-      "type":"structure",
-      "members":{
-        "CacheCluster":{"shape":"CacheCluster"}
-      }
-    },
-    "CreateCacheParameterGroupResult":{
-      "type":"structure",
-      "members":{
-        "CacheParameterGroup":{"shape":"CacheParameterGroup"}
-      }
-    },
-    "CreateCacheSecurityGroupResult":{
-      "type":"structure",
-      "members":{
-        "CacheSecurityGroup":{"shape":"CacheSecurityGroup"}
-      }
-    },
-    "CreateCacheSubnetGroupResult":{
-      "type":"structure",
-      "members":{
-        "CacheSubnetGroup":{"shape":"CacheSubnetGroup"}
-      }
-    },
-    "CreateReplicationGroupResult":{
-      "type":"structure",
-      "members":{
-        "ReplicationGroup":{"shape":"ReplicationGroup"}
-      }
-    },
-    "CreateSnapshotResult":{
-      "type":"structure",
-      "members":{
-        "Snapshot":{"shape":"Snapshot"}
-      }
-    },
-    "DeleteCacheClusterResult":{
-      "type":"structure",
-      "members":{
-        "CacheCluster":{"shape":"CacheCluster"}
-      }
-    },
-    "DeleteReplicationGroupResult":{
-      "type":"structure",
-      "members":{
-        "ReplicationGroup":{"shape":"ReplicationGroup"}
-      }
-    },
-    "DeleteSnapshotResult":{
-      "type":"structure",
-      "members":{
-        "Snapshot":{"shape":"Snapshot"}
-      }
-    },
-    "DescribeEngineDefaultParametersResult":{
-      "type":"structure",
-      "members":{
-        "EngineDefaults":{"shape":"EngineDefaults"}
-      }
-    },
-    "ModifyCacheClusterResult":{
-      "type":"structure",
-      "members":{
-        "CacheCluster":{"shape":"CacheCluster"}
-      }
-    },
-    "ModifyCacheSubnetGroupResult":{
-      "type":"structure",
-      "members":{
-        "CacheSubnetGroup":{"shape":"CacheSubnetGroup"}
-      }
-    },
-    "ModifyReplicationGroupResult":{
-      "type":"structure",
-      "members":{
-        "ReplicationGroup":{"shape":"ReplicationGroup"}
-      }
-    },
-    "PurchaseReservedCacheNodesOfferingResult":{
-      "type":"structure",
-      "members":{
-        "ReservedCacheNode":{"shape":"ReservedCacheNode"}
-      }
-    },
-    "RebootCacheClusterResult":{
-      "type":"structure",
-      "members":{
-        "CacheCluster":{"shape":"CacheCluster"}
-      }
-    },
-    "RevokeCacheSecurityGroupIngressResult":{
-      "type":"structure",
-      "members":{
-        "CacheSecurityGroup":{"shape":"CacheSecurityGroup"}
-      }
+      "exception":true
     }
-  }
+  },
+  "documentation":"<fullname>Amazon ElastiCache</fullname> <p>Amazon ElastiCache is a web service that makes it easier to set up, operate, and scale a distributed cache in the cloud.</p> <p>With ElastiCache, customers gain all of the benefits of a high-performance, in-memory cache with far less of the administrative burden of launching and managing a distributed cache. The service makes setup, scaling, and cluster failure handling much simpler than in a self-managed cache deployment.</p> <p>In addition, through integration with Amazon CloudWatch, customers get enhanced visibility into the key performance statistics associated with their cache and can receive alarms if a part of their cache runs hot.</p>"
 }
