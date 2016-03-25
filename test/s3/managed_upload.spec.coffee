@@ -325,6 +325,18 @@ describe 'AWS.S3.ManagedUpload', ->
           expect(data).not.to.exist
           done()
 
+    it 'returns data with ETag, Location, Bucket, and Key with single part upload', (done) ->
+      reqs = helpers.mockResponses [
+        data: ETag: 'ETAG'
+      ]
+      send Body: smallbody, ContentEncoding: 'encoding', ->
+        expect(err).not.to.exist
+        expect(data.ETag).to.equal('ETAG')
+        expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key')
+        expect(data.Key).to.equal('key')
+        expect(data.Bucket).to.equal('bucket')
+        done()
+
     if AWS.util.isNode()
       describe 'streaming', ->
         it 'sends a small stream in a single putObject', (done) ->
