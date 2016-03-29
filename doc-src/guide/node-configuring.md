@@ -264,6 +264,37 @@ s3.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
 });
 ```
 
+### Registering Certificate Bundles
+
+The default trust stores included with node.js includes the certificates needed to
+access AWS services. In some cases, it might be preferable to include only a specific
+set of certificates.
+
+```javascript
+var fs = require('fs');
+var https = require('https');
+
+var certs = [
+  fs.readFileSync('/path/to/cert.pem')
+];
+
+AWS.config.update({
+  httpOptions: {
+    agent: new https.Agent({
+      rejectUnauthorized: true,
+      ca: certs
+    })
+  }
+});
+
+var s3 = new AWS.S3({apiVersion: '2006-03-01'});
+s3.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
+  console.log(err, data);
+});
+```
+
+
+
 ## Service-Specific Configuration
 
 Occasionally, you might want to apply configuration only to one service.
