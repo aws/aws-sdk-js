@@ -738,7 +738,7 @@
         {"shape":"TableRestoreNotFoundFault"},
         {"shape":"ClusterNotFoundFault"}
       ],
-      "documentation":"<p>Lists the status of one or more table restore requests made using the <a>RestoreTableFromClusterSnapshot</a> API action. If you don't specify a value for the <code>TableRestoreRequestId</code> parameter, then <code>DescribeTableRestoreStatus</code> returns the status of all in-progress table restore requests. Otherwise <code>DescribeTableRestoreStatus</code> returns the status of the table specified by <code>TableRestoreRequestId</code>.</p>"
+      "documentation":"<p>Lists the status of one or more table restore requests made using the <a>RestoreTableFromClusterSnapshot</a> API action. If you don't specify a value for the <code>TableRestoreRequestId</code> parameter, then <code>DescribeTableRestoreStatus</code> returns the status of all table restore requests ordered by the date and time of the request in ascending order. Otherwise <code>DescribeTableRestoreStatus</code> returns the status of the table specified by <code>TableRestoreRequestId</code>.</p>"
     },
     "DescribeTags":{
       "name":"DescribeTags",
@@ -866,6 +866,23 @@
         {"shape":"InvalidElasticIpFault"}
       ],
       "documentation":"<p> Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i> . </p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p>"
+    },
+    "ModifyClusterIamRoles":{
+      "name":"ModifyClusterIamRoles",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyClusterIamRolesMessage"},
+      "output":{
+        "shape":"ModifyClusterIamRolesResult",
+        "resultWrapper":"ModifyClusterIamRolesResult"
+      },
+      "errors":[
+        {"shape":"InvalidClusterStateFault"},
+        {"shape":"ClusterNotFoundFault"}
+      ],
+      "documentation":"<p>Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. </p> <p>A cluster can have up to 10 IAM roles associated at any time. </p>"
     },
     "ModifyClusterParameterGroup":{
       "name":"ModifyClusterParameterGroup",
@@ -1395,6 +1412,10 @@
         "KmsKeyId":{
           "shape":"String",
           "documentation":"<p>The AWS Key Management Service (KMS) key ID of the encryption key used to encrypt data in the cluster.</p>"
+        },
+        "IamRoles":{
+          "shape":"ClusterIamRoleList",
+          "documentation":"<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.</p>"
         }
       },
       "documentation":"<p>Describes a cluster.</p>",
@@ -1411,6 +1432,27 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "ClusterIamRole":{
+      "type":"structure",
+      "members":{
+        "IamRoleArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role. For example, <code>arn:aws:iam::123456789012:role/RedshiftCopyUnload</code>. </p>"
+        },
+        "ApplyStatus":{
+          "shape":"String",
+          "documentation":"<p>Describes the status of the IAM role's association with an Amazon Redshift cluster.</p> <p>The following are possible statuses and descriptions.<ul> <li><code>in-sync</code>: The role is available for use by the cluster.</li> <li><code>adding</code>: The role is in the process of being associated with the cluster.</li> <li><code>removing</code>: The role is in the process of being disassociated with the cluster.</li> </ul> </p>"
+        }
+      },
+      "documentation":"<p>An AWS Identity and Access Management (IAM) role that can be used by the associated Amazon Redshift cluster to access other AWS services.</p>"
+    },
+    "ClusterIamRoleList":{
+      "type":"list",
+      "member":{
+        "shape":"ClusterIamRole",
+        "locationName":"ClusterIamRole"
+      }
     },
     "ClusterList":{
       "type":"list",
@@ -2080,6 +2122,10 @@
         "AdditionalInfo":{
           "shape":"String",
           "documentation":"<p>Reserved.</p>"
+        },
+        "IamRoles":{
+          "shape":"IamRoleArnList",
+          "documentation":"<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated at any time. </p>"
         }
       },
       "documentation":"<p/>"
@@ -3586,6 +3632,13 @@
         "locationName":"IPRange"
       }
     },
+    "IamRoleArnList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"IamRoleArn"
+      }
+    },
     "ImportTablesCompleted":{
       "type":"list",
       "member":{"shape":"String"}
@@ -3908,6 +3961,31 @@
     },
     "Long":{"type":"long"},
     "LongOptional":{"type":"long"},
+    "ModifyClusterIamRolesMessage":{
+      "type":"structure",
+      "required":["ClusterIdentifier"],
+      "members":{
+        "ClusterIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The unique identifier of the cluster for which you want to associate or disassociate IAM roles.</p>"
+        },
+        "AddIamRoles":{
+          "shape":"IamRoleArnList",
+          "documentation":"<p>Zero or more IAM roles (in their ARN format) to associate with the cluster. You can associate up to 10 IAM roles with a single cluster in a single request.</p>"
+        },
+        "RemoveIamRoles":{
+          "shape":"IamRoleArnList",
+          "documentation":"<p>Zero or more IAM roles (in their ARN format) to disassociate from the cluster. You can disassociate up to 10 IAM roles from a single cluster in a single request.</p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
+    "ModifyClusterIamRolesResult":{
+      "type":"structure",
+      "members":{
+        "Cluster":{"shape":"Cluster"}
+      }
+    },
     "ModifyClusterMessage":{
       "type":"structure",
       "required":["ClusterIdentifier"],
@@ -4703,6 +4781,10 @@
         "AdditionalInfo":{
           "shape":"String",
           "documentation":"<p>Reserved.</p>"
+        },
+        "IamRoles":{
+          "shape":"IamRoleArnList",
+          "documentation":"<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated at any time. </p>"
         }
       },
       "documentation":"<p/>"
@@ -4767,7 +4849,7 @@
         },
         "SourceSchemaName":{
           "shape":"String",
-          "documentation":"<p>The name of the source schema that contains the table to restore from.</p>"
+          "documentation":"<p>The name of the source schema that contains the table to restore from. If you do not specify a <code>SourceSchemaName</code> value, the default is <code>public</code>.</p>"
         },
         "SourceTableName":{
           "shape":"String",
@@ -4783,7 +4865,7 @@
         },
         "NewTableName":{
           "shape":"String",
-          "documentation":"<p>The name of the table to create as a result of the current request.</p>"
+          "documentation":"<p>The name of the table to create as a result of the current request. </p>"
         }
       }
     },
@@ -5307,11 +5389,11 @@
         },
         "Status":{
           "shape":"TableRestoreStatusType",
-          "documentation":"<p>A value that describes the current state of the table restore request.</p> <p>Valid Values: <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>PENDING</code>, <code>IN_PROGRESS</code></p>"
+          "documentation":"<p>A value that describes the current state of the table restore request.</p> <p>Valid Values: <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELED</code>, <code>PENDING</code>, <code>IN_PROGRESS</code></p>"
         },
         "Message":{
           "shape":"String",
-          "documentation":"<p>A description of the status of the table restore request. Status values include <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>PENDING</code>, <code>IN_PROGRESS</code>.</p>"
+          "documentation":"<p>A description of the status of the table restore request. Status values include <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELED</code>, <code>PENDING</code>, <code>IN_PROGRESS</code>.</p>"
         },
         "RequestTime":{
           "shape":"TStamp",
