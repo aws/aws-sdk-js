@@ -356,13 +356,13 @@ integrationTests ->
 
   describe 'AWS.Inspector', ->
     it 'makes a request', (done) ->
-      inspector.listApplications (err, data) ->
+      inspector.listRulesPackages (err, data) ->
         noError(err)
-        expect(Array.isArray(data.applicationArnList)).to.equal(true)
+        expect(Array.isArray(data.rulesPackageArns)).to.equal(true)
         done()
 
     it 'handles errors', (done) ->
-      inspector.describeApplication {applicationArn: 'fake-arn'}, (err, data) ->
+      inspector.stopAssessmentRun {assessmentRunArn: 'fake-arn'}, (err, data) ->
         noData(data)
         assertError(err, 'InvalidInputException')
         done()
