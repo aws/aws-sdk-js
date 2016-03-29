@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.2.47
+// AWS SDK for JavaScript v2.2.48
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -21,7 +21,7 @@ if (typeof self !== 'undefined') self.AWS = AWS;
 AWS.apiLoader.services['acm'] = {};
 AWS.ACM = AWS.Service.defineService('acm', [ '2015-12-08' ]);
 
-AWS.apiLoader.services['acm']['2015-12-08'] = {"version":"2.0","metadata":{"apiVersion":"2015-12-08","endpointPrefix":"acm","jsonVersion":"1.1","serviceAbbreviation":"ACM","serviceFullName":"AWS Certificate Manager","signatureVersion":"v4","targetPrefix":"CertificateManager","protocol":"json"},"operations":{"DeleteCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"http":{}},"DescribeCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Certificate":{"type":"structure","members":{"CertificateArn":{},"DomainName":{},"SubjectAlternativeNames":{"shape":"S7"},"DomainValidationOptions":{"type":"list","member":{"type":"structure","required":["DomainName"],"members":{"DomainName":{},"ValidationEmails":{"type":"list","member":{}},"ValidationDomain":{}}}},"Serial":{},"Subject":{},"Issuer":{},"CreatedAt":{"type":"timestamp"},"IssuedAt":{"type":"timestamp"},"Status":{},"RevokedAt":{"type":"timestamp"},"RevocationReason":{},"NotBefore":{"type":"timestamp"},"NotAfter":{"type":"timestamp"},"KeyAlgorithm":{},"SignatureAlgorithm":{},"InUseBy":{"type":"list","member":{}}}}}},"http":{}},"GetCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Certificate":{},"CertificateChain":{}}},"http":{}},"ListCertificates":{"input":{"type":"structure","members":{"CertificateStatuses":{"type":"list","member":{}},"NextToken":{},"MaxItems":{"type":"integer"}}},"output":{"type":"structure","members":{"NextToken":{},"CertificateSummaryList":{"type":"list","member":{"type":"structure","members":{"CertificateArn":{},"DomainName":{}}}}}},"http":{}},"RequestCertificate":{"input":{"type":"structure","required":["DomainName"],"members":{"DomainName":{},"SubjectAlternativeNames":{"shape":"S7"},"IdempotencyToken":{},"DomainValidationOptions":{"type":"list","member":{"type":"structure","required":["DomainName","ValidationDomain"],"members":{"DomainName":{},"ValidationDomain":{}}}}}},"output":{"type":"structure","members":{"CertificateArn":{}}},"http":{}},"ResendValidationEmail":{"input":{"type":"structure","required":["CertificateArn","Domain","ValidationDomain"],"members":{"CertificateArn":{},"Domain":{},"ValidationDomain":{}}},"http":{}}},"shapes":{"S7":{"type":"list","member":{}}},"examples":{},"paginators":{"ListCertificates":{"limit_key":"MaxItems","input_token":"NextToken","output_token":"NextToken","result_key":"CertificateSummaryList"}}};
+AWS.apiLoader.services['acm']['2015-12-08'] = {"version":"2.0","metadata":{"apiVersion":"2015-12-08","endpointPrefix":"acm","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"ACM","serviceFullName":"AWS Certificate Manager","signatureVersion":"v4","targetPrefix":"CertificateManager"},"operations":{"DeleteCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"http":{}},"DescribeCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Certificate":{"type":"structure","members":{"CertificateArn":{},"DomainName":{},"SubjectAlternativeNames":{"shape":"S7"},"DomainValidationOptions":{"type":"list","member":{"type":"structure","required":["DomainName"],"members":{"DomainName":{},"ValidationEmails":{"type":"list","member":{}},"ValidationDomain":{}}}},"Serial":{},"Subject":{},"Issuer":{},"CreatedAt":{"type":"timestamp"},"IssuedAt":{"type":"timestamp"},"Status":{},"RevokedAt":{"type":"timestamp"},"RevocationReason":{},"NotBefore":{"type":"timestamp"},"NotAfter":{"type":"timestamp"},"KeyAlgorithm":{},"SignatureAlgorithm":{},"InUseBy":{"type":"list","member":{}}}}}},"http":{}},"GetCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Certificate":{},"CertificateChain":{}}},"http":{}},"ListCertificates":{"input":{"type":"structure","members":{"CertificateStatuses":{"type":"list","member":{}},"NextToken":{},"MaxItems":{"type":"integer"}}},"output":{"type":"structure","members":{"NextToken":{},"CertificateSummaryList":{"type":"list","member":{"type":"structure","members":{"CertificateArn":{},"DomainName":{}}}}}},"http":{}},"RequestCertificate":{"input":{"type":"structure","required":["DomainName"],"members":{"DomainName":{},"SubjectAlternativeNames":{"shape":"S7"},"IdempotencyToken":{},"DomainValidationOptions":{"type":"list","member":{"type":"structure","required":["DomainName","ValidationDomain"],"members":{"DomainName":{},"ValidationDomain":{}}}}}},"output":{"type":"structure","members":{"CertificateArn":{}}},"http":{}},"ResendValidationEmail":{"input":{"type":"structure","required":["CertificateArn","Domain","ValidationDomain"],"members":{"CertificateArn":{},"Domain":{},"ValidationDomain":{}}},"http":{}}},"shapes":{"S7":{"type":"list","member":{}}},"paginators":{"ListCertificates":{"limit_key":"MaxItems","input_token":"NextToken","output_token":"NextToken","result_key":"CertificateSummaryList"}}};
 AWS.apiLoader.services['cloudfront'] = {};
 AWS.CloudFront = AWS.Service.defineService('cloudfront', [ '2016-01-28' ]);
 require('./services/cloudfront');
@@ -87,9 +87,9 @@ AWS.Firehose = AWS.Service.defineService('firehose', [ '2015-08-04' ]);
 
 AWS.apiLoader.services['firehose']['2015-08-04'] = {"version":"2.0","metadata":{"apiVersion":"2015-08-04","endpointPrefix":"firehose","jsonVersion":"1.1","serviceAbbreviation":"Firehose","serviceFullName":"0","signatureVersion":"v4","targetPrefix":"Firehose_20150804","protocol":"json"},"operations":{"CreateDeliveryStream":{"input":{"type":"structure","required":["DeliveryStreamName"],"members":{"DeliveryStreamName":{},"S3DestinationConfiguration":{"shape":"S3"},"RedshiftDestinationConfiguration":{"type":"structure","required":["RoleARN","ClusterJDBCURL","CopyCommand","Username","Password","S3Configuration"],"members":{"RoleARN":{},"ClusterJDBCURL":{},"CopyCommand":{"shape":"Sh"},"Username":{"shape":"Sl"},"Password":{"shape":"Sm"},"S3Configuration":{"shape":"S3"}}}}},"output":{"type":"structure","members":{"DeliveryStreamARN":{}}},"http":{}},"DeleteDeliveryStream":{"input":{"type":"structure","required":["DeliveryStreamName"],"members":{"DeliveryStreamName":{}}},"output":{"type":"structure","members":{}},"http":{}},"DescribeDeliveryStream":{"input":{"type":"structure","required":["DeliveryStreamName"],"members":{"DeliveryStreamName":{},"Limit":{"type":"integer"},"ExclusiveStartDestinationId":{}}},"output":{"type":"structure","required":["DeliveryStreamDescription"],"members":{"DeliveryStreamDescription":{"type":"structure","required":["DeliveryStreamName","DeliveryStreamARN","DeliveryStreamStatus","VersionId","Destinations","HasMoreDestinations"],"members":{"DeliveryStreamName":{},"DeliveryStreamARN":{},"DeliveryStreamStatus":{},"VersionId":{},"CreateTimestamp":{"type":"timestamp"},"LastUpdateTimestamp":{"type":"timestamp"},"Destinations":{"type":"list","member":{"type":"structure","required":["DestinationId"],"members":{"DestinationId":{},"S3DestinationDescription":{"shape":"S11"},"RedshiftDestinationDescription":{"type":"structure","required":["RoleARN","ClusterJDBCURL","CopyCommand","Username","S3DestinationDescription"],"members":{"RoleARN":{},"ClusterJDBCURL":{},"CopyCommand":{"shape":"Sh"},"Username":{"shape":"Sl"},"S3DestinationDescription":{"shape":"S11"}}}}}},"HasMoreDestinations":{"type":"boolean"}}}}},"http":{}},"ListDeliveryStreams":{"input":{"type":"structure","members":{"Limit":{"type":"integer"},"ExclusiveStartDeliveryStreamName":{}}},"output":{"type":"structure","required":["DeliveryStreamNames","HasMoreDeliveryStreams"],"members":{"DeliveryStreamNames":{"type":"list","member":{}},"HasMoreDeliveryStreams":{"type":"boolean"}}},"http":{}},"PutRecord":{"input":{"type":"structure","required":["DeliveryStreamName","Record"],"members":{"DeliveryStreamName":{},"Record":{"shape":"S19"}}},"output":{"type":"structure","required":["RecordId"],"members":{"RecordId":{}}},"http":{}},"PutRecordBatch":{"input":{"type":"structure","required":["DeliveryStreamName","Records"],"members":{"DeliveryStreamName":{},"Records":{"type":"list","member":{"shape":"S19"}}}},"output":{"type":"structure","required":["FailedPutCount","RequestResponses"],"members":{"FailedPutCount":{"type":"integer"},"RequestResponses":{"type":"list","member":{"type":"structure","members":{"RecordId":{},"ErrorCode":{},"ErrorMessage":{}}}}}},"http":{}},"UpdateDestination":{"input":{"type":"structure","required":["DeliveryStreamName","CurrentDeliveryStreamVersionId","DestinationId"],"members":{"DeliveryStreamName":{},"CurrentDeliveryStreamVersionId":{},"DestinationId":{},"S3DestinationUpdate":{"shape":"S1m"},"RedshiftDestinationUpdate":{"type":"structure","members":{"RoleARN":{},"ClusterJDBCURL":{},"CopyCommand":{"shape":"Sh"},"Username":{"shape":"Sl"},"Password":{"shape":"Sm"},"S3Update":{"shape":"S1m"}}}}},"output":{"type":"structure","members":{}},"http":{}}},"shapes":{"S3":{"type":"structure","required":["RoleARN","BucketARN"],"members":{"RoleARN":{},"BucketARN":{},"Prefix":{},"BufferingHints":{"shape":"S7"},"CompressionFormat":{},"EncryptionConfiguration":{"shape":"Sb"}}},"S7":{"type":"structure","members":{"SizeInMBs":{"type":"integer"},"IntervalInSeconds":{"type":"integer"}}},"Sb":{"type":"structure","members":{"NoEncryptionConfig":{},"KMSEncryptionConfig":{"type":"structure","required":["AWSKMSKeyARN"],"members":{"AWSKMSKeyARN":{}}}}},"Sh":{"type":"structure","required":["DataTableName"],"members":{"DataTableName":{},"DataTableColumns":{},"CopyOptions":{}}},"Sl":{"type":"string","sensitive":true},"Sm":{"type":"string","sensitive":true},"S11":{"type":"structure","required":["RoleARN","BucketARN","BufferingHints","CompressionFormat","EncryptionConfiguration"],"members":{"RoleARN":{},"BucketARN":{},"Prefix":{},"BufferingHints":{"shape":"S7"},"CompressionFormat":{},"EncryptionConfiguration":{"shape":"Sb"}}},"S19":{"type":"structure","required":["Data"],"members":{"Data":{"type":"blob"}}},"S1m":{"type":"structure","members":{"RoleARN":{},"BucketARN":{},"Prefix":{},"BufferingHints":{"shape":"S7"},"CompressionFormat":{},"EncryptionConfiguration":{"shape":"Sb"}}}},"examples":{}};
 AWS.apiLoader.services['inspector'] = {};
-AWS.Inspector = AWS.Service.defineService('inspector', [ '2015-08-18' ]);
+AWS.Inspector = AWS.Service.defineService('inspector', [ '2016-02-16' ]);
 
-AWS.apiLoader.services['inspector']['2015-08-18'] = {"version":"2.0","metadata":{"apiVersion":"2015-08-18","endpointPrefix":"inspector","jsonVersion":"1.1","serviceFullName":"Amazon Inspector","signatureVersion":"v4","targetPrefix":"InspectorService","protocol":"json"},"operations":{"AddAttributesToFindings":{"input":{"type":"structure","members":{"findingArns":{"shape":"S2"},"attributes":{"shape":"S4"}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"AttachAssessmentAndRulesPackage":{"input":{"type":"structure","members":{"assessmentArn":{},"rulesPackageArn":{}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"CreateApplication":{"input":{"type":"structure","members":{"applicationName":{},"resourceGroupArn":{}}},"output":{"type":"structure","members":{"applicationArn":{}}},"http":{}},"CreateAssessment":{"input":{"type":"structure","members":{"applicationArn":{},"assessmentName":{},"durationInSeconds":{"type":"integer"},"userAttributesForFindings":{"shape":"S4"}}},"output":{"type":"structure","members":{"assessmentArn":{}}},"http":{}},"CreateResourceGroup":{"input":{"type":"structure","members":{"resourceGroupTags":{}}},"output":{"type":"structure","members":{"resourceGroupArn":{}}},"http":{}},"DeleteApplication":{"input":{"type":"structure","members":{"applicationArn":{}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"DeleteAssessment":{"input":{"type":"structure","members":{"assessmentArn":{}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"DeleteRun":{"input":{"type":"structure","members":{"runArn":{}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"DescribeApplication":{"input":{"type":"structure","members":{"applicationArn":{}}},"output":{"type":"structure","members":{"application":{"type":"structure","members":{"applicationArn":{},"applicationName":{},"resourceGroupArn":{}}}}},"http":{}},"DescribeAssessment":{"input":{"type":"structure","members":{"assessmentArn":{}}},"output":{"type":"structure","members":{"assessment":{"type":"structure","members":{"assessmentArn":{},"assessmentName":{},"applicationArn":{},"assessmentState":{},"failureMessage":{},"dataCollected":{"type":"boolean"},"startTime":{"type":"timestamp"},"endTime":{"type":"timestamp"},"durationInSeconds":{"type":"integer"},"userAttributesForFindings":{"shape":"S4"}}}}},"http":{}},"DescribeCrossAccountAccessRole":{"output":{"type":"structure","members":{"roleArn":{},"valid":{"type":"boolean"}}},"http":{}},"DescribeFinding":{"input":{"type":"structure","members":{"findingArn":{}}},"output":{"type":"structure","members":{"finding":{"type":"structure","members":{"findingArn":{},"runArn":{},"rulesPackageArn":{},"ruleName":{},"agentId":{},"autoScalingGroup":{},"severity":{},"finding":{"shape":"S18"},"description":{"shape":"S18"},"recommendation":{"shape":"S18"},"attributes":{"shape":"S4"},"userAttributes":{"shape":"S4"}}}}},"http":{}},"DescribeResourceGroup":{"input":{"type":"structure","members":{"resourceGroupArn":{}}},"output":{"type":"structure","members":{"resourceGroup":{"type":"structure","members":{"resourceGroupArn":{},"resourceGroupTags":{}}}}},"http":{}},"DescribeRulesPackage":{"input":{"type":"structure","members":{"rulesPackageArn":{}}},"output":{"type":"structure","members":{"rulesPackage":{"type":"structure","members":{"rulesPackageArn":{},"rulesPackageName":{},"version":{},"provider":{},"description":{"shape":"S18"}}}}},"http":{}},"DescribeRun":{"input":{"type":"structure","members":{"runArn":{}}},"output":{"type":"structure","members":{"run":{"type":"structure","members":{"runArn":{},"runName":{},"assessmentArn":{},"runState":{},"rulesPackages":{"shape":"S2"},"creationTime":{"type":"timestamp"},"completionTime":{"type":"timestamp"}}}}},"http":{}},"DetachAssessmentAndRulesPackage":{"input":{"type":"structure","members":{"assessmentArn":{},"rulesPackageArn":{}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"GetAssessmentTelemetry":{"input":{"type":"structure","members":{"assessmentArn":{}}},"output":{"type":"structure","members":{"telemetry":{"shape":"S1v"}}},"http":{}},"ListApplications":{"input":{"type":"structure","members":{"filter":{"type":"structure","members":{"applicationNamePatterns":{"shape":"S24"}}},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"applicationArnList":{"shape":"S2"},"nextToken":{}}},"http":{}},"ListAssessmentAgents":{"input":{"type":"structure","members":{"assessmentArn":{},"filter":{"type":"structure","members":{"agentHealthList":{"type":"list","member":{}}}},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"agentList":{"type":"list","member":{"type":"structure","members":{"agentId":{},"assessmentArn":{},"agentHealth":{},"agentHealthCode":{},"agentHealthDetails":{},"autoScalingGroup":{},"accountId":{},"telemetry":{"shape":"S1v"}}}},"nextToken":{}}},"http":{}},"ListAssessments":{"input":{"type":"structure","members":{"applicationArns":{"shape":"S2"},"filter":{"shape":"S2k"},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"assessmentArnList":{"shape":"S2"},"nextToken":{}}},"http":{}},"ListAttachedAssessments":{"input":{"type":"structure","members":{"rulesPackageArn":{},"filter":{"shape":"S2k"},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"assessmentArnList":{"shape":"S2"},"nextToken":{}}},"http":{}},"ListAttachedRulesPackages":{"input":{"type":"structure","members":{"assessmentArn":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"rulesPackageArnList":{"shape":"S2"},"nextToken":{}}},"http":{}},"ListFindings":{"input":{"type":"structure","members":{"runArns":{"shape":"S2"},"filter":{"type":"structure","members":{"rulesPackageArns":{"shape":"S2"},"ruleNames":{"type":"list","member":{}},"severities":{"type":"list","member":{}},"attributes":{"shape":"S4"},"userAttributes":{"shape":"S4"}}},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"findingArnList":{"shape":"S2"},"nextToken":{}}},"http":{}},"ListRulesPackages":{"input":{"type":"structure","members":{"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"rulesPackageArnList":{"shape":"S2"},"nextToken":{}}},"http":{}},"ListRuns":{"input":{"type":"structure","members":{"assessmentArns":{"shape":"S2"},"filter":{"type":"structure","members":{"runNamePatterns":{"shape":"S24"},"runStates":{"type":"list","member":{}},"rulesPackages":{"shape":"S2"},"creationTime":{"shape":"S2m"},"completionTime":{"shape":"S2m"}}},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"runArnList":{"shape":"S2"},"nextToken":{}}},"http":{}},"ListTagsForResource":{"input":{"type":"structure","members":{"resourceArn":{}}},"output":{"type":"structure","members":{"tagList":{"shape":"S36"}}},"http":{}},"LocalizeText":{"input":{"type":"structure","members":{"localizedTexts":{"type":"list","member":{"shape":"S18"}},"locale":{}}},"output":{"type":"structure","members":{"message":{},"results":{"type":"list","member":{}}}},"http":{}},"PreviewAgentsForResourceGroup":{"input":{"type":"structure","members":{"resourceGroupArn":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"agentPreviewList":{"type":"list","member":{"type":"structure","members":{"agentId":{},"autoScalingGroup":{}}}},"nextToken":{}}},"http":{}},"RegisterCrossAccountAccessRole":{"input":{"type":"structure","members":{"roleArn":{}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"RemoveAttributesFromFindings":{"input":{"type":"structure","members":{"findingArns":{"shape":"S2"},"attributeKeys":{"type":"list","member":{}}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"RunAssessment":{"input":{"type":"structure","members":{"assessmentArn":{},"runName":{}}},"output":{"type":"structure","members":{"runArn":{}}},"http":{}},"SetTagsForResource":{"input":{"type":"structure","members":{"resourceArn":{},"tags":{"shape":"S36"}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"StartDataCollection":{"input":{"type":"structure","members":{"assessmentArn":{}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"StopDataCollection":{"input":{"type":"structure","members":{"assessmentArn":{}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"UpdateApplication":{"input":{"type":"structure","members":{"applicationArn":{},"applicationName":{},"resourceGroupArn":{}}},"output":{"type":"structure","members":{"message":{}}},"http":{}},"UpdateAssessment":{"input":{"type":"structure","members":{"assessmentArn":{},"assessmentName":{},"durationInSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"message":{}}},"http":{}}},"shapes":{"S2":{"type":"list","member":{}},"S4":{"type":"list","member":{"type":"structure","members":{"key":{},"value":{}}}},"S18":{"type":"structure","members":{"key":{"type":"structure","members":{"facility":{},"id":{}}},"parameters":{"type":"list","member":{"type":"structure","members":{"name":{},"value":{}}}}}},"S1v":{"type":"list","member":{"type":"structure","members":{"status":{},"messageTypeTelemetries":{"type":"list","member":{"type":"structure","members":{"messageType":{},"count":{"type":"long"},"dataSize":{"type":"long"}}}}}}},"S24":{"type":"list","member":{}},"S2k":{"type":"structure","members":{"assessmentNamePatterns":{"shape":"S24"},"assessmentStates":{"type":"list","member":{}},"dataCollected":{"type":"boolean"},"startTimeRange":{"shape":"S2m"},"endTimeRange":{"shape":"S2m"},"durationRange":{"type":"structure","members":{"minimum":{"type":"integer"},"maximum":{"type":"integer"}}}}},"S2m":{"type":"structure","members":{"minimum":{"type":"timestamp"},"maximum":{"type":"timestamp"}}},"S36":{"type":"list","member":{"type":"structure","members":{"Key":{},"Value":{}}}}},"examples":{}};
+AWS.apiLoader.services['inspector']['2016-02-16'] = {"version":"2.0","metadata":{"apiVersion":"2016-02-16","endpointPrefix":"inspector","jsonVersion":"1.1","protocol":"json","serviceFullName":"Amazon Inspector","signatureVersion":"v4","targetPrefix":"InspectorService"},"operations":{"AddAttributesToFindings":{"input":{"type":"structure","required":["findingArns","attributes"],"members":{"findingArns":{"shape":"S2"},"attributes":{"shape":"S4"}}},"output":{"type":"structure","required":["failedItems"],"members":{"failedItems":{"shape":"S9"}}},"http":{}},"CreateAssessmentTarget":{"input":{"type":"structure","required":["assessmentTargetName","resourceGroupArn"],"members":{"assessmentTargetName":{},"resourceGroupArn":{}}},"output":{"type":"structure","required":["assessmentTargetArn"],"members":{"assessmentTargetArn":{}}},"http":{}},"CreateAssessmentTemplate":{"input":{"type":"structure","required":["assessmentTargetArn","assessmentTemplateName","durationInSeconds","rulesPackageArns"],"members":{"assessmentTargetArn":{},"assessmentTemplateName":{},"durationInSeconds":{"type":"integer"},"rulesPackageArns":{"shape":"Sj"},"userAttributesForFindings":{"shape":"S4"}}},"output":{"type":"structure","required":["assessmentTemplateArn"],"members":{"assessmentTemplateArn":{}}},"http":{}},"CreateResourceGroup":{"input":{"type":"structure","required":["resourceGroupTags"],"members":{"resourceGroupTags":{"shape":"Sm"}}},"output":{"type":"structure","required":["resourceGroupArn"],"members":{"resourceGroupArn":{}}},"http":{}},"DeleteAssessmentRun":{"input":{"type":"structure","required":["assessmentRunArn"],"members":{"assessmentRunArn":{}}},"http":{}},"DeleteAssessmentTarget":{"input":{"type":"structure","required":["assessmentTargetArn"],"members":{"assessmentTargetArn":{}}},"http":{}},"DeleteAssessmentTemplate":{"input":{"type":"structure","required":["assessmentTemplateArn"],"members":{"assessmentTemplateArn":{}}},"http":{}},"DescribeAssessmentRuns":{"input":{"type":"structure","required":["assessmentRunArns"],"members":{"assessmentRunArns":{"shape":"Sv"}}},"output":{"type":"structure","required":["assessmentRuns","failedItems"],"members":{"assessmentRuns":{"type":"list","member":{"type":"structure","required":["arn","name","assessmentTemplateArn","state","durationInSeconds","rulesPackageArns","userAttributesForFindings","createdAt","stateChangedAt","dataCollected","stateChanges","notifications"],"members":{"arn":{},"name":{},"assessmentTemplateArn":{},"state":{},"durationInSeconds":{"type":"integer"},"rulesPackageArns":{"type":"list","member":{}},"userAttributesForFindings":{"shape":"S4"},"createdAt":{"type":"timestamp"},"startedAt":{"type":"timestamp"},"completedAt":{"type":"timestamp"},"stateChangedAt":{"type":"timestamp"},"dataCollected":{"type":"boolean"},"stateChanges":{"type":"list","member":{"type":"structure","required":["stateChangedAt","state"],"members":{"stateChangedAt":{"type":"timestamp"},"state":{}}}},"notifications":{"type":"list","member":{"type":"structure","required":["date","event","error"],"members":{"date":{"type":"timestamp"},"event":{},"message":{},"error":{"type":"boolean"},"snsTopicArn":{},"snsPublishStatusCode":{}}}}}}},"failedItems":{"shape":"S9"}}},"http":{}},"DescribeAssessmentTargets":{"input":{"type":"structure","required":["assessmentTargetArns"],"members":{"assessmentTargetArns":{"shape":"Sv"}}},"output":{"type":"structure","required":["assessmentTargets","failedItems"],"members":{"assessmentTargets":{"type":"list","member":{"type":"structure","required":["arn","name","resourceGroupArn","createdAt","updatedAt"],"members":{"arn":{},"name":{},"resourceGroupArn":{},"createdAt":{"type":"timestamp"},"updatedAt":{"type":"timestamp"}}}},"failedItems":{"shape":"S9"}}},"http":{}},"DescribeAssessmentTemplates":{"input":{"type":"structure","required":["assessmentTemplateArns"],"members":{"assessmentTemplateArns":{"shape":"Sv"}}},"output":{"type":"structure","required":["assessmentTemplates","failedItems"],"members":{"assessmentTemplates":{"type":"list","member":{"type":"structure","required":["arn","name","assessmentTargetArn","durationInSeconds","rulesPackageArns","userAttributesForFindings","createdAt"],"members":{"arn":{},"name":{},"assessmentTargetArn":{},"durationInSeconds":{"type":"integer"},"rulesPackageArns":{"shape":"Sj"},"userAttributesForFindings":{"shape":"S4"},"createdAt":{"type":"timestamp"}}}},"failedItems":{"shape":"S9"}}},"http":{}},"DescribeCrossAccountAccessRole":{"output":{"type":"structure","required":["roleArn","valid","registeredAt"],"members":{"roleArn":{},"valid":{"type":"boolean"},"registeredAt":{"type":"timestamp"}}},"http":{}},"DescribeFindings":{"input":{"type":"structure","required":["findingArns"],"members":{"findingArns":{"shape":"Sv"},"locale":{}}},"output":{"type":"structure","required":["findings","failedItems"],"members":{"findings":{"type":"list","member":{"type":"structure","required":["arn","attributes","userAttributes","createdAt","updatedAt"],"members":{"arn":{},"schemaVersion":{"type":"integer"},"service":{},"serviceAttributes":{"type":"structure","required":["schemaVersion"],"members":{"schemaVersion":{"type":"integer"},"assessmentRunArn":{},"rulesPackageArn":{}}},"assetType":{},"assetAttributes":{"type":"structure","required":["schemaVersion"],"members":{"schemaVersion":{"type":"integer"},"agentId":{},"autoScalingGroup":{},"amiId":{},"hostname":{},"ipv4Addresses":{"type":"list","member":{}}}},"id":{},"title":{},"description":{},"recommendation":{},"severity":{},"numericSeverity":{"type":"double"},"confidence":{"type":"integer"},"indicatorOfCompromise":{"type":"boolean"},"attributes":{"shape":"S24"},"userAttributes":{"shape":"S4"},"createdAt":{"type":"timestamp"},"updatedAt":{"type":"timestamp"}}}},"failedItems":{"shape":"S9"}}},"http":{}},"DescribeResourceGroups":{"input":{"type":"structure","required":["resourceGroupArns"],"members":{"resourceGroupArns":{"shape":"Sv"}}},"output":{"type":"structure","required":["resourceGroups","failedItems"],"members":{"resourceGroups":{"type":"list","member":{"type":"structure","required":["arn","tags","createdAt"],"members":{"arn":{},"tags":{"shape":"Sm"},"createdAt":{"type":"timestamp"}}}},"failedItems":{"shape":"S9"}}},"http":{}},"DescribeRulesPackages":{"input":{"type":"structure","required":["rulesPackageArns"],"members":{"rulesPackageArns":{"shape":"Sv"},"locale":{}}},"output":{"type":"structure","required":["rulesPackages","failedItems"],"members":{"rulesPackages":{"type":"list","member":{"type":"structure","required":["arn","name","version","provider"],"members":{"arn":{},"name":{},"version":{},"provider":{},"description":{}}}},"failedItems":{"shape":"S9"}}},"http":{}},"GetTelemetryMetadata":{"input":{"type":"structure","required":["assessmentRunArn"],"members":{"assessmentRunArn":{}}},"output":{"type":"structure","required":["telemetryMetadata"],"members":{"telemetryMetadata":{"shape":"S2i"}}},"http":{}},"ListAssessmentRunAgents":{"input":{"type":"structure","required":["assessmentRunArn"],"members":{"assessmentRunArn":{},"filter":{"type":"structure","required":["agentHealths","agentHealthCodes"],"members":{"agentHealths":{"type":"list","member":{}},"agentHealthCodes":{"type":"list","member":{}}}},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","required":["assessmentRunAgents"],"members":{"assessmentRunAgents":{"type":"list","member":{"type":"structure","required":["agentId","assessmentRunArn","agentHealth","agentHealthCode","telemetryMetadata"],"members":{"agentId":{},"assessmentRunArn":{},"agentHealth":{},"agentHealthCode":{},"agentHealthDetails":{},"autoScalingGroup":{},"telemetryMetadata":{"shape":"S2i"}}}},"nextToken":{}}},"http":{}},"ListAssessmentRuns":{"input":{"type":"structure","members":{"assessmentTemplateArns":{"shape":"S2y"},"filter":{"type":"structure","members":{"namePattern":{},"states":{"type":"list","member":{}},"durationRange":{"shape":"S32"},"rulesPackageArns":{"shape":"S33"},"startTimeRange":{"shape":"S34"},"completionTimeRange":{"shape":"S34"},"stateChangeTimeRange":{"shape":"S34"}}},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","required":["assessmentRunArns"],"members":{"assessmentRunArns":{"shape":"S36"},"nextToken":{}}},"http":{}},"ListAssessmentTargets":{"input":{"type":"structure","members":{"filter":{"type":"structure","members":{"assessmentTargetNamePattern":{}}},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","required":["assessmentTargetArns"],"members":{"assessmentTargetArns":{"shape":"S36"},"nextToken":{}}},"http":{}},"ListAssessmentTemplates":{"input":{"type":"structure","members":{"assessmentTargetArns":{"shape":"S2y"},"filter":{"type":"structure","members":{"namePattern":{},"durationRange":{"shape":"S32"},"rulesPackageArns":{"shape":"S33"}}},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","required":["assessmentTemplateArns"],"members":{"assessmentTemplateArns":{"shape":"S36"},"nextToken":{}}},"http":{}},"ListEventSubscriptions":{"input":{"type":"structure","members":{"resourceArn":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","required":["subscriptions"],"members":{"subscriptions":{"type":"list","member":{"type":"structure","required":["resourceArn","topicArn","eventSubscriptions"],"members":{"resourceArn":{},"topicArn":{},"eventSubscriptions":{"type":"list","member":{"type":"structure","required":["event","subscribedAt"],"members":{"event":{},"subscribedAt":{"type":"timestamp"}}}}}}},"nextToken":{}}},"http":{}},"ListFindings":{"input":{"type":"structure","members":{"assessmentRunArns":{"shape":"S2y"},"filter":{"type":"structure","members":{"agentIds":{"type":"list","member":{}},"autoScalingGroups":{"type":"list","member":{}},"ruleNames":{"type":"list","member":{}},"severities":{"type":"list","member":{}},"rulesPackageArns":{"shape":"S33"},"attributes":{"shape":"S24"},"userAttributes":{"shape":"S24"},"creationTimeRange":{"shape":"S34"}}},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","required":["findingArns"],"members":{"findingArns":{"shape":"S36"},"nextToken":{}}},"http":{}},"ListRulesPackages":{"input":{"type":"structure","members":{"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","required":["rulesPackageArns"],"members":{"rulesPackageArns":{"shape":"S36"},"nextToken":{}}},"http":{}},"ListTagsForResource":{"input":{"type":"structure","required":["resourceArn"],"members":{"resourceArn":{}}},"output":{"type":"structure","required":["tags"],"members":{"tags":{"shape":"S3w"}}},"http":{}},"PreviewAgents":{"input":{"type":"structure","required":["previewAgentsArn"],"members":{"previewAgentsArn":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","required":["agentPreviews"],"members":{"agentPreviews":{"type":"list","member":{"type":"structure","required":["agentId"],"members":{"agentId":{},"autoScalingGroup":{}}}},"nextToken":{}}},"http":{}},"RegisterCrossAccountAccessRole":{"input":{"type":"structure","required":["roleArn"],"members":{"roleArn":{}}},"http":{}},"RemoveAttributesFromFindings":{"input":{"type":"structure","required":["findingArns","attributeKeys"],"members":{"findingArns":{"shape":"S2"},"attributeKeys":{"type":"list","member":{}}}},"output":{"type":"structure","required":["failedItems"],"members":{"failedItems":{"shape":"S9"}}},"http":{}},"SetTagsForResource":{"input":{"type":"structure","required":["resourceArn"],"members":{"resourceArn":{},"tags":{"shape":"S3w"}}},"http":{}},"StartAssessmentRun":{"input":{"type":"structure","required":["assessmentTemplateArn"],"members":{"assessmentTemplateArn":{},"assessmentRunName":{}}},"output":{"type":"structure","required":["assessmentRunArn"],"members":{"assessmentRunArn":{}}},"http":{}},"StopAssessmentRun":{"input":{"type":"structure","required":["assessmentRunArn"],"members":{"assessmentRunArn":{}}},"http":{}},"SubscribeToEvent":{"input":{"type":"structure","required":["resourceArn","event","topicArn"],"members":{"resourceArn":{},"event":{},"topicArn":{}}},"http":{}},"UnsubscribeFromEvent":{"input":{"type":"structure","required":["resourceArn","event","topicArn"],"members":{"resourceArn":{},"event":{},"topicArn":{}}},"http":{}},"UpdateAssessmentTarget":{"input":{"type":"structure","required":["assessmentTargetArn","assessmentTargetName","resourceGroupArn"],"members":{"assessmentTargetArn":{},"assessmentTargetName":{},"resourceGroupArn":{}}},"http":{}}},"shapes":{"S2":{"type":"list","member":{}},"S4":{"type":"list","member":{"shape":"S5"}},"S5":{"type":"structure","required":["key"],"members":{"key":{},"value":{}}},"S9":{"type":"map","key":{},"value":{"type":"structure","required":["failureCode","retryable"],"members":{"failureCode":{},"retryable":{"type":"boolean"}}}},"Sj":{"type":"list","member":{}},"Sm":{"type":"list","member":{"type":"structure","required":["key"],"members":{"key":{},"value":{}}}},"Sv":{"type":"list","member":{}},"S24":{"type":"list","member":{"shape":"S5"}},"S2i":{"type":"list","member":{"type":"structure","required":["messageType","count"],"members":{"messageType":{},"count":{"type":"long"},"dataSize":{"type":"long"}}}},"S2y":{"type":"list","member":{}},"S32":{"type":"structure","members":{"minSeconds":{"type":"integer"},"maxSeconds":{"type":"integer"}}},"S33":{"type":"list","member":{}},"S34":{"type":"structure","members":{"beginDate":{"type":"timestamp"},"endDate":{"type":"timestamp"}}},"S36":{"type":"list","member":{}},"S3w":{"type":"list","member":{"type":"structure","required":["key"],"members":{"key":{},"value":{}}}}}};
 AWS.apiLoader.services['kinesis'] = {};
 AWS.Kinesis = AWS.Service.defineService('kinesis', [ '2013-12-02' ]);
 
@@ -158,7 +158,7 @@ AWS.apiLoader.services['sts']['2011-06-15'] = {"version":"2.0","metadata":{"apiV
 AWS.apiLoader.services['waf'] = {};
 AWS.WAF = AWS.Service.defineService('waf', [ '2015-08-24' ]);
 
-AWS.apiLoader.services['waf']['2015-08-24'] = {"version":"2.0","metadata":{"apiVersion":"2015-08-24","endpointPrefix":"waf","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"WAF","serviceFullName":"AWS WAF","signatureVersion":"v4","targetPrefix":"AWSWAF_20150824"},"operations":{"CreateByteMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"},"ChangeToken":{}}},"http":{}},"CreateIPSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"},"ChangeToken":{}}},"http":{}},"CreateRule":{"input":{"type":"structure","required":["Name","MetricName","ChangeToken"],"members":{"Name":{},"MetricName":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"},"ChangeToken":{}}},"http":{}},"CreateSizeConstraintSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"SizeConstraintSet":{"shape":"Sw"},"ChangeToken":{}}},"http":{}},"CreateSqlInjectionMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"S13"},"ChangeToken":{}}},"http":{}},"CreateWebACL":{"input":{"type":"structure","required":["Name","MetricName","DefaultAction","ChangeToken"],"members":{"Name":{},"MetricName":{},"DefaultAction":{"shape":"S17"},"ChangeToken":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S1a"},"ChangeToken":{}}},"http":{}},"DeleteByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken"],"members":{"ByteMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken"],"members":{"IPSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteRule":{"input":{"type":"structure","required":["RuleId","ChangeToken"],"members":{"RuleId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId","ChangeToken"],"members":{"SizeConstraintSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId"],"members":{"ByteMatchSetId":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"}}},"http":{}},"GetChangeToken":{"input":{"type":"structure","members":{}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetChangeTokenStatus":{"input":{"type":"structure","required":["ChangeToken"],"members":{"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeTokenStatus":{}}},"http":{}},"GetIPSet":{"input":{"type":"structure","required":["IPSetId"],"members":{"IPSetId":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"}}},"http":{}},"GetRule":{"input":{"type":"structure","required":["RuleId"],"members":{"RuleId":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"}}},"http":{}},"GetSampledRequests":{"input":{"type":"structure","required":["WebAclId","RuleId","TimeWindow","MaxItems"],"members":{"WebAclId":{},"RuleId":{},"TimeWindow":{"shape":"S22"},"MaxItems":{"type":"long"}}},"output":{"type":"structure","members":{"SampledRequests":{"type":"list","member":{"type":"structure","required":["Request","Weight"],"members":{"Request":{"type":"structure","members":{"ClientIP":{},"Country":{},"URI":{},"Method":{},"HTTPVersion":{},"Headers":{"type":"list","member":{"type":"structure","members":{"Name":{},"Value":{}}}}}},"Weight":{"type":"long"},"Timestamp":{"type":"timestamp"},"Action":{}}}},"PopulationSize":{"type":"long"},"TimeWindow":{"shape":"S22"}}},"http":{}},"GetSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId"],"members":{"SizeConstraintSetId":{}}},"output":{"type":"structure","members":{"SizeConstraintSet":{"shape":"Sw"}}},"http":{}},"GetSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId"],"members":{"SqlInjectionMatchSetId":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"S13"}}},"http":{}},"GetWebACL":{"input":{"type":"structure","required":["WebACLId"],"members":{"WebACLId":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S1a"}}},"http":{}},"ListByteMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"ByteMatchSets":{"type":"list","member":{"type":"structure","required":["ByteMatchSetId","Name"],"members":{"ByteMatchSetId":{},"Name":{}}}}}},"http":{}},"ListIPSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"IPSets":{"type":"list","member":{"type":"structure","required":["IPSetId","Name"],"members":{"IPSetId":{},"Name":{}}}}}},"http":{}},"ListRules":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"Rules":{"type":"list","member":{"type":"structure","required":["RuleId","Name"],"members":{"RuleId":{},"Name":{}}}}}},"http":{}},"ListSizeConstraintSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"SizeConstraintSets":{"type":"list","member":{"type":"structure","required":["SizeConstraintSetId","Name"],"members":{"SizeConstraintSetId":{},"Name":{}}}}}},"http":{}},"ListSqlInjectionMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"SqlInjectionMatchSets":{"type":"list","member":{"type":"structure","required":["SqlInjectionMatchSetId","Name"],"members":{"SqlInjectionMatchSetId":{},"Name":{}}}}}},"http":{}},"ListWebACLs":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"WebACLs":{"type":"list","member":{"type":"structure","required":["WebACLId","Name"],"members":{"WebACLId":{},"Name":{}}}}}},"http":{}},"UpdateByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken","Updates"],"members":{"ByteMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ByteMatchTuple"],"members":{"Action":{},"ByteMatchTuple":{"shape":"S8"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken","Updates"],"members":{"IPSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","IPSetDescriptor"],"members":{"Action":{},"IPSetDescriptor":{"shape":"Sj"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateRule":{"input":{"type":"structure","required":["RuleId","ChangeToken","Updates"],"members":{"RuleId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","Predicate"],"members":{"Action":{},"Predicate":{"shape":"Sr"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId","ChangeToken","Updates"],"members":{"SizeConstraintSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","SizeConstraint"],"members":{"Action":{},"SizeConstraint":{"shape":"Sy"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken","Updates"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","SqlInjectionMatchTuple"],"members":{"Action":{},"SqlInjectionMatchTuple":{"shape":"S15"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ActivatedRule"],"members":{"Action":{},"ActivatedRule":{"shape":"S1c"}}}},"DefaultAction":{"shape":"S17"}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}}},"shapes":{"S5":{"type":"structure","required":["ByteMatchSetId","ByteMatchTuples"],"members":{"ByteMatchSetId":{},"Name":{},"ByteMatchTuples":{"type":"list","member":{"shape":"S8"}}}},"S8":{"type":"structure","required":["FieldToMatch","TargetString","TextTransformation","PositionalConstraint"],"members":{"FieldToMatch":{"shape":"S9"},"TargetString":{"type":"blob"},"TextTransformation":{},"PositionalConstraint":{}}},"S9":{"type":"structure","required":["Type"],"members":{"Type":{},"Data":{}}},"Sh":{"type":"structure","required":["IPSetId","IPSetDescriptors"],"members":{"IPSetId":{},"Name":{},"IPSetDescriptors":{"type":"list","member":{"shape":"Sj"}}}},"Sj":{"type":"structure","required":["Type","Value"],"members":{"Type":{},"Value":{}}},"Sp":{"type":"structure","required":["RuleId","Predicates"],"members":{"RuleId":{},"Name":{},"MetricName":{},"Predicates":{"type":"list","member":{"shape":"Sr"}}}},"Sr":{"type":"structure","required":["Negated","Type","DataId"],"members":{"Negated":{"type":"boolean"},"Type":{},"DataId":{}}},"Sw":{"type":"structure","required":["SizeConstraintSetId","SizeConstraints"],"members":{"SizeConstraintSetId":{},"Name":{},"SizeConstraints":{"type":"list","member":{"shape":"Sy"}}}},"Sy":{"type":"structure","required":["FieldToMatch","TextTransformation","ComparisonOperator","Size"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{},"ComparisonOperator":{},"Size":{"type":"long"}}},"S13":{"type":"structure","required":["SqlInjectionMatchSetId","SqlInjectionMatchTuples"],"members":{"SqlInjectionMatchSetId":{},"Name":{},"SqlInjectionMatchTuples":{"type":"list","member":{"shape":"S15"}}}},"S15":{"type":"structure","required":["FieldToMatch","TextTransformation"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{}}},"S17":{"type":"structure","required":["Type"],"members":{"Type":{}}},"S1a":{"type":"structure","required":["WebACLId","DefaultAction","Rules"],"members":{"WebACLId":{},"Name":{},"MetricName":{},"DefaultAction":{"shape":"S17"},"Rules":{"type":"list","member":{"shape":"S1c"}}}},"S1c":{"type":"structure","required":["Priority","RuleId","Action"],"members":{"Priority":{"type":"integer"},"RuleId":{},"Action":{"shape":"S17"}}},"S22":{"type":"structure","required":["StartTime","EndTime"],"members":{"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"}}}}};
+AWS.apiLoader.services['waf']['2015-08-24'] = {"version":"2.0","metadata":{"apiVersion":"2015-08-24","endpointPrefix":"waf","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"WAF","serviceFullName":"AWS WAF","signatureVersion":"v4","targetPrefix":"AWSWAF_20150824"},"operations":{"CreateByteMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"},"ChangeToken":{}}},"http":{}},"CreateIPSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"},"ChangeToken":{}}},"http":{}},"CreateRule":{"input":{"type":"structure","required":["Name","MetricName","ChangeToken"],"members":{"Name":{},"MetricName":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"},"ChangeToken":{}}},"http":{}},"CreateSizeConstraintSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"SizeConstraintSet":{"shape":"Sw"},"ChangeToken":{}}},"http":{}},"CreateSqlInjectionMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"S13"},"ChangeToken":{}}},"http":{}},"CreateWebACL":{"input":{"type":"structure","required":["Name","MetricName","DefaultAction","ChangeToken"],"members":{"Name":{},"MetricName":{},"DefaultAction":{"shape":"S17"},"ChangeToken":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S1a"},"ChangeToken":{}}},"http":{}},"CreateXssMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"XssMatchSet":{"shape":"S1g"},"ChangeToken":{}}},"http":{}},"DeleteByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken"],"members":{"ByteMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken"],"members":{"IPSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteRule":{"input":{"type":"structure","required":["RuleId","ChangeToken"],"members":{"RuleId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId","ChangeToken"],"members":{"SizeConstraintSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteXssMatchSet":{"input":{"type":"structure","required":["XssMatchSetId","ChangeToken"],"members":{"XssMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId"],"members":{"ByteMatchSetId":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"}}},"http":{}},"GetChangeToken":{"input":{"type":"structure","members":{}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetChangeTokenStatus":{"input":{"type":"structure","required":["ChangeToken"],"members":{"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeTokenStatus":{}}},"http":{}},"GetIPSet":{"input":{"type":"structure","required":["IPSetId"],"members":{"IPSetId":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"}}},"http":{}},"GetRule":{"input":{"type":"structure","required":["RuleId"],"members":{"RuleId":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"}}},"http":{}},"GetSampledRequests":{"input":{"type":"structure","required":["WebAclId","RuleId","TimeWindow","MaxItems"],"members":{"WebAclId":{},"RuleId":{},"TimeWindow":{"shape":"S29"},"MaxItems":{"type":"long"}}},"output":{"type":"structure","members":{"SampledRequests":{"type":"list","member":{"type":"structure","required":["Request","Weight"],"members":{"Request":{"type":"structure","members":{"ClientIP":{},"Country":{},"URI":{},"Method":{},"HTTPVersion":{},"Headers":{"type":"list","member":{"type":"structure","members":{"Name":{},"Value":{}}}}}},"Weight":{"type":"long"},"Timestamp":{"type":"timestamp"},"Action":{}}}},"PopulationSize":{"type":"long"},"TimeWindow":{"shape":"S29"}}},"http":{}},"GetSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId"],"members":{"SizeConstraintSetId":{}}},"output":{"type":"structure","members":{"SizeConstraintSet":{"shape":"Sw"}}},"http":{}},"GetSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId"],"members":{"SqlInjectionMatchSetId":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"S13"}}},"http":{}},"GetWebACL":{"input":{"type":"structure","required":["WebACLId"],"members":{"WebACLId":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S1a"}}},"http":{}},"GetXssMatchSet":{"input":{"type":"structure","required":["XssMatchSetId"],"members":{"XssMatchSetId":{}}},"output":{"type":"structure","members":{"XssMatchSet":{"shape":"S1g"}}},"http":{}},"ListByteMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"ByteMatchSets":{"type":"list","member":{"type":"structure","required":["ByteMatchSetId","Name"],"members":{"ByteMatchSetId":{},"Name":{}}}}}},"http":{}},"ListIPSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"IPSets":{"type":"list","member":{"type":"structure","required":["IPSetId","Name"],"members":{"IPSetId":{},"Name":{}}}}}},"http":{}},"ListRules":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"Rules":{"type":"list","member":{"type":"structure","required":["RuleId","Name"],"members":{"RuleId":{},"Name":{}}}}}},"http":{}},"ListSizeConstraintSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"SizeConstraintSets":{"type":"list","member":{"type":"structure","required":["SizeConstraintSetId","Name"],"members":{"SizeConstraintSetId":{},"Name":{}}}}}},"http":{}},"ListSqlInjectionMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"SqlInjectionMatchSets":{"type":"list","member":{"type":"structure","required":["SqlInjectionMatchSetId","Name"],"members":{"SqlInjectionMatchSetId":{},"Name":{}}}}}},"http":{}},"ListWebACLs":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"WebACLs":{"type":"list","member":{"type":"structure","required":["WebACLId","Name"],"members":{"WebACLId":{},"Name":{}}}}}},"http":{}},"ListXssMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"XssMatchSets":{"type":"list","member":{"type":"structure","required":["XssMatchSetId","Name"],"members":{"XssMatchSetId":{},"Name":{}}}}}},"http":{}},"UpdateByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken","Updates"],"members":{"ByteMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ByteMatchTuple"],"members":{"Action":{},"ByteMatchTuple":{"shape":"S8"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken","Updates"],"members":{"IPSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","IPSetDescriptor"],"members":{"Action":{},"IPSetDescriptor":{"shape":"Sj"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateRule":{"input":{"type":"structure","required":["RuleId","ChangeToken","Updates"],"members":{"RuleId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","Predicate"],"members":{"Action":{},"Predicate":{"shape":"Sr"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId","ChangeToken","Updates"],"members":{"SizeConstraintSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","SizeConstraint"],"members":{"Action":{},"SizeConstraint":{"shape":"Sy"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken","Updates"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","SqlInjectionMatchTuple"],"members":{"Action":{},"SqlInjectionMatchTuple":{"shape":"S15"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ActivatedRule"],"members":{"Action":{},"ActivatedRule":{"shape":"S1c"}}}},"DefaultAction":{"shape":"S17"}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateXssMatchSet":{"input":{"type":"structure","required":["XssMatchSetId","ChangeToken","Updates"],"members":{"XssMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","XssMatchTuple"],"members":{"Action":{},"XssMatchTuple":{"shape":"S1i"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}}},"shapes":{"S5":{"type":"structure","required":["ByteMatchSetId","ByteMatchTuples"],"members":{"ByteMatchSetId":{},"Name":{},"ByteMatchTuples":{"type":"list","member":{"shape":"S8"}}}},"S8":{"type":"structure","required":["FieldToMatch","TargetString","TextTransformation","PositionalConstraint"],"members":{"FieldToMatch":{"shape":"S9"},"TargetString":{"type":"blob"},"TextTransformation":{},"PositionalConstraint":{}}},"S9":{"type":"structure","required":["Type"],"members":{"Type":{},"Data":{}}},"Sh":{"type":"structure","required":["IPSetId","IPSetDescriptors"],"members":{"IPSetId":{},"Name":{},"IPSetDescriptors":{"type":"list","member":{"shape":"Sj"}}}},"Sj":{"type":"structure","required":["Type","Value"],"members":{"Type":{},"Value":{}}},"Sp":{"type":"structure","required":["RuleId","Predicates"],"members":{"RuleId":{},"Name":{},"MetricName":{},"Predicates":{"type":"list","member":{"shape":"Sr"}}}},"Sr":{"type":"structure","required":["Negated","Type","DataId"],"members":{"Negated":{"type":"boolean"},"Type":{},"DataId":{}}},"Sw":{"type":"structure","required":["SizeConstraintSetId","SizeConstraints"],"members":{"SizeConstraintSetId":{},"Name":{},"SizeConstraints":{"type":"list","member":{"shape":"Sy"}}}},"Sy":{"type":"structure","required":["FieldToMatch","TextTransformation","ComparisonOperator","Size"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{},"ComparisonOperator":{},"Size":{"type":"long"}}},"S13":{"type":"structure","required":["SqlInjectionMatchSetId","SqlInjectionMatchTuples"],"members":{"SqlInjectionMatchSetId":{},"Name":{},"SqlInjectionMatchTuples":{"type":"list","member":{"shape":"S15"}}}},"S15":{"type":"structure","required":["FieldToMatch","TextTransformation"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{}}},"S17":{"type":"structure","required":["Type"],"members":{"Type":{}}},"S1a":{"type":"structure","required":["WebACLId","DefaultAction","Rules"],"members":{"WebACLId":{},"Name":{},"MetricName":{},"DefaultAction":{"shape":"S17"},"Rules":{"type":"list","member":{"shape":"S1c"}}}},"S1c":{"type":"structure","required":["Priority","RuleId","Action"],"members":{"Priority":{"type":"integer"},"RuleId":{},"Action":{"shape":"S17"}}},"S1g":{"type":"structure","required":["XssMatchSetId","XssMatchTuples"],"members":{"XssMatchSetId":{},"Name":{},"XssMatchTuples":{"type":"list","member":{"shape":"S1i"}}}},"S1i":{"type":"structure","required":["FieldToMatch","TextTransformation"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{}}},"S29":{"type":"structure","required":["StartTime","EndTime"],"members":{"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"}}}}};
 
 },{"./core":4,"./http/xhr":18,"./services/cloudfront":42,"./services/cognitoidentity":43,"./services/dynamodb":44,"./services/ec2":45,"./services/machinelearning":46,"./services/route53":47,"./services/s3":48,"./services/sqs":49,"./services/sts":50,"./xml/browser_parser":60}],2:[function(require,module,exports){
 var crypto = require('crypto'),
@@ -505,7 +505,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.2.47',
+  VERSION: '2.2.48',
 
 
   Signers: {},
@@ -4621,7 +4621,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     if (err) return upload.callback(err);
     data.Location =
       [endpoint.protocol, '//', endpoint.host, httpReq.path].join('');
-    data.key = this.request.params.Key;
+    data.key = this.request.params.Key; // will stay undocumented
+    data.Key = this.request.params.Key;
+    data.Bucket = this.request.params.Bucket;
     upload.callback(err, data);
   },
 
@@ -5372,6 +5374,12 @@ var AWS = require('../core');
 
 require('../s3/managed_upload');
 
+var operationsWith200StatusCodeError = {
+  'completeMultipartUpload': true,
+  'copyObject': true,
+  'uploadPartCopy': true
+};
+
 AWS.util.update(AWS.S3.prototype, {
 
   validateService: function validateService() {
@@ -5565,7 +5573,7 @@ AWS.util.update(AWS.S3.prototype, {
   successfulResponse: function successfulResponse(resp) {
     var req = resp.request;
     var httpResponse = resp.httpResponse;
-    if (req.operation === 'completeMultipartUpload' &&
+    if (operationsWith200StatusCodeError[req.operation] &&
         httpResponse.body.toString().match('<Error>')) {
       return false;
     } else {
@@ -5575,7 +5583,7 @@ AWS.util.update(AWS.S3.prototype, {
 
 
   retryableError: function retryableError(error, request) {
-    if (request.operation === 'completeMultipartUpload' &&
+    if (operationsWith200StatusCodeError[request.operation] &&
         error.statusCode === 200) {
       return true;
     } else if (error && error.code === 'RequestTimeout') {
@@ -7525,7 +7533,7 @@ function applyNamespaces(xml, shape) {
 
 module.exports = XmlBuilder;
 
-},{"../util":59,"xmlbuilder":145}],62:[function(require,module,exports){
+},{"../util":59,"xmlbuilder":97}],62:[function(require,module,exports){
 
 
 var base64 = require('base64-js')
@@ -11197,1211 +11205,6 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require("FWaASH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./support/isBuffer":79,"FWaASH":73,"inherits":72}],81:[function(require,module,exports){
-var arrayEvery = require('../internal/arrayEvery'),
-    baseCallback = require('../internal/baseCallback'),
-    baseEvery = require('../internal/baseEvery'),
-    isArray = require('../lang/isArray');
-
-
-function every(collection, predicate, thisArg) {
-  var func = isArray(collection) ? arrayEvery : baseEvery;
-  if (typeof predicate != 'function' || typeof thisArg != 'undefined') {
-    predicate = baseCallback(predicate, thisArg, 3);
-  }
-  return func(collection, predicate);
-}
-
-module.exports = every;
-
-},{"../internal/arrayEvery":82,"../internal/baseCallback":84,"../internal/baseEvery":88,"../lang/isArray":115}],82:[function(require,module,exports){
-
-function arrayEvery(array, predicate) {
-  var index = -1,
-      length = array.length;
-
-  while (++index < length) {
-    if (!predicate(array[index], index, array)) {
-      return false;
-    }
-  }
-  return true;
-}
-
-module.exports = arrayEvery;
-
-},{}],83:[function(require,module,exports){
-var baseCopy = require('./baseCopy'),
-    keys = require('../object/keys');
-
-
-function baseAssign(object, source, customizer) {
-  var props = keys(source);
-  if (!customizer) {
-    return baseCopy(source, object, props);
-  }
-  var index = -1,
-      length = props.length;
-
-  while (++index < length) {
-    var key = props[index],
-        value = object[key],
-        result = customizer(value, source[key], key, object, source);
-
-    if ((result === result ? (result !== value) : (value === value)) ||
-        (typeof value == 'undefined' && !(key in object))) {
-      object[key] = result;
-    }
-  }
-  return object;
-}
-
-module.exports = baseAssign;
-
-},{"../object/keys":124,"./baseCopy":85}],84:[function(require,module,exports){
-var baseMatches = require('./baseMatches'),
-    baseMatchesProperty = require('./baseMatchesProperty'),
-    baseProperty = require('./baseProperty'),
-    bindCallback = require('./bindCallback'),
-    identity = require('../utility/identity'),
-    isBindable = require('./isBindable');
-
-
-function baseCallback(func, thisArg, argCount) {
-  var type = typeof func;
-  if (type == 'function') {
-    return (typeof thisArg != 'undefined' && isBindable(func))
-      ? bindCallback(func, thisArg, argCount)
-      : func;
-  }
-  if (func == null) {
-    return identity;
-  }
-  if (type == 'object') {
-    return baseMatches(func);
-  }
-  return typeof thisArg == 'undefined'
-    ? baseProperty(func + '')
-    : baseMatchesProperty(func + '', thisArg);
-}
-
-module.exports = baseCallback;
-
-},{"../utility/identity":128,"./baseMatches":95,"./baseMatchesProperty":96,"./baseProperty":97,"./bindCallback":100,"./isBindable":105}],85:[function(require,module,exports){
-
-function baseCopy(source, object, props) {
-  if (!props) {
-    props = object;
-    object = {};
-  }
-  var index = -1,
-      length = props.length;
-
-  while (++index < length) {
-    var key = props[index];
-    object[key] = source[key];
-  }
-  return object;
-}
-
-module.exports = baseCopy;
-
-},{}],86:[function(require,module,exports){
-(function (global){
-var isObject = require('../lang/isObject');
-
-
-var baseCreate = (function() {
-  function Object() {}
-  return function(prototype) {
-    if (isObject(prototype)) {
-      Object.prototype = prototype;
-      var result = new Object;
-      Object.prototype = null;
-    }
-    return result || global.Object();
-  };
-}());
-
-module.exports = baseCreate;
-
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../lang/isObject":119}],87:[function(require,module,exports){
-var baseForOwn = require('./baseForOwn'),
-    isLength = require('./isLength'),
-    toObject = require('./toObject');
-
-
-function baseEach(collection, iteratee) {
-  var length = collection ? collection.length : 0;
-  if (!isLength(length)) {
-    return baseForOwn(collection, iteratee);
-  }
-  var index = -1,
-      iterable = toObject(collection);
-
-  while (++index < length) {
-    if (iteratee(iterable[index], index, iterable) === false) {
-      break;
-    }
-  }
-  return collection;
-}
-
-module.exports = baseEach;
-
-},{"./baseForOwn":90,"./isLength":108,"./toObject":113}],88:[function(require,module,exports){
-var baseEach = require('./baseEach');
-
-
-function baseEvery(collection, predicate) {
-  var result = true;
-  baseEach(collection, function(value, index, collection) {
-    result = !!predicate(value, index, collection);
-    return result;
-  });
-  return result;
-}
-
-module.exports = baseEvery;
-
-},{"./baseEach":87}],89:[function(require,module,exports){
-var toObject = require('./toObject');
-
-
-function baseFor(object, iteratee, keysFunc) {
-  var index = -1,
-      iterable = toObject(object),
-      props = keysFunc(object),
-      length = props.length;
-
-  while (++index < length) {
-    var key = props[index];
-    if (iteratee(iterable[key], key, iterable) === false) {
-      break;
-    }
-  }
-  return object;
-}
-
-module.exports = baseFor;
-
-},{"./toObject":113}],90:[function(require,module,exports){
-var baseFor = require('./baseFor'),
-    keys = require('../object/keys');
-
-
-function baseForOwn(object, iteratee) {
-  return baseFor(object, iteratee, keys);
-}
-
-module.exports = baseForOwn;
-
-},{"../object/keys":124,"./baseFor":89}],91:[function(require,module,exports){
-var baseIsEqualDeep = require('./baseIsEqualDeep');
-
-
-function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
-  if (value === other) {
-    return value !== 0 || (1 / value == 1 / other);
-  }
-  var valType = typeof value,
-      othType = typeof other;
-
-  if ((valType != 'function' && valType != 'object' && othType != 'function' && othType != 'object') ||
-      value == null || other == null) {
-    return value !== value && other !== other;
-  }
-  return baseIsEqualDeep(value, other, baseIsEqual, customizer, isWhere, stackA, stackB);
-}
-
-module.exports = baseIsEqual;
-
-},{"./baseIsEqualDeep":92}],92:[function(require,module,exports){
-var equalArrays = require('./equalArrays'),
-    equalByTag = require('./equalByTag'),
-    equalObjects = require('./equalObjects'),
-    isArray = require('../lang/isArray'),
-    isTypedArray = require('../lang/isTypedArray');
-
-
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    objectTag = '[object Object]';
-
-
-var objectProto = Object.prototype;
-
-
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-
-var objToString = objectProto.toString;
-
-
-function baseIsEqualDeep(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
-  var objIsArr = isArray(object),
-      othIsArr = isArray(other),
-      objTag = arrayTag,
-      othTag = arrayTag;
-
-  if (!objIsArr) {
-    objTag = objToString.call(object);
-    if (objTag == argsTag) {
-      objTag = objectTag;
-    } else if (objTag != objectTag) {
-      objIsArr = isTypedArray(object);
-    }
-  }
-  if (!othIsArr) {
-    othTag = objToString.call(other);
-    if (othTag == argsTag) {
-      othTag = objectTag;
-    } else if (othTag != objectTag) {
-      othIsArr = isTypedArray(other);
-    }
-  }
-  var objIsObj = objTag == objectTag,
-      othIsObj = othTag == objectTag,
-      isSameTag = objTag == othTag;
-
-  if (isSameTag && !(objIsArr || objIsObj)) {
-    return equalByTag(object, other, objTag);
-  }
-  var valWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-      othWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
-
-  if (valWrapped || othWrapped) {
-    return equalFunc(valWrapped ? object.value() : object, othWrapped ? other.value() : other, customizer, isWhere, stackA, stackB);
-  }
-  if (!isSameTag) {
-    return false;
-  }
-  stackA || (stackA = []);
-  stackB || (stackB = []);
-
-  var length = stackA.length;
-  while (length--) {
-    if (stackA[length] == object) {
-      return stackB[length] == other;
-    }
-  }
-  stackA.push(object);
-  stackB.push(other);
-
-  var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isWhere, stackA, stackB);
-
-  stackA.pop();
-  stackB.pop();
-
-  return result;
-}
-
-module.exports = baseIsEqualDeep;
-
-},{"../lang/isArray":115,"../lang/isTypedArray":121,"./equalArrays":102,"./equalByTag":103,"./equalObjects":104}],93:[function(require,module,exports){
-
-function baseIsFunction(value) {
-  return typeof value == 'function' || false;
-}
-
-module.exports = baseIsFunction;
-
-},{}],94:[function(require,module,exports){
-var baseIsEqual = require('./baseIsEqual');
-
-
-var objectProto = Object.prototype;
-
-
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-
-function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
-  var length = props.length;
-  if (object == null) {
-    return !length;
-  }
-  var index = -1,
-      noCustomizer = !customizer;
-
-  while (++index < length) {
-    if ((noCustomizer && strictCompareFlags[index])
-          ? values[index] !== object[props[index]]
-          : !hasOwnProperty.call(object, props[index])
-        ) {
-      return false;
-    }
-  }
-  index = -1;
-  while (++index < length) {
-    var key = props[index];
-    if (noCustomizer && strictCompareFlags[index]) {
-      var result = hasOwnProperty.call(object, key);
-    } else {
-      var objValue = object[key],
-          srcValue = values[index];
-
-      result = customizer ? customizer(objValue, srcValue, key) : undefined;
-      if (typeof result == 'undefined') {
-        result = baseIsEqual(srcValue, objValue, customizer, true);
-      }
-    }
-    if (!result) {
-      return false;
-    }
-  }
-  return true;
-}
-
-module.exports = baseIsMatch;
-
-},{"./baseIsEqual":91}],95:[function(require,module,exports){
-var baseIsMatch = require('./baseIsMatch'),
-    isStrictComparable = require('./isStrictComparable'),
-    keys = require('../object/keys');
-
-
-var objectProto = Object.prototype;
-
-
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-
-function baseMatches(source) {
-  var props = keys(source),
-      length = props.length;
-
-  if (length == 1) {
-    var key = props[0],
-        value = source[key];
-
-    if (isStrictComparable(value)) {
-      return function(object) {
-        return object != null && object[key] === value && hasOwnProperty.call(object, key);
-      };
-    }
-  }
-  var values = Array(length),
-      strictCompareFlags = Array(length);
-
-  while (length--) {
-    value = source[props[length]];
-    values[length] = value;
-    strictCompareFlags[length] = isStrictComparable(value);
-  }
-  return function(object) {
-    return baseIsMatch(object, props, values, strictCompareFlags);
-  };
-}
-
-module.exports = baseMatches;
-
-},{"../object/keys":124,"./baseIsMatch":94,"./isStrictComparable":110}],96:[function(require,module,exports){
-var baseIsEqual = require('./baseIsEqual'),
-    isStrictComparable = require('./isStrictComparable');
-
-
-function baseMatchesProperty(key, value) {
-  if (isStrictComparable(value)) {
-    return function(object) {
-      return object != null && object[key] === value;
-    };
-  }
-  return function(object) {
-    return object != null && baseIsEqual(value, object[key], null, true);
-  };
-}
-
-module.exports = baseMatchesProperty;
-
-},{"./baseIsEqual":91,"./isStrictComparable":110}],97:[function(require,module,exports){
-
-function baseProperty(key) {
-  return function(object) {
-    return object == null ? undefined : object[key];
-  };
-}
-
-module.exports = baseProperty;
-
-},{}],98:[function(require,module,exports){
-var identity = require('../utility/identity'),
-    metaMap = require('./metaMap');
-
-
-var baseSetData = !metaMap ? identity : function(func, data) {
-  metaMap.set(func, data);
-  return func;
-};
-
-module.exports = baseSetData;
-
-},{"../utility/identity":128,"./metaMap":111}],99:[function(require,module,exports){
-
-function baseToString(value) {
-  if (typeof value == 'string') {
-    return value;
-  }
-  return value == null ? '' : (value + '');
-}
-
-module.exports = baseToString;
-
-},{}],100:[function(require,module,exports){
-var identity = require('../utility/identity');
-
-
-function bindCallback(func, thisArg, argCount) {
-  if (typeof func != 'function') {
-    return identity;
-  }
-  if (typeof thisArg == 'undefined') {
-    return func;
-  }
-  switch (argCount) {
-    case 1: return function(value) {
-      return func.call(thisArg, value);
-    };
-    case 3: return function(value, index, collection) {
-      return func.call(thisArg, value, index, collection);
-    };
-    case 4: return function(accumulator, value, index, collection) {
-      return func.call(thisArg, accumulator, value, index, collection);
-    };
-    case 5: return function(value, other, key, object, source) {
-      return func.call(thisArg, value, other, key, object, source);
-    };
-  }
-  return function() {
-    return func.apply(thisArg, arguments);
-  };
-}
-
-module.exports = bindCallback;
-
-},{"../utility/identity":128}],101:[function(require,module,exports){
-var bindCallback = require('./bindCallback'),
-    isIterateeCall = require('./isIterateeCall');
-
-
-function createAssigner(assigner) {
-  return function() {
-    var args = arguments,
-        length = args.length,
-        object = args[0];
-
-    if (length < 2 || object == null) {
-      return object;
-    }
-    var customizer = args[length - 2],
-        thisArg = args[length - 1],
-        guard = args[3];
-
-    if (length > 3 && typeof customizer == 'function') {
-      customizer = bindCallback(customizer, thisArg, 5);
-      length -= 2;
-    } else {
-      customizer = (length > 2 && typeof thisArg == 'function') ? thisArg : null;
-      length -= (customizer ? 1 : 0);
-    }
-    if (guard && isIterateeCall(args[1], args[2], guard)) {
-      customizer = length == 3 ? null : customizer;
-      length = 2;
-    }
-    var index = 0;
-    while (++index < length) {
-      var source = args[index];
-      if (source) {
-        assigner(object, source, customizer);
-      }
-    }
-    return object;
-  };
-}
-
-module.exports = createAssigner;
-
-},{"./bindCallback":100,"./isIterateeCall":107}],102:[function(require,module,exports){
-
-function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stackB) {
-  var index = -1,
-      arrLength = array.length,
-      othLength = other.length,
-      result = true;
-
-  if (arrLength != othLength && !(isWhere && othLength > arrLength)) {
-    return false;
-  }
-  while (result && ++index < arrLength) {
-    var arrValue = array[index],
-        othValue = other[index];
-
-    result = undefined;
-    if (customizer) {
-      result = isWhere
-        ? customizer(othValue, arrValue, index)
-        : customizer(arrValue, othValue, index);
-    }
-    if (typeof result == 'undefined') {
-      if (isWhere) {
-        var othIndex = othLength;
-        while (othIndex--) {
-          othValue = other[othIndex];
-          result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
-          if (result) {
-            break;
-          }
-        }
-      } else {
-        result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
-      }
-    }
-  }
-  return !!result;
-}
-
-module.exports = equalArrays;
-
-},{}],103:[function(require,module,exports){
-
-var boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    numberTag = '[object Number]',
-    regexpTag = '[object RegExp]',
-    stringTag = '[object String]';
-
-
-function equalByTag(object, other, tag) {
-  switch (tag) {
-    case boolTag:
-    case dateTag:
-      return +object == +other;
-
-    case errorTag:
-      return object.name == other.name && object.message == other.message;
-
-    case numberTag:
-      return (object != +object)
-        ? other != +other
-        : (object == 0 ? ((1 / object) == (1 / other)) : object == +other);
-
-    case regexpTag:
-    case stringTag:
-      return object == (other + '');
-  }
-  return false;
-}
-
-module.exports = equalByTag;
-
-},{}],104:[function(require,module,exports){
-var keys = require('../object/keys');
-
-
-var objectProto = Object.prototype;
-
-
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-
-function equalObjects(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
-  var objProps = keys(object),
-      objLength = objProps.length,
-      othProps = keys(other),
-      othLength = othProps.length;
-
-  if (objLength != othLength && !isWhere) {
-    return false;
-  }
-  var hasCtor,
-      index = -1;
-
-  while (++index < objLength) {
-    var key = objProps[index],
-        result = hasOwnProperty.call(other, key);
-
-    if (result) {
-      var objValue = object[key],
-          othValue = other[key];
-
-      result = undefined;
-      if (customizer) {
-        result = isWhere
-          ? customizer(othValue, objValue, key)
-          : customizer(objValue, othValue, key);
-      }
-      if (typeof result == 'undefined') {
-        result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, customizer, isWhere, stackA, stackB);
-      }
-    }
-    if (!result) {
-      return false;
-    }
-    hasCtor || (hasCtor = key == 'constructor');
-  }
-  if (!hasCtor) {
-    var objCtor = object.constructor,
-        othCtor = other.constructor;
-
-    if (objCtor != othCtor &&
-        ('constructor' in object && 'constructor' in other) &&
-        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
-          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
-      return false;
-    }
-  }
-  return true;
-}
-
-module.exports = equalObjects;
-
-},{"../object/keys":124}],105:[function(require,module,exports){
-var baseSetData = require('./baseSetData'),
-    isNative = require('../lang/isNative'),
-    support = require('../support');
-
-
-var reFuncName = /^\s*function[ \n\r\t]+\w/;
-
-
-var reThis = /\bthis\b/;
-
-
-var fnToString = Function.prototype.toString;
-
-
-function isBindable(func) {
-  var result = !(support.funcNames ? func.name : support.funcDecomp);
-
-  if (!result) {
-    var source = fnToString.call(func);
-    if (!support.funcNames) {
-      result = !reFuncName.test(source);
-    }
-    if (!result) {
-      result = reThis.test(source) || isNative(func);
-      baseSetData(func, result);
-    }
-  }
-  return result;
-}
-
-module.exports = isBindable;
-
-},{"../lang/isNative":118,"../support":127,"./baseSetData":98}],106:[function(require,module,exports){
-
-var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-
-function isIndex(value, length) {
-  value = +value;
-  length = length == null ? MAX_SAFE_INTEGER : length;
-  return value > -1 && value % 1 == 0 && value < length;
-}
-
-module.exports = isIndex;
-
-},{}],107:[function(require,module,exports){
-var isIndex = require('./isIndex'),
-    isLength = require('./isLength'),
-    isObject = require('../lang/isObject');
-
-
-function isIterateeCall(value, index, object) {
-  if (!isObject(object)) {
-    return false;
-  }
-  var type = typeof index;
-  if (type == 'number') {
-    var length = object.length,
-        prereq = isLength(length) && isIndex(index, length);
-  } else {
-    prereq = type == 'string' && index in object;
-  }
-  if (prereq) {
-    var other = object[index];
-    return value === value ? (value === other) : (other !== other);
-  }
-  return false;
-}
-
-module.exports = isIterateeCall;
-
-},{"../lang/isObject":119,"./isIndex":106,"./isLength":108}],108:[function(require,module,exports){
-
-var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-
-function isLength(value) {
-  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-}
-
-module.exports = isLength;
-
-},{}],109:[function(require,module,exports){
-
-function isObjectLike(value) {
-  return (value && typeof value == 'object') || false;
-}
-
-module.exports = isObjectLike;
-
-},{}],110:[function(require,module,exports){
-var isObject = require('../lang/isObject');
-
-
-function isStrictComparable(value) {
-  return value === value && (value === 0 ? ((1 / value) > 0) : !isObject(value));
-}
-
-module.exports = isStrictComparable;
-
-},{"../lang/isObject":119}],111:[function(require,module,exports){
-(function (global){
-var isNative = require('../lang/isNative');
-
-
-var WeakMap = isNative(WeakMap = global.WeakMap) && WeakMap;
-
-
-var metaMap = WeakMap && new WeakMap;
-
-module.exports = metaMap;
-
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../lang/isNative":118}],112:[function(require,module,exports){
-var isArguments = require('../lang/isArguments'),
-    isArray = require('../lang/isArray'),
-    isIndex = require('./isIndex'),
-    isLength = require('./isLength'),
-    keysIn = require('../object/keysIn'),
-    support = require('../support');
-
-
-var objectProto = Object.prototype;
-
-
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-
-function shimKeys(object) {
-  var props = keysIn(object),
-      propsLength = props.length,
-      length = propsLength && object.length;
-
-  var allowIndexes = length && isLength(length) &&
-    (isArray(object) || (support.nonEnumArgs && isArguments(object)));
-
-  var index = -1,
-      result = [];
-
-  while (++index < propsLength) {
-    var key = props[index];
-    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = shimKeys;
-
-},{"../lang/isArguments":114,"../lang/isArray":115,"../object/keysIn":125,"../support":127,"./isIndex":106,"./isLength":108}],113:[function(require,module,exports){
-var isObject = require('../lang/isObject');
-
-
-function toObject(value) {
-  return isObject(value) ? value : Object(value);
-}
-
-module.exports = toObject;
-
-},{"../lang/isObject":119}],114:[function(require,module,exports){
-var isLength = require('../internal/isLength'),
-    isObjectLike = require('../internal/isObjectLike');
-
-
-var argsTag = '[object Arguments]';
-
-
-var objectProto = Object.prototype;
-
-
-var objToString = objectProto.toString;
-
-
-function isArguments(value) {
-  var length = isObjectLike(value) ? value.length : undefined;
-  return (isLength(length) && objToString.call(value) == argsTag) || false;
-}
-
-module.exports = isArguments;
-
-},{"../internal/isLength":108,"../internal/isObjectLike":109}],115:[function(require,module,exports){
-var isLength = require('../internal/isLength'),
-    isNative = require('./isNative'),
-    isObjectLike = require('../internal/isObjectLike');
-
-
-var arrayTag = '[object Array]';
-
-
-var objectProto = Object.prototype;
-
-
-var objToString = objectProto.toString;
-
-
-var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
-
-
-var isArray = nativeIsArray || function(value) {
-  return (isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag) || false;
-};
-
-module.exports = isArray;
-
-},{"../internal/isLength":108,"../internal/isObjectLike":109,"./isNative":118}],116:[function(require,module,exports){
-var isArguments = require('./isArguments'),
-    isArray = require('./isArray'),
-    isFunction = require('./isFunction'),
-    isLength = require('../internal/isLength'),
-    isObjectLike = require('../internal/isObjectLike'),
-    isString = require('./isString'),
-    keys = require('../object/keys');
-
-
-function isEmpty(value) {
-  if (value == null) {
-    return true;
-  }
-  var length = value.length;
-  if (isLength(length) && (isArray(value) || isString(value) || isArguments(value) ||
-      (isObjectLike(value) && isFunction(value.splice)))) {
-    return !length;
-  }
-  return !keys(value).length;
-}
-
-module.exports = isEmpty;
-
-},{"../internal/isLength":108,"../internal/isObjectLike":109,"../object/keys":124,"./isArguments":114,"./isArray":115,"./isFunction":117,"./isString":120}],117:[function(require,module,exports){
-(function (global){
-var baseIsFunction = require('../internal/baseIsFunction'),
-    isNative = require('./isNative');
-
-
-var funcTag = '[object Function]';
-
-
-var objectProto = Object.prototype;
-
-
-var objToString = objectProto.toString;
-
-
-var Uint8Array = isNative(Uint8Array = global.Uint8Array) && Uint8Array;
-
-
-var isFunction = !(baseIsFunction(/x/) || (Uint8Array && !baseIsFunction(Uint8Array))) ? baseIsFunction : function(value) {
-  return objToString.call(value) == funcTag;
-};
-
-module.exports = isFunction;
-
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../internal/baseIsFunction":93,"./isNative":118}],118:[function(require,module,exports){
-var escapeRegExp = require('../string/escapeRegExp'),
-    isObjectLike = require('../internal/isObjectLike');
-
-
-var funcTag = '[object Function]';
-
-
-var reHostCtor = /^\[object .+?Constructor\]$/;
-
-
-var objectProto = Object.prototype;
-
-
-var fnToString = Function.prototype.toString;
-
-
-var objToString = objectProto.toString;
-
-
-var reNative = RegExp('^' +
-  escapeRegExp(objToString)
-  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-);
-
-
-function isNative(value) {
-  if (value == null) {
-    return false;
-  }
-  if (objToString.call(value) == funcTag) {
-    return reNative.test(fnToString.call(value));
-  }
-  return (isObjectLike(value) && reHostCtor.test(value)) || false;
-}
-
-module.exports = isNative;
-
-},{"../internal/isObjectLike":109,"../string/escapeRegExp":126}],119:[function(require,module,exports){
-
-function isObject(value) {
-  var type = typeof value;
-  return type == 'function' || (value && type == 'object') || false;
-}
-
-module.exports = isObject;
-
-},{}],120:[function(require,module,exports){
-var isObjectLike = require('../internal/isObjectLike');
-
-
-var stringTag = '[object String]';
-
-
-var objectProto = Object.prototype;
-
-
-var objToString = objectProto.toString;
-
-
-function isString(value) {
-  return typeof value == 'string' || (isObjectLike(value) && objToString.call(value) == stringTag) || false;
-}
-
-module.exports = isString;
-
-},{"../internal/isObjectLike":109}],121:[function(require,module,exports){
-var isLength = require('../internal/isLength'),
-    isObjectLike = require('../internal/isObjectLike');
-
-
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    funcTag = '[object Function]',
-    mapTag = '[object Map]',
-    numberTag = '[object Number]',
-    objectTag = '[object Object]',
-    regexpTag = '[object RegExp]',
-    setTag = '[object Set]',
-    stringTag = '[object String]',
-    weakMapTag = '[object WeakMap]';
-
-var arrayBufferTag = '[object ArrayBuffer]',
-    float32Tag = '[object Float32Array]',
-    float64Tag = '[object Float64Array]',
-    int8Tag = '[object Int8Array]',
-    int16Tag = '[object Int16Array]',
-    int32Tag = '[object Int32Array]',
-    uint8Tag = '[object Uint8Array]',
-    uint8ClampedTag = '[object Uint8ClampedArray]',
-    uint16Tag = '[object Uint16Array]',
-    uint32Tag = '[object Uint32Array]';
-
-
-var typedArrayTags = {};
-typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
-typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
-typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
-typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
-typedArrayTags[uint32Tag] = true;
-typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
-typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
-typedArrayTags[dateTag] = typedArrayTags[errorTag] =
-typedArrayTags[funcTag] = typedArrayTags[mapTag] =
-typedArrayTags[numberTag] = typedArrayTags[objectTag] =
-typedArrayTags[regexpTag] = typedArrayTags[setTag] =
-typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
-
-
-var objectProto = Object.prototype;
-
-
-var objToString = objectProto.toString;
-
-
-function isTypedArray(value) {
-  return (isObjectLike(value) && isLength(value.length) && typedArrayTags[objToString.call(value)]) || false;
-}
-
-module.exports = isTypedArray;
-
-},{"../internal/isLength":108,"../internal/isObjectLike":109}],122:[function(require,module,exports){
-var baseAssign = require('../internal/baseAssign'),
-    createAssigner = require('../internal/createAssigner');
-
-
-var assign = createAssigner(baseAssign);
-
-module.exports = assign;
-
-},{"../internal/baseAssign":83,"../internal/createAssigner":101}],123:[function(require,module,exports){
-var baseCopy = require('../internal/baseCopy'),
-    baseCreate = require('../internal/baseCreate'),
-    isIterateeCall = require('../internal/isIterateeCall'),
-    keys = require('./keys');
-
-
-function create(prototype, properties, guard) {
-  var result = baseCreate(prototype);
-  if (guard && isIterateeCall(prototype, properties, guard)) {
-    properties = null;
-  }
-  return properties ? baseCopy(properties, result, keys(properties)) : result;
-}
-
-module.exports = create;
-
-},{"../internal/baseCopy":85,"../internal/baseCreate":86,"../internal/isIterateeCall":107,"./keys":124}],124:[function(require,module,exports){
-var isLength = require('../internal/isLength'),
-    isNative = require('../lang/isNative'),
-    isObject = require('../lang/isObject'),
-    shimKeys = require('../internal/shimKeys');
-
-
-var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
-
-
-var keys = !nativeKeys ? shimKeys : function(object) {
-  if (object) {
-    var Ctor = object.constructor,
-        length = object.length;
-  }
-  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-      (typeof object != 'function' && (length && isLength(length)))) {
-    return shimKeys(object);
-  }
-  return isObject(object) ? nativeKeys(object) : [];
-};
-
-module.exports = keys;
-
-},{"../internal/isLength":108,"../internal/shimKeys":112,"../lang/isNative":118,"../lang/isObject":119}],125:[function(require,module,exports){
-var isArguments = require('../lang/isArguments'),
-    isArray = require('../lang/isArray'),
-    isIndex = require('../internal/isIndex'),
-    isLength = require('../internal/isLength'),
-    isObject = require('../lang/isObject'),
-    support = require('../support');
-
-
-var objectProto = Object.prototype;
-
-
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-
-function keysIn(object) {
-  if (object == null) {
-    return [];
-  }
-  if (!isObject(object)) {
-    object = Object(object);
-  }
-  var length = object.length;
-  length = (length && isLength(length) &&
-    (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
-
-  var Ctor = object.constructor,
-      index = -1,
-      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
-      result = Array(length),
-      skipIndexes = length > 0;
-
-  while (++index < length) {
-    result[index] = (index + '');
-  }
-  for (var key in object) {
-    if (!(skipIndexes && isIndex(key, length)) &&
-        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = keysIn;
-
-},{"../internal/isIndex":106,"../internal/isLength":108,"../lang/isArguments":114,"../lang/isArray":115,"../lang/isObject":119,"../support":127}],126:[function(require,module,exports){
-var baseToString = require('../internal/baseToString');
-
-
-var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-
-function escapeRegExp(string) {
-  string = baseToString(string);
-  return (string && reHasRegExpChars.test(string))
-    ? string.replace(reRegExpChars, '\\$&')
-    : string;
-}
-
-module.exports = escapeRegExp;
-
-},{"../internal/baseToString":99}],127:[function(require,module,exports){
-(function (global){
-var isNative = require('./lang/isNative');
-
-
-var reThis = /\bthis\b/;
-
-
-var objectProto = Object.prototype;
-
-
-var document = (document = global.window) && document.document;
-
-
-var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-
-var support = {};
-
-(function(x) {
-
-
-  support.funcDecomp = !isNative(global.WinRTError) && reThis.test(function() { return this; });
-
-
-  support.funcNames = typeof Function.name == 'string';
-
-
-  try {
-    support.dom = document.createDocumentFragment().nodeType === 11;
-  } catch(e) {
-    support.dom = false;
-  }
-
-
-  try {
-    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
-  } catch(e) {
-    support.nonEnumArgs = true;
-  }
-}(0, 0));
-
-module.exports = support;
-
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./lang/isNative":118}],128:[function(require,module,exports){
-
-function identity(value) {
-  return value;
-}
-
-module.exports = identity;
-
-},{}],129:[function(require,module,exports){
 (function() {
   var XMLAttribute, create;
 
@@ -12434,7 +11237,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"lodash/object/create":123}],130:[function(require,module,exports){
+},{"lodash/object/create":140}],82:[function(require,module,exports){
 (function() {
   var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
 
@@ -12504,7 +11307,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLDeclaration":137,"./XMLDocType":138,"./XMLElement":139,"./XMLStringifier":143}],131:[function(require,module,exports){
+},{"./XMLDeclaration":89,"./XMLDocType":90,"./XMLElement":91,"./XMLStringifier":95}],83:[function(require,module,exports){
 (function() {
   var XMLCData, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -12554,7 +11357,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLNode":140,"lodash/object/create":123}],132:[function(require,module,exports){
+},{"./XMLNode":92,"lodash/object/create":140}],84:[function(require,module,exports){
 (function() {
   var XMLComment, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -12604,7 +11407,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLNode":140,"lodash/object/create":123}],133:[function(require,module,exports){
+},{"./XMLNode":92,"lodash/object/create":140}],85:[function(require,module,exports){
 (function() {
   var XMLDTDAttList, create;
 
@@ -12677,7 +11480,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"lodash/object/create":123}],134:[function(require,module,exports){
+},{"lodash/object/create":140}],86:[function(require,module,exports){
 (function() {
   var XMLDTDElement, create, isArray;
 
@@ -12730,7 +11533,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"lodash/lang/isArray":115,"lodash/object/create":123}],135:[function(require,module,exports){
+},{"lodash/lang/isArray":132,"lodash/object/create":140}],87:[function(require,module,exports){
 (function() {
   var XMLDTDEntity, create, isObject;
 
@@ -12819,7 +11622,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"lodash/lang/isObject":119,"lodash/object/create":123}],136:[function(require,module,exports){
+},{"lodash/lang/isObject":136,"lodash/object/create":140}],88:[function(require,module,exports){
 (function() {
   var XMLDTDNotation, create;
 
@@ -12880,7 +11683,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"lodash/object/create":123}],137:[function(require,module,exports){
+},{"lodash/object/create":140}],89:[function(require,module,exports){
 (function() {
   var XMLDeclaration, XMLNode, create, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -12954,7 +11757,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLNode":140,"lodash/lang/isObject":119,"lodash/object/create":123}],138:[function(require,module,exports){
+},{"./XMLNode":92,"lodash/lang/isObject":136,"lodash/object/create":140}],90:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
 
@@ -13147,7 +11950,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLCData":131,"./XMLComment":132,"./XMLDTDAttList":133,"./XMLDTDElement":134,"./XMLDTDEntity":135,"./XMLDTDNotation":136,"./XMLProcessingInstruction":141,"lodash/lang/isObject":119,"lodash/object/create":123}],139:[function(require,module,exports){
+},{"./XMLCData":83,"./XMLComment":84,"./XMLDTDAttList":85,"./XMLDTDElement":86,"./XMLDTDEntity":87,"./XMLDTDNotation":88,"./XMLProcessingInstruction":93,"lodash/lang/isObject":136,"lodash/object/create":140}],91:[function(require,module,exports){
 (function() {
   var XMLAttribute, XMLElement, XMLNode, XMLProcessingInstruction, create, every, isArray, isFunction, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -13362,7 +12165,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLAttribute":129,"./XMLNode":140,"./XMLProcessingInstruction":141,"lodash/collection/every":81,"lodash/lang/isArray":115,"lodash/lang/isFunction":117,"lodash/lang/isObject":119,"lodash/object/create":123}],140:[function(require,module,exports){
+},{"./XMLAttribute":81,"./XMLNode":92,"./XMLProcessingInstruction":93,"lodash/collection/every":98,"lodash/lang/isArray":132,"lodash/lang/isFunction":134,"lodash/lang/isObject":136,"lodash/object/create":140}],92:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isArray, isEmpty, isFunction, isObject,
     hasProp = {}.hasOwnProperty;
@@ -13697,7 +12500,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLCData":131,"./XMLComment":132,"./XMLDeclaration":137,"./XMLDocType":138,"./XMLElement":139,"./XMLRaw":142,"./XMLText":144,"lodash/lang/isArray":115,"lodash/lang/isEmpty":116,"lodash/lang/isFunction":117,"lodash/lang/isObject":119}],141:[function(require,module,exports){
+},{"./XMLCData":83,"./XMLComment":84,"./XMLDeclaration":89,"./XMLDocType":90,"./XMLElement":91,"./XMLRaw":94,"./XMLText":96,"lodash/lang/isArray":132,"lodash/lang/isEmpty":133,"lodash/lang/isFunction":134,"lodash/lang/isObject":136}],93:[function(require,module,exports){
 (function() {
   var XMLProcessingInstruction, create;
 
@@ -13749,7 +12552,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"lodash/object/create":123}],142:[function(require,module,exports){
+},{"lodash/object/create":140}],94:[function(require,module,exports){
 (function() {
   var XMLNode, XMLRaw, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -13799,7 +12602,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLNode":140,"lodash/object/create":123}],143:[function(require,module,exports){
+},{"./XMLNode":92,"lodash/object/create":140}],95:[function(require,module,exports){
 (function() {
   var XMLStringifier,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -13967,7 +12770,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{}],144:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 (function() {
   var XMLNode, XMLText, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -14017,7 +12820,7 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLNode":140,"lodash/object/create":123}],145:[function(require,module,exports){
+},{"./XMLNode":92,"lodash/object/create":140}],97:[function(require,module,exports){
 (function() {
   var XMLBuilder, assign;
 
@@ -14032,4 +12835,1209 @@ module.exports = identity;
 
 }).call(this);
 
-},{"./XMLBuilder":130,"lodash/object/assign":122}]},{},[1])
+},{"./XMLBuilder":82,"lodash/object/assign":139}],98:[function(require,module,exports){
+var arrayEvery = require('../internal/arrayEvery'),
+    baseCallback = require('../internal/baseCallback'),
+    baseEvery = require('../internal/baseEvery'),
+    isArray = require('../lang/isArray');
+
+
+function every(collection, predicate, thisArg) {
+  var func = isArray(collection) ? arrayEvery : baseEvery;
+  if (typeof predicate != 'function' || typeof thisArg != 'undefined') {
+    predicate = baseCallback(predicate, thisArg, 3);
+  }
+  return func(collection, predicate);
+}
+
+module.exports = every;
+
+},{"../internal/arrayEvery":99,"../internal/baseCallback":101,"../internal/baseEvery":105,"../lang/isArray":132}],99:[function(require,module,exports){
+
+function arrayEvery(array, predicate) {
+  var index = -1,
+      length = array.length;
+
+  while (++index < length) {
+    if (!predicate(array[index], index, array)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+module.exports = arrayEvery;
+
+},{}],100:[function(require,module,exports){
+var baseCopy = require('./baseCopy'),
+    keys = require('../object/keys');
+
+
+function baseAssign(object, source, customizer) {
+  var props = keys(source);
+  if (!customizer) {
+    return baseCopy(source, object, props);
+  }
+  var index = -1,
+      length = props.length;
+
+  while (++index < length) {
+    var key = props[index],
+        value = object[key],
+        result = customizer(value, source[key], key, object, source);
+
+    if ((result === result ? (result !== value) : (value === value)) ||
+        (typeof value == 'undefined' && !(key in object))) {
+      object[key] = result;
+    }
+  }
+  return object;
+}
+
+module.exports = baseAssign;
+
+},{"../object/keys":141,"./baseCopy":102}],101:[function(require,module,exports){
+var baseMatches = require('./baseMatches'),
+    baseMatchesProperty = require('./baseMatchesProperty'),
+    baseProperty = require('./baseProperty'),
+    bindCallback = require('./bindCallback'),
+    identity = require('../utility/identity'),
+    isBindable = require('./isBindable');
+
+
+function baseCallback(func, thisArg, argCount) {
+  var type = typeof func;
+  if (type == 'function') {
+    return (typeof thisArg != 'undefined' && isBindable(func))
+      ? bindCallback(func, thisArg, argCount)
+      : func;
+  }
+  if (func == null) {
+    return identity;
+  }
+  if (type == 'object') {
+    return baseMatches(func);
+  }
+  return typeof thisArg == 'undefined'
+    ? baseProperty(func + '')
+    : baseMatchesProperty(func + '', thisArg);
+}
+
+module.exports = baseCallback;
+
+},{"../utility/identity":145,"./baseMatches":112,"./baseMatchesProperty":113,"./baseProperty":114,"./bindCallback":117,"./isBindable":122}],102:[function(require,module,exports){
+
+function baseCopy(source, object, props) {
+  if (!props) {
+    props = object;
+    object = {};
+  }
+  var index = -1,
+      length = props.length;
+
+  while (++index < length) {
+    var key = props[index];
+    object[key] = source[key];
+  }
+  return object;
+}
+
+module.exports = baseCopy;
+
+},{}],103:[function(require,module,exports){
+(function (global){
+var isObject = require('../lang/isObject');
+
+
+var baseCreate = (function() {
+  function Object() {}
+  return function(prototype) {
+    if (isObject(prototype)) {
+      Object.prototype = prototype;
+      var result = new Object;
+      Object.prototype = null;
+    }
+    return result || global.Object();
+  };
+}());
+
+module.exports = baseCreate;
+
+}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../lang/isObject":136}],104:[function(require,module,exports){
+var baseForOwn = require('./baseForOwn'),
+    isLength = require('./isLength'),
+    toObject = require('./toObject');
+
+
+function baseEach(collection, iteratee) {
+  var length = collection ? collection.length : 0;
+  if (!isLength(length)) {
+    return baseForOwn(collection, iteratee);
+  }
+  var index = -1,
+      iterable = toObject(collection);
+
+  while (++index < length) {
+    if (iteratee(iterable[index], index, iterable) === false) {
+      break;
+    }
+  }
+  return collection;
+}
+
+module.exports = baseEach;
+
+},{"./baseForOwn":107,"./isLength":125,"./toObject":130}],105:[function(require,module,exports){
+var baseEach = require('./baseEach');
+
+
+function baseEvery(collection, predicate) {
+  var result = true;
+  baseEach(collection, function(value, index, collection) {
+    result = !!predicate(value, index, collection);
+    return result;
+  });
+  return result;
+}
+
+module.exports = baseEvery;
+
+},{"./baseEach":104}],106:[function(require,module,exports){
+var toObject = require('./toObject');
+
+
+function baseFor(object, iteratee, keysFunc) {
+  var index = -1,
+      iterable = toObject(object),
+      props = keysFunc(object),
+      length = props.length;
+
+  while (++index < length) {
+    var key = props[index];
+    if (iteratee(iterable[key], key, iterable) === false) {
+      break;
+    }
+  }
+  return object;
+}
+
+module.exports = baseFor;
+
+},{"./toObject":130}],107:[function(require,module,exports){
+var baseFor = require('./baseFor'),
+    keys = require('../object/keys');
+
+
+function baseForOwn(object, iteratee) {
+  return baseFor(object, iteratee, keys);
+}
+
+module.exports = baseForOwn;
+
+},{"../object/keys":141,"./baseFor":106}],108:[function(require,module,exports){
+var baseIsEqualDeep = require('./baseIsEqualDeep');
+
+
+function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
+  if (value === other) {
+    return value !== 0 || (1 / value == 1 / other);
+  }
+  var valType = typeof value,
+      othType = typeof other;
+
+  if ((valType != 'function' && valType != 'object' && othType != 'function' && othType != 'object') ||
+      value == null || other == null) {
+    return value !== value && other !== other;
+  }
+  return baseIsEqualDeep(value, other, baseIsEqual, customizer, isWhere, stackA, stackB);
+}
+
+module.exports = baseIsEqual;
+
+},{"./baseIsEqualDeep":109}],109:[function(require,module,exports){
+var equalArrays = require('./equalArrays'),
+    equalByTag = require('./equalByTag'),
+    equalObjects = require('./equalObjects'),
+    isArray = require('../lang/isArray'),
+    isTypedArray = require('../lang/isTypedArray');
+
+
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    objectTag = '[object Object]';
+
+
+var objectProto = Object.prototype;
+
+
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+
+var objToString = objectProto.toString;
+
+
+function baseIsEqualDeep(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
+  var objIsArr = isArray(object),
+      othIsArr = isArray(other),
+      objTag = arrayTag,
+      othTag = arrayTag;
+
+  if (!objIsArr) {
+    objTag = objToString.call(object);
+    if (objTag == argsTag) {
+      objTag = objectTag;
+    } else if (objTag != objectTag) {
+      objIsArr = isTypedArray(object);
+    }
+  }
+  if (!othIsArr) {
+    othTag = objToString.call(other);
+    if (othTag == argsTag) {
+      othTag = objectTag;
+    } else if (othTag != objectTag) {
+      othIsArr = isTypedArray(other);
+    }
+  }
+  var objIsObj = objTag == objectTag,
+      othIsObj = othTag == objectTag,
+      isSameTag = objTag == othTag;
+
+  if (isSameTag && !(objIsArr || objIsObj)) {
+    return equalByTag(object, other, objTag);
+  }
+  var valWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+      othWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+
+  if (valWrapped || othWrapped) {
+    return equalFunc(valWrapped ? object.value() : object, othWrapped ? other.value() : other, customizer, isWhere, stackA, stackB);
+  }
+  if (!isSameTag) {
+    return false;
+  }
+  stackA || (stackA = []);
+  stackB || (stackB = []);
+
+  var length = stackA.length;
+  while (length--) {
+    if (stackA[length] == object) {
+      return stackB[length] == other;
+    }
+  }
+  stackA.push(object);
+  stackB.push(other);
+
+  var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isWhere, stackA, stackB);
+
+  stackA.pop();
+  stackB.pop();
+
+  return result;
+}
+
+module.exports = baseIsEqualDeep;
+
+},{"../lang/isArray":132,"../lang/isTypedArray":138,"./equalArrays":119,"./equalByTag":120,"./equalObjects":121}],110:[function(require,module,exports){
+
+function baseIsFunction(value) {
+  return typeof value == 'function' || false;
+}
+
+module.exports = baseIsFunction;
+
+},{}],111:[function(require,module,exports){
+var baseIsEqual = require('./baseIsEqual');
+
+
+var objectProto = Object.prototype;
+
+
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+
+function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
+  var length = props.length;
+  if (object == null) {
+    return !length;
+  }
+  var index = -1,
+      noCustomizer = !customizer;
+
+  while (++index < length) {
+    if ((noCustomizer && strictCompareFlags[index])
+          ? values[index] !== object[props[index]]
+          : !hasOwnProperty.call(object, props[index])
+        ) {
+      return false;
+    }
+  }
+  index = -1;
+  while (++index < length) {
+    var key = props[index];
+    if (noCustomizer && strictCompareFlags[index]) {
+      var result = hasOwnProperty.call(object, key);
+    } else {
+      var objValue = object[key],
+          srcValue = values[index];
+
+      result = customizer ? customizer(objValue, srcValue, key) : undefined;
+      if (typeof result == 'undefined') {
+        result = baseIsEqual(srcValue, objValue, customizer, true);
+      }
+    }
+    if (!result) {
+      return false;
+    }
+  }
+  return true;
+}
+
+module.exports = baseIsMatch;
+
+},{"./baseIsEqual":108}],112:[function(require,module,exports){
+var baseIsMatch = require('./baseIsMatch'),
+    isStrictComparable = require('./isStrictComparable'),
+    keys = require('../object/keys');
+
+
+var objectProto = Object.prototype;
+
+
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+
+function baseMatches(source) {
+  var props = keys(source),
+      length = props.length;
+
+  if (length == 1) {
+    var key = props[0],
+        value = source[key];
+
+    if (isStrictComparable(value)) {
+      return function(object) {
+        return object != null && object[key] === value && hasOwnProperty.call(object, key);
+      };
+    }
+  }
+  var values = Array(length),
+      strictCompareFlags = Array(length);
+
+  while (length--) {
+    value = source[props[length]];
+    values[length] = value;
+    strictCompareFlags[length] = isStrictComparable(value);
+  }
+  return function(object) {
+    return baseIsMatch(object, props, values, strictCompareFlags);
+  };
+}
+
+module.exports = baseMatches;
+
+},{"../object/keys":141,"./baseIsMatch":111,"./isStrictComparable":127}],113:[function(require,module,exports){
+var baseIsEqual = require('./baseIsEqual'),
+    isStrictComparable = require('./isStrictComparable');
+
+
+function baseMatchesProperty(key, value) {
+  if (isStrictComparable(value)) {
+    return function(object) {
+      return object != null && object[key] === value;
+    };
+  }
+  return function(object) {
+    return object != null && baseIsEqual(value, object[key], null, true);
+  };
+}
+
+module.exports = baseMatchesProperty;
+
+},{"./baseIsEqual":108,"./isStrictComparable":127}],114:[function(require,module,exports){
+
+function baseProperty(key) {
+  return function(object) {
+    return object == null ? undefined : object[key];
+  };
+}
+
+module.exports = baseProperty;
+
+},{}],115:[function(require,module,exports){
+var identity = require('../utility/identity'),
+    metaMap = require('./metaMap');
+
+
+var baseSetData = !metaMap ? identity : function(func, data) {
+  metaMap.set(func, data);
+  return func;
+};
+
+module.exports = baseSetData;
+
+},{"../utility/identity":145,"./metaMap":128}],116:[function(require,module,exports){
+
+function baseToString(value) {
+  if (typeof value == 'string') {
+    return value;
+  }
+  return value == null ? '' : (value + '');
+}
+
+module.exports = baseToString;
+
+},{}],117:[function(require,module,exports){
+var identity = require('../utility/identity');
+
+
+function bindCallback(func, thisArg, argCount) {
+  if (typeof func != 'function') {
+    return identity;
+  }
+  if (typeof thisArg == 'undefined') {
+    return func;
+  }
+  switch (argCount) {
+    case 1: return function(value) {
+      return func.call(thisArg, value);
+    };
+    case 3: return function(value, index, collection) {
+      return func.call(thisArg, value, index, collection);
+    };
+    case 4: return function(accumulator, value, index, collection) {
+      return func.call(thisArg, accumulator, value, index, collection);
+    };
+    case 5: return function(value, other, key, object, source) {
+      return func.call(thisArg, value, other, key, object, source);
+    };
+  }
+  return function() {
+    return func.apply(thisArg, arguments);
+  };
+}
+
+module.exports = bindCallback;
+
+},{"../utility/identity":145}],118:[function(require,module,exports){
+var bindCallback = require('./bindCallback'),
+    isIterateeCall = require('./isIterateeCall');
+
+
+function createAssigner(assigner) {
+  return function() {
+    var args = arguments,
+        length = args.length,
+        object = args[0];
+
+    if (length < 2 || object == null) {
+      return object;
+    }
+    var customizer = args[length - 2],
+        thisArg = args[length - 1],
+        guard = args[3];
+
+    if (length > 3 && typeof customizer == 'function') {
+      customizer = bindCallback(customizer, thisArg, 5);
+      length -= 2;
+    } else {
+      customizer = (length > 2 && typeof thisArg == 'function') ? thisArg : null;
+      length -= (customizer ? 1 : 0);
+    }
+    if (guard && isIterateeCall(args[1], args[2], guard)) {
+      customizer = length == 3 ? null : customizer;
+      length = 2;
+    }
+    var index = 0;
+    while (++index < length) {
+      var source = args[index];
+      if (source) {
+        assigner(object, source, customizer);
+      }
+    }
+    return object;
+  };
+}
+
+module.exports = createAssigner;
+
+},{"./bindCallback":117,"./isIterateeCall":124}],119:[function(require,module,exports){
+
+function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stackB) {
+  var index = -1,
+      arrLength = array.length,
+      othLength = other.length,
+      result = true;
+
+  if (arrLength != othLength && !(isWhere && othLength > arrLength)) {
+    return false;
+  }
+  while (result && ++index < arrLength) {
+    var arrValue = array[index],
+        othValue = other[index];
+
+    result = undefined;
+    if (customizer) {
+      result = isWhere
+        ? customizer(othValue, arrValue, index)
+        : customizer(arrValue, othValue, index);
+    }
+    if (typeof result == 'undefined') {
+      if (isWhere) {
+        var othIndex = othLength;
+        while (othIndex--) {
+          othValue = other[othIndex];
+          result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
+          if (result) {
+            break;
+          }
+        }
+      } else {
+        result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
+      }
+    }
+  }
+  return !!result;
+}
+
+module.exports = equalArrays;
+
+},{}],120:[function(require,module,exports){
+
+var boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    numberTag = '[object Number]',
+    regexpTag = '[object RegExp]',
+    stringTag = '[object String]';
+
+
+function equalByTag(object, other, tag) {
+  switch (tag) {
+    case boolTag:
+    case dateTag:
+      return +object == +other;
+
+    case errorTag:
+      return object.name == other.name && object.message == other.message;
+
+    case numberTag:
+      return (object != +object)
+        ? other != +other
+        : (object == 0 ? ((1 / object) == (1 / other)) : object == +other);
+
+    case regexpTag:
+    case stringTag:
+      return object == (other + '');
+  }
+  return false;
+}
+
+module.exports = equalByTag;
+
+},{}],121:[function(require,module,exports){
+var keys = require('../object/keys');
+
+
+var objectProto = Object.prototype;
+
+
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+
+function equalObjects(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
+  var objProps = keys(object),
+      objLength = objProps.length,
+      othProps = keys(other),
+      othLength = othProps.length;
+
+  if (objLength != othLength && !isWhere) {
+    return false;
+  }
+  var hasCtor,
+      index = -1;
+
+  while (++index < objLength) {
+    var key = objProps[index],
+        result = hasOwnProperty.call(other, key);
+
+    if (result) {
+      var objValue = object[key],
+          othValue = other[key];
+
+      result = undefined;
+      if (customizer) {
+        result = isWhere
+          ? customizer(othValue, objValue, key)
+          : customizer(objValue, othValue, key);
+      }
+      if (typeof result == 'undefined') {
+        result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, customizer, isWhere, stackA, stackB);
+      }
+    }
+    if (!result) {
+      return false;
+    }
+    hasCtor || (hasCtor = key == 'constructor');
+  }
+  if (!hasCtor) {
+    var objCtor = object.constructor,
+        othCtor = other.constructor;
+
+    if (objCtor != othCtor &&
+        ('constructor' in object && 'constructor' in other) &&
+        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+module.exports = equalObjects;
+
+},{"../object/keys":141}],122:[function(require,module,exports){
+var baseSetData = require('./baseSetData'),
+    isNative = require('../lang/isNative'),
+    support = require('../support');
+
+
+var reFuncName = /^\s*function[ \n\r\t]+\w/;
+
+
+var reThis = /\bthis\b/;
+
+
+var fnToString = Function.prototype.toString;
+
+
+function isBindable(func) {
+  var result = !(support.funcNames ? func.name : support.funcDecomp);
+
+  if (!result) {
+    var source = fnToString.call(func);
+    if (!support.funcNames) {
+      result = !reFuncName.test(source);
+    }
+    if (!result) {
+      result = reThis.test(source) || isNative(func);
+      baseSetData(func, result);
+    }
+  }
+  return result;
+}
+
+module.exports = isBindable;
+
+},{"../lang/isNative":135,"../support":144,"./baseSetData":115}],123:[function(require,module,exports){
+
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+
+function isIndex(value, length) {
+  value = +value;
+  length = length == null ? MAX_SAFE_INTEGER : length;
+  return value > -1 && value % 1 == 0 && value < length;
+}
+
+module.exports = isIndex;
+
+},{}],124:[function(require,module,exports){
+var isIndex = require('./isIndex'),
+    isLength = require('./isLength'),
+    isObject = require('../lang/isObject');
+
+
+function isIterateeCall(value, index, object) {
+  if (!isObject(object)) {
+    return false;
+  }
+  var type = typeof index;
+  if (type == 'number') {
+    var length = object.length,
+        prereq = isLength(length) && isIndex(index, length);
+  } else {
+    prereq = type == 'string' && index in object;
+  }
+  if (prereq) {
+    var other = object[index];
+    return value === value ? (value === other) : (other !== other);
+  }
+  return false;
+}
+
+module.exports = isIterateeCall;
+
+},{"../lang/isObject":136,"./isIndex":123,"./isLength":125}],125:[function(require,module,exports){
+
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+
+function isLength(value) {
+  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+
+module.exports = isLength;
+
+},{}],126:[function(require,module,exports){
+
+function isObjectLike(value) {
+  return (value && typeof value == 'object') || false;
+}
+
+module.exports = isObjectLike;
+
+},{}],127:[function(require,module,exports){
+var isObject = require('../lang/isObject');
+
+
+function isStrictComparable(value) {
+  return value === value && (value === 0 ? ((1 / value) > 0) : !isObject(value));
+}
+
+module.exports = isStrictComparable;
+
+},{"../lang/isObject":136}],128:[function(require,module,exports){
+(function (global){
+var isNative = require('../lang/isNative');
+
+
+var WeakMap = isNative(WeakMap = global.WeakMap) && WeakMap;
+
+
+var metaMap = WeakMap && new WeakMap;
+
+module.exports = metaMap;
+
+}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../lang/isNative":135}],129:[function(require,module,exports){
+var isArguments = require('../lang/isArguments'),
+    isArray = require('../lang/isArray'),
+    isIndex = require('./isIndex'),
+    isLength = require('./isLength'),
+    keysIn = require('../object/keysIn'),
+    support = require('../support');
+
+
+var objectProto = Object.prototype;
+
+
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+
+function shimKeys(object) {
+  var props = keysIn(object),
+      propsLength = props.length,
+      length = propsLength && object.length;
+
+  var allowIndexes = length && isLength(length) &&
+    (isArray(object) || (support.nonEnumArgs && isArguments(object)));
+
+  var index = -1,
+      result = [];
+
+  while (++index < propsLength) {
+    var key = props[index];
+    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = shimKeys;
+
+},{"../lang/isArguments":131,"../lang/isArray":132,"../object/keysIn":142,"../support":144,"./isIndex":123,"./isLength":125}],130:[function(require,module,exports){
+var isObject = require('../lang/isObject');
+
+
+function toObject(value) {
+  return isObject(value) ? value : Object(value);
+}
+
+module.exports = toObject;
+
+},{"../lang/isObject":136}],131:[function(require,module,exports){
+var isLength = require('../internal/isLength'),
+    isObjectLike = require('../internal/isObjectLike');
+
+
+var argsTag = '[object Arguments]';
+
+
+var objectProto = Object.prototype;
+
+
+var objToString = objectProto.toString;
+
+
+function isArguments(value) {
+  var length = isObjectLike(value) ? value.length : undefined;
+  return (isLength(length) && objToString.call(value) == argsTag) || false;
+}
+
+module.exports = isArguments;
+
+},{"../internal/isLength":125,"../internal/isObjectLike":126}],132:[function(require,module,exports){
+var isLength = require('../internal/isLength'),
+    isNative = require('./isNative'),
+    isObjectLike = require('../internal/isObjectLike');
+
+
+var arrayTag = '[object Array]';
+
+
+var objectProto = Object.prototype;
+
+
+var objToString = objectProto.toString;
+
+
+var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
+
+
+var isArray = nativeIsArray || function(value) {
+  return (isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag) || false;
+};
+
+module.exports = isArray;
+
+},{"../internal/isLength":125,"../internal/isObjectLike":126,"./isNative":135}],133:[function(require,module,exports){
+var isArguments = require('./isArguments'),
+    isArray = require('./isArray'),
+    isFunction = require('./isFunction'),
+    isLength = require('../internal/isLength'),
+    isObjectLike = require('../internal/isObjectLike'),
+    isString = require('./isString'),
+    keys = require('../object/keys');
+
+
+function isEmpty(value) {
+  if (value == null) {
+    return true;
+  }
+  var length = value.length;
+  if (isLength(length) && (isArray(value) || isString(value) || isArguments(value) ||
+      (isObjectLike(value) && isFunction(value.splice)))) {
+    return !length;
+  }
+  return !keys(value).length;
+}
+
+module.exports = isEmpty;
+
+},{"../internal/isLength":125,"../internal/isObjectLike":126,"../object/keys":141,"./isArguments":131,"./isArray":132,"./isFunction":134,"./isString":137}],134:[function(require,module,exports){
+(function (global){
+var baseIsFunction = require('../internal/baseIsFunction'),
+    isNative = require('./isNative');
+
+
+var funcTag = '[object Function]';
+
+
+var objectProto = Object.prototype;
+
+
+var objToString = objectProto.toString;
+
+
+var Uint8Array = isNative(Uint8Array = global.Uint8Array) && Uint8Array;
+
+
+var isFunction = !(baseIsFunction(/x/) || (Uint8Array && !baseIsFunction(Uint8Array))) ? baseIsFunction : function(value) {
+  return objToString.call(value) == funcTag;
+};
+
+module.exports = isFunction;
+
+}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../internal/baseIsFunction":110,"./isNative":135}],135:[function(require,module,exports){
+var escapeRegExp = require('../string/escapeRegExp'),
+    isObjectLike = require('../internal/isObjectLike');
+
+
+var funcTag = '[object Function]';
+
+
+var reHostCtor = /^\[object .+?Constructor\]$/;
+
+
+var objectProto = Object.prototype;
+
+
+var fnToString = Function.prototype.toString;
+
+
+var objToString = objectProto.toString;
+
+
+var reNative = RegExp('^' +
+  escapeRegExp(objToString)
+  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+);
+
+
+function isNative(value) {
+  if (value == null) {
+    return false;
+  }
+  if (objToString.call(value) == funcTag) {
+    return reNative.test(fnToString.call(value));
+  }
+  return (isObjectLike(value) && reHostCtor.test(value)) || false;
+}
+
+module.exports = isNative;
+
+},{"../internal/isObjectLike":126,"../string/escapeRegExp":143}],136:[function(require,module,exports){
+
+function isObject(value) {
+  var type = typeof value;
+  return type == 'function' || (value && type == 'object') || false;
+}
+
+module.exports = isObject;
+
+},{}],137:[function(require,module,exports){
+var isObjectLike = require('../internal/isObjectLike');
+
+
+var stringTag = '[object String]';
+
+
+var objectProto = Object.prototype;
+
+
+var objToString = objectProto.toString;
+
+
+function isString(value) {
+  return typeof value == 'string' || (isObjectLike(value) && objToString.call(value) == stringTag) || false;
+}
+
+module.exports = isString;
+
+},{"../internal/isObjectLike":126}],138:[function(require,module,exports){
+var isLength = require('../internal/isLength'),
+    isObjectLike = require('../internal/isObjectLike');
+
+
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    funcTag = '[object Function]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    objectTag = '[object Object]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    weakMapTag = '[object WeakMap]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    float32Tag = '[object Float32Array]',
+    float64Tag = '[object Float64Array]',
+    int8Tag = '[object Int8Array]',
+    int16Tag = '[object Int16Array]',
+    int32Tag = '[object Int32Array]',
+    uint8Tag = '[object Uint8Array]',
+    uint8ClampedTag = '[object Uint8ClampedArray]',
+    uint16Tag = '[object Uint16Array]',
+    uint32Tag = '[object Uint32Array]';
+
+
+var typedArrayTags = {};
+typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
+typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
+typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
+typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
+typedArrayTags[uint32Tag] = true;
+typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
+typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
+typedArrayTags[dateTag] = typedArrayTags[errorTag] =
+typedArrayTags[funcTag] = typedArrayTags[mapTag] =
+typedArrayTags[numberTag] = typedArrayTags[objectTag] =
+typedArrayTags[regexpTag] = typedArrayTags[setTag] =
+typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
+
+
+var objectProto = Object.prototype;
+
+
+var objToString = objectProto.toString;
+
+
+function isTypedArray(value) {
+  return (isObjectLike(value) && isLength(value.length) && typedArrayTags[objToString.call(value)]) || false;
+}
+
+module.exports = isTypedArray;
+
+},{"../internal/isLength":125,"../internal/isObjectLike":126}],139:[function(require,module,exports){
+var baseAssign = require('../internal/baseAssign'),
+    createAssigner = require('../internal/createAssigner');
+
+
+var assign = createAssigner(baseAssign);
+
+module.exports = assign;
+
+},{"../internal/baseAssign":100,"../internal/createAssigner":118}],140:[function(require,module,exports){
+var baseCopy = require('../internal/baseCopy'),
+    baseCreate = require('../internal/baseCreate'),
+    isIterateeCall = require('../internal/isIterateeCall'),
+    keys = require('./keys');
+
+
+function create(prototype, properties, guard) {
+  var result = baseCreate(prototype);
+  if (guard && isIterateeCall(prototype, properties, guard)) {
+    properties = null;
+  }
+  return properties ? baseCopy(properties, result, keys(properties)) : result;
+}
+
+module.exports = create;
+
+},{"../internal/baseCopy":102,"../internal/baseCreate":103,"../internal/isIterateeCall":124,"./keys":141}],141:[function(require,module,exports){
+var isLength = require('../internal/isLength'),
+    isNative = require('../lang/isNative'),
+    isObject = require('../lang/isObject'),
+    shimKeys = require('../internal/shimKeys');
+
+
+var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
+
+
+var keys = !nativeKeys ? shimKeys : function(object) {
+  if (object) {
+    var Ctor = object.constructor,
+        length = object.length;
+  }
+  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
+      (typeof object != 'function' && (length && isLength(length)))) {
+    return shimKeys(object);
+  }
+  return isObject(object) ? nativeKeys(object) : [];
+};
+
+module.exports = keys;
+
+},{"../internal/isLength":125,"../internal/shimKeys":129,"../lang/isNative":135,"../lang/isObject":136}],142:[function(require,module,exports){
+var isArguments = require('../lang/isArguments'),
+    isArray = require('../lang/isArray'),
+    isIndex = require('../internal/isIndex'),
+    isLength = require('../internal/isLength'),
+    isObject = require('../lang/isObject'),
+    support = require('../support');
+
+
+var objectProto = Object.prototype;
+
+
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+
+function keysIn(object) {
+  if (object == null) {
+    return [];
+  }
+  if (!isObject(object)) {
+    object = Object(object);
+  }
+  var length = object.length;
+  length = (length && isLength(length) &&
+    (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
+
+  var Ctor = object.constructor,
+      index = -1,
+      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
+      result = Array(length),
+      skipIndexes = length > 0;
+
+  while (++index < length) {
+    result[index] = (index + '');
+  }
+  for (var key in object) {
+    if (!(skipIndexes && isIndex(key, length)) &&
+        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = keysIn;
+
+},{"../internal/isIndex":123,"../internal/isLength":125,"../lang/isArguments":131,"../lang/isArray":132,"../lang/isObject":136,"../support":144}],143:[function(require,module,exports){
+var baseToString = require('../internal/baseToString');
+
+
+var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
+    reHasRegExpChars = RegExp(reRegExpChars.source);
+
+
+function escapeRegExp(string) {
+  string = baseToString(string);
+  return (string && reHasRegExpChars.test(string))
+    ? string.replace(reRegExpChars, '\\$&')
+    : string;
+}
+
+module.exports = escapeRegExp;
+
+},{"../internal/baseToString":116}],144:[function(require,module,exports){
+(function (global){
+var isNative = require('./lang/isNative');
+
+
+var reThis = /\bthis\b/;
+
+
+var objectProto = Object.prototype;
+
+
+var document = (document = global.window) && document.document;
+
+
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+
+var support = {};
+
+(function(x) {
+
+
+  support.funcDecomp = !isNative(global.WinRTError) && reThis.test(function() { return this; });
+
+
+  support.funcNames = typeof Function.name == 'string';
+
+
+  try {
+    support.dom = document.createDocumentFragment().nodeType === 11;
+  } catch(e) {
+    support.dom = false;
+  }
+
+
+  try {
+    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
+  } catch(e) {
+    support.nonEnumArgs = true;
+  }
+}(0, 0));
+
+module.exports = support;
+
+}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./lang/isNative":135}],145:[function(require,module,exports){
+
+function identity(value) {
+  return value;
+}
+
+module.exports = identity;
+
+},{}]},{},[1])
