@@ -21,7 +21,7 @@
       "errors":[
         {"shape":"ResourceNotFoundFault"}
       ],
-      "documentation":"<p>For internal use only</p> <note/><p/>"
+      "documentation":"<p> Adds metadata tags to a DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.</p> <note/><p/>"
     },
     "CreateEndpoint":{
       "name":"CreateEndpoint",
@@ -299,7 +299,7 @@
       "errors":[
         {"shape":"ResourceNotFoundFault"}
       ],
-      "documentation":"<p>For internal use only</p> <note/><p/>"
+      "documentation":"<p> Lists all tags for an AWS DMS resource.</p> <note/><p/>"
     },
     "ModifyEndpoint":{
       "name":"ModifyEndpoint",
@@ -379,7 +379,7 @@
       "errors":[
         {"shape":"ResourceNotFoundFault"}
       ],
-      "documentation":"<p>For internal use only</p> <note/><p/>"
+      "documentation":"<p> Removes metadata tags from a DMS resource.</p> <note/><p/>"
     },
     "StartReplicationTask":{
       "name":"StartReplicationTask",
@@ -430,11 +430,9 @@
     "AccessDeniedFault":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>AWS DMS was denied access to the endpoint.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>AWS DMS was denied access to the endpoint.</p>",
       "exception":true
     },
     "AccountQuota":{
@@ -1222,11 +1220,9 @@
     "InsufficientResourceCapacityFault":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>There are not enough resources allocated to the database migration.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>There are not enough resources allocated to the database migration.</p>",
       "exception":true
     },
     "Integer":{"type":"integer"},
@@ -1234,31 +1230,25 @@
     "InvalidResourceStateFault":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>The resource is in a state that prevents it from being used for database migration.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>The resource is in a state that prevents it from being used for database migration.</p>",
       "exception":true
     },
     "InvalidSubnet":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>The subnet provided is invalid.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>The subnet provided is invalid.</p>",
       "exception":true
     },
     "KMSKeyNotAccessibleFault":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>AWS DMS cannot access the KMS key.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>AWS DMS cannot access the KMS key.</p>",
       "exception":true
     },
     "KeyList":{
@@ -1678,11 +1668,9 @@
     "ReplicationSubnetGroupDoesNotCoverEnoughAZs":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>The replication subnet group does not cover enough Availability Zones (AZs). Edit the replication subnet group and add more AZs.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>The replication subnet group does not cover enough Availability Zones (AZs). Edit the replication subnet group and add more AZs.</p>",
       "exception":true
     },
     "ReplicationSubnetGroups":{
@@ -1788,31 +1776,25 @@
     "ResourceAlreadyExistsFault":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>The resource you are attempting to create already exists.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>The resource you are attempting to create already exists.</p>",
       "exception":true
     },
     "ResourceNotFoundFault":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>The resource could not be found.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>The resource could not be found.</p>",
       "exception":true
     },
     "ResourceQuotaExceededFault":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>The quota for this resource quota has been exceeded.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>The quota for this resource quota has been exceeded.</p>",
       "exception":true
     },
     "SchemaList":{
@@ -1883,11 +1865,9 @@
     "StorageQuotaExceededFault":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>The storage quota has been exceeded.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>The storage quota has been exceeded.</p>",
       "exception":true
     },
     "String":{"type":"string"},
@@ -1911,11 +1891,9 @@
     "SubnetAlreadyInUse":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>The specified subnet is already in use.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>The specified subnet is already in use.</p>",
       "exception":true
     },
     "SubnetIdentifierList":{
@@ -2051,11 +2029,9 @@
     "UpgradeDependencyFailureFault":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"<p>An upgrade dependency is preventing the database migration.</p>"
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
+      "documentation":"<p>An upgrade dependency is preventing the database migration.</p>",
       "exception":true
     }
   },
