@@ -524,6 +524,102 @@ describe 'AWS.S3', ->
         expect(error.retryable).to.equal(true)
         expect(data).to.equal(null)
 
+  describe 'copyObject', ->
+
+    it 'returns data when the resp is 200 with valid response', ->
+      headers =
+        'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg=='
+        'x-amz-request-id': '656c76696e6727732072657175657374'
+      body =
+        """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <CopyObjectResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+          <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>
+          <Bucket>Example-Bucket</Bucket>
+          <Key>Example-Object</Key>
+          <ETag>"3858f62230ac3c915f300c664312c11f-9"</ETag>
+        </CopyObjectResult>
+        """
+
+      helpers.mockHttpResponse 200, headers, body
+      s3.copyObject (error, data) ->
+        expect(error).to.equal(null)
+        expect(data).to.eql({
+          CopyObjectResult: {
+            ETag: '"3858f62230ac3c915f300c664312c11f-9"'
+          }
+        })
+        expect(this.requestId).to.equal('656c76696e6727732072657175657374')
+
+    it 'returns an error when the resp is 200 with an error xml document', ->
+      body =
+      """
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Error>
+        <Code>InternalError</Code>
+        <Message>We encountered an internal error. Please try again.</Message>
+        <RequestId>656c76696e6727732072657175657374</RequestId>
+        <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+      </Error>
+      """
+
+      helpers.mockHttpResponse 200, {}, body
+      s3.copyObject (error, data) ->
+        expect(error ).to.be.instanceOf(Error)
+        expect(error.code).to.equal('InternalError')
+        expect(error.message).to.equal('We encountered an internal error. Please try again.')
+        expect(error.statusCode).to.equal(200)
+        expect(error.retryable).to.equal(true)
+        expect(data).to.equal(null)
+
+  describe 'uploadPartCopy', ->
+
+    it 'returns data when the resp is 200 with valid response', ->
+      headers =
+        'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg=='
+        'x-amz-request-id': '656c76696e6727732072657175657374'
+      body =
+        """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <CopyPartResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+          <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>
+          <Bucket>Example-Bucket</Bucket>
+          <Key>Example-Object</Key>
+          <ETag>"3858f62230ac3c915f300c664312c11f-9"</ETag>
+        </CopyPartResult>
+        """
+
+      helpers.mockHttpResponse 200, headers, body
+      s3.uploadPartCopy {Bucket: 'bucket', Key: 'key', CopySource: 'bucket/key'}, (error, data) ->
+        expect(error).to.equal(null)
+        expect(data).to.eql({
+          CopyPartResult: {
+            ETag: '"3858f62230ac3c915f300c664312c11f-9"'
+          }
+        })
+        expect(this.requestId).to.equal('656c76696e6727732072657175657374')
+
+    it 'returns an error when the resp is 200 with an error xml document', ->
+      body =
+      """
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Error>
+        <Code>InternalError</Code>
+        <Message>We encountered an internal error. Please try again.</Message>
+        <RequestId>656c76696e6727732072657175657374</RequestId>
+        <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+      </Error>
+      """
+
+      helpers.mockHttpResponse 200, {}, body
+      s3.uploadPartCopy (error, data) ->
+        expect(error ).to.be.instanceOf(Error)
+        expect(error.code).to.equal('InternalError')
+        expect(error.message).to.equal('We encountered an internal error. Please try again.')
+        expect(error.statusCode).to.equal(200)
+        expect(error.retryable).to.equal(true)
+        expect(data).to.equal(null)
+
   describe 'getBucketLocation', ->
 
     it 'returns empty string for the location constraint when not present', ->
