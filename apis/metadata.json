@@ -135,7 +135,8 @@
     "name": "ImportExport"
   },
   "inspector": {
-    "name": "Inspector"
+    "name": "Inspector",
+    "versions": ["2015-08-18*"]
   },
   "iot": {
     "name": "Iot"
