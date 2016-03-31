@@ -635,3 +635,42 @@ describe 'AWS.util.extractRequestId', ->
     req.send()
     AWS.util.extractRequestId(req.response)
     expect(req.response.error.requestId).to.equal('RequestId1')
+
+describe 'AWS.util.addPromisesToRequests', ->
+  afterEach ->
+    delete AWS.Request.prototype.promise
+
+  if typeof Promise != 'undefined'
+    describe 'with native promises', ->
+      it 'can use native promises', ->
+        AWS.util.addPromisesToRequests(AWS.Request)
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+
+      it 'will use specified dependency over native promises', ->
+        service = new helpers.MockService()
+        count = 0
+        P = -> count++
+        AWS.util.addPromisesToRequests(AWS.Request, P)
+        req = service.makeRequest('mockMethod')
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+        reqSpy = helpers.spyOn(req, 'promise').andCallThrough()
+        req.promise()
+        expect(count).to.equal(reqSpy.calls.length)
+
+  else
+    describe 'without native promises', ->
+      it 'will not add promise method if no dependency is provided', ->
+        AWS.util.addPromisesToRequests(AWS.Request)
+        expect(typeof AWS.Request.prototype.promise).to.equal('undefined')
+
+      it 'will add promise method if dependency is provided', ->
+        P = ->
+        AWS.util.addPromisesToRequests(AWS.Request, P)
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+
+      it 'will remove promise method if dependency is not a function', ->
+        P = ->
+        AWS.util.addPromisesToRequests(AWS.Request, P)
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+        AWS.util.addPromisesToRequests(AWS.Request, null)
+        expect(typeof AWS.Request.prototype.promise).to.equal('undefined')

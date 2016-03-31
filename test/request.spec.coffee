@@ -234,6 +234,22 @@ describe 'AWS.Request', ->
         expect(err.message).to.match(/aborted by user/)
         done()
 
+  describe 'promise', ->
+    it 'exists if Promises are available', ->
+      req = service.makeRequest('mockMethod')
+      if typeof Promise == 'undefined'
+        expect(typeof req.promise).to.equal('undefined')
+      else
+        expect(typeof req.promise).to.equal('function')
+
+    it 'returns a promise when called', ->
+      P = ->
+      AWS.config.setPromisesDependency(P)
+      req = service.makeRequest('mockMethod')
+      expect(typeof req.promise).to.equal('function')
+      promise = req.promise()
+      expect(promise instanceof P).to.equal(true)
+
   if AWS.util.isNode()
     describe 'createReadStream', ->
       nstream = require('stream')

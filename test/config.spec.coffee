@@ -230,3 +230,9 @@ describe 'AWS.config', ->
     AWS.config = {}
     expect(AWS.config).to.eql({})
     AWS.config = oldConfig
+
+  describe 'setPromisesDependency', ->
+    it 'updates promise support on requests', ->
+      utilSpy = helpers.spyOn(AWS.util, 'addPromisesToRequests')
+      AWS.config.setPromisesDependency(->)
+      expect(utilSpy.calls.length).to.equal(1)
