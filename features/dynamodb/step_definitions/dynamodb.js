@@ -1,3 +1,5 @@
+var jmespath = require('jmespath');
+
 module.exports = function() {
   this.Before("@dynamodb-2011-12-05", function (next) {
     this.service = new this.AWS.DynamoDB({
@@ -72,7 +74,7 @@ module.exports = function() {
   });
 
   this.Then(/^it should have attribute "([^"]*)" containing "([^"]*)"$/, function(attr, value, next) {
-    this.assert.equal(this.AWS.util.jamespath.find(attr, this.data.Item), value);
+    this.assert.equal(jmespath.search(this.data.Item, attr), value);
     next();
   });
 

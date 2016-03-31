@@ -134,6 +134,83 @@ describe 'AWS.Request', ->
       catch e
         expect(e.name).to.equal('ReferenceError')
 
+  describe 'eachItem', ->
+    beforeEach ->
+      service = new AWS.Service apiConfig: new AWS.Model.Api
+        operations:
+          mockMethod:
+            input:
+              type: 'structure'
+              members:
+                NextToken: type: 'string'
+            output:
+              type: 'structure'
+              members:
+                NextToken: type: 'string'
+                Results:
+                  type: 'list'
+                  member: type: 'string'
+        paginators:
+          mockMethod:
+            input_token: 'NextToken'
+            output_token: 'NextToken'
+            result_key: 'Results'
+
+    it 'performs callback on each returned item', (done) ->
+      helpers.mockResponses [
+        {data: Results: [{Value: 1}, {Value: 2}, {Value: 3}]}
+      ]
+      resps = []
+      service.mockMethod().eachItem (err, data) ->
+        resps.push([err, data])
+        if err == null && data == null
+          expect(resps).to.eql [
+            [null, {Value: 1}],
+            [null, {Value: 2}],
+            [null, {Value: 3}],
+            [null, null]
+          ]
+          done()
+
+    it 'performs callback on items from multiple pages', (done) ->
+      helpers.mockResponses [
+        {data: {Results: [{Value: 1}, {Value: 2}], NextToken: 'a'}},
+        {data: {Results: [{Value: 3}], NextToken: 'b'}},
+        {data: Results: [{Value: 4}, {Value: 5}]}
+      ]
+      resps = []
+      service.mockMethod().eachItem (err, data) ->
+        resps.push([err, data])
+        if err == null && data == null
+          expect(resps).to.eql [
+            [null, {Value: 1}],
+            [null, {Value: 2}],
+            [null, {Value: 3}],
+            [null, {Value: 4}],
+            [null, {Value: 5}],
+            [null, null]
+          ]
+          done()
+
+    it 'passes error to callback', (done) ->
+      helpers.mockResponses [
+        {data: {Results: [{Value: 1}, {Value: 2}], NextToken: 'a'}},
+        {error: {code: 'mockError'}, httpResponse: {statusCode: 404}}
+      ]
+      resps = []
+      service.mockMethod().eachItem (err, data) ->
+        if err
+          delete err.retryDelay
+        resps.push([err, data])
+        if err == null && data == null
+          expect(resps).to.eql [
+            [null, {Value: 1}],
+            [null, {Value: 2}],
+            [{code: 'mockError', retryable: false, statusCode: 404}, null],
+            [null, null]
+          ]
+          done()
+
   describe 'waitFor', ->
     it 'creates a ResourceWaiter object', ->
       service.api.waiters = state: operation: 'mockMethod'
