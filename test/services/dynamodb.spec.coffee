@@ -9,6 +9,8 @@ describe 'AWS.DynamoDB', ->
   ddb = (options) ->
     new AWS.DynamoDB(configure(options))
 
+  client = ddb()
+
   describe 'config', ->
 
     it 'returns the configuration object it was constructed with', ->
@@ -19,7 +21,7 @@ describe 'AWS.DynamoDB', ->
   describe 'numRetries', ->
 
     it 'defaults to 10', ->
-      expect(ddb().numRetries()).to.equal(10)
+      expect(client.numRetries()).to.equal(10)
 
     it 'can be overridden in the config', ->
       expect(ddb({ maxRetries: 2 }).numRetries()).to.equal(2)
@@ -27,7 +29,6 @@ describe 'AWS.DynamoDB', ->
   describe 'retryDelays', ->
 
     it 'has a custom backoff function', ->
-      client = ddb()
       expectedDelays = [ 0, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800 ]
       actualDelays = (client.retryDelays(i) for i in [0..client.numRetries()-1])
       expect(actualDelays).to.eql(expectedDelays)
