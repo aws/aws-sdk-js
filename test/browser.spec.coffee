@@ -18,7 +18,9 @@ devicefarm = new AWS.DeviceFarm(AWS.util.merge(config, config.devicefarm))
 dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
 dynamodbstreams = new AWS.DynamoDBStreams(AWS.util.merge(config, config.dynamodbstreams))
 ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
+ecs = new AWS.ECS(AWS.util.merge(config, config.ecs))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
+elb = new AWS.ELB(AWS.util.merge(config, config.elb))
 config.inspector = config.inspector || {}
 config.inspector.region = 'us-west-2'
 inspector = new AWS.Inspector(AWS.util.merge(config, config.inspector))
@@ -341,6 +343,19 @@ integrationTests ->
         matchError(err, 'The volume \'vol-12345678\' does not exist')
         done()
 
+  describe 'AWS.ECS', ->
+    it 'makes a request', (done) ->
+      ecs.listClusters {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.clusterArns)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      ecs.stopTask {task: 'xxxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxx'}, (err, data) ->
+        assertError(err, 'ClusterNotFoundException')
+        noData(data)
+        done()
+
   describe 'AWS.ElasticTranscoder', ->
     it 'makes a request', (done) ->
       elastictranscoder.listPipelines (err, data) ->
@@ -352,6 +367,19 @@ integrationTests ->
       elastictranscoder.readJob {Id: '3333333333333-abcde3'}, (err, data) ->
         noData(data)
         assertError(err, 'ResourceNotFoundException')
+        done()
+
+  describe 'AWS.ELB', ->
+    it 'makes a request', (done) ->
+      elb.describeLoadBalancers {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.LoadBalancerDescriptions)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      elb.describeTags {LoadBalancerNames: ['fake-name']}, (err, data) ->
+        assertError(err, 'LoadBalancerNotFound')
+        noData(data)
         done()
 
   describe 'AWS.Inspector', ->
