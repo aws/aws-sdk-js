@@ -5,6 +5,7 @@ try
   config = require('./configuration')
 
 acm = new AWS.ACM(AWS.util.merge(config, config.acm))
+apigateway = new AWS.APIGateway(AWS.util.merge(config, config.apigateway))
 cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront))
 cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail))
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
@@ -138,6 +139,21 @@ integrationTests ->
         CertificateArn: 'fake-arn'
       acm.describeCertificate params, (err, data) ->
         assertError(err, 'ValidationException')
+        noData(data)
+        done()
+
+  describe 'AWS.APIGateway', ->
+    it 'makes a request', (done) ->
+      apigateway.getRestApis {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.items)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        restApiId: 'fake-id'
+      apigateway.getRestApi params, (err, data) ->
+        assertError(err, 'NotFoundException')
         noData(data)
         done()
 
