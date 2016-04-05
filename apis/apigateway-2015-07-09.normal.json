@@ -23,7 +23,8 @@
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
         {"shape":"BadRequestException"}
-      ]
+      ],
+      "documentation":"<p>Create an <a>ApiKey</a> resource. </p>"
     },
     "CreateAuthorizer":{
       "name":"CreateAuthorizer",
@@ -40,7 +41,8 @@
         {"shape":"NotFoundException"},
         {"shape":"LimitExceededException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "documentation":"<p>Adds a new <a>Authorizer</a> resource to an existing <a>RestApi</a> resource.</p>"
     },
     "CreateBasePathMapping":{
       "name":"CreateBasePathMapping",
@@ -230,7 +232,8 @@
         {"shape":"TooManyRequestsException"},
         {"shape":"BadRequestException"},
         {"shape":"NotFoundException"}
-      ]
+      ],
+      "documentation":"<p>Deletes the <a>ClientCertificate</a> resource.</p>"
     },
     "DeleteDeployment":{
       "name":"DeleteDeployment",
@@ -367,7 +370,8 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"}
       ],
       "documentation":"<p>Deletes the specified API.</p>"
     },
@@ -382,7 +386,8 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"}
       ],
       "documentation":"<p>Deletes a <a>Stage</a> resource.</p>"
     },
@@ -431,7 +436,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"}
-      ]
+      ],
+      "documentation":"<p>Generates a <a>ClientCertificate</a> resource.</p>"
     },
     "GetAccount":{
       "name":"GetAccount",
@@ -551,7 +557,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "documentation":"<p>Gets information about the current <a>ClientCertificate</a> resource.</p>"
     },
     "GetClientCertificates":{
       "name":"GetClientCertificates",
@@ -565,7 +572,8 @@
         {"shape":"BadRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "documentation":"<p>Gets a collection of <a>ClientCertificate</a> resources.</p>"
     },
     "GetDeployment":{
       "name":"GetDeployment",
@@ -644,7 +652,8 @@
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "documentation":"<p>Exports a deployed version of a <a>RestApi</a> in a specified format.</p>"
     },
     "GetIntegration":{
       "name":"GetIntegration",
@@ -828,7 +837,8 @@
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "documentation":"<p>Generates a client SDK for a <a>RestApi</a> and <a>Stage</a>.</p>"
     },
     "GetStage":{
       "name":"GetStage",
@@ -859,6 +869,23 @@
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Gets information about one or more <a>Stage</a> resources.</p>"
+    },
+    "ImportRestApi":{
+      "name":"ImportRestApi",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis?mode=import",
+        "responseCode":201
+      },
+      "input":{"shape":"ImportRestApiRequest"},
+      "output":{"shape":"RestApi"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>A feature of the Amazon API Gateway control service for creating a new API from an external API definition file.</p>"
     },
     "PutIntegration":{
       "name":"PutIntegration",
@@ -891,7 +918,8 @@
         {"shape":"NotFoundException"},
         {"shape":"LimitExceededException"},
         {"shape":"BadRequestException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
       ],
       "documentation":"<p>Represents a put integration.</p>"
     },
@@ -933,6 +961,22 @@
       ],
       "documentation":"<p>Adds a <a>MethodResponse</a> to an existing <a>Method</a> resource.</p>"
     },
+    "PutRestApi":{
+      "name":"PutRestApi",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/restapis/{restapi_id}"
+      },
+      "input":{"shape":"PutRestApiRequest"},
+      "output":{"shape":"RestApi"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>A feature of the Amazon API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.</p>"
+    },
     "TestInvokeAuthorizer":{
       "name":"TestInvokeAuthorizer",
       "http":{
@@ -946,7 +990,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "documentation":"<p>Simulate the execution of an <a>Authorizer</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.</p>"
     },
     "TestInvokeMethod":{
       "name":"TestInvokeMethod",
@@ -961,7 +1006,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "documentation":"<p>Simulate the execution of a <a>Method</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.</p>"
     },
     "UpdateAccount":{
       "name":"UpdateAccount",
@@ -1041,7 +1087,8 @@
         {"shape":"TooManyRequestsException"},
         {"shape":"BadRequestException"},
         {"shape":"NotFoundException"}
-      ]
+      ],
+      "documentation":"<p>Changes information about an <a>ClientCertificate</a> resource.</p>"
     },
     "UpdateDeployment":{
       "name":"UpdateDeployment",
@@ -1088,7 +1135,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
       ],
       "documentation":"<p>Represents an update integration.</p>"
     },
@@ -1287,6 +1335,10 @@
           "shape":"AuthorizerType",
           "documentation":"<p>[Required] The type of the authorizer. Currently, the only valid type is TOKEN.</p>"
         },
+        "authType":{
+          "shape":"String",
+          "documentation":"<p>Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.</p>"
+        },
         "authorizerUri":{
           "shape":"String",
           "documentation":"<p>[Required] Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN authorizers, this must be a well-formed Lambda function URI. The URI should be of the form <code>arn:aws:apigateway:{region}:lambda:path/{service_api}</code>. <code>Region</code> is used to determine the right endpoint. In this case, <code>path</code> is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations</p>"
@@ -1312,6 +1364,7 @@
     },
     "AuthorizerType":{
       "type":"string",
+      "documentation":"<p>The authorizer type. Only current value is TOKEN.</p>",
       "enum":["TOKEN"]
     },
     "Authorizers":{
@@ -1394,12 +1447,28 @@
     "ClientCertificate":{
       "type":"structure",
       "members":{
-        "clientCertificateId":{"shape":"String"},
-        "description":{"shape":"String"},
-        "pemEncodedCertificate":{"shape":"String"},
-        "createdDate":{"shape":"Timestamp"},
-        "expirationDate":{"shape":"Timestamp"}
-      }
+        "clientCertificateId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the Client Certificate.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the Client Certificate.</p>"
+        },
+        "pemEncodedCertificate":{
+          "shape":"String",
+          "documentation":"<p>The PEM-encoded public key of the Client Certificate, that can be used to configure certificate authentication in the integration endpoint .</p>"
+        },
+        "createdDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date when the Client Certificate was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+        },
+        "expirationDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date when the Client Certificate will expire, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+        }
+      },
+      "documentation":"<p>Represents a Client Certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p>"
     },
     "ClientCertificates":{
       "type":"structure",
@@ -1407,9 +1476,11 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfClientCertificate",
+          "documentation":"<p>The current page of any <a>ClientCertificate</a> resources in the collection of <a>ClientCertificate</a> resources.</p>",
           "locationName":"item"
         }
-      }
+      },
+      "documentation":"<p>Represents a collection of <a>ClientCertificate</a> resources.</p>"
     },
     "ConflictException":{
       "type":"structure",
@@ -1438,7 +1509,8 @@
           "shape":"ListOfStageKeys",
           "documentation":"<p>Specifies whether the <a>ApiKey</a> can be used by callers.</p>"
         }
-      }
+      },
+      "documentation":"<p>Request to create an <a>ApiKey</a> resource.</p>"
     },
     "CreateAuthorizerRequest":{
       "type":"structure",
@@ -1452,6 +1524,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
+          "documentation":"<p>The <a>RestApi</a> identifier under which the <a>Authorizer</a> will be created.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -1462,6 +1535,10 @@
         "type":{
           "shape":"AuthorizerType",
           "documentation":"<p>[Required] The type of the authorizer.</p>"
+        },
+        "authType":{
+          "shape":"String",
+          "documentation":"<p>Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.</p>"
         },
         "authorizerUri":{
           "shape":"String",
@@ -1483,7 +1560,8 @@
           "shape":"NullableInteger",
           "documentation":"<p>The TTL of cached authorizer results.</p>"
         }
-      }
+      },
+      "documentation":"<p>Request to add a new <a>Authorizer</a> to an existing <a>RestApi</a> resource.</p>"
     },
     "CreateBasePathMappingRequest":{
       "type":"structure",
@@ -1663,7 +1741,7 @@
           "documentation":"<p>The Id of the <a>RestApi</a> that you want to clone from.</p>"
         }
       },
-      "documentation":"<p>Request to add a new <a>RestApi</a> resource to your collection.</p>"
+      "documentation":"<p>The POST Request to add a new <a>RestApi</a> resource to your collection.</p>"
     },
     "CreateStageRequest":{
       "type":"structure",
@@ -1769,10 +1847,12 @@
       "members":{
         "clientCertificateId":{
           "shape":"String",
+          "documentation":"<p>The identifier of the <a>ClientCertificate</a> resource to be deleted.</p>",
           "location":"uri",
           "locationName":"clientcertificate_id"
         }
-      }
+      },
+      "documentation":"<p>A request to delete the <a>ClientCertificate</a> resource.</p>"
     },
     "DeleteDeploymentRequest":{
       "type":"structure",
@@ -2092,16 +2172,22 @@
       "members":{
         "contentType":{
           "shape":"String",
+          "documentation":"<p>The content-type header value in the HTTP response. This will correspond to a valid 'accept' type in the request.</p>",
           "location":"header",
           "locationName":"Content-Type"
         },
         "contentDisposition":{
           "shape":"String",
+          "documentation":"<p>The content-disposition header value in the HTTP reseponse.</p>",
           "location":"header",
           "locationName":"Content-Disposition"
         },
-        "body":{"shape":"Blob"}
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>The binary blob response to <a>GetExport</a>, which contains the export.</p>"
+        }
       },
+      "documentation":"<p>The binary blob response to <a>GetExport</a>, which contains the generated SDK.</p>",
       "payload":"body"
     },
     "FlushStageAuthorizersCacheRequest":{
@@ -2151,8 +2237,12 @@
     "GenerateClientCertificateRequest":{
       "type":"structure",
       "members":{
-        "description":{"shape":"String"}
-      }
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the <a>ClientCertificate</a>.</p>"
+        }
+      },
+      "documentation":"<p>A request to generate a <a>ClientCertificate</a> resource.</p>"
     },
     "GetAccountRequest":{
       "type":"structure",
@@ -2225,11 +2315,13 @@
         },
         "position":{
           "shape":"String",
+          "documentation":"<p>If not all <a>Authorizer</a> resources in the response were present, the position will specificy where to start the next page of results.</p>",
           "location":"querystring",
           "locationName":"position"
         },
         "limit":{
           "shape":"NullableInteger",
+          "documentation":"<p>Limit the number of <a>Authorizer</a> resources in the response.</p>",
           "location":"querystring",
           "locationName":"limit"
         }
@@ -2289,25 +2381,30 @@
       "members":{
         "clientCertificateId":{
           "shape":"String",
+          "documentation":"<p>The identifier of the <a>ClientCertificate</a> resource to be described.</p>",
           "location":"uri",
           "locationName":"clientcertificate_id"
         }
-      }
+      },
+      "documentation":"<p>A request to get information about the current <a>ClientCertificate</a> resource.</p>"
     },
     "GetClientCertificatesRequest":{
       "type":"structure",
       "members":{
         "position":{
           "shape":"String",
+          "documentation":"<p>The position of the current <a>ClientCertificate</a> resource in the collection to get information about.</p>",
           "location":"querystring",
           "locationName":"position"
         },
         "limit":{
           "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of <a>ClientCertificate</a> resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.</p>",
           "location":"querystring",
           "locationName":"limit"
         }
-      }
+      },
+      "documentation":"<p>A request to get information about a collection of <a>ClientCertificate</a> resources.</p>"
     },
     "GetDeploymentRequest":{
       "type":"structure",
@@ -2397,29 +2494,35 @@
       "members":{
         "restApiId":{
           "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> to be exported.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
         "stageName":{
           "shape":"String",
+          "documentation":"<p>The name of the <a>Stage</a> that will be exported.</p>",
           "location":"uri",
           "locationName":"stage_name"
         },
         "exportType":{
           "shape":"String",
+          "documentation":"<p>The type of export. Currently only 'swagger' is supported.</p>",
           "location":"uri",
           "locationName":"export_type"
         },
         "parameters":{
           "shape":"MapOfStringToString",
+          "documentation":"<p>A key-value map of query string parameters that specify properties of the export, depending on the requested exportType. For exportType 'swagger', any combination of the following parameters are supported: 'integrations' will export x-amazon-apigateway-integration extensions 'authorizers' will export x-amazon-apigateway-authorizer extensions 'postman' will export with Postman extensions, allowing for import to the Postman tool</p>",
           "location":"querystring"
         },
         "accepts":{
           "shape":"String",
+          "documentation":"<p>The content-type of the export, for example 'application/json'. Currently 'application/json' and 'application/yaml' are supported for exportType 'swagger'. Should be specifed in the 'Accept' header for direct API requests.</p>",
           "location":"header",
           "locationName":"Accept"
         }
-      }
+      },
+      "documentation":"<p>Request a new export of a <a>RestApi</a> for a particular <a>Stage</a>.</p>"
     },
     "GetIntegrationRequest":{
       "type":"structure",
@@ -2684,7 +2787,7 @@
           "locationName":"restapi_id"
         }
       },
-      "documentation":"<p>Request to list an existing <a>RestApi</a> defined for your collection. </p>"
+      "documentation":"<p>The GET request to list an existing <a>RestApi</a> defined for your collection. </p>"
     },
     "GetRestApisRequest":{
       "type":"structure",
@@ -2702,7 +2805,7 @@
           "locationName":"limit"
         }
       },
-      "documentation":"<p>Request to list existing <a>RestApis</a> defined for your collection.</p>"
+      "documentation":"<p>The GET request to list existing <a>RestApis</a> defined for your collection.</p>"
     },
     "GetSdkRequest":{
       "type":"structure",
@@ -2714,24 +2817,29 @@
       "members":{
         "restApiId":{
           "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> that the SDK will use.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
         "stageName":{
           "shape":"String",
+          "documentation":"<p>The name of the <a>Stage</a> that the SDK will use.</p>",
           "location":"uri",
           "locationName":"stage_name"
         },
         "sdkType":{
           "shape":"String",
+          "documentation":"<p>The language for the generated SDK. Currently javascript, android, and objectivec (for iOS) are supported.</p>",
           "location":"uri",
           "locationName":"sdk_type"
         },
         "parameters":{
           "shape":"MapOfStringToString",
+          "documentation":"<p>A key-value map of query string parameters that specify properties of the SDK, depending on the requested sdkType. For sdkType 'objectivec', a parameter named \"classPrefix\" is required. For sdkType 'android', parameters named \"groupId\", \"artifactId\", \"artifactVersion\", and \"invokerPackage\" are required.</p>",
           "location":"querystring"
         }
-      }
+      },
+      "documentation":"<p>Request a new generated client SDK for a <a>RestApi</a> and <a>Stage</a>.</p>"
     },
     "GetStageRequest":{
       "type":"structure",
@@ -2774,13 +2882,36 @@
       },
       "documentation":"<p>Requests Amazon API Gateway to get information about one or more <a>Stage</a> resources.</p>"
     },
+    "ImportRestApiRequest":{
+      "type":"structure",
+      "required":["body"],
+      "members":{
+        "failOnWarnings":{
+          "shape":"Boolean",
+          "documentation":"<p>A query parameter to indicate whether to rollback the API creation (<code>true</code>) or not (<code>false</code>) when a warning is encountered. The default value is <code>false</code>.</p>",
+          "location":"querystring",
+          "locationName":"failonwarnings"
+        },
+        "parameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Custom header parameters as part of the request.</p>",
+          "location":"querystring"
+        },
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>The POST request body containing external API definitions. Currently, only Swagger definition JSON files are supported.</p>"
+        }
+      },
+      "documentation":"<p>A POST request to import an API to Amazon API Gateway using an input of an API definition file.</p>",
+      "payload":"body"
+    },
     "Integer":{"type":"integer"},
     "Integration":{
       "type":"structure",
       "members":{
         "type":{
           "shape":"IntegrationType",
-          "documentation":"<p>Specifies the integration's type.</p>"
+          "documentation":"<p>Specifies the integration's type. The valid value is <code>HTTP</code>, <code>AWS</code>, or <code>MOCK</code>.</p>"
         },
         "httpMethod":{
           "shape":"String",
@@ -2841,7 +2972,7 @@
     },
     "IntegrationType":{
       "type":"string",
-      "documentation":"<p>The integration type. Possible values are HTTP, AWS, or Mock.</p>",
+      "documentation":"<p>The integration type. The valid value is <code>HTTP</code>, <code>AWS</code>, or <code>MOCK</code>.</p>",
       "enum":[
         "HTTP",
         "AWS",
@@ -3189,7 +3320,7 @@
         },
         "uri":{
           "shape":"String",
-          "documentation":"<p>Specifies a put integration input's Uniform Resource Identifier (URI). When the integration type is HTTP or AWS, this field is required.</p>"
+          "documentation":"<p>Specifies a put integration input's Uniform Resource Identifier (URI). When the integration type is HTTP or AWS, this field is required. For integration with Lambda as an AWS service proxy, this value is of the 'arn:aws:apigateway:&lt;region&gt;:lambda:path/2015-03-31/functions/&lt;functionArn&gt;/invocations' format.</p>"
         },
         "credentials":{
           "shape":"String",
@@ -3356,6 +3487,51 @@
       },
       "documentation":"<p>Request to add a <a>MethodResponse</a> to an existing <a>Method</a> resource.</p>"
     },
+    "PutMode":{
+      "type":"string",
+      "enum":[
+        "merge",
+        "overwrite"
+      ]
+    },
+    "PutRestApiRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "body"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>RestApi</a> to be updated. </p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "mode":{
+          "shape":"PutMode",
+          "documentation":"<p>The <code>mode</code> query parameter to specify the update mode. Valid values are \"merge\" and \"overwrite\". By default, the update mode is \"merge\".</p>",
+          "location":"querystring",
+          "locationName":"mode"
+        },
+        "failOnWarnings":{
+          "shape":"Boolean",
+          "documentation":"<p>A query parameter to indicate whether to rollback the API update (<code>true</code>) or not (<code>false</code>) when a warning is encountered. The default value is <code>false</code>.</p>",
+          "location":"querystring",
+          "locationName":"failonwarnings"
+        },
+        "parameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Custom headers supplied as part of the request. </p>",
+          "location":"querystring"
+        },
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>The PUT request body containing external API definitions. Currently, only Swagger definition JSON files are supported.</p>"
+        }
+      },
+      "documentation":"<p>A PUT request to update an existing API, with external API definitions specified as the request body.</p>",
+      "payload":"body"
+    },
     "Resource":{
       "type":"structure",
       "members":{
@@ -3377,7 +3553,7 @@
         },
         "resourceMethods":{
           "shape":"MapOfMethod",
-          "documentation":"<p>Map of methods for this resource, which is included only if requested using the <b>embed</b> option.</p>"
+          "documentation":"<p>Map of methods for this resource, which is included only if the request uses the <b>embed</b> query option.</p>"
         }
       },
       "documentation":"<p>Represents a resource.</p>"
@@ -3412,7 +3588,8 @@
         "createdDate":{
           "shape":"Timestamp",
           "documentation":"<p>The date when the API was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
-        }
+        },
+        "warnings":{"shape":"ListOfString"}
       },
       "documentation":"<p>Represents a REST API.</p>"
     },
@@ -3433,16 +3610,22 @@
       "members":{
         "contentType":{
           "shape":"String",
+          "documentation":"<p>The content-type header value in the HTTP response.</p>",
           "location":"header",
           "locationName":"Content-Type"
         },
         "contentDisposition":{
           "shape":"String",
+          "documentation":"<p>The content-disposition header value in the HTTP reseponse.</p>",
           "location":"header",
           "locationName":"Content-Disposition"
         },
-        "body":{"shape":"Blob"}
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>The binary blob response to <a>GetSdk</a>, which contains the generated SDK.</p>"
+        }
       },
+      "documentation":"<p>The binary blob response to <a>GetSdk</a>, which contains the generated SDK.</p>",
       "payload":"body"
     },
     "ServiceUnavailableException":{
@@ -3555,20 +3738,38 @@
       "members":{
         "restApiId":{
           "shape":"String",
+          "documentation":"<p>Specifies a test invoke authorizer request's <a>RestApi</a> identifier.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
         "authorizerId":{
           "shape":"String",
+          "documentation":"<p>Specifies a test invoke authorizer request's <a>Authorizer</a> ID.</p>",
           "location":"uri",
           "locationName":"authorizer_id"
         },
-        "headers":{"shape":"MapOfHeaderValues"},
-        "pathWithQueryString":{"shape":"String"},
-        "body":{"shape":"String"},
-        "stageVariables":{"shape":"MapOfStringToString"},
-        "additionalContext":{"shape":"MapOfStringToString"}
-      }
+        "headers":{
+          "shape":"MapOfHeaderValues",
+          "documentation":"<p>[Required] A key-value map of headers to simulate an incoming invocation request. This is where the incoming authorization token, or identity source, should be specified.</p>"
+        },
+        "pathWithQueryString":{
+          "shape":"String",
+          "documentation":"<p>[Optional] The URI path, including query string, of the simulated invocation request. Use this to specify path parameters and query string parameters.</p>"
+        },
+        "body":{
+          "shape":"String",
+          "documentation":"<p>[Optional] The simulated request body of an incoming invocation request.</p>"
+        },
+        "stageVariables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A key-value map of stage variables to simulate an invocation on a deployed <a>Stage</a>.</p>"
+        },
+        "additionalContext":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>[Optional] A key-value map of additional context variables.</p>"
+        }
+      },
+      "documentation":"<p>Make a request to simulate the execution of an <a>Authorizer</a>.</p>"
     },
     "TestInvokeAuthorizerResponse":{
       "type":"structure",
@@ -3607,25 +3808,44 @@
       "members":{
         "restApiId":{
           "shape":"String",
+          "documentation":"<p>Specifies a test invoke method request's API identifier.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
         "resourceId":{
           "shape":"String",
+          "documentation":"<p>Specifies a test invoke method request's resource ID.</p>",
           "location":"uri",
           "locationName":"resource_id"
         },
         "httpMethod":{
           "shape":"String",
+          "documentation":"<p>Specifies a test invoke method request's HTTP method.</p>",
           "location":"uri",
           "locationName":"http_method"
         },
-        "pathWithQueryString":{"shape":"String"},
-        "body":{"shape":"String"},
-        "headers":{"shape":"MapOfHeaderValues"},
-        "clientCertificateId":{"shape":"String"},
-        "stageVariables":{"shape":"MapOfStringToString"}
-      }
+        "pathWithQueryString":{
+          "shape":"String",
+          "documentation":"<p>The URI path, including query string, of the simulated invocation request. Use this to specify path parameters and query string parameters.</p>"
+        },
+        "body":{
+          "shape":"String",
+          "documentation":"<p>The simulated request body of an incoming invocation request.</p>"
+        },
+        "headers":{
+          "shape":"MapOfHeaderValues",
+          "documentation":"<p>A key-value map of headers to simulate an incoming invocation request.</p>"
+        },
+        "clientCertificateId":{
+          "shape":"String",
+          "documentation":"<p>A <a>ClientCertificate</a> identifier to use in the test invocation. API Gateway will use use the certificate when making the HTTPS request to the defined backend endpoint.</p>"
+        },
+        "stageVariables":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A key-value map of stage variables to simulate an invocation on a deployed <a>Stage</a>.</p>"
+        }
+      },
+      "documentation":"<p>Make a request to simulate the execution of a <a>Method</a>.</p>"
     },
     "TestInvokeMethodResponse":{
       "type":"structure",
@@ -3782,6 +4002,7 @@
       "members":{
         "clientCertificateId":{
           "shape":"String",
+          "documentation":"<p>The identifier of the <a>ClientCertificate</a> resource to be updated.</p>",
           "location":"uri",
           "locationName":"clientcertificate_id"
         },
@@ -3789,7 +4010,8 @@
           "shape":"ListOfPatchOperation",
           "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
         }
-      }
+      },
+      "documentation":"<p>A request to change information about an <a>ClientCertificate</a> resource.</p>"
     },
     "UpdateDeploymentRequest":{
       "type":"structure",
