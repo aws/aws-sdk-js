@@ -947,7 +947,7 @@
           "documentation":"<p>The date of the notification.</p>"
         },
         "event":{
-          "shape":"Event",
+          "shape":"InspectorEvent",
           "documentation":"<p>The event for which a notification is sent.</p>"
         },
         "message":{"shape":"Message"},
@@ -1571,16 +1571,6 @@
       "max":1000,
       "min":0
     },
-    "Event":{
-      "type":"string",
-      "enum":[
-        "ASSESSMENT_RUN_STARTED",
-        "ASSESSMENT_RUN_COMPLETED",
-        "ASSESSMENT_RUN_STATE_CHANGED",
-        "FINDING_REPORTED",
-        "OTHER"
-      ]
-    },
     "EventSubscription":{
       "type":"structure",
       "required":[
@@ -1589,7 +1579,7 @@
       ],
       "members":{
         "event":{
-          "shape":"Event",
+          "shape":"InspectorEvent",
           "documentation":"<p>The event for which Amazon Simple Notification Service (SNS) notifications are sent.</p>"
         },
         "subscribedAt":{
@@ -1800,6 +1790,16 @@
       "type":"string",
       "max":256,
       "min":0
+    },
+    "InspectorEvent":{
+      "type":"string",
+      "enum":[
+        "ASSESSMENT_RUN_STARTED",
+        "ASSESSMENT_RUN_COMPLETED",
+        "ASSESSMENT_RUN_STATE_CHANGED",
+        "FINDING_REPORTED",
+        "OTHER"
+      ]
     },
     "InspectorServiceAttributes":{
       "type":"structure",
@@ -2599,7 +2599,7 @@
           "documentation":"<p>The ARN of the assessment template used during the event for which you want to recieve SNS notifications.</p>"
         },
         "event":{
-          "shape":"Event",
+          "shape":"InspectorEvent",
           "documentation":"<p>The event for which you want to receive SNS notifications.</p>"
         },
         "topicArn":{
@@ -2729,7 +2729,7 @@
           "documentation":"<p>The ARN of the assessment template used during the event for which you want to stop recieving SNS notifications.</p>"
         },
         "event":{
-          "shape":"Event",
+          "shape":"InspectorEvent",
           "documentation":"<p>The event for which you want to stop receiving SNS notifications.</p>"
         },
         "topicArn":{
