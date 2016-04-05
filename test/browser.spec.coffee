@@ -18,6 +18,7 @@ devicefarm = new AWS.DeviceFarm(AWS.util.merge(config, config.devicefarm))
 dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
 dynamodbstreams = new AWS.DynamoDBStreams(AWS.util.merge(config, config.dynamodbstreams))
 ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
+ecr = new AWS.ECR(AWS.util.merge(config, config.ecr))
 ecs = new AWS.ECS(AWS.util.merge(config, config.ecs))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 elb = new AWS.ELB(AWS.util.merge(config, config.elb))
@@ -341,6 +342,19 @@ integrationTests ->
         noData(data)
         assertError(err, 'InvalidVolume.NotFound')
         matchError(err, 'The volume \'vol-12345678\' does not exist')
+        done()
+
+  describe 'AWS.ECR', ->
+    it 'makes a request', (done) ->
+      ecr.describeRepositories (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.repositories)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      ecr.listImages {repositoryName: 'fake-name'}, (err, data) ->
+        noData(data)
+        assertError(err, 'RepositoryNotFoundException')
         done()
 
   describe 'AWS.ECS', ->
