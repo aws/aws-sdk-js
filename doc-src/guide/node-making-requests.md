@@ -324,3 +324,51 @@ streams. This means that in the event of a socket failure in the middle of a
 connection, the SDK will not attempt to retry and send more data to the stream.
 It will be your responsibility to manage this logic in your library or
 application.
+
+## Support for Promises
+
+Each operation supports returning a promise if promises are globally
+available when the SDK in imported or a Promises implementation is
+provided to the SDK.
+ 
+### Setting a Promise Dependency
+ 
+By default, the SDK will add the `promise()` method to AWS.Request if the
+`Promise` constructor is available globally, either natively or pulled in
+by a 3rd party library. It is also possible to configure the SDK to use
+a 3rd party implementation of promises, such as bluebird, instead:
+ 
+```javascript
+AWS.config.setPromisesDependency(require('bluebird'));
+```
+Pass in your favorite Promise library to `AWS.config.setPromisesDependency`
+or call it without a parameter to revert back to whichever Promise
+implementation is globally available.
+
+### Returned Promise Method
+
+The `promise()` method is called directly on a `AWS.Request` object.
+Remember that a request is returned when an operation is called without
+a callback function supplied. Callbacks can still be registered to
+events emitted by the request. Calling the `promise()` method will
+immediately send then the request, and return a promise that is fulfilled
+with the response `data` property or rejected with the response `error`
+property:
+
+```javascript
+// create the AWS.Request object
+var request = new AWS.EC2().describeInstances();
+
+// create the promise object
+var promise = request.promise();
+
+// handle promise's fulfilled/rejected states
+promise.then(
+  function(data) {
+    /* process the data */
+  },
+  function(error) {
+    /* handle the error */
+  }
+);
+```

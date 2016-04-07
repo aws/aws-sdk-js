@@ -38,6 +38,27 @@ describe 'AWS.Response', ->
       fill(null, Marker: 'next_page', true)
       expect(response.hasNextPage()).to.equal(true)
 
+  describe 'cacheNextPageTokens', ->
+    it 'sets nextPageTokens to null if no token in data', ->
+      fill(null, {notMarker: 'someData'}, true)
+      response.cacheNextPageTokens()
+      expect(response.nextPageTokens).to.equal(null)
+
+    it 'sets nextPageTokens for one token', ->
+      fill(null, {notMarker: 'someData', Marker: 'token'}, true)
+      response.cacheNextPageTokens()
+      expect(response.nextPageTokens).to.eql(['token'])
+
+    it 'sets nextPageTokens for multiple tokens', ->
+      fill(null, {MarkerI: 'token1', MarkerII: 'token2', MarkerIII: 'token3'}, true)
+      service.api.paginators.op.outputToken = ['MarkerI', 'MarkerII', 'MarkerIV']
+      response.cacheNextPageTokens()
+      expect(response.nextPageTokens).to.eql(['token1', 'token2'])
+
+    it 'returns cached tokens if nextPageTokens exists', ->
+      response.nextPageTokens = ['cachedToken']
+      expect(response.cacheNextPageTokens()).to.eql(['cachedToken'])
+
   describe 'nextPage', ->
     it 'throws an exception if the operation has no pagination information', ->
       service.api.pagination = {}

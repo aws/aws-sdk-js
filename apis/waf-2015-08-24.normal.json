@@ -118,6 +118,24 @@
       ],
       "documentation":"<p>Creates a <code>WebACL</code>, which contains the <code>Rules</code> that identify the CloudFront web requests that you want to allow, block, or count. AWS WAF evaluates <code>Rules</code> in order based on the value of <code>Priority</code> for each <code>Rule</code>.</p> <p>You also specify a default action, either <code>ALLOW</code> or <code>BLOCK</code>. If a web request doesn't match any of the <code>Rules</code> in a <code>WebACL</code>, AWS WAF responds to the request with the default action. </p> <p>To create and configure a <code>WebACL</code>, perform the following steps:</p> <ol> <li>Create and update the <code>ByteMatchSet</code> objects and other predicates that you want to include in <code>Rules</code>. For more information, see <a>CreateByteMatchSet</a>, <a>UpdateByteMatchSet</a>, <a>CreateIPSet</a>, <a>UpdateIPSet</a>, <a>CreateSqlInjectionMatchSet</a>, and <a>UpdateSqlInjectionMatchSet</a>.</li> <li>Create and update the <code>Rules</code> that you want to include in the <code>WebACL</code>. For more information, see <a>CreateRule</a> and <a>UpdateRule</a>.</li> <li>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of a <code>CreateWebACL</code> request.</li> <li>Submit a <code>CreateWebACL</code> request.</li> <li>Use <code>GetChangeToken</code> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <a>UpdateWebACL</a> request.</li> <li>Submit an <a>UpdateWebACL</a> request to specify the <code>Rules</code> that you want to include in the <code>WebACL</code>, to specify the default action, and to associate the <code>WebACL</code> with a CloudFront distribution.</li> </ol> <p>For more information about how to use the AWS WAF API, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
     },
+    "CreateXssMatchSet":{
+      "name":"CreateXssMatchSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateXssMatchSetRequest"},
+      "output":{"shape":"CreateXssMatchSetResponse"},
+      "errors":[
+        {"shape":"WAFDisallowedNameException"},
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidAccountException"},
+        {"shape":"WAFInvalidParameterException"},
+        {"shape":"WAFStaleDataException"},
+        {"shape":"WAFLimitsExceededException"}
+      ],
+      "documentation":"<p>Creates an <a>XssMatchSet</a>, which you use to allow, block, or count requests that contain cross-site scripting attacks in the specified part of web requests. AWS WAF searches for character sequences that are likely to be malicious strings.</p> <p>To create and configure an <code>XssMatchSet</code>, perform the following steps:</p> <ol> <li>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of a <code>CreateXssMatchSet</code> request.</li> <li>Submit a <code>CreateXssMatchSet</code> request.</li> <li>Use <code>GetChangeToken</code> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <a>UpdateXssMatchSet</a> request.</li> <li>Submit an <a>UpdateXssMatchSet</a> request to specify the parts of web requests in which you want to allow, block, or count cross-site scripting attacks.</li> </ol> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
+    },
     "DeleteByteMatchSet":{
       "name":"DeleteByteMatchSet",
       "http":{
@@ -225,6 +243,24 @@
         {"shape":"WAFNonEmptyEntityException"}
       ],
       "documentation":"<p>Permanently deletes a <a>WebACL</a>. You can't delete a <code>WebACL</code> if it still contains any <code>Rules</code>.</p> <p>To delete a <code>WebACL</code>, perform the following steps:</p> <ol> <li>Update the <code>WebACL</code> to remove <code>Rules</code>, if any. For more information, see <a>UpdateWebACL</a>.</li> <li>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of a <code>DeleteWebACL</code> request.</li> <li>Submit a <code>DeleteWebACL</code> request.</li> </ol>"
+    },
+    "DeleteXssMatchSet":{
+      "name":"DeleteXssMatchSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteXssMatchSetRequest"},
+      "output":{"shape":"DeleteXssMatchSetResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidAccountException"},
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFReferencedItemException"},
+        {"shape":"WAFStaleDataException"},
+        {"shape":"WAFNonEmptyEntityException"}
+      ],
+      "documentation":"<p>Permanently deletes an <a>XssMatchSet</a>. You can't delete an <code>XssMatchSet</code> if it's still used in any <code>Rules</code> or if it still contains any <a>XssMatchTuple</a> objects.</p> <p>If you just want to remove an <code>XssMatchSet</code> from a <code>Rule</code>, use <a>UpdateRule</a>.</p> <p>To permanently delete an <code>XssMatchSet</code> from AWS WAF, perform the following steps:</p> <ol> <li>Update the <code>XssMatchSet</code> to remove filters, if any. For more information, see <a>UpdateXssMatchSet</a>.</li> <li>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of a <code>DeleteXssMatchSet</code> request.</li> <li>Submit a <code>DeleteXssMatchSet</code> request.</li> </ol>"
     },
     "GetByteMatchSet":{
       "name":"GetByteMatchSet",
@@ -357,6 +393,21 @@
       ],
       "documentation":"<p>Returns the <a>WebACL</a> that is specified by <code>WebACLId</code>.</p>"
     },
+    "GetXssMatchSet":{
+      "name":"GetXssMatchSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetXssMatchSetRequest"},
+      "output":{"shape":"GetXssMatchSetResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidAccountException"},
+        {"shape":"WAFNonexistentItemException"}
+      ],
+      "documentation":"<p>Returns the <a>XssMatchSet</a> that is specified by <code>XssMatchSetId</code>.</p>"
+    },
     "ListByteMatchSets":{
       "name":"ListByteMatchSets",
       "http":{
@@ -440,6 +491,20 @@
         {"shape":"WAFInvalidAccountException"}
       ],
       "documentation":"<p>Returns an array of <a>WebACLSummary</a> objects in the response.</p>"
+    },
+    "ListXssMatchSets":{
+      "name":"ListXssMatchSets",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListXssMatchSetsRequest"},
+      "output":{"shape":"ListXssMatchSetsResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidAccountException"}
+      ],
+      "documentation":"<p>Returns an array of <a>XssMatchSet</a> objects.</p>"
     },
     "UpdateByteMatchSet":{
       "name":"UpdateByteMatchSet",
@@ -564,6 +629,26 @@
         {"shape":"WAFLimitsExceededException"}
       ],
       "documentation":"<p>Inserts or deletes <a>ActivatedRule</a> objects in a <code>WebACL</code>. Each <code>Rule</code> identifies web requests that you want to allow, block, or count. When you update a <code>WebACL</code>, you specify the following values:</p> <ul> <li>A default action for the <code>WebACL</code>, either <code>ALLOW</code> or <code>BLOCK</code>. AWS WAF performs the default action if a request doesn't match the criteria in any of the <code>Rules</code> in a <code>WebACL</code>.</li> <li>The <code>Rules</code> that you want to add and/or delete. If you want to replace one <code>Rule</code> with another, you delete the existing <code>Rule</code> and add the new one.</li> <li>For each <code>Rule</code>, whether you want AWS WAF to allow requests, block requests, or count requests that match the conditions in the <code>Rule</code>.</li> <li>The order in which you want AWS WAF to evaluate the <code>Rules</code> in a <code>WebACL</code>. If you add more than one <code>Rule</code> to a <code>WebACL</code>, AWS WAF evaluates each request against the <code>Rules</code> in order based on the value of <code>Priority</code>. (The <code>Rule</code> that has the lowest value for <code>Priority</code> is evaluated first.) When a web request matches all of the predicates (such as <code>ByteMatchSets</code> and <code>IPSets</code>) in a <code>Rule</code>, AWS WAF immediately takes the corresponding action, allow or block, and doesn't evaluate the request against the remaining <code>Rules</code> in the <code>WebACL</code>, if any. </li> <li>The CloudFront distribution that you want to associate with the <code>WebACL</code>.</li> </ul> <p>To create and configure a <code>WebACL</code>, perform the following steps:</p> <ol> <li>Create and update the predicates that you want to include in <code>Rules</code>. For more information, see <a>CreateByteMatchSet</a>, <a>UpdateByteMatchSet</a>, <a>CreateIPSet</a>, <a>UpdateIPSet</a>, <a>CreateSqlInjectionMatchSet</a>, and <a>UpdateSqlInjectionMatchSet</a>.</li> <li>Create and update the <code>Rules</code> that you want to include in the <code>WebACL</code>. For more information, see <a>CreateRule</a> and <a>UpdateRule</a>.</li> <li>Create a <code>WebACL</code>. See <a>CreateWebACL</a>.</li> <li>Use <code>GetChangeToken</code> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <a>UpdateWebACL</a> request.</li> <li>Submit an <code>UpdateWebACL</code> request to specify the <code>Rules</code> that you want to include in the <code>WebACL</code>, to specify the default action, and to associate the <code>WebACL</code> with a CloudFront distribution. </li> </ol> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
+    },
+    "UpdateXssMatchSet":{
+      "name":"UpdateXssMatchSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateXssMatchSetRequest"},
+      "output":{"shape":"UpdateXssMatchSetResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidAccountException"},
+        {"shape":"WAFInvalidOperationException"},
+        {"shape":"WAFInvalidParameterException"},
+        {"shape":"WAFNonexistentContainerException"},
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFStaleDataException"},
+        {"shape":"WAFLimitsExceededException"}
+      ],
+      "documentation":"<p>Inserts or deletes <a>XssMatchTuple</a> objects (filters) in an <a>XssMatchSet</a>. For each <code>XssMatchTuple</code> object, you specify the following values:</p> <ul> <li><code>Action</code>: Whether to insert the object into or delete the object from the array. To change a <code>XssMatchTuple</code>, you delete the existing object and add a new one.</li> <li><code>FieldToMatch</code>: The part of web requests that you want AWS WAF to inspect and, if you want AWS WAF to inspect a header, the name of the header.</li> <li><code>TextTransformation</code>: Which text transformation, if any, to perform on the web request before inspecting the request for cross-site scripting attacks.</li> </ul> <p>You use <code>XssMatchSet</code> objects to specify which CloudFront requests you want to allow, block, or count. For example, if you're receiving requests that contain cross-site scripting attacks in the request body and you want to block the requests, you can create an <code>XssMatchSet</code> with the applicable settings, and then configure AWS WAF to block the requests. </p> <p>To create and configure an <code>XssMatchSet</code>, perform the following steps:</p> <ol> <li>Submit a <a>CreateXssMatchSet</a> request.</li> <li>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <a>UpdateIPSet</a> request.</li> <li>Submit an <code>UpdateXssMatchSet</code> request to specify the parts of web requests that you want AWS WAF to inspect for cross-site scripting attacks.</li> </ol> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
     }
   },
   "shapes":{
@@ -604,7 +689,7 @@
       "members":{
         "ByteMatchSetId":{
           "shape":"ResourceId",
-          "documentation":"<p>The <code>ByteMatchSetId</code> for a <code>ByteMatchSet</code>. You use <code>ByteMatchSetId</code> to get information about a <code>ByteMatchSet</code> (see <a>GetByteMatchSet</a>), update a <code>ByteMatchSet</code> (see <a>UpdateByteMatchSet</a>, insert a <code>ByteMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>ByteMatchSet</code> from AWS WAF (see <a>DeleteByteMatchSet</a>).</p> <p><code>ByteMatchSetId</code> is returned by <a>CreateByteMatchSet</a> and by <a>ListByteMatchSets</a>.</p>"
+          "documentation":"<p>The <code>ByteMatchSetId</code> for a <code>ByteMatchSet</code>. You use <code>ByteMatchSetId</code> to get information about a <code>ByteMatchSet</code> (see <a>GetByteMatchSet</a>), update a <code>ByteMatchSet</code> (see <a>UpdateByteMatchSet</a>), insert a <code>ByteMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>ByteMatchSet</code> from AWS WAF (see <a>DeleteByteMatchSet</a>).</p> <p><code>ByteMatchSetId</code> is returned by <a>CreateByteMatchSet</a> and by <a>ListByteMatchSets</a>.</p>"
         },
         "Name":{
           "shape":"ResourceName",
@@ -919,6 +1004,38 @@
         }
       }
     },
+    "CreateXssMatchSetRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "ChangeToken"
+      ],
+      "members":{
+        "Name":{
+          "shape":"ResourceName",
+          "documentation":"<p>A friendly name or description for the <a>XssMatchSet</a> that you're creating. You can't change <code>Name</code> after you create the <code>XssMatchSet</code>.</p>"
+        },
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>"
+        }
+      },
+      "documentation":"<p>A request to create an <a>XssMatchSet</a>.</p>"
+    },
+    "CreateXssMatchSetResponse":{
+      "type":"structure",
+      "members":{
+        "XssMatchSet":{
+          "shape":"XssMatchSet",
+          "documentation":"<p>An <a>XssMatchSet</a>.</p>"
+        },
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The <code>ChangeToken</code> that you used to submit the <code>CreateXssMatchSet</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>"
+        }
+      },
+      "documentation":"<p>The response to a <code>CreateXssMatchSet</code> request.</p>"
+    },
     "DeleteByteMatchSetRequest":{
       "type":"structure",
       "required":[
@@ -1076,6 +1193,34 @@
           "documentation":"<p>The <code>ChangeToken</code> that you used to submit the <code>DeleteWebACL</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>"
         }
       }
+    },
+    "DeleteXssMatchSetRequest":{
+      "type":"structure",
+      "required":[
+        "XssMatchSetId",
+        "ChangeToken"
+      ],
+      "members":{
+        "XssMatchSetId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The <code>XssMatchSetId</code> of the <a>XssMatchSet</a> that you want to delete. <code>XssMatchSetId</code> is returned by <a>CreateXssMatchSet</a> and by <a>ListXssMatchSets</a>.</p>"
+        },
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>"
+        }
+      },
+      "documentation":"<p>A request to delete an <a>XssMatchSet</a> from AWS WAF.</p>"
+    },
+    "DeleteXssMatchSetResponse":{
+      "type":"structure",
+      "members":{
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The <code>ChangeToken</code> that you used to submit the <code>DeleteXssMatchSet</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>"
+        }
+      },
+      "documentation":"<p>The response to a request to delete an <a>XssMatchSet</a> from AWS WAF.</p>"
     },
     "FieldToMatch":{
       "type":"structure",
@@ -1284,6 +1429,27 @@
           "documentation":"<p>Information about the <a>WebACL</a> that you specified in the <code>GetWebACL</code> request. For more information, see the following topics:</p> <ul> <li><a>WebACL</a>: Contains <code>DefaultAction</code>, <code>MetricName</code>, <code>Name</code>, an array of <code>Rule</code> objects, and <code>WebACLId</code></li> <li><code>DefaultAction</code> (Data type is <a>WafAction</a>): Contains <code>Type</code></li> <li><code>Rules</code>: Contains an array of <code>ActivatedRule</code> objects, which contain <code>Action</code>, <code>Priority</code>, and <code>RuleId</code></li> <li><code>Action</code>: Contains <code>Type</code></li> </ul>"
         }
       }
+    },
+    "GetXssMatchSetRequest":{
+      "type":"structure",
+      "required":["XssMatchSetId"],
+      "members":{
+        "XssMatchSetId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The <code>XssMatchSetId</code> of the <a>XssMatchSet</a> that you want to get. <code>XssMatchSetId</code> is returned by <a>CreateXssMatchSet</a> and by <a>ListXssMatchSets</a>.</p>"
+        }
+      },
+      "documentation":"<p>A request to get an <a>XssMatchSet</a>.</p>"
+    },
+    "GetXssMatchSetResponse":{
+      "type":"structure",
+      "members":{
+        "XssMatchSet":{
+          "shape":"XssMatchSet",
+          "documentation":"<p>Information about the <a>XssMatchSet</a> that you specified in the <code>GetXssMatchSet</code> request. For more information, see the following topics:</p> <ul> <li><a>XssMatchSet</a>: Contains <code>Name</code>, <code>XssMatchSetId</code>, and an array of <code>XssMatchTuple</code> objects</li> <li><a>XssMatchTuple</a>: Each <code>XssMatchTuple</code> object contains <code>FieldToMatch</code> and <code>TextTransformation</code></li> <li><a>FieldToMatch</a>: Contains <code>Data</code> and <code>Type</code></li> </ul>"
+        }
+      },
+      "documentation":"<p>The response to a <a>GetXssMatchSet</a> request.</p>"
     },
     "HTTPHeader":{
       "type":"structure",
@@ -1600,6 +1766,35 @@
         }
       }
     },
+    "ListXssMatchSetsRequest":{
+      "type":"structure",
+      "required":["Limit"],
+      "members":{
+        "NextMarker":{
+          "shape":"NextMarker",
+          "documentation":"<p>If you specify a value for <code>Limit</code> and you have more <a>XssMatchSet</a> objects than the value of <code>Limit</code>, AWS WAF returns a <code>NextMarker</code> value in the response that allows you to list another group of <code>XssMatchSets</code>. For the second and subsequent <code>ListXssMatchSets</code> requests, specify the value of <code>NextMarker</code> from the previous response to get information about another batch of <code>XssMatchSets</code>.</p>"
+        },
+        "Limit":{
+          "shape":"PaginationLimit",
+          "documentation":"<p>Specifies the number of <a>XssMatchSet</a> objects that you want AWS WAF to return for this request. If you have more <code>XssMatchSet</code> objects than the number you specify for <code>Limit</code>, the response includes a <code>NextMarker</code> value that you can use to get another batch of <code>Rules</code>.</p>"
+        }
+      },
+      "documentation":"<p>A request to list the <a>XssMatchSet</a> objects created by the current AWS account.</p>"
+    },
+    "ListXssMatchSetsResponse":{
+      "type":"structure",
+      "members":{
+        "NextMarker":{
+          "shape":"NextMarker",
+          "documentation":"<p>If you have more <a>XssMatchSet</a> objects than the number that you specified for <code>Limit</code> in the request, the response includes a <code>NextMarker</code> value. To list more <code>XssMatchSet</code> objects, submit another <code>ListXssMatchSets</code> request, and specify the <code>NextMarker</code> value from the response in the <code>NextMarker</code> value in the next request.</p>"
+        },
+        "XssMatchSets":{
+          "shape":"XssMatchSetSummaries",
+          "documentation":"<p>An array of <a>XssMatchSetSummary</a> objects.</p>"
+        }
+      },
+      "documentation":"<p>The response to a <a>ListXssMatchSets</a> request.</p>"
+    },
     "MatchFieldData":{"type":"string"},
     "MatchFieldType":{
       "type":"string",
@@ -1668,7 +1863,7 @@
       "members":{
         "Negated":{
           "shape":"Negated",
-          "documentation":"<p>Set <code>Negated</code> to <code>False</code> if you want AWS WAF to allow, block, or count requests based on the settings in the specified <a>ByteMatchSet</a>, <a>IPSet</a>, or <a>SqlInjectionMatchSet</a>. For example, if an <code>IPSet</code> includes the IP address <code>192.0.2.44</code>, AWS WAF will allow or block requests based on that IP address.</p> <p>Set <code>Negated</code> to <code>True</code> if you want AWS WAF to allow or block a request based on the negation of the settings in the <a>ByteMatchSet</a>, <a>IPSet</a>, or <a>SqlInjectionMatchSet</a>. For example, if an <code>IPSet</code> includes the IP address <code>192.0.2.44</code>, AWS WAF will allow, block, or count requests based on all IP addresses <i>except</i> <code>192.0.2.44</code>.</p>"
+          "documentation":"<p>Set <code>Negated</code> to <code>False</code> if you want AWS WAF to allow, block, or count requests based on the settings in the specified <a>ByteMatchSet</a>, <a>IPSet</a>, <a>SqlInjectionMatchSet</a>, <a>XssMatchSet</a>, or <a>SizeConstraintSet</a>. For example, if an <code>IPSet</code> includes the IP address <code>192.0.2.44</code>, AWS WAF will allow or block requests based on that IP address.</p> <p>Set <code>Negated</code> to <code>True</code> if you want AWS WAF to allow or block a request based on the negation of the settings in the <a>ByteMatchSet</a>, <a>IPSet</a>, <a>SqlInjectionMatchSet</a>, <a>XssMatchSet</a>, or <a>SizeConstraintSet</a>. For example, if an <code>IPSet</code> includes the IP address <code>192.0.2.44</code>, AWS WAF will allow, block, or count requests based on all IP addresses <i>except</i> <code>192.0.2.44</code>.</p>"
         },
         "Type":{
           "shape":"PredicateType",
@@ -1679,7 +1874,7 @@
           "documentation":"<p>A unique identifier for a predicate in a <code>Rule</code>, such as <code>ByteMatchSetId</code> or <code>IPSetId</code>. The ID is returned by the corresponding <code>Create</code> or <code>List</code> command.</p>"
         }
       },
-      "documentation":"<p>Specifies the <a>ByteMatchSet</a>, <a>IPSet</a>, and <a>SqlInjectionMatchSet</a> objects that you want to add to a <code>Rule</code> and, for each object, indicates whether you want to negate the settings, for example, requests that do NOT originate from the IP address 192.0.2.44. </p>"
+      "documentation":"<p>Specifies the <a>ByteMatchSet</a>, <a>IPSet</a>, <a>SqlInjectionMatchSet</a>, <a>XssMatchSet</a>, and <a>SizeConstraintSet</a> objects that you want to add to a <code>Rule</code> and, for each object, indicates whether you want to negate the settings, for example, requests that do NOT originate from the IP address 192.0.2.44. </p>"
     },
     "PredicateType":{
       "type":"string",
@@ -1687,7 +1882,8 @@
         "IPMatch",
         "ByteMatch",
         "SqlInjectionMatch",
-        "SizeConstraint"
+        "SizeConstraint",
+        "XssMatch"
       ]
     },
     "Predicates":{
@@ -1808,6 +2004,7 @@
     },
     "Size":{
       "type":"long",
+      "max":21474836480,
       "min":0
     },
     "SizeConstraint":{
@@ -1844,7 +2041,7 @@
       "members":{
         "SizeConstraintSetId":{
           "shape":"ResourceId",
-          "documentation":"<p>A unique identifier for a <code>SizeConstraintSet</code>. You use <code>SizeConstraintSetId</code> to get information about a <code>SizeConstraintSet</code> (see <a>GetSizeConstraintSet</a>), update a <code>SizeConstraintSet</code> (see <a>UpdateSizeConstraintSet</a>, insert a <code>SizeConstraintSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SizeConstraintSet</code> from AWS WAF (see <a>DeleteSizeConstraintSet</a>).</p> <p><code>SizeConstraintSetId</code> is returned by <a>CreateSizeConstraintSet</a> and by <a>ListSizeConstraintSets</a>.</p>"
+          "documentation":"<p>A unique identifier for a <code>SizeConstraintSet</code>. You use <code>SizeConstraintSetId</code> to get information about a <code>SizeConstraintSet</code> (see <a>GetSizeConstraintSet</a>), update a <code>SizeConstraintSet</code> (see <a>UpdateSizeConstraintSet</a>), insert a <code>SizeConstraintSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SizeConstraintSet</code> from AWS WAF (see <a>DeleteSizeConstraintSet</a>).</p> <p><code>SizeConstraintSetId</code> is returned by <a>CreateSizeConstraintSet</a> and by <a>ListSizeConstraintSets</a>.</p>"
         },
         "Name":{
           "shape":"ResourceName",
@@ -1870,7 +2067,7 @@
       "members":{
         "SizeConstraintSetId":{
           "shape":"ResourceId",
-          "documentation":"<p>A unique identifier for a <code>SizeConstraintSet</code>. You use <code>SizeConstraintSetId</code> to get information about a <code>SizeConstraintSet</code> (see <a>GetSizeConstraintSet</a>), update a <code>SizeConstraintSet</code> (see <a>UpdateSizeConstraintSet</a>, insert a <code>SizeConstraintSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SizeConstraintSet</code> from AWS WAF (see <a>DeleteSizeConstraintSet</a>).</p> <p><code>SizeConstraintSetId</code> is returned by <a>CreateSizeConstraintSet</a> and by <a>ListSizeConstraintSets</a>.</p>"
+          "documentation":"<p>A unique identifier for a <code>SizeConstraintSet</code>. You use <code>SizeConstraintSetId</code> to get information about a <code>SizeConstraintSet</code> (see <a>GetSizeConstraintSet</a>), update a <code>SizeConstraintSet</code> (see <a>UpdateSizeConstraintSet</a>), insert a <code>SizeConstraintSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SizeConstraintSet</code> from AWS WAF (see <a>DeleteSizeConstraintSet</a>).</p> <p><code>SizeConstraintSetId</code> is returned by <a>CreateSizeConstraintSet</a> and by <a>ListSizeConstraintSets</a>.</p>"
         },
         "Name":{
           "shape":"ResourceName",
@@ -1914,7 +2111,7 @@
       "members":{
         "SqlInjectionMatchSetId":{
           "shape":"ResourceId",
-          "documentation":"<p>A unique identifier for a <code>SqlInjectionMatchSet</code>. You use <code>SqlInjectionMatchSetId</code> to get information about a <code>SqlInjectionMatchSet</code> (see <a>GetSqlInjectionMatchSet</a>), update a <code>SqlInjectionMatchSet</code> (see <a>UpdateSqlInjectionMatchSet</a>, insert a <code>SqlInjectionMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SqlInjectionMatchSet</code> from AWS WAF (see <a>DeleteSqlInjectionMatchSet</a>).</p> <p><code>SqlInjectionMatchSetId</code> is returned by <a>CreateSqlInjectionMatchSet</a> and by <a>ListSqlInjectionMatchSets</a>.</p>"
+          "documentation":"<p>A unique identifier for a <code>SqlInjectionMatchSet</code>. You use <code>SqlInjectionMatchSetId</code> to get information about a <code>SqlInjectionMatchSet</code> (see <a>GetSqlInjectionMatchSet</a>), update a <code>SqlInjectionMatchSet</code> (see <a>UpdateSqlInjectionMatchSet</a>), insert a <code>SqlInjectionMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SqlInjectionMatchSet</code> from AWS WAF (see <a>DeleteSqlInjectionMatchSet</a>).</p> <p><code>SqlInjectionMatchSetId</code> is returned by <a>CreateSqlInjectionMatchSet</a> and by <a>ListSqlInjectionMatchSets</a>.</p>"
         },
         "Name":{
           "shape":"ResourceName",
@@ -1940,7 +2137,7 @@
       "members":{
         "SqlInjectionMatchSetId":{
           "shape":"ResourceId",
-          "documentation":"<p>A unique identifier for a <code>SqlInjectionMatchSet</code>. You use <code>SqlInjectionMatchSetId</code> to get information about a <code>SqlInjectionMatchSet</code> (see <a>GetSqlInjectionMatchSet</a>), update a <code>SqlInjectionMatchSet</code> (see <a>UpdateSqlInjectionMatchSet</a>, insert a <code>SqlInjectionMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SqlInjectionMatchSet</code> from AWS WAF (see <a>DeleteSqlInjectionMatchSet</a>).</p> <p><code>SqlInjectionMatchSetId</code> is returned by <a>CreateSqlInjectionMatchSet</a> and by <a>ListSqlInjectionMatchSets</a>.</p>"
+          "documentation":"<p>A unique identifier for a <code>SqlInjectionMatchSet</code>. You use <code>SqlInjectionMatchSetId</code> to get information about a <code>SqlInjectionMatchSet</code> (see <a>GetSqlInjectionMatchSet</a>), update a <code>SqlInjectionMatchSet</code> (see <a>UpdateSqlInjectionMatchSet</a>), insert a <code>SqlInjectionMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SqlInjectionMatchSet</code> from AWS WAF (see <a>DeleteSqlInjectionMatchSet</a>).</p> <p><code>SqlInjectionMatchSetId</code> is returned by <a>CreateSqlInjectionMatchSet</a> and by <a>ListSqlInjectionMatchSets</a>.</p>"
         },
         "Name":{
           "shape":"ResourceName",
@@ -2209,6 +2406,39 @@
         }
       }
     },
+    "UpdateXssMatchSetRequest":{
+      "type":"structure",
+      "required":[
+        "XssMatchSetId",
+        "ChangeToken",
+        "Updates"
+      ],
+      "members":{
+        "XssMatchSetId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The <code>XssMatchSetId</code> of the <code>XssMatchSet</code> that you want to update. <code>XssMatchSetId</code> is returned by <a>CreateXssMatchSet</a> and by <a>ListXssMatchSets</a>.</p>"
+        },
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>"
+        },
+        "Updates":{
+          "shape":"XssMatchSetUpdates",
+          "documentation":"<p>An array of <code>XssMatchSetUpdate</code> objects that you want to insert into or delete from a <a>XssMatchSet</a>. For more information, see the applicable data types:</p> <ul> <li><a>XssMatchSetUpdate</a>: Contains <code>Action</code> and <code>XssMatchTuple</code></li> <li><a>XssMatchTuple</a>: Contains <code>FieldToMatch</code> and <code>TextTransformation</code></li> <li><a>FieldToMatch</a>: Contains <code>Data</code> and <code>Type</code></li> </ul>"
+        }
+      },
+      "documentation":"<p>A request to update an <a>XssMatchSet</a>.</p>"
+    },
+    "UpdateXssMatchSetResponse":{
+      "type":"structure",
+      "members":{
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The <code>ChangeToken</code> that you used to submit the <code>UpdateXssMatchSet</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>"
+        }
+      },
+      "documentation":"<p>The response to an <a>UpdateXssMatchSets</a> request.</p>"
+    },
     "WAFDisallowedNameException":{
       "type":"structure",
       "members":{
@@ -2328,7 +2558,7 @@
       "members":{
         "WebACLId":{
           "shape":"ResourceId",
-          "documentation":"<p>A unique identifier for a <code>WebACL</code>. You use <code>WebACLId</code> to get information about a <code>WebACL</code> (see <a>GetWebACL</a>), update a <code>WebACL</code> (see <a>UpdateWebACL</a>, and delete a <code>WebACL</code> from AWS WAF (see <a>DeleteWebACL</a>).</p> <p><code>WebACLId</code> is returned by <a>CreateWebACL</a> and by <a>ListWebACLs</a>.</p>"
+          "documentation":"<p>A unique identifier for a <code>WebACL</code>. You use <code>WebACLId</code> to get information about a <code>WebACL</code> (see <a>GetWebACL</a>), update a <code>WebACL</code> (see <a>UpdateWebACL</a>), and delete a <code>WebACL</code> from AWS WAF (see <a>DeleteWebACL</a>).</p> <p><code>WebACLId</code> is returned by <a>CreateWebACL</a> and by <a>ListWebACLs</a>.</p>"
         },
         "Name":{
           "shape":"ResourceName",
@@ -2359,7 +2589,7 @@
       "members":{
         "WebACLId":{
           "shape":"ResourceId",
-          "documentation":"<p>A unique identifier for a <code>WebACL</code>. You use <code>WebACLId</code> to get information about a <code>WebACL</code> (see <a>GetWebACL</a>), update a <code>WebACL</code> (see <a>UpdateWebACL</a>, and delete a <code>WebACL</code> from AWS WAF (see <a>DeleteWebACL</a>).</p> <p><code>WebACLId</code> is returned by <a>CreateWebACL</a> and by <a>ListWebACLs</a>.</p>"
+          "documentation":"<p>A unique identifier for a <code>WebACL</code>. You use <code>WebACLId</code> to get information about a <code>WebACL</code> (see <a>GetWebACL</a>), update a <code>WebACL</code> (see <a>UpdateWebACL</a>), and delete a <code>WebACL</code> from AWS WAF (see <a>DeleteWebACL</a>).</p> <p><code>WebACLId</code> is returned by <a>CreateWebACL</a> and by <a>ListWebACLs</a>.</p>"
         },
         "Name":{
           "shape":"ResourceName",
@@ -2386,6 +2616,91 @@
     "WebACLUpdates":{
       "type":"list",
       "member":{"shape":"WebACLUpdate"}
+    },
+    "XssMatchSet":{
+      "type":"structure",
+      "required":[
+        "XssMatchSetId",
+        "XssMatchTuples"
+      ],
+      "members":{
+        "XssMatchSetId":{
+          "shape":"ResourceId",
+          "documentation":"<p>A unique identifier for an <code>XssMatchSet</code>. You use <code>XssMatchSetId</code> to get information about an <code>XssMatchSet</code> (see <a>GetXssMatchSet</a>), update an <code>XssMatchSet</code> (see <a>UpdateXssMatchSet</a>), insert an <code>XssMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete an <code>XssMatchSet</code> from AWS WAF (see <a>DeleteXssMatchSet</a>).</p> <p><code>XssMatchSetId</code> is returned by <a>CreateXssMatchSet</a> and by <a>ListXssMatchSets</a>.</p>"
+        },
+        "Name":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name, if any, of the <code>XssMatchSet</code>.</p>"
+        },
+        "XssMatchTuples":{
+          "shape":"XssMatchTuples",
+          "documentation":"<p>Specifies the parts of web requests that you want to inspect for cross-site scripting attacks.</p>"
+        }
+      },
+      "documentation":"<p>A complex type that contains <code>XssMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header. If a <code>XssMatchSet</code> contains more than one <code>XssMatchTuple</code> object, a request needs to include cross-site scripting attacks in only one of the specified parts of the request to be considered a match.</p>"
+    },
+    "XssMatchSetSummaries":{
+      "type":"list",
+      "member":{"shape":"XssMatchSetSummary"}
+    },
+    "XssMatchSetSummary":{
+      "type":"structure",
+      "required":[
+        "XssMatchSetId",
+        "Name"
+      ],
+      "members":{
+        "XssMatchSetId":{
+          "shape":"ResourceId",
+          "documentation":"<p>A unique identifier for an <code>XssMatchSet</code>. You use <code>XssMatchSetId</code> to get information about a <code>XssMatchSet</code> (see <a>GetXssMatchSet</a>), update an <code>XssMatchSet</code> (see <a>UpdateXssMatchSet</a>), insert an <code>XssMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete an <code>XssMatchSet</code> from AWS WAF (see <a>DeleteXssMatchSet</a>).</p> <p><code>XssMatchSetId</code> is returned by <a>CreateXssMatchSet</a> and by <a>ListXssMatchSets</a>.</p>"
+        },
+        "Name":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the <code>XssMatchSet</code>, if any, specified by <code>Id</code>.</p>"
+        }
+      },
+      "documentation":"<p>The <code>Id</code> and <code>Name</code> of an <code>XssMatchSet</code>.</p>"
+    },
+    "XssMatchSetUpdate":{
+      "type":"structure",
+      "required":[
+        "Action",
+        "XssMatchTuple"
+      ],
+      "members":{
+        "Action":{
+          "shape":"ChangeAction",
+          "documentation":"<p>Specify <code>INSERT</code> to add a <a>XssMatchSetUpdate</a> to an <a>XssMatchSet</a>. Use <code>DELETE</code> to remove a <code>XssMatchSetUpdate</code> from an <code>XssMatchSet</code>.</p>"
+        },
+        "XssMatchTuple":{
+          "shape":"XssMatchTuple",
+          "documentation":"<p>Specifies the part of a web request that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the part of a web request that you want to inspect for cross-site scripting attacks and indicates whether you want to add the specification to an <a>XssMatchSet</a> or delete it from an <code>XssMatchSet</code>.</p>"
+    },
+    "XssMatchSetUpdates":{
+      "type":"list",
+      "member":{"shape":"XssMatchSetUpdate"}
+    },
+    "XssMatchTuple":{
+      "type":"structure",
+      "required":[
+        "FieldToMatch",
+        "TextTransformation"
+      ],
+      "members":{
+        "FieldToMatch":{"shape":"FieldToMatch"},
+        "TextTransformation":{
+          "shape":"TextTransformation",
+          "documentation":"<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass AWS WAF. If you specify a transformation, AWS WAF performs the transformation on <code>FieldToMatch</code> before inspecting a request for a match.</p> <p><b>CMD_LINE</b></p> <p>When you're concerned that attackers are injecting an operating system commandline command and using unusual formatting to disguise some or all of the command, use this option to perform the following transformations:</p> <ul> <li>Delete the following characters: \\ \" ' ^</li> <li>Delete spaces before the following characters: / (</li> <li>Replace the following characters with a space: , ;</li> <li>Replace multiple spaces with one space</li> <li>Convert uppercase letters (A-Z) to lowercase (a-z)</li> </ul> <p><b>COMPRESS_WHITE_SPACE</b></p> <p>Use this option to replace the following characters with a space character (decimal 32):</p> <ul> <li>\\f, formfeed, decimal 12</li> <li>\\t, tab, decimal 9</li> <li>\\n, newline, decimal 10</li> <li>\\r, carriage return, decimal 13</li> <li>\\v, vertical tab, decimal 11</li> <li>non-breaking space, decimal 160</li> </ul> <p><code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p> <p><b>HTML_ENTITY_DECODE</b></p> <p>Use this option to replace HTML-encoded characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs the following operations:</p> <ul> <li>Replaces <code>(ampersand)quot;</code> with <code>\"</code></li> <li>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</li> <li>Replaces <code>(ampersand)lt;</code> with a \"less than\" symbol</li> <li>Replaces <code>(ampersand)gt;</code> with <code>></code></li> <li>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</li> <li>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</li> </ul> <p><b>LOWERCASE</b></p> <p>Use this option to convert uppercase letters (A-Z) to lowercase (a-z).</p> <p><b>URL_DECODE</b></p> <p>Use this option to decode a URL-encoded value.</p> <p><b>NONE</b></p> <p>Specify <code>NONE</code> if you don't want to perform any text transformations.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the part of a web request that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header.</p>"
+    },
+    "XssMatchTuples":{
+      "type":"list",
+      "member":{"shape":"XssMatchTuple"}
     },
     "errorMessage":{"type":"string"}
   },

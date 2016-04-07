@@ -16,7 +16,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"CancelUpdateStackInput"},
-      "documentation":"<p>Cancels an update on the specified stack. If the call completes successfully, the stack rolls back the update and reverts to the previous stack configuration.</p> <note>You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.</note>"
+      "documentation":"<p>Cancels an update on the specified stack. If the call completes successfully, the stack rolls back the update and reverts to the previous stack configuration.</p> <note>You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.</note> <examples></examples>"
     },
     "ContinueUpdateRollback":{
       "name":"ContinueUpdateRollback",
@@ -29,7 +29,25 @@
         "shape":"ContinueUpdateRollbackOutput",
         "resultWrapper":"ContinueUpdateRollbackResult"
       },
-      "documentation":"<p>For a specified stack that is in the <code>UPDATE_ROLLBACK_FAILED</code> state, continues rolling it back to the <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on the cause of the failure, you can manually <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed\"> fix the error</a> and continue the rollback. By continuing the rollback, you can return your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state), and then try to update the stack again.</p> <p>A stack goes into the <code>UPDATE_ROLLBACK_FAILED</code> state when AWS CloudFormation cannot roll back all changes after a failed stack update. For example, you might have a stack that is rolling back to an old database instance that was deleted outside of AWS CloudFormation. Because AWS CloudFormation doesn't know the database was deleted, it assumes that the database instance still exists and attempts to roll back to it, causing the update rollback to fail.</p>"
+      "documentation":"<p>For a specified stack that is in the <code>UPDATE_ROLLBACK_FAILED</code> state, continues rolling it back to the <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on the cause of the failure, you can manually <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed\"> fix the error</a> and continue the rollback. By continuing the rollback, you can return your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state), and then try to update the stack again.</p> <p>A stack goes into the <code>UPDATE_ROLLBACK_FAILED</code> state when AWS CloudFormation cannot roll back all changes after a failed stack update. For example, you might have a stack that is rolling back to an old database instance that was deleted outside of AWS CloudFormation. Because AWS CloudFormation doesn't know the database was deleted, it assumes that the database instance still exists and attempts to roll back to it, causing the update rollback to fail.</p> <examples></examples>"
+    },
+    "CreateChangeSet":{
+      "name":"CreateChangeSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateChangeSetInput"},
+      "output":{
+        "shape":"CreateChangeSetOutput",
+        "resultWrapper":"CreateChangeSetResult"
+      },
+      "errors":[
+        {"shape":"AlreadyExistsException"},
+        {"shape":"InsufficientCapabilitiesException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a list of changes for a stack. AWS CloudFormation generates the change set by comparing the stack's information with the information that you submit. A change set can help you understand which resources AWS CloudFormation will change and how it will change them before you update your stack. Change sets allow you to check before you make a change so that you don't delete or replace critical resources.</p> <p>AWS CloudFormation doesn't make any changes to the stack when you create a change set. To make the specified changes, you must execute the change set by using the <a>ExecuteChangeSet</a> action.</p> <p>After the call successfully completes, AWS CloudFormation starts creating the change set. To check the status of the change set, use the <a>DescribeChangeSet</a> action.</p> <examples></examples>"
     },
     "CreateStack":{
       "name":"CreateStack",
@@ -47,7 +65,20 @@
         {"shape":"AlreadyExistsException"},
         {"shape":"InsufficientCapabilitiesException"}
       ],
-      "documentation":"<p>Creates a stack as specified in the template. After the call completes successfully, the stack creation starts. You can check the status of the stack via the <a>DescribeStacks</a> API.</p>"
+      "documentation":"<p>Creates a stack as specified in the template. After the call completes successfully, the stack creation starts. You can check the status of the stack via the <a>DescribeStacks</a> API.</p> <examples></examples>"
+    },
+    "DeleteChangeSet":{
+      "name":"DeleteChangeSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteChangeSetInput"},
+      "output":{
+        "shape":"DeleteChangeSetOutput",
+        "resultWrapper":"DeleteChangeSetResult"
+      },
+      "documentation":"<p>Deletes the specified change set. Deleting change sets ensures that no one executes the wrong change set.</p> <p>If the call successfully completes, AWS CloudFormation successfully deleted the change set.</p> <examples></examples>"
     },
     "DeleteStack":{
       "name":"DeleteStack",
@@ -56,7 +87,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteStackInput"},
-      "documentation":"<p>Deletes a specified stack. Once the call completes successfully, stack deletion starts. Deleted stacks do not show up in the <a>DescribeStacks</a> API if the deletion has been completed successfully.</p>"
+      "documentation":"<p>Deletes a specified stack. Once the call completes successfully, stack deletion starts. Deleted stacks do not show up in the <a>DescribeStacks</a> API if the deletion has been completed successfully.</p> <examples></examples>"
     },
     "DescribeAccountLimits":{
       "name":"DescribeAccountLimits",
@@ -69,7 +100,23 @@
         "shape":"DescribeAccountLimitsOutput",
         "resultWrapper":"DescribeAccountLimitsResult"
       },
-      "documentation":"<p>Retrieves your account's AWS CloudFormation limits, such as the maximum number of stacks that you can create in your account.</p>"
+      "documentation":"<p>Retrieves your account's AWS CloudFormation limits, such as the maximum number of stacks that you can create in your account.</p> <examples></examples>"
+    },
+    "DescribeChangeSet":{
+      "name":"DescribeChangeSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeChangeSetInput"},
+      "output":{
+        "shape":"DescribeChangeSetOutput",
+        "resultWrapper":"DescribeChangeSetResult"
+      },
+      "errors":[
+        {"shape":"ChangeSetNotFoundException"}
+      ],
+      "documentation":"<p>Returns the inputs for the change set and a list of changes that AWS CloudFormation will make if you execute the change set. For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html\">Updating Stacks Using Change Sets</a> in the AWS CloudFormation User Guide.</p> <examples></examples>"
     },
     "DescribeStackEvents":{
       "name":"DescribeStackEvents",
@@ -82,7 +129,7 @@
         "shape":"DescribeStackEventsOutput",
         "resultWrapper":"DescribeStackEventsResult"
       },
-      "documentation":"<p>Returns all stack related events for a specified stack. For more information about a stack's event history, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html\">Stacks</a> in the AWS CloudFormation User Guide.</p> <note>You can list events for stacks that have failed to create or have been deleted by specifying the unique stack identifier (stack ID).</note>"
+      "documentation":"<p>Returns all stack related events for a specified stack. For more information about a stack's event history, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html\">Stacks</a> in the AWS CloudFormation User Guide.</p> <note>You can list events for stacks that have failed to create or have been deleted by specifying the unique stack identifier (stack ID).</note> <examples></examples>"
     },
     "DescribeStackResource":{
       "name":"DescribeStackResource",
@@ -95,7 +142,7 @@
         "shape":"DescribeStackResourceOutput",
         "resultWrapper":"DescribeStackResourceResult"
       },
-      "documentation":"<p>Returns a description of the specified resource in the specified stack.</p> <p>For deleted stacks, DescribeStackResource returns resource information for up to 90 days after the stack has been deleted.</p>"
+      "documentation":"<p>Returns a description of the specified resource in the specified stack.</p> <p>For deleted stacks, DescribeStackResource returns resource information for up to 90 days after the stack has been deleted.</p> <examples></examples>"
     },
     "DescribeStackResources":{
       "name":"DescribeStackResources",
@@ -108,7 +155,7 @@
         "shape":"DescribeStackResourcesOutput",
         "resultWrapper":"DescribeStackResourcesResult"
       },
-      "documentation":"<p>Returns AWS resource descriptions for running and deleted stacks. If <code>StackName</code> is specified, all the associated resources that are part of the stack are returned. If <code>PhysicalResourceId</code> is specified, the associated resources of the stack that the resource belongs to are returned.</p> <note>Only the first 100 resources will be returned. If your stack has more resources than this, you should use <code>ListStackResources</code> instead.</note> <p>For deleted stacks, <code>DescribeStackResources</code> returns resource information for up to 90 days after the stack has been deleted.</p> <p>You must specify either <code>StackName</code> or <code>PhysicalResourceId</code>, but not both. In addition, you can specify <code>LogicalResourceId</code> to filter the returned result. For more information about resources, the <code>LogicalResourceId</code> and <code>PhysicalResourceId</code>, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/\">AWS CloudFormation User Guide</a>.</p> <note>A <code>ValidationError</code> is returned if you specify both <code>StackName</code> and <code>PhysicalResourceId</code> in the same request.</note>"
+      "documentation":"<p>Returns AWS resource descriptions for running and deleted stacks. If <code>StackName</code> is specified, all the associated resources that are part of the stack are returned. If <code>PhysicalResourceId</code> is specified, the associated resources of the stack that the resource belongs to are returned.</p> <note>Only the first 100 resources will be returned. If your stack has more resources than this, you should use <code>ListStackResources</code> instead.</note> <p>For deleted stacks, <code>DescribeStackResources</code> returns resource information for up to 90 days after the stack has been deleted.</p> <p>You must specify either <code>StackName</code> or <code>PhysicalResourceId</code>, but not both. In addition, you can specify <code>LogicalResourceId</code> to filter the returned result. For more information about resources, the <code>LogicalResourceId</code> and <code>PhysicalResourceId</code>, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/\">AWS CloudFormation User Guide</a>.</p> <note>A <code>ValidationError</code> is returned if you specify both <code>StackName</code> and <code>PhysicalResourceId</code> in the same request.</note> <examples></examples>"
     },
     "DescribeStacks":{
       "name":"DescribeStacks",
@@ -121,7 +168,7 @@
         "shape":"DescribeStacksOutput",
         "resultWrapper":"DescribeStacksResult"
       },
-      "documentation":"<p>Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.</p>"
+      "documentation":"<p>Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.</p> <examples></examples>"
     },
     "EstimateTemplateCost":{
       "name":"EstimateTemplateCost",
@@ -134,7 +181,24 @@
         "shape":"EstimateTemplateCostOutput",
         "resultWrapper":"EstimateTemplateCostResult"
       },
-      "documentation":"<p>Returns the estimated monthly cost of a template. The return value is an AWS Simple Monthly Calculator URL with a query string that describes the resources required to run the template.</p>"
+      "documentation":"<p>Returns the estimated monthly cost of a template. The return value is an AWS Simple Monthly Calculator URL with a query string that describes the resources required to run the template.</p> <examples></examples>"
+    },
+    "ExecuteChangeSet":{
+      "name":"ExecuteChangeSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ExecuteChangeSetInput"},
+      "output":{
+        "shape":"ExecuteChangeSetOutput",
+        "resultWrapper":"ExecuteChangeSetResult"
+      },
+      "errors":[
+        {"shape":"InvalidChangeSetStatusException"},
+        {"shape":"ChangeSetNotFoundException"}
+      ],
+      "documentation":"<p>Updates a stack using the input information that was provided when the specified change set was created. After the call successfully completes, AWS CloudFormation starts updating the stack. Use the <a>DescribeStacks</a> action to view the status of the update.</p> <p>When you execute a change set, AWS CloudFormation deletes all other change sets associated with the stack because they aren't valid for the updated stack.</p> <p>If a stack policy is associated with the stack, AWS CloudFormation enforces the policy during the update. You can't specify a temporary stack policy that overrides the current policy.</p> <examples></examples>"
     },
     "GetStackPolicy":{
       "name":"GetStackPolicy",
@@ -147,7 +211,7 @@
         "shape":"GetStackPolicyOutput",
         "resultWrapper":"GetStackPolicyResult"
       },
-      "documentation":"<p>Returns the stack policy for a specified stack. If a stack doesn't have a policy, a null value is returned.</p>"
+      "documentation":"<p>Returns the stack policy for a specified stack. If a stack doesn't have a policy, a null value is returned.</p> <examples></examples>"
     },
     "GetTemplate":{
       "name":"GetTemplate",
@@ -160,7 +224,7 @@
         "shape":"GetTemplateOutput",
         "resultWrapper":"GetTemplateResult"
       },
-      "documentation":"<p>Returns the template body for a specified stack. You can get the template for running or deleted stacks.</p> <p>For deleted stacks, GetTemplate returns the template for up to 90 days after the stack has been deleted.</p> <note> If the template does not exist, a <code>ValidationError</code> is returned. </note>"
+      "documentation":"<p>Returns the template body for a specified stack. You can get the template for running or deleted stacks.</p> <p>For deleted stacks, GetTemplate returns the template for up to 90 days after the stack has been deleted.</p> <note> If the template does not exist, a <code>ValidationError</code> is returned. </note> <examples></examples>"
     },
     "GetTemplateSummary":{
       "name":"GetTemplateSummary",
@@ -173,7 +237,20 @@
         "shape":"GetTemplateSummaryOutput",
         "resultWrapper":"GetTemplateSummaryResult"
       },
-      "documentation":"<p>Returns information about a new or existing template. The <code>GetTemplateSummary</code> action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack.</p> <p>You can use the <code>GetTemplateSummary</code> action when you submit a template, or you can get template information for a running or deleted stack.</p> <p>For deleted stacks, <code>GetTemplateSummary</code> returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a <code>ValidationError</code> is returned.</p>"
+      "documentation":"<p>Returns information about a new or existing template. The <code>GetTemplateSummary</code> action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack.</p> <p>You can use the <code>GetTemplateSummary</code> action when you submit a template, or you can get template information for a running or deleted stack.</p> <p>For deleted stacks, <code>GetTemplateSummary</code> returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a <code>ValidationError</code> is returned.</p> <examples></examples>"
+    },
+    "ListChangeSets":{
+      "name":"ListChangeSets",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListChangeSetsInput"},
+      "output":{
+        "shape":"ListChangeSetsOutput",
+        "resultWrapper":"ListChangeSetsResult"
+      },
+      "documentation":"<p>Returns the ID and status of each active change set for a stack. For example, AWS CloudFormation lists change sets that are in the <code>CREATE_IN_PROGRESS</code> or <code>CREATE_PENDING</code> state.</p> <examples></examples>"
     },
     "ListStackResources":{
       "name":"ListStackResources",
@@ -186,7 +263,7 @@
         "shape":"ListStackResourcesOutput",
         "resultWrapper":"ListStackResourcesResult"
       },
-      "documentation":"<p>Returns descriptions of all resources of the specified stack.</p> <p>For deleted stacks, ListStackResources returns resource information for up to 90 days after the stack has been deleted.</p>"
+      "documentation":"<p>Returns descriptions of all resources of the specified stack.</p> <p>For deleted stacks, ListStackResources returns resource information for up to 90 days after the stack has been deleted.</p> <examples></examples>"
     },
     "ListStacks":{
       "name":"ListStacks",
@@ -199,7 +276,7 @@
         "shape":"ListStacksOutput",
         "resultWrapper":"ListStacksResult"
       },
-      "documentation":"<p>Returns the summary information for stacks whose status matches the specified StackStatusFilter. Summary information for stacks that have been deleted is kept for 90 days after the stack is deleted. If no StackStatusFilter is specified, summary information for all stacks is returned (including existing stacks and stacks that have been deleted).</p>"
+      "documentation":"<p>Returns the summary information for stacks whose status matches the specified StackStatusFilter. Summary information for stacks that have been deleted is kept for 90 days after the stack is deleted. If no StackStatusFilter is specified, summary information for all stacks is returned (including existing stacks and stacks that have been deleted).</p> <examples></examples>"
     },
     "SetStackPolicy":{
       "name":"SetStackPolicy",
@@ -208,7 +285,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"SetStackPolicyInput"},
-      "documentation":"<p>Sets a stack policy for a specified stack.</p>"
+      "documentation":"<p>Sets a stack policy for a specified stack.</p> <examples></examples>"
     },
     "SignalResource":{
       "name":"SignalResource",
@@ -217,7 +294,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"SignalResourceInput"},
-      "documentation":"<p>Sends a signal to the specified resource with a success or failure status. You can use the SignalResource API in conjunction with a creation policy or update policy. AWS CloudFormation doesn't proceed with a stack creation or update until resources receive the required number of signals or the timeout period is exceeded. The SignalResource API is useful in cases where you want to send signals from anywhere other than an Amazon EC2 instance.</p>"
+      "documentation":"<p>Sends a signal to the specified resource with a success or failure status. You can use the SignalResource API in conjunction with a creation policy or update policy. AWS CloudFormation doesn't proceed with a stack creation or update until resources receive the required number of signals or the timeout period is exceeded. The SignalResource API is useful in cases where you want to send signals from anywhere other than an Amazon EC2 instance.</p> <examples></examples>"
     },
     "UpdateStack":{
       "name":"UpdateStack",
@@ -233,7 +310,7 @@
       "errors":[
         {"shape":"InsufficientCapabilitiesException"}
       ],
-      "documentation":"<p>Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the <a>DescribeStacks</a> action.</p> <p>To get a copy of the template for an existing stack, you can use the <a>GetTemplate</a> action.</p> <p>For more information about creating an update template, updating a stack, and monitoring the progress of the update, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html\">Updating a Stack</a>.</p>"
+      "documentation":"<p>Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the <a>DescribeStacks</a> action.</p> <p>To get a copy of the template for an existing stack, you can use the <a>GetTemplate</a> action.</p> <p>For more information about creating an update template, updating a stack, and monitoring the progress of the update, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html\">Updating a Stack</a>.</p> <examples></examples>"
     },
     "ValidateTemplate":{
       "name":"ValidateTemplate",
@@ -246,7 +323,7 @@
         "shape":"ValidateTemplateOutput",
         "resultWrapper":"ValidateTemplateResult"
       },
-      "documentation":"<p>Validates a specified template.</p>"
+      "documentation":"<p>Validates a specified template.</p> <examples></examples>"
     }
   },
   "shapes":{
@@ -305,6 +382,134 @@
       "type":"string",
       "enum":["CAPABILITY_IAM"]
     },
+    "CausingEntity":{"type":"string"},
+    "Change":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"ChangeType",
+          "documentation":"<p>The type of entity that AWS CloudFormation changes. Currently, the only entity type is <code>Resource</code>.</p>"
+        },
+        "ResourceChange":{
+          "shape":"ResourceChange",
+          "documentation":"<p>A <code>ResourceChange</code> structure that describes the resource and action that AWS CloudFormation will perform.</p>"
+        }
+      },
+      "documentation":"<p>The <code>Change</code> structure describes the changes AWS CloudFormation will perform if you execute the change set.</p>"
+    },
+    "ChangeAction":{
+      "type":"string",
+      "enum":[
+        "Add",
+        "Modify",
+        "Remove"
+      ]
+    },
+    "ChangeSetId":{
+      "type":"string",
+      "min":1,
+      "pattern":"arn:[-a-zA-Z0-9:/]*"
+    },
+    "ChangeSetName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z][-a-zA-Z0-9]*"
+    },
+    "ChangeSetNameOrId":{
+      "type":"string",
+      "max":1600,
+      "min":1,
+      "pattern":"[a-zA-Z][-a-zA-Z0-9]*|arn:[-a-zA-Z0-9:/]*"
+    },
+    "ChangeSetNotFoundException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The specified change set name or ID doesn't exit. To view valid change sets for a stack, use the <code>ListChangeSets</code> action.</p>",
+      "error":{
+        "code":"ChangeSetNotFound",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ChangeSetStatus":{
+      "type":"string",
+      "enum":[
+        "CREATE_PENDING",
+        "CREATE_IN_PROGRESS",
+        "CREATE_COMPLETE",
+        "DELETE_COMPLETE",
+        "FAILED"
+      ]
+    },
+    "ChangeSetStatusReason":{"type":"string"},
+    "ChangeSetSummaries":{
+      "type":"list",
+      "member":{"shape":"ChangeSetSummary"}
+    },
+    "ChangeSetSummary":{
+      "type":"structure",
+      "members":{
+        "StackId":{
+          "shape":"StackId",
+          "documentation":"<p>The ID of the stack with which the change set is associated.</p>"
+        },
+        "StackName":{
+          "shape":"StackName",
+          "documentation":"<p>The name of the stack with which the change set is associated.</p>"
+        },
+        "ChangeSetId":{
+          "shape":"ChangeSetId",
+          "documentation":"<p>The ID of the change set.</p>"
+        },
+        "ChangeSetName":{
+          "shape":"ChangeSetName",
+          "documentation":"<p>The name of the change set.</p>"
+        },
+        "Status":{
+          "shape":"ChangeSetStatus",
+          "documentation":"<p>The state of the change set, such as <code>CREATE_IN_PROGRESS</code>, <code>CREATE_COMPLETE</code>, or <code>FAILED</code>.</p>"
+        },
+        "StatusReason":{
+          "shape":"ChangeSetStatusReason",
+          "documentation":"<p>A description of the change set's status. For example, if your change set is in the <code>FAILED</code> state, AWS CloudFormation shows the error message.</p>"
+        },
+        "CreationTime":{
+          "shape":"CreationTime",
+          "documentation":"<p>The start time when the change set was created, in UTC.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>Descriptive information about the change set.</p>"
+        }
+      },
+      "documentation":"<p>The <code>ChangeSetSummary</code> structure describes a change set, its status, and the stack with which it's associated.</p>"
+    },
+    "ChangeSource":{
+      "type":"string",
+      "enum":[
+        "ResourceReference",
+        "ParameterReference",
+        "ResourceAttribute",
+        "DirectModification",
+        "Automatic"
+      ]
+    },
+    "ChangeType":{
+      "type":"string",
+      "enum":["Resource"]
+    },
+    "Changes":{
+      "type":"list",
+      "member":{"shape":"Change"}
+    },
+    "ClientToken":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "ContinueUpdateRollbackInput":{
       "type":"structure",
       "required":["StackName"],
@@ -321,6 +526,74 @@
       "members":{
       },
       "documentation":"<p>The output for a <a>ContinueUpdateRollback</a> action.</p>"
+    },
+    "CreateChangeSetInput":{
+      "type":"structure",
+      "required":[
+        "StackName",
+        "ChangeSetName"
+      ],
+      "members":{
+        "StackName":{
+          "shape":"StackNameOrId",
+          "documentation":"<p>The name or the unique ID of the stack for which you are creating a change set. AWS CloudFormation generates the change set by comparing this stack's information with the information that you submit, such as a modified template or different parameter input values.</p>"
+        },
+        "TemplateBody":{
+          "shape":"TemplateBody",
+          "documentation":"<p>A structure that contains the body of the revised template, with a minimum length of 1 byte and a maximum length of 51,200 bytes. AWS CloudFormation generates the change set by comparing this template with the template of the stack that you specified.</p> <p>Conditional: You must specify only <code>TemplateBody</code> or <code>TemplateURL</code>.</p>"
+        },
+        "TemplateURL":{
+          "shape":"TemplateURL",
+          "documentation":"<p>The location of the file that contains the revised template. The URL must point to a template (max size: 460,800 bytes) that is located in an S3 bucket. AWS CloudFormation generates the change set by comparing this template with the stack that you specified.</p> <p>Conditional: You must specify only <code>TemplateBody</code> or <code>TemplateURL</code>.</p>"
+        },
+        "UsePreviousTemplate":{
+          "shape":"UsePreviousTemplate",
+          "documentation":"<p>Whether to reuse the template that is associated with the stack to create the change set.</p>"
+        },
+        "Parameters":{
+          "shape":"Parameters",
+          "documentation":"<p>A list of <code>Parameter</code> structures that specify input parameters for the change set. For more information, see the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html\">Parameter</a> data type.</p>"
+        },
+        "Capabilities":{
+          "shape":"Capabilities",
+          "documentation":"<p>A list of capabilities that you must specify before AWS CloudFormation can update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account, for example, by creating new AWS Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter.</p> <p>Currently, the only valid value is <code>CAPABILITY_IAM</code>, which is required for the following resources: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\"> AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\"> AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\"> AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\"> AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\"> AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\"> AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\"> AWS::IAM::UserToGroupAddition</a>. If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary. If your template contains any of the listed resources and you don't specify this parameter, this action returns an <code>InsufficientCapabilities</code> error.</p>"
+        },
+        "ResourceTypes":{
+          "shape":"ResourceTypes",
+          "documentation":"<p>The template resource types that you have permissions to work with if you execute this change set, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or <code>Custom::MyCustomInstance</code>.</p> <p>If the list of resource types doesn't include a resource type that you're updating, the stack update fails. By default, AWS CloudFormation grants permissions to all resource types. AWS Identity and Access Management (IAM) uses this parameter for condition keys in IAM policies for AWS CloudFormation. For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html\">Controlling Access with AWS Identity and Access Management</a> in the AWS CloudFormation User Guide.</p>"
+        },
+        "NotificationARNs":{
+          "shape":"NotificationARNs",
+          "documentation":"<p>The Amazon Resource Names (ARNs) of Amazon Simple Notification Service (Amazon SNS) topics that AWS CloudFormation associates with the stack. To remove all associated notification topics, specify an empty list.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to resources in the stack. You can specify a maximum of 10 tags.</p>"
+        },
+        "ChangeSetName":{
+          "shape":"ChangeSetName",
+          "documentation":"<p>The name of the change set. The name must be unique among all change sets that are associated with the specified stack.</p> <p>A change set name can contain only alphanumeric, case sensitive characters and hyphens. It must start with an alphabetic character and cannot exceed 128 characters.</p>"
+        },
+        "ClientToken":{
+          "shape":"ClientToken",
+          "documentation":"<p>A unique identifier for this <code>CreateChangeSet</code> request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to create another change set with the same name. You might retry <code>CreateChangeSet</code> requests to ensure that AWS CloudFormation successfully received them.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>A description to help you identify this change set.</p>"
+        }
+      },
+      "documentation":"<p>The input for the <a>CreateChangeSet</a> action.</p>"
+    },
+    "CreateChangeSetOutput":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"ChangeSetId",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the change set.</p>"
+        }
+      },
+      "documentation":"<p>The output for the <a>CreateChangeSet</a> action.</p>"
     },
     "CreateStackInput":{
       "type":"structure",
@@ -356,7 +629,7 @@
         },
         "Capabilities":{
           "shape":"Capabilities",
-          "documentation":"<p>A list of capabilities that you must specify before AWS CloudFormation can create or update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter.</p> <p>Currently, the only valid value is <code>CAPABILITY_IAM</code>, which is required for the following resources: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\"> AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\"> AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\"> AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\"> AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\"> AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\"> AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\"> AWS::IAM::UserToGroupAddition</a>. If your stack template contains these resources, we recommend that you review any permissions associated with them. If you don't specify this parameter, this action returns an <code>InsufficientCapabilities</code> error.</p>"
+          "documentation":"<p>A list of capabilities that you must specify before AWS CloudFormation can create certain stacks. Some stack templates might include resources that can affect permissions in your AWS account, for example, by creating new AWS Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter.</p> <p>Currently, the only valid value is <code>CAPABILITY_IAM</code>, which is required for the following resources: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\"> AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\"> AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\"> AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\"> AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\"> AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\"> AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\"> AWS::IAM::UserToGroupAddition</a>. If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary. If your template contains any of the listed resources and you don't specify this parameter, this action returns an <code>InsufficientCapabilities</code> error.</p>"
         },
         "ResourceTypes":{
           "shape":"ResourceTypes",
@@ -392,6 +665,27 @@
       "documentation":"<p>The output for a <a>CreateStack</a> action.</p>"
     },
     "CreationTime":{"type":"timestamp"},
+    "DeleteChangeSetInput":{
+      "type":"structure",
+      "required":["ChangeSetName"],
+      "members":{
+        "ChangeSetName":{
+          "shape":"ChangeSetNameOrId",
+          "documentation":"<p>The name or Amazon Resource Name (ARN) of the change set that you want to delete.</p>"
+        },
+        "StackName":{
+          "shape":"StackNameOrId",
+          "documentation":"<p>If you specified the name of a change set to delete, specify the stack name or ID (ARN) that is associated with it.</p>"
+        }
+      },
+      "documentation":"<p>The input for the <a>DeleteChangeSet</a> action.</p>"
+    },
+    "DeleteChangeSetOutput":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The output for the <a>DeleteChangeSet</a> action.</p>"
+    },
     "DeleteStackInput":{
       "type":"structure",
       "required":["StackName"],
@@ -431,6 +725,87 @@
         }
       },
       "documentation":"<p>The output for the <a>DescribeAccountLimits</a> action.</p>"
+    },
+    "DescribeChangeSetInput":{
+      "type":"structure",
+      "required":["ChangeSetName"],
+      "members":{
+        "ChangeSetName":{
+          "shape":"ChangeSetNameOrId",
+          "documentation":"<p>The name or Amazon Resource Name (ARN) of the change set that you want to describe. </p>"
+        },
+        "StackName":{
+          "shape":"StackNameOrId",
+          "documentation":"<p>If you specified the name of a change set, specify the stack name or ID (ARN) of the change set you want to describe.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A string (provided by the <a>DescribeChangeSet</a> response output) that identifies the next page of information that you want to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>The input for the <a>DescribeChangeSet</a> action.</p>"
+    },
+    "DescribeChangeSetOutput":{
+      "type":"structure",
+      "members":{
+        "ChangeSetName":{
+          "shape":"ChangeSetName",
+          "documentation":"<p>The name of the change set.</p>"
+        },
+        "ChangeSetId":{
+          "shape":"ChangeSetId",
+          "documentation":"<p>The ARN of the change set.</p>"
+        },
+        "StackId":{
+          "shape":"StackId",
+          "documentation":"<p>The ARN of the stack that is associated with the change set.</p>"
+        },
+        "StackName":{
+          "shape":"StackName",
+          "documentation":"<p>The name of the stack that is associated with the change set.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>Information about the change set.</p>"
+        },
+        "Parameters":{
+          "shape":"Parameters",
+          "documentation":"<p>A list of <code>Parameter</code> structures that describes the input parameters and their values used to create the change set. For more information, see the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html\">Parameter</a> data type.</p>"
+        },
+        "CreationTime":{
+          "shape":"CreationTime",
+          "documentation":"<p>The start time when the change set was created, in UTC.</p>"
+        },
+        "Status":{
+          "shape":"ChangeSetStatus",
+          "documentation":"<p>The current status of the change set, such as <code>CREATE_IN_PROGRESS</code>, <code>CREATE_COMPLETE</code>, or <code>FAILED</code>.</p>"
+        },
+        "StatusReason":{
+          "shape":"ChangeSetStatusReason",
+          "documentation":"<p>A description of the change set's status. For example, if your attempt to create a change set failed, AWS CloudFormation shows the error message.</p>"
+        },
+        "NotificationARNs":{
+          "shape":"NotificationARNs",
+          "documentation":"<p>The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that will be associated with the stack if you execute the change set.</p>"
+        },
+        "Capabilities":{
+          "shape":"Capabilities",
+          "documentation":"<p>If you execute the change set, the list of capabilities that were explicitly acknowledged when the change set was created.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>If you execute the change set, the tags that will be associated with the stack.</p>"
+        },
+        "Changes":{
+          "shape":"Changes",
+          "documentation":"<p>A list of <code>Change</code> structures that describes the resources AWS CloudFormation changes if you execute the change set.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If the output exceeds 1 MB, a string that identifies the next page of changes. If there is no additional page, this value is null.</p>"
+        }
+      },
+      "documentation":"<p>The output for the <a>DescribeChangeSet</a> action.</p>"
     },
     "DescribeStackEventsInput":{
       "type":"structure",
@@ -544,7 +919,11 @@
       },
       "documentation":"<p>The output for a <a>DescribeStacks</a> action.</p>"
     },
-    "Description":{"type":"string"},
+    "Description":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
     "DisableRollback":{"type":"boolean"},
     "EstimateTemplateCostInput":{
       "type":"structure",
@@ -573,7 +952,35 @@
       },
       "documentation":"<p>The output for a <a>EstimateTemplateCost</a> action.</p>"
     },
+    "EvaluationType":{
+      "type":"string",
+      "enum":[
+        "Static",
+        "Dynamic"
+      ]
+    },
     "EventId":{"type":"string"},
+    "ExecuteChangeSetInput":{
+      "type":"structure",
+      "required":["ChangeSetName"],
+      "members":{
+        "ChangeSetName":{
+          "shape":"ChangeSetNameOrId",
+          "documentation":"<p>The name or ARN of the change set that you want use to update the specified stack.</p>"
+        },
+        "StackName":{
+          "shape":"StackNameOrId",
+          "documentation":"<p>If you specified the name of a change set, specify the stack name or ID (ARN) that is associated with the change set you want to execute.</p>"
+        }
+      },
+      "documentation":"<p>The input for the <a>ExecuteChangeSet</a> action.</p>"
+    },
+    "ExecuteChangeSetOutput":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The output for the <a>ExecuteChangeSet</a> action.</p>"
+    },
     "GetStackPolicyInput":{
       "type":"structure",
       "required":["StackName"],
@@ -680,6 +1087,18 @@
       },
       "exception":true
     },
+    "InvalidChangeSetStatusException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The specified change set cannot be used to update the stack. For example, the change set status might be <code>CREATE_IN_PROGRESS</code> or the stack status might be <code>UPDATE_IN_PROGRESS</code>.</p>",
+      "error":{
+        "code":"InvalidChangeSetStatus",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "LastUpdatedTime":{"type":"timestamp"},
     "LimitExceededException":{
       "type":"structure",
@@ -695,6 +1114,35 @@
     },
     "LimitName":{"type":"string"},
     "LimitValue":{"type":"integer"},
+    "ListChangeSetsInput":{
+      "type":"structure",
+      "required":["StackName"],
+      "members":{
+        "StackName":{
+          "shape":"StackNameOrId",
+          "documentation":"<p>The name or the Amazon Resource Name (ARN) of the stack for which you want to list change sets.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A string (provided by the <a>ListChangeSets</a> response output) that identifies the next page of change sets that you want to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>The input for the <a>ListChangeSets</a> action.</p>"
+    },
+    "ListChangeSetsOutput":{
+      "type":"structure",
+      "members":{
+        "Summaries":{
+          "shape":"ChangeSetSummaries",
+          "documentation":"<p>A list of <code>ChangeSetSummary</code> structures that provides the ID and status of each change set for the specified stack.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If the output exceeds 1 MB, a string that identifies the next page of change sets. If there is no additional page, this value is null.</p>"
+        }
+      },
+      "documentation":"<p>The output for the <a>ListChangeSets</a> action.</p>"
+    },
     "ListStackResourcesInput":{
       "type":"structure",
       "required":["StackName"],
@@ -719,7 +1167,7 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>If the output exceeds 1 MB in size, a string that identifies the next page of stack resources. If no additional page exists, this value is null.</p>"
+          "documentation":"<p>If the output exceeds 1 MB, a string that identifies the next page of stack resources. If no additional page exists, this value is null.</p>"
         }
       },
       "documentation":"<p>The output for a <a>ListStackResources</a> action.</p>"
@@ -868,6 +1316,94 @@
       "member":{"shape":"Parameter"}
     },
     "PhysicalResourceId":{"type":"string"},
+    "PropertyName":{"type":"string"},
+    "Replacement":{
+      "type":"string",
+      "enum":[
+        "True",
+        "False",
+        "Conditional"
+      ]
+    },
+    "RequiresRecreation":{
+      "type":"string",
+      "enum":[
+        "Never",
+        "Conditionally",
+        "Always"
+      ]
+    },
+    "ResourceAttribute":{
+      "type":"string",
+      "enum":[
+        "Properties",
+        "Metadata",
+        "CreationPolicy",
+        "UpdatePolicy",
+        "DeletionPolicy",
+        "Tags"
+      ]
+    },
+    "ResourceChange":{
+      "type":"structure",
+      "members":{
+        "Action":{
+          "shape":"ChangeAction",
+          "documentation":"<p>The action that AWS CloudFormation takes on the resource, such as <code>Add</code> (adds a new resource), <code>Modify</code> (changes a resource), or <code>Remove</code> (deletes a resource).</p>"
+        },
+        "LogicalResourceId":{
+          "shape":"LogicalResourceId",
+          "documentation":"<p>The resource's logical ID, which is defined in the stack's template.</p>"
+        },
+        "PhysicalResourceId":{
+          "shape":"PhysicalResourceId",
+          "documentation":"<p>The resource's physical ID (resource name). Resources that you are adding don't have physical IDs because they haven't been created.</p>"
+        },
+        "ResourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The type of AWS CloudFormation resource, such as <code>AWS::S3::Bucket</code>.</p>"
+        },
+        "Replacement":{
+          "shape":"Replacement",
+          "documentation":"<p>For the <code>Modify</code> action, indicates whether AWS CloudFormation will replace the resource by creating a new one and deleting the old one. This value depends on the value of the <code>RequiresRecreation</code> property in the <code>ResourceTargetDefinition</code> structure. For example, if the <code>RequiresRecreation</code> field is <code>Always</code> and the <code>Evaluation</code> field is <code>Static</code>, <code>Replacement</code> is <code>True</code>. If the <code>RequiresRecreation</code> field is <code>Always</code> and the <code>Evaluation</code> field is <code>Dynamic</code>, <code>Replacement</code> is <code>Conditionally</code>.</p> <p>If you have multiple changes with different <code>RequiresRecreation</code> values, the <code>Replacement</code> value depends on the change with the most impact. A <code>RequiresRecreation</code> value of <code>Always</code> has the most impact, followed by <code>Conditionally</code>, and then <code>Never</code>.</p>"
+        },
+        "Scope":{
+          "shape":"Scope",
+          "documentation":"<p>For the <code>Modify</code> action, indicates which resource attribute is triggering this update, such as a change in the resource attribute's <code>Metadata</code>, <code>Properties</code>, or <code>Tags</code>.</p>"
+        },
+        "Details":{
+          "shape":"ResourceChangeDetails",
+          "documentation":"<p>For the <code>Modify</code> action, a list of <code>ResourceChangeDetail</code> structures that describes the changes that AWS CloudFormation will make to the resource. </p>"
+        }
+      },
+      "documentation":"<p>The <code>ResourceChange</code> structure describes the resource and the action that AWS CloudFormation will perform on it if you execute this change set.</p>"
+    },
+    "ResourceChangeDetail":{
+      "type":"structure",
+      "members":{
+        "Target":{
+          "shape":"ResourceTargetDefinition",
+          "documentation":"<p>A <code>ResourceTargetDefinition</code> structure that describes the field that AWS CloudFormation will change and whether the resource will be recreated.</p>"
+        },
+        "Evaluation":{
+          "shape":"EvaluationType",
+          "documentation":"<p>Indicates whether AWS CloudFormation can determine the target value, and whether the target value will change before you execute a change set.</p> <p>For <code>Static</code> evaluations, AWS CloudFormation can determine that the target value will change, and its value. For example, if you directly modify the <code>InstanceType</code> property of an EC2 instance, AWS CloudFormation knows that this property value will change, and its value, so this is a <code>Static</code> evaluation.</p> <p>For <code>Dynamic</code> evaluations, cannot determine the target value because it depends on the result of an intrinsic function, such as a <code>Ref</code> or <code>Fn::GetAtt</code> intrinsic function, when the stack is updated. For example, if your template includes a reference to a resource that is conditionally recreated, the value of the reference (the physical ID of the resource) might change, depending on if the resource is recreated. If the resource is recreated, it will have a new physical ID, so all references to that resource will also be updated.</p>"
+        },
+        "ChangeSource":{
+          "shape":"ChangeSource",
+          "documentation":"<p>The group to which the <code>CausingEntity</code> value belongs. There are five entity groups:</p> <ul> <li><code>ResourceReference</code> entities are <code>Ref</code> intrinsic functions that refer to resources in the template, such as <code>{ \"Ref\" : \"MyEC2InstanceResource\" }</code>.</li> <li><code>ParameterReference</code> entities are <code>Ref</code> intrinsic functions that get template parameter values, such as <code>{ \"Ref\" : \"MyPasswordParameter\" }</code>.</li> <li><code>ResourceAttribute</code> entities are <code>Fn::GetAtt</code> intrinsic functions that get resource attribute values, such as <code>{ \"Fn::GetAtt\" : [ \"MyEC2InstanceResource\", \"PublicDnsName\" ] }</code>.</li> <li><code>DirectModification</code> entities are changes that are made directly to the template.</li> <li><code>Automatic</code> entities are <code>AWS::CloudFormation::Stack</code> resource types, which are also known as nested stacks. If you made no changes to the <code>AWS::CloudFormation::Stack</code> resource, AWS CloudFormation sets the <code>ChangeSource</code> to <code>Automatic</code> because the nested stack's template might have changed. Changes to a nested stack's template aren't visible to AWS CloudFormation until you run an update on the parent stack.</li> </ul>"
+        },
+        "CausingEntity":{
+          "shape":"CausingEntity",
+          "documentation":"<p>The identity of the entity that triggered this change. This entity is a member of the group that is specified by the <code>ChangeSource</code> field. For example, if you modified the value of the <code>KeyPairName</code> parameter, the <code>CausingEntity</code> is the name of the parameter (<code>KeyPairName</code>).</p> <p>If the <code>ChangeSource</code> value is <code>DirectModification</code>, no value is given for <code>CausingEntity</code>.</p>"
+        }
+      },
+      "documentation":"<p>For a resource with <code>Modify</code> as the action, the <code>ResourceChange</code> structure describes the changes AWS CloudFormation will make to that resource.</p>"
+    },
+    "ResourceChangeDetails":{
+      "type":"list",
+      "member":{"shape":"ResourceChangeDetail"}
+    },
     "ResourceProperties":{"type":"string"},
     "ResourceSignalStatus":{
       "type":"string",
@@ -897,7 +1433,29 @@
       ]
     },
     "ResourceStatusReason":{"type":"string"},
-    "ResourceType":{"type":"string"},
+    "ResourceTargetDefinition":{
+      "type":"structure",
+      "members":{
+        "Attribute":{
+          "shape":"ResourceAttribute",
+          "documentation":"<p>Indicates which resource attribute is triggering this update, such as a change in the resource attribute's <code>Metadata</code>, <code>Properties</code>, or <code>Tags</code>.</p>"
+        },
+        "Name":{
+          "shape":"PropertyName",
+          "documentation":"<p>If the <code>Attribute</code> value is <code>Properties</code>, the name of the property. For all other attributes, the value is null.</p>"
+        },
+        "RequiresRecreation":{
+          "shape":"RequiresRecreation",
+          "documentation":"<p>If the <code>Attribute</code> value is <code>Properties</code>, indicates whether a change to this property causes the resource to be recreated. The value can be <code>Never</code>, <code>Always</code>, or <code>Conditionally</code>. To determine the conditions for a <code>Conditionally</code> recreation, see the update behavior for that <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">property</a> in the AWS CloudFormation User Guide.</p>"
+        }
+      },
+      "documentation":"<p>The field that AWS CloudFormation will change, such as the name of a resource's property, and whether the resource will be recreated.</p>"
+    },
+    "ResourceType":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "ResourceTypes":{
       "type":"list",
       "member":{"shape":"ResourceType"}
@@ -905,6 +1463,10 @@
     "RetainResources":{
       "type":"list",
       "member":{"shape":"LogicalResourceId"}
+    },
+    "Scope":{
+      "type":"list",
+      "member":{"shape":"ResourceAttribute"}
     },
     "SetStackPolicyInput":{
       "type":"structure",
@@ -920,7 +1482,7 @@
         },
         "StackPolicyURL":{
           "shape":"StackPolicyURL",
-          "documentation":"<p>Location of a file containing the stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack. You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.</p>"
+          "documentation":"<p>Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same region as the stack. You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.</p>"
         }
       },
       "documentation":"<p>The input for the <a>SetStackPolicy</a> action.</p>"
@@ -1015,7 +1577,7 @@
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>A list of <code>Tag</code>s that specify cost allocation information for the stack.</p>"
+          "documentation":"<p>A list of <code>Tag</code>s that specify information about the stack.</p>"
         }
       },
       "documentation":"<p>The Stack data type.</p>"
@@ -1336,7 +1898,7 @@
           "documentation":"<p><i>Required</i>. A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.</p>"
         }
       },
-      "documentation":"<p>The Tag type is used by <code>CreateStack</code> in the <code>Tags</code> parameter. It allows you to specify a key-value pair that can be used to store information related to cost allocation for an AWS CloudFormation stack.</p>"
+      "documentation":"<p>The Tag type enables you to specify a key-value pair that can be used to store information about an AWS CloudFormation stack.</p>"
     },
     "TagKey":{"type":"string"},
     "TagValue":{"type":"string"},
@@ -1419,7 +1981,7 @@
         },
         "Capabilities":{
           "shape":"Capabilities",
-          "documentation":"<p>A list of capabilities that you must specify before AWS CloudFormation can create or update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter. Currently, the only valid value is <code>CAPABILITY_IAM</code>, which is required for the following resources: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\"> AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\"> AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\"> AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\"> AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\"> AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\"> AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\"> AWS::IAM::UserToGroupAddition</a>. If your stack template contains these resources, we recommend that you review any permissions associated with them. If you don't specify this parameter, this action returns an InsufficientCapabilities error.</p>"
+          "documentation":"<p>A list of capabilities that you must specify before AWS CloudFormation can update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account, for example, by creating new AWS Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter.</p> <p>Currently, the only valid value is <code>CAPABILITY_IAM</code>, which is required for the following resources: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\"> AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\"> AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\"> AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\"> AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\"> AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\"> AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\"> AWS::IAM::UserToGroupAddition</a>. If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary. If your template contains any of the listed resources and you don't specify this parameter, this action returns an <code>InsufficientCapabilities</code> error.</p>"
         },
         "ResourceTypes":{
           "shape":"ResourceTypes",

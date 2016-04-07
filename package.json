@@ -1,7 +1,7 @@
 {
     "name": "aws-sdk",
     "description": "AWS SDK for JavaScript",
-    "version": "2.2.47",
+    "version": "2.3.1",
     "author": {
       "name":"Amazon Web Services",
       "email":"",
@@ -30,7 +30,8 @@
     "dependencies": {
       "sax": "1.1.5",
       "xml2js": "0.4.15",
-      "xmlbuilder": "2.6.2"
+      "xmlbuilder": "2.6.2",
+      "jmespath": "0.15.0"
     },
     "main": "lib/aws.js",
     "browser": "lib/browser.js",

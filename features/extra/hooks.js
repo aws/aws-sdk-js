@@ -1,4 +1,5 @@
 var util = require('util');
+var jmespath = require('jmespath');
 
 module.exports = function () {
   this.World = require('./world.js').World;
@@ -53,19 +54,19 @@ module.exports = function () {
   });
 
   this.Then(/^the value at "([^"]*)" should be a list$/, function (path, callback) {
-    var value = this.AWS.util.jamespath.find(path, this.data);
+    var value = jmespath.search(this.data, path);
     this.assert.ok(Array.isArray(value), 'expected ' + util.inspect(value) + ' to be a list');
     callback();
   });
 
   this.Then(/^the value at "([^"]*)" should be a number$/, function (path, callback) {
-    var value = this.AWS.util.jamespath.find(path, this.data);
+    var value = jmespath.search(this.data, path);
     this.assert.ok(typeof value === 'number', 'expected ' + util.inspect(value) + ' to be a number');
     callback();
   });
 
   this.Then(/^the value at "([^"]*)" should be a string$/, function (path, callback) {
-    var value = this.AWS.util.jamespath.find(path, this.data);
+    var value = jmespath.search(this.data, path);
     this.assert.ok(typeof value === 'string', 'expected ' + util.inspect(value) + ' to be a string');
     callback();
   });

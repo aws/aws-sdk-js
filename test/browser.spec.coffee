@@ -5,6 +5,7 @@ try
   config = require('./configuration')
 
 acm = new AWS.ACM(AWS.util.merge(config, config.acm))
+apigateway = new AWS.APIGateway(AWS.util.merge(config, config.apigateway))
 cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront))
 cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail))
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
@@ -18,7 +19,10 @@ devicefarm = new AWS.DeviceFarm(AWS.util.merge(config, config.devicefarm))
 dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
 dynamodbstreams = new AWS.DynamoDBStreams(AWS.util.merge(config, config.dynamodbstreams))
 ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
+ecr = new AWS.ECR(AWS.util.merge(config, config.ecr))
+ecs = new AWS.ECS(AWS.util.merge(config, config.ecs))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
+elb = new AWS.ELB(AWS.util.merge(config, config.elb))
 config.inspector = config.inspector || {}
 config.inspector.region = 'us-west-2'
 inspector = new AWS.Inspector(AWS.util.merge(config, config.inspector))
@@ -135,6 +139,21 @@ integrationTests ->
         CertificateArn: 'fake-arn'
       acm.describeCertificate params, (err, data) ->
         assertError(err, 'ValidationException')
+        noData(data)
+        done()
+
+  describe 'AWS.APIGateway', ->
+    it 'makes a request', (done) ->
+      apigateway.getRestApis {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.items)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        restApiId: 'fake-id'
+      apigateway.getRestApi params, (err, data) ->
+        assertError(err, 'NotFoundException')
         noData(data)
         done()
 
@@ -341,6 +360,32 @@ integrationTests ->
         matchError(err, 'The volume \'vol-12345678\' does not exist')
         done()
 
+  describe 'AWS.ECR', ->
+    it 'makes a request', (done) ->
+      ecr.describeRepositories (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.repositories)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      ecr.listImages {repositoryName: 'fake-name'}, (err, data) ->
+        noData(data)
+        assertError(err, 'RepositoryNotFoundException')
+        done()
+
+  describe 'AWS.ECS', ->
+    it 'makes a request', (done) ->
+      ecs.listClusters {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.clusterArns)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      ecs.stopTask {task: 'xxxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxx'}, (err, data) ->
+        assertError(err, 'ClusterNotFoundException')
+        noData(data)
+        done()
+
   describe 'AWS.ElasticTranscoder', ->
     it 'makes a request', (done) ->
       elastictranscoder.listPipelines (err, data) ->
@@ -354,15 +399,28 @@ integrationTests ->
         assertError(err, 'ResourceNotFoundException')
         done()
 
-  describe 'AWS.Inspector', ->
+  describe 'AWS.ELB', ->
     it 'makes a request', (done) ->
-      inspector.listApplications (err, data) ->
+      elb.describeLoadBalancers {}, (err, data) ->
         noError(err)
-        expect(Array.isArray(data.applicationArnList)).to.equal(true)
+        expect(Array.isArray(data.LoadBalancerDescriptions)).to.equal(true)
         done()
 
     it 'handles errors', (done) ->
-      inspector.describeApplication {applicationArn: 'fake-arn'}, (err, data) ->
+      elb.describeTags {LoadBalancerNames: ['fake-name']}, (err, data) ->
+        assertError(err, 'LoadBalancerNotFound')
+        noData(data)
+        done()
+
+  describe 'AWS.Inspector', ->
+    it 'makes a request', (done) ->
+      inspector.listRulesPackages (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.rulesPackageArns)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      inspector.stopAssessmentRun {assessmentRunArn: 'fake-arn'}, (err, data) ->
         noData(data)
         assertError(err, 'InvalidInputException')
         done()

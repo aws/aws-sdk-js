@@ -5,13 +5,13 @@ Feature:
   I want to use Amazon Inspector
 
   Scenario: Making a request
-    Given I run the "listApplications" operation
+    Given I run the "listRulesPackages" operation
     Then the request should be successful
-    And the value at "applicationArnList" should be a list
+    And the value at "rulesPackageArns" should be a list
 
   Scenario: Error handling
-    Given I run the "describeApplication" operation with params:
+    Given I run the "stopAssessmentRun" operation with params:
     """
-    { "applicationArn": "fake_arn" }
+    { "assessmentRunArn": "fake_arn" }
     """
     Then the error code should be "InvalidInputException"

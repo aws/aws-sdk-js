@@ -9,20 +9,6 @@ Feature: AWS Security Token Service
     Given I get an STS session token with a duration of 900 seconds
     Then the result should contain an access key ID and secret access key
 
-  Scenario: Web Identity Federation
-    Given I try to assume role with web identity
-    Then the error message should equal:
-    """
-    Not authorized to perform sts:AssumeRoleWithWebIdentity
-    """
-
-  Scenario: SAML Support
-    Given I try to assume role with SAML
-    Then the error message should equal:
-    """
-    Not authorized to perform sts:AssumeRoleWithSAML
-    """
-
   Scenario: Error handling
     Given I get an STS session token with a duration of 60 seconds
     Then the error code should be "ValidationError"

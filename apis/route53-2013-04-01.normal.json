@@ -792,6 +792,29 @@
   },
   "shapes":{
     "AWSAccountID":{"type":"string"},
+    "AlarmIdentifier":{
+      "type":"structure",
+      "required":[
+        "Region",
+        "Name"
+      ],
+      "members":{
+        "Region":{
+          "shape":"CloudWatchRegion",
+          "documentation":"<p>The <code>CloudWatchRegion</code> that the CloudWatch alarm was created in.</p>"
+        },
+        "Name":{
+          "shape":"AlarmName",
+          "documentation":"<p>The name of the CloudWatch alarm.</p>"
+        }
+      },
+      "documentation":"<p>A complex type that contains information to uniquely identify the CloudWatch alarm that you're associating with a Route 53 health check.</p>"
+    },
+    "AlarmName":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "AliasHealthEnabled":{"type":"boolean"},
     "AliasTarget":{
       "type":"structure",
@@ -1057,6 +1080,79 @@
         "locationName":"ChildHealthCheck"
       },
       "max":256
+    },
+    "CloudWatchAlarmConfiguration":{
+      "type":"structure",
+      "required":[
+        "EvaluationPeriods",
+        "Threshold",
+        "ComparisonOperator",
+        "Period",
+        "MetricName",
+        "Namespace",
+        "Statistic"
+      ],
+      "members":{
+        "EvaluationPeriods":{
+          "shape":"EvaluationPeriods",
+          "documentation":"<p>The number of periods over which data is compared to the specified threshold.</p>"
+        },
+        "Threshold":{
+          "shape":"Threshold",
+          "documentation":"<p>The value that the metric is compared with to determine the state of the alarm. For example, if you want the health check to fail if the average TCP connection time is greater than 500 milliseconds for more than 60 seconds, the threshold is 500.</p>"
+        },
+        "ComparisonOperator":{
+          "shape":"ComparisonOperator",
+          "documentation":"<p>The arithmetic operation to use when comparing the specified Statistic and Threshold.</p> <p>Valid Values are <code>GreaterThanOrEqualToThreshold</code>, <code>GreaterThanThreshold</code>, <code>LessThanThreshold</code> and <code>LessThanOrEqualToThreshold</code></p>"
+        },
+        "Period":{
+          "shape":"Period",
+          "documentation":"<p>An integer that represents the period in seconds over which the statistic is applied.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>The name of the CloudWatch metric that is associated with the CloudWatch alarm.</p>"
+        },
+        "Namespace":{
+          "shape":"Namespace",
+          "documentation":"<p>The namespace of the CloudWatch metric that is associated with the CloudWatch alarm.</p>"
+        },
+        "Statistic":{
+          "shape":"Statistic",
+          "documentation":"<p>The statistic to apply to the CloudWatch metric that is associated with the CloudWatch alarm.</p> <p>Valid Values are <code>SampleCount</code>, <code>Average</code>, <code>Sum</code>, <code>Minimum</code> and <code>Maximum</code></p>"
+        },
+        "Dimensions":{
+          "shape":"DimensionList",
+          "documentation":"<p>A list of <code>Dimension</code> elements for the CloudWatch metric that is associated with the CloudWatch alarm. For information about the metrics and dimensions that CloudWatch supports, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html\">Amazon CloudWatch Namespaces, Dimensions, and Metrics Reference</a>.</p>"
+        }
+      },
+      "documentation":"<p>For CLOUDWATCH_METRIC health checks, a complex type that contains information about the CloudWatch alarm that you're associating with the health check.</p>"
+    },
+    "CloudWatchRegion":{
+      "type":"string",
+      "enum":[
+        "us-east-1",
+        "us-west-1",
+        "us-west-2",
+        "eu-central-1",
+        "eu-west-1",
+        "ap-southeast-1",
+        "ap-southeast-2",
+        "ap-northeast-1",
+        "ap-northeast-2",
+        "sa-east-1"
+      ],
+      "max":64,
+      "min":1
+    },
+    "ComparisonOperator":{
+      "type":"string",
+      "enum":[
+        "GreaterThanOrEqualToThreshold",
+        "GreaterThanThreshold",
+        "LessThanThreshold",
+        "LessThanOrEqualToThreshold"
+      ]
     },
     "ConcurrentModification":{
       "type":"structure",
@@ -1559,6 +1655,37 @@
       },
       "documentation":"<p>An empty element.</p>"
     },
+    "Dimension":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Value"
+      ],
+      "members":{
+        "Name":{
+          "shape":"DimensionField",
+          "documentation":"<p>The name of the dimension.</p>"
+        },
+        "Value":{
+          "shape":"DimensionField",
+          "documentation":"<p>The value of the dimension.</p>"
+        }
+      },
+      "documentation":"<p>The name and value of a dimension for a CloudWatch metric.</p>"
+    },
+    "DimensionField":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "DimensionList":{
+      "type":"list",
+      "member":{
+        "shape":"Dimension",
+        "locationName":"Dimension"
+      },
+      "max":10
+    },
     "DisassociateVPCComment":{"type":"string"},
     "DisassociateVPCFromHostedZoneRequest":{
       "type":"structure",
@@ -1603,6 +1730,10 @@
         "shape":"ErrorMessage",
         "locationName":"Message"
       }
+    },
+    "EvaluationPeriods":{
+      "type":"integer",
+      "min":1
     },
     "FailureThreshold":{
       "type":"integer",
@@ -2060,6 +2191,10 @@
         "HealthCheckVersion":{
           "shape":"HealthCheckVersion",
           "documentation":"<p>The version of the health check. You can optionally pass this value in a call to <code>UpdateHealthCheck</code> to prevent overwriting another change to the health check.</p>"
+        },
+        "CloudWatchAlarmConfiguration":{
+          "shape":"CloudWatchAlarmConfiguration",
+          "documentation":"<p>For CLOUDWATCH_METRIC health checks, a complex type that contains information about the CloudWatch alarm that you're associating with the health check.</p>"
         }
       },
       "documentation":"<p>A complex type that contains identifying information about the health check.</p>"
@@ -2090,7 +2225,7 @@
         },
         "Type":{
           "shape":"HealthCheckType",
-          "documentation":"<p>The type of health check to be performed. Currently supported types are TCP, HTTP, HTTPS, HTTP_STR_MATCH, and HTTPS_STR_MATCH.</p>"
+          "documentation":"<p>The type of health check to be performed. Currently supported types are TCP, HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, CALCULATED and CLOUDWATCH_METRIC.</p>"
         },
         "ResourcePath":{
           "shape":"ResourcePath",
@@ -2131,6 +2266,18 @@
         "EnableSNI":{
           "shape":"EnableSNI",
           "documentation":"<p>Specify whether you want Amazon Route 53 to send the value of <code>FullyQualifiedDomainName</code> to the endpoint in the <code>client_hello</code> message during TLS negotiation. If you don't specify a value for <code>EnableSNI</code>, Amazon Route 53 defaults to <code>true</code> when <code>Type</code> is <code>HTTPS</code> or <code>HTTPS_STR_MATCH</code> and defaults to <code>false</code> when <code>Type</code> is any other value.</p>"
+        },
+        "Regions":{
+          "shape":"HealthCheckRegionList",
+          "documentation":"<p>A list of <code>HealthCheckRegion</code> values that you want Amazon Route 53 to use to perform health checks for the specified endpoint. You must specify at least three regions.</p>"
+        },
+        "AlarmIdentifier":{
+          "shape":"AlarmIdentifier",
+          "documentation":"<p>A complex type that contains information to uniquely identify the CloudWatch alarm that you're associating with a Route 53 health check.</p>"
+        },
+        "InsufficientDataHealthStatus":{
+          "shape":"InsufficientDataHealthStatus",
+          "documentation":"<p>The status of the health check when CloudWatch has insufficient data about the state of associated alarm. Valid values are <code>Healthy</code>, <code>Unhealthy</code> and <code>LastKnownStatus</code>.</p>"
         }
       },
       "documentation":"<p>A complex type that contains the health check configuration.</p>"
@@ -2160,9 +2307,13 @@
     "HealthCheckObservation":{
       "type":"structure",
       "members":{
+        "Region":{
+          "shape":"HealthCheckRegion",
+          "documentation":"<p>The <code>HealthCheckRegion</code> of the Amazon Route 53 health checker that performed this health check.</p>"
+        },
         "IPAddress":{
           "shape":"IPAddress",
-          "documentation":"<p>The IP address of the Amazon Route 53 health checker that performed the health check.</p>"
+          "documentation":"<p>The IP address of the Amazon Route 53 health checker that performed this health check.</p>"
         },
         "StatusReport":{
           "shape":"StatusReport",
@@ -2178,6 +2329,31 @@
         "locationName":"HealthCheckObservation"
       }
     },
+    "HealthCheckRegion":{
+      "type":"string",
+      "documentation":"<p>An Amazon EC2 region that you want Amazon Route 53 to use to perform health checks.</p>",
+      "enum":[
+        "us-east-1",
+        "us-west-1",
+        "us-west-2",
+        "eu-west-1",
+        "ap-southeast-1",
+        "ap-southeast-2",
+        "ap-northeast-1",
+        "sa-east-1"
+      ],
+      "max":64,
+      "min":1
+    },
+    "HealthCheckRegionList":{
+      "type":"list",
+      "member":{
+        "shape":"HealthCheckRegion",
+        "locationName":"Region"
+      },
+      "max":64,
+      "min":1
+    },
     "HealthCheckType":{
       "type":"string",
       "enum":[
@@ -2186,7 +2362,8 @@
         "HTTP_STR_MATCH",
         "HTTPS_STR_MATCH",
         "TCP",
-        "CALCULATED"
+        "CALCULATED",
+        "CLOUDWATCH_METRIC"
       ]
     },
     "HealthCheckVersion":{
@@ -2313,6 +2490,14 @@
       "documentation":"<p>The resource you are trying to access is unsupported on this Amazon Route 53 endpoint. Please consider using a newer endpoint or a tool that does so.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "InsufficientDataHealthStatus":{
+      "type":"string",
+      "enum":[
+        "Healthy",
+        "Unhealthy",
+        "LastKnownStatus"
+      ]
     },
     "InvalidArgument":{
       "type":"structure",
@@ -3308,6 +3493,16 @@
       "type":"string",
       "max":1024
     },
+    "MetricName":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "Namespace":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
     "NoSuchChange":{
       "type":"structure",
       "members":{
@@ -3394,6 +3589,10 @@
     },
     "PageMaxItems":{"type":"string"},
     "PageTruncated":{"type":"boolean"},
+    "Period":{
+      "type":"integer",
+      "min":60
+    },
     "Port":{
       "type":"integer",
       "max":65535,
@@ -3605,6 +3804,16 @@
       "type":"string",
       "max":255
     },
+    "Statistic":{
+      "type":"string",
+      "enum":[
+        "Average",
+        "Sum",
+        "SampleCount",
+        "Maximum",
+        "Minimum"
+      ]
+    },
     "Status":{"type":"string"},
     "StatusReport":{
       "type":"structure",
@@ -3685,6 +3894,7 @@
       "type":"string",
       "max":256
     },
+    "Threshold":{"type":"double"},
     "ThrottlingException":{
       "type":"structure",
       "members":{
@@ -3938,7 +4148,13 @@
         "EnableSNI":{
           "shape":"EnableSNI",
           "documentation":"<p>Specify whether you want Amazon Route 53 to send the value of <code>FullyQualifiedDomainName</code> to the endpoint in the <code>client_hello</code> message during TLS negotiation. If you don't specify a value for <code>EnableSNI</code>, Amazon Route 53 defaults to <code>true</code> when <code>Type</code> is <code>HTTPS</code> or <code>HTTPS_STR_MATCH</code> and defaults to <code>false</code> when <code>Type</code> is any other value.</p> <p>Specify this value only if you want to change it.</p>"
-        }
+        },
+        "Regions":{
+          "shape":"HealthCheckRegionList",
+          "documentation":"<p>A list of <code>HealthCheckRegion</code> values that specify the Amazon EC2 regions that you want Amazon Route 53 to use to perform health checks. You must specify at least three regions.</p> <note>When you remove a region from the list, Amazon Route 53 will briefly continue to check your endpoint from that region.</note> <p>Specify this value only if you want to change it.</p>"
+        },
+        "AlarmIdentifier":{"shape":"AlarmIdentifier"},
+        "InsufficientDataHealthStatus":{"shape":"InsufficientDataHealthStatus"}
       },
       "documentation":"<p>>A complex type that contains information about the request to update a health check.</p>"
     },

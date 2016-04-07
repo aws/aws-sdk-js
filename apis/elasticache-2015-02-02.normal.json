@@ -1521,8 +1521,7 @@
         "TargetSnapshotName":{
           "shape":"String",
           "documentation":"<p>A name for the copied snapshot.</p>"
-        },
-        "TargetBucket":{"shape":"String"}
+        }
       },
       "documentation":"<p>Represents the input of a <i>CopySnapshotMessage</i> action.</p>"
     },
@@ -3342,7 +3341,10 @@
     },
     "ResetCacheParameterGroupMessage":{
       "type":"structure",
-      "required":["CacheParameterGroupName"],
+      "required":[
+        "CacheParameterGroupName",
+        "ParameterNameValues"
+      ],
       "members":{
         "CacheParameterGroupName":{
           "shape":"String",

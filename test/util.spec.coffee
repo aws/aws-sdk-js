@@ -543,60 +543,6 @@ describe 'AWS.util.base64', ->
       expect(base64.decode('Zm9v').toString()).to.equal('foo')
       expect(base64.decode('0ZHFnQ==').toString()).to.equal('ёŝ')
 
-describe 'AWS.util.jamespath', ->
-  query = AWS.util.jamespath.query
-  find = AWS.util.jamespath.find
-
-  describe 'query', ->
-    it 'can find a toplevel element of a data structure', ->
-      expect(query('foo', foo: 'value')).to.eql(['value'])
-
-    it 'can find a nested element of a data structure', ->
-      expect(query('foo.bar.baz', foo: bar: baz: 'value')).to.eql(['value'])
-
-    it 'can index an element (positive and negative indexes)', ->
-      data = foo: bar: [{baz: 'wrong'}, {baz: 'right'}, {baz: 'wrong'}]
-      expect(query('foo.bar[1].baz', data)).to.eql(['right'])
-      expect(query('foo.bar[-2].baz', data)).to.eql(['right'])
-
-    it 'can index an element with wildcard', ->
-      data = foo: bar: [{baz: 'wrong'}, {baz: 'right'}, {baz: 'wrong'}]
-      expect(query('foo.bar[*].baz', data)).to.eql(['wrong', 'right', 'wrong'])
-
-    it 'returns empty array if element is not found', ->
-      data = foo: notBar: baz: 'value'
-      expect(query('foo.bar.baz', data)).to.eql([])
-
-    it 'allows multiple expressions to be ORed', ->
-      data = foo: {key1: 'wrong'}, bar: {key2: 'right'}
-      expect(query('foo.key2 || bar.key2', data)).to.eql(['right'])
-
-    it 'returns multiple matches if a wildcard is used', ->
-      data = foo:
-        child1: bar: 'value1'
-        child2: bar: 'value2'
-        child3: bar: 'value3'
-      expect(query('foo.*.bar', data)).to.eql(['value1', 'value2', 'value3'])
-
-    it 'can support wildcard on both token and index', ->
-      data = foo:
-        child1: ['value1', 'value2']
-        child2: ['value3']
-        child4: 'notarray'
-      expect(query('foo.*[*]', data)).to.eql(['value1', 'value2', 'value3'])
-
-    it 'can support array flattening', ->
-      data = foo: [ {bar: 1}, {bar: 2}, {bar: 3} ]
-      expect(query('foo[].bar', data)).to.eql([1, 2, 3])
-
-
-  describe 'find', ->
-    it 'returns the first match of query', ->
-      expect(find('foo.*', foo: bar: 1, baz: 2)).to.equal(1)
-
-    it 'returns null if no match is found', ->
-      expect(find('invalid.*', foo: bar: 1, baz: 2)).not.to.exist
-
 describe 'AWS.util.hoistPayloadMember', ->
   hoist = AWS.util.hoistPayloadMember
 
@@ -689,3 +635,42 @@ describe 'AWS.util.extractRequestId', ->
     req.send()
     AWS.util.extractRequestId(req.response)
     expect(req.response.error.requestId).to.equal('RequestId1')
+
+describe 'AWS.util.addPromisesToRequests', ->
+  afterEach ->
+    delete AWS.Request.prototype.promise
+
+  if typeof Promise != 'undefined'
+    describe 'with native promises', ->
+      it 'can use native promises', ->
+        AWS.util.addPromisesToRequests(AWS.Request)
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+
+      it 'will use specified dependency over native promises', ->
+        service = new helpers.MockService()
+        count = 0
+        P = -> count++
+        AWS.util.addPromisesToRequests(AWS.Request, P)
+        req = service.makeRequest('mockMethod')
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+        reqSpy = helpers.spyOn(req, 'promise').andCallThrough()
+        req.promise()
+        expect(count).to.equal(reqSpy.calls.length)
+
+  else
+    describe 'without native promises', ->
+      it 'will not add promise method if no dependency is provided', ->
+        AWS.util.addPromisesToRequests(AWS.Request)
+        expect(typeof AWS.Request.prototype.promise).to.equal('undefined')
+
+      it 'will add promise method if dependency is provided', ->
+        P = ->
+        AWS.util.addPromisesToRequests(AWS.Request, P)
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+
+      it 'will remove promise method if dependency is not a function', ->
+        P = ->
+        AWS.util.addPromisesToRequests(AWS.Request, P)
+        expect(typeof AWS.Request.prototype.promise).to.equal('function')
+        AWS.util.addPromisesToRequests(AWS.Request, null)
+        expect(typeof AWS.Request.prototype.promise).to.equal('undefined')
