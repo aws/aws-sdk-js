@@ -58,7 +58,8 @@
         {"shape":"ServiceException"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"ResourceConflictException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Identifies a stream as an event source for a Lambda function. It can be either an Amazon Kinesis stream or an Amazon DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the stream.</p> <p>This association between a stream source and a Lambda function is called the event source mapping. </p> <important>This event source mapping is relevant only in the AWS Lambda pull model, where AWS Lambda invokes the function. For more information, go to <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a> in the <i>AWS Lambda Developer Guide</i>.</important> <p> You provide mapping information (for example, which stream to read from and which Lambda function to invoke) in the request body. </p> <p> Each event source, such as an Amazon Kinesis or a DynamoDB stream, can be associated with multiple AWS Lambda function. A given Lambda function can be associated with multiple AWS event sources. </p> <p> <p>If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> </p> <p>This operation requires permission for the <code>lambda:CreateEventSourceMapping</code> action.</p>"
     },
@@ -469,6 +470,7 @@
           "shape":"SourceOwner",
           "documentation":"<p>The AWS account ID (without a hyphen) of the source owner. For example, if the <code>SourceArn</code> identifies a bucket, then this is the bucket owner's account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don't specify the <code>SourceArn</code>) owned by a specific account. </p>"
         },
+        "EventSourceToken":{"shape":"EventSourceToken"},
         "Qualifier":{
           "shape":"Qualifier",
           "documentation":"<p>You can use this optional query parameter to describe a qualified ARN using a function version or an alias name. The permission will then apply to the specific qualified ARN. For example, if you specify function version 2 as the qualifier, then permission applies only when request is made using qualified function ARN: </p> <p><code>arn:aws:lambda:aws-region:acct-id:function:function-name:2</code></p> <p>If you specify an alias name, for example <code>PROD</code>, then the permission is valid only for requests made using the alias ARN:</p> <p><code>arn:aws:lambda:aws-region:acct-id:function:function-name:PROD</code></p> <p>If the qualifier is not specified, the permission is valid only when requests is made using unqualified function ARN. </p> <p><code>arn:aws:lambda:aws-region:acct-id:function:function-name</code></p>",
@@ -799,6 +801,12 @@
         "TRIM_HORIZON",
         "LATEST"
       ]
+    },
+    "EventSourceToken":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"[a-zA-Z0-9._\\-]+"
     },
     "FunctionArn":{
       "type":"string",
@@ -1446,6 +1454,7 @@
       "type":"string",
       "enum":[
         "nodejs",
+        "nodejs4.3",
         "java8",
         "python2.7"
       ]
@@ -1654,7 +1663,8 @@
           "shape":"MemorySize",
           "documentation":"<p>The amount of memory, in MB, your Lambda function is given. AWS Lambda uses this memory size to infer the amount of CPU allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.</p>"
         },
-        "VpcConfig":{"shape":"VpcConfig"}
+        "VpcConfig":{"shape":"VpcConfig"},
+        "Runtime":{"shape":"Runtime"}
       }
     },
     "Version":{
