@@ -64,6 +64,25 @@
       ],
       "documentation":"<p>Creates a computer account in the specified directory, and joins the computer to the directory.</p>"
     },
+    "CreateConditionalForwarder":{
+      "name":"CreateConditionalForwarder",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateConditionalForwarderRequest"},
+      "output":{"shape":"CreateConditionalForwarderResult"},
+      "errors":[
+        {"shape":"EntityAlreadyExistsException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Creates a conditional forwarder associated with your AWS directory. Conditional forwarders are required in order to set up a trust relationship with another domain. The conditional forwarder points to the trusted domain.</p>"
+    },
     "CreateDirectory":{
       "name":"CreateDirectory",
       "http":{
@@ -132,6 +151,24 @@
       ],
       "documentation":"<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p><p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>"
     },
+    "DeleteConditionalForwarder":{
+      "name":"DeleteConditionalForwarder",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteConditionalForwarderRequest"},
+      "output":{"shape":"DeleteConditionalForwarderResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Deletes a conditional forwarder that has been set up for your AWS directory.</p>"
+    },
     "DeleteDirectory":{
       "name":"DeleteDirectory",
       "http":{
@@ -195,6 +232,24 @@
         {"shape":"ServiceException"}
       ],
       "documentation":"<p>Removes the specified directory as a publisher to the specified SNS topic.</p>"
+    },
+    "DescribeConditionalForwarders":{
+      "name":"DescribeConditionalForwarders",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeConditionalForwardersRequest"},
+      "output":{"shape":"DescribeConditionalForwardersResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Obtains information about the conditional forwarders for this account.</p> <p>If no input parameters are provided for RemoteDomainNames, this request describes all conditional forwarders for the specified directory ID.</p>"
     },
     "DescribeDirectories":{
       "name":"DescribeDirectories",
@@ -392,6 +447,24 @@
       ],
       "documentation":"<p>Restores a directory using an existing directory snapshot.</p> <p>When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten.</p> <p>This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the <a>DescribeDirectories</a> operation with the directory identifier. When the <b>DirectoryDescription.Stage</b> value changes to <code>Active</code>, the restore operation is complete.</p>"
     },
+    "UpdateConditionalForwarder":{
+      "name":"UpdateConditionalForwarder",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateConditionalForwarderRequest"},
+      "output":{"shape":"UpdateConditionalForwarderResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Updates a conditional forwarder that has been set up for your AWS directory.</p>"
+    },
     "UpdateRadius":{
       "name":"UpdateRadius",
       "http":{
@@ -521,6 +594,28 @@
       "pattern":"[\\u0020-\\u00FF]+",
       "sensitive":true
     },
+    "ConditionalForwarder":{
+      "type":"structure",
+      "members":{
+        "RemoteDomainName":{
+          "shape":"RemoteDomainName",
+          "documentation":"<p>The fully qualified domain name (FQDN) of the remote domains pointed to by the conditional forwarder.</p>"
+        },
+        "DnsIpAddrs":{
+          "shape":"DnsIpAddrs",
+          "documentation":"<p>The IP addresses of the remote DNS server associated with RemoteDomainName. This is the IP address of the DNS server that your conditional forwarder points to.</p>"
+        },
+        "ReplicationScope":{
+          "shape":"ReplicationScope",
+          "documentation":"<p>The replication scope of the conditional forwarder. The only allowed value is <code>Domain</code>, which will replicate the conditional forwarder to all of the domain controllers for your AWS directory.</p>"
+        }
+      },
+      "documentation":"<p>Points to a remote domain with which you are setting up a trust relationship. Conditional forwarders are required in order to set up a trust relationship with another domain.</p>"
+    },
+    "ConditionalForwarders":{
+      "type":"list",
+      "member":{"shape":"ConditionalForwarder"}
+    },
     "ConnectDirectoryRequest":{
       "type":"structure",
       "required":[
@@ -646,6 +741,34 @@
         }
       },
       "documentation":"<p>Contains the results for the <a>CreateComputer</a> operation.</p>"
+    },
+    "CreateConditionalForwarderRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "RemoteDomainName",
+        "DnsIpAddrs"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The directory ID of the AWS directory for which you are creating the conditional forwarder.</p>"
+        },
+        "RemoteDomainName":{
+          "shape":"RemoteDomainName",
+          "documentation":"<p>The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.</p>"
+        },
+        "DnsIpAddrs":{
+          "shape":"DnsIpAddrs",
+          "documentation":"<p>The IP addresses of the remote DNS server associated with RemoteDomainName.</p>"
+        }
+      },
+      "documentation":"<p>Initiates the creation of a conditional forwarder for your AWS Directory Service for Microsoft Active Directory. Conditional forwarders are required in order to set up a trust relationship with another domain.</p>"
+    },
+    "CreateConditionalForwarderResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "CreateDirectoryRequest":{
       "type":"structure",
@@ -782,7 +905,8 @@
         "TrustType":{
           "shape":"TrustType",
           "documentation":"The trust relationship type."
-        }
+        },
+        "ConditionalForwarderIpAddrs":{"shape":"DnsIpAddrs"}
       },
       "documentation":"<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p><p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>"
     },
@@ -796,6 +920,29 @@
       }
     },
     "CreatedDateTime":{"type":"timestamp"},
+    "DeleteAssociatedConditionalForwarder":{"type":"boolean"},
+    "DeleteConditionalForwarderRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "RemoteDomainName"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The directory ID for which you are deleting the conditional forwarder.</p>"
+        },
+        "RemoteDomainName":{
+          "shape":"RemoteDomainName",
+          "documentation":"<p>The fully qualified domain name (FQDN) of the remote domain with which you are deleting the conditional forwarder.</p>"
+        }
+      }
+    },
+    "DeleteConditionalForwarderResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteDirectoryRequest":{
       "type":"structure",
       "required":["DirectoryId"],
@@ -845,7 +992,8 @@
         "TrustId":{
           "shape":"TrustId",
           "documentation":"The Trust ID of the trust relationship to be deleted."
-        }
+        },
+        "DeleteAssociatedConditionalForwarder":{"shape":"DeleteAssociatedConditionalForwarder"}
       },
       "documentation":"Deletes the local side of an existing trust relationship between the Microsoft AD in the AWS cloud and the external domain."
     },
@@ -879,6 +1027,29 @@
     "DeregisterEventTopicResult":{
       "type":"structure",
       "members":{
+      }
+    },
+    "DescribeConditionalForwardersRequest":{
+      "type":"structure",
+      "required":["DirectoryId"],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The directory ID for which to get the list of associated conditional forwarders.</p>"
+        },
+        "RemoteDomainNames":{
+          "shape":"RemoteDomainNames",
+          "documentation":"<p>The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders. If this member is null, all conditional forwarders are returned.</p>"
+        }
+      }
+    },
+    "DescribeConditionalForwardersResult":{
+      "type":"structure",
+      "members":{
+        "ConditionalForwarders":{
+          "shape":"ConditionalForwarders",
+          "documentation":"<p>The list of conditional forwarders that have been created.</p>"
+        }
       }
     },
     "DescribeDirectoriesRequest":{
@@ -1645,6 +1816,14 @@
       "type":"string",
       "pattern":"^([a-zA-Z0-9]+[\\\\.-])+([a-zA-Z0-9])+[.]?$"
     },
+    "RemoteDomainNames":{
+      "type":"list",
+      "member":{"shape":"RemoteDomainName"}
+    },
+    "ReplicationScope":{
+      "type":"string",
+      "enum":["Domain"]
+    },
     "RequestId":{
       "type":"string",
       "documentation":"<p>The AWS request identifier.</p>",
@@ -1858,6 +2037,10 @@
         "StateLastUpdatedDateTime":{
           "shape":"StateLastUpdatedDateTime",
           "documentation":"The date and time that the TrustState was last updated."
+        },
+        "TrustStateReason":{
+          "shape":"TrustStateReason",
+          "documentation":"<p>The reason for the TrustState.</p>"
         }
       },
       "documentation":"Describes a trust relationship between an Microsoft AD in the AWS cloud and an external domain."
@@ -1897,6 +2080,7 @@
         "Failed"
       ]
     },
+    "TrustStateReason":{"type":"string"},
     "TrustType":{
       "type":"string",
       "enum":["Forest"]
@@ -1913,6 +2097,33 @@
       },
       "documentation":"<p>The operation is not supported.</p>",
       "exception":true
+    },
+    "UpdateConditionalForwarderRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "RemoteDomainName",
+        "DnsIpAddrs"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The directory ID of the AWS directory for which to update the conditional forwarder.</p>"
+        },
+        "RemoteDomainName":{
+          "shape":"RemoteDomainName",
+          "documentation":"<p>The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.</p>"
+        },
+        "DnsIpAddrs":{
+          "shape":"DnsIpAddrs",
+          "documentation":"<p>The updated IP addresses of the remote DNS server associated with the conditional forwarder.</p>"
+        }
+      }
+    },
+    "UpdateConditionalForwarderResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "UpdateRadiusRequest":{
       "type":"structure",
