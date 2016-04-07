@@ -1038,7 +1038,7 @@
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> A unique name for the deployment environment. Used in the application URL. </p> <p>Constraint: Must be from 4 to 23 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.</p>"
+          "documentation":"<p> A unique name for the deployment environment. Used in the application URL. </p> <p>Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.</p>"
         },
         "GroupName":{
           "shape":"GroupName",
@@ -1178,6 +1178,29 @@
       "documentation":"<p>Request to delete a draft environment configuration.</p>"
     },
     "DeleteSourceBundle":{"type":"boolean"},
+    "Deployment":{
+      "type":"structure",
+      "members":{
+        "VersionLabel":{
+          "shape":"String",
+          "documentation":"<p>The version label of the application version in the deployment.</p>"
+        },
+        "DeploymentId":{
+          "shape":"NullableLong",
+          "documentation":"<p>The ID of the deployment. This number increases by one each time that you deploy source code or change instance configuration settings.</p>"
+        },
+        "Status":{
+          "shape":"String",
+          "documentation":"<p>The status of the deployment:</p> <ul> <li> <code>In Progress</code> : The deployment is in progress.</li> <li> <code>Deployed</code> : The deployment succeeded.</li> <li> <code>Failed</code> : The deployment failed.</li> </ul>"
+        },
+        "DeploymentTime":{
+          "shape":"DeploymentTimestamp",
+          "documentation":"<p>For in-progress deployments, the time that the deloyment started.</p> <p>For completed deployments, the time that the deployment ended.</p>"
+        }
+      },
+      "documentation":"<p>Information about an application version deployment.</p>"
+    },
+    "DeploymentTimestamp":{"type":"timestamp"},
     "DescribeApplicationVersionsMessage":{
       "type":"structure",
       "members":{
@@ -1637,7 +1660,7 @@
     },
     "EnvironmentName":{
       "type":"string",
-      "max":23,
+      "max":40,
       "min":4
     },
     "EnvironmentNamesList":{
@@ -1880,6 +1903,9 @@
         "RefreshedAt",
         "LaunchedAt",
         "System",
+        "Deployment",
+        "AvailabilityZone",
+        "InstanceType",
         "All"
       ]
     },
@@ -2047,6 +2073,7 @@
     },
     "NullableDouble":{"type":"double"},
     "NullableInteger":{"type":"integer"},
+    "NullableLong":{"type":"long"},
     "OperationInProgressException":{
       "type":"structure",
       "members":{
@@ -2275,7 +2302,19 @@
           "documentation":"<p>The time at which the EC2 instance was launched.</p>"
         },
         "ApplicationMetrics":{"shape":"ApplicationMetrics"},
-        "System":{"shape":"SystemStatus"}
+        "System":{"shape":"SystemStatus"},
+        "Deployment":{
+          "shape":"Deployment",
+          "documentation":"<p>Information about the most recent deployment to an instance.</p>"
+        },
+        "AvailabilityZone":{
+          "shape":"String",
+          "documentation":"<p>The availability zone in which the instance runs.</p>"
+        },
+        "InstanceType":{
+          "shape":"String",
+          "documentation":"<p>The instance's type.</p>"
+        }
       },
       "documentation":"<p>Represents health information from the specified instance that belongs to the AWS Elastic Beanstalk environment. Use the <code>InstanceId</code> property to specify the application instance for which you'd like to return data.</p>"
     },
