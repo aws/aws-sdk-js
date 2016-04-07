@@ -32,6 +32,7 @@ lambda = new AWS.Lambda(AWS.util.merge(config, config.lambda))
 mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobileanalytics))
 machinelearning = new AWS.MachineLearning(AWS.util.merge(config, config.machinelearning))
 opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks))
+rds = new AWS.RDS(AWS.util.merge(config, config.rds))
 route53 = new AWS.Route53(AWS.util.merge(config, config.route53))
 route53domains = new AWS.Route53Domains(AWS.util.merge(config, config.route53domains))
 s3 = new AWS.S3(AWS.util.merge(config, config.s3))
@@ -523,6 +524,19 @@ integrationTests ->
         noData(data)
         assertError(err, 'ResourceNotFoundException')
         matchError(err, 'Unable to find stack with ID fake-id')
+        done()
+
+  describe 'AWS.RDS', ->
+    it 'makes a request', (done) ->
+      rds.describeCertificates (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Certificates)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      rds.listTagsForResource {ResourceName: 'fake-name'}, (err, data) ->
+        noData(data)
+        assertError(err, 'InvalidParameterValue')
         done()
 
   describe 'AWS.Route53', ->
