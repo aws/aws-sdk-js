@@ -252,3 +252,54 @@ describe 'AWS.Service', ->
       service.defaultRetryCount = 13
       service.config.maxRetries = undefined
       expect(service.numRetries()).to.equal(13)
+
+  describe 'defineMethods', ->
+    operations = null
+    serviceConstructor = null
+    
+    beforeEach ->
+      serviceConstructor = () ->
+        AWS.Service.call(this, new AWS.Config())
+      serviceConstructor.prototype = Object.create(AWS.Service.prototype)  
+      serviceConstructor.prototype.api = {}
+      operations = {'foo': {}, 'bar': {}}
+      serviceConstructor.prototype.api.operations = operations  
+    
+    it 'should add operation methods', ->
+      AWS.Service.defineMethods(serviceConstructor);
+      expect(typeof serviceConstructor.prototype.foo).to.equal('function')
+      expect(typeof serviceConstructor.prototype.bar).to.equal('function')
+
+    it 'should not overwrite methods with generated methods', ->
+      foo = ->
+      serviceConstructor.prototype.foo = foo
+      AWS.Service.defineMethods(serviceConstructor);
+      expect(typeof serviceConstructor.prototype.foo).to.equal('function')
+      expect(serviceConstructor.prototype.foo).to.eql(foo)
+      expect(typeof serviceConstructor.prototype.bar).to.equal('function')
+      
+    describe 'should generate a method', ->
+    
+      it 'that makes an authenticated request by default', (done) ->
+        AWS.Service.defineMethods(serviceConstructor);
+        customService = new serviceConstructor()
+        helpers.spyOn(customService, 'makeRequest')
+        customService.foo();
+        expect(customService.makeRequest.calls.length).to.equal(1)
+        done()
+      
+      it 'that makes an unauthenticated request when operation authtype is none', (done) ->
+        serviceConstructor.prototype.api.operations.foo.authtype = 'none'
+        AWS.Service.defineMethods(serviceConstructor);
+        customService = new serviceConstructor()
+        helpers.spyOn(customService, 'makeRequest')
+        helpers.spyOn(customService, 'makeUnauthenticatedRequest')
+        expect(customService.makeRequest.calls.length).to.equal(0)
+        expect(customService.makeUnauthenticatedRequest.calls.length).to.equal(0)
+        customService.foo();
+        expect(customService.makeRequest.calls.length).to.equal(0)
+        expect(customService.makeUnauthenticatedRequest.calls.length).to.equal(1)
+        customService.bar();
+        expect(customService.makeRequest.calls.length).to.equal(1)
+        expect(customService.makeUnauthenticatedRequest.calls.length).to.equal(1)
+        done()
