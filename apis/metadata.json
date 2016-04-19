@@ -53,6 +53,10 @@
     "prefix": "cognito-identity",
     "name": "CognitoIdentity"
   },
+  "cognitoidentityserviceprovider": {
+    "prefix": "cognito-idp",
+    "name": "CognitoIdentityServiceProvider"
+  },
   "cognitosync": {
     "prefix": "cognito-sync",
     "name": "CognitoSync"

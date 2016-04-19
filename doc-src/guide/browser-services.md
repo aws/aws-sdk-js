@@ -4,13 +4,13 @@
 
 ## Supported Services
 
-By default, the SDK ships with support for 38 AWS services. Each service object
+By default, the SDK ships with support for 39 AWS services. Each service object
 in the SDK currently provides low-level access to every API call in the
 respective AWS service. The full list of methods and their parameters are
 documented in the complete API reference documentation (linked from each
 service name in the list below).
 
-The 38 services that come with the default hosted package of the SDK are:
+The 39 services that come with the default hosted package of the SDK are:
 
 * [AWS.ACM](/AWSJavaScriptSDK/latest/AWS/ACM.html)
 * [AWS.APIGateway](/AWSJavaScriptSDK/latest/AWS/APIGateway.html)
@@ -21,6 +21,7 @@ The 38 services that come with the default hosted package of the SDK are:
 * [AWS.CodeCommit](/AWSJavaScriptSDK/latest/AWS/CodeCommit.html)
 * [AWS.CodePipeline](/AWSJavaScriptSDK/latest/AWS/CodePipeline.html)
 * [AWS.CognitoIdentity](/AWSJavaScriptSDK/latest/AWS/CognitoIdentity.html)
+* [AWS.CognitoIdentityServiceProvider](/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html)
 * [AWS.CognitoSync](/AWSJavaScriptSDK/latest/AWS/CognitoSync.html)
 * [AWS.ConfigService](/AWSJavaScriptSDK/latest/AWS/ConfigService.html)
 * [AWS.DeviceFarm](/AWSJavaScriptSDK/latest/AWS/DeviceFarm.html)
