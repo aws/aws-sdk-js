@@ -1331,7 +1331,7 @@
     "CopySourceRange":{"type":"string"},
     "CopySourceSSECustomerAlgorithm":{"type":"string"},
     "CopySourceSSECustomerKey":{
-      "type":"string",
+      "type":"blob",
       "sensitive":true
     },
     "CopySourceSSECustomerKeyMD5":{"type":"string"},
@@ -4673,7 +4673,7 @@
     },
     "SSECustomerAlgorithm":{"type":"string"},
     "SSECustomerKey":{
-      "type":"string",
+      "type":"blob",
       "sensitive":true
     },
     "SSECustomerKeyMD5":{"type":"string"},
