@@ -172,6 +172,16 @@
       "documentation":"This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.",
       "alias":"DeleteMultipleObjects"
     },
+    "GetBucketAccelerateConfiguration":{
+      "name":"GetBucketAccelerateConfiguration",
+      "http":{
+        "method":"GET",
+        "requestUri":"/{Bucket}?accelerate"
+      },
+      "input":{"shape":"GetBucketAccelerateConfigurationRequest"},
+      "output":{"shape":"GetBucketAccelerateConfigurationOutput"},
+      "documentation":"Returns the accelerate configuration of a bucket."
+    },
     "GetBucketAcl":{
       "name":"GetBucketAcl",
       "http":{
@@ -451,6 +461,15 @@
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListParts.html",
       "documentation":"Lists the parts that have been uploaded for a specific multipart upload."
     },
+    "PutBucketAccelerateConfiguration":{
+      "name":"PutBucketAccelerateConfiguration",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/{Bucket}?accelerate"
+      },
+      "input":{"shape":"PutBucketAccelerateConfigurationRequest"},
+      "documentation":"Sets the accelerate configuration of an existing bucket."
+    },
     "PutBucketAcl":{
       "name":"PutBucketAcl",
       "http":{
@@ -696,6 +715,15 @@
       }
     },
     "AbortRuleId":{"type":"string"},
+    "AccelerateConfiguration":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"BucketAccelerateStatus",
+          "documentation":"The accelerate configuration of the bucket."
+        }
+      }
+    },
     "AcceptRanges":{"type":"string"},
     "AccessControlPolicy":{
       "type":"structure",
@@ -739,6 +767,13 @@
           "documentation":"Date the bucket was created."
         }
       }
+    },
+    "BucketAccelerateStatus":{
+      "type":"string",
+      "enum":[
+        "Enabled",
+        "Suspended"
+      ]
     },
     "BucketAlreadyExists":{
       "type":"structure",
@@ -1296,7 +1331,7 @@
     "CopySourceRange":{"type":"string"},
     "CopySourceSSECustomerAlgorithm":{"type":"string"},
     "CopySourceSSECustomerKey":{
-      "type":"blob",
+      "type":"string",
       "sensitive":true
     },
     "CopySourceSSECustomerKeyMD5":{"type":"string"},
@@ -1923,6 +1958,27 @@
       ]
     },
     "FilterRuleValue":{"type":"string"},
+    "GetBucketAccelerateConfigurationOutput":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"BucketAccelerateStatus",
+          "documentation":"The accelerate configuration of the bucket."
+        }
+      }
+    },
+    "GetBucketAccelerateConfigurationRequest":{
+      "type":"structure",
+      "required":["Bucket"],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "documentation":"Name of the bucket for which the accelerate configuration is retrieved.",
+          "location":"uri",
+          "locationName":"Bucket"
+        }
+      }
+    },
     "GetBucketAclOutput":{
       "type":"structure",
       "members":{
@@ -3656,6 +3712,28 @@
         "https"
       ]
     },
+    "PutBucketAccelerateConfigurationRequest":{
+      "type":"structure",
+      "required":[
+        "Bucket",
+        "AccelerateConfiguration"
+      ],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "documentation":"Name of the bucket for which the accelerate configuration is set.",
+          "location":"uri",
+          "locationName":"Bucket"
+        },
+        "AccelerateConfiguration":{
+          "shape":"AccelerateConfiguration",
+          "documentation":"Specifies the Accelerate Configuration you want to set for the bucket.",
+          "locationName":"AccelerateConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
+        }
+      },
+      "payload":"AccelerateConfiguration"
+    },
     "PutBucketAclRequest":{
       "type":"structure",
       "required":["Bucket"],
@@ -4080,6 +4158,12 @@
           "shape":"RequestPayer",
           "location":"header",
           "locationName":"x-amz-request-payer"
+        },
+        "VersionId":{
+          "shape":"ObjectVersionId",
+          "documentation":"VersionId used to reference a specific version of the object.",
+          "location":"querystring",
+          "locationName":"versionId"
         }
       },
       "payload":"AccessControlPolicy"
@@ -4589,7 +4673,7 @@
     },
     "SSECustomerAlgorithm":{"type":"string"},
     "SSECustomerKey":{
-      "type":"blob",
+      "type":"string",
       "sensitive":true
     },
     "SSECustomerKeyMD5":{"type":"string"},
