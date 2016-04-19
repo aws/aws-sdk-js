@@ -624,7 +624,11 @@
         },
         "unmeteredDevices":{
           "shape":"PurchasedDevicesMap",
-          "documentation":"<p>Returns the unmetered devices you have purchased.</p>"
+          "documentation":"<p>Returns the unmetered devices you have purchased or want to purchase.</p>"
+        },
+        "unmeteredRemoteAccessDevices":{
+          "shape":"PurchasedDevicesMap",
+          "documentation":"<p>Returns the unmetered remote access devices you have purchased or want to purchase.</p>"
         }
       },
       "documentation":"<p>A container for account-level settings within AWS Device Farm.</p>"
@@ -707,7 +711,8 @@
         "EXPLORER_EVENT_LOG",
         "EXPLORER_SUMMARY_LOG",
         "APPLICATION_CRASH_REPORT",
-        "XCTEST_LOG"
+        "XCTEST_LOG",
+        "VIDEO"
       ]
     },
     "Artifacts":{
@@ -1124,8 +1129,11 @@
       "type":"string",
       "enum":[
         "PENDING",
+        "PENDING_CONCURRENCY",
+        "PENDING_DEVICE",
         "PROCESSING",
         "SCHEDULING",
+        "PREPARING",
         "RUNNING",
         "COMPLETED",
         "STOPPING"
@@ -1405,11 +1413,11 @@
         },
         "status":{
           "shape":"ExecutionStatus",
-          "documentation":"<p>The job's status.</p> <p>Allowed values include:</p> <ul> <li><p>COMPLETED: A completed status.</p></li> <li><p>PENDING: A pending status.</p></li> <li><p>PROCESSING: A processing status.</p></li> <li><p>RUNNING: A running status.</p></li> <li><p>SCHEDULING: A scheduling status.</p></li> </ul>"
+          "documentation":"<p>The job's status.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending status.</p></li> <li><p>PENDING_CONCURRENCY: A pending concurrency status.</p></li> <li><p>PENDING_DEVICE: A pending device status.</p></li> <li><p>PROCESSING: A processing status.</p></li> <li><p>SCHEDULING: A scheduling status.</p></li> <li><p>PREPARING: A preparing status.</p></li> <li><p>RUNNING: A running status.</p></li> <li><p>COMPLETED: A completed status.</p></li> <li><p>STOPPING: A stopping status.</p></li> </ul>"
         },
         "result":{
           "shape":"ExecutionResult",
-          "documentation":"<p>The job's result.</p> <p>Allowed values include:</p> <ul> <li><p>ERRORED: An error condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>PENDING: A pending condition.</p></li> <li><p>WARNED: A warning condition.</p></li> </ul>"
+          "documentation":"<p>The job's result.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>WARNED: A warning condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>ERRORED: An error condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> </ul>"
         },
         "started":{
           "shape":"DateTime",
@@ -1788,7 +1796,7 @@
       "members":{
         "uniqueProblems":{
           "shape":"UniqueProblemsByExecutionResultMap",
-          "documentation":"<p>Information about the unique problems.</p> <p>Allowed values include:</p> <ul> <li><p>ERRORED: An error condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>PENDING: A pending condition.</p></li> <li><p>WARNED: A warning condition.</p></li> </ul>"
+          "documentation":"<p>Information about the unique problems.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>WARNED: A warning condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>ERRORED: An error condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> </ul>"
         },
         "nextToken":{
           "shape":"PaginationToken",
@@ -2025,7 +2033,7 @@
         },
         "result":{
           "shape":"ExecutionResult",
-          "documentation":"<p>The problem's result.</p> <p>Allowed values include:</p> <ul> <li><p>ERRORED: An error condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>PENDING: A pending condition.</p></li> <li><p>WARNED: A warning condition.</p></li> </ul>"
+          "documentation":"<p>The problem's result.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>WARNED: A warning condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>ERRORED: An error condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> </ul>"
         },
         "message":{
           "shape":"Message",
@@ -2242,11 +2250,11 @@
         },
         "status":{
           "shape":"ExecutionStatus",
-          "documentation":"<p>The run's status.</p> <p>Allowed values include:</p> <ul> <li><p>COMPLETED: A completed status.</p></li> <li><p>PENDING: A pending status.</p></li> <li><p>PROCESSING: A processing status.</p></li> <li><p>RUNNING: A running status.</p></li> <li><p>SCHEDULING: A scheduling status.</p></li> </ul>"
+          "documentation":"<p>The run's status.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending status.</p></li> <li><p>PENDING_CONCURRENCY: A pending concurrency status.</p></li> <li><p>PENDING_DEVICE: A pending device status.</p></li> <li><p>PROCESSING: A processing status.</p></li> <li><p>SCHEDULING: A scheduling status.</p></li> <li><p>PREPARING: A preparing status.</p></li> <li><p>RUNNING: A running status.</p></li> <li><p>COMPLETED: A completed status.</p></li> <li><p>STOPPING: A stopping status.</p></li> </ul>"
         },
         "result":{
           "shape":"ExecutionResult",
-          "documentation":"<p>The run's result.</p> <p>Allowed values include:</p> <ul> <li><p>ERRORED: An error condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>PENDING: A pending condition.</p></li> <li><p>WARNED: A warning condition.</p></li> </ul>"
+          "documentation":"<p>The run's result.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>WARNED: A warning condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>ERRORED: An error condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> </ul>"
         },
         "started":{
           "shape":"DateTime",
@@ -2484,11 +2492,11 @@
         },
         "status":{
           "shape":"ExecutionStatus",
-          "documentation":"<p>The suite's status.</p> <p>Allowed values include:</p> <ul> <li><p>COMPLETED: A completed status.</p></li> <li><p>PENDING: A pending status.</p></li> <li><p>PROCESSING: A processing status.</p></li> <li><p>RUNNING: A running status.</p></li> <li><p>SCHEDULING: A scheduling status.</p></li> </ul>"
+          "documentation":"<p>The suite's status.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending status.</p></li> <li><p>PENDING_CONCURRENCY: A pending concurrency status.</p></li> <li><p>PENDING_DEVICE: A pending device status.</p></li> <li><p>PROCESSING: A processing status.</p></li> <li><p>SCHEDULING: A scheduling status.</p></li> <li><p>PREPARING: A preparing status.</p></li> <li><p>RUNNING: A running status.</p></li> <li><p>COMPLETED: A completed status.</p></li> <li><p>STOPPING: A stopping status.</p></li> </ul>"
         },
         "result":{
           "shape":"ExecutionResult",
-          "documentation":"<p>The suite's result.</p> <p>Allowed values include:</p> <ul> <li><p>ERRORED: An error condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>PENDING: A pending condition.</p></li> <li><p>WARNED: A warning condition.</p></li> </ul>"
+          "documentation":"<p>The suite's result.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>WARNED: A warning condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>ERRORED: An error condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> </ul>"
         },
         "started":{
           "shape":"DateTime",
@@ -2538,11 +2546,11 @@
         },
         "status":{
           "shape":"ExecutionStatus",
-          "documentation":"<p>The test's status.</p> <p>Allowed values include:</p> <ul> <li><p>COMPLETED: A completed status.</p></li> <li><p>PENDING: A pending status.</p></li> <li><p>PROCESSING: A processing status.</p></li> <li><p>RUNNING: A running status.</p></li> <li><p>SCHEDULING: A scheduling status.</p></li> </ul>"
+          "documentation":"<p>The test's status.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending status.</p></li> <li><p>PENDING_CONCURRENCY: A pending concurrency status.</p></li> <li><p>PENDING_DEVICE: A pending device status.</p></li> <li><p>PROCESSING: A processing status.</p></li> <li><p>SCHEDULING: A scheduling status.</p></li> <li><p>PREPARING: A preparing status.</p></li> <li><p>RUNNING: A running status.</p></li> <li><p>COMPLETED: A completed status.</p></li> <li><p>STOPPING: A stopping status.</p></li> </ul>"
         },
         "result":{
           "shape":"ExecutionResult",
-          "documentation":"<p>The test's result.</p> <p>Allowed values include:</p> <ul> <li><p>ERRORED: An error condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>PENDING: A pending condition.</p></li> <li><p>WARNED: A warning condition.</p></li> </ul>"
+          "documentation":"<p>The test's result.</p> <p>Allowed values include:</p> <ul> <li><p>PENDING: A pending condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>WARNED: A warning condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>ERRORED: An error condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> </ul>"
         },
         "started":{
           "shape":"DateTime",
