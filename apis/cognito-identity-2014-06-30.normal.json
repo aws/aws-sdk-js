@@ -4,12 +4,11 @@
     "apiVersion":"2014-06-30",
     "endpointPrefix":"cognito-identity",
     "jsonVersion":"1.1",
+    "protocol":"json",
     "serviceFullName":"Amazon Cognito Identity",
     "signatureVersion":"v4",
-    "targetPrefix":"AWSCognitoIdentityService",
-    "protocol":"json"
+    "targetPrefix":"AWSCognitoIdentityService"
   },
-  "documentation":"<fullname>Amazon Cognito</fullname> <p>Amazon Cognito is a web service that delivers scoped temporary credentials to mobile devices and other untrusted environments. Amazon Cognito uniquely identifies a device and supplies the user with a consistent identity over the lifetime of an application.</p> <p>Using Amazon Cognito, you can enable authentication with one or more third-party identity providers (Facebook, Google, or Login with Amazon), and you can also choose to support unauthenticated access from your app. Cognito delivers a unique identifier for each user and acts as an OpenID token provider trusted by AWS Security Token Service (STS) to access temporary, limited-privilege AWS credentials.</p> <p>To provide end-user credentials, first make an unsigned call to <a>GetId</a>. If the end user is authenticated with one of the supported identity providers, set the <code>Logins</code> map with the identity provider token. <code>GetId</code> returns a unique identifier for the user.</p> <p>Next, make an unsigned call to <a>GetCredentialsForIdentity</a>. This call expects the same <code>Logins</code> map as the <code>GetId</code> call, as well as the <code>IdentityID</code> originally returned by <code>GetId</code>. Assuming your identity pool has been configured via the <a>SetIdentityPoolRoles</a> operation, <code>GetCredentialsForIdentity</code> will return AWS credentials for your use. If your pool has not been configured with <code>SetIdentityPoolRoles</code>, or if you want to follow legacy flow, make an unsigned call to <a>GetOpenIdToken</a>, which returns the OpenID token necessary to call STS and retrieve AWS credentials. This call expects the same <code>Logins</code> map as the <code>GetId</code> call, as well as the <code>IdentityID</code> originally returned by <code>GetId</code>. The token returned by <code>GetOpenIdToken</code> can be passed to the STS operation <a href=\"http://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html\">AssumeRoleWithWebIdentity</a> to retrieve AWS credentials.</p> <p>If you want to use Amazon Cognito in an Android, iOS, or Unity application, you will probably want to make API calls via the AWS Mobile SDK. To learn more, see the <a href=\"http://docs.aws.amazon.com/mobile/index.html\">AWS Mobile SDK Developer Guide</a>.</p>",
   "operations":{
     "CreateIdentityPool":{
       "name":"CreateIdentityPool",
@@ -17,53 +16,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateIdentityPoolInput",
-        "documentation":"<p>Input to the CreateIdentityPool action.</p>"
-      },
-      "output":{
-        "shape":"IdentityPool",
-        "documentation":"An object representing a Cognito identity pool."
-      },
+      "input":{"shape":"CreateIdentityPoolInput"},
+      "output":{"shape":"IdentityPool"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        },
-        {
-          "shape":"LimitExceededException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when the total number of user pools has exceeded a preset limit."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for <code>SupportedLoginProviders</code> are as follows: <ul> <li>Facebook: <code>graph.facebook.com</code> </li> <li>Google: <code>accounts.google.com</code> </li> <li>Amazon: <code>www.amazon.com</code> </li> <li>Twitter: <code>api.twitter.com</code> </li> <li>Digits: <code>www.digits.com</code> </li> </ul> You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for <code>SupportedLoginProviders</code> are as follows: <ul> <li>Facebook: <code>graph.facebook.com</code></li> <li>Google: <code>accounts.google.com</code></li> <li>Amazon: <code>www.amazon.com</code></li> <li>Twitter: <code>api.twitter.com</code></li> <li>Digits: <code>www.digits.com</code></li> </ul> You must use AWS Developer credentials to call this API.</p>"
     },
     "DeleteIdentities":{
       "name":"DeleteIdentities",
@@ -71,35 +34,14 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteIdentitiesInput",
-        "documentation":"<p>Input to the <code>DeleteIdentities</code> action.</p>"
-      },
-      "output":{
-        "shape":"DeleteIdentitiesResponse",
-        "documentation":"<p>Returned in response to a successful <code>DeleteIdentities</code> operation.</p>"
-      },
+      "input":{"shape":"DeleteIdentitiesInput"},
+      "output":{"shape":"DeleteIdentitiesResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Deletes identities from an identity pool. You can specify a list of 1-60 identities that you want to delete.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Deletes identities from an identity pool. You can specify a list of 1-60 identities that you want to delete.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "DeleteIdentityPool":{
       "name":"DeleteIdentityPool",
@@ -107,43 +49,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteIdentityPoolInput",
-        "documentation":"<p>Input to the DeleteIdentityPool action.</p>"
-      },
+      "input":{"shape":"DeleteIdentityPoolInput"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Deletes a user pool. Once a pool is deleted, users will not be able to authenticate with the pool.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Deletes a user pool. Once a pool is deleted, users will not be able to authenticate with the pool.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "DescribeIdentity":{
       "name":"DescribeIdentity",
@@ -151,47 +65,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeIdentityInput",
-        "documentation":"<p>Input to the <code>DescribeIdentity</code> action.</p>"
-      },
-      "output":{
-        "shape":"IdentityDescription",
-        "documentation":"A description of the identity."
-      },
+      "input":{"shape":"DescribeIdentityInput"},
+      "output":{"shape":"IdentityDescription"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Returns metadata related to the given identity, including when the identity was created and any associated linked logins.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Returns metadata related to the given identity, including when the identity was created and any associated linked logins.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "DescribeIdentityPool":{
       "name":"DescribeIdentityPool",
@@ -199,47 +82,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeIdentityPoolInput",
-        "documentation":"Input to the DescribeIdentityPool action."
-      },
-      "output":{
-        "shape":"IdentityPool",
-        "documentation":"An object representing a Cognito identity pool."
-      },
+      "input":{"shape":"DescribeIdentityPoolInput"},
+      "output":{"shape":"IdentityPool"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "GetCredentialsForIdentity":{
       "name":"GetCredentialsForIdentity",
@@ -247,65 +99,19 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetCredentialsForIdentityInput",
-        "documentation":"<p>Input to the <code>GetCredentialsForIdentity</code> action.</p>"
-      },
-      "output":{
-        "shape":"GetCredentialsForIdentityResponse",
-        "documentation":"<p>Returned in response to a successful <code>GetCredentialsForIdentity</code> operation.</p>"
-      },
+      "input":{"shape":"GetCredentialsForIdentityInput"},
+      "output":{"shape":"GetCredentialsForIdentityResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InvalidIdentityPoolConfigurationException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>Thrown if the identity pool has no role associated for the given auth type (auth/unauth) or if the AssumeRole fails.</p>"
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        },
-        {
-          "shape":"ExternalServiceException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception thrown when a dependent service such as Facebook or Twitter is not responding</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InvalidIdentityPoolConfigurationException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"ExternalServiceException"}
       ],
-      "documentation":"<p>Returns credentials for the provided identity ID. Any provided logins will be validated against supported login providers. If the token is for cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service with the appropriate role for the token.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
+      "documentation":"<p>Returns credentials for the provided identity ID. Any provided logins will be validated against supported login providers. If the token is for cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service with the appropriate role for the token.</p><p>This is a public API. You do not need any credentials to call this API.</p>"
     },
     "GetId":{
       "name":"GetId",
@@ -313,65 +119,19 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetIdInput",
-        "documentation":"Input to the GetId action."
-      },
-      "output":{
-        "shape":"GetIdResponse",
-        "documentation":"Returned in response to a GetId request."
-      },
+      "input":{"shape":"GetIdInput"},
+      "output":{"shape":"GetIdResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        },
-        {
-          "shape":"LimitExceededException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when the total number of user pools has exceeded a preset limit."
-        },
-        {
-          "shape":"ExternalServiceException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception thrown when a dependent service such as Facebook or Twitter is not responding</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ExternalServiceException"}
       ],
-      "documentation":"<p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
+      "documentation":"<p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account.</p><p>This is a public API. You do not need any credentials to call this API.</p>"
     },
     "GetIdentityPoolRoles":{
       "name":"GetIdentityPoolRoles",
@@ -379,53 +139,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetIdentityPoolRolesInput",
-        "documentation":"<p>Input to the <code>GetIdentityPoolRoles</code> action.</p>"
-      },
-      "output":{
-        "shape":"GetIdentityPoolRolesResponse",
-        "documentation":"<p>Returned in response to a successful <code>GetIdentityPoolRoles</code> operation.</p>"
-      },
+      "input":{"shape":"GetIdentityPoolRolesInput"},
+      "output":{"shape":"GetIdentityPoolRolesResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Gets the roles for an identity pool.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Gets the roles for an identity pool.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "GetOpenIdToken":{
       "name":"GetOpenIdToken",
@@ -433,59 +157,18 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetOpenIdTokenInput",
-        "documentation":"Input to the GetOpenIdToken action."
-      },
-      "output":{
-        "shape":"GetOpenIdTokenResponse",
-        "documentation":"Returned in response to a successful GetOpenIdToken request."
-      },
+      "input":{"shape":"GetOpenIdTokenInput"},
+      "output":{"shape":"GetOpenIdTokenResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        },
-        {
-          "shape":"ExternalServiceException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception thrown when a dependent service such as Facebook or Twitter is not responding</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"ExternalServiceException"}
       ],
-      "documentation":"<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by <a>GetId</a>. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link.</p> <p>The OpenId token is valid for 15 minutes.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
+      "documentation":"<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by <a>GetId</a>. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link.</p> <p>The OpenId token is valid for 15 minutes.</p><p>This is a public API. You do not need any credentials to call this API.</p>"
     },
     "GetOpenIdTokenForDeveloperIdentity":{
       "name":"GetOpenIdTokenForDeveloperIdentity",
@@ -493,59 +176,18 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetOpenIdTokenForDeveloperIdentityInput",
-        "documentation":"<p>Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.</p>"
-      },
-      "output":{
-        "shape":"GetOpenIdTokenForDeveloperIdentityResponse",
-        "documentation":"<p>Returned in response to a successful <code>GetOpenIdTokenForDeveloperIdentity</code> request.</p>"
-      },
+      "input":{"shape":"GetOpenIdTokenForDeveloperIdentityInput"},
+      "output":{"shape":"GetOpenIdTokenForDeveloperIdentityResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        },
-        {
-          "shape":"DeveloperUserAlreadyRegisteredException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The provided developer user identifier is already registered with Cognito under a different identity ID.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"DeveloperUserAlreadyRegisteredException"}
       ],
-      "documentation":"<p>Registers (or retrieves) a Cognito <code>IdentityId</code> and an OpenID Connect token for a user authenticated by your backend authentication process. Supplying multiple logins will create an implicit linked account. You can only specify one developer provider as part of the <code>Logins</code> map, which is linked to the identity pool. The developer provider is the \"domain\" by which Cognito will refer to your users.</p> <p>You can use <code>GetOpenIdTokenForDeveloperIdentity</code> to create a new identity and to link new logins (that is, user credentials issued by a public provider or developer provider) to an existing identity. When you want to create a new identity, the <code>IdentityId</code> should be null. When you want to associate a new login with an existing authenticated/unauthenticated identity, you can do so by providing the existing <code>IdentityId</code>. This API will create the identity in the specified <code>IdentityPoolId</code>.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Registers (or retrieves) a Cognito <code>IdentityId</code> and an OpenID Connect token for a user authenticated by your backend authentication process. Supplying multiple logins will create an implicit linked account. You can only specify one developer provider as part of the <code>Logins</code> map, which is linked to the identity pool. The developer provider is the \"domain\" by which Cognito will refer to your users.</p> <p>You can use <code>GetOpenIdTokenForDeveloperIdentity</code> to create a new identity and to link new logins (that is, user credentials issued by a public provider or developer provider) to an existing identity. When you want to create a new identity, the <code>IdentityId</code> should be null. When you want to associate a new login with an existing authenticated/unauthenticated identity, you can do so by providing the existing <code>IdentityId</code>. This API will create the identity in the specified <code>IdentityPoolId</code>.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "ListIdentities":{
       "name":"ListIdentities",
@@ -553,47 +195,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListIdentitiesInput",
-        "documentation":"Input to the ListIdentities action."
-      },
-      "output":{
-        "shape":"ListIdentitiesResponse",
-        "documentation":"The response to a ListIdentities request."
-      },
+      "input":{"shape":"ListIdentitiesInput"},
+      "output":{"shape":"ListIdentitiesResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Lists the identities in a pool.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Lists the identities in a pool.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "ListIdentityPools":{
       "name":"ListIdentityPools",
@@ -601,41 +212,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListIdentityPoolsInput",
-        "documentation":"Input to the ListIdentityPools action."
-      },
-      "output":{
-        "shape":"ListIdentityPoolsResponse",
-        "documentation":"The result of a successful ListIdentityPools action."
-      },
+      "input":{"shape":"ListIdentityPoolsInput"},
+      "output":{"shape":"ListIdentityPoolsResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Lists all of the Cognito identity pools registered for your account.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Lists all of the Cognito identity pools registered for your account.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "LookupDeveloperIdentity":{
       "name":"LookupDeveloperIdentity",
@@ -643,53 +228,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"LookupDeveloperIdentityInput",
-        "documentation":"<p>Input to the <code>LookupDeveloperIdentityInput</code> action.</p>"
-      },
-      "output":{
-        "shape":"LookupDeveloperIdentityResponse",
-        "documentation":"<p>Returned in response to a successful <code>LookupDeveloperIdentity</code> action.</p>"
-      },
+      "input":{"shape":"LookupDeveloperIdentityInput"},
+      "output":{"shape":"LookupDeveloperIdentityResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Retrieves the <code>IdentityID</code> associated with a <code>DeveloperUserIdentifier</code> or the list of <code>DeveloperUserIdentifier</code>s associated with an <code>IdentityId</code> for an existing identity. Either <code>IdentityID</code> or <code>DeveloperUserIdentifier</code> must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, <code>DeveloperUserIdentifier</code> will be matched against <code>IdentityID</code>. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a <code>ResourceConflictException</code> is thrown.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Retrieves the <code>IdentityID</code> associated with a <code>DeveloperUserIdentifier</code> or the list of <code>DeveloperUserIdentifier</code>s associated with an <code>IdentityId</code> for an existing identity. Either <code>IdentityID</code> or <code>DeveloperUserIdentifier</code> must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, <code>DeveloperUserIdentifier</code> will be matched against <code>IdentityID</code>. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a <code>ResourceConflictException</code> is thrown.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "MergeDeveloperIdentities":{
       "name":"MergeDeveloperIdentities",
@@ -697,53 +246,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"MergeDeveloperIdentitiesInput",
-        "documentation":"<p>Input to the <code>MergeDeveloperIdentities</code> action.</p>"
-      },
-      "output":{
-        "shape":"MergeDeveloperIdentitiesResponse",
-        "documentation":"<p>Returned in response to a successful <code>MergeDeveloperIdentities</code> action.</p>"
-      },
+      "input":{"shape":"MergeDeveloperIdentitiesInput"},
+      "output":{"shape":"MergeDeveloperIdentitiesResponse"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Merges two users having different <code>IdentityId</code>s, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (<code>SourceUserIdentifier</code>) with the <code>IdentityId</code> of the <code>DestinationUserIdentifier</code>. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Merges two users having different <code>IdentityId</code>s, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (<code>SourceUserIdentifier</code>) with the <code>IdentityId</code> of the <code>DestinationUserIdentifier</code>. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "SetIdentityPoolRoles":{
       "name":"SetIdentityPoolRoles",
@@ -751,55 +264,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"SetIdentityPoolRolesInput",
-        "documentation":"<p>Input to the <code>SetIdentityPoolRoles</code> action.</p>"
-      },
+      "input":{"shape":"SetIdentityPoolRolesInput"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        },
-        {
-          "shape":"ConcurrentModificationException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>Thrown if there are parallel requests to modify a resource.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Sets the roles for an identity pool. These roles are used when making calls to <code>GetCredentialsForIdentity</code> action.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Sets the roles for an identity pool. These roles are used when making calls to <code>GetCredentialsForIdentity</code> action.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "UnlinkDeveloperIdentity":{
       "name":"UnlinkDeveloperIdentity",
@@ -807,49 +282,16 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UnlinkDeveloperIdentityInput",
-        "documentation":"<p>Input to the <code>UnlinkDeveloperIdentity</code> action.</p>"
-      },
+      "input":{"shape":"UnlinkDeveloperIdentityInput"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Unlinks a <code>DeveloperUserIdentifier</code> from an existing identity. Unlinked developer users will be considered new identities next time they are seen. If, for a given Cognito identity, you remove all federated identities as well as the developer user identifier, the Cognito identity becomes inaccessible.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Unlinks a <code>DeveloperUserIdentifier</code> from an existing identity. Unlinked developer users will be considered new identities next time they are seen. If, for a given Cognito identity, you remove all federated identities as well as the developer user identifier, the Cognito identity becomes inaccessible.</p><p>You must use AWS Developer credentials to call this API.</p>"
     },
     "UnlinkIdentity":{
       "name":"UnlinkIdentity",
@@ -857,55 +299,17 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UnlinkIdentityInput",
-        "documentation":"Input to the UnlinkIdentity action."
-      },
+      "input":{"shape":"UnlinkIdentityInput"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        },
-        {
-          "shape":"ExternalServiceException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>An exception thrown when a dependent service such as Facebook or Twitter is not responding</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"ExternalServiceException"}
       ],
-      "documentation":"<p>Unlinks a federated identity from an existing account. Unlinked logins will be considered new identities next time they are seen. Removing the last linked login will make this identity inaccessible.</p> <p>This is a public API. You do not need any credentials to call this API.</p>"
+      "documentation":"<p>Unlinks a federated identity from an existing account. Unlinked logins will be considered new identities next time they are seen. Removing the last linked login will make this identity inaccessible.</p><p>This is a public API. You do not need any credentials to call this API.</p>"
     },
     "UpdateIdentityPool":{
       "name":"UpdateIdentityPool",
@@ -913,73 +317,63 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"IdentityPool",
-        "documentation":"An object representing a Cognito identity pool."
-      },
-      "output":{
-        "shape":"IdentityPool",
-        "documentation":"An object representing a Cognito identity pool."
-      },
+      "input":{"shape":"IdentityPool"},
+      "output":{"shape":"IdentityPool"},
       "errors":[
-        {
-          "shape":"InvalidParameterException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
-        },
-        {
-          "shape":"NotAuthorizedException",
-          "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
-        },
-        {
-          "shape":"ResourceConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
-        },
-        {
-          "shape":"TooManyRequestsException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
-        },
-        {
-          "shape":"InternalErrorException",
-          "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
-        },
-        {
-          "shape":"ConcurrentModificationException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>Thrown if there are parallel requests to modify a resource.</p>"
-        }
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Updates a user pool.</p> <p>You must use AWS Developer credentials to call this API.</p>"
+      "documentation":"<p>Updates a user pool.</p><p>You must use AWS Developer credentials to call this API.</p>"
     }
   },
   "shapes":{
     "ARNString":{
       "type":"string",
-      "min":20,
-      "max":2048
+      "max":2048,
+      "min":20
     },
     "AccessKeyString":{"type":"string"},
     "AccountId":{
       "type":"string",
-      "min":1,
       "max":15,
+      "min":1,
       "pattern":"\\d+"
+    },
+    "CognitoIdentityProvider":{
+      "type":"structure",
+      "members":{
+        "ProviderName":{
+          "shape":"CognitoIdentityProviderName",
+          "documentation":"<p>The provider name for a Cognito User Identity Pool. For example, <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code>.</p>"
+        },
+        "ClientId":{
+          "shape":"CognitoIdentityProviderClientId",
+          "documentation":"<p>The client ID for the Cognito User Identity Pool.</p>"
+        }
+      },
+      "documentation":"<p>A provider representing a Cognito User Identity Pool and its client ID.</p>"
+    },
+    "CognitoIdentityProviderClientId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\w_]+"
+    },
+    "CognitoIdentityProviderList":{
+      "type":"list",
+      "member":{"shape":"CognitoIdentityProvider"}
+    },
+    "CognitoIdentityProviderName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\w._:/-]+"
     },
     "ConcurrentModificationException":{
       "type":"structure",
@@ -989,9 +383,8 @@
           "documentation":"<p>The message returned by a ConcurrentModificationException.</p>"
         }
       },
-      "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>Thrown if there are parallel requests to modify a resource.</p>"
+      "documentation":"<p>Thrown if there are parallel requests to modify a resource.</p>",
+      "exception":true
     },
     "CreateIdentityPoolInput":{
       "type":"structure",
@@ -1019,6 +412,10 @@
         "OpenIdConnectProviderARNs":{
           "shape":"OIDCProviderList",
           "documentation":"<p>A list of OpendID Connect provider ARNs.</p>"
+        },
+        "CognitoIdentityProviders":{
+          "shape":"CognitoIdentityProviderList",
+          "documentation":"<p>A list representing a Cognito User Identity Pool and its client ID.</p>"
         }
       },
       "documentation":"<p>Input to the CreateIdentityPool action.</p>"
@@ -1102,8 +499,8 @@
     },
     "DeveloperProviderName":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "pattern":"[\\w._-]+"
     },
     "DeveloperUserAlreadyRegisteredException":{
@@ -1114,14 +511,13 @@
           "documentation":"<p>This developer user identifier is already registered with Cognito.</p>"
         }
       },
-      "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>The provided developer user identifier is already registered with Cognito under a different identity ID.</p>"
+      "documentation":"<p>The provided developer user identifier is already registered with Cognito under a different identity ID.</p>",
+      "exception":true
     },
     "DeveloperUserIdentifier":{
       "type":"string",
-      "min":1,
       "max":1024,
+      "min":1,
       "pattern":"[\\w.@_-]+"
     },
     "DeveloperUserIdentifierList":{
@@ -1143,9 +539,8 @@
           "documentation":"<p>The message returned by an ExternalServiceException</p>"
         }
       },
-      "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>An exception thrown when a dependent service such as Facebook or Twitter is not responding</p>"
+      "documentation":"<p>An exception thrown when a dependent service such as Facebook or Twitter is not responding</p>",
+      "exception":true
     },
     "GetCredentialsForIdentityInput":{
       "type":"structure",
@@ -1190,7 +585,7 @@
         },
         "Logins":{
           "shape":"LoginsMap",
-          "documentation":"<p>A set of optional name-value pairs that map provider names to provider tokens.</p> <p>The available provider names for <code>Logins</code> are as follows: <ul> <li>Facebook: <code>graph.facebook.com</code> </li> <li>Google: <code>accounts.google.com</code> </li> <li>Amazon: <code>www.amazon.com</code> </li> <li>Twitter: <code>api.twitter.com</code> </li> <li>Digits: <code>www.digits.com</code> </li> </ul> </p>"
+          "documentation":"<p>A set of optional name-value pairs that map provider names to provider tokens.</p> <p>The available provider names for <code>Logins</code> are as follows: <ul> <li>Facebook: <code>graph.facebook.com</code></li> <li>Amazon Cognito Identity Provider: <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code></li> <li>Google: <code>accounts.google.com</code></li> <li>Amazon: <code>www.amazon.com</code></li> <li>Twitter: <code>api.twitter.com</code></li> <li>Digits: <code>www.digits.com</code></li> </ul> </p>"
         }
       },
       "documentation":"Input to the GetId action."
@@ -1280,7 +675,7 @@
         },
         "Logins":{
           "shape":"LoginsMap",
-          "documentation":"A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider's authflow. For accounts.google.com or any other OpenId Connect provider, always include the id_token."
+          "documentation":"<p>A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider's authflow. For accounts.google.com, an Amazon Cognito Identity Provider, or any other OpenId Connect provider, always include the <code>id_token</code>.</p>"
         }
       },
       "documentation":"Input to the GetOpenIdToken action."
@@ -1328,15 +723,15 @@
     },
     "IdentityId":{
       "type":"string",
-      "min":1,
       "max":55,
+      "min":1,
       "pattern":"[\\w-]+:[0-9a-f-]+"
     },
     "IdentityIdList":{
       "type":"list",
       "member":{"shape":"IdentityId"},
-      "min":1,
-      "max":60
+      "max":60,
+      "min":1
     },
     "IdentityPool":{
       "type":"structure",
@@ -1369,20 +764,24 @@
         "OpenIdConnectProviderARNs":{
           "shape":"OIDCProviderList",
           "documentation":"<p>A list of OpendID Connect provider ARNs.</p>"
+        },
+        "CognitoIdentityProviders":{
+          "shape":"CognitoIdentityProviderList",
+          "documentation":"<p>A list representing a Cognito User Identity Pool and its client ID.</p>"
         }
       },
       "documentation":"An object representing a Cognito identity pool."
     },
     "IdentityPoolId":{
       "type":"string",
-      "min":1,
       "max":55,
+      "min":1,
       "pattern":"[\\w-]+:[0-9a-f-]+"
     },
     "IdentityPoolName":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "pattern":"[\\w ]+"
     },
     "IdentityPoolShortDescription":{
@@ -1406,20 +805,20 @@
     },
     "IdentityProviderId":{
       "type":"string",
-      "min":1,
       "max":128,
-      "pattern":"[\\w.;_-]+"
+      "min":1,
+      "pattern":"[\\w.;_/-]+"
     },
     "IdentityProviderName":{
       "type":"string",
-      "min":1,
       "max":128,
-      "pattern":"[\\w._/-]+"
+      "min":1,
+      "pattern":"[\\w._/:-]+"
     },
     "IdentityProviderToken":{
       "type":"string",
-      "min":1,
       "max":2048,
+      "min":1,
       "pattern":"[\\S]+"
     },
     "IdentityProviders":{
@@ -1436,9 +835,9 @@
           "documentation":"The message returned by an InternalErrorException."
         }
       },
+      "documentation":"Thrown when the service encounters an error during processing the request.",
       "exception":true,
-      "fault":true,
-      "documentation":"Thrown when the service encounters an error during processing the request."
+      "fault":true
     },
     "InvalidIdentityPoolConfigurationException":{
       "type":"structure",
@@ -1448,9 +847,8 @@
           "documentation":"<p>The message returned for an <code>InvalidIdentityPoolConfigurationException</code></p>"
         }
       },
-      "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>Thrown if the identity pool has no role associated for the given auth type (auth/unauth) or if the AssumeRole fails.</p>"
+      "documentation":"<p>Thrown if the identity pool has no role associated for the given auth type (auth/unauth) or if the AssumeRole fails.</p>",
+      "exception":true
     },
     "InvalidParameterException":{
       "type":"structure",
@@ -1460,9 +858,8 @@
           "documentation":"The message returned by an InvalidParameterException."
         }
       },
-      "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Thrown for missing or bad input parameter(s)."
+      "documentation":"Thrown for missing or bad input parameter(s).",
+      "exception":true
     },
     "LimitExceededException":{
       "type":"structure",
@@ -1472,9 +869,8 @@
           "documentation":"The message returned by a LimitExceededException."
         }
       },
-      "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Thrown when the total number of user pools has exceeded a preset limit."
+      "documentation":"Thrown when the total number of user pools has exceeded a preset limit.",
+      "exception":true
     },
     "ListIdentitiesInput":{
       "type":"structure",
@@ -1650,9 +1046,8 @@
           "documentation":"The message returned by a NotAuthorizedException"
         }
       },
-      "error":{"httpStatusCode":403},
-      "exception":true,
-      "documentation":"Thrown when a user is not authorized to access the requested resource."
+      "documentation":"Thrown when a user is not authorized to access the requested resource.",
+      "exception":true
     },
     "OIDCProviderList":{
       "type":"list",
@@ -1666,8 +1061,8 @@
     },
     "QueryLimit":{
       "type":"integer",
-      "min":1,
-      "max":60
+      "max":60,
+      "min":1
     },
     "ResourceConflictException":{
       "type":"structure",
@@ -1677,9 +1072,8 @@
           "documentation":"The message returned by a ResourceConflictException."
         }
       },
-      "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"Thrown when a user tries to use a login which is already linked to another account."
+      "documentation":"Thrown when a user tries to use a login which is already linked to another account.",
+      "exception":true
     },
     "ResourceNotFoundException":{
       "type":"structure",
@@ -1689,9 +1083,8 @@
           "documentation":"The message returned by a ResourceNotFoundException."
         }
       },
-      "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
+      "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist.",
+      "exception":true
     },
     "RoleType":{
       "type":"string",
@@ -1726,8 +1119,8 @@
     "String":{"type":"string"},
     "TokenDuration":{
       "type":"long",
-      "min":1,
-      "max":86400
+      "max":86400,
+      "min":1
     },
     "TooManyRequestsException":{
       "type":"structure",
@@ -1737,9 +1130,8 @@
           "documentation":"Message returned by a TooManyRequestsException"
         }
       },
-      "error":{"httpStatusCode":429},
-      "exception":true,
-      "documentation":"Thrown when a request is throttled."
+      "documentation":"Thrown when a request is throttled.",
+      "exception":true
     },
     "UnlinkDeveloperIdentityInput":{
       "type":"structure",
@@ -1812,6 +1204,5 @@
       "max":60
     }
   },
-  "examples":{
-  }
+  "documentation":"<fullname>Amazon Cognito</fullname> <p>Amazon Cognito is a web service that delivers scoped temporary credentials to mobile devices and other untrusted environments. Amazon Cognito uniquely identifies a device and supplies the user with a consistent identity over the lifetime of an application.</p> <p>Using Amazon Cognito, you can enable authentication with one or more third-party identity providers (Facebook, Google, or Login with Amazon), and you can also choose to support unauthenticated access from your app. Cognito delivers a unique identifier for each user and acts as an OpenID token provider trusted by AWS Security Token Service (STS) to access temporary, limited-privilege AWS credentials.</p> <p>To provide end-user credentials, first make an unsigned call to <a>GetId</a>. If the end user is authenticated with one of the supported identity providers, set the <code>Logins</code> map with the identity provider token. <code>GetId</code> returns a unique identifier for the user.</p> <p>Next, make an unsigned call to <a>GetCredentialsForIdentity</a>. This call expects the same <code>Logins</code> map as the <code>GetId</code> call, as well as the <code>IdentityID</code> originally returned by <code>GetId</code>. Assuming your identity pool has been configured via the <a>SetIdentityPoolRoles</a> operation, <code>GetCredentialsForIdentity</code> will return AWS credentials for your use. If your pool has not been configured with <code>SetIdentityPoolRoles</code>, or if you want to follow legacy flow, make an unsigned call to <a>GetOpenIdToken</a>, which returns the OpenID token necessary to call STS and retrieve AWS credentials. This call expects the same <code>Logins</code> map as the <code>GetId</code> call, as well as the <code>IdentityID</code> originally returned by <code>GetId</code>. The token returned by <code>GetOpenIdToken</code> can be passed to the STS operation <a href=\"http://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html\">AssumeRoleWithWebIdentity</a> to retrieve AWS credentials.</p> <p>If you want to use Amazon Cognito in an Android, iOS, or Unity application, you will probably want to make API calls via the AWS Mobile SDK. To learn more, see the <a href=\"http://docs.aws.amazon.com/mobile/index.html\">AWS Mobile SDK Developer Guide</a>.</p>"
 }
