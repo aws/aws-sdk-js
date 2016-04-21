@@ -700,6 +700,10 @@
       },
       "documentation":"<p>This output contains the description of the cluster step.</p>"
     },
+    "EC2InstanceIdsList":{
+      "type":"list",
+      "member":{"shape":"InstanceId"}
+    },
     "EC2InstanceIdsToTerminateList":{
       "type":"list",
       "member":{"shape":"InstanceId"}
@@ -951,6 +955,10 @@
         "EbsOptimized":{
           "shape":"BooleanObject",
           "documentation":"<p>If the instance group is EBS-optimized. An Amazon EBS–optimized instance uses an optimized configuration stack and provides additional, dedicated capacity for Amazon EBS I/O. </p>"
+        },
+        "ShrinkPolicy":{
+          "shape":"ShrinkPolicy",
+          "documentation":"<p>Policy for customizing shrink operations.</p>"
         }
       },
       "documentation":"<p>This entity represents an instance group, which is a group of instances that have common purpose. For example, CORE instance group is used for HDFS.</p>"
@@ -1100,7 +1108,11 @@
         },
         "EC2InstanceIdsToTerminate":{
           "shape":"EC2InstanceIdsToTerminateList",
-          "documentation":"<p>The EC2 InstanceIds to terminate. For advanced users only. Once you terminate the instances, the instance group will not return to its original requested size.</p>"
+          "documentation":"<p>The EC2 InstanceIds to terminate. Once you terminate the instances, the instance group will not return to its original requested size.</p>"
+        },
+        "ShrinkPolicy":{
+          "shape":"ShrinkPolicy",
+          "documentation":"<p>Policy for customizing shrink operations.</p>"
         }
       },
       "documentation":"<p>Modify an instance group size.</p>"
@@ -1199,6 +1211,24 @@
     "InstanceList":{
       "type":"list",
       "member":{"shape":"Instance"}
+    },
+    "InstanceResizePolicy":{
+      "type":"structure",
+      "members":{
+        "InstancesToTerminate":{
+          "shape":"EC2InstanceIdsList",
+          "documentation":"<p>Specific list of instances to be terminated when shrinking an instance group.</p>"
+        },
+        "InstancesToProtect":{
+          "shape":"EC2InstanceIdsList",
+          "documentation":"<p>Specific list of instances to be protected when shrinking an instance group.</p>"
+        },
+        "InstanceTerminationTimeout":{
+          "shape":"Integer",
+          "documentation":"<p>Decommissioning timeout override for the specific list of instances to be terminated.</p>"
+        }
+      },
+      "documentation":"<p>Custom policy for requesting termination protection or termination of specific instances when shrinking an instance group.</p>"
     },
     "InstanceRoleType":{
       "type":"string",
@@ -1748,7 +1778,7 @@
           "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
-      "documentation":"<p>This output contains the list of steps.</p>"
+      "documentation":"<p>This output contains the list of steps returned in reverse order. This means that the last step is the first element in the list.</p>"
     },
     "Marker":{"type":"string"},
     "MarketType":{
@@ -1946,6 +1976,20 @@
         }
       },
       "documentation":"<p>The input to the SetVisibleToAllUsers action.</p>"
+    },
+    "ShrinkPolicy":{
+      "type":"structure",
+      "members":{
+        "DecommissionTimeout":{
+          "shape":"Integer",
+          "documentation":"<p>The desired timeout for decommissioning an instance. Overrides the default YARN decommissioning timeout.</p>"
+        },
+        "InstanceResizePolicy":{
+          "shape":"InstanceResizePolicy",
+          "documentation":"<p>Custom policy for requesting termination protection or termination of specific instances when shrinking an instance group.</p>"
+        }
+      },
+      "documentation":"<p>Policy for customizing shrink operations. Allows configuration of decommissioning timeout and targeted instance shrinking.</p>"
     },
     "Step":{
       "type":"structure",
