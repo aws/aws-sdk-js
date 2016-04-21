@@ -836,6 +836,12 @@
           "documentation":"<p>The rate exceeds the limit.</p>"
         },
         {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The specified resource does not exist.</p>"
+        },
+        {
           "shape":"UnauthorizedException",
           "error":{"httpStatusCode":401},
           "exception":true,
@@ -2816,6 +2822,7 @@
       "pattern":"[0-9]{12}"
     },
     "AwsArn":{"type":"string"},
+    "AwsIotSqlVersion":{"type":"string"},
     "BucketName":{"type":"string"},
     "CACertificate":{
       "type":"structure",
@@ -4844,6 +4851,10 @@
         "ruleDisabled":{
           "shape":"IsDisabled",
           "documentation":"<p>Specifies whether the rule is disabled.</p>"
+        },
+        "awsIotSqlVersion":{
+          "shape":"AwsIotSqlVersion",
+          "documentation":"<p>The version of the SQL rules engine to use when evaluating the rule.</p>"
         }
       },
       "documentation":"<p>Describes a rule.</p>"
@@ -4900,6 +4911,10 @@
         "ruleDisabled":{
           "shape":"IsDisabled",
           "documentation":"<p>Specifies whether the rule is disabled.</p>"
+        },
+        "awsIotSqlVersion":{
+          "shape":"AwsIotSqlVersion",
+          "documentation":"<p>The version of the SQL rules engine to use when evaluating the rule.</p>"
         }
       },
       "documentation":"<p>Describes a rule.</p>"
