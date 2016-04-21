@@ -24,7 +24,7 @@
         {"shape":"CloudHsmInternalException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Adds or overwrites one or more tags for the specified resource.</p> <p>Each tag consists of a key and a value. Tag keys must be unique per resource.</p>"
+      "documentation":"<p>Adds or overwrites one or more tags for the specified AWS CloudHSM resource.</p> <p>Each tag consists of a key and a value. Tag keys must be unique to each resource.</p>"
     },
     "CreateHapg":{
       "name":"CreateHapg",
@@ -249,7 +249,7 @@
         {"shape":"CloudHsmInternalException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Returns a list of all tags for the specified resource.</p>"
+      "documentation":"<p>Returns a list of all tags for the specified AWS CloudHSM resource.</p>"
     },
     "ModifyHapg":{
       "name":"ModifyHapg",
@@ -307,7 +307,7 @@
         {"shape":"CloudHsmInternalException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Removes one or more tags from the specified resource.</p> <p>To remove a tag, specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use <a>AddTagsToResource</a>.</p>"
+      "documentation":"<p>Removes one or more tags from the specified AWS CloudHSM resource.</p> <p>To remove a tag, specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use <a>AddTagsToResource</a>.</p>"
     }
   },
   "shapes":{
@@ -328,7 +328,7 @@
       "members":{
         "ResourceArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the resource to tag.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.</p>"
         },
         "TagList":{
           "shape":"TagList",
@@ -958,7 +958,7 @@
       "members":{
         "ResourceArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the resource.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS CloudHSM resource.</p>"
         }
       }
     },
@@ -1102,7 +1102,7 @@
       "members":{
         "ResourceArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the resource.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the AWS CloudHSM resource.</p>"
         },
         "TagKeyList":{
           "shape":"TagKeyList",
@@ -1153,7 +1153,7 @@
           "documentation":"<p>The value of the tag.</p>"
         }
       },
-      "documentation":"<p>A key-value pair that identifies or specifies metadata about a resource.</p>"
+      "documentation":"<p>A key-value pair that identifies or specifies metadata about an AWS CloudHSM resource.</p>"
     },
     "TagKey":{
       "type":"string",
