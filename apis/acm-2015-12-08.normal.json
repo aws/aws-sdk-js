@@ -11,6 +11,21 @@
     "targetPrefix":"CertificateManager"
   },
   "operations":{
+    "AddTagsToCertificate":{
+      "name":"AddTagsToCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddTagsToCertificateRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"InvalidTagException"},
+        {"shape":"TooManyTagsException"}
+      ],
+      "documentation":"<p>Adds one or more tags to an ACM Certificate. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a <code>key</code> and an optional <code>value</code>. You specify the certificate on input by its Amazon Resource Name (ARN). You specify the tag by using a key-value pair. </p> <p> You can apply a tag to just one certificate if you want to identify a specific characteristic of that certificate, or you can apply the same tag to multiple certificates if you want to filter for a common relationship among those certificates. Similarly, you can apply the same tag to multiple resources if you want to specify a relationship among those resources. For example, you can add the same tag to an ACM Certificate and an Elastic Load Balancing load balancer to indicate that they are both used by the same website. For more information, see <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/tags.html\">Tagging ACM Certificates</a>. </p> <p>To remove one or more tags, use the <a>RemoveTagsFromCertificate</a> action. To view all of the tags that have been applied to the certificate, use the <a>ListTagsForCertificate</a> action. </p>"
+    },
     "DeleteCertificate":{
       "name":"DeleteCertificate",
       "http":{
@@ -37,7 +52,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidArnException"}
       ],
-      "documentation":"<p> Returns a list of the fields contained in the specified ACM Certificate. For example, this action returns the certificate status, a flag that indicates whether the certificate is associated with any other AWS service, and the date at which the certificate request was created. The ACM Certificate is specified on input by its Amazon Resource Name (ARN). </p>"
+      "documentation":"<p> Returns a list of the fields contained in the specified ACM Certificate. For example, this action returns the certificate status, a flag that indicates whether the certificate is associated with any other AWS service, and the date at which the certificate request was created. You specify the ACM Certificate on input by its Amazon Resource Name (ARN). </p>"
     },
     "GetCertificate":{
       "name":"GetCertificate",
@@ -63,6 +78,34 @@
       "input":{"shape":"ListCertificatesRequest"},
       "output":{"shape":"ListCertificatesResponse"},
       "documentation":"<p> Retrieves a list of the ACM Certificate ARNs, and the domain name for each ARN, owned by the calling account. You can filter the list based on the <code>CertificateStatuses</code> parameter, and you can display up to <code>MaxItems</code> certificates at one time. If you have more than <code>MaxItems</code> certificates, use the <code>NextToken</code> marker from the response object in your next call to the <code>ListCertificates</code> action to retrieve the next set of certificate ARNs. </p>"
+    },
+    "ListTagsForCertificate":{
+      "name":"ListTagsForCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForCertificateRequest"},
+      "output":{"shape":"ListTagsForCertificateResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidArnException"}
+      ],
+      "documentation":"<p>Lists the tags that have been applied to the ACM Certificate. Use the certificate ARN to specify the certificate. To add a tag to an ACM Certificate, use the <a>AddTagsToCertificate</a> action. To delete a tag, use the <a>RemoveTagsFromCertificate</a> action. </p>"
+    },
+    "RemoveTagsFromCertificate":{
+      "name":"RemoveTagsFromCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveTagsFromCertificateRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"InvalidTagException"}
+      ],
+      "documentation":"<p>Remove one or more tags from an ACM Certificate. A tag consists of a key-value pair. If you do not specify the value portion of the tag when calling this function, the tag will be removed regardless of value. If you specify a value, the tag is removed only if it is associated with the specified value. </p> <p>To add tags to a certificate, use the <a>AddTagsToCertificate</a> action. To view all of the tags that have been applied to a specific ACM Certificate, use the <a>ListTagsForCertificate</a> action. </p>"
     },
     "RequestCertificate":{
       "name":"RequestCertificate",
@@ -95,6 +138,24 @@
     }
   },
   "shapes":{
+    "AddTagsToCertificateRequest":{
+      "type":"structure",
+      "required":[
+        "CertificateArn",
+        "Tags"
+      ],
+      "members":{
+        "CertificateArn":{
+          "shape":"Arn",
+          "documentation":"<p> String that contains the ARN of the ACM Certificate to which the tag is to be applied. This must be of the form: </p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p> For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>The key-value pair that defines the tag. The tag value is optional.</p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
     "Arn":{
       "type":"string",
       "max":2048,
@@ -154,7 +215,7 @@
         },
         "Status":{
           "shape":"CertificateStatus",
-          "documentation":"<p> A <code>CertificateStatus</code> enumeration value that can contain one of the following: <ul> <li>PENDING_VALIDATION</li> <li>ISSUED</li> <li>INACTIVE</li> <li>EXPIRED</li> <li>REVOKED</li> <li>FAILED</li> <li>VALIDATION_TIMED_OUT</li> </ul> </p>"
+          "documentation":"<p> A <code>CertificateStatus</code> enumeration value that can contain one of the following: <ul> <li><p>PENDING_VALIDATION</p></li> <li><p>ISSUED</p></li> <li><p>INACTIVE</p></li> <li><p>EXPIRED</p></li> <li><p>REVOKED</p></li> <li><p>FAILED</p></li> <li><p>VALIDATION_TIMED_OUT</p></li> </ul> </p>"
         },
         "RevokedAt":{
           "shape":"TStamp",
@@ -162,7 +223,7 @@
         },
         "RevocationReason":{
           "shape":"RevocationReason",
-          "documentation":"<p> A <code>RevocationReason</code> enumeration value that indicates why the certificate was revoked. This value exists only if the certificate has been revoked. This can be one of the following vales: <ul> <li>UNSPECIFIED</li> <li>KEY_COMPROMISE</li> <li>CA_COMPROMISE</li> <li>AFFILIATION_CHANGED</li> <li>SUPERCEDED</li> <li>CESSATION_OF_OPERATION</li> <li>CERTIFICATE_HOLD</li> <li>REMOVE_FROM_CRL</li> <li>PRIVILEGE_WITHDRAWN</li> <li>A_A_COMPROMISE</li> </ul> </p>"
+          "documentation":"<p> A <code>RevocationReason</code> enumeration value that indicates why the certificate was revoked. This value exists only if the certificate has been revoked. This can be one of the following vales: <ul> <li><p>UNSPECIFIED</p></li> <li><p>KEY_COMPROMISE</p></li> <li><p>CA_COMPROMISE</p></li> <li><p>AFFILIATION_CHANGED</p></li> <li><p>SUPERCEDED</p></li> <li><p>CESSATION_OF_OPERATION</p></li> <li><p>CERTIFICATE_HOLD</p></li> <li><p>REMOVE_FROM_CRL</p></li> <li><p>PRIVILEGE_WITHDRAWN</p></li> <li><p>A_A_COMPROMISE</p></li> </ul> </p>"
         },
         "NotBefore":{
           "shape":"TStamp",
@@ -229,7 +290,8 @@
           "shape":"Arn",
           "documentation":"<p> String that contains the ARN of the ACM Certificate to be deleted. This must be of the form: </p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p> For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeCertificateRequest":{
       "type":"structure",
@@ -239,7 +301,8 @@
           "shape":"Arn",
           "documentation":"<p> String that contains an ACM Certificate ARN. The ARN must be of the form: </p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p> For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeCertificateResponse":{
       "type":"structure",
@@ -248,7 +311,8 @@
           "shape":"CertificateDetail",
           "documentation":"<p>Contains a <a>CertificateDetail</a> structure that lists the fields of an ACM Certificate.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DomainList":{
       "type":"list",
@@ -300,7 +364,7 @@
         },
         "ValidationDomain":{
           "shape":"DomainNameString",
-          "documentation":"<p> The domain to which validation email is sent. This is the base validation domain that will act as the suffix of the email addresses. This must be the same as the <code>DomainName</code> value or a superdomain of the <code>DomainName</code> value. For example, if you requested a certificate for <code>site.subdomain.example.com</code> and specify a <b>ValidationDomain</b> of <code>subdomain.example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS for the base domain and the following five addresses: <ul> <li>admin@subdomain.example.com</li> <li>administrator@subdomain.example.com</li> <li>hostmaster@subdomain.example.com</li> <li>postmaster@subdomain.example.com</li> <li>webmaster@subdomain.example.com</li> </ul> </p>"
+          "documentation":"<p> The domain to which validation email is sent. This is the base validation domain that will act as the suffix of the email addresses. This must be the same as the <code>DomainName</code> value or a superdomain of the <code>DomainName</code> value. For example, if you requested a certificate for <code>site.subdomain.example.com</code> and specify a <b>ValidationDomain</b> of <code>subdomain.example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS for the base domain and the following five addresses: <ul> <li><p>admin@subdomain.example.com</p></li> <li><p>administrator@subdomain.example.com</p></li> <li><p>hostmaster@subdomain.example.com</p></li> <li><p>postmaster@subdomain.example.com</p></li> <li><p>webmaster@subdomain.example.com</p></li> </ul> </p>"
         }
       },
       "documentation":"<p> This structure is used in the request object of the <a>RequestCertificate</a> action. </p>"
@@ -319,7 +383,8 @@
           "shape":"Arn",
           "documentation":"<p> String that contains a certificate ARN in the following format: </p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p> For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "GetCertificateResponse":{
       "type":"structure",
@@ -332,7 +397,8 @@
           "shape":"CertificateChain",
           "documentation":"<p> The certificate chain that contains the root certificate issued by the certificate authority (CA). </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "IdempotencyToken":{
       "type":"string",
@@ -347,7 +413,10 @@
     "InvalidArnException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"String"}
+        "message":{
+          "shape":"String",
+          "documentation":"<p/>"
+        }
       },
       "documentation":"<p> The requested Amazon Resource Name (ARN) does not refer to an existing resource. </p>",
       "exception":true
@@ -355,7 +424,10 @@
     "InvalidDomainValidationOptionsException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"String"}
+        "message":{
+          "shape":"String",
+          "documentation":"<p/>"
+        }
       },
       "documentation":"<p> One or more values in the <a>DomainValidationOption</a> structure is incorrect. </p>",
       "exception":true
@@ -363,9 +435,23 @@
     "InvalidStateException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"String"}
+        "message":{
+          "shape":"String",
+          "documentation":"<p/>"
+        }
       },
       "documentation":"<p> Processing has reached an invalid state. For example, this exception can occur if the specified domain is not using email validation, or the current certificate status does not permit the requested operation. See the exception message returned by ACM to determine which state is not valid. </p>",
+      "exception":true
+    },
+    "InvalidTagException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"String",
+          "documentation":"<p/>"
+        }
+      },
+      "documentation":"<p>One or both of the values that make up the key-value pair is not valid. For example, you cannot specify a tag value that begins with <code>aws:</code>. </p>",
       "exception":true
     },
     "KeyAlgorithm":{
@@ -378,7 +464,10 @@
     "LimitExceededException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"String"}
+        "message":{
+          "shape":"String",
+          "documentation":"<p/>"
+        }
       },
       "documentation":"<p> An ACM limit has been exceeded. For example, you may have input more domains than are allowed or you've requested too many certificates for your account. See the exception message returned by ACM to determine which limit you have violated. For more information about ACM limits, see the <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html\">Limits</a> topic. </p>",
       "exception":true
@@ -388,7 +477,7 @@
       "members":{
         "CertificateStatuses":{
           "shape":"CertificateStatuses",
-          "documentation":"<p> Identifies the statuses of the ACM Certificates for which you want to retrieve the ARNs. This can be one or more of the following values: <ul> <li><code>PENDING_VALIDATION</code></li> <li><code>ISSUED</code></li> <li><code>INACTIVE</code></li> <li><code>EXPIRED</code></li> <li><code>VALIDATION_TIMED_OUT</code></li> <li><code>REVOKED</code></li> <li><code>FAILED</code></li> </ul> </p>"
+          "documentation":"<p> Identifies the statuses of the ACM Certificates for which you want to retrieve the ARNs. This can be one or more of the following values: <ul> <li><p><code>PENDING_VALIDATION</code></p></li> <li><p><code>ISSUED</code></p></li> <li><p><code>INACTIVE</code></p></li> <li><p><code>EXPIRED</code></p></li> <li><p><code>VALIDATION_TIMED_OUT</code></p></li> <li><p><code>REVOKED</code></p></li> <li><p><code>FAILED</code></p></li> </ul> </p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -398,7 +487,8 @@
           "shape":"MaxItems",
           "documentation":"<p> Specify this parameter when paginating results to indicate the maximum number of ACM Certificates that you want to display for each response. If there are additional certificates beyond the maximum you specify, use the <code>NextToken</code> value in your next call to the <code>ListCertificates</code> action. </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "ListCertificatesResponse":{
       "type":"structure",
@@ -411,7 +501,29 @@
           "shape":"CertificateSummaryList",
           "documentation":"<p> A list of the certificate ARNs. </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
+    },
+    "ListTagsForCertificateRequest":{
+      "type":"structure",
+      "required":["CertificateArn"],
+      "members":{
+        "CertificateArn":{
+          "shape":"Arn",
+          "documentation":"<p> String that contains the ARN of the ACM Certificate for which you want to list the tags. This must be of the form: </p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p> For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
+    "ListTagsForCertificateResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>The key-value pairs that define the applied tags.</p>"
+        }
+      },
+      "documentation":"<p/>"
     },
     "MaxItems":{
       "type":"integer",
@@ -423,6 +535,24 @@
       "max":320,
       "min":1,
       "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*"
+    },
+    "RemoveTagsFromCertificateRequest":{
+      "type":"structure",
+      "required":[
+        "CertificateArn",
+        "Tags"
+      ],
+      "members":{
+        "CertificateArn":{
+          "shape":"Arn",
+          "documentation":"<p> String that contains the ARN of the ACM Certificate with one or more tags that you want to remove. This must be of the form: </p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p> For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>The key-value pair that defines the tag to remove.</p>"
+        }
+      },
+      "documentation":"<p/>"
     },
     "RequestCertificateRequest":{
       "type":"structure",
@@ -442,9 +572,10 @@
         },
         "DomainValidationOptions":{
           "shape":"DomainValidationOptionList",
-          "documentation":"<p> The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>test.example.com</code> and specify <b>DomainValidationOptions</b> of <code>example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses: <ul> <li>admin@example.com</li> <li>administrator@example.com</li> <li>hostmaster@example.com</li> <li>postmaster@example.com</li> <li>webmaster@example.com</li> </ul> </p>"
+          "documentation":"<p> The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>test.example.com</code> and specify <b>DomainValidationOptions</b> of <code>example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses: <ul> <li><p>admin@example.com</p></li> <li><p>administrator@example.com</p></li> <li><p>hostmaster@example.com</p></li> <li><p>postmaster@example.com</p></li> <li><p>webmaster@example.com</p></li> </ul> </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "RequestCertificateResponse":{
       "type":"structure",
@@ -453,12 +584,16 @@
           "shape":"Arn",
           "documentation":"<p> String that contains the ARN of the issued certificate. This must be of the form: </p> <p> <code>arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "RequestInProgressException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"String"}
+        "message":{
+          "shape":"String",
+          "documentation":"<p/>"
+        }
       },
       "documentation":"<p> The certificate request is in process and the certificate in your account has not yet been issued. </p>",
       "exception":true
@@ -473,7 +608,7 @@
       "members":{
         "CertificateArn":{
           "shape":"Arn",
-          "documentation":"<p> String that contains the ARN of the requested certificate. The certificate ARN is generated and returned by <a>RequestCertificate</a> as soon as the request is made. By default, using this parameter causes email to be sent to all top-level domains you specified in the certificate request. </p> <p> The ARN must be of the form: </p> <p> <code>arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p>"
+          "documentation":"<p> String that contains the ARN of the requested certificate. The certificate ARN is generated and returned by the <a>RequestCertificate</a> action as soon as the request is made. By default, using this parameter causes email to be sent to all top-level domains you specified in the certificate request. </p> <p> The ARN must be of the form: </p> <p> <code>arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p>"
         },
         "Domain":{
           "shape":"DomainNameString",
@@ -481,14 +616,18 @@
         },
         "ValidationDomain":{
           "shape":"DomainNameString",
-          "documentation":"<p> The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>site.subdomain.example.com</code> and specify a <b>ValidationDomain</b> of <code>subdomain.example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses: <ul> <li>admin@subdomain.example.com</li> <li>administrator@subdomain.example.com</li> <li>hostmaster@subdomain.example.com</li> <li>postmaster@subdomain.example.com</li> <li>webmaster@subdomain.example.com</li> </ul> </p>"
+          "documentation":"<p> The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>site.subdomain.example.com</code> and specify a <b>ValidationDomain</b> of <code>subdomain.example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses: <ul> <li><p>admin@subdomain.example.com</p></li> <li><p>administrator@subdomain.example.com</p></li> <li><p>hostmaster@subdomain.example.com</p></li> <li><p>postmaster@subdomain.example.com</p></li> <li><p>webmaster@subdomain.example.com</p></li> </ul> </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "ResourceInUseException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"String"}
+        "message":{
+          "shape":"String",
+          "documentation":"<p/>"
+        }
       },
       "documentation":"<p> The certificate is in use by another AWS service in the caller's account. Remove the association and try again. </p>",
       "exception":true
@@ -496,7 +635,10 @@
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"String"}
+        "message":{
+          "shape":"String",
+          "documentation":"<p/>"
+        }
       },
       "documentation":"<p> The specified certificate cannot be found in the caller's account, or the caller's account cannot be found. </p>",
       "exception":true
@@ -518,6 +660,47 @@
     },
     "String":{"type":"string"},
     "TStamp":{"type":"timestamp"},
+    "Tag":{
+      "type":"structure",
+      "required":["Key"],
+      "members":{
+        "Key":{
+          "shape":"TagKey",
+          "documentation":"<p>The key of the tag.</p>"
+        },
+        "Value":{
+          "shape":"TagValue",
+          "documentation":"<p>The value of the tag.</p>"
+        }
+      },
+      "documentation":"<p>A key-value pair that identifies or specifies metadata about an ACM resource.</p>"
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*"
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "max":50,
+      "min":1
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*"
+    },
+    "TooManyTagsException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "documentation":"<p>The request contains too many tags. Try the request again with fewer tags.</p>",
+      "exception":true
+    },
     "ValidationEmailList":{
       "type":"list",
       "member":{"shape":"String"}
