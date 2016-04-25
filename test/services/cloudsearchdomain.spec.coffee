@@ -49,8 +49,16 @@ describe 'AWS.CloudSearchDomain', ->
       params = { query: 'foo' }
       req = build('search', params)
       expect(req.headers).not.to.have.property('Authorization')
-    
+
     it 'signs request if credentials are provided', ->
       params = { query: 'foo' }
       req = build('search', params)
       expect(req.headers).to.have.property('Authorization')
+
+    it 'converts the GET request to POST for search operation', ->
+      params = { query: 'food' }
+      req = build('search', params)
+      expect(req.method).to.equal('POST')
+      expect(req.path.indexOf('?')).to.equal(-1)
+      expect(typeof req.body).to.equal('string')
+      expect(req.headers['Content-Length']).to.equal(req.body.length)
