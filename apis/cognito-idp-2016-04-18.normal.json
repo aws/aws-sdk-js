@@ -406,40 +406,6 @@
       "documentation":"<p>Retrieves the password for the specified client ID or username.</p>",
       "authtype":"none"
     },
-    "GetJWKS":{
-      "name":"GetJWKS",
-      "http":{
-        "method":"GET",
-        "requestUri":"/{userPoolId}/.well-known/jwks.json",
-        "responseCode":200
-      },
-      "input":{"shape":"GetJWKSRequest"},
-      "output":{"shape":"GetJWKSResponse"},
-      "errors":[
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"TooManyRequestsException"},
-        {"shape":"InternalErrorException"}
-      ],
-      "documentation":"<p>Gets the JSON Web keys for the specified user pool.</p>",
-      "authtype":"none"
-    },
-    "GetOpenIdConfiguration":{
-      "name":"GetOpenIdConfiguration",
-      "http":{
-        "method":"GET",
-        "requestUri":"/{userPoolId}/.well-known/openid-configuration",
-        "responseCode":200
-      },
-      "input":{"shape":"GetOpenIdConfigurationRequest"},
-      "output":{"shape":"GetOpenIdConfigurationResponse"},
-      "errors":[
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"TooManyRequestsException"},
-        {"shape":"InternalErrorException"}
-      ],
-      "documentation":"<p>Gets the OpenId configuration information for the specified user pool.</p>",
-      "authtype":"none"
-    },
     "GetUser":{
       "name":"GetUser",
       "http":{
@@ -1461,72 +1427,6 @@
       "documentation":"<p>Respresents the response from the server regarding the request to reset a password.</p>"
     },
     "GenerateSecret":{"type":"boolean"},
-    "GetJWKSRequest":{
-      "type":"structure",
-      "required":["UserPoolId"],
-      "members":{
-        "UserPoolId":{
-          "shape":"UserPoolIdType",
-          "documentation":"<p>The user pool ID for the user pool where you want to get JSON Web keys.</p>",
-          "location":"uri",
-          "locationName":"userPoolId"
-        }
-      },
-      "documentation":"<p>Represents the request to get JSON Web keys.</p>"
-    },
-    "GetJWKSResponse":{
-      "type":"structure",
-      "members":{
-        "keys":{
-          "shape":"KeyListType",
-          "documentation":"<p>The keys in a get JSON Web keys response.</p>"
-        }
-      },
-      "documentation":"<p>Represents the response from the server to get JSON Web keys.</p>"
-    },
-    "GetOpenIdConfigurationRequest":{
-      "type":"structure",
-      "required":["UserPoolId"],
-      "members":{
-        "UserPoolId":{
-          "shape":"UserPoolIdType",
-          "documentation":"<p>The user pool ID for the user pool where you want to get Open ID configuration information.</p>",
-          "location":"uri",
-          "locationName":"userPoolId"
-        }
-      },
-      "documentation":"<p>Represents the request to get the Open ID configuration.</p>"
-    },
-    "GetOpenIdConfigurationResponse":{
-      "type":"structure",
-      "members":{
-        "issuer":{
-          "shape":"openIdUrlType",
-          "documentation":"<p>The issuer of the Open ID configuration response.</p>"
-        },
-        "jwks_uri":{
-          "shape":"openIdUrlType",
-          "documentation":"<p>The URI of the JSON Web keys in the server response to get Open ID configuration information.</p>"
-        },
-        "authorization_endpoint":{
-          "shape":"openIdUrlType",
-          "documentation":"<p>The authorization endpoint returned by the server response to get the Open ID configuration information.</p>"
-        },
-        "subject_types_supported":{
-          "shape":"openIdListType",
-          "documentation":"<p>The subject types supported returned by the server response to get the Open ID configuration information.</p>"
-        },
-        "response_types_supported":{
-          "shape":"openIdListType",
-          "documentation":"<p>The response types supported returned by the server response to get the Open ID configuration information.</p>"
-        },
-        "id_token_signing_alg_values_supported":{
-          "shape":"openIdListType",
-          "documentation":"<p>The token-signing algorithm values supported returned by the server response to get the Open ID configuration information.</p>"
-        }
-      },
-      "documentation":"<p>Represents the response from the server to get the Open ID configuration information.</p>"
-    },
     "GetUserAttributeVerificationCodeRequest":{
       "type":"structure",
       "required":["AttributeName"],
@@ -1629,40 +1529,6 @@
       },
       "documentation":"<p>This exception is thrown when the Amazon Cognito service encounters an invalid password.</p>",
       "exception":true
-    },
-    "KeyListType":{
-      "type":"list",
-      "member":{"shape":"KeyType"}
-    },
-    "KeyType":{
-      "type":"structure",
-      "members":{
-        "kty":{
-          "shape":"StringType",
-          "documentation":"<p>A \"kty\" key type parameter. For more information, see <a href=\"\">JSON Web Key (JWK) Format</a>.</p>"
-        },
-        "alg":{
-          "shape":"StringType",
-          "documentation":"<p>A \"kty\" (Key Type) parameter. For more information, see <a href=\"http://self-issued.info/docs/draft-ietf-jose-json-web-key.html#ktyDef\">\"kty\" (Key Type) Parameter</a>.</p>"
-        },
-        "use":{
-          "shape":"StringType",
-          "documentation":"<p>A \"use\" (Public Key Use) parameter. For more information, see <a href=\"http://self-issued.info/docs/draft-ietf-jose-json-web-key.html#useDef\">\"use\" (Public Key Use) Parameter</a>.</p>"
-        },
-        "kid":{
-          "shape":"StringType",
-          "documentation":"<p>A \"kid\" (Key ID) parameter. For more information, see <a href=\"http://self-issued.info/docs/draft-ietf-jose-json-web-key.html#kidDef\">\"kid\" (Key ID) Parameter</a>.</p>"
-        },
-        "n":{
-          "shape":"StringType",
-          "documentation":"<p>An \"n\" parameter.</p>"
-        },
-        "e":{
-          "shape":"StringType",
-          "documentation":"<p>An \"e\" parameter.</p>"
-        }
-      },
-      "documentation":"<p>A JSON Web Key key type in <a href=\"http://self-issued.info/docs/draft-ietf-jose-json-web-key.html#rfc.section.4\">JSON Web Key (JWK) Format</a>.</p>"
     },
     "LambdaConfigType":{
       "type":"structure",
@@ -2538,16 +2404,6 @@
       "members":{
       },
       "documentation":"<p>A container representing the response from the server from the request to verify user attributes.</p>"
-    },
-    "openIdListType":{
-      "type":"list",
-      "member":{"shape":"StringType"}
-    },
-    "openIdUrlType":{
-      "type":"string",
-      "max":150,
-      "min":1,
-      "pattern":"https://cognito-idp\\.amazonaws\\.com/[\\w\\._/-]"
     }
   },
   "documentation":"<p>You can create a user pool in Amazon Cognito Identity to manage directories and users. You can authenticate a user to obtain tokens related to user identity and access policies.</p> <p>This API reference provides information about user pools in Amazon Cognito Identity, which is a new capability that is available as a beta.</p>"
