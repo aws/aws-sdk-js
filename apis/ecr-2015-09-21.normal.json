@@ -199,7 +199,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"RepositoryNotFoundException"}
       ],
-      "documentation":"<p>Notify Amazon ECR that you intend to upload an image layer. </p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
+      "documentation":"<p>Notify Amazon ECR that you intend to upload an image layer.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
     "ListImages":{
       "name":"ListImages",
@@ -283,7 +283,7 @@
         },
         "proxyEndpoint":{
           "shape":"ProxyEndpoint",
-          "documentation":"<p>The registry URL to use for this authorization token in a <code>docker login</code> command. The Amazon ECR registry URL format is <code>https://aws_account_id.dkr.ecr.region.amazonaws.com</code>. For example, <code>https://012345678910.dkr.ecr.us-east-1.amazonaws.com</code>.</p>"
+          "documentation":"<p>The registry URL to use for this authorization token in a <code>docker login</code> command. The Amazon ECR registry URL format is <code>https://aws_account_id.dkr.ecr.region.amazonaws.com</code>. For example, <code>https://012345678910.dkr.ecr.us-east-1.amazonaws.com</code>.. </p>"
         }
       },
       "documentation":"<p>An object representing authorization data for an Amazon ECR registry.</p>"
@@ -537,7 +537,7 @@
         },
         "repositoryNames":{
           "shape":"RepositoryNameList",
-          "documentation":"<p>A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described. </p>"
+          "documentation":"<p>A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.</p>"
         },
         "nextToken":{
           "shape":"NextToken",
@@ -1050,6 +1050,10 @@
         "repositoryName":{
           "shape":"RepositoryName",
           "documentation":"<p>The name of the repository.</p>"
+        },
+        "repositoryUri":{
+          "shape":"Url",
+          "documentation":"<p>The URI for the repository. You can use this URI for Docker <code>push</code> and <code>pull</code> operations.</p>"
         }
       },
       "documentation":"<p>Object representing a repository.</p>"
