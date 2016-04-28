@@ -23,6 +23,8 @@ ecr = new AWS.ECR(AWS.util.merge(config, config.ecr))
 ecs = new AWS.ECS(AWS.util.merge(config, config.ecs))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 elb = new AWS.ELB(AWS.util.merge(config, config.elb))
+firehose = new AWS.Firehose(AWS.util.merge(config, config.firehose))
+gamelift = new AWS.GameLift(AWS.util.merge(config, config.gamelift))
 config.inspector = config.inspector || {}
 config.inspector.region = 'us-west-2'
 inspector = new AWS.Inspector(AWS.util.merge(config, config.inspector))
@@ -410,6 +412,32 @@ integrationTests ->
     it 'handles errors', (done) ->
       elb.describeTags {LoadBalancerNames: ['fake-name']}, (err, data) ->
         assertError(err, 'LoadBalancerNotFound')
+        noData(data)
+        done()
+
+  describe 'AWS.Firehose', ->
+    it 'makes a request', (done) ->
+      firehose.listDeliveryStreams {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.DeliveryStreamNames)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      firehose.describeDeliveryStream {DeliveryStreamName: 'fake-name'}, (err, data) ->
+        assertError(err, 'ResourceNotFoundException')
+        noData(data)
+        done()
+
+  describe 'AWS.GameLift', ->
+    it 'makes a request', (done) ->
+      gamelift.listBuilds {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Builds)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      gamelift.describeAlias {AliasId: 'fake-id'}, (err, data) ->
+        assertError(err, 'InvalidRequestException')
         noData(data)
         done()
 
