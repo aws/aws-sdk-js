@@ -133,7 +133,7 @@ Feature: Working with Objects in S3
     Then the streamed data should contain "STREAMING CONTENT"
     When I stream2 key "streaming_object"
     Then the streamed data should contain "STREAMING CONTENT"
-  
+
   @streams
   Scenario: Streaming empty objects
     Given I put an empty buffer to the key "empty_streaming_object"
@@ -164,12 +164,12 @@ Feature: Working with Objects in S3
   @progress
   Scenario: Progress events
     When I put a 2MB buffer to the key "progress_object" with progress events
-    Then more than 1 "httpUploadProgress" event should fire
+    Then more than 0 "httpUploadProgress" event should fire
     And the "total" value of the progress event should equal 2MB
     And the "loaded" value of the first progress event should be greater than 10 bytes
 
     When I read the key "progress_object" with progress events
-    Then more than 1 "httpDownloadProgress" event should fire
+    Then more than 0 "httpDownloadProgress" event should fire
     And the "total" value of the progress event should equal 2MB
     And the "loaded" value of the first progress event should be greater than 10 bytes
 
