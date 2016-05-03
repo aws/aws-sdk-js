@@ -117,6 +117,7 @@
       },
       "errors":[
         {"shape":"InsufficientPrivilegesException"},
+        {"shape":"TooManyBucketsException"},
         {"shape":"TooManyConfigurationTemplatesException"}
       ],
       "documentation":"<p>Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings.</p> <p>Related Topics</p> <ul> <li> <a>DescribeConfigurationOptions</a> </li> <li> <a>DescribeConfigurationSettings</a> </li> <li> <a>ListAvailableSolutionStacks</a> </li> </ul>"
@@ -240,6 +241,9 @@
         "shape":"ConfigurationOptionsDescription",
         "resultWrapper":"DescribeConfigurationOptionsResult"
       },
+      "errors":[
+        {"shape":"TooManyBucketsException"}
+      ],
       "documentation":"<p> Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed. </p>"
     },
     "DescribeConfigurationSettings":{
@@ -253,6 +257,9 @@
         "shape":"ConfigurationSettingsDescriptions",
         "resultWrapper":"DescribeConfigurationSettingsResult"
       },
+      "errors":[
+        {"shape":"TooManyBucketsException"}
+      ],
       "documentation":"<p> Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment. </p> <p> When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy. </p> <p>Related Topics</p> <ul> <li> <a>DeleteEnvironmentConfiguration</a> </li> </ul>"
     },
     "DescribeEnvironmentHealth":{
@@ -481,7 +488,8 @@
         "resultWrapper":"UpdateConfigurationTemplateResult"
       },
       "errors":[
-        {"shape":"InsufficientPrivilegesException"}
+        {"shape":"InsufficientPrivilegesException"},
+        {"shape":"TooManyBucketsException"}
       ],
       "documentation":"<p> Updates the specified configuration template to have the specified properties or configuration option values. </p> <note> If a property (for example, <code>ApplicationName</code>) is not provided, its value remains unchanged. To clear such properties, specify an empty string. </note> <p>Related Topics</p> <ul> <li> <a>DescribeConfigurationOptions</a> </li> </ul>"
     },
@@ -497,7 +505,8 @@
         "resultWrapper":"UpdateEnvironmentResult"
       },
       "errors":[
-        {"shape":"InsufficientPrivilegesException"}
+        {"shape":"InsufficientPrivilegesException"},
+        {"shape":"TooManyBucketsException"}
       ],
       "documentation":"<p> Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment. </p> <p> Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p> <p> When updating the configuration settings to a new template or individual settings, a draft configuration is created and <a>DescribeConfigurationSettings</a> for this environment returns two setting descriptions with different <code>DeploymentStatus</code> values. </p>"
     },
@@ -513,7 +522,8 @@
         "resultWrapper":"ValidateConfigurationSettingsResult"
       },
       "errors":[
-        {"shape":"InsufficientPrivilegesException"}
+        {"shape":"InsufficientPrivilegesException"},
+        {"shape":"TooManyBucketsException"}
       ],
       "documentation":"<p> Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid. </p> <p> This action returns a list of messages indicating any errors or warnings associated with the selection of option values. </p>"
     }
