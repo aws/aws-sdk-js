@@ -68,6 +68,7 @@ describe 'AWS.DynamoDB', ->
       request = dynamo.listTables()
       request.send (err, data) ->
         expect(err.code).to.eql('CRC32CheckFailed')
+        expect(data).to.eql(null)
 
     it 'retries request when response checksum does not match', ->
       helpers.mockHttpResponse 200, {'x-amz-crc32': '0'}, """{"TableNames":["mock-table"]}"""
