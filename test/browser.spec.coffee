@@ -16,6 +16,7 @@ codecommit = new AWS.CodeCommit(AWS.util.merge(config, config.codecommit))
 codepipeline = new AWS.CodePipeline(AWS.util.merge(config, config.codepipeline))
 cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
 devicefarm = new AWS.DeviceFarm(AWS.util.merge(config, config.devicefarm))
+directconnect = new AWS.DirectConnect(AWS.util.merge(config, config.directconnect))
 dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
 dynamodbstreams = new AWS.DynamoDBStreams(AWS.util.merge(config, config.dynamodbstreams))
 ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
@@ -313,6 +314,22 @@ integrationTests ->
       devicefarm.getDevice params, (err, data) ->
         assertError(err, 'NotFoundException')
         matchError(err, 'No device was found for arn arn:aws:devicefarm:us-west-2::device:00000000000000000000000000000000')
+        noData(data)
+        done()
+
+  describe 'AWS.DirectConnect', ->
+    it 'makes a request', (done) ->
+      directconnect.describeConnections (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.connections)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        connectionId: 'dxcon-fakeconn'
+      directconnect.confirmConnection params, (err, data) ->
+        assertError(err, 'DirectConnectClientException')
+        matchError(err, 'ConfirmConnection failed. dxcon-fakeconn doesn\'t exist.')
         noData(data)
         done()
 
