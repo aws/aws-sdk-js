@@ -94,6 +94,7 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Creates a new domain name.</p>"
@@ -355,6 +356,7 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Deletes a <a>Resource</a> resource.</p>"
@@ -899,6 +901,7 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
       ],
@@ -972,6 +975,7 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"LimitExceededException"},
+        {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
         {"shape":"TooManyRequestsException"}
       ],
@@ -1119,6 +1123,7 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Changes information about the <a>DomainName</a> resource.</p>"
@@ -1151,6 +1156,7 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
         {"shape":"BadRequestException"},
         {"shape":"TooManyRequestsException"}
       ],
@@ -1168,6 +1174,7 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Updates an existing <a>Method</a> resource.</p>"
@@ -1203,6 +1210,7 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Changes information about a model.</p>"
@@ -2931,7 +2939,11 @@
         },
         "requestTemplates":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>Specifies the integration's request templates.</p>"
+          "documentation":"<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.</p>"
+        },
+        "passthroughBehavior":{
+          "shape":"String",
+          "documentation":"<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available requestTemplates defined on the Integration. There are three valid values: <code>WHEN_NO_MATCH</code>, <code>WHEN_NO_TEMPLATES</code>, and <code>NEVER</code>.</p> <p/> <p><code>WHEN_NO_MATCH</code> passes the request body for unmapped content types through to the Integration backend without transformation.</p> <p><code>NEVER</code> rejects unmapped content types with an HTTP 415 'Unsupported Media Type' response.</p> <p><code>WHEN_NO_TEMPLATES</code> will allow pass-through when the Integration has NO content types mapped to templates. However if there is at least one content type defined, unmapped content types will be rejected with the same 415 response.</p>"
         },
         "cacheNamespace":{
           "shape":"String",
@@ -3332,7 +3344,11 @@
         },
         "requestTemplates":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>Specifies the templates used to transform the method request body. Request templates are represented as a key/value map, with a content-type as the key and a template as the value.</p>"
+          "documentation":"<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.</p>"
+        },
+        "passthroughBehavior":{
+          "shape":"String",
+          "documentation":"<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available requestTemplates defined on the Integration. There are three valid values: <code>WHEN_NO_MATCH</code>, <code>WHEN_NO_TEMPLATES</code>, and <code>NEVER</code>.</p> <p/> <p><code>WHEN_NO_MATCH</code> passes the request body for unmapped content types through to the Integration backend without transformation.</p> <p><code>NEVER</code> rejects unmapped content types with an HTTP 415 'Unsupported Media Type' response.</p> <p><code>WHEN_NO_TEMPLATES</code> will allow pass-through when the Integration has NO content types mapped to templates. However if there is at least one content type defined, unmapped content types will be rejected with the same 415 response.</p>"
         },
         "cacheNamespace":{
           "shape":"String",
