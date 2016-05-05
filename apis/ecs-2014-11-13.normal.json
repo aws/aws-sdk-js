@@ -40,7 +40,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ClusterNotFoundException"}
       ],
-      "documentation":"<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS spawns another instantiation of the task in the specified cluster. To update an existing service, see <a>UpdateService</a>.</p> <p>You can optionally specify a deployment configuration for your service. During a deployment (which is triggered by changing the task definition of a service with an <a>UpdateService</a> operation), the service scheduler uses the <code>minimumHealthyPercent</code> and <code>maximumPercent</code> parameters to determine the deployment strategy.</p> <p>If the <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore the <code>desiredCount</code> temporarily during a deployment. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>minimumHealthyPercent</code> of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance it is hosted on is reported as healthy by the load balancer. The default value for <code>minimumHealthyPercent</code> is 50% in the console and 100% for the AWS CLI, the AWS SDKs, and the APIs.</p> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>maximumPercent</code> value of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for <code>maximumPercent</code> is 200%.</p> <p>When the service scheduler launches new tasks, it attempts to balance them across the Availability Zones in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul>"
+      "documentation":"<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS spawns another instantiation of the task in the specified cluster. To update an existing service, see <a>UpdateService</a>.</p> <p>In addition to maintaining the desired count of tasks in your service, you can optionally run your service behind a load balancer. The load balancer distributes traffic across the tasks that are associated with the service.</p> <p>You can optionally specify a deployment configuration for your service. During a deployment (which is triggered by changing the task definition of a service with an <a>UpdateService</a> operation), the service scheduler uses the <code>minimumHealthyPercent</code> and <code>maximumPercent</code> parameters to determine the deployment strategy.</p> <p>If the <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore the <code>desiredCount</code> temporarily during a deployment. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>minimumHealthyPercent</code> of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance it is hosted on is reported as healthy by the load balancer. The default value for <code>minimumHealthyPercent</code> is 50% in the console and 100% for the AWS CLI, the AWS SDKs, and the APIs.</p> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>maximumPercent</code> value of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for <code>maximumPercent</code> is 200%.</p> <p>When the service scheduler launches new tasks, it attempts to balance them across the Availability Zones in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul>"
     },
     "DeleteCluster":{
       "name":"DeleteCluster",
@@ -91,7 +91,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ClusterNotFoundException"}
       ],
-      "documentation":"<p>Deregisters an Amazon ECS container instance from the specified cluster. This instance is no longer available to run tasks.</p> <p>If you intend to use the container instance for some other purpose after deregistration, you should stop all of the tasks running on the container instance before deregistration to avoid any orphaned tasks from consuming resources.</p> <p>Deregistering a container instance removes the instance from a cluster, but it does not terminate the EC2 instance; if you are finished using the instance, be sure to terminate it in the Amazon EC2 console to stop billing.</p> <note><p>When you terminate a container instance, it is automatically deregistered from your cluster.</p></note>"
+      "documentation":"<p>Deregisters an Amazon ECS container instance from the specified cluster. This instance is no longer available to run tasks.</p> <p>If you intend to use the container instance for some other purpose after deregistration, you should stop all of the tasks running on the container instance before deregistration to avoid any orphaned tasks from consuming resources.</p> <p>Deregistering a container instance removes the instance from a cluster, but it does not terminate the EC2 instance; if you are finished using the instance, be sure to terminate it in the Amazon EC2 console to stop billing.</p> <note> <p>If you terminate a running container instance with a connected Amazon ECS container agent, the agent automatically deregisters the instance from your cluster (stopped container instances or instances with disconnected agents are not automatically deregistered when terminated).</p> </note>"
     },
     "DeregisterTaskDefinition":{
       "name":"DeregisterTaskDefinition",
@@ -198,7 +198,7 @@
         {"shape":"ServerException"},
         {"shape":"ClientException"}
       ],
-      "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Returns an endpoint for the Amazon EC2 Container Service agent to poll for updates.</p>"
+      "documentation":"<note> <p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p> </note> <p>Returns an endpoint for the Amazon EC2 Container Service agent to poll for updates.</p>"
     },
     "ListClusters":{
       "name":"ListClusters",
@@ -306,7 +306,7 @@
         {"shape":"ServerException"},
         {"shape":"ClientException"}
       ],
-      "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Registers an EC2 instance into the specified cluster. This instance becomes available to place containers on.</p>"
+      "documentation":"<note> <p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p> </note> <p>Registers an EC2 instance into the specified cluster. This instance becomes available to place containers on.</p>"
     },
     "RegisterTaskDefinition":{
       "name":"RegisterTaskDefinition",
@@ -383,7 +383,7 @@
         {"shape":"ServerException"},
         {"shape":"ClientException"}
       ],
-      "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Sent to acknowledge that a container changed states.</p>"
+      "documentation":"<note> <p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p> </note> <p>Sent to acknowledge that a container changed states.</p>"
     },
     "SubmitTaskStateChange":{
       "name":"SubmitTaskStateChange",
@@ -397,7 +397,7 @@
         {"shape":"ServerException"},
         {"shape":"ClientException"}
       ],
-      "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Sent to acknowledge that a task changed states.</p>"
+      "documentation":"<note> <p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p> </note> <p>Sent to acknowledge that a task changed states.</p>"
     },
     "UpdateContainerAgent":{
       "name":"UpdateContainerAgent",
@@ -416,7 +416,7 @@
         {"shape":"NoUpdateAvailableException"},
         {"shape":"MissingVersionException"}
       ],
-      "documentation":"<p>Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.</p> <p><code>UpdateContainerAgent</code> requires the Amazon ECS-optimized AMI or Amazon Linux with the <code>ecs-init</code> service installed and running. For help updating the Amazon ECS container agent on other operating systems, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent\">Manually Updating the Amazon ECS Container Agent</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+      "documentation":"<p>Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.</p> <p> <code>UpdateContainerAgent</code> requires the Amazon ECS-optimized AMI or Amazon Linux with the <code>ecs-init</code> service installed and running. For help updating the Amazon ECS container agent on other operating systems, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent\">Manually Updating the Amazon ECS Container Agent</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
     },
     "UpdateService":{
       "name":"UpdateService",
@@ -490,7 +490,7 @@
       "members":{
         "clusterArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the cluster, the AWS account ID of the cluster owner, the <code>cluster</code> namespace, and then the cluster name. For example, arn:aws:ecs:<i>region</i>:<i>012345678910</i>:cluster/<i>test</i>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the cluster, the AWS account ID of the cluster owner, the <code>cluster</code> namespace, and then the cluster name. For example, <code>arn:aws:ecs:<i>region</i>:<i>012345678910</i>:cluster/<i>test</i> </code>..</p>"
         },
         "clusterName":{
           "shape":"String",
@@ -587,11 +587,11 @@
         },
         "image":{
           "shape":"String",
-          "documentation":"<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with <code><i>repository-url</i>/<i>image</i>:<i>tag</i></code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <ul> <li>Images in official repositories on Docker Hub use a single name (for example, <code>ubuntu</code> or <code>mongo</code>).</li> <li>Images in other repositories on Docker Hub are qualified with an organization name (for example, <code>amazon/amazon-ecs-agent</code>).</li> <li>Images in other online repositories are qualified further by a domain name (for example, <code>quay.io/assemblyline/ubuntu</code>).</li> </ul>"
+          "documentation":"<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with <code> <i>repository-url</i>/<i>image</i>:<i>tag</i> </code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <ul> <li><p>Images in official repositories on Docker Hub use a single name (for example, <code>ubuntu</code> or <code>mongo</code>).</p> </li> <li><p>Images in other repositories on Docker Hub are qualified with an organization name (for example, <code>amazon/amazon-ecs-agent</code>).</p> </li> <li><p>Images in other online repositories are qualified further by a domain name (for example, <code>quay.io/assemblyline/ubuntu</code>).</p> </li> </ul>"
         },
         "cpu":{
           "shape":"Integer",
-          "documentation":"<p>The number of <code>cpu</code> units reserved for the container. A container instance has 1,024 <code>cpu</code> units for every CPU core. This parameter specifies the minimum amount of CPU to reserve for a container, and containers share unallocated CPU units with other containers on the instance with the same ratio as their allocated amount. This parameter maps to <code>CpuShares</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <note> <p>You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instances</a> detail page by 1,024.</p> </note> <p>For example, if you run a single-container task on a single-core instance type with 512 CPU units specified for that container, and that is the only task running on the container instance, that container could use the full 1,024 CPU unit share at any given time. However, if you launched another copy of the same task on that container instance, each task would be guaranteed a minimum of 512 CPU units when needed, and each container could float to higher CPU usage if the other container was not using it, but if both tasks were 100% active all of the time, they would be limited to 512 CPU units.</p> <p>The Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. For more information, see <a href=\"https://docs.docker.com/reference/run/#cpu-share-constraint\">CPU share constraint</a> in the Docker documentation. The minimum valid CPU share value that the Linux kernel allows is 2; however, the CPU parameter is not required, and you can use CPU values below 2 in your container definitions. For CPU values below 2 (including null), the behavior varies based on your Amazon ECS container agent version:</p> <ul> <li><b>Agent versions less than or equal to 1.1.0:</b> Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to 2 CPU shares.</li> <li><b>Agent versions greater than or equal to 1.2.0:</b> Null, zero, and CPU values of 1 are passed to Docker as 2.</li></ul>"
+          "documentation":"<p>The number of <code>cpu</code> units reserved for the container. A container instance has 1,024 <code>cpu</code> units for every CPU core. This parameter specifies the minimum amount of CPU to reserve for a container, and containers share unallocated CPU units with other containers on the instance with the same ratio as their allocated amount. This parameter maps to <code>CpuShares</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <note> <p>You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instances</a> detail page by 1,024.</p> </note> <p>For example, if you run a single-container task on a single-core instance type with 512 CPU units specified for that container, and that is the only task running on the container instance, that container could use the full 1,024 CPU unit share at any given time. However, if you launched another copy of the same task on that container instance, each task would be guaranteed a minimum of 512 CPU units when needed, and each container could float to higher CPU usage if the other container was not using it, but if both tasks were 100% active all of the time, they would be limited to 512 CPU units.</p> <p>The Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. For more information, see <a href=\"https://docs.docker.com/reference/run/#cpu-share-constraint\">CPU share constraint</a> in the Docker documentation. The minimum valid CPU share value that the Linux kernel allows is 2; however, the CPU parameter is not required, and you can use CPU values below 2 in your container definitions. For CPU values below 2 (including null), the behavior varies based on your Amazon ECS container agent version:</p> <ul> <li><p> <b>Agent versions less than or equal to 1.1.0:</b> Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to 2 CPU shares.</p> </li> <li><p> <b>Agent versions greater than or equal to 1.2.0:</b> Null, zero, and CPU values of 1 are passed to Docker as 2.</p> </li> </ul>"
         },
         "memory":{
           "shape":"Integer",
@@ -599,7 +599,7 @@
         },
         "links":{
           "shape":"StringList",
-          "documentation":"<p>The <code>link</code> parameter allows containers to communicate with each other without the need for port mappings, using the <code>name</code> parameter and optionally, an <code>alias</code> for the link. This construct is analogous to <code>name:alias</code> in Docker links. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed for each <code>name</code> and <code>alias</code>. For more information on linking Docker containers, see <a href=\"https://docs.docker.com/userguide/dockerlinks/\">https://docs.docker.com/userguide/dockerlinks/</a>. This parameter maps to <code>Links</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--link</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\"><code>docker run</code></a>.</p> <important> <p>Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.</p> </important>"
+          "documentation":"<p>The <code>link</code> parameter allows containers to communicate with each other without the need for port mappings, using the <code>name</code> parameter and optionally, an <code>alias</code> for the link. This construct is analogous to <code>name:alias</code> in Docker links. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed for each <code>name</code> and <code>alias</code>. For more information on linking Docker containers, see <a href=\"https://docs.docker.com/userguide/dockerlinks/\">https://docs.docker.com/userguide/dockerlinks/</a>. This parameter maps to <code>Links</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--link</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\"> <code>docker run</code> </a>.</p> <important> <p>Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.</p> </important>"
         },
         "portMappings":{
           "shape":"PortMappingList",
@@ -607,7 +607,7 @@
         },
         "essential":{
           "shape":"BoxedBoolean",
-          "documentation":"<p>If the <code>essential</code> parameter of a container is marked as <code>true</code>, the failure of that container stops the task. If the <code>essential</code> parameter of a container is marked as <code>false</code>, then its failure does not affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential.</p> <note> <p>All tasks must have at least one essential container.</p> </note>"
+          "documentation":"<p>If the <code>essential</code> parameter of a container is marked as <code>true</code>, and that container fails or stops for any reason, all other containers that are part of the task are stopped. If the <code>essential</code> parameter of a container is marked as <code>false</code>, then its failure does not affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential.</p> <p>All tasks must have at least one essential container. If you have an application that is composed of multiple containers, you should group containers that are used for a common purpose into components, and separate the different components into multiple task definitions. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html\">Application Architecture</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
         },
         "entryPoint":{
           "shape":"StringList",
@@ -667,7 +667,7 @@
         },
         "dockerSecurityOptions":{
           "shape":"StringList",
-          "documentation":"<p>A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems. This parameter maps to <code>SecurityOpt</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--security-opt</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <note> <p>The Amazon ECS container agent running on a container instance must register with the <code>ECS_SELINUX_CAPABLE=true</code> or <code>ECS_APPARMOR_CAPABLE=true</code> environment variables before containers placed on that instance can use these security options. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>"
+          "documentation":"<p>A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems. This parameter maps to <code>SecurityOpt</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--security-opt</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>.</p> <note> <p>The Amazon ECS container agent running on a container instance must register with the <code>ECS_SELINUX_CAPABLE=true</code> or <code>ECS_APPARMOR_CAPABLE=true</code> environment variables before containers placed on that instance can use these security options. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>"
         },
         "dockerLabels":{
           "shape":"DockerLabelsMap",
@@ -675,11 +675,11 @@
         },
         "ulimits":{
           "shape":"UlimitList",
-          "documentation":"<p>A list of <code>ulimits</code> to set in the container. This parameter maps to <code>Ulimits</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. Valid naming values are displayed in the <a>Ulimit</a> data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code></p>"
+          "documentation":"<p>A list of <code>ulimits</code> to set in the container. This parameter maps to <code>Ulimits</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. Valid naming values are displayed in the <a>Ulimit</a> data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p>"
         },
         "logConfiguration":{
           "shape":"LogConfiguration",
-          "documentation":"<p>The log configuration specification for the container. This parameter maps to <code>LogConfig</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--log-driver</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. Valid log drivers are displayed in the <a>LogConfiguration</a> data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code></p> <note> <p>The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the <code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before containers placed on that instance can use these log configuration options. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>"
+          "documentation":"<p>The log configuration specification for the container. This parameter maps to <code>LogConfig</code> in the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/reference/api/docker_remote_api_v1.19/\">Docker Remote API</a> and the <code>--log-driver</code> option to <a href=\"https://docs.docker.com/reference/commandline/run/\">docker run</a>. By default, containers use the same logging driver that the Docker daemon uses; however the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see <a href=\"https://docs.docker.com/engine/admin/logging/overview/\">Configure logging drivers</a> in the Docker documentation.</p> <note> <p>Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon (shown in the <a>LogConfiguration</a> data type). Currently unsupported log drivers may be available in future releases of the Amazon ECS container agent.</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p> <note> <p>The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the <code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before containers placed on that instance can use these log configuration options. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>"
         }
       },
       "documentation":"<p>Container definitions are used in task definitions to describe the different containers that are launched as part of a task.</p>"
@@ -693,7 +693,7 @@
       "members":{
         "containerInstanceArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_ID</i>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, <code>arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_ID</i> </code>.</p>"
         },
         "ec2InstanceId":{
           "shape":"String",
@@ -808,7 +808,7 @@
         },
         "loadBalancers":{
           "shape":"LoadBalancers",
-          "documentation":"<p>A list of load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.</p>"
+          "documentation":"<p>A load balancer object representing the load balancer to use with your service.</p> <p>For Elastic Load Balancing standard load balancers, this object must contain the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance is registered with the load balancer specified here.</p> <p>For Elastic Load Balancing application load balancers, this object must contain the load balancer target group ARN, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance and port combination is registered as a target in the target group specified here.</p>"
         },
         "desiredCount":{
           "shape":"BoxedInteger",
@@ -824,7 +824,7 @@
         },
         "deploymentConfiguration":{
           "shape":"DeploymentConfiguration",
-          "documentation":"<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks. </p>"
+          "documentation":"<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.</p>"
         }
       }
     },
@@ -945,7 +945,7 @@
         },
         "containerInstance":{
           "shape":"String",
-          "documentation":"<p>The container instance ID or full Amazon Resource Name (ARN) of the container instance to deregister. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_ID</i>.</p>"
+          "documentation":"<p>The container instance ID or full Amazon Resource Name (ARN) of the container instance to deregister. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, <code>arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_ID</i> </code>.</p>"
         },
         "force":{
           "shape":"BoxedBoolean",
@@ -1113,7 +1113,7 @@
       "members":{
         "containerInstance":{
           "shape":"String",
-          "documentation":"<p>The container instance ID or full Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_ID</i>.</p>"
+          "documentation":"<p>The container instance ID or full Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, <code>arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_ID</i> </code>.</p>"
         },
         "cluster":{
           "shape":"String",
@@ -1448,11 +1448,11 @@
       "members":{
         "logDriver":{
           "shape":"LogDriver",
-          "documentation":"<p>The log driver to use for the container. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code></p>"
+          "documentation":"<p>The log driver to use for the container. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p>"
         },
         "options":{
           "shape":"LogConfigurationOptionsMap",
-          "documentation":"<p>The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code></p>"
+          "documentation":"<p>The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p>"
         }
       },
       "documentation":"<p>Log configuration options to send to a custom log driver for the container.</p>"
@@ -1469,7 +1469,8 @@
         "syslog",
         "journald",
         "gelf",
-        "fluentd"
+        "fluentd",
+        "awslogs"
       ]
     },
     "Long":{"type":"long"},
@@ -1540,11 +1541,11 @@
       "members":{
         "containerPort":{
           "shape":"Integer",
-          "documentation":"<p>The port number on the container that is bound to the user-specified or automatically assigned host port. If you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range (for more information, see <code>hostPort</code>).</p>"
+          "documentation":"<p>The port number on the container that is bound to the user-specified or automatically assigned host port. If you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range (for more information, see <code>hostPort</code>). Port mappings that are automatically assigned in this way do not count toward the 50 reserved ports limit of a container instance.</p>"
         },
         "hostPort":{
           "shape":"Integer",
-          "documentation":"<p>The port number on the container instance to reserve for your container. You can specify a non-reserved host port for your container port mapping, or you can omit the <code>hostPort</code> (or set it to <code>0</code>) while specifying a <code>containerPort</code> and your container automatically receives a port in the ephemeral port range for your container instance operating system and Docker version.</p> <p>The default ephemeral port range is 49153 to 65535, and this range is used for Docker versions prior to 1.6.0. For Docker version 1.6.0 and later, the Docker daemon tries to read the ephemeral port range from <code>/proc/sys/net/ipv4/ip_local_port_range</code>; if this kernel parameter is unavailable, the default ephemeral port range is used. You should not attempt to specify a host port in the ephemeral port range, because these are reserved for automatic assignment. In general, ports below 32768 are outside of the ephemeral port range.</p> <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS container agent port 51678. Any host port that was previously specified in a running task is also reserved while the task is running (after a task stops, the host port is released).The current reserved ports are displayed in the <code>remainingResources</code> of <a>DescribeContainerInstances</a> output, and a container instance may have up to 50 reserved ports at a time, including the default reserved ports (automatically assigned ports do not count toward this limit).</p>"
+          "documentation":"<p>The port number on the container instance to reserve for your container. You can specify a non-reserved host port for your container port mapping, or you can omit the <code>hostPort</code> (or set it to <code>0</code>) while specifying a <code>containerPort</code> and your container automatically receives a port in the ephemeral port range for your container instance operating system and Docker version.</p> <p>The default ephemeral port range is 49153 to 65535, and this range is used for Docker versions prior to 1.6.0. For Docker version 1.6.0 and later, the Docker daemon tries to read the ephemeral port range from <code>/proc/sys/net/ipv4/ip_local_port_range</code>; if this kernel parameter is unavailable, the default ephemeral port range is used. You should not attempt to specify a host port in the ephemeral port range, because these are reserved for automatic assignment. In general, ports below 32768 are outside of the ephemeral port range.</p> <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS container agent port 51678. Any host port that was previously specified in a running task is also reserved while the task is running (after a task stops, the host port is released).The current reserved ports are displayed in the <code>remainingResources</code> of <a>DescribeContainerInstances</a> output, and a container instance may have up to 50 reserved ports at a time, including the default reserved ports (automatically assigned ports do not count toward the 50 reserved ports limit).</p>"
         },
         "protocol":{
           "shape":"TransportProtocol",
@@ -1566,11 +1567,11 @@
         },
         "instanceIdentityDocument":{
           "shape":"String",
-          "documentation":"<p>The instance identity document for the EC2 instance to register. This document can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/document/</code></p>"
+          "documentation":"<p>The instance identity document for the EC2 instance to register. This document can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/document/</code> </p>"
         },
         "instanceIdentityDocumentSignature":{
           "shape":"String",
-          "documentation":"<p>The instance identity document signature for the EC2 instance to register. This signature can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/signature/</code></p>"
+          "documentation":"<p>The instance identity document signature for the EC2 instance to register. This signature can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/signature/</code> </p>"
         },
         "totalResources":{
           "shape":"Resources",
@@ -1717,7 +1718,7 @@
       "members":{
         "serviceArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) that identifies the service. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the service, the AWS account ID of the service owner, the <code>service</code> namespace, and then the service name. For example, arn:aws:ecs:<i>region</i>:<i>012345678910</i>:service/<i>my-service</i>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) that identifies the service. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the service, the AWS account ID of the service owner, the <code>service</code> namespace, and then the service name. For example, <code>arn:aws:ecs:<i>region</i>:<i>012345678910</i>:service/<i>my-service</i> </code>.</p>"
         },
         "serviceName":{
           "shape":"String",
@@ -1725,11 +1726,11 @@
         },
         "clusterArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the of the cluster that hosts the service.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the cluster that hosts the service.</p>"
         },
         "loadBalancers":{
           "shape":"LoadBalancers",
-          "documentation":"<p>A list of load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.</p>"
+          "documentation":"<p>A list of Elastic Load Balancing load balancer objects, containing the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer.</p>"
         },
         "status":{
           "shape":"String",
@@ -1761,12 +1762,13 @@
         },
         "roleArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role associated with the service that allows the Amazon ECS container agent to register container instances with a load balancer. </p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role associated with the service that allows the Amazon ECS container agent to register container instances with an Elastic Load Balancing load balancer.</p>"
         },
         "events":{
           "shape":"ServiceEvents",
           "documentation":"<p>The event stream for your service. A maximum of 100 of the latest events are displayed.</p>"
-        }
+        },
+        "createdAt":{"shape":"Timestamp"}
       },
       "documentation":"<p>Details on a service within a cluster</p>"
     },
@@ -1969,11 +1971,11 @@
         },
         "clusterArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the of the cluster that hosts the task.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the cluster that hosts the task.</p>"
         },
         "taskDefinitionArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the of the task definition that creates the task.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the task definition that creates the task.</p>"
         },
         "containerInstanceArn":{
           "shape":"String",
@@ -2023,11 +2025,11 @@
       "members":{
         "taskDefinitionArn":{
           "shape":"String",
-          "documentation":"<p>The full Amazon Resource Name (ARN) of the of the task definition.</p>"
+          "documentation":"<p>The full Amazon Resource Name (ARN) of the task definition.</p>"
         },
         "containerDefinitions":{
           "shape":"ContainerDefinitions",
-          "documentation":"<p>A list of container definitions in JSON format that describe the different containers that make up your task. For more information about container definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+          "documentation":"<p>A list of container definitions in JSON format that describe the different containers that make up your task. For more information about container definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonECS/latest/developerguidetask_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
         },
         "family":{
           "shape":"String",
@@ -2039,7 +2041,7 @@
         },
         "volumes":{
           "shape":"VolumeList",
-          "documentation":"<p>The list of volumes in a task. For more information about volume definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+          "documentation":"<p>The list of volumes in a task. For more information about volume definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonECS/latest/developerguidetask_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
         },
         "status":{
           "shape":"TaskDefinitionStatus",
@@ -2177,7 +2179,7 @@
         },
         "deploymentConfiguration":{
           "shape":"DeploymentConfiguration",
-          "documentation":"<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks. </p>"
+          "documentation":"<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.</p>"
         }
       }
     },
