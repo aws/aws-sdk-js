@@ -29,7 +29,8 @@
         {"shape":"UnsupportedOperationException"},
         {"shape":"OperationNotPermittedException"}
       ],
-      "documentation":"<p>Adds one or more tags to a trail, up to a limit of 10. Tags must be unique per trail. Overwrites an existing tag's value when a new value is specified for an existing tag key. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all regions only from the region in which the trail was created (that is, from its home region).</p>"
+      "documentation":"<p>Adds one or more tags to a trail, up to a limit of 10. Tags must be unique per trail. Overwrites an existing tag's value when a new value is specified for an existing tag key. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all regions only from the region in which the trail was created (that is, from its home region).</p>",
+      "idempotent":true
     },
     "CreateTrail":{
       "name":"CreateTrail",
@@ -61,7 +62,8 @@
         {"shape":"UnsupportedOperationException"},
         {"shape":"OperationNotPermittedException"}
       ],
-      "documentation":"<p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective of the region in which they were created.</p>"
+      "documentation":"<p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective of the region in which they were created.</p>",
+      "idempotent":true
     },
     "DeleteTrail":{
       "name":"DeleteTrail",
@@ -76,7 +78,8 @@
         {"shape":"InvalidTrailNameException"},
         {"shape":"InvalidHomeRegionException"}
       ],
-      "documentation":"<p>Deletes a trail. This operation must be called from the region in which the trail was created. <code>DeleteTrail</code> cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.</p>"
+      "documentation":"<p>Deletes a trail. This operation must be called from the region in which the trail was created. <code>DeleteTrail</code> cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.</p>",
+      "idempotent":true
     },
     "DescribeTrails":{
       "name":"DescribeTrails",
@@ -90,7 +93,8 @@
         {"shape":"UnsupportedOperationException"},
         {"shape":"OperationNotPermittedException"}
       ],
-      "documentation":"<p>Retrieves settings for the trail associated with the current region for your account.</p>"
+      "documentation":"<p>Retrieves settings for the trail associated with the current region for your account.</p>",
+      "idempotent":true
     },
     "GetTrailStatus":{
       "name":"GetTrailStatus",
@@ -104,7 +108,8 @@
         {"shape":"TrailNotFoundException"},
         {"shape":"InvalidTrailNameException"}
       ],
-      "documentation":"<p>Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.</p>"
+      "documentation":"<p>Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.</p>",
+      "idempotent":true
     },
     "ListPublicKeys":{
       "name":"ListPublicKeys",
@@ -120,7 +125,8 @@
         {"shape":"OperationNotPermittedException"},
         {"shape":"InvalidTokenException"}
       ],
-      "documentation":"<p>Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.</p> <note>CloudTrail uses different private/public key pairs per region. Each digest file is signed with a private key unique to its region. Therefore, when you validate a digest file from a particular region, you must look in the same region for its corresponding public key.</note>"
+      "documentation":"<p>Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.</p> <note> <p>CloudTrail uses different private/public key pairs per region. Each digest file is signed with a private key unique to its region. Therefore, when you validate a digest file from a particular region, you must look in the same region for its corresponding public key.</p> </note>",
+      "idempotent":true
     },
     "ListTags":{
       "name":"ListTags",
@@ -139,7 +145,8 @@
         {"shape":"OperationNotPermittedException"},
         {"shape":"InvalidTokenException"}
       ],
-      "documentation":"<p>Lists the tags for the specified trail or trails in the current region.</p> <p>Lists the tags for the trail in the current region.</p>"
+      "documentation":"<p>Lists the tags for the trail in the current region.</p>",
+      "idempotent":true
     },
     "LookupEvents":{
       "name":"LookupEvents",
@@ -155,7 +162,8 @@
         {"shape":"InvalidMaxResultsException"},
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p>Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports five different attributes: time range (defined by a start time and end time), user name, event name, resource type, and resource name. All attributes are optional. The maximum number of attributes that can be specified in any one lookup request are time range and one other attribute. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results. </p> <important>The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs. </important> <important>Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred.</important>"
+      "documentation":"<p>Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports five different attributes: time range (defined by a start time and end time), user name, event name, resource type, and resource name. All attributes are optional. The maximum number of attributes that can be specified in any one lookup request are time range and one other attribute. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.</p> <important> <p>The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs.</p> </important> <important> <p>Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred.</p> </important>",
+      "idempotent":true
     },
     "RemoveTags":{
       "name":"RemoveTags",
@@ -174,7 +182,8 @@
         {"shape":"UnsupportedOperationException"},
         {"shape":"OperationNotPermittedException"}
       ],
-      "documentation":"<p>Removes the specified tags from a trail.</p>"
+      "documentation":"<p>Removes the specified tags from a trail.</p>",
+      "idempotent":true
     },
     "StartLogging":{
       "name":"StartLogging",
@@ -189,7 +198,8 @@
         {"shape":"InvalidTrailNameException"},
         {"shape":"InvalidHomeRegionException"}
       ],
-      "documentation":"<p>Starts the recording of AWS API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.</p>"
+      "documentation":"<p>Starts the recording of AWS API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.</p>",
+      "idempotent":true
     },
     "StopLogging":{
       "name":"StopLogging",
@@ -204,7 +214,8 @@
         {"shape":"InvalidTrailNameException"},
         {"shape":"InvalidHomeRegionException"}
       ],
-      "documentation":"<p>Suspends the recording of AWS API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an <code>InvalidHomeRegionException</code> will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.</p>"
+      "documentation":"<p>Suspends the recording of AWS API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an <code>InvalidHomeRegionException</code> will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.</p>",
+      "idempotent":true
     },
     "UpdateTrail":{
       "name":"UpdateTrail",
@@ -236,7 +247,8 @@
         {"shape":"UnsupportedOperationException"},
         {"shape":"OperationNotPermittedException"}
       ],
-      "documentation":"<p>Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. <code>UpdateTrail</code> must be called from the region in which the trail was created; otherwise, an <code>InvalidHomeRegionException</code> is thrown.</p>"
+      "documentation":"<p>Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. <code>UpdateTrail</code> must be called from the region in which the trail was created; otherwise, an <code>InvalidHomeRegionException</code> is thrown.</p>",
+      "idempotent":true
     }
   },
   "shapes":{
@@ -246,7 +258,7 @@
       "members":{
         "ResourceId":{
           "shape":"String",
-          "documentation":"<p>Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+          "documentation":"<p>Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         },
         "TagsList":{
           "shape":"TagsList",
@@ -259,7 +271,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> Returns the objects or data listed below if successful. Otherwise, returns an error. </p>"
+      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
     },
     "Boolean":{"type":"boolean"},
     "ByteBuffer":{"type":"blob"},
@@ -267,7 +279,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>. </p>",
+      "documentation":"<p>This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>",
       "exception":true
     },
     "CloudWatchLogsDeliveryUnavailableException":{
@@ -286,7 +298,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the trail. The name must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>"
+          "documentation":"<p>Specifies the name of the trail. The name must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul>"
         },
         "S3BucketName":{
           "shape":"String",
@@ -302,7 +314,7 @@
         },
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files.</p>"
         },
         "IsMultiRegionTrail":{
           "shape":"Boolean",
@@ -310,7 +322,7 @@
         },
         "EnableLogFileValidation":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether log file integrity validation is enabled. The default is false.</p> <note>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</note>"
+          "documentation":"<p>Specifies whether log file integrity validation is enabled. The default is false.</p> <note> <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p> </note>"
         },
         "CloudWatchLogsLogGroupArn":{
           "shape":"String",
@@ -322,7 +334,7 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be a an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li>alias/MyAliasName</li> <li>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</li> <li>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</li> <li>12345678-1234-1234-1234-123456789012</li> </ul>"
+          "documentation":"<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be a an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li> <p>alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</p> </li> <li> <p>12345678-1234-1234-1234-123456789012</p> </li> </ul>"
         }
       },
       "documentation":"<p>Specifies the settings for each trail.</p>"
@@ -344,11 +356,16 @@
         },
         "SnsTopicName":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery.</p>"
+          "documentation":"<p>Specifies the name of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered.</p>",
+          "deprecated":true
+        },
+        "SnsTopicARN":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:</p> <p> <code>arn:aws:sns:us-east-1:123456789012:MyTopic</code> </p>"
         },
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files.</p>"
         },
         "IsMultiRegionTrail":{
           "shape":"Boolean",
@@ -356,7 +373,7 @@
         },
         "TrailARN":{
           "shape":"String",
-          "documentation":"<p>Specifies the ARN of the trail that was created.</p>"
+          "documentation":"<p>Specifies the ARN of the trail that was created. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         },
         "LogFileValidationEnabled":{
           "shape":"Boolean",
@@ -372,10 +389,10 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code>"
+          "documentation":"<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code> </p>"
         }
       },
-      "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
+      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
     },
     "Date":{"type":"timestamp"},
     "DeleteTrailRequest":{
@@ -384,10 +401,10 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail to be deleted. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail to be deleted. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         }
       },
-      "documentation":"<a>The request that specifies the name of a trail to delete.</a>"
+      "documentation":"<p>The request that specifies the name of a trail to delete.</p>"
     },
     "DeleteTrailResponse":{
       "type":"structure",
@@ -400,7 +417,7 @@
       "members":{
         "trailNameList":{
           "shape":"TrailNameList",
-          "documentation":"<p>Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>. If an empty list is specified, information for the trail in the current region is returned.</p> <ul> <li>If an empty list is specified and <code>IncludeShadowTrails</code> is false, then information for all trails in the current region is returned.</li> <li> If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned. </li> </ul> <note>If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN.</note>"
+          "documentation":"<p>Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p> <p>If an empty list is specified, information for the trail in the current region is returned.</p> <ul> <li> <p>If an empty list is specified and <code>IncludeShadowTrails</code> is false, then information for all trails in the current region is returned.</p> </li> <li> <p>If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.</p> </li> </ul> <note> <p>If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN.</p> </note>"
         },
         "includeShadowTrails":{
           "shape":"Boolean",
@@ -447,7 +464,7 @@
           "documentation":"<p>A JSON string that contains a representation of the event returned.</p>"
         }
       },
-      "documentation":"<p>Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event. </p>"
+      "documentation":"<p>Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event.</p>"
     },
     "EventsList":{
       "type":"list",
@@ -459,7 +476,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another region), you must specify its ARN. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another region), you must specify its ARN. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         }
       },
       "documentation":"<p>The name of a trail about which you want the current status.</p>"
@@ -473,7 +490,7 @@
         },
         "LatestDeliveryError":{
           "shape":"String",
-          "documentation":"<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver log files to the designated bucket. For more information see the topic <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error Responses</a> in the Amazon S3 API Reference. </p> <note>This error occurs only when there is a problem with the destination S3 bucket and will not occur for timeouts. To resolve the issue, create a new bucket and call <code>UpdateTrail</code> to specify the new bucket, or fix the existing objects so that CloudTrail can again write to the bucket. </note>"
+          "documentation":"<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver log files to the designated bucket. For more information see the topic <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error Responses</a> in the Amazon S3 API Reference. </p> <note> <p>This error occurs only when there is a problem with the destination S3 bucket and will not occur for timeouts. To resolve the issue, create a new bucket and call <code>UpdateTrail</code> to specify the new bucket, or fix the existing objects so that CloudTrail can again write to the bucket.</p> </note>"
         },
         "LatestNotificationError":{
           "shape":"String",
@@ -485,15 +502,15 @@
         },
         "LatestNotificationTime":{
           "shape":"Date",
-          "documentation":"<p>Specifies the date and time of the most recent Amazon SNS notification that CloudTrail has written a new log file to an account's Amazon S3 bucket. </p>"
+          "documentation":"<p>Specifies the date and time of the most recent Amazon SNS notification that CloudTrail has written a new log file to an account's Amazon S3 bucket.</p>"
         },
         "StartLoggingTime":{
           "shape":"Date",
-          "documentation":"<p>Specifies the most recent date and time when CloudTrail started recording API calls for an AWS account. </p>"
+          "documentation":"<p>Specifies the most recent date and time when CloudTrail started recording API calls for an AWS account.</p>"
         },
         "StopLoggingTime":{
           "shape":"Date",
-          "documentation":"<p>Specifies the most recent date and time when CloudTrail stopped recording API calls for an AWS account. </p>"
+          "documentation":"<p>Specifies the most recent date and time when CloudTrail stopped recording API calls for an AWS account.</p>"
         },
         "LatestCloudWatchLogsDeliveryError":{
           "shape":"String",
@@ -509,7 +526,7 @@
         },
         "LatestDigestDeliveryError":{
           "shape":"String",
-          "documentation":"<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver a digest file to the designated bucket. For more information see the topic <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error Responses</a> in the Amazon S3 API Reference. </p> <note>This error occurs only when there is a problem with the destination S3 bucket and will not occur for timeouts. To resolve the issue, create a new bucket and call <code>UpdateTrail</code> to specify the new bucket, or fix the existing objects so that CloudTrail can again write to the bucket. </note>"
+          "documentation":"<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver a digest file to the designated bucket. For more information see the topic <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error Responses</a> in the Amazon S3 API Reference. </p> <note> <p>This error occurs only when there is a problem with the destination S3 bucket and will not occur for timeouts. To resolve the issue, create a new bucket and call <code>UpdateTrail</code> to specify the new bucket, or fix the existing objects so that CloudTrail can again write to the bucket.</p> </note>"
         },
         "LatestDeliveryAttemptTime":{
           "shape":"String",
@@ -542,7 +559,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient.",
+      "documentation":"<p>This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient.</p>",
       "exception":true
     },
     "InsufficientS3BucketPolicyException":{
@@ -584,7 +601,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"This exception is thrown when the KMS key ARN is invalid.",
+      "documentation":"<p>This exception is thrown when the KMS key ARN is invalid.</p>",
       "exception":true
     },
     "InvalidLookupAttributesException":{
@@ -598,14 +615,14 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>This exception is thrown if the limit specified is invalid. </p>",
+      "documentation":"<p>This exception is thrown if the limit specified is invalid.</p>",
       "exception":true
     },
     "InvalidNextTokenException":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Invalid token or token that was previously used in a request with different parameters. This exception is thrown if the token is invalid. </p>",
+      "documentation":"<p>Invalid token or token that was previously used in a request with different parameters. This exception is thrown if the token is invalid.</p>",
       "exception":true
     },
     "InvalidParameterCombinationException":{
@@ -647,7 +664,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values. </p>",
+      "documentation":"<p>Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values.</p>",
       "exception":true
     },
     "InvalidTokenException":{
@@ -661,7 +678,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul>",
+      "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul>",
       "exception":true
     },
     "KmsKeyDisabledException":{
@@ -675,7 +692,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region.",
+      "documentation":"<p>This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region.</p>",
       "exception":true
     },
     "ListPublicKeysRequest":{
@@ -683,11 +700,11 @@
       "members":{
         "StartTime":{
           "shape":"Date",
-          "documentation":"<p>Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used, and the current public key is returned. </p>"
+          "documentation":"<p>Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used, and the current public key is returned.</p>"
         },
         "EndTime":{
           "shape":"Date",
-          "documentation":"<p>Optionally specifies, in UTC, the end of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used. </p>"
+          "documentation":"<p>Optionally specifies, in UTC, the end of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used.</p>"
         },
         "NextToken":{
           "shape":"String",
@@ -701,14 +718,14 @@
       "members":{
         "PublicKeyList":{
           "shape":"PublicKeyList",
-          "documentation":"<p>Contains an array of PublicKey objects.</p> <note>The returned public keys may have validity time ranges that overlap.</note>"
+          "documentation":"<p>Contains an array of PublicKey objects.</p> <note> <p>The returned public keys may have validity time ranges that overlap.</p> </note>"
         },
         "NextToken":{
           "shape":"String",
           "documentation":"<p>Reserved for future use.</p>"
         }
       },
-      "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
+      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
     },
     "ListTagsRequest":{
       "type":"structure",
@@ -716,7 +733,7 @@
       "members":{
         "ResourceIdList":{
           "shape":"ResourceIdList",
-          "documentation":"<p>Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+          "documentation":"<p>Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         },
         "NextToken":{
           "shape":"String",
@@ -731,10 +748,10 @@
         "ResourceTagList":{"shape":"ResourceTagList"},
         "NextToken":{
           "shape":"String",
-          "documentation":"<p> Reserved for future use. </p>"
+          "documentation":"<p>Reserved for future use.</p>"
         }
       },
-      "documentation":"<p> Returns the objects or data listed below if successful. Otherwise, returns an error. </p>"
+      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
     },
     "LookupAttribute":{
       "type":"structure",
@@ -860,11 +877,11 @@
       "members":{
         "ResourceId":{
           "shape":"String",
-          "documentation":"<p>Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+          "documentation":"<p>Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         },
         "TagsList":{
           "shape":"TagsList",
-          "documentation":"<p>Specifies a list of tags to be removed. </p>"
+          "documentation":"<p>Specifies a list of tags to be removed.</p>"
         }
       },
       "documentation":"<p>Specifies the tags to remove from a trail.</p>"
@@ -873,7 +890,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p> Returns the objects or data listed below if successful. Otherwise, returns an error. </p>"
+      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
     },
     "Resource":{
       "type":"structure",
@@ -941,7 +958,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         }
       },
       "documentation":"<p>The request to CloudTrail to start logging AWS API calls for an account.</p>"
@@ -958,7 +975,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging AWS API calls. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+          "documentation":"<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging AWS API calls. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         }
       },
       "documentation":"<p>Passes the request to CloudTrail to stop logging AWS API calls for the specified account.</p>"
@@ -1014,7 +1031,12 @@
         },
         "SnsTopicName":{
           "shape":"String",
-          "documentation":"<p>Name of the existing Amazon SNS topic that CloudTrail uses to notify the account owner when new CloudTrail log files have been delivered. The maximum length is 256 characters.</p>"
+          "documentation":"<p>Specifies the name of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered.</p>",
+          "deprecated":true
+        },
+        "SnsTopicARN":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:</p> <p> <code>arn:aws:sns:us-east-1:123456789012:MyTopic</code> </p>"
         },
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
@@ -1030,7 +1052,7 @@
         },
         "TrailARN":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name of the trail. The <code>TrailARN</code> format is <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+          "documentation":"<p>Specifies the ARN of the trail. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         },
         "LogFileValidationEnabled":{
           "shape":"Boolean",
@@ -1046,7 +1068,7 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code>"
+          "documentation":"<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code> </p>"
         }
       },
       "documentation":"<p>The settings for a trail.</p>"
@@ -1093,7 +1115,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the trail or trail ARN. If <code>Name</code> is a trail name, the string must meet the following requirements:</p> <ul> <li>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</li> <li>Start with a letter or number, and end with a letter or number</li> <li>Be between 3 and 128 characters</li> <li>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</li> <li>Not be in IP address format (for example, 192.168.5.4)</li> </ul> <p>If <code>Name</code> is a trail ARN, it must be in the format <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code>.</p>"
+          "documentation":"<p>Specifies the name of the trail or trail ARN. If <code>Name</code> is a trail name, the string must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul> <p>If <code>Name</code> is a trail ARN, it must be in the format:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         },
         "S3BucketName":{
           "shape":"String",
@@ -1109,7 +1131,7 @@
         },
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files.</p>"
         },
         "IsMultiRegionTrail":{
           "shape":"Boolean",
@@ -1117,7 +1139,7 @@
         },
         "EnableLogFileValidation":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether log file validation is enabled. The default is false.</p> <note>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</note>"
+          "documentation":"<p>Specifies whether log file validation is enabled. The default is false.</p> <note> <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p> </note>"
         },
         "CloudWatchLogsLogGroupArn":{
           "shape":"String",
@@ -1129,7 +1151,7 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be a an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li>alias/MyAliasName</li> <li>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</li> <li>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</li> <li>12345678-1234-1234-1234-123456789012</li> </ul>"
+          "documentation":"<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be a an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li> <p>alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</p> </li> <li> <p>12345678-1234-1234-1234-123456789012</p> </li> </ul>"
         }
       },
       "documentation":"<p>Specifies settings to update for the trail.</p>"
@@ -1151,11 +1173,16 @@
         },
         "SnsTopicName":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery.</p>"
+          "documentation":"<p>Specifies the name of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered.</p>",
+          "deprecated":true
+        },
+        "SnsTopicARN":{
+          "shape":"String",
+          "documentation":"<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:</p> <p> <code>arn:aws:sns:us-east-1:123456789012:MyTopic</code> </p>"
         },
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files.</p>"
         },
         "IsMultiRegionTrail":{
           "shape":"Boolean",
@@ -1163,7 +1190,7 @@
         },
         "TrailARN":{
           "shape":"String",
-          "documentation":"<p>Specifies the ARN of the trail that was updated.</p>"
+          "documentation":"<p>Specifies the ARN of the trail that was updated. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>"
         },
         "LogFileValidationEnabled":{
           "shape":"Boolean",
@@ -1179,11 +1206,11 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code>"
+          "documentation":"<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <p> <code>arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012</code> </p>"
         }
       },
-      "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
+      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
     }
   },
-  "documentation":"<fullname>AWS CloudTrail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <note> As an alternative to using the API, you can use one of the AWS SDKs, which consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to AWSCloudTrail. For example, the SDKs take care of cryptographically signing requests, managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services page</a>. </note> <p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>"
+  "documentation":"<fullname>AWS CloudTrail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <note> <p>As an alternative to the API, you can use one of the AWS SDKs, which consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to AWSCloudTrail. For example, the SDKs take care of cryptographically signing requests, managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services page</a>.</p> </note> <p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>"
 }
