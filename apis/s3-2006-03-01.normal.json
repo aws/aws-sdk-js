@@ -450,6 +450,19 @@
       "documentation":"Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.",
       "alias":"GetBucket"
     },
+    "ListObjectsV2":{
+      "name":"ListObjectsV2",
+      "http":{
+        "method":"GET",
+        "requestUri":"/{Bucket}?list-type=2"
+      },
+      "input":{"shape":"ListObjectsV2Request"},
+      "output":{"shape":"ListObjectsV2Output"},
+      "errors":[
+        {"shape":"NoSuchBucket"}
+      ],
+      "documentation":"Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development."
+    },
     "ListParts":{
       "name":"ListParts",
       "http":{
@@ -1331,7 +1344,7 @@
     "CopySourceRange":{"type":"string"},
     "CopySourceSSECustomerAlgorithm":{"type":"string"},
     "CopySourceSSECustomerKey":{
-      "type":"blob",
+      "type":"string",
       "sensitive":true
     },
     "CopySourceSSECustomerKeyMD5":{"type":"string"},
@@ -1933,6 +1946,7 @@
       "member":{"shape":"ExposeHeader"},
       "flattened":true
     },
+    "FetchOwner":{"type":"boolean"},
     "FilterRule":{
       "type":"structure",
       "members":{
@@ -2907,6 +2921,7 @@
     },
     "IsLatest":{"type":"boolean"},
     "IsTruncated":{"type":"boolean"},
+    "KeyCount":{"type":"integer"},
     "KeyMarker":{"type":"string"},
     "KeyPrefixEquals":{"type":"string"},
     "LambdaFunctionArn":{"type":"string"},
@@ -3250,6 +3265,113 @@
         }
       }
     },
+    "ListObjectsV2Output":{
+      "type":"structure",
+      "members":{
+        "IsTruncated":{
+          "shape":"IsTruncated",
+          "documentation":"A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria."
+        },
+        "Contents":{
+          "shape":"ObjectList",
+          "documentation":"Metadata about each object returned."
+        },
+        "Name":{
+          "shape":"BucketName",
+          "documentation":"Name of the bucket to list."
+        },
+        "Prefix":{
+          "shape":"Prefix",
+          "documentation":"Limits the response to keys that begin with the specified prefix."
+        },
+        "Delimiter":{
+          "shape":"Delimiter",
+          "documentation":"A delimiter is a character you use to group keys."
+        },
+        "MaxKeys":{
+          "shape":"MaxKeys",
+          "documentation":"Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more."
+        },
+        "CommonPrefixes":{
+          "shape":"CommonPrefixList",
+          "documentation":"CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by delimiter"
+        },
+        "EncodingType":{
+          "shape":"EncodingType",
+          "documentation":"Encoding type used by Amazon S3 to encode object keys in the response."
+        },
+        "KeyCount":{
+          "shape":"KeyCount",
+          "documentation":"KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys"
+        },
+        "ContinuationToken":{
+          "shape":"Token",
+          "documentation":"ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key"
+        },
+        "NextContinuationToken":{
+          "shape":"NextToken",
+          "documentation":"NextContinuationToken is sent when isTruncated is true which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key"
+        },
+        "StartAfter":{
+          "shape":"StartAfter",
+          "documentation":"StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket"
+        }
+      }
+    },
+    "ListObjectsV2Request":{
+      "type":"structure",
+      "required":["Bucket"],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "documentation":"Name of the bucket to list.",
+          "location":"uri",
+          "locationName":"Bucket"
+        },
+        "Delimiter":{
+          "shape":"Delimiter",
+          "documentation":"A delimiter is a character you use to group keys.",
+          "location":"querystring",
+          "locationName":"delimiter"
+        },
+        "EncodingType":{
+          "shape":"EncodingType",
+          "documentation":"Encoding type used by Amazon S3 to encode object keys in the response.",
+          "location":"querystring",
+          "locationName":"encoding-type"
+        },
+        "MaxKeys":{
+          "shape":"MaxKeys",
+          "documentation":"Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.",
+          "location":"querystring",
+          "locationName":"max-keys"
+        },
+        "Prefix":{
+          "shape":"Prefix",
+          "documentation":"Limits the response to keys that begin with the specified prefix.",
+          "location":"querystring",
+          "locationName":"prefix"
+        },
+        "ContinuationToken":{
+          "shape":"Token",
+          "documentation":"ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key",
+          "location":"querystring",
+          "locationName":"continuation-token"
+        },
+        "FetchOwner":{
+          "shape":"FetchOwner",
+          "documentation":"The owner field is not present in listV2 by default, if you want to return owner field with each key in the result then set the fetch owner field to true",
+          "location":"querystring",
+          "locationName":"fetch-owner"
+        },
+        "StartAfter":{
+          "shape":"StartAfter",
+          "documentation":"StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket",
+          "location":"querystring",
+          "locationName":"start-key"
+        }
+      }
+    },
     "ListPartsOutput":{
       "type":"structure",
       "members":{
@@ -3442,6 +3564,7 @@
     "NextKeyMarker":{"type":"string"},
     "NextMarker":{"type":"string"},
     "NextPartNumberMarker":{"type":"integer"},
+    "NextToken":{"type":"string"},
     "NextUploadIdMarker":{"type":"string"},
     "NextVersionIdMarker":{"type":"string"},
     "NoSuchBucket":{
@@ -4673,7 +4796,7 @@
     },
     "SSECustomerAlgorithm":{"type":"string"},
     "SSECustomerKey":{
-      "type":"blob",
+      "type":"string",
       "sensitive":true
     },
     "SSECustomerKeyMD5":{"type":"string"},
@@ -4689,6 +4812,7 @@
       ]
     },
     "Size":{"type":"integer"},
+    "StartAfter":{"type":"string"},
     "StorageClass":{
       "type":"string",
       "enum":[
@@ -4748,6 +4872,7 @@
       }
     },
     "TargetPrefix":{"type":"string"},
+    "Token":{"type":"string"},
     "TopicArn":{"type":"string"},
     "TopicConfiguration":{
       "type":"structure",
