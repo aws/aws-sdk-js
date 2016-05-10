@@ -18,6 +18,7 @@ The 41 services that come with the default hosted package of the SDK are:
 * [AWS.CloudTrail](/AWSJavaScriptSDK/latest/AWS/CloudTrail.html)
 * [AWS.CloudWatch](/AWSJavaScriptSDK/latest/AWS/CloudWatch.html)
 * [AWS.CloudWatchLogs](/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html)
+* [AWS.CloudWatchEvents](/AWSJavaScriptSDK/latest/AWS/CloudWatchEvents.html)
 * [AWS.CodeCommit](/AWSJavaScriptSDK/latest/AWS/CodeCommit.html)
 * [AWS.CodePipeline](/AWSJavaScriptSDK/latest/AWS/CodePipeline.html)
 * [AWS.CognitoIdentity](/AWSJavaScriptSDK/latest/AWS/CognitoIdentity.html)

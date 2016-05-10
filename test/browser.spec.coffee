@@ -10,6 +10,7 @@ cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront))
 cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail))
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
 cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs))
+cloudwatchevents = new AWS.CloudWatchEvents(AWS.util.merge(config, config.cloudwatchevents))
 cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
 configservice = new AWS.ConfigService(AWS.util.merge(config, config.configservice))
 codecommit = new AWS.CodeCommit(AWS.util.merge(config, config.codecommit))
@@ -204,6 +205,21 @@ integrationTests ->
       cloudwatch.setAlarmState params, (err, data) ->
         assertError(err, 'ValidationError')
         matchError(err, 'failed to satisfy constraint')
+        noData(data)
+        done()
+
+  describe 'AWS.CloudWatchEvents', ->
+    it 'makes a request', (done) ->
+      cloudwatchevents.listRules (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Rules)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params =
+        Name: 'fake-rule'
+      cloudwatchevents.describeRule params, (err, data) ->
+        assertError(err, 'ResourceNotFoundException')
         noData(data)
         done()
 

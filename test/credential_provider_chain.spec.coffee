@@ -7,12 +7,13 @@ if AWS.util.isNode()
       chain = null
       defaultProviders = AWS.CredentialProviderChain.defaultProviders
 
-      beforeEach ->
+      beforeEach (done) ->
         process.env = {}
         chain = new AWS.CredentialProviderChain [
           -> new AWS.EnvironmentCredentials('AWS'),
           -> new AWS.EnvironmentCredentials('AMAZON')
         ]
+        done()
 
       afterEach ->
         AWS.CredentialProviderChain.defaultProviders = defaultProviders

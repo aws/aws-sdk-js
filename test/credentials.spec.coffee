@@ -88,8 +88,9 @@ describe 'AWS.Credentials', ->
 
 if AWS.util.isNode()
   describe 'AWS.EnvironmentCredentials', ->
-    beforeEach ->
+    beforeEach (done) ->
       process.env = {}
+      done()
 
     afterEach ->
       process.env = {}

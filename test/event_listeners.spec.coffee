@@ -10,7 +10,7 @@ describe 'AWS.EventListeners', ->
   successHandler = null; errorHandler = null; completeHandler = null
   retryHandler = null; randomValues = []
 
-  beforeEach ->
+  beforeEach (done) ->
     # Mock the timer manually
     `setTimeout = helpers.createSpy('setTimeout');`
     setTimeout.andCallFake (callback, delay) ->
@@ -37,6 +37,7 @@ describe 'AWS.EventListeners', ->
     errorHandler = helpers.createSpy('error')
     completeHandler = helpers.createSpy('complete')
     retryHandler = helpers.createSpy('retry')
+    done()
 
   # Safely tear down setTimeout hack
   afterEach -> `setTimeout = oldSetTimeout; Math.random = oldMathRandom`

@@ -8,9 +8,10 @@ describe 'AWS.Service', ->
   retryableError = (error, result) ->
     expect(service.retryableError(error)).to.eql(result)
 
-  beforeEach ->
+  beforeEach (done) ->
     config = new AWS.Config()
     service = new AWS.Service(config)
+    done()
 
   describe 'apiVersions', ->
     it 'should set apiVersions property', ->
@@ -137,9 +138,10 @@ describe 'AWS.Service', ->
   describe 'setEndpoint', ->
     FooService = null
 
-    beforeEach ->
+    beforeEach (done) ->
       FooService = AWS.util.inherit AWS.Service, api:
         endpointPrefix: 'fooservice'
+      done()
 
     it 'uses specified endpoint if provided', ->
       service = new FooService()
@@ -257,13 +259,14 @@ describe 'AWS.Service', ->
     operations = null
     serviceConstructor = null
     
-    beforeEach ->
+    beforeEach (done) ->
       serviceConstructor = () ->
         AWS.Service.call(this, new AWS.Config())
       serviceConstructor.prototype = Object.create(AWS.Service.prototype)  
       serviceConstructor.prototype.api = {}
       operations = {'foo': {}, 'bar': {}}
-      serviceConstructor.prototype.api.operations = operations  
+      serviceConstructor.prototype.api.operations = operations
+      done()
     
     it 'should add operation methods', ->
       AWS.Service.defineMethods(serviceConstructor);

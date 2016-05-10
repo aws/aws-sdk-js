@@ -24,8 +24,9 @@ describe 'AWS.Config', ->
 
   describe 'region', ->
     oldEnv = process.env
-    beforeEach ->
+    beforeEach (done) ->
       process.env = {}
+      done()
     afterEach ->
       process.env = oldEnv
 
@@ -172,8 +173,9 @@ describe 'AWS.Config', ->
   describe 'getCredentials', ->
     spy = null
     config = null
-    beforeEach ->
+    beforeEach (done) ->
       spy = helpers.createSpy('getCredentials callback')
+      done()
 
     expectValid = (options, key) ->
       if options instanceof AWS.Config
