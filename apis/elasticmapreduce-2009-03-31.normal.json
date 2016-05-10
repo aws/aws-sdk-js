@@ -1272,6 +1272,10 @@
         "CLUSTER_TERMINATED"
       ]
     },
+    "InstanceStateList":{
+      "type":"list",
+      "member":{"shape":"InstanceState"}
+    },
     "InstanceStatus":{
       "type":"structure",
       "members":{
@@ -1721,6 +1725,10 @@
         "InstanceGroupTypes":{
           "shape":"InstanceGroupTypeList",
           "documentation":"<p>The type of instance group for which to list the instances.</p>"
+        },
+        "InstanceStates":{
+          "shape":"InstanceStateList",
+          "documentation":"<p>A list of instance states that will filter the instances returned with this request.</p>"
         },
         "Marker":{
           "shape":"Marker",
