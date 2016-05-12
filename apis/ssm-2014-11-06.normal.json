@@ -20,6 +20,7 @@
       "input":{"shape":"CancelCommandRequest"},
       "output":{"shape":"CancelCommandResult"},
       "errors":[
+        {"shape":"InternalServerError"},
         {"shape":"InvalidCommandId"},
         {"shape":"InvalidInstanceId"},
         {"shape":"DuplicateInstanceId"}
@@ -79,7 +80,7 @@
         {"shape":"InvalidDocumentContent"},
         {"shape":"DocumentLimitExceeded"}
       ],
-      "documentation":"<p>Creates an SSM document.</p> <p>After you create an SSM document, you can use <a>CreateAssociation</a> to associate it with one or more running instances.</p>"
+      "documentation":"<p>Creates an SSM document.</p> <p>After you create an SSM document, you can use CreateAssociation to associate it with one or more running instances.</p>"
     },
     "DeleteAssociation":{
       "name":"DeleteAssociation",
@@ -109,6 +110,7 @@
       "errors":[
         {"shape":"InternalServerError"},
         {"shape":"InvalidDocument"},
+        {"shape":"InvalidDocumentOperation"},
         {"shape":"AssociatedInstances"}
       ],
       "documentation":"<p>Deletes the SSM document and all instance associations to the document.</p> <p>Before you delete the SSM document, we recommend that you use DeleteAssociation to disassociate all instances that are associated with the document.</p>"
@@ -143,6 +145,21 @@
       ],
       "documentation":"<p>Describes the specified SSM document.</p>"
     },
+    "DescribeDocumentPermission":{
+      "name":"DescribeDocumentPermission",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeDocumentPermissionRequest"},
+      "output":{"shape":"DescribeDocumentPermissionResponse"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidDocument"},
+        {"shape":"InvalidPermissionType"}
+      ],
+      "documentation":"<p>Describes the permissions for an SSM document. If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user’s AWS account ID) or publicly (<i>All</i>). </p>"
+    },
     "DescribeInstanceInformation":{
       "name":"DescribeInstanceInformation",
       "http":{
@@ -158,7 +175,7 @@
         {"shape":"InvalidInstanceInformationFilterValue"},
         {"shape":"InvalidFilterKey"}
       ],
-      "documentation":"Describes one or more of your instances. You can use this to get information about instances like the operating system platform, the SSM agent version, status etc. If you specify one or more instance IDs, it returns information for those instances. If you do not specify instance IDs, it returns information for all your instances. If you specify an instance ID that is not valid or an instance that you do not own, you receive an error."
+      "documentation":"<p>Describes one or more of your instances. You can use this to get information about instances like the operating system platform, the SSM agent version, status etc. If you specify one or more instance IDs, it returns information for those instances. If you do not specify instance IDs, it returns information for all your instances. If you specify an instance ID that is not valid or an instance that you do not own, you receive an error. </p>"
     },
     "GetDocument":{
       "name":"GetDocument",
@@ -197,12 +214,13 @@
       "input":{"shape":"ListCommandInvocationsRequest"},
       "output":{"shape":"ListCommandInvocationsResult"},
       "errors":[
+        {"shape":"InternalServerError"},
         {"shape":"InvalidCommandId"},
         {"shape":"InvalidInstanceId"},
         {"shape":"InvalidFilterKey"},
         {"shape":"InvalidNextToken"}
       ],
-      "documentation":"An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user executes SendCommand against three instances, then a command invocation is created for each requested instance ID. ListCommandInvocations provide status about command execution."
+      "documentation":"<p>An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user executes SendCommand against three instances, then a command invocation is created for each requested instance ID. ListCommandInvocations provide status about command execution.</p>"
     },
     "ListCommands":{
       "name":"ListCommands",
@@ -213,6 +231,7 @@
       "input":{"shape":"ListCommandsRequest"},
       "output":{"shape":"ListCommandsResult"},
       "errors":[
+        {"shape":"InternalServerError"},
         {"shape":"InvalidCommandId"},
         {"shape":"InvalidInstanceId"},
         {"shape":"InvalidFilterKey"},
@@ -235,6 +254,23 @@
       ],
       "documentation":"<p>Describes one or more of your SSM documents.</p>"
     },
+    "ModifyDocumentPermission":{
+      "name":"ModifyDocumentPermission",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyDocumentPermissionRequest"},
+      "output":{"shape":"ModifyDocumentPermissionResponse"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidDocument"},
+        {"shape":"InvalidPermissionType"},
+        {"shape":"DocumentPermissionLimit"},
+        {"shape":"DocumentLimitExceeded"}
+      ],
+      "documentation":"<p>Share a document publicly or privately. If you share a document privately, you must specify the AWS user account IDs for those people who can use the document. If you share a document publicly, you must specify <i>All</i> as the account ID.</p>"
+    },
     "SendCommand":{
       "name":"SendCommand",
       "http":{
@@ -245,13 +281,15 @@
       "output":{"shape":"SendCommandResult"},
       "errors":[
         {"shape":"DuplicateInstanceId"},
+        {"shape":"InternalServerError"},
         {"shape":"InvalidInstanceId"},
         {"shape":"InvalidDocument"},
         {"shape":"InvalidOutputFolder"},
         {"shape":"InvalidParameters"},
-        {"shape":"UnsupportedPlatformType"}
+        {"shape":"UnsupportedPlatformType"},
+        {"shape":"MaxDocumentSizeExceeded"}
       ],
-      "documentation":"Executes commands on one or more remote instances."
+      "documentation":"<p>Executes commands on one or more remote instances.</p>"
     },
     "UpdateAssociationStatus":{
       "name":"UpdateAssociationStatus",
@@ -273,6 +311,18 @@
     }
   },
   "shapes":{
+    "AccountId":{
+      "type":"string",
+      "pattern":"(?i)all|[0-9]{12}"
+    },
+    "AccountIdList":{
+      "type":"list",
+      "member":{
+        "shape":"AccountId",
+        "locationName":"AccountId"
+      },
+      "max":20
+    },
     "AssociatedInstances":{
       "type":"structure",
       "members":{
@@ -322,7 +372,7 @@
         },
         "Parameters":{
           "shape":"Parameters",
-          "documentation":"A description of the parameters for a document."
+          "documentation":"<p>A description of the parameters for a document. </p>"
         }
       },
       "documentation":"<p>Describes the parameters for a document.</p>"
@@ -435,13 +485,14 @@
       "members":{
         "CommandId":{
           "shape":"CommandId",
-          "documentation":"The ID of the command you want to cancel."
+          "documentation":"<p>The ID of the command you want to cancel.</p>"
         },
         "InstanceIds":{
           "shape":"InstanceIdList",
           "documentation":"<p>(Optional) A list of instance IDs on which you want to cancel the command. If not provided, the command is canceled on every instance on which it was requested.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "CancelCommandResult":{
       "type":"structure",
@@ -454,46 +505,46 @@
       "members":{
         "CommandId":{
           "shape":"CommandId",
-          "documentation":"A unique identifier for this command."
+          "documentation":"<p>A unique identifier for this command.</p>"
         },
         "DocumentName":{
           "shape":"DocumentName",
-          "documentation":"The name of the SSM document requested for execution."
+          "documentation":"<p>The name of the SSM document requested for execution.</p>"
         },
         "Comment":{
           "shape":"Comment",
-          "documentation":"User-specified information about the command, such as a brief description of what the command should do."
+          "documentation":"<p>User-specified information about the command, such as a brief description of what the command should do.</p>"
         },
         "ExpiresAfter":{
           "shape":"DateTime",
-          "documentation":"If this time is reached and the command has not already started executing, it will not execute. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API."
+          "documentation":"<p>If this time is reached and the command has not already started executing, it will not execute. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API.</p>"
         },
         "Parameters":{
           "shape":"Parameters",
-          "documentation":"The parameter values to be inserted in the SSM document when executing the command."
+          "documentation":"<p>The parameter values to be inserted in the SSM document when executing the command.</p>"
         },
         "InstanceIds":{
           "shape":"InstanceIdList",
-          "documentation":"The instance IDs against which this command was requested."
+          "documentation":"<p>The instance IDs against which this command was requested.</p>"
         },
         "RequestedDateTime":{
           "shape":"DateTime",
-          "documentation":"The date and time the command was requested."
+          "documentation":"<p>The date and time the command was requested.</p>"
         },
         "Status":{
           "shape":"CommandStatus",
-          "documentation":"The status of the command."
+          "documentation":"<p>The status of the command.</p>"
         },
         "OutputS3BucketName":{
           "shape":"S3BucketName",
-          "documentation":"The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command."
+          "documentation":"<p>The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command.</p>"
         },
         "OutputS3KeyPrefix":{
           "shape":"S3KeyPrefix",
-          "documentation":"The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command."
+          "documentation":"<p>The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command.</p>"
         }
       },
-      "documentation":"Describes a command request."
+      "documentation":"<p>Describes a command request.</p>"
     },
     "CommandFilter":{
       "type":"structure",
@@ -504,14 +555,14 @@
       "members":{
         "key":{
           "shape":"CommandFilterKey",
-          "documentation":"The name of the filter. For example, requested date and time."
+          "documentation":"<p>The name of the filter. For example, requested date and time.</p>"
         },
         "value":{
           "shape":"CommandFilterValue",
-          "documentation":"The filter value. For example: June 30, 2015."
+          "documentation":"<p>The filter value. For example: June 30, 2015.</p>"
         }
       },
-      "documentation":"Describes a command filter."
+      "documentation":"<p>Describes a command filter.</p>"
     },
     "CommandFilterKey":{
       "type":"string",
@@ -541,35 +592,35 @@
       "members":{
         "CommandId":{
           "shape":"CommandId",
-          "documentation":"The command against which this invocation was requested."
+          "documentation":"<p>The command against which this invocation was requested.</p>"
         },
         "InstanceId":{
           "shape":"InstanceId",
-          "documentation":"The instance ID in which this invocation was requested."
+          "documentation":"<p>The instance ID in which this invocation was requested.</p>"
         },
         "Comment":{
           "shape":"Comment",
-          "documentation":"User-specified information about the command, such as a brief description of what the command should do."
+          "documentation":"<p>User-specified information about the command, such as a brief description of what the command should do.</p>"
         },
         "DocumentName":{
           "shape":"DocumentName",
-          "documentation":"The document name that was requested for execution."
+          "documentation":"<p>The document name that was requested for execution.</p>"
         },
         "RequestedDateTime":{
           "shape":"DateTime",
-          "documentation":"The time and date the request was sent to this instance."
+          "documentation":"<p>The time and date the request was sent to this instance.</p>"
         },
         "Status":{
           "shape":"CommandInvocationStatus",
-          "documentation":"Whether or not the invocation succeeded, failed, or is pending."
+          "documentation":"<p>Whether or not the invocation succeeded, failed, or is pending.</p>"
         },
         "TraceOutput":{
           "shape":"InvocationTraceOutput",
-          "documentation":"Gets the trace output sent by the agent."
+          "documentation":"<p> Gets the trace output sent by the agent. </p>"
         },
         "CommandPlugins":{"shape":"CommandPluginList"}
       },
-      "documentation":"An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user executes SendCommand against three instances, then a command invocation is created for each requested instance ID. A command invocation returns status and detail information about a command you executed."
+      "documentation":"<p>An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user executes SendCommand against three instances, then a command invocation is created for each requested instance ID. A command invocation returns status and detail information about a command you executed. </p>"
     },
     "CommandInvocationList":{
       "type":"list",
@@ -601,38 +652,38 @@
       "members":{
         "Name":{
           "shape":"CommandPluginName",
-          "documentation":"The name of the plugin. Must be one of the following: aws:updateAgent, aws:domainjoin, aws:applications, aws:runPowerShellScript, aws:psmodule, aws:cloudWatch, aws:runShellScript, or aws:updateSSMAgent."
+          "documentation":"<p>The name of the plugin. Must be one of the following: aws:updateAgent, aws:domainjoin, aws:applications, aws:runPowerShellScript, aws:psmodule, aws:cloudWatch, aws:runShellScript, or aws:updateSSMAgent. </p>"
         },
         "Status":{
           "shape":"CommandPluginStatus",
-          "documentation":"The status of this plugin. You can execute a document with multiple plugins."
+          "documentation":"<p>The status of this plugin. You can execute a document with multiple plugins.</p>"
         },
         "ResponseCode":{
           "shape":"ResponseCode",
-          "documentation":"A numeric response code generated after executing the plugin."
+          "documentation":"<p>A numeric response code generated after executing the plugin. </p>"
         },
         "ResponseStartDateTime":{
           "shape":"DateTime",
-          "documentation":"The time the plugin started executing."
+          "documentation":"<p>The time the plugin started executing. </p>"
         },
         "ResponseFinishDateTime":{
           "shape":"DateTime",
-          "documentation":"The time the plugin stopped executing. Could stop prematurely if, for example, a cancel command was sent."
+          "documentation":"<p>The time the plugin stopped executing. Could stop prematurely if, for example, a cancel command was sent. </p>"
         },
         "Output":{
           "shape":"CommandPluginOutput",
-          "documentation":"Output of the plugin execution."
+          "documentation":"<p>Output of the plugin execution.</p>"
         },
         "OutputS3BucketName":{
           "shape":"S3BucketName",
-          "documentation":"The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command."
+          "documentation":"<p>The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command.</p>"
         },
         "OutputS3KeyPrefix":{
           "shape":"S3KeyPrefix",
-          "documentation":"The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command."
+          "documentation":"<p>The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. </p>"
         }
       },
-      "documentation":"Describes plugin details."
+      "documentation":"<p>Describes plugin details.</p>"
     },
     "CommandPluginList":{
       "type":"list",
@@ -695,18 +746,18 @@
       "members":{
         "Name":{
           "shape":"DocumentName",
-          "documentation":"The name of the configuration document."
+          "documentation":"<p> The name of the configuration document. </p>"
         },
         "InstanceId":{
           "shape":"InstanceId",
-          "documentation":"The ID of the instance."
+          "documentation":"<p> The ID of the instance. </p>"
         },
         "Parameters":{
           "shape":"Parameters",
-          "documentation":"A description of the parameters for a document."
+          "documentation":"<p>A description of the parameters for a document. </p>"
         }
       },
-      "documentation":"Describes the association of an SSM document and an instance."
+      "documentation":"<p> Describes the association of an SSM document and an instance. </p>"
     },
     "CreateAssociationBatchResult":{
       "type":"structure",
@@ -734,11 +785,11 @@
         },
         "InstanceId":{
           "shape":"InstanceId",
-          "documentation":"<p>The Windows Server instance ID.</p>"
+          "documentation":"<p>The instance ID.</p>"
         },
         "Parameters":{
           "shape":"Parameters",
-          "documentation":"The parameters for the documents runtime configuration."
+          "documentation":"<p>The parameters for the documents runtime configuration. </p>"
         }
       }
     },
@@ -760,7 +811,7 @@
       "members":{
         "Content":{
           "shape":"DocumentContent",
-          "documentation":"<p>A valid JSON string. For more information about the contents of this string, see <a href=\"http://docs.aws.amazon.com/ssm/latest/APIReference/aws-ssm-document.html\">SSM Document</a>.</p>"
+          "documentation":"<p>A valid JSON string.</p>"
         },
         "Name":{
           "shape":"DocumentName",
@@ -828,7 +879,7 @@
         },
         "InstanceId":{
           "shape":"InstanceId",
-          "documentation":"<p>The Windows Server instance ID.</p>"
+          "documentation":"<p>The instance ID.</p>"
         }
       }
     },
@@ -841,12 +892,38 @@
         }
       }
     },
+    "DescribeDocumentPermissionRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "PermissionType"
+      ],
+      "members":{
+        "Name":{
+          "shape":"DocumentName",
+          "documentation":"<p>The name of the document for which you are the owner.</p>"
+        },
+        "PermissionType":{
+          "shape":"DocumentPermissionType",
+          "documentation":"<p>The permission type for the document. The permission type can be <i>Share</i>.</p>"
+        }
+      }
+    },
+    "DescribeDocumentPermissionResponse":{
+      "type":"structure",
+      "members":{
+        "AccountIds":{
+          "shape":"AccountIdList",
+          "documentation":"<p>The account IDs that have permission to use this document. The ID can be either an AWS account or <i>All</i>.</p>"
+        }
+      }
+    },
     "DescribeDocumentRequest":{
       "type":"structure",
       "required":["Name"],
       "members":{
         "Name":{
-          "shape":"DocumentName",
+          "shape":"DocumentARN",
           "documentation":"<p>The name of the SSM document.</p>"
         }
       }
@@ -865,16 +942,16 @@
       "members":{
         "InstanceInformationFilterList":{
           "shape":"InstanceInformationFilterList",
-          "documentation":"One or more filters. Use a filter to return a more specific list of instances."
+          "documentation":"<p>One or more filters. Use a filter to return a more specific list of instances.</p>"
         },
         "MaxResults":{
           "shape":"MaxResultsEC2Compatible",
-          "documentation":"The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results. </p>",
           "box":true
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"The token for the next set of items to return. (You received this token from a previous call.)"
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
         }
       }
     },
@@ -883,18 +960,23 @@
       "members":{
         "InstanceInformationList":{
           "shape":"InstanceInformationList",
-          "documentation":"The instance information list."
+          "documentation":"<p>The instance information list.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"The token to use when requesting the next set of items. If there are no additional items to return, the string is empty."
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty. </p>"
         }
       }
     },
     "DescriptionInDocument":{"type":"string"},
+    "DocumentARN":{
+      "type":"string",
+      "pattern":"^[a-zA-Z0-9_\\-.:/]{3,128}$"
+    },
     "DocumentAlreadyExists":{
       "type":"structure",
       "members":{
+        "Message":{"shape":"String"}
       },
       "documentation":"<p>The specified SSM document already exists.</p>",
       "exception":true
@@ -910,13 +992,25 @@
           "shape":"DocumentSha1",
           "documentation":"<p>The SHA1 hash of the document, which you can use for verification purposes.</p>"
         },
+        "Hash":{
+          "shape":"DocumentHash",
+          "documentation":"<p>The Sha256 or Sha1 hash created by the system when the document was created. </p> <note> <p>Sha1 hashes have been deprecated.</p> </note>"
+        },
+        "HashType":{
+          "shape":"DocumentHashType",
+          "documentation":"<p>Sha256 or Sha1.</p> <note> <p>Sha1 hashes have been deprecated.</p> </note>"
+        },
         "Name":{
-          "shape":"DocumentName",
+          "shape":"DocumentARN",
           "documentation":"<p>The name of the SSM document.</p>"
+        },
+        "Owner":{
+          "shape":"DocumentOwner",
+          "documentation":"<p>The AWS user account of the person who created the document.</p>"
         },
         "CreatedDate":{
           "shape":"DateTime",
-          "documentation":"The date when the SSM document was created."
+          "documentation":"<p> The date when the SSM document was created. </p>"
         },
         "Status":{
           "shape":"DocumentStatus",
@@ -924,7 +1018,7 @@
         },
         "Description":{
           "shape":"DescriptionInDocument",
-          "documentation":"A description of the document."
+          "documentation":"<p> A description of the document. </p>"
         },
         "Parameters":{
           "shape":"DocumentParameterList",
@@ -932,10 +1026,10 @@
         },
         "PlatformTypes":{
           "shape":"PlatformTypeList",
-          "documentation":"The list of OS platforms compatible with this SSM document."
+          "documentation":"<p>The list of OS platforms compatible with this SSM document. </p>"
         }
       },
-      "documentation":"Describes an SSM document."
+      "documentation":"<p> Describes an SSM document. </p>"
     },
     "DocumentFilter":{
       "type":"structure",
@@ -975,16 +1069,31 @@
       "type":"string",
       "min":1
     },
+    "DocumentHash":{
+      "type":"string",
+      "max":256
+    },
+    "DocumentHashType":{
+      "type":"string",
+      "enum":[
+        "Sha256",
+        "Sha1"
+      ]
+    },
     "DocumentIdentifier":{
       "type":"structure",
       "members":{
         "Name":{
-          "shape":"DocumentName",
+          "shape":"DocumentARN",
           "documentation":"<p>The name of the SSM document.</p>"
+        },
+        "Owner":{
+          "shape":"DocumentOwner",
+          "documentation":"<p>The AWS user account of the person who created the document.</p>"
         },
         "PlatformTypes":{
           "shape":"PlatformTypeList",
-          "documentation":"The operating system platform."
+          "documentation":"<p>The operating system platform. </p>"
         }
       },
       "documentation":"<p>Describes the name of an SSM document.</p>"
@@ -999,6 +1108,7 @@
     "DocumentLimitExceeded":{
       "type":"structure",
       "members":{
+        "Message":{"shape":"String"}
       },
       "documentation":"<p>You can have at most 100 active SSM documents.</p>",
       "exception":true
@@ -1007,6 +1117,7 @@
       "type":"string",
       "pattern":"^[a-zA-Z0-9_\\-.]{3,128}$"
     },
+    "DocumentOwner":{"type":"string"},
     "DocumentParameter":{
       "type":"structure",
       "members":{
@@ -1026,7 +1137,8 @@
           "shape":"DocumentParameterDefaultValue",
           "documentation":"<p>If specified, the default values for the parameters. Parameters without a default value are required. Parameters with a default value are optional.</p>"
         }
-      }
+      },
+      "documentation":"<p>Parameters specified in the SSM document that execute on the server when the command is run. </p>"
     },
     "DocumentParameterDefaultValue":{"type":"string"},
     "DocumentParameterDescrption":{"type":"string"},
@@ -1044,6 +1156,18 @@
         "String",
         "StringList"
       ]
+    },
+    "DocumentPermissionLimit":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The document cannot be shared with more AWS user accounts. You can share a document with a maximum of 20 accounts. You can publicly share up to five documents. If you need to increase this limit, contact AWS Support.</p>",
+      "exception":true
+    },
+    "DocumentPermissionType":{
+      "type":"string",
+      "enum":["Share"]
     },
     "DocumentSha1":{"type":"string"},
     "DocumentStatus":{
@@ -1099,7 +1223,7 @@
       "required":["Name"],
       "members":{
         "Name":{
-          "shape":"DocumentName",
+          "shape":"DocumentARN",
           "documentation":"<p>The name of the SSM document.</p>"
         }
       }
@@ -1108,7 +1232,7 @@
       "type":"structure",
       "members":{
         "Name":{
-          "shape":"DocumentName",
+          "shape":"DocumentARN",
           "documentation":"<p>The name of the SSM document.</p>"
         },
         "Content":{
@@ -1132,40 +1256,40 @@
       "members":{
         "InstanceId":{
           "shape":"InstanceId",
-          "documentation":"The instance ID."
+          "documentation":"<p>The instance ID. </p>"
         },
         "PingStatus":{
           "shape":"PingStatus",
-          "documentation":"Connection status of the SSM agent."
+          "documentation":"<p>Connection status of the SSM agent. </p>"
         },
         "LastPingDateTime":{
           "shape":"DateTime",
-          "documentation":"The date and time when agent last pinged SSM service.",
+          "documentation":"<p>The date and time when agent last pinged SSM service. </p>",
           "box":true
         },
         "AgentVersion":{
           "shape":"Version",
-          "documentation":"The version of the SSM agent running on your instance."
+          "documentation":"<p>The version of the SSM agent running on your instance. </p>"
         },
         "IsLatestVersion":{
           "shape":"Boolean",
-          "documentation":"Indicates whether latest version of the SSM agent is running on your instance.",
+          "documentation":"<p>Indicates whether latest version of the SSM agent is running on your instance. </p>",
           "box":true
         },
         "PlatformType":{
           "shape":"PlatformType",
-          "documentation":"The operating system platform type."
+          "documentation":"<p>The operating system platform type. </p>"
         },
         "PlatformName":{
           "shape":"String",
-          "documentation":"The name of the operating system platform running on your instance."
+          "documentation":"<p>The name of the operating system platform running on your instance. </p>"
         },
         "PlatformVersion":{
           "shape":"String",
-          "documentation":"The version of the OS platform running on your instance."
+          "documentation":"<p>The version of the OS platform running on your instance. </p>"
         }
       },
-      "documentation":"Describes a filter for a specific list of instances."
+      "documentation":"<p>Describes a filter for a specific list of instances. </p>"
     },
     "InstanceInformationFilter":{
       "type":"structure",
@@ -1176,14 +1300,14 @@
       "members":{
         "key":{
           "shape":"InstanceInformationFilterKey",
-          "documentation":"The name of the filter."
+          "documentation":"<p>The name of the filter. </p>"
         },
         "valueSet":{
           "shape":"InstanceInformationFilterValueSet",
-          "documentation":"The filter values."
+          "documentation":"<p>The filter values. </p>"
         }
       },
-      "documentation":"Describes a filter for a specific list of instances."
+      "documentation":"<p>Describes a filter for a specific list of instances. </p>"
     },
     "InstanceInformationFilterKey":{
       "type":"string",
@@ -1225,10 +1349,7 @@
     "InternalServerError":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"An error occurred on the server side."
-        }
+        "Message":{"shape":"String"}
       },
       "documentation":"<p>An error occurred on the server side.</p>",
       "exception":true
@@ -1242,7 +1363,7 @@
     "InvalidDocument":{
       "type":"structure",
       "members":{
-        "message":{
+        "Message":{
           "shape":"String",
           "documentation":"<p>The SSM document does not exist or the document is not available to the user. This exception can be issued by CreateAssociation, CreateAssociationBatch, DeleteAssociation, DeleteDocument, DescribeAssociation, DescribeDocument, GetDocument, SendCommand, or UpdateAssociationStatus. </p>"
         }
@@ -1253,7 +1374,7 @@
     "InvalidDocumentContent":{
       "type":"structure",
       "members":{
-        "message":{
+        "Message":{
           "shape":"String",
           "documentation":"<p>A description of the validation error.</p>"
         }
@@ -1261,16 +1382,25 @@
       "documentation":"<p>The content for the SSM document is not valid.</p>",
       "exception":true
     },
+    "InvalidDocumentOperation":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>You attempted to delete a document while it is still shared. You must stop sharing the document before you can delete it.</p>",
+      "exception":true
+    },
     "InvalidFilterKey":{
       "type":"structure",
       "members":{
       },
-      "documentation":"The specified key is not valid.",
+      "documentation":"<p>The specified key is not valid.</p>",
       "exception":true
     },
     "InvalidInstanceId":{
       "type":"structure",
       "members":{
+        "Message":{"shape":"String"}
       },
       "documentation":"<p>The instance is not in valid state. Valid states are: Running, Pending, Stopped, Stopping. Invalid states are: Shutting-down and Terminated. </p>",
       "exception":true
@@ -1280,7 +1410,7 @@
       "members":{
         "message":{"shape":"String"}
       },
-      "documentation":"The specified filter value is not valid.",
+      "documentation":"<p>The specified filter value is not valid.</p>",
       "exception":true
     },
     "InvalidNextToken":{
@@ -1294,18 +1424,23 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"The S3 bucket does not exist.",
+      "documentation":"<p>The S3 bucket does not exist.</p>",
       "exception":true
     },
     "InvalidParameters":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"<p>The parameter values entered by the user do not work in the SSM document. For example, incorrect type. This exception can be issued by CreateAssociation, CreateAssociationBatch, or SendCommand. </p>"
-        }
+        "Message":{"shape":"String"}
       },
-      "documentation":"You must specify values for all required parameters in the SSM document. You can only supply values to parameters defined in the SSM document.",
+      "documentation":"<p>You must specify values for all required parameters in the SSM document. You can only supply values to parameters defined in the SSM document.</p>",
+      "exception":true
+    },
+    "InvalidPermissionType":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The permission type is not supported. <i>Share</i> is the only supported permission type.</p>",
       "exception":true
     },
     "InvocationTraceOutput":{
@@ -1349,28 +1484,28 @@
       "members":{
         "CommandId":{
           "shape":"CommandId",
-          "documentation":"(Optional) The invocations for a specific command ID."
+          "documentation":"<p>(Optional) The invocations for a specific command ID.</p>"
         },
         "InstanceId":{
           "shape":"InstanceId",
-          "documentation":"(Optional) The command execution details for a specific instance ID."
+          "documentation":"<p>(Optional) The command execution details for a specific instance ID.</p>"
         },
         "MaxResults":{
           "shape":"CommandMaxResults",
-          "documentation":"(Optional) The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.",
+          "documentation":"<p>(Optional) The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
           "box":true
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"(Optional) The token for the next set of items to return. (You received this token from a previous call.)"
+          "documentation":"<p>(Optional) The token for the next set of items to return. (You received this token from a previous call.)</p>"
         },
         "Filters":{
           "shape":"CommandFilterList",
-          "documentation":"(Optional) One or more filters. Use a filter to return a more specific list of results."
+          "documentation":"<p>(Optional) One or more filters. Use a filter to return a more specific list of results.</p>"
         },
         "Details":{
           "shape":"Boolean",
-          "documentation":"(Optional) If set this returns the response of the command executions and any command output. By default this is set to False."
+          "documentation":"<p>(Optional) If set this returns the response of the command executions and any command output. By default this is set to False. </p>"
         }
       }
     },
@@ -1379,11 +1514,11 @@
       "members":{
         "CommandInvocations":{
           "shape":"CommandInvocationList",
-          "documentation":"(Optional) A list of all invocations."
+          "documentation":"<p>(Optional) A list of all invocations. </p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"(Optional) The token for the next set of items to return. (You received this token from a previous call.)"
+          "documentation":"<p>(Optional) The token for the next set of items to return. (You received this token from a previous call.)</p>"
         }
       }
     },
@@ -1392,24 +1527,24 @@
       "members":{
         "CommandId":{
           "shape":"CommandId",
-          "documentation":"(Optional) If provided, lists only the specified command."
+          "documentation":"<p>(Optional) If provided, lists only the specified command.</p>"
         },
         "InstanceId":{
           "shape":"InstanceId",
-          "documentation":"(Optional) Lists commands issued against this instance ID."
+          "documentation":"<p>(Optional) Lists commands issued against this instance ID.</p>"
         },
         "MaxResults":{
           "shape":"CommandMaxResults",
-          "documentation":"(Optional) The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.",
+          "documentation":"<p>(Optional) The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
           "box":true
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"(Optional) The token for the next set of items to return. (You received this token from a previous call.)"
+          "documentation":"<p>(Optional) The token for the next set of items to return. (You received this token from a previous call.)</p>"
         },
         "Filters":{
           "shape":"CommandFilterList",
-          "documentation":"(Optional) One or more filters. Use a filter to return a more specific list of results."
+          "documentation":"<p>(Optional) One or more filters. Use a filter to return a more specific list of results. </p>"
         }
       }
     },
@@ -1418,13 +1553,18 @@
       "members":{
         "Commands":{
           "shape":"CommandList",
-          "documentation":"(Optional) The list of commands requested by the user."
+          "documentation":"<p>(Optional) The list of commands requested by the user. </p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"(Optional) The token for the next set of items to return. (You received this token from a previous call.)"
+          "documentation":"<p>(Optional) The token for the next set of items to return. (You received this token from a previous call.)</p>"
         }
       }
+    },
+    "ListDocumentsMaxResults":{
+      "type":"integer",
+      "max":50,
+      "min":1
     },
     "ListDocumentsRequest":{
       "type":"structure",
@@ -1434,7 +1574,7 @@
           "documentation":"<p>One or more filters. Use a filter to return a more specific list of results.</p>"
         },
         "MaxResults":{
-          "shape":"MaxResults",
+          "shape":"ListDocumentsMaxResults",
           "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
           "box":true
         },
@@ -1460,6 +1600,7 @@
     "MaxDocumentSizeExceeded":{
       "type":"structure",
       "members":{
+        "Message":{"shape":"String"}
       },
       "documentation":"<p>The size limit of an SSM document is 64 KB.</p>",
       "exception":true
@@ -1473,6 +1614,36 @@
       "type":"integer",
       "max":50,
       "min":5
+    },
+    "ModifyDocumentPermissionRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "PermissionType"
+      ],
+      "members":{
+        "Name":{
+          "shape":"DocumentName",
+          "documentation":"<p>The name of the document that you want to share.</p>"
+        },
+        "PermissionType":{
+          "shape":"DocumentPermissionType",
+          "documentation":"<p>The permission type for the document. The permission type can be <i>Share</i>.</p>"
+        },
+        "AccountIdsToAdd":{
+          "shape":"AccountIdList",
+          "documentation":"<p>The AWS user accounts that should have access to the document. The account IDs can either be a group of account IDs or <i>All</i>.</p>"
+        },
+        "AccountIdsToRemove":{
+          "shape":"AccountIdList",
+          "documentation":"<p>The AWS user accounts that should no longer have access to the document. The AWS user account can either be a group of account IDs or <i>All</i>. This action has a higher priority than <i>AccountIdsToAdd</i>. If you specify an account ID to add and the same ID to remove, the system removes access to the document.</p>"
+        }
+      }
+    },
+    "ModifyDocumentPermissionResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "NextToken":{"type":"string"},
     "ParameterName":{"type":"string"},
@@ -1527,32 +1698,40 @@
       "members":{
         "InstanceIds":{
           "shape":"InstanceIdList",
-          "documentation":"Required. The instance IDs where the command should execute."
+          "documentation":"<p>Required. The instance IDs where the command should execute.</p>"
         },
         "DocumentName":{
-          "shape":"DocumentName",
-          "documentation":"Required. The name of the SSM document to execute. This can be an SSM public document or a custom document."
+          "shape":"DocumentARN",
+          "documentation":"<p>Required. The name of the SSM document to execute. This can be an SSM public document or a custom document.</p>"
+        },
+        "DocumentHash":{
+          "shape":"DocumentHash",
+          "documentation":"<p>The Sha256 or Sha1 hash created by the system when the document was created. </p> <note> <p>Sha1 hashes have been deprecated.</p> </note>"
+        },
+        "DocumentHashType":{
+          "shape":"DocumentHashType",
+          "documentation":"<p>Sha256 or Sha1.</p> <note> <p>Sha1 hashes have been deprecated.</p> </note>"
         },
         "TimeoutSeconds":{
           "shape":"TimeoutSeconds",
-          "documentation":"If this time is reached and the command has not already started executing, it will not execute.",
+          "documentation":"<p>If this time is reached and the command has not already started executing, it will not execute.</p>",
           "box":true
         },
         "Comment":{
           "shape":"Comment",
-          "documentation":"User-specified information about the command, such as a brief description of what the command should do."
+          "documentation":"<p>User-specified information about the command, such as a brief description of what the command should do.</p>"
         },
         "Parameters":{
           "shape":"Parameters",
-          "documentation":"The required and optional parameters specified in the SSM document being executed."
+          "documentation":"<p>The required and optional parameters specified in the SSM document being executed.</p>"
         },
         "OutputS3BucketName":{
           "shape":"S3BucketName",
-          "documentation":"The name of the S3 bucket where command execution responses should be stored."
+          "documentation":"<p>The name of the S3 bucket where command execution responses should be stored.</p>"
         },
         "OutputS3KeyPrefix":{
           "shape":"S3KeyPrefix",
-          "documentation":"The directory structure within the S3 bucket where the responses should be stored."
+          "documentation":"<p>The directory structure within the S3 bucket where the responses should be stored.</p>"
         }
       }
     },
@@ -1561,7 +1740,7 @@
       "members":{
         "Command":{
           "shape":"Command",
-          "documentation":"The request as it was received by SSM. Also provides the command ID which can be used future references to this request."
+          "documentation":"<p>The request as it was received by SSM. Also provides the command ID which can be used future references to this request.</p>"
         }
       }
     },
@@ -1596,9 +1775,9 @@
     "UnsupportedPlatformType":{
       "type":"structure",
       "members":{
-        "message":{"shape":"String"}
+        "Message":{"shape":"String"}
       },
-      "documentation":"The document does not support the platform type of the given instance ID(s).",
+      "documentation":"<p>The document does not support the platform type of the given instance ID(s). For example, you sent an SSM document for a Windows instance to a Linux instance.</p>",
       "exception":true
     },
     "UpdateAssociationStatusRequest":{
@@ -1637,5 +1816,5 @@
       "pattern":"^[0-9]{1,6}(\\.[0-9]{1,6}){2,3}$"
     }
   },
-  "documentation":"<p>Simple Systems Manager (SSM) enables you to remotely manage the configuration of your Amazon EC2 instance. Using SSM, you can run scripts or commands using either EC2 Run Command or SSM Config. (SSM Config is currently available only for Windows instances.) </p> <p/> <b>Run Command</b> <p>Run Command provides an on-demand experience for executing commands. You can use pre-defined Amazon SSM documents to perform the actions listed later in this section, or you can create your own documents. With these documents, you can remotely configure your instances by sending commands using the <b>Commands</b> page in the <a href=\"http://console.aws.amazon.com/ec2/\">Amazon EC2 console</a>, <a href=\"http://docs.aws.amazon.com/powershell/latest/reference/items/Amazon_Simple_Systems_Management_cmdlets.html\">AWS Tools for Windows PowerShell</a>, or the <a href=\"http://docs.aws.amazon.com/cli/latest/reference/ssm/index.html\">AWS CLI</a>.</p> <p>Run Command reports the status of the command execution for each instance targeted by a command. You can also audit the command execution to understand who executed commands, when, and what changes were made. By switching between different SSM documents, you can quickly configure your instances with different types of commands. To get started with Run Command, verify that your environment meets the prerequisites for remotely running commands on EC2 instances (<a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/remote-commands-prereq.html\">Linux</a> or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/remote-commands-prereq.html\">Windows</a>). </p> <p/> <b>SSM Config</b> <p>SSM Config is a lightweight instance configuration solution. SSM Config is currently only available for Windows instances. With SSM Config, you can specify a setup configuration for your instances. SSM Config is similar to EC2 User Data, which is another way of running one-time scripts or applying settings during instance launch. SSM Config is an extension of this capability. Using SSM documents, you can specify which actions the system should perform on your instances, including which applications to install, which AWS Directory Service directory to join, which Microsoft PowerShell modules to install, etc. If an instance is missing one or more of these configurations, the system makes those changes. By default, the system checks every five minutes to see if there is a new configuration to apply as defined in a new SSM document. If so, the system updates the instances accordingly. In this way, you can remotely maintain a consistent configuration baseline on your instances. SSM Config is available using the AWS CLI or the AWS Tools for Windows PowerShell. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-configuration-manage.html\">Managing Windows Instance Configuration</a>.</p> <p>SSM Config and Run Command include the following pre-defined documents.</p> <table> <title>Amazon Pre-defined SSM Documents</title> <tgroup cols=\"3\"> <colspec colname=\"col1\" colnum=\"1\" colwidth=\"1*\"/> <colspec colname=\"col2\" colnum=\"2\" colwidth=\"1*\"/> <colspec colname=\"col3\" colnum=\"3\" colwidth=\"1*\"/> <thead> <row> <entry>Name</entry> <entry>Description</entry> <entry>Platform</entry> </row> </thead> <tbody> <row> <entry> <p>AWS-RunShellScript</p> </entry> <entry> <p>Run shell scripts</p> </entry> <entry> <p>Linux</p> </entry> </row> <row> <entry> <p>AWS-UpdateSSMAgent</p> </entry> <entry> <p>Update the Amazon SSM agent</p> </entry> <entry> <p>Linux</p> </entry> </row> <row> <entry> <p>AWS-JoinDirectoryServiceDomain </p> </entry> <entry> <p>Join an AWS Directory </p> </entry> <entry> <p>Windows</p> </entry> </row> <row> <entry> <p>AWS-RunPowerShellScript</p> </entry> <entry> <p>Run PowerShell commands or scripts</p> </entry> <entry> <p>Windows</p> </entry> </row> <row> <entry> <p>AWS-UpdateEC2Config</p> </entry> <entry> <p>Update the EC2Config service </p> </entry> <entry> <p>Windows</p> </entry> </row> <row> <entry> <p>AWS-ConfigureWindowsUpdate</p> </entry> <entry> <p>Configure Windows Update settings</p> </entry> <entry> <p>Windows</p> </entry> </row> <row> <entry> <p>AWS-InstallApplication</p> </entry> <entry> <p>Install, repair, or uninstall software using an MSI package</p> </entry> <entry> <p>Windows</p> </entry> </row> <row> <entry> <p>AWS-InstallPowerShellModule</p> </entry> <entry> <p>Install PowerShell modules </p> </entry> <entry> <p>Windows</p> </entry> </row> <row> <entry> <p>AWS-ConfigureCloudWatch</p> </entry> <entry> <p>Configure Amazon CloudWatch Logs to monitor applications and systems</p> </entry> <entry> <p>Windows</p> </entry> </row> </tbody> </tgroup> </table> <important> <simpara>The commands or scripts specified in SSM documents run with administrative privilege on your instances because the Amazon SSM agent runs as root on Linux and the EC2Config service runs in the Local System account on Windows. If a user has permission to execute any of the pre-defined SSM documents (any document that begins with AWS-*) then that user also has administrator access to the instance. Delegate access to SSM and Run Command judiciously. This becomes extremely important if you create your own SSM documents. Amazon Web Services does not provide guidance about how to create secure SSM documents. You create SSM documents and delegate access to Run Command at your own risk. As a security best practice, we recommend that you assign access to \"AWS-*\" documents, especially the AWS-RunShellScript document on Linux and the AWS-RunPowerShellScript document on Windows, to trusted administrators only. You can create SSM documents for specific tasks and delegate access to non-administrators.</simpara> </important>"
+  "documentation":"<p>This is the Amazon Simple Systems Manager (SSM) API Reference. SSM enables you to remotely manage the configuration of your Amazon EC2 instance using scripts or commands with either an on-demand solution called <i>SSM Run Command</i> or a lightweight instance configuration solution called <i>SSM Config</i>. </p> <p>This references is intended to be used with the SSM User Guide for <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/execute-remote-commands.html\">Linux</a> or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/execute-remote-commands.html\">Windows</a>.</p> <p> <b>Run Command</b> </p> <p>Run Command provides an on-demand experience for executing commands. You can use pre-defined Amazon SSM documents to perform the actions listed later in this section, or you can create your own documents. With these documents, you can remotely configure your instances by sending commands using the <b>Commands</b> page in the <a href=\"http://console.aws.amazon.com/ec2/\">Amazon EC2 console</a>, <a href=\"http://docs.aws.amazon.com/powershell/latest/reference/items/Amazon_Simple_Systems_Management_cmdlets.html\">AWS Tools for Windows PowerShell</a>, the <a href=\"http://docs.aws.amazon.com/cli/latest/reference/ssm/index.html\">AWS CLI</a>, or AWS SDKs.</p> <p>Run Command reports the status of the command execution for each instance targeted by a command. You can also audit the command execution to understand who executed commands, when, and what changes were made. By switching between different SSM documents, you can quickly configure your instances with different types of commands. To get started with Run Command, verify that your environment meets the prerequisites for remotely running commands on EC2 instances (<a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/remote-commands-prereq.html\">Linux</a> or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/remote-commands-prereq.html\">Windows</a>). </p> <p/> <p> <b>SSM Config</b> </p> <p>SSM Config is a lightweight instance configuration solution. SSM Config is currently only available for Windows instances. With SSM Config, you can specify a setup configuration for your instances. SSM Config is similar to EC2 User Data, which is another way of running one-time scripts or applying settings during instance launch. SSM Config is an extension of this capability. Using SSM documents, you can specify which actions the system should perform on your instances, including which applications to install, which AWS Directory Service directory to join, which Microsoft PowerShell modules to install, etc. If an instance is missing one or more of these configurations, the system makes those changes. By default, the system checks every five minutes to see if there is a new configuration to apply as defined in a new SSM document. If so, the system updates the instances accordingly. In this way, you can remotely maintain a consistent configuration baseline on your instances. SSM Config is available using the AWS CLI or the AWS Tools for Windows PowerShell. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-configuration-manage.html\">Managing Windows Instance Configuration</a>.</p> <p>SSM Config and SSM Run Command include the following pre-defined documents.</p> <p> <b>Linux</b> </p> <ul> <li> <p> <b>AWS-RunShellScript</b> to run shell scripts</p> </li> <li> <p> <b>AWS-UpdateSSMAgent</b> to update the Amazon SSM agent</p> </li> </ul> <p/> <p> <b>Windows</b> </p> <ul> <li> <p> <b>AWS-JoinDirectoryServiceDomain</b> to join an AWS Directory</p> </li> <li> <p> <b>AWS-RunPowerShellScript</b> to run PowerShell commands or scripts</p> </li> <li> <p> <b>AWS-UpdateEC2Config</b> to update the EC2Config service</p> </li> <li> <p> <b>AWS-ConfigureWindowsUpdate</b> to configure Windows Update settings</p> </li> <li> <p> <b>AWS-InstallApplication</b> to install, repair, or uninstall software using an MSI package</p> </li> <li> <p> <b>AWS-InstallPowerShellModule</b> to install PowerShell modules </p> </li> <li> <p> <b>AWS-ConfigureCloudWatch</b> to configure Amazon CloudWatch Logs to monitor applications and systems</p> </li> <li> <p> <b>AWS-ListWindowsInventory</b> to collect information about an EC2 instance running in Windows.</p> </li> <li> <p> <b>AWS-FindWindowsUpdates</b> to scan an instance and determines which updates are missing.</p> </li> <li> <p> <b>AWS-InstallMissingWindowsUpdates</b> to install missing updates on your EC2 instance.</p> </li> <li> <p> <b>AWS-InstallSpecificWindowsUpdates</b> to install one or more specific updates.</p> </li> </ul> <important> <p>The commands or scripts specified in SSM documents run with administrative privilege on your instances because the Amazon SSM agent runs as root on Linux and the EC2Config service runs in the Local System account on Windows. If a user has permission to execute any of the pre-defined SSM documents (any document that begins with AWS-*) then that user also has administrator access to the instance. Delegate access to SSM and Run Command judiciously. This becomes extremely important if you create your own SSM documents. Amazon Web Services does not provide guidance about how to create secure SSM documents. You create SSM documents and delegate access to Run Command at your own risk. As a security best practice, we recommend that you assign access to \"AWS-*\" documents, especially the AWS-RunShellScript document on Linux and the AWS-RunPowerShellScript document on Windows, to trusted administrators only. You can create SSM documents for specific tasks and delegate access to non-administrators.</p> </important> <p>For information about creating and sharing SSM documents, see the following topics in the SSM User Guide: </p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-ssm-doc.html\">Creating SSM Documents</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssm-sharing.html\">Sharing SSM Documents</a> (Linux)</p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/create-ssm-doc.html\">Creating SSM Documents</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ssm-sharing.html\">Sharing SSM Documents</a> (Windows)</p> </li> </ul>"
 }
