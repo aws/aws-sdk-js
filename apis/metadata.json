@@ -78,6 +78,9 @@
     "prefix": "ds",
     "name": "DirectoryService"
   },
+  "discovery": {
+    "name": "Discovery"
+  },
   "dms": {
     "name": "DMS"
   },
