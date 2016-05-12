@@ -4,13 +4,13 @@
 
 ## Supported Services
 
-By default, the SDK ships with support for 41 AWS services. Each service object
+By default, the SDK ships with support for 43 AWS services. Each service object
 in the SDK currently provides low-level access to every API call in the
 respective AWS service. The full list of methods and their parameters are
 documented in the complete API reference documentation (linked from each
 service name in the list below).
 
-The 41 services that come with the default hosted package of the SDK are:
+The 43 services that come with the default hosted package of the SDK are:
 
 * [AWS.ACM](/AWSJavaScriptSDK/latest/AWS/ACM.html)
 * [AWS.APIGateway](/AWSJavaScriptSDK/latest/AWS/APIGateway.html)
@@ -48,6 +48,7 @@ The 41 services that come with the default hosted package of the SDK are:
 * [AWS.Route53](/AWSJavaScriptSDK/latest/AWS/Route53.html)
 * [AWS.Route53Domains](/AWSJavaScriptSDK/latest/AWS/Route53Domains.html)
 * [AWS.S3](/AWSJavaScriptSDK/latest/AWS/S3.html)
+* [AWS.SES](/AWSJavaScriptSDK/latest/AWS/SES.html)
 * [AWS.SNS](/AWSJavaScriptSDK/latest/AWS/SNS.html)
 * [AWS.SQS](/AWSJavaScriptSDK/latest/AWS/SQS.html)
 * [AWS.SSM](/AWSJavaScriptSDK/latest/AWS/SSM.html)

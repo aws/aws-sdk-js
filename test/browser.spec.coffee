@@ -40,6 +40,7 @@ rds = new AWS.RDS(AWS.util.merge(config, config.rds))
 route53 = new AWS.Route53(AWS.util.merge(config, config.route53))
 route53domains = new AWS.Route53Domains(AWS.util.merge(config, config.route53domains))
 s3 = new AWS.S3(AWS.util.merge(config, config.s3))
+ses = new AWS.SES(AWS.util.merge(config, config.ses))
 sns = new AWS.SNS(AWS.util.merge(config, config.sns))
 sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 ssm = new AWS.SSM(AWS.util.merge(config, config.ssm))
@@ -703,6 +704,21 @@ integrationTests ->
             expect(progress[0].total).to.equal(body.size)
             expect(progress[0].loaded > 10).to.equal(true)
             s3.deleteObject(Key: key).send(done)
+
+  describe 'AWS.SES', ->
+    it 'makes a request', (done) ->
+      ses.listIdentities {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Identities)).to.equal(true)
+        done()
+    it 'handles errors', (done) ->
+      params =
+        RuleSetName: 'fake-name'
+        RuleName: 'fake-name'
+      ses.describeReceiptRule params, (err, data) ->
+        assertError(err, 'RuleSetDoesNotExist')
+        noData(data)
+        done()
 
   describe 'AWS.SNS', ->
     it 'creates and deletes topics', (done) ->
