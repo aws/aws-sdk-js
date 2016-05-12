@@ -1108,6 +1108,16 @@
       "output":{"shape":"DescribeScheduledInstancesResult"},
       "documentation":"<p>Describes one or more of your Scheduled Instances.</p>"
     },
+    "DescribeSecurityGroupReferences":{
+      "name":"DescribeSecurityGroupReferences",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeSecurityGroupReferencesRequest"},
+      "output":{"shape":"DescribeSecurityGroupReferencesResult"},
+      "documentation":"<p>[EC2-VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request. </p>"
+    },
     "DescribeSecurityGroups":{
       "name":"DescribeSecurityGroups",
       "http":{
@@ -1197,6 +1207,16 @@
       "input":{"shape":"DescribeSpotPriceHistoryRequest"},
       "output":{"shape":"DescribeSpotPriceHistoryResult"},
       "documentation":"<p>Describes the Spot price history. The prices returned are listed in chronological order, from the oldest to the most recent, for up to the past 90 days. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html\">Spot Instance Pricing History</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.</p>"
+    },
+    "DescribeStaleSecurityGroups":{
+      "name":"DescribeStaleSecurityGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeStaleSecurityGroupsRequest"},
+      "output":{"shape":"DescribeStaleSecurityGroupsResult"},
+      "documentation":"<p>[EC2-VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted. </p>"
     },
     "DescribeSubnets":{
       "name":"DescribeSubnets",
@@ -1843,7 +1863,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"ResetInstanceAttributeRequest"},
-      "documentation":"<p>Resets an attribute of an instance to its default value. To reset the <code>kernel</code> or <code>ramdisk</code>, the instance must be in a stopped state. To reset the <code>SourceDestCheck</code>, the instance can be either running or stopped.</p> <p>The <code>SourceDestCheck</code> attribute controls whether source/destination checking is enabled. The default value is <code>true</code>, which means checking is enabled. This value must be <code>false</code> for a NAT instance to perform NAT. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html\">NAT Instances</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation":"<p>Resets an attribute of an instance to its default value. To reset the <code>kernel</code> or <code>ramdisk</code>, the instance must be in a stopped state. To reset the <code>sourceDestCheck</code>, the instance can be either running or stopped.</p> <p>The <code>sourceDestCheck</code> attribute controls whether source/destination checking is enabled. The default value is <code>true</code>, which means checking is enabled. This value must be <code>false</code> for a NAT instance to perform NAT. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html\">NAT Instances</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "ResetNetworkInterfaceAttribute":{
       "name":"ResetNetworkInterfaceAttribute",
@@ -1929,7 +1949,7 @@
       },
       "input":{"shape":"StopInstancesRequest"},
       "output":{"shape":"StopInstancesResult"},
-      "documentation":"<p>Stops an Amazon EBS-backed instance. </p> <p>We don't charge hourly usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. Each time you transition an instance from stopped to started, Amazon EC2 charges a full instance hour, even if transitions happen multiple times within a single hour.</p> <p>You can't start or stop Spot instances, and you can't stop instance store-backed instances.</p> <p>When you stop an instance, we shut it down. You can restart your instance at any time. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Stopping an instance is different to rebooting or terminating it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, and terminating instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html\">Troubleshooting Stopping Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Stops an Amazon EBS-backed instance. </p> <p>We don't charge hourly usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. Each time you transition an instance from stopped to started, Amazon EC2 charges a full instance hour, even if transitions happen multiple times within a single hour.</p> <p>You can't start or stop Spot instances, and you can't stop instance store-backed instances.</p> <p>When you stop an instance, we shut it down. You can restart your instance at any time. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Stopping an instance is different to rebooting or terminating it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, and terminating instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html\">Troubleshooting Stopping Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "TerminateInstances":{
       "name":"TerminateInstances",
@@ -3648,7 +3668,7 @@
       "members":{
         "ResourceIds":{
           "shape":"ValueStringList",
-          "documentation":"<p>One or more subnet, network interface, or VPC IDs.</p>",
+          "documentation":"<p>One or more subnet, network interface, or VPC IDs.</p> <p>Constraints: Maximum of 1000 resources</p>",
           "locationName":"ResourceId"
         },
         "ResourceType":{
@@ -5789,7 +5809,7 @@
         },
         "MaxResults":{
           "shape":"Integer",
-          "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.</p>",
+          "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter or tag filters in the same call.</p>",
           "locationName":"maxResults"
         }
       },
@@ -6516,6 +6536,30 @@
       },
       "documentation":"<p>Contains the output of DescribeScheduledInstances.</p>"
     },
+    "DescribeSecurityGroupReferencesRequest":{
+      "type":"structure",
+      "required":["GroupId"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.</p>"
+        },
+        "GroupId":{
+          "shape":"GroupIds",
+          "documentation":"<p>One or more security group IDs in your account.</p>"
+        }
+      }
+    },
+    "DescribeSecurityGroupReferencesResult":{
+      "type":"structure",
+      "members":{
+        "SecurityGroupReferenceSet":{
+          "shape":"SecurityGroupReferences",
+          "documentation":"<p>Information about the VPCs with the referencing security groups.</p>",
+          "locationName":"securityGroupReferenceSet"
+        }
+      }
+    },
     "DescribeSecurityGroupsRequest":{
       "type":"structure",
       "members":{
@@ -6944,6 +6988,43 @@
         }
       },
       "documentation":"<p>Contains the output of DescribeSpotPriceHistory.</p>"
+    },
+    "DescribeStaleSecurityGroupsRequest":{
+      "type":"structure",
+      "required":["VpcId"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.</p>"
+        },
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a prior call.)</p>"
+        }
+      }
+    },
+    "DescribeStaleSecurityGroupsResult":{
+      "type":"structure",
+      "members":{
+        "StaleSecurityGroupSet":{
+          "shape":"StaleSecurityGroupSet",
+          "documentation":"<p>Information about the stale security groups.</p>",
+          "locationName":"staleSecurityGroupSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>",
+          "locationName":"nextToken"
+        }
+      }
     },
     "DescribeSubnetsRequest":{
       "type":"structure",
@@ -8419,6 +8500,13 @@
       "type":"list",
       "member":{
         "shape":"GroupIdentifier",
+        "locationName":"item"
+      }
+    },
+    "GroupIds":{
+      "type":"list",
+      "member":{
+        "shape":"String",
         "locationName":"item"
       }
     },
@@ -10516,6 +10604,13 @@
         "locationName":"item"
       }
     },
+    "IpRanges":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
+    },
     "KeyNameStringList":{
       "type":"list",
       "member":{
@@ -11367,7 +11462,7 @@
         },
         "State":{
           "shape":"NatGatewayState",
-          "documentation":"<p>The state of the NAT gateway.</p>",
+          "documentation":"<p>The state of the NAT gateway.</p> <ul> <li> <p><code>pending</code>: The NAT gateway is being created and is not ready to process traffic.</p> </li> <li> <p><code>failed</code>: The NAT gateway could not be created. Check the <code>failureCode</code> and <code>failureMessage</code> fields for the reason.</p> </li> <li> <p><code>available</code>: The NAT gateway is able to process traffic. This status remains until you delete the NAT gateway, and does not indicate the health of the NAT gateway.</p> </li> <li> <p><code>deleting</code>: The NAT gateway is in the process of being terminated and may still be processing traffic.</p> </li> <li> <p><code>deleted</code>: The NAT gateway has been terminated and is no longer processing traffic.</p> </li> </ul>",
           "locationName":"state"
         },
         "FailureCode":{
@@ -12047,6 +12142,13 @@
       "type":"list",
       "member":{
         "shape":"PrefixListId",
+        "locationName":"item"
+      }
+    },
+    "PrefixListIdSet":{
+      "type":"list",
+      "member":{
+        "shape":"String",
         "locationName":"item"
       }
     },
@@ -13515,7 +13617,7 @@
         },
         "Attribute":{
           "shape":"InstanceAttributeName",
-          "documentation":"<p>The attribute to reset.</p>",
+          "documentation":"<p>The attribute to reset.</p> <important><p>You can only reset the following attributes: <code>kernel</code> | <code>ramdisk</code> | <code>sourceDestCheck</code>. To change an instance attribute, use <a>ModifyInstanceAttribute</a>.</p></important>",
           "locationName":"attribute"
         }
       },
@@ -14625,6 +14727,38 @@
         "locationName":"item"
       }
     },
+    "SecurityGroupReference":{
+      "type":"structure",
+      "required":[
+        "GroupId",
+        "ReferencingVpcId"
+      ],
+      "members":{
+        "GroupId":{
+          "shape":"String",
+          "documentation":"<p>The ID of your security group.</p>",
+          "locationName":"groupId"
+        },
+        "ReferencingVpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC with the referencing security group.</p>",
+          "locationName":"referencingVpcId"
+        },
+        "VpcPeeringConnectionId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC peering connection.</p>",
+          "locationName":"vpcPeeringConnectionId"
+        }
+      },
+      "documentation":"<p>Describes a VPC with a security group that references your security group.</p>"
+    },
+    "SecurityGroupReferences":{
+      "type":"list",
+      "member":{
+        "shape":"SecurityGroupReference",
+        "locationName":"item"
+      }
+    },
     "SecurityGroupStringList":{
       "type":"list",
       "member":{
@@ -15364,6 +15498,93 @@
         "locationName":"item"
       }
     },
+    "StaleIpPermission":{
+      "type":"structure",
+      "members":{
+        "FromPort":{
+          "shape":"Integer",
+          "documentation":"<p>The start of the port range for the TCP and UDP protocols, or an ICMP type number. A value of <code>-1</code> indicates all ICMP types. </p>",
+          "locationName":"fromPort"
+        },
+        "IpProtocol":{
+          "shape":"String",
+          "documentation":"<p>The IP protocol name (for <code>tcp</code>, <code>udp</code>, and <code>icmp</code>) or number (see <a href=\"http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers)</a>.</p>",
+          "locationName":"ipProtocol"
+        },
+        "IpRanges":{
+          "shape":"IpRanges",
+          "documentation":"<p>One or more IP ranges. Not applicable for stale security group rules.</p>",
+          "locationName":"ipRanges"
+        },
+        "PrefixListIds":{
+          "shape":"PrefixListIdSet",
+          "documentation":"<p>One or more prefix list IDs for an AWS service. Not applicable for stale security group rules.</p>",
+          "locationName":"prefixListIds"
+        },
+        "ToPort":{
+          "shape":"Integer",
+          "documentation":"<p>The end of the port range for the TCP and UDP protocols, or an ICMP type number. A value of <code>-1</code> indicates all ICMP types. </p>",
+          "locationName":"toPort"
+        },
+        "UserIdGroupPairs":{
+          "shape":"UserIdGroupPairSet",
+          "documentation":"<p>One or more security group pairs. Returns the ID of the referenced security group and VPC, and the ID and status of the VPC peering connection.</p>",
+          "locationName":"groups"
+        }
+      },
+      "documentation":"<p>Describes a stale rule in a security group.</p>"
+    },
+    "StaleIpPermissionSet":{
+      "type":"list",
+      "member":{
+        "shape":"StaleIpPermission",
+        "locationName":"item"
+      }
+    },
+    "StaleSecurityGroup":{
+      "type":"structure",
+      "required":["GroupId"],
+      "members":{
+        "GroupId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the security group.</p>",
+          "locationName":"groupId"
+        },
+        "GroupName":{
+          "shape":"String",
+          "documentation":"<p>The name of the security group.</p>",
+          "locationName":"groupName"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>The description of the security group.</p>",
+          "locationName":"description"
+        },
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC for the security group.</p>",
+          "locationName":"vpcId"
+        },
+        "StaleIpPermissions":{
+          "shape":"StaleIpPermissionSet",
+          "documentation":"<p>Information about the stale inbound rules in the security group.</p>",
+          "locationName":"staleIpPermissions"
+        },
+        "StaleIpPermissionsEgress":{
+          "shape":"StaleIpPermissionSet",
+          "documentation":"<p>Information about the stale outbound rules in the security group.</p>",
+          "locationName":"staleIpPermissionsEgress"
+        }
+      },
+      "documentation":"<p>Describes a stale security group (a security group that contains stale rules).</p>"
+    },
+    "StaleSecurityGroupSet":{
+      "type":"list",
+      "member":{
+        "shape":"StaleSecurityGroup",
+        "locationName":"item"
+      }
+    },
     "StartInstancesRequest":{
       "type":"structure",
       "required":["InstanceIds"],
@@ -15728,15 +15949,15 @@
       "type":"structure",
       "required":["Error"],
       "members":{
-        "Error":{
-          "shape":"UnsuccessfulItemError",
-          "documentation":"<p>Information about the error.</p>",
-          "locationName":"error"
-        },
         "ResourceId":{
           "shape":"String",
           "documentation":"<p>The ID of the resource.</p>",
           "locationName":"resourceId"
+        },
+        "Error":{
+          "shape":"UnsuccessfulItemError",
+          "documentation":"<p>Information about the error.</p>",
+          "locationName":"error"
         }
       },
       "documentation":"<p>Information about items that were not successfully processed in a batch call.</p>"
@@ -15828,7 +16049,7 @@
       "members":{
         "UserId":{
           "shape":"String",
-          "documentation":"<p>The ID of an AWS account.</p> <p>[EC2-Classic] Required when adding or removing rules that reference a security group in another AWS account.</p>",
+          "documentation":"<p>The ID of an AWS account. For a referenced security group in another VPC, the account ID of the referenced security group is returned.</p> <p>[EC2-Classic] Required when adding or removing rules that reference a security group in another AWS account.</p>",
           "locationName":"userId"
         },
         "GroupName":{
@@ -15860,6 +16081,13 @@
       "documentation":"<p>Describes a security group and AWS account ID pair. </p>"
     },
     "UserIdGroupPairList":{
+      "type":"list",
+      "member":{
+        "shape":"UserIdGroupPair",
+        "locationName":"item"
+      }
+    },
+    "UserIdGroupPairSet":{
       "type":"list",
       "member":{
         "shape":"UserIdGroupPair",
@@ -16433,7 +16661,7 @@
       "members":{
         "AccepterVpcInfo":{
           "shape":"VpcPeeringConnectionVpcInfo",
-          "documentation":"<p>Information about the peer VPC. CIDR block information is not returned when creating a VPC peering connection, or when describing a VPC peering connection that's in the <code>initiating-request</code> or <code>pending-acceptance</code> state.</p>",
+          "documentation":"<p>Information about the accepter VPC. CIDR block information is not returned when creating a VPC peering connection, or when describing a VPC peering connection that's in the <code>initiating-request</code> or <code>pending-acceptance</code> state.</p>",
           "locationName":"accepterVpcInfo"
         },
         "ExpirationTime":{
