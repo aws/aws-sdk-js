@@ -8,9 +8,10 @@ describe 'AWS.Service', ->
   retryableError = (error, result) ->
     expect(service.retryableError(error)).to.eql(result)
 
-  beforeEach ->
+  beforeEach (done) ->
     config = new AWS.Config()
     service = new AWS.Service(config)
+    done()
 
   describe 'apiVersions', ->
     it 'should set apiVersions property', ->
