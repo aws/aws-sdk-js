@@ -589,16 +589,35 @@ describe 'AWS.S3', ->
       expect(req.httpRequest.region).to.equal('eu-west-1')
       expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com')
 
-    it 'should retry with updated endpoint even when bucket endpoint is specified', ->
+    it 'should retry with updated region but not endpoint if non-S3 url endpoint is specified', ->
       err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
       s3 = new AWS.S3(endpoint: 'https://fake-custom-url.com', s3BucketEndpoint: true)
       req = request('operation', {Bucket: 'name'})
       req.build()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
       expect(req.httpRequest.endpoint.hostname).to.equal('fake-custom-url.com')
+
+    it 'should retry with updated endpoint if S3 url endpoint is specified', ->
+      err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
+      s3 = new AWS.S3(endpoint: 'https://name.s3-us-west-2.amazonaws.com', s3BucketEndpoint: true)
+      req = request('operation', {Bucket: 'name'})
+      req.build()
       retryable = s3.retryableError(err, req)
       expect(retryable).to.equal(true)
       expect(req.httpRequest.region).to.equal('eu-west-1')
       expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com')
+
+    it 'should retry with updated region but not endpoint if accelerate endpoint is used', ->
+      err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
+      s3 = new AWS.S3(useAccelerateEndpoint: true)
+      req = request('operation', {Bucket: 'name'})
+      req.build()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-accelerate.amazonaws.com')
 
     it 'should not retry on requests for bucket region once region is obtained', ->
       err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
