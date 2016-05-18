@@ -5,6 +5,10 @@
   "apigateway": {
     "name": "APIGateway"
   },
+  "applicationautoscaling": {
+    "prefix": "application-autoscaling",
+    "name": "ApplicationAutoScaling"
+  },
   "autoscaling": {
     "name": "AutoScaling"
   },
