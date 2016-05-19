@@ -5,6 +5,11 @@ module.exports = function() {
     callback();
   });
 
+  this.Given(/^I am using the S3 "([^"]*)" region with signatureVersion "([^"]*)"$/, function(region, signatureVersion, callback) {
+    this.s3 = new this.AWS.S3({region: region, signatureVersion: signatureVersion});
+    callback();
+  });
+
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(location, callback) {
     this.bucket = this.uniqueName('aws-sdk-js-integration');
     var params = {

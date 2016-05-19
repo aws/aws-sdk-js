@@ -65,6 +65,78 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3(region: 'us-west-1')
       expect(s3.endpoint.hostname).to.equal('s3-us-west-1.amazonaws.com')
 
+  describe 'getSignerClass', ->
+    getVersion = (signer) ->
+      if (signer == AWS.Signers.S3)
+        return 's3'
+      else if (signer == AWS.Signers.V4)
+        return 'v4'
+      else if (signer == AWS.Signers.V2)
+        return 'v2'
+    
+    describe 'when using presigned requests', ->
+      req = null
+
+      beforeEach (done) ->
+        req = request('mock')
+        helpers.spyOn(req, 'isPresigned').andReturn(true)
+        done()
+
+      describe 'will return an s3 (v2) signer when', ->
+
+        it 'user does not specify a signatureVersion for a region that supports v2', (done) ->
+          s3 = new AWS.S3(region: 'us-east-1')
+          expect(getVersion(s3.getSignerClass(req))).to.equal('s3')
+          done()
+
+        it 'user specifies a signatureVersion of s3', (done) ->
+          s3 = new AWS.S3(signatureVersion: 's3')
+          expect(getVersion(s3.getSignerClass(req))).to.equal('s3')
+          done()
+
+        it 'user specifies a signatureVersion of v2', (done) ->
+          s3 = new AWS.S3(signatureVersion: 'v2')
+          expect(getVersion(s3.getSignerClass(req))).to.equal('s3')
+          done()
+
+      describe 'will return a v4 signer when', ->
+
+        it 'user does not specify a signatureVersion for a region that supports only v4', (done) ->
+          s3 = new AWS.S3(region: 'eu-central-1')
+          expect(getVersion(s3.getSignerClass(req))).to.equal('v4')
+          done()
+
+        it 'user specifies a signatureVersion of v4', (done) ->
+          s3 = new AWS.S3(signatureVersion: 'v4')
+          expect(getVersion(s3.getSignerClass(req))).to.equal('v4')
+          done()
+
+    describe 'when not using presigned requests', ->
+
+      describe 'will return an s3 (v2) signer when', ->
+
+        it 'user specifies a signatureVersion of s3', (done) ->
+          s3 = new AWS.S3(signatureVersion: 's3')
+          expect(getVersion(s3.getSignerClass())).to.equal('s3')
+          done()
+
+        it 'user specifies a signatureVersion of v2', (done) ->
+          s3 = new AWS.S3(signatureVersion: 'v2')
+          expect(getVersion(s3.getSignerClass())).to.equal('s3')
+          done()
+
+      describe 'will return a v4 signer when', ->
+
+        it 'user does not specify a signatureVersion', (done) ->
+          s3 = new AWS.S3()
+          expect(getVersion(s3.getSignerClass())).to.equal('v4')
+          done()
+
+        it 'user specifies a signatureVersion of v4', (done) ->
+          s3 = new AWS.S3(signatureVersion: 'v4')
+          expect(getVersion(s3.getSignerClass())).to.equal('v4')
+          done()
+  
   describe 'building a request', ->
     build = (operation, params) ->
       request(operation, params).build().httpRequest

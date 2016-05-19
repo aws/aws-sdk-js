@@ -46,7 +46,7 @@ Feature: Working with Buckets
     Then I delete the bucket
 
   Scenario: Access bucket following 307 redirects
-    Given I am using the S3 "us-east-1" region
+    Given I am using the S3 "us-east-1" region with signatureVersion "s3"
     When I create a bucket with the location constraint "EU"
     Then the bucket should exist
     Then the bucket should have a location constraint of "EU"
@@ -69,7 +69,7 @@ Feature: Working with Buckets
     Then I delete the bucket
 
   Scenario: Follow 307 redirect on new buckets
-    Given I am using the S3 "us-east-1" region
+    Given I am using the S3 "us-east-1" region with signatureVersion "s3"
     When I create a bucket with the location constraint "us-west-2"
     And I put a large buffer to the key "largeobject" in the bucket
     Then the object "largeobject" should exist in the bucket
