@@ -99,6 +99,10 @@ describe 'AWS.Config', ->
     it 'defaults to false', ->
       expect(configure().useAccelerateEndpoint).to.equal(false)
 
+  describe 's3DisableBodySigning', ->
+    it 'defaults to true', ->
+      expect(configure().s3DisableBodySigning).to.equal(true)
+
   describe 'set', ->
     it 'should set a default value for a key', ->
       config = new AWS.Config()

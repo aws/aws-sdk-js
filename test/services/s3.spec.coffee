@@ -8,8 +8,9 @@ describe 'AWS.S3', ->
   s3 = null
   request = (operation, params) -> s3.makeRequest(operation, params)
 
-  beforeEach ->
+  beforeEach (done) ->
     s3 = new AWS.S3(region: undefined)
+    done()
 
   describe 'dnsCompatibleBucketName', ->
 
@@ -157,6 +158,43 @@ describe 'AWS.S3', ->
         it 'does not add expect header in the browser', ->
           req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 + 1))
           expect(req.headers['Expect']).not.to.exist
+
+    describe 'with s3DisableBodySigning set to true', ->
+
+      it 'will disable body signing when using signature version 4 and the endpoint uses https', ->
+        s3 = new AWS.S3(s3DisableBodySigning: true, signatureVersion: 'v4')
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.equal('UNSIGNED-PAYLOAD')
+
+      it 'will compute contentMD5', ->
+        s3 = new AWS.S3(s3DisableBodySigning: true, signatureVersion: 'v4')
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['Content-MD5']).to.equal('XzY+DlipXwbL6bvGYsXftg==')
+
+      it 'will not disable body signing when the endpoint is not https', ->
+        s3 = new AWS.S3(s3DisableBodySigning: true, signatureVersion: 'v4', sslEnabled: false)
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.exist
+        expect(req.headers['X-Amz-Content-Sha256']).to.not.equal('UNSIGNED-PAYLOAD')
+
+      it 'will have no effect when sigv2 signing is used', ->
+        s3 = new AWS.S3(s3DisableBodySigning: true, signatureVersion: 's3', sslEnabled: true)
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.not.exist
+
+    describe 'with s3DisableBodySigning set to false', ->
+
+      it 'will sign the body when sigv4 is used', ->
+        s3 = new AWS.S3(s3DisableBodySigning: false, signatureVersion: 'v4')
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.exist
+        expect(req.headers['X-Amz-Cotnent-Sha256']).to.not.equal('UNSIGNED-PAYLOAD')
+
+      it 'will have no effect when sigv2 signing is used', ->
+        s3 = new AWS.S3(s3DisableBodySigning: false, signatureVersion: 's3', sslEnabled: true)
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        expect(req.headers['X-Amz-Content-Sha256']).to.not.exist
+
 
     describe 'adding Content-Type', ->
       beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
@@ -761,13 +799,13 @@ describe 'AWS.S3', ->
         expect(req.build(->).httpRequest.headers['Content-MD5']).to.equal(undefined)
 
       it 'throws an error in SigV4, if a non-file stream is provided', (done) ->
-        s3 = new AWS.S3(signatureVersion: 'v4')
+        s3 = new AWS.S3({signatureVersion: 'v4'})
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream.Stream)
         req.send (err) ->
           expect(err.message).to.contain('stream objects are not supported')
           done()
 
-      it 'opens separate stream if a file object is provided', (done) ->
+      it 'opens separate stream if a file object is provided (signed payload)', (done) ->
         hash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
         helpers.mockResponse data: ETag: 'etag'
 
@@ -781,7 +819,7 @@ describe 'AWS.S3', ->
           tr.end()
           tr
 
-        s3 = new AWS.S3(signatureVersion: 'v4')
+        s3 = new AWS.S3({signatureVersion: 'v4', s3DisableBodySigning: false})
         stream = fs.createReadStream('path/to/file')
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: stream)
         req.send (err) ->
@@ -793,11 +831,14 @@ describe 'AWS.S3', ->
 
   describe 'getSignedUrl', ->
     date = null
-    beforeEach ->
+    beforeEach (done) ->
       date = AWS.util.date.getDate
       AWS.util.date.getDate = -> new Date(0)
-    afterEach ->
+      done()
+
+    afterEach (done) ->
       AWS.util.date.getDate = date
+      done()
 
     it 'gets a signed URL for getObject', ->
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'key')
@@ -864,6 +905,16 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'object')
       expect(url).to.equal('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=05ae40d2d22c93549a1de0686232ff56baf556876ec497d0d8349431f98b8dfe&X-Amz-SignedHeaders=host')
+
+    it 'gets a signed URL for putObject using SigV4', ->
+      s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'object')
+      expect(url).to.equal('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=1b6f75301a2e480bcfbb53d47d8940c28c8657ea70f23c24846a5595a53b1dfe&X-Amz-SignedHeaders=host')
+
+    it 'gets a signed URL for putObject using SigV4 with body', ->
+      s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'object', Body: 'foo')
+      expect(url).to.equal('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=600a64aff20c4ea6c28d11fd0639fb33a0107d072f4c2dd1ea38a16d057513f3&X-Amz-SignedHeaders=host%3Bx-amz-content-sha256')
 
     it 'errors when expiry time is greater than a week out on SigV4', (done) ->
       err = null; data = null
