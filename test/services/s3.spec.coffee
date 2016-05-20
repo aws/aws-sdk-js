@@ -10,6 +10,7 @@ describe 'AWS.S3', ->
 
   beforeEach ->
     s3 = new AWS.S3(region: undefined)
+    s3.clearBucketRegionCache()
 
   describe 'dnsCompatibleBucketName', ->
 
@@ -65,6 +66,22 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3(region: 'us-west-1')
       expect(s3.endpoint.hostname).to.equal('s3-us-west-1.amazonaws.com')
 
+  describe 'clearing bucket region cache', ->
+    beforeEach ->
+      s3.bucketRegionCache = a: 'rg-fake-1', b: 'rg-fake-2', c: 'rg-fake-3'
+
+    it 'clears one bucket name', ->
+      s3.clearBucketRegionCache 'b'
+      expect(s3.bucketRegionCache).to.eql(a: 'rg-fake-1', c: 'rg-fake-3')
+
+    it 'clears a list of bucket names', ->
+      s3.clearBucketRegionCache ['a', 'c']
+      expect(s3.bucketRegionCache).to.eql(b: 'rg-fake-2')
+
+    it 'clears entire cache', ->
+      s3.clearBucketRegionCache()
+      expect(s3.bucketRegionCache).to.eql({})
+
   describe 'building a request', ->
     build = (operation, params) ->
       request(operation, params).build().httpRequest
@@ -94,6 +111,28 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3(endpoint: 'foo.bar', s3BucketEndpoint: true, paramValidation: true)
       req = s3.listBuckets().build()
       expect(req.response.error.code).to.equal('ConfigError')
+
+    it 'corrects virtual-hosted bucket region on request if bucket region stored in cache', ->
+      s3 = new AWS.S3(region: 'us-east-1')
+      s3.bucketRegionCache.name = 'us-west-2'
+      param = Bucket: 'name'
+      req = s3.headBucket(param).build()
+      httpRequest = req.httpRequest
+      expect(httpRequest.region).to.equal('us-west-2')
+      expect(httpRequest.endpoint.hostname).to.equal('name.s3-us-west-2.amazonaws.com')
+      expect(httpRequest.headers.Host).to.equal('name.s3-us-west-2.amazonaws.com')
+      expect(httpRequest.path).to.equal('/')
+
+    it 'corrects path-style bucket region on request if bucket region stored in cache', ->
+      s3 = new AWS.S3(region: 'us-east-1', s3ForcePathStyle: true)
+      s3.bucketRegionCache.name = 'us-west-2'
+      param = Bucket: 'name'
+      req = s3.headBucket(param).build()
+      httpRequest = req.httpRequest
+      expect(httpRequest.region).to.equal('us-west-2')
+      expect(httpRequest.endpoint.hostname).to.equal('s3-us-west-2.amazonaws.com')
+      expect(httpRequest.headers.Host).to.equal('s3-us-west-2.amazonaws.com')
+      expect(httpRequest.path).to.equal('/name')
 
     describe 'with useAccelerateEndpoint set to true', ->
       beforeEach ->
@@ -325,16 +364,27 @@ describe 'AWS.S3', ->
     it 'does not send if no callback is supplied', ->
       s3.upload(Bucket: 'bucket', Key: 'key', Body: 'body')
 
+  describe 'extractData', ->
+    it 'caches bucket region if found in header', ->
+      req = request('operation', {Bucket: 'name'})
+      resp = new AWS.Response(req)
+      resp.httpResponse.headers = 'x-amz-bucket-region': 'rg-fake-1'
+      req.emit('extractData', [resp])
+      expect(s3.bucketRegionCache.name).to.equal('rg-fake-1')
+
   # S3 returns a handful of errors without xml bodies (to match the
   # http spec) these tests ensure we give meaningful codes/messages for these.
   describe 'errors with no XML body', ->
 
-    extractError = (statusCode, body) ->
-      req = request('operation')
+    extractError = (statusCode, body, addHeaders, req) ->
+      if !req
+        req = request('operation')
       resp = new AWS.Response(req)
       resp.httpResponse.body = new Buffer(body || '')
       resp.httpResponse.statusCode = statusCode
       resp.httpResponse.headers = {'x-amz-request-id': 'RequestId', 'x-amz-id-2': 'ExtendedRequestId'}
+      for header, value of addHeaders
+        resp.httpResponse.headers[header] = value
       req.emit('extractError', [resp])
       resp.error
 
@@ -358,7 +408,9 @@ describe 'AWS.S3', ->
       expect(error.code).to.equal('NotFound')
       expect(error.message).to.equal(null)
 
-    it 'extracts the region', ->
+    it 'extracts the region from body and takes precedence over cache', ->
+      s3.bucketRegionCache.name = 'us-west-2'
+      req = request('operation', {Bucket: 'name'})
       body = """
         <Error>
           <Code>InvalidArgument</Code>
@@ -366,8 +418,117 @@ describe 'AWS.S3', ->
           <Region>eu-west-1</Region>
         </Error>
         """
-      error = extractError(400, body)
+      error = extractError(400, body, {}, req)
       expect(error.region).to.equal('eu-west-1')
+      expect(s3.bucketRegionCache.name).to.equal('eu-west-1')
+
+    it 'extracts the region from header and takes precedence over body and cache', ->
+      s3.bucketRegionCache.name = 'us-west-2'
+      req = request('operation', {Bucket: 'name'})
+      body = """
+        <Error>
+          <Code>InvalidArgument</Code>
+          <Message>Provided param is bad</Message>
+          <Region>eu-west-1</Region>
+        </Error>
+        """
+      headers = 'x-amz-bucket-region': 'us-east-1'
+      error = extractError(400, body, headers, req)
+      expect(error.region).to.equal('us-east-1')
+      expect(s3.bucketRegionCache.name).to.equal('us-east-1')
+
+    it 'uses cache if region not extracted from body or header', ->
+      s3.bucketRegionCache.name = 'us-west-2'
+      req = request('operation', {Bucket: 'name'})
+      body = """
+        <Error>
+          <Code>InvalidArgument</Code>
+          <Message>Provided param is bad</Message>
+        </Error>
+        """
+      error = extractError(400, body, {}, req)
+      expect(error.region).to.equal('us-west-2')
+      expect(s3.bucketRegionCache.name).to.equal('us-west-2')
+
+    it 'does not use cache if not different from current region', ->
+      s3.bucketRegionCache.name = 'us-west-2'
+      req = request('operation', {Bucket: 'name'})
+      req.httpRequest.region = 'us-west-2'
+      body = """
+        <Error>
+          <Code>InvalidArgument</Code>
+          <Message>Provided param is bad</Message>
+        </Error>
+        """
+      error = extractError(400, body)
+      expect(error.region).to.not.exist
+      expect(s3.bucketRegionCache.name).to.equal('us-west-2')
+
+    it 'does not make async request for bucket region if error.region is set', ->
+      regionReq = send: (fn) ->
+        fn()
+      spy = helpers.spyOn(s3, 'listObjects').andReturn(regionReq)
+      req = request('operation', {Bucket: 'name'})
+      body = """
+        <Error>
+          <Code>PermanentRedirect</Code>
+          <Message>Message</Message>
+        </Error>
+        """
+      headers = 'x-amz-bucket-region': 'us-east-1'
+      error = extractError(301, body, headers, req)
+      expect(error.region).to.exist
+      expect(spy.calls.length).to.equal(0)
+      expect(regionReq._requestRegionForBucket).to.not.exist
+
+    it 'makes async request for bucket region if error.region not set for a region redirect error code', ->
+      regionReq = send: (fn) ->
+        fn()
+      spy = helpers.spyOn(s3, 'listObjects').andReturn(regionReq)
+      params = Bucket: 'name'
+      req = request('operation', params)
+      body = """
+        <Error>
+          <Code>PermanentRedirect</Code>
+          <Message>Message</Message>
+        </Error>
+        """
+      error = extractError(301, body, {}, req)
+      expect(error.region).to.not.exist
+      expect(spy.calls.length).to.equal(1)
+      expect(regionReq._requestRegionForBucket).to.exist
+
+    it 'does not make request for bucket region if error code is not a region redirect code', ->
+      regionReq = send: (fn) ->
+        fn()
+      spy = helpers.spyOn(s3, 'listObjects').andReturn(regionReq)
+      req = request('operation', {Bucket: 'name'})
+      body = """
+        <Error>
+          <Code>InvalidCode</Code>
+          <Message>Message</Message>
+        </Error>
+        """
+      error = extractError(301, body, {}, req)
+      expect(error.region).to.not.exist
+      expect(spy.calls.length).to.equal(0)
+      expect(regionReq._requestRegionForBucket).to.not.exist
+
+    it 'updates error.region if async request adds region to cache', ->
+      regionReq = send: (fn) ->
+        s3.bucketRegionCache.name = 'us-west-2'
+        fn()
+      spy = helpers.spyOn(s3, 'listObjects').andReturn(regionReq)
+      req = request('operation', {Bucket: 'name'})
+      body = """
+        <Error>
+          <Code>PermanentRedirect</Code>
+          <Message>Message</Message>
+        </Error>
+        """
+      error = extractError(301, body, {}, req)
+      expect(spy.calls.length).to.equal(1)
+      expect(error.region).to.equal('us-west-2')
 
     it 'extracts the request ids', ->
       error = extractError(400)
@@ -393,11 +554,153 @@ describe 'AWS.S3', ->
   describe 'retryableError', ->
 
     it 'should retry on authorization header with updated region', ->
-      err = {code: 'AuthorizationHeaderMalformed', statusCode:400, region: "eu-west-1"}
-      req = request()
+      err = {code: 'AuthorizationHeaderMalformed', statusCode:400, region: 'eu-west-1'}
+      req = request('operation', {Bucket: 'name'})
+      req.build()
       retryable = s3.retryableError(err, req)
       expect(retryable).to.equal(true)
-      expect(req.httpRequest.region).to.equal("eu-west-1")
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.amazonaws.com')
+
+    it 'should retry on bad request with updated region', ->
+      err = {code: 'BadRequest', statusCode:400, region: 'eu-west-1'}
+      req = request('operation', {Bucket: 'name'})
+      req.build()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.amazonaws.com')
+
+    it 'should retry on permanent redirect with updated region and endpoint', ->
+      err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
+      req = request('operation', {Bucket: 'name'})
+      req.build()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com')
+
+    it 'should retry on error code 301 with updated region and endpoint', ->
+      err = {code: 301, statusCode:301, region: 'eu-west-1'}
+      req = request('operation', {Bucket: 'name'})
+      req.build()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com')
+
+    it 'should retry with updated region but not endpoint if non-S3 url endpoint is specified', ->
+      err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
+      s3 = new AWS.S3(endpoint: 'https://fake-custom-url.com', s3BucketEndpoint: true)
+      req = request('operation', {Bucket: 'name'})
+      req.build()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('fake-custom-url.com')
+
+    it 'should retry with updated endpoint if S3 url endpoint is specified', ->
+      err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
+      s3 = new AWS.S3(endpoint: 'https://name.s3-us-west-2.amazonaws.com', s3BucketEndpoint: true)
+      req = request('operation', {Bucket: 'name'})
+      req.build()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com')
+
+    it 'should retry with updated region but not endpoint if accelerate endpoint is used', ->
+      err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
+      s3 = new AWS.S3(useAccelerateEndpoint: true)
+      req = request('operation', {Bucket: 'name'})
+      req.build()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-accelerate.amazonaws.com')
+
+    it 'should not retry on requests for bucket region once region is obtained', ->
+      err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
+      req = request('operation', {Bucket: 'name'})
+      req._requestRegionForBucket = 'name'
+      retryable = []
+      retryable.push s3.retryableError(err, req)
+      s3.bucketRegionCache.name = 'eu-west-1'
+      retryable.push s3.retryableError(err, req)
+      expect(retryable).to.eql([true, false])
+
+  describe 'browser NetworkingError due to wrong region', ->
+    done = ->
+    spy = null
+    regionReq = null
+
+    callNetworkingErrorListener = (req) ->
+      if !req
+        req = request('operation', {Bucket: 'name'})
+      if req._asm.currentState == 'validate'
+        req.build()
+      resp = new AWS.Response(req)
+      resp.error = code: 'NetworkingError'
+      s3.reqRegionForNetworkingError(resp, done)
+      req
+
+    beforeEach ->
+      s3 = new AWS.S3(region: 'us-west-2')
+      regionReq = request('operation', {Bucket: 'name'})
+      regionReq.send = (fn) ->
+        fn()
+      helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
+      spy = helpers.spyOn(s3, 'listObjects').andReturn(regionReq)
+
+    it 'updates region to us-east-1 if bucket name not DNS compatible', ->
+      req = request('operation', {Bucket: 'name!'})
+      callNetworkingErrorListener(req)
+      expect(req.httpRequest.region).to.equal('us-east-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('s3.amazonaws.com')
+      expect(s3.bucketRegionCache['name!']).to.equal('us-east-1')
+      expect(spy.calls.length).to.equal(0)
+
+    it 'updates region if cached and not current region', ->
+      req = request('operation', {Bucket: 'name'})
+      req.build()
+      s3.bucketRegionCache.name = 'eu-west-1'
+      callNetworkingErrorListener(req)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com')
+      expect(spy.calls.length).to.equal(0)
+
+    it 'makes async request in us-east-1 if not in cache', ->
+      regionReq.send = (fn) ->
+        s3.bucketRegionCache.name = 'eu-west-1'
+        fn()
+      req = callNetworkingErrorListener()
+      expect(spy.calls.length).to.equal(1)
+      expect(regionReq.httpRequest.region).to.equal('us-east-1')
+      expect(regionReq.httpRequest.endpoint.hostname).to.equal('name.s3.amazonaws.com')
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com')
+
+    it 'makes async request in us-east-1 if cached region matches current region', ->
+      s3.bucketRegionCache.name = 'us-west-2'
+      regionReq.send = (fn) ->
+        s3.bucketRegionCache.name = 'eu-west-1'
+        fn()
+      req = callNetworkingErrorListener()
+      expect(spy.calls.length).to.equal(1)  
+      expect(regionReq.httpRequest.region).to.equal('us-east-1')
+      expect(regionReq.httpRequest.endpoint.hostname).to.equal('name.s3.amazonaws.com')
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com')
+
+    it 'does not update region if path-style bucket is dns-compliant and not in cache', ->
+      s3.config.s3ForcePathStyle = true
+      regionReq.send = (fn) ->
+        s3.bucketRegionCache.name = 'eu-west-1'
+        fn()
+      req = callNetworkingErrorListener()
+      expect(spy.calls.length).to.equal(0)
+      expect(req.httpRequest.region).to.equal('us-west-2')
+      expect(req.httpRequest.endpoint.hostname).to.equal('s3-us-west-2.amazonaws.com')
 
   # tests from this point on are "special cases" for specific aws operations
 
@@ -706,6 +1009,37 @@ describe 'AWS.S3', ->
       s3.createBucket(undefined, () -> called = 1)
       expect(loc).to.equal('eu-west-1')
       expect(called).to.equal(1)
+
+    it 'caches bucket region based on LocationConstraint upon successful response', ->
+      s3 = new AWS.S3()
+      params = Bucket: 'name', CreateBucketConfiguration: LocationConstraint: 'rg-fake-1'
+      helpers.mockHttpResponse 200, {}, ''
+      s3.createBucket params, ->
+        expect(s3.bucketRegionCache.name).to.equal('rg-fake-1')
+
+    it 'caches bucket region without LocationConstraint upon successful response', ->
+      s3 = new AWS.S3(region: 'us-east-1')
+      params = Bucket: 'name'
+      helpers.mockHttpResponse 200, {}, ''
+      s3.createBucket params, ->
+        expect(params.CreateBucketConfiguration).to.not.exist
+        expect(s3.bucketRegionCache.name).to.equal('us-east-1')
+
+    it 'caches bucket region with LocationConstraint "EU" upon successful response', ->
+      s3 = new AWS.S3()
+      params = Bucket: 'name', CreateBucketConfiguration: LocationConstraint: 'EU'
+      helpers.mockHttpResponse 200, {}, ''
+      s3.createBucket params, ->
+        expect(s3.bucketRegionCache.name).to.equal('eu-west-1')
+
+  describe 'deleteBucket', ->
+    it 'removes bucket from region cache on successful response', ->
+      s3 = new AWS.S3()
+      params = Bucket: 'name'
+      s3.bucketRegionCache.name = 'rg-fake-1'
+      helpers.mockHttpResponse 204, {}, '' 
+      s3.deleteBucket params, ->
+        expect(s3.bucketRegionCache.name).to.not.exist
 
   AWS.util.each AWS.S3.prototype.computableChecksumOperations, (operation) ->
     describe operation, ->
