@@ -34,6 +34,7 @@
       "jmespath": "0.15.0"
     },
     "main": "lib/aws.js",
+    "typings": "./typings/AWS.d.ts",
     "browser": "lib/browser.js",
     "browserify": { "transform": "./dist-tools/transform.js" },
     "directories":  {
