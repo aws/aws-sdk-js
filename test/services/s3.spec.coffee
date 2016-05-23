@@ -1120,7 +1120,7 @@ describe 'AWS.S3', ->
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: stream)
         req.send (err) ->
           expect(mock.calls[0].arguments).to.eql(['path/to/file'])
-          expect(mock.calls[1].arguments).to.eql(['path/to/file'])
+          expect(mock.calls[1].arguments).to.eql(['path/to/file', {}])
           expect(err).not.to.exist
           expect(req.httpRequest.headers['X-Amz-Content-Sha256']).to.equal(hash)
           done()
