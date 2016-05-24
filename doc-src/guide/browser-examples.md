@@ -7,7 +7,7 @@ and authenticated with the correct credentials.
 
 The common preamble code can be summarized as follows:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.14.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.15.min.js"></script>
     <script type="text/javascript">
       // See the Configuring section to configure credentials in the SDK
       AWS.config.credentials = ...;
