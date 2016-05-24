@@ -1500,6 +1500,16 @@
       "output":{"shape":"GetConsoleOutputResult"},
       "documentation":"<p>Gets the console output for the specified instance.</p> <p>Instances do not have a physical monitor through which you can view their console output. They also lack physical controls that allow you to power up, reboot, or shut them down. To allow these actions, we provide them through the Amazon EC2 API and command line interface.</p> <p>Instance console output is buffered and posted shortly after instance boot, reboot, and termination. Amazon EC2 preserves the most recent 64 KB output which is available for at least one hour after the most recent post.</p> <p>For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. This output is buffered because the instance produces it and then posts it to a store where the instance's owner can retrieve it.</p> <p>For Windows instances, the instance console output includes output from the EC2Config service.</p>"
     },
+    "GetConsoleScreenshot":{
+      "name":"GetConsoleScreenshot",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetConsoleScreenshotRequest"},
+      "output":{"shape":"GetConsoleScreenshotResult"},
+      "documentation":"<p>Retrieve a JPG-format screenshot of an instance to help with troubleshooting.</p> <p>For API calls, the returned content is base64-encoded. For command line tools, the decoding is performed for you.</p>"
+    },
     "GetPasswordData":{
       "name":"GetPasswordData",
       "http":{
@@ -1710,7 +1720,7 @@
       },
       "input":{"shape":"MoveAddressToVpcRequest"},
       "output":{"shape":"MoveAddressToVpcResult"},
-      "documentation":"<p>Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the <a>RestoreAddressToClassic</a> request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform. You cannot migrate an Elastic IP address that's associated with a reverse DNS record. Contact AWS account and billing support to remove the reverse DNS record. </p>"
+      "documentation":"<p>Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the <a>RestoreAddressToClassic</a> request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform. </p>"
     },
     "PurchaseReservedInstancesOffering":{
       "name":"PurchaseReservedInstancesOffering",
@@ -1891,7 +1901,7 @@
       },
       "input":{"shape":"RestoreAddressToClassicRequest"},
       "output":{"shape":"RestoreAddressToClassicResult"},
-      "documentation":"<p>Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface. You cannot restore an Elastic IP address that's associated with a reverse DNS record. Contact AWS account and billing support to remove the reverse DNS record. </p>"
+      "documentation":"<p>Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface. </p>"
     },
     "RevokeSecurityGroupEgress":{
       "name":"RevokeSecurityGroupEgress",
@@ -1919,7 +1929,7 @@
       },
       "input":{"shape":"RunInstancesRequest"},
       "output":{"shape":"Reservation"},
-      "documentation":"<p>Launches the specified number of instances using an AMI for which you have permissions.</p> <p>When you launch an instance, it enters the <code>pending</code> state. After the instance is ready for you, it enters the <code>running</code> state. To check the state of your instance, call <a>DescribeInstances</a>.</p> <p>To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances.</p> <p>If you don't specify a security group when launching an instance, Amazon EC2 uses the default security group. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Security Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-VPC only accounts] If you don't specify a subnet in the request, we choose a default subnet from your default VPC for you. </p> <p>[EC2-Classic accounts] If you're launching into EC2-Classic and you don't specify an Availability Zone, we choose one for you.</p> <p>Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can provide optional user data when launching an instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html\">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If any of the AMIs have a product code attached for which the user has not subscribed, <code>RunInstances</code> fails.</p> <p>Some instance types can only be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID in the request, <code>RunInstances</code> fails. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types\">Instance Types Available Only in a VPC</a>.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html\">What To Do If An Instance Immediately Terminates</a>, and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html\">Troubleshooting Connecting to Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Launches the specified number of instances using an AMI for which you have permissions.</p> <p>When you launch an instance, it enters the <code>pending</code> state. After the instance is ready for you, it enters the <code>running</code> state. To check the state of your instance, call <a>DescribeInstances</a>.</p> <p>To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances.</p> <p>To tag your instance, ensure that it is <code>running</code> as <a>CreateTags</a> requires a resource ID. For more information about tagging, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Amazon EC2 Resources</a>.</p> <p>If you don't specify a security group when launching an instance, Amazon EC2 uses the default security group. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Security Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-VPC only accounts] If you don't specify a subnet in the request, we choose a default subnet from your default VPC for you. </p> <p>[EC2-Classic accounts] If you're launching into EC2-Classic and you don't specify an Availability Zone, we choose one for you.</p> <p>Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can provide optional user data when launching an instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html\">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If any of the AMIs have a product code attached for which the user has not subscribed, <code>RunInstances</code> fails.</p> <p>Some instance types can only be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID in the request, <code>RunInstances</code> fails. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types\">Instance Types Available Only in a VPC</a>.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html\">What To Do If An Instance Immediately Terminates</a>, and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html\">Troubleshooting Connecting to Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "RunScheduledInstances":{
       "name":"RunScheduledInstances",
@@ -3903,7 +3913,7 @@
         },
         "RuleNumber":{
           "shape":"Integer",
-          "documentation":"<p>The rule number for the entry (for example, 100). ACL entries are processed in ascending order by rule number.</p> <p>Constraints: Positive integer from 1 to 32766</p>",
+          "documentation":"<p>The rule number for the entry (for example, 100). ACL entries are processed in ascending order by rule number.</p> <p>Constraints: Positive integer from 1 to 32766. The range 32767 to 65535 is reserved for internal use. </p>",
           "locationName":"ruleNumber"
         },
         "Protocol":{
@@ -8436,6 +8446,41 @@
       },
       "documentation":"<p>Contains the output of GetConsoleOutput.</p>"
     },
+    "GetConsoleScreenshotRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance.</p>"
+        },
+        "WakeUp":{
+          "shape":"Boolean",
+          "documentation":"<p>When set to <code>true</code>, acts as keystroke input and wakes up an instance that's in standby or \"sleep\" mode.</p>"
+        }
+      },
+      "documentation":"<p>Contains the parameters for the request.</p>"
+    },
+    "GetConsoleScreenshotResult":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance.</p>",
+          "locationName":"instanceId"
+        },
+        "ImageData":{
+          "shape":"String",
+          "documentation":"<p>The data that comprises the image.</p>",
+          "locationName":"imageData"
+        }
+      },
+      "documentation":"<p>Contains the output of the request.</p>"
+    },
     "GetPasswordDataRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -11478,6 +11523,11 @@
           "shape":"String",
           "documentation":"<p>If the NAT gateway could not be created, specifies the error message for the failure, that corresponds to the error code. </p> <ul> <li><p>For InsufficientFreeAddressesInSubnet: \"Subnet has insufficient free addresses to create this NAT gateway\"</p></li> <li><p>For Gateway.NotAttached: \"Network vpc-xxxxxxxx has no Internet gateway attached\"</p></li> <li><p>For InvalidAllocationID.NotFound: \"Elastic IP address eipalloc-xxxxxxxx could not be associated with this NAT gateway\"</p></li> <li><p>For Resource.AlreadyAssociated: \"Elastic IP address eipalloc-xxxxxxxx is already associated\"</p></li> <li><p>For InternalError: \"Network interface eni-xxxxxxxx, created and used internally by this NAT gateway is in an invalid state. Please try again.\"</p></li> <li><p>For InvalidSubnetID.NotFound: \"The specified subnet subnet-xxxxxxxx does not exist or could not be found.\"</p></li> </ul>",
           "locationName":"failureMessage"
+        },
+        "ProvisionedBandwidth":{
+          "shape":"ProvisionedBandwidth",
+          "documentation":"<p>Reserved. If you need to sustain traffic greater than the <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "locationName":"provisionedBandwidth"
         }
       },
       "documentation":"<p>Describes a NAT gateway.</p>"
@@ -12343,6 +12393,37 @@
         "shape":"PropagatingVgw",
         "locationName":"item"
       }
+    },
+    "ProvisionedBandwidth":{
+      "type":"structure",
+      "members":{
+        "Provisioned":{
+          "shape":"String",
+          "documentation":"<p>Reserved. If you need to sustain traffic greater than the <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "locationName":"provisioned"
+        },
+        "Requested":{
+          "shape":"String",
+          "documentation":"<p>Reserved. If you need to sustain traffic greater than the <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "locationName":"requested"
+        },
+        "RequestTime":{
+          "shape":"DateTime",
+          "documentation":"<p>Reserved. If you need to sustain traffic greater than the <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "locationName":"requestTime"
+        },
+        "ProvisionTime":{
+          "shape":"DateTime",
+          "documentation":"<p>Reserved. If you need to sustain traffic greater than the <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "locationName":"provisionTime"
+        },
+        "Status":{
+          "shape":"String",
+          "documentation":"<p>Reserved. If you need to sustain traffic greater than the <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "locationName":"status"
+        }
+      },
+      "documentation":"<p>Reserved. If you need to sustain traffic greater than the <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>"
     },
     "PublicIpStringList":{
       "type":"list",
@@ -15953,15 +16034,15 @@
       "type":"structure",
       "required":["Error"],
       "members":{
-        "ResourceId":{
-          "shape":"String",
-          "documentation":"<p>The ID of the resource.</p>",
-          "locationName":"resourceId"
-        },
         "Error":{
           "shape":"UnsuccessfulItemError",
           "documentation":"<p>Information about the error.</p>",
           "locationName":"error"
+        },
+        "ResourceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the resource.</p>",
+          "locationName":"resourceId"
         }
       },
       "documentation":"<p>Information about items that were not successfully processed in a batch call.</p>"
