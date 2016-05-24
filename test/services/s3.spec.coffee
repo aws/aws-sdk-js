@@ -1120,7 +1120,37 @@ describe 'AWS.S3', ->
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: stream)
         req.send (err) ->
           expect(mock.calls[0].arguments).to.eql(['path/to/file'])
-          expect(mock.calls[1].arguments).to.eql(['path/to/file'])
+          expect(mock.calls[1].arguments).to.eql(['path/to/file', {}])
+          expect(err).not.to.exist
+          expect(req.httpRequest.headers['X-Amz-Content-Sha256']).to.equal(hash)
+          done()
+
+      it 'opens separate stream with range if a file object is provided', (done) ->
+        hash = '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'
+        helpers.mockResponse data: ETag: 'etag'
+
+        fs = require('fs')
+        mock = helpers.spyOn(fs, 'createReadStream').andCallFake (path, settings) ->
+          tr = new Stream.Readable
+          tr.length = 0
+          tr.path = 'path/to/file'
+          tr.start = settings.start
+          tr.end = settings.end
+          didRead = false
+          tr._read = (n) ->
+            if (didRead)
+              tr.push(null)
+            else
+              didRead = true
+              tr.push(new Buffer('test'))
+          tr
+
+        s3 = new AWS.S3(signatureVersion: 'v4')
+        stream = fs.createReadStream('path/to/file', {start:0, end:5})
+        req = s3.putObject(Bucket: 'example', Key: 'key', Body: stream)
+        req.send (err) ->
+          expect(mock.calls[0].arguments).to.eql(['path/to/file', {start:0, end:5}])
+          expect(mock.calls[1].arguments).to.eql(['path/to/file', {start:0, end:5}])
           expect(err).not.to.exist
           expect(req.httpRequest.headers['X-Amz-Content-Sha256']).to.equal(hash)
           done()
