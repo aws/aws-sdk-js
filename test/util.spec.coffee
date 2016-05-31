@@ -27,6 +27,20 @@ describe 'uriEscape', ->
   it 'encodes utf8 characters', ->
     expect(e('ёŝ')).to.equal('%D1%91%C5%9D')
 
+describe 'readFileSync', ->
+  readFileSync = AWS.util.readFileSync;
+
+  if AWS.util.isBrowser()
+    it 'will always return null in the browser', ->
+      expect(readFileSync('fake/path')).to.eql(null)
+  else
+    errorFound = false
+    try
+      readFileSync('fake/path');
+    catch err
+      errorFound = true
+    expect(errorFound).to.equal(true)
+
 describe 'uriEscapePath', ->
 
   e = AWS.util.uriEscapePath
