@@ -1508,7 +1508,7 @@
       },
       "input":{"shape":"GetConsoleScreenshotRequest"},
       "output":{"shape":"GetConsoleScreenshotResult"},
-      "documentation":"<p>Retrieve a JPG-format screenshot of an instance to help with troubleshooting.</p> <p>For API calls, the returned content is base64-encoded. For command line tools, the decoding is performed for you.</p>"
+      "documentation":"<p>Retrieve a JPG-format screenshot of a running instance to help with troubleshooting.</p> <p>The returned content is base64-encoded.</p>"
     },
     "GetPasswordData":{
       "name":"GetPasswordData",
@@ -8338,6 +8338,13 @@
         "locationName":"Filter"
       }
     },
+    "FleetType":{
+      "type":"string",
+      "enum":[
+        "request",
+        "maintain"
+      ]
+    },
     "Float":{"type":"float"},
     "FlowLog":{
       "type":"structure",
@@ -8440,7 +8447,7 @@
         },
         "Output":{
           "shape":"String",
-          "documentation":"<p>The console output, Base64 encoded. If using a command line tool, the tools decode the output for you. </p>",
+          "documentation":"<p>The console output, base64-encoded. If using a command line tool, the tools decode the output for you. </p>",
           "locationName":"output"
         }
       },
@@ -15354,6 +15361,16 @@
           "shape":"AllocationStrategy",
           "documentation":"<p>Indicates how to allocate the target capacity across the Spot pools specified by the Spot fleet request. The default is <code>lowestPrice</code>.</p>",
           "locationName":"allocationStrategy"
+        },
+        "FulfilledCapacity":{
+          "shape":"Double",
+          "documentation":"<p>The number of units fulfilled by this request compared to the set target capacity.</p>",
+          "locationName":"fulfilledCapacity"
+        },
+        "Type":{
+          "shape":"FleetType",
+          "documentation":"<p>The type of request. Indicates whether the fleet will only <code>request</code> the target capacity or also attempt to <code>maintain</code> it. When you <code>request</code> a certain target capacity, the fleet will only place the required bids. It will not attempt to replenish Spot instances if capacity is diminished, nor will it submit bids in alternative Spot pools if capacity is not available. When you want to <code>maintain</code> a certain target capacity, fleet will place the required bids to meet this target capacity. It will also automatically replenish any interrupted instances. Default: <code>maintain</code>. </p>",
+          "locationName":"type"
         }
       },
       "documentation":"<p>Describes the configuration of a Spot fleet request.</p>"
