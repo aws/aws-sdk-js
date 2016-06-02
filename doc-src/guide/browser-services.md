@@ -4,13 +4,13 @@
 
 ## Supported Services
 
-By default, the SDK ships with support for 43 AWS services. Each service object
+By default, the SDK ships with support for 44 AWS services. Each service object
 in the SDK currently provides low-level access to every API call in the
 respective AWS service. The full list of methods and their parameters are
 documented in the complete API reference documentation (linked from each
 service name in the list below).
 
-The 43 services that come with the default hosted package of the SDK are:
+The 44 services that come with the default hosted package of the SDK are:
 
 * [AWS.ACM](/AWSJavaScriptSDK/latest/AWS/ACM.html)
 * [AWS.APIGateway](/AWSJavaScriptSDK/latest/AWS/APIGateway.html)
@@ -37,6 +37,7 @@ The 43 services that come with the default hosted package of the SDK are:
 * [AWS.Firehose](/AWSJavaScriptSDK/latest/AWS/Firehose.html)
 * [AWS.GameLift](/AWSJavaScriptSDK/latest/AWS/GameLift.html)
 * [AWS.Inspector](/AWSJavaScriptSDK/latest/AWS/Inspector.html)
+* [AWS.IotData](/AWSJavaScriptSDK/latest/AWS/IotData.html)
 * [AWS.Kinesis](/AWSJavaScriptSDK/latest/AWS/Kinesis.html)
 * [AWS.KMS](/AWSJavaScriptSDK/latest/AWS/KMS.html)
 * [AWS.Lambda](/AWSJavaScriptSDK/latest/AWS/Lambda.html)
