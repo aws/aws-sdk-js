@@ -288,7 +288,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p><b>Note</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. </p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p>&gt; <p>On Linux and OS X, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p> This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. </p> <p> The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: </p> <p> $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} </p> <p> On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} </p> <p> On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path\"</p>"
+      "documentation":"<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p><b>Note</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. </p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p> This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. </p> <p> The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: </p> <p> $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} </p> <p> On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} </p> <p> On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path\"</p>"
     },
     "CreateKeysAndCertificate":{
       "name":"CreateKeysAndCertificate",
@@ -576,7 +576,7 @@
       "name":"DeleteCACertificate",
       "http":{
         "method":"DELETE",
-        "requestUri":"/cacertificate/{certificateId}"
+        "requestUri":"/cacertificate/{caCertificateId}"
       },
       "input":{
         "shape":"DeleteCACertificateRequest",
@@ -964,7 +964,7 @@
       "name":"DescribeCACertificate",
       "http":{
         "method":"GET",
-        "requestUri":"/cacertificate/{certificateId}"
+        "requestUri":"/cacertificate/{caCertificateId}"
       },
       "input":{
         "shape":"DescribeCACertificateRequest",
@@ -1107,7 +1107,7 @@
           "documentation":"<p>The rate exceeds the limit.</p>"
         }
       ],
-      "documentation":"<p>Returns a unique endpoint specific to the AWS account making the call. You specify the following URI when updating state information for your thing: https://<i>endpoint</i>/things/<i>thingName</i>/shadow.</p>"
+      "documentation":"<p>Returns a unique endpoint specific to the AWS account making the call.</p>"
     },
     "DescribeThing":{
       "name":"DescribeThing",
@@ -1543,6 +1543,12 @@
           "exception":true,
           "fault":true,
           "documentation":"<p>An unexpected error has occurred.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
         }
       ],
       "documentation":"<p>Gets a registration code used to register a CA certificate with AWS IoT.</p>"
@@ -1791,6 +1797,62 @@
       ],
       "documentation":"<p>Lists your policies.</p>"
     },
+    "ListPolicyPrincipals":{
+      "name":"ListPolicyPrincipals",
+      "http":{
+        "method":"GET",
+        "requestUri":"/policy-principals"
+      },
+      "input":{
+        "shape":"ListPolicyPrincipalsRequest",
+        "documentation":"<p>The input for the ListPolicyPrincipals operation.</p>"
+      },
+      "output":{
+        "shape":"ListPolicyPrincipalsResponse",
+        "documentation":"<p>The output from the ListPolicyPrincipals operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The specified resource does not exist.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
+        },
+        {
+          "shape":"ThrottlingException",
+          "error":{"httpStatusCode":429},
+          "exception":true,
+          "documentation":"<p>The rate exceeds the limit.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "error":{"httpStatusCode":401},
+          "exception":true,
+          "documentation":"<p>You are not authorized to perform this operation.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":503},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service is temporarily unavailable.</p>"
+        },
+        {
+          "shape":"InternalFailureException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An unexpected error has occurred.</p>"
+        }
+      ],
+      "documentation":"<p>Lists the principals associated with the specified policy.</p>"
+    },
     "ListPolicyVersions":{
       "name":"ListPolicyVersions",
       "http":{
@@ -1845,7 +1907,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Lists the versions of the specified policy, and identifies the default version.</p>"
+      "documentation":"<p>Lists the versions of the specified policy and identifies the default version.</p>"
     },
     "ListPrincipalPolicies":{
       "name":"ListPrincipalPolicies",
@@ -2501,7 +2563,7 @@
       "name":"UpdateCACertificate",
       "http":{
         "method":"PUT",
-        "requestUri":"/cacertificate/{certificateId}"
+        "requestUri":"/cacertificate/{caCertificateId}"
       },
       "input":{
         "shape":"UpdateCACertificateRequest",
@@ -2837,7 +2899,7 @@
         },
         "status":{
           "shape":"CACertificateStatus",
-          "documentation":"<p>The status of the CA certificate.</p>"
+          "documentation":"<p>The status of the CA certificate. </p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
         },
         "creationDate":{
           "shape":"DateType",
@@ -2913,7 +2975,7 @@
         },
         "status":{
           "shape":"CertificateStatus",
-          "documentation":"<p>The status of the certificate.</p>"
+          "documentation":"<p>The status of the certificate.</p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
         },
         "creationDate":{
           "shape":"DateType",
@@ -3320,7 +3382,7 @@
         "certificateId":{
           "shape":"CertificateId",
           "location":"uri",
-          "locationName":"certificateId",
+          "locationName":"caCertificateId",
           "documentation":"<p>The ID of the certificate to delete.</p>"
         }
       },
@@ -3444,7 +3506,7 @@
         "certificateId":{
           "shape":"CertificateId",
           "location":"uri",
-          "locationName":"certificateId",
+          "locationName":"caCertificateId",
           "documentation":"<p>The CA certificate identifier.</p>"
         }
       },
@@ -3570,7 +3632,7 @@
           "shape":"Principal",
           "location":"header",
           "locationName":"x-amzn-principal",
-          "documentation":"<p>The principal.</p>"
+          "documentation":"<p>The principal.</p> <p>If the principal is a certificate, specify the certificate ARN. If the principal is an Amazon Cognito identity, specify the identity ID.</p>"
         }
       },
       "documentation":"<p>The input for the DetachThingPrincipal operation.</p>"
@@ -3600,9 +3662,7 @@
         "tableName",
         "roleArn",
         "hashKeyField",
-        "hashKeyValue",
-        "rangeKeyField",
-        "rangeKeyValue"
+        "hashKeyValue"
       ],
       "members":{
         "tableName":{
@@ -3621,6 +3681,10 @@
           "shape":"HashKeyValue",
           "documentation":"<p>The hash key value.</p>"
         },
+        "hashKeyType":{
+          "shape":"DynamoKeyType",
+          "documentation":"<p>The hash key type. Valid values are \"STRING\" or \"NUMBER\"</p>"
+        },
         "rangeKeyField":{
           "shape":"RangeKeyField",
           "documentation":"<p>The range key name.</p>"
@@ -3629,12 +3693,23 @@
           "shape":"RangeKeyValue",
           "documentation":"<p>The range key value.</p>"
         },
+        "rangeKeyType":{
+          "shape":"DynamoKeyType",
+          "documentation":"<p>The range key type. Valid values are \"STRING\" or \"NUMBER\"</p>"
+        },
         "payloadField":{
           "shape":"PayloadField",
           "documentation":"<p>The action payload. This name can be customized.</p>"
         }
       },
       "documentation":"<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p><code>\"hashKeyValue\": \"${topic(3)}\"</code></p> <p>The following field uses the timestamp:</p> <p><code>\"rangeKeyValue\": \"${timestamp()}\"</code></p>"
+    },
+    "DynamoKeyType":{
+      "type":"string",
+      "enum":[
+        "STRING",
+        "NUMBER"
+      ]
     },
     "ElasticsearchAction":{
       "type":"structure",
@@ -4115,6 +4190,51 @@
         }
       },
       "documentation":"<p>The output from the ListPolicies operation.</p>"
+    },
+    "ListPolicyPrincipalsRequest":{
+      "type":"structure",
+      "required":["policyName"],
+      "members":{
+        "policyName":{
+          "shape":"PolicyName",
+          "location":"header",
+          "locationName":"x-amzn-iot-policy",
+          "documentation":"<p>The policy name.</p>"
+        },
+        "marker":{
+          "shape":"Marker",
+          "location":"querystring",
+          "locationName":"marker",
+          "documentation":"<p>The marker for the next set of results.</p>"
+        },
+        "pageSize":{
+          "shape":"PageSize",
+          "location":"querystring",
+          "locationName":"pageSize",
+          "documentation":"<p>The result page size.</p>"
+        },
+        "ascendingOrder":{
+          "shape":"AscendingOrder",
+          "location":"querystring",
+          "locationName":"isAscendingOrder",
+          "documentation":"<p>Specifies the order for results. If true, the results are returned in ascending creation order.</p>"
+        }
+      },
+      "documentation":"<p>The input for the ListPolicyPrincipals operation.</p>"
+    },
+    "ListPolicyPrincipalsResponse":{
+      "type":"structure",
+      "members":{
+        "principals":{
+          "shape":"Principals",
+          "documentation":"<p>The descriptions of the principals.</p>"
+        },
+        "nextMarker":{
+          "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results, or null if there are no additional results.</p>"
+        }
+      },
+      "documentation":"<p>The output from the ListPolicyPrincipals operation.</p>"
     },
     "ListPolicyVersionsRequest":{
       "type":"structure",
@@ -5027,14 +5147,14 @@
         "certificateId":{
           "shape":"CertificateId",
           "location":"uri",
-          "locationName":"certificateId",
+          "locationName":"caCertificateId",
           "documentation":"<p>The CA certificate identifier.</p>"
         },
         "newStatus":{
           "shape":"CACertificateStatus",
           "location":"querystring",
           "locationName":"newStatus",
-          "documentation":"<p>The updated status of the CA certificate.</p>"
+          "documentation":"<p>The updated status of the CA certificate.</p> <p><b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
         }
       },
       "documentation":"<p>The input to the UpdateCACertificate operation.</p>"
@@ -5056,7 +5176,7 @@
           "shape":"CertificateStatus",
           "location":"querystring",
           "locationName":"newStatus",
-          "documentation":"<p>The new status.</p> <p><b>Note:</b> Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.</p>"
+          "documentation":"<p>The new status.</p> <p><b>Note:</b> Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.</p> <p><b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
         }
       },
       "documentation":"<p>The input for the UpdateCertificate operation.</p>"
