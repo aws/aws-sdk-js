@@ -1183,7 +1183,7 @@ describe 'AWS.S3', ->
               tr.push(new Buffer('test'))
           tr
 
-        s3 = new AWS.S3(signatureVersion: 'v4')
+        s3 = new AWS.S3(signatureVersion: 'v4', s3DisableBodySigning: false)
         stream = fs.createReadStream('path/to/file', {start:0, end:5})
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: stream)
         req.send (err) ->
