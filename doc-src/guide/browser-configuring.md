@@ -344,10 +344,10 @@ resources from "*.s3.amazonaws.com" (or a specific regional endpoint), your
 requests will not be accessing an external domain and therefore will not
 require CORS. CORS will still be used for services besides S3 in this case.
 
-[cognito]: /mobile/sdkforios/developerguide/cognito-auth.html
+[cognito]: https://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth.html
 [cognito-console]: https://console.aws.amazon.com/cognito
-[cognito-devguide]: /mobile/sdkforios/developerguide/cognito-auth.html#create-an-identity-pool
-[wif]: /STS/latest/UsingSTS/web-identity-federation.html
-[sts]: /STS/latest/APIReference/Welcome.html
+[cognito-devguide]: https://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth.html#create-an-identity-pool
+[wif]: https://docs.aws.amazon.com/STS/latest/UsingSTS/web-identity-federation.html
+[sts]: https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html
 [fb-sdk]: https://developers.facebook.com/docs/facebook-login/login-flow-for-web/v2.2
-[ci-creds]: /AWSJavaScriptSDK/latest/AWS/CognitoIdentityCredentials.html
+[ci-creds]: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityCredentials.html
