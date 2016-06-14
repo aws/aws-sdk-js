@@ -56,6 +56,7 @@
         {"shape":"InvalidParameterCombinationException"},
         {"shape":"KmsKeyNotFoundException"},
         {"shape":"KmsKeyDisabledException"},
+        {"shape":"KmsException"},
         {"shape":"InvalidCloudWatchLogsLogGroupArnException"},
         {"shape":"InvalidCloudWatchLogsRoleArnException"},
         {"shape":"CloudWatchLogsDeliveryUnavailableException"},
@@ -241,6 +242,7 @@
         {"shape":"InvalidHomeRegionException"},
         {"shape":"KmsKeyNotFoundException"},
         {"shape":"KmsKeyDisabledException"},
+        {"shape":"KmsException"},
         {"shape":"InvalidCloudWatchLogsLogGroupArnException"},
         {"shape":"InvalidCloudWatchLogsRoleArnException"},
         {"shape":"CloudWatchLogsDeliveryUnavailableException"},
@@ -356,7 +358,7 @@
         },
         "SnsTopicName":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered.</p>",
+          "documentation":"<p>This field is deprecated. Use SnsTopicARN.</p>",
           "deprecated":true
         },
         "SnsTopicARN":{
@@ -681,11 +683,19 @@
       "documentation":"<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul>",
       "exception":true
     },
+    "KmsException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>This exception is thrown when there is an issue with the specified KMS key and the trail can’t be updated.</p>",
+      "exception":true
+    },
     "KmsKeyDisabledException":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>This exception is thrown when the KMS key is disabled.</p>",
+      "documentation":"<p>This exception is deprecated.</p>",
+      "deprecated":true,
       "exception":true
     },
     "KmsKeyNotFoundException":{
@@ -1031,7 +1041,7 @@
         },
         "SnsTopicName":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered.</p>",
+          "documentation":"<p>This field is deprecated. Use SnsTopicARN.</p>",
           "deprecated":true
         },
         "SnsTopicARN":{
@@ -1173,7 +1183,7 @@
         },
         "SnsTopicName":{
           "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered.</p>",
+          "documentation":"<p>This field is deprecated. Use SnsTopicARN.</p>",
           "deprecated":true
         },
         "SnsTopicARN":{
