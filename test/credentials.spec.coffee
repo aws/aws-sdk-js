@@ -744,7 +744,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       helpers.mockResponses [
         {data: null, error: {code: 'NotAuthorizedException'}}
       ]
-      creds.clearIdOnNotAuthorized(err)
+      creds.clearIdOnNotAuthorized()
       expect(clearCache.calls.length).to.equal(1)
       
     it 'should not call clearCachedId if user is authorized', ->
@@ -752,7 +752,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       helpers.mockResponses [
         {data: null, error: {code: ''}}
       ]
-      creds.clearIdOnNotAuthorized(err)
+      creds.clearIdOnNotAuthorized()
       expect(clearCache.calls.length).to.equal(0)
 
 
@@ -887,7 +887,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
       creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
       expect(creds.cacheId.calls.length).to.equal(0)
-      expect(creds.getStorage('id')).not.to.exist
+      expect(creds.getStorage('id')).to.exist
 
     it 'clears cache if getOpenIdToken fails', ->
       creds.setStorage('id', 'MYID')
@@ -898,7 +898,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
       creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
       expect(creds.cacheId.calls.length).to.equal(0)
-      expect(creds.getStorage('id')).not.to.exist
+      expect(creds.getStorage('id')).to.exist
 
     it 'clears cache if getCredentialsForIdentity fails', ->
       delete creds.cognito.config.params.RoleArn
@@ -909,7 +909,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       ]
       creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
       expect(creds.cacheId.calls.length).to.equal(0)
-      expect(creds.getStorage('id')).not.to.exist
+      expect(creds.getStorage('id')).to.exist
 
     it 'does try to load creds second time if service request failed', ->
       reqs = helpers.mockResponses [
