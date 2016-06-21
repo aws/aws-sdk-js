@@ -1307,6 +1307,12 @@ describe 'AWS.S3', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', Metadata: {someKey: 'someValue'})
       expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=5Lcbv0WLGWseQhtmNQ8WwIpX6Kw%3D&x-amz-meta-somekey=someValue&x-amz-security-token=session')
 
+    it 'gets a signed URL for putObject with Metadata using Sigv4', ->
+      s3 = new AWS.S3
+        signatureVersion: 'v4'
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', Metadata: {someKey: 'someValue'})
+      expect(url).to.equal('https://bucket.s3.mock-region.amazonaws.com/key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fmock-region%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=0a1ef336042a7a03b8a2e130ac36097cb1fbab54f8ed5105977a863a5139e679&X-Amz-SignedHeaders=host%3Bx-amz-meta-somekey&x-amz-meta-somekey=someValue')
+
     it 'gets a signed URL for putObject with special characters', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: '!@#$%^&*();\':"{}[],./?`~')
       expect(url).to.equal('https://bucket.s3.amazonaws.com/%21%40%23%24%25%5E%26%2A%28%29%3B%27%3A%22%7B%7D%5B%5D%2C./%3F%60~?AWSAccessKeyId=akid&Expires=900&Signature=9nEltJACZKsriZqU2cmRel6g8LQ%3D&x-amz-security-token=session')
