@@ -24,7 +24,7 @@
         {"shape":"InvalidNonceException"},
         {"shape":"JobNotFoundException"}
       ],
-      "documentation":"<p>Returns information about a specified job and whether that job has been received by the job worker. Only used for custom actions.</p> <examples></examples>"
+      "documentation":"<p>Returns information about a specified job and whether that job has been received by the job worker. Only used for custom actions.</p>"
     },
     "AcknowledgeThirdPartyJob":{
       "name":"AcknowledgeThirdPartyJob",
@@ -54,7 +54,7 @@
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Creates a new custom action that can be used in all pipelines associated with the AWS account. Only used for custom actions.</p> <examples></examples>"
+      "documentation":"<p>Creates a new custom action that can be used in all pipelines associated with the AWS account. Only used for custom actions.</p>"
     },
     "CreatePipeline":{
       "name":"CreatePipeline",
@@ -73,7 +73,7 @@
         {"shape":"InvalidStructureException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Creates a pipeline.</p> <examples></examples>"
+      "documentation":"<p>Creates a pipeline.</p>"
     },
     "DeleteCustomActionType":{
       "name":"DeleteCustomActionType",
@@ -85,7 +85,7 @@
       "errors":[
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p>Marks a custom action as deleted. PollForJobs for the custom action will fail after the action is marked for deletion. Only used for custom actions.</p> <important><p>You cannot recreate a custom action after it has been deleted unless you increase the version number of the action.</p></important> <examples></examples>"
+      "documentation":"<p>Marks a custom action as deleted. PollForJobs for the custom action will fail after the action is marked for deletion. Only used for custom actions.</p> <important> <p>You cannot recreate a custom action after it has been deleted unless you increase the version number of the action.</p> </important>"
     },
     "DeletePipeline":{
       "name":"DeletePipeline",
@@ -97,7 +97,7 @@
       "errors":[
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p>Deletes the specified pipeline.</p> <examples></examples>"
+      "documentation":"<p>Deletes the specified pipeline.</p>"
     },
     "DisableStageTransition":{
       "name":"DisableStageTransition",
@@ -111,7 +111,7 @@
         {"shape":"PipelineNotFoundException"},
         {"shape":"StageNotFoundException"}
       ],
-      "documentation":"<p>Prevents artifacts in a pipeline from transitioning to the next stage in the pipeline. </p> <examples></examples>"
+      "documentation":"<p>Prevents artifacts in a pipeline from transitioning to the next stage in the pipeline.</p>"
     },
     "EnableStageTransition":{
       "name":"EnableStageTransition",
@@ -125,7 +125,7 @@
         {"shape":"PipelineNotFoundException"},
         {"shape":"StageNotFoundException"}
       ],
-      "documentation":"<p>Enables artifacts in a pipeline to transition to a stage in a pipeline.</p> <examples></examples>"
+      "documentation":"<p>Enables artifacts in a pipeline to transition to a stage in a pipeline.</p>"
     },
     "GetJobDetails":{
       "name":"GetJobDetails",
@@ -139,7 +139,7 @@
         {"shape":"ValidationException"},
         {"shape":"JobNotFoundException"}
       ],
-      "documentation":"<p>Returns information about a job. Only used for custom actions.</p> <important><p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.</p></important> <examples></examples>"
+      "documentation":"<p>Returns information about a job. Only used for custom actions.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.</p> </important>"
     },
     "GetPipeline":{
       "name":"GetPipeline",
@@ -154,7 +154,7 @@
         {"shape":"PipelineNotFoundException"},
         {"shape":"PipelineVersionNotFoundException"}
       ],
-      "documentation":"<p>Returns the metadata, structure, stages, and actions of a pipeline. Can be used to return the entire structure of a pipeline in JSON format, which can then be modified and used to update the pipeline structure with <a>UpdatePipeline</a>.</p> <examples></examples>"
+      "documentation":"<p>Returns the metadata, structure, stages, and actions of a pipeline. Can be used to return the entire structure of a pipeline in JSON format, which can then be modified and used to update the pipeline structure with <a>UpdatePipeline</a>.</p>"
     },
     "GetPipelineState":{
       "name":"GetPipelineState",
@@ -168,7 +168,7 @@
         {"shape":"ValidationException"},
         {"shape":"PipelineNotFoundException"}
       ],
-      "documentation":"<p>Returns information about the state of a pipeline, including the stages, actions, and details about the last run of the pipeline.</p> <examples></examples>"
+      "documentation":"<p>Returns information about the state of a pipeline, including the stages and actions.</p>"
     },
     "GetThirdPartyJobDetails":{
       "name":"GetThirdPartyJobDetails",
@@ -184,7 +184,7 @@
         {"shape":"InvalidClientTokenException"},
         {"shape":"InvalidJobException"}
       ],
-      "documentation":"<p>Requests the details of a job for a third party action. Only used for partner actions.</p> <important><p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.</p></important>"
+      "documentation":"<p>Requests the details of a job for a third party action. Only used for partner actions.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.</p> </important>"
     },
     "ListActionTypes":{
       "name":"ListActionTypes",
@@ -211,7 +211,7 @@
       "errors":[
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p>Gets a summary of all of the pipelines associated with your account.</p> <examples></examples>"
+      "documentation":"<p>Gets a summary of all of the pipelines associated with your account.</p>"
     },
     "PollForJobs":{
       "name":"PollForJobs",
@@ -225,7 +225,7 @@
         {"shape":"ValidationException"},
         {"shape":"ActionTypeNotFoundException"}
       ],
-      "documentation":"<p>Returns information about any jobs for AWS CodePipeline to act upon.</p> <important><p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.</p></important> <examples></examples>"
+      "documentation":"<p>Returns information about any jobs for AWS CodePipeline to act upon.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.</p> </important>"
     },
     "PollForThirdPartyJobs":{
       "name":"PollForThirdPartyJobs",
@@ -239,7 +239,7 @@
         {"shape":"ActionTypeNotFoundException"},
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p>Determines whether there are any third party jobs for a job worker to act on. Only used for partner actions.</p> <important><p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts.</p></important>"
+      "documentation":"<p>Determines whether there are any third party jobs for a job worker to act on. Only used for partner actions.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts.</p> </important>"
     },
     "PutActionRevision":{
       "name":"PutActionRevision",
@@ -315,6 +315,23 @@
       ],
       "documentation":"<p>Represents the success of a third party job as returned to the pipeline by a job worker. Only used for partner actions.</p>"
     },
+    "RetryStageExecution":{
+      "name":"RetryStageExecution",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RetryStageExecutionInput"},
+      "output":{"shape":"RetryStageExecutionOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"PipelineNotFoundException"},
+        {"shape":"StageNotFoundException"},
+        {"shape":"StageNotRetryableException"},
+        {"shape":"NotLatestPipelineExecutionException"}
+      ],
+      "documentation":"<p>Resumes the pipeline execution by retrying the last failed actions in a stage.</p>"
+    },
     "StartPipelineExecution":{
       "name":"StartPipelineExecution",
       "http":{
@@ -327,7 +344,7 @@
         {"shape":"ValidationException"},
         {"shape":"PipelineNotFoundException"}
       ],
-      "documentation":"<p>Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.</p> <examples></examples>"
+      "documentation":"<p>Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.</p>"
     },
     "UpdatePipeline":{
       "name":"UpdatePipeline",
@@ -344,7 +361,7 @@
         {"shape":"InvalidBlockerDeclarationException"},
         {"shape":"InvalidStructureException"}
       ],
-      "documentation":"<p>Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure in conjunction with UpdatePipeline to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.</p> <examples></examples>"
+      "documentation":"<p>Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure in conjunction with UpdatePipeline to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.</p>"
     }
   },
   "shapes":{
@@ -445,7 +462,8 @@
         "Build",
         "Deploy",
         "Test",
-        "Invoke"
+        "Invoke",
+        "Approval"
       ]
     },
     "ActionConfiguration":{
@@ -529,7 +547,7 @@
     },
     "ActionConfigurationValue":{
       "type":"string",
-      "max":250,
+      "max":500,
       "min":1
     },
     "ActionContext":{
@@ -555,7 +573,7 @@
         },
         "actionTypeId":{
           "shape":"ActionTypeId",
-          "documentation":"<p>The configuration information for the action type. </p>"
+          "documentation":"<p>The configuration information for the action type.</p>"
         },
         "runOrder":{
           "shape":"ActionRunOrder",
@@ -612,7 +630,7 @@
           "documentation":"<p>The details of an error returned by a URL external to AWS.</p>"
         }
       },
-      "documentation":"<p>Represents information about how an action runs.</p>"
+      "documentation":"<p>Represents information about the run of an action.</p>"
     },
     "ActionExecutionStatus":{
       "type":"string",
@@ -727,7 +745,7 @@
           "documentation":"<p>The details of the output artifact of the action, such as its commit ID.</p>"
         }
       },
-      "documentation":"<p>Returns information about the details of an action type. </p>"
+      "documentation":"<p>Returns information about the details of an action type.</p>"
     },
     "ActionTypeId":{
       "type":"structure",
@@ -740,11 +758,11 @@
       "members":{
         "category":{
           "shape":"ActionCategory",
-          "documentation":"<p>A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below. </p>"
+          "documentation":"<p>A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.</p>"
         },
         "owner":{
           "shape":"ActionOwner",
-          "documentation":"<p>The creator of the action being called. </p>"
+          "documentation":"<p>The creator of the action being called.</p>"
         },
         "provider":{
           "shape":"ActionProvider",
@@ -752,7 +770,7 @@
         },
         "version":{
           "shape":"Version",
-          "documentation":"<p>A string that identifies the action type. </p>"
+          "documentation":"<p>A string that identifies the action type.</p>"
         }
       },
       "documentation":"<p>Represents information about an action type.</p>"
@@ -773,7 +791,7 @@
       "members":{
         "thirdPartyConfigurationUrl":{
           "shape":"Url",
-          "documentation":"<p>The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service. </p>"
+          "documentation":"<p>The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.</p>"
         },
         "entityUrlTemplate":{
           "shape":"UrlTemplate",
@@ -788,7 +806,7 @@
           "documentation":"<p>The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.</p>"
         }
       },
-      "documentation":"<p>Returns information about the settings for an action type. </p>"
+      "documentation":"<p>Returns information about the settings for an action type.</p>"
     },
     "Artifact":{
       "type":"structure",
@@ -933,7 +951,7 @@
       "members":{
         "category":{
           "shape":"ActionCategory",
-          "documentation":"<p>The category of the custom action, such as a source action or a build action.</p> <note>Although Source is listed as a valid value, it is not currently functional. This value is reserved for future use.</note>"
+          "documentation":"<p>The category of the custom action, such as a source action or a build action.</p> <note> <p>Although Source is listed as a valid value, it is not currently functional. This value is reserved for future use.</p> </note>"
         },
         "provider":{
           "shape":"ActionProvider",
@@ -941,17 +959,17 @@
         },
         "version":{
           "shape":"Version",
-          "documentation":"<p>The version number of the custom action. </p>"
+          "documentation":"<p>The version number of the custom action.</p>"
         },
         "settings":{"shape":"ActionTypeSettings"},
         "configurationProperties":{
           "shape":"ActionConfigurationPropertyList",
-          "documentation":"<p>The configuration properties for the custom action.</p> <note>You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of {Config:<i>name</i>}, as long as the configuration property is both required and not secret. For more information, see <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html\">Create a Custom Action for a Pipeline</a>.</note>"
+          "documentation":"<p>The configuration properties for the custom action.</p> <note> <p>You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of {Config:name}, as long as the configuration property is both required and not secret. For more information, see <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html\">Create a Custom Action for a Pipeline</a>.</p> </note>"
         },
         "inputArtifactDetails":{"shape":"ArtifactDetails"},
         "outputArtifactDetails":{"shape":"ArtifactDetails"}
       },
-      "documentation":"<p>Represents the input of a create custom action operation. </p>"
+      "documentation":"<p>Represents the input of a create custom action operation.</p>"
     },
     "CreateCustomActionTypeOutput":{
       "type":"structure",
@@ -1048,7 +1066,7 @@
         },
         "stageName":{
           "shape":"StageName",
-          "documentation":"<p>The name of the stage where you want to disable the inbound or outbound transition of artifacts. </p>"
+          "documentation":"<p>The name of the stage where you want to disable the inbound or outbound transition of artifacts.</p>"
         },
         "transitionType":{
           "shape":"StageTransitionType",
@@ -1205,7 +1223,7 @@
       "members":{
         "jobDetails":{
           "shape":"JobDetails",
-          "documentation":"<p>The details of the job. </p> <note> <p>If AWSSessionCredentials is used, a long-running job can call GetJobDetails again to obtain new credentials.</p> </note>"
+          "documentation":"<p>The details of the job.</p> <note> <p>If AWSSessionCredentials is used, a long-running job can call GetJobDetails again to obtain new credentials.</p> </note>"
         }
       },
       "documentation":"<p>Represents the output of a get job details action.</p>"
@@ -1252,11 +1270,11 @@
         },
         "pipelineVersion":{
           "shape":"PipelineVersion",
-          "documentation":"<p>The version number of the pipeline.</p> <note>A newly-created pipeline is always assigned a version number of <code>1</code>.</note>"
+          "documentation":"<p>The version number of the pipeline.</p> <note> <p>A newly-created pipeline is always assigned a version number of <code>1</code>.</p> </note>"
         },
         "stageStates":{
           "shape":"StageStateList",
-          "documentation":"<p>A list of the pipeline stage output information, including stage name, state, most recent run details, whether the stage is disabled, and other data. </p>"
+          "documentation":"<p>A list of the pipeline stage output information, including stage name, state, most recent run details, whether the stage is disabled, and other data.</p>"
         },
         "created":{
           "shape":"Timestamp",
@@ -1292,10 +1310,10 @@
       "members":{
         "jobDetails":{
           "shape":"ThirdPartyJobDetails",
-          "documentation":"<p>The details of the job, including any protected values defined for the job. </p>"
+          "documentation":"<p>The details of the job, including any protected values defined for the job.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get third party job details action. </p>"
+      "documentation":"<p>Represents the output of a get third party job details action.</p>"
     },
     "InputArtifact":{
       "type":"structure",
@@ -1418,7 +1436,7 @@
         },
         "encryptionKey":{"shape":"EncryptionKey"}
       },
-      "documentation":"<p>Represents additional information about a job required for a job worker to complete the job. </p>"
+      "documentation":"<p>Represents additional information about a job required for a job worker to complete the job.</p>"
     },
     "JobDetails":{
       "type":"structure",
@@ -1508,7 +1526,7 @@
           "documentation":"<p>An identifier that was returned from the previous list pipelines call, which can be used to return the next set of pipelines in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list pipelines action. </p>"
+      "documentation":"<p>Represents the input of a list pipelines action.</p>"
     },
     "ListPipelinesOutput":{
       "type":"structure",
@@ -1541,13 +1559,20 @@
     },
     "NextToken":{"type":"string"},
     "Nonce":{"type":"string"},
+    "NotLatestPipelineExecutionException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The stage has failed in a later pipeline run and the pipelineExecutionId associated with the request is out of date.</p>",
+      "exception":true
+    },
     "OutputArtifact":{
       "type":"structure",
       "required":["name"],
       "members":{
         "name":{
           "shape":"ArtifactName",
-          "documentation":"<p>The name of the output of an artifact, such as \"My App\". </p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p> <p>Output artifact names must be unique within a pipeline.</p>"
+          "documentation":"<p>The name of the output of an artifact, such as \"My App\".</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p> <p>Output artifact names must be unique within a pipeline.</p>"
         }
       },
       "documentation":"<p>Represents information about the output of an action.</p>"
@@ -1587,7 +1612,7 @@
       "members":{
         "name":{
           "shape":"PipelineName",
-          "documentation":"<p>The name of the action to be performed. </p>"
+          "documentation":"<p>The name of the action to be performed.</p>"
         },
         "roleArn":{
           "shape":"RoleArn",
@@ -1596,14 +1621,14 @@
         "artifactStore":{"shape":"ArtifactStore"},
         "stages":{
           "shape":"PipelineStageDeclarationList",
-          "documentation":"<p>The stage in which to perform the action. </p>"
+          "documentation":"<p>The stage in which to perform the action.</p>"
         },
         "version":{
           "shape":"PipelineVersion",
           "documentation":"<p>The version number of the pipeline. A new pipeline always has a version number of 1. This number is automatically incremented when a pipeline is updated.</p>"
         }
       },
-      "documentation":"<p>Represents the structure of actions and stages to be performed in the pipeline. </p>"
+      "documentation":"<p>Represents the structure of actions and stages to be performed in the pipeline.</p>"
     },
     "PipelineExecutionId":{
       "type":"string",
@@ -1752,7 +1777,7 @@
         },
         "pipelineExecutionId":{
           "shape":"PipelineExecutionId",
-          "documentation":"<p>The ID of the current workflow state of the pipeline. </p>"
+          "documentation":"<p>The ID of the current workflow state of the pipeline.</p>"
         }
       },
       "documentation":"<p>Represents the output of a put action revision action.</p>"
@@ -1770,10 +1795,10 @@
         },
         "failureDetails":{
           "shape":"FailureDetails",
-          "documentation":"<p>The details about the failure of a job. </p>"
+          "documentation":"<p>The details about the failure of a job.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a put job failure result action. </p>"
+      "documentation":"<p>Represents the input of a put job failure result action.</p>"
     },
     "PutJobSuccessResultInput":{
       "type":"structure",
@@ -1785,18 +1810,18 @@
         },
         "currentRevision":{
           "shape":"CurrentRevision",
-          "documentation":"<p>The ID of the current revision of the artifact successfully worked upon by the job. </p>"
+          "documentation":"<p>The ID of the current revision of the artifact successfully worked upon by the job.</p>"
         },
         "continuationToken":{
           "shape":"ContinuationToken",
-          "documentation":"<p>A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a custom action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the custom action. When the action is complete, no continuation token should be supplied. </p>"
+          "documentation":"<p>A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a custom action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the custom action. When the action is complete, no continuation token should be supplied.</p>"
         },
         "executionDetails":{
           "shape":"ExecutionDetails",
-          "documentation":"<p>The execution details of the successful job, such as the actions taken by the job worker. </p>"
+          "documentation":"<p>The execution details of the successful job, such as the actions taken by the job worker.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a put job success result action. </p>"
+      "documentation":"<p>Represents the input of a put job success result action.</p>"
     },
     "PutThirdPartyJobFailureResultInput":{
       "type":"structure",
@@ -1836,7 +1861,7 @@
         "currentRevision":{"shape":"CurrentRevision"},
         "continuationToken":{
           "shape":"ContinuationToken",
-          "documentation":"<p>A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the partner action. When the action is complete, no continuation token should be supplied. </p>"
+          "documentation":"<p>A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the partner action. When the action is complete, no continuation token should be supplied.</p>"
         },
         "executionDetails":{"shape":"ExecutionDetails"}
       },
@@ -1848,6 +1873,44 @@
       "value":{"shape":"ActionConfigurationQueryableValue"},
       "max":1,
       "min":0
+    },
+    "RetryStageExecutionInput":{
+      "type":"structure",
+      "required":[
+        "pipelineName",
+        "stageName",
+        "pipelineExecutionId",
+        "retryMode"
+      ],
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline that contains the failed stage.</p>"
+        },
+        "stageName":{
+          "shape":"StageName",
+          "documentation":"<p>The name of the failed stage to be retried.</p>"
+        },
+        "pipelineExecutionId":{
+          "shape":"PipelineExecutionId",
+          "documentation":"<p>The ID of the pipeline execution in the failed stage to be retried. Use the <a>GetPipelineState</a> action to retrieve the current pipelineExecutionId of the failed stage</p>"
+        },
+        "retryMode":{
+          "shape":"StageRetryMode",
+          "documentation":"<p>The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a retry stage execution operation.</p>"
+    },
+    "RetryStageExecutionOutput":{
+      "type":"structure",
+      "members":{
+        "pipelineExecutionId":{
+          "shape":"PipelineExecutionId",
+          "documentation":"<p>The ID of the current workflow execution in the failed stage.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a retry stage execution operation.</p>"
     },
     "Revision":{
       "type":"string",
@@ -1861,7 +1924,8 @@
     },
     "RoleArn":{
       "type":"string",
-      "pattern":"arn:[^:]+:iam::[0-9]{12}:role/.*"
+      "max":1024,
+      "pattern":"arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*"
     },
     "S3ArtifactLocation":{
       "type":"structure",
@@ -1872,11 +1936,11 @@
       "members":{
         "bucketName":{
           "shape":"S3BucketName",
-          "documentation":"<p>The name of the Amazon S3 bucket. </p>"
+          "documentation":"<p>The name of the Amazon S3 bucket.</p>"
         },
         "objectKey":{
           "shape":"S3ObjectKey",
-          "documentation":"<p>The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket. </p>"
+          "documentation":"<p>The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket.</p>"
         }
       },
       "documentation":"<p>The location of the Amazon S3 bucket that contains a revision.</p>"
@@ -1925,6 +1989,32 @@
       },
       "documentation":"<p>Represents information about a stage and its definition.</p>"
     },
+    "StageExecution":{
+      "type":"structure",
+      "required":[
+        "pipelineExecutionId",
+        "status"
+      ],
+      "members":{
+        "pipelineExecutionId":{
+          "shape":"PipelineExecutionId",
+          "documentation":"<p>The ID of the pipeline execution associated with the stage.</p>"
+        },
+        "status":{
+          "shape":"StageExecutionStatus",
+          "documentation":"<p>The status of the stage, or for a completed stage, the last status of the stage.</p>"
+        }
+      },
+      "documentation":"<p>Represents information about the run of a stage.</p>"
+    },
+    "StageExecutionStatus":{
+      "type":"string",
+      "enum":[
+        "InProgress",
+        "Failed",
+        "Succeeded"
+      ]
+    },
     "StageName":{
       "type":"string",
       "max":100,
@@ -1937,6 +2027,17 @@
       },
       "documentation":"<p>The specified stage was specified in an invalid format or cannot be found.</p>",
       "exception":true
+    },
+    "StageNotRetryableException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The specified stage can't be retried because the pipeline structure or stage state changed after the stage failed to complete, the stage contains no failed actions, one or more actions are still in progress, or another retry attempt is already in progress. </p>",
+      "exception":true
+    },
+    "StageRetryMode":{
+      "type":"string",
+      "enum":["FAILED_ACTIONS"]
     },
     "StageState":{
       "type":"structure",
@@ -1952,6 +2053,10 @@
         "actionStates":{
           "shape":"ActionStateList",
           "documentation":"<p>The state of the stage.</p>"
+        },
+        "latestExecution":{
+          "shape":"StageExecution",
+          "documentation":"<p>Information about the latest execution in the stage, including its ID and status.</p>"
         }
       },
       "documentation":"<p>Represents information about the state of the stage.</p>"
@@ -2123,5 +2228,5 @@
       "pattern":"[0-9A-Za-z_-]+"
     }
   },
-  "documentation":"<fullname>AWS CodePipeline</fullname> <b>Overview</b> <p>This is the AWS CodePipeline API Reference. This guide provides descriptions of the actions and data types for AWS CodePipeline. Some functionality for your pipeline is only configurable through the API. For additional information, see the <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html\">AWS CodePipeline User Guide</a>.</p> <p>You can use the AWS CodePipeline API to work with pipelines, stages, actions, gates, and transitions, as described below.</p> <p><i>Pipelines</i> are models of automated release processes. Each pipeline is uniquely named, and consists of actions, gates, and stages. </p> <p>You can work with pipelines by calling: <ul><li><a>CreatePipeline</a>, which creates a uniquely-named pipeline.</li> <li><a>DeletePipeline</a>, which deletes the specified pipeline.</li> <li><a>GetPipeline</a>, which returns information about a pipeline structure.</li> <li><a>GetPipelineState</a>, which returns information about the current state of the stages and actions of a pipeline.</li> <li> <a>ListPipelines</a>, which gets a summary of all of the pipelines associated with your account.</li> <li><a>StartPipelineExecution</a>, which runs the the most recent revision of an artifact through the pipeline.</li> <li><a>UpdatePipeline</a>, which updates a pipeline with edits or changes to the structure of the pipeline.</li> </ul></p> <p>Pipelines include <i>stages</i>, which are which are logical groupings of gates and actions. Each stage contains one or more actions that must complete before the next stage begins. A stage will result in success or failure. If a stage fails, then the pipeline stops at that stage and will remain stopped until either a new version of an artifact appears in the source location, or a user takes action to re-run the most recent artifact through the pipeline. You can call <a>GetPipelineState</a>, which displays the status of a pipeline, including the status of stages in the pipeline, or <a>GetPipeline</a>, which returns the entire structure of the pipeline, including the stages of that pipeline. For more information about the structure of stages and actions, also refer to the <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html\">AWS CodePipeline Pipeline Structure Reference</a>.</p> <p>Pipeline stages include <i>actions</i>, which are categorized into categories such as source or build actions performed within a stage of a pipeline. For example, you can use a source action to import artifacts into a pipeline from a source such as Amazon S3. Like stages, you do not work with actions directly in most cases, but you do define and interact with actions when working with pipeline operations such as <a>CreatePipeline</a> and <a>GetPipelineState</a>. </p> <p>Pipelines also include <i>transitions</i>, which allow the transition of artifacts from one stage to the next in a pipeline after the actions in one stage complete.</p> <p>You can work with transitions by calling:</p> <ul> <li><a>DisableStageTransition</a>, which prevents artifacts from transitioning to the next stage in a pipeline.</li> <li><a>EnableStageTransition</a>, which enables transition of artifacts between stages in a pipeline. </li> </ul> <p><b>Using the API to integrate with AWS CodePipeline</b></p> <p>For third-party integrators or developers who want to create their own integrations with AWS CodePipeline, the expected sequence varies from the standard API user. In order to integrate with AWS CodePipeline, developers will need to work with the following items:</p> <ul> <li>Jobs, which are instances of an action. For example, a job for a source action might import a revision of an artifact from a source. <p>You can work with jobs by calling:</p> <ul> <li><a>AcknowledgeJob</a>, which confirms whether a job worker has received the specified job,</li> <li><a>GetJobDetails</a>, which returns the details of a job,</li> <li><a>PollForJobs</a>, which determines whether there are any jobs to act upon, </li> <li><a>PutJobFailureResult</a>, which provides details of a job failure, and</li> <li><a>PutJobSuccessResult</a>, which provides details of a job success.</li> </ul></li> <li>Third party jobs, which are instances of an action created by a partner action and integrated into AWS CodePipeline. Partner actions are created by members of the AWS Partner Network. <p>You can work with third party jobs by calling:</p> <ul><li><a>AcknowledgeThirdPartyJob</a>, which confirms whether a job worker has received the specified job,</li> <li><a>GetThirdPartyJobDetails</a>, which requests the details of a job for a partner action,</li> <li><a>PollForThirdPartyJobs</a>, which determines whether there are any jobs to act upon, </li> <li><a>PutThirdPartyJobFailureResult</a>, which provides details of a job failure, and</li> <li><a>PutThirdPartyJobSuccessResult</a>, which provides details of a job success.</li> </ul></li> </ul>"
+  "documentation":"<fullname>AWS CodePipeline</fullname> <p> <b>Overview</b> </p> <p>This is the AWS CodePipeline API Reference. This guide provides descriptions of the actions and data types for AWS CodePipeline. Some functionality for your pipeline is only configurable through the API. For additional information, see the <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html\">AWS CodePipeline User Guide</a>.</p> <p>You can use the AWS CodePipeline API to work with pipelines, stages, actions, gates, and transitions, as described below.</p> <p> <i>Pipelines</i> are models of automated release processes. Each pipeline is uniquely named, and consists of actions, gates, and stages. </p> <p>You can work with pipelines by calling:</p> <ul> <li> <p> <a>CreatePipeline</a>, which creates a uniquely-named pipeline.</p> </li> <li> <p> <a>DeletePipeline</a>, which deletes the specified pipeline.</p> </li> <li> <p> <a>GetPipeline</a>, which returns information about a pipeline structure.</p> </li> <li> <p> <a>GetPipelineState</a>, which returns information about the current state of the stages and actions of a pipeline.</p> </li> <li> <p> <a>ListPipelines</a>, which gets a summary of all of the pipelines associated with your account.</p> </li> <li> <p> <a>StartPipelineExecution</a>, which runs the the most recent revision of an artifact through the pipeline.</p> </li> <li> <p> <a>UpdatePipeline</a>, which updates a pipeline with edits or changes to the structure of the pipeline.</p> </li> </ul> <p>Pipelines include <i>stages</i>, which are which are logical groupings of gates and actions. Each stage contains one or more actions that must complete before the next stage begins. A stage will result in success or failure. If a stage fails, then the pipeline stops at that stage and will remain stopped until either a new version of an artifact appears in the source location, or a user takes action to re-run the most recent artifact through the pipeline. You can call <a>GetPipelineState</a>, which displays the status of a pipeline, including the status of stages in the pipeline, or <a>GetPipeline</a>, which returns the entire structure of the pipeline, including the stages of that pipeline. For more information about the structure of stages and actions, also refer to the <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html\">AWS CodePipeline Pipeline Structure Reference</a>.</p> <p>Pipeline stages include <i>actions</i>, which are categorized into categories such as source or build actions performed within a stage of a pipeline. For example, you can use a source action to import artifacts into a pipeline from a source such as Amazon S3. Like stages, you do not work with actions directly in most cases, but you do define and interact with actions when working with pipeline operations such as <a>CreatePipeline</a> and <a>GetPipelineState</a>. </p> <p>Pipelines also include <i>transitions</i>, which allow the transition of artifacts from one stage to the next in a pipeline after the actions in one stage complete.</p> <p>You can work with transitions by calling:</p> <ul> <li> <p> <a>DisableStageTransition</a>, which prevents artifacts from transitioning to the next stage in a pipeline.</p> </li> <li> <p> <a>EnableStageTransition</a>, which enables transition of artifacts between stages in a pipeline. </p> </li> </ul> <p> <b>Using the API to integrate with AWS CodePipeline</b> </p> <p>For third-party integrators or developers who want to create their own integrations with AWS CodePipeline, the expected sequence varies from the standard API user. In order to integrate with AWS CodePipeline, developers will need to work with the following items:</p> <p> <b>Jobs</b>, which are instances of an action. For example, a job for a source action might import a revision of an artifact from a source. </p> <p>You can work with jobs by calling:</p> <ul> <li> <p> <a>AcknowledgeJob</a>, which confirms whether a job worker has received the specified job,</p> </li> <li> <p> <a>GetJobDetails</a>, which returns the details of a job,</p> </li> <li> <p> <a>PollForJobs</a>, which determines whether there are any jobs to act upon, </p> </li> <li> <p> <a>PutJobFailureResult</a>, which provides details of a job failure, and</p> </li> <li> <p> <a>PutJobSuccessResult</a>, which provides details of a job success.</p> </li> </ul> <p> <b>Third party jobs</b>, which are instances of an action created by a partner action and integrated into AWS CodePipeline. Partner actions are created by members of the AWS Partner Network.</p> <p>You can work with third party jobs by calling:</p> <ul> <li> <p> <a>AcknowledgeThirdPartyJob</a>, which confirms whether a job worker has received the specified job,</p> </li> <li> <p> <a>GetThirdPartyJobDetails</a>, which requests the details of a job for a partner action,</p> </li> <li> <p> <a>PollForThirdPartyJobs</a>, which determines whether there are any jobs to act upon, </p> </li> <li> <p> <a>PutThirdPartyJobFailureResult</a>, which provides details of a job failure, and</p> </li> <li> <p> <a>PutThirdPartyJobSuccessResult</a>, which provides details of a job success.</p> </li> </ul>"
 }
