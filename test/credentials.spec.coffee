@@ -737,6 +737,25 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.identityId).not.to.exist
       expect(creds.params.IdentityId).not.to.exist
 
+  describe 'clearIdOnNotAuthorized', ->
+    
+    it 'should call clearCachedId if user is not authorized', ->
+      clearCache = helpers.spyOn(creds,'clearCachedId')
+      helpers.mockResponses [
+        {data: null, error: {code: 'NotAuthorizedException'}}
+      ]
+      creds.clearIdOnNotAuthorized(err)
+      expect(clearCache.calls.length).to.equal(1)
+      
+    it 'should not call clearCachedId if user is authorized', ->
+      clearCache = helpers.spyOn(creds,'clearCachedId')
+      helpers.mockResponses [
+        {data: null, error: {code: ''}}
+      ]
+      creds.clearIdOnNotAuthorized(err)
+      expect(clearCache.calls.length).to.equal(0)
+
+
   describe 'createClients', ->
     beforeEach -> setupCreds()
 
