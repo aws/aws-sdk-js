@@ -1204,12 +1204,20 @@ describe 'AWS.S3', ->
         req = s3.putObject(Bucket: 'example', Key: 'foo', Body: new Stream.Stream)
         expect(req.build(->).httpRequest.headers['Content-MD5']).to.equal(undefined)
 
-      it 'throws an error in SigV4, if a non-file stream is provided', (done) ->
-        s3 = new AWS.S3({signatureVersion: 'v4'})
+      it 'throws an error in SigV4, if a non-file stream is provided when body signing enabled', (done) ->
+        s3 = new AWS.S3({signatureVersion: 'v4', s3DisableBodySigning: false})
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream.Stream)
         req.send (err) ->
           expect(err.message).to.contain('stream objects are not supported')
           done()
+
+      it 'does not throw an error in SigV4, if a non-file stream is provided when body signing disabled with ContentLength', (done) ->
+        s3 = new AWS.S3({signatureVersion: 'v4', s3DisableBodySigning: true})
+        helpers.mockResponse data: ETag: 'etag'
+        req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream.Stream, ContentLength: 10)
+        req.send (err) ->
+          expect(err).not.to.exist
+          done()          
 
       it 'opens separate stream if a file object is provided (signed payload)', (done) ->
         hash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
