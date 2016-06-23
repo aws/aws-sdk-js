@@ -350,14 +350,14 @@
       "members":{
         "ProviderName":{
           "shape":"CognitoIdentityProviderName",
-          "documentation":"<p>The provider name for a Cognito User Identity Pool. For example, <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code>.</p>"
+          "documentation":"<p>The provider name for an Amazon Cognito Identity User Pool. For example, <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code>.</p>"
         },
         "ClientId":{
           "shape":"CognitoIdentityProviderClientId",
-          "documentation":"<p>The client ID for the Cognito User Identity Pool.</p>"
+          "documentation":"<p>The client ID for the Amazon Cognito Identity User Pool.</p>"
         }
       },
-      "documentation":"<p>A provider representing a Cognito User Identity Pool and its client ID.</p>"
+      "documentation":"<p>A provider representing an Amazon Cognito Identity User Pool and its client ID.</p>"
     },
     "CognitoIdentityProviderClientId":{
       "type":"string",
@@ -415,7 +415,11 @@
         },
         "CognitoIdentityProviders":{
           "shape":"CognitoIdentityProviderList",
-          "documentation":"<p>A list representing a Cognito User Identity Pool and its client ID.</p>"
+          "documentation":"<p>An array of Amazon Cognito Identity user pools.</p>"
+        },
+        "SamlProviderARNs":{
+          "shape":"SAMLProviderList",
+          "documentation":"<p>An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.</p>"
         }
       },
       "documentation":"<p>Input to the CreateIdentityPool action.</p>"
@@ -553,6 +557,10 @@
         "Logins":{
           "shape":"LoginsMap",
           "documentation":"<p>A set of optional name-value pairs that map provider names to provider tokens.</p>"
+        },
+        "CustomRoleArn":{
+          "shape":"ARNString",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the role to be assumed when multiple roles were received in the token from the identity provider. For example, a SAML-based identity provider. This parameter is optional for identity providers that do not support role customization.</p>"
         }
       },
       "documentation":"<p>Input to the <code>GetCredentialsForIdentity</code> action.</p>"
@@ -585,7 +593,7 @@
         },
         "Logins":{
           "shape":"LoginsMap",
-          "documentation":"<p>A set of optional name-value pairs that map provider names to provider tokens.</p> <p>The available provider names for <code>Logins</code> are as follows: <ul> <li>Facebook: <code>graph.facebook.com</code></li> <li>Amazon Cognito Identity Provider: <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code></li> <li>Google: <code>accounts.google.com</code></li> <li>Amazon: <code>www.amazon.com</code></li> <li>Twitter: <code>api.twitter.com</code></li> <li>Digits: <code>www.digits.com</code></li> </ul> </p>"
+          "documentation":"<p>A set of optional name-value pairs that map provider names to provider tokens.</p> <p>The available provider names for <code>Logins</code> are as follows: <ul> <li>Facebook: <code>graph.facebook.com</code></li> <li>Google: <code>accounts.google.com</code></li> <li>Amazon: <code>www.amazon.com</code></li> <li>Twitter: <code>api.twitter.com</code></li> <li>Digits: <code>www.digits.com</code></li> </ul> </p>"
         }
       },
       "documentation":"Input to the GetId action."
@@ -675,7 +683,7 @@
         },
         "Logins":{
           "shape":"LoginsMap",
-          "documentation":"<p>A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider's authflow. For accounts.google.com, an Amazon Cognito Identity Provider, or any other OpenId Connect provider, always include the <code>id_token</code>.</p>"
+          "documentation":"A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider's authflow. For accounts.google.com or any other OpenId Connect provider, always include the id_token."
         }
       },
       "documentation":"Input to the GetOpenIdToken action."
@@ -767,7 +775,11 @@
         },
         "CognitoIdentityProviders":{
           "shape":"CognitoIdentityProviderList",
-          "documentation":"<p>A list representing a Cognito User Identity Pool and its client ID.</p>"
+          "documentation":"<p>A list representing an Amazon Cognito Identity User Pool and its client ID.</p>"
+        },
+        "SamlProviderARNs":{
+          "shape":"SAMLProviderList",
+          "documentation":"<p>An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.</p>"
         }
       },
       "documentation":"An object representing a Cognito identity pool."
@@ -812,14 +824,12 @@
     "IdentityProviderName":{
       "type":"string",
       "max":128,
-      "min":1,
-      "pattern":"[\\w._/:-]+"
+      "min":1
     },
     "IdentityProviderToken":{
       "type":"string",
-      "max":2048,
-      "min":1,
-      "pattern":"[\\S]+"
+      "max":50000,
+      "min":1
     },
     "IdentityProviders":{
       "type":"map",
@@ -1095,6 +1105,10 @@
       "key":{"shape":"RoleType"},
       "value":{"shape":"ARNString"},
       "max":2
+    },
+    "SAMLProviderList":{
+      "type":"list",
+      "member":{"shape":"ARNString"}
     },
     "SecretKeyString":{"type":"string"},
     "SessionTokenString":{"type":"string"},
