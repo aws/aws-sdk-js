@@ -24,13 +24,13 @@ describe 'AWS.EC2', ->
           'Action=CopySnapshot',
           'DestinationRegion=mock-region',
           'PresignedUrl=https%3A%2F%2Fec2.src-region.amazonaws.com%2F%3F' +
-            "Action%3DCopySnapshot%26DestinationRegion%3Dmock-region%26SourceRegion%3Dsrc-region" +
-            "%26SourceSnapshotId%3Dsnap-123456789%26Version%3D#{ec2.api.apiVersion}" +
-            "%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3Dakid%252F19700101" +
-            "%252Fsrc-region%252Fec2%252Faws4_request%26X-Amz-Date%3D19700101T000000Z" +
-            "%26X-Amz-Expires%3D3600%26X-Amz-Security-Token%3Dsession" +
-            "%26X-Amz-Signature%3D37f45901157b4599bfcd4bf42b26f958d503f357aed899488a78f494825d34be" +
-            "%26X-Amz-SignedHeaders%3Dhost",
+          'Action%3DCopySnapshot%26DestinationRegion%3Dmock-region%26SourceRegion%3Dsrc-region' + 
+          '%26SourceSnapshotId%3Dsnap-123456789%26Version%3D2016-04-01' + 
+          '%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3Dakid%252F19700101' +
+          '%252Fsrc-region%252Fec2%252Faws4_request%26X-Amz-Date%3D19700101T000000Z' + 
+          '%26X-Amz-Expires%3D3600%26X-Amz-Security-Token%3Dsession' + 
+          '%26X-Amz-Signature%3D49bbd1016e6e7dd7eafd12ff8773ef56c4f63bbdc8edb767452eaa6a144ef98c' + 
+          '%26X-Amz-SignedHeaders%3Dhost',
           'SourceRegion=src-region',
           'SourceSnapshotId=snap-123456789'
         ].forEach (i) ->
