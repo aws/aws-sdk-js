@@ -873,6 +873,17 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.cacheId.calls.length).to.equal(0)
       expect(creds.getStorage('id')).not.to.exist
 
+    it 'clears cache if getId fails for unauthorized user', ->
+      creds.setStorage('id', 'MYID')
+      helpers.mockResponses [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: {message : 'INVALID SERVICE', code: 'NotAuthorizedException'} }
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
+
     it 'does not clear cache if getId fails for authorized user', ->
       creds.setStorage('id', 'MYID')
       helpers.mockResponses [
@@ -884,6 +895,17 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.cacheId.calls.length).to.equal(0)
       expect(creds.getStorage('id')).to.exist
 
+    it 'clears cache if getOpenIdToken fails for unauthorized user', ->
+      creds.setStorage('id', 'MYID')
+      helpers.mockResponses [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: {message : 'INVALID SERVICE', code: 'NotAuthorizedException'}}
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
+
     it 'does not clear cache if getOpenIdToken fails for authorized user', ->
       creds.setStorage('id', 'MYID')
       helpers.mockResponses [
@@ -894,6 +916,17 @@ describe 'AWS.CognitoIdentityCredentials', ->
       creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
       expect(creds.cacheId.calls.length).to.equal(0)
       expect(creds.getStorage('id')).to.equal('MYID')
+
+    it 'clears cache if getCredentialsForIdentity fails for unauthorized user', ->
+      delete creds.cognito.config.params.RoleArn
+      creds.setStorage('id', 'MYID')
+      helpers.mockResponses [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: {message : 'INVALID SERVICE', code: 'NotAuthorizedException'}}
+      ]
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
 
     it 'does not clear cache if getCredentialsForIdentity fails for authorized user', ->
       delete creds.cognito.config.params.RoleArn
