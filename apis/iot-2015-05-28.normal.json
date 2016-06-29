@@ -3673,6 +3673,10 @@
           "shape":"AwsArn",
           "documentation":"<p>The ARN of the IAM role that grants access to the DynamoDB table.</p>"
         },
+        "operation":{
+          "shape":"DynamoOperation",
+          "documentation":"<p>The type of operation to be performed. This follows the substitution template, so it can be <code>${operation}</code>, but the substitution must result in one of the following: <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code>.</p>"
+        },
         "hashKeyField":{
           "shape":"HashKeyField",
           "documentation":"<p>The hash key name.</p>"
@@ -3711,6 +3715,7 @@
         "NUMBER"
       ]
     },
+    "DynamoOperation":{"type":"string"},
     "ElasticsearchAction":{
       "type":"structure",
       "required":[
