@@ -470,7 +470,7 @@ if AWS.util.isNode()
         expect(creds.getECSRelativeUri()).to.equal(undefined)
 
       it 'returns relative URI when environment variable is set', ->
-        process.env[creds.environmentVar] = '/path'
+        process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path'
         expect(creds.getECSRelativeUri()).to.equal('/path')
 
     describe 'credsFormatIsValid', ->
@@ -489,7 +489,7 @@ if AWS.util.isNode()
 
     describe 'needsRefresh', ->
       it 'can be expired based on expire time from URI endpoint', ->
-        process.env[creds.environmentVar] = '/path'
+        process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path'
         spy = mockEndpoint(new Date(0))
         creds.refresh(->)
         expect(spy.calls.length).to.equal(1)
@@ -498,7 +498,7 @@ if AWS.util.isNode()
     describe 'refresh', ->
       it 'loads credentials from specified relative URI', ->
         callbackErr = null
-        process.env[creds.environmentVar] = '/path'
+        process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path'
         spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000))
         creds.refresh((err) -> callbackErr = err)
         expect(spy.calls.length).to.equal(1)
