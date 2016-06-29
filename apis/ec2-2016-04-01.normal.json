@@ -946,7 +946,7 @@
       },
       "input":{"shape":"DescribeInstancesRequest"},
       "output":{"shape":"DescribeInstancesResult"},
-      "documentation":"<p>Describes one or more of your instances.</p> <p>If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the returned results.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p>"
+      "documentation":"<p>Describes one or more of your instances.</p> <p>If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the returned results.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.</p>"
     },
     "DescribeInternetGateways":{
       "name":"DescribeInternetGateways",
@@ -5785,7 +5785,7 @@
         },
         "Attribute":{
           "shape":"InstanceAttributeName",
-          "documentation":"<p>The instance attribute.</p>",
+          "documentation":"<p>The instance attribute.</p> <p>Note: The <code>enaSupport</code> attribute is not supported at this time.</p>",
           "locationName":"attribute"
         }
       },
@@ -8911,8 +8911,13 @@
         },
         "SriovNetSupport":{
           "shape":"String",
-          "documentation":"<p>Specifies whether enhanced networking is enabled.</p>",
+          "documentation":"<p>Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>",
           "locationName":"sriovNetSupport"
+        },
+        "EnaSupport":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether enhanced networking with ENA is enabled.</p>",
+          "locationName":"enaSupport"
         },
         "StateReason":{
           "shape":"StateReason",
@@ -9002,6 +9007,7 @@
         },
         "SriovNetSupport":{
           "shape":"AttributeValue",
+          "documentation":"<p>Indicates whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>",
           "locationName":"sriovNetSupport"
         },
         "BlockDeviceMappings":{
@@ -9853,8 +9859,13 @@
         },
         "SriovNetSupport":{
           "shape":"String",
-          "documentation":"<p>Specifies whether enhanced networking is enabled.</p>",
+          "documentation":"<p>Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>",
           "locationName":"sriovNetSupport"
+        },
+        "EnaSupport":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether enhanced networking with ENA is enabled.</p>",
+          "locationName":"enaSupport"
         }
       },
       "documentation":"<p>Describes an instance.</p>"
@@ -9919,7 +9930,13 @@
         },
         "SriovNetSupport":{
           "shape":"AttributeValue",
+          "documentation":"<p>Indicates whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>",
           "locationName":"sriovNetSupport"
+        },
+        "EnaSupport":{
+          "shape":"AttributeBooleanValue",
+          "documentation":"<p>Indicates whether enhanced networking with ENA is enabled.</p>",
+          "locationName":"enaSupport"
         },
         "SourceDestCheck":{
           "shape":"AttributeBooleanValue",
@@ -9949,7 +9966,8 @@
         "sourceDestCheck",
         "groupSet",
         "ebsOptimized",
-        "sriovNetSupport"
+        "sriovNetSupport",
+        "enaSupport"
       ]
     },
     "InstanceBlockDeviceMapping":{
@@ -11120,8 +11138,13 @@
         },
         "SriovNetSupport":{
           "shape":"AttributeValue",
-          "documentation":"<p>Set to <code>simple</code> to enable enhanced networking for the instance.</p> <p>There is no way to disable enhanced networking at this time.</p> <p>This option is supported only for HVM instances. Specifying this option with a PV instance can make it unreachable.</p>",
+          "documentation":"<p>Set to <code>simple</code> to enable enhanced networking with the Intel 82599 Virtual Function interface for the instance.</p> <p>There is no way to disable enhanced networking with the Intel 82599 Virtual Function interface at this time.</p> <p>This option is supported only for HVM instances. Specifying this option with a PV instance can make it unreachable.</p>",
           "locationName":"sriovNetSupport"
+        },
+        "EnaSupport":{
+          "shape":"AttributeBooleanValue",
+          "documentation":"<p>Set to <code>true</code> to enable enhanced networking with ENA for the instance.</p> <p>This option is supported only for HVM instances. Specifying this option with a PV instance can make it unreachable.</p>",
+          "locationName":"enaSupport"
         }
       },
       "documentation":"<p>Contains the parameters for ModifyInstanceAttribute.</p>"
@@ -12761,8 +12784,13 @@
         },
         "SriovNetSupport":{
           "shape":"String",
-          "documentation":"<p>Set to <code>simple</code> to enable enhanced networking for the AMI and any instances that you launch from the AMI.</p> <p>There is no way to disable <code>sriovNetSupport</code> at this time.</p> <p>This option is supported only for HVM AMIs. Specifying this option with a PV AMI can make instances launched from the AMI unreachable.</p>",
+          "documentation":"<p>Set to <code>simple</code> to enable enhanced networking with the Intel 82599 Virtual Function interface for the AMI and any instances that you launch from the AMI.</p> <p>There is no way to disable <code>sriovNetSupport</code> at this time.</p> <p>This option is supported only for HVM AMIs. Specifying this option with a PV AMI can make instances launched from the AMI unreachable.</p>",
           "locationName":"sriovNetSupport"
+        },
+        "EnaSupport":{
+          "shape":"Boolean",
+          "documentation":"<p>Set to <code>true</code> to enable enhanced networking with ENA for the AMI and any instances that you launch from the AMI.</p> <p>This option is supported only for HVM AMIs. Specifying this option with a PV AMI can make instances launched from the AMI unreachable.</p>",
+          "locationName":"enaSupport"
         }
       },
       "documentation":"<p>Contains the parameters for RegisterImage.</p>"
