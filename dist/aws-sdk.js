@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.4.3
+// AWS SDK for JavaScript v2.4.4
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -191,7 +191,7 @@ AWS.apiLoader.services['sqs']['2012-11-05'] = {"version":"2.0","metadata":{"apiV
 AWS.apiLoader.services['ssm'] = {};
 AWS.SSM = AWS.Service.defineService('ssm', [ '2014-11-06' ]);
 
-AWS.apiLoader.services['ssm']['2014-11-06'] = {"version":"2.0","metadata":{"apiVersion":"2014-11-06","endpointPrefix":"ssm","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"Amazon SSM","serviceFullName":"Amazon Simple Systems Management Service","signatureVersion":"v4","targetPrefix":"AmazonSSM"},"operations":{"CancelCommand":{"input":{"type":"structure","required":["CommandId"],"members":{"CommandId":{},"InstanceIds":{"shape":"S3"}}},"output":{"type":"structure","members":{}},"http":{}},"CreateAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{},"Parameters":{"shape":"S8"}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Sd"}}},"http":{}},"CreateAssociationBatch":{"input":{"type":"structure","required":["Entries"],"members":{"Entries":{"type":"list","member":{"shape":"Sl","locationName":"entries"}}}},"output":{"type":"structure","members":{"Successful":{"type":"list","member":{"shape":"Sd","locationName":"AssociationDescription"}},"Failed":{"type":"list","member":{"locationName":"FailedCreateAssociationEntry","type":"structure","members":{"Entry":{"shape":"Sl"},"Message":{},"Fault":{}}}}}},"http":{}},"CreateDocument":{"input":{"type":"structure","required":["Content","Name"],"members":{"Content":{},"Name":{}}},"output":{"type":"structure","members":{"DocumentDescription":{"shape":"Sv"}}},"http":{}},"DeleteAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{}}},"output":{"type":"structure","members":{}},"http":{}},"DeleteDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{}},"http":{}},"DescribeAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Sd"}}},"http":{}},"DescribeDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{"Document":{"shape":"Sv"}}},"http":{}},"DescribeDocumentPermission":{"input":{"type":"structure","required":["Name","PermissionType"],"members":{"Name":{},"PermissionType":{}}},"output":{"type":"structure","members":{"AccountIds":{"shape":"S1m"}}},"http":{}},"DescribeInstanceInformation":{"input":{"type":"structure","members":{"InstanceInformationFilterList":{"type":"list","member":{"locationName":"InstanceInformationFilter","type":"structure","required":["key","valueSet"],"members":{"key":{},"valueSet":{"type":"list","member":{"locationName":"InstanceInformationFilterValue"}}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"InstanceInformationList":{"type":"list","member":{"locationName":"InstanceInformation","type":"structure","members":{"InstanceId":{},"PingStatus":{},"LastPingDateTime":{"type":"timestamp"},"AgentVersion":{},"IsLatestVersion":{"type":"boolean"},"PlatformType":{},"PlatformName":{},"PlatformVersion":{}}}},"NextToken":{}}},"http":{}},"GetDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{"Name":{},"Content":{}}},"http":{}},"ListAssociations":{"input":{"type":"structure","required":["AssociationFilterList"],"members":{"AssociationFilterList":{"type":"list","member":{"locationName":"AssociationFilter","type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Associations":{"type":"list","member":{"locationName":"Association","type":"structure","members":{"Name":{},"InstanceId":{}}}},"NextToken":{}}},"http":{}},"ListCommandInvocations":{"input":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"MaxResults":{"type":"integer"},"NextToken":{},"Filters":{"shape":"S2g"},"Details":{"type":"boolean"}}},"output":{"type":"structure","members":{"CommandInvocations":{"type":"list","member":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"Comment":{},"DocumentName":{},"RequestedDateTime":{"type":"timestamp"},"Status":{},"TraceOutput":{},"CommandPlugins":{"type":"list","member":{"type":"structure","members":{"Name":{},"Status":{},"ResponseCode":{"type":"integer"},"ResponseStartDateTime":{"type":"timestamp"},"ResponseFinishDateTime":{"type":"timestamp"},"Output":{},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}}}}}},"NextToken":{}}},"http":{}},"ListCommands":{"input":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"MaxResults":{"type":"integer"},"NextToken":{},"Filters":{"shape":"S2g"}}},"output":{"type":"structure","members":{"Commands":{"type":"list","member":{"shape":"S31"}},"NextToken":{}}},"http":{}},"ListDocuments":{"input":{"type":"structure","members":{"DocumentFilterList":{"type":"list","member":{"locationName":"DocumentFilter","type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"DocumentIdentifiers":{"type":"list","member":{"locationName":"DocumentIdentifier","type":"structure","members":{"Name":{},"Owner":{},"PlatformTypes":{"shape":"S19"}}}},"NextToken":{}}},"http":{}},"ModifyDocumentPermission":{"input":{"type":"structure","required":["Name","PermissionType"],"members":{"Name":{},"PermissionType":{},"AccountIdsToAdd":{"shape":"S1m"},"AccountIdsToRemove":{"shape":"S1m"}}},"output":{"type":"structure","members":{}},"http":{}},"SendCommand":{"input":{"type":"structure","required":["InstanceIds","DocumentName"],"members":{"InstanceIds":{"shape":"S3"},"DocumentName":{},"DocumentHash":{},"DocumentHashType":{},"TimeoutSeconds":{"type":"integer"},"Comment":{},"Parameters":{"shape":"S8"},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}},"output":{"type":"structure","members":{"Command":{"shape":"S31"}}},"http":{}},"UpdateAssociationStatus":{"input":{"type":"structure","required":["Name","InstanceId","AssociationStatus"],"members":{"Name":{},"InstanceId":{},"AssociationStatus":{"shape":"Sf"}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Sd"}}},"http":{}}},"shapes":{"S3":{"type":"list","member":{}},"S8":{"type":"map","key":{},"value":{"type":"list","member":{}}},"Sd":{"type":"structure","members":{"Name":{},"InstanceId":{},"Date":{"type":"timestamp"},"Status":{"shape":"Sf"},"Parameters":{"shape":"S8"}}},"Sf":{"type":"structure","required":["Date","Name","Message"],"members":{"Date":{"type":"timestamp"},"Name":{},"Message":{},"AdditionalInfo":{}}},"Sl":{"type":"structure","members":{"Name":{},"InstanceId":{},"Parameters":{"shape":"S8"}}},"Sv":{"type":"structure","members":{"Sha1":{},"Hash":{},"HashType":{},"Name":{},"Owner":{},"CreatedDate":{"type":"timestamp"},"Status":{},"Description":{},"Parameters":{"type":"list","member":{"locationName":"DocumentParameter","type":"structure","members":{"Name":{},"Type":{},"Description":{},"DefaultValue":{}}}},"PlatformTypes":{"shape":"S19"}}},"S19":{"type":"list","member":{"locationName":"PlatformType"}},"S1m":{"type":"list","member":{"locationName":"AccountId"}},"S2g":{"type":"list","member":{"type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"S31":{"type":"structure","members":{"CommandId":{},"DocumentName":{},"Comment":{},"ExpiresAfter":{"type":"timestamp"},"Parameters":{"shape":"S8"},"InstanceIds":{"shape":"S3"},"RequestedDateTime":{"type":"timestamp"},"Status":{},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}}},"paginators":{"ListAssociations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"Associations"},"ListCommandInvocations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"CommandInvocations"},"ListCommands":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"Commands"},"ListDocuments":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"DocumentIdentifiers"}}};
+AWS.apiLoader.services['ssm']['2014-11-06'] = {"version":"2.0","metadata":{"apiVersion":"2014-11-06","endpointPrefix":"ssm","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"Amazon SSM","serviceFullName":"Amazon Simple Systems Management Service","signatureVersion":"v4","targetPrefix":"AmazonSSM"},"operations":{"AddTagsToResource":{"input":{"type":"structure","required":["ResourceType","ResourceId","Tags"],"members":{"ResourceType":{},"ResourceId":{},"Tags":{"shape":"S4"}}},"output":{"type":"structure","members":{}},"http":{}},"CancelCommand":{"input":{"type":"structure","required":["CommandId"],"members":{"CommandId":{},"InstanceIds":{"shape":"Sb"}}},"output":{"type":"structure","members":{}},"http":{}},"CreateActivation":{"input":{"type":"structure","required":["IamRole"],"members":{"Description":{},"DefaultInstanceName":{},"IamRole":{},"RegistrationLimit":{"type":"integer"},"ExpirationDate":{"type":"timestamp"}}},"output":{"type":"structure","members":{"ActivationId":{},"ActivationCode":{}}},"http":{}},"CreateAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{},"Parameters":{"shape":"Sp"}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Su"}}},"http":{}},"CreateAssociationBatch":{"input":{"type":"structure","required":["Entries"],"members":{"Entries":{"type":"list","member":{"shape":"S12","locationName":"entries"}}}},"output":{"type":"structure","members":{"Successful":{"type":"list","member":{"shape":"Su","locationName":"AssociationDescription"}},"Failed":{"type":"list","member":{"locationName":"FailedCreateAssociationEntry","type":"structure","members":{"Entry":{"shape":"S12"},"Message":{},"Fault":{}}}}}},"http":{}},"CreateDocument":{"input":{"type":"structure","required":["Content","Name"],"members":{"Content":{},"Name":{}}},"output":{"type":"structure","members":{"DocumentDescription":{"shape":"S1c"}}},"http":{}},"DeleteActivation":{"input":{"type":"structure","required":["ActivationId"],"members":{"ActivationId":{}}},"output":{"type":"structure","members":{}},"http":{}},"DeleteAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{}}},"output":{"type":"structure","members":{}},"http":{}},"DeleteDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{}},"http":{}},"DeregisterManagedInstance":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{}}},"output":{"type":"structure","members":{}},"http":{}},"DescribeActivations":{"input":{"type":"structure","members":{"Filters":{"type":"list","member":{"type":"structure","members":{"FilterKey":{},"FilterValues":{"type":"list","member":{}}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"ActivationList":{"type":"list","member":{"type":"structure","members":{"ActivationId":{},"Description":{},"DefaultInstanceName":{},"IamRole":{},"RegistrationLimit":{"type":"integer"},"RegistrationsCount":{"type":"integer"},"ExpirationDate":{"type":"timestamp"},"Expired":{"type":"boolean"},"CreatedDate":{"type":"timestamp"}}}},"NextToken":{}}},"http":{}},"DescribeAssociation":{"input":{"type":"structure","required":["Name","InstanceId"],"members":{"Name":{},"InstanceId":{}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Su"}}},"http":{}},"DescribeDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{"Document":{"shape":"S1c"}}},"http":{}},"DescribeDocumentPermission":{"input":{"type":"structure","required":["Name","PermissionType"],"members":{"Name":{},"PermissionType":{}}},"output":{"type":"structure","members":{"AccountIds":{"shape":"S2m"}}},"http":{}},"DescribeInstanceInformation":{"input":{"type":"structure","members":{"InstanceInformationFilterList":{"type":"list","member":{"locationName":"InstanceInformationFilter","type":"structure","required":["key","valueSet"],"members":{"key":{},"valueSet":{"type":"list","member":{"locationName":"InstanceInformationFilterValue"}}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"InstanceInformationList":{"type":"list","member":{"locationName":"InstanceInformation","type":"structure","members":{"InstanceId":{},"PingStatus":{},"LastPingDateTime":{"type":"timestamp"},"AgentVersion":{},"IsLatestVersion":{"type":"boolean"},"PlatformType":{},"PlatformName":{},"PlatformVersion":{},"ActivationId":{},"IamRole":{},"RegistrationDate":{"type":"timestamp"},"ResourceType":{},"Name":{},"IPAddress":{},"ComputerName":{}}}},"NextToken":{}}},"http":{}},"GetDocument":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"type":"structure","members":{"Name":{},"Content":{}}},"http":{}},"ListAssociations":{"input":{"type":"structure","required":["AssociationFilterList"],"members":{"AssociationFilterList":{"type":"list","member":{"locationName":"AssociationFilter","type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Associations":{"type":"list","member":{"locationName":"Association","type":"structure","members":{"Name":{},"InstanceId":{}}}},"NextToken":{}}},"http":{}},"ListCommandInvocations":{"input":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"MaxResults":{"type":"integer"},"NextToken":{},"Filters":{"shape":"S3f"},"Details":{"type":"boolean"}}},"output":{"type":"structure","members":{"CommandInvocations":{"type":"list","member":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"Comment":{},"DocumentName":{},"RequestedDateTime":{"type":"timestamp"},"Status":{},"TraceOutput":{},"CommandPlugins":{"type":"list","member":{"type":"structure","members":{"Name":{},"Status":{},"ResponseCode":{"type":"integer"},"ResponseStartDateTime":{"type":"timestamp"},"ResponseFinishDateTime":{"type":"timestamp"},"Output":{},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}}}}}},"NextToken":{}}},"http":{}},"ListCommands":{"input":{"type":"structure","members":{"CommandId":{},"InstanceId":{},"MaxResults":{"type":"integer"},"NextToken":{},"Filters":{"shape":"S3f"}}},"output":{"type":"structure","members":{"Commands":{"type":"list","member":{"shape":"S40"}},"NextToken":{}}},"http":{}},"ListDocuments":{"input":{"type":"structure","members":{"DocumentFilterList":{"type":"list","member":{"locationName":"DocumentFilter","type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"DocumentIdentifiers":{"type":"list","member":{"locationName":"DocumentIdentifier","type":"structure","members":{"Name":{},"Owner":{},"PlatformTypes":{"shape":"S1q"}}}},"NextToken":{}}},"http":{}},"ListTagsForResource":{"input":{"type":"structure","required":["ResourceType","ResourceId"],"members":{"ResourceType":{},"ResourceId":{}}},"output":{"type":"structure","members":{"TagList":{"shape":"S4"}}},"http":{}},"ModifyDocumentPermission":{"input":{"type":"structure","required":["Name","PermissionType"],"members":{"Name":{},"PermissionType":{},"AccountIdsToAdd":{"shape":"S2m"},"AccountIdsToRemove":{"shape":"S2m"}}},"output":{"type":"structure","members":{}},"http":{}},"RemoveTagsFromResource":{"input":{"type":"structure","required":["ResourceType","ResourceId","TagKeys"],"members":{"ResourceType":{},"ResourceId":{},"TagKeys":{"type":"list","member":{}}}},"output":{"type":"structure","members":{}},"http":{}},"SendCommand":{"input":{"type":"structure","required":["InstanceIds","DocumentName"],"members":{"InstanceIds":{"shape":"Sb"},"DocumentName":{},"DocumentHash":{},"DocumentHashType":{},"TimeoutSeconds":{"type":"integer"},"Comment":{},"Parameters":{"shape":"Sp"},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}},"output":{"type":"structure","members":{"Command":{"shape":"S40"}}},"http":{}},"UpdateAssociationStatus":{"input":{"type":"structure","required":["Name","InstanceId","AssociationStatus"],"members":{"Name":{},"InstanceId":{},"AssociationStatus":{"shape":"Sw"}}},"output":{"type":"structure","members":{"AssociationDescription":{"shape":"Su"}}},"http":{}},"UpdateManagedInstanceRole":{"input":{"type":"structure","required":["InstanceId","IamRole"],"members":{"InstanceId":{},"IamRole":{}}},"output":{"type":"structure","members":{}},"http":{}}},"shapes":{"S4":{"type":"list","member":{"type":"structure","required":["Key","Value"],"members":{"Key":{},"Value":{}}}},"Sb":{"type":"list","member":{}},"Sp":{"type":"map","key":{},"value":{"type":"list","member":{}}},"Su":{"type":"structure","members":{"Name":{},"InstanceId":{},"Date":{"type":"timestamp"},"Status":{"shape":"Sw"},"Parameters":{"shape":"Sp"}}},"Sw":{"type":"structure","required":["Date","Name","Message"],"members":{"Date":{"type":"timestamp"},"Name":{},"Message":{},"AdditionalInfo":{}}},"S12":{"type":"structure","members":{"Name":{},"InstanceId":{},"Parameters":{"shape":"Sp"}}},"S1c":{"type":"structure","members":{"Sha1":{},"Hash":{},"HashType":{},"Name":{},"Owner":{},"CreatedDate":{"type":"timestamp"},"Status":{},"Description":{},"Parameters":{"type":"list","member":{"locationName":"DocumentParameter","type":"structure","members":{"Name":{},"Type":{},"Description":{},"DefaultValue":{}}}},"PlatformTypes":{"shape":"S1q"}}},"S1q":{"type":"list","member":{"locationName":"PlatformType"}},"S2m":{"type":"list","member":{"locationName":"AccountId"}},"S3f":{"type":"list","member":{"type":"structure","required":["key","value"],"members":{"key":{},"value":{}}}},"S40":{"type":"structure","members":{"CommandId":{},"DocumentName":{},"Comment":{},"ExpiresAfter":{"type":"timestamp"},"Parameters":{"shape":"Sp"},"InstanceIds":{"shape":"Sb"},"RequestedDateTime":{"type":"timestamp"},"Status":{},"OutputS3BucketName":{},"OutputS3KeyPrefix":{}}}},"paginators":{"ListAssociations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"Associations"},"ListCommandInvocations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"CommandInvocations"},"ListCommands":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"Commands"},"ListDocuments":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"DocumentIdentifiers"},"DescribeActivations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxResults","result_key":"ActivationList"}}};
 AWS.apiLoader.services['storagegateway'] = {};
 AWS.StorageGateway = AWS.Service.defineService('storagegateway', [ '2013-06-30' ]);
 
@@ -319,7 +319,7 @@ AWS.CloudFront.Signer = inherit({
 
         var cookieHash = {};
         for (var key in signatureHash) {
-            if (signatureHash.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(signatureHash, key)) {
                 cookieHash['CloudFront-' + key] = signatureHash[key];
             }
         }
@@ -336,13 +336,13 @@ AWS.CloudFront.Signer = inherit({
         }
 
         var parsedUrl = url.parse(options.url, true),
-            signatureHash = options.hasOwnProperty('policy')
+            signatureHash = Object.prototype.hasOwnProperty.call(options, 'policy')
                 ? signWithCustomPolicy(options.policy, this.keyPairId, this.privateKey)
                 : signWithCannedPolicy(resource, options.expires, this.keyPairId, this.privateKey);
 
         parsedUrl.search = null;
         for (var key in signatureHash) {
-            if (signatureHash.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(signatureHash, key)) {
                 parsedUrl.query[key] = signatureHash[key];
             }
         }
@@ -441,7 +441,7 @@ AWS.Config = AWS.util.inherit({
     allowUnknownKeys = allowUnknownKeys || false;
     options = this.extractCredentials(options);
     AWS.util.each.call(this, options, function (key, value) {
-      if (allowUnknownKeys || this.keys.hasOwnProperty(key) ||
+      if (allowUnknownKeys || Object.prototype.hasOwnProperty.call(this.keys, key) ||
           AWS.Service.hasService(key)) {
         this.set(key, value);
       }
@@ -558,7 +558,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.4.3',
+  VERSION: '2.4.4',
 
 
   Signers: {},
@@ -2260,7 +2260,7 @@ function translateStructure(structure, shape) {
   var shapeMembers = shape.members;
   util.each(shapeMembers, function(name, memberShape) {
     var locationName = memberShape.isLocationName ? memberShape.name : name;
-    if (structure.hasOwnProperty(locationName)) {
+    if (Object.prototype.hasOwnProperty.call(structure, locationName)) {
       var value = structure[locationName];
       var result = translate(value, memberShape);
       if (result !== undefined) struct[name] = result;
@@ -2378,7 +2378,7 @@ function Collection(iterable, options, fn, nameTr) {
   var self = this;
 
   for (var id in iterable) {
-    if (iterable.hasOwnProperty(id)) {
+    if (Object.prototype.hasOwnProperty.call(iterable, id)) {
       memoize.call(self, id, iterable[id], fn, nameTr);
     }
   }
@@ -2872,7 +2872,7 @@ AWS.ParamValidator = AWS.util.inherit({
     }
 
     for (paramName in params) {
-      if (!params.hasOwnProperty(paramName)) continue;
+      if (!Object.prototype.hasOwnProperty.call(params, paramName)) continue;
 
       var paramValue = params[paramName],
           memberShape = shape.members[paramName];
@@ -2915,7 +2915,7 @@ AWS.ParamValidator = AWS.util.inherit({
     if (this.validateType(params, context, ['object'], 'map')) {
       var mapCount = 0;
       for (var param in params) {
-        if (!params.hasOwnProperty(param)) continue;
+        if (!Object.prototype.hasOwnProperty.call(params, param)) continue;
         this.validateMember(shape.key, param,
                             context + '[key=\'' + param + '\']')
         this.validateMember(shape.value, params[param],
@@ -3691,7 +3691,7 @@ function configureEndpoint(service) {
     var key = keys[i];
     if (!key) continue;
 
-    if (regionConfig.rules.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(regionConfig.rules, key)) {
       var config = regionConfig.rules[key];
       if (typeof config === 'string') {
         config = regionConfig.patterns[config];
@@ -3721,7 +3721,7 @@ var jmespath = require('jmespath');
 var hardErrorStates = {success: 1, error: 1, complete: 1};
 
 function isTerminalState(machine) {
-  return hardErrorStates.hasOwnProperty(machine._asm.currentState);
+  return Object.prototype.hasOwnProperty.call(hardErrorStates, machine._asm.currentState);
 }
 
 var fsm = new AcceptorStateMachine();
@@ -3982,7 +3982,7 @@ AWS.Request = inherit({
 
 
   isPresigned: function isPresigned() {
-    return this.httpRequest.headers.hasOwnProperty('presigned-expires');
+    return Object.prototype.hasOwnProperty.call(this.httpRequest.headers, 'presigned-expires');
   },
 
 
@@ -4232,7 +4232,7 @@ AWS.Response = inherit({
 
 
   cacheNextPageTokens: function cacheNextPageTokens() {
-    if (this.hasOwnProperty('nextPageTokens')) return this.nextPageTokens;
+    if (Object.prototype.hasOwnProperty.call(this, 'nextPageTokens')) return this.nextPageTokens;
     this.nextPageTokens = undefined;
 
     var config = this.request.service.paginationConfig(this.request.operation);
@@ -5231,7 +5231,7 @@ AWS.util.update(AWS.Service, {
           });
         }
       }
-      if (!superclass.services.hasOwnProperty(version)) {
+      if (!Object.prototype.hasOwnProperty.call(superclass.services, version)) {
         superclass.apiVersions = superclass.apiVersions.concat(version).sort();
       }
       superclass.services[version] = svc;
@@ -5245,7 +5245,7 @@ AWS.util.update(AWS.Service, {
 
 
   hasService: function(identifier) {
-    return AWS.Service._serviceMap.hasOwnProperty(identifier);
+    return Object.prototype.hasOwnProperty.call(AWS.Service._serviceMap, identifier);
   },
 
 
@@ -5703,7 +5703,7 @@ AWS.util.update(AWS.S3.prototype, {
 
     var rules = req.service.api.operations[req.operation].input.members;
 
-    if (req.service.shouldDisableBodySigning(req) && !req.httpRequest.headers.hasOwnProperty('presigned-expires')) {
+    if (req.service.shouldDisableBodySigning(req) && !Object.prototype.hasOwnProperty.call(req.httpRequest.headers, 'presigned-expires')) {
       if (rules.ContentMD5 && !req.params.ContentMD5) {
         return true;
       }
@@ -6051,7 +6051,7 @@ AWS.util.update(AWS.S3.prototype, {
 
   disableBodySigning: function disableBodySigning(request) {
     var headers = request.httpRequest.headers;
-    if (!headers.hasOwnProperty('presigned-expires')) {
+    if (!Object.prototype.hasOwnProperty.call(headers, 'presigned-expires')) {
       headers['X-Amz-Content-Sha256'] = 'UNSIGNED-PAYLOAD';
     }
   },
@@ -7366,7 +7366,7 @@ var util = {
 
   arrayEach: function arrayEach(array, iterFunction) {
     for (var idx in array) {
-      if (array.hasOwnProperty(idx)) {
+      if (Object.prototype.hasOwnProperty.call(array, idx)) {
         var ret = iterFunction.call(this, array[idx], parseInt(idx, 10));
         if (ret === util.abort) break;
       }
@@ -7395,7 +7395,7 @@ var util = {
 
   isEmpty: function isEmpty(obj) {
     for (var prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
+      if (Object.prototype.hasOwnProperty.call(obj, prop)) {
         return false;
       }
     }
@@ -7413,7 +7413,7 @@ var util = {
   },
 
   typeName: function typeName(type) {
-    if (type.hasOwnProperty('name')) return type.name;
+    if (Object.prototype.hasOwnProperty.call(type, 'name')) return type.name;
     var str = type.toString();
     var match = str.match(/^\s*function (.+)\(/);
     return match ? match[1] : str;
@@ -7732,7 +7732,7 @@ function parseStructure(xml, shape) {
 
   util.each(shape.members, function(memberName, memberShape) {
     if (memberShape.isXmlAttribute) {
-      if (xml.attributes.hasOwnProperty(memberShape.name)) {
+      if (Object.prototype.hasOwnProperty.call(xml.attributes, memberShape.name)) {
         var value = xml.attributes[memberShape.name].value;
         data[memberName] = parseXml({textContent: value}, memberShape);
       }
@@ -7812,7 +7812,7 @@ function parseUnknown(xml) {
   var child = xml.firstElementChild;
   while (child) {
     var tag = child.nodeName;
-    if (shape.members.hasOwnProperty(tag)) {
+    if (Object.prototype.hasOwnProperty.call(shape.members, tag)) {
       shape.members[tag].type = 'list';
     } else {
       shape.members[tag] = {name: tag};
