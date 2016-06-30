@@ -12,7 +12,17 @@ buildRequest = ->
   req.httpRequest
 
 buildSigner = (request, signatureCache) ->
-  return new AWS.Signers.V4(request || buildRequest(), 'dynamodb', signatureCache || true)
+  if typeof signatureCache != 'boolean'
+    signatureCache = true
+  return new AWS.Signers.V4(request || buildRequest(), 'dynamodb', signatureCache)
+
+buildSignerFromService = (signatureCache) ->
+  if typeof signatureCache != 'boolean'
+    signatureCache = true
+  ddb = new AWS.DynamoDB({region: 'region', endpoint: 'localhost', apiVersion: '2011-12-05'})
+  signer = buildSigner(null, signatureCache)
+  signer.setServiceClientId(ddb._clientId)
+  return signer
 
 describe 'AWS.Signers.V4', ->
   date = new Date(1935346573456)
@@ -34,7 +44,6 @@ describe 'AWS.Signers.V4', ->
       req = buildRequest()
       signer = buildSigner(req)
       expect(signer.request).to.equal(req)
-
   describe 'addAuthorization', ->
     headers = {
       'Content-Type': 'application/x-amz-json-1.0',
@@ -75,6 +84,8 @@ describe 'AWS.Signers.V4', ->
         calls = AWS.util.crypto.hmac.calls
         callCount = calls.length
 
+
+      #Calling signer.signature should call hmac 1 time when caching, and 5 times when not caching
       it 'caches subsequent requests', ->
         signer.signature(creds, datetime)
         expect(calls.length).to.equal(callCount + 1)
@@ -107,6 +118,24 @@ describe 'AWS.Signers.V4', ->
         newDatetime = AWS.util.date.iso8601(newDate).replace(/[:\-]|\.\d{3}/g, '')
         signer.signature(creds, newDatetime)
         expect(calls.length).to.equal(callCount + 5)
+
+      it 'uses a different cache if client is different', ->
+        signer1 = buildSignerFromService()
+        callCount = calls.length
+        signer1.signature(creds, datetime)
+        expect(calls.length).to.equal(callCount + 5)
+        signer2 = buildSignerFromService()
+        callCount = calls.length
+        signer2.signature(creds, datetime)
+        expect(calls.length).to.equal(callCount + 5)
+
+      it 'works when using the same client', ->
+        signer1 = buildSignerFromService()
+        callCount = calls.length
+        signer1.signature(creds, datetime)
+        expect(calls.length).to.equal(callCount + 5)
+        signer1.signature(creds, datetime)
+        expect(calls.length).to.equal(callCount + 6)
 
   describe 'stringToSign', ->
     it 'should sign correctly generated input string', ->
