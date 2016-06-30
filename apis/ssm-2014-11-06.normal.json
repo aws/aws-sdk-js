@@ -11,6 +11,21 @@
     "targetPrefix":"AmazonSSM"
   },
   "operations":{
+    "AddTagsToResource":{
+      "name":"AddTagsToResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddTagsToResourceRequest"},
+      "output":{"shape":"AddTagsToResourceResult"},
+      "errors":[
+        {"shape":"InvalidResourceType"},
+        {"shape":"InvalidResourceId"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances. Tags enable you to categorize your managed instances in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags. </p> <p> We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Amazon EC2 Resources</a> in the Amazon EC2 User Guide. </p>"
+    },
     "CancelCommand":{
       "name":"CancelCommand",
       "http":{
@@ -26,6 +41,19 @@
         {"shape":"DuplicateInstanceId"}
       ],
       "documentation":"<p>Attempts to cancel the command specified by the Command ID. There is no guarantee that the command will be terminated and the underlying process stopped.</p>"
+    },
+    "CreateActivation":{
+      "name":"CreateActivation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateActivationRequest"},
+      "output":{"shape":"CreateActivationResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Registers your on-premises server or virtual machine with Amazon EC2 so that you can manage these resources using Run Command. An on-premises server or virtual machine that has been registered with EC2 is called a managed instance. For more information about activations, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managed-instances.html\">Setting Up Managed Instances (Linux)</a> or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/managed-instances.html\">Setting Up Managed Instances (Windows)</a> in the Amazon EC2 User Guide. </p>"
     },
     "CreateAssociation":{
       "name":"CreateAssociation",
@@ -82,6 +110,21 @@
       ],
       "documentation":"<p>Creates an SSM document.</p> <p>After you create an SSM document, you can use CreateAssociation to associate it with one or more running instances.</p>"
     },
+    "DeleteActivation":{
+      "name":"DeleteActivation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteActivationRequest"},
+      "output":{"shape":"DeleteActivationResult"},
+      "errors":[
+        {"shape":"InvalidActivationId"},
+        {"shape":"InvalidActivation"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Deletes an activation. You are not required to delete an activation. If you delete an activation, you can no longer use it to register additional managed instances. Deleting an activation does not de-register managed instances. You must manually de-register managed instances.</p>"
+    },
     "DeleteAssociation":{
       "name":"DeleteAssociation",
       "http":{
@@ -114,6 +157,35 @@
         {"shape":"AssociatedInstances"}
       ],
       "documentation":"<p>Deletes the SSM document and all instance associations to the document.</p> <p>Before you delete the SSM document, we recommend that you use DeleteAssociation to disassociate all instances that are associated with the document.</p>"
+    },
+    "DeregisterManagedInstance":{
+      "name":"DeregisterManagedInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeregisterManagedInstanceRequest"},
+      "output":{"shape":"DeregisterManagedInstanceResult"},
+      "errors":[
+        {"shape":"InvalidInstanceId"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don’t plan to use Run Command on the server, we suggest uninstalling the SSM agent first.</p>"
+    },
+    "DescribeActivations":{
+      "name":"DescribeActivations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeActivationsRequest"},
+      "output":{"shape":"DescribeActivationsResult"},
+      "errors":[
+        {"shape":"InvalidFilter"},
+        {"shape":"InvalidNextToken"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Details about the activation, including: the date and time the activation was created, the expiration date, the IAM role assigned to the instances in the activation, and the number of instances activated by this registration.</p>"
     },
     "DescribeAssociation":{
       "name":"DescribeAssociation",
@@ -254,6 +326,21 @@
       ],
       "documentation":"<p>Describes one or more of your SSM documents.</p>"
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResult"},
+      "errors":[
+        {"shape":"InvalidResourceType"},
+        {"shape":"InvalidResourceId"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Returns a list of the tags assigned to the specified resource.</p>"
+    },
     "ModifyDocumentPermission":{
       "name":"ModifyDocumentPermission",
       "http":{
@@ -270,6 +357,21 @@
         {"shape":"DocumentLimitExceeded"}
       ],
       "documentation":"<p>Share a document publicly or privately. If you share a document privately, you must specify the AWS user account IDs for those people who can use the document. If you share a document publicly, you must specify <i>All</i> as the account ID.</p>"
+    },
+    "RemoveTagsFromResource":{
+      "name":"RemoveTagsFromResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveTagsFromResourceRequest"},
+      "output":{"shape":"RemoveTagsFromResourceResult"},
+      "errors":[
+        {"shape":"InvalidResourceType"},
+        {"shape":"InvalidResourceId"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Removes all tags from the specified resource.</p>"
     },
     "SendCommand":{
       "name":"SendCommand",
@@ -308,6 +410,20 @@
         {"shape":"TooManyUpdates"}
       ],
       "documentation":"<p>Updates the status of the SSM document associated with the specified instance.</p>"
+    },
+    "UpdateManagedInstanceRole":{
+      "name":"UpdateManagedInstanceRole",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateManagedInstanceRoleRequest"},
+      "output":{"shape":"UpdateManagedInstanceRoleResult"},
+      "errors":[
+        {"shape":"InvalidInstanceId"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Assigns or changes an Amazon Identity and Access Management (IAM) role to the managed instance.</p>"
     }
   },
   "shapes":{
@@ -322,6 +438,93 @@
         "locationName":"AccountId"
       },
       "max":20
+    },
+    "Activation":{
+      "type":"structure",
+      "members":{
+        "ActivationId":{
+          "shape":"ActivationId",
+          "documentation":"<p>The ID created by SSM when you submitted the activation.</p>"
+        },
+        "Description":{
+          "shape":"ActivationDescription",
+          "documentation":"<p>A user defined description of the activation.</p>"
+        },
+        "DefaultInstanceName":{
+          "shape":"DefaultInstanceName",
+          "documentation":"<p>A name for the managed instance when it is created.</p>"
+        },
+        "IamRole":{
+          "shape":"IamRole",
+          "documentation":"<p>The Amazon Identity and Access Management (IAM) role to assign to the managed instance.</p>"
+        },
+        "RegistrationLimit":{
+          "shape":"RegistrationLimit",
+          "documentation":"<p>The maximum number of managed instances that can be registered using this activation.</p>"
+        },
+        "RegistrationsCount":{
+          "shape":"RegistrationsCount",
+          "documentation":"<p>The number of managed instances already registered with this activation.</p>"
+        },
+        "ExpirationDate":{
+          "shape":"ExpirationDate",
+          "documentation":"<p>The date when this activation can no longer be used to register managed instances.</p>"
+        },
+        "Expired":{
+          "shape":"Boolean",
+          "documentation":"<p>Whether or not the activation is expired.</p>"
+        },
+        "CreatedDate":{
+          "shape":"CreatedDate",
+          "documentation":"<p>The date the activation was created.</p>"
+        }
+      },
+      "documentation":"<p>An activation registers one or more on-premises servers or virtual machines (VMs) with AWS so that you can configure those servers or VMs using Run Command. A server or VM that has been registered with AWS is called a managed instance.</p>"
+    },
+    "ActivationCode":{
+      "type":"string",
+      "max":250,
+      "min":20
+    },
+    "ActivationDescription":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
+    "ActivationId":{
+      "type":"string",
+      "pattern":"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "ActivationList":{
+      "type":"list",
+      "member":{"shape":"Activation"}
+    },
+    "AddTagsToResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceType",
+        "ResourceId",
+        "Tags"
+      ],
+      "members":{
+        "ResourceType":{
+          "shape":"ResourceTypeForTagging",
+          "documentation":"<p>Specifies the type of resource you are tagging.</p>"
+        },
+        "ResourceId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The resource ID you want to tag.</p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p> One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. </p>"
+        }
+      }
+    },
+    "AddTagsToResourceResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "AssociatedInstances":{
       "type":"structure",
@@ -724,6 +927,51 @@
       "type":"string",
       "max":100
     },
+    "ComputerName":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "CreateActivationRequest":{
+      "type":"structure",
+      "required":["IamRole"],
+      "members":{
+        "Description":{
+          "shape":"ActivationDescription",
+          "documentation":"<p>A user-defined description of the resource that you want to register with Amazon EC2. </p>"
+        },
+        "DefaultInstanceName":{
+          "shape":"DefaultInstanceName",
+          "documentation":"<p>The name of the registered, managed instance as it will appear in the Amazon EC2 console or when you use the AWS command line tools to list EC2 resources.</p>"
+        },
+        "IamRole":{
+          "shape":"IamRole",
+          "documentation":"<p>The Amazon Identity and Access Management (IAM) role that you want to assign to the managed instance. </p>"
+        },
+        "RegistrationLimit":{
+          "shape":"RegistrationLimit",
+          "documentation":"<p>Specify the maximum number of managed instances you want to register. The default value is 1 instance.</p>",
+          "box":true
+        },
+        "ExpirationDate":{
+          "shape":"ExpirationDate",
+          "documentation":"<p>The date by which this activation request should expire. The default value is 24 hours.</p>"
+        }
+      }
+    },
+    "CreateActivationResult":{
+      "type":"structure",
+      "members":{
+        "ActivationId":{
+          "shape":"ActivationId",
+          "documentation":"<p>The ID number generated by the system when it processed the activation. The activation ID functions like a user name.</p>"
+        },
+        "ActivationCode":{
+          "shape":"ActivationCode",
+          "documentation":"<p>The code the system generates when it processes the activation. The activation code functions like a password to validate the activation ID. </p>"
+        }
+      }
+    },
     "CreateAssociationBatchRequest":{
       "type":"structure",
       "required":["Entries"],
@@ -828,7 +1076,29 @@
         }
       }
     },
+    "CreatedDate":{"type":"timestamp"},
     "DateTime":{"type":"timestamp"},
+    "DefaultInstanceName":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "DeleteActivationRequest":{
+      "type":"structure",
+      "required":["ActivationId"],
+      "members":{
+        "ActivationId":{
+          "shape":"ActivationId",
+          "documentation":"<p>The ID of the activation that you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteActivationResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteAssociationRequest":{
       "type":"structure",
       "required":[
@@ -864,6 +1134,78 @@
     "DeleteDocumentResult":{
       "type":"structure",
       "members":{
+      }
+    },
+    "DeregisterManagedInstanceRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"ManagedInstanceId",
+          "documentation":"<p>The ID assigned to the managed instance when you registered it using the activation process. </p>"
+        }
+      }
+    },
+    "DeregisterManagedInstanceResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeActivationsFilter":{
+      "type":"structure",
+      "members":{
+        "FilterKey":{
+          "shape":"DescribeActivationsFilterKeys",
+          "documentation":"<p>The name of the filter.</p>"
+        },
+        "FilterValues":{
+          "shape":"StringList",
+          "documentation":"<p>The filter values.</p>"
+        }
+      },
+      "documentation":"<p>Filter for the DescribeActivation API.</p>"
+    },
+    "DescribeActivationsFilterKeys":{
+      "type":"string",
+      "enum":[
+        "ActivationIds",
+        "DefaultInstanceName",
+        "IamRole"
+      ]
+    },
+    "DescribeActivationsFilterList":{
+      "type":"list",
+      "member":{"shape":"DescribeActivationsFilter"}
+    },
+    "DescribeActivationsRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"DescribeActivationsFilterList",
+          "documentation":"<p>A filter to view information about your activations.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to start the list. Use this token to get the next set of results. </p>"
+        }
+      }
+    },
+    "DescribeActivationsResult":{
+      "type":"structure",
+      "members":{
+        "ActivationList":{
+          "shape":"ActivationList",
+          "documentation":"<p>A list of activations for your AWS account.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p> The token for the next set of items to return. Use this token to get the next set of results. </p>"
+        }
       }
     },
     "DescribeAssociationRequest":{
@@ -1185,6 +1527,7 @@
       "documentation":"<p>You cannot specify an instance ID in more than one association.</p>",
       "exception":true
     },
+    "ExpirationDate":{"type":"timestamp"},
     "FailedCreateAssociation":{
       "type":"structure",
       "members":{
@@ -1241,9 +1584,18 @@
         }
       }
     },
+    "IPAddress":{
+      "type":"string",
+      "max":46,
+      "min":1
+    },
+    "IamRole":{
+      "type":"string",
+      "max":64
+    },
     "InstanceId":{
       "type":"string",
-      "pattern":"(^i-(\\w{8}|\\w{17})$)|(^op-\\w{17}$)"
+      "pattern":"(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)"
     },
     "InstanceIdList":{
       "type":"list",
@@ -1287,6 +1639,35 @@
         "PlatformVersion":{
           "shape":"String",
           "documentation":"<p>The version of the OS platform running on your instance. </p>"
+        },
+        "ActivationId":{
+          "shape":"ActivationId",
+          "documentation":"<p>The activation ID created by SSM when the server or VM was registered.</p>"
+        },
+        "IamRole":{
+          "shape":"IamRole",
+          "documentation":"<p>The Amazon Identity and Access Management (IAM) role assigned to EC2 instances or managed instances. </p>"
+        },
+        "RegistrationDate":{
+          "shape":"DateTime",
+          "documentation":"<p>The date the server or VM was registered with AWS as a managed instance.</p>",
+          "box":true
+        },
+        "ResourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The type of instance. Instances are either EC2 instances or managed instances. </p>"
+        },
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>The name of the managed instance.</p>"
+        },
+        "IPAddress":{
+          "shape":"IPAddress",
+          "documentation":"<p>The IP address of the managed instance.</p>"
+        },
+        "ComputerName":{
+          "shape":"ComputerName",
+          "documentation":"<p>The fully qualified host name of the managed instance.</p>"
         }
       },
       "documentation":"<p>Describes a filter for a specific list of instances. </p>"
@@ -1315,7 +1696,10 @@
         "InstanceIds",
         "AgentVersion",
         "PingStatus",
-        "PlatformTypes"
+        "PlatformTypes",
+        "ActivationIds",
+        "IamRole",
+        "ResourceType"
       ]
     },
     "InstanceInformationFilterList":{
@@ -1354,6 +1738,22 @@
       "documentation":"<p>An error occurred on the server side.</p>",
       "exception":true
     },
+    "InvalidActivation":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The activation is not valid. The activation might have been deleted, or the ActivationId and the ActivationCode do not match.</p>",
+      "exception":true
+    },
+    "InvalidActivationId":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The activation ID is not valid. Verify the you entered the correct ActivationId or ActivationCode and try again.</p>",
+      "exception":true
+    },
     "InvalidCommandId":{
       "type":"structure",
       "members":{
@@ -1388,6 +1788,14 @@
         "Message":{"shape":"String"}
       },
       "documentation":"<p>You attempted to delete a document while it is still shared. You must stop sharing the document before you can delete it.</p>",
+      "exception":true
+    },
+    "InvalidFilter":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The filter name is not valid. Verify the you entered the correct name and try again.</p>",
       "exception":true
     },
     "InvalidFilterKey":{
@@ -1443,9 +1851,27 @@
       "documentation":"<p>The permission type is not supported. <i>Share</i> is the only supported permission type.</p>",
       "exception":true
     },
+    "InvalidResourceId":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The resource ID is not valid. Verify that you entered the correct ID and try again.</p>",
+      "exception":true
+    },
+    "InvalidResourceType":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The resource type is not valid. If you are attempting to tag an instance, the instance must be a registered, managed instance.</p>",
+      "exception":true
+    },
     "InvocationTraceOutput":{
       "type":"string",
       "max":2500
+    },
+    "KeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
     },
     "ListAssociationsRequest":{
       "type":"structure",
@@ -1561,11 +1987,6 @@
         }
       }
     },
-    "ListDocumentsMaxResults":{
-      "type":"integer",
-      "max":50,
-      "min":1
-    },
     "ListDocumentsRequest":{
       "type":"structure",
       "members":{
@@ -1574,7 +1995,7 @@
           "documentation":"<p>One or more filters. Use a filter to return a more specific list of results.</p>"
         },
         "MaxResults":{
-          "shape":"ListDocumentsMaxResults",
+          "shape":"MaxResults",
           "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
           "box":true
         },
@@ -1597,6 +2018,36 @@
         }
       }
     },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceType",
+        "ResourceId"
+      ],
+      "members":{
+        "ResourceType":{
+          "shape":"ResourceTypeForTagging",
+          "documentation":"<p>Returns a list of tags for a specific resource type.</p>"
+        },
+        "ResourceId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The resource ID for which you want to see a list of tags.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResult":{
+      "type":"structure",
+      "members":{
+        "TagList":{
+          "shape":"TagList",
+          "documentation":"<p>A list of tags.</p>"
+        }
+      }
+    },
+    "ManagedInstanceId":{
+      "type":"string",
+      "pattern":"^mi-[0-9a-f]{17}$"
+    },
     "MaxDocumentSizeExceeded":{
       "type":"structure",
       "members":{
@@ -1607,7 +2058,7 @@
     },
     "MaxResults":{
       "type":"integer",
-      "max":25,
+      "max":50,
       "min":1
     },
     "MaxResultsEC2Compatible":{
@@ -1679,6 +2130,59 @@
         "locationName":"PlatformType"
       }
     },
+    "RegistrationLimit":{
+      "type":"integer",
+      "max":1000,
+      "min":1
+    },
+    "RegistrationsCount":{
+      "type":"integer",
+      "max":1000,
+      "min":1
+    },
+    "RemoveTagsFromResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceType",
+        "ResourceId",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceType":{
+          "shape":"ResourceTypeForTagging",
+          "documentation":"<p>The type of resource of which you want to remove a tag.</p>"
+        },
+        "ResourceId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The resource ID for which you want to remove tags.</p>"
+        },
+        "TagKeys":{
+          "shape":"KeyList",
+          "documentation":"<p>Tag keys that you want to remove from the specified resource.</p>"
+        }
+      }
+    },
+    "RemoveTagsFromResourceResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "ResourceId":{
+      "type":"string",
+      "pattern":"^mi-[0-9a-f]{17}$"
+    },
+    "ResourceType":{
+      "type":"string",
+      "enum":[
+        "ManagedInstance",
+        "Document",
+        "EC2Instance"
+      ]
+    },
+    "ResourceTypeForTagging":{
+      "type":"string",
+      "enum":["ManagedInstance"]
+    },
     "ResponseCode":{"type":"integer"},
     "S3BucketName":{
       "type":"string",
@@ -1698,7 +2202,7 @@
       "members":{
         "InstanceIds":{
           "shape":"InstanceIdList",
-          "documentation":"<p>Required. The instance IDs where the command should execute.</p>"
+          "documentation":"<p>Required. The instance IDs where the command should execute. You can specify a maximum of 50 IDs.</p>"
         },
         "DocumentName":{
           "shape":"DocumentARN",
@@ -1760,6 +2264,44 @@
       "exception":true
     },
     "String":{"type":"string"},
+    "StringList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{
+          "shape":"TagKey",
+          "documentation":"<p>The name of the tag.</p>"
+        },
+        "Value":{
+          "shape":"TagValue",
+          "documentation":"<p>The value of the tag.</p>"
+        }
+      },
+      "documentation":"<p> Metadata that you assign to your managed instances. Tags enable you to categorize your managed instances in different ways, for example, by purpose, owner, or environment.</p>"
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^(?!^(?i)aws:)(?=^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$).*$"
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
     "TimeoutSeconds":{
       "type":"integer",
       "max":2592000,
@@ -1811,10 +2353,32 @@
         }
       }
     },
+    "UpdateManagedInstanceRoleRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "IamRole"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"ManagedInstanceId",
+          "documentation":"<p>The ID of the managed instance where you want to update the role.</p>"
+        },
+        "IamRole":{
+          "shape":"IamRole",
+          "documentation":"<p>The IAM role you want to assign or change.</p>"
+        }
+      }
+    },
+    "UpdateManagedInstanceRoleResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "Version":{
       "type":"string",
       "pattern":"^[0-9]{1,6}(\\.[0-9]{1,6}){2,3}$"
     }
   },
-  "documentation":"<p>This is the Amazon Simple Systems Manager (SSM) API Reference. SSM enables you to remotely manage the configuration of your Amazon EC2 instance using scripts or commands with either an on-demand solution called <i>SSM Run Command</i> or a lightweight instance configuration solution called <i>SSM Config</i>. </p> <p>This references is intended to be used with the SSM User Guide for <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/execute-remote-commands.html\">Linux</a> or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/execute-remote-commands.html\">Windows</a>.</p> <p> <b>Run Command</b> </p> <p>Run Command provides an on-demand experience for executing commands. You can use pre-defined Amazon SSM documents to perform the actions listed later in this section, or you can create your own documents. With these documents, you can remotely configure your instances by sending commands using the <b>Commands</b> page in the <a href=\"http://console.aws.amazon.com/ec2/\">Amazon EC2 console</a>, <a href=\"http://docs.aws.amazon.com/powershell/latest/reference/items/Amazon_Simple_Systems_Management_cmdlets.html\">AWS Tools for Windows PowerShell</a>, the <a href=\"http://docs.aws.amazon.com/cli/latest/reference/ssm/index.html\">AWS CLI</a>, or AWS SDKs.</p> <p>Run Command reports the status of the command execution for each instance targeted by a command. You can also audit the command execution to understand who executed commands, when, and what changes were made. By switching between different SSM documents, you can quickly configure your instances with different types of commands. To get started with Run Command, verify that your environment meets the prerequisites for remotely running commands on EC2 instances (<a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/remote-commands-prereq.html\">Linux</a> or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/remote-commands-prereq.html\">Windows</a>). </p> <p/> <p> <b>SSM Config</b> </p> <p>SSM Config is a lightweight instance configuration solution. SSM Config is currently only available for Windows instances. With SSM Config, you can specify a setup configuration for your instances. SSM Config is similar to EC2 User Data, which is another way of running one-time scripts or applying settings during instance launch. SSM Config is an extension of this capability. Using SSM documents, you can specify which actions the system should perform on your instances, including which applications to install, which AWS Directory Service directory to join, which Microsoft PowerShell modules to install, etc. If an instance is missing one or more of these configurations, the system makes those changes. By default, the system checks every five minutes to see if there is a new configuration to apply as defined in a new SSM document. If so, the system updates the instances accordingly. In this way, you can remotely maintain a consistent configuration baseline on your instances. SSM Config is available using the AWS CLI or the AWS Tools for Windows PowerShell. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-configuration-manage.html\">Managing Windows Instance Configuration</a>.</p> <p>SSM Config and SSM Run Command include the following pre-defined documents.</p> <p> <b>Linux</b> </p> <ul> <li> <p> <b>AWS-RunShellScript</b> to run shell scripts</p> </li> <li> <p> <b>AWS-UpdateSSMAgent</b> to update the Amazon SSM agent</p> </li> </ul> <p/> <p> <b>Windows</b> </p> <ul> <li> <p> <b>AWS-JoinDirectoryServiceDomain</b> to join an AWS Directory</p> </li> <li> <p> <b>AWS-RunPowerShellScript</b> to run PowerShell commands or scripts</p> </li> <li> <p> <b>AWS-UpdateEC2Config</b> to update the EC2Config service</p> </li> <li> <p> <b>AWS-ConfigureWindowsUpdate</b> to configure Windows Update settings</p> </li> <li> <p> <b>AWS-InstallApplication</b> to install, repair, or uninstall software using an MSI package</p> </li> <li> <p> <b>AWS-InstallPowerShellModule</b> to install PowerShell modules </p> </li> <li> <p> <b>AWS-ConfigureCloudWatch</b> to configure Amazon CloudWatch Logs to monitor applications and systems</p> </li> <li> <p> <b>AWS-ListWindowsInventory</b> to collect information about an EC2 instance running in Windows.</p> </li> <li> <p> <b>AWS-FindWindowsUpdates</b> to scan an instance and determines which updates are missing.</p> </li> <li> <p> <b>AWS-InstallMissingWindowsUpdates</b> to install missing updates on your EC2 instance.</p> </li> <li> <p> <b>AWS-InstallSpecificWindowsUpdates</b> to install one or more specific updates.</p> </li> </ul> <important> <p>The commands or scripts specified in SSM documents run with administrative privilege on your instances because the Amazon SSM agent runs as root on Linux and the EC2Config service runs in the Local System account on Windows. If a user has permission to execute any of the pre-defined SSM documents (any document that begins with AWS-*) then that user also has administrator access to the instance. Delegate access to SSM and Run Command judiciously. This becomes extremely important if you create your own SSM documents. Amazon Web Services does not provide guidance about how to create secure SSM documents. You create SSM documents and delegate access to Run Command at your own risk. As a security best practice, we recommend that you assign access to \"AWS-*\" documents, especially the AWS-RunShellScript document on Linux and the AWS-RunPowerShellScript document on Windows, to trusted administrators only. You can create SSM documents for specific tasks and delegate access to non-administrators.</p> </important> <p>For information about creating and sharing SSM documents, see the following topics in the SSM User Guide: </p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-ssm-doc.html\">Creating SSM Documents</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssm-sharing.html\">Sharing SSM Documents</a> (Linux)</p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/create-ssm-doc.html\">Creating SSM Documents</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ssm-sharing.html\">Sharing SSM Documents</a> (Windows)</p> </li> </ul>"
+  "documentation":"<p>This is the Amazon Simple Systems Manager (SSM) API Reference. SSM enables you to remotely manage the configuration of your on-premises servers and virtual machines (VMs) and your Amazon EC2 instances using scripts, commands, or the Amazon EC2 console. SSM includes an on-demand solution called <i>Amazon EC2 Run Command</i> and a lightweight instance configuration solution called <i>SSM Config</i>. </p> <p>This references is intended to be used with the EC2 Run Command User Guide for <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/execute-remote-commands.html\">Linux</a> or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/execute-remote-commands.html\">Windows</a>.</p> <note> <p>You must register your on-premises servers and VMs through an activation process before you can configure them using Run Command. Registered servers and VMs are called <i>managed instances</i>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managed-instances.html\">Setting Up Run Command On Managed Instances (On-Premises Servers and VMs) on Linux</a> or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/managed-instances.html\">Setting Up Run Command On Managed Instances (On-Premises Servers and VMs) on Windows</a>.</p> </note> <p> <b>Run Command</b> </p> <p>Run Command provides an on-demand experience for executing commands. You can use pre-defined SSM documents to perform the actions listed later in this section, or you can create your own documents. With these documents, you can remotely configure your instances by sending commands using the <b>Commands</b> page in the <a href=\"http://console.aws.amazon.com/ec2/\">Amazon EC2 console</a>, <a href=\"http://docs.aws.amazon.com/powershell/latest/reference/items/Amazon_Simple_Systems_Management_cmdlets.html\">AWS Tools for Windows PowerShell</a>, the <a href=\"http://docs.aws.amazon.com/cli/latest/reference/ssm/index.html\">AWS CLI</a>, or AWS SDKs.</p> <p>Run Command reports the status of the command execution for each instance targeted by a command. You can also audit the command execution to understand who executed commands, when, and what changes were made. By switching between different SSM documents, you can quickly configure your instances with different types of commands. To get started with Run Command, verify that your environment meets the prerequisites for remotely running commands on EC2 instances (<a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/remote-commands-prereq.html\">Linux</a> or <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/remote-commands-prereq.html\">Windows</a>). </p> <p/> <p> <b>SSM Config</b> </p> <p>SSM Config is a lightweight instance configuration solution. SSM Config is currently only available for Windows instances. With SSM Config, you can specify a setup configuration for your instances. SSM Config is similar to EC2 User Data, which is another way of running one-time scripts or applying settings during instance launch. SSM Config is an extension of this capability. Using SSM documents, you can specify which actions the system should perform on your instances, including which applications to install, which AWS Directory Service directory to join, which Microsoft PowerShell modules to install, etc. If an instance is missing one or more of these configurations, the system makes those changes. By default, the system checks every five minutes to see if there is a new configuration to apply as defined in a new SSM document. If so, the system updates the instances accordingly. In this way, you can remotely maintain a consistent configuration baseline on your instances. SSM Config is available using the AWS CLI or the AWS Tools for Windows PowerShell. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-configuration-manage.html\">Managing Windows Instance Configuration</a>.</p> <p>SSM Config and Run Command include the following pre-defined documents.</p> <p> <b>Linux</b> </p> <ul> <li> <p> <b>AWS-RunShellScript</b> to run shell scripts</p> </li> <li> <p> <b>AWS-UpdateSSMAgent</b> to update the Amazon SSM agent</p> </li> </ul> <p/> <p> <b>Windows</b> </p> <ul> <li> <p> <b>AWS-JoinDirectoryServiceDomain</b> to join an AWS Directory</p> </li> <li> <p> <b>AWS-RunPowerShellScript</b> to run PowerShell commands or scripts</p> </li> <li> <p> <b>AWS-UpdateEC2Config</b> to update the EC2Config service</p> </li> <li> <p> <b>AWS-ConfigureWindowsUpdate</b> to configure Windows Update settings</p> </li> <li> <p> <b>AWS-InstallApplication</b> to install, repair, or uninstall software using an MSI package</p> </li> <li> <p> <b>AWS-InstallPowerShellModule</b> to install PowerShell modules </p> </li> <li> <p> <b>AWS-ConfigureCloudWatch</b> to configure Amazon CloudWatch Logs to monitor applications and systems</p> </li> <li> <p> <b>AWS-ListWindowsInventory</b> to collect information about an EC2 instance running in Windows.</p> </li> <li> <p> <b>AWS-FindWindowsUpdates</b> to scan an instance and determines which updates are missing.</p> </li> <li> <p> <b>AWS-InstallMissingWindowsUpdates</b> to install missing updates on your EC2 instance.</p> </li> <li> <p> <b>AWS-InstallSpecificWindowsUpdates</b> to install one or more specific updates.</p> </li> </ul> <important> <p>The commands or scripts specified in SSM documents run with administrative privilege on your instances because the Amazon SSM agent runs as root on Linux and the EC2Config service runs in the Local System account on Windows. If a user has permission to execute any of the pre-defined SSM documents (any document that begins with AWS-*) then that user also has administrator access to the instance. Delegate access to Run Command and SSM Config judiciously. This becomes extremely important if you create your own SSM documents. Amazon Web Services does not provide guidance about how to create secure SSM documents. You create SSM documents and delegate access to Run Command at your own risk. As a security best practice, we recommend that you assign access to \"AWS-*\" documents, especially the AWS-RunShellScript document on Linux and the AWS-RunPowerShellScript document on Windows, to trusted administrators only. You can create SSM documents for specific tasks and delegate access to non-administrators.</p> </important> <p>For information about creating and sharing SSM documents, see the following topics in the SSM User Guide: </p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-ssm-doc.html\">Creating SSM Documents</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssm-sharing.html\">Sharing SSM Documents</a> (Linux)</p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/create-ssm-doc.html\">Creating SSM Documents</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ssm-sharing.html\">Sharing SSM Documents</a> (Windows)</p> </li> </ul>"
 }
