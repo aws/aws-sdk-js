@@ -7,6 +7,7 @@ describe 'AWS.S3', ->
 
   s3 = null
   request = (operation, params) -> s3.makeRequest(operation, params)
+  regionReqOperation = if AWS.util.isNode() then 'headBucket' else 'listObjects'
 
   beforeEach (done) ->
     s3 = new AWS.S3(region: undefined)
@@ -577,7 +578,7 @@ describe 'AWS.S3', ->
     it 'does not make async request for bucket region if error.region is set', ->
       regionReq = send: (fn) ->
         fn()
-      spy = helpers.spyOn(s3, 'listObjects').andReturn(regionReq)
+      spy = helpers.spyOn(s3, regionReqOperation).andReturn(regionReq)
       req = request('operation', {Bucket: 'name'})
       body = """
         <Error>
@@ -594,7 +595,7 @@ describe 'AWS.S3', ->
     it 'makes async request for bucket region if error.region not set for a region redirect error code', ->
       regionReq = send: (fn) ->
         fn()
-      spy = helpers.spyOn(s3, 'listObjects').andReturn(regionReq)
+      spy = helpers.spyOn(s3, regionReqOperation).andReturn(regionReq)
       params = Bucket: 'name'
       req = request('operation', params)
       body = """
@@ -611,7 +612,7 @@ describe 'AWS.S3', ->
     it 'does not make request for bucket region if error code is not a region redirect code', ->
       regionReq = send: (fn) ->
         fn()
-      spy = helpers.spyOn(s3, 'listObjects').andReturn(regionReq)
+      spy = helpers.spyOn(s3, regionReqOperation).andReturn(regionReq)
       req = request('operation', {Bucket: 'name'})
       body = """
         <Error>
@@ -628,7 +629,7 @@ describe 'AWS.S3', ->
       regionReq = send: (fn) ->
         s3.bucketRegionCache.name = 'us-west-2'
         fn()
-      spy = helpers.spyOn(s3, 'listObjects').andReturn(regionReq)
+      spy = helpers.spyOn(s3, regionReqOperation).andReturn(regionReq)
       req = request('operation', {Bucket: 'name'})
       body = """
         <Error>
