@@ -7,7 +7,6 @@ describe 'AWS.S3', ->
 
   s3 = null
   request = (operation, params) -> s3.makeRequest(operation, params)
-  regionReqOperation = if AWS.util.isNode() then 'headBucket' else 'listObjects'
 
   beforeEach (done) ->
     s3 = new AWS.S3(region: undefined)
@@ -486,6 +485,8 @@ describe 'AWS.S3', ->
   # S3 returns a handful of errors without xml bodies (to match the
   # http spec) these tests ensure we give meaningful codes/messages for these.
   describe 'errors with no XML body', ->
+    regionReqOperation = if AWS.util.isNode() then 'headBucket' else 'listObjects'
+    maxKeysParam = if regionReqOperation == 'listObjects' then 0 else undefined
 
     extractError = (statusCode, body, addHeaders, req) ->
       if !req
@@ -607,6 +608,8 @@ describe 'AWS.S3', ->
       error = extractError(301, body, {}, req)
       expect(error.region).to.not.exist
       expect(spy.calls.length).to.equal(1)
+      expect(spy.calls[0].arguments[0].Bucket).to.equal('name')
+      expect(spy.calls[0].arguments[0].MaxKeys).to.equal(maxKeysParam)
       expect(regionReq._requestRegionForBucket).to.exist
 
     it 'does not make request for bucket region if error code is not a region redirect code', ->
@@ -639,6 +642,8 @@ describe 'AWS.S3', ->
         """
       error = extractError(301, body, {}, req)
       expect(spy.calls.length).to.equal(1)
+      expect(spy.calls[0].arguments[0].Bucket).to.equal('name')
+      expect(spy.calls[0].arguments[0].MaxKeys).to.equal(maxKeysParam)
       expect(error.region).to.equal('us-west-2')
 
     it 'extracts the request ids', ->
