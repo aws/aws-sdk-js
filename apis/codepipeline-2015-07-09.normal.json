@@ -257,6 +257,24 @@
       ],
       "documentation":"<p>Provides information to AWS CodePipeline about new revisions to a source.</p>"
     },
+    "PutApprovalResult":{
+      "name":"PutApprovalResult",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutApprovalResultInput"},
+      "output":{"shape":"PutApprovalResultOutput"},
+      "errors":[
+        {"shape":"InvalidApprovalTokenException"},
+        {"shape":"ApprovalAlreadyCompletedException"},
+        {"shape":"PipelineNotFoundException"},
+        {"shape":"StageNotFoundException"},
+        {"shape":"ActionNotFoundException"},
+        {"shape":"ValidationException"}
+      ],
+      "documentation":"<p>Provides the response to a manual approval request to AWS CodePipeline. Valid responses include Approved and Rejected.</p>"
+    },
     "PutJobFailureResult":{
       "name":"PutJobFailureResult",
       "http":{
@@ -613,6 +631,14 @@
           "shape":"Timestamp",
           "documentation":"<p>The last status change of the action.</p>"
         },
+        "token":{
+          "shape":"ActionExecutionToken",
+          "documentation":"<p>The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the GetPipelineState command and is used to validate that the approval request corresponding to this token is still valid.</p>"
+        },
+        "lastUpdatedBy":{
+          "shape":"LastUpdatedBy",
+          "documentation":"<p>The ARN of the user who last changed the pipeline.</p>"
+        },
         "externalExecutionId":{
           "shape":"ExecutionId",
           "documentation":"<p>The external ID of the run of the action.</p>"
@@ -640,6 +666,7 @@
         "Failed"
       ]
     },
+    "ActionExecutionToken":{"type":"string"},
     "ActionName":{
       "type":"string",
       "max":100,
@@ -807,6 +834,47 @@
         }
       },
       "documentation":"<p>Returns information about the settings for an action type.</p>"
+    },
+    "ApprovalAlreadyCompletedException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The approval action has already been approved or rejected.</p>",
+      "exception":true
+    },
+    "ApprovalResult":{
+      "type":"structure",
+      "required":[
+        "summary",
+        "status"
+      ],
+      "members":{
+        "summary":{
+          "shape":"ApprovalSummary",
+          "documentation":"<p>The summary of the current status of the approval request.</p>"
+        },
+        "status":{
+          "shape":"ApprovalStatus",
+          "documentation":"<p>The response submitted by a reviewer assigned to an approval action request.</p>"
+        }
+      },
+      "documentation":"<p>Represents information about the result of an approval request.</p>"
+    },
+    "ApprovalStatus":{
+      "type":"string",
+      "enum":[
+        "Approved",
+        "Rejected"
+      ]
+    },
+    "ApprovalSummary":{
+      "type":"string",
+      "max":512,
+      "min":0
+    },
+    "ApprovalToken":{
+      "type":"string",
+      "pattern":"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
     },
     "Artifact":{
       "type":"structure",
@@ -1337,6 +1405,13 @@
       "documentation":"<p>The specified action declaration was specified in an invalid format.</p>",
       "exception":true
     },
+    "InvalidApprovalTokenException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The approval request already received a response or has expired.</p>",
+      "exception":true
+    },
     "InvalidBlockerDeclarationException":{
       "type":"structure",
       "members":{
@@ -1482,6 +1557,7 @@
     },
     "LastChangedAt":{"type":"timestamp"},
     "LastChangedBy":{"type":"string"},
+    "LastUpdatedBy":{"type":"string"},
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -1563,7 +1639,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The stage has failed in a later pipeline run and the pipelineExecutionId associated with the request is out of date.</p>",
+      "documentation":"<p>The stage has failed in a later run of the pipeline and the pipelineExecutionId associated with the request is out of date.</p>",
       "exception":true
     },
     "OutputArtifact":{
@@ -1782,6 +1858,48 @@
       },
       "documentation":"<p>Represents the output of a put action revision action.</p>"
     },
+    "PutApprovalResultInput":{
+      "type":"structure",
+      "required":[
+        "pipelineName",
+        "stageName",
+        "actionName",
+        "result"
+      ],
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline that contains the action. </p>"
+        },
+        "stageName":{
+          "shape":"StageName",
+          "documentation":"<p>The name of the stage that contains the action.</p>"
+        },
+        "actionName":{
+          "shape":"ActionName",
+          "documentation":"<p>The name of the action for which approval is requested.</p>"
+        },
+        "result":{
+          "shape":"ApprovalResult",
+          "documentation":"<p>Represents information about the result of the approval request.</p>"
+        },
+        "token":{
+          "shape":"ApprovalToken",
+          "documentation":"<p>The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <a>GetPipelineState</a> action and is used to validate that the approval request corresponding to this token is still valid.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a put approval result action.</p>"
+    },
+    "PutApprovalResultOutput":{
+      "type":"structure",
+      "members":{
+        "approvedAt":{
+          "shape":"Timestamp",
+          "documentation":"<p>The timestamp showing when the approval or rejection was submitted.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a put approval result action.</p>"
+    },
     "PutJobFailureResultInput":{
       "type":"structure",
       "required":[
@@ -1900,7 +2018,7 @@
           "documentation":"<p>The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a retry stage execution operation.</p>"
+      "documentation":"<p>Represents the input of a retry stage execution action.</p>"
     },
     "RetryStageExecutionOutput":{
       "type":"structure",
@@ -1910,7 +2028,7 @@
           "documentation":"<p>The ID of the current workflow execution in the failed stage.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a retry stage execution operation.</p>"
+      "documentation":"<p>Represents the output of a retry stage execution action.</p>"
     },
     "Revision":{
       "type":"string",
@@ -2032,7 +2150,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The specified stage can't be retried because the pipeline structure or stage state changed after the stage failed to complete, the stage contains no failed actions, one or more actions are still in progress, or another retry attempt is already in progress. </p>",
+      "documentation":"<p>The specified stage can't be retried because the pipeline structure or stage state changed after the stage was not completed; the stage contains no failed actions; one or more actions are still in progress; or another retry attempt is already in progress. </p>",
       "exception":true
     },
     "StageRetryMode":{
