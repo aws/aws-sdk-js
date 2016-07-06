@@ -1,0 +1,80 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+
+var changelogFile = process.cwd() + '/CHANGELOG.md';
+var insertMarker = '<!--ENTRYINSERT-->';
+var versionMarker = ['<!--LATEST=', '-->'];
+var versionRegStr = '(\\d+)\\.(\\d+)\\.(\\d+)';
+var versionMarkerReg = new RegExp(versionMarker.join(versionRegStr));
+
+try {
+	var changelog = fs.readFileSync(changelogFile).toString();
+} catch(err) {
+	if (err.code === 'ENOENT') {
+		err.message += '. Make sure to run from sdk root directory'
+	}
+	throw err;
+}
+
+var latest = changelog.match(versionMarkerReg);
+var lmajor = +latest[1];
+var lminor = +latest[2];
+var lpatch = +latest[3];
+
+var version = process.argv[2];
+if (version !== undefined) {
+	if (version === 'major') {
+		version = (lmajor + 1) + '.0.0';
+	} else if (version === 'minor') {
+		version = lmajor + '.' + (lminor + 1) + '.0';
+	} else {
+		version = version.match(new RegExp('^' + versionRegStr + '$'));
+		if (version) {
+			// convert to num for comparison and for normalizing leading zeros
+			var major = +version[1];
+			var minor = +version[2];
+			var patch = +version[3];
+			if (major < lmajor ||
+				major == lmajor && minor < lminor ||
+				major == lmajor && minor == lminor && patch <= lpatch) {
+				throw new Error('Version must be greater than latest version');
+			}
+			version = major + '.' + minor + '.' + patch;
+		} else {
+			throw new Error('Provided input version is in wrong format');
+		}
+	}
+} else {
+	version = lmajor + '.' + lminor + '.' + (lpatch + 1);	
+}
+
+// should throw error if file doesn't exist or not in correct json format
+var changes = JSON.parse(
+	fs.readFileSync(process.cwd() + '/.changes/' + version + '.json')
+);
+
+if (!Array.isArray(changes)) {
+	throw new Error('json not in correct format');
+}
+
+var entry = '\n\n## ' + version + '\n<ul>';
+
+changes.forEach(function(change) {
+	if (!change.type || !change.category || !change.description) {
+		throw new Error('json not in correct format');
+	}
+	entry += '\n\t<li>' + change.type + ': ' + change.category + ': ' +
+		change.description + '</li>';
+});
+
+entry += '\n</ul>';
+
+var logParts = changelog.split(insertMarker);
+logParts[0] = logParts[0]
+	.replace(versionMarkerReg, versionMarker.join(version)) + insertMarker;
+var newChangelog = logParts.join(entry);
+
+fs.writeFileSync(changelogFile, newChangelog);
+
+console.log('Added version ' + version + ' to CHANGELOG');
