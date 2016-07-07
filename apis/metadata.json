@@ -197,6 +197,9 @@
   "s3": {
     "name": "S3"
   },
+  "servicecatalog": {
+    "name": "ServiceCatalog"
+  },
   "ses": {
     "prefix": "email",
     "name": "SES"

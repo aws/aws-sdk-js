@@ -1,0 +1,1204 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2015-12-10",
+    "endpointPrefix":"servicecatalog",
+    "jsonVersion":"1.1",
+    "protocol":"json",
+    "serviceFullName":"AWS Service Catalog",
+    "signatureVersion":"v4",
+    "targetPrefix":"AWS242ServiceCatalogService"
+  },
+  "operations":{
+    "DescribeProduct":{
+      "name":"DescribeProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeProductInput"},
+      "output":{"shape":"DescribeProductOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Retrieves information about a specified product.</p> <p>This operation is functionally identical to <a>DescribeProductView</a> except that it takes as input <code>ProductId</code> instead of <code>ProductViewId</code>.</p>"
+    },
+    "DescribeProductView":{
+      "name":"DescribeProductView",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeProductViewInput"},
+      "output":{"shape":"DescribeProductViewOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Retrieves information about a specified product.</p> <p>This operation is functionally identical to <a>DescribeProduct</a> except that it takes as input <code>ProductViewId</code> instead of <code>ProductId</code>.</p>"
+    },
+    "DescribeProvisioningParameters":{
+      "name":"DescribeProvisioningParameters",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeProvisioningParametersInput"},
+      "output":{"shape":"DescribeProvisioningParametersOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of <code>ProvisioningArtifactParameters</code> parameters available to call the <a>ProvisionProduct</a> operation for the specified product.</p>"
+    },
+    "DescribeRecord":{
+      "name":"DescribeRecord",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeRecordInput"},
+      "output":{"shape":"DescribeRecordOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Retrieves a paginated list of the full details of a specific request. Use this operation after calling a request operation (<a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p>"
+    },
+    "ListLaunchPaths":{
+      "name":"ListLaunchPaths",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListLaunchPathsInput"},
+      "output":{"shape":"ListLaunchPathsOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Returns a paginated list of all paths to a specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.</p>"
+    },
+    "ListRecordHistory":{
+      "name":"ListRecordHistory",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListRecordHistoryInput"},
+      "output":{"shape":"ListRecordHistoryOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Returns a paginated list of all performed requests, in the form of RecordDetails objects that are filtered as specified.</p>"
+    },
+    "ProvisionProduct":{
+      "name":"ProvisionProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ProvisionProductInput"},
+      "output":{"shape":"ProvisionProductOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"DuplicateResourceException"}
+      ],
+      "documentation":"<p>Requests a <i>Provision</i> of a specified product. A <i>ProvisionedProduct</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
+    },
+    "ScanProvisionedProducts":{
+      "name":"ScanProvisionedProducts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ScanProvisionedProductsInput"},
+      "output":{"shape":"ScanProvisionedProductsOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Returns a paginated list of all the ProvisionedProduct objects that are currently available (not terminated). </p>"
+    },
+    "SearchProducts":{
+      "name":"SearchProducts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SearchProductsInput"},
+      "output":{"shape":"SearchProductsOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Returns a paginated list all of the <code>Products</code> objects to which the caller has access. </p> <p>The output of this operation can be used as input for other operations, such as <a>DescribeProductView</a>.</p>"
+    },
+    "TerminateProvisionedProduct":{
+      "name":"TerminateProvisionedProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TerminateProvisionedProductInput"},
+      "output":{"shape":"TerminateProvisionedProductOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Requests termination of an existing ProvisionedProduct object. If there are <code>Tags</code> associated with the object, they are terminated when the ProvisionedProduct object is terminated. </p> <p>This operation does not delete any records associated with the ProvisionedProduct object.</p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
+    },
+    "UpdateProvisionedProduct":{
+      "name":"UpdateProvisionedProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateProvisionedProductInput"},
+      "output":{"shape":"UpdateProvisionedProductOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Requests updates to the configuration of an existing ProvisionedProduct object. If there are tags associated with the object, they cannot be updated or added with this operation. Depending on the specific updates requested, this operation may update with no interruption, with some interruption, or replace the ProvisionedProduct object entirely. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
+    }
+  },
+  "shapes":{
+    "AcceptLanguage":{"type":"string"},
+    "AllowedValue":{"type":"string"},
+    "AllowedValues":{
+      "type":"list",
+      "member":{"shape":"AllowedValue"}
+    },
+    "ApproximateCount":{"type":"integer"},
+    "AttributeValue":{"type":"string"},
+    "ConstraintDescription":{"type":"string"},
+    "ConstraintSummaries":{
+      "type":"list",
+      "member":{"shape":"ConstraintSummary"}
+    },
+    "ConstraintSummary":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"ConstraintType",
+          "documentation":"<p>The type of the constraint. </p>"
+        },
+        "Description":{
+          "shape":"ConstraintDescription",
+          "documentation":"<p>The text description of the constraint.</p>"
+        }
+      },
+      "documentation":"<p>An administrator-specified constraint to apply when provisioning a product.</p>"
+    },
+    "ConstraintType":{"type":"string"},
+    "CreatedTime":{"type":"timestamp"},
+    "DefaultValue":{"type":"string"},
+    "DescribeProductInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The <code>ProductId</code> of the product to describe.</p>"
+        }
+      }
+    },
+    "DescribeProductOutput":{
+      "type":"structure",
+      "members":{
+        "ProductViewSummary":{
+          "shape":"ProductViewSummary",
+          "documentation":"<p>The summary metadata about the specified product.</p>"
+        },
+        "ProvisioningArtifacts":{
+          "shape":"ProvisioningArtifacts",
+          "documentation":"<p>A list of provisioning artifact objects for the specified product. The <code>ProvisioningArtifacts</code> parameter represent the ways the specified product can be provisioned.</p>"
+        }
+      }
+    },
+    "DescribeProductViewInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The <code>ProductViewId</code> of the product to describe.</p>"
+        }
+      }
+    },
+    "DescribeProductViewOutput":{
+      "type":"structure",
+      "members":{
+        "ProductViewSummary":{
+          "shape":"ProductViewSummary",
+          "documentation":"<p>The summary metadata about the specified product.</p>"
+        },
+        "ProvisioningArtifacts":{
+          "shape":"ProvisioningArtifacts",
+          "documentation":"<p>A list of provisioning artifact objects for the specified product. The <code>ProvisioningArtifacts</code> represent the ways in which the specified product can be provisioned.</p>"
+        }
+      }
+    },
+    "DescribeProvisioningParametersInput":{
+      "type":"structure",
+      "required":[
+        "ProductId",
+        "ProvisioningArtifactId"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the product.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The provisioning artifact identifier for this product.</p>"
+        },
+        "PathId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the path for this product's provisioning. This value is optional if the product has a default path, and is required if there is more than one path for the specified product.</p>"
+        }
+      }
+    },
+    "DescribeProvisioningParametersOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisioningArtifactParameters":{
+          "shape":"ProvisioningArtifactParameters",
+          "documentation":"<p>The list of parameters used to successfully provision the product. Each parameter includes a list of allowable values and additional metadata about each parameter.</p>"
+        },
+        "ConstraintSummaries":{
+          "shape":"ConstraintSummaries",
+          "documentation":"<p>The list of constraint summaries that apply to provisioning this product.</p>"
+        },
+        "UsageInstructions":{
+          "shape":"UsageInstructions",
+          "documentation":"<p>Any additional metadata specifically related to the provisioning of the product. For example, see the <code>Version</code> field of the CloudFormation template.</p>"
+        }
+      }
+    },
+    "DescribeRecordInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The record identifier of the ProvisionedProduct object for which to retrieve output information. This is the <code>RecordDetail.RecordId</code> obtained from the request operation's response.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        }
+      }
+    },
+    "DescribeRecordOutput":{
+      "type":"structure",
+      "members":{
+        "RecordDetail":{
+          "shape":"RecordDetail",
+          "documentation":"<p>Detailed record information for the specified product. </p>"
+        },
+        "RecordOutputs":{
+          "shape":"RecordOutputs",
+          "documentation":"<p>A list of outputs for the specified Product object created as the result of a request. For example, a CloudFormation-backed product that creates an S3 bucket would have an output for the S3 bucket URL.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "Description":{"type":"string"},
+    "DuplicateResourceException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The specified resource is a duplicate.</p>",
+      "exception":true
+    },
+    "ErrorCode":{"type":"string"},
+    "ErrorDescription":{"type":"string"},
+    "HasDefaultPath":{"type":"boolean"},
+    "Id":{"type":"string"},
+    "IdempotencyToken":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9][a-zA-Z0-9_-]*"
+    },
+    "IgnoreErrors":{"type":"boolean"},
+    "InstructionType":{"type":"string"},
+    "InstructionValue":{"type":"string"},
+    "InvalidParametersException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>One or more parameters provided to the operation are invalid.</p>",
+      "exception":true
+    },
+    "LastRequestId":{"type":"string"},
+    "LaunchPathSummaries":{
+      "type":"list",
+      "member":{"shape":"LaunchPathSummary"}
+    },
+    "LaunchPathSummary":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The unique identifier of the product path.</p>"
+        },
+        "ConstraintSummaries":{
+          "shape":"ConstraintSummaries",
+          "documentation":"<p>List of constraints on the portfolio-product relationship.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>List of tags used by this launch path.</p>"
+        },
+        "Name":{
+          "shape":"PortfolioName",
+          "documentation":"<p>Corresponds to the name of the portfolio to which the user was assigned.</p>"
+        }
+      },
+      "documentation":"<p>Summary information about a path for a user to have access to a specified product.</p>"
+    },
+    "ListLaunchPathsInput":{
+      "type":"structure",
+      "required":["ProductId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>Identifies the product for which to retrieve <code>LaunchPathSummaries</code> information.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
+    },
+    "ListLaunchPathsOutput":{
+      "type":"structure",
+      "members":{
+        "LaunchPathSummaries":{
+          "shape":"LaunchPathSummaries",
+          "documentation":"<p>List of launch path information summaries for the specified <code>PageToken</code>.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "ListRecordHistoryInput":{
+      "type":"structure",
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "SearchFilter":{
+          "shape":"ListRecordHistorySearchFilter",
+          "documentation":"<p>(Optional) The filter to limit search results. </p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
+    },
+    "ListRecordHistoryOutput":{
+      "type":"structure",
+      "members":{
+        "RecordDetails":{
+          "shape":"RecordDetails",
+          "documentation":"<p>A list of record detail objects, listed in reverse chronological order.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "ListRecordHistorySearchFilter":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"SearchFilterKey",
+          "documentation":"<p>The filter key.</p>"
+        },
+        "Value":{
+          "shape":"SearchFilterValue",
+          "documentation":"<p>The filter value for <code>Key</code>.</p>"
+        }
+      },
+      "documentation":"<p>The search filter to limit results when listing request history records.</p>"
+    },
+    "NoEcho":{"type":"boolean"},
+    "NotificationArn":{
+      "type":"string",
+      "max":1224,
+      "min":1,
+      "pattern":"arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+    },
+    "NotificationArns":{
+      "type":"list",
+      "member":{"shape":"NotificationArn"},
+      "max":5
+    },
+    "OutputKey":{"type":"string"},
+    "OutputValue":{"type":"string"},
+    "PageSize":{
+      "type":"integer",
+      "max":20,
+      "min":0
+    },
+    "PageToken":{
+      "type":"string",
+      "pattern":"[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*"
+    },
+    "ParameterConstraints":{
+      "type":"structure",
+      "members":{
+        "AllowedValues":{
+          "shape":"AllowedValues",
+          "documentation":"<p>The values that the administrator has allowed for the parameter.</p>"
+        }
+      },
+      "documentation":"<p>The constraints that the administrator has put on the parameter.</p>"
+    },
+    "ParameterKey":{"type":"string"},
+    "ParameterType":{"type":"string"},
+    "ParameterValue":{"type":"string"},
+    "PortfolioName":{"type":"string"},
+    "ProductType":{"type":"string"},
+    "ProductViewAggregationType":{"type":"string"},
+    "ProductViewAggregationValue":{
+      "type":"structure",
+      "members":{
+        "Value":{
+          "shape":"AttributeValue",
+          "documentation":"<p>The value of the product view aggregation.</p>"
+        },
+        "ApproximateCount":{
+          "shape":"ApproximateCount",
+          "documentation":"<p>An approximate count of the products that match the value.</p>"
+        }
+      },
+      "documentation":"<p>A single product view aggregation value/count pair, containing metadata about each product to which the calling user has access.</p>"
+    },
+    "ProductViewAggregationValues":{
+      "type":"list",
+      "member":{"shape":"ProductViewAggregationValue"}
+    },
+    "ProductViewAggregations":{
+      "type":"map",
+      "key":{"shape":"ProductViewAggregationType"},
+      "value":{"shape":"ProductViewAggregationValues"}
+    },
+    "ProductViewDistributor":{"type":"string"},
+    "ProductViewFilterBy":{
+      "type":"string",
+      "enum":[
+        "FullTextSearch",
+        "Owner",
+        "ProductType"
+      ]
+    },
+    "ProductViewFilterValue":{"type":"string"},
+    "ProductViewFilterValues":{
+      "type":"list",
+      "member":{"shape":"ProductViewFilterValue"}
+    },
+    "ProductViewFilters":{
+      "type":"map",
+      "key":{"shape":"ProductViewFilterBy"},
+      "value":{"shape":"ProductViewFilterValues"}
+    },
+    "ProductViewName":{"type":"string"},
+    "ProductViewOwner":{"type":"string"},
+    "ProductViewShortDescription":{"type":"string"},
+    "ProductViewSortBy":{
+      "type":"string",
+      "enum":[
+        "Title",
+        "VersionCount",
+        "CreationDate"
+      ]
+    },
+    "ProductViewSummaries":{
+      "type":"list",
+      "member":{"shape":"ProductViewSummary"}
+    },
+    "ProductViewSummary":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The product view identifier.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "Name":{
+          "shape":"ProductViewName",
+          "documentation":"<p>The name of the product.</p>"
+        },
+        "Owner":{
+          "shape":"ProductViewOwner",
+          "documentation":"<p>The owner of the product. Contact the product administrator for the significance of this value.</p>"
+        },
+        "ShortDescription":{
+          "shape":"ProductViewShortDescription",
+          "documentation":"<p>Short description of the product.</p>"
+        },
+        "Type":{
+          "shape":"ProductType",
+          "documentation":"<p>The product type. Contact the product administrator for the significance of this value.</p>"
+        },
+        "Distributor":{
+          "shape":"ProductViewDistributor",
+          "documentation":"<p>The distributor of the product. Contact the product administrator for the significance of this value.</p>"
+        },
+        "HasDefaultPath":{
+          "shape":"HasDefaultPath",
+          "documentation":"<p>A value of <code>false</code> indicates that the product does not have a default path, while a value of <code>true</code> indicates that it does. If it's false, call <a>ListLaunchPaths</a> to disambiguate between paths. If true, <a>ListLaunchPaths</a> is not required, and the output of the <a>ProductViewSummary</a> operation can be used directly with <a>DescribeProvisioningParameters</a>.</p>"
+        },
+        "SupportEmail":{
+          "shape":"SupportEmail",
+          "documentation":"<p>The email contact information to obtain support for this Product.</p>"
+        },
+        "SupportDescription":{
+          "shape":"SupportDescription",
+          "documentation":"<p>The description of the support for this Product.</p>"
+        },
+        "SupportUrl":{
+          "shape":"SupportUrl",
+          "documentation":"<p>The URL information to obtain support for this Product.</p>"
+        }
+      },
+      "documentation":"<p>The summary metadata about the specified product.</p>"
+    },
+    "ProvisionProductInput":{
+      "type":"structure",
+      "required":[
+        "ProductId",
+        "ProvisioningArtifactId",
+        "ProvisionedProductName",
+        "ProvisionToken"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the product.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The provisioning artifact identifier for this product.</p>"
+        },
+        "PathId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the path for this product's provisioning. This value is optional if the product has a default path, and is required if there is more than one path for the specified product.</p>"
+        },
+        "ProvisionedProductName":{
+          "shape":"ProvisionedProductName",
+          "documentation":"<p>A user-friendly name to identify the ProvisionedProduct object. This value must be unique for the AWS account and cannot be updated after the product is provisioned.</p>"
+        },
+        "ProvisioningParameters":{
+          "shape":"ProvisioningParameters",
+          "documentation":"<p>Parameters specified by the administrator that are required for provisioning the product.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>(Optional) A list of tags to use as provisioning options.</p>"
+        },
+        "NotificationArns":{
+          "shape":"NotificationArns",
+          "documentation":"<p>Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.</p>"
+        },
+        "ProvisionToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>An idempotency token that uniquely identifies the provisioning request. </p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "ProvisionProductOutput":{
+      "type":"structure",
+      "members":{
+        "RecordDetail":{
+          "shape":"RecordDetail",
+          "documentation":"<p>The detailed result of the <a>ProvisionProduct</a> request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object of the request, and a list of any errors that the request encountered. </p>"
+        }
+      }
+    },
+    "ProvisionedProductDetail":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"ProvisionedProductNameOrArn",
+          "documentation":"<p>The user-friendly name of the ProvisionedProduct object.</p>"
+        },
+        "Arn":{
+          "shape":"ProvisionedProductNameOrArn",
+          "documentation":"<p>The ARN associated with the ProvisionedProduct object.</p>"
+        },
+        "Type":{
+          "shape":"ProvisionedProductType",
+          "documentation":"<p>The type of the ProvisionedProduct object.</p>"
+        },
+        "Id":{
+          "shape":"ProvisionedProductId",
+          "documentation":"<p>The identifier of the ProvisionedProduct object.</p>"
+        },
+        "Status":{
+          "shape":"RecordStatus",
+          "documentation":"<p>The current status of the ProvisionedProduct.</p>"
+        },
+        "StatusMessage":{
+          "shape":"ProvisionedProductStatusMessage",
+          "documentation":"<p>The current status message of the ProvisionedProduct.</p>"
+        },
+        "CreatedTime":{
+          "shape":"CreatedTime",
+          "documentation":"<p>The time the ProvisionedProduct was created.</p>"
+        },
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>An idempotency token that uniquely identifies this ProvisionedProduct.</p>"
+        },
+        "LastRecordId":{
+          "shape":"LastRequestId",
+          "documentation":"<p>The record identifier of the last request performed on this ProvisionedProduct object.</p>"
+        }
+      },
+      "documentation":"<p>Detailed information about a ProvisionedProduct object.</p>"
+    },
+    "ProvisionedProductDetails":{
+      "type":"list",
+      "member":{"shape":"ProvisionedProductDetail"}
+    },
+    "ProvisionedProductId":{"type":"string"},
+    "ProvisionedProductName":{"type":"string"},
+    "ProvisionedProductNameOrArn":{
+      "type":"string",
+      "max":1224,
+      "min":1,
+      "pattern":"[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}|arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+    },
+    "ProvisionedProductStatusMessage":{"type":"string"},
+    "ProvisionedProductType":{"type":"string"},
+    "ProvisioningArtifact":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier for the artifact.</p>"
+        },
+        "Name":{
+          "shape":"ProvisioningArtifactName",
+          "documentation":"<p>The name of the artifact.</p>"
+        },
+        "Description":{
+          "shape":"ProvisioningArtifactDescription",
+          "documentation":"<p>The text description of the artifact.</p>"
+        },
+        "CreatedTime":{
+          "shape":"ProvisioningArtifactCreatedTime",
+          "documentation":"<p>The time that the artifact was created by the Administrator.</p>"
+        }
+      },
+      "documentation":"<p>Contains information indicating the ways in which a product can be provisioned.</p>"
+    },
+    "ProvisioningArtifactCreatedTime":{"type":"timestamp"},
+    "ProvisioningArtifactDescription":{"type":"string"},
+    "ProvisioningArtifactName":{"type":"string"},
+    "ProvisioningArtifactParameter":{
+      "type":"structure",
+      "members":{
+        "ParameterKey":{
+          "shape":"ParameterKey",
+          "documentation":"<p>The parameter key. </p>"
+        },
+        "DefaultValue":{
+          "shape":"DefaultValue",
+          "documentation":"<p>The default value for this parameter.</p>"
+        },
+        "ParameterType":{
+          "shape":"ParameterType",
+          "documentation":"<p>The parameter type.</p>"
+        },
+        "IsNoEcho":{
+          "shape":"NoEcho",
+          "documentation":"<p>If this value is true, the value for this parameter is obfuscated from view when the parameter is retrieved. This parameter is used to hide sensitive information.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>The text description of the parameter.</p>"
+        },
+        "ParameterConstraints":{
+          "shape":"ParameterConstraints",
+          "documentation":"<p>The list of constraints that the administrator has put on the parameter.</p>"
+        }
+      },
+      "documentation":"<p>A parameter used to successfully provision the product. This value includes a list of allowable values and additional metadata. </p>"
+    },
+    "ProvisioningArtifactParameters":{
+      "type":"list",
+      "member":{"shape":"ProvisioningArtifactParameter"}
+    },
+    "ProvisioningArtifacts":{
+      "type":"list",
+      "member":{"shape":"ProvisioningArtifact"}
+    },
+    "ProvisioningParameter":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"ParameterKey",
+          "documentation":"<p>The <code>ProvisioningArtifactParameter.ParameterKey</code> parameter from <a>DescribeProvisioningParameters</a>.</p>"
+        },
+        "Value":{
+          "shape":"ParameterValue",
+          "documentation":"<p>The value to use for provisioning. Any constraints on this value can be found in <code>ProvisioningArtifactParameter</code> for <code>Key</code>.</p>"
+        }
+      },
+      "documentation":"<p>The arameter key/value pairs used to provision a product.</p>"
+    },
+    "ProvisioningParameters":{
+      "type":"list",
+      "member":{"shape":"ProvisioningParameter"}
+    },
+    "RecordDetail":{
+      "type":"structure",
+      "members":{
+        "RecordId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the ProvisionedProduct object record.</p>"
+        },
+        "ProvisionedProductName":{
+          "shape":"ProvisionedProductName",
+          "documentation":"<p>The user-friendly name of the ProvisionedProduct object.</p>"
+        },
+        "Status":{
+          "shape":"RecordStatus",
+          "documentation":"<p>The status of the ProvisionedProduct object.</p>"
+        },
+        "CreatedTime":{
+          "shape":"CreatedTime",
+          "documentation":"<p>The time when the record for the ProvisionedProduct object was created.</p>"
+        },
+        "UpdatedTime":{
+          "shape":"UpdatedTime",
+          "documentation":"<p>The time when the record for the ProvisionedProduct object was last updated.</p>"
+        },
+        "ProvisionedProductType":{
+          "shape":"ProvisionedProductType",
+          "documentation":"<p>The type of the ProvisionedProduct object.</p>"
+        },
+        "RecordType":{
+          "shape":"RecordType",
+          "documentation":"<p>The record type for this record.</p>"
+        },
+        "ProvisionedProductId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the ProvisionedProduct object.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the product.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The provisioning artifact identifier for this product.</p>"
+        },
+        "PathId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the path for this product's provisioning.</p>"
+        },
+        "RecordErrors":{
+          "shape":"RecordErrors",
+          "documentation":"<p>A list of errors that occurred while processing the request.</p>"
+        },
+        "RecordTags":{
+          "shape":"RecordTags",
+          "documentation":"<p>List of tags associated with this record.</p>"
+        }
+      },
+      "documentation":"<p>The full details of a specific ProvisionedProduct object.</p>"
+    },
+    "RecordDetails":{
+      "type":"list",
+      "member":{"shape":"RecordDetail"}
+    },
+    "RecordError":{
+      "type":"structure",
+      "members":{
+        "Code":{
+          "shape":"ErrorCode",
+          "documentation":"<p>The numeric value of the error.</p>"
+        },
+        "Description":{
+          "shape":"ErrorDescription",
+          "documentation":"<p>The text description of the error.</p>"
+        }
+      },
+      "documentation":"<p>The error code and description resulting from an operation.</p>"
+    },
+    "RecordErrors":{
+      "type":"list",
+      "member":{"shape":"RecordError"}
+    },
+    "RecordOutput":{
+      "type":"structure",
+      "members":{
+        "OutputKey":{
+          "shape":"OutputKey",
+          "documentation":"<p>The output key.</p>"
+        },
+        "OutputValue":{
+          "shape":"OutputValue",
+          "documentation":"<p>The output value.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>The text description of the output.</p>"
+        }
+      },
+      "documentation":"<p>An output for the specified Product object created as the result of a request. For example, a CloudFormation-backed product that creates an S3 bucket would have an output for the S3 bucket URL.</p>"
+    },
+    "RecordOutputs":{
+      "type":"list",
+      "member":{"shape":"RecordOutput"}
+    },
+    "RecordStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "SUCCEEDED",
+        "ERROR"
+      ]
+    },
+    "RecordTag":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"RecordTagKey",
+          "documentation":"<p>The key for this tag.</p>"
+        },
+        "Value":{
+          "shape":"RecordTagValue",
+          "documentation":"<p>The value for this tag.</p>"
+        }
+      },
+      "documentation":"<p>A tag associated with the record, stored as a key-value pair.</p>"
+    },
+    "RecordTagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "RecordTagValue":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "RecordTags":{
+      "type":"list",
+      "member":{"shape":"RecordTag"},
+      "max":10
+    },
+    "RecordType":{"type":"string"},
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The specified resource was not found.</p>",
+      "exception":true
+    },
+    "ScanProvisionedProductsInput":{
+      "type":"structure",
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
+    },
+    "ScanProvisionedProductsOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisionedProducts":{
+          "shape":"ProvisionedProductDetails",
+          "documentation":"<p>A list of ProvisionedProduct detail objects.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "SearchFilterKey":{"type":"string"},
+    "SearchFilterValue":{"type":"string"},
+    "SearchProductsInput":{
+      "type":"structure",
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Filters":{
+          "shape":"ProductViewFilters",
+          "documentation":"<p>(Optional) The list of filters with which to limit search results. If no search filters are specified, the output is all the products to which the calling user has access. </p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        },
+        "SortBy":{
+          "shape":"ProductViewSortBy",
+          "documentation":"<p>(Optional) The sort field specifier. If no value is specified, results are not sorted.</p>"
+        },
+        "SortOrder":{
+          "shape":"SortOrder",
+          "documentation":"<p>(Optional) The sort order specifier. If no value is specified, results are not sorted.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
+    },
+    "SearchProductsOutput":{
+      "type":"structure",
+      "members":{
+        "ProductViewSummaries":{
+          "shape":"ProductViewSummaries",
+          "documentation":"<p>A list of the product view summary objects.</p>"
+        },
+        "ProductViewAggregations":{
+          "shape":"ProductViewAggregations",
+          "documentation":"<p>A list of the product view aggregation value objects.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "SortOrder":{
+      "type":"string",
+      "enum":[
+        "ASCENDING",
+        "DESCENDING"
+      ]
+    },
+    "SupportDescription":{"type":"string"},
+    "SupportEmail":{"type":"string"},
+    "SupportUrl":{"type":"string"},
+    "Tag":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"TagKey",
+          "documentation":"<p>The <code>ProvisioningArtifactParameter.TagKey</code> parameter from <a>DescribeProvisioningParameters</a>.</p>"
+        },
+        "Value":{
+          "shape":"TagValue",
+          "documentation":"<p>The esired value for this key.</p>"
+        }
+      },
+      "documentation":"<p>Optional key/value pairs to associate with this provisioning. These tags are propagated to the resources created in the provisioning.</p>"
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "Tags":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "max":10
+    },
+    "TerminateProvisionedProductInput":{
+      "type":"structure",
+      "required":["TerminateToken"],
+      "members":{
+        "ProvisionedProductName":{
+          "shape":"ProvisionedProductNameOrArn",
+          "documentation":"<p>The name of the ProvisionedProduct object to terminate. You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+        },
+        "ProvisionedProductId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the ProvisionedProduct object to terminate. You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+        },
+        "TerminateToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>An idempotency token that uniquely identifies the termination request. This token is only valid during the termination process. After the ProvisionedProduct object is terminated, further requests to terminate the same ProvisionedProduct object always return <b>ResourceNotFound</b> regardless of the value of <code>TerminateToken</code>.</p>",
+          "idempotencyToken":true
+        },
+        "IgnoreErrors":{
+          "shape":"IgnoreErrors",
+          "documentation":"<p>Optional Boolean parameter. If set to true, AWS Service Catalog stops managing the specified ProvisionedProduct object even if it cannot delete the underlying resources.</p>"
+        },
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        }
+      }
+    },
+    "TerminateProvisionedProductOutput":{
+      "type":"structure",
+      "members":{
+        "RecordDetail":{
+          "shape":"RecordDetail",
+          "documentation":"<p>The detailed result of the <a>TerminateProvisionedProduct</a> request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object that the request is modifying, and a list of any errors that the request encountered.</p>"
+        }
+      }
+    },
+    "UpdateProvisionedProductInput":{
+      "type":"structure",
+      "required":["UpdateToken"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProvisionedProductName":{
+          "shape":"ProvisionedProductNameOrArn",
+          "documentation":"<p>The updated name of the ProvisionedProduct object . You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+        },
+        "ProvisionedProductId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the ProvisionedProduct object to update. You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the ProvisionedProduct object.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The provisioning artifact identifier for this product.</p>"
+        },
+        "PathId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the path to use in the updated ProvisionedProduct object. This value is optional if the product has a default path, and is required if there is more than one path for the specified product.</p>"
+        },
+        "ProvisioningParameters":{
+          "shape":"UpdateProvisioningParameters",
+          "documentation":"<p>A list of <code>ProvisioningParameter</code> objects used to update the ProvisionedProduct object.</p>"
+        },
+        "UpdateToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>The idempotency token that uniquely identifies the provisioning update request.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "UpdateProvisionedProductOutput":{
+      "type":"structure",
+      "members":{
+        "RecordDetail":{
+          "shape":"RecordDetail",
+          "documentation":"<p>The detailed result of the <a>UpdateProvisionedProduct</a> request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object that the request is modifying, and a list of any errors that the request encountered.</p>"
+        }
+      }
+    },
+    "UpdateProvisioningParameter":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"ParameterKey",
+          "documentation":"<p>The <code>ProvisioningArtifactParameter.ParameterKey</code> parameter from <a>DescribeProvisioningParameters</a>.</p>"
+        },
+        "Value":{
+          "shape":"ParameterValue",
+          "documentation":"<p>The value to use for updating the product provisioning. Any constraints on this value can be found in the <code>ProvisioningArtifactParameter</code> parameter for <code>Key</code>.</p>"
+        },
+        "UsePreviousValue":{
+          "shape":"UsePreviousValue",
+          "documentation":"<p>If true, uses the currently set value for <code>Key</code>, ignoring <code>UpdateProvisioningParameter.Value</code>.</p>"
+        }
+      },
+      "documentation":"<p>The parameter key/value pair used to update a ProvisionedProduct object. If <code>UsePreviousValue</code> is set to true, <code>Value</code> is ignored and the value for <code>Key</code> is kept as previously set (current value).</p>"
+    },
+    "UpdateProvisioningParameters":{
+      "type":"list",
+      "member":{"shape":"UpdateProvisioningParameter"}
+    },
+    "UpdatedTime":{"type":"timestamp"},
+    "UsageInstruction":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"InstructionType",
+          "documentation":"<p>The usage instruction type for the value.</p>"
+        },
+        "Value":{
+          "shape":"InstructionValue",
+          "documentation":"<p>The usage instruction value for this type.</p>"
+        }
+      },
+      "documentation":"<p>Additional information provided by the administrator.</p>"
+    },
+    "UsageInstructions":{
+      "type":"list",
+      "member":{"shape":"UsageInstruction"}
+    },
+    "UsePreviousValue":{"type":"boolean"}
+  },
+  "documentation":"<fullname>AWS Service Catalog</fullname> <p> <b>Overview</b> </p> <p> <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> allows organizations to create and manage catalogs of IT services that are approved for use on AWS. This documentation provides reference material for the AWS Service Catalog end user API. To get the most out of this documentation, you need to be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/userguide/what-is_concepts.html\">AWS Service Catalog Concepts</a>.</p> <p> <i>Additional Resources</i> </p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">AWS Service Catalog Administrator Guide</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/userguide/introduction.html\">AWS Service Catalog User Guide</a> </p> </li> </ul>"
+}
