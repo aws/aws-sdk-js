@@ -18,9 +18,9 @@ try {
 }
 
 var latest = changelog.match(versionMarkerReg);
-var lmajor = +latest[1];
-var lminor = +latest[2];
-var lpatch = +latest[3];
+var lmajor = parseInt(latest[1], 10);
+var lminor = parseInt(latest[2], 10);
+var lpatch = parseInt(latest[3], 10);
 
 var version = process.argv[2];
 if (version !== undefined) {
@@ -32,9 +32,9 @@ if (version !== undefined) {
 		version = version.match(new RegExp('^' + versionRegStr + '$'));
 		if (version) {
 			// convert to num for comparison and for normalizing leading zeros
-			var major = +version[1];
-			var minor = +version[2];
-			var patch = +version[3];
+			var major = parseInt(version[1], 10);
+			var minor = parseInt(version[2], 10);
+			var patch = parseInt(version[3], 10);
 			if (major < lmajor ||
 				major == lmajor && minor < lminor ||
 				major == lmajor && minor == lminor && patch <= lpatch) {
@@ -58,17 +58,15 @@ if (!Array.isArray(changes)) {
 	throw new Error('json not in correct format');
 }
 
-var entry = '\n\n## ' + version + '\n<ul>';
+var entry = '\n\n## ' + version;
 
 changes.forEach(function(change) {
 	if (!change.type || !change.category || !change.description) {
 		throw new Error('json not in correct format');
 	}
-	entry += '\n\t<li>' + change.type + ': ' + change.category + ': ' +
-		change.description + '</li>';
+	entry += '\n* ' + change.type + ': ' + change.category + ': ' +
+		change.description;
 });
-
-entry += '\n</ul>';
 
 var logParts = changelog.split(insertMarker);
 logParts[0] = logParts[0]
