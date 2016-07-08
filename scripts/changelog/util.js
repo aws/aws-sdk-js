@@ -6,9 +6,8 @@ var changesDir = process.cwd() + '/.changes/';
 var nextReleaseDir = changesDir + 'next-release/';
 var insertMarker = '<!--ENTRYINSERT-->';
 var versionMarker = ['<!--LATEST=', '-->'];
-var startContent = '# Changelog for AWS SDK for JavaScript\
-\n<!--LATEST=0.0.0-->\
-\n<!--ENTRYINSERT-->';
+var startContent = '# Changelog for AWS SDK for JavaScript\n' +
+	versionMarker.join('0.0.0') + '\n' + insertMarker;
 
 var versionRegStr = '(\\d+)\\.(\\d+)\\.(\\d+)';
 var versionReg = new RegExp('^' + versionRegStr + '$');
