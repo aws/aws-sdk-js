@@ -47,9 +47,9 @@ function checkAndNormalizeVersion(version) {
 	var match = version.match(versionReg);
 	if (match) {
 		// convert to num for comparison and for normalizing leading zeros
-		var major = parseInt(version[1], 10);
-		var minor = parseInt(version[2], 10);
-		var patch = parseInt(version[3], 10);
+		var major = parseInt(match[1], 10);
+		var minor = parseInt(match[2], 10);
+		var patch = parseInt(match[3], 10);
 		if (major < latest.major ||
 			major == latest.major && minor < latest.minor ||
 			major == latest.major && minor == latest.minor && patch <= latest.patch) {
@@ -97,6 +97,7 @@ function listVersions() {
 function listNextReleaseFiles() {
 	nextReleaseFiles = fsSyncFromRoot('readdir', nextReleaseDir)
 		.map(function(file) { return nextReleaseDir + file });
+	if (!nextReleaseFiles.length) throw new Error('No changes to be released');
 	return nextReleaseFiles;
 }
 
@@ -106,21 +107,35 @@ function startNewChangelog() {
 }
 
 function checkChangeFormat(change) {
-	if (!change.type || !change.category || !change.description) {
-		throw new Error('JSON not in correct format');
+	if (!change.type || !change.category || !change.description ||
+		typeof change.type !== 'string' ||
+		typeof change.category !== 'string' ||
+		typeof change.description !== 'string') {
+		var err = new Error('JSON not in correct format');
+		err.code = 'InvalidFormat';
+		throw err;
 	}
 }
 
 function readChangesFromJSON(filepath) {
 	var changes = JSON.parse(fsSyncFromRoot('readFile', filepath));
 	if (!Array.isArray(changes)) changes = [changes];
-	changes.forEach(checkChangeFormat);
+	if (!changes.length) throw new Error(filepath + ' contains no changes');
+	try {
+		changes.forEach(checkChangeFormat);
+	} catch (err) {
+		if (err.code === 'InvalidFormat') {
+			err.message += ' in ' + filepath;
+		}
+		throw err;
+	}
 	return changes;
 }
 
-function readVersionJSONAndAddToChangelog(version) {
+// This will not to write to file
+// writeToChangelog must be called after
+function addVersionJSONToChangelog(version, changes) {
 	if (!changelog) readChangelog();
-	var changes = readChangesFromJSON(changesDir + version + '.json');
 	var entry = '\n\n## ' + version;
 
 	changes.forEach(function(change) {
@@ -134,6 +149,13 @@ function readVersionJSONAndAddToChangelog(version) {
 	changelog = logParts.join(entry);
 }
 
+// This will not to write to file
+// writeToChangelog must be called after
+function readVersionJSONAndAddToChangelog(version) {
+	var changes = readChangesFromJSON(changesDir + version + '.json');
+	addVersionJSONToChangelog(version, changes);
+}
+
 function writeToChangelog() {
 	if (!changelog) throw new Error('Nothing to write');
 	fs.writeFileSync(changelogFile, changelog);
@@ -142,9 +164,8 @@ function writeToChangelog() {
 
 function writeToVersionJSON(version, json) {
 	var content = JSON.stringify(json, null, 4);
-	console.log(content);
-	console.log(version);
 	fs.writeFileSync(changesDir + version + '.json', content);
+	console.log('Successfully added ' + version + '.json to ' + changesDir);
 }
 
 function clearNextReleaseDir() {
@@ -152,6 +173,7 @@ function clearNextReleaseDir() {
 	nextReleaseFiles.forEach(function(filepath) {
 		fsSyncFromRoot('unlink', filepath);
 	});
+	console.log(nextReleaseDir + ' has been cleared');
 }
 
 module.exports = {
@@ -165,6 +187,7 @@ module.exports = {
 	listNextReleaseFiles: listNextReleaseFiles,
 	startNewChangelog: startNewChangelog,
 	readChangesFromJSON: readChangesFromJSON,
+	addVersionJSONToChangelog: addVersionJSONToChangelog,
 	readVersionJSONAndAddToChangelog: readVersionJSONAndAddToChangelog,
 	writeToChangelog: writeToChangelog,
 	writeToVersionJSON: writeToVersionJSON,

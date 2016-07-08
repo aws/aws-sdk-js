@@ -30,6 +30,6 @@ util.writeToVersionJSON(version, versionJSON);
 
 util.clearNextReleaseDir();
 
-util.readVersionJSONAndAddToChangelog(version);
+util.addVersionJSONToChangelog(version, versionJSON);
 
 util.writeToChangelog();
