@@ -77,8 +77,22 @@ npm run-script unit
 
 See the implementation of the `test` script in `package.json` for more options.
 
+### Changelog
+
+We have moved to using a changelog to document changes between SDK versions instead of [release notes][releasenotes].
+The release notes generally contained service client updates, and major SDK changes. 
+Our goal with the changelog is to document all changes made with each version of the SDK. 
+When submitting a pull request, please run the `add-change` script and commit the resulting JSON file so that your change gets added to the changelog.
+From SDK root:
+```
+node ./scripts/changelog/add-change.js
+```
+
+See the [add-change cli notes](./scripts/changelog/README.md) for more information.
+
 [issues]: https://github.com/aws/aws-sdk-js/issues
 [pr]: https://github.com/aws/aws-sdk-js/pulls
 [license]: http://aws.amazon.com/apache2.0/
 [cla]: http://en.wikipedia.org/wiki/Contributor_License_Agreement
 [homebrew]: http://brew.sh/
+[releasenotes]: https://aws.amazon.com/releasenotes/JavaScript
