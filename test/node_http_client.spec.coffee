@@ -9,9 +9,16 @@ if AWS.util.isNode()
       it 'delegates maxSockets from agent to globalAgent', ->
         https = require('https')
         agent = http.sslAgent()
+        https.globalAgent.maxSockets = 5
         expect(https.globalAgent.maxSockets).to.equal(agent.maxSockets)
         https.globalAgent.maxSockets += 1
         expect(https.globalAgent.maxSockets).to.equal(agent.maxSockets)
+
+      it 'overrides globalAgent value if global is set to Infinity', ->
+        https = require('https')
+        agent = http.sslAgent()
+        https.globalAgent.maxSockets = Infinity
+        expect(agent.maxSockets).to.equal(50)
 
     describe 'handleRequest', ->
       it 'emits error event', (done) ->
