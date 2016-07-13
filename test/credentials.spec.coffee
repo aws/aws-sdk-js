@@ -473,6 +473,10 @@ if AWS.util.isNode()
         process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path'
         expect(creds.getECSRelativeUri()).to.equal('/path')
 
+      it 'returns relative URI from prototype when environment variable is set', ->
+        process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path'
+        expect(AWS.ECSCredentials.prototype.getECSRelativeUri()).to.equal('/path')
+
     describe 'credsFormatIsValid', ->
       it 'returns false when data is missing required property', ->
         responseData = {AccessKeyId: 'KEY', SecretAccessKey: 'SECRET', Token: 'TOKEN'}
