@@ -97,6 +97,20 @@
       ],
       "documentation":"<p>Creates a replication task using the specified parameters.</p>"
     },
+    "DeleteCertificate":{
+      "name":"DeleteCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteCertificateMessage"},
+      "output":{"shape":"DeleteCertificateResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundFault"},
+        {"shape":"InvalidResourceStateFault"}
+      ],
+      "documentation":"<p>Deletes the specified certificate. </p>"
+    },
     "DeleteEndpoint":{
       "name":"DeleteEndpoint",
       "http":{
@@ -162,6 +176,19 @@
       "input":{"shape":"DescribeAccountAttributesMessage"},
       "output":{"shape":"DescribeAccountAttributesResponse"},
       "documentation":"<p>Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such as the number of replication instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value.</p> <p>This command does not take any parameters.</p>"
+    },
+    "DescribeCertificates":{
+      "name":"DescribeCertificates",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeCertificatesMessage"},
+      "output":{"shape":"DescribeCertificatesResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundFault"}
+      ],
+      "documentation":"<p>Provides a description of the certificate.</p>"
     },
     "DescribeConnections":{
       "name":"DescribeConnections",
@@ -290,6 +317,20 @@
       ],
       "documentation":"<p>Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted.</p>"
     },
+    "ImportCertificate":{
+      "name":"ImportCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ImportCertificateMessage"},
+      "output":{"shape":"ImportCertificateResponse"},
+      "errors":[
+        {"shape":"ResourceAlreadyExistsFault"},
+        {"shape":"InvalidCertificateFault"}
+      ],
+      "documentation":"<p>Uploads the specified certificate.</p>"
+    },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
       "http":{
@@ -346,6 +387,7 @@
       "input":{"shape":"ModifyReplicationSubnetGroupMessage"},
       "output":{"shape":"ModifyReplicationSubnetGroupResponse"},
       "errors":[
+        {"shape":"AccessDeniedFault"},
         {"shape":"ResourceNotFoundFault"},
         {"shape":"ResourceQuotaExceededFault"},
         {"shape":"SubnetAlreadyInUse"},
@@ -501,6 +543,55 @@
     },
     "Boolean":{"type":"boolean"},
     "BooleanOptional":{"type":"boolean"},
+    "Certificate":{
+      "type":"structure",
+      "members":{
+        "CertificateIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The customer-assigned name of the certificate. Valid characters are [A-z_0-9].</p>"
+        },
+        "CertificateCreationDate":{
+          "shape":"TStamp",
+          "documentation":"<p>the date the certificate was created.</p>"
+        },
+        "CertificatePem":{
+          "shape":"String",
+          "documentation":"<p>The contents of the .pem X.509 certificate file.</p>"
+        },
+        "CertificateArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the certificate.</p>"
+        },
+        "CertificateOwner":{
+          "shape":"String",
+          "documentation":"<p>The owner of the certificate.</p>"
+        },
+        "ValidFromDate":{
+          "shape":"TStamp",
+          "documentation":"<p>The beginning date the certificate is valid.</p>"
+        },
+        "ValidToDate":{
+          "shape":"TStamp",
+          "documentation":"<p>the final date the certificate is valid.</p>"
+        },
+        "SigningAlgorithm":{
+          "shape":"String",
+          "documentation":"<p>The signing algorithm for the certificate.</p>"
+        },
+        "KeyLength":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>The key length of the cryptographic algorithm being used.</p>"
+        }
+      },
+      "documentation":"<p>The SSL certificate that can be used to encrypt connections between the endpoints and the replication instance.</p>"
+    },
+    "CertificateList":{
+      "type":"list",
+      "member":{
+        "shape":"Certificate",
+        "locationName":"Certificate"
+      }
+    },
     "Connection":{
       "type":"structure",
       "members":{
@@ -593,6 +684,14 @@
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>Tags to be added to the endpoint.</p>"
+        },
+        "CertificateArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Number (ARN) for the certificate.</p>"
+        },
+        "SslMode":{
+          "shape":"DmsSslModeValue",
+          "documentation":"<p>The SSL mode to use for the SSL connection.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>"
         }
       },
       "documentation":"<p/>"
@@ -641,6 +740,10 @@
         "PreferredMaintenanceWindow":{
           "shape":"String",
           "documentation":"<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week.</p> <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
+        },
+        "MultiAZ":{
+          "shape":"BooleanOptional",
+          "documentation":"<p> Specifies if the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
         },
         "EngineVersion":{
           "shape":"String",
@@ -745,7 +848,7 @@
         },
         "TableMappings":{
           "shape":"String",
-          "documentation":"<p>The path of the JSON file that contains the table mappings.</p>"
+          "documentation":"<p>The path of the JSON file that contains the table mappings. Preceed the path with \"file://\".</p> <p>For example, --table-mappings file://mappingfile.json</p>"
         },
         "ReplicationTaskSettings":{
           "shape":"String",
@@ -771,6 +874,25 @@
         }
       },
       "documentation":"<p/>"
+    },
+    "DeleteCertificateMessage":{
+      "type":"structure",
+      "required":["CertificateArn"],
+      "members":{
+        "CertificateArn":{
+          "shape":"String",
+          "documentation":"<p>the Amazon Resource Name (ARN) of the deleted certificate.</p>"
+        }
+      }
+    },
+    "DeleteCertificateResponse":{
+      "type":"structure",
+      "members":{
+        "Certificate":{
+          "shape":"Certificate",
+          "documentation":"<p>The SSL certificate.</p>"
+        }
+      }
     },
     "DeleteEndpointMessage":{
       "type":"structure",
@@ -867,6 +989,36 @@
         }
       },
       "documentation":"<p/>"
+    },
+    "DescribeCertificatesMessage":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>Filters applied to the certificate described in the form of key-value pairs.</p>"
+        },
+        "MaxRecords":{
+          "shape":"IntegerOptional",
+          "documentation":"<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 10</p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      }
+    },
+    "DescribeCertificatesResponse":{
+      "type":"structure",
+      "members":{
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "Certificates":{
+          "shape":"CertificateList",
+          "documentation":"<p>The SSL certificates associated with the replication instance.</p>"
+        }
+      }
     },
     "DescribeConnectionsMessage":{
       "type":"structure",
@@ -1179,6 +1331,15 @@
       },
       "documentation":"<p/>"
     },
+    "DmsSslModeValue":{
+      "type":"string",
+      "enum":[
+        "none",
+        "require",
+        "verify-ca",
+        "verify-full"
+      ]
+    },
     "Endpoint":{
       "type":"structure",
       "members":{
@@ -1225,6 +1386,14 @@
         "EndpointArn":{
           "shape":"String",
           "documentation":"<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>"
+        },
+        "CertificateArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) used for SSL connection to the endpoint.</p>"
+        },
+        "SslMode":{
+          "shape":"DmsSslModeValue",
+          "documentation":"<p>The SSL mode used to connect to the endpoint.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>"
         }
       },
       "documentation":"<p/>"
@@ -1269,6 +1438,29 @@
         "locationName":"Value"
       }
     },
+    "ImportCertificateMessage":{
+      "type":"structure",
+      "required":["CertificateIdentifier"],
+      "members":{
+        "CertificateIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The customer-assigned name of the certificate. Valid characters are [A-z_0-9].</p>"
+        },
+        "CertificatePem":{
+          "shape":"String",
+          "documentation":"<p>The contents of the .pem X.509 certificate file.</p>"
+        }
+      }
+    },
+    "ImportCertificateResponse":{
+      "type":"structure",
+      "members":{
+        "Certificate":{
+          "shape":"Certificate",
+          "documentation":"<p>The certificate to be uploaded.</p>"
+        }
+      }
+    },
     "InsufficientResourceCapacityFault":{
       "type":"structure",
       "members":{
@@ -1282,6 +1474,14 @@
     },
     "Integer":{"type":"integer"},
     "IntegerOptional":{"type":"integer"},
+    "InvalidCertificateFault":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "documentation":"<p>The certificate was not valid.</p>",
+      "exception":true
+    },
     "InvalidResourceStateFault":{
       "type":"structure",
       "members":{
@@ -1392,6 +1592,14 @@
         "ExtraConnectionAttributes":{
           "shape":"String",
           "documentation":"<p>Additional attributes associated with the connection.</p>"
+        },
+        "CertificateArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
+        },
+        "SslMode":{
+          "shape":"DmsSslModeValue",
+          "documentation":"<p>The SSL mode to be used.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>"
         }
       },
       "documentation":"<p/>"
@@ -1433,6 +1641,10 @@
         "PreferredMaintenanceWindow":{
           "shape":"String",
           "documentation":"<p>The weekly time range (in UTC) during which system maintenance can occur, which might result in an outage. Changing this parameter does not result in an outage, except in the following situation, and the change is asynchronously applied as soon as possible. If moving this window to the current time, there must be at least 30 minutes between the current time and end of the window to ensure pending changes are applied.</p> <p>Default: Uses existing setting</p> <p>Format: ddd:hh24:mi-ddd:hh24:mi</p> <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p> <p>Constraints: Must be at least 30 minutes</p>"
+        },
+        "MultiAZ":{
+          "shape":"BooleanOptional",
+          "documentation":"<p> Specifies if the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
         },
         "EngineVersion":{
           "shape":"String",
@@ -1672,6 +1884,10 @@
           "shape":"ReplicationPendingModifiedValues",
           "documentation":"<p>The pending modification values.</p>"
         },
+        "MultiAZ":{
+          "shape":"Boolean",
+          "documentation":"<p> Specifies if the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
+        },
         "EngineVersion":{
           "shape":"String",
           "documentation":"<p>The engine version number of the replication instance.</p>"
@@ -1690,10 +1906,20 @@
         },
         "ReplicationInstancePublicIpAddress":{
           "shape":"String",
-          "documentation":"<p>The public IP address of the replication instance.</p>"
+          "documentation":"<p>The public IP address of the replication instance.</p>",
+          "deprecated":true
         },
         "ReplicationInstancePrivateIpAddress":{
           "shape":"String",
+          "documentation":"<p>The private IP address of the replication instance.</p>",
+          "deprecated":true
+        },
+        "ReplicationInstancePublicIpAddresses":{
+          "shape":"ReplicationInstancePublicIpAddressList",
+          "documentation":"<p>The public IP address of the replication instance.</p>"
+        },
+        "ReplicationInstancePrivateIpAddresses":{
+          "shape":"ReplicationInstancePrivateIpAddressList",
           "documentation":"<p>The private IP address of the replication instance.</p>"
         },
         "PubliclyAccessible":{
@@ -1710,6 +1936,14 @@
         "locationName":"ReplicationInstance"
       }
     },
+    "ReplicationInstancePrivateIpAddressList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "ReplicationInstancePublicIpAddressList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "ReplicationPendingModifiedValues":{
       "type":"structure",
       "members":{
@@ -1720,6 +1954,10 @@
         "AllocatedStorage":{
           "shape":"IntegerOptional",
           "documentation":"<p>The amount of storage (in gigabytes) that is allocated for the replication instance.</p>"
+        },
+        "MultiAZ":{
+          "shape":"BooleanOptional",
+          "documentation":"<p> Specifies if the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
         },
         "EngineVersion":{
           "shape":"String",
@@ -2126,7 +2364,7 @@
       "members":{
         "ReplicationInstanceArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Number (ARN) of the replication instance.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the replication instance.</p>"
         },
         "EndpointArn":{
           "shape":"String",
