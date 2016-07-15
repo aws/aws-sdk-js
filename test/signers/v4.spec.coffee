@@ -84,7 +84,25 @@ describe 'AWS.Signers.V4', ->
         calls = AWS.util.crypto.hmac.calls
         callCount = calls.length
 
-
+      it 'will cache a maximum of 50 clients', (done) ->
+        maxCacheEntries = 50
+        clientSigners = (buildSignerFromService() for i in [0..maxCacheEntries-1])
+        callCount = calls.length
+        #Get signature for all clients to store them in cache
+        (clientSigners[i].signature(creds, datetime) for i in [0..clientSigners.length-1])
+        expect(calls.length).to.equal(callCount + (5 * maxCacheEntries))
+        #Signer should use cache
+        callCount = calls.length
+        clientSigners[0].signature(creds, datetime)
+        expect(calls.length).to.equal(callCount + 1)
+        #add a new signer, pushing past cache limit
+        newestSigner = buildSignerFromService()
+        #old signer shouldn't be using cache anymore
+        callCount = calls.length
+        clientSigners[0].signature(creds, datetime)
+        expect(calls.length).to.equal(callCount + 5)
+        done()
+        
       #Calling signer.signature should call hmac 1 time when caching, and 5 times when not caching
       it 'caches subsequent requests', ->
         signer.signature(creds, datetime)
