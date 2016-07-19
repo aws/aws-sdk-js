@@ -8,6 +8,7 @@ acm = new AWS.ACM(AWS.util.merge(config, config.acm))
 apigateway = new AWS.APIGateway(AWS.util.merge(config, config.apigateway))
 cloudformation = new AWS.CloudFormation(AWS.util.merge(config, config.cloudformation))
 cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront))
+cloudhsm = new AWS.CloudHSM(AWS.util.merge(config, config.cloudhsm))
 cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail))
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
 cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs))
@@ -191,6 +192,19 @@ integrationTests ->
         Id: 'fake-distro'
       cloudfront.getDistribution params, (err, data) ->
         assertError(err, 'NoSuchDistribution')
+        noData(data)
+        done()
+
+  describe 'AWS.CloudHSM', ->
+    it 'makes a request', (done) ->
+      cloudhsm.listHsms {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.HsmList)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      cloudhsm.describeHsm {}}, (err, data) ->
+        assertError(err, 'InvalidRequestException')
         noData(data)
         done()
 
