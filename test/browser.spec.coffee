@@ -6,6 +6,7 @@ try
 
 acm = new AWS.ACM(AWS.util.merge(config, config.acm))
 apigateway = new AWS.APIGateway(AWS.util.merge(config, config.apigateway))
+cloudformation = new AWS.CloudFormation(AWS.util.merge(config, config.cloudformation))
 cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront))
 cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail))
 cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch))
@@ -160,6 +161,21 @@ integrationTests ->
         restApiId: 'fake-id'
       apigateway.getRestApi params, (err, data) ->
         assertError(err, 'NotFoundException')
+        noData(data)
+        done()
+
+  describe 'AWS.CloudFormation', ->
+    it 'makes a request', (done) ->
+      cloudformation.listStacks {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.StackSummaries)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      params = 
+        StackName: 'fake-name'
+      cloudformation.getStackPolicy params, (err, data) ->
+        assertError(err, 'ValidationError')
         noData(data)
         done()
 
