@@ -207,7 +207,7 @@ integrationTests ->
         done()
 
     it 'handles errors', (done) ->
-      cloudhsm.describeHsm {}}, (err, data) ->
+      cloudhsm.describeHsm {}, (err, data) ->
         assertError(err, 'InvalidRequestException')
         noData(data)
         done()
