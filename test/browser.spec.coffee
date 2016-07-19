@@ -42,6 +42,7 @@ mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobilean
 machinelearning = new AWS.MachineLearning(AWS.util.merge(config, config.machinelearning))
 opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks))
 rds = new AWS.RDS(AWS.util.merge(config, config.rds))
+redshift = new AWS.Redshift(AWS.util.merge(config, config.redshift))
 route53 = new AWS.Route53(AWS.util.merge(config, config.route53))
 route53domains = new AWS.Route53Domains(AWS.util.merge(config, config.route53domains))
 s3 = new AWS.S3(AWS.util.merge(config, config.s3))
@@ -671,6 +672,19 @@ integrationTests ->
       rds.listTagsForResource {ResourceName: 'fake-name'}, (err, data) ->
         noData(data)
         assertError(err, 'InvalidParameterValue')
+        done()
+
+  describe 'AWS.Redshift', ->
+    it 'makes a request', (done) ->
+      redshift.describeClusters (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Clusters)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      redshift.describeResize {ClusterIdentifier: 'fake-id'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ClusterNotFound')
         done()
 
   describe 'AWS.Route53', ->
