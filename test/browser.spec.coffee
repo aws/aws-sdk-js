@@ -26,6 +26,7 @@ ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
 ecr = new AWS.ECR(AWS.util.merge(config, config.ecr))
 ecs = new AWS.ECS(AWS.util.merge(config, config.ecs))
 elasticache = new AWS.ElastiCache(AWS.util.merge(config, config.elasticache))
+elasticbeanstalk = new AWS.ElasticBeanstalk(AWS.util.merge(config, config.elasticbeanstalk))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 elb = new AWS.ELB(AWS.util.merge(config, config.elb))
 firehose = new AWS.Firehose(AWS.util.merge(config, config.firehose))
@@ -477,6 +478,19 @@ integrationTests ->
     it 'handles errors', (done) ->
       elasticache.listAllowedNodeTypeModifications {}, (err, data) ->
         assertError(err, 'InvalidParameterCombination')
+        noData(data)
+        done()
+
+  describe 'AWS.ElasticBeanstalk', ->
+    it 'makes a request', (done) ->
+      elasticbeanstalk.listAvailableSolutionStacks {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.SolutionStacks)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      elasticbeanstalk.describeEnvironmentHealth {}, (err, data) ->
+        assertError(err, 'MissingParameter')
         noData(data)
         done()
 
