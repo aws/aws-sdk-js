@@ -42,6 +42,22 @@
       ],
       "documentation":"<p>Creates a new project.</p>"
     },
+    "CreateRemoteAccessSession":{
+      "name":"CreateRemoteAccessSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateRemoteAccessSessionRequest"},
+      "output":{"shape":"CreateRemoteAccessSessionResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Specifies and starts a remote access session.</p>"
+    },
     "CreateUpload":{
       "name":"CreateUpload",
       "http":{
@@ -89,6 +105,22 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Deletes an AWS Device Farm project, given the project ARN.</p> <p><b>Note</b> Deleting this resource does not stop an in-progress run.</p>"
+    },
+    "DeleteRemoteAccessSession":{
+      "name":"DeleteRemoteAccessSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteRemoteAccessSessionRequest"},
+      "output":{"shape":"DeleteRemoteAccessSessionResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Deletes a completed remote access session and its results.</p>"
     },
     "DeleteRun":{
       "name":"DeleteRun",
@@ -235,6 +267,22 @@
       ],
       "documentation":"<p>Gets information about a project.</p>"
     },
+    "GetRemoteAccessSession":{
+      "name":"GetRemoteAccessSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetRemoteAccessSessionRequest"},
+      "output":{"shape":"GetRemoteAccessSessionResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Returns a link to a currently running remote access session.</p>"
+    },
     "GetRun":{
       "name":"GetRun",
       "http":{
@@ -298,6 +346,22 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about an upload.</p>"
+    },
+    "InstallToRemoteAccessSession":{
+      "name":"InstallToRemoteAccessSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"InstallToRemoteAccessSessionRequest"},
+      "output":{"shape":"InstallToRemoteAccessSessionResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.</p>"
     },
     "ListArtifacts":{
       "name":"ListArtifacts",
@@ -412,6 +476,22 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about projects.</p>"
+    },
+    "ListRemoteAccessSessions":{
+      "name":"ListRemoteAccessSessions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListRemoteAccessSessionsRequest"},
+      "output":{"shape":"ListRemoteAccessSessionsResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Returns a list of all currently running remote access sessions.</p>"
     },
     "ListRuns":{
       "name":"ListRuns",
@@ -560,6 +640,22 @@
       ],
       "documentation":"<p>Schedules a run.</p>"
     },
+    "StopRemoteAccessSession":{
+      "name":"StopRemoteAccessSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopRemoteAccessSessionRequest"},
+      "output":{"shape":"StopRemoteAccessSessionResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Ends a specified remote access session.</p>"
+    },
     "StopRun":{
       "name":"StopRun",
       "http":{
@@ -693,6 +789,7 @@
         "SCREENSHOT",
         "DEVICE_LOG",
         "MESSAGE_LOG",
+        "VIDEO_LOG",
         "RESULT_LOG",
         "SERVICE_LOG",
         "WEBKIT_LOG",
@@ -842,6 +939,52 @@
       },
       "documentation":"<p>Represents the result of a create project request.</p>"
     },
+    "CreateRemoteAccessSessionConfiguration":{
+      "type":"structure",
+      "members":{
+        "billingMethod":{
+          "shape":"BillingMethod",
+          "documentation":"<p>Returns the billing method for purposes of configuring a remote access session.</p>"
+        }
+      },
+      "documentation":"<p>Creates the configuration settings for a remote access session, including the device model and type.</p>"
+    },
+    "CreateRemoteAccessSessionRequest":{
+      "type":"structure",
+      "required":[
+        "projectArn",
+        "deviceArn"
+      ],
+      "members":{
+        "projectArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the project for which you want to create a remote access session.</p>"
+        },
+        "deviceArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the device for which you want to create a remote access session.</p>"
+        },
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the remote access session that you wish to create.</p>"
+        },
+        "configuration":{
+          "shape":"CreateRemoteAccessSessionConfiguration",
+          "documentation":"<p>The configuration information for the remote access session request.</p>"
+        }
+      },
+      "documentation":"<p>Creates and submits a request to start a remote access session.</p>"
+    },
+    "CreateRemoteAccessSessionResult":{
+      "type":"structure",
+      "members":{
+        "remoteAccessSession":{
+          "shape":"RemoteAccessSession",
+          "documentation":"<p>A container that describes the remote access session when the request to create a remote access session is sent.</p>"
+        }
+      },
+      "documentation":"<p>Represents the server response from a request to create a remote access session.</p>"
+    },
     "CreateUploadRequest":{
       "type":"structure",
       "required":[
@@ -856,7 +999,7 @@
         },
         "name":{
           "shape":"Name",
-          "documentation":"<p>The upload's file name.</p>"
+          "documentation":"<p>The upload's file name. The name should not contain the '/' character.</p>"
         },
         "type":{
           "shape":"UploadType",
@@ -917,6 +1060,23 @@
       "members":{
       },
       "documentation":"<p>Represents the result of a delete project request.</p>"
+    },
+    "DeleteRemoteAccessSessionRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the sesssion for which you want to delete remote access.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to delete the specified remote access session.</p>"
+    },
+    "DeleteRemoteAccessSessionResult":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The response from the server when a request is made to delete the remote access session.</p>"
     },
     "DeleteRunRequest":{
       "type":"structure",
@@ -1007,6 +1167,18 @@
         "radio":{
           "shape":"String",
           "documentation":"<p>The device's radio.</p>"
+        },
+        "remoteAccessEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether remote access has been enabled for the specified device.</p>"
+        },
+        "fleetType":{
+          "shape":"String",
+          "documentation":"<p>The type of fleet to which this device belongs. Possible values for fleet type are PRIVATE and PUBLIC.</p>"
+        },
+        "fleetName":{
+          "shape":"String",
+          "documentation":"<p>The name of the fleet to which this device belongs.</p>"
         }
       },
       "documentation":"<p>Represents a device type that an app is tested against.</p>"
@@ -1017,7 +1189,8 @@
         "ARN",
         "PLATFORM",
         "FORM_FACTOR",
-        "MANUFACTURER"
+        "MANUFACTURER",
+        "REMOTE_ACCESS_ENABLED"
       ]
     },
     "DeviceFormFactor":{
@@ -1290,6 +1463,27 @@
       },
       "documentation":"<p>Represents the result of a get project request.</p>"
     },
+    "GetRemoteAccessSessionRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the remote access session about which you want to get session information.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to get information about the specified remote access session.</p>"
+    },
+    "GetRemoteAccessSessionResult":{
+      "type":"structure",
+      "members":{
+        "remoteAccessSession":{
+          "shape":"RemoteAccessSession",
+          "documentation":"<p>A container that lists detailed information about the remote access session.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server that lists detailed information about the remote access session.</p>"
+    },
     "GetRunRequest":{
       "type":"structure",
       "required":["arn"],
@@ -1390,6 +1584,31 @@
     "IncompatibilityMessages":{
       "type":"list",
       "member":{"shape":"IncompatibilityMessage"}
+    },
+    "InstallToRemoteAccessSessionRequest":{
+      "type":"structure",
+      "required":[
+        "remoteAccessSessionArn",
+        "appArn"
+      ],
+      "members":{
+        "remoteAccessSessionArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the remote access session about which you are requesting information.</p>"
+        },
+        "appArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the app about which you are requesting information.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to install an Android application (in .apk format) or an iOS application (in .ipa format) as part of a remote access session.</p>"
+    },
+    "InstallToRemoteAccessSessionResult":{
+      "type":"structure",
+      "members":{
+        "appUpload":{"shape":"Upload"}
+      },
+      "documentation":"<p>Represents the response from the server after AWS Device Farm makes a request to install to a remote access session.</p>"
     },
     "Integer":{"type":"integer"},
     "Job":{
@@ -1659,6 +1878,35 @@
         }
       },
       "documentation":"<p>Represents the result of a list projects request.</p>"
+    },
+    "ListRemoteAccessSessionsRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the remote access session about which you are requesting information.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to return information about the remote access session.</p>"
+    },
+    "ListRemoteAccessSessionsResult":{
+      "type":"structure",
+      "members":{
+        "remoteAccessSessions":{
+          "shape":"RemoteAccessSessions",
+          "documentation":"<p>A container representing the metadata from the service about each remote access session you are requesting.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server after AWS Device Farm makes a request to return information about the remote access session.</p>"
     },
     "ListRunsRequest":{
       "type":"structure",
@@ -2155,6 +2403,58 @@
       "type":"list",
       "member":{"shape":"RecurringCharge"}
     },
+    "RemoteAccessSession":{
+      "type":"structure",
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the remote access session.</p>"
+        },
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the remote access session.</p>"
+        },
+        "created":{
+          "shape":"DateTime",
+          "documentation":"<p>The date and time the remote access session was created.</p>"
+        },
+        "status":{
+          "shape":"ExecutionStatus",
+          "documentation":"<p>The status of the remote access session. Can be any of the following:</p> <ul> <li><p>PENDING: A pending status.</p></li> <li><p>PENDING_CONCURRENCY: A pending concurrency status.</p></li> <li><p>PENDING_DEVICE: A pending device status.</p></li> <li><p>PROCESSING: A processing status.</p></li> <li><p>SCHEDULING: A scheduling status.</p></li> <li><p>PREPARING: A preparing status.</p></li> <li><p>RUNNING: A running status.</p></li> <li><p>COMPLETED: A completed status.</p></li> <li><p>STOPPING: A stopping status.</p></li> </ul>"
+        },
+        "result":{
+          "shape":"ExecutionResult",
+          "documentation":"<p>The result of the remote access session. Can be any of the following:</p> <ul> <li><p>PENDING: A pending condition.</p></li> <li><p>PASSED: A passing condition.</p></li> <li><p>WARNED: A warning condition.</p></li> <li><p>FAILED: A failed condition.</p></li> <li><p>SKIPPED: A skipped condition.</p></li> <li><p>ERRORED: An error condition.</p></li> <li><p>STOPPED: A stopped condition.</p></li> </ul>"
+        },
+        "message":{
+          "shape":"Message",
+          "documentation":"<p>A message about the remote access session.</p>"
+        },
+        "started":{
+          "shape":"DateTime",
+          "documentation":"<p>The date and time the remote access session was started.</p>"
+        },
+        "stopped":{
+          "shape":"DateTime",
+          "documentation":"<p>The date and time the remote access session was stopped.</p>"
+        },
+        "device":{"shape":"Device"},
+        "billingMethod":{
+          "shape":"BillingMethod",
+          "documentation":"<p>The billing method of the remote access session. Possible values include <code>METERED</code> or <code>UNMETERED</code>. For more information about metered devices, see <a href=\"http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology\">AWS Device Farm terminology</a>.\"</p>"
+        },
+        "deviceMinutes":{"shape":"DeviceMinutes"},
+        "endpoint":{
+          "shape":"String",
+          "documentation":"<p>The endpoint for the remote access sesssion.</p>"
+        }
+      },
+      "documentation":"<p>Represents information about the remote access session.</p>"
+    },
+    "RemoteAccessSessions":{
+      "type":"list",
+      "member":{"shape":"RemoteAccessSession"}
+    },
     "RenewOfferingRequest":{
       "type":"structure",
       "members":{
@@ -2451,6 +2751,27 @@
       },
       "documentation":"<p>There was a problem with the service account.</p>",
       "exception":true
+    },
+    "StopRemoteAccessSessionRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the remote access session you wish to stop.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to stop the remote access session.</p>"
+    },
+    "StopRemoteAccessSessionResult":{
+      "type":"structure",
+      "members":{
+        "remoteAccessSession":{
+          "shape":"RemoteAccessSession",
+          "documentation":"<p>A container representing the metadata from the service about the remote access session you are stopping.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server that describes the remote access session when AWS Device Farm stops the session.</p>"
     },
     "StopRunRequest":{
       "type":"structure",
