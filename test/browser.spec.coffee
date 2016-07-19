@@ -29,6 +29,7 @@ elasticache = new AWS.ElastiCache(AWS.util.merge(config, config.elasticache))
 elasticbeanstalk = new AWS.ElasticBeanstalk(AWS.util.merge(config, config.elasticbeanstalk))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 elb = new AWS.ELB(AWS.util.merge(config, config.elb))
+emr = new AWS.EMR(AWS.util.merge(config, config.emr))
 firehose = new AWS.Firehose(AWS.util.merge(config, config.firehose))
 gamelift = new AWS.GameLift(AWS.util.merge(config, config.gamelift))
 config.inspector = config.inspector || {}
@@ -504,6 +505,19 @@ integrationTests ->
     it 'handles errors', (done) ->
       elb.describeTags {LoadBalancerNames: ['fake-name']}, (err, data) ->
         assertError(err, 'LoadBalancerNotFound')
+        noData(data)
+        done()
+
+  describe 'AWS.EMR', ->
+    it 'makes a request', (done) ->
+      emr.listClusters {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Clusters)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      emr.describeCluster {ClusterId: 'fake-id'}, (err, data) ->
+        assertError(err, 'InvalidRequestException')
         noData(data)
         done()
 

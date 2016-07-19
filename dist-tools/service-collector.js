@@ -5,7 +5,7 @@ var path = require('path');
 var AWS = require('../');
 var apis = require('../lib/api_loader');
 
-var defaultServices = 'acm,apigateway,cloudformation,cloudfront,cloudhsm,cloudtrail,cloudwatch,cloudwatchlogs,cloudwatchevents,codecommit,codepipeline,cognitoidentity,cognitoidentityserviceprovider,cognitosync,configservice,devicefarm,directconnect,dynamodb,dynamodbstreams,ec2,ecr,ecs,elasticache,elasticbeanstalk,elastictranscoder,elb,firehose,gamelift,inspector,iotdata,kinesis,kms,lambda,marketplacecommerceanalytics,mobileanalytics,machinelearning,opsworks,rds,route53,route53domains,s3,ses,sns,sqs,ssm,storagegateway,sts,waf';
+var defaultServices = 'acm,apigateway,cloudformation,cloudfront,cloudhsm,cloudtrail,cloudwatch,cloudwatchlogs,cloudwatchevents,codecommit,codepipeline,cognitoidentity,cognitoidentityserviceprovider,cognitosync,configservice,devicefarm,directconnect,dynamodb,dynamodbstreams,ec2,ecr,ecs,elasticache,elasticbeanstalk,elastictranscoder,elb,emr,firehose,gamelift,inspector,iotdata,kinesis,kms,lambda,marketplacecommerceanalytics,mobileanalytics,machinelearning,opsworks,rds,route53,route53domains,s3,ses,sns,sqs,ssm,storagegateway,sts,waf';
 var sanitizeRegex = /[^a-zA-Z0-9,-]/;
 
 var serviceClasses = {};
