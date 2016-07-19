@@ -25,6 +25,7 @@ dynamodbstreams = new AWS.DynamoDBStreams(AWS.util.merge(config, config.dynamodb
 ec2 = new AWS.EC2(AWS.util.merge(config, config.ec2))
 ecr = new AWS.ECR(AWS.util.merge(config, config.ecr))
 ecs = new AWS.ECS(AWS.util.merge(config, config.ecs))
+elasticache = new AWS.ElastiCache(AWS.util.merge(config, config.elasticache))
 elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 elb = new AWS.ELB(AWS.util.merge(config, config.elb))
 firehose = new AWS.Firehose(AWS.util.merge(config, config.firehose))
@@ -464,6 +465,19 @@ integrationTests ->
       elastictranscoder.readJob {Id: '3333333333333-abcde3'}, (err, data) ->
         noData(data)
         assertError(err, 'ResourceNotFoundException')
+        done()
+
+  describe 'AWS.ElastiCache', ->
+    it 'makes a request', (done) ->
+      elasticache.describeSnapshots {}, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Snapshots)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      elasticache.listAllowedNodeTypeModifications {}, (err, data) ->
+        assertError(err, 'InvalidParameterCombination')
+        noData(data)
         done()
 
   describe 'AWS.ELB', ->
