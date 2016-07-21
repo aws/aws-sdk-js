@@ -73,7 +73,7 @@
         {"shape":"ConcurrentUpdateException"},
         {"shape":"InternalServiceException"}
       ],
-      "documentation":"<p>Provides descriptive information for scaling activities with a specified service namespace.</p> <p>You can filter the results in a service namespace with the <code>ResourceId</code> and <code>ScalableDimension</code> parameters.</p> <p>Scaling activities are triggered by CloudWatch alarms that are associated with scaling policies. To view the existing scaling policies for a service namespace, see <a>DescribeScalingPolicies</a>. To create a new scaling policy or update an existing one, see <a>PutScalingPolicy</a>.</p>"
+      "documentation":"<p>Provides descriptive information for scaling activities with a specified service namespace for the previous six weeks.</p> <p>You can filter the results in a service namespace with the <code>ResourceId</code> and <code>ScalableDimension</code> parameters.</p> <p>Scaling activities are triggered by CloudWatch alarms that are associated with scaling policies. To view the existing scaling policies for a service namespace, see <a>DescribeScalingPolicies</a>. To create a new scaling policy or update an existing one, see <a>PutScalingPolicy</a>.</p>"
     },
     "DescribeScalingPolicies":{
       "name":"DescribeScalingPolicies",
@@ -435,11 +435,11 @@
         },
         "PolicyType":{
           "shape":"PolicyType",
-          "documentation":"<p>The policy type. This parameter is required if you are creating a new policy.</p>"
+          "documentation":"<p>The policy type. If you are creating a new policy, this parameter is required. If you are updating an existing policy, this parameter is not required.</p>"
         },
         "StepScalingPolicyConfiguration":{
           "shape":"StepScalingPolicyConfiguration",
-          "documentation":"<p>The configuration for the step scaling policy. This parameter is required if you are creating a new policy. For more information, see <a>StepScalingPolicyConfiguration</a> and <a>StepAdjustment</a>.</p>"
+          "documentation":"<p>The configuration for the step scaling policy. If you are creating a new policy, this parameter is required. If you are updating an existing policy, this parameter is not required. For more information, see <a>StepScalingPolicyConfiguration</a> and <a>StepAdjustment</a>.</p>"
         }
       }
     },
@@ -756,5 +756,5 @@
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     }
   },
-  "documentation":"<p>Application Auto Scaling is a general purpose Auto Scaling service for supported elastic AWS resources. With Application Auto Scaling, you can automatically scale your AWS resources, with an experience similar to that of Auto Scaling.</p> <note> <p>At this time, Application Auto Scaling only supports scaling Amazon ECS services.</p> </note> <p>For example, you can use Application Auto Scaling to accomplish the following tasks:</p> <ul> <li> <p>Define scaling policies for automatically adjusting your application’s resources</p> </li> <li> <p>Scale your resources in response to CloudWatch alarms</p> </li> <li> <p>View history of your scaling events </p> </li> </ul> <p>Application Auto Scaling is available in the following regions:</p> <ul> <li> <p> <code>us-east-1</code> </p> </li> <li> <p> <code>us-west-2</code> </p> </li> <li> <p> <code>eu-west-1</code> </p> </li> </ul>"
+  "documentation":"<p>Application Auto Scaling is a general purpose Auto Scaling service for supported elastic AWS resources. With Application Auto Scaling, you can automatically scale your AWS resources, with an experience similar to that of Auto Scaling.</p> <note> <p>At this time, Application Auto Scaling only supports scaling Amazon ECS services.</p> </note> <p>For example, you can use Application Auto Scaling to accomplish the following tasks:</p> <ul> <li> <p>Define scaling policies for automatically adjusting your application’s resources</p> </li> <li> <p>Scale your resources in response to CloudWatch alarms</p> </li> <li> <p>View history of your scaling events </p> </li> </ul> <p>Application Auto Scaling is available in the following regions:</p> <ul> <li> <p> <code>us-east-1</code> </p> </li> <li> <p> <code>us-west-1</code> </p> </li> <li> <p> <code>us-west-2</code> </p> </li> <li> <p> <code>ap-southeast-1</code> </p> </li> <li> <p> <code>ap-southeast-2</code> </p> </li> <li> <p> <code>ap-northeast-1</code> </p> </li> <li> <p> <code>eu-central-1</code> </p> </li> <li> <p> <code>eu-west-1</code> </p> </li> </ul>"
 }
