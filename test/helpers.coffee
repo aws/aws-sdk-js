@@ -68,9 +68,10 @@ _spyOn = (obj, methodName) ->
   spies.push(spy)
   spy
 
-# Disable setTimeout for tests
+# Disable setTimeout for tests, but keep original in case test needs to use it
 # Warning: this might cause unpredictable results
 # TODO: refactor this out.
+global.setTimeoutOrig = global.setTimeout
 global.setTimeout = (fn) -> fn()
 
 global.expect = require('chai').expect
