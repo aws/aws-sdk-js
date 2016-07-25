@@ -207,11 +207,14 @@ describe 'AWS.util.ini', ->
       invalidline
       key1=value1 ; another comment
         key2 = value2;value3
+        key3 = value4 # yet another comment
       [emptysection]
+      #key1=value1
       '''
       map = AWS.util.ini.parse(ini)
       expect(map.section1.key1).to.equal('value1')
       expect(map.section1.key2).to.equal('value2;value3')
+      expect(map.section1.key3).to.equal('value4')
       expect(map.emptysection).to.equal(undefined)
 
     it 'ignores leading and trailing white space', ->

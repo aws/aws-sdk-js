@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "util",
+  "description": "Parse ini files containing comments using #"
+}
