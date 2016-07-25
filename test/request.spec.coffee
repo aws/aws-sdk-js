@@ -267,8 +267,7 @@ describe 'AWS.Request', ->
       server = require('http').createServer (req, resp) ->
         app(req, resp)
 
-      if server.setTimeout
-        server.setTimeout(1)
+      server.setTimeout(1)
 
       beforeEach (done) ->
         data = ''; error = null
@@ -323,9 +322,6 @@ describe 'AWS.Request', ->
           done()
 
       it 'emits error when stream length is less than content-length header', (done) ->
-        if server.setTimeout == undefined
-          return done()
-
         AWS.HttpClient.streamsApiVersion = 1
 
         app = (req, resp) ->
