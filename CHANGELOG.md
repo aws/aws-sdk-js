@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.4.9-->
+<!--LATEST=2.4.10-->
 <!--ENTRYINSERT-->
+
+## 2.4.10
+* feature: util: Parse ini files containing comments using #
+* feature: Iot: Adds support for thing types. Thing types are entities that store a description of common features of Things that are of the same logical type. Also adds support for `:` in Thing name. Adds a separator in Firehose action.
 
 ## 2.4.9
 * feature: ACM: Adds reason for failure when describing certificates.
