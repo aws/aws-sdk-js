@@ -522,9 +522,71 @@
           "error":{"httpStatusCode":409},
           "exception":true,
           "documentation":"<p>The resource already exists.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The specified resource does not exist.</p>"
         }
       ],
-      "documentation":"<p>Creates a thing in the Thing Registry.</p>"
+      "documentation":"<p>Creates a thing record in the thing registry.</p>"
+    },
+    "CreateThingType":{
+      "name":"CreateThingType",
+      "http":{
+        "method":"POST",
+        "requestUri":"/thing-types/{thingTypeName}"
+      },
+      "input":{
+        "shape":"CreateThingTypeRequest",
+        "documentation":"<p>The input for the CreateThingType operation.</p>"
+      },
+      "output":{
+        "shape":"CreateThingTypeResponse",
+        "documentation":"<p>The output of the CreateThingType operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
+        },
+        {
+          "shape":"ThrottlingException",
+          "error":{"httpStatusCode":429},
+          "exception":true,
+          "documentation":"<p>The rate exceeds the limit.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "error":{"httpStatusCode":401},
+          "exception":true,
+          "documentation":"<p>You are not authorized to perform this operation.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":503},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service is temporarily unavailable.</p>"
+        },
+        {
+          "shape":"InternalFailureException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An unexpected error has occurred.</p>"
+        },
+        {
+          "shape":"ResourceAlreadyExistsException",
+          "error":{"httpStatusCode":409},
+          "exception":true,
+          "documentation":"<p>The resource already exists.</p>"
+        }
+      ],
+      "documentation":"<p>Creates a new thing type.</p>"
     },
     "CreateTopicRule":{
       "name":"CreateTopicRule",
@@ -886,6 +948,12 @@
           "documentation":"<p>The specified resource does not exist.</p>"
         },
         {
+          "shape":"VersionConflictException",
+          "error":{"httpStatusCode":409},
+          "exception":true,
+          "documentation":"<p>An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter. </p>"
+        },
+        {
           "shape":"InvalidRequestException",
           "error":{"httpStatusCode":400},
           "exception":true,
@@ -918,7 +986,63 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Deletes the specified thing from the Thing Registry.</p>"
+      "documentation":"<p>Deletes the specified thing.</p>"
+    },
+    "DeleteThingType":{
+      "name":"DeleteThingType",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/thing-types/{thingTypeName}"
+      },
+      "input":{
+        "shape":"DeleteThingTypeRequest",
+        "documentation":"<p>The input for the DeleteThingType operation.</p>"
+      },
+      "output":{
+        "shape":"DeleteThingTypeResponse",
+        "documentation":"<p>The output for the DeleteThingType operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The specified resource does not exist.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
+        },
+        {
+          "shape":"ThrottlingException",
+          "error":{"httpStatusCode":429},
+          "exception":true,
+          "documentation":"<p>The rate exceeds the limit.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "error":{"httpStatusCode":401},
+          "exception":true,
+          "documentation":"<p>You are not authorized to perform this operation.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":503},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service is temporarily unavailable.</p>"
+        },
+        {
+          "shape":"InternalFailureException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An unexpected error has occurred.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes the specified thing type . You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling <a>DeprecateThingType</a>, then remove any associated things by calling <a>UpdateThing</a> to change the thing type on any associated thing, and finally use <a>DeleteThingType</a> to delete the thing type.</p>"
     },
     "DeleteTopicRule":{
       "name":"DeleteTopicRule",
@@ -959,6 +1083,62 @@
         }
       ],
       "documentation":"<p>Deletes the specified rule.</p>"
+    },
+    "DeprecateThingType":{
+      "name":"DeprecateThingType",
+      "http":{
+        "method":"POST",
+        "requestUri":"/thing-types/{thingTypeName}/deprecate"
+      },
+      "input":{
+        "shape":"DeprecateThingTypeRequest",
+        "documentation":"<p>The input for the DeprecateThingType operation.</p>"
+      },
+      "output":{
+        "shape":"DeprecateThingTypeResponse",
+        "documentation":"<p>The output for the DeprecateThingType operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The specified resource does not exist.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
+        },
+        {
+          "shape":"ThrottlingException",
+          "error":{"httpStatusCode":429},
+          "exception":true,
+          "documentation":"<p>The rate exceeds the limit.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "error":{"httpStatusCode":401},
+          "exception":true,
+          "documentation":"<p>You are not authorized to perform this operation.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":503},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service is temporarily unavailable.</p>"
+        },
+        {
+          "shape":"InternalFailureException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An unexpected error has occurred.</p>"
+        }
+      ],
+      "documentation":"<p>Deprecates a thing type. You can not associate new things with deprecated thing type.</p>"
     },
     "DescribeCACertificate":{
       "name":"DescribeCACertificate",
@@ -1164,6 +1344,62 @@
         }
       ],
       "documentation":"<p>Gets information about the specified thing.</p>"
+    },
+    "DescribeThingType":{
+      "name":"DescribeThingType",
+      "http":{
+        "method":"GET",
+        "requestUri":"/thing-types/{thingTypeName}"
+      },
+      "input":{
+        "shape":"DescribeThingTypeRequest",
+        "documentation":"<p>The input for the DescribeThingType operation.</p>"
+      },
+      "output":{
+        "shape":"DescribeThingTypeResponse",
+        "documentation":"<p>The output for the DescribeThingType operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The specified resource does not exist.</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
+        },
+        {
+          "shape":"ThrottlingException",
+          "error":{"httpStatusCode":429},
+          "exception":true,
+          "documentation":"<p>The rate exceeds the limit.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "error":{"httpStatusCode":401},
+          "exception":true,
+          "documentation":"<p>You are not authorized to perform this operation.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":503},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service is temporarily unavailable.</p>"
+        },
+        {
+          "shape":"InternalFailureException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An unexpected error has occurred.</p>"
+        }
+      ],
+      "documentation":"<p>Gets information about the specified thing type.</p>"
     },
     "DetachPrincipalPolicy":{
       "name":"DetachPrincipalPolicy",
@@ -2011,6 +2247,12 @@
           "exception":true,
           "fault":true,
           "documentation":"<p>An unexpected error has occurred.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The specified resource does not exist.</p>"
         }
       ],
       "documentation":"<p>Lists the things associated with the specified principal.</p>"
@@ -2061,9 +2303,65 @@
           "exception":true,
           "fault":true,
           "documentation":"<p>An unexpected error has occurred.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{"httpStatusCode":404},
+          "exception":true,
+          "documentation":"<p>The specified resource does not exist.</p>"
         }
       ],
       "documentation":"<p>Lists the principals associated with the specified thing.</p>"
+    },
+    "ListThingTypes":{
+      "name":"ListThingTypes",
+      "http":{
+        "method":"GET",
+        "requestUri":"/thing-types"
+      },
+      "input":{
+        "shape":"ListThingTypesRequest",
+        "documentation":"<p>The input for the ListThingTypes operation.</p>"
+      },
+      "output":{
+        "shape":"ListThingTypesResponse",
+        "documentation":"<p>The output for the ListThingTypes operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
+        },
+        {
+          "shape":"ThrottlingException",
+          "error":{"httpStatusCode":429},
+          "exception":true,
+          "documentation":"<p>The rate exceeds the limit.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "error":{"httpStatusCode":401},
+          "exception":true,
+          "documentation":"<p>You are not authorized to perform this operation.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":503},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service is temporarily unavailable.</p>"
+        },
+        {
+          "shape":"InternalFailureException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An unexpected error has occurred.</p>"
+        }
+      ],
+      "documentation":"<p>Lists the existing thing types.</p>"
     },
     "ListThings":{
       "name":"ListThings",
@@ -2113,7 +2411,7 @@
           "documentation":"<p>An unexpected error has occurred.</p>"
         }
       ],
-      "documentation":"<p>Lists your things. You can pass an AttributeName or AttributeValue to filter your things (for example, \"ListThings where AttributeName=Color and AttributeValue=Red\").</p>"
+      "documentation":"<p>Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. </p>"
     },
     "ListTopicRules":{
       "name":"ListTopicRules",
@@ -2691,6 +2989,12 @@
           "documentation":"<p>The request is not valid.</p>"
         },
         {
+          "shape":"VersionConflictException",
+          "error":{"httpStatusCode":409},
+          "exception":true,
+          "documentation":"<p>An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter. </p>"
+        },
+        {
           "shape":"ThrottlingException",
           "error":{"httpStatusCode":429},
           "exception":true,
@@ -2843,7 +3147,7 @@
           "shape":"Principal",
           "location":"header",
           "locationName":"x-amzn-principal",
-          "documentation":"<p>The principal (certificate or other credential).</p>"
+          "documentation":"<p>The principal, such as a certificate or other credential.</p>"
         }
       },
       "documentation":"<p>The input for the AttachThingPrincipal operation.</p>"
@@ -2864,15 +3168,20 @@
       "members":{
         "attributes":{
           "shape":"Attributes",
-          "documentation":"<p>A JSON string containing up to three key-value pair in JSON format (for example, {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}).</p>"
+          "documentation":"<p>A JSON string containing up to three key-value pair in JSON format. For example:</p> <p><code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}})</code></p>"
+        },
+        "merge":{
+          "shape":"Flag",
+          "documentation":"<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p> <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p> <note> <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code>.</p> </note>"
         }
       },
-      "documentation":"<p>The attribute payload, a JSON string containing up to three key-value pairs (for example, {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}).</p>"
+      "documentation":"<p>The attribute payload.</p>"
     },
     "AttributeValue":{
       "type":"string",
-      "max":1024,
-      "pattern":"[a-zA-Z0-9_.,@/:#-]+"
+      "max":800,
+      "pattern":"[a-zA-Z0-9_.,@/:#-]*",
+      "documentation":"An attribute value for an Thing. An empty or null value in Update means that existing value for that attribute should be deleted. Empty and null values in create are ignored."
     },
     "Attributes":{
       "type":"map",
@@ -2885,6 +3194,7 @@
     },
     "AwsArn":{"type":"string"},
     "AwsIotSqlVersion":{"type":"string"},
+    "Boolean":{"type":"boolean"},
     "BucketName":{"type":"string"},
     "CACertificate":{
       "type":"structure",
@@ -3329,11 +3639,15 @@
           "shape":"ThingName",
           "location":"uri",
           "locationName":"thingName",
-          "documentation":"<p>The name of the thing.</p>"
+          "documentation":"<p>The name of the thing to create.</p>"
+        },
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type associated with the new thing.</p>"
         },
         "attributePayload":{
           "shape":"AttributePayload",
-          "documentation":"<p>The attribute payload, which consists of up to 3 name/value pairs in a JSON document (for example, {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}).</p>"
+          "documentation":"<p>The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:</p> <p><code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}})</code></p>"
         }
       },
       "documentation":"<p>The input for the CreateThing operation.</p>"
@@ -3343,14 +3657,45 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
-          "documentation":"<p>The name of the thing.</p>"
+          "documentation":"<p>The name of the new thing.</p>"
         },
         "thingArn":{
           "shape":"ThingArn",
-          "documentation":"<p>The thing ARN.</p>"
+          "documentation":"<p>The ARN of the new thing.</p>"
         }
       },
       "documentation":"<p>The output of the CreateThing operation.</p>"
+    },
+    "CreateThingTypeRequest":{
+      "type":"structure",
+      "required":["thingTypeName"],
+      "members":{
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "location":"uri",
+          "locationName":"thingTypeName",
+          "documentation":"<p>The name of the thing type.</p>"
+        },
+        "thingTypeProperties":{
+          "shape":"ThingTypeProperties",
+          "documentation":"<p>The ThingTypeProperties for the thing type to create. It contains information about the new thing type including a description, and a list of searchable thing attribute names.</p>"
+        }
+      },
+      "documentation":"<p>The input for the CreateThingType operation.</p>"
+    },
+    "CreateThingTypeResponse":{
+      "type":"structure",
+      "members":{
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type.</p>"
+        },
+        "thingTypeArn":{
+          "shape":"ThingTypeArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the thing type.</p>"
+        }
+      },
+      "documentation":"<p>The output of the CreateThingType operation.</p>"
     },
     "CreateTopicRuleRequest":{
       "type":"structure",
@@ -3374,6 +3719,7 @@
       "payload":"topicRulePayload"
     },
     "CreatedAtDate":{"type":"timestamp"},
+    "CreationDate":{"type":"timestamp"},
     "DateType":{"type":"timestamp"},
     "DeleteCACertificateRequest":{
       "type":"structure",
@@ -3474,7 +3820,13 @@
           "shape":"ThingName",
           "location":"uri",
           "locationName":"thingName",
-          "documentation":"<p>The thing name.</p>"
+          "documentation":"<p>The name of the thing to delete.</p>"
+        },
+        "expectedVersion":{
+          "shape":"OptionalVersion",
+          "location":"querystring",
+          "locationName":"expectedVersion",
+          "documentation":"<p>The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the <code>DeleteThing</code> request is rejected with a <code>VersionConflictException</code>.</p>"
         }
       },
       "documentation":"<p>The input for the DeleteThing operation.</p>"
@@ -3484,6 +3836,25 @@
       "members":{
       },
       "documentation":"<p>The output of the DeleteThing operation.</p>"
+    },
+    "DeleteThingTypeRequest":{
+      "type":"structure",
+      "required":["thingTypeName"],
+      "members":{
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "location":"uri",
+          "locationName":"thingTypeName",
+          "documentation":"<p>The name of the thing type.</p>"
+        }
+      },
+      "documentation":"<p>The input for the DeleteThingType operation.</p>"
+    },
+    "DeleteThingTypeResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The output for the DeleteThingType operation.</p>"
     },
     "DeleteTopicRuleRequest":{
       "type":"structure",
@@ -3499,6 +3870,30 @@
       "required":["ruleName"]
     },
     "DeliveryStreamName":{"type":"string"},
+    "DeprecateThingTypeRequest":{
+      "type":"structure",
+      "required":["thingTypeName"],
+      "members":{
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "location":"uri",
+          "locationName":"thingTypeName",
+          "documentation":"<p>The name of the thing type to deprecate.</p>"
+        },
+        "undoDeprecate":{
+          "shape":"UndoDeprecate",
+          "documentation":"<p>Whether to undeprecate a deprecated thing type. If <b>true</b>, the thing type will not be deprecated anymore and you can associate it with things.</p>"
+        }
+      },
+      "documentation":"<p>The input for the DeprecateThingType operation.</p>"
+    },
+    "DeprecateThingTypeResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The output for the DeprecateThingType operation.</p>"
+    },
+    "DeprecationDate":{"type":"timestamp"},
     "DescribeCACertificateRequest":{
       "type":"structure",
       "required":["certificateId"],
@@ -3585,12 +3980,48 @@
           "shape":"ThingName",
           "documentation":"<p>The name of the thing.</p>"
         },
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "documentation":"<p>The thing type name.</p>"
+        },
         "attributes":{
           "shape":"Attributes",
-          "documentation":"<p>The attributes, which are name/value pairs in JSON format (for example: {\\\"attributes\\\":{\\\"some-name1\\\":\\\"some-value1\\\"}, {\\\"some-name2\\\":\\\"some-value2\\\"}, {\\\"some-name3\\\":\\\"some-value3\\\"}})</p>"
+          "documentation":"<p>The thing attributes.</p>"
+        },
+        "version":{
+          "shape":"Version",
+          "documentation":"<p>The current version of the thing record in the registry.</p> <note> <p>To avoid unintentional changes to the information in the registry, you can pass the version information in the <code>expectedVersion</code> parameter of the <code>UpdateThing</code> and <code>DeleteThing</code> calls.</p> </note>"
         }
       },
       "documentation":"<p>The output from the DescribeThing operation.</p>"
+    },
+    "DescribeThingTypeRequest":{
+      "type":"structure",
+      "required":["thingTypeName"],
+      "members":{
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "location":"uri",
+          "locationName":"thingTypeName",
+          "documentation":"<p>The name of the thing type.</p>"
+        }
+      },
+      "documentation":"<p>The input for the DescribeThingType operation.</p>"
+    },
+    "DescribeThingTypeResponse":{
+      "type":"structure",
+      "members":{
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type.</p>"
+        },
+        "thingTypeProperties":{
+          "shape":"ThingTypeProperties",
+          "documentation":"<p>The ThingTypeProperties contains information about the thing type including description, and a list of searchable thing attribute names.</p>"
+        },
+        "thingTypeMetadata":{"shape":"ThingTypeMetadata"}
+      },
+      "documentation":"<p>The output for the DescribeThingType operation.</p>"
     },
     "Description":{"type":"string"},
     "DetachPrincipalPolicyRequest":{
@@ -3632,7 +4063,7 @@
           "shape":"Principal",
           "location":"header",
           "locationName":"x-amzn-principal",
-          "documentation":"<p>The principal.</p> <p>If the principal is a certificate, specify the certificate ARN. If the principal is an Amazon Cognito identity, specify the identity ID.</p>"
+          "documentation":"<p>If the principal is a certificate, this value must be ARN of the certificate. If the principal is an Amazon Cognito identity, this value must be the ID of the Amazon Cognito identity.</p>"
         }
       },
       "documentation":"<p>The input for the DetachThingPrincipal operation.</p>"
@@ -3784,10 +4215,19 @@
         "deliveryStreamName":{
           "shape":"DeliveryStreamName",
           "documentation":"<p>The delivery stream name.</p>"
+        },
+        "separator":{
+          "shape":"FirehoseSeparator",
+          "documentation":"<p>A character separator that will be used to separate records written to the firehose stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).</p>"
         }
       },
       "documentation":"<p>Describes an action that writes data to an Amazon Kinesis Firehose stream.</p>"
     },
+    "FirehoseSeparator":{
+      "type":"string",
+      "pattern":"([\\n\\t])|(\\r\\n)|(,)"
+    },
+    "Flag":{"type":"boolean"},
     "FunctionArn":{"type":"string"},
     "GetLoggingOptionsRequest":{
       "type":"structure",
@@ -4317,13 +4757,13 @@
           "shape":"NextToken",
           "location":"querystring",
           "locationName":"nextToken",
-          "documentation":"<p>A token used to retrieve the next value.</p>"
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
         },
         "maxResults":{
           "shape":"MaxResults",
           "location":"querystring",
           "locationName":"maxResults",
-          "documentation":"<p>The maximum number of principals to return.</p>"
+          "documentation":"<p>The maximum number of results to return in this operation.</p>"
         },
         "principal":{
           "shape":"Principal",
@@ -4343,7 +4783,7 @@
         },
         "nextToken":{
           "shape":"NextToken",
-          "documentation":"<p>A token used to retrieve the next value.</p>"
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
         }
       },
       "documentation":"<p>The output from the ListPrincipalThings operation.</p>"
@@ -4366,10 +4806,48 @@
       "members":{
         "principals":{
           "shape":"Principals",
-          "documentation":"<p>The principals.</p>"
+          "documentation":"<p>The principals associated with the thing.</p>"
         }
       },
       "documentation":"<p>The output from the ListThingPrincipals operation.</p>"
+    },
+    "ListThingTypesRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken",
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults",
+          "documentation":"<p>The maximum number of results to return in this operation.</p>"
+        },
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "location":"querystring",
+          "locationName":"thingTypeName",
+          "documentation":"<p>The name of the thing type.</p>"
+        }
+      },
+      "documentation":"<p>The input for the ListThingTypes operation.</p>"
+    },
+    "ListThingTypesResponse":{
+      "type":"structure",
+      "members":{
+        "thingTypes":{
+          "shape":"ThingTypeList",
+          "documentation":"<p>The thing types.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      },
+      "documentation":"<p>The output for the ListThingTypes operation.</p>"
     },
     "ListThingsRequest":{
       "type":"structure",
@@ -4378,25 +4856,31 @@
           "shape":"NextToken",
           "location":"querystring",
           "locationName":"nextToken",
-          "documentation":"<p>The token for the next value.</p>"
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
         },
         "maxResults":{
           "shape":"MaxResults",
           "location":"querystring",
           "locationName":"maxResults",
-          "documentation":"<p>The maximum number of results.</p>"
+          "documentation":"<p>The maximum number of results to return in this operation.</p>"
         },
         "attributeName":{
           "shape":"AttributeName",
           "location":"querystring",
           "locationName":"attributeName",
-          "documentation":"<p>The attribute name.</p>"
+          "documentation":"<p>The attribute name used to search for things.</p>"
         },
         "attributeValue":{
           "shape":"AttributeValue",
           "location":"querystring",
           "locationName":"attributeValue",
-          "documentation":"<p>The attribute value.</p>"
+          "documentation":"<p>The attribute value used to search for things.</p>"
+        },
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "location":"querystring",
+          "locationName":"thingTypeName",
+          "documentation":"<p>The name of the thing type used to search for things.</p>"
         }
       },
       "documentation":"<p>The input for the ListThings operation.</p>"
@@ -4410,7 +4894,7 @@
         },
         "nextToken":{
           "shape":"NextToken",
-          "documentation":"<p>A token used to retrieve the next value.</p>"
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
         }
       },
       "documentation":"<p>The output from the ListThings operation.</p>"
@@ -4519,6 +5003,7 @@
     "MetricUnit":{"type":"string"},
     "MetricValue":{"type":"string"},
     "NextToken":{"type":"string"},
+    "OptionalVersion":{"type":"long"},
     "PageSize":{
       "type":"integer",
       "min":1,
@@ -4704,6 +5189,7 @@
       },
       "documentation":"<p>The input for the RejectCertificateTransfer operation.</p>"
     },
+    "RemoveThingType":{"type":"boolean"},
     "ReplaceTopicRuleRequest":{
       "type":"structure",
       "required":[
@@ -4798,6 +5284,10 @@
       "documentation":"<p>Describes an action to write data to an Amazon S3 bucket.</p>"
     },
     "SQL":{"type":"string"},
+    "SearchableAttributes":{
+      "type":"list",
+      "member":{"shape":"AttributeName"}
+    },
     "ServiceUnavailableException":{
       "type":"structure",
       "members":{
@@ -4915,12 +5405,20 @@
           "shape":"ThingName",
           "documentation":"<p>The name of the thing.</p>"
         },
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type, if the thing has been associated with a type.</p>"
+        },
         "attributes":{
           "shape":"Attributes",
-          "documentation":"<p>The attributes.</p>"
+          "documentation":"<p>A list of thing attributes which are name-value pairs.</p>"
+        },
+        "version":{
+          "shape":"Version",
+          "documentation":"<p>The version of the thing record in the registry.</p>"
         }
       },
-      "documentation":"<p>Describes a thing attribute.</p>"
+      "documentation":"<p>The properties of the thing, including thing name, thing type name, and a list of thing attributes.</p>"
     },
     "ThingAttributeList":{
       "type":"list",
@@ -4930,11 +5428,74 @@
       "type":"string",
       "min":1,
       "max":128,
-      "pattern":"[a-zA-Z0-9_-]+"
+      "pattern":"[a-zA-Z0-9:_-]+"
     },
     "ThingNameList":{
       "type":"list",
       "member":{"shape":"ThingName"}
+    },
+    "ThingTypeArn":{"type":"string"},
+    "ThingTypeDefinition":{
+      "type":"structure",
+      "members":{
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type.</p>"
+        },
+        "thingTypeProperties":{
+          "shape":"ThingTypeProperties",
+          "documentation":"<p>The ThingTypeProperties for the thing type.</p>"
+        },
+        "thingTypeMetadata":{"shape":"ThingTypeMetadata"}
+      },
+      "documentation":"<p>The definition of the thing type, including thing type name and description.</p>"
+    },
+    "ThingTypeDescription":{
+      "type":"string",
+      "max":2028,
+      "pattern":"[\\p{Graph}\\x20]*"
+    },
+    "ThingTypeList":{
+      "type":"list",
+      "member":{"shape":"ThingTypeDefinition"}
+    },
+    "ThingTypeMetadata":{
+      "type":"structure",
+      "members":{
+        "deprecated":{
+          "shape":"Boolean",
+          "documentation":"<p>Whether the thing type is deprecated. If <b>true</b>, no new things could be associated with this type.</p>"
+        },
+        "deprecationDate":{
+          "shape":"DeprecationDate",
+          "documentation":"<p>The date and time when the thing type was deprecated.</p>"
+        },
+        "creationDate":{
+          "shape":"CreationDate",
+          "documentation":"<p>The date and time when the thing type was created.</p>"
+        }
+      },
+      "documentation":"<p>The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when time was deprecated.</p>"
+    },
+    "ThingTypeName":{
+      "type":"string",
+      "min":1,
+      "max":128,
+      "pattern":"[a-zA-Z0-9:_-]+"
+    },
+    "ThingTypeProperties":{
+      "type":"structure",
+      "members":{
+        "thingTypeDescription":{
+          "shape":"ThingTypeDescription",
+          "documentation":"<p>The description of the thing type.</p>"
+        },
+        "searchableAttributes":{
+          "shape":"SearchableAttributes",
+          "documentation":"<p>A list of searchable thing attribute names.</p>"
+        }
+      },
+      "documentation":"<p>The ThingTypeProperties contains information about the thing type including: a thing type description, and a list of searchable thing attribute names.</p>"
     },
     "ThrottlingException":{
       "type":"structure",
@@ -5142,6 +5703,7 @@
       "exception":true,
       "documentation":"<p>You are not authorized to perform this operation.</p>"
     },
+    "UndoDeprecate":{"type":"boolean"},
     "UpdateCACertificateRequest":{
       "type":"structure",
       "required":[
@@ -5188,20 +5750,29 @@
     },
     "UpdateThingRequest":{
       "type":"structure",
-      "required":[
-        "thingName",
-        "attributePayload"
-      ],
+      "required":["thingName"],
       "members":{
         "thingName":{
           "shape":"ThingName",
           "location":"uri",
           "locationName":"thingName",
-          "documentation":"<p>The thing name.</p>"
+          "documentation":"<p>The name of the thing to update.</p>"
+        },
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type.</p>"
         },
         "attributePayload":{
           "shape":"AttributePayload",
-          "documentation":"<p>The attribute payload, a JSON string containing up to three key-value pairs (for example, {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}).</p>"
+          "documentation":"<p>A list of thing attributes, a JSON string containing name-value pairs. For example:</p> <p><code>{\\\"attributes\\\":{\\\"name1\\\":\\\"value2\\\"}})</code></p> <p>This data is used to add new attributes or update existing attributes.</p>"
+        },
+        "expectedVersion":{
+          "shape":"OptionalVersion",
+          "documentation":"<p>The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the <code>UpdateThing</code> request is rejected with a <code>VersionConflictException</code>.</p>"
+        },
+        "removeThingType":{
+          "shape":"RemoveThingType",
+          "documentation":"<p>Remove a thing type association. If <b>true</b>, the assocation is removed.</p>"
         }
       },
       "documentation":"<p>The input for the UpdateThing operation.</p>"
@@ -5213,6 +5784,19 @@
       "documentation":"<p>The output from the UpdateThing operation.</p>"
     },
     "UseBase64":{"type":"boolean"},
+    "Version":{"type":"long"},
+    "VersionConflictException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"errorMessage",
+          "documentation":"<p>The message for the exception.</p>"
+        }
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true,
+      "documentation":"<p>An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter. </p>"
+    },
     "VersionsLimitExceededException":{
       "type":"structure",
       "members":{
