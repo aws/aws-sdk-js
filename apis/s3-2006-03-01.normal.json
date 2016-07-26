@@ -383,7 +383,7 @@
       "output": {
         "shape": "GetBucketReplicationOutput"
       },
-      "documentation": "Deprecated, see the GetBucketReplicationConfiguration operation."
+      "documentation": "Returns the replication configuration of a bucket."
     },
     "GetBucketRequestPayment": {
       "name": "GetBucketRequestPayment",
