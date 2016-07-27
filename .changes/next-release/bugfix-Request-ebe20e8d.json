@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Request",
+  "description": "Adds a content-length check for the stream returned from c`createReadStream()`, and the stream will emit an error when the bytes received are fewer than specified by the response content-length header."
+}
