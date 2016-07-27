@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Request",
+  "description": "eachItem method stops iteration on returning false (like eachPage)"
+}
