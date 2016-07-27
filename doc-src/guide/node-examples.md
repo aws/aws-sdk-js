@@ -35,8 +35,11 @@ var AWS = require('aws-sdk');
 AWS.config.region = 'us-west-2';
 
 // Create a bucket using bound parameters and put something in it.
-// Make sure to change the bucket name from "myBucket" to something unique.
+
 var s3bucket = new AWS.S3({params: {Bucket: 'myBucket'}});
+
+// IMPORTANT: Make sure to change the bucket name from "myBucket" above to something unique.
+
 s3bucket.createBucket(function() {
   var params = {Key: 'myKey', Body: 'Hello!'};
   s3bucket.upload(params, function(err, data) {
