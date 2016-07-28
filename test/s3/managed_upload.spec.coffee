@@ -367,3 +367,81 @@ describe 'AWS.S3.ManagedUpload', ->
             expect(d).not.to.exist
             expect(e.message).to.equal('message')
             done()
+
+    if typeof Promise == 'function'
+      describe 'promise', ->
+        thenFunction = (d) ->
+          data = d
+
+        catchFunction = (e) ->
+          err = e
+
+        before ->
+          AWS.Request._PromiseDependency = Promise
+
+        it 'resolves when single part upload is successful', ->
+          reqs = helpers.mockResponses [
+            data: ETag: 'ETAG'
+          ]
+
+          params = Body: smallbody, ContentEncoding: 'encoding'
+          upload = new AWS.S3.ManagedUpload(service: s3, params: params)
+
+          return upload.promise().then(thenFunction).catch(catchFunction).then ->
+            expect(err).not.to.exist
+            expect(data.ETag).to.equal('ETAG')
+            expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key')
+            expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
+            expect(reqs[0].params.ContentEncoding).to.equal('encoding')
+
+        it 'resolves when multipart upload is successful', ->
+          reqs = helpers.mockResponses [
+            { data: UploadId: 'uploadId' }
+            { data: ETag: 'ETAG1' }
+            { data: ETag: 'ETAG2' }
+            { data: ETag: 'ETAG3' }
+            { data: ETag: 'ETAG4' }
+            { data: ETag: 'FINAL_ETAG', Location: 'FINAL_LOCATION' }
+          ]
+
+          params = Body: bigbody, ContentEncoding: 'encoding'
+          upload = new AWS.S3.ManagedUpload(service: s3, params: params)
+
+          return upload.promise().then(thenFunction).catch(catchFunction).then ->
+            expect(helpers.operationsForRequests(reqs)).to.eql [
+              's3.createMultipartUpload'
+              's3.uploadPart'
+              's3.uploadPart'
+              's3.uploadPart'
+              's3.uploadPart'
+              's3.completeMultipartUpload'
+            ]
+            expect(err).not.to.exist
+            expect(data.ETag).to.equal('FINAL_ETAG')
+            expect(data.Location).to.equal('FINAL_LOCATION')
+            expect(reqs[0].params).to.eql(Bucket: 'bucket', Key: 'key', ContentEncoding: 'encoding')
+            expect(reqs[1].params.ContentLength).to.equal(10)
+            expect(reqs[1].params.UploadId).to.equal('uploadId')
+            expect(reqs[2].params.UploadId).to.equal('uploadId')
+            expect(reqs[2].params.ContentLength).to.equal(10)
+            expect(reqs[3].params.UploadId).to.equal('uploadId')
+            expect(reqs[3].params.ContentLength).to.equal(10)
+            expect(reqs[4].params.UploadId).to.equal('uploadId')
+            expect(reqs[4].params.ContentLength).to.equal(6)
+            expect(reqs[5].params.UploadId).to.equal('uploadId')
+            expect(reqs[5].params.MultipartUpload.Parts).to.eql [
+              { ETag: 'ETAG1', PartNumber: 1 }
+              { ETag: 'ETAG2', PartNumber: 2 }
+              { ETag: 'ETAG3', PartNumber: 3 }
+              { ETag: 'ETAG4', PartNumber: 4 }
+            ]
+
+        it 'rejects when upload fails', ->
+          helpers.mockResponses [ error: new Error('ERROR') ]
+
+          params = Body: smallbody, ContentEncoding: 'encoding'
+          upload = new AWS.S3.ManagedUpload(service: s3, params: params)
+
+          return upload.promise().then(thenFunction).catch(catchFunction).then ->
+            expect(data).not.to.exist
+            expect(err.message).to.equal('ERROR')
