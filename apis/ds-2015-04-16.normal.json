@@ -11,6 +11,25 @@
     "targetPrefix":"DirectoryService_20150416"
   },
   "operations":{
+    "AddIpRoutes":{
+      "name":"AddIpRoutes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddIpRoutesRequest"},
+      "output":{"shape":"AddIpRoutesResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"EntityAlreadyExistsException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"IpRouteLimitExceededException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. <i>AddIpRoutes</i> adds this address block. You can also use <i>AddIpRoutes</i> to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC. </p>"
+    },
     "AddTagsToResource":{
       "name":"AddTagsToResource",
       "http":{
@@ -26,7 +45,7 @@
         {"shape":"ClientException"},
         {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 10 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource.</p>"
+      "documentation":"<p>Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 10 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.</p>"
     },
     "ConnectDirectory":{
       "name":"ConnectDirectory",
@@ -432,6 +451,23 @@
       ],
       "documentation":"<p>Obtains the manual snapshot limits for a directory.</p>"
     },
+    "ListIpRoutes":{
+      "name":"ListIpRoutes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListIpRoutesRequest"},
+      "output":{"shape":"ListIpRoutesResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Lists the address blocks that you have added to a directory.</p>"
+    },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
       "http":{
@@ -464,6 +500,23 @@
         {"shape":"ServiceException"}
       ],
       "documentation":"<p>Associates a directory with an SNS topic. This establishes the directory as a publisher to the specified SNS topic. You can then receive email or text (SMS) messages when the status of your directory changes. You get notified if your directory goes from an Active status to an Impaired or Inoperable status. You also receive a notification when the directory returns to an Active status.</p>"
+    },
+    "RemoveIpRoutes":{
+      "name":"RemoveIpRoutes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveIpRoutesRequest"},
+      "output":{"shape":"RemoveIpRoutesResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Removes IP address blocks from a directory.</p>"
     },
     "RemoveTagsFromResource":{
       "name":"RemoveTagsFromResource",
@@ -555,6 +608,32 @@
       "max":128,
       "min":1
     },
+    "AddIpRoutesRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "IpRoutes"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>Identifier (ID) of the directory to which to add the address block.</p>"
+        },
+        "IpRoutes":{
+          "shape":"IpRoutes",
+          "documentation":"<p>IP address blocks, using CIDR format, of the traffic to route. This is often the IP address block of the DNS server used for your on-premises domain.</p>"
+        },
+        "UpdateSecurityGroupForDirectoryControllers":{
+          "shape":"UpdateSecurityGroupForDirectoryControllers",
+          "documentation":"<p>If set to true, updates the inbound and outbound rules of the security group that has the description: \"AWS created security group for <i>directory ID</i> directory controllers.\" Following are the new rules: </p> <p>Inbound:</p> <ul> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: 0.0.0.0/0</p> </li> <li> <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0</p> </li> <li> <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0</p> </li> <li> <p>Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0</p> </li> <li> <p>Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0</p> </li> </ul> <p/> <p>Outbound:</p> <ul> <li> <p>Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0</p> </li> </ul> <p>These security rules impact an internal network interface that is not exposed publicly.</p>"
+        }
+      }
+    },
+    "AddIpRoutesResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "AddTagsToResourceRequest":{
       "type":"structure",
       "required":[
@@ -564,7 +643,7 @@
       "members":{
         "ResourceId":{
           "shape":"ResourceId",
-          "documentation":"<p>The ID of the directory to which to add the tag.</p>"
+          "documentation":"<p>Identifier (ID) for the directory to which to add the tag.</p>"
         },
         "Tags":{
           "shape":"Tags",
@@ -577,6 +656,7 @@
       "members":{
       }
     },
+    "AddedDateTime":{"type":"timestamp"},
     "AliasName":{
       "type":"string",
       "max":62,
@@ -625,6 +705,14 @@
     "AvailabilityZones":{
       "type":"list",
       "member":{"shape":"AvailabilityZone"}
+    },
+    "CidrIp":{
+      "type":"string",
+      "pattern":"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([1-9]|[1-2][0-9]|3[0-2]))$"
+    },
+    "CidrIps":{
+      "type":"list",
+      "member":{"shape":"CidrIp"}
     },
     "ClientException":{
       "type":"structure",
@@ -1781,11 +1869,115 @@
       "type":"list",
       "member":{"shape":"IpAddr"}
     },
+    "IpRoute":{
+      "type":"structure",
+      "members":{
+        "CidrIp":{
+          "shape":"CidrIp",
+          "documentation":"<p>IP address block using CIDR format, for example 10.0.0.0/24. This is often the address block of the DNS server used for your on-premises domain. For a single IP address use a CIDR address block with /32. For example 10.0.0.0/32.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>Description of the address block.</p>"
+        }
+      },
+      "documentation":"<p>IP address block. This is often the address block of the DNS server used for your on-premises domain. </p>"
+    },
+    "IpRouteInfo":{
+      "type":"structure",
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>Identifier (ID) of the directory associated with the IP addresses.</p>"
+        },
+        "CidrIp":{
+          "shape":"CidrIp",
+          "documentation":"<p>IP address block in the <a>IpRoute</a>.</p>"
+        },
+        "IpRouteStatusMsg":{
+          "shape":"IpRouteStatusMsg",
+          "documentation":"<p>The status of the IP address block.</p>"
+        },
+        "AddedDateTime":{
+          "shape":"AddedDateTime",
+          "documentation":"<p>The date and time the address block was added to the directory.</p>"
+        },
+        "IpRouteStatusReason":{
+          "shape":"IpRouteStatusReason",
+          "documentation":"<p>The reason for the IpRouteStatusMsg.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>Description of the <a>IpRouteInfo</a>.</p>"
+        }
+      },
+      "documentation":"<p>Information about one or more IP address blocks.</p>"
+    },
+    "IpRouteLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ExceptionMessage"},
+        "RequestId":{"shape":"RequestId"}
+      },
+      "documentation":"<p>The maximum allowed number of IP addresses was exceeded. The default limit is 100 IP address blocks.</p>",
+      "exception":true
+    },
+    "IpRouteStatusMsg":{
+      "type":"string",
+      "enum":[
+        "Adding",
+        "Added",
+        "Removing",
+        "Removed",
+        "AddFailed",
+        "RemoveFailed"
+      ]
+    },
+    "IpRouteStatusReason":{"type":"string"},
+    "IpRoutes":{
+      "type":"list",
+      "member":{"shape":"IpRoute"}
+    },
+    "IpRoutesInfo":{
+      "type":"list",
+      "member":{"shape":"IpRouteInfo"}
+    },
     "LastUpdatedDateTime":{"type":"timestamp"},
     "LaunchTime":{"type":"timestamp"},
     "Limit":{
       "type":"integer",
       "min":0
+    },
+    "ListIpRoutesRequest":{
+      "type":"structure",
+      "required":["DirectoryId"],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>Identifier (ID) of the directory for which you want to retrieve the IP addresses.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <i>ListIpRoutes.NextToken</i> value from a previous call to <a>ListIpRoutes</a>. Pass null if this is the first call.</p>"
+        },
+        "Limit":{
+          "shape":"Limit",
+          "documentation":"<p>Maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation.</p>"
+        }
+      }
+    },
+    "ListIpRoutesResult":{
+      "type":"structure",
+      "members":{
+        "IpRoutesInfo":{
+          "shape":"IpRoutesInfo",
+          "documentation":"<p>A list of <a>IpRoute</a>s.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.</p>"
+        }
+      }
     },
     "ListTagsForResourceRequest":{
       "type":"structure",
@@ -1793,7 +1985,7 @@
       "members":{
         "ResourceId":{
           "shape":"ResourceId",
-          "documentation":"<p>The ID of the directory for which you want to retrieve tags.</p>"
+          "documentation":"<p>Identifier (ID) of the directory for which you want to retrieve tags.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -1943,6 +2135,28 @@
       "type":"list",
       "member":{"shape":"RemoteDomainName"}
     },
+    "RemoveIpRoutesRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "CidrIps"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>Identifier (ID) of the directory from which you want to remove the IP addresses.</p>"
+        },
+        "CidrIps":{
+          "shape":"CidrIps",
+          "documentation":"<p>IP address blocks that you want to remove.</p>"
+        }
+      }
+    },
+    "RemoveIpRoutesResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "RemoveTagsFromResourceRequest":{
       "type":"structure",
       "required":[
@@ -1952,7 +2166,7 @@
       "members":{
         "ResourceId":{
           "shape":"ResourceId",
-          "documentation":"<p>The ID of the directory from which to remove the tag.</p>"
+          "documentation":"<p>Identifier (ID) of the directory from which to remove the tag.</p>"
         },
         "TagKeys":{
           "shape":"TagKeys",
@@ -2137,11 +2351,11 @@
       "members":{
         "Key":{
           "shape":"TagKey",
-          "documentation":"<p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with \"aws:\". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+          "documentation":"<p>Required name of the tag. The string value can be Unicode characters and cannot be prefixed with \"aws:\". The string can contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
         },
         "Value":{
           "shape":"TagValue",
-          "documentation":"<p>A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+          "documentation":"<p>The optional value of the tag. The string value can be Unicode characters. The string can contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
         }
       },
       "documentation":"<p>Metadata assigned to an Amazon Directory Services directory consisting of a key-value pair.</p>"
@@ -2347,6 +2561,7 @@
       },
       "documentation":"<p>Contains the results of the <a>UpdateRadius</a> operation.</p>"
     },
+    "UpdateSecurityGroupForDirectoryControllers":{"type":"boolean"},
     "UseSameUsername":{"type":"boolean"},
     "UserName":{
       "type":"string",

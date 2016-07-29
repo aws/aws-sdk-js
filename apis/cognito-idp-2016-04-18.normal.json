@@ -22,6 +22,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Adds additional user attributes to the user pool schema.</p>"
@@ -44,7 +45,8 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"PasswordResetRequiredException"}
       ],
       "documentation":"<p>Confirms user registration as an admin without using a confirmation code. Works on any user.</p>"
     },
@@ -59,6 +61,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Deletes a user as an administrator. Works on any user.</p>"
@@ -75,6 +78,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Deletes the user attributes in a user pool as an administrator. Works on any user.</p>"
@@ -91,6 +95,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Disables the specified user as an administrator. Works on any user.</p>"
@@ -107,9 +112,45 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Enables the specified user as an administrator. Works on any user.</p>"
+    },
+    "AdminForgetDevice":{
+      "name":"AdminForgetDevice",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminForgetDeviceRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"NotAuthorizedException"}
+      ],
+      "documentation":"<p>Forgets the device, as an administrator.</p>"
+    },
+    "AdminGetDevice":{
+      "name":"AdminGetDevice",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminGetDeviceRequest"},
+      "output":{"shape":"AdminGetDeviceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"NotAuthorizedException"}
+      ],
+      "documentation":"<p>Gets the device, as an administrator.</p>"
     },
     "AdminGetUser":{
       "name":"AdminGetUser",
@@ -123,9 +164,52 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Gets the specified user by user name in a user pool as an administrator. Works on any user.</p>"
+    },
+    "AdminInitiateAuth":{
+      "name":"AdminInitiateAuth",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminInitiateAuthRequest"},
+      "output":{"shape":"AdminInitiateAuthResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"UnexpectedLambdaException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"UserLambdaValidationException"},
+        {"shape":"InvalidLambdaResponseException"},
+        {"shape":"MFAMethodNotFoundException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"}
+      ],
+      "documentation":"<p>Initiates the authentication flow, as an administrator.</p>"
+    },
+    "AdminListDevices":{
+      "name":"AdminListDevices",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminListDevicesRequest"},
+      "output":{"shape":"AdminListDevicesResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"NotAuthorizedException"}
+      ],
+      "documentation":"<p>Lists devices, as an administrator.</p>"
     },
     "AdminResetUserPassword":{
       "name":"AdminResetUserPassword",
@@ -148,6 +232,33 @@
       ],
       "documentation":"<p>Resets the specified user's password in a user pool as an administrator. Works on any user.</p>"
     },
+    "AdminRespondToAuthChallenge":{
+      "name":"AdminRespondToAuthChallenge",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminRespondToAuthChallengeRequest"},
+      "output":{"shape":"AdminRespondToAuthChallengeResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"CodeMismatchException"},
+        {"shape":"ExpiredCodeException"},
+        {"shape":"UnexpectedLambdaException"},
+        {"shape":"UserLambdaValidationException"},
+        {"shape":"InvalidLambdaResponseException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"MFAMethodNotFoundException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"AliasExistsException"}
+      ],
+      "documentation":"<p>Responds to an authentication challenge, as an administrator.</p>"
+    },
     "AdminSetUserSettings":{
       "name":"AdminSetUserSettings",
       "http":{
@@ -159,9 +270,28 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
-        {"shape":"NotAuthorizedException"}
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Sets all the user settings for a specified user name. Works on any user.</p>"
+    },
+    "AdminUpdateDeviceStatus":{
+      "name":"AdminUpdateDeviceStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminUpdateDeviceStatusRequest"},
+      "output":{"shape":"AdminUpdateDeviceStatusResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"NotAuthorizedException"}
+      ],
+      "documentation":"<p>Updates the device status as an administrator.</p>"
     },
     "AdminUpdateUserAttributes":{
       "name":"AdminUpdateUserAttributes",
@@ -179,9 +309,27 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"AliasExistsException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user.</p>"
+    },
+    "AdminUserGlobalSignOut":{
+      "name":"AdminUserGlobalSignOut",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminUserGlobalSignOutRequest"},
+      "output":{"shape":"AdminUserGlobalSignOutResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Signs out users from all devices, as an administrator.</p>"
     },
     "ChangePassword":{
       "name":"ChangePassword",
@@ -197,10 +345,32 @@
         {"shape":"InvalidPasswordException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"LimitExceededException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Changes the password for a specified user in a user pool.</p>",
       "authtype":"none"
+    },
+    "ConfirmDevice":{
+      "name":"ConfirmDevice",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ConfirmDeviceRequest"},
+      "output":{"shape":"ConfirmDeviceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InvalidPasswordException"},
+        {"shape":"InvalidLambdaResponseException"},
+        {"shape":"UsernameExistsException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Confirms tracking of the device. This API call is the call that beings device tracking.</p>"
     },
     "ConfirmForgotPassword":{
       "name":"ConfirmForgotPassword",
@@ -223,7 +393,9 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"}
       ],
       "documentation":"<p>Allows a user to enter a code provided when they reset their password to update their password.</p>",
       "authtype":"none"
@@ -249,7 +421,8 @@
         {"shape":"AliasExistsException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"UserNotFoundException"}
       ],
       "documentation":"<p>Confirms registration of a user and handles the existing alias from a previous user.</p>",
       "authtype":"none"
@@ -265,8 +438,12 @@
       "errors":[
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"InternalErrorException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"InvalidEmailRoleAccessPolicyException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Creates a new Amazon Cognito user pool and sets the password policy for the pool.</p>"
     },
@@ -283,6 +460,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Creates the user pool client.</p>"
@@ -333,6 +511,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Deletes the specified Amazon Cognito user pool.</p>"
@@ -348,6 +527,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Allows the developer to delete the user pool client.</p>"
@@ -364,6 +544,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Returns the configuration information and metadata of the specified user pool.</p>"
@@ -380,9 +561,27 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Client method for returning the configuration information and metadata of the specified user pool client.</p>"
+    },
+    "ForgetDevice":{
+      "name":"ForgetDevice",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ForgetDeviceRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Forgets the specified device.</p>"
     },
     "ForgotPassword":{
       "name":"ForgotPassword",
@@ -401,10 +600,34 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"InvalidEmailRoleAccessPolicyException"},
+        {"shape":"CodeDeliveryFailureException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"}
       ],
       "documentation":"<p>Retrieves the password for the specified client ID or username.</p>",
       "authtype":"none"
+    },
+    "GetDevice":{
+      "name":"GetDevice",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDeviceRequest"},
+      "output":{"shape":"GetDeviceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Gets the device.</p>"
     },
     "GetUser":{
       "name":"GetUser",
@@ -440,10 +663,74 @@
         {"shape":"UnexpectedLambdaException"},
         {"shape":"UserLambdaValidationException"},
         {"shape":"InvalidLambdaResponseException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"InvalidEmailRoleAccessPolicyException"},
+        {"shape":"CodeDeliveryFailureException"},
+        {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Gets the user attribute verification code for the specified attribute name.</p>",
       "authtype":"none"
+    },
+    "GlobalSignOut":{
+      "name":"GlobalSignOut",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GlobalSignOutRequest"},
+      "output":{"shape":"GlobalSignOutResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Signs out users from all devices.</p>"
+    },
+    "InitiateAuth":{
+      "name":"InitiateAuth",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"InitiateAuthRequest"},
+      "output":{"shape":"InitiateAuthResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"UnexpectedLambdaException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"UserLambdaValidationException"},
+        {"shape":"InvalidLambdaResponseException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"}
+      ],
+      "documentation":"<p>Initiates the authentication flow.</p>"
+    },
+    "ListDevices":{
+      "name":"ListDevices",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListDevicesRequest"},
+      "output":{"shape":"ListDevicesResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Lists the devices.</p>"
     },
     "ListUserPoolClients":{
       "name":"ListUserPoolClients",
@@ -457,6 +744,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Lists the clients that have been created for the specified user pool.</p>"
@@ -472,6 +760,7 @@
       "errors":[
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Lists the user pools associated with an AWS account.</p>"
@@ -488,6 +777,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Lists the users in the Amazon Cognito user pool.</p>"
@@ -509,10 +799,45 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"InvalidEmailRoleAccessPolicyException"},
+        {"shape":"CodeDeliveryFailureException"},
+        {"shape":"UserNotFoundException"}
       ],
       "documentation":"<p>Resends the confirmation (for confirmation of registration) to a specific user in the user pool.</p>",
       "authtype":"none"
+    },
+    "RespondToAuthChallenge":{
+      "name":"RespondToAuthChallenge",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RespondToAuthChallengeRequest"},
+      "output":{"shape":"RespondToAuthChallengeResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"CodeMismatchException"},
+        {"shape":"ExpiredCodeException"},
+        {"shape":"UnexpectedLambdaException"},
+        {"shape":"UserLambdaValidationException"},
+        {"shape":"InvalidLambdaResponseException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"MFAMethodNotFoundException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"AliasExistsException"}
+      ],
+      "documentation":"<p>Responds to the authentication challenge.</p>"
     },
     "SetUserSettings":{
       "name":"SetUserSettings",
@@ -548,10 +873,32 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"UsernameExistsException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"InvalidEmailRoleAccessPolicyException"},
+        {"shape":"CodeDeliveryFailureException"}
       ],
       "documentation":"<p>Registers the user in the specified user pool and creates a user name, password, and user attributes.</p>",
       "authtype":"none"
+    },
+    "UpdateDeviceStatus":{
+      "name":"UpdateDeviceStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateDeviceStatusRequest"},
+      "output":{"shape":"UpdateDeviceStatusResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Updates the device status.</p>"
     },
     "UpdateUserAttributes":{
       "name":"UpdateUserAttributes",
@@ -572,7 +919,11 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"AliasExistsException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"InvalidEmailRoleAccessPolicyException"},
+        {"shape":"CodeDeliveryFailureException"}
       ],
       "documentation":"<p>Allows a user to update a specific attribute (one at a time).</p>",
       "authtype":"none"
@@ -590,7 +941,11 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ConcurrentModificationException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"InvalidEmailRoleAccessPolicyException"}
       ],
       "documentation":"<p>Updates the specified user pool with the specified attributes.</p>"
     },
@@ -606,6 +961,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Allows the developer to update the specified user pool client and password policy.</p>"
@@ -625,6 +981,7 @@
         {"shape":"ExpiredCodeException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"LimitExceededException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Verifies the specified user attributes in the user pool.</p>",
@@ -775,6 +1132,63 @@
       },
       "documentation":"<p>Represents the response from the server for the request to enable a user as an administrator.</p>"
     },
+    "AdminForgetDeviceRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username",
+        "DeviceKey"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID.</p>"
+        },
+        "Username":{
+          "shape":"UsernameType",
+          "documentation":"<p>The user name.</p>"
+        },
+        "DeviceKey":{
+          "shape":"DeviceKeyType",
+          "documentation":"<p>The device key.</p>"
+        }
+      },
+      "documentation":"<p>Sends the forgot device request, as an administrator.</p>"
+    },
+    "AdminGetDeviceRequest":{
+      "type":"structure",
+      "required":[
+        "DeviceKey",
+        "UserPoolId",
+        "Username"
+      ],
+      "members":{
+        "DeviceKey":{
+          "shape":"DeviceKeyType",
+          "documentation":"<p>The device key.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID.</p>"
+        },
+        "Username":{
+          "shape":"UsernameType",
+          "documentation":"<p>The user name.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to get the device, as an administrator.</p>"
+    },
+    "AdminGetDeviceResponse":{
+      "type":"structure",
+      "required":["Device"],
+      "members":{
+        "Device":{
+          "shape":"DeviceType",
+          "documentation":"<p>The device.</p>"
+        }
+      },
+      "documentation":"<p>Gets the device response, as an administrator.</p>"
+    },
     "AdminGetUserRequest":{
       "type":"structure",
       "required":[
@@ -828,6 +1242,96 @@
       },
       "documentation":"<p>Represents the response from the server from the request to get the specified user as an administrator.</p>"
     },
+    "AdminInitiateAuthRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "ClientId",
+        "AuthFlow"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The ID of the Amazon Cognito user pool.</p>"
+        },
+        "ClientId":{
+          "shape":"ClientIdType",
+          "documentation":"<p>The client app ID.</p>"
+        },
+        "AuthFlow":{
+          "shape":"AuthFlowType",
+          "documentation":"<p>The authentication flow.</p>"
+        },
+        "AuthParameters":{
+          "shape":"AuthParametersType",
+          "documentation":"<p>The authentication parameters.</p>"
+        },
+        "ClientMetadata":{
+          "shape":"ClientMetadataType",
+          "documentation":"<p>The client app metadata.</p>"
+        }
+      },
+      "documentation":"<p>Initiates the authorization request, as an administrator.</p>"
+    },
+    "AdminInitiateAuthResponse":{
+      "type":"structure",
+      "members":{
+        "ChallengeName":{
+          "shape":"ChallengeNameType",
+          "documentation":"<p>The name of the challenge.</p>"
+        },
+        "Session":{
+          "shape":"SessionType",
+          "documentation":"<p>The session.</p>"
+        },
+        "ChallengeParameters":{
+          "shape":"ChallengeParametersType",
+          "documentation":"<p>The challenge parameters.</p>"
+        },
+        "AuthenticationResult":{"shape":"AuthenticationResultType"}
+      },
+      "documentation":"<p>Initiates the authentication response, as an administrator.</p>"
+    },
+    "AdminListDevicesRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID.</p>"
+        },
+        "Username":{
+          "shape":"UsernameType",
+          "documentation":"<p>The user name.</p>"
+        },
+        "Limit":{
+          "shape":"QueryLimitType",
+          "documentation":"<p>The limit of the devices request.</p>"
+        },
+        "PaginationToken":{
+          "shape":"SearchPaginationTokenType",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to list devices, as an administrator.</p>"
+    },
+    "AdminListDevicesResponse":{
+      "type":"structure",
+      "members":{
+        "Devices":{
+          "shape":"DeviceListType",
+          "documentation":"<p>The devices in the list of devices response.</p>"
+        },
+        "PaginationToken":{
+          "shape":"SearchPaginationTokenType",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Lists the device's response, as an administrator.</p>"
+    },
     "AdminResetUserPasswordRequest":{
       "type":"structure",
       "required":[
@@ -851,6 +1355,56 @@
       "members":{
       },
       "documentation":"<p>Represents the response from the server to reset a user password as an administrator.</p>"
+    },
+    "AdminRespondToAuthChallengeRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "ClientId",
+        "ChallengeName"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The ID of the Amazon Cognito user pool.</p>"
+        },
+        "ClientId":{
+          "shape":"ClientIdType",
+          "documentation":"<p>The client ID.</p>"
+        },
+        "ChallengeName":{
+          "shape":"ChallengeNameType",
+          "documentation":"<p>The name of the challenge.</p>"
+        },
+        "ChallengeResponses":{
+          "shape":"ChallengeResponsesType",
+          "documentation":"<p>The challenge response.</p>"
+        },
+        "Session":{
+          "shape":"SessionType",
+          "documentation":"<p>The session.</p>"
+        }
+      },
+      "documentation":"<p>The request to respond to the authentication challenge, as an administrator.</p>"
+    },
+    "AdminRespondToAuthChallengeResponse":{
+      "type":"structure",
+      "members":{
+        "ChallengeName":{
+          "shape":"ChallengeNameType",
+          "documentation":"<p>The name of the challenge.</p>"
+        },
+        "Session":{
+          "shape":"SessionType",
+          "documentation":"<p>The session.</p>"
+        },
+        "ChallengeParameters":{
+          "shape":"ChallengeParametersType",
+          "documentation":"<p>The challenge parameters.</p>"
+        },
+        "AuthenticationResult":{"shape":"AuthenticationResultType"}
+      },
+      "documentation":"<p>Responds to the authentication challenge, as an administrator.</p>"
     },
     "AdminSetUserSettingsRequest":{
       "type":"structure",
@@ -881,6 +1435,39 @@
       },
       "documentation":"<p>Represents the response from the server to set user settings as an administrator.</p>"
     },
+    "AdminUpdateDeviceStatusRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username",
+        "DeviceKey"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID></p>"
+        },
+        "Username":{
+          "shape":"UsernameType",
+          "documentation":"<p>The user name.</p>"
+        },
+        "DeviceKey":{
+          "shape":"DeviceKeyType",
+          "documentation":"<p>The device key.</p>"
+        },
+        "DeviceRememberedStatus":{
+          "shape":"DeviceRememberedStatusType",
+          "documentation":"<p>The status indicating whether a device has been remembered or not.</p>"
+        }
+      },
+      "documentation":"<p>The request to update the device status, as an administrator.</p>"
+    },
+    "AdminUpdateDeviceStatusResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The status response from the request to update the device, as an administrator.</p>"
+    },
     "AdminUpdateUserAttributesRequest":{
       "type":"structure",
       "required":[
@@ -910,6 +1497,30 @@
       },
       "documentation":"<p>Represents the response from the server for the request to update user attributes as an administrator.</p>"
     },
+    "AdminUserGlobalSignOutRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID.</p>"
+        },
+        "Username":{
+          "shape":"UsernameType",
+          "documentation":"<p>The user name.</p>"
+        }
+      },
+      "documentation":"<p>The request to sign out of all devices, as an administrator.</p>"
+    },
+    "AdminUserGlobalSignOutResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The global signot response, as an administrator.</p>"
+    },
     "AliasAttributeType":{
       "type":"string",
       "enum":[
@@ -936,7 +1547,8 @@
     "ArnType":{
       "type":"string",
       "max":2048,
-      "min":20
+      "min":20,
+      "pattern":"arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?"
     },
     "AttributeDataType":{
       "type":"string",
@@ -978,10 +1590,75 @@
     },
     "AttributeValueType":{
       "type":"string",
-      "max":256,
+      "max":2048,
       "sensitive":true
     },
+    "AuthFlowType":{
+      "type":"string",
+      "enum":[
+        "USER_SRP_AUTH",
+        "REFRESH_TOKEN_AUTH",
+        "CUSTOM_AUTH",
+        "ADMIN_NO_SRP_AUTH"
+      ]
+    },
+    "AuthParametersType":{
+      "type":"map",
+      "key":{"shape":"StringType"},
+      "value":{"shape":"StringType"}
+    },
+    "AuthenticationResultType":{
+      "type":"structure",
+      "members":{
+        "AccessToken":{
+          "shape":"TokenModelType",
+          "documentation":"<p>The access token of the authentication result.</p>"
+        },
+        "ExpiresIn":{
+          "shape":"IntegerType",
+          "documentation":"<p>The expiration period of the authentication result.</p>"
+        },
+        "TokenType":{
+          "shape":"StringType",
+          "documentation":"<p>The token type of the authentication result.</p>"
+        },
+        "RefreshToken":{
+          "shape":"TokenModelType",
+          "documentation":"<p>The refresh token of the authentication result.</p>"
+        },
+        "IdToken":{
+          "shape":"TokenModelType",
+          "documentation":"<p>The ID token of the authentication result.</p>"
+        },
+        "NewDeviceMetadata":{
+          "shape":"NewDeviceMetadataType",
+          "documentation":"<p>The new device metadata from an authentication result.</p>"
+        }
+      },
+      "documentation":"<p>The result type of the authentication result.</p>"
+    },
     "BooleanType":{"type":"boolean"},
+    "ChallengeNameType":{
+      "type":"string",
+      "enum":[
+        "SMS_MFA",
+        "PASSWORD_VERIFIER",
+        "CUSTOM_CHALLENGE",
+        "DEVICE_SRP_AUTH",
+        "DEVICE_PASSWORD_VERIFIER",
+        "ADMIN_NO_SRP_AUTH"
+      ]
+    },
+    "ChallengeParametersType":{
+      "type":"map",
+      "key":{"shape":"StringType"},
+      "value":{"shape":"StringType"}
+    },
+    "ChallengeResponsesType":{
+      "type":"map",
+      "key":{"shape":"StringType"},
+      "value":{"shape":"StringType"}
+    },
     "ChangePasswordRequest":{
       "type":"structure",
       "required":[
@@ -1017,11 +1694,25 @@
       "pattern":"[\\w+]+",
       "sensitive":true
     },
+    "ClientMetadataType":{
+      "type":"map",
+      "key":{"shape":"StringType"},
+      "value":{"shape":"StringType"}
+    },
     "ClientNameType":{
       "type":"string",
       "max":128,
       "min":1,
       "pattern":"[\\w\\s+=,.@-]+"
+    },
+    "ClientPermissionListType":{
+      "type":"list",
+      "member":{"shape":"ClientPermissionType"}
+    },
+    "ClientPermissionType":{
+      "type":"string",
+      "max":2048,
+      "min":1
     },
     "ClientSecretType":{
       "type":"string",
@@ -1052,6 +1743,17 @@
       },
       "documentation":"<p>The type of code delivery details being returned from the server.</p>"
     },
+    "CodeDeliveryFailureException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message sent when a verification code fails to deliver successfully.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when a verification code fails to deliver successfully.</p>",
+      "exception":true
+    },
     "CodeMismatchException":{
       "type":"structure",
       "members":{
@@ -1073,6 +1775,42 @@
       },
       "documentation":"<p>This exception is thrown if two or more modifications are happening concurrently.</p>",
       "exception":true
+    },
+    "ConfirmDeviceRequest":{
+      "type":"structure",
+      "required":[
+        "AccessToken",
+        "DeviceKey"
+      ],
+      "members":{
+        "AccessToken":{
+          "shape":"TokenModelType",
+          "documentation":"<p>The access token.</p>"
+        },
+        "DeviceKey":{
+          "shape":"DeviceKeyType",
+          "documentation":"<p>The device key.</p>"
+        },
+        "DeviceSecretVerifierConfig":{
+          "shape":"DeviceSecretVerifierConfigType",
+          "documentation":"<p>The configuration of the device secret verifier.</p>"
+        },
+        "DeviceName":{
+          "shape":"DeviceNameType",
+          "documentation":"<p>The device name.</p>"
+        }
+      },
+      "documentation":"<p>Confirms the device request.</p>"
+    },
+    "ConfirmDeviceResponse":{
+      "type":"structure",
+      "members":{
+        "UserConfirmationNecessary":{
+          "shape":"BooleanType",
+          "documentation":"<p>Indicates whether the user confirmation is necessary to confirm the device response.</p>"
+        }
+      },
+      "documentation":"<p>Confirms the device response.</p>"
     },
     "ConfirmForgotPasswordRequest":{
       "type":"structure",
@@ -1173,6 +1911,22 @@
         "GenerateSecret":{
           "shape":"GenerateSecret",
           "documentation":"<p> Boolean to specify whether you want to generate a secret for the user pool client being created.</p>"
+        },
+        "RefreshTokenValidity":{
+          "shape":"RefreshTokenValidityType",
+          "documentation":"<p>Refreshes the token validity.</p>"
+        },
+        "ReadAttributes":{
+          "shape":"ClientPermissionListType",
+          "documentation":"<p>The read attributes.</p>"
+        },
+        "WriteAttributes":{
+          "shape":"ClientPermissionListType",
+          "documentation":"<p>The write attributes.</p>"
+        },
+        "ExplicitAuthFlows":{
+          "shape":"ExplicitAuthFlowsListType",
+          "documentation":"<p>The explicit authentication flows.</p>"
         }
       },
       "documentation":"<p>Represents the request to create a user pool client.</p>"
@@ -1230,6 +1984,18 @@
         "MfaConfiguration":{
           "shape":"UserPoolMfaType",
           "documentation":"<p>Specifies MFA configuration details.</p>"
+        },
+        "DeviceConfiguration":{
+          "shape":"DeviceConfigurationType",
+          "documentation":"<p>The device configuration.</p>"
+        },
+        "EmailConfiguration":{
+          "shape":"EmailConfigurationType",
+          "documentation":"<p>The email configuration.</p>"
+        },
+        "SmsConfiguration":{
+          "shape":"SmsConfigurationType",
+          "documentation":"<p>The SMS configuration.</p>"
         }
       },
       "documentation":"<p>Represents the request to create a user pool.</p>"
@@ -1373,6 +2139,100 @@
       },
       "documentation":"<p>Represents the response to describe the user pool.</p>"
     },
+    "DeviceConfigurationType":{
+      "type":"structure",
+      "members":{
+        "ChallengeRequiredOnNewDevice":{
+          "shape":"BooleanType",
+          "documentation":"<p>Indicates whether a challenge is required on a new device. Only applicable to a new device.</p>"
+        },
+        "DeviceOnlyRememberedOnUserPrompt":{
+          "shape":"BooleanType",
+          "documentation":"<p>If true, a device is only remembered on user prompt.</p>"
+        }
+      },
+      "documentation":"<p>The type of configuration for the user pool's device tracking.</p>"
+    },
+    "DeviceKeyType":{
+      "type":"string",
+      "max":55,
+      "min":1,
+      "pattern":"[\\w-]+_[0-9a-f-]+"
+    },
+    "DeviceListType":{
+      "type":"list",
+      "member":{"shape":"DeviceType"}
+    },
+    "DeviceNameType":{
+      "type":"string",
+      "max":150,
+      "min":1
+    },
+    "DeviceRememberedStatusType":{
+      "type":"string",
+      "enum":[
+        "remembered",
+        "not_remembered"
+      ]
+    },
+    "DeviceSecretVerifierConfigType":{
+      "type":"structure",
+      "members":{
+        "PasswordVerifier":{
+          "shape":"StringType",
+          "documentation":"<p>The password verifier.</p>"
+        },
+        "Salt":{
+          "shape":"StringType",
+          "documentation":"<p>The salt.</p>"
+        }
+      },
+      "documentation":"<p>The device verifier against which it will be authenticated.</p>"
+    },
+    "DeviceType":{
+      "type":"structure",
+      "members":{
+        "DeviceKey":{
+          "shape":"DeviceKeyType",
+          "documentation":"<p>The device key.</p>"
+        },
+        "DeviceAttributes":{
+          "shape":"AttributeListType",
+          "documentation":"<p>The device attributes.</p>"
+        },
+        "DeviceCreateDate":{
+          "shape":"DateType",
+          "documentation":"<p>The creation date of the device.</p>"
+        },
+        "DeviceLastModifiedDate":{
+          "shape":"DateType",
+          "documentation":"<p>The last modified date of the device.</p>"
+        },
+        "DeviceLastAuthenticatedDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date in which the device was last authenticated.</p>"
+        }
+      },
+      "documentation":"<p>The device type.</p>"
+    },
+    "EmailAddressType":{
+      "type":"string",
+      "pattern":"[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+@[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+    },
+    "EmailConfigurationType":{
+      "type":"structure",
+      "members":{
+        "SourceArn":{
+          "shape":"ArnType",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the email source.</p>"
+        },
+        "ReplyToEmailAddress":{
+          "shape":"EmailAddressType",
+          "documentation":"<p>The REPLY-TO email address.</p>"
+        }
+      },
+      "documentation":"<p>The email configuration type.</p>"
+    },
     "EmailVerificationMessageType":{
       "type":"string",
       "max":2048,
@@ -1396,7 +2256,30 @@
       "documentation":"<p>This exception is thrown if a code has expired.</p>",
       "exception":true
     },
+    "ExplicitAuthFlowsListType":{
+      "type":"list",
+      "member":{"shape":"ExplicitAuthFlowsType"}
+    },
+    "ExplicitAuthFlowsType":{
+      "type":"string",
+      "enum":["ADMIN_NO_SRP_AUTH"]
+    },
     "ForceAliasCreation":{"type":"boolean"},
+    "ForgetDeviceRequest":{
+      "type":"structure",
+      "required":["DeviceKey"],
+      "members":{
+        "AccessToken":{
+          "shape":"TokenModelType",
+          "documentation":"<p>The access token for the forgotten device request.</p>"
+        },
+        "DeviceKey":{
+          "shape":"DeviceKeyType",
+          "documentation":"<p>The device key.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to forget the device.</p>"
+    },
     "ForgotPasswordRequest":{
       "type":"structure",
       "required":[
@@ -1427,6 +2310,32 @@
       "documentation":"<p>Respresents the response from the server regarding the request to reset a password.</p>"
     },
     "GenerateSecret":{"type":"boolean"},
+    "GetDeviceRequest":{
+      "type":"structure",
+      "required":["DeviceKey"],
+      "members":{
+        "DeviceKey":{
+          "shape":"DeviceKeyType",
+          "documentation":"<p>The device key.</p>"
+        },
+        "AccessToken":{
+          "shape":"TokenModelType",
+          "documentation":"<p>The access token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to get the device.</p>"
+    },
+    "GetDeviceResponse":{
+      "type":"structure",
+      "required":["Device"],
+      "members":{
+        "Device":{
+          "shape":"DeviceType",
+          "documentation":"<p>The device.</p>"
+        }
+      },
+      "documentation":"<p>Gets the device response.</p>"
+    },
     "GetUserAttributeVerificationCodeRequest":{
       "type":"structure",
       "required":["AttributeName"],
@@ -1484,6 +2393,67 @@
       },
       "documentation":"<p>Represents the response from the server from the request to get information about the user.</p>"
     },
+    "GlobalSignOutRequest":{
+      "type":"structure",
+      "members":{
+        "AccessToken":{
+          "shape":"TokenModelType",
+          "documentation":"<p>The access token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to sign out all devices.</p>"
+    },
+    "GlobalSignOutResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The response to the request to sign out all devices.</p>"
+    },
+    "InitiateAuthRequest":{
+      "type":"structure",
+      "required":[
+        "AuthFlow",
+        "ClientId"
+      ],
+      "members":{
+        "AuthFlow":{
+          "shape":"AuthFlowType",
+          "documentation":"<p>The authentication flow.</p>"
+        },
+        "AuthParameters":{
+          "shape":"AuthParametersType",
+          "documentation":"<p>The authentication parameters.</p>"
+        },
+        "ClientMetadata":{
+          "shape":"ClientMetadataType",
+          "documentation":"<p>The client app's metadata.</p>"
+        },
+        "ClientId":{
+          "shape":"ClientIdType",
+          "documentation":"<p>The client ID.</p>"
+        }
+      },
+      "documentation":"<p>Initiates the authentication request.</p>"
+    },
+    "InitiateAuthResponse":{
+      "type":"structure",
+      "members":{
+        "ChallengeName":{
+          "shape":"ChallengeNameType",
+          "documentation":"<p>The name of the challenge.</p>"
+        },
+        "Session":{
+          "shape":"SessionType",
+          "documentation":"<p>The session.</p>"
+        },
+        "ChallengeParameters":{
+          "shape":"ChallengeParametersType",
+          "documentation":"<p>The challenge parameters.</p>"
+        },
+        "AuthenticationResult":{"shape":"AuthenticationResultType"}
+      },
+      "documentation":"<p>Initiates the authentication response.</p>"
+    },
     "IntegerType":{"type":"integer"},
     "InternalErrorException":{
       "type":"structure",
@@ -1496,6 +2466,17 @@
       "documentation":"<p>This exception is thrown when Amazon Cognito encounters an internal error.</p>",
       "exception":true,
       "fault":true
+    },
+    "InvalidEmailRoleAccessPolicyException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when you have an unverified email address or the identity policy is not set on an email address that Amazon Cognito can access.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when Amazon Cognito is not allowed to use your email identity. HTTP status code: 400.</p>",
+      "exception":true
     },
     "InvalidLambdaResponseException":{
       "type":"structure",
@@ -1530,6 +2511,39 @@
       "documentation":"<p>This exception is thrown when the Amazon Cognito service encounters an invalid password.</p>",
       "exception":true
     },
+    "InvalidSmsRoleAccessPolicyException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message retuned when the invalid SMS role access policy exception is thrown.</p>"
+        }
+      },
+      "documentation":"<p>This exception is returned when the role provided for SMS configuration does not have permission to publish using Amazon SNS.</p>",
+      "exception":true
+    },
+    "InvalidSmsRoleTrustRelationshipException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when the role trust relationship for the SMS message is invalid.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when the trust relationship is invalid for the role provided for SMS configuration. This can happen if you do not trust <b>cognito-idp.amazonaws.com</b> or the external ID provided in the role does not match what is provided in the SMS configuration for the user pool.</p>",
+      "exception":true
+    },
+    "InvalidUserPoolConfigurationException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when the user pool configuration is invalid.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when the user pool configuration is invalid.</p>",
+      "exception":true
+    },
     "LambdaConfigType":{
       "type":"structure",
       "members":{
@@ -1552,6 +2566,18 @@
         "PostAuthentication":{
           "shape":"ArnType",
           "documentation":"<p>A post-authentication AWS Lambda trigger.</p>"
+        },
+        "DefineAuthChallenge":{
+          "shape":"ArnType",
+          "documentation":"<p>Defines the authentication challenge.</p>"
+        },
+        "CreateAuthChallenge":{
+          "shape":"ArnType",
+          "documentation":"<p>Creates an authentication challenge.</p>"
+        },
+        "VerifyAuthChallengeResponse":{
+          "shape":"ArnType",
+          "documentation":"<p>Verifies the authentication challenge response.</p>"
         }
       },
       "documentation":"<p>Specifies the type of configuration for AWS Lambda triggers.</p>"
@@ -1566,6 +2592,39 @@
       },
       "documentation":"<p>This exception is thrown when a user exceeds the limit for a requested AWS resource.</p>",
       "exception":true
+    },
+    "ListDevicesRequest":{
+      "type":"structure",
+      "required":["AccessToken"],
+      "members":{
+        "AccessToken":{
+          "shape":"TokenModelType",
+          "documentation":"<p>The access tokens for the request to list devices.</p>"
+        },
+        "Limit":{
+          "shape":"QueryLimitType",
+          "documentation":"<p>The limit of the device request.</p>"
+        },
+        "PaginationToken":{
+          "shape":"SearchPaginationTokenType",
+          "documentation":"<p>The pagination token for the list request.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to list the devices.</p>"
+    },
+    "ListDevicesResponse":{
+      "type":"structure",
+      "members":{
+        "Devices":{
+          "shape":"DeviceListType",
+          "documentation":"<p>The devices returned in the list devices response.</p>"
+        },
+        "PaginationToken":{
+          "shape":"SearchPaginationTokenType",
+          "documentation":"<p>The pagination token for the list device response.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response to list devices.</p>"
     },
     "ListUserPoolClientsRequest":{
       "type":"structure",
@@ -1609,7 +2668,7 @@
           "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
         },
         "MaxResults":{
-          "shape":"QueryLimitType",
+          "shape":"PoolQueryLimitType",
           "documentation":"<p>The maximum number of results you want the request to return when listing the user pools.</p>"
         }
       },
@@ -1649,9 +2708,9 @@
           "shape":"SearchPaginationTokenType",
           "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
         },
-        "UserStatus":{
-          "shape":"UserStatusType",
-          "documentation":"<p>The user status. Can be one of the following:</p> <ul> <li>UNCONFIRMED - User has been created but not confirmed.</li> <li>CONFIRMED - User has been confirmed.</li> <li>ARCHIVED - User is no longer active.</li> <li>COMPROMISED - User is disabled due to a potential security threat.</li> <li>UNKNOWN - User status is not known.</li> </ul>"
+        "Filter":{
+          "shape":"UserFilterType",
+          "documentation":"<p>The filter for the list users request.</p>"
         }
       },
       "documentation":"<p>Represents the request to list users.</p>"
@@ -1669,6 +2728,17 @@
         }
       },
       "documentation":"<p>The response from the request to list users.</p>"
+    },
+    "MFAMethodNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when Amazon Cognito throws an MFA method not found exception.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when Amazon Cognito cannot find a multi-factor authentication (MFA) method.</p>",
+      "exception":true
     },
     "MFAOptionListType":{
       "type":"list",
@@ -1689,6 +2759,20 @@
       "documentation":"<p>Specifies the different settings for multi-factor authentication (MFA).</p>"
     },
     "MessageType":{"type":"string"},
+    "NewDeviceMetadataType":{
+      "type":"structure",
+      "members":{
+        "DeviceKey":{
+          "shape":"DeviceKeyType",
+          "documentation":"<p>The device key.</p>"
+        },
+        "DeviceGroupKey":{
+          "shape":"StringType",
+          "documentation":"<p>The device group key.</p>"
+        }
+      },
+      "documentation":"<p>The new device metadata type.</p>"
+    },
     "NotAuthorizedException":{
       "type":"structure",
       "members":{
@@ -1716,7 +2800,8 @@
     },
     "PaginationKey":{
       "type":"string",
-      "min":1
+      "min":1,
+      "pattern":"[\\S]+"
     },
     "PaginationKeyType":{
       "type":"string",
@@ -1754,12 +2839,28 @@
       },
       "documentation":"<p>The password policy type.</p>"
     },
+    "PasswordResetRequiredException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when a password reset is required.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when a password reset is required.</p>",
+      "exception":true
+    },
     "PasswordType":{
       "type":"string",
       "max":256,
       "min":6,
       "pattern":"[\\S]+",
       "sensitive":true
+    },
+    "PoolQueryLimitType":{
+      "type":"integer",
+      "max":60,
+      "min":1
     },
     "QueryLimit":{
       "type":"integer",
@@ -1769,7 +2870,12 @@
     "QueryLimitType":{
       "type":"integer",
       "max":60,
-      "min":1
+      "min":0
+    },
+    "RefreshTokenValidityType":{
+      "type":"integer",
+      "max":3650,
+      "min":0
     },
     "ResendConfirmationCodeRequest":{
       "type":"structure",
@@ -1810,6 +2916,51 @@
       },
       "documentation":"<p>This exception is thrown when the Amazon Cognito service cannot find the requested resource.</p>",
       "exception":true
+    },
+    "RespondToAuthChallengeRequest":{
+      "type":"structure",
+      "required":[
+        "ClientId",
+        "ChallengeName"
+      ],
+      "members":{
+        "ClientId":{
+          "shape":"ClientIdType",
+          "documentation":"<p>The client ID.</p>"
+        },
+        "ChallengeName":{
+          "shape":"ChallengeNameType",
+          "documentation":"<p>The name of the challenge.</p>"
+        },
+        "Session":{
+          "shape":"SessionType",
+          "documentation":"<p>The session.</p>"
+        },
+        "ChallengeResponses":{
+          "shape":"ChallengeResponsesType",
+          "documentation":"<p>The responses to the authentication challenge.</p>"
+        }
+      },
+      "documentation":"<p>The request to respond to an authentication challenge.</p>"
+    },
+    "RespondToAuthChallengeResponse":{
+      "type":"structure",
+      "members":{
+        "ChallengeName":{
+          "shape":"ChallengeNameType",
+          "documentation":"<p>The challenge name.</p>"
+        },
+        "Session":{
+          "shape":"SessionType",
+          "documentation":"<p>The session.</p>"
+        },
+        "ChallengeParameters":{
+          "shape":"ChallengeParametersType",
+          "documentation":"<p>The challenge parameters.</p>"
+        },
+        "AuthenticationResult":{"shape":"AuthenticationResultType"}
+      },
+      "documentation":"<p>The response to respond to the authentication challenge.</p>"
     },
     "SchemaAttributeType":{
       "type":"structure",
@@ -1853,7 +3004,8 @@
     },
     "SearchPaginationTokenType":{
       "type":"string",
-      "min":1
+      "min":1,
+      "pattern":"[\\S]+"
     },
     "SearchedAttributeNamesListType":{
       "type":"list",
@@ -1865,6 +3017,11 @@
       "min":1,
       "pattern":"[\\w+=/]+",
       "sensitive":true
+    },
+    "SessionType":{
+      "type":"string",
+      "max":2048,
+      "min":20
     },
     "SetUserSettingsRequest":{
       "type":"structure",
@@ -1936,6 +3093,20 @@
       },
       "documentation":"<p>The response from the server for a registration request.</p>"
     },
+    "SmsConfigurationType":{
+      "type":"structure",
+      "members":{
+        "SnsCallerArn":{
+          "shape":"ArnType",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) caller.</p>"
+        },
+        "ExternalId":{
+          "shape":"StringType",
+          "documentation":"<p>The external ID.</p>"
+        }
+      },
+      "documentation":"<p>The SMS configuratoin type.</p>"
+    },
     "SmsVerificationMessageType":{
       "type":"string",
       "max":140,
@@ -1966,6 +3137,7 @@
     "StringType":{"type":"string"},
     "TokenModelType":{
       "type":"string",
+      "pattern":"[A-Za-z0-9-_=.]+",
       "sensitive":true
     },
     "TooManyFailedAttemptsException":{
@@ -2000,6 +3172,34 @@
       },
       "documentation":"<p>This exception gets thrown when the Amazon Cognito service encounters an unexpected exception with the AWS Lambda service.</p>",
       "exception":true
+    },
+    "UpdateDeviceStatusRequest":{
+      "type":"structure",
+      "required":[
+        "AccessToken",
+        "DeviceKey"
+      ],
+      "members":{
+        "AccessToken":{
+          "shape":"TokenModelType",
+          "documentation":"<p>The access token.</p>"
+        },
+        "DeviceKey":{
+          "shape":"DeviceKeyType",
+          "documentation":"<p>The device key.</p>"
+        },
+        "DeviceRememberedStatus":{
+          "shape":"DeviceRememberedStatusType",
+          "documentation":"<p>The status of whether a device is remembered.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to update the device status.</p>"
+    },
+    "UpdateDeviceStatusResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The response to the request to update the device status.</p>"
     },
     "UpdateUserAttributesRequest":{
       "type":"structure",
@@ -2044,6 +3244,22 @@
         "ClientName":{
           "shape":"ClientNameType",
           "documentation":"<p>The client name from the update user pool client request.</p>"
+        },
+        "RefreshTokenValidity":{
+          "shape":"RefreshTokenValidityType",
+          "documentation":"<p>The validity of the refresh token.</p>"
+        },
+        "ReadAttributes":{
+          "shape":"ClientPermissionListType",
+          "documentation":"<p>The read-only attributes of the user pool.</p>"
+        },
+        "WriteAttributes":{
+          "shape":"ClientPermissionListType",
+          "documentation":"<p>The writeable attributes of the user pool.</p>"
+        },
+        "ExplicitAuthFlows":{
+          "shape":"ExplicitAuthFlowsListType",
+          "documentation":"<p>Explicit authentication flows.</p>"
         }
       },
       "documentation":"<p>Represents the request to update the user pool client.</p>"
@@ -2097,6 +3313,18 @@
         "MfaConfiguration":{
           "shape":"UserPoolMfaType",
           "documentation":"<p>Can be one of the following values:</p> <ul> <li><code>OFF</code> - MFA tokens are not required and cannot be specified during user registration.</li> <li><code>ON</code> - MFA tokens are required for all user registrations. You can only specify required when you are initially creating a user pool.</li> <li><code>OPTIONAL</code> - Users have the option when registering to create an MFA token.</li> </ul>"
+        },
+        "DeviceConfiguration":{
+          "shape":"DeviceConfigurationType",
+          "documentation":"<p>Device configuration.</p>"
+        },
+        "EmailConfiguration":{
+          "shape":"EmailConfigurationType",
+          "documentation":"<p>Email configuration.</p>"
+        },
+        "SmsConfiguration":{
+          "shape":"SmsConfigurationType",
+          "documentation":"<p>SMS configuration.</p>"
         }
       },
       "documentation":"<p>Represents the request to update the user pool.</p>"
@@ -2107,6 +3335,10 @@
       },
       "documentation":"<p>Represents the response from the server when you make a request to update the user pool.</p>"
     },
+    "UserFilterType":{
+      "type":"string",
+      "max":256
+    },
     "UserLambdaValidationException":{
       "type":"structure",
       "members":{
@@ -2116,6 +3348,28 @@
         }
       },
       "documentation":"<p>This exception gets thrown when the Amazon Cognito service encounters a user validation exception with the AWS Lambda service.</p>",
+      "exception":true
+    },
+    "UserNotConfirmedException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when a user is not confirmed successfully.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when a user is not confirmed successfully.</p>",
+      "exception":true
+    },
+    "UserNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when a user is not found.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when a user is not found.</p>",
       "exception":true
     },
     "UserPoolClientDescription":{
@@ -2166,6 +3420,22 @@
         "CreationDate":{
           "shape":"DateType",
           "documentation":"<p>The creation date from the user pool request of the client type.</p>"
+        },
+        "RefreshTokenValidity":{
+          "shape":"RefreshTokenValidityType",
+          "documentation":"<p>The validity of the refresh token.</p>"
+        },
+        "ReadAttributes":{
+          "shape":"ClientPermissionListType",
+          "documentation":"<p>The Read-only attributes.</p>"
+        },
+        "WriteAttributes":{
+          "shape":"ClientPermissionListType",
+          "documentation":"<p>The writeable attributes.</p>"
+        },
+        "ExplicitAuthFlows":{
+          "shape":"ExplicitAuthFlowsListType",
+          "documentation":"<p>The explicit authentication flows.</p>"
         }
       },
       "documentation":"<p>A user pool of the client type.</p>"
@@ -2297,9 +3567,29 @@
           "shape":"UserPoolMfaType",
           "documentation":"<p>Can be one of the following values:</p> <ul> <li><code>OFF</code> - MFA tokens are not required and cannot be specified during user registration.</li> <li><code>ON</code> - MFA tokens are required for all user registrations. You can only specify required when you are initially creating a user pool.</li> <li><code>OPTIONAL</code> - Users have the option when registering to create an MFA token.</li> </ul>"
         },
+        "DeviceConfiguration":{
+          "shape":"DeviceConfigurationType",
+          "documentation":"<p>The device configuration.</p>"
+        },
         "EstimatedNumberOfUsers":{
           "shape":"IntegerType",
           "documentation":"<p>A number estimating the size of the user pool.</p>"
+        },
+        "EmailConfiguration":{
+          "shape":"EmailConfigurationType",
+          "documentation":"<p>The email configuration.</p>"
+        },
+        "SmsConfiguration":{
+          "shape":"SmsConfigurationType",
+          "documentation":"<p>The SMS configuration.</p>"
+        },
+        "SmsConfigurationFailure":{
+          "shape":"StringType",
+          "documentation":"<p>The reason why the SMS configuration cannot send the message(s) to your users.</p>"
+        },
+        "EmailConfigurationFailure":{
+          "shape":"StringType",
+          "documentation":"<p>The reason why the email configuration cannot send the messages to your users.</p>"
         }
       },
       "documentation":"<p>A container with information about the user pool type.</p>"
@@ -2311,7 +3601,8 @@
         "CONFIRMED",
         "ARCHIVED",
         "COMPROMISED",
-        "UNKNOWN"
+        "UNKNOWN",
+        "RESET_REQUIRED"
       ]
     },
     "UserType":{
@@ -2406,5 +3697,5 @@
       "documentation":"<p>A container representing the response from the server from the request to verify user attributes.</p>"
     }
   },
-  "documentation":"<p>You can create a user pool in Amazon Cognito Identity to manage directories and users. You can authenticate a user to obtain tokens related to user identity and access policies.</p> <p>This API reference provides information about user pools in Amazon Cognito Identity, which is a new capability that is available as a beta.</p>"
+  "documentation":"<p>You can create a user pool in Amazon Cognito Identity to manage directories and users. You can authenticate a user to obtain tokens related to user identity and access policies.</p> <p>This API reference provides information about user pools in Amazon Cognito Identity.</p> <p>For more information, see <a href=\"https://aws.amazon.com/cognito/\">Amazon Cognito</a>.</p>"
 }

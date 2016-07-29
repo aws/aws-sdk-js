@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "CognitoIdentityServiceProvider",
+  "description": "Introduces support for Your User Pools."
+}

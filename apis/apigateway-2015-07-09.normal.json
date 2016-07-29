@@ -293,7 +293,8 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"}
       ],
       "documentation":"<p>Represents a delete integration response.</p>"
     },
@@ -323,7 +324,8 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"}
       ],
       "documentation":"<p>Deletes an existing <a>MethodResponse</a> resource.</p>"
     },
@@ -977,7 +979,8 @@
         {"shape":"LimitExceededException"},
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
       ],
       "documentation":"<p>A feature of the Amazon API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.</p>"
     },
@@ -1343,6 +1346,7 @@
           "shape":"AuthorizerType",
           "documentation":"<p>[Required] The type of the authorizer. Currently, the only valid type is TOKEN.</p>"
         },
+        "providerARNs":{"shape":"ListOfARNs"},
         "authType":{
           "shape":"String",
           "documentation":"<p>Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.</p>"
@@ -1373,7 +1377,10 @@
     "AuthorizerType":{
       "type":"string",
       "documentation":"<p>The authorizer type. Only current value is TOKEN.</p>",
-      "enum":["TOKEN"]
+      "enum":[
+        "TOKEN",
+        "COGNITO_USER_POOLS"
+      ]
     },
     "Authorizers":{
       "type":"structure",
@@ -1526,7 +1533,6 @@
         "restApiId",
         "name",
         "type",
-        "authorizerUri",
         "identitySource"
       ],
       "members":{
@@ -1544,6 +1550,7 @@
           "shape":"AuthorizerType",
           "documentation":"<p>[Required] The type of the authorizer.</p>"
         },
+        "providerARNs":{"shape":"ListOfARNs"},
         "authType":{
           "shape":"String",
           "documentation":"<p>Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.</p>"
@@ -3004,6 +3011,10 @@
       "error":{"httpStatusCode":429},
       "exception":true
     },
+    "ListOfARNs":{
+      "type":"list",
+      "member":{"shape":"ProviderARN"}
+    },
     "ListOfApiKey":{
       "type":"list",
       "member":{"shape":"ApiKey"}
@@ -3294,6 +3305,7 @@
       "key":{"shape":"String"},
       "value":{"shape":"MapOfMethodSnapshot"}
     },
+    "ProviderARN":{"type":"string"},
     "PutIntegrationRequest":{
       "type":"structure",
       "required":[
@@ -3810,7 +3822,8 @@
           "shape":"String",
           "documentation":"<p>The policy JSON document returned by the <a>Authorizer</a></p>"
         },
-        "authorization":{"shape":"MapOfStringToList"}
+        "authorization":{"shape":"MapOfStringToList"},
+        "claims":{"shape":"MapOfStringToString"}
       },
       "documentation":"<p>Represents the response of the test invoke request in for a custom <a>Authorizer</a></p>"
     },

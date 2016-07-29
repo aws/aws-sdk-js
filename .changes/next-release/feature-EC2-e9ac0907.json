@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "EC2",
+  "description": "Enables resolution of DNS queries from a peered VPC to a private IP address."
+}
