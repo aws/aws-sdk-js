@@ -253,11 +253,8 @@ describe 'AWS.Request', ->
   if AWS.util.isNode()
     describe 'createReadStream', ->
       nstream = require('stream')
-
-      app = (req, resp) ->
-        resp.writeHead(200, {})
-        resp.write('FOOBARBAZQUX')
-        resp.end()
+      streamsApiVersion = AWS.HttpClient.streamsApiVersion
+      app = undefined; data = undefined; error = undefined
 
       getport = (cb, startport) ->
         port = startport or 45678
@@ -270,35 +267,113 @@ describe 'AWS.Request', ->
       server = require('http').createServer (req, resp) ->
         app(req, resp)
 
+      server.setTimeout(1)
+
       beforeEach (done) ->
+        data = ''; error = null
+
+        app = (req, resp) ->
+          resp.writeHead(200, {})
+          resp.write('FOOBARBAZQUX')
+          resp.end()
+
         getport (port) ->
           server.listen(port)
           service = new MockService(endpoint: 'http://localhost:' + port)
           done()
 
       afterEach ->
+        AWS.HttpClient.streamsApiVersion = streamsApiVersion
         server.close()
 
       it 'streams data', (done) ->
-        data = ''
-        helpers.spyOn(AWS.HttpClient, 'streamsApiVersion').andReturn 1
+        AWS.HttpClient.streamsApiVersion = 1
 
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
-        s.on 'end', -> done = true
+        s.on 'error', (e) ->
+          error = e
+          # should fail because 'error' should not be emitted
+          expect(error).to.be.null
         s.on 'data', (c) -> data += c.toString()
-        request.on 'complete', ->
+        s.on 'end', ->
+          expect(error).to.be.null
           expect(data).to.equal('FOOBARBAZQUX')
+          done()
+
+      it 'succeeds when stream length matches content-length header', (done) ->
+        AWS.HttpClient.streamsApiVersion = 1
+
+        app = (req, resp) ->
+          resp.writeHead(200, {'content-length': '12'})
+          resp.write('FOOBARBAZQUX')
+          resp.end()
+
+        request = service.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'error', (e) ->
+          error = e
+          # should fail because 'error' should not be emitted
+          expect(error).to.be.null
+        s.on 'data', (c) -> data += c.toString()
+        s.on 'end', ->
+          expect(error).to.be.null
+          expect(data).to.equal('FOOBARBAZQUX')
+          done()
+
+      it 'emits error when stream length is less than content-length header', (done) ->
+        AWS.HttpClient.streamsApiVersion = 1
+
+        app = (req, resp) ->
+          resp.writeHead(200, {'content-length': '13'})
+          resp.write('FOOBARBAZQUX')
+          resp.end()
+
+        request = service.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'data', (c) -> data += c.toString()
+        s.on 'end', (a) ->
+          # will fail if 'error' was not emitted
+          expect(error).to.not.be.null
+        s.on 'error', (e) ->
+          error = e
+          expect(error).to.not.be.null
+          expect(error.code).to.equal('StreamContentLengthMismatch')
+          expect(data).to.equal('FOOBARBAZQUX')
+          done()
+
+      it 'only accepts data up to the specified content-length', (done) ->
+        AWS.HttpClient.streamsApiVersion = 1
+
+        app = (req, resp) ->
+          resp.writeHead(200, {'content-length': '11'})
+          resp.write('FOOBARBAZQUX')
+          resp.end()
+
+        request = service.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'error', (e) ->
+          error = e
+          # should fail because 'error' should not be emitted
+          expect(error).to.be.null
+        s.on 'data', (c) -> data += c.toString()
+        s.on 'end', ->
+          expect(error).to.be.null
+          expect(data).to.equal('FOOBARBAZQU')
           done()
 
       it 'streams2 data (readable event)', (done) ->
         if AWS.HttpClient.streamsApiVersion < 2
           return done()
 
-        data = ''
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
+        s.on 'error', (e) ->
+          error = e
+          # should fail because 'error' should not be emitted
+          expect(error).to.be.null
         s.on 'end', ->
+          expect(error).to.be.null
           expect(data).to.equal('FOOBARBAZQUX')
           done()
         s.on 'readable', ->
@@ -309,15 +384,79 @@ describe 'AWS.Request', ->
           catch e
             console.log(e.stack)
 
-      it 'streams2 data does not hang out while waiting response', (done) ->
+      it 'succeeds when streams2 length matches content-length header', (done) ->
         if AWS.HttpClient.streamsApiVersion < 2
           return done()
 
-        data = ''
+        app = (req, resp) ->
+          resp.writeHead(200, {'content-length': '12'})
+          resp.write('FOOBARBAZQUX')
+          resp.end()
+
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
+        s.on 'error', (e) ->
+          error = e
+          # should fail because 'error' should not be emitted
+          expect(error).to.be.null
         s.on 'end', ->
+          expect(error).to.be.null
           expect(data).to.equal('FOOBARBAZQUX')
+          done()
+        s.on 'readable', ->
+          try
+            chunk = s.read()
+            if chunk
+              data += chunk
+          catch e
+            console.log(e.stack)
+
+      it 'emits error when streams2 length is less than content-length header', (done) ->
+        if AWS.HttpClient.streamsApiVersion < 2
+          return done()
+
+        app = (req, resp) ->
+          resp.writeHead(200, {'content-length': '13'})
+          resp.write('FOOBARBAZQUX')
+          resp.end()
+
+        request = service.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'error', (e) ->
+          error = e
+          expect(error).to.not.be.null
+          expect(error.code).to.equal('StreamContentLengthMismatch')
+          expect(data).to.equal('FOOBARBAZQUX')
+          done()
+        s.on 'end', ->
+          # will fail if 'error' was not emitted
+          expect(error).to.not.be.null
+        s.on 'readable', ->
+          try
+            chunk = s.read()
+            if chunk
+              data += chunk
+          catch e
+            console.log(e.stack)
+
+      it 'only accepts data up to the specified content-length', (done) ->
+        if AWS.HttpClient.streamsApiVersion < 2
+          return done()
+
+        app = (req, resp) ->
+          resp.writeHead(200, {'content-length': '11'})
+          resp.write('FOOBARBAZQUX')
+          resp.end()
+
+        request = service.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'error', (e) ->
+          error = e
+          # should fail because 'error' should not be emitted
+          expect(error).to.be.null
+        s.on 'end', ->
+          expect(error).to.be.null
+          expect(data).to.equal('FOOBARBAZQU')
           done()
         s.on 'readable', ->
           try
@@ -328,21 +467,52 @@ describe 'AWS.Request', ->
             console.log(e.stack)
 
       it 'does not stream data on failures', (done) ->
-        data = ''; error = null
+        AWS.HttpClient.streamsApiVersion = 1
         app = (req, resp) ->
           resp.writeHead(404, {})
           resp.end()
 
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
-        s.on 'error', (error) ->
-          expect(data).to.equal('')
+        s.on 'error', (e) ->
+          error = e
+          expect(error).to.not.be.null
           expect(error.statusCode).to.equal(404)
+          expect(data).to.equal('')
           done()
+        s.on 'end', ->
+          # will fail if 'error' not emitted
+          expect(error).to.not.be.null
         s.on 'data', (c) -> data += c.toString()
 
+      it 'does not stream data on failures for streams2', (done) ->
+        if AWS.HttpClient.streamsApiVersion < 2
+          return done()
+
+        app = (req, resp) ->
+          resp.writeHead(404, {})
+          resp.end()
+
+        request = service.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'error', (e) ->
+          error = e
+          expect(error).to.not.be.null
+          expect(error.statusCode).to.equal(404)
+          expect(data).to.equal('')
+          done()
+        s.on 'end', ->
+          # will fail if 'error' not emitted
+          expect(error).to.not.be.null
+        s.on 'readable', ->
+          try
+            chunk = s.read()
+            if chunk
+              data += chunk
+          catch e
+            console.log(e.stack)
+
       it 'retries temporal errors and streams resulting successful response', (done) ->
-        data = ''; error = null
         errs = 0
         app = (req, resp) ->
           status = if errs < 2 then 500 else 200
@@ -350,6 +520,8 @@ describe 'AWS.Request', ->
           resp.writeHead(status, {})
           if status == 200
             resp.write('FOOBARBAZQUX')
+          else
+            resp.write('SOME_ERROR')
           resp.end()
 
         request = service.makeRequest('mockMethod')
@@ -357,12 +529,12 @@ describe 'AWS.Request', ->
         s.on 'error', (e) -> error = e
         s.on 'data', (c) -> data += c.toString()
         request.on 'complete', ->
+          expect(error).to.be.null
           expect(data).to.equal('FOOBARBAZQUX')
-          expect(error).to.equal(null)
           done()
 
       it 'streams partial data and raises an error', (done) ->
-        data = ''; error = null; reqError = null
+        reqError = null
         helpers.spyOn(AWS.HttpClient, 'getInstance')
         AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
           req = new EventEmitter()
@@ -395,7 +567,7 @@ describe 'AWS.Request', ->
         s.on 'data', (c) -> data += c.toString()
 
       it 'fails if retry occurs in the middle of a successful stream', (done) ->
-        data = ''; error = null; reqError = null; resp = null
+        reqError = null; resp = null
         retryCount = 0
         helpers.spyOn(AWS.HttpClient, 'getInstance')
         AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
