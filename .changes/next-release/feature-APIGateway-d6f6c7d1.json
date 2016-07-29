@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "APIGateway",
-  "description": "Adds support for authentication through Cognito User Pools."
-}

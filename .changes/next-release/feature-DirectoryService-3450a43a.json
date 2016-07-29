@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "DirectoryService",
-  "description": "Enables routing to on-premises public IP for Microsoft Active Directory."
-}
