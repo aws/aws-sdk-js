@@ -5598,6 +5598,10 @@
           "shape":"BooleanOptional",
           "documentation":"<p> Indicates that minor version upgrades will be applied automatically to the DB instance during the maintenance window. Changing this parameter does not result in an outage except in the following case and the change is asynchronously applied as soon as possible. An outage will result if this parameter is set to <code>true</code> during the maintenance window, and a newer minor version is available, and RDS has enabled auto patching for that engine version. </p>"
         },
+        "LicenseModel":{
+          "shape":"String",
+          "documentation":"<p>The license model for the DB instance.</p> <p>Valid values: <code>license-included</code> | <code>bring-your-own-license</code> | <code>general-public-license</code> </p>"
+        },
         "Iops":{
           "shape":"IntegerOptional",
           "documentation":"<p> The new Provisioned IOPS (I/O operations per second) value for the RDS instance. Changing this setting does not result in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value. If you are migrating from Provisioned IOPS to standard storage, set this value to 0. The DB instance will require a reboot for the change in storage type to take effect.</p> <p> <b>SQL Server</b> </p> <p>Setting the IOPS value for the SQL Server database engine is not supported.</p> <p>Type: Integer</p> <p>If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance.</p>"
@@ -5830,6 +5834,10 @@
           "shape":"IntegerOptional",
           "documentation":"<p>If required, the port configured for this option to use.</p>"
         },
+        "OptionVersion":{
+          "shape":"String",
+          "documentation":"<p>The version of the option.</p>"
+        },
         "OptionSettings":{
           "shape":"OptionSettingConfigurationList",
           "documentation":"<p>The option settings for this option.</p>"
@@ -5856,6 +5864,10 @@
         "Port":{
           "shape":"IntegerOptional",
           "documentation":"<p>The optional port for the option.</p>"
+        },
+        "OptionVersion":{
+          "shape":"String",
+          "documentation":"<p>The version for the option.</p>"
         },
         "DBSecurityGroupMemberships":{
           "shape":"DBSecurityGroupNameList",
@@ -6005,6 +6017,10 @@
         "OptionGroupOptionSettings":{
           "shape":"OptionGroupOptionSettingsList",
           "documentation":"<p>Specifies the option settings that are available (and the default value) for each option in an option group.</p>"
+        },
+        "OptionGroupOptionVersions":{
+          "shape":"OptionGroupOptionVersionsList",
+          "documentation":"<p>Specifies the versions that are available for the option.</p>"
         }
       },
       "documentation":"<p>Available option.</p>"
@@ -6044,6 +6060,13 @@
       "member":{
         "shape":"OptionGroupOptionSetting",
         "locationName":"OptionGroupOptionSetting"
+      }
+    },
+    "OptionGroupOptionVersionsList":{
+      "type":"list",
+      "member":{
+        "shape":"OptionVersion",
+        "locationName":"OptionVersion"
       }
     },
     "OptionGroupOptionsList":{
@@ -6157,6 +6180,20 @@
         "shape":"OptionSetting",
         "locationName":"OptionSetting"
       }
+    },
+    "OptionVersion":{
+      "type":"structure",
+      "members":{
+        "Version":{
+          "shape":"String",
+          "documentation":"<p>The version of the option.</p>"
+        },
+        "IsDefault":{
+          "shape":"Boolean",
+          "documentation":"<p>True if the version is the default version of the option; otherwise, false.</p>"
+        }
+      },
+      "documentation":"<p>The version for an option. Option group option versions are returned by the <a>DescribeOptionGroupOptions</a> action.</p>"
     },
     "OptionsDependedOn":{
       "type":"list",
@@ -6389,6 +6426,10 @@
         "EngineVersion":{
           "shape":"String",
           "documentation":"<p>Indicates the database engine version.</p>"
+        },
+        "LicenseModel":{
+          "shape":"String",
+          "documentation":"<p>The license model for the DB instance.</p> <p>Valid values: <code>license-included</code> | <code>bring-your-own-license</code> | <code>general-public-license</code> </p>"
         },
         "Iops":{
           "shape":"IntegerOptional",
@@ -7032,7 +7073,7 @@
         },
         "DBName":{
           "shape":"String",
-          "documentation":"<p>The database name for the restored DB instance.</p> <note> <p>This parameter doesn't apply to the MySQL or MariaDB engines.</p> </note>"
+          "documentation":"<p>The database name for the restored DB instance.</p> <note> <p>This parameter doesn't apply to the MySQL, PostgreSQL, or MariaDB engines.</p> </note>"
         },
         "Engine":{
           "shape":"String",
