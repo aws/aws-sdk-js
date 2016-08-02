@@ -1983,6 +1983,56 @@
       ],
       "documentation":"<p>List the device certificates signed by the specified CA certificate.</p>"
     },
+    "ListOutgoingCertificates":{
+      "name":"ListOutgoingCertificates",
+      "http":{
+        "method":"GET",
+        "requestUri":"/certificates-out-going"
+      },
+      "input":{
+        "shape":"ListOutgoingCertificatesRequest",
+        "documentation":"<p>The input to the ListOutgoingCertificates operation.</p>"
+      },
+      "output":{
+        "shape":"ListOutgoingCertificatesResponse",
+        "documentation":"<p>The output from the ListOutgoingCertificates operation.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The request is not valid.</p>"
+        },
+        {
+          "shape":"ThrottlingException",
+          "error":{"httpStatusCode":429},
+          "exception":true,
+          "documentation":"<p>The rate exceeds the limit.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "error":{"httpStatusCode":401},
+          "exception":true,
+          "documentation":"<p>You are not authorized to perform this operation.</p>"
+        },
+        {
+          "shape":"ServiceUnavailableException",
+          "error":{"httpStatusCode":503},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service is temporarily unavailable.</p>"
+        },
+        {
+          "shape":"InternalFailureException",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>An unexpected error has occurred.</p>"
+        }
+      ],
+      "documentation":"<p>Lists certificates that are being transfered but not yet accepted.</p>"
+    },
     "ListPolicies":{
       "name":"ListPolicies",
       "http":{
@@ -3107,6 +3157,7 @@
       "max":10
     },
     "AlarmName":{"type":"string"},
+    "AllowAutoRegistration":{"type":"boolean"},
     "AscendingOrder":{"type":"boolean"},
     "AttachPrincipalPolicyRequest":{
       "type":"structure",
@@ -3188,6 +3239,13 @@
       "key":{"shape":"AttributeName"},
       "value":{"shape":"AttributeValue"}
     },
+    "AutoRegistrationStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLE",
+        "DISABLE"
+      ]
+    },
     "AwsAccountId":{
       "type":"string",
       "pattern":"[0-9]{12}"
@@ -3244,6 +3302,10 @@
         "creationDate":{
           "shape":"DateType",
           "documentation":"<p>The date the CA certificate was created.</p>"
+        },
+        "autoRegistrationStatus":{
+          "shape":"AutoRegistrationStatus",
+          "documentation":"<p>Whether the CA certificate configured for auto registration of device certificates. Valid values are \"ENABLE\" and \"DISABLE\"</p>"
         }
       },
       "documentation":"<p>Describes a CA certificate.</p>"
@@ -3387,7 +3449,8 @@
         "INACTIVE",
         "REVOKED",
         "PENDING_TRANSFER",
-        "REGISTER_INACTIVE"
+        "REGISTER_INACTIVE",
+        "PENDING_ACTIVATION"
       ]
     },
     "CertificateValidationException":{
@@ -4598,6 +4661,44 @@
       },
       "documentation":"<p>The output of the ListCertificates operation.</p>"
     },
+    "ListOutgoingCertificatesRequest":{
+      "type":"structure",
+      "members":{
+        "pageSize":{
+          "shape":"PageSize",
+          "location":"querystring",
+          "locationName":"pageSize",
+          "documentation":"<p>The result page size.</p>"
+        },
+        "marker":{
+          "shape":"Marker",
+          "location":"querystring",
+          "locationName":"marker",
+          "documentation":"<p>The marker for the next set of results.</p>"
+        },
+        "ascendingOrder":{
+          "shape":"AscendingOrder",
+          "location":"querystring",
+          "locationName":"isAscendingOrder",
+          "documentation":"<p>Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.</p>"
+        }
+      },
+      "documentation":"<p>The input to the ListOutgoingCertificates operation.</p>"
+    },
+    "ListOutgoingCertificatesResponse":{
+      "type":"structure",
+      "members":{
+        "outgoingCertificates":{
+          "shape":"OutgoingCertificates",
+          "documentation":"<p>The certificates that are being transfered but not yet accepted.</p>"
+        },
+        "nextMarker":{
+          "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results.</p>"
+        }
+      },
+      "documentation":"<p>The output from the ListOutgoingCertificates operation.</p>"
+    },
     "ListPoliciesRequest":{
       "type":"structure",
       "members":{
@@ -5004,6 +5105,40 @@
     "MetricValue":{"type":"string"},
     "NextToken":{"type":"string"},
     "OptionalVersion":{"type":"long"},
+    "OutgoingCertificate":{
+      "type":"structure",
+      "members":{
+        "certificateArn":{
+          "shape":"CertificateArn",
+          "documentation":"<p>The certificate ARN.</p>"
+        },
+        "certificateId":{
+          "shape":"CertificateId",
+          "documentation":"<p>The certificate ID.</p>"
+        },
+        "transferredTo":{
+          "shape":"AwsAccountId",
+          "documentation":"<p>The AWS account to which the transfer was made.</p>"
+        },
+        "transferDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date the transfer was initiated.</p>"
+        },
+        "transferMessage":{
+          "shape":"Message",
+          "documentation":"<p>The transfer message.</p>"
+        },
+        "creationDate":{
+          "shape":"DateType",
+          "documentation":"<p>The certificate creation date.</p>"
+        }
+      },
+      "documentation":"<p>A certificate that has been transfered but not yet accepted.</p>"
+    },
+    "OutgoingCertificates":{
+      "type":"list",
+      "member":{"shape":"OutgoingCertificate"}
+    },
     "PageSize":{
       "type":"integer",
       "min":1,
@@ -5101,6 +5236,12 @@
           "location":"querystring",
           "locationName":"setAsActive",
           "documentation":"<p>A boolean value that specifies if the CA certificate is set to active.</p>"
+        },
+        "allowAutoRegistration":{
+          "shape":"AllowAutoRegistration",
+          "location":"querystring",
+          "locationName":"allowAutoRegistration",
+          "documentation":"<p>Allows this CA certificate to be used for auto registration of device certificates.</p>"
         }
       },
       "documentation":"<p>The input to the RegisterCACertificate operation.</p>"
@@ -5706,10 +5847,7 @@
     "UndoDeprecate":{"type":"boolean"},
     "UpdateCACertificateRequest":{
       "type":"structure",
-      "required":[
-        "certificateId",
-        "newStatus"
-      ],
+      "required":["certificateId"],
       "members":{
         "certificateId":{
           "shape":"CertificateId",
@@ -5722,6 +5860,12 @@
           "location":"querystring",
           "locationName":"newStatus",
           "documentation":"<p>The updated status of the CA certificate.</p> <p><b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
+        },
+        "newAutoRegistrationStatus":{
+          "shape":"AutoRegistrationStatus",
+          "location":"querystring",
+          "locationName":"newAutoRegistrationStatus",
+          "documentation":"<p>The new value for the auto registration status. Valid values are: \"ENABLE\" or \"DISABLE\".</p>"
         }
       },
       "documentation":"<p>The input to the UpdateCACertificate operation.</p>"
