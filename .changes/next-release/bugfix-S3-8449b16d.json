@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3",
-  "description": "Reverts behavior introduced in version `2.4.0` of the SDK to default the `signatureVersion` of S3 clients to `v4`. S3 clients instantiated without a user-defined `signatureVersion` will now default to `v2` unless the region only supports `v4` signing. This change is being made due to issues sending non-ascii characters in headers when using `v4` signing."
-}
