@@ -255,7 +255,7 @@
           "documentation":"<p>A second request to use or change an object was not allowed. This can result from retrying a request using a parameter that was not present in the original request.</p>"
         }
       ],
-      "documentation":"<p>Creates a new <code>MLModel</code> using the <code>DataSource</code> and the recipe as information sources. </p> <p>An <code>MLModel</code> is nearly immutable. Users can update only the <code>MLModelName</code> and the <code>ScoreThreshold</code> in an <code>MLModel</code> without creating a new <code>MLModel</code>. </p> <p><code>CreateMLModel</code> is an asynchronous operation. In response to <code>CreateMLModel</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>MLModel</code> status to <code>PENDING</code>. After the <code>MLModel</code> has been created and ready is for use, Amazon ML sets the status to <code>COMPLETED</code>. </p> <p>You can use the <code>GetMLModel</code> operation to check the progress of the <code>MLModel</code> during the creation operation.</p> <p> <code>CreateMLModel</code> requires a <code>DataSource</code> with computed statistics, which can be created by setting <code>ComputeStatistics</code> to <code>true</code> in <code>CreateDataSourcceFromRDS</code>, <code>CreateDataSourceFromS3</code>, or <code>CreateDataSourceFromRedshift</code> operations. </p>"
+      "documentation":"<p>Creates a new <code>MLModel</code> using the <code>DataSource</code> and the recipe as information sources. </p> <p>An <code>MLModel</code> is nearly immutable. Users can update only the <code>MLModelName</code> and the <code>ScoreThreshold</code> in an <code>MLModel</code> without creating a new <code>MLModel</code>. </p> <p><code>CreateMLModel</code> is an asynchronous operation. In response to <code>CreateMLModel</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>MLModel</code> status to <code>PENDING</code>. After the <code>MLModel</code> has been created and ready is for use, Amazon ML sets the status to <code>COMPLETED</code>. </p> <p>You can use the <code>GetMLModel</code> operation to check the progress of the <code>MLModel</code> during the creation operation.</p> <p> <code>CreateMLModel</code> requires a <code>DataSource</code> with computed statistics, which can be created by setting <code>ComputeStatistics</code> to <code>true</code> in <code>CreateDataSourceFromRDS</code>, <code>CreateDataSourceFromS3</code>, or <code>CreateDataSourceFromRedshift</code> operations. </p>"
     },
     "CreateRealtimeEndpoint":{
       "name":"CreateRealtimeEndpoint",
@@ -1054,7 +1054,12 @@
         "Message":{
           "shape":"Message",
           "documentation":"<p>A description of the most recent details about processing the batch prediction request.</p>"
-        }
+        },
+        "ComputeTime":{"shape":"LongType"},
+        "FinishedAt":{"shape":"EpochTime"},
+        "StartedAt":{"shape":"EpochTime"},
+        "TotalRecordCount":{"shape":"LongType"},
+        "InvalidRecordCount":{"shape":"LongType"}
       },
       "documentation":"<p> Represents the output of a <code>GetBatchPrediction</code> operation.</p> <p> The content consists of the detailed metadata, the status, and the data file information of a <code>Batch Prediction</code>.</p>"
     },
@@ -1406,7 +1411,10 @@
         "ComputeStatistics":{
           "shape":"ComputeStatistics",
           "documentation":"<p> The parameter is <code>true</code> if statistics need to be generated from the observation data. </p>"
-        }
+        },
+        "ComputeTime":{"shape":"LongType"},
+        "FinishedAt":{"shape":"EpochTime"},
+        "StartedAt":{"shape":"EpochTime"}
       },
       "documentation":"<p> Represents the output of the <code>GetDataSource</code> operation. </p> <p> The content consists of the detailed metadata and data file information and the current status of the <code>DataSource</code>. </p>"
     },
@@ -1978,7 +1986,10 @@
         "Message":{
           "shape":"Message",
           "documentation":"<p>A description of the most recent details about evaluating the <code>MLModel</code>.</p>"
-        }
+        },
+        "ComputeTime":{"shape":"LongType"},
+        "FinishedAt":{"shape":"EpochTime"},
+        "StartedAt":{"shape":"EpochTime"}
       },
       "documentation":"<p> Represents the output of <code>GetEvaluation</code> operation. </p> <p>The content consists of the detailed metadata and data file information and the current status of the <code>Evaluation</code>.</p>"
     },
@@ -2060,6 +2071,26 @@
         "Message":{
           "shape":"Message",
           "documentation":"<p>A description of the most recent details about processing the batch prediction request.</p>"
+        },
+        "ComputeTime":{
+          "shape":"LongType",
+          "documentation":"<p>The approximate CPU time in milliseconds that Amazon Machine Learning spent processing the <code>BatchPrediction</code>, normalized and scaled on computation resources. <code>ComputeTime</code> is only available if the <code>BatchPrediction</code> is in the <code>COMPLETED</code> state.</p>"
+        },
+        "FinishedAt":{
+          "shape":"EpochTime",
+          "documentation":"<p>The epoch time when Amazon Machine Learning marked the <code>BatchPrediction</code> as <code>COMPLETED</code> or <code>FAILED</code>. <code>FinishedAt</code> is only available when the <code>BatchPrediction</code> is in the <code>COMPLETED</code> or <code>FAILED</code> state.</p>"
+        },
+        "StartedAt":{
+          "shape":"EpochTime",
+          "documentation":"<p>The epoch time when Amazon Machine Learning marked the <code>BatchPrediction</code> as <code>INPROGRESS</code>. <code>StartedAt</code> isn't available if the <code>BatchPrediction</code> is in the <code>PENDING</code> state.</p>"
+        },
+        "TotalRecordCount":{
+          "shape":"LongType",
+          "documentation":"<p>The number of total records that Amazon Machine Learning saw while processing the <code>BatchPrediction</code>.</p>"
+        },
+        "InvalidRecordCount":{
+          "shape":"LongType",
+          "documentation":"<p>The number of invalid records that Amazon Machine Learning saw while processing the <code>BatchPrediction</code>.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>GetBatchPrediction</code> operation and describes a <code>BatchPrediction</code>.</p>"
@@ -2136,6 +2167,18 @@
           "shape":"ComputeStatistics",
           "documentation":"<p> The parameter is <code>true</code> if statistics need to be generated from the observation data. </p>"
         },
+        "ComputeTime":{
+          "shape":"LongType",
+          "documentation":"<p>The approximate CPU time in milliseconds that Amazon Machine Learning spent processing the <code>DataSource</code>, normalized and scaled on computation resources. <code>ComputeTime</code> is only available if the <code>DataSource</code> is in the <code>COMPLETED</code> state and the <code>ComputeStatistics</code> is set to true.</p>"
+        },
+        "FinishedAt":{
+          "shape":"EpochTime",
+          "documentation":"<p>The epoch time when Amazon Machine Learning marked the <code>DataSource</code> as <code>COMPLETED</code> or <code>FAILED</code>. <code>FinishedAt</code> is only available when the <code>DataSource</code> is in the <code>COMPLETED</code> or <code>FAILED</code> state.</p>"
+        },
+        "StartedAt":{
+          "shape":"EpochTime",
+          "documentation":"<p>The epoch time when Amazon Machine Learning marked the <code>DataSource</code> as <code>INPROGRESS</code>. <code>StartedAt</code> isn't available if the <code>DataSource</code> is in the <code>PENDING</code> state.</p>"
+        },
         "DataSourceSchema":{
           "shape":"DataSchema",
           "documentation":"<p>The schema used by all of the data files of this <code>DataSource</code>.</p> <note><title>Note</title> <p>This parameter is provided as part of the verbose format.</p></note>"
@@ -2182,7 +2225,7 @@
         },
         "LastUpdatedAt":{
           "shape":"EpochTime",
-          "documentation":"<p>The time of the most recent edit to the <code>BatchPrediction</code>. The time is expressed in epoch time.</p>"
+          "documentation":"<p>The time of the most recent edit to the <code>Evaluation</code>. The time is expressed in epoch time.</p>"
         },
         "Name":{
           "shape":"EntityName",
@@ -2203,6 +2246,18 @@
         "Message":{
           "shape":"Message",
           "documentation":"<p>A description of the most recent details about evaluating the <code>MLModel</code>.</p>"
+        },
+        "ComputeTime":{
+          "shape":"LongType",
+          "documentation":"<p>The approximate CPU time in milliseconds that Amazon Machine Learning spent processing the <code>Evaluation</code>, normalized and scaled on computation resources. <code>ComputeTime</code> is only available if the <code>Evaluation</code> is in the <code>COMPLETED</code> state.</p>"
+        },
+        "FinishedAt":{
+          "shape":"EpochTime",
+          "documentation":"<p>The epoch time when Amazon Machine Learning marked the <code>Evaluation</code> as <code>COMPLETED</code> or <code>FAILED</code>. <code>FinishedAt</code> is only available when the <code>Evaluation</code> is in the <code>COMPLETED</code> or <code>FAILED</code> state.</p>"
+        },
+        "StartedAt":{
+          "shape":"EpochTime",
+          "documentation":"<p>The epoch time when Amazon Machine Learning marked the <code>Evaluation</code> as <code>INPROGRESS</code>. <code>StartedAt</code> isn't available if the <code>Evaluation</code> is in the <code>PENDING</code> state.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>GetEvaluation</code> operation and describes an <code>Evaluation</code>.</p>"
@@ -2284,6 +2339,18 @@
         "Message":{
           "shape":"Message",
           "documentation":"<p>A description of the most recent details about accessing the <code>MLModel</code>.</p>"
+        },
+        "ComputeTime":{
+          "shape":"LongType",
+          "documentation":"<p>The approximate CPU time in milliseconds that Amazon Machine Learning spent processing the <code>MLModel</code>, normalized and scaled on computation resources. <code>ComputeTime</code> is only available if the <code>MLModel</code> is in the <code>COMPLETED</code> state.</p>"
+        },
+        "FinishedAt":{
+          "shape":"EpochTime",
+          "documentation":"<p>The epoch time when Amazon Machine Learning marked the <code>MLModel</code> as <code>COMPLETED</code> or <code>FAILED</code>. <code>FinishedAt</code> is only available when the <code>MLModel</code> is in the <code>COMPLETED</code> or <code>FAILED</code> state.</p>"
+        },
+        "StartedAt":{
+          "shape":"EpochTime",
+          "documentation":"<p>The epoch time when Amazon Machine Learning marked the <code>MLModel</code> as <code>INPROGRESS</code>. <code>StartedAt</code> isn't available if the <code>MLModel</code> is in the <code>PENDING</code> state.</p>"
         },
         "Recipe":{
           "shape":"Recipe",
@@ -2416,7 +2483,10 @@
         "Message":{
           "shape":"Message",
           "documentation":"<p>A description of the most recent details about accessing the <code>MLModel</code>.</p>"
-        }
+        },
+        "ComputeTime":{"shape":"LongType"},
+        "FinishedAt":{"shape":"EpochTime"},
+        "StartedAt":{"shape":"EpochTime"}
       },
       "documentation":"<p> Represents the output of a <code>GetMLModel</code> operation. </p> <p>The content consists of the detailed metadata and the current status of the <code>MLModel</code>.</p>"
     },
@@ -2538,7 +2608,7 @@
       "members":{
         "DatabaseInformation":{
           "shape":"RDSDatabase",
-          "documentation":"<p>Describes the <code>DatabaseName</code> and <code>InstanceIdentifier</code> of an an Amazon RDS database.</p>"
+          "documentation":"<p>Describes the <code>DatabaseName</code> and <code>InstanceIdentifier</code> of an Amazon RDS database.</p>"
         },
         "SelectSqlQuery":{
           "shape":"RDSSelectSqlQuery",
@@ -2904,7 +2974,8 @@
     },
     "TagKeyList":{
       "type":"list",
-      "member":{"shape":"TagKey"}
+      "member":{"shape":"TagKey"},
+      "max":100
     },
     "TagLimitExceededException":{
       "type":"structure",
@@ -2915,7 +2986,8 @@
     },
     "TagList":{
       "type":"list",
-      "member":{"shape":"Tag"}
+      "member":{"shape":"Tag"},
+      "max":100
     },
     "TagValue":{
       "type":"string",

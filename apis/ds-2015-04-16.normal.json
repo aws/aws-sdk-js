@@ -2067,7 +2067,7 @@
         },
         "SharedSecret":{
           "shape":"RadiusSharedSecret",
-          "documentation":"<p>The shared secret code that was specified when your RADIUS endpoints were created.</p>"
+          "documentation":"<p>Not currently used.</p>"
         },
         "AuthenticationProtocol":{
           "shape":"RadiusAuthenticationProtocol",
