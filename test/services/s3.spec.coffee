@@ -143,10 +143,15 @@ describe 'AWS.S3', ->
           expect(getVersion(s3.getSignerClass())).to.equal('s3')
           done()
 
+        it 'user does not specify a signatureVersion and region supports v2', (done) ->
+          s3 = new AWS.S3({region: 'us-east-1'})
+          expect(getVersion(s3.getSignerClass())).to.equal('s3')
+          done()  
+
       describe 'will return a v4 signer when', ->
 
-        it 'user does not specify a signatureVersion', (done) ->
-          s3 = new AWS.S3()
+        it 'user does not specify a signatureVersion and region only supports v4', (done) ->
+          s3 = new AWS.S3({region: 'eu-central-1'})
           expect(getVersion(s3.getSignerClass())).to.equal('v4')
           done()
 
