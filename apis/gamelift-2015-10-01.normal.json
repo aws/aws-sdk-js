@@ -9,7 +9,7 @@
     "targetPrefix":"GameLift",
     "protocol":"json"
   },
-  "documentation":"<fullname>Amazon GameLift Service</fullname> <p>Welcome to the <i>Amazon GameLift API Reference</i>. Amazon GameLift is a managed Amazon Web Services (AWS) service for developers who need a scalable, server-based solution for multiplayer games. Amazon GameLift provides setup and deployment of game servers, and handles infrastructure scaling and session management.</p> <p>This reference describes the low-level service API for GameLift. You can call this API directly or use the <a href=\"https://aws.amazon.com/tools/\">AWS SDK</a> for your preferred language. The AWS SDK includes a set of high-level GameLift actions multiplayer game sessions. Alternatively, you can use the <a href=\"https://aws.amazon.com/cli/\">AWS command-line interface</a> (CLI) tool, which includes commands for GameLift. For administrative actions, you can also use the Amazon GameLift console. </p> <p><b>More Resources</b></p> <ul> <li> <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a>: Learn more about GameLift features and how to use them </li> <li> <a href=\"https://gamedev.amazon.com/forums/tutorials\">Lumberyard and GameLift Tutorials</a>: Get started fast with walkthroughs and sample projects</li> <li> <a href=\"https://aws.amazon.com/blogs/gamedev/\">GameDev Blog</a>: Stay up to date with new features and techniques</li> <li> <a href=\"https://gamedev.amazon.com/forums/spaces/123/gamelift-discussion.html\">GameDev Forums</a>: Connect with the GameDev community</li> </ul> <p><b>Manage Games and Players Through GameLift</b></p> <p>Call these actions from your game clients and/or services to create and manage multiplayer game sessions and player sessions.</p> <ul> <li> <b>Game sessions</b> <ul> <li><a>CreateGameSession</a></li> <li><a>DescribeGameSessions</a></li> <li><a>DescribeGameSessionDetails</a></li> <li><a>UpdateGameSession</a></li> </ul> </li> <li> <b>Player sessions</b> <ul> <li><a>CreatePlayerSession</a></li> <li><a>CreatePlayerSessions</a></li> <li><a>DescribePlayerSessions</a></li> </ul> </li> <li> <b>Other actions:</b> <ul> <li><a>GetGameSessionLogUrl</a></li> </ul> </li> </ul> <p><b>Set Up and Manage Game Servers</b></p> <p>Use these administrative actions to configure GameLift to host your game servers. When setting up GameLift, you'll need to (1) configure a build for your game and upload build files, and (2) set up one or more fleets to host game sessions. Once you've created and activated a fleet, you can assign aliases to it, scale capacity, track performance and utilization, etc.</p> <ul> <li> <b>Manage your builds:</b> <ul> <li><a>ListBuilds</a></li> <li><a>CreateBuild</a></li> <li><a>DescribeBuild</a></li> <li><a>UpdateBuild</a></li> <li><a>DeleteBuild</a></li> <li><a>RequestUploadCredentials</a></li> </ul> </li> <li> <b>Manage your fleets:</b> <ul> <li><a>ListFleets</a></li> <li><a>CreateFleet</a></li> <li>Describe fleets: <ul> <li><a>DescribeFleetAttributes</a></li> <li><a>DescribeFleetCapacity</a></li> <li><a>DescribeFleetPortSettings</a></li> <li><a>DescribeFleetUtilization</a></li> <li><a>DescribeEC2InstanceLimits</a></li> <li><a>DescribeFleetEvents</a></li> <li><a>DescribeRuntimeConfiguration</a></li> </ul> </li> <li>Update fleets: <ul> <li><a>UpdateFleetAttributes</a></li> <li><a>UpdateFleetCapacity</a></li> <li><a>UpdateFleetPortSettings</a></li> <li><a>UpdateRuntimeConfiguration</a></li> </ul> </li> <li><a>DeleteFleet</a></li> </ul> </li> <li> <b>Manage fleet aliases:</b> <ul> <li><a>ListAliases</a></li> <li><a>CreateAlias</a></li> <li><a>DescribeAlias</a></li> <li><a>UpdateAlias</a></li> <li><a>DeleteAlias</a></li> <li><a>ResolveAlias</a></li> </ul> </li> <li> <b>Manage autoscaling:</b> <ul> <li><a>PutScalingPolicy</a></li> <li><a>DescribeScalingPolicies</a></li> <li><a>DeleteScalingPolicy</a></li> </ul> </li> </ul> <p>To view changes to the API, see the GameLift <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/doc-history.html\">Document History</a> page.</p>",
+  "documentation":"<fullname>Amazon GameLift Service</fullname> <p>Welcome to the <i>Amazon GameLift API Reference</i>. Amazon GameLift is a managed Amazon Web Services (AWS) service for developers who need a scalable, server-based solution for multiplayer games. Amazon GameLift provides setup and deployment of game servers, and handles infrastructure scaling and session management.</p> <p>This reference describes the low-level service API for GameLift. You can call this API directly or use the <a href=\"https://aws.amazon.com/tools/\">AWS SDK</a> for your preferred language. The AWS SDK includes a set of high-level GameLift actions multiplayer game sessions. Alternatively, you can use the <a href=\"https://aws.amazon.com/cli/\">AWS command-line interface</a> (CLI) tool, which includes commands for GameLift. For administrative actions, you can also use the Amazon GameLift console. </p> <p><b>More Resources</b></p> <ul> <li> <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a>: Learn more about GameLift features and how to use them </li> <li> <a href=\"https://gamedev.amazon.com/forums/tutorials\">Lumberyard and GameLift Tutorials</a>: Get started fast with walkthroughs and sample projects</li> <li> <a href=\"https://aws.amazon.com/blogs/gamedev/\">GameDev Blog</a>: Stay up to date with new features and techniques</li> <li> <a href=\"https://gamedev.amazon.com/forums/spaces/123/gamelift-discussion.html\">GameDev Forums</a>: Connect with the GameDev community</li> </ul> <p><b>Manage Games and Players Through GameLift</b></p> <p>Call these actions from your game clients and/or services to create and manage multiplayer game sessions and player sessions.</p> <ul> <li> <b>Game sessions</b> <ul> <li><a>CreateGameSession</a></li> <li><a>DescribeGameSessions</a></li> <li><a>DescribeGameSessionDetails</a></li> <li><a>UpdateGameSession</a></li> <li><a>SearchGameSessions</a></li> </ul> </li> <li> <b>Player sessions</b> <ul> <li><a>CreatePlayerSession</a></li> <li><a>CreatePlayerSessions</a></li> <li><a>DescribePlayerSessions</a></li> </ul> </li> <li> <b>Other actions:</b> <ul> <li><a>GetGameSessionLogUrl</a></li> </ul> </li> </ul> <p><b>Set Up and Manage Game Servers</b></p> <p>Use these administrative actions to configure GameLift to host your game servers. When setting up GameLift, you'll need to (1) configure a build for your game and upload build files, and (2) set up one or more fleets to host game sessions. Once you've created and activated a fleet, you can assign aliases to it, scale capacity, track performance and utilization, etc.</p> <ul> <li> <b>Manage your builds:</b> <ul> <li><a>ListBuilds</a></li> <li><a>CreateBuild</a></li> <li><a>DescribeBuild</a></li> <li><a>UpdateBuild</a></li> <li><a>DeleteBuild</a></li> <li><a>RequestUploadCredentials</a></li> </ul> </li> <li> <b>Manage your fleets:</b> <ul> <li><a>ListFleets</a></li> <li><a>CreateFleet</a></li> <li>Describe fleets: <ul> <li><a>DescribeFleetAttributes</a></li> <li><a>DescribeFleetCapacity</a></li> <li><a>DescribeFleetPortSettings</a></li> <li><a>DescribeFleetUtilization</a></li> <li><a>DescribeEC2InstanceLimits</a></li> <li><a>DescribeFleetEvents</a></li> <li><a>DescribeRuntimeConfiguration</a></li> </ul> </li> <li>Update fleets: <ul> <li><a>UpdateFleetAttributes</a></li> <li><a>UpdateFleetCapacity</a></li> <li><a>UpdateFleetPortSettings</a></li> <li><a>UpdateRuntimeConfiguration</a></li> </ul> </li> <li><a>DeleteFleet</a></li> </ul> </li> <li> <b>Manage fleet aliases:</b> <ul> <li><a>ListAliases</a></li> <li><a>CreateAlias</a></li> <li><a>DescribeAlias</a></li> <li><a>UpdateAlias</a></li> <li><a>DeleteAlias</a></li> <li><a>ResolveAlias</a></li> </ul> </li> <li> <b>Manage autoscaling:</b> <ul> <li><a>PutScalingPolicy</a></li> <li><a>DescribeScalingPolicies</a></li> <li><a>DeleteScalingPolicy</a></li> </ul> </li> </ul> <p>To view changes to the API, see the GameLift <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/doc-history.html\">Document History</a> page.</p>",
   "operations":{
     "CreateAlias":{
       "name":"CreateAlias",
@@ -92,7 +92,7 @@
           "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Clients can retry such requests, either immediately or after a back-off period.</p>"
         }
       ],
-      "documentation":"<p>Initializes a new build record and generates information required to upload a game build to Amazon GameLift. Once the build record has been created and is in an <code>INITIALIZED</code> state, you can upload your game build.</p> <important> <p>Do not use this API action unless you are using your own Amazon Simple Storage Service (Amazon S3) client and need to manually upload your build files. Instead, to create a build, use the CLI command <code>upload-build</code>, which creates a new build record and uploads the build files in one step. (See the <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a> for more details on the CLI and the upload process.) </p> </important> <p>To create a new build, optionally specify a build name and version. This metadata is stored with other properties in the build record and is displayed in the GameLift console (it is not visible to players). If successful, this action returns the newly created build record along with the Amazon S3 storage location and AWS account credentials. Use the location and credentials to upload your game build.</p>"
+      "documentation":"<p>Initializes a new build record and generates information required to upload a game build to Amazon GameLift. Once the build record has been created and its status is <code>INITIALIZED</code>, you can upload your game build.</p> <important> <p>Do not use this API action unless you are using your own Amazon Simple Storage Service (Amazon S3) client and need to manually upload your build files. Instead, to create a build, use the CLI command <code>upload-build</code>, which creates a new build record and uploads the build files in one step. (See the <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a> for more details on the CLI and the upload process.) </p> </important> <p>To create a new build, optionally specify a build name and version. This metadata is stored with other properties in the build record and is displayed in the GameLift console (it is not visible to players). If successful, this action returns the newly created build record along with the Amazon S3 storage location and AWS account credentials. Use the location and credentials to upload your game build.</p>"
     },
     "CreateFleet":{
       "name":"CreateFleet",
@@ -141,7 +141,7 @@
           "documentation":"<p>The client failed authentication. Clients should not retry such requests</p>"
         }
       ],
-      "documentation":"<p>Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see <a href=\"https://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for more information), and deploy a specified game build to each instance. A newly created fleet passes through several states; once it reaches the <code>ACTIVE</code> state, it can begin hosting game sessions.</p> <p>To create a new fleet, provide a fleet name, an EC2 instance type, and a build ID of the game build to deploy. You can also configure the new fleet with the following settings: (1) a runtime configuration describing what server processes to run on each instance in the fleet (required to create fleet), (2) access permissions for inbound traffic, (3) fleet-wide game session protection, and (4) the location of default log files for GameLift to upload and store. </p> <p>If the <code>CreateFleet</code> call is successful, Amazon GameLift performs the following tasks:</p> <ul> <li>Creates a fleet record and sets the state to <code>NEW</code> (followed by other states as the fleet is activated).</li> <li>Sets the fleet's capacity to 1 \"desired\", which causes GameLift to start one new EC2 instance.</li> <li>Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, GameLift staggers each launch by a few seconds.</li> <li>Begins writing events to the fleet event log, which can be accessed in the GameLift console.</li> <li>Sets the fleet's status to <code>ACTIVE</code> once one server process in the fleet is ready to host a game session.</li> </ul> <p>After a fleet is created, use the following actions to change fleet properties and configuration:</p> <ul> <li> <a>UpdateFleetAttributes</a> -- Update fleet metadata, including name and description.</li> <li> <a>UpdateFleetCapacity</a> -- Increase or decrease the number of instances you want the fleet to maintain.</li> <li> <a>UpdateFleetPortSettings</a> -- Change the IP address and port ranges that allow access to incoming traffic.</li> <li> <a>UpdateRuntimeConfiguration</a> -- Change how server processes are launched in the fleet, including launch path, launch parameters, and the number of concurrent processes.</li> </ul>"
+      "documentation":"<p>Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see <a href=\"https://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the <code>ACTIVE</code> status, it can begin hosting game sessions.</p> <p>To create a new fleet, provide a fleet name, an EC2 instance type, and a build ID of the game build to deploy. You can also configure the new fleet with the following settings: (1) a runtime configuration describing what server processes to run on each instance in the fleet (required to create fleet), (2) access permissions for inbound traffic, (3) fleet-wide game session protection, and (4) the location of default log files for GameLift to upload and store.</p> <p>If the <code>CreateFleet</code> call is successful, Amazon GameLift performs the following tasks:</p> <ul> <li>Creates a fleet record and sets the status to <code>NEW</code> (followed by other statuses as the fleet is activated).</li> <li>Sets the fleet's capacity to 1 \"desired\", which causes GameLift to start one new EC2 instance.</li> <li>Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, GameLift staggers each launch by a few seconds.</li> <li>Begins writing events to the fleet event log, which can be accessed in the GameLift console.</li> <li>Sets the fleet's status to <code>ACTIVE</code> once one server process in the fleet is ready to host a game session.</li> </ul> <p>After a fleet is created, use the following actions to change fleet properties and configuration:</p> <ul> <li> <a>UpdateFleetAttributes</a> -- Update fleet metadata, including name and description.</li> <li> <a>UpdateFleetCapacity</a> -- Increase or decrease the number of instances you want the fleet to maintain.</li> <li> <a>UpdateFleetPortSettings</a> -- Change the IP address and port ranges that allow access to incoming traffic.</li> <li> <a>UpdateRuntimeConfiguration</a> -- Change how server processes are launched in the fleet, including launch path, launch parameters, and the number of concurrent processes.</li> </ul>"
     },
     "CreateGameSession":{
       "name":"CreateGameSession",
@@ -182,7 +182,7 @@
         {
           "shape":"TerminalRoutingStrategyException",
           "exception":true,
-          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the routing strategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
         },
         {
           "shape":"InvalidRequestException",
@@ -200,7 +200,7 @@
           "documentation":"<p>The specified fleet has no available instances to fulfill a request to create a new game session. Such requests should only be retried once the fleet capacity has been increased. </p>"
         }
       ],
-      "documentation":"<p>Creates a multiplayer game session for players. This action creates a game session record and assigns the new session to an instance in the specified fleet, which initializes a new server process to host the game session. A fleet must be in an <code>ACTIVE</code> state before a game session can be created in it.</p> <p>To create a game session, specify either a fleet ID or an alias ID and indicate the maximum number of players the game session allows. You can also provide a name and a set of properties for your game (optional). If successful, a <a>GameSession</a> object is returned containing session properties, including an IP address. By default, newly created game sessions are set to accept adding any new players to the game session. Use <a>UpdateGameSession</a> to change the creation policy.</p>"
+      "documentation":"<p>Creates a multiplayer game session for players. This action creates a game session record and assigns the new session to an instance in the specified fleet, which initializes a new server process to host the game session. A fleet must be in an <code>ACTIVE</code> status before a game session can be created in it.</p> <p>To create a game session, specify either a fleet ID or an alias ID and indicate the maximum number of players the game session allows. You can also provide a name and a set of properties for your game (optional). If successful, a <a>GameSession</a> object is returned containing session properties, including an IP address. By default, newly created game sessions are set to accept adding any new players to the game session. Use <a>UpdateGameSession</a> to change the creation policy.</p>"
     },
     "CreatePlayerSession":{
       "name":"CreatePlayerSession",
@@ -241,7 +241,7 @@
         {
           "shape":"TerminalRoutingStrategyException",
           "exception":true,
-          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the routing strategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
         },
         {
           "shape":"InvalidRequestException",
@@ -254,7 +254,7 @@
           "documentation":"<p>A service resource associated with the request could not be found. Clients should not retry such requests</p>"
         }
       ],
-      "documentation":"<p>Adds a player to a game session and creates a player session record. A game session must be in an <code>ACTIVE</code> state, have a creation policy of <code>ALLOW_ALL</code>, and have an open player slot before players can be added to the session.</p> <p>To create a player session, specify a game session ID and player ID. If successful, the player is added to the game session and a new <a>PlayerSession</a> object is returned. </p>"
+      "documentation":"<p>Adds a player to a game session and creates a player session record. A game session must be in an <code>ACTIVE</code> status, have a creation policy of <code>ALLOW_ALL</code>, and have an open player slot before players can be added to the session.</p> <p>To create a player session, specify a game session ID and player ID. If successful, the player is added to the game session and a new <a>PlayerSession</a> object is returned. </p>"
     },
     "CreatePlayerSessions":{
       "name":"CreatePlayerSessions",
@@ -295,7 +295,7 @@
         {
           "shape":"TerminalRoutingStrategyException",
           "exception":true,
-          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the routing strategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
         },
         {
           "shape":"InvalidRequestException",
@@ -308,7 +308,7 @@
           "documentation":"<p>A service resource associated with the request could not be found. Clients should not retry such requests</p>"
         }
       ],
-      "documentation":"<p>Adds a group of players to a game session. Similar to <a>CreatePlayerSession</a>, this action allows you to add multiple players in a single call, which is useful for games that provide party and/or matchmaking features. A game session must be in an <code>ACTIVE</code> state, have a creation policy of <code>ALLOW_ALL</code>, and have an open player slot before players can be added to the session.</p> <p>To create player sessions, specify a game session ID and a list of player IDs. If successful, the players are added to the game session and a set of new <a>PlayerSession</a> objects is returned. </p>"
+      "documentation":"<p>Adds a group of players to a game session. Similar to <a>CreatePlayerSession</a>, this action allows you to add multiple players in a single call, which is useful for games that provide party and/or matchmaking features. A game session must be in an <code>ACTIVE</code> status, have a creation policy of <code>ALLOW_ALL</code>, and have an open player slot before players can be added to the session.</p> <p>To create player sessions, specify a game session ID and a list of player IDs. If successful, the players are added to the game session and a set of new <a>PlayerSession</a> objects is returned. </p>"
     },
     "DeleteAlias":{
       "name":"DeleteAlias",
@@ -801,7 +801,7 @@
         {
           "shape":"TerminalRoutingStrategyException",
           "exception":true,
-          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the routing strategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
         }
       ],
       "documentation":"<p>Retrieves properties, including the protection policy in force, for one or more game sessions. This action can be used in several ways: (1) provide a <code>GameSessionId</code> to request details for a specific game session; (2) provide either a <code>FleetId</code> or an <code>AliasId</code> to request properties for all game sessions running on a fleet. </p> <p>To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>GameSessionDetail</a> object is returned for each session matching the request.</p>"
@@ -845,7 +845,7 @@
         {
           "shape":"TerminalRoutingStrategyException",
           "exception":true,
-          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the routing strategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
         }
       ],
       "documentation":"<p>Retrieves properties for one or more game sessions. This action can be used in several ways: (1) provide a <code>GameSessionId</code> to request properties for a specific game session; (2) provide a <code>FleetId</code> or an <code>AliasId</code> to request properties for all game sessions running on a fleet. </p> <p>To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a <a>GameSession</a> object is returned for each session matching the request.</p>"
@@ -1072,7 +1072,7 @@
           "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Clients can retry such requests, either immediately or after a back-off period.</p>"
         }
       ],
-      "documentation":"<p>Retrieves build records for all builds associated with the AWS account in use. You can limit results to builds in a specific state using the <code>Status</code> parameter. Use the pagination parameters to retrieve results in a set of sequential pages. </p> <note> <p>Build records are not listed in any particular order.</p> </note>"
+      "documentation":"<p>Retrieves build records for all builds associated with the AWS account in use. You can limit results to builds that are in a specific status by using the <code>Status</code> parameter. Use the pagination parameters to retrieve results in a set of sequential pages. </p> <note> <p>Build records are not listed in any particular order.</p> </note>"
     },
     "ListFleets":{
       "name":"ListFleets",
@@ -1189,7 +1189,7 @@
           "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Clients can retry such requests, either immediately or after a back-off period.</p>"
         }
       ],
-      "documentation":"<p>Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.</p> <important> <p>Call this action only if you need credentials for a build created with <code><a>CreateBuild</a></code>. This is a rare situation; in most cases, builds are created using the CLI command <code>upload-build</code>, which creates a build record and also uploads build files. </p> </important> <p>Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the state of that build changes to <code>READY</code>. Once this happens, you must create a brand new build.</p>"
+      "documentation":"<p>Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.</p> <important> <p>Call this action only if you need credentials for a build created with <code><a>CreateBuild</a></code>. This is a rare situation; in most cases, builds are created using the CLI command <code>upload-build</code>, which creates a build record and also uploads build files. </p> </important> <p>Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the status of that build changes to <code>READY</code>. Once this happens, you must create a brand new build.</p>"
     },
     "ResolveAlias":{
       "name":"ResolveAlias",
@@ -1224,7 +1224,7 @@
         {
           "shape":"TerminalRoutingStrategyException",
           "exception":true,
-          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the routing strategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
         },
         {
           "shape":"InternalServiceException",
@@ -1234,6 +1234,50 @@
         }
       ],
       "documentation":"<p>Retrieves the fleet ID that a specified alias is currently pointing to. </p>"
+    },
+    "SearchGameSessions":{
+      "name":"SearchGameSessions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"SearchGameSessionsInput",
+        "documentation":"<p>Represents the input for a request action.</p>"
+      },
+      "output":{
+        "shape":"SearchGameSessionsOutput",
+        "documentation":"<p>Represents the returned data in response to a request action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Clients can retry such requests, either immediately or after a back-off period.</p>"
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true,
+          "documentation":"<p>A service resource associated with the request could not be found. Clients should not retry such requests</p>"
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true,
+          "documentation":"<p>One or more parameters specified as part of the request are invalid. Correct the invalid parameters before retrying.</p>"
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true,
+          "documentation":"<p>The client failed authentication. Clients should not retry such requests</p>"
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true,
+          "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the routing strategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+        }
+      ],
+      "documentation":"<p>Retrieves a list of game sessions in a fleet that match a set of search criteria and sorts them in a specified order. Currently game session searches are limited to a single fleet. Search results include only game sessions that are in ACTIVE status.</p> <p>You can search or sort by the following game session attributes:</p> <ul> <li> <b>gameSessionId</b> -- ID value assigned to a game session. This unique value is returned in a <a>GameSession</a> object when a new game session is created. </li> <li> <b>gameSessionName</b> -- Name assigned to a game session. This value is set when requesting a new game session with <a>CreateGameSession</a> or updating with <a>UpdateGameSession</a>. Game session names do not need to be unique to a game session.</li> <li> <b>creationTimeMillis</b> -- Value indicating when a game session was created. It is expressed in Unix time as milliseconds.</li> <li> <b>playerSessionCount</b> -- Number of players currently connected to a game session. This value changes rapidly as players join the session or drop out.</li> <li> <b>maximumSessions</b> -- Maximum number of player sessions allowed for a game session. This value is set when requesting a new game session with <a>CreateGameSession</a> or updating with <a>UpdateGameSession</a>.</li> <li> <b>hasAvailablePlayerSessions</b> -- Boolean value indicating whether or not a game session has reached its maximum number of players. When searching with this attribute, the search value must be <code>true</code> or <code>false</code>. It is highly recommended that all search requests include this filter attribute to optimize search performance and return only sessions that players can join. </li> </ul> <p>To search or sort, specify either a fleet ID or an alias ID, and provide a search filter expression, a sort expression, or both. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a collection of <a>GameSession</a> objects matching the request is returned.</p> <note> <p>Returned values for <code>playerSessionCount</code> and <code>hasAvailablePlayerSessions</code> change quickly as players join sessions and others drop out. Results should be considered a snapshot in time. Be sure to refresh search results often, and handle sessions that fill up before a player can join. </p> </note>"
     },
     "UpdateAlias":{
       "name":"UpdateAlias",
@@ -1566,7 +1610,7 @@
           "documentation":"<p>The requested operation would cause a conflict with the current state of a resource associated with the request and/or the fleet. Resolve the conflict before retrying.</p>"
         }
       ],
-      "documentation":"<p>Updates the current runtime configuration for the specified fleet, which tells GameLift how to launch server processes on instances in the fleet. You can update a fleet's runtime configuration at any time after the fleet is created; it does not need to be in an <code>ACTIVE</code> state.</p> <p>To update runtime configuration, specify the fleet ID and provide a <code>RuntimeConfiguration</code> object with the updated collection of server process configurations.</p> <p>Each instance in a GameLift fleet checks regularly for an updated runtime configuration and changes how it launches server processes to comply with the latest version. Existing server processes are not affected by the update; they continue to run until they end, while GameLift simply adds new server processes to fit the current runtime configuration. As a result, the runtime configuration changes are applied gradually as existing processes shut down and new processes are launched in GameLift's normal process recycling activity.</p>"
+      "documentation":"<p>Updates the current runtime configuration for the specified fleet, which tells GameLift how to launch server processes on instances in the fleet. You can update a fleet's runtime configuration at any time after the fleet is created; it does not need to be in an <code>ACTIVE</code> status.</p> <p>To update runtime configuration, specify the fleet ID and provide a <code>RuntimeConfiguration</code> object with the updated collection of server process configurations.</p> <p>Each instance in a GameLift fleet checks regularly for an updated runtime configuration and changes how it launches server processes to comply with the latest version. Existing server processes are not affected by the update; they continue to run until they end, while GameLift simply adds new server processes to fit the current runtime configuration. As a result, the runtime configuration changes are applied gradually as existing processes shut down and new processes are launched in GameLift's normal process recycling activity.</p>"
     }
   },
   "shapes":{
@@ -1588,11 +1632,11 @@
         "RoutingStrategy":{"shape":"RoutingStrategy"},
         "CreationTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         },
         "LastUpdatedTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this object was last modified. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this data object was last modified. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         }
       },
       "documentation":"<p>Properties describing a fleet alias.</p>"
@@ -1641,15 +1685,15 @@
         },
         "Status":{
           "shape":"BuildStatus",
-          "documentation":"<p>Current status of the build. Possible build states include the following: <ul><li><b>INITIALIZED</b> – A new build has been defined, but no files have been uploaded. You cannot create fleets for builds that are in this state. When a build is successfully created, the build state is set to this value. </li><li><b>READY</b> – The game build has been successfully uploaded. You can now create new fleets for this build.</li><li><b>FAILED</b> – The game build upload failed. You cannot create new fleets for this build. </li></ul></p>"
+          "documentation":"<p>Current status of the build.</p> <p>Possible build statuses include the following:</p> <ul><li><b>INITIALIZED</b> – A new build has been defined, but no files have been uploaded. You cannot create fleets for builds that are in this status. When a build is successfully created, the build status is set to this value. </li><li><b>READY</b> – The game build has been successfully uploaded. You can now create new fleets for this build.</li><li><b>FAILED</b> – The game build upload failed. You cannot create new fleets for this build. </li></ul>"
         },
         "SizeOnDisk":{
           "shape":"PositiveLong",
-          "documentation":"<p>File size of the uploaded game build, expressed in bytes. When the build state is <code>INITIALIZED</code>, this value is 0.</p>"
+          "documentation":"<p>File size of the uploaded game build, expressed in bytes. When the build status is <code>INITIALIZED</code>, this value is 0.</p>"
         },
         "CreationTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         }
       },
       "documentation":"<p>Properties describing a game build.</p>"
@@ -1770,7 +1814,7 @@
         },
         "BuildId":{
           "shape":"BuildId",
-          "documentation":"<p>Unique identifier of the build to be deployed on the new fleet. The build must have been successfully uploaded to GameLift and be in a <code>READY</code> state. This fleet setting cannot be changed once the fleet is created.</p>"
+          "documentation":"<p>Unique identifier of the build to be deployed on the new fleet. The build must have been successfully uploaded to GameLift and be in a <code>READY</code> status. This fleet setting cannot be changed once the fleet is created.</p>"
         },
         "ServerLaunchPath":{
           "shape":"NonZeroAndMaxString",
@@ -1794,7 +1838,7 @@
         },
         "NewGameSessionProtectionPolicy":{
           "shape":"ProtectionPolicy",
-          "documentation":"<p>Game session protection policy to apply to all instances in this fleet. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy using UpdateFleetAttributes, but this change will only affect sessions created after the policy change. You can also set protection for individual instances using <a>UpdateGameSession</a>. <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul></p>"
+          "documentation":"<p>Game session protection policy to apply to all instances in this fleet. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy using UpdateFleetAttributes, but this change will only affect sessions created after the policy change. You can also set protection for individual instances using <a>UpdateGameSession</a>.</p> <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul>"
         },
         "RuntimeConfiguration":{
           "shape":"RuntimeConfiguration",
@@ -2093,11 +2137,11 @@
         },
         "StartTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Earliest date to retrieve event logs for. If no start time is specified, this call returns entries starting from when the fleet was created to the specified end time. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Earliest date to retrieve event logs for. If no start time is specified, this call returns entries starting from when the fleet was created to the specified end time. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         },
         "EndTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Most recent date to retrieve event logs for. If no end time is specified, this call returns entries from the specified start time up to the present. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Most recent date to retrieve event logs for. If no end time is specified, this call returns entries from the specified start time up to the present. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         },
         "Limit":{
           "shape":"PositiveInteger",
@@ -2194,7 +2238,7 @@
         },
         "StatusFilter":{
           "shape":"NonZeroAndMaxString",
-          "documentation":"<p>Game session status to filter results on. Possible game session states include ACTIVE, <code>TERMINATED</code>, <code>ACTIVATING</code> and <code>TERMINATING</code> (the last two are transitory). </p>"
+          "documentation":"<p>Game session status to filter results on. Possible game session statuses include ACTIVE, <code>TERMINATED</code>, <code>ACTIVATING</code> and <code>TERMINATING</code> (the last two are transitory). </p>"
         },
         "Limit":{
           "shape":"PositiveInteger",
@@ -2238,7 +2282,7 @@
         },
         "StatusFilter":{
           "shape":"NonZeroAndMaxString",
-          "documentation":"<p>Game session status to filter results on. Possible game session states include <code>ACTIVE</code>, <code>TERMINATED</code>, <code>ACTIVATING</code>, and <code>TERMINATING</code> (the last two are transitory). </p>"
+          "documentation":"<p>Game session status to filter results on. Possible game session statuses include <code>ACTIVE</code>, <code>TERMINATED</code>, <code>ACTIVATING</code>, and <code>TERMINATING</code> (the last two are transitory). </p>"
         },
         "Limit":{
           "shape":"PositiveInteger",
@@ -2282,7 +2326,7 @@
         },
         "PlayerSessionStatusFilter":{
           "shape":"NonZeroAndMaxString",
-          "documentation":"<p>Player session status to filter results on. Possible player session states include the following: <ul><li><b>RESERVED</b> – The player session request has been received, but the player has not yet connected to the server process and/or been validated. </li><li><b>ACTIVE</b> – The player has been validated by the server process and is currently connected.</li><li><b>COMPLETED</b> – The player connection has been dropped.</li><li><b>TIMEDOUT</b> – A player session request was received, but the player did not connect and/or was not validated within the time-out limit (60 seconds).</li></ul></p>"
+          "documentation":"<p>Player session status to filter results on.</p> <p>Possible player session statuses include the following:</p> <ul><li><b>RESERVED</b> – The player session request has been received, but the player has not yet connected to the server process and/or been validated. </li><li><b>ACTIVE</b> – The player has been validated by the server process and is currently connected.</li><li><b>COMPLETED</b> – The player connection has been dropped.</li><li><b>TIMEDOUT</b> – A player session request was received, but the player did not connect and/or was not validated within the time-out limit (60 seconds).</li></ul>"
         },
         "Limit":{
           "shape":"PositiveInteger",
@@ -2340,7 +2384,7 @@
         },
         "StatusFilter":{
           "shape":"ScalingStatusType",
-          "documentation":"<p>Game session status to filter results on. A scaling policy is only in force when in an Active state. <ul> <li> <b>ACTIVE</b> – The scaling policy is currently in force.</li> <li> <b>UPDATEREQUESTED</b> – A request to update the scaling policy has been received.</li> <li> <b>UPDATING</b> – A change is being made to the scaling policy.</li> <li> <b>DELETEREQUESTED</b> – A request to delete the scaling policy has been received.</li> <li> <b>DELETING</b> – The scaling policy is being deleted.</li> <li> <b>DELETED</b> – The scaling policy has been deleted.</li> <li> <b>ERROR</b> – An error occurred in creating the policy. It should be removed and recreated.</li> </ul></p>"
+          "documentation":"<p>Scaling policy status to filter results on. A scaling policy is only in force when in an <code>ACTIVE</code> status.</p> <ul> <li> <b>ACTIVE</b> – The scaling policy is currently in force.</li> <li> <b>UPDATEREQUESTED</b> – A request to update the scaling policy has been received.</li> <li> <b>UPDATING</b> – A change is being made to the scaling policy.</li> <li> <b>DELETEREQUESTED</b> – A request to delete the scaling policy has been received.</li> <li> <b>DELETING</b> – The scaling policy is being deleted.</li> <li> <b>DELETED</b> – The scaling policy has been deleted.</li> <li> <b>ERROR</b> – An error occurred in creating the policy. It should be removed and recreated.</li> </ul>"
         },
         "Limit":{
           "shape":"PositiveInteger",
@@ -2478,7 +2522,7 @@
         },
         "EventTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this event occurred. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this event occurred. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         }
       },
       "documentation":"<p>Log entry describing an event involving an Amazon GameLift resource (such as a fleet).</p>"
@@ -2527,15 +2571,15 @@
         },
         "CreationTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         },
         "TerminationTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this fleet was terminated. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         },
         "Status":{
           "shape":"FleetStatus",
-          "documentation":"<p>Current status of the fleet. Possible fleet states include the following: <ul><li><b>NEW</b> – A new fleet has been defined and desired instances is set to 1. </li><li><b>DOWNLOADING/VALIDATING/BUILDING/ACTIVATING</b> – GameLift is setting up the new fleet, creating new instances with the game build and starting server processes.</li><li><b>ACTIVE</b> – Hosts can now accept game sessions.</li><li><b>ERROR</b> – An error occurred when downloading, validating, building, or activating the fleet.</li><li><b>DELETING</b> – Hosts are responding to a delete fleet request.</li><li><b>TERMINATED</b> – The fleet no longer exists.</li></ul></p>"
+          "documentation":"<p>Current status of the fleet.</p> <p>Possible fleet statuses include the following:</p> <ul><li><b>NEW</b> – A new fleet has been defined and desired instances is set to 1. </li><li><b>DOWNLOADING/VALIDATING/BUILDING/ACTIVATING</b> – GameLift is setting up the new fleet, creating new instances with the game build and starting server processes.</li><li><b>ACTIVE</b> – Hosts can now accept game sessions.</li><li><b>ERROR</b> – An error occurred when downloading, validating, building, or activating the fleet.</li><li><b>DELETING</b> – Hosts are responding to a delete fleet request.</li><li><b>TERMINATED</b> – The fleet no longer exists.</li></ul>"
         },
         "BuildId":{
           "shape":"BuildId",
@@ -2555,7 +2599,7 @@
         },
         "NewGameSessionProtectionPolicy":{
           "shape":"ProtectionPolicy",
-          "documentation":"<p>Type of game session protection to set for all new instances started in the fleet. <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul></p>"
+          "documentation":"<p>Type of game session protection to set for all new instances started in the fleet.</p> <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul>"
         }
       },
       "documentation":"<p>General properties describing a fleet.</p>"
@@ -2626,7 +2670,7 @@
         },
         "ActiveServerProcessCount":{
           "shape":"WholeNumber",
-          "documentation":"<p>Number of server processes in an <code>ACTIVE</code> state currently running across all instances in the fleet</p>"
+          "documentation":"<p>Number of server processes in an <code>ACTIVE</code> status currently running across all instances in the fleet</p>"
         },
         "ActiveGameSessionCount":{
           "shape":"WholeNumber",
@@ -2690,11 +2734,11 @@
         },
         "CreationTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         },
         "TerminationTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this fleet was terminated. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         },
         "CurrentPlayerSessionCount":{
           "shape":"WholeNumber",
@@ -2706,7 +2750,7 @@
         },
         "Status":{
           "shape":"GameSessionStatus",
-          "documentation":"<p>Current status of the game session. A game session must be in an <code>ACTIVE</code> state to have player sessions.</p>"
+          "documentation":"<p>Current status of the game session. A game session must be in an <code>ACTIVE</code> status to have player sessions.</p>"
         },
         "GameProperties":{
           "shape":"GamePropertyList",
@@ -2733,7 +2777,7 @@
         "GameSession":{"shape":"GameSession"},
         "ProtectionPolicy":{
           "shape":"ProtectionPolicy",
-          "documentation":"<p>Current status of protection for the game session. <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul></p>"
+          "documentation":"<p>Current status of protection for the game session.</p> <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul>"
         }
       },
       "documentation":"<p>A game session's properties and the protection policy currently in force.</p>"
@@ -2876,7 +2920,7 @@
       "members":{
         "RoutingStrategyType":{
           "shape":"RoutingStrategyType",
-          "documentation":"<p>Type of routing to filter results on. Use this parameter to retrieve only aliases of a certain type. To retrieve all aliases, leave this parameter empty. Possible routing types include the following: <ul><li><b>SIMPLE</b> – The alias resolves to one specific fleet. Use this type when routing to active fleets.</li><li><b>TERMINAL</b> – The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the <a>RoutingStrategy</a> message embedded.</li></ul></p>"
+          "documentation":"<p>Type of routing to filter results on. Use this parameter to retrieve only aliases of a certain type. To retrieve all aliases, leave this parameter empty.</p> <p>Possible routing types include the following:</p> <ul><li><b>SIMPLE</b> – The alias resolves to one specific fleet. Use this type when routing to active fleets.</li><li><b>TERMINAL</b> – The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the <a>RoutingStrategy</a> message embedded.</li></ul>"
         },
         "Name":{
           "shape":"NonEmptyString",
@@ -2912,7 +2956,7 @@
       "members":{
         "Status":{
           "shape":"BuildStatus",
-          "documentation":"<p>Build state to filter results by. To retrieve all builds, leave this parameter empty. Possible build states include the following: <ul><li><b>INITIALIZED</b> – A new build has been defined, but no files have been uploaded. You cannot create fleets for builds that are in this state. When a build is successfully created, the build state is set to this value. </li><li><b>READY</b> – The game build has been successfully uploaded. You can now create new fleets for this build.</li><li><b>FAILED</b> – The game build upload failed. You cannot create new fleets for this build. </li></ul></p>"
+          "documentation":"<p>Build status to filter results by. To retrieve all builds, leave this parameter empty.</p> <p>Possible build statuses include the following:</p> <ul><li><b>INITIALIZED</b> – A new build has been defined, but no files have been uploaded. You cannot create fleets for builds that are in this status. When a build is successfully created, the build status is set to this value. </li><li><b>READY</b> – The game build has been successfully uploaded. You can now create new fleets for this build.</li><li><b>FAILED</b> – The game build upload failed. You cannot create new fleets for this build. </li></ul>"
         },
         "Limit":{
           "shape":"PositiveInteger",
@@ -3030,15 +3074,15 @@
         },
         "CreationTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this object was created. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         },
         "TerminationTime":{
           "shape":"Timestamp",
-          "documentation":"<p>Time stamp indicating when this fleet was terminated. Format is an integer representing the number of seconds since the Unix epoch (Unix time).</p>"
+          "documentation":"<p>Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
         },
         "Status":{
           "shape":"PlayerSessionStatus",
-          "documentation":"<p>Current status of the player session. Possible player session states include the following: <ul><li><b>RESERVED</b> – The player session request has been received, but the player has not yet connected to the server process and/or been validated. </li><li><b>ACTIVE</b> – The player has been validated by the server process and is currently connected.</li><li><b>COMPLETED</b> – The player connection has been dropped.</li><li><b>TIMEDOUT</b> – A player session request was received, but the player did not connect and/or was not validated within the time-out limit (60 seconds).</li></ul></p>"
+          "documentation":"<p>Current status of the player session.</p> <p>Possible player session statuses include the following:</p> <ul><li><b>RESERVED</b> – The player session request has been received, but the player has not yet connected to the server process and/or been validated. </li><li><b>ACTIVE</b> – The player has been validated by the server process and is currently connected.</li><li><b>COMPLETED</b> – The player connection has been dropped.</li><li><b>TIMEDOUT</b> – A player session request was received, but the player did not connect and/or was not validated within the time-out limit (60 seconds).</li></ul>"
         },
         "IpAddress":{
           "shape":"IpAddress",
@@ -3122,7 +3166,7 @@
         },
         "ScalingAdjustmentType":{
           "shape":"ScalingAdjustmentType",
-          "documentation":"<p>Type of adjustment to make to a fleet's instance count (see <a>FleetCapacity</a>): <ul> <li> <b>ChangeInCapacity</b> – add (or subtract) the scaling adjustment value from the current instance count. Positive values scale up while negative values scale down.</li> <li> <b>ExactCapacity</b> – set the instance count to the scaling adjustment value.</li> <li> <b>PercentChangeInCapacity</b> – increase or reduce the current instance count by the scaling adjustment, read as a percentage. Positive values scale up while negative values scale down; for example, a value of \"-10\" scales the fleet down by 10%.</li> </ul></p>"
+          "documentation":"<p>Type of adjustment to make to a fleet's instance count (see <a>FleetCapacity</a>):</p> <ul> <li> <b>ChangeInCapacity</b> – add (or subtract) the scaling adjustment value from the current instance count. Positive values scale up while negative values scale down.</li> <li> <b>ExactCapacity</b> – set the instance count to the scaling adjustment value.</li> <li> <b>PercentChangeInCapacity</b> – increase or reduce the current instance count by the scaling adjustment, read as a percentage. Positive values scale up while negative values scale down; for example, a value of \"-10\" scales the fleet down by 10%.</li> </ul>"
         },
         "Threshold":{
           "shape":"Double",
@@ -3138,7 +3182,7 @@
         },
         "MetricName":{
           "shape":"MetricName",
-          "documentation":"<p>Name of the Amazon GameLift-defined metric that is used to trigger an adjustment. <ul> <li> <b>ActivatingGameSessions</b> – number of game sessions in the process of being created (game session status = <code>ACTIVATING</code>).</li> <li> <b>ActiveGameSessions</b> – number of game sessions currently running (game session status = <code>ACTIVE</code>).</li> <li> <b>CurrentPlayerSessions</b> – number of active or reserved player sessions (player session status = <code>ACTIVE</code> or <code>RESERVED</code>). </li> <li> <b>AvailablePlayerSessions</b> – number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number includes game sessions that are not currently accepting players (game session <code>PlayerSessionCreationPolicy</code> = <code>DENY_ALL</code>).</li> <li> <b>ActiveInstances</b> – number of instances currently running a game session.</li> <li> <b>IdleInstances</b> – number of instances not currently running a game session.</li> </ul></p>"
+          "documentation":"<p>Name of the Amazon GameLift-defined metric that is used to trigger an adjustment.</p> <ul> <li> <b>ActivatingGameSessions</b> – number of game sessions in the process of being created (game session status = <code>ACTIVATING</code>).</li> <li> <b>ActiveGameSessions</b> – number of game sessions currently running (game session status = <code>ACTIVE</code>).</li> <li> <b>CurrentPlayerSessions</b> – number of active or reserved player sessions (player session status = <code>ACTIVE</code> or <code>RESERVED</code>). </li> <li> <b>AvailablePlayerSessions</b> – number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number includes game sessions that are not currently accepting players (game session <code>PlayerSessionCreationPolicy</code> = <code>DENY_ALL</code>).</li> <li> <b>ActiveInstances</b> – number of instances currently running a game session.</li> <li> <b>IdleInstances</b> – number of instances not currently running a game session.</li> </ul>"
         }
       },
       "documentation":"<p>Represents the input for a request action.</p>"
@@ -3204,7 +3248,7 @@
       "members":{
         "Type":{
           "shape":"RoutingStrategyType",
-          "documentation":"<p>Type of routing strategy. Possible routing types include the following: <ul><li><b>SIMPLE</b> – The alias resolves to one specific fleet. Use this type when routing to active fleets.</li><li><b>TERMINAL</b> – The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the <a>RoutingStrategy</a> message embedded.</li></ul></p>"
+          "documentation":"<p>Type of routing strategy.</p> <p>Possible routing types include the following:</p> <ul><li><b>SIMPLE</b> – The alias resolves to one specific fleet. Use this type when routing to active fleets.</li><li><b>TERMINAL</b> – The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the <a>RoutingStrategy</a> message embedded.</li></ul>"
         },
         "FleetId":{
           "shape":"FleetId",
@@ -3232,7 +3276,7 @@
           "documentation":"<p>Collection of server process configurations describing what server processes to run on each instance in a fleet </p>"
         }
       },
-      "documentation":"<p>Collection of server process configurations that describe what processes should be run on each instance in a fleet. An instance can launch and maintain multiple server processes based on the runtime configuration; it regularly checks for an updated runtime configuration and starts new server processes to match the latest version.</p> <p>The key purpose of a a runtime configuration with multiple server process configurations is to be able to run more than one kind of game server in a single fleet. You can include configurations for more than one server executable in order to run two or more different programs to run on the same instance. This option might be useful, for example, to run more than one version of your game server on the same fleet. Another option is to specify configurations for the same server executable but with different launch parameters.</p> <p>A GameLift instance is limited to 50 processes running simultaneously. To calculate the total number of processes specified in a runtime configuration, add the values of the <code>ConcurrentExecutions</code> parameter for each <code><a>ServerProcess</a></code> object in the runtime configuration.</p>"
+      "documentation":"<p>Collection of server process configurations that describe what processes should be run on each instance in a fleet. An instance can launch and maintain multiple server processes based on the runtime configuration; it regularly checks for an updated runtime configuration and starts new server processes to match the latest version.</p> <p>The key purpose of a runtime configuration with multiple server process configurations is to be able to run more than one kind of game server in a single fleet. You can include configurations for more than one server executable in order to run two or more different programs to run on the same instance. This option might be useful, for example, to run more than one version of your game server on the same fleet. Another option is to specify configurations for the same server executable but with different launch parameters.</p> <p>A GameLift instance is limited to 50 processes running simultaneously. To calculate the total number of processes specified in a runtime configuration, add the values of the <code>ConcurrentExecutions</code> parameter for each <code><a>ServerProcess</a></code> object in the runtime configuration.</p>"
     },
     "S3Location":{
       "type":"structure",
@@ -3273,7 +3317,7 @@
         },
         "Status":{
           "shape":"ScalingStatusType",
-          "documentation":"<p>Current status of the scaling policy. The scaling policy is only in force when in an Active state. <ul> <li> <b>ACTIVE</b> – The scaling policy is currently in force.</li> <li> <b>UPDATEREQUESTED</b> – A request to update the scaling policy has been received.</li> <li> <b>UPDATING</b> – A change is being made to the scaling policy.</li> <li> <b>DELETEREQUESTED</b> – A request to delete the scaling policy has been received.</li> <li> <b>DELETING</b> – The scaling policy is being deleted.</li> <li> <b>DELETED</b> – The scaling policy has been deleted.</li> <li> <b>ERROR</b> – An error occurred in creating the policy. It should be removed and recreated.</li> </ul></p>"
+          "documentation":"<p>Current status of the scaling policy. The scaling policy is only in force when in an <code>ACTIVE</code> status.</p> <ul> <li> <b>ACTIVE</b> – The scaling policy is currently in force.</li> <li> <b>UPDATEREQUESTED</b> – A request to update the scaling policy has been received.</li> <li> <b>UPDATING</b> – A change is being made to the scaling policy.</li> <li> <b>DELETEREQUESTED</b> – A request to delete the scaling policy has been received.</li> <li> <b>DELETING</b> – The scaling policy is being deleted.</li> <li> <b>DELETED</b> – The scaling policy has been deleted.</li> <li> <b>ERROR</b> – An error occurred in creating the policy. It should be removed and recreated.</li> </ul>"
         },
         "ScalingAdjustment":{
           "shape":"Integer",
@@ -3281,7 +3325,7 @@
         },
         "ScalingAdjustmentType":{
           "shape":"ScalingAdjustmentType",
-          "documentation":"<p>Type of adjustment to make to a fleet's instance count (see <a>FleetCapacity</a>): <ul> <li> <b>ChangeInCapacity</b> – add (or subtract) the scaling adjustment value from the current instance count. Positive values scale up while negative values scale down.</li> <li> <b>ExactCapacity</b> – set the instance count to the scaling adjustment value.</li> <li> <b>PercentChangeInCapacity</b> – increase or reduce the current instance count by the scaling adjustment, read as a percentage. Positive values scale up while negative values scale down.</li> </ul></p>"
+          "documentation":"<p>Type of adjustment to make to a fleet's instance count (see <a>FleetCapacity</a>):</p> <ul> <li> <b>ChangeInCapacity</b> – add (or subtract) the scaling adjustment value from the current instance count. Positive values scale up while negative values scale down.</li> <li> <b>ExactCapacity</b> – set the instance count to the scaling adjustment value.</li> <li> <b>PercentChangeInCapacity</b> – increase or reduce the current instance count by the scaling adjustment, read as a percentage. Positive values scale up while negative values scale down.</li> </ul>"
         },
         "ComparisonOperator":{
           "shape":"ComparisonOperatorType",
@@ -3297,7 +3341,7 @@
         },
         "MetricName":{
           "shape":"MetricName",
-          "documentation":"<p>Name of the GameLift-defined metric that is used to trigger an adjustment. <ul> <li> <b>ActivatingGameSessions</b> – number of game sessions in the process of being created (game session status = <code>ACTIVATING</code>).</li> <li> <b>ActiveGameSessions</b> – number of game sessions currently running (game session status = <code>ACTIVE</code>).</li> <li> <b>CurrentPlayerSessions</b> – number of active or reserved player sessions (player session status = <code>ACTIVE</code> or <code>RESERVED</code>). </li> <li> <b>AvailablePlayerSessions</b> – number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number does include game sessions that are not currently accepting players (game session <code>PlayerSessionCreationPolicy</code> = <code>DENY_ALL</code>).</li> <li> <b>ActiveInstances</b> – number of instances currently running a game session.</li> <li> <b>IdleInstances</b> – number of instances not currently running a game session.</li> </ul></p>"
+          "documentation":"<p>Name of the GameLift-defined metric that is used to trigger an adjustment.</p> <ul> <li> <b>ActivatingGameSessions</b> – number of game sessions in the process of being created (game session status = <code>ACTIVATING</code>).</li> <li> <b>ActiveGameSessions</b> – number of game sessions currently running (game session status = <code>ACTIVE</code>).</li> <li> <b>CurrentPlayerSessions</b> – number of active or reserved player sessions (player session status = <code>ACTIVE</code> or <code>RESERVED</code>). </li> <li> <b>AvailablePlayerSessions</b> – number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number does include game sessions that are not currently accepting players (game session <code>PlayerSessionCreationPolicy</code> = <code>DENY_ALL</code>).</li> <li> <b>ActiveInstances</b> – number of instances currently running a game session.</li> <li> <b>IdleInstances</b> – number of instances not currently running a game session.</li> </ul>"
         }
       },
       "documentation":"<p>Rule that controls how a fleet is scaled. Scaling policies are uniquely identified by the combination of name and fleet ID.</p>"
@@ -3317,6 +3361,50 @@
         "DELETED",
         "ERROR"
       ]
+    },
+    "SearchGameSessionsInput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{
+          "shape":"FleetId",
+          "documentation":"<p>Unique identifier for a fleet. Each request must reference either a fleet ID or alias ID, but not both.</p>"
+        },
+        "AliasId":{
+          "shape":"AliasId",
+          "documentation":"<p>Unique identifier for a fleet alias. Each request must reference either a fleet ID or alias ID, but not both.</p>"
+        },
+        "FilterExpression":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>String containing the search criteria for the session search. If no filter expression is included, the request returns results for all game sessions in the fleet that are in ACTIVE status. </p> <p>A filter expression can contain one or multiple conditions. Each condition consists of the following:</p> <ul> <li> <b>Operand</b> -- Name of a game session attribute. Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>, <code>creationTimeMillis</code>, <code>playerSessionCount</code>, <code>maximumSessions</code>, <code>hasAvailablePlayerSessions</code>.</li> <li> <b>Comparator</b> -- Valid comparators are: <code>=</code>, <code>&amp;lt;&amp;gt;</code>, <code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;lt;=</code>, <code>&amp;gt;=</code>. </li> <li> <b>Value</b> -- Value to be searched for. Values can be numbers, boolean values (true/false) or strings. String values are case sensitive, enclosed in single quotes. Special characters must be escaped. Boolean and string values can only be used with the comparators <code>=</code> and <code>&amp;lt;&amp;gt;</code>. For example, the following filter expression searches on <code>gameSessionName</code>: \"<code>FilterExpression\": \"gameSessionName = 'Matt\\\\'s Awesome Game 1'\"</code>. </li> </ul> <p>To chain multiple conditions in a single expression, use the logical keywords <code>AND</code>, <code>OR</code>, and <code>NOT</code> and parentheses as needed. For example: <code>x AND y AND NOT z</code>, <code>NOT (x OR y)</code>.</p> <p> Session search evaluates conditions from left to right using the following precedence rules: </p> <ol> <li> <code>=</code>, <code>&amp;lt;&amp;gt;</code>, <code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;lt;=</code>, <code>&amp;gt;=</code> </li> <li>Parentheses </li> <li>NOT</li> <li>AND</li> <li>OR</li> </ol> <p>For example, this filter expression retrieves game sessions hosting at least ten players that have an open player slot: <code>\"maximumSessions&amp;gt;=10 AND hasAvailablePlayerSessions=true\"</code>. </p>"
+        },
+        "SortExpression":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Instructions on how to sort the search results. If no sort expression is included, the request returns results in random order. A sort expression consists of the following elements: </p> <ul> <li> <b>Operand</b> -- Name of a game session attribute. Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>, <code>creationTimeMillis</code>, <code>playerSessionCount</code>, <code>maximumSessions</code>, <code>hasAvailablePlayerSessions</code>.</li> <li> <b>Order</b> -- Valid sort orders are <code>ASC</code> (ascending) and <code>DESC</code> (descending).</li> </ul> <p>For example, this sort expression returns the oldest active sessions first: <code>\"SortExpression\": \"creationTimeMillis ASC\"</code>. Results with a null value for the sort operand are returned at the end of the list.</p>"
+        },
+        "Limit":{
+          "shape":"PositiveInteger",
+          "documentation":"<p>Maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages. The maximum number of results returned is 20, even if this value is not set or is set higher than 20. </p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input for a request action.</p>"
+    },
+    "SearchGameSessionsOutput":{
+      "type":"structure",
+      "members":{
+        "GameSessions":{
+          "shape":"GameSessionList",
+          "documentation":"<p>Collection of objects containing game session properties for each session matching the request.</p>"
+        },
+        "NextToken":{
+          "shape":"NonZeroAndMaxString",
+          "documentation":"<p>Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.</p> <note> <p>If a request has a limit that exactly matches the number of remaining results, a token is returned even though there are no more results to retrieve.</p> </note>"
+        }
+      },
+      "documentation":"<p>Represents the returned data in response to a request action.</p>"
     },
     "ServerProcess":{
       "type":"structure",
@@ -3356,7 +3444,7 @@
         "Message":{"shape":"NonEmptyString"}
       },
       "exception":true,
-      "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the TerminalRoutingStrategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
+      "documentation":"<p>The service is unable to resolve the routing for a particular alias because it has a terminal <a>RoutingStrategy</a> associated with it. The message returned in this exception is the message defined in the routing strategy itself. Such requests should only be retried if the routing strategy for the specified alias is modified. </p>"
     },
     "Timestamp":{"type":"timestamp"},
     "UnauthorizedException":{
@@ -3447,7 +3535,7 @@
         },
         "NewGameSessionProtectionPolicy":{
           "shape":"ProtectionPolicy",
-          "documentation":"<p>Game session protection policy to apply to all new instances created in this fleet. Instances that already exist are not affected. You can set protection for individual instances using <a>UpdateGameSession</a>. <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul></p>"
+          "documentation":"<p>Game session protection policy to apply to all new instances created in this fleet. Instances that already exist are not affected. You can set protection for individual instances using <a>UpdateGameSession</a>.</p> <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul>"
         }
       },
       "documentation":"<p>Represents the input for a request action.</p>"
@@ -3546,7 +3634,7 @@
         },
         "ProtectionPolicy":{
           "shape":"ProtectionPolicy",
-          "documentation":"<p>Game session protection policy to apply to this game session only. <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul></p>"
+          "documentation":"<p>Game session protection policy to apply to this game session only.</p> <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul>"
         }
       },
       "documentation":"<p>Represents the input for a request action.</p>"
