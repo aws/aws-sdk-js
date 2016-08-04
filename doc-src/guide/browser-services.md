@@ -4,16 +4,18 @@
 
 ## Supported Services
 
-By default, the SDK ships with support for 50 AWS services. Each service object
+By default, the SDK ships with support for 54 AWS services. Each service object
 in the SDK currently provides low-level access to every API call in the
 respective AWS service. The full list of methods and their parameters are
 documented in the complete API reference documentation (linked from each
 service name in the list below).
 
-The 50 services that come with the default hosted package of the SDK are:
+The 54 services that come with the default hosted package of the SDK are:
 
 * [AWS.ACM](/AWSJavaScriptSDK/latest/AWS/ACM.html)
 * [AWS.APIGateway](/AWSJavaScriptSDK/latest/AWS/APIGateway.html)
+* [AWS.ApplicationAutoScaling](/AWSJavaScriptSDK/latest/AWS/ApplicationAutoScaling.html)
+* [AWS.AutoScaling](/AWSJavaScriptSDK/latest/AWS/AutoScaling.html)
 * [AWS.CloudFormation](/AWSJavaScriptSDK/latest/AWS/CloudFormation.html)
 * [AWS.CloudFront](/AWSJavaScriptSDK/latest/AWS/CloudFront.html)
 * [AWS.CloudHSM](/AWSJavaScriptSDK/latest/AWS/CloudHSM.html)
@@ -22,6 +24,7 @@ The 50 services that come with the default hosted package of the SDK are:
 * [AWS.CloudWatchLogs](/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html)
 * [AWS.CloudWatchEvents](/AWSJavaScriptSDK/latest/AWS/CloudWatchEvents.html)
 * [AWS.CodeCommit](/AWSJavaScriptSDK/latest/AWS/CodeCommit.html)
+* [AWS.CodeDeploy](/AWSJavaScriptSDK/latest/AWS/CodeDeploy.html)
 * [AWS.CodePipeline](/AWSJavaScriptSDK/latest/AWS/CodePipeline.html)
 * [AWS.CognitoIdentity](/AWSJavaScriptSDK/latest/AWS/CognitoIdentity.html)
 * [AWS.CognitoIdentityServiceProvider](/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html)
@@ -36,6 +39,7 @@ The 50 services that come with the default hosted package of the SDK are:
 * [AWS.ECS](/AWSJavaScriptSDK/latest/AWS/ECS.html)
 * [AWS.ElastiCache](/AWSJavaScriptSDK/latest/AWS/ElastiCache.html)
 * [AWS.ElasticBeanstalk](/AWSJavaScriptSDK/latest/AWS/ElasticBeanstalk.html)
+* [AWS.ElasticTranscoder](/AWSJavaScriptSDK/latest/AWS/ElasticTranscoder.html)
 * [AWS.ELB](/AWSJavaScriptSDK/latest/AWS/ELB.html)
 * [AWS.EMR](/AWSJavaScriptSDK/latest/AWS/EMR.html)
 * [AWS.Firehose](/AWSJavaScriptSDK/latest/AWS/Firehose.html)
