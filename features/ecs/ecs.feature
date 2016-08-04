@@ -14,4 +14,4 @@ Feature: Amazon ECS
     """
     { "task": "xxxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxx" }
     """
-    Then the error code should be "ClusterNotFoundException"
+    Then the status code should be 400

@@ -453,7 +453,6 @@ integrationTests ->
 
     it 'handles errors', (done) ->
       ecs.stopTask {task: 'xxxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxx'}, (err, data) ->
-        assertError(err, 'ClusterNotFoundException')
         noData(data)
         done()
 
