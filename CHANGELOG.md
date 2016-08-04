@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.4.12-->
+<!--LATEST=2.4.13-->
 <!--ENTRYINSERT-->
+
+## 2.4.13
+* feature: ApplicationAutoScaling: CORS support added. Now a default service in the browser build of the JavaScript SDK.
+* feature: AutoScaling: CORS support added. Now a default service in the browser build of the JavaScript SDK.
+* feature: CodeDeploy: CORS support added. Now a default service in the browser build of the JavaScript SDK.
+* feature: GameLift: Provides a new Search API for GameLift, which allows game developers to retrieve filtered and sorted lists of their GameSessions.
+* feature: RDS: You can now use the AWS Management Console to easily move your DB instance to a different VPC, or to a different subnet group in the same VPC. For more information, see Updating the VPC for a DB Instance. If your DB instance is not in a VPC, you can now use the AWS Management Console to easily move your DB instance into a VPC. You can now copy the source files from a MySQL database to an Amazon Simple Storage Service (Amazon S3) bucket, and then restore an Amazon Aurora DB cluster from those files. This option can be considerably faster than migrating data using mysqldump.
 
 ## 2.4.12
 * bugfix: Request: Adds a content-length check for the stream returned from `createReadStream()`, and the stream will emit an error when the bytes received are fewer than specified by the response content-length header.
