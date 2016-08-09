@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.4.13-->
+<!--LATEST=2.4.14-->
 <!--ENTRYINSERT-->
+
+## 2.4.14
+* feature: CloudFront: Amazon CloudFront now supports tagging for Web and Streaming distributions. Tags make it easier for you to allocate costs and optimize spending by categorizing and grouping AWS resources.
+* feature: ECR: Adds filtering of ListImages requests based on whether an image is tagged or untagged.
+* feature: MarketplaceCommerceAnalytics: Adds the `startSupportDataExport` operation.
 
 ## 2.4.13
 * feature: ApplicationAutoScaling: CORS support added. Now a default service in the browser build of the JavaScript SDK.
