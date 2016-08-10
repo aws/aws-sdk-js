@@ -195,7 +195,8 @@
     "name": "Route53Domains"
   },
   "s3": {
-    "name": "S3"
+    "name": "S3",
+    "dualstackAvailable": true
   },
   "servicecatalog": {
     "name": "ServiceCatalog"
