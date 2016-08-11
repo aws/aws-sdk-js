@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.4.14
+// AWS SDK for JavaScript v2.5.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -34,7 +34,7 @@ AWS.apiLoader.services['applicationautoscaling']['2016-02-06'] = {"version":"2.0
 AWS.apiLoader.services['autoscaling'] = {};
 AWS.AutoScaling = AWS.Service.defineService('autoscaling', [ '2011-01-01' ]);
 
-AWS.apiLoader.services['autoscaling']['2011-01-01'] = {"version":"2.0","metadata":{"apiVersion":"2011-01-01","endpointPrefix":"autoscaling","protocol":"query","serviceFullName":"Auto Scaling","signatureVersion":"v4","xmlNamespace":"http://autoscaling.amazonaws.com/doc/2011-01-01/"},"operations":{"AttachInstances":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{}}},"http":{}},"AttachLoadBalancers":{"input":{"type":"structure","members":{"AutoScalingGroupName":{},"LoadBalancerNames":{"shape":"S6"}}},"output":{"resultWrapper":"AttachLoadBalancersResult","type":"structure","members":{}},"http":{}},"CompleteLifecycleAction":{"input":{"type":"structure","required":["LifecycleHookName","AutoScalingGroupName","LifecycleActionResult"],"members":{"LifecycleHookName":{},"AutoScalingGroupName":{},"LifecycleActionToken":{},"LifecycleActionResult":{},"InstanceId":{}}},"output":{"resultWrapper":"CompleteLifecycleActionResult","type":"structure","members":{}},"http":{}},"CreateAutoScalingGroup":{"input":{"type":"structure","required":["AutoScalingGroupName","MinSize","MaxSize"],"members":{"AutoScalingGroupName":{},"LaunchConfigurationName":{},"InstanceId":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"},"DefaultCooldown":{"type":"integer"},"AvailabilityZones":{"shape":"Sj"},"LoadBalancerNames":{"shape":"S6"},"HealthCheckType":{},"HealthCheckGracePeriod":{"type":"integer"},"PlacementGroup":{},"VPCZoneIdentifier":{},"TerminationPolicies":{"shape":"Sm"},"NewInstancesProtectedFromScaleIn":{"type":"boolean"},"Tags":{"shape":"Sp"}}},"http":{}},"CreateLaunchConfiguration":{"input":{"type":"structure","required":["LaunchConfigurationName"],"members":{"LaunchConfigurationName":{},"ImageId":{},"KeyName":{},"SecurityGroups":{"shape":"Sw"},"ClassicLinkVPCId":{},"ClassicLinkVPCSecurityGroups":{"shape":"Sx"},"UserData":{},"InstanceId":{},"InstanceType":{},"KernelId":{},"RamdiskId":{},"BlockDeviceMappings":{"shape":"Sz"},"InstanceMonitoring":{"shape":"S18"},"SpotPrice":{},"IamInstanceProfile":{},"EbsOptimized":{"type":"boolean"},"AssociatePublicIpAddress":{"type":"boolean"},"PlacementTenancy":{}}},"http":{}},"CreateOrUpdateTags":{"input":{"type":"structure","required":["Tags"],"members":{"Tags":{"shape":"Sp"}}},"http":{}},"DeleteAutoScalingGroup":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"ForceDelete":{"type":"boolean"}}},"http":{}},"DeleteLaunchConfiguration":{"input":{"type":"structure","required":["LaunchConfigurationName"],"members":{"LaunchConfigurationName":{}}},"http":{}},"DeleteLifecycleHook":{"input":{"type":"structure","required":["LifecycleHookName","AutoScalingGroupName"],"members":{"LifecycleHookName":{},"AutoScalingGroupName":{}}},"output":{"resultWrapper":"DeleteLifecycleHookResult","type":"structure","members":{}},"http":{}},"DeleteNotificationConfiguration":{"input":{"type":"structure","required":["AutoScalingGroupName","TopicARN"],"members":{"AutoScalingGroupName":{},"TopicARN":{}}},"http":{}},"DeletePolicy":{"input":{"type":"structure","required":["PolicyName"],"members":{"AutoScalingGroupName":{},"PolicyName":{}}},"http":{}},"DeleteScheduledAction":{"input":{"type":"structure","required":["ScheduledActionName"],"members":{"AutoScalingGroupName":{},"ScheduledActionName":{}}},"http":{}},"DeleteTags":{"input":{"type":"structure","required":["Tags"],"members":{"Tags":{"shape":"Sp"}}},"http":{}},"DescribeAccountLimits":{"output":{"resultWrapper":"DescribeAccountLimitsResult","type":"structure","members":{"MaxNumberOfAutoScalingGroups":{"type":"integer"},"MaxNumberOfLaunchConfigurations":{"type":"integer"},"NumberOfAutoScalingGroups":{"type":"integer"},"NumberOfLaunchConfigurations":{"type":"integer"}}},"http":{}},"DescribeAdjustmentTypes":{"output":{"resultWrapper":"DescribeAdjustmentTypesResult","type":"structure","members":{"AdjustmentTypes":{"type":"list","member":{"type":"structure","members":{"AdjustmentType":{}}}}}},"http":{}},"DescribeAutoScalingGroups":{"input":{"type":"structure","members":{"AutoScalingGroupNames":{"shape":"S1x"},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeAutoScalingGroupsResult","type":"structure","required":["AutoScalingGroups"],"members":{"AutoScalingGroups":{"type":"list","member":{"type":"structure","required":["AutoScalingGroupName","MinSize","MaxSize","DesiredCapacity","DefaultCooldown","AvailabilityZones","HealthCheckType","CreatedTime"],"members":{"AutoScalingGroupName":{},"AutoScalingGroupARN":{},"LaunchConfigurationName":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"},"DefaultCooldown":{"type":"integer"},"AvailabilityZones":{"shape":"Sj"},"LoadBalancerNames":{"shape":"S6"},"HealthCheckType":{},"HealthCheckGracePeriod":{"type":"integer"},"Instances":{"type":"list","member":{"type":"structure","required":["InstanceId","AvailabilityZone","LifecycleState","HealthStatus","LaunchConfigurationName","ProtectedFromScaleIn"],"members":{"InstanceId":{},"AvailabilityZone":{},"LifecycleState":{},"HealthStatus":{},"LaunchConfigurationName":{},"ProtectedFromScaleIn":{"type":"boolean"}}}},"CreatedTime":{"type":"timestamp"},"SuspendedProcesses":{"type":"list","member":{"type":"structure","members":{"ProcessName":{},"SuspensionReason":{}}}},"PlacementGroup":{},"VPCZoneIdentifier":{},"EnabledMetrics":{"type":"list","member":{"type":"structure","members":{"Metric":{},"Granularity":{}}}},"Status":{},"Tags":{"shape":"S2a"},"TerminationPolicies":{"shape":"Sm"},"NewInstancesProtectedFromScaleIn":{"type":"boolean"}}}},"NextToken":{}}},"http":{}},"DescribeAutoScalingInstances":{"input":{"type":"structure","members":{"InstanceIds":{"shape":"S2"},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAutoScalingInstancesResult","type":"structure","members":{"AutoScalingInstances":{"type":"list","member":{"type":"structure","required":["InstanceId","AutoScalingGroupName","AvailabilityZone","LifecycleState","HealthStatus","LaunchConfigurationName","ProtectedFromScaleIn"],"members":{"InstanceId":{},"AutoScalingGroupName":{},"AvailabilityZone":{},"LifecycleState":{},"HealthStatus":{},"LaunchConfigurationName":{},"ProtectedFromScaleIn":{"type":"boolean"}}}},"NextToken":{}}},"http":{}},"DescribeAutoScalingNotificationTypes":{"output":{"resultWrapper":"DescribeAutoScalingNotificationTypesResult","type":"structure","members":{"AutoScalingNotificationTypes":{"shape":"S2h"}}},"http":{}},"DescribeLaunchConfigurations":{"input":{"type":"structure","members":{"LaunchConfigurationNames":{"type":"list","member":{}},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeLaunchConfigurationsResult","type":"structure","required":["LaunchConfigurations"],"members":{"LaunchConfigurations":{"type":"list","member":{"type":"structure","required":["LaunchConfigurationName","ImageId","InstanceType","CreatedTime"],"members":{"LaunchConfigurationName":{},"LaunchConfigurationARN":{},"ImageId":{},"KeyName":{},"SecurityGroups":{"shape":"Sw"},"ClassicLinkVPCId":{},"ClassicLinkVPCSecurityGroups":{"shape":"Sx"},"UserData":{},"InstanceType":{},"KernelId":{},"RamdiskId":{},"BlockDeviceMappings":{"shape":"Sz"},"InstanceMonitoring":{"shape":"S18"},"SpotPrice":{},"IamInstanceProfile":{},"CreatedTime":{"type":"timestamp"},"EbsOptimized":{"type":"boolean"},"AssociatePublicIpAddress":{"type":"boolean"},"PlacementTenancy":{}}}},"NextToken":{}}},"http":{}},"DescribeLifecycleHookTypes":{"output":{"resultWrapper":"DescribeLifecycleHookTypesResult","type":"structure","members":{"LifecycleHookTypes":{"shape":"S2h"}}},"http":{}},"DescribeLifecycleHooks":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"LifecycleHookNames":{"type":"list","member":{}}}},"output":{"resultWrapper":"DescribeLifecycleHooksResult","type":"structure","members":{"LifecycleHooks":{"type":"list","member":{"type":"structure","members":{"LifecycleHookName":{},"AutoScalingGroupName":{},"LifecycleTransition":{},"NotificationTargetARN":{},"RoleARN":{},"NotificationMetadata":{},"HeartbeatTimeout":{"type":"integer"},"GlobalTimeout":{"type":"integer"},"DefaultResult":{}}}}}},"http":{}},"DescribeLoadBalancers":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeLoadBalancersResult","type":"structure","members":{"LoadBalancers":{"type":"list","member":{"type":"structure","members":{"LoadBalancerName":{},"State":{}}}},"NextToken":{}}},"http":{}},"DescribeMetricCollectionTypes":{"output":{"resultWrapper":"DescribeMetricCollectionTypesResult","type":"structure","members":{"Metrics":{"type":"list","member":{"type":"structure","members":{"Metric":{}}}},"Granularities":{"type":"list","member":{"type":"structure","members":{"Granularity":{}}}}}},"http":{}},"DescribeNotificationConfigurations":{"input":{"type":"structure","members":{"AutoScalingGroupNames":{"shape":"S1x"},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeNotificationConfigurationsResult","type":"structure","required":["NotificationConfigurations"],"members":{"NotificationConfigurations":{"type":"list","member":{"type":"structure","members":{"AutoScalingGroupName":{},"TopicARN":{},"NotificationType":{}}}},"NextToken":{}}},"http":{}},"DescribePolicies":{"input":{"type":"structure","members":{"AutoScalingGroupName":{},"PolicyNames":{"type":"list","member":{}},"PolicyTypes":{"type":"list","member":{}},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribePoliciesResult","type":"structure","members":{"ScalingPolicies":{"type":"list","member":{"type":"structure","members":{"AutoScalingGroupName":{},"PolicyName":{},"PolicyARN":{},"PolicyType":{},"AdjustmentType":{},"MinAdjustmentStep":{"shape":"S3g"},"MinAdjustmentMagnitude":{"type":"integer"},"ScalingAdjustment":{"type":"integer"},"Cooldown":{"type":"integer"},"StepAdjustments":{"shape":"S3j"},"MetricAggregationType":{},"EstimatedInstanceWarmup":{"type":"integer"},"Alarms":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"AlarmARN":{}}}}}}},"NextToken":{}}},"http":{}},"DescribeScalingActivities":{"input":{"type":"structure","members":{"ActivityIds":{"type":"list","member":{}},"AutoScalingGroupName":{},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeScalingActivitiesResult","type":"structure","required":["Activities"],"members":{"Activities":{"shape":"S3s"},"NextToken":{}}},"http":{}},"DescribeScalingProcessTypes":{"output":{"resultWrapper":"DescribeScalingProcessTypesResult","type":"structure","members":{"Processes":{"type":"list","member":{"type":"structure","required":["ProcessName"],"members":{"ProcessName":{}}}}}},"http":{}},"DescribeScheduledActions":{"input":{"type":"structure","members":{"AutoScalingGroupName":{},"ScheduledActionNames":{"type":"list","member":{}},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeScheduledActionsResult","type":"structure","members":{"ScheduledUpdateGroupActions":{"type":"list","member":{"type":"structure","members":{"AutoScalingGroupName":{},"ScheduledActionName":{},"ScheduledActionARN":{},"Time":{"type":"timestamp"},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"Recurrence":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"}}}},"NextToken":{}}},"http":{}},"DescribeTags":{"input":{"type":"structure","members":{"Filters":{"type":"list","member":{"type":"structure","members":{"Name":{},"Values":{"type":"list","member":{}}}}},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeTagsResult","type":"structure","members":{"Tags":{"shape":"S2a"},"NextToken":{}}},"http":{}},"DescribeTerminationPolicyTypes":{"output":{"resultWrapper":"DescribeTerminationPolicyTypesResult","type":"structure","members":{"TerminationPolicyTypes":{"shape":"Sm"}}},"http":{}},"DetachInstances":{"input":{"type":"structure","required":["AutoScalingGroupName","ShouldDecrementDesiredCapacity"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{},"ShouldDecrementDesiredCapacity":{"type":"boolean"}}},"output":{"resultWrapper":"DetachInstancesResult","type":"structure","members":{"Activities":{"shape":"S3s"}}},"http":{}},"DetachLoadBalancers":{"input":{"type":"structure","members":{"AutoScalingGroupName":{},"LoadBalancerNames":{"shape":"S6"}}},"output":{"resultWrapper":"DetachLoadBalancersResult","type":"structure","members":{}},"http":{}},"DisableMetricsCollection":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"Metrics":{"shape":"S4g"}}},"http":{}},"EnableMetricsCollection":{"input":{"type":"structure","required":["AutoScalingGroupName","Granularity"],"members":{"AutoScalingGroupName":{},"Metrics":{"shape":"S4g"},"Granularity":{}}},"http":{}},"EnterStandby":{"input":{"type":"structure","required":["AutoScalingGroupName","ShouldDecrementDesiredCapacity"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{},"ShouldDecrementDesiredCapacity":{"type":"boolean"}}},"output":{"resultWrapper":"EnterStandbyResult","type":"structure","members":{"Activities":{"shape":"S3s"}}},"http":{}},"ExecutePolicy":{"input":{"type":"structure","required":["PolicyName"],"members":{"AutoScalingGroupName":{},"PolicyName":{},"HonorCooldown":{"type":"boolean"},"MetricValue":{"type":"double"},"BreachThreshold":{"type":"double"}}},"http":{}},"ExitStandby":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{}}},"output":{"resultWrapper":"ExitStandbyResult","type":"structure","members":{"Activities":{"shape":"S3s"}}},"http":{}},"PutLifecycleHook":{"input":{"type":"structure","required":["LifecycleHookName","AutoScalingGroupName"],"members":{"LifecycleHookName":{},"AutoScalingGroupName":{},"LifecycleTransition":{},"RoleARN":{},"NotificationTargetARN":{},"NotificationMetadata":{},"HeartbeatTimeout":{"type":"integer"},"DefaultResult":{}}},"output":{"resultWrapper":"PutLifecycleHookResult","type":"structure","members":{}},"http":{}},"PutNotificationConfiguration":{"input":{"type":"structure","required":["AutoScalingGroupName","TopicARN","NotificationTypes"],"members":{"AutoScalingGroupName":{},"TopicARN":{},"NotificationTypes":{"shape":"S2h"}}},"http":{}},"PutScalingPolicy":{"input":{"type":"structure","required":["AutoScalingGroupName","PolicyName","AdjustmentType"],"members":{"AutoScalingGroupName":{},"PolicyName":{},"PolicyType":{},"AdjustmentType":{},"MinAdjustmentStep":{"shape":"S3g"},"MinAdjustmentMagnitude":{"type":"integer"},"ScalingAdjustment":{"type":"integer"},"Cooldown":{"type":"integer"},"MetricAggregationType":{},"StepAdjustments":{"shape":"S3j"},"EstimatedInstanceWarmup":{"type":"integer"}}},"output":{"resultWrapper":"PutScalingPolicyResult","type":"structure","members":{"PolicyARN":{}}},"http":{}},"PutScheduledUpdateGroupAction":{"input":{"type":"structure","required":["AutoScalingGroupName","ScheduledActionName"],"members":{"AutoScalingGroupName":{},"ScheduledActionName":{},"Time":{"type":"timestamp"},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"Recurrence":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"}}},"http":{}},"RecordLifecycleActionHeartbeat":{"input":{"type":"structure","required":["LifecycleHookName","AutoScalingGroupName"],"members":{"LifecycleHookName":{},"AutoScalingGroupName":{},"LifecycleActionToken":{},"InstanceId":{}}},"output":{"resultWrapper":"RecordLifecycleActionHeartbeatResult","type":"structure","members":{}},"http":{}},"ResumeProcesses":{"input":{"shape":"S4x"},"http":{}},"SetDesiredCapacity":{"input":{"type":"structure","required":["AutoScalingGroupName","DesiredCapacity"],"members":{"AutoScalingGroupName":{},"DesiredCapacity":{"type":"integer"},"HonorCooldown":{"type":"boolean"}}},"http":{}},"SetInstanceHealth":{"input":{"type":"structure","required":["InstanceId","HealthStatus"],"members":{"InstanceId":{},"HealthStatus":{},"ShouldRespectGracePeriod":{"type":"boolean"}}},"http":{}},"SetInstanceProtection":{"input":{"type":"structure","required":["InstanceIds","AutoScalingGroupName","ProtectedFromScaleIn"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{},"ProtectedFromScaleIn":{"type":"boolean"}}},"output":{"resultWrapper":"SetInstanceProtectionResult","type":"structure","members":{}},"http":{}},"SuspendProcesses":{"input":{"shape":"S4x"},"http":{}},"TerminateInstanceInAutoScalingGroup":{"input":{"type":"structure","required":["InstanceId","ShouldDecrementDesiredCapacity"],"members":{"InstanceId":{},"ShouldDecrementDesiredCapacity":{"type":"boolean"}}},"output":{"resultWrapper":"TerminateInstanceInAutoScalingGroupResult","type":"structure","members":{"Activity":{"shape":"S3t"}}},"http":{}},"UpdateAutoScalingGroup":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"LaunchConfigurationName":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"},"DefaultCooldown":{"type":"integer"},"AvailabilityZones":{"shape":"Sj"},"HealthCheckType":{},"HealthCheckGracePeriod":{"type":"integer"},"PlacementGroup":{},"VPCZoneIdentifier":{},"TerminationPolicies":{"shape":"Sm"},"NewInstancesProtectedFromScaleIn":{"type":"boolean"}}},"http":{}}},"shapes":{"S2":{"type":"list","member":{}},"S6":{"type":"list","member":{}},"Sj":{"type":"list","member":{}},"Sm":{"type":"list","member":{}},"Sp":{"type":"list","member":{"type":"structure","required":["Key"],"members":{"ResourceId":{},"ResourceType":{},"Key":{},"Value":{},"PropagateAtLaunch":{"type":"boolean"}}}},"Sw":{"type":"list","member":{}},"Sx":{"type":"list","member":{}},"Sz":{"type":"list","member":{"type":"structure","required":["DeviceName"],"members":{"VirtualName":{},"DeviceName":{},"Ebs":{"type":"structure","members":{"SnapshotId":{},"VolumeSize":{"type":"integer"},"VolumeType":{},"DeleteOnTermination":{"type":"boolean"},"Iops":{"type":"integer"},"Encrypted":{"type":"boolean"}}},"NoDevice":{"type":"boolean"}}}},"S18":{"type":"structure","members":{"Enabled":{"type":"boolean"}}},"S1x":{"type":"list","member":{}},"S2a":{"type":"list","member":{"type":"structure","members":{"ResourceId":{},"ResourceType":{},"Key":{},"Value":{},"PropagateAtLaunch":{"type":"boolean"}}}},"S2h":{"type":"list","member":{}},"S3g":{"type":"integer","deprecated":true},"S3j":{"type":"list","member":{"type":"structure","required":["ScalingAdjustment"],"members":{"MetricIntervalLowerBound":{"type":"double"},"MetricIntervalUpperBound":{"type":"double"},"ScalingAdjustment":{"type":"integer"}}}},"S3s":{"type":"list","member":{"shape":"S3t"}},"S3t":{"type":"structure","required":["ActivityId","AutoScalingGroupName","Cause","StartTime","StatusCode"],"members":{"ActivityId":{},"AutoScalingGroupName":{},"Description":{},"Cause":{},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"StatusCode":{},"StatusMessage":{},"Progress":{"type":"integer"},"Details":{}}},"S4g":{"type":"list","member":{}},"S4x":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"ScalingProcesses":{"type":"list","member":{}}}}},"paginators":{"DescribeAutoScalingGroups":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"AutoScalingGroups"},"DescribeAutoScalingInstances":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"AutoScalingInstances"},"DescribeLaunchConfigurations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"LaunchConfigurations"},"DescribeNotificationConfigurations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"NotificationConfigurations"},"DescribePolicies":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"ScalingPolicies"},"DescribeScalingActivities":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"Activities"},"DescribeScheduledActions":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"ScheduledUpdateGroupActions"},"DescribeTags":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"Tags"}}};
+AWS.apiLoader.services['autoscaling']['2011-01-01'] = {"version":"2.0","metadata":{"apiVersion":"2011-01-01","endpointPrefix":"autoscaling","protocol":"query","serviceFullName":"Auto Scaling","signatureVersion":"v4","xmlNamespace":"http://autoscaling.amazonaws.com/doc/2011-01-01/"},"operations":{"AttachInstances":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{}}},"http":{}},"AttachLoadBalancerTargetGroups":{"input":{"type":"structure","required":["AutoScalingGroupName","TargetGroupARNs"],"members":{"AutoScalingGroupName":{},"TargetGroupARNs":{"shape":"S6"}}},"output":{"resultWrapper":"AttachLoadBalancerTargetGroupsResult","type":"structure","members":{}},"http":{}},"AttachLoadBalancers":{"input":{"type":"structure","required":["AutoScalingGroupName","LoadBalancerNames"],"members":{"AutoScalingGroupName":{},"LoadBalancerNames":{"shape":"Sa"}}},"output":{"resultWrapper":"AttachLoadBalancersResult","type":"structure","members":{}},"http":{}},"CompleteLifecycleAction":{"input":{"type":"structure","required":["LifecycleHookName","AutoScalingGroupName","LifecycleActionResult"],"members":{"LifecycleHookName":{},"AutoScalingGroupName":{},"LifecycleActionToken":{},"LifecycleActionResult":{},"InstanceId":{}}},"output":{"resultWrapper":"CompleteLifecycleActionResult","type":"structure","members":{}},"http":{}},"CreateAutoScalingGroup":{"input":{"type":"structure","required":["AutoScalingGroupName","MinSize","MaxSize"],"members":{"AutoScalingGroupName":{},"LaunchConfigurationName":{},"InstanceId":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"},"DefaultCooldown":{"type":"integer"},"AvailabilityZones":{"shape":"Sn"},"LoadBalancerNames":{"shape":"Sa"},"TargetGroupARNs":{"shape":"S6"},"HealthCheckType":{},"HealthCheckGracePeriod":{"type":"integer"},"PlacementGroup":{},"VPCZoneIdentifier":{},"TerminationPolicies":{"shape":"Sr"},"NewInstancesProtectedFromScaleIn":{"type":"boolean"},"Tags":{"shape":"Su"}}},"http":{}},"CreateLaunchConfiguration":{"input":{"type":"structure","required":["LaunchConfigurationName"],"members":{"LaunchConfigurationName":{},"ImageId":{},"KeyName":{},"SecurityGroups":{"shape":"S11"},"ClassicLinkVPCId":{},"ClassicLinkVPCSecurityGroups":{"shape":"S12"},"UserData":{},"InstanceId":{},"InstanceType":{},"KernelId":{},"RamdiskId":{},"BlockDeviceMappings":{"shape":"S14"},"InstanceMonitoring":{"shape":"S1d"},"SpotPrice":{},"IamInstanceProfile":{},"EbsOptimized":{"type":"boolean"},"AssociatePublicIpAddress":{"type":"boolean"},"PlacementTenancy":{}}},"http":{}},"CreateOrUpdateTags":{"input":{"type":"structure","required":["Tags"],"members":{"Tags":{"shape":"Su"}}},"http":{}},"DeleteAutoScalingGroup":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"ForceDelete":{"type":"boolean"}}},"http":{}},"DeleteLaunchConfiguration":{"input":{"type":"structure","required":["LaunchConfigurationName"],"members":{"LaunchConfigurationName":{}}},"http":{}},"DeleteLifecycleHook":{"input":{"type":"structure","required":["LifecycleHookName","AutoScalingGroupName"],"members":{"LifecycleHookName":{},"AutoScalingGroupName":{}}},"output":{"resultWrapper":"DeleteLifecycleHookResult","type":"structure","members":{}},"http":{}},"DeleteNotificationConfiguration":{"input":{"type":"structure","required":["AutoScalingGroupName","TopicARN"],"members":{"AutoScalingGroupName":{},"TopicARN":{}}},"http":{}},"DeletePolicy":{"input":{"type":"structure","required":["PolicyName"],"members":{"AutoScalingGroupName":{},"PolicyName":{}}},"http":{}},"DeleteScheduledAction":{"input":{"type":"structure","required":["AutoScalingGroupName","ScheduledActionName"],"members":{"AutoScalingGroupName":{},"ScheduledActionName":{}}},"http":{}},"DeleteTags":{"input":{"type":"structure","required":["Tags"],"members":{"Tags":{"shape":"Su"}}},"http":{}},"DescribeAccountLimits":{"output":{"resultWrapper":"DescribeAccountLimitsResult","type":"structure","members":{"MaxNumberOfAutoScalingGroups":{"type":"integer"},"MaxNumberOfLaunchConfigurations":{"type":"integer"},"NumberOfAutoScalingGroups":{"type":"integer"},"NumberOfLaunchConfigurations":{"type":"integer"}}},"http":{}},"DescribeAdjustmentTypes":{"output":{"resultWrapper":"DescribeAdjustmentTypesResult","type":"structure","members":{"AdjustmentTypes":{"type":"list","member":{"type":"structure","members":{"AdjustmentType":{}}}}}},"http":{}},"DescribeAutoScalingGroups":{"input":{"type":"structure","members":{"AutoScalingGroupNames":{"shape":"S22"},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeAutoScalingGroupsResult","type":"structure","required":["AutoScalingGroups"],"members":{"AutoScalingGroups":{"type":"list","member":{"type":"structure","required":["AutoScalingGroupName","MinSize","MaxSize","DesiredCapacity","DefaultCooldown","AvailabilityZones","HealthCheckType","CreatedTime"],"members":{"AutoScalingGroupName":{},"AutoScalingGroupARN":{},"LaunchConfigurationName":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"},"DefaultCooldown":{"type":"integer"},"AvailabilityZones":{"shape":"Sn"},"LoadBalancerNames":{"shape":"Sa"},"TargetGroupARNs":{"shape":"S6"},"HealthCheckType":{},"HealthCheckGracePeriod":{"type":"integer"},"Instances":{"type":"list","member":{"type":"structure","required":["InstanceId","AvailabilityZone","LifecycleState","HealthStatus","LaunchConfigurationName","ProtectedFromScaleIn"],"members":{"InstanceId":{},"AvailabilityZone":{},"LifecycleState":{},"HealthStatus":{},"LaunchConfigurationName":{},"ProtectedFromScaleIn":{"type":"boolean"}}}},"CreatedTime":{"type":"timestamp"},"SuspendedProcesses":{"type":"list","member":{"type":"structure","members":{"ProcessName":{},"SuspensionReason":{}}}},"PlacementGroup":{},"VPCZoneIdentifier":{},"EnabledMetrics":{"type":"list","member":{"type":"structure","members":{"Metric":{},"Granularity":{}}}},"Status":{},"Tags":{"shape":"S2f"},"TerminationPolicies":{"shape":"Sr"},"NewInstancesProtectedFromScaleIn":{"type":"boolean"}}}},"NextToken":{}}},"http":{}},"DescribeAutoScalingInstances":{"input":{"type":"structure","members":{"InstanceIds":{"shape":"S2"},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAutoScalingInstancesResult","type":"structure","members":{"AutoScalingInstances":{"type":"list","member":{"type":"structure","required":["InstanceId","AutoScalingGroupName","AvailabilityZone","LifecycleState","HealthStatus","LaunchConfigurationName","ProtectedFromScaleIn"],"members":{"InstanceId":{},"AutoScalingGroupName":{},"AvailabilityZone":{},"LifecycleState":{},"HealthStatus":{},"LaunchConfigurationName":{},"ProtectedFromScaleIn":{"type":"boolean"}}}},"NextToken":{}}},"http":{}},"DescribeAutoScalingNotificationTypes":{"output":{"resultWrapper":"DescribeAutoScalingNotificationTypesResult","type":"structure","members":{"AutoScalingNotificationTypes":{"shape":"S2m"}}},"http":{}},"DescribeLaunchConfigurations":{"input":{"type":"structure","members":{"LaunchConfigurationNames":{"type":"list","member":{}},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeLaunchConfigurationsResult","type":"structure","required":["LaunchConfigurations"],"members":{"LaunchConfigurations":{"type":"list","member":{"type":"structure","required":["LaunchConfigurationName","ImageId","InstanceType","CreatedTime"],"members":{"LaunchConfigurationName":{},"LaunchConfigurationARN":{},"ImageId":{},"KeyName":{},"SecurityGroups":{"shape":"S11"},"ClassicLinkVPCId":{},"ClassicLinkVPCSecurityGroups":{"shape":"S12"},"UserData":{},"InstanceType":{},"KernelId":{},"RamdiskId":{},"BlockDeviceMappings":{"shape":"S14"},"InstanceMonitoring":{"shape":"S1d"},"SpotPrice":{},"IamInstanceProfile":{},"CreatedTime":{"type":"timestamp"},"EbsOptimized":{"type":"boolean"},"AssociatePublicIpAddress":{"type":"boolean"},"PlacementTenancy":{}}}},"NextToken":{}}},"http":{}},"DescribeLifecycleHookTypes":{"output":{"resultWrapper":"DescribeLifecycleHookTypesResult","type":"structure","members":{"LifecycleHookTypes":{"shape":"S2m"}}},"http":{}},"DescribeLifecycleHooks":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"LifecycleHookNames":{"type":"list","member":{}}}},"output":{"resultWrapper":"DescribeLifecycleHooksResult","type":"structure","members":{"LifecycleHooks":{"type":"list","member":{"type":"structure","members":{"LifecycleHookName":{},"AutoScalingGroupName":{},"LifecycleTransition":{},"NotificationTargetARN":{},"RoleARN":{},"NotificationMetadata":{},"HeartbeatTimeout":{"type":"integer"},"GlobalTimeout":{"type":"integer"},"DefaultResult":{}}}}}},"http":{}},"DescribeLoadBalancerTargetGroups":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeLoadBalancerTargetGroupsResult","type":"structure","members":{"LoadBalancerTargetGroups":{"type":"list","member":{"type":"structure","members":{"LoadBalancerTargetGroupARN":{},"State":{}}}},"NextToken":{}}},"http":{}},"DescribeLoadBalancers":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeLoadBalancersResult","type":"structure","members":{"LoadBalancers":{"type":"list","member":{"type":"structure","members":{"LoadBalancerName":{},"State":{}}}},"NextToken":{}}},"http":{}},"DescribeMetricCollectionTypes":{"output":{"resultWrapper":"DescribeMetricCollectionTypesResult","type":"structure","members":{"Metrics":{"type":"list","member":{"type":"structure","members":{"Metric":{}}}},"Granularities":{"type":"list","member":{"type":"structure","members":{"Granularity":{}}}}}},"http":{}},"DescribeNotificationConfigurations":{"input":{"type":"structure","members":{"AutoScalingGroupNames":{"shape":"S22"},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeNotificationConfigurationsResult","type":"structure","required":["NotificationConfigurations"],"members":{"NotificationConfigurations":{"type":"list","member":{"type":"structure","members":{"AutoScalingGroupName":{},"TopicARN":{},"NotificationType":{}}}},"NextToken":{}}},"http":{}},"DescribePolicies":{"input":{"type":"structure","members":{"AutoScalingGroupName":{},"PolicyNames":{"type":"list","member":{}},"PolicyTypes":{"type":"list","member":{}},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribePoliciesResult","type":"structure","members":{"ScalingPolicies":{"type":"list","member":{"type":"structure","members":{"AutoScalingGroupName":{},"PolicyName":{},"PolicyARN":{},"PolicyType":{},"AdjustmentType":{},"MinAdjustmentStep":{"shape":"S3p"},"MinAdjustmentMagnitude":{"type":"integer"},"ScalingAdjustment":{"type":"integer"},"Cooldown":{"type":"integer"},"StepAdjustments":{"shape":"S3s"},"MetricAggregationType":{},"EstimatedInstanceWarmup":{"type":"integer"},"Alarms":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"AlarmARN":{}}}}}}},"NextToken":{}}},"http":{}},"DescribeScalingActivities":{"input":{"type":"structure","members":{"ActivityIds":{"type":"list","member":{}},"AutoScalingGroupName":{},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeScalingActivitiesResult","type":"structure","required":["Activities"],"members":{"Activities":{"shape":"S41"},"NextToken":{}}},"http":{}},"DescribeScalingProcessTypes":{"output":{"resultWrapper":"DescribeScalingProcessTypesResult","type":"structure","members":{"Processes":{"type":"list","member":{"type":"structure","required":["ProcessName"],"members":{"ProcessName":{}}}}}},"http":{}},"DescribeScheduledActions":{"input":{"type":"structure","members":{"AutoScalingGroupName":{},"ScheduledActionNames":{"type":"list","member":{}},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeScheduledActionsResult","type":"structure","members":{"ScheduledUpdateGroupActions":{"type":"list","member":{"type":"structure","members":{"AutoScalingGroupName":{},"ScheduledActionName":{},"ScheduledActionARN":{},"Time":{"type":"timestamp"},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"Recurrence":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"}}}},"NextToken":{}}},"http":{}},"DescribeTags":{"input":{"type":"structure","members":{"Filters":{"type":"list","member":{"type":"structure","members":{"Name":{},"Values":{"type":"list","member":{}}}}},"NextToken":{},"MaxRecords":{"type":"integer"}}},"output":{"resultWrapper":"DescribeTagsResult","type":"structure","members":{"Tags":{"shape":"S2f"},"NextToken":{}}},"http":{}},"DescribeTerminationPolicyTypes":{"output":{"resultWrapper":"DescribeTerminationPolicyTypesResult","type":"structure","members":{"TerminationPolicyTypes":{"shape":"Sr"}}},"http":{}},"DetachInstances":{"input":{"type":"structure","required":["AutoScalingGroupName","ShouldDecrementDesiredCapacity"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{},"ShouldDecrementDesiredCapacity":{"type":"boolean"}}},"output":{"resultWrapper":"DetachInstancesResult","type":"structure","members":{"Activities":{"shape":"S41"}}},"http":{}},"DetachLoadBalancerTargetGroups":{"input":{"type":"structure","required":["AutoScalingGroupName","TargetGroupARNs"],"members":{"AutoScalingGroupName":{},"TargetGroupARNs":{"shape":"S6"}}},"output":{"resultWrapper":"DetachLoadBalancerTargetGroupsResult","type":"structure","members":{}},"http":{}},"DetachLoadBalancers":{"input":{"type":"structure","required":["AutoScalingGroupName","LoadBalancerNames"],"members":{"AutoScalingGroupName":{},"LoadBalancerNames":{"shape":"Sa"}}},"output":{"resultWrapper":"DetachLoadBalancersResult","type":"structure","members":{}},"http":{}},"DisableMetricsCollection":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"Metrics":{"shape":"S4r"}}},"http":{}},"EnableMetricsCollection":{"input":{"type":"structure","required":["AutoScalingGroupName","Granularity"],"members":{"AutoScalingGroupName":{},"Metrics":{"shape":"S4r"},"Granularity":{}}},"http":{}},"EnterStandby":{"input":{"type":"structure","required":["AutoScalingGroupName","ShouldDecrementDesiredCapacity"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{},"ShouldDecrementDesiredCapacity":{"type":"boolean"}}},"output":{"resultWrapper":"EnterStandbyResult","type":"structure","members":{"Activities":{"shape":"S41"}}},"http":{}},"ExecutePolicy":{"input":{"type":"structure","required":["PolicyName"],"members":{"AutoScalingGroupName":{},"PolicyName":{},"HonorCooldown":{"type":"boolean"},"MetricValue":{"type":"double"},"BreachThreshold":{"type":"double"}}},"http":{}},"ExitStandby":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{}}},"output":{"resultWrapper":"ExitStandbyResult","type":"structure","members":{"Activities":{"shape":"S41"}}},"http":{}},"PutLifecycleHook":{"input":{"type":"structure","required":["LifecycleHookName","AutoScalingGroupName"],"members":{"LifecycleHookName":{},"AutoScalingGroupName":{},"LifecycleTransition":{},"RoleARN":{},"NotificationTargetARN":{},"NotificationMetadata":{},"HeartbeatTimeout":{"type":"integer"},"DefaultResult":{}}},"output":{"resultWrapper":"PutLifecycleHookResult","type":"structure","members":{}},"http":{}},"PutNotificationConfiguration":{"input":{"type":"structure","required":["AutoScalingGroupName","TopicARN","NotificationTypes"],"members":{"AutoScalingGroupName":{},"TopicARN":{},"NotificationTypes":{"shape":"S2m"}}},"http":{}},"PutScalingPolicy":{"input":{"type":"structure","required":["AutoScalingGroupName","PolicyName","AdjustmentType"],"members":{"AutoScalingGroupName":{},"PolicyName":{},"PolicyType":{},"AdjustmentType":{},"MinAdjustmentStep":{"shape":"S3p"},"MinAdjustmentMagnitude":{"type":"integer"},"ScalingAdjustment":{"type":"integer"},"Cooldown":{"type":"integer"},"MetricAggregationType":{},"StepAdjustments":{"shape":"S3s"},"EstimatedInstanceWarmup":{"type":"integer"}}},"output":{"resultWrapper":"PutScalingPolicyResult","type":"structure","members":{"PolicyARN":{}}},"http":{}},"PutScheduledUpdateGroupAction":{"input":{"type":"structure","required":["AutoScalingGroupName","ScheduledActionName"],"members":{"AutoScalingGroupName":{},"ScheduledActionName":{},"Time":{"type":"timestamp"},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"Recurrence":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"}}},"http":{}},"RecordLifecycleActionHeartbeat":{"input":{"type":"structure","required":["LifecycleHookName","AutoScalingGroupName"],"members":{"LifecycleHookName":{},"AutoScalingGroupName":{},"LifecycleActionToken":{},"InstanceId":{}}},"output":{"resultWrapper":"RecordLifecycleActionHeartbeatResult","type":"structure","members":{}},"http":{}},"ResumeProcesses":{"input":{"shape":"S58"},"http":{}},"SetDesiredCapacity":{"input":{"type":"structure","required":["AutoScalingGroupName","DesiredCapacity"],"members":{"AutoScalingGroupName":{},"DesiredCapacity":{"type":"integer"},"HonorCooldown":{"type":"boolean"}}},"http":{}},"SetInstanceHealth":{"input":{"type":"structure","required":["InstanceId","HealthStatus"],"members":{"InstanceId":{},"HealthStatus":{},"ShouldRespectGracePeriod":{"type":"boolean"}}},"http":{}},"SetInstanceProtection":{"input":{"type":"structure","required":["InstanceIds","AutoScalingGroupName","ProtectedFromScaleIn"],"members":{"InstanceIds":{"shape":"S2"},"AutoScalingGroupName":{},"ProtectedFromScaleIn":{"type":"boolean"}}},"output":{"resultWrapper":"SetInstanceProtectionResult","type":"structure","members":{}},"http":{}},"SuspendProcesses":{"input":{"shape":"S58"},"http":{}},"TerminateInstanceInAutoScalingGroup":{"input":{"type":"structure","required":["InstanceId","ShouldDecrementDesiredCapacity"],"members":{"InstanceId":{},"ShouldDecrementDesiredCapacity":{"type":"boolean"}}},"output":{"resultWrapper":"TerminateInstanceInAutoScalingGroupResult","type":"structure","members":{"Activity":{"shape":"S42"}}},"http":{}},"UpdateAutoScalingGroup":{"input":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"LaunchConfigurationName":{},"MinSize":{"type":"integer"},"MaxSize":{"type":"integer"},"DesiredCapacity":{"type":"integer"},"DefaultCooldown":{"type":"integer"},"AvailabilityZones":{"shape":"Sn"},"HealthCheckType":{},"HealthCheckGracePeriod":{"type":"integer"},"PlacementGroup":{},"VPCZoneIdentifier":{},"TerminationPolicies":{"shape":"Sr"},"NewInstancesProtectedFromScaleIn":{"type":"boolean"}}},"http":{}}},"shapes":{"S2":{"type":"list","member":{}},"S6":{"type":"list","member":{}},"Sa":{"type":"list","member":{}},"Sn":{"type":"list","member":{}},"Sr":{"type":"list","member":{}},"Su":{"type":"list","member":{"type":"structure","required":["Key"],"members":{"ResourceId":{},"ResourceType":{},"Key":{},"Value":{},"PropagateAtLaunch":{"type":"boolean"}}}},"S11":{"type":"list","member":{}},"S12":{"type":"list","member":{}},"S14":{"type":"list","member":{"type":"structure","required":["DeviceName"],"members":{"VirtualName":{},"DeviceName":{},"Ebs":{"type":"structure","members":{"SnapshotId":{},"VolumeSize":{"type":"integer"},"VolumeType":{},"DeleteOnTermination":{"type":"boolean"},"Iops":{"type":"integer"},"Encrypted":{"type":"boolean"}}},"NoDevice":{"type":"boolean"}}}},"S1d":{"type":"structure","members":{"Enabled":{"type":"boolean"}}},"S22":{"type":"list","member":{}},"S2f":{"type":"list","member":{"type":"structure","members":{"ResourceId":{},"ResourceType":{},"Key":{},"Value":{},"PropagateAtLaunch":{"type":"boolean"}}}},"S2m":{"type":"list","member":{}},"S3p":{"type":"integer","deprecated":true},"S3s":{"type":"list","member":{"type":"structure","required":["ScalingAdjustment"],"members":{"MetricIntervalLowerBound":{"type":"double"},"MetricIntervalUpperBound":{"type":"double"},"ScalingAdjustment":{"type":"integer"}}}},"S41":{"type":"list","member":{"shape":"S42"}},"S42":{"type":"structure","required":["ActivityId","AutoScalingGroupName","Cause","StartTime","StatusCode"],"members":{"ActivityId":{},"AutoScalingGroupName":{},"Description":{},"Cause":{},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"StatusCode":{},"StatusMessage":{},"Progress":{"type":"integer"},"Details":{}}},"S4r":{"type":"list","member":{}},"S58":{"type":"structure","required":["AutoScalingGroupName"],"members":{"AutoScalingGroupName":{},"ScalingProcesses":{"type":"list","member":{}}}}},"paginators":{"DescribeAutoScalingGroups":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"AutoScalingGroups"},"DescribeAutoScalingInstances":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"AutoScalingInstances"},"DescribeLaunchConfigurations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"LaunchConfigurations"},"DescribeNotificationConfigurations":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"NotificationConfigurations"},"DescribePolicies":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"ScalingPolicies"},"DescribeScalingActivities":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"Activities"},"DescribeScheduledActions":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"ScheduledUpdateGroupActions"},"DescribeTags":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"Tags"}}};
 AWS.apiLoader.services['cloudformation'] = {};
 AWS.CloudFormation = AWS.Service.defineService('cloudformation', [ '2010-05-15' ]);
 
@@ -122,7 +122,7 @@ AWS.apiLoader.services['ecr']['2015-09-21'] = {"version":"2.0","metadata":{"apiV
 AWS.apiLoader.services['ecs'] = {};
 AWS.ECS = AWS.Service.defineService('ecs', [ '2014-11-13' ]);
 
-AWS.apiLoader.services['ecs']['2014-11-13'] = {"version":"2.0","metadata":{"apiVersion":"2014-11-13","endpointPrefix":"ecs","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"Amazon ECS","serviceFullName":"Amazon EC2 Container Service","signatureVersion":"v4","targetPrefix":"AmazonEC2ContainerServiceV20141113"},"operations":{"CreateCluster":{"input":{"type":"structure","members":{"clusterName":{}}},"output":{"type":"structure","members":{"cluster":{"shape":"S4"}}},"http":{}},"CreateService":{"input":{"type":"structure","required":["serviceName","taskDefinition","desiredCount"],"members":{"cluster":{},"serviceName":{},"taskDefinition":{},"loadBalancers":{"shape":"S7"},"desiredCount":{"type":"integer"},"clientToken":{},"role":{},"deploymentConfiguration":{"shape":"Sa"}}},"output":{"type":"structure","members":{"service":{"shape":"Sc"}}},"http":{}},"DeleteCluster":{"input":{"type":"structure","required":["cluster"],"members":{"cluster":{}}},"output":{"type":"structure","members":{"cluster":{"shape":"S4"}}},"http":{}},"DeleteService":{"input":{"type":"structure","required":["service"],"members":{"cluster":{},"service":{}}},"output":{"type":"structure","members":{"service":{"shape":"Sc"}}},"http":{}},"DeregisterContainerInstance":{"input":{"type":"structure","required":["containerInstance"],"members":{"cluster":{},"containerInstance":{},"force":{"type":"boolean"}}},"output":{"type":"structure","members":{"containerInstance":{"shape":"Sp"}}},"http":{}},"DeregisterTaskDefinition":{"input":{"type":"structure","required":["taskDefinition"],"members":{"taskDefinition":{}}},"output":{"type":"structure","members":{"taskDefinition":{"shape":"S12"}}},"http":{}},"DescribeClusters":{"input":{"type":"structure","members":{"clusters":{"shape":"Sv"}}},"output":{"type":"structure","members":{"clusters":{"type":"list","member":{"shape":"S4"}},"failures":{"shape":"S1v"}}},"http":{}},"DescribeContainerInstances":{"input":{"type":"structure","required":["containerInstances"],"members":{"cluster":{},"containerInstances":{"shape":"Sv"}}},"output":{"type":"structure","members":{"containerInstances":{"type":"list","member":{"shape":"Sp"}},"failures":{"shape":"S1v"}}},"http":{}},"DescribeServices":{"input":{"type":"structure","required":["services"],"members":{"cluster":{},"services":{"shape":"Sv"}}},"output":{"type":"structure","members":{"services":{"type":"list","member":{"shape":"Sc"}},"failures":{"shape":"S1v"}}},"http":{}},"DescribeTaskDefinition":{"input":{"type":"structure","required":["taskDefinition"],"members":{"taskDefinition":{}}},"output":{"type":"structure","members":{"taskDefinition":{"shape":"S12"}}},"http":{}},"DescribeTasks":{"input":{"type":"structure","required":["tasks"],"members":{"cluster":{},"tasks":{"shape":"Sv"}}},"output":{"type":"structure","members":{"tasks":{"shape":"S27"},"failures":{"shape":"S1v"}}},"http":{}},"DiscoverPollEndpoint":{"input":{"type":"structure","members":{"containerInstance":{},"cluster":{}}},"output":{"type":"structure","members":{"endpoint":{},"telemetryEndpoint":{}}},"http":{}},"ListClusters":{"input":{"type":"structure","members":{"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"clusterArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListContainerInstances":{"input":{"type":"structure","members":{"cluster":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"containerInstanceArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListServices":{"input":{"type":"structure","members":{"cluster":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"serviceArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListTaskDefinitionFamilies":{"input":{"type":"structure","members":{"familyPrefix":{},"status":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"families":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListTaskDefinitions":{"input":{"type":"structure","members":{"familyPrefix":{},"status":{},"sort":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"taskDefinitionArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListTasks":{"input":{"type":"structure","members":{"cluster":{},"containerInstance":{},"family":{},"nextToken":{},"maxResults":{"type":"integer"},"startedBy":{},"serviceName":{},"desiredStatus":{}}},"output":{"type":"structure","members":{"taskArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"RegisterContainerInstance":{"input":{"type":"structure","members":{"cluster":{},"instanceIdentityDocument":{},"instanceIdentityDocumentSignature":{},"totalResources":{"shape":"Sr"},"versionInfo":{"shape":"Sq"},"containerInstanceArn":{},"attributes":{"shape":"Sy"}}},"output":{"type":"structure","members":{"containerInstance":{"shape":"Sp"}}},"http":{}},"RegisterTaskDefinition":{"input":{"type":"structure","required":["family","containerDefinitions"],"members":{"family":{},"taskRoleArn":{},"containerDefinitions":{"shape":"S13"},"volumes":{"shape":"S1n"}}},"output":{"type":"structure","members":{"taskDefinition":{"shape":"S12"}}},"http":{}},"RunTask":{"input":{"type":"structure","required":["taskDefinition"],"members":{"cluster":{},"taskDefinition":{},"overrides":{"shape":"S29"},"count":{"type":"integer"},"startedBy":{}}},"output":{"type":"structure","members":{"tasks":{"shape":"S27"},"failures":{"shape":"S1v"}}},"http":{}},"StartTask":{"input":{"type":"structure","required":["taskDefinition","containerInstances"],"members":{"cluster":{},"taskDefinition":{},"overrides":{"shape":"S29"},"containerInstances":{"shape":"Sv"},"startedBy":{}}},"output":{"type":"structure","members":{"tasks":{"shape":"S27"},"failures":{"shape":"S1v"}}},"http":{}},"StopTask":{"input":{"type":"structure","required":["task"],"members":{"cluster":{},"task":{},"reason":{}}},"output":{"type":"structure","members":{"task":{"shape":"S28"}}},"http":{}},"SubmitContainerStateChange":{"input":{"type":"structure","members":{"cluster":{},"task":{},"containerName":{},"status":{},"exitCode":{"type":"integer"},"reason":{},"networkBindings":{"shape":"S2e"}}},"output":{"type":"structure","members":{"acknowledgment":{}}},"http":{}},"SubmitTaskStateChange":{"input":{"type":"structure","members":{"cluster":{},"task":{},"status":{},"reason":{}}},"output":{"type":"structure","members":{"acknowledgment":{}}},"http":{}},"UpdateContainerAgent":{"input":{"type":"structure","required":["containerInstance"],"members":{"cluster":{},"containerInstance":{}}},"output":{"type":"structure","members":{"containerInstance":{"shape":"Sp"}}},"http":{}},"UpdateService":{"input":{"type":"structure","required":["service"],"members":{"cluster":{},"service":{},"desiredCount":{"type":"integer"},"taskDefinition":{},"deploymentConfiguration":{"shape":"Sa"}}},"output":{"type":"structure","members":{"service":{"shape":"Sc"}}},"http":{}}},"shapes":{"S4":{"type":"structure","members":{"clusterArn":{},"clusterName":{},"status":{},"registeredContainerInstancesCount":{"type":"integer"},"runningTasksCount":{"type":"integer"},"pendingTasksCount":{"type":"integer"},"activeServicesCount":{"type":"integer"}}},"S7":{"type":"list","member":{"type":"structure","members":{"loadBalancerName":{},"containerName":{},"containerPort":{"type":"integer"}}}},"Sa":{"type":"structure","members":{"maximumPercent":{"type":"integer"},"minimumHealthyPercent":{"type":"integer"}}},"Sc":{"type":"structure","members":{"serviceArn":{},"serviceName":{},"clusterArn":{},"loadBalancers":{"shape":"S7"},"status":{},"desiredCount":{"type":"integer"},"runningCount":{"type":"integer"},"pendingCount":{"type":"integer"},"taskDefinition":{},"deploymentConfiguration":{"shape":"Sa"},"deployments":{"type":"list","member":{"type":"structure","members":{"id":{},"status":{},"taskDefinition":{},"desiredCount":{"type":"integer"},"pendingCount":{"type":"integer"},"runningCount":{"type":"integer"},"createdAt":{"type":"timestamp"},"updatedAt":{"type":"timestamp"}}}},"roleArn":{},"events":{"type":"list","member":{"type":"structure","members":{"id":{},"createdAt":{"type":"timestamp"},"message":{}}}},"createdAt":{"type":"timestamp"}}},"Sp":{"type":"structure","members":{"containerInstanceArn":{},"ec2InstanceId":{},"versionInfo":{"shape":"Sq"},"remainingResources":{"shape":"Sr"},"registeredResources":{"shape":"Sr"},"status":{},"agentConnected":{"type":"boolean"},"runningTasksCount":{"type":"integer"},"pendingTasksCount":{"type":"integer"},"agentUpdateStatus":{},"attributes":{"shape":"Sy"}}},"Sq":{"type":"structure","members":{"agentVersion":{},"agentHash":{},"dockerVersion":{}}},"Sr":{"type":"list","member":{"type":"structure","members":{"name":{},"type":{},"doubleValue":{"type":"double"},"longValue":{"type":"long"},"integerValue":{"type":"integer"},"stringSetValue":{"shape":"Sv"}}}},"Sv":{"type":"list","member":{}},"Sy":{"type":"list","member":{"shape":"Sz"}},"Sz":{"type":"structure","required":["name"],"members":{"name":{},"value":{}}},"S12":{"type":"structure","members":{"taskDefinitionArn":{},"containerDefinitions":{"shape":"S13"},"family":{},"taskRoleArn":{},"revision":{"type":"integer"},"volumes":{"shape":"S1n"},"status":{},"requiresAttributes":{"type":"list","member":{"shape":"Sz"}}}},"S13":{"type":"list","member":{"type":"structure","members":{"name":{},"image":{},"cpu":{"type":"integer"},"memory":{"type":"integer"},"links":{"shape":"Sv"},"portMappings":{"type":"list","member":{"type":"structure","members":{"containerPort":{"type":"integer"},"hostPort":{"type":"integer"},"protocol":{}}}},"essential":{"type":"boolean"},"entryPoint":{"shape":"Sv"},"command":{"shape":"Sv"},"environment":{"shape":"S18"},"mountPoints":{"type":"list","member":{"type":"structure","members":{"sourceVolume":{},"containerPath":{},"readOnly":{"type":"boolean"}}}},"volumesFrom":{"type":"list","member":{"type":"structure","members":{"sourceContainer":{},"readOnly":{"type":"boolean"}}}},"hostname":{},"user":{},"workingDirectory":{},"disableNetworking":{"type":"boolean"},"privileged":{"type":"boolean"},"readonlyRootFilesystem":{"type":"boolean"},"dnsServers":{"shape":"Sv"},"dnsSearchDomains":{"shape":"Sv"},"extraHosts":{"type":"list","member":{"type":"structure","required":["hostname","ipAddress"],"members":{"hostname":{},"ipAddress":{}}}},"dockerSecurityOptions":{"shape":"Sv"},"dockerLabels":{"type":"map","key":{},"value":{}},"ulimits":{"type":"list","member":{"type":"structure","required":["name","softLimit","hardLimit"],"members":{"name":{},"softLimit":{"type":"integer"},"hardLimit":{"type":"integer"}}}},"logConfiguration":{"type":"structure","required":["logDriver"],"members":{"logDriver":{},"options":{"type":"map","key":{},"value":{}}}}}}},"S18":{"type":"list","member":{"type":"structure","members":{"name":{},"value":{}}}},"S1n":{"type":"list","member":{"type":"structure","members":{"name":{},"host":{"type":"structure","members":{"sourcePath":{}}}}}},"S1v":{"type":"list","member":{"type":"structure","members":{"arn":{},"reason":{}}}},"S27":{"type":"list","member":{"shape":"S28"}},"S28":{"type":"structure","members":{"taskArn":{},"clusterArn":{},"taskDefinitionArn":{},"containerInstanceArn":{},"overrides":{"shape":"S29"},"lastStatus":{},"desiredStatus":{},"containers":{"type":"list","member":{"type":"structure","members":{"containerArn":{},"taskArn":{},"name":{},"lastStatus":{},"exitCode":{"type":"integer"},"reason":{},"networkBindings":{"shape":"S2e"}}}},"startedBy":{},"stoppedReason":{},"createdAt":{"type":"timestamp"},"startedAt":{"type":"timestamp"},"stoppedAt":{"type":"timestamp"}}},"S29":{"type":"structure","members":{"containerOverrides":{"type":"list","member":{"type":"structure","members":{"name":{},"command":{"shape":"Sv"},"environment":{"shape":"S18"}}}},"taskRoleArn":{}}},"S2e":{"type":"list","member":{"type":"structure","members":{"bindIP":{},"containerPort":{"type":"integer"},"hostPort":{"type":"integer"},"protocol":{}}}}},"paginators":{"ListClusters":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"clusterArns"},"ListContainerInstances":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"containerInstanceArns"},"ListTaskDefinitions":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"taskDefinitionArns"},"ListTaskDefinitionFamilies":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"families"},"ListTasks":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"taskArns"},"ListServices":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"serviceArns"}},"waiters":{"TasksRunning":{"delay":6,"operation":"DescribeTasks","maxAttempts":100,"acceptors":[{"expected":"STOPPED","matcher":"pathAny","state":"failure","argument":"tasks[].lastStatus"},{"expected":"MISSING","matcher":"pathAny","state":"failure","argument":"failures[].reason"},{"expected":"RUNNING","matcher":"pathAll","state":"success","argument":"tasks[].lastStatus"}]},"TasksStopped":{"delay":6,"operation":"DescribeTasks","maxAttempts":100,"acceptors":[{"expected":"STOPPED","matcher":"pathAll","state":"success","argument":"tasks[].lastStatus"}]},"ServicesStable":{"delay":15,"operation":"DescribeServices","maxAttempts":40,"acceptors":[{"expected":"MISSING","matcher":"pathAny","state":"failure","argument":"failures[].reason"},{"expected":"DRAINING","matcher":"pathAny","state":"failure","argument":"services[].status"},{"expected":"INACTIVE","matcher":"pathAny","state":"failure","argument":"services[].status"},{"expected":true,"matcher":"path","state":"success","argument":"services | [@[?length(deployments)!=`1`], @[?desiredCount!=runningCount]][] | length(@) == `0`"}]},"ServicesInactive":{"delay":15,"operation":"DescribeServices","maxAttempts":40,"acceptors":[{"expected":"MISSING","matcher":"pathAny","state":"failure","argument":"failures[].reason"},{"expected":"INACTIVE","matcher":"pathAny","state":"success","argument":"services[].status"}]}}};
+AWS.apiLoader.services['ecs']['2014-11-13'] = {"version":"2.0","metadata":{"apiVersion":"2014-11-13","endpointPrefix":"ecs","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"Amazon ECS","serviceFullName":"Amazon EC2 Container Service","signatureVersion":"v4","targetPrefix":"AmazonEC2ContainerServiceV20141113"},"operations":{"CreateCluster":{"input":{"type":"structure","members":{"clusterName":{}}},"output":{"type":"structure","members":{"cluster":{"shape":"S4"}}},"http":{}},"CreateService":{"input":{"type":"structure","required":["serviceName","taskDefinition","desiredCount"],"members":{"cluster":{},"serviceName":{},"taskDefinition":{},"loadBalancers":{"shape":"S7"},"desiredCount":{"type":"integer"},"clientToken":{},"role":{},"deploymentConfiguration":{"shape":"Sa"}}},"output":{"type":"structure","members":{"service":{"shape":"Sc"}}},"http":{}},"DeleteCluster":{"input":{"type":"structure","required":["cluster"],"members":{"cluster":{}}},"output":{"type":"structure","members":{"cluster":{"shape":"S4"}}},"http":{}},"DeleteService":{"input":{"type":"structure","required":["service"],"members":{"cluster":{},"service":{}}},"output":{"type":"structure","members":{"service":{"shape":"Sc"}}},"http":{}},"DeregisterContainerInstance":{"input":{"type":"structure","required":["containerInstance"],"members":{"cluster":{},"containerInstance":{},"force":{"type":"boolean"}}},"output":{"type":"structure","members":{"containerInstance":{"shape":"Sp"}}},"http":{}},"DeregisterTaskDefinition":{"input":{"type":"structure","required":["taskDefinition"],"members":{"taskDefinition":{}}},"output":{"type":"structure","members":{"taskDefinition":{"shape":"S12"}}},"http":{}},"DescribeClusters":{"input":{"type":"structure","members":{"clusters":{"shape":"Sv"}}},"output":{"type":"structure","members":{"clusters":{"type":"list","member":{"shape":"S4"}},"failures":{"shape":"S1v"}}},"http":{}},"DescribeContainerInstances":{"input":{"type":"structure","required":["containerInstances"],"members":{"cluster":{},"containerInstances":{"shape":"Sv"}}},"output":{"type":"structure","members":{"containerInstances":{"type":"list","member":{"shape":"Sp"}},"failures":{"shape":"S1v"}}},"http":{}},"DescribeServices":{"input":{"type":"structure","required":["services"],"members":{"cluster":{},"services":{"shape":"Sv"}}},"output":{"type":"structure","members":{"services":{"type":"list","member":{"shape":"Sc"}},"failures":{"shape":"S1v"}}},"http":{}},"DescribeTaskDefinition":{"input":{"type":"structure","required":["taskDefinition"],"members":{"taskDefinition":{}}},"output":{"type":"structure","members":{"taskDefinition":{"shape":"S12"}}},"http":{}},"DescribeTasks":{"input":{"type":"structure","required":["tasks"],"members":{"cluster":{},"tasks":{"shape":"Sv"}}},"output":{"type":"structure","members":{"tasks":{"shape":"S27"},"failures":{"shape":"S1v"}}},"http":{}},"DiscoverPollEndpoint":{"input":{"type":"structure","members":{"containerInstance":{},"cluster":{}}},"output":{"type":"structure","members":{"endpoint":{},"telemetryEndpoint":{}}},"http":{}},"ListClusters":{"input":{"type":"structure","members":{"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"clusterArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListContainerInstances":{"input":{"type":"structure","members":{"cluster":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"containerInstanceArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListServices":{"input":{"type":"structure","members":{"cluster":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"serviceArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListTaskDefinitionFamilies":{"input":{"type":"structure","members":{"familyPrefix":{},"status":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"families":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListTaskDefinitions":{"input":{"type":"structure","members":{"familyPrefix":{},"status":{},"sort":{},"nextToken":{},"maxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"taskDefinitionArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"ListTasks":{"input":{"type":"structure","members":{"cluster":{},"containerInstance":{},"family":{},"nextToken":{},"maxResults":{"type":"integer"},"startedBy":{},"serviceName":{},"desiredStatus":{}}},"output":{"type":"structure","members":{"taskArns":{"shape":"Sv"},"nextToken":{}}},"http":{}},"RegisterContainerInstance":{"input":{"type":"structure","members":{"cluster":{},"instanceIdentityDocument":{},"instanceIdentityDocumentSignature":{},"totalResources":{"shape":"Sr"},"versionInfo":{"shape":"Sq"},"containerInstanceArn":{},"attributes":{"shape":"Sy"}}},"output":{"type":"structure","members":{"containerInstance":{"shape":"Sp"}}},"http":{}},"RegisterTaskDefinition":{"input":{"type":"structure","required":["family","containerDefinitions"],"members":{"family":{},"taskRoleArn":{},"containerDefinitions":{"shape":"S13"},"volumes":{"shape":"S1n"}}},"output":{"type":"structure","members":{"taskDefinition":{"shape":"S12"}}},"http":{}},"RunTask":{"input":{"type":"structure","required":["taskDefinition"],"members":{"cluster":{},"taskDefinition":{},"overrides":{"shape":"S29"},"count":{"type":"integer"},"startedBy":{}}},"output":{"type":"structure","members":{"tasks":{"shape":"S27"},"failures":{"shape":"S1v"}}},"http":{}},"StartTask":{"input":{"type":"structure","required":["taskDefinition","containerInstances"],"members":{"cluster":{},"taskDefinition":{},"overrides":{"shape":"S29"},"containerInstances":{"shape":"Sv"},"startedBy":{}}},"output":{"type":"structure","members":{"tasks":{"shape":"S27"},"failures":{"shape":"S1v"}}},"http":{}},"StopTask":{"input":{"type":"structure","required":["task"],"members":{"cluster":{},"task":{},"reason":{}}},"output":{"type":"structure","members":{"task":{"shape":"S28"}}},"http":{}},"SubmitContainerStateChange":{"input":{"type":"structure","members":{"cluster":{},"task":{},"containerName":{},"status":{},"exitCode":{"type":"integer"},"reason":{},"networkBindings":{"shape":"S2e"}}},"output":{"type":"structure","members":{"acknowledgment":{}}},"http":{}},"SubmitTaskStateChange":{"input":{"type":"structure","members":{"cluster":{},"task":{},"status":{},"reason":{}}},"output":{"type":"structure","members":{"acknowledgment":{}}},"http":{}},"UpdateContainerAgent":{"input":{"type":"structure","required":["containerInstance"],"members":{"cluster":{},"containerInstance":{}}},"output":{"type":"structure","members":{"containerInstance":{"shape":"Sp"}}},"http":{}},"UpdateService":{"input":{"type":"structure","required":["service"],"members":{"cluster":{},"service":{},"desiredCount":{"type":"integer"},"taskDefinition":{},"deploymentConfiguration":{"shape":"Sa"}}},"output":{"type":"structure","members":{"service":{"shape":"Sc"}}},"http":{}}},"shapes":{"S4":{"type":"structure","members":{"clusterArn":{},"clusterName":{},"status":{},"registeredContainerInstancesCount":{"type":"integer"},"runningTasksCount":{"type":"integer"},"pendingTasksCount":{"type":"integer"},"activeServicesCount":{"type":"integer"}}},"S7":{"type":"list","member":{"type":"structure","members":{"targetGroupArn":{},"loadBalancerName":{},"containerName":{},"containerPort":{"type":"integer"}}}},"Sa":{"type":"structure","members":{"maximumPercent":{"type":"integer"},"minimumHealthyPercent":{"type":"integer"}}},"Sc":{"type":"structure","members":{"serviceArn":{},"serviceName":{},"clusterArn":{},"loadBalancers":{"shape":"S7"},"status":{},"desiredCount":{"type":"integer"},"runningCount":{"type":"integer"},"pendingCount":{"type":"integer"},"taskDefinition":{},"deploymentConfiguration":{"shape":"Sa"},"deployments":{"type":"list","member":{"type":"structure","members":{"id":{},"status":{},"taskDefinition":{},"desiredCount":{"type":"integer"},"pendingCount":{"type":"integer"},"runningCount":{"type":"integer"},"createdAt":{"type":"timestamp"},"updatedAt":{"type":"timestamp"}}}},"roleArn":{},"events":{"type":"list","member":{"type":"structure","members":{"id":{},"createdAt":{"type":"timestamp"},"message":{}}}},"createdAt":{"type":"timestamp"}}},"Sp":{"type":"structure","members":{"containerInstanceArn":{},"ec2InstanceId":{},"versionInfo":{"shape":"Sq"},"remainingResources":{"shape":"Sr"},"registeredResources":{"shape":"Sr"},"status":{},"agentConnected":{"type":"boolean"},"runningTasksCount":{"type":"integer"},"pendingTasksCount":{"type":"integer"},"agentUpdateStatus":{},"attributes":{"shape":"Sy"}}},"Sq":{"type":"structure","members":{"agentVersion":{},"agentHash":{},"dockerVersion":{}}},"Sr":{"type":"list","member":{"type":"structure","members":{"name":{},"type":{},"doubleValue":{"type":"double"},"longValue":{"type":"long"},"integerValue":{"type":"integer"},"stringSetValue":{"shape":"Sv"}}}},"Sv":{"type":"list","member":{}},"Sy":{"type":"list","member":{"shape":"Sz"}},"Sz":{"type":"structure","required":["name"],"members":{"name":{},"value":{}}},"S12":{"type":"structure","members":{"taskDefinitionArn":{},"containerDefinitions":{"shape":"S13"},"family":{},"taskRoleArn":{},"revision":{"type":"integer"},"volumes":{"shape":"S1n"},"status":{},"requiresAttributes":{"type":"list","member":{"shape":"Sz"}}}},"S13":{"type":"list","member":{"type":"structure","members":{"name":{},"image":{},"cpu":{"type":"integer"},"memory":{"type":"integer"},"links":{"shape":"Sv"},"portMappings":{"type":"list","member":{"type":"structure","members":{"containerPort":{"type":"integer"},"hostPort":{"type":"integer"},"protocol":{}}}},"essential":{"type":"boolean"},"entryPoint":{"shape":"Sv"},"command":{"shape":"Sv"},"environment":{"shape":"S18"},"mountPoints":{"type":"list","member":{"type":"structure","members":{"sourceVolume":{},"containerPath":{},"readOnly":{"type":"boolean"}}}},"volumesFrom":{"type":"list","member":{"type":"structure","members":{"sourceContainer":{},"readOnly":{"type":"boolean"}}}},"hostname":{},"user":{},"workingDirectory":{},"disableNetworking":{"type":"boolean"},"privileged":{"type":"boolean"},"readonlyRootFilesystem":{"type":"boolean"},"dnsServers":{"shape":"Sv"},"dnsSearchDomains":{"shape":"Sv"},"extraHosts":{"type":"list","member":{"type":"structure","required":["hostname","ipAddress"],"members":{"hostname":{},"ipAddress":{}}}},"dockerSecurityOptions":{"shape":"Sv"},"dockerLabels":{"type":"map","key":{},"value":{}},"ulimits":{"type":"list","member":{"type":"structure","required":["name","softLimit","hardLimit"],"members":{"name":{},"softLimit":{"type":"integer"},"hardLimit":{"type":"integer"}}}},"logConfiguration":{"type":"structure","required":["logDriver"],"members":{"logDriver":{},"options":{"type":"map","key":{},"value":{}}}}}}},"S18":{"type":"list","member":{"type":"structure","members":{"name":{},"value":{}}}},"S1n":{"type":"list","member":{"type":"structure","members":{"name":{},"host":{"type":"structure","members":{"sourcePath":{}}}}}},"S1v":{"type":"list","member":{"type":"structure","members":{"arn":{},"reason":{}}}},"S27":{"type":"list","member":{"shape":"S28"}},"S28":{"type":"structure","members":{"taskArn":{},"clusterArn":{},"taskDefinitionArn":{},"containerInstanceArn":{},"overrides":{"shape":"S29"},"lastStatus":{},"desiredStatus":{},"containers":{"type":"list","member":{"type":"structure","members":{"containerArn":{},"taskArn":{},"name":{},"lastStatus":{},"exitCode":{"type":"integer"},"reason":{},"networkBindings":{"shape":"S2e"}}}},"startedBy":{},"stoppedReason":{},"createdAt":{"type":"timestamp"},"startedAt":{"type":"timestamp"},"stoppedAt":{"type":"timestamp"}}},"S29":{"type":"structure","members":{"containerOverrides":{"type":"list","member":{"type":"structure","members":{"name":{},"command":{"shape":"Sv"},"environment":{"shape":"S18"}}}},"taskRoleArn":{}}},"S2e":{"type":"list","member":{"type":"structure","members":{"bindIP":{},"containerPort":{"type":"integer"},"hostPort":{"type":"integer"},"protocol":{}}}}},"paginators":{"ListClusters":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"clusterArns"},"ListContainerInstances":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"containerInstanceArns"},"ListTaskDefinitions":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"taskDefinitionArns"},"ListTaskDefinitionFamilies":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"families"},"ListTasks":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"taskArns"},"ListServices":{"input_token":"nextToken","output_token":"nextToken","limit_key":"maxResults","result_key":"serviceArns"}},"waiters":{"TasksRunning":{"delay":6,"operation":"DescribeTasks","maxAttempts":100,"acceptors":[{"expected":"STOPPED","matcher":"pathAny","state":"failure","argument":"tasks[].lastStatus"},{"expected":"MISSING","matcher":"pathAny","state":"failure","argument":"failures[].reason"},{"expected":"RUNNING","matcher":"pathAll","state":"success","argument":"tasks[].lastStatus"}]},"TasksStopped":{"delay":6,"operation":"DescribeTasks","maxAttempts":100,"acceptors":[{"expected":"STOPPED","matcher":"pathAll","state":"success","argument":"tasks[].lastStatus"}]},"ServicesStable":{"delay":15,"operation":"DescribeServices","maxAttempts":40,"acceptors":[{"expected":"MISSING","matcher":"pathAny","state":"failure","argument":"failures[].reason"},{"expected":"DRAINING","matcher":"pathAny","state":"failure","argument":"services[].status"},{"expected":"INACTIVE","matcher":"pathAny","state":"failure","argument":"services[].status"},{"expected":true,"matcher":"path","state":"success","argument":"services | [@[?length(deployments)!=`1`], @[?desiredCount!=runningCount]][] | length(@) == `0`"}]},"ServicesInactive":{"delay":15,"operation":"DescribeServices","maxAttempts":40,"acceptors":[{"expected":"MISSING","matcher":"pathAny","state":"failure","argument":"failures[].reason"},{"expected":"INACTIVE","matcher":"pathAny","state":"success","argument":"services[].status"}]}}};
 AWS.apiLoader.services['elasticache'] = {};
 AWS.ElastiCache = AWS.Service.defineService('elasticache', [ '2015-02-02' ]);
 
@@ -138,7 +138,7 @@ AWS.apiLoader.services['elastictranscoder']['2012-09-25'] = {"version":"2.0","me
 AWS.apiLoader.services['elb'] = {};
 AWS.ELB = AWS.Service.defineService('elb', [ '2012-06-01' ]);
 
-AWS.apiLoader.services['elb']['2012-06-01'] = {"version":"2.0","metadata":{"apiVersion":"2012-06-01","endpointPrefix":"elasticloadbalancing","serviceFullName":"Elastic Load Balancing","signatureVersion":"v4","xmlNamespace":"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/","protocol":"query"},"operations":{"AddTags":{"input":{"type":"structure","required":["LoadBalancerNames","Tags"],"members":{"LoadBalancerNames":{"shape":"S2"},"Tags":{"shape":"S4"}}},"output":{"resultWrapper":"AddTagsResult","type":"structure","members":{}},"http":{}},"ApplySecurityGroupsToLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","SecurityGroups"],"members":{"LoadBalancerName":{},"SecurityGroups":{"shape":"Sa"}}},"output":{"resultWrapper":"ApplySecurityGroupsToLoadBalancerResult","type":"structure","members":{"SecurityGroups":{"shape":"Sa"}}},"http":{}},"AttachLoadBalancerToSubnets":{"input":{"type":"structure","required":["LoadBalancerName","Subnets"],"members":{"LoadBalancerName":{},"Subnets":{"shape":"Se"}}},"output":{"resultWrapper":"AttachLoadBalancerToSubnetsResult","type":"structure","members":{"Subnets":{"shape":"Se"}}},"http":{}},"ConfigureHealthCheck":{"input":{"type":"structure","required":["LoadBalancerName","HealthCheck"],"members":{"LoadBalancerName":{},"HealthCheck":{"shape":"Si"}}},"output":{"resultWrapper":"ConfigureHealthCheckResult","type":"structure","members":{"HealthCheck":{"shape":"Si"}}},"http":{}},"CreateAppCookieStickinessPolicy":{"input":{"type":"structure","required":["LoadBalancerName","PolicyName","CookieName"],"members":{"LoadBalancerName":{},"PolicyName":{},"CookieName":{}}},"output":{"resultWrapper":"CreateAppCookieStickinessPolicyResult","type":"structure","members":{}},"http":{}},"CreateLBCookieStickinessPolicy":{"input":{"type":"structure","required":["LoadBalancerName","PolicyName"],"members":{"LoadBalancerName":{},"PolicyName":{},"CookieExpirationPeriod":{"type":"long"}}},"output":{"resultWrapper":"CreateLBCookieStickinessPolicyResult","type":"structure","members":{}},"http":{}},"CreateLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","Listeners"],"members":{"LoadBalancerName":{},"Listeners":{"shape":"Sx"},"AvailabilityZones":{"shape":"S13"},"Subnets":{"shape":"Se"},"SecurityGroups":{"shape":"Sa"},"Scheme":{},"Tags":{"shape":"S4"}}},"output":{"resultWrapper":"CreateLoadBalancerResult","type":"structure","members":{"DNSName":{}}},"http":{}},"CreateLoadBalancerListeners":{"input":{"type":"structure","required":["LoadBalancerName","Listeners"],"members":{"LoadBalancerName":{},"Listeners":{"shape":"Sx"}}},"output":{"resultWrapper":"CreateLoadBalancerListenersResult","type":"structure","members":{}},"http":{}},"CreateLoadBalancerPolicy":{"input":{"type":"structure","required":["LoadBalancerName","PolicyName","PolicyTypeName"],"members":{"LoadBalancerName":{},"PolicyName":{},"PolicyTypeName":{},"PolicyAttributes":{"type":"list","member":{"type":"structure","members":{"AttributeName":{},"AttributeValue":{}}}}}},"output":{"resultWrapper":"CreateLoadBalancerPolicyResult","type":"structure","members":{}},"http":{}},"DeleteLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName"],"members":{"LoadBalancerName":{}}},"output":{"resultWrapper":"DeleteLoadBalancerResult","type":"structure","members":{}},"http":{}},"DeleteLoadBalancerListeners":{"input":{"type":"structure","required":["LoadBalancerName","LoadBalancerPorts"],"members":{"LoadBalancerName":{},"LoadBalancerPorts":{"type":"list","member":{"type":"integer"}}}},"output":{"resultWrapper":"DeleteLoadBalancerListenersResult","type":"structure","members":{}},"http":{}},"DeleteLoadBalancerPolicy":{"input":{"type":"structure","required":["LoadBalancerName","PolicyName"],"members":{"LoadBalancerName":{},"PolicyName":{}}},"output":{"resultWrapper":"DeleteLoadBalancerPolicyResult","type":"structure","members":{}},"http":{}},"DeregisterInstancesFromLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","Instances"],"members":{"LoadBalancerName":{},"Instances":{"shape":"S1p"}}},"output":{"resultWrapper":"DeregisterInstancesFromLoadBalancerResult","type":"structure","members":{"Instances":{"shape":"S1p"}}},"http":{}},"DescribeInstanceHealth":{"input":{"type":"structure","required":["LoadBalancerName"],"members":{"LoadBalancerName":{},"Instances":{"shape":"S1p"}}},"output":{"resultWrapper":"DescribeInstanceHealthResult","type":"structure","members":{"InstanceStates":{"type":"list","member":{"type":"structure","members":{"InstanceId":{},"State":{},"ReasonCode":{},"Description":{}}}}}},"http":{}},"DescribeLoadBalancerAttributes":{"input":{"type":"structure","required":["LoadBalancerName"],"members":{"LoadBalancerName":{}}},"output":{"resultWrapper":"DescribeLoadBalancerAttributesResult","type":"structure","members":{"LoadBalancerAttributes":{"shape":"S22"}}},"http":{}},"DescribeLoadBalancerPolicies":{"input":{"type":"structure","members":{"LoadBalancerName":{},"PolicyNames":{"shape":"S2j"}}},"output":{"resultWrapper":"DescribeLoadBalancerPoliciesResult","type":"structure","members":{"PolicyDescriptions":{"type":"list","member":{"type":"structure","members":{"PolicyName":{},"PolicyTypeName":{},"PolicyAttributeDescriptions":{"type":"list","member":{"type":"structure","members":{"AttributeName":{},"AttributeValue":{}}}}}}}}},"http":{}},"DescribeLoadBalancerPolicyTypes":{"input":{"type":"structure","members":{"PolicyTypeNames":{"type":"list","member":{}}}},"output":{"resultWrapper":"DescribeLoadBalancerPolicyTypesResult","type":"structure","members":{"PolicyTypeDescriptions":{"type":"list","member":{"type":"structure","members":{"PolicyTypeName":{},"Description":{},"PolicyAttributeTypeDescriptions":{"type":"list","member":{"type":"structure","members":{"AttributeName":{},"AttributeType":{},"Description":{},"DefaultValue":{},"Cardinality":{}}}}}}}}},"http":{}},"DescribeLoadBalancers":{"input":{"type":"structure","members":{"LoadBalancerNames":{"shape":"S2"},"Marker":{},"PageSize":{"type":"integer"}}},"output":{"resultWrapper":"DescribeLoadBalancersResult","type":"structure","members":{"LoadBalancerDescriptions":{"type":"list","member":{"type":"structure","members":{"LoadBalancerName":{},"DNSName":{},"CanonicalHostedZoneName":{},"CanonicalHostedZoneNameID":{},"ListenerDescriptions":{"type":"list","member":{"type":"structure","members":{"Listener":{"shape":"Sy"},"PolicyNames":{"shape":"S2j"}}}},"Policies":{"type":"structure","members":{"AppCookieStickinessPolicies":{"type":"list","member":{"type":"structure","members":{"PolicyName":{},"CookieName":{}}}},"LBCookieStickinessPolicies":{"type":"list","member":{"type":"structure","members":{"PolicyName":{},"CookieExpirationPeriod":{"type":"long"}}}},"OtherPolicies":{"shape":"S2j"}}},"BackendServerDescriptions":{"type":"list","member":{"type":"structure","members":{"InstancePort":{"type":"integer"},"PolicyNames":{"shape":"S2j"}}}},"AvailabilityZones":{"shape":"S13"},"Subnets":{"shape":"Se"},"VPCId":{},"Instances":{"shape":"S1p"},"HealthCheck":{"shape":"Si"},"SourceSecurityGroup":{"type":"structure","members":{"OwnerAlias":{},"GroupName":{}}},"SecurityGroups":{"shape":"Sa"},"CreatedTime":{"type":"timestamp"},"Scheme":{}}}},"NextMarker":{}}},"http":{}},"DescribeTags":{"input":{"type":"structure","required":["LoadBalancerNames"],"members":{"LoadBalancerNames":{"type":"list","member":{}}}},"output":{"resultWrapper":"DescribeTagsResult","type":"structure","members":{"TagDescriptions":{"type":"list","member":{"type":"structure","members":{"LoadBalancerName":{},"Tags":{"shape":"S4"}}}}}},"http":{}},"DetachLoadBalancerFromSubnets":{"input":{"type":"structure","required":["LoadBalancerName","Subnets"],"members":{"LoadBalancerName":{},"Subnets":{"shape":"Se"}}},"output":{"resultWrapper":"DetachLoadBalancerFromSubnetsResult","type":"structure","members":{"Subnets":{"shape":"Se"}}},"http":{}},"DisableAvailabilityZonesForLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","AvailabilityZones"],"members":{"LoadBalancerName":{},"AvailabilityZones":{"shape":"S13"}}},"output":{"resultWrapper":"DisableAvailabilityZonesForLoadBalancerResult","type":"structure","members":{"AvailabilityZones":{"shape":"S13"}}},"http":{}},"EnableAvailabilityZonesForLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","AvailabilityZones"],"members":{"LoadBalancerName":{},"AvailabilityZones":{"shape":"S13"}}},"output":{"resultWrapper":"EnableAvailabilityZonesForLoadBalancerResult","type":"structure","members":{"AvailabilityZones":{"shape":"S13"}}},"http":{}},"ModifyLoadBalancerAttributes":{"input":{"type":"structure","required":["LoadBalancerName","LoadBalancerAttributes"],"members":{"LoadBalancerName":{},"LoadBalancerAttributes":{"shape":"S22"}}},"output":{"resultWrapper":"ModifyLoadBalancerAttributesResult","type":"structure","members":{"LoadBalancerName":{},"LoadBalancerAttributes":{"shape":"S22"}}},"http":{}},"RegisterInstancesWithLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","Instances"],"members":{"LoadBalancerName":{},"Instances":{"shape":"S1p"}}},"output":{"resultWrapper":"RegisterInstancesWithLoadBalancerResult","type":"structure","members":{"Instances":{"shape":"S1p"}}},"http":{}},"RemoveTags":{"input":{"type":"structure","required":["LoadBalancerNames","Tags"],"members":{"LoadBalancerNames":{"shape":"S2"},"Tags":{"type":"list","member":{"type":"structure","members":{"Key":{}}}}}},"output":{"resultWrapper":"RemoveTagsResult","type":"structure","members":{}},"http":{}},"SetLoadBalancerListenerSSLCertificate":{"input":{"type":"structure","required":["LoadBalancerName","LoadBalancerPort","SSLCertificateId"],"members":{"LoadBalancerName":{},"LoadBalancerPort":{"type":"integer"},"SSLCertificateId":{}}},"output":{"resultWrapper":"SetLoadBalancerListenerSSLCertificateResult","type":"structure","members":{}},"http":{}},"SetLoadBalancerPoliciesForBackendServer":{"input":{"type":"structure","required":["LoadBalancerName","InstancePort","PolicyNames"],"members":{"LoadBalancerName":{},"InstancePort":{"type":"integer"},"PolicyNames":{"shape":"S2j"}}},"output":{"resultWrapper":"SetLoadBalancerPoliciesForBackendServerResult","type":"structure","members":{}},"http":{}},"SetLoadBalancerPoliciesOfListener":{"input":{"type":"structure","required":["LoadBalancerName","LoadBalancerPort","PolicyNames"],"members":{"LoadBalancerName":{},"LoadBalancerPort":{"type":"integer"},"PolicyNames":{"shape":"S2j"}}},"output":{"resultWrapper":"SetLoadBalancerPoliciesOfListenerResult","type":"structure","members":{}},"http":{}}},"shapes":{"S2":{"type":"list","member":{}},"S4":{"type":"list","member":{"type":"structure","required":["Key"],"members":{"Key":{},"Value":{}}}},"Sa":{"type":"list","member":{}},"Se":{"type":"list","member":{}},"Si":{"type":"structure","required":["Target","Interval","Timeout","UnhealthyThreshold","HealthyThreshold"],"members":{"Target":{},"Interval":{"type":"integer"},"Timeout":{"type":"integer"},"UnhealthyThreshold":{"type":"integer"},"HealthyThreshold":{"type":"integer"}}},"Sx":{"type":"list","member":{"shape":"Sy"}},"Sy":{"type":"structure","required":["Protocol","LoadBalancerPort","InstancePort"],"members":{"Protocol":{},"LoadBalancerPort":{"type":"integer"},"InstanceProtocol":{},"InstancePort":{"type":"integer"},"SSLCertificateId":{}}},"S13":{"type":"list","member":{}},"S1p":{"type":"list","member":{"type":"structure","members":{"InstanceId":{}}}},"S22":{"type":"structure","members":{"CrossZoneLoadBalancing":{"type":"structure","required":["Enabled"],"members":{"Enabled":{"type":"boolean"}}},"AccessLog":{"type":"structure","required":["Enabled"],"members":{"Enabled":{"type":"boolean"},"S3BucketName":{},"EmitInterval":{"type":"integer"},"S3BucketPrefix":{}}},"ConnectionDraining":{"type":"structure","required":["Enabled"],"members":{"Enabled":{"type":"boolean"},"Timeout":{"type":"integer"}}},"ConnectionSettings":{"type":"structure","required":["IdleTimeout"],"members":{"IdleTimeout":{"type":"integer"}}},"AdditionalAttributes":{"type":"list","member":{"type":"structure","members":{"Key":{},"Value":{}}}}}},"S2j":{"type":"list","member":{}}},"examples":{},"paginators":{"DescribeInstanceHealth":{"result_key":"InstanceStates"},"DescribeLoadBalancerPolicies":{"result_key":"PolicyDescriptions"},"DescribeLoadBalancerPolicyTypes":{"result_key":"PolicyTypeDescriptions"},"DescribeLoadBalancers":{"input_token":"Marker","output_token":"NextMarker","result_key":"LoadBalancerDescriptions"}},"waiters":{"InstanceInService":{"delay":15,"operation":"DescribeInstanceHealth","maxAttempts":40,"acceptors":[{"expected":"InService","matcher":"pathAll","state":"success","argument":"InstanceStates[].State"}]},"InstanceDeregistered":{"delay":15,"operation":"DescribeInstanceHealth","maxAttempts":40,"acceptors":[{"expected":"OutOfService","matcher":"pathAll","state":"success","argument":"InstanceStates[].State"},{"matcher":"error","expected":"InvalidInstance","state":"success"}]},"AnyInstanceInService":{"delay":15,"operation":"DescribeInstanceHealth","maxAttempts":40,"acceptors":[{"expected":"InService","matcher":"pathAny","state":"success","argument":"InstanceStates[].State"}]}}};
+AWS.apiLoader.services['elb']['2012-06-01'] = {"version":"2.0","metadata":{"apiVersion":"2012-06-01","endpointPrefix":"elasticloadbalancing","protocol":"query","serviceFullName":"Elastic Load Balancing","signatureVersion":"v4","xmlNamespace":"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/"},"operations":{"AddTags":{"input":{"type":"structure","required":["LoadBalancerNames","Tags"],"members":{"LoadBalancerNames":{"shape":"S2"},"Tags":{"shape":"S4"}}},"output":{"resultWrapper":"AddTagsResult","type":"structure","members":{}},"http":{}},"ApplySecurityGroupsToLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","SecurityGroups"],"members":{"LoadBalancerName":{},"SecurityGroups":{"shape":"Sa"}}},"output":{"resultWrapper":"ApplySecurityGroupsToLoadBalancerResult","type":"structure","members":{"SecurityGroups":{"shape":"Sa"}}},"http":{}},"AttachLoadBalancerToSubnets":{"input":{"type":"structure","required":["LoadBalancerName","Subnets"],"members":{"LoadBalancerName":{},"Subnets":{"shape":"Se"}}},"output":{"resultWrapper":"AttachLoadBalancerToSubnetsResult","type":"structure","members":{"Subnets":{"shape":"Se"}}},"http":{}},"ConfigureHealthCheck":{"input":{"type":"structure","required":["LoadBalancerName","HealthCheck"],"members":{"LoadBalancerName":{},"HealthCheck":{"shape":"Si"}}},"output":{"resultWrapper":"ConfigureHealthCheckResult","type":"structure","members":{"HealthCheck":{"shape":"Si"}}},"http":{}},"CreateAppCookieStickinessPolicy":{"input":{"type":"structure","required":["LoadBalancerName","PolicyName","CookieName"],"members":{"LoadBalancerName":{},"PolicyName":{},"CookieName":{}}},"output":{"resultWrapper":"CreateAppCookieStickinessPolicyResult","type":"structure","members":{}},"http":{}},"CreateLBCookieStickinessPolicy":{"input":{"type":"structure","required":["LoadBalancerName","PolicyName"],"members":{"LoadBalancerName":{},"PolicyName":{},"CookieExpirationPeriod":{"type":"long"}}},"output":{"resultWrapper":"CreateLBCookieStickinessPolicyResult","type":"structure","members":{}},"http":{}},"CreateLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","Listeners"],"members":{"LoadBalancerName":{},"Listeners":{"shape":"Sx"},"AvailabilityZones":{"shape":"S13"},"Subnets":{"shape":"Se"},"SecurityGroups":{"shape":"Sa"},"Scheme":{},"Tags":{"shape":"S4"}}},"output":{"resultWrapper":"CreateLoadBalancerResult","type":"structure","members":{"DNSName":{}}},"http":{}},"CreateLoadBalancerListeners":{"input":{"type":"structure","required":["LoadBalancerName","Listeners"],"members":{"LoadBalancerName":{},"Listeners":{"shape":"Sx"}}},"output":{"resultWrapper":"CreateLoadBalancerListenersResult","type":"structure","members":{}},"http":{}},"CreateLoadBalancerPolicy":{"input":{"type":"structure","required":["LoadBalancerName","PolicyName","PolicyTypeName"],"members":{"LoadBalancerName":{},"PolicyName":{},"PolicyTypeName":{},"PolicyAttributes":{"type":"list","member":{"type":"structure","members":{"AttributeName":{},"AttributeValue":{}}}}}},"output":{"resultWrapper":"CreateLoadBalancerPolicyResult","type":"structure","members":{}},"http":{}},"DeleteLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName"],"members":{"LoadBalancerName":{}}},"output":{"resultWrapper":"DeleteLoadBalancerResult","type":"structure","members":{}},"http":{}},"DeleteLoadBalancerListeners":{"input":{"type":"structure","required":["LoadBalancerName","LoadBalancerPorts"],"members":{"LoadBalancerName":{},"LoadBalancerPorts":{"type":"list","member":{"type":"integer"}}}},"output":{"resultWrapper":"DeleteLoadBalancerListenersResult","type":"structure","members":{}},"http":{}},"DeleteLoadBalancerPolicy":{"input":{"type":"structure","required":["LoadBalancerName","PolicyName"],"members":{"LoadBalancerName":{},"PolicyName":{}}},"output":{"resultWrapper":"DeleteLoadBalancerPolicyResult","type":"structure","members":{}},"http":{}},"DeregisterInstancesFromLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","Instances"],"members":{"LoadBalancerName":{},"Instances":{"shape":"S1p"}}},"output":{"resultWrapper":"DeregisterInstancesFromLoadBalancerResult","type":"structure","members":{"Instances":{"shape":"S1p"}}},"http":{}},"DescribeInstanceHealth":{"input":{"type":"structure","required":["LoadBalancerName"],"members":{"LoadBalancerName":{},"Instances":{"shape":"S1p"}}},"output":{"resultWrapper":"DescribeInstanceHealthResult","type":"structure","members":{"InstanceStates":{"type":"list","member":{"type":"structure","members":{"InstanceId":{},"State":{},"ReasonCode":{},"Description":{}}}}}},"http":{}},"DescribeLoadBalancerAttributes":{"input":{"type":"structure","required":["LoadBalancerName"],"members":{"LoadBalancerName":{}}},"output":{"resultWrapper":"DescribeLoadBalancerAttributesResult","type":"structure","members":{"LoadBalancerAttributes":{"shape":"S22"}}},"http":{}},"DescribeLoadBalancerPolicies":{"input":{"type":"structure","members":{"LoadBalancerName":{},"PolicyNames":{"shape":"S2k"}}},"output":{"resultWrapper":"DescribeLoadBalancerPoliciesResult","type":"structure","members":{"PolicyDescriptions":{"type":"list","member":{"type":"structure","members":{"PolicyName":{},"PolicyTypeName":{},"PolicyAttributeDescriptions":{"type":"list","member":{"type":"structure","members":{"AttributeName":{},"AttributeValue":{}}}}}}}}},"http":{}},"DescribeLoadBalancerPolicyTypes":{"input":{"type":"structure","members":{"PolicyTypeNames":{"type":"list","member":{}}}},"output":{"resultWrapper":"DescribeLoadBalancerPolicyTypesResult","type":"structure","members":{"PolicyTypeDescriptions":{"type":"list","member":{"type":"structure","members":{"PolicyTypeName":{},"Description":{},"PolicyAttributeTypeDescriptions":{"type":"list","member":{"type":"structure","members":{"AttributeName":{},"AttributeType":{},"Description":{},"DefaultValue":{},"Cardinality":{}}}}}}}}},"http":{}},"DescribeLoadBalancers":{"input":{"type":"structure","members":{"LoadBalancerNames":{"shape":"S2"},"Marker":{},"PageSize":{"type":"integer"}}},"output":{"resultWrapper":"DescribeLoadBalancersResult","type":"structure","members":{"LoadBalancerDescriptions":{"type":"list","member":{"type":"structure","members":{"LoadBalancerName":{},"DNSName":{},"CanonicalHostedZoneName":{},"CanonicalHostedZoneNameID":{},"ListenerDescriptions":{"type":"list","member":{"type":"structure","members":{"Listener":{"shape":"Sy"},"PolicyNames":{"shape":"S2k"}}}},"Policies":{"type":"structure","members":{"AppCookieStickinessPolicies":{"type":"list","member":{"type":"structure","members":{"PolicyName":{},"CookieName":{}}}},"LBCookieStickinessPolicies":{"type":"list","member":{"type":"structure","members":{"PolicyName":{},"CookieExpirationPeriod":{"type":"long"}}}},"OtherPolicies":{"shape":"S2k"}}},"BackendServerDescriptions":{"type":"list","member":{"type":"structure","members":{"InstancePort":{"type":"integer"},"PolicyNames":{"shape":"S2k"}}}},"AvailabilityZones":{"shape":"S13"},"Subnets":{"shape":"Se"},"VPCId":{},"Instances":{"shape":"S1p"},"HealthCheck":{"shape":"Si"},"SourceSecurityGroup":{"type":"structure","members":{"OwnerAlias":{},"GroupName":{}}},"SecurityGroups":{"shape":"Sa"},"CreatedTime":{"type":"timestamp"},"Scheme":{}}}},"NextMarker":{}}},"http":{}},"DescribeTags":{"input":{"type":"structure","required":["LoadBalancerNames"],"members":{"LoadBalancerNames":{"type":"list","member":{}}}},"output":{"resultWrapper":"DescribeTagsResult","type":"structure","members":{"TagDescriptions":{"type":"list","member":{"type":"structure","members":{"LoadBalancerName":{},"Tags":{"shape":"S4"}}}}}},"http":{}},"DetachLoadBalancerFromSubnets":{"input":{"type":"structure","required":["LoadBalancerName","Subnets"],"members":{"LoadBalancerName":{},"Subnets":{"shape":"Se"}}},"output":{"resultWrapper":"DetachLoadBalancerFromSubnetsResult","type":"structure","members":{"Subnets":{"shape":"Se"}}},"http":{}},"DisableAvailabilityZonesForLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","AvailabilityZones"],"members":{"LoadBalancerName":{},"AvailabilityZones":{"shape":"S13"}}},"output":{"resultWrapper":"DisableAvailabilityZonesForLoadBalancerResult","type":"structure","members":{"AvailabilityZones":{"shape":"S13"}}},"http":{}},"EnableAvailabilityZonesForLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","AvailabilityZones"],"members":{"LoadBalancerName":{},"AvailabilityZones":{"shape":"S13"}}},"output":{"resultWrapper":"EnableAvailabilityZonesForLoadBalancerResult","type":"structure","members":{"AvailabilityZones":{"shape":"S13"}}},"http":{}},"ModifyLoadBalancerAttributes":{"input":{"type":"structure","required":["LoadBalancerName","LoadBalancerAttributes"],"members":{"LoadBalancerName":{},"LoadBalancerAttributes":{"shape":"S22"}}},"output":{"resultWrapper":"ModifyLoadBalancerAttributesResult","type":"structure","members":{"LoadBalancerName":{},"LoadBalancerAttributes":{"shape":"S22"}}},"http":{}},"RegisterInstancesWithLoadBalancer":{"input":{"type":"structure","required":["LoadBalancerName","Instances"],"members":{"LoadBalancerName":{},"Instances":{"shape":"S1p"}}},"output":{"resultWrapper":"RegisterInstancesWithLoadBalancerResult","type":"structure","members":{"Instances":{"shape":"S1p"}}},"http":{}},"RemoveTags":{"input":{"type":"structure","required":["LoadBalancerNames","Tags"],"members":{"LoadBalancerNames":{"shape":"S2"},"Tags":{"type":"list","member":{"type":"structure","members":{"Key":{}}}}}},"output":{"resultWrapper":"RemoveTagsResult","type":"structure","members":{}},"http":{}},"SetLoadBalancerListenerSSLCertificate":{"input":{"type":"structure","required":["LoadBalancerName","LoadBalancerPort","SSLCertificateId"],"members":{"LoadBalancerName":{},"LoadBalancerPort":{"type":"integer"},"SSLCertificateId":{}}},"output":{"resultWrapper":"SetLoadBalancerListenerSSLCertificateResult","type":"structure","members":{}},"http":{}},"SetLoadBalancerPoliciesForBackendServer":{"input":{"type":"structure","required":["LoadBalancerName","InstancePort","PolicyNames"],"members":{"LoadBalancerName":{},"InstancePort":{"type":"integer"},"PolicyNames":{"shape":"S2k"}}},"output":{"resultWrapper":"SetLoadBalancerPoliciesForBackendServerResult","type":"structure","members":{}},"http":{}},"SetLoadBalancerPoliciesOfListener":{"input":{"type":"structure","required":["LoadBalancerName","LoadBalancerPort","PolicyNames"],"members":{"LoadBalancerName":{},"LoadBalancerPort":{"type":"integer"},"PolicyNames":{"shape":"S2k"}}},"output":{"resultWrapper":"SetLoadBalancerPoliciesOfListenerResult","type":"structure","members":{}},"http":{}}},"shapes":{"S2":{"type":"list","member":{}},"S4":{"type":"list","member":{"type":"structure","required":["Key"],"members":{"Key":{},"Value":{}}}},"Sa":{"type":"list","member":{}},"Se":{"type":"list","member":{}},"Si":{"type":"structure","required":["Target","Interval","Timeout","UnhealthyThreshold","HealthyThreshold"],"members":{"Target":{},"Interval":{"type":"integer"},"Timeout":{"type":"integer"},"UnhealthyThreshold":{"type":"integer"},"HealthyThreshold":{"type":"integer"}}},"Sx":{"type":"list","member":{"shape":"Sy"}},"Sy":{"type":"structure","required":["Protocol","LoadBalancerPort","InstancePort"],"members":{"Protocol":{},"LoadBalancerPort":{"type":"integer"},"InstanceProtocol":{},"InstancePort":{"type":"integer"},"SSLCertificateId":{}}},"S13":{"type":"list","member":{}},"S1p":{"type":"list","member":{"type":"structure","members":{"InstanceId":{}}}},"S22":{"type":"structure","members":{"CrossZoneLoadBalancing":{"type":"structure","required":["Enabled"],"members":{"Enabled":{"type":"boolean"}}},"AccessLog":{"type":"structure","required":["Enabled"],"members":{"Enabled":{"type":"boolean"},"S3BucketName":{},"EmitInterval":{"type":"integer"},"S3BucketPrefix":{}}},"ConnectionDraining":{"type":"structure","required":["Enabled"],"members":{"Enabled":{"type":"boolean"},"Timeout":{"type":"integer"}}},"ConnectionSettings":{"type":"structure","required":["IdleTimeout"],"members":{"IdleTimeout":{"type":"integer"}}},"AdditionalAttributes":{"type":"list","member":{"type":"structure","members":{"Key":{},"Value":{}}}}}},"S2k":{"type":"list","member":{}}},"paginators":{"DescribeInstanceHealth":{"result_key":"InstanceStates"},"DescribeLoadBalancerPolicies":{"result_key":"PolicyDescriptions"},"DescribeLoadBalancerPolicyTypes":{"result_key":"PolicyTypeDescriptions"},"DescribeLoadBalancers":{"input_token":"Marker","output_token":"NextMarker","result_key":"LoadBalancerDescriptions"}},"waiters":{"InstanceDeregistered":{"delay":15,"operation":"DescribeInstanceHealth","maxAttempts":40,"acceptors":[{"expected":"OutOfService","matcher":"pathAll","state":"success","argument":"InstanceStates[].State"},{"matcher":"error","expected":"InvalidInstance","state":"success"}]},"AnyInstanceInService":{"acceptors":[{"argument":"InstanceStates[].State","expected":"InService","matcher":"pathAny","state":"success"}],"delay":15,"maxAttempts":40,"operation":"DescribeInstanceHealth"},"InstanceInService":{"acceptors":[{"argument":"InstanceStates[].State","expected":"InService","matcher":"pathAll","state":"success"}],"delay":15,"maxAttempts":40,"operation":"DescribeInstanceHealth"}}};
 AWS.apiLoader.services['emr'] = {};
 AWS.EMR = AWS.Service.defineService('emr', [ '2009-03-31' ]);
 
@@ -167,7 +167,7 @@ AWS.apiLoader.services['kinesis']['2013-12-02'] = {"version":"2.0","metadata":{"
 AWS.apiLoader.services['kms'] = {};
 AWS.KMS = AWS.Service.defineService('kms', [ '2014-11-01' ]);
 
-AWS.apiLoader.services['kms']['2014-11-01'] = {"version":"2.0","metadata":{"apiVersion":"2014-11-01","endpointPrefix":"kms","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"KMS","serviceFullName":"AWS Key Management Service","signatureVersion":"v4","targetPrefix":"TrentService"},"operations":{"CancelKeyDeletion":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"output":{"type":"structure","members":{"KeyId":{}}},"http":{}},"CreateAlias":{"input":{"type":"structure","required":["AliasName","TargetKeyId"],"members":{"AliasName":{},"TargetKeyId":{}}},"http":{}},"CreateGrant":{"input":{"type":"structure","required":["KeyId","GranteePrincipal"],"members":{"KeyId":{},"GranteePrincipal":{},"RetiringPrincipal":{},"Operations":{"shape":"S8"},"Constraints":{"shape":"Sa"},"GrantTokens":{"shape":"Se"},"Name":{}}},"output":{"type":"structure","members":{"GrantToken":{},"GrantId":{}}},"http":{}},"CreateKey":{"input":{"type":"structure","members":{"Policy":{},"Description":{},"KeyUsage":{},"BypassPolicyLockoutSafetyCheck":{"type":"boolean"}}},"output":{"type":"structure","members":{"KeyMetadata":{"shape":"Sp"}}},"http":{}},"Decrypt":{"input":{"type":"structure","required":["CiphertextBlob"],"members":{"CiphertextBlob":{"type":"blob"},"EncryptionContext":{"shape":"Sb"},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"KeyId":{},"Plaintext":{"shape":"Sx"}}},"http":{}},"DeleteAlias":{"input":{"type":"structure","required":["AliasName"],"members":{"AliasName":{}}},"http":{}},"DescribeKey":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"KeyMetadata":{"shape":"Sp"}}},"http":{}},"DisableKey":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"http":{}},"DisableKeyRotation":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"http":{}},"EnableKey":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"http":{}},"EnableKeyRotation":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"http":{}},"Encrypt":{"input":{"type":"structure","required":["KeyId","Plaintext"],"members":{"KeyId":{},"Plaintext":{"shape":"Sx"},"EncryptionContext":{"shape":"Sb"},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"CiphertextBlob":{"type":"blob"},"KeyId":{}}},"http":{}},"GenerateDataKey":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"EncryptionContext":{"shape":"Sb"},"NumberOfBytes":{"type":"integer"},"KeySpec":{},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"CiphertextBlob":{"type":"blob"},"Plaintext":{"shape":"Sx"},"KeyId":{}}},"http":{}},"GenerateDataKeyWithoutPlaintext":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"EncryptionContext":{"shape":"Sb"},"KeySpec":{},"NumberOfBytes":{"type":"integer"},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"CiphertextBlob":{"type":"blob"},"KeyId":{}}},"http":{}},"GenerateRandom":{"input":{"type":"structure","members":{"NumberOfBytes":{"type":"integer"}}},"output":{"type":"structure","members":{"Plaintext":{"shape":"Sx"}}},"http":{}},"GetKeyPolicy":{"input":{"type":"structure","required":["KeyId","PolicyName"],"members":{"KeyId":{},"PolicyName":{}}},"output":{"type":"structure","members":{"Policy":{}}},"http":{}},"GetKeyRotationStatus":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"output":{"type":"structure","members":{"KeyRotationEnabled":{"type":"boolean"}}},"http":{}},"ListAliases":{"input":{"type":"structure","members":{"Limit":{"type":"integer"},"Marker":{}}},"output":{"type":"structure","members":{"Aliases":{"type":"list","member":{"type":"structure","members":{"AliasName":{},"AliasArn":{},"TargetKeyId":{}}}},"NextMarker":{},"Truncated":{"type":"boolean"}}},"http":{}},"ListGrants":{"input":{"type":"structure","required":["KeyId"],"members":{"Limit":{"type":"integer"},"Marker":{},"KeyId":{}}},"output":{"shape":"S1r"},"http":{}},"ListKeyPolicies":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"Limit":{"type":"integer"},"Marker":{}}},"output":{"type":"structure","members":{"PolicyNames":{"type":"list","member":{}},"NextMarker":{},"Truncated":{"type":"boolean"}}},"http":{}},"ListKeys":{"input":{"type":"structure","members":{"Limit":{"type":"integer"},"Marker":{}}},"output":{"type":"structure","members":{"Keys":{"type":"list","member":{"type":"structure","members":{"KeyId":{},"KeyArn":{}}}},"NextMarker":{},"Truncated":{"type":"boolean"}}},"http":{}},"ListRetirableGrants":{"input":{"type":"structure","required":["RetiringPrincipal"],"members":{"Limit":{"type":"integer"},"Marker":{},"RetiringPrincipal":{}}},"output":{"shape":"S1r"},"http":{}},"PutKeyPolicy":{"input":{"type":"structure","required":["KeyId","PolicyName","Policy"],"members":{"KeyId":{},"PolicyName":{},"Policy":{},"BypassPolicyLockoutSafetyCheck":{"type":"boolean"}}},"http":{}},"ReEncrypt":{"input":{"type":"structure","required":["CiphertextBlob","DestinationKeyId"],"members":{"CiphertextBlob":{"type":"blob"},"SourceEncryptionContext":{"shape":"Sb"},"DestinationKeyId":{},"DestinationEncryptionContext":{"shape":"Sb"},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"CiphertextBlob":{"type":"blob"},"SourceKeyId":{},"KeyId":{}}},"http":{}},"RetireGrant":{"input":{"type":"structure","members":{"GrantToken":{},"KeyId":{},"GrantId":{}}},"http":{}},"RevokeGrant":{"input":{"type":"structure","required":["KeyId","GrantId"],"members":{"KeyId":{},"GrantId":{}}},"http":{}},"ScheduleKeyDeletion":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"PendingWindowInDays":{"type":"integer"}}},"output":{"type":"structure","members":{"KeyId":{},"DeletionDate":{"type":"timestamp"}}},"http":{}},"UpdateAlias":{"input":{"type":"structure","required":["AliasName","TargetKeyId"],"members":{"AliasName":{},"TargetKeyId":{}}},"http":{}},"UpdateKeyDescription":{"input":{"type":"structure","required":["KeyId","Description"],"members":{"KeyId":{},"Description":{}}},"http":{}}},"shapes":{"S8":{"type":"list","member":{}},"Sa":{"type":"structure","members":{"EncryptionContextSubset":{"shape":"Sb"},"EncryptionContextEquals":{"shape":"Sb"}}},"Sb":{"type":"map","key":{},"value":{}},"Se":{"type":"list","member":{}},"Sp":{"type":"structure","required":["KeyId"],"members":{"AWSAccountId":{},"KeyId":{},"Arn":{},"CreationDate":{"type":"timestamp"},"Enabled":{"type":"boolean"},"Description":{},"KeyUsage":{},"KeyState":{},"DeletionDate":{"type":"timestamp"}}},"Sx":{"type":"blob","sensitive":true},"S1r":{"type":"structure","members":{"Grants":{"type":"list","member":{"type":"structure","members":{"KeyId":{},"GrantId":{},"Name":{},"CreationDate":{"type":"timestamp"},"GranteePrincipal":{},"RetiringPrincipal":{},"IssuingAccount":{},"Operations":{"shape":"S8"},"Constraints":{"shape":"Sa"}}}},"NextMarker":{},"Truncated":{"type":"boolean"}}}},"paginators":{"ListAliases":{"limit_key":"Limit","input_token":"Marker","output_token":"NextMarker","more_results":"Truncated","result_key":"Aliases"},"ListGrants":{"limit_key":"Limit","input_token":"Marker","output_token":"NextMarker","more_results":"Truncated","result_key":"Grants"},"ListKeyPolicies":{"limit_key":"Limit","input_token":"Marker","output_token":"NextMarker","more_results":"Truncated","result_key":"PolicyNames"},"ListKeys":{"limit_key":"Limit","input_token":"Marker","output_token":"NextMarker","more_results":"Truncated","result_key":"Keys"}}};
+AWS.apiLoader.services['kms']['2014-11-01'] = {"version":"2.0","metadata":{"apiVersion":"2014-11-01","endpointPrefix":"kms","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"KMS","serviceFullName":"AWS Key Management Service","signatureVersion":"v4","targetPrefix":"TrentService"},"operations":{"CancelKeyDeletion":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"output":{"type":"structure","members":{"KeyId":{}}},"http":{}},"CreateAlias":{"input":{"type":"structure","required":["AliasName","TargetKeyId"],"members":{"AliasName":{},"TargetKeyId":{}}},"http":{}},"CreateGrant":{"input":{"type":"structure","required":["KeyId","GranteePrincipal"],"members":{"KeyId":{},"GranteePrincipal":{},"RetiringPrincipal":{},"Operations":{"shape":"S8"},"Constraints":{"shape":"Sa"},"GrantTokens":{"shape":"Se"},"Name":{}}},"output":{"type":"structure","members":{"GrantToken":{},"GrantId":{}}},"http":{}},"CreateKey":{"input":{"type":"structure","members":{"Policy":{},"Description":{},"KeyUsage":{},"Origin":{},"BypassPolicyLockoutSafetyCheck":{"type":"boolean"}}},"output":{"type":"structure","members":{"KeyMetadata":{"shape":"Sq"}}},"http":{}},"Decrypt":{"input":{"type":"structure","required":["CiphertextBlob"],"members":{"CiphertextBlob":{"type":"blob"},"EncryptionContext":{"shape":"Sb"},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"KeyId":{},"Plaintext":{"shape":"Sz"}}},"http":{}},"DeleteAlias":{"input":{"type":"structure","required":["AliasName"],"members":{"AliasName":{}}},"http":{}},"DeleteImportedKeyMaterial":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"http":{}},"DescribeKey":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"KeyMetadata":{"shape":"Sq"}}},"http":{}},"DisableKey":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"http":{}},"DisableKeyRotation":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"http":{}},"EnableKey":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"http":{}},"EnableKeyRotation":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"http":{}},"Encrypt":{"input":{"type":"structure","required":["KeyId","Plaintext"],"members":{"KeyId":{},"Plaintext":{"shape":"Sz"},"EncryptionContext":{"shape":"Sb"},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"CiphertextBlob":{"type":"blob"},"KeyId":{}}},"http":{}},"GenerateDataKey":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"EncryptionContext":{"shape":"Sb"},"NumberOfBytes":{"type":"integer"},"KeySpec":{},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"CiphertextBlob":{"type":"blob"},"Plaintext":{"shape":"Sz"},"KeyId":{}}},"http":{}},"GenerateDataKeyWithoutPlaintext":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"EncryptionContext":{"shape":"Sb"},"KeySpec":{},"NumberOfBytes":{"type":"integer"},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"CiphertextBlob":{"type":"blob"},"KeyId":{}}},"http":{}},"GenerateRandom":{"input":{"type":"structure","members":{"NumberOfBytes":{"type":"integer"}}},"output":{"type":"structure","members":{"Plaintext":{"shape":"Sz"}}},"http":{}},"GetKeyPolicy":{"input":{"type":"structure","required":["KeyId","PolicyName"],"members":{"KeyId":{},"PolicyName":{}}},"output":{"type":"structure","members":{"Policy":{}}},"http":{}},"GetKeyRotationStatus":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{}}},"output":{"type":"structure","members":{"KeyRotationEnabled":{"type":"boolean"}}},"http":{}},"GetParametersForImport":{"input":{"type":"structure","required":["KeyId","WrappingAlgorithm","WrappingKeySpec"],"members":{"KeyId":{},"WrappingAlgorithm":{},"WrappingKeySpec":{}}},"output":{"type":"structure","members":{"KeyId":{},"ImportToken":{"type":"blob"},"PublicKey":{"shape":"Sz"},"ParametersValidTo":{"type":"timestamp"}}},"http":{}},"ImportKeyMaterial":{"input":{"type":"structure","required":["KeyId","ImportToken","EncryptedKeyMaterial","ValidTo"],"members":{"KeyId":{},"ImportToken":{"type":"blob"},"EncryptedKeyMaterial":{"type":"blob"},"ValidTo":{"type":"timestamp"},"ExpirationModel":{}}},"output":{"type":"structure","members":{}},"http":{}},"ListAliases":{"input":{"type":"structure","members":{"Limit":{"type":"integer"},"Marker":{}}},"output":{"type":"structure","members":{"Aliases":{"type":"list","member":{"type":"structure","members":{"AliasName":{},"AliasArn":{},"TargetKeyId":{}}}},"NextMarker":{},"Truncated":{"type":"boolean"}}},"http":{}},"ListGrants":{"input":{"type":"structure","required":["KeyId"],"members":{"Limit":{"type":"integer"},"Marker":{},"KeyId":{}}},"output":{"shape":"S20"},"http":{}},"ListKeyPolicies":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"Limit":{"type":"integer"},"Marker":{}}},"output":{"type":"structure","members":{"PolicyNames":{"type":"list","member":{}},"NextMarker":{},"Truncated":{"type":"boolean"}}},"http":{}},"ListKeys":{"input":{"type":"structure","members":{"Limit":{"type":"integer"},"Marker":{}}},"output":{"type":"structure","members":{"Keys":{"type":"list","member":{"type":"structure","members":{"KeyId":{},"KeyArn":{}}}},"NextMarker":{},"Truncated":{"type":"boolean"}}},"http":{}},"ListRetirableGrants":{"input":{"type":"structure","required":["RetiringPrincipal"],"members":{"Limit":{"type":"integer"},"Marker":{},"RetiringPrincipal":{}}},"output":{"shape":"S20"},"http":{}},"PutKeyPolicy":{"input":{"type":"structure","required":["KeyId","PolicyName","Policy"],"members":{"KeyId":{},"PolicyName":{},"Policy":{},"BypassPolicyLockoutSafetyCheck":{"type":"boolean"}}},"http":{}},"ReEncrypt":{"input":{"type":"structure","required":["CiphertextBlob","DestinationKeyId"],"members":{"CiphertextBlob":{"type":"blob"},"SourceEncryptionContext":{"shape":"Sb"},"DestinationKeyId":{},"DestinationEncryptionContext":{"shape":"Sb"},"GrantTokens":{"shape":"Se"}}},"output":{"type":"structure","members":{"CiphertextBlob":{"type":"blob"},"SourceKeyId":{},"KeyId":{}}},"http":{}},"RetireGrant":{"input":{"type":"structure","members":{"GrantToken":{},"KeyId":{},"GrantId":{}}},"http":{}},"RevokeGrant":{"input":{"type":"structure","required":["KeyId","GrantId"],"members":{"KeyId":{},"GrantId":{}}},"http":{}},"ScheduleKeyDeletion":{"input":{"type":"structure","required":["KeyId"],"members":{"KeyId":{},"PendingWindowInDays":{"type":"integer"}}},"output":{"type":"structure","members":{"KeyId":{},"DeletionDate":{"type":"timestamp"}}},"http":{}},"UpdateAlias":{"input":{"type":"structure","required":["AliasName","TargetKeyId"],"members":{"AliasName":{},"TargetKeyId":{}}},"http":{}},"UpdateKeyDescription":{"input":{"type":"structure","required":["KeyId","Description"],"members":{"KeyId":{},"Description":{}}},"http":{}}},"shapes":{"S8":{"type":"list","member":{}},"Sa":{"type":"structure","members":{"EncryptionContextSubset":{"shape":"Sb"},"EncryptionContextEquals":{"shape":"Sb"}}},"Sb":{"type":"map","key":{},"value":{}},"Se":{"type":"list","member":{}},"Sq":{"type":"structure","required":["KeyId"],"members":{"AWSAccountId":{},"KeyId":{},"Arn":{},"CreationDate":{"type":"timestamp"},"Enabled":{"type":"boolean"},"Description":{},"KeyUsage":{},"KeyState":{},"DeletionDate":{"type":"timestamp"},"ValidTo":{"type":"timestamp"},"Origin":{},"ExpirationModel":{}}},"Sz":{"type":"blob","sensitive":true},"S20":{"type":"structure","members":{"Grants":{"type":"list","member":{"type":"structure","members":{"KeyId":{},"GrantId":{},"Name":{},"CreationDate":{"type":"timestamp"},"GranteePrincipal":{},"RetiringPrincipal":{},"IssuingAccount":{},"Operations":{"shape":"S8"},"Constraints":{"shape":"Sa"}}}},"NextMarker":{},"Truncated":{"type":"boolean"}}}},"paginators":{"ListAliases":{"limit_key":"Limit","input_token":"Marker","output_token":"NextMarker","more_results":"Truncated","result_key":"Aliases"},"ListGrants":{"limit_key":"Limit","input_token":"Marker","output_token":"NextMarker","more_results":"Truncated","result_key":"Grants"},"ListKeyPolicies":{"limit_key":"Limit","input_token":"Marker","output_token":"NextMarker","more_results":"Truncated","result_key":"PolicyNames"},"ListKeys":{"limit_key":"Limit","input_token":"Marker","output_token":"NextMarker","more_results":"Truncated","result_key":"Keys"}}};
 AWS.apiLoader.services['lambda'] = {};
 AWS.Lambda = AWS.Service.defineService('lambda', [ '2014-11-11', '2015-03-31' ]);
 
@@ -242,7 +242,258 @@ AWS.WAF = AWS.Service.defineService('waf', [ '2015-08-24' ]);
 
 AWS.apiLoader.services['waf']['2015-08-24'] = {"version":"2.0","metadata":{"apiVersion":"2015-08-24","endpointPrefix":"waf","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"WAF","serviceFullName":"AWS WAF","signatureVersion":"v4","targetPrefix":"AWSWAF_20150824"},"operations":{"CreateByteMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"},"ChangeToken":{}}},"http":{}},"CreateIPSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"},"ChangeToken":{}}},"http":{}},"CreateRule":{"input":{"type":"structure","required":["Name","MetricName","ChangeToken"],"members":{"Name":{},"MetricName":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"},"ChangeToken":{}}},"http":{}},"CreateSizeConstraintSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"SizeConstraintSet":{"shape":"Sw"},"ChangeToken":{}}},"http":{}},"CreateSqlInjectionMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"S13"},"ChangeToken":{}}},"http":{}},"CreateWebACL":{"input":{"type":"structure","required":["Name","MetricName","DefaultAction","ChangeToken"],"members":{"Name":{},"MetricName":{},"DefaultAction":{"shape":"S17"},"ChangeToken":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S1a"},"ChangeToken":{}}},"http":{}},"CreateXssMatchSet":{"input":{"type":"structure","required":["Name","ChangeToken"],"members":{"Name":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"XssMatchSet":{"shape":"S1g"},"ChangeToken":{}}},"http":{}},"DeleteByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken"],"members":{"ByteMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken"],"members":{"IPSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteRule":{"input":{"type":"structure","required":["RuleId","ChangeToken"],"members":{"RuleId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId","ChangeToken"],"members":{"SizeConstraintSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"DeleteXssMatchSet":{"input":{"type":"structure","required":["XssMatchSetId","ChangeToken"],"members":{"XssMatchSetId":{},"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId"],"members":{"ByteMatchSetId":{}}},"output":{"type":"structure","members":{"ByteMatchSet":{"shape":"S5"}}},"http":{}},"GetChangeToken":{"input":{"type":"structure","members":{}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"GetChangeTokenStatus":{"input":{"type":"structure","required":["ChangeToken"],"members":{"ChangeToken":{}}},"output":{"type":"structure","members":{"ChangeTokenStatus":{}}},"http":{}},"GetIPSet":{"input":{"type":"structure","required":["IPSetId"],"members":{"IPSetId":{}}},"output":{"type":"structure","members":{"IPSet":{"shape":"Sh"}}},"http":{}},"GetRule":{"input":{"type":"structure","required":["RuleId"],"members":{"RuleId":{}}},"output":{"type":"structure","members":{"Rule":{"shape":"Sp"}}},"http":{}},"GetSampledRequests":{"input":{"type":"structure","required":["WebAclId","RuleId","TimeWindow","MaxItems"],"members":{"WebAclId":{},"RuleId":{},"TimeWindow":{"shape":"S29"},"MaxItems":{"type":"long"}}},"output":{"type":"structure","members":{"SampledRequests":{"type":"list","member":{"type":"structure","required":["Request","Weight"],"members":{"Request":{"type":"structure","members":{"ClientIP":{},"Country":{},"URI":{},"Method":{},"HTTPVersion":{},"Headers":{"type":"list","member":{"type":"structure","members":{"Name":{},"Value":{}}}}}},"Weight":{"type":"long"},"Timestamp":{"type":"timestamp"},"Action":{}}}},"PopulationSize":{"type":"long"},"TimeWindow":{"shape":"S29"}}},"http":{}},"GetSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId"],"members":{"SizeConstraintSetId":{}}},"output":{"type":"structure","members":{"SizeConstraintSet":{"shape":"Sw"}}},"http":{}},"GetSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId"],"members":{"SqlInjectionMatchSetId":{}}},"output":{"type":"structure","members":{"SqlInjectionMatchSet":{"shape":"S13"}}},"http":{}},"GetWebACL":{"input":{"type":"structure","required":["WebACLId"],"members":{"WebACLId":{}}},"output":{"type":"structure","members":{"WebACL":{"shape":"S1a"}}},"http":{}},"GetXssMatchSet":{"input":{"type":"structure","required":["XssMatchSetId"],"members":{"XssMatchSetId":{}}},"output":{"type":"structure","members":{"XssMatchSet":{"shape":"S1g"}}},"http":{}},"ListByteMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"ByteMatchSets":{"type":"list","member":{"type":"structure","required":["ByteMatchSetId","Name"],"members":{"ByteMatchSetId":{},"Name":{}}}}}},"http":{}},"ListIPSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"IPSets":{"type":"list","member":{"type":"structure","required":["IPSetId","Name"],"members":{"IPSetId":{},"Name":{}}}}}},"http":{}},"ListRules":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"Rules":{"type":"list","member":{"type":"structure","required":["RuleId","Name"],"members":{"RuleId":{},"Name":{}}}}}},"http":{}},"ListSizeConstraintSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"SizeConstraintSets":{"type":"list","member":{"type":"structure","required":["SizeConstraintSetId","Name"],"members":{"SizeConstraintSetId":{},"Name":{}}}}}},"http":{}},"ListSqlInjectionMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"SqlInjectionMatchSets":{"type":"list","member":{"type":"structure","required":["SqlInjectionMatchSetId","Name"],"members":{"SqlInjectionMatchSetId":{},"Name":{}}}}}},"http":{}},"ListWebACLs":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"WebACLs":{"type":"list","member":{"type":"structure","required":["WebACLId","Name"],"members":{"WebACLId":{},"Name":{}}}}}},"http":{}},"ListXssMatchSets":{"input":{"type":"structure","required":["Limit"],"members":{"NextMarker":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"XssMatchSets":{"type":"list","member":{"type":"structure","required":["XssMatchSetId","Name"],"members":{"XssMatchSetId":{},"Name":{}}}}}},"http":{}},"UpdateByteMatchSet":{"input":{"type":"structure","required":["ByteMatchSetId","ChangeToken","Updates"],"members":{"ByteMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ByteMatchTuple"],"members":{"Action":{},"ByteMatchTuple":{"shape":"S8"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateIPSet":{"input":{"type":"structure","required":["IPSetId","ChangeToken","Updates"],"members":{"IPSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","IPSetDescriptor"],"members":{"Action":{},"IPSetDescriptor":{"shape":"Sj"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateRule":{"input":{"type":"structure","required":["RuleId","ChangeToken","Updates"],"members":{"RuleId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","Predicate"],"members":{"Action":{},"Predicate":{"shape":"Sr"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateSizeConstraintSet":{"input":{"type":"structure","required":["SizeConstraintSetId","ChangeToken","Updates"],"members":{"SizeConstraintSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","SizeConstraint"],"members":{"Action":{},"SizeConstraint":{"shape":"Sy"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateSqlInjectionMatchSet":{"input":{"type":"structure","required":["SqlInjectionMatchSetId","ChangeToken","Updates"],"members":{"SqlInjectionMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","SqlInjectionMatchTuple"],"members":{"Action":{},"SqlInjectionMatchTuple":{"shape":"S15"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateWebACL":{"input":{"type":"structure","required":["WebACLId","ChangeToken"],"members":{"WebACLId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","ActivatedRule"],"members":{"Action":{},"ActivatedRule":{"shape":"S1c"}}}},"DefaultAction":{"shape":"S17"}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}},"UpdateXssMatchSet":{"input":{"type":"structure","required":["XssMatchSetId","ChangeToken","Updates"],"members":{"XssMatchSetId":{},"ChangeToken":{},"Updates":{"type":"list","member":{"type":"structure","required":["Action","XssMatchTuple"],"members":{"Action":{},"XssMatchTuple":{"shape":"S1i"}}}}}},"output":{"type":"structure","members":{"ChangeToken":{}}},"http":{}}},"shapes":{"S5":{"type":"structure","required":["ByteMatchSetId","ByteMatchTuples"],"members":{"ByteMatchSetId":{},"Name":{},"ByteMatchTuples":{"type":"list","member":{"shape":"S8"}}}},"S8":{"type":"structure","required":["FieldToMatch","TargetString","TextTransformation","PositionalConstraint"],"members":{"FieldToMatch":{"shape":"S9"},"TargetString":{"type":"blob"},"TextTransformation":{},"PositionalConstraint":{}}},"S9":{"type":"structure","required":["Type"],"members":{"Type":{},"Data":{}}},"Sh":{"type":"structure","required":["IPSetId","IPSetDescriptors"],"members":{"IPSetId":{},"Name":{},"IPSetDescriptors":{"type":"list","member":{"shape":"Sj"}}}},"Sj":{"type":"structure","required":["Type","Value"],"members":{"Type":{},"Value":{}}},"Sp":{"type":"structure","required":["RuleId","Predicates"],"members":{"RuleId":{},"Name":{},"MetricName":{},"Predicates":{"type":"list","member":{"shape":"Sr"}}}},"Sr":{"type":"structure","required":["Negated","Type","DataId"],"members":{"Negated":{"type":"boolean"},"Type":{},"DataId":{}}},"Sw":{"type":"structure","required":["SizeConstraintSetId","SizeConstraints"],"members":{"SizeConstraintSetId":{},"Name":{},"SizeConstraints":{"type":"list","member":{"shape":"Sy"}}}},"Sy":{"type":"structure","required":["FieldToMatch","TextTransformation","ComparisonOperator","Size"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{},"ComparisonOperator":{},"Size":{"type":"long"}}},"S13":{"type":"structure","required":["SqlInjectionMatchSetId","SqlInjectionMatchTuples"],"members":{"SqlInjectionMatchSetId":{},"Name":{},"SqlInjectionMatchTuples":{"type":"list","member":{"shape":"S15"}}}},"S15":{"type":"structure","required":["FieldToMatch","TextTransformation"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{}}},"S17":{"type":"structure","required":["Type"],"members":{"Type":{}}},"S1a":{"type":"structure","required":["WebACLId","DefaultAction","Rules"],"members":{"WebACLId":{},"Name":{},"MetricName":{},"DefaultAction":{"shape":"S17"},"Rules":{"type":"list","member":{"shape":"S1c"}}}},"S1c":{"type":"structure","required":["Priority","RuleId","Action"],"members":{"Priority":{"type":"integer"},"RuleId":{},"Action":{"shape":"S17"}}},"S1g":{"type":"structure","required":["XssMatchSetId","XssMatchTuples"],"members":{"XssMatchSetId":{},"Name":{},"XssMatchTuples":{"type":"list","member":{"shape":"S1i"}}}},"S1i":{"type":"structure","required":["FieldToMatch","TextTransformation"],"members":{"FieldToMatch":{"shape":"S9"},"TextTransformation":{}}},"S29":{"type":"structure","required":["StartTime","EndTime"],"members":{"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"}}}}};
 
-},{"./core":4,"./http/xhr":18,"./services/apigateway":42,"./services/cloudfront":43,"./services/cognitoidentity":44,"./services/dynamodb":45,"./services/ec2":46,"./services/iotdata":47,"./services/machinelearning":48,"./services/route53":49,"./services/s3":50,"./services/sqs":51,"./services/sts":52,"./xml/browser_parser":62}],2:[function(require,module,exports){
+},{"./core":5,"./http/xhr":19,"./services/apigateway":43,"./services/cloudfront":44,"./services/cognitoidentity":45,"./services/dynamodb":46,"./services/ec2":47,"./services/iotdata":48,"./services/machinelearning":49,"./services/route53":50,"./services/s3":51,"./services/sqs":52,"./services/sts":53,"./xml/browser_parser":63}],2:[function(require,module,exports){
+module.exports={
+  "acm": {
+    "name": "ACM"
+  },
+  "apigateway": {
+    "name": "APIGateway"
+  },
+  "applicationautoscaling": {
+    "prefix": "application-autoscaling",
+    "name": "ApplicationAutoScaling"
+  },
+  "autoscaling": {
+    "name": "AutoScaling"
+  },
+  "cloudformation": {
+    "name": "CloudFormation"
+  },
+  "cloudfront": {
+    "name": "CloudFront",
+    "versions": ["2013-05-12*", "2013-11-11*", "2014-05-31*", "2014-10-21*", "2014-11-06*", "2015-04-17*", "2015-07-27*", "2015-09-17*", "2016-01-13*", "2016-01-28*"]
+  },
+  "cloudhsm": {
+    "name": "CloudHSM"
+  },
+  "cloudsearch": {
+    "name": "CloudSearch"
+  },
+  "cloudsearchdomain": {
+    "name": "CloudSearchDomain"
+  },
+  "cloudtrail": {
+    "name": "CloudTrail"
+  },
+  "cloudwatch": {
+    "prefix": "monitoring",
+    "name": "CloudWatch"
+  },
+  "cloudwatchevents": {
+    "prefix": "events",
+    "name": "CloudWatchEvents",
+    "versions": ["2014-02-03*"]
+  },
+  "cloudwatchlogs": {
+    "prefix": "logs",
+    "name": "CloudWatchLogs"
+  },
+  "codecommit": {
+    "name": "CodeCommit"
+  },
+  "codedeploy": {
+    "name": "CodeDeploy"
+  },
+  "codepipeline": {
+    "name": "CodePipeline"
+  },
+  "cognitoidentity": {
+    "prefix": "cognito-identity",
+    "name": "CognitoIdentity"
+  },
+  "cognitoidentityserviceprovider": {
+    "prefix": "cognito-idp",
+    "name": "CognitoIdentityServiceProvider"
+  },
+  "cognitosync": {
+    "prefix": "cognito-sync",
+    "name": "CognitoSync"
+  },
+  "configservice": {
+    "prefix": "config",
+    "name": "ConfigService"
+  },
+  "datapipeline": {
+    "name": "DataPipeline"
+  },
+  "devicefarm": {
+    "name": "DeviceFarm"
+  },
+  "directconnect": {
+    "name": "DirectConnect"
+  },
+  "directoryservice": {
+    "prefix": "ds",
+    "name": "DirectoryService"
+  },
+  "discovery": {
+    "name": "Discovery"
+  },
+  "dms": {
+    "name": "DMS"
+  },
+  "dynamodb": {
+    "name": "DynamoDB"
+  },
+  "dynamodbstreams": {
+    "prefix": "streams.dynamodb",
+    "name": "DynamoDBStreams"
+  },
+  "ec2": {
+    "name": "EC2",
+    "versions": ["2013-06-15*", "2013-10-15*", "2014-02-01*", "2014-05-01*", "2014-06-15*", "2014-09-01*", "2014-10-01*", "2015-03-01*", "2015-04-15*", "2015-10-01*"]
+  },
+  "ecr": {
+    "name": "ECR"
+  },
+  "ecs": {
+    "name": "ECS"
+  },
+  "efs": {
+    "prefix": "elasticfilesystem",
+    "name": "EFS"
+  },
+  "elasticache": {
+    "name": "ElastiCache",
+    "versions": ["2012-11-15*", "2014-03-24*", "2014-07-15*", "2014-09-30*"]
+  },
+  "elasticbeanstalk": {
+    "name": "ElasticBeanstalk"
+  },
+  "elb": {
+    "prefix": "elasticloadbalancing",
+    "name": "ELB"
+  },
+  "elbv2": {
+    "prefix": "elasticloadbalancingv2",
+    "name": "ELBv2"
+  },
+  "emr": {
+    "prefix": "elasticmapreduce",
+    "name": "EMR"
+  },
+  "es": {
+    "name": "ES"
+  },
+  "elastictranscoder": {
+    "name": "ElasticTranscoder"
+  },
+  "firehose": {
+    "name": "Firehose"
+  },
+  "gamelift": {
+    "name": "GameLift"
+  },
+  "glacier": {
+    "name": "Glacier"
+  },
+  "iam": {
+    "name": "IAM"
+  },
+  "importexport": {
+    "name": "ImportExport"
+  },
+  "inspector": {
+    "name": "Inspector",
+    "versions": ["2015-08-18*"]
+  },
+  "iot": {
+    "name": "Iot"
+  },
+  "iotdata": {
+    "prefix": "iot-data",
+    "name": "IotData"
+  },
+  "kinesis": {
+    "name": "Kinesis"
+  },
+  "kinesisanalytics": {
+    "name": "KinesisAnalytics"
+  },
+  "kms": {
+    "name": "KMS"
+  },
+  "lambda": {
+    "name": "Lambda"
+  },
+  "machinelearning": {
+    "name": "MachineLearning"
+  },
+  "marketplacecommerceanalytics": {
+    "name": "MarketplaceCommerceAnalytics"
+  },
+  "marketplacemetering": {
+      "prefix": "meteringmarketplace",
+      "name": "MarketplaceMetering"
+  },
+  "mobileanalytics": {
+    "name": "MobileAnalytics"
+  },
+  "opsworks": {
+    "name": "OpsWorks"
+  },
+  "rds": {
+    "name": "RDS",
+    "versions": ["2014-09-01*"]
+  },
+  "redshift": {
+    "name": "Redshift"
+  },
+  "route53": {
+    "name": "Route53"
+  },
+  "route53domains": {
+    "name": "Route53Domains"
+  },
+  "s3": {
+    "name": "S3",
+    "dualstackAvailable": true
+  },
+  "servicecatalog": {
+    "name": "ServiceCatalog"
+  },
+  "ses": {
+    "prefix": "email",
+    "name": "SES"
+  },
+  "simpledb": {
+    "prefix": "sdb",
+    "name": "SimpleDB"
+  },
+  "snowball": {
+    "name": "Snowball"
+  },
+  "sns": {
+    "name": "SNS"
+  },
+  "sqs": {
+    "name": "SQS"
+  },
+  "ssm": {
+    "name": "SSM"
+  },
+  "storagegateway": {
+    "name": "StorageGateway"
+  },
+  "sts": {
+    "name": "STS"
+  },
+  "support": {
+    "name": "Support"
+  },
+  "swf": {
+    "name": "SWF"
+  },
+  "waf": {
+    "name": "WAF"
+  },
+  "workspaces": {
+    "name": "WorkSpaces"
+  }
+}
+
+},{}],3:[function(require,module,exports){
 var crypto = require('crypto'),
     url = require('url'),
     AWS = require('../core'),
@@ -397,7 +648,7 @@ AWS.CloudFront.Signer = inherit({
 
 module.exports = AWS.CloudFront.Signer;
 
-},{"../core":4,"crypto":69,"url":81}],3:[function(require,module,exports){
+},{"../core":5,"crypto":70,"url":82}],4:[function(require,module,exports){
 var AWS = require('./core');
 require('./credentials');
 require('./credentials/credential_provider_chain');
@@ -582,7 +833,7 @@ AWS.Config = AWS.util.inherit({
 
 AWS.config = new AWS.Config();
 
-},{"./core":4,"./credentials":5,"./credentials/credential_provider_chain":7}],4:[function(require,module,exports){
+},{"./core":5,"./credentials":6,"./credentials/credential_provider_chain":8}],5:[function(require,module,exports){
 
 var AWS = { util: require('./util') };
 
@@ -594,7 +845,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.4.14',
+  VERSION: '2.5.0',
 
 
   Signers: {},
@@ -657,7 +908,7 @@ require('./param_validator');
 
 AWS.events = new AWS.SequentialExecutor();
 
-},{"./config":3,"./credentials":5,"./credentials/cognito_identity_credentials":6,"./credentials/credential_provider_chain":7,"./credentials/saml_credentials":8,"./credentials/temporary_credentials":9,"./credentials/web_identity_credentials":10,"./event_listeners":16,"./http":17,"./json/builder":19,"./json/parser":20,"./model/api":21,"./model/operation":23,"./model/paginator":24,"./model/resource_waiter":25,"./model/shape":26,"./param_validator":27,"./protocol/json":28,"./protocol/query":29,"./protocol/rest":30,"./protocol/rest_json":31,"./protocol/rest_xml":32,"./request":36,"./resource_waiter":37,"./response":38,"./sequential_executor":40,"./service":41,"./signers/request_signer":54,"./util":61,"./xml/builder":63}],5:[function(require,module,exports){
+},{"./config":4,"./credentials":6,"./credentials/cognito_identity_credentials":7,"./credentials/credential_provider_chain":8,"./credentials/saml_credentials":9,"./credentials/temporary_credentials":10,"./credentials/web_identity_credentials":11,"./event_listeners":17,"./http":18,"./json/builder":20,"./json/parser":21,"./model/api":22,"./model/operation":24,"./model/paginator":25,"./model/resource_waiter":26,"./model/shape":27,"./param_validator":28,"./protocol/json":29,"./protocol/query":30,"./protocol/rest":31,"./protocol/rest_json":32,"./protocol/rest_xml":33,"./request":37,"./resource_waiter":38,"./response":39,"./sequential_executor":41,"./service":42,"./signers/request_signer":55,"./util":62,"./xml/builder":64}],6:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -715,7 +966,7 @@ AWS.Credentials = AWS.util.inherit({
   }
 });
 
-},{"./core":4}],6:[function(require,module,exports){
+},{"./core":5}],7:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -908,7 +1159,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   })()
 });
 
-},{"../core":4}],7:[function(require,module,exports){
+},{"../core":5}],8:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -964,7 +1215,7 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
 
 AWS.CredentialProviderChain.defaultProviders = [];
 
-},{"../core":4}],8:[function(require,module,exports){
+},{"../core":5}],9:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -997,7 +1248,7 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../core":4}],9:[function(require,module,exports){
+},{"../core":5}],10:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -1047,7 +1298,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../core":4}],10:[function(require,module,exports){
+},{"../core":5}],11:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -1084,7 +1335,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../core":4}],11:[function(require,module,exports){
+},{"../core":5}],12:[function(require,module,exports){
 var util = require('../core').util;
 var typeOf = require('./types').typeOf;
 var DynamoDBSet = require('./set');
@@ -1182,7 +1433,7 @@ module.exports = {
   output: convertOutput
 };
 
-},{"../core":4,"./set":13,"./types":15}],12:[function(require,module,exports){
+},{"../core":5,"./set":14,"./types":16}],13:[function(require,module,exports){
 var AWS = require('../core');
 var Translator = require('./translator');
 var DynamoDBSet = require('./set');
@@ -1396,7 +1647,7 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
 
 module.exports = AWS.DynamoDB.DocumentClient;
 
-},{"../core":4,"./set":13,"./translator":14}],13:[function(require,module,exports){
+},{"../core":5,"./set":14,"./translator":15}],14:[function(require,module,exports){
 var util = require('../core').util;
 var typeOf = require('./types').typeOf;
 
@@ -1451,7 +1702,7 @@ var DynamoDBSet = util.inherit({
 
 module.exports = DynamoDBSet;
 
-},{"../core":4,"./types":15}],14:[function(require,module,exports){
+},{"../core":5,"./types":16}],15:[function(require,module,exports){
 var util = require('../core').util;
 var convert = require('./converter');
 
@@ -1532,7 +1783,7 @@ Translator.prototype.translateScalar = function(value, shape) {
 
 module.exports = Translator;
 
-},{"../core":4,"./converter":11}],15:[function(require,module,exports){
+},{"../core":5,"./converter":12}],16:[function(require,module,exports){
 var util = require('../core').util;
 
 function typeOf(data) {
@@ -1574,7 +1825,7 @@ module.exports = {
   isBinary: isBinary
 };
 
-},{"../core":4}],16:[function(require,module,exports){
+},{"../core":5}],17:[function(require,module,exports){
 var AWS = require('./core');
 var SequentialExecutor = require('./sequential_executor');
 
@@ -1989,7 +2240,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":4,"./protocol/json":28,"./protocol/query":29,"./protocol/rest":30,"./protocol/rest_json":31,"./protocol/rest_xml":32,"./sequential_executor":40,"util":83}],17:[function(require,module,exports){
+},{"./core":5,"./protocol/json":29,"./protocol/query":30,"./protocol/rest":31,"./protocol/rest_json":32,"./protocol/rest_xml":33,"./sequential_executor":41,"util":84}],18:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -2095,7 +2346,7 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":4}],18:[function(require,module,exports){
+},{"./core":5}],19:[function(require,module,exports){
 var AWS = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
@@ -2213,7 +2464,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
 
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":4,"../http":17,"events":74}],19:[function(require,module,exports){
+},{"../core":5,"../http":18,"events":75}],20:[function(require,module,exports){
 var util = require('../util');
 
 function JsonBuilder() { }
@@ -2271,7 +2522,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonBuilder;
 
-},{"../util":61}],20:[function(require,module,exports){
+},{"../util":62}],21:[function(require,module,exports){
 var util = require('../util');
 
 function JsonParser() { }
@@ -2337,7 +2588,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonParser;
 
-},{"../util":61}],21:[function(require,module,exports){
+},{"../util":62}],22:[function(require,module,exports){
 var Collection = require('./collection');
 var Operation = require('./operation');
 var Shape = require('./shape');
@@ -2402,7 +2653,7 @@ function Api(api, options) {
 
 module.exports = Api;
 
-},{"../util":61,"./collection":22,"./operation":23,"./paginator":24,"./resource_waiter":25,"./shape":26}],22:[function(require,module,exports){
+},{"../util":62,"./collection":23,"./operation":24,"./paginator":25,"./resource_waiter":26,"./shape":27}],23:[function(require,module,exports){
 var memoizedProperty = require('../util').memoizedProperty;
 
 function memoize(name, value, fn, nameTr) {
@@ -2424,7 +2675,7 @@ function Collection(iterable, options, fn, nameTr) {
 
 module.exports = Collection;
 
-},{"../util":61}],23:[function(require,module,exports){
+},{"../util":62}],24:[function(require,module,exports){
 var Shape = require('./shape');
 
 var util = require('../util');
@@ -2479,7 +2730,7 @@ function Operation(name, operation, options) {
 
 module.exports = Operation;
 
-},{"../util":61,"./shape":26}],24:[function(require,module,exports){
+},{"../util":62,"./shape":27}],25:[function(require,module,exports){
 var property = require('../util').property;
 
 function Paginator(name, paginator) {
@@ -2492,7 +2743,7 @@ function Paginator(name, paginator) {
 
 module.exports = Paginator;
 
-},{"../util":61}],25:[function(require,module,exports){
+},{"../util":62}],26:[function(require,module,exports){
 var util = require('../util');
 var property = util.property;
 
@@ -2524,7 +2775,7 @@ function ResourceWaiter(name, waiter, options) {
 
 module.exports = ResourceWaiter;
 
-},{"../util":61}],26:[function(require,module,exports){
+},{"../util":62}],27:[function(require,module,exports){
 var Collection = require('./collection');
 
 var util = require('../util');
@@ -2862,7 +3113,7 @@ Shape.shapes = {
 
 module.exports = Shape;
 
-},{"../util":61,"./collection":22}],27:[function(require,module,exports){
+},{"../util":62,"./collection":23}],28:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -3092,7 +3343,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":4}],28:[function(require,module,exports){
+},{"./core":5}],29:[function(require,module,exports){
 var util = require('../util');
 var JsonBuilder = require('../json/builder');
 var JsonParser = require('../json/parser');
@@ -3156,7 +3407,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":19,"../json/parser":20,"../util":61}],29:[function(require,module,exports){
+},{"../json/builder":20,"../json/parser":21,"../util":62}],30:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var QueryParamSerializer = require('../query/query_param_serializer');
@@ -3252,7 +3503,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":4,"../model/shape":26,"../query/query_param_serializer":33,"../util":61}],30:[function(require,module,exports){
+},{"../core":5,"../model/shape":27,"../query/query_param_serializer":34,"../util":62}],31:[function(require,module,exports){
 var util = require('../util');
 
 function populateMethod(req) {
@@ -3383,7 +3634,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../util":61}],31:[function(require,module,exports){
+},{"../util":62}],32:[function(require,module,exports){
 var util = require('../util');
 var Rest = require('./rest');
 var Json = require('./json');
@@ -3451,7 +3702,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":19,"../json/parser":20,"../util":61,"./json":28,"./rest":30}],32:[function(require,module,exports){
+},{"../json/builder":20,"../json/parser":21,"../util":62,"./json":29,"./rest":31}],33:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var Rest = require('./rest');
@@ -3539,7 +3790,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":4,"../util":61,"./rest":30}],33:[function(require,module,exports){
+},{"../core":5,"../util":62,"./rest":31}],34:[function(require,module,exports){
 var util = require('../util');
 
 function QueryParamSerializer() {
@@ -3621,7 +3872,7 @@ function serializeMember(name, value, rules, fn) {
 
 module.exports = QueryParamSerializer;
 
-},{"../util":61}],34:[function(require,module,exports){
+},{"../util":62}],35:[function(require,module,exports){
 module.exports={
   "rules": {
     "*/*": {
@@ -3685,7 +3936,7 @@ module.exports={
   }
 }
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 var util = require('./util');
 var regionConfig = require('./region_config.json');
 
@@ -3735,6 +3986,11 @@ function configureEndpoint(service) {
         config = regionConfig.patterns[config];
       }
 
+      if (service.config.useDualstack && util.isDualstackAvailable(service)) {
+        config = util.copy(config);
+        config.endpoint = '{service}.dualstack.{region}.amazonaws.com';
+      }
+
       service.isGlobalEndpoint = !!config.globalEndpoint;
 
       if (!config.signatureVersion) config.signatureVersion = 'v4';
@@ -3747,7 +4003,7 @@ function configureEndpoint(service) {
 
 module.exports = configureEndpoint;
 
-},{"./region_config.json":34,"./util":61}],36:[function(require,module,exports){
+},{"./region_config.json":35,"./util":62}],37:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var AcceptorStateMachine = require('./state_machine');
@@ -4108,7 +4364,7 @@ AWS.util.addPromisesToRequests(AWS.Request);
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require('_process'))
-},{"./core":4,"./state_machine":60,"_process":76,"jmespath":84}],37:[function(require,module,exports){
+},{"./core":5,"./state_machine":61,"_process":77,"jmespath":85}],38:[function(require,module,exports){
 
 
 var AWS = require('./core');
@@ -4256,7 +4512,7 @@ AWS.ResourceWaiter = inherit({
   }
 });
 
-},{"./core":4,"jmespath":84}],38:[function(require,module,exports){
+},{"./core":5,"jmespath":85}],39:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 var jmespath = require('jmespath');
@@ -4344,7 +4600,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":4,"jmespath":84}],39:[function(require,module,exports){
+},{"./core":5,"jmespath":85}],40:[function(require,module,exports){
 (function (Buffer){
 var AWS = require('../core');
 var byteLength = AWS.util.string.byteLength;
@@ -4770,7 +5026,7 @@ AWS.util.mixin(AWS.S3.ManagedUpload, AWS.SequentialExecutor);
 module.exports = AWS.S3.ManagedUpload;
 
 }).call(this,require("buffer").Buffer)
-},{"../core":4,"buffer":64}],40:[function(require,module,exports){
+},{"../core":5,"buffer":65}],41:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -4919,7 +5175,7 @@ AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.
 
 module.exports = AWS.SequentialExecutor;
 
-},{"./core":4}],41:[function(require,module,exports){
+},{"./core":5}],42:[function(require,module,exports){
 var AWS = require('./core');
 var Api = require('./model/api');
 var regionConfig = require('./region_config');
@@ -5338,7 +5594,7 @@ AWS.util.update(AWS.Service, {
   _serviceMap: {}
 });
 
-},{"./core":4,"./model/api":21,"./region_config":35}],42:[function(require,module,exports){
+},{"./core":5,"./model/api":22,"./region_config":36}],43:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.APIGateway.prototype, {
@@ -5368,7 +5624,7 @@ AWS.util.update(AWS.APIGateway.prototype, {
 });
 
 
-},{"../core":4}],43:[function(require,module,exports){
+},{"../core":5}],44:[function(require,module,exports){
 var AWS = require('../core');
 
 require('../cloudfront/signer');
@@ -5381,7 +5637,7 @@ AWS.util.update(AWS.CloudFront.prototype, {
 
 });
 
-},{"../cloudfront/signer":2,"../core":4}],44:[function(require,module,exports){
+},{"../cloudfront/signer":3,"../core":5}],45:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.CognitoIdentity.prototype, {
@@ -5398,7 +5654,7 @@ AWS.util.update(AWS.CognitoIdentity.prototype, {
   }
 });
 
-},{"../core":4}],45:[function(require,module,exports){
+},{"../core":5}],46:[function(require,module,exports){
 var AWS = require('../core');
 require('../dynamodb/document_client');
 
@@ -5443,7 +5699,7 @@ AWS.util.update(AWS.DynamoDB.prototype, {
   }
 });
 
-},{"../core":4,"../dynamodb/document_client":12}],46:[function(require,module,exports){
+},{"../core":5,"../dynamodb/document_client":13}],47:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.EC2.prototype, {
@@ -5500,7 +5756,7 @@ AWS.util.update(AWS.EC2.prototype, {
   }
 });
 
-},{"../core":4}],47:[function(require,module,exports){
+},{"../core":5}],48:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -5531,7 +5787,7 @@ AWS.util.update(AWS.IotData.prototype, {
 
 });
 
-},{"../core":4}],48:[function(require,module,exports){
+},{"../core":5}],49:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.MachineLearning.prototype, {
@@ -5552,7 +5808,7 @@ AWS.util.update(AWS.MachineLearning.prototype, {
 
 });
 
-},{"../core":4}],49:[function(require,module,exports){
+},{"../core":5}],50:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Route53.prototype, {
@@ -5568,7 +5824,7 @@ AWS.util.update(AWS.Route53.prototype, {
   }
 });
 
-},{"../core":4}],50:[function(require,module,exports){
+},{"../core":5}],51:[function(require,module,exports){
 var AWS = require('../core');
 
 require('../s3/managed_upload');
@@ -5609,11 +5865,25 @@ AWS.util.update(AWS.S3.prototype, {
 
 
   validateService: function validateService() {
+    var msg;
+    var messages = [];
+
     if (!this.config.region) this.config.region = 'us-east-1';
 
     if (!this.config.endpoint && this.config.s3BucketEndpoint) {
-      var msg = 'An endpoint must be provided when configuring ' +
-                '`s3BucketEndpoint` to true.';
+      messages.push('An endpoint must be provided when configuring ' +
+                    '`s3BucketEndpoint` to true.');
+    }
+    if (this.config.useAccelerateEndpoint && this.config.useDualstack) {
+      messages.push('`useAccelerateEndpoint` and `useDualstack` ' +
+                    'cannot both be configured to true.');
+    }
+    if (messages.length === 1) {
+      msg = messages[0];
+    } else if (messages.length > 1) {
+      msg = 'Multiple configuration errors:\n' + messages.join('\n');
+    }
+    if (msg) {
       throw AWS.util.error(new Error(),
         {name: 'InvalidEndpoint', message: msg});
     }
@@ -6179,7 +6449,7 @@ AWS.util.update(AWS.S3.prototype, {
   }
 });
 
-},{"../core":4,"../s3/managed_upload":39}],51:[function(require,module,exports){
+},{"../core":5,"../s3/managed_upload":40}],52:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.SQS.prototype, {
@@ -6294,7 +6564,7 @@ AWS.util.update(AWS.SQS.prototype, {
   }
 });
 
-},{"../core":4}],52:[function(require,module,exports){
+},{"../core":5}],53:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.STS.prototype, {
@@ -6319,7 +6589,7 @@ AWS.util.update(AWS.STS.prototype, {
   }
 });
 
-},{"../core":4}],53:[function(require,module,exports){
+},{"../core":5}],54:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6424,7 +6694,7 @@ AWS.Signers.Presign = inherit({
 
 module.exports = AWS.Signers.Presign;
 
-},{"../core":4}],54:[function(require,module,exports){
+},{"../core":5}],55:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6461,7 +6731,7 @@ require('./v4');
 require('./s3');
 require('./presign');
 
-},{"../core":4,"./presign":53,"./s3":55,"./v2":56,"./v3":57,"./v3https":58,"./v4":59}],55:[function(require,module,exports){
+},{"../core":5,"./presign":54,"./s3":56,"./v2":57,"./v3":58,"./v3https":59,"./v4":60}],56:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6620,7 +6890,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":4}],56:[function(require,module,exports){
+},{"../core":5}],57:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6665,7 +6935,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":4}],57:[function(require,module,exports){
+},{"../core":5}],58:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6739,7 +7009,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":4}],58:[function(require,module,exports){
+},{"../core":5}],59:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6761,7 +7031,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":4,"./v3":57}],59:[function(require,module,exports){
+},{"../core":5,"./v3":58}],60:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -6990,7 +7260,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":4}],60:[function(require,module,exports){
+},{"../core":5}],61:[function(require,module,exports){
 function AcceptorStateMachine(states, state) {
   this.currentState = state || null;
   this.states = states || {};
@@ -7034,7 +7304,7 @@ AcceptorStateMachine.prototype.addState = function addState(name, acceptState, f
 
 module.exports = AcceptorStateMachine;
 
-},{}],61:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 (function (process){
 
 
@@ -7741,6 +8011,15 @@ var util = {
         self.runTo();
       });
     }
+  },
+
+
+  isDualstackAvailable: function isDualstackAvailable(service) {
+    if (!service) return false;
+    var metadata = require('../apis/metadata.json');
+    if (typeof service !== 'string') service = service.serviceIdentifier;
+    if (typeof service !== 'string' || !metadata.hasOwnProperty(service)) return false;
+    return !!metadata[service].dualstackAvailable;
   }
 
 };
@@ -7748,7 +8027,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require('_process'))
-},{"./core":4,"_process":76,"buffer":64,"crypto":69,"querystring":80,"url":81}],62:[function(require,module,exports){
+},{"../apis/metadata.json":2,"./core":5,"_process":77,"buffer":65,"crypto":70,"querystring":81,"url":82}],63:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -7933,7 +8212,7 @@ function parseUnknown(xml) {
 
 module.exports = DomXmlParser;
 
-},{"../model/shape":26,"../util":61}],63:[function(require,module,exports){
+},{"../model/shape":27,"../util":62}],64:[function(require,module,exports){
 var util = require('../util');
 var builder = require('xmlbuilder');
 
@@ -8021,7 +8300,7 @@ function applyNamespaces(xml, shape) {
 
 module.exports = XmlBuilder;
 
-},{"../util":61,"xmlbuilder":101}],64:[function(require,module,exports){
+},{"../util":62,"xmlbuilder":102}],65:[function(require,module,exports){
 (function (global){
 
 
@@ -9381,7 +9660,7 @@ function blitBuffer (src, dst, offset, length) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":65,"ieee754":66,"isarray":67}],65:[function(require,module,exports){
+},{"base64-js":66,"ieee754":67,"isarray":68}],66:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -9483,7 +9762,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],66:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -9569,14 +9848,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],67:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 var Buffer = require('buffer').Buffer;
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -9613,7 +9892,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 
 module.exports = { hash: hash };
 
-},{"buffer":64}],69:[function(require,module,exports){
+},{"buffer":65}],70:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -9711,7 +9990,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":70,"./rng":71,"./sha":72,"./sha256":73,"buffer":64}],70:[function(require,module,exports){
+},{"./md5":71,"./rng":72,"./sha":73,"./sha256":74,"buffer":65}],71:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -9858,7 +10137,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":68}],71:[function(require,module,exports){
+},{"./helpers":69}],72:[function(require,module,exports){
 (function() {
   var _global = this;
 
@@ -9888,7 +10167,7 @@ module.exports = function md5(buf) {
 
 }())
 
-},{}],72:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -9972,7 +10251,7 @@ module.exports = function sha1(buf) {
   return helpers.hash(buf, core_sha1, 20, true);
 };
 
-},{"./helpers":68}],73:[function(require,module,exports){
+},{"./helpers":69}],74:[function(require,module,exports){
 
 
 
@@ -10047,7 +10326,7 @@ module.exports = function sha256(buf) {
   return helpers.hash(buf, core_sha256, 32, true);
 };
 
-},{"./helpers":68}],74:[function(require,module,exports){
+},{"./helpers":69}],75:[function(require,module,exports){
 
 function EventEmitter() {
   this._events = this._events || {};
@@ -10311,7 +10590,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],75:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   module.exports = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor
@@ -10334,7 +10613,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],76:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 
 var process = module.exports = {};
 var queue = [];
@@ -10392,7 +10671,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],77:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 (function (global){
 
 ;(function(root) {
@@ -10765,7 +11044,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],78:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 
 'use strict';
 
@@ -10827,7 +11106,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],79:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 
 'use strict';
 
@@ -10894,13 +11173,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],80:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":78,"./encode":79}],81:[function(require,module,exports){
+},{"./decode":79,"./encode":80}],82:[function(require,module,exports){
 
 var punycode = require('punycode');
 
@@ -11467,14 +11746,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":77,"querystring":80}],82:[function(require,module,exports){
+},{"punycode":78,"querystring":81}],83:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 (function (process,global){
 
 var formatRegExp = /%[sdj%]/g;
@@ -11994,7 +12273,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":82,"_process":76,"inherits":75}],84:[function(require,module,exports){
+},{"./support/isBuffer":83,"_process":77,"inherits":76}],85:[function(require,module,exports){
 (function(exports) {
   "use strict";
 
@@ -13577,7 +13856,7 @@ function hasOwnProperty(obj, prop) {
   exports.strictDeepEqual = strictDeepEqual;
 })(typeof exports === "undefined" ? this.jmespath = {} : exports);
 
-},{}],85:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 (function() {
   var XMLAttribute, create;
 
@@ -13610,7 +13889,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/object/create":144}],86:[function(require,module,exports){
+},{"lodash/object/create":145}],87:[function(require,module,exports){
 (function() {
   var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
 
@@ -13680,7 +13959,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLDeclaration":93,"./XMLDocType":94,"./XMLElement":95,"./XMLStringifier":99}],87:[function(require,module,exports){
+},{"./XMLDeclaration":94,"./XMLDocType":95,"./XMLElement":96,"./XMLStringifier":100}],88:[function(require,module,exports){
 (function() {
   var XMLCData, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -13730,7 +14009,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":96,"lodash/object/create":144}],88:[function(require,module,exports){
+},{"./XMLNode":97,"lodash/object/create":145}],89:[function(require,module,exports){
 (function() {
   var XMLComment, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -13780,7 +14059,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":96,"lodash/object/create":144}],89:[function(require,module,exports){
+},{"./XMLNode":97,"lodash/object/create":145}],90:[function(require,module,exports){
 (function() {
   var XMLDTDAttList, create;
 
@@ -13853,7 +14132,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/object/create":144}],90:[function(require,module,exports){
+},{"lodash/object/create":145}],91:[function(require,module,exports){
 (function() {
   var XMLDTDElement, create, isArray;
 
@@ -13906,7 +14185,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/lang/isArray":136,"lodash/object/create":144}],91:[function(require,module,exports){
+},{"lodash/lang/isArray":137,"lodash/object/create":145}],92:[function(require,module,exports){
 (function() {
   var XMLDTDEntity, create, isObject;
 
@@ -13995,7 +14274,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/lang/isObject":140,"lodash/object/create":144}],92:[function(require,module,exports){
+},{"lodash/lang/isObject":141,"lodash/object/create":145}],93:[function(require,module,exports){
 (function() {
   var XMLDTDNotation, create;
 
@@ -14056,7 +14335,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/object/create":144}],93:[function(require,module,exports){
+},{"lodash/object/create":145}],94:[function(require,module,exports){
 (function() {
   var XMLDeclaration, XMLNode, create, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -14130,7 +14409,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":96,"lodash/lang/isObject":140,"lodash/object/create":144}],94:[function(require,module,exports){
+},{"./XMLNode":97,"lodash/lang/isObject":141,"lodash/object/create":145}],95:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
 
@@ -14323,7 +14602,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLCData":87,"./XMLComment":88,"./XMLDTDAttList":89,"./XMLDTDElement":90,"./XMLDTDEntity":91,"./XMLDTDNotation":92,"./XMLProcessingInstruction":97,"lodash/lang/isObject":140,"lodash/object/create":144}],95:[function(require,module,exports){
+},{"./XMLCData":88,"./XMLComment":89,"./XMLDTDAttList":90,"./XMLDTDElement":91,"./XMLDTDEntity":92,"./XMLDTDNotation":93,"./XMLProcessingInstruction":98,"lodash/lang/isObject":141,"lodash/object/create":145}],96:[function(require,module,exports){
 (function() {
   var XMLAttribute, XMLElement, XMLNode, XMLProcessingInstruction, create, every, isArray, isFunction, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -14538,7 +14817,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLAttribute":85,"./XMLNode":96,"./XMLProcessingInstruction":97,"lodash/collection/every":102,"lodash/lang/isArray":136,"lodash/lang/isFunction":138,"lodash/lang/isObject":140,"lodash/object/create":144}],96:[function(require,module,exports){
+},{"./XMLAttribute":86,"./XMLNode":97,"./XMLProcessingInstruction":98,"lodash/collection/every":103,"lodash/lang/isArray":137,"lodash/lang/isFunction":139,"lodash/lang/isObject":141,"lodash/object/create":145}],97:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isArray, isEmpty, isFunction, isObject,
     hasProp = {}.hasOwnProperty;
@@ -14873,7 +15152,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLCData":87,"./XMLComment":88,"./XMLDeclaration":93,"./XMLDocType":94,"./XMLElement":95,"./XMLRaw":98,"./XMLText":100,"lodash/lang/isArray":136,"lodash/lang/isEmpty":137,"lodash/lang/isFunction":138,"lodash/lang/isObject":140}],97:[function(require,module,exports){
+},{"./XMLCData":88,"./XMLComment":89,"./XMLDeclaration":94,"./XMLDocType":95,"./XMLElement":96,"./XMLRaw":99,"./XMLText":101,"lodash/lang/isArray":137,"lodash/lang/isEmpty":138,"lodash/lang/isFunction":139,"lodash/lang/isObject":141}],98:[function(require,module,exports){
 (function() {
   var XMLProcessingInstruction, create;
 
@@ -14925,7 +15204,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/object/create":144}],98:[function(require,module,exports){
+},{"lodash/object/create":145}],99:[function(require,module,exports){
 (function() {
   var XMLNode, XMLRaw, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -14975,7 +15254,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":96,"lodash/object/create":144}],99:[function(require,module,exports){
+},{"./XMLNode":97,"lodash/object/create":145}],100:[function(require,module,exports){
 (function() {
   var XMLStringifier,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -15143,7 +15422,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{}],100:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 (function() {
   var XMLNode, XMLText, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -15193,7 +15472,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":96,"lodash/object/create":144}],101:[function(require,module,exports){
+},{"./XMLNode":97,"lodash/object/create":145}],102:[function(require,module,exports){
 (function() {
   var XMLBuilder, assign;
 
@@ -15208,7 +15487,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLBuilder":86,"lodash/object/assign":143}],102:[function(require,module,exports){
+},{"./XMLBuilder":87,"lodash/object/assign":144}],103:[function(require,module,exports){
 var arrayEvery = require('../internal/arrayEvery'),
     baseCallback = require('../internal/baseCallback'),
     baseEvery = require('../internal/baseEvery'),
@@ -15225,7 +15504,7 @@ function every(collection, predicate, thisArg) {
 
 module.exports = every;
 
-},{"../internal/arrayEvery":103,"../internal/baseCallback":105,"../internal/baseEvery":109,"../lang/isArray":136}],103:[function(require,module,exports){
+},{"../internal/arrayEvery":104,"../internal/baseCallback":106,"../internal/baseEvery":110,"../lang/isArray":137}],104:[function(require,module,exports){
 
 function arrayEvery(array, predicate) {
   var index = -1,
@@ -15241,7 +15520,7 @@ function arrayEvery(array, predicate) {
 
 module.exports = arrayEvery;
 
-},{}],104:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 var baseCopy = require('./baseCopy'),
     keys = require('../object/keys');
 
@@ -15269,7 +15548,7 @@ function baseAssign(object, source, customizer) {
 
 module.exports = baseAssign;
 
-},{"../object/keys":145,"./baseCopy":106}],105:[function(require,module,exports){
+},{"../object/keys":146,"./baseCopy":107}],106:[function(require,module,exports){
 var baseMatches = require('./baseMatches'),
     baseMatchesProperty = require('./baseMatchesProperty'),
     baseProperty = require('./baseProperty'),
@@ -15298,7 +15577,7 @@ function baseCallback(func, thisArg, argCount) {
 
 module.exports = baseCallback;
 
-},{"../utility/identity":149,"./baseMatches":116,"./baseMatchesProperty":117,"./baseProperty":118,"./bindCallback":121,"./isBindable":126}],106:[function(require,module,exports){
+},{"../utility/identity":150,"./baseMatches":117,"./baseMatchesProperty":118,"./baseProperty":119,"./bindCallback":122,"./isBindable":127}],107:[function(require,module,exports){
 
 function baseCopy(source, object, props) {
   if (!props) {
@@ -15317,7 +15596,7 @@ function baseCopy(source, object, props) {
 
 module.exports = baseCopy;
 
-},{}],107:[function(require,module,exports){
+},{}],108:[function(require,module,exports){
 (function (global){
 var isObject = require('../lang/isObject');
 
@@ -15337,7 +15616,7 @@ var baseCreate = (function() {
 module.exports = baseCreate;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../lang/isObject":140}],108:[function(require,module,exports){
+},{"../lang/isObject":141}],109:[function(require,module,exports){
 var baseForOwn = require('./baseForOwn'),
     isLength = require('./isLength'),
     toObject = require('./toObject');
@@ -15361,7 +15640,7 @@ function baseEach(collection, iteratee) {
 
 module.exports = baseEach;
 
-},{"./baseForOwn":111,"./isLength":129,"./toObject":134}],109:[function(require,module,exports){
+},{"./baseForOwn":112,"./isLength":130,"./toObject":135}],110:[function(require,module,exports){
 var baseEach = require('./baseEach');
 
 
@@ -15376,7 +15655,7 @@ function baseEvery(collection, predicate) {
 
 module.exports = baseEvery;
 
-},{"./baseEach":108}],110:[function(require,module,exports){
+},{"./baseEach":109}],111:[function(require,module,exports){
 var toObject = require('./toObject');
 
 
@@ -15397,7 +15676,7 @@ function baseFor(object, iteratee, keysFunc) {
 
 module.exports = baseFor;
 
-},{"./toObject":134}],111:[function(require,module,exports){
+},{"./toObject":135}],112:[function(require,module,exports){
 var baseFor = require('./baseFor'),
     keys = require('../object/keys');
 
@@ -15408,7 +15687,7 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"../object/keys":145,"./baseFor":110}],112:[function(require,module,exports){
+},{"../object/keys":146,"./baseFor":111}],113:[function(require,module,exports){
 var baseIsEqualDeep = require('./baseIsEqualDeep');
 
 
@@ -15428,7 +15707,7 @@ function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
 
 module.exports = baseIsEqual;
 
-},{"./baseIsEqualDeep":113}],113:[function(require,module,exports){
+},{"./baseIsEqualDeep":114}],114:[function(require,module,exports){
 var equalArrays = require('./equalArrays'),
     equalByTag = require('./equalByTag'),
     equalObjects = require('./equalObjects'),
@@ -15510,7 +15789,7 @@ function baseIsEqualDeep(object, other, equalFunc, customizer, isWhere, stackA, 
 
 module.exports = baseIsEqualDeep;
 
-},{"../lang/isArray":136,"../lang/isTypedArray":142,"./equalArrays":123,"./equalByTag":124,"./equalObjects":125}],114:[function(require,module,exports){
+},{"../lang/isArray":137,"../lang/isTypedArray":143,"./equalArrays":124,"./equalByTag":125,"./equalObjects":126}],115:[function(require,module,exports){
 
 function baseIsFunction(value) {
   return typeof value == 'function' || false;
@@ -15518,7 +15797,7 @@ function baseIsFunction(value) {
 
 module.exports = baseIsFunction;
 
-},{}],115:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 var baseIsEqual = require('./baseIsEqual');
 
 
@@ -15567,7 +15846,7 @@ function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"./baseIsEqual":112}],116:[function(require,module,exports){
+},{"./baseIsEqual":113}],117:[function(require,module,exports){
 var baseIsMatch = require('./baseIsMatch'),
     isStrictComparable = require('./isStrictComparable'),
     keys = require('../object/keys');
@@ -15608,7 +15887,7 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"../object/keys":145,"./baseIsMatch":115,"./isStrictComparable":131}],117:[function(require,module,exports){
+},{"../object/keys":146,"./baseIsMatch":116,"./isStrictComparable":132}],118:[function(require,module,exports){
 var baseIsEqual = require('./baseIsEqual'),
     isStrictComparable = require('./isStrictComparable');
 
@@ -15626,7 +15905,7 @@ function baseMatchesProperty(key, value) {
 
 module.exports = baseMatchesProperty;
 
-},{"./baseIsEqual":112,"./isStrictComparable":131}],118:[function(require,module,exports){
+},{"./baseIsEqual":113,"./isStrictComparable":132}],119:[function(require,module,exports){
 
 function baseProperty(key) {
   return function(object) {
@@ -15636,7 +15915,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],119:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 var identity = require('../utility/identity'),
     metaMap = require('./metaMap');
 
@@ -15648,7 +15927,7 @@ var baseSetData = !metaMap ? identity : function(func, data) {
 
 module.exports = baseSetData;
 
-},{"../utility/identity":149,"./metaMap":132}],120:[function(require,module,exports){
+},{"../utility/identity":150,"./metaMap":133}],121:[function(require,module,exports){
 
 function baseToString(value) {
   if (typeof value == 'string') {
@@ -15659,7 +15938,7 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{}],121:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 var identity = require('../utility/identity');
 
 
@@ -15691,7 +15970,7 @@ function bindCallback(func, thisArg, argCount) {
 
 module.exports = bindCallback;
 
-},{"../utility/identity":149}],122:[function(require,module,exports){
+},{"../utility/identity":150}],123:[function(require,module,exports){
 var bindCallback = require('./bindCallback'),
     isIterateeCall = require('./isIterateeCall');
 
@@ -15733,7 +16012,7 @@ function createAssigner(assigner) {
 
 module.exports = createAssigner;
 
-},{"./bindCallback":121,"./isIterateeCall":128}],123:[function(require,module,exports){
+},{"./bindCallback":122,"./isIterateeCall":129}],124:[function(require,module,exports){
 
 function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stackB) {
   var index = -1,
@@ -15774,7 +16053,7 @@ function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stack
 
 module.exports = equalArrays;
 
-},{}],124:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 
 var boolTag = '[object Boolean]',
     dateTag = '[object Date]',
@@ -15807,7 +16086,7 @@ function equalByTag(object, other, tag) {
 
 module.exports = equalByTag;
 
-},{}],125:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 var keys = require('../object/keys');
 
 
@@ -15868,7 +16147,7 @@ function equalObjects(object, other, equalFunc, customizer, isWhere, stackA, sta
 
 module.exports = equalObjects;
 
-},{"../object/keys":145}],126:[function(require,module,exports){
+},{"../object/keys":146}],127:[function(require,module,exports){
 var baseSetData = require('./baseSetData'),
     isNative = require('../lang/isNative'),
     support = require('../support');
@@ -15901,7 +16180,7 @@ function isBindable(func) {
 
 module.exports = isBindable;
 
-},{"../lang/isNative":139,"../support":148,"./baseSetData":119}],127:[function(require,module,exports){
+},{"../lang/isNative":140,"../support":149,"./baseSetData":120}],128:[function(require,module,exports){
 
 var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -15914,7 +16193,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],128:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 var isIndex = require('./isIndex'),
     isLength = require('./isLength'),
     isObject = require('../lang/isObject');
@@ -15940,7 +16219,7 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
-},{"../lang/isObject":140,"./isIndex":127,"./isLength":129}],129:[function(require,module,exports){
+},{"../lang/isObject":141,"./isIndex":128,"./isLength":130}],130:[function(require,module,exports){
 
 var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -15951,7 +16230,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],130:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 
 function isObjectLike(value) {
   return (value && typeof value == 'object') || false;
@@ -15959,7 +16238,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],131:[function(require,module,exports){
+},{}],132:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 
@@ -15969,7 +16248,7 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"../lang/isObject":140}],132:[function(require,module,exports){
+},{"../lang/isObject":141}],133:[function(require,module,exports){
 (function (global){
 var isNative = require('../lang/isNative');
 
@@ -15982,7 +16261,7 @@ var metaMap = WeakMap && new WeakMap;
 module.exports = metaMap;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../lang/isNative":139}],133:[function(require,module,exports){
+},{"../lang/isNative":140}],134:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('./isIndex'),
@@ -16019,7 +16298,7 @@ function shimKeys(object) {
 
 module.exports = shimKeys;
 
-},{"../lang/isArguments":135,"../lang/isArray":136,"../object/keysIn":146,"../support":148,"./isIndex":127,"./isLength":129}],134:[function(require,module,exports){
+},{"../lang/isArguments":136,"../lang/isArray":137,"../object/keysIn":147,"../support":149,"./isIndex":128,"./isLength":130}],135:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 
@@ -16029,7 +16308,7 @@ function toObject(value) {
 
 module.exports = toObject;
 
-},{"../lang/isObject":140}],135:[function(require,module,exports){
+},{"../lang/isObject":141}],136:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -16050,7 +16329,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{"../internal/isLength":129,"../internal/isObjectLike":130}],136:[function(require,module,exports){
+},{"../internal/isLength":130,"../internal/isObjectLike":131}],137:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isNative = require('./isNative'),
     isObjectLike = require('../internal/isObjectLike');
@@ -16074,7 +16353,7 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"../internal/isLength":129,"../internal/isObjectLike":130,"./isNative":139}],137:[function(require,module,exports){
+},{"../internal/isLength":130,"../internal/isObjectLike":131,"./isNative":140}],138:[function(require,module,exports){
 var isArguments = require('./isArguments'),
     isArray = require('./isArray'),
     isFunction = require('./isFunction'),
@@ -16098,7 +16377,7 @@ function isEmpty(value) {
 
 module.exports = isEmpty;
 
-},{"../internal/isLength":129,"../internal/isObjectLike":130,"../object/keys":145,"./isArguments":135,"./isArray":136,"./isFunction":138,"./isString":141}],138:[function(require,module,exports){
+},{"../internal/isLength":130,"../internal/isObjectLike":131,"../object/keys":146,"./isArguments":136,"./isArray":137,"./isFunction":139,"./isString":142}],139:[function(require,module,exports){
 (function (global){
 var baseIsFunction = require('../internal/baseIsFunction'),
     isNative = require('./isNative');
@@ -16123,7 +16402,7 @@ var isFunction = !(baseIsFunction(/x/) || (Uint8Array && !baseIsFunction(Uint8Ar
 module.exports = isFunction;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../internal/baseIsFunction":114,"./isNative":139}],139:[function(require,module,exports){
+},{"../internal/baseIsFunction":115,"./isNative":140}],140:[function(require,module,exports){
 var escapeRegExp = require('../string/escapeRegExp'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -16161,7 +16440,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{"../internal/isObjectLike":130,"../string/escapeRegExp":147}],140:[function(require,module,exports){
+},{"../internal/isObjectLike":131,"../string/escapeRegExp":148}],141:[function(require,module,exports){
 
 function isObject(value) {
   var type = typeof value;
@@ -16170,7 +16449,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],141:[function(require,module,exports){
+},{}],142:[function(require,module,exports){
 var isObjectLike = require('../internal/isObjectLike');
 
 
@@ -16189,7 +16468,7 @@ function isString(value) {
 
 module.exports = isString;
 
-},{"../internal/isObjectLike":130}],142:[function(require,module,exports){
+},{"../internal/isObjectLike":131}],143:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -16247,7 +16526,7 @@ function isTypedArray(value) {
 
 module.exports = isTypedArray;
 
-},{"../internal/isLength":129,"../internal/isObjectLike":130}],143:[function(require,module,exports){
+},{"../internal/isLength":130,"../internal/isObjectLike":131}],144:[function(require,module,exports){
 var baseAssign = require('../internal/baseAssign'),
     createAssigner = require('../internal/createAssigner');
 
@@ -16256,7 +16535,7 @@ var assign = createAssigner(baseAssign);
 
 module.exports = assign;
 
-},{"../internal/baseAssign":104,"../internal/createAssigner":122}],144:[function(require,module,exports){
+},{"../internal/baseAssign":105,"../internal/createAssigner":123}],145:[function(require,module,exports){
 var baseCopy = require('../internal/baseCopy'),
     baseCreate = require('../internal/baseCreate'),
     isIterateeCall = require('../internal/isIterateeCall'),
@@ -16273,7 +16552,7 @@ function create(prototype, properties, guard) {
 
 module.exports = create;
 
-},{"../internal/baseCopy":106,"../internal/baseCreate":107,"../internal/isIterateeCall":128,"./keys":145}],145:[function(require,module,exports){
+},{"../internal/baseCopy":107,"../internal/baseCreate":108,"../internal/isIterateeCall":129,"./keys":146}],146:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isNative = require('../lang/isNative'),
     isObject = require('../lang/isObject'),
@@ -16297,7 +16576,7 @@ var keys = !nativeKeys ? shimKeys : function(object) {
 
 module.exports = keys;
 
-},{"../internal/isLength":129,"../internal/shimKeys":133,"../lang/isNative":139,"../lang/isObject":140}],146:[function(require,module,exports){
+},{"../internal/isLength":130,"../internal/shimKeys":134,"../lang/isNative":140,"../lang/isObject":141}],147:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('../internal/isIndex'),
@@ -16343,7 +16622,7 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"../internal/isIndex":127,"../internal/isLength":129,"../lang/isArguments":135,"../lang/isArray":136,"../lang/isObject":140,"../support":148}],147:[function(require,module,exports){
+},{"../internal/isIndex":128,"../internal/isLength":130,"../lang/isArguments":136,"../lang/isArray":137,"../lang/isObject":141,"../support":149}],148:[function(require,module,exports){
 var baseToString = require('../internal/baseToString');
 
 
@@ -16360,7 +16639,7 @@ function escapeRegExp(string) {
 
 module.exports = escapeRegExp;
 
-},{"../internal/baseToString":120}],148:[function(require,module,exports){
+},{"../internal/baseToString":121}],149:[function(require,module,exports){
 (function (global){
 var isNative = require('./lang/isNative');
 
@@ -16405,7 +16684,7 @@ var support = {};
 module.exports = support;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./lang/isNative":139}],149:[function(require,module,exports){
+},{"./lang/isNative":140}],150:[function(require,module,exports){
 
 function identity(value) {
   return value;

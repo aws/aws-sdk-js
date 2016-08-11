@@ -1,7 +1,7 @@
 {
     "name": "aws-sdk",
     "description": "AWS SDK for JavaScript",
-    "version": "2.4.14",
+    "version": "2.5.0",
     "author": {
       "name":"Amazon Web Services",
       "email":"",
