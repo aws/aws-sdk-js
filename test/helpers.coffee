@@ -85,7 +85,7 @@ matchXML = (xml1, xml2) ->
       results.push(r)
   expect(results[0]).to.eql(results[1])
 
-MockService = AWS.Service.defineService 'mockService',
+MockService = AWS.Service.defineService 'mock',
   serviceIdentifier: 'mock'
   initialize: (config) ->
     AWS.Service.prototype.initialize.call(this, config)

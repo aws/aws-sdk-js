@@ -691,3 +691,34 @@ describe 'AWS.util.addPromisesToRequests', ->
         expect(typeof AWS.Request.prototype.promise).to.equal('function')
         AWS.util.addPromisesToRequests(AWS.Request, null)
         expect(typeof AWS.Request.prototype.promise).to.equal('undefined')
+
+describe 'AWS.util.isDualstackAvailable', ->
+  metadata = require('../apis/metadata.json')
+
+  beforeEach ->
+    metadata.mock = {name: 'MockService'}
+
+  afterEach ->
+    delete metadata.mock
+
+  if AWS.util.isNode()
+    it 'accepts service identifier string as argument', ->
+      expect(AWS.util.isDualstackAvailable('mock')).to.be.false
+      metadata.mock.dualstackAvailable = true
+      expect(AWS.util.isDualstackAvailable('mock')).to.be.true
+
+    it 'accepts service client instance as argument', ->
+      service = new helpers.MockService()
+      expect(AWS.util.isDualstackAvailable(service)).to.be.false
+      metadata.mock.dualstackAvailable = true
+      expect(AWS.util.isDualstackAvailable(service)).to.be.true
+
+    it 'accepts service constructor as argument', ->
+      expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be.false
+      metadata.mock.dualstackAvailable = true
+      expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be.true
+
+  it 'returns false if invalid service is given as argument', ->
+    expect(AWS.util.isDualstackAvailable(null)).to.be.false
+    expect(AWS.util.isDualstackAvailable('invalid')).to.be.false
+    expect(AWS.util.isDualstackAvailable({})).to.be.false

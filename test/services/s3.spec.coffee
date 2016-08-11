@@ -49,6 +49,10 @@ describe 'AWS.S3', ->
       expect(-> new AWS.S3(s3BucketEndpoint: true)).to.throw(
         /An endpoint must be provided/)
 
+    it 'does not allow useDualstack and useAccelerateEndpoint to both be true', ->
+      expect(-> new AWS.S3(useDualstack: true, useAccelerateEndpoint: true)).to.throw(
+        /cannot both be configured to true/)
+
   describe 'endpoint', ->
 
     it 'sets hostname to s3.amazonaws.com when region is un-specified', ->
@@ -66,6 +70,12 @@ describe 'AWS.S3', ->
     it 'combines the region with s3 in the endpoint using a - instead of .', ->
       s3 = new AWS.S3(region: 'us-west-1')
       expect(s3.endpoint.hostname).to.equal('s3-us-west-1.amazonaws.com')
+
+    it 'sets a region-specific dualstack endpoint when dualstack enabled', ->
+      s3 = new AWS.S3(region: 'us-west-1', useDualstack: true)
+      expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-west-1.amazonaws.com')
+      s3 = new AWS.S3(region: 'us-east-1', useDualstack: true)
+      expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-east-1.amazonaws.com')
 
   describe 'clearing bucket region cache', ->
     beforeEach ->
@@ -390,6 +400,58 @@ describe 'AWS.S3', ->
         it 'puts dns-incompat bucket names in path', ->
           req = build('listObjects', {Bucket:'bucket_name'})
           expect(req.endpoint.hostname).to.equal('s3.amazonaws.com')
+          expect(req.path).to.equal('/bucket_name')
+
+      describe 'HTTPS dualstack', ->
+
+        beforeEach ->
+          s3 = new AWS.S3(sslEnabled: true, region: undefined, useDualstack: true)
+
+        it 'puts dns-compat bucket names in the hostname', ->
+          req = build('headObject', {Bucket:'bucket-name',Key:'abc'})
+          expect(req.method).to.equal('HEAD')
+          expect(req.endpoint.hostname).to.equal('bucket-name.s3.dualstack.us-east-1.amazonaws.com')
+          expect(req.path).to.equal('/abc')
+
+        it 'ensures the path contains / at a minimum when moving bucket', ->
+          req = build('listObjects', {Bucket:'bucket-name'})
+          expect(req.endpoint.hostname).to.equal('bucket-name.s3.dualstack.us-east-1.amazonaws.com')
+          expect(req.path).to.equal('/')
+
+        it 'puts dns-compat bucket names in path if they contain a dot', ->
+          req = build('listObjects', {Bucket:'bucket.name'})
+          expect(req.endpoint.hostname).to.equal('s3.dualstack.us-east-1.amazonaws.com')
+          expect(req.path).to.equal('/bucket.name')
+
+        it 'puts dns-compat bucket names in path if configured to do so', ->
+          s3 = new AWS.S3(sslEnabled: true, s3ForcePathStyle: true, region: undefined, useDualstack: true)
+          req = build('listObjects', {Bucket:'bucket-name'})
+          expect(req.endpoint.hostname).to.equal('s3.dualstack.us-east-1.amazonaws.com')
+          expect(req.path).to.equal('/bucket-name')
+
+        it 'puts dns-incompat bucket names in path', ->
+          req = build('listObjects', {Bucket:'bucket_name'})
+          expect(req.endpoint.hostname).to.equal('s3.dualstack.us-east-1.amazonaws.com')
+          expect(req.path).to.equal('/bucket_name')
+
+      describe 'HTTP dualstack', ->
+
+        beforeEach ->
+          s3 = new AWS.S3(sslEnabled: false, region: undefined, useDualstack: true)
+
+        it 'puts dns-compat bucket names in the hostname', ->
+          req = build('listObjects', {Bucket:'bucket-name'})
+          expect(req.endpoint.hostname).to.equal('bucket-name.s3.dualstack.us-east-1.amazonaws.com')
+          expect(req.path).to.equal('/')
+
+        it 'puts dns-compat bucket names in the hostname if they contain a dot', ->
+          req = build('listObjects', {Bucket:'bucket.name'})
+          expect(req.endpoint.hostname).to.equal('bucket.name.s3.dualstack.us-east-1.amazonaws.com')
+          expect(req.path).to.equal('/')
+
+        it 'puts dns-incompat bucket names in path', ->
+          req = build('listObjects', {Bucket:'bucket_name'})
+          expect(req.endpoint.hostname).to.equal('s3.dualstack.us-east-1.amazonaws.com')
           expect(req.path).to.equal('/bucket_name')
 
   describe 'SSE support', ->
@@ -739,6 +801,16 @@ describe 'AWS.S3', ->
       expect(retryable).to.equal(true)
       expect(req.httpRequest.region).to.equal('eu-west-1')
       expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-accelerate.amazonaws.com')
+
+    it 'should retry with updated endpoint if dualstack endpoint is used', ->
+      err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
+      s3 = new AWS.S3(useDualstack: true)
+      req = request('operation', {Bucket: 'name'})
+      req.build()
+      retryable = s3.retryableError(err, req)
+      expect(retryable).to.equal(true)
+      expect(req.httpRequest.region).to.equal('eu-west-1')
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.dualstack.eu-west-1.amazonaws.com')
 
     it 'should not retry on requests for bucket region once region is obtained', ->
       err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}

@@ -68,6 +68,22 @@ describe 'region_config.js', ->
     expect(service.isGlobalEndpoint).to.equal(false)
     expect(service.endpoint.host).to.equal('sts.us-gov-west-1.amazonaws.com')
 
+  describe 'dualstack endpoint', ->
+    it 'uses dualstack endpoint if useDualstack flag configured and available for service', ->
+      helpers.spyOn(AWS.util, 'isDualstackAvailable').andReturn(true)
+      service = new MockService(region: 'us-west-2', useDualstack: true)
+      expect(service.config.endpoint).to.equal('mockservice.dualstack.us-west-2.amazonaws.com')
+
+    it 'does not use dualstack endpoint if useDualstack flag not set to true', ->
+      helpers.spyOn(AWS.util, 'isDualstackAvailable').andReturn(true)
+      service = new MockService(region: 'us-west-2')
+      expect(service.config.endpoint).to.equal('mockservice.us-west-2.amazonaws.com')
+
+    it 'does not use dualstack endpoint if not available for service', ->
+      helpers.spyOn(AWS.util, 'isDualstackAvailable').andReturn(false)
+      service = new MockService(region: 'us-west-2', useDualstack: true)
+      expect(service.config.endpoint).to.equal('mockservice.us-west-2.amazonaws.com')
+
 describe 'region_config.json', ->
   it 'does not reference undefined patterns', ->
     config = require('../lib/region_config.json')
