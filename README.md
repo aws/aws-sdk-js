@@ -104,6 +104,7 @@ The SDK currently supports the following services:
     <tr><td>Amazon Glacier</td><td>AWS.Glacier</td><td>2012-06-01</td></tr>
     <tr><td>Amazon Inspector</td><td>AWS.Inspector</td><td>2016-02-16</td></tr>
     <tr><td>Amazon Kinesis</td><td>AWS.Kinesis</td><td>2013-12-02</td></tr>
+    <tr><td>Amazon Kinesis Analytics</td><td>AWS.KinesisAnalytics</td><td>2015-08-14</td></tr>
     <tr><td>Amazon Kinesis Firehose</td><td>AWS.Firehose</td><td>2015-08-04</td></tr>
     <tr><td>Amazon Machine Learning</td><td>AWS.MachineLearning</td><td>2014-12-12</td></tr>
     <tr><td>Amazon Mobile Analytics</td><td>AWS.MobileAnalytics</td><td>2014-06-05</td></tr>
@@ -118,6 +119,7 @@ The SDK currently supports the following services:
     <tr><td>Amazon Simple Systems Management Service</td><td>AWS.SSM</td><td>2014-11-06</td></tr>
     <tr><td>Amazon Simple Workflow Service</td><td>AWS.SWF</td><td>2012-01-25</td></tr>
     <tr><td>Amazon SimpleDB</td><td>AWS.SimpleDB</td><td>2009-04-15</td></tr>
+    <tr><td>Amazon Snowball</td><td>AWS.Snowball</td><td>2016-06-30</td></tr>
     <tr><td>Amazon WorkSpaces</td><td>AWS.WorkSpaces</td><td>2015-04-08</td></tr>
     <tr><td>Auto Scaling</td><td>AWS.AutoScaling</td><td>2011-01-01</td></tr>
     <tr><td>AWS Certificate Manager</td><td>AWS.ACM</td><td>2015-12-08</td></tr>
@@ -147,6 +149,7 @@ The SDK currently supports the following services:
     <tr><td>AWS Support</td><td>AWS.Support</td><td>2013-04-15</td></tr>
     <tr><td>AWS WAF</td><td>AWS.WAF</td><td>2015-08-24</td></tr>
     <tr><td>Elastic Load Balancing</td><td>AWS.ELB</td><td>2012-06-01</td></tr>
+    <tr><td>Elastic Load Balancing v2</td><td>AWS.ELBv2</td><td>2015-12-01</td></tr>
   </tbody>
 </table>
 
