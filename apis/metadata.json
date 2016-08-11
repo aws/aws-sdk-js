@@ -120,6 +120,10 @@
     "prefix": "elasticloadbalancing",
     "name": "ELB"
   },
+  "elbv2": {
+    "prefix": "elasticloadbalancingv2",
+    "name": "ELBv2"
+  },
   "emr": {
     "prefix": "elasticmapreduce",
     "name": "EMR"
@@ -158,6 +162,9 @@
   },
   "kinesis": {
     "name": "Kinesis"
+  },
+  "kinesisanalytics": {
+    "name": "KinesisAnalytics"
   },
   "kms": {
     "name": "KMS"
@@ -208,6 +215,9 @@
   "simpledb": {
     "prefix": "sdb",
     "name": "SimpleDB"
+  },
+  "snowball": {
+    "name": "Snowball"
   },
   "sns": {
     "name": "SNS"
