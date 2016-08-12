@@ -87,26 +87,27 @@ class ApiDocumentor
 
   def generate_api(file, version_suffix = true)
     _, klass, version = *file.match($API_FILE_MATCH)
-    identifier, klass = *class_info_for(klass.downcase)
+    identifier, klass, dualstack = *class_info_for(klass.downcase)
     name = version_suffix ? klass + '_' + version.gsub('-', '') : klass
     log.progress("Parsing AWS.#{klass} (#{version})")
     svc = YARD::CodeObjects::ClassObject.new(@root, name)
 
     model = load_model(file)
     $dynamodb_model = model if klass == 'DynamoDB' && version == '2012-08-10'
-    add_class_documentation(svc, klass, model, version)
+    add_class_documentation(svc, klass, model, version, dualstack)
     add_methods(svc, klass, model)
     add_waiters(svc, klass, model)
-    add_config(svc, identifier)
+    add_config(svc, identifier, dualstack)
 
     svc.docstring.add_tag(YARD::Tags::Tag.new(:service, identifier))
     svc.docstring.add_tag(YARD::Tags::Tag.new(:version, version))
     svc.superclass = 'AWS.Service'
   end
 
-  def add_config(service, identifier)
+  def add_config(service, identifier, dualstack)
     config = YARD::CodeObjects::ClassObject.new(@root, 'AWS.Config')
     config.groups = ["General Configuration Options"]
+    dualstack_string = dualstack ? ", useDualstack: true" : ""
 
     prop = YARDJS::CodeObjects::PropertyObject.new(config, identifier)
     prop.property_type = :object
@@ -116,11 +117,15 @@ class ApiDocumentor
     prop.docstring = <<-eof
 @example Bind parameters to all newly created #{service.name} objects
   AWS.config.#{identifier} = { params: { /* ... */ } };
+@example Override default endpoint URI for all newly created #{service.name} objects
+  AWS.config.#{identifier} = { endpoint: 'https://{service}.{region}.amazonaws.com' };
+#{dualstack ? "@example Use IPv6/IPv4 dualstack endpoint for all newly created #{service.name} objects
+  AWS.config.#{identifier} = { useDualstack: true };" : ""}
 @return [AWS.Config, map] Service-specific configuration options for {#{service.path}}.
     eof
   end
 
-  def add_class_documentation(service, klass, model, api_version)
+  def add_class_documentation(service, klass, model, api_version, dualstack)
     docstring = ModelDocumentor.new(klass, model).lines.join("\n")
     parser = YARD::Docstring.parser
     parser.parse(docstring, service)
@@ -145,6 +150,12 @@ API operation.
   to.  The default endpoint is built from the configured `region`.
   The endpoint should be a string like `'https://{service}.{region}.amazonaws.com'`.
 @option (see AWS.Config.constructor)
+#{dualstack ? "@option options [Boolean] useDualstack Enables IPv6/IPv4 dualstack endpoint.
+  When a DNS lookup is performed on an endpoint of this type, it returns an “A” record with
+  an IPv4 address and an “AAAA” record with an IPv6 address. In most cases the network stack
+  in the client environment will automatically prefer the AAAA record and make a connection
+  using the IPv6 address. Note, however, that currently on Windows, the IPv4 address will be
+  preferred." : ""}
 eof
 
     # endpoint attribute
@@ -257,7 +268,7 @@ eof
     @info.each do |identifier, info|
       iprefix = info['prefix'] || identifier
       if prefix == iprefix
-        return [identifier, info['name']]
+        return [identifier, info['name'], info['dualstackAvailable'] || false]
       end
     end
 
