@@ -1249,8 +1249,7 @@
       "required":[
         "KeyId",
         "ImportToken",
-        "EncryptedKeyMaterial",
-        "ValidTo"
+        "EncryptedKeyMaterial"
       ],
       "members":{
         "KeyId":{
