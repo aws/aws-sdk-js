@@ -22,9 +22,10 @@
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"BadRequestException"}
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"}
       ],
-      "documentation":"<p>Create an <a>ApiKey</a> resource. </p>"
+      "documentation":"<p>Create an <a>ApiKey</a> resource. </p> <div class=\"seeAlso\"><a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html\">AWS CLI</a></div>"
     },
     "CreateAuthorizer":{
       "name":"CreateAuthorizer",
@@ -42,7 +43,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Adds a new <a>Authorizer</a> resource to an existing <a>RestApi</a> resource.</p>"
+      "documentation":"<p>Adds a new <a>Authorizer</a> resource to an existing <a>RestApi</a> resource.</p> <div class=\"seeAlso\"><a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html\">AWS CLI</a></div>"
     },
     "CreateBasePathMapping":{
       "name":"CreateBasePathMapping",
@@ -173,6 +174,42 @@
       ],
       "documentation":"<p>Creates a new <a>Stage</a> resource that references a pre-existing <a>Deployment</a> for the API. </p>"
     },
+    "CreateUsagePlan":{
+      "name":"CreateUsagePlan",
+      "http":{
+        "method":"POST",
+        "requestUri":"/usageplans",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateUsagePlanRequest"},
+      "output":{"shape":"UsagePlan"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ConflictException"}
+      ],
+      "documentation":"<p>Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. </p>"
+    },
+    "CreateUsagePlanKey":{
+      "name":"CreateUsagePlanKey",
+      "http":{
+        "method":"POST",
+        "requestUri":"/usageplans/{usageplanId}/keys",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateUsagePlanKeyRequest"},
+      "output":{"shape":"UsagePlanKey"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Creates a usage plan key for adding an existing API key to a usage plan.</p>"
+    },
     "DeleteApiKey":{
       "name":"DeleteApiKey",
       "http":{
@@ -203,7 +240,7 @@
         {"shape":"BadRequestException"},
         {"shape":"ConflictException"}
       ],
-      "documentation":"<p>Deletes an existing <a>Authorizer</a> resource.</p>"
+      "documentation":"<p>Deletes an existing <a>Authorizer</a> resource.</p> <div class=\"seeAlso\"><a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html\">AWS CLI</a></div>"
     },
     "DeleteBasePathMapping":{
       "name":"DeleteBasePathMapping",
@@ -278,7 +315,8 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
       ],
       "documentation":"<p>Represents a delete integration.</p>"
     },
@@ -294,7 +332,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"BadRequestException"}
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"}
       ],
       "documentation":"<p>Represents a delete integration response.</p>"
     },
@@ -309,7 +348,8 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
       ],
       "documentation":"<p>Deletes an existing <a>Method</a> resource.</p>"
     },
@@ -325,7 +365,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"BadRequestException"}
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"}
       ],
       "documentation":"<p>Deletes an existing <a>MethodResponse</a> resource.</p>"
     },
@@ -394,6 +435,39 @@
         {"shape":"BadRequestException"}
       ],
       "documentation":"<p>Deletes a <a>Stage</a> resource.</p>"
+    },
+    "DeleteUsagePlan":{
+      "name":"DeleteUsagePlan",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/usageplans/{usageplanId}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteUsagePlanRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Deletes a usage plan of a given plan Id.</p>"
+    },
+    "DeleteUsagePlanKey":{
+      "name":"DeleteUsagePlanKey",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/usageplans/{usageplanId}/keys/{keyId}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteUsagePlanKeyRequest"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Deletes a usage plan key and remove the underlying API key from the associated usage plan.</p>"
     },
     "FlushStageAuthorizersCache":{
       "name":"FlushStageAuthorizersCache",
@@ -501,7 +575,7 @@
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Describe an existing <a>Authorizer</a> resource.</p>"
+      "documentation":"<p>Describe an existing <a>Authorizer</a> resource.</p> <div class=\"seeAlso\"><a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html\">AWS CLI</a></div>"
     },
     "GetAuthorizers":{
       "name":"GetAuthorizers",
@@ -517,7 +591,7 @@
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Describe an existing <a>Authorizers</a> resource.</p>"
+      "documentation":"<p>Describe an existing <a>Authorizers</a> resource.</p> <div class=\"seeAlso\"><a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html\">AWS CLI</a></div>"
     },
     "GetBasePathMapping":{
       "name":"GetBasePathMapping",
@@ -874,6 +948,106 @@
       ],
       "documentation":"<p>Gets information about one or more <a>Stage</a> resources.</p>"
     },
+    "GetUsage":{
+      "name":"GetUsage",
+      "http":{
+        "method":"GET",
+        "requestUri":"/usageplans/{usageplanId}/usage"
+      },
+      "input":{"shape":"GetUsageRequest"},
+      "output":{"shape":"Usage"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets the usage data of a usage plan in a specified time interval.</p>"
+    },
+    "GetUsagePlan":{
+      "name":"GetUsagePlan",
+      "http":{
+        "method":"GET",
+        "requestUri":"/usageplans/{usageplanId}"
+      },
+      "input":{"shape":"GetUsagePlanRequest"},
+      "output":{"shape":"UsagePlan"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets a usage plan of a given plan identifier.</p>"
+    },
+    "GetUsagePlanKey":{
+      "name":"GetUsagePlanKey",
+      "http":{
+        "method":"GET",
+        "requestUri":"/usageplans/{usageplanId}/keys/{keyId}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetUsagePlanKeyRequest"},
+      "output":{"shape":"UsagePlanKey"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets a usage plan key of a given key identifier.</p>"
+    },
+    "GetUsagePlanKeys":{
+      "name":"GetUsagePlanKeys",
+      "http":{
+        "method":"GET",
+        "requestUri":"/usageplans/{usageplanId}/keys"
+      },
+      "input":{"shape":"GetUsagePlanKeysRequest"},
+      "output":{"shape":"UsagePlanKeys"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets all the usage plan keys representing the API keys added to a specified usage plan.</p>"
+    },
+    "GetUsagePlans":{
+      "name":"GetUsagePlans",
+      "http":{
+        "method":"GET",
+        "requestUri":"/usageplans"
+      },
+      "input":{"shape":"GetUsagePlansRequest"},
+      "output":{"shape":"UsagePlans"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
+      ],
+      "documentation":"<p>Gets all the usage plans of the caller's account.</p>"
+    },
+    "ImportApiKeys":{
+      "name":"ImportApiKeys",
+      "http":{
+        "method":"POST",
+        "requestUri":"/apikeys?mode=import",
+        "responseCode":201
+      },
+      "input":{"shape":"ImportApiKeysRequest"},
+      "output":{"shape":"ApiKeyIds"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"}
+      ],
+      "documentation":"<p>Import API keys from an external source, such as a CSV-formatted file.</p>"
+    },
     "ImportRestApi":{
       "name":"ImportRestApi",
       "http":{
@@ -887,7 +1061,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"LimitExceededException"},
         {"shape":"BadRequestException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
       ],
       "documentation":"<p>A feature of the Amazon API Gateway control service for creating a new API from an external API definition file.</p>"
     },
@@ -998,7 +1173,7 @@
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Simulate the execution of an <a>Authorizer</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.</p>"
+      "documentation":"<p>Simulate the execution of an <a>Authorizer</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html\">Enable custom authorizers</a> </div>"
     },
     "TestInvokeMethod":{
       "name":"TestInvokeMethod",
@@ -1044,7 +1219,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
       ],
       "documentation":"<p>Changes information about an <a>ApiKey</a> resource.</p>"
     },
@@ -1062,7 +1238,7 @@
         {"shape":"BadRequestException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Updates an existing <a>Authorizer</a> resource.</p>"
+      "documentation":"<p>Updates an existing <a>Authorizer</a> resource.</p> <div class=\"seeAlso\"><a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html\">AWS CLI</a></div>"
     },
     "UpdateBasePathMapping":{
       "name":"UpdateBasePathMapping",
@@ -1268,6 +1444,39 @@
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Changes information about a <a>Stage</a> resource.</p>"
+    },
+    "UpdateUsage":{
+      "name":"UpdateUsage",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/usageplans/{usageplanId}/keys/{keyId}/usage"
+      },
+      "input":{"shape":"UpdateUsageRequest"},
+      "output":{"shape":"Usage"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"}
+      ],
+      "documentation":"<p>Grants a temporary extension to the reamining quota of a usage plan associated with a specified API key.</p>"
+    },
+    "UpdateUsagePlan":{
+      "name":"UpdateUsagePlan",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/usageplans/{usageplanId}"
+      },
+      "input":{"shape":"UpdateUsagePlanRequest"},
+      "output":{"shape":"UsagePlan"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"}
+      ],
+      "documentation":"<p>Updates a usage plan of a given plan Id.</p>"
     }
   },
   "shapes":{
@@ -1276,14 +1485,22 @@
       "members":{
         "cloudwatchRoleArn":{
           "shape":"String",
-          "documentation":"<p>Specifies the Amazon resource name (ARN) of an Amazon CloudWatch role for the current <a>Account</a> resource.</p>"
+          "documentation":"<p>The ARN of an Amazon CloudWatch role for the current <a>Account</a>. </p>"
         },
         "throttleSettings":{
           "shape":"ThrottleSettings",
-          "documentation":"<p>Specifies the application programming interface (API) throttle settings for the current <a>Account</a> resource.</p>"
+          "documentation":"<p>Specifies the API request limits configured for the current <a>Account</a>.</p>"
+        },
+        "features":{
+          "shape":"ListOfString",
+          "documentation":"<p>A list of features supported for the account. When usage plans are enabled, the features list will include an entry of <code>\"UsagePlans\"</code>.</p>"
+        },
+        "apiKeyVersion":{
+          "shape":"String",
+          "documentation":"<p>The version of the API keys used for the account.</p>"
         }
       },
-      "documentation":"<p>Represents an AWS account that is associated with Amazon API Gateway.</p>"
+      "documentation":"<p>Represents an AWS account that is associated with Amazon API Gateway.</p> <div class=\"remarks\"> <p>To view the account info, call <code>GET</code> on this resource.</p> <h4>Error Codes</h4> <p>The following exception may be thrown when the request fails.</p> <ul> <li>UnauthorizedException</li> <li>NotFoundException</li> <li>TooManyRequestsException</li> </ul> <p>For detailed error code information, including the corresponding HTTP Status Codes, see <a href=\"http://docs.aws.amazon.com/apigateway/api-reference/handling-errors/#api-error-codes\">API Gateway Error Codes</a></p> <h4>Example: Get the information about an account.</h4> <h5>Request</h5> <pre><code>GET /account HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160531T184618Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash} </code></pre> <h5>Response</h5> <p>The successful response returns a <code>200 OK</code> status code and a payload similar to the following:</p> <pre><code>{ \"_links\": { \"curies\": { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/account-apigateway-{rel}.html\", \"name\": \"account\", \"templated\": true }, \"self\": { \"href\": \"/account\" }, \"account:update\": { \"href\": \"/account\" } }, \"cloudwatchRoleArn\": \"arn:aws:iam::123456789012:role/apigAwsProxyRole\", \"throttleSettings\": { \"rateLimit\": 500, \"burstLimit\": 1000 } } </code></pre> <p>In addition to making the REST API call directly, you can use the AWS CLI and an AWS SDK to access this resource.</p> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-limits.html\">API Gateway Limits</a> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html\">Developer Guide</a>, <a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html\">AWS CLI</a> </div>"
     },
     "ApiKey":{
       "type":"structure",
@@ -1291,6 +1508,10 @@
         "id":{
           "shape":"String",
           "documentation":"<p>The identifier of the API Key.</p>"
+        },
+        "value":{
+          "shape":"String",
+          "documentation":"<p>The value of the API Key.</p>"
         },
         "name":{
           "shape":"String",
@@ -1304,10 +1525,6 @@
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the API Key can be used by callers.</p>"
         },
-        "stageKeys":{
-          "shape":"ListOfString",
-          "documentation":"<p>A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.</p>"
-        },
         "createdDate":{
           "shape":"Timestamp",
           "documentation":"<p>The date when the API Key was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
@@ -1315,13 +1532,35 @@
         "lastUpdatedDate":{
           "shape":"Timestamp",
           "documentation":"<p>When the API Key was last updated, in ISO 8601 format.</p>"
+        },
+        "stageKeys":{
+          "shape":"ListOfString",
+          "documentation":"<p>A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.</p>"
         }
       },
-      "documentation":"<p>A resource that can be distributed to callers for executing <a>Method</a> resources that require an API key. API keys can be mapped to any <a>Stage</a> on any <a>RestApi</a>, which indicates that the callers with the API key can make requests to that stage.</p>"
+      "documentation":"<p>A resource that can be distributed to callers for executing <a>Method</a> resources that require an API key. API keys can be mapped to any <a>Stage</a> on any <a>RestApi</a>, which indicates that the callers with the API key can make requests to that stage.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html\">Use API Keys</a> </div>"
+    },
+    "ApiKeyIds":{
+      "type":"structure",
+      "members":{
+        "ids":{
+          "shape":"ListOfString",
+          "documentation":"<p>A list of all the <a>ApiKey</a> identifiers.</p>"
+        },
+        "warnings":{
+          "shape":"ListOfString",
+          "documentation":"<p>A list of warning messages.</p>"
+        }
+      },
+      "documentation":"<p>The identifier of an API key used to reference an API key in a usage plan.</p>"
     },
     "ApiKeys":{
       "type":"structure",
       "members":{
+        "warnings":{
+          "shape":"ListOfString",
+          "documentation":"<p>A list of warning messages logged during the import of API keys when the <code>failOnWarnings</code> option is set to true.</p>"
+        },
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfApiKey",
@@ -1329,7 +1568,25 @@
           "locationName":"item"
         }
       },
-      "documentation":"<p>Represents a collection of <a>ApiKey</a> resources.</p>"
+      "documentation":"<p>Represents a collection of API keys as represented by an <a>ApiKeys</a> resource.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html\">Use API Keys</a> </div>"
+    },
+    "ApiKeysFormat":{
+      "type":"string",
+      "enum":["csv"]
+    },
+    "ApiStage":{
+      "type":"structure",
+      "members":{
+        "apiId":{
+          "shape":"String",
+          "documentation":"<p>API Id of the associated API stage in a usage plan.</p>"
+        },
+        "stage":{
+          "shape":"String",
+          "documentation":"<p>API stage name of the associated API stage in a usage plan.</p>"
+        }
+      },
+      "documentation":"<p>API stage name of the associated API stage in a usage plan.</p>"
     },
     "Authorizer":{
       "type":"structure",
@@ -1346,7 +1603,10 @@
           "shape":"AuthorizerType",
           "documentation":"<p>[Required] The type of the authorizer. Currently, the only valid type is TOKEN.</p>"
         },
-        "providerARNs":{"shape":"ListOfARNs"},
+        "providerARNs":{
+          "shape":"ListOfARNs",
+          "documentation":"<p>A list of the provider ARNs of the authorizer.</p>"
+        },
         "authType":{
           "shape":"String",
           "documentation":"<p>Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.</p>"
@@ -1357,7 +1617,7 @@
         },
         "authorizerCredentials":{
           "shape":"String",
-          "documentation":"<p>Specifies the credentials required for the authorizer, if any. Two options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.</p>"
+          "documentation":"<p>Specifies the credentials required for the authorizer, if any. Two options are available. To specify an IAM role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.</p>"
         },
         "identitySource":{
           "shape":"String",
@@ -1372,11 +1632,11 @@
           "documentation":"<p>The TTL in seconds of cached authorizer results. If greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.</p>"
         }
       },
-      "documentation":"<p>Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.</p>"
+      "documentation":"<p>Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html\">Enable custom authorization</a> </div>"
     },
     "AuthorizerType":{
       "type":"string",
-      "documentation":"<p>The authorizer type. Only current value is TOKEN.</p>",
+      "documentation":"<p>The authorizer type. the only current value is TOKEN.</p>",
       "enum":[
         "TOKEN",
         "COGNITO_USER_POOLS"
@@ -1392,7 +1652,7 @@
           "locationName":"item"
         }
       },
-      "documentation":"<p>Represents a collection of <a>Authorizer</a> resources.</p>"
+      "documentation":"<p>Represents a collection of <a>Authorizer</a> resources.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html\">Enable custom authorization</a> </div>"
     },
     "BadRequestException":{
       "type":"structure",
@@ -1418,7 +1678,7 @@
           "documentation":"<p>The name of the API's stage.</p>"
         }
       },
-      "documentation":"<p>Represents the base path that callers of the API that must provide as part of the URL after the domain name.</p>"
+      "documentation":"<p>Represents the base path that callers of the API must provide as part of the URL after the domain name.</p> <div class=\"remarks\">A custom domain name plus a <code>BasePathMapping</code> specification identifies a deployed <a>RestApi</a> in a given stage of the owner <a>Account</a>.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html\">Use Custom Domain Names</a> </div>"
     },
     "BasePathMappings":{
       "type":"structure",
@@ -1430,7 +1690,7 @@
           "locationName":"item"
         }
       },
-      "documentation":"<p>Represents a collection of <a>BasePathMapping</a> resources.</p>"
+      "documentation":"<p>Represents a collection of <a>BasePathMapping</a> resources.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html\">Use Custom Domain Names</a> </div>"
     },
     "Blob":{"type":"blob"},
     "Boolean":{"type":"boolean"},
@@ -1464,26 +1724,26 @@
       "members":{
         "clientCertificateId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the Client Certificate.</p>"
+          "documentation":"<p>The identifier of the client certificate.</p>"
         },
         "description":{
           "shape":"String",
-          "documentation":"<p>The description of the Client Certificate.</p>"
+          "documentation":"<p>The description of the client certificate.</p>"
         },
         "pemEncodedCertificate":{
           "shape":"String",
-          "documentation":"<p>The PEM-encoded public key of the Client Certificate, that can be used to configure certificate authentication in the integration endpoint .</p>"
+          "documentation":"<p>The PEM-encoded public key of the client certificate, which can be used to configure certificate authentication in the integration endpoint .</p>"
         },
         "createdDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date when the Client Certificate was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+          "documentation":"<p>The date when the client certificate was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
         },
         "expirationDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date when the Client Certificate will expire, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
+          "documentation":"<p>The date when the client certificate will expire, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
         }
       },
-      "documentation":"<p>Represents a Client Certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p>"
+      "documentation":"<p>Represents a client certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p> <div class=\"remarks\">Client certificates are used authenticate an API by the back-end server. To authenticate an API client (or user), use a custom <a>Authorizer</a>.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html\">Use Client-Side Certificate</a> </div>"
     },
     "ClientCertificates":{
       "type":"structure",
@@ -1495,7 +1755,7 @@
           "locationName":"item"
         }
       },
-      "documentation":"<p>Represents a collection of <a>ClientCertificate</a> resources.</p>"
+      "documentation":"<p>Represents a collection of <a>ClientCertificate</a> resources.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html\">Use Client-Side Certificate</a> </div>"
     },
     "ConflictException":{
       "type":"structure",
@@ -1520,9 +1780,17 @@
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the <a>ApiKey</a> can be used by callers.</p>"
         },
+        "generateDistinctId":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies whether (<code>true</code>) or not (<code>false</code>) the key identifier is distinct from the created API key value.</p>"
+        },
+        "value":{
+          "shape":"String",
+          "documentation":"<p>Specifies a value of the API key.</p>"
+        },
         "stageKeys":{
           "shape":"ListOfStageKeys",
-          "documentation":"<p>Specifies whether the <a>ApiKey</a> can be used by callers.</p>"
+          "documentation":"<p>DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.</p>"
         }
       },
       "documentation":"<p>Request to create an <a>ApiKey</a> resource.</p>"
@@ -1550,7 +1818,10 @@
           "shape":"AuthorizerType",
           "documentation":"<p>[Required] The type of the authorizer.</p>"
         },
-        "providerARNs":{"shape":"ListOfARNs"},
+        "providerARNs":{
+          "shape":"ListOfARNs",
+          "documentation":"<p>A list of the Cognito Your User Pool authorizer's provider ARNs.</p>"
+        },
         "authType":{
           "shape":"String",
           "documentation":"<p>Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.</p>"
@@ -1641,7 +1912,7 @@
         },
         "variables":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>A map that defines the stage variables for the <a>Stage</a> resource that is associated with the new deployment. Variable names can have alphanumeric characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
+          "documentation":"<p>A map that defines the stage variables for the <a>Stage</a> resource that is associated with the new deployment. Variable names can have alphanumeric and underscore characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to create a <a>Deployment</a> resource.</p>"
@@ -1753,7 +2024,7 @@
         },
         "cloneFrom":{
           "shape":"String",
-          "documentation":"<p>The Id of the <a>RestApi</a> that you want to clone from.</p>"
+          "documentation":"<p>The ID of the <a>RestApi</a> that you want to clone from.</p>"
         }
       },
       "documentation":"<p>The POST Request to add a new <a>RestApi</a> resource to your collection.</p>"
@@ -1794,10 +2065,62 @@
         },
         "variables":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>A map that defines the stage variables for the new <a>Stage</a> resource. Variable names can have alphanumeric characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
+          "documentation":"<p>A map that defines the stage variables for the new <a>Stage</a> resource. Variable names can have alphanumeric and underscore characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to create a <a>Stage</a> resource.</p>"
+    },
+    "CreateUsagePlanKeyRequest":{
+      "type":"structure",
+      "required":[
+        "usagePlanId",
+        "keyId",
+        "keyType"
+      ],
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the <a>UsagePlan</a> resource representing the usage plan containing the to-be-created <a>UsagePlanKey</a> resource representing a plan customer.</p>",
+          "location":"uri",
+          "locationName":"usageplanId"
+        },
+        "keyId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of a <a>UsagePlanKey</a> resource for a plan customer.</p>"
+        },
+        "keyType":{
+          "shape":"String",
+          "documentation":"<p>The type of a <a>UsagePlanKey</a> resource for a plan customer.</p>"
+        }
+      },
+      "documentation":"<p>The POST request to create a usage plan key for adding an existing API key to a usage plan.</p>"
+    },
+    "CreateUsagePlanRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the usage plan.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the usage plan.</p>"
+        },
+        "apiStages":{
+          "shape":"ListOfApiStage",
+          "documentation":"<p>The associated API stages of the usage plan.</p>"
+        },
+        "throttle":{
+          "shape":"ThrottleSettings",
+          "documentation":"<p>The throttling limits of the usage plan.</p>"
+        },
+        "quota":{
+          "shape":"QuotaSettings",
+          "documentation":"<p>The quota of the usage plan.</p>"
+        }
+      },
+      "documentation":"<p>The POST request to create a usage plan with the name, description, throttle limits and quota limits, as well as the associated API stages, specified in the payload.</p>"
     },
     "DeleteApiKeyRequest":{
       "type":"structure",
@@ -1991,7 +2314,7 @@
         },
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>The HTTP verb that identifies the <a>Method</a> resource.</p>",
+          "documentation":"<p>The HTTP verb of the <a>Method</a> resource.</p>",
           "location":"uri",
           "locationName":"http_method"
         }
@@ -2021,7 +2344,7 @@
         },
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>The HTTP verb identifier for the parent <a>Method</a> resource.</p>",
+          "documentation":"<p>The HTTP verb of the <a>Method</a> resource.</p>",
           "location":"uri",
           "locationName":"http_method"
         },
@@ -2113,6 +2436,41 @@
       },
       "documentation":"<p>Requests Amazon API Gateway to delete a <a>Stage</a> resource.</p>"
     },
+    "DeleteUsagePlanKeyRequest":{
+      "type":"structure",
+      "required":[
+        "usagePlanId",
+        "keyId"
+      ],
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the <a>UsagePlan</a> resource representing the usage plan containing the to-be-deleted <a>UsagePlanKey</a> resource representing a plan customer.</p>",
+          "location":"uri",
+          "locationName":"usageplanId"
+        },
+        "keyId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the <a>UsagePlanKey</a> resource to be deleted.</p>",
+          "location":"uri",
+          "locationName":"keyId"
+        }
+      },
+      "documentation":"<p>The DELETE request to delete a usage plan key and remove the underlying API key from the associated usage plan.</p>"
+    },
+    "DeleteUsagePlanRequest":{
+      "type":"structure",
+      "required":["usagePlanId"],
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the to-be-deleted usage plan.</p>",
+          "location":"uri",
+          "locationName":"usageplanId"
+        }
+      },
+      "documentation":"<p>The DELETE request to delete a uasge plan of a given plan Id.</p>"
+    },
     "Deployment":{
       "type":"structure",
       "members":{
@@ -2130,10 +2488,10 @@
         },
         "apiSummary":{
           "shape":"PathToMapOfMethodSnapshot",
-          "documentation":"<p>Gets a summary of the <a>RestApi</a> at the date and time that the deployment resource was created.</p>"
+          "documentation":"<p>A summary of the <a>RestApi</a> at the date and time that the deployment resource was created.</p>"
         }
       },
-      "documentation":"<p>An immutable representation of a <a>RestApi</a> resource that can be called by users using <a>Stages</a>. A deployment must be associated with a <a>Stage</a> for it to be callable over the Internet.</p>"
+      "documentation":"<p>An immutable representation of a <a>RestApi</a> resource that can be called by users using <a>Stages</a>. A deployment must be associated with a <a>Stage</a> for it to be callable over the Internet.</p> <div class=\"remarks\">To create a deployment, call <code>POST</code> on the <a>Deployments</a> resource of a <a>RestApi</a>. To view, update, or delete a deployment, call <code>GET</code>, <code>PATCH</code>, or <code>DELETE</code> on the specified deployment resource (<code>/restapis/{restapi_id}/deployments/{deployment_id}</code>).</div> <div class=\"seeAlso\"><a>RestApi</a>, <a>Deployments</a>, <a>Stage</a>, <a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html\">AWS CLI</a>, <a href=\"https://aws.amazon.com/tools/\">AWS SDKs</a> </div>"
     },
     "Deployments":{
       "type":"structure",
@@ -2145,7 +2503,7 @@
           "locationName":"item"
         }
       },
-      "documentation":"<p>Represents a collection resource that contains zero or more references to your existing deployments, and links that guide you on ways to interact with your collection. The collection offers a paginated view of the contained deployments.</p>"
+      "documentation":"<p>Represents a collection resource that contains zero or more references to your existing deployments, and links that guide you on how to interact with your collection. The collection offers a paginated view of the contained deployments.</p> <div class=\"remarks\">To create a new deployment of a <a>RestApi</a>, make a <code>POST</code> request against this resource. To view, update, or delete an existing deployment, make a <code>GET</code>, <code>PATCH</code>, or <code>DELETE</code> request, respectively, on a specified <a>Deployment</a> resource.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html\">Deploying an API</a>, <a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html\">AWS CLI</a>, <a href=\"https://aws.amazon.com/tools/\">AWS SDKs</a> </div>"
     },
     "DomainName":{
       "type":"structure",
@@ -2167,7 +2525,7 @@
           "documentation":"<p>The domain name of the Amazon CloudFront distribution. For more information, see the <a href=\"http://aws.amazon.com/documentation/cloudfront/\" target=\"_blank\">Amazon CloudFront documentation</a>.</p>"
         }
       },
-      "documentation":"<p>Represents a domain name that is contained in a simpler, more intuitive URL that can be called.</p>"
+      "documentation":"<p>Represents a domain name that is contained in a simpler, more intuitive URL that can be called.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html\">Use Client-Side Certificate</a> </div>"
     },
     "DomainNames":{
       "type":"structure",
@@ -2179,7 +2537,7 @@
           "locationName":"item"
         }
       },
-      "documentation":"<p>Represents a collection of <a>DomainName</a> resources.</p>"
+      "documentation":"<p>Represents a collection of <a>DomainName</a> resources.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html\">Use Client-Side Certificate</a> </div>"
     },
     "Double":{"type":"double"},
     "ExportResponse":{
@@ -2193,7 +2551,7 @@
         },
         "contentDisposition":{
           "shape":"String",
-          "documentation":"<p>The content-disposition header value in the HTTP reseponse.</p>",
+          "documentation":"<p>The content-disposition header value in the HTTP response.</p>",
           "location":"header",
           "locationName":"Content-Disposition"
         },
@@ -2274,6 +2632,12 @@
           "documentation":"<p>The identifier of the <a>ApiKey</a> resource.</p>",
           "location":"uri",
           "locationName":"api_Key"
+        },
+        "includeValue":{
+          "shape":"Boolean",
+          "documentation":"<p>A boolean flag to specify whether (<code>true</code>) or not (<code>false</code>) the result contains the key value.</p>",
+          "location":"querystring",
+          "locationName":"includeValue"
         }
       },
       "documentation":"<p>A request to get information about the current <a>ApiKey</a> resource.</p>"
@@ -2292,6 +2656,18 @@
           "documentation":"<p>The maximum number of <a>ApiKeys</a> to get information about.</p>",
           "location":"querystring",
           "locationName":"limit"
+        },
+        "nameQuery":{
+          "shape":"String",
+          "documentation":"<p>The name of queried API keys.</p>",
+          "location":"querystring",
+          "locationName":"name"
+        },
+        "includeValues":{
+          "shape":"Boolean",
+          "documentation":"<p>A boolean flag to specify whether (<code>true</code>) or not (<code>false</code>) the result contains key values.</p>",
+          "location":"querystring",
+          "locationName":"includeValues"
         }
       },
       "documentation":"<p>A request to get information about the current <a>ApiKeys</a> resource.</p>"
@@ -2330,7 +2706,7 @@
         },
         "position":{
           "shape":"String",
-          "documentation":"<p>If not all <a>Authorizer</a> resources in the response were present, the position will specificy where to start the next page of results.</p>",
+          "documentation":"<p>If not all <a>Authorizer</a> resources in the response were present, the position will specify where to start the next page of results.</p>",
           "location":"querystring",
           "locationName":"position"
         },
@@ -2527,12 +2903,12 @@
         },
         "parameters":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>A key-value map of query string parameters that specify properties of the export, depending on the requested exportType. For exportType 'swagger', any combination of the following parameters are supported: 'integrations' will export x-amazon-apigateway-integration extensions 'authorizers' will export x-amazon-apigateway-authorizer extensions 'postman' will export with Postman extensions, allowing for import to the Postman tool</p>",
+          "documentation":"<p>A key-value map of query string parameters that specify properties of the export, depending on the requested <code>exportType</code>. For <code>exportType</code> <code>swagger</code>, any combination of the following parameters are supported: <code>integrations</code> will export the API with x-amazon-apigateway-integration extensions. <code>authorizers</code> will export the API with x-amazon-apigateway-authorizer extensions. <code>postman</code> will export the API with Postman extensions, allowing for import to the Postman tool</p>",
           "location":"querystring"
         },
         "accepts":{
           "shape":"String",
-          "documentation":"<p>The content-type of the export, for example 'application/json'. Currently 'application/json' and 'application/yaml' are supported for exportType 'swagger'. Should be specifed in the 'Accept' header for direct API requests.</p>",
+          "documentation":"<p>The content-type of the export, for example <code>application/json</code>. Currently <code>application/json</code> and <code>application/yaml</code> are supported for <code>exportType</code> of <code>swagger</code>. This should be specified in the <code>Accept</code> header for direct API requests.</p>",
           "location":"header",
           "locationName":"Accept"
         }
@@ -2626,7 +3002,7 @@
         },
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>Specifies the put method request's HTTP method type.</p>",
+          "documentation":"<p>Specifies the method request's HTTP method type.</p>",
           "location":"uri",
           "locationName":"http_method"
         }
@@ -2656,13 +3032,13 @@
         },
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>The HTTP verb identifier for the parent <a>Method</a> resource.</p>",
+          "documentation":"<p>The HTTP verb of the <a>Method</a> resource.</p>",
           "location":"uri",
           "locationName":"http_method"
         },
         "statusCode":{
           "shape":"StatusCode",
-          "documentation":"<p>The status code identifier for the <a>MethodResponse</a> resource.</p>",
+          "documentation":"<p>The status code for the <a>MethodResponse</a> resource.</p>",
           "location":"uri",
           "locationName":"status_code"
         }
@@ -2690,7 +3066,7 @@
         },
         "flatten":{
           "shape":"Boolean",
-          "documentation":"<p>Resolves all external model references and returns a flattened model schema.</p>",
+          "documentation":"<p>A query parameter of a Boolean value to resolve (<code>true</code>) all external model references and returns a flattened model schema or not (<code>false</code>) The default is <code>false</code>.</p>",
           "location":"querystring",
           "locationName":"flatten"
         }
@@ -2844,13 +3220,13 @@
         },
         "sdkType":{
           "shape":"String",
-          "documentation":"<p>The language for the generated SDK. Currently javascript, android, and objectivec (for iOS) are supported.</p>",
+          "documentation":"<p>The language for the generated SDK. Currently <code>javascript</code>, <code>android</code>, and <code>objectivec</code> (for iOS) are supported.</p>",
           "location":"uri",
           "locationName":"sdk_type"
         },
         "parameters":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>A key-value map of query string parameters that specify properties of the SDK, depending on the requested sdkType. For sdkType 'objectivec', a parameter named \"classPrefix\" is required. For sdkType 'android', parameters named \"groupId\", \"artifactId\", \"artifactVersion\", and \"invokerPackage\" are required.</p>",
+          "documentation":"<p>A key-value map of query string parameters that specify properties of the SDK, depending on the requested <code>sdkType</code>. For <code>sdkType</code> of <code>objectivec</code>, a parameter named <code>classPrefix</code> is required. For <code>sdkType</code> of <code>android</code>, parameters named <code>groupId</code>, <code>artifactId</code>, <code>artifactVersion</code>, and <code>invokerPackage</code> are required.</p>",
           "location":"querystring"
         }
       },
@@ -2897,6 +3273,170 @@
       },
       "documentation":"<p>Requests Amazon API Gateway to get information about one or more <a>Stage</a> resources.</p>"
     },
+    "GetUsagePlanKeyRequest":{
+      "type":"structure",
+      "required":[
+        "usagePlanId",
+        "keyId"
+      ],
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the <a>UsagePlan</a> resource representing the usage plan containing the to-be-retrieved <a>UsagePlanKey</a> resource representing a plan customer.</p>",
+          "location":"uri",
+          "locationName":"usageplanId"
+        },
+        "keyId":{
+          "shape":"String",
+          "documentation":"<p>The key Id of the to-be-retrieved <a>UsagePlanKey</a> resource representing a plan customer.</p>",
+          "location":"uri",
+          "locationName":"keyId"
+        }
+      },
+      "documentation":"<p>The GET request to get a usage plan key of a given key identifier.</p>"
+    },
+    "GetUsagePlanKeysRequest":{
+      "type":"structure",
+      "required":["usagePlanId"],
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the <a>UsagePlan</a> resource representing the usage plan containing the to-be-retrieved <a>UsagePlanKey</a> resource representing a plan customer.</p>",
+          "location":"uri",
+          "locationName":"usageplanId"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>A query parameter specifying the zero-based index specifying the position of a usage plan key.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>A query parameter specifying the maximum number usage plan keys returned by the GET request.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        },
+        "nameQuery":{
+          "shape":"String",
+          "documentation":"<p>A query parameter specifying the name of the to-be-returned usage plan keys.</p>",
+          "location":"querystring",
+          "locationName":"name"
+        }
+      },
+      "documentation":"<p>The GET request to get all the usage plan keys representing the API keys added to a specified usage plan.</p>"
+    },
+    "GetUsagePlanRequest":{
+      "type":"structure",
+      "required":["usagePlanId"],
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the <a>UsagePlan</a> resource to be retrieved.</p>",
+          "location":"uri",
+          "locationName":"usageplanId"
+        }
+      },
+      "documentation":"<p>The GET request to get a usage plan of a given plan identifier.</p>"
+    },
+    "GetUsagePlansRequest":{
+      "type":"structure",
+      "members":{
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The zero-based array index specifying the position of the to-be-retrieved <a>UsagePlan</a> resource.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "keyId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the API key associated with the usage plans.</p>",
+          "location":"querystring",
+          "locationName":"keyId"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The number of <a>UsagePlan</a> resources to be returned as the result.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>The GET request to get all the usage plans of the caller's account.</p>"
+    },
+    "GetUsageRequest":{
+      "type":"structure",
+      "required":[
+        "usagePlanId",
+        "startDate",
+        "endDate"
+      ],
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the usage plan associated with the usage data.</p>",
+          "location":"uri",
+          "locationName":"usageplanId"
+        },
+        "keyId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the API key associated with the resultant usage data.</p>",
+          "location":"querystring",
+          "locationName":"keyId"
+        },
+        "startDate":{
+          "shape":"String",
+          "documentation":"<p>The starting date (e.g., 2016-01-01) of the usage data.</p>",
+          "location":"querystring",
+          "locationName":"startDate"
+        },
+        "endDate":{
+          "shape":"String",
+          "documentation":"<p>The ending date (e.g., 2016-12-31) of the usage data.</p>",
+          "location":"querystring",
+          "locationName":"endDate"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>Position</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of results to be returned.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>The GET request to get the usage data of a usage plan in a specified time interval.</p>"
+    },
+    "ImportApiKeysRequest":{
+      "type":"structure",
+      "required":[
+        "body",
+        "format"
+      ],
+      "members":{
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>The payload of the POST request to import API keys. For the payload format, see <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html\">API Key File Format</a>.</p>"
+        },
+        "format":{
+          "shape":"ApiKeysFormat",
+          "documentation":"<p>A query parameter to specify the input format to imported API keys. Currently, only the <code>csv</code> format is supported.</p>",
+          "location":"querystring",
+          "locationName":"format"
+        },
+        "failOnWarnings":{
+          "shape":"Boolean",
+          "documentation":"<p>A query parameter to indicate whether to rollback <a>ApiKey</a> importation (<code>true</code>) or not (<code>false</code>) when error is encountered.</p>",
+          "location":"querystring",
+          "locationName":"failonwarnings"
+        }
+      },
+      "documentation":"<p>The POST request to import API keys from an external source, such as a CSV-formatted file.</p>",
+      "payload":"body"
+    },
     "ImportRestApiRequest":{
       "type":"structure",
       "required":["body"],
@@ -2942,7 +3482,7 @@
         },
         "requestParameters":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>Represents requests parameters that are sent with the backend request. Request parameters are represented as a key/value map, with a destination as the key and a source as the value. A source must match an existing method request parameter, or a static value. Static values must be enclosed with single quotes, and be pre-encoded based on their destination in the request. The destination must match the pattern <code>integration.request.{location}.{name}</code>, where <code>location</code> is either querystring, path, or header. <code>name</code> must be a valid, unique parameter name.</p>"
+          "documentation":"<p>A key-value map specifying request parameters that are passed from the method request to the back end. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the back end. The method request parameter value must match the pattern of <code>method.request.{location}.{name}</code>, where <code>location</code> is <code>querystring</code>, <code>path</code>, or <code>header</code> and <code>name</code> must be a valid and unique method request parameter name.</p>"
         },
         "requestTemplates":{
           "shape":"MapOfStringToString",
@@ -2950,7 +3490,7 @@
         },
         "passthroughBehavior":{
           "shape":"String",
-          "documentation":"<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available requestTemplates defined on the Integration. There are three valid values: <code>WHEN_NO_MATCH</code>, <code>WHEN_NO_TEMPLATES</code>, and <code>NEVER</code>.</p> <p/> <p><code>WHEN_NO_MATCH</code> passes the request body for unmapped content types through to the Integration backend without transformation.</p> <p><code>NEVER</code> rejects unmapped content types with an HTTP 415 'Unsupported Media Type' response.</p> <p><code>WHEN_NO_TEMPLATES</code> will allow pass-through when the Integration has NO content types mapped to templates. However if there is at least one content type defined, unmapped content types will be rejected with the same 415 response.</p>"
+          "documentation":"<div> <p> Specifies how the method request body of an unmapped content type will be passed through the integration request to the back end without transformation. A content type is unmapped if no mapping template is defined in the integration or the content type does not match any of the mapped content types, as specified in <code>requestTemplates</code>. There are three valid values: <code>WHEN_NO_MATCH</code>, <code>WHEN_NO_TEMPLATES</code>, and <code>NEVER</code>. </p> <ul> <li> <code>WHEN_NO_MATCH</code> passes the method request body through the integration request to the back end without transformation when the method request content type does not match any content type associated with the mapping templates defined in the integration request. </li> <li> <code>WHEN_NO_TEMPLATES</code> passes the method request body through the integration request to the back end without transformation when no mapping template is defined in the integration request. If a template is defined when this option is selected, the method request of an unmapped content-type will be rejected with an HTTP <code>415 Unsupported Media Type</code> response. </li> <li> <code>NEVER</code> rejects the method request with an HTTP <code>415 Unsupported Media Type</code> response when either the method request content type does not match any content type associated with the mapping templates defined in the integration request or no mapping template is defined in the integration request. </li> </ul> </div>"
         },
         "cacheNamespace":{
           "shape":"String",
@@ -2962,10 +3502,10 @@
         },
         "integrationResponses":{
           "shape":"MapOfIntegrationResponse",
-          "documentation":"<p>Specifies the integration's responses.</p>"
+          "documentation":"<p>Specifies the integration's responses.</p> <div class=\"remarks\"> <p/> <h4>Example: Get integration responses of a method</h4> <h5>Request</h5> <p/> <pre><code>GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash} </code></pre> <h5>Response</h5> <p>The successful response returns <code>200 OK</code> status and a payload as follows:</p> <pre><code>{ \"_links\": { \"curies\": { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html\", \"name\": \"integrationresponse\", \"templated\": true }, \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\", \"title\": \"200\" }, \"integrationresponse:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" }, \"integrationresponse:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" } }, \"responseParameters\": { \"method.response.header.Content-Type\": \"'application/xml'\" }, \"responseTemplates\": { \"application/json\": \"$util.urlDecode(\\\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\\\")\\n\" }, \"statusCode\": \"200\" }</code></pre> <p/> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
         }
       },
-      "documentation":"<p>Represents a HTTP, AWS, or Mock integration.</p>"
+      "documentation":"<p>Represents an HTTP, AWS, or Mock integration.</p> <div class=\"remarks\">In the API Gateway console, the built-in Lambda integration is an AWS integration.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
     },
     "IntegrationResponse":{
       "type":"structure",
@@ -2976,18 +3516,18 @@
         },
         "selectionPattern":{
           "shape":"String",
-          "documentation":"<p>Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the backend. If the backend is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS backends, the HTTP status code is matched.</p>"
+          "documentation":"<p>Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the back end. For example, if the success response returns nothing and the error response returns some string, you could use the <code>.+</code> regex to match error response. However, make sure that the error response does not contain any newline (<code>\\n</code>) character in such cases. If the back end is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS back ends, the HTTP status code is matched.</p>"
         },
         "responseParameters":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>Represents response parameters that can be read from the backend response. Response parameters are represented as a key/value map, with a destination as the key and a source as the value. A destination must match an existing response parameter in the <a>MethodResponse</a>. The source can be a header from the backend response, or a static value. Static values are specified using enclosing single quotes, and backend response headers can be read using the pattern <code>integration.response.header.{name}</code>.</p>"
+          "documentation":"<p>A key-value map specifying response parameters that are passed to the method response from the back end. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of <code>method.response.header.{name}</code>, where <code>name</code> is a valid and unique header name. The mapped non-static value must match the pattern of <code>integration.response.header.{name}</code> or <code>integration.response.body.{JSON-expression}</code>, where <code>name</code> is a valid and unique response header name and <code>JSON-expression</code> is a valid JSON expression without the <code>$</code> prefix.</p>"
         },
         "responseTemplates":{
           "shape":"MapOfStringToString",
           "documentation":"<p>Specifies the templates used to transform the integration response body. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.</p>"
         }
       },
-      "documentation":"<p>Represents an integration response. The status code must map to an existing <a>MethodResponse</a>, and parameters and templates can be used to transform the backend response.</p>"
+      "documentation":"<p>Represents an integration response. The status code must map to an existing <a>MethodResponse</a>, and parameters and templates can be used to transform the back-end response.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
     },
     "IntegrationType":{
       "type":"string",
@@ -3019,6 +3559,10 @@
       "type":"list",
       "member":{"shape":"ApiKey"}
     },
+    "ListOfApiStage":{
+      "type":"list",
+      "member":{"shape":"ApiStage"}
+    },
     "ListOfAuthorizer":{
       "type":"list",
       "member":{"shape":"Authorizer"}
@@ -3038,6 +3582,10 @@
     "ListOfDomainName":{
       "type":"list",
       "member":{"shape":"DomainName"}
+    },
+    "ListOfLong":{
+      "type":"list",
+      "member":{"shape":"Long"}
     },
     "ListOfModel":{
       "type":"list",
@@ -3068,6 +3616,18 @@
       "type":"list",
       "member":{"shape":"String"}
     },
+    "ListOfUsage":{
+      "type":"list",
+      "member":{"shape":"ListOfLong"}
+    },
+    "ListOfUsagePlan":{
+      "type":"list",
+      "member":{"shape":"UsagePlan"}
+    },
+    "ListOfUsagePlanKey":{
+      "type":"list",
+      "member":{"shape":"UsagePlanKey"}
+    },
     "Long":{"type":"long"},
     "MapOfHeaderValues":{
       "type":"map",
@@ -3078,6 +3638,11 @@
       "type":"map",
       "key":{"shape":"String"},
       "value":{"shape":"IntegrationResponse"}
+    },
+    "MapOfKeyUsages":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"ListOfUsage"}
     },
     "MapOfMethod":{
       "type":"map",
@@ -3119,7 +3684,7 @@
       "members":{
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>The HTTP method.</p>"
+          "documentation":"<p>The method's HTTP verb.</p>"
         },
         "authorizationType":{
           "shape":"String",
@@ -3127,30 +3692,30 @@
         },
         "authorizerId":{
           "shape":"String",
-          "documentation":"<p>Specifies the identifier of an <a>Authorizer</a> to use on this Method. The authorizationType must be CUSTOM.</p>"
+          "documentation":"<p>The identifier of an <a>Authorizer</a> to use on this method. The <code>authorizationType</code> must be <code>CUSTOM</code>.</p>"
         },
         "apiKeyRequired":{
           "shape":"NullableBoolean",
-          "documentation":"<p>Specifies whether the method requires a valid <a>ApiKey</a>.</p>"
+          "documentation":"<p>A boolean flag specifying whether a valid <a>ApiKey</a> is required to invoke this method.</p>"
         },
         "requestParameters":{
           "shape":"MapOfStringToBoolean",
-          "documentation":"<p>Represents request parameters that can be accepted by Amazon API Gateway. Request parameters are represented as a key/value map, with a source as the key and a Boolean flag as the value. The Boolean flag is used to specify whether the parameter is required. A source must match the pattern <code>method.request.{location}.{name}</code>, where <code>location</code> is either querystring, path, or header. <code>name</code> is a valid, unique parameter name. Sources specified here are available to the integration for mapping to integration request parameters or templates.</p>"
+          "documentation":"<p>A key-value map defining required or optional method request parameters that can be accepted by Amazon API Gateway. A key is a method request parameter name matching the pattern of <code>method.request.{location}.{name}</code>, where <code>location</code> is <code>querystring</code>, <code>path</code>, or <code>header</code> and <code>name</code> is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (<code>true</code>) or optional (<code>false</code>). The method request parameter names defined here are available in <a>Integration</a> to be mapped to integration request parameters or templates.</p>"
         },
         "requestModels":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>Specifies the <a>Model</a> resources used for the request's content type. Request models are represented as a key/value map, with a content type as the key and a <a>Model</a> name as the value.</p>"
+          "documentation":"<p>A key-value map specifying data schemas, represented by <a>Model</a> resources, (as the mapped value) of the request payloads of given content types (as the mapping key).</p>"
         },
         "methodResponses":{
           "shape":"MapOfMethodResponse",
-          "documentation":"<p>Represents available responses that can be sent to the caller. Method responses are represented as a key/value map, with an HTTP status code as the key and a <a>MethodResponse</a> as the value. The status codes are available for the <a>Integration</a> responses to map to.</p>"
+          "documentation":"<p>Gets a method response associated with a given HTTP status code. </p> <div class=\"remarks\"> <p>The collection of method responses are encapsulated in a key-value map, where the key is a response's HTTP status code and the value is a <a>MethodResponse</a> resource that specifies the response returned to the caller from the back end through the integration response.</p> <h4>Example: Get a 200 OK response of a GET method</h4> <h5>Request</h5> <p/> <pre><code>GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com Content-Length: 117 X-Amz-Date: 20160613T215008Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}</code></pre> <h5>Response</h5> <p>The successful response returns a <code>200 OK</code> status code and a payload similar to the following:</p> <pre><code>{ \"_links\": { \"curies\": { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html\", \"name\": \"methodresponse\", \"templated\": true }, \"self\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200\", \"title\": \"200\" }, \"methodresponse:delete\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200\" }, \"methodresponse:update\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200\" } }, \"responseModels\": { \"application/json\": \"Empty\" }, \"responseParameters\": { \"method.response.header.operator\": false, \"method.response.header.operand_2\": false, \"method.response.header.operand_1\": false }, \"statusCode\": \"200\" }</code></pre> <p/> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html\">AWS CLI</a> </div>"
         },
         "methodIntegration":{
           "shape":"Integration",
-          "documentation":"<p>The method's integration.</p>"
+          "documentation":"<p>Gets the method's integration responsible for passing the client-submitted request to the back end and performing necessary transformations to make the request compliant with the back end.</p> <div class=\"remarks\"> <p/> <h4>Example: </h4> <h5>Request</h5> <p/> <pre><code>GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com Content-Length: 117 X-Amz-Date: 20160613T213210Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}</code></pre> <h5>Response</h5> <p>The successful response returns a <code>200 OK</code> status code and a payload similar to the following:</p> <pre><code>{ \"_links\": { \"curies\": [ { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html\", \"name\": \"integration\", \"templated\": true }, { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html\", \"name\": \"integrationresponse\", \"templated\": true } ], \"self\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration\" }, \"integration:delete\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration\" }, \"integration:responses\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"integration:update\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration\" }, \"integrationresponse:put\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/{status_code}\", \"templated\": true } }, \"cacheKeyParameters\": [], \"cacheNamespace\": \"0cjtch\", \"credentials\": \"arn:aws:iam::123456789012:role/apigAwsProxyRole\", \"httpMethod\": \"POST\", \"passthroughBehavior\": \"WHEN_NO_MATCH\", \"requestTemplates\": { \"application/json\": \"{\\n \\\"a\\\": \\\"$input.params('operand1')\\\",\\n \\\"b\\\": \\\"$input.params('operand2')\\\", \\n \\\"op\\\": \\\"$input.params('operator')\\\" \\n}\" }, \"type\": \"AWS\", \"uri\": \"arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations\", \"_embedded\": { \"integration:responses\": { \"_links\": { \"self\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"integrationresponse:delete\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200\" }, \"integrationresponse:update\": { \"href\": \"/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200\" } }, \"responseParameters\": { \"method.response.header.operator\": \"integration.response.body.op\", \"method.response.header.operand_2\": \"integration.response.body.b\", \"method.response.header.operand_1\": \"integration.response.body.a\" }, \"responseTemplates\": { \"application/json\": \"#set($res = $input.path('$'))\\n{\\n \\\"result\\\": \\\"$res.a, $res.b, $res.op => $res.c\\\",\\n \\\"a\\\" : \\\"$res.a\\\",\\n \\\"b\\\" : \\\"$res.b\\\",\\n \\\"op\\\" : \\\"$res.op\\\",\\n \\\"c\\\" : \\\"$res.c\\\"\\n}\" }, \"selectionPattern\": \"\", \"statusCode\": \"200\" } } }</code></pre> <p/> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html\">AWS CLI</a> </div>"
         }
       },
-      "documentation":"<p>Represents a method.</p>"
+      "documentation":"<p> Represents a client-facing interface by which the client calls the API to access back-end resources. A <b>Method</b> resource is integrated with an <a>Integration</a> resource. Both consist of a request and one or more responses. The method request takes the client input that is passed to the back end through the integration request. A method response returns the output from the back end to the client through an integration response. A method request is embodied in a <b>Method</b> resource, whereas an integration request is embodied in an <a>Integration</a> resource. On the other hand, a method response is represented by a <a>MethodResponse</a> resource, whereas an integration response is represented by an <a>IntegrationResponse</a> resource. </p> <div class=\"remarks\"> <p/> <h4>Example: Retrive the GET method on a specified resource</h4> <h5>Request</h5> <p>The following example request retrieves the information about the GET method on an API resource (<code>3kzxbg5sa2</code>) of an API (<code>fugvjdxtri</code>). </p> <pre><code>GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160603T210259Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}</code></pre> <h5>Response</h5> <p>The successful response returns a <code>200 OK</code> status code and a payload similar to the following:</p> <pre><code>{ \"_links\": { \"curies\": [ { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html\", \"name\": \"integration\", \"templated\": true }, { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html\", \"name\": \"integrationresponse\", \"templated\": true }, { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html\", \"name\": \"method\", \"templated\": true }, { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html\", \"name\": \"methodresponse\", \"templated\": true } ], \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET\", \"name\": \"GET\", \"title\": \"GET\" }, \"integration:put\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"method:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET\" }, \"method:integration\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"method:responses\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"method:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET\" }, \"methodresponse:put\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}\", \"templated\": true } }, \"apiKeyRequired\": true, \"authorizationType\": \"NONE\", \"httpMethod\": \"GET\", \"_embedded\": { \"method:integration\": { \"_links\": { \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"integration:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"integration:responses\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"integration:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"integrationresponse:put\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}\", \"templated\": true } }, \"cacheKeyParameters\": [], \"cacheNamespace\": \"3kzxbg5sa2\", \"credentials\": \"arn:aws:iam::123456789012:role/apigAwsProxyRole\", \"httpMethod\": \"POST\", \"passthroughBehavior\": \"WHEN_NO_MATCH\", \"requestParameters\": { \"integration.request.header.Content-Type\": \"'application/x-amz-json-1.1'\" }, \"requestTemplates\": { \"application/json\": \"{\\n}\" }, \"type\": \"AWS\", \"uri\": \"arn:aws:apigateway:us-east-1:kinesis:action/ListStreams\", \"_embedded\": { \"integration:responses\": { \"_links\": { \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"integrationresponse:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" }, \"integrationresponse:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" } }, \"responseParameters\": { \"method.response.header.Content-Type\": \"'application/xml'\" }, \"responseTemplates\": { \"application/json\": \"$util.urlDecode(\\\"%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E\\\")\" }, \"statusCode\": \"200\" } } }, \"method:responses\": { \"_links\": { \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"methodresponse:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\" }, \"methodresponse:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\" } }, \"responseModels\": { \"application/json\": \"Empty\" }, \"responseParameters\": { \"method.response.header.Content-Type\": false }, \"statusCode\": \"200\" } } }</code></pre> <p>In the example above, the response template for the <code>200 OK</code> response maps the JSON output from the <code>ListStreams</code> action in the back end to an XML output. The mapping template is URL-encoded as <code>%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E</code> and the output is decoded using the <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference\">$util.urlDecode()</a> helper function.</p> </div> <div class=\"seeAlso\"> <a>MethodResponse</a>, <a>Integration</a>, <a>IntegrationResponse</a>, <a>Resource</a>, <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html\">Set up an API's method</a> </div>"
     },
     "MethodResponse":{
       "type":"structure",
@@ -3161,14 +3726,14 @@
         },
         "responseParameters":{
           "shape":"MapOfStringToBoolean",
-          "documentation":"<p>Represents response parameters that can be sent back to the caller by Amazon API Gateway. Response parameters are represented as a key/value map, with a destination as the key and a boolean flag as the value, which is used to specify whether the parameter is required. A destination must match the pattern <code>method.response.header.{name}</code>, where <code>name</code> is a valid, unique header name. Destinations specified here are available to the integration for mapping from integration response parameters.</p>"
+          "documentation":"<p>A key-value map specifying required or optional response parameters that Amazon API Gateway can send back to the caller. A key defines a method response header and the value specifies whether the associated method response header is required or not. The expression of the key must match the pattern <code>method.response.header.{name}</code>, where <code>name</code> is a valid and unique header name. Amazon API Gateway passes certain integration response data to the method response headers specified here according to the mapping you prescribe in the API's <a>IntegrationResponse</a>. The integration response data that can be mapped include an integration response header expressed in <code>integration.response.header.{name}</code>, a static value enclosed within a pair of single quotes (e.g., <code>'application/json'</code>), or a JSON expression from the back-end response payload in the form of <code>integration.response.body.{JSON-expression}</code>, where <code>JSON-expression</code> is a valid JSON expression without the <code>$</code> prefix.)</p>"
         },
         "responseModels":{
           "shape":"MapOfStringToString",
           "documentation":"<p>Specifies the <a>Model</a> resources used for the response's content-type. Response models are represented as a key/value map, with a content-type as the key and a <a>Model</a> name as the value.</p>"
         }
       },
-      "documentation":"<p>Represents a method response. Amazon API Gateway sends back the status code to the caller as the HTTP status code. Parameters and models can be used to transform the response from the method's integration.</p>"
+      "documentation":"<p>Represents a method response of a given HTTP status code returned to the client. The method response is passed from the back end through the associated integration response that can be transformed using a mapping template. </p> <div class=\"remarks\"> <p/> <h4>Example: A <b>MethodResponse</b> instance of an API</h4> <h5>Request</h5> <p>The example request retrieves a <b>MethodResponse</b> of the 200 status code.</p> <pre><code>GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160603T222952Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}</code></pre> <h5>Response</h5> <p>The successful response returns <code>200 OK</code> status and a payload as follows:</p> <pre><code>{ \"_links\": { \"curies\": { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html\", \"name\": \"methodresponse\", \"templated\": true }, \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\", \"title\": \"200\" }, \"methodresponse:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\" }, \"methodresponse:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\" } }, \"responseModels\": { \"application/json\": \"Empty\" }, \"responseParameters\": { \"method.response.header.Content-Type\": false }, \"statusCode\": \"200\" }</code></pre> <p/> </div> <div class=\"seeAlso\"> <a>Method</a>, <a>IntegrationResponse</a>, <a>Integration</a> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
     },
     "MethodSetting":{
       "type":"structure",
@@ -3183,7 +3748,7 @@
         },
         "dataTraceEnabled":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies the whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
+          "documentation":"<p>Specifies whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
         },
         "throttlingBurstLimit":{
           "shape":"Integer",
@@ -3199,7 +3764,7 @@
         },
         "cacheTtlInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>Specifies the time to live (TTL) in seconds, for cached responses. The higher a the TTL, the longer the response will be cached. The PATCH path for this setting is <code>/{method_setting_key}/caching/ttlInSeconds</code>, and the value is an integer.</p>"
+          "documentation":"<p>Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached. The PATCH path for this setting is <code>/{method_setting_key}/caching/ttlInSeconds</code>, and the value is an integer.</p>"
         },
         "cacheDataEncrypted":{
           "shape":"Boolean",
@@ -3211,7 +3776,7 @@
         },
         "unauthorizedCacheControlHeaderStrategy":{
           "shape":"UnauthorizedCacheControlHeaderStrategy",
-          "documentation":"<p>Specifies the strategy on how to handle the unauthorized requests for cache invalidation. The PATCH path for this setting is <code>/{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy</code>, and the available values are <code>FAIL_WITH_403</code>, <code>SUCCEED_WITH_RESPONSE_HEADER</code>, <code>SUCCEED_WITHOUT_RESPONSE_HEADER</code>.</p>"
+          "documentation":"<p>Specifies how to handle unauthorized requests for cache invalidation. The PATCH path for this setting is <code>/{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy</code>, and the available values are <code>FAIL_WITH_403</code>, <code>SUCCEED_WITH_RESPONSE_HEADER</code>, <code>SUCCEED_WITHOUT_RESPONSE_HEADER</code>.</p>"
         }
       },
       "documentation":"<p>Specifies the method setting properties.</p>"
@@ -3247,14 +3812,14 @@
         },
         "schema":{
           "shape":"String",
-          "documentation":"<p>The schema for the model. For <code>application/json</code> models, this should be <a href=\"http://json-schema.org/documentation.html\" target=\"_blank\">JSON-schema draft v4</a> model.</p>"
+          "documentation":"<p>The schema for the model. For <code>application/json</code> models, this should be <a href=\"http://json-schema.org/documentation.html\" target=\"_blank\">JSON-schema draft v4</a> model. Do not include \"\\*/\" characters in the description of any properties because such \"\\*/\" characters may be interpreted as the closing marker for comments in some languages, such as Java or JavaScript, causing the installation of your API's SDK generated by API Gateway to fail.</p>"
         },
         "contentType":{
           "shape":"String",
           "documentation":"<p>The content-type for the model.</p>"
         }
       },
-      "documentation":"<p>Represents the structure of a request or response payload for a method.</p>"
+      "documentation":"<p>Represents the data structure of a method's request or response payload.</p> <div class=\"remarks\"> <p>A request model defines the data structure of the client-supplied request payload. A response model defines the data structure of the response payload returned by the back end. Although not required, models are useful for mapping payloads between the front end and back end.</p> <p>A model is used for generating an API's SDK, validating the input request body, and creating a skeletal mapping template.</p> </div> <div class=\"seeAlso\"> <a>Method</a>, <a>MethodResponse</a>, <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html\">Models and Mappings</a> </div>"
     },
     "Models":{
       "type":"structure",
@@ -3266,7 +3831,7 @@
           "locationName":"item"
         }
       },
-      "documentation":"<p>Represents a collection of <a>Model</a> resources.</p>"
+      "documentation":"<p>Represents a collection of <a>Model</a> resources.</p> <div class=\"seeAlso\"> <a>Method</a>, <a>MethodResponse</a>, <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html\">Models and Mappings</a> </div>"
     },
     "NotFoundException":{
       "type":"structure",
@@ -3283,19 +3848,19 @@
       "members":{
         "op":{
           "shape":"op",
-          "documentation":"<p>A patch operation whose value indicates the operation to perform. Its value MUST be one of \"add\", \"remove\", \"replace\", \"move\", \"copy\", or \"test\"; other values are errors. </p>"
+          "documentation":"<p>An update operation to be performed with this PATCH request. The valid value can be \"add\", \"remove\", or \"replace\". Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.</p>"
         },
         "path":{
           "shape":"String",
-          "documentation":"<p>Operation objects MUST have exactly one \"path\" member. That member's value is a string containing a `JSON-Pointer` value that references a location within the target document (the \"target location\") where the operation is performed.</p>"
+          "documentation":"<p>The <code>op</code> operation's target, as identified by a <a href=\"https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08\">JSON Pointer</a> value that references a location within the targeted resource. For example, if the target resource has an updateable property of <code>{\"name\":\"value\"}</code>, the path for this property is <code>/name</code>. If the <code>name</code> property value is a JSON object (e.g., <code>{\"name\": {\"child/name\": \"child-value\"}}</code>), the path for the <code>child/name</code> property will be <code>/name/child~1name</code>. Any slash (\"/\") character appearing in path names must be escaped with \"~1\", as shown in the example above. Each <code>op</code> operation can have only one <code>path</code> associated with it.</p>"
         },
         "value":{
           "shape":"String",
-          "documentation":"<p>The actual value content. </p>"
+          "documentation":"<p>The new target value of the update operation. </p>"
         },
         "from":{
           "shape":"String",
-          "documentation":"<p>The \"move\" and \"copy\" operation object MUST contain a \"from\" member, which is a string containing a <code>JSON Pointer</code> value that references the location in the target document to move the value from.</p>"
+          "documentation":"<p> Not supported.</p>"
         }
       },
       "documentation":"A single patch operation to apply to the specified resource. Please refer to http://tools.ietf.org/html/rfc6902#section-4 for an explanation of how each operation is used."
@@ -3352,7 +3917,7 @@
         },
         "requestParameters":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>Represents request parameters that are sent with the backend request. Request parameters are represented as a key/value map, with a destination as the key and a source as the value. A source must match an existing method request parameter, or a static value. Static values must be enclosed with single quotes, and be pre-encoded based on their destination in the request. The destination must match the pattern <code>integration.request.{location}.{name}</code>, where <code>location</code> is either querystring, path, or header. <code>name</code> must be a valid, unique parameter name.</p>"
+          "documentation":"<p>A key-value map specifying request parameters that are passed from the method request to the back end. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the back end. The method request parameter value must match the pattern of <code>method.request.{location}.{name}</code>, where <code>location</code> is <code>querystring</code>, <code>path</code>, or <code>header</code> and <code>name</code> must be a valid and unique method request parameter name.</p>"
         },
         "requestTemplates":{
           "shape":"MapOfStringToString",
@@ -3360,7 +3925,7 @@
         },
         "passthroughBehavior":{
           "shape":"String",
-          "documentation":"<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available requestTemplates defined on the Integration. There are three valid values: <code>WHEN_NO_MATCH</code>, <code>WHEN_NO_TEMPLATES</code>, and <code>NEVER</code>.</p> <p/> <p><code>WHEN_NO_MATCH</code> passes the request body for unmapped content types through to the Integration backend without transformation.</p> <p><code>NEVER</code> rejects unmapped content types with an HTTP 415 'Unsupported Media Type' response.</p> <p><code>WHEN_NO_TEMPLATES</code> will allow pass-through when the Integration has NO content types mapped to templates. However if there is at least one content type defined, unmapped content types will be rejected with the same 415 response.</p>"
+          "documentation":"<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the <code>requestTemplates</code> property on the Integration resource. There are three valid values: <code>WHEN_NO_MATCH</code>, <code>WHEN_NO_TEMPLATES</code>, and <code>NEVER</code>. </p> <ul> <li><p><code>WHEN_NO_MATCH</code> passes the request body for unmapped content types through to the integration back end without transformation.</p></li> <li><p><code>NEVER</code> rejects unmapped content types with an HTTP 415 'Unsupported Media Type' response.</p></li> <li><p><code>WHEN_NO_TEMPLATES</code> allows pass-through when the integration has NO content types mapped to templates. However if there is at least one content type defined, unmapped content types will be rejected with the same 415 response.</p></li> </ul>"
         },
         "cacheNamespace":{
           "shape":"String",
@@ -3412,7 +3977,7 @@
         },
         "responseParameters":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>Represents response parameters that can be read from the backend response. Response parameters are represented as a key/value map, with a destination as the key and a source as the value. A destination must match an existing response parameter in the <a>Method</a>. The source can be a header from the backend response, or a static value. Static values are specified using enclosing single quotes, and backend response headers can be read using the pattern <code>integration.response.header.{name}</code>.</p>"
+          "documentation":"<p>A key-value map specifying response parameters that are passed to the method response from the back end. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of <code>method.response.header.{name}</code>, where <code>name</code> is a valid and unique header name. The mapped non-static value must match the pattern of <code>integration.response.header.{name}</code> or <code>integration.response.body.{JSON-expression}</code>, where <code>name</code> must be a valid and unique response header name and <code>JSON-expression</code> a valid JSON expression without the <code>$</code> prefix.</p>"
         },
         "responseTemplates":{
           "shape":"MapOfStringToString",
@@ -3444,7 +4009,7 @@
         },
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>Specifies the put method request's HTTP method type.</p>",
+          "documentation":"<p>Specifies the method request's HTTP method type.</p>",
           "location":"uri",
           "locationName":"http_method"
         },
@@ -3462,7 +4027,7 @@
         },
         "requestParameters":{
           "shape":"MapOfStringToBoolean",
-          "documentation":"<p>Represents requests parameters that are sent with the backend request. Request parameters are represented as a key/value map, with a destination as the key and a source as the value. A source must match an existing method request parameter, or a static value. Static values must be enclosed with single quotes, and be pre-encoded based on their destination in the request. The destination must match the pattern <code>integration.request.{location}.{name}</code>, where <code>location</code> is either querystring, path, or header. <code>name</code> must be a valid, unique parameter name.</p>"
+          "documentation":"<p>A key-value map defining required or optional method request parameters that can be accepted by Amazon API Gateway. A key defines a method request parameter name matching the pattern of <code>method.request.{location}.{name}</code>, where <code>location</code> is <code>querystring</code>, <code>path</code>, or <code>header</code> and <code>name</code> is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (<code>true</code>) or optional (<code>false</code>). The method request parameter names defined here are available in <a>Integration</a> to be mapped to integration request parameters or body-mapping templates.</p>"
         },
         "requestModels":{
           "shape":"MapOfStringToString",
@@ -3494,7 +4059,7 @@
         },
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>The HTTP verb that identifies the <a>Method</a> resource.</p>",
+          "documentation":"<p>The HTTP verb of the <a>Method</a> resource.</p>",
           "location":"uri",
           "locationName":"http_method"
         },
@@ -3506,7 +4071,7 @@
         },
         "responseParameters":{
           "shape":"MapOfStringToBoolean",
-          "documentation":"<p>Represents response parameters that can be sent back to the caller by Amazon API Gateway. Response parameters are represented as a key/value map, with a destination as the key and a Boolean flag as the value. The Boolean flag is used to specify whether the parameter is required. A destination must match the pattern <code>method.response.header.{name}</code>, where <code>name</code> is a valid, unique header name. Destinations specified here are available to the integration for mapping from integration response parameters.</p>"
+          "documentation":"<p>A key-value map specifying required or optional response parameters that Amazon API Gateway can send back to the caller. A key defines a method response header name and the associated value is a Boolean flag indicating whether the method response parameter is required or not. The method response header names must match the pattern of <code>method.response.header.{name}</code>, where <code>name</code> is a valid and unique header name. The response parameter names defined here are available in the integration response to be mapped from an integration response header expressed in <code>integration.response.header.{name}</code>, a static value enclosed within a pair of single quotes (e.g., <code>'application/json'</code>), or a JSON expression from the back-end response payload in the form of <code>integration.response.body.{JSON-expression}</code>, where <code>JSON-expression</code> is a valid JSON expression without the <code>$</code> prefix.)</p>"
         },
         "responseModels":{
           "shape":"MapOfStringToString",
@@ -3560,6 +4125,32 @@
       "documentation":"<p>A PUT request to update an existing API, with external API definitions specified as the request body.</p>",
       "payload":"body"
     },
+    "QuotaPeriodType":{
+      "type":"string",
+      "enum":[
+        "DAY",
+        "WEEK",
+        "MONTH"
+      ]
+    },
+    "QuotaSettings":{
+      "type":"structure",
+      "members":{
+        "limit":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of requests that can be made in a given time period.</p>"
+        },
+        "offset":{
+          "shape":"Integer",
+          "documentation":"<p>The number of requests subtracted from the given limit in the initial time period.</p>"
+        },
+        "period":{
+          "shape":"QuotaPeriodType",
+          "documentation":"<p>The time period in which the limit applies. Valid values are \"DAY\", \"WEEK\" or \"MONTH\".</p>"
+        }
+      },
+      "documentation":"<p>Quotas configured for a usage plan.</p>"
+    },
     "Resource":{
       "type":"structure",
       "members":{
@@ -3581,10 +4172,10 @@
         },
         "resourceMethods":{
           "shape":"MapOfMethod",
-          "documentation":"<p>Map of methods for this resource, which is included only if the request uses the <b>embed</b> query option.</p>"
+          "documentation":"<p>Gets an API resource's method of a given HTTP verb.</p> <div class=\"remarks\"> <p>The resource methods are a map of methods indexed by methods' HTTP verbs enabled on the resource. This method map is included in the <code>200 OK</code> response of the <code>GET /restapis/{restapi_id}/resources/{resource_id}</code> or <code>GET /restapis/{restapi_id}/resources/{resource_id}?embed=methods</code> request.</p> <h4>Example: Get the GET method of an API resource</h4> <h5>Request</h5> <pre><code>GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160608T031827Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160608/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}</code></pre> <h5>Response</h5> <pre><code>{ \"_links\": { \"curies\": [ { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html\", \"name\": \"integration\", \"templated\": true }, { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html\", \"name\": \"integrationresponse\", \"templated\": true }, { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html\", \"name\": \"method\", \"templated\": true }, { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html\", \"name\": \"methodresponse\", \"templated\": true } ], \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET\", \"name\": \"GET\", \"title\": \"GET\" }, \"integration:put\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"method:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET\" }, \"method:integration\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"method:responses\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"method:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET\" }, \"methodresponse:put\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}\", \"templated\": true } }, \"apiKeyRequired\": false, \"authorizationType\": \"NONE\", \"httpMethod\": \"GET\", \"_embedded\": { \"method:integration\": { \"_links\": { \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"integration:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"integration:responses\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"integration:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration\" }, \"integrationresponse:put\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}\", \"templated\": true } }, \"cacheKeyParameters\": [], \"cacheNamespace\": \"3kzxbg5sa2\", \"credentials\": \"arn:aws:iam::123456789012:role/apigAwsProxyRole\", \"httpMethod\": \"POST\", \"passthroughBehavior\": \"WHEN_NO_MATCH\", \"requestParameters\": { \"integration.request.header.Content-Type\": \"'application/x-amz-json-1.1'\" }, \"requestTemplates\": { \"application/json\": \"{\\n}\" }, \"type\": \"AWS\", \"uri\": \"arn:aws:apigateway:us-east-1:kinesis:action/ListStreams\", \"_embedded\": { \"integration:responses\": { \"_links\": { \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"integrationresponse:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" }, \"integrationresponse:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" } }, \"responseParameters\": { \"method.response.header.Content-Type\": \"'application/xml'\" }, \"responseTemplates\": { \"application/json\": \"$util.urlDecode(\\\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\\\")\\n\" }, \"statusCode\": \"200\" } } }, \"method:responses\": { \"_links\": { \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\", \"name\": \"200\", \"title\": \"200\" }, \"methodresponse:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\" }, \"methodresponse:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200\" } }, \"responseModels\": { \"application/json\": \"Empty\" }, \"responseParameters\": { \"method.response.header.Content-Type\": false }, \"statusCode\": \"200\" } } }</code></pre> <p>If the <code>OPTIONS</code> is enabled on the resource, you can follow the example here to get that method. Just replace the <code>GET</code> of the last path segment in the request URL with <code>OPTIONS</code>.</p> </div> <div class=\"seeAlso\"> </div>"
         }
       },
-      "documentation":"<p>Represents a resource.</p>"
+      "documentation":"<p>Represents an API resource.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Create an API</a> </div>"
     },
     "Resources":{
       "type":"structure",
@@ -3596,7 +4187,7 @@
           "locationName":"item"
         }
       },
-      "documentation":"<p>Represents a collection of <a>Resource</a> resources.</p>"
+      "documentation":"<p>Represents a collection of <a>Resource</a> resources.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Create an API</a> </div>"
     },
     "RestApi":{
       "type":"structure",
@@ -3617,9 +4208,12 @@
           "shape":"Timestamp",
           "documentation":"<p>The date when the API was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
         },
-        "warnings":{"shape":"ListOfString"}
+        "warnings":{
+          "shape":"ListOfString",
+          "documentation":"<p>The warning messages reported when <code>failonwarnings</code> is turned on during API import.</p>"
+        }
       },
-      "documentation":"<p>Represents a REST API.</p>"
+      "documentation":"<p>Represents a REST API.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Create an API</a> </div>"
     },
     "RestApis":{
       "type":"structure",
@@ -3631,7 +4225,7 @@
           "locationName":"item"
         }
       },
-      "documentation":"<p>Contains references to your APIs and links that guide you in ways to interact with your collection. A collection offers a paginated view of your APIs.</p>"
+      "documentation":"<p>Contains references to your APIs and links that guide you in how to interact with your collection. A collection offers a paginated view of your APIs.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Create an API</a> </div>"
     },
     "SdkResponse":{
       "type":"structure",
@@ -3644,7 +4238,7 @@
         },
         "contentDisposition":{
           "shape":"String",
-          "documentation":"<p>The content-disposition header value in the HTTP reseponse.</p>",
+          "documentation":"<p>The content-disposition header value in the HTTP response.</p>",
           "location":"header",
           "locationName":"Content-Disposition"
         },
@@ -3677,7 +4271,10 @@
           "shape":"String",
           "documentation":"<p>The identifier of the <a>Deployment</a> that the stage points to.</p>"
         },
-        "clientCertificateId":{"shape":"String"},
+        "clientCertificateId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of a client certificate for an API stage.</p>"
+        },
         "stageName":{
           "shape":"String",
           "documentation":"<p>The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to Amazon API Gateway.</p>"
@@ -3700,11 +4297,11 @@
         },
         "methodSettings":{
           "shape":"MapOfMethodSettings",
-          "documentation":"<p>A map that defines the method settings for a <a>Stage</a> resource. Keys are defined as <code>{resource_path}/{http_method}</code> for an individual method override, or <code>\\*/\\*</code> for the settings applied to all methods in the stage.</p>"
+          "documentation":"<p>A map that defines the method settings for a <a>Stage</a> resource. Keys (designated as <code>/{method_setting_key</code> below) are method paths defined as <code>{resource_path}/{http_method}</code> for an individual method override, or <code>/\\*/\\*</code> for overriding all methods in the stage. Any forward slash (\"/\") characters in the <code>resource_path</code> part must be encoded as \"~1\" as in, for example, <code>~1resource~1sub-resource/GET</code>.</p>"
         },
         "variables":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>A map that defines the stage variables for a <a>Stage</a> resource. Variable names can have alphanumeric characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
+          "documentation":"<p>A map that defines the stage variables for a <a>Stage</a> resource. Variable names can have alphanumeric and underscore characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
         },
         "createdDate":{
           "shape":"Timestamp",
@@ -3715,7 +4312,7 @@
           "documentation":"<p>The date and time that information about the stage was last updated, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
         }
       },
-      "documentation":"<p>Represents a unique identifier for a version of a deployed <a>RestApi</a> that is callable by users.</p>"
+      "documentation":"<p>Represents a unique identifier for a version of a deployed <a>RestApi</a> that is callable by users.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html\">Deploy an API</a> </div>"
     },
     "StageKey":{
       "type":"structure",
@@ -3739,7 +4336,7 @@
           "documentation":"<p>An individual <a>Stage</a> resource.</p>"
         }
       },
-      "documentation":"<p>A list of <a>Stage</a> resource that are associated with the <a>ApiKey</a> resource.</p>"
+      "documentation":"<p>A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.</p> <div class=\"seeAlso\"><a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html\">Deploying API in Stages</a></div>"
     },
     "StatusCode":{
       "type":"string",
@@ -3755,7 +4352,7 @@
           "documentation":"<p>The Apache <a href=\"http://velocity.apache.org/engine/devel/vtl-reference-guide.html\" target=\"_blank\">Velocity Template Language (VTL)</a> template content used for the template resource.</p>"
         }
       },
-      "documentation":"<p>Represents a mapping template used to transform a payload.</p>"
+      "documentation":"<p>Represents a mapping template used to transform a payload.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings\">Mapping Templates</a> </div>"
     },
     "TestInvokeAuthorizerRequest":{
       "type":"structure",
@@ -3812,7 +4409,7 @@
         },
         "latency":{
           "shape":"Long",
-          "documentation":"<p>The execution latency of the test authorizer request</p>"
+          "documentation":"<p>The execution latency of the test authorizer request.</p>"
         },
         "principalId":{
           "shape":"String",
@@ -3820,12 +4417,15 @@
         },
         "policy":{
           "shape":"String",
-          "documentation":"<p>The policy JSON document returned by the <a>Authorizer</a></p>"
+          "documentation":"<p>The JSON policy document returned by the <a>Authorizer</a></p>"
         },
         "authorization":{"shape":"MapOfStringToList"},
-        "claims":{"shape":"MapOfStringToString"}
+        "claims":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>The <a href=\"http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims\">open identity claims</a>, with any supported custom attributes, returned from the Cognito Your User Pool configured for the API.</p>"
+        }
       },
-      "documentation":"<p>Represents the response of the test invoke request in for a custom <a>Authorizer</a></p>"
+      "documentation":"<p>Represents the response of the test invoke request for a custom <a>Authorizer</a></p>"
     },
     "TestInvokeMethodRequest":{
       "type":"structure",
@@ -3867,7 +4467,7 @@
         },
         "clientCertificateId":{
           "shape":"String",
-          "documentation":"<p>A <a>ClientCertificate</a> identifier to use in the test invocation. API Gateway will use use the certificate when making the HTTPS request to the defined backend endpoint.</p>"
+          "documentation":"<p>A <a>ClientCertificate</a> identifier to use in the test invocation. API Gateway will use the certificate when making the HTTPS request to the defined back-end endpoint.</p>"
         },
         "stageVariables":{
           "shape":"MapOfStringToString",
@@ -3885,11 +4485,11 @@
         },
         "body":{
           "shape":"String",
-          "documentation":"<p>The body of HTTP response.</p>"
+          "documentation":"<p>The body of the HTTP response.</p>"
         },
         "headers":{
           "shape":"MapOfHeaderValues",
-          "documentation":"<p>The headers of HTTP response.</p>"
+          "documentation":"<p>The headers of the HTTP response.</p>"
         },
         "log":{
           "shape":"String",
@@ -3900,21 +4500,21 @@
           "documentation":"<p>The execution latency of the test invoke request.</p>"
         }
       },
-      "documentation":"<p>Represents the response of the test invoke request in HTTP method.</p>"
+      "documentation":"<p>Represents the response of the test invoke request in the HTTP method.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console\">Test API using the API Gateway console</a> </div>"
     },
     "ThrottleSettings":{
       "type":"structure",
       "members":{
         "burstLimit":{
           "shape":"Integer",
-          "documentation":"<p>Returns the burstLimit when <b>ThrottleSettings</b> is called.</p>"
+          "documentation":"<p>The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.</p>"
         },
         "rateLimit":{
           "shape":"Double",
-          "documentation":"<p>Returns the rateLimit when <b>ThrottleSettings</b> is called.</p>"
+          "documentation":"<p>The API request steady-state rate limit.</p>"
         }
       },
-      "documentation":"<p>Returns the throttle settings.</p>"
+      "documentation":"<p> The API request rate limits.</p>"
     },
     "Timestamp":{"type":"timestamp"},
     "TooManyRequestsException":{
@@ -3951,7 +4551,7 @@
       "members":{
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to change information about the current <a>Account</a> resource.</p>"
@@ -3968,7 +4568,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>A request to change information about an <a>ApiKey</a> resource.</p>"
@@ -3994,7 +4594,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Request to update an existing <a>Authorizer</a> resource.</p>"
@@ -4020,7 +4620,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>A request to change information about the <a>BasePathMapping</a> resource.</p>"
@@ -4037,7 +4637,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>A request to change information about an <a>ClientCertificate</a> resource.</p>"
@@ -4057,13 +4657,13 @@
         },
         "deploymentId":{
           "shape":"String",
-          "documentation":"<p>The replacment identifier for the <a>Deployment</a> resource to change information about.</p>",
+          "documentation":"<p>The replacement identifier for the <a>Deployment</a> resource to change information about.</p>",
           "location":"uri",
           "locationName":"deployment_id"
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to change information about a <a>Deployment</a> resource.</p>"
@@ -4080,7 +4680,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>A request to change information about the <a>DomainName</a> resource.</p>"
@@ -4113,7 +4713,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Represents an update integration request.</p>"
@@ -4153,7 +4753,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Represents an update integration response request.</p>"
@@ -4180,13 +4780,13 @@
         },
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>The HTTP verb that identifies the <a>Method</a> resource.</p>",
+          "documentation":"<p>The HTTP verb of the <a>Method</a> resource.</p>",
           "location":"uri",
           "locationName":"http_method"
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Request to update an existing <a>Method</a> resource.</p>"
@@ -4214,19 +4814,19 @@
         },
         "httpMethod":{
           "shape":"String",
-          "documentation":"<p>The HTTP verb identifier for the parent <a>Method</a> resource.</p>",
+          "documentation":"<p>The HTTP verb of the <a>Method</a> resource.</p>",
           "location":"uri",
           "locationName":"http_method"
         },
         "statusCode":{
           "shape":"StatusCode",
-          "documentation":"<p>The status code identifier for the <a>MethodResponse</a> resource.</p>",
+          "documentation":"<p>The status code for the <a>MethodResponse</a> resource.</p>",
           "location":"uri",
           "locationName":"status_code"
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>A request to update an existing <a>MethodResponse</a> resource.</p>"
@@ -4252,7 +4852,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Request to update an existing model in an existing <a>RestApi</a> resource.</p>"
@@ -4278,7 +4878,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Request to change information about a <a>Resource</a> resource.</p>"
@@ -4295,7 +4895,7 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Request to update an existing <a>RestApi</a> resource in your collection.</p>"
@@ -4321,10 +4921,153 @@
         },
         "patchOperations":{
           "shape":"ListOfPatchOperation",
-          "documentation":"<p>A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.</p>"
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to change information about a <a>Stage</a> resource.</p>"
+    },
+    "UpdateUsagePlanRequest":{
+      "type":"structure",
+      "required":["usagePlanId"],
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the to-be-updated usage plan.</p>",
+          "location":"uri",
+          "locationName":"usageplanId"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
+        }
+      },
+      "documentation":"<p>The PATCH request to update a usage plan of a given plan Id.</p>"
+    },
+    "UpdateUsageRequest":{
+      "type":"structure",
+      "required":[
+        "usagePlanId",
+        "keyId"
+      ],
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The Id of the usage plan associated with the usage data.</p>",
+          "location":"uri",
+          "locationName":"usageplanId"
+        },
+        "keyId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the API key associated with the usage plan in which a temporary extension is granted to the remaining quota.</p>",
+          "location":"uri",
+          "locationName":"keyId"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
+        }
+      },
+      "documentation":"<p>The PATCH request to grant a temporary extension to the reamining quota of a usage plan associated with a specified API key.</p>"
+    },
+    "Usage":{
+      "type":"structure",
+      "members":{
+        "usagePlanId":{
+          "shape":"String",
+          "documentation":"<p>The plan Id associated with this usage data.</p>"
+        },
+        "startDate":{
+          "shape":"String",
+          "documentation":"<p>The starting date of the usage data.</p>"
+        },
+        "endDate":{
+          "shape":"String",
+          "documentation":"<p>The ending date of the usage data.</p>"
+        },
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"MapOfKeyUsages",
+          "documentation":"<p>The usage data, as daily logs of used and remaining quotas, over the specified time interval indexed over the API keys in a usage plan. For example, <code>{..., \"values\" : { \"{api_key}\" : [ [0, 100], [10, 90], [100, 10]]}</code>, where <code>{api_key}</code> stands for an API key value and the daily log entry is of the format <code>[used quota, remaining quota]</code>.</p>",
+          "locationName":"values"
+        }
+      },
+      "documentation":"<p>Represents the usage data of a usage plan.</p> <div class=\"remarks\"/> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a>, <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage\">Manage Usage in a Usage Plan</a> </div>"
+    },
+    "UsagePlan":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The identifier of a <a>UsagePlan</a> resource.</p>"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of a usage plan.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of a usage plan.</p>"
+        },
+        "apiStages":{
+          "shape":"ListOfApiStage",
+          "documentation":"<p>The associated API stages of a usage plan.</p>"
+        },
+        "throttle":{
+          "shape":"ThrottleSettings",
+          "documentation":"<p>The request throttle limits of a usage plan.</p>"
+        },
+        "quota":{
+          "shape":"QuotaSettings",
+          "documentation":"<p>The maximum number of permitted requests per a given unit time interval.</p>"
+        }
+      },
+      "documentation":"<p>Represents a usage plan than can specify who can assess associated API stages with specified request limits and quotas.</p> <div class=\"remarks\"> <p>In a usage plan, you associate an API by specifying the API's Id and a stage name of the specified API. You add plan customers by adding API keys to the plan. </p> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>"
+    },
+    "UsagePlanKey":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The Id of a usage plan key.</p>"
+        },
+        "type":{
+          "shape":"String",
+          "documentation":"<p>The type of a usage plan key. Currently, the valid key type is <code>API_KEY</code>.</p>"
+        },
+        "value":{
+          "shape":"String",
+          "documentation":"<p>The value of a usage plan key.</p>"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of a usage plan key.</p>"
+        }
+      },
+      "documentation":"<p>Represents a usage plan key to identify a plan customer.</p> <div class=\"remarks\"> <p>To associate an API stage with a selected API key in a usage plan, you must create a UsagePlanKey resource to represent the selected <a>ApiKey</a>.</p> </div>\" <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>"
+    },
+    "UsagePlanKeys":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfUsagePlanKey",
+          "documentation":"<p>Gets the current item of the usage plan keys collection.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents the collection of usage plan keys added to usage plans for the associated API keys and, possibly, other types of keys.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>"
+    },
+    "UsagePlans":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfUsagePlan",
+          "documentation":"<p>Gets the current item when enumerating the collection of <a>UsagePlan</a>.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>Represents a collection of usage plans for an AWS account.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>"
     },
     "op":{
       "type":"string",
@@ -4338,5 +5081,5 @@
       ]
     }
   },
-  "documentation":"<fullname>Amazon API Gateway</fullname> <p>Amazon API Gateway helps developers deliver robust, secure and scalable mobile and web application backends. Amazon API Gateway allows developers to securely connect mobile and web applications to APIs that run on AWS Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>"
+  "documentation":"<fullname>Amazon API Gateway</fullname> <p>Amazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends. Amazon API Gateway allows developers to securely connect mobile and web applications to APIs that run on AWS Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>"
 }
