@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.5.0-->
+<!--LATEST=2.5.1-->
 <!--ENTRYINSERT-->
+
+## 2.5.1
+* feature: ACM: Increase tagging limit from 10 to 50.
+* feature: APIGateway: Amazon API Gateway now supports API usage plans. Usage plans allows you to easily manage and monetize your APIs for your API-based business.
+* feature: ECS: Adds support for memory reservation and network mode on task definitions. Also adds splunk as a supported log driver.
 
 ## 2.5.0
 * feature: AutoScaling: Adds 3 new APIs for ELB L7 integration: attachLoadBalancerTargetGroups, detachLoadBalancerTargetGroups, and describeLoadBalancerTargetGroups.
