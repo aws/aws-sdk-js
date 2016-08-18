@@ -2158,7 +2158,7 @@
         },
         "GroupName":{
           "shape":"groupNameType",
-          "documentation":"<p>The name of the group to create. Do not include the path in this value.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for this parameter is a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-</p>"
+          "documentation":"<p>The name of the group to create. Do not include the path in this value.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for this parameter is a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-. The group name must be unique within the account. Group names are not distinguished by case. For example, you cannot create groups named both \"ADMINS\" and \"admins\".</p>"
         }
       }
     },
@@ -2340,7 +2340,7 @@
         },
         "RoleName":{
           "shape":"roleNameType",
-          "documentation":"<p>The name of the role to create.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for this parameter is a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-</p>"
+          "documentation":"<p>The name of the role to create.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for this parameter is a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-. Role names are not distinguished by case. For example, you cannot create roles named both \"PRODROLE\" and \"prodrole\".</p>"
         },
         "AssumeRolePolicyDocument":{
           "shape":"policyDocumentType",
@@ -2396,7 +2396,7 @@
         },
         "UserName":{
           "shape":"userNameType",
-          "documentation":"<p>The name of the user to create.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for this parameter is a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-</p>"
+          "documentation":"<p>The name of the user to create.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for this parameter is a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-. User names are not distinguished by case. For example, you cannot create users named both \"TESTUSER\" and \"testuser\".</p>"
         }
       }
     },

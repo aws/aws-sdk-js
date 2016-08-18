@@ -104,7 +104,39 @@
         {"shape":"InvalidParameterValuesException"},
         {"shape":"ResourceUnavailableException"}
       ],
-      "documentation":"<p>Obtains information about the specified WorkSpaces. </p> <p>Only one of the filter parameters, such as <code>BundleId</code>, <code>DirectoryId</code>, or <code>WorkspaceIds</code>, can be specified at a time.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> request and response parameters. If more results are available, the <code>NextToken</code> response member contains a token that you pass in the next call to this operation to retrieve the next set of items.</p>"
+      "documentation":"<p>Obtains information about the specified WorkSpaces.</p> <p>Only one of the filter parameters, such as <code>BundleId</code>, <code>DirectoryId</code>, or <code>WorkspaceIds</code>, can be specified at a time.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> request and response parameters. If more results are available, the <code>NextToken</code> response member contains a token that you pass in the next call to this operation to retrieve the next set of items.</p>"
+    },
+    "DescribeWorkspacesConnectionStatus":{
+      "name":"DescribeWorkspacesConnectionStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeWorkspacesConnectionStatusRequest"},
+      "output":{"shape":"DescribeWorkspacesConnectionStatusResult"},
+      "errors":[
+        {"shape":"InvalidParameterValuesException"}
+      ],
+      "documentation":"<p>Describes the connection status of a specified WorkSpace.</p>"
+    },
+    "ModifyWorkspaceProperties":{
+      "name":"ModifyWorkspaceProperties",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyWorkspacePropertiesRequest"},
+      "output":{"shape":"ModifyWorkspacePropertiesResult"},
+      "errors":[
+        {"shape":"InvalidParameterValuesException"},
+        {"shape":"InvalidResourceStateException"},
+        {"shape":"OperationInProgressException"},
+        {"shape":"UnsupportedWorkspaceConfigurationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceUnavailableException"}
+      ],
+      "documentation":"<p>Modifies the WorkSpace properties, including the RunningMode and AutoStop time.</p>"
     },
     "RebootWorkspaces":{
       "name":"RebootWorkspaces",
@@ -114,7 +146,7 @@
       },
       "input":{"shape":"RebootWorkspacesRequest"},
       "output":{"shape":"RebootWorkspacesResult"},
-      "documentation":"<p>Reboots the specified WorkSpaces.</p> <p>To be able to reboot a WorkSpace, the WorkSpace must have a <b>State</b> of <code>AVAILABLE</code>, <code>IMPAIRED</code>, or <code>INOPERABLE</code>.</p> <note> <p>This operation is asynchronous and will return before the WorkSpaces have rebooted.</p> </note>"
+      "documentation":"<p>Reboots the specified WorkSpaces.</p> <p>To be able to reboot a WorkSpace, the WorkSpace must have a <b>State</b> of <code>AVAILABLE</code>, <code>IMPAIRED</code>, or <code>INOPERABLE</code>.</p> <note> <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p> </note>"
     },
     "RebuildWorkspaces":{
       "name":"RebuildWorkspaces",
@@ -124,7 +156,27 @@
       },
       "input":{"shape":"RebuildWorkspacesRequest"},
       "output":{"shape":"RebuildWorkspacesResult"},
-      "documentation":"<p>Rebuilds the specified WorkSpaces.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. Rebuilding a WorkSpace causes the following to occur:</p> <ul> <li>The system is restored to the image of the bundle that the WorkSpace is created from. Any applications that have been installed, or system settings that have been made since the WorkSpace was created will be lost.</li> <li>The data drive (D drive) is re-created from the last automatic snapshot taken of the data drive. The current contents of the data drive are overwritten. Automatic snapshots of the data drive are taken every 12 hours, so the snapshot can be as much as 12 hours old.</li> </ul> <p>To be able to rebuild a WorkSpace, the WorkSpace must have a <b>State</b> of <code>AVAILABLE</code> or <code>ERROR</code>.</p> <note> <p>This operation is asynchronous and will return before the WorkSpaces have been completely rebuilt.</p> </note>"
+      "documentation":"<p>Rebuilds the specified WorkSpaces.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. Rebuilding a WorkSpace causes the following to occur:</p> <ul> <li> <p>The system is restored to the image of the bundle that the WorkSpace is created from. Any applications that have been installed, or system settings that have been made since the WorkSpace was created will be lost.</p> </li> <li> <p>The data drive (D drive) is re-created from the last automatic snapshot taken of the data drive. The current contents of the data drive are overwritten. Automatic snapshots of the data drive are taken every 12 hours, so the snapshot can be as much as 12 hours old.</p> </li> </ul> <p>To be able to rebuild a WorkSpace, the WorkSpace must have a <b>State</b> of <code>AVAILABLE</code> or <code>ERROR</code>.</p> <note> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p> </note>"
+    },
+    "StartWorkspaces":{
+      "name":"StartWorkspaces",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartWorkspacesRequest"},
+      "output":{"shape":"StartWorkspacesResult"},
+      "documentation":"<p>Starts the specified WorkSpaces. The API only works with WorkSpaces that have RunningMode configured as AutoStop and the State set to “STOPPED.”</p>"
+    },
+    "StopWorkspaces":{
+      "name":"StopWorkspaces",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopWorkspacesRequest"},
+      "output":{"shape":"StopWorkspacesResult"},
+      "documentation":"<p> Stops the specified WorkSpaces. The API only works with WorkSpaces that have RunningMode configured as AutoStop and the State set to AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.</p>"
     },
     "TerminateWorkspaces":{
       "name":"TerminateWorkspaces",
@@ -134,13 +186,20 @@
       },
       "input":{"shape":"TerminateWorkspacesRequest"},
       "output":{"shape":"TerminateWorkspacesResult"},
-      "documentation":"<p>Terminates the specified WorkSpaces.</p> <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is not maintained and will be destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace.</p> <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p> <note> <p>This operation is asynchronous and will return before the WorkSpaces have been completely terminated.</p> </note>"
+      "documentation":"<p>Terminates the specified WorkSpaces.</p> <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is not maintained and will be destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace.</p> <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p> <note> <p>This operation is asynchronous and returns before the WorkSpaces have been completely terminated.</p> </note>"
     }
   },
   "shapes":{
     "ARN":{
       "type":"string",
       "pattern":"^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$"
+    },
+    "AccessDeniedException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "exception":true
     },
     "Alias":{"type":"string"},
     "BooleanObject":{"type":"boolean"},
@@ -178,6 +237,14 @@
       "documentation":"<p>Contains information about the compute type of a WorkSpace bundle.</p>"
     },
     "ComputerName":{"type":"string"},
+    "ConnectionState":{
+      "type":"string",
+      "enum":[
+        "CONNECTED",
+        "DISCONNECTED",
+        "UNKNOWN"
+      ]
+    },
     "CreateTagsRequest":{
       "type":"structure",
       "required":[
@@ -194,13 +261,13 @@
           "documentation":"<p>The tags of the request.</p>"
         }
       },
-      "documentation":"<p>The request of the create tags action.</p>"
+      "documentation":"<p>The request of the <a>CreateTags</a> operation.</p>"
     },
     "CreateTagsResult":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The result of the create tags action.</p>"
+      "documentation":"<p>The result of the <a>CreateTags</a> operation.</p>"
     },
     "CreateWorkspacesRequest":{
       "type":"structure",
@@ -270,13 +337,13 @@
           "documentation":"<p>The tag keys of the request.</p>"
         }
       },
-      "documentation":"<p>The request of the delete tags action.</p>"
+      "documentation":"<p>The request of the <a>DeleteTags</a> operation.</p>"
     },
     "DeleteTagsResult":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The result of the delete tags action.</p>"
+      "documentation":"<p>The result of the <a>DeleteTags</a> operation.</p>"
     },
     "DescribeTagsRequest":{
       "type":"structure",
@@ -287,7 +354,7 @@
           "documentation":"<p>The resource ID of the request.</p>"
         }
       },
-      "documentation":"<p>The request of the describe tags action.</p>"
+      "documentation":"<p>The request of the <a>DescribeTags</a> operation.</p>"
     },
     "DescribeTagsResult":{
       "type":"structure",
@@ -297,7 +364,7 @@
           "documentation":"<p>The list of tags.</p>"
         }
       },
-      "documentation":"<p>The result of the describe tags action.</p>"
+      "documentation":"<p>The result of the <a>DescribeTags</a> operation.</p>"
     },
     "DescribeWorkspaceBundlesRequest":{
       "type":"structure",
@@ -308,7 +375,7 @@
         },
         "Owner":{
           "shape":"BundleOwner",
-          "documentation":"<p>The owner of the bundles to retrieve. This parameter cannot be combined with any other filter parameter.</p> <p>This contains one of the following values:</p> <ul> <li>null - Retrieves the bundles that belong to the account making the call.</li> <li><code>AMAZON</code> - Retrieves the bundles that are provided by AWS.</li> </ul>"
+          "documentation":"<p>The owner of the bundles to retrieve. This parameter cannot be combined with any other filter parameter.</p> <p>This contains one of the following values:</p> <ul> <li> <p>null- Retrieves the bundles that belong to the account making the call.</p> </li> <li> <p> <code>AMAZON</code>- Retrieves the bundles that are provided by AWS.</p> </li> </ul>"
         },
         "NextToken":{
           "shape":"PaginationToken",
@@ -326,7 +393,7 @@
         },
         "NextToken":{
           "shape":"PaginationToken",
-          "documentation":"<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that timeframe.</p>"
+          "documentation":"<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that time frame.</p>"
         }
       },
       "documentation":"<p>Contains the results of the <a>DescribeWorkspaceBundles</a> operation.</p>"
@@ -354,17 +421,43 @@
         },
         "NextToken":{
           "shape":"PaginationToken",
-          "documentation":"<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that timeframe.</p>"
+          "documentation":"<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that time frame.</p>"
         }
       },
       "documentation":"<p>Contains the results of the <a>DescribeWorkspaceDirectories</a> operation.</p>"
+    },
+    "DescribeWorkspacesConnectionStatusRequest":{
+      "type":"structure",
+      "members":{
+        "WorkspaceIds":{
+          "shape":"WorkspaceIdList",
+          "documentation":"<p>An array of strings that contain the identifiers of the WorkSpaces.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>The next token of the request.</p>"
+        }
+      }
+    },
+    "DescribeWorkspacesConnectionStatusResult":{
+      "type":"structure",
+      "members":{
+        "WorkspacesConnectionStatus":{
+          "shape":"WorkspaceConnectionStatusList",
+          "documentation":"<p>The connection status of the WorkSpace.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>The next token of the result.</p>"
+        }
+      }
     },
     "DescribeWorkspacesRequest":{
       "type":"structure",
       "members":{
         "WorkspaceIds":{
           "shape":"WorkspaceIdList",
-          "documentation":"<p>An array of strings that contain the identifiers of the WorkSpaces for which to retrieve information. This parameter cannot be combined with any other filter parameter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier returned by <a>CreateWorkspaces</a> is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information will be returned.</p>"
+          "documentation":"<p>An array of strings that contain the identifiers of the WorkSpaces for which to retrieve information. This parameter cannot be combined with any other filter parameter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier it returns is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information is returned.</p>"
         },
         "DirectoryId":{
           "shape":"DirectoryId",
@@ -372,7 +465,7 @@
         },
         "UserName":{
           "shape":"UserName",
-          "documentation":"<p>Used with the <code>DirectoryId</code> parameter to specify the directory user for which to obtain the WorkSpace.</p>"
+          "documentation":"<p>Used with the <code>DirectoryId</code> parameter to specify the directory user for whom to obtain the WorkSpace.</p>"
         },
         "BundleId":{
           "shape":"BundleId",
@@ -398,7 +491,7 @@
         },
         "NextToken":{
           "shape":"PaginationToken",
-          "documentation":"<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that timeframe.</p>"
+          "documentation":"<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that time frame.</p>"
         }
       },
       "documentation":"<p>Contains the results for the <a>DescribeWorkspaces</a> operation.</p>"
@@ -430,7 +523,7 @@
       "members":{
         "WorkspaceRequest":{
           "shape":"WorkspaceRequest",
-          "documentation":"<p>A <a>WorkspaceRequest</a> object that contains the information about the WorkSpace that could not be created.</p>"
+          "documentation":"<p>A <a>FailedCreateWorkspaceRequest$WorkspaceRequest</a> object that contains the information about the WorkSpace that could not be created.</p>"
         },
         "ErrorCode":{
           "shape":"ErrorType",
@@ -455,6 +548,14 @@
       "type":"list",
       "member":{"shape":"FailedWorkspaceChangeRequest"}
     },
+    "FailedStartWorkspaceRequests":{
+      "type":"list",
+      "member":{"shape":"FailedWorkspaceChangeRequest"}
+    },
+    "FailedStopWorkspaceRequests":{
+      "type":"list",
+      "member":{"shape":"FailedWorkspaceChangeRequest"}
+    },
     "FailedTerminateWorkspaceRequests":{
       "type":"list",
       "member":{"shape":"FailedWorkspaceChangeRequest"}
@@ -475,7 +576,7 @@
           "documentation":"<p>The textual error message.</p>"
         }
       },
-      "documentation":"<p>Contains information about a WorkSpace that could not be rebooted (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), or terminated (<a>TerminateWorkspaces</a>).</p>"
+      "documentation":"<p>Contains information about a WorkSpace that could not be rebooted (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>"
     },
     "InvalidParameterValuesException":{
       "type":"structure",
@@ -488,15 +589,53 @@
       "documentation":"<p>One or more parameter values are not valid.</p>",
       "exception":true
     },
+    "InvalidResourceStateException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "documentation":"<p>The specified WorkSpace has an invalid state for this operation.</p>",
+      "exception":true
+    },
     "IpAddress":{"type":"string"},
     "Limit":{
       "type":"integer",
       "max":25,
       "min":1
     },
+    "ModifyWorkspacePropertiesRequest":{
+      "type":"structure",
+      "required":[
+        "WorkspaceId",
+        "WorkspaceProperties"
+      ],
+      "members":{
+        "WorkspaceId":{
+          "shape":"WorkspaceId",
+          "documentation":"<p>The ID of the WorkSpace.</p>"
+        },
+        "WorkspaceProperties":{
+          "shape":"WorkspaceProperties",
+          "documentation":"<p>The WorkSpace properties of the request.</p>"
+        }
+      }
+    },
+    "ModifyWorkspacePropertiesResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "NonEmptyString":{
       "type":"string",
       "min":1
+    },
+    "OperationInProgressException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "documentation":"<p>The properties of this WorkSpace are currently being modified. Try again in a moment.</p>",
+      "exception":true
     },
     "PaginationToken":{
       "type":"string",
@@ -536,7 +675,7 @@
       "members":{
         "FailedRequests":{
           "shape":"FailedRebootWorkspaceRequests",
-          "documentation":"<p>An array of structures that represent any WorkSpaces that could not be rebooted.</p>"
+          "documentation":"<p>An array of structures representing any WorkSpaces that could not be rebooted.</p>"
         }
       },
       "documentation":"<p>Contains the results of the <a>RebootWorkspaces</a> operation.</p>"
@@ -574,7 +713,7 @@
       "members":{
         "FailedRequests":{
           "shape":"FailedRebuildWorkspaceRequests",
-          "documentation":"<p>An array of structures that represent any WorkSpaces that could not be rebuilt.</p>"
+          "documentation":"<p>An array of structures representing any WorkSpaces that could not be rebuilt.</p>"
         }
       },
       "documentation":"<p>Contains the results of the <a>RebuildWorkspaces</a> operation.</p>"
@@ -625,9 +764,87 @@
       "documentation":"<p>The specified resource is not available.</p>",
       "exception":true
     },
+    "RunningMode":{
+      "type":"string",
+      "enum":[
+        "AUTO_STOP",
+        "ALWAYS_ON"
+      ]
+    },
+    "RunningModeAutoStopTimeoutInMinutes":{"type":"integer"},
     "SecurityGroupId":{
       "type":"string",
       "pattern":"^(sg-[0-9a-f]{8})$"
+    },
+    "StartRequest":{
+      "type":"structure",
+      "members":{
+        "WorkspaceId":{
+          "shape":"WorkspaceId",
+          "documentation":"<p>The ID of the WorkSpace.</p>"
+        }
+      },
+      "documentation":"<p>Describes the start request.</p>"
+    },
+    "StartWorkspaceRequests":{
+      "type":"list",
+      "member":{"shape":"StartRequest"},
+      "max":25,
+      "min":1
+    },
+    "StartWorkspacesRequest":{
+      "type":"structure",
+      "required":["StartWorkspaceRequests"],
+      "members":{
+        "StartWorkspaceRequests":{
+          "shape":"StartWorkspaceRequests",
+          "documentation":"<p>The requests.</p>"
+        }
+      }
+    },
+    "StartWorkspacesResult":{
+      "type":"structure",
+      "members":{
+        "FailedRequests":{
+          "shape":"FailedStartWorkspaceRequests",
+          "documentation":"<p>The failed requests.</p>"
+        }
+      }
+    },
+    "StopRequest":{
+      "type":"structure",
+      "members":{
+        "WorkspaceId":{
+          "shape":"WorkspaceId",
+          "documentation":"<p>The ID of the WorkSpace.</p>"
+        }
+      },
+      "documentation":"<p>Describes the stop request.</p>"
+    },
+    "StopWorkspaceRequests":{
+      "type":"list",
+      "member":{"shape":"StopRequest"},
+      "max":25,
+      "min":1
+    },
+    "StopWorkspacesRequest":{
+      "type":"structure",
+      "required":["StopWorkspaceRequests"],
+      "members":{
+        "StopWorkspaceRequests":{
+          "shape":"StopWorkspaceRequests",
+          "documentation":"<p>The requests.</p>"
+        }
+      }
+    },
+    "StopWorkspacesResult":{
+      "type":"structure",
+      "members":{
+        "FailedRequests":{
+          "shape":"FailedStopWorkspaceRequests",
+          "documentation":"<p>The failed requests.</p>"
+        }
+      }
     },
     "SubnetId":{
       "type":"string",
@@ -702,10 +919,19 @@
       "members":{
         "FailedRequests":{
           "shape":"FailedTerminateWorkspaceRequests",
-          "documentation":"<p>An array of structures that represent any WorkSpaces that could not be terminated.</p>"
+          "documentation":"<p>An array of structures representing any WorkSpaces that could not be terminated.</p>"
         }
       },
       "documentation":"<p>Contains the results of the <a>TerminateWorkspaces</a> operation.</p>"
+    },
+    "Timestamp":{"type":"timestamp"},
+    "UnsupportedWorkspaceConfigurationException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "documentation":"<p>The WorkSpace does not have the supported configuration for this operation. For more information, see the <a href=\"http://docs.aws.amazon.com/workspaces/latest/adminguide\">Amazon WorkSpaces Administration Guide</a>. </p>",
+      "exception":true
     },
     "UserName":{
       "type":"string",
@@ -777,7 +1003,8 @@
         "RootVolumeEncryptionEnabled":{
           "shape":"BooleanObject",
           "documentation":"<p>Specifies whether the data stored on the root volume, or C: drive, is encrypted.</p>"
-        }
+        },
+        "WorkspaceProperties":{"shape":"WorkspaceProperties"}
       },
       "documentation":"<p>Contains information about a WorkSpace.</p>"
     },
@@ -810,6 +1037,32 @@
         }
       },
       "documentation":"<p>Contains information about a WorkSpace bundle.</p>"
+    },
+    "WorkspaceConnectionStatus":{
+      "type":"structure",
+      "members":{
+        "WorkspaceId":{
+          "shape":"WorkspaceId",
+          "documentation":"<p>The ID of the WorkSpace.</p>"
+        },
+        "ConnectionState":{
+          "shape":"ConnectionState",
+          "documentation":"<p>The connection state of the WorkSpace. Returns UNKOWN if the WorkSpace is in a Stopped state.</p>"
+        },
+        "ConnectionStateCheckTimestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The timestamp of the connection state check.</p>"
+        },
+        "LastKnownUserConnectionTimestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The timestamp of the last known user connection.</p>"
+        }
+      },
+      "documentation":"<p>Describes the connection status of a WorkSpace.</p>"
+    },
+    "WorkspaceConnectionStatusList":{
+      "type":"list",
+      "member":{"shape":"WorkspaceConnectionStatus"}
     },
     "WorkspaceDirectory":{
       "type":"structure",
@@ -897,6 +1150,20 @@
       "type":"list",
       "member":{"shape":"Workspace"}
     },
+    "WorkspaceProperties":{
+      "type":"structure",
+      "members":{
+        "RunningMode":{
+          "shape":"RunningMode",
+          "documentation":"<p>The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed monthly. AutoStop WorkSpaces are billed by the hour and stopped when no longer being used in order to save on costs.</p>"
+        },
+        "RunningModeAutoStopTimeoutInMinutes":{
+          "shape":"RunningModeAutoStopTimeoutInMinutes",
+          "documentation":"<p>The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.</p>"
+        }
+      },
+      "documentation":"<p>Describes the properties of a WorkSpace.</p>"
+    },
     "WorkspaceRequest":{
       "type":"structure",
       "required":[
@@ -929,6 +1196,7 @@
           "shape":"BooleanObject",
           "documentation":"<p>Specifies whether the data stored on the root volume, or C: drive, is encrypted.</p>"
         },
+        "WorkspaceProperties":{"shape":"WorkspaceProperties"},
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>The tags of the WorkSpace request.</p>"
@@ -950,13 +1218,17 @@
         "IMPAIRED",
         "UNHEALTHY",
         "REBOOTING",
+        "STARTING",
         "REBUILDING",
+        "MAINTENANCE",
         "TERMINATING",
         "TERMINATED",
         "SUSPENDED",
+        "STOPPING",
+        "STOPPED",
         "ERROR"
       ]
     }
   },
-  "documentation":"<fullname>Amazon WorkSpaces Service</fullname> <p>This is the <i>Amazon WorkSpaces API Reference</i>. This guide provides detailed information about Amazon WorkSpaces operations, data types, parameters, and errors.</p>"
+  "documentation":"<fullname>Amazon WorkSpaces Service</fullname> <p>This reference provides detailed information about the Amazon WorkSpaces operations.</p>"
 }

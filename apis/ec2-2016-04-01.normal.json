@@ -38,7 +38,7 @@
       },
       "input":{"shape":"AllocateHostsRequest"},
       "output":{"shape":"AllocateHostsResult"},
-      "documentation":"<p>Allocates a Dedicated host to your account. At minimum you need to specify the instance size type, Availability Zone, and quantity of hosts you want to allocate.</p>"
+      "documentation":"<p>Allocates a Dedicated Host to your account. At minimum you need to specify the instance size type, Availability Zone, and quantity of hosts you want to allocate.</p>"
     },
     "AssignPrivateIpAddresses":{
       "name":"AssignPrivateIpAddresses",
@@ -172,7 +172,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"CancelConversionRequest"},
-      "documentation":"<p>Cancels an active conversion task. The task can be the import of an instance or volume. The action removes all artifacts of the conversion, including a partially uploaded volume or instance. If the conversion is complete or is in the process of transferring the final disk image, the command fails and returns an exception.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Cancels an active conversion task. The task can be the import of an instance or volume. The action removes all artifacts of the conversion, including a partially uploaded volume or instance. If the conversion is complete or is in the process of transferring the final disk image, the command fails and returns an exception.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html\">Importing a Virtual Machine Using the Amazon EC2 CLI</a>.</p>"
     },
     "CancelExportTask":{
       "name":"CancelExportTask",
@@ -301,7 +301,7 @@
       },
       "input":{"shape":"CreateInstanceExportTaskRequest"},
       "output":{"shape":"CreateInstanceExportTaskResult"},
-      "documentation":"<p>Exports a running or stopped instance to an S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ExportingEC2Instances.html\">Exporting EC2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Exports a running or stopped instance to an S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href=\"http://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html\">Exporting an Instance as a VM Using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>"
     },
     "CreateInternetGateway":{
       "name":"CreateInternetGateway",
@@ -806,7 +806,7 @@
       },
       "input":{"shape":"DescribeConversionTasksRequest"},
       "output":{"shape":"DescribeConversionTasksResult"},
-      "documentation":"<p>Describes one or more of your conversion tasks. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
+      "documentation":"<p>Describes one or more of your conversion tasks. For more information, see the <a href=\"http://docs.aws.amazon.com/vm-import/latest/userguide/\">VM Import/Export User Guide</a>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
     },
     "DescribeCustomerGateways":{
       "name":"DescribeCustomerGateways",
@@ -848,6 +848,26 @@
       "output":{"shape":"DescribeFlowLogsResult"},
       "documentation":"<p>Describes one or more flow logs. To view the information in your flow logs (the log streams for the network interfaces), you must use the CloudWatch Logs console or the CloudWatch Logs API.</p>"
     },
+    "DescribeHostReservationOfferings":{
+      "name":"DescribeHostReservationOfferings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeHostReservationOfferingsRequest"},
+      "output":{"shape":"DescribeHostReservationOfferingsResult"},
+      "documentation":"<p>Describes the Dedicated Host Reservations that are available to purchase.</p> <p>The results describe all the Dedicated Host Reservation offerings, including offerings that may not match the instance family and region of your Dedicated Hosts. When purchasing an offering, ensure that the the instance family and region of the offering matches that of the Dedicated Host/s it will be associated with. For an overview of supported instance types, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html\">Dedicated Hosts Overview</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>"
+    },
+    "DescribeHostReservations":{
+      "name":"DescribeHostReservations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeHostReservationsRequest"},
+      "output":{"shape":"DescribeHostReservationsResult"},
+      "documentation":"<p>Describes Dedicated Host Reservations which are associated with Dedicated Hosts in your account.</p>"
+    },
     "DescribeHosts":{
       "name":"DescribeHosts",
       "http":{
@@ -856,7 +876,7 @@
       },
       "input":{"shape":"DescribeHostsRequest"},
       "output":{"shape":"DescribeHostsResult"},
-      "documentation":"<p>Describes one or more of your Dedicated hosts.</p> <p>The results describe only the Dedicated hosts in the region you're currently using. All listed instances consume capacity on your Dedicated host. Dedicated hosts that have recently been released will be listed with the state <code>released</code>.</p>"
+      "documentation":"<p>Describes one or more of your Dedicated Hosts.</p> <p>The results describe only the Dedicated Hosts in the region you're currently using. All listed instances consume capacity on your Dedicated Host. Dedicated Hosts that have recently been released will be listed with the state <code>released</code>.</p>"
     },
     "DescribeIdFormat":{
       "name":"DescribeIdFormat",
@@ -1404,7 +1424,7 @@
       },
       "input":{"shape":"DetachVolumeRequest"},
       "output":{"shape":"VolumeAttachment"},
-      "documentation":"<p>Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so results in the volume being stuck in a busy state while detaching.</p> <p>If an Amazon EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first.</p> <p>When a volume with an AWS Marketplace product code is detached from an instance, the product code is no longer associated with the instance.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html\">Detaching an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the <code>busy</code> state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first.</p> <p>When a volume with an AWS Marketplace product code is detached from an instance, the product code is no longer associated with the instance.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html\">Detaching an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DetachVpnGateway":{
       "name":"DetachVpnGateway",
@@ -1520,6 +1540,16 @@
       "output":{"shape":"GetConsoleScreenshotResult"},
       "documentation":"<p>Retrieve a JPG-format screenshot of a running instance to help with troubleshooting.</p> <p>The returned content is Base64-encoded.</p>"
     },
+    "GetHostReservationPurchasePreview":{
+      "name":"GetHostReservationPurchasePreview",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetHostReservationPurchasePreviewRequest"},
+      "output":{"shape":"GetHostReservationPurchasePreviewResult"},
+      "documentation":"<p>Preview a reservation purchase with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation.</p> <p>This is a preview of the <a>PurchaseHostReservation</a> action and does not result in the offering being purchased.</p>"
+    },
     "GetPasswordData":{
       "name":"GetPasswordData",
       "http":{
@@ -1538,7 +1568,7 @@
       },
       "input":{"shape":"ImportImageRequest"},
       "output":{"shape":"ImportImageResult"},
-      "documentation":"<p>Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI).</p>"
+      "documentation":"<p>Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI). For more information, see <a href=\"http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html\">Importing a VM as an Image Using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>"
     },
     "ImportInstance":{
       "name":"ImportInstance",
@@ -1548,7 +1578,7 @@
       },
       "input":{"shape":"ImportInstanceRequest"},
       "output":{"shape":"ImportInstanceResult"},
-      "documentation":"<p>Creates an import instance task using metadata from the specified disk image. <code>ImportInstance</code> only supports single-volume VMs. To import multi-volume VMs, use <a>ImportImage</a>. After importing the image, you then upload it using the <code>ec2-import-volume</code> command in the EC2 command line tools. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
+      "documentation":"<p>Creates an import instance task using metadata from the specified disk image. <code>ImportInstance</code> only supports single-volume VMs. To import multi-volume VMs, use <a>ImportImage</a>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html\">Importing a Virtual Machine Using the Amazon EC2 CLI</a>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
     },
     "ImportKeyPair":{
       "name":"ImportKeyPair",
@@ -1578,7 +1608,7 @@
       },
       "input":{"shape":"ImportVolumeRequest"},
       "output":{"shape":"ImportVolumeResult"},
-      "documentation":"<p>Creates an import volume task using metadata from the specified disk image. After importing the image, you then upload it using the <code>ec2-import-volume</code> command in the Amazon EC2 command-line interface (CLI) tools. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html\">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
+      "documentation":"<p>Creates an import volume task using metadata from the specified disk image.For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/importing-your-volumes-into-amazon-ebs.html\">Importing Disks to Amazon EBS</a>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
     },
     "ModifyHosts":{
       "name":"ModifyHosts",
@@ -1588,7 +1618,7 @@
       },
       "input":{"shape":"ModifyHostsRequest"},
       "output":{"shape":"ModifyHostsResult"},
-      "documentation":"<p>Modify the auto-placement setting of a Dedicated host. When auto-placement is enabled, AWS will place instances that you launch with a tenancy of <code>host</code>, but without targeting a specific host ID, onto any available Dedicated host in your account which has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID if you want the instance to launch onto a specific host. If no host ID is provided, the instance will be launched onto a suitable host which has auto-placement enabled.</p>"
+      "documentation":"<p>Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, AWS will place instances that you launch with a tenancy of <code>host</code>, but without targeting a specific host ID, onto any available Dedicated Host in your account which has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID if you want the instance to launch onto a specific host. If no host ID is provided, the instance will be launched onto a suitable host which has auto-placement enabled.</p>"
     },
     "ModifyIdFormat":{
       "name":"ModifyIdFormat",
@@ -1634,7 +1664,7 @@
       },
       "input":{"shape":"ModifyInstancePlacementRequest"},
       "output":{"shape":"ModifyInstancePlacementResult"},
-      "documentation":"<p>Set the instance affinity value for a specific stopped instance and modify the instance tenancy setting.</p> <p>Instance affinity is disabled by default. When instance affinity is <code>host</code> and it is not associated with a specific Dedicated host, the next time it is launched it will automatically be associated with the host it lands on. This relationship will persist if the instance is stopped/started, or rebooted.</p> <p>You can modify the host ID associated with a stopped instance. If a stopped instance has a new host ID association, the instance will target that host when restarted.</p> <p>You can modify the tenancy of a stopped instance with a tenancy of <code>host</code> or <code>dedicated</code>.</p> <p>Affinity, hostID, and tenancy are not required parameters, but at least one of them must be specified in the request. Affinity and tenancy can be modified in the same request, but tenancy can only be modified on instances that are stopped.</p>"
+      "documentation":"<p>Set the instance affinity value for a specific stopped instance and modify the instance tenancy setting.</p> <p>Instance affinity is disabled by default. When instance affinity is <code>host</code> and it is not associated with a specific Dedicated Host, the next time it is launched it will automatically be associated with the host it lands on. This relationship will persist if the instance is stopped/started, or rebooted.</p> <p>You can modify the host ID associated with a stopped instance. If a stopped instance has a new host ID association, the instance will target that host when restarted.</p> <p>You can modify the tenancy of a stopped instance with a tenancy of <code>host</code> or <code>dedicated</code>.</p> <p>Affinity, hostID, and tenancy are not required parameters, but at least one of them must be specified in the request. Affinity and tenancy can be modified in the same request, but tenancy can only be modified on instances that are stopped.</p>"
     },
     "ModifyNetworkInterfaceAttribute":{
       "name":"ModifyNetworkInterfaceAttribute",
@@ -1741,6 +1771,16 @@
       "output":{"shape":"MoveAddressToVpcResult"},
       "documentation":"<p>Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the <a>RestoreAddressToClassic</a> request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform. </p>"
     },
+    "PurchaseHostReservation":{
+      "name":"PurchaseHostReservation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PurchaseHostReservationRequest"},
+      "output":{"shape":"PurchaseHostReservationResult"},
+      "documentation":"<p>Purchase a reservation with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This action results in the specified reservation being purchased and charged to your account.</p>"
+    },
     "PurchaseReservedInstancesOffering":{
       "name":"PurchaseReservedInstancesOffering",
       "http":{
@@ -1807,7 +1847,7 @@
       },
       "input":{"shape":"ReleaseHostsRequest"},
       "output":{"shape":"ReleaseHostsResult"},
-      "documentation":"<p>When you no longer want to use a Dedicated host it can be released. On-Demand billing is stopped and the host goes into <code>released</code> state. The host ID of Dedicated hosts that have been released can no longer be specified in another request, e.g., ModifyHosts. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated hosts are released, it make take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated hosts. Try waiting a few minutes, and then try again.</p> <p>Released hosts will still appear in a DescribeHosts response.</p>"
+      "documentation":"<p>When you no longer want to use an On-Demand Dedicated Host it can be released. On-Demand billing is stopped and the host goes into <code>released</code> state. The host ID of Dedicated Hosts that have been released can no longer be specified in another request, e.g., ModifyHosts. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated Hosts are released, it make take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated hosts. Try waiting a few minutes, and then try again.</p> <p>Released hosts will still appear in a <a>DescribeHosts</a> response.</p>"
     },
     "ReplaceNetworkAclAssociation":{
       "name":"ReplaceNetworkAclAssociation",
@@ -2121,6 +2161,15 @@
         "locationName":"item"
       }
     },
+    "ActivityStatus":{
+      "type":"string",
+      "enum":[
+        "error",
+        "pending_fulfillment",
+        "pending_termination",
+        "fulfilled"
+      ]
+    },
     "Address":{
       "type":"structure",
       "members":{
@@ -2227,7 +2276,7 @@
       "members":{
         "AutoPlacement":{
           "shape":"AutoPlacement",
-          "documentation":"<p>This is enabled by default. This property allows instances to be automatically placed onto available Dedicated hosts, when you are launching instances without specifying a host ID.</p> <p>Default: Enabled</p>",
+          "documentation":"<p>This is enabled by default. This property allows instances to be automatically placed onto available Dedicated Hosts, when you are launching instances without specifying a host ID.</p> <p>Default: Enabled</p>",
           "locationName":"autoPlacement"
         },
         "ClientToken":{
@@ -2237,17 +2286,17 @@
         },
         "InstanceType":{
           "shape":"String",
-          "documentation":"<p>Specify the instance type that you want your Dedicated hosts to be configured for. When you specify the instance type, that is the only instance type that you can launch onto that host.</p>",
+          "documentation":"<p>Specify the instance type that you want your Dedicated Hosts to be configured for. When you specify the instance type, that is the only instance type that you can launch onto that host.</p>",
           "locationName":"instanceType"
         },
         "Quantity":{
           "shape":"Integer",
-          "documentation":"<p>The number of Dedicated hosts you want to allocate to your account with these parameters.</p>",
+          "documentation":"<p>The number of Dedicated Hosts you want to allocate to your account with these parameters.</p>",
           "locationName":"quantity"
         },
         "AvailabilityZone":{
           "shape":"String",
-          "documentation":"<p>The Availability Zone for the Dedicated hosts.</p>",
+          "documentation":"<p>The Availability Zone for the Dedicated Hosts.</p>",
           "locationName":"availabilityZone"
         }
       },
@@ -2258,7 +2307,7 @@
       "members":{
         "HostIds":{
           "shape":"ResponseHostIdList",
-          "documentation":"<p>The ID of the allocated Dedicated host. This is used when you want to launch an instance onto a specific host.</p>",
+          "documentation":"<p>The ID of the allocated Dedicated Host. This is used when you want to launch an instance onto a specific host.</p>",
           "locationName":"hostIdSet"
         }
       },
@@ -2803,16 +2852,16 @@
       "members":{
         "AvailableInstanceCapacity":{
           "shape":"AvailableInstanceCapacityList",
-          "documentation":"<p>The total number of instances that the Dedicated host supports.</p>",
+          "documentation":"<p>The total number of instances that the Dedicated Host supports.</p>",
           "locationName":"availableInstanceCapacity"
         },
         "AvailableVCpus":{
           "shape":"Integer",
-          "documentation":"<p>The number of vCPUs available on the Dedicated host.</p>",
+          "documentation":"<p>The number of vCPUs available on the Dedicated Host.</p>",
           "locationName":"availableVCpus"
         }
       },
-      "documentation":"<p>The capacity information for instances launched onto the Dedicated host.</p>"
+      "documentation":"<p>The capacity information for instances launched onto the Dedicated Host.</p>"
     },
     "AvailableInstanceCapacityList":{
       "type":"list",
@@ -5524,12 +5573,92 @@
       },
       "documentation":"<p>Contains the output of DescribeFlowLogs.</p>"
     },
+    "DescribeHostReservationOfferingsRequest":{
+      "type":"structure",
+      "members":{
+        "OfferingId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the reservation offering.</p>"
+        },
+        "MinDuration":{
+          "shape":"Integer",
+          "documentation":"<p>This is the minimum duration of the reservation you'd like to purchase, specified in seconds. Reservations are available in 1, 3, and 5 year terms. The number of seconds specified must be the number of seconds in a year (365x24x60x60) times one of the supported durations (1, 3, or 5). For example, specify 94608000 for 3 years.</p>"
+        },
+        "MaxDuration":{
+          "shape":"Integer",
+          "documentation":"<p>This is the maximum duration of the reservation you'd like to purchase, specified in seconds.Reservations are available in 1, 3, and 5 year terms. The number of seconds specified must be the number of seconds in a year (365x24x60x60) times one of the supported durations (1, 3, or 5). For example, specify 157680000 for 5 years.</p>"
+        },
+        "Filter":{
+          "shape":"FilterList",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>instance-family</code> - The instance family of the offering (e.g., <code>m4</code>).</p> </li> <li> <p> <code>payment-option</code> - The payment option (<code>No Upfront</code> | <code>Partial Upfront</code> | <code>All Upfront</code>).</p> </li> </ul>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500; if <code>maxResults</code> is given a larger value than 500, you will receive an error.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeHostReservationOfferingsResult":{
+      "type":"structure",
+      "members":{
+        "OfferingSet":{
+          "shape":"HostOfferingSet",
+          "documentation":"<p>Information about the offerings.</p>",
+          "locationName":"offeringSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeHostReservationsRequest":{
+      "type":"structure",
+      "members":{
+        "HostReservationIdSet":{
+          "shape":"HostReservationIdSet",
+          "documentation":"<p>One or more host reservation IDs.</p>"
+        },
+        "Filter":{
+          "shape":"FilterList",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>instance-family</code> - The instance family (e.g., <code>m4</code>).</p> </li> <li> <p> <code>payment-option</code> - The payment option (<code>No Upfront</code> | <code>Partial Upfront</code> | <code>All Upfront</code>).</p> </li> <li> <p> <code>state</code> - The state of the reservation (<code>payment-pending</code> | <code>payment-failed</code> | <code>active</code> | <code>retired</code>).</p> </li> </ul>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500; if <code>maxResults</code> is given a larger value than 500, you will receive an error.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeHostReservationsResult":{
+      "type":"structure",
+      "members":{
+        "HostReservationSet":{
+          "shape":"HostReservationSet",
+          "documentation":"<p>Details about the reservation's configuration.</p>",
+          "locationName":"hostReservationSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName":"nextToken"
+        }
+      }
+    },
     "DescribeHostsRequest":{
       "type":"structure",
       "members":{
         "HostIds":{
           "shape":"RequestHostIdList",
-          "documentation":"<p>The IDs of the Dedicated hosts. The IDs are used for targeted instance launches.</p>",
+          "documentation":"<p>The IDs of the Dedicated Hosts. The IDs are used for targeted instance launches.</p>",
           "locationName":"hostId"
         },
         "NextToken":{
@@ -5544,7 +5673,7 @@
         },
         "Filter":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>instance-type</code> - The instance type size that the Dedicated host is configured to support.</p> </li> <li> <p> <code>auto-placement</code> - Whether auto-placement is enabled or disabled (<code>on</code> | <code>off</code>).</p> </li> <li> <p> <code>host-reservation-id</code> - The ID of the reservation associated with this host.</p> </li> <li> <p> <code>client-token</code> - The idempotency token you provided when you launched the instance</p> </li> <li> <p> <code>state</code>- The allocation state of the Dedicated host (<code>available</code> | <code>under-assessment</code> | <code>permanent-failure</code> | <code>released</code> | <code>released-permanent-failure</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the host.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>instance-type</code> - The instance type size that the Dedicated Host is configured to support.</p> </li> <li> <p> <code>auto-placement</code> - Whether auto-placement is enabled or disabled (<code>on</code> | <code>off</code>).</p> </li> <li> <p> <code>host-reservation-id</code> - The ID of the reservation assigned to this host.</p> </li> <li> <p> <code>client-token</code> - The idempotency token you provided when you launched the instance</p> </li> <li> <p> <code>state</code>- The allocation state of the Dedicated Host (<code>available</code> | <code>under-assessment</code> | <code>permanent-failure</code> | <code>released</code> | <code>released-permanent-failure</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the host.</p> </li> </ul>",
           "locationName":"filter"
         }
       },
@@ -5555,7 +5684,7 @@
       "members":{
         "Hosts":{
           "shape":"HostList",
-          "documentation":"<p>Information about the Dedicated hosts.</p>",
+          "documentation":"<p>Information about the Dedicated Hosts.</p>",
           "locationName":"hostSet"
         },
         "NextToken":{
@@ -5571,7 +5700,7 @@
       "members":{
         "Resource":{
           "shape":"String",
-          "documentation":"<p>The type of resource.</p>"
+          "documentation":"<p>The type of resource: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code> </p>"
         }
       },
       "documentation":"<p>Contains the parameters for DescribeIdFormat.</p>"
@@ -5593,7 +5722,7 @@
       "members":{
         "Resource":{
           "shape":"String",
-          "documentation":"<p>The type of resource.</p>",
+          "documentation":"<p>The type of resource: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code> </p>",
           "locationName":"resource"
         },
         "PrincipalArn":{
@@ -5653,7 +5782,7 @@
         },
         "Owners":{
           "shape":"OwnerStringList",
-          "documentation":"<p>Filters the images by the owner. Specify an AWS account ID, <code>amazon</code> (owner is Amazon), <code>aws-marketplace</code> (owner is AWS Marketplace), <code>self</code> (owner is the sender of the request). Omitting this option returns all images for which you have launch permissions, regardless of ownership.</p>",
+          "documentation":"<p>Filters the images by the owner. Specify an AWS account ID, <code>self</code> (owner is the sender of the request), or an AWS owner alias (valid values are <code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>). Omitting this option returns all images for which you have launch permissions, regardless of ownership.</p>",
           "locationName":"Owner"
         },
         "ExecutableUsers":{
@@ -5663,7 +5792,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name for the EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - The AWS account alias (for example, <code>amazon</code>).</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the image owner.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name for the EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - String value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the image owner.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
           "locationName":"Filter"
         }
       },
@@ -5856,7 +5985,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>affinity</code> - The affinity setting for an instance running on a Dedicated host (<code>default</code> | <code>host</code>).</p> </li> <li> <p> <code>architecture</code> - The instance architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the instance.</p> </li> <li> <p> <code>block-device-mapping.attach-time</code> - The attach time for an EBS volume mapped to the instance, for example, <code>2010-09-15T17:15:20.000Z</code>.</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean that indicates whether the EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name for the EBS volume (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.status</code> - The status for the EBS volume (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>block-device-mapping.volume-id</code> - The volume ID of the EBS volume.</p> </li> <li> <p> <code>client-token</code> - The idempotency token you provided when you launched the instance.</p> </li> <li> <p> <code>dns-name</code> - The public DNS name of the instance.</p> </li> <li> <p> <code>group-id</code> - The ID of the security group for the instance. EC2-Classic only.</p> </li> <li> <p> <code>group-name</code> - The name of the security group for the instance. EC2-Classic only.</p> </li> <li> <p> <code>host-Id</code> - The ID of the Dedicated host on which the instance is running, if applicable.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type of the instance (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>iam-instance-profile.arn</code> - The instance profile associated with the instance. Specified as an ARN.</p> </li> <li> <p> <code>image-id</code> - The ID of the image used to launch the instance.</p> </li> <li> <p> <code>instance-id</code> - The ID of the instance.</p> </li> <li> <p> <code>instance-lifecycle</code> - Indicates whether this is a Spot Instance or a Scheduled Instance (<code>spot</code> | <code>scheduled</code>).</p> </li> <li> <p> <code>instance-state-code</code> - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p> </li> <li> <p> <code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p> </li> <li> <p> <code>instance-type</code> - The type of instance (for example, <code>t2.micro</code>).</p> </li> <li> <p> <code>instance.group-id</code> - The ID of the security group for the instance. </p> </li> <li> <p> <code>instance.group-name</code> - The name of the security group for the instance. </p> </li> <li> <p> <code>ip-address</code> - The public IP address of the instance.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>key-name</code> - The name of the key pair used when the instance was launched.</p> </li> <li> <p> <code>launch-index</code> - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on). </p> </li> <li> <p> <code>launch-time</code> - The time when the instance was launched.</p> </li> <li> <p> <code>monitoring-state</code> - Indicates whether monitoring is enabled for the instance (<code>disabled</code> | <code>enabled</code>).</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the instance owner.</p> </li> <li> <p> <code>placement-group-name</code> - The name of the placement group for the instance.</p> </li> <li> <p> <code>platform</code> - The platform. Use <code>windows</code> if you have Windows instances; otherwise, leave blank.</p> </li> <li> <p> <code>private-dns-name</code> - The private DNS name of the instance.</p> </li> <li> <p> <code>private-ip-address</code> - The private IP address of the instance.</p> </li> <li> <p> <code>product-code</code> - The product code associated with the AMI used to launch the instance.</p> </li> <li> <p> <code>product-code.type</code> - The type of product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>reason</code> - The reason for the current state of the instance (for example, shows \"User Initiated [date]\" when you stop or terminate the instance). Similar to the state-reason-code filter.</p> </li> <li> <p> <code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>reservation-id</code> - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.</p> </li> <li> <p> <code>root-device-name</code> - The name of the root device for the instance (for example, <code>/dev/sda1</code> or <code>/dev/xvda</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of root device that the instance uses (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>source-dest-check</code> - Indicates whether the instance performs source/destination checking. A value of <code>true</code> means that checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the instance to perform network address translation (NAT) in your VPC. </p> </li> <li> <p> <code>spot-instance-request-id</code> - The ID of the Spot instance request.</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - A message that describes the state change.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource, where <code>tag</code>:<i>key</i> is the tag's key. </p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> | <code>default</code> | <code>host</code>).</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type of the instance (<code>paravirtual</code> | <code>hvm</code>).</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC that the instance is running in.</p> </li> <li> <p> <code>network-interface.description</code> - The description of the network interface.</p> </li> <li> <p> <code>network-interface.subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p> <code>network-interface.vpc-id</code> - The ID of the VPC for the network interface.</p> </li> <li> <p> <code>network-interface.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>network-interface.owner-id</code> - The ID of the owner of the network interface.</p> </li> <li> <p> <code>network-interface.availability-zone</code> - The Availability Zone for the network interface.</p> </li> <li> <p> <code>network-interface.requester-id</code> - The requester ID for the network interface.</p> </li> <li> <p> <code>network-interface.requester-managed</code> - Indicates whether the network interface is being managed by AWS.</p> </li> <li> <p> <code>network-interface.status</code> - The status of the network interface (<code>available</code>) | <code>in-use</code>).</p> </li> <li> <p> <code>network-interface.mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p> <code>network-interface.private-dns-name</code> - The private DNS name of the network interface.</p> </li> <li> <p> <code>network-interface.source-dest-check</code> - Whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC.</p> </li> <li> <p> <code>network-interface.group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p> <code>network-interface.group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p> <code>network-interface.attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p> <code>network-interface.attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>network-interface.attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>network-interface.addresses.private-ip-address</code> - The private IP address associated with the network interface.</p> </li> <li> <p> <code>network-interface.attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p> <code>network-interface.attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>network-interface.attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p> <code>network-interface.attachment.delete-on-termination</code> - Specifies whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p> <code>network-interface.addresses.primary</code> - Specifies whether the IP address of the network interface is the primary private IP address.</p> </li> <li> <p> <code>network-interface.addresses.association.public-ip</code> - The ID of the association of an Elastic IP address with a network interface.</p> </li> <li> <p> <code>network-interface.addresses.association.ip-owner-id</code> - The owner ID of the private IP address associated with the network interface.</p> </li> <li> <p> <code>association.public-ip</code> - The address of the Elastic IP address bound to the network interface.</p> </li> <li> <p> <code>association.ip-owner-id</code> - The owner of the Elastic IP address associated with the network interface.</p> </li> <li> <p> <code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address for your network interface.</p> </li> <li> <p> <code>association.association-id</code> - The association ID returned when the network interface was associated with an IP address.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>affinity</code> - The affinity setting for an instance running on a Dedicated Host (<code>default</code> | <code>host</code>).</p> </li> <li> <p> <code>architecture</code> - The instance architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the instance.</p> </li> <li> <p> <code>block-device-mapping.attach-time</code> - The attach time for an EBS volume mapped to the instance, for example, <code>2010-09-15T17:15:20.000Z</code>.</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean that indicates whether the EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name for the EBS volume (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.status</code> - The status for the EBS volume (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>block-device-mapping.volume-id</code> - The volume ID of the EBS volume.</p> </li> <li> <p> <code>client-token</code> - The idempotency token you provided when you launched the instance.</p> </li> <li> <p> <code>dns-name</code> - The public DNS name of the instance.</p> </li> <li> <p> <code>group-id</code> - The ID of the security group for the instance. EC2-Classic only.</p> </li> <li> <p> <code>group-name</code> - The name of the security group for the instance. EC2-Classic only.</p> </li> <li> <p> <code>host-id</code> - The ID of the Dedicated Host on which the instance is running, if applicable.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type of the instance (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>iam-instance-profile.arn</code> - The instance profile associated with the instance. Specified as an ARN.</p> </li> <li> <p> <code>image-id</code> - The ID of the image used to launch the instance.</p> </li> <li> <p> <code>instance-id</code> - The ID of the instance.</p> </li> <li> <p> <code>instance-lifecycle</code> - Indicates whether this is a Spot Instance or a Scheduled Instance (<code>spot</code> | <code>scheduled</code>).</p> </li> <li> <p> <code>instance-state-code</code> - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p> </li> <li> <p> <code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p> </li> <li> <p> <code>instance-type</code> - The type of instance (for example, <code>t2.micro</code>).</p> </li> <li> <p> <code>instance.group-id</code> - The ID of the security group for the instance. </p> </li> <li> <p> <code>instance.group-name</code> - The name of the security group for the instance. </p> </li> <li> <p> <code>ip-address</code> - The public IP address of the instance.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>key-name</code> - The name of the key pair used when the instance was launched.</p> </li> <li> <p> <code>launch-index</code> - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on). </p> </li> <li> <p> <code>launch-time</code> - The time when the instance was launched.</p> </li> <li> <p> <code>monitoring-state</code> - Indicates whether monitoring is enabled for the instance (<code>disabled</code> | <code>enabled</code>).</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the instance owner.</p> </li> <li> <p> <code>placement-group-name</code> - The name of the placement group for the instance.</p> </li> <li> <p> <code>platform</code> - The platform. Use <code>windows</code> if you have Windows instances; otherwise, leave blank.</p> </li> <li> <p> <code>private-dns-name</code> - The private DNS name of the instance.</p> </li> <li> <p> <code>private-ip-address</code> - The private IP address of the instance.</p> </li> <li> <p> <code>product-code</code> - The product code associated with the AMI used to launch the instance.</p> </li> <li> <p> <code>product-code.type</code> - The type of product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>reason</code> - The reason for the current state of the instance (for example, shows \"User Initiated [date]\" when you stop or terminate the instance). Similar to the state-reason-code filter.</p> </li> <li> <p> <code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>reservation-id</code> - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.</p> </li> <li> <p> <code>root-device-name</code> - The name of the root device for the instance (for example, <code>/dev/sda1</code> or <code>/dev/xvda</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of root device that the instance uses (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>source-dest-check</code> - Indicates whether the instance performs source/destination checking. A value of <code>true</code> means that checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the instance to perform network address translation (NAT) in your VPC. </p> </li> <li> <p> <code>spot-instance-request-id</code> - The ID of the Spot instance request.</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - A message that describes the state change.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource, where <code>tag</code>:<i>key</i> is the tag's key. </p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> | <code>default</code> | <code>host</code>).</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type of the instance (<code>paravirtual</code> | <code>hvm</code>).</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC that the instance is running in.</p> </li> <li> <p> <code>network-interface.description</code> - The description of the network interface.</p> </li> <li> <p> <code>network-interface.subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p> <code>network-interface.vpc-id</code> - The ID of the VPC for the network interface.</p> </li> <li> <p> <code>network-interface.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>network-interface.owner-id</code> - The ID of the owner of the network interface.</p> </li> <li> <p> <code>network-interface.availability-zone</code> - The Availability Zone for the network interface.</p> </li> <li> <p> <code>network-interface.requester-id</code> - The requester ID for the network interface.</p> </li> <li> <p> <code>network-interface.requester-managed</code> - Indicates whether the network interface is being managed by AWS.</p> </li> <li> <p> <code>network-interface.status</code> - The status of the network interface (<code>available</code>) | <code>in-use</code>).</p> </li> <li> <p> <code>network-interface.mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p> <code>network-interface.private-dns-name</code> - The private DNS name of the network interface.</p> </li> <li> <p> <code>network-interface.source-dest-check</code> - Whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC.</p> </li> <li> <p> <code>network-interface.group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p> <code>network-interface.group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p> <code>network-interface.attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p> <code>network-interface.attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>network-interface.attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>network-interface.addresses.private-ip-address</code> - The private IP address associated with the network interface.</p> </li> <li> <p> <code>network-interface.attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p> <code>network-interface.attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>network-interface.attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p> <code>network-interface.attachment.delete-on-termination</code> - Specifies whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p> <code>network-interface.addresses.primary</code> - Specifies whether the IP address of the network interface is the primary private IP address.</p> </li> <li> <p> <code>network-interface.addresses.association.public-ip</code> - The ID of the association of an Elastic IP address with a network interface.</p> </li> <li> <p> <code>network-interface.addresses.association.ip-owner-id</code> - The owner ID of the private IP address associated with the network interface.</p> </li> <li> <p> <code>association.public-ip</code> - The address of the Elastic IP address bound to the network interface.</p> </li> <li> <p> <code>association.ip-owner-id</code> - The owner of the Elastic IP address associated with the network interface.</p> </li> <li> <p> <code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address for your network interface.</p> </li> <li> <p> <code>association.association-id</code> - The association ID returned when the network interface was associated with an IP address.</p> </li> </ul>",
           "locationName":"Filter"
         },
         "NextToken":{
@@ -6723,7 +6852,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>description</code> - A description of the snapshot.</p> </li> <li> <p> <code>owner-alias</code> - The AWS account alias (for example, <code>amazon</code>) that owns the snapshot.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the snapshot.</p> </li> <li> <p> <code>progress</code> - The progress of the snapshot, as a percentage (for example, 80%).</p> </li> <li> <p> <code>snapshot-id</code> - The snapshot ID.</p> </li> <li> <p> <code>start-time</code> - The time stamp when the snapshot was initiated.</p> </li> <li> <p> <code>status</code> - The status of the snapshot (<code>pending</code> | <code>completed</code> | <code>error</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>volume-id</code> - The ID of the volume the snapshot is for.</p> </li> <li> <p> <code>volume-size</code> - The size of the volume, in GiB.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>description</code> - A description of the snapshot.</p> </li> <li> <p> <code>owner-alias</code> - Value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM consolew.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the snapshot.</p> </li> <li> <p> <code>progress</code> - The progress of the snapshot, as a percentage (for example, 80%).</p> </li> <li> <p> <code>snapshot-id</code> - The snapshot ID.</p> </li> <li> <p> <code>start-time</code> - The time stamp when the snapshot was initiated.</p> </li> <li> <p> <code>status</code> - The status of the snapshot (<code>pending</code> | <code>completed</code> | <code>error</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>volume-id</code> - The ID of the volume the snapshot is for.</p> </li> <li> <p> <code>volume-size</code> - The size of the volume, in GiB.</p> </li> </ul>",
           "locationName":"Filter"
         },
         "NextToken":{
@@ -8535,6 +8664,48 @@
       },
       "documentation":"<p>Contains the output of the request.</p>"
     },
+    "GetHostReservationPurchasePreviewRequest":{
+      "type":"structure",
+      "required":[
+        "OfferingId",
+        "HostIdSet"
+      ],
+      "members":{
+        "OfferingId":{
+          "shape":"String",
+          "documentation":"<p>The offering ID of the reservation.</p>"
+        },
+        "HostIdSet":{
+          "shape":"RequestHostIdSet",
+          "documentation":"<p>The ID/s of the Dedicated Host/s that the reservation will be associated with.</p>"
+        }
+      }
+    },
+    "GetHostReservationPurchasePreviewResult":{
+      "type":"structure",
+      "members":{
+        "Purchase":{
+          "shape":"PurchaseSet",
+          "documentation":"<p>The purchase information of the Dedicated Host Reservation and the Dedicated Hosts associated with it.</p>",
+          "locationName":"purchase"
+        },
+        "TotalUpfrontPrice":{
+          "shape":"String",
+          "documentation":"<p>The potential total upfront price. This is billed immediately.</p>",
+          "locationName":"totalUpfrontPrice"
+        },
+        "TotalHourlyPrice":{
+          "shape":"String",
+          "documentation":"<p>The potential total hourly price of the reservation per hour.</p>",
+          "locationName":"totalHourlyPrice"
+        },
+        "CurrencyCode":{
+          "shape":"CurrencyCodeValues",
+          "documentation":"<p>The currency in which the <code>totalUpfrontPrice</code> and <code>totalHourlyPrice</code> amounts are specified. At this time, the only supported currency is <code>USD</code>.</p>",
+          "locationName":"currencyCode"
+        }
+      }
+    },
     "GetPasswordDataRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -8654,7 +8825,7 @@
       "members":{
         "HostId":{
           "shape":"String",
-          "documentation":"<p>The ID of the Dedicated host.</p>",
+          "documentation":"<p>The ID of the Dedicated Host.</p>",
           "locationName":"hostId"
         },
         "AutoPlacement":{
@@ -8664,7 +8835,7 @@
         },
         "HostReservationId":{
           "shape":"String",
-          "documentation":"<p>The reservation ID of the Dedicated host. This returns a <code>null</code> response if the Dedicated host doesn't have an associated reservation.</p>",
+          "documentation":"<p>The reservation ID of the Dedicated Host. This returns a <code>null</code> response if the Dedicated Host doesn't have an associated reservation.</p>",
           "locationName":"hostReservationId"
         },
         "ClientToken":{
@@ -8674,47 +8845,47 @@
         },
         "HostProperties":{
           "shape":"HostProperties",
-          "documentation":"<p>The hardware specifications of the Dedicated host.</p>",
+          "documentation":"<p>The hardware specifications of the Dedicated Host.</p>",
           "locationName":"hostProperties"
         },
         "State":{
           "shape":"AllocationState",
-          "documentation":"<p>The Dedicated host's state.</p>",
+          "documentation":"<p>The Dedicated Host's state.</p>",
           "locationName":"state"
         },
         "AvailabilityZone":{
           "shape":"String",
-          "documentation":"<p>The Availability Zone of the Dedicated host.</p>",
+          "documentation":"<p>The Availability Zone of the Dedicated Host.</p>",
           "locationName":"availabilityZone"
         },
         "Instances":{
           "shape":"HostInstanceList",
-          "documentation":"<p>The IDs and instance type that are currently running on the Dedicated host.</p>",
+          "documentation":"<p>The IDs and instance type that are currently running on the Dedicated Host.</p>",
           "locationName":"instances"
         },
         "AvailableCapacity":{
           "shape":"AvailableCapacity",
-          "documentation":"<p>The number of new instances that can be launched onto the Dedicated host.</p>",
+          "documentation":"<p>The number of new instances that can be launched onto the Dedicated Host.</p>",
           "locationName":"availableCapacity"
         }
       },
-      "documentation":"<p>Describes the properties of the Dedicated host.</p>"
+      "documentation":"<p>Describes the properties of the Dedicated Host.</p>"
     },
     "HostInstance":{
       "type":"structure",
       "members":{
         "InstanceId":{
           "shape":"String",
-          "documentation":"<p>the IDs of instances that are running on the Dedicated host.</p>",
+          "documentation":"<p>the IDs of instances that are running on the Dedicated Host.</p>",
           "locationName":"instanceId"
         },
         "InstanceType":{
           "shape":"String",
-          "documentation":"<p>The instance type size (for example, m3.medium) of the running instance.</p>",
+          "documentation":"<p>The instance type size (for example, <code>m3.medium</code>) of the running instance.</p>",
           "locationName":"instanceType"
         }
       },
-      "documentation":"<p>Describes an instance running on a Dedicated host.</p>"
+      "documentation":"<p>Describes an instance running on a Dedicated Host.</p>"
     },
     "HostInstanceList":{
       "type":"list",
@@ -8730,31 +8901,158 @@
         "locationName":"item"
       }
     },
+    "HostOffering":{
+      "type":"structure",
+      "members":{
+        "OfferingId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the offering.</p>",
+          "locationName":"offeringId"
+        },
+        "InstanceFamily":{
+          "shape":"String",
+          "documentation":"<p>The instance family that the offering covers.</p>",
+          "locationName":"instanceFamily"
+        },
+        "PaymentOption":{
+          "shape":"PaymentOption",
+          "documentation":"<p>The available payment option.</p>",
+          "locationName":"paymentOption"
+        },
+        "UpfrontPrice":{
+          "shape":"String",
+          "documentation":"<p>The upfront price of the offering. Does not apply to No Upfront offerings.</p>",
+          "locationName":"upfrontPrice"
+        },
+        "HourlyPrice":{
+          "shape":"String",
+          "documentation":"<p>The hourly price of the offering.</p>",
+          "locationName":"hourlyPrice"
+        },
+        "CurrencyCode":{
+          "shape":"CurrencyCodeValues",
+          "documentation":"<p>The currency of the offering.</p>",
+          "locationName":"currencyCode"
+        },
+        "Duration":{
+          "shape":"Integer",
+          "documentation":"<p>The duration of the offering (in seconds).</p>",
+          "locationName":"duration"
+        }
+      },
+      "documentation":"<p>Details about the Dedicated Host Reservation offering.</p>"
+    },
+    "HostOfferingSet":{
+      "type":"list",
+      "member":{"shape":"HostOffering"}
+    },
     "HostProperties":{
       "type":"structure",
       "members":{
         "Sockets":{
           "shape":"Integer",
-          "documentation":"<p>The number of sockets on the Dedicated host.</p>",
+          "documentation":"<p>The number of sockets on the Dedicated Host.</p>",
           "locationName":"sockets"
         },
         "Cores":{
           "shape":"Integer",
-          "documentation":"<p>The number of cores on the Dedicated host.</p>",
+          "documentation":"<p>The number of cores on the Dedicated Host.</p>",
           "locationName":"cores"
         },
         "TotalVCpus":{
           "shape":"Integer",
-          "documentation":"<p>The number of vCPUs on the Dedicated host.</p>",
+          "documentation":"<p>The number of vCPUs on the Dedicated Host.</p>",
           "locationName":"totalVCpus"
         },
         "InstanceType":{
           "shape":"String",
-          "documentation":"<p>The instance type size that the Dedicated host supports (for example, m3.medium).</p>",
+          "documentation":"<p>The instance type size that the Dedicated Host supports (for example, <code>m3.medium</code>).</p>",
           "locationName":"instanceType"
         }
       },
-      "documentation":"<p>Describes properties of a Dedicated host.</p>"
+      "documentation":"<p>Describes properties of a Dedicated Host.</p>"
+    },
+    "HostReservation":{
+      "type":"structure",
+      "members":{
+        "HostReservationId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the reservation that specifies the associated Dedicated Hosts.</p>",
+          "locationName":"hostReservationId"
+        },
+        "HostIdSet":{
+          "shape":"ResponseHostIdSet",
+          "documentation":"<p>The IDs of the Dedicated Hosts associated with the reservation.</p>",
+          "locationName":"hostIdSet"
+        },
+        "OfferingId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the reservation. This remains the same regardless of which Dedicated Hosts are associated with it.</p>",
+          "locationName":"offeringId"
+        },
+        "InstanceFamily":{
+          "shape":"String",
+          "documentation":"<p>The instance family of the Dedicated Host Reservation. The instance family on the Dedicated Host must be the same in order for it to benefit from the reservation.</p>",
+          "locationName":"instanceFamily"
+        },
+        "PaymentOption":{
+          "shape":"PaymentOption",
+          "documentation":"<p>The payment option selected for this reservation.</p>",
+          "locationName":"paymentOption"
+        },
+        "HourlyPrice":{
+          "shape":"String",
+          "documentation":"<p>The hourly price of the reservation.</p>",
+          "locationName":"hourlyPrice"
+        },
+        "UpfrontPrice":{
+          "shape":"String",
+          "documentation":"<p>The upfront price of the reservation.</p>",
+          "locationName":"upfrontPrice"
+        },
+        "CurrencyCode":{
+          "shape":"CurrencyCodeValues",
+          "documentation":"<p>The currency in which the <code>upfrontPrice</code> and <code>hourlyPrice</code> amounts are specified. At this time, the only supported currency is <code>USD</code>.</p>",
+          "locationName":"currencyCode"
+        },
+        "Count":{
+          "shape":"Integer",
+          "documentation":"<p>The number of Dedicated Hosts the reservation is associated with.</p>",
+          "locationName":"count"
+        },
+        "Duration":{
+          "shape":"Integer",
+          "documentation":"<p>The length of the reservation's term, specified in seconds. Can be <code>31536000 (1 year)</code> | <code>94608000 (3 years)</code> | <code>157680000 (5 years)</code>.</p>",
+          "locationName":"duration"
+        },
+        "End":{
+          "shape":"DateTime",
+          "documentation":"<p>The date and time that the reservation ends.</p>",
+          "locationName":"end"
+        },
+        "Start":{
+          "shape":"DateTime",
+          "documentation":"<p>The date and time that the reservation started.</p>",
+          "locationName":"start"
+        },
+        "State":{
+          "shape":"ReservationState",
+          "documentation":"<p>The state of the reservation.</p>",
+          "locationName":"state"
+        }
+      },
+      "documentation":"<p>Details about the Dedicated Host Reservation and associated Dedicated Hosts.</p>"
+    },
+    "HostReservationIdSet":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
+    },
+    "HostReservationSet":{
+      "type":"list",
+      "member":{"shape":"HostReservation"}
     },
     "HostTenancy":{
       "type":"string",
@@ -9119,7 +9417,7 @@
         },
         "LicenseType":{
           "shape":"String",
-          "documentation":"<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p> <p> <b>Note:</b> You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html\">VM Import/Export Prerequisites</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Valid values: <code>AWS</code> | <code>BYOL</code> </p>"
+          "documentation":"<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p> <p> <b>Note:</b> You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see <a href=\"http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image\">Prerequisites</a> in the VM Import/Export User Guide.</p> <p>Valid values: <code>AWS</code> | <code>BYOL</code> </p>"
         },
         "Hypervisor":{
           "shape":"String",
@@ -9307,7 +9605,7 @@
         },
         "InstanceType":{
           "shape":"InstanceType",
-          "documentation":"<p>The instance type. For more information about the instance types that you can import, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html\">Before You Get Started</a> in the Amazon Elastic Compute Cloud User Guide.</p>",
+          "documentation":"<p>The instance type. For more information about the instance types that you can import, see <a href=\"http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#vmimport-instance-types\">Instance Types</a> in the VM Import/Export User Guide.</p>",
           "locationName":"instanceType"
         },
         "Placement":{
@@ -10031,21 +10329,21 @@
       "members":{
         "InstanceType":{
           "shape":"String",
-          "documentation":"<p>The instance type size supported by the Dedicated host.</p>",
+          "documentation":"<p>The instance type size supported by the Dedicated Host.</p>",
           "locationName":"instanceType"
         },
         "AvailableCapacity":{
           "shape":"Integer",
-          "documentation":"<p>The number of instances that can still be launched onto the Dedicated host.</p>",
+          "documentation":"<p>The number of instances that can still be launched onto the Dedicated Host.</p>",
           "locationName":"availableCapacity"
         },
         "TotalCapacity":{
           "shape":"Integer",
-          "documentation":"<p>The total number of instances that can be launched onto the Dedicated host.</p>",
+          "documentation":"<p>The total number of instances that can be launched onto the Dedicated Host.</p>",
           "locationName":"totalCapacity"
         }
       },
-      "documentation":"<p>Information about the instance type that the Dedicated host supports.</p>"
+      "documentation":"<p>Information about the instance type that the Dedicated Host supports.</p>"
     },
     "InstanceCount":{
       "type":"structure",
@@ -10941,7 +11239,7 @@
       "members":{
         "HostIds":{
           "shape":"RequestHostIdList",
-          "documentation":"<p>The host IDs of the Dedicated hosts you want to modify.</p>",
+          "documentation":"<p>The host IDs of the Dedicated Hosts you want to modify.</p>",
           "locationName":"hostId"
         },
         "AutoPlacement":{
@@ -10957,12 +11255,12 @@
       "members":{
         "Successful":{
           "shape":"ResponseHostIdList",
-          "documentation":"<p>The IDs of the Dedicated hosts that were successfully modified.</p>",
+          "documentation":"<p>The IDs of the Dedicated Hosts that were successfully modified.</p>",
           "locationName":"successful"
         },
         "Unsuccessful":{
           "shape":"UnsuccessfulItemList",
-          "documentation":"<p>The IDs of the Dedicated hosts that could not be modified. Check whether the setting you requested can be used.</p>",
+          "documentation":"<p>The IDs of the Dedicated Hosts that could not be modified. Check whether the setting you requested can be used.</p>",
           "locationName":"unsuccessful"
         }
       },
@@ -10977,7 +11275,7 @@
       "members":{
         "Resource":{
           "shape":"String",
-          "documentation":"<p>The type of resource.</p>"
+          "documentation":"<p>The type of resource: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code> </p>"
         },
         "UseLongIds":{
           "shape":"Boolean",
@@ -10996,7 +11294,7 @@
       "members":{
         "Resource":{
           "shape":"String",
-          "documentation":"<p>The type of resource.</p>",
+          "documentation":"<p>The type of resource: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code> </p>",
           "locationName":"resource"
         },
         "UseLongIds":{
@@ -11170,7 +11468,7 @@
         },
         "HostId":{
           "shape":"String",
-          "documentation":"<p>The ID of the Dedicated host that the instance will have affinity with.</p>",
+          "documentation":"<p>The ID of the Dedicated Host that the instance will have affinity with.</p>",
           "locationName":"hostId"
         }
       },
@@ -12129,6 +12427,14 @@
         "locationName":"Owner"
       }
     },
+    "PaymentOption":{
+      "type":"string",
+      "enum":[
+        "AllUpfront",
+        "PartialUpfront",
+        "NoUpfront"
+      ]
+    },
     "PeeringConnectionOptions":{
       "type":"structure",
       "members":{
@@ -12197,7 +12503,7 @@
         },
         "Affinity":{
           "shape":"String",
-          "documentation":"<p>The affinity setting for the instance on the Dedicated host. This parameter is not supported for the <a>ImportInstance</a> command.</p>",
+          "documentation":"<p>The affinity setting for the instance on the Dedicated Host. This parameter is not supported for the <a>ImportInstance</a> command.</p>",
           "locationName":"affinity"
         }
       },
@@ -12540,6 +12846,111 @@
         "locationName":"PublicIp"
       }
     },
+    "Purchase":{
+      "type":"structure",
+      "members":{
+        "HostReservationId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the reservation.</p>",
+          "locationName":"hostReservationId"
+        },
+        "HostIdSet":{
+          "shape":"ResponseHostIdSet",
+          "documentation":"<p>The IDs of the Dedicated Hosts associated with the reservation.</p>",
+          "locationName":"hostIdSet"
+        },
+        "InstanceFamily":{
+          "shape":"String",
+          "documentation":"<p>The instance family on the Dedicated Host that the reservation can be associated with.</p>",
+          "locationName":"instanceFamily"
+        },
+        "PaymentOption":{
+          "shape":"PaymentOption",
+          "documentation":"<p>The payment option for the reservation.</p>",
+          "locationName":"paymentOption"
+        },
+        "UpfrontPrice":{
+          "shape":"String",
+          "documentation":"<p>The upfront price of the reservation.</p>",
+          "locationName":"upfrontPrice"
+        },
+        "HourlyPrice":{
+          "shape":"String",
+          "documentation":"<p>The hourly price of the reservation per hour.</p>",
+          "locationName":"hourlyPrice"
+        },
+        "CurrencyCode":{
+          "shape":"CurrencyCodeValues",
+          "documentation":"<p>The currency in which the <code>UpfrontPrice</code> and <code>HourlyPrice</code> amounts are specified. At this time, the only supported currency is <code>USD</code>.</p>",
+          "locationName":"currencyCode"
+        },
+        "Duration":{
+          "shape":"Integer",
+          "documentation":"<p>The duration of the reservation's term in seconds.</p>",
+          "locationName":"duration"
+        }
+      },
+      "documentation":"<p>Describes the result of the purchase.</p>"
+    },
+    "PurchaseHostReservationRequest":{
+      "type":"structure",
+      "required":[
+        "OfferingId",
+        "HostIdSet"
+      ],
+      "members":{
+        "OfferingId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the offering.</p>"
+        },
+        "HostIdSet":{
+          "shape":"RequestHostIdSet",
+          "documentation":"<p>The ID/s of the Dedicated Host/s that the reservation will be associated with.</p>"
+        },
+        "LimitPrice":{
+          "shape":"String",
+          "documentation":"<p>The specified limit is checked against the total upfront cost of the reservation (calculated as the offering's upfront cost multiplied by the host count). If the total upfront cost is greater than the specified price limit, the request will fail. This is used to ensure that the purchase does not exceed the expected upfront cost of the purchase. At this time, the only supported currency is <code>USD</code>. For example, to indicate a limit price of USD 100, specify 100.00.</p>"
+        },
+        "CurrencyCode":{
+          "shape":"CurrencyCodeValues",
+          "documentation":"<p>The currency in which the <code>totalUpfrontPrice</code>, <code>LimitPrice</code>, and <code>totalHourlyPrice</code> amounts are specified. At this time, the only supported currency is <code>USD</code>.</p>"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "documentation":"<p>Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        }
+      }
+    },
+    "PurchaseHostReservationResult":{
+      "type":"structure",
+      "members":{
+        "Purchase":{
+          "shape":"PurchaseSet",
+          "documentation":"<p>Describes the details of the purchase.</p>",
+          "locationName":"purchase"
+        },
+        "TotalUpfrontPrice":{
+          "shape":"String",
+          "documentation":"<p>The total amount that will be charged to your account when you purchase the reservation.</p>",
+          "locationName":"totalUpfrontPrice"
+        },
+        "TotalHourlyPrice":{
+          "shape":"String",
+          "documentation":"<p>The total hourly price of the reservation calculated per hour.</p>",
+          "locationName":"totalHourlyPrice"
+        },
+        "CurrencyCode":{
+          "shape":"CurrencyCodeValues",
+          "documentation":"<p>The currency in which the <code>totalUpfrontPrice</code> and <code>totalHourlyPrice</code> amounts are specified. At this time, the only supported currency is <code>USD</code>.</p>",
+          "locationName":"currencyCode"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "documentation":"<p>Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a> in the <i>Amazon Elastic Compute Cloud User Guide</i> </p>",
+          "locationName":"clientToken"
+        }
+      }
+    },
     "PurchaseRequest":{
       "type":"structure",
       "required":[
@@ -12636,6 +13047,10 @@
         }
       },
       "documentation":"<p>Contains the output of PurchaseScheduledInstances.</p>"
+    },
+    "PurchaseSet":{
+      "type":"list",
+      "member":{"shape":"Purchase"}
     },
     "PurchasedScheduledInstanceSet":{
       "type":"list",
@@ -12864,7 +13279,7 @@
       "members":{
         "HostIds":{
           "shape":"RequestHostIdList",
-          "documentation":"<p>The IDs of the Dedicated hosts you want to release.</p>",
+          "documentation":"<p>The IDs of the Dedicated Hosts you want to release.</p>",
           "locationName":"hostId"
         }
       },
@@ -12875,12 +13290,12 @@
       "members":{
         "Successful":{
           "shape":"ResponseHostIdList",
-          "documentation":"<p>The IDs of the Dedicated hosts that were successfully released.</p>",
+          "documentation":"<p>The IDs of the Dedicated Hosts that were successfully released.</p>",
           "locationName":"successful"
         },
         "Unsuccessful":{
           "shape":"UnsuccessfulItemList",
-          "documentation":"<p>The IDs of the Dedicated hosts that could not be released, including an error message.</p>",
+          "documentation":"<p>The IDs of the Dedicated Hosts that could not be released, including an error message.</p>",
           "locationName":"unsuccessful"
         }
       },
@@ -13141,6 +13556,13 @@
         "locationName":"item"
       }
     },
+    "RequestHostIdSet":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
+    },
     "RequestSpotFleetRequest":{
       "type":"structure",
       "required":["SpotFleetRequestConfig"],
@@ -13359,6 +13781,15 @@
         "shape":"Reservation",
         "locationName":"item"
       }
+    },
+    "ReservationState":{
+      "type":"string",
+      "enum":[
+        "payment-pending",
+        "payment-failed",
+        "active",
+        "retired"
+      ]
     },
     "ReservedInstanceLimitPrice":{
       "type":"structure",
@@ -13899,6 +14330,13 @@
         "locationName":"item"
       }
     },
+    "ResponseHostIdSet":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
+    },
     "RestorableByStringList":{
       "type":"list",
       "member":{"shape":"String"}
@@ -14269,7 +14707,7 @@
         },
         "BlockDeviceMappings":{
           "shape":"BlockDeviceMappingRequestList",
-          "documentation":"<p>The block device mapping.</p>",
+          "documentation":"<p>The block device mapping.</p> <important> <p>Supplying both a snapshot ID and an encryption value as arguments for block-device mapping results in an error. This is because only blank volumes can be encrypted on start, and these are not created from a snapshot. If a snapshot is the basis for the volume, it contains data by definition and its encryption status cannot be changed using this action.</p> </important>",
           "locationName":"BlockDeviceMapping"
         },
         "Monitoring":{
@@ -15053,7 +15491,7 @@
         },
         "OwnerAlias":{
           "shape":"String",
-          "documentation":"<p>The AWS account alias (for example, <code>amazon</code>, <code>self</code>) or AWS account ID that owns the snapshot.</p>",
+          "documentation":"<p> Value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console. </p>",
           "locationName":"ownerAlias"
         },
         "Tags":{
@@ -15405,6 +15843,11 @@
           "shape":"DateTime",
           "documentation":"<p>The creation date and time of the request.</p>",
           "locationName":"createTime"
+        },
+        "ActivityStatus":{
+          "shape":"ActivityStatus",
+          "documentation":"<p>The progress of the Spot fleet request. If there is an error, the status is <code>error</code>. After all bids are placed, the status is <code>pending_fulfillment</code>. If the size of the fleet is equal to or greater than its target capacity, the status is <code>fulfilled</code>. If the size of the fleet is decreased, the status is <code>pending_termination</code> while Spot instances are terminating.</p>",
+          "locationName":"activityStatus"
         }
       },
       "documentation":"<p>Describes a Spot fleet request.</p>"
@@ -15475,7 +15918,7 @@
         },
         "Type":{
           "shape":"FleetType",
-          "documentation":"<p>The type of request. Indicates whether the fleet will only <code>request</code> the target capacity or also attempt to <code>maintain</code> it. When you <code>request</code> a certain target capacity, the fleet will only place the required bids. It will not attempt to replenish Spot instances if capacity is diminished, nor will it submit bids in alternative Spot pools if capacity is not available. When you want to <code>maintain</code> a certain target capacity, fleet will place the required bids to meet this target capacity. It will also automatically replenish any interrupted instances. Default: <code>maintain</code>. </p>",
+          "documentation":"<p>The type of request. Indicates whether the fleet will only <code>request</code> the target capacity or also attempt to <code>maintain</code> it. When you <code>request</code> a certain target capacity, the fleet will only place the required bids. It will not attempt to replenish Spot instances if capacity is diminished, nor will it submit bids in alternative Spot pools if capacity is not available. When you want to <code>maintain</code> a certain target capacity, fleet will place the required bids to meet this target capacity. It will also automatically replenish any interrupted instances. Default: <code>maintain</code>.</p>",
           "locationName":"type"
         }
       },

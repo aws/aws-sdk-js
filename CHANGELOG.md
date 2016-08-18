@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.5.1-->
+<!--LATEST=2.5.2-->
 <!--ENTRYINSERT-->
+
+## 2.5.2
+* bugfix: Waiter: Fixes bug in `clusterDeleted` waiter for AWS.Redshift.
+* feature: EC2: Adds  new APIs supporting dedicated host reservations. Also adds new property to response of `describeSpotFleetRequests` to indicate  the activity status of spot fleet requests.
+* feature: Request: eachItem method stops iteration on returning false (like eachPage)
+* feature: WorkSpaces: Adds new APIs to support the launch and management of WorkSpaces that are paid for and used by the hour.
 
 ## 2.5.1
 * feature: ACM: Increase tagging limit from 10 to 50.
