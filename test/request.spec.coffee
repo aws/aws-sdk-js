@@ -192,6 +192,23 @@ describe 'AWS.Request', ->
           ]
           done()
 
+    it 'supports stopping responses if false is returned', ->
+      helpers.mockResponses [
+        {data: {Results: [{Value: 1}, {Value: 2}], NextToken: 'a'}},
+        {data: {Results: [{Value: 3}], NextToken: 'b'}},
+        {data: Results: [{Value: 4}, {Value: 5}]}
+      ]
+      resps = []
+      service.mockMethod().eachItem (err, data) ->
+        if resps.length == 2
+          return false
+        resps.push([err, data])
+
+      expect(resps).to.eql [
+        [null, {Value: 1}],
+        [null, {Value: 2}]
+      ]
+
     it 'passes error to callback', (done) ->
       helpers.mockResponses [
         {data: {Results: [{Value: 1}, {Value: 2}], NextToken: 'a'}},
