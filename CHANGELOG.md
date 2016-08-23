@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.5.2-->
+<!--LATEST=2.5.3-->
 <!--ENTRYINSERT-->
+
+## 2.5.3
+* feature: RDS: Adds resource ARNs to Describe APIs.
 
 ## 2.5.2
 * bugfix: Waiter: Fixes bug in `clusterDeleted` waiter for AWS.Redshift.
