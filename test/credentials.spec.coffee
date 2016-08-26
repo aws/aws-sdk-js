@@ -530,8 +530,6 @@ if AWS.util.isNode()
       it 'makes only one request when multiple calls are made before first one finishes', (done) ->
         concurrency = countdown = 10
         process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path'
-        creds = AWS.ECSCredentials.prototype
-        spy = mockEndpoint(new Date(0))
         spy = helpers.spyOn(AWS.ECSCredentials.prototype, 'request').andCallFake (path, cb) ->
           respond = ->
             cb null, JSON.stringify(responseData)
