@@ -722,3 +722,123 @@ describe 'AWS.util.isDualstackAvailable', ->
     expect(AWS.util.isDualstackAvailable(null)).to.be.false
     expect(AWS.util.isDualstackAvailable('invalid')).to.be.false
     expect(AWS.util.isDualstackAvailable({})).to.be.false
+
+describe 'AWS.util.calculateRetryDelay', ->
+  beforeEach ->
+    helpers.spyOn(Math, 'random').andReturn 1
+
+  it 'exponentially increases delay as retryCount increases', ->
+    delay1 = AWS.util.calculateRetryDelay(1)
+    delay2 = AWS.util.calculateRetryDelay(2)
+    delay3 = AWS.util.calculateRetryDelay(3)
+    expect(delay2).to.equal(delay1 * 2)
+    expect(delay3).to.equal(delay1 * 4)
+
+  it 'has random jitter', ->
+    delay1 = AWS.util.calculateRetryDelay(1)
+    helpers.spyOn(Math, 'random').andReturn 0.5
+    delay2 = AWS.util.calculateRetryDelay(1)
+    expect(delay2).to.not.equal(delay1)
+
+  it 'allows configuration of base delay', ->
+    delay = AWS.util.calculateRetryDelay(1, { base: 1000 })
+    expect(delay).to.equal(2000)
+
+  it 'allows custom backoff function', ->
+    customBackoff = (retryCount) ->
+      return 100 * Math.pow(3, retryCount)
+    delay = AWS.util.calculateRetryDelay(2, { customBackoff: customBackoff })
+    expect(delay).to.equal(900)
+
+if AWS.util.isNode()
+  describe 'AWS.util.handleRequestWithTimeoutRetries', ->
+    app = null
+    httpRequest = null
+    spy = null
+    options = {maxRetries: 2}
+    httpClient = AWS.HttpClient.getInstance()
+
+    sendRequest = (cb) ->
+      AWS.util.handleRequestWithTimeoutRetries httpRequest, options, cb
+
+    getport = (cb, startport) ->
+      port = startport or 45678
+      srv = require('net').createServer()
+      srv.on 'error', -> getport(cb, port + 1)
+      srv.listen port, ->
+        srv.once 'close', -> cb(port)
+        srv.close()
+
+    server = require('http').createServer (req, resp) ->
+      app(req, resp)
+
+    beforeEach (done) ->
+      httpRequest = new AWS.HttpRequest('http://127.0.0.1')
+      spy = helpers.spyOn(httpClient, 'handleRequest').andCallThrough()
+      getport (port) ->
+        httpRequest.endpoint.port = port
+        server.listen(port)
+        done()
+
+    afterEach ->
+      server.close()
+
+    it 'does not retry if request is successful', (done) ->
+      app = (req, resp) ->
+        resp.write('FOOBAR')
+        resp.end()
+      sendRequest (err, data) ->
+        expect(err).to.be.null
+        expect(data).to.equal('FOOBAR')
+        expect(spy.calls.length).to.equal(1)
+        done()
+
+    it 'does not retry non-timeout errors', (done) ->
+      app = (req, resp) ->
+        httpRequest.stream.emit('error', {code: 'SomeError'})
+        resp.end()
+      sendRequest (err, data) ->
+        expect(data).to.be.undefined
+        expect(err).to.not.be.null
+        expect(err.code).to.equal('SomeError')
+        expect(spy.calls.length).to.equal(1)
+        done()
+
+    it 'retries for TimeoutError', (done) ->
+      firstcall = true
+      app = (req, resp) ->
+        if firstcall
+          httpRequest.stream.emit('error', {code: 'TimeoutError'})
+          firstcall = false
+        else
+          resp.write('FOOBAR')
+        resp.end()
+      sendRequest (err, data) ->
+        expect(err).to.be.null
+        expect(data).to.equal('FOOBAR')
+        expect(spy.calls.length).to.equal(2)
+        done()
+
+    it 'retries up to the maxRetries specified', (done) ->
+      app = (req, resp) ->
+        httpRequest.stream.emit('error', {code: 'TimeoutError'})
+        resp.end()
+      sendRequest (err, data) ->
+        expect(data).to.be.undefined
+        expect(err).to.not.be.null
+        expect(err.code).to.equal('TimeoutError')
+        expect(spy.calls.length).to.equal(options.maxRetries + 1)
+        done()
+
+    it 'defaults to not retrying if maxRetries not specified', (done) ->
+      app = (req, resp) ->
+        httpRequest.stream.emit('error', {code: 'TimeoutError'})
+        resp.end()
+      options = {}
+      sendRequest (err, data) ->
+        expect(data).to.be.undefined
+        expect(err).to.not.be.null
+        expect(err.code).to.equal('TimeoutError')
+        expect(spy.calls.length).to.equal(1)
+        done()
+
