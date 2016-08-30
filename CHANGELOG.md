@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.5.3-->
+<!--LATEST=2.5.4-->
 <!--ENTRYINSERT-->
+
+## 2.5.4
+* feature: CloudFront: CloudFront is adding a Querystring Whitelist Option. Customers will be able to choose to forward certain querystring keys instead of a.) all of them or b.) none of them.
+* feature: CodePipeline: CodePiepline has introduced a new feature to return pipeline execution details. Execution details consists of source revisions that are running in the pipeline. Customers will be able to tell what source revisions that are running through the stages in pipeline by fetching execution details of each stage.
+* feature: Route53: With this release, Route 53 will support the following new features: support for the NAPTR DNS record type, a new testDNSAnswer API which enables customers to send a test query against a specific name server using spoofed delegation nameserver, resolver, and ECS IPs, and support metric-based health check in ap-south-1 region.
 
 ## 2.5.3
 * feature: RDS: Adds resource ARNs to Describe APIs.

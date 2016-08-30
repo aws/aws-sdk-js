@@ -549,7 +549,7 @@
       "errors":[
         {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Disables monitoring of the specified metrics for the specified Auto Scaling group.</p>"
+      "documentation":"<p>Disables group metrics for the specified Auto Scaling group.</p>"
     },
     "EnableMetricsCollection":{
       "name":"EnableMetricsCollection",
@@ -561,7 +561,7 @@
       "errors":[
         {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Enables monitoring of the specified metrics for the specified Auto Scaling group.</p> <p>You can only enable metrics collection if <code>InstanceMonitoring</code> in the launch configuration for the group is set to <code>True</code>.</p>"
+      "documentation":"<p>Enables group metrics for the specified Auto Scaling group. For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/userguide/as-instance-monitoring.html\">Monitoring Your Auto Scaling Groups and Instances</a> in the <i>Auto Scaling User Guide</i>.</p>"
     },
     "EnterStandby":{
       "name":"EnterStandby",
@@ -1425,7 +1425,7 @@
         },
         "InstanceMonitoring":{
           "shape":"InstanceMonitoring",
-          "documentation":"<p>Enables detailed monitoring if it is disabled. Detailed monitoring is enabled by default.</p> <p>When detailed monitoring is enabled, Amazon CloudWatch generates metrics every minute and your account is charged a fee. When you disable detailed monitoring, by specifying <code>False</code>, CloudWatch generates metrics every 5 minutes. For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-instance-monitoring.html\">Monitoring Your Auto Scaling Instances and Groups</a> in the <i>Auto Scaling User Guide</i>.</p>"
+          "documentation":"<p>Enables detailed monitoring (<code>true</code>) or basic monitoring (<code>false</code>) for the Auto Scaling instances.</p>"
         },
         "SpotPrice":{
           "shape":"SpotPrice",
@@ -2013,7 +2013,7 @@
         },
         "Metrics":{
           "shape":"Metrics",
-          "documentation":"<p>One or more of the following metrics. If you omit this parameter, all metrics are enabled.</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul> <p>Note that the <code>GroupStandbyInstances</code> metric is not enabled by default. You must explicitly request this metric.</p>"
+          "documentation":"<p>One or more of the following metrics. If you omit this parameter, all metrics are enabled.</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul>"
         },
         "Granularity":{
           "shape":"XmlStringMaxLen255",
@@ -2280,7 +2280,7 @@
         },
         "InstanceMonitoring":{
           "shape":"InstanceMonitoring",
-          "documentation":"<p>Controls whether instances in this group are launched with detailed monitoring.</p>"
+          "documentation":"<p>Controls whether instances in this group are launched with detailed (<code>true</code>) or basic (<code>false</code>) monitoring.</p>"
         },
         "SpotPrice":{
           "shape":"SpotPrice",
