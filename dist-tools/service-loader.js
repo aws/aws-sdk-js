@@ -165,5 +165,5 @@ function ServiceCollector(services) {
 module.exports = ServiceCollector;
 
 //var source = ServiceCollector(defaultServices);
-var source = ServiceCollector('all');
+var source = ServiceCollector(process.env.AWS_SERVICES);
 fs.writeFile(path.join(__dirname, '..', 'lib', 'browser_services.js'), source);
