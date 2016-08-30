@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "MetadataService",
+  "description": "Adds retry logic to the EC2 Metadata Service, so that EC2MetadataCredentials will retry TimeoutError. This retry logic is also added to ECSCredentials. Resolves #692"
+}
