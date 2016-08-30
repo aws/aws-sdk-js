@@ -6,29 +6,28 @@ AWS = helpers.AWS
 if AWS.util.isNode()
   describe 'AWS.MetadataService', ->
     describe 'loadCredentials', ->
-      [server, port, service] = [null, 1024 + parseInt(Math.random() * 100), null]
-      [forceTimeout, httpRequest] = [false, null]
+      [server, port, service, forceTimeout] = [null, 1024 + parseInt(Math.random() * 100), null, null]
       httpClient = AWS.HttpClient.getInstance()
 
       beforeEach ->
-        [forceTimeout, httpRequest] = [false, null]
+        forceTimeout = false
+        helpers.spyOn(http.ClientRequest.prototype, 'setTimeout').andCallFake (timeout, cb) ->
+          if forceTimeout
+            process.nextTick(cb)
         service = new AWS.MetadataService(host: '127.0.0.1:' + port)
         server = http.createServer (req, res) ->
-          if forceTimeout
-            httpRequest.stream.emit('error', {code: 'TimeoutError'})
-          else
-            re = new RegExp('^/latest/meta-data/iam/security-credentials/(.*)$')
-            match = url.parse(req.url).pathname.match(re)
-            if match
-              res.writeHead(200, 'Content-Type': 'text/plain')
-              if match[1] == ''
-                res.write('TestingRole\n')
-                res.write('TestingRole2\n')
-              else
-                data = '{"Code":"Success","AccessKeyId":"KEY","SecretAccessKey":"SECRET","Token":"TOKEN"}'
-                res.write(data)
+          re = new RegExp('^/latest/meta-data/iam/security-credentials/(.*)$')
+          match = url.parse(req.url).pathname.match(re)
+          if match
+            res.writeHead(200, 'Content-Type': 'text/plain')
+            if match[1] == ''
+              res.write('TestingRole\n')
+              res.write('TestingRole2\n')
             else
-              res.writeHead(404, {})
+              data = '{"Code":"Success","AccessKeyId":"KEY","SecretAccessKey":"SECRET","Token":"TOKEN"}'
+              res.write(data)
+          else
+            res.writeHead(404, {})
           res.end()
 
         server.listen(port)
@@ -80,9 +79,7 @@ if AWS.util.isNode()
             firstTry = false
           else
             forceTimeout = false
-          args = spy.calls[spy.calls.length - 1].arguments
-          httpRequest = args[0]
-          return spy.origMethod.apply(httpClient, args)
+          return spy.origMethod.apply(httpClient, arguments)
 
         service = new AWS.MetadataService(options)
         service.loadCredentials (err, data) ->
@@ -97,12 +94,8 @@ if AWS.util.isNode()
           host: '127.0.0.1:' + port,
           maxRetries: 5
         }
-
-        spy = helpers.spyOn(httpClient, 'handleRequest').andCallFake ->
-          forceTimeout = true
-          args = spy.calls[spy.calls.length - 1].arguments
-          httpRequest = args[0]
-          return spy.origMethod.apply(httpClient, args)
+        forceTimeout = true
+        spy = helpers.spyOn(httpClient, 'handleRequest').andCallThrough()
 
         service = new AWS.MetadataService(options)
         service.loadCredentials (err, data) ->

@@ -752,9 +752,11 @@ describe 'AWS.util.calculateRetryDelay', ->
 
 if AWS.util.isNode()
   describe 'AWS.util.handleRequestWithTimeoutRetries', ->
+    http = require('http')
     app = null
     httpRequest = null
     spy = null
+    forceTimeout = null
     options = {maxRetries: 2}
     httpClient = AWS.HttpClient.getInstance()
 
@@ -769,10 +771,14 @@ if AWS.util.isNode()
         srv.once 'close', -> cb(port)
         srv.close()
 
-    server = require('http').createServer (req, resp) ->
+    server = http.createServer (req, resp) ->
       app(req, resp)
 
     beforeEach (done) ->
+      forceTimeout = false
+      helpers.spyOn(http.ClientRequest.prototype, 'setTimeout').andCallFake (timeout, cb) ->
+        if forceTimeout
+          process.nextTick(cb)
       httpRequest = new AWS.HttpRequest('http://127.0.0.1')
       spy = helpers.spyOn(httpClient, 'handleRequest').andCallThrough()
       getport (port) ->
@@ -796,8 +802,10 @@ if AWS.util.isNode()
     it 'does not retry non-timeout errors', (done) ->
       app = (req, resp) ->
         httpRequest.stream.emit('error', {code: 'SomeError'})
+        resp.write('FOOBAR')
         resp.end()
       sendRequest (err, data) ->
+        console.log('cb was called')
         expect(data).to.be.undefined
         expect(err).to.not.be.null
         expect(err.code).to.equal('SomeError')
@@ -806,12 +814,15 @@ if AWS.util.isNode()
 
     it 'retries for TimeoutError', (done) ->
       firstcall = true
-      app = (req, resp) ->
+      spy = helpers.spyOn(httpClient, 'handleRequest').andCallFake ->
         if firstcall
-          httpRequest.stream.emit('error', {code: 'TimeoutError'})
+          forceTimeout = true
           firstcall = false
         else
-          resp.write('FOOBAR')
+          forceTimeout = false
+        return spy.origMethod.apply(httpClient, arguments)
+      app = (req, resp) ->
+        resp.write('FOOBAR')
         resp.end()
       sendRequest (err, data) ->
         expect(err).to.be.null
@@ -820,8 +831,9 @@ if AWS.util.isNode()
         done()
 
     it 'retries up to the maxRetries specified', (done) ->
+      forceTimeout = true
       app = (req, resp) ->
-        httpRequest.stream.emit('error', {code: 'TimeoutError'})
+        resp.write('FOOBAR')
         resp.end()
       sendRequest (err, data) ->
         expect(data).to.be.undefined
@@ -831,8 +843,9 @@ if AWS.util.isNode()
         done()
 
     it 'defaults to not retrying if maxRetries not specified', (done) ->
+      forceTimeout = true
       app = (req, resp) ->
-        httpRequest.stream.emit('error', {code: 'TimeoutError'})
+        resp.write('FOOBAR')
         resp.end()
       options = {}
       sendRequest (err, data) ->
