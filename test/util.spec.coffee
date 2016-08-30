@@ -805,7 +805,6 @@ if AWS.util.isNode()
         resp.write('FOOBAR')
         resp.end()
       sendRequest (err, data) ->
-        console.log('cb was called')
         expect(data).to.be.undefined
         expect(err).to.not.be.null
         expect(err.code).to.equal('SomeError')
