@@ -1,70 +1,104 @@
 {
-    "name": "aws-sdk",
-    "description": "AWS SDK for JavaScript",
-    "version": "2.5.3",
-    "author": {
-      "name":"Amazon Web Services",
-      "email":"",
-      "url":"http://aws.amazon.com/"
-    },
-    "homepage": "https://github.com/aws/aws-sdk-js",
-    "contributors": [
-      "Loren Segal <lsegal@amazon.com>",
-      "Trevor Rowe <trevrowe@amazon.com>"
-    ],
-    "devDependencies": {
-      "repl.history": "*",
-      "semver": "*",
-      "coffee-script": "1.6.3",
-      "eslint": "1.x",
-      "cucumber": "0.5.x",
-      "coffeeify": "*",
-      "browserify": "^8.1.3",
-      "uglify-js": "2.x",
-      "mocha": "*",
-      "chai": "*",
-      "istanbul": "*",
-      "coveralls": "2.x",
-      "insert-module-globals": "^7.0.0"
-    },
-    "dependencies": {
-      "sax": "1.1.5",
-      "xml2js": "0.4.15",
-      "xmlbuilder": "2.6.2",
-      "jmespath": "0.15.0"
-    },
-    "main": "lib/aws.js",
-    "browser": "lib/browser.js",
-    "browserify": { "transform": "./dist-tools/transform.js" },
-    "directories":  {
-      "lib": "lib"
-    },
-    "engines": {
-      "node": ">= 0.8.0"
-    },
-    "repository": {
-      "type" : "git",
-      "url": "git://github.com/aws/aws-sdk-js"
-    },
-    "bugs" : {
-      "url" : "http://github.com/aws/aws-sdk-js/issues",
-      "mail" : ""
-    },
-    "license": "Apache-2.0",
-    "keywords": [
-      "api", "amazon","aws","ec2","simpledb","s3","sqs","ses","sns","route53","rds","elasticache","cloudfront","fps",
-      "cloudformation","cloudwatch","dynamodb","iam","swf","autoscaling","cloudsearch","elb",
-      "loadbalancing","emr","mapreduce","importexport","storagegateway","workflow","ebs","vpc","beanstalk",
-      "glacier","kinesis","cloudtrail", "waf"
-    ],
-    "scripts" : {
-      "test" : "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
-      "unit" : "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'` -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront",
-      "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml",
-      "browsertest": "rake browser:test",
-      "buildertest": "mocha --compilers coffee:coffee-script -s 1000 -t 10000 dist-tools/test",
-      "integration": "cucumber.js",
-      "lint" : "eslint lib dist-tools/*.js",
-      "console": "./scripts/console"
-    }
+  "name": "aws-sdk",
+  "description": "AWS SDK for JavaScript",
+  "version": "2.5.3",
+  "author": {
+    "name": "Amazon Web Services",
+    "email": "",
+    "url": "http://aws.amazon.com/"
+  },
+  "homepage": "https://github.com/aws/aws-sdk-js",
+  "contributors": [
+    "Loren Segal <lsegal@amazon.com>",
+    "Trevor Rowe <trevrowe@amazon.com>"
+  ],
+  "devDependencies": {
+    "repl.history": "*",
+    "semver": "*",
+    "coffee-script": "1.6.3",
+    "eslint": "1.x",
+    "cucumber": "0.5.x",
+    "coffeeify": "*",
+    "browserify": "^8.1.3",
+    "uglify-js": "2.x",
+    "mocha": "*",
+    "chai": "*",
+    "istanbul": "*",
+    "coveralls": "2.x",
+    "insert-module-globals": "^7.0.0"
+  },
+  "dependencies": {
+    "crypto-browserify": "^1.0.9",
+    "jmespath": "0.15.0",
+    "sax": "1.1.5",
+    "xml2js": "0.4.15",
+    "xmlbuilder": "2.6.2"
+  },
+  "main": "lib/aws.js",
+  "browser": {
+    "lib/aws.js": "./lib/browser.js",
+    "fs": false
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aws/aws-sdk-js"
+  },
+  "bugs": {
+    "url": "http://github.com/aws/aws-sdk-js/issues",
+    "mail": ""
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "api",
+    "amazon",
+    "aws",
+    "ec2",
+    "simpledb",
+    "s3",
+    "sqs",
+    "ses",
+    "sns",
+    "route53",
+    "rds",
+    "elasticache",
+    "cloudfront",
+    "fps",
+    "cloudformation",
+    "cloudwatch",
+    "dynamodb",
+    "iam",
+    "swf",
+    "autoscaling",
+    "cloudsearch",
+    "elb",
+    "loadbalancing",
+    "emr",
+    "mapreduce",
+    "importexport",
+    "storagegateway",
+    "workflow",
+    "ebs",
+    "vpc",
+    "beanstalk",
+    "glacier",
+    "kinesis",
+    "cloudtrail",
+    "waf"
+  ],
+  "scripts": {
+    "test": "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
+    "unit": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'` -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml",
+    "browsertest": "rake browser:test",
+    "buildertest": "mocha --compilers coffee:coffee-script -s 1000 -t 10000 dist-tools/test",
+    "integration": "cucumber.js",
+    "lint": "eslint lib dist-tools/*.js",
+    "console": "./scripts/console"
+  }
 }
