@@ -751,17 +751,14 @@ describe 'AWS.util.calculateRetryDelay', ->
     expect(delay).to.equal(900)
 
 if AWS.util.isNode()
-  describe 'AWS.util.handleRequestWithTimeoutRetries', ->
+  describe 'AWS.util.handleRequestWithRetries', ->
     http = require('http')
-    app = null
-    httpRequest = null
-    spy = null
-    forceTimeout = null
+    app = null; httpRequest = null; spy = null
     options = {maxRetries: 2}
     httpClient = AWS.HttpClient.getInstance()
 
     sendRequest = (cb) ->
-      AWS.util.handleRequestWithTimeoutRetries httpRequest, options, cb
+      AWS.util.handleRequestWithRetries httpRequest, options, cb
 
     getport = (cb, startport) ->
       port = startport or 45678
@@ -775,10 +772,6 @@ if AWS.util.isNode()
       app(req, resp)
 
     beforeEach (done) ->
-      forceTimeout = false
-      helpers.spyOn(http.ClientRequest.prototype, 'setTimeout').andCallFake (timeout, cb) ->
-        if forceTimeout
-          process.nextTick(cb)
       httpRequest = new AWS.HttpRequest('http://127.0.0.1')
       spy = helpers.spyOn(httpClient, 'handleRequest').andCallThrough()
       getport (port) ->
@@ -799,27 +792,12 @@ if AWS.util.isNode()
         expect(spy.calls.length).to.equal(1)
         done()
 
-    it 'does not retry non-timeout errors', (done) ->
-      app = (req, resp) ->
-        httpRequest.stream.emit('error', {code: 'SomeError'})
-        resp.write('FOOBAR')
-        resp.end()
-      sendRequest (err, data) ->
-        expect(data).to.be.undefined
-        expect(err).to.not.be.null
-        expect(err.code).to.equal('SomeError')
-        expect(spy.calls.length).to.equal(1)
-        done()
-
     it 'retries for TimeoutError', (done) ->
-      firstcall = true
-      spy = helpers.spyOn(httpClient, 'handleRequest').andCallFake ->
-        if firstcall
-          forceTimeout = true
-          firstcall = false
-        else
+      forceTimeout = true
+      helpers.spyOn(http.ClientRequest.prototype, 'setTimeout').andCallFake (timeout, cb) ->
+        if forceTimeout
+          process.nextTick(cb)
           forceTimeout = false
-        return spy.origMethod.apply(httpClient, arguments)
       app = (req, resp) ->
         resp.write('FOOBAR')
         resp.end()
@@ -830,7 +808,8 @@ if AWS.util.isNode()
         done()
 
     it 'retries up to the maxRetries specified', (done) ->
-      forceTimeout = true
+      helpers.spyOn(http.ClientRequest.prototype, 'setTimeout').andCallFake (timeout, cb) ->
+        process.nextTick(cb)
       app = (req, resp) ->
         resp.write('FOOBAR')
         resp.end()
@@ -838,19 +817,69 @@ if AWS.util.isNode()
         expect(data).to.be.undefined
         expect(err).to.not.be.null
         expect(err.code).to.equal('TimeoutError')
+        expect(err.retryable).to.be.true
+        expect(spy.calls.length).to.equal(options.maxRetries + 1)
+        done()
+
+    it 'retries errors with status code 5xx', (done) ->
+      app = (req, resp) ->
+        resp.writeHead(500, {})
+        resp.write('FOOBAR')
+        resp.end()
+      sendRequest (err, data) ->
+        expect(data).to.be.undefined
+        expect(err).to.not.be.null
+        expect(err.retryable).to.be.true
+        expect(spy.calls.length).to.equal(options.maxRetries + 1)
+        done()
+
+    it 'retries errors with status code 4xx with retry-after header', (done) ->
+      app = (req, resp) ->
+        resp.writeHead(400, {'retry-after': 1})
+        resp.write('FOOBAR')
+        resp.end()
+      sendRequest (err, data) ->
+        expect(data).to.be.undefined
+        expect(err).to.not.be.null
+        expect(err.retryable).to.be.true
+        expect(spy.calls.length).to.equal(options.maxRetries + 1)
+        done()
+
+    it 'does not retry non-retryable errors', (done) ->
+      app = (req, resp) ->
+        resp.writeHead(400, {})
+        resp.write('FOOBAR')
+        resp.end()
+      sendRequest (err, data) ->
+        expect(data).to.be.undefined
+        expect(err).to.not.be.null
+        expect(err.retryable).to.be.false
+        expect(spy.calls.length).to.equal(1)
+        done()
+
+    it 'retries errors with retryable set to true', (done) ->
+      helpers.spyOn(AWS.util, 'error').andReturn {retryable: true}
+      app = (req, resp) ->
+        resp.writeHead(400, {})
+        resp.write('FOOBAR')
+        resp.end()
+      sendRequest (err, data) ->
+        expect(data).to.be.undefined
+        expect(err).to.not.be.null
+        expect(err.retryable).to.be.true
         expect(spy.calls.length).to.equal(options.maxRetries + 1)
         done()
 
     it 'defaults to not retrying if maxRetries not specified', (done) ->
-      forceTimeout = true
+      helpers.spyOn(AWS.util, 'error').andReturn {retryable: true}
       app = (req, resp) ->
+        resp.writeHead(400, {})
         resp.write('FOOBAR')
         resp.end()
       options = {}
       sendRequest (err, data) ->
         expect(data).to.be.undefined
         expect(err).to.not.be.null
-        expect(err.code).to.equal('TimeoutError')
         expect(spy.calls.length).to.equal(1)
         done()
 
