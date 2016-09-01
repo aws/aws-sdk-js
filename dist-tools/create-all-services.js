@@ -8,7 +8,7 @@ var sanitizeRegex = /[^a-zA-Z0-9,-]/;
 function ClientCreator() {
   this._metadata = require('../apis/metadata');
   this._apisFolderPath = path.join(__dirname, '..', 'apis');
-  this._clientFolderPath = path.join(__dirname, '..', 'clients');
+  this._clientFolderPath = path.join(__dirname, '..', 'browser');
   this._serviceCustomizationsFolderPath = path.join(__dirname, '..', 'lib', 'services');
   this._apiFileNames = null;
 }
@@ -68,11 +68,12 @@ ClientCreator.prototype.customizationsExist = function customizationsExist(servi
     return fs.existsSync(path.join(customizationsFolder, serviceName + '.js'));
 };
 
-ClientCreator.prototype.generateClientFileSource = function generateClientFileSource(serviceMetadata) {
+ClientCreator.prototype.generateClientFileSource = function generateClientFileSource(serviceMetadata, specifiedVersion) {
   var clientFolderPath = this._clientFolderPath;
   var className = serviceMetadata.name;
   var serviceName = className.toLowerCase();
   var modelName = serviceMetadata.prefix || serviceName;
+  specifiedVersion = specifiedVersion || '*';
 
   // get models for the service
   var models = this.getAllApiFilenamesForService(modelName);
@@ -83,7 +84,7 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
   }
   var versionNumbers = Object.keys(modelVersions);
   var code = '';
-  code += 'require(\'../lib/global\');\n';
+  code += 'require(\'../lib/browser_loader\');\n';
   code += 'var AWS = require(\'../lib/core\');\n\n';
   code += 'AWS.apiLoader.services[\'' + serviceName +'\'] = {};\n';
   code += 'AWS.' + className + ' = AWS.Service.defineService(\'' + serviceName + '\', [\'' + versionNumbers.join('\', \'') + '\']);\n';
@@ -92,6 +93,10 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
       code += 'require(\'../lib/services/' + serviceName + '\');\n';
   }
   versionNumbers.forEach(function(version) {
+      // check version
+      if (specifiedVersion !== '*' && specifiedVersion !== version) {
+          return;
+      }
       var versionInfo = modelVersions[version];
       if (!versionInfo.hasOwnProperty('api')) {
           throw new Error('No API model for ' + serviceName + '-' + version);
@@ -108,10 +113,6 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
   });
   code += '\n';
   code += 'module.exports = AWS.' + className + ';\n';
-//   code += 'module.exports = {\n';
-//   code += '  AWS: AWS,\n';
-//   code += '  ' + className + ': AWS.' + className + '\n';
-//   code += '};';
   return {
       code: code,
       path: path.join(clientFolderPath, serviceName + '.js'),
@@ -128,7 +129,7 @@ ClientCreator.prototype.generateAllServicesSource = function generateAllServices
     var className = metadata[service].name;
     var tab = '  ';
     var isLast = idx === services.length - 1;
-    code += tab + service + ': require(\'./' + service + '\')' + (isLast ? '' : ',') + '\n';
+    code += tab + className + ': require(\'./' + service + '\')' + (isLast ? '' : ',') + '\n';
   });
   code += '};';
   return {
@@ -153,7 +154,6 @@ ClientCreator.prototype.writeClientServices = function writeClientServices() {
   fs.writeFileSync(allClientInfo.path, allClientInfo.code);
   var browserClientInfo = this.generateAllServicesSource(defaultServices.split(','), 'browser_default');
   fs.writeFileSync(browserClientInfo.path, browserClientInfo.code);
-  console.log('complete');
 };
 
 var cc = new ClientCreator();

@@ -19,7 +19,7 @@
     "eslint": "1.x",
     "cucumber": "0.5.x",
     "coffeeify": "*",
-    "browserify": "^8.1.3",
+    "browserify": "13.1.0",
     "uglify-js": "2.x",
     "mocha": "*",
     "chai": "*",
@@ -28,7 +28,8 @@
     "insert-module-globals": "^7.0.0"
   },
   "dependencies": {
-    "crypto-browserify": "^1.0.9",
+    "buffer": "4.9.1",
+    "crypto-browserify": "1.0.9",
     "jmespath": "0.15.0",
     "sax": "1.1.5",
     "xml2js": "0.4.15",
@@ -38,6 +39,9 @@
   "browser": {
     "lib/aws.js": "./lib/browser.js",
     "fs": false
+  },
+  "browserify": {
+    "transform": "./dist-tools/transform.js"
   },
   "directories": {
     "lib": "lib"
@@ -92,7 +96,7 @@
     "waf"
   ],
   "scripts": {
-    "test": "npm -s run-script lint && npm -s run-script unit && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
+    "test": "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
     "unit": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'` -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml",
     "browsertest": "rake browser:test",

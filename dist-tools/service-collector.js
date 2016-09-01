@@ -4,6 +4,7 @@ var path = require('path');
 
 var AWS = require('../');
 var apis = require('../lib/api_loader');
+var metadata = require('../apis/metadata');
 
 var defaultServices = 'acm,apigateway,applicationautoscaling,autoscaling,cloudformation,cloudfront,cloudhsm,cloudtrail,cloudwatch,cloudwatchlogs,cloudwatchevents,codecommit,codedeploy,codepipeline,cognitoidentity,cognitoidentityserviceprovider,cognitosync,configservice,devicefarm,directconnect,dynamodb,dynamodbstreams,ec2,ecr,ecs,elasticache,elasticbeanstalk,elastictranscoder,elb,emr,firehose,gamelift,inspector,iotdata,kinesis,kms,lambda,marketplacecommerceanalytics,mobileanalytics,machinelearning,opsworks,rds,redshift,route53,route53domains,s3,ses,sns,sqs,ssm,storagegateway,sts,waf';
 var sanitizeRegex = /[^a-zA-Z0-9,-]/;
@@ -64,11 +65,26 @@ function getService(service, version) {
     return null;
   }
 
+  var serviceFileName = metadata[service].prefix || service;
+  var lines = [];
   var line = util.format(
-    'AWS.apiLoader.services[\'%s\'][\'%s\'] = %s;',
-    service, svc.api.apiVersion, JSON.stringify(api));
+    'AWS.apiLoader.services[\'%s\'][\'%s\'] = %s;\n',
+    service, svc.api.apiVersion, 'require(\'../apis/' + serviceFileName + '-' + svc.api.apiVersion + '.min\')');
+  lines.push(line);
+  if (Object.prototype.hasOwnProperty.call(api, 'paginators')) {
+    line = util.format(
+      'AWS.apiLoader.services[\'%s\'][\'%s\'].paginators = %s;\n',
+      service, svc.api.apiVersion, 'require(\'../apis/' + serviceFileName + '-' + svc.api.apiVersion + '.paginators\').pagination');
+    lines.push(line);
+  }
+  if (Object.prototype.hasOwnProperty.call(api, 'waiters')) {
+    line = util.format(
+      'AWS.apiLoader.services[\'%s\'][\'%s\'].waiters = %s;\n',
+      service, svc.api.apiVersion, 'require(\'../apis/' + serviceFileName + '-' + svc.api.apiVersion + '.waiters2\').waiters');
+    lines.push(line);
+  }
 
-  return line;
+  return lines.join('');
 }
 
 function ServiceCollector(services) {
@@ -110,7 +126,7 @@ function ServiceCollector(services) {
       }
     }
 
-    return contents.join('\n');
+    return contents.join('');
   }
 
   var serviceCode = '';
