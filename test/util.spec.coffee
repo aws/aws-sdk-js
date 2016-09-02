@@ -833,9 +833,9 @@ if AWS.util.isNode()
         expect(spy.calls.length).to.equal(options.maxRetries + 1)
         done()
 
-    it 'retries errors with status code 4xx with retry-after header', (done) ->
+    it 'retries errors with status code 429', (done) ->
       app = (req, resp) ->
-        resp.writeHead(400, {'retry-after': 1})
+        resp.writeHead(429, {})
         resp.write('FOOBAR')
         resp.end()
       sendRequest (err, data) ->
