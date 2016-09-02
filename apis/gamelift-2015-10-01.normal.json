@@ -9,7 +9,7 @@
     "targetPrefix":"GameLift",
     "protocol":"json"
   },
-  "documentation":"<fullname>Amazon GameLift Service</fullname> <p>Welcome to the <i>Amazon GameLift API Reference</i>. Amazon GameLift is a managed Amazon Web Services (AWS) service for developers who need a scalable, server-based solution for multiplayer games. Amazon GameLift provides setup and deployment of game servers, and handles infrastructure scaling and session management.</p> <p>This reference describes the low-level service API for GameLift. You can call this API directly or use the <a href=\"https://aws.amazon.com/tools/\">AWS SDK</a> for your preferred language. The AWS SDK includes a set of high-level GameLift actions multiplayer game sessions. Alternatively, you can use the <a href=\"https://aws.amazon.com/cli/\">AWS command-line interface</a> (CLI) tool, which includes commands for GameLift. For administrative actions, you can also use the Amazon GameLift console. </p> <p><b>More Resources</b></p> <ul> <li> <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a>: Learn more about GameLift features and how to use them </li> <li> <a href=\"https://gamedev.amazon.com/forums/tutorials\">Lumberyard and GameLift Tutorials</a>: Get started fast with walkthroughs and sample projects</li> <li> <a href=\"https://aws.amazon.com/blogs/gamedev/\">GameDev Blog</a>: Stay up to date with new features and techniques</li> <li> <a href=\"https://gamedev.amazon.com/forums/spaces/123/gamelift-discussion.html\">GameDev Forums</a>: Connect with the GameDev community</li> </ul> <p><b>Manage Games and Players Through GameLift</b></p> <p>Call these actions from your game clients and/or services to create and manage multiplayer game sessions and player sessions.</p> <ul> <li> <b>Game sessions</b> <ul> <li><a>CreateGameSession</a></li> <li><a>DescribeGameSessions</a></li> <li><a>DescribeGameSessionDetails</a></li> <li><a>UpdateGameSession</a></li> <li><a>SearchGameSessions</a></li> </ul> </li> <li> <b>Player sessions</b> <ul> <li><a>CreatePlayerSession</a></li> <li><a>CreatePlayerSessions</a></li> <li><a>DescribePlayerSessions</a></li> </ul> </li> <li> <b>Other actions:</b> <ul> <li><a>GetGameSessionLogUrl</a></li> </ul> </li> </ul> <p><b>Set Up and Manage Game Servers</b></p> <p>Use these administrative actions to configure GameLift to host your game servers. When setting up GameLift, you'll need to (1) configure a build for your game and upload build files, and (2) set up one or more fleets to host game sessions. Once you've created and activated a fleet, you can assign aliases to it, scale capacity, track performance and utilization, etc.</p> <ul> <li> <b>Manage your builds:</b> <ul> <li><a>ListBuilds</a></li> <li><a>CreateBuild</a></li> <li><a>DescribeBuild</a></li> <li><a>UpdateBuild</a></li> <li><a>DeleteBuild</a></li> <li><a>RequestUploadCredentials</a></li> </ul> </li> <li> <b>Manage your fleets:</b> <ul> <li><a>ListFleets</a></li> <li><a>CreateFleet</a></li> <li>Describe fleets: <ul> <li><a>DescribeFleetAttributes</a></li> <li><a>DescribeFleetCapacity</a></li> <li><a>DescribeFleetPortSettings</a></li> <li><a>DescribeFleetUtilization</a></li> <li><a>DescribeEC2InstanceLimits</a></li> <li><a>DescribeFleetEvents</a></li> <li><a>DescribeRuntimeConfiguration</a></li> </ul> </li> <li>Update fleets: <ul> <li><a>UpdateFleetAttributes</a></li> <li><a>UpdateFleetCapacity</a></li> <li><a>UpdateFleetPortSettings</a></li> <li><a>UpdateRuntimeConfiguration</a></li> </ul> </li> <li><a>DeleteFleet</a></li> </ul> </li> <li> <b>Manage fleet aliases:</b> <ul> <li><a>ListAliases</a></li> <li><a>CreateAlias</a></li> <li><a>DescribeAlias</a></li> <li><a>UpdateAlias</a></li> <li><a>DeleteAlias</a></li> <li><a>ResolveAlias</a></li> </ul> </li> <li> <b>Manage autoscaling:</b> <ul> <li><a>PutScalingPolicy</a></li> <li><a>DescribeScalingPolicies</a></li> <li><a>DeleteScalingPolicy</a></li> </ul> </li> </ul> <p>To view changes to the API, see the GameLift <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/doc-history.html\">Document History</a> page.</p>",
+  "documentation":"<fullname>Amazon GameLift Service</fullname> <p>Welcome to the <i>Amazon GameLift API Reference</i>. Amazon GameLift is a managed Amazon Web Services (AWS) service for developers who need a scalable, server-based solution for multiplayer games. Amazon GameLift provides setup and deployment of game servers, and handles infrastructure scaling and session management.</p> <p>This reference describes the low-level service API for GameLift. You can call this API directly or use the <a href=\"https://aws.amazon.com/tools/#sdk\">AWS SDK</a> for your preferred language. The AWS SDK includes a set of high-level GameLift actions multiplayer game sessions. Alternatively, you can use the <a href=\"https://aws.amazon.com/cli/\">AWS command-line interface</a> (CLI) tool, which includes commands for GameLift. For administrative actions, you can also use the Amazon GameLift console. </p> <p><b>More Resources</b></p> <ul> <li> <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a>: Learn more about GameLift features and how to use them </li> <li> <a href=\"https://gamedev.amazon.com/forums/tutorials\">Lumberyard and GameLift Tutorials</a>: Get started fast with walkthroughs and sample projects</li> <li> <a href=\"https://aws.amazon.com/blogs/gamedev/\">GameDev Blog</a>: Stay up to date with new features and techniques</li> <li> <a href=\"https://gamedev.amazon.com/forums/spaces/123/gamelift-discussion.html\">GameDev Forums</a>: Connect with the GameDev community</li> </ul> <p><b>Manage Games and Players Through GameLift</b></p> <p>Call these actions from your game clients and/or services to create and manage multiplayer game sessions and player sessions.</p> <ul> <li> <b>Game sessions</b> <ul> <li><a>CreateGameSession</a></li> <li><a>DescribeGameSessions</a></li> <li><a>DescribeGameSessionDetails</a></li> <li><a>UpdateGameSession</a></li> <li><a>SearchGameSessions</a></li> </ul> </li> <li> <b>Player sessions</b> <ul> <li><a>CreatePlayerSession</a></li> <li><a>CreatePlayerSessions</a></li> <li><a>DescribePlayerSessions</a></li> </ul> </li> <li> <b>Other actions:</b> <ul> <li><a>GetGameSessionLogUrl</a></li> </ul> </li> </ul> <p><b>Set Up and Manage Game Servers</b></p> <p>Use these administrative actions to configure GameLift to host your game servers. When setting up GameLift, you'll need to (1) configure a build for your game and upload build files, and (2) set up one or more fleets to host game sessions. Once you've created and activated a fleet, you can assign aliases to it, scale capacity, track performance and utilization, etc.</p> <ul> <li> <b>Manage your builds:</b> <ul> <li><a>ListBuilds</a></li> <li><a>CreateBuild</a></li> <li><a>DescribeBuild</a></li> <li><a>UpdateBuild</a></li> <li><a>DeleteBuild</a></li> <li><a>RequestUploadCredentials</a></li> </ul> </li> <li> <b>Manage your fleets:</b> <ul> <li><a>ListFleets</a></li> <li><a>CreateFleet</a></li> <li>Describe fleets: <ul> <li><a>DescribeFleetAttributes</a></li> <li><a>DescribeFleetCapacity</a></li> <li><a>DescribeFleetPortSettings</a></li> <li><a>DescribeFleetUtilization</a></li> <li><a>DescribeEC2InstanceLimits</a></li> <li><a>DescribeFleetEvents</a></li> <li><a>DescribeRuntimeConfiguration</a></li> </ul> </li> <li>Update fleets: <ul> <li><a>UpdateFleetAttributes</a></li> <li><a>UpdateFleetCapacity</a></li> <li><a>UpdateFleetPortSettings</a></li> <li><a>UpdateRuntimeConfiguration</a></li> </ul> </li> <li><a>DeleteFleet</a></li> </ul> </li> <li> <b>Manage fleet aliases:</b> <ul> <li><a>ListAliases</a></li> <li><a>CreateAlias</a></li> <li><a>DescribeAlias</a></li> <li><a>UpdateAlias</a></li> <li><a>DeleteAlias</a></li> <li><a>ResolveAlias</a></li> </ul> </li> <li> <b>Manage autoscaling:</b> <ul> <li><a>PutScalingPolicy</a></li> <li><a>DescribeScalingPolicies</a></li> <li><a>DeleteScalingPolicy</a></li> </ul> </li> </ul> <p>To view changes to the API, see the GameLift <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/doc-history.html\">Document History</a> page.</p>",
   "operations":{
     "CreateAlias":{
       "name":"CreateAlias",
@@ -92,7 +92,7 @@
           "documentation":"<p>The service encountered an unrecoverable internal failure while processing the request. Clients can retry such requests, either immediately or after a back-off period.</p>"
         }
       ],
-      "documentation":"<p>Initializes a new build record and generates information required to upload a game build to Amazon GameLift. Once the build record has been created and its status is <code>INITIALIZED</code>, you can upload your game build.</p> <important> <p>Do not use this API action unless you are using your own Amazon Simple Storage Service (Amazon S3) client and need to manually upload your build files. Instead, to create a build, use the CLI command <code>upload-build</code>, which creates a new build record and uploads the build files in one step. (See the <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/\">Amazon GameLift Developer Guide</a> for more details on the CLI and the upload process.) </p> </important> <p>To create a new build, optionally specify a build name and version. This metadata is stored with other properties in the build record and is displayed in the GameLift console (it is not visible to players). If successful, this action returns the newly created build record along with the Amazon S3 storage location and AWS account credentials. Use the location and credentials to upload your game build.</p>"
+      "documentation":"<p>Initializes a new build record and generates information required to upload a game build to Amazon GameLift. Once the build record has been created and its status is <code>INITIALIZED</code>, you can upload your game build.</p> <important> <p>Do not use this API action unless you are using your own Amazon Simple Storage Service (Amazon S3) client and need to manually upload your build files. Instead, to create a build, use the CLI command <code>upload-build</code>, which creates a new build record and uploads the build files in one step. (See the <a href=\"http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html\">Amazon GameLift Developer Guide</a> help on packaging and uploading your build.) </p> </important> <p>To create a new build, identify the operating system of the game server binaries. All game servers in a build must use the same operating system. Optionally, specify a build name and version; this metadata is stored with other properties in the build record and is displayed in the GameLift console (it is not visible to players). If successful, this action returns the newly created build record along with the Amazon S3 storage location and AWS account credentials. Use the location and credentials to upload your game build.</p>"
     },
     "CreateFleet":{
       "name":"CreateFleet",
@@ -1691,6 +1691,10 @@
           "shape":"PositiveLong",
           "documentation":"<p>File size of the uploaded game build, expressed in bytes. When the build status is <code>INITIALIZED</code>, this value is 0.</p>"
         },
+        "OperatingSystem":{
+          "shape":"OperatingSystem",
+          "documentation":"<p>Operating system that the game server binaries are built to run on. This value determines the type of fleet resources that you can use for this build.</p>"
+        },
         "CreationTime":{
           "shape":"Timestamp",
           "documentation":"<p>Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: \"1469498468.057\".</p>"
@@ -1774,7 +1778,11 @@
           "shape":"NonZeroAndMaxString",
           "documentation":"<p>Version associated with this build. Version strings do not need to be unique to a build. A build version can be changed later using <code><a>UpdateBuild</a></code>.</p>"
         },
-        "StorageLocation":{"shape":"S3Location"}
+        "StorageLocation":{"shape":"S3Location"},
+        "OperatingSystem":{
+          "shape":"OperatingSystem",
+          "documentation":"<p>Operating system that the game server binaries are built to run on. This value determines the type of fleet resources that you can use for this build.</p>"
+        }
       },
       "documentation":"<p>Represents the input for a request action.</p>"
     },
@@ -2587,11 +2595,11 @@
         },
         "ServerLaunchPath":{
           "shape":"NonZeroAndMaxString",
-          "documentation":"<p>Deprecated. Server launch parameters are now set using a <code><a>RuntimeConfiguration</a></code> object.</p>"
+          "documentation":"<p>Path to a game server executable in the fleet's build, specified for fleets created prior to 2016-08-04 (or AWS SDK v. 0.12.16). Server launch paths for fleets created after this date are specified in the fleet's <code><a>RuntimeConfiguration</a></code>.</p>"
         },
         "ServerLaunchParameters":{
           "shape":"NonZeroAndMaxString",
-          "documentation":"<p>Deprecated. Server launch parameters are now specified using a <code><a>RuntimeConfiguration</a></code> object.</p>"
+          "documentation":"<p>Game server launch parameters specified for fleets created prior to 2016-08-04 (or AWS SDK v. 0.12.16). Server launch parameters for fleets created after this date are specified in the fleet's <code><a>RuntimeConfiguration</a></code>.</p>"
         },
         "LogPaths":{
           "shape":"StringList",
@@ -2600,6 +2608,10 @@
         "NewGameSessionProtectionPolicy":{
           "shape":"ProtectionPolicy",
           "documentation":"<p>Type of game session protection to set for all new instances started in the fleet.</p> <ul><li><b>NoProtection</b> – The game session can be terminated during a scale-down event.</li> <li><b>FullProtection</b> – If the game session is in an <code>ACTIVE</code> status, it cannot be terminated during a scale-down event.</li></ul>"
+        },
+        "OperatingSystem":{
+          "shape":"OperatingSystem",
+          "documentation":"<p>Operating system of the fleet's computing resources. A fleet's operating system depends on the OS specified for the build that is deployed on this fleet.</p>"
         }
       },
       "documentation":"<p>General properties describing a fleet.</p>"
@@ -3047,6 +3059,13 @@
       "exception":true,
       "documentation":"<p>A service resource associated with the request could not be found. Clients should not retry such requests</p>"
     },
+    "OperatingSystem":{
+      "type":"string",
+      "enum":[
+        "WINDOWS_2012",
+        "AMAZON_LINUX"
+      ]
+    },
     "PlayerIdList":{
       "type":"list",
       "member":{"shape":"NonZeroAndMaxString"},
@@ -3317,7 +3336,7 @@
         },
         "Status":{
           "shape":"ScalingStatusType",
-          "documentation":"<p>Current status of the scaling policy. The scaling policy is only in force when in an <code>ACTIVE</code> status.</p> <ul> <li> <b>ACTIVE</b> – The scaling policy is currently in force.</li> <li> <b>UPDATEREQUESTED</b> – A request to update the scaling policy has been received.</li> <li> <b>UPDATING</b> – A change is being made to the scaling policy.</li> <li> <b>DELETEREQUESTED</b> – A request to delete the scaling policy has been received.</li> <li> <b>DELETING</b> – The scaling policy is being deleted.</li> <li> <b>DELETED</b> – The scaling policy has been deleted.</li> <li> <b>ERROR</b> – An error occurred in creating the policy. It should be removed and recreated.</li> </ul>"
+          "documentation":"<p>Current status of the scaling policy. The scaling policy is only in force when in an <code>ACTIVE</code> status.</p> <ul> <li> <b>ACTIVE</b> – The scaling policy is currently in force.</li> <li> <b>UPDATE_REQUESTED</b> – A request to update the scaling policy has been received.</li> <li> <b>UPDATING</b> – A change is being made to the scaling policy.</li> <li> <b>DELETE_REQUESTED</b> – A request to delete the scaling policy has been received.</li> <li> <b>DELETING</b> – The scaling policy is being deleted.</li> <li> <b>DELETED</b> – The scaling policy has been deleted.</li> <li> <b>ERROR</b> – An error occurred in creating the policy. It should be removed and recreated.</li> </ul>"
         },
         "ScalingAdjustment":{
           "shape":"Integer",

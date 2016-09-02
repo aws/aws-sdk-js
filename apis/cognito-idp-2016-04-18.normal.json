@@ -23,6 +23,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserImportInProgressException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Adds additional user attributes to the user pool schema.</p>"
@@ -45,8 +46,8 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"},
-        {"shape":"PasswordResetRequiredException"}
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Confirms user registration as an admin without using a confirmation code. Works on any user.</p>"
     },
@@ -62,6 +63,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Deletes a user as an administrator. Works on any user.</p>"
@@ -79,6 +81,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Deletes the user attributes in a user pool as an administrator. Works on any user.</p>"
@@ -96,6 +99,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Disables the specified user as an administrator. Works on any user.</p>"
@@ -113,6 +117,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Enables the specified user as an administrator. Works on any user.</p>"
@@ -129,8 +134,9 @@
         {"shape":"InvalidParameterException"},
         {"shape":"InvalidUserPoolConfigurationException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"InternalErrorException"},
-        {"shape":"NotAuthorizedException"}
+        {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Forgets the device, as an administrator.</p>"
     },
@@ -165,6 +171,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Gets the specified user by user name in a user pool as an administrator. Works on any user.</p>"
@@ -189,7 +196,10 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"MFAMethodNotFoundException"},
         {"shape":"InvalidSmsRoleAccessPolicyException"},
-        {"shape":"InvalidSmsRoleTrustRelationshipException"}
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"}
       ],
       "documentation":"<p>Initiates the authentication flow, as an administrator.</p>"
     },
@@ -228,9 +238,10 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
+        {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Resets the specified user's password in a user pool as an administrator. Works on any user.</p>"
+      "documentation":"<p>Resets the specified user's password in a user pool as an administrator. Works on any user.</p> <p>When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password.</p>"
     },
     "AdminRespondToAuthChallenge":{
       "name":"AdminRespondToAuthChallenge",
@@ -255,7 +266,10 @@
         {"shape":"MFAMethodNotFoundException"},
         {"shape":"InvalidSmsRoleAccessPolicyException"},
         {"shape":"InvalidSmsRoleTrustRelationshipException"},
-        {"shape":"AliasExistsException"}
+        {"shape":"AliasExistsException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"}
       ],
       "documentation":"<p>Responds to an authentication challenge, as an administrator.</p>"
     },
@@ -271,6 +285,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Sets all the user settings for a specified user name. Works on any user.</p>"
@@ -288,8 +303,9 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidUserPoolConfigurationException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"InternalErrorException"},
-        {"shape":"NotAuthorizedException"}
+        {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Updates the device status as an administrator.</p>"
     },
@@ -310,6 +326,7 @@
         {"shape":"AliasExistsException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user.</p>"
@@ -327,6 +344,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Signs out users from all devices, as an administrator.</p>"
@@ -346,6 +364,9 @@
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Changes the password for a specified user in a user pool.</p>",
@@ -368,6 +389,9 @@
         {"shape":"UsernameExistsException"},
         {"shape":"InvalidUserPoolConfigurationException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Confirms tracking of the device. This API call is the call that beings device tracking.</p>"
@@ -393,9 +417,9 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"},
         {"shape":"UserNotFoundException"},
-        {"shape":"UserNotConfirmedException"}
+        {"shape":"UserNotConfirmedException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Allows a user to enter a code provided when they reset their password to update their password.</p>",
       "authtype":"none"
@@ -421,11 +445,30 @@
         {"shape":"AliasExistsException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"},
-        {"shape":"UserNotFoundException"}
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Confirms registration of a user and handles the existing alias from a previous user.</p>",
       "authtype":"none"
+    },
+    "CreateUserImportJob":{
+      "name":"CreateUserImportJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateUserImportJobRequest"},
+      "output":{"shape":"CreateUserImportJobResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"PreconditionNotMetException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Creates the user import job.</p>"
     },
     "CreateUserPool":{
       "name":"CreateUserPool",
@@ -477,6 +520,9 @@
         {"shape":"InvalidParameterException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Allows a user to delete one's self.</p>",
@@ -495,6 +541,9 @@
         {"shape":"InvalidParameterException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Deletes the attributes for a user.</p>",
@@ -512,6 +561,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserImportInProgressException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Deletes the specified Amazon Cognito user pool.</p>"
@@ -531,6 +581,23 @@
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Allows the developer to delete the user pool client.</p>"
+    },
+    "DescribeUserImportJob":{
+      "name":"DescribeUserImportJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeUserImportJobRequest"},
+      "output":{"shape":"DescribeUserImportJobResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Describes the user import job.</p>"
     },
     "DescribeUserPool":{
       "name":"DescribeUserPool",
@@ -579,6 +646,9 @@
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"InvalidUserPoolConfigurationException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Forgets the specified device.</p>"
@@ -600,16 +670,33 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"},
         {"shape":"InvalidSmsRoleAccessPolicyException"},
         {"shape":"InvalidSmsRoleTrustRelationshipException"},
         {"shape":"InvalidEmailRoleAccessPolicyException"},
         {"shape":"CodeDeliveryFailureException"},
         {"shape":"UserNotFoundException"},
-        {"shape":"UserNotConfirmedException"}
+        {"shape":"UserNotConfirmedException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Retrieves the password for the specified client ID or username.</p>",
       "authtype":"none"
+    },
+    "GetCSVHeader":{
+      "name":"GetCSVHeader",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetCSVHeaderRequest"},
+      "output":{"shape":"GetCSVHeaderResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Gets the header information for the .csv file to be used as input for the user import job.</p>"
     },
     "GetDevice":{
       "name":"GetDevice",
@@ -625,6 +712,9 @@
         {"shape":"InvalidUserPoolConfigurationException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Gets the device.</p>"
@@ -642,6 +732,9 @@
         {"shape":"InvalidParameterException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Gets the user attributes and metadata for a user.</p>",
@@ -663,12 +756,15 @@
         {"shape":"UnexpectedLambdaException"},
         {"shape":"UserLambdaValidationException"},
         {"shape":"InvalidLambdaResponseException"},
-        {"shape":"InternalErrorException"},
         {"shape":"InvalidSmsRoleAccessPolicyException"},
         {"shape":"InvalidSmsRoleTrustRelationshipException"},
         {"shape":"InvalidEmailRoleAccessPolicyException"},
         {"shape":"CodeDeliveryFailureException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Gets the user attribute verification code for the specified attribute name.</p>",
       "authtype":"none"
@@ -703,14 +799,14 @@
         {"shape":"InvalidParameterException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"InternalErrorException"},
         {"shape":"UnexpectedLambdaException"},
         {"shape":"InvalidUserPoolConfigurationException"},
         {"shape":"UserLambdaValidationException"},
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"PasswordResetRequiredException"},
         {"shape":"UserNotFoundException"},
-        {"shape":"UserNotConfirmedException"}
+        {"shape":"UserNotConfirmedException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Initiates the authentication flow.</p>"
     },
@@ -728,9 +824,29 @@
         {"shape":"NotAuthorizedException"},
         {"shape":"InvalidUserPoolConfigurationException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Lists the devices.</p>"
+    },
+    "ListUserImportJobs":{
+      "name":"ListUserImportJobs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListUserImportJobsRequest"},
+      "output":{"shape":"ListUserImportJobsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Lists the user import jobs.</p>"
     },
     "ListUserPoolClients":{
       "name":"ListUserPoolClients",
@@ -799,12 +915,12 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InternalErrorException"},
         {"shape":"InvalidSmsRoleAccessPolicyException"},
         {"shape":"InvalidSmsRoleTrustRelationshipException"},
         {"shape":"InvalidEmailRoleAccessPolicyException"},
         {"shape":"CodeDeliveryFailureException"},
-        {"shape":"UserNotFoundException"}
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Resends the confirmation (for confirmation of registration) to a specific user in the user pool.</p>",
       "authtype":"none"
@@ -828,14 +944,14 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"InvalidUserPoolConfigurationException"},
-        {"shape":"InternalErrorException"},
         {"shape":"MFAMethodNotFoundException"},
         {"shape":"PasswordResetRequiredException"},
         {"shape":"UserNotFoundException"},
         {"shape":"UserNotConfirmedException"},
         {"shape":"InvalidSmsRoleAccessPolicyException"},
         {"shape":"InvalidSmsRoleTrustRelationshipException"},
-        {"shape":"AliasExistsException"}
+        {"shape":"AliasExistsException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Responds to the authentication challenge.</p>"
     },
@@ -850,7 +966,11 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterException"},
-        {"shape":"NotAuthorizedException"}
+        {"shape":"NotAuthorizedException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Sets the user settings like multi-factor authentication (MFA). If MFA is to be removed for a particular attribute pass the attribute with code delivery as null. If null list is passed, all MFA options are removed.</p>",
       "authtype":"none"
@@ -882,6 +1002,42 @@
       "documentation":"<p>Registers the user in the specified user pool and creates a user name, password, and user attributes.</p>",
       "authtype":"none"
     },
+    "StartUserImportJob":{
+      "name":"StartUserImportJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartUserImportJobRequest"},
+      "output":{"shape":"StartUserImportJobResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"PreconditionNotMetException"},
+        {"shape":"NotAuthorizedException"}
+      ],
+      "documentation":"<p>Starts the user import.</p>"
+    },
+    "StopUserImportJob":{
+      "name":"StopUserImportJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopUserImportJobRequest"},
+      "output":{"shape":"StopUserImportJobResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"PreconditionNotMetException"},
+        {"shape":"NotAuthorizedException"}
+      ],
+      "documentation":"<p>Stops the user import job.</p>"
+    },
     "UpdateDeviceStatus":{
       "name":"UpdateDeviceStatus",
       "http":{
@@ -896,6 +1052,9 @@
         {"shape":"NotAuthorizedException"},
         {"shape":"InvalidUserPoolConfigurationException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Updates the device status.</p>"
@@ -919,11 +1078,14 @@
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"AliasExistsException"},
-        {"shape":"InternalErrorException"},
         {"shape":"InvalidSmsRoleAccessPolicyException"},
         {"shape":"InvalidSmsRoleTrustRelationshipException"},
         {"shape":"InvalidEmailRoleAccessPolicyException"},
-        {"shape":"CodeDeliveryFailureException"}
+        {"shape":"CodeDeliveryFailureException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
+        {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Allows a user to update a specific attribute (one at a time).</p>",
       "authtype":"none"
@@ -942,6 +1104,7 @@
         {"shape":"ConcurrentModificationException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserImportInProgressException"},
         {"shape":"InternalErrorException"},
         {"shape":"InvalidSmsRoleAccessPolicyException"},
         {"shape":"InvalidSmsRoleTrustRelationshipException"},
@@ -982,6 +1145,9 @@
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Verifies the specified user attributes in the user pool.</p>",
@@ -1519,7 +1685,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The global signot response, as an administrator.</p>"
+      "documentation":"<p>The global sign-out response, as an administrator.</p>"
     },
     "AliasAttributeType":{
       "type":"string",
@@ -1598,6 +1764,7 @@
       "enum":[
         "USER_SRP_AUTH",
         "REFRESH_TOKEN_AUTH",
+        "REFRESH_TOKEN",
         "CUSTOM_AUTH",
         "ADMIN_NO_SRP_AUTH"
       ]
@@ -1765,6 +1932,12 @@
       "documentation":"<p>This exception is thrown if the provided code does not match what the server was expecting.</p>",
       "exception":true
     },
+    "CompletionMessageType":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\w]+"
+    },
     "ConcurrentModificationException":{
       "type":"structure",
       "members":{
@@ -1892,6 +2065,39 @@
       "max":2048,
       "min":1,
       "pattern":"[\\S]+"
+    },
+    "CreateUserImportJobRequest":{
+      "type":"structure",
+      "required":[
+        "JobName",
+        "UserPoolId",
+        "CloudWatchLogsRoleArn"
+      ],
+      "members":{
+        "JobName":{
+          "shape":"UserImportJobNameType",
+          "documentation":"<p>The job name for the user import job.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that the users are being imported into.</p>"
+        },
+        "CloudWatchLogsRoleArn":{
+          "shape":"ArnType",
+          "documentation":"<p>The role ARN for the Amazon CloudWatch Logging role for the user import job.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to create the user import job.</p>"
+    },
+    "CreateUserImportJobResponse":{
+      "type":"structure",
+      "members":{
+        "UserImportJob":{
+          "shape":"UserImportJobType",
+          "documentation":"<p>The job object that represents the user import job.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server to the request to create the user import job.</p>"
     },
     "CreateUserPoolClientRequest":{
       "type":"structure",
@@ -2090,6 +2296,34 @@
         "EMAIL"
       ]
     },
+    "DescribeUserImportJobRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "JobId"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that the users are being imported into.</p>"
+        },
+        "JobId":{
+          "shape":"UserImportJobIdType",
+          "documentation":"<p>The job ID for the user import job.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to describe the user import job.</p>"
+    },
+    "DescribeUserImportJobResponse":{
+      "type":"structure",
+      "members":{
+        "UserImportJob":{
+          "shape":"UserImportJobType",
+          "documentation":"<p>The job object that represents the user import job.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server to the request to describe the user import job.</p>"
+    },
     "DescribeUserPoolClientRequest":{
       "type":"structure",
       "required":[
@@ -2165,7 +2399,7 @@
     },
     "DeviceNameType":{
       "type":"string",
-      "max":150,
+      "max":1024,
       "min":1
     },
     "DeviceRememberedStatusType":{
@@ -2262,7 +2496,10 @@
     },
     "ExplicitAuthFlowsType":{
       "type":"string",
-      "enum":["ADMIN_NO_SRP_AUTH"]
+      "enum":[
+        "ADMIN_NO_SRP_AUTH",
+        "CUSTOM_AUTH_FLOW_ONLY"
+      ]
     },
     "ForceAliasCreation":{"type":"boolean"},
     "ForgetDeviceRequest":{
@@ -2310,6 +2547,31 @@
       "documentation":"<p>Respresents the response from the server regarding the request to reset a password.</p>"
     },
     "GenerateSecret":{"type":"boolean"},
+    "GetCSVHeaderRequest":{
+      "type":"structure",
+      "required":["UserPoolId"],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that the users are to be imported into.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to get the header information for the .csv file for the user import job.</p>"
+    },
+    "GetCSVHeaderResponse":{
+      "type":"structure",
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that the users are to be imported into.</p>"
+        },
+        "CSVHeader":{
+          "shape":"ListOfStringTypes",
+          "documentation":"<p>The header information for the .csv file for the user import job.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server to the request to get the header information for the .csv file for the user import job.</p>"
+    },
     "GetDeviceRequest":{
       "type":"structure",
       "required":["DeviceKey"],
@@ -2626,6 +2888,46 @@
       },
       "documentation":"<p>Represents the response to list devices.</p>"
     },
+    "ListOfStringTypes":{
+      "type":"list",
+      "member":{"shape":"StringType"}
+    },
+    "ListUserImportJobsRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "MaxResults"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that the users are being imported into.</p>"
+        },
+        "MaxResults":{
+          "shape":"PoolQueryLimitType",
+          "documentation":"<p>The maximum number of import jobs you want the request to return.</p>"
+        },
+        "PaginationToken":{
+          "shape":"PaginationKeyType",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of import jobs in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to list the user import jobs.</p>"
+    },
+    "ListUserImportJobsResponse":{
+      "type":"structure",
+      "members":{
+        "UserImportJobs":{
+          "shape":"UserImportJobsListType",
+          "documentation":"<p>The user import jobs.</p>"
+        },
+        "PaginationToken":{
+          "shape":"PaginationKeyType",
+          "documentation":"<p>An identifier that can be used to return the next set of user import jobs in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server to the request to list the user import jobs.</p>"
+    },
     "ListUserPoolClientsRequest":{
       "type":"structure",
       "required":["UserPoolId"],
@@ -2729,6 +3031,7 @@
       },
       "documentation":"<p>The response from the request to list users.</p>"
     },
+    "LongType":{"type":"long"},
     "MFAMethodNotFoundException":{
       "type":"structure",
       "members":{
@@ -2861,6 +3164,22 @@
       "type":"integer",
       "max":60,
       "min":1
+    },
+    "PreSignedUrlType":{
+      "type":"string",
+      "max":2048,
+      "min":0
+    },
+    "PreconditionNotMetException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when a precondition is not met.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when a precondition is not met.</p>",
+      "exception":true
     },
     "QueryLimit":{
       "type":"integer",
@@ -3113,12 +3432,68 @@
       "min":6,
       "pattern":".*\\{####\\}.*"
     },
+    "StartUserImportJobRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "JobId"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that the users are being imported into.</p>"
+        },
+        "JobId":{
+          "shape":"UserImportJobIdType",
+          "documentation":"<p>The job ID for the user import job.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to start the user import job.</p>"
+    },
+    "StartUserImportJobResponse":{
+      "type":"structure",
+      "members":{
+        "UserImportJob":{
+          "shape":"UserImportJobType",
+          "documentation":"<p>The job object that represents the user import job.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server to the request to start the user import job.</p>"
+    },
     "StatusType":{
       "type":"string",
       "enum":[
         "Enabled",
         "Disabled"
       ]
+    },
+    "StopUserImportJobRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "JobId"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that the users are being imported into.</p>"
+        },
+        "JobId":{
+          "shape":"UserImportJobIdType",
+          "documentation":"<p>The job ID for the user import job.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to stop the user import job.</p>"
+    },
+    "StopUserImportJobResponse":{
+      "type":"structure",
+      "members":{
+        "UserImportJob":{
+          "shape":"UserImportJobType",
+          "documentation":"<p>The job object that represents the user import job.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server to the request to stop the user import job.</p>"
     },
     "StringAttributeConstraintsType":{
       "type":"structure",
@@ -3339,6 +3714,106 @@
       "type":"string",
       "max":256
     },
+    "UserImportInProgressException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when the user pool has an import job running.</p>"
+        }
+      },
+      "documentation":"<p>This exception is thrown when you are trying to modify a user pool while a user import job is in progress for that pool.</p>",
+      "exception":true
+    },
+    "UserImportJobIdType":{
+      "type":"string",
+      "max":55,
+      "min":1,
+      "pattern":"import-[0-9a-zA-Z-]+"
+    },
+    "UserImportJobNameType":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\w\\s+=,.@-]+"
+    },
+    "UserImportJobStatusType":{
+      "type":"string",
+      "enum":[
+        "Created",
+        "Pending",
+        "InProgress",
+        "Stopping",
+        "Expired",
+        "Stopped",
+        "Failed",
+        "Succeeded"
+      ]
+    },
+    "UserImportJobType":{
+      "type":"structure",
+      "members":{
+        "JobName":{
+          "shape":"UserImportJobNameType",
+          "documentation":"<p>The job name for the user import job.</p>"
+        },
+        "JobId":{
+          "shape":"UserImportJobIdType",
+          "documentation":"<p>The job ID for the user import job.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that the users are being imported into.</p>"
+        },
+        "PreSignedUrl":{
+          "shape":"PreSignedUrlType",
+          "documentation":"<p>The pre-signed URL to be used to upload the .csv file.</p>"
+        },
+        "CreationDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date when the user import job was created.</p>"
+        },
+        "StartDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date when the user import job was started.</p>"
+        },
+        "CompletionDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date when the user imoprt job was completed.</p>"
+        },
+        "Status":{
+          "shape":"UserImportJobStatusType",
+          "documentation":"<p>The status of the user import job. One of the following:</p> <ul> <li>Created - The job was created but not started.</li> <li>Pending - A transition state. You have started the job, but it has not begun importing users yet.</li> <li>InProgress - The job has started, and users are being imported.</li> <li>Stopping - You have stopped the job, but the job has not stopped importing users yet.</li> <li>Stopped - You have stopped the job, and the job has stopped importing users.</li> <li>Succeeded - The job has completed successfully.</li> <li>Failed - The job has stopped due to an error.</li> <li>Expired - You created a job, but did not start the job within 24-48 hours. All data associated with the job was deleted, and the job cannot be started.</li> </ul>"
+        },
+        "CloudWatchLogsRoleArn":{
+          "shape":"ArnType",
+          "documentation":"<p>The role ARN for the Amazon CloudWatch Logging role for the user import job. For more information, see \"Creating the CloudWatch Logs IAM Role\" in the Amazon Cognito Developer Guide.</p>"
+        },
+        "ImportedUsers":{
+          "shape":"LongType",
+          "documentation":"<p>The number of users that were successfully imported.</p>"
+        },
+        "SkippedUsers":{
+          "shape":"LongType",
+          "documentation":"<p>The number of users that were skipped.</p>"
+        },
+        "FailedUsers":{
+          "shape":"LongType",
+          "documentation":"<p>The number of users that could not be imported.</p>"
+        },
+        "CompletionMessage":{
+          "shape":"CompletionMessageType",
+          "documentation":"<p>The message returned when the user import job is completed.</p>"
+        }
+      },
+      "documentation":"<p>The user import job type.</p>"
+    },
+    "UserImportJobsListType":{
+      "type":"list",
+      "member":{"shape":"UserImportJobType"},
+      "max":50,
+      "min":1
+    },
     "UserLambdaValidationException":{
       "type":"structure",
       "members":{
@@ -3474,7 +3949,7 @@
       "type":"string",
       "max":55,
       "min":1,
-      "pattern":"[\\w-]+.[0-9a-zA-Z-]+"
+      "pattern":"[\\w-]+_[0-9a-zA-Z]+"
     },
     "UserPoolListType":{
       "type":"list",

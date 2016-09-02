@@ -45,6 +45,7 @@ The 54 services that come with the default hosted package of the SDK are:
 * [AWS.Firehose](/AWSJavaScriptSDK/latest/AWS/Firehose.html)
 * [AWS.GameLift](/AWSJavaScriptSDK/latest/AWS/GameLift.html)
 * [AWS.Inspector](/AWSJavaScriptSDK/latest/AWS/Inspector.html)
+* [AWS.Iot](/AWSJavaScriptSDK/latest/AWS/Iot.html)
 * [AWS.IotData](/AWSJavaScriptSDK/latest/AWS/IotData.html)
 * [AWS.Kinesis](/AWSJavaScriptSDK/latest/AWS/Kinesis.html)
 * [AWS.KMS](/AWSJavaScriptSDK/latest/AWS/KMS.html)

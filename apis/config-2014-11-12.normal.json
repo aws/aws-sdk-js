@@ -346,7 +346,7 @@
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidParameterValueException"}
       ],
-      "documentation":"<p>Evaluates your resources against the specified Config rules. You can specify up to 25 Config rules per request.</p> <p>An existing <a>StartConfigRulesEvaluation</a> call must complete for the rules that you specified before you can call the API again. If you chose to have AWS Config stream to an Amazon SNS topic, you will receive a notification when the evaluation starts.</p>"
+      "documentation":"<p>Evaluates your resources against the specified Config rules. You can specify up to 25 Config rules per request.</p> <p>An existing <a>StartConfigRulesEvaluation</a> call must complete for the specified rules before you can call the API again. If you chose to have AWS Config stream to an Amazon SNS topic, you will receive a <code>ConfigRuleEvaluationStarted</code> notification when the evaluation starts.</p> <note> <p>You don't need to call the <code>StartConfigRulesEvaluation</code> API to run an evaluation for a new rule. When you create a new rule, AWS Config automatically evaluates your resources against the rule. </p> </note> <p>The <code>StartConfigRulesEvaluation</code> API is useful if you want to run on-demand evaluations, such as the following example:</p> <ol> <li><p>You have a custom rule that evaluates your IAM resources every 24 hours.</p></li> <li><p>You update your Lambda function to add additional conditions to your rule.</p></li> <li><p>Instead of waiting for the next periodic evaluation, you call the <code>StartConfigRulesEvaluation</code> API.</p></li> <li><p>AWS Config invokes your Lambda function and evaluates your IAM resources.</p></li> <li><p>Your custom rule will still run periodic evaluations every 24 hours.</p></li> </ol>"
     },
     "StartConfigurationRecorder":{
       "name":"StartConfigurationRecorder",
@@ -582,14 +582,14 @@
         },
         "MaximumExecutionFrequency":{
           "shape":"MaximumExecutionFrequency",
-          "documentation":"<p>If you want to create a rule that evaluates at a frequency that is independent of the configuration snapshot delivery, use the <code>MaximumExecutionFrequency</code> parameter in the <a>SourceDetail</a> object.</p> <note> <p>If you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot, see the following:</p> </note> <p>A rule that runs an evaluation when AWS Config delivers a configuration snapshot cannot run evaluations more frequently than AWS Config delivers the snapshots. Set the value of the <code>MaximumExecutionFrequency</code> to be equal to or greater than the value of the <code>deliveryFrequency</code> key, which is part of <code>ConfigSnapshotDeliveryProperties</code>.</p> <p>For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p>"
+          "documentation":"<p>The maximum frequency with which AWS Config runs evaluations for a rule. You can specify a value for <code>MaximumExecutionFrequency</code> when: </p> <ul> <li> <p>You are using an AWS managed rule that is triggered at a periodic frequency.</p> </li> <li> <p>Your custom rule is triggered when AWS Config delivers the configuration snapshot.</p> </li> </ul> <p>For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p>"
         },
         "ConfigRuleState":{
           "shape":"ConfigRuleState",
           "documentation":"<p>Indicates whether the AWS Config rule is active or is currently being deleted by AWS Config. It can also indicate the evaluation status for the Config rule.</p> <p>AWS Config sets the state of the rule to <code>EVALUATING</code> temporarily after you use the <code>StartConfigRulesEvaluation</code> request to evaluate your resources against the Config rule.</p> <p>AWS Config sets the state of the rule to <code>DELETING_RESULTS</code> temporarily after you use the <code>DeleteEvaluationResults</code> request to delete the current evaluation results for the Config rule.</p> <p>AWS Config sets the state of a rule to <code>DELETING</code> temporarily after you use the <code>DeleteConfigRule</code> request to delete the rule. After AWS Config deletes the rule, the rule and all of its evaluations are erased and are no longer available.</p>"
         }
       },
-      "documentation":"<p>An AWS Lambda function that evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).</p> <note> <p>You can use the AWS CLI and AWS SDKs if you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </note> <p>For more information about developing and using AWS Config rules, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html\">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>"
+      "documentation":"<p>An AWS Config rule represents an AWS Lambda function that you create for a custom rule or a predefined function for an AWS managed rule. The function evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).</p> <note> <p>You can use the AWS CLI and AWS SDKs if you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </note> <p>For more information about developing and using AWS Config rules, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html\">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>"
     },
     "ConfigRuleEvaluationStatus":{
       "type":"structure",
@@ -672,7 +672,7 @@
           "documentation":"<p>The frequency with which AWS Config delivers configuration snapshots.</p>"
         }
       },
-      "documentation":"<p>Shows the options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket in your delivery channel.</p> <note> <p>If you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot, see the following:</p> </note> <p>The frequency for a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot is set by one of two values, depending on which is less frequent:</p> <ul> <li> <p>The value for the <code>deliveryFrequency</code> parameter within the delivery channel configuration, which sets how often AWS Config delivers configuration snapshots. This value also sets how often AWS Config invokes evaluations for Config rules.</p> </li> <li> <p>The value for the <code>MaximumExecutionFrequency</code> parameter, which sets the maximum frequency with which AWS Config invokes evaluations for the rule. For more information, see <a>ConfigRule</a>.</p> </li> </ul> <p>If the <code>deliveryFrequency</code> value is less frequent than the <code>MaximumExecutionFrequency</code> value for a rule, AWS Config invokes the rule only as often as the <code>deliveryFrequency</code> value. </p> <ol> <li> <p>For example, you have a rule and you specify the <code>MaximumExecutionFrequency</code> value to be <code>Six_Hours</code>. </p> </li> <li> <p>You then specify the delivery channel <code>deliveryFrequency</code> value to <code>TwentyFour_Hours</code>. </p> </li> <li> <p>Because the value for <code>deliveryFrequency</code> is less frequent than <code>MaximumExecutionFrequency</code>, AWS Config invokes evaluations for the rule every 24 hours. </p> </li> </ol> <p>You should set the <code>MaximumExecutionFrequency</code> value to be at least as frequent as the <code>deliveryFrequency</code> value. You can view the <code>deliveryFrequency</code> value by using the <code>DescribeDeliveryChannnels</code> action.</p> <p>To update the frequency with which AWS Config delivers your configuration snapshots, use the <code>PutDeliveryChannel</code> action.</p>"
+      "documentation":"<p>Provides options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket in your delivery channel.</p> <note> <p>If you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot, see the following:</p> </note> <p>The frequency for a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot is set by one of two values, depending on which is less frequent:</p> <ul> <li> <p>The value for the <code>deliveryFrequency</code> parameter within the delivery channel configuration, which sets how often AWS Config delivers configuration snapshots. This value also sets how often AWS Config invokes evaluations for Config rules.</p> </li> <li> <p>The value for the <code>MaximumExecutionFrequency</code> parameter, which sets the maximum frequency with which AWS Config invokes evaluations for the rule. For more information, see <a>ConfigRule</a>.</p> </li> </ul> <p>If the <code>deliveryFrequency</code> value is less frequent than the <code>MaximumExecutionFrequency</code> value for a rule, AWS Config invokes the rule only as often as the <code>deliveryFrequency</code> value.</p> <ol> <li> <p>For example, you want your rule to run evaluations when AWS Config delivers the configuration snapshot. </p> </li> <li> <p>You specify the <code>MaximumExecutionFrequency</code> value for <code>Six_Hours</code>. </p> </li> <li> <p>You then specify the delivery channel <code>deliveryFrequency</code> value for <code>TwentyFour_Hours</code>. </p> </li> <li> <p>Because the value for <code>deliveryFrequency</code> is less frequent than <code>MaximumExecutionFrequency</code>, AWS Config invokes evaluations for the rule every 24 hours. </p> </li> </ol> <p>You should set the <code>MaximumExecutionFrequency</code> value to be at least as frequent as the <code>deliveryFrequency</code> value. You can view the <code>deliveryFrequency</code> value by using the <code>DescribeDeliveryChannnels</code> action.</p> <p>To update the <code>deliveryFrequency</code> with which AWS Config delivers your configuration snapshots, use the <code>PutDeliveryChannel</code> action.</p>"
     },
     "ConfigStreamDeliveryInfo":{
       "type":"structure",
@@ -1562,7 +1562,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>This exception is thrown when the previous <a>StartConfigRulesEvaluation</a> call is in progress or a previous evaluation is in progress.</p>",
+      "documentation":"<p>This exception is thrown if an evaluation is in progress or if you call the <a>StartConfigRulesEvaluation</a> API more than once per minute.</p>",
       "exception":true
     },
     "ListDiscoveredResourcesRequest":{
@@ -1902,7 +1902,8 @@
         "AWS::RDS::DBSubnetGroup",
         "AWS::RDS::DBSecurityGroup",
         "AWS::RDS::DBSnapshot",
-        "AWS::RDS::EventSubscription"
+        "AWS::RDS::EventSubscription",
+        "AWS::ElasticLoadBalancingV2::LoadBalancer"
       ]
     },
     "ResourceTypeList":{
@@ -1960,18 +1961,18 @@
       "members":{
         "EventSource":{
           "shape":"EventSource",
-          "documentation":"<p>The source of the event, such as an AWS service, that triggers AWS Config to evaluate your AWS resources.</p>"
+          "documentation":"<p> </p> <p>The source of the event, such as an AWS service, that triggers AWS Config to evaluate your AWS resources.</p>"
         },
         "MessageType":{
           "shape":"MessageType",
-          "documentation":"<p>The type of SNS message that triggers AWS Config to run an evaluation.</p> <p>For evaluations that are initiated when AWS Config delivers a configuration item change notification, you must use <code>ConfigurationItemChangeNotification</code>. </p> <p>For evaluations that are initiated at a frequency that you choose (for example, every 24 hours), you must use <code>ScheduledNotification</code>.</p> <p>For evaluations that are initiated when AWS Config delivers a configuration snapshot, you must use <code>ConfigurationSnapshotDeliveryCompleted</code>.</p>"
+          "documentation":"<p>The type of notification that triggers AWS Config to run an evaluation. You can specify the following notification types:</p> <p><code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers a configuration item change notification.</p> <p><code>ScheduledNotification</code> - Triggers a periodic evaluation at the frequency specified for <code>MaximumExecutionFrequency</code>.</p> <p><code>ConfigurationSnapshotDeliveryCompleted</code> - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.</p>"
         },
         "MaximumExecutionFrequency":{
           "shape":"MaximumExecutionFrequency",
-          "documentation":"<p>If the trigger type for your rule includes periodic, AWS Config runs evaluations for the rule at a frequency that you choose. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p>"
+          "documentation":"<p>The frequency that you want AWS Config to run evaluations for a rule that is triggered periodically. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p>"
         }
       },
-      "documentation":"<p>Provides the source and the message type that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic.</p>"
+      "documentation":"<p>Provides the source and the message types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic. You can specify the parameter values for <code>SourceDetail</code> only for custom rules. </p>"
     },
     "SourceDetails":{
       "type":"list",

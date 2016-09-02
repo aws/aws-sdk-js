@@ -1594,7 +1594,7 @@
       "members":{
         "ResourceName":{
           "shape":"String",
-          "documentation":"<p>The Amazon RDS resource the tags will be added to. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
+          "documentation":"<p>The Amazon RDS resource the tags will be added to. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
         },
         "Tags":{
           "shape":"TagList",
@@ -1620,7 +1620,7 @@
       "members":{
         "ResourceIdentifier":{
           "shape":"String",
-          "documentation":"<p>The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to. For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
+          "documentation":"<p>The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to. For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
         },
         "ApplyAction":{
           "shape":"String",
@@ -1765,7 +1765,10 @@
           "shape":"TStamp",
           "documentation":"<p>The final date that the certificate continues to be valid.</p>"
         },
-        "CertificateArn":{"shape":"String"}
+        "CertificateArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the certificate.</p>"
+        }
       },
       "documentation":"<p>A CA certificate for an AWS account.</p>",
       "wrapper":true
@@ -1827,7 +1830,7 @@
       "members":{
         "SourceDBClusterParameterGroupIdentifier":{
           "shape":"String",
-          "documentation":"<p>The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group. For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing an RDS Amazon Resource Name (ARN)</a>. </p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid DB cluster parameter group.</p> </li> <li> <p>If the source DB cluster parameter group is in the same region as the copy, specify a valid DB parameter group identifier, for example <code>my-db-cluster-param-group</code>, or a valid ARN.</p> </li> <li> <p>If the source DB parameter group is in a different region than the copy, specify a valid DB cluster parameter group ARN, for example <code>arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1</code>.</p> </li> </ul>"
+          "documentation":"<p>The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group. For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>. </p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid DB cluster parameter group.</p> </li> <li> <p>If the source DB cluster parameter group is in the same region as the copy, specify a valid DB parameter group identifier, for example <code>my-db-cluster-param-group</code>, or a valid ARN.</p> </li> <li> <p>If the source DB parameter group is in a different region than the copy, specify a valid DB cluster parameter group ARN, for example <code>arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1</code>.</p> </li> </ul>"
         },
         "TargetDBClusterParameterGroupIdentifier":{
           "shape":"String",
@@ -1881,7 +1884,7 @@
       "members":{
         "SourceDBParameterGroupIdentifier":{
           "shape":"String",
-          "documentation":"<p> The identifier or ARN for the source DB parameter group. For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing an RDS Amazon Resource Name (ARN)</a>. </p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid DB parameter group.</p> </li> <li> <p>If the source DB parameter group is in the same region as the copy, specify a valid DB parameter group identifier, for example <code>my-db-param-group</code>, or a valid ARN.</p> </li> <li> <p>If the source DB parameter group is in a different region than the copy, specify a valid DB parameter group ARN, for example <code>arn:aws:rds:us-west-2:123456789012:pg:special-parameters</code>.</p> </li> </ul>"
+          "documentation":"<p> The identifier or ARN for the source DB parameter group. For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>. </p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid DB parameter group.</p> </li> <li> <p> Must specify a valid DB parameter group identifier, for example <code>my-db-param-group</code>, or a valid ARN.</p> </li> </ul>"
         },
         "TargetDBParameterGroupIdentifier":{
           "shape":"String",
@@ -1944,7 +1947,7 @@
       "members":{
         "SourceOptionGroupIdentifier":{
           "shape":"String",
-          "documentation":"<p>The identifier or ARN for the source option group. For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing an RDS Amazon Resource Name (ARN)</a>. </p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid option group.</p> </li> <li> <p>If the source option group is in the same region as the copy, specify a valid option group identifier, for example <code>my-option-group</code>, or a valid ARN.</p> </li> <li> <p>If the source option group is in a different region than the copy, specify a valid option group ARN, for example <code>arn:aws:rds:us-west-2:123456789012:og:special-options</code>.</p> </li> </ul>"
+          "documentation":"<p>The identifier or ARN for the source option group. For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>. </p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid option group.</p> </li> <li> <p>If the source option group is in the same region as the copy, specify a valid option group identifier, for example <code>my-option-group</code>, or a valid ARN.</p> </li> <li> <p>If the source option group is in a different region than the copy, specify a valid option group ARN, for example <code>arn:aws:rds:us-west-2:123456789012:og:special-options</code>.</p> </li> </ul>"
         },
         "TargetOptionGroupIdentifier":{
           "shape":"String",
@@ -2193,7 +2196,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p>The version number of the database engine to use.</p> <p>The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS region.</p> <p> <b>Amazon Aurora</b> </p> <ul> <li> <p> <b>Version 5.6 (only available in AWS regions ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-2, eu-west-1, us-east-1, us-west-2):</b> <code> 5.6.10a</code> </p> </li> </ul> <p> <b>MariaDB</b> </p> <ul> <li> <p> <b>Version 10.1 (available in all AWS regions except us-gov-west-1):</b> <code> 10.1.14</code> </p> </li> <li> <p> <b>Version 10.0 (available in all AWS regions):</b> <code> 10.0.17 | 10.0.24</code> </p> </li> </ul> <p> <b>Microsoft SQL Server Enterprise Edition (sqlserver-ee)</b> </p> <ul> <li> <p> <b>Version 11.00 (available in all AWS regions):</b> <code> 11.00.2100.60.v1 | 11.00.5058.0.v1 | 11.00.6020.0.v1</code> </p> </li> <li> <p> <b>Version 10.50 (available in all AWS regions):</b> <code> 10.50.2789.0.v1 | 10.50.6000.34.v1 | 10.50.6529.0.v1</code> </p> </li> </ul> <p> <b>Microsoft SQL Server Express Edition (sqlserver-ex)</b> </p> <ul> <li> <p> <b>Version 12.00 (available in all AWS regions):</b> <code> 12.00.4422.0.v1</code> </p> </li> <li> <p> <b>Version 11.00 (available in all AWS regions):</b> <code> 11.00.2100.60.v1 | 11.00.5058.0.v1 | 11.00.6020.0.v1</code> </p> </li> <li> <p> <b>Version 10.50 (available in all AWS regions):</b> <code> 10.50.2789.0.v1 | 10.50.6000.34.v1 | 10.50.6529.0.v1</code> </p> </li> </ul> <p> <b>Microsoft SQL Server Standard Edition (sqlserver-se)</b> </p> <ul> <li> <p> <b>Version 12.00 (available in all AWS regions):</b> <code> 12.00.4422.0.v1</code> </p> </li> <li> <p> <b>Version 11.00 (available in all AWS regions):</b> <code> 11.00.2100.60.v1 | 11.00.5058.0.v1 | 11.00.6020.0.v1</code> </p> </li> <li> <p> <b>Version 10.50 (available in all AWS regions):</b> <code> 10.50.2789.0.v1 | 10.50.6000.34.v1 | 10.50.6529.0.v1</code> </p> </li> </ul> <p> <b>Microsoft SQL Server Web Edition (sqlserver-web)</b> </p> <ul> <li> <p> <b>Version 12.00 (available in all AWS regions):</b> <code> 12.00.4422.0.v1</code> </p> </li> <li> <p> <b>Version 11.00 (available in all AWS regions):</b> <code> 11.00.2100.60.v1 | 11.00.5058.0.v1 | 11.00.6020.0.v1</code> </p> </li> <li> <p> <b>Version 10.50 (available in all AWS regions):</b> <code> 10.50.2789.0.v1 | 10.50.6000.34.v1 | 10.50.6529.0.v1</code> </p> </li> </ul> <p> <b>MySQL</b> </p> <ul> <li> <p> <b>Version 5.7 (available in all AWS regions):</b> <code> 5.7.10 | 5.7.11</code> </p> </li> <li> <p> <b>Version 5.6 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b | 5.6.22</code> </p> </li> <li> <p> <b>Version 5.6 (available in all AWS regions except ap-south-1):</b> <code> 5.6.23</code> </p> </li> <li> <p> <b>Version 5.6 (available in all AWS regions):</b> <code> 5.6.27 | 5.6.29</code> </p> </li> <li> <p> <b>Version 5.5 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):</b> <code> 5.5.40 | 5.5.40a</code> </p> </li> <li> <p> <b>Version 5.5 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 5.5.40b | 5.5.41</code> </p> </li> <li> <p> <b>Version 5.5 (available in all AWS regions except ap-south-1):</b> <code> 5.5.42</code> </p> </li> <li> <p> <b>Version 5.5 (available in all AWS regions):</b> <code> 5.5.46</code> </p> </li> <li> <p> <b>Version 5.1 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):</b> <code> 5.1.73a | 5.1.73b</code> </p> </li> </ul> <p> <b>Oracle Database Enterprise Edition (oracle-ee)</b> </p> <ul> <li> <p> <b>Version 12.1 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code> </p> </li> <li> <p> <b>Version 12.1 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 12.1.0.1.v3 | 12.1.0.1.v4 | 12.1.0.1.v5</code> </p> </li> <li> <p> <b>Version 12.1 (available in all AWS regions):</b> <code> 12.1.0.2.v1</code> </p> </li> <li> <p> <b>Version 12.1 (available in all AWS regions except us-gov-west-1):</b> <code> 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4</code> </p> </li> <li> <p> <b>Version 11.2 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3</code> </p> </li> <li> <p> <b>Version 11.2 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 11.2.0.3.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions):</b> <code> 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions except us-gov-west-1):</b> <code> 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 | 11.2.0.4.v8</code> </p> </li> </ul> <p> <b>Oracle Database Standard Edition (oracle-se)</b> </p> <ul> <li> <p> <b>Version 12.1 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code> </p> </li> <li> <p> <b>Version 12.1 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 12.1.0.1.v3 | 12.1.0.1.v4 | 12.1.0.1.v5</code> </p> </li> <li> <p> <b>Version 11.2 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3</code> </p> </li> <li> <p> <b>Version 11.2 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 11.2.0.3.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions):</b> <code> 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions except us-gov-west-1):</b> <code> 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 | 11.2.0.4.v8</code> </p> </li> </ul> <p> <b>Oracle Database Standard Edition One (oracle-se1)</b> </p> <ul> <li> <p> <b>Version 12.1 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code> </p> </li> <li> <p> <b>Version 12.1 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 12.1.0.1.v3 | 12.1.0.1.v4 | 12.1.0.1.v5</code> </p> </li> <li> <p> <b>Version 11.2 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):</b> <code> 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3</code> </p> </li> <li> <p> <b>Version 11.2 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 11.2.0.3.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions):</b> <code> 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions except us-gov-west-1):</b> <code> 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 | 11.2.0.4.v8</code> </p> </li> </ul> <p> <b>Oracle Database Standard Edition Two (oracle-se2)</b> </p> <ul> <li> <p> <b>Version 12.1 (available in all AWS regions except us-gov-west-1):</b> <code> 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4</code> </p> </li> </ul> <p> <b>PostgreSQL</b> </p> <ul> <li> <p> <b>Version 9.5 (available in all AWS regions except us-gov-west-1):</b> <code> 9.5.2</code> </p> </li> <li> <p> <b>Version 9.4 (available in all AWS regions except ap-south-1):</b> <code> 9.4.1 | 9.4.4</code> </p> </li> <li> <p> <b>Version 9.4 (available in all AWS regions):</b> <code> 9.4.5</code> </p> </li> <li> <p> <b>Version 9.4 (available in all AWS regions except us-gov-west-1):</b> <code> 9.4.7</code> </p> </li> <li> <p> <b>Version 9.3 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):</b> <code> 9.3.1 | 9.3.2</code> </p> </li> <li> <p> <b>Version 9.3 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 9.3.10 | 9.3.3 | 9.3.5 | 9.3.6 | 9.3.9</code> </p> </li> <li> <p> <b>Version 9.3 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 9.3.12</code> </p> </li> </ul>"
+          "documentation":"<p>The version number of the database engine to use.</p> <p>The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS region.</p> <p> <b>Amazon Aurora</b> </p> <ul> <li> <p> <b>Version 5.6 (only available in AWS regions ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-2, eu-west-1, us-east-1, us-west-2):</b> <code> 5.6.10a</code> </p> </li> </ul> <p> <b>MariaDB</b> </p> <ul> <li> <p> <b>Version 10.1 (available in all AWS regions except us-gov-west-1):</b> <code> 10.1.14</code> </p> </li> <li> <p> <b>Version 10.0 (available in all AWS regions):</b> <code> 10.0.17 | 10.0.24</code> </p> </li> </ul> <p> <b>Microsoft SQL Server Enterprise Edition (sqlserver-ee)</b> </p> <ul> <li> <p> <b>Version 11.00 (available in all AWS regions):</b> <code> 11.00.2100.60.v1 | 11.00.5058.0.v1 | 11.00.6020.0.v1</code> </p> </li> <li> <p> <b>Version 10.50 (available in all AWS regions):</b> <code> 10.50.2789.0.v1 | 10.50.6000.34.v1 | 10.50.6529.0.v1</code> </p> </li> </ul> <p> <b>Microsoft SQL Server Express Edition (sqlserver-ex)</b> </p> <ul> <li> <p> <b>Version 12.00 (available in all AWS regions):</b> <code> 12.00.4422.0.v1</code> </p> </li> <li> <p> <b>Version 11.00 (available in all AWS regions):</b> <code> 11.00.2100.60.v1 | 11.00.5058.0.v1 | 11.00.6020.0.v1</code> </p> </li> <li> <p> <b>Version 10.50 (available in all AWS regions):</b> <code> 10.50.2789.0.v1 | 10.50.6000.34.v1 | 10.50.6529.0.v1</code> </p> </li> </ul> <p> <b>Microsoft SQL Server Standard Edition (sqlserver-se)</b> </p> <ul> <li> <p> <b>Version 12.00 (available in all AWS regions):</b> <code> 12.00.4422.0.v1</code> </p> </li> <li> <p> <b>Version 11.00 (available in all AWS regions):</b> <code> 11.00.2100.60.v1 | 11.00.5058.0.v1 | 11.00.6020.0.v1</code> </p> </li> <li> <p> <b>Version 10.50 (available in all AWS regions):</b> <code> 10.50.2789.0.v1 | 10.50.6000.34.v1 | 10.50.6529.0.v1</code> </p> </li> </ul> <p> <b>Microsoft SQL Server Web Edition (sqlserver-web)</b> </p> <ul> <li> <p> <b>Version 12.00 (available in all AWS regions):</b> <code> 12.00.4422.0.v1</code> </p> </li> <li> <p> <b>Version 11.00 (available in all AWS regions):</b> <code> 11.00.2100.60.v1 | 11.00.5058.0.v1 | 11.00.6020.0.v1</code> </p> </li> <li> <p> <b>Version 10.50 (available in all AWS regions):</b> <code> 10.50.2789.0.v1 | 10.50.6000.34.v1 | 10.50.6529.0.v1</code> </p> </li> </ul> <p> <b>MySQL</b> </p> <ul> <li> <p> <b>Version 5.7 (available in all AWS regions):</b> <code> 5.7.10 | 5.7.11</code> </p> </li> <li> <p> <b>Version 5.6 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b | 5.6.22</code> </p> </li> <li> <p> <b>Version 5.6 (available in all AWS regions except ap-south-1):</b> <code> 5.6.23</code> </p> </li> <li> <p> <b>Version 5.6 (available in all AWS regions):</b> <code> 5.6.27 | 5.6.29</code> </p> </li> <li> <p> <b>Version 5.5 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):</b> <code> 5.5.40 | 5.5.40a</code> </p> </li> <li> <p> <b>Version 5.5 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 5.5.40b | 5.5.41</code> </p> </li> <li> <p> <b>Version 5.5 (available in all AWS regions except ap-south-1):</b> <code> 5.5.42</code> </p> </li> <li> <p> <b>Version 5.5 (available in all AWS regions):</b> <code> 5.5.46</code> </p> </li> </ul> <p> <b>Oracle Database Enterprise Edition (oracle-ee)</b> </p> <ul> <li> <p> <b>Version 12.1 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code> </p> </li> <li> <p> <b>Version 12.1 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 12.1.0.1.v3 | 12.1.0.1.v4 | 12.1.0.1.v5</code> </p> </li> <li> <p> <b>Version 12.1 (available in all AWS regions):</b> <code> 12.1.0.2.v1</code> </p> </li> <li> <p> <b>Version 12.1 (available in all AWS regions except us-gov-west-1):</b> <code> 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions):</b> <code> 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions except us-gov-west-1):</b> <code> 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 | 11.2.0.4.v8</code> </p> </li> </ul> <p> <b>Oracle Database Standard Edition (oracle-se)</b> </p> <ul> <li> <p> <b>Version 12.1 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code> </p> </li> <li> <p> <b>Version 12.1 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 12.1.0.1.v3 | 12.1.0.1.v4 | 12.1.0.1.v5</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions):</b> <code> 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions except us-gov-west-1):</b> <code> 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 | 11.2.0.4.v8</code> </p> </li> </ul> <p> <b>Oracle Database Standard Edition One (oracle-se1)</b> </p> <ul> <li> <p> <b>Version 12.1 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 12.1.0.1.v1 | 12.1.0.1.v2</code> </p> </li> <li> <p> <b>Version 12.1 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 12.1.0.1.v3 | 12.1.0.1.v4 | 12.1.0.1.v5</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions):</b> <code> 11.2.0.4.v1 | 11.2.0.4.v3 | 11.2.0.4.v4</code> </p> </li> <li> <p> <b>Version 11.2 (available in all AWS regions except us-gov-west-1):</b> <code> 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 | 11.2.0.4.v8</code> </p> </li> </ul> <p> <b>Oracle Database Standard Edition Two (oracle-se2)</b> </p> <ul> <li> <p> <b>Version 12.1 (available in all AWS regions except us-gov-west-1):</b> <code> 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4</code> </p> </li> </ul> <p> <b>PostgreSQL</b> </p> <ul> <li> <p> <b>Version 9.5 (available in all AWS regions except us-gov-west-1):</b> <code> 9.5.2</code> </p> </li> <li> <p> <b>Version 9.4 (available in all AWS regions except ap-south-1):</b> <code> 9.4.1 | 9.4.4</code> </p> </li> <li> <p> <b>Version 9.4 (available in all AWS regions):</b> <code> 9.4.5</code> </p> </li> <li> <p> <b>Version 9.4 (available in all AWS regions except us-gov-west-1):</b> <code> 9.4.7</code> </p> </li> <li> <p> <b>Version 9.3 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):</b> <code> 9.3.1 | 9.3.2</code> </p> </li> <li> <p> <b>Version 9.3 (available in all AWS regions except ap-south-1, ap-northeast-2):</b> <code> 9.3.10 | 9.3.3 | 9.3.5 | 9.3.6 | 9.3.9</code> </p> </li> <li> <p> <b>Version 9.3 (only available in AWS regions ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):</b> <code> 9.3.12</code> </p> </li> </ul>"
         },
         "AutoMinorVersionUpgrade":{
           "shape":"BooleanOptional",
@@ -2284,7 +2287,7 @@
         },
         "SourceDBInstanceIdentifier":{
           "shape":"String",
-          "documentation":"<p>The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL DB instance.</p> </li> <li> <p>Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6.</p> </li> <li> <p>Can specify a DB instance that is a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5.</p> </li> <li> <p>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</p> </li> <li> <p>If the source DB instance is in the same region as the Read Replica, specify a valid DB instance identifier.</p> </li> <li> <p>If the source DB instance is in a different region than the Read Replica, specify a valid DB instance ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing a Amazon RDS Amazon Resource Name (ARN)</a>.</p> </li> </ul>"
+          "documentation":"<p>The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL DB instance.</p> </li> <li> <p>Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6.</p> </li> <li> <p>Can specify a DB instance that is a PostgreSQL Read Replica only if the source is running PostgreSQL 9.3.5.</p> </li> <li> <p>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</p> </li> <li> <p>If the source DB instance is in the same region as the Read Replica, specify a valid DB instance identifier.</p> </li> <li> <p>If the source DB instance is in a different region than the Read Replica, specify a valid DB instance ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing a Amazon RDS Amazon Resource Name (ARN)</a>.</p> </li> </ul>"
         },
         "DBInstanceClass":{
           "shape":"String",
@@ -2650,7 +2653,10 @@
           "shape":"String",
           "documentation":"<p>The region-unique, immutable identifier for the DB cluster. This identifier is found in AWS CloudTrail log entries whenever the KMS key for the DB cluster is accessed.</p>"
         },
-        "DBClusterArn":{"shape":"String"}
+        "DBClusterArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the DB cluster.</p>"
+        }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions:</p> <ul> <li> <p> <a>CreateDBCluster</a> </p> </li> <li> <p> <a>DeleteDBCluster</a> </p> </li> <li> <p> <a>FailoverDBCluster</a> </p> </li> <li> <p> <a>ModifyDBCluster</a> </p> </li> <li> <p> <a>RestoreDBClusterFromSnapshot</a> </p> </li> <li> <p> <a>RestoreDBClusterToPointInTime</a> </p> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action.</p>",
       "wrapper":true
@@ -2766,7 +2772,10 @@
           "shape":"String",
           "documentation":"<p>Provides the customer-specified description for this DB cluster parameter group.</p>"
         },
-        "DBClusterParameterGroupArn":{"shape":"String"}
+        "DBClusterParameterGroupArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the DB cluster parameter group.</p>"
+        }
       },
       "documentation":"<p>Contains the result of a successful invocation of the <a>CreateDBClusterParameterGroup</a> or <a>CopyDBClusterParameterGroup</a> action. </p> <p>This data type is used as a request parameter in the <a>DeleteDBClusterParameterGroup</a> action, and as a response element in the <a>DescribeDBClusterParameterGroups</a> action. </p>",
       "wrapper":true
@@ -2911,7 +2920,10 @@
           "shape":"String",
           "documentation":"<p>If <code>StorageEncrypted</code> is true, the KMS key identifier for the encrypted DB cluster snapshot.</p>"
         },
-        "DBClusterSnapshotArn":{"shape":"String"}
+        "DBClusterSnapshotArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the DB cluster snapshot.</p>"
+        }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions:</p> <ul> <li> <p> <a>CreateDBClusterSnapshot</a> </p> </li> <li> <p> <a>DeleteDBClusterSnapshot</a> </p> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBClusterSnapshots</a> action.</p>",
       "wrapper":true
@@ -3239,7 +3251,10 @@
           "shape":"IntegerOptional",
           "documentation":"<p>A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance\"> Fault Tolerance for an Aurora DB Cluster</a>. </p>"
         },
-        "DBInstanceArn":{"shape":"String"}
+        "DBInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the DB instance.</p>"
+        }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>DeleteDBInstance</a> </p> </li> <li> <p> <a>ModifyDBInstance</a> </p> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
       "wrapper":true
@@ -3345,7 +3360,10 @@
           "shape":"String",
           "documentation":"<p>Provides the customer-specified description for this DB parameter group.</p>"
         },
-        "DBParameterGroupArn":{"shape":"String"}
+        "DBParameterGroupArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the DB parameter group.</p>"
+        }
       },
       "documentation":"<p>Contains the result of a successful invocation of the <a>CreateDBParameterGroup</a> action. </p> <p>This data type is used as a request parameter in the <a>DeleteDBParameterGroup</a> action, and as a response element in the <a>DescribeDBParameterGroups</a> action. </p>",
       "wrapper":true
@@ -3479,7 +3497,10 @@
           "shape":"IPRangeList",
           "documentation":"<p> Contains a list of <a>IPRange</a> elements. </p>"
         },
-        "DBSecurityGroupArn":{"shape":"String"}
+        "DBSecurityGroupArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the DB security group.</p>"
+        }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions:</p> <ul> <li> <p> <a>DescribeDBSecurityGroups</a> </p> </li> <li> <p> <a>AuthorizeDBSecurityGroupIngress</a> </p> </li> <li> <p> <a>CreateDBSecurityGroup</a> </p> </li> <li> <p> <a>RevokeDBSecurityGroupIngress</a> </p> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSecurityGroups</a> action.</p>",
       "wrapper":true
@@ -3676,7 +3697,10 @@
           "shape":"String",
           "documentation":"<p> If <code>Encrypted</code> is true, the KMS key identifier for the encrypted DB snapshot. </p>"
         },
-        "DBSnapshotArn":{"shape":"String"}
+        "DBSnapshotArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the DB snapshot.</p>"
+        }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions:</p> <ul> <li> <p> <a>CreateDBSnapshot</a> </p> </li> <li> <p> <a>DeleteDBSnapshot</a> </p> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action.</p>",
       "wrapper":true
@@ -3786,7 +3810,10 @@
           "shape":"SubnetList",
           "documentation":"<p> Contains a list of <a>Subnet</a> elements. </p>"
         },
-        "DBSubnetGroupArn":{"shape":"String"}
+        "DBSubnetGroupArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the DB subnet group.</p>"
+        }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions:</p> <ul> <li> <p> <a>CreateDBSubnetGroup</a> </p> </li> <li> <p> <a>ModifyDBSubnetGroup</a> </p> </li> <li> <p> <a>DescribeDBSubnetGroups</a> </p> </li> <li> <p> <a>DeleteDBSubnetGroup</a> </p> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action.</p>",
       "wrapper":true
@@ -5004,7 +5031,10 @@
           "shape":"TStamp",
           "documentation":"<p>Specifies the date and time of the event.</p>"
         },
-        "SourceArn":{"shape":"String"}
+        "SourceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the event.</p>"
+        }
       },
       "documentation":"<p> This data type is used as a response element in the <a>DescribeEvents</a> action. </p>"
     },
@@ -5093,7 +5123,10 @@
           "shape":"Boolean",
           "documentation":"<p>A Boolean value indicating if the subscription is enabled. True indicates the subscription is enabled.</p>"
         },
-        "EventSubscriptionArn":{"shape":"String"}
+        "EventSubscriptionArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the event subscription.</p>"
+        }
       },
       "documentation":"<p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>",
       "wrapper":true
@@ -5470,7 +5503,7 @@
       "members":{
         "ResourceName":{
           "shape":"String",
-          "documentation":"<p>The Amazon RDS resource with tags to be listed. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
+          "documentation":"<p>The Amazon RDS resource with tags to be listed. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
         },
         "Filters":{
           "shape":"FilterList",
@@ -5979,7 +6012,10 @@
           "shape":"String",
           "documentation":"<p>If <b>AllowsVpcAndNonVpcInstanceMemberships</b> is <code>false</code>, this field is blank. If <b>AllowsVpcAndNonVpcInstanceMemberships</b> is <code>true</code> and this field is blank, then this option group can be applied to both VPC and non-VPC instances. If this field contains a value, then this option group can only be applied to instances that are in the VPC indicated by this field. </p>"
         },
-        "OptionGroupArn":{"shape":"String"}
+        "OptionGroupArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the option group.</p>"
+        }
       },
       "documentation":"<p/>",
       "wrapper":true
@@ -6064,6 +6100,10 @@
           "shape":"OptionsDependedOn",
           "documentation":"<p>The options that are prerequisites for this option.</p>"
         },
+        "OptionsConflictsWith":{
+          "shape":"OptionsConflictsWith",
+          "documentation":"<p>The options that conflict with this option.</p>"
+        },
         "Persistent":{
           "shape":"Boolean",
           "documentation":"<p>Persistent options can't be removed from an option group while DB instances are associated with the option group. If you disassociate all DB instances from the option group, your can remove the persistent option from the option group.</p>"
@@ -6074,7 +6114,7 @@
         },
         "OptionGroupOptionSettings":{
           "shape":"OptionGroupOptionSettingsList",
-          "documentation":"<p>Specifies the option settings that are available (and the default value) for each option in an option group.</p>"
+          "documentation":"<p>The option settings that are available (and the default value) for each option in an option group.</p>"
         },
         "OptionGroupOptionVersions":{
           "shape":"OptionGroupOptionVersionsList",
@@ -6252,6 +6292,13 @@
         }
       },
       "documentation":"<p>The version for an option. Option group option versions are returned by the <a>DescribeOptionGroupOptions</a> action.</p>"
+    },
+    "OptionsConflictsWith":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"OptionConflictName"
+      }
     },
     "OptionsDependedOn":{
       "type":"list",
@@ -6694,7 +6741,7 @@
       "members":{
         "ResourceName":{
           "shape":"String",
-          "documentation":"<p>The Amazon RDS resource the tags will be removed from. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
+          "documentation":"<p>The Amazon RDS resource the tags will be removed from. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
         },
         "TagKeys":{
           "shape":"KeyList",
@@ -6762,7 +6809,10 @@
           "shape":"RecurringChargeList",
           "documentation":"<p>The recurring price charged to run this reserved DB instance.</p>"
         },
-        "ReservedDBInstanceArn":{"shape":"String"}
+        "ReservedDBInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the reserved DB instance.</p>"
+        }
       },
       "documentation":"<p> This data type is used as a response element in the <a>DescribeReservedDBInstances</a> and <a>PurchaseReservedDBInstancesOffering</a> actions. </p>",
       "wrapper":true

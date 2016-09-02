@@ -25,7 +25,7 @@
         {"shape":"ConcurrentUpdateException"},
         {"shape":"InternalServiceException"}
       ],
-      "documentation":"<p>Deletes an Application Auto Scaling scaling policy that was previously created. If you are no longer using a scaling policy, you can delete it with this operation.</p> <p>Deleting a policy deletes the underlying alarm action, but does not delete the CloudWatch alarm, even if it no longer has an associated action.</p> <p>To create a new scaling policy or update an existing one, see <a>PutScalingPolicy</a>.</p>"
+      "documentation":"<p>Deletes an Application Auto Scaling scaling policy that was previously created. If you are no longer using a scaling policy, you can delete it with this operation.</p> <p>Deleting a policy deletes the underlying alarm action, but does not delete the CloudWatch alarm associated with the scaling policy, even if it no longer has an associated action.</p> <p>To create a new scaling policy or update an existing one, see <a>PutScalingPolicy</a>.</p>"
     },
     "DeregisterScalableTarget":{
       "name":"DeregisterScalableTarget",
@@ -123,7 +123,7 @@
         {"shape":"ConcurrentUpdateException"},
         {"shape":"InternalServiceException"}
       ],
-      "documentation":"<p>Registers or updates a scalable target. A scalable target is a resource that can be scaled up or down with Application Auto Scaling. After you have registered a scalable target, you can use this command to update the minimum and maximum values for your scalable dimension.</p> <note> <p>At this time, Application Auto Scaling only supports scaling Amazon ECS services.</p> </note> <p>After you register a scalable target with Application Auto Scaling, you can create and apply scaling policies to it with <a>PutScalingPolicy</a>. You can view the existing scaling policies for a service namespace with <a>DescribeScalableTargets</a>. If you are no longer using a scalable target, you can deregister it with <a>DeregisterScalableTarget</a>.</p>"
+      "documentation":"<p>Registers or updates a scalable target. A scalable target is a resource that can be scaled out or in with Application Auto Scaling. After you have registered a scalable target, you can use this operation to update the minimum and maximum values for your scalable dimension.</p> <p>After you register a scalable target with Application Auto Scaling, you can create and apply scaling policies to it with <a>PutScalingPolicy</a>. You can view the existing scaling policies for a service namespace with <a>DescribeScalableTargets</a>. If you are no longer using a scalable target, you can deregister it with <a>DeregisterScalableTarget</a>.</p>"
     }
   },
   "shapes":{
@@ -185,11 +185,11 @@
         },
         "ResourceId":{
           "shape":"ResourceIdMaxLen1600",
-          "documentation":"<p>The unique identifier string for the resource associated with the scaling policy. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>.</p>"
+          "documentation":"<p>The resource type and unique identifier string for the resource associated with the scaling policy. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension associated with the scaling policy. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service.</p>"
+          "documentation":"<p>The scalable dimension associated with the scaling policy. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request.</p>"
         }
       }
     },
@@ -212,11 +212,11 @@
         },
         "ResourceId":{
           "shape":"ResourceIdMaxLen1600",
-          "documentation":"<p>The unique identifier string for the resource associated with the scalable target. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>.</p>"
+          "documentation":"<p>The resource type and unique identifier string for the resource associated with the scalable target. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension associated with the scalable target. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service.</p>"
+          "documentation":"<p>The scalable dimension associated with the scalable target. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request.</p>"
         }
       }
     },
@@ -235,11 +235,11 @@
         },
         "ResourceIds":{
           "shape":"ResourceIdsMaxLen1600",
-          "documentation":"<p>The unique identifier string for the resource associated with the scalable target. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>. If you specify a scalable dimension, you must also specify a resource ID.</p>"
+          "documentation":"<p>The resource type and unique identifier string for the resource associated with the scalable target. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>. If you specify a scalable dimension, you must also specify a resource ID.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension associated with the scalable target. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service. If you specify a scalable dimension, you must also specify a resource ID.</p>"
+          "documentation":"<p>The scalable dimension associated with the scalable target. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request. If you specify a scalable dimension, you must also specify a resource ID.</p>"
         },
         "MaxResults":{
           "shape":"MaxResults",
@@ -274,11 +274,11 @@
         },
         "ResourceId":{
           "shape":"ResourceIdMaxLen1600",
-          "documentation":"<p>The unique identifier string for the resource associated with the scaling activity. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>. If you specify a scalable dimension, you must also specify a resource ID.</p>"
+          "documentation":"<p>The resource type and unique identifier string for the resource associated with the scaling activity. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>. If you specify a scalable dimension, you must also specify a resource ID.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension associated with the scaling activity. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service. If you specify a scalable dimension, you must also specify a resource ID.</p>"
+          "documentation":"<p>The scalable dimension associated with the scaling activity. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request. If you specify a scalable dimension, you must also specify a resource ID.</p>"
         },
         "MaxResults":{
           "shape":"MaxResults",
@@ -317,11 +317,11 @@
         },
         "ResourceId":{
           "shape":"ResourceIdMaxLen1600",
-          "documentation":"<p>The unique resource identifier string of the scalable target that the scaling policy is associated with. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>. If you specify a scalable dimension, you must also specify a resource ID.</p>"
+          "documentation":"<p>The unique resource identifier string of the scalable target that the scaling policy is associated with. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>. If you specify a scalable dimension, you must also specify a resource ID.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension of the scalable target that the scaling policy is associated with. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service. If you specify a scalable dimension, you must also specify a resource ID.</p>"
+          "documentation":"<p>The scalable dimension of the scalable target that the scaling policy is associated with. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request. If you specify a scalable dimension, you must also specify a resource ID.</p>"
         },
         "MaxResults":{
           "shape":"MaxResults",
@@ -427,11 +427,11 @@
         },
         "ResourceId":{
           "shape":"ResourceIdMaxLen1600",
-          "documentation":"<p>The unique resource identifier string for the scalable target that this scaling policy applies to. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>.</p>"
+          "documentation":"<p>The unique resource identifier string for the scalable target that this scaling policy applies to. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension of the scalable target that this scaling policy applies to. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service.</p>"
+          "documentation":"<p>The scalable dimension of the scalable target that this scaling policy applies to. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request.</p>"
         },
         "PolicyType":{
           "shape":"PolicyType",
@@ -467,11 +467,11 @@
         },
         "ResourceId":{
           "shape":"ResourceIdMaxLen1600",
-          "documentation":"<p>The unique identifier string for the resource to associate with the scalable target. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>.</p>"
+          "documentation":"<p>The resource type and unique identifier string for the resource to associate with the scalable target. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension associated with the scalable target. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service.</p>"
+          "documentation":"<p>The scalable dimension associated with the scalable target. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request.</p>"
         },
         "MinCapacity":{
           "shape":"ResourceCapacity",
@@ -509,7 +509,10 @@
     },
     "ScalableDimension":{
       "type":"string",
-      "enum":["ecs:service:DesiredCount"]
+      "enum":[
+        "ecs:service:DesiredCount",
+        "ec2:spot-fleet-request:TargetCapacity"
+      ]
     },
     "ScalableTarget":{
       "type":"structure",
@@ -529,11 +532,11 @@
         },
         "ResourceId":{
           "shape":"ResourceIdMaxLen1600",
-          "documentation":"<p>The unique identifier string for the resource associated with the scalable target. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>.</p>"
+          "documentation":"<p>The resource type and unique identifier string for the resource associated with the scalable target. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension associated with the scalable target. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service.</p>"
+          "documentation":"<p>The scalable dimension associated with the scalable target. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request.</p>"
         },
         "MinCapacity":{
           "shape":"ResourceCapacity",
@@ -585,11 +588,11 @@
         },
         "ResourceId":{
           "shape":"ResourceIdMaxLen1600",
-          "documentation":"<p>The unique identifier string for the resource associated with the scaling activity. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>.</p>"
+          "documentation":"<p>The resource type and unique identifier string for the resource associated with the scaling activity. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension associated with the scaling activity. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service.</p>"
+          "documentation":"<p>The scalable dimension associated with the scaling activity. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request.</p>"
         },
         "Description":{
           "shape":"XmlString",
@@ -664,11 +667,11 @@
         },
         "ResourceId":{
           "shape":"ResourceIdMaxLen1600",
-          "documentation":"<p>The unique identifier string for the resource associated with the scaling policy. For Amazon ECS services, this value is the resource type, followed by the cluster name and service name, such as <code>service/default/sample-webapp</code>.</p>"
+          "documentation":"<p>The resource type and unique identifier string for the resource associated with the scaling policy. For Amazon ECS services, the resource type is <code>services</code>, and the identifier is the cluster name and service name; for example, <code>service/default/sample-webapp</code>. For Amazon EC2 Spot fleet requests, the resource type is <code>spot-fleet-request</code>, and the identifier is the Spot fleet request ID; for example, <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>"
         },
         "ScalableDimension":{
           "shape":"ScalableDimension",
-          "documentation":"<p>The scalable dimension associated with the scaling policy. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service.</p>"
+          "documentation":"<p>The scalable dimension associated with the scaling policy. The scalable dimension contains the service namespace, resource type, and scaling property, such as <code>ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service, or <code>ec2:spot-fleet-request:TargetCapacity</code> for the target capacity of an Amazon EC2 Spot fleet request.</p>"
         },
         "PolicyType":{
           "shape":"PolicyType",
@@ -691,7 +694,10 @@
     },
     "ServiceNamespace":{
       "type":"string",
-      "enum":["ecs"]
+      "enum":[
+        "ecs",
+        "ec2"
+      ]
     },
     "StepAdjustment":{
       "type":"structure",
@@ -756,5 +762,5 @@
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     }
   },
-  "documentation":"<p>Application Auto Scaling is a general purpose Auto Scaling service for supported elastic AWS resources. With Application Auto Scaling, you can automatically scale your AWS resources, with an experience similar to that of Auto Scaling.</p> <note> <p>At this time, Application Auto Scaling only supports scaling Amazon ECS services.</p> </note> <p>For example, you can use Application Auto Scaling to accomplish the following tasks:</p> <ul> <li> <p>Define scaling policies for automatically adjusting your application’s resources</p> </li> <li> <p>Scale your resources in response to CloudWatch alarms</p> </li> <li> <p>View history of your scaling events </p> </li> </ul> <p>Application Auto Scaling is available in the following regions:</p> <ul> <li> <p> <code>us-east-1</code> </p> </li> <li> <p> <code>us-west-1</code> </p> </li> <li> <p> <code>us-west-2</code> </p> </li> <li> <p> <code>ap-southeast-1</code> </p> </li> <li> <p> <code>ap-southeast-2</code> </p> </li> <li> <p> <code>ap-northeast-1</code> </p> </li> <li> <p> <code>eu-central-1</code> </p> </li> <li> <p> <code>eu-west-1</code> </p> </li> </ul>"
+  "documentation":"<p>Application Auto Scaling is a general purpose Auto Scaling service for supported elastic AWS resources. With Application Auto Scaling, you can automatically scale your AWS resources, with an experience similar to that of Auto Scaling.</p> <p>Application Auto Scaling supports scaling the following AWS resources:</p> <ul> <li> <p>Amazon ECS services</p> </li> <li> <p>Amazon EC2 Spot fleet instances</p> </li> </ul> <p>You can use Application Auto Scaling to accomplish the following tasks:</p> <ul> <li> <p>Define scaling policies for automatically adjusting your AWS resources</p> </li> <li> <p>Scale your resources in response to CloudWatch alarms</p> </li> <li> <p>View history of your scaling events </p> </li> </ul> <p>Application Auto Scaling is available in the following regions:</p> <ul> <li> <p> <code>us-east-1</code> </p> </li> <li> <p> <code>us-west-1</code> </p> </li> <li> <p> <code>us-west-2</code> </p> </li> <li> <p> <code>ap-southeast-1</code> </p> </li> <li> <p> <code>ap-southeast-2</code> </p> </li> <li> <p> <code>ap-northeast-1</code> </p> </li> <li> <p> <code>eu-central-1</code> </p> </li> <li> <p> <code>eu-west-1</code> </p> </li> </ul>"
 }

@@ -35,6 +35,7 @@ gamelift = new AWS.GameLift(AWS.util.merge(config, config.gamelift))
 config.inspector = config.inspector || {}
 config.inspector.region = 'us-west-2'
 inspector = new AWS.Inspector(AWS.util.merge(config, config.inspector))
+iot = new AWS.Iot(AWS.util.merge(config, config.iot))
 kinesis = new AWS.Kinesis(AWS.util.merge(config, config.kinesis))
 kms = new AWS.KMS(AWS.util.merge(config, config.kms))
 lambda = new AWS.Lambda(AWS.util.merge(config, config.lambda))
@@ -558,6 +559,19 @@ integrationTests ->
       inspector.stopAssessmentRun {assessmentRunArn: 'fake-arn'}, (err, data) ->
         noData(data)
         assertError(err, 'InvalidInputException')
+        done()
+
+  describe 'AWS.Iot', ->
+    it 'makes a request', (done) ->
+      iot.listPolicies (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.policies)).to.equal(true)
+        done()
+
+    it 'handles errors', (done) ->
+      iot.describeThing {thingName: 'fake-name'}, (err, data) ->
+        noData(data)
+        assertError(err, 'ResourceNotFoundException')
         done()
 
   describe 'AWS.Kinesis', ->

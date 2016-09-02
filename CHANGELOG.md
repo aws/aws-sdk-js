@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.5.4-->
+<!--LATEST=2.5.5-->
 <!--ENTRYINSERT-->
+
+## 2.5.5
+* feature: CognitoIdentityServiceProvider: Adds support for bulk import of users.
+* feature: GameLift: Adds Linux support.
+* feature: Iot: Adds Iot as a default service in the browser distribution of the AWS SDK for JavaScript.
+* feature: RDS: Adds information in response of describeOptionGroupOptions about options that conflict with each other.
 
 ## 2.5.4
 * feature: CloudFront: CloudFront is adding a Querystring Whitelist Option. Customers will be able to choose to forward certain querystring keys instead of a.) all of them or b.) none of them.
