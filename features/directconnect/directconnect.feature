@@ -14,7 +14,3 @@ Feature: AWS Direct Connect
   Scenario: Error handling
     Given I create a Direct Connect connection with an invalid location
     Then the error code should be "DirectConnectClientException"
-    And the error message should be:
-    """
-    'INVALID_LOCATION' is not a valid Direct Connect location
-    """

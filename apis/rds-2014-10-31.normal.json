@@ -976,6 +976,19 @@
       ],
       "documentation":"<p>Lists available reserved DB instance offerings.</p>"
     },
+    "DescribeSourceRegions":{
+      "name":"DescribeSourceRegions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeSourceRegionsMessage"},
+      "output":{
+        "shape":"SourceRegionMessage",
+        "resultWrapper":"DescribeSourceRegionsResult"
+      },
+      "documentation":"<p>Returns a list that includes the status of each source AWS Region that the current region can get a Read Replica or a DB snapshot from. This API action supports pagination.</p>"
+    },
     "DownloadDBLogFilePortion":{
       "name":"DownloadDBLogFilePortion",
       "http":{
@@ -4855,6 +4868,28 @@
       },
       "documentation":"<p/>"
     },
+    "DescribeSourceRegionsMessage":{
+      "type":"structure",
+      "members":{
+        "RegionName":{
+          "shape":"String",
+          "documentation":"<p>The source region name, for example US West (Oregon).</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid AWS Region name, for example US West (Oregon).</p> </li> </ul>"
+        },
+        "MaxRecords":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p> An optional pagination token provided by a previous <a>DescribeSourceRegions</a> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>This parameter is not currently supported.</p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
     "DomainMembership":{
       "type":"structure",
       "members":{
@@ -7564,6 +7599,45 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "SourceRegion":{
+      "type":"structure",
+      "members":{
+        "RegionName":{
+          "shape":"String",
+          "documentation":"<p>The source region name.</p>"
+        },
+        "Endpoint":{
+          "shape":"String",
+          "documentation":"<p>The source region endpoint.</p>"
+        },
+        "Status":{
+          "shape":"String",
+          "documentation":"<p>The status of the source region.</p>"
+        }
+      },
+      "documentation":"<p>Contains an AWS Region name as the result of a successful call to the <a>DescribeSourceRegions</a> action.</p>"
+    },
+    "SourceRegionList":{
+      "type":"list",
+      "member":{
+        "shape":"SourceRegion",
+        "locationName":"SourceRegion"
+      }
+    },
+    "SourceRegionMessage":{
+      "type":"structure",
+      "members":{
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "SourceRegions":{
+          "shape":"SourceRegionList",
+          "documentation":"<p>A list of SourceRegion instances that contains each source AWS Region that the current region can get a Read Replica or a DB snapshot from.</p>"
+        }
+      },
+      "documentation":"<p>Contains the result of a successful invocation of the <a>DescribeSourceRegions</a> action.</p>"
     },
     "SourceType":{
       "type":"string",

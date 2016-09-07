@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.5.5-->
+<!--LATEST=2.5.6-->
 <!--ENTRYINSERT-->
+
+## 2.5.6
+* feature: RDS: Adds new operation describeSourceRegions to provide list of all the source region names and endpoints for any region. Source regions are the regions where current region can get a replica or copy a snapshot from.
 
 ## 2.5.5
 * feature: CognitoIdentityServiceProvider: Adds support for bulk import of users.

@@ -958,6 +958,10 @@
     "ArtifactRevision":{
       "type":"structure",
       "members":{
+        "name":{
+          "shape":"ArtifactName",
+          "documentation":"<p>The name of an artifact. This name might be system-generated, such as \"MyApp\", or might be defined by the user when an action is created.</p>"
+        },
         "revisionId":{
           "shape":"Revision",
           "documentation":"<p>The revision ID of the artifact.</p>"
@@ -968,7 +972,7 @@
         },
         "revisionSummary":{
           "shape":"RevisionSummary",
-          "documentation":"<p>Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided value of an <code>x-amz-meta-codepipeline-artifact-revision-summary</code> key specified in the object metadata.</p>"
+          "documentation":"<p>Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a <code>codepipeline-artifact-revision-summary</code> key specified in the object metadata.</p>"
         },
         "created":{
           "shape":"Timestamp",
@@ -981,23 +985,9 @@
       },
       "documentation":"<p>Represents revision details of an artifact. </p>"
     },
-    "ArtifactRevisionInformation":{
-      "type":"structure",
-      "members":{
-        "name":{
-          "shape":"ArtifactName",
-          "documentation":"<p>The name of an artifact. This name might be system-generated, such as \"MyApp\", or might be defined by the user when an action is created.</p>"
-        },
-        "revision":{
-          "shape":"ArtifactRevision",
-          "documentation":"<p>Represents details about the ArtifactRevision object.</p>"
-        }
-      },
-      "documentation":"<p>Represents information about an artifact revision.</p>"
-    },
-    "ArtifactRevisionInformationList":{
+    "ArtifactRevisionList":{
       "type":"list",
-      "member":{"shape":"ArtifactRevisionInformation"}
+      "member":{"shape":"ArtifactRevision"}
     },
     "ArtifactStore":{
       "type":"structure",
@@ -1820,9 +1810,9 @@
           "shape":"PipelineExecutionStatus",
           "documentation":"<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline did not complete successfully.</p> </li> </ul>"
         },
-        "artifactRevisionInformations":{
-          "shape":"ArtifactRevisionInformationList",
-          "documentation":"<p>A list of ArtifactRevisionInformation objects included in a pipeline execution.</p>"
+        "artifactRevisions":{
+          "shape":"ArtifactRevisionList",
+          "documentation":"<p>A list of ArtifactRevision objects included in a pipeline execution.</p>"
         }
       },
       "documentation":"<p>Represents information about an execution of a pipeline.</p>"
@@ -2001,7 +1991,8 @@
         "pipelineName",
         "stageName",
         "actionName",
-        "result"
+        "result",
+        "token"
       ],
       "members":{
         "pipelineName":{

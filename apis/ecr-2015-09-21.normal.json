@@ -214,7 +214,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"RepositoryNotFoundException"}
       ],
-      "documentation":"<p>Lists all the image IDs for a given repository.</p>"
+      "documentation":"<p>Lists all the image IDs for a given repository.</p> <p>You can filter images based on whether or not they are tagged by setting the <code>tagStatus</code> parameter to <code>TAGGED</code> or <code>UNTAGGED</code>. For example, you can filter your results to return only <code>UNTAGGED</code> images and then pipe that result to a <a>BatchDeleteImage</a> operation to delete them. Or, you can filter your results to return only <code>TAGGED</code> images to list all of the tags in your repository.</p>"
     },
     "PutImage":{
       "name":"PutImage",
@@ -963,8 +963,12 @@
     "ListImagesFilter":{
       "type":"structure",
       "members":{
-        "tagStatus":{"shape":"TagStatus"}
-      }
+        "tagStatus":{
+          "shape":"TagStatus",
+          "documentation":"<p>The tag status with which to filter your <a>ListImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.</p>"
+        }
+      },
+      "documentation":"<p>An object representing a filter on a <a>ListImages</a> operation.</p>"
     },
     "ListImagesRequest":{
       "type":"structure",
@@ -986,7 +990,10 @@
           "shape":"MaxResults",
           "documentation":"<p>The maximum number of image results returned by <code>ListImages</code> in paginated output. When this parameter is used, <code>ListImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.</p>"
         },
-        "filter":{"shape":"ListImagesFilter"}
+        "filter":{
+          "shape":"ListImagesFilter",
+          "documentation":"<p>The filter key and value with which to filter your <code>ListImages</code> results.</p>"
+        }
       }
     },
     "ListImagesResponse":{
