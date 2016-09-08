@@ -1,26 +1,33 @@
 {
   "acm": {
-    "name": "ACM"
+    "name": "ACM",
+    "cors": true
   },
   "apigateway": {
-    "name": "APIGateway"
+    "name": "APIGateway",
+    "cors": true
   },
   "applicationautoscaling": {
     "prefix": "application-autoscaling",
-    "name": "ApplicationAutoScaling"
+    "name": "ApplicationAutoScaling",
+    "cors": true
   },
   "autoscaling": {
-    "name": "AutoScaling"
+    "name": "AutoScaling",
+    "cors": true
   },
   "cloudformation": {
-    "name": "CloudFormation"
+    "name": "CloudFormation",
+    "cors": true
   },
   "cloudfront": {
     "name": "CloudFront",
-    "versions": ["2013-05-12*", "2013-11-11*", "2014-05-31*", "2014-10-21*", "2014-11-06*", "2015-04-17*", "2015-07-27*", "2015-09-17*", "2016-01-13*", "2016-01-28*"]
+    "versions": ["2013-05-12*", "2013-11-11*", "2014-05-31*", "2014-10-21*", "2014-11-06*", "2015-04-17*", "2015-07-27*", "2015-09-17*", "2016-01-13*", "2016-01-28*"],
+    "cors": true
   },
   "cloudhsm": {
-    "name": "CloudHSM"
+    "name": "CloudHSM",
+    "cors": true
   },
   "cloudsearch": {
     "name": "CloudSearch"
@@ -29,54 +36,67 @@
     "name": "CloudSearchDomain"
   },
   "cloudtrail": {
-    "name": "CloudTrail"
+    "name": "CloudTrail",
+    "cors": true
   },
   "cloudwatch": {
     "prefix": "monitoring",
-    "name": "CloudWatch"
+    "name": "CloudWatch",
+    "cors": true
   },
   "cloudwatchevents": {
     "prefix": "events",
     "name": "CloudWatchEvents",
-    "versions": ["2014-02-03*"]
+    "versions": ["2014-02-03*"],
+    "cors": true
   },
   "cloudwatchlogs": {
     "prefix": "logs",
-    "name": "CloudWatchLogs"
+    "name": "CloudWatchLogs",
+    "cors": true
   },
   "codecommit": {
-    "name": "CodeCommit"
+    "name": "CodeCommit",
+    "cors": true
   },
   "codedeploy": {
-    "name": "CodeDeploy"
+    "name": "CodeDeploy",
+    "cors": true
   },
   "codepipeline": {
-    "name": "CodePipeline"
+    "name": "CodePipeline",
+    "cors": true
   },
   "cognitoidentity": {
     "prefix": "cognito-identity",
-    "name": "CognitoIdentity"
+    "name": "CognitoIdentity",
+    "cors": true
   },
   "cognitoidentityserviceprovider": {
     "prefix": "cognito-idp",
-    "name": "CognitoIdentityServiceProvider"
+    "name": "CognitoIdentityServiceProvider",
+    "cors": true
   },
   "cognitosync": {
     "prefix": "cognito-sync",
-    "name": "CognitoSync"
+    "name": "CognitoSync",
+    "cors": true
   },
   "configservice": {
     "prefix": "config",
-    "name": "ConfigService"
+    "name": "ConfigService",
+    "cors": true
   },
   "datapipeline": {
     "name": "DataPipeline"
   },
   "devicefarm": {
-    "name": "DeviceFarm"
+    "name": "DeviceFarm",
+    "cors": true
   },
   "directconnect": {
-    "name": "DirectConnect"
+    "name": "DirectConnect",
+    "cors": true
   },
   "directoryservice": {
     "prefix": "ds",
@@ -89,21 +109,26 @@
     "name": "DMS"
   },
   "dynamodb": {
-    "name": "DynamoDB"
+    "name": "DynamoDB",
+    "cors": true
   },
   "dynamodbstreams": {
     "prefix": "streams.dynamodb",
-    "name": "DynamoDBStreams"
+    "name": "DynamoDBStreams",
+    "cors": true
   },
   "ec2": {
     "name": "EC2",
-    "versions": ["2013-06-15*", "2013-10-15*", "2014-02-01*", "2014-05-01*", "2014-06-15*", "2014-09-01*", "2014-10-01*", "2015-03-01*", "2015-04-15*", "2015-10-01*"]
+    "versions": ["2013-06-15*", "2013-10-15*", "2014-02-01*", "2014-05-01*", "2014-06-15*", "2014-09-01*", "2014-10-01*", "2015-03-01*", "2015-04-15*", "2015-10-01*"],
+    "cors": true
   },
   "ecr": {
-    "name": "ECR"
+    "name": "ECR",
+    "cors": true
   },
   "ecs": {
-    "name": "ECS"
+    "name": "ECS",
+    "cors": true
   },
   "efs": {
     "prefix": "elasticfilesystem",
@@ -111,34 +136,42 @@
   },
   "elasticache": {
     "name": "ElastiCache",
-    "versions": ["2012-11-15*", "2014-03-24*", "2014-07-15*", "2014-09-30*"]
+    "versions": ["2012-11-15*", "2014-03-24*", "2014-07-15*", "2014-09-30*"],
+    "cors": true
   },
   "elasticbeanstalk": {
-    "name": "ElasticBeanstalk"
+    "name": "ElasticBeanstalk",
+    "cors": true
   },
   "elb": {
     "prefix": "elasticloadbalancing",
-    "name": "ELB"
+    "name": "ELB",
+    "cors": true
   },
   "elbv2": {
     "prefix": "elasticloadbalancingv2",
-    "name": "ELBv2"
+    "name": "ELBv2",
+    "cors": true
   },
   "emr": {
     "prefix": "elasticmapreduce",
-    "name": "EMR"
+    "name": "EMR",
+    "cors": true
   },
   "es": {
     "name": "ES"
   },
   "elastictranscoder": {
-    "name": "ElasticTranscoder"
+    "name": "ElasticTranscoder",
+    "cors": true
   },
   "firehose": {
-    "name": "Firehose"
+    "name": "Firehose",
+    "cors": true
   },
   "gamelift": {
-    "name": "GameLift"
+    "name": "GameLift",
+    "cors": true
   },
   "glacier": {
     "name": "Glacier"
@@ -151,66 +184,81 @@
   },
   "inspector": {
     "name": "Inspector",
-    "versions": ["2015-08-18*"]
+    "versions": ["2015-08-18*"],
+    "cors": true
   },
   "iot": {
     "name": "Iot"
   },
   "iotdata": {
     "prefix": "iot-data",
-    "name": "IotData"
+    "name": "IotData",
+    "cors": true
   },
   "kinesis": {
-    "name": "Kinesis"
+    "name": "Kinesis",
+    "cors": true
   },
   "kinesisanalytics": {
     "name": "KinesisAnalytics"
   },
   "kms": {
-    "name": "KMS"
+    "name": "KMS",
+    "cors": true
   },
   "lambda": {
-    "name": "Lambda"
+    "name": "Lambda",
+    "cors": true
   },
   "machinelearning": {
-    "name": "MachineLearning"
+    "name": "MachineLearning",
+    "cors": true
   },
   "marketplacecommerceanalytics": {
-    "name": "MarketplaceCommerceAnalytics"
+    "name": "MarketplaceCommerceAnalytics",
+    "cors": true
   },
   "marketplacemetering": {
       "prefix": "meteringmarketplace",
       "name": "MarketplaceMetering"
   },
   "mobileanalytics": {
-    "name": "MobileAnalytics"
+    "name": "MobileAnalytics",
+    "cors": true
   },
   "opsworks": {
-    "name": "OpsWorks"
+    "name": "OpsWorks",
+    "cors": true
   },
   "rds": {
     "name": "RDS",
-    "versions": ["2014-09-01*"]
+    "versions": ["2014-09-01*"],
+    "cors": true
   },
   "redshift": {
-    "name": "Redshift"
+    "name": "Redshift",
+    "cors": true
   },
   "route53": {
-    "name": "Route53"
+    "name": "Route53",
+    "cors": true
   },
   "route53domains": {
-    "name": "Route53Domains"
+    "name": "Route53Domains",
+    "cors": true
   },
   "s3": {
     "name": "S3",
-    "dualstackAvailable": true
+    "dualstackAvailable": true,
+    "cors": true
   },
   "servicecatalog": {
     "name": "ServiceCatalog"
   },
   "ses": {
     "prefix": "email",
-    "name": "SES"
+    "name": "SES",
+    "cors": true
   },
   "simpledb": {
     "prefix": "sdb",
@@ -220,19 +268,24 @@
     "name": "Snowball"
   },
   "sns": {
-    "name": "SNS"
+    "name": "SNS",
+    "cors": true
   },
   "sqs": {
-    "name": "SQS"
+    "name": "SQS",
+    "cors": true
   },
   "ssm": {
-    "name": "SSM"
+    "name": "SSM",
+    "cors": true
   },
   "storagegateway": {
-    "name": "StorageGateway"
+    "name": "StorageGateway",
+    "cors": true
   },
   "sts": {
-    "name": "STS"
+    "name": "STS",
+    "cors": true
   },
   "support": {
     "name": "Support"
@@ -241,7 +294,8 @@
     "name": "SWF"
   },
   "waf": {
-    "name": "WAF"
+    "name": "WAF",
+    "cors": true
   },
   "workspaces": {
     "name": "WorkSpaces"
