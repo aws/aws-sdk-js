@@ -38,7 +38,9 @@
   "main": "lib/aws.js",
   "browser": {
     "lib/aws.js": "./lib/browser.js",
-    "fs": false
+    "fs": false,
+    "./global.js": "./browser.js",
+    "./lib/node_loader.js": "./lib/browser_loader.js"
   },
   "browserify": {
     "transform": "./dist-tools/transform.js"
