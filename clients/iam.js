@@ -1,0 +1,15 @@
+require('../lib/node_loader');
+var AWS = require('../lib/core');
+var Service = require('../lib/service');
+var apiLoader = require('../lib/api_loader');
+
+if (!Object.prototype.hasOwnProperty.call(AWS, 'IAM')) {
+  apiLoader.services['iam'] = {};
+  AWS.IAM = Service.defineService('iam', ['2010-05-08']);
+
+  apiLoader.services['iam']['2010-05-08'] = require('../apis/iam-2010-05-08.min');
+  apiLoader.services['iam']['2010-05-08'].paginators = require('../apis/iam-2010-05-08.paginators').pagination;
+  apiLoader.services['iam']['2010-05-08'].waiters = require('../apis/iam-2010-05-08.waiters2').waiters;
+}
+
+module.exports = AWS.IAM;
