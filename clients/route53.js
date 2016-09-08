@@ -8,9 +8,9 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'Route53')) {
   AWS.Route53 = Service.defineService('route53', ['2013-04-01']);
   require('../lib/services/route53');
 
-  apiLoader.services['route53']['2013-04-01'] = require('../apis/route53-2013-04-01.min');
-  apiLoader.services['route53']['2013-04-01'].paginators = require('../apis/route53-2013-04-01.paginators').pagination;
-  apiLoader.services['route53']['2013-04-01'].waiters = require('../apis/route53-2013-04-01.waiters2').waiters;
+  apiLoader.services['route53']['2013-04-01'] = require('../apis/route53-2013-04-01.min.json');
+  apiLoader.services['route53']['2013-04-01'].paginators = require('../apis/route53-2013-04-01.paginators.json').pagination;
+  apiLoader.services['route53']['2013-04-01'].waiters = require('../apis/route53-2013-04-01.waiters2.json').waiters;
 }
 
 module.exports = AWS.Route53;

@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'KinesisAnalytics')) {
   apiLoader.services['kinesisanalytics'] = {};
   AWS.KinesisAnalytics = Service.defineService('kinesisanalytics', ['2015-08-14']);
 
-  apiLoader.services['kinesisanalytics']['2015-08-14'] = require('../apis/kinesisanalytics-2015-08-14.min');
+  apiLoader.services['kinesisanalytics']['2015-08-14'] = require('../apis/kinesisanalytics-2015-08-14.min.json');
 }
 
 module.exports = AWS.KinesisAnalytics;

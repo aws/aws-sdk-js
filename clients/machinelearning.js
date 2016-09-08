@@ -8,9 +8,9 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'MachineLearning')) {
   AWS.MachineLearning = Service.defineService('machinelearning', ['2014-12-12']);
   require('../lib/services/machinelearning');
 
-  apiLoader.services['machinelearning']['2014-12-12'] = require('../apis/machinelearning-2014-12-12.min');
-  apiLoader.services['machinelearning']['2014-12-12'].paginators = require('../apis/machinelearning-2014-12-12.paginators').pagination;
-  apiLoader.services['machinelearning']['2014-12-12'].waiters = require('../apis/machinelearning-2014-12-12.waiters2').waiters;
+  apiLoader.services['machinelearning']['2014-12-12'] = require('../apis/machinelearning-2014-12-12.min.json');
+  apiLoader.services['machinelearning']['2014-12-12'].paginators = require('../apis/machinelearning-2014-12-12.paginators.json').pagination;
+  apiLoader.services['machinelearning']['2014-12-12'].waiters = require('../apis/machinelearning-2014-12-12.waiters2.json').waiters;
 }
 
 module.exports = AWS.MachineLearning;

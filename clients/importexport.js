@@ -7,8 +7,8 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'ImportExport')) {
   apiLoader.services['importexport'] = {};
   AWS.ImportExport = Service.defineService('importexport', ['2010-06-01']);
 
-  apiLoader.services['importexport']['2010-06-01'] = require('../apis/importexport-2010-06-01.min');
-  apiLoader.services['importexport']['2010-06-01'].paginators = require('../apis/importexport-2010-06-01.paginators').pagination;
+  apiLoader.services['importexport']['2010-06-01'] = require('../apis/importexport-2010-06-01.min.json');
+  apiLoader.services['importexport']['2010-06-01'].paginators = require('../apis/importexport-2010-06-01.paginators.json').pagination;
 }
 
 module.exports = AWS.ImportExport;

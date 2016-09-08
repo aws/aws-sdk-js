@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'GameLift')) {
   apiLoader.services['gamelift'] = {};
   AWS.GameLift = Service.defineService('gamelift', ['2015-10-01']);
 
-  apiLoader.services['gamelift']['2015-10-01'] = require('../apis/gamelift-2015-10-01.min');
+  apiLoader.services['gamelift']['2015-10-01'] = require('../apis/gamelift-2015-10-01.min.json');
 }
 
 module.exports = AWS.GameLift;

@@ -98,12 +98,12 @@ ClientCreator.prototype.generateClientStub = function generateClientStub(service
     }
     var loaderPrefix = 'AWS.apiLoader.services[\'' + serviceName + '\'][\'' + version + '\']';
     code += '\n';
-    code += loaderPrefix + ' = require(\'../apis/' + versionInfo.api + '\');\n';
+    code += loaderPrefix + ' = require(\'../apis/' + versionInfo.api + '.json\');\n';
     if (versionInfo.hasOwnProperty('paginators')) {
-        code += loaderPrefix + '.paginators = require(\'../apis/' + versionInfo.paginators + '\').pagination;\n';
+        code += loaderPrefix + '.paginators = require(\'../apis/' + versionInfo.paginators + '.json\').pagination;\n';
     }
     if (versionInfo.hasOwnProperty('waiters')) {
-        code += loaderPrefix + '.waiters = require(\'../apis/' + versionInfo.waiters + '\').waiters;\n';
+        code += loaderPrefix + '.waiters = require(\'../apis/' + versionInfo.waiters + '.json\').waiters;\n';
     }
   });
   return code;
@@ -148,12 +148,12 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
     }
     var loaderPrefix = tab + 'apiLoader.services[\'' + serviceName + '\'][\'' + version + '\']';
     code += '\n';
-    code += loaderPrefix + ' = require(\'../apis/' + versionInfo.api + '\');\n';
+    code += loaderPrefix + ' = require(\'../apis/' + versionInfo.api + '.json\');\n';
     if (versionInfo.hasOwnProperty('paginators')) {
-        code += loaderPrefix + '.paginators = require(\'../apis/' + versionInfo.paginators + '\').pagination;\n';
+        code += loaderPrefix + '.paginators = require(\'../apis/' + versionInfo.paginators + '.json\').pagination;\n';
     }
     if (versionInfo.hasOwnProperty('waiters')) {
-        code += loaderPrefix + '.waiters = require(\'../apis/' + versionInfo.waiters + '\').waiters;\n';
+        code += loaderPrefix + '.waiters = require(\'../apis/' + versionInfo.waiters + '.json\').waiters;\n';
     }
   });
   code += '}\n';

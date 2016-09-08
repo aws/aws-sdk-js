@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'MobileAnalytics')) {
   apiLoader.services['mobileanalytics'] = {};
   AWS.MobileAnalytics = Service.defineService('mobileanalytics', ['2014-06-05']);
 
-  apiLoader.services['mobileanalytics']['2014-06-05'] = require('../apis/mobileanalytics-2014-06-05.min');
+  apiLoader.services['mobileanalytics']['2014-06-05'] = require('../apis/mobileanalytics-2014-06-05.min.json');
 }
 
 module.exports = AWS.MobileAnalytics;

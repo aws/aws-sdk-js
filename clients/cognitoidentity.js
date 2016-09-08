@@ -8,7 +8,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'CognitoIdentity')) {
   AWS.CognitoIdentity = Service.defineService('cognitoidentity', ['2014-06-30']);
   require('../lib/services/cognitoidentity');
 
-  apiLoader.services['cognitoidentity']['2014-06-30'] = require('../apis/cognito-identity-2014-06-30.min');
+  apiLoader.services['cognitoidentity']['2014-06-30'] = require('../apis/cognito-identity-2014-06-30.min.json');
 }
 
 module.exports = AWS.CognitoIdentity;

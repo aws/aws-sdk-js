@@ -7,9 +7,9 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'Redshift')) {
   apiLoader.services['redshift'] = {};
   AWS.Redshift = Service.defineService('redshift', ['2012-12-01']);
 
-  apiLoader.services['redshift']['2012-12-01'] = require('../apis/redshift-2012-12-01.min');
-  apiLoader.services['redshift']['2012-12-01'].paginators = require('../apis/redshift-2012-12-01.paginators').pagination;
-  apiLoader.services['redshift']['2012-12-01'].waiters = require('../apis/redshift-2012-12-01.waiters2').waiters;
+  apiLoader.services['redshift']['2012-12-01'] = require('../apis/redshift-2012-12-01.min.json');
+  apiLoader.services['redshift']['2012-12-01'].paginators = require('../apis/redshift-2012-12-01.paginators.json').pagination;
+  apiLoader.services['redshift']['2012-12-01'].waiters = require('../apis/redshift-2012-12-01.waiters2.json').waiters;
 }
 
 module.exports = AWS.Redshift;

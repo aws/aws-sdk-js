@@ -7,8 +7,8 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'ElasticBeanstalk')) {
   apiLoader.services['elasticbeanstalk'] = {};
   AWS.ElasticBeanstalk = Service.defineService('elasticbeanstalk', ['2010-12-01']);
 
-  apiLoader.services['elasticbeanstalk']['2010-12-01'] = require('../apis/elasticbeanstalk-2010-12-01.min');
-  apiLoader.services['elasticbeanstalk']['2010-12-01'].paginators = require('../apis/elasticbeanstalk-2010-12-01.paginators').pagination;
+  apiLoader.services['elasticbeanstalk']['2010-12-01'] = require('../apis/elasticbeanstalk-2010-12-01.min.json');
+  apiLoader.services['elasticbeanstalk']['2010-12-01'].paginators = require('../apis/elasticbeanstalk-2010-12-01.paginators.json').pagination;
 }
 
 module.exports = AWS.ElasticBeanstalk;

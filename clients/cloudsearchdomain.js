@@ -8,7 +8,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudSearchDomain')) {
   AWS.CloudSearchDomain = Service.defineService('cloudsearchdomain', ['2013-01-01']);
   require('../lib/services/cloudsearchdomain');
 
-  apiLoader.services['cloudsearchdomain']['2013-01-01'] = require('../apis/cloudsearchdomain-2013-01-01.min');
+  apiLoader.services['cloudsearchdomain']['2013-01-01'] = require('../apis/cloudsearchdomain-2013-01-01.min.json');
 }
 
 module.exports = AWS.CloudSearchDomain;

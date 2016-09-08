@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'CodePipeline')) {
   apiLoader.services['codepipeline'] = {};
   AWS.CodePipeline = Service.defineService('codepipeline', ['2015-07-09']);
 
-  apiLoader.services['codepipeline']['2015-07-09'] = require('../apis/codepipeline-2015-07-09.min');
+  apiLoader.services['codepipeline']['2015-07-09'] = require('../apis/codepipeline-2015-07-09.min.json');
 }
 
 module.exports = AWS.CodePipeline;

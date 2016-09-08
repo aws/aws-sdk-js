@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'Inspector')) {
   apiLoader.services['inspector'] = {};
   AWS.Inspector = Service.defineService('inspector', ['2016-02-16']);
 
-  apiLoader.services['inspector']['2016-02-16'] = require('../apis/inspector-2016-02-16.min');
+  apiLoader.services['inspector']['2016-02-16'] = require('../apis/inspector-2016-02-16.min.json');
 }
 
 module.exports = AWS.Inspector;

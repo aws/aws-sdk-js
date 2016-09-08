@@ -7,8 +7,8 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'DirectConnect')) {
   apiLoader.services['directconnect'] = {};
   AWS.DirectConnect = Service.defineService('directconnect', ['2012-10-25']);
 
-  apiLoader.services['directconnect']['2012-10-25'] = require('../apis/directconnect-2012-10-25.min');
-  apiLoader.services['directconnect']['2012-10-25'].paginators = require('../apis/directconnect-2012-10-25.paginators').pagination;
+  apiLoader.services['directconnect']['2012-10-25'] = require('../apis/directconnect-2012-10-25.min.json');
+  apiLoader.services['directconnect']['2012-10-25'].paginators = require('../apis/directconnect-2012-10-25.paginators.json').pagination;
 }
 
 module.exports = AWS.DirectConnect;

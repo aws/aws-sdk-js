@@ -7,9 +7,9 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'OpsWorks')) {
   apiLoader.services['opsworks'] = {};
   AWS.OpsWorks = Service.defineService('opsworks', ['2013-02-18']);
 
-  apiLoader.services['opsworks']['2013-02-18'] = require('../apis/opsworks-2013-02-18.min');
-  apiLoader.services['opsworks']['2013-02-18'].paginators = require('../apis/opsworks-2013-02-18.paginators').pagination;
-  apiLoader.services['opsworks']['2013-02-18'].waiters = require('../apis/opsworks-2013-02-18.waiters2').waiters;
+  apiLoader.services['opsworks']['2013-02-18'] = require('../apis/opsworks-2013-02-18.min.json');
+  apiLoader.services['opsworks']['2013-02-18'].paginators = require('../apis/opsworks-2013-02-18.paginators.json').pagination;
+  apiLoader.services['opsworks']['2013-02-18'].waiters = require('../apis/opsworks-2013-02-18.waiters2.json').waiters;
 }
 
 module.exports = AWS.OpsWorks;

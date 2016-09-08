@@ -7,8 +7,8 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'KMS')) {
   apiLoader.services['kms'] = {};
   AWS.KMS = Service.defineService('kms', ['2014-11-01']);
 
-  apiLoader.services['kms']['2014-11-01'] = require('../apis/kms-2014-11-01.min');
-  apiLoader.services['kms']['2014-11-01'].paginators = require('../apis/kms-2014-11-01.paginators').pagination;
+  apiLoader.services['kms']['2014-11-01'] = require('../apis/kms-2014-11-01.min.json');
+  apiLoader.services['kms']['2014-11-01'].paginators = require('../apis/kms-2014-11-01.paginators.json').pagination;
 }
 
 module.exports = AWS.KMS;

@@ -8,7 +8,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'IotData')) {
   AWS.IotData = Service.defineService('iotdata', ['2015-05-28']);
   require('../lib/services/iotdata');
 
-  apiLoader.services['iotdata']['2015-05-28'] = require('../apis/iot-data-2015-05-28.min');
+  apiLoader.services['iotdata']['2015-05-28'] = require('../apis/iot-data-2015-05-28.min.json');
 }
 
 module.exports = AWS.IotData;

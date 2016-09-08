@@ -7,9 +7,9 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'ElastiCache')) {
   apiLoader.services['elasticache'] = {};
   AWS.ElastiCache = Service.defineService('elasticache', ['2015-02-02']);
 
-  apiLoader.services['elasticache']['2015-02-02'] = require('../apis/elasticache-2015-02-02.min');
-  apiLoader.services['elasticache']['2015-02-02'].paginators = require('../apis/elasticache-2015-02-02.paginators').pagination;
-  apiLoader.services['elasticache']['2015-02-02'].waiters = require('../apis/elasticache-2015-02-02.waiters2').waiters;
+  apiLoader.services['elasticache']['2015-02-02'] = require('../apis/elasticache-2015-02-02.min.json');
+  apiLoader.services['elasticache']['2015-02-02'].paginators = require('../apis/elasticache-2015-02-02.paginators.json').pagination;
+  apiLoader.services['elasticache']['2015-02-02'].waiters = require('../apis/elasticache-2015-02-02.waiters2.json').waiters;
 }
 
 module.exports = AWS.ElastiCache;

@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'Firehose')) {
   apiLoader.services['firehose'] = {};
   AWS.Firehose = Service.defineService('firehose', ['2015-08-04']);
 
-  apiLoader.services['firehose']['2015-08-04'] = require('../apis/firehose-2015-08-04.min');
+  apiLoader.services['firehose']['2015-08-04'] = require('../apis/firehose-2015-08-04.min.json');
 }
 
 module.exports = AWS.Firehose;

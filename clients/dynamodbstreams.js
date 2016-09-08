@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'DynamoDBStreams')) {
   apiLoader.services['dynamodbstreams'] = {};
   AWS.DynamoDBStreams = Service.defineService('dynamodbstreams', ['2012-08-10']);
 
-  apiLoader.services['dynamodbstreams']['2012-08-10'] = require('../apis/streams.dynamodb-2012-08-10.min');
+  apiLoader.services['dynamodbstreams']['2012-08-10'] = require('../apis/streams.dynamodb-2012-08-10.min.json');
 }
 
 module.exports = AWS.DynamoDBStreams;

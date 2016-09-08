@@ -7,8 +7,8 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudTrail')) {
   apiLoader.services['cloudtrail'] = {};
   AWS.CloudTrail = Service.defineService('cloudtrail', ['2013-11-01']);
 
-  apiLoader.services['cloudtrail']['2013-11-01'] = require('../apis/cloudtrail-2013-11-01.min');
-  apiLoader.services['cloudtrail']['2013-11-01'].paginators = require('../apis/cloudtrail-2013-11-01.paginators').pagination;
+  apiLoader.services['cloudtrail']['2013-11-01'] = require('../apis/cloudtrail-2013-11-01.min.json');
+  apiLoader.services['cloudtrail']['2013-11-01'].paginators = require('../apis/cloudtrail-2013-11-01.paginators.json').pagination;
 }
 
 module.exports = AWS.CloudTrail;

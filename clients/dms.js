@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'DMS')) {
   apiLoader.services['dms'] = {};
   AWS.DMS = Service.defineService('dms', ['2016-01-01']);
 
-  apiLoader.services['dms']['2016-01-01'] = require('../apis/dms-2016-01-01.min');
+  apiLoader.services['dms']['2016-01-01'] = require('../apis/dms-2016-01-01.min.json');
 }
 
 module.exports = AWS.DMS;

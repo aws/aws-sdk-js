@@ -8,8 +8,8 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'APIGateway')) {
   AWS.APIGateway = Service.defineService('apigateway', ['2015-07-09']);
   require('../lib/services/apigateway');
 
-  apiLoader.services['apigateway']['2015-07-09'] = require('../apis/apigateway-2015-07-09.min');
-  apiLoader.services['apigateway']['2015-07-09'].paginators = require('../apis/apigateway-2015-07-09.paginators').pagination;
+  apiLoader.services['apigateway']['2015-07-09'] = require('../apis/apigateway-2015-07-09.min.json');
+  apiLoader.services['apigateway']['2015-07-09'].paginators = require('../apis/apigateway-2015-07-09.paginators.json').pagination;
 }
 
 module.exports = AWS.APIGateway;

@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'ES')) {
   apiLoader.services['es'] = {};
   AWS.ES = Service.defineService('es', ['2015-01-01']);
 
-  apiLoader.services['es']['2015-01-01'] = require('../apis/es-2015-01-01.min');
+  apiLoader.services['es']['2015-01-01'] = require('../apis/es-2015-01-01.min.json');
 }
 
 module.exports = AWS.ES;

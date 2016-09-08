@@ -7,8 +7,8 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'ConfigService')) {
   apiLoader.services['configservice'] = {};
   AWS.ConfigService = Service.defineService('configservice', ['2014-11-12']);
 
-  apiLoader.services['configservice']['2014-11-12'] = require('../apis/config-2014-11-12.min');
-  apiLoader.services['configservice']['2014-11-12'].paginators = require('../apis/config-2014-11-12.paginators').pagination;
+  apiLoader.services['configservice']['2014-11-12'] = require('../apis/config-2014-11-12.min.json');
+  apiLoader.services['configservice']['2014-11-12'].paginators = require('../apis/config-2014-11-12.paginators.json').pagination;
 }
 
 module.exports = AWS.ConfigService;

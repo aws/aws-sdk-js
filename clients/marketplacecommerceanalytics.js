@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'MarketplaceCommerceAnalytics')) 
   apiLoader.services['marketplacecommerceanalytics'] = {};
   AWS.MarketplaceCommerceAnalytics = Service.defineService('marketplacecommerceanalytics', ['2015-07-01']);
 
-  apiLoader.services['marketplacecommerceanalytics']['2015-07-01'] = require('../apis/marketplacecommerceanalytics-2015-07-01.min');
+  apiLoader.services['marketplacecommerceanalytics']['2015-07-01'] = require('../apis/marketplacecommerceanalytics-2015-07-01.min.json');
 }
 
 module.exports = AWS.MarketplaceCommerceAnalytics;

@@ -8,7 +8,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'STS')) {
   AWS.STS = Service.defineService('sts', ['2011-06-15']);
   require('../lib/services/sts');
 
-  apiLoader.services['sts']['2011-06-15'] = require('../apis/sts-2011-06-15.min');
+  apiLoader.services['sts']['2011-06-15'] = require('../apis/sts-2011-06-15.min.json');
 }
 
 module.exports = AWS.STS;

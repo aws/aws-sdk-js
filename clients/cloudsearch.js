@@ -7,11 +7,11 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudSearch')) {
   apiLoader.services['cloudsearch'] = {};
   AWS.CloudSearch = Service.defineService('cloudsearch', ['2011-02-01', '2013-01-01']);
 
-  apiLoader.services['cloudsearch']['2011-02-01'] = require('../apis/cloudsearch-2011-02-01.min');
-  apiLoader.services['cloudsearch']['2011-02-01'].paginators = require('../apis/cloudsearch-2011-02-01.paginators').pagination;
+  apiLoader.services['cloudsearch']['2011-02-01'] = require('../apis/cloudsearch-2011-02-01.min.json');
+  apiLoader.services['cloudsearch']['2011-02-01'].paginators = require('../apis/cloudsearch-2011-02-01.paginators.json').pagination;
 
-  apiLoader.services['cloudsearch']['2013-01-01'] = require('../apis/cloudsearch-2013-01-01.min');
-  apiLoader.services['cloudsearch']['2013-01-01'].paginators = require('../apis/cloudsearch-2013-01-01.paginators').pagination;
+  apiLoader.services['cloudsearch']['2013-01-01'] = require('../apis/cloudsearch-2013-01-01.min.json');
+  apiLoader.services['cloudsearch']['2013-01-01'].paginators = require('../apis/cloudsearch-2013-01-01.paginators.json').pagination;
 }
 
 module.exports = AWS.CloudSearch;

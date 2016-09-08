@@ -7,7 +7,7 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'Discovery')) {
   apiLoader.services['discovery'] = {};
   AWS.Discovery = Service.defineService('discovery', ['2015-11-01']);
 
-  apiLoader.services['discovery']['2015-11-01'] = require('../apis/discovery-2015-11-01.min');
+  apiLoader.services['discovery']['2015-11-01'] = require('../apis/discovery-2015-11-01.min.json');
 }
 
 module.exports = AWS.Discovery;

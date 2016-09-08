@@ -7,8 +7,8 @@ if (!Object.prototype.hasOwnProperty.call(AWS, 'ApplicationAutoScaling')) {
   apiLoader.services['applicationautoscaling'] = {};
   AWS.ApplicationAutoScaling = Service.defineService('applicationautoscaling', ['2016-02-06']);
 
-  apiLoader.services['applicationautoscaling']['2016-02-06'] = require('../apis/application-autoscaling-2016-02-06.min');
-  apiLoader.services['applicationautoscaling']['2016-02-06'].paginators = require('../apis/application-autoscaling-2016-02-06.paginators').pagination;
+  apiLoader.services['applicationautoscaling']['2016-02-06'] = require('../apis/application-autoscaling-2016-02-06.min.json');
+  apiLoader.services['applicationautoscaling']['2016-02-06'].paginators = require('../apis/application-autoscaling-2016-02-06.paginators.json').pagination;
 }
 
 module.exports = AWS.ApplicationAutoScaling;
