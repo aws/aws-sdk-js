@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Tools",
-  "description": "Adds support for bundling the SDK with webpack. Also adds support for creating node.js bundles using webpack or browserify."
-}

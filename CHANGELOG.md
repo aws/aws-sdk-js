@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.5.6-->
+<!--LATEST=2.6.0-->
 <!--ENTRYINSERT-->
+
+## 2.6.0
+* feature: CloudFront: Adds HTTP2 support for Amazon CloudFront distributions.
+* feature: MetadataService: Adds retry logic to the EC2 Metadata Service, so that EC2MetadataCredentials will retry TimeoutError. This retry logic is also added to ECSCredentials. Resolves #692
+* feature: ServiceCatalog: CORS support added. Now a default service in the browser build of the JavaScript SDK.
+* feature: Tools: Adds support for bundling the SDK with webpack. Also adds support for creating node.js bundles using webpack or browserify.
 
 ## 2.5.6
 * feature: RDS: Adds new operation describeSourceRegions to provide list of all the source region names and endpoints for any region. Source regions are the regions where current region can get a replica or copy a snapshot from.
