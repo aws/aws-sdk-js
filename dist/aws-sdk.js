@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.6.0
+// AWS SDK for JavaScript v2.6.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -81057,13 +81057,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ACM')) {
-  apiLoader.services['acm'] = {};
-  AWS.ACM = Service.defineService('acm', ['2015-12-08']);
+apiLoader.services['acm'] = {};
+AWS.ACM = Service.defineService('acm', ['2015-12-08']);
 
-  apiLoader.services['acm']['2015-12-08'] = require('../apis/acm-2015-12-08.min.json');
-  apiLoader.services['acm']['2015-12-08'].paginators = require('../apis/acm-2015-12-08.paginators.json').pagination;
-}
+apiLoader.services['acm']['2015-12-08'] = require('../apis/acm-2015-12-08.min.json');
+apiLoader.services['acm']['2015-12-08'].paginators = require('../apis/acm-2015-12-08.paginators.json').pagination;
 
 module.exports = AWS.ACM;
 
@@ -81073,14 +81071,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'APIGateway')) {
-  apiLoader.services['apigateway'] = {};
-  AWS.APIGateway = Service.defineService('apigateway', ['2015-07-09']);
-  require('../lib/services/apigateway');
+apiLoader.services['apigateway'] = {};
+AWS.APIGateway = Service.defineService('apigateway', ['2015-07-09']);
+require('../lib/services/apigateway');
 
-  apiLoader.services['apigateway']['2015-07-09'] = require('../apis/apigateway-2015-07-09.min.json');
-  apiLoader.services['apigateway']['2015-07-09'].paginators = require('../apis/apigateway-2015-07-09.paginators.json').pagination;
-}
+apiLoader.services['apigateway']['2015-07-09'] = require('../apis/apigateway-2015-07-09.min.json');
+apiLoader.services['apigateway']['2015-07-09'].paginators = require('../apis/apigateway-2015-07-09.paginators.json').pagination;
 
 module.exports = AWS.APIGateway;
 
@@ -81090,13 +81086,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ApplicationAutoScaling')) {
-  apiLoader.services['applicationautoscaling'] = {};
-  AWS.ApplicationAutoScaling = Service.defineService('applicationautoscaling', ['2016-02-06']);
+apiLoader.services['applicationautoscaling'] = {};
+AWS.ApplicationAutoScaling = Service.defineService('applicationautoscaling', ['2016-02-06']);
 
-  apiLoader.services['applicationautoscaling']['2016-02-06'] = require('../apis/application-autoscaling-2016-02-06.min.json');
-  apiLoader.services['applicationautoscaling']['2016-02-06'].paginators = require('../apis/application-autoscaling-2016-02-06.paginators.json').pagination;
-}
+apiLoader.services['applicationautoscaling']['2016-02-06'] = require('../apis/application-autoscaling-2016-02-06.min.json');
+apiLoader.services['applicationautoscaling']['2016-02-06'].paginators = require('../apis/application-autoscaling-2016-02-06.paginators.json').pagination;
 
 module.exports = AWS.ApplicationAutoScaling;
 
@@ -81106,89 +81100,647 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'AutoScaling')) {
-  apiLoader.services['autoscaling'] = {};
-  AWS.AutoScaling = Service.defineService('autoscaling', ['2011-01-01']);
+apiLoader.services['autoscaling'] = {};
+AWS.AutoScaling = Service.defineService('autoscaling', ['2011-01-01']);
 
-  apiLoader.services['autoscaling']['2011-01-01'] = require('../apis/autoscaling-2011-01-01.min.json');
-  apiLoader.services['autoscaling']['2011-01-01'].paginators = require('../apis/autoscaling-2011-01-01.paginators.json').pagination;
-}
+apiLoader.services['autoscaling']['2011-01-01'] = require('../apis/autoscaling-2011-01-01.min.json');
+apiLoader.services['autoscaling']['2011-01-01'].paginators = require('../apis/autoscaling-2011-01-01.paginators.json').pagination;
 
 module.exports = AWS.AutoScaling;
 
 },{"../apis/autoscaling-2011-01-01.min.json":7,"../apis/autoscaling-2011-01-01.paginators.json":8,"../lib/api_loader":184,"../lib/core":188,"../lib/node_loader":185,"../lib/service":225}],131:[function(require,module,exports){
-module.exports = {
-  ACM: require('./acm'),
-  APIGateway: require('./apigateway'),
-  ApplicationAutoScaling: require('./applicationautoscaling'),
-  AutoScaling: require('./autoscaling'),
-  CloudFormation: require('./cloudformation'),
-  CloudFront: require('./cloudfront'),
-  CloudHSM: require('./cloudhsm'),
-  CloudTrail: require('./cloudtrail'),
-  CloudWatch: require('./cloudwatch'),
-  CloudWatchEvents: require('./cloudwatchevents'),
-  CloudWatchLogs: require('./cloudwatchlogs'),
-  CodeCommit: require('./codecommit'),
-  CodeDeploy: require('./codedeploy'),
-  CodePipeline: require('./codepipeline'),
-  CognitoIdentity: require('./cognitoidentity'),
-  CognitoIdentityServiceProvider: require('./cognitoidentityserviceprovider'),
-  CognitoSync: require('./cognitosync'),
-  ConfigService: require('./configservice'),
-  DeviceFarm: require('./devicefarm'),
-  DirectConnect: require('./directconnect'),
-  DynamoDB: require('./dynamodb'),
-  DynamoDBStreams: require('./dynamodbstreams'),
-  EC2: require('./ec2'),
-  ECR: require('./ecr'),
-  ECS: require('./ecs'),
-  ElastiCache: require('./elasticache'),
-  ElasticBeanstalk: require('./elasticbeanstalk'),
-  ELB: require('./elb'),
-  ELBv2: require('./elbv2'),
-  EMR: require('./emr'),
-  ElasticTranscoder: require('./elastictranscoder'),
-  Firehose: require('./firehose'),
-  GameLift: require('./gamelift'),
-  Inspector: require('./inspector'),
-  Iot: require('./iot'),
-  IotData: require('./iotdata'),
-  Kinesis: require('./kinesis'),
-  KMS: require('./kms'),
-  Lambda: require('./lambda'),
-  MachineLearning: require('./machinelearning'),
-  MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
-  MobileAnalytics: require('./mobileanalytics'),
-  OpsWorks: require('./opsworks'),
-  RDS: require('./rds'),
-  Redshift: require('./redshift'),
-  Route53: require('./route53'),
-  Route53Domains: require('./route53domains'),
-  S3: require('./s3'),
-  ServiceCatalog: require('./servicecatalog'),
-  SES: require('./ses'),
-  SNS: require('./sns'),
-  SQS: require('./sqs'),
-  SSM: require('./ssm'),
-  StorageGateway: require('./storagegateway'),
-  STS: require('./sts'),
-  WAF: require('./waf')
-};
-},{"./acm":127,"./apigateway":128,"./applicationautoscaling":129,"./autoscaling":130,"./cloudformation":132,"./cloudfront":133,"./cloudhsm":134,"./cloudtrail":135,"./cloudwatch":136,"./cloudwatchevents":137,"./cloudwatchlogs":138,"./codecommit":139,"./codedeploy":140,"./codepipeline":141,"./cognitoidentity":142,"./cognitoidentityserviceprovider":143,"./cognitosync":144,"./configservice":145,"./devicefarm":146,"./directconnect":147,"./dynamodb":148,"./dynamodbstreams":149,"./ec2":150,"./ecr":151,"./ecs":152,"./elasticache":153,"./elasticbeanstalk":154,"./elastictranscoder":155,"./elb":156,"./elbv2":157,"./emr":158,"./firehose":159,"./gamelift":160,"./inspector":161,"./iot":162,"./iotdata":163,"./kinesis":164,"./kms":165,"./lambda":166,"./machinelearning":167,"./marketplacecommerceanalytics":168,"./mobileanalytics":169,"./opsworks":170,"./rds":171,"./redshift":172,"./route53":173,"./route53domains":174,"./s3":175,"./servicecatalog":176,"./ses":177,"./sns":178,"./sqs":179,"./ssm":180,"./storagegateway":181,"./sts":182,"./waf":183}],132:[function(require,module,exports){
+require('../lib/node_loader');
+var AWS = require('../lib/core');
+
+var acm = null;
+Object.defineProperty(AWS, 'ACM', {
+  get: function get() {
+    return acm || require('./acm');
+  },
+  set: function set(svc) {
+    acm = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var apigateway = null;
+Object.defineProperty(AWS, 'APIGateway', {
+  get: function get() {
+    return apigateway || require('./apigateway');
+  },
+  set: function set(svc) {
+    apigateway = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var applicationautoscaling = null;
+Object.defineProperty(AWS, 'ApplicationAutoScaling', {
+  get: function get() {
+    return applicationautoscaling || require('./applicationautoscaling');
+  },
+  set: function set(svc) {
+    applicationautoscaling = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var autoscaling = null;
+Object.defineProperty(AWS, 'AutoScaling', {
+  get: function get() {
+    return autoscaling || require('./autoscaling');
+  },
+  set: function set(svc) {
+    autoscaling = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cloudformation = null;
+Object.defineProperty(AWS, 'CloudFormation', {
+  get: function get() {
+    return cloudformation || require('./cloudformation');
+  },
+  set: function set(svc) {
+    cloudformation = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cloudfront = null;
+Object.defineProperty(AWS, 'CloudFront', {
+  get: function get() {
+    return cloudfront || require('./cloudfront');
+  },
+  set: function set(svc) {
+    cloudfront = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cloudhsm = null;
+Object.defineProperty(AWS, 'CloudHSM', {
+  get: function get() {
+    return cloudhsm || require('./cloudhsm');
+  },
+  set: function set(svc) {
+    cloudhsm = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cloudtrail = null;
+Object.defineProperty(AWS, 'CloudTrail', {
+  get: function get() {
+    return cloudtrail || require('./cloudtrail');
+  },
+  set: function set(svc) {
+    cloudtrail = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cloudwatch = null;
+Object.defineProperty(AWS, 'CloudWatch', {
+  get: function get() {
+    return cloudwatch || require('./cloudwatch');
+  },
+  set: function set(svc) {
+    cloudwatch = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cloudwatchevents = null;
+Object.defineProperty(AWS, 'CloudWatchEvents', {
+  get: function get() {
+    return cloudwatchevents || require('./cloudwatchevents');
+  },
+  set: function set(svc) {
+    cloudwatchevents = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cloudwatchlogs = null;
+Object.defineProperty(AWS, 'CloudWatchLogs', {
+  get: function get() {
+    return cloudwatchlogs || require('./cloudwatchlogs');
+  },
+  set: function set(svc) {
+    cloudwatchlogs = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var codecommit = null;
+Object.defineProperty(AWS, 'CodeCommit', {
+  get: function get() {
+    return codecommit || require('./codecommit');
+  },
+  set: function set(svc) {
+    codecommit = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var codedeploy = null;
+Object.defineProperty(AWS, 'CodeDeploy', {
+  get: function get() {
+    return codedeploy || require('./codedeploy');
+  },
+  set: function set(svc) {
+    codedeploy = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var codepipeline = null;
+Object.defineProperty(AWS, 'CodePipeline', {
+  get: function get() {
+    return codepipeline || require('./codepipeline');
+  },
+  set: function set(svc) {
+    codepipeline = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cognitoidentity = null;
+Object.defineProperty(AWS, 'CognitoIdentity', {
+  get: function get() {
+    return cognitoidentity || require('./cognitoidentity');
+  },
+  set: function set(svc) {
+    cognitoidentity = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cognitoidentityserviceprovider = null;
+Object.defineProperty(AWS, 'CognitoIdentityServiceProvider', {
+  get: function get() {
+    return cognitoidentityserviceprovider || require('./cognitoidentityserviceprovider');
+  },
+  set: function set(svc) {
+    cognitoidentityserviceprovider = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var cognitosync = null;
+Object.defineProperty(AWS, 'CognitoSync', {
+  get: function get() {
+    return cognitosync || require('./cognitosync');
+  },
+  set: function set(svc) {
+    cognitosync = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var configservice = null;
+Object.defineProperty(AWS, 'ConfigService', {
+  get: function get() {
+    return configservice || require('./configservice');
+  },
+  set: function set(svc) {
+    configservice = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var devicefarm = null;
+Object.defineProperty(AWS, 'DeviceFarm', {
+  get: function get() {
+    return devicefarm || require('./devicefarm');
+  },
+  set: function set(svc) {
+    devicefarm = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var directconnect = null;
+Object.defineProperty(AWS, 'DirectConnect', {
+  get: function get() {
+    return directconnect || require('./directconnect');
+  },
+  set: function set(svc) {
+    directconnect = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var dynamodb = null;
+Object.defineProperty(AWS, 'DynamoDB', {
+  get: function get() {
+    return dynamodb || require('./dynamodb');
+  },
+  set: function set(svc) {
+    dynamodb = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var dynamodbstreams = null;
+Object.defineProperty(AWS, 'DynamoDBStreams', {
+  get: function get() {
+    return dynamodbstreams || require('./dynamodbstreams');
+  },
+  set: function set(svc) {
+    dynamodbstreams = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var ec2 = null;
+Object.defineProperty(AWS, 'EC2', {
+  get: function get() {
+    return ec2 || require('./ec2');
+  },
+  set: function set(svc) {
+    ec2 = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var ecr = null;
+Object.defineProperty(AWS, 'ECR', {
+  get: function get() {
+    return ecr || require('./ecr');
+  },
+  set: function set(svc) {
+    ecr = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var ecs = null;
+Object.defineProperty(AWS, 'ECS', {
+  get: function get() {
+    return ecs || require('./ecs');
+  },
+  set: function set(svc) {
+    ecs = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var elasticache = null;
+Object.defineProperty(AWS, 'ElastiCache', {
+  get: function get() {
+    return elasticache || require('./elasticache');
+  },
+  set: function set(svc) {
+    elasticache = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var elasticbeanstalk = null;
+Object.defineProperty(AWS, 'ElasticBeanstalk', {
+  get: function get() {
+    return elasticbeanstalk || require('./elasticbeanstalk');
+  },
+  set: function set(svc) {
+    elasticbeanstalk = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var elb = null;
+Object.defineProperty(AWS, 'ELB', {
+  get: function get() {
+    return elb || require('./elb');
+  },
+  set: function set(svc) {
+    elb = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var elbv2 = null;
+Object.defineProperty(AWS, 'ELBv2', {
+  get: function get() {
+    return elbv2 || require('./elbv2');
+  },
+  set: function set(svc) {
+    elbv2 = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var emr = null;
+Object.defineProperty(AWS, 'EMR', {
+  get: function get() {
+    return emr || require('./emr');
+  },
+  set: function set(svc) {
+    emr = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var elastictranscoder = null;
+Object.defineProperty(AWS, 'ElasticTranscoder', {
+  get: function get() {
+    return elastictranscoder || require('./elastictranscoder');
+  },
+  set: function set(svc) {
+    elastictranscoder = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var firehose = null;
+Object.defineProperty(AWS, 'Firehose', {
+  get: function get() {
+    return firehose || require('./firehose');
+  },
+  set: function set(svc) {
+    firehose = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var gamelift = null;
+Object.defineProperty(AWS, 'GameLift', {
+  get: function get() {
+    return gamelift || require('./gamelift');
+  },
+  set: function set(svc) {
+    gamelift = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var inspector = null;
+Object.defineProperty(AWS, 'Inspector', {
+  get: function get() {
+    return inspector || require('./inspector');
+  },
+  set: function set(svc) {
+    inspector = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var iot = null;
+Object.defineProperty(AWS, 'Iot', {
+  get: function get() {
+    return iot || require('./iot');
+  },
+  set: function set(svc) {
+    iot = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var iotdata = null;
+Object.defineProperty(AWS, 'IotData', {
+  get: function get() {
+    return iotdata || require('./iotdata');
+  },
+  set: function set(svc) {
+    iotdata = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var kinesis = null;
+Object.defineProperty(AWS, 'Kinesis', {
+  get: function get() {
+    return kinesis || require('./kinesis');
+  },
+  set: function set(svc) {
+    kinesis = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var kms = null;
+Object.defineProperty(AWS, 'KMS', {
+  get: function get() {
+    return kms || require('./kms');
+  },
+  set: function set(svc) {
+    kms = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var lambda = null;
+Object.defineProperty(AWS, 'Lambda', {
+  get: function get() {
+    return lambda || require('./lambda');
+  },
+  set: function set(svc) {
+    lambda = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var machinelearning = null;
+Object.defineProperty(AWS, 'MachineLearning', {
+  get: function get() {
+    return machinelearning || require('./machinelearning');
+  },
+  set: function set(svc) {
+    machinelearning = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var marketplacecommerceanalytics = null;
+Object.defineProperty(AWS, 'MarketplaceCommerceAnalytics', {
+  get: function get() {
+    return marketplacecommerceanalytics || require('./marketplacecommerceanalytics');
+  },
+  set: function set(svc) {
+    marketplacecommerceanalytics = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var mobileanalytics = null;
+Object.defineProperty(AWS, 'MobileAnalytics', {
+  get: function get() {
+    return mobileanalytics || require('./mobileanalytics');
+  },
+  set: function set(svc) {
+    mobileanalytics = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var opsworks = null;
+Object.defineProperty(AWS, 'OpsWorks', {
+  get: function get() {
+    return opsworks || require('./opsworks');
+  },
+  set: function set(svc) {
+    opsworks = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var rds = null;
+Object.defineProperty(AWS, 'RDS', {
+  get: function get() {
+    return rds || require('./rds');
+  },
+  set: function set(svc) {
+    rds = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var redshift = null;
+Object.defineProperty(AWS, 'Redshift', {
+  get: function get() {
+    return redshift || require('./redshift');
+  },
+  set: function set(svc) {
+    redshift = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var route53 = null;
+Object.defineProperty(AWS, 'Route53', {
+  get: function get() {
+    return route53 || require('./route53');
+  },
+  set: function set(svc) {
+    route53 = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var route53domains = null;
+Object.defineProperty(AWS, 'Route53Domains', {
+  get: function get() {
+    return route53domains || require('./route53domains');
+  },
+  set: function set(svc) {
+    route53domains = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var s3 = null;
+Object.defineProperty(AWS, 'S3', {
+  get: function get() {
+    return s3 || require('./s3');
+  },
+  set: function set(svc) {
+    s3 = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var servicecatalog = null;
+Object.defineProperty(AWS, 'ServiceCatalog', {
+  get: function get() {
+    return servicecatalog || require('./servicecatalog');
+  },
+  set: function set(svc) {
+    servicecatalog = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var ses = null;
+Object.defineProperty(AWS, 'SES', {
+  get: function get() {
+    return ses || require('./ses');
+  },
+  set: function set(svc) {
+    ses = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var sns = null;
+Object.defineProperty(AWS, 'SNS', {
+  get: function get() {
+    return sns || require('./sns');
+  },
+  set: function set(svc) {
+    sns = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var sqs = null;
+Object.defineProperty(AWS, 'SQS', {
+  get: function get() {
+    return sqs || require('./sqs');
+  },
+  set: function set(svc) {
+    sqs = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var ssm = null;
+Object.defineProperty(AWS, 'SSM', {
+  get: function get() {
+    return ssm || require('./ssm');
+  },
+  set: function set(svc) {
+    ssm = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var storagegateway = null;
+Object.defineProperty(AWS, 'StorageGateway', {
+  get: function get() {
+    return storagegateway || require('./storagegateway');
+  },
+  set: function set(svc) {
+    storagegateway = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var sts = null;
+Object.defineProperty(AWS, 'STS', {
+  get: function get() {
+    return sts || require('./sts');
+  },
+  set: function set(svc) {
+    sts = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+var waf = null;
+Object.defineProperty(AWS, 'WAF', {
+  get: function get() {
+    return waf || require('./waf');
+  },
+  set: function set(svc) {
+    waf = svc;
+  },
+  enumerable: true,
+  configurable: true
+});
+module.exports = AWS;
+},{"../lib/core":188,"../lib/node_loader":185,"./acm":127,"./apigateway":128,"./applicationautoscaling":129,"./autoscaling":130,"./cloudformation":132,"./cloudfront":133,"./cloudhsm":134,"./cloudtrail":135,"./cloudwatch":136,"./cloudwatchevents":137,"./cloudwatchlogs":138,"./codecommit":139,"./codedeploy":140,"./codepipeline":141,"./cognitoidentity":142,"./cognitoidentityserviceprovider":143,"./cognitosync":144,"./configservice":145,"./devicefarm":146,"./directconnect":147,"./dynamodb":148,"./dynamodbstreams":149,"./ec2":150,"./ecr":151,"./ecs":152,"./elasticache":153,"./elasticbeanstalk":154,"./elastictranscoder":155,"./elb":156,"./elbv2":157,"./emr":158,"./firehose":159,"./gamelift":160,"./inspector":161,"./iot":162,"./iotdata":163,"./kinesis":164,"./kms":165,"./lambda":166,"./machinelearning":167,"./marketplacecommerceanalytics":168,"./mobileanalytics":169,"./opsworks":170,"./rds":171,"./redshift":172,"./route53":173,"./route53domains":174,"./s3":175,"./servicecatalog":176,"./ses":177,"./sns":178,"./sqs":179,"./ssm":180,"./storagegateway":181,"./sts":182,"./waf":183}],132:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudFormation')) {
-  apiLoader.services['cloudformation'] = {};
-  AWS.CloudFormation = Service.defineService('cloudformation', ['2010-05-15']);
+apiLoader.services['cloudformation'] = {};
+AWS.CloudFormation = Service.defineService('cloudformation', ['2010-05-15']);
 
-  apiLoader.services['cloudformation']['2010-05-15'] = require('../apis/cloudformation-2010-05-15.min.json');
-  apiLoader.services['cloudformation']['2010-05-15'].paginators = require('../apis/cloudformation-2010-05-15.paginators.json').pagination;
-  apiLoader.services['cloudformation']['2010-05-15'].waiters = require('../apis/cloudformation-2010-05-15.waiters2.json').waiters;
-}
+apiLoader.services['cloudformation']['2010-05-15'] = require('../apis/cloudformation-2010-05-15.min.json');
+apiLoader.services['cloudformation']['2010-05-15'].paginators = require('../apis/cloudformation-2010-05-15.paginators.json').pagination;
+apiLoader.services['cloudformation']['2010-05-15'].waiters = require('../apis/cloudformation-2010-05-15.waiters2.json').waiters;
 
 module.exports = AWS.CloudFormation;
 
@@ -81198,15 +81750,13 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudFront')) {
-  apiLoader.services['cloudfront'] = {};
-  AWS.CloudFront = Service.defineService('cloudfront', ['2016-09-07']);
-  require('../lib/services/cloudfront');
+apiLoader.services['cloudfront'] = {};
+AWS.CloudFront = Service.defineService('cloudfront', ['2016-09-07']);
+require('../lib/services/cloudfront');
 
-  apiLoader.services['cloudfront']['2016-09-07'] = require('../apis/cloudfront-2016-09-07.min.json');
-  apiLoader.services['cloudfront']['2016-09-07'].paginators = require('../apis/cloudfront-2016-09-07.paginators.json').pagination;
-  apiLoader.services['cloudfront']['2016-09-07'].waiters = require('../apis/cloudfront-2016-09-07.waiters2.json').waiters;
-}
+apiLoader.services['cloudfront']['2016-09-07'] = require('../apis/cloudfront-2016-09-07.min.json');
+apiLoader.services['cloudfront']['2016-09-07'].paginators = require('../apis/cloudfront-2016-09-07.paginators.json').pagination;
+apiLoader.services['cloudfront']['2016-09-07'].waiters = require('../apis/cloudfront-2016-09-07.waiters2.json').waiters;
 
 module.exports = AWS.CloudFront;
 
@@ -81216,12 +81766,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudHSM')) {
-  apiLoader.services['cloudhsm'] = {};
-  AWS.CloudHSM = Service.defineService('cloudhsm', ['2014-05-30']);
+apiLoader.services['cloudhsm'] = {};
+AWS.CloudHSM = Service.defineService('cloudhsm', ['2014-05-30']);
 
-  apiLoader.services['cloudhsm']['2014-05-30'] = require('../apis/cloudhsm-2014-05-30.min.json');
-}
+apiLoader.services['cloudhsm']['2014-05-30'] = require('../apis/cloudhsm-2014-05-30.min.json');
 
 module.exports = AWS.CloudHSM;
 
@@ -81231,13 +81779,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudTrail')) {
-  apiLoader.services['cloudtrail'] = {};
-  AWS.CloudTrail = Service.defineService('cloudtrail', ['2013-11-01']);
+apiLoader.services['cloudtrail'] = {};
+AWS.CloudTrail = Service.defineService('cloudtrail', ['2013-11-01']);
 
-  apiLoader.services['cloudtrail']['2013-11-01'] = require('../apis/cloudtrail-2013-11-01.min.json');
-  apiLoader.services['cloudtrail']['2013-11-01'].paginators = require('../apis/cloudtrail-2013-11-01.paginators.json').pagination;
-}
+apiLoader.services['cloudtrail']['2013-11-01'] = require('../apis/cloudtrail-2013-11-01.min.json');
+apiLoader.services['cloudtrail']['2013-11-01'].paginators = require('../apis/cloudtrail-2013-11-01.paginators.json').pagination;
 
 module.exports = AWS.CloudTrail;
 
@@ -81247,14 +81793,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudWatch')) {
-  apiLoader.services['cloudwatch'] = {};
-  AWS.CloudWatch = Service.defineService('cloudwatch', ['2010-08-01']);
+apiLoader.services['cloudwatch'] = {};
+AWS.CloudWatch = Service.defineService('cloudwatch', ['2010-08-01']);
 
-  apiLoader.services['cloudwatch']['2010-08-01'] = require('../apis/monitoring-2010-08-01.min.json');
-  apiLoader.services['cloudwatch']['2010-08-01'].paginators = require('../apis/monitoring-2010-08-01.paginators.json').pagination;
-  apiLoader.services['cloudwatch']['2010-08-01'].waiters = require('../apis/monitoring-2010-08-01.waiters2.json').waiters;
-}
+apiLoader.services['cloudwatch']['2010-08-01'] = require('../apis/monitoring-2010-08-01.min.json');
+apiLoader.services['cloudwatch']['2010-08-01'].paginators = require('../apis/monitoring-2010-08-01.paginators.json').pagination;
+apiLoader.services['cloudwatch']['2010-08-01'].waiters = require('../apis/monitoring-2010-08-01.waiters2.json').waiters;
 
 module.exports = AWS.CloudWatch;
 
@@ -81264,12 +81808,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudWatchEvents')) {
-  apiLoader.services['cloudwatchevents'] = {};
-  AWS.CloudWatchEvents = Service.defineService('cloudwatchevents', ['2015-10-07']);
+apiLoader.services['cloudwatchevents'] = {};
+AWS.CloudWatchEvents = Service.defineService('cloudwatchevents', ['2015-10-07']);
 
-  apiLoader.services['cloudwatchevents']['2015-10-07'] = require('../apis/events-2015-10-07.min.json');
-}
+apiLoader.services['cloudwatchevents']['2015-10-07'] = require('../apis/events-2015-10-07.min.json');
 
 module.exports = AWS.CloudWatchEvents;
 
@@ -81279,13 +81821,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudWatchLogs')) {
-  apiLoader.services['cloudwatchlogs'] = {};
-  AWS.CloudWatchLogs = Service.defineService('cloudwatchlogs', ['2014-03-28']);
+apiLoader.services['cloudwatchlogs'] = {};
+AWS.CloudWatchLogs = Service.defineService('cloudwatchlogs', ['2014-03-28']);
 
-  apiLoader.services['cloudwatchlogs']['2014-03-28'] = require('../apis/logs-2014-03-28.min.json');
-  apiLoader.services['cloudwatchlogs']['2014-03-28'].paginators = require('../apis/logs-2014-03-28.paginators.json').pagination;
-}
+apiLoader.services['cloudwatchlogs']['2014-03-28'] = require('../apis/logs-2014-03-28.min.json');
+apiLoader.services['cloudwatchlogs']['2014-03-28'].paginators = require('../apis/logs-2014-03-28.paginators.json').pagination;
 
 module.exports = AWS.CloudWatchLogs;
 
@@ -81295,13 +81835,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CodeCommit')) {
-  apiLoader.services['codecommit'] = {};
-  AWS.CodeCommit = Service.defineService('codecommit', ['2015-04-13']);
+apiLoader.services['codecommit'] = {};
+AWS.CodeCommit = Service.defineService('codecommit', ['2015-04-13']);
 
-  apiLoader.services['codecommit']['2015-04-13'] = require('../apis/codecommit-2015-04-13.min.json');
-  apiLoader.services['codecommit']['2015-04-13'].paginators = require('../apis/codecommit-2015-04-13.paginators.json').pagination;
-}
+apiLoader.services['codecommit']['2015-04-13'] = require('../apis/codecommit-2015-04-13.min.json');
+apiLoader.services['codecommit']['2015-04-13'].paginators = require('../apis/codecommit-2015-04-13.paginators.json').pagination;
 
 module.exports = AWS.CodeCommit;
 
@@ -81311,14 +81849,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CodeDeploy')) {
-  apiLoader.services['codedeploy'] = {};
-  AWS.CodeDeploy = Service.defineService('codedeploy', ['2014-10-06']);
+apiLoader.services['codedeploy'] = {};
+AWS.CodeDeploy = Service.defineService('codedeploy', ['2014-10-06']);
 
-  apiLoader.services['codedeploy']['2014-10-06'] = require('../apis/codedeploy-2014-10-06.min.json');
-  apiLoader.services['codedeploy']['2014-10-06'].paginators = require('../apis/codedeploy-2014-10-06.paginators.json').pagination;
-  apiLoader.services['codedeploy']['2014-10-06'].waiters = require('../apis/codedeploy-2014-10-06.waiters2.json').waiters;
-}
+apiLoader.services['codedeploy']['2014-10-06'] = require('../apis/codedeploy-2014-10-06.min.json');
+apiLoader.services['codedeploy']['2014-10-06'].paginators = require('../apis/codedeploy-2014-10-06.paginators.json').pagination;
+apiLoader.services['codedeploy']['2014-10-06'].waiters = require('../apis/codedeploy-2014-10-06.waiters2.json').waiters;
 
 module.exports = AWS.CodeDeploy;
 
@@ -81328,12 +81864,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CodePipeline')) {
-  apiLoader.services['codepipeline'] = {};
-  AWS.CodePipeline = Service.defineService('codepipeline', ['2015-07-09']);
+apiLoader.services['codepipeline'] = {};
+AWS.CodePipeline = Service.defineService('codepipeline', ['2015-07-09']);
 
-  apiLoader.services['codepipeline']['2015-07-09'] = require('../apis/codepipeline-2015-07-09.min.json');
-}
+apiLoader.services['codepipeline']['2015-07-09'] = require('../apis/codepipeline-2015-07-09.min.json');
 
 module.exports = AWS.CodePipeline;
 
@@ -81343,13 +81877,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CognitoIdentity')) {
-  apiLoader.services['cognitoidentity'] = {};
-  AWS.CognitoIdentity = Service.defineService('cognitoidentity', ['2014-06-30']);
-  require('../lib/services/cognitoidentity');
+apiLoader.services['cognitoidentity'] = {};
+AWS.CognitoIdentity = Service.defineService('cognitoidentity', ['2014-06-30']);
+require('../lib/services/cognitoidentity');
 
-  apiLoader.services['cognitoidentity']['2014-06-30'] = require('../apis/cognito-identity-2014-06-30.min.json');
-}
+apiLoader.services['cognitoidentity']['2014-06-30'] = require('../apis/cognito-identity-2014-06-30.min.json');
 
 module.exports = AWS.CognitoIdentity;
 
@@ -81359,12 +81891,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CognitoIdentityServiceProvider')) {
-  apiLoader.services['cognitoidentityserviceprovider'] = {};
-  AWS.CognitoIdentityServiceProvider = Service.defineService('cognitoidentityserviceprovider', ['2016-04-18']);
+apiLoader.services['cognitoidentityserviceprovider'] = {};
+AWS.CognitoIdentityServiceProvider = Service.defineService('cognitoidentityserviceprovider', ['2016-04-18']);
 
-  apiLoader.services['cognitoidentityserviceprovider']['2016-04-18'] = require('../apis/cognito-idp-2016-04-18.min.json');
-}
+apiLoader.services['cognitoidentityserviceprovider']['2016-04-18'] = require('../apis/cognito-idp-2016-04-18.min.json');
 
 module.exports = AWS.CognitoIdentityServiceProvider;
 
@@ -81374,12 +81904,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CognitoSync')) {
-  apiLoader.services['cognitosync'] = {};
-  AWS.CognitoSync = Service.defineService('cognitosync', ['2014-06-30']);
+apiLoader.services['cognitosync'] = {};
+AWS.CognitoSync = Service.defineService('cognitosync', ['2014-06-30']);
 
-  apiLoader.services['cognitosync']['2014-06-30'] = require('../apis/cognito-sync-2014-06-30.min.json');
-}
+apiLoader.services['cognitosync']['2014-06-30'] = require('../apis/cognito-sync-2014-06-30.min.json');
 
 module.exports = AWS.CognitoSync;
 
@@ -81389,13 +81917,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ConfigService')) {
-  apiLoader.services['configservice'] = {};
-  AWS.ConfigService = Service.defineService('configservice', ['2014-11-12']);
+apiLoader.services['configservice'] = {};
+AWS.ConfigService = Service.defineService('configservice', ['2014-11-12']);
 
-  apiLoader.services['configservice']['2014-11-12'] = require('../apis/config-2014-11-12.min.json');
-  apiLoader.services['configservice']['2014-11-12'].paginators = require('../apis/config-2014-11-12.paginators.json').pagination;
-}
+apiLoader.services['configservice']['2014-11-12'] = require('../apis/config-2014-11-12.min.json');
+apiLoader.services['configservice']['2014-11-12'].paginators = require('../apis/config-2014-11-12.paginators.json').pagination;
 
 module.exports = AWS.ConfigService;
 
@@ -81405,13 +81931,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'DeviceFarm')) {
-  apiLoader.services['devicefarm'] = {};
-  AWS.DeviceFarm = Service.defineService('devicefarm', ['2015-06-23']);
+apiLoader.services['devicefarm'] = {};
+AWS.DeviceFarm = Service.defineService('devicefarm', ['2015-06-23']);
 
-  apiLoader.services['devicefarm']['2015-06-23'] = require('../apis/devicefarm-2015-06-23.min.json');
-  apiLoader.services['devicefarm']['2015-06-23'].paginators = require('../apis/devicefarm-2015-06-23.paginators.json').pagination;
-}
+apiLoader.services['devicefarm']['2015-06-23'] = require('../apis/devicefarm-2015-06-23.min.json');
+apiLoader.services['devicefarm']['2015-06-23'].paginators = require('../apis/devicefarm-2015-06-23.paginators.json').pagination;
 
 module.exports = AWS.DeviceFarm;
 
@@ -81421,13 +81945,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'DirectConnect')) {
-  apiLoader.services['directconnect'] = {};
-  AWS.DirectConnect = Service.defineService('directconnect', ['2012-10-25']);
+apiLoader.services['directconnect'] = {};
+AWS.DirectConnect = Service.defineService('directconnect', ['2012-10-25']);
 
-  apiLoader.services['directconnect']['2012-10-25'] = require('../apis/directconnect-2012-10-25.min.json');
-  apiLoader.services['directconnect']['2012-10-25'].paginators = require('../apis/directconnect-2012-10-25.paginators.json').pagination;
-}
+apiLoader.services['directconnect']['2012-10-25'] = require('../apis/directconnect-2012-10-25.min.json');
+apiLoader.services['directconnect']['2012-10-25'].paginators = require('../apis/directconnect-2012-10-25.paginators.json').pagination;
 
 module.exports = AWS.DirectConnect;
 
@@ -81437,19 +81959,17 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'DynamoDB')) {
-  apiLoader.services['dynamodb'] = {};
-  AWS.DynamoDB = Service.defineService('dynamodb', ['2011-12-05', '2012-08-10']);
-  require('../lib/services/dynamodb');
+apiLoader.services['dynamodb'] = {};
+AWS.DynamoDB = Service.defineService('dynamodb', ['2011-12-05', '2012-08-10']);
+require('../lib/services/dynamodb');
 
-  apiLoader.services['dynamodb']['2011-12-05'] = require('../apis/dynamodb-2011-12-05.min.json');
-  apiLoader.services['dynamodb']['2011-12-05'].paginators = require('../apis/dynamodb-2011-12-05.paginators.json').pagination;
-  apiLoader.services['dynamodb']['2011-12-05'].waiters = require('../apis/dynamodb-2011-12-05.waiters2.json').waiters;
+apiLoader.services['dynamodb']['2011-12-05'] = require('../apis/dynamodb-2011-12-05.min.json');
+apiLoader.services['dynamodb']['2011-12-05'].paginators = require('../apis/dynamodb-2011-12-05.paginators.json').pagination;
+apiLoader.services['dynamodb']['2011-12-05'].waiters = require('../apis/dynamodb-2011-12-05.waiters2.json').waiters;
 
-  apiLoader.services['dynamodb']['2012-08-10'] = require('../apis/dynamodb-2012-08-10.min.json');
-  apiLoader.services['dynamodb']['2012-08-10'].paginators = require('../apis/dynamodb-2012-08-10.paginators.json').pagination;
-  apiLoader.services['dynamodb']['2012-08-10'].waiters = require('../apis/dynamodb-2012-08-10.waiters2.json').waiters;
-}
+apiLoader.services['dynamodb']['2012-08-10'] = require('../apis/dynamodb-2012-08-10.min.json');
+apiLoader.services['dynamodb']['2012-08-10'].paginators = require('../apis/dynamodb-2012-08-10.paginators.json').pagination;
+apiLoader.services['dynamodb']['2012-08-10'].waiters = require('../apis/dynamodb-2012-08-10.waiters2.json').waiters;
 
 module.exports = AWS.DynamoDB;
 
@@ -81459,12 +81979,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'DynamoDBStreams')) {
-  apiLoader.services['dynamodbstreams'] = {};
-  AWS.DynamoDBStreams = Service.defineService('dynamodbstreams', ['2012-08-10']);
+apiLoader.services['dynamodbstreams'] = {};
+AWS.DynamoDBStreams = Service.defineService('dynamodbstreams', ['2012-08-10']);
 
-  apiLoader.services['dynamodbstreams']['2012-08-10'] = require('../apis/streams.dynamodb-2012-08-10.min.json');
-}
+apiLoader.services['dynamodbstreams']['2012-08-10'] = require('../apis/streams.dynamodb-2012-08-10.min.json');
 
 module.exports = AWS.DynamoDBStreams;
 
@@ -81474,15 +81992,13 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'EC2')) {
-  apiLoader.services['ec2'] = {};
-  AWS.EC2 = Service.defineService('ec2', ['2016-04-01']);
-  require('../lib/services/ec2');
+apiLoader.services['ec2'] = {};
+AWS.EC2 = Service.defineService('ec2', ['2016-04-01']);
+require('../lib/services/ec2');
 
-  apiLoader.services['ec2']['2016-04-01'] = require('../apis/ec2-2016-04-01.min.json');
-  apiLoader.services['ec2']['2016-04-01'].paginators = require('../apis/ec2-2016-04-01.paginators.json').pagination;
-  apiLoader.services['ec2']['2016-04-01'].waiters = require('../apis/ec2-2016-04-01.waiters2.json').waiters;
-}
+apiLoader.services['ec2']['2016-04-01'] = require('../apis/ec2-2016-04-01.min.json');
+apiLoader.services['ec2']['2016-04-01'].paginators = require('../apis/ec2-2016-04-01.paginators.json').pagination;
+apiLoader.services['ec2']['2016-04-01'].waiters = require('../apis/ec2-2016-04-01.waiters2.json').waiters;
 
 module.exports = AWS.EC2;
 
@@ -81492,12 +82008,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ECR')) {
-  apiLoader.services['ecr'] = {};
-  AWS.ECR = Service.defineService('ecr', ['2015-09-21']);
+apiLoader.services['ecr'] = {};
+AWS.ECR = Service.defineService('ecr', ['2015-09-21']);
 
-  apiLoader.services['ecr']['2015-09-21'] = require('../apis/ecr-2015-09-21.min.json');
-}
+apiLoader.services['ecr']['2015-09-21'] = require('../apis/ecr-2015-09-21.min.json');
 
 module.exports = AWS.ECR;
 
@@ -81507,14 +82021,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ECS')) {
-  apiLoader.services['ecs'] = {};
-  AWS.ECS = Service.defineService('ecs', ['2014-11-13']);
+apiLoader.services['ecs'] = {};
+AWS.ECS = Service.defineService('ecs', ['2014-11-13']);
 
-  apiLoader.services['ecs']['2014-11-13'] = require('../apis/ecs-2014-11-13.min.json');
-  apiLoader.services['ecs']['2014-11-13'].paginators = require('../apis/ecs-2014-11-13.paginators.json').pagination;
-  apiLoader.services['ecs']['2014-11-13'].waiters = require('../apis/ecs-2014-11-13.waiters2.json').waiters;
-}
+apiLoader.services['ecs']['2014-11-13'] = require('../apis/ecs-2014-11-13.min.json');
+apiLoader.services['ecs']['2014-11-13'].paginators = require('../apis/ecs-2014-11-13.paginators.json').pagination;
+apiLoader.services['ecs']['2014-11-13'].waiters = require('../apis/ecs-2014-11-13.waiters2.json').waiters;
 
 module.exports = AWS.ECS;
 
@@ -81524,14 +82036,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ElastiCache')) {
-  apiLoader.services['elasticache'] = {};
-  AWS.ElastiCache = Service.defineService('elasticache', ['2015-02-02']);
+apiLoader.services['elasticache'] = {};
+AWS.ElastiCache = Service.defineService('elasticache', ['2015-02-02']);
 
-  apiLoader.services['elasticache']['2015-02-02'] = require('../apis/elasticache-2015-02-02.min.json');
-  apiLoader.services['elasticache']['2015-02-02'].paginators = require('../apis/elasticache-2015-02-02.paginators.json').pagination;
-  apiLoader.services['elasticache']['2015-02-02'].waiters = require('../apis/elasticache-2015-02-02.waiters2.json').waiters;
-}
+apiLoader.services['elasticache']['2015-02-02'] = require('../apis/elasticache-2015-02-02.min.json');
+apiLoader.services['elasticache']['2015-02-02'].paginators = require('../apis/elasticache-2015-02-02.paginators.json').pagination;
+apiLoader.services['elasticache']['2015-02-02'].waiters = require('../apis/elasticache-2015-02-02.waiters2.json').waiters;
 
 module.exports = AWS.ElastiCache;
 
@@ -81541,13 +82051,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ElasticBeanstalk')) {
-  apiLoader.services['elasticbeanstalk'] = {};
-  AWS.ElasticBeanstalk = Service.defineService('elasticbeanstalk', ['2010-12-01']);
+apiLoader.services['elasticbeanstalk'] = {};
+AWS.ElasticBeanstalk = Service.defineService('elasticbeanstalk', ['2010-12-01']);
 
-  apiLoader.services['elasticbeanstalk']['2010-12-01'] = require('../apis/elasticbeanstalk-2010-12-01.min.json');
-  apiLoader.services['elasticbeanstalk']['2010-12-01'].paginators = require('../apis/elasticbeanstalk-2010-12-01.paginators.json').pagination;
-}
+apiLoader.services['elasticbeanstalk']['2010-12-01'] = require('../apis/elasticbeanstalk-2010-12-01.min.json');
+apiLoader.services['elasticbeanstalk']['2010-12-01'].paginators = require('../apis/elasticbeanstalk-2010-12-01.paginators.json').pagination;
 
 module.exports = AWS.ElasticBeanstalk;
 
@@ -81557,14 +82065,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ElasticTranscoder')) {
-  apiLoader.services['elastictranscoder'] = {};
-  AWS.ElasticTranscoder = Service.defineService('elastictranscoder', ['2012-09-25']);
+apiLoader.services['elastictranscoder'] = {};
+AWS.ElasticTranscoder = Service.defineService('elastictranscoder', ['2012-09-25']);
 
-  apiLoader.services['elastictranscoder']['2012-09-25'] = require('../apis/elastictranscoder-2012-09-25.min.json');
-  apiLoader.services['elastictranscoder']['2012-09-25'].paginators = require('../apis/elastictranscoder-2012-09-25.paginators.json').pagination;
-  apiLoader.services['elastictranscoder']['2012-09-25'].waiters = require('../apis/elastictranscoder-2012-09-25.waiters2.json').waiters;
-}
+apiLoader.services['elastictranscoder']['2012-09-25'] = require('../apis/elastictranscoder-2012-09-25.min.json');
+apiLoader.services['elastictranscoder']['2012-09-25'].paginators = require('../apis/elastictranscoder-2012-09-25.paginators.json').pagination;
+apiLoader.services['elastictranscoder']['2012-09-25'].waiters = require('../apis/elastictranscoder-2012-09-25.waiters2.json').waiters;
 
 module.exports = AWS.ElasticTranscoder;
 
@@ -81574,14 +82080,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ELB')) {
-  apiLoader.services['elb'] = {};
-  AWS.ELB = Service.defineService('elb', ['2012-06-01']);
+apiLoader.services['elb'] = {};
+AWS.ELB = Service.defineService('elb', ['2012-06-01']);
 
-  apiLoader.services['elb']['2012-06-01'] = require('../apis/elasticloadbalancing-2012-06-01.min.json');
-  apiLoader.services['elb']['2012-06-01'].paginators = require('../apis/elasticloadbalancing-2012-06-01.paginators.json').pagination;
-  apiLoader.services['elb']['2012-06-01'].waiters = require('../apis/elasticloadbalancing-2012-06-01.waiters2.json').waiters;
-}
+apiLoader.services['elb']['2012-06-01'] = require('../apis/elasticloadbalancing-2012-06-01.min.json');
+apiLoader.services['elb']['2012-06-01'].paginators = require('../apis/elasticloadbalancing-2012-06-01.paginators.json').pagination;
+apiLoader.services['elb']['2012-06-01'].waiters = require('../apis/elasticloadbalancing-2012-06-01.waiters2.json').waiters;
 
 module.exports = AWS.ELB;
 
@@ -81591,13 +82095,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ELBv2')) {
-  apiLoader.services['elbv2'] = {};
-  AWS.ELBv2 = Service.defineService('elbv2', ['2015-12-01']);
+apiLoader.services['elbv2'] = {};
+AWS.ELBv2 = Service.defineService('elbv2', ['2015-12-01']);
 
-  apiLoader.services['elbv2']['2015-12-01'] = require('../apis/elasticloadbalancingv2-2015-12-01.min.json');
-  apiLoader.services['elbv2']['2015-12-01'].paginators = require('../apis/elasticloadbalancingv2-2015-12-01.paginators.json').pagination;
-}
+apiLoader.services['elbv2']['2015-12-01'] = require('../apis/elasticloadbalancingv2-2015-12-01.min.json');
+apiLoader.services['elbv2']['2015-12-01'].paginators = require('../apis/elasticloadbalancingv2-2015-12-01.paginators.json').pagination;
 
 module.exports = AWS.ELBv2;
 
@@ -81607,14 +82109,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'EMR')) {
-  apiLoader.services['emr'] = {};
-  AWS.EMR = Service.defineService('emr', ['2009-03-31']);
+apiLoader.services['emr'] = {};
+AWS.EMR = Service.defineService('emr', ['2009-03-31']);
 
-  apiLoader.services['emr']['2009-03-31'] = require('../apis/elasticmapreduce-2009-03-31.min.json');
-  apiLoader.services['emr']['2009-03-31'].paginators = require('../apis/elasticmapreduce-2009-03-31.paginators.json').pagination;
-  apiLoader.services['emr']['2009-03-31'].waiters = require('../apis/elasticmapreduce-2009-03-31.waiters2.json').waiters;
-}
+apiLoader.services['emr']['2009-03-31'] = require('../apis/elasticmapreduce-2009-03-31.min.json');
+apiLoader.services['emr']['2009-03-31'].paginators = require('../apis/elasticmapreduce-2009-03-31.paginators.json').pagination;
+apiLoader.services['emr']['2009-03-31'].waiters = require('../apis/elasticmapreduce-2009-03-31.waiters2.json').waiters;
 
 module.exports = AWS.EMR;
 
@@ -81624,12 +82124,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'Firehose')) {
-  apiLoader.services['firehose'] = {};
-  AWS.Firehose = Service.defineService('firehose', ['2015-08-04']);
+apiLoader.services['firehose'] = {};
+AWS.Firehose = Service.defineService('firehose', ['2015-08-04']);
 
-  apiLoader.services['firehose']['2015-08-04'] = require('../apis/firehose-2015-08-04.min.json');
-}
+apiLoader.services['firehose']['2015-08-04'] = require('../apis/firehose-2015-08-04.min.json');
 
 module.exports = AWS.Firehose;
 
@@ -81639,12 +82137,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'GameLift')) {
-  apiLoader.services['gamelift'] = {};
-  AWS.GameLift = Service.defineService('gamelift', ['2015-10-01']);
+apiLoader.services['gamelift'] = {};
+AWS.GameLift = Service.defineService('gamelift', ['2015-10-01']);
 
-  apiLoader.services['gamelift']['2015-10-01'] = require('../apis/gamelift-2015-10-01.min.json');
-}
+apiLoader.services['gamelift']['2015-10-01'] = require('../apis/gamelift-2015-10-01.min.json');
 
 module.exports = AWS.GameLift;
 
@@ -81654,12 +82150,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'Inspector')) {
-  apiLoader.services['inspector'] = {};
-  AWS.Inspector = Service.defineService('inspector', ['2016-02-16']);
+apiLoader.services['inspector'] = {};
+AWS.Inspector = Service.defineService('inspector', ['2016-02-16']);
 
-  apiLoader.services['inspector']['2016-02-16'] = require('../apis/inspector-2016-02-16.min.json');
-}
+apiLoader.services['inspector']['2016-02-16'] = require('../apis/inspector-2016-02-16.min.json');
 
 module.exports = AWS.Inspector;
 
@@ -81669,12 +82163,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'Iot')) {
-  apiLoader.services['iot'] = {};
-  AWS.Iot = Service.defineService('iot', ['2015-05-28']);
+apiLoader.services['iot'] = {};
+AWS.Iot = Service.defineService('iot', ['2015-05-28']);
 
-  apiLoader.services['iot']['2015-05-28'] = require('../apis/iot-2015-05-28.min.json');
-}
+apiLoader.services['iot']['2015-05-28'] = require('../apis/iot-2015-05-28.min.json');
 
 module.exports = AWS.Iot;
 
@@ -81684,13 +82176,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'IotData')) {
-  apiLoader.services['iotdata'] = {};
-  AWS.IotData = Service.defineService('iotdata', ['2015-05-28']);
-  require('../lib/services/iotdata');
+apiLoader.services['iotdata'] = {};
+AWS.IotData = Service.defineService('iotdata', ['2015-05-28']);
+require('../lib/services/iotdata');
 
-  apiLoader.services['iotdata']['2015-05-28'] = require('../apis/iot-data-2015-05-28.min.json');
-}
+apiLoader.services['iotdata']['2015-05-28'] = require('../apis/iot-data-2015-05-28.min.json');
 
 module.exports = AWS.IotData;
 
@@ -81700,14 +82190,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'Kinesis')) {
-  apiLoader.services['kinesis'] = {};
-  AWS.Kinesis = Service.defineService('kinesis', ['2013-12-02']);
+apiLoader.services['kinesis'] = {};
+AWS.Kinesis = Service.defineService('kinesis', ['2013-12-02']);
 
-  apiLoader.services['kinesis']['2013-12-02'] = require('../apis/kinesis-2013-12-02.min.json');
-  apiLoader.services['kinesis']['2013-12-02'].paginators = require('../apis/kinesis-2013-12-02.paginators.json').pagination;
-  apiLoader.services['kinesis']['2013-12-02'].waiters = require('../apis/kinesis-2013-12-02.waiters2.json').waiters;
-}
+apiLoader.services['kinesis']['2013-12-02'] = require('../apis/kinesis-2013-12-02.min.json');
+apiLoader.services['kinesis']['2013-12-02'].paginators = require('../apis/kinesis-2013-12-02.paginators.json').pagination;
+apiLoader.services['kinesis']['2013-12-02'].waiters = require('../apis/kinesis-2013-12-02.waiters2.json').waiters;
 
 module.exports = AWS.Kinesis;
 
@@ -81717,13 +82205,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'KMS')) {
-  apiLoader.services['kms'] = {};
-  AWS.KMS = Service.defineService('kms', ['2014-11-01']);
+apiLoader.services['kms'] = {};
+AWS.KMS = Service.defineService('kms', ['2014-11-01']);
 
-  apiLoader.services['kms']['2014-11-01'] = require('../apis/kms-2014-11-01.min.json');
-  apiLoader.services['kms']['2014-11-01'].paginators = require('../apis/kms-2014-11-01.paginators.json').pagination;
-}
+apiLoader.services['kms']['2014-11-01'] = require('../apis/kms-2014-11-01.min.json');
+apiLoader.services['kms']['2014-11-01'].paginators = require('../apis/kms-2014-11-01.paginators.json').pagination;
 
 module.exports = AWS.KMS;
 
@@ -81733,16 +82219,14 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'Lambda')) {
-  apiLoader.services['lambda'] = {};
-  AWS.Lambda = Service.defineService('lambda', ['2014-11-11', '2015-03-31']);
+apiLoader.services['lambda'] = {};
+AWS.Lambda = Service.defineService('lambda', ['2014-11-11', '2015-03-31']);
 
-  apiLoader.services['lambda']['2014-11-11'] = require('../apis/lambda-2014-11-11.min.json');
-  apiLoader.services['lambda']['2014-11-11'].paginators = require('../apis/lambda-2014-11-11.paginators.json').pagination;
+apiLoader.services['lambda']['2014-11-11'] = require('../apis/lambda-2014-11-11.min.json');
+apiLoader.services['lambda']['2014-11-11'].paginators = require('../apis/lambda-2014-11-11.paginators.json').pagination;
 
-  apiLoader.services['lambda']['2015-03-31'] = require('../apis/lambda-2015-03-31.min.json');
-  apiLoader.services['lambda']['2015-03-31'].paginators = require('../apis/lambda-2015-03-31.paginators.json').pagination;
-}
+apiLoader.services['lambda']['2015-03-31'] = require('../apis/lambda-2015-03-31.min.json');
+apiLoader.services['lambda']['2015-03-31'].paginators = require('../apis/lambda-2015-03-31.paginators.json').pagination;
 
 module.exports = AWS.Lambda;
 
@@ -81752,15 +82236,13 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'MachineLearning')) {
-  apiLoader.services['machinelearning'] = {};
-  AWS.MachineLearning = Service.defineService('machinelearning', ['2014-12-12']);
-  require('../lib/services/machinelearning');
+apiLoader.services['machinelearning'] = {};
+AWS.MachineLearning = Service.defineService('machinelearning', ['2014-12-12']);
+require('../lib/services/machinelearning');
 
-  apiLoader.services['machinelearning']['2014-12-12'] = require('../apis/machinelearning-2014-12-12.min.json');
-  apiLoader.services['machinelearning']['2014-12-12'].paginators = require('../apis/machinelearning-2014-12-12.paginators.json').pagination;
-  apiLoader.services['machinelearning']['2014-12-12'].waiters = require('../apis/machinelearning-2014-12-12.waiters2.json').waiters;
-}
+apiLoader.services['machinelearning']['2014-12-12'] = require('../apis/machinelearning-2014-12-12.min.json');
+apiLoader.services['machinelearning']['2014-12-12'].paginators = require('../apis/machinelearning-2014-12-12.paginators.json').pagination;
+apiLoader.services['machinelearning']['2014-12-12'].waiters = require('../apis/machinelearning-2014-12-12.waiters2.json').waiters;
 
 module.exports = AWS.MachineLearning;
 
@@ -81770,12 +82252,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'MarketplaceCommerceAnalytics')) {
-  apiLoader.services['marketplacecommerceanalytics'] = {};
-  AWS.MarketplaceCommerceAnalytics = Service.defineService('marketplacecommerceanalytics', ['2015-07-01']);
+apiLoader.services['marketplacecommerceanalytics'] = {};
+AWS.MarketplaceCommerceAnalytics = Service.defineService('marketplacecommerceanalytics', ['2015-07-01']);
 
-  apiLoader.services['marketplacecommerceanalytics']['2015-07-01'] = require('../apis/marketplacecommerceanalytics-2015-07-01.min.json');
-}
+apiLoader.services['marketplacecommerceanalytics']['2015-07-01'] = require('../apis/marketplacecommerceanalytics-2015-07-01.min.json');
 
 module.exports = AWS.MarketplaceCommerceAnalytics;
 
@@ -81785,12 +82265,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'MobileAnalytics')) {
-  apiLoader.services['mobileanalytics'] = {};
-  AWS.MobileAnalytics = Service.defineService('mobileanalytics', ['2014-06-05']);
+apiLoader.services['mobileanalytics'] = {};
+AWS.MobileAnalytics = Service.defineService('mobileanalytics', ['2014-06-05']);
 
-  apiLoader.services['mobileanalytics']['2014-06-05'] = require('../apis/mobileanalytics-2014-06-05.min.json');
-}
+apiLoader.services['mobileanalytics']['2014-06-05'] = require('../apis/mobileanalytics-2014-06-05.min.json');
 
 module.exports = AWS.MobileAnalytics;
 
@@ -81800,14 +82278,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'OpsWorks')) {
-  apiLoader.services['opsworks'] = {};
-  AWS.OpsWorks = Service.defineService('opsworks', ['2013-02-18']);
+apiLoader.services['opsworks'] = {};
+AWS.OpsWorks = Service.defineService('opsworks', ['2013-02-18']);
 
-  apiLoader.services['opsworks']['2013-02-18'] = require('../apis/opsworks-2013-02-18.min.json');
-  apiLoader.services['opsworks']['2013-02-18'].paginators = require('../apis/opsworks-2013-02-18.paginators.json').pagination;
-  apiLoader.services['opsworks']['2013-02-18'].waiters = require('../apis/opsworks-2013-02-18.waiters2.json').waiters;
-}
+apiLoader.services['opsworks']['2013-02-18'] = require('../apis/opsworks-2013-02-18.min.json');
+apiLoader.services['opsworks']['2013-02-18'].paginators = require('../apis/opsworks-2013-02-18.paginators.json').pagination;
+apiLoader.services['opsworks']['2013-02-18'].waiters = require('../apis/opsworks-2013-02-18.waiters2.json').waiters;
 
 module.exports = AWS.OpsWorks;
 
@@ -81817,24 +82293,22 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'RDS')) {
-  apiLoader.services['rds'] = {};
-  AWS.RDS = Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-09-09', '2014-10-31']);
+apiLoader.services['rds'] = {};
+AWS.RDS = Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-09-09', '2014-10-31']);
 
-  apiLoader.services['rds']['2013-01-10'] = require('../apis/rds-2013-01-10.min.json');
-  apiLoader.services['rds']['2013-01-10'].paginators = require('../apis/rds-2013-01-10.paginators.json').pagination;
+apiLoader.services['rds']['2013-01-10'] = require('../apis/rds-2013-01-10.min.json');
+apiLoader.services['rds']['2013-01-10'].paginators = require('../apis/rds-2013-01-10.paginators.json').pagination;
 
-  apiLoader.services['rds']['2013-02-12'] = require('../apis/rds-2013-02-12.min.json');
-  apiLoader.services['rds']['2013-02-12'].paginators = require('../apis/rds-2013-02-12.paginators.json').pagination;
+apiLoader.services['rds']['2013-02-12'] = require('../apis/rds-2013-02-12.min.json');
+apiLoader.services['rds']['2013-02-12'].paginators = require('../apis/rds-2013-02-12.paginators.json').pagination;
 
-  apiLoader.services['rds']['2013-09-09'] = require('../apis/rds-2013-09-09.min.json');
-  apiLoader.services['rds']['2013-09-09'].paginators = require('../apis/rds-2013-09-09.paginators.json').pagination;
-  apiLoader.services['rds']['2013-09-09'].waiters = require('../apis/rds-2013-09-09.waiters2.json').waiters;
+apiLoader.services['rds']['2013-09-09'] = require('../apis/rds-2013-09-09.min.json');
+apiLoader.services['rds']['2013-09-09'].paginators = require('../apis/rds-2013-09-09.paginators.json').pagination;
+apiLoader.services['rds']['2013-09-09'].waiters = require('../apis/rds-2013-09-09.waiters2.json').waiters;
 
-  apiLoader.services['rds']['2014-10-31'] = require('../apis/rds-2014-10-31.min.json');
-  apiLoader.services['rds']['2014-10-31'].paginators = require('../apis/rds-2014-10-31.paginators.json').pagination;
-  apiLoader.services['rds']['2014-10-31'].waiters = require('../apis/rds-2014-10-31.waiters2.json').waiters;
-}
+apiLoader.services['rds']['2014-10-31'] = require('../apis/rds-2014-10-31.min.json');
+apiLoader.services['rds']['2014-10-31'].paginators = require('../apis/rds-2014-10-31.paginators.json').pagination;
+apiLoader.services['rds']['2014-10-31'].waiters = require('../apis/rds-2014-10-31.waiters2.json').waiters;
 
 module.exports = AWS.RDS;
 
@@ -81844,14 +82318,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'Redshift')) {
-  apiLoader.services['redshift'] = {};
-  AWS.Redshift = Service.defineService('redshift', ['2012-12-01']);
+apiLoader.services['redshift'] = {};
+AWS.Redshift = Service.defineService('redshift', ['2012-12-01']);
 
-  apiLoader.services['redshift']['2012-12-01'] = require('../apis/redshift-2012-12-01.min.json');
-  apiLoader.services['redshift']['2012-12-01'].paginators = require('../apis/redshift-2012-12-01.paginators.json').pagination;
-  apiLoader.services['redshift']['2012-12-01'].waiters = require('../apis/redshift-2012-12-01.waiters2.json').waiters;
-}
+apiLoader.services['redshift']['2012-12-01'] = require('../apis/redshift-2012-12-01.min.json');
+apiLoader.services['redshift']['2012-12-01'].paginators = require('../apis/redshift-2012-12-01.paginators.json').pagination;
+apiLoader.services['redshift']['2012-12-01'].waiters = require('../apis/redshift-2012-12-01.waiters2.json').waiters;
 
 module.exports = AWS.Redshift;
 
@@ -81861,15 +82333,13 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'Route53')) {
-  apiLoader.services['route53'] = {};
-  AWS.Route53 = Service.defineService('route53', ['2013-04-01']);
-  require('../lib/services/route53');
+apiLoader.services['route53'] = {};
+AWS.Route53 = Service.defineService('route53', ['2013-04-01']);
+require('../lib/services/route53');
 
-  apiLoader.services['route53']['2013-04-01'] = require('../apis/route53-2013-04-01.min.json');
-  apiLoader.services['route53']['2013-04-01'].paginators = require('../apis/route53-2013-04-01.paginators.json').pagination;
-  apiLoader.services['route53']['2013-04-01'].waiters = require('../apis/route53-2013-04-01.waiters2.json').waiters;
-}
+apiLoader.services['route53']['2013-04-01'] = require('../apis/route53-2013-04-01.min.json');
+apiLoader.services['route53']['2013-04-01'].paginators = require('../apis/route53-2013-04-01.paginators.json').pagination;
+apiLoader.services['route53']['2013-04-01'].waiters = require('../apis/route53-2013-04-01.waiters2.json').waiters;
 
 module.exports = AWS.Route53;
 
@@ -81879,13 +82349,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'Route53Domains')) {
-  apiLoader.services['route53domains'] = {};
-  AWS.Route53Domains = Service.defineService('route53domains', ['2014-05-15']);
+apiLoader.services['route53domains'] = {};
+AWS.Route53Domains = Service.defineService('route53domains', ['2014-05-15']);
 
-  apiLoader.services['route53domains']['2014-05-15'] = require('../apis/route53domains-2014-05-15.min.json');
-  apiLoader.services['route53domains']['2014-05-15'].paginators = require('../apis/route53domains-2014-05-15.paginators.json').pagination;
-}
+apiLoader.services['route53domains']['2014-05-15'] = require('../apis/route53domains-2014-05-15.min.json');
+apiLoader.services['route53domains']['2014-05-15'].paginators = require('../apis/route53domains-2014-05-15.paginators.json').pagination;
 
 module.exports = AWS.Route53Domains;
 
@@ -81895,15 +82363,13 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'S3')) {
-  apiLoader.services['s3'] = {};
-  AWS.S3 = Service.defineService('s3', ['2006-03-01']);
-  require('../lib/services/s3');
+apiLoader.services['s3'] = {};
+AWS.S3 = Service.defineService('s3', ['2006-03-01']);
+require('../lib/services/s3');
 
-  apiLoader.services['s3']['2006-03-01'] = require('../apis/s3-2006-03-01.min.json');
-  apiLoader.services['s3']['2006-03-01'].paginators = require('../apis/s3-2006-03-01.paginators.json').pagination;
-  apiLoader.services['s3']['2006-03-01'].waiters = require('../apis/s3-2006-03-01.waiters2.json').waiters;
-}
+apiLoader.services['s3']['2006-03-01'] = require('../apis/s3-2006-03-01.min.json');
+apiLoader.services['s3']['2006-03-01'].paginators = require('../apis/s3-2006-03-01.paginators.json').pagination;
+apiLoader.services['s3']['2006-03-01'].waiters = require('../apis/s3-2006-03-01.waiters2.json').waiters;
 
 module.exports = AWS.S3;
 
@@ -81913,12 +82379,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ServiceCatalog')) {
-  apiLoader.services['servicecatalog'] = {};
-  AWS.ServiceCatalog = Service.defineService('servicecatalog', ['2015-12-10']);
+apiLoader.services['servicecatalog'] = {};
+AWS.ServiceCatalog = Service.defineService('servicecatalog', ['2015-12-10']);
 
-  apiLoader.services['servicecatalog']['2015-12-10'] = require('../apis/servicecatalog-2015-12-10.min.json');
-}
+apiLoader.services['servicecatalog']['2015-12-10'] = require('../apis/servicecatalog-2015-12-10.min.json');
 
 module.exports = AWS.ServiceCatalog;
 
@@ -81928,14 +82392,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'SES')) {
-  apiLoader.services['ses'] = {};
-  AWS.SES = Service.defineService('ses', ['2010-12-01']);
+apiLoader.services['ses'] = {};
+AWS.SES = Service.defineService('ses', ['2010-12-01']);
 
-  apiLoader.services['ses']['2010-12-01'] = require('../apis/email-2010-12-01.min.json');
-  apiLoader.services['ses']['2010-12-01'].paginators = require('../apis/email-2010-12-01.paginators.json').pagination;
-  apiLoader.services['ses']['2010-12-01'].waiters = require('../apis/email-2010-12-01.waiters2.json').waiters;
-}
+apiLoader.services['ses']['2010-12-01'] = require('../apis/email-2010-12-01.min.json');
+apiLoader.services['ses']['2010-12-01'].paginators = require('../apis/email-2010-12-01.paginators.json').pagination;
+apiLoader.services['ses']['2010-12-01'].waiters = require('../apis/email-2010-12-01.waiters2.json').waiters;
 
 module.exports = AWS.SES;
 
@@ -81945,13 +82407,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'SNS')) {
-  apiLoader.services['sns'] = {};
-  AWS.SNS = Service.defineService('sns', ['2010-03-31']);
+apiLoader.services['sns'] = {};
+AWS.SNS = Service.defineService('sns', ['2010-03-31']);
 
-  apiLoader.services['sns']['2010-03-31'] = require('../apis/sns-2010-03-31.min.json');
-  apiLoader.services['sns']['2010-03-31'].paginators = require('../apis/sns-2010-03-31.paginators.json').pagination;
-}
+apiLoader.services['sns']['2010-03-31'] = require('../apis/sns-2010-03-31.min.json');
+apiLoader.services['sns']['2010-03-31'].paginators = require('../apis/sns-2010-03-31.paginators.json').pagination;
 
 module.exports = AWS.SNS;
 
@@ -81961,14 +82421,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'SQS')) {
-  apiLoader.services['sqs'] = {};
-  AWS.SQS = Service.defineService('sqs', ['2012-11-05']);
-  require('../lib/services/sqs');
+apiLoader.services['sqs'] = {};
+AWS.SQS = Service.defineService('sqs', ['2012-11-05']);
+require('../lib/services/sqs');
 
-  apiLoader.services['sqs']['2012-11-05'] = require('../apis/sqs-2012-11-05.min.json');
-  apiLoader.services['sqs']['2012-11-05'].paginators = require('../apis/sqs-2012-11-05.paginators.json').pagination;
-}
+apiLoader.services['sqs']['2012-11-05'] = require('../apis/sqs-2012-11-05.min.json');
+apiLoader.services['sqs']['2012-11-05'].paginators = require('../apis/sqs-2012-11-05.paginators.json').pagination;
 
 module.exports = AWS.SQS;
 
@@ -81978,13 +82436,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'SSM')) {
-  apiLoader.services['ssm'] = {};
-  AWS.SSM = Service.defineService('ssm', ['2014-11-06']);
+apiLoader.services['ssm'] = {};
+AWS.SSM = Service.defineService('ssm', ['2014-11-06']);
 
-  apiLoader.services['ssm']['2014-11-06'] = require('../apis/ssm-2014-11-06.min.json');
-  apiLoader.services['ssm']['2014-11-06'].paginators = require('../apis/ssm-2014-11-06.paginators.json').pagination;
-}
+apiLoader.services['ssm']['2014-11-06'] = require('../apis/ssm-2014-11-06.min.json');
+apiLoader.services['ssm']['2014-11-06'].paginators = require('../apis/ssm-2014-11-06.paginators.json').pagination;
 
 module.exports = AWS.SSM;
 
@@ -81994,13 +82450,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'StorageGateway')) {
-  apiLoader.services['storagegateway'] = {};
-  AWS.StorageGateway = Service.defineService('storagegateway', ['2013-06-30']);
+apiLoader.services['storagegateway'] = {};
+AWS.StorageGateway = Service.defineService('storagegateway', ['2013-06-30']);
 
-  apiLoader.services['storagegateway']['2013-06-30'] = require('../apis/storagegateway-2013-06-30.min.json');
-  apiLoader.services['storagegateway']['2013-06-30'].paginators = require('../apis/storagegateway-2013-06-30.paginators.json').pagination;
-}
+apiLoader.services['storagegateway']['2013-06-30'] = require('../apis/storagegateway-2013-06-30.min.json');
+apiLoader.services['storagegateway']['2013-06-30'].paginators = require('../apis/storagegateway-2013-06-30.paginators.json').pagination;
 
 module.exports = AWS.StorageGateway;
 
@@ -82010,13 +82464,11 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'STS')) {
-  apiLoader.services['sts'] = {};
-  AWS.STS = Service.defineService('sts', ['2011-06-15']);
-  require('../lib/services/sts');
+apiLoader.services['sts'] = {};
+AWS.STS = Service.defineService('sts', ['2011-06-15']);
+require('../lib/services/sts');
 
-  apiLoader.services['sts']['2011-06-15'] = require('../apis/sts-2011-06-15.min.json');
-}
+apiLoader.services['sts']['2011-06-15'] = require('../apis/sts-2011-06-15.min.json');
 
 module.exports = AWS.STS;
 
@@ -82026,12 +82478,10 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'WAF')) {
-  apiLoader.services['waf'] = {};
-  AWS.WAF = Service.defineService('waf', ['2015-08-24']);
+apiLoader.services['waf'] = {};
+AWS.WAF = Service.defineService('waf', ['2015-08-24']);
 
-  apiLoader.services['waf']['2015-08-24'] = require('../apis/waf-2015-08-24.min.json');
-}
+apiLoader.services['waf']['2015-08-24'] = require('../apis/waf-2015-08-24.min.json');
 
 module.exports = AWS.WAF;
 
@@ -82421,7 +82871,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.6.0',
+  VERSION: '2.6.1',
 
 
   Signers: {},
