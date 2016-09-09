@@ -3,12 +3,13 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'SSM')) {
-  apiLoader.services['ssm'] = {};
-  AWS.SSM = Service.defineService('ssm', ['2014-11-06']);
+apiLoader.services['ssm'] = {};
+SSM = Service.defineService('ssm', ['2014-11-06']);
 
-  apiLoader.services['ssm']['2014-11-06'] = require('../apis/ssm-2014-11-06.min.json');
-  apiLoader.services['ssm']['2014-11-06'].paginators = require('../apis/ssm-2014-11-06.paginators.json').pagination;
+apiLoader.services['ssm']['2014-11-06'] = require('../apis/ssm-2014-11-06.min.json');
+apiLoader.services['ssm']['2014-11-06'].paginators = require('../apis/ssm-2014-11-06.paginators.json').pagination;
+if (!Object.prototype.hasOwnProperty.call(AWS, 'SSM')) {
+  AWS.SSM = SSM;
 }
 
-module.exports = AWS.SSM;
+module.exports = SSM;

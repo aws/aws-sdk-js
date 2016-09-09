@@ -3,13 +3,14 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'OpsWorks')) {
-  apiLoader.services['opsworks'] = {};
-  AWS.OpsWorks = Service.defineService('opsworks', ['2013-02-18']);
+apiLoader.services['opsworks'] = {};
+OpsWorks = Service.defineService('opsworks', ['2013-02-18']);
 
-  apiLoader.services['opsworks']['2013-02-18'] = require('../apis/opsworks-2013-02-18.min.json');
-  apiLoader.services['opsworks']['2013-02-18'].paginators = require('../apis/opsworks-2013-02-18.paginators.json').pagination;
-  apiLoader.services['opsworks']['2013-02-18'].waiters = require('../apis/opsworks-2013-02-18.waiters2.json').waiters;
+apiLoader.services['opsworks']['2013-02-18'] = require('../apis/opsworks-2013-02-18.min.json');
+apiLoader.services['opsworks']['2013-02-18'].paginators = require('../apis/opsworks-2013-02-18.paginators.json').pagination;
+apiLoader.services['opsworks']['2013-02-18'].waiters = require('../apis/opsworks-2013-02-18.waiters2.json').waiters;
+if (!Object.prototype.hasOwnProperty.call(AWS, 'OpsWorks')) {
+  AWS.OpsWorks = OpsWorks;
 }
 
-module.exports = AWS.OpsWorks;
+module.exports = OpsWorks;

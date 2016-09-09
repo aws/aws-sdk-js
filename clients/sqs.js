@@ -3,13 +3,14 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'SQS')) {
-  apiLoader.services['sqs'] = {};
-  AWS.SQS = Service.defineService('sqs', ['2012-11-05']);
-  require('../lib/services/sqs');
+apiLoader.services['sqs'] = {};
+SQS = Service.defineService('sqs', ['2012-11-05']);
+require('../lib/services/sqs')(SQS);
 
-  apiLoader.services['sqs']['2012-11-05'] = require('../apis/sqs-2012-11-05.min.json');
-  apiLoader.services['sqs']['2012-11-05'].paginators = require('../apis/sqs-2012-11-05.paginators.json').pagination;
+apiLoader.services['sqs']['2012-11-05'] = require('../apis/sqs-2012-11-05.min.json');
+apiLoader.services['sqs']['2012-11-05'].paginators = require('../apis/sqs-2012-11-05.paginators.json').pagination;
+if (!Object.prototype.hasOwnProperty.call(AWS, 'SQS')) {
+  AWS.SQS = SQS;
 }
 
-module.exports = AWS.SQS;
+module.exports = SQS;

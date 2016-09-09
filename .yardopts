@@ -15,6 +15,7 @@
 --mixin-module-expr (AWS\.util\.)?mixin
 lib/core.js
 lib/**/*.js
+doc-custom/**/*.js
 -
 README.md
 UPGRADING.md

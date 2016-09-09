@@ -3,13 +3,14 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudWatch')) {
-  apiLoader.services['cloudwatch'] = {};
-  AWS.CloudWatch = Service.defineService('cloudwatch', ['2010-08-01']);
+apiLoader.services['cloudwatch'] = {};
+CloudWatch = Service.defineService('cloudwatch', ['2010-08-01']);
 
-  apiLoader.services['cloudwatch']['2010-08-01'] = require('../apis/monitoring-2010-08-01.min.json');
-  apiLoader.services['cloudwatch']['2010-08-01'].paginators = require('../apis/monitoring-2010-08-01.paginators.json').pagination;
-  apiLoader.services['cloudwatch']['2010-08-01'].waiters = require('../apis/monitoring-2010-08-01.waiters2.json').waiters;
+apiLoader.services['cloudwatch']['2010-08-01'] = require('../apis/monitoring-2010-08-01.min.json');
+apiLoader.services['cloudwatch']['2010-08-01'].paginators = require('../apis/monitoring-2010-08-01.paginators.json').pagination;
+apiLoader.services['cloudwatch']['2010-08-01'].waiters = require('../apis/monitoring-2010-08-01.waiters2.json').waiters;
+if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudWatch')) {
+  AWS.CloudWatch = CloudWatch;
 }
 
-module.exports = AWS.CloudWatch;
+module.exports = CloudWatch;

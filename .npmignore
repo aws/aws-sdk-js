@@ -8,6 +8,7 @@ configuration.sample
 coverage
 doc
 doc-src
+doc-custom
 eslint-rules
 Gemfile
 Gemfile.lock

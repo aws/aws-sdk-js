@@ -3,12 +3,13 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'ACM')) {
-  apiLoader.services['acm'] = {};
-  AWS.ACM = Service.defineService('acm', ['2015-12-08']);
+apiLoader.services['acm'] = {};
+ACM = Service.defineService('acm', ['2015-12-08']);
 
-  apiLoader.services['acm']['2015-12-08'] = require('../apis/acm-2015-12-08.min.json');
-  apiLoader.services['acm']['2015-12-08'].paginators = require('../apis/acm-2015-12-08.paginators.json').pagination;
+apiLoader.services['acm']['2015-12-08'] = require('../apis/acm-2015-12-08.min.json');
+apiLoader.services['acm']['2015-12-08'].paginators = require('../apis/acm-2015-12-08.paginators.json').pagination;
+if (!Object.prototype.hasOwnProperty.call(AWS, 'ACM')) {
+  AWS.ACM = ACM;
 }
 
-module.exports = AWS.ACM;
+module.exports = ACM;

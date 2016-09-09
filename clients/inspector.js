@@ -3,11 +3,12 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-if (!Object.prototype.hasOwnProperty.call(AWS, 'Inspector')) {
-  apiLoader.services['inspector'] = {};
-  AWS.Inspector = Service.defineService('inspector', ['2016-02-16']);
+apiLoader.services['inspector'] = {};
+Inspector = Service.defineService('inspector', ['2016-02-16']);
 
-  apiLoader.services['inspector']['2016-02-16'] = require('../apis/inspector-2016-02-16.min.json');
+apiLoader.services['inspector']['2016-02-16'] = require('../apis/inspector-2016-02-16.min.json');
+if (!Object.prototype.hasOwnProperty.call(AWS, 'Inspector')) {
+  AWS.Inspector = Inspector;
 }
 
-module.exports = AWS.Inspector;
+module.exports = Inspector;
