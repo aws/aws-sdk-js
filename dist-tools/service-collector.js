@@ -37,7 +37,7 @@ function getServiceHeader(service) {
     service, metadata[service].name, service, util.inspect(versions));
   var svcPath = path.join(__dirname, '..', 'lib', 'services', service + '.js');
   if (fs.existsSync(svcPath)) {
-    file += '  require(\'./services/' + service + '\');\n';
+    file += '  require(\'./services/' + service + '\')(AWS.' + metadata[service].name + ');\n';
   }
   file += '}\n';
 
