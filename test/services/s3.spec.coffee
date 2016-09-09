@@ -1,6 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
-Stream = AWS.util.nodeRequire('stream')
+Stream = AWS.util.stream
 Buffer = AWS.util.Buffer
 
 describe 'AWS.S3', ->

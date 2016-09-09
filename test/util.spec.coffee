@@ -301,7 +301,7 @@ describe 'AWS.util.crypto', ->
 
     if AWS.util.isNode()
       it 'handles streams in async interface', (done) ->
-        Transform = AWS.util.nodeRequire('stream').Transform
+        Transform = AWS.util.stream.Transform
         tr = new Transform
         tr._transform = (data, encoding, callback) -> callback(null, data)
         tr.push(new AWS.util.Buffer(input))
@@ -347,7 +347,7 @@ describe 'AWS.util.crypto', ->
 
     if AWS.util.isNode()
       it 'handles streams in async interface', (done) ->
-        Transform = AWS.util.nodeRequire('stream').Transform
+        Transform = AWS.util.stream.Transform
         tr = new Transform
         tr._transform = (data, enc, callback) -> callback(null, data)
         tr.push(new AWS.util.Buffer(input))

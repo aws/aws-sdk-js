@@ -4,8 +4,11 @@ var path = require('path');
 
 var AWS = require('../');
 var apis = require('../lib/api_loader');
+var metadata = require('../apis/metadata');
+var ClientCreator = require('./client-creator');
 
-var defaultServices = 'acm,apigateway,applicationautoscaling,autoscaling,cloudformation,cloudfront,cloudhsm,cloudtrail,cloudwatch,cloudwatchlogs,cloudwatchevents,codecommit,codedeploy,codepipeline,cognitoidentity,cognitoidentityserviceprovider,cognitosync,configservice,devicefarm,directconnect,dynamodb,dynamodbstreams,ec2,ecr,ecs,elasticache,elasticbeanstalk,elastictranscoder,elb,emr,firehose,gamelift,inspector,iot,iotdata,kinesis,kms,lambda,marketplacecommerceanalytics,mobileanalytics,machinelearning,opsworks,rds,redshift,route53,route53domains,s3,ses,sns,sqs,ssm,storagegateway,sts,waf';
+var clientCreator = new ClientCreator();
+var defaultServices = clientCreator.getDefaultServices().join(',');
 var sanitizeRegex = /[^a-zA-Z0-9,-]/;
 
 var serviceClasses = {};
@@ -28,13 +31,15 @@ function getServiceHeader(service) {
   }).filter(function(c) { return c !== null; });
 
   var file = util.format(
-    'AWS.apiLoader.services[\'%s\'] = {};\n' +
-    'AWS.%s = AWS.Service.defineService(\'%s\', %s);\n',
-    service, apis.serviceName(service), service, util.inspect(versions));
+    'if (!Object.prototype.hasOwnProperty.call(AWS, \'' + metadata[service].name + '\')) {\n' +
+    '  AWS.apiLoader.services[\'%s\'] = {};\n' +
+    '  AWS.%s = AWS.Service.defineService(\'%s\', %s);\n',
+    service, metadata[service].name, service, util.inspect(versions));
   var svcPath = path.join(__dirname, '..', 'lib', 'services', service + '.js');
   if (fs.existsSync(svcPath)) {
-    file += 'require(\'./services/' + service + '\');\n';
+    file += '  require(\'./services/' + service + '\');\n';
   }
+  file += '}\n';
 
   return file;
 }
@@ -59,16 +64,30 @@ function getService(service, version) {
   try {
     var ClassName = serviceClasses[service];
     svc = new ClassName({apiVersion: version, endpoint: 'localhost'});
-    api = apis.load(service, svc.api.apiVersion);
+    api = svc.api;
   } catch (e) {
     return null;
   }
 
+  var serviceFileName = metadata[service].prefix || service;
+  var lines = [];
   var line = util.format(
-    'AWS.apiLoader.services[\'%s\'][\'%s\'] = %s;',
-    service, svc.api.apiVersion, JSON.stringify(api));
-
-  return line;
+    'AWS.apiLoader.services[\'%s\'][\'%s\'] = %s;\n',
+    service, svc.api.apiVersion, 'require(\'../apis/' + serviceFileName + '-' + svc.api.apiVersion + '.min\')');
+  lines.push(line);
+  if (Object.prototype.hasOwnProperty.call(api, 'paginators') && Object.keys(api.paginators).length) {
+    line = util.format(
+      'AWS.apiLoader.services[\'%s\'][\'%s\'].paginators = %s;\n',
+      service, svc.api.apiVersion, 'require(\'../apis/' + serviceFileName + '-' + svc.api.apiVersion + '.paginators\').pagination');
+    lines.push(line);
+  }
+  if (Object.prototype.hasOwnProperty.call(api, 'waiters') && Object.keys(api.waiters).length) {
+    line = util.format(
+      'AWS.apiLoader.services[\'%s\'][\'%s\'].waiters = %s;\n',
+      service, svc.api.apiVersion, 'require(\'../apis/' + serviceFileName + '-' + svc.api.apiVersion + '.waiters2\').waiters');
+    lines.push(line);
+  }
+  return lines.join('');
 }
 
 function ServiceCollector(services) {
@@ -110,7 +129,7 @@ function ServiceCollector(services) {
       }
     }
 
-    return contents.join('\n');
+    return contents.join('');
   }
 
   var serviceCode = '';
