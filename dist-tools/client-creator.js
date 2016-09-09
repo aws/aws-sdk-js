@@ -66,49 +66,6 @@ ClientCreator.prototype.customizationsExist = function customizationsExist(servi
     return fs.existsSync(path.join(customizationsFolder, serviceName + '.js'));
 };
 
-ClientCreator.prototype.generateClientStub = function generateClientStub(serviceMetadata, specifiedVersion) {
-  var className = serviceMetadata.name;
-  var serviceName = className.toLowerCase();
-  var modelName = serviceMetadata.prefix || serviceName;
-  specifiedVersion = specifiedVersion || '*';
-
-  // get models for the service
-  var models = this.getAllApiFilenamesForService(modelName);
-
-  var modelVersions = models && models.versions;
-  if (!modelVersions) {
-      throw new Error('Unable to get models for ' + modelName);
-  }
-  var versionNumbers = Object.keys(modelVersions);
-  var code = '';
-  code += 'AWS.apiLoader.services[\'' + serviceName +'\'] = {};\n';
-  code += 'AWS.' + className + ' = Service.defineService(\'' + serviceName + '\', [\'' + versionNumbers.join('\', \'') + '\']);\n';
-  // pull in service customizations
-  if (this.customizationsExist(serviceName)) {
-      code += 'require(\'../lib/services/' + serviceName + '\');\n';
-  }
-  versionNumbers.forEach(function(version) {
-    // check version
-    if (specifiedVersion !== '*' && specifiedVersion !== version) {
-        return;
-    }
-    var versionInfo = modelVersions[version];
-    if (!versionInfo.hasOwnProperty('api')) {
-        throw new Error('No API model for ' + serviceName + '-' + version);
-    }
-    var loaderPrefix = 'AWS.apiLoader.services[\'' + serviceName + '\'][\'' + version + '\']';
-    code += '\n';
-    code += loaderPrefix + ' = require(\'../apis/' + versionInfo.api + '.json\');\n';
-    if (versionInfo.hasOwnProperty('paginators')) {
-        code += loaderPrefix + '.paginators = require(\'../apis/' + versionInfo.paginators + '.json\').pagination;\n';
-    }
-    if (versionInfo.hasOwnProperty('waiters')) {
-        code += loaderPrefix + '.waiters = require(\'../apis/' + versionInfo.waiters + '.json\').waiters;\n';
-    }
-  });
-  return code;
-}
-
 ClientCreator.prototype.generateClientFileSource = function generateClientFileSource(serviceMetadata, specifiedVersion) {
   var clientFolderPath = this._clientFolderPath;
   var className = serviceMetadata.name;

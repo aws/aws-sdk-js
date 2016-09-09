@@ -102,7 +102,6 @@ function ServiceCollector(services) {
     if (!builtServices[service]) {
       builtServices[service] = {};
 
-      //lines = clientCreator.generateClientStub(metadata[service], version);
       lines = getServiceHeader(service);
       if (lines === null) {
         if (!usingDefaultServices) {
