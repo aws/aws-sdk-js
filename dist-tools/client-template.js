@@ -17,12 +17,12 @@ require('../lib/services/$serviceName');
 /*$loaderPrefix*/
 apiLoader.services['$serviceName']['$version']
 /*$loaderPrefix*//**/
-$loaderPrefix = require('../apis/$api');
+$loaderPrefix = require('../apis/$api.json');
 /*ifpaginators*/
-$loaderPrefix.paginators = require('../apis/$paginators').pagination;
+$loaderPrefix.paginators = require('../apis/$paginators.json').pagination;
 /*ifpaginators*//**/
 /*ifwaiters*/
-$loaderPrefix.waiters = require('../apis/$waiters').waiters;
+$loaderPrefix.waiters = require('../apis/$waiters.json').waiters;
 /*ifwaiters*//**/
 /*eachVersion*//**/
 

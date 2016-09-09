@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var clientTemplate;
+var clientTemplate, clientLoaderTemplate;
 
 function escapeRegExp(string) {
   return string.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
@@ -15,6 +15,7 @@ function ClientCreator() {
   this._packageJsonPath = path.join(__dirname, '..', 'package.json');
   this._apiFileNames = null;
   this._clientTemplatePath = path.join(__dirname, 'client-template.js');
+  this._clientLoaderTemplatePath = path.join(__dirname, 'client-loader-template.js');
 }
 
 ClientCreator.prototype.getAllApiFilenames = function getAllApiFilenames() {
@@ -75,6 +76,11 @@ ClientCreator.prototype.customizationsExist = function customizationsExist(servi
 ClientCreator.prototype.getClientTemplate = function getClientTemplate() {
   if (!clientTemplate) clientTemplate = fs.readFileSync(this._clientTemplatePath).toString();
   return clientTemplate;
+};
+
+ClientCreator.prototype.getClientLoaderTemplate = function getClientLoaderTemplate() {
+  if (!clientLoaderTemplate) clientLoaderTemplate = fs.readFileSync(this._clientLoaderTemplatePath).toString();
+  return clientLoaderTemplate;
 };
 
 ClientCreator.prototype.fillTemplate = function fillTemplate(code, replacers) {
@@ -165,48 +171,21 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
   };
 };
 
-ClientCreator.prototype.tabs = function tabs(count) {
-  var tab = '';
-  for (var i = 0; i < count; i++) {
-      tab += '  ';
-  }
-  return tab;
-}
-
-ClientCreator.prototype.generateDefinePropertySource = function generateDefinePropertySource(objName, serviceName, className) {
-  var tabs = this.tabs;
-  var code = '';
-  code += 'var ' + serviceName + ' = null;\n';
-  code += 'Object.defineProperty(' + objName + ', \'' + className + '\', {\n';
-  code += tabs(1) + 'get: function get() {\n';
-  code += tabs(2) + 'return ' + serviceName + ' || require(\'./' + serviceName + '\');\n';
-  code += tabs(1) + '},\n';
-  code += tabs(1) + 'set: function set(svc) {\n';
-  code += tabs(2) + serviceName + ' = svc;\n';
-  code += tabs(1) + '},\n';
-  code += tabs(1) + 'enumerable: true,\n';
-  code += tabs(1) + 'configurable: true\n';
-  code += '});\n';
-
-  return code;
-};
-
 ClientCreator.prototype.generateAllServicesSource = function generateAllServicesSource(services, fileName) {
   var metadata = this._metadata;
   var self = this;
-  var code = '';
-  code += 'require(\'../lib/node_loader\');\n';
-  code += 'var AWS = require(\'../lib/core\');\n\n';
-
-  services.forEach(function(service, idx) {
-    var className = metadata[service].name;
-    var tab = '  ';
-    var isLast = idx === services.length - 1;
-    code += self.generateDefinePropertySource('AWS', service, className);
-  });
-  code += 'module.exports = AWS;';
+  var replacers = {
+    '/*eachService*/': function(codeblock) {
+      return services.map(function(service) {
+        return self.fillTemplate(codeblock, {
+          '$serviceName': service,
+          '$className': metadata[service].name
+        });
+      }).join('');
+    }
+  };
   return {
-    code: code,
+    code: this.fillTemplate(this.getClientLoaderTemplate(), replacers),
     path: path.join(this._clientFolderPath, fileName + '.js'),
     service: fileName
   };

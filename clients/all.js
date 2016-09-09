@@ -815,4 +815,5 @@ Object.defineProperty(AWS, 'WorkSpaces', {
   enumerable: true,
   configurable: true
 });
+
 module.exports = AWS;
