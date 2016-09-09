@@ -47,6 +47,7 @@ module.exports = {
   Route53: require('./route53'),
   Route53Domains: require('./route53domains'),
   S3: require('./s3'),
+  ServiceCatalog: require('./servicecatalog'),
   SES: require('./ses'),
   SNS: require('./sns'),
   SQS: require('./sqs'),

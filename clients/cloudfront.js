@@ -5,12 +5,12 @@ var apiLoader = require('../lib/api_loader');
 
 if (!Object.prototype.hasOwnProperty.call(AWS, 'CloudFront')) {
   apiLoader.services['cloudfront'] = {};
-  AWS.CloudFront = Service.defineService('cloudfront', ['2016-08-20']);
+  AWS.CloudFront = Service.defineService('cloudfront', ['2016-09-07']);
   require('../lib/services/cloudfront');
 
-  apiLoader.services['cloudfront']['2016-08-20'] = require('../apis/cloudfront-2016-08-20.min.json');
-  apiLoader.services['cloudfront']['2016-08-20'].paginators = require('../apis/cloudfront-2016-08-20.paginators.json').pagination;
-  apiLoader.services['cloudfront']['2016-08-20'].waiters = require('../apis/cloudfront-2016-08-20.waiters2.json').waiters;
+  apiLoader.services['cloudfront']['2016-09-07'] = require('../apis/cloudfront-2016-09-07.min.json');
+  apiLoader.services['cloudfront']['2016-09-07'].paginators = require('../apis/cloudfront-2016-09-07.paginators.json').pagination;
+  apiLoader.services['cloudfront']['2016-09-07'].waiters = require('../apis/cloudfront-2016-09-07.waiters2.json').waiters;
 }
 
 module.exports = AWS.CloudFront;
