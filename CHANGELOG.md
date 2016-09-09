@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.0-->
+<!--LATEST=2.6.1-->
 <!--ENTRYINSERT-->
+
+## 2.6.1
+* bugfix: SDK: Fixes an issue that caused all services to be loaded into memory when requiring the SDK. This issue was introduced in version `2.6.0` of the SDK, and address #1124.
 
 ## 2.6.0
 * feature: CloudFront: Adds HTTP2 support for Amazon CloudFront distributions.
