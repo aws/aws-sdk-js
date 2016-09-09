@@ -1,14 +1,14 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2013-04-15",
     "endpointPrefix":"support",
     "jsonVersion":"1.1",
+    "protocol":"json",
     "serviceFullName":"AWS Support",
     "signatureVersion":"v4",
-    "targetPrefix":"AWSSupport_20130415",
-    "protocol":"json"
+    "targetPrefix":"AWSSupport_20130415"
   },
-  "documentation":"<fullname>AWS Support</fullname> <p>The AWS Support API reference is intended for programmers who need detailed information about the AWS Support operations and data types. This service enables you to manage your AWS Support cases programmatically. It uses HTTP methods that return results in JSON format.</p> <p>The AWS Support service also exposes a set of <a href=\"https://aws.amazon.com/premiumsupport/trustedadvisor/\">Trusted Advisor</a> features. You can retrieve a list of checks and their descriptions, get check results, specify checks to refresh, and get the refresh status of checks. </p> <p>The following list describes the AWS Support case management operations: </p> <ul> <li> <b>Service names, issue categories, and available severity levels. </b>The <a>DescribeServices</a> and <a>DescribeSeverityLevels</a> operations return AWS service names, service codes, service categories, and problem severity levels. You use these values when you call the <a>CreateCase</a> operation. </li> <li> <b>Case creation, case details, and case resolution.</b> The <a>CreateCase</a>, <a>DescribeCases</a>, <a>DescribeAttachment</a>, and <a>ResolveCase</a> operations create AWS Support cases, retrieve information about cases, and resolve cases.</li> <li> <b>Case communication.</b> The <a>DescribeCommunications</a>, <a>AddCommunicationToCase</a>, and <a>AddAttachmentsToSet</a> operations retrieve and add communications and attachments to AWS Support cases. </li> </ul> <p>The following list describes the operations available from the AWS Support service for Trusted Advisor:</p> <ul> <li> <a>DescribeTrustedAdvisorChecks</a> returns the list of checks that run against your AWS resources.</li> <li>Using the <code>CheckId</code> for a specific check returned by <a>DescribeTrustedAdvisorChecks</a>, you can call <a>DescribeTrustedAdvisorCheckResult</a> to obtain the results for the check you specified.</li> <li> <a>DescribeTrustedAdvisorCheckSummaries</a> returns summarized results for one or more Trusted Advisor checks.</li> <li> <a>RefreshTrustedAdvisorCheck</a> requests that Trusted Advisor rerun a specified check. </li> <li> <a>DescribeTrustedAdvisorCheckRefreshStatuses</a> reports the refresh status of one or more checks. </li> </ul> <p>For authentication of requests, AWS Support uses <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p> <p>See <a href=\"http://docs.aws.amazon.com/awssupport/latest/user/Welcome.html\">About the AWS Support API</a> in the <i>AWS Support User Guide</i> for information about how to use this service to create and manage your support cases, and how to call Trusted Advisor for results of checks on your resources. </p>",
   "operations":{
     "AddAttachmentsToSet":{
       "name":"AddAttachmentsToSet",
@@ -17,39 +17,15 @@
         "requestUri":"/"
       },
       "input":{"shape":"AddAttachmentsToSetRequest"},
-      "output":{
-        "shape":"AddAttachmentsToSetResponse",
-        "documentation":"<p>The ID and expiry time of the attachment set returned by the <a>AddAttachmentsToSet</a> operation.</p>"
-      },
+      "output":{"shape":"AddAttachmentsToSetResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        },
-        {
-          "shape":"AttachmentSetIdNotFound",
-          "exception":true,
-          "documentation":"<p>An attachment set with the specified ID could not be found.</p>"
-        },
-        {
-          "shape":"AttachmentSetExpired",
-          "exception":true,
-          "documentation":"<p>The expiration time of the attachment set has passed. The set expires 1 hour after it is created.</p>"
-        },
-        {
-          "shape":"AttachmentSetSizeLimitExceeded",
-          "exception":true,
-          "documentation":"<p>A limit for the size of an attachment set has been exceeded. The limits are 3 attachments and 5 MB per attachment.</p>"
-        },
-        {
-          "shape":"AttachmentLimitExceeded",
-          "exception":true,
-          "documentation":"<p>The limit for the number of attachment sets created in a short period of time has been exceeded.</p>"
-        }
+        {"shape":"InternalServerError"},
+        {"shape":"AttachmentSetIdNotFound"},
+        {"shape":"AttachmentSetExpired"},
+        {"shape":"AttachmentSetSizeLimitExceeded"},
+        {"shape":"AttachmentLimitExceeded"}
       ],
-      "documentation":"<p>Adds one or more attachments to an attachment set. If an <code>AttachmentSetId</code> is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>AttachmentSetId</code> is specified, the attachments are added to the specified set, if it exists.</p> <p>An attachment set is a temporary container for attachments that are to be added to a case or case communication. The set is available for one hour after it is created; the <code>ExpiryTime</code> returned in the response indicates when the set expires. The maximum number of attachments in a set is 3, and the maximum size of any attachment in the set is 5 MB.</p>"
+      "documentation":"<p>Adds one or more attachments to an attachment set. If an <code>attachmentSetId</code> is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>attachmentSetId</code> is specified, the attachments are added to the specified set, if it exists.</p> <p>An attachment set is a temporary container for attachments that are to be added to a case or case communication. The set is available for one hour after it is created; the <code>expiryTime</code> returned in the response indicates when the set expires. The maximum number of attachments in a set is 3, and the maximum size of any attachment in the set is 5 MB.</p>"
     },
     "AddCommunicationToCase":{
       "name":"AddCommunicationToCase",
@@ -57,38 +33,15 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"AddCommunicationToCaseRequest",
-        "documentation":"<p>To be written.</p>"
-      },
-      "output":{
-        "shape":"AddCommunicationToCaseResponse",
-        "documentation":"<p>The result of the <a>AddCommunicationToCase</a> operation.</p>"
-      },
+      "input":{"shape":"AddCommunicationToCaseRequest"},
+      "output":{"shape":"AddCommunicationToCaseResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        },
-        {
-          "shape":"CaseIdNotFound",
-          "exception":true,
-          "documentation":"<p>The requested <code>CaseId</code> could not be located.</p>"
-        },
-        {
-          "shape":"AttachmentSetIdNotFound",
-          "exception":true,
-          "documentation":"<p>An attachment set with the specified ID could not be found.</p>"
-        },
-        {
-          "shape":"AttachmentSetExpired",
-          "exception":true,
-          "documentation":"<p>The expiration time of the attachment set has passed. The set expires 1 hour after it is created.</p>"
-        }
+        {"shape":"InternalServerError"},
+        {"shape":"CaseIdNotFound"},
+        {"shape":"AttachmentSetIdNotFound"},
+        {"shape":"AttachmentSetExpired"}
       ],
-      "documentation":"<p>Adds additional customer communication to an AWS Support case. You use the <code>CaseId</code> value to identify the case to add communication to. You can list a set of email addresses to copy on the communication using the <code>CcEmailAddresses</code> value. The <code>CommunicationBody</code> value contains the text of the communication.</p> <p>The response indicates the success or failure of the request.</p> <p>This operation implements a subset of the features of the AWS Support Center.</p>"
+      "documentation":"<p>Adds additional customer communication to an AWS Support case. You use the <code>caseId</code> value to identify the case to add communication to. You can list a set of email addresses to copy on the communication using the <code>ccEmailAddresses</code> value. The <code>communicationBody</code> value contains the text of the communication.</p> <p>The response indicates the success or failure of the request.</p> <p>This operation implements a subset of the features of the AWS Support Center.</p>"
     },
     "CreateCase":{
       "name":"CreateCase",
@@ -97,34 +50,14 @@
         "requestUri":"/"
       },
       "input":{"shape":"CreateCaseRequest"},
-      "output":{
-        "shape":"CreateCaseResponse",
-        "documentation":"<p>The AWS Support case ID returned by a successful completion of the <a>CreateCase</a> operation. </p>"
-      },
+      "output":{"shape":"CreateCaseResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        },
-        {
-          "shape":"CaseCreationLimitExceeded",
-          "exception":true,
-          "documentation":"<p>The case creation limit for the account has been exceeded. </p>"
-        },
-        {
-          "shape":"AttachmentSetIdNotFound",
-          "exception":true,
-          "documentation":"<p>An attachment set with the specified ID could not be found.</p>"
-        },
-        {
-          "shape":"AttachmentSetExpired",
-          "exception":true,
-          "documentation":"<p>The expiration time of the attachment set has passed. The set expires 1 hour after it is created.</p>"
-        }
+        {"shape":"InternalServerError"},
+        {"shape":"CaseCreationLimitExceeded"},
+        {"shape":"AttachmentSetIdNotFound"},
+        {"shape":"AttachmentSetExpired"}
       ],
-      "documentation":"<p>Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page. Its parameters require you to specify the following information: </p> <ol> <li> <b>IssueType.</b> The type of issue for the case. You can specify either \"customer-service\" or \"technical.\" If you do not indicate a value, the default is \"technical.\" </li> <li> <b>ServiceCode.</b> The code for an AWS service. You obtain the <code>ServiceCode</code> by calling <a>DescribeServices</a>. </li> <li> <b>CategoryCode.</b> The category for the service defined for the <code>ServiceCode</code> value. You also obtain the category code for a service by calling <a>DescribeServices</a>. Each AWS service defines its own set of category codes. </li> <li> <b>SeverityCode.</b> A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You obtain the SeverityCode by calling <a>DescribeSeverityLevels</a>.</li> <li> <b>Subject.</b> The <b>Subject</b> field on the AWS Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page.</li> <li> <b>CommunicationBody.</b> The <b>Description</b> field on the AWS Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page.</li> <li> <b>AttachmentSetId.</b> The ID of a set of attachments that has been created by using <a>AddAttachmentsToSet</a>.</li> <li> <b>Language.</b> The human language in which AWS Support handles the case. English and Japanese are currently supported.</li> <li> <b>CcEmailAddresses.</b> The AWS Support Center <b>CC</b> field on the <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an <a href=\"http://aws.amazon.com/tools/\">AWS SDK</a>. </li> </ol> <note><p>To add additional communication or attachments to an existing case, use <a>AddCommunicationToCase</a>.</p> </note> <p>A successful <a>CreateCase</a> request returns an AWS Support case number. Case numbers are used by the <a>DescribeCases</a> operation to retrieve existing AWS Support cases. </p>"
+      "documentation":"<p>Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page. Its parameters require you to specify the following information: </p> <ul> <li> <p> <b>issueType.</b> The type of issue for the case. You can specify either \"customer-service\" or \"technical.\" If you do not indicate a value, the default is \"technical.\" </p> </li> <li> <p> <b>serviceCode.</b> The code for an AWS service. You obtain the <code>serviceCode</code> by calling <a>DescribeServices</a>. </p> </li> <li> <p> <b>categoryCode.</b> The category for the service defined for the <code>serviceCode</code> value. You also obtain the category code for a service by calling <a>DescribeServices</a>. Each AWS service defines its own set of category codes. </p> </li> <li> <p> <b>severityCode.</b> A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You obtain the SeverityCode by calling <a>DescribeSeverityLevels</a>.</p> </li> <li> <p> <b>subject.</b> The <b>Subject</b> field on the AWS Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page.</p> </li> <li> <p> <b>communicationBody.</b> The <b>Description</b> field on the AWS Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page.</p> </li> <li> <p> <b>attachmentSetId.</b> The ID of a set of attachments that has been created by using <a>AddAttachmentsToSet</a>.</p> </li> <li> <p> <b>language.</b> The human language in which AWS Support handles the case. English and Japanese are currently supported.</p> </li> <li> <p> <b>ccEmailAddresses.</b> The AWS Support Center <b>CC</b> field on the <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an <a href=\"http://aws.amazon.com/tools/\">AWS SDK</a>. </p> </li> </ul> <note> <p>To add additional communication or attachments to an existing case, use <a>AddCommunicationToCase</a>.</p> </note> <p>A successful <a>CreateCase</a> request returns an AWS Support case number. Case numbers are used by the <a>DescribeCases</a> operation to retrieve existing AWS Support cases. </p>"
     },
     "DescribeAttachment":{
       "name":"DescribeAttachment",
@@ -133,27 +66,11 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeAttachmentRequest"},
-      "output":{
-        "shape":"DescribeAttachmentResponse",
-        "documentation":"<p>The content and file name of the attachment returned by the <a>DescribeAttachment</a> operation.</p>"
-      },
+      "output":{"shape":"DescribeAttachmentResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        },
-        {
-          "shape":"DescribeAttachmentLimitExceeded",
-          "exception":true,
-          "documentation":"<p>The limit for the number of <a>DescribeAttachment</a> requests in a short period of time has been exceeded.</p>"
-        },
-        {
-          "shape":"AttachmentIdNotFound",
-          "exception":true,
-          "documentation":"<p>An attachment with the specified ID could not be found.</p>"
-        }
+        {"shape":"InternalServerError"},
+        {"shape":"DescribeAttachmentLimitExceeded"},
+        {"shape":"AttachmentIdNotFound"}
       ],
       "documentation":"<p>Returns the attachment that has the specified ID. Attachment IDs are generated by the case management system when you add an attachment to a case or case communication. Attachment IDs are returned in the <a>AttachmentDetails</a> objects that are returned by the <a>DescribeCommunications</a> operation.</p>"
     },
@@ -164,24 +81,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeCasesRequest"},
-      "output":{
-        "shape":"DescribeCasesResponse",
-        "documentation":"<p>Returns an array of <a>CaseDetails</a> objects and a <code>NextToken</code> that defines a point for pagination in the result set.</p>"
-      },
+      "output":{"shape":"DescribeCasesResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        },
-        {
-          "shape":"CaseIdNotFound",
-          "exception":true,
-          "documentation":"<p>The requested <code>CaseId</code> could not be located.</p>"
-        }
+        {"shape":"InternalServerError"},
+        {"shape":"CaseIdNotFound"}
       ],
-      "documentation":"<p>Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the <code>AfterTime</code> and <code>BeforeTime</code> request parameters. You can set values for the <code>IncludeResolvedCases</code> and <code>IncludeCommunications</code> request parameters to control how much information is returned. </p> <p>Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error. </p> <p>The response returns the following in JSON format:</p> <ol> <li>One or more <a>CaseDetails</a> data types. </li> <li>One or more <code>NextToken</code> values, which specify where to paginate the returned records represented by the <code>CaseDetails</code> objects.</li> </ol>"
+      "documentation":"<p>Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the <code>afterTime</code> and <code>beforeTime</code> request parameters. You can set values for the <code>includeResolvedCases</code> and <code>includeCommunications</code> request parameters to control how much information is returned. </p> <p>Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error.</p> <p>The response returns the following in JSON format:</p> <ul> <li> <p>One or more <a>CaseDetails</a> data types. </p> </li> <li> <p>One or more <code>nextToken</code> values, which specify where to paginate the returned records represented by the <code>CaseDetails</code> objects.</p> </li> </ul>"
     },
     "DescribeCommunications":{
       "name":"DescribeCommunications",
@@ -190,24 +95,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeCommunicationsRequest"},
-      "output":{
-        "shape":"DescribeCommunicationsResponse",
-        "documentation":"<p>The communications returned by the <a>DescribeCommunications</a> operation.</p>"
-      },
+      "output":{"shape":"DescribeCommunicationsResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        },
-        {
-          "shape":"CaseIdNotFound",
-          "exception":true,
-          "documentation":"<p>The requested <code>CaseId</code> could not be located.</p>"
-        }
+        {"shape":"InternalServerError"},
+        {"shape":"CaseIdNotFound"}
       ],
-      "documentation":"<p>Returns communications (and attachments) for one or more support cases. You can use the <code>AfterTime</code> and <code>BeforeTime</code> parameters to filter by date. You can use the <code>CaseId</code> parameter to restrict the results to a particular case.</p> <p>Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error. </p> <p>You can use the <code>MaxResults</code> and <code>NextToken</code> parameters to control the pagination of the result set. Set <code>MaxResults</code> to the number of cases you want displayed on each page, and use <code>NextToken</code> to specify the resumption of pagination.</p>"
+      "documentation":"<p>Returns communications (and attachments) for one or more support cases. You can use the <code>afterTime</code> and <code>beforeTime</code> parameters to filter by date. You can use the <code>caseId</code> parameter to restrict the results to a particular case.</p> <p>Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error.</p> <p>You can use the <code>maxResults</code> and <code>nextToken</code> parameters to control the pagination of the result set. Set <code>maxResults</code> to the number of cases you want displayed on each page, and use <code>nextToken</code> to specify the resumption of pagination.</p>"
     },
     "DescribeServices":{
       "name":"DescribeServices",
@@ -216,17 +109,9 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeServicesRequest"},
-      "output":{
-        "shape":"DescribeServicesResponse",
-        "documentation":"<p>The list of AWS services returned by the <a>DescribeServices</a> operation.</p>"
-      },
+      "output":{"shape":"DescribeServicesResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Returns the current list of AWS services and a list of service categories that applies to each one. You then use service names and categories in your <a>CreateCase</a> requests. Each AWS service has its own set of categories.</p> <p>The service codes and category codes correspond to the values that are displayed in the <b>Service</b> and <b>Category</b> drop-down lists on the AWS Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page. The values in those fields, however, do not necessarily match the service codes and categories returned by the <code>DescribeServices</code> request. Always use the service codes and categories obtained programmatically. This practice ensures that you always have the most recent set of service and category codes.</p>"
     },
@@ -237,17 +122,9 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeSeverityLevelsRequest"},
-      "output":{
-        "shape":"DescribeSeverityLevelsResponse",
-        "documentation":"<p>The list of severity levels returned by the <a>DescribeSeverityLevels</a> operation.</p>"
-      },
+      "output":{"shape":"DescribeSeverityLevelsResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Returns the list of severity levels that you can assign to an AWS Support case. The severity level for a case is also a field in the <a>CaseDetails</a> data type included in any <a>CreateCase</a> request. </p>"
     },
@@ -258,19 +135,11 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeTrustedAdvisorCheckRefreshStatusesRequest"},
-      "output":{
-        "shape":"DescribeTrustedAdvisorCheckRefreshStatusesResponse",
-        "documentation":"<p>The statuses of the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorCheckRefreshStatuses</a> operation.</p>"
-      },
+      "output":{"shape":"DescribeTrustedAdvisorCheckRefreshStatusesResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Returns the refresh status of the Trusted Advisor checks that have the specified check IDs. Check IDs can be obtained by calling <a>DescribeTrustedAdvisorChecks</a>.</p>"
+      "documentation":"<p>Returns the refresh status of the Trusted Advisor checks that have the specified check IDs. Check IDs can be obtained by calling <a>DescribeTrustedAdvisorChecks</a>.</p> <note> <p>Some checks are refreshed automatically, and their refresh statuses cannot be retrieved by using this operation. Use of the <code>DescribeTrustedAdvisorCheckRefreshStatuses</code> operation for these checks causes an <code>InvalidParameterValue</code> error.</p> </note>"
     },
     "DescribeTrustedAdvisorCheckResult":{
       "name":"DescribeTrustedAdvisorCheckResult",
@@ -279,19 +148,11 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeTrustedAdvisorCheckResultRequest"},
-      "output":{
-        "shape":"DescribeTrustedAdvisorCheckResultResponse",
-        "documentation":"<p>The result of the Trusted Advisor check returned by the <a>DescribeTrustedAdvisorCheckResult</a> operation.</p>"
-      },
+      "output":{"shape":"DescribeTrustedAdvisorCheckResultResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Returns the results of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling <a>DescribeTrustedAdvisorChecks</a>.</p> <p>The response contains a <a>TrustedAdvisorCheckResult</a> object, which contains these three objects:</p> <ul> <li><a>TrustedAdvisorCategorySpecificSummary</a></li> <li><a>TrustedAdvisorResourceDetail</a></li> <li><a>TrustedAdvisorResourcesSummary</a></li> </ul> <p>In addition, the response contains these fields:</p> <ul> <li> <b>Status.</b> The alert status of the check: \"ok\" (green), \"warning\" (yellow), \"error\" (red), or \"not_available\".</li> <li> <b>Timestamp.</b> The time of the last refresh of the check.</li> <li> <b>CheckId.</b> The unique identifier for the check.</li> </ul>"
+      "documentation":"<p>Returns the results of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling <a>DescribeTrustedAdvisorChecks</a>.</p> <p>The response contains a <a>TrustedAdvisorCheckResult</a> object, which contains these three objects:</p> <ul> <li> <p> <a>TrustedAdvisorCategorySpecificSummary</a> </p> </li> <li> <p> <a>TrustedAdvisorResourceDetail</a> </p> </li> <li> <p> <a>TrustedAdvisorResourcesSummary</a> </p> </li> </ul> <p>In addition, the response contains these fields:</p> <ul> <li> <p> <b>status.</b> The alert status of the check: \"ok\" (green), \"warning\" (yellow), \"error\" (red), or \"not_available\".</p> </li> <li> <p> <b>timestamp.</b> The time of the last refresh of the check.</p> </li> <li> <p> <b>checkId.</b> The unique identifier for the check.</p> </li> </ul>"
     },
     "DescribeTrustedAdvisorCheckSummaries":{
       "name":"DescribeTrustedAdvisorCheckSummaries",
@@ -300,17 +161,9 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeTrustedAdvisorCheckSummariesRequest"},
-      "output":{
-        "shape":"DescribeTrustedAdvisorCheckSummariesResponse",
-        "documentation":"<p>The summaries of the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorCheckSummaries</a> operation.</p>"
-      },
+      "output":{"shape":"DescribeTrustedAdvisorCheckSummariesResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Returns the summaries of the results of the Trusted Advisor checks that have the specified check IDs. Check IDs can be obtained by calling <a>DescribeTrustedAdvisorChecks</a>.</p> <p>The response contains an array of <a>TrustedAdvisorCheckSummary</a> objects.</p>"
     },
@@ -321,17 +174,9 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeTrustedAdvisorChecksRequest"},
-      "output":{
-        "shape":"DescribeTrustedAdvisorChecksResponse",
-        "documentation":"<p>Information about the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorChecks</a> operation.</p>"
-      },
+      "output":{"shape":"DescribeTrustedAdvisorChecksResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Returns information about all available Trusted Advisor checks, including name, ID, category, description, and metadata. You must specify a language code; English (\"en\") and Japanese (\"ja\") are currently supported. The response contains a <a>TrustedAdvisorCheckDescription</a> for each check.</p>"
     },
@@ -342,19 +187,11 @@
         "requestUri":"/"
       },
       "input":{"shape":"RefreshTrustedAdvisorCheckRequest"},
-      "output":{
-        "shape":"RefreshTrustedAdvisorCheckResponse",
-        "documentation":"<p>The current refresh status of a Trusted Advisor check.</p>"
-      },
+      "output":{"shape":"RefreshTrustedAdvisorCheckResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        }
+        {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Requests a refresh of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling <a>DescribeTrustedAdvisorChecks</a>.</p> <p>The response contains a <a>TrustedAdvisorCheckRefreshStatus</a> object, which contains these fields:</p> <ul> <li> <b>Status.</b> The refresh status of the check: \"none\", \"enqueued\", \"processing\", \"success\", or \"abandoned\".</li> <li> <b>MillisUntilNextRefreshable.</b> The amount of time, in milliseconds, until the check is eligible for refresh.</li> <li> <b>CheckId.</b> The unique identifier for the check.</li> </ul>"
+      "documentation":"<p>Requests a refresh of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling <a>DescribeTrustedAdvisorChecks</a>.</p> <note> <p>Some checks are refreshed automatically, and they cannot be refreshed by using this operation. Use of the <code>RefreshTrustedAdvisorCheck</code> operation for these checks causes an <code>InvalidParameterValue</code> error.</p> </note> <p>The response contains a <a>TrustedAdvisorCheckRefreshStatus</a> object, which contains these fields:</p> <ul> <li> <p> <b>status.</b> The refresh status of the check: \"none\", \"enqueued\", \"processing\", \"success\", or \"abandoned\".</p> </li> <li> <p> <b>millisUntilNextRefreshable.</b> The amount of time, in milliseconds, until the check is eligible for refresh.</p> </li> <li> <p> <b>checkId.</b> The unique identifier for the check.</p> </li> </ul>"
     },
     "ResolveCase":{
       "name":"ResolveCase",
@@ -363,24 +200,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"ResolveCaseRequest"},
-      "output":{
-        "shape":"ResolveCaseResponse",
-        "documentation":"<p>The status of the case returned by the <a>ResolveCase</a> operation.</p>"
-      },
+      "output":{"shape":"ResolveCaseResponse"},
       "errors":[
-        {
-          "shape":"InternalServerError",
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An internal server error occurred.</p>"
-        },
-        {
-          "shape":"CaseIdNotFound",
-          "exception":true,
-          "documentation":"<p>The requested <code>CaseId</code> could not be located.</p>"
-        }
+        {"shape":"InternalServerError"},
+        {"shape":"CaseIdNotFound"}
       ],
-      "documentation":"<p>Takes a <code>CaseId</code> and returns the initial state of the case along with the state of the case after the call to <a>ResolveCase</a> completed.</p>"
+      "documentation":"<p>Takes a <code>caseId</code> and returns the initial state of the case along with the state of the case after the call to <a>ResolveCase</a> completed.</p>"
     }
   },
   "shapes":{
@@ -390,20 +215,21 @@
       "members":{
         "attachmentSetId":{
           "shape":"AttachmentSetId",
-          "documentation":"<p>The ID of the attachment set. If an <code>AttachmentSetId</code> is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>AttachmentSetId</code> is specified, the attachments are added to the specified set, if it exists.</p>"
+          "documentation":"<p>The ID of the attachment set. If an <code>attachmentSetId</code> is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>attachmentSetId</code> is specified, the attachments are added to the specified set, if it exists.</p>"
         },
         "attachments":{
           "shape":"Attachments",
           "documentation":"<p>One or more attachments to add to the set. The limit is 3 attachments per set, and the size limit is 5 MB per attachment.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "AddAttachmentsToSetResponse":{
       "type":"structure",
       "members":{
         "attachmentSetId":{
           "shape":"AttachmentSetId",
-          "documentation":"<p>The ID of the attachment set. If an <code>AttachmentSetId</code> was not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>AttachmentSetId</code> was specified, the attachments are added to the specified set, if it exists.</p>"
+          "documentation":"<p>The ID of the attachment set. If an <code>attachmentSetId</code> was not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>attachmentSetId</code> was specified, the attachments are added to the specified set, if it exists.</p>"
         },
         "expiryTime":{
           "shape":"ExpiryTime",
@@ -418,7 +244,7 @@
       "members":{
         "caseId":{
           "shape":"CaseId",
-          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i></p>"
+          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> </p>"
         },
         "communicationBody":{
           "shape":"CommunicationBody",
@@ -430,7 +256,7 @@
         },
         "attachmentSetId":{
           "shape":"AttachmentSetId",
-          "documentation":"<p>The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling <a>AddAttachmentsToSet</a></p>"
+          "documentation":"<p>The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling <a>AddAttachmentsToSet</a> </p>"
         }
       },
       "documentation":"<p>To be written.</p>"
@@ -483,8 +309,8 @@
           "documentation":"<p>An attachment with the specified ID could not be found.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>An attachment with the specified ID could not be found.</p>"
+      "documentation":"<p>An attachment with the specified ID could not be found.</p>",
+      "exception":true
     },
     "AttachmentLimitExceeded":{
       "type":"structure",
@@ -494,8 +320,8 @@
           "documentation":"<p>The limit for the number of attachment sets created in a short period of time has been exceeded.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>The limit for the number of attachment sets created in a short period of time has been exceeded.</p>"
+      "documentation":"<p>The limit for the number of attachment sets created in a short period of time has been exceeded.</p>",
+      "exception":true
     },
     "AttachmentSet":{
       "type":"list",
@@ -509,8 +335,8 @@
           "documentation":"<p>The expiration time of the attachment set has passed. The set expires 1 hour after it is created.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>The expiration time of the attachment set has passed. The set expires 1 hour after it is created.</p>"
+      "documentation":"<p>The expiration time of the attachment set has passed. The set expires 1 hour after it is created.</p>",
+      "exception":true
     },
     "AttachmentSetId":{"type":"string"},
     "AttachmentSetIdNotFound":{
@@ -521,8 +347,8 @@
           "documentation":"<p>An attachment set with the specified ID could not be found.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>An attachment set with the specified ID could not be found.</p>"
+      "documentation":"<p>An attachment set with the specified ID could not be found.</p>",
+      "exception":true
     },
     "AttachmentSetSizeLimitExceeded":{
       "type":"structure",
@@ -532,8 +358,8 @@
           "documentation":"<p>A limit for the size of an attachment set has been exceeded. The limits are 3 attachments and 5 MB per attachment.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>A limit for the size of an attachment set has been exceeded. The limits are 3 attachments and 5 MB per attachment.</p>"
+      "documentation":"<p>A limit for the size of an attachment set has been exceeded. The limits are 3 attachments and 5 MB per attachment.</p>",
+      "exception":true
     },
     "Attachments":{
       "type":"list",
@@ -546,22 +372,22 @@
       "members":{
         "message":{
           "shape":"ErrorMessage",
-          "documentation":"<p>An error message that indicates that you have exceeded the number of cases you can have open. </p>"
+          "documentation":"<p>An error message that indicates that you have exceeded the number of cases you can have open.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>The case creation limit for the account has been exceeded. </p>"
+      "documentation":"<p>The case creation limit for the account has been exceeded.</p>",
+      "exception":true
     },
     "CaseDetails":{
       "type":"structure",
       "members":{
         "caseId":{
           "shape":"CaseId",
-          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i></p>"
+          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> </p>"
         },
         "displayId":{
           "shape":"DisplayId",
-          "documentation":"<p>The ID displayed for the case in the AWS Support Center. This is a numeric string. </p>"
+          "documentation":"<p>The ID displayed for the case in the AWS Support Center. This is a numeric string.</p>"
         },
         "subject":{
           "shape":"Subject",
@@ -569,7 +395,7 @@
         },
         "status":{
           "shape":"Status",
-          "documentation":"<p>The status of the case. </p>"
+          "documentation":"<p>The status of the case.</p>"
         },
         "serviceCode":{
           "shape":"ServiceCode",
@@ -589,7 +415,7 @@
         },
         "timeCreated":{
           "shape":"TimeCreated",
-          "documentation":"<p>The time that the case was case created in the AWS Support Center. </p>"
+          "documentation":"<p>The time that the case was case created in the AWS Support Center.</p>"
         },
         "recentCommunications":{
           "shape":"RecentCaseCommunications",
@@ -604,14 +430,14 @@
           "documentation":"<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be passed explicitly for operations that take them.</p>"
         }
       },
-      "documentation":"<p>A JSON-formatted object that contains the metadata for a support case. It is contained the response from a <a>DescribeCases</a> request. <b>CaseDetails</b> contains the following fields:</p> <ol> <li> <b>CaseID.</b> The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</li> <li> <b>CategoryCode.</b> The category of problem for the AWS Support case. Corresponds to the CategoryCode values returned by a call to <a>DescribeServices</a>.</li> <li> <b>DisplayId.</b> The identifier for the case on pages in the AWS Support Center.</li> <li> <b>Language.</b> The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be passed explicitly for operations that take them.</li> <li> <b>RecentCommunications.</b> One or more <a>Communication</a> objects. Fields of these objects are <code>Attachments</code>, <code>Body</code>, <code>CaseId</code>, <code>SubmittedBy</code>, and <code>TimeCreated</code>.</li> <li> <b>NextToken.</b> A resumption point for pagination.</li> <li> <b>ServiceCode.</b> The identifier for the AWS service that corresponds to the service code defined in the call to <a>DescribeServices</a>.</li> <li> <b>SeverityCode. </b>The severity code assigned to the case. Contains one of the values returned by the call to <a>DescribeSeverityLevels</a>.</li> <li> <b>Status.</b> The status of the case in the AWS Support Center.</li> <li> <b>Subject.</b> The subject line of the case.</li> <li> <b>SubmittedBy.</b> The email address of the account that submitted the case.</li> <li> <b>TimeCreated.</b> The time the case was created, in ISO-8601 format.</li> </ol>"
+      "documentation":"<p>A JSON-formatted object that contains the metadata for a support case. It is contained the response from a <a>DescribeCases</a> request. <b>CaseDetails</b> contains the following fields:</p> <ul> <li> <p> <b>caseId.</b> The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</p> </li> <li> <p> <b>categoryCode.</b> The category of problem for the AWS Support case. Corresponds to the CategoryCode values returned by a call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>displayId.</b> The identifier for the case on pages in the AWS Support Center.</p> </li> <li> <p> <b>language.</b> The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be passed explicitly for operations that take them.</p> </li> <li> <p> <b>recentCommunications.</b> One or more <a>Communication</a> objects. Fields of these objects are <code>attachments</code>, <code>body</code>, <code>caseId</code>, <code>submittedBy</code>, and <code>timeCreated</code>.</p> </li> <li> <p> <b>nextToken.</b> A resumption point for pagination.</p> </li> <li> <p> <b>serviceCode.</b> The identifier for the AWS service that corresponds to the service code defined in the call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>severityCode. </b>The severity code assigned to the case. Contains one of the values returned by the call to <a>DescribeSeverityLevels</a>.</p> </li> <li> <p> <b>status.</b> The status of the case in the AWS Support Center.</p> </li> <li> <p> <b>subject.</b> The subject line of the case.</p> </li> <li> <p> <b>submittedBy.</b> The email address of the account that submitted the case.</p> </li> <li> <p> <b>timeCreated.</b> The time the case was created, in ISO-8601 format.</p> </li> </ul>"
     },
     "CaseId":{"type":"string"},
     "CaseIdList":{
       "type":"list",
       "member":{"shape":"CaseId"},
-      "min":0,
-      "max":100
+      "max":100,
+      "min":0
     },
     "CaseIdNotFound":{
       "type":"structure",
@@ -621,8 +447,8 @@
           "documentation":"<p>The requested <code>CaseId</code> could not be located.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>The requested <code>CaseId</code> could not be located.</p>"
+      "documentation":"<p>The requested <code>caseId</code> could not be located.</p>",
+      "exception":true
     },
     "CaseList":{
       "type":"list",
@@ -634,11 +460,11 @@
       "members":{
         "code":{
           "shape":"CategoryCode",
-          "documentation":"<p>The category code for the support case. </p>"
+          "documentation":"<p>The category code for the support case.</p>"
         },
         "name":{
           "shape":"CategoryName",
-          "documentation":"<p>The category name for the support case. </p>"
+          "documentation":"<p>The category name for the support case.</p>"
         }
       },
       "documentation":"<p>A JSON-formatted name/value pair that represents the category name and category code of the problem, selected from the <a>DescribeServices</a> response for each AWS service.</p>"
@@ -652,14 +478,16 @@
     "CcEmailAddress":{"type":"string"},
     "CcEmailAddressList":{
       "type":"list",
-      "member":{"shape":"CcEmailAddress"}
+      "member":{"shape":"CcEmailAddress"},
+      "max":10,
+      "min":0
     },
     "Communication":{
       "type":"structure",
       "members":{
         "caseId":{
           "shape":"CaseId",
-          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i></p>"
+          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> </p>"
         },
         "body":{
           "shape":"CommunicationBody",
@@ -667,20 +495,24 @@
         },
         "submittedBy":{
           "shape":"SubmittedBy",
-          "documentation":"<p>The email address of the account that submitted the AWS Support case. </p>"
+          "documentation":"<p>The email address of the account that submitted the AWS Support case.</p>"
         },
         "timeCreated":{
           "shape":"TimeCreated",
-          "documentation":"<p>The time the communication was created. </p>"
+          "documentation":"<p>The time the communication was created.</p>"
         },
         "attachmentSet":{
           "shape":"AttachmentSet",
-          "documentation":"<p>Information about the attachments to the case communication. </p>"
+          "documentation":"<p>Information about the attachments to the case communication.</p>"
         }
       },
       "documentation":"<p>A communication associated with an AWS Support case. The communication consists of the case ID, the message body, attachment information, the account email address, and the date and time of the communication.</p>"
     },
-    "CommunicationBody":{"type":"string"},
+    "CommunicationBody":{
+      "type":"string",
+      "max":8000,
+      "min":1
+    },
     "CommunicationList":{
       "type":"list",
       "member":{"shape":"Communication"}
@@ -702,11 +534,11 @@
         },
         "severityCode":{
           "shape":"SeverityCode",
-          "documentation":"<p>The code for the severity level returned by the call to <a>DescribeSeverityLevels</a>.</p> <note><p>The availability of severity levels depends on each customer's support subscription. In other words, your subscription may not necessarily require the urgent level of response time.</p></note>"
+          "documentation":"<p>The code for the severity level returned by the call to <a>DescribeSeverityLevels</a>.</p> <note> <p>The availability of severity levels depends on each customer's support subscription. In other words, your subscription may not necessarily require the urgent level of response time.</p> </note>"
         },
         "categoryCode":{
           "shape":"CategoryCode",
-          "documentation":"<p>The category of problem for the AWS Support case. </p>"
+          "documentation":"<p>The category of problem for the AWS Support case.</p>"
         },
         "communicationBody":{
           "shape":"CommunicationBody",
@@ -722,20 +554,21 @@
         },
         "issueType":{
           "shape":"IssueType",
-          "documentation":"<p>The type of issue for the case. You can specify either \"customer-service\" or \"technical.\" If you do not indicate a value, the default is \"technical.\" </p>"
+          "documentation":"<p>The type of issue for the case. You can specify either \"customer-service\" or \"technical.\" If you do not indicate a value, the default is \"technical.\"</p>"
         },
         "attachmentSetId":{
           "shape":"AttachmentSetId",
           "documentation":"<p>The ID of a set of one or more attachments for the case. Create the set by using <a>AddAttachmentsToSet</a>.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "CreateCaseResponse":{
       "type":"structure",
       "members":{
         "caseId":{
           "shape":"CaseId",
-          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i></p>"
+          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> </p>"
         }
       },
       "documentation":"<p>The AWS Support case ID returned by a successful completion of the <a>CreateCase</a> operation. </p>"
@@ -749,8 +582,8 @@
           "documentation":"<p>The limit for the number of <a>DescribeAttachment</a> requests in a short period of time has been exceeded.</p>"
         }
       },
-      "exception":true,
-      "documentation":"<p>The limit for the number of <a>DescribeAttachment</a> requests in a short period of time has been exceeded.</p>"
+      "documentation":"<p>The limit for the number of <a>DescribeAttachment</a> requests in a short period of time has been exceeded.</p>",
+      "exception":true
     },
     "DescribeAttachmentRequest":{
       "type":"structure",
@@ -777,11 +610,11 @@
       "members":{
         "caseIdList":{
           "shape":"CaseIdList",
-          "documentation":"<p>A list of ID numbers of the support cases you want returned. The maximum number of cases is 100. </p>"
+          "documentation":"<p>A list of ID numbers of the support cases you want returned. The maximum number of cases is 100.</p>"
         },
         "displayId":{
           "shape":"DisplayId",
-          "documentation":"<p>The ID displayed for a case in the AWS Support Center user interface. </p>"
+          "documentation":"<p>The ID displayed for a case in the AWS Support Center user interface.</p>"
         },
         "afterTime":{
           "shape":"AfterTime",
@@ -811,7 +644,8 @@
           "shape":"IncludeCommunications",
           "documentation":"<p>Specifies whether communications should be included in the <a>DescribeCases</a> results. The default is <i>true</i>.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeCasesResponse":{
       "type":"structure",
@@ -825,7 +659,7 @@
           "documentation":"<p>A resumption point for pagination.</p>"
         }
       },
-      "documentation":"<p>Returns an array of <a>CaseDetails</a> objects and a <code>NextToken</code> that defines a point for pagination in the result set.</p>"
+      "documentation":"<p>Returns an array of <a>CaseDetails</a> objects and a <code>nextToken</code> that defines a point for pagination in the result set.</p>"
     },
     "DescribeCommunicationsRequest":{
       "type":"structure",
@@ -833,7 +667,7 @@
       "members":{
         "caseId":{
           "shape":"CaseId",
-          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i></p>"
+          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> </p>"
         },
         "beforeTime":{
           "shape":"BeforeTime",
@@ -851,7 +685,8 @@
           "shape":"MaxResults",
           "documentation":"<p>The maximum number of results to return before paginating.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeCommunicationsResponse":{
       "type":"structure",
@@ -878,7 +713,8 @@
           "shape":"Language",
           "documentation":"<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be passed explicitly for operations that take them.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeServicesResponse":{
       "type":"structure",
@@ -897,7 +733,8 @@
           "shape":"Language",
           "documentation":"<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be passed explicitly for operations that take them.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeSeverityLevelsResponse":{
       "type":"structure",
@@ -915,9 +752,10 @@
       "members":{
         "checkIds":{
           "shape":"StringList",
-          "documentation":"<p>The IDs of the Trusted Advisor checks.</p>"
+          "documentation":"<p>The IDs of the Trusted Advisor checks to get the status of. <b>Note:</b> Specifying the check ID of a check that is automatically refreshed causes an <code>InvalidParameterValue</code> error.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeTrustedAdvisorCheckRefreshStatusesResponse":{
       "type":"structure",
@@ -942,7 +780,8 @@
           "shape":"String",
           "documentation":"<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be passed explicitly for operations that take them.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeTrustedAdvisorCheckResultResponse":{
       "type":"structure",
@@ -962,7 +801,8 @@
           "shape":"StringList",
           "documentation":"<p>The IDs of the Trusted Advisor checks.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeTrustedAdvisorCheckSummariesResponse":{
       "type":"structure",
@@ -983,7 +823,8 @@
           "shape":"String",
           "documentation":"<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be passed explicitly for operations that take them.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "DescribeTrustedAdvisorChecksResponse":{
       "type":"structure",
@@ -1011,17 +852,17 @@
           "documentation":"<p>An internal server error occurred.</p>"
         }
       },
+      "documentation":"<p>An internal server error occurred.</p>",
       "exception":true,
-      "fault":true,
-      "documentation":"<p>An internal server error occurred.</p>"
+      "fault":true
     },
     "IssueType":{"type":"string"},
     "Language":{"type":"string"},
     "Long":{"type":"long"},
     "MaxResults":{
       "type":"integer",
-      "min":10,
-      "max":100
+      "max":100,
+      "min":10
     },
     "NextToken":{"type":"string"},
     "RecentCaseCommunications":{
@@ -1044,9 +885,10 @@
       "members":{
         "checkId":{
           "shape":"String",
-          "documentation":"<p>The unique identifier for the Trusted Advisor check.</p>"
+          "documentation":"<p>The unique identifier for the Trusted Advisor check to refresh. <b>Note:</b> Specifying the check ID of a check that is automatically refreshed causes an <code>InvalidParameterValue</code> error.</p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "RefreshTrustedAdvisorCheckResponse":{
       "type":"structure",
@@ -1054,7 +896,7 @@
       "members":{
         "status":{
           "shape":"TrustedAdvisorCheckRefreshStatus",
-          "documentation":"<p>The current refresh status for a check, including the amount of time until the check is eligible for refresh. </p>"
+          "documentation":"<p>The current refresh status for a check, including the amount of time until the check is eligible for refresh.</p>"
         }
       },
       "documentation":"<p>The current refresh status of a Trusted Advisor check.</p>"
@@ -1064,9 +906,10 @@
       "members":{
         "caseId":{
           "shape":"CaseId",
-          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i></p>"
+          "documentation":"<p>The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> </p>"
         }
-      }
+      },
+      "documentation":"<p/>"
     },
     "ResolveCaseResponse":{
       "type":"structure",
@@ -1088,11 +931,11 @@
       "members":{
         "code":{
           "shape":"ServiceCode",
-          "documentation":"<p>The code for an AWS service returned by the <a>DescribeServices</a> response. The <code>Name</code> element contains the corresponding friendly name.</p>"
+          "documentation":"<p>The code for an AWS service returned by the <a>DescribeServices</a> response. The <code>name</code> element contains the corresponding friendly name.</p>"
         },
         "name":{
           "shape":"ServiceName",
-          "documentation":"<p>The friendly name for an AWS service. The <code>Code</code> element contains the corresponding code.</p>"
+          "documentation":"<p>The friendly name for an AWS service. The <code>code</code> element contains the corresponding code.</p>"
         },
         "categories":{
           "shape":"CategoryList",
@@ -1101,15 +944,12 @@
       },
       "documentation":"<p>Information about an AWS service returned by the <a>DescribeServices</a> operation. </p>"
     },
-    "ServiceCode":{
-      "type":"string",
-      "pattern":"[0-9a-z\\-_]+"
-    },
+    "ServiceCode":{"type":"string"},
     "ServiceCodeList":{
       "type":"list",
       "member":{"shape":"ServiceCode"},
-      "min":0,
-      "max":100
+      "max":100,
+      "min":0
     },
     "ServiceList":{
       "type":"list",
@@ -1122,14 +962,14 @@
       "members":{
         "code":{
           "shape":"SeverityLevelCode",
-          "documentation":"<p>One of four values: \"low,\" \"medium,\" \"high,\" and \"urgent\". These values correspond to response times returned to the caller in <code>SeverityLevel.name</code>. </p>"
+          "documentation":"<p>One of four values: \"low,\" \"medium,\" \"high,\" and \"urgent\". These values correspond to response times returned to the caller in <code>severityLevel.name</code>. </p>"
         },
         "name":{
           "shape":"SeverityLevelName",
           "documentation":"<p>The name of the severity level that corresponds to the severity level code.</p>"
         }
       },
-      "documentation":"<p>A code and name pair that represent a severity level that can be applied to a support case. </p>"
+      "documentation":"<p>A code and name pair that represent a severity level that can be applied to a support case.</p>"
     },
     "SeverityLevelCode":{"type":"string"},
     "SeverityLevelName":{"type":"string"},
@@ -1214,7 +1054,7 @@
           "documentation":"<p>The amount of time, in milliseconds, until the Trusted Advisor check is eligible for refresh.</p>"
         }
       },
-      "documentation":"<p>The refresh status of a Trusted Advisor check. </p>"
+      "documentation":"<p>The refresh status of a Trusted Advisor check.</p>"
     },
     "TrustedAdvisorCheckRefreshStatusList":{
       "type":"list",
@@ -1315,7 +1155,6 @@
       "type":"structure",
       "required":[
         "status",
-        "region",
         "resourceId",
         "metadata"
       ],
@@ -1326,7 +1165,7 @@
         },
         "region":{
           "shape":"String",
-          "documentation":"<p>The AWS region in which the identified resource is located. </p>"
+          "documentation":"<p>The AWS region in which the identified resource is located.</p>"
         },
         "resourceId":{
           "shape":"String",
@@ -1341,7 +1180,7 @@
           "documentation":"<p>Additional information about the identified resource. The exact metadata and its order can be obtained by inspecting the <a>TrustedAdvisorCheckDescription</a> object returned by the call to <a>DescribeTrustedAdvisorChecks</a>. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data. </p>"
         }
       },
-      "documentation":"<p>Contains information about a resource identified by a Trusted Advisor check. </p>"
+      "documentation":"<p>Contains information about a resource identified by a Trusted Advisor check.</p>"
     },
     "TrustedAdvisorResourceDetailList":{
       "type":"list",
@@ -1375,5 +1214,6 @@
       },
       "documentation":"<p>Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>. </p>"
     }
-  }
+  },
+  "documentation":"<fullname>AWS Support</fullname> <p>The AWS Support API reference is intended for programmers who need detailed information about the AWS Support operations and data types. This service enables you to manage your AWS Support cases programmatically. It uses HTTP methods that return results in JSON format.</p> <p>The AWS Support service also exposes a set of <a href=\"http://aws.amazon.com/premiumsupport/trustedadvisor/\">Trusted Advisor</a> features. You can retrieve a list of checks and their descriptions, get check results, specify checks to refresh, and get the refresh status of checks. </p> <p>The following list describes the AWS Support case management operations:</p> <ul> <li> <p> <b>Service names, issue categories, and available severity levels. </b>The <a>DescribeServices</a> and <a>DescribeSeverityLevels</a> operations return AWS service names, service codes, service categories, and problem severity levels. You use these values when you call the <a>CreateCase</a> operation. </p> </li> <li> <p> <b>Case creation, case details, and case resolution.</b> The <a>CreateCase</a>, <a>DescribeCases</a>, <a>DescribeAttachment</a>, and <a>ResolveCase</a> operations create AWS Support cases, retrieve information about cases, and resolve cases.</p> </li> <li> <p> <b>Case communication.</b> The <a>DescribeCommunications</a>, <a>AddCommunicationToCase</a>, and <a>AddAttachmentsToSet</a> operations retrieve and add communications and attachments to AWS Support cases. </p> </li> </ul> <p>The following list describes the operations available from the AWS Support service for Trusted Advisor:</p> <ul> <li> <p> <a>DescribeTrustedAdvisorChecks</a> returns the list of checks that run against your AWS resources.</p> </li> <li> <p>Using the <code>checkId</code> for a specific check returned by <a>DescribeTrustedAdvisorChecks</a>, you can call <a>DescribeTrustedAdvisorCheckResult</a> to obtain the results for the check you specified.</p> </li> <li> <p> <a>DescribeTrustedAdvisorCheckSummaries</a> returns summarized results for one or more Trusted Advisor checks.</p> </li> <li> <p> <a>RefreshTrustedAdvisorCheck</a> requests that Trusted Advisor rerun a specified check. </p> </li> <li> <p> <a>DescribeTrustedAdvisorCheckRefreshStatuses</a> reports the refresh status of one or more checks. </p> </li> </ul> <p>For authentication of requests, AWS Support uses <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p> <p>See <a href=\"http://docs.aws.amazon.com/awssupport/latest/user/Welcome.html\">About the AWS Support API</a> in the <i>AWS Support User Guide</i> for information about how to use this service to create and manage your support cases, and how to call Trusted Advisor for results of checks on your resources. </p>"
 }
