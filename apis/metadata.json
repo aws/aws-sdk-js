@@ -254,7 +254,8 @@
     "cors": true
   },
   "servicecatalog": {
-    "name": "ServiceCatalog"
+    "name": "ServiceCatalog",
+    "cors": true
   },
   "ses": {
     "prefix": "email",
