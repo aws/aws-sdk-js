@@ -294,7 +294,9 @@ describe 'AWS.S3', ->
 
       it 'will compute contentMD5', ->
         s3 = new AWS.S3(s3DisableBodySigning: true, signatureVersion: 'v4')
-        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024*1024*5))
+        buf = new Buffer(1024*1024*5)
+        buf.fill(0)
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: buf)
         expect(req.headers['Content-MD5']).to.equal('XzY+DlipXwbL6bvGYsXftg==')
 
       it 'will not disable body signing when the endpoint is not https', ->
