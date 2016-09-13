@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.1-->
+<!--LATEST=2.6.2-->
 <!--ENTRYINSERT-->
+
+## 2.6.2
+* feature: ServiceCatalog: Updates the API for AWS.ServiceCatalog.
 
 ## 2.6.1
 * bugfix: SDK: Fixes an issue that caused all services to be loaded into memory when requiring the SDK. This issue was introduced in version `2.6.0` of the SDK, and address #1124.
