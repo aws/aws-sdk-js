@@ -163,6 +163,29 @@
   },
   "shapes":{
     "AcceptLanguage":{"type":"string"},
+    "AccessLevelFilter":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"AccessLevelFilterKey",
+          "documentation":"<p>Specifies the access level.</p> <p> <code>Account</code> allows results at the account level. </p> <p> <code>Role</code> allows results based on the federated role of the specified user.</p> <p> <code>User</code> allows results limited to the specified user. </p>"
+        },
+        "Value":{
+          "shape":"AccessLevelFilterValue",
+          "documentation":"<p>Specifies the user to which the access level applies. A value of <code>Self</code> is currently supported.</p>"
+        }
+      },
+      "documentation":"<p>The access level to limit results.</p>"
+    },
+    "AccessLevelFilterKey":{
+      "type":"string",
+      "enum":[
+        "Account",
+        "Role",
+        "User"
+      ]
+    },
+    "AccessLevelFilterValue":{"type":"string"},
     "AllowedValue":{"type":"string"},
     "AllowedValues":{
       "type":"list",
@@ -198,7 +221,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
         },
         "Id":{
           "shape":"Id",
@@ -225,7 +248,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
         },
         "Id":{
           "shape":"Id",
@@ -255,7 +278,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
         },
         "ProductId":{
           "shape":"Id",
@@ -294,7 +317,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
         },
         "Id":{
           "shape":"Id",
@@ -302,7 +325,7 @@
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
@@ -338,7 +361,10 @@
     "ErrorCode":{"type":"string"},
     "ErrorDescription":{"type":"string"},
     "HasDefaultPath":{"type":"boolean"},
-    "Id":{"type":"string"},
+    "Id":{
+      "type":"string",
+      "min":1
+    },
     "IdempotencyToken":{
       "type":"string",
       "max":128,
@@ -388,7 +414,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
         },
         "ProductId":{
           "shape":"Id",
@@ -400,7 +426,7 @@
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
         }
       }
     },
@@ -422,11 +448,15 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "AccessLevelFilter":{
+          "shape":"AccessLevelFilter",
+          "documentation":"<p>The access level for obtaining results. If left unspecified, <code>User</code> level access is used.</p>"
         },
         "SearchFilter":{
           "shape":"ListRecordHistorySearchFilter",
-          "documentation":"<p>(Optional) The filter to limit search results. </p>"
+          "documentation":"<p>The filter to limit search results. </p>"
         },
         "PageSize":{
           "shape":"PageSize",
@@ -434,7 +464,7 @@
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
         }
       }
     },
@@ -622,7 +652,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
         },
         "ProductId":{
           "shape":"Id",
@@ -646,7 +676,7 @@
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>(Optional) A list of tags to use as provisioning options.</p>"
+          "documentation":"<p>A list of tags to use as provisioning options.</p>"
         },
         "NotificationArns":{
           "shape":"NotificationArns",
@@ -959,7 +989,11 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "AccessLevelFilter":{
+          "shape":"AccessLevelFilter",
+          "documentation":"<p>The access level for obtaining results. If left unspecified, <code>User</code> level access is used.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
@@ -967,7 +1001,7 @@
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
         }
       }
     },
@@ -991,11 +1025,11 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
         },
         "Filters":{
           "shape":"ProductViewFilters",
-          "documentation":"<p>(Optional) The list of filters with which to limit search results. If no search filters are specified, the output is all the products to which the calling user has access. </p>"
+          "documentation":"<p>The list of filters with which to limit search results. If no search filters are specified, the output is all the products to which the calling user has access. </p>"
         },
         "PageSize":{
           "shape":"PageSize",
@@ -1003,15 +1037,15 @@
         },
         "SortBy":{
           "shape":"ProductViewSortBy",
-          "documentation":"<p>(Optional) The sort field specifier. If no value is specified, results are not sorted.</p>"
+          "documentation":"<p>The sort field specifier. If no value is specified, results are not sorted.</p>"
         },
         "SortOrder":{
           "shape":"SortOrder",
-          "documentation":"<p>(Optional) The sort order specifier. If no value is specified, results are not sorted.</p>"
+          "documentation":"<p>The sort order specifier. If no value is specified, results are not sorted.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieve. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
         }
       }
     },
@@ -1054,7 +1088,7 @@
           "documentation":"<p>The esired value for this key.</p>"
         }
       },
-      "documentation":"<p>Optional key/value pairs to associate with this provisioning. These tags are propagated to the resources created in the provisioning.</p>"
+      "documentation":"<p>Key/value pairs to associate with this provisioning. These tags are entirely discretionary and are propagated to the resources created in the provisioning.</p>"
     },
     "TagKey":{
       "type":"string",
@@ -1092,11 +1126,11 @@
         },
         "IgnoreErrors":{
           "shape":"IgnoreErrors",
-          "documentation":"<p>Optional Boolean parameter. If set to true, AWS Service Catalog stops managing the specified ProvisionedProduct object even if it cannot delete the underlying resources.</p>"
+          "documentation":"<p>If set to true, AWS Service Catalog stops managing the specified ProvisionedProduct object even if it cannot delete the underlying resources.</p>"
         },
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
         }
       }
     },
@@ -1115,7 +1149,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>Optional language code. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
         },
         "ProvisionedProductName":{
           "shape":"ProvisionedProductNameOrArn",
