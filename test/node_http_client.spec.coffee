@@ -20,6 +20,14 @@ if AWS.util.isNode()
         https.globalAgent.maxSockets = Infinity
         expect(agent.maxSockets).to.equal(50)
 
+      it 'overrides globalAgent value if global is set to false', ->
+        https = require('https')
+        oldGlobal = https.globalAgent
+        https.globalAgent = false
+        agent = http.sslAgent()
+        expect(agent.maxSockets).to.equal(50)
+        https.globalAgent = oldGlobal
+
     describe 'handleRequest', ->
       it 'emits error event', (done) ->
         req = new AWS.HttpRequest 'http://invalid'

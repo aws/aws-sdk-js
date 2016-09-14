@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Node_Https",
+  "description": "Fixes an issue caused when https.globalAgent is set to false."
+}
