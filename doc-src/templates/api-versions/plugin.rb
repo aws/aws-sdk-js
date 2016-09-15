@@ -95,7 +95,7 @@ class ApiDocumentor
     model = load_model(file)
     $dynamodb_model = model if klass == 'DynamoDB' && version == '2012-08-10'
     add_class_documentation(svc, klass, model, version, dualstack)
-    add_methods(svc, klass, model)
+    add_methods(svc, klass, version, model)
     add_waiters(svc, klass, model)
     add_config(svc, identifier, dualstack)
 
@@ -167,8 +167,8 @@ eof
 
   end
 
-  def add_methods(service, klass, model)
-    examples = load_examples(klass.downcase) || {}
+  def add_methods(service, klass, version, model)
+    examples = load_examples(klass.downcase, version) || {}
     model['operations'].each_pair do |name, operation|
       meth = YARDJS::CodeObjects::PropertyObject.new(service, name[0].downcase + name[1..-1])
       docs = MethodDocumentor.new(name, operation, model, klass, {}, examples[name]).lines.join("\n")
@@ -275,8 +275,8 @@ eof
     raise "Unknown class name for #{prefix}"
   end
 
-  def load_examples(name)
-    paths = Dir[File.join($APIS_DIR, "#{name}-*.examples.json")]
+  def load_examples(name, version)
+    paths = Dir[File.join($APIS_DIR, "#{name}-#{version}.examples.json")]
     unless paths.empty?
       json = JSON.parse(File.read(paths[0]))
       json['examples']
