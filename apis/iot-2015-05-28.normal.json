@@ -3145,7 +3145,7 @@
         },
         "elasticsearch":{
           "shape":"ElasticsearchAction",
-          "documentation":"<p>Write data to an Amazon Elasticsearch Service; domain.</p>"
+          "documentation":"<p>Write data to an Amazon Elasticsearch Service domain.</p>"
         }
       },
       "documentation":"<p>Describes the actions associated with a rule.</p>"
@@ -3333,6 +3333,19 @@
         }
       },
       "documentation":"<p>The input for the CancelCertificateTransfer operation.</p>"
+    },
+    "CannedAccessControlList":{
+      "type":"string",
+      "enum":[
+        "private",
+        "public-read",
+        "public-read-write",
+        "aws-exec-read",
+        "authenticated-read",
+        "bucket-owner-read",
+        "bucket-owner-full-control",
+        "log-delivery-write"
+      ]
     },
     "Certificate":{
       "type":"structure",
@@ -4241,7 +4254,7 @@
           "documentation":"<p>The unique identifier for the document you are storing.</p>"
         }
       },
-      "documentation":"<p>Describes an action that writes data to an Amazon Elasticsearch Service; domain.</p>"
+      "documentation":"<p>Describes an action that writes data to an Amazon Elasticsearch Service domain.</p>"
     },
     "ElasticsearchEndpoint":{
       "type":"string",
@@ -4281,7 +4294,7 @@
         },
         "separator":{
           "shape":"FirehoseSeparator",
-          "documentation":"<p>A character separator that will be used to separate records written to the firehose stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).</p>"
+          "documentation":"<p>A character separator that will be used to separate records written to the Firehose stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).</p>"
         }
       },
       "documentation":"<p>Describes an action that writes data to an Amazon Kinesis Firehose stream.</p>"
@@ -5273,11 +5286,13 @@
           "documentation":"<p>The CA certificate used to sign the device certificate being registered.</p>"
         },
         "setAsActive":{
-          "shape":"SetAsActive",
+          "shape":"SetAsActiveFlag",
+          "deprecated":true,
           "location":"querystring",
           "locationName":"setAsActive",
           "documentation":"<p>A boolean value that specifies if the CA certificate is set to active.</p>"
-        }
+        },
+        "status":{"shape":"CertificateStatus"}
       },
       "documentation":"<p>The input to the RegisterCertificate operation.</p>"
     },
@@ -5376,6 +5391,14 @@
         "message":{
           "shape":"errorMessage",
           "documentation":"<p>The message for the exception.</p>"
+        },
+        "resourceId":{
+          "shape":"resourceId",
+          "documentation":"<p>The ID of the resource that caused the exception.</p>"
+        },
+        "resourceArn":{
+          "shape":"resourceArn",
+          "documentation":"<p>The ARN of the resource that caused the exception.</p>"
         }
       },
       "error":{"httpStatusCode":409},
@@ -5420,6 +5443,10 @@
         "key":{
           "shape":"Key",
           "documentation":"<p>The object key.</p>"
+        },
+        "cannedAcl":{
+          "shape":"CannedAccessControlList",
+          "documentation":"<p>The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl\">S3 canned ACLs</a>.</p>"
         }
       },
       "documentation":"<p>Describes an action to write data to an Amazon S3 bucket.</p>"
@@ -5443,6 +5470,7 @@
       "documentation":"<p>The service is temporarily unavailable.</p>"
     },
     "SetAsActive":{"type":"boolean"},
+    "SetAsActiveFlag":{"type":"boolean"},
     "SetAsDefault":{"type":"boolean"},
     "SetDefaultPolicyVersionRequest":{
       "type":"structure",
@@ -5953,7 +5981,9 @@
       "exception":true,
       "documentation":"<p>The number of policy versions exceeds the limit.</p>"
     },
-    "errorMessage":{"type":"string"}
+    "errorMessage":{"type":"string"},
+    "resourceArn":{"type":"string"},
+    "resourceId":{"type":"string"}
   },
   "examples":{
   }
