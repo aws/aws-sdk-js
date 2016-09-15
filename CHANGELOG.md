@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.2-->
+<!--LATEST=2.6.3-->
 <!--ENTRYINSERT-->
+
+## 2.6.3
+* bugfix: Node_Https: Fixes an issue caused when https.globalAgent is set to false.
+* feature: Iot: Updates registerCertificate operation, and allows users to specify cannedAcl for S3 action.
+* feature: RDS: Updates describeDbCluster operation to allow specifying a ReaderEndpoint for accessing cluster readers.
 
 ## 2.6.2
 * feature: ServiceCatalog: Updates the API for AWS.ServiceCatalog.
