@@ -987,7 +987,7 @@
         "shape":"SourceRegionMessage",
         "resultWrapper":"DescribeSourceRegionsResult"
       },
-      "documentation":"<p>Returns a list that includes the status of each source AWS Region that the current region can get a Read Replica or a DB snapshot from. This API action supports pagination.</p>"
+      "documentation":"<p>Returns a list of the source AWS regions where the current AWS region can create a Read Replica or copy a DB snapshot from. This API action supports pagination.</p>"
     },
     "DownloadDBLogFilePortion":{
       "name":"DownloadDBLogFilePortion",
@@ -2157,7 +2157,7 @@
         },
         "Engine":{
           "shape":"String",
-          "documentation":"<p>The name of the database engine to be used for this instance.</p> <p> Valid Values: <code>MySQL</code> | <code>mariadb</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code> | <code>aurora</code> </p> <p>Not every database engine is available for every AWS region.</p>"
+          "documentation":"<p>The name of the database engine to be used for this instance.</p> <p> Valid Values: <code>mysql</code> | <code>mariadb</code> | <code>oracle-se1</code> | <code>oracle-se2</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code> | <code>aurora</code> </p> <p>Not every database engine is available for every AWS region.</p>"
         },
         "MasterUsername":{
           "shape":"String",
@@ -2601,6 +2601,10 @@
         "Endpoint":{
           "shape":"String",
           "documentation":"<p>Specifies the connection endpoint for the primary instance of the DB cluster.</p>"
+        },
+        "ReaderEndpoint":{
+          "shape":"String",
+          "documentation":"<p>The reader endpoint for the DB cluster. The reader endpoint for a DB cluster load-balances connections across the Aurora Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Aurora distributes the connection requests among the Aurora Replicas in the DB cluster. This functionality can help balance your read workload across multiple Aurora Replicas in your DB cluster. </p> <p>If a failover occurs, and the Aurora Replica that you are connected to is promoted to be the primary instance, your connection will be dropped. To continue sending your read workload to other Aurora Replicas in the cluster, you can then recoonect to the reader endpoint.</p>"
         },
         "Engine":{
           "shape":"String",
@@ -4873,7 +4877,7 @@
       "members":{
         "RegionName":{
           "shape":"String",
-          "documentation":"<p>The source region name, for example US West (Oregon).</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid AWS Region name, for example US West (Oregon).</p> </li> </ul>"
+          "documentation":"<p>The source region name. For example, <code>us-east-1</code>.</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid AWS Region name.</p> </li> </ul>"
         },
         "MaxRecords":{
           "shape":"IntegerOptional",
@@ -5757,7 +5761,7 @@
         },
         "Domain":{
           "shape":"String",
-          "documentation":"<p>Specify the Active Directory Domain to move the instance to.</p> <p>The specified Active Directory Domain must be created prior to this operation. Currently only a SQL Server instance can be created in a Active Directory Domain.</p>"
+          "documentation":"<p>The Active Directory Domain to move the instance to. Specify <code>none</code> to remove the instance from its current domain. The domain must be created prior to this operation. Currently only a Microsoft SQL Server instance can be created in a Active Directory Domain. </p>"
         },
         "CopyTagsToSnapshot":{
           "shape":"BooleanOptional",
@@ -5781,7 +5785,7 @@
         },
         "DomainIAMRoleName":{
           "shape":"String",
-          "documentation":"<p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>"
+          "documentation":"<p>The name of the IAM role to use when making API calls to the Directory Service.</p>"
         },
         "PromotionTier":{
           "shape":"IntegerOptional",
