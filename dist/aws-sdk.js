@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.6.2
+// AWS SDK for JavaScript v2.6.3
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -45831,7 +45831,7 @@ module.exports={
             "shape": "S14"
           },
           "thingTypeMetadata": {
-            "shape": "S3r"
+            "shape": "S3s"
           }
         }
       }
@@ -46130,7 +46130,7 @@ module.exports={
         "type": "structure",
         "members": {
           "certificates": {
-            "shape": "S4o"
+            "shape": "S4p"
           },
           "nextMarker": {}
         }
@@ -46171,7 +46171,7 @@ module.exports={
         "type": "structure",
         "members": {
           "certificates": {
-            "shape": "S4o"
+            "shape": "S4p"
           },
           "nextMarker": {}
         }
@@ -46254,7 +46254,7 @@ module.exports={
         "type": "structure",
         "members": {
           "policies": {
-            "shape": "S4y"
+            "shape": "S4z"
           },
           "nextMarker": {}
         }
@@ -46295,7 +46295,7 @@ module.exports={
         "type": "structure",
         "members": {
           "principals": {
-            "shape": "S52"
+            "shape": "S53"
           },
           "nextMarker": {}
         }
@@ -46374,7 +46374,7 @@ module.exports={
         "type": "structure",
         "members": {
           "policies": {
-            "shape": "S4y"
+            "shape": "S4z"
           },
           "nextMarker": {}
         }
@@ -46438,7 +46438,7 @@ module.exports={
         "type": "structure",
         "members": {
           "principals": {
-            "shape": "S52"
+            "shape": "S53"
           }
         }
       }
@@ -46479,7 +46479,7 @@ module.exports={
                   "shape": "S14"
                 },
                 "thingTypeMetadata": {
-                  "shape": "S3r"
+                  "shape": "S3s"
                 }
               }
             }
@@ -46640,10 +46640,12 @@ module.exports={
           "certificatePem": {},
           "caCertificatePem": {},
           "setAsActive": {
+            "deprecated": true,
             "location": "querystring",
             "locationName": "setAsActive",
             "type": "boolean"
-          }
+          },
+          "status": {}
         }
       },
       "output": {
@@ -46994,7 +46996,8 @@ module.exports={
             "members": {
               "roleArn": {},
               "bucketName": {},
-              "key": {}
+              "key": {},
+              "cannedAcl": {}
             }
           },
           "firehose": {
@@ -47062,7 +47065,7 @@ module.exports={
         }
       }
     },
-    "S3r": {
+    "S3s": {
       "type": "structure",
       "members": {
         "deprecated": {
@@ -47076,7 +47079,7 @@ module.exports={
         }
       }
     },
-    "S4o": {
+    "S4p": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -47090,7 +47093,7 @@ module.exports={
         }
       }
     },
-    "S4y": {
+    "S4z": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -47100,7 +47103,7 @@ module.exports={
         }
       }
     },
-    "S52": {
+    "S53": {
       "type": "list",
       "member": {}
     }
@@ -64861,6 +64864,7 @@ module.exports={
           "type": "timestamp"
         },
         "Endpoint": {},
+        "ReaderEndpoint": {},
         "Engine": {},
         "EngineVersion": {},
         "LatestRestorableTime": {
@@ -82884,7 +82888,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.6.2',
+  VERSION: '2.6.3',
 
 
   Signers: {},
