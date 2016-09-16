@@ -5,7 +5,13 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['es'] = {};
 AWS.ES = Service.defineService('es', ['2015-01-01']);
-
-apiLoader.services['es']['2015-01-01'] = require('../apis/es-2015-01-01.min.json');
+Object.defineProperty(apiLoader.services['es'], '2015-01-01', {
+  get: function get() {
+    var model = require('../apis/es-2015-01-01.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ES;

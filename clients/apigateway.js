@@ -6,8 +6,14 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['apigateway'] = {};
 AWS.APIGateway = Service.defineService('apigateway', ['2015-07-09']);
 require('../lib/services/apigateway');
-
-apiLoader.services['apigateway']['2015-07-09'] = require('../apis/apigateway-2015-07-09.min.json');
-apiLoader.services['apigateway']['2015-07-09'].paginators = require('../apis/apigateway-2015-07-09.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['apigateway'], '2015-07-09', {
+  get: function get() {
+    var model = require('../apis/apigateway-2015-07-09.min.json');
+    model.paginators = require('../apis/apigateway-2015-07-09.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.APIGateway;

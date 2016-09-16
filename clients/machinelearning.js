@@ -6,9 +6,15 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['machinelearning'] = {};
 AWS.MachineLearning = Service.defineService('machinelearning', ['2014-12-12']);
 require('../lib/services/machinelearning');
-
-apiLoader.services['machinelearning']['2014-12-12'] = require('../apis/machinelearning-2014-12-12.min.json');
-apiLoader.services['machinelearning']['2014-12-12'].paginators = require('../apis/machinelearning-2014-12-12.paginators.json').pagination;
-apiLoader.services['machinelearning']['2014-12-12'].waiters = require('../apis/machinelearning-2014-12-12.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['machinelearning'], '2014-12-12', {
+  get: function get() {
+    var model = require('../apis/machinelearning-2014-12-12.min.json');
+    model.paginators = require('../apis/machinelearning-2014-12-12.paginators.json').pagination;
+    model.waiters = require('../apis/machinelearning-2014-12-12.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.MachineLearning;

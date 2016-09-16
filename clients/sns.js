@@ -5,8 +5,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['sns'] = {};
 AWS.SNS = Service.defineService('sns', ['2010-03-31']);
-
-apiLoader.services['sns']['2010-03-31'] = require('../apis/sns-2010-03-31.min.json');
-apiLoader.services['sns']['2010-03-31'].paginators = require('../apis/sns-2010-03-31.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['sns'], '2010-03-31', {
+  get: function get() {
+    var model = require('../apis/sns-2010-03-31.min.json');
+    model.paginators = require('../apis/sns-2010-03-31.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.SNS;

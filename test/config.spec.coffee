@@ -146,11 +146,19 @@ describe 'AWS.Config', ->
       config = new AWS.Config()
       config.update(foo: 10)
       expect(config.foo).to.equal(undefined)
-
-    it 'should allow service identifiers to be set', ->
-      config = new AWS.Config()
-      config.update(s3: {endpoint: 'localhost'})
-      expect(config.s3).to.eql(endpoint: 'localhost')
+    
+    describe 'should allow', ->
+      allServices = require('../clients/all')
+      for own className, ctor of allServices
+        serviceIdentifier = className.toLowerCase()
+        ((id) ->
+          it id + ' to be set', ->
+            config = new AWS.Config()
+            params = {}
+            params[id] = {endpoint: 'localhost'}
+            config.update(params)
+            expect(config[id]).to.eql(endpoint: 'localhost')
+        )(serviceIdentifier)
 
     it 'allows unknown keys if allowUnknownKeys is set', ->
       config = new AWS.Config()

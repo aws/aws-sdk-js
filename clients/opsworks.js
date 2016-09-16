@@ -5,9 +5,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['opsworks'] = {};
 AWS.OpsWorks = Service.defineService('opsworks', ['2013-02-18']);
-
-apiLoader.services['opsworks']['2013-02-18'] = require('../apis/opsworks-2013-02-18.min.json');
-apiLoader.services['opsworks']['2013-02-18'].paginators = require('../apis/opsworks-2013-02-18.paginators.json').pagination;
-apiLoader.services['opsworks']['2013-02-18'].waiters = require('../apis/opsworks-2013-02-18.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['opsworks'], '2013-02-18', {
+  get: function get() {
+    var model = require('../apis/opsworks-2013-02-18.min.json');
+    model.paginators = require('../apis/opsworks-2013-02-18.paginators.json').pagination;
+    model.waiters = require('../apis/opsworks-2013-02-18.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.OpsWorks;

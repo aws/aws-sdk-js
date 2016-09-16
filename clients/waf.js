@@ -5,7 +5,13 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['waf'] = {};
 AWS.WAF = Service.defineService('waf', ['2015-08-24']);
-
-apiLoader.services['waf']['2015-08-24'] = require('../apis/waf-2015-08-24.min.json');
+Object.defineProperty(apiLoader.services['waf'], '2015-08-24', {
+  get: function get() {
+    var model = require('../apis/waf-2015-08-24.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.WAF;
