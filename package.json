@@ -33,7 +33,7 @@
       "jmespath": "0.15.0",
       "sax": "1.1.5",
       "xml2js": "0.4.15",
-      "xmlbuilder": "2.6.2"
+      "xmlbuilder": "4.2.1"
     },
     "main": "lib/aws.js",
     "browser": {
