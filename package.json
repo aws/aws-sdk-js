@@ -32,7 +32,7 @@
       "crypto-browserify": "1.0.9",
       "jmespath": "0.15.0",
       "sax": "1.2.1",
-      "xml2js": "0.4.15",
+      "xml2js": "0.4.17",
       "xmlbuilder": "4.2.1"
     },
     "main": "lib/aws.js",
