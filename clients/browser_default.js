@@ -617,4 +617,5 @@ Object.defineProperty(AWS, 'WAF', {
   enumerable: true,
   configurable: true
 });
+
 module.exports = AWS;

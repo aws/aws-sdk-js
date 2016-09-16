@@ -1,5 +1,10 @@
 var fs = require('fs');
 var path = require('path');
+var clientTemplate, clientLoaderTemplate;
+
+function escapeRegExp(string) {
+  return string.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+}
 
 // Generate service clients
 function ClientCreator() {
@@ -9,6 +14,8 @@ function ClientCreator() {
   this._serviceCustomizationsFolderPath = path.join(__dirname, '..', 'lib', 'services');
   this._packageJsonPath = path.join(__dirname, '..', 'package.json');
   this._apiFileNames = null;
+  this._clientTemplatePath = path.join(__dirname, 'client-template.js');
+  this._clientLoaderTemplatePath = path.join(__dirname, 'client-loader-template.js');
 }
 
 ClientCreator.prototype.getAllApiFilenames = function getAllApiFilenames() {
@@ -66,6 +73,41 @@ ClientCreator.prototype.customizationsExist = function customizationsExist(servi
     return fs.existsSync(path.join(customizationsFolder, serviceName + '.js'));
 };
 
+ClientCreator.prototype.getClientTemplate = function getClientTemplate() {
+  if (!clientTemplate) clientTemplate = fs.readFileSync(this._clientTemplatePath).toString();
+  return clientTemplate;
+};
+
+ClientCreator.prototype.getClientLoaderTemplate = function getClientLoaderTemplate() {
+  if (!clientLoaderTemplate) clientLoaderTemplate = fs.readFileSync(this._clientLoaderTemplatePath).toString();
+  return clientLoaderTemplate;
+};
+
+ClientCreator.prototype.fillTemplate = function fillTemplate(code, replacers) {
+  if (Array.isArray(replacers)) {
+    replacers.forEach(function(subreplacers) {
+      code = fillTemplate(code, subreplacers);
+    });
+  } else if (replacers && typeof replacers === 'object') {
+    var replacerTags = Object.keys(replacers);
+    var endTag = escapeRegExp('/**/\n');
+    replacerTags.forEach(function(replacerTag) {
+      var replacer = replacers[replacerTag];
+      var escapedTag = escapeRegExp(replacerTag);
+      if (typeof replacer === 'string') {
+        code = code.replace(new RegExp(escapedTag, 'g'), replacer);
+      } else if (typeof replacer === 'function') {
+        var block;
+        var tagRegExp = new RegExp(escapedTag + '\n([^]*?)' + escapedTag + endTag);
+        while (block = code.match(tagRegExp)) {
+          code = code.replace(block[0], replacer(block[1]));
+        }
+      }
+    });
+  }
+  return code;
+};
+
 ClientCreator.prototype.generateClientFileSource = function generateClientFileSource(serviceMetadata, specifiedVersion) {
   var clientFolderPath = this._clientFolderPath;
   var className = serviceMetadata.name;
@@ -81,88 +123,69 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
       throw new Error('Unable to get models for ' + modelName);
   }
   var versionNumbers = Object.keys(modelVersions);
-  var tab = '  ';
-  var code = '';
-  code += 'require(\'../lib/node_loader\');\n';
-  code += 'var AWS = require(\'../lib/core\');\n';
-  code += 'var Service = require(\'../lib/service\');\n';
-  code += 'var apiLoader = require(\'../lib/api_loader\');\n\n';
-  code += 'apiLoader.services[\'' + serviceName +'\'] = {};\n';
-  code += 'AWS.' + className + ' = Service.defineService(\'' + serviceName + '\', [\'' + versionNumbers.join('\', \'') + '\']);\n';
-  // pull in service customizations
-  if (this.customizationsExist(serviceName)) {
-    code += 'require(\'../lib/services/' + serviceName + '\');\n';
-  }
-  versionNumbers.forEach(function(version) {
-    // check version
-    if (specifiedVersion !== '*' && specifiedVersion !== version) {
-        return;
-    }
-    var versionInfo = modelVersions[version];
-    if (!versionInfo.hasOwnProperty('api')) {
-        throw new Error('No API model for ' + serviceName + '-' + version);
-    }
-    var loaderPrefix = 'apiLoader.services[\'' + serviceName + '\'][\'' + version + '\']';
-    code += '\n';
-    code += loaderPrefix + ' = require(\'../apis/' + versionInfo.api + '.json\');\n';
-    if (versionInfo.hasOwnProperty('paginators')) {
-        code += loaderPrefix + '.paginators = require(\'../apis/' + versionInfo.paginators + '.json\').pagination;\n';
-    }
-    if (versionInfo.hasOwnProperty('waiters')) {
-        code += loaderPrefix + '.waiters = require(\'../apis/' + versionInfo.waiters + '.json\').waiters;\n';
-    }
-  });
-  code += '\n';
-  code += 'module.exports = AWS.' + className + ';\n';
+  var self = this;
+
+  var replacers = {
+    '$className': className,
+    '$serviceName': serviceName,
+    '$versionNumbers': versionNumbers.join('\', \''),
+
+    '/*ifcustomizations*/': function(codeblock) {
+      return self.customizationsExist(serviceName) ? codeblock : '';
+    },
+
+    '/*eachVersion*/': function(codeblock) {
+      var loaderPrefix;
+      codeblock = self.fillTemplate(codeblock, {
+        '/*$loaderPrefix*/': function(prefix) {loaderPrefix = prefix.trim(); return '';}
+      });
+      codeblock = self.fillTemplate(codeblock, {'$loaderPrefix': loaderPrefix});
+      return versionNumbers.map(function(version) {
+        // check version
+        if (specifiedVersion !== '*' && specifiedVersion !== version) return;
+        var versionInfo = modelVersions[version];
+        if (!versionInfo.hasOwnProperty('api')) {
+          throw new Error('No API model for ' + serviceName + '-' + version);
+        }
+        var hasPaginators = versionInfo.hasOwnProperty('paginators');
+        var hasWaiters = versionInfo.hasOwnProperty('waiters');
+        var subreplacers = {
+          '$version': version,
+          '$api': versionInfo.api,
+          '/*ifpaginators*/': function(codeblock) { return hasPaginators ? codeblock : ''; },
+          '/*ifwaiters*/': function(codeblock) { return hasWaiters ? codeblock : ''; }
+        };
+        if (hasPaginators) subreplacers['$paginators'] = versionInfo.paginators;
+        if (hasWaiters) subreplacers['$waiters'] = versionInfo.waiters;
+        return self.fillTemplate(codeblock, subreplacers);
+      }).join('\n');
+    },
+
+    '/*comment*/': function() { return ''; }
+  };
+
   return {
-      code: code,
+      code: this.fillTemplate(this.getClientTemplate(), replacers),
       path: path.join(clientFolderPath, serviceName + '.js'),
       service: serviceName,
-  }
-};
-
-ClientCreator.prototype.tabs = function tabs(count) {
-  var tab = '';
-  for (var i = 0; i < count; i++) {
-      tab += '  ';
-  }
-  return tab;
-}
-
-ClientCreator.prototype.generateDefinePropertySource = function generateDefinePropertySource(objName, serviceName, className) {
-  var tabs = this.tabs;
-  var code = '';
-  code += 'var ' + serviceName + ' = null;\n';
-  code += 'Object.defineProperty(' + objName + ', \'' + className + '\', {\n';
-  code += tabs(1) + 'get: function get() {\n';
-  code += tabs(2) + 'return ' + serviceName + ' || require(\'./' + serviceName + '\');\n';
-  code += tabs(1) + '},\n';
-  code += tabs(1) + 'set: function set(svc) {\n';
-  code += tabs(2) + serviceName + ' = svc;\n';
-  code += tabs(1) + '},\n';
-  code += tabs(1) + 'enumerable: true,\n';
-  code += tabs(1) + 'configurable: true\n';
-  code += '});\n';
-
-  return code;
+  };
 };
 
 ClientCreator.prototype.generateAllServicesSource = function generateAllServicesSource(services, fileName) {
   var metadata = this._metadata;
   var self = this;
-  var code = '';
-  code += 'require(\'../lib/node_loader\');\n';
-  code += 'var AWS = require(\'../lib/core\');\n\n';
-
-  services.forEach(function(service, idx) {
-    var className = metadata[service].name;
-    var tab = '  ';
-    var isLast = idx === services.length - 1;
-    code += self.generateDefinePropertySource('AWS', service, className);
-  });
-  code += 'module.exports = AWS;';
+  var replacers = {
+    '/*eachService*/': function(codeblock) {
+      return services.map(function(service) {
+        return self.fillTemplate(codeblock, {
+          '$serviceName': service,
+          '$className': metadata[service].name
+        });
+      }).join('');
+    }
+  };
   return {
-    code: code,
+    code: this.fillTemplate(this.getClientLoaderTemplate(), replacers),
     path: path.join(this._clientFolderPath, fileName + '.js'),
     service: fileName
   };
