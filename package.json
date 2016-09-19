@@ -31,7 +31,9 @@
       "buffer": "4.9.1",
       "crypto-browserify": "1.0.9",
       "jmespath": "0.15.0",
+      "querystring": "0.2.0",
       "sax": "1.1.5",
+      "url": "0.10.3",
       "xml2js": "0.4.15",
       "xmlbuilder": "2.6.2"
     },
