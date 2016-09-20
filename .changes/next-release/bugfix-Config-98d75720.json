@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Config",
-  "description": "Fixes an issue where specifying service-specific config on the global AWS.config object would fail if the service had not yet been instantiated."
-}
