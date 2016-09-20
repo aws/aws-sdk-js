@@ -52,6 +52,34 @@
       ],
       "documentation":"<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
     },
+    "CreateSecurityConfiguration":{
+      "name":"CreateSecurityConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateSecurityConfigurationInput"},
+      "output":{"shape":"CreateSecurityConfigurationOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ],
+      "documentation":"<p>Creates a security configuration using EMR Security Configurations, which are stored in the service. Security Configurations enable you to more easily create a configuration, reuse it, and apply it whenever a cluster is created.</p>"
+    },
+    "DeleteSecurityConfiguration":{
+      "name":"DeleteSecurityConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteSecurityConfigurationInput"},
+      "output":{"shape":"DeleteSecurityConfigurationOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ],
+      "documentation":"<p>Deletes a security configuration.</p>"
+    },
     "DescribeCluster":{
       "name":"DescribeCluster",
       "http":{
@@ -79,6 +107,20 @@
       ],
       "documentation":"<p> This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>, <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a> instead.</p> <p>DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p>Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p>If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li> <p>Job flows created and completed in the last two weeks</p> </li> <li> <p> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </p> </li> </ul> <p>Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions.</p>",
       "deprecated":true
+    },
+    "DescribeSecurityConfiguration":{
+      "name":"DescribeSecurityConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeSecurityConfigurationInput"},
+      "output":{"shape":"DescribeSecurityConfigurationOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ],
+      "documentation":"<p>Provides the details of a security configuration by returning the configuration JSON.</p>"
     },
     "DescribeStep":{
       "name":"DescribeStep",
@@ -149,6 +191,20 @@
         {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc.</p>"
+    },
+    "ListSecurityConfigurations":{
+      "name":"ListSecurityConfigurations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListSecurityConfigurationsInput"},
+      "output":{"shape":"ListSecurityConfigurationsOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ],
+      "documentation":"<p>Lists all the security configurations visible to this account, providing their creation dates and times, and their names. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListSecurityConfigurations calls.</p>"
     },
     "ListSteps":{
       "name":"ListSteps",
@@ -369,16 +425,9 @@
         "ScriptBootstrapAction"
       ],
       "members":{
-        "Name":{
-          "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The name of the bootstrap action.</p>"
-        },
-        "ScriptBootstrapAction":{
-          "shape":"ScriptBootstrapActionConfig",
-          "documentation":"<p>The script run by the bootstrap action.</p>"
-        }
-      },
-      "documentation":"<p>Configuration of a bootstrap action.</p>"
+        "Name":{"shape":"XmlStringMaxLen256"},
+        "ScriptBootstrapAction":{"shape":"ScriptBootstrapActionConfig"}
+      }
     },
     "BootstrapActionConfigList":{
       "type":"list",
@@ -465,6 +514,10 @@
         "Configurations":{
           "shape":"ConfigurationList",
           "documentation":"<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>The list of Configurations supplied to the EMR cluster.</p>"
+        },
+        "SecurityConfiguration":{
+          "shape":"XmlString",
+          "documentation":"<p>The name of the security configuration applied to the cluster.</p>"
         }
       },
       "documentation":"<p>The detailed description of the cluster.</p>"
@@ -618,7 +671,56 @@
       "type":"list",
       "member":{"shape":"Configuration"}
     },
+    "CreateSecurityConfigurationInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "SecurityConfiguration"
+      ],
+      "members":{
+        "Name":{
+          "shape":"XmlString",
+          "documentation":"<p>The name of the security configuration.</p>"
+        },
+        "SecurityConfiguration":{
+          "shape":"String",
+          "documentation":"<p>The security configuration details in JSON format.</p>"
+        }
+      }
+    },
+    "CreateSecurityConfigurationOutput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "CreationDateTime"
+      ],
+      "members":{
+        "Name":{
+          "shape":"XmlString",
+          "documentation":"<p>The name of the security configuration.</p>"
+        },
+        "CreationDateTime":{
+          "shape":"Date",
+          "documentation":"<p>The date and time the security configuration was created.</p>"
+        }
+      }
+    },
     "Date":{"type":"timestamp"},
+    "DeleteSecurityConfigurationInput":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"XmlString",
+          "documentation":"<p>The name of the security configuration.</p>"
+        }
+      }
+    },
+    "DeleteSecurityConfigurationOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DescribeClusterInput":{
       "type":"structure",
       "required":["ClusterId"],
@@ -671,6 +773,33 @@
         }
       },
       "documentation":"<p> The output for the <a>DescribeJobFlows</a> operation. </p>"
+    },
+    "DescribeSecurityConfigurationInput":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"XmlString",
+          "documentation":"<p>The name of the security configuration.</p>"
+        }
+      }
+    },
+    "DescribeSecurityConfigurationOutput":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"XmlString",
+          "documentation":"<p>The name of the security configuration.</p>"
+        },
+        "SecurityConfiguration":{
+          "shape":"String",
+          "documentation":"<p>The security configuration details in JSON format.</p>"
+        },
+        "CreationDateTime":{
+          "shape":"Date",
+          "documentation":"<p>The date and time the security configuration was created</p>"
+        }
+      }
     },
     "DescribeStepInput":{
       "type":"structure",
@@ -1644,7 +1773,7 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token that indicates the next set of results to retrieve .</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
       "documentation":"<p>This input determines which bootstrap actions to retrieve.</p>"
@@ -1658,7 +1787,7 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token that indicates the next set of results to retrieve .</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
       "documentation":"<p>This output contains the boostrap actions detail .</p>"
@@ -1768,6 +1897,28 @@
         }
       },
       "documentation":"<p>This output contains the list of instances.</p>"
+    },
+    "ListSecurityConfigurationsInput":{
+      "type":"structure",
+      "members":{
+        "Marker":{
+          "shape":"Marker",
+          "documentation":"<p>The pagination token that indicates the set of results to retrieve.</p>"
+        }
+      }
+    },
+    "ListSecurityConfigurationsOutput":{
+      "type":"structure",
+      "members":{
+        "SecurityConfigurations":{
+          "shape":"SecurityConfigurationList",
+          "documentation":"<p>The creation date and time, and name, of each security configuration.</p>"
+        },
+        "Marker":{
+          "shape":"Marker",
+          "documentation":"<p>A pagination token that indicates the next set of results to retrieve. Include the marker in the next ListSecurityConfiguration call to retrieve the next page of results, if required.</p>"
+        }
+      }
     },
     "ListStepsInput":{
       "type":"structure",
@@ -1934,6 +2085,10 @@
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>A list of tags to associate with a cluster and propagate to Amazon EC2 instances.</p>"
+        },
+        "SecurityConfiguration":{
+          "shape":"XmlString",
+          "documentation":"<p>The name of a security configuration to apply to the cluster.</p>"
         }
       },
       "documentation":"<p> Input to the <a>RunJobFlow</a> operation. </p>"
@@ -1952,16 +2107,27 @@
       "type":"structure",
       "required":["Path"],
       "members":{
-        "Path":{
+        "Path":{"shape":"XmlString"},
+        "Args":{"shape":"XmlStringList"}
+      }
+    },
+    "SecurityConfigurationList":{
+      "type":"list",
+      "member":{"shape":"SecurityConfigurationSummary"}
+    },
+    "SecurityConfigurationSummary":{
+      "type":"structure",
+      "members":{
+        "Name":{
           "shape":"XmlString",
-          "documentation":"<p>Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.</p>"
+          "documentation":"<p>The name of the security configuration.</p>"
         },
-        "Args":{
-          "shape":"XmlStringList",
-          "documentation":"<p>A list of command line arguments to pass to the bootstrap action script.</p>"
+        "CreationDateTime":{
+          "shape":"Date",
+          "documentation":"<p>The date and time the security configuration was created.</p>"
         }
       },
-      "documentation":"<p>Configuration of the script to run during a bootstrap action.</p>"
+      "documentation":"<p>The creation date and time, and name, of a security configuration.</p>"
     },
     "SecurityGroupsList":{
       "type":"list",
