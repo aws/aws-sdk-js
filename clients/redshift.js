@@ -5,9 +5,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['redshift'] = {};
 AWS.Redshift = Service.defineService('redshift', ['2012-12-01']);
-
-apiLoader.services['redshift']['2012-12-01'] = require('../apis/redshift-2012-12-01.min.json');
-apiLoader.services['redshift']['2012-12-01'].paginators = require('../apis/redshift-2012-12-01.paginators.json').pagination;
-apiLoader.services['redshift']['2012-12-01'].waiters = require('../apis/redshift-2012-12-01.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['redshift'], '2012-12-01', {
+  get: function get() {
+    var model = require('../apis/redshift-2012-12-01.min.json');
+    model.paginators = require('../apis/redshift-2012-12-01.paginators.json').pagination;
+    model.waiters = require('../apis/redshift-2012-12-01.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Redshift;

@@ -6,8 +6,14 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['sqs'] = {};
 AWS.SQS = Service.defineService('sqs', ['2012-11-05']);
 require('../lib/services/sqs');
-
-apiLoader.services['sqs']['2012-11-05'] = require('../apis/sqs-2012-11-05.min.json');
-apiLoader.services['sqs']['2012-11-05'].paginators = require('../apis/sqs-2012-11-05.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['sqs'], '2012-11-05', {
+  get: function get() {
+    var model = require('../apis/sqs-2012-11-05.min.json');
+    model.paginators = require('../apis/sqs-2012-11-05.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.SQS;

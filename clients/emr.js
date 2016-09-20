@@ -5,9 +5,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['emr'] = {};
 AWS.EMR = Service.defineService('emr', ['2009-03-31']);
-
-apiLoader.services['emr']['2009-03-31'] = require('../apis/elasticmapreduce-2009-03-31.min.json');
-apiLoader.services['emr']['2009-03-31'].paginators = require('../apis/elasticmapreduce-2009-03-31.paginators.json').pagination;
-apiLoader.services['emr']['2009-03-31'].waiters = require('../apis/elasticmapreduce-2009-03-31.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['emr'], '2009-03-31', {
+  get: function get() {
+    var model = require('../apis/elasticmapreduce-2009-03-31.min.json');
+    model.paginators = require('../apis/elasticmapreduce-2009-03-31.paginators.json').pagination;
+    model.waiters = require('../apis/elasticmapreduce-2009-03-31.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.EMR;

@@ -5,7 +5,13 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['marketplacemetering'] = {};
 AWS.MarketplaceMetering = Service.defineService('marketplacemetering', ['2016-01-14']);
-
-apiLoader.services['marketplacemetering']['2016-01-14'] = require('../apis/meteringmarketplace-2016-01-14.min.json');
+Object.defineProperty(apiLoader.services['marketplacemetering'], '2016-01-14', {
+  get: function get() {
+    var model = require('../apis/meteringmarketplace-2016-01-14.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.MarketplaceMetering;

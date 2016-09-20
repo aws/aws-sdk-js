@@ -5,8 +5,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['elbv2'] = {};
 AWS.ELBv2 = Service.defineService('elbv2', ['2015-12-01']);
-
-apiLoader.services['elbv2']['2015-12-01'] = require('../apis/elasticloadbalancingv2-2015-12-01.min.json');
-apiLoader.services['elbv2']['2015-12-01'].paginators = require('../apis/elasticloadbalancingv2-2015-12-01.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['elbv2'], '2015-12-01', {
+  get: function get() {
+    var model = require('../apis/elasticloadbalancingv2-2015-12-01.min.json');
+    model.paginators = require('../apis/elasticloadbalancingv2-2015-12-01.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ELBv2;

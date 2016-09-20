@@ -5,9 +5,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudwatch'] = {};
 AWS.CloudWatch = Service.defineService('cloudwatch', ['2010-08-01']);
-
-apiLoader.services['cloudwatch']['2010-08-01'] = require('../apis/monitoring-2010-08-01.min.json');
-apiLoader.services['cloudwatch']['2010-08-01'].paginators = require('../apis/monitoring-2010-08-01.paginators.json').pagination;
-apiLoader.services['cloudwatch']['2010-08-01'].waiters = require('../apis/monitoring-2010-08-01.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['cloudwatch'], '2010-08-01', {
+  get: function get() {
+    var model = require('../apis/monitoring-2010-08-01.min.json');
+    model.paginators = require('../apis/monitoring-2010-08-01.paginators.json').pagination;
+    model.waiters = require('../apis/monitoring-2010-08-01.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudWatch;

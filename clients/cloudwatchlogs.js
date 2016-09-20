@@ -5,8 +5,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudwatchlogs'] = {};
 AWS.CloudWatchLogs = Service.defineService('cloudwatchlogs', ['2014-03-28']);
-
-apiLoader.services['cloudwatchlogs']['2014-03-28'] = require('../apis/logs-2014-03-28.min.json');
-apiLoader.services['cloudwatchlogs']['2014-03-28'].paginators = require('../apis/logs-2014-03-28.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['cloudwatchlogs'], '2014-03-28', {
+  get: function get() {
+    var model = require('../apis/logs-2014-03-28.min.json');
+    model.paginators = require('../apis/logs-2014-03-28.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudWatchLogs;

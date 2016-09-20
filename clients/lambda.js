@@ -5,11 +5,23 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['lambda'] = {};
 AWS.Lambda = Service.defineService('lambda', ['2014-11-11', '2015-03-31']);
-
-apiLoader.services['lambda']['2014-11-11'] = require('../apis/lambda-2014-11-11.min.json');
-apiLoader.services['lambda']['2014-11-11'].paginators = require('../apis/lambda-2014-11-11.paginators.json').pagination;
-
-apiLoader.services['lambda']['2015-03-31'] = require('../apis/lambda-2015-03-31.min.json');
-apiLoader.services['lambda']['2015-03-31'].paginators = require('../apis/lambda-2015-03-31.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['lambda'], '2014-11-11', {
+  get: function get() {
+    var model = require('../apis/lambda-2014-11-11.min.json');
+    model.paginators = require('../apis/lambda-2014-11-11.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+Object.defineProperty(apiLoader.services['lambda'], '2015-03-31', {
+  get: function get() {
+    var model = require('../apis/lambda-2015-03-31.min.json');
+    model.paginators = require('../apis/lambda-2015-03-31.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Lambda;

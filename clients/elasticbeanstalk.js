@@ -5,8 +5,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['elasticbeanstalk'] = {};
 AWS.ElasticBeanstalk = Service.defineService('elasticbeanstalk', ['2010-12-01']);
-
-apiLoader.services['elasticbeanstalk']['2010-12-01'] = require('../apis/elasticbeanstalk-2010-12-01.min.json');
-apiLoader.services['elasticbeanstalk']['2010-12-01'].paginators = require('../apis/elasticbeanstalk-2010-12-01.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['elasticbeanstalk'], '2010-12-01', {
+  get: function get() {
+    var model = require('../apis/elasticbeanstalk-2010-12-01.min.json');
+    model.paginators = require('../apis/elasticbeanstalk-2010-12-01.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ElasticBeanstalk;
