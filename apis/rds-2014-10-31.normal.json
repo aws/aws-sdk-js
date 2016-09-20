@@ -1385,7 +1385,7 @@
         {"shape":"DBClusterNotFoundFault"},
         {"shape":"InsufficientStorageClusterCapacityFault"}
       ],
-      "documentation":"<p>Creates an Amazon Aurora DB cluster from data stored in an Amazon S3 bucket. Amazon RDS must be authorized to access the Amazon S3 bucket and the data must be created using the Percona XtraBackup utility as described in <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Migrate.html\">Migrating Data from an External MySQL Database to an Amazon Aurora DB Cluster</a>.</p>"
+      "documentation":"<p>Creates an Amazon Aurora DB cluster from data stored in an Amazon S3 bucket. Amazon RDS must be authorized to access the Amazon S3 bucket and the data must be created using the Percona XtraBackup utility as described in <a href=\"AmazonRDS/latest/UserGuide/Aurora.Migrate.MySQL.html#Aurora.Migrate.MySQL.S3\">Migrating Data from MySQL by Using an Amazon S3 Bucket</a>.</p>"
     },
     "RestoreDBClusterFromSnapshot":{
       "name":"RestoreDBClusterFromSnapshot",
@@ -2283,6 +2283,10 @@
         "PromotionTier":{
           "shape":"IntegerOptional",
           "documentation":"<p>A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance\"> Fault Tolerance for an Aurora DB Cluster</a>. </p> <p>Default: 1</p> <p>Valid Values: 0 - 15</p>"
+        },
+        "Timezone":{
+          "shape":"String",
+          "documentation":"<p>The time zone of the DB instance. The time zone parameter is currently supported only by <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone\">Microsoft SQL Server</a>. </p>"
         }
       },
       "documentation":"<p/>"
@@ -3055,11 +3059,15 @@
         },
         "SupportedCharacterSets":{
           "shape":"SupportedCharacterSetsList",
-          "documentation":"<p> A list of the character sets supported by this engine for the <code>CharacterSetName</code> parameter of the CreateDBInstance API. </p>"
+          "documentation":"<p> A list of the character sets supported by this engine for the <code>CharacterSetName</code> parameter of the <code>CreateDBInstance</code> action. </p>"
         },
         "ValidUpgradeTarget":{
           "shape":"ValidUpgradeTargetList",
           "documentation":"<p>A list of engine versions that this database engine version can be upgraded to.</p>"
+        },
+        "SupportedTimezones":{
+          "shape":"SupportedTimezonesList",
+          "documentation":"<p>A list of the time zones supported by this engine for the <code>Timezone</code> parameter of the <code>CreateDBInstance</code> action. </p>"
         }
       },
       "documentation":"<p> This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. </p>"
@@ -3138,7 +3146,7 @@
         },
         "VpcSecurityGroups":{
           "shape":"VpcSecurityGroupMembershipList",
-          "documentation":"<p>Provides List of VPC security group elements that the DB instance belongs to.</p>"
+          "documentation":"<p>Provides a list of VPC security group elements that the DB instance belongs to.</p>"
         },
         "DBParameterGroups":{
           "shape":"DBParameterGroupStatusList",
@@ -3218,7 +3226,7 @@
         },
         "TdeCredentialArn":{
           "shape":"String",
-          "documentation":"<p>The ARN from the Key Store with which the instance is associated for TDE encryption.</p>"
+          "documentation":"<p>The ARN from the key store with which the instance is associated for TDE encryption.</p>"
         },
         "DbInstancePort":{
           "shape":"Integer",
@@ -3271,6 +3279,10 @@
         "DBInstanceArn":{
           "shape":"String",
           "documentation":"<p>The Amazon Resource Name (ARN) for the DB instance.</p>"
+        },
+        "Timezone":{
+          "shape":"String",
+          "documentation":"<p>The time zone of the DB instance. In most cases, the <code>Timezone</code> element is empty. <code>Timezone</code> content appears only for Microsoft SQL Server DB instances that were created with a time zone specified. </p>"
         }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>DeleteDBInstance</a> </p> </li> <li> <p> <a>ModifyDBInstance</a> </p> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
@@ -3700,11 +3712,11 @@
         },
         "StorageType":{
           "shape":"String",
-          "documentation":"<p>Specifies the storage type associated with DB Snapshot.</p>"
+          "documentation":"<p>Specifies the storage type associated with DB snapshot.</p>"
         },
         "TdeCredentialArn":{
           "shape":"String",
-          "documentation":"<p>The ARN from the Key Store with which to associate the instance for TDE encryption.</p>"
+          "documentation":"<p>The ARN from the key store with which to associate the instance for TDE encryption.</p>"
         },
         "Encrypted":{
           "shape":"Boolean",
@@ -3717,6 +3729,10 @@
         "DBSnapshotArn":{
           "shape":"String",
           "documentation":"<p>The Amazon Resource Name (ARN) for the DB snapshot.</p>"
+        },
+        "Timezone":{
+          "shape":"String",
+          "documentation":"<p>The time zone of the DB snapshot. In most cases, the <code>Timezone</code> element is empty. <code>Timezone</code> content appears only for snapshots taken from Microsoft SQL Server DB instances that were created with a time zone specified. </p>"
         }
       },
       "documentation":"<p>Contains the result of a successful invocation of the following actions:</p> <ul> <li> <p> <a>CreateDBSnapshot</a> </p> </li> <li> <p> <a>DeleteDBSnapshot</a> </p> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action.</p>",
@@ -4283,7 +4299,11 @@
         },
         "ListSupportedCharacterSets":{
           "shape":"BooleanOptional",
-          "documentation":"<p>If this parameter is specified, and if the requested engine supports the CharacterSetName parameter for CreateDBInstance, the response includes a list of supported character sets for each engine version.</p>"
+          "documentation":"<p>If this parameter is specified and the requested engine supports the <code>CharacterSetName</code> parameter for <code>CreateDBInstance</code>, the response includes a list of supported character sets for each engine version. </p>"
+        },
+        "ListSupportedTimezones":{
+          "shape":"BooleanOptional",
+          "documentation":"<p>If this parameter is specified and the requested engine supports the <code>TimeZone</code> parameter for <code>CreateDBInstance</code>, the response includes a list of supported time zones for each engine version. </p>"
         }
       }
     },
@@ -7763,6 +7783,13 @@
         "locationName":"CharacterSet"
       }
     },
+    "SupportedTimezonesList":{
+      "type":"list",
+      "member":{
+        "shape":"Timezone",
+        "locationName":"Timezone"
+      }
+    },
     "TStamp":{"type":"timestamp"},
     "Tag":{
       "type":"structure",
@@ -7795,6 +7822,16 @@
         }
       },
       "documentation":"<p/>"
+    },
+    "Timezone":{
+      "type":"structure",
+      "members":{
+        "TimezoneName":{
+          "shape":"String",
+          "documentation":"<p>The name of the time zone.</p>"
+        }
+      },
+      "documentation":"<p>A time zone associated with a <a>DBInstance</a> or a <a>DBSnapshot</a>. This data type is an element in the response to the <a>DescribeDBInstances</a>, the <a>DescribeDBSnapshots</a>, and the <a>DescribeDBEngineVersions</a> actions. </p>"
     },
     "UpgradeTarget":{
       "type":"structure",
