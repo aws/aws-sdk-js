@@ -72,6 +72,7 @@
       "buildertest": "mocha --compilers coffee:coffee-script -s 1000 -t 10000 dist-tools/test",
       "integration": "cucumber.js",
       "lint" : "eslint lib dist-tools/*.js",
-      "console": "./scripts/console"
+      "console": "./scripts/console",
+      "testfiles" : "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`"      
     }
 }
