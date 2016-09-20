@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Browser",
+  "description": "Updates `url` and `querystring` dependencies to be controlled by the SDK instead of tools like browserify or webpack."
+}
