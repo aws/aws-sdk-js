@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.6.3
+// AWS SDK for JavaScript v2.6.4
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -10104,7 +10104,7 @@ module.exports={
         "members": {
           "deploymentId": {},
           "instanceIds": {
-            "shape": "S1r"
+            "shape": "S1y"
           }
         }
       },
@@ -10114,7 +10114,7 @@ module.exports={
           "instancesSummary": {
             "type": "list",
             "member": {
-              "shape": "S1v"
+              "shape": "S22"
             }
           },
           "errorMessage": {}
@@ -10126,7 +10126,7 @@ module.exports={
         "type": "structure",
         "members": {
           "deploymentIds": {
-            "shape": "S27"
+            "shape": "S2e"
           }
         }
       },
@@ -10136,7 +10136,7 @@ module.exports={
           "deploymentsInfo": {
             "type": "list",
             "member": {
-              "shape": "S2a"
+              "shape": "S2h"
             }
           }
         }
@@ -10157,7 +10157,7 @@ module.exports={
           "instanceInfos": {
             "type": "list",
             "member": {
-              "shape": "S2k"
+              "shape": "S2s"
             }
           }
         }
@@ -10196,6 +10196,12 @@ module.exports={
           "description": {},
           "ignoreApplicationStopFailures": {
             "type": "boolean"
+          },
+          "autoRollbackConfiguration": {
+            "shape": "S1t"
+          },
+          "updateOutdatedInstancesOnly": {
+            "type": "boolean"
           }
         }
       },
@@ -10215,7 +10221,7 @@ module.exports={
         "members": {
           "deploymentConfigName": {},
           "minimumHealthyHosts": {
-            "shape": "S2s"
+            "shape": "S30"
           }
         }
       },
@@ -10245,11 +10251,17 @@ module.exports={
             "shape": "S1b"
           },
           "autoScalingGroups": {
-            "shape": "S2y"
+            "shape": "S36"
           },
           "serviceRoleArn": {},
           "triggerConfigurations": {
             "shape": "S1j"
+          },
+          "alarmConfiguration": {
+            "shape": "S1p"
+          },
+          "autoRollbackConfiguration": {
+            "shape": "S1t"
           }
         }
       },
@@ -10374,7 +10386,7 @@ module.exports={
         "type": "structure",
         "members": {
           "deploymentInfo": {
-            "shape": "S2a"
+            "shape": "S2h"
           }
         }
       }
@@ -10398,7 +10410,7 @@ module.exports={
               "deploymentConfigId": {},
               "deploymentConfigName": {},
               "minimumHealthyHosts": {
-                "shape": "S2s"
+                "shape": "S30"
               },
               "createTime": {
                 "type": "timestamp"
@@ -10445,7 +10457,7 @@ module.exports={
         "type": "structure",
         "members": {
           "instanceSummary": {
-            "shape": "S1v"
+            "shape": "S22"
           }
         }
       }
@@ -10464,7 +10476,7 @@ module.exports={
         "type": "structure",
         "members": {
           "instanceInfo": {
-            "shape": "S2k"
+            "shape": "S2s"
           }
         }
       }
@@ -10571,7 +10583,7 @@ module.exports={
         "type": "structure",
         "members": {
           "instancesList": {
-            "shape": "S1r"
+            "shape": "S1y"
           },
           "nextToken": {}
         }
@@ -10605,7 +10617,7 @@ module.exports={
         "type": "structure",
         "members": {
           "deployments": {
-            "shape": "S27"
+            "shape": "S2e"
           },
           "nextToken": {}
         }
@@ -10685,7 +10697,10 @@ module.exports={
           "deploymentId"
         ],
         "members": {
-          "deploymentId": {}
+          "deploymentId": {},
+          "autoRollbackEnabled": {
+            "type": "boolean"
+          }
         }
       },
       "output": {
@@ -10724,11 +10739,17 @@ module.exports={
             "shape": "S1b"
           },
           "autoScalingGroups": {
-            "shape": "S2y"
+            "shape": "S36"
           },
           "serviceRoleArn": {},
           "triggerConfigurations": {
             "shape": "S1j"
+          },
+          "alarmConfiguration": {
+            "shape": "S1p"
+          },
+          "autoRollbackConfiguration": {
+            "shape": "S1t"
           }
         }
       },
@@ -10847,6 +10868,12 @@ module.exports={
         },
         "triggerConfigurations": {
           "shape": "S1j"
+        },
+        "alarmConfiguration": {
+          "shape": "S1p"
+        },
+        "autoRollbackConfiguration": {
+          "shape": "S1t"
         }
       }
     },
@@ -10896,11 +10923,43 @@ module.exports={
         }
       }
     },
-    "S1r": {
+    "S1p": {
+      "type": "structure",
+      "members": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "ignorePollAlarmFailure": {
+          "type": "boolean"
+        },
+        "alarms": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "name": {}
+            }
+          }
+        }
+      }
+    },
+    "S1t": {
+      "type": "structure",
+      "members": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "events": {
+          "type": "list",
+          "member": {}
+        }
+      }
+    },
+    "S1y": {
       "type": "list",
       "member": {}
     },
-    "S1v": {
+    "S22": {
       "type": "structure",
       "members": {
         "deploymentId": {},
@@ -10936,11 +10995,11 @@ module.exports={
         }
       }
     },
-    "S27": {
+    "S2e": {
       "type": "list",
       "member": {}
     },
-    "S2a": {
+    "S2h": {
       "type": "structure",
       "members": {
         "applicationName": {},
@@ -10991,10 +11050,24 @@ module.exports={
         "creator": {},
         "ignoreApplicationStopFailures": {
           "type": "boolean"
+        },
+        "autoRollbackConfiguration": {
+          "shape": "S1t"
+        },
+        "updateOutdatedInstancesOnly": {
+          "type": "boolean"
+        },
+        "rollbackInfo": {
+          "type": "structure",
+          "members": {
+            "rollbackDeploymentId": {},
+            "rollbackTriggeringDeploymentId": {},
+            "rollbackMessage": {}
+          }
         }
       }
     },
-    "S2k": {
+    "S2s": {
       "type": "structure",
       "members": {
         "instanceName": {},
@@ -11011,7 +11084,7 @@ module.exports={
         }
       }
     },
-    "S2s": {
+    "S30": {
       "type": "structure",
       "members": {
         "value": {
@@ -11020,7 +11093,7 @@ module.exports={
         "type": {}
       }
     },
-    "S2y": {
+    "S36": {
       "type": "list",
       "member": {}
     }
@@ -38369,6 +38442,47 @@ module.exports={
         "members": {}
       }
     },
+    "CreateSecurityConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "SecurityConfiguration"
+        ],
+        "members": {
+          "Name": {},
+          "SecurityConfiguration": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "CreationDateTime"
+        ],
+        "members": {
+          "Name": {},
+          "CreationDateTime": {
+            "type": "timestamp"
+          }
+        }
+      }
+    },
+    "DeleteSecurityConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name"
+        ],
+        "members": {
+          "Name": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "DescribeCluster": {
       "input": {
         "type": "structure",
@@ -38388,7 +38502,7 @@ module.exports={
               "Id": {},
               "Name": {},
               "Status": {
-                "shape": "S14"
+                "shape": "S19"
               },
               "Ec2InstanceAttributes": {
                 "type": "structure",
@@ -38401,10 +38515,10 @@ module.exports={
                   "EmrManagedSlaveSecurityGroup": {},
                   "ServiceAccessSecurityGroup": {},
                   "AdditionalMasterSecurityGroups": {
-                    "shape": "S1b"
+                    "shape": "S1f"
                   },
                   "AdditionalSlaveSecurityGroups": {
-                    "shape": "S1b"
+                    "shape": "S1f"
                   }
                 }
               },
@@ -38422,7 +38536,7 @@ module.exports={
                 "type": "boolean"
               },
               "Applications": {
-                "shape": "S1d"
+                "shape": "S1h"
               },
               "Tags": {
                 "shape": "Sx"
@@ -38434,7 +38548,8 @@ module.exports={
               "MasterPublicDnsName": {},
               "Configurations": {
                 "shape": "S9"
-              }
+              },
+              "SecurityConfiguration": {}
             }
           }
         }
@@ -38564,7 +38679,7 @@ module.exports={
                     "Ec2KeyName": {},
                     "Ec2SubnetId": {},
                     "Placement": {
-                      "shape": "S1q"
+                      "shape": "S1u"
                     },
                     "KeepJobFlowAliveWhenNoSteps": {
                       "type": "boolean"
@@ -38616,13 +38731,13 @@ module.exports={
                     "type": "structure",
                     "members": {
                       "BootstrapActionConfig": {
-                        "shape": "S1x"
+                        "shape": "S21"
                       }
                     }
                   }
                 },
                 "SupportedProducts": {
-                  "shape": "S1z"
+                  "shape": "S23"
                 },
                 "VisibleToAllUsers": {
                   "type": "boolean"
@@ -38635,6 +38750,27 @@ module.exports={
         }
       },
       "deprecated": true
+    },
+    "DescribeSecurityConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name"
+        ],
+        "members": {
+          "Name": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Name": {},
+          "SecurityConfiguration": {},
+          "CreationDateTime": {
+            "type": "timestamp"
+          }
+        }
+      }
     },
     "DescribeStep": {
       "input": {
@@ -38657,11 +38793,11 @@ module.exports={
               "Id": {},
               "Name": {},
               "Config": {
-                "shape": "S24"
+                "shape": "S2a"
               },
               "ActionOnFailure": {},
               "Status": {
-                "shape": "S25"
+                "shape": "S2b"
               }
             }
           }
@@ -38690,7 +38826,7 @@ module.exports={
                 "Name": {},
                 "ScriptPath": {},
                 "Args": {
-                  "shape": "S1b"
+                  "shape": "S1f"
                 }
               }
             }
@@ -38727,7 +38863,7 @@ module.exports={
                 "Id": {},
                 "Name": {},
                 "Status": {
-                  "shape": "S14"
+                  "shape": "S19"
                 },
                 "NormalizedInstanceHours": {
                   "type": "integer"
@@ -38816,7 +38952,7 @@ module.exports={
                   "type": "boolean"
                 },
                 "ShrinkPolicy": {
-                  "shape": "S2x"
+                  "shape": "S33"
                 }
               }
             }
@@ -38904,6 +39040,32 @@ module.exports={
         }
       }
     },
+    "ListSecurityConfigurations": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SecurityConfigurations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Name": {},
+                "CreationDateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "Marker": {}
+        }
+      }
+    },
     "ListSteps": {
       "input": {
         "type": "structure",
@@ -38933,11 +39095,11 @@ module.exports={
                 "Id": {},
                 "Name": {},
                 "Config": {
-                  "shape": "S24"
+                  "shape": "S2a"
                 },
                 "ActionOnFailure": {},
                 "Status": {
-                  "shape": "S25"
+                  "shape": "S2b"
                 }
               }
             }
@@ -38967,7 +39129,7 @@ module.exports={
                   "member": {}
                 },
                 "ShrinkPolicy": {
-                  "shape": "S2x"
+                  "shape": "S33"
                 }
               }
             }
@@ -38985,7 +39147,7 @@ module.exports={
         "members": {
           "ResourceId": {},
           "TagKeys": {
-            "shape": "S1b"
+            "shape": "S1f"
           }
         }
       },
@@ -39020,7 +39182,7 @@ module.exports={
               },
               "Ec2KeyName": {},
               "Placement": {
-                "shape": "S1q"
+                "shape": "S1u"
               },
               "KeepJobFlowAliveWhenNoSteps": {
                 "type": "boolean"
@@ -39034,10 +39196,10 @@ module.exports={
               "EmrManagedSlaveSecurityGroup": {},
               "ServiceAccessSecurityGroup": {},
               "AdditionalMasterSecurityGroups": {
-                "shape": "S3r"
+                "shape": "S41"
               },
               "AdditionalSlaveSecurityGroups": {
-                "shape": "S3r"
+                "shape": "S41"
               }
             }
           },
@@ -39047,11 +39209,11 @@ module.exports={
           "BootstrapActions": {
             "type": "list",
             "member": {
-              "shape": "S1x"
+              "shape": "S21"
             }
           },
           "SupportedProducts": {
-            "shape": "S1z"
+            "shape": "S23"
           },
           "NewSupportedProducts": {
             "type": "list",
@@ -39066,7 +39228,7 @@ module.exports={
             }
           },
           "Applications": {
-            "shape": "S1d"
+            "shape": "S1h"
           },
           "Configurations": {
             "shape": "S9"
@@ -39078,7 +39240,8 @@ module.exports={
           "ServiceRole": {},
           "Tags": {
             "shape": "Sx"
-          }
+          },
+          "SecurityConfiguration": {}
         }
       },
       "output": {
@@ -39276,7 +39439,7 @@ module.exports={
         }
       }
     },
-    "S14": {
+    "S19": {
       "type": "structure",
       "members": {
         "State": {},
@@ -39303,11 +39466,11 @@ module.exports={
         }
       }
     },
-    "S1b": {
+    "S1f": {
       "type": "list",
       "member": {}
     },
-    "S1d": {
+    "S1h": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -39315,7 +39478,7 @@ module.exports={
           "Name": {},
           "Version": {},
           "Args": {
-            "shape": "S1b"
+            "shape": "S1f"
           },
           "AdditionalInfo": {
             "shape": "Sc"
@@ -39323,7 +39486,7 @@ module.exports={
         }
       }
     },
-    "S1q": {
+    "S1u": {
       "type": "structure",
       "required": [
         "AvailabilityZone"
@@ -39332,7 +39495,7 @@ module.exports={
         "AvailabilityZone": {}
       }
     },
-    "S1x": {
+    "S21": {
       "type": "structure",
       "required": [
         "Name",
@@ -39354,11 +39517,11 @@ module.exports={
         }
       }
     },
-    "S1z": {
+    "S23": {
       "type": "list",
       "member": {}
     },
-    "S24": {
+    "S2a": {
       "type": "structure",
       "members": {
         "Jar": {},
@@ -39367,11 +39530,11 @@ module.exports={
         },
         "MainClass": {},
         "Args": {
-          "shape": "S1b"
+          "shape": "S1f"
         }
       }
     },
-    "S25": {
+    "S2b": {
       "type": "structure",
       "members": {
         "State": {},
@@ -39406,7 +39569,7 @@ module.exports={
         }
       }
     },
-    "S2x": {
+    "S33": {
       "type": "structure",
       "members": {
         "DecommissionTimeout": {
@@ -39416,10 +39579,10 @@ module.exports={
           "type": "structure",
           "members": {
             "InstancesToTerminate": {
-              "shape": "S2z"
+              "shape": "S35"
             },
             "InstancesToProtect": {
-              "shape": "S2z"
+              "shape": "S35"
             },
             "InstanceTerminationTimeout": {
               "type": "integer"
@@ -39428,11 +39591,11 @@ module.exports={
         }
       }
     },
-    "S2z": {
+    "S35": {
       "type": "list",
       "member": {}
     },
-    "S3r": {
+    "S41": {
       "type": "list",
       "member": {}
     }
@@ -62226,7 +62389,8 @@ module.exports={
           "DomainIAMRoleName": {},
           "PromotionTier": {
             "type": "integer"
-          }
+          },
+          "Timezone": {}
         }
       },
       "output": {
@@ -62855,6 +63019,9 @@ module.exports={
           },
           "ListSupportedCharacterSets": {
             "type": "boolean"
+          },
+          "ListSupportedTimezones": {
+            "type": "boolean"
           }
         }
       },
@@ -62899,6 +63066,16 @@ module.exports={
                       "IsMajorVersionUpgrade": {
                         "type": "boolean"
                       }
+                    }
+                  }
+                },
+                "SupportedTimezones": {
+                  "type": "list",
+                  "member": {
+                    "locationName": "Timezone",
+                    "type": "structure",
+                    "members": {
+                      "TimezoneName": {}
                     }
                   }
                 }
@@ -63087,7 +63264,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSnapshotAttributesResult": {
-            "shape": "S4q"
+            "shape": "S4s"
           }
         }
       }
@@ -63180,7 +63357,7 @@ module.exports={
         "type": "structure",
         "members": {
           "EngineDefaults": {
-            "shape": "S51"
+            "shape": "S53"
           }
         }
       }
@@ -63207,7 +63384,7 @@ module.exports={
         "type": "structure",
         "members": {
           "EngineDefaults": {
-            "shape": "S51"
+            "shape": "S53"
           }
         }
       }
@@ -63581,7 +63758,7 @@ module.exports={
           "ReservedDBInstances": {
             "type": "list",
             "member": {
-              "shape": "S64",
+              "shape": "S66",
               "locationName": "ReservedDBInstance"
             }
           }
@@ -63638,7 +63815,7 @@ module.exports={
                   "type": "boolean"
                 },
                 "RecurringCharges": {
-                  "shape": "S66"
+                  "shape": "S68"
                 }
               },
               "wrapper": true
@@ -63803,7 +63980,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S6p",
+        "shape": "S6r",
         "resultWrapper": "ModifyDBClusterParameterGroupResult"
       }
     },
@@ -63929,7 +64106,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S6v",
+        "shape": "S6x",
         "resultWrapper": "ModifyDBParameterGroupResult"
       }
     },
@@ -63956,7 +64133,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBSnapshotAttributesResult": {
-            "shape": "S4q"
+            "shape": "S4s"
           }
         }
       }
@@ -64137,7 +64314,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ReservedDBInstance": {
-            "shape": "S64"
+            "shape": "S66"
           }
         }
       }
@@ -64220,7 +64397,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S6p",
+        "shape": "S6r",
         "resultWrapper": "ResetDBClusterParameterGroupResult"
       }
     },
@@ -64241,7 +64418,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S6v",
+        "shape": "S6x",
         "resultWrapper": "ResetDBParameterGroupResult"
       }
     },
@@ -64742,7 +64919,8 @@ module.exports={
           "type": "boolean"
         },
         "KmsKeyId": {},
-        "DBSnapshotArn": {}
+        "DBSnapshotArn": {},
+        "Timezone": {}
       },
       "wrapper": true
     },
@@ -65098,7 +65276,8 @@ module.exports={
         "PromotionTier": {
           "type": "integer"
         },
-        "DBInstanceArn": {}
+        "DBInstanceArn": {},
+        "Timezone": {}
       },
       "wrapper": true
     },
@@ -65214,7 +65393,7 @@ module.exports={
         "CharacterSetDescription": {}
       }
     },
-    "S4q": {
+    "S4s": {
       "type": "structure",
       "members": {
         "DBSnapshotIdentifier": {},
@@ -65235,7 +65414,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S51": {
+    "S53": {
       "type": "structure",
       "members": {
         "DBParameterGroupFamily": {},
@@ -65246,7 +65425,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S64": {
+    "S66": {
       "type": "structure",
       "members": {
         "ReservedDBInstanceId": {},
@@ -65275,13 +65454,13 @@ module.exports={
         },
         "State": {},
         "RecurringCharges": {
-          "shape": "S66"
+          "shape": "S68"
         },
         "ReservedDBInstanceArn": {}
       },
       "wrapper": true
     },
-    "S66": {
+    "S68": {
       "type": "list",
       "member": {
         "locationName": "RecurringCharge",
@@ -65295,13 +65474,13 @@ module.exports={
         "wrapper": true
       }
     },
-    "S6p": {
+    "S6r": {
       "type": "structure",
       "members": {
         "DBClusterParameterGroupName": {}
       }
     },
-    "S6v": {
+    "S6x": {
       "type": "structure",
       "members": {
         "DBParameterGroupName": {}
@@ -65536,6 +65715,9 @@ module.exports={
             "shape": "S7"
           },
           "KmsKeyId": {},
+          "EnhancedVpcRouting": {
+            "type": "boolean"
+          },
           "AdditionalInfo": {},
           "IamRoles": {
             "shape": "St"
@@ -66754,7 +66936,10 @@ module.exports={
           "PubliclyAccessible": {
             "type": "boolean"
           },
-          "ElasticIp": {}
+          "ElasticIp": {},
+          "EnhancedVpcRouting": {
+            "type": "boolean"
+          }
         }
       },
       "output": {
@@ -66996,6 +67181,9 @@ module.exports={
           },
           "KmsKeyId": {},
           "NodeType": {},
+          "EnhancedVpcRouting": {
+            "type": "boolean"
+          },
           "AdditionalInfo": {},
           "IamRoles": {
             "shape": "St"
@@ -67235,6 +67423,9 @@ module.exports={
           "member": {
             "locationName": "NodeType"
           }
+        },
+        "EnhancedVpcRouting": {
+          "type": "boolean"
         }
       },
       "wrapper": true
@@ -67345,6 +67536,9 @@ module.exports={
             "ClusterIdentifier": {},
             "PubliclyAccessible": {
               "type": "boolean"
+            },
+            "EnhancedVpcRouting": {
+              "type": "boolean"
             }
           }
         },
@@ -67424,6 +67618,9 @@ module.exports={
           "shape": "S7"
         },
         "KmsKeyId": {},
+        "EnhancedVpcRouting": {
+          "type": "boolean"
+        },
         "IamRoles": {
           "type": "list",
           "member": {
@@ -81076,9 +81273,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['acm'] = {};
 AWS.ACM = Service.defineService('acm', ['2015-12-08']);
-
-apiLoader.services['acm']['2015-12-08'] = require('../apis/acm-2015-12-08.min.json');
-apiLoader.services['acm']['2015-12-08'].paginators = require('../apis/acm-2015-12-08.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['acm'], '2015-12-08', {
+  get: function get() {
+    var model = require('../apis/acm-2015-12-08.min.json');
+    model.paginators = require('../apis/acm-2015-12-08.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ACM;
 
@@ -81091,9 +81294,15 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['apigateway'] = {};
 AWS.APIGateway = Service.defineService('apigateway', ['2015-07-09']);
 require('../lib/services/apigateway');
-
-apiLoader.services['apigateway']['2015-07-09'] = require('../apis/apigateway-2015-07-09.min.json');
-apiLoader.services['apigateway']['2015-07-09'].paginators = require('../apis/apigateway-2015-07-09.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['apigateway'], '2015-07-09', {
+  get: function get() {
+    var model = require('../apis/apigateway-2015-07-09.min.json');
+    model.paginators = require('../apis/apigateway-2015-07-09.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.APIGateway;
 
@@ -81105,9 +81314,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['applicationautoscaling'] = {};
 AWS.ApplicationAutoScaling = Service.defineService('applicationautoscaling', ['2016-02-06']);
-
-apiLoader.services['applicationautoscaling']['2016-02-06'] = require('../apis/application-autoscaling-2016-02-06.min.json');
-apiLoader.services['applicationautoscaling']['2016-02-06'].paginators = require('../apis/application-autoscaling-2016-02-06.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['applicationautoscaling'], '2016-02-06', {
+  get: function get() {
+    var model = require('../apis/application-autoscaling-2016-02-06.min.json');
+    model.paginators = require('../apis/application-autoscaling-2016-02-06.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ApplicationAutoScaling;
 
@@ -81119,9 +81334,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['autoscaling'] = {};
 AWS.AutoScaling = Service.defineService('autoscaling', ['2011-01-01']);
-
-apiLoader.services['autoscaling']['2011-01-01'] = require('../apis/autoscaling-2011-01-01.min.json');
-apiLoader.services['autoscaling']['2011-01-01'].paginators = require('../apis/autoscaling-2011-01-01.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['autoscaling'], '2011-01-01', {
+  get: function get() {
+    var model = require('../apis/autoscaling-2011-01-01.min.json');
+    model.paginators = require('../apis/autoscaling-2011-01-01.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.AutoScaling;
 
@@ -81129,623 +81350,64 @@ module.exports = AWS.AutoScaling;
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 
-var acm = null;
-Object.defineProperty(AWS, 'ACM', {
-  get: function get() {
-    return acm || require('./acm');
-  },
-  set: function set(svc) {
-    acm = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var apigateway = null;
-Object.defineProperty(AWS, 'APIGateway', {
-  get: function get() {
-    return apigateway || require('./apigateway');
-  },
-  set: function set(svc) {
-    apigateway = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var applicationautoscaling = null;
-Object.defineProperty(AWS, 'ApplicationAutoScaling', {
-  get: function get() {
-    return applicationautoscaling || require('./applicationautoscaling');
-  },
-  set: function set(svc) {
-    applicationautoscaling = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var autoscaling = null;
-Object.defineProperty(AWS, 'AutoScaling', {
-  get: function get() {
-    return autoscaling || require('./autoscaling');
-  },
-  set: function set(svc) {
-    autoscaling = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cloudformation = null;
-Object.defineProperty(AWS, 'CloudFormation', {
-  get: function get() {
-    return cloudformation || require('./cloudformation');
-  },
-  set: function set(svc) {
-    cloudformation = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cloudfront = null;
-Object.defineProperty(AWS, 'CloudFront', {
-  get: function get() {
-    return cloudfront || require('./cloudfront');
-  },
-  set: function set(svc) {
-    cloudfront = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cloudhsm = null;
-Object.defineProperty(AWS, 'CloudHSM', {
-  get: function get() {
-    return cloudhsm || require('./cloudhsm');
-  },
-  set: function set(svc) {
-    cloudhsm = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cloudtrail = null;
-Object.defineProperty(AWS, 'CloudTrail', {
-  get: function get() {
-    return cloudtrail || require('./cloudtrail');
-  },
-  set: function set(svc) {
-    cloudtrail = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cloudwatch = null;
-Object.defineProperty(AWS, 'CloudWatch', {
-  get: function get() {
-    return cloudwatch || require('./cloudwatch');
-  },
-  set: function set(svc) {
-    cloudwatch = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cloudwatchevents = null;
-Object.defineProperty(AWS, 'CloudWatchEvents', {
-  get: function get() {
-    return cloudwatchevents || require('./cloudwatchevents');
-  },
-  set: function set(svc) {
-    cloudwatchevents = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cloudwatchlogs = null;
-Object.defineProperty(AWS, 'CloudWatchLogs', {
-  get: function get() {
-    return cloudwatchlogs || require('./cloudwatchlogs');
-  },
-  set: function set(svc) {
-    cloudwatchlogs = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var codecommit = null;
-Object.defineProperty(AWS, 'CodeCommit', {
-  get: function get() {
-    return codecommit || require('./codecommit');
-  },
-  set: function set(svc) {
-    codecommit = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var codedeploy = null;
-Object.defineProperty(AWS, 'CodeDeploy', {
-  get: function get() {
-    return codedeploy || require('./codedeploy');
-  },
-  set: function set(svc) {
-    codedeploy = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var codepipeline = null;
-Object.defineProperty(AWS, 'CodePipeline', {
-  get: function get() {
-    return codepipeline || require('./codepipeline');
-  },
-  set: function set(svc) {
-    codepipeline = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cognitoidentity = null;
-Object.defineProperty(AWS, 'CognitoIdentity', {
-  get: function get() {
-    return cognitoidentity || require('./cognitoidentity');
-  },
-  set: function set(svc) {
-    cognitoidentity = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cognitoidentityserviceprovider = null;
-Object.defineProperty(AWS, 'CognitoIdentityServiceProvider', {
-  get: function get() {
-    return cognitoidentityserviceprovider || require('./cognitoidentityserviceprovider');
-  },
-  set: function set(svc) {
-    cognitoidentityserviceprovider = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var cognitosync = null;
-Object.defineProperty(AWS, 'CognitoSync', {
-  get: function get() {
-    return cognitosync || require('./cognitosync');
-  },
-  set: function set(svc) {
-    cognitosync = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var configservice = null;
-Object.defineProperty(AWS, 'ConfigService', {
-  get: function get() {
-    return configservice || require('./configservice');
-  },
-  set: function set(svc) {
-    configservice = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var devicefarm = null;
-Object.defineProperty(AWS, 'DeviceFarm', {
-  get: function get() {
-    return devicefarm || require('./devicefarm');
-  },
-  set: function set(svc) {
-    devicefarm = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var directconnect = null;
-Object.defineProperty(AWS, 'DirectConnect', {
-  get: function get() {
-    return directconnect || require('./directconnect');
-  },
-  set: function set(svc) {
-    directconnect = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var dynamodb = null;
-Object.defineProperty(AWS, 'DynamoDB', {
-  get: function get() {
-    return dynamodb || require('./dynamodb');
-  },
-  set: function set(svc) {
-    dynamodb = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var dynamodbstreams = null;
-Object.defineProperty(AWS, 'DynamoDBStreams', {
-  get: function get() {
-    return dynamodbstreams || require('./dynamodbstreams');
-  },
-  set: function set(svc) {
-    dynamodbstreams = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var ec2 = null;
-Object.defineProperty(AWS, 'EC2', {
-  get: function get() {
-    return ec2 || require('./ec2');
-  },
-  set: function set(svc) {
-    ec2 = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var ecr = null;
-Object.defineProperty(AWS, 'ECR', {
-  get: function get() {
-    return ecr || require('./ecr');
-  },
-  set: function set(svc) {
-    ecr = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var ecs = null;
-Object.defineProperty(AWS, 'ECS', {
-  get: function get() {
-    return ecs || require('./ecs');
-  },
-  set: function set(svc) {
-    ecs = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var elasticache = null;
-Object.defineProperty(AWS, 'ElastiCache', {
-  get: function get() {
-    return elasticache || require('./elasticache');
-  },
-  set: function set(svc) {
-    elasticache = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var elasticbeanstalk = null;
-Object.defineProperty(AWS, 'ElasticBeanstalk', {
-  get: function get() {
-    return elasticbeanstalk || require('./elasticbeanstalk');
-  },
-  set: function set(svc) {
-    elasticbeanstalk = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var elb = null;
-Object.defineProperty(AWS, 'ELB', {
-  get: function get() {
-    return elb || require('./elb');
-  },
-  set: function set(svc) {
-    elb = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var elbv2 = null;
-Object.defineProperty(AWS, 'ELBv2', {
-  get: function get() {
-    return elbv2 || require('./elbv2');
-  },
-  set: function set(svc) {
-    elbv2 = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var emr = null;
-Object.defineProperty(AWS, 'EMR', {
-  get: function get() {
-    return emr || require('./emr');
-  },
-  set: function set(svc) {
-    emr = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var elastictranscoder = null;
-Object.defineProperty(AWS, 'ElasticTranscoder', {
-  get: function get() {
-    return elastictranscoder || require('./elastictranscoder');
-  },
-  set: function set(svc) {
-    elastictranscoder = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var firehose = null;
-Object.defineProperty(AWS, 'Firehose', {
-  get: function get() {
-    return firehose || require('./firehose');
-  },
-  set: function set(svc) {
-    firehose = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var gamelift = null;
-Object.defineProperty(AWS, 'GameLift', {
-  get: function get() {
-    return gamelift || require('./gamelift');
-  },
-  set: function set(svc) {
-    gamelift = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var inspector = null;
-Object.defineProperty(AWS, 'Inspector', {
-  get: function get() {
-    return inspector || require('./inspector');
-  },
-  set: function set(svc) {
-    inspector = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var iot = null;
-Object.defineProperty(AWS, 'Iot', {
-  get: function get() {
-    return iot || require('./iot');
-  },
-  set: function set(svc) {
-    iot = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var iotdata = null;
-Object.defineProperty(AWS, 'IotData', {
-  get: function get() {
-    return iotdata || require('./iotdata');
-  },
-  set: function set(svc) {
-    iotdata = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var kinesis = null;
-Object.defineProperty(AWS, 'Kinesis', {
-  get: function get() {
-    return kinesis || require('./kinesis');
-  },
-  set: function set(svc) {
-    kinesis = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var kms = null;
-Object.defineProperty(AWS, 'KMS', {
-  get: function get() {
-    return kms || require('./kms');
-  },
-  set: function set(svc) {
-    kms = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var lambda = null;
-Object.defineProperty(AWS, 'Lambda', {
-  get: function get() {
-    return lambda || require('./lambda');
-  },
-  set: function set(svc) {
-    lambda = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var machinelearning = null;
-Object.defineProperty(AWS, 'MachineLearning', {
-  get: function get() {
-    return machinelearning || require('./machinelearning');
-  },
-  set: function set(svc) {
-    machinelearning = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var marketplacecommerceanalytics = null;
-Object.defineProperty(AWS, 'MarketplaceCommerceAnalytics', {
-  get: function get() {
-    return marketplacecommerceanalytics || require('./marketplacecommerceanalytics');
-  },
-  set: function set(svc) {
-    marketplacecommerceanalytics = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var mobileanalytics = null;
-Object.defineProperty(AWS, 'MobileAnalytics', {
-  get: function get() {
-    return mobileanalytics || require('./mobileanalytics');
-  },
-  set: function set(svc) {
-    mobileanalytics = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var opsworks = null;
-Object.defineProperty(AWS, 'OpsWorks', {
-  get: function get() {
-    return opsworks || require('./opsworks');
-  },
-  set: function set(svc) {
-    opsworks = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var rds = null;
-Object.defineProperty(AWS, 'RDS', {
-  get: function get() {
-    return rds || require('./rds');
-  },
-  set: function set(svc) {
-    rds = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var redshift = null;
-Object.defineProperty(AWS, 'Redshift', {
-  get: function get() {
-    return redshift || require('./redshift');
-  },
-  set: function set(svc) {
-    redshift = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var route53 = null;
-Object.defineProperty(AWS, 'Route53', {
-  get: function get() {
-    return route53 || require('./route53');
-  },
-  set: function set(svc) {
-    route53 = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var route53domains = null;
-Object.defineProperty(AWS, 'Route53Domains', {
-  get: function get() {
-    return route53domains || require('./route53domains');
-  },
-  set: function set(svc) {
-    route53domains = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var s3 = null;
-Object.defineProperty(AWS, 'S3', {
-  get: function get() {
-    return s3 || require('./s3');
-  },
-  set: function set(svc) {
-    s3 = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var servicecatalog = null;
-Object.defineProperty(AWS, 'ServiceCatalog', {
-  get: function get() {
-    return servicecatalog || require('./servicecatalog');
-  },
-  set: function set(svc) {
-    servicecatalog = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var ses = null;
-Object.defineProperty(AWS, 'SES', {
-  get: function get() {
-    return ses || require('./ses');
-  },
-  set: function set(svc) {
-    ses = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var sns = null;
-Object.defineProperty(AWS, 'SNS', {
-  get: function get() {
-    return sns || require('./sns');
-  },
-  set: function set(svc) {
-    sns = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var sqs = null;
-Object.defineProperty(AWS, 'SQS', {
-  get: function get() {
-    return sqs || require('./sqs');
-  },
-  set: function set(svc) {
-    sqs = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var ssm = null;
-Object.defineProperty(AWS, 'SSM', {
-  get: function get() {
-    return ssm || require('./ssm');
-  },
-  set: function set(svc) {
-    ssm = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var storagegateway = null;
-Object.defineProperty(AWS, 'StorageGateway', {
-  get: function get() {
-    return storagegateway || require('./storagegateway');
-  },
-  set: function set(svc) {
-    storagegateway = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var sts = null;
-Object.defineProperty(AWS, 'STS', {
-  get: function get() {
-    return sts || require('./sts');
-  },
-  set: function set(svc) {
-    sts = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-var waf = null;
-Object.defineProperty(AWS, 'WAF', {
-  get: function get() {
-    return waf || require('./waf');
-  },
-  set: function set(svc) {
-    waf = svc;
-  },
-  enumerable: true,
-  configurable: true
-});
-module.exports = AWS;
+module.exports = {
+  ACM: require('./acm'),
+  APIGateway: require('./apigateway'),
+  ApplicationAutoScaling: require('./applicationautoscaling'),
+  AutoScaling: require('./autoscaling'),
+  CloudFormation: require('./cloudformation'),
+  CloudFront: require('./cloudfront'),
+  CloudHSM: require('./cloudhsm'),
+  CloudTrail: require('./cloudtrail'),
+  CloudWatch: require('./cloudwatch'),
+  CloudWatchEvents: require('./cloudwatchevents'),
+  CloudWatchLogs: require('./cloudwatchlogs'),
+  CodeCommit: require('./codecommit'),
+  CodeDeploy: require('./codedeploy'),
+  CodePipeline: require('./codepipeline'),
+  CognitoIdentity: require('./cognitoidentity'),
+  CognitoIdentityServiceProvider: require('./cognitoidentityserviceprovider'),
+  CognitoSync: require('./cognitosync'),
+  ConfigService: require('./configservice'),
+  DeviceFarm: require('./devicefarm'),
+  DirectConnect: require('./directconnect'),
+  DynamoDB: require('./dynamodb'),
+  DynamoDBStreams: require('./dynamodbstreams'),
+  EC2: require('./ec2'),
+  ECR: require('./ecr'),
+  ECS: require('./ecs'),
+  ElastiCache: require('./elasticache'),
+  ElasticBeanstalk: require('./elasticbeanstalk'),
+  ELB: require('./elb'),
+  ELBv2: require('./elbv2'),
+  EMR: require('./emr'),
+  ElasticTranscoder: require('./elastictranscoder'),
+  Firehose: require('./firehose'),
+  GameLift: require('./gamelift'),
+  Inspector: require('./inspector'),
+  Iot: require('./iot'),
+  IotData: require('./iotdata'),
+  Kinesis: require('./kinesis'),
+  KMS: require('./kms'),
+  Lambda: require('./lambda'),
+  MachineLearning: require('./machinelearning'),
+  MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
+  MobileAnalytics: require('./mobileanalytics'),
+  OpsWorks: require('./opsworks'),
+  RDS: require('./rds'),
+  Redshift: require('./redshift'),
+  Route53: require('./route53'),
+  Route53Domains: require('./route53domains'),
+  S3: require('./s3'),
+  ServiceCatalog: require('./servicecatalog'),
+  SES: require('./ses'),
+  SNS: require('./sns'),
+  SQS: require('./sqs'),
+  SSM: require('./ssm'),
+  StorageGateway: require('./storagegateway'),
+  STS: require('./sts'),
+  WAF: require('./waf')
+};
 },{"../lib/core":188,"../lib/node_loader":185,"./acm":127,"./apigateway":128,"./applicationautoscaling":129,"./autoscaling":130,"./cloudformation":132,"./cloudfront":133,"./cloudhsm":134,"./cloudtrail":135,"./cloudwatch":136,"./cloudwatchevents":137,"./cloudwatchlogs":138,"./codecommit":139,"./codedeploy":140,"./codepipeline":141,"./cognitoidentity":142,"./cognitoidentityserviceprovider":143,"./cognitosync":144,"./configservice":145,"./devicefarm":146,"./directconnect":147,"./dynamodb":148,"./dynamodbstreams":149,"./ec2":150,"./ecr":151,"./ecs":152,"./elasticache":153,"./elasticbeanstalk":154,"./elastictranscoder":155,"./elb":156,"./elbv2":157,"./emr":158,"./firehose":159,"./gamelift":160,"./inspector":161,"./iot":162,"./iotdata":163,"./kinesis":164,"./kms":165,"./lambda":166,"./machinelearning":167,"./marketplacecommerceanalytics":168,"./mobileanalytics":169,"./opsworks":170,"./rds":171,"./redshift":172,"./route53":173,"./route53domains":174,"./s3":175,"./servicecatalog":176,"./ses":177,"./sns":178,"./sqs":179,"./ssm":180,"./storagegateway":181,"./sts":182,"./waf":183}],132:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
@@ -81754,10 +81416,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudformation'] = {};
 AWS.CloudFormation = Service.defineService('cloudformation', ['2010-05-15']);
-
-apiLoader.services['cloudformation']['2010-05-15'] = require('../apis/cloudformation-2010-05-15.min.json');
-apiLoader.services['cloudformation']['2010-05-15'].paginators = require('../apis/cloudformation-2010-05-15.paginators.json').pagination;
-apiLoader.services['cloudformation']['2010-05-15'].waiters = require('../apis/cloudformation-2010-05-15.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['cloudformation'], '2010-05-15', {
+  get: function get() {
+    var model = require('../apis/cloudformation-2010-05-15.min.json');
+    model.paginators = require('../apis/cloudformation-2010-05-15.paginators.json').pagination;
+    model.waiters = require('../apis/cloudformation-2010-05-15.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudFormation;
 
@@ -81770,10 +81438,16 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['cloudfront'] = {};
 AWS.CloudFront = Service.defineService('cloudfront', ['2016-09-07']);
 require('../lib/services/cloudfront');
-
-apiLoader.services['cloudfront']['2016-09-07'] = require('../apis/cloudfront-2016-09-07.min.json');
-apiLoader.services['cloudfront']['2016-09-07'].paginators = require('../apis/cloudfront-2016-09-07.paginators.json').pagination;
-apiLoader.services['cloudfront']['2016-09-07'].waiters = require('../apis/cloudfront-2016-09-07.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['cloudfront'], '2016-09-07', {
+  get: function get() {
+    var model = require('../apis/cloudfront-2016-09-07.min.json');
+    model.paginators = require('../apis/cloudfront-2016-09-07.paginators.json').pagination;
+    model.waiters = require('../apis/cloudfront-2016-09-07.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudFront;
 
@@ -81785,8 +81459,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudhsm'] = {};
 AWS.CloudHSM = Service.defineService('cloudhsm', ['2014-05-30']);
-
-apiLoader.services['cloudhsm']['2014-05-30'] = require('../apis/cloudhsm-2014-05-30.min.json');
+Object.defineProperty(apiLoader.services['cloudhsm'], '2014-05-30', {
+  get: function get() {
+    var model = require('../apis/cloudhsm-2014-05-30.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudHSM;
 
@@ -81798,9 +81478,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudtrail'] = {};
 AWS.CloudTrail = Service.defineService('cloudtrail', ['2013-11-01']);
-
-apiLoader.services['cloudtrail']['2013-11-01'] = require('../apis/cloudtrail-2013-11-01.min.json');
-apiLoader.services['cloudtrail']['2013-11-01'].paginators = require('../apis/cloudtrail-2013-11-01.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['cloudtrail'], '2013-11-01', {
+  get: function get() {
+    var model = require('../apis/cloudtrail-2013-11-01.min.json');
+    model.paginators = require('../apis/cloudtrail-2013-11-01.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudTrail;
 
@@ -81812,10 +81498,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudwatch'] = {};
 AWS.CloudWatch = Service.defineService('cloudwatch', ['2010-08-01']);
-
-apiLoader.services['cloudwatch']['2010-08-01'] = require('../apis/monitoring-2010-08-01.min.json');
-apiLoader.services['cloudwatch']['2010-08-01'].paginators = require('../apis/monitoring-2010-08-01.paginators.json').pagination;
-apiLoader.services['cloudwatch']['2010-08-01'].waiters = require('../apis/monitoring-2010-08-01.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['cloudwatch'], '2010-08-01', {
+  get: function get() {
+    var model = require('../apis/monitoring-2010-08-01.min.json');
+    model.paginators = require('../apis/monitoring-2010-08-01.paginators.json').pagination;
+    model.waiters = require('../apis/monitoring-2010-08-01.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudWatch;
 
@@ -81827,8 +81519,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudwatchevents'] = {};
 AWS.CloudWatchEvents = Service.defineService('cloudwatchevents', ['2015-10-07']);
-
-apiLoader.services['cloudwatchevents']['2015-10-07'] = require('../apis/events-2015-10-07.min.json');
+Object.defineProperty(apiLoader.services['cloudwatchevents'], '2015-10-07', {
+  get: function get() {
+    var model = require('../apis/events-2015-10-07.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudWatchEvents;
 
@@ -81840,9 +81538,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudwatchlogs'] = {};
 AWS.CloudWatchLogs = Service.defineService('cloudwatchlogs', ['2014-03-28']);
-
-apiLoader.services['cloudwatchlogs']['2014-03-28'] = require('../apis/logs-2014-03-28.min.json');
-apiLoader.services['cloudwatchlogs']['2014-03-28'].paginators = require('../apis/logs-2014-03-28.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['cloudwatchlogs'], '2014-03-28', {
+  get: function get() {
+    var model = require('../apis/logs-2014-03-28.min.json');
+    model.paginators = require('../apis/logs-2014-03-28.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudWatchLogs;
 
@@ -81854,9 +81558,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['codecommit'] = {};
 AWS.CodeCommit = Service.defineService('codecommit', ['2015-04-13']);
-
-apiLoader.services['codecommit']['2015-04-13'] = require('../apis/codecommit-2015-04-13.min.json');
-apiLoader.services['codecommit']['2015-04-13'].paginators = require('../apis/codecommit-2015-04-13.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['codecommit'], '2015-04-13', {
+  get: function get() {
+    var model = require('../apis/codecommit-2015-04-13.min.json');
+    model.paginators = require('../apis/codecommit-2015-04-13.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CodeCommit;
 
@@ -81868,10 +81578,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['codedeploy'] = {};
 AWS.CodeDeploy = Service.defineService('codedeploy', ['2014-10-06']);
-
-apiLoader.services['codedeploy']['2014-10-06'] = require('../apis/codedeploy-2014-10-06.min.json');
-apiLoader.services['codedeploy']['2014-10-06'].paginators = require('../apis/codedeploy-2014-10-06.paginators.json').pagination;
-apiLoader.services['codedeploy']['2014-10-06'].waiters = require('../apis/codedeploy-2014-10-06.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['codedeploy'], '2014-10-06', {
+  get: function get() {
+    var model = require('../apis/codedeploy-2014-10-06.min.json');
+    model.paginators = require('../apis/codedeploy-2014-10-06.paginators.json').pagination;
+    model.waiters = require('../apis/codedeploy-2014-10-06.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CodeDeploy;
 
@@ -81883,8 +81599,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['codepipeline'] = {};
 AWS.CodePipeline = Service.defineService('codepipeline', ['2015-07-09']);
-
-apiLoader.services['codepipeline']['2015-07-09'] = require('../apis/codepipeline-2015-07-09.min.json');
+Object.defineProperty(apiLoader.services['codepipeline'], '2015-07-09', {
+  get: function get() {
+    var model = require('../apis/codepipeline-2015-07-09.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CodePipeline;
 
@@ -81897,8 +81619,14 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['cognitoidentity'] = {};
 AWS.CognitoIdentity = Service.defineService('cognitoidentity', ['2014-06-30']);
 require('../lib/services/cognitoidentity');
-
-apiLoader.services['cognitoidentity']['2014-06-30'] = require('../apis/cognito-identity-2014-06-30.min.json');
+Object.defineProperty(apiLoader.services['cognitoidentity'], '2014-06-30', {
+  get: function get() {
+    var model = require('../apis/cognito-identity-2014-06-30.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CognitoIdentity;
 
@@ -81910,8 +81638,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cognitoidentityserviceprovider'] = {};
 AWS.CognitoIdentityServiceProvider = Service.defineService('cognitoidentityserviceprovider', ['2016-04-18']);
-
-apiLoader.services['cognitoidentityserviceprovider']['2016-04-18'] = require('../apis/cognito-idp-2016-04-18.min.json');
+Object.defineProperty(apiLoader.services['cognitoidentityserviceprovider'], '2016-04-18', {
+  get: function get() {
+    var model = require('../apis/cognito-idp-2016-04-18.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CognitoIdentityServiceProvider;
 
@@ -81923,8 +81657,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cognitosync'] = {};
 AWS.CognitoSync = Service.defineService('cognitosync', ['2014-06-30']);
-
-apiLoader.services['cognitosync']['2014-06-30'] = require('../apis/cognito-sync-2014-06-30.min.json');
+Object.defineProperty(apiLoader.services['cognitosync'], '2014-06-30', {
+  get: function get() {
+    var model = require('../apis/cognito-sync-2014-06-30.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CognitoSync;
 
@@ -81936,9 +81676,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['configservice'] = {};
 AWS.ConfigService = Service.defineService('configservice', ['2014-11-12']);
-
-apiLoader.services['configservice']['2014-11-12'] = require('../apis/config-2014-11-12.min.json');
-apiLoader.services['configservice']['2014-11-12'].paginators = require('../apis/config-2014-11-12.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['configservice'], '2014-11-12', {
+  get: function get() {
+    var model = require('../apis/config-2014-11-12.min.json');
+    model.paginators = require('../apis/config-2014-11-12.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ConfigService;
 
@@ -81950,9 +81696,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['devicefarm'] = {};
 AWS.DeviceFarm = Service.defineService('devicefarm', ['2015-06-23']);
-
-apiLoader.services['devicefarm']['2015-06-23'] = require('../apis/devicefarm-2015-06-23.min.json');
-apiLoader.services['devicefarm']['2015-06-23'].paginators = require('../apis/devicefarm-2015-06-23.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['devicefarm'], '2015-06-23', {
+  get: function get() {
+    var model = require('../apis/devicefarm-2015-06-23.min.json');
+    model.paginators = require('../apis/devicefarm-2015-06-23.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.DeviceFarm;
 
@@ -81964,9 +81716,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['directconnect'] = {};
 AWS.DirectConnect = Service.defineService('directconnect', ['2012-10-25']);
-
-apiLoader.services['directconnect']['2012-10-25'] = require('../apis/directconnect-2012-10-25.min.json');
-apiLoader.services['directconnect']['2012-10-25'].paginators = require('../apis/directconnect-2012-10-25.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['directconnect'], '2012-10-25', {
+  get: function get() {
+    var model = require('../apis/directconnect-2012-10-25.min.json');
+    model.paginators = require('../apis/directconnect-2012-10-25.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.DirectConnect;
 
@@ -81979,14 +81737,26 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['dynamodb'] = {};
 AWS.DynamoDB = Service.defineService('dynamodb', ['2011-12-05', '2012-08-10']);
 require('../lib/services/dynamodb');
-
-apiLoader.services['dynamodb']['2011-12-05'] = require('../apis/dynamodb-2011-12-05.min.json');
-apiLoader.services['dynamodb']['2011-12-05'].paginators = require('../apis/dynamodb-2011-12-05.paginators.json').pagination;
-apiLoader.services['dynamodb']['2011-12-05'].waiters = require('../apis/dynamodb-2011-12-05.waiters2.json').waiters;
-
-apiLoader.services['dynamodb']['2012-08-10'] = require('../apis/dynamodb-2012-08-10.min.json');
-apiLoader.services['dynamodb']['2012-08-10'].paginators = require('../apis/dynamodb-2012-08-10.paginators.json').pagination;
-apiLoader.services['dynamodb']['2012-08-10'].waiters = require('../apis/dynamodb-2012-08-10.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['dynamodb'], '2011-12-05', {
+  get: function get() {
+    var model = require('../apis/dynamodb-2011-12-05.min.json');
+    model.paginators = require('../apis/dynamodb-2011-12-05.paginators.json').pagination;
+    model.waiters = require('../apis/dynamodb-2011-12-05.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+Object.defineProperty(apiLoader.services['dynamodb'], '2012-08-10', {
+  get: function get() {
+    var model = require('../apis/dynamodb-2012-08-10.min.json');
+    model.paginators = require('../apis/dynamodb-2012-08-10.paginators.json').pagination;
+    model.waiters = require('../apis/dynamodb-2012-08-10.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.DynamoDB;
 
@@ -81998,8 +81768,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['dynamodbstreams'] = {};
 AWS.DynamoDBStreams = Service.defineService('dynamodbstreams', ['2012-08-10']);
-
-apiLoader.services['dynamodbstreams']['2012-08-10'] = require('../apis/streams.dynamodb-2012-08-10.min.json');
+Object.defineProperty(apiLoader.services['dynamodbstreams'], '2012-08-10', {
+  get: function get() {
+    var model = require('../apis/streams.dynamodb-2012-08-10.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.DynamoDBStreams;
 
@@ -82012,10 +81788,16 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['ec2'] = {};
 AWS.EC2 = Service.defineService('ec2', ['2016-04-01']);
 require('../lib/services/ec2');
-
-apiLoader.services['ec2']['2016-04-01'] = require('../apis/ec2-2016-04-01.min.json');
-apiLoader.services['ec2']['2016-04-01'].paginators = require('../apis/ec2-2016-04-01.paginators.json').pagination;
-apiLoader.services['ec2']['2016-04-01'].waiters = require('../apis/ec2-2016-04-01.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['ec2'], '2016-04-01', {
+  get: function get() {
+    var model = require('../apis/ec2-2016-04-01.min.json');
+    model.paginators = require('../apis/ec2-2016-04-01.paginators.json').pagination;
+    model.waiters = require('../apis/ec2-2016-04-01.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.EC2;
 
@@ -82027,8 +81809,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['ecr'] = {};
 AWS.ECR = Service.defineService('ecr', ['2015-09-21']);
-
-apiLoader.services['ecr']['2015-09-21'] = require('../apis/ecr-2015-09-21.min.json');
+Object.defineProperty(apiLoader.services['ecr'], '2015-09-21', {
+  get: function get() {
+    var model = require('../apis/ecr-2015-09-21.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ECR;
 
@@ -82040,10 +81828,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['ecs'] = {};
 AWS.ECS = Service.defineService('ecs', ['2014-11-13']);
-
-apiLoader.services['ecs']['2014-11-13'] = require('../apis/ecs-2014-11-13.min.json');
-apiLoader.services['ecs']['2014-11-13'].paginators = require('../apis/ecs-2014-11-13.paginators.json').pagination;
-apiLoader.services['ecs']['2014-11-13'].waiters = require('../apis/ecs-2014-11-13.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['ecs'], '2014-11-13', {
+  get: function get() {
+    var model = require('../apis/ecs-2014-11-13.min.json');
+    model.paginators = require('../apis/ecs-2014-11-13.paginators.json').pagination;
+    model.waiters = require('../apis/ecs-2014-11-13.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ECS;
 
@@ -82055,10 +81849,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['elasticache'] = {};
 AWS.ElastiCache = Service.defineService('elasticache', ['2015-02-02']);
-
-apiLoader.services['elasticache']['2015-02-02'] = require('../apis/elasticache-2015-02-02.min.json');
-apiLoader.services['elasticache']['2015-02-02'].paginators = require('../apis/elasticache-2015-02-02.paginators.json').pagination;
-apiLoader.services['elasticache']['2015-02-02'].waiters = require('../apis/elasticache-2015-02-02.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['elasticache'], '2015-02-02', {
+  get: function get() {
+    var model = require('../apis/elasticache-2015-02-02.min.json');
+    model.paginators = require('../apis/elasticache-2015-02-02.paginators.json').pagination;
+    model.waiters = require('../apis/elasticache-2015-02-02.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ElastiCache;
 
@@ -82070,9 +81870,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['elasticbeanstalk'] = {};
 AWS.ElasticBeanstalk = Service.defineService('elasticbeanstalk', ['2010-12-01']);
-
-apiLoader.services['elasticbeanstalk']['2010-12-01'] = require('../apis/elasticbeanstalk-2010-12-01.min.json');
-apiLoader.services['elasticbeanstalk']['2010-12-01'].paginators = require('../apis/elasticbeanstalk-2010-12-01.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['elasticbeanstalk'], '2010-12-01', {
+  get: function get() {
+    var model = require('../apis/elasticbeanstalk-2010-12-01.min.json');
+    model.paginators = require('../apis/elasticbeanstalk-2010-12-01.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ElasticBeanstalk;
 
@@ -82084,10 +81890,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['elastictranscoder'] = {};
 AWS.ElasticTranscoder = Service.defineService('elastictranscoder', ['2012-09-25']);
-
-apiLoader.services['elastictranscoder']['2012-09-25'] = require('../apis/elastictranscoder-2012-09-25.min.json');
-apiLoader.services['elastictranscoder']['2012-09-25'].paginators = require('../apis/elastictranscoder-2012-09-25.paginators.json').pagination;
-apiLoader.services['elastictranscoder']['2012-09-25'].waiters = require('../apis/elastictranscoder-2012-09-25.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['elastictranscoder'], '2012-09-25', {
+  get: function get() {
+    var model = require('../apis/elastictranscoder-2012-09-25.min.json');
+    model.paginators = require('../apis/elastictranscoder-2012-09-25.paginators.json').pagination;
+    model.waiters = require('../apis/elastictranscoder-2012-09-25.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ElasticTranscoder;
 
@@ -82099,10 +81911,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['elb'] = {};
 AWS.ELB = Service.defineService('elb', ['2012-06-01']);
-
-apiLoader.services['elb']['2012-06-01'] = require('../apis/elasticloadbalancing-2012-06-01.min.json');
-apiLoader.services['elb']['2012-06-01'].paginators = require('../apis/elasticloadbalancing-2012-06-01.paginators.json').pagination;
-apiLoader.services['elb']['2012-06-01'].waiters = require('../apis/elasticloadbalancing-2012-06-01.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['elb'], '2012-06-01', {
+  get: function get() {
+    var model = require('../apis/elasticloadbalancing-2012-06-01.min.json');
+    model.paginators = require('../apis/elasticloadbalancing-2012-06-01.paginators.json').pagination;
+    model.waiters = require('../apis/elasticloadbalancing-2012-06-01.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ELB;
 
@@ -82114,9 +81932,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['elbv2'] = {};
 AWS.ELBv2 = Service.defineService('elbv2', ['2015-12-01']);
-
-apiLoader.services['elbv2']['2015-12-01'] = require('../apis/elasticloadbalancingv2-2015-12-01.min.json');
-apiLoader.services['elbv2']['2015-12-01'].paginators = require('../apis/elasticloadbalancingv2-2015-12-01.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['elbv2'], '2015-12-01', {
+  get: function get() {
+    var model = require('../apis/elasticloadbalancingv2-2015-12-01.min.json');
+    model.paginators = require('../apis/elasticloadbalancingv2-2015-12-01.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ELBv2;
 
@@ -82128,10 +81952,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['emr'] = {};
 AWS.EMR = Service.defineService('emr', ['2009-03-31']);
-
-apiLoader.services['emr']['2009-03-31'] = require('../apis/elasticmapreduce-2009-03-31.min.json');
-apiLoader.services['emr']['2009-03-31'].paginators = require('../apis/elasticmapreduce-2009-03-31.paginators.json').pagination;
-apiLoader.services['emr']['2009-03-31'].waiters = require('../apis/elasticmapreduce-2009-03-31.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['emr'], '2009-03-31', {
+  get: function get() {
+    var model = require('../apis/elasticmapreduce-2009-03-31.min.json');
+    model.paginators = require('../apis/elasticmapreduce-2009-03-31.paginators.json').pagination;
+    model.waiters = require('../apis/elasticmapreduce-2009-03-31.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.EMR;
 
@@ -82143,8 +81973,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['firehose'] = {};
 AWS.Firehose = Service.defineService('firehose', ['2015-08-04']);
-
-apiLoader.services['firehose']['2015-08-04'] = require('../apis/firehose-2015-08-04.min.json');
+Object.defineProperty(apiLoader.services['firehose'], '2015-08-04', {
+  get: function get() {
+    var model = require('../apis/firehose-2015-08-04.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Firehose;
 
@@ -82156,8 +81992,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['gamelift'] = {};
 AWS.GameLift = Service.defineService('gamelift', ['2015-10-01']);
-
-apiLoader.services['gamelift']['2015-10-01'] = require('../apis/gamelift-2015-10-01.min.json');
+Object.defineProperty(apiLoader.services['gamelift'], '2015-10-01', {
+  get: function get() {
+    var model = require('../apis/gamelift-2015-10-01.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.GameLift;
 
@@ -82169,8 +82011,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['inspector'] = {};
 AWS.Inspector = Service.defineService('inspector', ['2016-02-16']);
-
-apiLoader.services['inspector']['2016-02-16'] = require('../apis/inspector-2016-02-16.min.json');
+Object.defineProperty(apiLoader.services['inspector'], '2016-02-16', {
+  get: function get() {
+    var model = require('../apis/inspector-2016-02-16.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Inspector;
 
@@ -82182,8 +82030,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['iot'] = {};
 AWS.Iot = Service.defineService('iot', ['2015-05-28']);
-
-apiLoader.services['iot']['2015-05-28'] = require('../apis/iot-2015-05-28.min.json');
+Object.defineProperty(apiLoader.services['iot'], '2015-05-28', {
+  get: function get() {
+    var model = require('../apis/iot-2015-05-28.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Iot;
 
@@ -82196,8 +82050,14 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['iotdata'] = {};
 AWS.IotData = Service.defineService('iotdata', ['2015-05-28']);
 require('../lib/services/iotdata');
-
-apiLoader.services['iotdata']['2015-05-28'] = require('../apis/iot-data-2015-05-28.min.json');
+Object.defineProperty(apiLoader.services['iotdata'], '2015-05-28', {
+  get: function get() {
+    var model = require('../apis/iot-data-2015-05-28.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.IotData;
 
@@ -82209,10 +82069,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['kinesis'] = {};
 AWS.Kinesis = Service.defineService('kinesis', ['2013-12-02']);
-
-apiLoader.services['kinesis']['2013-12-02'] = require('../apis/kinesis-2013-12-02.min.json');
-apiLoader.services['kinesis']['2013-12-02'].paginators = require('../apis/kinesis-2013-12-02.paginators.json').pagination;
-apiLoader.services['kinesis']['2013-12-02'].waiters = require('../apis/kinesis-2013-12-02.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['kinesis'], '2013-12-02', {
+  get: function get() {
+    var model = require('../apis/kinesis-2013-12-02.min.json');
+    model.paginators = require('../apis/kinesis-2013-12-02.paginators.json').pagination;
+    model.waiters = require('../apis/kinesis-2013-12-02.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Kinesis;
 
@@ -82224,9 +82090,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['kms'] = {};
 AWS.KMS = Service.defineService('kms', ['2014-11-01']);
-
-apiLoader.services['kms']['2014-11-01'] = require('../apis/kms-2014-11-01.min.json');
-apiLoader.services['kms']['2014-11-01'].paginators = require('../apis/kms-2014-11-01.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['kms'], '2014-11-01', {
+  get: function get() {
+    var model = require('../apis/kms-2014-11-01.min.json');
+    model.paginators = require('../apis/kms-2014-11-01.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.KMS;
 
@@ -82238,12 +82110,24 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['lambda'] = {};
 AWS.Lambda = Service.defineService('lambda', ['2014-11-11', '2015-03-31']);
-
-apiLoader.services['lambda']['2014-11-11'] = require('../apis/lambda-2014-11-11.min.json');
-apiLoader.services['lambda']['2014-11-11'].paginators = require('../apis/lambda-2014-11-11.paginators.json').pagination;
-
-apiLoader.services['lambda']['2015-03-31'] = require('../apis/lambda-2015-03-31.min.json');
-apiLoader.services['lambda']['2015-03-31'].paginators = require('../apis/lambda-2015-03-31.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['lambda'], '2014-11-11', {
+  get: function get() {
+    var model = require('../apis/lambda-2014-11-11.min.json');
+    model.paginators = require('../apis/lambda-2014-11-11.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+Object.defineProperty(apiLoader.services['lambda'], '2015-03-31', {
+  get: function get() {
+    var model = require('../apis/lambda-2015-03-31.min.json');
+    model.paginators = require('../apis/lambda-2015-03-31.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Lambda;
 
@@ -82256,10 +82140,16 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['machinelearning'] = {};
 AWS.MachineLearning = Service.defineService('machinelearning', ['2014-12-12']);
 require('../lib/services/machinelearning');
-
-apiLoader.services['machinelearning']['2014-12-12'] = require('../apis/machinelearning-2014-12-12.min.json');
-apiLoader.services['machinelearning']['2014-12-12'].paginators = require('../apis/machinelearning-2014-12-12.paginators.json').pagination;
-apiLoader.services['machinelearning']['2014-12-12'].waiters = require('../apis/machinelearning-2014-12-12.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['machinelearning'], '2014-12-12', {
+  get: function get() {
+    var model = require('../apis/machinelearning-2014-12-12.min.json');
+    model.paginators = require('../apis/machinelearning-2014-12-12.paginators.json').pagination;
+    model.waiters = require('../apis/machinelearning-2014-12-12.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.MachineLearning;
 
@@ -82271,8 +82161,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['marketplacecommerceanalytics'] = {};
 AWS.MarketplaceCommerceAnalytics = Service.defineService('marketplacecommerceanalytics', ['2015-07-01']);
-
-apiLoader.services['marketplacecommerceanalytics']['2015-07-01'] = require('../apis/marketplacecommerceanalytics-2015-07-01.min.json');
+Object.defineProperty(apiLoader.services['marketplacecommerceanalytics'], '2015-07-01', {
+  get: function get() {
+    var model = require('../apis/marketplacecommerceanalytics-2015-07-01.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.MarketplaceCommerceAnalytics;
 
@@ -82284,8 +82180,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['mobileanalytics'] = {};
 AWS.MobileAnalytics = Service.defineService('mobileanalytics', ['2014-06-05']);
-
-apiLoader.services['mobileanalytics']['2014-06-05'] = require('../apis/mobileanalytics-2014-06-05.min.json');
+Object.defineProperty(apiLoader.services['mobileanalytics'], '2014-06-05', {
+  get: function get() {
+    var model = require('../apis/mobileanalytics-2014-06-05.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.MobileAnalytics;
 
@@ -82297,10 +82199,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['opsworks'] = {};
 AWS.OpsWorks = Service.defineService('opsworks', ['2013-02-18']);
-
-apiLoader.services['opsworks']['2013-02-18'] = require('../apis/opsworks-2013-02-18.min.json');
-apiLoader.services['opsworks']['2013-02-18'].paginators = require('../apis/opsworks-2013-02-18.paginators.json').pagination;
-apiLoader.services['opsworks']['2013-02-18'].waiters = require('../apis/opsworks-2013-02-18.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['opsworks'], '2013-02-18', {
+  get: function get() {
+    var model = require('../apis/opsworks-2013-02-18.min.json');
+    model.paginators = require('../apis/opsworks-2013-02-18.paginators.json').pagination;
+    model.waiters = require('../apis/opsworks-2013-02-18.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.OpsWorks;
 
@@ -82312,20 +82220,44 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['rds'] = {};
 AWS.RDS = Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-09-09', '2014-10-31']);
-
-apiLoader.services['rds']['2013-01-10'] = require('../apis/rds-2013-01-10.min.json');
-apiLoader.services['rds']['2013-01-10'].paginators = require('../apis/rds-2013-01-10.paginators.json').pagination;
-
-apiLoader.services['rds']['2013-02-12'] = require('../apis/rds-2013-02-12.min.json');
-apiLoader.services['rds']['2013-02-12'].paginators = require('../apis/rds-2013-02-12.paginators.json').pagination;
-
-apiLoader.services['rds']['2013-09-09'] = require('../apis/rds-2013-09-09.min.json');
-apiLoader.services['rds']['2013-09-09'].paginators = require('../apis/rds-2013-09-09.paginators.json').pagination;
-apiLoader.services['rds']['2013-09-09'].waiters = require('../apis/rds-2013-09-09.waiters2.json').waiters;
-
-apiLoader.services['rds']['2014-10-31'] = require('../apis/rds-2014-10-31.min.json');
-apiLoader.services['rds']['2014-10-31'].paginators = require('../apis/rds-2014-10-31.paginators.json').pagination;
-apiLoader.services['rds']['2014-10-31'].waiters = require('../apis/rds-2014-10-31.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['rds'], '2013-01-10', {
+  get: function get() {
+    var model = require('../apis/rds-2013-01-10.min.json');
+    model.paginators = require('../apis/rds-2013-01-10.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+Object.defineProperty(apiLoader.services['rds'], '2013-02-12', {
+  get: function get() {
+    var model = require('../apis/rds-2013-02-12.min.json');
+    model.paginators = require('../apis/rds-2013-02-12.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+Object.defineProperty(apiLoader.services['rds'], '2013-09-09', {
+  get: function get() {
+    var model = require('../apis/rds-2013-09-09.min.json');
+    model.paginators = require('../apis/rds-2013-09-09.paginators.json').pagination;
+    model.waiters = require('../apis/rds-2013-09-09.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+Object.defineProperty(apiLoader.services['rds'], '2014-10-31', {
+  get: function get() {
+    var model = require('../apis/rds-2014-10-31.min.json');
+    model.paginators = require('../apis/rds-2014-10-31.paginators.json').pagination;
+    model.waiters = require('../apis/rds-2014-10-31.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.RDS;
 
@@ -82337,10 +82269,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['redshift'] = {};
 AWS.Redshift = Service.defineService('redshift', ['2012-12-01']);
-
-apiLoader.services['redshift']['2012-12-01'] = require('../apis/redshift-2012-12-01.min.json');
-apiLoader.services['redshift']['2012-12-01'].paginators = require('../apis/redshift-2012-12-01.paginators.json').pagination;
-apiLoader.services['redshift']['2012-12-01'].waiters = require('../apis/redshift-2012-12-01.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['redshift'], '2012-12-01', {
+  get: function get() {
+    var model = require('../apis/redshift-2012-12-01.min.json');
+    model.paginators = require('../apis/redshift-2012-12-01.paginators.json').pagination;
+    model.waiters = require('../apis/redshift-2012-12-01.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Redshift;
 
@@ -82353,10 +82291,16 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['route53'] = {};
 AWS.Route53 = Service.defineService('route53', ['2013-04-01']);
 require('../lib/services/route53');
-
-apiLoader.services['route53']['2013-04-01'] = require('../apis/route53-2013-04-01.min.json');
-apiLoader.services['route53']['2013-04-01'].paginators = require('../apis/route53-2013-04-01.paginators.json').pagination;
-apiLoader.services['route53']['2013-04-01'].waiters = require('../apis/route53-2013-04-01.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['route53'], '2013-04-01', {
+  get: function get() {
+    var model = require('../apis/route53-2013-04-01.min.json');
+    model.paginators = require('../apis/route53-2013-04-01.paginators.json').pagination;
+    model.waiters = require('../apis/route53-2013-04-01.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Route53;
 
@@ -82368,9 +82312,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['route53domains'] = {};
 AWS.Route53Domains = Service.defineService('route53domains', ['2014-05-15']);
-
-apiLoader.services['route53domains']['2014-05-15'] = require('../apis/route53domains-2014-05-15.min.json');
-apiLoader.services['route53domains']['2014-05-15'].paginators = require('../apis/route53domains-2014-05-15.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['route53domains'], '2014-05-15', {
+  get: function get() {
+    var model = require('../apis/route53domains-2014-05-15.min.json');
+    model.paginators = require('../apis/route53domains-2014-05-15.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Route53Domains;
 
@@ -82383,10 +82333,16 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['s3'] = {};
 AWS.S3 = Service.defineService('s3', ['2006-03-01']);
 require('../lib/services/s3');
-
-apiLoader.services['s3']['2006-03-01'] = require('../apis/s3-2006-03-01.min.json');
-apiLoader.services['s3']['2006-03-01'].paginators = require('../apis/s3-2006-03-01.paginators.json').pagination;
-apiLoader.services['s3']['2006-03-01'].waiters = require('../apis/s3-2006-03-01.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['s3'], '2006-03-01', {
+  get: function get() {
+    var model = require('../apis/s3-2006-03-01.min.json');
+    model.paginators = require('../apis/s3-2006-03-01.paginators.json').pagination;
+    model.waiters = require('../apis/s3-2006-03-01.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.S3;
 
@@ -82398,8 +82354,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['servicecatalog'] = {};
 AWS.ServiceCatalog = Service.defineService('servicecatalog', ['2015-12-10']);
-
-apiLoader.services['servicecatalog']['2015-12-10'] = require('../apis/servicecatalog-2015-12-10.min.json');
+Object.defineProperty(apiLoader.services['servicecatalog'], '2015-12-10', {
+  get: function get() {
+    var model = require('../apis/servicecatalog-2015-12-10.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ServiceCatalog;
 
@@ -82411,10 +82373,16 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['ses'] = {};
 AWS.SES = Service.defineService('ses', ['2010-12-01']);
-
-apiLoader.services['ses']['2010-12-01'] = require('../apis/email-2010-12-01.min.json');
-apiLoader.services['ses']['2010-12-01'].paginators = require('../apis/email-2010-12-01.paginators.json').pagination;
-apiLoader.services['ses']['2010-12-01'].waiters = require('../apis/email-2010-12-01.waiters2.json').waiters;
+Object.defineProperty(apiLoader.services['ses'], '2010-12-01', {
+  get: function get() {
+    var model = require('../apis/email-2010-12-01.min.json');
+    model.paginators = require('../apis/email-2010-12-01.paginators.json').pagination;
+    model.waiters = require('../apis/email-2010-12-01.waiters2.json').waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.SES;
 
@@ -82426,9 +82394,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['sns'] = {};
 AWS.SNS = Service.defineService('sns', ['2010-03-31']);
-
-apiLoader.services['sns']['2010-03-31'] = require('../apis/sns-2010-03-31.min.json');
-apiLoader.services['sns']['2010-03-31'].paginators = require('../apis/sns-2010-03-31.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['sns'], '2010-03-31', {
+  get: function get() {
+    var model = require('../apis/sns-2010-03-31.min.json');
+    model.paginators = require('../apis/sns-2010-03-31.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.SNS;
 
@@ -82441,9 +82415,15 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['sqs'] = {};
 AWS.SQS = Service.defineService('sqs', ['2012-11-05']);
 require('../lib/services/sqs');
-
-apiLoader.services['sqs']['2012-11-05'] = require('../apis/sqs-2012-11-05.min.json');
-apiLoader.services['sqs']['2012-11-05'].paginators = require('../apis/sqs-2012-11-05.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['sqs'], '2012-11-05', {
+  get: function get() {
+    var model = require('../apis/sqs-2012-11-05.min.json');
+    model.paginators = require('../apis/sqs-2012-11-05.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.SQS;
 
@@ -82455,9 +82435,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['ssm'] = {};
 AWS.SSM = Service.defineService('ssm', ['2014-11-06']);
-
-apiLoader.services['ssm']['2014-11-06'] = require('../apis/ssm-2014-11-06.min.json');
-apiLoader.services['ssm']['2014-11-06'].paginators = require('../apis/ssm-2014-11-06.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['ssm'], '2014-11-06', {
+  get: function get() {
+    var model = require('../apis/ssm-2014-11-06.min.json');
+    model.paginators = require('../apis/ssm-2014-11-06.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.SSM;
 
@@ -82469,9 +82455,15 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['storagegateway'] = {};
 AWS.StorageGateway = Service.defineService('storagegateway', ['2013-06-30']);
-
-apiLoader.services['storagegateway']['2013-06-30'] = require('../apis/storagegateway-2013-06-30.min.json');
-apiLoader.services['storagegateway']['2013-06-30'].paginators = require('../apis/storagegateway-2013-06-30.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['storagegateway'], '2013-06-30', {
+  get: function get() {
+    var model = require('../apis/storagegateway-2013-06-30.min.json');
+    model.paginators = require('../apis/storagegateway-2013-06-30.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.StorageGateway;
 
@@ -82484,8 +82476,14 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['sts'] = {};
 AWS.STS = Service.defineService('sts', ['2011-06-15']);
 require('../lib/services/sts');
-
-apiLoader.services['sts']['2011-06-15'] = require('../apis/sts-2011-06-15.min.json');
+Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
+  get: function get() {
+    var model = require('../apis/sts-2011-06-15.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.STS;
 
@@ -82497,8 +82495,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['waf'] = {};
 AWS.WAF = Service.defineService('waf', ['2015-08-24']);
-
-apiLoader.services['waf']['2015-08-24'] = require('../apis/waf-2015-08-24.min.json');
+Object.defineProperty(apiLoader.services['waf'], '2015-08-24', {
+  get: function get() {
+    var model = require('../apis/waf-2015-08-24.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.WAF;
 
@@ -82521,6 +82525,8 @@ var util = require('./util');
 
 util.crypto.lib = require('crypto-browserify');
 util.Buffer = require('buffer/').Buffer;
+util.url = require('url/');
+util.querystring = require('querystring/');
 
 var AWS = require('./core');
 
@@ -82536,9 +82542,9 @@ if (typeof process === 'undefined') {
   };
 }
 }).call(this,require('_process'))
-},{"./api_loader":184,"./core":188,"./http/xhr":202,"./util":245,"./xml/browser_parser":246,"_process":309,"buffer/":250,"crypto-browserify":252}],186:[function(require,module,exports){
-var url = require('url'),
-    AWS = require('../core'),
+},{"./api_loader":184,"./core":188,"./http/xhr":202,"./util":245,"./xml/browser_parser":246,"_process":309,"buffer/":250,"crypto-browserify":252,"querystring/":316,"url/":317}],186:[function(require,module,exports){
+var AWS = require('../core'),
+    url = AWS.util.url,
     crypto = AWS.util.crypto.lib,
     base64Encode = AWS.util.base64.encode,
     inherit = AWS.util.inherit;
@@ -82691,7 +82697,7 @@ AWS.CloudFront.Signer = inherit({
 
 module.exports = AWS.CloudFront.Signer;
 
-},{"../core":188,"url":314}],187:[function(require,module,exports){
+},{"../core":188}],187:[function(require,module,exports){
 var AWS = require('./core');
 require('./credentials');
 require('./credentials/credential_provider_chain');
@@ -82888,7 +82894,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.6.3',
+  VERSION: '2.6.4',
 
 
   Signers: {},
@@ -84288,7 +84294,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":188,"./protocol/json":212,"./protocol/query":213,"./protocol/rest":214,"./protocol/rest_json":215,"./protocol/rest_xml":216,"./sequential_executor":224,"util":318}],201:[function(require,module,exports){
+},{"./core":188,"./protocol/json":212,"./protocol/query":213,"./protocol/rest":214,"./protocol/rest_json":215,"./protocol/rest_xml":216,"./sequential_executor":224,"util":320}],201:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -89396,15 +89402,15 @@ var util = {
   },
 
   urlParse: function urlParse(url) {
-    return require('url').parse(url);
+    return util.url.parse(url);
   },
 
   urlFormat: function urlFormat(url) {
-    return require('url').format(url);
+    return util.url.format(url);
   },
 
   queryStringParse: function queryStringParse(qs) {
-    return require('querystring').parse(qs);
+    return util.querystring.parse(qs);
   },
 
   queryParamsToString: function queryParamsToString(params) {
@@ -90117,7 +90123,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require('_process'))
-},{"../apis/metadata.json":86,"./core":188,"_process":309,"fs":249,"querystring":313,"url":314}],246:[function(require,module,exports){
+},{"../apis/metadata.json":86,"./core":188,"_process":309,"fs":249}],246:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -90390,7 +90396,7 @@ function applyNamespaces(xml, shape) {
 
 module.exports = XmlBuilder;
 
-},{"../util":245,"xmlbuilder":335}],248:[function(require,module,exports){
+},{"../util":245,"xmlbuilder":337}],248:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -95989,7 +95995,7 @@ process.umask = function() { return 0; };
 
 
 	function error(type) {
-		throw new RangeError(errors[type]);
+		throw RangeError(errors[type]);
 	}
 
 
@@ -96282,7 +96288,7 @@ process.umask = function() { return 0; };
 
 	punycode = {
 
-		'version': '1.4.1',
+		'version': '1.3.2',
 
 		'ucs2': {
 			'decode': ucs2decode,
@@ -96304,14 +96310,14 @@ process.umask = function() { return 0; };
 			return punycode;
 		});
 	} else if (freeExports && freeModule) {
-		if (module.exports == freeExports) {
+		if (module.exports == freeExports) { // in Node.js or RingoJS v0.8.0+
 			freeModule.exports = punycode;
-		} else {
+		} else { // in Narwhal or RingoJS v0.7.0-
 			for (key in punycode) {
 				punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
 			}
 		}
-	} else {
+	} else { // in Rhino or a web browser
 		root.punycode = punycode;
 	}
 
@@ -96457,8 +96463,111 @@ exports.encode = exports.stringify = require('./encode');
 
 'use strict';
 
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+module.exports = function(qs, sep, eq, options) {
+  sep = sep || '&';
+  eq = eq || '=';
+  var obj = {};
+
+  if (typeof qs !== 'string' || qs.length === 0) {
+    return obj;
+  }
+
+  var regexp = /\+/g;
+  qs = qs.split(sep);
+
+  var maxKeys = 1000;
+  if (options && typeof options.maxKeys === 'number') {
+    maxKeys = options.maxKeys;
+  }
+
+  var len = qs.length;
+  if (maxKeys > 0 && len > maxKeys) {
+    len = maxKeys;
+  }
+
+  for (var i = 0; i < len; ++i) {
+    var x = qs[i].replace(regexp, '%20'),
+        idx = x.indexOf(eq),
+        kstr, vstr, k, v;
+
+    if (idx >= 0) {
+      kstr = x.substr(0, idx);
+      vstr = x.substr(idx + 1);
+    } else {
+      kstr = x;
+      vstr = '';
+    }
+
+    k = decodeURIComponent(kstr);
+    v = decodeURIComponent(vstr);
+
+    if (!hasOwnProperty(obj, k)) {
+      obj[k] = v;
+    } else if (Array.isArray(obj[k])) {
+      obj[k].push(v);
+    } else {
+      obj[k] = [obj[k], v];
+    }
+  }
+
+  return obj;
+};
+
+},{}],315:[function(require,module,exports){
+
+'use strict';
+
+var stringifyPrimitive = function(v) {
+  switch (typeof v) {
+    case 'string':
+      return v;
+
+    case 'boolean':
+      return v ? 'true' : 'false';
+
+    case 'number':
+      return isFinite(v) ? v : '';
+
+    default:
+      return '';
+  }
+};
+
+module.exports = function(obj, sep, eq, name) {
+  sep = sep || '&';
+  eq = eq || '=';
+  if (obj === null) {
+    obj = undefined;
+  }
+
+  if (typeof obj === 'object') {
+    return Object.keys(obj).map(function(k) {
+      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+      if (Array.isArray(obj[k])) {
+        return obj[k].map(function(v) {
+          return ks + encodeURIComponent(stringifyPrimitive(v));
+        }).join(sep);
+      } else {
+        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+      }
+    }).join(sep);
+
+  }
+
+  if (!name) return '';
+  return encodeURIComponent(stringifyPrimitive(name)) + eq +
+         encodeURIComponent(stringifyPrimitive(obj));
+};
+
+},{}],316:[function(require,module,exports){
+arguments[4][313][0].apply(exports,arguments)
+},{"./decode":314,"./encode":315,"dup":313}],317:[function(require,module,exports){
+
 var punycode = require('punycode');
-var util = require('./util');
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -96486,8 +96595,6 @@ function Url() {
 var protocolPattern = /^([a-z0-9.+-]+:)/i,
     portPattern = /:[0-9]*$/,
 
-    simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/,
-
     delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
 
     unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
@@ -96496,8 +96603,8 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
     nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
     hostEndingChars = ['/', '?', '#'],
     hostnameMaxLen = 255,
-    hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/,
-    hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/,
+    hostnamePartPattern = /^[a-z0-9A-Z_-]{0,63}$/,
+    hostnamePartStart = /^([a-z0-9A-Z_-]{0,63})(.*)$/,
     unsafeProtocol = {
       'javascript': true,
       'javascript:': true
@@ -96521,7 +96628,7 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
     querystring = require('querystring');
 
 function urlParse(url, parseQueryString, slashesDenoteHost) {
-  if (url && util.isObject(url) && url instanceof Url) return url;
+  if (url && isObject(url) && url instanceof Url) return url;
 
   var u = new Url;
   u.parse(url, parseQueryString, slashesDenoteHost);
@@ -96529,42 +96636,13 @@ function urlParse(url, parseQueryString, slashesDenoteHost) {
 }
 
 Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
-  if (!util.isString(url)) {
+  if (!isString(url)) {
     throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
   }
-
-  var queryIndex = url.indexOf('?'),
-      splitter =
-          (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
-      uSplit = url.split(splitter),
-      slashRegex = /\\/g;
-  uSplit[0] = uSplit[0].replace(slashRegex, '/');
-  url = uSplit.join(splitter);
 
   var rest = url;
 
   rest = rest.trim();
-
-  if (!slashesDenoteHost && url.split('#').length === 1) {
-    var simplePath = simplePathPattern.exec(rest);
-    if (simplePath) {
-      this.path = rest;
-      this.href = rest;
-      this.pathname = simplePath[1];
-      if (simplePath[2]) {
-        this.search = simplePath[2];
-        if (parseQueryString) {
-          this.query = querystring.parse(this.search.substr(1));
-        } else {
-          this.query = this.search.substr(1);
-        }
-      } else if (parseQueryString) {
-        this.search = '';
-        this.query = {};
-      }
-      return this;
-    }
-  }
 
   var proto = protocolPattern.exec(rest);
   if (proto) {
@@ -96665,7 +96743,14 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     }
 
     if (!ipv6Hostname) {
-      this.hostname = punycode.toASCII(this.hostname);
+      var domainArray = this.hostname.split('.');
+      var newOut = [];
+      for (var i = 0; i < domainArray.length; ++i) {
+        var s = domainArray[i];
+        newOut.push(s.match(/[^A-Za-z0-9_-]/) ?
+            'xn--' + punycode.encode(s) : s);
+      }
+      this.hostname = newOut.join('.');
     }
 
     var p = this.port ? ':' + this.port : '';
@@ -96685,8 +96770,6 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
 
     for (var i = 0, l = autoEscape.length; i < l; i++) {
       var ae = autoEscape[i];
-      if (rest.indexOf(ae) === -1)
-        continue;
       var esc = encodeURIComponent(ae);
       if (esc === ae) {
         esc = escape(ae);
@@ -96730,7 +96813,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
 };
 
 function urlFormat(obj) {
-  if (util.isString(obj)) obj = urlParse(obj);
+  if (isString(obj)) obj = urlParse(obj);
   if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
   return obj.format();
 }
@@ -96761,7 +96844,7 @@ Url.prototype.format = function() {
   }
 
   if (this.query &&
-      util.isObject(this.query) &&
+      isObject(this.query) &&
       Object.keys(this.query).length) {
     query = querystring.stringify(this.query);
   }
@@ -96803,18 +96886,16 @@ function urlResolveObject(source, relative) {
 }
 
 Url.prototype.resolveObject = function(relative) {
-  if (util.isString(relative)) {
+  if (isString(relative)) {
     var rel = new Url();
     rel.parse(relative, false, true);
     relative = rel;
   }
 
   var result = new Url();
-  var tkeys = Object.keys(this);
-  for (var tk = 0; tk < tkeys.length; tk++) {
-    var tkey = tkeys[tk];
-    result[tkey] = this[tkey];
-  }
+  Object.keys(this).forEach(function(k) {
+    result[k] = this[k];
+  }, this);
 
   result.hash = relative.hash;
 
@@ -96824,12 +96905,10 @@ Url.prototype.resolveObject = function(relative) {
   }
 
   if (relative.slashes && !relative.protocol) {
-    var rkeys = Object.keys(relative);
-    for (var rk = 0; rk < rkeys.length; rk++) {
-      var rkey = rkeys[rk];
-      if (rkey !== 'protocol')
-        result[rkey] = relative[rkey];
-    }
+    Object.keys(relative).forEach(function(k) {
+      if (k !== 'protocol')
+        result[k] = relative[k];
+    });
 
     if (slashedProtocol[result.protocol] &&
         result.hostname && !result.pathname) {
@@ -96842,11 +96921,9 @@ Url.prototype.resolveObject = function(relative) {
 
   if (relative.protocol && relative.protocol !== result.protocol) {
     if (!slashedProtocol[relative.protocol]) {
-      var keys = Object.keys(relative);
-      for (var v = 0; v < keys.length; v++) {
-        var k = keys[v];
+      Object.keys(relative).forEach(function(k) {
         result[k] = relative[k];
-      }
+      });
       result.href = result.format();
       return result;
     }
@@ -96925,7 +97002,7 @@ Url.prototype.resolveObject = function(relative) {
     srcPath = srcPath.concat(relPath);
     result.search = relative.search;
     result.query = relative.query;
-  } else if (!util.isNullOrUndefined(relative.search)) {
+  } else if (!isNullOrUndefined(relative.search)) {
     if (psychotic) {
       result.hostname = result.host = srcPath.shift();
       var authInHost = result.host && result.host.indexOf('@') > 0 ?
@@ -96937,7 +97014,7 @@ Url.prototype.resolveObject = function(relative) {
     }
     result.search = relative.search;
     result.query = relative.query;
-    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+    if (!isNull(result.pathname) || !isNull(result.search)) {
       result.path = (result.pathname ? result.pathname : '') +
                     (result.search ? result.search : '');
     }
@@ -96958,13 +97035,13 @@ Url.prototype.resolveObject = function(relative) {
 
   var last = srcPath.slice(-1)[0];
   var hasTrailingSlash = (
-      (result.host || relative.host || srcPath.length > 1) &&
-      (last === '.' || last === '..') || last === '');
+      (result.host || relative.host) && (last === '.' || last === '..') ||
+      last === '');
 
   var up = 0;
   for (var i = srcPath.length; i >= 0; i--) {
     last = srcPath[i];
-    if (last === '.') {
+    if (last == '.') {
       srcPath.splice(i, 1);
     } else if (last === '..') {
       srcPath.splice(i, 1);
@@ -97017,7 +97094,7 @@ Url.prototype.resolveObject = function(relative) {
     result.pathname = srcPath.join('/');
   }
 
-  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+  if (!isNull(result.pathname) || !isNull(result.search)) {
     result.path = (result.pathname ? result.pathname : '') +
                   (result.search ? result.search : '');
   }
@@ -97040,25 +97117,22 @@ Url.prototype.parseHost = function() {
   if (host) this.hostname = host;
 };
 
-},{"./util":315,"punycode":310,"querystring":313}],315:[function(require,module,exports){
-'use strict';
+function isString(arg) {
+  return typeof arg === "string";
+}
 
-module.exports = {
-  isString: function(arg) {
-    return typeof(arg) === 'string';
-  },
-  isObject: function(arg) {
-    return typeof(arg) === 'object' && arg !== null;
-  },
-  isNull: function(arg) {
-    return arg === null;
-  },
-  isNullOrUndefined: function(arg) {
-    return arg == null;
-  }
-};
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
 
-},{}],316:[function(require,module,exports){
+function isNull(arg) {
+  return arg === null;
+}
+function isNullOrUndefined(arg) {
+  return  arg == null;
+}
+
+},{"punycode":310,"querystring":313}],318:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   module.exports = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor
@@ -97081,14 +97155,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],317:[function(require,module,exports){
+},{}],319:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],318:[function(require,module,exports){
+},{}],320:[function(require,module,exports){
 (function (process,global){
 
 var formatRegExp = /%[sdj%]/g;
@@ -97608,7 +97682,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":317,"_process":309,"inherits":316}],319:[function(require,module,exports){
+},{"./support/isBuffer":319,"_process":309,"inherits":318}],321:[function(require,module,exports){
 (function() {
   var XMLAttribute, create;
 
@@ -97641,7 +97715,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/object/create":303}],320:[function(require,module,exports){
+},{"lodash/object/create":303}],322:[function(require,module,exports){
 (function() {
   var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
 
@@ -97711,7 +97785,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLDeclaration":327,"./XMLDocType":328,"./XMLElement":329,"./XMLStringifier":333}],321:[function(require,module,exports){
+},{"./XMLDeclaration":329,"./XMLDocType":330,"./XMLElement":331,"./XMLStringifier":335}],323:[function(require,module,exports){
 (function() {
   var XMLCData, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -97761,7 +97835,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":330,"lodash/object/create":303}],322:[function(require,module,exports){
+},{"./XMLNode":332,"lodash/object/create":303}],324:[function(require,module,exports){
 (function() {
   var XMLComment, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -97811,7 +97885,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":330,"lodash/object/create":303}],323:[function(require,module,exports){
+},{"./XMLNode":332,"lodash/object/create":303}],325:[function(require,module,exports){
 (function() {
   var XMLDTDAttList, create;
 
@@ -97884,7 +97958,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/object/create":303}],324:[function(require,module,exports){
+},{"lodash/object/create":303}],326:[function(require,module,exports){
 (function() {
   var XMLDTDElement, create, isArray;
 
@@ -97937,7 +98011,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/lang/isArray":295,"lodash/object/create":303}],325:[function(require,module,exports){
+},{"lodash/lang/isArray":295,"lodash/object/create":303}],327:[function(require,module,exports){
 (function() {
   var XMLDTDEntity, create, isObject;
 
@@ -98026,7 +98100,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/lang/isObject":299,"lodash/object/create":303}],326:[function(require,module,exports){
+},{"lodash/lang/isObject":299,"lodash/object/create":303}],328:[function(require,module,exports){
 (function() {
   var XMLDTDNotation, create;
 
@@ -98087,7 +98161,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/object/create":303}],327:[function(require,module,exports){
+},{"lodash/object/create":303}],329:[function(require,module,exports){
 (function() {
   var XMLDeclaration, XMLNode, create, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -98161,7 +98235,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":330,"lodash/lang/isObject":299,"lodash/object/create":303}],328:[function(require,module,exports){
+},{"./XMLNode":332,"lodash/lang/isObject":299,"lodash/object/create":303}],330:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
 
@@ -98354,7 +98428,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLCData":321,"./XMLComment":322,"./XMLDTDAttList":323,"./XMLDTDElement":324,"./XMLDTDEntity":325,"./XMLDTDNotation":326,"./XMLProcessingInstruction":331,"lodash/lang/isObject":299,"lodash/object/create":303}],329:[function(require,module,exports){
+},{"./XMLCData":323,"./XMLComment":324,"./XMLDTDAttList":325,"./XMLDTDElement":326,"./XMLDTDEntity":327,"./XMLDTDNotation":328,"./XMLProcessingInstruction":333,"lodash/lang/isObject":299,"lodash/object/create":303}],331:[function(require,module,exports){
 (function() {
   var XMLAttribute, XMLElement, XMLNode, XMLProcessingInstruction, create, every, isArray, isFunction, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -98569,7 +98643,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLAttribute":319,"./XMLNode":330,"./XMLProcessingInstruction":331,"lodash/collection/every":261,"lodash/lang/isArray":295,"lodash/lang/isFunction":297,"lodash/lang/isObject":299,"lodash/object/create":303}],330:[function(require,module,exports){
+},{"./XMLAttribute":321,"./XMLNode":332,"./XMLProcessingInstruction":333,"lodash/collection/every":261,"lodash/lang/isArray":295,"lodash/lang/isFunction":297,"lodash/lang/isObject":299,"lodash/object/create":303}],332:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isArray, isEmpty, isFunction, isObject,
     hasProp = {}.hasOwnProperty;
@@ -98904,7 +98978,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLCData":321,"./XMLComment":322,"./XMLDeclaration":327,"./XMLDocType":328,"./XMLElement":329,"./XMLRaw":332,"./XMLText":334,"lodash/lang/isArray":295,"lodash/lang/isEmpty":296,"lodash/lang/isFunction":297,"lodash/lang/isObject":299}],331:[function(require,module,exports){
+},{"./XMLCData":323,"./XMLComment":324,"./XMLDeclaration":329,"./XMLDocType":330,"./XMLElement":331,"./XMLRaw":334,"./XMLText":336,"lodash/lang/isArray":295,"lodash/lang/isEmpty":296,"lodash/lang/isFunction":297,"lodash/lang/isObject":299}],333:[function(require,module,exports){
 (function() {
   var XMLProcessingInstruction, create;
 
@@ -98956,7 +99030,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"lodash/object/create":303}],332:[function(require,module,exports){
+},{"lodash/object/create":303}],334:[function(require,module,exports){
 (function() {
   var XMLNode, XMLRaw, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -99006,7 +99080,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":330,"lodash/object/create":303}],333:[function(require,module,exports){
+},{"./XMLNode":332,"lodash/object/create":303}],335:[function(require,module,exports){
 (function() {
   var XMLStringifier,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -99174,7 +99248,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{}],334:[function(require,module,exports){
+},{}],336:[function(require,module,exports){
 (function() {
   var XMLNode, XMLText, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -99224,7 +99298,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLNode":330,"lodash/object/create":303}],335:[function(require,module,exports){
+},{"./XMLNode":332,"lodash/object/create":303}],337:[function(require,module,exports){
 (function() {
   var XMLBuilder, assign;
 
@@ -99239,7 +99313,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this);
 
-},{"./XMLBuilder":320,"lodash/object/assign":302}],336:[function(require,module,exports){
+},{"./XMLBuilder":322,"lodash/object/assign":302}],338:[function(require,module,exports){
 require('./browser_loader');
 
 var AWS = require('./core');
@@ -99250,5 +99324,5 @@ if (typeof self !== 'undefined') self.AWS = AWS;
 
 
 require('../clients/browser_default');
-},{"../clients/browser_default":131,"./browser_loader":185,"./core":188}]},{},[336]);
+},{"../clients/browser_default":131,"./browser_loader":185,"./core":188}]},{},[338]);
 
