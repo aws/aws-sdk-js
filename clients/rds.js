@@ -4,7 +4,7 @@ var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['rds'] = {};
-AWS.RDS = Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-09-09', '2014-10-31']);
+AWS.RDS = Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-09-09', '2014-09-01*', '2014-10-31']);
 Object.defineProperty(apiLoader.services['rds'], '2013-01-10', {
   get: function get() {
     var model = require('../apis/rds-2013-01-10.min.json');

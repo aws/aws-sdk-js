@@ -1,6 +1,7 @@
 helpers = require('./helpers')
 AWS = helpers.AWS
 MockService = helpers.MockService
+metadata = require('../apis/metadata.json')
 
 describe 'AWS.Service', ->
 
@@ -134,6 +135,18 @@ describe 'AWS.Service', ->
       expect(service.config.endpoint).to.equal('https://mockservice.mock-region.domain.tld')
       service = new MockService(sslEnabled: false, endpoint: '{scheme}://{service}.{region}.domain.tld')
       expect(service.config.endpoint).to.equal('http://mockservice.mock-region.domain.tld')
+
+    describe 'will work with', ->
+      allServices = require('../clients/all')
+      for own className, ctor of allServices
+        serviceIdentifier = className.toLowerCase()
+        # check for obsolete versions
+        obsoleteVersions = metadata[serviceIdentifier].versions || []
+        for version in obsoleteVersions
+          ((ctor, id, v) ->
+            it id + ' version ' + v, ->
+              expect(-> new ctor(apiVersion: v)).not.to.throw()
+          )(ctor, serviceIdentifier, version)
 
   describe 'setEndpoint', ->
     FooService = null

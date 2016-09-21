@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "apiVersion",
+  "description": "Fixes an issue where some service clients would fail to instantiate if an older apiVersion was specified."
+}
