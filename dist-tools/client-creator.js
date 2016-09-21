@@ -80,6 +80,7 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
   if (!modelVersions) {
       throw new Error('Unable to get models for ' + modelName);
   }
+  var obsoleteVersions = serviceMetadata.versions || [];
   var versionNumbers = Object.keys(modelVersions);
   var tab = '  ';
   var code = '';
@@ -88,7 +89,7 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
   code += 'var Service = require(\'../lib/service\');\n';
   code += 'var apiLoader = require(\'../lib/api_loader\');\n\n';
   code += 'apiLoader.services[\'' + serviceName +'\'] = {};\n';
-  code += 'AWS.' + className + ' = Service.defineService(\'' + serviceName + '\', [\'' + versionNumbers.join('\', \'') + '\']);\n';
+  code += 'AWS.' + className + ' = Service.defineService(\'' + serviceName + '\', [\'' + [].concat(obsoleteVersions, versionNumbers).sort().join('\', \'') + '\']);\n';
   // pull in service customizations
   if (this.customizationsExist(serviceName)) {
     code += 'require(\'../lib/services/' + serviceName + '\');\n';
