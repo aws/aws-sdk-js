@@ -3466,7 +3466,7 @@
       "members":{
         "type":{
           "shape":"IntegrationType",
-          "documentation":"<p>Specifies the integration's type. The valid value is <code>HTTP</code>, <code>AWS</code>, or <code>MOCK</code>.</p>"
+          "documentation":"<p>Specifies the integration's type. The valid value is <code>HTTP</code> for integrating with an HTTP back end, <code>AWS</code> for any AWS service endpoints, <code>MOCK</code> for testing without actually invoking the back end, <code>HTTP_PROXY</code> for integrating with the HTTP proxy integration, or <code>AWS_PROXY</code> for integrating with the Lambda proxy integration type.</p>"
         },
         "httpMethod":{
           "shape":"String",
@@ -3531,11 +3531,13 @@
     },
     "IntegrationType":{
       "type":"string",
-      "documentation":"<p>The integration type. The valid value is <code>HTTP</code>, <code>AWS</code>, or <code>MOCK</code>.</p>",
+      "documentation":"<p>The integration type. The valid value is <code>HTTP</code> for integrating with an HTTP back end, <code>AWS</code> for any AWS service endpoints, <code>MOCK</code> for testing without actually invoking the back end, <code>HTTP_PROXY</code> for integrating with the HTTP proxy integration, or <code>AWS_PROXY</code> for integrating with the Lambda proxy integration type.</p>",
       "enum":[
         "HTTP",
         "AWS",
-        "MOCK"
+        "MOCK",
+        "HTTP_PROXY",
+        "AWS_PROXY"
       ]
     },
     "LimitExceededException":{
@@ -3843,11 +3845,22 @@
     },
     "NullableBoolean":{"type":"boolean"},
     "NullableInteger":{"type":"integer"},
+    "Op":{
+      "type":"string",
+      "enum":[
+        "add",
+        "remove",
+        "replace",
+        "move",
+        "copy",
+        "test"
+      ]
+    },
     "PatchOperation":{
       "type":"structure",
       "members":{
         "op":{
-          "shape":"op",
+          "shape":"Op",
           "documentation":"<p>An update operation to be performed with this PATCH request. The valid value can be \"add\", \"remove\", or \"replace\". Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.</p>"
         },
         "path":{
@@ -4297,7 +4310,7 @@
         },
         "methodSettings":{
           "shape":"MapOfMethodSettings",
-          "documentation":"<p>A map that defines the method settings for a <a>Stage</a> resource. Keys (designated as <code>/{method_setting_key</code> below) are method paths defined as <code>{resource_path}/{http_method}</code> for an individual method override, or <code>/\\*/\\*</code> for overriding all methods in the stage. Any forward slash (\"/\") characters in the <code>resource_path</code> part must be encoded as \"~1\" as in, for example, <code>~1resource~1sub-resource/GET</code>.</p>"
+          "documentation":"<p>A map that defines the method settings for a <a>Stage</a> resource. Keys (designated as <code>/{method_setting_key</code> below) are method paths defined as <code>{resource_path}/{http_method}</code> for an individual method override, or <code>/\\*/\\*</code> for overriding all methods in the stage. </p>"
         },
         "variables":{
           "shape":"MapOfStringToString",
@@ -5068,17 +5081,6 @@
         }
       },
       "documentation":"<p>Represents a collection of usage plans for an AWS account.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>"
-    },
-    "op":{
-      "type":"string",
-      "enum":[
-        "add",
-        "remove",
-        "replace",
-        "move",
-        "copy",
-        "test"
-      ]
     }
   },
   "documentation":"<fullname>Amazon API Gateway</fullname> <p>Amazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends. Amazon API Gateway allows developers to securely connect mobile and web applications to APIs that run on AWS Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>"
