@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.4-->
+<!--LATEST=2.6.5-->
 <!--ENTRYINSERT-->
+
+## 2.6.5
+* bugfix: apiVersion: Fixes an issue where some service clients would fail to instantiate if an older apiVersion was specified.
+* feature: CloudFormation: Adds support for specifying an IAM service role for CloudFormation stack operations.
 
 ## 2.6.4
 * bugfix: Browser: Updates `url` and `querystring` dependencies to be controlled by the SDK instead of tools like browserify or webpack.
