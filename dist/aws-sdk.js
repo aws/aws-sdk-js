@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.6.4
+// AWS SDK for JavaScript v2.6.5
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -5552,7 +5552,8 @@ module.exports={
           "StackName"
         ],
         "members": {
-          "StackName": {}
+          "StackName": {},
+          "RoleARN": {}
         }
       },
       "output": {
@@ -5576,19 +5577,20 @@ module.exports={
             "type": "boolean"
           },
           "Parameters": {
-            "shape": "Sa"
+            "shape": "Sb"
           },
           "Capabilities": {
-            "shape": "Sf"
+            "shape": "Sg"
           },
           "ResourceTypes": {
-            "shape": "Sh"
+            "shape": "Si"
           },
+          "RoleARN": {},
           "NotificationARNs": {
-            "shape": "Sj"
+            "shape": "Sk"
           },
           "Tags": {
-            "shape": "Sl"
+            "shape": "Sm"
           },
           "ChangeSetName": {},
           "ClientToken": {},
@@ -5614,7 +5616,7 @@ module.exports={
           "TemplateBody": {},
           "TemplateURL": {},
           "Parameters": {
-            "shape": "Sa"
+            "shape": "Sb"
           },
           "DisableRollback": {
             "type": "boolean"
@@ -5623,19 +5625,20 @@ module.exports={
             "type": "integer"
           },
           "NotificationARNs": {
-            "shape": "Sj"
+            "shape": "Sk"
           },
           "Capabilities": {
-            "shape": "Sf"
+            "shape": "Sg"
           },
           "ResourceTypes": {
-            "shape": "Sh"
+            "shape": "Si"
           },
+          "RoleARN": {},
           "OnFailure": {},
           "StackPolicyBody": {},
           "StackPolicyURL": {},
           "Tags": {
-            "shape": "Sl"
+            "shape": "Sm"
           }
         }
       },
@@ -5675,7 +5678,8 @@ module.exports={
           "RetainResources": {
             "type": "list",
             "member": {}
-          }
+          },
+          "RoleARN": {}
         }
       }
     },
@@ -5728,7 +5732,7 @@ module.exports={
           "StackName": {},
           "Description": {},
           "Parameters": {
-            "shape": "Sa"
+            "shape": "Sb"
           },
           "CreationTime": {
             "type": "timestamp"
@@ -5737,13 +5741,13 @@ module.exports={
           "Status": {},
           "StatusReason": {},
           "NotificationARNs": {
-            "shape": "Sj"
+            "shape": "Sk"
           },
           "Capabilities": {
-            "shape": "Sf"
+            "shape": "Sg"
           },
           "Tags": {
-            "shape": "Sl"
+            "shape": "Sm"
           },
           "Changes": {
             "type": "list",
@@ -5942,7 +5946,7 @@ module.exports={
                 "StackName": {},
                 "Description": {},
                 "Parameters": {
-                  "shape": "Sa"
+                  "shape": "Sb"
                 },
                 "CreationTime": {
                   "type": "timestamp"
@@ -5956,13 +5960,13 @@ module.exports={
                   "type": "boolean"
                 },
                 "NotificationARNs": {
-                  "shape": "Sj"
+                  "shape": "Sk"
                 },
                 "TimeoutInMinutes": {
                   "type": "integer"
                 },
                 "Capabilities": {
-                  "shape": "Sf"
+                  "shape": "Sg"
                 },
                 "Outputs": {
                   "type": "list",
@@ -5975,8 +5979,9 @@ module.exports={
                     }
                   }
                 },
+                "RoleARN": {},
                 "Tags": {
-                  "shape": "Sl"
+                  "shape": "Sm"
                 }
               }
             }
@@ -5992,7 +5997,7 @@ module.exports={
           "TemplateBody": {},
           "TemplateURL": {},
           "Parameters": {
-            "shape": "Sa"
+            "shape": "Sb"
           }
         }
       },
@@ -6096,11 +6101,11 @@ module.exports={
           },
           "Description": {},
           "Capabilities": {
-            "shape": "Sf"
+            "shape": "Sg"
           },
           "CapabilitiesReason": {},
           "ResourceTypes": {
-            "shape": "Sh"
+            "shape": "Si"
           },
           "Version": {},
           "Metadata": {}
@@ -6278,21 +6283,22 @@ module.exports={
           "StackPolicyDuringUpdateBody": {},
           "StackPolicyDuringUpdateURL": {},
           "Parameters": {
-            "shape": "Sa"
+            "shape": "Sb"
           },
           "Capabilities": {
-            "shape": "Sf"
+            "shape": "Sg"
           },
           "ResourceTypes": {
-            "shape": "Sh"
+            "shape": "Si"
           },
+          "RoleARN": {},
           "StackPolicyBody": {},
           "StackPolicyURL": {},
           "NotificationARNs": {
-            "shape": "Sj"
+            "shape": "Sk"
           },
           "Tags": {
-            "shape": "Sl"
+            "shape": "Sm"
           }
         }
       },
@@ -6332,7 +6338,7 @@ module.exports={
           },
           "Description": {},
           "Capabilities": {
-            "shape": "Sf"
+            "shape": "Sg"
           },
           "CapabilitiesReason": {}
         }
@@ -6340,7 +6346,7 @@ module.exports={
     }
   },
   "shapes": {
-    "Sa": {
+    "Sb": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -6353,19 +6359,19 @@ module.exports={
         }
       }
     },
-    "Sf": {
+    "Sg": {
       "type": "list",
       "member": {}
     },
-    "Sh": {
+    "Si": {
       "type": "list",
       "member": {}
     },
-    "Sj": {
+    "Sk": {
       "type": "list",
       "member": {}
     },
-    "Sl": {
+    "Sm": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -81436,7 +81442,7 @@ var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudfront'] = {};
-AWS.CloudFront = Service.defineService('cloudfront', ['2016-09-07']);
+AWS.CloudFront = Service.defineService('cloudfront', ['2013-05-12*', '2013-11-11*', '2014-05-31*', '2014-10-21*', '2014-11-06*', '2015-04-17*', '2015-07-27*', '2015-09-17*', '2016-01-13*', '2016-01-28*', '2016-08-01*', '2016-08-20*', '2016-09-07']);
 require('../lib/services/cloudfront');
 Object.defineProperty(apiLoader.services['cloudfront'], '2016-09-07', {
   get: function get() {
@@ -81518,7 +81524,7 @@ var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudwatchevents'] = {};
-AWS.CloudWatchEvents = Service.defineService('cloudwatchevents', ['2015-10-07']);
+AWS.CloudWatchEvents = Service.defineService('cloudwatchevents', ['2014-02-03*', '2015-10-07']);
 Object.defineProperty(apiLoader.services['cloudwatchevents'], '2015-10-07', {
   get: function get() {
     var model = require('../apis/events-2015-10-07.min.json');
@@ -81786,7 +81792,7 @@ var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['ec2'] = {};
-AWS.EC2 = Service.defineService('ec2', ['2016-04-01']);
+AWS.EC2 = Service.defineService('ec2', ['2013-06-15*', '2013-10-15*', '2014-02-01*', '2014-05-01*', '2014-06-15*', '2014-09-01*', '2014-10-01*', '2015-03-01*', '2015-04-15*', '2015-10-01*', '2016-04-01']);
 require('../lib/services/ec2');
 Object.defineProperty(apiLoader.services['ec2'], '2016-04-01', {
   get: function get() {
@@ -81848,7 +81854,7 @@ var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['elasticache'] = {};
-AWS.ElastiCache = Service.defineService('elasticache', ['2015-02-02']);
+AWS.ElastiCache = Service.defineService('elasticache', ['2012-11-15*', '2014-03-24*', '2014-07-15*', '2014-09-30*', '2015-02-02']);
 Object.defineProperty(apiLoader.services['elasticache'], '2015-02-02', {
   get: function get() {
     var model = require('../apis/elasticache-2015-02-02.min.json');
@@ -82010,7 +82016,7 @@ var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['inspector'] = {};
-AWS.Inspector = Service.defineService('inspector', ['2016-02-16']);
+AWS.Inspector = Service.defineService('inspector', ['2015-08-18*', '2016-02-16']);
 Object.defineProperty(apiLoader.services['inspector'], '2016-02-16', {
   get: function get() {
     var model = require('../apis/inspector-2016-02-16.min.json');
@@ -82219,7 +82225,7 @@ var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['rds'] = {};
-AWS.RDS = Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-09-09', '2014-10-31']);
+AWS.RDS = Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-09-09', '2014-09-01*', '2014-10-31']);
 Object.defineProperty(apiLoader.services['rds'], '2013-01-10', {
   get: function get() {
     var model = require('../apis/rds-2013-01-10.min.json');
@@ -82894,7 +82900,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.6.4',
+  VERSION: '2.6.5',
 
 
   Signers: {},
@@ -90399,6 +90405,7 @@ module.exports = XmlBuilder;
 },{"../util":245,"xmlbuilder":337}],248:[function(require,module,exports){
 'use strict'
 
+exports.byteLength = byteLength
 exports.toByteArray = toByteArray
 exports.fromByteArray = fromByteArray
 
@@ -90406,28 +90413,32 @@ var lookup = []
 var revLookup = []
 var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
 
-function init () {
-  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-  for (var i = 0, len = code.length; i < len; ++i) {
-    lookup[i] = code[i]
-    revLookup[code.charCodeAt(i)] = i
-  }
-
-  revLookup['-'.charCodeAt(0)] = 62
-  revLookup['_'.charCodeAt(0)] = 63
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
 }
 
-init()
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
 
-function toByteArray (b64) {
-  var i, j, l, tmp, placeHolders, arr
+function placeHoldersCount (b64) {
   var len = b64.length
-
   if (len % 4 > 0) {
     throw new Error('Invalid string. Length must be a multiple of 4')
   }
 
-  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+}
+
+function byteLength (b64) {
+  return b64.length * 3 / 4 - placeHoldersCount(b64)
+}
+
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
+  var len = b64.length
+  placeHolders = placeHoldersCount(b64)
 
   arr = new Arr(len * 3 / 4 - placeHolders)
 
