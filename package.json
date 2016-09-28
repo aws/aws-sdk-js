@@ -21,7 +21,7 @@
       "coffeeify": "*",
       "browserify": "13.1.0",
       "uglify-js": "2.x",
-      "mocha": "*",
+      "mocha": "2.2.4",
       "chai": "*",
       "istanbul": "*",
       "coveralls": "2.x",
