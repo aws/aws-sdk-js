@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.5-->
+<!--LATEST=2.6.6-->
 <!--ENTRYINSERT-->
+
+## 2.6.6
+* feature: EC2: Adding support for EC2 Convertible RIs and the EC2 RI regional benefit.
+* feature: S3: S3 API update with partNumber extension and a bug fix to address list-objects command failing when a bucket is marked with request-pays.
 
 ## 2.6.5
 * bugfix: apiVersion: Fixes an issue where some service clients would fail to instantiate if an older apiVersion was specified.
