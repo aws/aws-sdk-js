@@ -1,15 +1,25 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2016-04-01",
+    "apiVersion":"2016-09-15",
     "endpointPrefix":"ec2",
     "protocol":"ec2",
     "serviceAbbreviation":"Amazon EC2",
     "serviceFullName":"Amazon Elastic Compute Cloud",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://ec2.amazonaws.com/doc/2016-04-01"
+    "xmlNamespace":"http://ec2.amazonaws.com/doc/2016-09-15"
   },
   "operations":{
+    "AcceptReservedInstancesExchangeQuote":{
+      "name":"AcceptReservedInstancesExchangeQuote",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AcceptReservedInstancesExchangeQuoteRequest"},
+      "output":{"shape":"AcceptReservedInstancesExchangeQuoteResult"},
+      "documentation":"<p>Purchases Convertible Reserved Instance offerings described in the <a>GetReservedInstancesExchangeQuote</a> call.</p>"
+    },
     "AcceptVpcPeeringConnection":{
       "name":"AcceptVpcPeeringConnection",
       "http":{
@@ -379,7 +389,7 @@
       },
       "input":{"shape":"CreateReservedInstancesListingRequest"},
       "output":{"shape":"CreateReservedInstancesListingResult"},
-      "documentation":"<p>Creates a listing for Amazon EC2 Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Reserved Instance listing at a time. To get a list of your Reserved Instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <p>The Reserved Instance Marketplace matches sellers who want to resell Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances.</p> <p>To sell your Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Reserved Instances, and specify the upfront price to receive for them. Your Reserved Instance listings then become available for purchase. To view the details of your Reserved Instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <p>The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances.</p> <p>To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateRoute":{
       "name":"CreateRoute",
@@ -1216,7 +1226,7 @@
       },
       "input":{"shape":"DescribeSpotFleetRequestsRequest"},
       "output":{"shape":"DescribeSpotFleetRequestsResponse"},
-      "documentation":"<p>Describes your Spot fleet requests.</p>"
+      "documentation":"<p>Describes your Spot fleet requests.</p> <p>Spot fleet requests are deleted 48 hours after they are canceled and their instances are terminated.</p>"
     },
     "DescribeSpotInstanceRequests":{
       "name":"DescribeSpotInstanceRequests",
@@ -1226,7 +1236,7 @@
       },
       "input":{"shape":"DescribeSpotInstanceRequestsRequest"},
       "output":{"shape":"DescribeSpotInstanceRequestsResult"},
-      "documentation":"<p>Describes the Spot instance requests that belong to your account. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot instance capacity and current Spot instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can use <code>DescribeSpotInstanceRequests</code> to find a running Spot instance by examining the response. If the status of the Spot instance is <code>fulfilled</code>, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use <a>DescribeInstances</a> with a filter to look for instances where the instance lifecycle is <code>spot</code>.</p>"
+      "documentation":"<p>Describes the Spot instance requests that belong to your account. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot instance capacity and current Spot instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can use <code>DescribeSpotInstanceRequests</code> to find a running Spot instance by examining the response. If the status of the Spot instance is <code>fulfilled</code>, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use <a>DescribeInstances</a> with a filter to look for instances where the instance lifecycle is <code>spot</code>.</p> <p>Spot instance requests are deleted 4 hours after they are canceled and their instances are terminated.</p>"
     },
     "DescribeSpotPriceHistory":{
       "name":"DescribeSpotPriceHistory",
@@ -1560,6 +1570,16 @@
       "output":{"shape":"GetPasswordDataResult"},
       "documentation":"<p>Retrieves the encrypted administrator password for an instance running Windows.</p> <p>The Windows password is generated at boot if the <code>EC2Config</code> service plugin, <code>Ec2SetPassword</code>, is enabled. This usually only happens the first time an AMI is launched, and then <code>Ec2SetPassword</code> is automatically disabled. The password is not generated for rebundled AMIs unless <code>Ec2SetPassword</code> is enabled before bundling.</p> <p>The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file.</p> <p>Password generation and encryption takes a few moments. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.</p>"
     },
+    "GetReservedInstancesExchangeQuote":{
+      "name":"GetReservedInstancesExchangeQuote",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetReservedInstancesExchangeQuoteRequest"},
+      "output":{"shape":"GetReservedInstancesExchangeQuoteResult"},
+      "documentation":"<p>Returns details about the values and term of your specified Convertible Reserved Instances. When an offering ID is specified it returns information about whether the exchange is valid and can be performed.</p>"
+    },
     "ImportImage":{
       "name":"ImportImage",
       "http":{
@@ -1683,7 +1703,7 @@
       },
       "input":{"shape":"ModifyReservedInstancesRequest"},
       "output":{"shape":"ModifyReservedInstancesResult"},
-      "documentation":"<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
+      "documentation":"<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Standard Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
     },
     "ModifySnapshotAttribute":{
       "name":"ModifySnapshotAttribute",
@@ -1789,7 +1809,7 @@
       },
       "input":{"shape":"PurchaseReservedInstancesOfferingRequest"},
       "output":{"shape":"PurchaseReservedInstancesOfferingResult"},
-      "documentation":"<p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you obtain a capacity reservation for a certain instance configuration over a specified period of time and pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html\">Reserved Instances</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html\">Reserved Instances</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "PurchaseScheduledInstances":{
       "name":"PurchaseScheduledInstances",
@@ -2028,7 +2048,7 @@
       },
       "input":{"shape":"TerminateInstancesRequest"},
       "output":{"shape":"TerminateInstancesResult"},
-      "documentation":"<p>Shuts down one or more instances. This operation is idempotent; if you terminate an instance more than once, each call succeeds.</p> <p>Terminated instances remain visible after termination (for approximately one hour).</p> <p>By default, Amazon EC2 deletes all EBS volumes that were attached when the instance launched. Volumes attached after instance launch continue running.</p> <p>You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, any attached EBS volumes with the <code>DeleteOnTermination</code> block device mapping parameter set to <code>true</code> are automatically deleted. For more information about the differences between stopping and terminating instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html\">Troubleshooting Terminating Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Shuts down one or more instances. This operation is idempotent; if you terminate an instance more than once, each call succeeds. </p> <p>If you specify multiple instances and the request fails (for example, because of a single incorrect instance ID), none of the instances are terminated.</p> <p>Terminated instances remain visible after termination (for approximately one hour).</p> <p>By default, Amazon EC2 deletes all EBS volumes that were attached when the instance launched. Volumes attached after instance launch continue running.</p> <p>You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, any attached EBS volumes with the <code>DeleteOnTermination</code> block device mapping parameter set to <code>true</code> are automatically deleted. For more information about the differences between stopping and terminating instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about troubleshooting, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html\">Troubleshooting Terminating Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "UnassignPrivateIpAddresses":{
       "name":"UnassignPrivateIpAddresses",
@@ -2051,6 +2071,38 @@
     }
   },
   "shapes":{
+    "AcceptReservedInstancesExchangeQuoteRequest":{
+      "type":"structure",
+      "required":["ReservedInstanceIds"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ReservedInstanceIds":{
+          "shape":"ReservedInstanceIdSet",
+          "documentation":"<p>The IDs of the Convertible Reserved Instances that you want to exchange for other Convertible Reserved Instances of the same or higher value.</p>",
+          "locationName":"ReservedInstanceId"
+        },
+        "TargetConfigurations":{
+          "shape":"TargetConfigurationRequestSet",
+          "documentation":"<p>The configurations of the Convertible Reserved Instance offerings you are purchasing in this exchange.</p>",
+          "locationName":"TargetConfiguration"
+        }
+      },
+      "documentation":"<p>Contains the parameters for accepting the quote.</p>"
+    },
+    "AcceptReservedInstancesExchangeQuoteResult":{
+      "type":"structure",
+      "members":{
+        "ExchangeId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the successful exchange.</p>",
+          "locationName":"exchangeId"
+        }
+      },
+      "documentation":"<p>The result of the exchange and whether it was <code>successful</code>.</p>"
+    },
     "AcceptVpcPeeringConnectionRequest":{
       "type":"structure",
       "members":{
@@ -4134,7 +4186,7 @@
       "members":{
         "ReservedInstancesId":{
           "shape":"String",
-          "documentation":"<p>The ID of the active Reserved Instance.</p>",
+          "documentation":"<p>The ID of the active Standard Reserved Instance.</p>",
           "locationName":"reservedInstancesId"
         },
         "InstanceCount":{
@@ -4144,7 +4196,7 @@
         },
         "PriceSchedules":{
           "shape":"PriceScheduleSpecificationList",
-          "documentation":"<p>A list specifying the price of the Reserved Instance for each month remaining in the Reserved Instance term.</p>",
+          "documentation":"<p>A list specifying the price of the Standard Reserved Instance for each month remaining in the Reserved Instance term.</p>",
           "locationName":"priceSchedules"
         },
         "ClientToken":{
@@ -4160,7 +4212,7 @@
       "members":{
         "ReservedInstancesListings":{
           "shape":"ReservedInstancesListingList",
-          "documentation":"<p>Information about the Reserved Instance listing.</p>",
+          "documentation":"<p>Information about the Standard Reserved Instance listing.</p>",
           "locationName":"reservedInstancesListingsSet"
         }
       },
@@ -5424,11 +5476,6 @@
           "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName":"dryRun"
         },
-        "Filters":{
-          "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p>",
-          "locationName":"filter"
-        },
         "ConversionTaskIds":{
           "shape":"ConversionIdStringList",
           "documentation":"<p>One or more conversion task IDs.</p>",
@@ -6408,7 +6455,7 @@
         "Filters":{
           "shape":"FilterList",
           "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>reserved-instances-id</code> - The ID of the Reserved Instances.</p> </li> <li> <p> <code>reserved-instances-listing-id</code> - The ID of the Reserved Instances listing.</p> </li> <li> <p> <code>status</code> - The status of the Reserved Instance listing (<code>pending</code> | <code>active</code> | <code>cancelled</code> | <code>closed</code>).</p> </li> <li> <p> <code>status-message</code> - The reason for the status.</p> </li> </ul>",
-          "locationName":"filters"
+          "locationName":"Filter"
         }
       },
       "documentation":"<p>Contains the parameters for DescribeReservedInstancesListings.</p>"
@@ -6488,7 +6535,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone where the Reserved Instance can be used.</p> </li> <li> <p> <code>duration</code> - The duration of the Reserved Instance (for example, one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p> <code>fixed-price</code> - The purchase price of the Reserved Instance (for example, 9800.0).</p> </li> <li> <p> <code>instance-type</code> - The instance type that is covered by the reservation.</p> </li> <li> <p> <code>marketplace</code> - Set to <code>true</code> to show only Reserved Instance Marketplace offerings. When this filter is not used, which is the default behavior, all offerings from both AWS and the Reserved Instance Marketplace are listed.</p> </li> <li> <p> <code>product-description</code> - The Reserved Instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code> Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>) </p> </li> <li> <p> <code>reserved-instances-offering-id</code> - The Reserved Instances offering ID.</p> </li> <li> <p> <code>usage-price</code> - The usage price of the Reserved Instance, per hour (for example, 0.84).</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone where the Reserved Instance can be used.</p> </li> <li> <p> <code>duration</code> - The duration of the Reserved Instance (for example, one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p> <code>fixed-price</code> - The purchase price of the Reserved Instance (for example, 9800.0).</p> </li> <li> <p> <code>instance-type</code> - The instance type that is covered by the reservation.</p> </li> <li> <p> <code>marketplace</code> - Set to <code>true</code> to show only Reserved Instance Marketplace offerings. When this filter is not used, which is the default behavior, all offerings from both AWS and the Reserved Instance Marketplace are listed.</p> </li> <li> <p> <code>product-description</code> - The Reserved Instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC. (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code> Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>) </p> </li> <li> <p> <code>reserved-instances-offering-id</code> - The Reserved Instances offering ID.</p> </li> <li> <p> <code>scope</code> - The scope of the Reserved Instance (<code>Availability Zone</code> or <code>Region</code>).</p> </li> <li> <p> <code>usage-price</code> - The usage price of the Reserved Instance, per hour (for example, 0.84).</p> </li> </ul>",
           "locationName":"Filter"
         },
         "InstanceTenancy":{
@@ -6526,6 +6573,10 @@
         "MaxInstanceCount":{
           "shape":"Integer",
           "documentation":"<p>The maximum number of instances to filter when searching for offerings.</p> <p>Default: 20</p>"
+        },
+        "OfferingClass":{
+          "shape":"OfferingClassType",
+          "documentation":"<p>The offering class of the Reserved Instance. Can be <code>standard</code> or <code>convertible</code>.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for DescribeReservedInstancesOfferings.</p>"
@@ -6561,13 +6612,17 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone where the Reserved Instance can be used.</p> </li> <li> <p> <code>duration</code> - The duration of the Reserved Instance (one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p> <code>end</code> - The time when the Reserved Instance expires (for example, 2015-08-07T11:54:42.000Z).</p> </li> <li> <p> <code>fixed-price</code> - The purchase price of the Reserved Instance (for example, 9800.0).</p> </li> <li> <p> <code>instance-type</code> - The instance type that is covered by the reservation.</p> </li> <li> <p> <code>product-description</code> - The Reserved Instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code>Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>).</p> </li> <li> <p> <code>reserved-instances-id</code> - The ID of the Reserved Instance.</p> </li> <li> <p> <code>start</code> - The time at which the Reserved Instance purchase request was placed (for example, 2014-08-07T11:54:42.000Z).</p> </li> <li> <p> <code>state</code> - The state of the Reserved Instance (<code>payment-pending</code> | <code>active</code> | <code>payment-failed</code> | <code>retired</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>usage-price</code> - The usage price of the Reserved Instance, per hour (for example, 0.84).</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone where the Reserved Instance can be used.</p> </li> <li> <p> <code>duration</code> - The duration of the Reserved Instance (one year or three years), in seconds (<code>31536000</code> | <code>94608000</code>).</p> </li> <li> <p> <code>end</code> - The time when the Reserved Instance expires (for example, 2015-08-07T11:54:42.000Z).</p> </li> <li> <p> <code>fixed-price</code> - The purchase price of the Reserved Instance (for example, 9800.0).</p> </li> <li> <p> <code>instance-type</code> - The instance type that is covered by the reservation.</p> </li> <li> <p> <code>scope</code> - The scope of the Reserved Instance (<code>Region</code> or <code>Availability Zone</code>).</p> </li> <li> <p> <code>product-description</code> - The Reserved Instance product platform description. Instances that include <code>(Amazon VPC)</code> in the product platform description will only be displayed to EC2-Classic account holders and are for use with Amazon VPC (<code>Linux/UNIX</code> | <code>Linux/UNIX (Amazon VPC)</code> | <code>SUSE Linux</code> | <code>SUSE Linux (Amazon VPC)</code> | <code>Red Hat Enterprise Linux</code> | <code>Red Hat Enterprise Linux (Amazon VPC)</code> | <code>Windows</code> | <code>Windows (Amazon VPC)</code> | <code>Windows with SQL Server Standard</code> | <code>Windows with SQL Server Standard (Amazon VPC)</code> | <code>Windows with SQL Server Web</code> | <code>Windows with SQL Server Web (Amazon VPC)</code> | <code>Windows with SQL Server Enterprise</code> | <code>Windows with SQL Server Enterprise (Amazon VPC)</code>).</p> </li> <li> <p> <code>reserved-instances-id</code> - The ID of the Reserved Instance.</p> </li> <li> <p> <code>start</code> - The time at which the Reserved Instance purchase request was placed (for example, 2014-08-07T11:54:42.000Z).</p> </li> <li> <p> <code>state</code> - The state of the Reserved Instance (<code>payment-pending</code> | <code>active</code> | <code>payment-failed</code> | <code>retired</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>usage-price</code> - The usage price of the Reserved Instance, per hour (for example, 0.84).</p> </li> </ul>",
           "locationName":"Filter"
         },
         "OfferingType":{
           "shape":"OfferingTypeValues",
-          "documentation":"<p>The Reserved Instance offering type. If you are using tools that predate the 2011-11-01 API version, you only have access to the <code>Medium Utilization</code> Reserved Instance offering type. </p>",
+          "documentation":"<p>The Reserved Instance offering type. If you are using tools that predate the 2011-11-01 API version, you only have access to the <code>Medium Utilization</code> Reserved Instance offering type.</p>",
           "locationName":"offeringType"
+        },
+        "OfferingClass":{
+          "shape":"OfferingClassType",
+          "documentation":"<p>Describes whether the Reserved Instance is Standard or Convertible.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for DescribeReservedInstances.</p>"
@@ -8743,6 +8798,76 @@
       },
       "documentation":"<p>Contains the output of GetPasswordData.</p>"
     },
+    "GetReservedInstancesExchangeQuoteRequest":{
+      "type":"structure",
+      "required":["ReservedInstanceIds"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ReservedInstanceIds":{
+          "shape":"ReservedInstanceIdSet",
+          "documentation":"<p>The ID/s of the Convertible Reserved Instances you want to exchange.</p>",
+          "locationName":"ReservedInstanceId"
+        },
+        "TargetConfigurations":{
+          "shape":"TargetConfigurationRequestSet",
+          "documentation":"<p>The configuration requirements of the Convertible Reserved Instances you want in exchange for your current Convertible Reserved Instances.</p>",
+          "locationName":"TargetConfiguration"
+        }
+      },
+      "documentation":"<p>Contains the parameters for GetReservedInstanceExchangeQuote.</p>"
+    },
+    "GetReservedInstancesExchangeQuoteResult":{
+      "type":"structure",
+      "members":{
+        "ReservedInstanceValueSet":{
+          "shape":"ReservedInstanceReservationValueSet",
+          "documentation":"<p>The configuration of your Convertible Reserved Instances.</p>",
+          "locationName":"reservedInstanceValueSet"
+        },
+        "ReservedInstanceValueRollup":{
+          "shape":"ReservationValue",
+          "locationName":"reservedInstanceValueRollup"
+        },
+        "TargetConfigurationValueSet":{
+          "shape":"TargetReservationValueSet",
+          "documentation":"<p>The values of the target Convertible Reserved Instances.</p>",
+          "locationName":"targetConfigurationValueSet"
+        },
+        "TargetConfigurationValueRollup":{
+          "shape":"ReservationValue",
+          "locationName":"targetConfigurationValueRollup"
+        },
+        "PaymentDue":{
+          "shape":"String",
+          "documentation":"<p>The total true upfront charge for the exchange.</p>",
+          "locationName":"paymentDue"
+        },
+        "CurrencyCode":{
+          "shape":"String",
+          "documentation":"<p>The currency of the transaction.</p>",
+          "locationName":"currencyCode"
+        },
+        "OutputReservedInstancesWillExpireAt":{
+          "shape":"DateTime",
+          "documentation":"<p>The new end date of the reservation term.</p>",
+          "locationName":"outputReservedInstancesWillExpireAt"
+        },
+        "IsValidExchange":{
+          "shape":"Boolean",
+          "documentation":"<p>If <code>true</code>, the exchange is valid. If <code>false</code>, the exchange cannot be performed.</p>",
+          "locationName":"isValidExchange"
+        },
+        "ValidationFailureReason":{
+          "shape":"String",
+          "documentation":"<p>Describes the reason why the exchange can not be completed.</p>",
+          "locationName":"validationFailureReason"
+        }
+      },
+      "documentation":"<p>Contains the output of GetReservedInstancesExchangeQuote.</p>"
+    },
     "GroupIdStringList":{
       "type":"list",
       "member":{
@@ -10595,7 +10720,7 @@
         },
         "PrivateIpAddress":{
           "shape":"String",
-          "documentation":"<p>The private IP address of the network interface. Applies only if creating a network interface when launching an instance.</p>",
+          "documentation":"<p>The private IP address of the network interface. Applies only if creating a network interface when launching an instance. You cannot specify this option if you're launching more than one instance in a <a>RunInstances</a> request.</p>",
           "locationName":"privateIpAddress"
         },
         "Groups":{
@@ -10610,13 +10735,13 @@
         },
         "PrivateIpAddresses":{
           "shape":"PrivateIpAddressSpecificationList",
-          "documentation":"<p>One or more private IP addresses to assign to the network interface. Only one private IP address can be designated as primary.</p>",
+          "documentation":"<p>One or more private IP addresses to assign to the network interface. Only one private IP address can be designated as primary. You cannot specify this option if you're launching more than one instance in a <a>RunInstances</a> request.</p>",
           "locationName":"privateIpAddressesSet",
           "queryName":"PrivateIpAddresses"
         },
         "SecondaryPrivateIpAddressCount":{
           "shape":"Integer",
-          "documentation":"<p>The number of secondary private IP addresses. You can't specify this option and specify more than one private IP address using the private IP addresses option.</p>",
+          "documentation":"<p>The number of secondary private IP addresses. You can't specify this option and specify more than one private IP address using the private IP addresses option. You cannot specify this option if you're launching more than one instance in a <a>RunInstances</a> request.</p>",
           "locationName":"secondaryPrivateIpAddressCount"
         },
         "AssociatePublicIpAddress":{
@@ -10864,6 +10989,7 @@
         "m4.2xlarge",
         "m4.4xlarge",
         "m4.10xlarge",
+        "m4.16xlarge",
         "m2.xlarge",
         "m2.2xlarge",
         "m2.4xlarge",
@@ -10873,8 +10999,6 @@
         "r3.2xlarge",
         "r3.4xlarge",
         "r3.8xlarge",
-        "x1.4xlarge",
-        "x1.8xlarge",
         "x1.16xlarge",
         "x1.32xlarge",
         "i2.xlarge",
@@ -10900,6 +11024,9 @@
         "g2.2xlarge",
         "g2.8xlarge",
         "cg1.4xlarge",
+        "p2.xlarge",
+        "p2.8xlarge",
+        "p2.16xlarge",
         "d2.xlarge",
         "d2.2xlarge",
         "d2.4xlarge",
@@ -12402,6 +12529,13 @@
         "locationName":"item"
       }
     },
+    "OfferingClassType":{
+      "type":"string",
+      "enum":[
+        "standard",
+        "convertible"
+      ]
+    },
     "OfferingTypeValues":{
       "type":"string",
       "enum":[
@@ -13791,6 +13925,34 @@
         "retired"
       ]
     },
+    "ReservationValue":{
+      "type":"structure",
+      "members":{
+        "RemainingTotalValue":{
+          "shape":"String",
+          "documentation":"<p>The balance of the total value (the sum of remainingUpfrontValue + hourlyPrice * number of hours remaining).</p>",
+          "locationName":"remainingTotalValue"
+        },
+        "RemainingUpfrontValue":{
+          "shape":"String",
+          "documentation":"<p>The remaining upfront cost of the reservation.</p>",
+          "locationName":"remainingUpfrontValue"
+        },
+        "HourlyPrice":{
+          "shape":"String",
+          "documentation":"<p>The hourly rate of the reservation.</p>",
+          "locationName":"hourlyPrice"
+        }
+      },
+      "documentation":"<p>The cost associated with the Reserved Instance.</p>"
+    },
+    "ReservedInstanceIdSet":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"ReservedInstanceId"
+      }
+    },
     "ReservedInstanceLimitPrice":{
       "type":"structure",
       "members":{
@@ -13806,6 +13968,29 @@
         }
       },
       "documentation":"<p>Describes the limit price of a Reserved Instance offering.</p>"
+    },
+    "ReservedInstanceReservationValue":{
+      "type":"structure",
+      "members":{
+        "ReservedInstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the Convertible Reserved Instance that you are exchanging.</p>",
+          "locationName":"reservedInstanceId"
+        },
+        "ReservationValue":{
+          "shape":"ReservationValue",
+          "documentation":"<p>The total value of the Convertible Reserved Instance that you are exchanging.</p>",
+          "locationName":"reservationValue"
+        }
+      },
+      "documentation":"<p>The total value of the Convertible Reserved Instance.</p>"
+    },
+    "ReservedInstanceReservationValueSet":{
+      "type":"list",
+      "member":{
+        "shape":"ReservedInstanceReservationValue",
+        "locationName":"item"
+      }
     },
     "ReservedInstanceState":{
       "type":"string",
@@ -13898,6 +14083,16 @@
           "shape":"RecurringChargesList",
           "documentation":"<p>The recurring charge tag assigned to the resource.</p>",
           "locationName":"recurringCharges"
+        },
+        "OfferingClass":{
+          "shape":"OfferingClassType",
+          "documentation":"<p>The offering class of the Reserved Instance.</p>",
+          "locationName":"offeringClass"
+        },
+        "Scope":{
+          "shape":"scope",
+          "documentation":"<p>The scope of the Reserved Instance.</p>",
+          "locationName":"scope"
         }
       },
       "documentation":"<p>Describes a Reserved Instance.</p>"
@@ -13924,6 +14119,11 @@
           "shape":"InstanceType",
           "documentation":"<p>The instance type for the modified Reserved Instances.</p>",
           "locationName":"instanceType"
+        },
+        "Scope":{
+          "shape":"scope",
+          "documentation":"<p>Whether the Reserved Instance is <code>standard</code> or <code>convertible</code>.</p>",
+          "locationName":"scope"
         }
       },
       "documentation":"<p>Describes the configuration settings for the modified Reserved Instances.</p>"
@@ -14116,7 +14316,7 @@
       "members":{
         "ReservedInstancesOfferingId":{
           "shape":"String",
-          "documentation":"<p>The ID of the Reserved Instance offering.</p>",
+          "documentation":"<p>The ID of the Reserved Instance offering. This is the offering ID used in <a>GetReservedInstancesExchangeQuote</a> to confirm that an exchange can be made.</p>",
           "locationName":"reservedInstancesOfferingId"
         },
         "InstanceType":{
@@ -14178,6 +14378,16 @@
           "shape":"PricingDetailsList",
           "documentation":"<p>The pricing details of the Reserved Instance offering.</p>",
           "locationName":"pricingDetailsSet"
+        },
+        "OfferingClass":{
+          "shape":"OfferingClassType",
+          "documentation":"<p>If <code>convertible</code> it can be exchanged for Reserved Instances of the same or higher monetary value, with different configurations. If <code>standard</code>, it is not possible to perform an exchange.</p>",
+          "locationName":"offeringClass"
+        },
+        "Scope":{
+          "shape":"scope",
+          "documentation":"<p>Whether the Reserved Instance is applied to instances in a region or an Availability Zone.</p>",
+          "locationName":"scope"
         }
       },
       "documentation":"<p>Describes a Reserved Instance offering.</p>"
@@ -14730,7 +14940,7 @@
         },
         "PrivateIpAddress":{
           "shape":"String",
-          "documentation":"<p>[EC2-VPC] The primary IP address. You must specify a value from the IP address range of the subnet.</p> <p>Only one private IP address can be designated as primary. Therefore, you can't specify this parameter if <code>PrivateIpAddresses.n.Primary</code> is set to <code>true</code> and <code>PrivateIpAddresses.n.PrivateIpAddress</code> is set to an IP address. </p> <p>Default: We select an IP address from the IP address range of the subnet.</p>",
+          "documentation":"<p>[EC2-VPC] The primary IP address. You must specify a value from the IP address range of the subnet.</p> <p>Only one private IP address can be designated as primary. Therefore, you can't specify this parameter if <code>PrivateIpAddresses.n.Primary</code> is set to <code>true</code> and <code>PrivateIpAddresses.n.PrivateIpAddress</code> is set to an IP address. </p> <p>You cannot specify this option if you're launching more than one instance in the request.</p> <p>Default: We select an IP address from the IP address range of the subnet.</p>",
           "locationName":"privateIpAddress"
         },
         "ClientToken":{
@@ -16497,6 +16707,67 @@
         "locationName":"item"
       }
     },
+    "TargetConfiguration":{
+      "type":"structure",
+      "members":{
+        "OfferingId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the Convertible Reserved Instance offering.</p>",
+          "locationName":"offeringId"
+        },
+        "InstanceCount":{
+          "shape":"Integer",
+          "documentation":"<p>The number of instances the Convertible Reserved Instance offering can be applied to. This parameter is reserved and cannot be specified in a request</p>",
+          "locationName":"instanceCount"
+        }
+      },
+      "documentation":"<p>Information about the Convertible Reserved Instance offering.</p>"
+    },
+    "TargetConfigurationRequest":{
+      "type":"structure",
+      "required":["OfferingId"],
+      "members":{
+        "OfferingId":{
+          "shape":"String",
+          "documentation":"<p>The Convertible Reserved Instance offering ID. If this isn't included in the request, the response lists your current Convertible Reserved Instance/s and their value/s.</p>"
+        },
+        "InstanceCount":{
+          "shape":"Integer",
+          "documentation":"<p>The number of instances the Covertible Reserved Instance offering can be applied to. This parameter is reserved and cannot be specified in a request</p>"
+        }
+      },
+      "documentation":"<p>Details about the target configuration.</p>"
+    },
+    "TargetConfigurationRequestSet":{
+      "type":"list",
+      "member":{
+        "shape":"TargetConfigurationRequest",
+        "locationName":"TargetConfigurationRequest"
+      }
+    },
+    "TargetReservationValue":{
+      "type":"structure",
+      "members":{
+        "TargetConfiguration":{
+          "shape":"TargetConfiguration",
+          "documentation":"<p>The configuration of the Convertible Reserved Instances that make up the exchange.</p>",
+          "locationName":"targetConfiguration"
+        },
+        "ReservationValue":{
+          "shape":"ReservationValue",
+          "documentation":"<p>The total value of the Convertible Reserved Instances that make up the exchange. This is the sum of the list value, remaining upfront price, and additional upfront cost of the exchange.</p>",
+          "locationName":"reservationValue"
+        }
+      },
+      "documentation":"<p>The total value of the new Convertible Reserved Instances.</p>"
+    },
+    "TargetReservationValueSet":{
+      "type":"list",
+      "member":{
+        "shape":"TargetReservationValue",
+        "locationName":"item"
+      }
+    },
     "TelemetryStatus":{
       "type":"string",
       "enum":[
@@ -16523,7 +16794,7 @@
         },
         "InstanceIds":{
           "shape":"InstanceIdStringList",
-          "documentation":"<p>One or more instance IDs.</p>",
+          "documentation":"<p>One or more instance IDs.</p> <p>Constraints: Up to 1000 instance IDs. We recommend breaking up this request into smaller batches.</p>",
           "locationName":"InstanceId"
         }
       },
@@ -16600,15 +16871,15 @@
       "type":"structure",
       "required":["Error"],
       "members":{
-        "ResourceId":{
-          "shape":"String",
-          "documentation":"<p>The ID of the resource.</p>",
-          "locationName":"resourceId"
-        },
         "Error":{
           "shape":"UnsuccessfulItemError",
           "documentation":"<p>Information about the error.</p>",
           "locationName":"error"
+        },
+        "ResourceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the resource.</p>",
+          "locationName":"resourceId"
         }
       },
       "documentation":"<p>Information about items that were not successfully processed in a batch call.</p>"
@@ -17623,6 +17894,13 @@
         "shape":"String",
         "locationName":"ZoneName"
       }
+    },
+    "scope":{
+      "type":"string",
+      "enum":[
+        "Availability Zone",
+        "Region"
+      ]
     }
   },
   "documentation":"<fullname>Amazon Elastic Compute Cloud</fullname> <p>Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing capacity in the Amazon Web Services (AWS) cloud. Using Amazon EC2 eliminates your need to invest in hardware up front, so you can develop and deploy applications faster.</p>"
