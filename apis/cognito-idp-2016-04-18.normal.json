@@ -51,6 +51,34 @@
       ],
       "documentation":"<p>Confirms user registration as an admin without using a confirmation code. Works on any user.</p>"
     },
+    "AdminCreateUser":{
+      "name":"AdminCreateUser",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminCreateUserRequest"},
+      "output":{"shape":"AdminCreateUserResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UsernameExistsException"},
+        {"shape":"InvalidPasswordException"},
+        {"shape":"CodeDeliveryFailureException"},
+        {"shape":"UnexpectedLambdaException"},
+        {"shape":"UserLambdaValidationException"},
+        {"shape":"InvalidLambdaResponseException"},
+        {"shape":"PreconditionNotMetException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"UnsupportedUserStateException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Creates a new user in the specified user pool and sends a welcome message via email or phone (SMS). This message is based on a template that you configured in your call to CreateUserPool or UpdateUserPool. This template includes your custom sign-up instructions and placeholders for user name and temporary password.</p> <p>Requires developer credentials.</p>"
+    },
     "AdminDeleteUser":{
       "name":"AdminDeleteUser",
       "http":{
@@ -258,6 +286,7 @@
         {"shape":"CodeMismatchException"},
         {"shape":"ExpiredCodeException"},
         {"shape":"UnexpectedLambdaException"},
+        {"shape":"InvalidPasswordException"},
         {"shape":"UserLambdaValidationException"},
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
@@ -782,6 +811,8 @@
         {"shape":"InvalidParameterException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"PasswordResetRequiredException"},
+        {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Signs out users from all devices.</p>"
@@ -941,6 +972,7 @@
         {"shape":"ExpiredCodeException"},
         {"shape":"UnexpectedLambdaException"},
         {"shape":"UserLambdaValidationException"},
+        {"shape":"InvalidPasswordException"},
         {"shape":"InvalidLambdaResponseException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"InvalidUserPoolConfigurationException"},
@@ -1203,6 +1235,81 @@
       },
       "documentation":"<p>Represents the response from the server for the request to confirm registration.</p>"
     },
+    "AdminCreateUserConfigType":{
+      "type":"structure",
+      "members":{
+        "AllowAdminCreateUserOnly":{
+          "shape":"BooleanType",
+          "documentation":"<p>Set to True if only the administrator is allowed to create user profiles. Set to False if users can sign themselves up via an app.</p>"
+        },
+        "UnusedAccountValidityDays":{
+          "shape":"AdminCreateUserUnusedAccountValidityDaysType",
+          "documentation":"<p>The user account expiration limit, in days, after which the account is no longer usable. To reset the account after that time limit, you must call AdminCreateUser again, specifying \"RESEND\" for the MessageAction parameter.</p>"
+        },
+        "InviteMessageTemplate":{
+          "shape":"MessageTemplateType",
+          "documentation":"<p>The message template to be used for the welcome message to new users.</p>"
+        }
+      },
+      "documentation":"<p>The type of configuration for creating a new user profile.</p>"
+    },
+    "AdminCreateUserRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool where the user will be created.</p>"
+        },
+        "Username":{
+          "shape":"UsernameType",
+          "documentation":"<p>The username for the user. Must be unique within the user pool. Must be a UTF-8 string between 1 and 128 characters. After the user is created, the username cannot be changed.</p>"
+        },
+        "UserAttributes":{
+          "shape":"AttributeListType",
+          "documentation":"<p>An array of name-value pairs that contain user attributes and attribute values to be set for the user to be created. You can create a user without specifying any attributes other than Username. However, any attributes that you specify as required (in CreateUserPool or in the <b>Attributes</b> tab of the console) must be supplied either by you (in your call to AdminCreateUser) or by the user (when he or she signs up in response to your welcome message).</p> <p>To send a message inviting the user to sign up, you must specify the user's email address or phone number. This can be done in your call to AdminCreateUser or in the <b>Users</b> tab of the Amazon Cognito console for managing your user pools.</p> <p>In your call to AdminCreateUser, you can set the email_verified attribute to True, and you can set the phone_number_verified attribute to True. (You cannot do this by calling other operations such as AdminUpdateUserAttributes.)</p> <ul> <li> <p> <b>email</b>: The email address of the user to whom the message that contains the code and username will be sent. Required if the email_verified attribute is set to True, or if \"EMAIL\" is specified in the DesiredDeliveryMediums parameter.</p> </li> <li> <p> <b>phone_number</b>: The phone number of the user to whom the message that contains the code and username will be sent. Required if the phone_number_verified attribute is set to True, or if \"SMS\" is specified in the DesiredDeliveryMediums parameter.</p> </li> </ul>"
+        },
+        "ValidationData":{
+          "shape":"AttributeListType",
+          "documentation":"<p>The user's validation data. This is an array of name-value pairs that contain user attributes and attribute values that you can use for custom validation, such as restricting the types of user accounts that can be registered. For example, you might choose to allow or disallow user sign-up based on the user's domain.</p> <p>To configure custom validation, you must create a Pre Sign-up Lambda trigger for the user pool as described in the Amazon Cognito Developer Guide. The Lambda trigger receives the validation data and uses it in the validation process.</p> <p>The user's validation data is not persisted.</p>"
+        },
+        "TemporaryPassword":{
+          "shape":"PasswordType",
+          "documentation":"<p>The user's temporary password. This password must conform to the password policy that you specified when you created the user pool.</p> <p>The temporary password is valid only once. To complete the Admin Create User flow, the user must enter the temporary password in the sign-in page along with a new password to be used in all future sign-ins.</p> <p>This parameter is not required. If you do not specify a value, Amazon Cognito generates one for you.</p> <p>The temporary password can only be used until the user account expiration limit that you specified when you created the user pool. To reset the account after that time limit, you must call AdminCreateUser again, specifying \"RESEND\" for the MessageAction parameter.</p>"
+        },
+        "ForceAliasCreation":{
+          "shape":"ForceAliasCreation",
+          "documentation":"<p>This parameter is only used if the phone_number_verified or email_verified attribute is set to True. Otherwise, it is ignored.</p> <p>If this parameter is set to True and the phone number or email address specified in the UserAttributes parameter already exists as an alias with a different user, the API call will migrate the alias from the previous user to the newly created user. The previous user will no longer be able to log in using that alias.</p> <p>If this parameter is set to False, the API throws an AliasExistsException error if the alias already exists. The default value is False.</p>"
+        },
+        "MessageAction":{
+          "shape":"MessageActionType",
+          "documentation":"<p>Set to \"RESEND\" to resend the invitation message to a user that already exists and reset the expiration limit on the user's account. Set to \"SUPPRESS\" to suppress sending the message. Only one value can be specified.</p>"
+        },
+        "DesiredDeliveryMediums":{
+          "shape":"DeliveryMediumListType",
+          "documentation":"<p>Specify \"EMAIL\" if email will be used to send the welcome message. Specify \"SMS\" if the phone number will be used. The default value is \"SMS\". More than one value can be specified.</p>"
+        }
+      },
+      "documentation":"<p>Represents the request to create a user in the specified user pool.</p>"
+    },
+    "AdminCreateUserResponse":{
+      "type":"structure",
+      "members":{
+        "User":{
+          "shape":"UserType",
+          "documentation":"<p>The user returned in the request to create a new user.</p>"
+        }
+      },
+      "documentation":"<p>Represents the response from the server to the request to create the user.</p>"
+    },
+    "AdminCreateUserUnusedAccountValidityDaysType":{
+      "type":"integer",
+      "max":90,
+      "min":0
+    },
     "AdminDeleteUserAttributesRequest":{
       "type":"structure",
       "required":[
@@ -1399,7 +1506,7 @@
         },
         "UserStatus":{
           "shape":"UserStatusType",
-          "documentation":"<p>The user status. Can be one of the following:</p> <ul> <li>UNCONFIRMED - User has been created but not confirmed.</li> <li>CONFIRMED - User has been confirmed.</li> <li>ARCHIVED - User is no longer active.</li> <li>COMPROMISED - User is disabled due to a potential security threat.</li> <li>UNKNOWN - User status is not known.</li> </ul>"
+          "documentation":"<p>The user status. Can be one of the following:</p> <ul> <li> <p>UNCONFIRMED - User has been created but not confirmed.</p> </li> <li> <p>CONFIRMED - User has been confirmed.</p> </li> <li> <p>ARCHIVED - User is no longer active.</p> </li> <li> <p>COMPROMISED - User is disabled due to a potential security threat.</p> </li> <li> <p>UNKNOWN - User status is not known.</p> </li> </ul>"
         },
         "MFAOptions":{
           "shape":"MFAOptionListType",
@@ -1611,7 +1718,7 @@
       "members":{
         "UserPoolId":{
           "shape":"UserPoolIdType",
-          "documentation":"<p>The user pool ID></p>"
+          "documentation":"<p>The user pool ID&gt;</p>"
         },
         "Username":{
           "shape":"UsernameType",
@@ -1813,7 +1920,8 @@
         "CUSTOM_CHALLENGE",
         "DEVICE_SRP_AUTH",
         "DEVICE_PASSWORD_VERIFIER",
-        "ADMIN_NO_SRP_AUTH"
+        "ADMIN_NO_SRP_AUTH",
+        "NEW_PASSWORD_REQUIRED"
       ]
     },
     "ChallengeParametersType":{
@@ -2116,7 +2224,7 @@
         },
         "GenerateSecret":{
           "shape":"GenerateSecret",
-          "documentation":"<p> Boolean to specify whether you want to generate a secret for the user pool client being created.</p>"
+          "documentation":"<p>Boolean to specify whether you want to generate a secret for the user pool client being created.</p>"
         },
         "RefreshTokenValidity":{
           "shape":"RefreshTokenValidityType",
@@ -2202,6 +2310,10 @@
         "SmsConfiguration":{
           "shape":"SmsConfigurationType",
           "documentation":"<p>The SMS configuration.</p>"
+        },
+        "AdminCreateUserConfig":{
+          "shape":"AdminCreateUserConfigType",
+          "documentation":"<p>The configuration for AdminCreateUser requests.</p>"
         }
       },
       "documentation":"<p>Represents the request to create a user pool.</p>"
@@ -2288,6 +2400,10 @@
         }
       },
       "documentation":"<p>Represents the request to delete a user.</p>"
+    },
+    "DeliveryMediumListType":{
+      "type":"list",
+      "member":{"shape":"DeliveryMediumType"}
     },
     "DeliveryMediumType":{
       "type":"string",
@@ -2909,7 +3025,7 @@
         },
         "PaginationToken":{
           "shape":"PaginationKeyType",
-          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of import jobs in the list.</p>"
+          "documentation":"<p>An identifier that was returned from the previous call to ListUserImportJobs, which can be used to return the next set of import jobs in the list.</p>"
         }
       },
       "documentation":"<p>Represents the request to list the user import jobs.</p>"
@@ -3060,6 +3176,31 @@
         }
       },
       "documentation":"<p>Specifies the different settings for multi-factor authentication (MFA).</p>"
+    },
+    "MessageActionType":{
+      "type":"string",
+      "enum":[
+        "RESEND",
+        "SUPPRESS"
+      ]
+    },
+    "MessageTemplateType":{
+      "type":"structure",
+      "members":{
+        "SMSMessage":{
+          "shape":"SmsVerificationMessageType",
+          "documentation":"<p>The message template for SMS messages.</p>"
+        },
+        "EmailMessage":{
+          "shape":"EmailVerificationMessageType",
+          "documentation":"<p>The message template for email messages.</p>"
+        },
+        "EmailSubject":{
+          "shape":"EmailVerificationSubjectType",
+          "documentation":"<p>The subject line for email messages.</p>"
+        }
+      },
+      "documentation":"<p>The message template structure.</p>"
     },
     "MessageType":{"type":"string"},
     "NewDeviceMetadataType":{
@@ -3548,6 +3689,17 @@
       "documentation":"<p>This exception gets thrown when the Amazon Cognito service encounters an unexpected exception with the AWS Lambda service.</p>",
       "exception":true
     },
+    "UnsupportedUserStateException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"MessageType",
+          "documentation":"<p>The message returned when the user is in an unsupported state.</p>"
+        }
+      },
+      "documentation":"<p>The request failed because the user is in an unsupported state.</p>",
+      "exception":true
+    },
     "UpdateDeviceStatusRequest":{
       "type":"structure",
       "required":[
@@ -3679,7 +3831,7 @@
         },
         "EmailVerificationSubject":{
           "shape":"EmailVerificationSubjectType",
-          "documentation":"<p>The subject of the email verfication message</p>"
+          "documentation":"<p>The subject of the email verfication message.</p>"
         },
         "SmsAuthenticationMessage":{
           "shape":"SmsVerificationMessageType",
@@ -3687,7 +3839,7 @@
         },
         "MfaConfiguration":{
           "shape":"UserPoolMfaType",
-          "documentation":"<p>Can be one of the following values:</p> <ul> <li><code>OFF</code> - MFA tokens are not required and cannot be specified during user registration.</li> <li><code>ON</code> - MFA tokens are required for all user registrations. You can only specify required when you are initially creating a user pool.</li> <li><code>OPTIONAL</code> - Users have the option when registering to create an MFA token.</li> </ul>"
+          "documentation":"<p>Can be one of the following values:</p> <ul> <li> <p> <code>OFF</code> - MFA tokens are not required and cannot be specified during user registration.</p> </li> <li> <p> <code>ON</code> - MFA tokens are required for all user registrations. You can only specify required when you are initially creating a user pool.</p> </li> <li> <p> <code>OPTIONAL</code> - Users have the option when registering to create an MFA token.</p> </li> </ul>"
         },
         "DeviceConfiguration":{
           "shape":"DeviceConfigurationType",
@@ -3700,6 +3852,10 @@
         "SmsConfiguration":{
           "shape":"SmsConfigurationType",
           "documentation":"<p>SMS configuration.</p>"
+        },
+        "AdminCreateUserConfig":{
+          "shape":"AdminCreateUserConfigType",
+          "documentation":"<p>The configuration for AdminCreateUser requests.</p>"
         }
       },
       "documentation":"<p>Represents the request to update the user pool.</p>"
@@ -3783,7 +3939,7 @@
         },
         "Status":{
           "shape":"UserImportJobStatusType",
-          "documentation":"<p>The status of the user import job. One of the following:</p> <ul> <li>Created - The job was created but not started.</li> <li>Pending - A transition state. You have started the job, but it has not begun importing users yet.</li> <li>InProgress - The job has started, and users are being imported.</li> <li>Stopping - You have stopped the job, but the job has not stopped importing users yet.</li> <li>Stopped - You have stopped the job, and the job has stopped importing users.</li> <li>Succeeded - The job has completed successfully.</li> <li>Failed - The job has stopped due to an error.</li> <li>Expired - You created a job, but did not start the job within 24-48 hours. All data associated with the job was deleted, and the job cannot be started.</li> </ul>"
+          "documentation":"<p>The status of the user import job. One of the following:</p> <ul> <li> <p>Created - The job was created but not started.</p> </li> <li> <p>Pending - A transition state. You have started the job, but it has not begun importing users yet.</p> </li> <li> <p>InProgress - The job has started, and users are being imported.</p> </li> <li> <p>Stopping - You have stopped the job, but the job has not stopped importing users yet.</p> </li> <li> <p>Stopped - You have stopped the job, and the job has stopped importing users.</p> </li> <li> <p>Succeeded - The job has completed successfully.</p> </li> <li> <p>Failed - The job has stopped due to an error.</p> </li> <li> <p>Expired - You created a job, but did not start the job within 24-48 hours. All data associated with the job was deleted, and the job cannot be started.</p> </li> </ul>"
         },
         "CloudWatchLogsRoleArn":{
           "shape":"ArnType",
@@ -4040,7 +4196,7 @@
         },
         "MfaConfiguration":{
           "shape":"UserPoolMfaType",
-          "documentation":"<p>Can be one of the following values:</p> <ul> <li><code>OFF</code> - MFA tokens are not required and cannot be specified during user registration.</li> <li><code>ON</code> - MFA tokens are required for all user registrations. You can only specify required when you are initially creating a user pool.</li> <li><code>OPTIONAL</code> - Users have the option when registering to create an MFA token.</li> </ul>"
+          "documentation":"<p>Can be one of the following values:</p> <ul> <li> <p> <code>OFF</code> - MFA tokens are not required and cannot be specified during user registration.</p> </li> <li> <p> <code>ON</code> - MFA tokens are required for all user registrations. You can only specify required when you are initially creating a user pool.</p> </li> <li> <p> <code>OPTIONAL</code> - Users have the option when registering to create an MFA token.</p> </li> </ul>"
         },
         "DeviceConfiguration":{
           "shape":"DeviceConfigurationType",
@@ -4065,6 +4221,10 @@
         "EmailConfigurationFailure":{
           "shape":"StringType",
           "documentation":"<p>The reason why the email configuration cannot send the messages to your users.</p>"
+        },
+        "AdminCreateUserConfig":{
+          "shape":"AdminCreateUserConfigType",
+          "documentation":"<p>The configuration for AdminCreateUser requests.</p>"
         }
       },
       "documentation":"<p>A container with information about the user pool type.</p>"
@@ -4077,7 +4237,8 @@
         "ARCHIVED",
         "COMPROMISED",
         "UNKNOWN",
-        "RESET_REQUIRED"
+        "RESET_REQUIRED",
+        "FORCE_CHANGE_PASSWORD"
       ]
     },
     "UserType":{
@@ -4105,7 +4266,11 @@
         },
         "UserStatus":{
           "shape":"UserStatusType",
-          "documentation":"<p>The user status. Can be one of the following:</p> <ul> <li>UNCONFIRMED - User has been created but not confirmed.</li> <li>CONFIRMED - User has been confirmed.</li> <li>ARCHIVED - User is no longer active.</li> <li>COMPROMISED - User is disabled due to a potential security threat.</li> <li>UNKNOWN - User status is not known.</li> </ul>"
+          "documentation":"<p>The user status. Can be one of the following:</p> <ul> <li> <p>UNCONFIRMED - User has been created but not confirmed.</p> </li> <li> <p>CONFIRMED - User has been confirmed.</p> </li> <li> <p>ARCHIVED - User is no longer active.</p> </li> <li> <p>COMPROMISED - User is disabled due to a potential security threat.</p> </li> <li> <p>UNKNOWN - User status is not known.</p> </li> </ul>"
+        },
+        "MFAOptions":{
+          "shape":"MFAOptionListType",
+          "documentation":"<p>The MFA options for the user.</p>"
         }
       },
       "documentation":"<p>The user type.</p>"
@@ -4172,5 +4337,5 @@
       "documentation":"<p>A container representing the response from the server from the request to verify user attributes.</p>"
     }
   },
-  "documentation":"<p>You can create a user pool in Amazon Cognito Identity to manage directories and users. You can authenticate a user to obtain tokens related to user identity and access policies.</p> <p>This API reference provides information about user pools in Amazon Cognito Identity.</p> <p>For more information, see <a href=\"https://aws.amazon.com/cognito/\">Amazon Cognito</a>.</p>"
+  "documentation":"<p>Using the Amazon Cognito Your User Pools API, you can create a user pool to manage directories and users. You can authenticate a user to obtain tokens related to user identity and access policies.</p> <p>This API reference provides information about user pools in Amazon Cognito Your User Pools.</p> <p>For more information, see the Amazon Cognito Documentation.</p>"
 }
