@@ -75,3 +75,12 @@ describe 'AWS.Route53', ->
           Comment: 'comment'
       service.changeResourceRecordSets params, (err, data) ->
         helpers.matchXML(this.request.httpRequest.body, xml)
+
+  describe 'retryableError', ->
+    it 'retryableError returns true for PriorRequestNotComplete errors', ->
+      err = {code: 'PriorRequestNotComplete', statusCode: 400}
+      expect(service.retryableError(err)).to.be.true
+
+    it 'retryableError returns false for other 400 errors', ->
+      err = {code: 'SomeErrorCode', statusCode:400}
+      expect(service.retryableError(err)).to.be.false
