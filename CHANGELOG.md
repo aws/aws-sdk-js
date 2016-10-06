@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.6-->
+<!--LATEST=2.6.7-->
 <!--ENTRYINSERT-->
+
+## 2.6.7
+* feature: CognitoIdentityServiceProvider: Added new operation "AdminCreateUser" that creates a new user in the specified user pool and sends a welcome message via email or phone (SMS).
+* feature: Route53: Retries PriorRequestNotComplete errors.
 
 ## 2.6.6
 * feature: EC2: Adding support for EC2 Convertible RIs and the EC2 RI regional benefit.

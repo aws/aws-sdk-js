@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Route53",
-  "description": "Retries PriorRequestNotComplete errors."
-}
