@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.6.6
+// AWS SDK for JavaScript v2.6.7
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -12816,6 +12816,46 @@ module.exports={
         "members": {}
       }
     },
+    "AdminCreateUser": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "UserPoolId",
+          "Username"
+        ],
+        "members": {
+          "UserPoolId": {},
+          "Username": {
+            "shape": "Sd"
+          },
+          "UserAttributes": {
+            "shape": "Sg"
+          },
+          "ValidationData": {
+            "shape": "Sg"
+          },
+          "TemporaryPassword": {
+            "shape": "Sk"
+          },
+          "ForceAliasCreation": {
+            "type": "boolean"
+          },
+          "MessageAction": {},
+          "DesiredDeliveryMediums": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "User": {
+            "shape": "Sq"
+          }
+        }
+      }
+    },
     "AdminDeleteUser": {
       "input": {
         "type": "structure",
@@ -12845,7 +12885,7 @@ module.exports={
             "shape": "Sd"
           },
           "UserAttributeNames": {
-            "shape": "Sh"
+            "shape": "Sx"
           }
         }
       },
@@ -12932,7 +12972,7 @@ module.exports={
         ],
         "members": {
           "Device": {
-            "shape": "Ss"
+            "shape": "S17"
           }
         }
       }
@@ -12961,7 +13001,7 @@ module.exports={
             "shape": "Sd"
           },
           "UserAttributes": {
-            "shape": "St"
+            "shape": "Sg"
           },
           "UserCreateDate": {
             "type": "timestamp"
@@ -12974,7 +13014,7 @@ module.exports={
           },
           "UserStatus": {},
           "MFAOptions": {
-            "shape": "S10"
+            "shape": "St"
           }
         }
       }
@@ -12990,14 +13030,14 @@ module.exports={
         "members": {
           "UserPoolId": {},
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           },
           "AuthFlow": {},
           "AuthParameters": {
-            "shape": "S16"
+            "shape": "S1d"
           },
           "ClientMetadata": {
-            "shape": "S17"
+            "shape": "S1e"
           }
         }
       },
@@ -13007,10 +13047,10 @@ module.exports={
           "ChallengeName": {},
           "Session": {},
           "ChallengeParameters": {
-            "shape": "S1b"
+            "shape": "S1i"
           },
           "AuthenticationResult": {
-            "shape": "S1c"
+            "shape": "S1j"
           }
         }
       }
@@ -13037,7 +13077,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Devices": {
-            "shape": "S1k"
+            "shape": "S1r"
           },
           "PaginationToken": {}
         }
@@ -13073,11 +13113,11 @@ module.exports={
         "members": {
           "UserPoolId": {},
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           },
           "ChallengeName": {},
           "ChallengeResponses": {
-            "shape": "S1o"
+            "shape": "S1v"
           },
           "Session": {}
         }
@@ -13088,10 +13128,10 @@ module.exports={
           "ChallengeName": {},
           "Session": {},
           "ChallengeParameters": {
-            "shape": "S1b"
+            "shape": "S1i"
           },
           "AuthenticationResult": {
-            "shape": "S1c"
+            "shape": "S1j"
           }
         }
       }
@@ -13110,7 +13150,7 @@ module.exports={
             "shape": "Sd"
           },
           "MFAOptions": {
-            "shape": "S10"
+            "shape": "St"
           }
         }
       },
@@ -13155,7 +13195,7 @@ module.exports={
             "shape": "Sd"
           },
           "UserAttributes": {
-            "shape": "St"
+            "shape": "Sg"
           }
         }
       },
@@ -13192,13 +13232,13 @@ module.exports={
         ],
         "members": {
           "PreviousPassword": {
-            "shape": "S20"
+            "shape": "Sk"
           },
           "ProposedPassword": {
-            "shape": "S20"
+            "shape": "Sk"
           },
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           }
         }
       },
@@ -13217,7 +13257,7 @@ module.exports={
         ],
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           },
           "DeviceKey": {},
           "DeviceSecretVerifierConfig": {
@@ -13250,17 +13290,17 @@ module.exports={
         ],
         "members": {
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           },
           "SecretHash": {
-            "shape": "S27"
+            "shape": "S2d"
           },
           "Username": {
             "shape": "Sd"
           },
           "ConfirmationCode": {},
           "Password": {
-            "shape": "S20"
+            "shape": "Sk"
           }
         }
       },
@@ -13280,10 +13320,10 @@ module.exports={
         ],
         "members": {
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           },
           "SecretHash": {
-            "shape": "S27"
+            "shape": "S2d"
           },
           "Username": {
             "shape": "Sd"
@@ -13318,7 +13358,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserImportJob": {
-            "shape": "S2h"
+            "shape": "S2m"
           }
         }
       }
@@ -13332,16 +13372,16 @@ module.exports={
         "members": {
           "PoolName": {},
           "Policies": {
-            "shape": "S2p"
+            "shape": "S2u"
           },
           "LambdaConfig": {
-            "shape": "S2s"
+            "shape": "S2x"
           },
           "AutoVerifiedAttributes": {
-            "shape": "S2t"
+            "shape": "S2y"
           },
           "AliasAttributes": {
-            "shape": "S2v"
+            "shape": "S30"
           },
           "SmsVerificationMessage": {},
           "EmailVerificationMessage": {},
@@ -13349,13 +13389,16 @@ module.exports={
           "SmsAuthenticationMessage": {},
           "MfaConfiguration": {},
           "DeviceConfiguration": {
-            "shape": "S31"
+            "shape": "S36"
           },
           "EmailConfiguration": {
-            "shape": "S32"
+            "shape": "S37"
           },
           "SmsConfiguration": {
-            "shape": "S34"
+            "shape": "S39"
+          },
+          "AdminCreateUserConfig": {
+            "shape": "S3a"
           }
         }
       },
@@ -13363,7 +13406,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPool": {
-            "shape": "S36"
+            "shape": "S3e"
           }
         }
       }
@@ -13385,13 +13428,13 @@ module.exports={
             "type": "integer"
           },
           "ReadAttributes": {
-            "shape": "S3d"
+            "shape": "S3l"
           },
           "WriteAttributes": {
-            "shape": "S3d"
+            "shape": "S3l"
           },
           "ExplicitAuthFlows": {
-            "shape": "S3f"
+            "shape": "S3n"
           }
         }
       },
@@ -13399,7 +13442,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPoolClient": {
-            "shape": "S3i"
+            "shape": "S3q"
           }
         }
       }
@@ -13409,7 +13452,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           }
         }
       },
@@ -13423,10 +13466,10 @@ module.exports={
         ],
         "members": {
           "UserAttributeNames": {
-            "shape": "Sh"
+            "shape": "Sx"
           },
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           }
         }
       },
@@ -13457,7 +13500,7 @@ module.exports={
         "members": {
           "UserPoolId": {},
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           }
         }
       }
@@ -13478,7 +13521,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserImportJob": {
-            "shape": "S2h"
+            "shape": "S2m"
           }
         }
       }
@@ -13497,7 +13540,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPool": {
-            "shape": "S36"
+            "shape": "S3e"
           }
         }
       }
@@ -13512,7 +13555,7 @@ module.exports={
         "members": {
           "UserPoolId": {},
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           }
         }
       },
@@ -13520,7 +13563,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPoolClient": {
-            "shape": "S3i"
+            "shape": "S3q"
           }
         }
       }
@@ -13533,7 +13576,7 @@ module.exports={
         ],
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           },
           "DeviceKey": {}
         }
@@ -13548,10 +13591,10 @@ module.exports={
         ],
         "members": {
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           },
           "SecretHash": {
-            "shape": "S27"
+            "shape": "S2d"
           },
           "Username": {
             "shape": "Sd"
@@ -13562,7 +13605,7 @@ module.exports={
         "type": "structure",
         "members": {
           "CodeDeliveryDetails": {
-            "shape": "S3y"
+            "shape": "S46"
           }
         }
       },
@@ -13598,7 +13641,7 @@ module.exports={
         "members": {
           "DeviceKey": {},
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           }
         }
       },
@@ -13609,7 +13652,7 @@ module.exports={
         ],
         "members": {
           "Device": {
-            "shape": "Ss"
+            "shape": "S17"
           }
         }
       }
@@ -13619,7 +13662,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           }
         }
       },
@@ -13634,10 +13677,10 @@ module.exports={
             "shape": "Sd"
           },
           "UserAttributes": {
-            "shape": "St"
+            "shape": "Sg"
           },
           "MFAOptions": {
-            "shape": "S10"
+            "shape": "St"
           }
         }
       },
@@ -13651,7 +13694,7 @@ module.exports={
         ],
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           },
           "AttributeName": {}
         }
@@ -13660,7 +13703,7 @@ module.exports={
         "type": "structure",
         "members": {
           "CodeDeliveryDetails": {
-            "shape": "S3y"
+            "shape": "S46"
           }
         }
       },
@@ -13671,7 +13714,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           }
         }
       },
@@ -13690,13 +13733,13 @@ module.exports={
         "members": {
           "AuthFlow": {},
           "AuthParameters": {
-            "shape": "S16"
+            "shape": "S1d"
           },
           "ClientMetadata": {
-            "shape": "S17"
+            "shape": "S1e"
           },
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           }
         }
       },
@@ -13706,10 +13749,10 @@ module.exports={
           "ChallengeName": {},
           "Session": {},
           "ChallengeParameters": {
-            "shape": "S1b"
+            "shape": "S1i"
           },
           "AuthenticationResult": {
-            "shape": "S1c"
+            "shape": "S1j"
           }
         }
       }
@@ -13722,7 +13765,7 @@ module.exports={
         ],
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           },
           "Limit": {
             "type": "integer"
@@ -13734,7 +13777,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Devices": {
-            "shape": "S1k"
+            "shape": "S1r"
           },
           "PaginationToken": {}
         }
@@ -13761,7 +13804,7 @@ module.exports={
           "UserImportJobs": {
             "type": "list",
             "member": {
-              "shape": "S2h"
+              "shape": "S2m"
             }
           },
           "PaginationToken": {}
@@ -13791,7 +13834,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "ClientId": {
-                  "shape": "S14"
+                  "shape": "S1b"
                 },
                 "UserPoolId": {},
                 "ClientName": {}
@@ -13826,7 +13869,7 @@ module.exports={
                 "Id": {},
                 "Name": {},
                 "LambdaConfig": {
-                  "shape": "S2s"
+                  "shape": "S2x"
                 },
                 "Status": {},
                 "LastModifiedDate": {
@@ -13867,25 +13910,7 @@ module.exports={
           "Users": {
             "type": "list",
             "member": {
-              "type": "structure",
-              "members": {
-                "Username": {
-                  "shape": "Sd"
-                },
-                "Attributes": {
-                  "shape": "St"
-                },
-                "UserCreateDate": {
-                  "type": "timestamp"
-                },
-                "UserLastModifiedDate": {
-                  "type": "timestamp"
-                },
-                "Enabled": {
-                  "type": "boolean"
-                },
-                "UserStatus": {}
-              }
+              "shape": "Sq"
             }
           },
           "PaginationToken": {}
@@ -13901,10 +13926,10 @@ module.exports={
         ],
         "members": {
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           },
           "SecretHash": {
-            "shape": "S27"
+            "shape": "S2d"
           },
           "Username": {
             "shape": "Sd"
@@ -13915,7 +13940,7 @@ module.exports={
         "type": "structure",
         "members": {
           "CodeDeliveryDetails": {
-            "shape": "S3y"
+            "shape": "S46"
           }
         }
       },
@@ -13930,12 +13955,12 @@ module.exports={
         ],
         "members": {
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           },
           "ChallengeName": {},
           "Session": {},
           "ChallengeResponses": {
-            "shape": "S1o"
+            "shape": "S1v"
           }
         }
       },
@@ -13945,10 +13970,10 @@ module.exports={
           "ChallengeName": {},
           "Session": {},
           "ChallengeParameters": {
-            "shape": "S1b"
+            "shape": "S1i"
           },
           "AuthenticationResult": {
-            "shape": "S1c"
+            "shape": "S1j"
           }
         }
       }
@@ -13962,10 +13987,10 @@ module.exports={
         ],
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           },
           "MFAOptions": {
-            "shape": "S10"
+            "shape": "St"
           }
         }
       },
@@ -13985,22 +14010,22 @@ module.exports={
         ],
         "members": {
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           },
           "SecretHash": {
-            "shape": "S27"
+            "shape": "S2d"
           },
           "Username": {
             "shape": "Sd"
           },
           "Password": {
-            "shape": "S20"
+            "shape": "Sk"
           },
           "UserAttributes": {
-            "shape": "St"
+            "shape": "Sg"
           },
           "ValidationData": {
-            "shape": "St"
+            "shape": "Sg"
           }
         }
       },
@@ -14011,7 +14036,7 @@ module.exports={
             "type": "boolean"
           },
           "CodeDeliveryDetails": {
-            "shape": "S3y"
+            "shape": "S46"
           }
         }
       },
@@ -14033,7 +14058,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserImportJob": {
-            "shape": "S2h"
+            "shape": "S2m"
           }
         }
       }
@@ -14054,7 +14079,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserImportJob": {
-            "shape": "S2h"
+            "shape": "S2m"
           }
         }
       }
@@ -14068,7 +14093,7 @@ module.exports={
         ],
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           },
           "DeviceKey": {},
           "DeviceRememberedStatus": {}
@@ -14087,10 +14112,10 @@ module.exports={
         ],
         "members": {
           "UserAttributes": {
-            "shape": "St"
+            "shape": "Sg"
           },
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           }
         }
       },
@@ -14100,7 +14125,7 @@ module.exports={
           "CodeDeliveryDetailsList": {
             "type": "list",
             "member": {
-              "shape": "S3y"
+              "shape": "S46"
             }
           }
         }
@@ -14116,13 +14141,13 @@ module.exports={
         "members": {
           "UserPoolId": {},
           "Policies": {
-            "shape": "S2p"
+            "shape": "S2u"
           },
           "LambdaConfig": {
-            "shape": "S2s"
+            "shape": "S2x"
           },
           "AutoVerifiedAttributes": {
-            "shape": "S2t"
+            "shape": "S2y"
           },
           "SmsVerificationMessage": {},
           "EmailVerificationMessage": {},
@@ -14130,13 +14155,16 @@ module.exports={
           "SmsAuthenticationMessage": {},
           "MfaConfiguration": {},
           "DeviceConfiguration": {
-            "shape": "S31"
+            "shape": "S36"
           },
           "EmailConfiguration": {
-            "shape": "S32"
+            "shape": "S37"
           },
           "SmsConfiguration": {
-            "shape": "S34"
+            "shape": "S39"
+          },
+          "AdminCreateUserConfig": {
+            "shape": "S3a"
           }
         }
       },
@@ -14155,20 +14183,20 @@ module.exports={
         "members": {
           "UserPoolId": {},
           "ClientId": {
-            "shape": "S14"
+            "shape": "S1b"
           },
           "ClientName": {},
           "RefreshTokenValidity": {
             "type": "integer"
           },
           "ReadAttributes": {
-            "shape": "S3d"
+            "shape": "S3l"
           },
           "WriteAttributes": {
-            "shape": "S3d"
+            "shape": "S3l"
           },
           "ExplicitAuthFlows": {
-            "shape": "S3f"
+            "shape": "S3n"
           }
         }
       },
@@ -14176,7 +14204,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPoolClient": {
-            "shape": "S3i"
+            "shape": "S3q"
           }
         }
       }
@@ -14190,7 +14218,7 @@ module.exports={
         ],
         "members": {
           "AccessToken": {
-            "shape": "S1d"
+            "shape": "S1k"
           },
           "AttributeName": {},
           "Code": {}
@@ -14238,29 +14266,7 @@ module.exports={
       "type": "string",
       "sensitive": true
     },
-    "Sh": {
-      "type": "list",
-      "member": {}
-    },
-    "Ss": {
-      "type": "structure",
-      "members": {
-        "DeviceKey": {},
-        "DeviceAttributes": {
-          "shape": "St"
-        },
-        "DeviceCreateDate": {
-          "type": "timestamp"
-        },
-        "DeviceLastModifiedDate": {
-          "type": "timestamp"
-        },
-        "DeviceLastAuthenticatedDate": {
-          "type": "timestamp"
-        }
-      }
-    },
-    "St": {
+    "Sg": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -14276,7 +14282,35 @@ module.exports={
         }
       }
     },
-    "S10": {
+    "Sk": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sq": {
+      "type": "structure",
+      "members": {
+        "Username": {
+          "shape": "Sd"
+        },
+        "Attributes": {
+          "shape": "Sg"
+        },
+        "UserCreateDate": {
+          "type": "timestamp"
+        },
+        "UserLastModifiedDate": {
+          "type": "timestamp"
+        },
+        "Enabled": {
+          "type": "boolean"
+        },
+        "UserStatus": {},
+        "MFAOptions": {
+          "shape": "St"
+        }
+      }
+    },
+    "St": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -14286,40 +14320,62 @@ module.exports={
         }
       }
     },
-    "S14": {
+    "Sx": {
+      "type": "list",
+      "member": {}
+    },
+    "S17": {
+      "type": "structure",
+      "members": {
+        "DeviceKey": {},
+        "DeviceAttributes": {
+          "shape": "Sg"
+        },
+        "DeviceCreateDate": {
+          "type": "timestamp"
+        },
+        "DeviceLastModifiedDate": {
+          "type": "timestamp"
+        },
+        "DeviceLastAuthenticatedDate": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "S1b": {
       "type": "string",
       "sensitive": true
     },
-    "S16": {
+    "S1d": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "S17": {
+    "S1e": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "S1b": {
+    "S1i": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "S1c": {
+    "S1j": {
       "type": "structure",
       "members": {
         "AccessToken": {
-          "shape": "S1d"
+          "shape": "S1k"
         },
         "ExpiresIn": {
           "type": "integer"
         },
         "TokenType": {},
         "RefreshToken": {
-          "shape": "S1d"
+          "shape": "S1k"
         },
         "IdToken": {
-          "shape": "S1d"
+          "shape": "S1k"
         },
         "NewDeviceMetadata": {
           "type": "structure",
@@ -14330,30 +14386,26 @@ module.exports={
         }
       }
     },
-    "S1d": {
+    "S1k": {
       "type": "string",
       "sensitive": true
     },
-    "S1k": {
+    "S1r": {
       "type": "list",
       "member": {
-        "shape": "Ss"
+        "shape": "S17"
       }
     },
-    "S1o": {
+    "S1v": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "S20": {
+    "S2d": {
       "type": "string",
       "sensitive": true
     },
-    "S27": {
-      "type": "string",
-      "sensitive": true
-    },
-    "S2h": {
+    "S2m": {
       "type": "structure",
       "members": {
         "JobName": {},
@@ -14383,7 +14435,7 @@ module.exports={
         "CompletionMessage": {}
       }
     },
-    "S2p": {
+    "S2u": {
       "type": "structure",
       "members": {
         "PasswordPolicy": {
@@ -14408,7 +14460,7 @@ module.exports={
         }
       }
     },
-    "S2s": {
+    "S2x": {
       "type": "structure",
       "members": {
         "PreSignUp": {},
@@ -14421,15 +14473,15 @@ module.exports={
         "VerifyAuthChallengeResponse": {}
       }
     },
-    "S2t": {
+    "S2y": {
       "type": "list",
       "member": {}
     },
-    "S2v": {
+    "S30": {
       "type": "list",
       "member": {}
     },
-    "S31": {
+    "S36": {
       "type": "structure",
       "members": {
         "ChallengeRequiredOnNewDevice": {
@@ -14440,30 +14492,49 @@ module.exports={
         }
       }
     },
-    "S32": {
+    "S37": {
       "type": "structure",
       "members": {
         "SourceArn": {},
         "ReplyToEmailAddress": {}
       }
     },
-    "S34": {
+    "S39": {
       "type": "structure",
       "members": {
         "SnsCallerArn": {},
         "ExternalId": {}
       }
     },
-    "S36": {
+    "S3a": {
+      "type": "structure",
+      "members": {
+        "AllowAdminCreateUserOnly": {
+          "type": "boolean"
+        },
+        "UnusedAccountValidityDays": {
+          "type": "integer"
+        },
+        "InviteMessageTemplate": {
+          "type": "structure",
+          "members": {
+            "SMSMessage": {},
+            "EmailMessage": {},
+            "EmailSubject": {}
+          }
+        }
+      }
+    },
+    "S3e": {
       "type": "structure",
       "members": {
         "Id": {},
         "Name": {},
         "Policies": {
-          "shape": "S2p"
+          "shape": "S2u"
         },
         "LambdaConfig": {
-          "shape": "S2s"
+          "shape": "S2x"
         },
         "Status": {},
         "LastModifiedDate": {
@@ -14479,10 +14550,10 @@ module.exports={
           }
         },
         "AutoVerifiedAttributes": {
-          "shape": "S2t"
+          "shape": "S2y"
         },
         "AliasAttributes": {
-          "shape": "S2v"
+          "shape": "S30"
         },
         "SmsVerificationMessage": {},
         "EmailVerificationMessage": {},
@@ -14490,36 +14561,39 @@ module.exports={
         "SmsAuthenticationMessage": {},
         "MfaConfiguration": {},
         "DeviceConfiguration": {
-          "shape": "S31"
+          "shape": "S36"
         },
         "EstimatedNumberOfUsers": {
           "type": "integer"
         },
         "EmailConfiguration": {
-          "shape": "S32"
+          "shape": "S37"
         },
         "SmsConfiguration": {
-          "shape": "S34"
+          "shape": "S39"
         },
         "SmsConfigurationFailure": {},
-        "EmailConfigurationFailure": {}
+        "EmailConfigurationFailure": {},
+        "AdminCreateUserConfig": {
+          "shape": "S3a"
+        }
       }
     },
-    "S3d": {
+    "S3l": {
       "type": "list",
       "member": {}
     },
-    "S3f": {
+    "S3n": {
       "type": "list",
       "member": {}
     },
-    "S3i": {
+    "S3q": {
       "type": "structure",
       "members": {
         "UserPoolId": {},
         "ClientName": {},
         "ClientId": {
-          "shape": "S14"
+          "shape": "S1b"
         },
         "ClientSecret": {
           "type": "string",
@@ -14535,17 +14609,17 @@ module.exports={
           "type": "integer"
         },
         "ReadAttributes": {
-          "shape": "S3d"
+          "shape": "S3l"
         },
         "WriteAttributes": {
-          "shape": "S3d"
+          "shape": "S3l"
         },
         "ExplicitAuthFlows": {
-          "shape": "S3f"
+          "shape": "S3n"
         }
       }
     },
-    "S3y": {
+    "S46": {
       "type": "structure",
       "members": {
         "Destination": {},
@@ -80713,9 +80787,6 @@ module.exports={
     "ListByteMatchSets": {
       "input": {
         "type": "structure",
-        "required": [
-          "Limit"
-        ],
         "members": {
           "NextMarker": {},
           "Limit": {
@@ -80747,9 +80818,6 @@ module.exports={
     "ListIPSets": {
       "input": {
         "type": "structure",
-        "required": [
-          "Limit"
-        ],
         "members": {
           "NextMarker": {},
           "Limit": {
@@ -80781,9 +80849,6 @@ module.exports={
     "ListRules": {
       "input": {
         "type": "structure",
-        "required": [
-          "Limit"
-        ],
         "members": {
           "NextMarker": {},
           "Limit": {
@@ -80815,9 +80880,6 @@ module.exports={
     "ListSizeConstraintSets": {
       "input": {
         "type": "structure",
-        "required": [
-          "Limit"
-        ],
         "members": {
           "NextMarker": {},
           "Limit": {
@@ -80849,9 +80911,6 @@ module.exports={
     "ListSqlInjectionMatchSets": {
       "input": {
         "type": "structure",
-        "required": [
-          "Limit"
-        ],
         "members": {
           "NextMarker": {},
           "Limit": {
@@ -80883,9 +80942,6 @@ module.exports={
     "ListWebACLs": {
       "input": {
         "type": "structure",
-        "required": [
-          "Limit"
-        ],
         "members": {
           "NextMarker": {},
           "Limit": {
@@ -80917,9 +80973,6 @@ module.exports={
     "ListXssMatchSets": {
       "input": {
         "type": "structure",
-        "required": [
-          "Limit"
-        ],
         "members": {
           "NextMarker": {},
           "Limit": {
@@ -83101,7 +83154,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.6.6',
+  VERSION: '2.6.7',
 
 
   Signers: {},
@@ -88082,6 +88135,17 @@ AWS.util.update(AWS.Route53.prototype, {
   sanitizeUrl: function sanitizeUrl(request) {
     var path = request.httpRequest.path;
     request.httpRequest.path = path.replace(/\/%2F\w+%2F/, '/');
+  },
+
+
+  retryableError: function retryableError(error) {
+    if (error.code === 'PriorRequestNotComplete' &&
+        error.statusCode === 400) {
+      return true;
+    } else {
+      var _super = AWS.Service.prototype.retryableError;
+      return _super.call(this, error);
+    }
   }
 });
 
