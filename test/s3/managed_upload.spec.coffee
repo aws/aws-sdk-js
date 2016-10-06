@@ -356,3 +356,14 @@ describe 'AWS.S3.ManagedUpload', ->
             expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
             expect(err).not.to.exist
             done()
+
+        it 'propagates an error from a stream', (done) ->
+          errorStream = new require('stream').Readable()
+          errorStream._read = -> this.emit('error', new Error('message'))
+
+          upload = new AWS.S3.ManagedUpload params: { Body: errorStream }
+          upload.send (e, d) ->
+            expect(e).to.exist
+            expect(d).not.to.exist
+            expect(e.message).to.equal('message')
+            done()
