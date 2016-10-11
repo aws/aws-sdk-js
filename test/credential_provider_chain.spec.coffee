@@ -90,3 +90,41 @@ if AWS.util.isNode()
           expect(creds.accessKeyId).to.equal('abc')
           expect(creds.secretAccessKey).to.equal('xyz')
           expect(creds.sessionToken).to.equal(undefined)
+
+    if typeof Promise == 'function'
+      describe 'resolvePromise', ->
+        [err, creds, chain, forceError] = []
+
+        thenFunction = (c) ->
+          creds = c
+
+        catchFunction = (e) ->
+          err = e
+
+        mockProvider = ->
+          provider = new helpers.MockCredentialsProvider()
+          if forceError
+            provider.forceRefreshError = true
+          provider
+
+        beforeEach ->
+          err = null
+          creds = null
+          chain = new AWS.CredentialProviderChain([mockProvider])
+
+        it 'resolves when creds successfully retrieved from a provider in the chain', ->
+          forceError = false
+          # if a promise is returned from a test, then done callback not needed
+          # and next test will wait for promise to resolve before running
+          return chain.resolvePromise().then(thenFunction).catch(catchFunction).then ->
+            expect(err).to.be.null
+            expect(creds).to.not.be.null
+            expect(creds.accessKeyId).to.equal('akid')
+            expect(creds.secretAccessKey).to.equal('secret')
+
+        it 'rejects when all providers in chain return an error', ->
+          forceError = true
+          return chain.resolvePromise().then(thenFunction).catch(catchFunction).then ->
+            expect(err).to.not.be.null
+            expect(err.code).to.equal('MockCredentialsProviderFailure')
+            expect(creds).to.be.null

@@ -1135,3 +1135,59 @@ describe 'AWS.CognitoIdentityCredentials', ->
         creds.params.LoginId = 'LOGINIDA'
         creds.clearCachedId()
 
+  if typeof Promise == 'function'
+    describe 'promises', ->
+      err = null
+      mockCred = null
+
+      catchFunction = (e) ->
+        err = e
+
+      before ->
+        AWS.util.addPromises(AWS.Credentials, Promise)
+
+      beforeEach ->
+        err = null
+        mockCred = new helpers.MockCredentialsProvider()
+
+      describe 'getPromise', ->
+        spy = null
+
+        beforeEach ->
+          spy = helpers.spyOn(mockCred, 'refresh').andCallThrough()
+
+        it 'resolves when get is successful', ->
+          # if a promise is returned from a test, then done callback not needed
+          # and next test will wait for promise to resolve before running
+          return mockCred.getPromise().then ->
+            expect(spy.calls.length).to.equal(1)
+            expect(err).to.be.null
+            expect(mockCred.accessKeyId).to.equal('akid')
+            expect(mockCred.secretAccessKey).to.equal('secret')
+
+        it 'rejects when get is unsuccessful', ->
+          mockCred.forceRefreshError = true
+          return mockCred.getPromise().catch(catchFunction).then ->
+            expect(spy.calls.length).to.equal(1)
+            expect(err).to.not.be.null
+            expect(err.code).to.equal('MockCredentialsProviderFailure')
+            expect(err.message).to.equal('mock credentials refresh error')
+            expect(mockCred.accessKeyId).to.be.undefined
+            expect(mockCred.secretAccessKey).to.be.undefined
+
+      describe 'refreshPromise', ->
+        it 'resolves when refresh is successful', ->
+          refreshError = false
+          return mockCred.refreshPromise().then ->
+            expect(err).to.be.null
+            expect(mockCred.accessKeyId).to.equal('akid')
+            expect(mockCred.secretAccessKey).to.equal('secret')
+
+        it 'rejects when refresh is unsuccessful', ->
+          mockCred.forceRefreshError = true
+          return mockCred.refreshPromise().catch(catchFunction).then ->
+            expect(err).to.not.be.null
+            expect(err.code).to.equal('MockCredentialsProviderFailure')
+            expect(err.message).to.equal('mock credentials refresh error')
+            expect(mockCred.accessKeyId).to.be.undefined
+            expect(mockCred.secretAccessKey).to.be.undefined

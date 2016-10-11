@@ -253,6 +253,7 @@ describe 'AWS.Request', ->
 
   describe 'promise', ->
     it 'exists if Promises are available', ->
+      AWS.config.setPromisesDependency()
       req = service.makeRequest('mockMethod')
       if typeof Promise == 'undefined'
         expect(typeof req.promise).to.equal('undefined')

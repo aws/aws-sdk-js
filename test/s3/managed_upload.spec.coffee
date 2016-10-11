@@ -377,7 +377,7 @@ describe 'AWS.S3.ManagedUpload', ->
           err = e
 
         before ->
-          AWS.Request._PromiseDependency = Promise
+          AWS.util.addPromises(AWS.S3.ManagedUpload, Promise)
 
         it 'resolves when single part upload is successful', ->
           reqs = helpers.mockResponses [
@@ -387,6 +387,8 @@ describe 'AWS.S3.ManagedUpload', ->
           params = Body: smallbody, ContentEncoding: 'encoding'
           upload = new AWS.S3.ManagedUpload(service: s3, params: params)
 
+          # if a promise is returned from a test, then done callback not needed
+          # and next test will wait for promise to resolve before running
           return upload.promise().then(thenFunction).catch(catchFunction).then ->
             expect(err).not.to.exist
             expect(data.ETag).to.equal('ETAG')

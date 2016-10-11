@@ -251,6 +251,19 @@ describe 'AWS.config', ->
 
   describe 'setPromisesDependency', ->
     it 'updates promise support on requests', ->
-      utilSpy = helpers.spyOn(AWS.util, 'addPromisesToRequests')
+      utilSpy = helpers.spyOn(AWS.util, 'addPromises')
       AWS.config.setPromisesDependency(->)
       expect(utilSpy.calls.length).to.equal(1)
+
+  describe 'getPromisesDependency', ->
+    it 'returns native Promises (if supported) if PromisesDependency not set', ->
+      AWS.config.setPromisesDependency()
+      dep = AWS.config.getPromisesDependency()
+      # returns undefined if no native Promise
+      expect(dep).to.equal(global.Promise)
+
+    it 'returns PromisesDependency if set', ->
+      P = ->
+      AWS.config.setPromisesDependency(P)
+      dep = AWS.config.getPromisesDependency()
+      expect(dep).to.equal(P)
