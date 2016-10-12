@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.7-->
+<!--LATEST=2.6.8-->
 <!--ENTRYINSERT-->
+
+## 2.6.8
+* feature: ECR: DescribeImages is a new api used to expose image metadata which today includes image size and image creation timestamp.
+* feature: ElastiCache: Elasticache is launching a new major engine release of Redis, 3.2 (providing stability updates and new command sets over 2.8), as well as ElasticSupport for enabling Redis Cluster in 3.2, which provides support for multiple node groups to horizontally scale data, as well as superior engine failover capabilities.
 
 ## 2.6.7
 * feature: CognitoIdentityServiceProvider: Added new operation "AdminCreateUser" that creates a new user in the specified user pool and sends a welcome message via email or phone (SMS).
