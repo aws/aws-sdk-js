@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "S3",
+  "description": "Adds support for using dualstack with accelerate endpoints."
+}
