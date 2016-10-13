@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.6.8
+// AWS SDK for JavaScript v2.6.9
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -88,6 +88,9 @@ module.exports={
               "IssuedAt": {
                 "type": "timestamp"
               },
+              "ImportedAt": {
+                "type": "timestamp"
+              },
               "Status": {},
               "RevokedAt": {
                 "type": "timestamp"
@@ -105,7 +108,8 @@ module.exports={
                 "type": "list",
                 "member": {}
               },
-              "FailureReason": {}
+              "FailureReason": {},
+              "Type": {}
             }
           }
         }
@@ -126,6 +130,34 @@ module.exports={
         "members": {
           "Certificate": {},
           "CertificateChain": {}
+        }
+      }
+    },
+    "ImportCertificate": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Certificate",
+          "PrivateKey"
+        ],
+        "members": {
+          "CertificateArn": {},
+          "Certificate": {
+            "type": "blob"
+          },
+          "PrivateKey": {
+            "type": "blob",
+            "sensitive": true
+          },
+          "CertificateChain": {
+            "type": "blob"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CertificateArn": {}
         }
       }
     },
@@ -35447,8 +35479,11 @@ module.exports={
           "ApplicationName": {},
           "VersionLabel": {},
           "Description": {},
-          "SourceBundle": {
+          "SourceBuildInformation": {
             "shape": "S19"
+          },
+          "SourceBundle": {
+            "shape": "S1d"
           },
           "AutoCreateApplication": {
             "type": "boolean"
@@ -35459,7 +35494,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1e",
+        "shape": "S1i",
         "resultWrapper": "CreateApplicationVersionResult"
       }
     },
@@ -35484,12 +35519,12 @@ module.exports={
           "EnvironmentId": {},
           "Description": {},
           "OptionSettings": {
-            "shape": "S1j"
+            "shape": "S1n"
           }
         }
       },
       "output": {
-        "shape": "S1p",
+        "shape": "S1t",
         "resultWrapper": "CreateConfigurationTemplateResult"
       }
     },
@@ -35522,10 +35557,10 @@ module.exports={
           "TemplateName": {},
           "SolutionStackName": {},
           "OptionSettings": {
-            "shape": "S1j"
+            "shape": "S1n"
           },
           "OptionsToRemove": {
-            "shape": "S1w"
+            "shape": "S20"
           }
         }
       },
@@ -35606,7 +35641,11 @@ module.exports={
           "ApplicationName": {},
           "VersionLabels": {
             "shape": "S16"
-          }
+          },
+          "MaxRecords": {
+            "type": "integer"
+          },
+          "NextToken": {}
         }
       },
       "output": {
@@ -35616,9 +35655,10 @@ module.exports={
           "ApplicationVersions": {
             "type": "list",
             "member": {
-              "shape": "S1f"
+              "shape": "S1j"
             }
-          }
+          },
+          "NextToken": {}
         }
       }
     },
@@ -35654,7 +35694,7 @@ module.exports={
           "EnvironmentName": {},
           "SolutionStackName": {},
           "Options": {
-            "shape": "S1w"
+            "shape": "S20"
           }
         }
       },
@@ -35721,7 +35761,7 @@ module.exports={
           "ConfigurationSettings": {
             "type": "list",
             "member": {
-              "shape": "S1p"
+              "shape": "S1t"
             }
           }
         }
@@ -35748,10 +35788,10 @@ module.exports={
           "Status": {},
           "Color": {},
           "Causes": {
-            "shape": "S2z"
+            "shape": "S35"
           },
           "ApplicationMetrics": {
-            "shape": "S31"
+            "shape": "S37"
           },
           "InstancesHealth": {
             "type": "structure",
@@ -36037,13 +36077,13 @@ module.exports={
                 "HealthStatus": {},
                 "Color": {},
                 "Causes": {
-                  "shape": "S2z"
+                  "shape": "S35"
                 },
                 "LaunchedAt": {
                   "type": "timestamp"
                 },
                 "ApplicationMetrics": {
-                  "shape": "S31"
+                  "shape": "S37"
                 },
                 "System": {
                   "type": "structure",
@@ -36256,7 +36296,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1e",
+        "shape": "S1i",
         "resultWrapper": "UpdateApplicationVersionResult"
       }
     },
@@ -36272,15 +36312,15 @@ module.exports={
           "TemplateName": {},
           "Description": {},
           "OptionSettings": {
-            "shape": "S1j"
+            "shape": "S1n"
           },
           "OptionsToRemove": {
-            "shape": "S1w"
+            "shape": "S20"
           }
         }
       },
       "output": {
-        "shape": "S1p",
+        "shape": "S1t",
         "resultWrapper": "UpdateConfigurationTemplateResult"
       }
     },
@@ -36300,10 +36340,10 @@ module.exports={
           "TemplateName": {},
           "SolutionStackName": {},
           "OptionSettings": {
-            "shape": "S1j"
+            "shape": "S1n"
           },
           "OptionsToRemove": {
-            "shape": "S1w"
+            "shape": "S20"
           }
         }
       },
@@ -36324,7 +36364,7 @@ module.exports={
           "TemplateName": {},
           "EnvironmentName": {},
           "OptionSettings": {
-            "shape": "S1j"
+            "shape": "S1n"
           }
         }
       },
@@ -36465,27 +36505,43 @@ module.exports={
     },
     "S19": {
       "type": "structure",
+      "required": [
+        "SourceType",
+        "SourceRepository",
+        "SourceLocation"
+      ],
+      "members": {
+        "SourceType": {},
+        "SourceRepository": {},
+        "SourceLocation": {}
+      }
+    },
+    "S1d": {
+      "type": "structure",
       "members": {
         "S3Bucket": {},
         "S3Key": {}
       }
     },
-    "S1e": {
+    "S1i": {
       "type": "structure",
       "members": {
         "ApplicationVersion": {
-          "shape": "S1f"
+          "shape": "S1j"
         }
       }
     },
-    "S1f": {
+    "S1j": {
       "type": "structure",
       "members": {
         "ApplicationName": {},
         "Description": {},
         "VersionLabel": {},
-        "SourceBundle": {
+        "SourceBuildInformation": {
           "shape": "S19"
+        },
+        "SourceBundle": {
+          "shape": "S1d"
         },
         "DateCreated": {
           "type": "timestamp"
@@ -36496,7 +36552,7 @@ module.exports={
         "Status": {}
       }
     },
-    "S1j": {
+    "S1n": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -36508,7 +36564,7 @@ module.exports={
         }
       }
     },
-    "S1p": {
+    "S1t": {
       "type": "structure",
       "members": {
         "SolutionStackName": {},
@@ -36524,11 +36580,11 @@ module.exports={
           "type": "timestamp"
         },
         "OptionSettings": {
-          "shape": "S1j"
+          "shape": "S1n"
         }
       }
     },
-    "S1w": {
+    "S20": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -36539,11 +36595,11 @@ module.exports={
         }
       }
     },
-    "S2z": {
+    "S35": {
       "type": "list",
       "member": {}
     },
-    "S31": {
+    "S37": {
       "type": "structure",
       "members": {
         "Duration": {
@@ -43281,10 +43337,10 @@ module.exports={
     "apiVersion": "2015-10-01",
     "endpointPrefix": "gamelift",
     "jsonVersion": "1.1",
+    "protocol": "json",
     "serviceFullName": "Amazon GameLift",
     "signatureVersion": "v4",
-    "targetPrefix": "GameLift",
-    "protocol": "json"
+    "targetPrefix": "GameLift"
   },
   "operations": {
     "CreateAlias": {
@@ -43298,7 +43354,7 @@ module.exports={
           "Name": {},
           "Description": {},
           "RoutingStrategy": {
-            "shape": "S3"
+            "shape": "S4"
           }
         }
       },
@@ -43306,7 +43362,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Alias": {
-            "shape": "S8"
+            "shape": "S9"
           }
         }
       }
@@ -43318,7 +43374,7 @@ module.exports={
           "Name": {},
           "Version": {},
           "StorageLocation": {
-            "shape": "Sc"
+            "shape": "Sd"
           },
           "OperatingSystem": {}
         }
@@ -43327,13 +43383,13 @@ module.exports={
         "type": "structure",
         "members": {
           "Build": {
-            "shape": "Sg"
+            "shape": "Sh"
           },
           "UploadCredentials": {
-            "shape": "Sk"
+            "shape": "Sl"
           },
           "StorageLocation": {
-            "shape": "Sc"
+            "shape": "Sd"
           }
         }
       }
@@ -43353,15 +43409,18 @@ module.exports={
           "ServerLaunchPath": {},
           "ServerLaunchParameters": {},
           "LogPaths": {
-            "shape": "Sm"
+            "shape": "Sn"
           },
           "EC2InstanceType": {},
           "EC2InboundPermissions": {
-            "shape": "So"
+            "shape": "Sp"
           },
           "NewGameSessionProtectionPolicy": {},
           "RuntimeConfiguration": {
-            "shape": "Su"
+            "shape": "Sv"
+          },
+          "ResourceCreationLimitPolicy": {
+            "shape": "Sz"
           }
         }
       },
@@ -43369,7 +43428,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetAttributes": {
-            "shape": "Sz"
+            "shape": "S12"
           }
         }
       }
@@ -43388,15 +43447,17 @@ module.exports={
           },
           "Name": {},
           "GameProperties": {
-            "shape": "S13"
-          }
+            "shape": "S15"
+          },
+          "CreatorId": {},
+          "GameSessionId": {}
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "GameSession": {
-            "shape": "S18"
+            "shape": "S1b"
           }
         }
       }
@@ -43417,7 +43478,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlayerSession": {
-            "shape": "S1f"
+            "shape": "S1i"
           }
         }
       }
@@ -43441,7 +43502,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlayerSessions": {
-            "shape": "S1l"
+            "shape": "S1o"
           }
         }
       }
@@ -43506,7 +43567,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Alias": {
-            "shape": "S8"
+            "shape": "S9"
           }
         }
       }
@@ -43525,7 +43586,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Build": {
-            "shape": "Sg"
+            "shape": "Sh"
           }
         }
       }
@@ -43563,7 +43624,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetIds": {
-            "shape": "S1z"
+            "shape": "S22"
           },
           "Limit": {
             "type": "integer"
@@ -43577,7 +43638,7 @@ module.exports={
           "FleetAttributes": {
             "type": "list",
             "member": {
-              "shape": "Sz"
+              "shape": "S12"
             }
           },
           "NextToken": {}
@@ -43589,7 +43650,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetIds": {
-            "shape": "S1z"
+            "shape": "S22"
           },
           "Limit": {
             "type": "integer"
@@ -43696,7 +43757,7 @@ module.exports={
         "type": "structure",
         "members": {
           "InboundPermissions": {
-            "shape": "So"
+            "shape": "Sp"
           }
         }
       }
@@ -43706,7 +43767,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetIds": {
-            "shape": "S1z"
+            "shape": "S22"
           },
           "Limit": {
             "type": "integer"
@@ -43765,7 +43826,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "GameSession": {
-                  "shape": "S18"
+                  "shape": "S1b"
                 },
                 "ProtectionPolicy": {}
               }
@@ -43793,7 +43854,46 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSessions": {
-            "shape": "S2o"
+            "shape": "S2r"
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "DescribeInstances": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "FleetId"
+        ],
+        "members": {
+          "FleetId": {},
+          "InstanceId": {},
+          "Limit": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Instances": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "FleetId": {},
+                "InstanceId": {},
+                "IpAddress": {},
+                "OperatingSystem": {},
+                "Type": {},
+                "Status": {},
+                "CreationTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
           },
           "NextToken": {}
         }
@@ -43817,7 +43917,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlayerSessions": {
-            "shape": "S1l"
+            "shape": "S1o"
           },
           "NextToken": {}
         }
@@ -43837,7 +43937,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RuntimeConfiguration": {
-            "shape": "Su"
+            "shape": "Sv"
           }
         }
       }
@@ -43922,7 +44022,7 @@ module.exports={
           "Aliases": {
             "type": "list",
             "member": {
-              "shape": "S8"
+              "shape": "S9"
             }
           },
           "NextToken": {}
@@ -43946,7 +44046,7 @@ module.exports={
           "Builds": {
             "type": "list",
             "member": {
-              "shape": "Sg"
+              "shape": "Sh"
             }
           },
           "NextToken": {}
@@ -43968,7 +44068,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetIds": {
-            "shape": "S1z"
+            "shape": "S22"
           },
           "NextToken": {}
         }
@@ -44025,10 +44125,10 @@ module.exports={
         "type": "structure",
         "members": {
           "UploadCredentials": {
-            "shape": "Sk"
+            "shape": "Sl"
           },
           "StorageLocation": {
-            "shape": "Sc"
+            "shape": "Sd"
           }
         }
       }
@@ -44068,7 +44168,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSessions": {
-            "shape": "S2o"
+            "shape": "S2r"
           },
           "NextToken": {}
         }
@@ -44085,7 +44185,7 @@ module.exports={
           "Name": {},
           "Description": {},
           "RoutingStrategy": {
-            "shape": "S3"
+            "shape": "S4"
           }
         }
       },
@@ -44093,7 +44193,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Alias": {
-            "shape": "S8"
+            "shape": "S9"
           }
         }
       }
@@ -44114,7 +44214,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Build": {
-            "shape": "Sg"
+            "shape": "Sh"
           }
         }
       }
@@ -44129,7 +44229,10 @@ module.exports={
           "FleetId": {},
           "Name": {},
           "Description": {},
-          "NewGameSessionProtectionPolicy": {}
+          "NewGameSessionProtectionPolicy": {},
+          "ResourceCreationLimitPolicy": {
+            "shape": "Sz"
+          }
         }
       },
       "output": {
@@ -44174,10 +44277,10 @@ module.exports={
         "members": {
           "FleetId": {},
           "InboundPermissionAuthorizations": {
-            "shape": "So"
+            "shape": "Sp"
           },
           "InboundPermissionRevocations": {
-            "shape": "So"
+            "shape": "Sp"
           }
         }
       },
@@ -44208,7 +44311,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSession": {
-            "shape": "S18"
+            "shape": "S1b"
           }
         }
       }
@@ -44223,7 +44326,7 @@ module.exports={
         "members": {
           "FleetId": {},
           "RuntimeConfiguration": {
-            "shape": "Su"
+            "shape": "Sv"
           }
         }
       },
@@ -44231,14 +44334,14 @@ module.exports={
         "type": "structure",
         "members": {
           "RuntimeConfiguration": {
-            "shape": "Su"
+            "shape": "Sv"
           }
         }
       }
     }
   },
   "shapes": {
-    "S3": {
+    "S4": {
       "type": "structure",
       "members": {
         "Type": {},
@@ -44246,14 +44349,14 @@ module.exports={
         "Message": {}
       }
     },
-    "S8": {
+    "S9": {
       "type": "structure",
       "members": {
         "AliasId": {},
         "Name": {},
         "Description": {},
         "RoutingStrategy": {
-          "shape": "S3"
+          "shape": "S4"
         },
         "CreationTime": {
           "type": "timestamp"
@@ -44263,7 +44366,7 @@ module.exports={
         }
       }
     },
-    "Sc": {
+    "Sd": {
       "type": "structure",
       "members": {
         "Bucket": {},
@@ -44271,7 +44374,7 @@ module.exports={
         "RoleArn": {}
       }
     },
-    "Sg": {
+    "Sh": {
       "type": "structure",
       "members": {
         "BuildId": {},
@@ -44287,7 +44390,7 @@ module.exports={
         }
       }
     },
-    "Sk": {
+    "Sl": {
       "type": "structure",
       "members": {
         "AccessKeyId": {},
@@ -44296,11 +44399,11 @@ module.exports={
       },
       "sensitive": true
     },
-    "Sm": {
+    "Sn": {
       "type": "list",
       "member": {}
     },
-    "So": {
+    "Sp": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -44322,7 +44425,7 @@ module.exports={
         }
       }
     },
-    "Su": {
+    "Sv": {
       "type": "structure",
       "members": {
         "ServerProcesses": {
@@ -44347,6 +44450,17 @@ module.exports={
     "Sz": {
       "type": "structure",
       "members": {
+        "NewGameSessionsPerCreator": {
+          "type": "integer"
+        },
+        "PolicyPeriodInMinutes": {
+          "type": "integer"
+        }
+      }
+    },
+    "S12": {
+      "type": "structure",
+      "members": {
         "FleetId": {},
         "Description": {},
         "Name": {},
@@ -44361,13 +44475,16 @@ module.exports={
         "ServerLaunchPath": {},
         "ServerLaunchParameters": {},
         "LogPaths": {
-          "shape": "Sm"
+          "shape": "Sn"
         },
         "NewGameSessionProtectionPolicy": {},
-        "OperatingSystem": {}
+        "OperatingSystem": {},
+        "ResourceCreationLimitPolicy": {
+          "shape": "Sz"
+        }
       }
     },
-    "S13": {
+    "S15": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -44381,7 +44498,7 @@ module.exports={
         }
       }
     },
-    "S18": {
+    "S1b": {
       "type": "structure",
       "members": {
         "GameSessionId": {},
@@ -44401,16 +44518,17 @@ module.exports={
         },
         "Status": {},
         "GameProperties": {
-          "shape": "S13"
+          "shape": "S15"
         },
         "IpAddress": {},
         "Port": {
           "type": "integer"
         },
-        "PlayerSessionCreationPolicy": {}
+        "PlayerSessionCreationPolicy": {},
+        "CreatorId": {}
       }
     },
-    "S1f": {
+    "S1i": {
       "type": "structure",
       "members": {
         "PlayerSessionId": {},
@@ -44430,24 +44548,23 @@ module.exports={
         }
       }
     },
-    "S1l": {
+    "S1o": {
       "type": "list",
       "member": {
-        "shape": "S1f"
+        "shape": "S1i"
       }
     },
-    "S1z": {
+    "S22": {
       "type": "list",
       "member": {}
     },
-    "S2o": {
+    "S2r": {
       "type": "list",
       "member": {
-        "shape": "S18"
+        "shape": "S1b"
       }
     }
-  },
-  "examples": {}
+  }
 }
 },{}],68:[function(require,module,exports){
 module.exports={
@@ -83261,7 +83378,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.6.8',
+  VERSION: '2.6.9',
 
 
   Signers: {},
@@ -87102,6 +87219,7 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
         self.fillQueue = self.fillStream;
         self.partBuffers = [];
         self.body.
+          on('error', function(err) { self.cleanup(err); }).
           on('readable', function() { self.fillQueue(); }).
           on('end', function() {
             self.isDoneChunking = true;
@@ -88306,10 +88424,6 @@ AWS.util.update(AWS.S3.prototype, {
       messages.push('An endpoint must be provided when configuring ' +
                     '`s3BucketEndpoint` to true.');
     }
-    if (this.config.useAccelerateEndpoint && this.config.useDualstack) {
-      messages.push('`useAccelerateEndpoint` and `useDualstack` ' +
-                    'cannot both be configured to true.');
-    }
     if (messages.length === 1) {
       msg = messages[0];
     } else if (messages.length > 1) {
@@ -88400,7 +88514,11 @@ AWS.util.update(AWS.S3.prototype, {
     if (b) {
       if (!service.pathStyleBucketName(b)) {
         if (service.config.useAccelerateEndpoint && service.isValidAccelerateOperation(req.operation)) {
-          endpoint.hostname = b + '.s3-accelerate.amazonaws.com';
+          if (service.config.useDualstack) {
+            endpoint.hostname = b + '.s3-accelerate.dualstack.amazonaws.com';
+          } else {
+            endpoint.hostname = b + '.s3-accelerate.amazonaws.com';
+          }
         } else if (!service.config.s3BucketEndpoint) {
           endpoint.hostname =
             b + '.' + endpoint.hostname;

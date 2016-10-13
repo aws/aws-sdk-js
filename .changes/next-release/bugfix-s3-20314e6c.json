@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "s3",
-  "description": "Propagate an error from a stream to s3.upload callback #1169"
-}

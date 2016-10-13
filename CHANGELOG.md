@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.8-->
+<!--LATEST=2.6.9-->
 <!--ENTRYINSERT-->
+
+## 2.6.9
+* bugfix: s3: Propagate an error from a stream to s3.upload callback #1169
+* feature: S3: Adds support for using dualstack with accelerate endpoints.
+* feature: ACM: This change allows users to import third-party SSL/TLS certificates into ACM.
+* feature: ElasticBeanstalk: Adds CodeCommit integraion. DescribeApplicationVersions updated to support pagination.
+* feature: GameLift: New APIs to protect game developer resource (builds, alias, fleets, instances, game sessions and player sessions) against abuse.
 
 ## 2.6.8
 * feature: ECR: DescribeImages is a new api used to expose image metadata which today includes image size and image creation timestamp.
