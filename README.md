@@ -9,7 +9,7 @@
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
 or Node.js backends
 
-Release notes can be found at http://aws.amazon.com/releasenotes/SDK/JavaScript
+For release notes, see the [CHANGELOG](CHANGELOG.md). Prior to v2.4.8, release notes can be found at http://aws.amazon.com/releasenotes/SDK/JavaScript
 
 <p class="note">
 If you are upgrading from 1.x to 2.0 of the SDK, please see
