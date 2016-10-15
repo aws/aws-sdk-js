@@ -709,6 +709,17 @@ describe 'AWS.util.addPromises', ->
     expect(typeof AWS.Credentials.prototype.refreshPromise).to.equal('function')
     expect(typeof AWS.CredentialProviderChain.prototype.resolvePromise).to.equal('function')
 
+  it 'deletes promises from all supported constructors when promise dependency is not a function', ->
+    constructors = [AWS.Request, AWS.S3.ManagedUpload, AWS.Credentials, AWS.CredentialProviderChain]
+    P = ->
+    AWS.util.addPromises(constructors, P)
+    AWS.util.addPromises(constructors, 'not a function')
+    expect(AWS.Request.prototype.promise).to.be.undefined
+    expect(AWS.S3.ManagedUpload.prototype.promise).to.be.undefined
+    expect(AWS.Credentials.prototype.getPromise).to.be.undefined
+    expect(AWS.Credentials.prototype.refreshPromise).to.be.undefined
+    expect(AWS.CredentialProviderChain.prototype.resolvePromise).to.be.undefined
+
 describe 'AWS.util.isDualstackAvailable', ->
   metadata = require('../apis/metadata.json')
 

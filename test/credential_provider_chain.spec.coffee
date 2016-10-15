@@ -107,6 +107,9 @@ if AWS.util.isNode()
             provider.forceRefreshError = true
           provider
 
+        before ->
+          AWS.config.setPromisesDependency()
+
         beforeEach ->
           err = null
           creds = null

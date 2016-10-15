@@ -254,15 +254,13 @@ describe 'AWS.config', ->
       utilSpy = helpers.spyOn(AWS.util, 'addPromises')
       AWS.config.setPromisesDependency(->)
       expect(utilSpy.calls.length).to.equal(1)
+      expect(Array.isArray(utilSpy.calls[0].arguments[0])).to.be.true
+      expect(utilSpy.calls[0].arguments[0].length).to.equal(4)
 
   describe 'getPromisesDependency', ->
-    it 'returns native Promises (if supported) if PromisesDependency not set', ->
-      AWS.config.setPromisesDependency()
-      dep = AWS.config.getPromisesDependency()
-      # returns undefined if no native Promise
-      expect(dep).to.equal(global.Promise)
-
     it 'returns PromisesDependency if set', ->
+      AWS.config.setPromisesDependency()
+      expect(AWS.config.getPromisesDependency()).to.be.undefined
       P = ->
       AWS.config.setPromisesDependency(P)
       dep = AWS.config.getPromisesDependency()
