@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.9-->
+<!--LATEST=2.6.10-->
 <!--ENTRYINSERT-->
+
+## 2.6.10
+* feature: CloudFront: Ability to use Amazon CloudFront to deliver your content both via IPv6 and IPv4 using HTTP/HTTPS.
+* feature: IoT: Updates IoT API to the latest available version.
+* feature: RDS: Updates RDS to support accessing other AWS services by gassociating an IAM role with necessary permissions to your DB cluster.
 
 ## 2.6.9
 * bugfix: s3: Propagate an error from a stream to s3.upload callback #1169
