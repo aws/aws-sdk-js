@@ -16,6 +16,9 @@
     "name": "AutoScaling",
     "cors": true
   },
+  "budgets": {
+    "name": "Budgets"
+  },
   "cloudformation": {
     "name": "CloudFormation",
     "cors": true
