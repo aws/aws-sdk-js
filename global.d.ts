@@ -1,5 +1,4 @@
-import * as AWS from './lib/core';
+import {Config} from './lib/core';
 
-export = Object.assign({
-    config: new AWS.Config()
-}, AWS);
+export * from './lib/core';
+export var config = new Config()
