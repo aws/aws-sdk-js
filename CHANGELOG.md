@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.10-->
+<!--LATEST=2.6.11-->
 <!--ENTRYINSERT-->
+
+## 2.6.11
+* feature: Budgets: Adds the AWS Budgets service API via AWS.Budgets.
 
 ## 2.6.10
 * feature: CloudFront: Ability to use Amazon CloudFront to deliver your content both via IPv6 and IPv4 using HTTP/HTTPS.

@@ -6,6 +6,7 @@ module.exports = {
   APIGateway: require('./apigateway'),
   ApplicationAutoScaling: require('./applicationautoscaling'),
   AutoScaling: require('./autoscaling'),
+  Budgets: require('./budgets'),
   CloudFormation: require('./cloudformation'),
   CloudFront: require('./cloudfront'),
   CloudHSM: require('./cloudhsm'),
