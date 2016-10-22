@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "EnvironmentVariable",
+  "description": "Add AWS_CREDENTIAL_PROFILES_FILE Environment Variable as defined in the Java AWS_SDK"
+}
