@@ -653,21 +653,28 @@ describe 'AWS.util.extractRequestId', ->
     AWS.util.extractRequestId(req.response)
     expect(req.response.error.requestId).to.equal('RequestId1')
 
-describe 'AWS.util.addPromisesToRequests', ->
+describe 'AWS.util.addPromises', ->
+  beforeEach ->
+    AWS.config.setPromisesDependency()
+
   afterEach ->
     delete AWS.Request.prototype.promise
+    delete AWS.S3.ManagedUpload.prototype.promise
+    delete AWS.Credentials.prototype.getPromise
+    delete AWS.Credentials.prototype.refreshPromise
+    delete AWS.CredentialProviderChain.prototype.resolvePromise
 
   if typeof Promise != 'undefined'
     describe 'with native promises', ->
       it 'can use native promises', ->
-        AWS.util.addPromisesToRequests(AWS.Request)
+        AWS.util.addPromises(AWS.Request)
         expect(typeof AWS.Request.prototype.promise).to.equal('function')
 
       it 'will use specified dependency over native promises', ->
         service = new helpers.MockService()
         count = 0
         P = -> count++
-        AWS.util.addPromisesToRequests(AWS.Request, P)
+        AWS.util.addPromises(AWS.Request, P)
         req = service.makeRequest('mockMethod')
         expect(typeof AWS.Request.prototype.promise).to.equal('function')
         reqSpy = helpers.spyOn(req, 'promise').andCallThrough()
@@ -677,20 +684,41 @@ describe 'AWS.util.addPromisesToRequests', ->
   else
     describe 'without native promises', ->
       it 'will not add promise method if no dependency is provided', ->
-        AWS.util.addPromisesToRequests(AWS.Request)
+        AWS.util.addPromises(AWS.Request)
         expect(typeof AWS.Request.prototype.promise).to.equal('undefined')
 
       it 'will add promise method if dependency is provided', ->
         P = ->
-        AWS.util.addPromisesToRequests(AWS.Request, P)
+        AWS.util.addPromises(AWS.Request, P)
         expect(typeof AWS.Request.prototype.promise).to.equal('function')
 
       it 'will remove promise method if dependency is not a function', ->
         P = ->
-        AWS.util.addPromisesToRequests(AWS.Request, P)
+        AWS.util.addPromises(AWS.Request, P)
         expect(typeof AWS.Request.prototype.promise).to.equal('function')
-        AWS.util.addPromisesToRequests(AWS.Request, null)
+        AWS.util.addPromises(AWS.Request, null)
         expect(typeof AWS.Request.prototype.promise).to.equal('undefined')
+
+  it 'adds promises to supported constructors', ->
+    constructors = [AWS.Request, AWS.S3.ManagedUpload, AWS.Credentials, AWS.CredentialProviderChain]
+    P = ->
+    AWS.util.addPromises(constructors, P)
+    expect(typeof AWS.Request.prototype.promise).to.equal('function')
+    expect(typeof AWS.S3.ManagedUpload.prototype.promise).to.equal('function')
+    expect(typeof AWS.Credentials.prototype.getPromise).to.equal('function')
+    expect(typeof AWS.Credentials.prototype.refreshPromise).to.equal('function')
+    expect(typeof AWS.CredentialProviderChain.prototype.resolvePromise).to.equal('function')
+
+  it 'deletes promises from all supported constructors when promise dependency is not a function', ->
+    constructors = [AWS.Request, AWS.S3.ManagedUpload, AWS.Credentials, AWS.CredentialProviderChain]
+    P = ->
+    AWS.util.addPromises(constructors, P)
+    AWS.util.addPromises(constructors, 'not a function')
+    expect(AWS.Request.prototype.promise).to.be.undefined
+    expect(AWS.S3.ManagedUpload.prototype.promise).to.be.undefined
+    expect(AWS.Credentials.prototype.getPromise).to.be.undefined
+    expect(AWS.Credentials.prototype.refreshPromise).to.be.undefined
+    expect(AWS.CredentialProviderChain.prototype.resolvePromise).to.be.undefined
 
 describe 'AWS.util.isDualstackAvailable', ->
   metadata = require('../apis/metadata.json')
