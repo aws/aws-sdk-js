@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "ManagedUpload",
-  "description": "Adds promise support for S3.ManagedUpload. Calling `s3.upload(params).promise()` will return a promise."
-}

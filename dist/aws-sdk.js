@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.6.11
+// AWS SDK for JavaScript v2.6.12
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -52961,6 +52961,9 @@ module.exports={
     "prefix": "sdb",
     "name": "SimpleDB"
   },
+  "sms": {
+    "name": "SMS"
+  },
   "snowball": {
     "name": "Snowball"
   },
@@ -83284,6 +83287,7 @@ module.exports = AWS.CloudFront.Signer;
 var AWS = require('./core');
 require('./credentials');
 require('./credentials/credential_provider_chain');
+var PromisesDependency;
 
 
 AWS.Config = AWS.util.inherit({
@@ -83458,7 +83462,15 @@ AWS.Config = AWS.util.inherit({
 
 
   setPromisesDependency: function setPromisesDependency(dep) {
-    AWS.util.addPromisesToRequests(AWS.Request, dep);
+    PromisesDependency = dep;
+    var constructors = [AWS.Request, AWS.Credentials, AWS.CredentialProviderChain];
+    if (AWS.S3 && AWS.S3.ManagedUpload) constructors.push(AWS.S3.ManagedUpload);
+    AWS.util.addPromises(constructors, dep);
+  },
+
+
+  getPromisesDependency: function getPromisesDependency() {
+    return PromisesDependency;
   }
 });
 
@@ -83477,7 +83489,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.6.11',
+  VERSION: '2.6.12',
 
 
   Signers: {},
@@ -83592,11 +83604,29 @@ AWS.Credentials = AWS.util.inherit({
   },
 
 
+
+
+
+
   refresh: function refresh(callback) {
     this.expired = false;
     callback();
   }
 });
+
+
+AWS.Credentials.addPromisesToClass = function addPromisesToClass(PromiseDependency) {
+  this.prototype.getPromise = AWS.util.promisifyMethod('get', PromiseDependency);
+  this.prototype.refreshPromise = AWS.util.promisifyMethod('refresh', PromiseDependency);
+};
+
+
+AWS.Credentials.deletePromisesFromClass = function deletePromisesFromClass() {
+  delete this.prototype.getPromise;
+  delete this.prototype.refreshPromise;
+};
+
+AWS.util.addPromises(AWS.Credentials);
 
 },{"./core":188}],190:[function(require,module,exports){
 var AWS = require('../core');
@@ -83809,6 +83839,8 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
   },
 
 
+
+
   resolve: function resolve(callback) {
     if (this.providers.length === 0) {
       callback(new Error('No providers'));
@@ -83843,11 +83875,22 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
     resolveNext();
     return this;
   }
-
 });
 
 
 AWS.CredentialProviderChain.defaultProviders = [];
+
+
+AWS.CredentialProviderChain.addPromisesToClass = function addPromisesToClass(PromiseDependency) {
+  this.prototype.resolvePromise = AWS.util.promisifyMethod('resolve', PromiseDependency);
+};
+
+
+AWS.CredentialProviderChain.deletePromisesFromClass = function deletePromisesFromClass() {
+  delete this.prototype.resolvePromise;
+};
+
+AWS.util.addPromises(AWS.CredentialProviderChain);
 
 },{"../core":188}],192:[function(require,module,exports){
 var AWS = require('../core');
@@ -87004,7 +87047,29 @@ AWS.Request = inherit({
   }
 });
 
-AWS.util.addPromisesToRequests(AWS.Request);
+
+AWS.Request.addPromisesToClass = function addPromisesToClass(PromiseDependency) {
+  this.prototype.promise = function promise() {
+    var self = this;
+    return new PromiseDependency(function(resolve, reject) {
+      self.on('complete', function(resp) {
+        if (resp.error) {
+          reject(resp.error);
+        } else {
+          resolve(resp.data);
+        }
+      });
+      self.runTo();
+    });
+  };
+};
+
+
+AWS.Request.deletePromisesFromClass = function deletePromisesFromClass() {
+  delete this.prototype.promise;
+};
+
+AWS.util.addPromises(AWS.Request);
 
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
@@ -87331,6 +87396,8 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
 
     if (runFill) self.fillQueue.call(self);
   },
+
+
 
 
   abort: function() {
@@ -87669,6 +87736,19 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
 });
 
 AWS.util.mixin(AWS.S3.ManagedUpload, AWS.SequentialExecutor);
+
+
+AWS.S3.ManagedUpload.addPromisesToClass = function addPromisesToClass(PromiseDependency) {
+  this.prototype.promise = AWS.util.promisifyMethod('send', PromiseDependency);
+};
+
+
+AWS.S3.ManagedUpload.deletePromisesFromClass = function deletePromisesFromClass() {
+  delete this.prototype.promise;
+};
+
+AWS.util.addPromises(AWS.S3.ManagedUpload);
+
 module.exports = AWS.S3.ManagedUpload;
 
 },{"../core":188}],224:[function(require,module,exports){
@@ -90627,28 +90707,42 @@ var util = {
   },
 
 
-  addPromisesToRequests: function addPromisesToRequests(constructor, PromiseDependency) {
-    PromiseDependency = PromiseDependency || null;
-    if (!PromiseDependency && typeof Promise !== 'undefined') {
+  addPromises: function addPromises(constructors, PromiseDependency) {
+    if (PromiseDependency === undefined && AWS && AWS.config) {
+      PromiseDependency = AWS.config.getPromisesDependency();
+    }
+    if (PromiseDependency === undefined && typeof Promise !== 'undefined') {
       PromiseDependency = Promise;
     }
-    if (typeof PromiseDependency !== 'function') {
-      delete constructor.prototype.promise;
-      return;
+    if (typeof PromiseDependency !== 'function') var deletePromises = true;
+    if (!Array.isArray(constructors)) constructors = [constructors];
+
+    for (var ind = 0; ind < constructors.length; ind++) {
+      var constructor = constructors[ind];
+      if (deletePromises) {
+        if (constructor.deletePromisesFromClass) {
+          constructor.deletePromisesFromClass();
+        }
+      } else if (constructor.addPromisesToClass) {
+        constructor.addPromisesToClass(PromiseDependency);
+      }
     }
-    constructor.prototype.promise = function promise() {
+  },
+
+
+  promisifyMethod: function promisifyMethod(methodName, PromiseDependency) {
+    return function promise() {
       var self = this;
       return new PromiseDependency(function(resolve, reject) {
-        self.on('complete', function(resp) {
-          if (resp.error) {
-            reject(resp.error);
+        self[methodName](function(err, data) {
+          if (err) {
+            reject(err);
           } else {
-            resolve(resp.data);
+            resolve(data);
           }
         });
-        self.runTo();
       });
-    }
+    };
   },
 
 

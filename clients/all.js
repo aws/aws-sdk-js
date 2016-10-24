@@ -67,6 +67,7 @@ module.exports = {
   ServiceCatalog: require('./servicecatalog'),
   SES: require('./ses'),
   SimpleDB: require('./simpledb'),
+  SMS: require('./sms'),
   Snowball: require('./snowball'),
   SNS: require('./sns'),
   SQS: require('./sqs'),
