@@ -306,6 +306,9 @@
     "prefix": "sdb",
     "name": "SimpleDB"
   },
+  "sms": {
+    "name": "SMS"
+  },
   "snowball": {
     "name": "Snowball"
   },
