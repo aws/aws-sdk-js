@@ -6,245 +6,245 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Create a new origin access identity.
    */
-  createCloudFrontOriginAccessIdentity2016_09_07(params: CloudFront.CreateCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.CreateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.CreateCloudFrontOriginAccessIdentityResult, AWSError>;
+  createCloudFrontOriginAccessIdentity(params: CloudFront.Types.CreateCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
    * Create a new origin access identity.
    */
-  createCloudFrontOriginAccessIdentity2016_09_07(callback?: (err: AWSError, data: CloudFront.CreateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.CreateCloudFrontOriginAccessIdentityResult, AWSError>;
+  createCloudFrontOriginAccessIdentity(callback?: (err: AWSError, data: CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
    * Create a new distribution.
    */
-  createDistribution2016_09_07(params: CloudFront.CreateDistributionRequest, callback?: (err: AWSError, data: CloudFront.CreateDistributionResult) => void): Request<CloudFront.CreateDistributionResult, AWSError>;
+  createDistribution(params: CloudFront.Types.CreateDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionResult) => void): Request<CloudFront.Types.CreateDistributionResult, AWSError>;
   /**
    * Create a new distribution.
    */
-  createDistribution2016_09_07(callback?: (err: AWSError, data: CloudFront.CreateDistributionResult) => void): Request<CloudFront.CreateDistributionResult, AWSError>;
+  createDistribution(callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionResult) => void): Request<CloudFront.Types.CreateDistributionResult, AWSError>;
   /**
    * Create a new distribution with tags.
    */
-  createDistributionWithTags2016_09_07(params: CloudFront.CreateDistributionWithTagsRequest, callback?: (err: AWSError, data: CloudFront.CreateDistributionWithTagsResult) => void): Request<CloudFront.CreateDistributionWithTagsResult, AWSError>;
+  createDistributionWithTags(params: CloudFront.Types.CreateDistributionWithTagsRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateDistributionWithTagsResult, AWSError>;
   /**
    * Create a new distribution with tags.
    */
-  createDistributionWithTags2016_09_07(callback?: (err: AWSError, data: CloudFront.CreateDistributionWithTagsResult) => void): Request<CloudFront.CreateDistributionWithTagsResult, AWSError>;
+  createDistributionWithTags(callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateDistributionWithTagsResult, AWSError>;
   /**
    * Create a new invalidation.
    */
-  createInvalidation2016_09_07(params: CloudFront.CreateInvalidationRequest, callback?: (err: AWSError, data: CloudFront.CreateInvalidationResult) => void): Request<CloudFront.CreateInvalidationResult, AWSError>;
+  createInvalidation(params: CloudFront.Types.CreateInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
   /**
    * Create a new invalidation.
    */
-  createInvalidation2016_09_07(callback?: (err: AWSError, data: CloudFront.CreateInvalidationResult) => void): Request<CloudFront.CreateInvalidationResult, AWSError>;
+  createInvalidation(callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
   /**
    * Create a new streaming distribution.
    */
-  createStreamingDistribution2016_09_07(params: CloudFront.CreateStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.CreateStreamingDistributionResult) => void): Request<CloudFront.CreateStreamingDistributionResult, AWSError>;
+  createStreamingDistribution(params: CloudFront.Types.CreateStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionResult) => void): Request<CloudFront.Types.CreateStreamingDistributionResult, AWSError>;
   /**
    * Create a new streaming distribution.
    */
-  createStreamingDistribution2016_09_07(callback?: (err: AWSError, data: CloudFront.CreateStreamingDistributionResult) => void): Request<CloudFront.CreateStreamingDistributionResult, AWSError>;
+  createStreamingDistribution(callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionResult) => void): Request<CloudFront.Types.CreateStreamingDistributionResult, AWSError>;
   /**
    * Create a new streaming distribution with tags.
    */
-  createStreamingDistributionWithTags2016_09_07(params: CloudFront.CreateStreamingDistributionWithTagsRequest, callback?: (err: AWSError, data: CloudFront.CreateStreamingDistributionWithTagsResult) => void): Request<CloudFront.CreateStreamingDistributionWithTagsResult, AWSError>;
+  createStreamingDistributionWithTags(params: CloudFront.Types.CreateStreamingDistributionWithTagsRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateStreamingDistributionWithTagsResult, AWSError>;
   /**
    * Create a new streaming distribution with tags.
    */
-  createStreamingDistributionWithTags2016_09_07(callback?: (err: AWSError, data: CloudFront.CreateStreamingDistributionWithTagsResult) => void): Request<CloudFront.CreateStreamingDistributionWithTagsResult, AWSError>;
+  createStreamingDistributionWithTags(callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateStreamingDistributionWithTagsResult, AWSError>;
   /**
    * Delete an origin access identity.
    */
-  deleteCloudFrontOriginAccessIdentity2016_09_07(params: CloudFront.DeleteCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteCloudFrontOriginAccessIdentity(params: CloudFront.Types.DeleteCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete an origin access identity.
    */
-  deleteCloudFrontOriginAccessIdentity2016_09_07(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteCloudFrontOriginAccessIdentity(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a distribution.
    */
-  deleteDistribution2016_09_07(params: CloudFront.DeleteDistributionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDistribution(params: CloudFront.Types.DeleteDistributionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a distribution.
    */
-  deleteDistribution2016_09_07(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDistribution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a streaming distribution.
    */
-  deleteStreamingDistribution2016_09_07(params: CloudFront.DeleteStreamingDistributionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteStreamingDistribution(params: CloudFront.Types.DeleteStreamingDistributionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a streaming distribution.
    */
-  deleteStreamingDistribution2016_09_07(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteStreamingDistribution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Get the information about an origin access identity.
    */
-  getCloudFrontOriginAccessIdentity2016_09_07(params: CloudFront.GetCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.GetCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.GetCloudFrontOriginAccessIdentityResult, AWSError>;
+  getCloudFrontOriginAccessIdentity(params: CloudFront.Types.GetCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.Types.GetCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.GetCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
    * Get the information about an origin access identity.
    */
-  getCloudFrontOriginAccessIdentity2016_09_07(callback?: (err: AWSError, data: CloudFront.GetCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.GetCloudFrontOriginAccessIdentityResult, AWSError>;
+  getCloudFrontOriginAccessIdentity(callback?: (err: AWSError, data: CloudFront.Types.GetCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.GetCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
    * Get the configuration information about an origin access identity.
    */
-  getCloudFrontOriginAccessIdentityConfig2016_09_07(params: CloudFront.GetCloudFrontOriginAccessIdentityConfigRequest, callback?: (err: AWSError, data: CloudFront.GetCloudFrontOriginAccessIdentityConfigResult) => void): Request<CloudFront.GetCloudFrontOriginAccessIdentityConfigResult, AWSError>;
+  getCloudFrontOriginAccessIdentityConfig(params: CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult) => void): Request<CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult, AWSError>;
   /**
    * Get the configuration information about an origin access identity.
    */
-  getCloudFrontOriginAccessIdentityConfig2016_09_07(callback?: (err: AWSError, data: CloudFront.GetCloudFrontOriginAccessIdentityConfigResult) => void): Request<CloudFront.GetCloudFrontOriginAccessIdentityConfigResult, AWSError>;
+  getCloudFrontOriginAccessIdentityConfig(callback?: (err: AWSError, data: CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult) => void): Request<CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult, AWSError>;
   /**
    * Get the information about a distribution.
    */
-  getDistribution2016_09_07(params: CloudFront.GetDistributionRequest, callback?: (err: AWSError, data: CloudFront.GetDistributionResult) => void): Request<CloudFront.GetDistributionResult, AWSError>;
+  getDistribution(params: CloudFront.Types.GetDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetDistributionResult) => void): Request<CloudFront.Types.GetDistributionResult, AWSError>;
   /**
    * Get the information about a distribution.
    */
-  getDistribution2016_09_07(callback?: (err: AWSError, data: CloudFront.GetDistributionResult) => void): Request<CloudFront.GetDistributionResult, AWSError>;
+  getDistribution(callback?: (err: AWSError, data: CloudFront.Types.GetDistributionResult) => void): Request<CloudFront.Types.GetDistributionResult, AWSError>;
   /**
    * Get the configuration information about a distribution.
    */
-  getDistributionConfig2016_09_07(params: CloudFront.GetDistributionConfigRequest, callback?: (err: AWSError, data: CloudFront.GetDistributionConfigResult) => void): Request<CloudFront.GetDistributionConfigResult, AWSError>;
+  getDistributionConfig(params: CloudFront.Types.GetDistributionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetDistributionConfigResult) => void): Request<CloudFront.Types.GetDistributionConfigResult, AWSError>;
   /**
    * Get the configuration information about a distribution.
    */
-  getDistributionConfig2016_09_07(callback?: (err: AWSError, data: CloudFront.GetDistributionConfigResult) => void): Request<CloudFront.GetDistributionConfigResult, AWSError>;
+  getDistributionConfig(callback?: (err: AWSError, data: CloudFront.Types.GetDistributionConfigResult) => void): Request<CloudFront.Types.GetDistributionConfigResult, AWSError>;
   /**
    * Get the information about an invalidation.
    */
-  getInvalidation2016_09_07(params: CloudFront.GetInvalidationRequest, callback?: (err: AWSError, data: CloudFront.GetInvalidationResult) => void): Request<CloudFront.GetInvalidationResult, AWSError>;
+  getInvalidation(params: CloudFront.Types.GetInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
   /**
    * Get the information about an invalidation.
    */
-  getInvalidation2016_09_07(callback?: (err: AWSError, data: CloudFront.GetInvalidationResult) => void): Request<CloudFront.GetInvalidationResult, AWSError>;
+  getInvalidation(callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
   /**
    * Get the information about a streaming distribution.
    */
-  getStreamingDistribution2016_09_07(params: CloudFront.GetStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.GetStreamingDistributionResult) => void): Request<CloudFront.GetStreamingDistributionResult, AWSError>;
+  getStreamingDistribution(params: CloudFront.Types.GetStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
   /**
    * Get the information about a streaming distribution.
    */
-  getStreamingDistribution2016_09_07(callback?: (err: AWSError, data: CloudFront.GetStreamingDistributionResult) => void): Request<CloudFront.GetStreamingDistributionResult, AWSError>;
+  getStreamingDistribution(callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
   /**
    * Get the configuration information about a streaming distribution.
    */
-  getStreamingDistributionConfig2016_09_07(params: CloudFront.GetStreamingDistributionConfigRequest, callback?: (err: AWSError, data: CloudFront.GetStreamingDistributionConfigResult) => void): Request<CloudFront.GetStreamingDistributionConfigResult, AWSError>;
+  getStreamingDistributionConfig(params: CloudFront.Types.GetStreamingDistributionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionConfigResult) => void): Request<CloudFront.Types.GetStreamingDistributionConfigResult, AWSError>;
   /**
    * Get the configuration information about a streaming distribution.
    */
-  getStreamingDistributionConfig2016_09_07(callback?: (err: AWSError, data: CloudFront.GetStreamingDistributionConfigResult) => void): Request<CloudFront.GetStreamingDistributionConfigResult, AWSError>;
+  getStreamingDistributionConfig(callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionConfigResult) => void): Request<CloudFront.Types.GetStreamingDistributionConfigResult, AWSError>;
   /**
    * List origin access identities.
    */
-  listCloudFrontOriginAccessIdentities2016_09_07(params: CloudFront.ListCloudFrontOriginAccessIdentitiesRequest, callback?: (err: AWSError, data: CloudFront.ListCloudFrontOriginAccessIdentitiesResult) => void): Request<CloudFront.ListCloudFrontOriginAccessIdentitiesResult, AWSError>;
+  listCloudFrontOriginAccessIdentities(params: CloudFront.Types.ListCloudFrontOriginAccessIdentitiesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult) => void): Request<CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult, AWSError>;
   /**
    * List origin access identities.
    */
-  listCloudFrontOriginAccessIdentities2016_09_07(callback?: (err: AWSError, data: CloudFront.ListCloudFrontOriginAccessIdentitiesResult) => void): Request<CloudFront.ListCloudFrontOriginAccessIdentitiesResult, AWSError>;
+  listCloudFrontOriginAccessIdentities(callback?: (err: AWSError, data: CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult) => void): Request<CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult, AWSError>;
   /**
    * List distributions.
    */
-  listDistributions2016_09_07(params: CloudFront.ListDistributionsRequest, callback?: (err: AWSError, data: CloudFront.ListDistributionsResult) => void): Request<CloudFront.ListDistributionsResult, AWSError>;
+  listDistributions(params: CloudFront.Types.ListDistributionsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsResult) => void): Request<CloudFront.Types.ListDistributionsResult, AWSError>;
   /**
    * List distributions.
    */
-  listDistributions2016_09_07(callback?: (err: AWSError, data: CloudFront.ListDistributionsResult) => void): Request<CloudFront.ListDistributionsResult, AWSError>;
+  listDistributions(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsResult) => void): Request<CloudFront.Types.ListDistributionsResult, AWSError>;
   /**
    * List the distributions that are associated with a specified AWS WAF web ACL.
    */
-  listDistributionsByWebACLId2016_09_07(params: CloudFront.ListDistributionsByWebACLIdRequest, callback?: (err: AWSError, data: CloudFront.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.ListDistributionsByWebACLIdResult, AWSError>;
+  listDistributionsByWebACLId(params: CloudFront.Types.ListDistributionsByWebACLIdRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.Types.ListDistributionsByWebACLIdResult, AWSError>;
   /**
    * List the distributions that are associated with a specified AWS WAF web ACL.
    */
-  listDistributionsByWebACLId2016_09_07(callback?: (err: AWSError, data: CloudFront.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.ListDistributionsByWebACLIdResult, AWSError>;
+  listDistributionsByWebACLId(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.Types.ListDistributionsByWebACLIdResult, AWSError>;
   /**
    * List invalidation batches.
    */
-  listInvalidations2016_09_07(params: CloudFront.ListInvalidationsRequest, callback?: (err: AWSError, data: CloudFront.ListInvalidationsResult) => void): Request<CloudFront.ListInvalidationsResult, AWSError>;
+  listInvalidations(params: CloudFront.Types.ListInvalidationsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
   /**
    * List invalidation batches.
    */
-  listInvalidations2016_09_07(callback?: (err: AWSError, data: CloudFront.ListInvalidationsResult) => void): Request<CloudFront.ListInvalidationsResult, AWSError>;
+  listInvalidations(callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
   /**
    * List streaming distributions.
    */
-  listStreamingDistributions2016_09_07(params: CloudFront.ListStreamingDistributionsRequest, callback?: (err: AWSError, data: CloudFront.ListStreamingDistributionsResult) => void): Request<CloudFront.ListStreamingDistributionsResult, AWSError>;
+  listStreamingDistributions(params: CloudFront.Types.ListStreamingDistributionsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListStreamingDistributionsResult) => void): Request<CloudFront.Types.ListStreamingDistributionsResult, AWSError>;
   /**
    * List streaming distributions.
    */
-  listStreamingDistributions2016_09_07(callback?: (err: AWSError, data: CloudFront.ListStreamingDistributionsResult) => void): Request<CloudFront.ListStreamingDistributionsResult, AWSError>;
+  listStreamingDistributions(callback?: (err: AWSError, data: CloudFront.Types.ListStreamingDistributionsResult) => void): Request<CloudFront.Types.ListStreamingDistributionsResult, AWSError>;
   /**
    * List tags for a CloudFront resource.
    */
-  listTagsForResource2016_09_07(params: CloudFront.ListTagsForResourceRequest, callback?: (err: AWSError, data: CloudFront.ListTagsForResourceResult) => void): Request<CloudFront.ListTagsForResourceResult, AWSError>;
+  listTagsForResource(params: CloudFront.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CloudFront.Types.ListTagsForResourceResult) => void): Request<CloudFront.Types.ListTagsForResourceResult, AWSError>;
   /**
    * List tags for a CloudFront resource.
    */
-  listTagsForResource2016_09_07(callback?: (err: AWSError, data: CloudFront.ListTagsForResourceResult) => void): Request<CloudFront.ListTagsForResourceResult, AWSError>;
+  listTagsForResource(callback?: (err: AWSError, data: CloudFront.Types.ListTagsForResourceResult) => void): Request<CloudFront.Types.ListTagsForResourceResult, AWSError>;
   /**
    * Add tags to a CloudFront resource.
    */
-  tagResource2016_09_07(params: CloudFront.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(params: CloudFront.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Add tags to a CloudFront resource.
    */
-  tagResource2016_09_07(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Remove tags from a CloudFront resource.
    */
-  untagResource2016_09_07(params: CloudFront.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  untagResource(params: CloudFront.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Remove tags from a CloudFront resource.
    */
-  untagResource2016_09_07(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Update an origin access identity.
    */
-  updateCloudFrontOriginAccessIdentity2016_09_07(params: CloudFront.UpdateCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.UpdateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.UpdateCloudFrontOriginAccessIdentityResult, AWSError>;
+  updateCloudFrontOriginAccessIdentity(params: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
    * Update an origin access identity.
    */
-  updateCloudFrontOriginAccessIdentity2016_09_07(callback?: (err: AWSError, data: CloudFront.UpdateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.UpdateCloudFrontOriginAccessIdentityResult, AWSError>;
+  updateCloudFrontOriginAccessIdentity(callback?: (err: AWSError, data: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
    * Update a distribution.
    */
-  updateDistribution2016_09_07(params: CloudFront.UpdateDistributionRequest, callback?: (err: AWSError, data: CloudFront.UpdateDistributionResult) => void): Request<CloudFront.UpdateDistributionResult, AWSError>;
+  updateDistribution(params: CloudFront.Types.UpdateDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
   /**
    * Update a distribution.
    */
-  updateDistribution2016_09_07(callback?: (err: AWSError, data: CloudFront.UpdateDistributionResult) => void): Request<CloudFront.UpdateDistributionResult, AWSError>;
+  updateDistribution(callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
   /**
    * Update a streaming distribution.
    */
-  updateStreamingDistribution2016_09_07(params: CloudFront.UpdateStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.UpdateStreamingDistributionResult) => void): Request<CloudFront.UpdateStreamingDistributionResult, AWSError>;
+  updateStreamingDistribution(params: CloudFront.Types.UpdateStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateStreamingDistributionResult) => void): Request<CloudFront.Types.UpdateStreamingDistributionResult, AWSError>;
   /**
    * Update a streaming distribution.
    */
-  updateStreamingDistribution2016_09_07(callback?: (err: AWSError, data: CloudFront.UpdateStreamingDistributionResult) => void): Request<CloudFront.UpdateStreamingDistributionResult, AWSError>;
+  updateStreamingDistribution(callback?: (err: AWSError, data: CloudFront.Types.UpdateStreamingDistributionResult) => void): Request<CloudFront.Types.UpdateStreamingDistributionResult, AWSError>;
   /**
    * Waits for the DistributionDeployed state by periodically calling the underlying CloudFront.getDistributionoperation every 60 seconds (at most 25 times). Wait until a distribution is deployed.
    */
-  waitFor(state: "DistributionDeployed", params: CloudFront.GetDistributionRequest, callback?: (err: AWSError, data: CloudFront.GetDistributionResult) => void): Request<CloudFront.GetDistributionResult, AWSError>;
+  waitFor(state: "DistributionDeployed", params: CloudFront.Types.GetDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetDistributionResult) => void): Request<CloudFront.Types.GetDistributionResult, AWSError>;
   /**
    * Waits for the DistributionDeployed state by periodically calling the underlying CloudFront.getDistributionoperation every 60 seconds (at most 25 times). Wait until a distribution is deployed.
    */
-  waitFor(state: "DistributionDeployed", callback?: (err: AWSError, data: CloudFront.GetDistributionResult) => void): Request<CloudFront.GetDistributionResult, AWSError>;
+  waitFor(state: "DistributionDeployed", callback?: (err: AWSError, data: CloudFront.Types.GetDistributionResult) => void): Request<CloudFront.Types.GetDistributionResult, AWSError>;
   /**
    * Waits for the InvalidationCompleted state by periodically calling the underlying CloudFront.getInvalidationoperation every 20 seconds (at most 30 times). Wait until an invalidation has completed.
    */
-  waitFor(state: "InvalidationCompleted", params: CloudFront.GetInvalidationRequest, callback?: (err: AWSError, data: CloudFront.GetInvalidationResult) => void): Request<CloudFront.GetInvalidationResult, AWSError>;
+  waitFor(state: "InvalidationCompleted", params: CloudFront.Types.GetInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
   /**
    * Waits for the InvalidationCompleted state by periodically calling the underlying CloudFront.getInvalidationoperation every 20 seconds (at most 30 times). Wait until an invalidation has completed.
    */
-  waitFor(state: "InvalidationCompleted", callback?: (err: AWSError, data: CloudFront.GetInvalidationResult) => void): Request<CloudFront.GetInvalidationResult, AWSError>;
+  waitFor(state: "InvalidationCompleted", callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
   /**
    * Waits for the StreamingDistributionDeployed state by periodically calling the underlying CloudFront.getStreamingDistributionoperation every 60 seconds (at most 25 times). Wait until a streaming distribution is deployed.
    */
-  waitFor(state: "StreamingDistributionDeployed", params: CloudFront.GetStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.GetStreamingDistributionResult) => void): Request<CloudFront.GetStreamingDistributionResult, AWSError>;
+  waitFor(state: "StreamingDistributionDeployed", params: CloudFront.Types.GetStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
   /**
    * Waits for the StreamingDistributionDeployed state by periodically calling the underlying CloudFront.getStreamingDistributionoperation every 60 seconds (at most 25 times). Wait until a streaming distribution is deployed.
    */
-  waitFor(state: "StreamingDistributionDeployed", callback?: (err: AWSError, data: CloudFront.GetStreamingDistributionResult) => void): Request<CloudFront.GetStreamingDistributionResult, AWSError>;
+  waitFor(state: "StreamingDistributionDeployed", callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
 }
-declare namespace CloudFront {
+declare namespace CloudFront.Types {
   export interface ActiveTrustedSigners {
     /**
      * Each active trusted signer.
@@ -253,7 +253,7 @@ declare namespace CloudFront {
     /**
      * The number of unique trusted signers included in all cache behaviors. For example, if three cache behaviors all list the same three AWS accounts, the value of Quantity for ActiveTrustedSigners will be 3.
      */
-    Quantity?: integer;
+    Quantity: integer;
     /**
      * A complex type that contains one Signer complex type for each unique trusted signer that is specified in the TrustedSigners complex type, including trusted signers in the default cache behavior and in all of the other cache behaviors.
      */
@@ -278,7 +278,7 @@ declare namespace CloudFront {
     /**
      * A complex type that contains the HTTP methods that you want CloudFront to process and forward to your origin.
      */
-    Items?: MethodsList;
+    Items: MethodsList;
     CachedMethods?: CachedMethods;
   }
   export type AwsAccountNumberList = string[];
@@ -290,23 +290,23 @@ declare namespace CloudFront {
     /**
      * The value of ID for the origin that you want CloudFront to route requests to when a request matches the path pattern either for a cache behavior or for the default cache behavior.
      */
-    TargetOriginId?: string;
+    TargetOriginId: string;
     /**
      * A complex type that specifies how CloudFront handles query strings, cookies and headers.
      */
-    ForwardedValues?: ForwardedValues;
+    ForwardedValues: ForwardedValues;
     /**
      * A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer Guide. If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution.
      */
-    TrustedSigners?: TrustedSigners;
+    TrustedSigners: TrustedSigners;
     /**
      * Use this element to specify the protocol that users can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. If you want CloudFront to allow end users to use any available protocol, specify allow-all. If you want CloudFront to require HTTPS, specify https. If you want CloudFront to respond to an HTTP request with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL, specify redirect-to-https. The viewer then resubmits the request using the HTTPS URL.
      */
-    ViewerProtocolPolicy?: ViewerProtocolPolicy;
+    ViewerProtocolPolicy: ViewerProtocolPolicy;
     /**
      * The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated.You can specify a value from 0 to 3,153,600,000 seconds (100 years).
      */
-    MinTTL?: long;
+    MinTTL: long;
     AllowedMethods?: AllowedMethods;
     /**
      * Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false.
@@ -344,9 +344,9 @@ declare namespace CloudFront {
     /**
      * A complex type that contains the HTTP methods that you want CloudFront to cache responses to.
      */
-    Items?: MethodsList;
+    Items: MethodsList;
   }
-  export type CertificateSource = string;
+  export type CertificateSource = "cloudfront"|"iam"|"acm"|string;
   export interface CloudFrontOriginAccessIdentity {
     /**
      * The ID for the origin access identity. For example: E74FTE3AJFJ256A.
@@ -355,7 +355,7 @@ declare namespace CloudFront {
     /**
      * The Amazon S3 canonical user ID for the origin access identity, which you use when giving the origin access identity read permission to an object in Amazon S3.
      */
-    S3CanonicalUserId?: string;
+    S3CanonicalUserId: string;
     /**
      * The current configuration information for the identity.
      */
@@ -369,7 +369,7 @@ declare namespace CloudFront {
     /**
      * Any comments you want to include about the origin access identity.
      */
-    Comment?: string;
+    Comment: string;
   }
   export interface CloudFrontOriginAccessIdentityList {
     /**
@@ -383,15 +383,15 @@ declare namespace CloudFront {
     /**
      * The value you provided for the MaxItems request parameter.
      */
-    MaxItems?: integer;
+    MaxItems: integer;
     /**
      * A flag that indicates whether more origin access identities remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more items in the list.
      */
-    IsTruncated?: boolean;
+    IsTruncated: boolean;
     /**
      * The number of CloudFront origin access identities that were created by the current AWS account.
      */
-    Quantity?: integer;
+    Quantity: integer;
     /**
      * A complex type that contains one CloudFrontOriginAccessIdentitySummary element for each origin access identity that was created by the current AWS account.
      */
@@ -405,11 +405,11 @@ declare namespace CloudFront {
     /**
      * The Amazon S3 canonical user ID for the origin access identity, which you use when giving the origin access identity read permission to an object in Amazon S3.
      */
-    S3CanonicalUserId?: string;
+    S3CanonicalUserId: string;
     /**
      * The comment for this origin access identity, as originally specified when created.
      */
-    Comment?: string;
+    Comment: string;
   }
   export type CloudFrontOriginAccessIdentitySummaryList = CloudFrontOriginAccessIdentitySummary[];
   export type CookieNameList = string[];
@@ -501,7 +501,7 @@ declare namespace CloudFront {
     /**
      * The batch information for the invalidation.
      */
-    InvalidationBatch?: InvalidationBatch;
+    InvalidationBatch: InvalidationBatch;
   }
   export interface CreateInvalidationResult {
     /**
@@ -600,11 +600,11 @@ declare namespace CloudFront {
     /**
      * The HTTPS port the custom origin listens on.
      */
-    HTTPSPort?: integer;
+    HTTPSPort: integer;
     /**
      * The origin protocol policy to apply to your origin.
      */
-    OriginProtocolPolicy?: OriginProtocolPolicy;
+    OriginProtocolPolicy: OriginProtocolPolicy;
     /**
      * The SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS.
      */
@@ -618,19 +618,19 @@ declare namespace CloudFront {
     /**
      * A complex type that specifies how CloudFront handles query strings, cookies and headers.
      */
-    ForwardedValues?: ForwardedValues;
+    ForwardedValues: ForwardedValues;
     /**
      * A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer Guide. If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution.
      */
-    TrustedSigners?: TrustedSigners;
+    TrustedSigners: TrustedSigners;
     /**
      * Use this element to specify the protocol that users can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. If you want CloudFront to allow end users to use any available protocol, specify allow-all. If you want CloudFront to require HTTPS, specify https. If you want CloudFront to respond to an HTTP request with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL, specify redirect-to-https. The viewer then resubmits the request using the HTTPS URL.
      */
-    ViewerProtocolPolicy?: ViewerProtocolPolicy;
+    ViewerProtocolPolicy: ViewerProtocolPolicy;
     /**
      * The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated.You can specify a value from 0 to 3,153,600,000 seconds (100 years).
      */
-    MinTTL?: long;
+    MinTTL: long;
     AllowedMethods?: AllowedMethods;
     /**
      * Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false.
@@ -687,31 +687,31 @@ declare namespace CloudFront {
     /**
      * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account Id.
      */
-    ARN?: string;
+    ARN: string;
     /**
      * This response element indicates the current status of the distribution. When the status is Deployed, the distribution's information is fully propagated throughout the Amazon CloudFront system.
      */
-    Status?: string;
+    Status: string;
     /**
      * The date and time the distribution was last modified.
      */
-    LastModifiedTime?: timestamp;
+    LastModifiedTime: timestamp;
     /**
      * The number of invalidation batches currently in progress.
      */
-    InProgressInvalidationBatches?: integer;
+    InProgressInvalidationBatches: integer;
     /**
      * The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net.
      */
-    DomainName?: string;
+    DomainName: string;
     /**
      * CloudFront automatically adds this element to the response only if you've set up the distribution to serve private content with signed URLs. The element lists the key pair IDs that CloudFront is aware of for each trusted signer. The Signer child element lists the AWS account number of the trusted signer (or an empty Self element if the signer is you). The Signer element also includes the IDs of any active key pairs associated with the trusted signer's AWS account. If no KeyPairId element appears for a Signer, that signer can't create working signed URLs.
      */
-    ActiveTrustedSigners?: ActiveTrustedSigners;
+    ActiveTrustedSigners: ActiveTrustedSigners;
     /**
      * The current configuration information for the distribution.
      */
-    DistributionConfig?: DistributionConfig;
+    DistributionConfig: DistributionConfig;
   }
   export interface DistributionConfig {
     /**
@@ -729,11 +729,11 @@ declare namespace CloudFront {
     /**
      * A complex type that contains information about origins for this distribution.
      */
-    Origins?: Origins;
+    Origins: Origins;
     /**
      * A complex type that describes the default cache behavior if you do not specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements.You must create exactly one default cache behavior.
      */
-    DefaultCacheBehavior?: DefaultCacheBehavior;
+    DefaultCacheBehavior: DefaultCacheBehavior;
     /**
      * A complex type that contains zero or more CacheBehavior elements.
      */
@@ -745,7 +745,7 @@ declare namespace CloudFront {
     /**
      * Any comments you want to include about the distribution.
      */
-    Comment?: string;
+    Comment: string;
     /**
      * A complex type that controls whether access logs are written for the distribution.
      */
@@ -757,7 +757,7 @@ declare namespace CloudFront {
     /**
      * Whether the distribution is enabled to accept end user requests for content.
      */
-    Enabled?: boolean;
+    Enabled: boolean;
     ViewerCertificate?: ViewerCertificate;
     Restrictions?: Restrictions;
     /**
@@ -777,7 +777,7 @@ declare namespace CloudFront {
     /**
      * A complex type that contains zero or more Tag elements.
      */
-    Tags?: Tags;
+    Tags: Tags;
   }
   export interface DistributionList {
     /**
@@ -791,15 +791,15 @@ declare namespace CloudFront {
     /**
      * The value you provided for the MaxItems request parameter.
      */
-    MaxItems?: integer;
+    MaxItems: integer;
     /**
      * A flag that indicates whether more distributions remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more distributions in the list.
      */
-    IsTruncated?: boolean;
+    IsTruncated: boolean;
     /**
      * The number of distributions that were created by the current AWS account.
      */
-    Quantity?: integer;
+    Quantity: integer;
     /**
      * A complex type that contains one DistributionSummary element for each distribution that was created by the current AWS account.
      */
@@ -813,58 +813,58 @@ declare namespace CloudFront {
     /**
      * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account Id.
      */
-    ARN?: string;
+    ARN: string;
     /**
      * This response element indicates the current status of the distribution. When the status is Deployed, the distribution's information is fully propagated throughout the Amazon CloudFront system.
      */
-    Status?: string;
+    Status: string;
     /**
      * The date and time the distribution was last modified.
      */
-    LastModifiedTime?: timestamp;
+    LastModifiedTime: timestamp;
     /**
      * The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net.
      */
-    DomainName?: string;
+    DomainName: string;
     /**
      * A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution.
      */
-    Aliases?: Aliases;
+    Aliases: Aliases;
     /**
      * A complex type that contains information about origins for this distribution.
      */
-    Origins?: Origins;
+    Origins: Origins;
     /**
      * A complex type that describes the default cache behavior if you do not specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements.You must create exactly one default cache behavior.
      */
-    DefaultCacheBehavior?: DefaultCacheBehavior;
+    DefaultCacheBehavior: DefaultCacheBehavior;
     /**
      * A complex type that contains zero or more CacheBehavior elements.
      */
-    CacheBehaviors?: CacheBehaviors;
+    CacheBehaviors: CacheBehaviors;
     /**
      * A complex type that contains zero or more CustomErrorResponses elements.
      */
-    CustomErrorResponses?: CustomErrorResponses;
+    CustomErrorResponses: CustomErrorResponses;
     /**
      * The comment originally specified when this distribution was created.
      */
-    Comment?: string;
-    PriceClass?: PriceClass;
+    Comment: string;
+    PriceClass: PriceClass;
     /**
      * Whether the distribution is enabled to accept end user requests for content.
      */
-    Enabled?: boolean;
-    ViewerCertificate?: ViewerCertificate;
-    Restrictions?: Restrictions;
+    Enabled: boolean;
+    ViewerCertificate: ViewerCertificate;
+    Restrictions: Restrictions;
     /**
      * The Web ACL Id (if any) associated with the distribution.
      */
-    WebACLId?: string;
+    WebACLId: string;
     /**
      * Specify the maximum HTTP version that you want viewers to use to communicate with CloudFront. The default value for new web distributions is http2. Viewers that don't support HTTP/2 will automatically use an earlier version.
      */
-    HttpVersion?: HttpVersion;
+    HttpVersion: HttpVersion;
   }
   export type DistributionSummaryList = DistributionSummary[];
   export interface ForwardedValues {
@@ -875,7 +875,7 @@ declare namespace CloudFront {
     /**
      * A complex type that specifies how CloudFront handles cookies.
      */
-    Cookies?: CookiePreference;
+    Cookies: CookiePreference;
     /**
      * A complex type that specifies the Headers, if any, that you want CloudFront to vary upon for this cache behavior.
      */
@@ -893,13 +893,13 @@ declare namespace CloudFront {
     /**
      * When geo restriction is enabled, this is the number of countries in your whitelist or blacklist. Otherwise, when it is not enabled, Quantity is 0, and you can omit Items.
      */
-    Quantity?: integer;
+    Quantity: integer;
     /**
      * A complex type that contains a Location element for each country in which you want CloudFront either to distribute your content (whitelist) or not distribute your content (blacklist). The Location element is a two-letter, uppercase country code for a country that you want to include in your blacklist or whitelist. Include one Location element for each country. CloudFront and MaxMind both use ISO 3166 country codes. For the current list of countries and the corresponding codes, see ISO 3166-1-alpha-2 code on the International Organization for Standardization website. You can also refer to the country list in the CloudFront console, which includes both country names and codes.
      */
     Items?: LocationList;
   }
-  export type GeoRestrictionType = string;
+  export type GeoRestrictionType = "blacklist"|"whitelist"|"none"|string;
   export interface GetCloudFrontOriginAccessIdentityConfigRequest {
     /**
      * The identity's id.
@@ -972,7 +972,7 @@ declare namespace CloudFront {
     /**
      * The invalidation's id.
      */
-    Id?: string;
+    Id: string;
   }
   export interface GetInvalidationResult {
     /**
@@ -1023,7 +1023,7 @@ declare namespace CloudFront {
      */
     Items?: HeaderList;
   }
-  export type HttpVersion = string;
+  export type HttpVersion = "http1.1"|"http2"|string;
   export interface Invalidation {
     /**
      * The identifier for the invalidation request. For example: IDFDVBD632BHDS5.
@@ -1032,15 +1032,15 @@ declare namespace CloudFront {
     /**
      * The status of the invalidation request. When the invalidation batch is finished, the status is Completed.
      */
-    Status?: string;
+    Status: string;
     /**
      * The date and time the invalidation request was first made.
      */
-    CreateTime?: timestamp;
+    CreateTime: timestamp;
     /**
      * The current invalidation information for the batch request.
      */
-    InvalidationBatch?: InvalidationBatch;
+    InvalidationBatch: InvalidationBatch;
   }
   export interface InvalidationBatch {
     /**
@@ -1050,7 +1050,7 @@ declare namespace CloudFront {
     /**
      * A unique name that ensures the request can't be replayed. If the CallerReference is new (no matter the content of the Path object), a new distribution is created. If the CallerReference is a value you already sent in a previous request to create an invalidation batch, and the content of each Path element is identical to the original request, the response includes the same information returned to the original request. If the CallerReference is a value you already sent in a previous request to create a distribution but the content of any Path is different from the original request, CloudFront returns an InvalidationBatchAlreadyExists error.
      */
-    CallerReference?: string;
+    CallerReference: string;
   }
   export interface InvalidationList {
     /**
@@ -1064,15 +1064,15 @@ declare namespace CloudFront {
     /**
      * The value you provided for the MaxItems request parameter.
      */
-    MaxItems?: integer;
+    MaxItems: integer;
     /**
      * A flag that indicates whether more invalidation batch requests remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more invalidation batches in the list.
      */
-    IsTruncated?: boolean;
+    IsTruncated: boolean;
     /**
      * The number of invalidation batches that were created by the current AWS account.
      */
-    Quantity?: integer;
+    Quantity: integer;
     /**
      * A complex type that contains one InvalidationSummary element for each invalidation batch that was created by the current AWS account.
      */
@@ -1083,14 +1083,14 @@ declare namespace CloudFront {
      * The unique ID for an invalidation request.
      */
     Id: string;
-    CreateTime?: timestamp;
+    CreateTime: timestamp;
     /**
      * The status of an invalidation request.
      */
-    Status?: string;
+    Status: string;
   }
   export type InvalidationSummaryList = InvalidationSummary[];
-  export type ItemSelection = string;
+  export type ItemSelection = "none"|"whitelist"|"all"|string;
   export type KeyPairIdList = string[];
   export interface KeyPairIds {
     /**
@@ -1211,19 +1211,19 @@ declare namespace CloudFront {
     /**
      * Specifies whether you want CloudFront to include cookies in access logs, specify true for IncludeCookies. If you choose to include cookies in logs, CloudFront logs all cookies regardless of how you configure the cache behaviors for this distribution. If you do not want to include cookies when you create a distribution or if you want to disable include cookies for an existing distribution, specify false for IncludeCookies.
      */
-    IncludeCookies?: boolean;
+    IncludeCookies: boolean;
     /**
      * The Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com.
      */
-    Bucket?: string;
+    Bucket: string;
     /**
      * An optional string that you want CloudFront to prefix to the access log filenames for this distribution, for example, myprefix/. If you want to enable logging, but you do not want to specify a prefix, you still must include an empty Prefix element in the Logging element.
      */
-    Prefix?: string;
+    Prefix: string;
   }
-  export type Method = string;
+  export type Method = "GET"|"HEAD"|"POST"|"PUT"|"PATCH"|"OPTIONS"|"DELETE"|string;
   export type MethodsList = Method[];
-  export type MinimumProtocolVersion = string;
+  export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|string;
   export interface Origin {
     /**
      * A unique identifier for the origin. The value of Id must be unique within the distribution. You use the value of Id when you create a cache behavior. The Id identifies the origin that CloudFront routes a request to when the request matches the path pattern for that cache behavior.
@@ -1232,7 +1232,7 @@ declare namespace CloudFront {
     /**
      * Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin, for example, myawsbucket.s3.amazonaws.com. Custom origins: The DNS domain name for the HTTP server from which you want CloudFront to get objects for this origin, for example, www.example.com.
      */
-    DomainName?: string;
+    DomainName: string;
     /**
      * An optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin. When you include the OriginPath element, specify the directory name, beginning with a /. CloudFront appends the directory name to the value of DomainName.
      */
@@ -1258,11 +1258,11 @@ declare namespace CloudFront {
     /**
      * The header's value.
      */
-    HeaderValue?: string;
+    HeaderValue: string;
   }
   export type OriginCustomHeadersList = OriginCustomHeader[];
   export type OriginList = Origin[];
-  export type OriginProtocolPolicy = string;
+  export type OriginProtocolPolicy = "http-only"|"match-viewer"|"https-only"|string;
   export interface OriginSslProtocols {
     /**
      * The number of SSL/TLS protocols that you want to allow CloudFront to use when establishing an HTTPS connection with this origin.
@@ -1271,7 +1271,7 @@ declare namespace CloudFront {
     /**
      * A complex type that contains one SslProtocol element for each SSL/TLS protocol that you want to allow CloudFront to use when establishing an HTTPS connection with this origin.
      */
-    Items?: SslProtocolsList;
+    Items: SslProtocolsList;
   }
   export interface Origins {
     /**
@@ -1294,7 +1294,7 @@ declare namespace CloudFront {
      */
     Items?: PathList;
   }
-  export type PriceClass = string;
+  export type PriceClass = "PriceClass_100"|"PriceClass_200"|"PriceClass_All"|string;
   export interface QueryStringCacheKeys {
     /**
      * The number of whitelisted query string parameters for this cache behavior.
@@ -1318,7 +1318,7 @@ declare namespace CloudFront {
     /**
      * Your S3 origin's origin access identity.
      */
-    OriginAccessIdentity?: string;
+    OriginAccessIdentity: string;
   }
   export interface S3OriginConfig {
     /**
@@ -1326,7 +1326,7 @@ declare namespace CloudFront {
      */
     OriginAccessIdentity: string;
   }
-  export type SSLSupportMethod = string;
+  export type SSLSupportMethod = "sni-only"|"vip"|string;
   export interface Signer {
     /**
      * Specifies an AWS account that can create signed URLs. Values: self, which indicates that the AWS account that was used to create the distribution can created signed URLs, or an AWS account number. Omit the dashes in the account number.
@@ -1338,7 +1338,7 @@ declare namespace CloudFront {
     KeyPairIds?: KeyPairIds;
   }
   export type SignerList = Signer[];
-  export type SslProtocol = string;
+  export type SslProtocol = "SSLv3"|"TLSv1"|"TLSv1.1"|"TLSv1.2"|string;
   export type SslProtocolsList = SslProtocol[];
   export interface StreamingDistribution {
     /**
@@ -1348,11 +1348,11 @@ declare namespace CloudFront {
     /**
      * The ARN (Amazon Resource Name) for the streaming distribution. For example: arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account Id.
      */
-    ARN?: string;
+    ARN: string;
     /**
      * The current status of the streaming distribution. When the status is Deployed, the distribution's information is fully propagated throughout the Amazon CloudFront system.
      */
-    Status?: string;
+    Status: string;
     /**
      * The date and time the distribution was last modified.
      */
@@ -1360,15 +1360,15 @@ declare namespace CloudFront {
     /**
      * The domain name corresponding to the streaming distribution. For example: s5c39gqb8ow64r.cloudfront.net.
      */
-    DomainName?: string;
+    DomainName: string;
     /**
      * CloudFront automatically adds this element to the response only if you've set up the distribution to serve private content with signed URLs. The element lists the key pair IDs that CloudFront is aware of for each trusted signer. The Signer child element lists the AWS account number of the trusted signer (or an empty Self element if the signer is you). The Signer element also includes the IDs of any active key pairs associated with the trusted signer's AWS account. If no KeyPairId element appears for a Signer, that signer can't create working signed URLs.
      */
-    ActiveTrustedSigners?: ActiveTrustedSigners;
+    ActiveTrustedSigners: ActiveTrustedSigners;
     /**
      * The current configuration information for the streaming distribution.
      */
-    StreamingDistributionConfig?: StreamingDistributionConfig;
+    StreamingDistributionConfig: StreamingDistributionConfig;
   }
   export interface StreamingDistributionConfig {
     /**
@@ -1378,7 +1378,7 @@ declare namespace CloudFront {
     /**
      * A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution.
      */
-    S3Origin?: S3Origin;
+    S3Origin: S3Origin;
     /**
      * A complex type that contains information about CNAMEs (alternate domain names), if any, for this streaming distribution.
      */
@@ -1386,7 +1386,7 @@ declare namespace CloudFront {
     /**
      * Any comments you want to include about the streaming distribution.
      */
-    Comment?: string;
+    Comment: string;
     /**
      * A complex type that controls whether access logs are written for the streaming distribution.
      */
@@ -1394,7 +1394,7 @@ declare namespace CloudFront {
     /**
      * A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer Guide. If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution.
      */
-    TrustedSigners?: TrustedSigners;
+    TrustedSigners: TrustedSigners;
     /**
      * A complex type that contains information about price class for this streaming distribution.
      */
@@ -1402,7 +1402,7 @@ declare namespace CloudFront {
     /**
      * Whether the streaming distribution is enabled to accept end user requests for content.
      */
-    Enabled?: boolean;
+    Enabled: boolean;
   }
   export interface StreamingDistributionConfigWithTags {
     /**
@@ -1412,7 +1412,7 @@ declare namespace CloudFront {
     /**
      * A complex type that contains zero or more Tag elements.
      */
-    Tags?: Tags;
+    Tags: Tags;
   }
   export interface StreamingDistributionList {
     /**
@@ -1426,15 +1426,15 @@ declare namespace CloudFront {
     /**
      * The value you provided for the MaxItems request parameter.
      */
-    MaxItems?: integer;
+    MaxItems: integer;
     /**
      * A flag that indicates whether more streaming distributions remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more distributions in the list.
      */
-    IsTruncated?: boolean;
+    IsTruncated: boolean;
     /**
      * The number of streaming distributions that were created by the current AWS account.
      */
-    Quantity?: integer;
+    Quantity: integer;
     /**
      * A complex type that contains one StreamingDistributionSummary element for each distribution that was created by the current AWS account.
      */
@@ -1448,40 +1448,40 @@ declare namespace CloudFront {
     /**
      * The ARN (Amazon Resource Name) for the streaming distribution. For example: arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account Id.
      */
-    ARN?: string;
+    ARN: string;
     /**
      * Indicates the current status of the distribution. When the status is Deployed, the distribution's information is fully propagated throughout the Amazon CloudFront system.
      */
-    Status?: string;
+    Status: string;
     /**
      * The date and time the distribution was last modified.
      */
-    LastModifiedTime?: timestamp;
+    LastModifiedTime: timestamp;
     /**
      * The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net.
      */
-    DomainName?: string;
+    DomainName: string;
     /**
      * A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution.
      */
-    S3Origin?: S3Origin;
+    S3Origin: S3Origin;
     /**
      * A complex type that contains information about CNAMEs (alternate domain names), if any, for this streaming distribution.
      */
-    Aliases?: Aliases;
+    Aliases: Aliases;
     /**
      * A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer Guide. If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution.
      */
-    TrustedSigners?: TrustedSigners;
+    TrustedSigners: TrustedSigners;
     /**
      * The comment originally specified when this distribution was created.
      */
-    Comment?: string;
-    PriceClass?: PriceClass;
+    Comment: string;
+    PriceClass: PriceClass;
     /**
      * Whether the distribution is enabled to accept end user requests for content.
      */
-    Enabled?: boolean;
+    Enabled: boolean;
   }
   export type StreamingDistributionSummaryList = StreamingDistributionSummary[];
   export interface StreamingLoggingConfig {
@@ -1492,11 +1492,11 @@ declare namespace CloudFront {
     /**
      * The Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com.
      */
-    Bucket?: string;
+    Bucket: string;
     /**
      * An optional string that you want CloudFront to prefix to the access log filenames for this streaming distribution, for example, myprefix/. If you want to enable logging, but you do not want to specify a prefix, you still must include an empty Prefix element in the Logging element.
      */
-    Prefix?: string;
+    Prefix: string;
   }
   export interface Tag {
     /**
@@ -1525,7 +1525,7 @@ declare namespace CloudFront {
     /**
      * A complex type that contains zero or more Tag elements.
      */
-    Tags?: Tags;
+    Tags: Tags;
   }
   export type TagValue = string;
   export interface Tags {
@@ -1542,7 +1542,7 @@ declare namespace CloudFront {
     /**
      * The number of trusted signers for this cache behavior.
      */
-    Quantity?: integer;
+    Quantity: integer;
     /**
      * Optional: A complex type that contains trusted signers for this cache behavior. If Quantity is 0, you can omit Items.
      */
@@ -1556,7 +1556,7 @@ declare namespace CloudFront {
     /**
      * A complex type that contains zero or more Tag key elements.
      */
-    TagKeys?: TagKeys;
+    TagKeys: TagKeys;
   }
   export interface UpdateCloudFrontOriginAccessIdentityRequest {
     /**
@@ -1566,7 +1566,7 @@ declare namespace CloudFront {
     /**
      * The identity's id.
      */
-    Id?: string;
+    Id: string;
     /**
      * The value of the ETag header you received when retrieving the identity's configuration. For example: E2QWRUHAPOMQZL.
      */
@@ -1590,7 +1590,7 @@ declare namespace CloudFront {
     /**
      * The distribution's id.
      */
-    Id?: string;
+    Id: string;
     /**
      * The value of the ETag header you received when retrieving the distribution's configuration. For example: E2QWRUHAPOMQZL.
      */
@@ -1614,7 +1614,7 @@ declare namespace CloudFront {
     /**
      * The streaming distribution's id.
      */
-    Id?: string;
+    Id: string;
     /**
      * The value of the ETag header you received when retrieving the streaming distribution's configuration. For example: E2QWRUHAPOMQZL.
      */
@@ -1660,7 +1660,7 @@ declare namespace CloudFront {
      */
     CertificateSource?: CertificateSource;
   }
-  export type ViewerProtocolPolicy = string;
+  export type ViewerProtocolPolicy = "allow-all"|"https-only"|"redirect-to-https"|string;
   export type integer = number;
   export type long = number;
   export type timestamp = Date;

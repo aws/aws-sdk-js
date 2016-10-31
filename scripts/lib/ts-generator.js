@@ -131,7 +131,7 @@ TSGenerator.prototype.loadServiceApi = function loadServiceApi(serviceIdentifier
  * Determines if a member is required by checking for it in a list.
  */
 TSGenerator.prototype.checkRequired = function checkRequired(list, member) {
-    if (list.indexOf(member)) {
+    if (list.indexOf(member) >= 0) {
         return true;
     }
     return false;
@@ -188,7 +188,6 @@ TSGenerator.prototype.generateCustomConfigFromMetadata = function generateCustom
         if (!serviceMetadata.hasOwnProperty(memberName)) {
             continue;
         }
-        var memberValue = serviceMetadata[memberName];
         // check configs
         switch (memberName) {
             case 'dualstackAvailable':
@@ -224,7 +223,7 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
             if (member.documentation) {
                 code += self.generateDocString(member.documentation, tabCount + 1);
             }
-            var required = self.checkRequired(shape.required || [], memberKey) ? '?' : '';
+            var required = self.checkRequired(shape.required || [], memberKey) ? '' : '?';
             code += tabs(tabCount + 1) + memberKey + required + ': ' + member.shape + ';\n';
         });
         code += tabs(tabCount) + '}\n';
@@ -233,7 +232,13 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
     } else if (type === 'map') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = {[key: string]: ' + shape.value.shape + '};\n';
     } else if (type === 'string' || type === 'character') {
-        code += tabs(tabCount) + 'export type ' + shapeKey + ' = string;\n';
+        var stringType = 'string';
+        if (Array.isArray(shape.enum)) {
+            stringType = shape.enum.map(function(s) {
+                return '"' + s + '"';
+            }).join('|') + '|' + stringType;
+        }
+        code += tabs(tabCount) + 'export type ' + shapeKey + ' = ' + stringType + ';\n';
     } else if (['double', 'long', 'short', 'biginteger', 'bigdecimal', 'integer', 'float'].indexOf(type) >= 0) {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = number;\n';
     } else if (type === 'timestamp') {
@@ -249,17 +254,17 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
 /**
  * Generates a class method type for an operation.
  */
-TSGenerator.prototype.generateTypingsFromOperations = function generateTypingsFromOperations(className, operation, tabCount) {
+TSGenerator.prototype.generateTypingsFromOperations = function generateTypingsFromOperations(className, operation, operationName, tabCount) {
     var code = '';
     tabCount = tabCount || 0;
     var tabs = this.tabs;
 
     var input = operation.input;
     var output = operation.output;
-    var operationName = operation.name.charAt(0).toLowerCase() + operation.name.substring(1);
+    operationName = operationName.charAt(0).toLowerCase() + operationName.substring(1);
 
-    var inputShape = input ? className + '.' + input.shape : '{}';
-    var outputShape = output ? className + '.' + output.shape : '{}';
+    var inputShape = input ? className + '.Types.' + input.shape : '{}';
+    var outputShape = output ? className + '.Types.' + output.shape : '{}';
 
     code += this.generateDocString(operation.documentation, tabCount);
     code += tabs(tabCount) + operationName + '(params: ' + inputShape + ', callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
@@ -286,10 +291,10 @@ TSGenerator.prototype.generateTypingsFromWaiters = function generateTypingsFromW
     var inputShape = '{}';
     var outputShape = '{}';
     if (underlyingOperation.input) {
-        inputShape = className + '.' + underlyingOperation.input.shape;
+        inputShape = className + '.Types.' + underlyingOperation.input.shape;
     }
     if (underlyingOperation.output) {
-        outputShape = className + '.' + underlyingOperation.output.shape;
+        outputShape = className + '.Types.' + underlyingOperation.output.shape;
     }
 
     code += this.generateDocString(docString, tabCount);
@@ -336,9 +341,10 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     // get any custom config options
     var customConfig = this.generateCustomConfigFromMetadata(serviceIdentifier);
     var hasCustomConfig = !!customConfig.length;
+    var customConfigTypes = null;
     if (hasCustomConfig) {
         // generate import statements and custom config type
-        var customConfigTypes = ['ServiceConfigurationOptions'];
+        customConfigTypes = ['ServiceConfigurationOptions'];
         code += 'import {ServiceConfigurationOptions} from \'../lib/service\';\n';
         code += 'import {Config} from \'../lib/config\';\n';
         customConfig.forEach(function(config) {
@@ -359,7 +365,7 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     }
 
     operationKeys.forEach(function (operationKey) {
-        code += self.generateTypingsFromOperations(className, modelOperations[operationKey], 1);
+        code += self.generateTypingsFromOperations(className, modelOperations[operationKey], operationKey, 1);
     });
 
     // generate waitFor methods
@@ -377,7 +383,7 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     var modelShapes = model.shapes;
     // iterate over each shape
     var shapeKeys = Object.keys(modelShapes);
-    code += 'declare namespace ' + className + ' {\n'
+    code += 'declare namespace ' + className + '.Types {\n';
     shapeKeys.forEach(function (shapeKey) {
         var modelShape = modelShapes[shapeKey];
         // ignore exceptions
@@ -416,7 +422,6 @@ TSGenerator.prototype.generateAllClientTypings = function generateAllClientTypin
  * Create the typescript definition files for the all and browser_default exports.
  */
 TSGenerator.prototype.generateGroupedClients = function generateGroupedClients() {
-    var clientsDir = this._clientsDir;
     var metadata = this.metadata;
     var allCode = '';
     var browserCode = '';

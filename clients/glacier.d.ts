@@ -6,7 +6,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation aborts a multipart upload identified by the upload ID. After the Abort Multipart Upload request succeeds, you cannot upload any more parts to the multipart upload or complete the multipart upload. Aborting a completed upload fails. However, aborting an already-aborted upload will succeed, for a short time. For more information about uploading a part and completing a multipart upload, see UploadMultipartPart and CompleteMultipartUpload. This operation is idempotent. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Working with Archives in Amazon Glacier and Abort Multipart Upload in the Amazon Glacier Developer Guide. 
    */
-  abortMultipartUpload(params: Glacier.AbortMultipartUploadInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  abortMultipartUpload(params: Glacier.Types.AbortMultipartUploadInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation aborts a multipart upload identified by the upload ID. After the Abort Multipart Upload request succeeds, you cannot upload any more parts to the multipart upload or complete the multipart upload. Aborting a completed upload fails. However, aborting an already-aborted upload will succeed, for a short time. For more information about uploading a part and completing a multipart upload, see UploadMultipartPart and CompleteMultipartUpload. This operation is idempotent. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Working with Archives in Amazon Glacier and Abort Multipart Upload in the Amazon Glacier Developer Guide. 
    */
@@ -14,7 +14,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation aborts the vault locking process if the vault lock is not in the Locked state. If the vault lock is in the Locked state when this operation is requested, the operation returns an AccessDeniedException error. Aborting the vault locking process removes the vault lock policy from the specified vault.  A vault lock is put into the InProgress state by calling InitiateVaultLock. A vault lock is put into the Locked state by calling CompleteVaultLock. You can get the state of a vault lock by calling GetVaultLock. For more information about the vault locking process, see Amazon Glacier Vault Lock. For more information about vault lock policies, see Amazon Glacier Access Control with Vault Lock Policies.  This operation is idempotent. You can successfully invoke this operation multiple times, if the vault lock is in the InProgress state or if there is no policy associated with the vault.
    */
-  abortVaultLock(params: Glacier.AbortVaultLockInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  abortVaultLock(params: Glacier.Types.AbortVaultLockInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation aborts the vault locking process if the vault lock is not in the Locked state. If the vault lock is in the Locked state when this operation is requested, the operation returns an AccessDeniedException error. Aborting the vault locking process removes the vault lock policy from the specified vault.  A vault lock is put into the InProgress state by calling InitiateVaultLock. A vault lock is put into the Locked state by calling CompleteVaultLock. You can get the state of a vault lock by calling GetVaultLock. For more information about the vault locking process, see Amazon Glacier Vault Lock. For more information about vault lock policies, see Amazon Glacier Access Control with Vault Lock Policies.  This operation is idempotent. You can successfully invoke this operation multiple times, if the vault lock is in the InProgress state or if there is no policy associated with the vault.
    */
@@ -22,7 +22,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation adds the specified tags to a vault. Each tag is composed of a key and a value. Each vault can have up to 10 tags. If your request would cause the tag limit for the vault to be exceeded, the operation throws the LimitExceededException error. If a tag already exists on the vault under a specified key, the existing key value will be overwritten. For more information about tags, see Tagging Amazon Glacier Resources. 
    */
-  addTagsToVault(params: Glacier.AddTagsToVaultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  addTagsToVault(params: Glacier.Types.AddTagsToVaultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation adds the specified tags to a vault. Each tag is composed of a key and a value. Each vault can have up to 10 tags. If your request would cause the tag limit for the vault to be exceeded, the operation throws the LimitExceededException error. If a tag already exists on the vault under a specified key, the existing key value will be overwritten. For more information about tags, see Tagging Amazon Glacier Resources. 
    */
@@ -30,15 +30,15 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * You call this operation to inform Amazon Glacier that all the archive parts have been uploaded and that Amazon Glacier can now assemble the archive from the uploaded parts. After assembling and saving the archive to the vault, Amazon Glacier returns the URI path of the newly created archive resource. Using the URI path, you can then access the archive. After you upload an archive, you should save the archive ID returned to retrieve the archive at a later point. You can also get the vault inventory to obtain a list of archive IDs in a vault. For more information, see InitiateJob. In the request, you must include the computed SHA256 tree hash of the entire archive you have uploaded. For information about computing a SHA256 tree hash, see Computing Checksums. On the server side, Amazon Glacier also constructs the SHA256 tree hash of the assembled archive. If the values match, Amazon Glacier saves the archive to the vault; otherwise, it returns an error, and the operation fails. The ListParts operation returns a list of parts uploaded for a specific multipart upload. It includes checksum information for each uploaded part that can be used to debug a bad checksum issue. Additionally, Amazon Glacier also checks for any missing content ranges when assembling the archive, if missing content ranges are found, Amazon Glacier returns an error and the operation fails.  Complete Multipart Upload is an idempotent operation. After your first successful complete multipart upload, if you call the operation again within a short period, the operation will succeed and return the same archive ID. This is useful in the event you experience a network issue that causes an aborted connection or receive a 500 server error, in which case you can repeat your Complete Multipart Upload request and get the same archive ID without creating duplicate archives. Note, however, that after the multipart upload completes, you cannot call the List Parts operation and the multipart upload will not appear in List Multipart Uploads response, even if idempotent complete is possible. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Uploading Large Archives in Parts (Multipart Upload) and Complete Multipart Upload in the Amazon Glacier Developer Guide. 
    */
-  completeMultipartUpload(params: Glacier.CompleteMultipartUploadInput, callback?: (err: AWSError, data: Glacier.ArchiveCreationOutput) => void): Request<Glacier.ArchiveCreationOutput, AWSError>;
+  completeMultipartUpload(params: Glacier.Types.CompleteMultipartUploadInput, callback?: (err: AWSError, data: Glacier.Types.ArchiveCreationOutput) => void): Request<Glacier.Types.ArchiveCreationOutput, AWSError>;
   /**
    * You call this operation to inform Amazon Glacier that all the archive parts have been uploaded and that Amazon Glacier can now assemble the archive from the uploaded parts. After assembling and saving the archive to the vault, Amazon Glacier returns the URI path of the newly created archive resource. Using the URI path, you can then access the archive. After you upload an archive, you should save the archive ID returned to retrieve the archive at a later point. You can also get the vault inventory to obtain a list of archive IDs in a vault. For more information, see InitiateJob. In the request, you must include the computed SHA256 tree hash of the entire archive you have uploaded. For information about computing a SHA256 tree hash, see Computing Checksums. On the server side, Amazon Glacier also constructs the SHA256 tree hash of the assembled archive. If the values match, Amazon Glacier saves the archive to the vault; otherwise, it returns an error, and the operation fails. The ListParts operation returns a list of parts uploaded for a specific multipart upload. It includes checksum information for each uploaded part that can be used to debug a bad checksum issue. Additionally, Amazon Glacier also checks for any missing content ranges when assembling the archive, if missing content ranges are found, Amazon Glacier returns an error and the operation fails.  Complete Multipart Upload is an idempotent operation. After your first successful complete multipart upload, if you call the operation again within a short period, the operation will succeed and return the same archive ID. This is useful in the event you experience a network issue that causes an aborted connection or receive a 500 server error, in which case you can repeat your Complete Multipart Upload request and get the same archive ID without creating duplicate archives. Note, however, that after the multipart upload completes, you cannot call the List Parts operation and the multipart upload will not appear in List Multipart Uploads response, even if idempotent complete is possible. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Uploading Large Archives in Parts (Multipart Upload) and Complete Multipart Upload in the Amazon Glacier Developer Guide. 
    */
-  completeMultipartUpload(callback?: (err: AWSError, data: Glacier.ArchiveCreationOutput) => void): Request<Glacier.ArchiveCreationOutput, AWSError>;
+  completeMultipartUpload(callback?: (err: AWSError, data: Glacier.Types.ArchiveCreationOutput) => void): Request<Glacier.Types.ArchiveCreationOutput, AWSError>;
   /**
    * This operation completes the vault locking process by transitioning the vault lock from the InProgress state to the Locked state, which causes the vault lock policy to become unchangeable. A vault lock is put into the InProgress state by calling InitiateVaultLock. You can obtain the state of the vault lock by calling GetVaultLock. For more information about the vault locking process, Amazon Glacier Vault Lock.  This operation is idempotent. This request is always successful if the vault lock is in the Locked state and the provided lock ID matches the lock ID originally used to lock the vault. If an invalid lock ID is passed in the request when the vault lock is in the Locked state, the operation returns an AccessDeniedException error. If an invalid lock ID is passed in the request when the vault lock is in the InProgress state, the operation throws an InvalidParameter error.
    */
-  completeVaultLock(params: Glacier.CompleteVaultLockInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  completeVaultLock(params: Glacier.Types.CompleteVaultLockInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation completes the vault locking process by transitioning the vault lock from the InProgress state to the Locked state, which causes the vault lock policy to become unchangeable. A vault lock is put into the InProgress state by calling InitiateVaultLock. You can obtain the state of the vault lock by calling GetVaultLock. For more information about the vault locking process, Amazon Glacier Vault Lock.  This operation is idempotent. This request is always successful if the vault lock is in the Locked state and the provided lock ID matches the lock ID originally used to lock the vault. If an invalid lock ID is passed in the request when the vault lock is in the Locked state, the operation returns an AccessDeniedException error. If an invalid lock ID is passed in the request when the vault lock is in the InProgress state, the operation throws an InvalidParameter error.
    */
@@ -46,15 +46,15 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation creates a new vault with the specified name. The name of the vault must be unique within a region for an AWS account. You can create up to 1,000 vaults per account. If you need to create more vaults, contact Amazon Glacier. You must use the following guidelines when naming a vault.      Names can be between 1 and 255 characters long.    Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), and '.' (period).    This operation is idempotent. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Creating a Vault in Amazon Glacier and Create Vault  in the Amazon Glacier Developer Guide. 
    */
-  createVault(params: Glacier.CreateVaultInput, callback?: (err: AWSError, data: Glacier.CreateVaultOutput) => void): Request<Glacier.CreateVaultOutput, AWSError>;
+  createVault(params: Glacier.Types.CreateVaultInput, callback?: (err: AWSError, data: Glacier.Types.CreateVaultOutput) => void): Request<Glacier.Types.CreateVaultOutput, AWSError>;
   /**
    * This operation creates a new vault with the specified name. The name of the vault must be unique within a region for an AWS account. You can create up to 1,000 vaults per account. If you need to create more vaults, contact Amazon Glacier. You must use the following guidelines when naming a vault.      Names can be between 1 and 255 characters long.    Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), and '.' (period).    This operation is idempotent. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Creating a Vault in Amazon Glacier and Create Vault  in the Amazon Glacier Developer Guide. 
    */
-  createVault(callback?: (err: AWSError, data: Glacier.CreateVaultOutput) => void): Request<Glacier.CreateVaultOutput, AWSError>;
+  createVault(callback?: (err: AWSError, data: Glacier.Types.CreateVaultOutput) => void): Request<Glacier.Types.CreateVaultOutput, AWSError>;
   /**
    * This operation deletes an archive from a vault. Subsequent requests to initiate a retrieval of this archive will fail. Archive retrievals that are in progress for this archive ID may or may not succeed according to the following scenarios:  If the archive retrieval job is actively preparing the data for download when Amazon Glacier receives the delete archive request, the archival retrieval operation might fail.  If the archive retrieval job has successfully prepared the archive for download when Amazon Glacier receives the delete archive request, you will be able to download the output.   This operation is idempotent. Attempting to delete an already-deleted archive does not result in an error.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Deleting an Archive in Amazon Glacier and Delete Archive in the Amazon Glacier Developer Guide. 
    */
-  deleteArchive(params: Glacier.DeleteArchiveInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteArchive(params: Glacier.Types.DeleteArchiveInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation deletes an archive from a vault. Subsequent requests to initiate a retrieval of this archive will fail. Archive retrievals that are in progress for this archive ID may or may not succeed according to the following scenarios:  If the archive retrieval job is actively preparing the data for download when Amazon Glacier receives the delete archive request, the archival retrieval operation might fail.  If the archive retrieval job has successfully prepared the archive for download when Amazon Glacier receives the delete archive request, you will be able to download the output.   This operation is idempotent. Attempting to delete an already-deleted archive does not result in an error.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Deleting an Archive in Amazon Glacier and Delete Archive in the Amazon Glacier Developer Guide. 
    */
@@ -62,7 +62,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation deletes a vault. Amazon Glacier will delete a vault only if there are no archives in the vault as of the last inventory and there have been no writes to the vault since the last inventory. If either of these conditions is not satisfied, the vault deletion fails (that is, the vault is not removed) and Amazon Glacier returns an error. You can use DescribeVault to return the number of archives in a vault, and you can use Initiate a Job (POST jobs) to initiate a new inventory retrieval for a vault. The inventory contains the archive IDs you use to delete archives using Delete Archive (DELETE archive). This operation is idempotent. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Deleting a Vault in Amazon Glacier and Delete Vault  in the Amazon Glacier Developer Guide. 
    */
-  deleteVault(params: Glacier.DeleteVaultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteVault(params: Glacier.Types.DeleteVaultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation deletes a vault. Amazon Glacier will delete a vault only if there are no archives in the vault as of the last inventory and there have been no writes to the vault since the last inventory. If either of these conditions is not satisfied, the vault deletion fails (that is, the vault is not removed) and Amazon Glacier returns an error. You can use DescribeVault to return the number of archives in a vault, and you can use Initiate a Job (POST jobs) to initiate a new inventory retrieval for a vault. The inventory contains the archive IDs you use to delete archives using Delete Archive (DELETE archive). This operation is idempotent. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Deleting a Vault in Amazon Glacier and Delete Vault  in the Amazon Glacier Developer Guide. 
    */
@@ -70,7 +70,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation deletes the access policy associated with the specified vault. The operation is eventually consistent; that is, it might take some time for Amazon Glacier to completely remove the access policy, and you might still see the effect of the policy for a short time after you send the delete request. This operation is idempotent. You can invoke delete multiple times, even if there is no policy associated with the vault. For more information about vault access policies, see Amazon Glacier Access Control with Vault Access Policies. 
    */
-  deleteVaultAccessPolicy(params: Glacier.DeleteVaultAccessPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteVaultAccessPolicy(params: Glacier.Types.DeleteVaultAccessPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation deletes the access policy associated with the specified vault. The operation is eventually consistent; that is, it might take some time for Amazon Glacier to completely remove the access policy, and you might still see the effect of the policy for a short time after you send the delete request. This operation is idempotent. You can invoke delete multiple times, even if there is no policy associated with the vault. For more information about vault access policies, see Amazon Glacier Access Control with Vault Access Policies. 
    */
@@ -78,7 +78,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation deletes the notification configuration set for a vault. The operation is eventually consistent; that is, it might take some time for Amazon Glacier to completely disable the notifications and you might still receive some notifications for a short time after you send the delete request.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Configuring Vault Notifications in Amazon Glacier and Delete Vault Notification Configuration  in the Amazon Glacier Developer Guide. 
    */
-  deleteVaultNotifications(params: Glacier.DeleteVaultNotificationsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteVaultNotifications(params: Glacier.Types.DeleteVaultNotificationsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation deletes the notification configuration set for a vault. The operation is eventually consistent; that is, it might take some time for Amazon Glacier to completely disable the notifications and you might still receive some notifications for a short time after you send the delete request.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Configuring Vault Notifications in Amazon Glacier and Delete Vault Notification Configuration  in the Amazon Glacier Developer Guide. 
    */
@@ -86,127 +86,127 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon Glacier completes the job. For more information about initiating a job, see InitiateJob.  This operation enables you to check the status of your job. However, it is strongly recommended that you set up an Amazon SNS topic and specify it in your initiate job request so that Amazon Glacier can notify the topic after it completes the job.  A job ID will not expire for at least 24 hours after Amazon Glacier completes the job.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For information about the underlying REST API, go to Working with Archives in Amazon Glacier in the Amazon Glacier Developer Guide. 
    */
-  describeJob(params: Glacier.DescribeJobInput, callback?: (err: AWSError, data: Glacier.GlacierJobDescription) => void): Request<Glacier.GlacierJobDescription, AWSError>;
+  describeJob(params: Glacier.Types.DescribeJobInput, callback?: (err: AWSError, data: Glacier.Types.GlacierJobDescription) => void): Request<Glacier.Types.GlacierJobDescription, AWSError>;
   /**
    * This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon Glacier completes the job. For more information about initiating a job, see InitiateJob.  This operation enables you to check the status of your job. However, it is strongly recommended that you set up an Amazon SNS topic and specify it in your initiate job request so that Amazon Glacier can notify the topic after it completes the job.  A job ID will not expire for at least 24 hours after Amazon Glacier completes the job.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For information about the underlying REST API, go to Working with Archives in Amazon Glacier in the Amazon Glacier Developer Guide. 
    */
-  describeJob(callback?: (err: AWSError, data: Glacier.GlacierJobDescription) => void): Request<Glacier.GlacierJobDescription, AWSError>;
+  describeJob(callback?: (err: AWSError, data: Glacier.Types.GlacierJobDescription) => void): Request<Glacier.Types.GlacierJobDescription, AWSError>;
   /**
    * This operation returns information about a vault, including the vault's Amazon Resource Name (ARN), the date the vault was created, the number of archives it contains, and the total size of all the archives in the vault. The number of archives and their total size are as of the last inventory generation. This means that if you add or remove an archive from a vault, and then immediately use Describe Vault, the change in contents will not be immediately reflected. If you want to retrieve the latest inventory of the vault, use InitiateJob. Amazon Glacier generates vault inventories approximately daily. For more information, see Downloading a Vault Inventory in Amazon Glacier.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Retrieving Vault Metadata in Amazon Glacier and Describe Vault  in the Amazon Glacier Developer Guide. 
    */
-  describeVault(params: Glacier.DescribeVaultInput, callback?: (err: AWSError, data: Glacier.DescribeVaultOutput) => void): Request<Glacier.DescribeVaultOutput, AWSError>;
+  describeVault(params: Glacier.Types.DescribeVaultInput, callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
   /**
    * This operation returns information about a vault, including the vault's Amazon Resource Name (ARN), the date the vault was created, the number of archives it contains, and the total size of all the archives in the vault. The number of archives and their total size are as of the last inventory generation. This means that if you add or remove an archive from a vault, and then immediately use Describe Vault, the change in contents will not be immediately reflected. If you want to retrieve the latest inventory of the vault, use InitiateJob. Amazon Glacier generates vault inventories approximately daily. For more information, see Downloading a Vault Inventory in Amazon Glacier.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Retrieving Vault Metadata in Amazon Glacier and Describe Vault  in the Amazon Glacier Developer Guide. 
    */
-  describeVault(callback?: (err: AWSError, data: Glacier.DescribeVaultOutput) => void): Request<Glacier.DescribeVaultOutput, AWSError>;
+  describeVault(callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
   /**
    * This operation returns the current data retrieval policy for the account and region specified in the GET request. For more information about data retrieval policies, see Amazon Glacier Data Retrieval Policies.
    */
-  getDataRetrievalPolicy(params: Glacier.GetDataRetrievalPolicyInput, callback?: (err: AWSError, data: Glacier.GetDataRetrievalPolicyOutput) => void): Request<Glacier.GetDataRetrievalPolicyOutput, AWSError>;
+  getDataRetrievalPolicy(params: Glacier.Types.GetDataRetrievalPolicyInput, callback?: (err: AWSError, data: Glacier.Types.GetDataRetrievalPolicyOutput) => void): Request<Glacier.Types.GetDataRetrievalPolicyOutput, AWSError>;
   /**
    * This operation returns the current data retrieval policy for the account and region specified in the GET request. For more information about data retrieval policies, see Amazon Glacier Data Retrieval Policies.
    */
-  getDataRetrievalPolicy(callback?: (err: AWSError, data: Glacier.GetDataRetrievalPolicyOutput) => void): Request<Glacier.GetDataRetrievalPolicyOutput, AWSError>;
+  getDataRetrievalPolicy(callback?: (err: AWSError, data: Glacier.Types.GetDataRetrievalPolicyOutput) => void): Request<Glacier.Types.GetDataRetrievalPolicyOutput, AWSError>;
   /**
    * This operation downloads the output of the job you initiated using InitiateJob. Depending on the job type you specified when you initiated the job, the output will be either the content of an archive or a vault inventory. A job ID will not expire for at least 24 hours after Amazon Glacier completes the job. That is, you can download the job output within the 24 hours period after Amazon Glacier completes the job. If the job output is large, then you can use the Range request header to retrieve a portion of the output. This allows you to download the entire output in smaller chunks of bytes. For example, suppose you have 1 GB of job output you want to download and you decide to download 128 MB chunks of data at a time, which is a total of eight Get Job Output requests. You use the following process to download the job output:   Download a 128 MB chunk of output by specifying the appropriate byte range using the Range header.   Along with the data, the response includes a SHA256 tree hash of the payload. You compute the checksum of the payload on the client and compare it with the checksum you received in the response to ensure you received all the expected data.   Repeat steps 1 and 2 for all the eight 128 MB chunks of output data, each time specifying the appropriate byte range.   After downloading all the parts of the job output, you have a list of eight checksum values. Compute the tree hash of these values to find the checksum of the entire output. Using the DescribeJob API, obtain job information of the job that provided you the output. The response includes the checksum of the entire archive stored in Amazon Glacier. You compare this value with the checksum you computed to ensure you have downloaded the entire archive content with no errors.   An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, go to Downloading a Vault Inventory, Downloading an Archive, and Get Job Output  
    */
-  getJobOutput(params: Glacier.GetJobOutputInput, callback?: (err: AWSError, data: Glacier.GetJobOutputOutput) => void): Request<Glacier.GetJobOutputOutput, AWSError>;
+  getJobOutput(params: Glacier.Types.GetJobOutputInput, callback?: (err: AWSError, data: Glacier.Types.GetJobOutputOutput) => void): Request<Glacier.Types.GetJobOutputOutput, AWSError>;
   /**
    * This operation downloads the output of the job you initiated using InitiateJob. Depending on the job type you specified when you initiated the job, the output will be either the content of an archive or a vault inventory. A job ID will not expire for at least 24 hours after Amazon Glacier completes the job. That is, you can download the job output within the 24 hours period after Amazon Glacier completes the job. If the job output is large, then you can use the Range request header to retrieve a portion of the output. This allows you to download the entire output in smaller chunks of bytes. For example, suppose you have 1 GB of job output you want to download and you decide to download 128 MB chunks of data at a time, which is a total of eight Get Job Output requests. You use the following process to download the job output:   Download a 128 MB chunk of output by specifying the appropriate byte range using the Range header.   Along with the data, the response includes a SHA256 tree hash of the payload. You compute the checksum of the payload on the client and compare it with the checksum you received in the response to ensure you received all the expected data.   Repeat steps 1 and 2 for all the eight 128 MB chunks of output data, each time specifying the appropriate byte range.   After downloading all the parts of the job output, you have a list of eight checksum values. Compute the tree hash of these values to find the checksum of the entire output. Using the DescribeJob API, obtain job information of the job that provided you the output. The response includes the checksum of the entire archive stored in Amazon Glacier. You compare this value with the checksum you computed to ensure you have downloaded the entire archive content with no errors.   An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, go to Downloading a Vault Inventory, Downloading an Archive, and Get Job Output  
    */
-  getJobOutput(callback?: (err: AWSError, data: Glacier.GetJobOutputOutput) => void): Request<Glacier.GetJobOutputOutput, AWSError>;
+  getJobOutput(callback?: (err: AWSError, data: Glacier.Types.GetJobOutputOutput) => void): Request<Glacier.Types.GetJobOutputOutput, AWSError>;
   /**
    * This operation retrieves the access-policy subresource set on the vault; for more information on setting this subresource, see Set Vault Access Policy (PUT access-policy). If there is no access policy set on the vault, the operation returns a 404 Not found error. For more information about vault access policies, see Amazon Glacier Access Control with Vault Access Policies.
    */
-  getVaultAccessPolicy(params: Glacier.GetVaultAccessPolicyInput, callback?: (err: AWSError, data: Glacier.GetVaultAccessPolicyOutput) => void): Request<Glacier.GetVaultAccessPolicyOutput, AWSError>;
+  getVaultAccessPolicy(params: Glacier.Types.GetVaultAccessPolicyInput, callback?: (err: AWSError, data: Glacier.Types.GetVaultAccessPolicyOutput) => void): Request<Glacier.Types.GetVaultAccessPolicyOutput, AWSError>;
   /**
    * This operation retrieves the access-policy subresource set on the vault; for more information on setting this subresource, see Set Vault Access Policy (PUT access-policy). If there is no access policy set on the vault, the operation returns a 404 Not found error. For more information about vault access policies, see Amazon Glacier Access Control with Vault Access Policies.
    */
-  getVaultAccessPolicy(callback?: (err: AWSError, data: Glacier.GetVaultAccessPolicyOutput) => void): Request<Glacier.GetVaultAccessPolicyOutput, AWSError>;
+  getVaultAccessPolicy(callback?: (err: AWSError, data: Glacier.Types.GetVaultAccessPolicyOutput) => void): Request<Glacier.Types.GetVaultAccessPolicyOutput, AWSError>;
   /**
    * This operation retrieves the following attributes from the lock-policy subresource set on the specified vault:   The vault lock policy set on the vault.   The state of the vault lock, which is either InProgess or Locked.   When the lock ID expires. The lock ID is used to complete the vault locking process.   When the vault lock was initiated and put into the InProgress state.    A vault lock is put into the InProgress state by calling InitiateVaultLock. A vault lock is put into the Locked state by calling CompleteVaultLock. You can abort the vault locking process by calling AbortVaultLock. For more information about the vault locking process, Amazon Glacier Vault Lock.  If there is no vault lock policy set on the vault, the operation returns a 404 Not found error. For more information about vault lock policies, Amazon Glacier Access Control with Vault Lock Policies. 
    */
-  getVaultLock(params: Glacier.GetVaultLockInput, callback?: (err: AWSError, data: Glacier.GetVaultLockOutput) => void): Request<Glacier.GetVaultLockOutput, AWSError>;
+  getVaultLock(params: Glacier.Types.GetVaultLockInput, callback?: (err: AWSError, data: Glacier.Types.GetVaultLockOutput) => void): Request<Glacier.Types.GetVaultLockOutput, AWSError>;
   /**
    * This operation retrieves the following attributes from the lock-policy subresource set on the specified vault:   The vault lock policy set on the vault.   The state of the vault lock, which is either InProgess or Locked.   When the lock ID expires. The lock ID is used to complete the vault locking process.   When the vault lock was initiated and put into the InProgress state.    A vault lock is put into the InProgress state by calling InitiateVaultLock. A vault lock is put into the Locked state by calling CompleteVaultLock. You can abort the vault locking process by calling AbortVaultLock. For more information about the vault locking process, Amazon Glacier Vault Lock.  If there is no vault lock policy set on the vault, the operation returns a 404 Not found error. For more information about vault lock policies, Amazon Glacier Access Control with Vault Lock Policies. 
    */
-  getVaultLock(callback?: (err: AWSError, data: Glacier.GetVaultLockOutput) => void): Request<Glacier.GetVaultLockOutput, AWSError>;
+  getVaultLock(callback?: (err: AWSError, data: Glacier.Types.GetVaultLockOutput) => void): Request<Glacier.Types.GetVaultLockOutput, AWSError>;
   /**
    * This operation retrieves the notification-configuration subresource of the specified vault. For information about setting a notification configuration on a vault, see SetVaultNotifications. If a notification configuration for a vault is not set, the operation returns a 404 Not Found error. For more information about vault notifications, see Configuring Vault Notifications in Amazon Glacier.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Configuring Vault Notifications in Amazon Glacier and Get Vault Notification Configuration  in the Amazon Glacier Developer Guide. 
    */
-  getVaultNotifications(params: Glacier.GetVaultNotificationsInput, callback?: (err: AWSError, data: Glacier.GetVaultNotificationsOutput) => void): Request<Glacier.GetVaultNotificationsOutput, AWSError>;
+  getVaultNotifications(params: Glacier.Types.GetVaultNotificationsInput, callback?: (err: AWSError, data: Glacier.Types.GetVaultNotificationsOutput) => void): Request<Glacier.Types.GetVaultNotificationsOutput, AWSError>;
   /**
    * This operation retrieves the notification-configuration subresource of the specified vault. For information about setting a notification configuration on a vault, see SetVaultNotifications. If a notification configuration for a vault is not set, the operation returns a 404 Not Found error. For more information about vault notifications, see Configuring Vault Notifications in Amazon Glacier.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Configuring Vault Notifications in Amazon Glacier and Get Vault Notification Configuration  in the Amazon Glacier Developer Guide. 
    */
-  getVaultNotifications(callback?: (err: AWSError, data: Glacier.GetVaultNotificationsOutput) => void): Request<Glacier.GetVaultNotificationsOutput, AWSError>;
+  getVaultNotifications(callback?: (err: AWSError, data: Glacier.Types.GetVaultNotificationsOutput) => void): Request<Glacier.Types.GetVaultNotificationsOutput, AWSError>;
   /**
    * This operation initiates a job of the specified type. In this release, you can initiate a job to retrieve either an archive or a vault inventory (a list of archives in a vault).  Retrieving data from Amazon Glacier is a two-step process:    Initiate a retrieval job. A data retrieval policy can cause your initiate retrieval job request to fail with a PolicyEnforcedException exception. For more information about data retrieval policies, see Amazon Glacier Data Retrieval Policies. For more information about the PolicyEnforcedException exception, see Error Responses.   After the job completes, download the bytes.  The retrieval request is executed asynchronously. When you initiate a retrieval job, Amazon Glacier creates a job and returns a job ID in the response. When Amazon Glacier completes the job, you can get the job output (archive or inventory data). For information about getting job output, see GetJobOutput operation.  The job must complete before you can get its output. To determine when a job is complete, you have the following options:   Use Amazon SNS Notification You can specify an Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Glacier can post a notification after the job is completed. You can specify an SNS topic per job request. The notification is sent only after Amazon Glacier completes the job. In addition to specifying an SNS topic per job request, you can configure vault notifications for a vault so that job notifications are always sent. For more information, see SetVaultNotifications.   Get job details You can make a DescribeJob request to obtain job status information while a job is in progress. However, it is more efficient to use an Amazon SNS notification to determine when a job is complete.   The information you get via notification is same that you get by calling DescribeJob. If for a specific event, you add both the notification configuration on the vault and also specify an SNS topic in your initiate job request, Amazon Glacier sends both notifications. For more information, see SetVaultNotifications. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). About the Vault Inventory Amazon Glacier prepares an inventory for each vault periodically, every 24 hours. When you initiate a job for a vault inventory, Amazon Glacier returns the last inventory for the vault. The inventory data you get might be up to a day or two days old. Also, the initiate inventory job might take some time to complete before you can download the vault inventory. So you do not want to retrieve a vault inventory for each vault operation. However, in some scenarios, you might find the vault inventory useful. For example, when you upload an archive, you can provide an archive description but not an archive name. Amazon Glacier provides you a unique archive ID, an opaque string of characters. So, you might maintain your own database that maps archive names to their corresponding Amazon Glacier assigned archive IDs. You might find the vault inventory useful in the event you need to reconcile information in your database with the actual vault inventory.  Range Inventory Retrieval You can limit the number of inventory items retrieved by filtering on the archive creation date or by setting a limit. Filtering by Archive Creation Date You can retrieve inventory items for archives created between StartDate and EndDate by specifying values for these parameters in the InitiateJob request. Archives created on or after the StartDate and before the EndDate will be returned. If you only provide the StartDate without the EndDate, you will retrieve the inventory for all archives created on or after the StartDate. If you only provide the EndDate without the StartDate, you will get back the inventory for all archives created before the EndDate. Limiting Inventory Items per Retrieval You can limit the number of inventory items returned by setting the Limit parameter in the InitiateJob request. The inventory job output will contain inventory items up to the specified Limit. If there are more inventory items available, the result is paginated. After a job is complete you can use the DescribeJob operation to get a marker that you use in a subsequent InitiateJob request. The marker will indicate the starting point to retrieve the next set of inventory items. You can page through your entire inventory by repeatedly making InitiateJob requests with the marker from the previous DescribeJob output, until you get a marker from DescribeJob that returns null, indicating that there are no more inventory items available. You can use the Limit parameter together with the date range parameters. About Ranged Archive Retrieval  You can initiate an archive retrieval for the whole archive or a range of the archive. In the case of ranged archive retrieval, you specify a byte range to return or the whole archive. The range specified must be megabyte (MB) aligned, that is the range start value must be divisible by 1 MB and range end value plus 1 must be divisible by 1 MB or equal the end of the archive. If the ranged archive retrieval is not megabyte aligned, this operation returns a 400 response. Furthermore, to ensure you get checksum values for data you download using Get Job Output API, the range must be tree hash aligned.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, go to Initiate a Job and Downloading a Vault Inventory 
    */
-  initiateJob(params: Glacier.InitiateJobInput, callback?: (err: AWSError, data: Glacier.InitiateJobOutput) => void): Request<Glacier.InitiateJobOutput, AWSError>;
+  initiateJob(params: Glacier.Types.InitiateJobInput, callback?: (err: AWSError, data: Glacier.Types.InitiateJobOutput) => void): Request<Glacier.Types.InitiateJobOutput, AWSError>;
   /**
    * This operation initiates a job of the specified type. In this release, you can initiate a job to retrieve either an archive or a vault inventory (a list of archives in a vault).  Retrieving data from Amazon Glacier is a two-step process:    Initiate a retrieval job. A data retrieval policy can cause your initiate retrieval job request to fail with a PolicyEnforcedException exception. For more information about data retrieval policies, see Amazon Glacier Data Retrieval Policies. For more information about the PolicyEnforcedException exception, see Error Responses.   After the job completes, download the bytes.  The retrieval request is executed asynchronously. When you initiate a retrieval job, Amazon Glacier creates a job and returns a job ID in the response. When Amazon Glacier completes the job, you can get the job output (archive or inventory data). For information about getting job output, see GetJobOutput operation.  The job must complete before you can get its output. To determine when a job is complete, you have the following options:   Use Amazon SNS Notification You can specify an Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Glacier can post a notification after the job is completed. You can specify an SNS topic per job request. The notification is sent only after Amazon Glacier completes the job. In addition to specifying an SNS topic per job request, you can configure vault notifications for a vault so that job notifications are always sent. For more information, see SetVaultNotifications.   Get job details You can make a DescribeJob request to obtain job status information while a job is in progress. However, it is more efficient to use an Amazon SNS notification to determine when a job is complete.   The information you get via notification is same that you get by calling DescribeJob. If for a specific event, you add both the notification configuration on the vault and also specify an SNS topic in your initiate job request, Amazon Glacier sends both notifications. For more information, see SetVaultNotifications. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). About the Vault Inventory Amazon Glacier prepares an inventory for each vault periodically, every 24 hours. When you initiate a job for a vault inventory, Amazon Glacier returns the last inventory for the vault. The inventory data you get might be up to a day or two days old. Also, the initiate inventory job might take some time to complete before you can download the vault inventory. So you do not want to retrieve a vault inventory for each vault operation. However, in some scenarios, you might find the vault inventory useful. For example, when you upload an archive, you can provide an archive description but not an archive name. Amazon Glacier provides you a unique archive ID, an opaque string of characters. So, you might maintain your own database that maps archive names to their corresponding Amazon Glacier assigned archive IDs. You might find the vault inventory useful in the event you need to reconcile information in your database with the actual vault inventory.  Range Inventory Retrieval You can limit the number of inventory items retrieved by filtering on the archive creation date or by setting a limit. Filtering by Archive Creation Date You can retrieve inventory items for archives created between StartDate and EndDate by specifying values for these parameters in the InitiateJob request. Archives created on or after the StartDate and before the EndDate will be returned. If you only provide the StartDate without the EndDate, you will retrieve the inventory for all archives created on or after the StartDate. If you only provide the EndDate without the StartDate, you will get back the inventory for all archives created before the EndDate. Limiting Inventory Items per Retrieval You can limit the number of inventory items returned by setting the Limit parameter in the InitiateJob request. The inventory job output will contain inventory items up to the specified Limit. If there are more inventory items available, the result is paginated. After a job is complete you can use the DescribeJob operation to get a marker that you use in a subsequent InitiateJob request. The marker will indicate the starting point to retrieve the next set of inventory items. You can page through your entire inventory by repeatedly making InitiateJob requests with the marker from the previous DescribeJob output, until you get a marker from DescribeJob that returns null, indicating that there are no more inventory items available. You can use the Limit parameter together with the date range parameters. About Ranged Archive Retrieval  You can initiate an archive retrieval for the whole archive or a range of the archive. In the case of ranged archive retrieval, you specify a byte range to return or the whole archive. The range specified must be megabyte (MB) aligned, that is the range start value must be divisible by 1 MB and range end value plus 1 must be divisible by 1 MB or equal the end of the archive. If the ranged archive retrieval is not megabyte aligned, this operation returns a 400 response. Furthermore, to ensure you get checksum values for data you download using Get Job Output API, the range must be tree hash aligned.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, go to Initiate a Job and Downloading a Vault Inventory 
    */
-  initiateJob(callback?: (err: AWSError, data: Glacier.InitiateJobOutput) => void): Request<Glacier.InitiateJobOutput, AWSError>;
+  initiateJob(callback?: (err: AWSError, data: Glacier.Types.InitiateJobOutput) => void): Request<Glacier.Types.InitiateJobOutput, AWSError>;
   /**
    * This operation initiates a multipart upload. Amazon Glacier creates a multipart upload resource and returns its ID in the response. The multipart upload ID is used in subsequent requests to upload parts of an archive (see UploadMultipartPart). When you initiate a multipart upload, you specify the part size in number of bytes. The part size must be a megabyte (1024 KB) multiplied by a power of 2-for example, 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB. Every part you upload to this resource (see UploadMultipartPart), except the last one, must have the same size. The last one can be the same size or smaller. For example, suppose you want to upload a 16.2 MB file. If you initiate the multipart upload with a part size of 4 MB, you will upload four parts of 4 MB each and one part of 0.2 MB.  You don't need to know the size of the archive when you start a multipart upload because Amazon Glacier does not require you to specify the overall archive size. After you complete the multipart upload, Amazon Glacier removes the multipart upload resource referenced by the ID. Amazon Glacier also removes the multipart upload resource if you cancel the multipart upload or it may be removed if there is no activity for a period of 24 hours. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Uploading Large Archives in Parts (Multipart Upload) and Initiate Multipart Upload in the Amazon Glacier Developer Guide.
    */
-  initiateMultipartUpload(params: Glacier.InitiateMultipartUploadInput, callback?: (err: AWSError, data: Glacier.InitiateMultipartUploadOutput) => void): Request<Glacier.InitiateMultipartUploadOutput, AWSError>;
+  initiateMultipartUpload(params: Glacier.Types.InitiateMultipartUploadInput, callback?: (err: AWSError, data: Glacier.Types.InitiateMultipartUploadOutput) => void): Request<Glacier.Types.InitiateMultipartUploadOutput, AWSError>;
   /**
    * This operation initiates a multipart upload. Amazon Glacier creates a multipart upload resource and returns its ID in the response. The multipart upload ID is used in subsequent requests to upload parts of an archive (see UploadMultipartPart). When you initiate a multipart upload, you specify the part size in number of bytes. The part size must be a megabyte (1024 KB) multiplied by a power of 2-for example, 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB. Every part you upload to this resource (see UploadMultipartPart), except the last one, must have the same size. The last one can be the same size or smaller. For example, suppose you want to upload a 16.2 MB file. If you initiate the multipart upload with a part size of 4 MB, you will upload four parts of 4 MB each and one part of 0.2 MB.  You don't need to know the size of the archive when you start a multipart upload because Amazon Glacier does not require you to specify the overall archive size. After you complete the multipart upload, Amazon Glacier removes the multipart upload resource referenced by the ID. Amazon Glacier also removes the multipart upload resource if you cancel the multipart upload or it may be removed if there is no activity for a period of 24 hours. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Uploading Large Archives in Parts (Multipart Upload) and Initiate Multipart Upload in the Amazon Glacier Developer Guide.
    */
-  initiateMultipartUpload(callback?: (err: AWSError, data: Glacier.InitiateMultipartUploadOutput) => void): Request<Glacier.InitiateMultipartUploadOutput, AWSError>;
+  initiateMultipartUpload(callback?: (err: AWSError, data: Glacier.Types.InitiateMultipartUploadOutput) => void): Request<Glacier.Types.InitiateMultipartUploadOutput, AWSError>;
   /**
    * This operation initiates the vault locking process by doing the following:   Installing a vault lock policy on the specified vault.   Setting the lock state of vault lock to InProgress.   Returning a lock ID, which is used to complete the vault locking process.     You can set one vault lock policy for each vault and this policy can be up to 20 KB in size. For more information about vault lock policies, see Amazon Glacier Access Control with Vault Lock Policies.  You must complete the vault locking process within 24 hours after the vault lock enters the InProgress state. After the 24 hour window ends, the lock ID expires, the vault automatically exits the InProgress state, and the vault lock policy is removed from the vault. You call CompleteVaultLock to complete the vault locking process by setting the state of the vault lock to Locked.  After a vault lock is in the Locked state, you cannot initiate a new vault lock for the vault. You can abort the vault locking process by calling AbortVaultLock. You can get the state of the vault lock by calling GetVaultLock. For more information about the vault locking process, Amazon Glacier Vault Lock. If this operation is called when the vault lock is in the InProgress state, the operation returns an AccessDeniedException error. When the vault lock is in the InProgress state you must call AbortVaultLock before you can initiate a new vault lock policy. 
    */
-  initiateVaultLock(params: Glacier.InitiateVaultLockInput, callback?: (err: AWSError, data: Glacier.InitiateVaultLockOutput) => void): Request<Glacier.InitiateVaultLockOutput, AWSError>;
+  initiateVaultLock(params: Glacier.Types.InitiateVaultLockInput, callback?: (err: AWSError, data: Glacier.Types.InitiateVaultLockOutput) => void): Request<Glacier.Types.InitiateVaultLockOutput, AWSError>;
   /**
    * This operation initiates the vault locking process by doing the following:   Installing a vault lock policy on the specified vault.   Setting the lock state of vault lock to InProgress.   Returning a lock ID, which is used to complete the vault locking process.     You can set one vault lock policy for each vault and this policy can be up to 20 KB in size. For more information about vault lock policies, see Amazon Glacier Access Control with Vault Lock Policies.  You must complete the vault locking process within 24 hours after the vault lock enters the InProgress state. After the 24 hour window ends, the lock ID expires, the vault automatically exits the InProgress state, and the vault lock policy is removed from the vault. You call CompleteVaultLock to complete the vault locking process by setting the state of the vault lock to Locked.  After a vault lock is in the Locked state, you cannot initiate a new vault lock for the vault. You can abort the vault locking process by calling AbortVaultLock. You can get the state of the vault lock by calling GetVaultLock. For more information about the vault locking process, Amazon Glacier Vault Lock. If this operation is called when the vault lock is in the InProgress state, the operation returns an AccessDeniedException error. When the vault lock is in the InProgress state you must call AbortVaultLock before you can initiate a new vault lock policy. 
    */
-  initiateVaultLock(callback?: (err: AWSError, data: Glacier.InitiateVaultLockOutput) => void): Request<Glacier.InitiateVaultLockOutput, AWSError>;
+  initiateVaultLock(callback?: (err: AWSError, data: Glacier.Types.InitiateVaultLockOutput) => void): Request<Glacier.Types.InitiateVaultLockOutput, AWSError>;
   /**
    * This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished.  Amazon Glacier retains recently completed jobs for a period before deleting them; however, it eventually removes completed jobs. The output of completed jobs can be retrieved. Retaining completed jobs for a period of time after they have completed enables you to get a job output in the event you miss the job completion notification or your first attempt to download it fails. For example, suppose you start an archive retrieval job to download an archive. After the job completes, you start to download the archive but encounter a network error. In this scenario, you can retry and download the archive while the job exists.  To retrieve an archive or retrieve a vault inventory from Amazon Glacier, you first initiate a job, and after the job completes, you download the data. For an archive retrieval, the output is the archive data, and for an inventory retrieval, it is the inventory list. The List Job operation returns a list of these jobs sorted by job initiation time. This List Jobs operation supports pagination. By default, this operation returns up to 1,000 jobs in the response. You should always check the response for a marker at which to continue the list; if there are no more items the marker is null. To return a list of jobs that begins at a specific job, set the marker request parameter to the value you obtained from a previous List Jobs request. You can also limit the number of jobs returned in the response by specifying the limit parameter in the request. Additionally, you can filter the jobs list returned by specifying an optional statuscode (InProgress, Succeeded, or Failed) and completed (true, false) parameter. The statuscode allows you to specify that only jobs that match a specified status are returned. The completed parameter allows you to specify that only jobs in a specific completion state are returned. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For the underlying REST API, go to List Jobs  
    */
-  listJobs(params: Glacier.ListJobsInput, callback?: (err: AWSError, data: Glacier.ListJobsOutput) => void): Request<Glacier.ListJobsOutput, AWSError>;
+  listJobs(params: Glacier.Types.ListJobsInput, callback?: (err: AWSError, data: Glacier.Types.ListJobsOutput) => void): Request<Glacier.Types.ListJobsOutput, AWSError>;
   /**
    * This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished.  Amazon Glacier retains recently completed jobs for a period before deleting them; however, it eventually removes completed jobs. The output of completed jobs can be retrieved. Retaining completed jobs for a period of time after they have completed enables you to get a job output in the event you miss the job completion notification or your first attempt to download it fails. For example, suppose you start an archive retrieval job to download an archive. After the job completes, you start to download the archive but encounter a network error. In this scenario, you can retry and download the archive while the job exists.  To retrieve an archive or retrieve a vault inventory from Amazon Glacier, you first initiate a job, and after the job completes, you download the data. For an archive retrieval, the output is the archive data, and for an inventory retrieval, it is the inventory list. The List Job operation returns a list of these jobs sorted by job initiation time. This List Jobs operation supports pagination. By default, this operation returns up to 1,000 jobs in the response. You should always check the response for a marker at which to continue the list; if there are no more items the marker is null. To return a list of jobs that begins at a specific job, set the marker request parameter to the value you obtained from a previous List Jobs request. You can also limit the number of jobs returned in the response by specifying the limit parameter in the request. Additionally, you can filter the jobs list returned by specifying an optional statuscode (InProgress, Succeeded, or Failed) and completed (true, false) parameter. The statuscode allows you to specify that only jobs that match a specified status are returned. The completed parameter allows you to specify that only jobs in a specific completion state are returned. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For the underlying REST API, go to List Jobs  
    */
-  listJobs(callback?: (err: AWSError, data: Glacier.ListJobsOutput) => void): Request<Glacier.ListJobsOutput, AWSError>;
+  listJobs(callback?: (err: AWSError, data: Glacier.Types.ListJobsOutput) => void): Request<Glacier.Types.ListJobsOutput, AWSError>;
   /**
    * This operation lists in-progress multipart uploads for the specified vault. An in-progress multipart upload is a multipart upload that has been initiated by an InitiateMultipartUpload request, but has not yet been completed or aborted. The list returned in the List Multipart Upload response has no guaranteed order.  The List Multipart Uploads operation supports pagination. By default, this operation returns up to 1,000 multipart uploads in the response. You should always check the response for a marker at which to continue the list; if there are no more items the marker is null. To return a list of multipart uploads that begins at a specific upload, set the marker request parameter to the value you obtained from a previous List Multipart Upload request. You can also limit the number of uploads returned in the response by specifying the limit parameter in the request. Note the difference between this operation and listing parts (ListParts). The List Multipart Uploads operation lists all multipart uploads for a vault and does not require a multipart upload ID. The List Parts operation requires a multipart upload ID since parts are associated with a single upload. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, go to Working with Archives in Amazon Glacier and List Multipart Uploads  in the Amazon Glacier Developer Guide.
    */
-  listMultipartUploads(params: Glacier.ListMultipartUploadsInput, callback?: (err: AWSError, data: Glacier.ListMultipartUploadsOutput) => void): Request<Glacier.ListMultipartUploadsOutput, AWSError>;
+  listMultipartUploads(params: Glacier.Types.ListMultipartUploadsInput, callback?: (err: AWSError, data: Glacier.Types.ListMultipartUploadsOutput) => void): Request<Glacier.Types.ListMultipartUploadsOutput, AWSError>;
   /**
    * This operation lists in-progress multipart uploads for the specified vault. An in-progress multipart upload is a multipart upload that has been initiated by an InitiateMultipartUpload request, but has not yet been completed or aborted. The list returned in the List Multipart Upload response has no guaranteed order.  The List Multipart Uploads operation supports pagination. By default, this operation returns up to 1,000 multipart uploads in the response. You should always check the response for a marker at which to continue the list; if there are no more items the marker is null. To return a list of multipart uploads that begins at a specific upload, set the marker request parameter to the value you obtained from a previous List Multipart Upload request. You can also limit the number of uploads returned in the response by specifying the limit parameter in the request. Note the difference between this operation and listing parts (ListParts). The List Multipart Uploads operation lists all multipart uploads for a vault and does not require a multipart upload ID. The List Parts operation requires a multipart upload ID since parts are associated with a single upload. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, go to Working with Archives in Amazon Glacier and List Multipart Uploads  in the Amazon Glacier Developer Guide.
    */
-  listMultipartUploads(callback?: (err: AWSError, data: Glacier.ListMultipartUploadsOutput) => void): Request<Glacier.ListMultipartUploadsOutput, AWSError>;
+  listMultipartUploads(callback?: (err: AWSError, data: Glacier.Types.ListMultipartUploadsOutput) => void): Request<Glacier.Types.ListMultipartUploadsOutput, AWSError>;
   /**
    * This operation lists the parts of an archive that have been uploaded in a specific multipart upload. You can make this request at any time during an in-progress multipart upload before you complete the upload (see CompleteMultipartUpload. List Parts returns an error for completed uploads. The list returned in the List Parts response is sorted by part range.  The List Parts operation supports pagination. By default, this operation returns up to 1,000 uploaded parts in the response. You should always check the response for a marker at which to continue the list; if there are no more items the marker is null. To return a list of parts that begins at a specific part, set the marker request parameter to the value you obtained from a previous List Parts request. You can also limit the number of parts returned in the response by specifying the limit parameter in the request.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, go to Working with Archives in Amazon Glacier and List Parts in the Amazon Glacier Developer Guide.
    */
-  listParts(params: Glacier.ListPartsInput, callback?: (err: AWSError, data: Glacier.ListPartsOutput) => void): Request<Glacier.ListPartsOutput, AWSError>;
+  listParts(params: Glacier.Types.ListPartsInput, callback?: (err: AWSError, data: Glacier.Types.ListPartsOutput) => void): Request<Glacier.Types.ListPartsOutput, AWSError>;
   /**
    * This operation lists the parts of an archive that have been uploaded in a specific multipart upload. You can make this request at any time during an in-progress multipart upload before you complete the upload (see CompleteMultipartUpload. List Parts returns an error for completed uploads. The list returned in the List Parts response is sorted by part range.  The List Parts operation supports pagination. By default, this operation returns up to 1,000 uploaded parts in the response. You should always check the response for a marker at which to continue the list; if there are no more items the marker is null. To return a list of parts that begins at a specific part, set the marker request parameter to the value you obtained from a previous List Parts request. You can also limit the number of parts returned in the response by specifying the limit parameter in the request.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, go to Working with Archives in Amazon Glacier and List Parts in the Amazon Glacier Developer Guide.
    */
-  listParts(callback?: (err: AWSError, data: Glacier.ListPartsOutput) => void): Request<Glacier.ListPartsOutput, AWSError>;
+  listParts(callback?: (err: AWSError, data: Glacier.Types.ListPartsOutput) => void): Request<Glacier.Types.ListPartsOutput, AWSError>;
   /**
    * This operation lists all the tags attached to a vault. The operation returns an empty map if there are no tags. For more information about tags, see Tagging Amazon Glacier Resources.
    */
-  listTagsForVault(params: Glacier.ListTagsForVaultInput, callback?: (err: AWSError, data: Glacier.ListTagsForVaultOutput) => void): Request<Glacier.ListTagsForVaultOutput, AWSError>;
+  listTagsForVault(params: Glacier.Types.ListTagsForVaultInput, callback?: (err: AWSError, data: Glacier.Types.ListTagsForVaultOutput) => void): Request<Glacier.Types.ListTagsForVaultOutput, AWSError>;
   /**
    * This operation lists all the tags attached to a vault. The operation returns an empty map if there are no tags. For more information about tags, see Tagging Amazon Glacier Resources.
    */
-  listTagsForVault(callback?: (err: AWSError, data: Glacier.ListTagsForVaultOutput) => void): Request<Glacier.ListTagsForVaultOutput, AWSError>;
+  listTagsForVault(callback?: (err: AWSError, data: Glacier.Types.ListTagsForVaultOutput) => void): Request<Glacier.Types.ListTagsForVaultOutput, AWSError>;
   /**
    * This operation lists all vaults owned by the calling user's account. The list returned in the response is ASCII-sorted by vault name.  By default, this operation returns up to 1,000 items. If there are more vaults to list, the response marker field contains the vault Amazon Resource Name (ARN) at which to continue the list with a new List Vaults request; otherwise, the marker field is null. To return a list of vaults that begins at a specific vault, set the marker request parameter to the vault ARN you obtained from a previous List Vaults request. You can also limit the number of vaults returned in the response by specifying the limit parameter in the request.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Retrieving Vault Metadata in Amazon Glacier and List Vaults  in the Amazon Glacier Developer Guide. 
    */
-  listVaults(params: Glacier.ListVaultsInput, callback?: (err: AWSError, data: Glacier.ListVaultsOutput) => void): Request<Glacier.ListVaultsOutput, AWSError>;
+  listVaults(params: Glacier.Types.ListVaultsInput, callback?: (err: AWSError, data: Glacier.Types.ListVaultsOutput) => void): Request<Glacier.Types.ListVaultsOutput, AWSError>;
   /**
    * This operation lists all vaults owned by the calling user's account. The list returned in the response is ASCII-sorted by vault name.  By default, this operation returns up to 1,000 items. If there are more vaults to list, the response marker field contains the vault Amazon Resource Name (ARN) at which to continue the list with a new List Vaults request; otherwise, the marker field is null. To return a list of vaults that begins at a specific vault, set the marker request parameter to the vault ARN you obtained from a previous List Vaults request. You can also limit the number of vaults returned in the response by specifying the limit parameter in the request.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Retrieving Vault Metadata in Amazon Glacier and List Vaults  in the Amazon Glacier Developer Guide. 
    */
-  listVaults(callback?: (err: AWSError, data: Glacier.ListVaultsOutput) => void): Request<Glacier.ListVaultsOutput, AWSError>;
+  listVaults(callback?: (err: AWSError, data: Glacier.Types.ListVaultsOutput) => void): Request<Glacier.Types.ListVaultsOutput, AWSError>;
   /**
    * This operation removes one or more tags from the set of tags attached to a vault. For more information about tags, see Tagging Amazon Glacier Resources. This operation is idempotent. The operation will be successful, even if there are no tags attached to the vault. 
    */
-  removeTagsFromVault(params: Glacier.RemoveTagsFromVaultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  removeTagsFromVault(params: Glacier.Types.RemoveTagsFromVaultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation removes one or more tags from the set of tags attached to a vault. For more information about tags, see Tagging Amazon Glacier Resources. This operation is idempotent. The operation will be successful, even if there are no tags attached to the vault. 
    */
@@ -214,7 +214,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation sets and then enacts a data retrieval policy in the region specified in the PUT request. You can set one policy per region for an AWS account. The policy is enacted within a few minutes of a successful PUT operation.  The set policy operation does not affect retrieval jobs that were in progress before the policy was enacted. For more information about data retrieval policies, see Amazon Glacier Data Retrieval Policies. 
    */
-  setDataRetrievalPolicy(params: Glacier.SetDataRetrievalPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setDataRetrievalPolicy(params: Glacier.Types.SetDataRetrievalPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation sets and then enacts a data retrieval policy in the region specified in the PUT request. You can set one policy per region for an AWS account. The policy is enacted within a few minutes of a successful PUT operation.  The set policy operation does not affect retrieval jobs that were in progress before the policy was enacted. For more information about data retrieval policies, see Amazon Glacier Data Retrieval Policies. 
    */
@@ -222,7 +222,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation configures an access policy for a vault and will overwrite an existing policy. To configure a vault access policy, send a PUT request to the access-policy subresource of the vault. An access policy is specific to a vault and is also called a vault subresource. You can set one access policy per vault and the policy can be up to 20 KB in size. For more information about vault access policies, see Amazon Glacier Access Control with Vault Access Policies. 
    */
-  setVaultAccessPolicy(params: Glacier.SetVaultAccessPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setVaultAccessPolicy(params: Glacier.Types.SetVaultAccessPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation configures an access policy for a vault and will overwrite an existing policy. To configure a vault access policy, send a PUT request to the access-policy subresource of the vault. An access policy is specific to a vault and is also called a vault subresource. You can set one access policy per vault and the policy can be up to 20 KB in size. For more information about vault access policies, see Amazon Glacier Access Control with Vault Access Policies. 
    */
@@ -230,7 +230,7 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation configures notifications that will be sent when specific events happen to a vault. By default, you don't get any notifications.  To configure vault notifications, send a PUT request to the notification-configuration subresource of the vault. The request should include a JSON document that provides an Amazon SNS topic and specific events for which you want Amazon Glacier to send notifications to the topic. Amazon SNS topics must grant permission to the vault to be allowed to publish notifications to the topic. You can configure a vault to publish a notification for the following vault events:   ArchiveRetrievalCompleted This event occurs when a job that was initiated for an archive retrieval is completed (InitiateJob). The status of the completed job can be "Succeeded" or "Failed". The notification sent to the SNS topic is the same output as returned from DescribeJob.   InventoryRetrievalCompleted This event occurs when a job that was initiated for an inventory retrieval is completed (InitiateJob). The status of the completed job can be "Succeeded" or "Failed". The notification sent to the SNS topic is the same output as returned from DescribeJob.   An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Configuring Vault Notifications in Amazon Glacier and Set Vault Notification Configuration  in the Amazon Glacier Developer Guide. 
    */
-  setVaultNotifications(params: Glacier.SetVaultNotificationsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setVaultNotifications(params: Glacier.Types.SetVaultNotificationsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation configures notifications that will be sent when specific events happen to a vault. By default, you don't get any notifications.  To configure vault notifications, send a PUT request to the notification-configuration subresource of the vault. The request should include a JSON document that provides an Amazon SNS topic and specific events for which you want Amazon Glacier to send notifications to the topic. Amazon SNS topics must grant permission to the vault to be allowed to publish notifications to the topic. You can configure a vault to publish a notification for the following vault events:   ArchiveRetrievalCompleted This event occurs when a job that was initiated for an archive retrieval is completed (InitiateJob). The status of the completed job can be "Succeeded" or "Failed". The notification sent to the SNS topic is the same output as returned from DescribeJob.   InventoryRetrievalCompleted This event occurs when a job that was initiated for an inventory retrieval is completed (InitiateJob). The status of the completed job can be "Succeeded" or "Failed". The notification sent to the SNS topic is the same output as returned from DescribeJob.   An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and underlying REST API, go to Configuring Vault Notifications in Amazon Glacier and Set Vault Notification Configuration  in the Amazon Glacier Developer Guide. 
    */
@@ -238,37 +238,37 @@ declare class Glacier extends GlacierCustomizations {
   /**
    * This operation adds an archive to a vault. This is a synchronous operation, and for a successful upload, your data is durably persisted. Amazon Glacier returns the archive ID in the x-amz-archive-id header of the response.  You must use the archive ID to access your data in Amazon Glacier. After you upload an archive, you should save the archive ID returned so that you can retrieve or delete the archive later. Besides saving the archive ID, you can also index it and give it a friendly name to allow for better searching. You can also use the optional archive description field to specify how the archive is referred to in an external index of archives, such as you might create in Amazon DynamoDB. You can also get the vault inventory to obtain a list of archive IDs in a vault. For more information, see InitiateJob.  You must provide a SHA256 tree hash of the data you are uploading. For information about computing a SHA256 tree hash, see Computing Checksums.  You can optionally specify an archive description of up to 1,024 printable ASCII characters. You can get the archive description when you either retrieve the archive or get the vault inventory. For more information, see InitiateJob. Amazon Glacier does not interpret the description in any way. An archive description does not need to be unique. You cannot use the description to retrieve or sort the archive list.  Archives are immutable. After you upload an archive, you cannot edit the archive or its description.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Uploading an Archive in Amazon Glacier and Upload Archive in the Amazon Glacier Developer Guide. 
    */
-  uploadArchive(params: Glacier.UploadArchiveInput, callback?: (err: AWSError, data: Glacier.ArchiveCreationOutput) => void): Request<Glacier.ArchiveCreationOutput, AWSError>;
+  uploadArchive(params: Glacier.Types.UploadArchiveInput, callback?: (err: AWSError, data: Glacier.Types.ArchiveCreationOutput) => void): Request<Glacier.Types.ArchiveCreationOutput, AWSError>;
   /**
    * This operation adds an archive to a vault. This is a synchronous operation, and for a successful upload, your data is durably persisted. Amazon Glacier returns the archive ID in the x-amz-archive-id header of the response.  You must use the archive ID to access your data in Amazon Glacier. After you upload an archive, you should save the archive ID returned so that you can retrieve or delete the archive later. Besides saving the archive ID, you can also index it and give it a friendly name to allow for better searching. You can also use the optional archive description field to specify how the archive is referred to in an external index of archives, such as you might create in Amazon DynamoDB. You can also get the vault inventory to obtain a list of archive IDs in a vault. For more information, see InitiateJob.  You must provide a SHA256 tree hash of the data you are uploading. For information about computing a SHA256 tree hash, see Computing Checksums.  You can optionally specify an archive description of up to 1,024 printable ASCII characters. You can get the archive description when you either retrieve the archive or get the vault inventory. For more information, see InitiateJob. Amazon Glacier does not interpret the description in any way. An archive description does not need to be unique. You cannot use the description to retrieve or sort the archive list.  Archives are immutable. After you upload an archive, you cannot edit the archive or its description.  An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Uploading an Archive in Amazon Glacier and Upload Archive in the Amazon Glacier Developer Guide. 
    */
-  uploadArchive(callback?: (err: AWSError, data: Glacier.ArchiveCreationOutput) => void): Request<Glacier.ArchiveCreationOutput, AWSError>;
+  uploadArchive(callback?: (err: AWSError, data: Glacier.Types.ArchiveCreationOutput) => void): Request<Glacier.Types.ArchiveCreationOutput, AWSError>;
   /**
    * This operation uploads a part of an archive. You can upload archive parts in any order. You can also upload them in parallel. You can upload up to 10,000 parts for a multipart upload. Amazon Glacier rejects your upload part request if any of the following conditions is true:   SHA256 tree hash does not matchTo ensure that part data is not corrupted in transmission, you compute a SHA256 tree hash of the part and include it in your request. Upon receiving the part data, Amazon Glacier also computes a SHA256 tree hash. If these hash values don't match, the operation fails. For information about computing a SHA256 tree hash, see Computing Checksums.   Part size does not matchThe size of each part except the last must match the size specified in the corresponding InitiateMultipartUpload request. The size of the last part must be the same size as, or smaller than, the specified size. If you upload a part whose size is smaller than the part size you specified in your initiate multipart upload request and that part is not the last part, then the upload part request will succeed. However, the subsequent Complete Multipart Upload request will fail.   Range does not alignThe byte range value in the request does not align with the part size specified in the corresponding initiate request. For example, if you specify a part size of 4194304 bytes (4 MB), then 0 to 4194303 bytes (4 MB - 1) and 4194304 (4 MB) to 8388607 (8 MB - 1) are valid part ranges. However, if you set a range value of 2 MB to 6 MB, the range does not align with the part size and the upload will fail.   This operation is idempotent. If you upload the same part multiple times, the data included in the most recent request overwrites the previously uploaded data. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Uploading Large Archives in Parts (Multipart Upload) and Upload Part  in the Amazon Glacier Developer Guide.
    */
-  uploadMultipartPart(params: Glacier.UploadMultipartPartInput, callback?: (err: AWSError, data: Glacier.UploadMultipartPartOutput) => void): Request<Glacier.UploadMultipartPartOutput, AWSError>;
+  uploadMultipartPart(params: Glacier.Types.UploadMultipartPartInput, callback?: (err: AWSError, data: Glacier.Types.UploadMultipartPartOutput) => void): Request<Glacier.Types.UploadMultipartPartOutput, AWSError>;
   /**
    * This operation uploads a part of an archive. You can upload archive parts in any order. You can also upload them in parallel. You can upload up to 10,000 parts for a multipart upload. Amazon Glacier rejects your upload part request if any of the following conditions is true:   SHA256 tree hash does not matchTo ensure that part data is not corrupted in transmission, you compute a SHA256 tree hash of the part and include it in your request. Upon receiving the part data, Amazon Glacier also computes a SHA256 tree hash. If these hash values don't match, the operation fails. For information about computing a SHA256 tree hash, see Computing Checksums.   Part size does not matchThe size of each part except the last must match the size specified in the corresponding InitiateMultipartUpload request. The size of the last part must be the same size as, or smaller than, the specified size. If you upload a part whose size is smaller than the part size you specified in your initiate multipart upload request and that part is not the last part, then the upload part request will succeed. However, the subsequent Complete Multipart Upload request will fail.   Range does not alignThe byte range value in the request does not align with the part size specified in the corresponding initiate request. For example, if you specify a part size of 4194304 bytes (4 MB), then 0 to 4194303 bytes (4 MB - 1) and 4194304 (4 MB) to 8388607 (8 MB - 1) are valid part ranges. However, if you set a range value of 2 MB to 6 MB, the range does not align with the part size and the upload will fail.   This operation is idempotent. If you upload the same part multiple times, the data included in the most recent request overwrites the previously uploaded data. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Uploading Large Archives in Parts (Multipart Upload) and Upload Part  in the Amazon Glacier Developer Guide.
    */
-  uploadMultipartPart(callback?: (err: AWSError, data: Glacier.UploadMultipartPartOutput) => void): Request<Glacier.UploadMultipartPartOutput, AWSError>;
+  uploadMultipartPart(callback?: (err: AWSError, data: Glacier.Types.UploadMultipartPartOutput) => void): Request<Glacier.Types.UploadMultipartPartOutput, AWSError>;
   /**
    * Waits for the VaultExists state by periodically calling the underlying Glacier.describeVaultoperation every 3 seconds (at most 15 times).
    */
-  waitFor(state: "VaultExists", params: Glacier.DescribeVaultInput, callback?: (err: AWSError, data: Glacier.DescribeVaultOutput) => void): Request<Glacier.DescribeVaultOutput, AWSError>;
+  waitFor(state: "VaultExists", params: Glacier.Types.DescribeVaultInput, callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
   /**
    * Waits for the VaultExists state by periodically calling the underlying Glacier.describeVaultoperation every 3 seconds (at most 15 times).
    */
-  waitFor(state: "VaultExists", callback?: (err: AWSError, data: Glacier.DescribeVaultOutput) => void): Request<Glacier.DescribeVaultOutput, AWSError>;
+  waitFor(state: "VaultExists", callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
   /**
    * Waits for the VaultNotExists state by periodically calling the underlying Glacier.describeVaultoperation every 3 seconds (at most 15 times).
    */
-  waitFor(state: "VaultNotExists", params: Glacier.DescribeVaultInput, callback?: (err: AWSError, data: Glacier.DescribeVaultOutput) => void): Request<Glacier.DescribeVaultOutput, AWSError>;
+  waitFor(state: "VaultNotExists", params: Glacier.Types.DescribeVaultInput, callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
   /**
    * Waits for the VaultNotExists state by periodically calling the underlying Glacier.describeVaultoperation every 3 seconds (at most 15 times).
    */
-  waitFor(state: "VaultNotExists", callback?: (err: AWSError, data: Glacier.DescribeVaultOutput) => void): Request<Glacier.DescribeVaultOutput, AWSError>;
+  waitFor(state: "VaultNotExists", callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
 }
-declare namespace Glacier {
+declare namespace Glacier.Types {
   export interface AbortMultipartUploadInput {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single apos-apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (apos-apos) in the ID.
@@ -277,11 +277,11 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The upload ID of the multipart upload to delete.
      */
-    uploadId?: string;
+    uploadId: string;
   }
   export interface AbortVaultLockInput {
     /**
@@ -291,9 +291,9 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
-  export type ActionCode = string;
+  export type ActionCode = "ArchiveRetrieval"|"InventoryRetrieval"|string;
   export interface AddTagsToVaultInput {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single apos-apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (apos-apos) in the ID.
@@ -302,7 +302,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string.
      */
@@ -330,11 +330,11 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The upload ID of the multipart upload.
      */
-    uploadId?: string;
+    uploadId: string;
     /**
      * The total size, in bytes, of the entire archive. This value should be the sum of all the sizes of the individual parts that you uploaded.
      */
@@ -352,11 +352,11 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The lockId value is the lock ID obtained from a InitiateVaultLock request.
      */
-    lockId?: string;
+    lockId: string;
   }
   export interface CreateVaultInput {
     /**
@@ -366,7 +366,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
   export interface CreateVaultOutput {
     /**
@@ -400,11 +400,11 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The ID of the archive to delete.
      */
-    archiveId?: string;
+    archiveId: string;
   }
   export interface DeleteVaultAccessPolicyInput {
     /**
@@ -414,7 +414,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
   export interface DeleteVaultInput {
     /**
@@ -424,7 +424,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
   export interface DeleteVaultNotificationsInput {
     /**
@@ -434,7 +434,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
   export interface DescribeJobInput {
     /**
@@ -444,11 +444,11 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The ID of the job to describe.
      */
-    jobId?: string;
+    jobId: string;
   }
   export interface DescribeVaultInput {
     /**
@@ -458,7 +458,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
   export interface DescribeVaultOutput {
     /**
@@ -506,11 +506,11 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The job ID whose data is downloaded.
      */
-    jobId?: string;
+    jobId: string;
     /**
      * The range of bytes to retrieve from the output. For example, if you want to download the first 1,048,576 bytes, specify "Range: bytes=0-1048575". By default, this operation downloads the entire output. 
      */
@@ -554,7 +554,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
   export interface GetVaultAccessPolicyOutput {
     /**
@@ -570,7 +570,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
   export interface GetVaultLockOutput {
     /**
@@ -598,7 +598,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
   export interface GetVaultNotificationsOutput {
     /**
@@ -684,7 +684,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * Provides options for specifying job information.
      */
@@ -708,7 +708,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The archive description that you are uploading in parts. The part size must be a megabyte (1024 KB) multiplied by a power of 2, for example 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB (4096 MB).
      */
@@ -736,7 +736,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The vault lock policy as a JSON string, which uses "\" as an escape character.
      */
@@ -827,7 +827,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * Specifies that the response be limited to the specified number of items or fewer. If not specified, the List Jobs operation returns up to 1,000 jobs.
      */
@@ -863,7 +863,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * An opaque string used for pagination. This value specifies the upload at which the listing of uploads should begin. Get the marker value from a previous List Uploads response. You need only include the marker if you are continuing the pagination of results started in a previous List Uploads request.
      */
@@ -891,11 +891,11 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The upload ID of the multipart upload.
      */
-    uploadId?: string;
+    uploadId: string;
     /**
      * An opaque string used for pagination. This value specifies the part at which the listing of parts should begin. Get the marker value from the response of a previous List Parts response. You need only include the marker if you are continuing the pagination of results started in a previous List Parts request.
      */
@@ -943,7 +943,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
   }
   export interface ListTagsForVaultOutput {
     /**
@@ -996,7 +996,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * A list of tag keys. Each corresponding tag is removed from the vault.
      */
@@ -1020,7 +1020,7 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The vault access policy as a JSON string.
      */
@@ -1034,14 +1034,14 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * Provides options for specifying notification configuration.
      */
     vaultNotificationConfig?: VaultNotificationConfig;
   }
   export type Size = number;
-  export type StatusCode = string;
+  export type StatusCode = "InProgress"|"Succeeded"|"Failed"|string;
   export type Stream = Buffer|Uint8Array|Blob|string;
   export type TagKey = string;
   export type TagKeyList = string[];
@@ -1055,7 +1055,7 @@ declare namespace Glacier {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single apos-apos (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens (apos-apos) in the ID. 
      */
-    accountId?: string;
+    accountId: string;
     /**
      * The optional description of the archive you are uploading. 
      */
@@ -1099,11 +1099,11 @@ declare namespace Glacier {
     /**
      * The name of the vault.
      */
-    vaultName?: string;
+    vaultName: string;
     /**
      * The upload ID of the multipart upload.
      */
-    uploadId?: string;
+    uploadId: string;
     /**
      * The SHA256 tree hash of the data being uploaded. 
      */
