@@ -31,7 +31,7 @@ This can allow you to reduce the SDK's size, specify different API versions of
 services, or use AWS services that don't currently support CORS if you are
 working in an environment that does not enforce CORS. To get started:
 
-http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-building.html
+http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/building-sdk-for-browsers.html
 
 The AWS SDK is also compatible with [browserify](http://browserify.org).
 
@@ -58,17 +58,16 @@ bower install aws-sdk-js
 
 You can find a getting started guide at:
 
-http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/
+http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide
 
 ## Supported Services
 
 <p class="note"><strong>Note</strong>:
 Although all services are supported in the browser version of the SDK,
 not all of the services are available in the default hosted build (using the
-script tag provided above). A list of services in the hosted build are provided
-in the "<a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-services.html">Working With Services</a>"
-section of the browser SDK guide, including instructions on how to build a
-custom version of the SDK with extra services.
+script tag provided above). Instructions on how to build a
+custom version of the SDK with individual services are provided
+in the "<a href="http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/building-sdk-for-browsers.html">Building the SDK for Browsers</a>" section of the SDK Developer Guide.
 </p>
 
 The SDK currently supports the following services:
