@@ -51,7 +51,7 @@ export class Config {
     /**
      * The AWS credentials to sign requests with.
      */
-    credentials: Credentials
+    credentials?: Credentials
     /**
      * A set of options to pass to the low-level HTTP request.
      */
@@ -200,7 +200,7 @@ interface ConfigurationOptions {
     /**
      * The AWS credentials to sign requests with.
      */
-    credentials: Credentials
+    credentials?: Credentials
     /**
      * A set of options to pass to the low-level HTTP request.
      */

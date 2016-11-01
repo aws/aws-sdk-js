@@ -21,14 +21,14 @@ export class Service {
      * @param {string} operation - the name of the operation to call on the service.
      * @param {map} params - a map of input options for the operation. 
      */
-    makeRequest(operation: string, params?: {[key: string]: any}, callback?: (err: AWSError, data: any) => void): Request<AWSError, any>;
+    makeRequest(operation: string, params?: {[key: string]: any}, callback?: (err: AWSError, data: any) => void): Request<any, AWSError>;
     /**
      * Calls an operation on a service with the given input parameters, without any authentication data.
      * 
      * @param {string} operation - the name of the operation to call on the service.
      * @param {map} params - a map of input options for the operation. 
      */
-    makeUnauthenticatedRequest(operation: string, params?: {[key: string]: any}, callback?: (err: AWSError, data: any) => void): Request<AWSError, any>;
+    makeUnauthenticatedRequest(operation: string, params?: {[key: string]: any}, callback?: (err: AWSError, data: any) => void): Request<any, AWSError>;
     /**
      * Override this method to setup any custom request listeners for each new request to the service.
      */
@@ -36,7 +36,8 @@ export class Service {
     /**
      * Waits for a given state.
      */
-    waitFor(state: string, params?: {[key: string]: any}, callback?: (err: AWSError, data: any) => void): Request<AWSError, any>;
+    waitFor(state: string, params?: {[key: string]: any}, callback?: (err: AWSError, data: any) => void): Request<any, AWSError>;
+    waitFor(state: string, callback?: (err: AWSError, data: any) => void): Request<any, AWSError>;
 
     /**
      * The list of API versions supported by this service.
