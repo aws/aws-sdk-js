@@ -29,6 +29,44 @@
       ],
       "documentation":"<p>Creates a receipt rule set by cloning an existing one. All receipt rules and configurations are copied to the new receipt rule set and are completely independent of the source rule set.</p> <p>For information about setting up rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
+    "CreateConfigurationSet":{
+      "name":"CreateConfigurationSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateConfigurationSetRequest"},
+      "output":{
+        "shape":"CreateConfigurationSetResponse",
+        "resultWrapper":"CreateConfigurationSetResult"
+      },
+      "errors":[
+        {"shape":"ConfigurationSetAlreadyExistsException"},
+        {"shape":"InvalidConfigurationSetException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a configuration set.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
+    },
+    "CreateConfigurationSetEventDestination":{
+      "name":"CreateConfigurationSetEventDestination",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateConfigurationSetEventDestinationRequest"},
+      "output":{
+        "shape":"CreateConfigurationSetEventDestinationResponse",
+        "resultWrapper":"CreateConfigurationSetEventDestinationResult"
+      },
+      "errors":[
+        {"shape":"ConfigurationSetDoesNotExistException"},
+        {"shape":"EventDestinationAlreadyExistsException"},
+        {"shape":"InvalidCloudWatchDestinationException"},
+        {"shape":"InvalidFirehoseDestinationException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a configuration set event destination.</p> <note> <p>When you create or update an event destination, you must provide one, and only one, destination. The destination can be either Amazon CloudWatch or Amazon Kinesis Firehose.</p> </note> <p>An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
+    },
     "CreateReceiptFilter":{
       "name":"CreateReceiptFilter",
       "http":{
@@ -84,6 +122,39 @@
         {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Creates an empty receipt rule set.</p> <p>For information about setting up receipt rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
+    },
+    "DeleteConfigurationSet":{
+      "name":"DeleteConfigurationSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteConfigurationSetRequest"},
+      "output":{
+        "shape":"DeleteConfigurationSetResponse",
+        "resultWrapper":"DeleteConfigurationSetResult"
+      },
+      "errors":[
+        {"shape":"ConfigurationSetDoesNotExistException"}
+      ],
+      "documentation":"<p>Deletes a configuration set.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
+    },
+    "DeleteConfigurationSetEventDestination":{
+      "name":"DeleteConfigurationSetEventDestination",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteConfigurationSetEventDestinationRequest"},
+      "output":{
+        "shape":"DeleteConfigurationSetEventDestinationResponse",
+        "resultWrapper":"DeleteConfigurationSetEventDestinationResult"
+      },
+      "errors":[
+        {"shape":"ConfigurationSetDoesNotExistException"},
+        {"shape":"EventDestinationDoesNotExistException"}
+      ],
+      "documentation":"<p>Deletes a configuration set event destination.</p> <p>Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
     "DeleteIdentity":{
       "name":"DeleteIdentity",
@@ -177,6 +248,22 @@
         "resultWrapper":"DescribeActiveReceiptRuleSetResult"
       },
       "documentation":"<p>Returns the metadata and receipt rules for the receipt rule set that is currently active.</p> <p>For information about setting up receipt rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
+    },
+    "DescribeConfigurationSet":{
+      "name":"DescribeConfigurationSet",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeConfigurationSetRequest"},
+      "output":{
+        "shape":"DescribeConfigurationSetResponse",
+        "resultWrapper":"DescribeConfigurationSetResult"
+      },
+      "errors":[
+        {"shape":"ConfigurationSetDoesNotExistException"}
+      ],
+      "documentation":"<p>Returns the details of the specified configuration set.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
     "DescribeReceiptRule":{
       "name":"DescribeReceiptRule",
@@ -299,6 +386,19 @@
         "resultWrapper":"GetSendStatisticsResult"
       },
       "documentation":"<p>Returns the user's sending statistics. The result is a list of data points, representing the last two weeks of sending activity.</p> <p>Each data point in the list contains statistics for a 15-minute interval.</p> <p>This action is throttled at one request per second.</p>"
+    },
+    "ListConfigurationSets":{
+      "name":"ListConfigurationSets",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListConfigurationSetsRequest"},
+      "output":{
+        "shape":"ListConfigurationSetsResponse",
+        "resultWrapper":"ListConfigurationSetsResult"
+      },
+      "documentation":"<p>Lists the configuration sets associated with your AWS account.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second and can return up to 50 configuration sets at a time.</p>"
     },
     "ListIdentities":{
       "name":"ListIdentities",
@@ -426,7 +526,8 @@
       },
       "errors":[
         {"shape":"MessageRejected"},
-        {"shape":"MailFromDomainNotVerifiedException"}
+        {"shape":"MailFromDomainNotVerifiedException"},
+        {"shape":"ConfigurationSetDoesNotExistException"}
       ],
       "documentation":"<p>Composes an email message based on input data, and then immediately queues the message for sending.</p> <p>There are several important points to know about <code>SendEmail</code>:</p> <ul> <li> <p>You can only send email from verified email addresses and domains; otherwise, you will get an \"Email address not verified\" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>.</p> </li> <li> <p>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</p> </li> <li> <p>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</p> </li> <li> <p>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>.</p> </li> </ul>"
     },
@@ -443,7 +544,8 @@
       },
       "errors":[
         {"shape":"MessageRejected"},
-        {"shape":"MailFromDomainNotVerifiedException"}
+        {"shape":"MailFromDomainNotVerifiedException"},
+        {"shape":"ConfigurationSetDoesNotExistException"}
       ],
       "documentation":"<p>Sends an email message, with header and content specified by the client. The <code>SendRawEmail</code> action is useful for sending multipart MIME emails. The raw text of the message must comply with Internet email standards; otherwise, the message cannot be sent. </p> <p>There are several important points to know about <code>SendRawEmail</code>:</p> <ul> <li> <p>You can only send email from verified email addresses and domains; otherwise, you will get an \"Email address not verified\" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>.</p> </li> <li> <p>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</p> </li> <li> <p>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</p> </li> <li> <p>The To:, CC:, and BCC: headers in the raw message can contain a group list. Note that each recipient in a group list counts towards the 50-recipient limit.</p> </li> <li> <p>Amazon SES overrides any Message-ID and Date headers you provide.</p> </li> <li> <p>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>.</p> </li> <li> <p>If you are using sending authorization to send on behalf of another user, <code>SendRawEmail</code> enables you to specify the cross-account identity for the email's \"Source,\" \"From,\" and \"Return-Path\" parameters in one of two ways: you can pass optional parameters <code>SourceArn</code>, <code>FromArn</code>, and/or <code>ReturnPathArn</code> to the API, or you can include the following X-headers in the header of your raw email:</p> <ul> <li> <p> <code>X-SES-SOURCE-ARN</code> </p> </li> <li> <p> <code>X-SES-FROM-ARN</code> </p> </li> <li> <p> <code>X-SES-RETURN-PATH-ARN</code> </p> </li> </ul> <important> <p>Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.</p> </important> <p>For the most common sending authorization use case, we recommend that you specify the <code>SourceIdentityArn</code> and do not specify either the <code>FromIdentityArn</code> or <code>ReturnPathIdentityArn</code>. (The same note applies to the corresponding X-headers.) If you only specify the <code>SourceIdentityArn</code>, Amazon SES will simply set the \"From\" address and the \"Return Path\" address to the identity specified in <code>SourceIdentityArn</code>. For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> </li> </ul>"
     },
@@ -545,6 +647,25 @@
       ],
       "documentation":"<p>Sets the position of the specified receipt rule in the receipt rule set.</p> <p>For information about managing receipt rules, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
     },
+    "UpdateConfigurationSetEventDestination":{
+      "name":"UpdateConfigurationSetEventDestination",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateConfigurationSetEventDestinationRequest"},
+      "output":{
+        "shape":"UpdateConfigurationSetEventDestinationResponse",
+        "resultWrapper":"UpdateConfigurationSetEventDestinationResult"
+      },
+      "errors":[
+        {"shape":"ConfigurationSetDoesNotExistException"},
+        {"shape":"EventDestinationDoesNotExistException"},
+        {"shape":"InvalidCloudWatchDestinationException"},
+        {"shape":"InvalidFirehoseDestinationException"}
+      ],
+      "documentation":"<p>Updates the event destination of a configuration set.</p> <note> <p>When you create or update an event destination, you must provide one, and only one, destination. The destination can be either Amazon CloudWatch or Amazon Kinesis Firehose.</p> </note> <p>Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch or Amazon Kinesis Firehose. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>"
+    },
     "UpdateReceiptRule":{
       "name":"UpdateReceiptRule",
       "http":{
@@ -644,7 +765,7 @@
       "members":{
         "Name":{"shape":"RuleOrRuleSetName"}
       },
-      "documentation":"<p>Indicates that a resource could not be created due to a naming conflict.</p>",
+      "documentation":"<p>Indicates that a resource could not be created because of a naming conflict.</p>",
       "error":{
         "code":"AlreadyExists",
         "httpStatusCode":400,
@@ -786,6 +907,94 @@
       },
       "documentation":"<p>An empty element returned on a successful request.</p>"
     },
+    "CloudWatchDestination":{
+      "type":"structure",
+      "required":["DimensionConfigurations"],
+      "members":{
+        "DimensionConfigurations":{
+          "shape":"CloudWatchDimensionConfigurations",
+          "documentation":"<p>A list of dimensions upon which to categorize your emails when you publish email sending events to Amazon CloudWatch.</p>"
+        }
+      },
+      "documentation":"<p>Contains information associated with an Amazon CloudWatch event destination to which email sending events are published.</p> <p>Event destinations, such as Amazon CloudWatch, are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "CloudWatchDimensionConfiguration":{
+      "type":"structure",
+      "required":[
+        "DimensionName",
+        "DimensionValueSource",
+        "DefaultDimensionValue"
+      ],
+      "members":{
+        "DimensionName":{
+          "shape":"DimensionName",
+          "documentation":"<p>The name of an Amazon CloudWatch dimension associated with an email sending metric. The name must:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 256 characters.</p> </li> </ul>"
+        },
+        "DimensionValueSource":{
+          "shape":"DimensionValueSource",
+          "documentation":"<p>The place where Amazon SES finds the value of a dimension to publish to Amazon CloudWatch. If you want Amazon SES to use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or a parameter to the <code>SendEmail</code>/<code>SendRawEmail</code> API, choose <code>messageTag</code>. If you want Amazon SES to use your own email headers, choose <code>emailHeader</code>.</p>"
+        },
+        "DefaultDimensionValue":{
+          "shape":"DefaultDimensionValue",
+          "documentation":"<p>The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email. The default value must:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 256 characters.</p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>Contains the dimension configuration to use when you publish email sending events to Amazon CloudWatch.</p> <p>For information about publishing email sending events to Amazon CloudWatch, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "CloudWatchDimensionConfigurations":{
+      "type":"list",
+      "member":{"shape":"CloudWatchDimensionConfiguration"}
+    },
+    "ConfigurationSet":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set. The name must:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>The name of the configuration set.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "ConfigurationSetAlreadyExistsException":{
+      "type":"structure",
+      "members":{
+        "ConfigurationSetName":{"shape":"ConfigurationSetName"}
+      },
+      "documentation":"<p>Indicates that the configuration set could not be created because of a naming conflict.</p>",
+      "error":{
+        "code":"ConfigurationSetAlreadyExists",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ConfigurationSetAttribute":{
+      "type":"string",
+      "enum":["eventDestinations"]
+    },
+    "ConfigurationSetAttributeList":{
+      "type":"list",
+      "member":{"shape":"ConfigurationSetAttribute"}
+    },
+    "ConfigurationSetDoesNotExistException":{
+      "type":"structure",
+      "members":{
+        "ConfigurationSetName":{"shape":"ConfigurationSetName"}
+      },
+      "documentation":"<p>Indicates that the configuration set does not exist.</p>",
+      "error":{
+        "code":"ConfigurationSetDoesNotExist",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ConfigurationSetName":{"type":"string"},
+    "ConfigurationSets":{
+      "type":"list",
+      "member":{"shape":"ConfigurationSet"}
+    },
     "Content":{
       "type":"structure",
       "required":["Data"],
@@ -802,6 +1011,47 @@
       "documentation":"<p>Represents textual data, plus an optional character set specification.</p> <p>By default, the text must be 7-bit ASCII, due to the constraints of the SMTP protocol. If the text must contain any other characters, then you must also specify a character set. Examples include UTF-8, ISO-8859-1, and Shift_JIS.</p>"
     },
     "Counter":{"type":"long"},
+    "CreateConfigurationSetEventDestinationRequest":{
+      "type":"structure",
+      "required":[
+        "ConfigurationSetName",
+        "EventDestination"
+      ],
+      "members":{
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set to which to apply the event destination.</p>"
+        },
+        "EventDestination":{
+          "shape":"EventDestination",
+          "documentation":"<p>An object that describes the AWS service to which Amazon SES will publish the email sending events associated with the specified configuration set.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to create a configuration set event destination. A configuration set event destination, which can be either Amazon CloudWatch or Amazon Kinesis Firehose, describes an AWS service in which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "CreateConfigurationSetEventDestinationResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An empty element returned on a successful request.</p>"
+    },
+    "CreateConfigurationSetRequest":{
+      "type":"structure",
+      "required":["ConfigurationSet"],
+      "members":{
+        "ConfigurationSet":{
+          "shape":"ConfigurationSet",
+          "documentation":"<p>A data structure that contains the name of the configuration set.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to create a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "CreateConfigurationSetResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An empty element returned on a successful request.</p>"
+    },
     "CreateReceiptFilterRequest":{
       "type":"structure",
       "required":["Filter"],
@@ -872,6 +1122,48 @@
         "Failed",
         "TemporaryFailure"
       ]
+    },
+    "DefaultDimensionValue":{"type":"string"},
+    "DeleteConfigurationSetEventDestinationRequest":{
+      "type":"structure",
+      "required":[
+        "ConfigurationSetName",
+        "EventDestinationName"
+      ],
+      "members":{
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set from which to delete the event destination.</p>"
+        },
+        "EventDestinationName":{
+          "shape":"EventDestinationName",
+          "documentation":"<p>The name of the event destination to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to delete a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "DeleteConfigurationSetEventDestinationResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An empty element returned on a successful request.</p>"
+    },
+    "DeleteConfigurationSetRequest":{
+      "type":"structure",
+      "required":["ConfigurationSetName"],
+      "members":{
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to delete a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "DeleteConfigurationSetResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An empty element returned on a successful request.</p>"
     },
     "DeleteIdentityPolicyRequest":{
       "type":"structure",
@@ -1003,6 +1295,35 @@
       },
       "documentation":"<p>Represents the metadata and receipt rules for the receipt rule set that is currently active.</p>"
     },
+    "DescribeConfigurationSetRequest":{
+      "type":"structure",
+      "required":["ConfigurationSetName"],
+      "members":{
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set to describe.</p>"
+        },
+        "ConfigurationSetAttributeNames":{
+          "shape":"ConfigurationSetAttributeList",
+          "documentation":"<p>A list of configuration set attributes to return.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to return the details of a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "DescribeConfigurationSetResponse":{
+      "type":"structure",
+      "members":{
+        "ConfigurationSet":{
+          "shape":"ConfigurationSet",
+          "documentation":"<p>The configuration set object associated with the specified configuration set.</p>"
+        },
+        "EventDestinations":{
+          "shape":"EventDestinations",
+          "documentation":"<p>A list of event destinations associated with the configuration set. </p>"
+        }
+      },
+      "documentation":"<p>Represents the details of a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
     "DescribeReceiptRuleRequest":{
       "type":"structure",
       "required":[
@@ -1075,6 +1396,14 @@
       "documentation":"<p>Represents the destination of the message, consisting of To:, CC:, and BCC: fields.</p> <p> By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: <code>=?charset?encoding?encoded-text?=</code>. For more information, see <a href=\"http://tools.ietf.org/html/rfc2047\">RFC 2047</a>. </p>"
     },
     "DiagnosticCode":{"type":"string"},
+    "DimensionName":{"type":"string"},
+    "DimensionValueSource":{
+      "type":"string",
+      "enum":[
+        "messageTag",
+        "emailHeader"
+      ]
+    },
     "DkimAttributes":{
       "type":"map",
       "key":{"shape":"Identity"},
@@ -1093,6 +1422,83 @@
     },
     "DsnStatus":{"type":"string"},
     "Enabled":{"type":"boolean"},
+    "EventDestination":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "MatchingEventTypes"
+      ],
+      "members":{
+        "Name":{
+          "shape":"EventDestinationName",
+          "documentation":"<p>The name of the event destination. The name must:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>"
+        },
+        "Enabled":{
+          "shape":"Enabled",
+          "documentation":"<p>Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to <code>true</code> to enable publishing to this destination; set to <code>false</code> to prevent publishing to this destination. The default value is <code>false</code>.</p>"
+        },
+        "MatchingEventTypes":{
+          "shape":"EventTypes",
+          "documentation":"<p>The type of email sending events to publish to the event destination.</p>"
+        },
+        "KinesisFirehoseDestination":{
+          "shape":"KinesisFirehoseDestination",
+          "documentation":"<p>An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.</p>"
+        },
+        "CloudWatchDestination":{
+          "shape":"CloudWatchDestination",
+          "documentation":"<p>An object that contains the names, default values, and sources of the dimensions associated with an Amazon CloudWatch event destination.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about the event destination to which the specified email sending events are published.</p> <note> <p>When you create or update an event destination, you must provide one, and only one, destination. The destination can be either Amazon CloudWatch or Amazon Kinesis Firehose.</p> </note> <p>Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch or Amazon Kinesis Firehose. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "EventDestinationAlreadyExistsException":{
+      "type":"structure",
+      "members":{
+        "ConfigurationSetName":{"shape":"ConfigurationSetName"},
+        "EventDestinationName":{"shape":"EventDestinationName"}
+      },
+      "documentation":"<p>Indicates that the event destination could not be created because of a naming conflict.</p>",
+      "error":{
+        "code":"EventDestinationAlreadyExists",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "EventDestinationDoesNotExistException":{
+      "type":"structure",
+      "members":{
+        "ConfigurationSetName":{"shape":"ConfigurationSetName"},
+        "EventDestinationName":{"shape":"EventDestinationName"}
+      },
+      "documentation":"<p>Indicates that the event destination does not exist.</p>",
+      "error":{
+        "code":"EventDestinationDoesNotExist",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "EventDestinationName":{"type":"string"},
+    "EventDestinations":{
+      "type":"list",
+      "member":{"shape":"EventDestination"}
+    },
+    "EventType":{
+      "type":"string",
+      "enum":[
+        "send",
+        "reject",
+        "bounce",
+        "complaint",
+        "delivery"
+      ]
+    },
+    "EventTypes":{
+      "type":"list",
+      "member":{"shape":"EventType"}
+    },
     "Explanation":{"type":"string"},
     "ExtensionField":{
       "type":"structure",
@@ -1275,7 +1681,7 @@
       "members":{
         "DkimEnabled":{
           "shape":"Enabled",
-          "documentation":"<p>True if DKIM signing is enabled for email sent from the identity; false otherwise.</p>"
+          "documentation":"<p>True if DKIM signing is enabled for email sent from the identity; false otherwise. The default value is true.</p>"
         },
         "DkimVerificationStatus":{
           "shape":"VerificationStatus",
@@ -1377,6 +1783,46 @@
       },
       "documentation":"<p>Represents the verification attributes of a single identity.</p>"
     },
+    "InvalidCloudWatchDestinationException":{
+      "type":"structure",
+      "members":{
+        "ConfigurationSetName":{"shape":"ConfigurationSetName"},
+        "EventDestinationName":{"shape":"EventDestinationName"}
+      },
+      "documentation":"<p>Indicates that the Amazon CloudWatch destination is invalid. See the error message for details.</p>",
+      "error":{
+        "code":"InvalidCloudWatchDestination",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "InvalidConfigurationSetException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Indicates that the configuration set is invalid. See the error message for details.</p>",
+      "error":{
+        "code":"InvalidConfigurationSet",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "InvalidFirehoseDestinationException":{
+      "type":"structure",
+      "members":{
+        "ConfigurationSetName":{"shape":"ConfigurationSetName"},
+        "EventDestinationName":{"shape":"EventDestinationName"}
+      },
+      "documentation":"<p>Indicates that the Amazon Kinesis Firehose destination is invalid. See the error message for details.</p>",
+      "error":{
+        "code":"InvalidFirehoseDestination",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidLambdaFunctionException":{
       "type":"structure",
       "members":{
@@ -1435,6 +1881,24 @@
         "RequestResponse"
       ]
     },
+    "KinesisFirehoseDestination":{
+      "type":"structure",
+      "required":[
+        "IAMRoleARN",
+        "DeliveryStreamARN"
+      ],
+      "members":{
+        "IAMRoleARN":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The ARN of the IAM role under which Amazon SES publishes email sending events to the Amazon Kinesis Firehose stream.</p>"
+        },
+        "DeliveryStreamARN":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The ARN of the Amazon Kinesis Firehose stream to which to publish email sending events.</p>"
+        }
+      },
+      "documentation":"<p>Contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.</p> <p>Event destinations, such as Amazon Kinesis Firehose, are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
     "LambdaAction":{
       "type":"structure",
       "required":["FunctionArn"],
@@ -1459,13 +1923,41 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Indicates that a resource could not be created due to service limits. For a list of Amazon SES limits, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html\">Amazon SES Developer Guide</a>.</p>",
+      "documentation":"<p>Indicates that a resource could not be created because of service limits. For a list of Amazon SES limits, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html\">Amazon SES Developer Guide</a>.</p>",
       "error":{
         "code":"LimitExceeded",
         "httpStatusCode":400,
         "senderFault":true
       },
       "exception":true
+    },
+    "ListConfigurationSetsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token returned from a previous call to <code>ListConfigurationSets</code> to indicate the position of the configuration set in the configuration set list.</p>"
+        },
+        "MaxItems":{
+          "shape":"MaxItems",
+          "documentation":"<p>The number of configuration sets to return.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to list the configuration sets associated with your AWS account. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "ListConfigurationSetsResponse":{
+      "type":"structure",
+      "members":{
+        "ConfigurationSets":{
+          "shape":"ConfigurationSets",
+          "documentation":"<p>A list of configuration sets.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token indicating that there are additional configuration sets available to be listed. Pass this token to successive calls of <code>ListConfigurationSets</code>. </p>"
+        }
+      },
+      "documentation":"<p>A list of configuration sets associated with your AWS account. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
     },
     "ListIdentitiesRequest":{
       "type":"structure",
@@ -1526,7 +2018,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>: Represents a request to list the IP address filters that exist under your AWS account. You use IP address filters when you receive email with Amazon SES. For more information, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html\">Amazon SES Developer Guide</a>.</p>"
+      "documentation":"<p>Represents a request to list the IP address filters that exist under your AWS account. You use IP address filters when you receive email with Amazon SES. For more information, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html\">Amazon SES Developer Guide</a>.</p>"
     },
     "ListReceiptFiltersResponse":{
       "type":"structure",
@@ -1644,6 +2136,30 @@
       },
       "exception":true
     },
+    "MessageTag":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Value"
+      ],
+      "members":{
+        "Name":{
+          "shape":"MessageTagName",
+          "documentation":"<p>The name of the tag. The name must:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 256 characters.</p> </li> </ul>"
+        },
+        "Value":{
+          "shape":"MessageTagValue",
+          "documentation":"<p>The value of the tag. The value must:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 256 characters.</p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>Contains the name and value of a tag that you can provide to <code>SendEmail</code> or <code>SendRawEmail</code> to apply to an email.</p> <p>Message tags, which you use with configuration sets, enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "MessageTagList":{
+      "type":"list",
+      "member":{"shape":"MessageTag"}
+    },
+    "MessageTagName":{"type":"string"},
+    "MessageTagValue":{"type":"string"},
     "NextToken":{"type":"string"},
     "NotificationAttributes":{
       "type":"map",
@@ -2060,7 +2576,7 @@
         },
         "DeliveryAttempts":{
           "shape":"Counter",
-          "documentation":"<p>Number of emails that have been enqueued for sending.</p>"
+          "documentation":"<p>Number of emails that have been sent.</p>"
         },
         "Bounces":{
           "shape":"Counter",
@@ -2116,6 +2632,14 @@
         "ReturnPathArn":{
           "shape":"AmazonResourceName",
           "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>ReturnPath</code> parameter.</p> <p>For example, if the owner of <code>example.com</code> (which has ARN <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>) attaches a policy to it that authorizes you to use <code>feedback@example.com</code>, then you would specify the <code>ReturnPathArn</code> to be <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>, and the <code>ReturnPath</code> to be <code>feedback@example.com</code>.</p> <p>For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>. </p>"
+        },
+        "Tags":{
+          "shape":"MessageTagList",
+          "documentation":"<p>A list of tags, in the form of name/value pairs, to apply to an email that you send using <code>SendEmail</code>. Tags correspond to characteristics of the email that you define, so that you can publish email sending events.</p>"
+        },
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set to use when you send an email using <code>SendEmail</code>.</p>"
         }
       },
       "documentation":"<p>Represents a request to send a single formatted email using Amazon SES. For more information, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html\">Amazon SES Developer Guide</a>.</p>"
@@ -2158,6 +2682,14 @@
         "ReturnPathArn":{
           "shape":"AmazonResourceName",
           "documentation":"<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>ReturnPath</code> parameter.</p> <p>For example, if the owner of <code>example.com</code> (which has ARN <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>) attaches a policy to it that authorizes you to use <code>feedback@example.com</code>, then you would specify the <code>ReturnPathArn</code> to be <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>, and the <code>ReturnPath</code> to be <code>feedback@example.com</code>.</p> <p>Instead of using this parameter, you can use the X-header <code>X-SES-RETURN-PATH-ARN</code> in the raw message of the email. If you use both the <code>ReturnPathArn</code> parameter and the corresponding X-header, Amazon SES uses the value of the <code>ReturnPathArn</code> parameter.</p> <note> <p>For information about when to use this parameter, see the description of <code>SendRawEmail</code> in this guide, or see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html\">Amazon SES Developer Guide</a>.</p> </note>"
+        },
+        "Tags":{
+          "shape":"MessageTagList",
+          "documentation":"<p>A list of tags, in the form of name/value pairs, to apply to an email that you send using <code>SendRawEmail</code>. Tags correspond to characteristics of the email that you define, so that you can publish email sending events.</p>"
+        },
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set to use when you send an email using <code>SendRawEmail</code>.</p>"
         }
       },
       "documentation":"<p>Represents a request to send a single raw email using Amazon SES. For more information, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html\">Amazon SES Developer Guide</a>.</p>"
@@ -2374,6 +2906,30 @@
         "Require",
         "Optional"
       ]
+    },
+    "UpdateConfigurationSetEventDestinationRequest":{
+      "type":"structure",
+      "required":[
+        "ConfigurationSetName",
+        "EventDestination"
+      ],
+      "members":{
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set that you want to update.</p>"
+        },
+        "EventDestination":{
+          "shape":"EventDestination",
+          "documentation":"<p>The event destination object that you want to apply to the specified configuration set.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to update the event destination of a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "UpdateConfigurationSetEventDestinationResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An empty element returned on a successful request.</p>"
     },
     "UpdateReceiptRuleRequest":{
       "type":"structure",
