@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.14-->
+<!--LATEST=2.6.15-->
 <!--ENTRYINSERT-->
+
+## 2.6.15
+* feature: DirectConnect: AWS Direct Connect provides three new APIs to support basic tagging on Direct Connect resources.
 
 ## 2.6.14
 * feature: SES: Amazon Simple Email Service (Amazon SES) now enables you to track your bounce, complaint, delivery, sent, and rejected email metrics with fine-grained granularity.
