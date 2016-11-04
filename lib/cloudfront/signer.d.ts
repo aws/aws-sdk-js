@@ -5,7 +5,7 @@ export class Signer {
      * @param {string} keyPairId - The ID of the CloudFront key pair being used.
      * @param {string} privateKey - A private key in RSA format.
      */
-    constructor(keyPaidId: string, privateKey: string);
+    constructor(keyPairId: string, privateKey: string);
 
     /**
      * Create a signed Amazon CloudFront Cookie.

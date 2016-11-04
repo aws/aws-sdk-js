@@ -1,4 +1,4 @@
-import {Config} from './lib/core';
+import {GlobalConfigInstance} from './lib/config'; 
 
 export * from './lib/core';
-export var config = new Config()
+export var config: GlobalConfigInstance

@@ -6,7 +6,7 @@ export class CognitoIdentityCredentials extends Credentials {
 		/**
 		 * Creates a new credentials object.
 		 */
-		constructor(options?: CognitoIdentity.GetIdInput|CognitoIdentity.GetCredentialsForIdentityInput|CognitoIdentity.GetOpenIdTokenInput|STS.AssumeRoleWithWebIdentityRequest);
+		constructor(options?: CognitoIdentity.Types.GetIdInput|CognitoIdentity.Types.GetCredentialsForIdentityInput|CognitoIdentity.Types.GetOpenIdTokenInput|STS.Types.AssumeRoleWithWebIdentityRequest);
 		/**
 		 * Refreshes credentials using AWS.CognitoIdentity.getCredentialsForIdentity(), or AWS.STS.assumeRoleWithWebIdentity().
 		 */
@@ -18,7 +18,7 @@ export class CognitoIdentityCredentials extends Credentials {
         /**
          * The raw data response from the call to AWS.CognitoIdentity.getCredentialsForIdentity(), or AWS.STS.assumeRoleWithWebIdentity().
          */
-        data: CognitoIdentity.GetCredentialsForIdentityResponse|STS.AssumeRoleWithWebIdentityResponse;
+        data: CognitoIdentity.Types.GetCredentialsForIdentityResponse|STS.Types.AssumeRoleWithWebIdentityResponse;
         /**
          * The Cognito ID returned by the last call to AWS.CognitoIdentity.getOpenIdToken().
          */
@@ -26,5 +26,5 @@ export class CognitoIdentityCredentials extends Credentials {
         /**
          * The map of params passed to AWS.CognitoIdentity.getId(), AWS.CognitoIdentity.getOpenIdToken(), and AWS.STS.assumeRoleWithWebIdentity().
          */
-        params: CognitoIdentity.GetIdInput|CognitoIdentity.GetOpenIdTokenInput|STS.AssumeRoleWithWebIdentityRequest;
+        params: CognitoIdentity.Types.GetIdInput|CognitoIdentity.Types.GetOpenIdTokenInput|STS.Types.AssumeRoleWithWebIdentityRequest;
 	}

@@ -1,6 +1,6 @@
 import {Request} from './request';
 import {AWSError} from './error';
-import {ConfigurationOptions, Config} from './config';
+import {ConfigurationOptions, ConfigBase} from './config';
 export class Service {
     /**
      * Creates a new service object with a configuration object.
@@ -44,7 +44,7 @@ export class Service {
      */
     apiVersions: string[];
 
-    config: Config & ServiceConfigurationOptions;
+    config: ConfigBase & ServiceConfigurationOptions;
 }
 
 export interface ServiceConfigurationOptions extends ConfigurationOptions {

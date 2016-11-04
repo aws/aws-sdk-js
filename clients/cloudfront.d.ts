@@ -2,7 +2,12 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {CloudFrontCustomizations} from '../lib/services/cloudfront';
+import {ServiceConfigurationOptions} from '../lib/service';
 declare class CloudFront extends CloudFrontCustomizations {
+  /**
+   * Constructs a service object. This object has one method for each API operation.
+   */
+  constructor(options?: CloudFront.Types.ClientConfiguration)
   /**
    * Create a new origin access identity.
    */
@@ -1664,5 +1669,8 @@ declare namespace CloudFront.Types {
   export type integer = number;
   export type long = number;
   export type timestamp = Date;
+}
+declare namespace CloudFront.Types {
+  export type ClientConfiguration = ServiceConfigurationOptions;
 }
 export = CloudFront;

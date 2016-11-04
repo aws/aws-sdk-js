@@ -47,7 +47,7 @@ export interface ManagedUploadOptions {
      * A map of parameters to pass to the upload requests.
      * The "Body" parameter is required to be specified either on the service or in the params option.
      */
-    params?: S3.PutObjectRequest
+    params?: S3.Types.PutObjectRequest
     /**
      * The size of the concurrent queue manager to upload parts in parallel. Set to 1 for synchronous uploading of parts. Note that the uploader will buffer at most queueSize * partSize bytes into memory at any given time.
      * default: 4

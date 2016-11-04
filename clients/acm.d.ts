@@ -2,7 +2,12 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {ServiceConfigurationOptions} from '../lib/service';
 declare class ACM extends Service {
+  /**
+   * Constructs a service object. This object has one method for each API operation.
+   */
+  constructor(options?: ACM.Types.ClientConfiguration)
   /**
    * Adds one or more tags to an ACM Certificate. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. You specify the certificate on input by its Amazon Resource Name (ARN). You specify the tag by using a key-value pair. You can apply a tag to just one certificate if you want to identify a specific characteristic of that certificate, or you can apply the same tag to multiple certificates if you want to filter for a common relationship among those certificates. Similarly, you can apply the same tag to multiple resources if you want to specify a relationship among those resources. For example, you can add the same tag to an ACM Certificate and an Elastic Load Balancing load balancer to indicate that they are both used by the same website. For more information, see Tagging ACM Certificates. To remove one or more tags, use the RemoveTagsFromCertificate action. To view all of the tags that have been applied to the certificate, use the ListTagsForCertificate action.
    */
@@ -346,5 +351,8 @@ declare namespace ACM.Types {
   export type TagList = Tag[];
   export type TagValue = string;
   export type ValidationEmailList = String[];
+}
+declare namespace ACM.Types {
+  export type ClientConfiguration = ServiceConfigurationOptions;
 }
 export = ACM;

@@ -2,7 +2,12 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {GlacierCustomizations} from '../lib/services/glacier';
+import {ServiceConfigurationOptions} from '../lib/service';
 declare class Glacier extends GlacierCustomizations {
+  /**
+   * Constructs a service object. This object has one method for each API operation.
+   */
+  constructor(options?: Glacier.Types.ClientConfiguration)
   /**
    * This operation aborts a multipart upload identified by the upload ID. After the Abort Multipart Upload request succeeds, you cannot upload any more parts to the multipart upload or complete the multipart upload. Aborting a completed upload fails. However, aborting an already-aborted upload will succeed, for a short time. For more information about uploading a part and completing a multipart upload, see UploadMultipartPart and CompleteMultipartUpload. This operation is idempotent. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For conceptual information and underlying REST API, go to Working with Archives in Amazon Glacier and Abort Multipart Upload in the Amazon Glacier Developer Guide. 
    */
@@ -1149,5 +1154,8 @@ declare namespace Glacier.Types {
   }
   export type httpstatus = number;
   export type long = number;
+}
+declare namespace Glacier.Types {
+  export type ClientConfiguration = ServiceConfigurationOptions;
 }
 export = Glacier;

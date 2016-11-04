@@ -167,6 +167,7 @@ export interface CreateTableInput {
 export interface CreateTableOutput {
   TableDescription?: TableDescription;
 }
+export type _Date = Date;
 export interface DeleteGlobalSecondaryIndexAction {
   /**
    * The name of the global secondary index to be deleted.
@@ -535,11 +536,11 @@ export interface ProvisionedThroughputDescription {
   /**
    * The date and time of the last provisioned throughput increase for this table.
    */
-  LastIncreaseDateTime?: Date;
+  LastIncreaseDateTime?: _Date;
   /**
    * The date and time of the last provisioned throughput decrease for this table.
    */
-  LastDecreaseDateTime?: Date;
+  LastDecreaseDateTime?: _Date;
   /**
    * The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see Limits in the Amazon DynamoDB Developer Guide.
    */
@@ -822,7 +823,7 @@ export interface TableDescription {
   /**
    * The date and time when the table was created, in UNIX epoch time format.
    */
-  CreationDateTime?: Date;
+  CreationDateTime?: _Date;
   /**
    * The provisioned throughput settings for the table, consisting of read and write capacity units, along with data about increases and decreases.
    */

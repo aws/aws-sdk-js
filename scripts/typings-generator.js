@@ -9,6 +9,7 @@ var tsGenerator = new TSGenerator({
 tsGenerator.generateAllClientTypings();
 tsGenerator.generateGroupedClients();
 tsGenerator.generateDocumentClientInterfaces();
+tsGenerator.generateConfigurationServicePlaceholders();
 console.log('TypeScript Definitions created.');
 
 

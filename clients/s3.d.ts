@@ -9,8 +9,8 @@ declare class S3 extends S3Customizations {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: ServiceConfigurationOptions & UseDualstackConfigOptions)
-  config: Config & ServiceConfigurationOptions & UseDualstackConfigOptions;
+  constructor(options?: S3.Types.ClientConfiguration)
+  config: Config & S3.Types.ClientConfiguration;
   /**
    * Aborts a multipart upload.To verify that all parts have been removed, so you don't get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.
    */
@@ -1011,6 +1011,7 @@ declare namespace S3.Types {
     RequestPayer?: RequestPayer;
   }
   export type CreationDate = Date;
+  export type _Date = Date;
   export type Days = number;
   export type DaysAfterInitiation = number;
   export interface Delete {
@@ -1680,7 +1681,7 @@ declare namespace S3.Types {
     /**
      * Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
      */
-    Date?: Date;
+    Date?: _Date;
     /**
      * Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
      */
@@ -2688,7 +2689,7 @@ declare namespace S3.Types {
     /**
      * Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
      */
-    Date?: Date;
+    Date?: _Date;
     /**
      * Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
      */
@@ -2873,5 +2874,8 @@ declare namespace S3.Types {
     RoutingRules?: RoutingRules;
   }
   export type WebsiteRedirectLocation = string;
+}
+declare namespace S3.Types {
+  export type ClientConfiguration = ServiceConfigurationOptions & UseDualstackConfigOptions;
 }
 export = S3;

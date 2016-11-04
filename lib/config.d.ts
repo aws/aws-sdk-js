@@ -1,14 +1,12 @@
 /// <reference types="node" />
 
-import * as http from 'http';
-import * as https from 'https';
+import {Agent as httpAgent} from 'http';
+import {Agent as httpsAgent} from 'https';
 import {AWSError} from './error';
-import {Credentials} from './credentials';
-export class Config {
-    /**
-     * Creates a new configuration object.
-     * This is the object that passes option data along to service requests, including credentials, security, region information, and some service specific settings.
-     */
+import {Credentials, CredentialsOptions} from './credentials';
+import {ConfigurationServicePlaceholders} from './config_service_placeholders';
+
+export class ConfigBase extends ConfigurationOptions{
     constructor(options?: ConfigurationOptions);
     /**
      * Loads credentials from the configuration object.
@@ -34,89 +32,24 @@ export class Config {
      * @param {function} dep - a reference to a Promise constructor
      */
     setPromisesDependency(dep: any): void;
-
-    /**
-     * Whether to compute checksums for payload bodies when the service accepts it.
-     * Currently supported in S3 only.
-     */
-    computeChecksums?: boolean
-    /**
-     * Whether types are converted when parsing response data.
-     */
-    convertResponseTypes?: boolean
-    /**
-     * Whether to apply a clock skew correction and retry requests that fail because of an skewed client clock.
-     */
-    correctClockSkew?: boolean
-    /**
-     * The AWS credentials to sign requests with.
-     */
-    credentials?: Credentials
-    /**
-     * A set of options to pass to the low-level HTTP request.
-     */
-    httpOptions?: HTTPOptions
-    /**
-     * An object that responds to .write() (like a stream) or .log() (like the console object) in order to log information about requests.
-     */
-    logger?: Logger
-    /**
-     * The maximum amount of redirects to follow for a service request.
-     */
-    maxRedirects?: number
-    /**
-     * The maximum amount of retries to perform for a service request.
-     */
-    maxRetries?: number
-    /**
-     * Returns whether input parameters should be validated against the operation description before sending the request. 
-     * Defaults to true. 
-     * Pass a map to enable any of the following specific validation features: min|max|pattern|enum
-     */
-    paramValidation?: ParamValidation | boolean
-    /**
-     * The region to send service requests to.
-     */
-    region?: string
-    /**
-     * Returns A set of options to configure the retry delay on retryable errors.
-     */
-    retryDelayOptions?: RetryDelayOptions
-    /**
-     * Whether the provided endpoint addresses an individual bucket.
-     * false if it addresses the root API endpoint.
-     */
-    s3BucketEndpoint?: boolean
-    /**
-     * Whether to disable S3 body signing when using signature version v4.
-     */
-    s3DisableBodySigning?: boolean
-    /**
-     * Whether to force path style URLs for S3 objects.
-     */
-    s3ForcePathStyle?: boolean
-    /**
-     * Whether the signature to sign requests with (overriding the API configuration) is cached.
-     */
-    signatureCache?: boolean
-    /**
-     * The signature version to sign requests with (overriding the API configuration).
-     * Possible values: 'v2'|'v3'|'v4'
-     */
-    signatureVersion?: "v2"|"v3"|"v4"|string
-    /**
-     * Whether SSL is enabled for requests.
-     */
-    sslEnabled?: boolean
-    /**
-     * An offset value in milliseconds to apply to all signing times.
-     */
-    systemClockOffset?: number
-    /**
-     * Whether to use the Accelerate endpoint with the S3 service.
-     */
-    useAccelerateEndpoint?: boolean
 }
+
+export class Config extends ConfigBase {
+    /**
+     * Creates a new configuration object.
+     * This is the object that passes option data along to service requests, including credentials, security, region information, and some service specific settings.
+     */
+    constructor(options?: ConfigurationOptions & ConfigurationServicePlaceholders);
+    /**
+     * Updates the current configuration object with new options.
+     * 
+     * @param {ConfigurationOptions} options - a map of option keys and values.
+     * @param {boolean} allowUnknownKeys - Defaults to false. Whether unknown keys can be set on the configuration object.
+     */
+    update(options: ConfigurationOptions & ConfigurationServicePlaceholders, allowUnknownKeys?: boolean): void;
+}
+
+export type GlobalConfigInstance = Config & ConfigurationServicePlaceholders;
 
 interface HTTPOptions {
     /**
@@ -128,7 +61,7 @@ interface HTTPOptions {
      * Used for connection pooling.
      * Defaults to the global agent (http.globalAgent) for non-SSL connections.
      */
-    agent?: http.Agent | https.Agent
+    agent?: httpAgent | httpsAgent
     /**
      * The number of milliseconds to wait before giving up on a connection attempt.
      * Defaults to two minutes (120000).
@@ -183,7 +116,8 @@ interface RetryDelayOptions {
      */
     customBackoff?: (retryCount: number) => number
 }
-interface ConfigurationOptions {
+
+declare abstract class ConfigurationOptions {
     /**
      * Whether to compute checksums for payload bodies when the service accepts it.
      * Currently supported in S3 only.
@@ -200,7 +134,7 @@ interface ConfigurationOptions {
     /**
      * The AWS credentials to sign requests with.
      */
-    credentials?: Credentials
+    credentials?: Credentials|CredentialsOptions
     /**
      * A set of options to pass to the low-level HTTP request.
      */

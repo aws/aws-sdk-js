@@ -6,7 +6,7 @@ export class TemporaryCredentials extends Credentials {
      * Creates a new temporary credentials object.
      * @param {string} filename - a map of options that are passed to the AWS.STS.assumeRole() or AWS.STS.getSessionToken() operations. If a RoleArn parameter is passed in, credentials will be based on the IAM role.
      */
-    constructor(options?: STS.AssumeRoleRequest|STS.GetSessionTokenRequest);
+    constructor(options?: STS.Types.AssumeRoleRequest|STS.Types.GetSessionTokenRequest);
     /**
      * Refreshes credentials using AWS.STS.assumeRole() or AWS.STS.getSessionToken(), depending on whether an IAM role ARN was passed to the credentials constructor().
      */

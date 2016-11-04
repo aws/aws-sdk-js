@@ -204,8 +204,13 @@ TSGenerator.prototype.generateCustomConfigFromMetadata = function generateCustom
  */
 TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromShape(shapeKey, shape, tabCount) {
     // some shapes shouldn't be generated if they are javascript primitives
-    if (['string', 'boolean', 'number', 'Date', 'Blob'].indexOf(shapeKey) >= 0) {
+    var jsPrimitives = ['string', 'boolean', 'number'];
+    if (jsPrimitives.indexOf(shapeKey) >= 0) {
         return '';
+    }
+
+    if (['Date', 'Blob'].indexOf(shapeKey) >= 0) {
+        shapeKey = '_' + shapeKey;
     }
     var self = this;
     var code = '';
@@ -224,7 +229,11 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
                 code += self.generateDocString(member.documentation, tabCount + 1);
             }
             var required = self.checkRequired(shape.required || [], memberKey) ? '' : '?';
-            code += tabs(tabCount + 1) + memberKey + required + ': ' + member.shape + ';\n';
+            var memberType = member.shape;
+            if (['Date', 'Blob'].indexOf(memberType) >= 0) {
+                memberType = '_' + memberType;
+            }
+            code += tabs(tabCount + 1) + memberKey + required + ': ' + memberType + ';\n';
         });
         code += tabs(tabCount) + '}\n';
     } else if (type === 'list') {
@@ -272,6 +281,25 @@ TSGenerator.prototype.generateTypingsFromOperations = function generateTypingsFr
     code += tabs(tabCount) + operationName + '(callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
 
     return code;
+};
+
+TSGenerator.prototype.generateConfigurationServicePlaceholders = function generateConfigurationServicePlaceholders() {
+    /**
+     * Should create a config service placeholder
+     */
+    var self = this;
+    var metadata = this.metadata;
+    // Iterate over every service
+    var serviceIdentifiers = Object.keys(metadata);
+    var code = '';
+    code += 'import * as AWS from \'../clients/all\';\n';
+    code += 'export abstract class ConfigurationServicePlaceholders {\n';
+    serviceIdentifiers.forEach(function(serviceIdentifier) {
+        var className = self.metadata[serviceIdentifier].name;
+        code += self.tabs(1) + serviceIdentifier + '?: AWS.' + className + '.Types.ClientConfiguration;\n';
+    });
+    code += '}\n';
+    this.writeTypingsFile('config_service_placeholders', path.join(this._sdkRootDir, 'lib'), code);
 };
 
 /**
@@ -336,16 +364,15 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     if (hasCustomizations) {
         code += 'import {' + parentClass + '} from \'../lib/services/' + serviceIdentifier + '\';\n';
     } else {
-        code += 'import {'+ parentClass + '} from \'../lib/service\';\n';
+        code += 'import {' + parentClass + '} from \'../lib/service\';\n';
     }
+    code += 'import {ServiceConfigurationOptions} from \'../lib/service\';\n';
     // get any custom config options
     var customConfig = this.generateCustomConfigFromMetadata(serviceIdentifier);
     var hasCustomConfig = !!customConfig.length;
-    var customConfigTypes = null;
+    var customConfigTypes = ['ServiceConfigurationOptions'];
     if (hasCustomConfig) {
         // generate import statements and custom config type
-        customConfigTypes = ['ServiceConfigurationOptions'];
-        code += 'import {ServiceConfigurationOptions} from \'../lib/service\';\n';
         code += 'import {Config} from \'../lib/config\';\n';
         customConfig.forEach(function(config) {
             code += 'import {' + config.INTERFACE + '} from \'../lib/' + config.FILE_NAME + '\';\n';
@@ -357,11 +384,12 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     var modelOperations = model.operations;
     var operationKeys = Object.keys(modelOperations);
     code += 'declare class ' + className + ' extends ' + parentClass + ' {\n';
-    // create constructor if service has custom config
+    // create constructor
+    code += this.generateDocString('Constructs a service object. This object has one method for each API operation.', 1);
+    code += this.tabs(1) + 'constructor(options?: ' + className + '.Types.ClientConfiguration' + ')\n';
     if (hasCustomConfig) {
-        code += this.generateDocString('Constructs a service object. This object has one method for each API operation.', 1);
-        code += this.tabs(1) + 'constructor(options?: ' + customConfigTypes.join(' & ') + ')\n';
-        code += this.tabs(1) + 'config: Config & ' + customConfigTypes.join(' & ') + ';\n';
+        // Create custom config value if service has custom config
+        code += this.tabs(1) + 'config: Config & ' + className + '.Types.ClientConfiguration' + ';\n';
     }
 
     operationKeys.forEach(function (operationKey) {
@@ -393,6 +421,12 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
         code += self.generateTypingsFromShape(shapeKey, modelShape, 1);
     });
     code += '}\n';
+
+    // build configuration
+    code += 'declare namespace ' + className + '.Types {\n';
+    code += this.tabs(1) + 'export type ClientConfiguration = ' + customConfigTypes.join(' & ') + ';\n';
+    code += '}\n';
+
     code += 'export = ' + className + ';\n';
     return code;
 };
