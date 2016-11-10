@@ -374,7 +374,7 @@ declare namespace CloudFormation.Types {
      */
     ResourceTypes?: ResourceTypes;
     /**
-     * The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that AWS CloudFormation assumes when executing the change set. AWS CloudFormation uses the role's credentials to make calls on your behalf. AWS CloudFormation always uses this role for all future operations on the stack. As long as users have permission to operate on the stack, AWS CloudFormation uses this role even if the users don't have permission to pass it. Ensure that the role grants least privilege. If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.
+     * The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that AWS CloudFormation assumes when executing the change set. AWS CloudFormation uses the role's credentials to make calls on your behalf. AWS CloudFormation uses this role for all future operations on the stack. As long as users have permission to operate on the stack, AWS CloudFormation uses this role even if the users don't have permission to pass it. Ensure that the role grants least privilege. If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.
      */
     RoleARN?: RoleARN;
     /**
@@ -398,7 +398,7 @@ declare namespace CloudFormation.Types {
      */
     Description?: Description;
     /**
-     * The type of change set operation. Valid values are CREATE and UPDATE:    CREATE - Specify for a change set for a stack that does not yet exist. The stack has an expected unique ID, but no template or resources. It can include multiple change sets.    UPDATE - Specify for a change set for an existing stack.  
+     * The type of change set operation. Valid values are CREATE and UPDATE. The default value is UPDATE.    CREATE - Specify to use the change set to create a new stack. While AWS CloudFormation creates the stack, the stack has the  REVIEW_IN_PROGRESS  status and an expected StackId, but no template or resources. Except for its StackId, the stack is completely empty until you execute the change set. You can apply multiple change sets to a stack.    UPDATE - Specify to create a change set for an existing stack.  
      */
     ChangeSetType?: ChangeSetType;
   }
@@ -748,7 +748,7 @@ declare namespace CloudFormation.Types {
      */
     ChangeSetName?: ChangeSetNameOrId;
     /**
-     * The stage of the template that is returned. Valid values are Original and Processed:    Original - Use to return the specified pre-transform template.    Processed - Use to return the template after all transforms have been processed.  
+     * The stage of the template that is returned. Valid values are Original and Processed. The default value is Original.    Original - Use this value to return the user-submitted template.    Processed - Use this value to return the template after all transforms have been processed.  
      */
     TemplateStage?: TemplateStage;
   }
@@ -758,7 +758,7 @@ declare namespace CloudFormation.Types {
      */
     TemplateBody?: TemplateBody;
     /**
-     * The available template type. For stacks, both the Original and Processed template types are always available. For change sets, the Original template is always available. After the transforms are processed, the Processed template becomes available.
+     * The template type.   For stacks, you can use either the Original or the Processed template type.   For change sets, you can use only the Original template type. After the transforms are processed, you can use the Processed template type.    If you create a change set for a new stack, you must select the template type. 
      */
     StagesAvailable?: StageList;
   }
@@ -806,7 +806,7 @@ declare namespace CloudFormation.Types {
      */
     Metadata?: Metadata;
     /**
-     * A list of the transforms that have been declared in the template.
+     * A list of the transforms that are declared in the template.
      */
     DeclaredTransforms?: TransformsList;
   }
@@ -1475,7 +1475,7 @@ declare namespace CloudFormation.Types {
      */
     CapabilitiesReason?: CapabilitiesReason;
     /**
-     * A list of the transforms that have been declared in the template.
+     * A list of the transforms that are declared in the template.
      */
     DeclaredTransforms?: TransformsList;
   }

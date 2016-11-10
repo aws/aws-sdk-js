@@ -266,7 +266,7 @@
         "shape":"ListExportsOutput",
         "resultWrapper":"ListExportsResult"
       },
-      "documentation":"<p>Lists all exported output values in the account and region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html\"> <code>Fn::ImportValue</code> </a> function. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html\"> AWS CloudFormation Export Stack Output Values</a>.</p>"
+      "documentation":"<p>Lists all exported output values in the account and region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html\"> <code>Fn::ImportValue</code> </a> function. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html\"> AWS CloudFormation Export Stack Output Values</a>.</p>"
     },
     "ListStackResources":{
       "name":"ListStackResources",
@@ -602,7 +602,7 @@
         },
         "RoleARN":{
           "shape":"RoleARN",
-          "documentation":"<p>The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that AWS CloudFormation assumes when executing the change set. AWS CloudFormation uses the role's credentials to make calls on your behalf. AWS CloudFormation always uses this role for all future operations on the stack. As long as users have permission to operate on the stack, AWS CloudFormation uses this role even if the users don't have permission to pass it. Ensure that the role grants least privilege.</p> <p>If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that AWS CloudFormation assumes when executing the change set. AWS CloudFormation uses the role's credentials to make calls on your behalf. AWS CloudFormation uses this role for all future operations on the stack. As long as users have permission to operate on the stack, AWS CloudFormation uses this role even if the users don't have permission to pass it. Ensure that the role grants least privilege.</p> <p>If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.</p>"
         },
         "NotificationARNs":{
           "shape":"NotificationARNs",
@@ -626,7 +626,7 @@
         },
         "ChangeSetType":{
           "shape":"ChangeSetType",
-          "documentation":"<p>The type of change set operation. Valid values are <code>CREATE</code> and <code>UPDATE</code>:</p> <ul> <li> <p> <code>CREATE</code> - Specify for a change set for a stack that does not yet exist. The stack has an expected unique ID, but no template or resources. It can include multiple change sets.</p> </li> <li> <p> <code>UPDATE</code> - Specify for a change set for an existing stack.</p> </li> </ul>"
+          "documentation":"<p>The type of change set operation.</p> <p>Valid values are <code>CREATE</code> and <code>UPDATE</code>. The default value is <code>UPDATE</code>.</p> <ul> <li> <p> <code>CREATE</code> - Specify to use the change set to create a new stack. While AWS CloudFormation creates the stack, the stack has the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995\"> <code>REVIEW_IN_PROGRESS</code> </a> status and an expected <code>StackId</code>, but no template or resources. Except for its <code>StackId</code>, the stack is completely empty until you execute the change set. You can apply multiple change sets to a stack.</p> </li> <li> <p> <code>UPDATE</code> - Specify to create a change set for an existing stack.</p> </li> </ul>"
         }
       },
       "documentation":"<p>The input for the <a>CreateChangeSet</a> action.</p>"
@@ -1113,7 +1113,7 @@
         },
         "TemplateStage":{
           "shape":"TemplateStage",
-          "documentation":"<p>The stage of the template that is returned. Valid values are <code>Original</code> and <code>Processed</code>:</p> <ul> <li> <p> <code>Original</code> - Use to return the specified pre-transform template.</p> </li> <li> <p> <code>Processed</code> - Use to return the template after all transforms have been processed.</p> </li> </ul>"
+          "documentation":"<p>The stage of the template that is returned.</p> <p>Valid values are <code>Original</code> and <code>Processed</code>. The default value is <code>Original</code>.</p> <ul> <li> <p> <code>Original</code> - Use this value to return the user-submitted template.</p> </li> <li> <p> <code>Processed</code> - Use this value to return the template after all transforms have been processed.</p> </li> </ul>"
         }
       },
       "documentation":"<p>The input for a <a>GetTemplate</a> action.</p>"
@@ -1127,7 +1127,7 @@
         },
         "StagesAvailable":{
           "shape":"StageList",
-          "documentation":"<p>The available template type. For stacks, both the <code>Original</code> and <code>Processed</code> template types are always available. For change sets, the <code>Original</code> template is always available. After the transforms are processed, the <code>Processed</code> template becomes available.</p>"
+          "documentation":"<p>The template type.</p> <ul> <li> <p>For stacks, you can use either the <code>Original</code> or the <code>Processed</code> template type.</p> </li> <li> <p>For change sets, you can use only the <code>Original</code> template type. After the transforms are processed, you can use the <code>Processed</code> template type.</p> </li> </ul> <note> <p>If you create a change set for a new stack, you must select the template type.</p> </note>"
         }
       },
       "documentation":"<p>The output for <a>GetTemplate</a> action.</p>"
@@ -1183,7 +1183,7 @@
         },
         "DeclaredTransforms":{
           "shape":"TransformsList",
-          "documentation":"<p>A list of the transforms that have been declared in the template.</p>"
+          "documentation":"<p>A list of the transforms that are declared in the template.</p>"
         }
       },
       "documentation":"<p>The output for the <a>GetTemplateSummary</a> action.</p>"
@@ -2231,12 +2231,12 @@
         },
         "DeclaredTransforms":{
           "shape":"TransformsList",
-          "documentation":"<p>A list of the transforms that have been declared in the template.</p>"
+          "documentation":"<p>A list of the transforms that are declared in the template.</p>"
         }
       },
       "documentation":"<p>The output for <a>ValidateTemplate</a> action.</p>"
     },
     "Version":{"type":"string"}
   },
-  "documentation":"<fullname>AWS CloudFormation</fullname> <p>AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can use AWS CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure.</p> <p>With AWS CloudFormation, you declare all of your resources and dependencies in a template file. The template defines a collection of resources as a single unit called a stack. AWS CloudFormation creates and deletes all member resources of the stack together and manages all dependencies between the resources for you.</p> <p>For more information about AWS CloudFormation, see the <a href=\"http://aws.amazon.com/cloudformation/\">AWS CloudFormation Product Page</a>.</p> <p>Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific AWS product, you can find the product's technical documentation at <a href=\"http://docs.aws.amazon.com/\">http://docs.aws.amazon.com/</a>.</p>"
+  "documentation":"<fullname>AWS CloudFormation</fullname> <p>AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can use AWS CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure.</p> <p>With AWS CloudFormation, you declare all of your resources and dependencies in a template file. The template defines a collection of resources as a single unit called a stack. AWS CloudFormation creates and deletes all member resources of the stack together and manages all dependencies between the resources for you.</p> <p>For more information about AWS CloudFormation, see the <a href=\"http://aws.amazon.com/cloudformation/\">AWS CloudFormation Product Page</a>.</p> <p>Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific AWS product, you can find the product's technical documentation at <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/\">http://docs.aws.amazon.com/</a>.</p>"
 }

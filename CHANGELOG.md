@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.15-->
+<!--LATEST=2.7.0-->
 <!--ENTRYINSERT-->
+
+## 2.7.0
+* feature: TypeScript: Adds typescript definition files to the SDK.
+* feature: CloudWatchLogs: Amazon CloudWatch Metrics to Logs is a capability that helps pivot from your logs-extracted metrics directly to the corresponding logs.
 
 ## 2.6.15
 * feature: DirectConnect: AWS Direct Connect provides three new APIs to support basic tagging on Direct Connect resources.
