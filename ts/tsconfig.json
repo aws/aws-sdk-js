@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "target": "es5",
+        "module": "commonjs",
+        "lib": [
+            "es5",
+            "es2015.promise",
+            "dom"
+        ],
+        "noEmit": true
+    }
+}

@@ -13,19 +13,21 @@
     "Trevor Rowe <trevrowe@amazon.com>"
   ],
   "devDependencies": {
+    "@types/node": "^6.0.46",
+    "browserify": "13.1.0",
+    "chai": "*",
+    "coffee-script": "1.6.3",
+    "coffeeify": "*",
+    "coveralls": "2.x",
+    "cucumber": "0.5.x",
+    "eslint": "1.x",
+    "insert-module-globals": "^7.0.0",
+    "istanbul": "*",
+    "mocha": "*",
     "repl.history": "*",
     "semver": "*",
-    "coffee-script": "1.6.3",
-    "eslint": "1.x",
-    "cucumber": "0.5.x",
-    "coffeeify": "*",
-    "browserify": "13.1.0",
-    "uglify-js": "2.x",
-    "mocha": "*",
-    "chai": "*",
-    "istanbul": "*",
-    "coveralls": "2.x",
-    "insert-module-globals": "^7.0.0"
+    "typescript": "2.0.8",
+    "uglify-js": "2.x"
   },
   "dependencies": {
     "buffer": "4.9.1",
@@ -50,6 +52,8 @@
   "directories": {
     "lib": "lib"
   },
+  "types": "index.d.ts",
+  "typings": "index.d.ts",
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -108,6 +112,7 @@
     "integration": "cucumber.js",
     "lint": "eslint lib dist-tools/*.js",
     "console": "./scripts/console",
-    "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`"
+    "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`",
+    "tstest": "tsc -p ./ts"
   }
 }
