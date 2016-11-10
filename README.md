@@ -60,6 +60,53 @@ You can find a getting started guide at:
 
 http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide
 
+## Usage with TypeScript
+The AWS SDK for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
+Our goal is to keep these TypeScript definition files updated with each release for any public api.
+
+### Pre-requisites
+Before you can begin using these TypeScript definitions with your project, you need to make sure your project meets a few of these requirements:
+ * Use TypeScript v2.x
+ * Includes the TypeScript definitions for node. You can use npm to install this by typing the following into a terminal window:
+  ```sh
+    npm install --save-dev @types/node
+  ```
+ * Your `tsconfig.json` or `jsconfig.json` includes `'dom'` and `'es2015.promise'` under `compilerOptions.lib`.
+ See [tsconfig.json](./ts/tsconfig.json) for an example.
+
+### In the Browser
+To use the TypeScript definition files with the global `AWS` object in a front-end project, add the following line to the top of your JavaScript file:
+```javascript
+/// <reference types="aws-sdk" />
+```
+This will provide support for the global `AWS` object.
+
+### In Node.js
+To use the TypeScript definition files within a Node.js project, simply import `aws-sdk` as you normally would.
+In a TypeScript file:
+```javascript
+// import entire SDK
+import AWS = require('aws-sdk');
+// import AWS object without services
+import AWS = require('aws-sdk/global');
+// import individual service
+import S3 = require('aws-sdk/clients/s3');
+```
+In a JavaScript file:
+```javascript
+// import entire SDK
+var AWS = require('aws-sdk');
+// import AWS object without services
+var AWS = require('aws-sdk/global');
+// import individual service
+var S3 = require('aws-sdk/clients/s3');
+```
+
+### Known Limitations
+There are a few known limitations with the bundled TypeScript definitions at this time:
+ * Service client typings reflect the latest `apiVersion`, regardless of which `apiVersion` is specified when creating a client.
+ * Service-bound parameters use the `any` type.
+
 ## Supported Services
 
 <p class="note"><strong>Note</strong>:

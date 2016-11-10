@@ -1,0 +1,31 @@
+import {Service} from '../service';
+import {ManagedUpload, ManagedUploadOptions, SendData} from '../s3/managed_upload';
+import S3 = require('../../clients/s3');
+export class S3Customizations extends Service {
+    /**
+     * Get a pre-signed URL for a given operation name.
+     */
+    getSignedUrl(operation: string, params: any, callback: (err: Error, url: string) => void): void;
+    /**
+     * Get a pre-signed URL for a given operation name.
+     */
+    getSignedUrl(operation: string, params: any): string;
+
+    /**
+     * Uploads an arbitrarily sized buffer, blob, or stream, using intelligent
+     * concurrent handling of parts if the payload is large enough. You can
+     * configure the concurrent queue size by setting `options`. Note that this
+     * is the only operation for which the SDK can retry requests with stream
+     * bodies.
+     */
+    upload(params: S3.Types.PutObjectRequest, options?: ManagedUploadOptions, callback?: (err: Error, data: SendData) => void): ManagedUpload;
+    /**
+     * Uploads an arbitrarily sized buffer, blob, or stream, using intelligent
+     * concurrent handling of parts if the payload is large enough. You can
+     * configure the concurrent queue size by setting `options`. Note that this
+     * is the only operation for which the SDK can retry requests with stream
+     * bodies.
+     */
+    upload(params: S3.Types.PutObjectRequest, callback?: (err: Error, data: SendData) => void): ManagedUpload;
+    static ManagedUpload: typeof ManagedUpload;
+}
