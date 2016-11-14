@@ -12,7 +12,7 @@ export class ManagedUpload {
     /**
      * Returns a 'thenable' promise.
      */
-    promise(): Promise<void>;
+    promise(): Promise<SendData>;
     /**
      * Initiates the managed upload for the payload.
      */

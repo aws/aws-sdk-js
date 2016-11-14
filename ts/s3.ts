@@ -106,4 +106,5 @@ const upload = s3.upload({
 });
 
 // test managed upload promise support
-upload.promise();
+upload.promise()
+    .then((data) => data.Location);
