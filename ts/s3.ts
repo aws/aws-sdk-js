@@ -92,8 +92,18 @@ listObjectsReq.promise().then(function(data) {
 }).catch(function(err) {
     console.log(err);
 });
+
 // test stream
 var s3GetObjectStream = s3.getObject({
     Bucket: 'BUCKET',
     Key: 'KEY'
 }).createReadStream();
+
+const upload = s3.upload({
+    Bucket: 'BUCKET',
+    Key: 'KEY',
+    Body: new Buffer('some data')
+});
+
+// test managed upload promise support
+upload.promise();
