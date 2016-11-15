@@ -237,6 +237,75 @@ describe 'AWS.Service', ->
         new MockService().makeRequest('operation').send()
         expect(event.calls.length).not.to.equal(0)
 
+    describe 'custom request decorators', ->
+      s3 = new AWS.S3()
+      innerVal = null
+      outerVal = null
+      
+      innerFn = ->
+        innerVal = true
+      
+      outerFn = ->
+        outerVal = true
+
+      beforeEach ->
+        innerVal = null
+        outerVal = null
+
+      afterEach ->
+        s3.customizeRequests()
+        AWS.S3.prototype.customizeRequests()
+
+      it 'will be called when set on a service object', (done) ->
+        expect(innerVal).to.equal(null)
+        expect(outerVal).to.equal(null)
+
+        s3.customizeRequests(innerFn)
+        s3.makeRequest('listObjects')
+
+        expect(innerVal).to.equal(true)
+        expect(outerVal).to.equal(null)
+        done()
+
+      it 'will be called when set on a service object prototype', (done) ->
+        expect(innerVal).to.equal(null)
+        expect(outerVal).to.equal(null)
+
+        AWS.S3.prototype.customizeRequests(outerFn)
+        s3.makeRequest('listObjects')
+
+        expect(innerVal).to.equal(null)
+        expect(outerVal).to.equal(true)
+        done()
+
+      it 'will be called when set on a service object or prototype', (done) ->
+        expect(innerVal).to.equal(null)
+        expect(outerVal).to.equal(null)
+
+        AWS.S3.prototype.customizeRequests(outerFn)
+        s3.customizeRequests(innerFn)
+        s3.makeRequest('listObjects')
+
+        expect(innerVal).to.equal(true)
+        expect(outerVal).to.equal(true)
+        done()
+      
+      it 'gives access to the request object', (done) ->
+        innerVal = false
+        outerVal = false
+        innerReqHandler = (req) ->
+          innerVal = req instanceof AWS.Request
+        outerReqHandler = (req) ->
+          outerVal = req instanceof AWS.Request
+        
+        AWS.S3.prototype.customizeRequests(outerReqHandler)
+        s3.customizeRequests(innerReqHandler)
+        s3.makeRequest('listObjects')
+
+        expect(innerVal).to.equal(true)
+        expect(outerVal).to.equal(true)
+        done()
+
   describe 'retryableError', ->
 
     it 'should retry on throttle error', ->
@@ -319,3 +388,32 @@ describe 'AWS.Service', ->
         expect(customService.makeRequest.calls.length).to.equal(1)
         expect(customService.makeUnauthenticatedRequest.calls.length).to.equal(1)
         done()
+
+  describe 'customizeRequests', ->
+    it 'should accept nullable types', ->
+      didError = false
+      try
+        service.customizeRequests(null)
+        service.customizeRequests(undefined)
+        service.customizeRequests()
+      catch err
+        didError = true
+      expect(didError).to.equal(false)
+      expect(!!service.customRequestHandler).to.equal(false)
+
+    it 'should accept a function', ->
+      didError = false
+      try
+        service.customizeRequests(->)
+      catch err
+        didError = true
+      expect(didError).to.equal(false)
+      expect(typeof service.customRequestHandler).to.equal('function')
+
+    it 'should throw an error when non-nullable, non-function types are provided', ->
+      didError = false
+      try
+        service.customizeRequests('test')
+      catch err
+        didError = true
+      expect(didError).to.equal(true)
