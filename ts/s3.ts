@@ -1,4 +1,5 @@
 import S3 = require('../clients/s3');
+import fs = require('fs');
 
 // Instantiate S3 without options
 var s3 = new S3();
@@ -24,7 +25,7 @@ s3.listObjects({
 }, function(err, data) {
     if (err) {
         console.log(err.extendedRequstId);
-    } else {
+    } else if (data && data.Contents) {
         data.Contents.forEach(function(content) {
             console.log(content.Key);
         });
@@ -39,7 +40,7 @@ s3.listObjects({
 s3.listObjects(function(err, data) {
     if (err) {
         console.log(err.code);
-    } else {
+    } else if (data && data.Contents) {
         data.Contents.forEach(function(content) {
             console.log(content.Key);
         });
@@ -58,7 +59,7 @@ listObjectsReq.on('error', function(err, resp) {
     console.log(resp.error);
 });
 listObjectsReq.on('success', function(resp) {
-    if (resp.data) {
+    if (resp.data && resp.data.Contents) {
         resp.data.Contents.forEach(function(content) {
             console.log(content.Key);
         });
@@ -68,7 +69,7 @@ listObjectsReq.on('success', function(resp) {
 listObjectsReq.on('complete', function(resp) {
     if (resp.error) {
         console.log(resp.error.code);
-    } else if (resp.data) {
+    } else if (resp.data && resp.data.Contents) {
         resp.data.Contents.forEach(function(content) {
             console.log(content.Key);
         });
@@ -78,7 +79,7 @@ listObjectsReq.on('complete', function(resp) {
 listObjectsReq.send(function(err, data) {
     if (err) {
         console.log(err.code);
-    } else {
+    } else if (data && data.Contents) {
         data.Contents.forEach(function(content) {
             console.log(content.Key);
         });
@@ -86,6 +87,7 @@ listObjectsReq.send(function(err, data) {
 });
 // test promise support
 listObjectsReq.promise().then(function(data) {
+    data.Contents = data.Contents || [];
     data.Contents.forEach(function(content) {
         console.log(content.Key);
     });
@@ -97,3 +99,22 @@ var s3GetObjectStream = s3.getObject({
     Bucket: 'BUCKET',
     Key: 'KEY'
 }).createReadStream();
+
+// test putObject
+s3.putObject({
+    Bucket: 'BUCKET',
+    Key: 'Test',
+    Body: 'text'
+});
+
+s3.putObject({
+    Bucket: 'BUCKET',
+    Key: 'Test',
+    Body: new Buffer('text')
+});
+
+s3.putObject({
+    Bucket: 'BUCKET',
+    Key: 'Test',
+    Body: fs.createReadStream('/fake/path')
+});

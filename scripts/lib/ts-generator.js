@@ -94,8 +94,7 @@ TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocume
     // get the dynamodb model
     var dynamodbModel = this.loadServiceApi('dynamodb');
     var code = '';
-    // include node reference
-    code += '///<reference types="node" />\n';
+    code += 'interface Blob {}\n';
     // generate shapes
     var modelShapes = dynamodbModel.shapes;
     // iterate over each shape
@@ -246,7 +245,11 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
             if (['Date', 'Blob'].indexOf(memberType) >= 0) {
                 memberType = '_' + memberType;
             }
-            code += tabs(tabCount + 1) + memberKey + required + ': ' + memberType + ';\n';
+            code += tabs(tabCount + 1) + memberKey + required + ': ' + memberType + '';
+            if (member.streaming) {
+                code += '|stream.Readable';
+            }
+            code += ';\n';
         });
         code += tabs(tabCount) + '}\n';
     } else if (type === 'list') {
@@ -268,7 +271,11 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
     } else if (type === 'boolean') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = boolean;\n';
     } else if (type === 'blob' || type === 'binary') {
-        code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string;\n';
+        code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string';
+        if (shape.streaming) {
+            code += '|stream.Readable';
+        }
+        code += ';\n';
     }
     return code;
 };
@@ -386,12 +393,11 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     var self = this;
     var code = '';
     var className = this.metadata[serviceIdentifier].name;
-    // reference node
-    code += '///<reference types="node" />\n';
     // generate imports
     code += 'import {Request} from \'../lib/request\';\n';
     code += 'import {Response} from \'../lib/response\';\n';
     code += 'import {AWSError} from \'../lib/error\';\n';
+    code += 'import * as stream from \'stream\';\n';
     var hasCustomizations = this.includeCustomService(serviceIdentifier);
     var parentClass = hasCustomizations ? className + 'Customizations' : 'Service';
     if (hasCustomizations) {
@@ -412,6 +418,9 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
             customConfigTypes.push(config.INTERFACE);
         });
     }
+
+    // declare Blob interface (workaround so user's don't have to include "dom" library)
+    code += 'interface Blob {}\n';
 
     // generate methods
     var modelOperations = model.operations;

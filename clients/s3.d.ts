@@ -1,11 +1,12 @@
-///<reference types="node" />
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
+import * as stream from 'stream';
 import {S3Customizations} from '../lib/services/s3';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
+interface Blob {}
 declare class S3 extends S3Customizations {
   /**
    * Constructs a service object. This object has one method for each API operation.
@@ -1284,7 +1285,7 @@ declare namespace S3.Types {
     /**
      * Object data.
      */
-    Body?: Body;
+    Body?: Body|stream.Readable;
     /**
      * Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response.
      */
@@ -1448,7 +1449,7 @@ declare namespace S3.Types {
     PartNumber?: PartNumber;
   }
   export interface GetObjectTorrentOutput {
-    Body?: Body;
+    Body?: Body|stream.Readable;
     RequestCharged?: RequestCharged;
   }
   export interface GetObjectTorrentRequest {
@@ -2387,7 +2388,7 @@ declare namespace S3.Types {
     /**
      * Object data.
      */
-    Body?: Body;
+    Body?: Body|stream.Readable;
     /**
      * Name of the bucket to which the PUT operation was initiated.
      */
@@ -2813,7 +2814,7 @@ declare namespace S3.Types {
     /**
      * Object data.
      */
-    Body?: Body;
+    Body?: Body|stream.Readable;
     /**
      * Name of the bucket to which the multipart upload was initiated.
      */
