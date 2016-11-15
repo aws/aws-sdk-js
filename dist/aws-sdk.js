@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.0
+// AWS SDK for JavaScript v2.7.1
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -13406,6 +13406,9 @@ module.exports={
           },
           "AdminCreateUserConfig": {
             "shape": "S3a"
+          },
+          "Schema": {
+            "shape": "S3d"
           }
         }
       },
@@ -13413,7 +13416,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPool": {
-            "shape": "S3e"
+            "shape": "S3f"
           }
         }
       }
@@ -13547,7 +13550,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPool": {
-            "shape": "S3e"
+            "shape": "S3f"
           }
         }
       }
@@ -14508,6 +14511,9 @@ module.exports={
     },
     "S39": {
       "type": "structure",
+      "required": [
+        "SnsCallerArn"
+      ],
       "members": {
         "SnsCallerArn": {},
         "ExternalId": {}
@@ -14532,7 +14538,13 @@ module.exports={
         }
       }
     },
-    "S3e": {
+    "S3d": {
+      "type": "list",
+      "member": {
+        "shape": "S4"
+      }
+    },
+    "S3f": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -14551,10 +14563,7 @@ module.exports={
           "type": "timestamp"
         },
         "SchemaAttributes": {
-          "type": "list",
-          "member": {
-            "shape": "S4"
-          }
+          "shape": "S3d"
         },
         "AutoVerifiedAttributes": {
           "shape": "S2y"
@@ -83794,7 +83803,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.0',
+  VERSION: '2.7.1',
 
 
   Signers: {},
@@ -88321,6 +88330,17 @@ AWS.Service = inherit({
   defaultRetryCount: 3,
 
 
+  customizeRequests: function customizeRequests(callback) {
+    if (!callback) {
+      this.customRequestHandler = null;
+    } else if (typeof callback === 'function') {
+      this.customRequestHandler = callback;
+    } else {
+      throw new Error('Invalid callback type \'' + typeof callback + '\' provided in customizeRequests');
+    }
+  },
+
+
   makeRequest: function makeRequest(operation, params, callback) {
     if (typeof params === 'function') {
       callback = params;
@@ -88384,6 +88404,12 @@ AWS.Service = inherit({
     }
 
     this.setupRequestListeners(request);
+    if (typeof this.constructor.prototype.customRequestHandler === 'function') {
+      this.constructor.prototype.customRequestHandler(request);
+    }
+    if (typeof this.customRequestHandler === 'function') {
+      this.customRequestHandler(request);
+    }
   },
 
 

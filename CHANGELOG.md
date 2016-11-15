@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.0-->
+<!--LATEST=2.7.1-->
 <!--ENTRYINSERT-->
+
+## 2.7.1
+* feature: CognitoIdentityServiceProvider: Adds schema attributes to CreateUserPool.
+* bugfix: TypeScript: Updates definitions to work when `noImplicitAny` and `strictNullChecks` are set to `true`.
 
 ## 2.7.0
 * feature: TypeScript: Adds typescript definition files to the SDK.
