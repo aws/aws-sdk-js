@@ -239,55 +239,55 @@ describe 'AWS.Service', ->
 
     describe 'custom request decorators', ->
       s3 = new AWS.S3()
-      innerVal = null
-      outerVal = null
+      innerVal = 0
+      outerVal = 0
       
       innerFn = ->
-        innerVal = true
+        ++innerVal
       
       outerFn = ->
-        outerVal = true
+        ++outerVal
 
       beforeEach ->
-        innerVal = null
-        outerVal = null
+        innerVal = 0
+        outerVal = 0
 
       afterEach ->
-        s3.customizeRequests()
-        AWS.S3.prototype.customizeRequests()
+        delete s3.customRequestHandler
+        delete AWS.S3.prototype.customRequestHandler
 
       it 'will be called when set on a service object', (done) ->
-        expect(innerVal).to.equal(null)
-        expect(outerVal).to.equal(null)
+        expect(innerVal).to.equal(0)
+        expect(outerVal).to.equal(0)
 
         s3.customizeRequests(innerFn)
         s3.makeRequest('listObjects')
 
-        expect(innerVal).to.equal(true)
-        expect(outerVal).to.equal(null)
+        expect(innerVal).to.equal(1)
+        expect(outerVal).to.equal(0)
         done()
 
       it 'will be called when set on a service object prototype', (done) ->
-        expect(innerVal).to.equal(null)
-        expect(outerVal).to.equal(null)
+        expect(innerVal).to.equal(0)
+        expect(outerVal).to.equal(0)
 
         AWS.S3.prototype.customizeRequests(outerFn)
         s3.makeRequest('listObjects')
 
-        expect(innerVal).to.equal(null)
-        expect(outerVal).to.equal(true)
+        expect(innerVal).to.equal(0)
+        expect(outerVal).to.equal(1)
         done()
 
       it 'will be called when set on a service object or prototype', (done) ->
-        expect(innerVal).to.equal(null)
-        expect(outerVal).to.equal(null)
+        expect(innerVal).to.equal(0)
+        expect(outerVal).to.equal(0)
 
         AWS.S3.prototype.customizeRequests(outerFn)
         s3.customizeRequests(innerFn)
         s3.makeRequest('listObjects')
 
-        expect(innerVal).to.equal(true)
-        expect(outerVal).to.equal(true)
+        expect(innerVal).to.equal(1)
+        expect(outerVal).to.equal(1)
         done()
       
       it 'gives access to the request object', (done) ->
