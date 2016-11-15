@@ -1,5 +1,3 @@
-/// <reference types="node" />
-
 import {Service} from '../service';
 
 export class GlacierCustomizations extends Service {

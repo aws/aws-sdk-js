@@ -246,9 +246,6 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
                 memberType = '_' + memberType;
             }
             code += tabs(tabCount + 1) + memberKey + required + ': ' + memberType + '';
-            if (member.streaming) {
-                code += '|stream.Readable';
-            }
             code += ';\n';
         });
         code += tabs(tabCount) + '}\n';
@@ -272,9 +269,6 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = boolean;\n';
     } else if (type === 'blob' || type === 'binary') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string';
-        if (shape.streaming) {
-            code += '|stream.Readable';
-        }
         code += ';\n';
     }
     return code;
@@ -397,7 +391,6 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     code += 'import {Request} from \'../lib/request\';\n';
     code += 'import {Response} from \'../lib/response\';\n';
     code += 'import {AWSError} from \'../lib/error\';\n';
-    code += 'import * as stream from \'stream\';\n';
     var hasCustomizations = this.includeCustomService(serviceIdentifier);
     var parentClass = hasCustomizations ? className + 'Customizations' : 'Service';
     if (hasCustomizations) {

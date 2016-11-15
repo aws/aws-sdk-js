@@ -1,10 +1,10 @@
-///<reference types="node" />
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+interface Blob {}
 declare class DirectConnect extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
