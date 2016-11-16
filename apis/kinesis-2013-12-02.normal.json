@@ -24,7 +24,7 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Adds or updates tags for the specified Amazon Kinesis stream. Each stream can have up to 10 tags. </p> <p>If tags have already been assigned to the stream, <code>AddTagsToStream</code> overwrites any existing tags that correspond to the specified tag keys.</p>"
+      "documentation":"<p>Adds or updates tags for the specified Amazon Kinesis stream. Each stream can have up to 10 tags.</p> <p>If tags have already been assigned to the stream, <code>AddTagsToStream</code> overwrites any existing tags that correspond to the specified tag keys.</p>"
     },
     "CreateStream":{
       "name":"CreateStream",
@@ -38,7 +38,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"InvalidArgumentException"}
       ],
-      "documentation":"<p>Creates an Amazon Kinesis stream. A stream captures and transports data records that are continuously emitted from different data sources or <i>producers</i>. Scale-out within a stream is explicitly supported by means of shards, which are uniquely identified groups of data records in a stream.</p> <p>You specify and control the number of shards that a stream is composed of. Each shard can support reads up to 5 transactions per second, up to a maximum data read total of 2 MB per second. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second. You can add shards to a stream if the amount of data input increases and you can remove shards if the amount of data input decreases.</p> <p>The stream name identifies the stream. The name is scoped to the AWS account used by the application. It is also scoped by region. That is, two streams in two different accounts can have the same name, and two streams in the same account, but in two different regions, can have the same name. </p> <p><code>CreateStream</code> is an asynchronous operation. Upon receiving a <code>CreateStream</code> request, Amazon Kinesis immediately returns and sets the stream status to <code>CREATING</code>. After the stream is created, Amazon Kinesis sets the stream status to <code>ACTIVE</code>. You should perform read and write operations only on an <code>ACTIVE</code> stream. </p> <p>You receive a <code>LimitExceededException</code> when making a <code>CreateStream</code> request if you try to do one of the following:</p> <ul> <li>Have more than five streams in the <code>CREATING</code> state at any point in time.</li> <li>Create more shards than are authorized for your account.</li> </ul> <p>For the default shard limit for an AWS account, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>. If you need to increase this limit, <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact AWS Support</a>.</p> <p>You can use <code>DescribeStream</code> to check the stream status, which is returned in <code>StreamStatus</code>.</p> <p><a>CreateStream</a> has a limit of 5 transactions per second per account.</p>"
+      "documentation":"<p>Creates an Amazon Kinesis stream. A stream captures and transports data records that are continuously emitted from different data sources or <i>producers</i>. Scale-out within a stream is explicitly supported by means of shards, which are uniquely identified groups of data records in a stream.</p> <p>You specify and control the number of shards that a stream is composed of. Each shard can support reads up to 5 transactions per second, up to a maximum data read total of 2 MB per second. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second. You can add shards to a stream if the amount of data input increases and you can remove shards if the amount of data input decreases.</p> <p>The stream name identifies the stream. The name is scoped to the AWS account used by the application. It is also scoped by region. That is, two streams in two different accounts can have the same name, and two streams in the same account, but in two different regions, can have the same name.</p> <p> <code>CreateStream</code> is an asynchronous operation. Upon receiving a <code>CreateStream</code> request, Amazon Kinesis immediately returns and sets the stream status to <code>CREATING</code>. After the stream is created, Amazon Kinesis sets the stream status to <code>ACTIVE</code>. You should perform read and write operations only on an <code>ACTIVE</code> stream. </p> <p>You receive a <code>LimitExceededException</code> when making a <code>CreateStream</code> request if you try to do one of the following:</p> <ul> <li><p>Have more than five streams in the <code>CREATING</code> state at any point in time.</p> </li> <li><p>Create more shards than are authorized for your account.</p> </li> </ul> <p>For the default shard limit for an AWS account, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>. If you need to increase this limit, <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact AWS Support</a>.</p> <p>You can use <code>DescribeStream</code> to check the stream status, which is returned in <code>StreamStatus</code>.</p> <p> <a>CreateStream</a> has a limit of 5 transactions per second per account.</p>"
     },
     "DecreaseStreamRetentionPeriod":{
       "name":"DecreaseStreamRetentionPeriod",
@@ -50,7 +50,6 @@
       "errors":[
         {"shape":"ResourceInUseException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"LimitExceededException"},
         {"shape":"InvalidArgumentException"}
       ],
       "documentation":"<p>Decreases the Amazon Kinesis stream's retention period, which is the length of time data records are accessible after they are added to the stream. The minimum value of a stream's retention period is 24 hours.</p> <p>This operation may result in lost data. For example, if the stream's retention period is 48 hours and is decreased to 24 hours, any data already in the stream that is older than 24 hours is inaccessible.</p>"
@@ -66,7 +65,20 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Deletes an Amazon Kinesis stream and all its shards and data. You must shut down any applications that are operating on the stream before you delete the stream. If an application attempts to operate on a deleted stream, it will receive the exception <code>ResourceNotFoundException</code>.</p> <p>If the stream is in the <code>ACTIVE</code> state, you can delete it. After a <code>DeleteStream</code> request, the specified stream is in the <code>DELETING</code> state until Amazon Kinesis completes the deletion.</p> <p><b>Note:</b> Amazon Kinesis might continue to accept data read and write operations, such as <a>PutRecord</a>, <a>PutRecords</a>, and <a>GetRecords</a>, on a stream in the <code>DELETING</code> state until the stream deletion is complete.</p> <p>When you delete a stream, any shards in that stream are also deleted, and any tags are dissociated from the stream.</p> <p>You can use the <a>DescribeStream</a> operation to check the state of the stream, which is returned in <code>StreamStatus</code>.</p> <p><a>DeleteStream</a> has a limit of 5 transactions per second per account.</p>"
+      "documentation":"<p>Deletes an Amazon Kinesis stream and all its shards and data. You must shut down any applications that are operating on the stream before you delete the stream. If an application attempts to operate on a deleted stream, it will receive the exception <code>ResourceNotFoundException</code>.</p> <p>If the stream is in the <code>ACTIVE</code> state, you can delete it. After a <code>DeleteStream</code> request, the specified stream is in the <code>DELETING</code> state until Amazon Kinesis completes the deletion.</p> <p> <b>Note:</b> Amazon Kinesis might continue to accept data read and write operations, such as <a>PutRecord</a>, <a>PutRecords</a>, and <a>GetRecords</a>, on a stream in the <code>DELETING</code> state until the stream deletion is complete.</p> <p>When you delete a stream, any shards in that stream are also deleted, and any tags are dissociated from the stream.</p> <p>You can use the <a>DescribeStream</a> operation to check the state of the stream, which is returned in <code>StreamStatus</code>.</p> <p> <a>DeleteStream</a> has a limit of 5 transactions per second per account.</p>"
+    },
+    "DescribeLimits":{
+      "name":"DescribeLimits",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeLimitsInput"},
+      "output":{"shape":"DescribeLimitsOutput"},
+      "errors":[
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Describes the shard limits and usage for the account.</p> <p>If you update your account limits, the old limits might be returned for a few minutes.</p> <p>This operation has a limit of 1 transaction per second per account.</p>"
     },
     "DescribeStream":{
       "name":"DescribeStream",
@@ -80,7 +92,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Describes the specified Amazon Kinesis stream.</p> <p>The information about the stream includes its current status, its Amazon Resource Name (ARN), and an array of shard objects. For each shard object, there is information about the hash key and sequence number ranges that the shard spans, and the IDs of any earlier shards that played in a role in creating the shard. A sequence number is the identifier associated with every record ingested in the stream. The sequence number is assigned when a record is put into the stream.</p> <p>You can limit the number of returned shards using the <code>Limit</code> parameter. The number of shards in a stream may be too large to return from a single call to <code>DescribeStream</code>. You can detect this by using the <code>HasMoreShards</code> flag in the returned output. <code>HasMoreShards</code> is set to <code>true</code> when there is more data available. </p> <p><code>DescribeStream</code> is a paginated operation. If there are more shards available, you can request them using the shard ID of the last shard returned. Specify this ID in the <code>ExclusiveStartShardId</code> parameter in a subsequent request to <code>DescribeStream</code>. </p> <p>There are no guarantees about the chronological order shards returned in <code>DescribeStream</code> results. If you want to process shards in chronological order, use <code>ParentShardId</code> to track lineage to the oldest shard.</p> <p><a>DescribeStream</a> has a limit of 10 transactions per second per account.</p>"
+      "documentation":"<p>Describes the specified Amazon Kinesis stream.</p> <p>The information returned includes the stream name, Amazon Resource Name (ARN), creation time, enhanced metric configuration, and shard map. The shard map is an array of shard objects. For each shard object, there is the hash key and sequence number ranges that the shard spans, and the IDs of any earlier shards that played in a role in creating the shard. Every record ingested in the stream is identified by a sequence number, which is assigned when the record is put into the stream.</p> <p>You can limit the number of shards returned by each call. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html\">Retrieving Shards from a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>There are no guarantees about the chronological order shards returned. To process shards in chronological order, use the ID of the parent shard to track the lineage to the oldest shard.</p> <p>This operation has a limit of 10 transactions per second per account.</p>"
     },
     "DisableEnhancedMonitoring":{
       "name":"DisableEnhancedMonitoring",
@@ -143,7 +155,7 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"ProvisionedThroughputExceededException"}
       ],
-      "documentation":"<p>Gets an Amazon Kinesis shard iterator. A shard iterator expires five minutes after it is returned to the requester.</p> <p>A shard iterator specifies the shard position from which to start reading data records sequentially. The position is specified using the sequence number of a data record in a shard. A sequence number is the identifier associated with every record ingested in the stream, and is assigned when a record is put into the stream. Each stream has one or more shards.</p> <p>You must specify the shard iterator type. For example, you can set the <code>ShardIteratorType</code> parameter to read exactly from the position denoted by a specific sequence number by using the <code>AT_SEQUENCE_NUMBER</code> shard iterator type, or right after the sequence number by using the <code>AFTER_SEQUENCE_NUMBER</code> shard iterator type, using sequence numbers returned by earlier calls to <a>PutRecord</a>, <a>PutRecords</a>, <a>GetRecords</a>, or <a>DescribeStream</a>. In the request, you can specify the shard iterator type <code>AT_TIMESTAMP</code> to read records from an arbitrary point in time, <code>TRIM_HORIZON</code> to cause <code>ShardIterator</code> to point to the last untrimmed record in the shard in the system (the oldest data record in the shard), or <code>LATEST</code> so that you always read the most recent data in the shard. </p> <p>When you read repeatedly from a stream, use a <a>GetShardIterator</a> request to get the first shard iterator for use in your first <a>GetRecords</a> request and for subsequent reads use the shard iterator returned by the <a>GetRecords</a> request in <code>NextShardIterator</code>. A new shard iterator is returned by every <a>GetRecords</a> request in <code>NextShardIterator</code>, which you use in the <code>ShardIterator</code> parameter of the next <a>GetRecords</a> request. </p> <p>If a <a>GetShardIterator</a> request is made too often, you receive a <code>ProvisionedThroughputExceededException</code>. For more information about throughput limits, see <a>GetRecords</a>, and <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>If the shard is closed, <a>GetShardIterator</a> returns a valid iterator for the last sequence number of the shard. Note that a shard can be closed as a result of using <a>SplitShard</a> or <a>MergeShards</a>.</p> <p><a>GetShardIterator</a> has a limit of 5 transactions per second per account per open shard.</p>"
+      "documentation":"<p>Gets an Amazon Kinesis shard iterator. A shard iterator expires five minutes after it is returned to the requester.</p> <p>A shard iterator specifies the shard position from which to start reading data records sequentially. The position is specified using the sequence number of a data record in a shard. A sequence number is the identifier associated with every record ingested in the stream, and is assigned when a record is put into the stream. Each stream has one or more shards.</p> <p>You must specify the shard iterator type. For example, you can set the <code>ShardIteratorType</code> parameter to read exactly from the position denoted by a specific sequence number by using the <code>AT_SEQUENCE_NUMBER</code> shard iterator type, or right after the sequence number by using the <code>AFTER_SEQUENCE_NUMBER</code> shard iterator type, using sequence numbers returned by earlier calls to <a>PutRecord</a>, <a>PutRecords</a>, <a>GetRecords</a>, or <a>DescribeStream</a>. In the request, you can specify the shard iterator type <code>AT_TIMESTAMP</code> to read records from an arbitrary point in time, <code>TRIM_HORIZON</code> to cause <code>ShardIterator</code> to point to the last untrimmed record in the shard in the system (the oldest data record in the shard), or <code>LATEST</code> so that you always read the most recent data in the shard. </p> <p>When you read repeatedly from a stream, use a <a>GetShardIterator</a> request to get the first shard iterator for use in your first <a>GetRecords</a> request and for subsequent reads use the shard iterator returned by the <a>GetRecords</a> request in <code>NextShardIterator</code>. A new shard iterator is returned by every <a>GetRecords</a> request in <code>NextShardIterator</code>, which you use in the <code>ShardIterator</code> parameter of the next <a>GetRecords</a> request. </p> <p>If a <a>GetShardIterator</a> request is made too often, you receive a <code>ProvisionedThroughputExceededException</code>. For more information about throughput limits, see <a>GetRecords</a>, and <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>If the shard is closed, <a>GetShardIterator</a> returns a valid iterator for the last sequence number of the shard. Note that a shard can be closed as a result of using <a>SplitShard</a> or <a>MergeShards</a>.</p> <p> <a>GetShardIterator</a> has a limit of 5 transactions per second per account per open shard.</p>"
     },
     "IncreaseStreamRetentionPeriod":{
       "name":"IncreaseStreamRetentionPeriod",
@@ -155,7 +167,6 @@
       "errors":[
         {"shape":"ResourceInUseException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"LimitExceededException"},
         {"shape":"InvalidArgumentException"}
       ],
       "documentation":"<p>Increases the Amazon Kinesis stream's retention period, which is the length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 168 hours (7 days).</p> <p>Upon choosing a longer stream retention period, this operation will increase the time period records are accessible that have not yet expired. However, it will not make previous data that has expired (older than the stream's previous retention period) accessible after the operation has been called. For example, if a stream's retention period is set to 24 hours and is increased to 168 hours, any data that is older than 24 hours will remain inaccessible to consumer applications.</p>"
@@ -171,7 +182,7 @@
       "errors":[
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Lists your Amazon Kinesis streams.</p> <p>The number of streams may be too large to return from a single call to <code>ListStreams</code>. You can limit the number of returned streams using the <code>Limit</code> parameter. If you do not specify a value for the <code>Limit</code> parameter, Amazon Kinesis uses the default limit, which is currently 10.</p> <p>You can detect if there are more streams available to list by using the <code>HasMoreStreams</code> flag from the returned output. If there are more streams available, you can request more streams by using the name of the last stream returned by the <code>ListStreams</code> request in the <code>ExclusiveStartStreamName</code> parameter in a subsequent request to <code>ListStreams</code>. The group of stream names returned by the subsequent request is then added to the list. You can continue this process until all the stream names have been collected in the list. </p> <p><a>ListStreams</a> has a limit of 5 transactions per second per account.</p>"
+      "documentation":"<p>Lists your Amazon Kinesis streams.</p> <p>The number of streams may be too large to return from a single call to <code>ListStreams</code>. You can limit the number of returned streams using the <code>Limit</code> parameter. If you do not specify a value for the <code>Limit</code> parameter, Amazon Kinesis uses the default limit, which is currently 10.</p> <p>You can detect if there are more streams available to list by using the <code>HasMoreStreams</code> flag from the returned output. If there are more streams available, you can request more streams by using the name of the last stream returned by the <code>ListStreams</code> request in the <code>ExclusiveStartStreamName</code> parameter in a subsequent request to <code>ListStreams</code>. The group of stream names returned by the subsequent request is then added to the list. You can continue this process until all the stream names have been collected in the list. </p> <p> <a>ListStreams</a> has a limit of 5 transactions per second per account.</p>"
     },
     "ListTagsForStream":{
       "name":"ListTagsForStream",
@@ -201,7 +212,7 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Merges two adjacent shards in an Amazon Kinesis stream and combines them into a single shard to reduce the stream's capacity to ingest and transport data. Two shards are considered adjacent if the union of the hash key ranges for the two shards form a contiguous set with no gaps. For example, if you have two shards, one with a hash key range of 276...381 and the other with a hash key range of 382...454, then you could merge these two shards into a single shard that would have a hash key range of 276...454. After the merge, the single child shard receives data for all hash key values covered by the two parent shards.</p> <p><code>MergeShards</code> is called when there is a need to reduce the overall capacity of a stream because of excess capacity that is not being used. You must specify the shard to be merged and the adjacent shard for a stream. For more information about merging shards, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html\">Merge Two Shards</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>If the stream is in the <code>ACTIVE</code> state, you can call <code>MergeShards</code>. If a stream is in the <code>CREATING</code>, <code>UPDATING</code>, or <code>DELETING</code> state, <code>MergeShards</code> returns a <code>ResourceInUseException</code>. If the specified stream does not exist, <code>MergeShards</code> returns a <code>ResourceNotFoundException</code>. </p> <p>You can use <a>DescribeStream</a> to check the state of the stream, which is returned in <code>StreamStatus</code>.</p> <p><code>MergeShards</code> is an asynchronous operation. Upon receiving a <code>MergeShards</code> request, Amazon Kinesis immediately returns a response and sets the <code>StreamStatus</code> to <code>UPDATING</code>. After the operation is completed, Amazon Kinesis sets the <code>StreamStatus</code> to <code>ACTIVE</code>. Read and write operations continue to work while the stream is in the <code>UPDATING</code> state. </p> <p>You use <a>DescribeStream</a> to determine the shard IDs that are specified in the <code>MergeShards</code> request. </p> <p>If you try to operate on too many streams in parallel using <a>CreateStream</a>, <a>DeleteStream</a>, <code>MergeShards</code> or <a>SplitShard</a>, you will receive a <code>LimitExceededException</code>. </p> <p><code>MergeShards</code> has limit of 5 transactions per second per account.</p>"
+      "documentation":"<p>Merges two adjacent shards in an Amazon Kinesis stream and combines them into a single shard to reduce the stream's capacity to ingest and transport data. Two shards are considered adjacent if the union of the hash key ranges for the two shards form a contiguous set with no gaps. For example, if you have two shards, one with a hash key range of 276...381 and the other with a hash key range of 382...454, then you could merge these two shards into a single shard that would have a hash key range of 276...454. After the merge, the single child shard receives data for all hash key values covered by the two parent shards.</p> <p> <code>MergeShards</code> is called when there is a need to reduce the overall capacity of a stream because of excess capacity that is not being used. You must specify the shard to be merged and the adjacent shard for a stream. For more information about merging shards, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html\">Merge Two Shards</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>If the stream is in the <code>ACTIVE</code> state, you can call <code>MergeShards</code>. If a stream is in the <code>CREATING</code>, <code>UPDATING</code>, or <code>DELETING</code> state, <code>MergeShards</code> returns a <code>ResourceInUseException</code>. If the specified stream does not exist, <code>MergeShards</code> returns a <code>ResourceNotFoundException</code>. </p> <p>You can use <a>DescribeStream</a> to check the state of the stream, which is returned in <code>StreamStatus</code>.</p> <p> <code>MergeShards</code> is an asynchronous operation. Upon receiving a <code>MergeShards</code> request, Amazon Kinesis immediately returns a response and sets the <code>StreamStatus</code> to <code>UPDATING</code>. After the operation is completed, Amazon Kinesis sets the <code>StreamStatus</code> to <code>ACTIVE</code>. Read and write operations continue to work while the stream is in the <code>UPDATING</code> state. </p> <p>You use <a>DescribeStream</a> to determine the shard IDs that are specified in the <code>MergeShards</code> request. </p> <p>If you try to operate on too many streams in parallel using <a>CreateStream</a>, <a>DeleteStream</a>, <code>MergeShards</code> or <a>SplitShard</a>, you will receive a <code>LimitExceededException</code>. </p> <p> <code>MergeShards</code> has limit of 5 transactions per second per account.</p>"
     },
     "PutRecord":{
       "name":"PutRecord",
@@ -216,7 +227,7 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"ProvisionedThroughputExceededException"}
       ],
-      "documentation":"<p>Writes a single data record into an Amazon Kinesis stream. Call <code>PutRecord</code> to send data into the stream for real-time ingestion and subsequent processing, one record at a time. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; a partition key; and the data blob itself.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis to distribute data across shards. Amazon Kinesis segregates the data records that belong to a stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to. </p> <p>Partition keys are Unicode strings, with a maximum length limit of 256 characters for each key. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards using the hash key ranges of the shards. You can override hashing the partition key to determine the shard by explicitly specifying a hash value using the <code>ExplicitHashKey</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p><code>PutRecord</code> returns the shard ID of where the data record was placed and the sequence number that was assigned to the data record.</p> <p>Sequence numbers increase over time and are specific to a shard within a stream, not across all shards within a stream. To guarantee strictly increasing ordering, write serially to a shard and use the <code>SequenceNumberForOrdering</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>If a <code>PutRecord</code> request cannot be processed because of insufficient provisioned throughput on the shard involved in the request, <code>PutRecord</code> throws <code>ProvisionedThroughputExceededException</code>. </p> <p>Data records are accessible for only 24 hours from the time that they are added to a stream.</p>"
+      "documentation":"<p>Writes a single data record into an Amazon Kinesis stream. Call <code>PutRecord</code> to send data into the stream for real-time ingestion and subsequent processing, one record at a time. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; a partition key; and the data blob itself.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis to distribute data across shards. Amazon Kinesis segregates the data records that belong to a stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to.</p> <p>Partition keys are Unicode strings, with a maximum length limit of 256 characters for each key. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards using the hash key ranges of the shards. You can override hashing the partition key to determine the shard by explicitly specifying a hash value using the <code>ExplicitHashKey</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p> <code>PutRecord</code> returns the shard ID of where the data record was placed and the sequence number that was assigned to the data record.</p> <p>Sequence numbers increase over time and are specific to a shard within a stream, not across all shards within a stream. To guarantee strictly increasing ordering, write serially to a shard and use the <code>SequenceNumberForOrdering</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>If a <code>PutRecord</code> request cannot be processed because of insufficient provisioned throughput on the shard involved in the request, <code>PutRecord</code> throws <code>ProvisionedThroughputExceededException</code>. </p> <p>Data records are accessible for only 24 hours from the time that they are added to a stream.</p>"
     },
     "PutRecords":{
       "name":"PutRecords",
@@ -261,7 +272,23 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Splits a shard into two new shards in the Amazon Kinesis stream to increase the stream's capacity to ingest and transport data. <code>SplitShard</code> is called when there is a need to increase the overall capacity of a stream because of an expected increase in the volume of data records being ingested. </p> <p>You can also use <code>SplitShard</code> when a shard appears to be approaching its maximum utilization; for example, the producers sending data into the specific shard are suddenly sending more than previously anticipated. You can also call <code>SplitShard</code> to increase stream capacity, so that more Amazon Kinesis applications can simultaneously read data from the stream for real-time processing. </p> <p>You must specify the shard to be split and the new hash key, which is the position in the shard where the shard gets split in two. In many cases, the new hash key might simply be the average of the beginning and ending hash key, but it can be any hash key value in the range being mapped into the shard. For more information about splitting shards, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html\">Split a Shard</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>You can use <a>DescribeStream</a> to determine the shard ID and hash key values for the <code>ShardToSplit</code> and <code>NewStartingHashKey</code> parameters that are specified in the <code>SplitShard</code> request.</p> <p><code>SplitShard</code> is an asynchronous operation. Upon receiving a <code>SplitShard</code> request, Amazon Kinesis immediately returns a response and sets the stream status to <code>UPDATING</code>. After the operation is completed, Amazon Kinesis sets the stream status to <code>ACTIVE</code>. Read and write operations continue to work while the stream is in the <code>UPDATING</code> state. </p> <p>You can use <code>DescribeStream</code> to check the status of the stream, which is returned in <code>StreamStatus</code>. If the stream is in the <code>ACTIVE</code> state, you can call <code>SplitShard</code>. If a stream is in <code>CREATING</code> or <code>UPDATING</code> or <code>DELETING</code> states, <code>DescribeStream</code> returns a <code>ResourceInUseException</code>.</p> <p>If the specified stream does not exist, <code>DescribeStream</code> returns a <code>ResourceNotFoundException</code>. If you try to create more shards than are authorized for your account, you receive a <code>LimitExceededException</code>. </p> <p>For the default shard limit for an AWS account, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>. If you need to increase this limit, <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact AWS Support</a>.</p> <p>If you try to operate on too many streams simultaneously using <a>CreateStream</a>, <a>DeleteStream</a>, <a>MergeShards</a>, and/or <a>SplitShard</a>, you receive a <code>LimitExceededException</code>. </p> <p><code>SplitShard</code> has limit of 5 transactions per second per account.</p>"
+      "documentation":"<p>Splits a shard into two new shards in the Amazon Kinesis stream to increase the stream's capacity to ingest and transport data. <code>SplitShard</code> is called when there is a need to increase the overall capacity of a stream because of an expected increase in the volume of data records being ingested. </p> <p>You can also use <code>SplitShard</code> when a shard appears to be approaching its maximum utilization; for example, the producers sending data into the specific shard are suddenly sending more than previously anticipated. You can also call <code>SplitShard</code> to increase stream capacity, so that more Amazon Kinesis applications can simultaneously read data from the stream for real-time processing. </p> <p>You must specify the shard to be split and the new hash key, which is the position in the shard where the shard gets split in two. In many cases, the new hash key might simply be the average of the beginning and ending hash key, but it can be any hash key value in the range being mapped into the shard. For more information about splitting shards, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html\">Split a Shard</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>You can use <a>DescribeStream</a> to determine the shard ID and hash key values for the <code>ShardToSplit</code> and <code>NewStartingHashKey</code> parameters that are specified in the <code>SplitShard</code> request.</p> <p> <code>SplitShard</code> is an asynchronous operation. Upon receiving a <code>SplitShard</code> request, Amazon Kinesis immediately returns a response and sets the stream status to <code>UPDATING</code>. After the operation is completed, Amazon Kinesis sets the stream status to <code>ACTIVE</code>. Read and write operations continue to work while the stream is in the <code>UPDATING</code> state. </p> <p>You can use <code>DescribeStream</code> to check the status of the stream, which is returned in <code>StreamStatus</code>. If the stream is in the <code>ACTIVE</code> state, you can call <code>SplitShard</code>. If a stream is in <code>CREATING</code> or <code>UPDATING</code> or <code>DELETING</code> states, <code>DescribeStream</code> returns a <code>ResourceInUseException</code>.</p> <p>If the specified stream does not exist, <code>DescribeStream</code> returns a <code>ResourceNotFoundException</code>. If you try to create more shards than are authorized for your account, you receive a <code>LimitExceededException</code>. </p> <p>For the default shard limit for an AWS account, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>. If you need to increase this limit, <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact AWS Support</a>.</p> <p>If you try to operate on too many streams simultaneously using <a>CreateStream</a>, <a>DeleteStream</a>, <a>MergeShards</a>, and/or <a>SplitShard</a>, you receive a <code>LimitExceededException</code>. </p> <p> <code>SplitShard</code> has limit of 5 transactions per second per account.</p>"
+    },
+    "UpdateShardCount":{
+      "name":"UpdateShardCount",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateShardCountInput"},
+      "output":{"shape":"UpdateShardCountOutput"},
+      "errors":[
+        {"shape":"InvalidArgumentException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Updates the shard count of the specified stream to the specified number of shards.</p> <p>Updating the shard count is an asynchronous operation. Upon receiving the request, Amazon Kinesis returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Amazon Kinesis sets the status of the stream back to <code>ACTIVE</code>. Depending on the size of the stream, the scaling action could take a few minutes to complete. You can continue to read and write data to your stream while its status is <code>UPDATING</code>.</p> <p>To update the shard count, Amazon Kinesis performs splits and merges and individual shards. This can cause short-lived shards to be created, in addition to the final shards. We recommend that you double or halve the shard count, as this results in the fewest number of splits or merges.</p> <p>This operation has a rate limit of twice per rolling 24 hour period. You cannot scale above double your current shard count, scale below half your current shard count, or exceed the shard limits for your account.</p> <p>For the default limits for an AWS account, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>. If you need to increase a limit, <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact AWS Support</a>.</p>"
     }
   },
   "shapes":{
@@ -283,7 +310,6 @@
       },
       "documentation":"<p>Represents the input for <code>AddTagsToStream</code>.</p>"
     },
-    "ApproximateArrivalTimestamp":{"type":"timestamp"},
     "BooleanObject":{"type":"boolean"},
     "CreateStreamInput":{
       "type":"structure",
@@ -320,7 +346,7 @@
           "documentation":"<p>The name of the stream to modify.</p>"
         },
         "RetentionPeriodHours":{
-          "shape":"RetentionPeriodHours",
+          "shape":"PositiveIntegerObject",
           "documentation":"<p>The new retention period of the stream, in hours. Must be less than the current retention period.</p>"
         }
       },
@@ -337,6 +363,28 @@
       },
       "documentation":"<p>Represents the input for <a>DeleteStream</a>.</p>"
     },
+    "DescribeLimitsInput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeLimitsOutput":{
+      "type":"structure",
+      "required":[
+        "ShardLimit",
+        "OpenShardCount"
+      ],
+      "members":{
+        "ShardLimit":{
+          "shape":"ShardCountObject",
+          "documentation":"<p>The maximum number of shards.</p>"
+        },
+        "OpenShardCount":{
+          "shape":"ShardCountObject",
+          "documentation":"<p>The number of open shards.</p>"
+        }
+      }
+    },
     "DescribeStreamInput":{
       "type":"structure",
       "required":["StreamName"],
@@ -347,7 +395,7 @@
         },
         "Limit":{
           "shape":"DescribeStreamInputLimit",
-          "documentation":"<p>The maximum number of shards to return.</p>"
+          "documentation":"<p>The maximum number of shards to return in a single call. The default value is 100. If you specify a value greater than 100, at most 100 shards are returned.</p>"
         },
         "ExclusiveStartShardId":{
           "shape":"ShardId",
@@ -367,7 +415,7 @@
       "members":{
         "StreamDescription":{
           "shape":"StreamDescription",
-          "documentation":"<p>The current status of the stream, the stream ARN, an array of shard objects that comprise the stream, and states whether there are more shards available.</p>"
+          "documentation":"<p>The current status of the stream, the stream ARN, an array of shard objects that comprise the stream, and whether there are more shards available.</p>"
         }
       },
       "documentation":"<p>Represents the output for <code>DescribeStream</code>.</p>"
@@ -385,7 +433,7 @@
         },
         "ShardLevelMetrics":{
           "shape":"MetricsNameList",
-          "documentation":"<p>List of shard-level metrics to disable.</p> <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\" disables every metric.</p> <ul> <li> <code>IncomingBytes</code> </li> <li> <code>IncomingRecords</code> </li> <li> <code>OutgoingBytes</code> </li> <li> <code>OutgoingRecords</code> </li> <li> <code>WriteProvisionedThroughputExceeded</code> </li> <li> <code>ReadProvisionedThroughputExceeded</code> </li> <li> <code>IteratorAgeMilliseconds</code> </li> <li> <code>ALL</code> </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html\">Monitoring the Amazon Kinesis Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p>"
+          "documentation":"<p>List of shard-level metrics to disable.</p> <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\" disables every metric.</p> <ul> <li> <p> <code>IncomingBytes</code> </p> </li> <li> <p> <code>IncomingRecords</code> </p> </li> <li> <p> <code>OutgoingBytes</code> </p> </li> <li> <p> <code>OutgoingRecords</code> </p> </li> <li> <p> <code>WriteProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>ReadProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>IteratorAgeMilliseconds</code> </p> </li> <li> <p> <code>ALL</code> </p> </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html\">Monitoring the Amazon Kinesis Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p>"
         }
       },
       "documentation":"<p>Represents the input for <a>DisableEnhancedMonitoring</a>.</p>"
@@ -403,7 +451,7 @@
         },
         "ShardLevelMetrics":{
           "shape":"MetricsNameList",
-          "documentation":"<p>List of shard-level metrics to enable.</p> <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\" enables every metric.</p> <ul> <li> <code>IncomingBytes</code> </li> <li> <code>IncomingRecords</code> </li> <li> <code>OutgoingBytes</code> </li> <li> <code>OutgoingRecords</code> </li> <li> <code>WriteProvisionedThroughputExceeded</code> </li> <li> <code>ReadProvisionedThroughputExceeded</code> </li> <li> <code>IteratorAgeMilliseconds</code> </li> <li> <code>ALL</code> </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html\">Monitoring the Amazon Kinesis Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p>"
+          "documentation":"<p>List of shard-level metrics to enable.</p> <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\" enables every metric.</p> <ul> <li> <p> <code>IncomingBytes</code> </p> </li> <li> <p> <code>IncomingRecords</code> </p> </li> <li> <p> <code>OutgoingBytes</code> </p> </li> <li> <p> <code>OutgoingRecords</code> </p> </li> <li> <p> <code>WriteProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>ReadProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>IteratorAgeMilliseconds</code> </p> </li> <li> <p> <code>ALL</code> </p> </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html\">Monitoring the Amazon Kinesis Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p>"
         }
       },
       "documentation":"<p>Represents the input for <a>EnableEnhancedMonitoring</a>.</p>"
@@ -413,7 +461,7 @@
       "members":{
         "ShardLevelMetrics":{
           "shape":"MetricsNameList",
-          "documentation":"<p>List of shard-level metrics.</p> <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\" enhances every metric.</p> <ul> <li> <code>IncomingBytes</code> </li> <li> <code>IncomingRecords</code> </li> <li> <code>OutgoingBytes</code> </li> <li> <code>OutgoingRecords</code> </li> <li> <code>WriteProvisionedThroughputExceeded</code> </li> <li> <code>ReadProvisionedThroughputExceeded</code> </li> <li> <code>IteratorAgeMilliseconds</code> </li> <li> <code>ALL</code> </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html\">Monitoring the Amazon Kinesis Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p>"
+          "documentation":"<p>List of shard-level metrics.</p> <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\" enhances every metric.</p> <ul> <li> <p> <code>IncomingBytes</code> </p> </li> <li> <p> <code>IncomingRecords</code> </p> </li> <li> <p> <code>OutgoingBytes</code> </p> </li> <li> <p> <code>OutgoingRecords</code> </p> </li> <li> <p> <code>WriteProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>ReadProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>IteratorAgeMilliseconds</code> </p> </li> <li> <p> <code>ALL</code> </p> </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html\">Monitoring the Amazon Kinesis Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p>"
         }
       },
       "documentation":"<p>Represents enhanced metrics types.</p>"
@@ -510,7 +558,7 @@
         },
         "ShardIteratorType":{
           "shape":"ShardIteratorType",
-          "documentation":"<p>Determines how the shard iterator is used to start reading data records from the shard.</p> <p>The following are the valid Amazon Kinesis shard iterator types:</p> <ul> <li>AT_SEQUENCE_NUMBER - Start reading from the position denoted by a specific sequence number, provided in the value <code>StartingSequenceNumber</code>.</li> <li>AFTER_SEQUENCE_NUMBER - Start reading right after the position denoted by a specific sequence number, provided in the value <code>StartingSequenceNumber</code>.</li> <li>AT_TIMESTAMP - Start reading from the position denoted by a specific timestamp, provided in the value <code>Timestamp</code>.</li> <li>TRIM_HORIZON - Start reading at the last untrimmed record in the shard in the system, which is the oldest data record in the shard.</li> <li>LATEST - Start reading just after the most recent record in the shard, so that you always read the most recent data in the shard.</li> </ul>"
+          "documentation":"<p>Determines how the shard iterator is used to start reading data records from the shard.</p> <p>The following are the valid Amazon Kinesis shard iterator types:</p> <ul> <li><p>AT_SEQUENCE_NUMBER - Start reading from the position denoted by a specific sequence number, provided in the value <code>StartingSequenceNumber</code>.</p> </li> <li><p>AFTER_SEQUENCE_NUMBER - Start reading right after the position denoted by a specific sequence number, provided in the value <code>StartingSequenceNumber</code>.</p> </li> <li><p>AT_TIMESTAMP - Start reading from the position denoted by a specific timestamp, provided in the value <code>Timestamp</code>.</p> </li> <li><p>TRIM_HORIZON - Start reading at the last untrimmed record in the shard in the system, which is the oldest data record in the shard.</p> </li> <li><p>LATEST - Start reading just after the most recent record in the shard, so that you always read the most recent data in the shard.</p> </li> </ul>"
         },
         "StartingSequenceNumber":{
           "shape":"SequenceNumber",
@@ -567,7 +615,7 @@
           "documentation":"<p>The name of the stream to modify.</p>"
         },
         "RetentionPeriodHours":{
-          "shape":"RetentionPeriodHours",
+          "shape":"PositiveIntegerObject",
           "documentation":"<p>The new retention period of the stream, in hours. Must be more than the current retention period.</p>"
         }
       },
@@ -755,7 +803,7 @@
         },
         "Data":{
           "shape":"Data",
-          "documentation":"<p>The data blob to put into the record, which is base64-encoded when the blob is serialized. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB). </p>"
+          "documentation":"<p>The data blob to put into the record, which is base64-encoded when the blob is serialized. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB).</p>"
         },
         "PartitionKey":{
           "shape":"PartitionKey",
@@ -821,7 +869,7 @@
           "documentation":"<p>An array of successfully and unsuccessfully processed record results, correlated with the request by natural ordering. A record that is successfully added to a stream includes <code>SequenceNumber</code> and <code>ShardId</code> in the result. A record that fails to be added to a stream includes <code>ErrorCode</code> and <code>ErrorMessage</code> in the result.</p>"
         }
       },
-      "documentation":"<p><code>PutRecords</code> results.</p>"
+      "documentation":"<p> <code>PutRecords</code> results.</p>"
     },
     "PutRecordsRequestEntry":{
       "type":"structure",
@@ -892,7 +940,7 @@
           "documentation":"<p>The unique identifier of the record in the stream.</p>"
         },
         "ApproximateArrivalTimestamp":{
-          "shape":"ApproximateArrivalTimestamp",
+          "shape":"Timestamp",
           "documentation":"<p>The approximate time that the record was inserted into the stream.</p>"
         },
         "Data":{
@@ -947,13 +995,12 @@
           "documentation":"<p>A message that provides information about the error.</p>"
         }
       },
-      "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly, or it might not be in the <code>ACTIVE</code> state if the operation requires it.</p>",
+      "documentation":"<p>The requested resource could not be found. The stream might not be specified correctly.</p>",
       "exception":true
     },
-    "RetentionPeriodHours":{
-      "type":"integer",
-      "max":168,
-      "min":24
+    "ScalingType":{
+      "type":"string",
+      "enum":["UNIFORM_SCALING"]
     },
     "SequenceNumber":{
       "type":"string",
@@ -1004,6 +1051,11 @@
         }
       },
       "documentation":"<p>A uniquely identified group of data records in an Amazon Kinesis stream.</p>"
+    },
+    "ShardCountObject":{
+      "type":"integer",
+      "max":1000000,
+      "min":0
     },
     "ShardId":{
       "type":"string",
@@ -1063,6 +1115,7 @@
         "Shards",
         "HasMoreShards",
         "RetentionPeriodHours",
+        "StreamCreationTimestamp",
         "EnhancedMonitoring"
       ],
       "members":{
@@ -1076,7 +1129,7 @@
         },
         "StreamStatus":{
           "shape":"StreamStatus",
-          "documentation":"<p>The current status of the stream being described. The stream status is one of the following states:</p> <ul> <li><code>CREATING</code> - The stream is being created. Amazon Kinesis immediately returns and sets <code>StreamStatus</code> to <code>CREATING</code>.</li> <li><code>DELETING</code> - The stream is being deleted. The specified stream is in the <code>DELETING</code> state until Amazon Kinesis completes the deletion.</li> <li><code>ACTIVE</code> - The stream exists and is ready for read and write operations or deletion. You should perform read and write operations only on an <code>ACTIVE</code> stream.</li> <li><code>UPDATING</code> - Shards in the stream are being merged or split. Read and write operations continue to work while the stream is in the <code>UPDATING</code> state.</li> </ul>"
+          "documentation":"<p>The current status of the stream being described. The stream status is one of the following states:</p> <ul> <li> <p> <code>CREATING</code> - The stream is being created. Amazon Kinesis immediately returns and sets <code>StreamStatus</code> to <code>CREATING</code>.</p> </li> <li> <p> <code>DELETING</code> - The stream is being deleted. The specified stream is in the <code>DELETING</code> state until Amazon Kinesis completes the deletion.</p> </li> <li> <p> <code>ACTIVE</code> - The stream exists and is ready for read and write operations or deletion. You should perform read and write operations only on an <code>ACTIVE</code> stream.</p> </li> <li> <p> <code>UPDATING</code> - Shards in the stream are being merged or split. Read and write operations continue to work while the stream is in the <code>UPDATING</code> state.</p> </li> </ul>"
         },
         "Shards":{
           "shape":"ShardList",
@@ -1087,8 +1140,12 @@
           "documentation":"<p>If set to <code>true</code>, more shards in the stream are available to describe.</p>"
         },
         "RetentionPeriodHours":{
-          "shape":"RetentionPeriodHours",
+          "shape":"PositiveIntegerObject",
           "documentation":"<p>The current retention period, in hours.</p>"
+        },
+        "StreamCreationTimestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The approximate time that the stream was created.</p>"
         },
         "EnhancedMonitoring":{
           "shape":"EnhancedMonitoringList",
@@ -1159,7 +1216,46 @@
       "max":256,
       "min":0
     },
-    "Timestamp":{"type":"timestamp"}
+    "Timestamp":{"type":"timestamp"},
+    "UpdateShardCountInput":{
+      "type":"structure",
+      "required":[
+        "StreamName",
+        "TargetShardCount",
+        "ScalingType"
+      ],
+      "members":{
+        "StreamName":{
+          "shape":"StreamName",
+          "documentation":"<p>The name of the stream.</p>"
+        },
+        "TargetShardCount":{
+          "shape":"PositiveIntegerObject",
+          "documentation":"<p>The new number of shards.</p>"
+        },
+        "ScalingType":{
+          "shape":"ScalingType",
+          "documentation":"<p>The scaling type. Uniform scaling creates shards of equal size.</p>"
+        }
+      }
+    },
+    "UpdateShardCountOutput":{
+      "type":"structure",
+      "members":{
+        "StreamName":{
+          "shape":"StreamName",
+          "documentation":"<p>The name of the stream.</p>"
+        },
+        "CurrentShardCount":{
+          "shape":"PositiveIntegerObject",
+          "documentation":"<p>The current number of shards.</p>"
+        },
+        "TargetShardCount":{
+          "shape":"PositiveIntegerObject",
+          "documentation":"<p>The updated number of shards.</p>"
+        }
+      }
+    }
   },
   "documentation":"<fullname>Amazon Kinesis Streams Service API Reference</fullname> <p>Amazon Kinesis Streams is a managed service that scales elastically for real time processing of streaming big data.</p>"
 }

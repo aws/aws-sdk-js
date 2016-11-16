@@ -28,7 +28,7 @@
         {"shape":"ClientException"},
         {"shape":"ServiceException"}
       ],
-      "documentation":"<p>If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. <i>AddIpRoutes</i> adds this address block. You can also use <i>AddIpRoutes</i> to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC. </p>"
+      "documentation":"<p>If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. <i>AddIpRoutes</i> adds this address block. You can also use <i>AddIpRoutes</i> to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC. </p> <p>Before you call <i>AddIpRoutes</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>AddIpRoutes</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "AddTagsToResource":{
       "name":"AddTagsToResource",
@@ -45,7 +45,22 @@
         {"shape":"ClientException"},
         {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 10 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.</p>"
+      "documentation":"<p>Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.</p>"
+    },
+    "CancelSchemaExtension":{
+      "name":"CancelSchemaExtension",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CancelSchemaExtensionRequest"},
+      "output":{"shape":"CancelSchemaExtensionResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Cancels an in-progress schema extension to a Microsoft AD directory. Once a schema extension has started replicating to all domain controllers, the task can no longer be canceled. A schema extension can be canceled during any of the following states; <code>Initializing</code>, <code>CreatingSnapshot</code>, and <code>UpdatingSchema</code>.</p>"
     },
     "ConnectDirectory":{
       "name":"ConnectDirectory",
@@ -61,7 +76,7 @@
         {"shape":"ClientException"},
         {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Creates an AD Connector to connect to an on-premises directory.</p>"
+      "documentation":"<p>Creates an AD Connector to connect to an on-premises directory.</p> <p>Before you call <i>ConnectDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>ConnectDirectory</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "CreateAlias":{
       "name":"CreateAlias",
@@ -133,7 +148,7 @@
         {"shape":"ClientException"},
         {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Creates a Simple AD directory.</p>"
+      "documentation":"<p>Creates a Simple AD directory.</p> <p>Before you call <i>CreateDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateDirectory</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "CreateMicrosoftAD":{
       "name":"CreateMicrosoftAD",
@@ -150,7 +165,7 @@
         {"shape":"ServiceException"},
         {"shape":"UnsupportedOperationException"}
       ],
-      "documentation":"<p>Creates a Microsoft AD in the AWS cloud.</p>"
+      "documentation":"<p>Creates a Microsoft AD in the AWS cloud.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "CreateSnapshot":{
       "name":"CreateSnapshot",
@@ -218,7 +233,7 @@
         {"shape":"ClientException"},
         {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Deletes an AWS Directory Service directory.</p>"
+      "documentation":"<p>Deletes an AWS Directory Service directory.</p> <p>Before you call <i>DeleteDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>DeleteDirectory</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "DeleteSnapshot":{
       "name":"DeleteSnapshot",
@@ -468,6 +483,22 @@
       ],
       "documentation":"<p>Lists the address blocks that you have added to a directory.</p>"
     },
+    "ListSchemaExtensions":{
+      "name":"ListSchemaExtensions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListSchemaExtensionsRequest"},
+      "output":{"shape":"ListSchemaExtensionsResult"},
+      "errors":[
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Lists all schema extensions applied to a Microsoft AD Directory.</p>"
+    },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
       "http":{
@@ -549,6 +580,24 @@
         {"shape":"ServiceException"}
       ],
       "documentation":"<p>Restores a directory using an existing directory snapshot.</p> <p>When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten.</p> <p>This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the <a>DescribeDirectories</a> operation with the directory identifier. When the <b>DirectoryDescription.Stage</b> value changes to <code>Active</code>, the restore operation is complete.</p>"
+    },
+    "StartSchemaExtension":{
+      "name":"StartSchemaExtension",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartSchemaExtensionRequest"},
+      "output":{"shape":"StartSchemaExtensionResult"},
+      "errors":[
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"SnapshotLimitExceededException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Applies a schema extension to a Microsoft AD directory.</p>"
     },
     "UpdateConditionalForwarder":{
       "name":"UpdateConditionalForwarder",
@@ -705,6 +754,28 @@
     "AvailabilityZones":{
       "type":"list",
       "member":{"shape":"AvailabilityZone"}
+    },
+    "CancelSchemaExtensionRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "SchemaExtensionId"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The identifier of the directory whose schema extension will be canceled.</p>"
+        },
+        "SchemaExtensionId":{
+          "shape":"SchemaExtensionId",
+          "documentation":"<p>The identifier of the schema extension that will be canceled.</p>"
+        }
+      }
+    },
+    "CancelSchemaExtensionResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "CidrIp":{
       "type":"string",
@@ -1014,6 +1085,7 @@
       },
       "documentation":"<p>Result of a CreateMicrosoftAD request.</p>"
     },
+    "CreateSnapshotBeforeSchemaExtension":{"type":"boolean"},
     "CreateSnapshotRequest":{
       "type":"structure",
       "required":["DirectoryId"],
@@ -1745,6 +1817,7 @@
       },
       "documentation":"<p>Contains the results of the <a>EnableSso</a> operation.</p>"
     },
+    "EndDateTime":{"type":"timestamp"},
     "EntityAlreadyExistsException":{
       "type":"structure",
       "members":{
@@ -1944,6 +2017,11 @@
     },
     "LastUpdatedDateTime":{"type":"timestamp"},
     "LaunchTime":{"type":"timestamp"},
+    "LdifContent":{
+      "type":"string",
+      "max":500000,
+      "min":1
+    },
     "Limit":{
       "type":"integer",
       "min":0
@@ -1976,6 +2054,37 @@
         "NextToken":{
           "shape":"NextToken",
           "documentation":"<p>If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.</p>"
+        }
+      }
+    },
+    "ListSchemaExtensionsRequest":{
+      "type":"structure",
+      "required":["DirectoryId"],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The identifier of the directory from which to retrieve the schema extension information.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <code>ListSchemaExtensions.NextToken</code> value from a previous call to <code>ListSchemaExtensions</code>. Pass null if this is the first call.</p>"
+        },
+        "Limit":{
+          "shape":"Limit",
+          "documentation":"<p>The maximum number of items to return.</p>"
+        }
+      }
+    },
+    "ListSchemaExtensionsResult":{
+      "type":"structure",
+      "members":{
+        "SchemaExtensionsInfo":{
+          "shape":"SchemaExtensionsInfo",
+          "documentation":"<p>Information about the schema extensions applied to the directory.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <code>ListSchemaExtensions</code> to retrieve the next set of items.</p>"
         }
       }
     },
@@ -2215,6 +2324,63 @@
       "min":1,
       "pattern":"[&\\w+-.@]+"
     },
+    "SchemaExtensionId":{
+      "type":"string",
+      "pattern":"^e-[0-9a-f]{10}$"
+    },
+    "SchemaExtensionInfo":{
+      "type":"structure",
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The identifier of the directory to which the schema extension is applied.</p>"
+        },
+        "SchemaExtensionId":{
+          "shape":"SchemaExtensionId",
+          "documentation":"<p>The identifier of the schema extension.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>A description of the schema extension.</p>"
+        },
+        "SchemaExtensionStatus":{
+          "shape":"SchemaExtensionStatus",
+          "documentation":"<p>The current status of the schema extension.</p>"
+        },
+        "SchemaExtensionStatusReason":{
+          "shape":"SchemaExtensionStatusReason",
+          "documentation":"<p>The reason for the <code>SchemaExtensionStatus</code>.</p>"
+        },
+        "StartDateTime":{
+          "shape":"StartDateTime",
+          "documentation":"<p>The date and time that the schema extension started being applied to the directory.</p>"
+        },
+        "EndDateTime":{
+          "shape":"EndDateTime",
+          "documentation":"<p>The date and time that the schema extension was completed.</p>"
+        }
+      },
+      "documentation":"<p>Information about a schema extension.</p>"
+    },
+    "SchemaExtensionStatus":{
+      "type":"string",
+      "enum":[
+        "Initializing",
+        "CreatingSnapshot",
+        "UpdatingSchema",
+        "Replicating",
+        "CancelInProgress",
+        "RollbackInProgress",
+        "Cancelled",
+        "Failed",
+        "Completed"
+      ]
+    },
+    "SchemaExtensionStatusReason":{"type":"string"},
+    "SchemaExtensionsInfo":{
+      "type":"list",
+      "member":{"shape":"SchemaExtensionInfo"}
+    },
     "SecurityGroupId":{
       "type":"string",
       "pattern":"^(sg-[0-9a-f]{8})$"
@@ -2332,6 +2498,43 @@
     },
     "SsoEnabled":{"type":"boolean"},
     "StageReason":{"type":"string"},
+    "StartDateTime":{"type":"timestamp"},
+    "StartSchemaExtensionRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "CreateSnapshotBeforeSchemaExtension",
+        "LdifContent",
+        "Description"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>The identifier of the directory for which the schema extension will be applied to.</p>"
+        },
+        "CreateSnapshotBeforeSchemaExtension":{
+          "shape":"CreateSnapshotBeforeSchemaExtension",
+          "documentation":"<p>If true, creates a snapshot of the directory before applying the schema extension.</p>"
+        },
+        "LdifContent":{
+          "shape":"LdifContent",
+          "documentation":"<p>The LDIF file represented as a string. The file size can be no larger than 1MB.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>A description of the schema extension.</p>"
+        }
+      }
+    },
+    "StartSchemaExtensionResult":{
+      "type":"structure",
+      "members":{
+        "SchemaExtensionId":{
+          "shape":"SchemaExtensionId",
+          "documentation":"<p>The identifier of the schema extension that will be applied.</p>"
+        }
+      }
+    },
     "StartTime":{"type":"timestamp"},
     "StateLastUpdatedDateTime":{"type":"timestamp"},
     "SubnetId":{

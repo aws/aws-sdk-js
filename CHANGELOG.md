@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.1-->
+<!--LATEST=2.7.2-->
 <!--ENTRYINSERT-->
+
+## 2.7.2
+* feature: ElastiCache: Additional parameter to 2 create apis to provide an auth Token for Redis.
+* feature: DirectoryService: Adds support for SchemaExtensions.
+* feature: Kinesis: Adds DescribeLimits API which displays customer's current shard limit and the number of open shards that are being used. Also adds a 'display stream creation timestamp' feature to DescribeStream API.
 
 ## 2.7.1
 * feature: CognitoIdentityServiceProvider: Adds schema attributes to CreateUserPool.

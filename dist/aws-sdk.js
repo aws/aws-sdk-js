@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.1
+// AWS SDK for JavaScript v2.7.2
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -33793,7 +33793,8 @@ module.exports={
           "SnapshotRetentionLimit": {
             "type": "integer"
           },
-          "SnapshotWindow": {}
+          "SnapshotWindow": {},
+          "AuthToken": {}
         }
       },
       "output": {
@@ -33940,7 +33941,8 @@ module.exports={
           "SnapshotRetentionLimit": {
             "type": "integer"
           },
-          "SnapshotWindow": {}
+          "SnapshotWindow": {},
+          "AuthToken": {}
         }
       },
       "output": {
@@ -48286,6 +48288,27 @@ module.exports={
         }
       }
     },
+    "DescribeLimits": {
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ShardLimit",
+          "OpenShardCount"
+        ],
+        "members": {
+          "ShardLimit": {
+            "type": "integer"
+          },
+          "OpenShardCount": {
+            "type": "integer"
+          }
+        }
+      }
+    },
     "DescribeStream": {
       "input": {
         "type": "structure",
@@ -48315,6 +48338,7 @@ module.exports={
               "Shards",
               "HasMoreShards",
               "RetentionPeriodHours",
+              "StreamCreationTimestamp",
               "EnhancedMonitoring"
             ],
             "members": {
@@ -48364,13 +48388,16 @@ module.exports={
               "RetentionPeriodHours": {
                 "type": "integer"
               },
+              "StreamCreationTimestamp": {
+                "type": "timestamp"
+              },
               "EnhancedMonitoring": {
                 "type": "list",
                 "member": {
                   "type": "structure",
                   "members": {
                     "ShardLevelMetrics": {
-                      "shape": "Sr"
+                      "shape": "Su"
                     }
                   }
                 }
@@ -48390,12 +48417,12 @@ module.exports={
         "members": {
           "StreamName": {},
           "ShardLevelMetrics": {
-            "shape": "Sr"
+            "shape": "Su"
           }
         }
       },
       "output": {
-        "shape": "Su"
+        "shape": "Sx"
       }
     },
     "EnableEnhancedMonitoring": {
@@ -48408,12 +48435,12 @@ module.exports={
         "members": {
           "StreamName": {},
           "ShardLevelMetrics": {
-            "shape": "Sr"
+            "shape": "Su"
           }
         }
       },
       "output": {
-        "shape": "Su"
+        "shape": "Sx"
       }
     },
     "GetRecords": {
@@ -48697,22 +48724,51 @@ module.exports={
           "NewStartingHashKey": {}
         }
       }
+    },
+    "UpdateShardCount": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StreamName",
+          "TargetShardCount",
+          "ScalingType"
+        ],
+        "members": {
+          "StreamName": {},
+          "TargetShardCount": {
+            "type": "integer"
+          },
+          "ScalingType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StreamName": {},
+          "CurrentShardCount": {
+            "type": "integer"
+          },
+          "TargetShardCount": {
+            "type": "integer"
+          }
+        }
+      }
     }
   },
   "shapes": {
-    "Sr": {
+    "Su": {
       "type": "list",
       "member": {}
     },
-    "Su": {
+    "Sx": {
       "type": "structure",
       "members": {
         "StreamName": {},
         "CurrentShardLevelMetrics": {
-          "shape": "Sr"
+          "shape": "Su"
         },
         "DesiredShardLevelMetrics": {
-          "shape": "Sr"
+          "shape": "Su"
         }
       }
     }
@@ -83803,7 +83859,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.1',
+  VERSION: '2.7.2',
 
 
   Signers: {},
@@ -88407,7 +88463,7 @@ AWS.Service = inherit({
     if (typeof this.constructor.prototype.customRequestHandler === 'function') {
       this.constructor.prototype.customRequestHandler(request);
     }
-    if (typeof this.customRequestHandler === 'function') {
+    if (Object.prototype.hasOwnProperty.call(this, 'customRequestHandler') && typeof this.customRequestHandler === 'function') {
       this.customRequestHandler(request);
     }
   },
