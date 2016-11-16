@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.2
+// AWS SDK for JavaScript v2.7.3
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -69109,7 +69109,21 @@ module.exports={
             "members": {
               "Comment": {},
               "Changes": {
-                "shape": "Se"
+                "type": "list",
+                "member": {
+                  "locationName": "Change",
+                  "type": "structure",
+                  "required": [
+                    "Action",
+                    "ResourceRecordSet"
+                  ],
+                  "members": {
+                    "Action": {},
+                    "ResourceRecordSet": {
+                      "shape": "Sh"
+                    }
+                  }
+                }
               }
             }
           }
@@ -69422,6 +69436,44 @@ module.exports={
         }
       }
     },
+    "CreateVPCAssociationAuthorization": {
+      "http": {
+        "requestUri": "/2013-04-01/hostedzone/{Id}/authorizevpcassociation"
+      },
+      "input": {
+        "locationName": "CreateVPCAssociationAuthorizationRequest",
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "type": "structure",
+        "required": [
+          "HostedZoneId",
+          "VPC"
+        ],
+        "members": {
+          "HostedZoneId": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "VPC": {
+            "shape": "S3"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "HostedZoneId",
+          "VPC"
+        ],
+        "members": {
+          "HostedZoneId": {},
+          "VPC": {
+            "shape": "S3"
+          }
+        }
+      }
+    },
     "DeleteHealthCheck": {
       "http": {
         "method": "DELETE",
@@ -69545,6 +69597,35 @@ module.exports={
         "members": {}
       }
     },
+    "DeleteVPCAssociationAuthorization": {
+      "http": {
+        "requestUri": "/2013-04-01/hostedzone/{Id}/deauthorizevpcassociation"
+      },
+      "input": {
+        "locationName": "DeleteVPCAssociationAuthorizationRequest",
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "type": "structure",
+        "required": [
+          "HostedZoneId",
+          "VPC"
+        ],
+        "members": {
+          "HostedZoneId": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "VPC": {
+            "shape": "S3"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "DisassociateVPCFromHostedZone": {
       "http": {
         "requestUri": "/2013-04-01/hostedzone/{Id}/disassociatevpc"
@@ -69610,38 +69691,6 @@ module.exports={
           }
         }
       }
-    },
-    "GetChangeDetails": {
-      "http": {
-        "method": "GET",
-        "requestUri": "/2013-04-01/changedetails/{Id}"
-      },
-      "input": {
-        "type": "structure",
-        "required": [
-          "Id"
-        ],
-        "members": {
-          "Id": {
-            "location": "uri",
-            "locationName": "Id"
-          }
-        },
-        "deprecated": true
-      },
-      "output": {
-        "type": "structure",
-        "required": [
-          "ChangeBatchRecord"
-        ],
-        "members": {
-          "ChangeBatchRecord": {
-            "shape": "S3i"
-          }
-        },
-        "deprecated": true
-      },
-      "deprecated": true
     },
     "GetCheckerIpRanges": {
       "http": {
@@ -69837,11 +69886,7 @@ module.exports={
             "shape": "S2i"
           },
           "VPCs": {
-            "type": "list",
-            "member": {
-              "shape": "S3",
-              "locationName": "VPC"
-            }
+            "shape": "S49"
           }
         }
       }
@@ -69981,140 +70026,6 @@ module.exports={
         }
       }
     },
-    "ListChangeBatchesByHostedZone": {
-      "http": {
-        "method": "GET",
-        "requestUri": "/2013-04-01/hostedzone/{Id}/changes"
-      },
-      "input": {
-        "type": "structure",
-        "required": [
-          "HostedZoneId",
-          "StartDate",
-          "EndDate"
-        ],
-        "members": {
-          "HostedZoneId": {
-            "location": "uri",
-            "locationName": "Id"
-          },
-          "StartDate": {
-            "shape": "S4n",
-            "location": "querystring",
-            "locationName": "startDate"
-          },
-          "EndDate": {
-            "shape": "S4n",
-            "location": "querystring",
-            "locationName": "endDate"
-          },
-          "MaxItems": {
-            "location": "querystring",
-            "locationName": "maxItems"
-          },
-          "Marker": {
-            "location": "querystring",
-            "locationName": "marker"
-          }
-        },
-        "deprecated": true
-      },
-      "output": {
-        "type": "structure",
-        "required": [
-          "MaxItems",
-          "Marker",
-          "ChangeBatchRecords"
-        ],
-        "members": {
-          "MaxItems": {},
-          "Marker": {},
-          "IsTruncated": {
-            "type": "boolean"
-          },
-          "ChangeBatchRecords": {
-            "shape": "S4s"
-          },
-          "NextMarker": {}
-        },
-        "deprecated": true
-      },
-      "deprecated": true
-    },
-    "ListChangeBatchesByRRSet": {
-      "http": {
-        "method": "GET",
-        "requestUri": "/2013-04-01/hostedzone/{Id}/rrsChanges"
-      },
-      "input": {
-        "type": "structure",
-        "required": [
-          "HostedZoneId",
-          "Name",
-          "Type",
-          "StartDate",
-          "EndDate"
-        ],
-        "members": {
-          "HostedZoneId": {
-            "location": "uri",
-            "locationName": "Id"
-          },
-          "Name": {
-            "location": "querystring",
-            "locationName": "rrSet_name"
-          },
-          "Type": {
-            "location": "querystring",
-            "locationName": "type"
-          },
-          "SetIdentifier": {
-            "location": "querystring",
-            "locationName": "identifier"
-          },
-          "StartDate": {
-            "shape": "S4n",
-            "location": "querystring",
-            "locationName": "startDate"
-          },
-          "EndDate": {
-            "shape": "S4n",
-            "location": "querystring",
-            "locationName": "endDate"
-          },
-          "MaxItems": {
-            "location": "querystring",
-            "locationName": "maxItems"
-          },
-          "Marker": {
-            "location": "querystring",
-            "locationName": "marker"
-          }
-        },
-        "deprecated": true
-      },
-      "output": {
-        "type": "structure",
-        "required": [
-          "MaxItems",
-          "Marker",
-          "ChangeBatchRecords"
-        ],
-        "members": {
-          "MaxItems": {},
-          "Marker": {},
-          "IsTruncated": {
-            "type": "boolean"
-          },
-          "ChangeBatchRecords": {
-            "shape": "S4s"
-          },
-          "NextMarker": {}
-        },
-        "deprecated": true
-      },
-      "deprecated": true
-    },
     "ListGeoLocations": {
       "http": {
         "method": "GET",
@@ -70241,7 +70152,7 @@ module.exports={
         ],
         "members": {
           "HostedZones": {
-            "shape": "S53"
+            "shape": "S4x"
           },
           "Marker": {},
           "IsTruncated": {
@@ -70283,7 +70194,7 @@ module.exports={
         ],
         "members": {
           "HostedZones": {
-            "shape": "S53"
+            "shape": "S4x"
           },
           "DNSName": {},
           "HostedZoneId": {},
@@ -70426,7 +70337,7 @@ module.exports={
         ],
         "members": {
           "ResourceTagSet": {
-            "shape": "S5e"
+            "shape": "S58"
           }
         }
       }
@@ -70467,7 +70378,7 @@ module.exports={
           "ResourceTagSets": {
             "type": "list",
             "member": {
-              "shape": "S5e",
+              "shape": "S58",
               "locationName": "ResourceTagSet"
             }
           }
@@ -70569,7 +70480,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstances": {
-            "shape": "S5p"
+            "shape": "S5j"
           },
           "HostedZoneIdMarker": {},
           "TrafficPolicyInstanceNameMarker": {},
@@ -70619,7 +70530,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstances": {
-            "shape": "S5p"
+            "shape": "S5j"
           },
           "TrafficPolicyInstanceNameMarker": {},
           "TrafficPolicyInstanceTypeMarker": {},
@@ -70678,7 +70589,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstances": {
-            "shape": "S5p"
+            "shape": "S5j"
           },
           "HostedZoneIdMarker": {},
           "TrafficPolicyInstanceNameMarker": {},
@@ -70736,6 +70647,46 @@ module.exports={
           },
           "TrafficPolicyVersionMarker": {},
           "MaxItems": {}
+        }
+      }
+    },
+    "ListVPCAssociationAuthorizations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/hostedzone/{Id}/authorizevpcassociation"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "HostedZoneId"
+        ],
+        "members": {
+          "HostedZoneId": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nexttoken"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxresults"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "HostedZoneId",
+          "VPCs"
+        ],
+        "members": {
+          "HostedZoneId": {},
+          "NextToken": {},
+          "VPCs": {
+            "shape": "S49"
+          }
         }
       }
     },
@@ -71005,23 +70956,6 @@ module.exports={
           "type": "timestamp"
         },
         "Comment": {}
-      }
-    },
-    "Se": {
-      "type": "list",
-      "member": {
-        "locationName": "Change",
-        "type": "structure",
-        "required": [
-          "Action",
-          "ResourceRecordSet"
-        ],
-        "members": {
-          "Action": {},
-          "ResourceRecordSet": {
-            "shape": "Sh"
-          }
-        }
       }
     },
     "Sh": {
@@ -71314,26 +71248,6 @@ module.exports={
         "TrafficPolicyType": {}
       }
     },
-    "S3i": {
-      "type": "structure",
-      "required": [
-        "Id",
-        "Status"
-      ],
-      "members": {
-        "Id": {},
-        "SubmittedAt": {
-          "type": "timestamp"
-        },
-        "Status": {},
-        "Comment": {},
-        "Submitter": {},
-        "Changes": {
-          "shape": "Se"
-        }
-      },
-      "deprecated": true
-    },
     "S3q": {
       "type": "structure",
       "members": {
@@ -71365,26 +71279,21 @@ module.exports={
         }
       }
     },
-    "S4n": {
-      "type": "string",
-      "deprecated": true
-    },
-    "S4s": {
+    "S49": {
       "type": "list",
       "member": {
-        "shape": "S3i",
-        "locationName": "ChangeBatchRecord"
-      },
-      "deprecated": true
+        "shape": "S3",
+        "locationName": "VPC"
+      }
     },
-    "S53": {
+    "S4x": {
       "type": "list",
       "member": {
         "shape": "S2g",
         "locationName": "HostedZone"
       }
     },
-    "S5e": {
+    "S58": {
       "type": "structure",
       "members": {
         "ResourceType": {},
@@ -71394,7 +71303,7 @@ module.exports={
         }
       }
     },
-    "S5p": {
+    "S5j": {
       "type": "list",
       "member": {
         "shape": "S2w",
@@ -76169,6 +76078,352 @@ module.exports={
     "targetPrefix": "AWS242ServiceCatalogService"
   },
   "operations": {
+    "AcceptPortfolioShare": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "AssociatePrincipalWithPortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId",
+          "PrincipalARN",
+          "PrincipalType"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {},
+          "PrincipalARN": {},
+          "PrincipalType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "AssociateProductWithPortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId",
+          "PortfolioId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "ProductId": {},
+          "PortfolioId": {},
+          "SourcePortfolioId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "CreateConstraint": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId",
+          "ProductId",
+          "Parameters",
+          "Type",
+          "IdempotencyToken"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {},
+          "ProductId": {},
+          "Parameters": {},
+          "Type": {},
+          "Description": {},
+          "IdempotencyToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConstraintDetail": {
+            "shape": "Sh"
+          },
+          "ConstraintParameters": {},
+          "Status": {}
+        }
+      }
+    },
+    "CreatePortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DisplayName",
+          "ProviderName",
+          "IdempotencyToken"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "DisplayName": {},
+          "Description": {},
+          "ProviderName": {},
+          "Tags": {
+            "shape": "So"
+          },
+          "IdempotencyToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PortfolioDetail": {
+            "shape": "St"
+          },
+          "Tags": {
+            "shape": "Sw"
+          }
+        }
+      }
+    },
+    "CreatePortfolioShare": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId",
+          "AccountId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {},
+          "AccountId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "CreateProduct": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "Owner",
+          "ProductType",
+          "ProvisioningArtifactParameters",
+          "IdempotencyToken"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Name": {},
+          "Owner": {},
+          "Description": {},
+          "Distributor": {},
+          "SupportDescription": {},
+          "SupportEmail": {},
+          "SupportUrl": {},
+          "ProductType": {},
+          "Tags": {
+            "shape": "So"
+          },
+          "ProvisioningArtifactParameters": {
+            "shape": "S17"
+          },
+          "IdempotencyToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProductViewDetail": {
+            "shape": "S1f"
+          },
+          "ProvisioningArtifactDetail": {
+            "shape": "S1k"
+          },
+          "Tags": {
+            "shape": "Sw"
+          }
+        }
+      }
+    },
+    "CreateProvisioningArtifact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId",
+          "Parameters",
+          "IdempotencyToken"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "ProductId": {},
+          "Parameters": {
+            "shape": "S17"
+          },
+          "IdempotencyToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProvisioningArtifactDetail": {
+            "shape": "S1k"
+          },
+          "Info": {
+            "shape": "S1a"
+          },
+          "Status": {}
+        }
+      }
+    },
+    "DeleteConstraint": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeletePortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeletePortfolioShare": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId",
+          "AccountId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {},
+          "AccountId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteProduct": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteProvisioningArtifact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId",
+          "ProvisioningArtifactId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "ProductId": {},
+          "ProvisioningArtifactId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DescribeConstraint": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConstraintDetail": {
+            "shape": "Sh"
+          },
+          "ConstraintParameters": {},
+          "Status": {}
+        }
+      }
+    },
+    "DescribePortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PortfolioDetail": {
+            "shape": "St"
+          },
+          "Tags": {
+            "shape": "Sw"
+          }
+        }
+      }
+    },
     "DescribeProduct": {
       "input": {
         "type": "structure",
@@ -76184,10 +76439,33 @@ module.exports={
         "type": "structure",
         "members": {
           "ProductViewSummary": {
-            "shape": "S5"
+            "shape": "S1g"
           },
           "ProvisioningArtifacts": {
-            "shape": "Sf"
+            "shape": "S23"
+          }
+        }
+      }
+    },
+    "DescribeProductAsAdmin": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProductViewDetail": {
+            "shape": "S1f"
+          },
+          "Tags": {
+            "shape": "Sw"
           }
         }
       }
@@ -76207,11 +76485,37 @@ module.exports={
         "type": "structure",
         "members": {
           "ProductViewSummary": {
-            "shape": "S5"
+            "shape": "S1g"
           },
           "ProvisioningArtifacts": {
-            "shape": "Sf"
+            "shape": "S23"
           }
+        }
+      }
+    },
+    "DescribeProvisioningArtifact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProvisioningArtifactId",
+          "ProductId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "ProvisioningArtifactId": {},
+          "ProductId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProvisioningArtifactDetail": {
+            "shape": "S1k"
+          },
+          "Info": {
+            "shape": "S1a"
+          },
+          "Status": {}
         }
       }
     },
@@ -76257,7 +76561,7 @@ module.exports={
             }
           },
           "ConstraintSummaries": {
-            "shape": "Sy"
+            "shape": "S2o"
           },
           "UsageInstructions": {
             "type": "list",
@@ -76291,7 +76595,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S1a"
+            "shape": "S2y"
           },
           "RecordOutputs": {
             "type": "list",
@@ -76302,6 +76606,92 @@ module.exports={
                 "OutputValue": {},
                 "Description": {}
               }
+            }
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "DisassociatePrincipalFromPortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId",
+          "PrincipalARN"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {},
+          "PrincipalARN": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DisassociateProductFromPortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId",
+          "PortfolioId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "ProductId": {},
+          "PortfolioId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "ListAcceptedPortfolioShares": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "AcceptLanguage": {},
+          "PageToken": {},
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PortfolioDetails": {
+            "shape": "S3m"
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListConstraintsForPortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {},
+          "ProductId": {},
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConstraintDetails": {
+            "type": "list",
+            "member": {
+              "shape": "Sh"
             }
           },
           "NextPageToken": {}
@@ -76333,13 +76723,137 @@ module.exports={
               "members": {
                 "Id": {},
                 "ConstraintSummaries": {
-                  "shape": "Sy"
+                  "shape": "S2o"
                 },
                 "Tags": {
-                  "shape": "S1x"
+                  "shape": "Sw"
                 },
                 "Name": {}
               }
+            }
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListPortfolioAccess": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AccountIds": {
+            "type": "list",
+            "member": {}
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListPortfolios": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "AcceptLanguage": {},
+          "PageToken": {},
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PortfolioDetails": {
+            "shape": "S3m"
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListPortfoliosForProduct": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "ProductId": {},
+          "PageToken": {},
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PortfolioDetails": {
+            "shape": "S3m"
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListPrincipalsForPortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {},
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Principals": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "PrincipalARN": {},
+                "PrincipalType": {}
+              }
+            }
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListProvisioningArtifacts": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "ProductId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProvisioningArtifactDetails": {
+            "type": "list",
+            "member": {
+              "shape": "S1k"
             }
           },
           "NextPageToken": {}
@@ -76352,7 +76866,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "AccessLevelFilter": {
-            "shape": "S23"
+            "shape": "S4a"
           },
           "SearchFilter": {
             "type": "structure",
@@ -76373,7 +76887,7 @@ module.exports={
           "RecordDetails": {
             "type": "list",
             "member": {
-              "shape": "S1a"
+              "shape": "S2y"
             }
           },
           "NextPageToken": {}
@@ -76406,7 +76920,7 @@ module.exports={
             }
           },
           "Tags": {
-            "shape": "S1x"
+            "shape": "Sw"
           },
           "NotificationArns": {
             "type": "list",
@@ -76421,9 +76935,25 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S1a"
+            "shape": "S2y"
           }
         }
+      }
+    },
+    "RejectPortfolioShare": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PortfolioId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
       }
     },
     "ScanProvisionedProducts": {
@@ -76432,7 +76962,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "AccessLevelFilter": {
-            "shape": "S23"
+            "shape": "S4a"
           },
           "PageSize": {
             "type": "integer"
@@ -76472,12 +77002,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "Filters": {
-            "type": "map",
-            "key": {},
-            "value": {
-              "type": "list",
-              "member": {}
-            }
+            "shape": "S50"
           },
           "PageSize": {
             "type": "integer"
@@ -76493,7 +77018,7 @@ module.exports={
           "ProductViewSummaries": {
             "type": "list",
             "member": {
-              "shape": "S5"
+              "shape": "S1g"
             }
           },
           "ProductViewAggregations": {
@@ -76510,6 +77035,37 @@ module.exports={
                   }
                 }
               }
+            }
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "SearchProductsAsAdmin": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "AcceptLanguage": {},
+          "PortfolioId": {},
+          "Filters": {
+            "shape": "S50"
+          },
+          "SortBy": {},
+          "SortOrder": {},
+          "PageToken": {},
+          "PageSize": {
+            "type": "integer"
+          },
+          "ProductSource": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProductViewDetails": {
+            "type": "list",
+            "member": {
+              "shape": "S1f"
             }
           },
           "NextPageToken": {}
@@ -76538,7 +77094,98 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S1a"
+            "shape": "S2y"
+          }
+        }
+      }
+    },
+    "UpdateConstraint": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Id": {},
+          "Description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConstraintDetail": {
+            "shape": "Sh"
+          },
+          "ConstraintParameters": {},
+          "Status": {}
+        }
+      }
+    },
+    "UpdatePortfolio": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Id": {},
+          "DisplayName": {},
+          "Description": {},
+          "ProviderName": {},
+          "AddTags": {
+            "shape": "So"
+          },
+          "RemoveTags": {
+            "shape": "S5o"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PortfolioDetail": {
+            "shape": "St"
+          },
+          "Tags": {
+            "shape": "Sw"
+          }
+        }
+      }
+    },
+    "UpdateProduct": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "Id": {},
+          "Name": {},
+          "Owner": {},
+          "Description": {},
+          "Distributor": {},
+          "SupportDescription": {},
+          "SupportEmail": {},
+          "SupportUrl": {},
+          "AddTags": {
+            "shape": "So"
+          },
+          "RemoveTags": {
+            "shape": "S5o"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProductViewDetail": {
+            "shape": "S1f"
+          },
+          "Tags": {
+            "shape": "Sw"
           }
         }
       }
@@ -76578,14 +77225,119 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S1a"
+            "shape": "S2y"
           }
+        }
+      }
+    },
+    "UpdateProvisioningArtifact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProductId",
+          "ProvisioningArtifactId"
+        ],
+        "members": {
+          "AcceptLanguage": {},
+          "ProductId": {},
+          "ProvisioningArtifactId": {},
+          "Name": {},
+          "Description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProvisioningArtifactDetail": {
+            "shape": "S1k"
+          },
+          "Info": {
+            "shape": "S1a"
+          },
+          "Status": {}
         }
       }
     }
   },
   "shapes": {
-    "S5": {
+    "Sh": {
+      "type": "structure",
+      "members": {
+        "ConstraintId": {},
+        "Type": {},
+        "Description": {},
+        "Owner": {}
+      }
+    },
+    "So": {
+      "type": "list",
+      "member": {
+        "shape": "Sp"
+      }
+    },
+    "Sp": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "members": {
+        "Key": {},
+        "Value": {}
+      }
+    },
+    "St": {
+      "type": "structure",
+      "members": {
+        "Id": {},
+        "ARN": {},
+        "DisplayName": {},
+        "Description": {},
+        "CreatedTime": {
+          "type": "timestamp"
+        },
+        "ProviderName": {}
+      }
+    },
+    "Sw": {
+      "type": "list",
+      "member": {
+        "shape": "Sp"
+      }
+    },
+    "S17": {
+      "type": "structure",
+      "required": [
+        "Info"
+      ],
+      "members": {
+        "Name": {},
+        "Description": {},
+        "Info": {
+          "shape": "S1a"
+        },
+        "Type": {}
+      }
+    },
+    "S1a": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S1f": {
+      "type": "structure",
+      "members": {
+        "ProductViewSummary": {
+          "shape": "S1g"
+        },
+        "Status": {},
+        "ProductARN": {},
+        "CreatedTime": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "S1g": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -76603,7 +77355,19 @@ module.exports={
         "SupportUrl": {}
       }
     },
-    "Sf": {
+    "S1k": {
+      "type": "structure",
+      "members": {
+        "Id": {},
+        "Name": {},
+        "Description": {},
+        "Type": {},
+        "CreatedTime": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "S23": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -76617,7 +77381,7 @@ module.exports={
         }
       }
     },
-    "Sy": {
+    "S2o": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -76627,7 +77391,7 @@ module.exports={
         }
       }
     },
-    "S1a": {
+    "S2y": {
       "type": "structure",
       "members": {
         "RecordId": {},
@@ -76667,22 +77431,30 @@ module.exports={
         }
       }
     },
-    "S1x": {
+    "S3m": {
       "type": "list",
       "member": {
-        "type": "structure",
-        "members": {
-          "Key": {},
-          "Value": {}
-        }
+        "shape": "St"
       }
     },
-    "S23": {
+    "S4a": {
       "type": "structure",
       "members": {
         "Key": {},
         "Value": {}
       }
+    },
+    "S50": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "list",
+        "member": {}
+      }
+    },
+    "S5o": {
+      "type": "list",
+      "member": {}
     }
   }
 }
@@ -83859,7 +84631,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.2',
+  VERSION: '2.7.3',
 
 
   Signers: {},

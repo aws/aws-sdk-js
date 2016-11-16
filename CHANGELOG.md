@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.2-->
+<!--LATEST=2.7.3-->
 <!--ENTRYINSERT-->
+
+## 2.7.3
+* feature: Route53: Adds support for cross account VPC association.
+* feature: ServiceCatalog: This release enables Service Catalog users to perform administer operations via API.
 
 ## 2.7.2
 * feature: ElastiCache: Additional parameter to 2 create apis to provide an auth Token for Redis.

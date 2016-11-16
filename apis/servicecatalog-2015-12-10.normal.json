@@ -10,6 +10,223 @@
     "targetPrefix":"AWS242ServiceCatalogService"
   },
   "operations":{
+    "AcceptPortfolioShare":{
+      "name":"AcceptPortfolioShare",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AcceptPortfolioShareInput"},
+      "output":{"shape":"AcceptPortfolioShareOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Accepts an offer to share a portfolio.</p>"
+    },
+    "AssociatePrincipalWithPortfolio":{
+      "name":"AssociatePrincipalWithPortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociatePrincipalWithPortfolioInput"},
+      "output":{"shape":"AssociatePrincipalWithPortfolioOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Associates the specified principal ARN with the specified portfolio.</p>"
+    },
+    "AssociateProductWithPortfolio":{
+      "name":"AssociateProductWithPortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateProductWithPortfolioInput"},
+      "output":{"shape":"AssociateProductWithPortfolioOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Associates a product with a portfolio.</p>"
+    },
+    "CreateConstraint":{
+      "name":"CreateConstraint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateConstraintInput"},
+      "output":{"shape":"CreateConstraintOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"DuplicateResourceException"}
+      ],
+      "documentation":"<p>Creates a new constraint.</p>"
+    },
+    "CreatePortfolio":{
+      "name":"CreatePortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreatePortfolioInput"},
+      "output":{"shape":"CreatePortfolioOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a new portfolio.</p>"
+    },
+    "CreatePortfolioShare":{
+      "name":"CreatePortfolioShare",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreatePortfolioShareInput"},
+      "output":{"shape":"CreatePortfolioShareOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Creates a new portfolio share.</p>"
+    },
+    "CreateProduct":{
+      "name":"CreateProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateProductInput"},
+      "output":{"shape":"CreateProductOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a new product.</p>"
+    },
+    "CreateProvisioningArtifact":{
+      "name":"CreateProvisioningArtifact",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateProvisioningArtifactInput"},
+      "output":{"shape":"CreateProvisioningArtifactOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Create a new provisioning artifact for the specified product. This operation will not work with a product that has been shared with you.</p>"
+    },
+    "DeleteConstraint":{
+      "name":"DeleteConstraint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteConstraintInput"},
+      "output":{"shape":"DeleteConstraintOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Deletes the specified constraint.</p>"
+    },
+    "DeletePortfolio":{
+      "name":"DeletePortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeletePortfolioInput"},
+      "output":{"shape":"DeletePortfolioOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceInUseException"}
+      ],
+      "documentation":"<p>Deletes the specified portfolio. This operation will not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.</p>"
+    },
+    "DeletePortfolioShare":{
+      "name":"DeletePortfolioShare",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeletePortfolioShareInput"},
+      "output":{"shape":"DeletePortfolioShareOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Deletes the specified portfolio share.</p>"
+    },
+    "DeleteProduct":{
+      "name":"DeleteProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteProductInput"},
+      "output":{"shape":"DeleteProductOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Deletes the specified product. This operation will not work with a product that has been shared with you or is associated with a portfolio. </p>"
+    },
+    "DeleteProvisioningArtifact":{
+      "name":"DeleteProvisioningArtifact",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteProvisioningArtifactInput"},
+      "output":{"shape":"DeleteProvisioningArtifactOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Deletes the specified provisioning artifact. This operation will not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).</p>"
+    },
+    "DescribeConstraint":{
+      "name":"DescribeConstraint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeConstraintInput"},
+      "output":{"shape":"DescribeConstraintOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Retrieves detailed information for a specified constraint.</p>"
+    },
+    "DescribePortfolio":{
+      "name":"DescribePortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribePortfolioInput"},
+      "output":{"shape":"DescribePortfolioOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Retrieves detailed information and any tags associated with the specified portfolio.</p>"
+    },
     "DescribeProduct":{
       "name":"DescribeProduct",
       "http":{
@@ -24,6 +241,19 @@
       ],
       "documentation":"<p>Retrieves information about a specified product.</p> <p>This operation is functionally identical to <a>DescribeProductView</a> except that it takes as input <code>ProductId</code> instead of <code>ProductViewId</code>.</p>"
     },
+    "DescribeProductAsAdmin":{
+      "name":"DescribeProductAsAdmin",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeProductAsAdminInput"},
+      "output":{"shape":"DescribeProductAsAdminOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Retrieves information about a specified product, run with administrator access.</p>"
+    },
     "DescribeProductView":{
       "name":"DescribeProductView",
       "http":{
@@ -37,6 +267,19 @@
         {"shape":"InvalidParametersException"}
       ],
       "documentation":"<p>Retrieves information about a specified product.</p> <p>This operation is functionally identical to <a>DescribeProduct</a> except that it takes as input <code>ProductViewId</code> instead of <code>ProductId</code>.</p>"
+    },
+    "DescribeProvisioningArtifact":{
+      "name":"DescribeProvisioningArtifact",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeProvisioningArtifactInput"},
+      "output":{"shape":"DescribeProvisioningArtifactOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Retrieves detailed information about the specified provisioning artifact.</p>"
     },
     "DescribeProvisioningParameters":{
       "name":"DescribeProvisioningParameters",
@@ -65,6 +308,61 @@
       ],
       "documentation":"<p>Retrieves a paginated list of the full details of a specific request. Use this operation after calling a request operation (<a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p>"
     },
+    "DisassociatePrincipalFromPortfolio":{
+      "name":"DisassociatePrincipalFromPortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociatePrincipalFromPortfolioInput"},
+      "output":{"shape":"DisassociatePrincipalFromPortfolioOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Disassociates a previously associated principal ARN from a specified portfolio.</p>"
+    },
+    "DisassociateProductFromPortfolio":{
+      "name":"DisassociateProductFromPortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateProductFromPortfolioInput"},
+      "output":{"shape":"DisassociateProductFromPortfolioOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Disassociates the specified product from the specified portfolio. </p>"
+    },
+    "ListAcceptedPortfolioShares":{
+      "name":"ListAcceptedPortfolioShares",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListAcceptedPortfolioSharesInput"},
+      "output":{"shape":"ListAcceptedPortfolioSharesOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Lists details of all portfolios for which sharing was accepted by this account.</p>"
+    },
+    "ListConstraintsForPortfolio":{
+      "name":"ListConstraintsForPortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListConstraintsForPortfolioInput"},
+      "output":{"shape":"ListConstraintsForPortfolioOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Retrieves detailed constraint information for the specified portfolio and product.</p>"
+    },
     "ListLaunchPaths":{
       "name":"ListLaunchPaths",
       "http":{
@@ -78,6 +376,74 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Returns a paginated list of all paths to a specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.</p>"
+    },
+    "ListPortfolioAccess":{
+      "name":"ListPortfolioAccess",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListPortfolioAccessInput"},
+      "output":{"shape":"ListPortfolioAccessOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Lists the account IDs that have been authorized sharing of the specified portfolio.</p>"
+    },
+    "ListPortfolios":{
+      "name":"ListPortfolios",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListPortfoliosInput"},
+      "output":{"shape":"ListPortfoliosOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Lists all portfolios in the catalog.</p>"
+    },
+    "ListPortfoliosForProduct":{
+      "name":"ListPortfoliosForProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListPortfoliosForProductInput"},
+      "output":{"shape":"ListPortfoliosForProductOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Lists all portfolios that the specified product is associated with.</p>"
+    },
+    "ListPrincipalsForPortfolio":{
+      "name":"ListPrincipalsForPortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListPrincipalsForPortfolioInput"},
+      "output":{"shape":"ListPrincipalsForPortfolioOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Lists all principal ARNs associated with the specified portfolio.</p>"
+    },
+    "ListProvisioningArtifacts":{
+      "name":"ListProvisioningArtifacts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListProvisioningArtifactsInput"},
+      "output":{"shape":"ListProvisioningArtifactsOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Lists all provisioning artifacts associated with the specified product.</p>"
     },
     "ListRecordHistory":{
       "name":"ListRecordHistory",
@@ -107,6 +473,19 @@
       ],
       "documentation":"<p>Requests a <i>Provision</i> of a specified product. A <i>ProvisionedProduct</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
     },
+    "RejectPortfolioShare":{
+      "name":"RejectPortfolioShare",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RejectPortfolioShareInput"},
+      "output":{"shape":"RejectPortfolioShareOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Rejects an offer to share a portfolio.</p>"
+    },
     "ScanProvisionedProducts":{
       "name":"ScanProvisionedProducts",
       "http":{
@@ -133,6 +512,20 @@
       ],
       "documentation":"<p>Returns a paginated list all of the <code>Products</code> objects to which the caller has access. </p> <p>The output of this operation can be used as input for other operations, such as <a>DescribeProductView</a>.</p>"
     },
+    "SearchProductsAsAdmin":{
+      "name":"SearchProductsAsAdmin",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SearchProductsAsAdminInput"},
+      "output":{"shape":"SearchProductsAsAdminOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Retrieves summary and status information about all products created within the caller's account. If a portfolio ID is provided, this operation retrieves information for only those products that are associated with the specified portfolio.</p>"
+    },
     "TerminateProvisionedProduct":{
       "name":"TerminateProvisionedProduct",
       "http":{
@@ -145,6 +538,49 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Requests termination of an existing ProvisionedProduct object. If there are <code>Tags</code> associated with the object, they are terminated when the ProvisionedProduct object is terminated. </p> <p>This operation does not delete any records associated with the ProvisionedProduct object.</p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
+    },
+    "UpdateConstraint":{
+      "name":"UpdateConstraint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateConstraintInput"},
+      "output":{"shape":"UpdateConstraintOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Updates an existing constraint.</p>"
+    },
+    "UpdatePortfolio":{
+      "name":"UpdatePortfolio",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdatePortfolioInput"},
+      "output":{"shape":"UpdatePortfolioOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Updates the specified portfolio's details. This operation will not work with a product that has been shared with you.</p>"
+    },
+    "UpdateProduct":{
+      "name":"UpdateProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateProductInput"},
+      "output":{"shape":"UpdateProductOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Updates an existing product.</p>"
     },
     "UpdateProvisionedProduct":{
       "name":"UpdateProvisionedProduct",
@@ -159,10 +595,43 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Requests updates to the configuration of an existing ProvisionedProduct object. If there are tags associated with the object, they cannot be updated or added with this operation. Depending on the specific updates requested, this operation may update with no interruption, with some interruption, or replace the ProvisionedProduct object entirely. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
+    },
+    "UpdateProvisioningArtifact":{
+      "name":"UpdateProvisioningArtifact",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateProvisioningArtifactInput"},
+      "output":{"shape":"UpdateProvisioningArtifactOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Updates an existing provisioning artifact's information. This operation will not work on a provisioning artifact associated with a product that has been shared with you.</p>"
     }
   },
   "shapes":{
     "AcceptLanguage":{"type":"string"},
+    "AcceptPortfolioShareInput":{
+      "type":"structure",
+      "required":["PortfolioId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        }
+      }
+    },
+    "AcceptPortfolioShareOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "AccessLevelFilter":{
       "type":"structure",
       "members":{
@@ -186,14 +655,118 @@
       ]
     },
     "AccessLevelFilterValue":{"type":"string"},
+    "AccountId":{
+      "type":"string",
+      "pattern":"^[0-9]{12}$"
+    },
+    "AccountIds":{
+      "type":"list",
+      "member":{"shape":"AccountId"}
+    },
+    "AddTags":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "max":20
+    },
     "AllowedValue":{"type":"string"},
     "AllowedValues":{
       "type":"list",
       "member":{"shape":"AllowedValue"}
     },
     "ApproximateCount":{"type":"integer"},
+    "AssociatePrincipalWithPortfolioInput":{
+      "type":"structure",
+      "required":[
+        "PortfolioId",
+        "PrincipalARN",
+        "PrincipalType"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        },
+        "PrincipalARN":{
+          "shape":"PrincipalARN",
+          "documentation":"<p>The ARN representing the principal (IAM user, role, or group).</p>"
+        },
+        "PrincipalType":{
+          "shape":"PrincipalType",
+          "documentation":"<p>The principal type. Must be <code>IAM</code> </p>"
+        }
+      }
+    },
+    "AssociatePrincipalWithPortfolioOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "AssociateProductWithPortfolioInput":{
+      "type":"structure",
+      "required":[
+        "ProductId",
+        "PortfolioId"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        },
+        "SourcePortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the source portfolio to use with this association.</p>"
+        }
+      }
+    },
+    "AssociateProductWithPortfolioOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "AttributeValue":{"type":"string"},
-    "ConstraintDescription":{"type":"string"},
+    "ConstraintDescription":{
+      "type":"string",
+      "max":2000
+    },
+    "ConstraintDetail":{
+      "type":"structure",
+      "members":{
+        "ConstraintId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the constraint.</p>"
+        },
+        "Type":{
+          "shape":"ConstraintType",
+          "documentation":"<p>The type of the constraint.</p>"
+        },
+        "Description":{
+          "shape":"ConstraintDescription",
+          "documentation":"<p>The text description of the constraint.</p>"
+        },
+        "Owner":{
+          "shape":"AccountId",
+          "documentation":"<p>The owner of the constraint.</p>"
+        }
+      },
+      "documentation":"<p>Detailed constraint information.</p>"
+    },
+    "ConstraintDetails":{
+      "type":"list",
+      "member":{"shape":"ConstraintDetail"}
+    },
+    "ConstraintParameters":{"type":"string"},
     "ConstraintSummaries":{
       "type":"list",
       "member":{"shape":"ConstraintSummary"}
@@ -212,9 +785,462 @@
       },
       "documentation":"<p>An administrator-specified constraint to apply when provisioning a product.</p>"
     },
-    "ConstraintType":{"type":"string"},
+    "ConstraintType":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "CreateConstraintInput":{
+      "type":"structure",
+      "required":[
+        "PortfolioId",
+        "ProductId",
+        "Parameters",
+        "Type",
+        "IdempotencyToken"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "Parameters":{
+          "shape":"ConstraintParameters",
+          "documentation":"<p>The constraint parameters.</p>"
+        },
+        "Type":{
+          "shape":"ConstraintType",
+          "documentation":"<p>The type of the constraint.</p>"
+        },
+        "Description":{
+          "shape":"ConstraintDescription",
+          "documentation":"<p>The text description of the constraint.</p>"
+        },
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateConstraintOutput":{
+      "type":"structure",
+      "members":{
+        "ConstraintDetail":{
+          "shape":"ConstraintDetail",
+          "documentation":"<p>The resulting detailed constraint information.</p>"
+        },
+        "ConstraintParameters":{
+          "shape":"ConstraintParameters",
+          "documentation":"<p>The resulting constraint parameters.</p>"
+        },
+        "Status":{
+          "shape":"Status",
+          "documentation":"<p>The status of the current request.</p>"
+        }
+      }
+    },
+    "CreatePortfolioInput":{
+      "type":"structure",
+      "required":[
+        "DisplayName",
+        "ProviderName",
+        "IdempotencyToken"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "DisplayName":{
+          "shape":"PortfolioDisplayName",
+          "documentation":"<p>The name to use for display purposes.</p>"
+        },
+        "Description":{
+          "shape":"PortfolioDescription",
+          "documentation":"<p>The text description of the portfolio.</p>"
+        },
+        "ProviderName":{
+          "shape":"ProviderName",
+          "documentation":"<p>The name of the portfolio provider.</p>"
+        },
+        "Tags":{
+          "shape":"AddTags",
+          "documentation":"<p>Tags to associate with the new portfolio.</p>"
+        },
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreatePortfolioOutput":{
+      "type":"structure",
+      "members":{
+        "PortfolioDetail":{
+          "shape":"PortfolioDetail",
+          "documentation":"<p>The resulting detailed portfolio information.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>Tags successfully associated with the new portfolio.</p>"
+        }
+      }
+    },
+    "CreatePortfolioShareInput":{
+      "type":"structure",
+      "required":[
+        "PortfolioId",
+        "AccountId"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        },
+        "AccountId":{
+          "shape":"AccountId",
+          "documentation":"<p>The account ID with which to share the portfolio.</p>"
+        }
+      }
+    },
+    "CreatePortfolioShareOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "CreateProductInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Owner",
+        "ProductType",
+        "ProvisioningArtifactParameters",
+        "IdempotencyToken"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Name":{
+          "shape":"ProductViewName",
+          "documentation":"<p>The name of the product.</p>"
+        },
+        "Owner":{
+          "shape":"ProductViewOwner",
+          "documentation":"<p>The owner of the product.</p>"
+        },
+        "Description":{
+          "shape":"ProductViewShortDescription",
+          "documentation":"<p>The text description of the product.</p>"
+        },
+        "Distributor":{
+          "shape":"ProductViewOwner",
+          "documentation":"<p>The distributor of the product.</p>"
+        },
+        "SupportDescription":{
+          "shape":"SupportDescription",
+          "documentation":"<p>Support information about the product.</p>"
+        },
+        "SupportEmail":{
+          "shape":"SupportEmail",
+          "documentation":"<p>Contact email for product support.</p>"
+        },
+        "SupportUrl":{
+          "shape":"SupportUrl",
+          "documentation":"<p>Contact URL for product support.</p>"
+        },
+        "ProductType":{
+          "shape":"ProductType",
+          "documentation":"<p>The type of the product to create.</p>"
+        },
+        "Tags":{
+          "shape":"AddTags",
+          "documentation":"<p>Tags to associate with the new product.</p>"
+        },
+        "ProvisioningArtifactParameters":{
+          "shape":"ProvisioningArtifactProperties",
+          "documentation":"<p>Parameters for the provisioning artifact.</p>"
+        },
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateProductOutput":{
+      "type":"structure",
+      "members":{
+        "ProductViewDetail":{
+          "shape":"ProductViewDetail",
+          "documentation":"<p>The resulting detailed product view information.</p>"
+        },
+        "ProvisioningArtifactDetail":{
+          "shape":"ProvisioningArtifactDetail",
+          "documentation":"<p>The resulting detailed provisioning artifact information.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>Tags successfully associated with the new product.</p>"
+        }
+      }
+    },
+    "CreateProvisioningArtifactInput":{
+      "type":"structure",
+      "required":[
+        "ProductId",
+        "Parameters",
+        "IdempotencyToken"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "Parameters":{
+          "shape":"ProvisioningArtifactProperties",
+          "documentation":"<p>The parameters to use when creating the new provisioning artifact.</p>"
+        },
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateProvisioningArtifactOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisioningArtifactDetail":{
+          "shape":"ProvisioningArtifactDetail",
+          "documentation":"<p>The resulting detailed provisioning artifact information.</p>"
+        },
+        "Info":{
+          "shape":"ProvisioningArtifactInfo",
+          "documentation":"<p>Additional information about the provisioning artifact create request.</p>"
+        },
+        "Status":{
+          "shape":"Status",
+          "documentation":"<p>The status of the current request.</p>"
+        }
+      }
+    },
     "CreatedTime":{"type":"timestamp"},
+    "CreationTime":{"type":"timestamp"},
     "DefaultValue":{"type":"string"},
+    "DeleteConstraintInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the constraint to delete.</p>"
+        }
+      }
+    },
+    "DeleteConstraintOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeletePortfolioInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the portfolio for the delete request.</p>"
+        }
+      }
+    },
+    "DeletePortfolioOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeletePortfolioShareInput":{
+      "type":"structure",
+      "required":[
+        "PortfolioId",
+        "AccountId"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        },
+        "AccountId":{
+          "shape":"AccountId",
+          "documentation":"<p>The account ID associated with the share to delete.</p>"
+        }
+      }
+    },
+    "DeletePortfolioShareOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteProductInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the product for the delete request.</p>"
+        }
+      }
+    },
+    "DeleteProductOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteProvisioningArtifactInput":{
+      "type":"structure",
+      "required":[
+        "ProductId",
+        "ProvisioningArtifactId"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioning artifact for the delete request.</p>"
+        }
+      }
+    },
+    "DeleteProvisioningArtifactOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeConstraintInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the constraint.</p>"
+        }
+      }
+    },
+    "DescribeConstraintOutput":{
+      "type":"structure",
+      "members":{
+        "ConstraintDetail":{
+          "shape":"ConstraintDetail",
+          "documentation":"<p>Detailed constraint information.</p>"
+        },
+        "ConstraintParameters":{
+          "shape":"ConstraintParameters",
+          "documentation":"<p>The current parameters associated with the specified constraint.</p>"
+        },
+        "Status":{
+          "shape":"Status",
+          "documentation":"<p>The status of the current request.</p>"
+        }
+      }
+    },
+    "DescribePortfolioInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the portfolio for which to retrieve information.</p>"
+        }
+      }
+    },
+    "DescribePortfolioOutput":{
+      "type":"structure",
+      "members":{
+        "PortfolioDetail":{
+          "shape":"PortfolioDetail",
+          "documentation":"<p>Detailed portfolio information.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>Tags associated with the portfolio.</p>"
+        }
+      }
+    },
+    "DescribeProductAsAdminInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the product for which to retrieve information.</p>"
+        }
+      }
+    },
+    "DescribeProductAsAdminOutput":{
+      "type":"structure",
+      "members":{
+        "ProductViewDetail":{
+          "shape":"ProductViewDetail",
+          "documentation":"<p>Detailed product view information.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>Tags associated with the product.</p>"
+        }
+      }
+    },
     "DescribeProductInput":{
       "type":"structure",
       "required":["Id"],
@@ -269,6 +1295,44 @@
         }
       }
     },
+    "DescribeProvisioningArtifactInput":{
+      "type":"structure",
+      "required":[
+        "ProvisioningArtifactId",
+        "ProductId"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        }
+      }
+    },
+    "DescribeProvisioningArtifactOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisioningArtifactDetail":{
+          "shape":"ProvisioningArtifactDetail",
+          "documentation":"<p>Detailed provisioning artifact information.</p>"
+        },
+        "Info":{
+          "shape":"ProvisioningArtifactInfo",
+          "documentation":"<p>Additional information about the provisioning artifact.</p>"
+        },
+        "Status":{
+          "shape":"Status",
+          "documentation":"<p>The status of the current request.</p>"
+        }
+      }
+    },
     "DescribeProvisioningParametersInput":{
       "type":"structure",
       "required":[
@@ -282,7 +1346,7 @@
         },
         "ProductId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the product.</p>"
+          "documentation":"<p>The product identifier.</p>"
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
@@ -351,6 +1415,58 @@
       }
     },
     "Description":{"type":"string"},
+    "DisassociatePrincipalFromPortfolioInput":{
+      "type":"structure",
+      "required":[
+        "PortfolioId",
+        "PrincipalARN"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        },
+        "PrincipalARN":{
+          "shape":"PrincipalARN",
+          "documentation":"<p>The ARN representing the principal (IAM user, role, or group).</p>"
+        }
+      }
+    },
+    "DisassociatePrincipalFromPortfolioOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DisassociateProductFromPortfolioInput":{
+      "type":"structure",
+      "required":[
+        "ProductId",
+        "PortfolioId"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        }
+      }
+    },
+    "DisassociateProductFromPortfolioOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DuplicateResourceException":{
       "type":"structure",
       "members":{
@@ -363,6 +1479,7 @@
     "HasDefaultPath":{"type":"boolean"},
     "Id":{
       "type":"string",
+      "max":100,
       "min":1
     },
     "IdempotencyToken":{
@@ -408,6 +1525,82 @@
       },
       "documentation":"<p>Summary information about a path for a user to have access to a specified product.</p>"
     },
+    "LimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The current limits of the service would have been exceeded by this operation. Reduce the resource use or increase the service limits and retry the operation.</p>",
+      "exception":true
+    },
+    "ListAcceptedPortfolioSharesInput":{
+      "type":"structure",
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        }
+      }
+    },
+    "ListAcceptedPortfolioSharesOutput":{
+      "type":"structure",
+      "members":{
+        "PortfolioDetails":{
+          "shape":"PortfolioDetails",
+          "documentation":"<p>List of detailed portfolio information objects.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "ListConstraintsForPortfolioInput":{
+      "type":"structure",
+      "required":["PortfolioId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
+    },
+    "ListConstraintsForPortfolioOutput":{
+      "type":"structure",
+      "members":{
+        "ConstraintDetails":{
+          "shape":"ConstraintDetails",
+          "documentation":"<p>List of detailed constraint information objects.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
     "ListLaunchPathsInput":{
       "type":"structure",
       "required":["ProductId"],
@@ -418,7 +1611,7 @@
         },
         "ProductId":{
           "shape":"Id",
-          "documentation":"<p>Identifies the product for which to retrieve <code>LaunchPathSummaries</code> information.</p>"
+          "documentation":"<p>The product identifier.. Identifies the product for which to retrieve <code>LaunchPathSummaries</code> information.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
@@ -436,6 +1629,160 @@
         "LaunchPathSummaries":{
           "shape":"LaunchPathSummaries",
           "documentation":"<p>List of launch path information summaries for the specified <code>PageToken</code>.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "ListPortfolioAccessInput":{
+      "type":"structure",
+      "required":["PortfolioId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        }
+      }
+    },
+    "ListPortfolioAccessOutput":{
+      "type":"structure",
+      "members":{
+        "AccountIds":{
+          "shape":"AccountIds",
+          "documentation":"<p>List of account IDs associated with access to the portfolio.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "ListPortfoliosForProductInput":{
+      "type":"structure",
+      "required":["ProductId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        }
+      }
+    },
+    "ListPortfoliosForProductOutput":{
+      "type":"structure",
+      "members":{
+        "PortfolioDetails":{
+          "shape":"PortfolioDetails",
+          "documentation":"<p>List of detailed portfolio information objects.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "ListPortfoliosInput":{
+      "type":"structure",
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        }
+      }
+    },
+    "ListPortfoliosOutput":{
+      "type":"structure",
+      "members":{
+        "PortfolioDetails":{
+          "shape":"PortfolioDetails",
+          "documentation":"<p>List of detailed portfolio information objects.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "ListPrincipalsForPortfolioInput":{
+      "type":"structure",
+      "required":["PortfolioId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
+    },
+    "ListPrincipalsForPortfolioOutput":{
+      "type":"structure",
+      "members":{
+        "Principals":{
+          "shape":"Principals",
+          "documentation":"<p>The IAM principals (users or roles) associated with the portfolio.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "ListProvisioningArtifactsInput":{
+      "type":"structure",
+      "required":["ProductId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        }
+      }
+    },
+    "ListProvisioningArtifactsOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisioningArtifactDetails":{
+          "shape":"ProvisioningArtifactDetails",
+          "documentation":"<p>List of detailed provisioning artifact information objects.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
@@ -528,11 +1875,95 @@
       },
       "documentation":"<p>The constraints that the administrator has put on the parameter.</p>"
     },
-    "ParameterKey":{"type":"string"},
+    "ParameterKey":{
+      "type":"string",
+      "max":1000,
+      "min":1
+    },
     "ParameterType":{"type":"string"},
-    "ParameterValue":{"type":"string"},
+    "ParameterValue":{
+      "type":"string",
+      "max":1000
+    },
+    "PortfolioDescription":{
+      "type":"string",
+      "max":2000
+    },
+    "PortfolioDetail":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier for the portfolio.</p>"
+        },
+        "ARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The ARN assigned to the portfolio.</p>"
+        },
+        "DisplayName":{
+          "shape":"PortfolioDisplayName",
+          "documentation":"<p>The name to use for display purposes.</p>"
+        },
+        "Description":{
+          "shape":"PortfolioDescription",
+          "documentation":"<p>The text description of the portfolio.</p>"
+        },
+        "CreatedTime":{
+          "shape":"CreationTime",
+          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+        },
+        "ProviderName":{
+          "shape":"ProviderName",
+          "documentation":"<p>The name of the portfolio provider.</p>"
+        }
+      },
+      "documentation":"<p>Detailed portfolio information.</p>"
+    },
+    "PortfolioDetails":{
+      "type":"list",
+      "member":{"shape":"PortfolioDetail"}
+    },
+    "PortfolioDisplayName":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
     "PortfolioName":{"type":"string"},
-    "ProductType":{"type":"string"},
+    "Principal":{
+      "type":"structure",
+      "members":{
+        "PrincipalARN":{
+          "shape":"PrincipalARN",
+          "documentation":"<p>The ARN representing the principal (IAM user, role, or group).</p>"
+        },
+        "PrincipalType":{
+          "shape":"PrincipalType",
+          "documentation":"<p>The principal type. Must be <code>IAM</code> </p>"
+        }
+      },
+      "documentation":"<p>A principal's ARN and type.</p>"
+    },
+    "PrincipalARN":{
+      "type":"string",
+      "max":1000,
+      "min":1
+    },
+    "PrincipalType":{
+      "type":"string",
+      "enum":["IAM"]
+    },
+    "Principals":{
+      "type":"list",
+      "member":{"shape":"Principal"}
+    },
+    "ProductSource":{
+      "type":"string",
+      "enum":["ACCOUNT"]
+    },
+    "ProductType":{
+      "type":"string",
+      "enum":["CLOUD_FORMATION_TEMPLATE"]
+    },
     "ProductViewAggregationType":{"type":"string"},
     "ProductViewAggregationValue":{
       "type":"structure",
@@ -556,6 +1987,32 @@
       "type":"map",
       "key":{"shape":"ProductViewAggregationType"},
       "value":{"shape":"ProductViewAggregationValues"}
+    },
+    "ProductViewDetail":{
+      "type":"structure",
+      "members":{
+        "ProductViewSummary":{
+          "shape":"ProductViewSummary",
+          "documentation":"<p>The summary metadata about the specified product view.</p>"
+        },
+        "Status":{
+          "shape":"Status",
+          "documentation":"<p>Current status of the product.</p>"
+        },
+        "ProductARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The ARN associated with the product.</p>"
+        },
+        "CreatedTime":{
+          "shape":"CreatedTime",
+          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+        }
+      },
+      "documentation":"<p>Detailed product view information.</p>"
+    },
+    "ProductViewDetails":{
+      "type":"list",
+      "member":{"shape":"ProductViewDetail"}
     },
     "ProductViewDistributor":{"type":"string"},
     "ProductViewFilterBy":{
@@ -641,6 +2098,11 @@
       },
       "documentation":"<p>The summary metadata about the specified product.</p>"
     },
+    "ProviderName":{
+      "type":"string",
+      "max":20,
+      "min":1
+    },
     "ProvisionProductInput":{
       "type":"structure",
       "required":[
@@ -656,7 +2118,7 @@
         },
         "ProductId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the product.</p>"
+          "documentation":"<p>The product identifier.</p>"
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
@@ -727,11 +2189,11 @@
         },
         "CreatedTime":{
           "shape":"CreatedTime",
-          "documentation":"<p>The time the ProvisionedProduct was created.</p>"
+          "documentation":"<p>The UTC timestamp of the creation time.</p>"
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>An idempotency token that uniquely identifies this ProvisionedProduct.</p>"
+          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>"
         },
         "LastRecordId":{
           "shape":"LastRequestId",
@@ -771,13 +2233,52 @@
         },
         "CreatedTime":{
           "shape":"ProvisioningArtifactCreatedTime",
-          "documentation":"<p>The time that the artifact was created by the Administrator.</p>"
+          "documentation":"<p>The UTC timestamp of the creation time.</p>"
         }
       },
       "documentation":"<p>Contains information indicating the ways in which a product can be provisioned.</p>"
     },
     "ProvisioningArtifactCreatedTime":{"type":"timestamp"},
     "ProvisioningArtifactDescription":{"type":"string"},
+    "ProvisioningArtifactDetail":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
+        },
+        "Name":{
+          "shape":"ProvisioningArtifactName",
+          "documentation":"<p>The name assigned to the provisioning artifact.</p>"
+        },
+        "Description":{
+          "shape":"ProvisioningArtifactName",
+          "documentation":"<p>The text description of the provisioning artifact.</p>"
+        },
+        "Type":{
+          "shape":"ProvisioningArtifactType",
+          "documentation":"<p>The type of the provisioning artifact.</p>"
+        },
+        "CreatedTime":{
+          "shape":"CreationTime",
+          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+        }
+      },
+      "documentation":"<p>Detailed provisioning artifact information.</p>"
+    },
+    "ProvisioningArtifactDetails":{
+      "type":"list",
+      "member":{"shape":"ProvisioningArtifactDetail"}
+    },
+    "ProvisioningArtifactInfo":{
+      "type":"map",
+      "key":{"shape":"ProvisioningArtifactInfoKey"},
+      "value":{"shape":"ProvisioningArtifactInfoValue"},
+      "max":1,
+      "min":1
+    },
+    "ProvisioningArtifactInfoKey":{"type":"string"},
+    "ProvisioningArtifactInfoValue":{"type":"string"},
     "ProvisioningArtifactName":{"type":"string"},
     "ProvisioningArtifactParameter":{
       "type":"structure",
@@ -812,6 +2313,33 @@
     "ProvisioningArtifactParameters":{
       "type":"list",
       "member":{"shape":"ProvisioningArtifactParameter"}
+    },
+    "ProvisioningArtifactProperties":{
+      "type":"structure",
+      "required":["Info"],
+      "members":{
+        "Name":{
+          "shape":"ProvisioningArtifactName",
+          "documentation":"<p>The name assigned to the provisioning artifact properties.</p>"
+        },
+        "Description":{
+          "shape":"ProvisioningArtifactDescription",
+          "documentation":"<p>The text description of the provisioning artifact properties.</p>"
+        },
+        "Info":{
+          "shape":"ProvisioningArtifactInfo",
+          "documentation":"<p>Additional information about the provisioning artifact properties.</p>"
+        },
+        "Type":{
+          "shape":"ProvisioningArtifactType",
+          "documentation":"<p>The type of the provisioning artifact properties.</p>"
+        }
+      },
+      "documentation":"<p>Provisioning artifact properties.</p>"
+    },
+    "ProvisioningArtifactType":{
+      "type":"string",
+      "enum":["CLOUD_FORMATION_TEMPLATE"]
     },
     "ProvisioningArtifacts":{
       "type":"list",
@@ -852,7 +2380,7 @@
         },
         "CreatedTime":{
           "shape":"CreatedTime",
-          "documentation":"<p>The time when the record for the ProvisionedProduct object was created.</p>"
+          "documentation":"<p>The UTC timestamp of the creation time.</p>"
         },
         "UpdatedTime":{
           "shape":"UpdatedTime",
@@ -872,7 +2400,7 @@
         },
         "ProductId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the product.</p>"
+          "documentation":"<p>The product identifier.</p>"
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
@@ -974,9 +2502,40 @@
     "RecordTags":{
       "type":"list",
       "member":{"shape":"RecordTag"},
-      "max":10
+      "max":50
     },
     "RecordType":{"type":"string"},
+    "RejectPortfolioShareInput":{
+      "type":"structure",
+      "required":["PortfolioId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        }
+      }
+    },
+    "RejectPortfolioShareOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "ResourceARN":{
+      "type":"string",
+      "max":150,
+      "min":1
+    },
+    "ResourceInUseException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The operation was requested against a resource that is currently in use. Free the resource from use and retry the operation.</p>",
+      "exception":true
+    },
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
@@ -1020,6 +2579,56 @@
     },
     "SearchFilterKey":{"type":"string"},
     "SearchFilterValue":{"type":"string"},
+    "SearchProductsAsAdminInput":{
+      "type":"structure",
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "PortfolioId":{
+          "shape":"Id",
+          "documentation":"<p>The portfolio identifier.</p>"
+        },
+        "Filters":{
+          "shape":"ProductViewFilters",
+          "documentation":"<p>The list of filters with which to limit search results. If no search filters are specified, the output is all the products to which the administrator has access.</p>"
+        },
+        "SortBy":{
+          "shape":"ProductViewSortBy",
+          "documentation":"<p>The sort field specifier. If no value is specified, results are not sorted.</p>"
+        },
+        "SortOrder":{
+          "shape":"SortOrder",
+          "documentation":"<p>The sort order specifier. If no value is specified, results are not sorted.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        },
+        "ProductSource":{
+          "shape":"ProductSource",
+          "documentation":"<p>Access level of the source of the product.</p>"
+        }
+      }
+    },
+    "SearchProductsAsAdminOutput":{
+      "type":"structure",
+      "members":{
+        "ProductViewDetails":{
+          "shape":"ProductViewDetails",
+          "documentation":"<p>List of detailed product view information objects.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
     "SearchProductsInput":{
       "type":"structure",
       "members":{
@@ -1073,11 +2682,23 @@
         "DESCENDING"
       ]
     },
+    "Status":{
+      "type":"string",
+      "enum":[
+        "AVAILABLE",
+        "CREATING",
+        "FAILED"
+      ]
+    },
     "SupportDescription":{"type":"string"},
     "SupportEmail":{"type":"string"},
     "SupportUrl":{"type":"string"},
     "Tag":{
       "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
       "members":{
         "Key":{
           "shape":"TagKey",
@@ -1094,18 +2715,22 @@
       "type":"string",
       "max":128,
       "min":1,
-      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TagKeys":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
     },
     "TagValue":{
       "type":"string",
       "max":256,
       "min":1,
-      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "Tags":{
       "type":"list",
       "member":{"shape":"Tag"},
-      "max":10
+      "max":50
     },
     "TerminateProvisionedProductInput":{
       "type":"structure",
@@ -1140,6 +2765,151 @@
         "RecordDetail":{
           "shape":"RecordDetail",
           "documentation":"<p>The detailed result of the <a>TerminateProvisionedProduct</a> request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object that the request is modifying, and a list of any errors that the request encountered.</p>"
+        }
+      }
+    },
+    "UpdateConstraintInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the constraint to update.</p>"
+        },
+        "Description":{
+          "shape":"ConstraintDescription",
+          "documentation":"<p>The updated text description of the constraint.</p>"
+        }
+      }
+    },
+    "UpdateConstraintOutput":{
+      "type":"structure",
+      "members":{
+        "ConstraintDetail":{
+          "shape":"ConstraintDetail",
+          "documentation":"<p>The resulting detailed constraint information.</p>"
+        },
+        "ConstraintParameters":{
+          "shape":"ConstraintParameters",
+          "documentation":"<p>The resulting updated constraint parameters.</p>"
+        },
+        "Status":{
+          "shape":"Status",
+          "documentation":"<p>The status of the current request.</p>"
+        }
+      }
+    },
+    "UpdatePortfolioInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the portfolio for the update request.</p>"
+        },
+        "DisplayName":{
+          "shape":"PortfolioDisplayName",
+          "documentation":"<p>The name to use for display purposes.</p>"
+        },
+        "Description":{
+          "shape":"PortfolioDescription",
+          "documentation":"<p>The updated text description of the portfolio.</p>"
+        },
+        "ProviderName":{
+          "shape":"ProviderName",
+          "documentation":"<p>The updated name of the portfolio provider.</p>"
+        },
+        "AddTags":{
+          "shape":"AddTags",
+          "documentation":"<p>Tags to add to the existing list of tags associated with the portfolio.</p>"
+        },
+        "RemoveTags":{
+          "shape":"TagKeys",
+          "documentation":"<p>Tags to remove from the existing list of tags associated with the portfolio.</p>"
+        }
+      }
+    },
+    "UpdatePortfolioOutput":{
+      "type":"structure",
+      "members":{
+        "PortfolioDetail":{
+          "shape":"PortfolioDetail",
+          "documentation":"<p>The resulting detailed portfolio information.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>Tags associated with the portfolio.</p>"
+        }
+      }
+    },
+    "UpdateProductInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the product for the update request.</p>"
+        },
+        "Name":{
+          "shape":"ProductViewName",
+          "documentation":"<p>The updated product name.</p>"
+        },
+        "Owner":{
+          "shape":"ProductViewOwner",
+          "documentation":"<p>The updated owner of the product.</p>"
+        },
+        "Description":{
+          "shape":"ProductViewShortDescription",
+          "documentation":"<p>The updated text description of the product.</p>"
+        },
+        "Distributor":{
+          "shape":"ProductViewOwner",
+          "documentation":"<p>The updated distributor of the product.</p>"
+        },
+        "SupportDescription":{
+          "shape":"SupportDescription",
+          "documentation":"<p>The updated support description for the product.</p>"
+        },
+        "SupportEmail":{
+          "shape":"SupportEmail",
+          "documentation":"<p>The updated support email for the product.</p>"
+        },
+        "SupportUrl":{
+          "shape":"SupportUrl",
+          "documentation":"<p>The updated support URL for the product.</p>"
+        },
+        "AddTags":{
+          "shape":"AddTags",
+          "documentation":"<p>Tags to add to the existing list of tags associated with the product.</p>"
+        },
+        "RemoveTags":{
+          "shape":"TagKeys",
+          "documentation":"<p>Tags to remove from the existing list of tags associated with the product.</p>"
+        }
+      }
+    },
+    "UpdateProductOutput":{
+      "type":"structure",
+      "members":{
+        "ProductViewDetail":{
+          "shape":"ProductViewDetail",
+          "documentation":"<p>The resulting detailed product view information.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>Tags associated with the product.</p>"
         }
       }
     },
@@ -1188,6 +2958,52 @@
         "RecordDetail":{
           "shape":"RecordDetail",
           "documentation":"<p>The detailed result of the <a>UpdateProvisionedProduct</a> request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object that the request is modifying, and a list of any errors that the request encountered.</p>"
+        }
+      }
+    },
+    "UpdateProvisioningArtifactInput":{
+      "type":"structure",
+      "required":[
+        "ProductId",
+        "ProvisioningArtifactId"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioning artifact for the update request.</p>"
+        },
+        "Name":{
+          "shape":"ProvisioningArtifactName",
+          "documentation":"<p>The updated name of the provisioning artifact.</p>"
+        },
+        "Description":{
+          "shape":"ProvisioningArtifactDescription",
+          "documentation":"<p>The updated text description of the provisioning artifact.</p>"
+        }
+      }
+    },
+    "UpdateProvisioningArtifactOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisioningArtifactDetail":{
+          "shape":"ProvisioningArtifactDetail",
+          "documentation":"<p>The resulting detailed provisioning artifact information.</p>"
+        },
+        "Info":{
+          "shape":"ProvisioningArtifactInfo",
+          "documentation":"<p>Additional information about the provisioning artifact update request.</p>"
+        },
+        "Status":{
+          "shape":"Status",
+          "documentation":"<p>The status of the current request.</p>"
         }
       }
     },

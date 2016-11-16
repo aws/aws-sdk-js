@@ -12,19 +12,19 @@ declare class Route53 extends Service {
   constructor(options?: Route53.Types.ClientConfiguration)
   config: Config & Route53.Types.ClientConfiguration;
   /**
-   * Associates an Amazon VPC with a private hosted zone.   The VPC and the hosted zone must already exist, and you must have created a private hosted zone. You cannot convert a public hosted zone into a private hosted zone.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/associatevpc resource. The request body must include an XML document with a AssociateVPCWithHostedZoneRequest element. The response returns the AssociateVPCWithHostedZoneResponse element.  If you used different accounts to create the hosted zone and to create the Amazon VPCs that you want to associate with the hosted zone, we need to update account permissions for you. For more information, see Associating Amazon VPCs and Private Hosted Zones That You Create with Different AWS Accounts in the Amazon Route 53 Developer Guide. 
+   * Associates an Amazon VPC with a private hosted zone.   To perform the association, the VPC and the private hosted zone must already exist. You can't convert a public hosted zone into a private hosted zone.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/associatevpc resource. The request body must include a document with an AssociateVPCWithHostedZoneRequest element. The response contains a ChangeInfo data type that you can use to track the progress of the request.   If you want to associate a VPC that was created by using one AWS account with a private hosted zone that was created by using a different account, the AWS account that created the private hosted zone must first submit a CreateVPCAssociationAuthorization request. Then the account that created the VPC must submit an AssociateVPCWithHostedZone request. 
    */
   associateVPCWithHostedZone(params: Route53.Types.AssociateVPCWithHostedZoneRequest, callback?: (err: AWSError, data: Route53.Types.AssociateVPCWithHostedZoneResponse) => void): Request<Route53.Types.AssociateVPCWithHostedZoneResponse, AWSError>;
   /**
-   * Associates an Amazon VPC with a private hosted zone.   The VPC and the hosted zone must already exist, and you must have created a private hosted zone. You cannot convert a public hosted zone into a private hosted zone.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/associatevpc resource. The request body must include an XML document with a AssociateVPCWithHostedZoneRequest element. The response returns the AssociateVPCWithHostedZoneResponse element.  If you used different accounts to create the hosted zone and to create the Amazon VPCs that you want to associate with the hosted zone, we need to update account permissions for you. For more information, see Associating Amazon VPCs and Private Hosted Zones That You Create with Different AWS Accounts in the Amazon Route 53 Developer Guide. 
+   * Associates an Amazon VPC with a private hosted zone.   To perform the association, the VPC and the private hosted zone must already exist. You can't convert a public hosted zone into a private hosted zone.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/associatevpc resource. The request body must include a document with an AssociateVPCWithHostedZoneRequest element. The response contains a ChangeInfo data type that you can use to track the progress of the request.   If you want to associate a VPC that was created by using one AWS account with a private hosted zone that was created by using a different account, the AWS account that created the private hosted zone must first submit a CreateVPCAssociationAuthorization request. Then the account that created the VPC must submit an AssociateVPCWithHostedZone request. 
    */
   associateVPCWithHostedZone(callback?: (err: AWSError, data: Route53.Types.AssociateVPCWithHostedZoneResponse) => void): Request<Route53.Types.AssociateVPCWithHostedZoneResponse, AWSError>;
   /**
-   * Create, change, update, or delete authoritative DNS information on all Amazon Route 53 servers. Send a POST request to:   /2013-04-01/hostedzone/Amazon Route 53 hosted Zone ID/rrset resource.  The request body must include a document with a ChangeResourceRecordSetsRequest element. The request body contains a list of change items, known as a change batch. Change batches are considered transactional changes. When using the Amazon Route 53 API to change resource record sets, Amazon Route 53 either makes all or none of the changes in a change batch request. This ensures that Amazon Route 53 never partially implements the intended changes to the resource record sets in a hosted zone.  For example, a change batch request that deletes the CNAME record for www.example.com and creates an alias resource record set for www.example.com. Amazon Route 53 deletes the first resource record set and creates the second resource record set in a single operation. If either the DELETE or the CREATE action fails, then both changes (plus any other changes in the batch) fail, and the original CNAME record continues to exist.  Due to the nature of transactional changes, you cannot delete the same resource record set more than once in a single change batch. If you attempt to delete the same change batch more than once, Amazon Route 53 returns an InvalidChangeBatch error.   To create resource record sets for complex routing configurations, use either the traffic flow visual editor in the Amazon Route 53 console or the API actions for traffic policies and traffic policy instances. Save the configuration as a traffic policy, then associate the traffic policy with one or more domain names (such as example.com) or subdomain names (such as www.example.com), in the same hosted zone or in multiple hosted zones. You can roll back the updates if the new configuration isn't performing as expected. For more information, see Using Traffic Flow to Route DNS Traffic in the Amazon Route 53 Developer Guide.  Use ChangeResourceRecordsSetsRequest to perform the following actions:    CREATE: Creates a resource record set that has the specified values.    DELETE: Deletes an existing resource record set that has the specified values for Name, Type, Set Identifier (for code latency, weighted, geolocation, and failover resource record sets), and TTL (except alias resource record sets, for which the TTL is determined by the AWS resource you're routing queries to).    UPSERT: If a resource record set does not already exist, AWS creates it. If a resource set does exist, Amazon Route 53 updates it with the values in the request. Amazon Route 53 can update an existing resource record set only when all of the following values match: Name, Type, and Set Identifier (for weighted, latency, geolocation, and failover resource record sets).   In response to a ChangeResourceRecordSets request, the DNS data is changed on all Amazon Route 53 DNS servers. Initially, the status of a change is PENDING, meaning the change has not yet propagated to all the authoritative Amazon Route 53 DNS servers. When the change is propagated to all hosts, the change returns a status of INSYNC. After sending a change request, confirm your change has propagated to all Amazon Route 53 DNS servers. Changes generally propagate to all Amazon Route 53 name servers in a few minutes. In rare circumstances, propagation can take up to 30 minutes. For more information, see GetChange. For information about the limits on a ChangeResourceRecordSets request, see Limits in the Amazon Route 53 Developer Guide.
+   * Create, change, update, or delete authoritative DNS information on all Amazon Route 53 servers. Send a POST request to:   /2013-04-01/hostedzone/Amazon Route 53 hosted Zone ID/rrset resource.  The request body must include a document with a ChangeResourceRecordSetsRequest element. The request body contains a list of change items, known as a change batch. Change batches are considered transactional changes. When using the Amazon Route 53 API to change resource record sets, Amazon Route 53 either makes all or none of the changes in a change batch request. This ensures that Amazon Route 53 never partially implements the intended changes to the resource record sets in a hosted zone.  For example, a change batch request that deletes the CNAME record for www.example.com and creates an alias resource record set for www.example.com. Amazon Route 53 deletes the first resource record set and creates the second resource record set in a single operation. If either the DELETE or the CREATE action fails, then both changes (plus any other changes in the batch) fail, and the original CNAME record continues to exist.  Due to the nature of transactional changes, you can't delete the same resource record set more than once in a single change batch. If you attempt to delete the same change batch more than once, Amazon Route 53 returns an InvalidChangeBatch error.   To create resource record sets for complex routing configurations, use either the traffic flow visual editor in the Amazon Route 53 console or the API actions for traffic policies and traffic policy instances. Save the configuration as a traffic policy, then associate the traffic policy with one or more domain names (such as example.com) or subdomain names (such as www.example.com), in the same hosted zone or in multiple hosted zones. You can roll back the updates if the new configuration isn't performing as expected. For more information, see Using Traffic Flow to Route DNS Traffic in the Amazon Route 53 Developer Guide.  Use ChangeResourceRecordsSetsRequest to perform the following actions:    CREATE: Creates a resource record set that has the specified values.    DELETE: Deletes an existing resource record set that has the applicable values for the following elements:    Name: required to delete any resource record set    Type: required to delete any resource record set    AliasTarget, DNSName, EvaluateTargetHealth, and HostedZoneId: required to delete an alias resource record set    SetIdentifier: required to delete a failover, geolocation, latency, or weighted resource record set     TTL: required to delete any resource record set except an alias resource record set (For alias resource record sets, the TTL is determined by the AWS resource tat you're routing traffic to.)      UPSERT: If a resource record set does not already exist, AWS creates it. If a resource set does exist, Amazon Route 53 updates it with the values in the request. Amazon Route 53 can update an existing resource record set only when all of the following values match: Name, Type, and Set Identifier (for weighted, latency, geolocation, and failover resource record sets).   In response to a ChangeResourceRecordSets request, the DNS data is changed on all Amazon Route 53 DNS servers. Initially, the status of a change is PENDING, meaning the change has not yet propagated to all the authoritative Amazon Route 53 DNS servers. When the change is propagated to all hosts, the change returns a status of INSYNC. After sending a change request, confirm your change has propagated to all Amazon Route 53 DNS servers. Changes generally propagate to all Amazon Route 53 name servers in a few minutes. In rare circumstances, propagation can take up to 30 minutes. For more information, see GetChange. For information about the limits on a ChangeResourceRecordSets request, see Limits in the Amazon Route 53 Developer Guide.
    */
   changeResourceRecordSets(params: Route53.Types.ChangeResourceRecordSetsRequest, callback?: (err: AWSError, data: Route53.Types.ChangeResourceRecordSetsResponse) => void): Request<Route53.Types.ChangeResourceRecordSetsResponse, AWSError>;
   /**
-   * Create, change, update, or delete authoritative DNS information on all Amazon Route 53 servers. Send a POST request to:   /2013-04-01/hostedzone/Amazon Route 53 hosted Zone ID/rrset resource.  The request body must include a document with a ChangeResourceRecordSetsRequest element. The request body contains a list of change items, known as a change batch. Change batches are considered transactional changes. When using the Amazon Route 53 API to change resource record sets, Amazon Route 53 either makes all or none of the changes in a change batch request. This ensures that Amazon Route 53 never partially implements the intended changes to the resource record sets in a hosted zone.  For example, a change batch request that deletes the CNAME record for www.example.com and creates an alias resource record set for www.example.com. Amazon Route 53 deletes the first resource record set and creates the second resource record set in a single operation. If either the DELETE or the CREATE action fails, then both changes (plus any other changes in the batch) fail, and the original CNAME record continues to exist.  Due to the nature of transactional changes, you cannot delete the same resource record set more than once in a single change batch. If you attempt to delete the same change batch more than once, Amazon Route 53 returns an InvalidChangeBatch error.   To create resource record sets for complex routing configurations, use either the traffic flow visual editor in the Amazon Route 53 console or the API actions for traffic policies and traffic policy instances. Save the configuration as a traffic policy, then associate the traffic policy with one or more domain names (such as example.com) or subdomain names (such as www.example.com), in the same hosted zone or in multiple hosted zones. You can roll back the updates if the new configuration isn't performing as expected. For more information, see Using Traffic Flow to Route DNS Traffic in the Amazon Route 53 Developer Guide.  Use ChangeResourceRecordsSetsRequest to perform the following actions:    CREATE: Creates a resource record set that has the specified values.    DELETE: Deletes an existing resource record set that has the specified values for Name, Type, Set Identifier (for code latency, weighted, geolocation, and failover resource record sets), and TTL (except alias resource record sets, for which the TTL is determined by the AWS resource you're routing queries to).    UPSERT: If a resource record set does not already exist, AWS creates it. If a resource set does exist, Amazon Route 53 updates it with the values in the request. Amazon Route 53 can update an existing resource record set only when all of the following values match: Name, Type, and Set Identifier (for weighted, latency, geolocation, and failover resource record sets).   In response to a ChangeResourceRecordSets request, the DNS data is changed on all Amazon Route 53 DNS servers. Initially, the status of a change is PENDING, meaning the change has not yet propagated to all the authoritative Amazon Route 53 DNS servers. When the change is propagated to all hosts, the change returns a status of INSYNC. After sending a change request, confirm your change has propagated to all Amazon Route 53 DNS servers. Changes generally propagate to all Amazon Route 53 name servers in a few minutes. In rare circumstances, propagation can take up to 30 minutes. For more information, see GetChange. For information about the limits on a ChangeResourceRecordSets request, see Limits in the Amazon Route 53 Developer Guide.
+   * Create, change, update, or delete authoritative DNS information on all Amazon Route 53 servers. Send a POST request to:   /2013-04-01/hostedzone/Amazon Route 53 hosted Zone ID/rrset resource.  The request body must include a document with a ChangeResourceRecordSetsRequest element. The request body contains a list of change items, known as a change batch. Change batches are considered transactional changes. When using the Amazon Route 53 API to change resource record sets, Amazon Route 53 either makes all or none of the changes in a change batch request. This ensures that Amazon Route 53 never partially implements the intended changes to the resource record sets in a hosted zone.  For example, a change batch request that deletes the CNAME record for www.example.com and creates an alias resource record set for www.example.com. Amazon Route 53 deletes the first resource record set and creates the second resource record set in a single operation. If either the DELETE or the CREATE action fails, then both changes (plus any other changes in the batch) fail, and the original CNAME record continues to exist.  Due to the nature of transactional changes, you can't delete the same resource record set more than once in a single change batch. If you attempt to delete the same change batch more than once, Amazon Route 53 returns an InvalidChangeBatch error.   To create resource record sets for complex routing configurations, use either the traffic flow visual editor in the Amazon Route 53 console or the API actions for traffic policies and traffic policy instances. Save the configuration as a traffic policy, then associate the traffic policy with one or more domain names (such as example.com) or subdomain names (such as www.example.com), in the same hosted zone or in multiple hosted zones. You can roll back the updates if the new configuration isn't performing as expected. For more information, see Using Traffic Flow to Route DNS Traffic in the Amazon Route 53 Developer Guide.  Use ChangeResourceRecordsSetsRequest to perform the following actions:    CREATE: Creates a resource record set that has the specified values.    DELETE: Deletes an existing resource record set that has the applicable values for the following elements:    Name: required to delete any resource record set    Type: required to delete any resource record set    AliasTarget, DNSName, EvaluateTargetHealth, and HostedZoneId: required to delete an alias resource record set    SetIdentifier: required to delete a failover, geolocation, latency, or weighted resource record set     TTL: required to delete any resource record set except an alias resource record set (For alias resource record sets, the TTL is determined by the AWS resource tat you're routing traffic to.)      UPSERT: If a resource record set does not already exist, AWS creates it. If a resource set does exist, Amazon Route 53 updates it with the values in the request. Amazon Route 53 can update an existing resource record set only when all of the following values match: Name, Type, and Set Identifier (for weighted, latency, geolocation, and failover resource record sets).   In response to a ChangeResourceRecordSets request, the DNS data is changed on all Amazon Route 53 DNS servers. Initially, the status of a change is PENDING, meaning the change has not yet propagated to all the authoritative Amazon Route 53 DNS servers. When the change is propagated to all hosts, the change returns a status of INSYNC. After sending a change request, confirm your change has propagated to all Amazon Route 53 DNS servers. Changes generally propagate to all Amazon Route 53 name servers in a few minutes. In rare circumstances, propagation can take up to 30 minutes. For more information, see GetChange. For information about the limits on a ChangeResourceRecordSets request, see Limits in the Amazon Route 53 Developer Guide.
    */
   changeResourceRecordSets(callback?: (err: AWSError, data: Route53.Types.ChangeResourceRecordSetsResponse) => void): Request<Route53.Types.ChangeResourceRecordSetsResponse, AWSError>;
   /**
@@ -36,27 +36,27 @@ declare class Route53 extends Service {
    */
   changeTagsForResource(callback?: (err: AWSError, data: Route53.Types.ChangeTagsForResourceResponse) => void): Request<Route53.Types.ChangeTagsForResourceResponse, AWSError>;
   /**
-   * Creates a new health check. To create a new health check, send a POST request to the /2013-04-01/healthcheck resource. The request body must include an XML document with a CreateHealthCheckRequest element. The response returns the CreateHealthCheckResponse element, containing the health check ID specified when adding health check to a resource record set. For information about adding health checks to resource record sets, see ResourceRecordSet$HealthCheckId in ChangeResourceRecordSets.  If you are registering Amazon EC2 instances with an Elastic Load Balancing (ELB) load balancer, do not create Amazon Route 53 health checks for the Amazon EC2 instances. When you register an Amazon EC2 instance with a load balancer, you configure settings for an ELB health check, which performs a similar function to an Amazon Route 53 health check. You can associate health checks with failover resource record sets in a private hosted zone. Note the following:   Amazon Route 53 health checkers are outside the VPC. To check the health of an endpoint within a VPC by IP address, you must assign a public IP address to the instance in the VPC.   You can configure a health checker to check the health of an external resource that the instance relies on, such as a database server.   You can create a CloudWatch metric, associate an alarm with the metric, and then create a health check that is based on the state of the alarm. For example, you might create a CloudWatch metric that checks the status of the Amazon EC2 StatusCheckFailed metric, add an alarm to the metric, and then create a health check that is based on the state of the alarm. For information about creating CloudWatch metrics and alarms by using the CloudWatch console, see the Amazon CloudWatch Developer Guide.  
+   * Creates a new health check. To create a new health check, send a POST request to the /2013-04-01/healthcheck resource. The request body must include a document with a CreateHealthCheckRequest element. The response returns the CreateHealthCheckResponse element, containing the health check ID specified when adding health check to a resource record set. For information about adding health checks to resource record sets, see ResourceRecordSet$HealthCheckId in ChangeResourceRecordSets.  If you are registering EC2 instances with an Elastic Load Balancing (ELB) load balancer, do not create Amazon Route 53 health checks for the EC2 instances. When you register an EC2 instance with a load balancer, you configure settings for an ELB health check, which performs a similar function to an Amazon Route 53 health check. You can associate health checks with failover resource record sets in a private hosted zone. Note the following:   Amazon Route 53 health checkers are outside the VPC. To check the health of an endpoint within a VPC by IP address, you must assign a public IP address to the instance in the VPC.   You can configure a health checker to check the health of an external resource that the instance relies on, such as a database server.   You can create a CloudWatch metric, associate an alarm with the metric, and then create a health check that is based on the state of the alarm. For example, you might create a CloudWatch metric that checks the status of the Amazon EC2 StatusCheckFailed metric, add an alarm to the metric, and then create a health check that is based on the state of the alarm. For information about creating CloudWatch metrics and alarms by using the CloudWatch console, see the Amazon CloudWatch User Guide.  
    */
   createHealthCheck(params: Route53.Types.CreateHealthCheckRequest, callback?: (err: AWSError, data: Route53.Types.CreateHealthCheckResponse) => void): Request<Route53.Types.CreateHealthCheckResponse, AWSError>;
   /**
-   * Creates a new health check. To create a new health check, send a POST request to the /2013-04-01/healthcheck resource. The request body must include an XML document with a CreateHealthCheckRequest element. The response returns the CreateHealthCheckResponse element, containing the health check ID specified when adding health check to a resource record set. For information about adding health checks to resource record sets, see ResourceRecordSet$HealthCheckId in ChangeResourceRecordSets.  If you are registering Amazon EC2 instances with an Elastic Load Balancing (ELB) load balancer, do not create Amazon Route 53 health checks for the Amazon EC2 instances. When you register an Amazon EC2 instance with a load balancer, you configure settings for an ELB health check, which performs a similar function to an Amazon Route 53 health check. You can associate health checks with failover resource record sets in a private hosted zone. Note the following:   Amazon Route 53 health checkers are outside the VPC. To check the health of an endpoint within a VPC by IP address, you must assign a public IP address to the instance in the VPC.   You can configure a health checker to check the health of an external resource that the instance relies on, such as a database server.   You can create a CloudWatch metric, associate an alarm with the metric, and then create a health check that is based on the state of the alarm. For example, you might create a CloudWatch metric that checks the status of the Amazon EC2 StatusCheckFailed metric, add an alarm to the metric, and then create a health check that is based on the state of the alarm. For information about creating CloudWatch metrics and alarms by using the CloudWatch console, see the Amazon CloudWatch Developer Guide.  
+   * Creates a new health check. To create a new health check, send a POST request to the /2013-04-01/healthcheck resource. The request body must include a document with a CreateHealthCheckRequest element. The response returns the CreateHealthCheckResponse element, containing the health check ID specified when adding health check to a resource record set. For information about adding health checks to resource record sets, see ResourceRecordSet$HealthCheckId in ChangeResourceRecordSets.  If you are registering EC2 instances with an Elastic Load Balancing (ELB) load balancer, do not create Amazon Route 53 health checks for the EC2 instances. When you register an EC2 instance with a load balancer, you configure settings for an ELB health check, which performs a similar function to an Amazon Route 53 health check. You can associate health checks with failover resource record sets in a private hosted zone. Note the following:   Amazon Route 53 health checkers are outside the VPC. To check the health of an endpoint within a VPC by IP address, you must assign a public IP address to the instance in the VPC.   You can configure a health checker to check the health of an external resource that the instance relies on, such as a database server.   You can create a CloudWatch metric, associate an alarm with the metric, and then create a health check that is based on the state of the alarm. For example, you might create a CloudWatch metric that checks the status of the Amazon EC2 StatusCheckFailed metric, add an alarm to the metric, and then create a health check that is based on the state of the alarm. For information about creating CloudWatch metrics and alarms by using the CloudWatch console, see the Amazon CloudWatch User Guide.  
    */
   createHealthCheck(callback?: (err: AWSError, data: Route53.Types.CreateHealthCheckResponse) => void): Request<Route53.Types.CreateHealthCheckResponse, AWSError>;
   /**
-   * Creates a new public hosted zone, used to specify how the Domain Name System (DNS) routes traffic on the Internet for a domain, such as example.com, and its subdomains.   Public hosted zones cannot be converted to a private hosted zone or vice versa. Instead, create a new hosted zone with the same name and create new resource record sets.  Send a POST request to the /2013-04-01/hostedzone resource. The request body must include an XML document with a CreateHostedZoneRequest element. The response returns the CreateHostedZoneResponse element containing metadata about the hosted zone. Fore more information about charges for hosted zones, see Amazon Route 53 Pricing. Note the following:   You cannot create a hosted zone for a top-level domain (TLD).   Amazon Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see NS and SOA Records that Amazon Route 53 Creates for a Hosted Zone in the Amazon Route 53 Developer Guide.   If your domain is registered with a registrar other than Amazon Route 53, you must update the name servers with your registrar to make Amazon Route 53 your DNS service. For more information, see Configuring Amazon Route 53 as your DNS Service in the Amazon Route 53 Developer's Guide.   After creating a zone, its initial status is PENDING. This means that it is not yet available on all DNS servers. The status of the zone changes to INSYNC when the NS and SOA records are available on all Amazon Route 53 DNS servers.  When trying to create a hosted zone using a reusable delegation set, specify an optional DelegationSetId, and Amazon Route 53 would assign those 4 NS records for the zone, instead of allotting a new one.
+   * Creates a new public hosted zone, used to specify how the Domain Name System (DNS) routes traffic on the Internet for a domain, such as example.com, and its subdomains.   Public hosted zones can't be converted to a private hosted zone or vice versa. Instead, create a new hosted zone with the same name and create new resource record sets.  Send a POST request to the /2013-04-01/hostedzone resource. The request body must include a document with a CreateHostedZoneRequest element. The response returns the CreateHostedZoneResponse element containing metadata about the hosted zone. Fore more information about charges for hosted zones, see Amazon Route 53 Pricing. Note the following:   You can't create a hosted zone for a top-level domain (TLD).   Amazon Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see NS and SOA Records that Amazon Route 53 Creates for a Hosted Zone in the Amazon Route 53 Developer Guide.   If your domain is registered with a registrar other than Amazon Route 53, you must update the name servers with your registrar to make Amazon Route 53 your DNS service. For more information, see Configuring Amazon Route 53 as your DNS Service in the Amazon Route 53 Developer's Guide.   After creating a zone, its initial status is PENDING. This means that it is not yet available on all DNS servers. The status of the zone changes to INSYNC when the NS and SOA records are available on all Amazon Route 53 DNS servers.  When trying to create a hosted zone using a reusable delegation set, specify an optional DelegationSetId, and Amazon Route 53 would assign those 4 NS records for the zone, instead of allotting a new one.
    */
   createHostedZone(params: Route53.Types.CreateHostedZoneRequest, callback?: (err: AWSError, data: Route53.Types.CreateHostedZoneResponse) => void): Request<Route53.Types.CreateHostedZoneResponse, AWSError>;
   /**
-   * Creates a new public hosted zone, used to specify how the Domain Name System (DNS) routes traffic on the Internet for a domain, such as example.com, and its subdomains.   Public hosted zones cannot be converted to a private hosted zone or vice versa. Instead, create a new hosted zone with the same name and create new resource record sets.  Send a POST request to the /2013-04-01/hostedzone resource. The request body must include an XML document with a CreateHostedZoneRequest element. The response returns the CreateHostedZoneResponse element containing metadata about the hosted zone. Fore more information about charges for hosted zones, see Amazon Route 53 Pricing. Note the following:   You cannot create a hosted zone for a top-level domain (TLD).   Amazon Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see NS and SOA Records that Amazon Route 53 Creates for a Hosted Zone in the Amazon Route 53 Developer Guide.   If your domain is registered with a registrar other than Amazon Route 53, you must update the name servers with your registrar to make Amazon Route 53 your DNS service. For more information, see Configuring Amazon Route 53 as your DNS Service in the Amazon Route 53 Developer's Guide.   After creating a zone, its initial status is PENDING. This means that it is not yet available on all DNS servers. The status of the zone changes to INSYNC when the NS and SOA records are available on all Amazon Route 53 DNS servers.  When trying to create a hosted zone using a reusable delegation set, specify an optional DelegationSetId, and Amazon Route 53 would assign those 4 NS records for the zone, instead of allotting a new one.
+   * Creates a new public hosted zone, used to specify how the Domain Name System (DNS) routes traffic on the Internet for a domain, such as example.com, and its subdomains.   Public hosted zones can't be converted to a private hosted zone or vice versa. Instead, create a new hosted zone with the same name and create new resource record sets.  Send a POST request to the /2013-04-01/hostedzone resource. The request body must include a document with a CreateHostedZoneRequest element. The response returns the CreateHostedZoneResponse element containing metadata about the hosted zone. Fore more information about charges for hosted zones, see Amazon Route 53 Pricing. Note the following:   You can't create a hosted zone for a top-level domain (TLD).   Amazon Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see NS and SOA Records that Amazon Route 53 Creates for a Hosted Zone in the Amazon Route 53 Developer Guide.   If your domain is registered with a registrar other than Amazon Route 53, you must update the name servers with your registrar to make Amazon Route 53 your DNS service. For more information, see Configuring Amazon Route 53 as your DNS Service in the Amazon Route 53 Developer's Guide.   After creating a zone, its initial status is PENDING. This means that it is not yet available on all DNS servers. The status of the zone changes to INSYNC when the NS and SOA records are available on all Amazon Route 53 DNS servers.  When trying to create a hosted zone using a reusable delegation set, specify an optional DelegationSetId, and Amazon Route 53 would assign those 4 NS records for the zone, instead of allotting a new one.
    */
   createHostedZone(callback?: (err: AWSError, data: Route53.Types.CreateHostedZoneResponse) => void): Request<Route53.Types.CreateHostedZoneResponse, AWSError>;
   /**
-   * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet marks the delegation set associated with that zone as reusable Send a POST request to the /2013-04-01/delegationset resource. The request body must include an XML document with a CreateReusableDelegationSetRequest element.  A reusable delegation set cannot be associated with a private hosted zone/  For more information, including a procedure on how to create and configure a reusable delegation set (also known as white label name servers), see Configuring White Label Name Servers.
+   * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet marks the delegation set associated with that zone as reusable Send a POST request to the /2013-04-01/delegationset resource. The request body must include a document with a CreateReusableDelegationSetRequest element.  A reusable delegation set can't be associated with a private hosted zone/  For more information, including a procedure on how to create and configure a reusable delegation set (also known as white label name servers), see Configuring White Label Name Servers.
    */
   createReusableDelegationSet(params: Route53.Types.CreateReusableDelegationSetRequest, callback?: (err: AWSError, data: Route53.Types.CreateReusableDelegationSetResponse) => void): Request<Route53.Types.CreateReusableDelegationSetResponse, AWSError>;
   /**
-   * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet marks the delegation set associated with that zone as reusable Send a POST request to the /2013-04-01/delegationset resource. The request body must include an XML document with a CreateReusableDelegationSetRequest element.  A reusable delegation set cannot be associated with a private hosted zone/  For more information, including a procedure on how to create and configure a reusable delegation set (also known as white label name servers), see Configuring White Label Name Servers.
+   * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet marks the delegation set associated with that zone as reusable Send a POST request to the /2013-04-01/delegationset resource. The request body must include a document with a CreateReusableDelegationSetRequest element.  A reusable delegation set can't be associated with a private hosted zone/  For more information, including a procedure on how to create and configure a reusable delegation set (also known as white label name servers), see Configuring White Label Name Servers.
    */
   createReusableDelegationSet(callback?: (err: AWSError, data: Route53.Types.CreateReusableDelegationSetResponse) => void): Request<Route53.Types.CreateReusableDelegationSetResponse, AWSError>;
   /**
@@ -84,11 +84,19 @@ declare class Route53 extends Service {
    */
   createTrafficPolicyVersion(callback?: (err: AWSError, data: Route53.Types.CreateTrafficPolicyVersionResponse) => void): Request<Route53.Types.CreateTrafficPolicyVersionResponse, AWSError>;
   /**
-   * Deletes a health check. Send a DELETE request to the /2013-04-01/healthcheck/health check ID  resource.  Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one or more resource record sets. If you delete a health check and you don't update the associated resource record sets, the future status of the health check cannot be predicted and may change. This will affect the routing of DNS queries for your DNS failover configuration. For more information, see Replacing and Deleting Health Checks in the Amazon Route 53 Developer Guide. 
+   * Authorizes the AWS account that created a specified VPC to submit an AssociateVPCWithHostedZone request to associate the VPC with a specified hosted zone that was created by a different account. To submit a CreateVPCAssociationAuthorization request, you must use the account that created the hosted zone. After you authorize the association, use the account that created the VPC to submit an AssociateVPCWithHostedZone request.  If you want to associate multiple VPCs that you created by using one account with a hosted zone that you created by using a different account, you must submit one authorization request for each VPC.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/authorizevpcassociation resource. The request body must include a document with a CreateVPCAssociationAuthorizationRequest element. The response contains information about the authorization.
+   */
+  createVPCAssociationAuthorization(params: Route53.Types.CreateVPCAssociationAuthorizationRequest, callback?: (err: AWSError, data: Route53.Types.CreateVPCAssociationAuthorizationResponse) => void): Request<Route53.Types.CreateVPCAssociationAuthorizationResponse, AWSError>;
+  /**
+   * Authorizes the AWS account that created a specified VPC to submit an AssociateVPCWithHostedZone request to associate the VPC with a specified hosted zone that was created by a different account. To submit a CreateVPCAssociationAuthorization request, you must use the account that created the hosted zone. After you authorize the association, use the account that created the VPC to submit an AssociateVPCWithHostedZone request.  If you want to associate multiple VPCs that you created by using one account with a hosted zone that you created by using a different account, you must submit one authorization request for each VPC.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/authorizevpcassociation resource. The request body must include a document with a CreateVPCAssociationAuthorizationRequest element. The response contains information about the authorization.
+   */
+  createVPCAssociationAuthorization(callback?: (err: AWSError, data: Route53.Types.CreateVPCAssociationAuthorizationResponse) => void): Request<Route53.Types.CreateVPCAssociationAuthorizationResponse, AWSError>;
+  /**
+   * Deletes a health check. Send a DELETE request to the /2013-04-01/healthcheck/health check ID  resource.  Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one or more resource record sets. If you delete a health check and you don't update the associated resource record sets, the future status of the health check can't be predicted and may change. This will affect the routing of DNS queries for your DNS failover configuration. For more information, see Replacing and Deleting Health Checks in the Amazon Route 53 Developer Guide. 
    */
   deleteHealthCheck(params: Route53.Types.DeleteHealthCheckRequest, callback?: (err: AWSError, data: Route53.Types.DeleteHealthCheckResponse) => void): Request<Route53.Types.DeleteHealthCheckResponse, AWSError>;
   /**
-   * Deletes a health check. Send a DELETE request to the /2013-04-01/healthcheck/health check ID  resource.  Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one or more resource record sets. If you delete a health check and you don't update the associated resource record sets, the future status of the health check cannot be predicted and may change. This will affect the routing of DNS queries for your DNS failover configuration. For more information, see Replacing and Deleting Health Checks in the Amazon Route 53 Developer Guide. 
+   * Deletes a health check. Send a DELETE request to the /2013-04-01/healthcheck/health check ID  resource.  Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one or more resource record sets. If you delete a health check and you don't update the associated resource record sets, the future status of the health check can't be predicted and may change. This will affect the routing of DNS queries for your DNS failover configuration. For more information, see Replacing and Deleting Health Checks in the Amazon Route 53 Developer Guide. 
    */
   deleteHealthCheck(callback?: (err: AWSError, data: Route53.Types.DeleteHealthCheckResponse) => void): Request<Route53.Types.DeleteHealthCheckResponse, AWSError>;
   /**
@@ -124,11 +132,19 @@ declare class Route53 extends Service {
    */
   deleteTrafficPolicyInstance(callback?: (err: AWSError, data: Route53.Types.DeleteTrafficPolicyInstanceResponse) => void): Request<Route53.Types.DeleteTrafficPolicyInstanceResponse, AWSError>;
   /**
-   * Disassociates a VPC from a Amazon Route 53 private hosted zone.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/disassociatevpc resource. The request body must include an XML document with a DisassociateVPCFromHostedZoneRequest element. The response returns the DisassociateVPCFromHostedZoneResponse element.  You can only disassociate a VPC from a private hosted zone when two or more VPCs are associated with that hosted zone. You cannot convert a private hosted zone into a public hosted zone. 
+   * Removes authorization to submit an AssociateVPCWithHostedZone request to associate a specified VPC with a hosted zone that was created by a different account. You must use the account that created the hosted zone to submit a DeleteVPCAssociationAuthorization request.  Sending this request only prevents the AWS account that created the VPC from associating the VPC with the Amazon Route 53 hosted zone in the future. If the VPC is already associated with the hosted zone, DeleteVPCAssociationAuthorization won't disassociate the VPC from the hosted zone. If you want to delete an existing association, use DisassociateVPCFromHostedZone.  Send a DELETE request to the /2013-04-01/hostedzone/hosted zone ID/deauthorizevpcassociation resource. The request body must include a document with a DeleteVPCAssociationAuthorizationRequest element.
+   */
+  deleteVPCAssociationAuthorization(params: Route53.Types.DeleteVPCAssociationAuthorizationRequest, callback?: (err: AWSError, data: Route53.Types.DeleteVPCAssociationAuthorizationResponse) => void): Request<Route53.Types.DeleteVPCAssociationAuthorizationResponse, AWSError>;
+  /**
+   * Removes authorization to submit an AssociateVPCWithHostedZone request to associate a specified VPC with a hosted zone that was created by a different account. You must use the account that created the hosted zone to submit a DeleteVPCAssociationAuthorization request.  Sending this request only prevents the AWS account that created the VPC from associating the VPC with the Amazon Route 53 hosted zone in the future. If the VPC is already associated with the hosted zone, DeleteVPCAssociationAuthorization won't disassociate the VPC from the hosted zone. If you want to delete an existing association, use DisassociateVPCFromHostedZone.  Send a DELETE request to the /2013-04-01/hostedzone/hosted zone ID/deauthorizevpcassociation resource. The request body must include a document with a DeleteVPCAssociationAuthorizationRequest element.
+   */
+  deleteVPCAssociationAuthorization(callback?: (err: AWSError, data: Route53.Types.DeleteVPCAssociationAuthorizationResponse) => void): Request<Route53.Types.DeleteVPCAssociationAuthorizationResponse, AWSError>;
+  /**
+   * Disassociates a VPC from a Amazon Route 53 private hosted zone.   You can't disassociate the last VPC from a private hosted zone.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/disassociatevpc resource. The request body must include a document with a DisassociateVPCFromHostedZoneRequest element. The response includes a DisassociateVPCFromHostedZoneResponse element.  You can't disassociate a VPC from a private hosted zone when only one VPC is associated with the hosted zone. You also can't convert a private hosted zone into a public hosted zone. 
    */
   disassociateVPCFromHostedZone(params: Route53.Types.DisassociateVPCFromHostedZoneRequest, callback?: (err: AWSError, data: Route53.Types.DisassociateVPCFromHostedZoneResponse) => void): Request<Route53.Types.DisassociateVPCFromHostedZoneResponse, AWSError>;
   /**
-   * Disassociates a VPC from a Amazon Route 53 private hosted zone.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/disassociatevpc resource. The request body must include an XML document with a DisassociateVPCFromHostedZoneRequest element. The response returns the DisassociateVPCFromHostedZoneResponse element.  You can only disassociate a VPC from a private hosted zone when two or more VPCs are associated with that hosted zone. You cannot convert a private hosted zone into a public hosted zone. 
+   * Disassociates a VPC from a Amazon Route 53 private hosted zone.   You can't disassociate the last VPC from a private hosted zone.  Send a POST request to the /2013-04-01/hostedzone/hosted zone ID/disassociatevpc resource. The request body must include a document with a DisassociateVPCFromHostedZoneRequest element. The response includes a DisassociateVPCFromHostedZoneResponse element.  You can't disassociate a VPC from a private hosted zone when only one VPC is associated with the hosted zone. You also can't convert a private hosted zone into a public hosted zone. 
    */
   disassociateVPCFromHostedZone(callback?: (err: AWSError, data: Route53.Types.DisassociateVPCFromHostedZoneResponse) => void): Request<Route53.Types.DisassociateVPCFromHostedZoneResponse, AWSError>;
   /**
@@ -139,14 +155,6 @@ declare class Route53 extends Service {
    * Returns the current status of a change batch request. The status is one of the following values:    PENDING indicates that the changes in this request have not replicated to all Amazon Route 53 DNS servers. This is the initial status of all change batch requests.    INSYNC indicates that the changes have replicated to all Amazon Route 53 DNS servers.   
    */
   getChange(callback?: (err: AWSError, data: Route53.Types.GetChangeResponse) => void): Request<Route53.Types.GetChangeResponse, AWSError>;
-  /**
-   * Returns the status and changes of a change batch request.
-   */
-  getChangeDetails(params: Route53.Types.GetChangeDetailsRequest, callback?: (err: AWSError, data: Route53.Types.GetChangeDetailsResponse) => void): Request<Route53.Types.GetChangeDetailsResponse, AWSError>;
-  /**
-   * Returns the status and changes of a change batch request.
-   */
-  getChangeDetails(callback?: (err: AWSError, data: Route53.Types.GetChangeDetailsResponse) => void): Request<Route53.Types.GetChangeDetailsResponse, AWSError>;
   /**
    * Retrieves a list of the IP ranges used by Amazon Route 53 health checkers to check the health of your resources. Send a GET request to the /Amazon Route 53 API version/checkeripranges resource. Use these IP addresses to configure router and firewall rules to allow health checkers to check the health of your resources.
    */
@@ -243,22 +251,6 @@ declare class Route53 extends Service {
    * Gets the number of traffic policy instances that are associated with the current AWS account. To get the number of traffic policy instances, send a GET request to the /2013-04-01/trafficpolicyinstancecount resource.
    */
   getTrafficPolicyInstanceCount(callback?: (err: AWSError, data: Route53.Types.GetTrafficPolicyInstanceCountResponse) => void): Request<Route53.Types.GetTrafficPolicyInstanceCountResponse, AWSError>;
-  /**
-   * Gets the list of ChangeBatches in a given time period for a given hosted zone.
-   */
-  listChangeBatchesByHostedZone(params: Route53.Types.ListChangeBatchesByHostedZoneRequest, callback?: (err: AWSError, data: Route53.Types.ListChangeBatchesByHostedZoneResponse) => void): Request<Route53.Types.ListChangeBatchesByHostedZoneResponse, AWSError>;
-  /**
-   * Gets the list of ChangeBatches in a given time period for a given hosted zone.
-   */
-  listChangeBatchesByHostedZone(callback?: (err: AWSError, data: Route53.Types.ListChangeBatchesByHostedZoneResponse) => void): Request<Route53.Types.ListChangeBatchesByHostedZoneResponse, AWSError>;
-  /**
-   * Gets the list of ChangeBatches in a given time period for a given hosted zone and RRSet.
-   */
-  listChangeBatchesByRRSet(params: Route53.Types.ListChangeBatchesByRRSetRequest, callback?: (err: AWSError, data: Route53.Types.ListChangeBatchesByRRSetResponse) => void): Request<Route53.Types.ListChangeBatchesByRRSetResponse, AWSError>;
-  /**
-   * Gets the list of ChangeBatches in a given time period for a given hosted zone and RRSet.
-   */
-  listChangeBatchesByRRSet(callback?: (err: AWSError, data: Route53.Types.ListChangeBatchesByRRSetResponse) => void): Request<Route53.Types.ListChangeBatchesByRRSetResponse, AWSError>;
   /**
    * Retrieves a list of supported geo locations. Send a GET request to the /2013-04-01/geolocations resource. The response to this request includes a GeoLocationDetailsList element for each location that Amazon Route 53 supports. Countries are listed first, and continents are listed last. If Amazon Route 53 supports subdivisions for a country (for example, states or provinces), the subdivisions for that country are listed in alphabetical order immediately after the corresponding country. 
    */
@@ -364,6 +356,14 @@ declare class Route53 extends Service {
    */
   listTrafficPolicyVersions(callback?: (err: AWSError, data: Route53.Types.ListTrafficPolicyVersionsResponse) => void): Request<Route53.Types.ListTrafficPolicyVersionsResponse, AWSError>;
   /**
+   * Gets a list of the VPCs that were created by other accounts and that can be associated with a specified hosted zone because you've submitted one or more CreateVPCAssociationAuthorization requests.  Send a GET request to the /2013-04-01/hostedzone/hosted zone ID/authorizevpcassociation resource. The response to this request includes a VPCs element with a VPC child element for each VPC that can be associated with the hosted zone. Amazon Route 53 returns up to 50 VPCs per page. To return fewer VPCs per page, include the MaxResults parameter:   /2013-04-01/hostedzone/hosted zone ID/authorizevpcassociation?MaxItems=VPCs per page   If the response includes a NextToken element, there are more VPCs to list. To get the next page of VPCs, submit another ListVPCAssociationAuthorizations request, and include the value of the NextToken element from the response in the NextToken request parameter:  /2013-04-01/hostedzone/hosted zone ID/authorizevpcassociation?MaxItems=VPCs per page&amp;NextToken=  
+   */
+  listVPCAssociationAuthorizations(params: Route53.Types.ListVPCAssociationAuthorizationsRequest, callback?: (err: AWSError, data: Route53.Types.ListVPCAssociationAuthorizationsResponse) => void): Request<Route53.Types.ListVPCAssociationAuthorizationsResponse, AWSError>;
+  /**
+   * Gets a list of the VPCs that were created by other accounts and that can be associated with a specified hosted zone because you've submitted one or more CreateVPCAssociationAuthorization requests.  Send a GET request to the /2013-04-01/hostedzone/hosted zone ID/authorizevpcassociation resource. The response to this request includes a VPCs element with a VPC child element for each VPC that can be associated with the hosted zone. Amazon Route 53 returns up to 50 VPCs per page. To return fewer VPCs per page, include the MaxResults parameter:   /2013-04-01/hostedzone/hosted zone ID/authorizevpcassociation?MaxItems=VPCs per page   If the response includes a NextToken element, there are more VPCs to list. To get the next page of VPCs, submit another ListVPCAssociationAuthorizations request, and include the value of the NextToken element from the response in the NextToken request parameter:  /2013-04-01/hostedzone/hosted zone ID/authorizevpcassociation?MaxItems=VPCs per page&amp;NextToken=  
+   */
+  listVPCAssociationAuthorizations(callback?: (err: AWSError, data: Route53.Types.ListVPCAssociationAuthorizationsResponse) => void): Request<Route53.Types.ListVPCAssociationAuthorizationsResponse, AWSError>;
+  /**
    * Gets the value that Amazon Route 53 returns in response to a DNS request for a specified record name and type. You can optionally specify the IP address of a DNS resolver, an EDNS0 client subnet IP address, and a subnet mask. 
    */
   testDNSAnswer(params: Route53.Types.TestDNSAnswerRequest, callback?: (err: AWSError, data: Route53.Types.TestDNSAnswerResponse) => void): Request<Route53.Types.TestDNSAnswerResponse, AWSError>;
@@ -372,11 +372,11 @@ declare class Route53 extends Service {
    */
   testDNSAnswer(callback?: (err: AWSError, data: Route53.Types.TestDNSAnswerResponse) => void): Request<Route53.Types.TestDNSAnswerResponse, AWSError>;
   /**
-   * Updates an existing health check. Send a POST request to the /2013-04-01/healthcheck/health check ID  resource. The request body must include an XML document with an UpdateHealthCheckRequest element. For more information about updating health checks, see Creating, Updating, and Deleting Health Checks in the Amazon Route 53 Developer Guide.
+   * Updates an existing health check. Send a POST request to the /2013-04-01/healthcheck/health check ID  resource. The request body must include a document with an UpdateHealthCheckRequest element. For more information about updating health checks, see Creating, Updating, and Deleting Health Checks in the Amazon Route 53 Developer Guide.
    */
   updateHealthCheck(params: Route53.Types.UpdateHealthCheckRequest, callback?: (err: AWSError, data: Route53.Types.UpdateHealthCheckResponse) => void): Request<Route53.Types.UpdateHealthCheckResponse, AWSError>;
   /**
-   * Updates an existing health check. Send a POST request to the /2013-04-01/healthcheck/health check ID  resource. The request body must include an XML document with an UpdateHealthCheckRequest element. For more information about updating health checks, see Creating, Updating, and Deleting Health Checks in the Amazon Route 53 Developer Guide.
+   * Updates an existing health check. Send a POST request to the /2013-04-01/healthcheck/health check ID  resource. The request body must include a document with an UpdateHealthCheckRequest element. For more information about updating health checks, see Creating, Updating, and Deleting Health Checks in the Amazon Route 53 Developer Guide.
    */
   updateHealthCheck(callback?: (err: AWSError, data: Route53.Types.UpdateHealthCheckResponse) => void): Request<Route53.Types.UpdateHealthCheckResponse, AWSError>;
   /**
@@ -413,7 +413,6 @@ declare class Route53 extends Service {
   waitFor(state: "resourceRecordSetsChanged", callback?: (err: AWSError, data: Route53.Types.GetChangeResponse) => void): Request<Route53.Types.GetChangeResponse, AWSError>;
 }
 declare namespace Route53.Types {
-  export type AWSAccountID = string;
   export interface AlarmIdentifier {
     /**
      * A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy. For the current list of CloudWatch regions, see Amazon CloudWatch in AWS Regions and Endpoints in the Amazon Web Services General Reference.
@@ -428,26 +427,26 @@ declare namespace Route53.Types {
   export type AliasHealthEnabled = boolean;
   export interface AliasTarget {
     /**
-     *  Alias resource records sets only: The value used depends on where the queries are routed:  A CloudFront distribution  Specify Z2FDTNDATAQYW2.  Alias resource record sets for CloudFront cannot be created in a private zone.   Elastic Beanstalk environment  Specify the hosted zone ID for the region in which you created the environment. The environment must have a regionalized subdomain. For a list of regions and the corresponding hosted zone IDs, see AWS Elastic Beanstalk in the Regions and Endpoints chapter of the AWS General Reference.  ELB load balancer  Specify the value of the hosted zone ID for the load balancer. Use the following methods to get the hosted zone ID:   AWS Management Console: Go to the Amazon EC2; page, click Load Balancers in the navigation pane, select the load balancer, and get the value of the Hosted Zone ID field on the Description tab. Use the same process to get the DNS Name. See HostedZone$Name.   Elastic Load Balancing API: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneNameID. Use the same process to get the CanonicalHostedZoneName. See HostedZone$Name.   AWS CLI: Use  describe-load-balancers  to get the value of CanonicalHostedZoneNameID. Use the same process to get the CanonicalHostedZoneName. See HostedZone$Name.    An Amazon S3 bucket configured as a static website  Specify the hosted zone ID for the Amazon S3 website endpoint in which you created the bucket. For more information about valid values, see the table  Amazon S3 (S3) Website Endpoints in the Amazon Web Services General Reference.  Another Amazon Route 53 resource record set in your hosted zone  Specify the hosted zone ID of your hosted zone. (An alias resource record set cannot reference a resource record set in a different hosted zone.)  
+     *  Alias resource records sets only: The value used depends on where the queries are routed:  A CloudFront distribution  Specify Z2FDTNDATAQYW2.  Alias resource record sets for CloudFront can't be created in a private zone.   Elastic Beanstalk environment  Specify the hosted zone ID for the region in which you created the environment. The environment must have a regionalized subdomain. For a list of regions and the corresponding hosted zone IDs, see AWS Elastic Beanstalk in the Regions and Endpoints chapter of the Amazon Web Services General Reference.  ELB load balancer  Specify the value of the hosted zone ID for the load balancer. Use the following methods to get the hosted zone ID:   AWS Management Console: Go to the Amazon EC2 page, click Load Balancers in the navigation pane, select the load balancer, and get the value of the Hosted Zone ID field on the Description tab. Use the same process to get the value of DNS Name. See HostedZone$Name.   Elastic Load Balancing API: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneNameID. Use the same process to get the CanonicalHostedZoneName. See HostedZone$Name.   AWS CLI: Use  describe-load-balancers  to get the value of CanonicalHostedZoneNameID. Use the same process to get the CanonicalHostedZoneName. See HostedZone$Name.    An Amazon S3 bucket configured as a static website  Specify the hosted zone ID for the Amazon S3 website endpoint in which you created the bucket. For more information about valid values, see the table  Amazon S3 (S3) Website Endpoints in the Amazon Web Services General Reference.  Another Amazon Route 53 resource record set in your hosted zone  Specify the hosted zone ID of your hosted zone. (An alias resource record set can't reference a resource record set in a different hosted zone.)  
      */
     HostedZoneId: ResourceId;
     /**
-     *  Alias resource record sets only: The value that you specify depends on where you want to route queries:    A CloudFront distribution: Specify the domain name that CloudFront assigned when you created your distribution. Your CloudFront distribution must include an alternate domain name that matches the name of the resource record set. For example, if the name of the resource record set is acme.example.com, your CloudFront distribution must include acme.example.com as one of the alternate domain names. For more information, see Using Alternate Domain Names (CNAMEs) in the Amazon CloudFront Developer Guide.    Elastic Beanstalk environment: Specify the CNAME attribute for the environment. (The environment must have a regionalized domain name.) You can use the following methods to get the value of the CNAME attribute:    AWS Managment Console: For information about how to get the value by using the console, see Using Custom Domains with Elastic Beanstalk in the AWS Elastic Beanstalk Developer Guide.    Elastic Load Balancing API: Use the DescribeEnvironments action to get the value of the CNAME attribute. For more information, see DescribeEnvironments in the AWS Elastic Beanstalk API Reference.    AWS CLI: Use the describe-environments command to get the value of the CNAME attribute. For more information, see describe-environments in the AWS Command Line Interface Reference.      An ELB load balancer: Specify the DNS name associated with the load balancer. Get the DNS name by using the AWS Management Console, the ELB API, or the AWS CLI. Use the same method to get values for HostedZoneId and DNSName. If you get one value from the console and the other value from the API or the CLI, creating the resource record set will fail.    AWS Management Console: Go to the Amazon EC2 page, click Load Balancers in the navigation pane, choose the load balancer, choose the Description tab, and get the value of the DNS Name field that begins with dualstack. Use the same process to get the Hosted Zone ID. See HostedZone$Id.    Elastic Load Balancing API: Use  DescribeLoadBalancers  to get the value of CanonicalHostedZoneName. Use the same process to get the CanonicalHostedZoneNameId. See HostedZone$Id.    AWS CLI: Use  describe-load-balancers  to get the value of CanonicalHostedZoneName. Use the same process to get the CanonicalHostedZoneNameId. See HostedZoneId.      An Amazon S3 bucket that is configured as a static website: Specify the domain name of the Amazon S3 website endpoint in which you created the bucket; for example, s3-website-us-east-1.amazonaws.com. For more information about valid values, see the table Amazon Simple Storage Service (S3) Website Endpoints in the Amazon Web Services General Reference. For more information about using Amazon S3 buckets for websites, see Hosting a Static Website on Amazon S3 in the Amazon Simple Storage Service Developer Guide.     Another Amazon Route 53 resource record set: Specify the value of the Name element for a resource record set in the current hosted zone.  
+     *  Alias resource record sets only: The value that you specify depends on where you want to route queries:    A CloudFront distribution: Specify the domain name that CloudFront assigned when you created your distribution. Your CloudFront distribution must include an alternate domain name that matches the name of the resource record set. For example, if the name of the resource record set is acme.example.com, your CloudFront distribution must include acme.example.com as one of the alternate domain names. For more information, see Using Alternate Domain Names (CNAMEs) in the Amazon CloudFront Developer Guide.    Elastic Beanstalk environment: Specify the CNAME attribute for the environment. (The environment must have a regionalized domain name.) You can use the following methods to get the value of the CNAME attribute:    AWS Managment Console: For information about how to get the value by using the console, see Using Custom Domains with AWS Elastic Beanstalk in the AWS Elastic Beanstalk Developer Guide.    Elastic Load Balancing API: Use the DescribeEnvironments action to get the value of the CNAME attribute. For more information, see DescribeEnvironments in the AWS Elastic Beanstalk API Reference.    AWS CLI: Use the describe-environments command to get the value of the CNAME attribute. For more information, see describe-environments in the AWS Command Line Interface Reference.      An ELB load balancer: Specify the DNS name associated with the load balancer. Get the DNS name by using the AWS Management Console, the ELB API, or the AWS CLI. Use the same method to get values for HostedZoneId and DNSName. If you get one value from the console and the other value from the API or the CLI, creating the resource record set will fail.    AWS Management Console: Go to the EC2 page, click Load Balancers in the navigation pane, choose the load balancer, choose the Description tab, and get the value of the DNS Name field that begins with dualstack. Use the same process to get the Hosted Zone ID. See HostedZone$Id.    Elastic Load Balancing API: Use  DescribeLoadBalancers  to get the value of CanonicalHostedZoneName. Use the same process to get the CanonicalHostedZoneNameId. See HostedZone$Id.    AWS CLI: Use  describe-load-balancers  to get the value of CanonicalHostedZoneName. Use the same process to get the CanonicalHostedZoneNameId. See HostedZoneId.      An Amazon S3 bucket that is configured as a static website: Specify the domain name of the Amazon S3 website endpoint in which you created the bucket; for example, s3-website-us-east-1.amazonaws.com. For more information about valid values, see the table Amazon Simple Storage Service (S3) Website Endpoints in the Amazon Web Services General Reference. For more information about using S3 buckets for websites, see Hosting a Static Website on Amazon S3 in the Amazon S3 Developer Guide.     Another Amazon Route 53 resource record set: Specify the value of the Name element for a resource record set in the current hosted zone.  
      */
     DNSName: DNSName;
     /**
-     *  Applies only to alias, weighted alias, latency alias, and failover alias record sets: If you set the value of EvaluateTargetHealth to true for the resource record set or sets in an alias, weighted alias, latency alias, or failover alias resource record set, and if you specify a value for  HealthCheck$Id  for every resource record set that is referenced by these alias resource record sets, the alias resource record sets inherit the health of the referenced resource record sets. In this configuration, when Amazon Route 53 receives a DNS query for an alias resource record set:   Amazon Route 53 looks at the resource record sets that are referenced by the alias resource record sets to determine which health checks they're using.   Amazon Route 53 checks the current status of each health check. (Amazon Route 53 periodically checks the health of the endpoint that is specified in a health check; it doesn't perform the health check when the DNS query arrives.)   Based on the status of the health checks, Amazon Route 53 determines which resource record sets are healthy. Unhealthy resource record sets are immediately removed from consideration. In addition, if all of the resource record sets that are referenced by an alias resource record set are unhealthy, that alias resource record set also is immediately removed from consideration.   Based on the configuration of the alias resource record sets (weighted alias or latency alias, for example) and the configuration of the resource record sets that they reference, Amazon Route 53 chooses a resource record set from the healthy resource record sets, and responds to the query.   Note the following:   You cannot set EvaluateTargetHealth to true when the alias target is a CloudFront distribution.   If the AWS resource that you specify in AliasTarget is a resource record set or a group of resource record sets (for example, a group of weighted resource record sets), but it is not another alias resource record set, we recommend that you associate a health check with all of the resource record sets in the alias target.For more information, see What Happens When You Omit Health Checks? in the Amazon Route 53 Developer Guide.   If you specify an Elastic Beanstalk environment in HostedZoneId and DNSName, and if the environment contains an ELB load balancer, Elastic Load Balancing routes queries only to the healthy Amazon EC2 instances that are registered with the load balancer. (An environment automatically contains an ELB load balancer if it includes more than one Amazon EC2 instance.) If you set EvaluateTargetHealth to true and either no Amazon EC2 instances are healthy or the load balancer itself is unhealthy, Amazon Route 53 routes queries to other available resources that are healthy, if any. If the environment contains a single Amazon EC2 instance, there are no special requirements.   If you specify an ELB load balancer in  AliasTarget , Elastic Load Balancing routes queries only to the healthy Amazon EC2 instances that are registered with the load balancer. If no Amazon EC2 instances are healthy or if the load balancer itself is unhealthy, and if EvaluateTargetHealth is true for the corresponding alias resource record set, Amazon Route 53 routes queries to other resources. When you create a load balancer, you configure settings for Elastic Load Balancing health checks; they're not Amazon Route 53 health checks, but they perform a similar function. Do not create Amazon Route 53 health checks for the Amazon EC2 instances that you register with an ELB load balancer. For more information, see How Health Checks Work in More Complex Amazon Route 53 Configurations in the Amazon Route 53 Developers Guide.   We recommend that you set EvaluateTargetHealth to true only when you have enough idle capacity to handle the failure of one or more endpoints.   For more information and examples, see Amazon Route 53 Health Checks and DNS Failover in the Amazon Route 53 Developer Guide.
+     *  Applies only to alias, weighted alias, latency alias, and failover alias record sets: If you set the value of EvaluateTargetHealth to true for the resource record set or sets in an alias, weighted alias, latency alias, or failover alias resource record set, and if you specify a value for  HealthCheck$Id  for every resource record set that is referenced by these alias resource record sets, the alias resource record sets inherit the health of the referenced resource record sets. In this configuration, when Amazon Route 53 receives a DNS query for an alias resource record set:   Amazon Route 53 looks at the resource record sets that are referenced by the alias resource record sets to determine which health checks they're using.   Amazon Route 53 checks the current status of each health check. (Amazon Route 53 periodically checks the health of the endpoint that is specified in a health check; it doesn't perform the health check when the DNS query arrives.)   Based on the status of the health checks, Amazon Route 53 determines which resource record sets are healthy. Unhealthy resource record sets are immediately removed from consideration. In addition, if all of the resource record sets that are referenced by an alias resource record set are unhealthy, that alias resource record set also is immediately removed from consideration.   Based on the configuration of the alias resource record sets (weighted alias or latency alias, for example) and the configuration of the resource record sets that they reference, Amazon Route 53 chooses a resource record set from the healthy resource record sets, and responds to the query.   Note the following:   You can't set EvaluateTargetHealth to true when the alias target is a CloudFront distribution.   If the AWS resource that you specify in AliasTarget is a resource record set or a group of resource record sets (for example, a group of weighted resource record sets), but it is not another alias resource record set, we recommend that you associate a health check with all of the resource record sets in the alias target.For more information, see What Happens When You Omit Health Checks? in the Amazon Route 53 Developer Guide.   If you specify an Elastic Beanstalk environment in HostedZoneId and DNSName, and if the environment contains an ELB load balancer, Elastic Load Balancing routes queries only to the healthy Amazon EC2 instances that are registered with the load balancer. (An environment automatically contains an ELB load balancer if it includes more than one EC2 instance.) If you set EvaluateTargetHealth to true and either no EC2 instances are healthy or the load balancer itself is unhealthy, Amazon Route 53 routes queries to other available resources that are healthy, if any. If the environment contains a single EC2 instance, there are no special requirements.   If you specify an ELB load balancer in  AliasTarget , Elastic Load Balancing routes queries only to the healthy EC2 instances that are registered with the load balancer. If no EC2 instances are healthy or if the load balancer itself is unhealthy, and if EvaluateTargetHealth is true for the corresponding alias resource record set, Amazon Route 53 routes queries to other resources. When you create a load balancer, you configure settings for Elastic Load Balancing health checks; they're not Amazon Route 53 health checks, but they perform a similar function. Do not create Amazon Route 53 health checks for the EC2 instances that you register with an ELB load balancer. For more information, see How Health Checks Work in More Complex Amazon Route 53 Configurations in the Amazon Route 53 Developers Guide.   We recommend that you set EvaluateTargetHealth to true only when you have enough idle capacity to handle the failure of one or more endpoints.   For more information and examples, see Amazon Route 53 Health Checks and DNS Failover in the Amazon Route 53 Developer Guide.
      */
     EvaluateTargetHealth: AliasHealthEnabled;
   }
   export type AssociateVPCComment = string;
   export interface AssociateVPCWithHostedZoneRequest {
     /**
-     * The ID of the hosted zone you want to associate your VPC with. Note that you cannot associate a VPC with a hosted zone that doesn't have an existing VPC association.
+     * The ID of the private hosted zone that you want to associate an Amazon VPC with. Note that you can't associate a VPC with a hosted zone that doesn't have an existing VPC association.
      */
     HostedZoneId: ResourceId;
     /**
-     * A complex type containing information about the Amazon VPC that you're associating with the specified hosted zone.
+     * A complex type that contains information about the VPC that you want to associate with a private hosted zone.
      */
     VPC: VPC;
     /**
@@ -482,33 +481,6 @@ declare namespace Route53.Types {
      */
     Changes: Changes;
   }
-  export interface ChangeBatchRecord {
-    /**
-     * The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.
-     */
-    Id: ResourceId;
-    /**
-     * The date and time the change was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as specified in the ISO 8601 standard (for example, 2009-11-19T19:37:58Z). The Z after the time indicates that the time is listed in Coordinated Universal Time (UTC).
-     */
-    SubmittedAt?: TimeStamp;
-    /**
-     * The current state of the request. PENDING indicates that this request has not yet been applied to all Amazon Route 53 DNS servers. Valid Values: PENDING | INSYNC 
-     */
-    Status: ChangeStatus;
-    /**
-     * A complex type that describes change information about changes made to your hosted zone. This element contains an ID that you use when performing a GetChange action to get detailed information about the change.
-     */
-    Comment?: ResourceDescription;
-    /**
-     * The AWS account ID attached to the changes. 
-     */
-    Submitter?: AWSAccountID;
-    /**
-     * A list of changes made in the ChangeBatch.
-     */
-    Changes?: Changes;
-  }
-  export type ChangeBatchRecords = ChangeBatchRecord[];
   export interface ChangeInfo {
     /**
      * The ID of the request.
@@ -589,7 +561,7 @@ declare namespace Route53.Types {
      */
     MetricName: MetricName;
     /**
-     * The namespace of the metric that the alarm is associated with. For more information, see Amazon CloudWatch Namespaces, Dimensions, and Metrics Reference in the Amazon CloudWatch Developer Guide.
+     * The namespace of the metric that the alarm is associated with. For more information, see Amazon CloudWatch Namespaces, Dimensions, and Metrics Reference in the Amazon CloudWatch User Guide.
      */
     Namespace: Namespace;
     /**
@@ -597,11 +569,11 @@ declare namespace Route53.Types {
      */
     Statistic: Statistic;
     /**
-     * For the metric that the CloudWatch alarm is associated with, a complex type that contains information about the dimensions for the metric.For information, see Amazon CloudWatch Namespaces, Dimensions, and Metrics Reference in the Amazon CloudWatch Developer Guide.
+     * For the metric that the CloudWatch alarm is associated with, a complex type that contains information about the dimensions for the metric.For information, see Amazon CloudWatch Namespaces, Dimensions, and Metrics Reference in the Amazon CloudWatch User Guide.
      */
     Dimensions?: DimensionList;
   }
-  export type CloudWatchRegion = "us-east-1"|"us-west-1"|"us-west-2"|"eu-central-1"|"eu-west-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|string;
+  export type CloudWatchRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-central-1"|"eu-west-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|string;
   export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
   export interface CreateHealthCheckRequest {
     /**
@@ -629,7 +601,7 @@ declare namespace Route53.Types {
      */
     Name: DNSName;
     /**
-     * The VPC that you want your hosted zone to be associated with. By providing this parameter, your newly created hosted cannot be resolved anywhere other than the given VPC.
+     * The VPC that you want your hosted zone to be associated with. By providing this parameter, your newly created hosted can't be resolved anywhere other than the given VPC.
      */
     VPC?: VPC;
     /**
@@ -725,7 +697,7 @@ declare namespace Route53.Types {
      */
     Name: TrafficPolicyName;
     /**
-     * The definition of this traffic policy in JSON format. For more information, see Traffic Policy Document Format in the Amazon Route 53 API Reference.
+     * The definition of this traffic policy in JSON format. For more information, see Traffic Policy Document Format.
      */
     Document: TrafficPolicyDocument;
     /**
@@ -767,9 +739,28 @@ declare namespace Route53.Types {
      */
     Location: ResourceURI;
   }
+  export interface CreateVPCAssociationAuthorizationRequest {
+    /**
+     * The ID of the private hosted zone that you want to authorize associating a VPC with.
+     */
+    HostedZoneId: ResourceId;
+    /**
+     * A complex type that contains the VPC ID and region for the VPC that you want to authorize associating with your hosted zone.
+     */
+    VPC: VPC;
+  }
+  export interface CreateVPCAssociationAuthorizationResponse {
+    /**
+     * The ID of the hosted zone that you authorized associating a VPC with.
+     */
+    HostedZoneId: ResourceId;
+    /**
+     * The VPC that you authorized associating with a hosted zone.
+     */
+    VPC: VPC;
+  }
   export type DNSName = string;
   export type DNSRCode = string;
-  export type _Date = string;
   export interface DelegationSet {
     /**
      * The ID that Amazon Route 53 assigns to a reusable delegation set.
@@ -834,6 +825,18 @@ declare namespace Route53.Types {
   }
   export interface DeleteTrafficPolicyResponse {
   }
+  export interface DeleteVPCAssociationAuthorizationRequest {
+    /**
+     * When removing authorization to associate a VPC that was created by one AWS account with a hosted zone that was created with a different AWS account, the ID of the hosted zone.
+     */
+    HostedZoneId: ResourceId;
+    /**
+     * When removing authorization to associate a VPC that was created by one AWS account with a hosted zone that was created with a different AWS account, a complex type that includes the ID and region of the VPC.
+     */
+    VPC: VPC;
+  }
+  export interface DeleteVPCAssociationAuthorizationResponse {
+  }
   export interface Dimension {
     /**
      * For the metric that the CloudWatch alarm is associated with, the name of one dimension.
@@ -849,11 +852,11 @@ declare namespace Route53.Types {
   export type DisassociateVPCComment = string;
   export interface DisassociateVPCFromHostedZoneRequest {
     /**
-     * The ID of the VPC that you want to disassociate from an Amazon Route 53 hosted zone.
+     * The ID of the private hosted zone that you want to disassociate a VPC from.
      */
     HostedZoneId: ResourceId;
     /**
-     * A complex type containing information about the Amazon VPC that you're disassociating from the specified hosted zone.
+     * A complex type that contains information about the VPC that you're disassociating from the specified hosted zone.
      */
     VPC: VPC;
     /**
@@ -863,7 +866,7 @@ declare namespace Route53.Types {
   }
   export interface DisassociateVPCFromHostedZoneResponse {
     /**
-     * A complex type that describes the changes made to your hosted zone.
+     * A complex type that describes the changes made to the specified private hosted zone.
      */
     ChangeInfo: ChangeInfo;
   }
@@ -920,18 +923,6 @@ declare namespace Route53.Types {
   export type GeoLocationDetailsList = GeoLocationDetails[];
   export type GeoLocationSubdivisionCode = string;
   export type GeoLocationSubdivisionName = string;
-  export interface GetChangeDetailsRequest {
-    /**
-     * The ID of the change batch. This is the value that you specified in the change ID parameter when you submitted the request.
-     */
-    Id: ResourceId;
-  }
-  export interface GetChangeDetailsResponse {
-    /**
-     * A complex type that contains information about the specified change batch, including the change batch ID, the status of the change, and the contained changes.
-     */
-    ChangeBatchRecord: ChangeBatchRecord;
-  }
   export interface GetChangeRequest {
     /**
      * The ID of the change batch request. The value that you specify here is the value that ChangeResourceRecordSets returned in the Id element when you submitted the request.
@@ -1116,7 +1107,7 @@ declare namespace Route53.Types {
   }
   export interface HealthCheckConfig {
     /**
-     * The IPv4 IP address of the endpoint on which you want Amazon Route 53 to perform health checks. If you don't specify a value for IPAddress, Amazon Route 53 sends a DNS request to resolve the domain name that you specify in FullyQualifiedDomainName at the interval that you specify in RequestInterval. Using an IP address that DNS returns, Amazon Route 53 then checks the health of the endpoint. If the endpoint is an Amazon EC2 instance, we recommend that you create an Elastic IP address, associate it with your Amazon EC2 instance, and specify the Elastic IP address for IPAddress. This ensures that the IP address of your instance will never change. For more information, see HealthCheckConfig$FullyQualifiedDomainName. Contraints: Amazon Route 53 cannot check the health of endpoints for which the IP address is in local, private, non-routable, or multicast ranges. For more information about IP addresses for which you cannot create health checks, see RFC 5735, Special Use IPv4 Addresses and RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space. When the value of Type is CALCULATED or CLOUDWATCH_METRIC, omit IPAddress.
+     * The IPv4 IP address of the endpoint on which you want Amazon Route 53 to perform health checks. If you don't specify a value for IPAddress, Amazon Route 53 sends a DNS request to resolve the domain name that you specify in FullyQualifiedDomainName at the interval that you specify in RequestInterval. Using an IP address that DNS returns, Amazon Route 53 then checks the health of the endpoint. If the endpoint is an EC2 instance, we recommend that you create an Elastic IP address, associate it with your EC2 instance, and specify the Elastic IP address for IPAddress. This ensures that the IP address of your instance will never change. For more information, see HealthCheckConfig$FullyQualifiedDomainName. Constraints: Amazon Route 53 can't check the health of endpoints for which the IP address is in local, private, non-routable, or \ multicast ranges. For more information about IP addresses for which you can't create health checks, see RFC 5735, Special Use IPv4 Addresses and RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space. When the value of Type is CALCULATED or CLOUDWATCH_METRIC, omit IPAddress.
      */
     IPAddress?: IPAddress;
     /**
@@ -1244,106 +1235,6 @@ declare namespace Route53.Types {
   export type InsufficientDataHealthStatus = "Healthy"|"Unhealthy"|"LastKnownStatus"|string;
   export type Inverted = boolean;
   export type IsPrivateZone = boolean;
-  export interface ListChangeBatchesByHostedZoneRequest {
-    /**
-     * The ID of the hosted zone that you want to see changes for.
-     */
-    HostedZoneId: ResourceId;
-    /**
-     * The start of the time period you want to see changes for.
-     */
-    StartDate: _Date;
-    /**
-     * The end of the time period you want to see changes for.
-     */
-    EndDate: _Date;
-    /**
-     * The maximum number of items on a page.
-     */
-    MaxItems?: PageMaxItems;
-    /**
-     * The page marker.
-     */
-    Marker?: PageMarker;
-  }
-  export interface ListChangeBatchesByHostedZoneResponse {
-    /**
-     * The value that you specified for the maxitems parameter in the call to ListHostedZones that produced the current response. 
-     */
-    MaxItems: PageMaxItems;
-    /**
-     * For the second and subsequent calls to ListHostedZones, Marker is the value that you specified for the marker parameter in the request that produced the current response. 
-     */
-    Marker: PageMarker;
-    /**
-     * A flag that indicates if there are more change batches to list.
-     */
-    IsTruncated?: PageTruncated;
-    /**
-     * The change batches within the given hosted zone and time period. 
-     */
-    ChangeBatchRecords: ChangeBatchRecords;
-    /**
-     * The next page marker.
-     */
-    NextMarker?: PageMarker;
-  }
-  export interface ListChangeBatchesByRRSetRequest {
-    /**
-     * The ID of the hosted zone that you want to see changes for.
-     */
-    HostedZoneId: ResourceId;
-    /**
-     * The name of the RRSet that you want to see changes for.
-     */
-    Name: DNSName;
-    /**
-     * The type of the RRSet that you want to see changes for.
-     */
-    Type: RRType;
-    /**
-     * The identifier of the RRSet that you want to see changes for.
-     */
-    SetIdentifier?: ResourceRecordSetIdentifier;
-    /**
-     * The start of the time period you want to see changes for.
-     */
-    StartDate: _Date;
-    /**
-     * The end of the time period you want to see changes for.
-     */
-    EndDate: _Date;
-    /**
-     * The maximum number of items on a page.
-     */
-    MaxItems?: PageMaxItems;
-    /**
-     * The page marker.
-     */
-    Marker?: PageMarker;
-  }
-  export interface ListChangeBatchesByRRSetResponse {
-    /**
-     * The maximum number of items on a page.
-     */
-    MaxItems: PageMaxItems;
-    /**
-     * The page marker.
-     */
-    Marker: PageMarker;
-    /**
-     * A flag that indicates if there are more change batches to list.
-     */
-    IsTruncated?: PageTruncated;
-    /**
-     * The change batches within the given hosted zone and time period. 
-     */
-    ChangeBatchRecords: ChangeBatchRecords;
-    /**
-     * The next page marker.
-     */
-    NextMarker?: PageMarker;
-  }
   export interface ListGeoLocationsRequest {
     /**
      * The code for the continent with which you want to start listing locations that Amazon Route 53 supports for geolocation. If Amazon Route 53 has already returned a page or more of results, if IsTruncated is true, and if NextContinentCode from the previous response has a value, enter that value in StartContinentCode to return the next page of results. Include StartContinentCode only if you want to list continents. Don't include StartContinentCode when you're listing countries or countries with their subdivisions.
@@ -1510,7 +1401,7 @@ declare namespace Route53.Types {
      */
     StartRecordName?: DNSName;
     /**
-     * The type of resource record set to begin the record listing from. Valid values for basic resource record sets: A | AAAA | CNAME | MX | NAPTR | NS | PTR | SOA | SPF | SRV | TXT  Values for weighted, latency, geo, and failover resource record sets: A | AAAA | CNAME | MX | NAPTR | PTR | SPF | SRV | TXT  Values for alias resource record sets:     CloudFront distribution: A    Elastic Beanstalk environment that has a regionalized subdomain: A    ELB load balancer: A | AAAA    Amazon S3 bucket: A   Constraint: Specifying type without specifying name returns an InvalidInput error.
+     * The type of resource record set to begin the record listing from. Valid values for basic resource record sets: A | AAAA | CNAME | MX | NAPTR | NS | PTR | SOA | SPF | SRV | TXT  Values for weighted, latency, geo, and failover resource record sets: A | AAAA | CNAME | MX | NAPTR | PTR | SPF | SRV | TXT  Values for alias resource record sets:     CloudFront distribution: A or AAAA    Elastic Beanstalk environment that has a regionalized subdomain: A    ELB load balancer: A | AAAA    Amazon S3 bucket: A   Constraint: Specifying type without specifying name returns an InvalidInput error.
      */
     StartRecordType?: RRType;
     /**
@@ -1808,6 +1699,35 @@ declare namespace Route53.Types {
      */
     MaxItems: PageMaxItems;
   }
+  export interface ListVPCAssociationAuthorizationsRequest {
+    /**
+     * The ID of the hosted zone for which you want a list of VPCs that can be associated with the hosted zone.
+     */
+    HostedZoneId: ResourceId;
+    /**
+     *  Optional: If a response includes a NextToken element, there are more VPCs that can be associated with the specified hosted zone. To get the next page of results, submit another request, and include the value of the NextToken element in from the response in the NextToken parameter in another ListVPCAssociationAuthorizations request.
+     */
+    NextToken?: PaginationToken;
+    /**
+     *  Optional: An integer that specifies the maximum number of VPCs that you want Amazon Route 53 to return.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListVPCAssociationAuthorizationsResponse {
+    /**
+     * The ID of the hosted zone that you can associate the listed VPCs with.
+     */
+    HostedZoneId: ResourceId;
+    /**
+     * When the response includes a NextToken element, there are more VPCs that can be associated with the specified hosted zone. To get the next page of VPCs, submit another ListVPCAssociationAuthorizations request, and include the value of the NextToken element from the response in the NextToken request parameter:  /2013-04-01/hostedzone/hosted zone ID/authorizevpcassociation?MaxItems=VPCs per page&amp;NextToken=  
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The list of VPCs that are authorized to be associated with the specified hosted zone.
+     */
+    VPCs: VPCs;
+  }
+  export type MaxResults = string;
   export type MeasureLatency = boolean;
   export type Message = string;
   export type MetricName = string;
@@ -1817,6 +1737,7 @@ declare namespace Route53.Types {
   export type PageMarker = string;
   export type PageMaxItems = string;
   export type PageTruncated = boolean;
+  export type PaginationToken = string;
   export type Period = number;
   export type Port = number;
   export type RData = string;
@@ -1835,11 +1756,11 @@ declare namespace Route53.Types {
   }
   export interface ResourceRecordSet {
     /**
-     * The name of the domain you want to perform the action on. Enter a fully qualified domain name, for example, www.example.com. You can optionally include a trailing dot. If you omit the trailing dot, Amazon Route 53 still assumes that the domain name that you specify is fully qualified. This means that Amazon Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical. For information about how to specify characters other than a-z, 0-9, and - (hyphen) and how to specify internationalized domain names, see DNS Domain Name Format in the Amazon Route 53 Developer Guide. You can use the asterisk (*) wildcard to replace the leftmost label in a domain name. For example, *.example.com. Note the following:   The * must replace the entire label. For example, you can't specify *prod.example.com or prod*.example.com.   The * can't replace any of the middle labels, for example, marketing.*.example.com.   If you include * in any position other than the leftmost label in a domain name, DNS treats it as an * character (ASCII 42), not as a wildcard.  You can't use the * wildcard for resource records sets that have a type of NS.    You can use the * wildcard as the leftmost label in a domain name, for example, *.example.com. You cannot use an * for one of the middle labels, for example, marketing.*.example.com. In addition, the * must replace the entire label; for example, you can't specify prod*.example.com.
+     * The name of the domain you want to perform the action on. Enter a fully qualified domain name, for example, www.example.com. You can optionally include a trailing dot. If you omit the trailing dot, Amazon Route 53 still assumes that the domain name that you specify is fully qualified. This means that Amazon Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical. For information about how to specify characters other than a-z, 0-9, and - (hyphen) and how to specify internationalized domain names, see DNS Domain Name Format in the Amazon Route 53 Developer Guide. You can use the asterisk (*) wildcard to replace the leftmost label in a domain name. For example, *.example.com. Note the following:   The * must replace the entire label. For example, you can't specify *prod.example.com or prod*.example.com.   The * can't replace any of the middle labels, for example, marketing.*.example.com.   If you include * in any position other than the leftmost label in a domain name, DNS treats it as an * character (ASCII 42), not as a wildcard.  You can't use the * wildcard for resource records sets that have a type of NS.    You can use the * wildcard as the leftmost label in a domain name, for example, *.example.com. You can't use an * for one of the middle labels, for example, marketing.*.example.com. In addition, the * must replace the entire label; for example, you can't specify prod*.example.com.
      */
     Name: DNSName;
     /**
-     * The DNS record type. For information about different record types and how data is encoded for them, see Supported DNS Resource Record Types in the Amazon Route 53 Developer Guide. Valid values for basic resource record sets: A | AAAA | CNAME | MX | NAPTR | NS | PTR | SOA | SPF | SRV | TXT  Values for weighted, latency, geolocation, and failover resource record sets: A | AAAA | CNAME | MX | NAPTR | PTR | SPF | SRV | TXT. When creating a group of weighted, latency, geolocation, or failover resource record sets, specify the same value for all of the resource record sets in the group.  SPF records were formerly used to verify the identity of the sender of email messages. However, we no longer recommend that you create resource record sets for which the value of Type is SPF. RFC 7208, Sender Policy Framework (SPF) for Authorizing Use of Domains in Email, Version 1, has been updated to say, "...[I]ts existence and mechanism defined in [RFC4408] have led to some interoperability issues. Accordingly, its use is no longer appropriate for SPF version 1; implementations are not to use it." In RFC 7208, see section 14.1, The SPF DNS Record Type.  Values for alias resource record sets:    CloudFront distributions: A     Elastic Beanstalk environment that has a regionalized subdomain: A     ELB load balancers: A | AAAA     Amazon S3 buckets: A     Another resource record set in this hosted zone: Specify the type of the resource record set for which you're creating the alias. Specify any value except NS or SOA.  
+     * The DNS record type. For information about different record types and how data is encoded for them, see Supported DNS Resource Record Types in the Amazon Route 53 Developer Guide. Valid values for basic resource record sets: A | AAAA | CNAME | MX | NAPTR | NS | PTR | SOA | SPF | SRV | TXT  Values for weighted, latency, geolocation, and failover resource record sets: A | AAAA | CNAME | MX | NAPTR | PTR | SPF | SRV | TXT. When creating a group of weighted, latency, geolocation, or failover resource record sets, specify the same value for all of the resource record sets in the group.  SPF records were formerly used to verify the identity of the sender of email messages. However, we no longer recommend that you create resource record sets for which the value of Type is SPF. RFC 7208, Sender Policy Framework (SPF) for Authorizing Use of Domains in Email, Version 1, has been updated to say, "...[I]ts existence and mechanism defined in [RFC4408] have led to some interoperability issues. Accordingly, its use is no longer appropriate for SPF version 1; implementations are not to use it." In RFC 7208, see section 14.1, The SPF DNS Record Type.  Values for alias resource record sets:    CloudFront distributions: A  If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution, one with a value of A and one with a value of AAAA.     AWS Elastic Beanstalk environment that has a regionalized subdomain: A     ELB load balancers: A | AAAA     Amazon S3 buckets: A     Another resource record set in this hosted zone: Specify the type of the resource record set for which you're creating the alias. Specify any value except NS or SOA.  
      */
     Type: RRType;
     /**
@@ -1847,19 +1768,19 @@ declare namespace Route53.Types {
      */
     SetIdentifier?: ResourceRecordSetIdentifier;
     /**
-     *  Weighted resource record sets only: Among resource record sets that have the same combination of DNS name and type, a value that determines the proportion of DNS queries that Amazon Route 53 responds to using the current resource record set. Amazon Route 53 calculates the sum of the weights for the resource record sets that have the same combination of DNS name and type. Amazon Route 53 then responds to queries based on the ratio of a resource's weight to the total. Note the following:   You must specify a value for the Weight element for every weighted resource record set.   You can only specify one ResourceRecord per weighted resource record set.   You cannot create latency, failover, or geolocation resource record sets that have the same values for the Name and Type elements as weighted resource record sets.   You can create a maximum of 100 weighted resource record sets that have the same values for the Name and Type elements.   For weighted (but not weighted alias) resource record sets, if you set Weight to 0 for a resource record set, Amazon Route 53 never responds to queries with the applicable value for that resource record set. However, if you set Weight to 0 for all resource record sets that have the same combination of DNS name and type, traffic is routed to all resources with equal probability. The effect of setting Weight to 0 is different when you associate health checks with weighted resource record sets. For more information, see Options for Configuring Amazon Route 53 Active-Active and Active-Passive Failover in the Amazon Route 53 Developer Guide.  
+     *  Weighted resource record sets only: Among resource record sets that have the same combination of DNS name and type, a value that determines the proportion of DNS queries that Amazon Route 53 responds to using the current resource record set. Amazon Route 53 calculates the sum of the weights for the resource record sets that have the same combination of DNS name and type. Amazon Route 53 then responds to queries based on the ratio of a resource's weight to the total. Note the following:   You must specify a value for the Weight element for every weighted resource record set.   You can only specify one ResourceRecord per weighted resource record set.   You can't create latency, failover, or geolocation resource record sets that have the same values for the Name and Type elements as weighted resource record sets.   You can create a maximum of 100 weighted resource record sets that have the same values for the Name and Type elements.   For weighted (but not weighted alias) resource record sets, if you set Weight to 0 for a resource record set, Amazon Route 53 never responds to queries with the applicable value for that resource record set. However, if you set Weight to 0 for all resource record sets that have the same combination of DNS name and type, traffic is routed to all resources with equal probability. The effect of setting Weight to 0 is different when you associate health checks with weighted resource record sets. For more information, see Options for Configuring Amazon Route 53 Active-Active and Active-Passive Failover in the Amazon Route 53 Developer Guide.  
      */
     Weight?: ResourceRecordSetWeight;
     /**
-     *  Latency-based resource record sets only: The Amazon EC2 region where the resource that is specified in this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2 instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.  Creating latency and latency alias resource record sets in private hosted zones is not supported.  When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency resource record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency between the end user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is associated with the selected resource record set. Note the following:   You can only specify one ResourceRecord per latency resource record set.   You can only create one latency resource record set for each Amazon EC2 region.   You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53 will choose the region with the best latency from among the regions for which you create latency resource record sets.   You cannot create non-latency resource record sets that have the same values for the Name and Type elements as latency resource record sets.  
+     *  Latency-based resource record sets only: The Amazon EC2 Region where the resource that is specified in this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.  Creating latency and latency alias resource record sets in private hosted zones is not supported.  When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency resource record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency between the end user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is associated with the selected resource record set. Note the following:   You can only specify one ResourceRecord per latency resource record set.   You can only create one latency resource record set for each Amazon EC2 Region.   You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53 will choose the region with the best latency from among the regions for which you create latency resource record sets.   You can't create non-latency resource record sets that have the same values for the Name and Type elements as latency resource record sets.  
      */
     Region?: ResourceRecordSetRegion;
     /**
-     *  Geo location resource record sets only: A complex type that lets you control how Amazon Route 53 responds to DNS queries based on the geographic origin of the query. For example, if you want all queries from Africa to be routed to a web server with an IP address of 192.0.2.111, create a resource record set with a Type of A and a ContinentCode of AF.  Creating geolocation and geolocation alias resource record sets in private hosted zones is not supported.  If you create separate resource record sets for overlapping geographic regions (for example, one resource record set for a continent and one for a country on the same continent), priority goes to the smallest geographic region. This allows you to route most queries for a continent to one resource and to route queries for a country on that continent to a different resource. You cannot create two geolocation resource record sets that specify the same geographic location. The value * in the CountryCode element matches all geographic locations that aren't specified in other geolocation resource record sets that have the same values for the Name and Type elements.  Geolocation works by mapping IP addresses to locations. However, some IP addresses aren't mapped to geographic locations, so even if you create geolocation resource record sets that cover all seven continents, Amazon Route 53 will receive some DNS queries from locations that it can't identify. We recommend that you create a resource record set for which the value of CountryCode is *, which handles both queries that come from locations for which you haven't created geolocation resource record sets and queries from IP addresses that aren't mapped to a location. If you don't create a * resource record set, Amazon Route 53 returns a "no answer" response for queries from those locations.  You cannot create non-geolocation resource record sets that have the same values for the Name and Type elements as geolocation resource record sets.
+     *  Geo location resource record sets only: A complex type that lets you control how Amazon Route 53 responds to DNS queries based on the geographic origin of the query. For example, if you want all queries from Africa to be routed to a web server with an IP address of 192.0.2.111, create a resource record set with a Type of A and a ContinentCode of AF.  Creating geolocation and geolocation alias resource record sets in private hosted zones is not supported.  If you create separate resource record sets for overlapping geographic regions (for example, one resource record set for a continent and one for a country on the same continent), priority goes to the smallest geographic region. This allows you to route most queries for a continent to one resource and to route queries for a country on that continent to a different resource. You can't create two geolocation resource record sets that specify the same geographic location. The value * in the CountryCode element matches all geographic locations that aren't specified in other geolocation resource record sets that have the same values for the Name and Type elements.  Geolocation works by mapping IP addresses to locations. However, some IP addresses aren't mapped to geographic locations, so even if you create geolocation resource record sets that cover all seven continents, Amazon Route 53 will receive some DNS queries from locations that it can't identify. We recommend that you create a resource record set for which the value of CountryCode is *, which handles both queries that come from locations for which you haven't created geolocation resource record sets and queries from IP addresses that aren't mapped to a location. If you don't create a * resource record set, Amazon Route 53 returns a "no answer" response for queries from those locations.  You can't create non-geolocation resource record sets that have the same values for the Name and Type elements as geolocation resource record sets.
      */
     GeoLocation?: GeoLocation;
     /**
-     *  Failover resource record sets only: To configure failover, you add the Failover element to two resource record sets. For one resource record set, you specify PRIMARY as the value for Failover; for the other resource record set, you specify SECONDARY. In addition, you include the HealthCheckId element and specify the health check that you want Amazon Route 53 to perform for each resource record set. Except where noted, the following failover behaviors assume that you have included the HealthCheckId element in both resource record sets:   When the primary resource record set is healthy, Amazon Route 53 responds to DNS queries with the applicable value from the primary resource record set regardless of the health of the secondary resource record set.   When the primary resource record set is unhealthy and the secondary resource record set is healthy, Amazon Route 53 responds to DNS queries with the applicable value from the secondary resource record set.   When the secondary resource record set is unhealthy, Amazon Route 53 responds to DNS queries with the applicable value from the primary resource record set regardless of the health of the primary resource record set.   If you omit the HealthCheckId element for the secondary resource record set, and if the primary resource record set is unhealthy, Amazon Route 53 always responds to DNS queries with the applicable value from the secondary resource record set. This is true regardless of the health of the associated endpoint.   You cannot create non-failover resource record sets that have the same values for the Name and Type elements as failover resource record sets. For failover alias resource record sets, you must also include the EvaluateTargetHealth element and set the value to true. For more information about configuring failover for Amazon Route 53, see the following topics in the Amazon Route 53 Developer Guide:     Amazon Route 53 Health Checks and DNS Failover     Configuring Failover in a Private Hosted Zone    Valid values: PRIMARY | SECONDARY 
+     *  Failover resource record sets only: To configure failover, you add the Failover element to two resource record sets. For one resource record set, you specify PRIMARY as the value for Failover; for the other resource record set, you specify SECONDARY. In addition, you include the HealthCheckId element and specify the health check that you want Amazon Route 53 to perform for each resource record set. Except where noted, the following failover behaviors assume that you have included the HealthCheckId element in both resource record sets:   When the primary resource record set is healthy, Amazon Route 53 responds to DNS queries with the applicable value from the primary resource record set regardless of the health of the secondary resource record set.   When the primary resource record set is unhealthy and the secondary resource record set is healthy, Amazon Route 53 responds to DNS queries with the applicable value from the secondary resource record set.   When the secondary resource record set is unhealthy, Amazon Route 53 responds to DNS queries with the applicable value from the primary resource record set regardless of the health of the primary resource record set.   If you omit the HealthCheckId element for the secondary resource record set, and if the primary resource record set is unhealthy, Amazon Route 53 always responds to DNS queries with the applicable value from the secondary resource record set. This is true regardless of the health of the associated endpoint.   You can't create non-failover resource record sets that have the same values for the Name and Type elements as failover resource record sets. For failover alias resource record sets, you must also include the EvaluateTargetHealth element and set the value to true. For more information about configuring failover for Amazon Route 53, see the following topics in the Amazon Route 53 Developer Guide:     Amazon Route 53 Health Checks and DNS Failover     Configuring Failover in a Private Hosted Zone    Valid values: PRIMARY | SECONDARY 
      */
     Failover?: ResourceRecordSetFailover;
     /**
@@ -1871,7 +1792,7 @@ declare namespace Route53.Types {
      */
     ResourceRecords?: ResourceRecords;
     /**
-     *  Alias resource record sets only: Information about the CloudFront distribution, Elastic Beanstalk environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to which you are redirecting queries. The Elastic Beanstalk environment must have a regionalized subdomain. If you're creating resource records sets for a private hosted zone, note the following:   You can't create alias resource record sets for CloudFront distributions in a private hosted zone.   Creating geolocation alias resource record sets or latency alias resource record sets in a private hosted zone is unsupported.   For information about creating failover resource record sets in a private hosted zone, see Configuring Failover in a Private Hosted Zone in the Amazon Route 53 Developer Guide.  
+     *  Alias resource record sets only: Information about the CloudFront distribution, AWS Elastic Beanstalk environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to which you are redirecting queries. The AWS Elastic Beanstalk environment must have a regionalized subdomain. If you're creating resource records sets for a private hosted zone, note the following:   You can't create alias resource record sets for CloudFront distributions in a private hosted zone.   Creating geolocation alias resource record sets or latency alias resource record sets in a private hosted zone is unsupported.   For information about creating failover resource record sets in a private hosted zone, see Configuring Failover in a Private Hosted Zone in the Amazon Route 53 Developer Guide.  
      */
     AliasTarget?: AliasTarget;
     /**
@@ -2100,7 +2021,7 @@ declare namespace Route53.Types {
      */
     HealthCheckVersion?: HealthCheckVersion;
     /**
-     * The IPv4 IP address of the endpoint on which you want Amazon Route 53 to perform health checks. If you don't specify a value for IPAddress, Amazon Route 53 sends a DNS request to resolve the domain name that you specify in FullyQualifiedDomainName at the interval you specify in RequestInterval. Using an IP address that DNS returns, Amazon Route 53 then checks the health of the endpoint. f the endpoint is an Amazon EC2 instance, we recommend that you create an Elastic IP address, associate it with your Amazon EC2 instance, and specify the Elastic IP address for IPAddress. This ensures that the IP address of your instance never changes. For more information, see Elastic IP Addresses (EIP) in the Amazon EC2 User Guide for Linux Instances.  If a health check already has a value for IPAddress, you can change the value. However, you can't update an existing health check to add or remove the value of IPAddress.   For more information, see UpdateHealthCheckRequest$FullyQualifiedDomainName.
+     * The IPv4 IP address of the endpoint on which you want Amazon Route 53 to perform health checks. If you don't specify a value for IPAddress, Amazon Route 53 sends a DNS request to resolve the domain name that you specify in FullyQualifiedDomainName at the interval you specify in RequestInterval. Using an IP address that DNS returns, Amazon Route 53 then checks the health of the endpoint. f the endpoint is an EC2 instance, we recommend that you create an Elastic IP address, associate it with your EC2 instance, and specify the Elastic IP address for IPAddress. This ensures that the IP address of your instance never changes. For more information, see Elastic IP Addresses (EIP) in the Amazon EC2 User Guide for Linux Instances.  If a health check already has a value for IPAddress, you can change the value. However, you can't update an existing health check to add or remove the value of IPAddress.   For more information, see UpdateHealthCheckRequest$FullyQualifiedDomainName.
      */
     IPAddress?: IPAddress;
     /**
