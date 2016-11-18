@@ -188,7 +188,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"LimitExceededException"},
-        {"shape":"ConflictException"}
+        {"shape":"ConflictException"},
+        {"shape":"NotFoundException"}
       ],
       "documentation":"<p>Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. </p>"
     },
@@ -1025,7 +1026,8 @@
         {"shape":"BadRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"ConflictException"}
+        {"shape":"ConflictException"},
+        {"shape":"NotFoundException"}
       ],
       "documentation":"<p>Gets all the usage plans of the caller's account.</p>"
     },
@@ -1601,11 +1603,11 @@
         },
         "type":{
           "shape":"AuthorizerType",
-          "documentation":"<p>[Required] The type of the authorizer. Currently, the only valid type is TOKEN.</p>"
+          "documentation":"<p>[Required] The type of the authorizer. Currently, the valid type is <code>TOKEN</code> for a Lambda function or <code>COGNITO_USER_POOLS</code> for an Amazon Cognito user pool.</p>"
         },
         "providerARNs":{
           "shape":"ListOfARNs",
-          "documentation":"<p>A list of the provider ARNs of the authorizer.</p>"
+          "documentation":"<p>A list of the provider ARNs of the authorizer. For an <code>TOKEN</code> authorizer, this is not defined. For authorizers of the <code>COGNITO_USER_POOLS</code> type, each element corresponds to a user pool ARN of this format: <code>arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}</code>. </p>"
         },
         "authType":{
           "shape":"String",
@@ -1613,7 +1615,7 @@
         },
         "authorizerUri":{
           "shape":"String",
-          "documentation":"<p>[Required] Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN authorizers, this must be a well-formed Lambda function URI. The URI should be of the form <code>arn:aws:apigateway:{region}:lambda:path/{service_api}</code>. <code>Region</code> is used to determine the right endpoint. In this case, <code>path</code> is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations</p>"
+          "documentation":"<p>[Required] Specifies the authorizer's Uniform Resource Identifier (URI). For <code>TOKEN</code> authorizers, this must be a well-formed Lambda function URI, for example, <code>arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations</code>. In general, the URI has this form <code>arn:aws:apigateway:{region}:lambda:path/{service_api}</code>, where <code>{region}</code> is the same as the region hosting the Lambda function, <code>path</code> indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.</p>"
         },
         "authorizerCredentials":{
           "shape":"String",
@@ -1621,11 +1623,11 @@
         },
         "identitySource":{
           "shape":"String",
-          "documentation":"<p>[Required] The source of the identity in an incoming request. For TOKEN authorizers, this value is a mapping expression with the same syntax as integration parameter mappings. The only valid source for tokens is 'header', so the expression should match 'method.request.header.[headerName]'. The value of the header '[headerName]' will be interpreted as the incoming token.</p>"
+          "documentation":"<p>[Required] The source of the identity in an incoming request. For a <code>TOKEN</code> authorizer, this value is a mapping expression with the same syntax as integration parameter mappings. The only valid source for tokens is 'header', so the expression should match 'method.request.header.[headerName]'. The value of the header '[headerName]' will be interpreted as the incoming token. For <code>COGNITO_USER_POOLS</code> authorizers, this property is used.</p>"
         },
         "identityValidationExpression":{
           "shape":"String",
-          "documentation":"<p>A validation expression for the incoming identity. For TOKEN authorizers, this value should be a regular expression. The incoming token from the client is matched against this expression, and will proceed if the token matches. If the token doesn't match, the client receives a 401 Unauthorized response.</p>"
+          "documentation":"<p>A validation expression for the incoming identity. For <code>TOKEN</code> authorizers, this value should be a regular expression. The incoming token from the client is matched against this expression, and will proceed if the token matches. If the token doesn't match, the client receives a 401 Unauthorized response.</p>"
         },
         "authorizerResultTtlInSeconds":{
           "shape":"NullableInteger",
@@ -1636,7 +1638,7 @@
     },
     "AuthorizerType":{
       "type":"string",
-      "documentation":"<p>The authorizer type. the only current value is TOKEN.</p>",
+      "documentation":"<p>The authorizer type. the current value is <code>TOKEN</code> for a Lambda function or <code>COGNITO_USER_POOLS</code> for an Amazon Cognito Your User Pool.</p>",
       "enum":[
         "TOKEN",
         "COGNITO_USER_POOLS"
@@ -1765,6 +1767,13 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "ContentHandlingStrategy":{
+      "type":"string",
+      "enum":[
+        "CONVERT_TO_BINARY",
+        "CONVERT_TO_TEXT"
+      ]
+    },
     "CreateApiKeyRequest":{
       "type":"structure",
       "members":{
@@ -1879,10 +1888,7 @@
     },
     "CreateDeploymentRequest":{
       "type":"structure",
-      "required":[
-        "restApiId",
-        "stageName"
-      ],
+      "required":["restApiId"],
       "members":{
         "restApiId":{
           "shape":"String",
@@ -2025,6 +2031,10 @@
         "cloneFrom":{
           "shape":"String",
           "documentation":"<p>The ID of the <a>RestApi</a> that you want to clone from.</p>"
+        },
+        "binaryMediaTypes":{
+          "shape":"ListOfString",
+          "documentation":"<p>The list of binary media types supported by the <a>RestApi</a>. By default, the <a>RestApi</a> supports only UTF-8-encoded text payloads.</p>"
         }
       },
       "documentation":"<p>The POST Request to add a new <a>RestApi</a> resource to your collection.</p>"
@@ -2634,7 +2644,7 @@
           "locationName":"api_Key"
         },
         "includeValue":{
-          "shape":"Boolean",
+          "shape":"NullableBoolean",
           "documentation":"<p>A boolean flag to specify whether (<code>true</code>) or not (<code>false</code>) the result contains the key value.</p>",
           "location":"querystring",
           "locationName":"includeValue"
@@ -2663,8 +2673,13 @@
           "location":"querystring",
           "locationName":"name"
         },
+        "customerId":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"customerId"
+        },
         "includeValues":{
-          "shape":"Boolean",
+          "shape":"NullableBoolean",
           "documentation":"<p>A boolean flag to specify whether (<code>true</code>) or not (<code>false</code>) the result contains key values.</p>",
           "location":"querystring",
           "locationName":"includeValues"
@@ -3492,6 +3507,10 @@
           "shape":"String",
           "documentation":"<div> <p> Specifies how the method request body of an unmapped content type will be passed through the integration request to the back end without transformation. A content type is unmapped if no mapping template is defined in the integration or the content type does not match any of the mapped content types, as specified in <code>requestTemplates</code>. There are three valid values: <code>WHEN_NO_MATCH</code>, <code>WHEN_NO_TEMPLATES</code>, and <code>NEVER</code>. </p> <ul> <li> <code>WHEN_NO_MATCH</code> passes the method request body through the integration request to the back end without transformation when the method request content type does not match any content type associated with the mapping templates defined in the integration request. </li> <li> <code>WHEN_NO_TEMPLATES</code> passes the method request body through the integration request to the back end without transformation when no mapping template is defined in the integration request. If a template is defined when this option is selected, the method request of an unmapped content-type will be rejected with an HTTP <code>415 Unsupported Media Type</code> response. </li> <li> <code>NEVER</code> rejects the method request with an HTTP <code>415 Unsupported Media Type</code> response when either the method request content type does not match any content type associated with the mapping templates defined in the integration request or no mapping template is defined in the integration request. </li> </ul> </div>"
         },
+        "contentHandling":{
+          "shape":"ContentHandlingStrategy",
+          "documentation":"<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a request payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a request payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehaviors</code> is configured to support payload pass-through.</p>"
+        },
         "cacheNamespace":{
           "shape":"String",
           "documentation":"<p>Specifies the integration's cache namespace.</p>"
@@ -3505,7 +3524,7 @@
           "documentation":"<p>Specifies the integration's responses.</p> <div class=\"remarks\"> <p/> <h4>Example: Get integration responses of a method</h4> <h5>Request</h5> <p/> <pre><code>GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash} </code></pre> <h5>Response</h5> <p>The successful response returns <code>200 OK</code> status and a payload as follows:</p> <pre><code>{ \"_links\": { \"curies\": { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html\", \"name\": \"integrationresponse\", \"templated\": true }, \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\", \"title\": \"200\" }, \"integrationresponse:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" }, \"integrationresponse:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" } }, \"responseParameters\": { \"method.response.header.Content-Type\": \"'application/xml'\" }, \"responseTemplates\": { \"application/json\": \"$util.urlDecode(\\\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\\\")\\n\" }, \"statusCode\": \"200\" }</code></pre> <p/> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
         }
       },
-      "documentation":"<p>Represents an HTTP, AWS, or Mock integration.</p> <div class=\"remarks\">In the API Gateway console, the built-in Lambda integration is an AWS integration.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
+      "documentation":"<p>Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration.</p> <div class=\"remarks\">In the API Gateway console, the built-in Lambda integration is an AWS integration.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a>, <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/.html\"/> </div>"
     },
     "IntegrationResponse":{
       "type":"structure",
@@ -3525,6 +3544,10 @@
         "responseTemplates":{
           "shape":"MapOfStringToString",
           "documentation":"<p>Specifies the templates used to transform the integration response body. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.</p>"
+        },
+        "contentHandling":{
+          "shape":"ContentHandlingStrategy",
+          "documentation":"<p>Specifies how to handle response payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a response payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>"
         }
       },
       "documentation":"<p>Represents an integration response. The status code must map to an existing <a>MethodResponse</a>, and parameters and templates can be used to transform the back-end response.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
@@ -3947,6 +3970,10 @@
         "cacheKeyParameters":{
           "shape":"ListOfString",
           "documentation":"<p>Specifies a put integration input's cache key parameters.</p>"
+        },
+        "contentHandling":{
+          "shape":"ContentHandlingStrategy",
+          "documentation":"<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a request payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a request payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehaviors</code> is configured to support payload pass-through.</p>"
         }
       },
       "documentation":"<p>Represents a put integration request.</p>"
@@ -3995,6 +4022,10 @@
         "responseTemplates":{
           "shape":"MapOfStringToString",
           "documentation":"<p>Specifies a put integration response's templates.</p>"
+        },
+        "contentHandling":{
+          "shape":"ContentHandlingStrategy",
+          "documentation":"<p>Specifies how to handle response payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a response payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>"
         }
       },
       "documentation":"<p>Represents a put integration response request.</p>"
@@ -4224,6 +4255,10 @@
         "warnings":{
           "shape":"ListOfString",
           "documentation":"<p>The warning messages reported when <code>failonwarnings</code> is turned on during API import.</p>"
+        },
+        "binaryMediaTypes":{
+          "shape":"ListOfString",
+          "documentation":"<p>The list of binary media types supported by the <a>RestApi</a>. By default, the <a>RestApi</a> supports only UTF-8-encoded text payloads.</p>"
         }
       },
       "documentation":"<p>Represents a REST API.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Create an API</a> </div>"

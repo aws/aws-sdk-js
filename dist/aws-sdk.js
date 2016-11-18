@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.3
+// AWS SDK for JavaScript v2.7.4
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -423,8 +423,7 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "restApiId",
-          "stageName"
+          "restApiId"
         ],
         "members": {
           "restApiId": {
@@ -541,11 +540,14 @@ module.exports={
         "members": {
           "name": {},
           "description": {},
-          "cloneFrom": {}
+          "cloneFrom": {},
+          "binaryMediaTypes": {
+            "shape": "S8"
+          }
         }
       },
       "output": {
-        "shape": "S16"
+        "shape": "S17"
       }
     },
     "CreateStage": {
@@ -578,7 +580,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S18"
+        "shape": "S19"
       }
     },
     "CreateUsagePlan": {
@@ -595,18 +597,18 @@ module.exports={
           "name": {},
           "description": {},
           "apiStages": {
-            "shape": "S1g"
+            "shape": "S1h"
           },
           "throttle": {
-            "shape": "S1i"
+            "shape": "S1j"
           },
           "quota": {
-            "shape": "S1j"
+            "shape": "S1k"
           }
         }
       },
       "output": {
-        "shape": "S1l"
+        "shape": "S1m"
       }
     },
     "CreateUsagePlanKey": {
@@ -631,7 +633,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1n"
+        "shape": "S1o"
       }
     },
     "DeleteApiKey": {
@@ -1083,7 +1085,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S27"
+        "shape": "S28"
       }
     },
     "GetAccount": {
@@ -1096,7 +1098,7 @@ module.exports={
         "members": {}
       },
       "output": {
-        "shape": "S29"
+        "shape": "S2a"
       }
     },
     "GetApiKey": {
@@ -1145,6 +1147,10 @@ module.exports={
           "nameQuery": {
             "location": "querystring",
             "locationName": "name"
+          },
+          "customerId": {
+            "location": "querystring",
+            "locationName": "customerId"
           },
           "includeValues": {
             "location": "querystring",
@@ -1320,7 +1326,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S27"
+        "shape": "S28"
       }
     },
     "GetClientCertificates": {
@@ -1350,7 +1356,7 @@ module.exports={
             "locationName": "item",
             "type": "list",
             "member": {
-              "shape": "S27"
+              "shape": "S28"
             }
           }
         }
@@ -1594,7 +1600,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S14"
+        "shape": "S15"
       }
     },
     "GetMethod": {
@@ -1848,7 +1854,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S16"
+        "shape": "S17"
       }
     },
     "GetRestApis": {
@@ -1878,7 +1884,7 @@ module.exports={
             "locationName": "item",
             "type": "list",
             "member": {
-              "shape": "S16"
+              "shape": "S17"
             }
           }
         }
@@ -1957,7 +1963,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S18"
+        "shape": "S19"
       }
     },
     "GetStages": {
@@ -1987,7 +1993,7 @@ module.exports={
           "item": {
             "type": "list",
             "member": {
-              "shape": "S18"
+              "shape": "S19"
             }
           }
         }
@@ -2034,7 +2040,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S3q"
+        "shape": "S3r"
       }
     },
     "GetUsagePlan": {
@@ -2055,7 +2061,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1l"
+        "shape": "S1m"
       }
     },
     "GetUsagePlanKey": {
@@ -2082,7 +2088,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1n"
+        "shape": "S1o"
       }
     },
     "GetUsagePlanKeys": {
@@ -2123,7 +2129,7 @@ module.exports={
             "locationName": "item",
             "type": "list",
             "member": {
-              "shape": "S1n"
+              "shape": "S1o"
             }
           }
         }
@@ -2160,7 +2166,7 @@ module.exports={
             "locationName": "item",
             "type": "list",
             "member": {
-              "shape": "S1l"
+              "shape": "S1m"
             }
           }
         }
@@ -2232,7 +2238,7 @@ module.exports={
         "payload": "body"
       },
       "output": {
-        "shape": "S16"
+        "shape": "S17"
       }
     },
     "PutIntegration": {
@@ -2278,7 +2284,8 @@ module.exports={
           "cacheNamespace": {},
           "cacheKeyParameters": {
             "shape": "S8"
-          }
+          },
+          "contentHandling": {}
         }
       },
       "output": {
@@ -2322,11 +2329,12 @@ module.exports={
           },
           "responseTemplates": {
             "shape": "Sk"
-          }
+          },
+          "contentHandling": {}
         }
       },
       "output": {
-        "shape": "S14"
+        "shape": "S15"
       }
     },
     "PutMethod": {
@@ -2452,7 +2460,7 @@ module.exports={
         "payload": "body"
       },
       "output": {
-        "shape": "S16"
+        "shape": "S17"
       }
     },
     "TestInvokeAuthorizer": {
@@ -2475,7 +2483,7 @@ module.exports={
             "locationName": "authorizer_id"
           },
           "headers": {
-            "shape": "S4e"
+            "shape": "S4f"
           },
           "pathWithQueryString": {},
           "body": {},
@@ -2539,7 +2547,7 @@ module.exports={
           "pathWithQueryString": {},
           "body": {},
           "headers": {
-            "shape": "S4e"
+            "shape": "S4f"
           },
           "clientCertificateId": {},
           "stageVariables": {
@@ -2555,7 +2563,7 @@ module.exports={
           },
           "body": {},
           "headers": {
-            "shape": "S4e"
+            "shape": "S4f"
           },
           "log": {},
           "latency": {
@@ -2573,12 +2581,12 @@ module.exports={
         "type": "structure",
         "members": {
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
       "output": {
-        "shape": "S29"
+        "shape": "S2a"
       }
     },
     "UpdateApiKey": {
@@ -2597,7 +2605,7 @@ module.exports={
             "locationName": "api_Key"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2626,7 +2634,7 @@ module.exports={
             "locationName": "authorizer_id"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2655,7 +2663,7 @@ module.exports={
             "locationName": "base_path"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2679,12 +2687,12 @@ module.exports={
             "locationName": "clientcertificate_id"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
       "output": {
-        "shape": "S27"
+        "shape": "S28"
       }
     },
     "UpdateDeployment": {
@@ -2708,7 +2716,7 @@ module.exports={
             "locationName": "deployment_id"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2732,7 +2740,7 @@ module.exports={
             "locationName": "domain_name"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2766,7 +2774,7 @@ module.exports={
             "locationName": "http_method"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2805,12 +2813,12 @@ module.exports={
             "locationName": "status_code"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
       "output": {
-        "shape": "S14"
+        "shape": "S15"
       }
     },
     "UpdateMethod": {
@@ -2839,7 +2847,7 @@ module.exports={
             "locationName": "http_method"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2879,7 +2887,7 @@ module.exports={
             "locationName": "status_code"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2908,7 +2916,7 @@ module.exports={
             "locationName": "model_name"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2937,7 +2945,7 @@ module.exports={
             "locationName": "resource_id"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
@@ -2961,12 +2969,12 @@ module.exports={
             "locationName": "restapi_id"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
       "output": {
-        "shape": "S16"
+        "shape": "S17"
       }
     },
     "UpdateStage": {
@@ -2990,12 +2998,12 @@ module.exports={
             "locationName": "stage_name"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
       "output": {
-        "shape": "S18"
+        "shape": "S19"
       }
     },
     "UpdateUsage": {
@@ -3019,12 +3027,12 @@ module.exports={
             "locationName": "keyId"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
       "output": {
-        "shape": "S3q"
+        "shape": "S3r"
       }
     },
     "UpdateUsagePlan": {
@@ -3043,12 +3051,12 @@ module.exports={
             "locationName": "usageplanId"
           },
           "patchOperations": {
-            "shape": "S4k"
+            "shape": "S4l"
           }
         }
       },
       "output": {
-        "shape": "S1l"
+        "shape": "S1m"
       }
     }
   },
@@ -3238,6 +3246,7 @@ module.exports={
           "shape": "Sk"
         },
         "passthroughBehavior": {},
+        "contentHandling": {},
         "cacheNamespace": {},
         "cacheKeyParameters": {
           "shape": "S8"
@@ -3246,12 +3255,12 @@ module.exports={
           "type": "map",
           "key": {},
           "value": {
-            "shape": "S14"
+            "shape": "S15"
           }
         }
       }
     },
-    "S14": {
+    "S15": {
       "type": "structure",
       "members": {
         "statusCode": {},
@@ -3261,10 +3270,11 @@ module.exports={
         },
         "responseTemplates": {
           "shape": "Sk"
-        }
+        },
+        "contentHandling": {}
       }
     },
-    "S16": {
+    "S17": {
       "type": "structure",
       "members": {
         "id": {},
@@ -3275,10 +3285,13 @@ module.exports={
         },
         "warnings": {
           "shape": "S8"
+        },
+        "binaryMediaTypes": {
+          "shape": "S8"
         }
       }
     },
-    "S18": {
+    "S19": {
       "type": "structure",
       "members": {
         "deploymentId": {},
@@ -3336,7 +3349,7 @@ module.exports={
         }
       }
     },
-    "S1g": {
+    "S1h": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -3346,7 +3359,7 @@ module.exports={
         }
       }
     },
-    "S1i": {
+    "S1j": {
       "type": "structure",
       "members": {
         "burstLimit": {
@@ -3357,7 +3370,7 @@ module.exports={
         }
       }
     },
-    "S1j": {
+    "S1k": {
       "type": "structure",
       "members": {
         "limit": {
@@ -3369,24 +3382,24 @@ module.exports={
         "period": {}
       }
     },
-    "S1l": {
+    "S1m": {
       "type": "structure",
       "members": {
         "id": {},
         "name": {},
         "description": {},
         "apiStages": {
-          "shape": "S1g"
+          "shape": "S1h"
         },
         "throttle": {
-          "shape": "S1i"
+          "shape": "S1j"
         },
         "quota": {
-          "shape": "S1j"
+          "shape": "S1k"
         }
       }
     },
-    "S1n": {
+    "S1o": {
       "type": "structure",
       "members": {
         "id": {},
@@ -3395,7 +3408,7 @@ module.exports={
         "name": {}
       }
     },
-    "S27": {
+    "S28": {
       "type": "structure",
       "members": {
         "clientCertificateId": {},
@@ -3409,12 +3422,12 @@ module.exports={
         }
       }
     },
-    "S29": {
+    "S2a": {
       "type": "structure",
       "members": {
         "cloudwatchRoleArn": {},
         "throttleSettings": {
-          "shape": "S1i"
+          "shape": "S1j"
         },
         "features": {
           "shape": "S8"
@@ -3422,7 +3435,7 @@ module.exports={
         "apiKeyVersion": {}
       }
     },
-    "S3q": {
+    "S3r": {
       "type": "structure",
       "members": {
         "usagePlanId": {},
@@ -3445,12 +3458,12 @@ module.exports={
         }
       }
     },
-    "S4e": {
+    "S4f": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "S4k": {
+    "S4l": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -53551,8 +53564,9 @@ module.exports={
           "MetricName": {},
           "Namespace": {},
           "Statistic": {},
+          "ExtendedStatistic": {},
           "Dimensions": {
-            "shape": "Sv"
+            "shape": "Sw"
           },
           "Period": {
             "type": "integer"
@@ -53604,14 +53618,13 @@ module.exports={
           "MetricName",
           "StartTime",
           "EndTime",
-          "Period",
-          "Statistics"
+          "Period"
         ],
         "members": {
           "Namespace": {},
           "MetricName": {},
           "Dimensions": {
-            "shape": "Sv"
+            "shape": "Sw"
           },
           "StartTime": {
             "type": "timestamp"
@@ -53623,6 +53636,10 @@ module.exports={
             "type": "integer"
           },
           "Statistics": {
+            "type": "list",
+            "member": {}
+          },
+          "ExtendedStatistics": {
             "type": "list",
             "member": {}
           },
@@ -53657,7 +53674,14 @@ module.exports={
                 "Maximum": {
                   "type": "double"
                 },
-                "Unit": {}
+                "Unit": {},
+                "ExtendedStatistics": {
+                  "type": "map",
+                  "key": {},
+                  "value": {
+                    "type": "double"
+                  }
+                }
               },
               "xmlOrder": [
                 "Timestamp",
@@ -53666,7 +53690,8 @@ module.exports={
                 "Sum",
                 "Minimum",
                 "Maximum",
-                "Unit"
+                "Unit",
+                "ExtendedStatistics"
               ]
             }
           }
@@ -53707,7 +53732,7 @@ module.exports={
                 "Namespace": {},
                 "MetricName": {},
                 "Dimensions": {
-                  "shape": "Sv"
+                  "shape": "Sw"
                 }
               },
               "xmlOrder": [
@@ -53732,7 +53757,6 @@ module.exports={
           "AlarmName",
           "MetricName",
           "Namespace",
-          "Statistic",
           "Period",
           "EvaluationPeriods",
           "Threshold",
@@ -53756,8 +53780,9 @@ module.exports={
           "MetricName": {},
           "Namespace": {},
           "Statistic": {},
+          "ExtendedStatistic": {},
           "Dimensions": {
-            "shape": "Sv"
+            "shape": "Sw"
           },
           "Period": {
             "type": "integer"
@@ -53792,7 +53817,7 @@ module.exports={
               "members": {
                 "MetricName": {},
                 "Dimensions": {
-                  "shape": "Sv"
+                  "shape": "Sw"
                 },
                 "Timestamp": {
                   "type": "timestamp"
@@ -53884,8 +53909,9 @@ module.exports={
           "MetricName": {},
           "Namespace": {},
           "Statistic": {},
+          "ExtendedStatistic": {},
           "Dimensions": {
-            "shape": "Sv"
+            "shape": "Sw"
           },
           "Period": {
             "type": "integer"
@@ -53920,7 +53946,8 @@ module.exports={
           "Unit",
           "EvaluationPeriods",
           "Threshold",
-          "ComparisonOperator"
+          "ComparisonOperator",
+          "ExtendedStatistic"
         ]
       }
     },
@@ -53928,7 +53955,7 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "Sv": {
+    "Sw": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -78450,7 +78477,8 @@ module.exports={
           },
           "WaitTimeSeconds": {
             "type": "integer"
-          }
+          },
+          "ReceiveRequestAttemptId": {}
         }
       },
       "output": {
@@ -78468,12 +78496,19 @@ module.exports={
                 "MD5OfBody": {},
                 "Body": {},
                 "Attributes": {
-                  "shape": "Sh",
-                  "locationName": "Attribute"
+                  "locationName": "Attribute",
+                  "type": "map",
+                  "key": {
+                    "locationName": "Name"
+                  },
+                  "value": {
+                    "locationName": "Value"
+                  },
+                  "flattened": true
                 },
                 "MD5OfMessageAttributes": {},
                 "MessageAttributes": {
-                  "shape": "S19",
+                  "shape": "S1b",
                   "locationName": "MessageAttribute"
                 }
               }
@@ -78510,9 +78545,11 @@ module.exports={
             "type": "integer"
           },
           "MessageAttributes": {
-            "shape": "S19",
+            "shape": "S1b",
             "locationName": "MessageAttribute"
-          }
+          },
+          "MessageDeduplicationId": {},
+          "MessageGroupId": {}
         }
       },
       "output": {
@@ -78521,7 +78558,8 @@ module.exports={
         "members": {
           "MD5OfMessageBody": {},
           "MD5OfMessageAttributes": {},
-          "MessageId": {}
+          "MessageId": {},
+          "SequenceNumber": {}
         }
       }
     },
@@ -78550,9 +78588,11 @@ module.exports={
                   "type": "integer"
                 },
                 "MessageAttributes": {
-                  "shape": "S19",
+                  "shape": "S1b",
                   "locationName": "MessageAttribute"
-                }
+                },
+                "MessageDeduplicationId": {},
+                "MessageGroupId": {}
               }
             },
             "flattened": true
@@ -78581,7 +78621,8 @@ module.exports={
                 "Id": {},
                 "MessageId": {},
                 "MD5OfMessageBody": {},
-                "MD5OfMessageAttributes": {}
+                "MD5OfMessageAttributes": {},
+                "SequenceNumber": {}
               }
             },
             "flattened": true
@@ -78656,7 +78697,7 @@ module.exports={
       },
       "flattened": true
     },
-    "S19": {
+    "S1b": {
       "type": "map",
       "key": {
         "locationName": "Name"
@@ -84631,7 +84672,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.3',
+  VERSION: '2.7.4',
 
 
   Signers: {},

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.3-->
+<!--LATEST=2.7.4-->
 <!--ENTRYINSERT-->
+
+## 2.7.4
+* feature: MarketplaceMetering: Allows third parties to send metering records.
+* feature: SQS: Updates the latest version of the SQS API.
+* feature: CloudWatch: Amazon CloudWatch now supports Percentiles as a statistical function.
+* feature: APIGateway: Allows defining an encoding for the API per content type in order to support 'binary' use case.
 
 ## 2.7.3
 * feature: Route53: Adds support for cross account VPC association.
