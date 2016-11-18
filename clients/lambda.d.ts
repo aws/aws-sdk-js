@@ -1,10 +1,10 @@
-///<reference types="node" />
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+interface Blob {}
 declare class Lambda extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
@@ -108,11 +108,11 @@ declare class Lambda extends Service {
    */
   getPolicy(callback?: (err: AWSError, data: Lambda.Types.GetPolicyResponse) => void): Request<Lambda.Types.GetPolicyResponse, AWSError>;
   /**
-   * Invokes a specific Lambda function. If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.
+   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.
    */
   invoke(params: Lambda.Types.InvocationRequest, callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
-   * Invokes a specific Lambda function. If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.
+   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.
    */
   invoke(callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
@@ -228,7 +228,7 @@ declare namespace Lambda.Types {
      */
     SourceArn?: Arn;
     /**
-     * This parameter is used for S3 and SES only. The AWS account ID (without a hyphen) of the source owner. For example, if the SourceArn identifies a bucket, then this is the bucket owner's account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don't specify the SourceArn) owned by a specific account. 
+     * This parameter is used for S3, SES, CloudWatch Logs and CloudWatch Rules only. The AWS account ID (without a hyphen) of the source owner. For example, if the SourceArn identifies a bucket, then this is the bucket owner's account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don't specify the SourceArn) owned by a specific account. 
      */
     SourceAccount?: SourceOwner;
     /**
@@ -352,6 +352,11 @@ declare namespace Lambda.Types {
      * If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.
      */
     VpcConfig?: VpcConfig;
+    Environment?: Environment;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If not provided, AWS Lambda will use a default service key.
+     */
+    KMSKeyArn?: KMSKeyArn;
   }
   export type _Date = Date;
   export interface DeleteAliasRequest {
@@ -382,6 +387,32 @@ declare namespace Lambda.Types {
   }
   export type Description = string;
   export type Enabled = boolean;
+  export interface Environment {
+    /**
+     * The key-value pairs that represent your environment's configuration settings. The value you specify cannot contain a ",".
+     */
+    Variables?: EnvironmentVariables;
+  }
+  export interface EnvironmentError {
+    /**
+     * The error code returned by the environment error object.
+     */
+    ErrorCode?: String;
+    /**
+     * The message returned by the environment error object.
+     */
+    Message?: String;
+  }
+  export interface EnvironmentResponse {
+    /**
+     * The key-value pairs returned that represent your environment's configuration settings or error information.
+     */
+    Variables?: EnvironmentVariables;
+    Error?: EnvironmentError;
+  }
+  export type EnvironmentVariableName = string;
+  export type EnvironmentVariableValue = string;
+  export type EnvironmentVariables = {[key: string]: EnvironmentVariableValue};
   export interface EventSourceMappingConfiguration {
     /**
      * The AWS Lambda assigned opaque identifier for the mapping.
@@ -501,6 +532,14 @@ declare namespace Lambda.Types {
      * VPC configuration associated with your Lambda function.
      */
     VpcConfig?: VpcConfigResponse;
+    /**
+     * The parent object that contains your environment's configuration settings.
+     */
+    Environment?: EnvironmentResponse;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If empty, it means you are using the AWS Lambda default service key.
+     */
+    KMSKeyArn?: KMSKeyArn;
   }
   export type FunctionList = FunctionConfiguration[];
   export type FunctionName = string;
@@ -603,7 +642,7 @@ declare namespace Lambda.Types {
      */
     LogResult?: String;
     /**
-     *  It is the JSON representation of the object returned by the Lambda function. In This is present only if the invocation type is RequestResponse.  In the event of a function error this field contains a message describing the error. For the Handled errors the Lambda function will report this message. For Unhandled errors AWS Lambda reports the message. 
+     *  It is the JSON representation of the object returned by the Lambda function. This is present only if the invocation type is RequestResponse.  In the event of a function error this field contains a message describing the error. For the Handled errors the Lambda function will report this message. For Unhandled errors AWS Lambda reports the message. 
      */
     Payload?: _Blob;
   }
@@ -624,6 +663,7 @@ declare namespace Lambda.Types {
      */
     Status?: HttpStatus;
   }
+  export type KMSKeyArn = string;
   export interface ListAliasesRequest {
     /**
      * Lambda function name for which the alias is created.
@@ -861,6 +901,14 @@ declare namespace Lambda.Types {
      */
     MemorySize?: MemorySize;
     VpcConfig?: VpcConfig;
+    /**
+     * The parent object that contains your environment's configuration settings.
+     */
+    Environment?: Environment;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If you elect to use the AWS Lambda default service key, pass in an empty string ("") for this parameter.
+     */
+    KMSKeyArn?: KMSKeyArn;
     /**
      * The runtime environment for the Lambda function. To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use earlier runtime (v0.10.42), set the value to "nodejs".
      */

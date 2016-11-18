@@ -1,10 +1,10 @@
-///<reference types="node" />
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+interface Blob {}
 declare class EMR extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
@@ -12,19 +12,19 @@ declare class EMR extends Service {
   constructor(options?: EMR.Types.ClientConfiguration)
   config: Config & EMR.Types.ClientConfiguration;
   /**
-   * AddInstanceGroups adds an instance group to a running cluster.
+   * Adds one or more instance groups to a running cluster.
    */
   addInstanceGroups(params: EMR.Types.AddInstanceGroupsInput, callback?: (err: AWSError, data: EMR.Types.AddInstanceGroupsOutput) => void): Request<EMR.Types.AddInstanceGroupsOutput, AWSError>;
   /**
-   * AddInstanceGroups adds an instance group to a running cluster.
+   * Adds one or more instance groups to a running cluster.
    */
   addInstanceGroups(callback?: (err: AWSError, data: EMR.Types.AddInstanceGroupsOutput) => void): Request<EMR.Types.AddInstanceGroupsOutput, AWSError>;
   /**
-   * AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to Add More than 256 Steps to a Job Flow in the Amazon Elastic MapReduce Developer's Guide. A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Elastic MapReduce executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
+   * AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Job Flow in the Amazon EMR Developer's Guide. A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
    */
   addJobFlowSteps(params: EMR.Types.AddJobFlowStepsInput, callback?: (err: AWSError, data: EMR.Types.AddJobFlowStepsOutput) => void): Request<EMR.Types.AddJobFlowStepsOutput, AWSError>;
   /**
-   * AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to Add More than 256 Steps to a Job Flow in the Amazon Elastic MapReduce Developer's Guide. A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Elastic MapReduce executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
+   * AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Job Flow in the Amazon EMR Developer's Guide. A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
    */
   addJobFlowSteps(callback?: (err: AWSError, data: EMR.Types.AddJobFlowStepsOutput) => void): Request<EMR.Types.AddJobFlowStepsOutput, AWSError>;
   /**
@@ -36,11 +36,19 @@ declare class EMR extends Service {
    */
   addTags(callback?: (err: AWSError, data: EMR.Types.AddTagsOutput) => void): Request<EMR.Types.AddTagsOutput, AWSError>;
   /**
-   * Creates a security configuration using EMR Security Configurations, which are stored in the service. Security Configurations enable you to more easily create a configuration, reuse it, and apply it whenever a cluster is created.
+   * Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a PENDING state.
+   */
+  cancelSteps(params: EMR.Types.CancelStepsInput, callback?: (err: AWSError, data: EMR.Types.CancelStepsOutput) => void): Request<EMR.Types.CancelStepsOutput, AWSError>;
+  /**
+   * Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a PENDING state.
+   */
+  cancelSteps(callback?: (err: AWSError, data: EMR.Types.CancelStepsOutput) => void): Request<EMR.Types.CancelStepsOutput, AWSError>;
+  /**
+   * Creates a security configuration, which is stored in the service and can be specified when a cluster is created.
    */
   createSecurityConfiguration(params: EMR.Types.CreateSecurityConfigurationInput, callback?: (err: AWSError, data: EMR.Types.CreateSecurityConfigurationOutput) => void): Request<EMR.Types.CreateSecurityConfigurationOutput, AWSError>;
   /**
-   * Creates a security configuration using EMR Security Configurations, which are stored in the service. Security Configurations enable you to more easily create a configuration, reuse it, and apply it whenever a cluster is created.
+   * Creates a security configuration, which is stored in the service and can be specified when a cluster is created.
    */
   createSecurityConfiguration(callback?: (err: AWSError, data: EMR.Types.CreateSecurityConfigurationOutput) => void): Request<EMR.Types.CreateSecurityConfigurationOutput, AWSError>;
   /**
@@ -60,11 +68,11 @@ declare class EMR extends Service {
    */
   describeCluster(callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
-   *  This API is deprecated and will eventually be removed. We recommend you use ListClusters, DescribeCluster, ListSteps, ListInstanceGroups and ListBootstrapActions instead. DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time. Regardless of supplied parameters, only job flows created within the last two months are returned. If no parameters are supplied, then job flows matching either of the following criteria are returned:   Job flows created and completed in the last two weeks    Job flows created within the last two months that are in one of the following states: RUNNING, WAITING, SHUTTING_DOWN, STARTING    Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions.
+   * This API is deprecated and will eventually be removed. We recommend you use ListClusters, DescribeCluster, ListSteps, ListInstanceGroups and ListBootstrapActions instead. DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time. Regardless of supplied parameters, only job flows created within the last two months are returned. If no parameters are supplied, then job flows matching either of the following criteria are returned:   Job flows created and completed in the last two weeks    Job flows created within the last two months that are in one of the following states: RUNNING, WAITING, SHUTTING_DOWN, STARTING    Amazon EMR can return a maximum of 512 job flow descriptions.
    */
   describeJobFlows(params: EMR.Types.DescribeJobFlowsInput, callback?: (err: AWSError, data: EMR.Types.DescribeJobFlowsOutput) => void): Request<EMR.Types.DescribeJobFlowsOutput, AWSError>;
   /**
-   *  This API is deprecated and will eventually be removed. We recommend you use ListClusters, DescribeCluster, ListSteps, ListInstanceGroups and ListBootstrapActions instead. DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time. Regardless of supplied parameters, only job flows created within the last two months are returned. If no parameters are supplied, then job flows matching either of the following criteria are returned:   Job flows created and completed in the last two weeks    Job flows created within the last two months that are in one of the following states: RUNNING, WAITING, SHUTTING_DOWN, STARTING    Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions.
+   * This API is deprecated and will eventually be removed. We recommend you use ListClusters, DescribeCluster, ListSteps, ListInstanceGroups and ListBootstrapActions instead. DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time. Regardless of supplied parameters, only job flows created within the last two months are returned. If no parameters are supplied, then job flows matching either of the following criteria are returned:   Job flows created and completed in the last two weeks    Job flows created within the last two months that are in one of the following states: RUNNING, WAITING, SHUTTING_DOWN, STARTING    Amazon EMR can return a maximum of 512 job flow descriptions.
    */
   describeJobFlows(callback?: (err: AWSError, data: EMR.Types.DescribeJobFlowsOutput) => void): Request<EMR.Types.DescribeJobFlowsOutput, AWSError>;
   /**
@@ -124,11 +132,11 @@ declare class EMR extends Service {
    */
   listSecurityConfigurations(callback?: (err: AWSError, data: EMR.Types.ListSecurityConfigurationsOutput) => void): Request<EMR.Types.ListSecurityConfigurationsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
    */
   listSteps(params: EMR.Types.ListStepsInput, callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
    */
   listSteps(callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
@@ -140,6 +148,22 @@ declare class EMR extends Service {
    */
   modifyInstanceGroups(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates or updates an automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric.
+   */
+  putAutoScalingPolicy(params: EMR.Types.PutAutoScalingPolicyInput, callback?: (err: AWSError, data: EMR.Types.PutAutoScalingPolicyOutput) => void): Request<EMR.Types.PutAutoScalingPolicyOutput, AWSError>;
+  /**
+   * Creates or updates an automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric.
+   */
+  putAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.PutAutoScalingPolicyOutput) => void): Request<EMR.Types.PutAutoScalingPolicyOutput, AWSError>;
+  /**
+   * Removes an automatic scaling policy from a specified instance group within an EMR cluster.
+   */
+  removeAutoScalingPolicy(params: EMR.Types.RemoveAutoScalingPolicyInput, callback?: (err: AWSError, data: EMR.Types.RemoveAutoScalingPolicyOutput) => void): Request<EMR.Types.RemoveAutoScalingPolicyOutput, AWSError>;
+  /**
+   * Removes an automatic scaling policy from a specified instance group within an EMR cluster.
+   */
+  removeAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.RemoveAutoScalingPolicyOutput) => void): Request<EMR.Types.RemoveAutoScalingPolicyOutput, AWSError>;
+  /**
    * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tagging Amazon EMR Resources.  The following example removes the stack tag with value Prod from a cluster:
    */
   removeTags(params: EMR.Types.RemoveTagsInput, callback?: (err: AWSError, data: EMR.Types.RemoveTagsOutput) => void): Request<EMR.Types.RemoveTagsOutput, AWSError>;
@@ -148,19 +172,19 @@ declare class EMR extends Service {
    */
   removeTags(callback?: (err: AWSError, data: EMR.Types.RemoveTagsOutput) => void): Request<EMR.Types.RemoveTagsOutput, AWSError>;
   /**
-   *  RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. Once the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the job flow will transition to the WAITING state rather than shutting down once the steps have completed.  For additional protection, you can set the JobFlowInstancesConfig TerminationProtected parameter to TRUE to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to Add More than 256 Steps to a Job Flow in the Amazon Elastic MapReduce Developer's Guide. For long running job flows, we recommend that you periodically store your results.
+   * RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. After the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the job flow will transition to the WAITING state rather than shutting down after the steps have completed.  For additional protection, you can set the JobFlowInstancesConfig TerminationProtected parameter to TRUE to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Job Flow in the Amazon EMR Management Guide. For long running job flows, we recommend that you periodically store your results.
    */
   runJobFlow(params: EMR.Types.RunJobFlowInput, callback?: (err: AWSError, data: EMR.Types.RunJobFlowOutput) => void): Request<EMR.Types.RunJobFlowOutput, AWSError>;
   /**
-   *  RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. Once the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the job flow will transition to the WAITING state rather than shutting down once the steps have completed.  For additional protection, you can set the JobFlowInstancesConfig TerminationProtected parameter to TRUE to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to Add More than 256 Steps to a Job Flow in the Amazon Elastic MapReduce Developer's Guide. For long running job flows, we recommend that you periodically store your results.
+   * RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. After the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the job flow will transition to the WAITING state rather than shutting down after the steps have completed.  For additional protection, you can set the JobFlowInstancesConfig TerminationProtected parameter to TRUE to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Job Flow in the Amazon EMR Management Guide. For long running job flows, we recommend that you periodically store your results.
    */
   runJobFlow(callback?: (err: AWSError, data: EMR.Types.RunJobFlowOutput) => void): Request<EMR.Types.RunJobFlowOutput, AWSError>;
   /**
-   * SetTerminationProtection locks a job flow so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster. SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.  To terminate a job flow that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, go to Protecting a Job Flow from Termination in the Amazon Elastic MapReduce Developer's Guide. 
+   * SetTerminationProtection locks a job flow so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster. SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.  To terminate a job flow that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, seeProtecting a Job Flow from Termination in the Amazon EMR Guide. 
    */
   setTerminationProtection(params: EMR.Types.SetTerminationProtectionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * SetTerminationProtection locks a job flow so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster. SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.  To terminate a job flow that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, go to Protecting a Job Flow from Termination in the Amazon Elastic MapReduce Developer's Guide. 
+   * SetTerminationProtection locks a job flow so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster. SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.  To terminate a job flow that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, seeProtecting a Job Flow from Termination in the Amazon EMR Guide. 
    */
   setTerminationProtection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -172,11 +196,11 @@ declare class EMR extends Service {
    */
   setVisibleToAllUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. The maximum number of JobFlows allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 5-20 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances.
+   * TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. The maximum number of JobFlows allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 1-5 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances.
    */
   terminateJobFlows(params: EMR.Types.TerminateJobFlowsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. The maximum number of JobFlows allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 5-20 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances.
+   * TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. The maximum number of JobFlows allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 1-5 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances.
    */
   terminateJobFlows(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -200,7 +224,7 @@ declare namespace EMR.Types {
   export type ActionOnFailure = "TERMINATE_JOB_FLOW"|"TERMINATE_CLUSTER"|"CANCEL_AND_WAIT"|"CONTINUE"|string;
   export interface AddInstanceGroupsInput {
     /**
-     * Instance Groups to add.
+     * Instance groups to add.
      */
     InstanceGroups: InstanceGroupConfigList;
     /**
@@ -240,12 +264,13 @@ declare namespace EMR.Types {
      */
     ResourceId: ResourceId;
     /**
-     * A list of tags to associate with a cluster and propagate to Amazon EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.
+     * A list of tags to associate with a cluster and propagate to EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.
      */
     Tags: TagList;
   }
   export interface AddTagsOutput {
   }
+  export type AdjustmentType = "CHANGE_IN_CAPACITY"|"PERCENT_CHANGE_IN_CAPACITY"|"EXACT_CAPACITY"|string;
   export interface Application {
     /**
      * The name of the application.
@@ -265,10 +290,62 @@ declare namespace EMR.Types {
     AdditionalInfo?: StringMap;
   }
   export type ApplicationList = Application[];
+  export interface AutoScalingPolicy {
+    /**
+     * The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activity will not cause an instance group to grow above or below these limits.
+     */
+    Constraints: ScalingConstraints;
+    /**
+     * The scale-in and scale-out rules that comprise the automatic scaling policy.
+     */
+    Rules: ScalingRuleList;
+  }
+  export interface AutoScalingPolicyDescription {
+    /**
+     * The status of an automatic scaling policy. 
+     */
+    Status?: AutoScalingPolicyStatus;
+    /**
+     * The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activity will not cause an instance group to grow above or below these limits.
+     */
+    Constraints?: ScalingConstraints;
+    /**
+     * The scale-in and scale-out rules that comprise the automatic scaling policy.
+     */
+    Rules?: ScalingRuleList;
+  }
+  export type AutoScalingPolicyState = "PENDING"|"ATTACHING"|"ATTACHED"|"DETACHING"|"DETACHED"|"FAILED"|string;
+  export interface AutoScalingPolicyStateChangeReason {
+    /**
+     * The code indicating the reason for the change in status.USER_REQUEST indicates that the scaling policy status was changed by a user. PROVISION_FAILURE indicates that the status change was because the policy failed to provision. CLEANUP_FAILURE indicates something unclean happened.--&gt;
+     */
+    Code?: AutoScalingPolicyStateChangeReasonCode;
+    /**
+     * A friendly, more verbose message that accompanies an automatic scaling policy state change.
+     */
+    Message?: String;
+  }
+  export type AutoScalingPolicyStateChangeReasonCode = "USER_REQUEST"|"PROVISION_FAILURE"|"CLEANUP_FAILURE"|string;
+  export interface AutoScalingPolicyStatus {
+    /**
+     * 
+     */
+    State?: AutoScalingPolicyState;
+    /**
+     * The reason for a change in status.
+     */
+    StateChangeReason?: AutoScalingPolicyStateChangeReason;
+  }
   export type Boolean = boolean;
   export type BooleanObject = boolean;
   export interface BootstrapActionConfig {
+    /**
+     * The name of the bootstrap action.
+     */
     Name: XmlStringMaxLen256;
+    /**
+     * The script run by the bootstrap action.
+     */
     ScriptBootstrapAction: ScriptBootstrapActionConfig;
   }
   export type BootstrapActionConfigList = BootstrapActionConfig[];
@@ -279,6 +356,67 @@ declare namespace EMR.Types {
     BootstrapActionConfig?: BootstrapActionConfig;
   }
   export type BootstrapActionDetailList = BootstrapActionDetail[];
+  export interface CancelStepsInfo {
+    StepId?: StepId;
+    Status?: CancelStepsRequestStatus;
+    Reason?: String;
+  }
+  export type CancelStepsInfoList = CancelStepsInfo[];
+  export interface CancelStepsInput {
+    /**
+     * The ClusterID for which specified steps will be canceled. Use RunJobFlow and ListClusters to get ClusterIDs. 
+     */
+    ClusterId?: XmlStringMaxLen256;
+    /**
+     * The list of StepIDs to cancel. Use ListSteps to get steps and their states for the specified cluster.
+     */
+    StepIds?: StepIdsList;
+  }
+  export interface CancelStepsOutput {
+    /**
+     * A list of CancelStepsInfo, which shows the status of specified cancel requests for each StepID specified.
+     */
+    CancelStepsInfoList?: CancelStepsInfoList;
+  }
+  export type CancelStepsRequestStatus = "SUBMITTED"|"FAILED"|string;
+  export interface CloudWatchAlarmDefinition {
+    /**
+     * Determines how the metric specified by MetricName is compared to the value specified by Threshold.
+     */
+    ComparisonOperator: ComparisonOperator;
+    /**
+     * The number of periods, expressed in seconds using Period, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is 1.
+     */
+    EvaluationPeriods?: Integer;
+    /**
+     * The name of the CloudWatch metric that is watched to determine an alarm condition.
+     */
+    MetricName: String;
+    /**
+     * The namespace for the CloudWatch metric. The default is AWS/ElasticMapReduce.
+     */
+    Namespace?: String;
+    /**
+     * The period, in seconds, over which the statistic is applied. EMR CloudWatch metrics are emitted every five minutes (300 seconds), so if an EMR CloudWatch metric is specified, specify 300.
+     */
+    Period: Integer;
+    /**
+     * The statistic to apply to the metric associated with the alarm. The default is AVERAGE.
+     */
+    Statistic?: Statistic;
+    /**
+     * The value against which the specified statistic is compared.
+     */
+    Threshold: NonNegativeDouble;
+    /**
+     * The unit of measure associated with the CloudWatch metric being watched. The value specified for Unit must correspond to the units specified in the CloudWatch metric.
+     */
+    Unit?: Unit;
+    /**
+     * A CloudWatch metric dimension.
+     */
+    Dimensions?: MetricDimensionList;
+  }
   export interface Cluster {
     /**
      * The unique identifier for the cluster.
@@ -292,6 +430,9 @@ declare namespace EMR.Types {
      * The current status details about the cluster.
      */
     Status?: ClusterStatus;
+    /**
+     * Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.
+     */
     Ec2InstanceAttributes?: Ec2InstanceAttributes;
     /**
      * The path to the Amazon S3 location where logs for this cluster are stored.
@@ -349,6 +490,14 @@ declare namespace EMR.Types {
      * The name of the security configuration applied to the cluster.
      */
     SecurityConfiguration?: XmlString;
+    /**
+     * An IAM role for automatic scaling policies. The default role is EMR_AutoScaling_DefaultRole. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group.
+     */
+    AutoScalingRole?: XmlString;
+    /**
+     * The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION is available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.
+     */
+    ScaleDownBehavior?: ScaleDownBehavior;
   }
   export type ClusterId = string;
   export type ClusterState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
@@ -426,6 +575,7 @@ declare namespace EMR.Types {
     Args?: StringList;
   }
   export type CommandList = Command[];
+  export type ComparisonOperator = "GREATER_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN"|"LESS_THAN_OR_EQUAL"|string;
   export interface Configuration {
     /**
      * The classification of a configuration. For more information see, Amazon EMR Configurations. 
@@ -546,7 +696,7 @@ declare namespace EMR.Types {
   export type EC2InstanceIdsToTerminateList = InstanceId[];
   export interface EbsBlockDevice {
     /**
-     * EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.
+     * EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.
      */
     VolumeSpecification?: VolumeSpecification;
     /**
@@ -556,18 +706,24 @@ declare namespace EMR.Types {
   }
   export interface EbsBlockDeviceConfig {
     /**
-     * EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.
+     * EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.
      */
     VolumeSpecification: VolumeSpecification;
     /**
-     * Number of EBS volumes with specific volume configuration, that will be associated with every instance in the instance group
+     * Number of EBS volumes with a specific volume configuration that will be associated with every instance in the instance group
      */
     VolumesPerInstance?: Integer;
   }
   export type EbsBlockDeviceConfigList = EbsBlockDeviceConfig[];
   export type EbsBlockDeviceList = EbsBlockDevice[];
   export interface EbsConfiguration {
+    /**
+     * An array of Amazon EBS volume specifications attached to a cluster instance.
+     */
     EbsBlockDeviceConfigs?: EbsBlockDeviceConfigList;
+    /**
+     * Indicates whether an Amazon EBS volume is EBS-optimized.
+     */
     EbsOptimized?: BooleanObject;
   }
   export interface EbsVolume {
@@ -762,6 +918,10 @@ declare namespace EMR.Types {
      * Policy for customizing shrink operations.
      */
     ShrinkPolicy?: ShrinkPolicy;
+    /**
+     * An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See PutAutoScalingPolicy.
+     */
+    AutoScalingPolicy?: AutoScalingPolicyDescription;
   }
   export interface InstanceGroupConfig {
     /**
@@ -769,7 +929,7 @@ declare namespace EMR.Types {
      */
     Name?: XmlStringMaxLen256;
     /**
-     * Market type of the Amazon EC2 instances used to create a cluster node.
+     * Market type of the EC2 instances used to create a cluster node.
      */
     Market?: MarketType;
     /**
@@ -777,11 +937,11 @@ declare namespace EMR.Types {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * Bid price for each Amazon EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
+     * Bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
-     * The Amazon EC2 instance type for all instances in the instance group.
+     * The EC2 instance type for all instances in the instance group.
      */
     InstanceType: InstanceType;
     /**
@@ -793,9 +953,13 @@ declare namespace EMR.Types {
      */
     Configurations?: ConfigurationList;
     /**
-     * EBS configurations that will be attached to each Amazon EC2 instance in the instance group.
+     * EBS configurations that will be attached to each EC2 instance in the instance group.
      */
     EbsConfiguration?: EbsConfiguration;
+    /**
+     * An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See PutAutoScalingPolicy.
+     */
+    AutoScalingPolicy?: AutoScalingPolicy;
   }
   export type InstanceGroupConfigList = InstanceGroupConfig[];
   export interface InstanceGroupDetail {
@@ -808,7 +972,7 @@ declare namespace EMR.Types {
      */
     Name?: XmlStringMaxLen256;
     /**
-     * Market type of the Amazon EC2 instances used to create a cluster node.
+     * Market type of the EC2 instances used to create a cluster node.
      */
     Market: MarketType;
     /**
@@ -820,7 +984,7 @@ declare namespace EMR.Types {
      */
     BidPrice?: XmlStringMaxLen256;
     /**
-     * Amazon EC2 Instance type.
+     * EC2 instance type.
      */
     InstanceType: InstanceType;
     /**
@@ -870,7 +1034,7 @@ declare namespace EMR.Types {
      */
     InstanceCount?: Integer;
     /**
-     * The EC2 InstanceIds to terminate. Once you terminate the instances, the instance group will not return to its original requested size.
+     * The EC2 InstanceIds to terminate. After you terminate the instances, the instance group will not return to its original requested size.
      */
     EC2InstanceIdsToTerminate?: EC2InstanceIdsToTerminateList;
     /**
@@ -995,7 +1159,7 @@ declare namespace EMR.Types {
      */
     LogUri?: XmlString;
     /**
-     * The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon ElasticMapReduce, go to AMI Versions Supported in Elastic MapReduce in the Amazon Elastic MapReduce Developer Guide. 
+     * The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon EMR, see AMI Versions Supported in EMR in the Amazon EMR Developer Guide. 
      */
     AmiVersion?: XmlStringMaxLen256;
     /**
@@ -1030,6 +1194,14 @@ declare namespace EMR.Types {
      * The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.
      */
     ServiceRole?: XmlString;
+    /**
+     * An IAM role for automatic scaling policies. The default role is EMR_AutoScaling_DefaultRole. The IAM role provides a way for the automatic scaling feature to get the required permissions it needs to launch and terminate EC2 instances in an instance group.
+     */
+    AutoScalingRole?: XmlString;
+    /**
+     * The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.
+     */
+    ScaleDownBehavior?: ScaleDownBehavior;
   }
   export type JobFlowDetailList = JobFlowDetail[];
   export type JobFlowExecutionState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"SHUTTING_DOWN"|"TERMINATED"|"COMPLETED"|"FAILED"|string;
@@ -1070,7 +1242,7 @@ declare namespace EMR.Types {
      */
     SlaveInstanceType?: InstanceType;
     /**
-     * The number of Amazon EC2 instances used to execute the job flow.
+     * The number of EC2 instances used to execute the job flow.
      */
     InstanceCount?: Integer;
     /**
@@ -1078,7 +1250,7 @@ declare namespace EMR.Types {
      */
     InstanceGroups?: InstanceGroupConfigList;
     /**
-     * The name of the Amazon EC2 key pair that can be used to ssh to the master node as the user called "hadoop."
+     * The name of the EC2 key pair that can be used to ssh to the master node as the user called "hadoop."
      */
     Ec2KeyName?: XmlStringMaxLen256;
     /**
@@ -1148,7 +1320,7 @@ declare namespace EMR.Types {
      */
     InstanceGroups?: InstanceGroupDetailList;
     /**
-     * An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented once for every hour an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
+     * An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented one time for every hour that an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
      */
     NormalizedInstanceHours?: Integer;
     /**
@@ -1189,7 +1361,7 @@ declare namespace EMR.Types {
   export type KeyValueList = KeyValue[];
   export interface ListBootstrapActionsInput {
     /**
-     * The cluster identifier for the bootstrap actions to list .
+     * The cluster identifier for the bootstrap actions to list.
      */
     ClusterId: ClusterId;
     /**
@@ -1199,7 +1371,7 @@ declare namespace EMR.Types {
   }
   export interface ListBootstrapActionsOutput {
     /**
-     * The bootstrap actions associated with the cluster .
+     * The bootstrap actions associated with the cluster.
      */
     BootstrapActions?: CommandList;
     /**
@@ -1209,11 +1381,11 @@ declare namespace EMR.Types {
   }
   export interface ListClustersInput {
     /**
-     * The creation date and time beginning value filter for listing clusters .
+     * The creation date and time beginning value filter for listing clusters.
      */
     CreatedAfter?: _Date;
     /**
-     * The creation date and time end value filter for listing clusters .
+     * The creation date and time end value filter for listing clusters.
      */
     CreatedBefore?: _Date;
     /**
@@ -1333,18 +1505,74 @@ declare namespace EMR.Types {
   }
   export type Marker = string;
   export type MarketType = "ON_DEMAND"|"SPOT"|string;
+  export interface MetricDimension {
+    /**
+     * The dimension name.
+     */
+    Key?: String;
+    /**
+     * The dimension value.
+     */
+    Value?: String;
+  }
+  export type MetricDimensionList = MetricDimension[];
   export interface ModifyInstanceGroupsInput {
+    /**
+     * The ID of the cluster to which the instance group belongs.
+     */
+    ClusterId?: ClusterId;
     /**
      * Instance groups to change.
      */
     InstanceGroups?: InstanceGroupModifyConfigList;
   }
   export type NewSupportedProductsList = SupportedProductConfig[];
+  export type NonNegativeDouble = number;
   export interface PlacementType {
     /**
      * The Amazon EC2 Availability Zone for the job flow.
      */
     AvailabilityZone: XmlString;
+  }
+  export interface PutAutoScalingPolicyInput {
+    /**
+     * Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
+     */
+    ClusterId: ClusterId;
+    /**
+     * Specifies the ID of the instance group to which the automatic scaling policy is applied.
+     */
+    InstanceGroupId: InstanceGroupId;
+    /**
+     * Specifies the definition of the automatic scaling policy.
+     */
+    AutoScalingPolicy: AutoScalingPolicy;
+  }
+  export interface PutAutoScalingPolicyOutput {
+    /**
+     * Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
+     */
+    ClusterId?: ClusterId;
+    /**
+     * Specifies the ID of the instance group to which the scaling policy is applied.
+     */
+    InstanceGroupId?: InstanceGroupId;
+    /**
+     * The automatic scaling policy definition.
+     */
+    AutoScalingPolicy?: AutoScalingPolicyDescription;
+  }
+  export interface RemoveAutoScalingPolicyInput {
+    /**
+     * Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
+     */
+    ClusterId: ClusterId;
+    /**
+     * Specifies the ID of the instance group to which the scaling policy is applied.
+     */
+    InstanceGroupId: InstanceGroupId;
+  }
+  export interface RemoveAutoScalingPolicyOutput {
   }
   export interface RemoveTagsInput {
     /**
@@ -1373,7 +1601,7 @@ declare namespace EMR.Types {
      */
     AdditionalInfo?: XmlString;
     /**
-     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use ReleaseLabel.  The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid:   The version number of the AMI to use, for example, "2.0."   If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the JobFlowInstancesConfig HadoopVersion parameter to modify the version of Hadoop from the defaults shown above. For details about the AMI versions currently supported by Amazon Elastic MapReduce, go to AMI Versions Supported in Elastic MapReduce in the Amazon Elastic MapReduce Developer's Guide. 
+     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use ReleaseLabel.  The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid:   The version number of the AMI to use, for example, "2.0."   If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the JobFlowInstancesConfig HadoopVersion parameter to modify the version of Hadoop from the defaults shown above. For details about the AMI versions currently supported by Amazon Elastic MapReduce, see AMI Versions Supported in Elastic MapReduce in the Amazon Elastic MapReduce Developer Guide.   Previously, the EMR AMI version API parameter options allowed you to use latest for the latest AMI version rather than specify a numerical value. Some regions no longer support this deprecated option as they only have a newer release label version of EMR, which requires you to specify an EMR release label release (EMR 4.x or later). 
      */
     AmiVersion?: XmlStringMaxLen256;
     /**
@@ -1393,7 +1621,7 @@ declare namespace EMR.Types {
      */
     BootstrapActions?: BootstrapActionConfigList;
     /**
-     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.  A list of strings that indicates third-party software to use with the job flow. For more information, go to Use Third Party Applications with Amazon EMR. Currently supported values are:   "mapr-m3" - launch the job flow using MapR M3 Edition.   "mapr-m5" - launch the job flow using MapR M5 Edition.  
+     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.  A list of strings that indicates third-party software to use with the job flow. For more information, see Use Third Party Applications with Amazon EMR. Currently supported values are:   "mapr-m3" - launch the job flow using MapR M3 Edition.   "mapr-m5" - launch the job flow using MapR M5 Edition.  
      */
     SupportedProducts?: SupportedProductsList;
     /**
@@ -1428,6 +1656,14 @@ declare namespace EMR.Types {
      * The name of a security configuration to apply to the cluster.
      */
     SecurityConfiguration?: XmlString;
+    /**
+     * An IAM role for automatic scaling policies. The default role is EMR_AutoScaling_DefaultRole. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group.
+     */
+    AutoScalingRole?: XmlString;
+    /**
+     * Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.
+     */
+    ScaleDownBehavior?: ScaleDownBehavior;
   }
   export interface RunJobFlowOutput {
     /**
@@ -1435,8 +1671,60 @@ declare namespace EMR.Types {
      */
     JobFlowId?: XmlStringMaxLen256;
   }
+  export type ScaleDownBehavior = "TERMINATE_AT_INSTANCE_HOUR"|"TERMINATE_AT_TASK_COMPLETION"|string;
+  export interface ScalingAction {
+    /**
+     * Not available for instance groups. Instance groups use the market type specified for the group.
+     */
+    Market?: MarketType;
+    /**
+     * The type of adjustment the automatic scaling activity makes when triggered, and the periodicity of the adjustment.
+     */
+    SimpleScalingPolicyConfiguration: SimpleScalingPolicyConfiguration;
+  }
+  export interface ScalingConstraints {
+    /**
+     * The lower boundary of EC2 instances in an instance group below which scaling activities are not allowed to shrink. Scale-in activities will not terminate instances below this boundary.
+     */
+    MinCapacity: Integer;
+    /**
+     * The upper boundary of EC2 instances in an instance group beyond which scaling activities are not allowed to grow. Scale-out activities will not add instances beyond this boundary.
+     */
+    MaxCapacity: Integer;
+  }
+  export interface ScalingRule {
+    /**
+     * The name used to identify an automatic scaling rule. Rule names must be unique within a scaling policy.
+     */
+    Name: String;
+    /**
+     * A friendly, more verbose description of the automatic scaling rule.
+     */
+    Description?: String;
+    /**
+     * The conditions that trigger an automatic scaling activity.
+     */
+    Action: ScalingAction;
+    /**
+     * The CloudWatch alarm definition that determines when automatic scaling activity is triggered.
+     */
+    Trigger: ScalingTrigger;
+  }
+  export type ScalingRuleList = ScalingRule[];
+  export interface ScalingTrigger {
+    /**
+     * The definition of a CloudWatch metric alarm. When the defined alarm conditions are met along with other trigger parameters, scaling activity begins.
+     */
+    CloudWatchAlarmDefinition: CloudWatchAlarmDefinition;
+  }
   export interface ScriptBootstrapActionConfig {
+    /**
+     * Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.
+     */
     Path: XmlString;
+    /**
+     * A list of command line arguments to pass to the bootstrap action script.
+     */
     Args?: XmlStringList;
   }
   export type SecurityConfigurationList = SecurityConfigurationSummary[];
@@ -1481,6 +1769,21 @@ declare namespace EMR.Types {
      */
     InstanceResizePolicy?: InstanceResizePolicy;
   }
+  export interface SimpleScalingPolicyConfiguration {
+    /**
+     * The way in which EC2 instances are added (if ScalingAdjustment is a positive number) or terminated (if ScalingAdjustment is a negative number) each time the scaling activity is triggered. CHANGE_IN_CAPACITY is the default. CHANGE_IN_CAPACITY indicates that the EC2 instance count increments or decrements by ScalingAdjustment, which should be expressed as an integer. PERCENT_CHANGE_IN_CAPACITY indicates the instance count increments or decrements by the percentage specified by ScalingAdjustment, which should be expressed as a decimal, for example, 0.20 indicates an increase in 20% increments of cluster capacity. EXACT_CAPACITY indicates the scaling activity results in an instance group with the number of EC2 instances specified by ScalingAdjustment, which should be expressed as a positive integer.
+     */
+    AdjustmentType?: AdjustmentType;
+    /**
+     * The amount by which to scale in or scale out, based on the specified AdjustmentType. A positive value adds to the instance group's EC2 instance count while a negative number removes instances. If AdjustmentType is set to EXACT_CAPACITY, the number should only be a positive integer. If AdjustmentType is set to PERCENT_CHANGE_IN_CAPACITY, the value should express the percentage as a decimal. For example, -0.20 indicates a decrease in 20% increments of cluster capacity.
+     */
+    ScalingAdjustment: Integer;
+    /**
+     * The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start. The default value is 0.
+     */
+    CoolDown?: Integer;
+  }
+  export type Statistic = "SAMPLE_COUNT"|"AVERAGE"|"SUM"|"MINIMUM"|"MAXIMUM"|string;
   export interface Step {
     /**
      * The identifier of the cluster step.
@@ -1554,7 +1857,7 @@ declare namespace EMR.Types {
   }
   export type StepId = string;
   export type StepIdsList = XmlStringMaxLen256[];
-  export type StepState = "PENDING"|"RUNNING"|"COMPLETED"|"CANCELLED"|"FAILED"|"INTERRUPTED"|string;
+  export type StepState = "PENDING"|"CANCEL_PENDING"|"RUNNING"|"COMPLETED"|"CANCELLED"|"FAILED"|"INTERRUPTED"|string;
   export interface StepStateChangeReason {
     /**
      * The programmable code for the state change reason. Note: Currently, the service provides no code for the state change.
@@ -1653,6 +1956,7 @@ declare namespace EMR.Types {
      */
     JobFlowIds: XmlStringList;
   }
+  export type Unit = "NONE"|"SECONDS"|"MICRO_SECONDS"|"MILLI_SECONDS"|"BYTES"|"KILO_BYTES"|"MEGA_BYTES"|"GIGA_BYTES"|"TERA_BYTES"|"BITS"|"KILO_BITS"|"MEGA_BITS"|"GIGA_BITS"|"TERA_BITS"|"PERCENT"|"COUNT"|"BYTES_PER_SECOND"|"KILO_BYTES_PER_SECOND"|"MEGA_BYTES_PER_SECOND"|"GIGA_BYTES_PER_SECOND"|"TERA_BYTES_PER_SECOND"|"BITS_PER_SECOND"|"KILO_BITS_PER_SECOND"|"MEGA_BITS_PER_SECOND"|"GIGA_BITS_PER_SECOND"|"TERA_BITS_PER_SECOND"|"COUNT_PER_SECOND"|string;
   export interface VolumeSpecification {
     /**
      * The volume type. Volume types supported are gp2, io1, standard.

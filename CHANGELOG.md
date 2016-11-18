@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.4-->
+<!--LATEST=2.7.5-->
 <!--ENTRYINSERT-->
+
+## 2.7.5
+* bugfix: TypeScript: Stubs DOM interfaces and removes type reference to node.
+* feature: ElasticTranscoder: Support for multiple media input files that can be stitched together.
+* feature: Lambda: Adds support for Environment variables.
+* feature: Gamelift: Provide the ability to remote access into GameLift managed servers.
+* feature: EMR: Automatic Scaling of EMR clusters based on metrics. Adds support for cancelling a pending Amazon EMR step.
+* feature: ApplicationAutoScaling: Adds support for a new target resource (EMR Instance Groups) as a scalable target.
 
 ## 2.7.4
 * feature: MarketplaceMetering: Allows third parties to send metering records.

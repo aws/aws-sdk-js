@@ -23,7 +23,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>AddInstanceGroups adds an instance group to a running cluster.</p>"
+      "documentation":"<p>Adds one or more instance groups to a running cluster.</p>"
     },
     "AddJobFlowSteps":{
       "name":"AddJobFlowSteps",
@@ -36,7 +36,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow.</p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p> <p>A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step.</p> <p>Elastic MapReduce executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully.</p> <p>You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.</p>"
+      "documentation":"<p>AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow.</p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon EMR Developer's Guide</i>.</p> <p>A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step.</p> <p>Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully.</p> <p>You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.</p>"
     },
     "AddTags":{
       "name":"AddTags",
@@ -52,6 +52,20 @@
       ],
       "documentation":"<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
     },
+    "CancelSteps":{
+      "name":"CancelSteps",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CancelStepsInput"},
+      "output":{"shape":"CancelStepsOutput"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidRequestException"}
+      ],
+      "documentation":"<p>Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a <code>PENDING</code> state.</p>"
+    },
     "CreateSecurityConfiguration":{
       "name":"CreateSecurityConfiguration",
       "http":{
@@ -64,7 +78,7 @@
         {"shape":"InternalServerException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Creates a security configuration using EMR Security Configurations, which are stored in the service. Security Configurations enable you to more easily create a configuration, reuse it, and apply it whenever a cluster is created.</p>"
+      "documentation":"<p>Creates a security configuration, which is stored in the service and can be specified when a cluster is created.</p>"
     },
     "DeleteSecurityConfiguration":{
       "name":"DeleteSecurityConfiguration",
@@ -105,7 +119,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p> This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>, <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a> instead.</p> <p>DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p>Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p>If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li> <p>Job flows created and completed in the last two weeks</p> </li> <li> <p> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </p> </li> </ul> <p>Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions.</p>",
+      "documentation":"<p>This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>, <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a> instead.</p> <p>DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p>Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p>If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li> <p>Job flows created and completed in the last two weeks</p> </li> <li> <p> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </p> </li> </ul> <p>Amazon EMR can return a maximum of 512 job flow descriptions.</p>",
       "deprecated":true
     },
     "DescribeSecurityConfiguration":{
@@ -218,7 +232,7 @@
         {"shape":"InternalServerException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Provides a list of steps for the cluster.</p>"
+      "documentation":"<p>Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.</p>"
     },
     "ModifyInstanceGroups":{
       "name":"ModifyInstanceGroups",
@@ -231,6 +245,26 @@
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>ModifyInstanceGroups modifies the number of nodes and configuration settings of an instance group. The input parameters include the new target instance count for the group and the instance group ID. The call will either succeed or fail atomically.</p>"
+    },
+    "PutAutoScalingPolicy":{
+      "name":"PutAutoScalingPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutAutoScalingPolicyInput"},
+      "output":{"shape":"PutAutoScalingPolicyOutput"},
+      "documentation":"<p>Creates or updates an automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric.</p>"
+    },
+    "RemoveAutoScalingPolicy":{
+      "name":"RemoveAutoScalingPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveAutoScalingPolicyInput"},
+      "output":{"shape":"RemoveAutoScalingPolicyOutput"},
+      "documentation":"<p>Removes an automatic scaling policy from a specified instance group within an EMR cluster.</p>"
     },
     "RemoveTags":{
       "name":"RemoveTags",
@@ -257,7 +291,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p> RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. Once the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the job flow will transition to the WAITING state rather than shutting down once the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p> <p>For long running job flows, we recommend that you periodically store your results.</p>"
+      "documentation":"<p>RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. After the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the job flow will transition to the WAITING state rather than shutting down after the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/Management/Guide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon EMR Management Guide</i>.</p> <p>For long running job flows, we recommend that you periodically store your results.</p>"
     },
     "SetTerminationProtection":{
       "name":"SetTerminationProtection",
@@ -269,7 +303,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>SetTerminationProtection locks a job flow so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster.</p> <p>SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.</p> <p> To terminate a job flow that has been locked by setting SetTerminationProtection to <code>true</code>, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to <code>false</code>. </p> <p> For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html\">Protecting a Job Flow from Termination</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i> </p>"
+      "documentation":"<p>SetTerminationProtection locks a job flow so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster.</p> <p>SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.</p> <p> To terminate a job flow that has been locked by setting SetTerminationProtection to <code>true</code>, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to <code>false</code>. </p> <p> For more information, see<a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html\">Protecting a Job Flow from Termination</a> in the <i>Amazon EMR Guide.</i> </p>"
     },
     "SetVisibleToAllUsers":{
       "name":"SetVisibleToAllUsers",
@@ -293,7 +327,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created.</p> <p>The maximum number of JobFlows allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 5-20 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances.</p>"
+      "documentation":"<p>TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created.</p> <p>The maximum number of JobFlows allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 1-5 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances.</p>"
     }
   },
   "shapes":{
@@ -315,7 +349,7 @@
       "members":{
         "InstanceGroups":{
           "shape":"InstanceGroupConfigList",
-          "documentation":"<p>Instance Groups to add.</p>"
+          "documentation":"<p>Instance groups to add.</p>"
         },
         "JobFlowId":{
           "shape":"XmlStringMaxLen256",
@@ -379,7 +413,7 @@
         },
         "Tags":{
           "shape":"TagList",
-          "documentation":"<p>A list of tags to associate with a cluster and propagate to Amazon EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.</p>"
+          "documentation":"<p>A list of tags to associate with a cluster and propagate to EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.</p>"
         }
       },
       "documentation":"<p>This input identifies a cluster and a list of tags to attach.</p>"
@@ -389,6 +423,14 @@
       "members":{
       },
       "documentation":"<p>This output indicates the result of adding tags to a resource.</p>"
+    },
+    "AdjustmentType":{
+      "type":"string",
+      "enum":[
+        "CHANGE_IN_CAPACITY",
+        "PERCENT_CHANGE_IN_CAPACITY",
+        "EXACT_CAPACITY"
+      ]
     },
     "Application":{
       "type":"structure",
@@ -416,6 +458,89 @@
       "type":"list",
       "member":{"shape":"Application"}
     },
+    "AutoScalingPolicy":{
+      "type":"structure",
+      "required":[
+        "Constraints",
+        "Rules"
+      ],
+      "members":{
+        "Constraints":{
+          "shape":"ScalingConstraints",
+          "documentation":"<p>The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activity will not cause an instance group to grow above or below these limits.</p>"
+        },
+        "Rules":{
+          "shape":"ScalingRuleList",
+          "documentation":"<p>The scale-in and scale-out rules that comprise the automatic scaling policy.</p>"
+        }
+      },
+      "documentation":"<p>An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. An automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.</p>"
+    },
+    "AutoScalingPolicyDescription":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"AutoScalingPolicyStatus",
+          "documentation":"<p>The status of an automatic scaling policy. </p>"
+        },
+        "Constraints":{
+          "shape":"ScalingConstraints",
+          "documentation":"<p>The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activity will not cause an instance group to grow above or below these limits.</p>"
+        },
+        "Rules":{
+          "shape":"ScalingRuleList",
+          "documentation":"<p>The scale-in and scale-out rules that comprise the automatic scaling policy.</p>"
+        }
+      },
+      "documentation":"<p>An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.</p>"
+    },
+    "AutoScalingPolicyState":{
+      "type":"string",
+      "enum":[
+        "PENDING",
+        "ATTACHING",
+        "ATTACHED",
+        "DETACHING",
+        "DETACHED",
+        "FAILED"
+      ]
+    },
+    "AutoScalingPolicyStateChangeReason":{
+      "type":"structure",
+      "members":{
+        "Code":{
+          "shape":"AutoScalingPolicyStateChangeReasonCode",
+          "documentation":"<p>The code indicating the reason for the change in status.<code>USER_REQUEST</code> indicates that the scaling policy status was changed by a user. <code>PROVISION_FAILURE</code> indicates that the status change was because the policy failed to provision. <code>CLEANUP_FAILURE</code> indicates something unclean happened.--&gt;</p>"
+        },
+        "Message":{
+          "shape":"String",
+          "documentation":"<p>A friendly, more verbose message that accompanies an automatic scaling policy state change.</p>"
+        }
+      },
+      "documentation":"<p>The reason for an <a>AutoScalingPolicyStatus</a> change.</p>"
+    },
+    "AutoScalingPolicyStateChangeReasonCode":{
+      "type":"string",
+      "enum":[
+        "USER_REQUEST",
+        "PROVISION_FAILURE",
+        "CLEANUP_FAILURE"
+      ]
+    },
+    "AutoScalingPolicyStatus":{
+      "type":"structure",
+      "members":{
+        "State":{
+          "shape":"AutoScalingPolicyState",
+          "documentation":"<p></p>"
+        },
+        "StateChangeReason":{
+          "shape":"AutoScalingPolicyStateChangeReason",
+          "documentation":"<p>The reason for a change in status.</p>"
+        }
+      },
+      "documentation":"<p>The status of an automatic scaling policy. </p>"
+    },
     "Boolean":{"type":"boolean"},
     "BooleanObject":{"type":"boolean"},
     "BootstrapActionConfig":{
@@ -425,9 +550,16 @@
         "ScriptBootstrapAction"
       ],
       "members":{
-        "Name":{"shape":"XmlStringMaxLen256"},
-        "ScriptBootstrapAction":{"shape":"ScriptBootstrapActionConfig"}
-      }
+        "Name":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>The name of the bootstrap action.</p>"
+        },
+        "ScriptBootstrapAction":{
+          "shape":"ScriptBootstrapActionConfig",
+          "documentation":"<p>The script run by the bootstrap action.</p>"
+        }
+      },
+      "documentation":"<p>Configuration of a bootstrap action.</p>"
     },
     "BootstrapActionConfigList":{
       "type":"list",
@@ -447,6 +579,97 @@
       "type":"list",
       "member":{"shape":"BootstrapActionDetail"}
     },
+    "CancelStepsInfo":{
+      "type":"structure",
+      "members":{
+        "StepId":{"shape":"StepId"},
+        "Status":{"shape":"CancelStepsRequestStatus"},
+        "Reason":{"shape":"String"}
+      }
+    },
+    "CancelStepsInfoList":{
+      "type":"list",
+      "member":{"shape":"CancelStepsInfo"}
+    },
+    "CancelStepsInput":{
+      "type":"structure",
+      "members":{
+        "ClusterId":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>The <code>ClusterID</code> for which specified steps will be canceled. Use <a>RunJobFlow</a> and <a>ListClusters</a> to get ClusterIDs. </p>"
+        },
+        "StepIds":{
+          "shape":"StepIdsList",
+          "documentation":"<p>The list of <code>StepIDs</code> to cancel. Use <a>ListSteps</a> to get steps and their states for the specified cluster.</p>"
+        }
+      },
+      "documentation":"<p>The input argument to the <a>CancelSteps</a> operation.</p>"
+    },
+    "CancelStepsOutput":{
+      "type":"structure",
+      "members":{
+        "CancelStepsInfoList":{
+          "shape":"CancelStepsInfoList",
+          "documentation":"<p>A list of <a>CancelStepsInfo</a>, which shows the status of specified cancel requests for each <code>StepID</code> specified.</p>"
+        }
+      },
+      "documentation":"<p> The output for the <a>CancelSteps</a> operation. </p>"
+    },
+    "CancelStepsRequestStatus":{
+      "type":"string",
+      "enum":[
+        "SUBMITTED",
+        "FAILED"
+      ]
+    },
+    "CloudWatchAlarmDefinition":{
+      "type":"structure",
+      "required":[
+        "ComparisonOperator",
+        "MetricName",
+        "Period",
+        "Threshold"
+      ],
+      "members":{
+        "ComparisonOperator":{
+          "shape":"ComparisonOperator",
+          "documentation":"<p>Determines how the metric specified by <code>MetricName</code> is compared to the value specified by <code>Threshold</code>.</p>"
+        },
+        "EvaluationPeriods":{
+          "shape":"Integer",
+          "documentation":"<p>The number of periods, expressed in seconds using <code>Period</code>, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is <code>1</code>.</p>"
+        },
+        "MetricName":{
+          "shape":"String",
+          "documentation":"<p>The name of the CloudWatch metric that is watched to determine an alarm condition.</p>"
+        },
+        "Namespace":{
+          "shape":"String",
+          "documentation":"<p>The namespace for the CloudWatch metric. The default is <code>AWS/ElasticMapReduce</code>.</p>"
+        },
+        "Period":{
+          "shape":"Integer",
+          "documentation":"<p>The period, in seconds, over which the statistic is applied. EMR CloudWatch metrics are emitted every five minutes (300 seconds), so if an EMR CloudWatch metric is specified, specify <code>300</code>.</p>"
+        },
+        "Statistic":{
+          "shape":"Statistic",
+          "documentation":"<p>The statistic to apply to the metric associated with the alarm. The default is <code>AVERAGE</code>.</p>"
+        },
+        "Threshold":{
+          "shape":"NonNegativeDouble",
+          "documentation":"<p>The value against which the specified statistic is compared.</p>"
+        },
+        "Unit":{
+          "shape":"Unit",
+          "documentation":"<p>The unit of measure associated with the CloudWatch metric being watched. The value specified for <code>Unit</code> must correspond to the units specified in the CloudWatch metric.</p>"
+        },
+        "Dimensions":{
+          "shape":"MetricDimensionList",
+          "documentation":"<p>A CloudWatch metric dimension.</p>"
+        }
+      },
+      "documentation":"<p>The definition of a CloudWatch metric alarm, which determines when an automatic scaling activity is triggered. When the defined alarm conditions are satisfied, scaling activity begins.</p>"
+    },
     "Cluster":{
       "type":"structure",
       "members":{
@@ -462,7 +685,10 @@
           "shape":"ClusterStatus",
           "documentation":"<p>The current status details about the cluster.</p>"
         },
-        "Ec2InstanceAttributes":{"shape":"Ec2InstanceAttributes"},
+        "Ec2InstanceAttributes":{
+          "shape":"Ec2InstanceAttributes",
+          "documentation":"<p>Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.</p>"
+        },
         "LogUri":{
           "shape":"String",
           "documentation":"<p>The path to the Amazon S3 location where logs for this cluster are stored.</p>"
@@ -518,6 +744,14 @@
         "SecurityConfiguration":{
           "shape":"XmlString",
           "documentation":"<p>The name of the security configuration applied to the cluster.</p>"
+        },
+        "AutoScalingRole":{
+          "shape":"XmlString",
+          "documentation":"<p>An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group.</p>"
+        },
+        "ScaleDownBehavior":{
+          "shape":"ScaleDownBehavior",
+          "documentation":"<p>The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
         }
       },
       "documentation":"<p>The detailed description of the cluster.</p>"
@@ -648,6 +882,15 @@
     "CommandList":{
       "type":"list",
       "member":{"shape":"Command"}
+    },
+    "ComparisonOperator":{
+      "type":"string",
+      "enum":[
+        "GREATER_THAN_OR_EQUAL",
+        "GREATER_THAN",
+        "LESS_THAN",
+        "LESS_THAN_OR_EQUAL"
+      ]
     },
     "Configuration":{
       "type":"structure",
@@ -842,7 +1085,7 @@
       "members":{
         "VolumeSpecification":{
           "shape":"VolumeSpecification",
-          "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+          "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
         },
         "Device":{
           "shape":"String",
@@ -857,11 +1100,11 @@
       "members":{
         "VolumeSpecification":{
           "shape":"VolumeSpecification",
-          "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+          "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
         },
         "VolumesPerInstance":{
           "shape":"Integer",
-          "documentation":"<p>Number of EBS volumes with specific volume configuration, that will be associated with every instance in the instance group</p>"
+          "documentation":"<p>Number of EBS volumes with a specific volume configuration that will be associated with every instance in the instance group</p>"
         }
       },
       "documentation":"<p>Configuration of requested EBS block device associated with the instance group with count of volumes that will be associated to every instance.</p>"
@@ -877,9 +1120,16 @@
     "EbsConfiguration":{
       "type":"structure",
       "members":{
-        "EbsBlockDeviceConfigs":{"shape":"EbsBlockDeviceConfigList"},
-        "EbsOptimized":{"shape":"BooleanObject"}
-      }
+        "EbsBlockDeviceConfigs":{
+          "shape":"EbsBlockDeviceConfigList",
+          "documentation":"<p>An array of Amazon EBS volume specifications attached to a cluster instance.</p>"
+        },
+        "EbsOptimized":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Indicates whether an Amazon EBS volume is EBS-optimized.</p>"
+        }
+      },
+      "documentation":"<p>The Amazon EBS configuration of a cluster instance.</p>"
     },
     "EbsVolume":{
       "type":"structure",
@@ -1106,6 +1356,10 @@
         "ShrinkPolicy":{
           "shape":"ShrinkPolicy",
           "documentation":"<p>Policy for customizing shrink operations.</p>"
+        },
+        "AutoScalingPolicy":{
+          "shape":"AutoScalingPolicyDescription",
+          "documentation":"<p>An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See PutAutoScalingPolicy.</p>"
         }
       },
       "documentation":"<p>This entity represents an instance group, which is a group of instances that have common purpose. For example, CORE instance group is used for HDFS.</p>"
@@ -1124,7 +1378,7 @@
         },
         "Market":{
           "shape":"MarketType",
-          "documentation":"<p>Market type of the Amazon EC2 instances used to create a cluster node.</p>"
+          "documentation":"<p>Market type of the EC2 instances used to create a cluster node.</p>"
         },
         "InstanceRole":{
           "shape":"InstanceRoleType",
@@ -1132,11 +1386,11 @@
         },
         "BidPrice":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>Bid price for each Amazon EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.</p>"
+          "documentation":"<p>Bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.</p>"
         },
         "InstanceType":{
           "shape":"InstanceType",
-          "documentation":"<p>The Amazon EC2 instance type for all instances in the instance group.</p>"
+          "documentation":"<p>The EC2 instance type for all instances in the instance group.</p>"
         },
         "InstanceCount":{
           "shape":"Integer",
@@ -1148,7 +1402,11 @@
         },
         "EbsConfiguration":{
           "shape":"EbsConfiguration",
-          "documentation":"<p>EBS configurations that will be attached to each Amazon EC2 instance in the instance group.</p>"
+          "documentation":"<p>EBS configurations that will be attached to each EC2 instance in the instance group.</p>"
+        },
+        "AutoScalingPolicy":{
+          "shape":"AutoScalingPolicy",
+          "documentation":"<p>An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.</p>"
         }
       },
       "documentation":"<p>Configuration defining a new instance group.</p>"
@@ -1179,7 +1437,7 @@
         },
         "Market":{
           "shape":"MarketType",
-          "documentation":"<p>Market type of the Amazon EC2 instances used to create a cluster node.</p>"
+          "documentation":"<p>Market type of the EC2 instances used to create a cluster node.</p>"
         },
         "InstanceRole":{
           "shape":"InstanceRoleType",
@@ -1191,7 +1449,7 @@
         },
         "InstanceType":{
           "shape":"InstanceType",
-          "documentation":"<p>Amazon EC2 Instance type.</p>"
+          "documentation":"<p>EC2 instance type.</p>"
         },
         "InstanceRequestCount":{
           "shape":"Integer",
@@ -1255,7 +1513,7 @@
         },
         "EC2InstanceIdsToTerminate":{
           "shape":"EC2InstanceIdsToTerminateList",
-          "documentation":"<p>The EC2 InstanceIds to terminate. Once you terminate the instances, the instance group will not return to its original requested size.</p>"
+          "documentation":"<p>The EC2 InstanceIds to terminate. After you terminate the instances, the instance group will not return to its original requested size.</p>"
         },
         "ShrinkPolicy":{
           "shape":"ShrinkPolicy",
@@ -1523,7 +1781,7 @@
         },
         "AmiVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon ElasticMapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer Guide.</i> </p>"
+          "documentation":"<p>The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon EMR, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in EMR</a> in the <i>Amazon EMR Developer Guide.</i> </p>"
         },
         "ExecutionStatusDetail":{
           "shape":"JobFlowExecutionStatusDetail",
@@ -1556,6 +1814,14 @@
         "ServiceRole":{
           "shape":"XmlString",
           "documentation":"<p>The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.</p>"
+        },
+        "AutoScalingRole":{
+          "shape":"XmlString",
+          "documentation":"<p>An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides a way for the automatic scaling feature to get the required permissions it needs to launch and terminate EC2 instances in an instance group.</p>"
+        },
+        "ScaleDownBehavior":{
+          "shape":"ScaleDownBehavior",
+          "documentation":"<p>The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
         }
       },
       "documentation":"<p>A description of a job flow.</p>"
@@ -1629,7 +1895,7 @@
         },
         "InstanceCount":{
           "shape":"Integer",
-          "documentation":"<p>The number of Amazon EC2 instances used to execute the job flow.</p>"
+          "documentation":"<p>The number of EC2 instances used to execute the job flow.</p>"
         },
         "InstanceGroups":{
           "shape":"InstanceGroupConfigList",
@@ -1637,7 +1903,7 @@
         },
         "Ec2KeyName":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The name of the Amazon EC2 key pair that can be used to ssh to the master node as the user called \"hadoop.\"</p>"
+          "documentation":"<p>The name of the EC2 key pair that can be used to ssh to the master node as the user called \"hadoop.\"</p>"
         },
         "Placement":{
           "shape":"PlacementType",
@@ -1716,7 +1982,7 @@
         },
         "NormalizedInstanceHours":{
           "shape":"Integer",
-          "documentation":"<p>An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented once for every hour an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>"
+          "documentation":"<p>An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented one time for every hour that an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>"
         },
         "Ec2KeyName":{
           "shape":"XmlStringMaxLen256",
@@ -1769,7 +2035,7 @@
       "members":{
         "ClusterId":{
           "shape":"ClusterId",
-          "documentation":"<p>The cluster identifier for the bootstrap actions to list .</p>"
+          "documentation":"<p>The cluster identifier for the bootstrap actions to list.</p>"
         },
         "Marker":{
           "shape":"Marker",
@@ -1783,25 +2049,25 @@
       "members":{
         "BootstrapActions":{
           "shape":"CommandList",
-          "documentation":"<p>The bootstrap actions associated with the cluster .</p>"
+          "documentation":"<p>The bootstrap actions associated with the cluster.</p>"
         },
         "Marker":{
           "shape":"Marker",
           "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
-      "documentation":"<p>This output contains the boostrap actions detail .</p>"
+      "documentation":"<p>This output contains the bootstrap actions detail.</p>"
     },
     "ListClustersInput":{
       "type":"structure",
       "members":{
         "CreatedAfter":{
           "shape":"Date",
-          "documentation":"<p>The creation date and time beginning value filter for listing clusters .</p>"
+          "documentation":"<p>The creation date and time beginning value filter for listing clusters.</p>"
         },
         "CreatedBefore":{
           "shape":"Date",
-          "documentation":"<p>The creation date and time end value filter for listing clusters .</p>"
+          "documentation":"<p>The creation date and time end value filter for listing clusters.</p>"
         },
         "ClusterStates":{
           "shape":"ClusterStateList",
@@ -1965,9 +2231,31 @@
         "SPOT"
       ]
     },
+    "MetricDimension":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"String",
+          "documentation":"<p>The dimension name.</p>"
+        },
+        "Value":{
+          "shape":"String",
+          "documentation":"<p>The dimension value.</p>"
+        }
+      },
+      "documentation":"<p>A CloudWatch dimension, which is specified using a <code>Key</code> (known as a <code>Name</code> in CloudWatch), Value pair. By default, Amazon EMR uses one dimension whose <code>Key</code> is <code>JobFlowID</code> and <code>Value</code> is a variable representing the cluster ID, which is <code>${emr:cluster_id}</code>. This enables the rule to bootstrap when the cluster ID becomes available, and also enables a single automatic scaling policy to be reused for multiple clusters and instance groups.</p>"
+    },
+    "MetricDimensionList":{
+      "type":"list",
+      "member":{"shape":"MetricDimension"}
+    },
     "ModifyInstanceGroupsInput":{
       "type":"structure",
       "members":{
+        "ClusterId":{
+          "shape":"ClusterId",
+          "documentation":"<p>The ID of the cluster to which the instance group belongs.</p>"
+        },
         "InstanceGroups":{
           "shape":"InstanceGroupModifyConfigList",
           "documentation":"<p>Instance groups to change.</p>"
@@ -1979,6 +2267,10 @@
       "type":"list",
       "member":{"shape":"SupportedProductConfig"}
     },
+    "NonNegativeDouble":{
+      "type":"double",
+      "min":0.0
+    },
     "PlacementType":{
       "type":"structure",
       "required":["AvailabilityZone"],
@@ -1989,6 +2281,67 @@
         }
       },
       "documentation":"<p>The Amazon EC2 location for the job flow.</p>"
+    },
+    "PutAutoScalingPolicyInput":{
+      "type":"structure",
+      "required":[
+        "ClusterId",
+        "InstanceGroupId",
+        "AutoScalingPolicy"
+      ],
+      "members":{
+        "ClusterId":{
+          "shape":"ClusterId",
+          "documentation":"<p>Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.</p>"
+        },
+        "InstanceGroupId":{
+          "shape":"InstanceGroupId",
+          "documentation":"<p>Specifies the ID of the instance group to which the automatic scaling policy is applied.</p>"
+        },
+        "AutoScalingPolicy":{
+          "shape":"AutoScalingPolicy",
+          "documentation":"<p>Specifies the definition of the automatic scaling policy.</p>"
+        }
+      }
+    },
+    "PutAutoScalingPolicyOutput":{
+      "type":"structure",
+      "members":{
+        "ClusterId":{
+          "shape":"ClusterId",
+          "documentation":"<p>Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.</p>"
+        },
+        "InstanceGroupId":{
+          "shape":"InstanceGroupId",
+          "documentation":"<p>Specifies the ID of the instance group to which the scaling policy is applied.</p>"
+        },
+        "AutoScalingPolicy":{
+          "shape":"AutoScalingPolicyDescription",
+          "documentation":"<p>The automatic scaling policy definition.</p>"
+        }
+      }
+    },
+    "RemoveAutoScalingPolicyInput":{
+      "type":"structure",
+      "required":[
+        "ClusterId",
+        "InstanceGroupId"
+      ],
+      "members":{
+        "ClusterId":{
+          "shape":"ClusterId",
+          "documentation":"<p>Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.</p>"
+        },
+        "InstanceGroupId":{
+          "shape":"InstanceGroupId",
+          "documentation":"<p>Specifies the ID of the instance group to which the scaling policy is applied.</p>"
+        }
+      }
+    },
+    "RemoveAutoScalingPolicyOutput":{
+      "type":"structure",
+      "members":{
+      }
     },
     "RemoveTagsInput":{
       "type":"structure",
@@ -2036,7 +2389,7 @@
         },
         "AmiVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use ReleaseLabel.</p> </note> <p>The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid:</p> <ul> <li> <p>The version number of the AMI to use, for example, \"2.0.\"</p> </li> </ul> <p>If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the <a>JobFlowInstancesConfig</a> <code>HadoopVersion</code> parameter to modify the version of Hadoop from the defaults shown above.</p> <p>For details about the AMI versions currently supported by Amazon Elastic MapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i> </p>"
+          "documentation":"<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use ReleaseLabel.</p> </note> <p>The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid:</p> <ul> <li> <p>The version number of the AMI to use, for example, \"2.0.\"</p> </li> </ul> <p>If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the <a>JobFlowInstancesConfig</a> <code>HadoopVersion</code> parameter to modify the version of Hadoop from the defaults shown above.</p> <p>For details about the AMI versions currently supported by Amazon Elastic MapReduce, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer Guide.</i> </p> <note> <p>Previously, the EMR AMI version API parameter options allowed you to use latest for the latest AMI version rather than specify a numerical value. Some regions no longer support this deprecated option as they only have a newer release label version of EMR, which requires you to specify an EMR release label release (EMR 4.x or later).</p> </note>"
         },
         "ReleaseLabel":{
           "shape":"XmlStringMaxLen256",
@@ -2056,7 +2409,7 @@
         },
         "SupportedProducts":{
           "shape":"SupportedProductsList",
-          "documentation":"<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use with the job flow. For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html\">Use Third Party Applications with Amazon EMR</a>. Currently supported values are:</p> <ul> <li> <p>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</p> </li> <li> <p>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</p> </li> </ul>"
+          "documentation":"<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use with the job flow. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html\">Use Third Party Applications with Amazon EMR</a>. Currently supported values are:</p> <ul> <li> <p>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</p> </li> <li> <p>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</p> </li> </ul>"
         },
         "NewSupportedProducts":{
           "shape":"NewSupportedProductsList",
@@ -2089,6 +2442,14 @@
         "SecurityConfiguration":{
           "shape":"XmlString",
           "documentation":"<p>The name of a security configuration to apply to the cluster.</p>"
+        },
+        "AutoScalingRole":{
+          "shape":"XmlString",
+          "documentation":"<p>An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group.</p>"
+        },
+        "ScaleDownBehavior":{
+          "shape":"ScaleDownBehavior",
+          "documentation":"<p>Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
         }
       },
       "documentation":"<p> Input to the <a>RunJobFlow</a> operation. </p>"
@@ -2103,13 +2464,102 @@
       },
       "documentation":"<p> The result of the <a>RunJobFlow</a> operation. </p>"
     },
+    "ScaleDownBehavior":{
+      "type":"string",
+      "enum":[
+        "TERMINATE_AT_INSTANCE_HOUR",
+        "TERMINATE_AT_TASK_COMPLETION"
+      ]
+    },
+    "ScalingAction":{
+      "type":"structure",
+      "required":["SimpleScalingPolicyConfiguration"],
+      "members":{
+        "Market":{
+          "shape":"MarketType",
+          "documentation":"<p>Not available for instance groups. Instance groups use the market type specified for the group.</p>"
+        },
+        "SimpleScalingPolicyConfiguration":{
+          "shape":"SimpleScalingPolicyConfiguration",
+          "documentation":"<p>The type of adjustment the automatic scaling activity makes when triggered, and the periodicity of the adjustment.</p>"
+        }
+      },
+      "documentation":"<p>The type of adjustment the automatic scaling activity makes when triggered, and the periodicity of the adjustment.</p>"
+    },
+    "ScalingConstraints":{
+      "type":"structure",
+      "required":[
+        "MinCapacity",
+        "MaxCapacity"
+      ],
+      "members":{
+        "MinCapacity":{
+          "shape":"Integer",
+          "documentation":"<p>The lower boundary of EC2 instances in an instance group below which scaling activities are not allowed to shrink. Scale-in activities will not terminate instances below this boundary.</p>"
+        },
+        "MaxCapacity":{
+          "shape":"Integer",
+          "documentation":"<p>The upper boundary of EC2 instances in an instance group beyond which scaling activities are not allowed to grow. Scale-out activities will not add instances beyond this boundary.</p>"
+        }
+      },
+      "documentation":"<p>The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activities triggered by automatic scaling rules will not cause an instance group to grow above or below these limits.</p>"
+    },
+    "ScalingRule":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Action",
+        "Trigger"
+      ],
+      "members":{
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>The name used to identify an automatic scaling rule. Rule names must be unique within a scaling policy.</p>"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A friendly, more verbose description of the automatic scaling rule.</p>"
+        },
+        "Action":{
+          "shape":"ScalingAction",
+          "documentation":"<p>The conditions that trigger an automatic scaling activity.</p>"
+        },
+        "Trigger":{
+          "shape":"ScalingTrigger",
+          "documentation":"<p>The CloudWatch alarm definition that determines when automatic scaling activity is triggered.</p>"
+        }
+      },
+      "documentation":"<p>A scale-in or scale-out rule that defines scaling activity, including the CloudWatch metric alarm that triggers activity, how EC2 instances are added or removed, and the periodicity of adjustments. The automatic scaling policy for an instance group can comprise one or more automatic scaling rules.</p>"
+    },
+    "ScalingRuleList":{
+      "type":"list",
+      "member":{"shape":"ScalingRule"}
+    },
+    "ScalingTrigger":{
+      "type":"structure",
+      "required":["CloudWatchAlarmDefinition"],
+      "members":{
+        "CloudWatchAlarmDefinition":{
+          "shape":"CloudWatchAlarmDefinition",
+          "documentation":"<p>The definition of a CloudWatch metric alarm. When the defined alarm conditions are met along with other trigger parameters, scaling activity begins.</p>"
+        }
+      },
+      "documentation":"<p>The conditions that trigger an automatic scaling activity.</p>"
+    },
     "ScriptBootstrapActionConfig":{
       "type":"structure",
       "required":["Path"],
       "members":{
-        "Path":{"shape":"XmlString"},
-        "Args":{"shape":"XmlStringList"}
-      }
+        "Path":{
+          "shape":"XmlString",
+          "documentation":"<p>Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.</p>"
+        },
+        "Args":{
+          "shape":"XmlStringList",
+          "documentation":"<p>A list of command line arguments to pass to the bootstrap action script.</p>"
+        }
+      },
+      "documentation":"<p>Configuration of the script to run during a bootstrap action.</p>"
     },
     "SecurityConfigurationList":{
       "type":"list",
@@ -2182,6 +2632,35 @@
         }
       },
       "documentation":"<p>Policy for customizing shrink operations. Allows configuration of decommissioning timeout and targeted instance shrinking.</p>"
+    },
+    "SimpleScalingPolicyConfiguration":{
+      "type":"structure",
+      "required":["ScalingAdjustment"],
+      "members":{
+        "AdjustmentType":{
+          "shape":"AdjustmentType",
+          "documentation":"<p>The way in which EC2 instances are added (if <code>ScalingAdjustment</code> is a positive number) or terminated (if <code>ScalingAdjustment</code> is a negative number) each time the scaling activity is triggered. <code>CHANGE_IN_CAPACITY</code> is the default. <code>CHANGE_IN_CAPACITY</code> indicates that the EC2 instance count increments or decrements by <code>ScalingAdjustment</code>, which should be expressed as an integer. <code>PERCENT_CHANGE_IN_CAPACITY</code> indicates the instance count increments or decrements by the percentage specified by <code>ScalingAdjustment</code>, which should be expressed as a decimal, for example, 0.20 indicates an increase in 20% increments of cluster capacity. <code>EXACT_CAPACITY</code> indicates the scaling activity results in an instance group with the number of EC2 instances specified by <code>ScalingAdjustment</code>, which should be expressed as a positive integer.</p>"
+        },
+        "ScalingAdjustment":{
+          "shape":"Integer",
+          "documentation":"<p>The amount by which to scale in or scale out, based on the specified <code>AdjustmentType</code>. A positive value adds to the instance group's EC2 instance count while a negative number removes instances. If <code>AdjustmentType</code> is set to <code>EXACT_CAPACITY</code>, the number should only be a positive integer. If <code>AdjustmentType</code> is set to <code>PERCENT_CHANGE_IN_CAPACITY</code>, the value should express the percentage as a decimal. For example, -0.20 indicates a decrease in 20% increments of cluster capacity.</p>"
+        },
+        "CoolDown":{
+          "shape":"Integer",
+          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start. The default value is 0.</p>"
+        }
+      },
+      "documentation":"<p>An automatic scaling configuration, which describes how the policy adds or removes instances, the cooldown period, and the number of EC2 instances that will be added each time the CloudWatch metric alarm condition is satisfied.</p>"
+    },
+    "Statistic":{
+      "type":"string",
+      "enum":[
+        "SAMPLE_COUNT",
+        "AVERAGE",
+        "SUM",
+        "MINIMUM",
+        "MAXIMUM"
+      ]
     },
     "Step":{
       "type":"structure",
@@ -2308,6 +2787,7 @@
       "type":"string",
       "enum":[
         "PENDING",
+        "CANCEL_PENDING",
         "RUNNING",
         "COMPLETED",
         "CANCELLED",
@@ -2447,7 +2927,7 @@
           "documentation":"<p>A user-defined value, which is optional in a tag. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
         }
       },
-      "documentation":"<p>A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clu\\ sters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
+      "documentation":"<p>A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
     },
     "TagList":{
       "type":"list",
@@ -2463,6 +2943,38 @@
         }
       },
       "documentation":"<p> Input to the <a>TerminateJobFlows</a> operation. </p>"
+    },
+    "Unit":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "SECONDS",
+        "MICRO_SECONDS",
+        "MILLI_SECONDS",
+        "BYTES",
+        "KILO_BYTES",
+        "MEGA_BYTES",
+        "GIGA_BYTES",
+        "TERA_BYTES",
+        "BITS",
+        "KILO_BITS",
+        "MEGA_BITS",
+        "GIGA_BITS",
+        "TERA_BITS",
+        "PERCENT",
+        "COUNT",
+        "BYTES_PER_SECOND",
+        "KILO_BYTES_PER_SECOND",
+        "MEGA_BYTES_PER_SECOND",
+        "GIGA_BYTES_PER_SECOND",
+        "TERA_BYTES_PER_SECOND",
+        "BITS_PER_SECOND",
+        "KILO_BITS_PER_SECOND",
+        "MEGA_BITS_PER_SECOND",
+        "GIGA_BITS_PER_SECOND",
+        "TERA_BITS_PER_SECOND",
+        "COUNT_PER_SECOND"
+      ]
     },
     "VolumeSpecification":{
       "type":"structure",
@@ -2484,7 +2996,7 @@
           "documentation":"<p>The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If the volume type is EBS-optimized, the minimum value is 10.</p>"
         }
       },
-      "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size(GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+      "documentation":"<p>EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
     },
     "XmlString":{
       "type":"string",
@@ -2503,5 +3015,5 @@
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     }
   },
-  "documentation":"<p>Amazon Elastic MapReduce (Amazon EMR) is a web service that makes it easy to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehousing.</p>"
+  "documentation":"<p>Amazon EMR is a web service that makes it easy to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehousing.</p>"
 }

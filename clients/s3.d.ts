@@ -1,4 +1,3 @@
-///<reference types="node" />
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
@@ -6,6 +5,7 @@ import {S3Customizations} from '../lib/services/s3';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
+interface Blob {}
 declare class S3 extends S3Customizations {
   /**
    * Constructs a service object. This object has one method for each API operation.

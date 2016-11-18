@@ -239,9 +239,13 @@
         {"shape":"EC2AccessDeniedException"},
         {"shape":"InvalidSubnetIDException"},
         {"shape":"InvalidSecurityGroupIDException"},
-        {"shape":"InvalidZipFileException"}
+        {"shape":"InvalidZipFileException"},
+        {"shape":"KMSDisabledException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"KMSAccessDeniedException"},
+        {"shape":"KMSNotFoundException"}
       ],
-      "documentation":"<p>Invokes a specific Lambda function.</p> <p>If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the <code>Qualifier</code> parameter in the request. If you don't provide the <code>Qualifier</code> parameter, the <code>$LATEST</code> version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>"
+      "documentation":"<p>Invokes a specific Lambda function. For an example, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually\">Create the Lambda Function and Test It Manually</a>. </p> <p>If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the <code>Qualifier</code> parameter in the request. If you don't provide the <code>Qualifier</code> parameter, the <code>$LATEST</code> version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>"
     },
     "InvokeAsync":{
       "name":"InvokeAsync",
@@ -469,7 +473,7 @@
         },
         "SourceAccount":{
           "shape":"SourceOwner",
-          "documentation":"<p>This parameter is used for S3 and SES only. The AWS account ID (without a hyphen) of the source owner. For example, if the <code>SourceArn</code> identifies a bucket, then this is the bucket owner's account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don't specify the <code>SourceArn</code>) owned by a specific account. </p>"
+          "documentation":"<p>This parameter is used for S3, SES, CloudWatch Logs and CloudWatch Rules only. The AWS account ID (without a hyphen) of the source owner. For example, if the <code>SourceArn</code> identifies a bucket, then this is the bucket owner's account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don't specify the <code>SourceArn</code>) owned by a specific account. </p>"
         },
         "EventSourceToken":{
           "shape":"EventSourceToken",
@@ -662,6 +666,11 @@
         "VpcConfig":{
           "shape":"VpcConfig",
           "documentation":"<p>If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.</p>"
+        },
+        "Environment":{"shape":"Environment"},
+        "KMSKeyArn":{
+          "shape":"KMSKeyArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If not provided, AWS Lambda will use a default service key.</p>"
         }
       },
       "documentation":"<p/>"
@@ -766,6 +775,54 @@
       "exception":true
     },
     "Enabled":{"type":"boolean"},
+    "Environment":{
+      "type":"structure",
+      "members":{
+        "Variables":{
+          "shape":"EnvironmentVariables",
+          "documentation":"<p>The key-value pairs that represent your environment's configuration settings. The value you specify cannot contain a \",\".</p>"
+        }
+      },
+      "documentation":"<p>The parent object that contains your environment's configuration settings.</p>"
+    },
+    "EnvironmentError":{
+      "type":"structure",
+      "members":{
+        "ErrorCode":{
+          "shape":"String",
+          "documentation":"<p>The error code returned by the environment error object.</p>"
+        },
+        "Message":{
+          "shape":"String",
+          "documentation":"<p>The message returned by the environment error object.</p>"
+        }
+      },
+      "documentation":"<p>The parent object that contains error information associated with your configuration settings.</p>"
+    },
+    "EnvironmentResponse":{
+      "type":"structure",
+      "members":{
+        "Variables":{
+          "shape":"EnvironmentVariables",
+          "documentation":"<p>The key-value pairs returned that represent your environment's configuration settings or error information.</p>"
+        },
+        "Error":{"shape":"EnvironmentError"}
+      },
+      "documentation":"<p>The parent object returned that contains your environment's configuration settings or any error information associated with your configuration settings.</p>"
+    },
+    "EnvironmentVariableName":{
+      "type":"string",
+      "pattern":"[a-zA-Z]([a-zA-Z0-9_])+"
+    },
+    "EnvironmentVariableValue":{
+      "type":"string",
+      "pattern":"[^,]*"
+    },
+    "EnvironmentVariables":{
+      "type":"map",
+      "key":{"shape":"EnvironmentVariableName"},
+      "value":{"shape":"EnvironmentVariableValue"}
+    },
     "EventSourceMappingConfiguration":{
       "type":"structure",
       "members":{
@@ -915,6 +972,14 @@
         "VpcConfig":{
           "shape":"VpcConfigResponse",
           "documentation":"<p>VPC configuration associated with your Lambda function.</p>"
+        },
+        "Environment":{
+          "shape":"EnvironmentResponse",
+          "documentation":"<p>The parent object that contains your environment's configuration settings.</p>"
+        },
+        "KMSKeyArn":{
+          "shape":"KMSKeyArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If empty, it means you are using the AWS Lambda default service key.</p>"
         }
       },
       "documentation":"<p>A complex type that describes function metadata.</p>"
@@ -1007,7 +1072,7 @@
         "Configuration":{"shape":"FunctionConfiguration"},
         "Code":{"shape":"FunctionCodeLocation"}
       },
-      "documentation":"<p>This response contains the object for the Lambda function location (see .</p>"
+      "documentation":"<p>This response contains the object for the Lambda function location (see <a>FunctionCodeLocation</a>.</p>"
     },
     "GetPolicyRequest":{
       "type":"structure",
@@ -1171,7 +1236,7 @@
         },
         "Payload":{
           "shape":"Blob",
-          "documentation":"<p> It is the JSON representation of the object returned by the Lambda function. In This is present only if the invocation type is <code>RequestResponse</code>. </p> <p>In the event of a function error this field contains a message describing the error. For the <code>Handled</code> errors the Lambda function will report this message. For <code>Unhandled</code> errors AWS Lambda reports the message. </p>"
+          "documentation":"<p> It is the JSON representation of the object returned by the Lambda function. This is present only if the invocation type is <code>RequestResponse</code>. </p> <p>In the event of a function error this field contains a message describing the error. For the <code>Handled</code> errors the Lambda function will report this message. For <code>Unhandled</code> errors AWS Lambda reports the message. </p>"
         }
       },
       "documentation":"<p>Upon success, returns an empty response. Otherwise, throws an exception.</p>",
@@ -1218,6 +1283,50 @@
       },
       "documentation":"<p>Upon success, it returns empty response. Otherwise, throws an exception.</p>",
       "deprecated":true
+    },
+    "KMSAccessDeniedException":{
+      "type":"structure",
+      "members":{
+        "Type":{"shape":"String"},
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>Lambda was unable to decrypt the environment variables becauses KMS access was denied. Please check the Lambda function's KMS permissions.</p>",
+      "error":{"httpStatusCode":502},
+      "exception":true
+    },
+    "KMSDisabledException":{
+      "type":"structure",
+      "members":{
+        "Type":{"shape":"String"},
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>Lambda was unable to decrypt the environment variables because the KMS key used is disabled. Please check the Lambda function's KMS key settings.</p>",
+      "error":{"httpStatusCode":502},
+      "exception":true
+    },
+    "KMSInvalidStateException":{
+      "type":"structure",
+      "members":{
+        "Type":{"shape":"String"},
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>Lambda was unable to decrypt the environment variables because the KMS key used is in an invalid state for Decrypt. Please check the function's KMS key settings.</p>",
+      "error":{"httpStatusCode":502},
+      "exception":true
+    },
+    "KMSKeyArn":{
+      "type":"string",
+      "pattern":"(arn:aws:[a-z0-9-.]+:.*)|()"
+    },
+    "KMSNotFoundException":{
+      "type":"structure",
+      "members":{
+        "Type":{"shape":"String"},
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>Lambda was unable to decrypt the environment variables because the KMS key was not found. Please check the function's KMS key settings. </p>",
+      "error":{"httpStatusCode":502},
+      "exception":true
     },
     "ListAliasesRequest":{
       "type":"structure",
@@ -1304,7 +1413,7 @@
           "documentation":"<p>An array of <code>EventSourceMappingConfiguration</code> objects.</p>"
         }
       },
-      "documentation":"<p>Contains a list of event sources (see )</p>"
+      "documentation":"<p>Contains a list of event sources (see <a>EventSourceMappingConfiguration</a>)</p>"
     },
     "ListFunctionsRequest":{
       "type":"structure",
@@ -1730,6 +1839,14 @@
           "documentation":"<p>The amount of memory, in MB, your Lambda function is given. AWS Lambda uses this memory size to infer the amount of CPU allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.</p>"
         },
         "VpcConfig":{"shape":"VpcConfig"},
+        "Environment":{
+          "shape":"Environment",
+          "documentation":"<p>The parent object that contains your environment's configuration settings.</p>"
+        },
+        "KMSKeyArn":{
+          "shape":"KMSKeyArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If you elect to use the AWS Lambda default service key, pass in an empty string (\"\") for this parameter.</p>"
+        },
         "Runtime":{
           "shape":"Runtime",
           "documentation":"<p>The runtime environment for the Lambda function.</p> <p>To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To use earlier runtime (v0.10.42), set the value to \"nodejs\".</p>"
