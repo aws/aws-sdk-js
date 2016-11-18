@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "TypeScript",
+  "description": "Stubs DOM interfaces and removes type reference to node."
+}

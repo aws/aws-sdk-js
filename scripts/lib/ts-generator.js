@@ -94,8 +94,8 @@ TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocume
     // get the dynamodb model
     var dynamodbModel = this.loadServiceApi('dynamodb');
     var code = '';
-    // include node reference
-    code += '///<reference types="node" />\n';
+    // stub Blob interface
+    code += 'interface Blob {}\n';
     // generate shapes
     var modelShapes = dynamodbModel.shapes;
     // iterate over each shape
@@ -386,8 +386,6 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     var self = this;
     var code = '';
     var className = this.metadata[serviceIdentifier].name;
-    // reference node
-    code += '///<reference types="node" />\n';
     // generate imports
     code += 'import {Request} from \'../lib/request\';\n';
     code += 'import {Response} from \'../lib/response\';\n';
@@ -412,7 +410,7 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
             customConfigTypes.push(config.INTERFACE);
         });
     }
-
+    code += 'interface Blob {}\n';
     // generate methods
     var modelOperations = model.operations;
     var operationKeys = Object.keys(modelOperations);
