@@ -1,5 +1,3 @@
-/// <reference types="node" />
-
 import * as stream from 'stream';
 import {Service} from './service';
 import {Response} from './response';

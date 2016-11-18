@@ -1,4 +1,4 @@
-///<reference types="node" />
+interface Blob {}
 export type AttributeAction = "ADD"|"PUT"|"DELETE"|string;
 export interface AttributeDefinition {
   /**
