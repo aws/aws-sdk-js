@@ -1,6 +1,33 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.0-->
+<!--LATEST=2.7.5-->
 <!--ENTRYINSERT-->
+
+## 2.7.5
+* bugfix: TypeScript: Stubs DOM interfaces and removes type reference to node.
+* feature: ElasticTranscoder: Support for multiple media input files that can be stitched together.
+* feature: Lambda: Adds support for Environment variables.
+* feature: Gamelift: Provide the ability to remote access into GameLift managed servers.
+* feature: EMR: Automatic Scaling of EMR clusters based on metrics. Adds support for cancelling a pending Amazon EMR step.
+* feature: ApplicationAutoScaling: Adds support for a new target resource (EMR Instance Groups) as a scalable target.
+
+## 2.7.4
+* feature: MarketplaceMetering: Allows third parties to send metering records.
+* feature: SQS: Updates the latest version of the SQS API.
+* feature: CloudWatch: Amazon CloudWatch now supports Percentiles as a statistical function.
+* feature: APIGateway: Allows defining an encoding for the API per content type in order to support 'binary' use case.
+
+## 2.7.3
+* feature: Route53: Adds support for cross account VPC association.
+* feature: ServiceCatalog: This release enables Service Catalog users to perform administer operations via API.
+
+## 2.7.2
+* feature: ElastiCache: Additional parameter to 2 create apis to provide an auth Token for Redis.
+* feature: DirectoryService: Adds support for SchemaExtensions.
+* feature: Kinesis: Adds DescribeLimits API which displays customer's current shard limit and the number of open shards that are being used. Also adds a 'display stream creation timestamp' feature to DescribeStream API.
+
+## 2.7.1
+* feature: CognitoIdentityServiceProvider: Adds schema attributes to CreateUserPool.
+* bugfix: TypeScript: Updates definitions to work when `noImplicitAny` and `strictNullChecks` are set to `true`.
 
 ## 2.7.0
 * feature: TypeScript: Adds typescript definition files to the SDK.

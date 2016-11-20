@@ -1561,7 +1561,10 @@
           "shape":"ChallengeParametersType",
           "documentation":"<p>The challenge parameters.</p>"
         },
-        "AuthenticationResult":{"shape":"AuthenticationResultType"}
+        "AuthenticationResult":{
+          "shape":"AuthenticationResultType",
+          "documentation":"<p>The result of the authentication response.</p>"
+        }
       },
       "documentation":"<p>Initiates the authentication response, as an administrator.</p>"
     },
@@ -1675,7 +1678,10 @@
           "shape":"ChallengeParametersType",
           "documentation":"<p>The challenge parameters.</p>"
         },
-        "AuthenticationResult":{"shape":"AuthenticationResultType"}
+        "AuthenticationResult":{
+          "shape":"AuthenticationResultType",
+          "documentation":"<p>The result returned by the server in response to the authentication request.</p>"
+        }
       },
       "documentation":"<p>Responds to the authentication challenge, as an administrator.</p>"
     },
@@ -2314,6 +2320,10 @@
         "AdminCreateUserConfig":{
           "shape":"AdminCreateUserConfigType",
           "documentation":"<p>The configuration for AdminCreateUser requests.</p>"
+        },
+        "Schema":{
+          "shape":"SchemaAttributesListType",
+          "documentation":"<p>An array of schema attributes for the new user pool. These attributes can be standard or custom attributes.</p>"
         }
       },
       "documentation":"<p>Represents the request to create a user pool.</p>"
@@ -2650,7 +2660,7 @@
         },
         "Username":{
           "shape":"UsernameType",
-          "documentation":"<p>The user name of the user for whom you want to enter a code to retrieve a forgotten password.</p>"
+          "documentation":"<p>The user name of the user for whom you want to enter a code to reset a forgotten password.</p>"
         }
       },
       "documentation":"<p>Represents the request to reset a user's password.</p>"
@@ -2658,7 +2668,10 @@
     "ForgotPasswordResponse":{
       "type":"structure",
       "members":{
-        "CodeDeliveryDetails":{"shape":"CodeDeliveryDetailsType"}
+        "CodeDeliveryDetails":{
+          "shape":"CodeDeliveryDetailsType",
+          "documentation":"<p>The code delivery details returned by the server in response to the request to reset a password.</p>"
+        }
       },
       "documentation":"<p>Respresents the response from the server regarding the request to reset a password.</p>"
     },
@@ -2734,7 +2747,7 @@
       "members":{
         "CodeDeliveryDetails":{
           "shape":"CodeDeliveryDetailsType",
-          "documentation":"<p>The code delivery details returned by the server response to get the user attribute verification code.</p>"
+          "documentation":"<p>The code delivery details returned by the server in response to the request to get the user attribute verification code.</p>"
         }
       },
       "documentation":"<p>The verification code response returned by the server response to get the user attribute verification code.</p>"
@@ -2828,7 +2841,10 @@
           "shape":"ChallengeParametersType",
           "documentation":"<p>The challenge parameters.</p>"
         },
-        "AuthenticationResult":{"shape":"AuthenticationResultType"}
+        "AuthenticationResult":{
+          "shape":"AuthenticationResultType",
+          "documentation":"<p>The result returned by the server in response to the request to initiate authentication.</p>"
+        }
       },
       "documentation":"<p>Initiates the authentication response.</p>"
     },
@@ -3362,9 +3378,12 @@
     "ResendConfirmationCodeResponse":{
       "type":"structure",
       "members":{
-        "CodeDeliveryDetails":{"shape":"CodeDeliveryDetailsType"}
+        "CodeDeliveryDetails":{
+          "shape":"CodeDeliveryDetailsType",
+          "documentation":"<p>The code delivery details returned by the server in response to the request to resend the confirmation code.</p>"
+        }
       },
-      "documentation":"<p>The response from the server when the Amazon Cognito service makes the request to resend a confirmation code.</p>"
+      "documentation":"<p>The response from the server when the Amazon Cognito Your User Pools service makes the request to resend a confirmation code.</p>"
     },
     "ResourceNotFoundException":{
       "type":"structure",
@@ -3418,7 +3437,10 @@
           "shape":"ChallengeParametersType",
           "documentation":"<p>The challenge parameters.</p>"
         },
-        "AuthenticationResult":{"shape":"AuthenticationResultType"}
+        "AuthenticationResult":{
+          "shape":"AuthenticationResultType",
+          "documentation":"<p>The result returned by the server in response to the request to respond to the authentication challenge.</p>"
+        }
       },
       "documentation":"<p>The response to respond to the authentication challenge.</p>"
     },
@@ -3435,15 +3457,18 @@
         },
         "DeveloperOnlyAttribute":{
           "shape":"BooleanType",
-          "documentation":"<p>Specifies whether the attribute type is developer only.</p>"
+          "documentation":"<p>Specifies whether the attribute type is developer only.</p>",
+          "box":true
         },
         "Mutable":{
           "shape":"BooleanType",
-          "documentation":"<p>Specifies whether the attribute can be changed once it has been created.</p>"
+          "documentation":"<p>Specifies whether the attribute can be changed once it has been created.</p>",
+          "box":true
         },
         "Required":{
           "shape":"BooleanType",
-          "documentation":"<p>Specifies whether a user pool attribute is required. If the attribute is required and the user does not provide a value, registration or sign-in will fail.</p>"
+          "documentation":"<p>Specifies whether a user pool attribute is required. If the attribute is required and the user does not provide a value, registration or sign-in will fail.</p>",
+          "box":true
         },
         "NumberAttributeConstraints":{
           "shape":"NumberAttributeConstraintsType",
@@ -3549,12 +3574,16 @@
           "shape":"BooleanType",
           "documentation":"<p>A response from the server indicating that a user registration has been confirmed.</p>"
         },
-        "CodeDeliveryDetails":{"shape":"CodeDeliveryDetailsType"}
+        "CodeDeliveryDetails":{
+          "shape":"CodeDeliveryDetailsType",
+          "documentation":"<p>The code delivery details returned by the server response to the user registration request.</p>"
+        }
       },
       "documentation":"<p>The response from the server for a registration request.</p>"
     },
     "SmsConfigurationType":{
       "type":"structure",
+      "required":["SnsCallerArn"],
       "members":{
         "SnsCallerArn":{
           "shape":"ArnType",

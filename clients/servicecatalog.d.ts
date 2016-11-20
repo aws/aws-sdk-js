@@ -1,16 +1,136 @@
-///<reference types="node" />
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+interface Blob {}
 declare class ServiceCatalog extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
   constructor(options?: ServiceCatalog.Types.ClientConfiguration)
   config: Config & ServiceCatalog.Types.ClientConfiguration;
+  /**
+   * Accepts an offer to share a portfolio.
+   */
+  acceptPortfolioShare(params: ServiceCatalog.Types.AcceptPortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AcceptPortfolioShareOutput) => void): Request<ServiceCatalog.Types.AcceptPortfolioShareOutput, AWSError>;
+  /**
+   * Accepts an offer to share a portfolio.
+   */
+  acceptPortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.AcceptPortfolioShareOutput) => void): Request<ServiceCatalog.Types.AcceptPortfolioShareOutput, AWSError>;
+  /**
+   * Associates the specified principal ARN with the specified portfolio.
+   */
+  associatePrincipalWithPortfolio(params: ServiceCatalog.Types.AssociatePrincipalWithPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput, AWSError>;
+  /**
+   * Associates the specified principal ARN with the specified portfolio.
+   */
+  associatePrincipalWithPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput, AWSError>;
+  /**
+   * Associates a product with a portfolio.
+   */
+  associateProductWithPortfolio(params: ServiceCatalog.Types.AssociateProductWithPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateProductWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociateProductWithPortfolioOutput, AWSError>;
+  /**
+   * Associates a product with a portfolio.
+   */
+  associateProductWithPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateProductWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociateProductWithPortfolioOutput, AWSError>;
+  /**
+   * Creates a new constraint.
+   */
+  createConstraint(params: ServiceCatalog.Types.CreateConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateConstraintOutput) => void): Request<ServiceCatalog.Types.CreateConstraintOutput, AWSError>;
+  /**
+   * Creates a new constraint.
+   */
+  createConstraint(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateConstraintOutput) => void): Request<ServiceCatalog.Types.CreateConstraintOutput, AWSError>;
+  /**
+   * Creates a new portfolio.
+   */
+  createPortfolio(params: ServiceCatalog.Types.CreatePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioOutput, AWSError>;
+  /**
+   * Creates a new portfolio.
+   */
+  createPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioOutput, AWSError>;
+  /**
+   * Creates a new portfolio share.
+   */
+  createPortfolioShare(params: ServiceCatalog.Types.CreatePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
+  /**
+   * Creates a new portfolio share.
+   */
+  createPortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
+  /**
+   * Creates a new product.
+   */
+  createProduct(params: ServiceCatalog.Types.CreateProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
+  /**
+   * Creates a new product.
+   */
+  createProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
+  /**
+   * Create a new provisioning artifact for the specified product. This operation will not work with a product that has been shared with you.
+   */
+  createProvisioningArtifact(params: ServiceCatalog.Types.CreateProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
+  /**
+   * Create a new provisioning artifact for the specified product. This operation will not work with a product that has been shared with you.
+   */
+  createProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
+  /**
+   * Deletes the specified constraint.
+   */
+  deleteConstraint(params: ServiceCatalog.Types.DeleteConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteConstraintOutput) => void): Request<ServiceCatalog.Types.DeleteConstraintOutput, AWSError>;
+  /**
+   * Deletes the specified constraint.
+   */
+  deleteConstraint(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteConstraintOutput) => void): Request<ServiceCatalog.Types.DeleteConstraintOutput, AWSError>;
+  /**
+   * Deletes the specified portfolio. This operation will not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.
+   */
+  deletePortfolio(params: ServiceCatalog.Types.DeletePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioOutput, AWSError>;
+  /**
+   * Deletes the specified portfolio. This operation will not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.
+   */
+  deletePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioOutput, AWSError>;
+  /**
+   * Deletes the specified portfolio share.
+   */
+  deletePortfolioShare(params: ServiceCatalog.Types.DeletePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioShareOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioShareOutput, AWSError>;
+  /**
+   * Deletes the specified portfolio share.
+   */
+  deletePortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioShareOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioShareOutput, AWSError>;
+  /**
+   * Deletes the specified product. This operation will not work with a product that has been shared with you or is associated with a portfolio. 
+   */
+  deleteProduct(params: ServiceCatalog.Types.DeleteProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProductOutput) => void): Request<ServiceCatalog.Types.DeleteProductOutput, AWSError>;
+  /**
+   * Deletes the specified product. This operation will not work with a product that has been shared with you or is associated with a portfolio. 
+   */
+  deleteProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProductOutput) => void): Request<ServiceCatalog.Types.DeleteProductOutput, AWSError>;
+  /**
+   * Deletes the specified provisioning artifact. This operation will not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).
+   */
+  deleteProvisioningArtifact(params: ServiceCatalog.Types.DeleteProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DeleteProvisioningArtifactOutput, AWSError>;
+  /**
+   * Deletes the specified provisioning artifact. This operation will not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).
+   */
+  deleteProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DeleteProvisioningArtifactOutput, AWSError>;
+  /**
+   * Retrieves detailed information for a specified constraint.
+   */
+  describeConstraint(params: ServiceCatalog.Types.DescribeConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeConstraintOutput) => void): Request<ServiceCatalog.Types.DescribeConstraintOutput, AWSError>;
+  /**
+   * Retrieves detailed information for a specified constraint.
+   */
+  describeConstraint(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeConstraintOutput) => void): Request<ServiceCatalog.Types.DescribeConstraintOutput, AWSError>;
+  /**
+   * Retrieves detailed information and any tags associated with the specified portfolio.
+   */
+  describePortfolio(params: ServiceCatalog.Types.DescribePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioOutput, AWSError>;
+  /**
+   * Retrieves detailed information and any tags associated with the specified portfolio.
+   */
+  describePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioOutput, AWSError>;
   /**
    * Retrieves information about a specified product. This operation is functionally identical to DescribeProductView except that it takes as input ProductId instead of ProductViewId.
    */
@@ -20,6 +140,14 @@ declare class ServiceCatalog extends Service {
    */
   describeProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductOutput) => void): Request<ServiceCatalog.Types.DescribeProductOutput, AWSError>;
   /**
+   * Retrieves information about a specified product, run with administrator access.
+   */
+  describeProductAsAdmin(params: ServiceCatalog.Types.DescribeProductAsAdminInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductAsAdminOutput) => void): Request<ServiceCatalog.Types.DescribeProductAsAdminOutput, AWSError>;
+  /**
+   * Retrieves information about a specified product, run with administrator access.
+   */
+  describeProductAsAdmin(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductAsAdminOutput) => void): Request<ServiceCatalog.Types.DescribeProductAsAdminOutput, AWSError>;
+  /**
    * Retrieves information about a specified product. This operation is functionally identical to DescribeProduct except that it takes as input ProductViewId instead of ProductId.
    */
   describeProductView(params: ServiceCatalog.Types.DescribeProductViewInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductViewOutput) => void): Request<ServiceCatalog.Types.DescribeProductViewOutput, AWSError>;
@@ -27,6 +155,14 @@ declare class ServiceCatalog extends Service {
    * Retrieves information about a specified product. This operation is functionally identical to DescribeProduct except that it takes as input ProductViewId instead of ProductId.
    */
   describeProductView(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductViewOutput) => void): Request<ServiceCatalog.Types.DescribeProductViewOutput, AWSError>;
+  /**
+   * Retrieves detailed information about the specified provisioning artifact.
+   */
+  describeProvisioningArtifact(params: ServiceCatalog.Types.DescribeProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningArtifactOutput, AWSError>;
+  /**
+   * Retrieves detailed information about the specified provisioning artifact.
+   */
+  describeProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningArtifactOutput, AWSError>;
   /**
    * Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of ProvisioningArtifactParameters parameters available to call the ProvisionProduct operation for the specified product.
    */
@@ -44,6 +180,38 @@ declare class ServiceCatalog extends Service {
    */
   describeRecord(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeRecordOutput) => void): Request<ServiceCatalog.Types.DescribeRecordOutput, AWSError>;
   /**
+   * Disassociates a previously associated principal ARN from a specified portfolio.
+   */
+  disassociatePrincipalFromPortfolio(params: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput, AWSError>;
+  /**
+   * Disassociates a previously associated principal ARN from a specified portfolio.
+   */
+  disassociatePrincipalFromPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput, AWSError>;
+  /**
+   * Disassociates the specified product from the specified portfolio. 
+   */
+  disassociateProductFromPortfolio(params: ServiceCatalog.Types.DisassociateProductFromPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateProductFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociateProductFromPortfolioOutput, AWSError>;
+  /**
+   * Disassociates the specified product from the specified portfolio. 
+   */
+  disassociateProductFromPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateProductFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociateProductFromPortfolioOutput, AWSError>;
+  /**
+   * Lists details of all portfolios for which sharing was accepted by this account.
+   */
+  listAcceptedPortfolioShares(params: ServiceCatalog.Types.ListAcceptedPortfolioSharesInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput) => void): Request<ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput, AWSError>;
+  /**
+   * Lists details of all portfolios for which sharing was accepted by this account.
+   */
+  listAcceptedPortfolioShares(callback?: (err: AWSError, data: ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput) => void): Request<ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput, AWSError>;
+  /**
+   * Retrieves detailed constraint information for the specified portfolio and product.
+   */
+  listConstraintsForPortfolio(params: ServiceCatalog.Types.ListConstraintsForPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListConstraintsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListConstraintsForPortfolioOutput, AWSError>;
+  /**
+   * Retrieves detailed constraint information for the specified portfolio and product.
+   */
+  listConstraintsForPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.ListConstraintsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListConstraintsForPortfolioOutput, AWSError>;
+  /**
    * Returns a paginated list of all paths to a specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.
    */
   listLaunchPaths(params: ServiceCatalog.Types.ListLaunchPathsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListLaunchPathsOutput) => void): Request<ServiceCatalog.Types.ListLaunchPathsOutput, AWSError>;
@@ -51,6 +219,46 @@ declare class ServiceCatalog extends Service {
    * Returns a paginated list of all paths to a specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.
    */
   listLaunchPaths(callback?: (err: AWSError, data: ServiceCatalog.Types.ListLaunchPathsOutput) => void): Request<ServiceCatalog.Types.ListLaunchPathsOutput, AWSError>;
+  /**
+   * Lists the account IDs that have been authorized sharing of the specified portfolio.
+   */
+  listPortfolioAccess(params: ServiceCatalog.Types.ListPortfolioAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListPortfolioAccessOutput, AWSError>;
+  /**
+   * Lists the account IDs that have been authorized sharing of the specified portfolio.
+   */
+  listPortfolioAccess(callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListPortfolioAccessOutput, AWSError>;
+  /**
+   * Lists all portfolios in the catalog.
+   */
+  listPortfolios(params: ServiceCatalog.Types.ListPortfoliosInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfoliosOutput) => void): Request<ServiceCatalog.Types.ListPortfoliosOutput, AWSError>;
+  /**
+   * Lists all portfolios in the catalog.
+   */
+  listPortfolios(callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfoliosOutput) => void): Request<ServiceCatalog.Types.ListPortfoliosOutput, AWSError>;
+  /**
+   * Lists all portfolios that the specified product is associated with.
+   */
+  listPortfoliosForProduct(params: ServiceCatalog.Types.ListPortfoliosForProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfoliosForProductOutput) => void): Request<ServiceCatalog.Types.ListPortfoliosForProductOutput, AWSError>;
+  /**
+   * Lists all portfolios that the specified product is associated with.
+   */
+  listPortfoliosForProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfoliosForProductOutput) => void): Request<ServiceCatalog.Types.ListPortfoliosForProductOutput, AWSError>;
+  /**
+   * Lists all principal ARNs associated with the specified portfolio.
+   */
+  listPrincipalsForPortfolio(params: ServiceCatalog.Types.ListPrincipalsForPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPrincipalsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListPrincipalsForPortfolioOutput, AWSError>;
+  /**
+   * Lists all principal ARNs associated with the specified portfolio.
+   */
+  listPrincipalsForPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.ListPrincipalsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListPrincipalsForPortfolioOutput, AWSError>;
+  /**
+   * Lists all provisioning artifacts associated with the specified product.
+   */
+  listProvisioningArtifacts(params: ServiceCatalog.Types.ListProvisioningArtifactsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsOutput, AWSError>;
+  /**
+   * Lists all provisioning artifacts associated with the specified product.
+   */
+  listProvisioningArtifacts(callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsOutput, AWSError>;
   /**
    * Returns a paginated list of all performed requests, in the form of RecordDetails objects that are filtered as specified.
    */
@@ -68,6 +276,14 @@ declare class ServiceCatalog extends Service {
    */
   provisionProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
   /**
+   * Rejects an offer to share a portfolio.
+   */
+  rejectPortfolioShare(params: ServiceCatalog.Types.RejectPortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.RejectPortfolioShareOutput) => void): Request<ServiceCatalog.Types.RejectPortfolioShareOutput, AWSError>;
+  /**
+   * Rejects an offer to share a portfolio.
+   */
+  rejectPortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.RejectPortfolioShareOutput) => void): Request<ServiceCatalog.Types.RejectPortfolioShareOutput, AWSError>;
+  /**
    * Returns a paginated list of all the ProvisionedProduct objects that are currently available (not terminated). 
    */
   scanProvisionedProducts(params: ServiceCatalog.Types.ScanProvisionedProductsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ScanProvisionedProductsOutput) => void): Request<ServiceCatalog.Types.ScanProvisionedProductsOutput, AWSError>;
@@ -84,6 +300,14 @@ declare class ServiceCatalog extends Service {
    */
   searchProducts(callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProductsOutput) => void): Request<ServiceCatalog.Types.SearchProductsOutput, AWSError>;
   /**
+   * Retrieves summary and status information about all products created within the caller's account. If a portfolio ID is provided, this operation retrieves information for only those products that are associated with the specified portfolio.
+   */
+  searchProductsAsAdmin(params: ServiceCatalog.Types.SearchProductsAsAdminInput, callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProductsAsAdminOutput) => void): Request<ServiceCatalog.Types.SearchProductsAsAdminOutput, AWSError>;
+  /**
+   * Retrieves summary and status information about all products created within the caller's account. If a portfolio ID is provided, this operation retrieves information for only those products that are associated with the specified portfolio.
+   */
+  searchProductsAsAdmin(callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProductsAsAdminOutput) => void): Request<ServiceCatalog.Types.SearchProductsAsAdminOutput, AWSError>;
+  /**
    * Requests termination of an existing ProvisionedProduct object. If there are Tags associated with the object, they are terminated when the ProvisionedProduct object is terminated.  This operation does not delete any records associated with the ProvisionedProduct object. You can check the status of this request using the DescribeRecord operation.
    */
   terminateProvisionedProduct(params: ServiceCatalog.Types.TerminateProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.TerminateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.TerminateProvisionedProductOutput, AWSError>;
@@ -92,6 +316,30 @@ declare class ServiceCatalog extends Service {
    */
   terminateProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.TerminateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.TerminateProvisionedProductOutput, AWSError>;
   /**
+   * Updates an existing constraint.
+   */
+  updateConstraint(params: ServiceCatalog.Types.UpdateConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateConstraintOutput) => void): Request<ServiceCatalog.Types.UpdateConstraintOutput, AWSError>;
+  /**
+   * Updates an existing constraint.
+   */
+  updateConstraint(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateConstraintOutput) => void): Request<ServiceCatalog.Types.UpdateConstraintOutput, AWSError>;
+  /**
+   * Updates the specified portfolio's details. This operation will not work with a product that has been shared with you.
+   */
+  updatePortfolio(params: ServiceCatalog.Types.UpdatePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioOutput, AWSError>;
+  /**
+   * Updates the specified portfolio's details. This operation will not work with a product that has been shared with you.
+   */
+  updatePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioOutput, AWSError>;
+  /**
+   * Updates an existing product.
+   */
+  updateProduct(params: ServiceCatalog.Types.UpdateProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProductOutput) => void): Request<ServiceCatalog.Types.UpdateProductOutput, AWSError>;
+  /**
+   * Updates an existing product.
+   */
+  updateProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProductOutput) => void): Request<ServiceCatalog.Types.UpdateProductOutput, AWSError>;
+  /**
    * Requests updates to the configuration of an existing ProvisionedProduct object. If there are tags associated with the object, they cannot be updated or added with this operation. Depending on the specific updates requested, this operation may update with no interruption, with some interruption, or replace the ProvisionedProduct object entirely.  You can check the status of this request using the DescribeRecord operation.
    */
   updateProvisionedProduct(params: ServiceCatalog.Types.UpdateProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.UpdateProvisionedProductOutput, AWSError>;
@@ -99,9 +347,29 @@ declare class ServiceCatalog extends Service {
    * Requests updates to the configuration of an existing ProvisionedProduct object. If there are tags associated with the object, they cannot be updated or added with this operation. Depending on the specific updates requested, this operation may update with no interruption, with some interruption, or replace the ProvisionedProduct object entirely.  You can check the status of this request using the DescribeRecord operation.
    */
   updateProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.UpdateProvisionedProductOutput, AWSError>;
+  /**
+   * Updates an existing provisioning artifact's information. This operation will not work on a provisioning artifact associated with a product that has been shared with you.
+   */
+  updateProvisioningArtifact(params: ServiceCatalog.Types.UpdateProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
+  /**
+   * Updates an existing provisioning artifact's information. This operation will not work on a provisioning artifact associated with a product that has been shared with you.
+   */
+  updateProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
 }
 declare namespace ServiceCatalog.Types {
   export type AcceptLanguage = string;
+  export interface AcceptPortfolioShareInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+  }
+  export interface AcceptPortfolioShareOutput {
+  }
   export interface AccessLevelFilter {
     /**
      * Specifies the access level.  Account allows results at the account level.   Role allows results based on the federated role of the specified user.  User allows results limited to the specified user. 
@@ -114,11 +382,74 @@ declare namespace ServiceCatalog.Types {
   }
   export type AccessLevelFilterKey = "Account"|"Role"|"User"|string;
   export type AccessLevelFilterValue = string;
+  export type AccountId = string;
+  export type AccountIds = AccountId[];
+  export type AddTags = Tag[];
   export type AllowedValue = string;
   export type AllowedValues = AllowedValue[];
   export type ApproximateCount = number;
+  export interface AssociatePrincipalWithPortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+    /**
+     * The ARN representing the principal (IAM user, role, or group).
+     */
+    PrincipalARN: PrincipalARN;
+    /**
+     * The principal type. Must be IAM 
+     */
+    PrincipalType: PrincipalType;
+  }
+  export interface AssociatePrincipalWithPortfolioOutput {
+  }
+  export interface AssociateProductWithPortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+    /**
+     * The identifier of the source portfolio to use with this association.
+     */
+    SourcePortfolioId?: Id;
+  }
+  export interface AssociateProductWithPortfolioOutput {
+  }
   export type AttributeValue = string;
   export type ConstraintDescription = string;
+  export interface ConstraintDetail {
+    /**
+     * The identifier of the constraint.
+     */
+    ConstraintId?: Id;
+    /**
+     * The type of the constraint.
+     */
+    Type?: ConstraintType;
+    /**
+     * The text description of the constraint.
+     */
+    Description?: ConstraintDescription;
+    /**
+     * The owner of the constraint.
+     */
+    Owner?: AccountId;
+  }
+  export type ConstraintDetails = ConstraintDetail[];
+  export type ConstraintParameters = string;
   export type ConstraintSummaries = ConstraintSummary[];
   export interface ConstraintSummary {
     /**
@@ -131,8 +462,333 @@ declare namespace ServiceCatalog.Types {
     Description?: ConstraintDescription;
   }
   export type ConstraintType = string;
+  export interface CreateConstraintInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * The constraint parameters.
+     */
+    Parameters: ConstraintParameters;
+    /**
+     * The type of the constraint.
+     */
+    Type: ConstraintType;
+    /**
+     * The text description of the constraint.
+     */
+    Description?: ConstraintDescription;
+    /**
+     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface CreateConstraintOutput {
+    /**
+     * The resulting detailed constraint information.
+     */
+    ConstraintDetail?: ConstraintDetail;
+    /**
+     * The resulting constraint parameters.
+     */
+    ConstraintParameters?: ConstraintParameters;
+    /**
+     * The status of the current request.
+     */
+    Status?: Status;
+  }
+  export interface CreatePortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The name to use for display purposes.
+     */
+    DisplayName: PortfolioDisplayName;
+    /**
+     * The text description of the portfolio.
+     */
+    Description?: PortfolioDescription;
+    /**
+     * The name of the portfolio provider.
+     */
+    ProviderName: ProviderName;
+    /**
+     * Tags to associate with the new portfolio.
+     */
+    Tags?: AddTags;
+    /**
+     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface CreatePortfolioOutput {
+    /**
+     * The resulting detailed portfolio information.
+     */
+    PortfolioDetail?: PortfolioDetail;
+    /**
+     * Tags successfully associated with the new portfolio.
+     */
+    Tags?: Tags;
+  }
+  export interface CreatePortfolioShareInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+    /**
+     * The account ID with which to share the portfolio.
+     */
+    AccountId: AccountId;
+  }
+  export interface CreatePortfolioShareOutput {
+  }
+  export interface CreateProductInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The name of the product.
+     */
+    Name: ProductViewName;
+    /**
+     * The owner of the product.
+     */
+    Owner: ProductViewOwner;
+    /**
+     * The text description of the product.
+     */
+    Description?: ProductViewShortDescription;
+    /**
+     * The distributor of the product.
+     */
+    Distributor?: ProductViewOwner;
+    /**
+     * Support information about the product.
+     */
+    SupportDescription?: SupportDescription;
+    /**
+     * Contact email for product support.
+     */
+    SupportEmail?: SupportEmail;
+    /**
+     * Contact URL for product support.
+     */
+    SupportUrl?: SupportUrl;
+    /**
+     * The type of the product to create.
+     */
+    ProductType: ProductType;
+    /**
+     * Tags to associate with the new product.
+     */
+    Tags?: AddTags;
+    /**
+     * Parameters for the provisioning artifact.
+     */
+    ProvisioningArtifactParameters: ProvisioningArtifactProperties;
+    /**
+     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface CreateProductOutput {
+    /**
+     * The resulting detailed product view information.
+     */
+    ProductViewDetail?: ProductViewDetail;
+    /**
+     * The resulting detailed provisioning artifact information.
+     */
+    ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
+    /**
+     * Tags successfully associated with the new product.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateProvisioningArtifactInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * The parameters to use when creating the new provisioning artifact.
+     */
+    Parameters: ProvisioningArtifactProperties;
+    /**
+     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface CreateProvisioningArtifactOutput {
+    /**
+     * The resulting detailed provisioning artifact information.
+     */
+    ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
+    /**
+     * Additional information about the provisioning artifact create request.
+     */
+    Info?: ProvisioningArtifactInfo;
+    /**
+     * The status of the current request.
+     */
+    Status?: Status;
+  }
   export type CreatedTime = Date;
+  export type CreationTime = Date;
   export type DefaultValue = string;
+  export interface DeleteConstraintInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the constraint to delete.
+     */
+    Id: Id;
+  }
+  export interface DeleteConstraintOutput {
+  }
+  export interface DeletePortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the portfolio for the delete request.
+     */
+    Id: Id;
+  }
+  export interface DeletePortfolioOutput {
+  }
+  export interface DeletePortfolioShareInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+    /**
+     * The account ID associated with the share to delete.
+     */
+    AccountId: AccountId;
+  }
+  export interface DeletePortfolioShareOutput {
+  }
+  export interface DeleteProductInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the product for the delete request.
+     */
+    Id: Id;
+  }
+  export interface DeleteProductOutput {
+  }
+  export interface DeleteProvisioningArtifactInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact for the delete request.
+     */
+    ProvisioningArtifactId: Id;
+  }
+  export interface DeleteProvisioningArtifactOutput {
+  }
+  export interface DescribeConstraintInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the constraint.
+     */
+    Id: Id;
+  }
+  export interface DescribeConstraintOutput {
+    /**
+     * Detailed constraint information.
+     */
+    ConstraintDetail?: ConstraintDetail;
+    /**
+     * The current parameters associated with the specified constraint.
+     */
+    ConstraintParameters?: ConstraintParameters;
+    /**
+     * The status of the current request.
+     */
+    Status?: Status;
+  }
+  export interface DescribePortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the portfolio for which to retrieve information.
+     */
+    Id: Id;
+  }
+  export interface DescribePortfolioOutput {
+    /**
+     * Detailed portfolio information.
+     */
+    PortfolioDetail?: PortfolioDetail;
+    /**
+     * Tags associated with the portfolio.
+     */
+    Tags?: Tags;
+  }
+  export interface DescribeProductAsAdminInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the product for which to retrieve information.
+     */
+    Id: Id;
+  }
+  export interface DescribeProductAsAdminOutput {
+    /**
+     * Detailed product view information.
+     */
+    ProductViewDetail?: ProductViewDetail;
+    /**
+     * Tags associated with the product.
+     */
+    Tags?: Tags;
+  }
   export interface DescribeProductInput {
     /**
      * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
@@ -173,13 +829,41 @@ declare namespace ServiceCatalog.Types {
      */
     ProvisioningArtifacts?: ProvisioningArtifacts;
   }
+  export interface DescribeProvisioningArtifactInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the provisioning artifact.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+  }
+  export interface DescribeProvisioningArtifactOutput {
+    /**
+     * Detailed provisioning artifact information.
+     */
+    ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
+    /**
+     * Additional information about the provisioning artifact.
+     */
+    Info?: ProvisioningArtifactInfo;
+    /**
+     * The status of the current request.
+     */
+    Status?: Status;
+  }
   export interface DescribeProvisioningParametersInput {
     /**
      * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The identifier of the product.
+     * The product identifier.
      */
     ProductId: Id;
     /**
@@ -238,6 +922,38 @@ declare namespace ServiceCatalog.Types {
     NextPageToken?: PageToken;
   }
   export type Description = string;
+  export interface DisassociatePrincipalFromPortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+    /**
+     * The ARN representing the principal (IAM user, role, or group).
+     */
+    PrincipalARN: PrincipalARN;
+  }
+  export interface DisassociatePrincipalFromPortfolioOutput {
+  }
+  export interface DisassociateProductFromPortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+  }
+  export interface DisassociateProductFromPortfolioOutput {
+  }
   export type ErrorCode = string;
   export type ErrorDescription = string;
   export type HasDefaultPath = boolean;
@@ -266,13 +982,69 @@ declare namespace ServiceCatalog.Types {
      */
     Name?: PortfolioName;
   }
+  export interface ListAcceptedPortfolioSharesInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
+    /**
+     * The maximum number of items to return in the results. If more results exist than fit in the specified PageSize, the value of NextPageToken in the response is non-null.
+     */
+    PageSize?: PageSize;
+  }
+  export interface ListAcceptedPortfolioSharesOutput {
+    /**
+     * List of detailed portfolio information objects.
+     */
+    PortfolioDetails?: PortfolioDetails;
+    /**
+     * The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListConstraintsForPortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+    /**
+     * The product identifier.
+     */
+    ProductId?: Id;
+    /**
+     * The maximum number of items to return in the results. If more results exist than fit in the specified PageSize, the value of NextPageToken in the response is non-null.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
+  }
+  export interface ListConstraintsForPortfolioOutput {
+    /**
+     * List of detailed constraint information objects.
+     */
+    ConstraintDetails?: ConstraintDetails;
+    /**
+     * The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
   export interface ListLaunchPathsInput {
     /**
      * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * Identifies the product for which to retrieve LaunchPathSummaries information.
+     * The product identifier.. Identifies the product for which to retrieve LaunchPathSummaries information.
      */
     ProductId: Id;
     /**
@@ -289,6 +1061,126 @@ declare namespace ServiceCatalog.Types {
      * List of launch path information summaries for the specified PageToken.
      */
     LaunchPathSummaries?: LaunchPathSummaries;
+    /**
+     * The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListPortfolioAccessInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+  }
+  export interface ListPortfolioAccessOutput {
+    /**
+     * List of account IDs associated with access to the portfolio.
+     */
+    AccountIds?: AccountIds;
+    /**
+     * The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListPortfoliosForProductInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
+    /**
+     * The maximum number of items to return in the results. If more results exist than fit in the specified PageSize, the value of NextPageToken in the response is non-null.
+     */
+    PageSize?: PageSize;
+  }
+  export interface ListPortfoliosForProductOutput {
+    /**
+     * List of detailed portfolio information objects.
+     */
+    PortfolioDetails?: PortfolioDetails;
+    /**
+     * The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListPortfoliosInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
+    /**
+     * The maximum number of items to return in the results. If more results exist than fit in the specified PageSize, the value of NextPageToken in the response is non-null.
+     */
+    PageSize?: PageSize;
+  }
+  export interface ListPortfoliosOutput {
+    /**
+     * List of detailed portfolio information objects.
+     */
+    PortfolioDetails?: PortfolioDetails;
+    /**
+     * The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListPrincipalsForPortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+    /**
+     * The maximum number of items to return in the results. If more results exist than fit in the specified PageSize, the value of NextPageToken in the response is non-null.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
+  }
+  export interface ListPrincipalsForPortfolioOutput {
+    /**
+     * The IAM principals (users or roles) associated with the portfolio.
+     */
+    Principals?: Principals;
+    /**
+     * The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListProvisioningArtifactsInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+  }
+  export interface ListProvisioningArtifactsOutput {
+    /**
+     * List of detailed provisioning artifact information objects.
+     */
+    ProvisioningArtifactDetails?: ProvisioningArtifactDetails;
     /**
      * The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
@@ -352,8 +1244,51 @@ declare namespace ServiceCatalog.Types {
   export type ParameterKey = string;
   export type ParameterType = string;
   export type ParameterValue = string;
+  export type PortfolioDescription = string;
+  export interface PortfolioDetail {
+    /**
+     * The identifier for the portfolio.
+     */
+    Id?: Id;
+    /**
+     * The ARN assigned to the portfolio.
+     */
+    ARN?: ResourceARN;
+    /**
+     * The name to use for display purposes.
+     */
+    DisplayName?: PortfolioDisplayName;
+    /**
+     * The text description of the portfolio.
+     */
+    Description?: PortfolioDescription;
+    /**
+     * The UTC timestamp of the creation time.
+     */
+    CreatedTime?: CreationTime;
+    /**
+     * The name of the portfolio provider.
+     */
+    ProviderName?: ProviderName;
+  }
+  export type PortfolioDetails = PortfolioDetail[];
+  export type PortfolioDisplayName = string;
   export type PortfolioName = string;
-  export type ProductType = string;
+  export interface Principal {
+    /**
+     * The ARN representing the principal (IAM user, role, or group).
+     */
+    PrincipalARN?: PrincipalARN;
+    /**
+     * The principal type. Must be IAM 
+     */
+    PrincipalType?: PrincipalType;
+  }
+  export type PrincipalARN = string;
+  export type PrincipalType = "IAM"|string;
+  export type Principals = Principal[];
+  export type ProductSource = "ACCOUNT"|string;
+  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|string;
   export type ProductViewAggregationType = string;
   export interface ProductViewAggregationValue {
     /**
@@ -367,6 +1302,25 @@ declare namespace ServiceCatalog.Types {
   }
   export type ProductViewAggregationValues = ProductViewAggregationValue[];
   export type ProductViewAggregations = {[key: string]: ProductViewAggregationValues};
+  export interface ProductViewDetail {
+    /**
+     * The summary metadata about the specified product view.
+     */
+    ProductViewSummary?: ProductViewSummary;
+    /**
+     * Current status of the product.
+     */
+    Status?: Status;
+    /**
+     * The ARN associated with the product.
+     */
+    ProductARN?: ResourceARN;
+    /**
+     * The UTC timestamp of the creation time.
+     */
+    CreatedTime?: CreatedTime;
+  }
+  export type ProductViewDetails = ProductViewDetail[];
   export type ProductViewDistributor = string;
   export type ProductViewFilterBy = "FullTextSearch"|"Owner"|"ProductType"|string;
   export type ProductViewFilterValue = string;
@@ -423,13 +1377,14 @@ declare namespace ServiceCatalog.Types {
      */
     SupportUrl?: SupportUrl;
   }
+  export type ProviderName = string;
   export interface ProvisionProductInput {
     /**
      * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The identifier of the product.
+     * The product identifier.
      */
     ProductId: Id;
     /**
@@ -493,11 +1448,11 @@ declare namespace ServiceCatalog.Types {
      */
     StatusMessage?: ProvisionedProductStatusMessage;
     /**
-     * The time the ProvisionedProduct was created.
+     * The UTC timestamp of the creation time.
      */
     CreatedTime?: CreatedTime;
     /**
-     * An idempotency token that uniquely identifies this ProvisionedProduct.
+     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
      */
     IdempotencyToken?: IdempotencyToken;
     /**
@@ -525,12 +1480,38 @@ declare namespace ServiceCatalog.Types {
      */
     Description?: ProvisioningArtifactDescription;
     /**
-     * The time that the artifact was created by the Administrator.
+     * The UTC timestamp of the creation time.
      */
     CreatedTime?: ProvisioningArtifactCreatedTime;
   }
   export type ProvisioningArtifactCreatedTime = Date;
   export type ProvisioningArtifactDescription = string;
+  export interface ProvisioningArtifactDetail {
+    /**
+     * The identifier of the provisioning artifact.
+     */
+    Id?: Id;
+    /**
+     * The name assigned to the provisioning artifact.
+     */
+    Name?: ProvisioningArtifactName;
+    /**
+     * The text description of the provisioning artifact.
+     */
+    Description?: ProvisioningArtifactName;
+    /**
+     * The type of the provisioning artifact.
+     */
+    Type?: ProvisioningArtifactType;
+    /**
+     * The UTC timestamp of the creation time.
+     */
+    CreatedTime?: CreationTime;
+  }
+  export type ProvisioningArtifactDetails = ProvisioningArtifactDetail[];
+  export type ProvisioningArtifactInfo = {[key: string]: ProvisioningArtifactInfoValue};
+  export type ProvisioningArtifactInfoKey = string;
+  export type ProvisioningArtifactInfoValue = string;
   export type ProvisioningArtifactName = string;
   export interface ProvisioningArtifactParameter {
     /**
@@ -559,6 +1540,25 @@ declare namespace ServiceCatalog.Types {
     ParameterConstraints?: ParameterConstraints;
   }
   export type ProvisioningArtifactParameters = ProvisioningArtifactParameter[];
+  export interface ProvisioningArtifactProperties {
+    /**
+     * The name assigned to the provisioning artifact properties.
+     */
+    Name?: ProvisioningArtifactName;
+    /**
+     * The text description of the provisioning artifact properties.
+     */
+    Description?: ProvisioningArtifactDescription;
+    /**
+     * Additional information about the provisioning artifact properties.
+     */
+    Info: ProvisioningArtifactInfo;
+    /**
+     * The type of the provisioning artifact properties.
+     */
+    Type?: ProvisioningArtifactType;
+  }
+  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|string;
   export type ProvisioningArtifacts = ProvisioningArtifact[];
   export interface ProvisioningParameter {
     /**
@@ -585,7 +1585,7 @@ declare namespace ServiceCatalog.Types {
      */
     Status?: RecordStatus;
     /**
-     * The time when the record for the ProvisionedProduct object was created.
+     * The UTC timestamp of the creation time.
      */
     CreatedTime?: CreatedTime;
     /**
@@ -605,7 +1605,7 @@ declare namespace ServiceCatalog.Types {
      */
     ProvisionedProductId?: Id;
     /**
-     * The identifier of the product.
+     * The product identifier.
      */
     ProductId?: Id;
     /**
@@ -667,6 +1667,19 @@ declare namespace ServiceCatalog.Types {
   export type RecordTagValue = string;
   export type RecordTags = RecordTag[];
   export type RecordType = string;
+  export interface RejectPortfolioShareInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId: Id;
+  }
+  export interface RejectPortfolioShareOutput {
+  }
+  export type ResourceARN = string;
   export interface ScanProvisionedProductsInput {
     /**
      * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
@@ -697,6 +1710,50 @@ declare namespace ServiceCatalog.Types {
   }
   export type SearchFilterKey = string;
   export type SearchFilterValue = string;
+  export interface SearchProductsAsAdminInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId?: Id;
+    /**
+     * The list of filters with which to limit search results. If no search filters are specified, the output is all the products to which the administrator has access.
+     */
+    Filters?: ProductViewFilters;
+    /**
+     * The sort field specifier. If no value is specified, results are not sorted.
+     */
+    SortBy?: ProductViewSortBy;
+    /**
+     * The sort order specifier. If no value is specified, results are not sorted.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
+    /**
+     * The maximum number of items to return in the results. If more results exist than fit in the specified PageSize, the value of NextPageToken in the response is non-null.
+     */
+    PageSize?: PageSize;
+    /**
+     * Access level of the source of the product.
+     */
+    ProductSource?: ProductSource;
+  }
+  export interface SearchProductsAsAdminOutput {
+    /**
+     * List of detailed product view information objects.
+     */
+    ProductViewDetails?: ProductViewDetails;
+    /**
+     * The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
   export interface SearchProductsInput {
     /**
      * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
@@ -738,6 +1795,7 @@ declare namespace ServiceCatalog.Types {
     NextPageToken?: PageToken;
   }
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string;
   export type SupportDescription = string;
   export type SupportEmail = string;
   export type SupportUrl = string;
@@ -745,13 +1803,14 @@ declare namespace ServiceCatalog.Types {
     /**
      * The ProvisioningArtifactParameter.TagKey parameter from DescribeProvisioningParameters.
      */
-    Key?: TagKey;
+    Key: TagKey;
     /**
      * The esired value for this key.
      */
-    Value?: TagValue;
+    Value: TagValue;
   }
   export type TagKey = string;
+  export type TagKeys = TagKey[];
   export type TagValue = string;
   export type Tags = Tag[];
   export interface TerminateProvisionedProductInput {
@@ -781,6 +1840,130 @@ declare namespace ServiceCatalog.Types {
      * The detailed result of the TerminateProvisionedProduct request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object that the request is modifying, and a list of any errors that the request encountered.
      */
     RecordDetail?: RecordDetail;
+  }
+  export interface UpdateConstraintInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the constraint to update.
+     */
+    Id: Id;
+    /**
+     * The updated text description of the constraint.
+     */
+    Description?: ConstraintDescription;
+  }
+  export interface UpdateConstraintOutput {
+    /**
+     * The resulting detailed constraint information.
+     */
+    ConstraintDetail?: ConstraintDetail;
+    /**
+     * The resulting updated constraint parameters.
+     */
+    ConstraintParameters?: ConstraintParameters;
+    /**
+     * The status of the current request.
+     */
+    Status?: Status;
+  }
+  export interface UpdatePortfolioInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the portfolio for the update request.
+     */
+    Id: Id;
+    /**
+     * The name to use for display purposes.
+     */
+    DisplayName?: PortfolioDisplayName;
+    /**
+     * The updated text description of the portfolio.
+     */
+    Description?: PortfolioDescription;
+    /**
+     * The updated name of the portfolio provider.
+     */
+    ProviderName?: ProviderName;
+    /**
+     * Tags to add to the existing list of tags associated with the portfolio.
+     */
+    AddTags?: AddTags;
+    /**
+     * Tags to remove from the existing list of tags associated with the portfolio.
+     */
+    RemoveTags?: TagKeys;
+  }
+  export interface UpdatePortfolioOutput {
+    /**
+     * The resulting detailed portfolio information.
+     */
+    PortfolioDetail?: PortfolioDetail;
+    /**
+     * Tags associated with the portfolio.
+     */
+    Tags?: Tags;
+  }
+  export interface UpdateProductInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the product for the update request.
+     */
+    Id: Id;
+    /**
+     * The updated product name.
+     */
+    Name?: ProductViewName;
+    /**
+     * The updated owner of the product.
+     */
+    Owner?: ProductViewOwner;
+    /**
+     * The updated text description of the product.
+     */
+    Description?: ProductViewShortDescription;
+    /**
+     * The updated distributor of the product.
+     */
+    Distributor?: ProductViewOwner;
+    /**
+     * The updated support description for the product.
+     */
+    SupportDescription?: SupportDescription;
+    /**
+     * The updated support email for the product.
+     */
+    SupportEmail?: SupportEmail;
+    /**
+     * The updated support URL for the product.
+     */
+    SupportUrl?: SupportUrl;
+    /**
+     * Tags to add to the existing list of tags associated with the product.
+     */
+    AddTags?: AddTags;
+    /**
+     * Tags to remove from the existing list of tags associated with the product.
+     */
+    RemoveTags?: TagKeys;
+  }
+  export interface UpdateProductOutput {
+    /**
+     * The resulting detailed product view information.
+     */
+    ProductViewDetail?: ProductViewDetail;
+    /**
+     * Tags associated with the product.
+     */
+    Tags?: Tags;
   }
   export interface UpdateProvisionedProductInput {
     /**
@@ -821,6 +2004,42 @@ declare namespace ServiceCatalog.Types {
      * The detailed result of the UpdateProvisionedProduct request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object that the request is modifying, and a list of any errors that the request encountered.
      */
     RecordDetail?: RecordDetail;
+  }
+  export interface UpdateProvisioningArtifactInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact for the update request.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The updated name of the provisioning artifact.
+     */
+    Name?: ProvisioningArtifactName;
+    /**
+     * The updated text description of the provisioning artifact.
+     */
+    Description?: ProvisioningArtifactDescription;
+  }
+  export interface UpdateProvisioningArtifactOutput {
+    /**
+     * The resulting detailed provisioning artifact information.
+     */
+    ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
+    /**
+     * Additional information about the provisioning artifact update request.
+     */
+    Info?: ProvisioningArtifactInfo;
+    /**
+     * The status of the current request.
+     */
+    Status?: Status;
   }
   export interface UpdateProvisioningParameter {
     /**

@@ -1,10 +1,10 @@
-///<reference types="node" />
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+interface Blob {}
 declare class GameLift extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
@@ -36,11 +36,11 @@ declare class GameLift extends Service {
    */
   createFleet(callback?: (err: AWSError, data: GameLift.Types.CreateFleetOutput) => void): Request<GameLift.Types.CreateFleetOutput, AWSError>;
   /**
-   * Creates a multiplayer game session for players. This action creates a game session record and assigns the new session to an instance in the specified fleet, which initializes a new server process to host the game session. A fleet must be in an ACTIVE status before a game session can be created in it. To create a game session, specify either a fleet ID or an alias ID and indicate the maximum number of players the game session allows. You can also provide a name and a set of properties for your game (optional). If successful, a GameSession object is returned containing session properties, including an IP address. By default, newly created game sessions are set to accept adding any new players to the game session. Use UpdateGameSession to change the creation policy.
+   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must be in an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID, and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing session properties, including an IP address. By default, newly created game sessions allow new players to join. Use UpdateGameSession to change the game sessions player session creation policy. When creating a game session on a fleet with a resource limit creation policy, the request should include a creator ID. If none is provided, GameLift does not evaluate the fleet's resource limit creation policy.
    */
   createGameSession(params: GameLift.Types.CreateGameSessionInput, callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionOutput) => void): Request<GameLift.Types.CreateGameSessionOutput, AWSError>;
   /**
-   * Creates a multiplayer game session for players. This action creates a game session record and assigns the new session to an instance in the specified fleet, which initializes a new server process to host the game session. A fleet must be in an ACTIVE status before a game session can be created in it. To create a game session, specify either a fleet ID or an alias ID and indicate the maximum number of players the game session allows. You can also provide a name and a set of properties for your game (optional). If successful, a GameSession object is returned containing session properties, including an IP address. By default, newly created game sessions are set to accept adding any new players to the game session. Use UpdateGameSession to change the creation policy.
+   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must be in an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID, and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing session properties, including an IP address. By default, newly created game sessions allow new players to join. Use UpdateGameSession to change the game sessions player session creation policy. When creating a game session on a fleet with a resource limit creation policy, the request should include a creator ID. If none is provided, GameLift does not evaluate the fleet's resource limit creation policy.
    */
   createGameSession(callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionOutput) => void): Request<GameLift.Types.CreateGameSessionOutput, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class GameLift extends Service {
    */
   describeGameSessions(callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionsOutput) => void): Request<GameLift.Types.DescribeGameSessionsOutput, AWSError>;
   /**
-   * Retrieves information about instances in a fleet. To get information on a specific instance, specify both a fleet ID and instance ID. To get information for all instances in a fleet, specify a fleet ID only. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, an Instance object is returned for each result.
+   * Retrieves information about a fleet's instances, including instance IDs. Use this action to get details on all instances in the fleet or get details on one specific instance. To get a specific instance, specify fleet ID and instance ID. To get all instances in a fleet, specify a fleet ID only. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, an Instance object is returned for each result.
    */
   describeInstances(params: GameLift.Types.DescribeInstancesInput, callback?: (err: AWSError, data: GameLift.Types.DescribeInstancesOutput) => void): Request<GameLift.Types.DescribeInstancesOutput, AWSError>;
   /**
-   * Retrieves information about instances in a fleet. To get information on a specific instance, specify both a fleet ID and instance ID. To get information for all instances in a fleet, specify a fleet ID only. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, an Instance object is returned for each result.
+   * Retrieves information about a fleet's instances, including instance IDs. Use this action to get details on all instances in the fleet or get details on one specific instance. To get a specific instance, specify fleet ID and instance ID. To get all instances in a fleet, specify a fleet ID only. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, an Instance object is returned for each result.
    */
   describeInstances(callback?: (err: AWSError, data: GameLift.Types.DescribeInstancesOutput) => void): Request<GameLift.Types.DescribeInstancesOutput, AWSError>;
   /**
@@ -212,6 +212,14 @@ declare class GameLift extends Service {
    */
   getGameSessionLogUrl(callback?: (err: AWSError, data: GameLift.Types.GetGameSessionLogUrlOutput) => void): Request<GameLift.Types.GetGameSessionLogUrlOutput, AWSError>;
   /**
+   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or watching activity in real time.  Access requires credentials that match the operating system of the instance. For a Windows instance, GameLift returns a username and password as strings for use with a Windows Remote Desktop client. For a Linux instance, GameLift returns a username and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request (see the example later in this topic). For more information on remote access, see Remotely Accessing an Instance. To request access to a specific instance, specify the IDs of the instance and the fleet it belongs to. If successful, an InstanceAccess object is returned containing the instance's IP address and a set of credentials.
+   */
+  getInstanceAccess(params: GameLift.Types.GetInstanceAccessInput, callback?: (err: AWSError, data: GameLift.Types.GetInstanceAccessOutput) => void): Request<GameLift.Types.GetInstanceAccessOutput, AWSError>;
+  /**
+   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or watching activity in real time.  Access requires credentials that match the operating system of the instance. For a Windows instance, GameLift returns a username and password as strings for use with a Windows Remote Desktop client. For a Linux instance, GameLift returns a username and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request (see the example later in this topic). For more information on remote access, see Remotely Accessing an Instance. To request access to a specific instance, specify the IDs of the instance and the fleet it belongs to. If successful, an InstanceAccess object is returned containing the instance's IP address and a set of credentials.
+   */
+  getInstanceAccess(callback?: (err: AWSError, data: GameLift.Types.GetInstanceAccessOutput) => void): Request<GameLift.Types.GetInstanceAccessOutput, AWSError>;
+  /**
    * Retrieves a collection of alias records for this AWS account. You can filter the result set by alias name and/or routing strategy type. Use the pagination parameters to retrieve results in sequential pages.  Aliases are not listed in any particular order. 
    */
   listAliases(params: GameLift.Types.ListAliasesInput, callback?: (err: AWSError, data: GameLift.Types.ListAliasesOutput) => void): Request<GameLift.Types.ListAliasesOutput, AWSError>;
@@ -244,11 +252,11 @@ declare class GameLift extends Service {
    */
   putScalingPolicy(callback?: (err: AWSError, data: GameLift.Types.PutScalingPolicyOutput) => void): Request<GameLift.Types.PutScalingPolicyOutput, AWSError>;
   /**
-   * Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.  Call this action only if you need credentials for a build created with  CreateBuild . This is a rare situation; in most cases, builds are created using the CLI command upload-build, which creates a build record and also uploads build files.   Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the status of that build changes to READY. Once this happens, you must create a brand new build.
+   * Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.  Call this action only if you need credentials for a build created with CreateBuild . This is a rare situation; in most cases, builds are created using the CLI command upload-build, which creates a build record and also uploads build files.   Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the status of that build changes to READY. Once this happens, you must create a brand new build.
    */
   requestUploadCredentials(params: GameLift.Types.RequestUploadCredentialsInput, callback?: (err: AWSError, data: GameLift.Types.RequestUploadCredentialsOutput) => void): Request<GameLift.Types.RequestUploadCredentialsOutput, AWSError>;
   /**
-   * Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.  Call this action only if you need credentials for a build created with  CreateBuild . This is a rare situation; in most cases, builds are created using the CLI command upload-build, which creates a build record and also uploads build files.   Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the status of that build changes to READY. Once this happens, you must create a brand new build.
+   * Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.  Call this action only if you need credentials for a build created with CreateBuild . This is a rare situation; in most cases, builds are created using the CLI command upload-build, which creates a build record and also uploads build files.   Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the status of that build changes to READY. Once this happens, you must create a brand new build.
    */
   requestUploadCredentials(callback?: (err: AWSError, data: GameLift.Types.RequestUploadCredentialsOutput) => void): Request<GameLift.Types.RequestUploadCredentialsOutput, AWSError>;
   /**
@@ -340,11 +348,11 @@ declare namespace GameLift.Types {
     Description?: FreeText;
     RoutingStrategy?: RoutingStrategy;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     CreationTime?: Timestamp;
     /**
-     * Time stamp indicating when this data object was last modified. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this data object was last modified. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     LastUpdatedTime?: Timestamp;
   }
@@ -391,7 +399,7 @@ declare namespace GameLift.Types {
      */
     OperatingSystem?: OperatingSystem;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     CreationTime?: Timestamp;
   }
@@ -421,11 +429,11 @@ declare namespace GameLift.Types {
   }
   export interface CreateBuildInput {
     /**
-     * Descriptive label associated with a build. Build names do not need to be unique. A build name can be changed later using  UpdateBuild .
+     * Descriptive label associated with a build. Build names do not need to be unique. A build name can be changed later using UpdateBuild .
      */
     Name?: NonZeroAndMaxString;
     /**
-     * Version associated with this build. Version strings do not need to be unique to a build. A build version can be changed later using  UpdateBuild .
+     * Version associated with this build. Version strings do not need to be unique to a build. A build version can be changed later using UpdateBuild .
      */
     Version?: NonZeroAndMaxString;
     StorageLocation?: S3Location;
@@ -440,7 +448,7 @@ declare namespace GameLift.Types {
      */
     Build?: Build;
     /**
-     * AWS credentials required when uploading a game build to the storage location. These credentials have a limited lifespan and are valid only for the build they were issued for. If you need to get fresh credentials, call  RequestUploadCredentials .
+     * AWS credentials required when uploading a game build to the storage location. These credentials have a limited lifespan and are valid only for the build they were issued for. If you need to get fresh credentials, call RequestUploadCredentials .
      */
     UploadCredentials?: AwsCredentials;
     /**
@@ -470,7 +478,7 @@ declare namespace GameLift.Types {
      */
     ServerLaunchParameters?: NonZeroAndMaxString;
     /**
-     * Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the Amazon GameLift Developer Guide. If no default log path for a fleet is specified, GameLift will automatically upload logs stored on each instance at C:\game\logs. Use the GameLift console to access stored logs. 
+     * Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the Amazon GameLift Developer Guide. If no default log path for a fleet is specified, GameLift will automatically upload logs stored on each instance at C:\game\logs (for Windows) or /local/game/logs (for Linux). Use the GameLift console to access stored logs. 
      */
     LogPaths?: StringList;
     /**
@@ -526,7 +534,7 @@ declare namespace GameLift.Types {
      */
     CreatorId?: NonZeroAndMaxString;
     /**
-     * Custom string to include in the game session ID, with a maximum length of 48 characters. If this parameter is set, GameLift creates a game session ID in the following format: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;custom ID string&gt;". For example, this full game session ID: "arn:aws:gamelift:us-west-2::gamesession/fleet-2ec2aae5-c2c7-43ca-b19d-8249fe5fddf2/my-game-session" includes the custom ID string "my-game-session". If this parameter is not set, GameLift creates a game session ID in the same format with an auto-generated ID string. 
+     * Custom string to include in the game session ID, with a maximum length of 48 characters. If this parameter is set, GameLift creates a game session ID in the following format: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;custom ID string&gt;". For example, this full game session ID: "arn:aws:gamelift:us-west-2::gamesession/fleet-2ec2aae5-c2c7-43ca-b19d-8249fe5fddf2/my-game-session" includes the custom ID string "my-game-session". If this parameter is not set, GameLift creates a game session ID in the same format with an autogenerated ID string. 
      */
     GameSessionId?: IdStringModel;
   }
@@ -538,7 +546,7 @@ declare namespace GameLift.Types {
   }
   export interface CreatePlayerSessionInput {
     /**
-     * Unique identifier for the game session to add a player to. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an auto-generated string. 
+     * Unique identifier for the game session to add a player to. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
      */
     GameSessionId: ArnStringModel;
     /**
@@ -554,7 +562,7 @@ declare namespace GameLift.Types {
   }
   export interface CreatePlayerSessionsInput {
     /**
-     * Unique identifier for the game session to add players to. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an auto-generated string. 
+     * Unique identifier for the game session to add players to. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
      */
     GameSessionId: ArnStringModel;
     /**
@@ -686,11 +694,11 @@ declare namespace GameLift.Types {
      */
     FleetId: FleetId;
     /**
-     * Earliest date to retrieve event logs for. If no start time is specified, this call returns entries starting from when the fleet was created to the specified end time. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Earliest date to retrieve event logs for. If no start time is specified, this call returns entries starting from when the fleet was created to the specified end time. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     StartTime?: Timestamp;
     /**
-     * Most recent date to retrieve event logs for. If no end time is specified, this call returns entries from the specified start time up to the present. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Most recent date to retrieve event logs for. If no end time is specified, this call returns entries from the specified start time up to the present. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     EndTime?: Timestamp;
     /**
@@ -754,7 +762,7 @@ declare namespace GameLift.Types {
      */
     FleetId?: FleetId;
     /**
-     * Unique identifier for the game session to retrieve information on. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an auto-generated string. 
+     * Unique identifier for the game session to retrieve information on. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
      */
     GameSessionId?: ArnStringModel;
     /**
@@ -790,7 +798,7 @@ declare namespace GameLift.Types {
      */
     FleetId?: FleetId;
     /**
-     * Unique identifier for the game session to retrieve information on. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an auto-generated string. 
+     * Unique identifier for the game session to retrieve information on. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
      */
     GameSessionId?: ArnStringModel;
     /**
@@ -850,7 +858,7 @@ declare namespace GameLift.Types {
   }
   export interface DescribePlayerSessionsInput {
     /**
-     * Unique identifier for the game session to get player sessions for.Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an auto-generated string. 
+     * Unique identifier for the game session to get player sessions for. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
      */
     GameSessionId?: ArnStringModel;
     /**
@@ -981,7 +989,7 @@ declare namespace GameLift.Types {
      */
     ResourceId?: NonZeroAndMaxString;
     /**
-     * Type of event being logged.
+     * Type of event being logged. 
      */
     EventCode?: EventCode;
     /**
@@ -989,11 +997,11 @@ declare namespace GameLift.Types {
      */
     Message?: NonEmptyString;
     /**
-     * Time stamp indicating when this event occurred. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this event occurred. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     EventTime?: Timestamp;
   }
-  export type EventCode = "GENERIC_EVENT"|"FLEET_CREATED"|"FLEET_DELETED"|"FLEET_SCALING_EVENT"|"FLEET_STATE_DOWNLOADING"|"FLEET_STATE_VALIDATING"|"FLEET_STATE_BUILDING"|"FLEET_STATE_ACTIVATING"|"FLEET_STATE_ACTIVE"|"FLEET_STATE_ERROR"|"FLEET_INITIALIZATION_FAILED"|"FLEET_BINARY_DOWNLOAD_FAILED"|"FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"|"FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"|"FLEET_VALIDATION_TIMED_OUT"|"FLEET_ACTIVATION_FAILED"|"FLEET_ACTIVATION_FAILED_NO_INSTANCES"|"FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"|string;
+  export type EventCode = "GENERIC_EVENT"|"FLEET_CREATED"|"FLEET_DELETED"|"FLEET_SCALING_EVENT"|"FLEET_STATE_DOWNLOADING"|"FLEET_STATE_VALIDATING"|"FLEET_STATE_BUILDING"|"FLEET_STATE_ACTIVATING"|"FLEET_STATE_ACTIVE"|"FLEET_STATE_ERROR"|"FLEET_INITIALIZATION_FAILED"|"FLEET_BINARY_DOWNLOAD_FAILED"|"FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"|"FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"|"FLEET_VALIDATION_TIMED_OUT"|"FLEET_ACTIVATION_FAILED"|"FLEET_ACTIVATION_FAILED_NO_INSTANCES"|"FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"|"SERVER_PROCESS_INVALID_PATH"|"SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT"|"SERVER_PROCESS_PROCESS_READY_TIMEOUT"|"SERVER_PROCESS_CRASHED"|"SERVER_PROCESS_TERMINATED_UNHEALTHY"|"SERVER_PROCESS_FORCE_TERMINATED"|"SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"|string;
   export type EventList = Event[];
   export interface FleetAttributes {
     /**
@@ -1009,11 +1017,11 @@ declare namespace GameLift.Types {
      */
     Name?: NonZeroAndMaxString;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     CreationTime?: Timestamp;
     /**
-     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     TerminationTime?: Timestamp;
     /**
@@ -1033,7 +1041,7 @@ declare namespace GameLift.Types {
      */
     ServerLaunchParameters?: NonZeroAndMaxString;
     /**
-     * Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the Amazon GameLift Developer Guide. If no default log path for a fleet is specified, GameLift will automatically upload logs stored on each instance at C:\game\logs. Use the GameLift console to access stored logs. 
+     * Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the Amazon GameLift Developer Guide. If no default log path for a fleet is specified, GameLift will automatically upload logs that are stored on each instance at C:\game\logs (for Windows) or /local/game/logs (for Linux). Use the GameLift console to access stored logs. 
      */
     LogPaths?: StringList;
     /**
@@ -1107,7 +1115,7 @@ declare namespace GameLift.Types {
   export type GamePropertyValue = string;
   export interface GameSession {
     /**
-     * Unique identifier for a game session. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an auto-generated string. 
+     * Unique identifier for a game session. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
      */
     GameSessionId?: NonZeroAndMaxString;
     /**
@@ -1119,11 +1127,11 @@ declare namespace GameLift.Types {
      */
     FleetId?: FleetId;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     CreationTime?: Timestamp;
     /**
-     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     TerminationTime?: Timestamp;
     /**
@@ -1155,7 +1163,7 @@ declare namespace GameLift.Types {
      */
     PlayerSessionCreationPolicy?: PlayerSessionCreationPolicy;
     /**
-     * Player ID of the person or entity that created the game session. This ID is used to enforce a resource protection policy (if one exists) that limits the number of concurrent active game sessions one player can have.
+     * Player ID of the person or entity that created the game session. This ID is used to enforce a resource protection policy (if one exists) that limits the number of concurrent active game sessions for a single player.
      */
     CreatorId?: NonZeroAndMaxString;
   }
@@ -1171,7 +1179,7 @@ declare namespace GameLift.Types {
   export type GameSessionStatus = "ACTIVE"|"ACTIVATING"|"TERMINATED"|"TERMINATING"|"ERROR"|string;
   export interface GetGameSessionLogUrlInput {
     /**
-     * Unique identifier for the game session to get logs for. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an auto-generated string. 
+     * Unique identifier for the game session to get logs for. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
      */
     GameSessionId: ArnStringModel;
   }
@@ -1180,6 +1188,22 @@ declare namespace GameLift.Types {
      * Location of the requested game session logs, available for download.
      */
     PreSignedUrl?: NonZeroAndMaxString;
+  }
+  export interface GetInstanceAccessInput {
+    /**
+     * Unique identifier for a fleet. Specify the fleet that contain the instance you want access to. The fleet can be in any of the following statuses: ACTIVATING, ACTIVE, or ERROR. Fleets with an ERROR status can be accessed for a few hours before being deleted.
+     */
+    FleetId: FleetId;
+    /**
+     * Unique identifier for an instance. Specify the instance you want to get access to. You can access an instance in any status.
+     */
+    InstanceId: InstanceId;
+  }
+  export interface GetInstanceAccessOutput {
+    /**
+     * Object containing connection information for a fleet instance, including IP address and access credentials.
+     */
+    InstanceAccess?: InstanceAccess;
   }
   export type IdStringModel = string;
   export interface Instance {
@@ -1196,7 +1220,7 @@ declare namespace GameLift.Types {
      */
     IpAddress?: IpAddress;
     /**
-     * Operating system being used on this instance. 
+     * Operating system that is running on this instance. 
      */
     OperatingSystem?: OperatingSystem;
     /**
@@ -1211,6 +1235,38 @@ declare namespace GameLift.Types {
      * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     CreationTime?: Timestamp;
+  }
+  export interface InstanceAccess {
+    /**
+     * Unique identifier for the fleet containing the instance being accessed.
+     */
+    FleetId?: FleetId;
+    /**
+     * Unique identifier for the instance being accessed.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * IP address assigned to the instance.
+     */
+    IpAddress?: IpAddress;
+    /**
+     * Operating system that is running on the instance.
+     */
+    OperatingSystem?: OperatingSystem;
+    /**
+     * Credentials required to access the instance.
+     */
+    Credentials?: InstanceCredentials;
+  }
+  export interface InstanceCredentials {
+    /**
+     * User login string.
+     */
+    UserName?: NonEmptyString;
+    /**
+     * Secret string. For Windows instances, the secret is a password. For Linux instances, it is a private key.
+     */
+    Secret?: NonEmptyString;
   }
   export type InstanceId = string;
   export type InstanceList = Instance[];
@@ -1338,11 +1394,11 @@ declare namespace GameLift.Types {
      */
     FleetId?: FleetId;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     CreationTime?: Timestamp;
     /**
-     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057".
+     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
      */
     TerminationTime?: Timestamp;
     /**
@@ -1436,11 +1492,11 @@ declare namespace GameLift.Types {
   }
   export interface ResourceCreationLimitPolicy {
     /**
-     * Maximum number of game sessions an individual can create during the policy period. 
+     * Maximum number of game sessions that an individual can create during the policy period. 
      */
     NewGameSessionsPerCreator?: WholeNumber;
     /**
-     * Time span used to evaluate the resource creation limit policy. 
+     * Time span used in evaluating the resource creation limit policy. 
      */
     PolicyPeriodInMinutes?: WholeNumber;
   }
@@ -1558,7 +1614,7 @@ declare namespace GameLift.Types {
   }
   export interface ServerProcess {
     /**
-     * Location in the game build of the server executable. All game builds are installed on instances at the root C:\game\..., so an executable file located at MyGame\latest\server.exe has a launch path of "C:\game\MyGame\latest\server.exe". 
+     * Location of the server executable in a game build. All game builds are installed on instances at the root : for Windows instances C:\game, and for Linux instances /local/game. A Windows game build with an executable file located at MyGame\latest\server.exe must have a launch path of "C:\game\MyGame\latest\server.exe". A Linux game build with an executable file located at MyGame/latest/server.exe must have a launch path of "/local/game/MyGame/latest/server.exe". 
      */
     LaunchPath: NonZeroAndMaxString;
     /**
@@ -1691,7 +1747,7 @@ declare namespace GameLift.Types {
   }
   export interface UpdateGameSessionInput {
     /**
-     * Unique identifier for the game session to update. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an auto-generated string. 
+     * Unique identifier for the game session to update. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
      */
     GameSessionId: ArnStringModel;
     /**

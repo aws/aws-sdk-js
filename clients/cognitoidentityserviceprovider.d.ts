@@ -1,10 +1,10 @@
-///<reference types="node" />
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+interface Blob {}
 declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
@@ -699,6 +699,9 @@ declare namespace CognitoIdentityServiceProvider.Types {
      * The challenge parameters.
      */
     ChallengeParameters?: ChallengeParametersType;
+    /**
+     * The result of the authentication response.
+     */
     AuthenticationResult?: AuthenticationResultType;
   }
   export interface AdminListDevicesRequest {
@@ -776,6 +779,9 @@ declare namespace CognitoIdentityServiceProvider.Types {
      * The challenge parameters.
      */
     ChallengeParameters?: ChallengeParametersType;
+    /**
+     * The result returned by the server in response to the authentication request.
+     */
     AuthenticationResult?: AuthenticationResultType;
   }
   export interface AdminSetUserSettingsRequest {
@@ -1116,6 +1122,10 @@ declare namespace CognitoIdentityServiceProvider.Types {
      * The configuration for AdminCreateUser requests.
      */
     AdminCreateUserConfig?: AdminCreateUserConfigType;
+    /**
+     * An array of schema attributes for the new user pool. These attributes can be standard or custom attributes.
+     */
+    Schema?: SchemaAttributesListType;
   }
   export interface CreateUserPoolResponse {
     /**
@@ -1288,11 +1298,14 @@ declare namespace CognitoIdentityServiceProvider.Types {
      */
     SecretHash?: SecretHashType;
     /**
-     * The user name of the user for whom you want to enter a code to retrieve a forgotten password.
+     * The user name of the user for whom you want to enter a code to reset a forgotten password.
      */
     Username: UsernameType;
   }
   export interface ForgotPasswordResponse {
+    /**
+     * The code delivery details returned by the server in response to the request to reset a password.
+     */
     CodeDeliveryDetails?: CodeDeliveryDetailsType;
   }
   export type GenerateSecret = boolean;
@@ -1340,7 +1353,7 @@ declare namespace CognitoIdentityServiceProvider.Types {
   }
   export interface GetUserAttributeVerificationCodeResponse {
     /**
-     * The code delivery details returned by the server response to get the user attribute verification code.
+     * The code delivery details returned by the server in response to the request to get the user attribute verification code.
      */
     CodeDeliveryDetails?: CodeDeliveryDetailsType;
   }
@@ -1403,6 +1416,9 @@ declare namespace CognitoIdentityServiceProvider.Types {
      * The challenge parameters.
      */
     ChallengeParameters?: ChallengeParametersType;
+    /**
+     * The result returned by the server in response to the request to initiate authentication.
+     */
     AuthenticationResult?: AuthenticationResultType;
   }
   export type IntegerType = number;
@@ -1659,6 +1675,9 @@ declare namespace CognitoIdentityServiceProvider.Types {
     Username: UsernameType;
   }
   export interface ResendConfirmationCodeResponse {
+    /**
+     * The code delivery details returned by the server in response to the request to resend the confirmation code.
+     */
     CodeDeliveryDetails?: CodeDeliveryDetailsType;
   }
   export interface RespondToAuthChallengeRequest {
@@ -1692,6 +1711,9 @@ declare namespace CognitoIdentityServiceProvider.Types {
      * The challenge parameters.
      */
     ChallengeParameters?: ChallengeParametersType;
+    /**
+     * The result returned by the server in response to the request to respond to the authentication challenge.
+     */
     AuthenticationResult?: AuthenticationResultType;
   }
   export interface SchemaAttributeType {
@@ -1772,13 +1794,16 @@ declare namespace CognitoIdentityServiceProvider.Types {
      * A response from the server indicating that a user registration has been confirmed.
      */
     UserConfirmed?: BooleanType;
+    /**
+     * The code delivery details returned by the server response to the user registration request.
+     */
     CodeDeliveryDetails?: CodeDeliveryDetailsType;
   }
   export interface SmsConfigurationType {
     /**
      * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) caller.
      */
-    SnsCallerArn?: ArnType;
+    SnsCallerArn: ArnType;
     /**
      * The external ID.
      */

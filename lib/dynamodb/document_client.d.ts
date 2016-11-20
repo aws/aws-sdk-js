@@ -1,9 +1,10 @@
-/// <reference types="node" />
 import DynamoDB = require('../../clients/dynamodb');
 import * as DCInterfaces from './document_client_interfaces';
 import * as stream from 'stream';
 import {Request} from '../request';
 import {AWSError} from '../error';
+interface File {}
+interface Blob {}
 /**
  * The document client simplifies working with items in Amazon DynamoDB
  * by abstracting away the notion of attribute values. This abstraction

@@ -1,10 +1,10 @@
-///<reference types="node" />
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+interface Blob {}
 declare class DirectoryService extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
@@ -12,27 +12,35 @@ declare class DirectoryService extends Service {
   constructor(options?: DirectoryService.Types.ClientConfiguration)
   config: Config & DirectoryService.Types.ClientConfiguration;
   /**
-   * If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. AddIpRoutes adds this address block. You can also use AddIpRoutes to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC. 
+   * If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. AddIpRoutes adds this address block. You can also use AddIpRoutes to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC.  Before you call AddIpRoutes, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the AddIpRoutes operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   addIpRoutes(params: DirectoryService.Types.AddIpRoutesRequest, callback?: (err: AWSError, data: DirectoryService.Types.AddIpRoutesResult) => void): Request<DirectoryService.Types.AddIpRoutesResult, AWSError>;
   /**
-   * If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. AddIpRoutes adds this address block. You can also use AddIpRoutes to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC. 
+   * If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. AddIpRoutes adds this address block. You can also use AddIpRoutes to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC.  Before you call AddIpRoutes, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the AddIpRoutes operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   addIpRoutes(callback?: (err: AWSError, data: DirectoryService.Types.AddIpRoutesResult) => void): Request<DirectoryService.Types.AddIpRoutesResult, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 10 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
+   * Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
    */
   addTagsToResource(params: DirectoryService.Types.AddTagsToResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.AddTagsToResourceResult) => void): Request<DirectoryService.Types.AddTagsToResourceResult, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 10 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
+   * Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
    */
   addTagsToResource(callback?: (err: AWSError, data: DirectoryService.Types.AddTagsToResourceResult) => void): Request<DirectoryService.Types.AddTagsToResourceResult, AWSError>;
   /**
-   * Creates an AD Connector to connect to an on-premises directory.
+   * Cancels an in-progress schema extension to a Microsoft AD directory. Once a schema extension has started replicating to all domain controllers, the task can no longer be canceled. A schema extension can be canceled during any of the following states; Initializing, CreatingSnapshot, and UpdatingSchema.
+   */
+  cancelSchemaExtension(params: DirectoryService.Types.CancelSchemaExtensionRequest, callback?: (err: AWSError, data: DirectoryService.Types.CancelSchemaExtensionResult) => void): Request<DirectoryService.Types.CancelSchemaExtensionResult, AWSError>;
+  /**
+   * Cancels an in-progress schema extension to a Microsoft AD directory. Once a schema extension has started replicating to all domain controllers, the task can no longer be canceled. A schema extension can be canceled during any of the following states; Initializing, CreatingSnapshot, and UpdatingSchema.
+   */
+  cancelSchemaExtension(callback?: (err: AWSError, data: DirectoryService.Types.CancelSchemaExtensionResult) => void): Request<DirectoryService.Types.CancelSchemaExtensionResult, AWSError>;
+  /**
+   * Creates an AD Connector to connect to an on-premises directory. Before you call ConnectDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the ConnectDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   connectDirectory(params: DirectoryService.Types.ConnectDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.ConnectDirectoryResult) => void): Request<DirectoryService.Types.ConnectDirectoryResult, AWSError>;
   /**
-   * Creates an AD Connector to connect to an on-premises directory.
+   * Creates an AD Connector to connect to an on-premises directory. Before you call ConnectDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the ConnectDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   connectDirectory(callback?: (err: AWSError, data: DirectoryService.Types.ConnectDirectoryResult) => void): Request<DirectoryService.Types.ConnectDirectoryResult, AWSError>;
   /**
@@ -60,19 +68,19 @@ declare class DirectoryService extends Service {
    */
   createConditionalForwarder(callback?: (err: AWSError, data: DirectoryService.Types.CreateConditionalForwarderResult) => void): Request<DirectoryService.Types.CreateConditionalForwarderResult, AWSError>;
   /**
-   * Creates a Simple AD directory.
+   * Creates a Simple AD directory. Before you call CreateDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createDirectory(params: DirectoryService.Types.CreateDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateDirectoryResult) => void): Request<DirectoryService.Types.CreateDirectoryResult, AWSError>;
   /**
-   * Creates a Simple AD directory.
+   * Creates a Simple AD directory. Before you call CreateDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createDirectory(callback?: (err: AWSError, data: DirectoryService.Types.CreateDirectoryResult) => void): Request<DirectoryService.Types.CreateDirectoryResult, AWSError>;
   /**
-   * Creates a Microsoft AD in the AWS cloud.
+   * Creates a Microsoft AD in the AWS cloud. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createMicrosoftAD(params: DirectoryService.Types.CreateMicrosoftADRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateMicrosoftADResult) => void): Request<DirectoryService.Types.CreateMicrosoftADResult, AWSError>;
   /**
-   * Creates a Microsoft AD in the AWS cloud.
+   * Creates a Microsoft AD in the AWS cloud. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createMicrosoftAD(callback?: (err: AWSError, data: DirectoryService.Types.CreateMicrosoftADResult) => void): Request<DirectoryService.Types.CreateMicrosoftADResult, AWSError>;
   /**
@@ -100,11 +108,11 @@ declare class DirectoryService extends Service {
    */
   deleteConditionalForwarder(callback?: (err: AWSError, data: DirectoryService.Types.DeleteConditionalForwarderResult) => void): Request<DirectoryService.Types.DeleteConditionalForwarderResult, AWSError>;
   /**
-   * Deletes an AWS Directory Service directory.
+   * Deletes an AWS Directory Service directory. Before you call DeleteDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the DeleteDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   deleteDirectory(params: DirectoryService.Types.DeleteDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeleteDirectoryResult) => void): Request<DirectoryService.Types.DeleteDirectoryResult, AWSError>;
   /**
-   * Deletes an AWS Directory Service directory.
+   * Deletes an AWS Directory Service directory. Before you call DeleteDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the DeleteDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   deleteDirectory(callback?: (err: AWSError, data: DirectoryService.Types.DeleteDirectoryResult) => void): Request<DirectoryService.Types.DeleteDirectoryResult, AWSError>;
   /**
@@ -228,6 +236,14 @@ declare class DirectoryService extends Service {
    */
   listIpRoutes(callback?: (err: AWSError, data: DirectoryService.Types.ListIpRoutesResult) => void): Request<DirectoryService.Types.ListIpRoutesResult, AWSError>;
   /**
+   * Lists all schema extensions applied to a Microsoft AD Directory.
+   */
+  listSchemaExtensions(params: DirectoryService.Types.ListSchemaExtensionsRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListSchemaExtensionsResult) => void): Request<DirectoryService.Types.ListSchemaExtensionsResult, AWSError>;
+  /**
+   * Lists all schema extensions applied to a Microsoft AD Directory.
+   */
+  listSchemaExtensions(callback?: (err: AWSError, data: DirectoryService.Types.ListSchemaExtensionsResult) => void): Request<DirectoryService.Types.ListSchemaExtensionsResult, AWSError>;
+  /**
    * Lists all tags on an Amazon Directory Services directory.
    */
   listTagsForResource(params: DirectoryService.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListTagsForResourceResult) => void): Request<DirectoryService.Types.ListTagsForResourceResult, AWSError>;
@@ -267,6 +283,14 @@ declare class DirectoryService extends Service {
    * Restores a directory using an existing directory snapshot. When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten. This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the DescribeDirectories operation with the directory identifier. When the DirectoryDescription.Stage value changes to Active, the restore operation is complete.
    */
   restoreFromSnapshot(callback?: (err: AWSError, data: DirectoryService.Types.RestoreFromSnapshotResult) => void): Request<DirectoryService.Types.RestoreFromSnapshotResult, AWSError>;
+  /**
+   * Applies a schema extension to a Microsoft AD directory.
+   */
+  startSchemaExtension(params: DirectoryService.Types.StartSchemaExtensionRequest, callback?: (err: AWSError, data: DirectoryService.Types.StartSchemaExtensionResult) => void): Request<DirectoryService.Types.StartSchemaExtensionResult, AWSError>;
+  /**
+   * Applies a schema extension to a Microsoft AD directory.
+   */
+  startSchemaExtension(callback?: (err: AWSError, data: DirectoryService.Types.StartSchemaExtensionResult) => void): Request<DirectoryService.Types.StartSchemaExtensionResult, AWSError>;
   /**
    * Updates a conditional forwarder that has been set up for your AWS directory.
    */
@@ -339,6 +363,18 @@ declare namespace DirectoryService.Types {
   export type Attributes = Attribute[];
   export type AvailabilityZone = string;
   export type AvailabilityZones = AvailabilityZone[];
+  export interface CancelSchemaExtensionRequest {
+    /**
+     * The identifier of the directory whose schema extension will be canceled.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The identifier of the schema extension that will be canceled.
+     */
+    SchemaExtensionId: SchemaExtensionId;
+  }
+  export interface CancelSchemaExtensionResult {
+  }
   export type CidrIp = string;
   export type CidrIps = CidrIp[];
   export type CloudOnlyDirectoriesLimitReached = boolean;
@@ -528,6 +564,7 @@ declare namespace DirectoryService.Types {
      */
     DirectoryId?: DirectoryId;
   }
+  export type CreateSnapshotBeforeSchemaExtension = boolean;
   export interface CreateSnapshotRequest {
     /**
      * The identifier of the directory of which to take a snapshot.
@@ -1000,6 +1037,7 @@ declare namespace DirectoryService.Types {
   }
   export interface EnableSsoResult {
   }
+  export type EndDateTime = Date;
   export interface EventTopic {
     /**
      * The Directory ID of an AWS Directory Service directory that will publish status messages to an SNS topic.
@@ -1088,6 +1126,7 @@ declare namespace DirectoryService.Types {
   export type IpRoutesInfo = IpRouteInfo[];
   export type LastUpdatedDateTime = Date;
   export type LaunchTime = Date;
+  export type LdifContent = string;
   export type Limit = number;
   export interface ListIpRoutesRequest {
     /**
@@ -1110,6 +1149,30 @@ declare namespace DirectoryService.Types {
     IpRoutesInfo?: IpRoutesInfo;
     /**
      * If not null, more results are available. Pass this value for the NextToken parameter in a subsequent call to ListIpRoutes to retrieve the next set of items.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSchemaExtensionsRequest {
+    /**
+     * The identifier of the directory from which to retrieve the schema extension information.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The ListSchemaExtensions.NextToken value from a previous call to ListSchemaExtensions. Pass null if this is the first call.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return.
+     */
+    Limit?: Limit;
+  }
+  export interface ListSchemaExtensionsResult {
+    /**
+     * Information about the schema extensions applied to the directory.
+     */
+    SchemaExtensionsInfo?: SchemaExtensionsInfo;
+    /**
+     * If not null, more results are available. Pass this value for the NextToken parameter in a subsequent call to ListSchemaExtensions to retrieve the next set of items.
      */
     NextToken?: NextToken;
   }
@@ -1232,6 +1295,40 @@ declare namespace DirectoryService.Types {
   export interface RestoreFromSnapshotResult {
   }
   export type SID = string;
+  export type SchemaExtensionId = string;
+  export interface SchemaExtensionInfo {
+    /**
+     * The identifier of the directory to which the schema extension is applied.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The identifier of the schema extension.
+     */
+    SchemaExtensionId?: SchemaExtensionId;
+    /**
+     * A description of the schema extension.
+     */
+    Description?: Description;
+    /**
+     * The current status of the schema extension.
+     */
+    SchemaExtensionStatus?: SchemaExtensionStatus;
+    /**
+     * The reason for the SchemaExtensionStatus.
+     */
+    SchemaExtensionStatusReason?: SchemaExtensionStatusReason;
+    /**
+     * The date and time that the schema extension started being applied to the directory.
+     */
+    StartDateTime?: StartDateTime;
+    /**
+     * The date and time that the schema extension was completed.
+     */
+    EndDateTime?: EndDateTime;
+  }
+  export type SchemaExtensionStatus = "Initializing"|"CreatingSnapshot"|"UpdatingSchema"|"Replicating"|"CancelInProgress"|"RollbackInProgress"|"Cancelled"|"Failed"|"Completed"|string;
+  export type SchemaExtensionStatusReason = string;
+  export type SchemaExtensionsInfo = SchemaExtensionInfo[];
   export type SecurityGroupId = string;
   export type Server = string;
   export type Servers = Server[];
@@ -1283,6 +1380,31 @@ declare namespace DirectoryService.Types {
   export type Snapshots = Snapshot[];
   export type SsoEnabled = boolean;
   export type StageReason = string;
+  export type StartDateTime = Date;
+  export interface StartSchemaExtensionRequest {
+    /**
+     * The identifier of the directory for which the schema extension will be applied to.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * If true, creates a snapshot of the directory before applying the schema extension.
+     */
+    CreateSnapshotBeforeSchemaExtension: CreateSnapshotBeforeSchemaExtension;
+    /**
+     * The LDIF file represented as a string. The file size can be no larger than 1MB.
+     */
+    LdifContent: LdifContent;
+    /**
+     * A description of the schema extension.
+     */
+    Description: Description;
+  }
+  export interface StartSchemaExtensionResult {
+    /**
+     * The identifier of the schema extension that will be applied.
+     */
+    SchemaExtensionId?: SchemaExtensionId;
+  }
   export type StartTime = Date;
   export type StateLastUpdatedDateTime = Date;
   export type SubnetId = string;

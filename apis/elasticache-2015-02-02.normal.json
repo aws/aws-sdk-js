@@ -184,7 +184,7 @@
         {"shape":"InvalidParameterValueException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
-      "documentation":"<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p> <p>A Redis (cluster mode disabled) replication group is a collection of cache clusters, where one of the cache clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas.</p> <p>A Redis (cluster mode enabled) replication group is a collection of 1 to 15 node groups (shards). Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes. Writes to the primary are asynchronously propagated to the replicas. Redis (cluster mode enabled) replication groups partition the data across node groups (shards).</p> <p>When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled) replication group once it has been created.</p> <note> <p>This operation is valid for Redis only.</p> </note>"
+      "documentation":"<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p> <p>A Redis (cluster mode disabled) replication group is a collection of cache clusters, where one of the cache clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas.</p> <p>A Redis (cluster mode enabled) replication group is a collection of 1 to 15 node groups (shards). Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes. Writes to the primary are asynchronously propagated to the replicas. Redis (cluster mode enabled) replication groups partition the data across node groups (shards).</p> <p>When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled) replication group after it has been created.</p> <note> <p>This operation is valid for Redis only.</p> </note>"
     },
     "CreateSnapshot":{
       "name":"CreateSnapshot",
@@ -1636,6 +1636,10 @@
         "SnapshotWindow":{
           "shape":"String",
           "documentation":"<p>The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).</p> <p>Example: <code>05:00-09:00</code> </p> <p>If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.</p> <p> <b>Note:</b> This parameter is only valid if the <code>Engine</code> parameter is <code>redis</code>.</p>"
+        },
+        "AuthToken":{
+          "shape":"String",
+          "documentation":"<p>The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: '/', '\"', or \"@\". </p> </li> </ul> <p>For more information, see <a href=\"http://redis.io/commands/AUTH\">AUTH password</a> at Redis.</p>"
         }
       },
       "documentation":"<p>Represents the input of a CreateCacheCluster operation.</p>"
@@ -1753,7 +1757,7 @@
         },
         "NumCacheClusters":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of clusters this replication group initially has.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>ReplicasPerNodeGroup</code> instead.</p> <p>If <code>Multi-AZ</code> is <code>enabled</code>, the value of this parameter must be at least 2.</p> <p>The maximum permitted value for <code>NumCacheClusters</code> is 6 (primary plus 5 replicas). If you need to exceed this limit, fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request/\">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>"
+          "documentation":"<p>The number of clusters this replication group initially has.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>ReplicasPerNodeGroup</code> instead.</p> <p>If <code>Multi-AZ</code> is <code>enabled</code>, the value of this parameter must be at least 2.</p> <p>The maximum permitted value for <code>NumCacheClusters</code> is 6 (primary plus 5 replicas).</p>"
         },
         "PreferredCacheClusterAZs":{
           "shape":"AvailabilityZonesList",
@@ -1834,6 +1838,10 @@
         "SnapshotWindow":{
           "shape":"String",
           "documentation":"<p>The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).</p> <p>Example: <code>05:00-09:00</code> </p> <p>If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.</p> <note> <p>This parameter is only valid if the <code>Engine</code> parameter is <code>redis</code>.</p> </note>"
+        },
+        "AuthToken":{
+          "shape":"String",
+          "documentation":"<p>The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: '/', '\"', or \"@\". </p> </li> </ul> <p>For more information, see <a href=\"http://redis.io/commands/AUTH\">AUTH password</a> at Redis.</p>"
         }
       },
       "documentation":"<p>Represents the input of a <code>CreateReplicationGroup</code> operation.</p>"
@@ -2286,7 +2294,7 @@
         },
         "ShowNodeGroupConfig":{
           "shape":"BooleanOptional",
-          "documentation":"<p>A boolean value which if true, the node group (shard) configuration is included in the snapshot description.</p>"
+          "documentation":"<p>A Boolean value which if true, the node group (shard) configuration is included in the snapshot description.</p>"
         }
       },
       "documentation":"<p>Represents the input of a <code>DescribeSnapshotsMessage</code> operation.</p>"
@@ -2797,7 +2805,7 @@
           "documentation":"<p>A list containing information about individual nodes within the node group (shard).</p>"
         }
       },
-      "documentation":"<p>Represents a collection of cache nodes in a replication group. One node in the node group is the read/write Primary node. All the other nodes are read-only Replica nodes.</p>"
+      "documentation":"<p>Represents a collection of cache nodes in a replication group. One node in the node group is the read/write primary node. All the other nodes are read-only Replica nodes.</p>"
     },
     "NodeGroupConfiguration":{
       "type":"structure",
@@ -3169,7 +3177,7 @@
         },
         "Status":{
           "shape":"String",
-          "documentation":"<p>The current state of this replication group - <code>creating</code>, <code>available</code>, etc.</p>"
+          "documentation":"<p>The current state of this replication group - <code>creating</code>, <code>available</code>, <code>modifying</code>, <code>deleting</code>, <code>create-failed</code>, <code>snapshotting</code>.</p>"
         },
         "PendingModifiedValues":{
           "shape":"ReplicationGroupPendingModifiedValues",
