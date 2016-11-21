@@ -703,6 +703,10 @@
           "shape":"String",
           "documentation":"<p>The EC2 instance ID of the container instance.</p>"
         },
+        "version":{
+          "shape":"Long",
+          "documentation":"<p>The version counter for the container instance. Every time a container instance experiences a change that triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS container instance state with CloudWatch events, you can compare the version of a container instance reported by the Amazon ECS APIs with the version reported in CloudWatch events for the container instance (inside the <code>detail</code> object) to verify that the version in your event stream is current.</p>"
+        },
         "versionInfo":{
           "shape":"VersionInfo",
           "documentation":"<p>The version information for the Amazon ECS container agent and Docker daemon running on the container instance.</p>"
@@ -960,7 +964,10 @@
     "DeregisterContainerInstanceResponse":{
       "type":"structure",
       "members":{
-        "containerInstance":{"shape":"ContainerInstance"}
+        "containerInstance":{
+          "shape":"ContainerInstance",
+          "documentation":"<p>The container instance that was deregistered.</p>"
+        }
       }
     },
     "DeregisterTaskDefinitionRequest":{
@@ -1615,7 +1622,10 @@
     "RegisterContainerInstanceResponse":{
       "type":"structure",
       "members":{
-        "containerInstance":{"shape":"ContainerInstance"}
+        "containerInstance":{
+          "shape":"ContainerInstance",
+          "documentation":"<p>The container instance that was registered.</p>"
+        }
       }
     },
     "RegisterTaskDefinitionRequest":{
@@ -1914,7 +1924,10 @@
     "StopTaskResponse":{
       "type":"structure",
       "members":{
-        "task":{"shape":"Task"}
+        "task":{
+          "shape":"Task",
+          "documentation":"<p>The task that was stopped.</p>"
+        }
       }
     },
     "String":{"type":"string"},
@@ -2032,6 +2045,10 @@
         "startedBy":{
           "shape":"String",
           "documentation":"<p>The tag specified when a task is started. If the task is started by an Amazon ECS service, then the <code>startedBy</code> parameter contains the deployment ID of the service that starts it.</p>"
+        },
+        "version":{
+          "shape":"Long",
+          "documentation":"<p>The version counter for the task. Every time a task experiences a change that triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS task state with CloudWatch events, you can compare the version of a task reported by the Amazon ECS APIs with the version reported in CloudWatch events for the task (inside the <code>detail</code> object) to verify that the version in your event stream is current.</p>"
         },
         "stoppedReason":{
           "shape":"String",
@@ -2199,7 +2216,10 @@
     "UpdateContainerAgentResponse":{
       "type":"structure",
       "members":{
-        "containerInstance":{"shape":"ContainerInstance"}
+        "containerInstance":{
+          "shape":"ContainerInstance",
+          "documentation":"<p>The container instance for which the container agent was updated.</p>"
+        }
       }
     },
     "UpdateInProgressException":{
