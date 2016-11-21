@@ -269,6 +269,10 @@
     "name": "OpsWorks",
     "cors": true
   },
+  "polly": {
+    "name": "Polly",
+    "cors": true
+  },
   "rds": {
     "name": "RDS",
     "versions": [
