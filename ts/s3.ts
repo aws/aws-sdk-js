@@ -94,6 +94,7 @@ listObjectsReq.promise().then(function(data) {
 }).catch(function(err) {
     console.log(err);
 });
+
 // test stream
 var s3GetObjectStream = s3.getObject({
     Bucket: 'BUCKET',
@@ -118,3 +119,13 @@ s3.putObject({
     Key: 'Test',
     Body: fs.createReadStream('/fake/path')
 });
+
+const upload = s3.upload({
+    Bucket: 'BUCKET',
+    Key: 'KEY',
+    Body: new Buffer('some data')
+});
+
+// test managed upload promise support
+upload.promise()
+    .then((data) => data.Location);

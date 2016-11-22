@@ -10,6 +10,10 @@ export class ManagedUpload {
      */
     abort(): void;
     /**
+     * Returns a 'thenable' promise.
+     */
+    promise(): Promise<SendData>;
+    /**
      * Initiates the managed upload for the payload.
      */
     send(callback?: (err: AWSError, data: SendData) => void): void;
