@@ -6,6 +6,7 @@
     "protocol":"query",
     "serviceFullName":"AWS CloudFormation",
     "signatureVersion":"v4",
+    "uid":"cloudformation-2010-05-15",
     "xmlNamespace":"http://cloudformation.amazonaws.com/doc/2010-05-15/"
   },
   "operations":{
@@ -199,7 +200,8 @@
       },
       "errors":[
         {"shape":"InvalidChangeSetStatusException"},
-        {"shape":"ChangeSetNotFoundException"}
+        {"shape":"ChangeSetNotFoundException"},
+        {"shape":"InsufficientCapabilitiesException"}
       ],
       "documentation":"<p>Updates a stack using the input information that was provided when the specified change set was created. After the call successfully completes, AWS CloudFormation starts updating the stack. Use the <a>DescribeStacks</a> action to view the status of the update.</p> <p>When you execute a change set, AWS CloudFormation deletes all other change sets associated with the stack because they aren't valid for the updated stack.</p> <p>If a stack policy is associated with the stack, AWS CloudFormation enforces the policy during the update. You can't specify a temporary stack policy that overrides the current policy.</p>"
     },
@@ -227,6 +229,9 @@
         "shape":"GetTemplateOutput",
         "resultWrapper":"GetTemplateResult"
       },
+      "errors":[
+        {"shape":"ChangeSetNotFoundException"}
+      ],
       "documentation":"<p>Returns the template body for a specified stack. You can get the template for running or deleted stacks.</p> <p>For deleted stacks, GetTemplate returns the template for up to 90 days after the stack has been deleted.</p> <note> <p> If the template does not exist, a <code>ValidationError</code> is returned. </p> </note>"
     },
     "GetTemplateSummary":{
@@ -267,6 +272,19 @@
         "resultWrapper":"ListExportsResult"
       },
       "documentation":"<p>Lists all exported output values in the account and region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html\"> <code>Fn::ImportValue</code> </a> function. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html\"> AWS CloudFormation Export Stack Output Values</a>.</p>"
+    },
+    "ListImports":{
+      "name":"ListImports",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListImportsInput"},
+      "output":{
+        "shape":"ListImportsOutput",
+        "resultWrapper":"ListImportsResult"
+      },
+      "documentation":"<p>Lists all stacks that are importing an exported output value. To modify or remove an exported output value, first use this action to see which stacks are using it. To see the exported output values in your account, see <a>ListExports</a>. </p> <p>For more information about importing an exported output value, see the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html\"> <code>Fn::ImportValue</code> </a> function. </p>"
     },
     "ListStackResources":{
       "name":"ListStackResources",
@@ -626,7 +644,7 @@
         },
         "ChangeSetType":{
           "shape":"ChangeSetType",
-          "documentation":"<p>The type of change set operation.</p> <p>Valid values are <code>CREATE</code> and <code>UPDATE</code>. The default value is <code>UPDATE</code>.</p> <ul> <li> <p> <code>CREATE</code> - Specify to use the change set to create a new stack. While AWS CloudFormation creates the stack, the stack has the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995\"> <code>REVIEW_IN_PROGRESS</code> </a> status and an expected <code>StackId</code>, but no template or resources. Except for its <code>StackId</code>, the stack is completely empty until you execute the change set. You can apply multiple change sets to a stack.</p> </li> <li> <p> <code>UPDATE</code> - Specify to create a change set for an existing stack.</p> </li> </ul>"
+          "documentation":"<p>The type of change set operation. To create a change set for a new stack, specify <code>CREATE</code>. To create a change set for an existing stack, specify <code>UPDATE</code>.</p> <p>If you create a change set for a new stack, AWS Cloudformation creates a stack with a unique stack ID, but no template or resources. The stack will be in the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995\"> <code>REVIEW_IN_PROGRESS</code> </a> state until you execute the change set.</p> <p>By default, AWS CloudFormation specifies <code>UPDATE</code>. You can't use the <code>UPDATE</code> type to create a change set for a new stack or the <code>CREATE</code> type to create a change set for an existing stack.</p>"
         }
       },
       "documentation":"<p>The input for the <a>CreateChangeSet</a> action.</p>"
@@ -1109,11 +1127,11 @@
         },
         "ChangeSetName":{
           "shape":"ChangeSetNameOrId",
-          "documentation":"<p>Returns the template for a change set using the Amazon Resource Name (ARN) or name of the change set. If you specify a name, you must also specify the <code>StackName</code>.</p>"
+          "documentation":"<p>The name or Amazon Resource Name (ARN) of a change set for which AWS CloudFormation returns the associated template. If you specify a name, you must also specify the <code>StackName</code>.</p>"
         },
         "TemplateStage":{
           "shape":"TemplateStage",
-          "documentation":"<p>The stage of the template that is returned.</p> <p>Valid values are <code>Original</code> and <code>Processed</code>. The default value is <code>Original</code>.</p> <ul> <li> <p> <code>Original</code> - Use this value to return the user-submitted template.</p> </li> <li> <p> <code>Processed</code> - Use this value to return the template after all transforms have been processed.</p> </li> </ul>"
+          "documentation":"<p>For templates that include transforms, the stage of the template that AWS CloudFormation returns. To get the user-submitted template, specify <code>Original</code>. To get the template after AWS CloudFormation has processed all transforms, specify <code>Processed</code>. </p> <p>If the template doesn't include transforms, <code>Original</code> and <code>Processed</code> return the same template. By default, AWS CloudFormation specifies <code>Original</code>. </p>"
         }
       },
       "documentation":"<p>The input for a <a>GetTemplate</a> action.</p>"
@@ -1127,7 +1145,7 @@
         },
         "StagesAvailable":{
           "shape":"StageList",
-          "documentation":"<p>The template type.</p> <ul> <li> <p>For stacks, you can use either the <code>Original</code> or the <code>Processed</code> template type.</p> </li> <li> <p>For change sets, you can use only the <code>Original</code> template type. After the transforms are processed, you can use the <code>Processed</code> template type.</p> </li> </ul> <note> <p>If you create a change set for a new stack, you must select the template type.</p> </note>"
+          "documentation":"<p>The stage of the template that you can retrieve. For stacks, the <code>Original</code> and <code>Processed</code> templates are always available. For change sets, the <code>Original</code> template is always available. After AWS CloudFormation finishes creating the change set, the <code>Processed</code> template becomes available.</p>"
         }
       },
       "documentation":"<p>The output for <a>GetTemplate</a> action.</p>"
@@ -1187,6 +1205,10 @@
         }
       },
       "documentation":"<p>The output for the <a>GetTemplateSummary</a> action.</p>"
+    },
+    "Imports":{
+      "type":"list",
+      "member":{"shape":"StackName"}
     },
     "InsufficientCapabilitiesException":{
       "type":"structure",
@@ -1275,6 +1297,33 @@
         "NextToken":{
           "shape":"NextToken",
           "documentation":"<p>If the output exceeds 100 exported output values, a string that identifies the next page of exports. If there is no additional page, this value is null.</p>"
+        }
+      }
+    },
+    "ListImportsInput":{
+      "type":"structure",
+      "required":["ExportName"],
+      "members":{
+        "ExportName":{
+          "shape":"ExportName",
+          "documentation":"<p>The name of the exported output value. AWS CloudFormation returns the stack names that are importing this value. </p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A string (provided by the <a>ListImports</a> response output) that identifies the next page of stacks that are importing the specified exported output value. </p>"
+        }
+      }
+    },
+    "ListImportsOutput":{
+      "type":"structure",
+      "members":{
+        "Imports":{
+          "shape":"Imports",
+          "documentation":"<p>A list of stack names that are importing the specified exported output value. </p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A string that identifies the next page of exports. If there is no additional page, this value is null.</p>"
         }
       }
     },

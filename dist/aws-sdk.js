@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.6
+// AWS SDK for JavaScript v2.7.7
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -5576,6 +5576,7 @@ module.exports={
     "protocol": "query",
     "serviceFullName": "AWS CloudFormation",
     "signatureVersion": "v4",
+    "uid": "cloudformation-2010-05-15",
     "xmlNamespace": "http://cloudformation.amazonaws.com/doc/2010-05-15/"
   },
   "operations": {
@@ -6229,6 +6230,29 @@ module.exports={
                 "Value": {}
               }
             }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListImports": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ExportName"
+        ],
+        "members": {
+          "ExportName": {},
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "ListImportsResult",
+        "type": "structure",
+        "members": {
+          "Imports": {
+            "type": "list",
+            "member": {}
           },
           "NextToken": {}
         }
@@ -69477,7 +69501,8 @@ module.exports={
     "protocol": "rest-xml",
     "serviceAbbreviation": "Route 53",
     "serviceFullName": "Amazon Route 53",
-    "signatureVersion": "v4"
+    "signatureVersion": "v4",
+    "uid": "route53-2013-04-01"
   },
   "operations": {
     "AssociateVPCWithHostedZone": {
@@ -75534,6 +75559,15 @@ module.exports={
             "members": {
               "Days": {
                 "type": "integer"
+              },
+              "GlacierJobParameters": {
+                "type": "structure",
+                "required": [
+                  "Tier"
+                ],
+                "members": {
+                  "Tier": {}
+                }
               }
             }
           },
@@ -85080,7 +85114,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.6',
+  VERSION: '2.7.7',
 
 
   Signers: {},

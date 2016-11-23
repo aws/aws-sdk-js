@@ -164,6 +164,14 @@ declare class CloudFormation extends Service {
    */
   listExports(callback?: (err: AWSError, data: CloudFormation.Types.ListExportsOutput) => void): Request<CloudFormation.Types.ListExportsOutput, AWSError>;
   /**
+   * Lists all stacks that are importing an exported output value. To modify or remove an exported output value, first use this action to see which stacks are using it. To see the exported output values in your account, see ListExports.  For more information about importing an exported output value, see the  Fn::ImportValue  function. 
+   */
+  listImports(params: CloudFormation.Types.ListImportsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListImportsOutput) => void): Request<CloudFormation.Types.ListImportsOutput, AWSError>;
+  /**
+   * Lists all stacks that are importing an exported output value. To modify or remove an exported output value, first use this action to see which stacks are using it. To see the exported output values in your account, see ListExports.  For more information about importing an exported output value, see the  Fn::ImportValue  function. 
+   */
+  listImports(callback?: (err: AWSError, data: CloudFormation.Types.ListImportsOutput) => void): Request<CloudFormation.Types.ListImportsOutput, AWSError>;
+  /**
    * Returns descriptions of all resources of the specified stack. For deleted stacks, ListStackResources returns resource information for up to 90 days after the stack has been deleted.
    */
   listStackResources(params: CloudFormation.Types.ListStackResourcesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackResourcesOutput) => void): Request<CloudFormation.Types.ListStackResourcesOutput, AWSError>;
@@ -398,7 +406,7 @@ declare namespace CloudFormation.Types {
      */
     Description?: Description;
     /**
-     * The type of change set operation. Valid values are CREATE and UPDATE. The default value is UPDATE.    CREATE - Specify to use the change set to create a new stack. While AWS CloudFormation creates the stack, the stack has the  REVIEW_IN_PROGRESS  status and an expected StackId, but no template or resources. Except for its StackId, the stack is completely empty until you execute the change set. You can apply multiple change sets to a stack.    UPDATE - Specify to create a change set for an existing stack.  
+     * The type of change set operation. To create a change set for a new stack, specify CREATE. To create a change set for an existing stack, specify UPDATE. If you create a change set for a new stack, AWS Cloudformation creates a stack with a unique stack ID, but no template or resources. The stack will be in the  REVIEW_IN_PROGRESS  state until you execute the change set. By default, AWS CloudFormation specifies UPDATE. You can't use the UPDATE type to create a change set for a new stack or the CREATE type to create a change set for an existing stack.
      */
     ChangeSetType?: ChangeSetType;
   }
@@ -744,11 +752,11 @@ declare namespace CloudFormation.Types {
      */
     StackName?: StackName;
     /**
-     * Returns the template for a change set using the Amazon Resource Name (ARN) or name of the change set. If you specify a name, you must also specify the StackName.
+     * The name or Amazon Resource Name (ARN) of a change set for which AWS CloudFormation returns the associated template. If you specify a name, you must also specify the StackName.
      */
     ChangeSetName?: ChangeSetNameOrId;
     /**
-     * The stage of the template that is returned. Valid values are Original and Processed. The default value is Original.    Original - Use this value to return the user-submitted template.    Processed - Use this value to return the template after all transforms have been processed.  
+     * For templates that include transforms, the stage of the template that AWS CloudFormation returns. To get the user-submitted template, specify Original. To get the template after AWS CloudFormation has processed all transforms, specify Processed.  If the template doesn't include transforms, Original and Processed return the same template. By default, AWS CloudFormation specifies Original. 
      */
     TemplateStage?: TemplateStage;
   }
@@ -758,7 +766,7 @@ declare namespace CloudFormation.Types {
      */
     TemplateBody?: TemplateBody;
     /**
-     * The template type.   For stacks, you can use either the Original or the Processed template type.   For change sets, you can use only the Original template type. After the transforms are processed, you can use the Processed template type.    If you create a change set for a new stack, you must select the template type. 
+     * The stage of the template that you can retrieve. For stacks, the Original and Processed templates are always available. For change sets, the Original template is always available. After AWS CloudFormation finishes creating the change set, the Processed template becomes available.
      */
     StagesAvailable?: StageList;
   }
@@ -810,6 +818,7 @@ declare namespace CloudFormation.Types {
      */
     DeclaredTransforms?: TransformsList;
   }
+  export type Imports = StackName[];
   export type LastUpdatedTime = Date;
   export type LimitName = string;
   export type LimitValue = number;
@@ -846,6 +855,26 @@ declare namespace CloudFormation.Types {
     Exports?: Exports;
     /**
      * If the output exceeds 100 exported output values, a string that identifies the next page of exports. If there is no additional page, this value is null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListImportsInput {
+    /**
+     * The name of the exported output value. AWS CloudFormation returns the stack names that are importing this value. 
+     */
+    ExportName: ExportName;
+    /**
+     * A string (provided by the ListImports response output) that identifies the next page of stacks that are importing the specified exported output value. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListImportsOutput {
+    /**
+     * A list of stack names that are importing the specified exported output value. 
+     */
+    Imports?: Imports;
+    /**
+     * A string that identifies the next page of exports. If there is no additional page, this value is null.
      */
     NextToken?: NextToken;
   }

@@ -1456,6 +1456,12 @@ declare namespace S3.Types {
     Key: ObjectKey;
     RequestPayer?: RequestPayer;
   }
+  export interface GlacierJobParameters {
+    /**
+     * Glacier retrieval tier at which the restore will be processed.
+     */
+    Tier: Tier;
+  }
   export interface Grant {
     Grantee?: Grantee;
     /**
@@ -2589,6 +2595,10 @@ declare namespace S3.Types {
      * Lifetime of the active copy in days
      */
     Days: Days;
+    /**
+     * Glacier related prameters pertaining to this job.
+     */
+    GlacierJobParameters?: GlacierJobParameters;
   }
   export type Role = string;
   export interface RoutingRule {
@@ -2658,6 +2668,7 @@ declare namespace S3.Types {
   }
   export type TargetGrants = TargetGrant[];
   export type TargetPrefix = string;
+  export type Tier = "Standard"|"Bulk"|"Expedited"|string;
   export type Token = string;
   export type TopicArn = string;
   export interface TopicConfiguration {

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.6-->
+<!--LATEST=2.7.7-->
 <!--ENTRYINSERT-->
+
+## 2.7.7
+* feature: CloudFormation: List-imports API is to list all stacks of user's namespace that are using a specific output.
+* feature: Glacier: Allow customers to retrieve their data with different tiers.
+* feature: Route53: Expand current IPAddress field to accept IPv6 address.
+* feature: S3: Allow customers to specify different restore tiers when accessing their data.
 
 ## 2.7.6
 * feature: CloudTrail: This release of AWS CloudTrail supports configuring your trail with event selectors. Use event selectors to specify the type of events that you want your trails to log. You can configure event selectors to log read-only, write-only, or all events. CloudTrail supports logging Amazon S3 object level APIs such as GetObject, DeleteObject, and PutObject. You can configure event selectors for your trail to log object level operations.
