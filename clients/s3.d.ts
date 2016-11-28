@@ -513,6 +513,13 @@ declare class S3 extends S3Customizations {
    */
   waitFor(state: "objectNotExists", callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
 }
+declare namespace S3 {
+  export type ManagedUpload = S3Customizations.ManagedUpload;
+  export namespace ManagedUpload {
+    export type ManagedUploadOptions = S3Customizations.ManagedUpload.ManagedUploadOptions;
+    export type SendData = S3Customizations.ManagedUpload.SendData;
+  }
+}
 declare namespace S3.Types {
   export type AbortDate = Date;
   export interface AbortIncompleteMultipartUpload {

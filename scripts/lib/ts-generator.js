@@ -379,6 +379,69 @@ TSGenerator.prototype.includeCustomService = function includeCustomService(servi
 };
 
 /**
+ * Generates typings for classes that live on a service client namespace.
+ */
+TSGenerator.prototype.generateNamespaceTypes = function generateNamespaceTypes(serviceIdentifier, serviceCustomClassName, className, tabCount) {
+    // read service customization file
+    var serviceCustomizationsPath = path.join(this._sdkRootDir, 'lib', 'services', serviceIdentifier + '.d.ts');
+    var serviceCustomizations = fs.readFileSync(serviceCustomizationsPath).toString();
+    // split lines
+    var serviceLines = serviceCustomizations.split('\n');
+    var code = '';
+    var bracketCount = 0;
+    var exportStructure = [];
+    var exportsFound = false;
+    var typeRegex = new RegExp('export[\\s]([\\w]+)[\\s]([\\w\\d]+)');
+    for (var i = 0, iLen = serviceLines.length; i < iLen; i++) {
+        var line = serviceLines[i];
+        // find exported namespace
+        if (line.indexOf('export namespace ' + serviceCustomClassName) >= 0) {
+            code += this.tabs(tabCount++) + 'declare namespace ' + className + ' {\n';
+            exportsFound = true;
+            exportStructure.push(serviceCustomClassName);
+            bracketCount++;
+            continue;
+        }
+        // Skip further work if we haven't found the exported namespace yet
+        if (!exportsFound) {
+            continue;
+        }
+        var typeMatch = line.match(typeRegex);
+        if (typeMatch) {
+            // type should be 'type' or 'namespace', but treat 'interface' and 'module' same as 'namespace'
+            var type = typeMatch[1];
+            var name = typeMatch[2];
+
+            code += this.tabs(tabCount) + 'export ' + type + ' ' + name;
+            if (type === 'type') {
+                // if type is 'type', set value
+                code += ' = ' + exportStructure.join('.') + '.' + name + ';\n';
+            } else {
+                // type was (likely) a namespace, define members
+                code += ' {\n';
+                exportStructure.push(name);
+                tabCount++;
+            }
+
+            // check for open bracket
+            if (line.indexOf('{') >= 0) {
+                bracketCount++;
+            }
+        }
+
+        // check for closing brackets, break out of loop if we've finished iterating over the export
+        if (exportsFound && line.indexOf('}') >= 0) {
+            exportStructure.pop();
+            code += this.tabs(--tabCount) + '}\n';
+            if (--bracketCount === 0) {
+                break;
+            }
+        }
+    }
+    return code;
+};
+
+/**
  * Generates the typings for a service based on the serviceIdentifier.
  */
 TSGenerator.prototype.processServiceModel = function processServiceModel(serviceIdentifier) {
@@ -434,6 +497,11 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     });
 
     code += '}\n';
+    // check for static classes on namespace
+    if (hasCustomizations) {
+        // find anything exported
+        code += this.generateNamespaceTypes(serviceIdentifier, parentClass, className, 0);
+    }
 
     // shapes should map to interfaces
     var modelShapes = model.shapes;

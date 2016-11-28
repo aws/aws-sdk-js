@@ -140,6 +140,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   waitFor(state: "tableNotExists", callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
 }
+declare namespace DynamoDB {
+  export type DocumentClient = DynamoDBCustomizations.DocumentClient;
+  export namespace DocumentClient {
+    export type binaryType = DynamoDBCustomizations.DocumentClient.binaryType;
+    export type DocumentClientOptions = DynamoDBCustomizations.DocumentClient.DocumentClientOptions;
+    export type CreateSetOptions = DynamoDBCustomizations.DocumentClient.CreateSetOptions;
+  }
+}
 declare namespace DynamoDB.Types {
   export type AttributeAction = "ADD"|"PUT"|"DELETE"|string;
   export interface AttributeDefinition {

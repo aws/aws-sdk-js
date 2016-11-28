@@ -20,7 +20,7 @@ export class Signer {
     getSignedUrl(options: SignerOptions, callback: (err: Error, url: string) => void): void;
 }
 
-interface SignerOptions {
+export interface SignerOptions {
     /**
      * The URL to which the signature will grant access. Required unless you pass in a full policy.
      */
@@ -35,13 +35,13 @@ interface SignerOptions {
     policy?: string;
 }
 
-interface CustomPolicy {
+export interface CustomPolicy {
     "CloudFront-Policy": string;
     "CloudFront-Key-Pair-Id": string;
     "CloudFront-Signature": string;
 }
 
-interface CannedPolicy {
+export interface CannedPolicy {
     "CloudFront-Expires": number;
     "CloudFront-Key-Pair-Id": string;
     "CloudFront-Signature": string;

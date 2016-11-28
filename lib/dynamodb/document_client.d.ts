@@ -3,8 +3,10 @@ import * as DCInterfaces from './document_client_interfaces';
 import * as stream from 'stream';
 import {Request} from '../request';
 import {AWSError} from '../error';
+
 interface File {}
 interface Blob {}
+
 /**
  * The document client simplifies working with items in Amazon DynamoDB
  * by abstracting away the notion of attribute values. This abstraction
@@ -15,12 +17,12 @@ export class DocumentClient {
     /**
      * Creates a DynamoDB document client with a set of configuration options.
      */
-    constructor(options?: DocumentClientOptions)
+    constructor(options?: DocumentClient.DocumentClientOptions)
 
     /**
      * Creates a set of elements inferring the type of set from the type of the first element. Amazon DynamoDB currently supports the number sets, string sets, and binary sets. For more information about DynamoDB data types see the documentation on the Amazon DynamoDB Data Model.
      */
-    createSet(list: number[]|string[]|binaryType[], options: CreateSetOptions): void
+    createSet(list: number[]|string[]|DocumentClient.binaryType[], options: DocumentClient.CreateSetOptions): void
     /**
      * Returns the attributes of one or more items from one or more tables by delegating to AWS.DynamoDB.batchGetItem().
      */
@@ -55,21 +57,23 @@ export class DocumentClient {
     update(params: DCInterfaces.UpdateItemInput, callback?: (err: AWSError, data: DCInterfaces.UpdateItemOutput) => void): Request<DCInterfaces.UpdateItemOutput, AWSError>;
 }
 
-interface DocumentClientOptions {
-    /**
-     * An optional map of parameters to bind to every request sent by this service object. 
-     */
-    params?: {[key: string]: any}
-    /**
-     * An optional pre-configured instance of the AWS.DynamoDB service object to use for requests. The object may bound parameters used by the document client. 
-     */
-    service?: DynamoDB
-}
+export namespace DocumentClient {
+    export interface DocumentClientOptions {
+        /**
+         * An optional map of parameters to bind to every request sent by this service object. 
+         */
+        params?: {[key: string]: any}
+        /**
+         * An optional pre-configured instance of the AWS.DynamoDB service object to use for requests. The object may bound parameters used by the document client. 
+         */
+        service?: DynamoDB
+    }
 
-interface CreateSetOptions {
-    /**
-     * Set to true if you want to validate the type of each element in the set. Defaults to false.
-     */
-    validate?: boolean
+    export interface CreateSetOptions {
+        /**
+         * Set to true if you want to validate the type of each element in the set. Defaults to false.
+         */
+        validate?: boolean
+    }
+    export type binaryType = Buffer|File|Blob|ArrayBuffer|DataView|Int8Array|Uint8Array|Uint8ClampedArray|Int16Array|Uint16Array|Int32Array|Uint32Array|Float32Array|Float64Array|stream.Stream;
 }
-type binaryType = Buffer|File|Blob|ArrayBuffer|DataView|Int8Array|Uint8Array|Uint8ClampedArray|Int16Array|Uint16Array|Int32Array|Uint32Array|Float32Array|Float64Array|stream.Stream;

@@ -252,6 +252,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   waitFor(state: "streamingDistributionDeployed", callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
 }
+declare namespace CloudFront {
+  export type Signer = CloudFrontCustomizations.Signer;
+  export namespace Signer {
+    export type SingerOptions = CloudFrontCustomizations.Signer.SingerOptions;
+    export type CustomPolicy = CloudFrontCustomizations.Signer.CustomPolicy;
+    export type CannedPolicy = CloudFrontCustomizations.Signer.CannedPolicy;
+  }
+}
 declare namespace CloudFront.Types {
   export interface ActiveTrustedSigners {
     /**
