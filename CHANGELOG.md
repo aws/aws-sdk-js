@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.7-->
+<!--LATEST=2.7.8-->
 <!--ENTRYINSERT-->
+
+## 2.7.8
+* feature: core: The SDK will now automatically provide a version 4 UUID for top-level operation parameters that are modeled with the `idempotencyToken` flag. Users may continue to provide their own tokens.
+* feature: S3: Updates the AWS.S3 API to the latest version.
 
 ## 2.7.7
 * feature: CloudFormation: List-imports API is to list all stacks of user's namespace that are using a specific output.

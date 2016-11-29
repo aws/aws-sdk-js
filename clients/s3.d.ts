@@ -61,6 +61,14 @@ declare class S3 extends S3Customizations {
    */
   deleteBucket(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
+   */
+  deleteBucketAnalyticsConfiguration(params: S3.Types.DeleteBucketAnalyticsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
+   */
+  deleteBucketAnalyticsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the cors configuration information set for the bucket.
    */
   deleteBucketCors(params: S3.Types.DeleteBucketCorsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -69,6 +77,14 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an inventory configuration (identified by the inventory ID) from the bucket.
+   */
+  deleteBucketInventoryConfiguration(params: S3.Types.DeleteBucketInventoryConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an inventory configuration (identified by the inventory ID) from the bucket.
+   */
+  deleteBucketInventoryConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the lifecycle configuration from the bucket.
    */
   deleteBucketLifecycle(params: S3.Types.DeleteBucketLifecycleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -76,6 +92,14 @@ declare class S3 extends S3Customizations {
    * Deletes the lifecycle configuration from the bucket.
    */
   deleteBucketLifecycle(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a metrics configuration (specified by the metrics configuration ID) from the bucket.
+   */
+  deleteBucketMetricsConfiguration(params: S3.Types.DeleteBucketMetricsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a metrics configuration (specified by the metrics configuration ID) from the bucket.
+   */
+  deleteBucketMetricsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the policy from the bucket.
    */
@@ -117,6 +141,14 @@ declare class S3 extends S3Customizations {
    */
   deleteObject(callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
   /**
+   * Removes the tag-set from an existing object.
+   */
+  deleteObjectTagging(params: S3.Types.DeleteObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectTaggingOutput) => void): Request<S3.Types.DeleteObjectTaggingOutput, AWSError>;
+  /**
+   * Removes the tag-set from an existing object.
+   */
+  deleteObjectTagging(callback?: (err: AWSError, data: S3.Types.DeleteObjectTaggingOutput) => void): Request<S3.Types.DeleteObjectTaggingOutput, AWSError>;
+  /**
    * This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.
    */
   deleteObjects(params: S3.Types.DeleteObjectsRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectsOutput) => void): Request<S3.Types.DeleteObjectsOutput, AWSError>;
@@ -141,6 +173,14 @@ declare class S3 extends S3Customizations {
    */
   getBucketAcl(callback?: (err: AWSError, data: S3.Types.GetBucketAclOutput) => void): Request<S3.Types.GetBucketAclOutput, AWSError>;
   /**
+   * Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
+   */
+  getBucketAnalyticsConfiguration(params: S3.Types.GetBucketAnalyticsConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketAnalyticsConfigurationOutput) => void): Request<S3.Types.GetBucketAnalyticsConfigurationOutput, AWSError>;
+  /**
+   * Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
+   */
+  getBucketAnalyticsConfiguration(callback?: (err: AWSError, data: S3.Types.GetBucketAnalyticsConfigurationOutput) => void): Request<S3.Types.GetBucketAnalyticsConfigurationOutput, AWSError>;
+  /**
    * Returns the cors configuration for the bucket.
    */
   getBucketCors(params: S3.Types.GetBucketCorsRequest, callback?: (err: AWSError, data: S3.Types.GetBucketCorsOutput) => void): Request<S3.Types.GetBucketCorsOutput, AWSError>;
@@ -148,6 +188,14 @@ declare class S3 extends S3Customizations {
    * Returns the cors configuration for the bucket.
    */
   getBucketCors(callback?: (err: AWSError, data: S3.Types.GetBucketCorsOutput) => void): Request<S3.Types.GetBucketCorsOutput, AWSError>;
+  /**
+   * Returns an inventory configuration (identified by the inventory ID) from the bucket.
+   */
+  getBucketInventoryConfiguration(params: S3.Types.GetBucketInventoryConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketInventoryConfigurationOutput) => void): Request<S3.Types.GetBucketInventoryConfigurationOutput, AWSError>;
+  /**
+   * Returns an inventory configuration (identified by the inventory ID) from the bucket.
+   */
+  getBucketInventoryConfiguration(callback?: (err: AWSError, data: S3.Types.GetBucketInventoryConfigurationOutput) => void): Request<S3.Types.GetBucketInventoryConfigurationOutput, AWSError>;
   /**
    * Deprecated, see the GetBucketLifecycleConfiguration operation.
    */
@@ -180,6 +228,14 @@ declare class S3 extends S3Customizations {
    * Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner.
    */
   getBucketLogging(callback?: (err: AWSError, data: S3.Types.GetBucketLoggingOutput) => void): Request<S3.Types.GetBucketLoggingOutput, AWSError>;
+  /**
+   * Gets a metrics configuration (specified by the metrics configuration ID) from the bucket.
+   */
+  getBucketMetricsConfiguration(params: S3.Types.GetBucketMetricsConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketMetricsConfigurationOutput) => void): Request<S3.Types.GetBucketMetricsConfigurationOutput, AWSError>;
+  /**
+   * Gets a metrics configuration (specified by the metrics configuration ID) from the bucket.
+   */
+  getBucketMetricsConfiguration(callback?: (err: AWSError, data: S3.Types.GetBucketMetricsConfigurationOutput) => void): Request<S3.Types.GetBucketMetricsConfigurationOutput, AWSError>;
   /**
    * Deprecated, see the GetBucketNotificationConfiguration operation.
    */
@@ -261,6 +317,14 @@ declare class S3 extends S3Customizations {
    */
   getObjectAcl(callback?: (err: AWSError, data: S3.Types.GetObjectAclOutput) => void): Request<S3.Types.GetObjectAclOutput, AWSError>;
   /**
+   * Returns the tag-set of an object.
+   */
+  getObjectTagging(params: S3.Types.GetObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.GetObjectTaggingOutput) => void): Request<S3.Types.GetObjectTaggingOutput, AWSError>;
+  /**
+   * Returns the tag-set of an object.
+   */
+  getObjectTagging(callback?: (err: AWSError, data: S3.Types.GetObjectTaggingOutput) => void): Request<S3.Types.GetObjectTaggingOutput, AWSError>;
+  /**
    * Return torrent files from a bucket.
    */
   getObjectTorrent(params: S3.Types.GetObjectTorrentRequest, callback?: (err: AWSError, data: S3.Types.GetObjectTorrentOutput) => void): Request<S3.Types.GetObjectTorrentOutput, AWSError>;
@@ -284,6 +348,30 @@ declare class S3 extends S3Customizations {
    * The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object.
    */
   headObject(callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
+  /**
+   * Lists the analytics configurations for the bucket.
+   */
+  listBucketAnalyticsConfigurations(params: S3.Types.ListBucketAnalyticsConfigurationsRequest, callback?: (err: AWSError, data: S3.Types.ListBucketAnalyticsConfigurationsOutput) => void): Request<S3.Types.ListBucketAnalyticsConfigurationsOutput, AWSError>;
+  /**
+   * Lists the analytics configurations for the bucket.
+   */
+  listBucketAnalyticsConfigurations(callback?: (err: AWSError, data: S3.Types.ListBucketAnalyticsConfigurationsOutput) => void): Request<S3.Types.ListBucketAnalyticsConfigurationsOutput, AWSError>;
+  /**
+   * Returns a list of inventory configurations for the bucket.
+   */
+  listBucketInventoryConfigurations(params: S3.Types.ListBucketInventoryConfigurationsRequest, callback?: (err: AWSError, data: S3.Types.ListBucketInventoryConfigurationsOutput) => void): Request<S3.Types.ListBucketInventoryConfigurationsOutput, AWSError>;
+  /**
+   * Returns a list of inventory configurations for the bucket.
+   */
+  listBucketInventoryConfigurations(callback?: (err: AWSError, data: S3.Types.ListBucketInventoryConfigurationsOutput) => void): Request<S3.Types.ListBucketInventoryConfigurationsOutput, AWSError>;
+  /**
+   * Lists the metrics configurations for the bucket.
+   */
+  listBucketMetricsConfigurations(params: S3.Types.ListBucketMetricsConfigurationsRequest, callback?: (err: AWSError, data: S3.Types.ListBucketMetricsConfigurationsOutput) => void): Request<S3.Types.ListBucketMetricsConfigurationsOutput, AWSError>;
+  /**
+   * Lists the metrics configurations for the bucket.
+   */
+  listBucketMetricsConfigurations(callback?: (err: AWSError, data: S3.Types.ListBucketMetricsConfigurationsOutput) => void): Request<S3.Types.ListBucketMetricsConfigurationsOutput, AWSError>;
   /**
    * Returns a list of all buckets owned by the authenticated sender of the request.
    */
@@ -345,6 +433,14 @@ declare class S3 extends S3Customizations {
    */
   putBucketAcl(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Sets an analytics configuration for the bucket (specified by the analytics configuration ID).
+   */
+  putBucketAnalyticsConfiguration(params: S3.Types.PutBucketAnalyticsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets an analytics configuration for the bucket (specified by the analytics configuration ID).
+   */
+  putBucketAnalyticsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Sets the cors configuration for a bucket.
    */
   putBucketCors(params: S3.Types.PutBucketCorsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -352,6 +448,14 @@ declare class S3 extends S3Customizations {
    * Sets the cors configuration for a bucket.
    */
   putBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds an inventory configuration (identified by the inventory ID) from the bucket.
+   */
+  putBucketInventoryConfiguration(params: S3.Types.PutBucketInventoryConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds an inventory configuration (identified by the inventory ID) from the bucket.
+   */
+  putBucketInventoryConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deprecated, see the PutBucketLifecycleConfiguration operation.
    */
@@ -376,6 +480,14 @@ declare class S3 extends S3Customizations {
    * Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner.
    */
   putBucketLogging(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets a metrics configuration (specified by the metrics configuration ID) for the bucket.
+   */
+  putBucketMetricsConfiguration(params: S3.Types.PutBucketMetricsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets a metrics configuration (specified by the metrics configuration ID) for the bucket.
+   */
+  putBucketMetricsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deprecated, see the PutBucketNotificationConfiguraiton operation.
    */
@@ -456,6 +568,14 @@ declare class S3 extends S3Customizations {
    * uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket
    */
   putObjectAcl(callback?: (err: AWSError, data: S3.Types.PutObjectAclOutput) => void): Request<S3.Types.PutObjectAclOutput, AWSError>;
+  /**
+   * Sets the supplied tag-set to an object that already exists in a bucket
+   */
+  putObjectTagging(params: S3.Types.PutObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
+  /**
+   * Sets the supplied tag-set to an object that already exists in a bucket
+   */
+  putObjectTagging(callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
   /**
    * Restores an archived copy of an object back into Amazon S3
    */
@@ -545,12 +665,78 @@ declare namespace S3.Types {
     Grants?: Grants;
     Owner?: Owner;
   }
+  export type AccountId = string;
   export type AllowedHeader = string;
   export type AllowedHeaders = AllowedHeader[];
   export type AllowedMethod = string;
   export type AllowedMethods = AllowedMethod[];
   export type AllowedOrigin = string;
   export type AllowedOrigins = AllowedOrigin[];
+  export interface AnalyticsAndOperator {
+    /**
+     * The prefix to use when evaluating an AND predicate.
+     */
+    Prefix?: Prefix;
+    /**
+     * The list of tags to use when evaluating an AND predicate.
+     */
+    Tags?: TagSet;
+  }
+  export interface AnalyticsConfiguration {
+    /**
+     * The identifier used to represent an analytics configuration.
+     */
+    Id: AnalyticsId;
+    /**
+     * The filter used to describe a set of objects for analyses. A filter must have exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator). If no filter is provided, all objects will be considered in any analysis.
+     */
+    Filter?: AnalyticsFilter;
+    /**
+     * If present, it indicates that data related to access patterns will be collected and made available to analyze the tradeoffs between different storage classes.
+     */
+    StorageClassAnalysis: StorageClassAnalysis;
+  }
+  export type AnalyticsConfigurationList = AnalyticsConfiguration[];
+  export interface AnalyticsExportDestination {
+    /**
+     * A destination signifying output to an S3 bucket.
+     */
+    S3BucketDestination: AnalyticsS3BucketDestination;
+  }
+  export interface AnalyticsFilter {
+    /**
+     * The prefix to use when evaluating an analytics filter.
+     */
+    Prefix?: Prefix;
+    /**
+     * The tag to use when evaluating an analytics filter.
+     */
+    Tag?: Tag;
+    /**
+     * A conjunction (logical AND) of predicates, which is used in evaluating an analytics filter. The operator must have at least two predicates.
+     */
+    And?: AnalyticsAndOperator;
+  }
+  export type AnalyticsId = string;
+  export interface AnalyticsS3BucketDestination {
+    /**
+     * The file format used when exporting data to Amazon S3.
+     */
+    Format: AnalyticsS3ExportFileFormat;
+    /**
+     * The account ID that owns the destination bucket. If no account ID is provided, the owner will not be validated prior to exporting data.
+     */
+    BucketAccountId?: AccountId;
+    /**
+     * The Amazon resource name (ARN) of the bucket to which data is exported.
+     */
+    Bucket: BucketName;
+    /**
+     * The prefix to use when exporting data. The exported data begins with this prefix.
+     */
+    Prefix?: Prefix;
+  }
+  export type AnalyticsS3ExportFileFormat = "CSV"|string;
   export type Body = Buffer|Uint8Array|Blob|string;
   export interface Bucket {
     /**
@@ -785,6 +971,10 @@ declare namespace S3.Types {
      */
     MetadataDirective?: MetadataDirective;
     /**
+     * Specifies whether the object tag-set are copied from the source object or replaced with tag-set provided in the request.
+     */
+    TaggingDirective?: TaggingDirective;
+    /**
      * The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
      */
     ServerSideEncryption?: ServerSideEncryption;
@@ -825,6 +1015,10 @@ declare namespace S3.Types {
      */
     CopySourceSSECustomerKeyMD5?: CopySourceSSECustomerKeyMD5;
     RequestPayer?: RequestPayer;
+    /**
+     * The tag-set for the object destination object this value must be used in conjunction with the TaggingDirective. The tag-set must be encoded as URL Query parameters
+     */
+    Tagging?: TaggingHeader;
   }
   export interface CopyObjectResult {
     ETag?: ETag;
@@ -1018,11 +1212,41 @@ declare namespace S3.Types {
      */
     Quiet?: Quiet;
   }
+  export interface DeleteBucketAnalyticsConfigurationRequest {
+    /**
+     * The name of the bucket from which an analytics configuration is deleted.
+     */
+    Bucket: BucketName;
+    /**
+     * The identifier used to represent an analytics configuration.
+     */
+    Id: AnalyticsId;
+  }
   export interface DeleteBucketCorsRequest {
     Bucket: BucketName;
   }
+  export interface DeleteBucketInventoryConfigurationRequest {
+    /**
+     * The name of the bucket containing the inventory configuration to delete.
+     */
+    Bucket: BucketName;
+    /**
+     * The ID used to identify the inventory configuration.
+     */
+    Id: InventoryId;
+  }
   export interface DeleteBucketLifecycleRequest {
     Bucket: BucketName;
+  }
+  export interface DeleteBucketMetricsConfigurationRequest {
+    /**
+     * The name of the bucket containing the metrics configuration to delete.
+     */
+    Bucket: BucketName;
+    /**
+     * The ID used to identify the metrics configuration.
+     */
+    Id: MetricsId;
   }
   export interface DeleteBucketPolicyRequest {
     Bucket: BucketName;
@@ -1084,6 +1308,20 @@ declare namespace S3.Types {
      */
     VersionId?: ObjectVersionId;
     RequestPayer?: RequestPayer;
+  }
+  export interface DeleteObjectTaggingOutput {
+    /**
+     * The versionId of the object the tag-set was removed from.
+     */
+    VersionId?: ObjectVersionId;
+  }
+  export interface DeleteObjectTaggingRequest {
+    Bucket: BucketName;
+    Key: ObjectKey;
+    /**
+     * The versionId of the object that the tag-set will be removed from.
+     */
+    VersionId?: ObjectVersionId;
   }
   export interface DeleteObjectsOutput {
     Deleted?: DeletedObjects;
@@ -1175,11 +1413,43 @@ declare namespace S3.Types {
   export interface GetBucketAclRequest {
     Bucket: BucketName;
   }
+  export interface GetBucketAnalyticsConfigurationOutput {
+    /**
+     * The configuration and any analyses for the analytics filter.
+     */
+    AnalyticsConfiguration?: AnalyticsConfiguration;
+  }
+  export interface GetBucketAnalyticsConfigurationRequest {
+    /**
+     * The name of the bucket from which an analytics configuration is retrieved.
+     */
+    Bucket: BucketName;
+    /**
+     * The identifier used to represent an analytics configuration.
+     */
+    Id: AnalyticsId;
+  }
   export interface GetBucketCorsOutput {
     CORSRules?: CORSRules;
   }
   export interface GetBucketCorsRequest {
     Bucket: BucketName;
+  }
+  export interface GetBucketInventoryConfigurationOutput {
+    /**
+     * Specifies the inventory configuration.
+     */
+    InventoryConfiguration?: InventoryConfiguration;
+  }
+  export interface GetBucketInventoryConfigurationRequest {
+    /**
+     * The name of the bucket containing the inventory configuration to retrieve.
+     */
+    Bucket: BucketName;
+    /**
+     * The ID used to identify the inventory configuration.
+     */
+    Id: InventoryId;
   }
   export interface GetBucketLifecycleConfigurationOutput {
     Rules?: LifecycleRules;
@@ -1204,6 +1474,22 @@ declare namespace S3.Types {
   }
   export interface GetBucketLoggingRequest {
     Bucket: BucketName;
+  }
+  export interface GetBucketMetricsConfigurationOutput {
+    /**
+     * Specifies the metrics configuration.
+     */
+    MetricsConfiguration?: MetricsConfiguration;
+  }
+  export interface GetBucketMetricsConfigurationRequest {
+    /**
+     * The name of the bucket containing the metrics configuration to retrieve.
+     */
+    Bucket: BucketName;
+    /**
+     * The ID used to identify the metrics configuration.
+     */
+    Id: MetricsId;
   }
   export interface GetBucketNotificationConfigurationRequest {
     /**
@@ -1377,6 +1663,10 @@ declare namespace S3.Types {
      * The count of parts this object has.
      */
     PartsCount?: PartsCount;
+    /**
+     * The number of tags, if any, on the object.
+     */
+    TagCount?: TagCount;
   }
   export interface GetObjectRequest {
     Bucket: BucketName;
@@ -1446,6 +1736,15 @@ declare namespace S3.Types {
      * Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.
      */
     PartNumber?: PartNumber;
+  }
+  export interface GetObjectTaggingOutput {
+    VersionId?: ObjectVersionId;
+    TagSet: TagSet;
+  }
+  export interface GetObjectTaggingRequest {
+    Bucket: BucketName;
+    Key: ObjectKey;
+    VersionId: ObjectVersionId;
   }
   export interface GetObjectTorrentOutput {
     Body?: Body;
@@ -1660,6 +1959,80 @@ declare namespace S3.Types {
      */
     DisplayName?: DisplayName;
   }
+  export interface InventoryConfiguration {
+    /**
+     * Contains information about where to publish the inventory results.
+     */
+    Destination: InventoryDestination;
+    /**
+     * Specifies whether the inventory is enabled or disabled.
+     */
+    IsEnabled: IsEnabled;
+    /**
+     * Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria.
+     */
+    Filter?: InventoryFilter;
+    /**
+     * The ID used to identify the inventory configuration.
+     */
+    Id: InventoryId;
+    /**
+     * Specifies which object version(s) to included in the inventory results.
+     */
+    IncludedObjectVersions: InventoryIncludedObjectVersions;
+    /**
+     * Contains the optional fields that are included in the inventory results.
+     */
+    OptionalFields?: InventoryOptionalFields;
+    /**
+     * Specifies the schedule for generating inventory results.
+     */
+    Schedule: InventorySchedule;
+  }
+  export type InventoryConfigurationList = InventoryConfiguration[];
+  export interface InventoryDestination {
+    /**
+     * Contains the bucket name, file format, bucket owner (optional), and prefix (optional) where inventory results are published.
+     */
+    S3BucketDestination: InventoryS3BucketDestination;
+  }
+  export interface InventoryFilter {
+    /**
+     * The prefix that an object must have to be included in the inventory results.
+     */
+    Prefix: Prefix;
+  }
+  export type InventoryFormat = "CSV"|string;
+  export type InventoryFrequency = "Daily"|"Weekly"|string;
+  export type InventoryId = string;
+  export type InventoryIncludedObjectVersions = "All"|"Current"|string;
+  export type InventoryOptionalField = "Size"|"LastModifiedDate"|"StorageClass"|"ETag"|"IsMultipartUploaded"|"ReplicationStatus"|string;
+  export type InventoryOptionalFields = InventoryOptionalField[];
+  export interface InventoryS3BucketDestination {
+    /**
+     * The ID of the account that owns the destination bucket.
+     */
+    AccountId?: AccountId;
+    /**
+     * The Amazon resource name (ARN) of the bucket where inventory results will be published.
+     */
+    Bucket: BucketName;
+    /**
+     * Specifies the output format of the inventory results.
+     */
+    Format: InventoryFormat;
+    /**
+     * The prefix that is prepended to all inventory results.
+     */
+    Prefix?: Prefix;
+  }
+  export interface InventorySchedule {
+    /**
+     * Specifies how frequently inventory results are produced.
+     */
+    Frequency: InventoryFrequency;
+  }
+  export type IsEnabled = boolean;
   export type IsLatest = boolean;
   export type IsTruncated = boolean;
   export type KeyCount = number;
@@ -1701,9 +2074,10 @@ declare namespace S3.Types {
      */
     ID?: ID;
     /**
-     * Prefix identifying one or more objects to which the rule applies.
+     * Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.
      */
-    Prefix: Prefix;
+    Prefix?: Prefix;
+    Filter?: LifecycleRuleFilter;
     /**
      * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
      */
@@ -1713,7 +2087,109 @@ declare namespace S3.Types {
     NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
     AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
   }
+  export interface LifecycleRuleAndOperator {
+    Prefix?: Prefix;
+    /**
+     * All of these tags must exist in the object's tag set in order for the rule to apply.
+     */
+    Tags?: TagSet;
+  }
+  export interface LifecycleRuleFilter {
+    /**
+     * Prefix identifying one or more objects to which the rule applies.
+     */
+    Prefix?: Prefix;
+    /**
+     * This tag must exist in the object's tag set in order for the rule to apply.
+     */
+    Tag?: Tag;
+    And?: LifecycleRuleAndOperator;
+  }
   export type LifecycleRules = LifecycleRule[];
+  export interface ListBucketAnalyticsConfigurationsOutput {
+    /**
+     * Indicates whether the returned list of analytics configurations is complete. A value of true indicates that the list is not complete and the NextContinuationToken will be provided for a subsequent request.
+     */
+    IsTruncated?: IsTruncated;
+    /**
+     * The ContinuationToken that represents where this request began.
+     */
+    ContinuationToken?: Token;
+    /**
+     * NextContinuationToken is sent when isTruncated is true, which indicates that there are more analytics configurations to list. The next request must include this NextContinuationToken. The token is obfuscated and is not a usable value.
+     */
+    NextContinuationToken?: NextToken;
+    /**
+     * The list of analytics configurations for a bucket.
+     */
+    AnalyticsConfigurationList?: AnalyticsConfigurationList;
+  }
+  export interface ListBucketAnalyticsConfigurationsRequest {
+    /**
+     * The name of the bucket from which analytics configurations are retrieved.
+     */
+    Bucket: BucketName;
+    /**
+     * The ContinuationToken that represents a placeholder from where this request should begin.
+     */
+    ContinuationToken?: Token;
+  }
+  export interface ListBucketInventoryConfigurationsOutput {
+    /**
+     * If sent in the request, the marker that is used as a starting point for this inventory configuration list response.
+     */
+    ContinuationToken?: Token;
+    /**
+     * The list of inventory configurations for a bucket.
+     */
+    InventoryConfigurationList?: InventoryConfigurationList;
+    /**
+     * Indicates whether the returned list of inventory configurations is truncated in this response. A value of true indicates that the list is truncated.
+     */
+    IsTruncated?: IsTruncated;
+    /**
+     * The marker used to continue this inventory configuration listing. Use the NextContinuationToken from this response to continue the listing in a subsequent request. The continuation token is an opaque value that Amazon S3 understands.
+     */
+    NextContinuationToken?: NextToken;
+  }
+  export interface ListBucketInventoryConfigurationsRequest {
+    /**
+     * The name of the bucket containing the inventory configurations to retrieve.
+     */
+    Bucket: BucketName;
+    /**
+     * The marker used to continue an inventory configuration listing that has been truncated. Use the NextContinuationToken from a previously truncated list response to continue the listing. The continuation token is an opaque value that Amazon S3 understands.
+     */
+    ContinuationToken?: Token;
+  }
+  export interface ListBucketMetricsConfigurationsOutput {
+    /**
+     * Indicates whether the returned list of metrics configurations is complete. A value of true indicates that the list is not complete and the NextContinuationToken will be provided for a subsequent request.
+     */
+    IsTruncated?: IsTruncated;
+    /**
+     * The marker that is used as a starting point for this metrics configuration list response. This value is present if it was sent in the request.
+     */
+    ContinuationToken?: Token;
+    /**
+     * The marker used to continue a metrics configuration listing that has been truncated. Use the NextContinuationToken from a previously truncated list response to continue the listing. The continuation token is an opaque value that Amazon S3 understands.
+     */
+    NextContinuationToken?: NextToken;
+    /**
+     * The list of metrics configurations for a bucket.
+     */
+    MetricsConfigurationList?: MetricsConfigurationList;
+  }
+  export interface ListBucketMetricsConfigurationsRequest {
+    /**
+     * The name of the bucket containing the metrics configurations to retrieve.
+     */
+    Bucket: BucketName;
+    /**
+     * The marker that is used to continue a metrics configuration listing that has been truncated. Use the NextContinuationToken from a previously truncated list response to continue the listing. The continuation token is an opaque value that Amazon S3 understands.
+     */
+    ContinuationToken?: Token;
+  }
   export interface ListBucketsOutput {
     Buckets?: Buckets;
     Owner?: Owner;
@@ -2061,6 +2537,42 @@ declare namespace S3.Types {
   export type MetadataDirective = "COPY"|"REPLACE"|string;
   export type MetadataKey = string;
   export type MetadataValue = string;
+  export interface MetricsAndOperator {
+    /**
+     * The prefix used when evaluating an AND predicate.
+     */
+    Prefix?: Prefix;
+    /**
+     * The list of tags used when evaluating an AND predicate.
+     */
+    Tags?: TagSet;
+  }
+  export interface MetricsConfiguration {
+    /**
+     * The ID used to identify the metrics configuration.
+     */
+    Id: MetricsId;
+    /**
+     * Specifies a metrics configuration filter. The metrics configuration will only include objects that meet the filter's criteria. A filter must be a prefix, a tag, or a conjunction (MetricsAndOperator).
+     */
+    Filter?: MetricsFilter;
+  }
+  export type MetricsConfigurationList = MetricsConfiguration[];
+  export interface MetricsFilter {
+    /**
+     * The prefix used when evaluating a metrics filter.
+     */
+    Prefix?: Prefix;
+    /**
+     * The tag used when evaluating a metrics filter.
+     */
+    Tag?: Tag;
+    /**
+     * A conjunction (logical AND) of predicates, which is used in evaluating a metrics filter. The operator must have at least two predicates, and an object must match all of the predicates in order for the filter to apply.
+     */
+    And?: MetricsAndOperator;
+  }
+  export type MetricsId = string;
   export type MissingMeta = number;
   export interface MultipartUpload {
     /**
@@ -2251,10 +2763,38 @@ declare namespace S3.Types {
      */
     GrantWriteACP?: GrantWriteACP;
   }
+  export interface PutBucketAnalyticsConfigurationRequest {
+    /**
+     * The name of the bucket to which an analytics configuration is stored.
+     */
+    Bucket: BucketName;
+    /**
+     * The identifier used to represent an analytics configuration.
+     */
+    Id: AnalyticsId;
+    /**
+     * The configuration and any analyses for the analytics filter.
+     */
+    AnalyticsConfiguration: AnalyticsConfiguration;
+  }
   export interface PutBucketCorsRequest {
     Bucket: BucketName;
     CORSConfiguration: CORSConfiguration;
     ContentMD5?: ContentMD5;
+  }
+  export interface PutBucketInventoryConfigurationRequest {
+    /**
+     * The name of the bucket where the inventory configuration will be stored.
+     */
+    Bucket: BucketName;
+    /**
+     * The ID used to identify the inventory configuration.
+     */
+    Id: InventoryId;
+    /**
+     * Specifies the inventory configuration.
+     */
+    InventoryConfiguration: InventoryConfiguration;
   }
   export interface PutBucketLifecycleConfigurationRequest {
     Bucket: BucketName;
@@ -2269,6 +2809,20 @@ declare namespace S3.Types {
     Bucket: BucketName;
     BucketLoggingStatus: BucketLoggingStatus;
     ContentMD5?: ContentMD5;
+  }
+  export interface PutBucketMetricsConfigurationRequest {
+    /**
+     * The name of the bucket for which the metrics configuration is set.
+     */
+    Bucket: BucketName;
+    /**
+     * The ID used to identify the metrics configuration.
+     */
+    Id: MetricsId;
+    /**
+     * Specifies the metrics configuration.
+     */
+    MetricsConfiguration: MetricsConfiguration;
   }
   export interface PutBucketNotificationConfigurationRequest {
     Bucket: BucketName;
@@ -2483,6 +3037,20 @@ declare namespace S3.Types {
      */
     SSEKMSKeyId?: SSEKMSKeyId;
     RequestPayer?: RequestPayer;
+    /**
+     * The tag-set for the object. The tag-set must be encoded as URL Query parameters
+     */
+    Tagging?: TaggingHeader;
+  }
+  export interface PutObjectTaggingOutput {
+    VersionId?: ObjectVersionId;
+  }
+  export interface PutObjectTaggingRequest {
+    Bucket: BucketName;
+    Key: ObjectKey;
+    VersionId: ObjectVersionId;
+    ContentMD5?: ContentMD5;
+    Tagging: Tagging;
   }
   export type QueueArn = string;
   export interface QueueConfiguration {
@@ -2643,6 +3211,23 @@ declare namespace S3.Types {
   export type Size = number;
   export type StartAfter = string;
   export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|string;
+  export interface StorageClassAnalysis {
+    /**
+     * A container used to describe how data related to the storage class analysis should be exported.
+     */
+    DataExport?: StorageClassAnalysisDataExport;
+  }
+  export interface StorageClassAnalysisDataExport {
+    /**
+     * The version of the output schema to use when exporting data. Must be V_1.
+     */
+    OutputSchemaVersion: StorageClassAnalysisSchemaVersion;
+    /**
+     * The place to store the data for an analysis.
+     */
+    Destination: AnalyticsExportDestination;
+  }
+  export type StorageClassAnalysisSchemaVersion = "V_1"|string;
   export type Suffix = string;
   export interface Tag {
     /**
@@ -2654,10 +3239,13 @@ declare namespace S3.Types {
      */
     Value: Value;
   }
+  export type TagCount = number;
   export type TagSet = Tag[];
   export interface Tagging {
     TagSet: TagSet;
   }
+  export type TaggingDirective = "COPY"|"REPLACE"|string;
+  export type TaggingHeader = string;
   export type TargetBucket = string;
   export interface TargetGrant {
     Grantee?: Grantee;
