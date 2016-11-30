@@ -362,6 +362,7 @@ if AWS.util.isNode()
       </AssumeRoleResponse>
       '''
       creds = new AWS.SharedIniFileCredentials()
+      expect(creds.roleArn).to.equal('arn')
       creds.refresh (err) ->
         expect(creds.accessKeyId).to.equal('KEY')
         expect(creds.secretAccessKey).to.equal('SECRET')
