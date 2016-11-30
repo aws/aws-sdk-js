@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Polly",
-  "description": "Adds `AWS.Polly.Presigner` to create presigned urls for `synthesizeSpeech`."
-}

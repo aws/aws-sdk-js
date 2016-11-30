@@ -41,6 +41,7 @@ export import MachineLearning = require('./machinelearning');
 export import MarketplaceCommerceAnalytics = require('./marketplacecommerceanalytics');
 export import MobileAnalytics = require('./mobileanalytics');
 export import OpsWorks = require('./opsworks');
+export import Polly = require('./polly');
 export import RDS = require('./rds');
 export import Redshift = require('./redshift');
 export import Route53 = require('./route53');

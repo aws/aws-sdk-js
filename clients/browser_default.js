@@ -45,6 +45,7 @@ module.exports = {
   MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
   MobileAnalytics: require('./mobileanalytics'),
   OpsWorks: require('./opsworks'),
+  Polly: require('./polly'),
   RDS: require('./rds'),
   Redshift: require('./redshift'),
   Route53: require('./route53'),
