@@ -1,6 +1,105 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.6.3-->
+<!--LATEST=2.7.8-->
 <!--ENTRYINSERT-->
+
+## 2.7.8
+* feature: core: The SDK will now automatically provide a version 4 UUID for top-level operation parameters that are modeled with the `idempotencyToken` flag. Users may continue to provide their own tokens.
+* feature: S3: Updates the AWS.S3 API to the latest version.
+
+## 2.7.7
+* feature: CloudFormation: List-imports API is to list all stacks of user's namespace that are using a specific output.
+* feature: Glacier: Allow customers to retrieve their data with different tiers.
+* feature: Route53: Expand current IPAddress field to accept IPv6 address.
+* feature: S3: Allow customers to specify different restore tiers when accessing their data.
+
+## 2.7.6
+* feature: CloudTrail: This release of AWS CloudTrail supports configuring your trail with event selectors. Use event selectors to specify the type of events that you want your trails to log. You can configure event selectors to log read-only, write-only, or all events. CloudTrail supports logging Amazon S3 object level APIs such as GetObject, DeleteObject, and PutObject. You can configure event selectors for your trail to log object level operations.
+* feature: ECS: ECS will include a new field named `version` in API responses relating to tasks and container instances. Version is a number that increments every time a change has been made to the associated resource. Users replicating their ECS resource state can use the version field reported by the ECS APIs to determine if their local state is fresh.
+
+## 2.7.5
+* bugfix: TypeScript: Stubs DOM interfaces and removes type reference to node.
+* feature: ElasticTranscoder: Support for multiple media input files that can be stitched together.
+* feature: Lambda: Adds support for Environment variables.
+* feature: Gamelift: Provide the ability to remote access into GameLift managed servers.
+* feature: EMR: Automatic Scaling of EMR clusters based on metrics. Adds support for cancelling a pending Amazon EMR step.
+* feature: ApplicationAutoScaling: Adds support for a new target resource (EMR Instance Groups) as a scalable target.
+
+## 2.7.4
+* feature: MarketplaceMetering: Allows third parties to send metering records.
+* feature: SQS: Updates the latest version of the SQS API.
+* feature: CloudWatch: Amazon CloudWatch now supports Percentiles as a statistical function.
+* feature: APIGateway: Allows defining an encoding for the API per content type in order to support 'binary' use case.
+
+## 2.7.3
+* feature: Route53: Adds support for cross account VPC association.
+* feature: ServiceCatalog: This release enables Service Catalog users to perform administer operations via API.
+
+## 2.7.2
+* feature: ElastiCache: Additional parameter to 2 create apis to provide an auth Token for Redis.
+* feature: DirectoryService: Adds support for SchemaExtensions.
+* feature: Kinesis: Adds DescribeLimits API which displays customer's current shard limit and the number of open shards that are being used. Also adds a 'display stream creation timestamp' feature to DescribeStream API.
+
+## 2.7.1
+* feature: CognitoIdentityServiceProvider: Adds schema attributes to CreateUserPool.
+* bugfix: TypeScript: Updates definitions to work when `noImplicitAny` and `strictNullChecks` are set to `true`.
+
+## 2.7.0
+* feature: TypeScript: Adds typescript definition files to the SDK.
+* feature: CloudWatchLogs: Amazon CloudWatch Metrics to Logs is a capability that helps pivot from your logs-extracted metrics directly to the corresponding logs.
+
+## 2.6.15
+* feature: DirectConnect: AWS Direct Connect provides three new APIs to support basic tagging on Direct Connect resources.
+
+## 2.6.14
+* feature: SES: Amazon Simple Email Service (Amazon SES) now enables you to track your bounce, complaint, delivery, sent, and rejected email metrics with fine-grained granularity.
+
+## 2.6.13
+* feature: CloudFormation: Adding ResourcesToSkip parameter to ContinueUpdateRollback API, adding support for ListExports, new ChangeSet types and Transforms.
+
+## 2.6.12
+* feature: CredentialProviderChain: Adds promise support for the `resolve` method on the AWS.CredentialProviderChain class. Corresponding promise method is called `resolvePromise`.
+* feature: Credentials: Adds promise support for the `get` and `refresh` methods of the AWS.Credentials class. Corresponding promise methods are called `getPromise` and `refreshPromise`.
+* feature: ManagedUpload: Adds promise support for S3.ManagedUpload. Calling `s3.upload(params).promise()` will return a promise.
+* feature: SMS: AWS Server Migration Service (SMS) is an agentless service which makes it easier and faster for you to migrate thousands of on-premises workloads to AWS. AWS SMS allows you to automate, schedule, and track incremental replications of live server volumes, making it easier for you to coordinate large-scale server migrations.
+
+## 2.6.11
+* feature: Budgets: Adds the AWS Budgets service API via AWS.Budgets.
+
+## 2.6.10
+* feature: CloudFront: Ability to use Amazon CloudFront to deliver your content both via IPv6 and IPv4 using HTTP/HTTPS.
+* feature: IoT: Updates IoT API to the latest available version.
+* feature: RDS: Updates RDS to support accessing other AWS services by gassociating an IAM role with necessary permissions to your DB cluster.
+
+## 2.6.9
+* bugfix: s3: Propagate an error from a stream to s3.upload callback #1169
+* feature: S3: Adds support for using dualstack with accelerate endpoints.
+* feature: ACM: This change allows users to import third-party SSL/TLS certificates into ACM.
+* feature: ElasticBeanstalk: Adds CodeCommit integraion. DescribeApplicationVersions updated to support pagination.
+* feature: GameLift: New APIs to protect game developer resource (builds, alias, fleets, instances, game sessions and player sessions) against abuse.
+
+## 2.6.8
+* feature: ECR: DescribeImages is a new api used to expose image metadata which today includes image size and image creation timestamp.
+* feature: ElastiCache: Elasticache is launching a new major engine release of Redis, 3.2 (providing stability updates and new command sets over 2.8), as well as ElasticSupport for enabling Redis Cluster in 3.2, which provides support for multiple node groups to horizontally scale data, as well as superior engine failover capabilities.
+
+## 2.6.7
+* feature: CognitoIdentityServiceProvider: Added new operation "AdminCreateUser" that creates a new user in the specified user pool and sends a welcome message via email or phone (SMS).
+* feature: Route53: Retries PriorRequestNotComplete errors.
+
+## 2.6.6
+* feature: EC2: Adding support for EC2 Convertible RIs and the EC2 RI regional benefit.
+* feature: S3: S3 API update with partNumber extension and a bug fix to address list-objects command failing when a bucket is marked with request-pays.
+
+## 2.6.5
+* bugfix: apiVersion: Fixes an issue where some service clients would fail to instantiate if an older apiVersion was specified.
+* feature: CloudFormation: Adds support for specifying an IAM service role for CloudFormation stack operations.
+
+## 2.6.4
+* bugfix: Browser: Updates `url` and `querystring` dependencies to be controlled by the SDK instead of tools like browserify or webpack.
+* bugfix: Config: Fixes an issue where specifying service-specific config on the global AWS.config object would fail if the service had not yet been instantiated.
+* feature: CodeDeploy: AWS CodeDeploy now integrates with Amazon CloudWatch alarms, making it possible to stop a deployment if there is a change in the state of a specified alarm for a number of consecutive periods, as specified in the alarm threshold. AWS CodeDeploy also now supports automatically rolling back a deployment if certain conditions are met, such as a deployment failure or an activated alarm.
+* feature: EMR: Added support for Security Configurations which can be used to enable encryption at-rest and in-transit for certain applications on Amazon EMR.
+* feature: RDS: Provide local time zone support for AWS RDS SqlServer database instances.
+* feature: Redshift: This release of Amazon Redshift introduces Enhanced VPC Routing. When you use Amazon Redshift Enhanced VPC Routing, Amazon Redshift forces all COPY and UNLOAD traffic between your cluster and your data repositories through your Amazon VPC.
 
 ## 2.6.3
 * bugfix: Node_Https: Fixes an issue caused when https.globalAgent is set to false.

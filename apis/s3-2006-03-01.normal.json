@@ -9,7 +9,8 @@
     "serviceAbbreviation": "Amazon S3",
     "serviceFullName": "Amazon Simple Storage Service",
     "signatureVersion": "s3",
-    "timestampFormat": "rfc822"
+    "timestampFormat": "rfc822",
+    "uid": "s3-2006-03-01"
   },
   "operations": {
     "AbortMultipartUpload": {
@@ -120,6 +121,17 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html",
       "documentation": "Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted."
     },
+    "DeleteBucketAnalyticsConfiguration": {
+      "name": "DeleteBucketAnalyticsConfiguration",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/{Bucket}?analytics"
+      },
+      "input": {
+        "shape": "DeleteBucketAnalyticsConfigurationRequest"
+      },
+      "documentation": "Deletes an analytics configuration for the bucket (specified by the analytics configuration ID)."
+    },
     "DeleteBucketCors": {
       "name": "DeleteBucketCors",
       "http": {
@@ -132,6 +144,17 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html",
       "documentation": "Deletes the cors configuration information set for the bucket."
     },
+    "DeleteBucketInventoryConfiguration": {
+      "name": "DeleteBucketInventoryConfiguration",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/{Bucket}?inventory"
+      },
+      "input": {
+        "shape": "DeleteBucketInventoryConfigurationRequest"
+      },
+      "documentation": "Deletes an inventory configuration (identified by the inventory ID) from the bucket."
+    },
     "DeleteBucketLifecycle": {
       "name": "DeleteBucketLifecycle",
       "http": {
@@ -143,6 +166,17 @@
       },
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html",
       "documentation": "Deletes the lifecycle configuration from the bucket."
+    },
+    "DeleteBucketMetricsConfiguration": {
+      "name": "DeleteBucketMetricsConfiguration",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/{Bucket}?metrics"
+      },
+      "input": {
+        "shape": "DeleteBucketMetricsConfigurationRequest"
+      },
+      "documentation": "Deletes a metrics configuration (specified by the metrics configuration ID) from the bucket."
     },
     "DeleteBucketPolicy": {
       "name": "DeleteBucketPolicy",
@@ -206,6 +240,20 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html",
       "documentation": "Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects."
     },
+    "DeleteObjectTagging": {
+      "name": "DeleteObjectTagging",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/{Bucket}/{Key+}?tagging"
+      },
+      "input": {
+        "shape": "DeleteObjectTaggingRequest"
+      },
+      "output": {
+        "shape": "DeleteObjectTaggingOutput"
+      },
+      "documentation": "Removes the tag-set from an existing object."
+    },
     "DeleteObjects": {
       "name": "DeleteObjects",
       "http": {
@@ -251,6 +299,20 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html",
       "documentation": "Gets the access control policy for the bucket."
     },
+    "GetBucketAnalyticsConfiguration": {
+      "name": "GetBucketAnalyticsConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?analytics"
+      },
+      "input": {
+        "shape": "GetBucketAnalyticsConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetBucketAnalyticsConfigurationOutput"
+      },
+      "documentation": "Gets an analytics configuration for the bucket (specified by the analytics configuration ID)."
+    },
     "GetBucketCors": {
       "name": "GetBucketCors",
       "http": {
@@ -265,6 +327,20 @@
       },
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html",
       "documentation": "Returns the cors configuration for the bucket."
+    },
+    "GetBucketInventoryConfiguration": {
+      "name": "GetBucketInventoryConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?inventory"
+      },
+      "input": {
+        "shape": "GetBucketInventoryConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetBucketInventoryConfigurationOutput"
+      },
+      "documentation": "Returns an inventory configuration (identified by the inventory ID) from the bucket."
     },
     "GetBucketLifecycle": {
       "name": "GetBucketLifecycle",
@@ -325,6 +401,20 @@
       },
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlogging.html",
       "documentation": "Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner."
+    },
+    "GetBucketMetricsConfiguration": {
+      "name": "GetBucketMetricsConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?metrics"
+      },
+      "input": {
+        "shape": "GetBucketMetricsConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetBucketMetricsConfigurationOutput"
+      },
+      "documentation": "Gets a metrics configuration (specified by the metrics configuration ID) from the bucket."
     },
     "GetBucketNotification": {
       "name": "GetBucketNotification",
@@ -485,6 +575,20 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html",
       "documentation": "Returns the access control list (ACL) of an object."
     },
+    "GetObjectTagging": {
+      "name": "GetObjectTagging",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}/{Key+}?tagging"
+      },
+      "input": {
+        "shape": "GetObjectTaggingRequest"
+      },
+      "output": {
+        "shape": "GetObjectTaggingOutput"
+      },
+      "documentation": "Returns the tag-set of an object."
+    },
     "GetObjectTorrent": {
       "name": "GetObjectTorrent",
       "http": {
@@ -536,6 +640,48 @@
       ],
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectHEAD.html",
       "documentation": "The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object."
+    },
+    "ListBucketAnalyticsConfigurations": {
+      "name": "ListBucketAnalyticsConfigurations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?analytics"
+      },
+      "input": {
+        "shape": "ListBucketAnalyticsConfigurationsRequest"
+      },
+      "output": {
+        "shape": "ListBucketAnalyticsConfigurationsOutput"
+      },
+      "documentation": "Lists the analytics configurations for the bucket."
+    },
+    "ListBucketInventoryConfigurations": {
+      "name": "ListBucketInventoryConfigurations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?inventory"
+      },
+      "input": {
+        "shape": "ListBucketInventoryConfigurationsRequest"
+      },
+      "output": {
+        "shape": "ListBucketInventoryConfigurationsOutput"
+      },
+      "documentation": "Returns a list of inventory configurations for the bucket."
+    },
+    "ListBucketMetricsConfigurations": {
+      "name": "ListBucketMetricsConfigurations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?metrics"
+      },
+      "input": {
+        "shape": "ListBucketMetricsConfigurationsRequest"
+      },
+      "output": {
+        "shape": "ListBucketMetricsConfigurationsOutput"
+      },
+      "documentation": "Lists the metrics configurations for the bucket."
     },
     "ListBuckets": {
       "name": "ListBuckets",
@@ -659,6 +805,17 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTacl.html",
       "documentation": "Sets the permissions on a bucket using access control lists (ACL)."
     },
+    "PutBucketAnalyticsConfiguration": {
+      "name": "PutBucketAnalyticsConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}?analytics"
+      },
+      "input": {
+        "shape": "PutBucketAnalyticsConfigurationRequest"
+      },
+      "documentation": "Sets an analytics configuration for the bucket (specified by the analytics configuration ID)."
+    },
     "PutBucketCors": {
       "name": "PutBucketCors",
       "http": {
@@ -670,6 +827,17 @@
       },
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html",
       "documentation": "Sets the cors configuration for a bucket."
+    },
+    "PutBucketInventoryConfiguration": {
+      "name": "PutBucketInventoryConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}?inventory"
+      },
+      "input": {
+        "shape": "PutBucketInventoryConfigurationRequest"
+      },
+      "documentation": "Adds an inventory configuration (identified by the inventory ID) from the bucket."
     },
     "PutBucketLifecycle": {
       "name": "PutBucketLifecycle",
@@ -706,6 +874,17 @@
       },
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlogging.html",
       "documentation": "Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner."
+    },
+    "PutBucketMetricsConfiguration": {
+      "name": "PutBucketMetricsConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}?metrics"
+      },
+      "input": {
+        "shape": "PutBucketMetricsConfigurationRequest"
+      },
+      "documentation": "Sets a metrics configuration (specified by the metrics configuration ID) for the bucket."
     },
     "PutBucketNotification": {
       "name": "PutBucketNotification",
@@ -836,6 +1015,20 @@
       ],
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html",
       "documentation": "uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket"
+    },
+    "PutObjectTagging": {
+      "name": "PutObjectTagging",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}/{Key+}?tagging"
+      },
+      "input": {
+        "shape": "PutObjectTaggingRequest"
+      },
+      "output": {
+        "shape": "PutObjectTaggingOutput"
+      },
+      "documentation": "Sets the supplied tag-set to an object that already exists in a bucket"
     },
     "RestoreObject": {
       "name": "RestoreObject",
@@ -971,6 +1164,9 @@
         }
       }
     },
+    "AccountId": {
+      "type": "string"
+    },
     "AllowedHeader": {
       "type": "string"
     },
@@ -1000,6 +1196,112 @@
         "shape": "AllowedOrigin"
       },
       "flattened": true
+    },
+    "AnalyticsAndOperator": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "The prefix to use when evaluating an AND predicate."
+        },
+        "Tags": {
+          "shape": "TagSet",
+          "documentation": "The list of tags to use when evaluating an AND predicate.",
+          "flattened": true,
+          "locationName": "Tag"
+        }
+      }
+    },
+    "AnalyticsConfiguration": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "StorageClassAnalysis"
+      ],
+      "members": {
+        "Id": {
+          "shape": "AnalyticsId",
+          "documentation": "The identifier used to represent an analytics configuration."
+        },
+        "Filter": {
+          "shape": "AnalyticsFilter",
+          "documentation": "The filter used to describe a set of objects for analyses. A filter must have exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator). If no filter is provided, all objects will be considered in any analysis."
+        },
+        "StorageClassAnalysis": {
+          "shape": "StorageClassAnalysis",
+          "documentation": "If present, it indicates that data related to access patterns will be collected and made available to analyze the tradeoffs between different storage classes."
+        }
+      }
+    },
+    "AnalyticsConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "AnalyticsConfiguration"
+      },
+      "flattened": true
+    },
+    "AnalyticsExportDestination": {
+      "type": "structure",
+      "required": [
+        "S3BucketDestination"
+      ],
+      "members": {
+        "S3BucketDestination": {
+          "shape": "AnalyticsS3BucketDestination",
+          "documentation": "A destination signifying output to an S3 bucket."
+        }
+      }
+    },
+    "AnalyticsFilter": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "The prefix to use when evaluating an analytics filter."
+        },
+        "Tag": {
+          "shape": "Tag",
+          "documentation": "The tag to use when evaluating an analytics filter."
+        },
+        "And": {
+          "shape": "AnalyticsAndOperator",
+          "documentation": "A conjunction (logical AND) of predicates, which is used in evaluating an analytics filter. The operator must have at least two predicates."
+        }
+      }
+    },
+    "AnalyticsId": {
+      "type": "string"
+    },
+    "AnalyticsS3BucketDestination": {
+      "type": "structure",
+      "required": [
+        "Format",
+        "Bucket"
+      ],
+      "members": {
+        "Format": {
+          "shape": "AnalyticsS3ExportFileFormat",
+          "documentation": "The file format used when exporting data to Amazon S3."
+        },
+        "BucketAccountId": {
+          "shape": "AccountId",
+          "documentation": "The account ID that owns the destination bucket. If no account ID is provided, the owner will not be validated prior to exporting data."
+        },
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The Amazon resource name (ARN) of the bucket to which data is exported."
+        },
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "The prefix to use when exporting data. The exported data begins with this prefix."
+        }
+      }
+    },
+    "AnalyticsS3ExportFileFormat": {
+      "type": "string",
+      "enum": [
+        "CSV"
+      ]
     },
     "Body": {
       "type": "blob"
@@ -1535,6 +1837,12 @@
           "location": "header",
           "locationName": "x-amz-metadata-directive"
         },
+        "TaggingDirective": {
+          "shape": "TaggingDirective",
+          "documentation": "Specifies whether the object tag-set are copied from the source object or replaced with tag-set provided in the request.",
+          "location": "header",
+          "locationName": "x-amz-tagging-directive"
+        },
         "ServerSideEncryption": {
           "shape": "ServerSideEncryption",
           "documentation": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
@@ -1599,6 +1907,12 @@
           "shape": "RequestPayer",
           "location": "header",
           "locationName": "x-amz-request-payer"
+        },
+        "Tagging": {
+          "shape": "TaggingHeader",
+          "documentation": "The tag-set for the object destination object this value must be used in conjunction with the TaggingDirective. The tag-set must be encoded as URL Query parameters",
+          "location": "header",
+          "locationName": "x-amz-tagging"
         }
       }
     },
@@ -1960,6 +2274,27 @@
         }
       }
     },
+    "DeleteBucketAnalyticsConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Id"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket from which an analytics configuration is deleted.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Id": {
+          "shape": "AnalyticsId",
+          "documentation": "The identifier used to represent an analytics configuration.",
+          "location": "querystring",
+          "locationName": "id"
+        }
+      }
+    },
     "DeleteBucketCorsRequest": {
       "type": "structure",
       "required": [
@@ -1973,6 +2308,27 @@
         }
       }
     },
+    "DeleteBucketInventoryConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Id"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket containing the inventory configuration to delete.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Id": {
+          "shape": "InventoryId",
+          "documentation": "The ID used to identify the inventory configuration.",
+          "location": "querystring",
+          "locationName": "id"
+        }
+      }
+    },
     "DeleteBucketLifecycleRequest": {
       "type": "structure",
       "required": [
@@ -1983,6 +2339,27 @@
           "shape": "BucketName",
           "location": "uri",
           "locationName": "Bucket"
+        }
+      }
+    },
+    "DeleteBucketMetricsConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Id"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket containing the metrics configuration to delete.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Id": {
+          "shape": "MetricsId",
+          "documentation": "The ID used to identify the metrics configuration.",
+          "location": "querystring",
+          "locationName": "id"
         }
       }
     },
@@ -2143,6 +2520,42 @@
           "shape": "RequestPayer",
           "location": "header",
           "locationName": "x-amz-request-payer"
+        }
+      }
+    },
+    "DeleteObjectTaggingOutput": {
+      "type": "structure",
+      "members": {
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "documentation": "The versionId of the object the tag-set was removed from.",
+          "location": "header",
+          "locationName": "x-amz-version-id"
+        }
+      }
+    },
+    "DeleteObjectTaggingRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Key"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Key": {
+          "shape": "ObjectKey",
+          "location": "uri",
+          "locationName": "Key"
+        },
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "documentation": "The versionId of the object that the tag-set will be removed from.",
+          "location": "querystring",
+          "locationName": "versionId"
         }
       }
     },
@@ -2422,6 +2835,37 @@
         }
       }
     },
+    "GetBucketAnalyticsConfigurationOutput": {
+      "type": "structure",
+      "members": {
+        "AnalyticsConfiguration": {
+          "shape": "AnalyticsConfiguration",
+          "documentation": "The configuration and any analyses for the analytics filter."
+        }
+      },
+      "payload": "AnalyticsConfiguration"
+    },
+    "GetBucketAnalyticsConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Id"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket from which an analytics configuration is retrieved.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Id": {
+          "shape": "AnalyticsId",
+          "documentation": "The identifier used to represent an analytics configuration.",
+          "location": "querystring",
+          "locationName": "id"
+        }
+      }
+    },
     "GetBucketCorsOutput": {
       "type": "structure",
       "members": {
@@ -2441,6 +2885,37 @@
           "shape": "BucketName",
           "location": "uri",
           "locationName": "Bucket"
+        }
+      }
+    },
+    "GetBucketInventoryConfigurationOutput": {
+      "type": "structure",
+      "members": {
+        "InventoryConfiguration": {
+          "shape": "InventoryConfiguration",
+          "documentation": "Specifies the inventory configuration."
+        }
+      },
+      "payload": "InventoryConfiguration"
+    },
+    "GetBucketInventoryConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Id"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket containing the inventory configuration to retrieve.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Id": {
+          "shape": "InventoryId",
+          "documentation": "The ID used to identify the inventory configuration.",
+          "location": "querystring",
+          "locationName": "id"
         }
       }
     },
@@ -2527,6 +3002,37 @@
           "shape": "BucketName",
           "location": "uri",
           "locationName": "Bucket"
+        }
+      }
+    },
+    "GetBucketMetricsConfigurationOutput": {
+      "type": "structure",
+      "members": {
+        "MetricsConfiguration": {
+          "shape": "MetricsConfiguration",
+          "documentation": "Specifies the metrics configuration."
+        }
+      },
+      "payload": "MetricsConfiguration"
+    },
+    "GetBucketMetricsConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Id"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket containing the metrics configuration to retrieve.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Id": {
+          "shape": "MetricsId",
+          "documentation": "The ID used to identify the metrics configuration.",
+          "location": "querystring",
+          "locationName": "id"
         }
       }
     },
@@ -2893,6 +3399,18 @@
           "shape": "ReplicationStatus",
           "location": "header",
           "locationName": "x-amz-replication-status"
+        },
+        "PartsCount": {
+          "shape": "PartsCount",
+          "documentation": "The count of parts this object has.",
+          "location": "header",
+          "locationName": "x-amz-mp-parts-count"
+        },
+        "TagCount": {
+          "shape": "TagCount",
+          "documentation": "The number of tags, if any, on the object.",
+          "location": "header",
+          "locationName": "x-amz-tagging-count"
         }
       },
       "payload": "Body"
@@ -3008,6 +3526,53 @@
           "shape": "RequestPayer",
           "location": "header",
           "locationName": "x-amz-request-payer"
+        },
+        "PartNumber": {
+          "shape": "PartNumber",
+          "documentation": "Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.",
+          "location": "querystring",
+          "locationName": "partNumber"
+        }
+      }
+    },
+    "GetObjectTaggingOutput": {
+      "type": "structure",
+      "required": [
+        "TagSet"
+      ],
+      "members": {
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "location": "header",
+          "locationName": "x-amz-version-id"
+        },
+        "TagSet": {
+          "shape": "TagSet"
+        }
+      }
+    },
+    "GetObjectTaggingRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Key",
+        "VersionId"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Key": {
+          "shape": "ObjectKey",
+          "location": "uri",
+          "locationName": "Key"
+        },
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "location": "uri",
+          "locationName": "VersionId"
         }
       }
     },
@@ -3047,6 +3612,18 @@
           "shape": "RequestPayer",
           "location": "header",
           "locationName": "x-amz-request-payer"
+        }
+      }
+    },
+    "GlacierJobParameters": {
+      "type": "structure",
+      "required": [
+        "Tier"
+      ],
+      "members": {
+        "Tier": {
+          "shape": "Tier",
+          "documentation": "Glacier retrieval tier at which the restore will be processed."
         }
       }
     },
@@ -3273,6 +3850,12 @@
           "shape": "ReplicationStatus",
           "location": "header",
           "locationName": "x-amz-replication-status"
+        },
+        "PartsCount": {
+          "shape": "PartsCount",
+          "documentation": "The count of parts this object has.",
+          "location": "header",
+          "locationName": "x-amz-mp-parts-count"
         }
       }
     },
@@ -3351,6 +3934,12 @@
           "shape": "RequestPayer",
           "location": "header",
           "locationName": "x-amz-request-payer"
+        },
+        "PartNumber": {
+          "shape": "PartNumber",
+          "documentation": "Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' HEAD request for the part specified. Useful querying about the size of the part and the number of parts in this object.",
+          "location": "querystring",
+          "locationName": "partNumber"
         }
       }
     },
@@ -3405,6 +3994,158 @@
           "documentation": "Name of the Principal."
         }
       }
+    },
+    "InventoryConfiguration": {
+      "type": "structure",
+      "required": [
+        "Destination",
+        "IsEnabled",
+        "Id",
+        "IncludedObjectVersions",
+        "Schedule"
+      ],
+      "members": {
+        "Destination": {
+          "shape": "InventoryDestination",
+          "documentation": "Contains information about where to publish the inventory results."
+        },
+        "IsEnabled": {
+          "shape": "IsEnabled",
+          "documentation": "Specifies whether the inventory is enabled or disabled."
+        },
+        "Filter": {
+          "shape": "InventoryFilter",
+          "documentation": "Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria."
+        },
+        "Id": {
+          "shape": "InventoryId",
+          "documentation": "The ID used to identify the inventory configuration."
+        },
+        "IncludedObjectVersions": {
+          "shape": "InventoryIncludedObjectVersions",
+          "documentation": "Specifies which object version(s) to included in the inventory results."
+        },
+        "OptionalFields": {
+          "shape": "InventoryOptionalFields",
+          "documentation": "Contains the optional fields that are included in the inventory results."
+        },
+        "Schedule": {
+          "shape": "InventorySchedule",
+          "documentation": "Specifies the schedule for generating inventory results."
+        }
+      }
+    },
+    "InventoryConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "InventoryConfiguration"
+      },
+      "flattened": true
+    },
+    "InventoryDestination": {
+      "type": "structure",
+      "required": [
+        "S3BucketDestination"
+      ],
+      "members": {
+        "S3BucketDestination": {
+          "shape": "InventoryS3BucketDestination",
+          "documentation": "Contains the bucket name, file format, bucket owner (optional), and prefix (optional) where inventory results are published."
+        }
+      }
+    },
+    "InventoryFilter": {
+      "type": "structure",
+      "required": [
+        "Prefix"
+      ],
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "The prefix that an object must have to be included in the inventory results."
+        }
+      }
+    },
+    "InventoryFormat": {
+      "type": "string",
+      "enum": [
+        "CSV"
+      ]
+    },
+    "InventoryFrequency": {
+      "type": "string",
+      "enum": [
+        "Daily",
+        "Weekly"
+      ]
+    },
+    "InventoryId": {
+      "type": "string"
+    },
+    "InventoryIncludedObjectVersions": {
+      "type": "string",
+      "enum": [
+        "All",
+        "Current"
+      ]
+    },
+    "InventoryOptionalField": {
+      "type": "string",
+      "enum": [
+        "Size",
+        "LastModifiedDate",
+        "StorageClass",
+        "ETag",
+        "IsMultipartUploaded",
+        "ReplicationStatus"
+      ]
+    },
+    "InventoryOptionalFields": {
+      "type": "list",
+      "member": {
+        "shape": "InventoryOptionalField",
+        "locationName": "Field"
+      }
+    },
+    "InventoryS3BucketDestination": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Format"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "The ID of the account that owns the destination bucket."
+        },
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The Amazon resource name (ARN) of the bucket where inventory results will be published."
+        },
+        "Format": {
+          "shape": "InventoryFormat",
+          "documentation": "Specifies the output format of the inventory results."
+        },
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "The prefix that is prepended to all inventory results."
+        }
+      }
+    },
+    "InventorySchedule": {
+      "type": "structure",
+      "required": [
+        "Frequency"
+      ],
+      "members": {
+        "Frequency": {
+          "shape": "InventoryFrequency",
+          "documentation": "Specifies how frequently inventory results are produced."
+        }
+      }
+    },
+    "IsEnabled": {
+      "type": "boolean"
     },
     "IsLatest": {
       "type": "boolean"
@@ -3491,7 +4232,6 @@
     "LifecycleRule": {
       "type": "structure",
       "required": [
-        "Prefix",
         "Status"
       ],
       "members": {
@@ -3504,7 +4244,11 @@
         },
         "Prefix": {
           "shape": "Prefix",
-          "documentation": "Prefix identifying one or more objects to which the rule applies."
+          "documentation": "Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.",
+          "deprecated": true
+        },
+        "Filter": {
+          "shape": "LifecycleRuleFilter"
         },
         "Status": {
           "shape": "ExpirationStatus",
@@ -3526,12 +4270,170 @@
         }
       }
     },
+    "LifecycleRuleAndOperator": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix"
+        },
+        "Tags": {
+          "shape": "TagSet",
+          "documentation": "All of these tags must exist in the object's tag set in order for the rule to apply.",
+          "flattened": true,
+          "locationName": "Tag"
+        }
+      },
+      "documentation": "This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator."
+    },
+    "LifecycleRuleFilter": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "Prefix identifying one or more objects to which the rule applies."
+        },
+        "Tag": {
+          "shape": "Tag",
+          "documentation": "This tag must exist in the object's tag set in order for the rule to apply."
+        },
+        "And": {
+          "shape": "LifecycleRuleAndOperator"
+        }
+      },
+      "documentation": "The Filter is used to identify objects that a Lifecycle Rule applies to. A Filter must have exactly one of Prefix, Tag, or And specified."
+    },
     "LifecycleRules": {
       "type": "list",
       "member": {
         "shape": "LifecycleRule"
       },
       "flattened": true
+    },
+    "ListBucketAnalyticsConfigurationsOutput": {
+      "type": "structure",
+      "members": {
+        "IsTruncated": {
+          "shape": "IsTruncated",
+          "documentation": "Indicates whether the returned list of analytics configurations is complete. A value of true indicates that the list is not complete and the NextContinuationToken will be provided for a subsequent request."
+        },
+        "ContinuationToken": {
+          "shape": "Token",
+          "documentation": "The ContinuationToken that represents where this request began."
+        },
+        "NextContinuationToken": {
+          "shape": "NextToken",
+          "documentation": "NextContinuationToken is sent when isTruncated is true, which indicates that there are more analytics configurations to list. The next request must include this NextContinuationToken. The token is obfuscated and is not a usable value."
+        },
+        "AnalyticsConfigurationList": {
+          "shape": "AnalyticsConfigurationList",
+          "documentation": "The list of analytics configurations for a bucket.",
+          "locationName": "AnalyticsConfiguration"
+        }
+      }
+    },
+    "ListBucketAnalyticsConfigurationsRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket from which analytics configurations are retrieved.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "ContinuationToken": {
+          "shape": "Token",
+          "documentation": "The ContinuationToken that represents a placeholder from where this request should begin.",
+          "location": "querystring",
+          "locationName": "continuation-token"
+        }
+      }
+    },
+    "ListBucketInventoryConfigurationsOutput": {
+      "type": "structure",
+      "members": {
+        "ContinuationToken": {
+          "shape": "Token",
+          "documentation": "If sent in the request, the marker that is used as a starting point for this inventory configuration list response."
+        },
+        "InventoryConfigurationList": {
+          "shape": "InventoryConfigurationList",
+          "documentation": "The list of inventory configurations for a bucket.",
+          "locationName": "InventoryConfiguration"
+        },
+        "IsTruncated": {
+          "shape": "IsTruncated",
+          "documentation": "Indicates whether the returned list of inventory configurations is truncated in this response. A value of true indicates that the list is truncated."
+        },
+        "NextContinuationToken": {
+          "shape": "NextToken",
+          "documentation": "The marker used to continue this inventory configuration listing. Use the NextContinuationToken from this response to continue the listing in a subsequent request. The continuation token is an opaque value that Amazon S3 understands."
+        }
+      }
+    },
+    "ListBucketInventoryConfigurationsRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket containing the inventory configurations to retrieve.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "ContinuationToken": {
+          "shape": "Token",
+          "documentation": "The marker used to continue an inventory configuration listing that has been truncated. Use the NextContinuationToken from a previously truncated list response to continue the listing. The continuation token is an opaque value that Amazon S3 understands.",
+          "location": "querystring",
+          "locationName": "continuation-token"
+        }
+      }
+    },
+    "ListBucketMetricsConfigurationsOutput": {
+      "type": "structure",
+      "members": {
+        "IsTruncated": {
+          "shape": "IsTruncated",
+          "documentation": "Indicates whether the returned list of metrics configurations is complete. A value of true indicates that the list is not complete and the NextContinuationToken will be provided for a subsequent request."
+        },
+        "ContinuationToken": {
+          "shape": "Token",
+          "documentation": "The marker that is used as a starting point for this metrics configuration list response. This value is present if it was sent in the request."
+        },
+        "NextContinuationToken": {
+          "shape": "NextToken",
+          "documentation": "The marker used to continue a metrics configuration listing that has been truncated. Use the NextContinuationToken from a previously truncated list response to continue the listing. The continuation token is an opaque value that Amazon S3 understands."
+        },
+        "MetricsConfigurationList": {
+          "shape": "MetricsConfigurationList",
+          "documentation": "The list of metrics configurations for a bucket.",
+          "locationName": "MetricsConfiguration"
+        }
+      }
+    },
+    "ListBucketMetricsConfigurationsRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket containing the metrics configurations to retrieve.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "ContinuationToken": {
+          "shape": "Token",
+          "documentation": "The marker that is used to continue a metrics configuration listing that has been truncated. Use the NextContinuationToken from a previously truncated list response to continue the listing. The continuation token is an opaque value that Amazon S3 understands.",
+          "location": "querystring",
+          "locationName": "continuation-token"
+        }
+      }
     },
     "ListBucketsOutput": {
       "type": "structure",
@@ -3819,6 +4721,12 @@
           "documentation": "Limits the response to keys that begin with the specified prefix.",
           "location": "querystring",
           "locationName": "prefix"
+        },
+        "RequestPayer": {
+          "shape": "RequestPayer",
+          "documentation": "Confirms that the requester knows that she or he will be charged for the list objects request. Bucket owners need not specify this parameter in their requests.",
+          "location": "header",
+          "locationName": "x-amz-request-payer"
         }
       }
     },
@@ -3928,6 +4836,12 @@
           "documentation": "StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket",
           "location": "querystring",
           "locationName": "start-after"
+        },
+        "RequestPayer": {
+          "shape": "RequestPayer",
+          "documentation": "Confirms that the requester knows that she or he will be charged for the list objects request in V2 style. Bucket owners need not specify this parameter in their requests.",
+          "location": "header",
+          "locationName": "x-amz-request-payer"
         }
       }
     },
@@ -4113,6 +5027,64 @@
       "type": "string"
     },
     "MetadataValue": {
+      "type": "string"
+    },
+    "MetricsAndOperator": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "The prefix used when evaluating an AND predicate."
+        },
+        "Tags": {
+          "shape": "TagSet",
+          "documentation": "The list of tags used when evaluating an AND predicate.",
+          "flattened": true,
+          "locationName": "Tag"
+        }
+      }
+    },
+    "MetricsConfiguration": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MetricsId",
+          "documentation": "The ID used to identify the metrics configuration."
+        },
+        "Filter": {
+          "shape": "MetricsFilter",
+          "documentation": "Specifies a metrics configuration filter. The metrics configuration will only include objects that meet the filter's criteria. A filter must be a prefix, a tag, or a conjunction (MetricsAndOperator)."
+        }
+      }
+    },
+    "MetricsConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "MetricsConfiguration"
+      },
+      "flattened": true
+    },
+    "MetricsFilter": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "The prefix used when evaluating a metrics filter."
+        },
+        "Tag": {
+          "shape": "Tag",
+          "documentation": "The tag used when evaluating a metrics filter."
+        },
+        "And": {
+          "shape": "MetricsAndOperator",
+          "documentation": "A conjunction (logical AND) of predicates, which is used in evaluating a metrics filter. The operator must have at least two predicates, and an object must match all of the predicates in order for the filter to apply."
+        }
+      }
+    },
+    "MetricsId": {
       "type": "string"
     },
     "MissingMeta": {
@@ -4455,6 +5427,9 @@
       },
       "flattened": true
     },
+    "PartsCount": {
+      "type": "integer"
+    },
     "Payer": {
       "type": "string",
       "enum": [
@@ -4571,6 +5546,37 @@
       },
       "payload": "AccessControlPolicy"
     },
+    "PutBucketAnalyticsConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Id",
+        "AnalyticsConfiguration"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket to which an analytics configuration is stored.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Id": {
+          "shape": "AnalyticsId",
+          "documentation": "The identifier used to represent an analytics configuration.",
+          "location": "querystring",
+          "locationName": "id"
+        },
+        "AnalyticsConfiguration": {
+          "shape": "AnalyticsConfiguration",
+          "documentation": "The configuration and any analyses for the analytics filter.",
+          "locationName": "AnalyticsConfiguration",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        }
+      },
+      "payload": "AnalyticsConfiguration"
+    },
     "PutBucketCorsRequest": {
       "type": "structure",
       "required": [
@@ -4597,6 +5603,37 @@
         }
       },
       "payload": "CORSConfiguration"
+    },
+    "PutBucketInventoryConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Id",
+        "InventoryConfiguration"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket where the inventory configuration will be stored.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Id": {
+          "shape": "InventoryId",
+          "documentation": "The ID used to identify the inventory configuration.",
+          "location": "querystring",
+          "locationName": "id"
+        },
+        "InventoryConfiguration": {
+          "shape": "InventoryConfiguration",
+          "documentation": "Specifies the inventory configuration.",
+          "locationName": "InventoryConfiguration",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        }
+      },
+      "payload": "InventoryConfiguration"
     },
     "PutBucketLifecycleConfigurationRequest": {
       "type": "structure",
@@ -4671,6 +5708,37 @@
         }
       },
       "payload": "BucketLoggingStatus"
+    },
+    "PutBucketMetricsConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Id",
+        "MetricsConfiguration"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "The name of the bucket for which the metrics configuration is set.",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Id": {
+          "shape": "MetricsId",
+          "documentation": "The ID used to identify the metrics configuration.",
+          "location": "querystring",
+          "locationName": "id"
+        },
+        "MetricsConfiguration": {
+          "shape": "MetricsConfiguration",
+          "documentation": "Specifies the metrics configuration.",
+          "locationName": "MetricsConfiguration",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        }
+      },
+      "payload": "MetricsConfiguration"
     },
     "PutBucketNotificationConfigurationRequest": {
       "type": "structure",
@@ -5181,9 +6249,64 @@
           "shape": "RequestPayer",
           "location": "header",
           "locationName": "x-amz-request-payer"
+        },
+        "Tagging": {
+          "shape": "TaggingHeader",
+          "documentation": "The tag-set for the object. The tag-set must be encoded as URL Query parameters",
+          "location": "header",
+          "locationName": "x-amz-tagging"
         }
       },
       "payload": "Body"
+    },
+    "PutObjectTaggingOutput": {
+      "type": "structure",
+      "members": {
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "location": "header",
+          "locationName": "x-amz-version-id"
+        }
+      }
+    },
+    "PutObjectTaggingRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "Key",
+        "Tagging",
+        "VersionId"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Key": {
+          "shape": "ObjectKey",
+          "location": "uri",
+          "locationName": "Key"
+        },
+        "VersionId": {
+          "shape": "ObjectVersionId",
+          "location": "uri",
+          "locationName": "VersionId"
+        },
+        "ContentMD5": {
+          "shape": "ContentMD5",
+          "location": "header",
+          "locationName": "Content-MD5"
+        },
+        "Tagging": {
+          "shape": "Tagging",
+          "locationName": "Tagging",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        }
+      },
+      "payload": "Tagging"
     },
     "QueueArn": {
       "type": "string"
@@ -5462,6 +6585,10 @@
         "Days": {
           "shape": "Days",
           "documentation": "Lifetime of the active copy in days"
+        },
+        "GlacierJobParameters": {
+          "shape": "GlacierJobParameters",
+          "documentation": "Glacier related prameters pertaining to this job."
         }
       }
     },
@@ -5579,6 +6706,38 @@
         "STANDARD_IA"
       ]
     },
+    "StorageClassAnalysis": {
+      "type": "structure",
+      "members": {
+        "DataExport": {
+          "shape": "StorageClassAnalysisDataExport",
+          "documentation": "A container used to describe how data related to the storage class analysis should be exported."
+        }
+      }
+    },
+    "StorageClassAnalysisDataExport": {
+      "type": "structure",
+      "required": [
+        "OutputSchemaVersion",
+        "Destination"
+      ],
+      "members": {
+        "OutputSchemaVersion": {
+          "shape": "StorageClassAnalysisSchemaVersion",
+          "documentation": "The version of the output schema to use when exporting data. Must be V_1."
+        },
+        "Destination": {
+          "shape": "AnalyticsExportDestination",
+          "documentation": "The place to store the data for an analysis."
+        }
+      }
+    },
+    "StorageClassAnalysisSchemaVersion": {
+      "type": "string",
+      "enum": [
+        "V_1"
+      ]
+    },
     "Suffix": {
       "type": "string"
     },
@@ -5599,6 +6758,9 @@
         }
       }
     },
+    "TagCount": {
+      "type": "integer"
+    },
     "TagSet": {
       "type": "list",
       "member": {
@@ -5616,6 +6778,16 @@
           "shape": "TagSet"
         }
       }
+    },
+    "TaggingDirective": {
+      "type": "string",
+      "enum": [
+        "COPY",
+        "REPLACE"
+      ]
+    },
+    "TaggingHeader": {
+      "type": "string"
     },
     "TargetBucket": {
       "type": "string"
@@ -5641,6 +6813,14 @@
     },
     "TargetPrefix": {
       "type": "string"
+    },
+    "Tier": {
+      "type": "string",
+      "enum": [
+        "Standard",
+        "Bulk",
+        "Expedited"
+      ]
     },
     "Token": {
       "type": "string"

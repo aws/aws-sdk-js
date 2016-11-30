@@ -80,6 +80,7 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
   if (!modelVersions) {
       throw new Error('Unable to get models for ' + modelName);
   }
+  var obsoleteVersions = serviceMetadata.versions || [];
   var versionNumbers = Object.keys(modelVersions);
   var tab = '  ';
   var code = '';
@@ -88,7 +89,7 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
   code += 'var Service = require(\'../lib/service\');\n';
   code += 'var apiLoader = require(\'../lib/api_loader\');\n\n';
   code += 'apiLoader.services[\'' + serviceName +'\'] = {};\n';
-  code += 'AWS.' + className + ' = Service.defineService(\'' + serviceName + '\', [\'' + versionNumbers.join('\', \'') + '\']);\n';
+  code += 'AWS.' + className + ' = Service.defineService(\'' + serviceName + '\', [\'' + [].concat(obsoleteVersions, versionNumbers).sort().join('\', \'') + '\']);\n';
   // pull in service customizations
   if (this.customizationsExist(serviceName)) {
     code += 'require(\'../lib/services/' + serviceName + '\');\n';
@@ -102,16 +103,22 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
     if (!versionInfo.hasOwnProperty('api')) {
         throw new Error('No API model for ' + serviceName + '-' + version);
     }
-    var loaderPrefix = 'apiLoader.services[\'' + serviceName + '\'][\'' + version + '\']';
-    code += '\n';
-    code += loaderPrefix + ' = require(\'../apis/' + versionInfo.api + '.json\');\n';
+    code += 'Object.defineProperty(apiLoader.services[\'' + serviceName +'\'], \'' + version + '\', {\n';
+    code += tab + 'get: function get() {\n';
+    code += tab + tab + 'var model = require(\'../apis/' + versionInfo.api + '.json\');\n'
     if (versionInfo.hasOwnProperty('paginators')) {
-        code += loaderPrefix + '.paginators = require(\'../apis/' + versionInfo.paginators + '.json\').pagination;\n';
+        code += tab + tab + 'model.paginators = require(\'../apis/' + versionInfo.paginators + '.json\').pagination;\n';
     }
     if (versionInfo.hasOwnProperty('waiters')) {
-        code += loaderPrefix + '.waiters = require(\'../apis/' + versionInfo.waiters + '.json\').waiters;\n';
+        code += tab + tab + 'model.waiters = require(\'../apis/' + versionInfo.waiters + '.json\').waiters;\n';
     }
+    code += tab + tab + 'return model;\n';
+    code += tab + '},\n';
+    code += tab + 'enumerable: true,\n';
+    code += tab + 'configurable: true\n';
+    code += '});\n';
   });
+
   code += '\n';
   code += 'module.exports = AWS.' + className + ';\n';
   return {
@@ -153,14 +160,16 @@ ClientCreator.prototype.generateAllServicesSource = function generateAllServices
   var code = '';
   code += 'require(\'../lib/node_loader\');\n';
   code += 'var AWS = require(\'../lib/core\');\n\n';
+  code += 'module.exports = {\n';
 
   services.forEach(function(service, idx) {
     var className = metadata[service].name;
     var tab = '  ';
     var isLast = idx === services.length - 1;
-    code += self.generateDefinePropertySource('AWS', service, className);
+    //code += self.generateDefinePropertySource('AWS', service, className);
+    code += self.tabs(1) + className + ': require(\'./' + service + '\')' + (isLast ? '' : ',') + '\n';
   });
-  code += 'module.exports = AWS;';
+  code += '};';
   return {
     code: code,
     path: path.join(this._clientFolderPath, fileName + '.js'),

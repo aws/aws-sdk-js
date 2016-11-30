@@ -9,7 +9,7 @@
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
 or Node.js backends
 
-Release notes can be found at http://aws.amazon.com/releasenotes/SDK/JavaScript
+For release notes, see the [CHANGELOG](CHANGELOG.md). Prior to v2.4.8, release notes can be found at http://aws.amazon.com/releasenotes/SDK/JavaScript
 
 <p class="note">
 If you are upgrading from 1.x to 2.0 of the SDK, please see
@@ -24,14 +24,14 @@ to work with the new major version.
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.6.3.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.8.min.js"></script>
 
 You can also build a custom browser SDK with your specified set of AWS services.
 This can allow you to reduce the SDK's size, specify different API versions of
 services, or use AWS services that don't currently support CORS if you are
 working in an environment that does not enforce CORS. To get started:
 
-http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-building.html
+http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/building-sdk-for-browsers.html
 
 The AWS SDK is also compatible with [browserify](http://browserify.org).
 
@@ -58,17 +58,63 @@ bower install aws-sdk-js
 
 You can find a getting started guide at:
 
-http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/
+http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide
+
+## Usage with TypeScript
+The AWS SDK for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
+Our goal is to keep these TypeScript definition files updated with each release for any public api.
+
+### Pre-requisites
+Before you can begin using these TypeScript definitions with your project, you need to make sure your project meets a few of these requirements:
+ * Use TypeScript v2.x
+ * Includes the TypeScript definitions for node. You can use npm to install this by typing the following into a terminal window:
+  ```sh
+    npm install --save-dev @types/node
+  ```
+ * Your `tsconfig.json` or `jsconfig.json` includes `'dom'` and `'es2015.promise'` under `compilerOptions.lib`.
+ See [tsconfig.json](./ts/tsconfig.json) for an example.
+
+### In the Browser
+To use the TypeScript definition files with the global `AWS` object in a front-end project, add the following line to the top of your JavaScript file:
+```javascript
+/// <reference types="aws-sdk" />
+```
+This will provide support for the global `AWS` object.
+
+### In Node.js
+To use the TypeScript definition files within a Node.js project, simply import `aws-sdk` as you normally would.
+In a TypeScript file:
+```javascript
+// import entire SDK
+import AWS = require('aws-sdk');
+// import AWS object without services
+import AWS = require('aws-sdk/global');
+// import individual service
+import S3 = require('aws-sdk/clients/s3');
+```
+In a JavaScript file:
+```javascript
+// import entire SDK
+var AWS = require('aws-sdk');
+// import AWS object without services
+var AWS = require('aws-sdk/global');
+// import individual service
+var S3 = require('aws-sdk/clients/s3');
+```
+
+### Known Limitations
+There are a few known limitations with the bundled TypeScript definitions at this time:
+ * Service client typings reflect the latest `apiVersion`, regardless of which `apiVersion` is specified when creating a client.
+ * Service-bound parameters use the `any` type.
 
 ## Supported Services
 
 <p class="note"><strong>Note</strong>:
 Although all services are supported in the browser version of the SDK,
 not all of the services are available in the default hosted build (using the
-script tag provided above). A list of services in the hosted build are provided
-in the "<a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-services.html">Working With Services</a>"
-section of the browser SDK guide, including instructions on how to build a
-custom version of the SDK with extra services.
+script tag provided above). Instructions on how to build a
+custom version of the SDK with individual services are provided
+in the "<a href="http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/building-sdk-for-browsers.html">Building the SDK for Browsers</a>" section of the SDK Developer Guide.
 </p>
 
 The SDK currently supports the following services:

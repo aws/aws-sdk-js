@@ -49,10 +49,6 @@ describe 'AWS.S3', ->
       expect(-> new AWS.S3(s3BucketEndpoint: true)).to.throw(
         /An endpoint must be provided/)
 
-    it 'does not allow useDualstack and useAccelerateEndpoint to both be true', ->
-      expect(-> new AWS.S3(useDualstack: true, useAccelerateEndpoint: true)).to.throw(
-        /cannot both be configured to true/)
-
   describe 'endpoint', ->
 
     it 'sets hostname to s3.amazonaws.com when region is un-specified', ->
@@ -235,19 +231,44 @@ describe 'AWS.S3', ->
         req = build('getObject', {Bucket: 'foo', Key: 'baz'})
         expect(req.endpoint.hostname).to.equal('foo.s3-accelerate.amazonaws.com')
 
-      describe 'does not use s3-accelerate', ->
+      describe 'does not use s3-accelerate.dualstack or s3-accelerate', ->
         it 'on dns-incompatible buckets', ->
           req = build('getObject', {Bucket: 'foo.baz', Key: 'bar'})
-          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
 
         it 'on excluded operations', ->
           req = build('listBuckets')
-          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
           req = build('createBucket', {Bucket: 'foo'})
-          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
           req = build('deleteBucket', {Bucket: 'foo'})
-          expect(req.endpoint.hostname).to.not.contain('s3-accelerate.amazonaws.com')
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
 
+    describe 'with useAccelerateEndpoint and dualstack set to true', ->
+      beforeEach ->
+        s3 = new AWS.S3(useAccelerateEndpoint: true, useDualstack: true)
+ 
+      it 'changes the hostname to use s3-accelerate for dns-comaptible buckets', ->
+        req = build('getObject', {Bucket: 'foo', Key: 'bar'})
+        expect(req.endpoint.hostname).to.equal('foo.s3-accelerate.dualstack.amazonaws.com')
+ 
+      it 'overrides s3BucketEndpoint configuration when s3BucketEndpoint is set', ->
+        s3 = new AWS.S3(useAccelerateEndpoint: true, useDualstack: true, s3BucketEndpoint: true, endpoint: 'foo.region.amazonaws.com')
+        req = build('getObject', {Bucket: 'foo', Key: 'baz'})
+        expect(req.endpoint.hostname).to.equal('foo.s3-accelerate.dualstack.amazonaws.com')
+ 
+      describe 'does not use s3-accelerate.dualstack or s3-accelerate', ->
+        it 'on dns-incompatible buckets', ->
+          req = build('getObject', {Bucket: 'foo.baz', Key: 'bar'})
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
+ 
+        it 'on excluded operations', ->
+          req = build('listBuckets')
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
+          req = build('createBucket', {Bucket: 'foo'})
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
+          req = build('deleteBucket', {Bucket: 'foo'})
+          expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
 
     describe 'uri escaped params', ->
       it 'uri-escapes path and querystring params', ->

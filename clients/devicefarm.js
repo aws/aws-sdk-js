@@ -5,8 +5,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['devicefarm'] = {};
 AWS.DeviceFarm = Service.defineService('devicefarm', ['2015-06-23']);
-
-apiLoader.services['devicefarm']['2015-06-23'] = require('../apis/devicefarm-2015-06-23.min.json');
-apiLoader.services['devicefarm']['2015-06-23'].paginators = require('../apis/devicefarm-2015-06-23.paginators.json').pagination;
+Object.defineProperty(apiLoader.services['devicefarm'], '2015-06-23', {
+  get: function get() {
+    var model = require('../apis/devicefarm-2015-06-23.min.json');
+    model.paginators = require('../apis/devicefarm-2015-06-23.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.DeviceFarm;

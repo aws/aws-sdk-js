@@ -253,6 +253,7 @@ describe 'AWS.Request', ->
 
   describe 'promise', ->
     it 'exists if Promises are available', ->
+      AWS.config.setPromisesDependency()
       req = service.makeRequest('mockMethod')
       if typeof Promise == 'undefined'
         expect(typeof req.promise).to.equal('undefined')
@@ -284,10 +285,10 @@ describe 'AWS.Request', ->
       server = require('http').createServer (req, resp) ->
         app(req, resp)
 
-      server.setTimeout(1)
-
       beforeEach (done) ->
         data = ''; error = null
+
+        server.setTimeout(1)
 
         app = (req, resp) ->
           resp.writeHead(200, {})
@@ -530,6 +531,7 @@ describe 'AWS.Request', ->
             console.log(e.stack)
 
       it 'retries temporal errors and streams resulting successful response', (done) ->
+        server.setTimeout(1000)
         errs = 0
         app = (req, resp) ->
           status = if errs < 2 then 500 else 200

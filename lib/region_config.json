@@ -6,6 +6,7 @@
     "cn-*/*": {
       "endpoint": "{service}.{region}.amazonaws.com.cn"
     },
+    "*/budgets": "globalSSL",
     "*/cloudfront": "globalSSL",
     "*/iam": "globalSSL",
     "*/sts": "globalSSL",

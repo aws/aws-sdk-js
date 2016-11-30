@@ -5,7 +5,14 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['ecr'] = {};
 AWS.ECR = Service.defineService('ecr', ['2015-09-21']);
-
-apiLoader.services['ecr']['2015-09-21'] = require('../apis/ecr-2015-09-21.min.json');
+Object.defineProperty(apiLoader.services['ecr'], '2015-09-21', {
+  get: function get() {
+    var model = require('../apis/ecr-2015-09-21.min.json');
+    model.paginators = require('../apis/ecr-2015-09-21.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.ECR;

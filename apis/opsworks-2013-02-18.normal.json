@@ -1264,7 +1264,7 @@
         },
         "CustomJson":{
           "shape":"String",
-          "documentation":"<p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format and must escape characters such as '\"':</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a> </p>"
+          "documentation":"<p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format:</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a> </p>"
         },
         "ConfigurationManager":{
           "shape":"StackConfigurationManager",
@@ -1466,7 +1466,7 @@
         },
         "CustomJson":{
           "shape":"String",
-          "documentation":"<p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format and must escape characters such as '\"':</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
+          "documentation":"<p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format:</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
         }
       }
     },
@@ -1712,7 +1712,7 @@
         },
         "CustomJson":{
           "shape":"String",
-          "documentation":"<p>A string that contains user-defined, custom JSON. It can be used to override the corresponding default stack configuration attribute values or to pass data to recipes. The string should be in the following escape characters such as '\"':</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
+          "documentation":"<p>A string that contains user-defined, custom JSON. It can be used to override the corresponding default stack configuration attribute values or to pass data to recipes. The string should be in the following format:</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
         },
         "ConfigurationManager":{
           "shape":"StackConfigurationManager",
@@ -1761,7 +1761,7 @@
       "members":{
         "IamUserArn":{
           "shape":"String",
-          "documentation":"<p>The user's IAM ARN.</p>"
+          "documentation":"<p>The user's IAM ARN; this can also be a federated user's ARN.</p>"
         },
         "SshUsername":{
           "shape":"String",
@@ -1869,7 +1869,7 @@
       "members":{
         "IamUserArn":{
           "shape":"String",
-          "documentation":"<p>The user's IAM ARN.</p>"
+          "documentation":"<p>The user's IAM ARN. This can also be a federated user's ARN.</p>"
         }
       }
     },
@@ -1915,7 +1915,7 @@
         },
         "CustomJson":{
           "shape":"String",
-          "documentation":"<p>A string that contains user-defined custom JSON. It can be used to override the corresponding default stack configuration attribute values for stack or to pass data to recipes. The string should be in the following format and must escape characters such as '\"':</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
+          "documentation":"<p>A string that contains user-defined custom JSON. It can be used to override the corresponding default stack configuration attribute values for stack or to pass data to recipes. The string should be in the following format:</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
         },
         "InstanceIds":{
           "shape":"Strings",
@@ -2285,7 +2285,7 @@
       "members":{
         "IamUserArn":{
           "shape":"String",
-          "documentation":"<p>The user's IAM ARN. For more information about IAM ARNs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>"
+          "documentation":"<p>The user's IAM ARN. This can also be a federated user's ARN. For more information about IAM ARNs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>"
         },
         "StackId":{
           "shape":"String",
@@ -2469,7 +2469,7 @@
       "members":{
         "IamUserArns":{
           "shape":"Strings",
-          "documentation":"<p>An array of IAM user ARNs that identify the users to be described.</p>"
+          "documentation":"<p>An array of IAM or federated user ARNs that identify the users to be described.</p>"
         }
       }
     },
@@ -3658,7 +3658,7 @@
         },
         "IamUserArn":{
           "shape":"String",
-          "documentation":"<p>The user's IAM ARN.</p>"
+          "documentation":"<p>The user's IAM ARN. This can also be a federated user's ARN.</p>"
         },
         "AllowSsh":{
           "shape":"Boolean",
@@ -3816,7 +3816,7 @@
         },
         "CustomJson":{
           "shape":"String",
-          "documentation":"<p>A JSON object that contains user-defined attributes to be added to the stack configuration and deployment attributes. You can use custom JSON to override the corresponding default stack configuration attribute values or to pass data to recipes. The string should be in the following format and must escape characters such as '\"':</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
+          "documentation":"<p>A JSON object that contains user-defined attributes to be added to the stack configuration and deployment attributes. You can use custom JSON to override the corresponding default stack configuration attribute values or to pass data to recipes. The string should be in the following format:</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
         },
         "ConfigurationManager":{
           "shape":"StackConfigurationManager",
@@ -4107,11 +4107,11 @@
         },
         "Os":{
           "shape":"String",
-          "documentation":"<p>The instance's operating system, which must be set to one of the following.</p> <ul> <li> <p>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2016.03</code>, <code>Amazon Linux 2015.09</code>, or <code>Amazon Linux 2015.03</code>.</p> </li> <li> <p>A supported Ubuntu operating system, such as <code>Ubuntu 16.04 LTS</code>, <code>Ubuntu 14.04 LTS</code>, or <code>Ubuntu 12.04 LTS</code>.</p> </li> <li> <p> <code>CentOS 7</code> </p> </li> <li> <p> <code>Red Hat Enterprise Linux 7</code> </p> </li> <li> <p>A supported Windows operating system, such as <code>Microsoft Windows Server 2012 R2 Base</code>, <code>Microsoft Windows Server 2012 R2 with SQL Server Express</code>, <code>Microsoft Windows Server 2012 R2 with SQL Server Standard</code>, or <code>Microsoft Windows Server 2012 R2 with SQL Server Web</code>.</p> </li> <li> <p>A custom AMI: <code>Custom</code>.</p> </li> </ul> <p>For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p> <p>The default option is the current Amazon Linux version. If you set this parameter to <code>Custom</code>, you must use the AmiId parameter to specify the custom AMI that you want to use. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">Operating Systems</a>. For more information on how to use custom AMIs with OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</p> <note> <p>You can specify a different Linux operating system for the updated stack, but you cannot change from Linux to Windows or Windows to Linux.</p> </note>"
+          "documentation":"<p>The instance's operating system, which must be set to one of the following. You cannot update an instance that is using a custom AMI.</p> <ul> <li> <p>A supported Linux operating system: An Amazon Linux version, such as <code>Amazon Linux 2016.03</code>, <code>Amazon Linux 2015.09</code>, or <code>Amazon Linux 2015.03</code>.</p> </li> <li> <p>A supported Ubuntu operating system, such as <code>Ubuntu 16.04 LTS</code>, <code>Ubuntu 14.04 LTS</code>, or <code>Ubuntu 12.04 LTS</code>.</p> </li> <li> <p> <code>CentOS 7</code> </p> </li> <li> <p> <code>Red Hat Enterprise Linux 7</code> </p> </li> <li> <p>A supported Windows operating system, such as <code>Microsoft Windows Server 2012 R2 Base</code>, <code>Microsoft Windows Server 2012 R2 with SQL Server Express</code>, <code>Microsoft Windows Server 2012 R2 with SQL Server Standard</code>, or <code>Microsoft Windows Server 2012 R2 with SQL Server Web</code>.</p> </li> </ul> <p>For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">AWS OpsWorks Operating Systems</a>.</p> <p>The default option is the current Amazon Linux version. If you set this parameter to <code>Custom</code>, you must use the AmiId parameter to specify the custom AMI that you want to use. For more information on the supported operating systems, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html\">Operating Systems</a>. For more information on how to use custom AMIs with OpsWorks, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Using Custom AMIs</a>.</p> <note> <p>You can specify a different Linux operating system for the updated stack, but you cannot change from Linux to Windows or Windows to Linux.</p> </note>"
         },
         "AmiId":{
           "shape":"String",
-          "documentation":"<p>A custom AMI ID to be used to create the instance. The AMI must be based on one of the supported operating systems. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html\">Instances</a> </p> <note> <p>If you specify a custom AMI, you must set <code>Os</code> to <code>Custom</code>.</p> </note>"
+          "documentation":"<p>The ID of the AMI that was used to create the instance. The value of this parameter must be the same AMI ID that the instance is already using. You cannot apply a new AMI to an instance by running UpdateInstance. UpdateInstance does not work on instances that are using custom AMIs. </p>"
         },
         "SshKeyName":{
           "shape":"String",
@@ -4274,7 +4274,7 @@
         },
         "CustomJson":{
           "shape":"String",
-          "documentation":"<p>A string that contains user-defined, custom JSON. It can be used to override the corresponding default stack configuration JSON values or to pass data to recipes. The string should be in the following format and escape characters such as '\"':</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
+          "documentation":"<p>A string that contains user-defined, custom JSON. It can be used to override the corresponding default stack configuration JSON values or to pass data to recipes. The string should be in the following format:</p> <p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> </p> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration Attributes</a>.</p>"
         },
         "ConfigurationManager":{
           "shape":"StackConfigurationManager",
@@ -4313,7 +4313,7 @@
       "members":{
         "IamUserArn":{
           "shape":"String",
-          "documentation":"<p>The user IAM ARN.</p>"
+          "documentation":"<p>The user IAM ARN. This can also be a federated user's ARN.</p>"
         },
         "SshUsername":{
           "shape":"String",

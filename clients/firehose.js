@@ -5,7 +5,13 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['firehose'] = {};
 AWS.Firehose = Service.defineService('firehose', ['2015-08-04']);
-
-apiLoader.services['firehose']['2015-08-04'] = require('../apis/firehose-2015-08-04.min.json');
+Object.defineProperty(apiLoader.services['firehose'], '2015-08-04', {
+  get: function get() {
+    var model = require('../apis/firehose-2015-08-04.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.Firehose;

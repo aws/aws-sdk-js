@@ -200,7 +200,7 @@ class SharedExampleVisitor
     if operation_input
       input_shape_name = operation_input['shape']
       input_shape = @api['shapes'][input_shape_name]
-      input = visit(input_shape, @example['input'], "", [], @comments['input'])
+      input = visit(input_shape, @example['input'] || {}, "", [], @comments['input'])
     else
       input = "{}"
     end
@@ -214,7 +214,7 @@ class SharedExampleVisitor
     if operation_output
       output_shape_name = operation_output['shape']
       output_shape = @api['shapes'][output_shape_name]
-      if output = visit(output_shape, @example['output'], "  ", [], @comments['output'])
+      if output = visit(output_shape, @example['output'] || {}, "  ", [], @comments['output'])
         lines << "  /*"
         lines << "  data = #{output}"
         lines << "  */"
@@ -523,6 +523,10 @@ doc_client
     if rules['enum']
       @lines << "#{prefix}   Possible values include:"
       @lines += rules['enum'].map{|v| "#{prefix}   * `#{v.inspect}`" }
+    end
+
+    if rules['idempotencyToken']
+      @lines << "#{prefix}   If a token is not provided, the SDK will use a version 4 UUID."
     end
 
   end

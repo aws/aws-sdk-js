@@ -50,7 +50,7 @@
         "shape":"CheckDNSAvailabilityResultMessage",
         "resultWrapper":"CheckDNSAvailabilityResult"
       },
-      "documentation":"<p> Checks if the specified CNAME is available. </p>"
+      "documentation":"<p>Checks if the specified CNAME is available.</p>"
     },
     "ComposeEnvironments":{
       "name":"ComposeEnvironments",
@@ -102,7 +102,7 @@
         {"shape":"InsufficientPrivilegesException"},
         {"shape":"S3LocationNotInServiceRegionException"}
       ],
-      "documentation":"<p>Creates an application version for the specified application.</p> <note>Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. </note>"
+      "documentation":"<p>Creates an application version for the specified application.</p> <note> <p>Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version.</p> </note>"
     },
     "CreateConfigurationTemplate":{
       "name":"CreateConfigurationTemplate",
@@ -120,7 +120,7 @@
         {"shape":"TooManyBucketsException"},
         {"shape":"TooManyConfigurationTemplatesException"}
       ],
-      "documentation":"<p>Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings.</p> <p>Related Topics</p> <ul> <li> <a>DescribeConfigurationOptions</a> </li> <li> <a>DescribeConfigurationSettings</a> </li> <li> <a>ListAvailableSolutionStacks</a> </li> </ul>"
+      "documentation":"<p>Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings.</p> <p>Related Topics</p> <ul> <li> <p> <a>DescribeConfigurationOptions</a> </p> </li> <li> <p> <a>DescribeConfigurationSettings</a> </p> </li> <li> <p> <a>ListAvailableSolutionStacks</a> </p> </li> </ul>"
     },
     "CreateEnvironment":{
       "name":"CreateEnvironment",
@@ -154,7 +154,7 @@
         {"shape":"S3SubscriptionRequiredException"},
         {"shape":"InsufficientPrivilegesException"}
       ],
-      "documentation":"<p> Creates the Amazon S3 storage location for the account. </p> <p> This location is used to store user log files. </p>"
+      "documentation":"<p>Creates the Amazon S3 storage location for the account.</p> <p>This location is used to store user log files.</p>"
     },
     "DeleteApplication":{
       "name":"DeleteApplication",
@@ -166,7 +166,7 @@
       "errors":[
         {"shape":"OperationInProgressException"}
       ],
-      "documentation":"<p> Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket. </p> <note>You cannot delete an application that has a running environment. </note>"
+      "documentation":"<p>Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket.</p> <note> <p>You cannot delete an application that has a running environment.</p> </note>"
     },
     "DeleteApplicationVersion":{
       "name":"DeleteApplicationVersion",
@@ -181,7 +181,7 @@
         {"shape":"OperationInProgressException"},
         {"shape":"S3LocationNotInServiceRegionException"}
       ],
-      "documentation":"<p> Deletes the specified version from the specified application. </p> <note>You cannot delete an application version that is associated with a running environment.</note>"
+      "documentation":"<p>Deletes the specified version from the specified application.</p> <note> <p>You cannot delete an application version that is associated with a running environment.</p> </note>"
     },
     "DeleteConfigurationTemplate":{
       "name":"DeleteConfigurationTemplate",
@@ -193,7 +193,7 @@
       "errors":[
         {"shape":"OperationInProgressException"}
       ],
-      "documentation":"<p>Deletes the specified configuration template.</p> <note>When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment.</note>"
+      "documentation":"<p>Deletes the specified configuration template.</p> <note> <p>When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment.</p> </note>"
     },
     "DeleteEnvironmentConfiguration":{
       "name":"DeleteEnvironmentConfiguration",
@@ -244,7 +244,7 @@
       "errors":[
         {"shape":"TooManyBucketsException"}
       ],
-      "documentation":"<p> Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed. </p>"
+      "documentation":"<p>Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed.</p>"
     },
     "DescribeConfigurationSettings":{
       "name":"DescribeConfigurationSettings",
@@ -260,7 +260,7 @@
       "errors":[
         {"shape":"TooManyBucketsException"}
       ],
-      "documentation":"<p> Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment. </p> <p> When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy. </p> <p>Related Topics</p> <ul> <li> <a>DeleteEnvironmentConfiguration</a> </li> </ul>"
+      "documentation":"<p>Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.</p> <p>When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy.</p> <p>Related Topics</p> <ul> <li> <p> <a>DeleteEnvironmentConfiguration</a> </p> </li> </ul>"
     },
     "DescribeEnvironmentHealth":{
       "name":"DescribeEnvironmentHealth",
@@ -351,7 +351,7 @@
         "shape":"EventDescriptionsMessage",
         "resultWrapper":"DescribeEventsResult"
       },
-      "documentation":"<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p> <note>This action returns the most recent 1,000 events from the specified <code>NextToken</code>.</note>"
+      "documentation":"<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p> <note> <p>This action returns the most recent 1,000 events from the specified <code>NextToken</code>.</p> </note>"
     },
     "DescribeInstancesHealth":{
       "name":"DescribeInstancesHealth",
@@ -380,7 +380,7 @@
         "shape":"ListAvailableSolutionStacksResultMessage",
         "resultWrapper":"ListAvailableSolutionStacksResult"
       },
-      "documentation":"<p> Returns a list of the available solution stack names. </p>"
+      "documentation":"<p>Returns a list of the available solution stack names.</p>"
     },
     "RebuildEnvironment":{
       "name":"RebuildEnvironment",
@@ -392,7 +392,7 @@
       "errors":[
         {"shape":"InsufficientPrivilegesException"}
       ],
-      "documentation":"<p> Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart. </p>"
+      "documentation":"<p>Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.</p>"
     },
     "RequestEnvironmentInfo":{
       "name":"RequestEnvironmentInfo",
@@ -401,7 +401,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"RequestEnvironmentInfoMessage"},
-      "documentation":"<p> Initiates a request to compile the specified type of information of the deployed environment. </p> <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from the application server log files of every Amazon EC2 instance in your environment. </p> <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET containers do not support bundle logs. </p> <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p> <p>Related Topics</p> <ul> <li> <a>RetrieveEnvironmentInfo</a> </li> </ul>"
+      "documentation":"<p>Initiates a request to compile the specified type of information of the deployed environment.</p> <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from the application server log files of every Amazon EC2 instance in your environment. </p> <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET containers do not support bundle logs. </p> <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p> <p>Related Topics</p> <ul> <li> <p> <a>RetrieveEnvironmentInfo</a> </p> </li> </ul>"
     },
     "RestartAppServer":{
       "name":"RestartAppServer",
@@ -423,7 +423,7 @@
         "shape":"RetrieveEnvironmentInfoResultMessage",
         "resultWrapper":"RetrieveEnvironmentInfoResult"
       },
-      "documentation":"<p>Retrieves the compiled information from a <a>RequestEnvironmentInfo</a> request.</p> <p>Related Topics</p> <ul> <li> <a>RequestEnvironmentInfo</a> </li> </ul>"
+      "documentation":"<p>Retrieves the compiled information from a <a>RequestEnvironmentInfo</a> request.</p> <p>Related Topics</p> <ul> <li> <p> <a>RequestEnvironmentInfo</a> </p> </li> </ul>"
     },
     "SwapEnvironmentCNAMEs":{
       "name":"SwapEnvironmentCNAMEs",
@@ -432,7 +432,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"SwapEnvironmentCNAMEsMessage"},
-      "documentation":"<p> Swaps the CNAMEs of two environments. </p>"
+      "documentation":"<p>Swaps the CNAMEs of two environments.</p>"
     },
     "TerminateEnvironment":{
       "name":"TerminateEnvironment",
@@ -448,7 +448,7 @@
       "errors":[
         {"shape":"InsufficientPrivilegesException"}
       ],
-      "documentation":"<p> Terminates the specified environment. </p>"
+      "documentation":"<p>Terminates the specified environment.</p>"
     },
     "UpdateApplication":{
       "name":"UpdateApplication",
@@ -461,7 +461,7 @@
         "shape":"ApplicationDescriptionMessage",
         "resultWrapper":"UpdateApplicationResult"
       },
-      "documentation":"<p>Updates the specified application to have the specified properties. </p> <note> If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear these properties, specify an empty string. </note>"
+      "documentation":"<p>Updates the specified application to have the specified properties.</p> <note> <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear these properties, specify an empty string.</p> </note>"
     },
     "UpdateApplicationVersion":{
       "name":"UpdateApplicationVersion",
@@ -474,7 +474,7 @@
         "shape":"ApplicationVersionDescriptionMessage",
         "resultWrapper":"UpdateApplicationVersionResult"
       },
-      "documentation":"<p> Updates the specified application version to have the specified properties. </p> <note> If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear properties, specify an empty string. </note>"
+      "documentation":"<p>Updates the specified application version to have the specified properties.</p> <note> <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear properties, specify an empty string.</p> </note>"
     },
     "UpdateConfigurationTemplate":{
       "name":"UpdateConfigurationTemplate",
@@ -491,7 +491,7 @@
         {"shape":"InsufficientPrivilegesException"},
         {"shape":"TooManyBucketsException"}
       ],
-      "documentation":"<p> Updates the specified configuration template to have the specified properties or configuration option values. </p> <note> If a property (for example, <code>ApplicationName</code>) is not provided, its value remains unchanged. To clear such properties, specify an empty string. </note> <p>Related Topics</p> <ul> <li> <a>DescribeConfigurationOptions</a> </li> </ul>"
+      "documentation":"<p>Updates the specified configuration template to have the specified properties or configuration option values.</p> <note> <p>If a property (for example, <code>ApplicationName</code>) is not provided, its value remains unchanged. To clear such properties, specify an empty string.</p> </note> <p>Related Topics</p> <ul> <li> <p> <a>DescribeConfigurationOptions</a> </p> </li> </ul>"
     },
     "UpdateEnvironment":{
       "name":"UpdateEnvironment",
@@ -508,7 +508,7 @@
         {"shape":"InsufficientPrivilegesException"},
         {"shape":"TooManyBucketsException"}
       ],
-      "documentation":"<p> Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment. </p> <p> Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p> <p> When updating the configuration settings to a new template or individual settings, a draft configuration is created and <a>DescribeConfigurationSettings</a> for this environment returns two setting descriptions with different <code>DeploymentStatus</code> values. </p>"
+      "documentation":"<p>Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.</p> <p> Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p> <p> When updating the configuration settings to a new template or individual settings, a draft configuration is created and <a>DescribeConfigurationSettings</a> for this environment returns two setting descriptions with different <code>DeploymentStatus</code> values. </p>"
     },
     "ValidateConfigurationSettings":{
       "name":"ValidateConfigurationSettings",
@@ -525,7 +525,7 @@
         {"shape":"InsufficientPrivilegesException"},
         {"shape":"TooManyBucketsException"}
       ],
-      "documentation":"<p> Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid. </p> <p> This action returns a list of messages indicating any errors or warnings associated with the selection of option values. </p>"
+      "documentation":"<p>Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.</p> <p>This action returns a list of messages indicating any errors or warnings associated with the selection of option values.</p>"
     }
   },
   "shapes":{
@@ -594,7 +594,7 @@
         },
         "ConfigurationTemplates":{
           "shape":"ConfigurationTemplateNamesList",
-          "documentation":"<p> The names of the configuration templates associated with this application. </p>"
+          "documentation":"<p>The names of the configuration templates associated with this application.</p>"
         }
       },
       "documentation":"<p>Describes the properties of an application.</p>"
@@ -667,11 +667,12 @@
         },
         "VersionLabel":{
           "shape":"VersionLabel",
-          "documentation":"<p> A label uniquely identifying the version for the associated application. </p>"
+          "documentation":"<p>A label uniquely identifying the version for the associated application.</p>"
         },
+        "SourceBuildInformation":{"shape":"SourceBuildInformation"},
         "SourceBundle":{
           "shape":"S3Location",
-          "documentation":"<p> The location where the source bundle is located for this version. </p>"
+          "documentation":"<p>The location where the source bundle is located for this version.</p>"
         },
         "DateCreated":{
           "shape":"CreationDate",
@@ -686,7 +687,7 @@
           "documentation":"<p>The processing status of the application version.</p>"
         }
       },
-      "documentation":"<p> Describes the properties of an application version. </p>"
+      "documentation":"<p>Describes the properties of an application version.</p>"
     },
     "ApplicationVersionDescriptionList":{
       "type":"list",
@@ -700,7 +701,7 @@
           "documentation":"<p> The <a>ApplicationVersionDescription</a> of the application version. </p>"
         }
       },
-      "documentation":"<p> Result message wrapping a single description of an application version. </p>"
+      "documentation":"<p>Result message wrapping a single description of an application version.</p>"
     },
     "ApplicationVersionDescriptionsMessage":{
       "type":"structure",
@@ -708,6 +709,10 @@
         "ApplicationVersions":{
           "shape":"ApplicationVersionDescriptionList",
           "documentation":"<p>List of <code>ApplicationVersionDescription</code> objects sorted by order of creation.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>For a paginated request, the token that you can pass in a subsequent request to get the next page.</p>"
         }
       },
       "documentation":"<p>Result message wrapping a list of application version descriptions.</p>"
@@ -772,7 +777,7 @@
           "documentation":"<p>The name of the <code>AutoScalingGroup</code> . </p>"
         }
       },
-      "documentation":"<p>Describes an Auto Scaling launch configuration. </p>"
+      "documentation":"<p>Describes an Auto Scaling launch configuration.</p>"
     },
     "AutoScalingGroupList":{
       "type":"list",
@@ -835,7 +840,7 @@
       "members":{
         "CNAMEPrefix":{
           "shape":"DNSCnamePrefix",
-          "documentation":"<p> The prefix used when this CNAME is reserved. </p>"
+          "documentation":"<p>The prefix used when this CNAME is reserved.</p>"
         }
       },
       "documentation":"<p>Results message indicating whether a CNAME is available.</p>"
@@ -845,7 +850,7 @@
       "members":{
         "Available":{
           "shape":"CnameAvailability",
-          "documentation":"<p> Indicates if the specified CNAME is available: </p> <ul> <li> <code>true</code> : The CNAME is available. </li> <li> <code>false</code> : The CNAME is not available. </li> </ul>"
+          "documentation":"<p>Indicates if the specified CNAME is available:</p> <ul> <li> <p> <code>true</code> : The CNAME is available.</p> </li> <li> <p> <code>false</code> : The CNAME is not available.</p> </li> </ul>"
         },
         "FullyQualifiedCNAME":{
           "shape":"DNSCname",
@@ -887,50 +892,50 @@
       "members":{
         "Namespace":{
           "shape":"OptionNamespace",
-          "documentation":"<p> A unique namespace identifying the option's associated AWS resource. </p>"
+          "documentation":"<p>A unique namespace identifying the option's associated AWS resource.</p>"
         },
         "Name":{
           "shape":"ConfigurationOptionName",
-          "documentation":"<p> The name of the configuration option. </p>"
+          "documentation":"<p>The name of the configuration option.</p>"
         },
         "DefaultValue":{
           "shape":"ConfigurationOptionDefaultValue",
-          "documentation":"<p> The default value for this configuration option. </p>"
+          "documentation":"<p>The default value for this configuration option.</p>"
         },
         "ChangeSeverity":{
           "shape":"ConfigurationOptionSeverity",
-          "documentation":"<p> An indication of which action is required if the value for this configuration option changes: </p> <ul> <li> <code>NoInterruption</code> : There is no interruption to the environment or application availability. </li> <li> <code>RestartEnvironment</code> : The environment is entirely restarted, all AWS resources are deleted and recreated, and the environment is unavailable during the process. </li> <li> <code>RestartApplicationServer</code> : The environment is available the entire time. However, a short application outage occurs when the application servers on the running Amazon EC2 instances are restarted. </li> </ul>"
+          "documentation":"<p>An indication of which action is required if the value for this configuration option changes:</p> <ul> <li> <p> <code>NoInterruption</code> : There is no interruption to the environment or application availability.</p> </li> <li> <p> <code>RestartEnvironment</code> : The environment is entirely restarted, all AWS resources are deleted and recreated, and the environment is unavailable during the process.</p> </li> <li> <p> <code>RestartApplicationServer</code> : The environment is available the entire time. However, a short application outage occurs when the application servers on the running Amazon EC2 instances are restarted.</p> </li> </ul>"
         },
         "UserDefined":{
           "shape":"UserDefinedOption",
-          "documentation":"<p> An indication of whether the user defined this configuration option: </p> <ul> <li> <p> <code>true</code> : This configuration option was defined by the user. It is a valid choice for specifying if this as an <code>Option to Remove</code> when updating configuration settings. </p> </li> <li> <code>false</code> : This configuration was not defined by the user. </li> </ul> <p> Constraint: You can remove only <code>UserDefined</code> options from a configuration. </p> <p> Valid Values: <code>true</code> | <code>false</code></p>"
+          "documentation":"<p>An indication of whether the user defined this configuration option:</p> <ul> <li> <p> <code>true</code> : This configuration option was defined by the user. It is a valid choice for specifying if this as an <code>Option to Remove</code> when updating configuration settings. </p> </li> <li> <p> <code>false</code> : This configuration was not defined by the user.</p> </li> </ul> <p> Constraint: You can remove only <code>UserDefined</code> options from a configuration. </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>"
         },
         "ValueType":{
           "shape":"ConfigurationOptionValueType",
-          "documentation":"<p> An indication of which type of values this option has and whether it is allowable to select one or more than one of the possible values: </p> <ul> <li> <code>Scalar</code> : Values for this option are a single selection from the possible values, or an unformatted string, or numeric value governed by the <code>MIN/MAX/Regex</code> constraints. </li> <li> <code>List</code> : Values for this option are multiple selections from the possible values. </li> <li> <code>Boolean</code> : Values for this option are either <code>true</code> or <code>false</code> . </li> <li> <code>Json</code> : Values for this option are a JSON representation of a <code>ConfigDocument</code>. </li> </ul>"
+          "documentation":"<p>An indication of which type of values this option has and whether it is allowable to select one or more than one of the possible values:</p> <ul> <li> <p> <code>Scalar</code> : Values for this option are a single selection from the possible values, or an unformatted string, or numeric value governed by the <code>MIN/MAX/Regex</code> constraints.</p> </li> <li> <p> <code>List</code> : Values for this option are multiple selections from the possible values.</p> </li> <li> <p> <code>Boolean</code> : Values for this option are either <code>true</code> or <code>false</code> .</p> </li> <li> <p> <code>Json</code> : Values for this option are a JSON representation of a <code>ConfigDocument</code>.</p> </li> </ul>"
         },
         "ValueOptions":{
           "shape":"ConfigurationOptionPossibleValues",
-          "documentation":"<p> If specified, values for the configuration option are selected from this list. </p>"
+          "documentation":"<p>If specified, values for the configuration option are selected from this list.</p>"
         },
         "MinValue":{
           "shape":"OptionRestrictionMinValue",
-          "documentation":"<p> If specified, the configuration option must be a numeric value greater than this value. </p>"
+          "documentation":"<p>If specified, the configuration option must be a numeric value greater than this value.</p>"
         },
         "MaxValue":{
           "shape":"OptionRestrictionMaxValue",
-          "documentation":"<p> If specified, the configuration option must be a numeric value less than this value. </p>"
+          "documentation":"<p>If specified, the configuration option must be a numeric value less than this value.</p>"
         },
         "MaxLength":{
           "shape":"OptionRestrictionMaxLength",
-          "documentation":"<p> If specified, the configuration option must be a string value no longer than this value. </p>"
+          "documentation":"<p>If specified, the configuration option must be a string value no longer than this value.</p>"
         },
         "Regex":{
           "shape":"OptionRestrictionRegex",
-          "documentation":"<p> If specified, the configuration option must be a string value that satisfies this regular expression. </p>"
+          "documentation":"<p>If specified, the configuration option must be a string value that satisfies this regular expression.</p>"
         }
       },
-      "documentation":"<p> Describes the possible values for a configuration option. </p>"
+      "documentation":"<p>Describes the possible values for a configuration option.</p>"
     },
     "ConfigurationOptionDescriptionsList":{
       "type":"list",
@@ -947,19 +952,19 @@
       "members":{
         "ResourceName":{
           "shape":"ResourceName",
-          "documentation":"<p> A unique resource name for a time-based scaling configuration option. </p>"
+          "documentation":"<p>A unique resource name for a time-based scaling configuration option.</p>"
         },
         "Namespace":{
           "shape":"OptionNamespace",
-          "documentation":"<p> A unique namespace identifying the option's associated AWS resource. </p>"
+          "documentation":"<p>A unique namespace identifying the option's associated AWS resource.</p>"
         },
         "OptionName":{
           "shape":"ConfigurationOptionName",
-          "documentation":"<p> The name of the configuration option. </p>"
+          "documentation":"<p>The name of the configuration option.</p>"
         },
         "Value":{
           "shape":"ConfigurationOptionValue",
-          "documentation":"<p> The current value for the configuration option. </p>"
+          "documentation":"<p>The current value for the configuration option.</p>"
         }
       },
       "documentation":"<p> A specification identifying an individual configuration option along with its current value. For a list of possible option values, go to <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html\">Option Values</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>. </p>"
@@ -982,7 +987,7 @@
       "members":{
         "SolutionStackName":{
           "shape":"SolutionStackName",
-          "documentation":"<p> The name of the solution stack these configuration options belong to. </p>"
+          "documentation":"<p>The name of the solution stack these configuration options belong to.</p>"
         },
         "Options":{
           "shape":"ConfigurationOptionDescriptionsList",
@@ -996,11 +1001,11 @@
       "members":{
         "SolutionStackName":{
           "shape":"SolutionStackName",
-          "documentation":"<p> The name of the solution stack this configuration set uses. </p>"
+          "documentation":"<p>The name of the solution stack this configuration set uses.</p>"
         },
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p> The name of the application associated with this configuration set. </p>"
+          "documentation":"<p>The name of the application associated with this configuration set.</p>"
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
@@ -1008,7 +1013,7 @@
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p> Describes this configuration set. </p>"
+          "documentation":"<p>Describes this configuration set.</p>"
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
@@ -1016,22 +1021,22 @@
         },
         "DeploymentStatus":{
           "shape":"ConfigurationDeploymentStatus",
-          "documentation":"<p> If this configuration set is associated with an environment, the <code>DeploymentStatus</code> parameter indicates the deployment status of this configuration set: </p> <ul> <li> <code>null</code>: This configuration is not associated with a running environment. </li> <li> <code>pending</code>: This is a draft configuration that is not deployed to the associated environment but is in the process of deploying. </li> <li> <code>deployed</code>: This is the configuration that is currently deployed to the associated running environment. </li> <li> <code>failed</code>: This is a draft configuration that failed to successfully deploy. </li> </ul>"
+          "documentation":"<p> If this configuration set is associated with an environment, the <code>DeploymentStatus</code> parameter indicates the deployment status of this configuration set: </p> <ul> <li> <p> <code>null</code>: This configuration is not associated with a running environment.</p> </li> <li> <p> <code>pending</code>: This is a draft configuration that is not deployed to the associated environment but is in the process of deploying.</p> </li> <li> <p> <code>deployed</code>: This is the configuration that is currently deployed to the associated running environment.</p> </li> <li> <p> <code>failed</code>: This is a draft configuration that failed to successfully deploy.</p> </li> </ul>"
         },
         "DateCreated":{
           "shape":"CreationDate",
-          "documentation":"<p> The date (in UTC time) when this configuration set was created. </p>"
+          "documentation":"<p>The date (in UTC time) when this configuration set was created.</p>"
         },
         "DateUpdated":{
           "shape":"UpdateDate",
-          "documentation":"<p> The date (in UTC time) when this configuration set was last modified. </p>"
+          "documentation":"<p>The date (in UTC time) when this configuration set was last modified.</p>"
         },
         "OptionSettings":{
           "shape":"ConfigurationOptionSettingsList",
-          "documentation":"<p> A list of the configuration options and their values in this configuration set. </p>"
+          "documentation":"<p>A list of the configuration options and their values in this configuration set.</p>"
         }
       },
-      "documentation":"<p> Describes the settings for a configuration set. </p>"
+      "documentation":"<p>Describes the settings for a configuration set.</p>"
     },
     "ConfigurationSettingsDescriptionList":{
       "type":"list",
@@ -1100,13 +1105,14 @@
           "shape":"Description",
           "documentation":"<p>Describes this version.</p>"
         },
+        "SourceBuildInformation":{"shape":"SourceBuildInformation"},
         "SourceBundle":{
           "shape":"S3Location",
-          "documentation":"<p> The Amazon S3 bucket and key that identify the location of the source bundle for this version. </p> <p> If data found at the Amazon S3 location exceeds the maximum allowed source bundle size, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. The maximum size allowed is 512 MB. </p> <p>Default: If not specified, AWS Elastic Beanstalk uses a sample application. If only partially specified (for example, a bucket is provided but not the key) or if no data is found at the Amazon S3 location, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p>"
+          "documentation":"<p>The Amazon S3 bucket and key that identify the location of the source bundle for this version.</p> <p> If data found at the Amazon S3 location exceeds the maximum allowed source bundle size, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. The maximum size allowed is 512 MB. </p> <p>Default: If not specified, AWS Elastic Beanstalk uses a sample application. If only partially specified (for example, a bucket is provided but not the key) or if no data is found at the Amazon S3 location, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p>"
         },
         "AutoCreateApplication":{
           "shape":"AutoCreateApplication",
-          "documentation":"<p> Determines how the system behaves if the specified application for this version does not already exist: </p> <ul> <li> <code>true</code> : Automatically creates the specified application for this release if it does not already exist. </li> <li> <code>false</code> : Throws an <code>InvalidParameterValue</code> if the specified application for this release does not already exist. </li> </ul> <p> Default: <code>false</code> </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>"
+          "documentation":"<p>Determines how the system behaves if the specified application for this version does not already exist:</p> <ul> <li> <p> <code>true</code> : Automatically creates the specified application for this release if it does not already exist.</p> </li> <li> <p> <code>false</code> : Throws an <code>InvalidParameterValue</code> if the specified application for this release does not already exist.</p> </li> </ul> <p> Default: <code>false</code> </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>"
         },
         "Process":{
           "shape":"ApplicationVersionProccess",
@@ -1128,15 +1134,15 @@
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
-          "documentation":"<p>The name of the configuration template.</p> <p>Constraint: This name must be unique per application. </p> <p>Default: If a configuration template already exists with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>"
+          "documentation":"<p>The name of the configuration template.</p> <p>Constraint: This name must be unique per application.</p> <p>Default: If a configuration template already exists with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>"
         },
         "SolutionStackName":{
           "shape":"SolutionStackName",
-          "documentation":"<p>The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values. </p> <p> Use <a>ListAvailableSolutionStacks</a> to obtain a list of available solution stacks. </p> <p> A solution stack name or a source configuration parameter must be specified, otherwise AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p> If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template. </p>"
+          "documentation":"<p>The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values.</p> <p> Use <a>ListAvailableSolutionStacks</a> to obtain a list of available solution stacks. </p> <p> A solution stack name or a source configuration parameter must be specified, otherwise AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template.</p>"
         },
         "SourceConfiguration":{
           "shape":"SourceConfiguration",
-          "documentation":"<p> If specified, AWS Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration. </p> <p> Values specified in the <code>OptionSettings</code> parameter of this call overrides any values obtained from the <code>SourceConfiguration</code>. </p> <p> If no configuration template is found, returns an <code>InvalidParameterValue</code> error. </p> <p> Constraint: If both the solution stack name parameter and the source configuration parameters are specified, the solution stack of the source configuration template must match the specified solution stack name or else AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p>"
+          "documentation":"<p>If specified, AWS Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration.</p> <p> Values specified in the <code>OptionSettings</code> parameter of this call overrides any values obtained from the <code>SourceConfiguration</code>. </p> <p> If no configuration template is found, returns an <code>InvalidParameterValue</code> error. </p> <p> Constraint: If both the solution stack name parameter and the source configuration parameters are specified, the solution stack of the source configuration template must match the specified solution stack name or else AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p>"
         },
         "EnvironmentId":{
           "shape":"EnvironmentId",
@@ -1148,7 +1154,7 @@
         },
         "OptionSettings":{
           "shape":"ConfigurationOptionSettingsList",
-          "documentation":"<p> If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template. </p>"
+          "documentation":"<p>If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template.</p>"
         }
       },
       "documentation":"<p>Request to create a configuration template.</p>"
@@ -1159,11 +1165,11 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p> The name of the application that contains the version to be deployed. </p> <p> If no application is found with this name, <code>CreateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p>"
+          "documentation":"<p>The name of the application that contains the version to be deployed.</p> <p> If no application is found with this name, <code>CreateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p>"
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> A unique name for the deployment environment. Used in the application URL. </p> <p>Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.</p>"
+          "documentation":"<p>A unique name for the deployment environment. Used in the application URL.</p> <p>Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.</p>"
         },
         "GroupName":{
           "shape":"GroupName",
@@ -1175,19 +1181,19 @@
         },
         "CNAMEPrefix":{
           "shape":"DNSCnamePrefix",
-          "documentation":"<p> If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name. </p>"
+          "documentation":"<p>If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.</p>"
         },
         "Tier":{
           "shape":"EnvironmentTier",
-          "documentation":"<p> This specifies the tier to use for creating this environment. </p>"
+          "documentation":"<p>This specifies the tier to use for creating this environment.</p>"
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p> This specifies the tags applied to resources in the environment. </p>"
+          "documentation":"<p>This specifies the tags applied to resources in the environment.</p>"
         },
         "VersionLabel":{
           "shape":"VersionLabel",
-          "documentation":"<p>The name of the application version to deploy.</p> <p> If the specified application has no associated application versions, AWS Elastic Beanstalk <code>UpdateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p> <p> Default: If not specified, AWS Elastic Beanstalk attempts to launch the sample application in the container. </p>"
+          "documentation":"<p>The name of the application version to deploy.</p> <p> If the specified application has no associated application versions, AWS Elastic Beanstalk <code>UpdateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If not specified, AWS Elastic Beanstalk attempts to launch the sample application in the container.</p>"
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
@@ -1195,15 +1201,15 @@
         },
         "SolutionStackName":{
           "shape":"SolutionStackName",
-          "documentation":"<p> This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. </p> <p> Condition: You must specify either this or a <code>TemplateName</code>, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.</p> <p> Condition: You must specify either this or a <code>TemplateName</code>, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>"
         },
         "OptionSettings":{
           "shape":"ConfigurationOptionSettingsList",
-          "documentation":"<p> If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template. </p>"
+          "documentation":"<p>If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.</p>"
         },
         "OptionsToRemove":{
           "shape":"OptionsSpecifierList",
-          "documentation":"<p> A list of custom user-defined configuration options to remove from the configuration set for this new environment. </p>"
+          "documentation":"<p>A list of custom user-defined configuration options to remove from the configuration set for this new environment.</p>"
         }
       },
       "documentation":"<p/>"
@@ -1213,7 +1219,7 @@
       "members":{
         "S3Bucket":{
           "shape":"S3Bucket",
-          "documentation":"<p> The name of the Amazon S3 bucket created. </p>"
+          "documentation":"<p>The name of the Amazon S3 bucket created.</p>"
         }
       },
       "documentation":"<p>Results of a <a>CreateStorageLocationResult</a> call.</p>"
@@ -1261,7 +1267,7 @@
         },
         "DeleteSourceBundle":{
           "shape":"DeleteSourceBundle",
-          "documentation":"<p>Indicates whether to delete the associated source bundle from Amazon S3: </p> <ul> <li> <code>true</code>: An attempt is made to delete the associated Amazon S3 source bundle specified at time of creation. </li> <li> <code>false</code>: No action is taken on the Amazon S3 source bundle specified at time of creation. </li> </ul> <p> Valid Values: <code>true</code> | <code>false</code> </p>"
+          "documentation":"<p>Indicates whether to delete the associated source bundle from Amazon S3:</p> <ul> <li> <p> <code>true</code>: An attempt is made to delete the associated Amazon S3 source bundle specified at time of creation.</p> </li> <li> <p> <code>false</code>: No action is taken on the Amazon S3 source bundle specified at time of creation.</p> </li> </ul> <p> Valid Values: <code>true</code> | <code>false</code> </p>"
         }
       },
       "documentation":"<p>Request to delete an application version.</p>"
@@ -1275,7 +1281,7 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p> The name of the application to delete the configuration template from.</p>"
+          "documentation":"<p>The name of the application to delete the configuration template from.</p>"
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
@@ -1316,7 +1322,7 @@
         },
         "Status":{
           "shape":"String",
-          "documentation":"<p>The status of the deployment:</p> <ul> <li> <code>In Progress</code> : The deployment is in progress.</li> <li> <code>Deployed</code> : The deployment succeeded.</li> <li> <code>Failed</code> : The deployment failed.</li> </ul>"
+          "documentation":"<p>The status of the deployment:</p> <ul> <li> <p> <code>In Progress</code> : The deployment is in progress.</p> </li> <li> <p> <code>Deployed</code> : The deployment succeeded.</p> </li> <li> <p> <code>Failed</code> : The deployment failed.</p> </li> </ul>"
         },
         "DeploymentTime":{
           "shape":"DeploymentTimestamp",
@@ -1336,6 +1342,14 @@
         "VersionLabels":{
           "shape":"VersionLabelsList",
           "documentation":"<p>If specified, restricts the returned descriptions to only include ones that have the specified version labels.</p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>Specify a maximum number of application versions to paginate in the request.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>Specify a next token to retrieve the next page in a paginated request.</p>"
         }
       },
       "documentation":"<p>Result message containing a list of configuration descriptions.</p>"
@@ -1345,7 +1359,7 @@
       "members":{
         "ApplicationNames":{
           "shape":"ApplicationNamesList",
-          "documentation":"<p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names. </p>"
+          "documentation":"<p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.</p>"
         }
       },
       "documentation":"<p>Request to describe one or more applications.</p>"
@@ -1355,26 +1369,26 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p> The name of the application associated with the configuration template or environment. Only needed if you want to describe the configuration options associated with either the configuration template or environment. </p>"
+          "documentation":"<p>The name of the application associated with the configuration template or environment. Only needed if you want to describe the configuration options associated with either the configuration template or environment.</p>"
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
-          "documentation":"<p> The name of the configuration template whose configuration options you want to describe. </p>"
+          "documentation":"<p>The name of the configuration template whose configuration options you want to describe.</p>"
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> The name of the environment whose configuration options you want to describe. </p>"
+          "documentation":"<p>The name of the environment whose configuration options you want to describe.</p>"
         },
         "SolutionStackName":{
           "shape":"SolutionStackName",
-          "documentation":"<p> The name of the solution stack whose configuration options you want to describe. </p>"
+          "documentation":"<p>The name of the solution stack whose configuration options you want to describe.</p>"
         },
         "Options":{
           "shape":"OptionsSpecifierList",
-          "documentation":"<p> If specified, restricts the descriptions to only the specified options. </p>"
+          "documentation":"<p>If specified, restricts the descriptions to only the specified options.</p>"
         }
       },
-      "documentation":"<p>Result message containig a list of application version descriptions. </p>"
+      "documentation":"<p>Result message containig a list of application version descriptions.</p>"
     },
     "DescribeConfigurationSettingsMessage":{
       "type":"structure",
@@ -1382,15 +1396,15 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p> The application for the environment or configuration template. </p>"
+          "documentation":"<p>The application for the environment or configuration template.</p>"
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
-          "documentation":"<p> The name of the configuration template to describe. </p> <p> Conditional: You must specify either this parameter or an EnvironmentName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>The name of the configuration template to describe.</p> <p> Conditional: You must specify either this parameter or an EnvironmentName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>"
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> The name of the environment to describe. </p> <p> Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>The name of the environment to describe.</p> <p> Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
         }
       },
       "documentation":"<p>Result message containing all of the configuration settings for a specified solution stack or configuration template.</p>"
@@ -1514,11 +1528,11 @@
       "members":{
         "EnvironmentId":{
           "shape":"EnvironmentId",
-          "documentation":"<p> The ID of the environment to retrieve AWS resource usage data. </p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>The ID of the environment to retrieve AWS resource usage data.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> The name of the environment to retrieve AWS resource usage data. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>The name of the environment to retrieve AWS resource usage data.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
         }
       },
       "documentation":"<p>Request to describe the resources in an environment.</p>"
@@ -1578,11 +1592,11 @@
         },
         "RequestId":{
           "shape":"RequestId",
-          "documentation":"<p> If specified, AWS Elastic Beanstalk restricts the described events to include only those associated with this request ID. </p>"
+          "documentation":"<p>If specified, AWS Elastic Beanstalk restricts the described events to include only those associated with this request ID.</p>"
         },
         "Severity":{
           "shape":"EventSeverity",
-          "documentation":"<p> If specified, limits the events returned from this call to include only those with the specified severity or higher. </p>"
+          "documentation":"<p>If specified, limits the events returned from this call to include only those with the specified severity or higher.</p>"
         },
         "StartTime":{
           "shape":"TimeFilterStart",
@@ -1594,11 +1608,11 @@
         },
         "MaxRecords":{
           "shape":"MaxRecords",
-          "documentation":"<p> Specifies the maximum number of events that can be returned, beginning with the most recent event. </p>"
+          "documentation":"<p>Specifies the maximum number of events that can be returned, beginning with the most recent event.</p>"
         },
         "NextToken":{
           "shape":"Token",
-          "documentation":"<p> Pagination token. If specified, the events return the next batch of results. </p>"
+          "documentation":"<p>Pagination token. If specified, the events return the next batch of results.</p>"
         }
       },
       "documentation":"<p>Request to retrieve a list of events for an environment.</p>"
@@ -1669,7 +1683,7 @@
         },
         "EnvironmentId":{
           "shape":"EnvironmentId",
-          "documentation":"<p> The ID of this environment. </p>"
+          "documentation":"<p>The ID of this environment.</p>"
         },
         "ApplicationName":{
           "shape":"ApplicationName",
@@ -1685,7 +1699,7 @@
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
-          "documentation":"<p> The name of the configuration template used to originally launch this environment. </p>"
+          "documentation":"<p>The name of the configuration template used to originally launch this environment.</p>"
         },
         "Description":{
           "shape":"Description",
@@ -1697,7 +1711,7 @@
         },
         "CNAME":{
           "shape":"DNSCname",
-          "documentation":"<p> The URL to the CNAME for this environment. </p>"
+          "documentation":"<p>The URL to the CNAME for this environment.</p>"
         },
         "DateCreated":{
           "shape":"CreationDate",
@@ -1709,7 +1723,7 @@
         },
         "Status":{
           "shape":"EnvironmentStatus",
-          "documentation":"<p> The current operational status of the environment: </p> <ul> <li> <code>Launching</code>: Environment is in the process of initial deployment. </li> <li> <code>Updating</code>: Environment is in the process of updating its configuration settings or application version. </li> <li> <code>Ready</code>: Environment is available to have an action performed on it, such as update or terminate. </li> <li> <code>Terminating</code>: Environment is in the shut-down process. </li> <li> <code>Terminated</code>: Environment is not running. </li> </ul>"
+          "documentation":"<p>The current operational status of the environment:</p> <ul> <li> <p> <code>Launching</code>: Environment is in the process of initial deployment.</p> </li> <li> <p> <code>Updating</code>: Environment is in the process of updating its configuration settings or application version.</p> </li> <li> <p> <code>Ready</code>: Environment is available to have an action performed on it, such as update or terminate.</p> </li> <li> <p> <code>Terminating</code>: Environment is in the shut-down process.</p> </li> <li> <p> <code>Terminated</code>: Environment is not running.</p> </li> </ul>"
         },
         "AbortableOperationInProgress":{
           "shape":"AbortableOperationInProgress",
@@ -1717,7 +1731,7 @@
         },
         "Health":{
           "shape":"EnvironmentHealth",
-          "documentation":"<p> Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment: </p> <ul> <li> <code>Red</code>: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment. </li> <li> <code>Yellow</code>: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment. </li> <li> <code>Green</code>: Indicates the environment is healthy and fully functional. </li> <li> <code>Grey</code>: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an <code>UpdateEnvironment</code> or <code>RestartEnvironement</code> request. </li> </ul> <p> Default: <code>Grey</code> </p>"
+          "documentation":"<p>Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:</p> <ul> <li> <p> <code>Red</code>: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.</p> </li> <li> <p> <code>Yellow</code>: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.</p> </li> <li> <p> <code>Green</code>: Indicates the environment is healthy and fully functional.</p> </li> <li> <p> <code>Grey</code>: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an <code>UpdateEnvironment</code> or <code>RestartEnvironement</code> request.</p> </li> </ul> <p> Default: <code>Grey</code> </p>"
         },
         "HealthStatus":{
           "shape":"EnvironmentHealthStatus",
@@ -1885,7 +1899,7 @@
         },
         "Queues":{
           "shape":"QueueList",
-          "documentation":"<p>The queues used by this environment. </p>"
+          "documentation":"<p>The queues used by this environment.</p>"
         }
       },
       "documentation":"<p>Describes the AWS resources in use by this environment. This data is live.</p>"
@@ -1898,7 +1912,7 @@
           "documentation":"<p> A list of <a>EnvironmentResourceDescription</a>. </p>"
         }
       },
-      "documentation":"<p>Result message containing a list of environment resource descriptions. </p>"
+      "documentation":"<p>Result message containing a list of environment resource descriptions.</p>"
     },
     "EnvironmentResourcesDescription":{
       "type":"structure",
@@ -1936,7 +1950,7 @@
           "documentation":"<p>The version of this environment tier.</p>"
         }
       },
-      "documentation":"<p> Describes the properties of an environment tier </p>"
+      "documentation":"<p>Describes the properties of an environment tier</p>"
     },
     "EventDate":{"type":"timestamp"},
     "EventDescription":{
@@ -1972,7 +1986,7 @@
         },
         "Severity":{
           "shape":"EventSeverity",
-          "documentation":"<p>The severity level of this event. </p>"
+          "documentation":"<p>The severity level of this event.</p>"
         }
       },
       "documentation":"<p>Describes an event.</p>"
@@ -2052,35 +2066,35 @@
       "members":{
         "NoData":{
           "shape":"NullableInteger",
-          "documentation":"<p><b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting no data on an instance.</p>"
+          "documentation":"<p> <b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting no data on an instance.</p>"
         },
         "Unknown":{
           "shape":"NullableInteger",
-          "documentation":"<p><b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting an insufficient amount of data on an instance.</p>"
+          "documentation":"<p> <b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting an insufficient amount of data on an instance.</p>"
         },
         "Pending":{
           "shape":"NullableInteger",
-          "documentation":"<p><b>Grey.</b> An operation is in progress on an instance within the command timeout.</p>"
+          "documentation":"<p> <b>Grey.</b> An operation is in progress on an instance within the command timeout.</p>"
         },
         "Ok":{
           "shape":"NullableInteger",
-          "documentation":"<p><b>Green.</b> An instance is passing health checks and the health agent is not reporting any problems.</p>"
+          "documentation":"<p> <b>Green.</b> An instance is passing health checks and the health agent is not reporting any problems.</p>"
         },
         "Info":{
           "shape":"NullableInteger",
-          "documentation":"<p><b>Green.</b> An operation is in progress on an instance.</p>"
+          "documentation":"<p> <b>Green.</b> An operation is in progress on an instance.</p>"
         },
         "Warning":{
           "shape":"NullableInteger",
-          "documentation":"<p><b>Yellow.</b> The health agent is reporting a moderate number of request failures or other issues for an instance or environment.</p>"
+          "documentation":"<p> <b>Yellow.</b> The health agent is reporting a moderate number of request failures or other issues for an instance or environment.</p>"
         },
         "Degraded":{
           "shape":"NullableInteger",
-          "documentation":"<p><b>Red.</b> The health agent is reporting a high number of request failures or other issues for an instance or environment.</p>"
+          "documentation":"<p> <b>Red.</b> The health agent is reporting a high number of request failures or other issues for an instance or environment.</p>"
         },
         "Severe":{
           "shape":"NullableInteger",
-          "documentation":"<p><b>Red.</b> The health agent is reporting a very high number of request failures or other issues for an instance or environment.</p>"
+          "documentation":"<p> <b>Red.</b> The health agent is reporting a very high number of request failures or other issues for an instance or environment.</p>"
         }
       },
       "documentation":"<p>Represents summary information about the health of an instance. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">Health Colors and Statuses</a>.</p>"
@@ -2197,14 +2211,14 @@
       "members":{
         "SolutionStacks":{
           "shape":"AvailableSolutionStackNamesList",
-          "documentation":"<p> A list of available solution stacks. </p>"
+          "documentation":"<p>A list of available solution stacks.</p>"
         },
         "SolutionStackDetails":{
           "shape":"AvailableSolutionStackDetailsList",
           "documentation":"<p> A list of available solution stacks and their <a>SolutionStackDescription</a>. </p>"
         }
       },
-      "documentation":"<p>A list of available AWS Elastic Beanstalk solution stacks. </p>"
+      "documentation":"<p>A list of available AWS Elastic Beanstalk solution stacks.</p>"
     },
     "Listener":{
       "type":"structure",
@@ -2384,32 +2398,32 @@
       "members":{
         "Pattern":{
           "shape":"RegexPattern",
-          "documentation":"<p> The regular expression pattern that a string configuration option value with this restriction must match. </p>"
+          "documentation":"<p>The regular expression pattern that a string configuration option value with this restriction must match.</p>"
         },
         "Label":{
           "shape":"RegexLabel",
-          "documentation":"<p> A unique name representing this regular expression. </p>"
+          "documentation":"<p>A unique name representing this regular expression.</p>"
         }
       },
-      "documentation":"<p> A regular expression representing a restriction on a string configuration option value. </p>"
+      "documentation":"<p>A regular expression representing a restriction on a string configuration option value.</p>"
     },
     "OptionSpecification":{
       "type":"structure",
       "members":{
         "ResourceName":{
           "shape":"ResourceName",
-          "documentation":"<p> A unique resource name for a time-based scaling configuration option. </p>"
+          "documentation":"<p>A unique resource name for a time-based scaling configuration option.</p>"
         },
         "Namespace":{
           "shape":"OptionNamespace",
-          "documentation":"<p> A unique namespace identifying the option's associated AWS resource. </p>"
+          "documentation":"<p>A unique namespace identifying the option's associated AWS resource.</p>"
         },
         "OptionName":{
           "shape":"ConfigurationOptionName",
-          "documentation":"<p> The name of the configuration option. </p>"
+          "documentation":"<p>The name of the configuration option.</p>"
         }
       },
-      "documentation":"<p> A specification identifying an individual configuration option. </p>"
+      "documentation":"<p>A specification identifying an individual configuration option.</p>"
     },
     "OptionsSpecifierList":{
       "type":"list",
@@ -2438,11 +2452,11 @@
       "members":{
         "EnvironmentId":{
           "shape":"EnvironmentId",
-          "documentation":"<p> The ID of the environment to rebuild. </p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>The ID of the environment to rebuild.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> The name of the environment to rebuild. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>The name of the environment to rebuild.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
         }
       },
       "documentation":"<p/>"
@@ -2482,11 +2496,11 @@
       "members":{
         "EnvironmentId":{
           "shape":"EnvironmentId",
-          "documentation":"<p> The ID of the environment to restart the server for. </p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>The ID of the environment to restart the server for.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> The name of the environment to restart the server for. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>The name of the environment to restart the server for.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
         }
       },
       "documentation":"<p/>"
@@ -2505,7 +2519,7 @@
         },
         "InfoType":{
           "shape":"EnvironmentInfoType",
-          "documentation":"<p> The type of information to retrieve. </p>"
+          "documentation":"<p>The type of information to retrieve.</p>"
         }
       },
       "documentation":"<p>Request to download logs retrieved with <a>RequestEnvironmentInfo</a>.</p>"
@@ -2612,14 +2626,14 @@
       "members":{
         "SolutionStackName":{
           "shape":"SolutionStackName",
-          "documentation":"<p> The name of the solution stack. </p>"
+          "documentation":"<p>The name of the solution stack.</p>"
         },
         "PermittedFileTypes":{
           "shape":"SolutionStackFileTypeList",
-          "documentation":"<p> The permitted file types allowed for a solution stack. </p>"
+          "documentation":"<p>The permitted file types allowed for a solution stack.</p>"
         }
       },
-      "documentation":"<p> Describes the solution stack. </p>"
+      "documentation":"<p>Describes the solution stack.</p>"
     },
     "SolutionStackFileTypeList":{
       "type":"list",
@@ -2628,6 +2642,19 @@
     "SolutionStackName":{
       "type":"string",
       "max":100
+    },
+    "SourceBuildInformation":{
+      "type":"structure",
+      "required":[
+        "SourceType",
+        "SourceRepository",
+        "SourceLocation"
+      ],
+      "members":{
+        "SourceType":{"shape":"SourceType"},
+        "SourceRepository":{"shape":"SourceRepository"},
+        "SourceLocation":{"shape":"SourceLocation"}
+      }
     },
     "SourceBundleDeletionException":{
       "type":"structure",
@@ -2654,6 +2681,20 @@
         }
       },
       "documentation":"<p>A specification for an environment configuration</p>"
+    },
+    "SourceLocation":{
+      "type":"string",
+      "max":255,
+      "min":3,
+      "pattern":".+/.+"
+    },
+    "SourceRepository":{
+      "type":"string",
+      "enum":["CodeCommit"]
+    },
+    "SourceType":{
+      "type":"string",
+      "enum":["Git"]
     },
     "StatusCodes":{
       "type":"structure",
@@ -2683,19 +2724,19 @@
       "members":{
         "SourceEnvironmentId":{
           "shape":"EnvironmentId",
-          "documentation":"<p> The ID of the source environment. </p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentId</code>, you must specify the <code>DestinationEnvironmentId</code>. </p>"
+          "documentation":"<p>The ID of the source environment.</p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentId</code>, you must specify the <code>DestinationEnvironmentId</code>. </p>"
         },
         "SourceEnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> The name of the source environment. </p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentName</code>, you must specify the <code>DestinationEnvironmentName</code>. </p>"
+          "documentation":"<p>The name of the source environment.</p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentName</code>, you must specify the <code>DestinationEnvironmentName</code>. </p>"
         },
         "DestinationEnvironmentId":{
           "shape":"EnvironmentId",
-          "documentation":"<p> The ID of the destination environment. </p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentId</code> with the <code>DestinationEnvironmentId</code>. </p>"
+          "documentation":"<p>The ID of the destination environment.</p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentId</code> with the <code>DestinationEnvironmentId</code>. </p>"
         },
         "DestinationEnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> The name of the destination environment. </p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentName</code> with the <code>DestinationEnvironmentName</code>. </p>"
+          "documentation":"<p>The name of the destination environment.</p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentName</code> with the <code>DestinationEnvironmentName</code>. </p>"
         }
       },
       "documentation":"<p>Swaps the CNAMEs of two environments.</p>"
@@ -2753,7 +2794,7 @@
         },
         "TerminateResources":{
           "shape":"TerminateEnvironmentResources",
-          "documentation":"<p> Indicates whether the associated AWS resources should shut down when the environment is terminated: </p> <ul> <li> <code>true</code>: The specified environment as well as the associated AWS resources, such as Auto Scaling group and LoadBalancer, are terminated. </li> <li> <code>false</code>: AWS Elastic Beanstalk resource management is removed from the environment, but the AWS resources continue to operate. </li> </ul> <p> For more information, see the <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/\"> AWS Elastic Beanstalk User Guide. </a> </p> <p> Default: <code>true</code> </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>"
+          "documentation":"<p>Indicates whether the associated AWS resources should shut down when the environment is terminated:</p> <ul> <li> <p> <code>true</code>: The specified environment as well as the associated AWS resources, such as Auto Scaling group and LoadBalancer, are terminated.</p> </li> <li> <p> <code>false</code>: AWS Elastic Beanstalk resource management is removed from the environment, but the AWS resources continue to operate.</p> </li> </ul> <p> For more information, see the <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/\"> AWS Elastic Beanstalk User Guide. </a> </p> <p> Default: <code>true</code> </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>"
         },
         "ForceTerminate":{
           "shape":"ForceTerminate",
@@ -2846,7 +2887,7 @@
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p> A new description for the application. </p> <p>Default: If not specified, AWS Elastic Beanstalk does not update the description. </p>"
+          "documentation":"<p>A new description for the application.</p> <p>Default: If not specified, AWS Elastic Beanstalk does not update the description.</p>"
         }
       },
       "documentation":"<p>Request to update an application.</p>"
@@ -2860,7 +2901,7 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p> The name of the application associated with this version. </p> <p> If no application is found with this name, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>"
+          "documentation":"<p>The name of the application associated with this version.</p> <p> If no application is found with this name, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>"
         },
         "VersionLabel":{
           "shape":"VersionLabel",
@@ -2894,11 +2935,11 @@
         },
         "OptionSettings":{
           "shape":"ConfigurationOptionSettingsList",
-          "documentation":"<p> A list of configuration option settings to update with the new specified option value. </p>"
+          "documentation":"<p>A list of configuration option settings to update with the new specified option value.</p>"
         },
         "OptionsToRemove":{
           "shape":"OptionsSpecifierList",
-          "documentation":"<p> A list of configuration options to remove from the configuration set. </p> <p> Constraint: You can remove only <code>UserDefined</code> configuration options. </p>"
+          "documentation":"<p>A list of configuration options to remove from the configuration set.</p> <p> Constraint: You can remove only <code>UserDefined</code> configuration options. </p>"
         }
       },
       "documentation":"<p>The result message containing the options for the specified solution stack.</p>"
@@ -2925,11 +2966,11 @@
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment. </p>"
+          "documentation":"<p>If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.</p>"
         },
         "Tier":{
           "shape":"EnvironmentTier",
-          "documentation":"<p>This specifies the tier to use to update the environment. </p> <p>Condition: At this time, if you change the tier version, name, or type, AWS Elastic Beanstalk returns <code>InvalidParameterValue</code> error. </p>"
+          "documentation":"<p>This specifies the tier to use to update the environment.</p> <p>Condition: At this time, if you change the tier version, name, or type, AWS Elastic Beanstalk returns <code>InvalidParameterValue</code> error. </p>"
         },
         "VersionLabel":{
           "shape":"VersionLabel",
@@ -2941,15 +2982,15 @@
         },
         "SolutionStackName":{
           "shape":"SolutionStackName",
-          "documentation":"<p>This specifies the platform version that the environment will run after the environment is updated. </p>"
+          "documentation":"<p>This specifies the platform version that the environment will run after the environment is updated.</p>"
         },
         "OptionSettings":{
           "shape":"ConfigurationOptionSettingsList",
-          "documentation":"<p>If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value. </p>"
+          "documentation":"<p>If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.</p>"
         },
         "OptionsToRemove":{
           "shape":"OptionsSpecifierList",
-          "documentation":"<p>A list of custom user-defined configuration options to remove from the configuration set for this environment. </p>"
+          "documentation":"<p>A list of custom user-defined configuration options to remove from the configuration set for this environment.</p>"
         }
       },
       "documentation":"<p>Request to update an environment.</p>"
@@ -2964,33 +3005,33 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p> The name of the application that the configuration template or environment belongs to. </p>"
+          "documentation":"<p>The name of the application that the configuration template or environment belongs to.</p>"
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
-          "documentation":"<p> The name of the configuration template to validate the settings against. </p> <p> Condition: You cannot specify both this and an environment name. </p>"
+          "documentation":"<p>The name of the configuration template to validate the settings against.</p> <p>Condition: You cannot specify both this and an environment name.</p>"
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p> The name of the environment to validate the settings against. </p> <p> Condition: You cannot specify both this and a configuration template name. </p>"
+          "documentation":"<p>The name of the environment to validate the settings against.</p> <p>Condition: You cannot specify both this and a configuration template name.</p>"
         },
         "OptionSettings":{
           "shape":"ConfigurationOptionSettingsList",
-          "documentation":"<p> A list of the options and desired values to evaluate. </p>"
+          "documentation":"<p>A list of the options and desired values to evaluate.</p>"
         }
       },
-      "documentation":"<p>A list of validation messages for a specified configuration template. </p>"
+      "documentation":"<p>A list of validation messages for a specified configuration template.</p>"
     },
     "ValidationMessage":{
       "type":"structure",
       "members":{
         "Message":{
           "shape":"ValidationMessageString",
-          "documentation":"<p> A message describing the error or warning. </p>"
+          "documentation":"<p>A message describing the error or warning.</p>"
         },
         "Severity":{
           "shape":"ValidationSeverity",
-          "documentation":"<p> An indication of the severity of this message: </p> <ul> <li> <code>error</code>: This message indicates that this is not a valid setting for an option. </li> <li> <code>warning</code>: This message is providing information you should take into account. </li> </ul>"
+          "documentation":"<p>An indication of the severity of this message:</p> <ul> <li> <p> <code>error</code>: This message indicates that this is not a valid setting for an option.</p> </li> <li> <p> <code>warning</code>: This message is providing information you should take into account.</p> </li> </ul>"
         },
         "Namespace":{
           "shape":"OptionNamespace",
@@ -3001,7 +3042,7 @@
           "documentation":"<p/>"
         }
       },
-      "documentation":"<p> An error or warning for a desired configuration option value. </p>"
+      "documentation":"<p>An error or warning for a desired configuration option value.</p>"
     },
     "ValidationMessageString":{"type":"string"},
     "ValidationMessagesList":{
@@ -3029,5 +3070,5 @@
       "member":{"shape":"VersionLabel"}
     }
   },
-  "documentation":"<fullname>AWS Elastic Beanstalk</fullname> <p>AWS Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on the Amazon Web Services cloud.</p> <p>For more information about this product, go to the <a href=\"http://aws.amazon.com/elasticbeanstalk/\">AWS Elastic Beanstalk</a> details page. The location of the latest AWS Elastic Beanstalk WSDL is <a href=\"http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl\">http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>. To install the Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools that enable you to access the API, go to <a href=\"https://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p> <p><b>Endpoints</b></p> <p>For a list of region-specific endpoints that AWS Elastic Beanstalk supports, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region\">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p>"
+  "documentation":"<fullname>AWS Elastic Beanstalk</fullname> <p>AWS Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on the Amazon Web Services cloud.</p> <p>For more information about this product, go to the <a href=\"http://aws.amazon.com/elasticbeanstalk/\">AWS Elastic Beanstalk</a> details page. The location of the latest AWS Elastic Beanstalk WSDL is <a href=\"http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl\">http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>. To install the Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools that enable you to access the API, go to <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p> <p> <b>Endpoints</b> </p> <p>For a list of region-specific endpoints that AWS Elastic Beanstalk supports, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region\">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p>"
 }

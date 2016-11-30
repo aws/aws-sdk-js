@@ -15,4 +15,5 @@ features
 Rakefile
 test
 tasks
+ts
 vendor

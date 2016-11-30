@@ -5,7 +5,13 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['directoryservice'] = {};
 AWS.DirectoryService = Service.defineService('directoryservice', ['2015-04-16']);
-
-apiLoader.services['directoryservice']['2015-04-16'] = require('../apis/ds-2015-04-16.min.json');
+Object.defineProperty(apiLoader.services['directoryservice'], '2015-04-16', {
+  get: function get() {
+    var model = require('../apis/ds-2015-04-16.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.DirectoryService;

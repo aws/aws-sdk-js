@@ -5,7 +5,13 @@ var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['kinesisanalytics'] = {};
 AWS.KinesisAnalytics = Service.defineService('kinesisanalytics', ['2015-08-14']);
-
-apiLoader.services['kinesisanalytics']['2015-08-14'] = require('../apis/kinesisanalytics-2015-08-14.min.json');
+Object.defineProperty(apiLoader.services['kinesisanalytics'], '2015-08-14', {
+  get: function get() {
+    var model = require('../apis/kinesisanalytics-2015-08-14.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.KinesisAnalytics;

@@ -6,7 +6,13 @@ var apiLoader = require('../lib/api_loader');
 apiLoader.services['cloudsearchdomain'] = {};
 AWS.CloudSearchDomain = Service.defineService('cloudsearchdomain', ['2013-01-01']);
 require('../lib/services/cloudsearchdomain');
-
-apiLoader.services['cloudsearchdomain']['2013-01-01'] = require('../apis/cloudsearchdomain-2013-01-01.min.json');
+Object.defineProperty(apiLoader.services['cloudsearchdomain'], '2013-01-01', {
+  get: function get() {
+    var model = require('../apis/cloudsearchdomain-2013-01-01.min.json');
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
 
 module.exports = AWS.CloudSearchDomain;

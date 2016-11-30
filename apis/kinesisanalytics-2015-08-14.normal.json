@@ -694,7 +694,10 @@
     },
     "Input":{
       "type":"structure",
-      "required":["NamePrefix"],
+      "required":[
+        "NamePrefix",
+        "InputSchema"
+      ],
       "members":{
         "NamePrefix":{
           "shape":"InAppStreamName",
@@ -1559,7 +1562,8 @@
     "UnableToDetectSchemaException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"ErrorMessage"}
+        "message":{"shape":"ErrorMessage"},
+        "RawInputRecords":{"shape":"RawInputRecords"}
       },
       "documentation":"<p>Data format is not valid, Kinesis Analytics is not able to detect schema for the given streaming source.</p>",
       "exception":true
