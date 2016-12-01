@@ -25,11 +25,11 @@ describe 'AWS.EC2', ->
           'DestinationRegion=mock-region',
           'PresignedUrl=https%3A%2F%2Fec2.src-region.amazonaws.com%2F%3F' +
           'Action%3DCopySnapshot%26DestinationRegion%3Dmock-region%26SourceRegion%3Dsrc-region' + 
-          '%26SourceSnapshotId%3Dsnap-123456789%26Version%3D2016-09-15' + 
+          '%26SourceSnapshotId%3Dsnap-123456789%26Version%3D2016-12-15' + 
           '%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3Dakid%252F19700101' +
           '%252Fsrc-region%252Fec2%252Faws4_request%26X-Amz-Date%3D19700101T000000Z' + 
           '%26X-Amz-Expires%3D3600%26X-Amz-Security-Token%3Dsession' + 
-          '%26X-Amz-Signature%3D47d513a7623b81ded5f0be86e59ac13aa5ebd7bbf25fde03327442cd3a998949' + 
+          '%26X-Amz-Signature%3Dc00f4cd1d32318c8960bd664f229e45e0111d90e03e51fe4b4bd307f8ac213b5' + 
           '%26X-Amz-SignedHeaders%3Dhost',
           'SourceRegion=src-region',
           'SourceSnapshotId=snap-123456789'
