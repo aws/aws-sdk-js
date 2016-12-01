@@ -371,7 +371,6 @@
     "name": "SWF"
   },
   "xray": {
-    "prefix": "tracing",
     "name": "XRay"
   },
   "waf": {
