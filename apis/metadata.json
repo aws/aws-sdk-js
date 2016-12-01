@@ -12,6 +12,9 @@
     "name": "ApplicationAutoScaling",
     "cors": true
   },
+  "appstream": {
+    "name": "AppStream"
+  },
   "autoscaling": {
     "name": "AutoScaling",
     "cors": true
@@ -73,6 +76,9 @@
     "prefix": "logs",
     "name": "CloudWatchLogs",
     "cors": true
+  },
+  "codebuild": {
+    "name": "CodeBuild"
   },
   "codecommit": {
     "name": "CodeCommit",
@@ -212,6 +218,9 @@
   "glacier": {
     "name": "Glacier"
   },
+  "health": {
+    "name": "Health"
+  },
   "iam": {
     "name": "IAM"
   },
@@ -272,6 +281,12 @@
     "name": "OpsWorks",
     "cors": true
   },
+  "opsworkscm": {
+    "name": "OpsWorksCM"
+  },
+  "pinpoint": {
+    "name": "Pinpoint"
+  },
   "polly": {
     "name": "Polly",
     "cors": true
@@ -312,6 +327,9 @@
     "name": "SES",
     "cors": true
   },
+  "shield": {
+    "name": "Shield"
+  },
   "simpledb": {
     "prefix": "sdb",
     "name": "SimpleDB"
@@ -338,6 +356,10 @@
     "name": "StorageGateway",
     "cors": true
   },
+  "stepfunctions": {
+    "prefix": "states",
+    "name": "StepFunctions"
+  },
   "sts": {
     "name": "STS",
     "cors": true
@@ -347,6 +369,10 @@
   },
   "swf": {
     "name": "SWF"
+  },
+  "xray": {
+    "prefix": "tracing",
+    "name": "XRay"
   },
   "waf": {
     "name": "WAF",
