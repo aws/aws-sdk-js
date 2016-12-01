@@ -7,6 +7,7 @@
     "serviceAbbreviation":"Elastic Beanstalk",
     "serviceFullName":"AWS Elastic Beanstalk",
     "signatureVersion":"v4",
+    "uid":"elasticbeanstalk-2010-12-01",
     "xmlNamespace":"http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"
   },
   "operations":{
@@ -100,7 +101,8 @@
         {"shape":"TooManyApplicationsException"},
         {"shape":"TooManyApplicationVersionsException"},
         {"shape":"InsufficientPrivilegesException"},
-        {"shape":"S3LocationNotInServiceRegionException"}
+        {"shape":"S3LocationNotInServiceRegionException"},
+        {"shape":"CodeBuildNotInServiceRegionException"}
       ],
       "documentation":"<p>Creates an application version for the specified application.</p> <note> <p>Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version.</p> </note>"
     },
@@ -215,7 +217,7 @@
         "shape":"ApplicationVersionDescriptionsMessage",
         "resultWrapper":"DescribeApplicationVersionsResult"
       },
-      "documentation":"<p>Retrieve a list of application versions stored in your AWS Elastic Beanstalk storage bucket.</p>"
+      "documentation":"<p>Retrieve a list of application versions.</p>"
     },
     "DescribeApplications":{
       "name":"DescribeApplications",
@@ -368,7 +370,7 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ElasticBeanstalkServiceException"}
       ],
-      "documentation":"<p>Returns more detailed information about the health of the specified instances (for example, CPU utilization, load average, and causes). The <b>DescribeInstancesHealth</b> operation is only available with AWS Elastic Beanstalk Enhanced Health.</p>"
+      "documentation":"<p>Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html\">enhanced health reporting</a>.</p>"
     },
     "ListAvailableSolutionStacks":{
       "name":"ListAvailableSolutionStacks",
@@ -643,7 +645,7 @@
           "documentation":"<p>Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one milisecond resolution.</p>"
         }
       },
-      "documentation":"<p>Represents the application metrics for a specified environment.</p>"
+      "documentation":"<p>Application request metrics for an AWS Elastic Beanstalk environment.</p>"
     },
     "ApplicationName":{
       "type":"string",
@@ -659,20 +661,24 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p>The name of the application associated with this release.</p>"
+          "documentation":"<p>The name of the application to which the application version belongs.</p>"
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>The description of this application version.</p>"
+          "documentation":"<p>The description of the application version.</p>"
         },
         "VersionLabel":{
           "shape":"VersionLabel",
-          "documentation":"<p>A label uniquely identifying the version for the associated application.</p>"
+          "documentation":"<p>A unique identifier for the application version.</p>"
         },
-        "SourceBuildInformation":{"shape":"SourceBuildInformation"},
+        "SourceBuildInformation":{
+          "shape":"SourceBuildInformation",
+          "documentation":"<p>If the version's source code was retrieved from AWS CodeCommit, the location of the source code for the application version.</p>"
+        },
+        "BuildArn":{"shape":"String"},
         "SourceBundle":{
           "shape":"S3Location",
-          "documentation":"<p>The location where the source bundle is located for this version.</p>"
+          "documentation":"<p>The storage location of the application version's source bundle in Amazon S3.</p>"
         },
         "DateCreated":{
           "shape":"CreationDate",
@@ -708,7 +714,7 @@
       "members":{
         "ApplicationVersions":{
           "shape":"ApplicationVersionDescriptionList",
-          "documentation":"<p>List of <code>ApplicationVersionDescription</code> objects sorted by order of creation.</p>"
+          "documentation":"<p>List of <code>ApplicationVersionDescription</code> objects sorted in order of creation.</p>"
         },
         "NextToken":{
           "shape":"Token",
@@ -724,7 +730,8 @@
         "Processed",
         "Unprocessed",
         "Failed",
-        "Processing"
+        "Processing",
+        "Building"
       ]
     },
     "ApplyEnvironmentManagedActionRequest":{
@@ -791,6 +798,21 @@
       "type":"list",
       "member":{"shape":"SolutionStackName"}
     },
+    "BoxedInt":{"type":"integer"},
+    "BuildConfiguration":{
+      "type":"structure",
+      "required":[
+        "CodeBuildServiceRole",
+        "Image"
+      ],
+      "members":{
+        "ArtifactName":{"shape":"String"},
+        "CodeBuildServiceRole":{"shape":"NonEmptyString"},
+        "ComputeType":{"shape":"ComputeType"},
+        "Image":{"shape":"NonEmptyString"},
+        "TimeoutInMinutes":{"shape":"BoxedInt"}
+      }
+    },
     "CPUUtilization":{
       "type":"structure",
       "members":{
@@ -823,7 +845,7 @@
           "documentation":"<p>Percentage of time that the CPU has spent in the <code>SoftIRQ</code> state over the last 10 seconds.</p>"
         }
       },
-      "documentation":"<p>Represents CPU utilization information from the specified instance that belongs to the AWS Elastic Beanstalk environment. Use the <code>instanceId</code> property to specify the application instance for which you'd like to return data.</p>"
+      "documentation":"<p>CPU utilization metrics for an instance.</p>"
     },
     "Cause":{
       "type":"string",
@@ -860,6 +882,18 @@
       "documentation":"<p>Indicates if the specified CNAME is available.</p>"
     },
     "CnameAvailability":{"type":"boolean"},
+    "CodeBuildNotInServiceRegionException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The CodeBuild service is not supported in this region.</p>",
+      "error":{
+        "code":"CodeBuildNotInServiceRegionException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "ComposeEnvironmentsMessage":{
       "type":"structure",
       "members":{
@@ -877,6 +911,14 @@
         }
       },
       "documentation":"<p>Request to create or update a group of environments.</p>"
+    },
+    "ComputeType":{
+      "type":"string",
+      "enum":[
+        "BUILD_GENERAL1_SMALL",
+        "BUILD_GENERAL1_MEDIUM",
+        "BUILD_GENERAL1_LARGE"
+      ]
     },
     "ConfigurationDeploymentStatus":{
       "type":"string",
@@ -1105,14 +1147,18 @@
           "shape":"Description",
           "documentation":"<p>Describes this version.</p>"
         },
-        "SourceBuildInformation":{"shape":"SourceBuildInformation"},
+        "SourceBuildInformation":{
+          "shape":"SourceBuildInformation",
+          "documentation":"<p>Specify a commit in an AWS CodeCommit Git repository to use as the source code for the application version.</p> <p>Specify a commit in an AWS CodeCommit repository or a source bundle in S3 (with <code>SourceBundle</code>), but not both. If neither <code>SourceBundle</code> nor <code>SourceBuildInformation</code> are provided, Elastic Beanstalk uses a sample application.</p>"
+        },
         "SourceBundle":{
           "shape":"S3Location",
-          "documentation":"<p>The Amazon S3 bucket and key that identify the location of the source bundle for this version.</p> <p> If data found at the Amazon S3 location exceeds the maximum allowed source bundle size, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. The maximum size allowed is 512 MB. </p> <p>Default: If not specified, AWS Elastic Beanstalk uses a sample application. If only partially specified (for example, a bucket is provided but not the key) or if no data is found at the Amazon S3 location, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p>"
+          "documentation":"<p>The Amazon S3 bucket and key that identify the location of the source bundle for this version.</p> <p>Specify a source bundle in S3 or a commit in an AWS CodeCommit repository (with <code>SourceBuildInformation</code>), but not both. If neither <code>SourceBundle</code> nor <code>SourceBuildInformation</code> are provided, Elastic Beanstalk uses a sample application.</p>"
         },
+        "BuildConfiguration":{"shape":"BuildConfiguration"},
         "AutoCreateApplication":{
           "shape":"AutoCreateApplication",
-          "documentation":"<p>Determines how the system behaves if the specified application for this version does not already exist:</p> <ul> <li> <p> <code>true</code> : Automatically creates the specified application for this release if it does not already exist.</p> </li> <li> <p> <code>false</code> : Throws an <code>InvalidParameterValue</code> if the specified application for this release does not already exist.</p> </li> </ul> <p> Default: <code>false</code> </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>"
+          "documentation":"<p>Set to <code>true</code> to create an application with the specified name if it doesn't already exist.</p>"
         },
         "Process":{
           "shape":"ApplicationVersionProccess",
@@ -1259,7 +1305,7 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p>The name of the application to delete releases from.</p>"
+          "documentation":"<p>The name of the application to which the version belongs.</p>"
         },
         "VersionLabel":{
           "shape":"VersionLabel",
@@ -1267,7 +1313,7 @@
         },
         "DeleteSourceBundle":{
           "shape":"DeleteSourceBundle",
-          "documentation":"<p>Indicates whether to delete the associated source bundle from Amazon S3:</p> <ul> <li> <p> <code>true</code>: An attempt is made to delete the associated Amazon S3 source bundle specified at time of creation.</p> </li> <li> <p> <code>false</code>: No action is taken on the Amazon S3 source bundle specified at time of creation.</p> </li> </ul> <p> Valid Values: <code>true</code> | <code>false</code> </p>"
+          "documentation":"<p>Set to <code>true</code> to delete the source bundle from your storage bucket. Otherwise, the application version is deleted only from Elastic Beanstalk and the source bundle remains in Amazon S3.</p>"
         }
       },
       "documentation":"<p>Request to delete an application version.</p>"
@@ -1337,11 +1383,11 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include ones that are associated with the specified application.</p>"
+          "documentation":"<p>Specify an application name to show only application versions for that application.</p>"
         },
         "VersionLabels":{
           "shape":"VersionLabelsList",
-          "documentation":"<p>If specified, restricts the returned descriptions to only include ones that have the specified version labels.</p>"
+          "documentation":"<p>Specify a version label to show a specific application version.</p>"
         },
         "MaxRecords":{
           "shape":"MaxRecords",
@@ -1352,7 +1398,7 @@
           "documentation":"<p>Specify a next token to retrieve the next page in a paginated request.</p>"
         }
       },
-      "documentation":"<p>Result message containing a list of configuration descriptions.</p>"
+      "documentation":"<p>Request to describe application versions.</p>"
     },
     "DescribeApplicationsMessage":{
       "type":"structure",
@@ -1414,15 +1460,15 @@
       "members":{
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p>Specifies the AWS Elastic Beanstalk environment name.</p> <p>Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>Specify the environment by name.</p> <p>You must specify either this or an EnvironmentName, or both.</p>"
         },
         "EnvironmentId":{
           "shape":"EnvironmentId",
-          "documentation":"<p>Specifies the AWS Elastic Beanstalk environment ID.</p> <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>Specify the environment by ID.</p> <p>You must specify either this or an EnvironmentName, or both.</p>"
         },
         "AttributeNames":{
           "shape":"EnvironmentHealthAttributes",
-          "documentation":"<p>Specifies the response elements you wish to receive. If no attribute names are specified, AWS Elastic Beanstalk only returns the name of the environment.</p>"
+          "documentation":"<p>Specify the response elements to return. To retrieve all attributes, set to <code>All</code>. If no attribute names are specified, returns the name of the environment.</p>"
         }
       },
       "documentation":"<p>See the example below to learn how to create a request body.</p>"
@@ -1432,32 +1478,38 @@
       "members":{
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p>The AWS Elastic Beanstalk environment name.</p>"
+          "documentation":"<p>The environment's name.</p>"
         },
         "HealthStatus":{
           "shape":"String",
-          "documentation":"<p>Contains the response body with information about the health of the environment.</p>"
+          "documentation":"<p>The <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">health status</a> of the environment. For example, <code>Ok</code>.</p>"
         },
         "Status":{
           "shape":"EnvironmentHealth",
-          "documentation":"<p>Returns the health status value of the environment. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">Health Colors and Statuses</a>.</p>"
+          "documentation":"<p>The environment's operational status. <code>Ready</code>, <code>Launching</code>, <code>Updating</code>, <code>Terminating</code>, or <code>Terminated</code>.</p>"
         },
         "Color":{
           "shape":"String",
-          "documentation":"<p>Returns the color indicator that tells you information about the health of the environment. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">Health Colors and Statuses</a>.</p>"
+          "documentation":"<p>The <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html\">health color</a> of the environment.</p>"
         },
         "Causes":{
           "shape":"Causes",
-          "documentation":"<p>Returns potential causes for the reported status.</p>"
+          "documentation":"<p>Descriptions of the data that contributed to the environment's current health status.</p>"
         },
-        "ApplicationMetrics":{"shape":"ApplicationMetrics"},
-        "InstancesHealth":{"shape":"InstanceHealthSummary"},
+        "ApplicationMetrics":{
+          "shape":"ApplicationMetrics",
+          "documentation":"<p>Application request metrics for the environment.</p>"
+        },
+        "InstancesHealth":{
+          "shape":"InstanceHealthSummary",
+          "documentation":"<p>Summary health information for the instances in the environment.</p>"
+        },
         "RefreshedAt":{
           "shape":"RefreshedAt",
-          "documentation":"<p>The date and time the information was last refreshed.</p>"
+          "documentation":"<p>The date and time that the health information was retrieved.</p>"
         }
       },
-      "documentation":"<p>See the example below for a sample response.</p>"
+      "documentation":"<p>Health details for an AWS Elastic Beanstalk environment.</p>"
     },
     "DescribeEnvironmentManagedActionHistoryRequest":{
       "type":"structure",
@@ -1622,40 +1674,40 @@
       "members":{
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p>Specifies the AWS Elastic Beanstalk environment name.</p>"
+          "documentation":"<p>Specify the AWS Elastic Beanstalk environment by name.</p>"
         },
         "EnvironmentId":{
           "shape":"EnvironmentId",
-          "documentation":"<p>Specifies the AWS Elastic Beanstalk environment ID.</p>"
+          "documentation":"<p>Specify the AWS Elastic Beanstalk environment by ID.</p>"
         },
         "AttributeNames":{
           "shape":"InstancesHealthAttributes",
-          "documentation":"<p>Specifies the response elements you wish to receive. If no attribute names are specified, AWS Elastic Beanstalk only returns a list of instances.</p>"
+          "documentation":"<p>Specifies the response elements you wish to receive. To retrieve all attributes, set to <code>All</code>. If no attribute names are specified, returns a list of instances.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Specifies the next token of the request.</p>"
+          "documentation":"<p>Specify the pagination token returned by a previous call.</p>"
         }
       },
-      "documentation":"<p>See the example below to learn how to create a request body.</p>"
+      "documentation":"<p>Parameters for a call to <code>DescribeInstancesHealth</code>.</p>"
     },
     "DescribeInstancesHealthResult":{
       "type":"structure",
       "members":{
         "InstanceHealthList":{
           "shape":"InstanceHealthList",
-          "documentation":"<p>Contains the response body with information about the health of the instance.</p>"
+          "documentation":"<p>Detailed health information about each instance.</p>"
         },
         "RefreshedAt":{
           "shape":"RefreshedAt",
-          "documentation":"<p>The date and time the information was last refreshed.</p>"
+          "documentation":"<p>The date and time that the health information was retrieved.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>The next token.</p>"
+          "documentation":"<p>Pagination token for the next page of results, if available.</p>"
         }
       },
-      "documentation":"<p>See the example below for a sample response.</p>"
+      "documentation":"<p>Detailed health information about the Amazon EC2 instances in an AWS Elastic Beanstalk environment.</p>"
     },
     "Description":{
       "type":"string",
@@ -2374,6 +2426,10 @@
       "max":100,
       "min":1
     },
+    "NonEmptyString":{
+      "type":"string",
+      "pattern":".*\\S.*"
+    },
     "NullableDouble":{"type":"double"},
     "NullableInteger":{"type":"integer"},
     "NullableLong":{"type":"long"},
@@ -2554,7 +2610,7 @@
           "documentation":"<p>The Amazon S3 key where the data is located.</p>"
         }
       },
-      "documentation":"<p>A specification of a location in Amazon S3.</p>"
+      "documentation":"<p>The bucket and key of an item stored in Amazon S3.</p>"
     },
     "S3LocationNotInServiceRegionException":{
       "type":"structure",
@@ -2604,8 +2660,14 @@
           "shape":"LaunchedAt",
           "documentation":"<p>The time at which the EC2 instance was launched.</p>"
         },
-        "ApplicationMetrics":{"shape":"ApplicationMetrics"},
-        "System":{"shape":"SystemStatus"},
+        "ApplicationMetrics":{
+          "shape":"ApplicationMetrics",
+          "documentation":"<p>Request metrics from your application.</p>"
+        },
+        "System":{
+          "shape":"SystemStatus",
+          "documentation":"<p>Operating system metrics from the instance.</p>"
+        },
         "Deployment":{
           "shape":"Deployment",
           "documentation":"<p>Information about the most recent deployment to an instance.</p>"
@@ -2619,7 +2681,7 @@
           "documentation":"<p>The instance's type.</p>"
         }
       },
-      "documentation":"<p>Represents health information from the specified instance that belongs to the AWS Elastic Beanstalk environment. Use the <code>InstanceId</code> property to specify the application instance for which you'd like to return data.</p>"
+      "documentation":"<p>Detailed health information about an Amazon EC2 instance in your Elastic Beanstalk environment.</p>"
     },
     "SolutionStackDescription":{
       "type":"structure",
@@ -2651,10 +2713,20 @@
         "SourceLocation"
       ],
       "members":{
-        "SourceType":{"shape":"SourceType"},
-        "SourceRepository":{"shape":"SourceRepository"},
-        "SourceLocation":{"shape":"SourceLocation"}
-      }
+        "SourceType":{
+          "shape":"SourceType",
+          "documentation":"<p>The type of repository, such as <code>Git</code>.</p>"
+        },
+        "SourceRepository":{
+          "shape":"SourceRepository",
+          "documentation":"<p>Location where the repository is stored, such as <code>CodeCommit</code>.</p>"
+        },
+        "SourceLocation":{
+          "shape":"SourceLocation",
+          "documentation":"<p>The repository name and commit ID, separated by a forward slash. For example, <code>my-repo/265cfa0cf6af46153527f55d6503ec030551f57a</code>.</p>"
+        }
+      },
+      "documentation":"<p>Location of the source code for an application version.</p>"
     },
     "SourceBundleDeletionException":{
       "type":"structure",
@@ -2690,11 +2762,17 @@
     },
     "SourceRepository":{
       "type":"string",
-      "enum":["CodeCommit"]
+      "enum":[
+        "CodeCommit",
+        "S3"
+      ]
     },
     "SourceType":{
       "type":"string",
-      "enum":["Git"]
+      "enum":[
+        "Git",
+        "Zip"
+      ]
     },
     "StatusCodes":{
       "type":"structure",
@@ -2744,13 +2822,16 @@
     "SystemStatus":{
       "type":"structure",
       "members":{
-        "CPUUtilization":{"shape":"CPUUtilization"},
+        "CPUUtilization":{
+          "shape":"CPUUtilization",
+          "documentation":"<p>CPU utilization metrics for the instance.</p>"
+        },
         "LoadAverage":{
           "shape":"LoadAverage",
           "documentation":"<p>Load average in the last 1-minute and 5-minute periods. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os\">Operating System Metrics</a>.</p>"
         }
       },
-      "documentation":"<p>Represents CPU utilization and load average information for applications running in the specified environment.</p>"
+      "documentation":"<p>CPU utilization and load average metrics for an Amazon EC2 instance.</p>"
     },
     "Tag":{
       "type":"structure",
@@ -2901,15 +2982,15 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p>The name of the application associated with this version.</p> <p> If no application is found with this name, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>"
+          "documentation":"<p>The name of the application associated with this version.</p> <p> If no application is found with this name, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error.</p>"
         },
         "VersionLabel":{
           "shape":"VersionLabel",
-          "documentation":"<p>The name of the version to update.</p> <p> If no application version is found with this label, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>"
+          "documentation":"<p>The name of the version to update.</p> <p>If no application version is found with this label, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>"
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>A new description for this release.</p>"
+          "documentation":"<p>A new description for this version.</p>"
         }
       },
       "documentation":"<p/>"
@@ -3035,11 +3116,11 @@
         },
         "Namespace":{
           "shape":"OptionNamespace",
-          "documentation":"<p/>"
+          "documentation":"<p>The namespace to which the option belongs.</p>"
         },
         "OptionName":{
           "shape":"ConfigurationOptionName",
-          "documentation":"<p/>"
+          "documentation":"<p>The name of the option.</p>"
         }
       },
       "documentation":"<p>An error or warning for a desired configuration option value.</p>"

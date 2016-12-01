@@ -112,11 +112,11 @@ declare class ElasticBeanstalk extends Service {
    */
   deleteEnvironmentConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Retrieve a list of application versions stored in your AWS Elastic Beanstalk storage bucket.
+   * Retrieve a list of application versions.
    */
   describeApplicationVersions(params: ElasticBeanstalk.Types.DescribeApplicationVersionsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage, AWSError>;
   /**
-   * Retrieve a list of application versions stored in your AWS Elastic Beanstalk storage bucket.
+   * Retrieve a list of application versions.
    */
   describeApplicationVersions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage, AWSError>;
   /**
@@ -192,11 +192,11 @@ declare class ElasticBeanstalk extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EventDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EventDescriptionsMessage, AWSError>;
   /**
-   * Returns more detailed information about the health of the specified instances (for example, CPU utilization, load average, and causes). The DescribeInstancesHealth operation is only available with AWS Elastic Beanstalk Enhanced Health.
+   * Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
    */
   describeInstancesHealth(params: ElasticBeanstalk.Types.DescribeInstancesHealthRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
-   * Returns more detailed information about the health of the specified instances (for example, CPU utilization, load average, and causes). The DescribeInstancesHealth operation is only available with AWS Elastic Beanstalk Enhanced Health.
+   * Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
    */
   describeInstancesHealth(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
@@ -368,20 +368,24 @@ declare namespace ElasticBeanstalk.Types {
   export type ApplicationNamesList = ApplicationName[];
   export interface ApplicationVersionDescription {
     /**
-     * The name of the application associated with this release.
+     * The name of the application to which the application version belongs.
      */
     ApplicationName?: ApplicationName;
     /**
-     * The description of this application version.
+     * The description of the application version.
      */
     Description?: Description;
     /**
-     * A label uniquely identifying the version for the associated application.
+     * A unique identifier for the application version.
      */
     VersionLabel?: VersionLabel;
-    SourceBuildInformation?: SourceBuildInformation;
     /**
-     * The location where the source bundle is located for this version.
+     * If the version's source code was retrieved from AWS CodeCommit, the location of the source code for the application version.
+     */
+    SourceBuildInformation?: SourceBuildInformation;
+    BuildArn?: String;
+    /**
+     * The storage location of the application version's source bundle in Amazon S3.
      */
     SourceBundle?: S3Location;
     /**
@@ -406,7 +410,7 @@ declare namespace ElasticBeanstalk.Types {
   }
   export interface ApplicationVersionDescriptionsMessage {
     /**
-     * List of ApplicationVersionDescription objects sorted by order of creation.
+     * List of ApplicationVersionDescription objects sorted in order of creation.
      */
     ApplicationVersions?: ApplicationVersionDescriptionList;
     /**
@@ -415,7 +419,7 @@ declare namespace ElasticBeanstalk.Types {
     NextToken?: Token;
   }
   export type ApplicationVersionProccess = boolean;
-  export type ApplicationVersionStatus = "Processed"|"Unprocessed"|"Failed"|"Processing"|string;
+  export type ApplicationVersionStatus = "Processed"|"Unprocessed"|"Failed"|"Processing"|"Building"|string;
   export interface ApplyEnvironmentManagedActionRequest {
     /**
      * The name of the target environment.
@@ -458,6 +462,14 @@ declare namespace ElasticBeanstalk.Types {
   export type AutoScalingGroupList = AutoScalingGroup[];
   export type AvailableSolutionStackDetailsList = SolutionStackDescription[];
   export type AvailableSolutionStackNamesList = SolutionStackName[];
+  export type BoxedInt = number;
+  export interface BuildConfiguration {
+    ArtifactName?: String;
+    CodeBuildServiceRole: NonEmptyString;
+    ComputeType?: ComputeType;
+    Image: NonEmptyString;
+    TimeoutInMinutes?: BoxedInt;
+  }
   export interface CPUUtilization {
     /**
      * Percentage of time that the CPU has spent in the User state over the last 10 seconds.
@@ -521,6 +533,7 @@ declare namespace ElasticBeanstalk.Types {
      */
     VersionLabels?: VersionLabels;
   }
+  export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE"|string;
   export type ConfigurationDeploymentStatus = "deployed"|"pending"|"failed"|string;
   export type ConfigurationOptionDefaultValue = string;
   export interface ConfigurationOptionDescription {
@@ -681,13 +694,17 @@ declare namespace ElasticBeanstalk.Types {
      * Describes this version.
      */
     Description?: Description;
+    /**
+     * Specify a commit in an AWS CodeCommit Git repository to use as the source code for the application version. Specify a commit in an AWS CodeCommit repository or a source bundle in S3 (with SourceBundle), but not both. If neither SourceBundle nor SourceBuildInformation are provided, Elastic Beanstalk uses a sample application.
+     */
     SourceBuildInformation?: SourceBuildInformation;
     /**
-     * The Amazon S3 bucket and key that identify the location of the source bundle for this version.  If data found at the Amazon S3 location exceeds the maximum allowed source bundle size, AWS Elastic Beanstalk returns an InvalidParameterValue error. The maximum size allowed is 512 MB.  Default: If not specified, AWS Elastic Beanstalk uses a sample application. If only partially specified (for example, a bucket is provided but not the key) or if no data is found at the Amazon S3 location, AWS Elastic Beanstalk returns an InvalidParameterCombination error. 
+     * The Amazon S3 bucket and key that identify the location of the source bundle for this version. Specify a source bundle in S3 or a commit in an AWS CodeCommit repository (with SourceBuildInformation), but not both. If neither SourceBundle nor SourceBuildInformation are provided, Elastic Beanstalk uses a sample application.
      */
     SourceBundle?: S3Location;
+    BuildConfiguration?: BuildConfiguration;
     /**
-     * Determines how the system behaves if the specified application for this version does not already exist:    true : Automatically creates the specified application for this release if it does not already exist.    false : Throws an InvalidParameterValue if the specified application for this release does not already exist.    Default: false   Valid Values: true | false 
+     * Set to true to create an application with the specified name if it doesn't already exist.
      */
     AutoCreateApplication?: AutoCreateApplication;
     /**
@@ -796,7 +813,7 @@ declare namespace ElasticBeanstalk.Types {
   }
   export interface DeleteApplicationVersionMessage {
     /**
-     * The name of the application to delete releases from.
+     * The name of the application to which the version belongs.
      */
     ApplicationName: ApplicationName;
     /**
@@ -804,7 +821,7 @@ declare namespace ElasticBeanstalk.Types {
      */
     VersionLabel: VersionLabel;
     /**
-     * Indicates whether to delete the associated source bundle from Amazon S3:    true: An attempt is made to delete the associated Amazon S3 source bundle specified at time of creation.    false: No action is taken on the Amazon S3 source bundle specified at time of creation.    Valid Values: true | false 
+     * Set to true to delete the source bundle from your storage bucket. Otherwise, the application version is deleted only from Elastic Beanstalk and the source bundle remains in Amazon S3.
      */
     DeleteSourceBundle?: DeleteSourceBundle;
   }
@@ -850,11 +867,11 @@ declare namespace ElasticBeanstalk.Types {
   export type DeploymentTimestamp = Date;
   export interface DescribeApplicationVersionsMessage {
     /**
-     * If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include ones that are associated with the specified application.
+     * Specify an application name to show only application versions for that application.
      */
     ApplicationName?: ApplicationName;
     /**
-     * If specified, restricts the returned descriptions to only include ones that have the specified version labels.
+     * Specify a version label to show a specific application version.
      */
     VersionLabels?: VersionLabelsList;
     /**
@@ -910,43 +927,49 @@ declare namespace ElasticBeanstalk.Types {
   }
   export interface DescribeEnvironmentHealthRequest {
     /**
-     * Specifies the AWS Elastic Beanstalk environment name. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter error. 
+     * Specify the environment by name. You must specify either this or an EnvironmentName, or both.
      */
     EnvironmentName?: EnvironmentName;
     /**
-     * Specifies the AWS Elastic Beanstalk environment ID. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter error. 
+     * Specify the environment by ID. You must specify either this or an EnvironmentName, or both.
      */
     EnvironmentId?: EnvironmentId;
     /**
-     * Specifies the response elements you wish to receive. If no attribute names are specified, AWS Elastic Beanstalk only returns the name of the environment.
+     * Specify the response elements to return. To retrieve all attributes, set to All. If no attribute names are specified, returns the name of the environment.
      */
     AttributeNames?: EnvironmentHealthAttributes;
   }
   export interface DescribeEnvironmentHealthResult {
     /**
-     * The AWS Elastic Beanstalk environment name.
+     * The environment's name.
      */
     EnvironmentName?: EnvironmentName;
     /**
-     * Contains the response body with information about the health of the environment.
+     * The health status of the environment. For example, Ok.
      */
     HealthStatus?: String;
     /**
-     * Returns the health status value of the environment. For more information, see Health Colors and Statuses.
+     * The environment's operational status. Ready, Launching, Updating, Terminating, or Terminated.
      */
     Status?: EnvironmentHealth;
     /**
-     * Returns the color indicator that tells you information about the health of the environment. For more information, see Health Colors and Statuses.
+     * The health color of the environment.
      */
     Color?: String;
     /**
-     * Returns potential causes for the reported status.
+     * Descriptions of the data that contributed to the environment's current health status.
      */
     Causes?: Causes;
+    /**
+     * Application request metrics for the environment.
+     */
     ApplicationMetrics?: ApplicationMetrics;
+    /**
+     * Summary health information for the instances in the environment.
+     */
     InstancesHealth?: InstanceHealthSummary;
     /**
-     * The date and time the information was last refreshed.
+     * The date and time that the health information was retrieved.
      */
     RefreshedAt?: RefreshedAt;
   }
@@ -1082,33 +1105,33 @@ declare namespace ElasticBeanstalk.Types {
   }
   export interface DescribeInstancesHealthRequest {
     /**
-     * Specifies the AWS Elastic Beanstalk environment name.
+     * Specify the AWS Elastic Beanstalk environment by name.
      */
     EnvironmentName?: EnvironmentName;
     /**
-     * Specifies the AWS Elastic Beanstalk environment ID.
+     * Specify the AWS Elastic Beanstalk environment by ID.
      */
     EnvironmentId?: EnvironmentId;
     /**
-     * Specifies the response elements you wish to receive. If no attribute names are specified, AWS Elastic Beanstalk only returns a list of instances.
+     * Specifies the response elements you wish to receive. To retrieve all attributes, set to All. If no attribute names are specified, returns a list of instances.
      */
     AttributeNames?: InstancesHealthAttributes;
     /**
-     * Specifies the next token of the request.
+     * Specify the pagination token returned by a previous call.
      */
     NextToken?: NextToken;
   }
   export interface DescribeInstancesHealthResult {
     /**
-     * Contains the response body with information about the health of the instance.
+     * Detailed health information about each instance.
      */
     InstanceHealthList?: InstanceHealthList;
     /**
-     * The date and time the information was last refreshed.
+     * The date and time that the health information was retrieved.
      */
     RefreshedAt?: RefreshedAt;
     /**
-     * The next token.
+     * Pagination token for the next page of results, if available.
      */
     NextToken?: NextToken;
   }
@@ -1540,6 +1563,7 @@ declare namespace ElasticBeanstalk.Types {
   export type MaxRecords = number;
   export type Message = string;
   export type NextToken = string;
+  export type NonEmptyString = string;
   export type NullableDouble = number;
   export type NullableInteger = number;
   export type NullableLong = number;
@@ -1678,7 +1702,13 @@ declare namespace ElasticBeanstalk.Types {
      * The time at which the EC2 instance was launched.
      */
     LaunchedAt?: LaunchedAt;
+    /**
+     * Request metrics from your application.
+     */
     ApplicationMetrics?: ApplicationMetrics;
+    /**
+     * Operating system metrics from the instance.
+     */
     System?: SystemStatus;
     /**
      * Information about the most recent deployment to an instance.
@@ -1706,8 +1736,17 @@ declare namespace ElasticBeanstalk.Types {
   export type SolutionStackFileTypeList = FileTypeExtension[];
   export type SolutionStackName = string;
   export interface SourceBuildInformation {
+    /**
+     * The type of repository, such as Git.
+     */
     SourceType: SourceType;
+    /**
+     * Location where the repository is stored, such as CodeCommit.
+     */
     SourceRepository: SourceRepository;
+    /**
+     * The repository name and commit ID, separated by a forward slash. For example, my-repo/265cfa0cf6af46153527f55d6503ec030551f57a.
+     */
     SourceLocation: SourceLocation;
   }
   export interface SourceConfiguration {
@@ -1721,8 +1760,8 @@ declare namespace ElasticBeanstalk.Types {
     TemplateName?: ConfigurationTemplateName;
   }
   export type SourceLocation = string;
-  export type SourceRepository = "CodeCommit"|string;
-  export type SourceType = "Git"|string;
+  export type SourceRepository = "CodeCommit"|"S3"|string;
+  export type SourceType = "Git"|"Zip"|string;
   export interface StatusCodes {
     /**
      * The percentage of requests over the last 10 seconds that resulted in a 2xx (200, 201, etc.) status code.
@@ -1761,6 +1800,9 @@ declare namespace ElasticBeanstalk.Types {
     DestinationEnvironmentName?: EnvironmentName;
   }
   export interface SystemStatus {
+    /**
+     * CPU utilization metrics for the instance.
+     */
     CPUUtilization?: CPUUtilization;
     /**
      * Load average in the last 1-minute and 5-minute periods. For more information, see Operating System Metrics.
@@ -1823,15 +1865,15 @@ declare namespace ElasticBeanstalk.Types {
   }
   export interface UpdateApplicationVersionMessage {
     /**
-     * The name of the application associated with this version.  If no application is found with this name, UpdateApplication returns an InvalidParameterValue error. 
+     * The name of the application associated with this version.  If no application is found with this name, UpdateApplication returns an InvalidParameterValue error.
      */
     ApplicationName: ApplicationName;
     /**
-     * The name of the version to update.  If no application version is found with this label, UpdateApplication returns an InvalidParameterValue error. 
+     * The name of the version to update. If no application version is found with this label, UpdateApplication returns an InvalidParameterValue error. 
      */
     VersionLabel: VersionLabel;
     /**
-     * A new description for this release.
+     * A new description for this version.
      */
     Description?: Description;
   }
@@ -1933,11 +1975,11 @@ declare namespace ElasticBeanstalk.Types {
      */
     Severity?: ValidationSeverity;
     /**
-     * 
+     * The namespace to which the option belongs.
      */
     Namespace?: OptionNamespace;
     /**
-     * 
+     * The name of the option.
      */
     OptionName?: ConfigurationOptionName;
   }

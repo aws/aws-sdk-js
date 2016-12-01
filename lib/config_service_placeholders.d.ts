@@ -3,6 +3,7 @@ export abstract class ConfigurationServicePlaceholders {
   acm?: AWS.ACM.Types.ClientConfiguration;
   apigateway?: AWS.APIGateway.Types.ClientConfiguration;
   applicationautoscaling?: AWS.ApplicationAutoScaling.Types.ClientConfiguration;
+  appstream?: AWS.AppStream.Types.ClientConfiguration;
   autoscaling?: AWS.AutoScaling.Types.ClientConfiguration;
   budgets?: AWS.Budgets.Types.ClientConfiguration;
   cloudformation?: AWS.CloudFormation.Types.ClientConfiguration;
@@ -14,6 +15,7 @@ export abstract class ConfigurationServicePlaceholders {
   cloudwatch?: AWS.CloudWatch.Types.ClientConfiguration;
   cloudwatchevents?: AWS.CloudWatchEvents.Types.ClientConfiguration;
   cloudwatchlogs?: AWS.CloudWatchLogs.Types.ClientConfiguration;
+  codebuild?: AWS.CodeBuild.Types.ClientConfiguration;
   codecommit?: AWS.CodeCommit.Types.ClientConfiguration;
   codedeploy?: AWS.CodeDeploy.Types.ClientConfiguration;
   codepipeline?: AWS.CodePipeline.Types.ClientConfiguration;
@@ -43,6 +45,7 @@ export abstract class ConfigurationServicePlaceholders {
   firehose?: AWS.Firehose.Types.ClientConfiguration;
   gamelift?: AWS.GameLift.Types.ClientConfiguration;
   glacier?: AWS.Glacier.Types.ClientConfiguration;
+  health?: AWS.Health.Types.ClientConfiguration;
   iam?: AWS.IAM.Types.ClientConfiguration;
   importexport?: AWS.ImportExport.Types.ClientConfiguration;
   inspector?: AWS.Inspector.Types.ClientConfiguration;
@@ -58,6 +61,8 @@ export abstract class ConfigurationServicePlaceholders {
   marketplacemetering?: AWS.MarketplaceMetering.Types.ClientConfiguration;
   mobileanalytics?: AWS.MobileAnalytics.Types.ClientConfiguration;
   opsworks?: AWS.OpsWorks.Types.ClientConfiguration;
+  opsworkscm?: AWS.OpsWorksCM.Types.ClientConfiguration;
+  pinpoint?: AWS.Pinpoint.Types.ClientConfiguration;
   polly?: AWS.Polly.Types.ClientConfiguration;
   rds?: AWS.RDS.Types.ClientConfiguration;
   redshift?: AWS.Redshift.Types.ClientConfiguration;
@@ -67,6 +72,7 @@ export abstract class ConfigurationServicePlaceholders {
   s3?: AWS.S3.Types.ClientConfiguration;
   servicecatalog?: AWS.ServiceCatalog.Types.ClientConfiguration;
   ses?: AWS.SES.Types.ClientConfiguration;
+  shield?: AWS.Shield.Types.ClientConfiguration;
   simpledb?: AWS.SimpleDB.Types.ClientConfiguration;
   sms?: AWS.SMS.Types.ClientConfiguration;
   snowball?: AWS.Snowball.Types.ClientConfiguration;
@@ -74,9 +80,11 @@ export abstract class ConfigurationServicePlaceholders {
   sqs?: AWS.SQS.Types.ClientConfiguration;
   ssm?: AWS.SSM.Types.ClientConfiguration;
   storagegateway?: AWS.StorageGateway.Types.ClientConfiguration;
+  stepfunctions?: AWS.StepFunctions.Types.ClientConfiguration;
   sts?: AWS.STS.Types.ClientConfiguration;
   support?: AWS.Support.Types.ClientConfiguration;
   swf?: AWS.SWF.Types.ClientConfiguration;
+  xray?: AWS.XRay.Types.ClientConfiguration;
   waf?: AWS.WAF.Types.ClientConfiguration;
   workspaces?: AWS.WorkSpaces.Types.ClientConfiguration;
 }
@@ -84,6 +92,7 @@ export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
   apigateway?: AWS.APIGateway.Types.apiVersion;
   applicationautoscaling?: AWS.ApplicationAutoScaling.Types.apiVersion;
+  appstream?: AWS.AppStream.Types.apiVersion;
   autoscaling?: AWS.AutoScaling.Types.apiVersion;
   budgets?: AWS.Budgets.Types.apiVersion;
   cloudformation?: AWS.CloudFormation.Types.apiVersion;
@@ -95,6 +104,7 @@ export interface ConfigurationServiceApiVersions {
   cloudwatch?: AWS.CloudWatch.Types.apiVersion;
   cloudwatchevents?: AWS.CloudWatchEvents.Types.apiVersion;
   cloudwatchlogs?: AWS.CloudWatchLogs.Types.apiVersion;
+  codebuild?: AWS.CodeBuild.Types.apiVersion;
   codecommit?: AWS.CodeCommit.Types.apiVersion;
   codedeploy?: AWS.CodeDeploy.Types.apiVersion;
   codepipeline?: AWS.CodePipeline.Types.apiVersion;
@@ -124,6 +134,7 @@ export interface ConfigurationServiceApiVersions {
   firehose?: AWS.Firehose.Types.apiVersion;
   gamelift?: AWS.GameLift.Types.apiVersion;
   glacier?: AWS.Glacier.Types.apiVersion;
+  health?: AWS.Health.Types.apiVersion;
   iam?: AWS.IAM.Types.apiVersion;
   importexport?: AWS.ImportExport.Types.apiVersion;
   inspector?: AWS.Inspector.Types.apiVersion;
@@ -139,6 +150,8 @@ export interface ConfigurationServiceApiVersions {
   marketplacemetering?: AWS.MarketplaceMetering.Types.apiVersion;
   mobileanalytics?: AWS.MobileAnalytics.Types.apiVersion;
   opsworks?: AWS.OpsWorks.Types.apiVersion;
+  opsworkscm?: AWS.OpsWorksCM.Types.apiVersion;
+  pinpoint?: AWS.Pinpoint.Types.apiVersion;
   polly?: AWS.Polly.Types.apiVersion;
   rds?: AWS.RDS.Types.apiVersion;
   redshift?: AWS.Redshift.Types.apiVersion;
@@ -148,6 +161,7 @@ export interface ConfigurationServiceApiVersions {
   s3?: AWS.S3.Types.apiVersion;
   servicecatalog?: AWS.ServiceCatalog.Types.apiVersion;
   ses?: AWS.SES.Types.apiVersion;
+  shield?: AWS.Shield.Types.apiVersion;
   simpledb?: AWS.SimpleDB.Types.apiVersion;
   sms?: AWS.SMS.Types.apiVersion;
   snowball?: AWS.Snowball.Types.apiVersion;
@@ -155,9 +169,11 @@ export interface ConfigurationServiceApiVersions {
   sqs?: AWS.SQS.Types.apiVersion;
   ssm?: AWS.SSM.Types.apiVersion;
   storagegateway?: AWS.StorageGateway.Types.apiVersion;
+  stepfunctions?: AWS.StepFunctions.Types.apiVersion;
   sts?: AWS.STS.Types.apiVersion;
   support?: AWS.Support.Types.apiVersion;
   swf?: AWS.SWF.Types.apiVersion;
+  xray?: AWS.XRay.Types.apiVersion;
   waf?: AWS.WAF.Types.apiVersion;
   workspaces?: AWS.WorkSpaces.Types.apiVersion;
 }

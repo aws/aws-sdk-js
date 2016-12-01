@@ -5,7 +5,8 @@
     "endpointPrefix":"apigateway",
     "protocol":"rest-json",
     "serviceFullName":"Amazon API Gateway",
-    "signatureVersion":"v4"
+    "signatureVersion":"v4",
+    "uid":"apigateway-2015-07-09"
   },
   "operations":{
     "CreateApiKey":{
@@ -82,6 +83,42 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Creates a <a>Deployment</a> resource, which makes a specified <a>RestApi</a> callable over the internet.</p>"
+    },
+    "CreateDocumentationPart":{
+      "name":"CreateDocumentationPart",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/documentation/parts",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateDocumentationPartRequest"},
+      "output":{"shape":"DocumentationPart"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
+    "CreateDocumentationVersion":{
+      "name":"CreateDocumentationVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restapis/{restapi_id}/documentation/versions",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateDocumentationVersionRequest"},
+      "output":{"shape":"DocumentationVersion"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"}
+      ]
     },
     "CreateDomainName":{
       "name":"CreateDomainName",
@@ -289,6 +326,38 @@
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Deletes a <a>Deployment</a> resource. Deleting a deployment will only succeed if there are no <a>Stage</a> resources associated with it.</p>"
+    },
+    "DeleteDocumentationPart":{
+      "name":"DeleteDocumentationPart",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/documentation/parts/{part_id}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteDocumentationPartRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"},
+        {"shape":"BadRequestException"}
+      ]
+    },
+    "DeleteDocumentationVersion":{
+      "name":"DeleteDocumentationVersion",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/documentation/versions/{doc_version}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteDocumentationVersionRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
+        {"shape":"TooManyRequestsException"}
+      ]
     },
     "DeleteDomainName":{
       "name":"DeleteDomainName",
@@ -686,6 +755,64 @@
       ],
       "documentation":"<p>Gets information about a <a>Deployments</a> collection.</p>"
     },
+    "GetDocumentationPart":{
+      "name":"GetDocumentationPart",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/documentation/parts/{part_id}"
+      },
+      "input":{"shape":"GetDocumentationPartRequest"},
+      "output":{"shape":"DocumentationPart"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
+    "GetDocumentationParts":{
+      "name":"GetDocumentationParts",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/documentation/parts"
+      },
+      "input":{"shape":"GetDocumentationPartsRequest"},
+      "output":{"shape":"DocumentationParts"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
+    "GetDocumentationVersion":{
+      "name":"GetDocumentationVersion",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/documentation/versions/{doc_version}"
+      },
+      "input":{"shape":"GetDocumentationVersionRequest"},
+      "output":{"shape":"DocumentationVersion"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
+    "GetDocumentationVersions":{
+      "name":"GetDocumentationVersions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/documentation/versions"
+      },
+      "input":{"shape":"GetDocumentationVersionsRequest"},
+      "output":{"shape":"DocumentationVersions"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
     "GetDomainName":{
       "name":"GetDomainName",
       "http":{
@@ -1050,6 +1177,22 @@
       ],
       "documentation":"<p>Import API keys from an external source, such as a CSV-formatted file.</p>"
     },
+    "ImportDocumentationParts":{
+      "name":"ImportDocumentationParts",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/restapis/{restapi_id}/documentation/parts"
+      },
+      "input":{"shape":"ImportDocumentationPartsRequest"},
+      "output":{"shape":"DocumentationPartIds"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
     "ImportRestApi":{
       "name":"ImportRestApi",
       "http":{
@@ -1292,6 +1435,39 @@
       ],
       "documentation":"<p>Changes information about a <a>Deployment</a> resource.</p>"
     },
+    "UpdateDocumentationPart":{
+      "name":"UpdateDocumentationPart",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/documentation/parts/{part_id}"
+      },
+      "input":{"shape":"UpdateDocumentationPartRequest"},
+      "output":{"shape":"DocumentationPart"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
+    "UpdateDocumentationVersion":{
+      "name":"UpdateDocumentationVersion",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/documentation/versions/{doc_version}"
+      },
+      "input":{"shape":"UpdateDocumentationVersionRequest"},
+      "output":{"shape":"DocumentationVersion"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
     "UpdateDomainName":{
       "name":"UpdateDomainName",
       "http":{
@@ -1519,6 +1695,10 @@
           "shape":"String",
           "documentation":"<p>The name of the API Key.</p>"
         },
+        "customerId":{
+          "shape":"String",
+          "documentation":"<p>An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.</p>"
+        },
         "description":{
           "shape":"String",
           "documentation":"<p>The description of the API Key.</p>"
@@ -1554,7 +1734,7 @@
           "documentation":"<p>A list of warning messages.</p>"
         }
       },
-      "documentation":"<p>The identifier of an API key used to reference an API key in a usage plan.</p>"
+      "documentation":"<p>The identifier of an <a>ApiKey</a> used in a <a>UsagePlan</a>.</p>"
     },
     "ApiKeys":{
       "type":"structure",
@@ -1800,6 +1980,10 @@
         "stageKeys":{
           "shape":"ListOfStageKeys",
           "documentation":"<p>DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.</p>"
+        },
+        "customerId":{
+          "shape":"String",
+          "documentation":"<p>An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.</p>"
         }
       },
       "documentation":"<p>Request to create an <a>ApiKey</a> resource.</p>"
@@ -1923,6 +2107,59 @@
       },
       "documentation":"<p>Requests Amazon API Gateway to create a <a>Deployment</a> resource.</p>"
     },
+    "CreateDocumentationPartRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "location",
+        "properties"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of an API of the to-be-created documentation part.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "location":{
+          "shape":"DocumentationPartLocation",
+          "documentation":"<p>[Required] The location of the targeted API entity of the to-be-created documentation part.</p>"
+        },
+        "properties":{
+          "shape":"String",
+          "documentation":"<p>[Required] The new documentation content map of the targeted API entity. Enclosed key-value pairs are API-specific, but only Swagger-compliant key-value pairs can be exported and, hence, published.</p>"
+        }
+      },
+      "documentation":"<p>Creates a new documentation part of a given API.</p>"
+    },
+    "CreateDocumentationVersionRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "documentationVersion"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] Specifies the API identifier of the to-be-created documentation version.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "documentationVersion":{
+          "shape":"String",
+          "documentation":"<p>[Required] The version identifier of the new snapshot.</p>"
+        },
+        "stageName":{
+          "shape":"String",
+          "documentation":"<p>The stage name to be associated with the new documentation snapshot.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>A description about the new documentation snapshot.</p>"
+        }
+      },
+      "documentation":"<p>Creates a new documentation version of a given API.</p>"
+    },
     "CreateDomainNameRequest":{
       "type":"structure",
       "required":[
@@ -2028,6 +2265,10 @@
           "shape":"String",
           "documentation":"<p>The description of the <a>RestApi</a>.</p>"
         },
+        "version":{
+          "shape":"String",
+          "documentation":"<p>A version identifier for the API.</p>"
+        },
         "cloneFrom":{
           "shape":"String",
           "documentation":"<p>The ID of the <a>RestApi</a> that you want to clone from.</p>"
@@ -2076,6 +2317,10 @@
         "variables":{
           "shape":"MapOfStringToString",
           "documentation":"<p>A map that defines the stage variables for the new <a>Stage</a> resource. Variable names can have alphanumeric and underscore characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
+        },
+        "documentationVersion":{
+          "shape":"String",
+          "documentation":"<p>The version of the associated API documentation.</p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to create a <a>Stage</a> resource.</p>"
@@ -2223,6 +2468,50 @@
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to delete a <a>Deployment</a> resource.</p>"
+    },
+    "DeleteDocumentationPartRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "documentationPartId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] Specifies the identifier of an API of the to-be-deleted documentation part.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "documentationPartId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of the to-be-deleted documentation part.</p>",
+          "location":"uri",
+          "locationName":"part_id"
+        }
+      },
+      "documentation":"<p>Deletes an existing documentation part of an API.</p>"
+    },
+    "DeleteDocumentationVersionRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "documentationVersion"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of an API of a to-be-deleted documentation snapshot.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "documentationVersion":{
+          "shape":"String",
+          "documentation":"<p>[Required] The version identifier of a to-be-deleted documentation snapshot.</p>",
+          "location":"uri",
+          "locationName":"doc_version"
+        }
+      },
+      "documentation":"<p>Deletes an existing documentation version of an API.</p>"
     },
     "DeleteDomainNameRequest":{
       "type":"structure",
@@ -2515,6 +2804,128 @@
       },
       "documentation":"<p>Represents a collection resource that contains zero or more references to your existing deployments, and links that guide you on how to interact with your collection. The collection offers a paginated view of the contained deployments.</p> <div class=\"remarks\">To create a new deployment of a <a>RestApi</a>, make a <code>POST</code> request against this resource. To view, update, or delete an existing deployment, make a <code>GET</code>, <code>PATCH</code>, or <code>DELETE</code> request, respectively, on a specified <a>Deployment</a> resource.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html\">Deploying an API</a>, <a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html\">AWS CLI</a>, <a href=\"https://aws.amazon.com/tools/\">AWS SDKs</a> </div>"
     },
+    "DocumentationPart":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The <a>DocumentationPart</a> identifier, generated by Amazon API Gateway when the <code>DocumentationPart</code> is created.</p>"
+        },
+        "location":{
+          "shape":"DocumentationPartLocation",
+          "documentation":"<p>The location of the API entity to which the documentation applies. Valid fields depend on the targeted API entity type. All the valid location fields are not required. If not explicitly specified, a valid location field is treated as a wildcard and associated documentation content may be inherited by matching entities, unless overridden.</p>"
+        },
+        "properties":{
+          "shape":"String",
+          "documentation":"<p>A content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., <code>\"{ \\\"description\\\": \\\"The API does ...\\\" }\"</code>. Only Swagger-compliant documentation-related fields from the <literal>properties</literal> map are exported and, hence, published as part of the API entity definitions, while the original documentation parts are exported in a Swagger extension of <code>x-amazon-apigateway-documentation</code>.</p>"
+        }
+      },
+      "documentation":"<p>A documentation part for a targeted API entity.</p> <div class=\"remarks\"> <p>A documentation part consists of a content map (<code>properties</code>) and a target (<code>location</code>). The target specifies an API entity to which the documentation content applies. The supported API entity types are <code>API</code>, <code>AUTHORIZER</code>, <code>MODEL</code>, <code>RESOURCE</code>, <code>METHOD</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code>, <code>RESPONSE</code>, <code>RESPONSE_HEADER</code>, and <code>RESPONSE_BODY</code>. Valid <code>location</code> fields depend on the API entity type. All valid fields are not required.</p> <p>The content map is a JSON string of API-specific key-value pairs. Although an API can use any shape for the content map, only the Swagger-compliant documentation fields will be injected into the associated API entity definition in the exported Swagger definition file.</p></div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html\">Documenting an API</a>, <a>DocumentationParts</a> </div>"
+    },
+    "DocumentationPartIds":{
+      "type":"structure",
+      "members":{
+        "ids":{
+          "shape":"ListOfString",
+          "documentation":"<p>A list of the returned documentation part identifiers.</p>"
+        },
+        "warnings":{
+          "shape":"ListOfString",
+          "documentation":"<p>A list of warning messages reported during import of documentation parts.</p>"
+        }
+      },
+      "documentation":"<p>A collection of the imported <a>DocumentationPart</a> identifiers.</p> <div class=\"remarks\">This is used to return the result when documentation parts in an external (e.g., Swagger) file are imported into Amazon API Gateway</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html\">Documenting an API</a>, <a href=\"http://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/\">documentationpart:import</a>, <a>DocumentationPart</a> </div>"
+    },
+    "DocumentationPartLocation":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "type":{
+          "shape":"DocumentationPartType",
+          "documentation":"<p>The type of API entity to which the documentation content applies. It is a valid and required field for API entity types of <code>API</code>, <code>AUTHORIZER</code>, <code>MODEL</code>, <code>RESOURCE</code>, <code>METHOD</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code>, <code>RESPONSE</code>, <code>RESPONSE_HEADER</code>, and <code>RESPONSE_BODY</code>. Content inheritance does not apply to any entity of the <code>API</code>, <code>AUTHROZER</code>, <code>MODEL</code>, or <code>RESOURCE</code> type.</p>"
+        },
+        "path":{
+          "shape":"String",
+          "documentation":"<p>The URL path of the target. It is a valid field for the API entity types of <code>RESOURCE</code>, <code>METHOD</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code>, <code>RESPONSE</code>, <code>RESPONSE_HEADER</code>, and <code>RESPONSE_BODY</code>. The default value is <code>/</code> for the root resource. When an applicable child entity inherits the content of another entity of the same type with more general specifications of the other <code>location</code> attributes, the child entity's <code>path</code> attribute must match that of the parent entity as a prefix.</p>"
+        },
+        "method":{
+          "shape":"String",
+          "documentation":"<p>The HTTP verb of a method. It is a valid field for the API entity types of <code>METHOD</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code>, <code>RESPONSE</code>, <code>RESPONSE_HEADER</code>, and <code>RESPONSE_BODY</code>. The default value is <code>*</code> for any method. When an applicable child entity inherits the content of an entity of the same type with more general specifications of the other <code>location</code> attributes, the child entity's <code>method</code> attribute must match that of the parent entity exactly.</p>"
+        },
+        "statusCode":{
+          "shape":"DocumentationPartLocationStatusCode",
+          "documentation":"<p>The HTTP status code of a response. It is a valid field for the API entity types of <code>RESPONSE</code>, <code>RESPONSE_HEADER</code>, and <code>RESPONSE_BODY</code>. The default value is <code>*</code> for any status code. When an applicable child entity inherits the content of an entity of the same type with more general specifications of the other <code>location</code> attributes, the child entity's <code>statusCode</code> attribute must match that of the parent entity exactly.</p>"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the targeted API entity. It is a valid and required field for the API entity types of <code>AUTHORIZER</code>, <code>MODEL</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code> and <code>RESPONSE_HEADER</code>. It is an invalid field for any other entity type.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the target API entity to which the documentation applies.</p>"
+    },
+    "DocumentationPartLocationStatusCode":{
+      "type":"string",
+      "pattern":"^([1-5]\\d\\d|\\*|\\s*)$"
+    },
+    "DocumentationPartType":{
+      "type":"string",
+      "enum":[
+        "API",
+        "AUTHORIZER",
+        "MODEL",
+        "RESOURCE",
+        "METHOD",
+        "PATH_PARAMETER",
+        "QUERY_PARAMETER",
+        "REQUEST_HEADER",
+        "REQUEST_BODY",
+        "RESPONSE",
+        "RESPONSE_HEADER",
+        "RESPONSE_BODY"
+      ]
+    },
+    "DocumentationParts":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfDocumentationPart",
+          "documentation":"<p>The current page of <a>DocumentationPart</a> resources in the <a>DocumentationParts</a> collection.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>The collection of documentation parts of an API.</p> <div class=\"remarks\"/> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html\">Documenting an API</a>, <a>DocumentationPart</a> </div>"
+    },
+    "DocumentationVersion":{
+      "type":"structure",
+      "members":{
+        "version":{
+          "shape":"String",
+          "documentation":"<p>The version identifier of the API documentation snapshot.</p>"
+        },
+        "createdDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date when the API documentation snapshot is created.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of the API documentation snapshot.</p>"
+        }
+      },
+      "documentation":"<p>A snapshot of the documentation of an API.</p> <div class=\"remarks\"><p>Publishing API documentation involves creating a documentation version associated with an API stage and exporting the versioned documentation to an external (e.g., Swagger) file.</p></div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html\">Documenting an API</a>, <a>DocumentationPart</a>, <a>DocumentationVersions</a> </div>"
+    },
+    "DocumentationVersions":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfDocumentationVersion",
+          "documentation":"<p>The current page of <a>DocumentationVersion</a> items from the <a>DocumentationVersions</a> collection of an API.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>The collection of documentation snapshots of an API. </p> <div class=\"remarks\"><p>Use the <a>DocumentationVersions</a> to manage documentation snapshots associated with various API stages.</p></div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html\">Documenting an API</a>, <a>DocumentationPart</a>, <a>DocumentationVersion</a> </div>"
+    },
     "DomainName":{
       "type":"structure",
       "members":{
@@ -2675,6 +3086,7 @@
         },
         "customerId":{
           "shape":"String",
+          "documentation":"<p>The identifier of a customer in AWS Marketplace or an external system, such as a developer portal.</p>",
           "location":"querystring",
           "locationName":"customerId"
         },
@@ -2858,6 +3270,118 @@
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to get information about a <a>Deployments</a> collection.</p>"
+    },
+    "GetDocumentationPartRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "documentationPartId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of an API of the to-be-retrieved documentation part.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "documentationPartId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of the to-be-retrieved documentation part.</p>",
+          "location":"uri",
+          "locationName":"part_id"
+        }
+      },
+      "documentation":"<p>Gets a specified documentation part of a given API.</p>"
+    },
+    "GetDocumentationPartsRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of the API of the to-be-retrieved documentation parts.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "type":{
+          "shape":"DocumentationPartType",
+          "documentation":"<p>The type of API entities of the to-be-retrieved documentation parts. </p>",
+          "location":"querystring",
+          "locationName":"type"
+        },
+        "nameQuery":{
+          "shape":"String",
+          "documentation":"<p>The name of API entities of the to-be-retrieved documentation parts.</p>",
+          "location":"querystring",
+          "locationName":"name"
+        },
+        "path":{
+          "shape":"String",
+          "documentation":"<p>The path of API entities of the to-be-retrieved documentation parts.</p>",
+          "location":"querystring",
+          "locationName":"path"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the to-be-retrieved documentation part in the <a>DocumentationParts</a> collection.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The size of the paged results.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>Gets the documentation parts of an API. The result may be filtered by the type, name, or path of API entities (targets).</p>"
+    },
+    "GetDocumentationVersionRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "documentationVersion"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of the API of the to-be-retrieved documentation snapshot.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "documentationVersion":{
+          "shape":"String",
+          "documentation":"<p>[Required] The version identifier of the to-be-retrieved documentation snapshot.</p>",
+          "location":"uri",
+          "locationName":"doc_version"
+        }
+      },
+      "documentation":"<p>Gets a documentation snapshot of an API.</p>"
+    },
+    "GetDocumentationVersionsRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of an API of the to-be-retrieved documentation versions.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the returned <code>DocumentationVersion</code> in the <a>DocumentationVersions</a> collection.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The page size of the returned documentation versions.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>Gets the documentation versions of an API.</p>"
     },
     "GetDomainNameRequest":{
       "type":"structure",
@@ -3452,6 +3976,39 @@
       "documentation":"<p>The POST request to import API keys from an external source, such as a CSV-formatted file.</p>",
       "payload":"body"
     },
+    "ImportDocumentationPartsRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "body"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of an API of the to-be-imported documentation parts.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "mode":{
+          "shape":"PutMode",
+          "documentation":"<p>A query parameter to indicate whether to overwrite (<code>OVERWRITE</code>) any existing <a>DocumentationParts</a> definition or to merge (<code>MERGE</code>) the new definition into the existing one. The default value is <code>MERGE</code>.</p>",
+          "location":"querystring",
+          "locationName":"mode"
+        },
+        "failOnWarnings":{
+          "shape":"Boolean",
+          "documentation":"<p>A query parameter to specify whether to rollback the documentation importation (<code>true</code>) or not (<code>false</code>) when a warning is encountered. The default value is <code>false</code>.</p>",
+          "location":"querystring",
+          "locationName":"failonwarnings"
+        },
+        "body":{
+          "shape":"Blob",
+          "documentation":"<p>[Required] Raw byte array representing the to-be-imported documentation parts. To import from a Swagger file, this is a JSON object.</p>"
+        }
+      },
+      "documentation":"<p>Import documentation parts from an external (e.g., Swagger) definition file. </p>",
+      "payload":"body"
+    },
     "ImportRestApiRequest":{
       "type":"structure",
       "required":["body"],
@@ -3603,6 +4160,14 @@
     "ListOfDeployment":{
       "type":"list",
       "member":{"shape":"Deployment"}
+    },
+    "ListOfDocumentationPart":{
+      "type":"list",
+      "member":{"shape":"DocumentationPart"}
+    },
+    "ListOfDocumentationVersion":{
+      "type":"list",
+      "member":{"shape":"DocumentationVersion"}
     },
     "ListOfDomainName":{
       "type":"list",
@@ -4252,6 +4817,10 @@
           "shape":"Timestamp",
           "documentation":"<p>The date when the API was created, in <a href=\"http://www.iso.org/iso/home/standards/iso8601.htm\" target=\"_blank\">ISO 8601 format</a>.</p>"
         },
+        "version":{
+          "shape":"String",
+          "documentation":"<p>A version identifier for the API.</p>"
+        },
         "warnings":{
           "shape":"ListOfString",
           "documentation":"<p>The warning messages reported when <code>failonwarnings</code> is turned on during API import.</p>"
@@ -4350,6 +4919,10 @@
         "variables":{
           "shape":"MapOfStringToString",
           "documentation":"<p>A map that defines the stage variables for a <a>Stage</a> resource. Variable names can have alphanumeric and underscore characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
+        },
+        "documentationVersion":{
+          "shape":"String",
+          "documentation":"<p>The version of the associated API documentation.</p>"
         },
         "createdDate":{
           "shape":"Timestamp",
@@ -4716,6 +5289,58 @@
       },
       "documentation":"<p>Requests Amazon API Gateway to change information about a <a>Deployment</a> resource.</p>"
     },
+    "UpdateDocumentationPartRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "documentationPartId"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of an API of the to-be-updated documentation part.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "documentationPartId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of the to-be-updated documentation part.</p>",
+          "location":"uri",
+          "locationName":"part_id"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
+        }
+      },
+      "documentation":"<p>Updates an existing documentation part of a given API.</p>"
+    },
+    "UpdateDocumentationVersionRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "documentationVersion"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>[Required] The identifier of an API of the to-be-updated documentation version.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "documentationVersion":{
+          "shape":"String",
+          "documentation":"<p>[Required] The version identifier of the to-be-updated documentation version.</p>",
+          "location":"uri",
+          "locationName":"doc_version"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
+        }
+      },
+      "documentation":"<p>Updates an existing documentation version of an API.</p>"
+    },
     "UpdateDomainNameRequest":{
       "type":"structure",
       "required":["domainName"],
@@ -5067,6 +5692,10 @@
         "quota":{
           "shape":"QuotaSettings",
           "documentation":"<p>The maximum number of permitted requests per a given unit time interval.</p>"
+        },
+        "productCode":{
+          "shape":"String",
+          "documentation":"<p>The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.</p>"
         }
       },
       "documentation":"<p>Represents a usage plan than can specify who can assess associated API stages with specified request limits and quotas.</p> <div class=\"remarks\"> <p>In a usage plan, you associate an API by specifying the API's Id and a stage name of the specified API. You add plan customers by adding API keys to the plan. </p> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>"
