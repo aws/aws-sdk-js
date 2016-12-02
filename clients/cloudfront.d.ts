@@ -4,6 +4,7 @@ import {AWSError} from '../lib/error';
 import {CloudFrontCustomizations} from '../lib/services/cloudfront';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+import {Signer as signer} from '../lib/cloudfront/signer';
 interface Blob {}
 declare class CloudFront extends CloudFrontCustomizations {
   /**
@@ -253,14 +254,9 @@ declare class CloudFront extends CloudFrontCustomizations {
   waitFor(state: "streamingDistributionDeployed", callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
 }
 declare namespace CloudFront {
-  export type Signer = CloudFrontCustomizations.Signer;
-  export namespace Signer {
-    export type SingerOptions = CloudFrontCustomizations.Signer.SingerOptions;
-    export type CustomPolicy = CloudFrontCustomizations.Signer.CustomPolicy;
-    export type CannedPolicy = CloudFrontCustomizations.Signer.CannedPolicy;
-  }
+  export import Signer = signer;
 }
-declare namespace CloudFront.Types {
+declare namespace CloudFront {
   export interface ActiveTrustedSigners {
     /**
      * Enabled is true if any of the AWS accounts listed in the TrustedSigners complex type for this RTMP distribution have active CloudFront key pairs. If not, Enabled is false. For more information, see ActiveTrustedSigners.
@@ -1345,7 +1341,7 @@ declare namespace CloudFront.Types {
     OriginAccessIdentity: string;
   }
   export type SSLSupportMethod = "sni-only"|"vip"|string;
-  export interface Signer {
+  export interface _Signer {
     /**
      * An AWS account that is included in the TrustedSigners complex type for this RTMP distribution. Valid values include:    self, which is the AWS account used to create the distribution.   An AWS account number.  
      */
@@ -1355,7 +1351,7 @@ declare namespace CloudFront.Types {
      */
     KeyPairIds?: KeyPairIds;
   }
-  export type SignerList = Signer[];
+  export type SignerList = _Signer[];
   export type SslProtocol = "SSLv3"|"TLSv1"|"TLSv1.1"|"TLSv1.2"|string;
   export type SslProtocolsList = SslProtocol[];
   export interface StreamingDistribution {
@@ -1690,5 +1686,9 @@ declare namespace CloudFront.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CloudFront client.
+   */
+  export import Types = CloudFront;
 }
 export = CloudFront;

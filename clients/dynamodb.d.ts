@@ -4,6 +4,7 @@ import {AWSError} from '../lib/error';
 import {DynamoDBCustomizations} from '../lib/services/dynamodb';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+import {DocumentClient as document_client} from '../lib/dynamodb/document_client';
 interface Blob {}
 declare class DynamoDB extends DynamoDBCustomizations {
   /**
@@ -141,14 +142,9 @@ declare class DynamoDB extends DynamoDBCustomizations {
   waitFor(state: "tableNotExists", callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
 }
 declare namespace DynamoDB {
-  export type DocumentClient = DynamoDBCustomizations.DocumentClient;
-  export namespace DocumentClient {
-    export type binaryType = DynamoDBCustomizations.DocumentClient.binaryType;
-    export type DocumentClientOptions = DynamoDBCustomizations.DocumentClient.DocumentClientOptions;
-    export type CreateSetOptions = DynamoDBCustomizations.DocumentClient.CreateSetOptions;
-  }
+  export import DocumentClient = document_client;
 }
-declare namespace DynamoDB.Types {
+declare namespace DynamoDB {
   export type AttributeAction = "ADD"|"PUT"|"DELETE"|string;
   export interface AttributeDefinition {
     /**
@@ -1159,5 +1155,9 @@ declare namespace DynamoDB.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the DynamoDB client.
+   */
+  export import Types = DynamoDB;
 }
 export = DynamoDB;
