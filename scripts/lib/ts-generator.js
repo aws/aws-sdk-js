@@ -86,16 +86,41 @@ TSGenerator.prototype.fillApiModelFileNames = function fillApiModelFileNames(api
     });
 };
 
+TSGenerator.prototype.updateDynamoDBDocumentClient = function updateDynamoDBDocumentClient() {
+    // read in document client customization
+    var docClientCustomCode = fs.readFileSync(path.join(this._sdkRootDir, 'lib', 'dynamodb', 'document_client.d.ts')).toString();
+    var lines = docClientCustomCode.split('\n');
+    var namespaceIndexStart = -1;
+    var namespaceIndexEnd = -1;
+    for (var i = 0, iLen = lines.length; i < iLen; i++) {
+        var line = lines[i];
+        // find exported namespace
+        if (line.indexOf('//<!--auto-generated start-->') >= 0) {
+            namespaceIndexStart = i;
+        }
+        if (line.indexOf('//<!--auto-generated end-->') >= 0) {
+            namespaceIndexEnd = i;
+        }
+    }
+    if (namespaceIndexStart >= 0 && namespaceIndexEnd >= 0) {
+        // insert doc client interfaces
+        lines.splice(namespaceIndexStart + 1, (namespaceIndexEnd - namespaceIndexStart - 1), this.generateDocumentClientInterfaces(1));
+        var code = lines.join('\n');
+        this.writeTypingsFile('document_client', path.join(this._sdkRootDir, 'lib', 'dynamodb'), code);
+    }
+};
+
 /**
  * Generates the file containing DocumentClient interfaces.
  */
-TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocumentClientInterfaces() {
+TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocumentClientInterfaces(tabCount) {
+    tabCount = tabCount || 0;
     var self = this;
     // get the dynamodb model
     var dynamodbModel = this.loadServiceApi('dynamodb');
     var code = '';
     // stub Blob interface
-    code += 'interface Blob {}\n';
+    code += this.tabs(tabCount) + 'interface Blob {}\n';
     // generate shapes
     var modelShapes = dynamodbModel.shapes;
     // iterate over each shape
@@ -108,15 +133,13 @@ TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocume
         }
         // overwrite AttributeValue
         if (shapeKey === 'AttributeValue') {
-            code += self.generateDocString('A JavaScript object or native type.');
-            code += 'export type ' + shapeKey + ' = any;\n';
+            code += self.generateDocString('A JavaScript object or native type.', tabCount);
+            code += self.tabs(tabCount) + 'export type ' + shapeKey + ' = any;\n';
             return;
         }
-        code += self.generateTypingsFromShape(shapeKey, modelShape);
+        code += self.generateTypingsFromShape(shapeKey, modelShape, tabCount);
     });
-
-    // write file:
-    this.writeTypingsFile('document_client_interfaces', path.join(this._sdkRootDir, 'lib', 'dynamodb'), code);
+    return code;
 };
 
 /**
@@ -500,14 +523,14 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     // check for static classes on namespace
     if (hasCustomizations) {
         // find anything exported
-        code += this.generateNamespaceTypes(serviceIdentifier, parentClass, className, 0);
+        //code += this.generateNamespaceTypes(serviceIdentifier, parentClass, className, 0);
     }
 
     // shapes should map to interfaces
     var modelShapes = model.shapes;
     // iterate over each shape
     var shapeKeys = Object.keys(modelShapes);
-    code += 'declare namespace ' + className + '.Types {\n';
+    code += 'declare namespace ' + className + ' {\n';
     shapeKeys.forEach(function (shapeKey) {
         var modelShape = modelShapes[shapeKey];
         // ignore exceptions
@@ -524,6 +547,9 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     code += this.tabs(2) + 'apiVersion?: apiVersion;\n';
     code += this.tabs(1) + '}\n';
     code += this.tabs(1) + 'export type ClientConfiguration = ' + customConfigTypes.join(' & ') + ' & ClientApiVersions;\n';
+    // export interfaces under Types namespace for backwards-compatibility
+    code += this.generateDocString('Contains interfaces for use with the ' + className + ' client.', 1);
+    code += this.tabs(1) + 'export import Types = ' + className + ';\n';
     code += '}\n';
 
     code += 'export = ' + className + ';\n';
