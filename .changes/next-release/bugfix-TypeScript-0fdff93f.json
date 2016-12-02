@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "TypeScript",
+  "description": "Adds support for `on` on the `S3.ManagedUpload` object."
+}
