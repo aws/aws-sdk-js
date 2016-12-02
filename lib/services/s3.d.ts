@@ -1,5 +1,5 @@
 import {Service} from '../service';
-import * as uploader from '../s3/managed_upload';
+import {ManagedUpload} from '../s3/managed_upload';
 import S3 = require('../../clients/s3');
 export class S3Customizations extends Service {
     /**
@@ -18,7 +18,7 @@ export class S3Customizations extends Service {
      * is the only operation for which the SDK can retry requests with stream
      * bodies.
      */
-    upload(params: S3.Types.PutObjectRequest, options?: uploader.ManagedUploadOptions, callback?: (err: Error, data: uploader.SendData) => void): uploader.ManagedUpload;
+    upload(params: S3.Types.PutObjectRequest, options?: ManagedUpload.ManagedUploadOptions, callback?: (err: Error, data: ManagedUpload.SendData) => void): ManagedUpload;
     /**
      * Uploads an arbitrarily sized buffer, blob, or stream, using intelligent
      * concurrent handling of parts if the payload is large enough. You can
@@ -26,13 +26,6 @@ export class S3Customizations extends Service {
      * is the only operation for which the SDK can retry requests with stream
      * bodies.
      */
-    upload(params: S3.Types.PutObjectRequest, callback?: (err: Error, data: uploader.SendData) => void): uploader.ManagedUpload;
-    static ManagedUpload: typeof uploader.ManagedUpload;
-}
-export namespace S3Customizations {
-    export type ManagedUpload = uploader.ManagedUpload;
-    export namespace ManagedUpload {
-        export type ManagedUploadOptions = uploader.ManagedUploadOptions;
-        export type SendData = uploader.SendData;
-    }
+    upload(params: S3.Types.PutObjectRequest, callback?: (err: Error, data: ManagedUpload.SendData) => void): ManagedUpload;
+    static ManagedUpload: typeof ManagedUpload;
 }

@@ -7,11 +7,3 @@ export class DynamoDBCustomizations extends Service {
      */
     static DocumentClient: typeof DDBDocumentClient;
 }
-export namespace DynamoDBCustomizations {
-    export type DocumentClient = DDBDocumentClient
-    export namespace DocumentClient {
-        export type binaryType = DDBDocumentClient.binaryType;
-        export type DocumentClientOptions = DDBDocumentClient.DocumentClientOptions;
-        export type CreateSetOptions = DDBDocumentClient.CreateSetOptions;
-  }
-}
