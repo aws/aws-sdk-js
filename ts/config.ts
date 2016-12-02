@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import AWS = require('../index');
 import {Agent} from 'https';
 

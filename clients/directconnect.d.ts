@@ -28,11 +28,11 @@ declare class DirectConnect extends Service {
    */
   allocatePrivateVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Provisions a public virtual interface to be owned by a different customer. The owner of a connection calls this function to provision a public virtual interface which will be owned by another AWS customer. Virtual interfaces created using this function must be confirmed by the virtual interface owner by calling ConfirmPublicVirtualInterface. Until this step has been completed, the virtual interface will be in 'Confirming' state, and will not be available for handling traffic.
+   * Provisions a public virtual interface to be owned by a different customer. The owner of a connection calls this function to provision a public virtual interface which will be owned by another AWS customer. Virtual interfaces created using this function must be confirmed by the virtual interface owner by calling ConfirmPublicVirtualInterface. Until this step has been completed, the virtual interface will be in 'Confirming' state, and will not be available for handling traffic. When creating an IPv6 public virtual interface (addressFamily is 'ipv6'), the customer and amazon address fields should be left blank to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently not supported.
    */
   allocatePublicVirtualInterface(params: DirectConnect.Types.AllocatePublicVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Provisions a public virtual interface to be owned by a different customer. The owner of a connection calls this function to provision a public virtual interface which will be owned by another AWS customer. Virtual interfaces created using this function must be confirmed by the virtual interface owner by calling ConfirmPublicVirtualInterface. Until this step has been completed, the virtual interface will be in 'Confirming' state, and will not be available for handling traffic.
+   * Provisions a public virtual interface to be owned by a different customer. The owner of a connection calls this function to provision a public virtual interface which will be owned by another AWS customer. Virtual interfaces created using this function must be confirmed by the virtual interface owner by calling ConfirmPublicVirtualInterface. Until this step has been completed, the virtual interface will be in 'Confirming' state, and will not be available for handling traffic. When creating an IPv6 public virtual interface (addressFamily is 'ipv6'), the customer and amazon address fields should be left blank to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently not supported.
    */
   allocatePublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
@@ -60,6 +60,14 @@ declare class DirectConnect extends Service {
    */
   confirmPublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.ConfirmPublicVirtualInterfaceResponse) => void): Request<DirectConnect.Types.ConfirmPublicVirtualInterfaceResponse, AWSError>;
   /**
+   * Creates a new BGP peer on a specified virtual interface. The BGP peer cannot be in the same address family (IPv4/IPv6) of an existing BGP peer on the virtual interface. You must create a BGP peer for the corresponding address family in order to access AWS resources that also use that address family. When creating a IPv6 BGP peer, the Amazon address and customer address fields must be left blank. IPv6 addresses are automatically assigned from Amazon's pool of IPv6 addresses; you cannot specify custom IPv6 addresses. For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.
+   */
+  createBGPPeer(params: DirectConnect.Types.CreateBGPPeerRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateBGPPeerResponse) => void): Request<DirectConnect.Types.CreateBGPPeerResponse, AWSError>;
+  /**
+   * Creates a new BGP peer on a specified virtual interface. The BGP peer cannot be in the same address family (IPv4/IPv6) of an existing BGP peer on the virtual interface. You must create a BGP peer for the corresponding address family in order to access AWS resources that also use that address family. When creating a IPv6 BGP peer, the Amazon address and customer address fields must be left blank. IPv6 addresses are automatically assigned from Amazon's pool of IPv6 addresses; you cannot specify custom IPv6 addresses. For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.
+   */
+  createBGPPeer(callback?: (err: AWSError, data: DirectConnect.Types.CreateBGPPeerResponse) => void): Request<DirectConnect.Types.CreateBGPPeerResponse, AWSError>;
+  /**
    * Creates a new connection between the customer network and a specific AWS Direct Connect location. A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. An AWS Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions.
    */
   createConnection(params: DirectConnect.Types.CreateConnectionRequest, callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
@@ -84,13 +92,21 @@ declare class DirectConnect extends Service {
    */
   createPrivateVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Creates a new public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon Simple Storage Service (Amazon S3).
+   * Creates a new public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon Simple Storage Service (Amazon S3). When creating an IPv6 public virtual interface (addressFamily is 'ipv6'), the customer and amazon address fields should be left blank to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently not supported.
    */
   createPublicVirtualInterface(params: DirectConnect.Types.CreatePublicVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Creates a new public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon Simple Storage Service (Amazon S3).
+   * Creates a new public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon Simple Storage Service (Amazon S3). When creating an IPv6 public virtual interface (addressFamily is 'ipv6'), the customer and amazon address fields should be left blank to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently not supported.
    */
   createPublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
+  /**
+   * Deletes a BGP peer on the specified virtual interface that matches the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.
+   */
+  deleteBGPPeer(params: DirectConnect.Types.DeleteBGPPeerRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteBGPPeerResponse) => void): Request<DirectConnect.Types.DeleteBGPPeerResponse, AWSError>;
+  /**
+   * Deletes a BGP peer on the specified virtual interface that matches the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.
+   */
+  deleteBGPPeer(callback?: (err: AWSError, data: DirectConnect.Types.DeleteBGPPeerResponse) => void): Request<DirectConnect.Types.DeleteBGPPeerResponse, AWSError>;
   /**
    * Deletes the connection. Deleting a connection only stops the AWS Direct Connect port hour and data transfer charges. You need to cancel separately with the providers any services or charges for cross-connects or network circuits that connect you to the AWS Direct Connect location.
    */
@@ -198,6 +214,7 @@ declare class DirectConnect extends Service {
 }
 declare namespace DirectConnect.Types {
   export type ASN = number;
+  export type AddressFamily = "ipv4"|"ipv6"|string;
   export interface AllocateConnectionOnInterconnectRequest {
     /**
      * Bandwidth of the connection. Example: "500Mbps" Default: None Values: 50M, 100M, 200M, 300M, 400M, or 500M
@@ -250,6 +267,18 @@ declare namespace DirectConnect.Types {
   }
   export type AmazonAddress = string;
   export type BGPAuthKey = string;
+  export interface BGPPeer {
+    asn?: ASN;
+    authKey?: BGPAuthKey;
+    addressFamily?: AddressFamily;
+    amazonAddress?: AmazonAddress;
+    customerAddress?: CustomerAddress;
+    bgpPeerState?: BGPPeerState;
+    bgpStatus?: BGPStatus;
+  }
+  export type BGPPeerList = BGPPeer[];
+  export type BGPPeerState = "verifying"|"pending"|"available"|"deleting"|"deleted"|string;
+  export type BGPStatus = "up"|"down"|string;
   export type Bandwidth = string;
   export type CIDR = string;
   export interface ConfirmConnectionRequest {
@@ -308,6 +337,19 @@ declare namespace DirectConnect.Types {
      */
     connections?: ConnectionList;
   }
+  export interface CreateBGPPeerRequest {
+    /**
+     * The ID of the virtual interface on which the BGP peer will be provisioned. Example: dxvif-456abc78 Default: None
+     */
+    virtualInterfaceId?: VirtualInterfaceId;
+    /**
+     * Detailed information for the BGP peer to be created. Default: None
+     */
+    newBGPPeer?: NewBGPPeer;
+  }
+  export interface CreateBGPPeerResponse {
+    virtualInterface?: VirtualInterface;
+  }
   export interface CreateConnectionRequest {
     location: LocationCode;
     bandwidth: Bandwidth;
@@ -342,6 +384,17 @@ declare namespace DirectConnect.Types {
     newPublicVirtualInterface: NewPublicVirtualInterface;
   }
   export type CustomerAddress = string;
+  export interface DeleteBGPPeerRequest {
+    /**
+     * The ID of the virtual interface from which the BGP peer will be deleted. Example: dxvif-456abc78 Default: None
+     */
+    virtualInterfaceId?: VirtualInterfaceId;
+    asn?: ASN;
+    customerAddress?: CustomerAddress;
+  }
+  export interface DeleteBGPPeerResponse {
+    virtualInterface?: VirtualInterface;
+  }
   export interface DeleteConnectionRequest {
     connectionId: ConnectionId;
   }
@@ -456,6 +509,13 @@ declare namespace DirectConnect.Types {
      */
     locations?: LocationList;
   }
+  export interface NewBGPPeer {
+    asn?: ASN;
+    authKey?: BGPAuthKey;
+    addressFamily?: AddressFamily;
+    amazonAddress?: AmazonAddress;
+    customerAddress?: CustomerAddress;
+  }
   export interface NewPrivateVirtualInterface {
     virtualInterfaceName: VirtualInterfaceName;
     vlan: VLAN;
@@ -463,6 +523,7 @@ declare namespace DirectConnect.Types {
     authKey?: BGPAuthKey;
     amazonAddress?: AmazonAddress;
     customerAddress?: CustomerAddress;
+    addressFamily?: AddressFamily;
     virtualGatewayId: VirtualGatewayId;
   }
   export interface NewPrivateVirtualInterfaceAllocation {
@@ -471,6 +532,7 @@ declare namespace DirectConnect.Types {
     asn: ASN;
     authKey?: BGPAuthKey;
     amazonAddress?: AmazonAddress;
+    addressFamily?: AddressFamily;
     customerAddress?: CustomerAddress;
   }
   export interface NewPublicVirtualInterface {
@@ -478,18 +540,20 @@ declare namespace DirectConnect.Types {
     vlan: VLAN;
     asn: ASN;
     authKey?: BGPAuthKey;
-    amazonAddress: AmazonAddress;
-    customerAddress: CustomerAddress;
-    routeFilterPrefixes: RouteFilterPrefixList;
+    amazonAddress?: AmazonAddress;
+    customerAddress?: CustomerAddress;
+    addressFamily?: AddressFamily;
+    routeFilterPrefixes?: RouteFilterPrefixList;
   }
   export interface NewPublicVirtualInterfaceAllocation {
     virtualInterfaceName: VirtualInterfaceName;
     vlan: VLAN;
     asn: ASN;
     authKey?: BGPAuthKey;
-    amazonAddress: AmazonAddress;
-    customerAddress: CustomerAddress;
-    routeFilterPrefixes: RouteFilterPrefixList;
+    amazonAddress?: AmazonAddress;
+    customerAddress?: CustomerAddress;
+    addressFamily?: AddressFamily;
+    routeFilterPrefixes?: RouteFilterPrefixList;
   }
   export type OwnerAccount = string;
   export type PartnerName = string;
@@ -510,7 +574,7 @@ declare namespace DirectConnect.Types {
   export type ResourceTagList = ResourceTag[];
   export interface RouteFilterPrefix {
     /**
-     * CIDR notation for the advertised route. Multiple routes are separated by commas. Example: 10.10.10.0/24,10.10.11.0/24
+     * CIDR notation for the advertised route. Multiple routes are separated by commas. IPv6 CIDRs must be at least a /64 or shorter Example: 10.10.10.0/24,10.10.11.0/24,2001:db8::/64
      */
     cidr?: CIDR;
   }
@@ -583,6 +647,7 @@ declare namespace DirectConnect.Types {
     authKey?: BGPAuthKey;
     amazonAddress?: AmazonAddress;
     customerAddress?: CustomerAddress;
+    addressFamily?: AddressFamily;
     virtualInterfaceState?: VirtualInterfaceState;
     /**
      * Information for generating the customer router configuration.
@@ -590,6 +655,7 @@ declare namespace DirectConnect.Types {
     customerRouterConfig?: RouterConfig;
     virtualGatewayId?: VirtualGatewayId;
     routeFilterPrefixes?: RouteFilterPrefixList;
+    bgpPeers?: BGPPeerList;
   }
   export type VirtualInterfaceId = string;
   export type VirtualInterfaceList = VirtualInterface[];

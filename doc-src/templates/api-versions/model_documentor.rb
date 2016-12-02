@@ -525,6 +525,10 @@ doc_client
       @lines += rules['enum'].map{|v| "#{prefix}   * `#{v.inspect}`" }
     end
 
+    if rules['idempotencyToken']
+      @lines << "#{prefix}   If a token is not provided, the SDK will use a version 4 UUID."
+    end
+
   end
 
   def structure?

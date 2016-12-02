@@ -12,6 +12,9 @@
     "name": "ApplicationAutoScaling",
     "cors": true
   },
+  "appstream": {
+    "name": "AppStream"
+  },
   "autoscaling": {
     "name": "AutoScaling",
     "cors": true
@@ -73,6 +76,9 @@
     "prefix": "logs",
     "name": "CloudWatchLogs",
     "cors": true
+  },
+  "codebuild": {
+    "name": "CodeBuild"
   },
   "codecommit": {
     "name": "CodeCommit",
@@ -149,7 +155,8 @@
       "2015-03-01*",
       "2015-04-15*",
       "2015-10-01*",
-      "2016-04-01*"
+      "2016-04-01*",
+      "2016-09-15*"
     ],
     "cors": true
   },
@@ -212,6 +219,9 @@
   "glacier": {
     "name": "Glacier"
   },
+  "health": {
+    "name": "Health"
+  },
   "iam": {
     "name": "IAM"
   },
@@ -249,6 +259,9 @@
     "name": "Lambda",
     "cors": true
   },
+  "lightsail": {
+    "name": "Lightsail"
+  },
   "machinelearning": {
     "name": "MachineLearning",
     "cors": true
@@ -269,6 +282,16 @@
     "name": "OpsWorks",
     "cors": true
   },
+  "opsworkscm": {
+    "name": "OpsWorksCM"
+  },
+  "pinpoint": {
+    "name": "Pinpoint"
+  },
+  "polly": {
+    "name": "Polly",
+    "cors": true
+  },
   "rds": {
     "name": "RDS",
     "versions": [
@@ -279,6 +302,9 @@
   "redshift": {
     "name": "Redshift",
     "cors": true
+  },
+  "rekognition": {
+    "name": "Rekognition"
   },
   "route53": {
     "name": "Route53",
@@ -301,6 +327,9 @@
     "prefix": "email",
     "name": "SES",
     "cors": true
+  },
+  "shield": {
+    "name": "Shield"
   },
   "simpledb": {
     "prefix": "sdb",
@@ -328,6 +357,10 @@
     "name": "StorageGateway",
     "cors": true
   },
+  "stepfunctions": {
+    "prefix": "states",
+    "name": "StepFunctions"
+  },
   "sts": {
     "name": "STS",
     "cors": true
@@ -337,6 +370,9 @@
   },
   "swf": {
     "name": "SWF"
+  },
+  "xray": {
+    "name": "XRay"
   },
   "waf": {
     "name": "WAF",

@@ -50,7 +50,7 @@
         {"shape":"DirectConnectServerException"},
         {"shape":"DirectConnectClientException"}
       ],
-      "documentation":"<p>Provisions a public virtual interface to be owned by a different customer.</p> <p>The owner of a connection calls this function to provision a public virtual interface which will be owned by another AWS customer.</p> <p>Virtual interfaces created using this function must be confirmed by the virtual interface owner by calling ConfirmPublicVirtualInterface. Until this step has been completed, the virtual interface will be in 'Confirming' state, and will not be available for handling traffic.</p>"
+      "documentation":"<p>Provisions a public virtual interface to be owned by a different customer.</p> <p>The owner of a connection calls this function to provision a public virtual interface which will be owned by another AWS customer.</p> <p>Virtual interfaces created using this function must be confirmed by the virtual interface owner by calling ConfirmPublicVirtualInterface. Until this step has been completed, the virtual interface will be in 'Confirming' state, and will not be available for handling traffic.</p> <p>When creating an IPv6 public virtual interface (addressFamily is 'ipv6'), the customer and amazon address fields should be left blank to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently not supported.</p>"
     },
     "ConfirmConnection":{
       "name":"ConfirmConnection",
@@ -93,6 +93,20 @@
         {"shape":"DirectConnectClientException"}
       ],
       "documentation":"<p>Accept ownership of a public virtual interface created by another customer.</p> <p>After the virtual interface owner calls this function, the specified virtual interface will be created and made available for handling traffic.</p>"
+    },
+    "CreateBGPPeer":{
+      "name":"CreateBGPPeer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateBGPPeerRequest"},
+      "output":{"shape":"CreateBGPPeerResponse"},
+      "errors":[
+        {"shape":"DirectConnectServerException"},
+        {"shape":"DirectConnectClientException"}
+      ],
+      "documentation":"<p>Creates a new BGP peer on a specified virtual interface. The BGP peer cannot be in the same address family (IPv4/IPv6) of an existing BGP peer on the virtual interface.</p> <p>You must create a BGP peer for the corresponding address family in order to access AWS resources that also use that address family.</p> <p>When creating a IPv6 BGP peer, the Amazon address and customer address fields must be left blank. IPv6 addresses are automatically assigned from Amazon's pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p> <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.</p>"
     },
     "CreateConnection":{
       "name":"CreateConnection",
@@ -148,7 +162,21 @@
         {"shape":"DirectConnectServerException"},
         {"shape":"DirectConnectClientException"}
       ],
-      "documentation":"<p>Creates a new public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon Simple Storage Service (Amazon S3).</p>"
+      "documentation":"<p>Creates a new public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon Simple Storage Service (Amazon S3).</p> <p>When creating an IPv6 public virtual interface (addressFamily is 'ipv6'), the customer and amazon address fields should be left blank to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently not supported.</p>"
+    },
+    "DeleteBGPPeer":{
+      "name":"DeleteBGPPeer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteBGPPeerRequest"},
+      "output":{"shape":"DeleteBGPPeerResponse"},
+      "errors":[
+        {"shape":"DirectConnectServerException"},
+        {"shape":"DirectConnectClientException"}
+      ],
+      "documentation":"<p>Deletes a BGP peer on the specified virtual interface that matches the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.</p>"
     },
     "DeleteConnection":{
       "name":"DeleteConnection",
@@ -352,6 +380,14 @@
       "type":"integer",
       "documentation":"<p>Autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>Example: 65000</p>"
     },
+    "AddressFamily":{
+      "type":"string",
+      "documentation":"<p>Indicates the address family for the BGP peer.</p> <ul> <li> <p> <b>ipv4</b>: IPv4 address family</p> </li> <li> <p> <b>ipv6</b>: IPv6 address family</p> </li> </ul>",
+      "enum":[
+        "ipv4",
+        "ipv6"
+      ]
+    },
     "AllocateConnectionOnInterconnectRequest":{
       "type":"structure",
       "required":[
@@ -433,11 +469,48 @@
     },
     "AmazonAddress":{
       "type":"string",
-      "documentation":"<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30</p>"
+      "documentation":"<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30 or 2001:db8::1/125</p>"
     },
     "BGPAuthKey":{
       "type":"string",
       "documentation":"<p>Authentication key for BGP configuration.</p> <p>Example: asdf34example</p>"
+    },
+    "BGPPeer":{
+      "type":"structure",
+      "members":{
+        "asn":{"shape":"ASN"},
+        "authKey":{"shape":"BGPAuthKey"},
+        "addressFamily":{"shape":"AddressFamily"},
+        "amazonAddress":{"shape":"AmazonAddress"},
+        "customerAddress":{"shape":"CustomerAddress"},
+        "bgpPeerState":{"shape":"BGPPeerState"},
+        "bgpStatus":{"shape":"BGPStatus"}
+      },
+      "documentation":"<p>A structure containing information about a BGP peer.</p>"
+    },
+    "BGPPeerList":{
+      "type":"list",
+      "member":{"shape":"BGPPeer"},
+      "documentation":"<p>A list of the BGP peers configured on this virtual interface.</p>"
+    },
+    "BGPPeerState":{
+      "type":"string",
+      "documentation":"<p>The state of the BGP peer.</p> <ul> <li> <p> <b>Verifying</b>: The BGP peering addresses or ASN require validation before the BGP peer can be created. This state only applies to BGP peers on a public virtual interface. </p> </li> <li> <p> <b>Pending</b>: The BGP peer has been created, and is in this state until it is ready to be established.</p> </li> <li> <p> <b>Available</b>: The BGP peer can be established.</p> </li> <li> <p> <b>Deleting</b>: The BGP peer is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The BGP peer has been deleted and cannot be established.</p> </li> </ul>",
+      "enum":[
+        "verifying",
+        "pending",
+        "available",
+        "deleting",
+        "deleted"
+      ]
+    },
+    "BGPStatus":{
+      "type":"string",
+      "documentation":"<p>The Up/Down state of the BGP peer.</p> <ul> <li> <p> <b>Up</b>: The BGP peer is established.</p> </li> <li> <p> <b>Down</b>: The BGP peer is down.</p> </li> </ul>",
+      "enum":[
+        "up",
+        "down"
+      ]
     },
     "Bandwidth":{
       "type":"string",
@@ -561,6 +634,27 @@
       },
       "documentation":"<p>A structure containing a list of connections.</p>"
     },
+    "CreateBGPPeerRequest":{
+      "type":"structure",
+      "members":{
+        "virtualInterfaceId":{
+          "shape":"VirtualInterfaceId",
+          "documentation":"<p>The ID of the virtual interface on which the BGP peer will be provisioned.</p> <p>Example: dxvif-456abc78</p> <p>Default: None</p>"
+        },
+        "newBGPPeer":{
+          "shape":"NewBGPPeer",
+          "documentation":"<p>Detailed information for the BGP peer to be created.</p> <p>Default: None</p>"
+        }
+      },
+      "documentation":"<p>Container for the parameters to the CreateBGPPeer operation.</p>"
+    },
+    "CreateBGPPeerResponse":{
+      "type":"structure",
+      "members":{
+        "virtualInterface":{"shape":"VirtualInterface"}
+      },
+      "documentation":"<p>The response received when CreateBGPPeer is called.</p>"
+    },
     "CreateConnectionRequest":{
       "type":"structure",
       "required":[
@@ -630,7 +724,26 @@
     },
     "CustomerAddress":{
       "type":"string",
-      "documentation":"<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30</p>"
+      "documentation":"<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30 or 2001:db8::2/125</p>"
+    },
+    "DeleteBGPPeerRequest":{
+      "type":"structure",
+      "members":{
+        "virtualInterfaceId":{
+          "shape":"VirtualInterfaceId",
+          "documentation":"<p>The ID of the virtual interface from which the BGP peer will be deleted.</p> <p>Example: dxvif-456abc78</p> <p>Default: None</p>"
+        },
+        "asn":{"shape":"ASN"},
+        "customerAddress":{"shape":"CustomerAddress"}
+      },
+      "documentation":"<p>Container for the parameters to the DeleteBGPPeer operation.</p>"
+    },
+    "DeleteBGPPeerResponse":{
+      "type":"structure",
+      "members":{
+        "virtualInterface":{"shape":"VirtualInterface"}
+      },
+      "documentation":"<p>The response received when DeleteBGPPeer is called.</p>"
     },
     "DeleteConnectionRequest":{
       "type":"structure",
@@ -896,6 +1009,17 @@
       },
       "documentation":"<p>A location is a network facility where AWS Direct Connect routers are available to be connected. Generally, these are colocation hubs where many network providers have equipment, and where cross connects can be delivered. Locations include a name and facility code, and must be provided when creating a connection.</p>"
     },
+    "NewBGPPeer":{
+      "type":"structure",
+      "members":{
+        "asn":{"shape":"ASN"},
+        "authKey":{"shape":"BGPAuthKey"},
+        "addressFamily":{"shape":"AddressFamily"},
+        "amazonAddress":{"shape":"AmazonAddress"},
+        "customerAddress":{"shape":"CustomerAddress"}
+      },
+      "documentation":"<p>A structure containing information about a new BGP peer.</p>"
+    },
     "NewPrivateVirtualInterface":{
       "type":"structure",
       "required":[
@@ -911,6 +1035,7 @@
         "authKey":{"shape":"BGPAuthKey"},
         "amazonAddress":{"shape":"AmazonAddress"},
         "customerAddress":{"shape":"CustomerAddress"},
+        "addressFamily":{"shape":"AddressFamily"},
         "virtualGatewayId":{"shape":"VirtualGatewayId"}
       },
       "documentation":"<p>A structure containing information about a new private virtual interface.</p>"
@@ -928,6 +1053,7 @@
         "asn":{"shape":"ASN"},
         "authKey":{"shape":"BGPAuthKey"},
         "amazonAddress":{"shape":"AmazonAddress"},
+        "addressFamily":{"shape":"AddressFamily"},
         "customerAddress":{"shape":"CustomerAddress"}
       },
       "documentation":"<p>A structure containing information about a private virtual interface that will be provisioned on a connection.</p>"
@@ -937,10 +1063,7 @@
       "required":[
         "virtualInterfaceName",
         "vlan",
-        "asn",
-        "amazonAddress",
-        "customerAddress",
-        "routeFilterPrefixes"
+        "asn"
       ],
       "members":{
         "virtualInterfaceName":{"shape":"VirtualInterfaceName"},
@@ -949,6 +1072,7 @@
         "authKey":{"shape":"BGPAuthKey"},
         "amazonAddress":{"shape":"AmazonAddress"},
         "customerAddress":{"shape":"CustomerAddress"},
+        "addressFamily":{"shape":"AddressFamily"},
         "routeFilterPrefixes":{"shape":"RouteFilterPrefixList"}
       },
       "documentation":"<p>A structure containing information about a new public virtual interface.</p>"
@@ -958,10 +1082,7 @@
       "required":[
         "virtualInterfaceName",
         "vlan",
-        "asn",
-        "amazonAddress",
-        "customerAddress",
-        "routeFilterPrefixes"
+        "asn"
       ],
       "members":{
         "virtualInterfaceName":{"shape":"VirtualInterfaceName"},
@@ -970,6 +1091,7 @@
         "authKey":{"shape":"BGPAuthKey"},
         "amazonAddress":{"shape":"AmazonAddress"},
         "customerAddress":{"shape":"CustomerAddress"},
+        "addressFamily":{"shape":"AddressFamily"},
         "routeFilterPrefixes":{"shape":"RouteFilterPrefixList"}
       },
       "documentation":"<p>A structure containing information about a public virtual interface that will be provisioned on a connection.</p>"
@@ -1009,7 +1131,7 @@
       "members":{
         "cidr":{
           "shape":"CIDR",
-          "documentation":"<p>CIDR notation for the advertised route. Multiple routes are separated by commas.</p> <p>Example: 10.10.10.0/24,10.10.11.0/24</p>"
+          "documentation":"<p>CIDR notation for the advertised route. Multiple routes are separated by commas.</p> <p>IPv6 CIDRs must be at least a /64 or shorter</p> <p>Example: 10.10.10.0/24,10.10.11.0/24,2001:db8::/64</p>"
         }
       },
       "documentation":"<p>A route filter prefix that the customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.</p>"
@@ -1163,13 +1285,15 @@
         "authKey":{"shape":"BGPAuthKey"},
         "amazonAddress":{"shape":"AmazonAddress"},
         "customerAddress":{"shape":"CustomerAddress"},
+        "addressFamily":{"shape":"AddressFamily"},
         "virtualInterfaceState":{"shape":"VirtualInterfaceState"},
         "customerRouterConfig":{
           "shape":"RouterConfig",
           "documentation":"<p>Information for generating the customer router configuration.</p>"
         },
         "virtualGatewayId":{"shape":"VirtualGatewayId"},
-        "routeFilterPrefixes":{"shape":"RouteFilterPrefixList"}
+        "routeFilterPrefixes":{"shape":"RouteFilterPrefixList"},
+        "bgpPeers":{"shape":"BGPPeerList"}
       },
       "documentation":"<p>A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect location and the customer.</p>"
     },

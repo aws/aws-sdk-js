@@ -12,11 +12,11 @@ declare class EC2 extends Service {
   constructor(options?: EC2.Types.ClientConfiguration)
   config: Config & EC2.Types.ClientConfiguration;
   /**
-   * Purchases Convertible Reserved Instance offerings described in the GetReservedInstancesExchangeQuote call.
+   * Accepts the Convertible Reserved Instance exchange quote described in the GetReservedInstancesExchangeQuote call.
    */
   acceptReservedInstancesExchangeQuote(params: EC2.Types.AcceptReservedInstancesExchangeQuoteRequest, callback?: (err: AWSError, data: EC2.Types.AcceptReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.AcceptReservedInstancesExchangeQuoteResult, AWSError>;
   /**
-   * Purchases Convertible Reserved Instance offerings described in the GetReservedInstancesExchangeQuote call.
+   * Accepts the Convertible Reserved Instance exchange quote described in the GetReservedInstancesExchangeQuote call.
    */
   acceptReservedInstancesExchangeQuote(callback?: (err: AWSError, data: EC2.Types.AcceptReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.AcceptReservedInstancesExchangeQuoteResult, AWSError>;
   /**
@@ -43,6 +43,14 @@ declare class EC2 extends Service {
    * Allocates a Dedicated Host to your account. At minimum you need to specify the instance size type, Availability Zone, and quantity of hosts you want to allocate.
    */
   allocateHosts(callback?: (err: AWSError, data: EC2.Types.AllocateHostsResult) => void): Request<EC2.Types.AllocateHostsResult, AWSError>;
+  /**
+   * Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see IP Addresses Per Network Interface Per Instance Type in the Amazon Elastic Compute Cloud User Guide.
+   */
+  assignIpv6Addresses(params: EC2.Types.AssignIpv6AddressesRequest, callback?: (err: AWSError, data: EC2.Types.AssignIpv6AddressesResult) => void): Request<EC2.Types.AssignIpv6AddressesResult, AWSError>;
+  /**
+   * Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see IP Addresses Per Network Interface Per Instance Type in the Amazon Elastic Compute Cloud User Guide.
+   */
+  assignIpv6Addresses(callback?: (err: AWSError, data: EC2.Types.AssignIpv6AddressesResult) => void): Request<EC2.Types.AssignIpv6AddressesResult, AWSError>;
   /**
    * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. AssignPrivateIpAddresses is available only in EC2-VPC.
    */
@@ -75,6 +83,22 @@ declare class EC2 extends Service {
    * Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table from the subnet later. A route table can be associated with multiple subnets. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   associateRouteTable(callback?: (err: AWSError, data: EC2.Types.AssociateRouteTableResult) => void): Request<EC2.Types.AssociateRouteTableResult, AWSError>;
+  /**
+   * Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of /64.
+   */
+  associateSubnetCidrBlock(params: EC2.Types.AssociateSubnetCidrBlockRequest, callback?: (err: AWSError, data: EC2.Types.AssociateSubnetCidrBlockResult) => void): Request<EC2.Types.AssociateSubnetCidrBlockResult, AWSError>;
+  /**
+   * Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of /64.
+   */
+  associateSubnetCidrBlock(callback?: (err: AWSError, data: EC2.Types.AssociateSubnetCidrBlockResult) => void): Request<EC2.Types.AssociateSubnetCidrBlockResult, AWSError>;
+  /**
+   * Associates a CIDR block with your VPC. You can only associate a single Amazon-provided IPv6 CIDR block with your VPC. The IPv6 CIDR block size is fixed at /56.
+   */
+  associateVpcCidrBlock(params: EC2.Types.AssociateVpcCidrBlockRequest, callback?: (err: AWSError, data: EC2.Types.AssociateVpcCidrBlockResult) => void): Request<EC2.Types.AssociateVpcCidrBlockResult, AWSError>;
+  /**
+   * Associates a CIDR block with your VPC. You can only associate a single Amazon-provided IPv6 CIDR block with your VPC. The IPv6 CIDR block size is fixed at /56.
+   */
+  associateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.AssociateVpcCidrBlockResult) => void): Request<EC2.Types.AssociateVpcCidrBlockResult, AWSError>;
   /**
    * Links an EC2-Classic instance to a ClassicLink-enabled VPC through one or more of the VPC's security groups. You cannot link an EC2-Classic instance to more than one VPC at a time. You can only link an instance that's in the running state. An instance is automatically unlinked from a VPC when it's stopped - you can link it to the VPC again when you restart it. After you've linked an instance, you cannot change the VPC security groups that are associated with it. To change the security groups, you must first unlink the instance, and then link it again. Linking your instance to a VPC is sometimes referred to as attaching your instance.
    */
@@ -116,19 +140,19 @@ declare class EC2 extends Service {
    */
   attachVpnGateway(callback?: (err: AWSError, data: EC2.Types.AttachVpnGatewayResult) => void): Request<EC2.Types.AttachVpnGatewayResult, AWSError>;
   /**
-   * [EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination CIDR IP address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide.  You can have up to 50 rules per security group (covering both ingress and egress rules).  Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.
+   * [EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination IPv4 or IPv6 CIDR address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide. For more information about security group limits, see Amazon VPC Limits. Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.
    */
   authorizeSecurityGroupEgress(params: EC2.Types.AuthorizeSecurityGroupEgressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * [EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination CIDR IP address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide.  You can have up to 50 rules per security group (covering both ingress and egress rules).  Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.
+   * [EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination IPv4 or IPv6 CIDR address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide. For more information about security group limits, see Amazon VPC Limits. Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.
    */
   authorizeSecurityGroupEgress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more ingress rules to a security group.  EC2-Classic: You can have up to 100 rules per group. EC2-VPC: You can have up to 50 rules per group (covering both ingress and egress rules).  Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. [EC2-Classic] This action gives one or more CIDR IP address ranges permission to access a security group in your account, or gives one or more security groups (called the source groups) permission to access a security group for your account. A source group can be for your own AWS account, or another. [EC2-VPC] This action gives one or more CIDR IP address ranges permission to access a security group in your VPC, or gives one or more other security groups (called the source groups) permission to access a security group for your VPC. The security groups must all be for the same VPC.
+   * Adds one or more ingress rules to a security group. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. [EC2-Classic] This action gives one or more IPv4 CIDR address ranges permission to access a security group in your account, or gives one or more security groups (called the source groups) permission to access a security group for your account. A source group can be for your own AWS account, or another. You can have up to 100 rules per group. [EC2-VPC] This action gives one or more IPv4 or IPv6 CIDR address ranges permission to access a security group in your VPC, or gives one or more other security groups (called the source groups) permission to access a security group for your VPC. The security groups must all be for the same VPC or a peer VPC in a VPC peering connection. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupIngress(params: EC2.Types.AuthorizeSecurityGroupIngressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more ingress rules to a security group.  EC2-Classic: You can have up to 100 rules per group. EC2-VPC: You can have up to 50 rules per group (covering both ingress and egress rules).  Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. [EC2-Classic] This action gives one or more CIDR IP address ranges permission to access a security group in your account, or gives one or more security groups (called the source groups) permission to access a security group for your account. A source group can be for your own AWS account, or another. [EC2-VPC] This action gives one or more CIDR IP address ranges permission to access a security group in your VPC, or gives one or more other security groups (called the source groups) permission to access a security group for your VPC. The security groups must all be for the same VPC.
+   * Adds one or more ingress rules to a security group. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. [EC2-Classic] This action gives one or more IPv4 CIDR address ranges permission to access a security group in your account, or gives one or more security groups (called the source groups) permission to access a security group for your account. A source group can be for your own AWS account, or another. You can have up to 100 rules per group. [EC2-VPC] This action gives one or more IPv4 or IPv6 CIDR address ranges permission to access a security group in your VPC, or gives one or more other security groups (called the source groups) permission to access a security group for your VPC. The security groups must all be for the same VPC or a peer VPC in a VPC peering connection. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -236,6 +260,14 @@ declare class EC2 extends Service {
    */
   createDhcpOptions(callback?: (err: AWSError, data: EC2.Types.CreateDhcpOptionsResult) => void): Request<EC2.Types.CreateDhcpOptionsResult, AWSError>;
   /**
+   * [IPv6 only] Creates an egress-only Internet gateway for your VPC. An egress-only Internet gateway is used to enable outbound communication over IPv6 from instances in your VPC to the Internet, and prevents hosts outside of your VPC from initiating an IPv6 connection with your instance.
+   */
+  createEgressOnlyInternetGateway(params: EC2.Types.CreateEgressOnlyInternetGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.CreateEgressOnlyInternetGatewayResult, AWSError>;
+  /**
+   * [IPv6 only] Creates an egress-only Internet gateway for your VPC. An egress-only Internet gateway is used to enable outbound communication over IPv6 from instances in your VPC to the Internet, and prevents hosts outside of your VPC from initiating an IPv6 connection with your instance.
+   */
+  createEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.CreateEgressOnlyInternetGatewayResult, AWSError>;
+  /**
    * Creates one or more flow logs to capture IP traffic for a specific network interface, subnet, or VPC. Flow logs are delivered to a specified log group in Amazon CloudWatch Logs. If you specify a VPC or subnet in the request, a log stream is created in CloudWatch Logs for each network interface in the subnet or VPC. Log streams can include information about accepted and rejected traffic to a network interface. You can view the data in your log streams using Amazon CloudWatch Logs. In your request, you must also specify an IAM role that has permission to publish logs to CloudWatch Logs.
    */
   createFlowLogs(params: EC2.Types.CreateFlowLogsRequest, callback?: (err: AWSError, data: EC2.Types.CreateFlowLogsResult) => void): Request<EC2.Types.CreateFlowLogsResult, AWSError>;
@@ -300,11 +332,11 @@ declare class EC2 extends Service {
    */
   createNetworkAclEntry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a network interface in the specified subnet. For more information about network interfaces, see Elastic Network Interfaces in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a network interface in the specified subnet. For more information about network interfaces, see Elastic Network Interfaces in the Amazon Virtual Private Cloud User Guide.
    */
   createNetworkInterface(params: EC2.Types.CreateNetworkInterfaceRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfaceResult) => void): Request<EC2.Types.CreateNetworkInterfaceResult, AWSError>;
   /**
-   * Creates a network interface in the specified subnet. For more information about network interfaces, see Elastic Network Interfaces in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a network interface in the specified subnet. For more information about network interfaces, see Elastic Network Interfaces in the Amazon Virtual Private Cloud User Guide.
    */
   createNetworkInterface(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfaceResult) => void): Request<EC2.Types.CreateNetworkInterfaceResult, AWSError>;
   /**
@@ -324,11 +356,11 @@ declare class EC2 extends Service {
    */
   createReservedInstancesListing(callback?: (err: AWSError, data: EC2.Types.CreateReservedInstancesListingResult) => void): Request<EC2.Types.CreateReservedInstancesListingResult, AWSError>;
   /**
-   * Creates a route in a route table within a VPC. You must specify one of the following targets: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, or network interface. When determining how to route traffic, we use the route with the most specific match. For example, let's say the traffic is destined for 192.0.2.3, and the route table includes the following two routes:    192.0.2.0/24 (goes to some target A)    192.0.2.0/28 (goes to some target B)   Both routes apply to the traffic destined for 192.0.2.3. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Creates a route in a route table within a VPC. You must specify one of the following targets: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only Internet gateway. When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address 192.0.2.3, and the route table includes the following two IPv4 routes:    192.0.2.0/24 (goes to some target A)    192.0.2.0/28 (goes to some target B)   Both routes apply to the traffic destined for 192.0.2.3. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   createRoute(params: EC2.Types.CreateRouteRequest, callback?: (err: AWSError, data: EC2.Types.CreateRouteResult) => void): Request<EC2.Types.CreateRouteResult, AWSError>;
   /**
-   * Creates a route in a route table within a VPC. You must specify one of the following targets: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, or network interface. When determining how to route traffic, we use the route with the most specific match. For example, let's say the traffic is destined for 192.0.2.3, and the route table includes the following two routes:    192.0.2.0/24 (goes to some target A)    192.0.2.0/28 (goes to some target B)   Both routes apply to the traffic destined for 192.0.2.3. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Creates a route in a route table within a VPC. You must specify one of the following targets: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only Internet gateway. When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address 192.0.2.3, and the route table includes the following two IPv4 routes:    192.0.2.0/24 (goes to some target A)    192.0.2.0/28 (goes to some target B)   Both routes apply to the traffic destined for 192.0.2.3. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   createRoute(callback?: (err: AWSError, data: EC2.Types.CreateRouteResult) => void): Request<EC2.Types.CreateRouteResult, AWSError>;
   /**
@@ -364,11 +396,11 @@ declare class EC2 extends Service {
    */
   createSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The subnet's CIDR block can be the same as the VPC's CIDR block (assuming you want only a single subnet in the VPC), or a subset of the VPC's CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest subnet (and VPC) you can create uses a /28 netmask (16 IP addresses), and the largest uses a /16 netmask (65,536 IP addresses).  AWS reserves both the first four and the last IP address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The subnet's IPv4 CIDR block can be the same as the VPC's IPv4 CIDR block (assuming you want only a single subnet in the VPC), or a subset of the VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IP address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(params: EC2.Types.CreateSubnetRequest, callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
-   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The subnet's CIDR block can be the same as the VPC's CIDR block (assuming you want only a single subnet in the VPC), or a subset of the VPC's CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest subnet (and VPC) you can create uses a /28 netmask (16 IP addresses), and the largest uses a /16 netmask (65,536 IP addresses).  AWS reserves both the first four and the last IP address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The subnet's IPv4 CIDR block can be the same as the VPC's IPv4 CIDR block (assuming you want only a single subnet in the VPC), or a subset of the VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IP address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
@@ -388,11 +420,11 @@ declare class EC2 extends Service {
    */
   createVolume(callback?: (err: AWSError, data: EC2.Types.Volume) => void): Request<EC2.Types.Volume, AWSError>;
   /**
-   * Creates a VPC with the specified CIDR block. The smallest VPC you can create uses a /28 netmask (16 IP addresses), and the largest uses a /16 netmask (65,536 IP addresses). To help you decide how big to make your VPC, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide. By default, each instance you launch in the VPC has the default DHCP options, which includes only a default DNS server that we provide (AmazonProvidedDNS). For more information about DHCP options, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Virtual Private Cloud User Guide.
+   * Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). To help you decide how big to make your VPC, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide. You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon's pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC. By default, each instance you launch in the VPC has the default DHCP options, which includes only a default DNS server that we provide (AmazonProvidedDNS). For more information about DHCP options, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Virtual Private Cloud User Guide.
    */
   createVpc(params: EC2.Types.CreateVpcRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC with the specified CIDR block. The smallest VPC you can create uses a /28 netmask (16 IP addresses), and the largest uses a /16 netmask (65,536 IP addresses). To help you decide how big to make your VPC, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide. By default, each instance you launch in the VPC has the default DHCP options, which includes only a default DNS server that we provide (AmazonProvidedDNS). For more information about DHCP options, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Virtual Private Cloud User Guide.
+   * Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). To help you decide how big to make your VPC, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide. You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon's pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC. By default, each instance you launch in the VPC has the default DHCP options, which includes only a default DNS server that we provide (AmazonProvidedDNS). For more information about DHCP options, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Virtual Private Cloud User Guide.
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
@@ -451,6 +483,14 @@ declare class EC2 extends Service {
    * Deletes the specified set of DHCP options. You must disassociate the set of DHCP options before you can delete it. You can disassociate the set of DHCP options by associating either a new set of options or the default set of options with the VPC.
    */
   deleteDhcpOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an egress-only Internet gateway.
+   */
+  deleteEgressOnlyInternetGateway(params: EC2.Types.DeleteEgressOnlyInternetGatewayRequest, callback?: (err: AWSError, data: EC2.Types.DeleteEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.DeleteEgressOnlyInternetGatewayResult, AWSError>;
+  /**
+   * Deletes an egress-only Internet gateway.
+   */
+  deleteEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.DeleteEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.DeleteEgressOnlyInternetGatewayResult, AWSError>;
   /**
    * Deletes one or more flow logs.
    */
@@ -699,6 +739,14 @@ declare class EC2 extends Service {
    * Describes one or more of your DHCP options sets. For more information about DHCP options sets, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
    */
   describeDhcpOptions(callback?: (err: AWSError, data: EC2.Types.DescribeDhcpOptionsResult) => void): Request<EC2.Types.DescribeDhcpOptionsResult, AWSError>;
+  /**
+   * Describes one or more of your egress-only Internet gateways.
+   */
+  describeEgressOnlyInternetGateways(params: EC2.Types.DescribeEgressOnlyInternetGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeEgressOnlyInternetGatewaysResult) => void): Request<EC2.Types.DescribeEgressOnlyInternetGatewaysResult, AWSError>;
+  /**
+   * Describes one or more of your egress-only Internet gateways.
+   */
+  describeEgressOnlyInternetGateways(callback?: (err: AWSError, data: EC2.Types.DescribeEgressOnlyInternetGatewaysResult) => void): Request<EC2.Types.DescribeEgressOnlyInternetGatewaysResult, AWSError>;
   /**
    * Describes one or more of your export tasks.
    */
@@ -1020,11 +1068,11 @@ declare class EC2 extends Service {
    */
   describeSpotInstanceRequests(callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
   /**
-   * Describes the Spot price history. The prices returned are listed in chronological order, from the oldest to the most recent, for up to the past 90 days. For more information, see Spot Instance Pricing History in the Amazon Elastic Compute Cloud User Guide. When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.
+   * Describes the Spot price history. For more information, see Spot Instance Pricing History in the Amazon Elastic Compute Cloud User Guide. When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.
    */
   describeSpotPriceHistory(params: EC2.Types.DescribeSpotPriceHistoryRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotPriceHistoryResult) => void): Request<EC2.Types.DescribeSpotPriceHistoryResult, AWSError>;
   /**
-   * Describes the Spot price history. The prices returned are listed in chronological order, from the oldest to the most recent, for up to the past 90 days. For more information, see Spot Instance Pricing History in the Amazon Elastic Compute Cloud User Guide. When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.
+   * Describes the Spot price history. For more information, see Spot Instance Pricing History in the Amazon Elastic Compute Cloud User Guide. When you specify a start and end time, this operation returns the prices of the instance types within the time range that you specified and the time when the price changed. The price is valid within the time period that you specified; the response merely indicates the last time that the price changed.
    */
   describeSpotPriceHistory(callback?: (err: AWSError, data: EC2.Types.DescribeSpotPriceHistoryResult) => void): Request<EC2.Types.DescribeSpotPriceHistoryResult, AWSError>;
   /**
@@ -1228,6 +1276,22 @@ declare class EC2 extends Service {
    */
   disassociateRouteTable(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Disassociates a CIDR block from a subnet. Currently, you can disassociate an IPv6 CIDR block only. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it. 
+   */
+  disassociateSubnetCidrBlock(params: EC2.Types.DisassociateSubnetCidrBlockRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateSubnetCidrBlockResult) => void): Request<EC2.Types.DisassociateSubnetCidrBlockResult, AWSError>;
+  /**
+   * Disassociates a CIDR block from a subnet. Currently, you can disassociate an IPv6 CIDR block only. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it. 
+   */
+  disassociateSubnetCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateSubnetCidrBlockResult) => void): Request<EC2.Types.DisassociateSubnetCidrBlockResult, AWSError>;
+  /**
+   * Disassociates a CIDR block from a VPC. Currently, you can disassociate an IPv6 CIDR block only. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it. 
+   */
+  disassociateVpcCidrBlock(params: EC2.Types.DisassociateVpcCidrBlockRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
+  /**
+   * Disassociates a CIDR block from a VPC. Currently, you can disassociate an IPv6 CIDR block only. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it. 
+   */
+  disassociateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
+  /**
    * Enables a virtual private gateway (VGW) to propagate routes to the specified route table of a VPC.
    */
   enableVgwRoutePropagation(params: EC2.Types.EnableVgwRoutePropagationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1292,11 +1356,11 @@ declare class EC2 extends Service {
    */
   getPasswordData(callback?: (err: AWSError, data: EC2.Types.GetPasswordDataResult) => void): Request<EC2.Types.GetPasswordDataResult, AWSError>;
   /**
-   * Returns details about the values and term of your specified Convertible Reserved Instances. When an offering ID is specified it returns information about whether the exchange is valid and can be performed.
+   * Returns details about the values and term of your specified Convertible Reserved Instances. When a target configuration is specified, it returns information about whether the exchange is valid and can be performed.
    */
   getReservedInstancesExchangeQuote(params: EC2.Types.GetReservedInstancesExchangeQuoteRequest, callback?: (err: AWSError, data: EC2.Types.GetReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.GetReservedInstancesExchangeQuoteResult, AWSError>;
   /**
-   * Returns details about the values and term of your specified Convertible Reserved Instances. When an offering ID is specified it returns information about whether the exchange is valid and can be performed.
+   * Returns details about the values and term of your specified Convertible Reserved Instances. When a target configuration is specified, it returns information about whether the exchange is valid and can be performed.
    */
   getReservedInstancesExchangeQuote(callback?: (err: AWSError, data: EC2.Types.GetReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.GetReservedInstancesExchangeQuoteResult, AWSError>;
   /**
@@ -1420,11 +1484,11 @@ declare class EC2 extends Service {
    */
   modifySpotFleetRequest(callback?: (err: AWSError, data: EC2.Types.ModifySpotFleetRequestResponse) => void): Request<EC2.Types.ModifySpotFleetRequestResponse, AWSError>;
   /**
-   * Modifies a subnet attribute.
+   * Modifies a subnet attribute. You can only modify one attribute at a time.
    */
   modifySubnetAttribute(params: EC2.Types.ModifySubnetAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies a subnet attribute.
+   * Modifies a subnet attribute. You can only modify one attribute at a time.
    */
   modifySubnetAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1460,11 +1524,11 @@ declare class EC2 extends Service {
    */
   modifyVpcPeeringConnectionOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcPeeringConnectionOptionsResult) => void): Request<EC2.Types.ModifyVpcPeeringConnectionOptionsResult, AWSError>;
   /**
-   * Enables monitoring for a running instance. For more information about monitoring instances, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide.
+   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide. To disable detailed monitoring, see .
    */
   monitorInstances(params: EC2.Types.MonitorInstancesRequest, callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
   /**
-   * Enables monitoring for a running instance. For more information about monitoring instances, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide.
+   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide. To disable detailed monitoring, see .
    */
   monitorInstances(callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
   /**
@@ -1556,11 +1620,11 @@ declare class EC2 extends Service {
    */
   replaceNetworkAclEntry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces an existing route within a route table in a VPC. You must provide only one of the following: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, or network interface. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Replaces an existing route within a route table in a VPC. You must provide only one of the following: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only Internet gateway. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   replaceRoute(params: EC2.Types.ReplaceRouteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces an existing route within a route table in a VPC. You must provide only one of the following: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, or network interface. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
+   * Replaces an existing route within a route table in a VPC. You must provide only one of the following: Internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only Internet gateway. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   replaceRoute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1636,11 +1700,11 @@ declare class EC2 extends Service {
    */
   restoreAddressToClassic(callback?: (err: AWSError, data: EC2.Types.RestoreAddressToClassicResult) => void): Request<EC2.Types.RestoreAddressToClassicResult, AWSError>;
   /**
-   * [EC2-VPC only] Removes one or more egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be revoked. Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * [EC2-VPC only] Removes one or more egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be revoked. Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupEgress(params: EC2.Types.RevokeSecurityGroupEgressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * [EC2-VPC only] Removes one or more egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be revoked. Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * [EC2-VPC only] Removes one or more egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be revoked. Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupEgress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1652,11 +1716,11 @@ declare class EC2 extends Service {
    */
   revokeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Launches the specified number of instances using an AMI for which you have permissions. When you launch an instance, it enters the pending state. After the instance is ready for you, it enters the running state. To check the state of your instance, call DescribeInstances. To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. To tag your instance, ensure that it is running as CreateTags requires a resource ID. For more information about tagging, see Tagging Your Amazon EC2 Resources. If you don't specify a security group when launching an instance, Amazon EC2 uses the default security group. For more information, see Security Groups in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC only accounts] If you don't specify a subnet in the request, we choose a default subnet from your default VPC for you. [EC2-Classic accounts] If you're launching into EC2-Classic and you don't specify an Availability Zone, we choose one for you. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. You can provide optional user data when launching an instance. For more information, see Instance Metadata in the Amazon Elastic Compute Cloud User Guide. If any of the AMIs have a product code attached for which the user has not subscribed, RunInstances fails. Some instance types can only be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID in the request, RunInstances fails. For more information, see Instance Types Available Only in a VPC. For more information about troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
+   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Amazon EC2 Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   To ensure faster instance launches, break up large requests into smaller batches. For example, create 5 separate launch requests for 100 instances each instead of 1 launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. After launch, you can apply tags to your running instance (requires a resource ID). For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   runInstances(params: EC2.Types.RunInstancesRequest, callback?: (err: AWSError, data: EC2.Types.Reservation) => void): Request<EC2.Types.Reservation, AWSError>;
   /**
-   * Launches the specified number of instances using an AMI for which you have permissions. When you launch an instance, it enters the pending state. After the instance is ready for you, it enters the running state. To check the state of your instance, call DescribeInstances. To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. To tag your instance, ensure that it is running as CreateTags requires a resource ID. For more information about tagging, see Tagging Your Amazon EC2 Resources. If you don't specify a security group when launching an instance, Amazon EC2 uses the default security group. For more information, see Security Groups in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC only accounts] If you don't specify a subnet in the request, we choose a default subnet from your default VPC for you. [EC2-Classic accounts] If you're launching into EC2-Classic and you don't specify an Availability Zone, we choose one for you. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. You can provide optional user data when launching an instance. For more information, see Instance Metadata in the Amazon Elastic Compute Cloud User Guide. If any of the AMIs have a product code attached for which the user has not subscribed, RunInstances fails. Some instance types can only be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID in the request, RunInstances fails. For more information, see Instance Types Available Only in a VPC. For more information about troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
+   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Amazon EC2 Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   To ensure faster instance launches, break up large requests into smaller batches. For example, create 5 separate launch requests for 100 instances each instead of 1 launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. After launch, you can apply tags to your running instance (requires a resource ID). For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   runInstances(callback?: (err: AWSError, data: EC2.Types.Reservation) => void): Request<EC2.Types.Reservation, AWSError>;
   /**
@@ -1692,6 +1756,14 @@ declare class EC2 extends Service {
    */
   terminateInstances(callback?: (err: AWSError, data: EC2.Types.TerminateInstancesResult) => void): Request<EC2.Types.TerminateInstancesResult, AWSError>;
   /**
+   * Unassigns one or more IPv6 addresses from a network interface.
+   */
+  unassignIpv6Addresses(params: EC2.Types.UnassignIpv6AddressesRequest, callback?: (err: AWSError, data: EC2.Types.UnassignIpv6AddressesResult) => void): Request<EC2.Types.UnassignIpv6AddressesResult, AWSError>;
+  /**
+   * Unassigns one or more IPv6 addresses from a network interface.
+   */
+  unassignIpv6Addresses(callback?: (err: AWSError, data: EC2.Types.UnassignIpv6AddressesResult) => void): Request<EC2.Types.UnassignIpv6AddressesResult, AWSError>;
+  /**
    * Unassigns one or more secondary private IP addresses from a network interface.
    */
   unassignPrivateIpAddresses(params: EC2.Types.UnassignPrivateIpAddressesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1700,11 +1772,11 @@ declare class EC2 extends Service {
    */
   unassignPrivateIpAddresses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disables monitoring for a running instance. For more information about monitoring instances, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide.
+   * Disables detailed monitoring for a running instance. For more information, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide.
    */
   unmonitorInstances(params: EC2.Types.UnmonitorInstancesRequest, callback?: (err: AWSError, data: EC2.Types.UnmonitorInstancesResult) => void): Request<EC2.Types.UnmonitorInstancesResult, AWSError>;
   /**
-   * Disables monitoring for a running instance. For more information about monitoring instances, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide.
+   * Disables detailed monitoring for a running instance. For more information, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide.
    */
   unmonitorInstances(callback?: (err: AWSError, data: EC2.Types.UnmonitorInstancesResult) => void): Request<EC2.Types.UnmonitorInstancesResult, AWSError>;
   /**
@@ -1955,11 +2027,11 @@ declare namespace EC2.Types {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of the Convertible Reserved Instances that you want to exchange for other Convertible Reserved Instances of the same or higher value.
+     * The IDs of the Convertible Reserved Instances to exchange for other Convertible Reserved Instances of the same or higher value.
      */
     ReservedInstanceIds: ReservedInstanceIdSet;
     /**
-     * The configurations of the Convertible Reserved Instance offerings you are purchasing in this exchange.
+     * The configurations of the Convertible Reserved Instance offerings that you are purchasing in this exchange.
      */
     TargetConfigurations?: TargetConfigurationRequestSet;
   }
@@ -2113,6 +2185,30 @@ declare namespace EC2.Types {
   export type AllocationState = "available"|"under-assessment"|"permanent-failure"|"released"|"released-permanent-failure"|string;
   export type AllocationStrategy = "lowestPrice"|"diversified"|string;
   export type ArchitectureValues = "i386"|"x86_64"|string;
+  export interface AssignIpv6AddressesRequest {
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId: String;
+    /**
+     * One or more specific IPv6 addresses to be assigned to the network interface. You can't use this option if you're specifying a number of IPv6 addresses.
+     */
+    Ipv6Addresses?: Ipv6AddressList;
+    /**
+     * The number of IPv6 addresses to assign to the network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.
+     */
+    Ipv6AddressCount?: Integer;
+  }
+  export interface AssignIpv6AddressesResult {
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The IPv6 addresses assigned to the network interface.
+     */
+    AssignedIpv6Addresses?: Ipv6AddressList;
+  }
   export interface AssignPrivateIpAddressesRequest {
     /**
      * The ID of the network interface.
@@ -2200,6 +2296,46 @@ declare namespace EC2.Types {
      * The route table association ID (needed to disassociate the route table).
      */
     AssociationId?: String;
+  }
+  export interface AssociateSubnetCidrBlockRequest {
+    /**
+     * The ID of your subnet.
+     */
+    SubnetId: String;
+    /**
+     * The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
+     */
+    Ipv6CidrBlock: String;
+  }
+  export interface AssociateSubnetCidrBlockResult {
+    /**
+     * The ID of the subnet.
+     */
+    SubnetId?: String;
+    /**
+     * Information about the IPv6 CIDR block association.
+     */
+    Ipv6CidrBlockAssociation?: SubnetIpv6CidrBlockAssociation;
+  }
+  export interface AssociateVpcCidrBlockRequest {
+    /**
+     * The ID of the VPC.
+     */
+    VpcId: String;
+    /**
+     * Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.
+     */
+    AmazonProvidedIpv6CidrBlock?: Boolean;
+  }
+  export interface AssociateVpcCidrBlockResult {
+    /**
+     * The ID of the VPC.
+     */
+    VpcId?: String;
+    /**
+     * Information about the IPv6 CIDR block association.
+     */
+    Ipv6CidrBlockAssociation?: VpcIpv6CidrBlockAssociation;
   }
   export interface AttachClassicLinkVpcRequest {
     /**
@@ -2344,7 +2480,7 @@ declare namespace EC2.Types {
      */
     ToPort?: Integer;
     /**
-     * The CIDR IP address range. We recommend that you specify the CIDR range in a set of IP permissions instead.
+     * The CIDR IPv4 address range. We recommend that you specify the CIDR range in a set of IP permissions instead.
      */
     CidrIp?: String;
     /**
@@ -2374,19 +2510,19 @@ declare namespace EC2.Types {
      */
     SourceSecurityGroupOwnerId?: String;
     /**
-     * The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers). (VPC only) Use -1 to specify all traffic. If you specify -1, traffic on all ports is allowed, regardless of any ports you specify.
+     * The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers). (VPC only) Use -1 to specify all protocols. If you specify -1, or a protocol number other than tcp, udp, icmp, or 58 (ICMPv6), traffic on all ports is allowed, regardless of any ports you specify. For tcp, udp, and icmp, you must specify a port range. For protocol 58 (ICMPv6), you can optionally specify a port range; if you don't, traffic for all types and codes is allowed.
      */
     IpProtocol?: String;
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use -1 to specify all ICMP types.
+     * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use -1 to specify all types.
      */
     FromPort?: Integer;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP code number. For the ICMP code number, use -1 to specify all ICMP codes for the ICMP type.
+     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use -1 to specify all codes.
      */
     ToPort?: Integer;
     /**
-     * The CIDR IP address range. You can't specify this parameter when specifying a source security group.
+     * The CIDR IPv4 address range. You can't specify this parameter when specifying a source security group.
      */
     CidrIp?: String;
     /**
@@ -2916,6 +3052,30 @@ declare namespace EC2.Types {
      */
     DhcpOptions?: DhcpOptions;
   }
+  export interface CreateEgressOnlyInternetGatewayRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the VPC for which to create the egress-only Internet gateway.
+     */
+    VpcId: String;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateEgressOnlyInternetGatewayResult {
+    /**
+     * Information about the egress-only Internet gateway.
+     */
+    EgressOnlyInternetGateway?: EgressOnlyInternetGateway;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: String;
+  }
   export interface CreateFlowLogsRequest {
     /**
      * One or more subnet, network interface, or VPC IDs. Constraints: Maximum of 1000 resources
@@ -3072,7 +3232,7 @@ declare namespace EC2.Types {
      */
     RuleNumber: Integer;
     /**
-     * The protocol. A value of -1 means all protocols.
+     * The protocol. A value of -1 or all means all protocols. If you specify all, -1, or a protocol number other than tcp, udp, or icmp, traffic on all ports is allowed, regardless of any ports or ICMP types or codes you specify. If you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
      */
     Protocol: String;
     /**
@@ -3084,11 +3244,15 @@ declare namespace EC2.Types {
      */
     Egress: Boolean;
     /**
-     * The network range to allow or deny, in CIDR notation (for example 172.16.0.0/24).
+     * The IPv4 network range to allow or deny, in CIDR notation (for example 172.16.0.0/24).
      */
-    CidrBlock: String;
+    CidrBlock?: String;
     /**
-     * ICMP protocol: The ICMP type and code. Required if specifying ICMP for the protocol.
+     * The IPv6 network range to allow or deny, in CIDR notation (for example 2001:db8:1234:1a00::/64).
+     */
+    Ipv6CidrBlock?: String;
+    /**
+     * ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.
      */
     IcmpTypeCode?: IcmpTypeCode;
     /**
@@ -3122,7 +3286,7 @@ declare namespace EC2.Types {
      */
     Description?: String;
     /**
-     * The primary private IP address of the network interface. If you don't specify an IP address, Amazon EC2 selects one for you from the subnet range. If you specify an IP address, you cannot indicate any IP addresses specified in privateIpAddresses as primary (only one IP address can be designated as primary).
+     * The primary private IPv4 address of the network interface. If you don't specify an IPv4 address, Amazon EC2 selects one for you from the subnet's IPv4 CIDR range. If you specify an IP address, you cannot indicate any IP addresses specified in privateIpAddresses as primary (only one IP address can be designated as primary).
      */
     PrivateIpAddress?: String;
     /**
@@ -3130,13 +3294,21 @@ declare namespace EC2.Types {
      */
     Groups?: SecurityGroupIdStringList;
     /**
-     * One or more private IP addresses.
+     * One or more private IPv4 addresses.
      */
     PrivateIpAddresses?: PrivateIpAddressSpecificationList;
     /**
-     * The number of secondary private IP addresses to assign to a network interface. When you specify a number of secondary IP addresses, Amazon EC2 selects these IP addresses within the subnet range. You can't specify this option and specify more than one private IP address using privateIpAddresses. The number of IP addresses you can assign to a network interface varies by instance type. For more information, see Private IP Addresses Per ENI Per Instance Type in the Amazon Elastic Compute Cloud User Guide.
+     * The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses. The number of IP addresses you can assign to a network interface varies by instance type. For more information, see IP Addresses Per ENI Per Instance Type in the Amazon Virtual Private Cloud User Guide.
      */
     SecondaryPrivateIpAddressCount?: Integer;
+    /**
+     * One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.
+     */
+    Ipv6Addresses?: InstanceIpv6AddressList;
+    /**
+     * The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses. If your subnet has the AssignIpv6AddressOnCreation attribute set to true, you can specify 0 to override this setting.
+     */
+    Ipv6AddressCount?: Integer;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -3196,13 +3368,21 @@ declare namespace EC2.Types {
      */
     RouteTableId: String;
     /**
-     * The CIDR address block used for the destination match. Routing decisions are based on the most specific match.
+     * The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match.
      */
-    DestinationCidrBlock: String;
+    DestinationCidrBlock?: String;
     /**
      * The ID of an Internet gateway or virtual private gateway attached to your VPC.
      */
     GatewayId?: String;
+    /**
+     * The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.
+     */
+    DestinationIpv6CidrBlock?: String;
+    /**
+     * [IPv6 traffic only] The ID of an egress-only Internet gateway.
+     */
+    EgressOnlyInternetGatewayId?: String;
     /**
      * The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.
      */
@@ -3216,7 +3396,7 @@ declare namespace EC2.Types {
      */
     VpcPeeringConnectionId?: String;
     /**
-     * The ID of a NAT gateway.
+     * [IPv4 traffic only] The ID of a NAT gateway.
      */
     NatGatewayId?: String;
   }
@@ -3310,9 +3490,13 @@ declare namespace EC2.Types {
      */
     VpcId: String;
     /**
-     * The network range for the subnet, in CIDR notation. For example, 10.0.0.0/24.
+     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24.
      */
     CidrBlock: String;
+    /**
+     * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.
+     */
+    Ipv6CidrBlock?: String;
     /**
      * The Availability Zone for the subnet. Default: AWS selects one for you. If you create more than one subnet in your VPC, we may not necessarily select a different zone for each subnet.
      */
@@ -3381,7 +3565,7 @@ declare namespace EC2.Types {
      */
     VolumeType?: VolumeType;
     /**
-     * Only valid for Provisioned IOPS SSD volumes. The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 30 IOPS/GiB. Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes 
+     * Only valid for Provisioned IOPS SSD volumes. The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes 
      */
     Iops?: Integer;
     /**
@@ -3459,13 +3643,17 @@ declare namespace EC2.Types {
      */
     DryRun?: Boolean;
     /**
-     * The network range for the VPC, in CIDR notation. For example, 10.0.0.0/16.
+     * The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16.
      */
     CidrBlock: String;
     /**
      * The tenancy options for instances launched into the VPC. For default, instances are launched with shared tenancy by default. You can launch instances with any tenancy into a shared tenancy VPC. For dedicated, instances are launched as dedicated tenancy instances by default. You can only launch instances with a tenancy of dedicated or host into a dedicated tenancy VPC.   Important: The host value cannot be used with this parameter. Use the default or dedicated values only. Default: default 
      */
     InstanceTenancy?: Tenancy;
+    /**
+     * Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.
+     */
+    AmazonProvidedIpv6CidrBlock?: Boolean;
   }
   export interface CreateVpcResult {
     /**
@@ -3582,6 +3770,22 @@ declare namespace EC2.Types {
      */
     DhcpOptionsId: String;
   }
+  export interface DeleteEgressOnlyInternetGatewayRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the egress-only Internet gateway.
+     */
+    EgressOnlyInternetGatewayId: EgressOnlyInternetGatewayId;
+  }
+  export interface DeleteEgressOnlyInternetGatewayResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    ReturnCode?: Boolean;
+  }
   export interface DeleteFlowLogsRequest {
     /**
      * One or more flow log IDs.
@@ -3684,9 +3888,13 @@ declare namespace EC2.Types {
      */
     RouteTableId: String;
     /**
-     * The CIDR range for the route. The value you specify must match the CIDR for the route exactly.
+     * The IPv4 CIDR range for the route. The value you specify must match the CIDR for the route exactly.
      */
-    DestinationCidrBlock: String;
+    DestinationCidrBlock?: String;
+    /**
+     * The IPv6 CIDR range for the route. The value you specify must match the CIDR for the route exactly.
+     */
+    DestinationIpv6CidrBlock?: String;
   }
   export interface DeleteRouteTableRequest {
     /**
@@ -4013,6 +4221,34 @@ declare namespace EC2.Types {
      */
     DhcpOptions?: DhcpOptionsList;
   }
+  export interface DescribeEgressOnlyInternetGatewaysRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more egress-only Internet gateway IDs.
+     */
+    EgressOnlyInternetGatewayIds?: EgressOnlyInternetGatewayIdList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeEgressOnlyInternetGatewaysResult {
+    /**
+     * Information about the egress-only Internet gateways.
+     */
+    EgressOnlyInternetGateways?: EgressOnlyInternetGatewayList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
   export interface DescribeExportTasksRequest {
     /**
      * One or more export task IDs.
@@ -4205,7 +4441,7 @@ declare namespace EC2.Types {
      */
     ExecutableUsers?: ExecutableByStringList;
     /**
-     * One or more filters.    architecture - The image architecture (i386 | x86_64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name for the EBS volume (for example, /dev/sdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | st1 | sc1 | standard).    description - The description of the image (provided during image creation).    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - String value from an Amazon-maintained list (amazon | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The AWS account ID of the image owner.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    virtualization-type - The virtualization type (paravirtual | hvm).  
+     * One or more filters.    architecture - The image architecture (i386 | x86_64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name for the EBS volume (for example, /dev/sdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | st1 | sc1 | standard).    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - String value from an Amazon-maintained list (amazon | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The AWS account ID of the image owner.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    virtualization-type - The virtualization type (paravirtual | hvm).  
      */
     Filters?: FilterList;
   }
@@ -4339,7 +4575,7 @@ declare namespace EC2.Types {
      */
     InstanceIds?: InstanceIdStringList;
     /**
-     * One or more filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64).    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name for the EBS volume (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen).    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IP address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched.    monitoring-state - Indicates whether monitoring is enabled for the instance (disabled | enabled).    owner-id - The AWS account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    platform - The platform. Use windows if you have Windows instances; otherwise, leave blank.    private-dns-name - The private DNS name of the instance.    private-ip-address - The private IP address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.    root-device-name - The name of the root device for the instance (for example, /dev/sda1 or /dev/xvda).    root-device-type - The type of root device that the instance uses (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:key=value - The key/value combination of a tag assigned to the resource, where tag:key is the tag's key.     tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.    network-interface.description - The description of the network interface.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by AWS.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.mac-address - The MAC address of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.addresses.private-ip-address - The private IP address associated with the network interface.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.addresses.primary - Specifies whether the IP address of the network interface is the primary private IP address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IP address associated with the network interface.    association.public-ip - The address of the Elastic IP address bound to the network interface.    association.ip-owner-id - The owner of the Elastic IP address associated with the network interface.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address for your network interface.    association.association-id - The association ID returned when the network interface was associated with an IP address.  
+     * One or more filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64).    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name for the EBS volume (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen).    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IPv4 address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched.    monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled).    network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.    network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.description - The description of the network interface.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.    network-interface.mac-address - The MAC address of the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by AWS.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    owner-id - The AWS account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    platform - The platform. Use windows if you have Windows instances; otherwise, leave blank.    private-dns-name - The private IPv4 DNS name of the instance.    private-ip-address - The private IPv4 address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.    root-device-name - The name of the root device for the instance (for example, /dev/sda1 or /dev/xvda).    root-device-type - The type of root device that the instance uses (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:key=value - The key/value combination of a tag assigned to the resource, where tag:key is the tag's key.     tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.  
      */
     Filters?: FilterList;
     /**
@@ -4471,7 +4707,7 @@ declare namespace EC2.Types {
      */
     NetworkAclIds?: ValueStringList;
     /**
-     * One or more filters.    association.association-id - The ID of an association ID for the ACL.    association.network-acl-id - The ID of the network ACL involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    default - Indicates whether the ACL is the default network ACL for the VPC.    entry.cidr - The CIDR range specified in the entry.    entry.egress - Indicates whether the entry applies to egress traffic.    entry.icmp.code - The ICMP code specified in the entry, if any.    entry.icmp.type - The ICMP type specified in the entry, if any.    entry.port-range.from - The start of the port range specified in the entry.     entry.port-range.to - The end of the port range specified in the entry.     entry.protocol - The protocol specified in the entry (tcp | udp | icmp or a protocol number).    entry.rule-action - Allows or denies the matching traffic (allow | deny).    entry.rule-number - The number of an entry (in other words, rule) in the ACL's set of entries.    network-acl-id - The ID of the network ACL.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC for the network ACL.  
+     * One or more filters.    association.association-id - The ID of an association ID for the ACL.    association.network-acl-id - The ID of the network ACL involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    default - Indicates whether the ACL is the default network ACL for the VPC.    entry.cidr - The IPv4 CIDR range specified in the entry.    entry.egress - Indicates whether the entry applies to egress traffic.    entry.icmp.code - The ICMP code specified in the entry, if any.    entry.icmp.type - The ICMP type specified in the entry, if any.    entry.ipv6-cidr - The IPv6 CIDR range specified in the entry.    entry.port-range.from - The start of the port range specified in the entry.     entry.port-range.to - The end of the port range specified in the entry.     entry.protocol - The protocol specified in the entry (tcp | udp | icmp or a protocol number).    entry.rule-action - Allows or denies the matching traffic (allow | deny).    entry.rule-number - The number of an entry (in other words, rule) in the ACL's set of entries.    network-acl-id - The ID of the network ACL.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC for the network ACL.  
      */
     Filters?: FilterList;
   }
@@ -4527,7 +4763,7 @@ declare namespace EC2.Types {
      */
     NetworkInterfaceIds?: NetworkInterfaceIdList;
     /**
-     * One or more filters.    addresses.private-ip-address - The private IP addresses associated with the network interface.    addresses.primary - Whether the private IP address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address.    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IP address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address for your network interface.    association.ip-owner-id - The owner of the Elastic IP address associated with the network interface.    association.public-ip - The address of the Elastic IP address bound to the network interface.    association.public-dns-name - The public DNS name for the network interface.    attachment.attachment-id - The ID of the interface attachment.    attachment.attach.time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.nat-gateway-id - The ID of the NAT gateway to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The AWS account ID of the network interface owner.    private-ip-address - The private IP address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface.    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    requester-managed - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).    source-desk-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC for the network interface.  
+     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach.time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.nat-gateway-id - The ID of the NAT gateway to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The AWS account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    requester-managed - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).    source-desk-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC for the network interface.  
      */
     Filters?: FilterList;
   }
@@ -4763,7 +4999,7 @@ declare namespace EC2.Types {
      */
     RouteTableIds?: ValueStringList;
     /**
-     * One or more filters.    association.route-table-association-id - The ID of an association ID for the route table.    association.route-table-id - The ID of the route table involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    association.main - Indicates whether the route table is the main route table for the VPC (true | false).    route-table-id - The ID of the route table.    route.destination-cidr-block - The CIDR range specified in a route in the table.    route.destination-prefix-list-id - The ID (prefix) of the AWS service specified in a route in the table.    route.gateway-id - The ID of a gateway specified in a route in the table.    route.instance-id - The ID of an instance specified in a route in the table.    route.nat-gateway-id - The ID of a NAT gateway.    route.origin - Describes how the route was created. CreateRouteTable indicates that the route was automatically created when the route table was created; CreateRoute indicates that the route was manually added to the route table; EnableVgwRoutePropagation indicates that the route was propagated by route propagation.    route.state - The state of a route in the route table (active | blackhole). The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).    route.vpc-peering-connection-id - The ID of a VPC peering connection specified in a route in the table.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC for the route table.  
+     * One or more filters.    association.route-table-association-id - The ID of an association ID for the route table.    association.route-table-id - The ID of the route table involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    association.main - Indicates whether the route table is the main route table for the VPC (true | false).    route-table-id - The ID of the route table.    route.destination-cidr-block - The IPv4 CIDR range specified in a route in the table.    route.destination-ipv6-cidr-block - The IPv6 CIDR range specified in a route in the route table.    route.destination-prefix-list-id - The ID (prefix) of the AWS service specified in a route in the table.    route.egress-only-internet-gateway-id - The ID of an egress-only Internet gateway specified in a route in the route table.    route.gateway-id - The ID of a gateway specified in a route in the table.    route.instance-id - The ID of an instance specified in a route in the table.    route.nat-gateway-id - The ID of a NAT gateway.    route.origin - Describes how the route was created. CreateRouteTable indicates that the route was automatically created when the route table was created; CreateRoute indicates that the route was manually added to the route table; EnableVgwRoutePropagation indicates that the route was propagated by route propagation.    route.state - The state of a route in the route table (active | blackhole). The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).    route.vpc-peering-connection-id - The ID of a VPC peering connection specified in a route in the table.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC for the route table.  
      */
     Filters?: FilterList;
   }
@@ -4883,7 +5119,7 @@ declare namespace EC2.Types {
      */
     GroupIds?: GroupIdStringList;
     /**
-     * One or more filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.    description - The description of the security group.    egress.ip-permission.prefix-list-id - The ID (prefix) of the AWS service to which the security group allows access.    group-id - The ID of the security group.     group-name - The name of the security group.    ip-permission.cidr - A CIDR range that has been granted permission.    ip-permission.from-port - The start of port range for the TCP and UDP protocols, or an ICMP type number.    ip-permission.group-id - The ID of a security group that has been granted permission.    ip-permission.group-name - The name of a security group that has been granted permission.    ip-permission.protocol - The IP protocol for the permission (tcp | udp | icmp or a protocol number).    ip-permission.to-port - The end of port range for the TCP and UDP protocols, or an ICMP code.    ip-permission.user-id - The ID of an AWS account that has been granted permission.    owner-id - The AWS account ID of the owner of the security group.    tag-key - The key of a tag assigned to the security group.    tag-value - The value of a tag assigned to the security group.    vpc-id - The ID of the VPC specified when the security group was created.  
+     * One or more filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.    description - The description of the security group.    egress.ip-permission.prefix-list-id - The ID (prefix) of the AWS service to which the security group allows access.    group-id - The ID of the security group.     group-name - The name of the security group.    ip-permission.cidr - An IPv4 CIDR range that has been granted permission in a security group rule.    ip-permission.from-port - The start of port range for the TCP and UDP protocols, or an ICMP type number.    ip-permission.group-id - The ID of a security group that has been granted permission.    ip-permission.group-name - The name of a security group that has been granted permission.    ip-permission.ipv6-cidr - An IPv6 CIDR range that has been granted permission in a security group rule.    ip-permission.protocol - The IP protocol for the permission (tcp | udp | icmp or a protocol number).    ip-permission.to-port - The end of port range for the TCP and UDP protocols, or an ICMP code.    ip-permission.user-id - The ID of an AWS account that has been granted permission.    owner-id - The AWS account ID of the owner of the security group.    tag-key - The key of a tag assigned to the security group.    tag-value - The value of a tag assigned to the security group.    vpc-id - The ID of the VPC specified when the security group was created.  
      */
     Filters?: FilterList;
   }
@@ -5115,7 +5351,7 @@ declare namespace EC2.Types {
      */
     EndTime?: DateTime;
     /**
-     * Filters the results by the specified instance types.
+     * Filters the results by the specified instance types. Note that T2 and HS1 instance types are not supported.
      */
     InstanceTypes?: InstanceTypeList;
     /**
@@ -5187,7 +5423,7 @@ declare namespace EC2.Types {
      */
     SubnetIds?: SubnetIdStringList;
     /**
-     * One or more filters.    availabilityZone - The Availability Zone for the subnet. You can also use availability-zone as the filter name.    available-ip-address-count - The number of IP addresses in the subnet that are available.    cidrBlock - The CIDR block of the subnet. The CIDR block you specify must exactly match the subnet's CIDR block for information to be returned for the subnet. You can also use cidr or cidr-block as the filter names.    defaultForAz - Indicates whether this is the default subnet for the Availability Zone. You can also use default-for-az as the filter name.    state - The state of the subnet (pending | available).    subnet-id - The ID of the subnet.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC for the subnet.  
+     * One or more filters.    availabilityZone - The Availability Zone for the subnet. You can also use availability-zone as the filter name.    available-ip-address-count - The number of IPv4 addresses in the subnet that are available.    cidrBlock - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet's CIDR block for information to be returned for the subnet. You can also use cidr or cidr-block as the filter names.    defaultForAz - Indicates whether this is the default subnet for the Availability Zone. You can also use default-for-az as the filter name.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.association-id - An association ID for an IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the subnet.    state - The state of the subnet (pending | available).    subnet-id - The ID of the subnet.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC for the subnet.  
      */
     Filters?: FilterList;
   }
@@ -5455,7 +5691,7 @@ declare namespace EC2.Types {
      */
     VpcPeeringConnectionIds?: ValueStringList;
     /**
-     * One or more filters.    accepter-vpc-info.cidr-block - The CIDR block of the peer VPC.    accepter-vpc-info.owner-id - The AWS account ID of the owner of the peer VPC.    accepter-vpc-info.vpc-id - The ID of the peer VPC.    expiration-time - The expiration date and time for the VPC peering connection.    requester-vpc-info.cidr-block - The CIDR block of the requester's VPC.    requester-vpc-info.owner-id - The AWS account ID of the owner of the requester VPC.    requester-vpc-info.vpc-id - The ID of the requester VPC.    status-code - The status of the VPC peering connection (pending-acceptance | failed | expired | provisioning | active | deleted | rejected).    status-message - A message that provides more information about the status of the VPC peering connection, if applicable.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-peering-connection-id - The ID of the VPC peering connection.  
+     * One or more filters.    accepter-vpc-info.cidr-block - The IPv4 CIDR block of the peer VPC.    accepter-vpc-info.owner-id - The AWS account ID of the owner of the peer VPC.    accepter-vpc-info.vpc-id - The ID of the peer VPC.    expiration-time - The expiration date and time for the VPC peering connection.    requester-vpc-info.cidr-block - The IPv4 CIDR block of the requester's VPC.    requester-vpc-info.owner-id - The AWS account ID of the owner of the requester VPC.    requester-vpc-info.vpc-id - The ID of the requester VPC.    status-code - The status of the VPC peering connection (pending-acceptance | failed | expired | provisioning | active | deleted | rejected).    status-message - A message that provides more information about the status of the VPC peering connection, if applicable.    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-peering-connection-id - The ID of the VPC peering connection.  
      */
     Filters?: FilterList;
   }
@@ -5475,7 +5711,7 @@ declare namespace EC2.Types {
      */
     VpcIds?: VpcIdStringList;
     /**
-     * One or more filters.    cidr - The CIDR block of the VPC. The CIDR block you specify must exactly match the VPC's CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, /28).    dhcp-options-id - The ID of a set of DHCP options.    isDefault - Indicates whether the VPC is the default VPC.    state - The state of the VPC (pending | available).    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC.  
+     * One or more filters.    cidr - The IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC's CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, /28).    dhcp-options-id - The ID of a set of DHCP options.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the VPC.    ipv6-cidr-block-association.association-id - The association ID for an IPv6 CIDR block associated with the VPC.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the VPC.    isDefault - Indicates whether the VPC is the default VPC.    state - The state of the VPC (pending | available).    tag:key=value - The key/value combination of a tag assigned to the resource.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC.  
      */
     Filters?: FilterList;
   }
@@ -5700,6 +5936,38 @@ declare namespace EC2.Types {
      */
     AssociationId: String;
   }
+  export interface DisassociateSubnetCidrBlockRequest {
+    /**
+     * The association ID for the CIDR block.
+     */
+    AssociationId: String;
+  }
+  export interface DisassociateSubnetCidrBlockResult {
+    /**
+     * The ID of the subnet.
+     */
+    SubnetId?: String;
+    /**
+     * Information about the IPv6 CIDR block association.
+     */
+    Ipv6CidrBlockAssociation?: SubnetIpv6CidrBlockAssociation;
+  }
+  export interface DisassociateVpcCidrBlockRequest {
+    /**
+     * The association ID for the CIDR block.
+     */
+    AssociationId: String;
+  }
+  export interface DisassociateVpcCidrBlockResult {
+    /**
+     * The ID of the VPC.
+     */
+    VpcId?: String;
+    /**
+     * Information about the IPv6 CIDR block association.
+     */
+    Ipv6CidrBlockAssociation?: VpcIpv6CidrBlockAssociation;
+  }
   export interface DiskImage {
     /**
      * Information about the disk image.
@@ -5814,6 +6082,19 @@ declare namespace EC2.Types {
      */
     DeleteOnTermination?: Boolean;
   }
+  export interface EgressOnlyInternetGateway {
+    /**
+     * The ID of the egress-only Internet gateway.
+     */
+    EgressOnlyInternetGatewayId?: EgressOnlyInternetGatewayId;
+    /**
+     * Information about the attachment of the egress-only Internet gateway.
+     */
+    Attachments?: InternetGatewayAttachmentList;
+  }
+  export type EgressOnlyInternetGatewayId = string;
+  export type EgressOnlyInternetGatewayIdList = EgressOnlyInternetGatewayId[];
+  export type EgressOnlyInternetGatewayList = EgressOnlyInternetGateway[];
   export interface EnableVgwRoutePropagationRequest {
     /**
      * The ID of the route table.
@@ -6106,11 +6387,11 @@ declare namespace EC2.Types {
      */
     DryRun?: Boolean;
     /**
-     * The ID/s of the Convertible Reserved Instances you want to exchange.
+     * The IDs of the Convertible Reserved Instances to exchange.
      */
     ReservedInstanceIds: ReservedInstanceIdSet;
     /**
-     * The configuration requirements of the Convertible Reserved Instances you want in exchange for your current Convertible Reserved Instances.
+     * The configuration requirements of the Convertible Reserved Instances to exchange for your current Convertible Reserved Instances.
      */
     TargetConfigurations?: TargetConfigurationRequestSet;
   }
@@ -6138,11 +6419,11 @@ declare namespace EC2.Types {
      */
     OutputReservedInstancesWillExpireAt?: DateTime;
     /**
-     * If true, the exchange is valid. If false, the exchange cannot be performed.
+     * If true, the exchange is valid. If false, the exchange cannot be completed.
      */
     IsValidExchange?: Boolean;
     /**
-     * Describes the reason why the exchange can not be completed.
+     * Describes the reason why the exchange cannot be completed.
      */
     ValidationFailureReason?: String;
   }
@@ -6354,11 +6635,11 @@ declare namespace EC2.Types {
   }
   export interface IcmpTypeCode {
     /**
-     * The ICMP code. A value of -1 means all codes for the specified ICMP type.
+     * The ICMP type. A value of -1 means all types.
      */
     Type?: Integer;
     /**
-     * The ICMP type. A value of -1 means all types.
+     * The ICMP code. A value of -1 means all codes for the specified ICMP type.
      */
     Code?: Integer;
   }
@@ -6943,11 +7224,11 @@ declare namespace EC2.Types {
      */
     State?: InstanceState;
     /**
-     * The private DNS name assigned to the instance. This DNS name can only be used inside the Amazon EC2 network. This name is not available until the instance enters the running state. For EC2-VPC, this name is only available if you've enabled DNS hostnames for your VPC.
+     * (IPv4 only) The private DNS hostname name assigned to the instance. This DNS hostname can only be used inside the Amazon EC2 network. This name is not available until the instance enters the running state.  [EC2-VPC] The Amazon-provided DNS server will resolve Amazon-provided private DNS hostnames if you've enabled DNS resolution and DNS hostnames in your VPC. If you are not using the Amazon-provided DNS server in your VPC, your custom domain name servers must resolve the hostname as appropriate.
      */
     PrivateDnsName?: String;
     /**
-     * The public DNS name assigned to the instance. This name is not available until the instance enters the running state. For EC2-VPC, this name is only available if you've enabled DNS hostnames for your VPC.
+     * (IPv4 only) The public DNS name assigned to the instance. This name is not available until the instance enters the running state. For EC2-VPC, this name is only available if you've enabled DNS hostnames for your VPC.
      */
     PublicDnsName?: String;
     /**
@@ -6991,7 +7272,7 @@ declare namespace EC2.Types {
      */
     Platform?: PlatformValues;
     /**
-     * The monitoring information for the instance.
+     * The monitoring for the instance.
      */
     Monitoring?: Monitoring;
     /**
@@ -7003,11 +7284,11 @@ declare namespace EC2.Types {
      */
     VpcId?: String;
     /**
-     * The private IP address assigned to the instance.
+     * The private IPv4 address assigned to the instance.
      */
     PrivateIpAddress?: String;
     /**
-     * The public IP address assigned to the instance, if applicable.
+     * The public IPv4 address assigned to the instance, if applicable.
      */
     PublicIpAddress?: String;
     /**
@@ -7213,6 +7494,13 @@ declare namespace EC2.Types {
   }
   export type InstanceIdSet = String[];
   export type InstanceIdStringList = String[];
+  export interface InstanceIpv6Address {
+    /**
+     * The IPv6 address.
+     */
+    Ipv6Address?: String;
+  }
+  export type InstanceIpv6AddressList = InstanceIpv6Address[];
   export type InstanceLifecycleType = "spot"|"scheduled"|string;
   export type InstanceList = Instance[];
   export interface InstanceMonitoring {
@@ -7221,7 +7509,7 @@ declare namespace EC2.Types {
      */
     InstanceId?: String;
     /**
-     * The monitoring information.
+     * The monitoring for the instance.
      */
     Monitoring?: Monitoring;
   }
@@ -7256,7 +7544,7 @@ declare namespace EC2.Types {
      */
     MacAddress?: String;
     /**
-     * The IP address of the network interface within the subnet.
+     * The IPv4 address of the network interface within the subnet.
      */
     PrivateIpAddress?: String;
     /**
@@ -7276,13 +7564,17 @@ declare namespace EC2.Types {
      */
     Attachment?: InstanceNetworkInterfaceAttachment;
     /**
-     * The association information for an Elastic IP associated with the network interface.
+     * The association information for an Elastic IPv4 associated with the network interface.
      */
     Association?: InstanceNetworkInterfaceAssociation;
     /**
-     * The private IP addresses associated with the network interface.
+     * One or more private IPv4 addresses associated with the network interface.
      */
     PrivateIpAddresses?: InstancePrivateIpAddressList;
+    /**
+     * One or more IPv6 addresses associated with the network interface.
+     */
+    Ipv6Addresses?: InstanceIpv6AddressList;
   }
   export interface InstanceNetworkInterfaceAssociation {
     /**
@@ -7339,7 +7631,7 @@ declare namespace EC2.Types {
      */
     Description?: String;
     /**
-     * The private IP address of the network interface. Applies only if creating a network interface when launching an instance. You cannot specify this option if you're launching more than one instance in a RunInstances request.
+     * The private IPv4 address of the network interface. Applies only if creating a network interface when launching an instance. You cannot specify this option if you're launching more than one instance in a RunInstances request.
      */
     PrivateIpAddress?: String;
     /**
@@ -7351,30 +7643,38 @@ declare namespace EC2.Types {
      */
     DeleteOnTermination?: Boolean;
     /**
-     * One or more private IP addresses to assign to the network interface. Only one private IP address can be designated as primary. You cannot specify this option if you're launching more than one instance in a RunInstances request.
+     * One or more private IPv4 addresses to assign to the network interface. Only one private IPv4 address can be designated as primary. You cannot specify this option if you're launching more than one instance in a RunInstances request.
      */
     PrivateIpAddresses?: PrivateIpAddressSpecificationList;
     /**
-     * The number of secondary private IP addresses. You can't specify this option and specify more than one private IP address using the private IP addresses option. You cannot specify this option if you're launching more than one instance in a RunInstances request.
+     * The number of secondary private IPv4 addresses. You can't specify this option and specify more than one private IP address using the private IP addresses option. You cannot specify this option if you're launching more than one instance in a RunInstances request.
      */
     SecondaryPrivateIpAddressCount?: Integer;
     /**
-     * Indicates whether to assign a public IP address to an instance you launch in a VPC. The public IP address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If launching into a default subnet, the default value is true.
+     * Indicates whether to assign a public IPv4 address to an instance you launch in a VPC. The public IP address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If launching into a default subnet, the default value is true.
      */
     AssociatePublicIpAddress?: Boolean;
+    /**
+     * One or more IPv6 addresses to assign to the network interface. You cannot specify this option and the option to assign a number of IPv6 addresses in the same request. You cannot specify this option if you've specified a minimum number of instances to launch.
+     */
+    Ipv6Addresses?: InstanceIpv6AddressList;
+    /**
+     * A number of IPv6 addresses to assign to the network interface. Amazon EC2 chooses the IPv6 addresses from the range of the subnet. You cannot specify this option and the option to assign specific IPv6 addresses in the same request. You can specify this option if you've specified a minimum number of instances to launch.
+     */
+    Ipv6AddressCount?: Integer;
   }
   export type InstanceNetworkInterfaceSpecificationList = InstanceNetworkInterfaceSpecification[];
   export interface InstancePrivateIpAddress {
     /**
-     * The private IP address of the network interface.
+     * The private IPv4 address of the network interface.
      */
     PrivateIpAddress?: String;
     /**
-     * The private DNS name.
+     * The private IPv4 DNS name.
      */
     PrivateDnsName?: String;
     /**
-     * Indicates whether this IP address is the primary private IP address of the network interface.
+     * Indicates whether this IPv4 address is the primary private IP address of the network interface.
      */
     Primary?: Boolean;
     /**
@@ -7480,7 +7780,7 @@ declare namespace EC2.Types {
      */
     Details?: InstanceStatusDetailsList;
   }
-  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"x1.16xlarge"|"x1.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|string;
+  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"x1.16xlarge"|"x1.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.16xlarge"|string;
   export type InstanceTypeList = InstanceType[];
   export type Integer = number;
   export interface InternetGateway {
@@ -7511,15 +7811,15 @@ declare namespace EC2.Types {
   export type InternetGatewayList = InternetGateway[];
   export interface IpPermission {
     /**
-     * The IP protocol name (for tcp, udp, and icmp) or number (see Protocol Numbers).  [EC2-VPC only] When you authorize or revoke security group rules, you can use -1 to specify all.
+     * The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers).  [EC2-VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or 58 (ICMPv6) allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For 58 (ICMPv6), you can optionally specify a port range; if you don't, traffic for all types and codes is allowed when authorizing rules. 
      */
     IpProtocol?: String;
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP type number. A value of -1 indicates all ICMP types.
+     * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types.
      */
     FromPort?: Integer;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP code. A value of -1 indicates all ICMP codes for the specified ICMP type.
+     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes for the specified ICMP type.
      */
     ToPort?: Integer;
     /**
@@ -7527,9 +7827,13 @@ declare namespace EC2.Types {
      */
     UserIdGroupPairs?: UserIdGroupPairList;
     /**
-     * One or more IP ranges.
+     * One or more IPv4 ranges.
      */
     IpRanges?: IpRangeList;
+    /**
+     * [EC2-VPC only] One or more IPv6 ranges.
+     */
+    Ipv6Ranges?: Ipv6RangeList;
     /**
      * (Valid for AuthorizeSecurityGroupEgress, RevokeSecurityGroupEgress and DescribeSecurityGroups only) One or more prefix list IDs for an AWS service. In an AuthorizeSecurityGroupEgress request, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.
      */
@@ -7538,12 +7842,28 @@ declare namespace EC2.Types {
   export type IpPermissionList = IpPermission[];
   export interface IpRange {
     /**
-     * The CIDR range. You can either specify a CIDR range or a source security group, not both.
+     * The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix.
      */
     CidrIp?: String;
   }
   export type IpRangeList = IpRange[];
   export type IpRanges = String[];
+  export type Ipv6Address = string;
+  export type Ipv6AddressList = String[];
+  export interface Ipv6CidrBlock {
+    /**
+     * The IPv6 CIDR block.
+     */
+    Ipv6CidrBlock?: String;
+  }
+  export type Ipv6CidrBlockSet = Ipv6CidrBlock[];
+  export interface Ipv6Range {
+    /**
+     * The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix.
+     */
+    CidrIpv6?: String;
+  }
+  export type Ipv6RangeList = Ipv6Range[];
   export type KeyNameStringList = String[];
   export interface KeyPair {
     /**
@@ -7637,7 +7957,7 @@ declare namespace EC2.Types {
      */
     SubnetId?: String;
     /**
-     * One or more network interfaces.
+     * One or more network interfaces. If you specify a network interface, you must specify subnet IDs and security group IDs using the network interface.
      */
     NetworkInterfaces?: InstanceNetworkInterfaceSpecificationList;
     /**
@@ -7933,9 +8253,13 @@ declare namespace EC2.Types {
      */
     SubnetId: String;
     /**
-     * Specify true to indicate that instances launched into the specified subnet should be assigned public IP address.
+     * Specify true to indicate that network interfaces created in the specified subnet should be assigned a public IPv4 address. This includes a network interface that's created when launching an instance into the subnet (the instance therefore receives a public IPv4 address).
      */
     MapPublicIpOnLaunch?: AttributeBooleanValue;
+    /**
+     * Specify true to indicate that network interfaces created in the specified subnet should be assigned an IPv6 address. This includes a network interface that's created when launching an instance into the subnet (the instance therefore receives an IPv6 address).
+     */
+    AssignIpv6AddressOnCreation?: AttributeBooleanValue;
   }
   export interface ModifyVolumeAttributeRequest {
     /**
@@ -8037,13 +8361,13 @@ declare namespace EC2.Types {
   }
   export interface MonitorInstancesResult {
     /**
-     * Monitoring information for one or more instances.
+     * The monitoring information.
      */
     InstanceMonitorings?: InstanceMonitoringList;
   }
   export interface Monitoring {
     /**
-     * Indicates whether monitoring is enabled for the instance.
+     * Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.
      */
     State?: MonitoringState;
   }
@@ -8202,9 +8526,13 @@ declare namespace EC2.Types {
      */
     Egress?: Boolean;
     /**
-     * The network range to allow or deny, in CIDR notation.
+     * The IPv4 network range to allow or deny, in CIDR notation.
      */
     CidrBlock?: String;
+    /**
+     * The IPv6 network range to allow or deny, in CIDR notation.
+     */
+    Ipv6CidrBlock?: String;
     /**
      * ICMP protocol: The ICMP type and code.
      */
@@ -8258,7 +8586,7 @@ declare namespace EC2.Types {
      */
     MacAddress?: String;
     /**
-     * The IP address of the network interface within the subnet.
+     * The IPv4 address of the network interface within the subnet.
      */
     PrivateIpAddress?: String;
     /**
@@ -8278,7 +8606,7 @@ declare namespace EC2.Types {
      */
     Attachment?: NetworkInterfaceAttachment;
     /**
-     * The association information for an Elastic IP associated with the network interface.
+     * The association information for an Elastic IP address (IPv4) associated with the network interface.
      */
     Association?: NetworkInterfaceAssociation;
     /**
@@ -8286,9 +8614,13 @@ declare namespace EC2.Types {
      */
     TagSet?: TagList;
     /**
-     * The private IP addresses associated with the network interface.
+     * The private IPv4 addresses associated with the network interface.
      */
     PrivateIpAddresses?: NetworkInterfacePrivateIpAddressList;
+    /**
+     * The IPv6 addresses associated with the network interface.
+     */
+    Ipv6Addresses?: NetworkInterfaceIpv6AddressesList;
     /**
      * The type of interface.
      */
@@ -8358,10 +8690,17 @@ declare namespace EC2.Types {
   }
   export type NetworkInterfaceAttribute = "description"|"groupSet"|"sourceDestCheck"|"attachment"|string;
   export type NetworkInterfaceIdList = String[];
+  export interface NetworkInterfaceIpv6Address {
+    /**
+     * The IPv6 address.
+     */
+    Ipv6Address?: String;
+  }
+  export type NetworkInterfaceIpv6AddressesList = NetworkInterfaceIpv6Address[];
   export type NetworkInterfaceList = NetworkInterface[];
   export interface NetworkInterfacePrivateIpAddress {
     /**
-     * The private IP address.
+     * The private IPv4 address.
      */
     PrivateIpAddress?: String;
     /**
@@ -8369,11 +8708,11 @@ declare namespace EC2.Types {
      */
     PrivateDnsName?: String;
     /**
-     * Indicates whether this IP address is the primary private IP address of the network interface.
+     * Indicates whether this IPv4 address is the primary private IPv4 address of the network interface.
      */
     Primary?: Boolean;
     /**
-     * The association information for an Elastic IP address associated with the network interface.
+     * The association information for an Elastic IP address (IPv4) associated with the network interface.
      */
     Association?: NetworkInterfaceAssociation;
   }
@@ -8544,11 +8883,11 @@ declare namespace EC2.Types {
   export type PrivateIpAddressConfigSet = ScheduledInstancesPrivateIpAddressConfig[];
   export interface PrivateIpAddressSpecification {
     /**
-     * The private IP addresses.
+     * The private IPv4 addresses.
      */
     PrivateIpAddress: String;
     /**
-     * Indicates whether the private IP address is the primary private IP address. Only one IP address can be designated as primary.
+     * Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.
      */
     Primary?: Boolean;
   }
@@ -8905,7 +9244,7 @@ declare namespace EC2.Types {
      */
     RuleNumber: Integer;
     /**
-     * The IP protocol. You can specify all or -1 to mean all protocols.
+     * The IP protocol. You can specify all or -1 to mean all protocols. If you specify all, -1, or a protocol number other than tcp, udp, or icmp, traffic on all ports is allowed, regardless of any ports or ICMP types or codes you specify. If you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
      */
     Protocol: String;
     /**
@@ -8917,15 +9256,19 @@ declare namespace EC2.Types {
      */
     Egress: Boolean;
     /**
-     * The network range to allow or deny, in CIDR notation.
+     * The IPv4 network range to allow or deny, in CIDR notation (for example 172.16.0.0/24).
      */
-    CidrBlock: String;
+    CidrBlock?: String;
     /**
-     * ICMP protocol: The ICMP type and code. Required if specifying 1 (ICMP) for the protocol.
+     * The IPv6 network range to allow or deny, in CIDR notation (for example 2001:bd8:1234:1a00::/64).
+     */
+    Ipv6CidrBlock?: String;
+    /**
+     * ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.
      */
     IcmpTypeCode?: IcmpTypeCode;
     /**
-     * TCP or UDP protocols: The range of ports the rule applies to. Required if specifying 6 (TCP) or 17 (UDP) for the protocol.
+     * TCP or UDP protocols: The range of ports the rule applies to. Required if specifying TCP (6) or UDP (17) for the protocol.
      */
     PortRange?: PortRange;
   }
@@ -8939,13 +9282,21 @@ declare namespace EC2.Types {
      */
     RouteTableId: String;
     /**
-     * The CIDR address block used for the destination match. The value you provide must match the CIDR of an existing route in the table.
+     * The IPv4 CIDR address block used for the destination match. The value you provide must match the CIDR of an existing route in the table.
      */
-    DestinationCidrBlock: String;
+    DestinationCidrBlock?: String;
     /**
      * The ID of an Internet gateway or virtual private gateway.
      */
     GatewayId?: String;
+    /**
+     * The IPv6 CIDR address block used for the destination match. The value you provide must match the CIDR of an existing route in the table.
+     */
+    DestinationIpv6CidrBlock?: String;
+    /**
+     * [IPv6 traffic only] The ID of an egress-only Internet gateway.
+     */
+    EgressOnlyInternetGatewayId?: String;
     /**
      * The ID of a NAT instance in your VPC.
      */
@@ -8959,7 +9310,7 @@ declare namespace EC2.Types {
      */
     VpcPeeringConnectionId?: String;
     /**
-     * The ID of a NAT gateway.
+     * [IPv4 traffic only] The ID of a NAT gateway.
      */
     NatGatewayId?: String;
   }
@@ -9125,7 +9476,7 @@ declare namespace EC2.Types {
      */
     SubnetId?: String;
     /**
-     * One or more network interfaces.
+     * One or more network interfaces. If you specify a network interface, you must specify subnet IDs and security group IDs using the network interface.
      */
     NetworkInterfaces?: InstanceNetworkInterfaceSpecificationList;
     /**
@@ -9292,7 +9643,7 @@ declare namespace EC2.Types {
      */
     InstanceType?: InstanceType;
     /**
-     * Whether the Reserved Instance is standard or convertible.
+     * Whether the Reserved Instance is applied to instances in a region or instances in a specific Availability Zone.
      */
     Scope?: scope;
   }
@@ -9628,7 +9979,7 @@ declare namespace EC2.Types {
   }
   export interface Route {
     /**
-     * The CIDR block used for the destination match.
+     * The IPv4 CIDR block used for the destination match.
      */
     DestinationCidrBlock?: String;
     /**
@@ -9667,6 +10018,14 @@ declare namespace EC2.Types {
      * Describes how the route was created.    CreateRouteTable - The route was automatically created when the route table was created.    CreateRoute - The route was manually added to the route table.    EnableVgwRoutePropagation - The route was propagated by route propagation.  
      */
     Origin?: RouteOrigin;
+    /**
+     * The IPv6 CIDR block used for the destination match.
+     */
+    DestinationIpv6CidrBlock?: String;
+    /**
+     * The ID of the egress-only Internet gateway.
+     */
+    EgressOnlyInternetGatewayId?: String;
   }
   export type RouteList = Route[];
   export type RouteOrigin = "CreateRouteTable"|"CreateRoute"|"EnableVgwRoutePropagation"|string;
@@ -9720,7 +10079,7 @@ declare namespace EC2.Types {
   export type RuleAction = "allow"|"deny"|string;
   export interface RunInstancesMonitoringEnabled {
     /**
-     * Indicates whether monitoring is enabled for the instance.
+     * Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.
      */
     Enabled: Boolean;
   }
@@ -9786,7 +10145,7 @@ declare namespace EC2.Types {
      */
     SubnetId?: String;
     /**
-     * If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. If you set this parameter to true and then later want to be able to terminate the instance, you must first change the value of the disableApiTermination attribute to false using ModifyInstanceAttribute. Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate, you can terminate the instance by running the shutdown command from the instance. Default: false 
+     * If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute to false after launch, use ModifyInstanceAttribute. Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate, you can terminate the instance by running the shutdown command from the instance. Default: false 
      */
     DisableApiTermination?: Boolean;
     /**
@@ -9794,9 +10153,17 @@ declare namespace EC2.Types {
      */
     InstanceInitiatedShutdownBehavior?: ShutdownBehavior;
     /**
-     * [EC2-VPC] The primary IP address. You must specify a value from the IP address range of the subnet. Only one private IP address can be designated as primary. Therefore, you can't specify this parameter if PrivateIpAddresses.n.Primary is set to true and PrivateIpAddresses.n.PrivateIpAddress is set to an IP address.  You cannot specify this option if you're launching more than one instance in the request. Default: We select an IP address from the IP address range of the subnet.
+     * [EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet. Only one private IP address can be designated as primary. You can't specify this option if you've specified the option to designate a private IP address as the primary IP address in a network interface specification. You cannot specify this option if you're launching more than one instance in the request.
      */
     PrivateIpAddress?: String;
+    /**
+     * [EC2-VPC] Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface. You cannot specify this option and the option to assign a number of IPv6 addresses in the same request. You cannot specify this option if you've specified a minimum number of instances to launch.
+     */
+    Ipv6Addresses?: InstanceIpv6AddressList;
+    /**
+     * [EC2-VPC] A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. You cannot specify this option and the option to assign specific IPv6 addresses in the same request. You can specify this option if you've specified a minimum number of instances to launch.
+     */
+    Ipv6AddressCount?: Integer;
     /**
      * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraints: Maximum 64 ASCII characters
      */
@@ -10086,6 +10453,13 @@ declare namespace EC2.Types {
      */
     Name?: String;
   }
+  export interface ScheduledInstancesIpv6Address {
+    /**
+     * The IPv6 address.
+     */
+    Ipv6Address?: Ipv6Address;
+  }
+  export type ScheduledInstancesIpv6AddressList = ScheduledInstancesIpv6Address[];
   export interface ScheduledInstancesLaunchSpecification {
     /**
      * The ID of the Amazon Machine Image (AMI).
@@ -10168,19 +10542,19 @@ declare namespace EC2.Types {
      */
     Description?: String;
     /**
-     * The IP address of the network interface within the subnet.
+     * The IPv4 address of the network interface within the subnet.
      */
     PrivateIpAddress?: String;
     /**
-     * The private IP addresses.
+     * The private IPv4 addresses.
      */
     PrivateIpAddressConfigs?: PrivateIpAddressConfigSet;
     /**
-     * The number of secondary private IP addresses.
+     * The number of secondary private IPv4 addresses.
      */
     SecondaryPrivateIpAddressCount?: Integer;
     /**
-     * Indicates whether to assign a public IP address to instances launched in a VPC. The public IP address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If launching into a default subnet, the default value is true.
+     * Indicates whether to assign a public IPv4 address to instances launched in a VPC. The public IPv4 address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If launching into a default subnet, the default value is true.
      */
     AssociatePublicIpAddress?: Boolean;
     /**
@@ -10191,6 +10565,14 @@ declare namespace EC2.Types {
      * Indicates whether to delete the interface when the instance is terminated.
      */
     DeleteOnTermination?: Boolean;
+    /**
+     * One or more specific IPv6 addresses from the subnet range.
+     */
+    Ipv6Addresses?: ScheduledInstancesIpv6AddressList;
+    /**
+     * The number of IPv6 addresses to assign to the network interface. The IPv6 addresses are automatically selected from the subnet range.
+     */
+    Ipv6AddressCount?: Integer;
   }
   export type ScheduledInstancesNetworkInterfaceSet = ScheduledInstancesNetworkInterface[];
   export interface ScheduledInstancesPlacement {
@@ -10205,11 +10587,11 @@ declare namespace EC2.Types {
   }
   export interface ScheduledInstancesPrivateIpAddressConfig {
     /**
-     * The IP address.
+     * The IPv4 address.
      */
     PrivateIpAddress?: String;
     /**
-     * Indicates whether this is a primary IP address. Otherwise, this is a secondary IP address.
+     * Indicates whether this is a primary IPv4 address. Otherwise, this is a secondary IPv4 address.
      */
     Primary?: Boolean;
   }
@@ -10492,7 +10874,7 @@ declare namespace EC2.Types {
      */
     AddressingType?: String;
     /**
-     * The instance type.
+     * The instance type. Note that T2 and HS1 instance types are not supported.
      */
     InstanceType?: InstanceType;
     /**
@@ -10520,7 +10902,7 @@ declare namespace EC2.Types {
      */
     SubnetId?: String;
     /**
-     * One or more network interfaces.
+     * One or more network interfaces. If you specify a network interface, you must specify subnet IDs and security group IDs using the network interface.
      */
     NetworkInterfaces?: InstanceNetworkInterfaceSpecificationList;
     /**
@@ -10733,7 +11115,7 @@ declare namespace EC2.Types {
   }
   export interface SpotPrice {
     /**
-     * The instance type.
+     * The instance type. Note that T2 and HS1 instance types are not supported.
      */
     InstanceType?: InstanceType;
     /**
@@ -10883,11 +11265,19 @@ declare namespace EC2.Types {
      */
     VpcId?: String;
     /**
-     * The CIDR block assigned to the subnet.
+     * The IPv4 CIDR block assigned to the subnet.
      */
     CidrBlock?: String;
     /**
-     * The number of unused IP addresses in the subnet. Note that the IP addresses for any stopped instances are considered unavailable.
+     * Information about the IPv6 CIDR blocks associated with the subnet.
+     */
+    Ipv6CidrBlockAssociationSet?: SubnetIpv6CidrBlockAssociationSet;
+    /**
+     * Indicates whether a network interface created in this subnet (including a network interface created by RunInstances) receives an IPv6 address.
+     */
+    AssignIpv6AddressOnCreation?: Boolean;
+    /**
+     * The number of unused private IPv4 addresses in the subnet. Note that the IPv4 addresses for any stopped instances are considered unavailable.
      */
     AvailableIpAddressCount?: Integer;
     /**
@@ -10899,7 +11289,7 @@ declare namespace EC2.Types {
      */
     DefaultForAz?: Boolean;
     /**
-     * Indicates whether instances launched in this subnet receive a public IP address.
+     * Indicates whether instances launched in this subnet receive a public IPv4 address.
      */
     MapPublicIpOnLaunch?: Boolean;
     /**
@@ -10907,7 +11297,33 @@ declare namespace EC2.Types {
      */
     Tags?: TagList;
   }
+  export interface SubnetCidrBlockState {
+    /**
+     * The state of a CIDR block.
+     */
+    State?: SubnetCidrBlockStateCode;
+    /**
+     * A message about the status of the CIDR block, if applicable.
+     */
+    StatusMessage?: String;
+  }
+  export type SubnetCidrBlockStateCode = "associating"|"associated"|"disassociating"|"disassociated"|"failing"|"failed"|string;
   export type SubnetIdStringList = String[];
+  export interface SubnetIpv6CidrBlockAssociation {
+    /**
+     * The IPv6 CIDR block.
+     */
+    Ipv6CidrBlock?: String;
+    /**
+     * Information about the state of the CIDR block.
+     */
+    Ipv6CidrBlockState?: SubnetCidrBlockState;
+    /**
+     * The association ID for the CIDR block.
+     */
+    AssociationId?: String;
+  }
+  export type SubnetIpv6CidrBlockAssociationSet = SubnetIpv6CidrBlockAssociation[];
   export type SubnetList = Subnet[];
   export type SubnetState = "pending"|"available"|string;
   export type SummaryStatus = "ok"|"impaired"|"insufficient-data"|"not-applicable"|"initializing"|string;
@@ -10953,7 +11369,7 @@ declare namespace EC2.Types {
   }
   export interface TargetConfigurationRequest {
     /**
-     * The Convertible Reserved Instance offering ID. If this isn't included in the request, the response lists your current Convertible Reserved Instance/s and their value/s.
+     * The Convertible Reserved Instance offering ID.
      */
     OfferingId: String;
     /**
@@ -10992,6 +11408,26 @@ declare namespace EC2.Types {
     TerminatingInstances?: InstanceStateChangeList;
   }
   export type TrafficType = "ACCEPT"|"REJECT"|"ALL"|string;
+  export interface UnassignIpv6AddressesRequest {
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId: String;
+    /**
+     * The IPv6 addresses to unassign from the network interface.
+     */
+    Ipv6Addresses: Ipv6AddressList;
+  }
+  export interface UnassignIpv6AddressesResult {
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The IPv6 addresses that have been unassigned from the network interface.
+     */
+    UnassignedIpv6Addresses?: Ipv6AddressList;
+  }
   export interface UnassignPrivateIpAddressesRequest {
     /**
      * The ID of the network interface.
@@ -11014,19 +11450,19 @@ declare namespace EC2.Types {
   }
   export interface UnmonitorInstancesResult {
     /**
-     * Monitoring information for one or more instances.
+     * The monitoring information.
      */
     InstanceMonitorings?: InstanceMonitoringList;
   }
   export interface UnsuccessfulItem {
     /**
-     * Information about the error.
-     */
-    Error: UnsuccessfulItemError;
-    /**
      * The ID of the resource.
      */
     ResourceId?: String;
+    /**
+     * Information about the error.
+     */
+    Error: UnsuccessfulItemError;
   }
   export interface UnsuccessfulItemError {
     /**
@@ -11308,7 +11744,7 @@ declare namespace EC2.Types {
      */
     State?: VpcState;
     /**
-     * The CIDR block for the VPC.
+     * The IPv4 CIDR block for the VPC.
      */
     CidrBlock?: String;
     /**
@@ -11327,6 +11763,10 @@ declare namespace EC2.Types {
      * Indicates whether the VPC is the default VPC.
      */
     IsDefault?: Boolean;
+    /**
+     * Information about the IPv6 CIDR blocks associated with the VPC.
+     */
+    Ipv6CidrBlockAssociationSet?: VpcIpv6CidrBlockAssociationSet;
   }
   export interface VpcAttachment {
     /**
@@ -11340,6 +11780,17 @@ declare namespace EC2.Types {
   }
   export type VpcAttachmentList = VpcAttachment[];
   export type VpcAttributeName = "enableDnsSupport"|"enableDnsHostnames"|string;
+  export interface VpcCidrBlockState {
+    /**
+     * The state of the CIDR block.
+     */
+    State?: VpcCidrBlockStateCode;
+    /**
+     * A message about the status of the CIDR block, if applicable.
+     */
+    StatusMessage?: String;
+  }
+  export type VpcCidrBlockStateCode = "associating"|"associated"|"disassociating"|"disassociated"|"failing"|"failed"|string;
   export interface VpcClassicLink {
     /**
      * The ID of the VPC.
@@ -11388,6 +11839,21 @@ declare namespace EC2.Types {
   }
   export type VpcEndpointSet = VpcEndpoint[];
   export type VpcIdStringList = String[];
+  export interface VpcIpv6CidrBlockAssociation {
+    /**
+     * The IPv6 CIDR block.
+     */
+    Ipv6CidrBlock?: String;
+    /**
+     * Information about the state of the CIDR block.
+     */
+    Ipv6CidrBlockState?: VpcCidrBlockState;
+    /**
+     * The association ID for the IPv6 CIDR block.
+     */
+    AssociationId?: String;
+  }
+  export type VpcIpv6CidrBlockAssociationSet = VpcIpv6CidrBlockAssociation[];
   export type VpcList = Vpc[];
   export interface VpcPeeringConnection {
     /**
@@ -11443,7 +11909,7 @@ declare namespace EC2.Types {
   export type VpcPeeringConnectionStateReasonCode = "initiating-request"|"pending-acceptance"|"active"|"deleted"|"rejected"|"failed"|"expired"|"provisioning"|"deleting"|string;
   export interface VpcPeeringConnectionVpcInfo {
     /**
-     * The CIDR block for the VPC.
+     * The IPv4 CIDR block for the VPC.
      */
     CidrBlock?: String;
     /**
@@ -11454,6 +11920,10 @@ declare namespace EC2.Types {
      * The ID of the VPC.
      */
     VpcId?: String;
+    /**
+     * The IPv6 CIDR block for the VPC.
+     */
+    Ipv6CidrBlockSet?: Ipv6CidrBlockSet;
     /**
      * Information about the VPC peering connection options for the accepter or requester VPC.
      */
@@ -11566,7 +12036,7 @@ declare namespace EC2.Types {
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
-  export type apiVersion = "2013-06-15"|"2013-10-15"|"2014-02-01"|"2014-05-01"|"2014-06-15"|"2014-09-01"|"2014-10-01"|"2015-03-01"|"2015-04-15"|"2015-10-01"|"2016-04-01"|"2016-09-15"|"latest"|string;
+  export type apiVersion = "2013-06-15"|"2013-10-15"|"2014-02-01"|"2014-05-01"|"2014-06-15"|"2014-09-01"|"2014-10-01"|"2015-03-01"|"2015-04-15"|"2015-10-01"|"2016-04-01"|"2016-09-15"|"2016-11-15"|"latest"|string;
   export interface ClientApiVersions {
     /**
      * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

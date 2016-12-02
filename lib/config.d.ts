@@ -1,5 +1,3 @@
-/// <reference types="node" />
-
 import {Agent as httpAgent} from 'http';
 import {Agent as httpsAgent} from 'https';
 import {AWSError} from './error';

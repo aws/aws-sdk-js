@@ -44,6 +44,22 @@ declare class APIGateway extends Service {
    */
   createDeployment(callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
+   * 
+   */
+  createDocumentationPart(params: APIGateway.Types.CreateDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  /**
+   * 
+   */
+  createDocumentationPart(callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  /**
+   * 
+   */
+  createDocumentationVersion(params: APIGateway.Types.CreateDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  /**
+   * 
+   */
+  createDocumentationVersion(callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  /**
    * Creates a new domain name.
    */
   createDomainName(params: APIGateway.Types.CreateDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
@@ -139,6 +155,22 @@ declare class APIGateway extends Service {
    * Deletes a Deployment resource. Deleting a deployment will only succeed if there are no Stage resources associated with it.
    */
   deleteDeployment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteDocumentationPart(params: APIGateway.Types.DeleteDocumentationPartRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteDocumentationPart(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteDocumentationVersion(params: APIGateway.Types.DeleteDocumentationVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteDocumentationVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the DomainName resource.
    */
@@ -340,6 +372,38 @@ declare class APIGateway extends Service {
    */
   getDeployments(callback?: (err: AWSError, data: APIGateway.Types.Deployments) => void): Request<APIGateway.Types.Deployments, AWSError>;
   /**
+   * 
+   */
+  getDocumentationPart(params: APIGateway.Types.GetDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  /**
+   * 
+   */
+  getDocumentationPart(callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  /**
+   * 
+   */
+  getDocumentationParts(params: APIGateway.Types.GetDocumentationPartsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationParts) => void): Request<APIGateway.Types.DocumentationParts, AWSError>;
+  /**
+   * 
+   */
+  getDocumentationParts(callback?: (err: AWSError, data: APIGateway.Types.DocumentationParts) => void): Request<APIGateway.Types.DocumentationParts, AWSError>;
+  /**
+   * 
+   */
+  getDocumentationVersion(params: APIGateway.Types.GetDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  /**
+   * 
+   */
+  getDocumentationVersion(callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  /**
+   * 
+   */
+  getDocumentationVersions(params: APIGateway.Types.GetDocumentationVersionsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersions) => void): Request<APIGateway.Types.DocumentationVersions, AWSError>;
+  /**
+   * 
+   */
+  getDocumentationVersions(callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersions) => void): Request<APIGateway.Types.DocumentationVersions, AWSError>;
+  /**
    * Represents a domain name that is contained in a simpler, more intuitive URL that can be called.
    */
   getDomainName(params: APIGateway.Types.GetDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
@@ -524,6 +588,14 @@ declare class APIGateway extends Service {
    */
   importApiKeys(callback?: (err: AWSError, data: APIGateway.Types.ApiKeyIds) => void): Request<APIGateway.Types.ApiKeyIds, AWSError>;
   /**
+   * 
+   */
+  importDocumentationParts(params: APIGateway.Types.ImportDocumentationPartsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPartIds) => void): Request<APIGateway.Types.DocumentationPartIds, AWSError>;
+  /**
+   * 
+   */
+  importDocumentationParts(callback?: (err: AWSError, data: APIGateway.Types.DocumentationPartIds) => void): Request<APIGateway.Types.DocumentationPartIds, AWSError>;
+  /**
    * A feature of the Amazon API Gateway control service for creating a new API from an external API definition file.
    */
   importRestApi(params: APIGateway.Types.ImportRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
@@ -635,6 +707,22 @@ declare class APIGateway extends Service {
    * Changes information about a Deployment resource.
    */
   updateDeployment(callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
+  /**
+   * 
+   */
+  updateDocumentationPart(params: APIGateway.Types.UpdateDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  /**
+   * 
+   */
+  updateDocumentationPart(callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  /**
+   * 
+   */
+  updateDocumentationVersion(params: APIGateway.Types.UpdateDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  /**
+   * 
+   */
+  updateDocumentationVersion(callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
   /**
    * Changes information about the DomainName resource.
    */
@@ -756,6 +844,10 @@ declare namespace APIGateway.Types {
      * The name of the API Key.
      */
     name?: String;
+    /**
+     * An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.
+     */
+    customerId?: String;
     /**
      * The description of the API Key.
      */
@@ -939,6 +1031,10 @@ declare namespace APIGateway.Types {
      * DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.
      */
     stageKeys?: ListOfStageKeys;
+    /**
+     * An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.
+     */
+    customerId?: String;
   }
   export interface CreateAuthorizerRequest {
     /**
@@ -1030,6 +1126,38 @@ declare namespace APIGateway.Types {
      */
     variables?: MapOfStringToString;
   }
+  export interface CreateDocumentationPartRequest {
+    /**
+     * [Required] The identifier of an API of the to-be-created documentation part.
+     */
+    restApiId: String;
+    /**
+     * [Required] The location of the targeted API entity of the to-be-created documentation part.
+     */
+    location: DocumentationPartLocation;
+    /**
+     * [Required] The new documentation content map of the targeted API entity. Enclosed key-value pairs are API-specific, but only Swagger-compliant key-value pairs can be exported and, hence, published.
+     */
+    properties: String;
+  }
+  export interface CreateDocumentationVersionRequest {
+    /**
+     * [Required] Specifies the API identifier of the to-be-created documentation version.
+     */
+    restApiId: String;
+    /**
+     * [Required] The version identifier of the new snapshot.
+     */
+    documentationVersion: String;
+    /**
+     * The stage name to be associated with the new documentation snapshot.
+     */
+    stageName?: String;
+    /**
+     * A description about the new documentation snapshot.
+     */
+    description?: String;
+  }
   export interface CreateDomainNameRequest {
     /**
      * The name of the DomainName resource.
@@ -1098,6 +1226,10 @@ declare namespace APIGateway.Types {
      */
     description?: String;
     /**
+     * A version identifier for the API.
+     */
+    version?: String;
+    /**
      * The ID of the RestApi that you want to clone from.
      */
     cloneFrom?: String;
@@ -1135,6 +1267,10 @@ declare namespace APIGateway.Types {
      * A map that defines the stage variables for the new Stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.
      */
     variables?: MapOfStringToString;
+    /**
+     * The version of the associated API documentation.
+     */
+    documentationVersion?: String;
   }
   export interface CreateUsagePlanKeyRequest {
     /**
@@ -1213,6 +1349,26 @@ declare namespace APIGateway.Types {
      * The identifier of the Deployment resource to delete.
      */
     deploymentId: String;
+  }
+  export interface DeleteDocumentationPartRequest {
+    /**
+     * [Required] Specifies the identifier of an API of the to-be-deleted documentation part.
+     */
+    restApiId: String;
+    /**
+     * [Required] The identifier of the to-be-deleted documentation part.
+     */
+    documentationPartId: String;
+  }
+  export interface DeleteDocumentationVersionRequest {
+    /**
+     * [Required] The identifier of an API of a to-be-deleted documentation snapshot.
+     */
+    restApiId: String;
+    /**
+     * [Required] The version identifier of a to-be-deleted documentation snapshot.
+     */
+    documentationVersion: String;
   }
   export interface DeleteDomainNameRequest {
     /**
@@ -1361,6 +1517,82 @@ declare namespace APIGateway.Types {
      */
     items?: ListOfDeployment;
   }
+  export interface DocumentationPart {
+    /**
+     * The DocumentationPart identifier, generated by Amazon API Gateway when the DocumentationPart is created.
+     */
+    id?: String;
+    /**
+     * The location of the API entity to which the documentation applies. Valid fields depend on the targeted API entity type. All the valid location fields are not required. If not explicitly specified, a valid location field is treated as a wildcard and associated documentation content may be inherited by matching entities, unless overridden.
+     */
+    location?: DocumentationPartLocation;
+    /**
+     * A content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ \"description\": \"The API does ...\" }". Only Swagger-compliant documentation-related fields from the properties map are exported and, hence, published as part of the API entity definitions, while the original documentation parts are exported in a Swagger extension of x-amazon-apigateway-documentation.
+     */
+    properties?: String;
+  }
+  export interface DocumentationPartIds {
+    /**
+     * A list of the returned documentation part identifiers.
+     */
+    ids?: ListOfString;
+    /**
+     * A list of warning messages reported during import of documentation parts.
+     */
+    warnings?: ListOfString;
+  }
+  export interface DocumentationPartLocation {
+    /**
+     * The type of API entity to which the documentation content applies. It is a valid and required field for API entity types of API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. Content inheritance does not apply to any entity of the API, AUTHROZER, MODEL, or RESOURCE type.
+     */
+    type: DocumentationPartType;
+    /**
+     * The URL path of the target. It is a valid field for the API entity types of RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. The default value is / for the root resource. When an applicable child entity inherits the content of another entity of the same type with more general specifications of the other location attributes, the child entity's path attribute must match that of the parent entity as a prefix.
+     */
+    path?: String;
+    /**
+     * The HTTP verb of a method. It is a valid field for the API entity types of METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. The default value is * for any method. When an applicable child entity inherits the content of an entity of the same type with more general specifications of the other location attributes, the child entity's method attribute must match that of the parent entity exactly.
+     */
+    method?: String;
+    /**
+     * The HTTP status code of a response. It is a valid field for the API entity types of RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. The default value is * for any status code. When an applicable child entity inherits the content of an entity of the same type with more general specifications of the other location attributes, the child entity's statusCode attribute must match that of the parent entity exactly.
+     */
+    statusCode?: DocumentationPartLocationStatusCode;
+    /**
+     * The name of the targeted API entity. It is a valid and required field for the API entity types of AUTHORIZER, MODEL, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY and RESPONSE_HEADER. It is an invalid field for any other entity type.
+     */
+    name?: String;
+  }
+  export type DocumentationPartLocationStatusCode = string;
+  export type DocumentationPartType = "API"|"AUTHORIZER"|"MODEL"|"RESOURCE"|"METHOD"|"PATH_PARAMETER"|"QUERY_PARAMETER"|"REQUEST_HEADER"|"REQUEST_BODY"|"RESPONSE"|"RESPONSE_HEADER"|"RESPONSE_BODY"|string;
+  export interface DocumentationParts {
+    position?: String;
+    /**
+     * The current page of DocumentationPart resources in the DocumentationParts collection.
+     */
+    items?: ListOfDocumentationPart;
+  }
+  export interface DocumentationVersion {
+    /**
+     * The version identifier of the API documentation snapshot.
+     */
+    version?: String;
+    /**
+     * The date when the API documentation snapshot is created.
+     */
+    createdDate?: Timestamp;
+    /**
+     * The description of the API documentation snapshot.
+     */
+    description?: String;
+  }
+  export interface DocumentationVersions {
+    position?: String;
+    /**
+     * The current page of DocumentationVersion items from the DocumentationVersions collection of an API.
+     */
+    items?: ListOfDocumentationVersion;
+  }
   export interface DomainName {
     /**
      * The name of the DomainName resource.
@@ -1452,6 +1684,9 @@ declare namespace APIGateway.Types {
      * The name of queried API keys.
      */
     nameQuery?: String;
+    /**
+     * The identifier of a customer in AWS Marketplace or an external system, such as a developer portal.
+     */
     customerId?: String;
     /**
      * A boolean flag to specify whether (true) or not (false) the result contains key values.
@@ -1543,6 +1778,66 @@ declare namespace APIGateway.Types {
     position?: String;
     /**
      * The maximum number of Deployment resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.
+     */
+    limit?: NullableInteger;
+  }
+  export interface GetDocumentationPartRequest {
+    /**
+     * [Required] The identifier of an API of the to-be-retrieved documentation part.
+     */
+    restApiId: String;
+    /**
+     * [Required] The identifier of the to-be-retrieved documentation part.
+     */
+    documentationPartId: String;
+  }
+  export interface GetDocumentationPartsRequest {
+    /**
+     * [Required] The identifier of the API of the to-be-retrieved documentation parts.
+     */
+    restApiId: String;
+    /**
+     * The type of API entities of the to-be-retrieved documentation parts. 
+     */
+    type?: DocumentationPartType;
+    /**
+     * The name of API entities of the to-be-retrieved documentation parts.
+     */
+    nameQuery?: String;
+    /**
+     * The path of API entities of the to-be-retrieved documentation parts.
+     */
+    path?: String;
+    /**
+     * The position of the to-be-retrieved documentation part in the DocumentationParts collection.
+     */
+    position?: String;
+    /**
+     * The size of the paged results.
+     */
+    limit?: NullableInteger;
+  }
+  export interface GetDocumentationVersionRequest {
+    /**
+     * [Required] The identifier of the API of the to-be-retrieved documentation snapshot.
+     */
+    restApiId: String;
+    /**
+     * [Required] The version identifier of the to-be-retrieved documentation snapshot.
+     */
+    documentationVersion: String;
+  }
+  export interface GetDocumentationVersionsRequest {
+    /**
+     * [Required] The identifier of an API of the to-be-retrieved documentation versions.
+     */
+    restApiId: String;
+    /**
+     * The position of the returned DocumentationVersion in the DocumentationVersions collection.
+     */
+    position?: String;
+    /**
+     * The page size of the returned documentation versions.
      */
     limit?: NullableInteger;
   }
@@ -1852,6 +2147,24 @@ declare namespace APIGateway.Types {
      */
     failOnWarnings?: Boolean;
   }
+  export interface ImportDocumentationPartsRequest {
+    /**
+     * [Required] The identifier of an API of the to-be-imported documentation parts.
+     */
+    restApiId: String;
+    /**
+     * A query parameter to indicate whether to overwrite (OVERWRITE) any existing DocumentationParts definition or to merge (MERGE) the new definition into the existing one. The default value is MERGE.
+     */
+    mode?: PutMode;
+    /**
+     * A query parameter to specify whether to rollback the documentation importation (true) or not (false) when a warning is encountered. The default value is false.
+     */
+    failOnWarnings?: Boolean;
+    /**
+     * [Required] Raw byte array representing the to-be-imported documentation parts. To import from a Swagger file, this is a JSON object.
+     */
+    body: _Blob;
+  }
   export interface ImportRestApiRequest {
     /**
      * A query parameter to indicate whether to rollback the API creation (true) or not (false) when a warning is encountered. The default value is false.
@@ -1943,6 +2256,8 @@ declare namespace APIGateway.Types {
   export type ListOfBasePathMapping = BasePathMapping[];
   export type ListOfClientCertificate = ClientCertificate[];
   export type ListOfDeployment = Deployment[];
+  export type ListOfDocumentationPart = DocumentationPart[];
+  export type ListOfDocumentationVersion = DocumentationVersion[];
   export type ListOfDomainName = DomainName[];
   export type ListOfLong = Long[];
   export type ListOfModel = Model[];
@@ -2351,6 +2666,10 @@ declare namespace APIGateway.Types {
      */
     createdDate?: Timestamp;
     /**
+     * A version identifier for the API.
+     */
+    version?: String;
+    /**
      * The warning messages reported when failonwarnings is turned on during API import.
      */
     warnings?: ListOfString;
@@ -2417,6 +2736,10 @@ declare namespace APIGateway.Types {
      * A map that defines the stage variables for a Stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.
      */
     variables?: MapOfStringToString;
+    /**
+     * The version of the associated API documentation.
+     */
+    documentationVersion?: String;
     /**
      * The date and time that the stage was created, in ISO 8601 format.
      */
@@ -2643,6 +2966,34 @@ declare namespace APIGateway.Types {
      */
     patchOperations?: ListOfPatchOperation;
   }
+  export interface UpdateDocumentationPartRequest {
+    /**
+     * [Required] The identifier of an API of the to-be-updated documentation part.
+     */
+    restApiId: String;
+    /**
+     * [Required] The identifier of the to-be-updated documentation part.
+     */
+    documentationPartId: String;
+    /**
+     * A list of update operations to be applied to the specified resource and in the order specified in this list.
+     */
+    patchOperations?: ListOfPatchOperation;
+  }
+  export interface UpdateDocumentationVersionRequest {
+    /**
+     * [Required] The identifier of an API of the to-be-updated documentation version.
+     */
+    restApiId: String;
+    /**
+     * [Required] The version identifier of the to-be-updated documentation version.
+     */
+    documentationVersion: String;
+    /**
+     * A list of update operations to be applied to the specified resource and in the order specified in this list.
+     */
+    patchOperations?: ListOfPatchOperation;
+  }
   export interface UpdateDomainNameRequest {
     /**
      * The name of the DomainName resource to be changed.
@@ -2853,6 +3204,10 @@ declare namespace APIGateway.Types {
      * The maximum number of permitted requests per a given unit time interval.
      */
     quota?: QuotaSettings;
+    /**
+     * The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
+     */
+    productCode?: String;
   }
   export interface UsagePlanKey {
     /**

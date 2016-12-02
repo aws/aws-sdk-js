@@ -12,11 +12,19 @@ declare class Snowball extends Service {
   constructor(options?: Snowball.Types.ClientConfiguration)
   config: Config & Snowball.Types.ClientConfiguration;
   /**
-   * Cancels the specified job. Note that you can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action will return a job's JobState as part of the response element data returned.
+   * Cancels a cluster job. You can only cancel a cluster job while it's in the AwaitingQuorum status. You'll have at least an hour after creating a cluster job to cancel it.
+   */
+  cancelCluster(params: Snowball.Types.CancelClusterRequest, callback?: (err: AWSError, data: Snowball.Types.CancelClusterResult) => void): Request<Snowball.Types.CancelClusterResult, AWSError>;
+  /**
+   * Cancels a cluster job. You can only cancel a cluster job while it's in the AwaitingQuorum status. You'll have at least an hour after creating a cluster job to cancel it.
+   */
+  cancelCluster(callback?: (err: AWSError, data: Snowball.Types.CancelClusterResult) => void): Request<Snowball.Types.CancelClusterResult, AWSError>;
+  /**
+   * Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action will return a job's JobState as part of the response element data returned.
    */
   cancelJob(params: Snowball.Types.CancelJobRequest, callback?: (err: AWSError, data: Snowball.Types.CancelJobResult) => void): Request<Snowball.Types.CancelJobResult, AWSError>;
   /**
-   * Cancels the specified job. Note that you can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action will return a job's JobState as part of the response element data returned.
+   * Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action will return a job's JobState as part of the response element data returned.
    */
   cancelJob(callback?: (err: AWSError, data: Snowball.Types.CancelJobResult) => void): Request<Snowball.Types.CancelJobResult, AWSError>;
   /**
@@ -28,11 +36,19 @@ declare class Snowball extends Service {
    */
   createAddress(callback?: (err: AWSError, data: Snowball.Types.CreateAddressResult) => void): Request<Snowball.Types.CreateAddressResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Note that your AWS account must have the right trust policies and permissions in place to create a job for Snowball. For more information, see api-reference-policies.
+   * Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.
+   */
+  createCluster(params: Snowball.Types.CreateClusterRequest, callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
+  /**
+   * Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.
+   */
+  createCluster(callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
+  /**
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. .
    */
   createJob(params: Snowball.Types.CreateJobRequest, callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Note that your AWS account must have the right trust policies and permissions in place to create a job for Snowball. For more information, see api-reference-policies.
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. .
    */
   createJob(callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
@@ -52,19 +68,27 @@ declare class Snowball extends Service {
    */
   describeAddresses(callback?: (err: AWSError, data: Snowball.Types.DescribeAddressesResult) => void): Request<Snowball.Types.DescribeAddressesResult, AWSError>;
   /**
-   * Returns information about a specific job including shipping information, job status, and other important metadata.
+   * Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
+   */
+  describeCluster(params: Snowball.Types.DescribeClusterRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeClusterResult) => void): Request<Snowball.Types.DescribeClusterResult, AWSError>;
+  /**
+   * Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
+   */
+  describeCluster(callback?: (err: AWSError, data: Snowball.Types.DescribeClusterResult) => void): Request<Snowball.Types.DescribeClusterResult, AWSError>;
+  /**
+   * Returns information about a specific job including shipping information, job status, and other important metadata. .
    */
   describeJob(params: Snowball.Types.DescribeJobRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeJobResult) => void): Request<Snowball.Types.DescribeJobResult, AWSError>;
   /**
-   * Returns information about a specific job including shipping information, job status, and other important metadata.
+   * Returns information about a specific job including shipping information, job status, and other important metadata. .
    */
   describeJob(callback?: (err: AWSError, data: Snowball.Types.DescribeJobResult) => void): Request<Snowball.Types.DescribeJobResult, AWSError>;
   /**
-   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job. Note that the credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
+   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
    */
   getJobManifest(params: Snowball.Types.GetJobManifestRequest, callback?: (err: AWSError, data: Snowball.Types.GetJobManifestResult) => void): Request<Snowball.Types.GetJobManifestResult, AWSError>;
   /**
-   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job. Note that the credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
+   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
    */
   getJobManifest(callback?: (err: AWSError, data: Snowball.Types.GetJobManifestResult) => void): Request<Snowball.Types.GetJobManifestResult, AWSError>;
   /**
@@ -76,13 +100,29 @@ declare class Snowball extends Service {
    */
   getJobUnlockCode(callback?: (err: AWSError, data: Snowball.Types.GetJobUnlockCodeResult) => void): Request<Snowball.Types.GetJobUnlockCodeResult, AWSError>;
   /**
-   * Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use. Note that the default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
+   * Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use. The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
    */
   getSnowballUsage(params: Snowball.Types.GetSnowballUsageRequest, callback?: (err: AWSError, data: Snowball.Types.GetSnowballUsageResult) => void): Request<Snowball.Types.GetSnowballUsageResult, AWSError>;
   /**
-   * Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use. Note that the default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
+   * Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use. The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
    */
   getSnowballUsage(callback?: (err: AWSError, data: Snowball.Types.GetSnowballUsageResult) => void): Request<Snowball.Types.GetSnowballUsageResult, AWSError>;
+  /**
+   * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.
+   */
+  listClusterJobs(params: Snowball.Types.ListClusterJobsRequest, callback?: (err: AWSError, data: Snowball.Types.ListClusterJobsResult) => void): Request<Snowball.Types.ListClusterJobsResult, AWSError>;
+  /**
+   * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.
+   */
+  listClusterJobs(callback?: (err: AWSError, data: Snowball.Types.ListClusterJobsResult) => void): Request<Snowball.Types.ListClusterJobsResult, AWSError>;
+  /**
+   * Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry object contains a cluster's state, a cluster's ID, and other important status information.
+   */
+  listClusters(params: Snowball.Types.ListClustersRequest, callback?: (err: AWSError, data: Snowball.Types.ListClustersResult) => void): Request<Snowball.Types.ListClustersResult, AWSError>;
+  /**
+   * Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry object contains a cluster's state, a cluster's ID, and other important status information.
+   */
+  listClusters(callback?: (err: AWSError, data: Snowball.Types.ListClustersResult) => void): Request<Snowball.Types.ListClustersResult, AWSError>;
   /**
    * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
    */
@@ -91,6 +131,14 @@ declare class Snowball extends Service {
    * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
    */
   listJobs(callback?: (err: AWSError, data: Snowball.Types.ListJobsResult) => void): Request<Snowball.Types.ListJobsResult, AWSError>;
+  /**
+   * While a cluster's ClusterState value is in the AwaitingQuorum state, you can update some of the information associated with a cluster. Once the cluster changes to a different job state, usually 60 minutes after the cluster being created, this action is no longer available.
+   */
+  updateCluster(params: Snowball.Types.UpdateClusterRequest, callback?: (err: AWSError, data: Snowball.Types.UpdateClusterResult) => void): Request<Snowball.Types.UpdateClusterResult, AWSError>;
+  /**
+   * While a cluster's ClusterState value is in the AwaitingQuorum state, you can update some of the information associated with a cluster. Once the cluster changes to a different job state, usually 60 minutes after the cluster being created, this action is no longer available.
+   */
+  updateCluster(callback?: (err: AWSError, data: Snowball.Types.UpdateClusterResult) => void): Request<Snowball.Types.UpdateClusterResult, AWSError>;
   /**
    * While a job's JobState value is New, you can update some of the information associated with a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.
    */
@@ -135,11 +183,11 @@ declare namespace Snowball.Types {
      */
     StateOrProvince?: String;
     /**
-     * The prefecture or district in an address that a Snowball is to be delivered to.
+     * The prefecture or district that the appliance will be shipped to.
      */
     PrefectureOrDistrict?: String;
     /**
-     * A landmark listed in an address that a Snowball is to be delivered to.
+     * The landmark identifying the address that the appliance will be shipped to.
      */
     Landmark?: String;
     /**
@@ -158,14 +206,93 @@ declare namespace Snowball.Types {
   export type AddressId = string;
   export type AddressList = Address[];
   export type Boolean = boolean;
+  export interface CancelClusterRequest {
+    /**
+     * The 39-character ID for the cluster that you want to cancel, for example CID123e4567-e89b-12d3-a456-426655440000.
+     */
+    ClusterId: ClusterId;
+  }
+  export interface CancelClusterResult {
+  }
   export interface CancelJobRequest {
     /**
-     * The 39 character job ID for the job that you want to cancel, for example JID123e4567-e89b-12d3-a456-426655440000.
+     * The 39-character job ID for the job that you want to cancel, for example JID123e4567-e89b-12d3-a456-426655440000.
      */
     JobId: JobId;
   }
   export interface CancelJobResult {
   }
+  export type ClusterId = string;
+  export interface ClusterListEntry {
+    /**
+     * The 39-character ID for the cluster that you want to list, for example CID123e4567-e89b-12d3-a456-426655440000.
+     */
+    ClusterId?: String;
+    /**
+     * The current state of this cluster. For information about the state of a specific node, see JobListEntry$JobState.
+     */
+    ClusterState?: ClusterState;
+    /**
+     * The creation date for this cluster.
+     */
+    CreationDate?: Timestamp;
+    /**
+     * Defines an optional description of the cluster, for example Environmental Data Cluster-01.
+     */
+    Description?: String;
+  }
+  export type ClusterListEntryList = ClusterListEntry[];
+  export interface ClusterMetadata {
+    /**
+     * The automatically generated ID for a cluster.
+     */
+    ClusterId?: String;
+    /**
+     * The optional description of the cluster.
+     */
+    Description?: String;
+    /**
+     * The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This ARN was created using the CreateKey API action in AWS Key Management Service (AWS KMS).
+     */
+    KmsKeyARN?: KmsKeyARN;
+    /**
+     * The role ARN associated with this cluster. This ARN was created using the CreateRole API action in AWS Identity and Access Management (IAM).
+     */
+    RoleARN?: RoleARN;
+    /**
+     * The current status of the cluster.
+     */
+    ClusterState?: ClusterState;
+    /**
+     * The type of job for this cluster. Currently, the only job type supported for clusters is LOCAL_USE.
+     */
+    JobType?: JobType;
+    /**
+     * The type of AWS Snowball appliance to use for this cluster. Currently, the only supported appliance type for cluster jobs is EDGE.
+     */
+    SnowballType?: SnowballType;
+    /**
+     * The creation date for this cluster.
+     */
+    CreationDate?: Timestamp;
+    /**
+     * The arrays of JobResource objects that can include updated S3Resource objects or LambdaResource objects.
+     */
+    Resources?: JobResource;
+    /**
+     * The automatically generated ID for a specific address.
+     */
+    AddressId?: AddressId;
+    /**
+     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge appliance, rather it represents how quickly each appliance moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, appliances shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
+     */
+    ShippingOption?: ShippingOption;
+    /**
+     * The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
+     */
+    Notification?: Notification;
+  }
+  export type ClusterState = "AwaitingQuorum"|"Pending"|"InUse"|"Complete"|"Cancelled"|string;
   export interface CreateAddressRequest {
     /**
      * The address that you want the Snowball shipped to.
@@ -178,15 +305,59 @@ declare namespace Snowball.Types {
      */
     AddressId?: String;
   }
+  export interface CreateClusterRequest {
+    /**
+     * The type of job for this cluster. Currently, the only job type supported for clusters is LOCAL_USE.
+     */
+    JobType: JobType;
+    /**
+     * The resources associated with the cluster job. These resources include Amazon S3 buckets and optional AWS Lambda functions written in the Python language. 
+     */
+    Resources: JobResource;
+    /**
+     * An optional description of this specific cluster, for example Environmental Data Cluster-01.
+     */
+    Description?: String;
+    /**
+     * The ID for the address that you want the cluster shipped to.&gt;
+     */
+    AddressId: AddressId;
+    /**
+     * The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN values are created by using the CreateKey API action in AWS Key Management Service (AWS KMS). 
+     */
+    KmsKeyARN?: KmsKeyARN;
+    /**
+     * The RoleARN that you want to associate with this cluster. RoleArn values are created by using the CreateRole API action in AWS Identity and Access Management (IAM).
+     */
+    RoleARN: RoleARN;
+    /**
+     * The type of AWS Snowball appliance to use for this cluster. Currently, the only supported appliance type for cluster jobs is EDGE.
+     */
+    SnowballType?: SnowballType;
+    /**
+     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge appliance, rather it represents how quickly each appliance moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, appliances shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
+     */
+    ShippingOption: ShippingOption;
+    /**
+     * The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
+     */
+    Notification?: Notification;
+  }
+  export interface CreateClusterResult {
+    /**
+     * The automatically generated ID for a cluster.
+     */
+    ClusterId?: ClusterId;
+  }
   export interface CreateJobRequest {
     /**
      * Defines the type of job that you're creating. 
      */
-    JobType: JobType;
+    JobType?: JobType;
     /**
      * Defines the Amazon S3 buckets associated with this job. With IMPORT jobs, you specify the bucket or buckets that your transferred data will be imported into. With EXPORT jobs, you specify the bucket or buckets that your transferred data will be exported from. Optionally, you can also specify a KeyRange value. If you choose to export a range, you define the length of the range by providing either an inclusive BeginMarker value, an inclusive EndMarker value, or both. Ranges are UTF-8 binary sorted.
      */
-    Resources: JobResource;
+    Resources?: JobResource;
     /**
      * Defines an optional description of this specific job, for example Important Photos 2016-08-11.
      */
@@ -194,7 +365,7 @@ declare namespace Snowball.Types {
     /**
      * The ID for the address that you want the Snowball shipped to.
      */
-    AddressId: AddressId;
+    AddressId?: AddressId;
     /**
      * The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created using the CreateKey AWS Key Management Service (KMS) API action.
      */
@@ -202,19 +373,27 @@ declare namespace Snowball.Types {
     /**
      * The RoleARN that you want to associate with this job. RoleArns are created using the CreateRole AWS Identity and Access Management (IAM) API action.
      */
-    RoleARN: RoleARN;
+    RoleARN?: RoleARN;
     /**
      * If your job is being created in one of the US regions, you have the option of specifying what size Snowball you'd like for this job. In all other regions, Snowballs come with 80 TB in storage capacity.
      */
     SnowballCapacityPreference?: SnowballCapacity;
     /**
-     * The shipping speed for this job. Note that this speed does not dictate how soon you'll get the Snowball, rather it represents how quickly the Snowball moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowballs are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
+     * The shipping speed for this job. This speed doesn't dictate how soon you'll get the Snowball, rather it represents how quickly the Snowball moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowballs are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
      */
-    ShippingOption: ShippingOption;
+    ShippingOption?: ShippingOption;
     /**
      * Defines the Amazon Simple Notification Service (Amazon SNS) notification settings for this job.
      */
     Notification?: Notification;
+    /**
+     * The ID of a cluster. If you're creating a job for a node in a cluster, you need to provide only this clusterId value. The other job attributes are inherited from the cluster.
+     */
+    ClusterId?: ClusterId;
+    /**
+     * The type of AWS Snowball appliance to use for this job. Currently, the only supported appliance type for cluster jobs is EDGE.
+     */
+    SnowballType?: SnowballType;
   }
   export interface CreateJobResult {
     /**
@@ -272,6 +451,18 @@ declare namespace Snowball.Types {
      */
     NextToken?: String;
   }
+  export interface DescribeClusterRequest {
+    /**
+     * The automatically generated ID for a cluster.
+     */
+    ClusterId: ClusterId;
+  }
+  export interface DescribeClusterResult {
+    /**
+     * Information about a specific cluster, including shipping information, cluster status, and other important metadata.
+     */
+    ClusterMetadata?: ClusterMetadata;
+  }
   export interface DescribeJobRequest {
     /**
      * The automatically generated ID for a job, for example JID123e4567-e89b-12d3-a456-426655440000.
@@ -280,14 +471,21 @@ declare namespace Snowball.Types {
   }
   export interface DescribeJobResult {
     /**
-     * Information about a specific job, including shipping information, job status, and other important metadata. 
+     * Information about a specific job, including shipping information, job status, and other important metadata.
      */
     JobMetadata?: JobMetadata;
     /**
-     * Information about a specific job part (in the case of an export job), including shipping information, job status, and other important metadata. 
+     * Information about a specific job part (in the case of an export job), including shipping information, job status, and other important metadata.
      */
     SubJobMetadata?: JobMetadataList;
   }
+  export interface EventTriggerDefinition {
+    /**
+     * The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda function's event trigger associated with this job.
+     */
+    EventResourceARN?: ResourceARN;
+  }
+  export type EventTriggerDefinitionList = EventTriggerDefinition[];
   export interface GetJobManifestRequest {
     /**
      * The ID for a job that you want to get the manifest file for, for example JID123e4567-e89b-12d3-a456-426655440000.
@@ -339,6 +537,22 @@ declare namespace Snowball.Types {
      * A value that indicates that this job is a master job. A master job represents a successful request to create an export job. Master jobs aren't associated with any Snowballs. Instead, each master job will have at least one job part, and each job part is associated with a Snowball. It might take some time before the job parts associated with a particular master job are listed, because they are created after the master job is created.
      */
     IsMaster?: Boolean;
+    /**
+     * The type of job.
+     */
+    JobType?: JobType;
+    /**
+     * The type of appliance used with this job.
+     */
+    SnowballType?: SnowballType;
+    /**
+     * The creation date for this job.
+     */
+    CreationDate?: Timestamp;
+    /**
+     * The optional description of this specific job, for example Important Photos 2016-08-11.
+     */
+    Description?: String;
   }
   export type JobListEntryList = JobListEntry[];
   export interface JobLogs {
@@ -361,13 +575,17 @@ declare namespace Snowball.Types {
      */
     JobId?: String;
     /**
-     * The current state of the jobs.
+     * The current status of the jobs.
      */
     JobState?: JobState;
     /**
      * The type of job.
      */
     JobType?: JobType;
+    /**
+     * The type of appliance used with this job.
+     */
+    SnowballType?: SnowballType;
     /**
      * The creation date for this job.
      */
@@ -405,13 +623,17 @@ declare namespace Snowball.Types {
      */
     Notification?: Notification;
     /**
-     * A value that defines the real-time status of a Snowball's data transfer while the appliance is at AWS. Note that this data is only available while a job has a JobState value of InProgress, for both import and export jobs.
+     * A value that defines the real-time status of a Snowball's data transfer while the appliance is at AWS. This data is only available while a job has a JobState value of InProgress, for both import and export jobs.
      */
     DataTransferProgress?: DataTransfer;
     /**
      * Links to Amazon S3 presigned URLs for the job report and logs. For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snowball for your job part is being delivered to you.
      */
     JobLogInfo?: JobLogs;
+    /**
+     * The 39-character ID for the cluster, for example CID123e4567-e89b-12d3-a456-426655440000.
+     */
+    ClusterId?: String;
   }
   export type JobMetadataList = JobMetadata[];
   export interface JobResource {
@@ -419,10 +641,14 @@ declare namespace Snowball.Types {
      * An array of S3Resource objects.
      */
     S3Resources?: S3ResourceList;
+    /**
+     * The Python-language Lambda functions for this job.
+     */
+    LambdaResources?: LambdaResourceList;
   }
   export type JobState = "New"|"PreparingAppliance"|"PreparingShipment"|"InTransitToCustomer"|"WithCustomer"|"InTransitToAWS"|"WithAWS"|"InProgress"|"Complete"|"Cancelled"|"Listing"|"Pending"|string;
   export type JobStateList = JobState[];
-  export type JobType = "IMPORT"|"EXPORT"|string;
+  export type JobType = "IMPORT"|"EXPORT"|"LOCAL_USE"|string;
   export interface KeyRange {
     /**
      * The key that starts an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
@@ -434,6 +660,61 @@ declare namespace Snowball.Types {
     EndMarker?: String;
   }
   export type KmsKeyARN = string;
+  export interface LambdaResource {
+    /**
+     * An Amazon Resource Name (ARN) that represents an AWS Lambda function to be triggered by PUT object actions on the associated local Amazon S3 resource.
+     */
+    LambdaArn?: ResourceARN;
+    /**
+     * The array of ARNs for S3Resource objects to trigger the LambdaResource objects associated with this job.
+     */
+    EventTriggers?: EventTriggerDefinitionList;
+  }
+  export type LambdaResourceList = LambdaResource[];
+  export interface ListClusterJobsRequest {
+    /**
+     * The 39-character ID for the cluster that you want to list, for example CID123e4567-e89b-12d3-a456-426655440000.
+     */
+    ClusterId: ClusterId;
+    /**
+     * The number of JobListEntry objects to return.
+     */
+    MaxResults?: ListLimit;
+    /**
+     * HTTP requests are stateless. To identify what object comes "next" in the list of JobListEntry objects, you have the option of specifying NextToken as the starting point for your returned list.
+     */
+    NextToken?: String;
+  }
+  export interface ListClusterJobsResult {
+    /**
+     * Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. 
+     */
+    JobListEntries?: JobListEntryList;
+    /**
+     * HTTP requests are stateless. If you use the automatically generated NextToken value in your next ListClusterJobsResult call, your list of returned jobs will start from this point in the array.
+     */
+    NextToken?: String;
+  }
+  export interface ListClustersRequest {
+    /**
+     * The number of ClusterListEntry objects to return.
+     */
+    MaxResults?: ListLimit;
+    /**
+     * HTTP requests are stateless. To identify what object comes "next" in the list of ClusterListEntry objects, you have the option of specifying NextToken as the starting point for your returned list.
+     */
+    NextToken?: String;
+  }
+  export interface ListClustersResult {
+    /**
+     * Each ClusterListEntry object contains a cluster's state, a cluster's ID, and other important status information.
+     */
+    ClusterListEntries?: ClusterListEntryList;
+    /**
+     * HTTP requests are stateless. If you use the automatically generated NextToken value in your next ClusterListEntry call, your list of returned clusters will start from this point in the array.
+     */
+    NextToken?: String;
+  }
   export interface ListJobsRequest {
     /**
      * The number of JobListEntry objects to return.
@@ -458,7 +739,7 @@ declare namespace Snowball.Types {
   export type Long = number;
   export interface Notification {
     /**
-     * The new SNS TopicArn that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the CreateTopic Amazon SNS API action. Note that you can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the Subscribe AWS Simple Notification Service (SNS) API action.
+     * The new SNS TopicArn that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the CreateTopic Amazon SNS API action. You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the Subscribe AWS Simple Notification Service (SNS) API action.
      */
     SnsTopicARN?: SnsTopicARN;
     /**
@@ -495,7 +776,7 @@ declare namespace Snowball.Types {
   }
   export interface ShippingDetails {
     /**
-     * The shipping speed for a particular job. Note that this speed does not dictate how soon you'll get the Snowball from the job's creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowballs are delivered in one to seven days.   In the United States of America (US), you have access to one-day shipping and two-day shipping.  
+     * The shipping speed for a particular job. This speed doesn't dictate how soon you'll get the Snowball from the job's creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowballs are delivered in one to seven days.   In the United States of America (US), you have access to one-day shipping and two-day shipping.  
      */
     ShippingOption?: ShippingOption;
     /**
@@ -508,10 +789,43 @@ declare namespace Snowball.Types {
     OutboundShipment?: Shipment;
   }
   export type ShippingOption = "SECOND_DAY"|"NEXT_DAY"|"EXPRESS"|"STANDARD"|string;
-  export type SnowballCapacity = "T50"|"T80"|"NoPreference"|string;
+  export type SnowballCapacity = "T50"|"T80"|"T100"|"NoPreference"|string;
+  export type SnowballType = "STANDARD"|"EDGE"|string;
   export type SnsTopicARN = string;
   export type String = string;
   export type Timestamp = Date;
+  export interface UpdateClusterRequest {
+    /**
+     * The cluster ID of the cluster that you want to update, for example CID123e4567-e89b-12d3-a456-426655440000.
+     */
+    ClusterId: ClusterId;
+    /**
+     * The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the CreateRole API action in AWS Identity and Access Management (IAM).
+     */
+    RoleARN?: RoleARN;
+    /**
+     * The updated description of this cluster.
+     */
+    Description?: String;
+    /**
+     * The updated arrays of JobResource objects that can include updated S3Resource objects or LambdaResource objects.
+     */
+    Resources?: JobResource;
+    /**
+     * The ID of the updated Address object.
+     */
+    AddressId?: AddressId;
+    /**
+     * The updated shipping option value of this cluster's ShippingDetails object.
+     */
+    ShippingOption?: ShippingOption;
+    /**
+     * The new or updated Notification object.
+     */
+    Notification?: Notification;
+  }
+  export interface UpdateClusterResult {
+  }
   export interface UpdateJobRequest {
     /**
      * The job ID of the job that you want to update, for example JID123e4567-e89b-12d3-a456-426655440000.
@@ -542,7 +856,7 @@ declare namespace Snowball.Types {
      */
     Description?: String;
     /**
-     * The updated SnowballCapacityPreference of this job's JobMetadata object. Note that the 50 TB Snowballs are only available in the US regions.
+     * The updated SnowballCapacityPreference of this job's JobMetadata object. The 50 TB Snowballs are only available in the US regions.
      */
     SnowballCapacityPreference?: SnowballCapacity;
   }

@@ -68,6 +68,14 @@ declare class Lambda extends Service {
    */
   deleteFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Returns a customer's account settings. You can use this operation to retrieve Lambda limit information such as code size and concurrency limits. For more information on limits, see AWS Lambda Limits. You can also retrieve resource usage statistics such as code storage usage and function count.
+   */
+  getAccountSettings(params: Lambda.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
+  /**
+   * Returns a customer's account settings. You can use this operation to retrieve Lambda limit information such as code size and concurrency limits. For more information on limits, see AWS Lambda Limits. You can also retrieve resource usage statistics such as code storage usage and function count.
+   */
+  getAccountSettings(callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
+  /**
    * Returns the specified alias information such as the alias ARN, description, and function version it is pointing to. For more information, see Introduction to AWS Lambda Aliases. This requires permission for the lambda:GetAlias action.
    */
   getAlias(params: Lambda.Types.GetAliasRequest, callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
@@ -205,6 +213,34 @@ declare class Lambda extends Service {
   updateFunctionConfiguration(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
 }
 declare namespace Lambda.Types {
+  export interface AccountLimit {
+    /**
+     * Maximum size, in megabytes, of a code package you can upload per region. The default size is 75 GB. 
+     */
+    TotalCodeSize?: Long;
+    /**
+     * Size, in bytes, of code/dependencies that you can zip into a deployment package (uncompressed zip/jar size) for uploading. The default limit is 250 MB.
+     */
+    CodeSizeUnzipped?: Long;
+    /**
+     * Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using AWS S3 for uploading larger files. Default limit is 50 MB.
+     */
+    CodeSizeZipped?: Long;
+    /**
+     * Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see Lambda Function Concurrent Executions. The default limit is 100.
+     */
+    ConcurrentExecutions?: Integer;
+  }
+  export interface AccountUsage {
+    /**
+     * Total size, in megabytes, of the account's deployment packages per region.
+     */
+    TotalCodeSize?: Long;
+    /**
+     * The number of your account's existing functions per region.
+     */
+    FunctionCount?: Long;
+  }
   export type Action = string;
   export interface AddPermissionRequest {
     /**
@@ -307,9 +343,13 @@ declare namespace Lambda.Types {
      */
     BatchSize?: BatchSize;
     /**
-     * The position in the stream where AWS Lambda should start reading. For more information, go to ShardIteratorType in the Amazon Kinesis API Reference. 
+     * The position in the stream where AWS Lambda should start reading. Valid only for Kinesis streams. For more information, go to ShardIteratorType in the Amazon Kinesis API Reference. 
      */
     StartingPosition: EventSourcePosition;
+    /**
+     * The timestamp of the data record from which to start reading. Used with shard iterator type AT_TIMESTAMP. If a record with this exact timestamp does not exist, the iterator returned is for the next (later) record. If the timestamp is older than the current trim horizon, the iterator returned is for the oldest untrimmed data record (TRIM_HORIZON). Valid only for Kinesis streams. 
+     */
+    StartingPositionTimestamp?: _Date;
   }
   export interface CreateFunctionRequest {
     /**
@@ -317,7 +357,7 @@ declare namespace Lambda.Types {
      */
     FunctionName: FunctionName;
     /**
-     * The runtime environment for the Lambda function you are uploading. To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use earlier runtime (v0.10.42), set the value to "nodejs".
+     * The runtime environment for the Lambda function you are uploading. To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use earlier runtime (v0.10.42), set the value to "nodejs".  You can no longer create functions using the v0.10.42 runtime version as of November, 2016. Existing functions will be supported until early 2017 but we recommend you migrate them to nodejs4.3 runtime version as soon as possible. 
      */
     Runtime: Runtime;
     /**
@@ -352,6 +392,10 @@ declare namespace Lambda.Types {
      * If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.
      */
     VpcConfig?: VpcConfig;
+    /**
+     * The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic. 
+     */
+    DeadLetterConfig?: DeadLetterConfig;
     Environment?: Environment;
     /**
      * The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If not provided, AWS Lambda will use a default service key.
@@ -359,6 +403,12 @@ declare namespace Lambda.Types {
     KMSKeyArn?: KMSKeyArn;
   }
   export type _Date = Date;
+  export interface DeadLetterConfig {
+    /**
+     * The ARN (Amazon Resource Value) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).
+     */
+    TargetArn?: ResourceArn;
+  }
   export interface DeleteAliasRequest {
     /**
      * The Lambda function name for which the alias is created. Deleting an alias does not delete the function version to which it is pointing.
@@ -401,7 +451,7 @@ declare namespace Lambda.Types {
     /**
      * The message returned by the environment error object.
      */
-    Message?: String;
+    Message?: SensitiveString;
   }
   export interface EnvironmentResponse {
     /**
@@ -448,7 +498,7 @@ declare namespace Lambda.Types {
     StateTransitionReason?: String;
   }
   export type EventSourceMappingsList = EventSourceMappingConfiguration[];
-  export type EventSourcePosition = "TRIM_HORIZON"|"LATEST"|string;
+  export type EventSourcePosition = "TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP"|string;
   export type EventSourceToken = string;
   export type FunctionArn = string;
   export interface FunctionCode {
@@ -533,6 +583,10 @@ declare namespace Lambda.Types {
      */
     VpcConfig?: VpcConfigResponse;
     /**
+     * The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
+     */
+    DeadLetterConfig?: DeadLetterConfig;
+    /**
      * The parent object that contains your environment's configuration settings.
      */
     Environment?: EnvironmentResponse;
@@ -543,6 +597,12 @@ declare namespace Lambda.Types {
   }
   export type FunctionList = FunctionConfiguration[];
   export type FunctionName = string;
+  export interface GetAccountSettingsRequest {
+  }
+  export interface GetAccountSettingsResponse {
+    AccountLimit?: AccountLimit;
+    AccountUsage?: AccountUsage;
+  }
   export interface GetAliasRequest {
     /**
      * Function name for which the alias is created. An alias is a subresource that exists only in the context of an existing Lambda function so you must specify the function name.
@@ -798,13 +858,15 @@ declare namespace Lambda.Types {
      */
     Qualifier?: Qualifier;
   }
+  export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"java8"|"python2.7"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"java8"|"python2.7"|"dotnetcore1.0"|"nodejs4.3-edge"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
+  export type SensitiveString = string;
   export type SourceOwner = string;
   export type StatementId = string;
   export type String = string;
@@ -906,13 +968,17 @@ declare namespace Lambda.Types {
      */
     Environment?: Environment;
     /**
+     * The runtime environment for the Lambda function. To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use earlier runtime (v0.10.42), set the value to "nodejs".  You can no longer downgrade to the v0.10.42 runtime version. This version will no longer be supported as of early 2017. 
+     */
+    Runtime?: Runtime;
+    /**
+     * The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
+     */
+    DeadLetterConfig?: DeadLetterConfig;
+    /**
      * The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If you elect to use the AWS Lambda default service key, pass in an empty string ("") for this parameter.
      */
     KMSKeyArn?: KMSKeyArn;
-    /**
-     * The runtime environment for the Lambda function. To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use earlier runtime (v0.10.42), set the value to "nodejs".
-     */
-    Runtime?: Runtime;
   }
   export type Version = string;
   export interface VpcConfig {

@@ -5,7 +5,8 @@
     "endpointPrefix":"lambda",
     "protocol":"rest-json",
     "serviceFullName":"AWS Lambda",
-    "signatureVersion":"v4"
+    "signatureVersion":"v4",
+    "uid":"lambda-2015-03-31"
   },
   "operations":{
     "AddPermission":{
@@ -130,6 +131,21 @@
         {"shape":"ResourceConflictException"}
       ],
       "documentation":"<p>Deletes the specified Lambda function code and configuration.</p> <p>If you are using the versioning feature and you don't specify a function version in your <code>DeleteFunction</code> request, AWS Lambda will delete the function, including all its versions, and any aliases pointing to the function versions. To delete a specific function version, you must provide the function version via the <code>Qualifier</code> parameter. For information about function versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>When you delete a function the associated resource policy is also deleted. You will need to delete the event source mappings explicitly.</p> <p>This operation requires permission for the <code>lambda:DeleteFunction</code> action.</p>"
+    },
+    "GetAccountSettings":{
+      "name":"GetAccountSettings",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2016-08-19/account-settings/",
+        "responseCode":200
+      },
+      "input":{"shape":"GetAccountSettingsRequest"},
+      "output":{"shape":"GetAccountSettingsResponse"},
+      "errors":[
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Returns a customer's account settings.</p> <p>You can use this operation to retrieve Lambda limit information such as code size and concurrency limits. For more information on limits, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">AWS Lambda Limits</a>. You can also retrieve resource usage statistics such as code storage usage and function count.</p>"
     },
     "GetAlias":{
       "name":"GetAlias",
@@ -436,6 +452,42 @@
     }
   },
   "shapes":{
+    "AccountLimit":{
+      "type":"structure",
+      "members":{
+        "TotalCodeSize":{
+          "shape":"Long",
+          "documentation":"<p>Maximum size, in megabytes, of a code package you can upload per region. The default size is 75 GB. </p>"
+        },
+        "CodeSizeUnzipped":{
+          "shape":"Long",
+          "documentation":"<p>Size, in bytes, of code/dependencies that you can zip into a deployment package (uncompressed zip/jar size) for uploading. The default limit is 250 MB.</p>"
+        },
+        "CodeSizeZipped":{
+          "shape":"Long",
+          "documentation":"<p>Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using AWS S3 for uploading larger files. Default limit is 50 MB.</p>"
+        },
+        "ConcurrentExecutions":{
+          "shape":"Integer",
+          "documentation":"<p>Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html\">Lambda Function Concurrent Executions</a>. The default limit is 100.</p>"
+        }
+      },
+      "documentation":"<p>Provides limits of code size and concurrency associated with the current account and region.</p>"
+    },
+    "AccountUsage":{
+      "type":"structure",
+      "members":{
+        "TotalCodeSize":{
+          "shape":"Long",
+          "documentation":"<p>Total size, in megabytes, of the account's deployment packages per region.</p>"
+        },
+        "FunctionCount":{
+          "shape":"Long",
+          "documentation":"<p>The number of your account's existing functions per region.</p>"
+        }
+      },
+      "documentation":"<p>Provides code size usage and function count associated with the current account and region.</p>"
+    },
     "Action":{
       "type":"string",
       "pattern":"(lambda:[*]|lambda:[a-zA-Z]+|[*])"
@@ -539,7 +591,10 @@
       "max":10000,
       "min":1
     },
-    "Blob":{"type":"blob"},
+    "Blob":{
+      "type":"blob",
+      "sensitive":true
+    },
     "BlobStream":{
       "type":"blob",
       "streaming":true
@@ -612,7 +667,11 @@
         },
         "StartingPosition":{
           "shape":"EventSourcePosition",
-          "documentation":"<p>The position in the stream where AWS Lambda should start reading. For more information, go to <a href=\"http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType\">ShardIteratorType</a> in the <i>Amazon Kinesis API Reference</i>. </p>"
+          "documentation":"<p>The position in the stream where AWS Lambda should start reading. Valid only for Kinesis streams. For more information, go to <a href=\"http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType\">ShardIteratorType</a> in the <i>Amazon Kinesis API Reference</i>. </p>"
+        },
+        "StartingPositionTimestamp":{
+          "shape":"Date",
+          "documentation":"<p>The timestamp of the data record from which to start reading. Used with <a href=\"http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType\">shard iterator type</a> AT_TIMESTAMP. If a record with this exact timestamp does not exist, the iterator returned is for the next (later) record. If the timestamp is older than the current trim horizon, the iterator returned is for the oldest untrimmed data record (TRIM_HORIZON). Valid only for Kinesis streams. </p>"
         }
       },
       "documentation":"<p/>"
@@ -633,7 +692,7 @@
         },
         "Runtime":{
           "shape":"Runtime",
-          "documentation":"<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To use earlier runtime (v0.10.42), set the value to \"nodejs\".</p>"
+          "documentation":"<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To use earlier runtime (v0.10.42), set the value to \"nodejs\".</p> <note> <p>You can no longer create functions using the v0.10.42 runtime version as of November, 2016. Existing functions will be supported until early 2017 but we recommend you migrate them to nodejs4.3 runtime version as soon as possible.</p> </note>"
         },
         "Role":{
           "shape":"RoleArn",
@@ -667,6 +726,10 @@
           "shape":"VpcConfig",
           "documentation":"<p>If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.</p>"
         },
+        "DeadLetterConfig":{
+          "shape":"DeadLetterConfig",
+          "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic. </p>"
+        },
         "Environment":{"shape":"Environment"},
         "KMSKeyArn":{
           "shape":"KMSKeyArn",
@@ -676,6 +739,16 @@
       "documentation":"<p/>"
     },
     "Date":{"type":"timestamp"},
+    "DeadLetterConfig":{
+      "type":"structure",
+      "members":{
+        "TargetArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The ARN (Amazon Resource Value) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).</p>"
+        }
+      },
+      "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.</p>"
+    },
     "DeleteAliasRequest":{
       "type":"structure",
       "required":[
@@ -793,7 +866,7 @@
           "documentation":"<p>The error code returned by the environment error object.</p>"
         },
         "Message":{
-          "shape":"String",
+          "shape":"SensitiveString",
           "documentation":"<p>The message returned by the environment error object.</p>"
         }
       },
@@ -812,16 +885,19 @@
     },
     "EnvironmentVariableName":{
       "type":"string",
-      "pattern":"[a-zA-Z]([a-zA-Z0-9_])+"
+      "pattern":"[a-zA-Z]([a-zA-Z0-9_])+",
+      "sensitive":true
     },
     "EnvironmentVariableValue":{
       "type":"string",
-      "pattern":"[^,]*"
+      "pattern":"[^,]*",
+      "sensitive":true
     },
     "EnvironmentVariables":{
       "type":"map",
       "key":{"shape":"EnvironmentVariableName"},
-      "value":{"shape":"EnvironmentVariableValue"}
+      "value":{"shape":"EnvironmentVariableValue"},
+      "sensitive":true
     },
     "EventSourceMappingConfiguration":{
       "type":"structure",
@@ -869,7 +945,8 @@
       "type":"string",
       "enum":[
         "TRIM_HORIZON",
-        "LATEST"
+        "LATEST",
+        "AT_TIMESTAMP"
       ]
     },
     "EventSourceToken":{
@@ -973,6 +1050,10 @@
           "shape":"VpcConfigResponse",
           "documentation":"<p>VPC configuration associated with your Lambda function.</p>"
         },
+        "DeadLetterConfig":{
+          "shape":"DeadLetterConfig",
+          "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.</p>"
+        },
         "Environment":{
           "shape":"EnvironmentResponse",
           "documentation":"<p>The parent object that contains your environment's configuration settings.</p>"
@@ -993,6 +1074,18 @@
       "max":140,
       "min":1,
       "pattern":"(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"
+    },
+    "GetAccountSettingsRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "GetAccountSettingsResponse":{
+      "type":"structure",
+      "members":{
+        "AccountLimit":{"shape":"AccountLimit"},
+        "AccountUsage":{"shape":"AccountUsage"}
+      }
     },
     "GetAliasRequest":{
       "type":"structure",
@@ -1290,7 +1383,7 @@
         "Type":{"shape":"String"},
         "Message":{"shape":"String"}
       },
-      "documentation":"<p>Lambda was unable to decrypt the environment variables becauses KMS access was denied. Please check the Lambda function's KMS permissions.</p>",
+      "documentation":"<p>Lambda was unable to decrypt the environment variables because KMS access was denied. Please check the Lambda function's KMS permissions.</p>",
       "error":{"httpStatusCode":502},
       "exception":true
     },
@@ -1583,6 +1676,10 @@
       "error":{"httpStatusCode":413},
       "exception":true
     },
+    "ResourceArn":{
+      "type":"string",
+      "pattern":"(arn:aws:[a-z0-9-.]+:.*)|()"
+    },
     "ResourceConflictException":{
       "type":"structure",
       "members":{
@@ -1619,7 +1716,9 @@
         "nodejs",
         "nodejs4.3",
         "java8",
-        "python2.7"
+        "python2.7",
+        "dotnetcore1.0",
+        "nodejs4.3-edge"
       ]
     },
     "S3Bucket":{
@@ -1643,6 +1742,10 @@
       "type":"list",
       "member":{"shape":"SecurityGroupId"},
       "max":5
+    },
+    "SensitiveString":{
+      "type":"string",
+      "sensitive":true
     },
     "ServiceException":{
       "type":"structure",
@@ -1843,13 +1946,17 @@
           "shape":"Environment",
           "documentation":"<p>The parent object that contains your environment's configuration settings.</p>"
         },
+        "Runtime":{
+          "shape":"Runtime",
+          "documentation":"<p>The runtime environment for the Lambda function.</p> <p>To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To use earlier runtime (v0.10.42), set the value to \"nodejs\".</p> <note> <p>You can no longer downgrade to the v0.10.42 runtime version. This version will no longer be supported as of early 2017.</p> </note>"
+        },
+        "DeadLetterConfig":{
+          "shape":"DeadLetterConfig",
+          "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.</p>"
+        },
         "KMSKeyArn":{
           "shape":"KMSKeyArn",
           "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If you elect to use the AWS Lambda default service key, pass in an empty string (\"\") for this parameter.</p>"
-        },
-        "Runtime":{
-          "shape":"Runtime",
-          "documentation":"<p>The runtime environment for the Lambda function.</p> <p>To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To use earlier runtime (v0.10.42), set the value to \"nodejs\".</p>"
         }
       },
       "documentation":"<p/>"
