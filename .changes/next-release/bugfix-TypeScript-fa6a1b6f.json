@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "TypeScript",
+  "description": "Removes remaining `reference` comments from definitions."
+}
