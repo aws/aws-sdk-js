@@ -18,6 +18,14 @@ export class ManagedUpload {
      */
     send(callback?: (err: AWSError, data: SendData) => void): void;
     /**
+     * Adds a listener that is triggered when theuploader has uploaded more data.
+     * 
+     * @param {string} event - httpUploadProgress: triggered when the uploader has uploaded more data.
+     * @param {function} listener - Callback to run when the uploader has uploaded more data.
+     */
+    on(event: "httpUploadProgress", listener: (progress: Progress) => void): any;
+
+    /**
      * Default value: 10000
      */
     static maxTotalParts: number
@@ -72,4 +80,8 @@ export interface ManagedUploadOptions {
      * This object might have bound parameters used by the uploader.
      */
     service?: S3
+}
+export interface Progress {
+    loaded: number;
+    total: number;
 }
