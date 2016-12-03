@@ -129,3 +129,35 @@ const upload = s3.upload({
 // test managed upload promise support
 upload.promise()
     .then((data) => data.Location);
+
+const uploader = new S3.ManagedUpload({
+    queueSize: 4
+});
+uploader.on('httpUploadProgress', function(progress) {
+    console.log(progress.loaded);
+    console.log(progress.total);
+});
+uploader.send(function(err, data) {
+    if (err) {
+        console.log(err.code);
+    } else if (data) {
+        console.log(data.Bucket);
+    }
+});
+uploader.abort();
+uploader.promise().then(function(data) {
+    console.log(data.Bucket);
+});
+
+var uploader2: S3.ManagedUpload = new S3.ManagedUpload(<S3.ManagedUpload.ManagedUploadOptions>{
+    service: s3,
+    params: {
+        Bucket: 'bucket',
+        Key: 'key',
+        Body: 'test'
+    }
+});
+
+uploader2.send((err, data) => {
+
+});

@@ -18,6 +18,13 @@ export class ManagedUpload {
      */
     send(callback?: (err: AWSError, data: ManagedUpload.SendData) => void): void;
     /**
+     * Adds a listener that is triggered when theuploader has uploaded more data.
+     * 
+     * @param {string} event - httpUploadProgress: triggered when the uploader has uploaded more data.
+     * @param {function} listener - Callback to run when the uploader has uploaded more data.
+     */
+    on(event: "httpUploadProgress", listener: (progress: ManagedUpload.Progress) => void): any;
+    /**
      * Default value: 10000
      */
     static maxTotalParts: number
@@ -29,6 +36,10 @@ export class ManagedUpload {
     static minPartSize: number
 }
 export namespace ManagedUpload {
+    export interface Progress {
+        loaded: number;
+        total: number;
+    }
     export interface SendData {
         /**
          * URL of the uploaded object.

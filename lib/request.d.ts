@@ -173,7 +173,7 @@ export class Request<D, E> {
 
 }
 
-interface Progress {
+export interface Progress {
     loaded: number;
     total: number;
 }

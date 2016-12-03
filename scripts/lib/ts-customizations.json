@@ -21,6 +21,17 @@
       ]
     }
   ],
+  "polly": [
+    {
+      "path": "lib/polly/presigner",
+      "imports": [
+        {
+          "name": "Presigner",
+          "alias": "presigner"
+        }
+      ]
+    }
+  ],
   "s3": [
     {
       "path": "lib/s3/managed_upload",
