@@ -300,7 +300,7 @@ declare class CodeDeploy extends Service {
    */
   waitFor(state: "deploymentSuccessful", callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentOutput) => void): Request<CodeDeploy.Types.GetDeploymentOutput, AWSError>;
 }
-declare namespace CodeDeploy.Types {
+declare namespace CodeDeploy {
   export interface AddTagsToOnPremisesInstancesInput {
     /**
      * The tag key-value pairs to add to the on-premises instances. Keys and values are both required. Keys cannot be null or empty strings. Value-only tags are not allowed.
@@ -1517,5 +1517,9 @@ declare namespace CodeDeploy.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CodeDeploy client.
+   */
+  export import Types = CodeDeploy;
 }
 export = CodeDeploy;

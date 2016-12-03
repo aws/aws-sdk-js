@@ -348,7 +348,7 @@ declare class ElastiCache extends Service {
    */
   waitFor(state: "replicationGroupDeleted", callback?: (err: AWSError, data: ElastiCache.Types.ReplicationGroupMessage) => void): Request<ElastiCache.Types.ReplicationGroupMessage, AWSError>;
 }
-declare namespace ElastiCache.Types {
+declare namespace ElastiCache {
   export type AZMode = "single-az"|"cross-az"|string;
   export interface AddTagsToResourceMessage {
     /**
@@ -2188,5 +2188,9 @@ declare namespace ElastiCache.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ElastiCache client.
+   */
+  export import Types = ElastiCache;
 }
 export = ElastiCache;

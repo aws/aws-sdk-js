@@ -220,7 +220,7 @@ declare class EMR extends Service {
    */
   waitFor(state: "stepComplete", callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
 }
-declare namespace EMR.Types {
+declare namespace EMR {
   export type ActionOnFailure = "TERMINATE_JOB_FLOW"|"TERMINATE_CLUSTER"|"CANCEL_AND_WAIT"|"CONTINUE"|string;
   export interface AddInstanceGroupsInput {
     /**
@@ -1985,5 +1985,9 @@ declare namespace EMR.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the EMR client.
+   */
+  export import Types = EMR;
 }
 export = EMR;

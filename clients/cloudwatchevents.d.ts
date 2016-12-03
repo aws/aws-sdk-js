@@ -108,7 +108,7 @@ declare class CloudWatchEvents extends Service {
    */
   testEventPattern(callback?: (err: AWSError, data: CloudWatchEvents.Types.TestEventPatternResponse) => void): Request<CloudWatchEvents.Types.TestEventPatternResponse, AWSError>;
 }
-declare namespace CloudWatchEvents.Types {
+declare namespace CloudWatchEvents {
   export type Boolean = boolean;
   export interface DeleteRuleRequest {
     /**
@@ -492,5 +492,9 @@ declare namespace CloudWatchEvents.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CloudWatchEvents client.
+   */
+  export import Types = CloudWatchEvents;
 }
 export = CloudWatchEvents;

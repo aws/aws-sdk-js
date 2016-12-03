@@ -268,7 +268,7 @@ declare class DMS extends Service {
    */
   testConnection(callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
 }
-declare namespace DMS.Types {
+declare namespace DMS {
   export interface AccountQuota {
     /**
      * The name of the AWS DMS quota for this AWS account.
@@ -1551,5 +1551,9 @@ declare namespace DMS.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the DMS client.
+   */
+  export import Types = DMS;
 }
 export = DMS;

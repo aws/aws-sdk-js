@@ -220,7 +220,7 @@ declare class CodePipeline extends Service {
    */
   updatePipeline(callback?: (err: AWSError, data: CodePipeline.Types.UpdatePipelineOutput) => void): Request<CodePipeline.Types.UpdatePipelineOutput, AWSError>;
 }
-declare namespace CodePipeline.Types {
+declare namespace CodePipeline {
   export interface AWSSessionCredentials {
     /**
      * The access key for the session.
@@ -1363,5 +1363,9 @@ declare namespace CodePipeline.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CodePipeline client.
+   */
+  export import Types = CodePipeline;
 }
 export = CodePipeline;

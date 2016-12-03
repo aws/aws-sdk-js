@@ -36,7 +36,7 @@ declare class MarketplaceMetering extends Service {
    */
   resolveCustomer(callback?: (err: AWSError, data: MarketplaceMetering.Types.ResolveCustomerResult) => void): Request<MarketplaceMetering.Types.ResolveCustomerResult, AWSError>;
 }
-declare namespace MarketplaceMetering.Types {
+declare namespace MarketplaceMetering {
   export interface BatchMeterUsageRequest {
     /**
      * The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords at a time.
@@ -153,5 +153,9 @@ declare namespace MarketplaceMetering.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the MarketplaceMetering client.
+   */
+  export import Types = MarketplaceMetering;
 }
 export = MarketplaceMetering;

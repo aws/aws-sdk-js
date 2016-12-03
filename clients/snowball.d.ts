@@ -148,7 +148,7 @@ declare class Snowball extends Service {
    */
   updateJob(callback?: (err: AWSError, data: Snowball.Types.UpdateJobResult) => void): Request<Snowball.Types.UpdateJobResult, AWSError>;
 }
-declare namespace Snowball.Types {
+declare namespace Snowball {
   export interface Address {
     /**
      * The unique ID for an address.
@@ -873,5 +873,9 @@ declare namespace Snowball.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Snowball client.
+   */
+  export import Types = Snowball;
 }
 export = Snowball;

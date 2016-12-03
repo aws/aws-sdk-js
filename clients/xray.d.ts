@@ -60,7 +60,7 @@ declare class XRay extends Service {
    */
   putTraceSegments(callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
 }
-declare namespace XRay.Types {
+declare namespace XRay {
   export interface Alias {
     /**
      * The canonical name of the alias.
@@ -630,5 +630,9 @@ declare namespace XRay.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the XRay client.
+   */
+  export import Types = XRay;
 }
 export = XRay;

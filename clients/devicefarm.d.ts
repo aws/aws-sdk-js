@@ -356,7 +356,7 @@ declare class DeviceFarm extends Service {
    */
   updateProject(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateProjectResult) => void): Request<DeviceFarm.Types.UpdateProjectResult, AWSError>;
 }
-declare namespace DeviceFarm.Types {
+declare namespace DeviceFarm {
   export type AWSAccountNumber = string;
   export interface AccountSettings {
     /**
@@ -1845,5 +1845,9 @@ declare namespace DeviceFarm.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the DeviceFarm client.
+   */
+  export import Types = DeviceFarm;
 }
 export = DeviceFarm;

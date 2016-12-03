@@ -172,7 +172,7 @@ declare class Kinesis extends Service {
    */
   waitFor(state: "streamExists", callback?: (err: AWSError, data: Kinesis.Types.DescribeStreamOutput) => void): Request<Kinesis.Types.DescribeStreamOutput, AWSError>;
 }
-declare namespace Kinesis.Types {
+declare namespace Kinesis {
   export interface AddTagsToStreamInput {
     /**
      * The name of the stream.
@@ -687,5 +687,9 @@ declare namespace Kinesis.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Kinesis client.
+   */
+  export import Types = Kinesis;
 }
 export = Kinesis;

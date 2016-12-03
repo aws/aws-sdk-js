@@ -100,7 +100,7 @@ declare class SMS extends Service {
    */
   updateReplicationJob(callback?: (err: AWSError, data: SMS.Types.UpdateReplicationJobResponse) => void): Request<SMS.Types.UpdateReplicationJobResponse, AWSError>;
 }
-declare namespace SMS.Types {
+declare namespace SMS {
   export type AmiId = string;
   export interface Connector {
     connectorId?: ConnectorId;
@@ -288,5 +288,9 @@ declare namespace SMS.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the SMS client.
+   */
+  export import Types = SMS;
 }
 export = SMS;

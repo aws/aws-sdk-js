@@ -148,7 +148,7 @@ declare class ECR extends Service {
    */
   uploadLayerPart(callback?: (err: AWSError, data: ECR.Types.UploadLayerPartResponse) => void): Request<ECR.Types.UploadLayerPartResponse, AWSError>;
 }
-declare namespace ECR.Types {
+declare namespace ECR {
   export type Arn = string;
   export interface AuthorizationData {
     /**
@@ -783,5 +783,9 @@ declare namespace ECR.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ECR client.
+   */
+  export import Types = ECR;
 }
 export = ECR;

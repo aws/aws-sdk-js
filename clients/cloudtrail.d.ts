@@ -124,7 +124,7 @@ declare class CloudTrail extends Service {
    */
   updateTrail(callback?: (err: AWSError, data: CloudTrail.Types.UpdateTrailResponse) => void): Request<CloudTrail.Types.UpdateTrailResponse, AWSError>;
 }
-declare namespace CloudTrail.Types {
+declare namespace CloudTrail {
   export interface AddTagsRequest {
     /**
      * Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
@@ -756,5 +756,9 @@ declare namespace CloudTrail.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CloudTrail client.
+   */
+  export import Types = CloudTrail;
 }
 export = CloudTrail;

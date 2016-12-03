@@ -100,7 +100,7 @@ declare class EFS extends Service {
    */
   modifyMountTargetSecurityGroups(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace EFS.Types {
+declare namespace EFS {
   export type AwsAccountId = string;
   export interface CreateFileSystemRequest {
     /**
@@ -398,5 +398,9 @@ declare namespace EFS.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the EFS client.
+   */
+  export import Types = EFS;
 }
 export = EFS;

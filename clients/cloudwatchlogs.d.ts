@@ -212,7 +212,7 @@ declare class CloudWatchLogs extends Service {
    */
   testMetricFilter(callback?: (err: AWSError, data: CloudWatchLogs.Types.TestMetricFilterResponse) => void): Request<CloudWatchLogs.Types.TestMetricFilterResponse, AWSError>;
 }
-declare namespace CloudWatchLogs.Types {
+declare namespace CloudWatchLogs {
   export type AccessPolicy = string;
   export type Arn = string;
   export interface CancelExportTaskRequest {
@@ -1037,5 +1037,9 @@ declare namespace CloudWatchLogs.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CloudWatchLogs client.
+   */
+  export import Types = CloudWatchLogs;
 }
 export = CloudWatchLogs;

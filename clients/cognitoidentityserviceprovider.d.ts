@@ -460,7 +460,7 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   verifyUserAttribute(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifyUserAttributeResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifyUserAttributeResponse, AWSError>;
 }
-declare namespace CognitoIdentityServiceProvider.Types {
+declare namespace CognitoIdentityServiceProvider {
   export interface AddCustomAttributesRequest {
     /**
      * The user pool ID for the user pool where you want to add custom attributes.
@@ -2283,5 +2283,9 @@ declare namespace CognitoIdentityServiceProvider.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CognitoIdentityServiceProvider client.
+   */
+  export import Types = CognitoIdentityServiceProvider;
 }
 export = CognitoIdentityServiceProvider;

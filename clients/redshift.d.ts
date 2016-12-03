@@ -540,7 +540,7 @@ declare class Redshift extends Service {
    */
   waitFor(state: "snapshotAvailable", callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
 }
-declare namespace Redshift.Types {
+declare namespace Redshift {
   export interface AccountWithRestoreAccess {
     /**
      * The identifier of an AWS customer account authorized to restore a snapshot.
@@ -3109,5 +3109,9 @@ declare namespace Redshift.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Redshift client.
+   */
+  export import Types = Redshift;
 }
 export = Redshift;

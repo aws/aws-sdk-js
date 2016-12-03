@@ -196,7 +196,7 @@ declare class Route53Domains extends Service {
    */
   viewBilling(callback?: (err: AWSError, data: Route53Domains.Types.ViewBillingResponse) => void): Request<Route53Domains.Types.ViewBillingResponse, AWSError>;
 }
-declare namespace Route53Domains.Types {
+declare namespace Route53Domains {
   export type AddressLine = string;
   export interface BillingRecord {
     /**
@@ -930,5 +930,9 @@ declare namespace Route53Domains.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Route53Domains client.
+   */
+  export import Types = Route53Domains;
 }
 export = Route53Domains;

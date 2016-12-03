@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "TypeScript",
+  "description": "Exposes typings for classes that live on service namespaces (i.e. DynamoDB.DocumentClient). Also exposes interfaces off of service namespaces to allow easier migration from some 3rd party typings. Interfaces will continue to be exposed via Service.Types as well."
+}

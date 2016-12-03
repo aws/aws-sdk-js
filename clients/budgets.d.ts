@@ -116,7 +116,7 @@ declare class Budgets extends Service {
    */
   updateSubscriber(callback?: (err: AWSError, data: Budgets.Types.UpdateSubscriberResponse) => void): Request<Budgets.Types.UpdateSubscriberResponse, AWSError>;
 }
-declare namespace Budgets.Types {
+declare namespace Budgets {
   export type AccountId = string;
   export interface Budget {
     BudgetName: BudgetName;
@@ -292,5 +292,9 @@ declare namespace Budgets.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Budgets client.
+   */
+  export import Types = Budgets;
 }
 export = Budgets;

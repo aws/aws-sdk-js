@@ -148,7 +148,7 @@ declare class StepFunctions extends Service {
    */
   stopExecution(callback?: (err: AWSError, data: StepFunctions.Types.StopExecutionOutput) => void): Request<StepFunctions.Types.StopExecutionOutput, AWSError>;
 }
-declare namespace StepFunctions.Types {
+declare namespace StepFunctions {
   export interface ActivityFailedEventDetails {
     /**
      * The error code of the failure.
@@ -800,5 +800,9 @@ declare namespace StepFunctions.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the StepFunctions client.
+   */
+  export import Types = StepFunctions;
 }
 export = StepFunctions;

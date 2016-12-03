@@ -60,7 +60,7 @@ declare class Health extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: Health.Types.DescribeEventsResponse) => void): Request<Health.Types.DescribeEventsResponse, AWSError>;
 }
-declare namespace Health.Types {
+declare namespace Health {
   export interface AffectedEntity {
     /**
      * The unique identifier for the entity. Format: arn:aws:health:entity-region:aws-account:entity/entity-id . Example: arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K 
@@ -508,5 +508,9 @@ declare namespace Health.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Health client.
+   */
+  export import Types = Health;
 }
 export = Health;

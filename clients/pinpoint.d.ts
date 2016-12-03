@@ -252,7 +252,7 @@ declare class Pinpoint extends Service {
    */
   updateSegment(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
 }
-declare namespace Pinpoint.Types {
+declare namespace Pinpoint {
   export interface APNSChannelRequest {
     /**
      * The distribution certificate from Apple.
@@ -1582,5 +1582,9 @@ EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Pinpoint client.
+   */
+  export import Types = Pinpoint;
 }
 export = Pinpoint;

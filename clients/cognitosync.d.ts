@@ -148,7 +148,7 @@ declare class CognitoSync extends Service {
    */
   updateRecords(callback?: (err: AWSError, data: CognitoSync.Types.UpdateRecordsResponse) => void): Request<CognitoSync.Types.UpdateRecordsResponse, AWSError>;
 }
-declare namespace CognitoSync.Types {
+declare namespace CognitoSync {
   export type ApplicationArn = string;
   export type ApplicationArnList = ApplicationArn[];
   export type AssumeRoleArn = string;
@@ -740,5 +740,9 @@ declare namespace CognitoSync.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CognitoSync client.
+   */
+  export import Types = CognitoSync;
 }
 export = CognitoSync;

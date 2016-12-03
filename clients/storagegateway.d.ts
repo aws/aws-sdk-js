@@ -460,7 +460,7 @@ declare class StorageGateway extends Service {
    */
   updateVTLDeviceType(callback?: (err: AWSError, data: StorageGateway.Types.UpdateVTLDeviceTypeOutput) => void): Request<StorageGateway.Types.UpdateVTLDeviceTypeOutput, AWSError>;
 }
-declare namespace StorageGateway.Types {
+declare namespace StorageGateway {
   export interface ActivateGatewayInput {
     /**
      * Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter activationKey. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the ActivateGateway API call determine the actual configuration of your gateway.
@@ -1665,5 +1665,9 @@ declare namespace StorageGateway.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the StorageGateway client.
+   */
+  export import Types = StorageGateway;
 }
 export = StorageGateway;

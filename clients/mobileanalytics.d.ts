@@ -20,7 +20,7 @@ declare class MobileAnalytics extends Service {
    */
   putEvents(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace MobileAnalytics.Types {
+declare namespace MobileAnalytics {
   export type Double = number;
   export interface Event {
     /**
@@ -100,5 +100,9 @@ declare namespace MobileAnalytics.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the MobileAnalytics client.
+   */
+  export import Types = MobileAnalytics;
 }
 export = MobileAnalytics;

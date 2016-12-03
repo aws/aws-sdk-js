@@ -616,7 +616,7 @@ declare class OpsWorks extends Service {
    */
   waitFor(state: "instanceTerminated", callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
 }
-declare namespace OpsWorks.Types {
+declare namespace OpsWorks {
   export interface AgentVersion {
     /**
      * The agent version.
@@ -3356,5 +3356,9 @@ declare namespace OpsWorks.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the OpsWorks client.
+   */
+  export import Types = OpsWorks;
 }
 export = OpsWorks;

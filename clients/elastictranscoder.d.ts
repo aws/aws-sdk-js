@@ -156,7 +156,7 @@ declare class ElasticTranscoder extends Service {
    */
   waitFor(state: "jobComplete", callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadJobResponse) => void): Request<ElasticTranscoder.Types.ReadJobResponse, AWSError>;
 }
-declare namespace ElasticTranscoder.Types {
+declare namespace ElasticTranscoder {
   export type AccessControl = string;
   export type AccessControls = AccessControl[];
   export interface Artwork {
@@ -1477,5 +1477,9 @@ declare namespace ElasticTranscoder.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ElasticTranscoder client.
+   */
+  export import Types = ElasticTranscoder;
 }
 export = ElasticTranscoder;

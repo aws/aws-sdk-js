@@ -172,7 +172,7 @@ declare class AppStream extends Service {
    */
   waitFor(state: "fleetStopped", callback?: (err: AWSError, data: AppStream.Types.DescribeFleetsResult) => void): Request<AppStream.Types.DescribeFleetsResult, AWSError>;
 }
-declare namespace AppStream.Types {
+declare namespace AppStream {
   export interface Application {
     /**
      * The unique identifier for the application.
@@ -791,5 +791,9 @@ declare namespace AppStream.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the AppStream client.
+   */
+  export import Types = AppStream;
 }
 export = AppStream;

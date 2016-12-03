@@ -124,7 +124,7 @@ declare class WorkSpaces extends Service {
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
 }
-declare namespace WorkSpaces.Types {
+declare namespace WorkSpaces {
   export type ARN = string;
   export type Alias = string;
   export type BooleanObject = boolean;
@@ -708,5 +708,9 @@ declare namespace WorkSpaces.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the WorkSpaces client.
+   */
+  export import Types = WorkSpaces;
 }
 export = WorkSpaces;

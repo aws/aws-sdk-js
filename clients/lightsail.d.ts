@@ -388,7 +388,7 @@ declare class Lightsail extends Service {
    */
   updateDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.UpdateDomainEntryResult) => void): Request<Lightsail.Types.UpdateDomainEntryResult, AWSError>;
 }
-declare namespace Lightsail.Types {
+declare namespace Lightsail {
   export type AccessDirection = "inbound"|"outbound"|string;
   export interface AllocateStaticIpRequest {
     /**
@@ -1805,5 +1805,9 @@ declare namespace Lightsail.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Lightsail client.
+   */
+  export import Types = Lightsail;
 }
 export = Lightsail;

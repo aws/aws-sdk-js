@@ -332,7 +332,7 @@ declare class GameLift extends Service {
    */
   updateRuntimeConfiguration(callback?: (err: AWSError, data: GameLift.Types.UpdateRuntimeConfigurationOutput) => void): Request<GameLift.Types.UpdateRuntimeConfigurationOutput, AWSError>;
 }
-declare namespace GameLift.Types {
+declare namespace GameLift {
   export interface Alias {
     /**
      * Unique identifier for a fleet alias.
@@ -1801,5 +1801,9 @@ declare namespace GameLift.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the GameLift client.
+   */
+  export import Types = GameLift;
 }
 export = GameLift;

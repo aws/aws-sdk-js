@@ -356,7 +356,7 @@ declare class ServiceCatalog extends Service {
    */
   updateProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
 }
-declare namespace ServiceCatalog.Types {
+declare namespace ServiceCatalog {
   export type AcceptLanguage = string;
   export interface AcceptPortfolioShareInput {
     /**
@@ -2080,5 +2080,9 @@ declare namespace ServiceCatalog.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ServiceCatalog client.
+   */
+  export import Types = ServiceCatalog;
 }
 export = ServiceCatalog;

@@ -400,7 +400,7 @@ declare class SES extends Service {
    */
   waitFor(state: "identityExists", callback?: (err: AWSError, data: SES.Types.GetIdentityVerificationAttributesResponse) => void): Request<SES.Types.GetIdentityVerificationAttributesResponse, AWSError>;
 }
-declare namespace SES.Types {
+declare namespace SES {
   export interface AddHeaderAction {
     /**
      * The name of the header to add. Must be between 1 and 50 characters, inclusive, and consist of alphanumeric (a-z, A-Z, 0-9) characters and dashes only.
@@ -1634,5 +1634,9 @@ declare namespace SES.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the SES client.
+   */
+  export import Types = SES;
 }
 export = SES;

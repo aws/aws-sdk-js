@@ -164,7 +164,7 @@ declare class DataPipeline extends Service {
    */
   validatePipelineDefinition(callback?: (err: AWSError, data: DataPipeline.Types.ValidatePipelineDefinitionOutput) => void): Request<DataPipeline.Types.ValidatePipelineDefinitionOutput, AWSError>;
 }
-declare namespace DataPipeline.Types {
+declare namespace DataPipeline {
   export interface ActivatePipelineInput {
     /**
      * The ID of the pipeline.
@@ -762,5 +762,9 @@ declare namespace DataPipeline.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the DataPipeline client.
+   */
+  export import Types = DataPipeline;
 }
 export = DataPipeline;
