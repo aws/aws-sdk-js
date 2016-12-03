@@ -412,7 +412,7 @@ declare class Route53 extends Service {
    */
   waitFor(state: "resourceRecordSetsChanged", callback?: (err: AWSError, data: Route53.Types.GetChangeResponse) => void): Request<Route53.Types.GetChangeResponse, AWSError>;
 }
-declare namespace Route53.Types {
+declare namespace Route53 {
   export interface AlarmIdentifier {
     /**
      * A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy. For the current list of CloudWatch regions, see Amazon CloudWatch in AWS Regions and Endpoints in the Amazon Web Services General Reference.
@@ -2151,5 +2151,9 @@ declare namespace Route53.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Route53 client.
+   */
+  export import Types = Route53;
 }
 export = Route53;

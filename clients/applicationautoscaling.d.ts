@@ -68,7 +68,7 @@ declare class ApplicationAutoScaling extends Service {
    */
   registerScalableTarget(callback?: (err: AWSError, data: ApplicationAutoScaling.Types.RegisterScalableTargetResponse) => void): Request<ApplicationAutoScaling.Types.RegisterScalableTargetResponse, AWSError>;
 }
-declare namespace ApplicationAutoScaling.Types {
+declare namespace ApplicationAutoScaling {
   export type AdjustmentType = "ChangeInCapacity"|"PercentChangeInCapacity"|"ExactCapacity"|string;
   export interface Alarm {
     /**
@@ -460,5 +460,9 @@ declare namespace ApplicationAutoScaling.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ApplicationAutoScaling client.
+   */
+  export import Types = ApplicationAutoScaling;
 }
 export = ApplicationAutoScaling;

@@ -156,7 +156,7 @@ declare class CognitoIdentity extends Service {
    */
   updateIdentityPool(callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
 }
-declare namespace CognitoIdentity.Types {
+declare namespace CognitoIdentity {
   export type ARNString = string;
   export type AccessKeyString = string;
   export type AccountId = string;
@@ -627,5 +627,9 @@ declare namespace CognitoIdentity.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CognitoIdentity client.
+   */
+  export import Types = CognitoIdentity;
 }
 export = CognitoIdentity;

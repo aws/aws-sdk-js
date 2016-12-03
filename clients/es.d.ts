@@ -88,7 +88,7 @@ declare class ES extends Service {
    */
   updateElasticsearchDomainConfig(callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
 }
-declare namespace ES.Types {
+declare namespace ES {
   export type ARN = string;
   export interface AccessPoliciesStatus {
     /**
@@ -502,5 +502,9 @@ declare namespace ES.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ES client.
+   */
+  export import Types = ES;
 }
 export = ES;

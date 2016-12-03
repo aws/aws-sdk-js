@@ -172,7 +172,7 @@ declare class CloudHSM extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: CloudHSM.Types.RemoveTagsFromResourceResponse) => void): Request<CloudHSM.Types.RemoveTagsFromResourceResponse, AWSError>;
 }
-declare namespace CloudHSM.Types {
+declare namespace CloudHSM {
   export type AZ = string;
   export type AZList = AZ[];
   export interface AddTagsToResourceRequest {
@@ -688,5 +688,9 @@ declare namespace CloudHSM.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CloudHSM client.
+   */
+  export import Types = CloudHSM;
 }
 export = CloudHSM;

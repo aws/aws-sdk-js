@@ -316,7 +316,7 @@ declare class WAF extends Service {
    */
   updateXssMatchSet(callback?: (err: AWSError, data: WAF.Types.UpdateXssMatchSetResponse) => void): Request<WAF.Types.UpdateXssMatchSetResponse, AWSError>;
 }
-declare namespace WAF.Types {
+declare namespace WAF {
   export type Action = string;
   export interface ActivatedRule {
     /**
@@ -1475,5 +1475,9 @@ declare namespace WAF.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the WAF client.
+   */
+  export import Types = WAF;
 }
 export = WAF;

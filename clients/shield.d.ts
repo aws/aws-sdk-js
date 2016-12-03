@@ -84,7 +84,7 @@ declare class Shield extends Service {
    */
   listProtections(callback?: (err: AWSError, data: Shield.Types.ListProtectionsResponse) => void): Request<Shield.Types.ListProtectionsResponse, AWSError>;
 }
-declare namespace Shield.Types {
+declare namespace Shield {
   export interface AttackDetail {
     /**
      * The unique identifier (ID) of the attack.
@@ -388,5 +388,9 @@ declare namespace Shield.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Shield client.
+   */
+  export import Types = Shield;
 }
 export = Shield;

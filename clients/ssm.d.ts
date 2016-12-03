@@ -508,7 +508,7 @@ declare class SSM extends Service {
    */
   updateManagedInstanceRole(callback?: (err: AWSError, data: SSM.Types.UpdateManagedInstanceRoleResult) => void): Request<SSM.Types.UpdateManagedInstanceRoleResult, AWSError>;
 }
-declare namespace SSM.Types {
+declare namespace SSM {
   export type AccountId = string;
   export type AccountIdList = AccountId[];
   export interface Activation {
@@ -3679,5 +3679,9 @@ declare namespace SSM.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the SSM client.
+   */
+  export import Types = SSM;
 }
 export = SSM;

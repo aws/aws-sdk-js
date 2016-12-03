@@ -8,7 +8,7 @@ var tsGenerator = new TSGenerator({
 
 tsGenerator.generateAllClientTypings();
 tsGenerator.generateGroupedClients();
-tsGenerator.generateDocumentClientInterfaces();
+tsGenerator.updateDynamoDBDocumentClient();
 tsGenerator.generateConfigurationServicePlaceholders();
 console.log('TypeScript Definitions created.');
 

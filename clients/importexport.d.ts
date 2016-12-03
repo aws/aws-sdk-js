@@ -60,7 +60,7 @@ declare class ImportExport extends Service {
    */
   updateJob(callback?: (err: AWSError, data: ImportExport.Types.UpdateJobOutput) => void): Request<ImportExport.Types.UpdateJobOutput, AWSError>;
 }
-declare namespace ImportExport.Types {
+declare namespace ImportExport {
   export type APIVersion = string;
   export interface Artifact {
     Description?: Description;
@@ -207,5 +207,9 @@ declare namespace ImportExport.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ImportExport client.
+   */
+  export import Types = ImportExport;
 }
 export = ImportExport;

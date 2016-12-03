@@ -44,7 +44,7 @@ declare class IotData extends Service {
    */
   updateThingShadow(callback?: (err: AWSError, data: IotData.Types.UpdateThingShadowResponse) => void): Request<IotData.Types.UpdateThingShadowResponse, AWSError>;
 }
-declare namespace IotData.Types {
+declare namespace IotData {
   export interface DeleteThingShadowRequest {
     /**
      * The name of the thing.
@@ -117,5 +117,9 @@ declare namespace IotData.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the IotData client.
+   */
+  export import Types = IotData;
 }
 export = IotData;

@@ -264,7 +264,7 @@ declare class Inspector extends Service {
    */
   updateAssessmentTarget(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace Inspector.Types {
+declare namespace Inspector {
   export type AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_TARGET"|"ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE"|"ACCESS_DENIED_TO_ASSESSMENT_RUN"|"ACCESS_DENIED_TO_FINDING"|"ACCESS_DENIED_TO_RESOURCE_GROUP"|"ACCESS_DENIED_TO_RULES_PACKAGE"|"ACCESS_DENIED_TO_SNS_TOPIC"|"ACCESS_DENIED_TO_IAM_ROLE"|string;
   export interface AddAttributesToFindingsRequest {
     /**
@@ -1425,5 +1425,9 @@ declare namespace Inspector.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Inspector client.
+   */
+  export import Types = Inspector;
 }
 export = Inspector;

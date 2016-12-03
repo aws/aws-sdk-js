@@ -44,7 +44,7 @@ declare class DynamoDBStreams extends Service {
    */
   listStreams(callback?: (err: AWSError, data: DynamoDBStreams.Types.ListStreamsOutput) => void): Request<DynamoDBStreams.Types.ListStreamsOutput, AWSError>;
 }
-declare namespace DynamoDBStreams.Types {
+declare namespace DynamoDBStreams {
   export type AttributeMap = {[key: string]: AttributeValue};
   export type AttributeName = string;
   export interface AttributeValue {
@@ -360,5 +360,9 @@ declare namespace DynamoDBStreams.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the DynamoDBStreams client.
+   */
+  export import Types = DynamoDBStreams;
 }
 export = DynamoDBStreams;

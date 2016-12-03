@@ -212,7 +212,7 @@ declare class Lambda extends Service {
    */
   updateFunctionConfiguration(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
 }
-declare namespace Lambda.Types {
+declare namespace Lambda {
   export interface AccountLimit {
     /**
      * Maximum size, in megabytes, of a code package you can upload per region. The default size is 75 GB. 
@@ -1017,5 +1017,9 @@ declare namespace Lambda.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Lambda client.
+   */
+  export import Types = Lambda;
 }
 export = Lambda;

@@ -124,7 +124,7 @@ declare class Support extends Service {
    */
   resolveCase(callback?: (err: AWSError, data: Support.Types.ResolveCaseResponse) => void): Request<Support.Types.ResolveCaseResponse, AWSError>;
 }
-declare namespace Support.Types {
+declare namespace Support {
   export interface AddAttachmentsToSetRequest {
     /**
      * The ID of the attachment set. If an attachmentSetId is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an attachmentSetId is specified, the attachments are added to the specified set, if it exists.
@@ -748,5 +748,9 @@ declare namespace Support.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Support client.
+   */
+  export import Types = Support;
 }
 export = Support;

@@ -88,7 +88,7 @@ declare class Discovery extends Service {
    */
   stopDataCollectionByAgentIds(callback?: (err: AWSError, data: Discovery.Types.StopDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StopDataCollectionByAgentIdsResponse, AWSError>;
 }
-declare namespace Discovery.Types {
+declare namespace Discovery {
   export interface AgentConfigurationStatus {
     /**
      * The agent ID.
@@ -430,5 +430,9 @@ declare namespace Discovery.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Discovery client.
+   */
+  export import Types = Discovery;
 }
 export = Discovery;

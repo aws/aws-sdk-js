@@ -316,7 +316,7 @@ declare class DirectoryService extends Service {
    */
   verifyTrust(callback?: (err: AWSError, data: DirectoryService.Types.VerifyTrustResult) => void): Request<DirectoryService.Types.VerifyTrustResult, AWSError>;
 }
-declare namespace DirectoryService.Types {
+declare namespace DirectoryService {
   export type AccessUrl = string;
   export interface AddIpRoutesRequest {
     /**
@@ -1532,5 +1532,9 @@ declare namespace DirectoryService.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the DirectoryService client.
+   */
+  export import Types = DirectoryService;
 }
 export = DirectoryService;

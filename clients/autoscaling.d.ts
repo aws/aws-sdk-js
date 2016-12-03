@@ -400,7 +400,7 @@ declare class AutoScaling extends Service {
    */
   updateAutoScalingGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace AutoScaling.Types {
+declare namespace AutoScaling {
   export type Activities = Activity[];
   export interface ActivitiesType {
     /**
@@ -2135,5 +2135,9 @@ declare namespace AutoScaling.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the AutoScaling client.
+   */
+  export import Types = AutoScaling;
 }
 export = AutoScaling;

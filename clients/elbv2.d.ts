@@ -244,7 +244,7 @@ declare class ELBv2 extends Service {
    */
   setSubnets(callback?: (err: AWSError, data: ELBv2.Types.SetSubnetsOutput) => void): Request<ELBv2.Types.SetSubnetsOutput, AWSError>;
 }
-declare namespace ELBv2.Types {
+declare namespace ELBv2 {
   export interface Action {
     /**
      * The type of action.
@@ -1227,5 +1227,9 @@ declare namespace ELBv2.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ELBv2 client.
+   */
+  export import Types = ELBv2;
 }
 export = ELBv2;

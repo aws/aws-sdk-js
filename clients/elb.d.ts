@@ -260,7 +260,7 @@ declare class ELB extends Service {
    */
   waitFor(state: "instanceInService", callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
 }
-declare namespace ELB.Types {
+declare namespace ELB {
   export interface AccessLog {
     /**
      * Specifies whether access logs are enabled for the load balancer.
@@ -1148,5 +1148,9 @@ declare namespace ELB.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ELB client.
+   */
+  export import Types = ELB;
 }
 export = ELB;

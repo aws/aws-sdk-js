@@ -912,7 +912,7 @@ declare class IAM extends Service {
    */
   waitFor(state: "userExists", callback?: (err: AWSError, data: IAM.Types.GetUserResponse) => void): Request<IAM.Types.GetUserResponse, AWSError>;
 }
-declare namespace IAM.Types {
+declare namespace IAM {
   export interface AccessKey {
     /**
      * The name of the IAM user that the access key is associated with.
@@ -3682,5 +3682,9 @@ declare namespace IAM.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the IAM client.
+   */
+  export import Types = IAM;
 }
 export = IAM;

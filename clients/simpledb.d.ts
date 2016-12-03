@@ -92,7 +92,7 @@ declare class SimpleDB extends Service {
    */
   select(callback?: (err: AWSError, data: SimpleDB.Types.SelectResult) => void): Request<SimpleDB.Types.SelectResult, AWSError>;
 }
-declare namespace SimpleDB.Types {
+declare namespace SimpleDB {
   export interface Attribute {
     /**
      * The name of the attribute.
@@ -373,5 +373,9 @@ declare namespace SimpleDB.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the SimpleDB client.
+   */
+  export import Types = SimpleDB;
 }
 export = SimpleDB;

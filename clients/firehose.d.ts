@@ -68,7 +68,7 @@ declare class Firehose extends Service {
    */
   updateDestination(callback?: (err: AWSError, data: Firehose.Types.UpdateDestinationOutput) => void): Request<Firehose.Types.UpdateDestinationOutput, AWSError>;
 }
-declare namespace Firehose.Types {
+declare namespace Firehose {
   export type AWSKMSKeyARN = string;
   export type BooleanObject = boolean;
   export type BucketARN = string;
@@ -708,5 +708,9 @@ declare namespace Firehose.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Firehose client.
+   */
+  export import Types = Firehose;
 }
 export = Firehose;

@@ -292,7 +292,7 @@ declare class ElasticBeanstalk extends Service {
    */
   validateConfigurationSettings(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages, AWSError>;
 }
-declare namespace ElasticBeanstalk.Types {
+declare namespace ElasticBeanstalk {
   export interface AbortEnvironmentUpdateMessage {
     /**
      * This specifies the ID of the environment with the in-progress update that you want to cancel.
@@ -2000,5 +2000,9 @@ declare namespace ElasticBeanstalk.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ElasticBeanstalk client.
+   */
+  export import Types = ElasticBeanstalk;
 }
 export = ElasticBeanstalk;

@@ -212,7 +212,7 @@ declare class DirectConnect extends Service {
    */
   untagResource(callback?: (err: AWSError, data: DirectConnect.Types.UntagResourceResponse) => void): Request<DirectConnect.Types.UntagResourceResponse, AWSError>;
 }
-declare namespace DirectConnect.Types {
+declare namespace DirectConnect {
   export type ASN = number;
   export type AddressFamily = "ipv4"|"ipv6"|string;
   export interface AllocateConnectionOnInterconnectRequest {
@@ -679,5 +679,9 @@ declare namespace DirectConnect.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the DirectConnect client.
+   */
+  export import Types = DirectConnect;
 }
 export = DirectConnect;

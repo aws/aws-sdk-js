@@ -132,7 +132,7 @@ declare class CodeCommit extends Service {
    */
   updateRepositoryName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace CodeCommit.Types {
+declare namespace CodeCommit {
   export type AccountId = string;
   export type AdditionalData = string;
   export type Arn = string;
@@ -541,5 +541,9 @@ declare namespace CodeCommit.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CodeCommit client.
+   */
+  export import Types = CodeCommit;
 }
 export = CodeCommit;

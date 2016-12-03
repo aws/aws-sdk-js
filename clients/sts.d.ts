@@ -68,7 +68,7 @@ declare class STS extends Service {
    */
   getSessionToken(callback?: (err: AWSError, data: STS.Types.GetSessionTokenResponse) => void): Request<STS.Types.GetSessionTokenResponse, AWSError>;
 }
-declare namespace STS.Types {
+declare namespace STS {
   export interface AssumeRoleRequest {
     /**
      * The Amazon Resource Name (ARN) of the role to assume.
@@ -383,5 +383,9 @@ declare namespace STS.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the STS client.
+   */
+  export import Types = STS;
 }
 export = STS;

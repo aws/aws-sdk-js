@@ -108,7 +108,7 @@ declare class CloudWatch extends Service {
    */
   waitFor(state: "alarmExists", callback?: (err: AWSError, data: CloudWatch.Types.DescribeAlarmsOutput) => void): Request<CloudWatch.Types.DescribeAlarmsOutput, AWSError>;
 }
-declare namespace CloudWatch.Types {
+declare namespace CloudWatch {
   export type ActionPrefix = string;
   export type ActionsEnabled = boolean;
   export type AlarmArn = string;
@@ -684,5 +684,9 @@ declare namespace CloudWatch.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CloudWatch client.
+   */
+  export import Types = CloudWatch;
 }
 export = CloudWatch;

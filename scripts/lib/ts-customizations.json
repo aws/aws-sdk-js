@@ -1,0 +1,46 @@
+{
+  "cloudfront": [
+    {
+      "path": "lib/cloudfront/signer",
+      "imports": [
+        {
+          "name": "Signer",
+          "alias": "signer"
+        }
+      ]
+    }
+  ],
+  "dynamodb": [
+    {
+      "path": "lib/dynamodb/document_client",
+      "imports": [
+        {
+          "name": "DocumentClient",
+          "alias": "document_client"
+        }
+      ]
+    }
+  ],
+  "polly": [
+    {
+      "path": "lib/polly/presigner",
+      "imports": [
+        {
+          "name": "Presigner",
+          "alias": "presigner"
+        }
+      ]
+    }
+  ],
+  "s3": [
+    {
+      "path": "lib/s3/managed_upload",
+      "imports": [
+        {
+          "name": "ManagedUpload",
+          "alias": "managed_upload"
+        }
+      ]
+    }
+  ]
+}

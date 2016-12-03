@@ -28,7 +28,7 @@ declare class MarketplaceCommerceAnalytics extends Service {
    */
   startSupportDataExport(callback?: (err: AWSError, data: MarketplaceCommerceAnalytics.Types.StartSupportDataExportResult) => void): Request<MarketplaceCommerceAnalytics.Types.StartSupportDataExportResult, AWSError>;
 }
-declare namespace MarketplaceCommerceAnalytics.Types {
+declare namespace MarketplaceCommerceAnalytics {
   export type CustomerDefinedValues = {[key: string]: OptionalValue};
   export type DataSetPublicationDate = Date;
   export type DataSetRequestId = string;
@@ -125,5 +125,9 @@ declare namespace MarketplaceCommerceAnalytics.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the MarketplaceCommerceAnalytics client.
+   */
+  export import Types = MarketplaceCommerceAnalytics;
 }
 export = MarketplaceCommerceAnalytics;

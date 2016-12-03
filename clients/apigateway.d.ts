@@ -812,7 +812,7 @@ declare class APIGateway extends Service {
    */
   updateUsagePlan(callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
 }
-declare namespace APIGateway.Types {
+declare namespace APIGateway {
   export interface Account {
     /**
      * The ARN of an Amazon CloudWatch role for the current Account. 
@@ -3252,5 +3252,9 @@ declare namespace APIGateway.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the APIGateway client.
+   */
+  export import Types = APIGateway;
 }
 export = APIGateway;

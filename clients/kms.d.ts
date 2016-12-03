@@ -268,7 +268,7 @@ declare class KMS extends Service {
    */
   updateKeyDescription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace KMS.Types {
+declare namespace KMS {
   export type AWSAccountIdType = string;
   export type AlgorithmSpec = "RSAES_PKCS1_V1_5"|"RSAES_OAEP_SHA_1"|"RSAES_OAEP_SHA_256"|string;
   export type AliasList = AliasListEntry[];
@@ -1033,5 +1033,9 @@ declare namespace KMS.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the KMS client.
+   */
+  export import Types = KMS;
 }
 export = KMS;

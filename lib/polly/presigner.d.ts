@@ -7,7 +7,7 @@ export class Presigner {
   /**
    * Creates a presigner object with a set of configuration options.
    */
-  constructor(options?: PresignerOptions)
+  constructor(options?: Presigner.PresignerOptions)
   /**
    * Generate a signed URL.
    */
@@ -22,13 +22,16 @@ export class Presigner {
   getSynthesizeSpeechUrl(params: Polly.Types.SynthesizeSpeechInput, expires?: number): string;
 }
 
-export interface PresignerOptions {
-  /**
-   * An optional map of parameters to bind to every request sent by this service object. 
-   */
-  params?: {[key: string]: any}
-  /**
-   * An optional pre-configured instance of the AWS.Polly service object to use for requests. The object may bound parameters used by the presigner.
-   */
-  service?: Polly;
+export namespace Presigner {
+  export import GetSynthesizeSpeechUrlInput = Polly.Types.SynthesizeSpeechInput;
+  export interface PresignerOptions {
+    /**
+     * An optional map of parameters to bind to every request sent by this service object. 
+     */
+    params?: {[key: string]: any}
+    /**
+     * An optional pre-configured instance of the AWS.Polly service object to use for requests. The object may bound parameters used by the presigner.
+     */
+    service?: Polly;
+  }
 }

@@ -5,6 +5,7 @@ import {S3Customizations} from '../lib/services/s3';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
+import {ManagedUpload as managed_upload} from '../lib/s3/managed_upload';
 interface Blob {}
 declare class S3 extends S3Customizations {
   /**
@@ -633,7 +634,10 @@ declare class S3 extends S3Customizations {
    */
   waitFor(state: "objectNotExists", callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
 }
-declare namespace S3.Types {
+declare namespace S3 {
+  export import ManagedUpload = managed_upload;
+}
+declare namespace S3 {
   export type AbortDate = Date;
   export interface AbortIncompleteMultipartUpload {
     /**
@@ -3481,5 +3485,9 @@ declare namespace S3.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & UseDualstackConfigOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the S3 client.
+   */
+  export import Types = S3;
 }
 export = S3;

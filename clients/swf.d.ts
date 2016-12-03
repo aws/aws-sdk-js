@@ -260,7 +260,7 @@ declare class SWF extends Service {
    */
   terminateWorkflowExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace SWF.Types {
+declare namespace SWF {
   export type ActivityId = string;
   export interface ActivityTask {
     /**
@@ -2852,5 +2852,9 @@ declare namespace SWF.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the SWF client.
+   */
+  export import Types = SWF;
 }
 export = SWF;

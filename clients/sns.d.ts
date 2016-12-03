@@ -252,7 +252,7 @@ declare class SNS extends Service {
    */
   unsubscribe(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace SNS.Types {
+declare namespace SNS {
   export type ActionsList = action[];
   export interface AddPermissionInput {
     /**
@@ -783,5 +783,9 @@ declare namespace SNS.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the SNS client.
+   */
+  export import Types = SNS;
 }
 export = SNS;

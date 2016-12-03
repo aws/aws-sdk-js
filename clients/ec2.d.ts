@@ -2020,7 +2020,7 @@ declare class EC2 extends Service {
    */
   waitFor(state: "vpcPeeringConnectionExists", callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
 }
-declare namespace EC2.Types {
+declare namespace EC2 {
   export interface AcceptReservedInstancesExchangeQuoteRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -12044,5 +12044,9 @@ declare namespace EC2.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the EC2 client.
+   */
+  export import Types = EC2;
 }
 export = EC2;

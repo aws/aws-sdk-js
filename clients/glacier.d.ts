@@ -292,7 +292,7 @@ declare class Glacier extends GlacierCustomizations {
    */
   waitFor(state: "vaultNotExists", callback?: (err: AWSError, data: Glacier.Types.DescribeVaultOutput) => void): Request<Glacier.Types.DescribeVaultOutput, AWSError>;
 }
-declare namespace Glacier.Types {
+declare namespace Glacier {
   export interface AbortMultipartUploadInput {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
@@ -1231,5 +1231,9 @@ declare namespace Glacier.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Glacier client.
+   */
+  export import Types = Glacier;
 }
 export = Glacier;

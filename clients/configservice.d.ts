@@ -216,7 +216,7 @@ declare class ConfigService extends Service {
    */
   stopConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace ConfigService.Types {
+declare namespace ConfigService {
   export type ARN = string;
   export type AccountId = string;
   export type AllSupported = boolean;
@@ -1206,5 +1206,9 @@ declare namespace ConfigService.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ConfigService client.
+   */
+  export import Types = ConfigService;
 }
 export = ConfigService;

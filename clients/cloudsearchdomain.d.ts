@@ -36,7 +36,7 @@ declare class CloudSearchDomain extends Service {
    */
   uploadDocuments(callback?: (err: AWSError, data: CloudSearchDomain.Types.UploadDocumentsResponse) => void): Request<CloudSearchDomain.Types.UploadDocumentsResponse, AWSError>;
 }
-declare namespace CloudSearchDomain.Types {
+declare namespace CloudSearchDomain {
   export type Adds = number;
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export interface Bucket {
@@ -349,5 +349,9 @@ declare namespace CloudSearchDomain.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CloudSearchDomain client.
+   */
+  export import Types = CloudSearchDomain;
 }
 export = CloudSearchDomain;

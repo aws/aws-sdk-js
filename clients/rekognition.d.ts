@@ -100,7 +100,7 @@ declare class Rekognition extends Service {
    */
   searchFacesByImage(callback?: (err: AWSError, data: Rekognition.Types.SearchFacesByImageResponse) => void): Request<Rekognition.Types.SearchFacesByImageResponse, AWSError>;
 }
-declare namespace Rekognition.Types {
+declare namespace Rekognition {
   export type Attribute = "DEFAULT"|"ALL"|string;
   export type Attributes = Attribute[];
   export interface Beard {
@@ -675,5 +675,9 @@ declare namespace Rekognition.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Rekognition client.
+   */
+  export import Types = Rekognition;
 }
 export = Rekognition;

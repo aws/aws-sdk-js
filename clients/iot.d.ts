@@ -468,7 +468,7 @@ declare class Iot extends Service {
    */
   updateThing(callback?: (err: AWSError, data: Iot.Types.UpdateThingResponse) => void): Request<Iot.Types.UpdateThingResponse, AWSError>;
 }
-declare namespace Iot.Types {
+declare namespace Iot {
   export interface AcceptCertificateTransferRequest {
     /**
      * The ID of the certificate.
@@ -2129,5 +2129,9 @@ declare namespace Iot.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Iot client.
+   */
+  export import Types = Iot;
 }
 export = Iot;

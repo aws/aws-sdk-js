@@ -260,7 +260,7 @@ declare class ECS extends Service {
    */
   waitFor(state: "servicesInactive", callback?: (err: AWSError, data: ECS.Types.DescribeServicesResponse) => void): Request<ECS.Types.DescribeServicesResponse, AWSError>;
 }
-declare namespace ECS.Types {
+declare namespace ECS {
   export type AgentUpdateStatus = "PENDING"|"STAGING"|"STAGED"|"UPDATING"|"UPDATED"|"FAILED"|string;
   export interface Attribute {
     /**
@@ -1604,5 +1604,9 @@ declare namespace ECS.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ECS client.
+   */
+  export import Types = ECS;
 }
 export = ECS;

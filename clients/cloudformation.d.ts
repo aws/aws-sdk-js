@@ -252,7 +252,7 @@ declare class CloudFormation extends Service {
    */
   waitFor(state: "stackUpdateComplete", callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
 }
-declare namespace CloudFormation.Types {
+declare namespace CloudFormation {
   export interface AccountLimit {
     /**
      * The name of the account limit. Currently, the only account limit is StackLimit.
@@ -1520,5 +1520,9 @@ declare namespace CloudFormation.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CloudFormation client.
+   */
+  export import Types = CloudFormation;
 }
 export = CloudFormation;

@@ -1,11 +1,12 @@
 import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
-import {Service} from '../lib/service';
+import {PollyCustomizations} from '../lib/services/polly';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+import {Presigner as presigner} from '../lib/polly/presigner';
 interface Blob {}
-declare class Polly extends Service {
+declare class Polly extends PollyCustomizations {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
@@ -60,7 +61,10 @@ declare class Polly extends Service {
    */
   synthesizeSpeech(callback?: (err: AWSError, data: Polly.Types.SynthesizeSpeechOutput) => void): Request<Polly.Types.SynthesizeSpeechOutput, AWSError>;
 }
-declare namespace Polly.Types {
+declare namespace Polly {
+  export import Presigner = presigner;
+}
+declare namespace Polly {
   export type Alphabet = string;
   export type AudioStream = Buffer|Uint8Array|Blob|string;
   export type ContentType = string;
@@ -276,5 +280,9 @@ declare namespace Polly.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Polly client.
+   */
+  export import Types = Polly;
 }
 export = Polly;

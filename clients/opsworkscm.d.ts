@@ -132,7 +132,7 @@ declare class OpsWorksCM extends Service {
    */
   updateServerEngineAttributes(callback?: (err: AWSError, data: OpsWorksCM.Types.UpdateServerEngineAttributesResponse) => void): Request<OpsWorksCM.Types.UpdateServerEngineAttributesResponse, AWSError>;
 }
-declare namespace OpsWorksCM.Types {
+declare namespace OpsWorksCM {
   export interface AccountAttribute {
     /**
      *  The attribute name. The following are supported attribute names.     ServerLimit: The number of servers that currently existing / maximal allowed. By default 10 servers can be created.     ManualBackupLimit: The number of manual backups that currently exist / are maximal allowed. By default 50 manual backups can be created.   
@@ -683,5 +683,9 @@ declare namespace OpsWorksCM.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the OpsWorksCM client.
+   */
+  export import Types = OpsWorksCM;
 }
 export = OpsWorksCM;

@@ -86,16 +86,42 @@ TSGenerator.prototype.fillApiModelFileNames = function fillApiModelFileNames(api
     });
 };
 
+TSGenerator.prototype.updateDynamoDBDocumentClient = function updateDynamoDBDocumentClient() {
+    // read in document client customization
+    var docClientCustomCode = fs.readFileSync(path.join(this._sdkRootDir, 'lib', 'dynamodb', 'document_client.d.ts')).toString();
+    var lines = docClientCustomCode.split('\n');
+    var namespaceIndexStart = -1;
+    var namespaceIndexEnd = -1;
+    for (var i = 0, iLen = lines.length; i < iLen; i++) {
+        var line = lines[i];
+        // find exported namespace
+        if (line.indexOf('//<!--auto-generated start-->') >= 0) {
+            namespaceIndexStart = i;
+        }
+        if (line.indexOf('//<!--auto-generated end-->') >= 0) {
+            namespaceIndexEnd = i;
+            break;
+        }
+    }
+    if (namespaceIndexStart >= 0 && namespaceIndexEnd >= 0) {
+        // insert doc client interfaces
+        lines.splice(namespaceIndexStart + 1, (namespaceIndexEnd - namespaceIndexStart - 1), this.generateDocumentClientInterfaces(1));
+        var code = lines.join('\n');
+        this.writeTypingsFile('document_client', path.join(this._sdkRootDir, 'lib', 'dynamodb'), code);
+    }
+};
+
 /**
  * Generates the file containing DocumentClient interfaces.
  */
-TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocumentClientInterfaces() {
+TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocumentClientInterfaces(tabCount) {
+    tabCount = tabCount || 0;
     var self = this;
     // get the dynamodb model
     var dynamodbModel = this.loadServiceApi('dynamodb');
     var code = '';
     // stub Blob interface
-    code += 'interface Blob {}\n';
+    code += this.tabs(tabCount) + 'interface Blob {}\n';
     // generate shapes
     var modelShapes = dynamodbModel.shapes;
     // iterate over each shape
@@ -108,15 +134,13 @@ TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocume
         }
         // overwrite AttributeValue
         if (shapeKey === 'AttributeValue') {
-            code += self.generateDocString('A JavaScript object or native type.');
-            code += 'export type ' + shapeKey + ' = any;\n';
+            code += self.generateDocString('A JavaScript object or native type.', tabCount);
+            code += self.tabs(tabCount) + 'export type ' + shapeKey + ' = any;\n';
             return;
         }
-        code += self.generateTypingsFromShape(shapeKey, modelShape);
+        code += self.generateTypingsFromShape(shapeKey, modelShape, tabCount, []);
     });
-
-    // write file:
-    this.writeTypingsFile('document_client_interfaces', path.join(this._sdkRootDir, 'lib', 'dynamodb'), code);
+    return code;
 };
 
 /**
@@ -212,10 +236,18 @@ TSGenerator.prototype.generateCustomConfigFromMetadata = function generateCustom
     return customConfigurations;
 };
 
+TSGenerator.prototype.generateSafeShapeName = function generateSafeShapeName(name, blacklist) {
+    blacklist = blacklist || [];
+    if (blacklist.indexOf(name) >= 0) {
+        return '_' + name;
+    }
+    return name;
+};
+
 /**
  * Generates a type or interface based on the shape.
  */
-TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromShape(shapeKey, shape, tabCount) {
+TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromShape(shapeKey, shape, tabCount, customClassNames) {
     // some shapes shouldn't be generated if they are javascript primitives
     var jsPrimitives = ['string', 'boolean', 'number'];
     if (jsPrimitives.indexOf(shapeKey) >= 0) {
@@ -225,6 +257,9 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
     if (['Date', 'Blob'].indexOf(shapeKey) >= 0) {
         shapeKey = '_' + shapeKey;
     }
+    // In at least one (cloudfront.Signer) case, a class on a service namespace clashes with a shape
+    shapeKey = this.generateSafeShapeName(shapeKey, customClassNames);
+
     var self = this;
     var code = '';
     tabCount = tabCount || 0;
@@ -243,16 +278,14 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
             }
             var required = self.checkRequired(shape.required || [], memberKey) ? '' : '?';
             var memberType = member.shape;
-            if (['Date', 'Blob'].indexOf(memberType) >= 0) {
-                memberType = '_' + memberType;
-            }
+            memberType = self.generateSafeShapeName(memberType, [].concat(customClassNames, ['Date', 'Blob']));
             code += tabs(tabCount + 1) + memberKey + required + ': ' + memberType + ';\n';
         });
         code += tabs(tabCount) + '}\n';
     } else if (type === 'list') {
-        code += tabs(tabCount) + 'export type ' + shapeKey + ' = ' + shape.member.shape + '[];\n';
+        code += tabs(tabCount) + 'export type ' + shapeKey + ' = ' + this.generateSafeShapeName(shape.member.shape, customClassNames) + '[];\n';
     } else if (type === 'map') {
-        code += tabs(tabCount) + 'export type ' + shapeKey + ' = {[key: string]: ' + shape.value.shape + '};\n';
+        code += tabs(tabCount) + 'export type ' + shapeKey + ' = {[key: string]: ' + this.generateSafeShapeName(shape.value.shape, customClassNames) + '};\n';
     } else if (type === 'string' || type === 'character') {
         var stringType = 'string';
         if (Array.isArray(shape.enum)) {
@@ -379,6 +412,43 @@ TSGenerator.prototype.includeCustomService = function includeCustomService(servi
 };
 
 /**
+ * Generates typings for classes that live on a service client namespace.
+ */
+TSGenerator.prototype.generateCustomNamespaceTypes = function generateCustomNamespaceTypes(serviceIdentifier, className) {
+    var self = this;
+    var tsCustomizationsJson = require('./ts-customizations');
+    var customClasses = [];
+    var code = '';
+
+    var serviceInfo = tsCustomizationsJson[serviceIdentifier] || null;
+    // exit early if no customizations found
+    if (!serviceInfo) {
+        return null;
+    }
+    code += 'declare namespace ' + className + ' {\n';
+    //generate import code
+    var importCode = '';
+    serviceInfo.forEach(function(data) {
+        var aliases = [];
+        var imports = data.imports || [];
+        imports.forEach(function(pair) {
+            aliases.push(pair.name + ' as ' + pair.alias);
+            code += self.tabs(1) + 'export import ' + pair.name + ' = ' + pair.alias + ';\n';
+            customClasses.push(pair.name);
+        });
+        if (aliases.length) {
+            importCode += 'import {' + aliases.join(', ') + '} from \'../' + data.path + '\';\n';
+        }
+    });
+    code += '}\n';
+    return {
+        importCode: importCode,
+        namespaceCode: code,
+        customClassNames: customClasses
+    };
+};
+
+/**
  * Generates the typings for a service based on the serviceIdentifier.
  */
 TSGenerator.prototype.processServiceModel = function processServiceModel(serviceIdentifier) {
@@ -386,6 +456,8 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     var self = this;
     var code = '';
     var className = this.metadata[serviceIdentifier].name;
+    var customNamespaces = this.generateCustomNamespaceTypes(serviceIdentifier, className);
+    var customClassNames = customNamespaces ? customNamespaces.customClassNames : [];
     // generate imports
     code += 'import {Request} from \'../lib/request\';\n';
     code += 'import {Response} from \'../lib/response\';\n';
@@ -409,6 +481,10 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
             code += 'import {' + config.INTERFACE + '} from \'../lib/' + config.FILE_NAME + '\';\n';
             customConfigTypes.push(config.INTERFACE);
         });
+    }
+    // import custom namespaces
+    if (customNamespaces) {
+        code += customNamespaces.importCode;
     }
     code += 'interface Blob {}\n';
     // generate methods
@@ -434,19 +510,23 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     });
 
     code += '}\n';
+    // check for static classes on namespace
+    if (customNamespaces) {
+        code += customNamespaces.namespaceCode;
+    }
 
     // shapes should map to interfaces
     var modelShapes = model.shapes;
     // iterate over each shape
     var shapeKeys = Object.keys(modelShapes);
-    code += 'declare namespace ' + className + '.Types {\n';
+    code += 'declare namespace ' + className + ' {\n';
     shapeKeys.forEach(function (shapeKey) {
         var modelShape = modelShapes[shapeKey];
         // ignore exceptions
         if (modelShape.exception) {
             return;
         }
-        code += self.generateTypingsFromShape(shapeKey, modelShape, 1);
+        code += self.generateTypingsFromShape(shapeKey, modelShape, 1, customClassNames);
     });
 
     code += this.generateDocString('A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify \'latest\' to use the latest possible version.', 1);
@@ -456,6 +536,9 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     code += this.tabs(2) + 'apiVersion?: apiVersion;\n';
     code += this.tabs(1) + '}\n';
     code += this.tabs(1) + 'export type ClientConfiguration = ' + customConfigTypes.join(' & ') + ' & ClientApiVersions;\n';
+    // export interfaces under Types namespace for backwards-compatibility
+    code += this.generateDocString('Contains interfaces for use with the ' + className + ' client.', 1);
+    code += this.tabs(1) + 'export import Types = ' + className + ';\n';
     code += '}\n';
 
     code += 'export = ' + className + ';\n';

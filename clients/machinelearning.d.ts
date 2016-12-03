@@ -268,7 +268,7 @@ declare class MachineLearning extends Service {
    */
   waitFor(state: "batchPredictionAvailable", callback?: (err: AWSError, data: MachineLearning.Types.DescribeBatchPredictionsOutput) => void): Request<MachineLearning.Types.DescribeBatchPredictionsOutput, AWSError>;
 }
-declare namespace MachineLearning.Types {
+declare namespace MachineLearning {
   export interface AddTagsInput {
     /**
      * The key-value pairs to use to create tags. If you specify a key without specifying a value, Amazon ML creates a tag with the specified key and a value of null.
@@ -1700,5 +1700,9 @@ declare namespace MachineLearning.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the MachineLearning client.
+   */
+  export import Types = MachineLearning;
 }
 export = MachineLearning;

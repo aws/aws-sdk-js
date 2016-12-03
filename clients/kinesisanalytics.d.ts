@@ -116,7 +116,7 @@ declare class KinesisAnalytics extends Service {
    */
   updateApplication(callback?: (err: AWSError, data: KinesisAnalytics.Types.UpdateApplicationResponse) => void): Request<KinesisAnalytics.Types.UpdateApplicationResponse, AWSError>;
 }
-declare namespace KinesisAnalytics.Types {
+declare namespace KinesisAnalytics {
   export interface AddApplicationInputRequest {
     /**
      * Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.
@@ -906,5 +906,9 @@ declare namespace KinesisAnalytics.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the KinesisAnalytics client.
+   */
+  export import Types = KinesisAnalytics;
 }
 export = KinesisAnalytics;

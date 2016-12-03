@@ -200,7 +200,7 @@ declare class CloudSearch extends Service {
    */
   updateServiceAccessPolicies(callback?: (err: AWSError, data: CloudSearch.Types.UpdateServiceAccessPoliciesResponse) => void): Request<CloudSearch.Types.UpdateServiceAccessPoliciesResponse, AWSError>;
 }
-declare namespace CloudSearch.Types {
+declare namespace CloudSearch {
   export type APIVersion = string;
   export type ARN = string;
   export interface AccessPoliciesStatus {
@@ -977,5 +977,9 @@ declare namespace CloudSearch.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the CloudSearch client.
+   */
+  export import Types = CloudSearch;
 }
 export = CloudSearch;

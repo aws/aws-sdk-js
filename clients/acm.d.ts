@@ -92,7 +92,7 @@ declare class ACM extends Service {
    */
   resendValidationEmail(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
-declare namespace ACM.Types {
+declare namespace ACM {
   export interface AddTagsToCertificateRequest {
     /**
      * String that contains the ARN of the ACM Certificate to which the tag is to be applied. This must be of the form:  arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012  For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
@@ -409,5 +409,9 @@ declare namespace ACM.Types {
     apiVersion?: apiVersion;
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the ACM client.
+   */
+  export import Types = ACM;
 }
 export = ACM;
