@@ -12,6 +12,15 @@ module Documentor
     end
     docs = docs.gsub(/\{(\S+)\}/, '`{\1}`')
     docs = docs.gsub(/\s+/, ' ').strip
+    ## The markdown to html converter incorrectly replaces underscores and asterisks in 'code' tags with 'em' tags.
+    ## html escape these symbols to get around this.
+    docs = docs.gsub(/<code>(.+?)<\/code>/m) do
+      ## strip out extraneous code blocks
+      text = $1.gsub('`','')
+      text = text.gsub('_', '&#95;')
+      text = text.gsub('*', '&#42;')
+      "<code>#{text}</code>"
+    end
     docs == '' ? nil : docs
   end
 
