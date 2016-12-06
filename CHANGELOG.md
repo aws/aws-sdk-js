@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.10-->
+<!--LATEST=2.7.11-->
 <!--ENTRYINSERT-->
+
+## 2.7.11
+* bugfix: TypeScript: Exposes typings for classes that live on service namespaces (i.e. DynamoDB.DocumentClient). Also exposes interfaces off of service namespaces to allow easier migration from some 3rd party typings. Interfaces will continue to be exposed via Service.Types as well.
+* bugfix: TypeScript: Removes remaining `reference` comments from definitions.
+* feature: ConfigService: Increases the number of config rules for all accounts from 25 to 50.
+* feature: EC2: Adds T2.xlarge, T2.2xlarge, and R4 instance types.
 
 ## 2.7.10
 * feature: APIGateway: You can now publish your APIs on Amazon API Gateway as products on the AWS Marketplace. Use the SDK to associate your APIs on API Gateway with Marketplace Product Codes. API Gateway will then send metering data to the Marketplace Metering Service on your behalf. Also, API Gateway now supports documenting your API.

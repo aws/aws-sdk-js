@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.10
+// AWS SDK for JavaScript v2.7.11
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -15894,7 +15894,8 @@ module.exports={
     "serviceAbbreviation": "Config Service",
     "serviceFullName": "AWS Config",
     "signatureVersion": "v4",
-    "targetPrefix": "StarlingDoveService"
+    "targetPrefix": "StarlingDoveService",
+    "uid": "config-2014-11-12"
   },
   "operations": {
     "DeleteConfigRule": {
@@ -16035,6 +16036,10 @@ module.exports={
         "members": {
           "ConfigRuleNames": {
             "shape": "Sd"
+          },
+          "NextToken": {},
+          "Limit": {
+            "type": "integer"
           }
         }
       },
@@ -16071,7 +16076,8 @@ module.exports={
                 }
               }
             }
-          }
+          },
+          "NextToken": {}
         }
       }
     },
@@ -16091,7 +16097,7 @@ module.exports={
           "ConfigRules": {
             "type": "list",
             "member": {
-              "shape": "S12"
+              "shape": "S13"
             }
           },
           "NextToken": {}
@@ -16103,7 +16109,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ConfigurationRecorderNames": {
-            "shape": "S1g"
+            "shape": "S1i"
           }
         }
       },
@@ -16142,7 +16148,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ConfigurationRecorderNames": {
-            "shape": "S1g"
+            "shape": "S1i"
           }
         }
       },
@@ -16152,7 +16158,7 @@ module.exports={
           "ConfigurationRecorders": {
             "type": "list",
             "member": {
-              "shape": "S1o"
+              "shape": "S1q"
             }
           }
         }
@@ -16163,7 +16169,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DeliveryChannelNames": {
-            "shape": "S1v"
+            "shape": "S1x"
           }
         }
       },
@@ -16177,10 +16183,10 @@ module.exports={
               "members": {
                 "name": {},
                 "configSnapshotDeliveryInfo": {
-                  "shape": "S1z"
+                  "shape": "S21"
                 },
                 "configHistoryDeliveryInfo": {
-                  "shape": "S1z"
+                  "shape": "S21"
                 },
                 "configStreamDeliveryInfo": {
                   "type": "structure",
@@ -16204,7 +16210,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DeliveryChannelNames": {
-            "shape": "S1v"
+            "shape": "S1x"
           }
         }
       },
@@ -16214,7 +16220,7 @@ module.exports={
           "DeliveryChannels": {
             "type": "list",
             "member": {
-              "shape": "S25"
+              "shape": "S27"
             }
           }
         }
@@ -16241,7 +16247,7 @@ module.exports={
         "type": "structure",
         "members": {
           "EvaluationResults": {
-            "shape": "S29"
+            "shape": "S2b"
           },
           "NextToken": {}
         }
@@ -16267,7 +16273,7 @@ module.exports={
         "type": "structure",
         "members": {
           "EvaluationResults": {
-            "shape": "S29"
+            "shape": "S2b"
           },
           "NextToken": {}
         }
@@ -16278,7 +16284,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ComplianceSummary": {
-            "shape": "S2g"
+            "shape": "S2i"
           }
         }
       }
@@ -16303,7 +16309,7 @@ module.exports={
               "members": {
                 "ResourceType": {},
                 "ComplianceSummary": {
-                  "shape": "S2g"
+                  "shape": "S2i"
                 }
               }
             }
@@ -16444,7 +16450,7 @@ module.exports={
         ],
         "members": {
           "ConfigRule": {
-            "shape": "S12"
+            "shape": "S13"
           }
         }
       }
@@ -16457,7 +16463,7 @@ module.exports={
         ],
         "members": {
           "ConfigurationRecorder": {
-            "shape": "S1o"
+            "shape": "S1q"
           }
         }
       }
@@ -16470,7 +16476,7 @@ module.exports={
         ],
         "members": {
           "DeliveryChannel": {
-            "shape": "S25"
+            "shape": "S27"
           }
         }
       }
@@ -16483,7 +16489,7 @@ module.exports={
         ],
         "members": {
           "Evaluations": {
-            "shape": "S3r"
+            "shape": "S3t"
           },
           "ResultToken": {}
         }
@@ -16492,7 +16498,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FailedEvaluations": {
-            "shape": "S3r"
+            "shape": "S3t"
           }
         }
       }
@@ -16564,7 +16570,7 @@ module.exports={
         }
       }
     },
-    "S12": {
+    "S13": {
       "type": "structure",
       "required": [
         "Source"
@@ -16588,6 +16594,10 @@ module.exports={
         },
         "Source": {
           "type": "structure",
+          "required": [
+            "Owner",
+            "SourceIdentifier"
+          ],
           "members": {
             "Owner": {},
             "SourceIdentifier": {},
@@ -16609,11 +16619,11 @@ module.exports={
         "ConfigRuleState": {}
       }
     },
-    "S1g": {
+    "S1i": {
       "type": "list",
       "member": {}
     },
-    "S1o": {
+    "S1q": {
       "type": "structure",
       "members": {
         "name": {},
@@ -16635,11 +16645,11 @@ module.exports={
         }
       }
     },
-    "S1v": {
+    "S1x": {
       "type": "list",
       "member": {}
     },
-    "S1z": {
+    "S21": {
       "type": "structure",
       "members": {
         "lastStatus": {},
@@ -16656,7 +16666,7 @@ module.exports={
         }
       }
     },
-    "S25": {
+    "S27": {
       "type": "structure",
       "members": {
         "name": {},
@@ -16671,7 +16681,7 @@ module.exports={
         }
       }
     },
-    "S29": {
+    "S2b": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -16704,7 +16714,7 @@ module.exports={
         }
       }
     },
-    "S2g": {
+    "S2i": {
       "type": "structure",
       "members": {
         "CompliantResourceCount": {
@@ -16718,7 +16728,7 @@ module.exports={
         }
       }
     },
-    "S3r": {
+    "S3t": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -85539,6 +85549,7 @@ module.exports={
     "serviceAbbreviation": "AWS STS",
     "serviceFullName": "AWS Security Token Service",
     "signatureVersion": "v4",
+    "uid": "sts-2011-06-15",
     "xmlNamespace": "https://sts.amazonaws.com/doc/2011-06-15/"
   },
   "operations": {
@@ -88721,7 +88732,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.10',
+  VERSION: '2.7.11',
 
 
   Signers: {},
@@ -89047,8 +89058,13 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
   storage: (function() {
     try {
-      return AWS.util.isBrowser() && window.localStorage !== null && typeof window.localStorage === 'object' ?
-             window.localStorage : {};
+      var storage = AWS.util.isBrowser() && window.localStorage !== null && typeof window.localStorage === 'object' ?
+          window.localStorage : {};
+
+      storage['aws.test-storage'] = 'foobar';
+      delete storage['aws.test-storage'];
+
+      return storage;
     } catch (_) {
       return {};
     }
