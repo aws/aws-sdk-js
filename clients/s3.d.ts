@@ -741,7 +741,7 @@ declare namespace S3 {
     Prefix?: Prefix;
   }
   export type AnalyticsS3ExportFileFormat = "CSV"|string;
-  export type Body = Buffer|Uint8Array|Blob|ReadableStream|string;
+  export type Body = Buffer|Uint8Array|Blob|Readable|string;
   export interface Bucket {
     /**
      * The name of the bucket.
