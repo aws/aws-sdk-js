@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.11-->
+<!--LATEST=2.7.12-->
 <!--ENTRYINSERT-->
+
+## 2.7.12
+* feature: S3: Add the Version ID field to the Get and Put object tagging operations.
 
 ## 2.7.11
 * bugfix: TypeScript: Exposes typings for classes that live on service namespaces (i.e. DynamoDB.DocumentClient). Also exposes interfaces off of service namespaces to allow easier migration from some 3rd party typings. Interfaces will continue to be exposed via Service.Types as well.

@@ -1748,7 +1748,7 @@ declare namespace S3 {
   export interface GetObjectTaggingRequest {
     Bucket: BucketName;
     Key: ObjectKey;
-    VersionId: ObjectVersionId;
+    VersionId?: ObjectVersionId;
   }
   export interface GetObjectTorrentOutput {
     Body?: Body;
@@ -3052,7 +3052,7 @@ declare namespace S3 {
   export interface PutObjectTaggingRequest {
     Bucket: BucketName;
     Key: ObjectKey;
-    VersionId: ObjectVersionId;
+    VersionId?: ObjectVersionId;
     ContentMD5?: ContentMD5;
     Tagging: Tagging;
   }
