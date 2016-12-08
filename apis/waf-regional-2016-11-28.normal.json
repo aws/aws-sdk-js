@@ -1,18 +1,34 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"waf-2015-08-24",
-    "apiVersion":"2015-08-24",
-    "endpointPrefix":"waf",
+    "apiVersion":"2016-11-28",
+    "endpointPrefix":"waf-regional",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "serviceAbbreviation":"WAF",
-    "serviceFullName":"AWS WAF",
+    "serviceAbbreviation":"WAF Regional",
+    "serviceFullName":"AWS WAF Regional",
     "signatureVersion":"v4",
-    "targetPrefix":"AWSWAF_20150824",
-    "uid":"waf-2015-08-24"
+    "targetPrefix":"AWSWAF_Regional_20161128",
+    "uid":"waf-regional-2016-11-28"
   },
   "operations":{
+    "AssociateWebACL":{
+      "name":"AssociateWebACL",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateWebACLRequest"},
+      "output":{"shape":"AssociateWebACLResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidAccountException"},
+        {"shape":"WAFInvalidParameterException"},
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFUnavailableEntityException"}
+      ],
+      "documentation":"<p>Associates a web ACL with a resource.</p>"
+    },
     "CreateByteMatchSet":{
       "name":"CreateByteMatchSet",
       "http":{
@@ -264,6 +280,22 @@
       ],
       "documentation":"<p>Permanently deletes an <a>XssMatchSet</a>. You can't delete an <code>XssMatchSet</code> if it's still used in any <code>Rules</code> or if it still contains any <a>XssMatchTuple</a> objects.</p> <p>If you just want to remove an <code>XssMatchSet</code> from a <code>Rule</code>, use <a>UpdateRule</a>.</p> <p>To permanently delete an <code>XssMatchSet</code> from AWS WAF, perform the following steps:</p> <ol> <li> <p>Update the <code>XssMatchSet</code> to remove filters, if any. For more information, see <a>UpdateXssMatchSet</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of a <code>DeleteXssMatchSet</code> request.</p> </li> <li> <p>Submit a <code>DeleteXssMatchSet</code> request.</p> </li> </ol>"
     },
+    "DisassociateWebACL":{
+      "name":"DisassociateWebACL",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateWebACLRequest"},
+      "output":{"shape":"DisassociateWebACLResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidAccountException"},
+        {"shape":"WAFInvalidParameterException"},
+        {"shape":"WAFNonexistentItemException"}
+      ],
+      "documentation":"<p>Removes a web ACL from the specified resource.</p>"
+    },
     "GetByteMatchSet":{
       "name":"GetByteMatchSet",
       "http":{
@@ -395,6 +427,23 @@
       ],
       "documentation":"<p>Returns the <a>WebACL</a> that is specified by <code>WebACLId</code>.</p>"
     },
+    "GetWebACLForResource":{
+      "name":"GetWebACLForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetWebACLForResourceRequest"},
+      "output":{"shape":"GetWebACLForResourceResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidAccountException"},
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFInvalidParameterException"},
+        {"shape":"WAFUnavailableEntityException"}
+      ],
+      "documentation":"<p>Returns the web ACL for the specified resource.</p>"
+    },
     "GetXssMatchSet":{
       "name":"GetXssMatchSet",
       "http":{
@@ -437,6 +486,21 @@
         {"shape":"WAFInvalidAccountException"}
       ],
       "documentation":"<p>Returns an array of <a>IPSetSummary</a> objects in the response.</p>"
+    },
+    "ListResourcesForWebACL":{
+      "name":"ListResourcesForWebACL",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListResourcesForWebACLRequest"},
+      "output":{"shape":"ListResourcesForWebACLResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidAccountException"},
+        {"shape":"WAFNonexistentItemException"}
+      ],
+      "documentation":"<p>Returns an array of resources associated with the specified web ACL.</p>"
     },
     "ListRules":{
       "name":"ListRules",
@@ -681,6 +745,28 @@
     "ActivatedRules":{
       "type":"list",
       "member":{"shape":"ActivatedRule"}
+    },
+    "AssociateWebACLRequest":{
+      "type":"structure",
+      "required":[
+        "WebACLId",
+        "ResourceArn"
+      ],
+      "members":{
+        "WebACLId":{
+          "shape":"ResourceId",
+          "documentation":"<p>A unique identifier (ID) for the web ACL.</p>"
+        },
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The ARN (Amazon Resource Name) of the resource to be protected.</p>"
+        }
+      }
+    },
+    "AssociateWebACLResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "ByteMatchSet":{
       "type":"structure",
@@ -1227,6 +1313,21 @@
       },
       "documentation":"<p>The response to a request to delete an <a>XssMatchSet</a> from AWS WAF.</p>"
     },
+    "DisassociateWebACLRequest":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The ARN (Amazon Resource Name) of the resource from which the web ACL is being removed.</p>"
+        }
+      }
+    },
+    "DisassociateWebACLResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "FieldToMatch":{
       "type":"structure",
       "required":["Type"],
@@ -1415,6 +1516,25 @@
         }
       },
       "documentation":"<p>The response to a <a>GetSqlInjectionMatchSet</a> request.</p>"
+    },
+    "GetWebACLForResourceRequest":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The ARN (Amazon Resource Name) of the resource for which to get the web ACL.</p>"
+        }
+      }
+    },
+    "GetWebACLForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "WebACLSummary":{
+          "shape":"WebACLSummary",
+          "documentation":"<p>Information about the web ACL that you specified in the <code>GetWebACLForResource</code> request. If there is no associated resource, a null WebACLSummary is returned.</p>"
+        }
+      }
     },
     "GetWebACLRequest":{
       "type":"structure",
@@ -1662,6 +1782,25 @@
       "max":100,
       "min":1
     },
+    "ListResourcesForWebACLRequest":{
+      "type":"structure",
+      "required":["WebACLId"],
+      "members":{
+        "WebACLId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The unique identifier (ID) of the web ACL for which to list the associated resources.</p>"
+        }
+      }
+    },
+    "ListResourcesForWebACLResponse":{
+      "type":"structure",
+      "members":{
+        "ResourceArns":{
+          "shape":"ResourceArns",
+          "documentation":"<p>An array of ARNs (Amazon Resource Names) of the resources associated with the specified web ACL. An array with zero elements is returned if there are no resources associated with the web ACL.</p>"
+        }
+      }
+    },
     "ListRulesRequest":{
       "type":"structure",
       "members":{
@@ -1890,6 +2029,15 @@
     "Predicates":{
       "type":"list",
       "member":{"shape":"Predicate"}
+    },
+    "ResourceArn":{
+      "type":"string",
+      "max":1224,
+      "min":1
+    },
+    "ResourceArns":{
+      "type":"list",
+      "member":{"shape":"ResourceArn"}
     },
     "ResourceId":{
       "type":"string",
@@ -2542,6 +2690,14 @@
       "documentation":"<p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>",
       "exception":true
     },
+    "WAFUnavailableEntityException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The operation failed because the entity referenced is temporarily unavailable. Retry your request.</p>",
+      "exception":true
+    },
     "WafAction":{
       "type":"structure",
       "required":["Type"],
@@ -2726,5 +2882,5 @@
     },
     "errorMessage":{"type":"string"}
   },
-  "documentation":"<p>This is the <i>AWS WAF API Reference</i> for using AWS WAF with Amazon CloudFront. The AWS WAF actions and data types listed in the reference are available for protecting Amazon CloudFront distributions. You can use these actions and data types via the endpoint <i>waf.amazonaws.com</i>. This guide is for developers who need detailed information about the AWS WAF API actions, data types, and errors. For detailed information about AWS WAF features and an overview of how to use the AWS WAF API, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
+  "documentation":"<p>This is the <i>AWS WAF Regional API Reference</i> for using AWS WAF with Elastic Load Balancing (ELB) Application Load Balancers. The AWS WAF actions and data types listed in the reference are available for protecting Application Load Balancers. You can use these actions and data types by means of the endpoints listed in <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#waf_region\">AWS Regions and Endpoints</a>. This guide is for developers who need detailed information about the AWS WAF API actions, data types, and errors. For detailed information about AWS WAF features and an overview of how to use the AWS WAF API, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
 }

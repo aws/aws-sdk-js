@@ -243,7 +243,7 @@ declare namespace CodePipeline {
      */
     jobId: JobId;
     /**
-     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. This number must be returned in the response.
+     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response of the PollForJobs request that returned this job.
      */
     nonce: Nonce;
   }
@@ -259,7 +259,7 @@ declare namespace CodePipeline {
      */
     jobId: ThirdPartyJobId;
     /**
-     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. This number must be returned in the response.
+     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response to a GetThirdPartyJobDetails request.
      */
     nonce: Nonce;
     /**
@@ -851,7 +851,7 @@ declare namespace CodePipeline {
      */
     data?: JobData;
     /**
-     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. This number must be returned in the response.
+     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an AcknowledgeJob request.
      */
     nonce?: Nonce;
     /**
@@ -1311,7 +1311,7 @@ declare namespace CodePipeline {
      */
     data?: ThirdPartyJobData;
     /**
-     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. This number must be returned in the response.
+     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an AcknowledgeThirdPartyJob request.
      */
     nonce?: Nonce;
   }

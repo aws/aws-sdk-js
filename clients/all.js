@@ -88,5 +88,6 @@ module.exports = {
   SWF: require('./swf'),
   XRay: require('./xray'),
   WAF: require('./waf'),
+  WAFRegional: require('./wafregional'),
   WorkSpaces: require('./workspaces')
 };

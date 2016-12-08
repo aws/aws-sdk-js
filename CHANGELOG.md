@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.12-->
+<!--LATEST=2.7.13-->
 <!--ENTRYINSERT-->
+
+## 2.7.13
+* feature: CloudFront:  Add lambda function associations to cache behaviors.
+* feature: RDS: Add cluster create data to DBCluster APIs.
+* feature: WAFRegional: With this new feature, customers can use AWS WAF directly on Application Load Balancers in a VPC within available regions to protect their websites and web services from malicious attacks such as SQL injection, Cross Site Scripting, bad bots, etc.
 
 ## 2.7.12
 * feature: S3: Add the Version ID field to the Get and Put object tagging operations.

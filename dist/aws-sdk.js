@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.12
+// AWS SDK for JavaScript v2.7.13
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -12,7 +12,8 @@ module.exports={
     "serviceAbbreviation": "ACM",
     "serviceFullName": "AWS Certificate Manager",
     "signatureVersion": "v4",
-    "targetPrefix": "CertificateManager"
+    "targetPrefix": "CertificateManager",
+    "uid": "acm-2015-12-08"
   },
   "operations": {
     "AddTagsToCertificate": {
@@ -3946,7 +3947,8 @@ module.exports={
     "serviceFullName": "Application Auto Scaling",
     "signatureVersion": "v4",
     "signingName": "application-autoscaling",
-    "targetPrefix": "AnyScaleFrontendService"
+    "targetPrefix": "AnyScaleFrontendService",
+    "uid": "application-autoscaling-2016-02-06"
   },
   "operations": {
     "DeleteScalingPolicy": {
@@ -4299,6 +4301,7 @@ module.exports={
     "protocol": "query",
     "serviceFullName": "Auto Scaling",
     "signatureVersion": "v4",
+    "uid": "autoscaling-2011-01-01",
     "xmlNamespace": "http://autoscaling.amazonaws.com/doc/2011-01-01/"
   },
   "operations": {
@@ -7076,18 +7079,19 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "apiVersion": "2016-09-29",
+    "apiVersion": "2016-11-25",
     "endpointPrefix": "cloudfront",
     "globalEndpoint": "cloudfront.amazonaws.com",
     "protocol": "rest-xml",
     "serviceAbbreviation": "CloudFront",
     "serviceFullName": "Amazon CloudFront",
-    "signatureVersion": "v4"
+    "signatureVersion": "v4",
+    "uid": "cloudfront-2016-11-25"
   },
   "operations": {
     "CreateCloudFrontOriginAccessIdentity": {
       "http": {
-        "requestUri": "/2016-09-29/origin-access-identity/cloudfront",
+        "requestUri": "/2016-11-25/origin-access-identity/cloudfront",
         "responseCode": 201
       },
       "input": {
@@ -7100,7 +7104,7 @@ module.exports={
             "shape": "S2",
             "locationName": "CloudFrontOriginAccessIdentityConfig",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             }
           }
         },
@@ -7126,7 +7130,7 @@ module.exports={
     },
     "CreateDistribution": {
       "http": {
-        "requestUri": "/2016-09-29/distribution",
+        "requestUri": "/2016-11-25/distribution",
         "responseCode": 201
       },
       "input": {
@@ -7139,7 +7143,7 @@ module.exports={
             "shape": "S7",
             "locationName": "DistributionConfig",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             }
           }
         },
@@ -7149,7 +7153,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Distribution": {
-            "shape": "S1o"
+            "shape": "S1s"
           },
           "Location": {
             "location": "header",
@@ -7165,7 +7169,7 @@ module.exports={
     },
     "CreateDistributionWithTags": {
       "http": {
-        "requestUri": "/2016-09-29/distribution?WithTags",
+        "requestUri": "/2016-11-25/distribution?WithTags",
         "responseCode": 201
       },
       "input": {
@@ -7177,7 +7181,7 @@ module.exports={
           "DistributionConfigWithTags": {
             "locationName": "DistributionConfigWithTags",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             },
             "type": "structure",
             "required": [
@@ -7189,7 +7193,7 @@ module.exports={
                 "shape": "S7"
               },
               "Tags": {
-                "shape": "S1x"
+                "shape": "S21"
               }
             }
           }
@@ -7200,7 +7204,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Distribution": {
-            "shape": "S1o"
+            "shape": "S1s"
           },
           "Location": {
             "location": "header",
@@ -7216,7 +7220,7 @@ module.exports={
     },
     "CreateInvalidation": {
       "http": {
-        "requestUri": "/2016-09-29/distribution/{DistributionId}/invalidation",
+        "requestUri": "/2016-11-25/distribution/{DistributionId}/invalidation",
         "responseCode": 201
       },
       "input": {
@@ -7231,10 +7235,10 @@ module.exports={
             "locationName": "DistributionId"
           },
           "InvalidationBatch": {
-            "shape": "S24",
+            "shape": "S28",
             "locationName": "InvalidationBatch",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             }
           }
         },
@@ -7248,7 +7252,7 @@ module.exports={
             "locationName": "Location"
           },
           "Invalidation": {
-            "shape": "S28"
+            "shape": "S2c"
           }
         },
         "payload": "Invalidation"
@@ -7256,7 +7260,7 @@ module.exports={
     },
     "CreateStreamingDistribution": {
       "http": {
-        "requestUri": "/2016-09-29/streaming-distribution",
+        "requestUri": "/2016-11-25/streaming-distribution",
         "responseCode": 201
       },
       "input": {
@@ -7266,10 +7270,10 @@ module.exports={
         ],
         "members": {
           "StreamingDistributionConfig": {
-            "shape": "S2a",
+            "shape": "S2e",
             "locationName": "StreamingDistributionConfig",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             }
           }
         },
@@ -7279,7 +7283,7 @@ module.exports={
         "type": "structure",
         "members": {
           "StreamingDistribution": {
-            "shape": "S2e"
+            "shape": "S2i"
           },
           "Location": {
             "location": "header",
@@ -7295,7 +7299,7 @@ module.exports={
     },
     "CreateStreamingDistributionWithTags": {
       "http": {
-        "requestUri": "/2016-09-29/streaming-distribution?WithTags",
+        "requestUri": "/2016-11-25/streaming-distribution?WithTags",
         "responseCode": 201
       },
       "input": {
@@ -7307,7 +7311,7 @@ module.exports={
           "StreamingDistributionConfigWithTags": {
             "locationName": "StreamingDistributionConfigWithTags",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             },
             "type": "structure",
             "required": [
@@ -7316,10 +7320,10 @@ module.exports={
             ],
             "members": {
               "StreamingDistributionConfig": {
-                "shape": "S2a"
+                "shape": "S2e"
               },
               "Tags": {
-                "shape": "S1x"
+                "shape": "S21"
               }
             }
           }
@@ -7330,7 +7334,7 @@ module.exports={
         "type": "structure",
         "members": {
           "StreamingDistribution": {
-            "shape": "S2e"
+            "shape": "S2i"
           },
           "Location": {
             "location": "header",
@@ -7347,7 +7351,7 @@ module.exports={
     "DeleteCloudFrontOriginAccessIdentity": {
       "http": {
         "method": "DELETE",
-        "requestUri": "/2016-09-29/origin-access-identity/cloudfront/{Id}",
+        "requestUri": "/2016-11-25/origin-access-identity/cloudfront/{Id}",
         "responseCode": 204
       },
       "input": {
@@ -7370,7 +7374,7 @@ module.exports={
     "DeleteDistribution": {
       "http": {
         "method": "DELETE",
-        "requestUri": "/2016-09-29/distribution/{Id}",
+        "requestUri": "/2016-11-25/distribution/{Id}",
         "responseCode": 204
       },
       "input": {
@@ -7393,7 +7397,7 @@ module.exports={
     "DeleteStreamingDistribution": {
       "http": {
         "method": "DELETE",
-        "requestUri": "/2016-09-29/streaming-distribution/{Id}",
+        "requestUri": "/2016-11-25/streaming-distribution/{Id}",
         "responseCode": 204
       },
       "input": {
@@ -7416,7 +7420,7 @@ module.exports={
     "GetCloudFrontOriginAccessIdentity": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/origin-access-identity/cloudfront/{Id}"
+        "requestUri": "/2016-11-25/origin-access-identity/cloudfront/{Id}"
       },
       "input": {
         "type": "structure",
@@ -7447,7 +7451,7 @@ module.exports={
     "GetCloudFrontOriginAccessIdentityConfig": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri": "/2016-11-25/origin-access-identity/cloudfront/{Id}/config"
       },
       "input": {
         "type": "structure",
@@ -7478,7 +7482,7 @@ module.exports={
     "GetDistribution": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/distribution/{Id}"
+        "requestUri": "/2016-11-25/distribution/{Id}"
       },
       "input": {
         "type": "structure",
@@ -7496,7 +7500,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Distribution": {
-            "shape": "S1o"
+            "shape": "S1s"
           },
           "ETag": {
             "location": "header",
@@ -7509,7 +7513,7 @@ module.exports={
     "GetDistributionConfig": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/distribution/{Id}/config"
+        "requestUri": "/2016-11-25/distribution/{Id}/config"
       },
       "input": {
         "type": "structure",
@@ -7540,7 +7544,7 @@ module.exports={
     "GetInvalidation": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/distribution/{DistributionId}/invalidation/{Id}"
+        "requestUri": "/2016-11-25/distribution/{DistributionId}/invalidation/{Id}"
       },
       "input": {
         "type": "structure",
@@ -7563,7 +7567,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Invalidation": {
-            "shape": "S28"
+            "shape": "S2c"
           }
         },
         "payload": "Invalidation"
@@ -7572,7 +7576,7 @@ module.exports={
     "GetStreamingDistribution": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/streaming-distribution/{Id}"
+        "requestUri": "/2016-11-25/streaming-distribution/{Id}"
       },
       "input": {
         "type": "structure",
@@ -7590,7 +7594,7 @@ module.exports={
         "type": "structure",
         "members": {
           "StreamingDistribution": {
-            "shape": "S2e"
+            "shape": "S2i"
           },
           "ETag": {
             "location": "header",
@@ -7603,7 +7607,7 @@ module.exports={
     "GetStreamingDistributionConfig": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/streaming-distribution/{Id}/config"
+        "requestUri": "/2016-11-25/streaming-distribution/{Id}/config"
       },
       "input": {
         "type": "structure",
@@ -7621,7 +7625,7 @@ module.exports={
         "type": "structure",
         "members": {
           "StreamingDistributionConfig": {
-            "shape": "S2a"
+            "shape": "S2e"
           },
           "ETag": {
             "location": "header",
@@ -7634,7 +7638,7 @@ module.exports={
     "ListCloudFrontOriginAccessIdentities": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/origin-access-identity/cloudfront"
+        "requestUri": "/2016-11-25/origin-access-identity/cloudfront"
       },
       "input": {
         "type": "structure",
@@ -7698,7 +7702,7 @@ module.exports={
     "ListDistributions": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/distribution"
+        "requestUri": "/2016-11-25/distribution"
       },
       "input": {
         "type": "structure",
@@ -7717,7 +7721,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DistributionList": {
-            "shape": "S36"
+            "shape": "S3a"
           }
         },
         "payload": "DistributionList"
@@ -7726,7 +7730,7 @@ module.exports={
     "ListDistributionsByWebACLId": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/distributionsByWebACLId/{WebACLId}"
+        "requestUri": "/2016-11-25/distributionsByWebACLId/{WebACLId}"
       },
       "input": {
         "type": "structure",
@@ -7752,7 +7756,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DistributionList": {
-            "shape": "S36"
+            "shape": "S3a"
           }
         },
         "payload": "DistributionList"
@@ -7761,7 +7765,7 @@ module.exports={
     "ListInvalidations": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/distribution/{DistributionId}/invalidation"
+        "requestUri": "/2016-11-25/distribution/{DistributionId}/invalidation"
       },
       "input": {
         "type": "structure",
@@ -7834,7 +7838,7 @@ module.exports={
     "ListStreamingDistributions": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/streaming-distribution"
+        "requestUri": "/2016-11-25/streaming-distribution"
       },
       "input": {
         "type": "structure",
@@ -7899,7 +7903,7 @@ module.exports={
                     },
                     "DomainName": {},
                     "S3Origin": {
-                      "shape": "S2b"
+                      "shape": "S2f"
                     },
                     "Aliases": {
                       "shape": "S8"
@@ -7924,7 +7928,7 @@ module.exports={
     "ListTagsForResource": {
       "http": {
         "method": "GET",
-        "requestUri": "/2016-09-29/tagging"
+        "requestUri": "/2016-11-25/tagging"
       },
       "input": {
         "type": "structure",
@@ -7945,7 +7949,7 @@ module.exports={
         ],
         "members": {
           "Tags": {
-            "shape": "S1x"
+            "shape": "S21"
           }
         },
         "payload": "Tags"
@@ -7953,7 +7957,7 @@ module.exports={
     },
     "TagResource": {
       "http": {
-        "requestUri": "/2016-09-29/tagging?Operation=Tag",
+        "requestUri": "/2016-11-25/tagging?Operation=Tag",
         "responseCode": 204
       },
       "input": {
@@ -7968,10 +7972,10 @@ module.exports={
             "locationName": "Resource"
           },
           "Tags": {
-            "shape": "S1x",
+            "shape": "S21",
             "locationName": "Tags",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             }
           }
         },
@@ -7980,7 +7984,7 @@ module.exports={
     },
     "UntagResource": {
       "http": {
-        "requestUri": "/2016-09-29/tagging?Operation=Untag",
+        "requestUri": "/2016-11-25/tagging?Operation=Untag",
         "responseCode": 204
       },
       "input": {
@@ -7997,7 +8001,7 @@ module.exports={
           "TagKeys": {
             "locationName": "TagKeys",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             },
             "type": "structure",
             "members": {
@@ -8016,7 +8020,7 @@ module.exports={
     "UpdateCloudFrontOriginAccessIdentity": {
       "http": {
         "method": "PUT",
-        "requestUri": "/2016-09-29/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri": "/2016-11-25/origin-access-identity/cloudfront/{Id}/config"
       },
       "input": {
         "type": "structure",
@@ -8029,7 +8033,7 @@ module.exports={
             "shape": "S2",
             "locationName": "CloudFrontOriginAccessIdentityConfig",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             }
           },
           "Id": {
@@ -8060,7 +8064,7 @@ module.exports={
     "UpdateDistribution": {
       "http": {
         "method": "PUT",
-        "requestUri": "/2016-09-29/distribution/{Id}/config"
+        "requestUri": "/2016-11-25/distribution/{Id}/config"
       },
       "input": {
         "type": "structure",
@@ -8073,7 +8077,7 @@ module.exports={
             "shape": "S7",
             "locationName": "DistributionConfig",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             }
           },
           "Id": {
@@ -8091,7 +8095,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Distribution": {
-            "shape": "S1o"
+            "shape": "S1s"
           },
           "ETag": {
             "location": "header",
@@ -8104,7 +8108,7 @@ module.exports={
     "UpdateStreamingDistribution": {
       "http": {
         "method": "PUT",
-        "requestUri": "/2016-09-29/streaming-distribution/{Id}/config"
+        "requestUri": "/2016-11-25/streaming-distribution/{Id}/config"
       },
       "input": {
         "type": "structure",
@@ -8114,10 +8118,10 @@ module.exports={
         ],
         "members": {
           "StreamingDistributionConfig": {
-            "shape": "S2a",
+            "shape": "S2e",
             "locationName": "StreamingDistributionConfig",
             "xmlNamespace": {
-              "uri": "http://cloudfront.amazonaws.com/doc/2016-09-29/"
+              "uri": "http://cloudfront.amazonaws.com/doc/2016-11-25/"
             }
           },
           "Id": {
@@ -8135,7 +8139,7 @@ module.exports={
         "type": "structure",
         "members": {
           "StreamingDistribution": {
-            "shape": "S2e"
+            "shape": "S2i"
           },
           "ETag": {
             "location": "header",
@@ -8194,10 +8198,10 @@ module.exports={
           "shape": "Sn"
         },
         "CacheBehaviors": {
-          "shape": "S16"
+          "shape": "S1a"
         },
         "CustomErrorResponses": {
-          "shape": "S19"
+          "shape": "S1d"
         },
         "Comment": {},
         "Logging": {
@@ -8224,10 +8228,10 @@ module.exports={
           "type": "boolean"
         },
         "ViewerCertificate": {
-          "shape": "S1e"
+          "shape": "S1i"
         },
         "Restrictions": {
-          "shape": "S1i"
+          "shape": "S1m"
         },
         "WebACLId": {},
         "HttpVersion": {},
@@ -8385,6 +8389,9 @@ module.exports={
         },
         "Compress": {
           "type": "boolean"
+        },
+        "LambdaFunctionAssociations": {
+          "shape": "S16"
         }
       }
     },
@@ -8529,6 +8536,28 @@ module.exports={
         "Items": {
           "type": "list",
           "member": {
+            "locationName": "LambdaFunctionAssociation",
+            "type": "structure",
+            "members": {
+              "LambdaFunctionARN": {},
+              "EventType": {}
+            }
+          }
+        }
+      }
+    },
+    "S1a": {
+      "type": "structure",
+      "required": [
+        "Quantity"
+      ],
+      "members": {
+        "Quantity": {
+          "type": "integer"
+        },
+        "Items": {
+          "type": "list",
+          "member": {
             "locationName": "CacheBehavior",
             "type": "structure",
             "required": [
@@ -8566,13 +8595,16 @@ module.exports={
               },
               "Compress": {
                 "type": "boolean"
+              },
+              "LambdaFunctionAssociations": {
+                "shape": "S16"
               }
             }
           }
         }
       }
     },
-    "S19": {
+    "S1d": {
       "type": "structure",
       "required": [
         "Quantity"
@@ -8603,7 +8635,7 @@ module.exports={
         }
       }
     },
-    "S1e": {
+    "S1i": {
       "type": "structure",
       "members": {
         "CloudFrontDefaultCertificate": {
@@ -8621,7 +8653,7 @@ module.exports={
         }
       }
     },
-    "S1i": {
+    "S1m": {
       "type": "structure",
       "required": [
         "GeoRestriction"
@@ -8648,7 +8680,7 @@ module.exports={
         }
       }
     },
-    "S1o": {
+    "S1s": {
       "type": "structure",
       "required": [
         "Id",
@@ -8672,14 +8704,14 @@ module.exports={
         },
         "DomainName": {},
         "ActiveTrustedSigners": {
-          "shape": "S1q"
+          "shape": "S1u"
         },
         "DistributionConfig": {
           "shape": "S7"
         }
       }
     },
-    "S1q": {
+    "S1u": {
       "type": "structure",
       "required": [
         "Enabled",
@@ -8721,7 +8753,7 @@ module.exports={
         }
       }
     },
-    "S1x": {
+    "S21": {
       "type": "structure",
       "members": {
         "Items": {
@@ -8740,7 +8772,7 @@ module.exports={
         }
       }
     },
-    "S24": {
+    "S28": {
       "type": "structure",
       "required": [
         "Paths",
@@ -8767,7 +8799,7 @@ module.exports={
         "CallerReference": {}
       }
     },
-    "S28": {
+    "S2c": {
       "type": "structure",
       "required": [
         "Id",
@@ -8782,11 +8814,11 @@ module.exports={
           "type": "timestamp"
         },
         "InvalidationBatch": {
-          "shape": "S24"
+          "shape": "S28"
         }
       }
     },
-    "S2a": {
+    "S2e": {
       "type": "structure",
       "required": [
         "CallerReference",
@@ -8798,7 +8830,7 @@ module.exports={
       "members": {
         "CallerReference": {},
         "S3Origin": {
-          "shape": "S2b"
+          "shape": "S2f"
         },
         "Aliases": {
           "shape": "S8"
@@ -8828,7 +8860,7 @@ module.exports={
         }
       }
     },
-    "S2b": {
+    "S2f": {
       "type": "structure",
       "required": [
         "DomainName",
@@ -8839,7 +8871,7 @@ module.exports={
         "OriginAccessIdentity": {}
       }
     },
-    "S2e": {
+    "S2i": {
       "type": "structure",
       "required": [
         "Id",
@@ -8858,14 +8890,14 @@ module.exports={
         },
         "DomainName": {},
         "ActiveTrustedSigners": {
-          "shape": "S1q"
+          "shape": "S1u"
         },
         "StreamingDistributionConfig": {
-          "shape": "S2a"
+          "shape": "S2e"
         }
       }
     },
-    "S36": {
+    "S3a": {
       "type": "structure",
       "required": [
         "Marker",
@@ -8928,10 +8960,10 @@ module.exports={
                 "shape": "Sn"
               },
               "CacheBehaviors": {
-                "shape": "S16"
+                "shape": "S1a"
               },
               "CustomErrorResponses": {
-                "shape": "S19"
+                "shape": "S1d"
               },
               "Comment": {},
               "PriceClass": {},
@@ -8939,10 +8971,10 @@ module.exports={
                 "type": "boolean"
               },
               "ViewerCertificate": {
-                "shape": "S1e"
+                "shape": "S1i"
               },
               "Restrictions": {
-                "shape": "S1i"
+                "shape": "S1m"
               },
               "WebACLId": {},
               "HttpVersion": {},
@@ -9050,7 +9082,8 @@ module.exports={
     "serviceAbbreviation": "CloudHSM",
     "serviceFullName": "Amazon CloudHSM",
     "signatureVersion": "v4",
-    "targetPrefix": "CloudHsmFrontendService"
+    "targetPrefix": "CloudHsmFrontendService",
+    "uid": "cloudhsm-2014-05-30"
   },
   "operations": {
     "AddTagsToResource": {
@@ -9570,7 +9603,8 @@ module.exports={
     "serviceAbbreviation": "CloudTrail",
     "serviceFullName": "AWS CloudTrail",
     "signatureVersion": "v4",
-    "targetPrefix": "com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101"
+    "targetPrefix": "com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
+    "uid": "cloudtrail-2013-11-01"
   },
   "operations": {
     "AddTags": {
@@ -10102,7 +10136,8 @@ module.exports={
     "serviceAbbreviation": "CodeCommit",
     "serviceFullName": "AWS CodeCommit",
     "signatureVersion": "v4",
-    "targetPrefix": "CodeCommit_20150413"
+    "targetPrefix": "CodeCommit_20150413",
+    "uid": "codecommit-2015-04-13"
   },
   "operations": {
     "BatchGetRepositories": {
@@ -10494,7 +10529,8 @@ module.exports={
     "serviceFullName": "AWS CodeDeploy",
     "signatureVersion": "v4",
     "targetPrefix": "CodeDeploy_20141006",
-    "timestampFormat": "unixTimestamp"
+    "timestampFormat": "unixTimestamp",
+    "uid": "codedeploy-2014-10-06"
   },
   "operations": {
     "AddTagsToOnPremisesInstances": {
@@ -11682,7 +11718,8 @@ module.exports={
     "serviceAbbreviation": "CodePipeline",
     "serviceFullName": "AWS CodePipeline",
     "signatureVersion": "v4",
-    "targetPrefix": "CodePipeline_20150709"
+    "targetPrefix": "CodePipeline_20150709",
+    "uid": "codepipeline-2015-07-09"
   },
   "operations": {
     "AcknowledgeJob": {
@@ -12782,7 +12819,8 @@ module.exports={
     "protocol": "json",
     "serviceFullName": "Amazon Cognito Identity",
     "signatureVersion": "v4",
-    "targetPrefix": "AWSCognitoIdentityService"
+    "targetPrefix": "AWSCognitoIdentityService",
+    "uid": "cognito-identity-2014-06-30"
   },
   "operations": {
     "CreateIdentityPool": {
@@ -13270,7 +13308,8 @@ module.exports={
     "protocol": "json",
     "serviceFullName": "Amazon Cognito Identity Provider",
     "signatureVersion": "v4",
-    "targetPrefix": "AWSCognitoIdentityProviderService"
+    "targetPrefix": "AWSCognitoIdentityProviderService",
+    "uid": "cognito-identity-2014-06-30"
   },
   "operations": {
     "AddCustomAttributes": {
@@ -15145,7 +15184,8 @@ module.exports={
     "jsonVersion": "1.1",
     "serviceFullName": "Amazon Cognito Sync",
     "signatureVersion": "v4",
-    "protocol": "rest-json"
+    "protocol": "rest-json",
+    "uid": "cognito-sync-2014-06-30"
   },
   "operations": {
     "BulkPublish": {
@@ -16773,7 +16813,8 @@ module.exports={
     "protocol": "json",
     "serviceFullName": "AWS Device Farm",
     "signatureVersion": "v4",
-    "targetPrefix": "DeviceFarm_20150623"
+    "targetPrefix": "DeviceFarm_20150623",
+    "uid": "devicefarm-2015-06-23"
   },
   "operations": {
     "CreateDevicePool": {
@@ -18254,7 +18295,8 @@ module.exports={
     "protocol": "json",
     "serviceFullName": "AWS Direct Connect",
     "signatureVersion": "v4",
-    "targetPrefix": "OvertureService"
+    "targetPrefix": "OvertureService",
+    "uid": "directconnect-2012-10-25"
   },
   "operations": {
     "AllocateConnectionOnInterconnect": {
@@ -19719,7 +19761,8 @@ module.exports={
     "serviceAbbreviation": "DynamoDB",
     "serviceFullName": "Amazon DynamoDB",
     "signatureVersion": "v4",
-    "targetPrefix": "DynamoDB_20120810"
+    "targetPrefix": "DynamoDB_20120810",
+    "uid": "dynamodb-2012-08-10"
   },
   "operations": {
     "BatchGetItem": {
@@ -32867,6 +32910,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "ecr-2015-09-21",
     "apiVersion": "2015-09-21",
     "endpointPrefix": "ecr",
     "jsonVersion": "1.1",
@@ -33437,6 +33481,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "ecs-2014-11-13",
     "apiVersion": "2014-11-13",
     "endpointPrefix": "ecs",
     "jsonVersion": "1.1",
@@ -34716,6 +34761,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "elasticache-2015-02-02",
     "apiVersion": "2015-02-02",
     "endpointPrefix": "elasticache",
     "protocol": "query",
@@ -37843,6 +37889,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "elasticloadbalancing-2012-06-01",
     "apiVersion": "2012-06-01",
     "endpointPrefix": "elasticloadbalancing",
     "protocol": "query",
@@ -38888,6 +38935,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "elasticloadbalancingv2-2015-12-01",
     "apiVersion": "2015-12-01",
     "endpointPrefix": "elasticloadbalancing",
     "protocol": "query",
@@ -39933,6 +39981,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "elasticmapreduce-2009-03-31",
     "apiVersion": "2009-03-31",
     "endpointPrefix": "elasticmapreduce",
     "jsonVersion": "1.1",
@@ -41501,6 +41550,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "elastictranscoder-2012-09-25",
     "apiVersion": "2012-09-25",
     "endpointPrefix": "elastictranscoder",
     "protocol": "rest-json",
@@ -42618,6 +42668,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "email-2010-12-01",
     "apiVersion": "2010-12-01",
     "endpointPrefix": "email",
     "protocol": "query",
@@ -44097,6 +44148,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "events-2015-10-07",
     "apiVersion": "2015-10-07",
     "endpointPrefix": "events",
     "jsonVersion": "1.1",
@@ -44428,6 +44480,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "firehose-2015-08-04",
     "apiVersion": "2015-08-04",
     "endpointPrefix": "firehose",
     "jsonVersion": "1.1",
@@ -44979,6 +45032,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "gamelift-2015-10-01",
     "apiVersion": "2015-10-01",
     "endpointPrefix": "gamelift",
     "jsonVersion": "1.1",
@@ -46250,6 +46304,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "inspector-2016-02-16",
     "apiVersion": "2016-02-16",
     "endpointPrefix": "inspector",
     "jsonVersion": "1.1",
@@ -47499,6 +47554,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "iot-2015-05-28",
     "apiVersion": "2015-05-28",
     "endpointPrefix": "iot",
     "serviceFullName": "AWS IoT",
@@ -49449,6 +49505,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "iot-data-2015-05-28",
     "apiVersion": "2015-05-28",
     "endpointPrefix": "data.iot",
     "protocol": "rest-json",
@@ -49578,6 +49635,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "kinesis-2013-12-02",
     "apiVersion": "2013-12-02",
     "endpointPrefix": "kinesis",
     "jsonVersion": "1.1",
@@ -50176,6 +50234,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "kms-2014-11-01",
     "apiVersion": "2014-11-01",
     "endpointPrefix": "kms",
     "jsonVersion": "1.1",
@@ -52417,6 +52476,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "logs-2014-03-28",
     "apiVersion": "2014-03-28",
     "endpointPrefix": "logs",
     "jsonVersion": "1.1",
@@ -53191,6 +53251,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "machinelearning-2014-12-12",
     "apiVersion": "2014-12-12",
     "endpointPrefix": "machinelearning",
     "jsonVersion": "1.1",
@@ -54412,6 +54473,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "marketplacecommerceanalytics-2015-07-01",
     "apiVersion": "2015-07-01",
     "endpointPrefix": "marketplacecommerceanalytics",
     "jsonVersion": "1.1",
@@ -54537,7 +54599,8 @@ module.exports={
       "2016-01-28*",
       "2016-08-01*",
       "2016-08-20*",
-      "2016-09-07*"
+      "2016-09-07*",
+      "2016-09-29*"
     ],
     "cors": true
   },
@@ -54874,6 +54937,10 @@ module.exports={
     "name": "WAF",
     "cors": true
   },
+  "wafregional": {
+    "prefix": "waf-regional",
+    "name": "WAFRegional"
+  },
   "workspaces": {
     "name": "WorkSpaces"
   }
@@ -54958,6 +55025,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "monitoring-2010-08-01",
     "apiVersion": "2010-08-01",
     "endpointPrefix": "monitoring",
     "protocol": "query",
@@ -55520,6 +55588,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "opsworks-2013-02-18",
     "apiVersion": "2013-02-18",
     "endpointPrefix": "opsworks",
     "jsonVersion": "1.1",
@@ -58267,6 +58336,7 @@ module.exports={
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
     "signatureVersion": "v4",
+    "uid": "rds-2013-01-10",
     "xmlNamespace": "http://rds.amazonaws.com/doc/2013-01-10/"
   },
   "operations": {
@@ -60262,6 +60332,7 @@ module.exports={
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
     "signatureVersion": "v4",
+    "uid": "rds-2013-02-12",
     "xmlNamespace": "http://rds.amazonaws.com/doc/2013-02-12/"
   },
   "operations": {
@@ -62402,6 +62473,7 @@ module.exports={
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
     "signatureVersion": "v4",
+    "uid": "rds-2013-09-09",
     "xmlNamespace": "http://rds.amazonaws.com/doc/2013-09-09/"
   },
   "operations": {
@@ -64667,6 +64739,7 @@ module.exports={
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
     "signatureVersion": "v4",
+    "uid": "rds-2014-10-31",
     "xmlNamespace": "http://rds.amazonaws.com/doc/2014-10-31/"
   },
   "operations": {
@@ -67747,6 +67820,9 @@ module.exports={
         },
         "Endpoint": {},
         "ReaderEndpoint": {},
+        "MultiAZ": {
+          "type": "boolean"
+        },
         "Engine": {},
         "EngineVersion": {},
         "LatestRestorableTime": {
@@ -67814,6 +67890,9 @@ module.exports={
               "Status": {}
             }
           }
+        },
+        "ClusterCreateTime": {
+          "type": "timestamp"
         }
       },
       "wrapper": true
@@ -68301,6 +68380,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "redshift-2012-12-01",
     "apiVersion": "2012-12-01",
     "endpointPrefix": "redshift",
     "protocol": "query",
@@ -73139,6 +73219,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "route53domains-2014-05-15",
     "apiVersion": "2014-05-15",
     "endpointPrefix": "route53domains",
     "jsonVersion": "1.1",
@@ -78556,6 +78637,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "servicecatalog-2015-12-10",
     "apiVersion": "2015-12-10",
     "endpointPrefix": "servicecatalog",
     "jsonVersion": "1.1",
@@ -79949,6 +80031,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "sns-2010-03-31",
     "apiVersion": "2010-03-31",
     "endpointPrefix": "sns",
     "protocol": "query",
@@ -83762,6 +83845,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "storagegateway-2013-06-30",
     "apiVersion": "2013-06-30",
     "endpointPrefix": "storagegateway",
     "jsonVersion": "1.1",
@@ -85302,6 +85386,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "streams-dynamodb-2012-08-10",
     "apiVersion": "2012-08-10",
     "endpointPrefix": "streams.dynamodb",
     "jsonVersion": "1.0",
@@ -85792,6 +85877,7 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "uid": "waf-2015-08-24",
     "apiVersion": "2015-08-24",
     "endpointPrefix": "waf",
     "jsonVersion": "1.1",
@@ -87243,13 +87329,13 @@ var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
 apiLoader.services['cloudfront'] = {};
-AWS.CloudFront = Service.defineService('cloudfront', ['2013-05-12*', '2013-11-11*', '2014-05-31*', '2014-10-21*', '2014-11-06*', '2015-04-17*', '2015-07-27*', '2015-09-17*', '2016-01-13*', '2016-01-28*', '2016-08-01*', '2016-08-20*', '2016-09-07*', '2016-09-29']);
+AWS.CloudFront = Service.defineService('cloudfront', ['2013-05-12*', '2013-11-11*', '2014-05-31*', '2014-10-21*', '2014-11-06*', '2015-04-17*', '2015-07-27*', '2015-09-17*', '2016-01-13*', '2016-01-28*', '2016-08-01*', '2016-08-20*', '2016-09-07*', '2016-09-29*', '2016-11-25']);
 require('../lib/services/cloudfront');
-Object.defineProperty(apiLoader.services['cloudfront'], '2016-09-29', {
+Object.defineProperty(apiLoader.services['cloudfront'], '2016-11-25', {
   get: function get() {
-    var model = require('../apis/cloudfront-2016-09-29.min.json');
-    model.paginators = require('../apis/cloudfront-2016-09-29.paginators.json').pagination;
-    model.waiters = require('../apis/cloudfront-2016-09-29.waiters2.json').waiters;
+    var model = require('../apis/cloudfront-2016-11-25.min.json');
+    model.paginators = require('../apis/cloudfront-2016-11-25.paginators.json').pagination;
+    model.waiters = require('../apis/cloudfront-2016-11-25.waiters2.json').waiters;
     return model;
   },
   enumerable: true,
@@ -87258,7 +87344,7 @@ Object.defineProperty(apiLoader.services['cloudfront'], '2016-09-29', {
 
 module.exports = AWS.CloudFront;
 
-},{"../apis/cloudfront-2016-09-29.min.json":12,"../apis/cloudfront-2016-09-29.paginators.json":13,"../apis/cloudfront-2016-09-29.waiters2.json":14,"../lib/api_loader":187,"../lib/core":191,"../lib/node_loader":188,"../lib/service":229,"../lib/services/cloudfront":231}],136:[function(require,module,exports){
+},{"../apis/cloudfront-2016-11-25.min.json":12,"../apis/cloudfront-2016-11-25.paginators.json":13,"../apis/cloudfront-2016-11-25.waiters2.json":14,"../lib/api_loader":187,"../lib/core":191,"../lib/node_loader":188,"../lib/service":229,"../lib/services/cloudfront":231}],136:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -88731,7 +88817,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.12',
+  VERSION: '2.7.13',
 
 
   Signers: {},

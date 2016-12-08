@@ -336,6 +336,10 @@ declare namespace CloudFront {
      * Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify true; if not, specify false. For more information, see Serving Compressed Files in the Amazon CloudFront Developer Guide.
      */
     Compress?: boolean;
+    /**
+     * A complex type that contains zero or more Lambda function associations for a cache behavior.
+     */
+    LambdaFunctionAssociations?: LambdaFunctionAssociations;
   }
   export type CacheBehaviorList = CacheBehavior[];
   export interface CacheBehaviors {
@@ -654,6 +658,10 @@ declare namespace CloudFront {
      * Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify true; if not, specify false. For more information, see Serving Compressed Files in the Amazon CloudFront Developer Guide.
      */
     Compress?: boolean;
+    /**
+     * A complex type that contains zero or more Lambda function associations for a cache behavior.
+     */
+    LambdaFunctionAssociations?: LambdaFunctionAssociations;
   }
   export interface DeleteCloudFrontOriginAccessIdentityRequest {
     /**
@@ -881,6 +889,7 @@ declare namespace CloudFront {
     IsIPV6Enabled: boolean;
   }
   export type DistributionSummaryList = DistributionSummary[];
+  export type EventType = "viewer-request"|"viewer-response"|"origin-request"|"origin-response"|string;
   export interface ForwardedValues {
     /**
      * Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of QueryString and on the values that you specify for QueryStringCacheKeys, if any: If you specify true for QueryString and you don't specify any values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin. If you specify true for QueryString and you specify one or more values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify. If you specify false for QueryString, CloudFront doesn't forward any query string parameters to the origin, and doesn't cache based on query string parameters. For more information, see Configuring CloudFront to Cache Based on Query String Parameters in the Amazon CloudFront Developer Guide.
@@ -1115,6 +1124,27 @@ declare namespace CloudFront {
      * A complex type that lists the active CloudFront key pairs, if any, that are associated with AwsAccountNumber. For more information, see ActiveTrustedSigners.
      */
     Items?: KeyPairIdList;
+  }
+  export interface LambdaFunctionAssociation {
+    /**
+     * The ARN of the Lambda function.
+     */
+    LambdaFunctionARN?: string;
+    /**
+     * Specifies the event type that triggers a Lambda function invocation. Valid values are:    viewer-request     origin-request     viewer-response     origin-response   
+     */
+    EventType?: EventType;
+  }
+  export type LambdaFunctionAssociationList = LambdaFunctionAssociation[];
+  export interface LambdaFunctionAssociations {
+    /**
+     * The number of Lambda function associations for this cache behavior.
+     */
+    Quantity: integer;
+    /**
+     *  Optional: A complex type that contains LambdaFunctionAssociation items for this cache behavior. If Quantity is 0, you can omit Items.
+     */
+    Items?: LambdaFunctionAssociationList;
   }
   export interface ListCloudFrontOriginAccessIdentitiesRequest {
     /**
@@ -1642,17 +1672,8 @@ declare namespace CloudFront {
     ETag?: string;
   }
   export interface ViewerCertificate {
-    /**
-     * If you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg), set to true. Omit this value if you are setting an ACMCertificateArn or IAMCertificateId.
-     */
     CloudFrontDefaultCertificate?: boolean;
-    /**
-     * If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), specify the IAM certificate identifier of the custom viewer certificate for this distribution. Specify either this value, ACMCertificateArn, or CloudFrontDefaultCertificate.
-     */
     IAMCertificateId?: string;
-    /**
-     * If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), specify the ACM certificate ARN of the custom viewer certificate for this distribution. Specify either this value, IAMCertificateId, or CloudFrontDefaultCertificate.
-     */
     ACMCertificateArn?: string;
     /**
      * If you specify a value for ACMCertificateArn or for IAMCertificateId, you must also specify how you want CloudFront to serve HTTPS requests: using a method that works for all clients or one that works for most clients:    vip: CloudFront uses dedicated IP addresses for your content and can respond to HTTPS requests from any viewer. However, you must request permission to use this feature, and you incur additional monthly charges.    sni-only: CloudFront can respond to HTTPS requests from viewers that support Server Name Indication (SNI). All modern browsers support SNI, but some browsers still in use don't support SNI. If some of your users' browsers don't support SNI, we recommend that you do one of the following:   Use the vip option (dedicated IP addresses) instead of sni-only.   Use the CloudFront SSL/TLS certificate instead of a custom certificate. This requires that you use the CloudFront domain name of your distribution in the URLs for your objects, for example, https://d111111abcdef8.cloudfront.net/logo.png.   If you can control which browser your users use, upgrade the browser to one that supports SNI.   Use HTTP instead of HTTPS.     Do not specify a value for SSLSupportMethod if you specified &lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt;. For more information, see Using Alternate Domain Names and HTTPS in the Amazon CloudFront Developer Guide.
@@ -1678,7 +1699,7 @@ declare namespace CloudFront {
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
-  export type apiVersion = "2013-05-12"|"2013-11-11"|"2014-05-31"|"2014-10-21"|"2014-11-06"|"2015-04-17"|"2015-07-27"|"2015-09-17"|"2016-01-13"|"2016-01-28"|"2016-08-01"|"2016-08-20"|"2016-09-07"|"2016-09-29"|"latest"|string;
+  export type apiVersion = "2013-05-12"|"2013-11-11"|"2014-05-31"|"2014-10-21"|"2014-11-06"|"2015-04-17"|"2015-07-27"|"2015-09-17"|"2016-01-13"|"2016-01-28"|"2016-08-01"|"2016-08-20"|"2016-09-07"|"2016-09-29"|"2016-11-25"|"latest"|string;
   export interface ClientApiVersions {
     /**
      * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

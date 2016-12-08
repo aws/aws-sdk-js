@@ -1,20 +1,21 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2016-09-29",
+    "apiVersion":"2016-11-25",
     "endpointPrefix":"cloudfront",
     "globalEndpoint":"cloudfront.amazonaws.com",
     "protocol":"rest-xml",
     "serviceAbbreviation":"CloudFront",
     "serviceFullName":"Amazon CloudFront",
-    "signatureVersion":"v4"
+    "signatureVersion":"v4",
+    "uid":"cloudfront-2016-11-25"
   },
   "operations":{
     "CreateCloudFrontOriginAccessIdentity":{
-      "name":"CreateCloudFrontOriginAccessIdentity2016_09_29",
+      "name":"CreateCloudFrontOriginAccessIdentity2016_11_25",
       "http":{
         "method":"POST",
-        "requestUri":"/2016-09-29/origin-access-identity/cloudfront",
+        "requestUri":"/2016-11-25/origin-access-identity/cloudfront",
         "responseCode":201
       },
       "input":{"shape":"CreateCloudFrontOriginAccessIdentityRequest"},
@@ -29,10 +30,10 @@
       "documentation":"<p>Creates a new origin access identity. If you're using Amazon S3 for your origin, you can use an origin access identity to require users to access your content using a CloudFront URL instead of the Amazon S3 URL. For more information about how to use origin access identities, see <a href=\"http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
     },
     "CreateDistribution":{
-      "name":"CreateDistribution2016_09_29",
+      "name":"CreateDistribution2016_11_25",
       "http":{
         "method":"POST",
-        "requestUri":"/2016-09-29/distribution",
+        "requestUri":"/2016-11-25/distribution",
         "responseCode":201
       },
       "input":{"shape":"CreateDistributionRequest"},
@@ -72,15 +73,18 @@
         {"shape":"InvalidWebACLId"},
         {"shape":"TooManyOriginCustomHeaders"},
         {"shape":"TooManyQueryStringParameters"},
-        {"shape":"InvalidQueryStringParameters"}
+        {"shape":"InvalidQueryStringParameters"},
+        {"shape":"TooManyDistributionsWithLambdaAssociations"},
+        {"shape":"TooManyLambdaFunctionAssociations"},
+        {"shape":"InvalidLambdaFunctionAssociation"}
       ],
       "documentation":"<p>Creates a new web distribution. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/distribution</code>/<code>distribution ID</code> resource.</p>"
     },
     "CreateDistributionWithTags":{
-      "name":"CreateDistributionWithTags2016_09_29",
+      "name":"CreateDistributionWithTags2016_11_25",
       "http":{
         "method":"POST",
-        "requestUri":"/2016-09-29/distribution?WithTags",
+        "requestUri":"/2016-11-25/distribution?WithTags",
         "responseCode":201
       },
       "input":{"shape":"CreateDistributionWithTagsRequest"},
@@ -121,15 +125,18 @@
         {"shape":"TooManyOriginCustomHeaders"},
         {"shape":"InvalidTagging"},
         {"shape":"TooManyQueryStringParameters"},
-        {"shape":"InvalidQueryStringParameters"}
+        {"shape":"InvalidQueryStringParameters"},
+        {"shape":"TooManyDistributionsWithLambdaAssociations"},
+        {"shape":"TooManyLambdaFunctionAssociations"},
+        {"shape":"InvalidLambdaFunctionAssociation"}
       ],
       "documentation":"<p>Create a new distribution with tags.</p>"
     },
     "CreateInvalidation":{
-      "name":"CreateInvalidation2016_09_29",
+      "name":"CreateInvalidation2016_11_25",
       "http":{
         "method":"POST",
-        "requestUri":"/2016-09-29/distribution/{DistributionId}/invalidation",
+        "requestUri":"/2016-11-25/distribution/{DistributionId}/invalidation",
         "responseCode":201
       },
       "input":{"shape":"CreateInvalidationRequest"},
@@ -146,10 +153,10 @@
       "documentation":"<p>Create a new invalidation. </p>"
     },
     "CreateStreamingDistribution":{
-      "name":"CreateStreamingDistribution2016_09_29",
+      "name":"CreateStreamingDistribution2016_11_25",
       "http":{
         "method":"POST",
-        "requestUri":"/2016-09-29/streaming-distribution",
+        "requestUri":"/2016-11-25/streaming-distribution",
         "responseCode":201
       },
       "input":{"shape":"CreateStreamingDistributionRequest"},
@@ -171,10 +178,10 @@
       "documentation":"<p>Creates a new RMTP distribution. An RTMP distribution is similar to a web distribution, but an RTMP distribution streams media files using the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files using HTTP. </p> <p>To create a new web distribution, submit a <code>POST</code> request to the <i>CloudFront API version</i>/distribution resource. The request body must include a document with a <i>StreamingDistributionConfig</i> element. The response echoes the <code>StreamingDistributionConfig</code> element and returns other information about the RTMP distribution.</p> <p>To get the status of your request, use the <i>GET StreamingDistribution</i> API action. When the value of <code>Enabled</code> is <code>true</code> and the value of <code>Status</code> is <code>Deployed</code>, your distribution is ready. A distribution usually deploys in less than 15 minutes.</p> <p>For more information about web distributions, see <a href=\"http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html\">Working with RTMP Distributions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <important> <p>Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a web distribution or an RTMP distribution, and when you invalidate objects. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there's a mismatch between the number of values you say you're specifying in the <code>Quantity</code> element and the number of values specified.</p> </important>"
     },
     "CreateStreamingDistributionWithTags":{
-      "name":"CreateStreamingDistributionWithTags2016_09_29",
+      "name":"CreateStreamingDistributionWithTags2016_11_25",
       "http":{
         "method":"POST",
-        "requestUri":"/2016-09-29/streaming-distribution?WithTags",
+        "requestUri":"/2016-11-25/streaming-distribution?WithTags",
         "responseCode":201
       },
       "input":{"shape":"CreateStreamingDistributionWithTagsRequest"},
@@ -197,10 +204,10 @@
       "documentation":"<p>Create a new streaming distribution with tags.</p>"
     },
     "DeleteCloudFrontOriginAccessIdentity":{
-      "name":"DeleteCloudFrontOriginAccessIdentity2016_09_29",
+      "name":"DeleteCloudFrontOriginAccessIdentity2016_11_25",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2016-09-29/origin-access-identity/cloudfront/{Id}",
+        "requestUri":"/2016-11-25/origin-access-identity/cloudfront/{Id}",
         "responseCode":204
       },
       "input":{"shape":"DeleteCloudFrontOriginAccessIdentityRequest"},
@@ -214,10 +221,10 @@
       "documentation":"<p>Delete an origin access identity. </p>"
     },
     "DeleteDistribution":{
-      "name":"DeleteDistribution2016_09_29",
+      "name":"DeleteDistribution2016_11_25",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2016-09-29/distribution/{Id}",
+        "requestUri":"/2016-11-25/distribution/{Id}",
         "responseCode":204
       },
       "input":{"shape":"DeleteDistributionRequest"},
@@ -231,10 +238,10 @@
       "documentation":"<p>Delete a distribution. </p>"
     },
     "DeleteStreamingDistribution":{
-      "name":"DeleteStreamingDistribution2016_09_29",
+      "name":"DeleteStreamingDistribution2016_11_25",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2016-09-29/streaming-distribution/{Id}",
+        "requestUri":"/2016-11-25/streaming-distribution/{Id}",
         "responseCode":204
       },
       "input":{"shape":"DeleteStreamingDistributionRequest"},
@@ -248,10 +255,10 @@
       "documentation":"<p>Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.</p> <p> <b>To delete an RTMP distribution using the CloudFront API</b>:</p> <ol> <li> <p>Disable the RTMP distribution.</p> </li> <li> <p>Submit a <code>GET Streaming Distribution Config</code> request to get the current configuration and the <code>Etag</code> header for the distribution. </p> </li> <li> <p>Update the XML document that was returned in the response to your <code>GET Streaming Distribution Config</code> request to change the value of <code>Enabled</code> to <code>false</code>.</p> </li> <li> <p>Submit a <code>PUT Streaming Distribution Config</code> request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Streaming Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to the <code>PUT Streaming Distribution Config</code> request to confirm that the distribution was successfully disabled.</p> </li> <li> <p>Submit a <code>GET Streaming Distribution Config</code> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> <li> <p>Submit a <code>DELETE Streaming Distribution</code> request. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Streaming Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to your <code>DELETE Streaming Distribution</code> request to confirm that the distribution was successfully deleted.</p> </li> </ol> <p>For information about deleting a distribution using the CloudFront console, see <a href=\"http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html\">Deleting a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
     },
     "GetCloudFrontOriginAccessIdentity":{
-      "name":"GetCloudFrontOriginAccessIdentity2016_09_29",
+      "name":"GetCloudFrontOriginAccessIdentity2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/origin-access-identity/cloudfront/{Id}"
+        "requestUri":"/2016-11-25/origin-access-identity/cloudfront/{Id}"
       },
       "input":{"shape":"GetCloudFrontOriginAccessIdentityRequest"},
       "output":{"shape":"GetCloudFrontOriginAccessIdentityResult"},
@@ -262,10 +269,10 @@
       "documentation":"<p>Get the information about an origin access identity. </p>"
     },
     "GetCloudFrontOriginAccessIdentityConfig":{
-      "name":"GetCloudFrontOriginAccessIdentityConfig2016_09_29",
+      "name":"GetCloudFrontOriginAccessIdentityConfig2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2016-11-25/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{"shape":"GetCloudFrontOriginAccessIdentityConfigRequest"},
       "output":{"shape":"GetCloudFrontOriginAccessIdentityConfigResult"},
@@ -276,10 +283,10 @@
       "documentation":"<p>Get the configuration information about an origin access identity. </p>"
     },
     "GetDistribution":{
-      "name":"GetDistribution2016_09_29",
+      "name":"GetDistribution2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/distribution/{Id}"
+        "requestUri":"/2016-11-25/distribution/{Id}"
       },
       "input":{"shape":"GetDistributionRequest"},
       "output":{"shape":"GetDistributionResult"},
@@ -290,10 +297,10 @@
       "documentation":"<p>Get the information about a distribution. </p>"
     },
     "GetDistributionConfig":{
-      "name":"GetDistributionConfig2016_09_29",
+      "name":"GetDistributionConfig2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/distribution/{Id}/config"
+        "requestUri":"/2016-11-25/distribution/{Id}/config"
       },
       "input":{"shape":"GetDistributionConfigRequest"},
       "output":{"shape":"GetDistributionConfigResult"},
@@ -304,10 +311,10 @@
       "documentation":"<p>Get the configuration information about a distribution. </p>"
     },
     "GetInvalidation":{
-      "name":"GetInvalidation2016_09_29",
+      "name":"GetInvalidation2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/distribution/{DistributionId}/invalidation/{Id}"
+        "requestUri":"/2016-11-25/distribution/{DistributionId}/invalidation/{Id}"
       },
       "input":{"shape":"GetInvalidationRequest"},
       "output":{"shape":"GetInvalidationResult"},
@@ -319,10 +326,10 @@
       "documentation":"<p>Get the information about an invalidation. </p>"
     },
     "GetStreamingDistribution":{
-      "name":"GetStreamingDistribution2016_09_29",
+      "name":"GetStreamingDistribution2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/streaming-distribution/{Id}"
+        "requestUri":"/2016-11-25/streaming-distribution/{Id}"
       },
       "input":{"shape":"GetStreamingDistributionRequest"},
       "output":{"shape":"GetStreamingDistributionResult"},
@@ -333,10 +340,10 @@
       "documentation":"<p>Gets information about a specified RTMP distribution, including the distribution configuration.</p>"
     },
     "GetStreamingDistributionConfig":{
-      "name":"GetStreamingDistributionConfig2016_09_29",
+      "name":"GetStreamingDistributionConfig2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/streaming-distribution/{Id}/config"
+        "requestUri":"/2016-11-25/streaming-distribution/{Id}/config"
       },
       "input":{"shape":"GetStreamingDistributionConfigRequest"},
       "output":{"shape":"GetStreamingDistributionConfigResult"},
@@ -347,10 +354,10 @@
       "documentation":"<p>Get the configuration information about a streaming distribution. </p>"
     },
     "ListCloudFrontOriginAccessIdentities":{
-      "name":"ListCloudFrontOriginAccessIdentities2016_09_29",
+      "name":"ListCloudFrontOriginAccessIdentities2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/origin-access-identity/cloudfront"
+        "requestUri":"/2016-11-25/origin-access-identity/cloudfront"
       },
       "input":{"shape":"ListCloudFrontOriginAccessIdentitiesRequest"},
       "output":{"shape":"ListCloudFrontOriginAccessIdentitiesResult"},
@@ -360,10 +367,10 @@
       "documentation":"<p>Lists origin access identities.</p>"
     },
     "ListDistributions":{
-      "name":"ListDistributions2016_09_29",
+      "name":"ListDistributions2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/distribution"
+        "requestUri":"/2016-11-25/distribution"
       },
       "input":{"shape":"ListDistributionsRequest"},
       "output":{"shape":"ListDistributionsResult"},
@@ -373,10 +380,10 @@
       "documentation":"<p>List distributions. </p>"
     },
     "ListDistributionsByWebACLId":{
-      "name":"ListDistributionsByWebACLId2016_09_29",
+      "name":"ListDistributionsByWebACLId2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/distributionsByWebACLId/{WebACLId}"
+        "requestUri":"/2016-11-25/distributionsByWebACLId/{WebACLId}"
       },
       "input":{"shape":"ListDistributionsByWebACLIdRequest"},
       "output":{"shape":"ListDistributionsByWebACLIdResult"},
@@ -387,10 +394,10 @@
       "documentation":"<p>List the distributions that are associated with a specified AWS WAF web ACL. </p>"
     },
     "ListInvalidations":{
-      "name":"ListInvalidations2016_09_29",
+      "name":"ListInvalidations2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/distribution/{DistributionId}/invalidation"
+        "requestUri":"/2016-11-25/distribution/{DistributionId}/invalidation"
       },
       "input":{"shape":"ListInvalidationsRequest"},
       "output":{"shape":"ListInvalidationsResult"},
@@ -402,10 +409,10 @@
       "documentation":"<p>Lists invalidation batches. </p>"
     },
     "ListStreamingDistributions":{
-      "name":"ListStreamingDistributions2016_09_29",
+      "name":"ListStreamingDistributions2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/streaming-distribution"
+        "requestUri":"/2016-11-25/streaming-distribution"
       },
       "input":{"shape":"ListStreamingDistributionsRequest"},
       "output":{"shape":"ListStreamingDistributionsResult"},
@@ -415,10 +422,10 @@
       "documentation":"<p>List streaming distributions. </p>"
     },
     "ListTagsForResource":{
-      "name":"ListTagsForResource2016_09_29",
+      "name":"ListTagsForResource2016_11_25",
       "http":{
         "method":"GET",
-        "requestUri":"/2016-09-29/tagging"
+        "requestUri":"/2016-11-25/tagging"
       },
       "input":{"shape":"ListTagsForResourceRequest"},
       "output":{"shape":"ListTagsForResourceResult"},
@@ -431,10 +438,10 @@
       "documentation":"<p>List tags for a CloudFront resource.</p>"
     },
     "TagResource":{
-      "name":"TagResource2016_09_29",
+      "name":"TagResource2016_11_25",
       "http":{
         "method":"POST",
-        "requestUri":"/2016-09-29/tagging?Operation=Tag",
+        "requestUri":"/2016-11-25/tagging?Operation=Tag",
         "responseCode":204
       },
       "input":{"shape":"TagResourceRequest"},
@@ -447,10 +454,10 @@
       "documentation":"<p>Add tags to a CloudFront resource.</p>"
     },
     "UntagResource":{
-      "name":"UntagResource2016_09_29",
+      "name":"UntagResource2016_11_25",
       "http":{
         "method":"POST",
-        "requestUri":"/2016-09-29/tagging?Operation=Untag",
+        "requestUri":"/2016-11-25/tagging?Operation=Untag",
         "responseCode":204
       },
       "input":{"shape":"UntagResourceRequest"},
@@ -463,10 +470,10 @@
       "documentation":"<p>Remove tags from a CloudFront resource.</p>"
     },
     "UpdateCloudFrontOriginAccessIdentity":{
-      "name":"UpdateCloudFrontOriginAccessIdentity2016_09_29",
+      "name":"UpdateCloudFrontOriginAccessIdentity2016_11_25",
       "http":{
         "method":"PUT",
-        "requestUri":"/2016-09-29/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2016-11-25/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{"shape":"UpdateCloudFrontOriginAccessIdentityRequest"},
       "output":{"shape":"UpdateCloudFrontOriginAccessIdentityResult"},
@@ -483,10 +490,10 @@
       "documentation":"<p>Update an origin access identity. </p>"
     },
     "UpdateDistribution":{
-      "name":"UpdateDistribution2016_09_29",
+      "name":"UpdateDistribution2016_11_25",
       "http":{
         "method":"PUT",
-        "requestUri":"/2016-09-29/distribution/{Id}/config"
+        "requestUri":"/2016-11-25/distribution/{Id}/config"
       },
       "input":{"shape":"UpdateDistributionRequest"},
       "output":{"shape":"UpdateDistributionResult"},
@@ -525,15 +532,18 @@
         {"shape":"InvalidWebACLId"},
         {"shape":"TooManyOriginCustomHeaders"},
         {"shape":"TooManyQueryStringParameters"},
-        {"shape":"InvalidQueryStringParameters"}
+        {"shape":"InvalidQueryStringParameters"},
+        {"shape":"TooManyDistributionsWithLambdaAssociations"},
+        {"shape":"TooManyLambdaFunctionAssociations"},
+        {"shape":"InvalidLambdaFunctionAssociation"}
       ],
       "documentation":"<p>Update a distribution. </p>"
     },
     "UpdateStreamingDistribution":{
-      "name":"UpdateStreamingDistribution2016_09_29",
+      "name":"UpdateStreamingDistribution2016_11_25",
       "http":{
         "method":"PUT",
-        "requestUri":"/2016-09-29/streaming-distribution/{Id}/config"
+        "requestUri":"/2016-11-25/streaming-distribution/{Id}/config"
       },
       "input":{"shape":"UpdateStreamingDistributionRequest"},
       "output":{"shape":"UpdateStreamingDistributionResult"},
@@ -702,6 +712,10 @@
         "Compress":{
           "shape":"boolean",
           "documentation":"<p>Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify true; if not, specify false. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html\">Serving Compressed Files</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+        },
+        "LambdaFunctionAssociations":{
+          "shape":"LambdaFunctionAssociations",
+          "documentation":"<p>A complex type that contains zero or more Lambda function associations for a cache behavior.</p>"
         }
       },
       "documentation":"<p>A complex type that describes how CloudFront processes requests.</p> <p>You must create at least as many cache behaviors (including the default cache behavior) as you have origins if you want CloudFront to distribute objects from all of the origins. Each cache behavior specifies the one origin from which you want CloudFront to get objects. If you have two origins and only the default cache behavior, the default cache behavior will cause CloudFront to get objects from one of the origins, but the other origin is never used.</p> <p>For the current limit on the number of cache behaviors that you can add to a distribution, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront\">Amazon CloudFront Limits</a> in the <i>AWS General Reference</i>.</p> <p>If you don't want to specify any cache behaviors, include only an empty <code>CacheBehaviors</code> element. Don't include an empty <code>CacheBehavior</code> element, or CloudFront returns a <code>MalformedXML</code> error.</p> <p>To delete all cache behaviors in an existing distribution, update the distribution configuration and include only an empty <code>CacheBehaviors</code> element.</p> <p>To add, change, or remove one or more cache behaviors, update the distribution configuration and specify all of the cache behaviors that you want to include in the updated distribution.</p> <p>For more information about cache behaviors, see <a href=\"http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior\">Cache Behaviors</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
@@ -922,7 +936,7 @@
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"<p>The current configuration information for the identity.</p>",
           "locationName":"CloudFrontOriginAccessIdentityConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         }
       },
       "documentation":"<p>The request to create a new origin access identity.</p>",
@@ -959,7 +973,7 @@
           "shape":"DistributionConfig",
           "documentation":"<p>The distribution's configuration information.</p>",
           "locationName":"DistributionConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         }
       },
       "documentation":"<p>The request to create a new distribution.</p>",
@@ -996,7 +1010,7 @@
           "shape":"DistributionConfigWithTags",
           "documentation":"<p>The distribution's configuration information. </p>",
           "locationName":"DistributionConfigWithTags",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         }
       },
       "documentation":"<p>The request to create a new distribution with tags. </p>",
@@ -1042,7 +1056,7 @@
           "shape":"InvalidationBatch",
           "documentation":"<p>The batch information for the invalidation.</p>",
           "locationName":"InvalidationBatch",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         }
       },
       "documentation":"<p>The request to create an invalidation.</p>",
@@ -1073,7 +1087,7 @@
           "shape":"StreamingDistributionConfig",
           "documentation":"<p>The streaming distribution's configuration information.</p>",
           "locationName":"StreamingDistributionConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         }
       },
       "documentation":"<p>The request to create a new streaming distribution.</p>",
@@ -1110,7 +1124,7 @@
           "shape":"StreamingDistributionConfigWithTags",
           "documentation":"<p> The streaming distribution's configuration information. </p>",
           "locationName":"StreamingDistributionConfigWithTags",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         }
       },
       "documentation":"<p>The request to create a new streaming distribution with tags.</p>",
@@ -1268,6 +1282,10 @@
         "Compress":{
           "shape":"boolean",
           "documentation":"<p>Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify <code>true</code>; if not, specify <code>false</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html\">Serving Compressed Files</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+        },
+        "LambdaFunctionAssociations":{
+          "shape":"LambdaFunctionAssociations",
+          "documentation":"<p>A complex type that contains zero or more Lambda function associations for a cache behavior.</p>"
         }
       },
       "documentation":"<p>A complex type that describes the default cache behavior if you do not specify a <code>CacheBehavior</code> element or if files don't match any of the values of <code>PathPattern</code> in <code>CacheBehavior</code> elements. You must create exactly one default cache behavior.</p>"
@@ -1614,6 +1632,15 @@
         "shape":"DistributionSummary",
         "locationName":"DistributionSummary"
       }
+    },
+    "EventType":{
+      "type":"string",
+      "enum":[
+        "viewer-request",
+        "viewer-response",
+        "origin-request",
+        "origin-response"
+      ]
     },
     "ForwardedValues":{
       "type":"structure",
@@ -1991,6 +2018,15 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "InvalidLambdaFunctionAssociation":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"string"}
+      },
+      "documentation":"<p>The specified Lambda function association is invalid.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "InvalidLocationCode":{
       "type":"structure",
       "members":{
@@ -2238,6 +2274,42 @@
         }
       },
       "documentation":"<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>. </p> <p>For more information, see <a>ActiveTrustedSigners</a>.</p>"
+    },
+    "LambdaFunctionAssociation":{
+      "type":"structure",
+      "members":{
+        "LambdaFunctionARN":{
+          "shape":"string",
+          "documentation":"<p>The ARN of the Lambda function.</p>"
+        },
+        "EventType":{
+          "shape":"EventType",
+          "documentation":"<p>Specifies the event type that triggers a Lambda function invocation. Valid values are:</p> <ul> <li> <p> <code>viewer-request</code> </p> </li> <li> <p> <code>origin-request</code> </p> </li> <li> <p> <code>viewer-response</code> </p> </li> <li> <p> <code>origin-response</code> </p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>A complex type that contains a Lambda function association.</p>"
+    },
+    "LambdaFunctionAssociationList":{
+      "type":"list",
+      "member":{
+        "shape":"LambdaFunctionAssociation",
+        "locationName":"LambdaFunctionAssociation"
+      }
+    },
+    "LambdaFunctionAssociations":{
+      "type":"structure",
+      "required":["Quantity"],
+      "members":{
+        "Quantity":{
+          "shape":"integer",
+          "documentation":"<p>The number of Lambda function associations for this cache behavior.</p>"
+        },
+        "Items":{
+          "shape":"LambdaFunctionAssociationList",
+          "documentation":"<p> <b>Optional</b>: A complex type that contains <code>LambdaFunctionAssociation</code> items for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.</p>"
+        }
+      },
+      "documentation":"<p>A complex type that specifies a list of Lambda functions associations for a cache behavior.</p> <p>If you want to invoke one or more Lambda functions triggered by requests that match the <code>PathPattern</code> of the cache behavior, specify the applicable values for <code>Quantity</code> and <code>Items</code>. Note that there can be up to 4 <code>LambdaFunctionAssociation</code> items in this list (one for each possible value of <code>EventType</code>) and each <code>EventType</code> can be associated with the Lambda function only once.</p> <p>If you don't want to invoke any Lambda functions for the requests that match <code>PathPattern</code>, specify <code>0</code> for <code>Quantity</code> and omit <code>Items</code>. </p>"
     },
     "ListCloudFrontOriginAccessIdentitiesRequest":{
       "type":"structure",
@@ -3106,7 +3178,7 @@
           "shape":"Tags",
           "documentation":"<p> A complex type that contains zero or more <code>Tag</code> elements.</p>",
           "locationName":"Tags",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         }
       },
       "documentation":"<p> The request to add tags to a CloudFront resource.</p>",
@@ -3182,6 +3254,15 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "TooManyDistributionsWithLambdaAssociations":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"string"}
+      },
+      "documentation":"<p>Processing your request would cause the maximum number of distributions with Lambda function associations per owner to be exceeded.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "TooManyHeadersInForwardedValues":{
       "type":"structure",
       "members":{
@@ -3196,6 +3277,15 @@
         "Message":{"shape":"string"}
       },
       "documentation":"<p>You have exceeded the maximum number of allowable InProgress invalidation batch requests, or invalidation objects.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "TooManyLambdaFunctionAssociations":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"string"}
+      },
+      "documentation":"<p>Your request contains more Lambda function associations than are allowed per distribution.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3298,7 +3388,7 @@
           "shape":"TagKeys",
           "documentation":"<p> A complex type that contains zero or more <code>Tag</code> key elements.</p>",
           "locationName":"TagKeys",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         }
       },
       "documentation":"<p> The request to remove tags from a CloudFront resource.</p>",
@@ -3315,7 +3405,7 @@
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"<p>The identity's configuration information.</p>",
           "locationName":"CloudFrontOriginAccessIdentityConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         },
         "Id":{
           "shape":"string",
@@ -3361,7 +3451,7 @@
           "shape":"DistributionConfig",
           "documentation":"<p>The distribution's configuration information.</p>",
           "locationName":"DistributionConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         },
         "Id":{
           "shape":"string",
@@ -3407,7 +3497,7 @@
           "shape":"StreamingDistributionConfig",
           "documentation":"<p>The streaming distribution's configuration information.</p>",
           "locationName":"StreamingDistributionConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-09-29/"}
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2016-11-25/"}
         },
         "Id":{
           "shape":"string",
@@ -3445,18 +3535,9 @@
     "ViewerCertificate":{
       "type":"structure",
       "members":{
-        "CloudFrontDefaultCertificate":{
-          "shape":"boolean",
-          "documentation":"<p>If you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name of your distribution in your object URLs (for example, <code>https://d111111abcdef8.cloudfront.net/logo.jpg</code>), set to <code>true</code>. Omit this value if you are setting an <code>ACMCertificateArn</code> or <code>IAMCertificateId</code>.</p>"
-        },
-        "IAMCertificateId":{
-          "shape":"string",
-          "documentation":"<p>If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, <code>https://example.com/logo.jpg)</code>, specify the IAM certificate identifier of the custom viewer certificate for this distribution. Specify either this value, <code>ACMCertificateArn</code>, or <code>CloudFrontDefaultCertificate</code>.</p>"
-        },
-        "ACMCertificateArn":{
-          "shape":"string",
-          "documentation":"<p>If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, <code>https://example.com/logo.jpg)</code>, specify the ACM certificate ARN of the custom viewer certificate for this distribution. Specify either this value, <code>IAMCertificateId</code>, or <code>CloudFrontDefaultCertificate</code>.</p>"
-        },
+        "CloudFrontDefaultCertificate":{"shape":"boolean"},
+        "IAMCertificateId":{"shape":"string"},
+        "ACMCertificateArn":{"shape":"string"},
         "SSLSupportMethod":{
           "shape":"SSLSupportMethod",
           "documentation":"<p>If you specify a value for <code>ACMCertificateArn</code> or for <code>IAMCertificateId</code>, you must also specify how you want CloudFront to serve HTTPS requests: using a method that works for all clients or one that works for most clients:</p> <ul> <li> <p> <code>vip</code>: CloudFront uses dedicated IP addresses for your content and can respond to HTTPS requests from any viewer. However, you must request permission to use this feature, and you incur additional monthly charges.</p> </li> <li> <p> <code>sni-only</code>: CloudFront can respond to HTTPS requests from viewers that support Server Name Indication (SNI). All modern browsers support SNI, but some browsers still in use don't support SNI. If some of your users' browsers don't support SNI, we recommend that you do one of the following:</p> <ul> <li> <p>Use the <code>vip</code> option (dedicated IP addresses) instead of <code>sni-only</code>.</p> </li> <li> <p>Use the CloudFront SSL/TLS certificate instead of a custom certificate. This requires that you use the CloudFront domain name of your distribution in the URLs for your objects, for example, <code>https://d111111abcdef8.cloudfront.net/logo.png</code>.</p> </li> <li> <p>If you can control which browser your users use, upgrade the browser to one that supports SNI.</p> </li> <li> <p>Use HTTP instead of HTTPS.</p> </li> </ul> </li> </ul> <p>Do not specify a value for <code>SSLSupportMethod</code> if you specified <code>&lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt;</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html\">Using Alternate Domain Names and HTTPS</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"

@@ -86,6 +86,7 @@ export abstract class ConfigurationServicePlaceholders {
   swf?: AWS.SWF.Types.ClientConfiguration;
   xray?: AWS.XRay.Types.ClientConfiguration;
   waf?: AWS.WAF.Types.ClientConfiguration;
+  wafregional?: AWS.WAFRegional.Types.ClientConfiguration;
   workspaces?: AWS.WorkSpaces.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
@@ -175,5 +176,6 @@ export interface ConfigurationServiceApiVersions {
   swf?: AWS.SWF.Types.apiVersion;
   xray?: AWS.XRay.Types.apiVersion;
   waf?: AWS.WAF.Types.apiVersion;
+  wafregional?: AWS.WAFRegional.Types.apiVersion;
   workspaces?: AWS.WorkSpaces.Types.apiVersion;
 }
