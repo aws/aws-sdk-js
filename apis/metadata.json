@@ -378,6 +378,10 @@
     "name": "WAF",
     "cors": true
   },
+  "wafregional": {
+    "prefix": "waf-regional",
+    "name": "WAFRegional"
+  },
   "workspaces": {
     "name": "WorkSpaces"
   }
