@@ -151,6 +151,16 @@ class MethodDocumentor
       @lines << "@see #{operation['documentation_url']}"
       @lines << "  #{api['serviceAbbreviation']} Documentation for #{operation_name}"
     end
+
+    ## Service Reference
+    if api['metadata']['uid']
+      @lines << '<div class="tags">'
+      @lines << '<p class="tag_title">Service Reference:</p>'
+      @lines << '<ul class="see">'
+      @lines << '<li><a href="/goto/WebAPI/' + api['metadata']['uid'] + '/' + operation_name + '">' + operation_name +  '</a></li>'
+      @lines << '</ul>'
+      @lines << '</div>'
+    end
   end
 
   def shapes(api, rules, options = {})
