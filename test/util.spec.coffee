@@ -778,7 +778,38 @@ describe 'AWS.util.calculateRetryDelay', ->
     delay = AWS.util.calculateRetryDelay(2, { customBackoff: customBackoff })
     expect(delay).to.equal(900)
 
+describe 'AWS.util.userAgent', ->
+  it 'should include an identifier for the browser SDK', ->
+    helpers.spyOn(AWS.util, 'isBrowser').andReturn true
+    expect(AWS.util.userAgent()).to.match(/^aws-sdk-js/)
+
+  it 'should include an identifier for the node SDK', ->
+    helpers.spyOn(AWS.util, 'isBrowser').andReturn false
+    expect(AWS.util.userAgent()).to.match(/^aws-sdk-nodejs/)
+
+  it 'should include the current SDK version number', ->
+    expect(AWS.util.userAgent()).to.have.string(AWS.VERSION)
+
+  it 'should include the engine when not running in a browser', ->
+    helpers.spyOn(AWS.util, 'isBrowser').andReturn false
+    helpers.spyOn(AWS.util, 'engine').andReturn 'ENGINE'
+    expect(AWS.util.userAgent()).to.match(/ENGINE$/)
+
 if AWS.util.isNode()
+  describe 'AWS.util.engine', ->
+    it 'should include the platform and version supplied by the global process variable', ->
+      engine = AWS.util.engine()
+      expect(engine).to.match(new RegExp(process.platform))
+      expect(engine).to.match(new RegExp(process.version))
+
+    it 'should include the execution environment if supplied as an environment variable', ->
+      previousValue = process.env.AWS_EXECUTION_ENV
+      process.env.AWS_EXECUTION_ENV = 'Lambda'
+      try
+        expect(AWS.util.engine()).to.match(/exec-env\/Lambda$/)
+      finally
+        process.env.AWS_EXECUTION_ENV = previousValue
+
   describe 'AWS.util.handleRequestWithRetries', ->
     http = require('http')
     app = null; httpRequest = null; spy = null
