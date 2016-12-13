@@ -376,7 +376,7 @@ describe 'AWS.S3.ManagedUpload', ->
         catchFunction = (e) ->
           err = e
 
-        before ->
+        beforeEach ->
           AWS.util.addPromises(AWS.S3.ManagedUpload, Promise)
 
         it 'resolves when single part upload is successful', ->

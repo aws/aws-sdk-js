@@ -1144,7 +1144,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       catchFunction = (e) ->
         err = e
 
-      before ->
+      beforeEach ->
         AWS.util.addPromises(AWS.Credentials, Promise)
 
       beforeEach ->
