@@ -52,6 +52,64 @@ describe 'AWS.DynamoDB.DocumentClient', ->
         foo: S: 'bar'
       expect(translateInput(input)).to.eql(params)
 
+    it 'converts empty strings to null when convertEmptyValues option set', ->
+      input = Item:
+        foo: ''
+      params = Item:
+        foo: NULL: true
+
+      client = new AWS.DynamoDB.DocumentClient({convertEmptyValues: true})
+      request = client.put(input)
+      request.emit('validate', [request])
+
+      expect(request.params).to.eql(params)
+
+    it 'does not convert empty strings to null when convertEmptyValues option not set', ->
+      input = Item:
+        foo: ''
+      params = Item:
+        foo: S: ''
+
+      client = new AWS.DynamoDB.DocumentClient()
+      request = client.put(input)
+      request.emit('validate', [request])
+
+      expect(request.params).to.eql(params)
+
+    it 'translates binary buffers', ->
+      buffer = new Buffer 'bar'
+      input = Item:
+        foo: buffer
+      params = Item:
+        foo: B: buffer
+      expect(translateInput(input)).to.eql(params)
+
+    it 'converts empty binary buffers to null when convertEmptyValues option set', ->
+      buffer = new Buffer ''
+      input = Item:
+        foo: buffer
+      params = Item:
+        foo: NULL: true
+
+      client = new AWS.DynamoDB.DocumentClient({convertEmptyValues: true})
+      request = client.put(input)
+      request.emit('validate', [request])
+
+      expect(request.params).to.eql(params)
+
+    it 'does not convert empty binary buffers to null when convertEmptyValues option not set', ->
+      buffer = new Buffer ''
+      input = Item:
+        foo: buffer
+      params = Item:
+        foo: B: buffer
+
+      client = new AWS.DynamoDB.DocumentClient()
+      request = client.put(input)
+      request.emit('validate', [request])
+
+      expect(request.params).to.eql(params)
+
     it 'translates numbers', ->
       input = Item:
         foo: 1
@@ -107,6 +165,43 @@ describe 'AWS.DynamoDB.DocumentClient', ->
           'SS': ['bar', 'baz', 'quux']
       expect(translateInput(input)).to.eql(params)
 
+    it 'removes empty strings from sets sets', ->
+      set  = docClient.createSet ['bar', 'baz', 'quux', '']
+      input = Item:
+        foo: set
+      params = Item:
+        foo:
+          'SS': ['bar', 'baz', 'quux']
+      expect(translateInput(input)).to.eql(params)
+
+    it 'converts empty sets to null when convertEmptyValues option set', ->
+      set  = docClient.createSet ['']
+      input = Item:
+        foo: set
+      params = Item:
+        foo:
+          NULL: true
+
+      client = new AWS.DynamoDB.DocumentClient({convertEmptyValues: true})
+      request = client.put(input)
+      request.emit('validate', [request])
+
+      expect(request.params).to.eql(params)
+
+    it 'does not convert empty sets to null when convertEmptyValues option not set', ->
+      set  = docClient.createSet ['']
+      input = Item:
+        foo: set
+      params = Item:
+        foo:
+          SS: []
+
+      client = new AWS.DynamoDB.DocumentClient()
+      request = client.put(input)
+      request.emit('validate', [request])
+
+      expect(request.params).to.eql(params)
+
     it 'translates number sets', ->
       set  = docClient.createSet [1, 2, 3]
       input = Item:
@@ -121,6 +216,18 @@ describe 'AWS.DynamoDB.DocumentClient', ->
       baz = new Buffer('baz')
       quux = new Buffer('quux')
       set  = docClient.createSet [bar, baz, quux]
+      input = Item:
+        foo: set
+      params = Item:
+        foo:
+          'BS': [bar, baz, quux]
+      expect(translateInput(input)).to.eql(params)
+
+    it 'removes empty binary members from sets', ->
+      bar = new Buffer('bar')
+      baz = new Buffer('baz')
+      quux = new Buffer('quux')
+      set  = docClient.createSet [bar, baz, quux, new Buffer '']
       input = Item:
         foo: set
       params = Item:

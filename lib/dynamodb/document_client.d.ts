@@ -66,6 +66,10 @@ export namespace DocumentClient {
          * An optional pre-configured instance of the AWS.DynamoDB service object to use for requests. The object may bound parameters used by the document client. 
          */
         service?: DynamoDB
+        /**
+         * An optional flag indicating that the document client should cast empty strings, buffers, and sets to NULL shapes
+         */
+        convertEmptyValues?: boolean
     }
 
     export interface CreateSetOptions {
