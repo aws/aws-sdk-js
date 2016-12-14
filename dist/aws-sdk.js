@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.13
+// AWS SDK for JavaScript v2.7.14
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -52476,14 +52476,14 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "logs-2014-03-28",
     "apiVersion": "2014-03-28",
     "endpointPrefix": "logs",
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon CloudWatch Logs",
     "signatureVersion": "v4",
-    "targetPrefix": "Logs_20140328"
+    "targetPrefix": "Logs_20140328",
+    "uid": "logs-2014-03-28"
   },
   "operations": {
     "CancelExportTask": {
@@ -52534,7 +52534,10 @@ module.exports={
           "logGroupName"
         ],
         "members": {
-          "logGroupName": {}
+          "logGroupName": {},
+          "tags": {
+            "shape": "Sc"
+          }
         }
       }
     },
@@ -52640,7 +52643,7 @@ module.exports={
           "destinations": {
             "type": "list",
             "member": {
-              "shape": "Sq"
+              "shape": "St"
             }
           },
           "nextToken": {}
@@ -52820,7 +52823,7 @@ module.exports={
                 "filterName": {},
                 "filterPattern": {},
                 "metricTransformations": {
-                  "shape": "S1o"
+                  "shape": "S1r"
                 },
                 "creationTime": {
                   "type": "long"
@@ -52861,6 +52864,7 @@ module.exports={
                 "filterPattern": {},
                 "destinationArn": {},
                 "roleArn": {},
+                "distribution": {},
                 "creationTime": {
                   "type": "long"
                 }
@@ -52983,6 +52987,25 @@ module.exports={
         }
       }
     },
+    "ListTagsLogGroup": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "logGroupName"
+        ],
+        "members": {
+          "logGroupName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "shape": "Sc"
+          }
+        }
+      }
+    },
     "PutDestination": {
       "input": {
         "type": "structure",
@@ -53001,7 +53024,7 @@ module.exports={
         "type": "structure",
         "members": {
           "destination": {
-            "shape": "Sq"
+            "shape": "St"
           }
         }
       }
@@ -53084,7 +53107,7 @@ module.exports={
           "filterName": {},
           "filterPattern": {},
           "metricTransformations": {
-            "shape": "S1o"
+            "shape": "S1r"
           }
         }
       }
@@ -53118,7 +53141,23 @@ module.exports={
           "filterName": {},
           "filterPattern": {},
           "destinationArn": {},
-          "roleArn": {}
+          "roleArn": {},
+          "distribution": {}
+        }
+      }
+    },
+    "TagLogGroup": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "logGroupName",
+          "tags"
+        ],
+        "members": {
+          "logGroupName": {},
+          "tags": {
+            "shape": "Sc"
+          }
         }
       }
     },
@@ -53159,10 +53198,31 @@ module.exports={
           }
         }
       }
+    },
+    "UntagLogGroup": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "logGroupName",
+          "tags"
+        ],
+        "members": {
+          "logGroupName": {},
+          "tags": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
     }
   },
   "shapes": {
-    "Sq": {
+    "Sc": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "St": {
       "type": "structure",
       "members": {
         "destinationName": {},
@@ -53175,7 +53235,7 @@ module.exports={
         }
       }
     },
-    "S1o": {
+    "S1r": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -54473,7 +54533,6 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "marketplacecommerceanalytics-2015-07-01",
     "apiVersion": "2015-07-01",
     "endpointPrefix": "marketplacecommerceanalytics",
     "jsonVersion": "1.1",
@@ -54481,7 +54540,8 @@ module.exports={
     "serviceFullName": "AWS Marketplace Commerce Analytics",
     "signatureVersion": "v4",
     "signingName": "marketplacecommerceanalytics",
-    "targetPrefix": "MarketplaceCommerceAnalytics20150701"
+    "targetPrefix": "MarketplaceCommerceAnalytics20150701",
+    "uid": "marketplacecommerceanalytics-2015-07-01"
   },
   "operations": {
     "GenerateDataSet": {
@@ -54576,6 +54636,9 @@ module.exports={
   "autoscaling": {
     "name": "AutoScaling",
     "cors": true
+  },
+  "batch": {
+    "name": "Batch"
   },
   "budgets": {
     "name": "Budgets"
@@ -88817,7 +88880,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.13',
+  VERSION: '2.7.14',
 
 
   Signers: {},
@@ -95518,7 +95581,11 @@ var util = {
     if (util.isBrowser() && typeof navigator !== 'undefined') {
       return navigator.userAgent;
     } else {
-      return process.platform + '/' + process.version;
+      var engine = process.platform + '/' + process.version;
+      if (process.env.AWS_EXECUTION_ENV) {
+        engine += ' exec-env/' + process.env.AWS_EXECUTION_ENV;
+      }
+      return engine;
     }
   },
 

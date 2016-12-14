@@ -52,11 +52,11 @@ declare class ElasticBeanstalk extends Service {
    */
   createApplication(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
   /**
-   * Creates an application version for the specified application.  Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
+   * Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a source bundle in S3 with SourceBundle  Omit both SourceBuildInformation and SourceBundle to use the default sample application.  Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
    */
   createApplicationVersion(params: ElasticBeanstalk.Types.CreateApplicationVersionMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
-   * Creates an application version for the specified application.  Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
+   * Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a source bundle in S3 with SourceBundle  Omit both SourceBuildInformation and SourceBundle to use the default sample application.  Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
    */
   createApplicationVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
@@ -383,6 +383,9 @@ declare namespace ElasticBeanstalk {
      * If the version's source code was retrieved from AWS CodeCommit, the location of the source code for the application version.
      */
     SourceBuildInformation?: SourceBuildInformation;
+    /**
+     * Reference to the artifact from the AWS CodeBuild build.
+     */
     BuildArn?: String;
     /**
      * The storage location of the application version's source bundle in Amazon S3.
@@ -464,10 +467,25 @@ declare namespace ElasticBeanstalk {
   export type AvailableSolutionStackNamesList = SolutionStackName[];
   export type BoxedInt = number;
   export interface BuildConfiguration {
+    /**
+     * The name of the artifact of the CodeBuild build. If provided, Elastic Beanstalk stores the build artifact in the S3 location S3-bucket/resources/application-name/codebuild/codebuild-version-label-artifact-name.zip. If not provided, Elastic Beanstalk stores the build artifact in the S3 location S3-bucket/resources/application-name/codebuild/codebuild-version-label.zip. 
+     */
     ArtifactName?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+     */
     CodeBuildServiceRole: NonEmptyString;
+    /**
+     * Information about the compute resources the build project will use.    BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds     BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds     BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds   
+     */
     ComputeType?: ComputeType;
+    /**
+     * The ID of the Docker image to use for this build project.
+     */
     Image: NonEmptyString;
+    /**
+     * How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed. The default is 60 minutes.
+     */
     TimeoutInMinutes?: BoxedInt;
   }
   export interface CPUUtilization {
@@ -695,13 +713,16 @@ declare namespace ElasticBeanstalk {
      */
     Description?: Description;
     /**
-     * Specify a commit in an AWS CodeCommit Git repository to use as the source code for the application version. Specify a commit in an AWS CodeCommit repository or a source bundle in S3 (with SourceBundle), but not both. If neither SourceBundle nor SourceBuildInformation are provided, Elastic Beanstalk uses a sample application.
+     * Specify a commit in an AWS CodeCommit Git repository to use as the source code for the application version.
      */
     SourceBuildInformation?: SourceBuildInformation;
     /**
-     * The Amazon S3 bucket and key that identify the location of the source bundle for this version. Specify a source bundle in S3 or a commit in an AWS CodeCommit repository (with SourceBuildInformation), but not both. If neither SourceBundle nor SourceBuildInformation are provided, Elastic Beanstalk uses a sample application.
+     * The Amazon S3 bucket and key that identify the location of the source bundle for this version.  The Amazon S3 bucket must be in the same region as the environment.  Specify a source bundle in S3 or a commit in an AWS CodeCommit repository (with SourceBuildInformation), but not both. If neither SourceBundle nor SourceBuildInformation are provided, Elastic Beanstalk uses a sample application.
      */
     SourceBundle?: S3Location;
+    /**
+     * Settings for an AWS CodeBuild build.
+     */
     BuildConfiguration?: BuildConfiguration;
     /**
      * Set to true to create an application with the specified name if it doesn't already exist.
@@ -1737,15 +1758,15 @@ declare namespace ElasticBeanstalk {
   export type SolutionStackName = string;
   export interface SourceBuildInformation {
     /**
-     * The type of repository, such as Git.
+     * The type of repository.    Git     Zip   
      */
     SourceType: SourceType;
     /**
-     * Location where the repository is stored, such as CodeCommit.
+     * Location where the repository is stored.    CodeCommit     S3   
      */
     SourceRepository: SourceRepository;
     /**
-     * The repository name and commit ID, separated by a forward slash. For example, my-repo/265cfa0cf6af46153527f55d6503ec030551f57a.
+     * The location of the source code, as a formatted string, depending on the value of SourceRepository    For CodeCommit, the format is the repository name and commit ID, separated by a forward slash. For example, my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a.   For S3, the format is the S3 bucket name and object key, separated by a forward slash. For example, my-s3-bucket/Folders/my-source-file.  
      */
     SourceLocation: SourceLocation;
   }

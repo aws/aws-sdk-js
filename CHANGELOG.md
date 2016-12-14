@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.13-->
+<!--LATEST=2.7.14-->
 <!--ENTRYINSERT-->
+
+## 2.7.14
+* feature: Batch: AWS Batch is a batch computing service that lets customers define queues and compute environments and then submit work as batch jobs.
+* feature: DMS: Adds support for SSL enabled Oracle endpoints and task modification.
+* feature: CloudWatchLogs: Amazon CloudWatch announces detailed billing to CloudWatch Logs. You can now get usage and cost per log group. You can also add tags on your log groups to get a fine-grained view on cost for logs across business dimension such as cost center, application name, AWS services such as Lambda, CloudTrail, ECS, and other. Up to 50 tags can be added to each log group.
 
 ## 2.7.13
 * feature: CloudFront:  Add lambda function associations to cache behaviors.

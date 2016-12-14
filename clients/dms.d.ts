@@ -228,6 +228,14 @@ declare class DMS extends Service {
    */
   modifyReplicationSubnetGroup(callback?: (err: AWSError, data: DMS.Types.ModifyReplicationSubnetGroupResponse) => void): Request<DMS.Types.ModifyReplicationSubnetGroupResponse, AWSError>;
   /**
+   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it. 
+   */
+  modifyReplicationTask(params: DMS.Types.ModifyReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
+  /**
+   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it. 
+   */
+  modifyReplicationTask(callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
+  /**
    * Populates the schema for the specified endpoint. This is an asynchronous operation and can take several minutes. You can check the status of this operation by calling the DescribeRefreshSchemasStatus operation.
    */
   refreshSchemas(params: DMS.Types.RefreshSchemasMessage, callback?: (err: AWSError, data: DMS.Types.RefreshSchemasResponse) => void): Request<DMS.Types.RefreshSchemasResponse, AWSError>;
@@ -306,17 +314,21 @@ declare namespace DMS {
   export type BooleanOptional = boolean;
   export interface Certificate {
     /**
-     * The customer-assigned name of the certificate. Valid characters are [A-z_0-9].
+     * The customer-assigned name of the certificate. Valid characters are A-z and 0-9.
      */
     CertificateIdentifier?: String;
     /**
-     * the date the certificate was created.
+     * The date that the certificate was created.
      */
     CertificateCreationDate?: TStamp;
     /**
-     * The contents of the .pem X.509 certificate file.
+     * The contents of the .pem X.509 certificate file for the certificate.
      */
     CertificatePem?: String;
+    /**
+     * The location of the imported Oracle Wallet certificate for use with SSL.
+     */
+    CertificateWallet?: CertificateWallet;
     /**
      * The Amazon Resource Name (ARN) for the certificate.
      */
@@ -326,11 +338,11 @@ declare namespace DMS {
      */
     CertificateOwner?: String;
     /**
-     * The beginning date the certificate is valid.
+     * The beginning date that the certificate is valid.
      */
     ValidFromDate?: TStamp;
     /**
-     * the final date the certificate is valid.
+     * The final date that the certificate is valid.
      */
     ValidToDate?: TStamp;
     /**
@@ -343,6 +355,7 @@ declare namespace DMS {
     KeyLength?: IntegerOptional;
   }
   export type CertificateList = Certificate[];
+  export type CertificateWallet = Buffer|Uint8Array|Blob|string;
   export interface Connection {
     /**
      * The Amazon Resource Name (ARN) of the replication instance.
@@ -380,25 +393,25 @@ declare namespace DMS {
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
+     * The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
      */
     EngineName: String;
     /**
      * The user name to be used to login to the endpoint database.
      */
-    Username: String;
+    Username?: String;
     /**
      * The password to be used to login to the endpoint database.
      */
-    Password: SecretString;
+    Password?: SecretString;
     /**
      * The name of the server where the endpoint database resides.
      */
-    ServerName: String;
+    ServerName?: String;
     /**
      * The port used by the endpoint database.
      */
-    Port: IntegerOptional;
+    Port?: IntegerOptional;
     /**
      * The name of the endpoint database.
      */
@@ -540,7 +553,7 @@ declare namespace DMS {
      */
     TableMappings: String;
     /**
-     * Settings for the task, such as target metadata settings.
+     * Settings for the task, such as target metadata settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
      */
     ReplicationTaskSettings?: String;
     /**
@@ -560,13 +573,13 @@ declare namespace DMS {
   }
   export interface DeleteCertificateMessage {
     /**
-     * the Amazon Resource Name (ARN) of the deleted certificate.
+     * The Amazon Resource Name (ARN) of the deleted certificate.
      */
     CertificateArn: String;
   }
   export interface DeleteCertificateResponse {
     /**
-     * The SSL certificate.
+     * The Secure Sockets Layer (SSL) certificate.
      */
     Certificate?: Certificate;
   }
@@ -642,7 +655,7 @@ declare namespace DMS {
      */
     Marker?: String;
     /**
-     * The SSL certificates associated with the replication instance.
+     * The Secure Sockets Layer (SSL) certificates associated with the replication instance.
      */
     Certificates?: CertificateList;
   }
@@ -885,7 +898,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The database engine name.
+     * The database engine name. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
      */
     EngineName?: String;
     /**
@@ -945,13 +958,17 @@ declare namespace DMS {
   export type FilterValueList = String[];
   export interface ImportCertificateMessage {
     /**
-     * The customer-assigned name of the certificate. Valid characters are [A-z_0-9].
+     * The customer-assigned name of the certificate. Valid characters are A-z and 0-9.
      */
     CertificateIdentifier: String;
     /**
-     * The contents of the .pem X.509 certificate file.
+     * The contents of the .pem X.509 certificate file for the certificate.
      */
     CertificatePem?: String;
+    /**
+     * The location of the imported Oracle Wallet certificate for use with SSL.
+     */
+    CertificateWallet?: CertificateWallet;
   }
   export interface ImportCertificateResponse {
     /**
@@ -990,7 +1007,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
+     * The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
      */
     EngineName?: String;
     /**
@@ -1103,6 +1120,38 @@ declare namespace DMS {
      * The modified replication subnet group.
      */
     ReplicationSubnetGroup?: ReplicationSubnetGroup;
+  }
+  export interface ModifyReplicationTaskMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the replication task.
+     */
+    ReplicationTaskArn: String;
+    /**
+     * The replication task identifier. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
+     */
+    ReplicationTaskIdentifier?: String;
+    /**
+     * The migration type. Valid values: full-load | cdc | full-load-and-cdc
+     */
+    MigrationType?: MigrationTypeValue;
+    /**
+     * The path of the JSON file that contains the table mappings. Preceed the path with "file://". For example, --table-mappings file://mappingfile.json
+     */
+    TableMappings?: String;
+    /**
+     * JSON file that contains settings for the task, such as target metadata settings.
+     */
+    ReplicationTaskSettings?: String;
+    /**
+     * The start time for the Change Data Capture (CDC) operation.
+     */
+    CdcStartTime?: TStamp;
+  }
+  export interface ModifyReplicationTaskResponse {
+    /**
+     * The replication task that was modified.
+     */
+    ReplicationTask?: ReplicationTask;
   }
   export interface OrderableReplicationInstance {
     /**
@@ -1268,6 +1317,10 @@ declare namespace DMS {
      *  Specifies the accessibility options for the replication instance. A value of true represents an instance with a public IP address. A value of false represents an instance with a private IP address. The default value is true. 
      */
     PubliclyAccessible?: Boolean;
+    /**
+     * The availability zone of the standby replication instance in a Multi-AZ deployment.
+     */
+    SecondaryAvailabilityZone?: String;
   }
   export type ReplicationInstanceList = ReplicationInstance[];
   export type ReplicationInstancePrivateIpAddressList = String[];
@@ -1350,6 +1403,10 @@ declare namespace DMS {
      * The last error (failure) message generated for the replication instance.
      */
     LastFailureMessage?: String;
+    /**
+     * The reason the replication task was stopped.
+     */
+    StopReason?: String;
     /**
      * The date the replication task was created.
      */
@@ -1448,7 +1505,7 @@ declare namespace DMS {
   export type SubnetList = Subnet[];
   export interface SupportedEndpointType {
     /**
-     * The database engine name.
+     * The database engine name. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
      */
     EngineName?: String;
     /**

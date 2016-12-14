@@ -3,6 +3,7 @@ export import APIGateway = require('./apigateway');
 export import ApplicationAutoScaling = require('./applicationautoscaling');
 export import AppStream = require('./appstream');
 export import AutoScaling = require('./autoscaling');
+export import Batch = require('./batch');
 export import Budgets = require('./budgets');
 export import CloudFormation = require('./cloudformation');
 export import CloudFront = require('./cloudfront');

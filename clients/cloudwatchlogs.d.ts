@@ -124,11 +124,11 @@ declare class CloudWatchLogs extends Service {
    */
   describeLogStreams(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeLogStreamsResponse) => void): Request<CloudWatchLogs.Types.DescribeLogStreamsResponse, AWSError>;
   /**
-   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, or metric namespace. The results are ASCII-sorted by filter name.
+   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, and metric namespace. The results are ASCII-sorted by filter name.
    */
   describeMetricFilters(params: CloudWatchLogs.Types.DescribeMetricFiltersRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeMetricFiltersResponse) => void): Request<CloudWatchLogs.Types.DescribeMetricFiltersResponse, AWSError>;
   /**
-   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, or metric namespace. The results are ASCII-sorted by filter name.
+   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, and metric namespace. The results are ASCII-sorted by filter name.
    */
   describeMetricFilters(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeMetricFiltersResponse) => void): Request<CloudWatchLogs.Types.DescribeMetricFiltersResponse, AWSError>;
   /**
@@ -156,6 +156,14 @@ declare class CloudWatchLogs extends Service {
    */
   getLogEvents(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogEventsResponse) => void): Request<CloudWatchLogs.Types.GetLogEventsResponse, AWSError>;
   /**
+   * Lists the tags for the specified log group. To add tags, use TagLogGroup. To remove tags, use UntagLogGroup.
+   */
+  listTagsLogGroup(params: CloudWatchLogs.Types.ListTagsLogGroupRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsLogGroupResponse) => void): Request<CloudWatchLogs.Types.ListTagsLogGroupResponse, AWSError>;
+  /**
+   * Lists the tags for the specified log group. To add tags, use TagLogGroup. To remove tags, use UntagLogGroup.
+   */
+  listTagsLogGroup(callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsLogGroupResponse) => void): Request<CloudWatchLogs.Types.ListTagsLogGroupResponse, AWSError>;
+  /**
    * Creates or updates a destination. A destination encapsulates a physical resource (such as a Kinesis stream) and enables you to subscribe to a real-time stream of log events of a different account, ingested using PutLogEvents. Currently, the only supported physical resource is a Amazon Kinesis stream belonging to the same account as the destination. A destination controls what is written to its Amazon Kinesis stream through an access policy. By default, PutDestination does not set any access policy with the destination, which means a cross-account user cannot call PutSubscriptionFilter against this destination. To enable this, the destination owner must call PutDestinationPolicy after PutDestination.
    */
   putDestination(params: CloudWatchLogs.Types.PutDestinationRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDestinationResponse) => void): Request<CloudWatchLogs.Types.PutDestinationResponse, AWSError>;
@@ -172,11 +180,11 @@ declare class CloudWatchLogs extends Service {
    */
   putDestinationPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Uploads a batch of log events to the specified log stream. You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using DescribeLogStreams. The batch of events must satisfy the following constraints:   The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.   None of the log events in the batch can be more than 2 hours in the future.   None of the log events in the batch can be older than 14 days or the retention period of the log group.   The log events in the batch must be in chronological ordered by their timestamp.   The maximum number of log events in a batch is 10,000.   A batch of log events in a single PutLogEvents request cannot span more than 24 hours. Otherwise, the PutLogEvents operation will fail.  
+   * Uploads a batch of log events to the specified log stream. You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using DescribeLogStreams. The batch of events must satisfy the following constraints:   The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.   None of the log events in the batch can be more than 2 hours in the future.   None of the log events in the batch can be older than 14 days or the retention period of the log group.   The log events in the batch must be in chronological ordered by their timestamp (the time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC).   The maximum number of log events in a batch is 10,000.   A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.  
    */
   putLogEvents(params: CloudWatchLogs.Types.PutLogEventsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.PutLogEventsResponse) => void): Request<CloudWatchLogs.Types.PutLogEventsResponse, AWSError>;
   /**
-   * Uploads a batch of log events to the specified log stream. You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using DescribeLogStreams. The batch of events must satisfy the following constraints:   The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.   None of the log events in the batch can be more than 2 hours in the future.   None of the log events in the batch can be older than 14 days or the retention period of the log group.   The log events in the batch must be in chronological ordered by their timestamp.   The maximum number of log events in a batch is 10,000.   A batch of log events in a single PutLogEvents request cannot span more than 24 hours. Otherwise, the PutLogEvents operation will fail.  
+   * Uploads a batch of log events to the specified log stream. You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using DescribeLogStreams. The batch of events must satisfy the following constraints:   The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.   None of the log events in the batch can be more than 2 hours in the future.   None of the log events in the batch can be older than 14 days or the retention period of the log group.   The log events in the batch must be in chronological ordered by their timestamp (the time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC).   The maximum number of log events in a batch is 10,000.   A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.  
    */
   putLogEvents(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutLogEventsResponse) => void): Request<CloudWatchLogs.Types.PutLogEventsResponse, AWSError>;
   /**
@@ -204,6 +212,14 @@ declare class CloudWatchLogs extends Service {
    */
   putSubscriptionFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Adds or updates the specified tags for the specified log group. To list the tags for a log group, use ListTagsLogGroup. To remove tags, use UntagLogGroup. For more information about tags, see Tag Log Groups in Amazon CloudWatch Logs in the Amazon CloudWatch Logs User Guide.
+   */
+  tagLogGroup(params: CloudWatchLogs.Types.TagLogGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or updates the specified tags for the specified log group. To list the tags for a log group, use ListTagsLogGroup. To remove tags, use UntagLogGroup. For more information about tags, see Tag Log Groups in Amazon CloudWatch Logs in the Amazon CloudWatch Logs User Guide.
+   */
+  tagLogGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Tests the filter pattern of a metric filter against a sample of log event messages. You can use this operation to validate the correctness of a metric filter pattern.
    */
   testMetricFilter(params: CloudWatchLogs.Types.TestMetricFilterRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.TestMetricFilterResponse) => void): Request<CloudWatchLogs.Types.TestMetricFilterResponse, AWSError>;
@@ -211,6 +227,14 @@ declare class CloudWatchLogs extends Service {
    * Tests the filter pattern of a metric filter against a sample of log event messages. You can use this operation to validate the correctness of a metric filter pattern.
    */
   testMetricFilter(callback?: (err: AWSError, data: CloudWatchLogs.Types.TestMetricFilterResponse) => void): Request<CloudWatchLogs.Types.TestMetricFilterResponse, AWSError>;
+  /**
+   * Removes the specified tags from the specified log group. To list the tags for a log group, use ListTagsLogGroup. To add tags, use UntagLogGroup.
+   */
+  untagLogGroup(params: CloudWatchLogs.Types.UntagLogGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the specified tags from the specified log group. To list the tags for a log group, use ListTagsLogGroup. To add tags, use UntagLogGroup.
+   */
+  untagLogGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace CloudWatchLogs {
   export type AccessPolicy = string;
@@ -262,6 +286,10 @@ declare namespace CloudWatchLogs {
      * The name of the log group.
      */
     logGroupName: LogGroupName;
+    /**
+     * The key-value pairs to use for the tags.
+     */
+    tags?: Tags;
   }
   export interface CreateLogStreamRequest {
     /**
@@ -512,6 +540,7 @@ declare namespace CloudWatchLogs {
   export type DestinationArn = string;
   export type DestinationName = string;
   export type Destinations = Destination[];
+  export type Distribution = "Random"|"ByLogStream"|string;
   export type EventId = string;
   export type EventMessage = string;
   export type EventNumber = number;
@@ -532,11 +561,11 @@ declare namespace CloudWatchLogs {
      */
     logGroupName?: LogGroupName;
     /**
-     * The start time. Events with a timestamp prior to this time are not exported.
+     * The start time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this time are not exported.
      */
     from?: Timestamp;
     /**
-     * The end time. Events with a timestamp later than this time are not exported.
+     * The end time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.
      */
     to?: Timestamp;
     /**
@@ -593,11 +622,11 @@ declare namespace CloudWatchLogs {
      */
     logStreamNames?: InputLogStreamNames;
     /**
-     * The start of the time range. Events with a timestamp prior to this time are not returned.
+     * The start of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this time are not returned.
      */
     startTime?: Timestamp;
     /**
-     * The end of the time range. Events with a timestamp later than this time are not returned.
+     * The end of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not returned.
      */
     endTime?: Timestamp;
     /**
@@ -639,7 +668,7 @@ declare namespace CloudWatchLogs {
      */
     logStreamName?: LogStreamName;
     /**
-     * The time the event occurred.
+     * The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     timestamp?: Timestamp;
     /**
@@ -666,11 +695,11 @@ declare namespace CloudWatchLogs {
      */
     logStreamName: LogStreamName;
     /**
-     * The start of the time range. Events with a timestamp earlier than this time are not included.
+     * The start of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this time are not included.
      */
     startTime?: Timestamp;
     /**
-     * The end of the time range. Events with a timestamp later than this time are not included.
+     * The end of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not included.
      */
     endTime?: Timestamp;
     /**
@@ -702,7 +731,7 @@ declare namespace CloudWatchLogs {
   }
   export interface InputLogEvent {
     /**
-     * The time the event occurred.
+     * The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     timestamp: Timestamp;
     /**
@@ -713,6 +742,18 @@ declare namespace CloudWatchLogs {
   export type InputLogEvents = InputLogEvent[];
   export type InputLogStreamNames = LogStreamName[];
   export type Interleaved = boolean;
+  export interface ListTagsLogGroupRequest {
+    /**
+     * The name of the log group.
+     */
+    logGroupName: LogGroupName;
+  }
+  export interface ListTagsLogGroupResponse {
+    /**
+     * The tags.
+     */
+    tags?: Tags;
+  }
   export type LogEventIndex = number;
   export interface LogGroup {
     /**
@@ -749,11 +790,11 @@ declare namespace CloudWatchLogs {
      */
     creationTime?: Timestamp;
     /**
-     * The time of the first event.
+     * The time of the first event, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     firstEventTimestamp?: Timestamp;
     /**
-     * The time of the last event.
+     * The time of the last event, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     lastEventTimestamp?: Timestamp;
     /**
@@ -837,7 +878,7 @@ declare namespace CloudWatchLogs {
   export type OrderBy = "LogStreamName"|"LastEventTime"|string;
   export interface OutputLogEvent {
     /**
-     * The time the event occurred.
+     * The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     timestamp?: Timestamp;
     /**
@@ -954,6 +995,10 @@ declare namespace CloudWatchLogs {
      * The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.
      */
     roleArn?: RoleArn;
+    /**
+     * The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream. By default, log data is grouped by log stream. For a more even distribution, you can group log data randomly.
+     */
+    distribution?: Distribution;
   }
   export interface RejectedLogEventsInfo {
     /**
@@ -1003,11 +1048,29 @@ declare namespace CloudWatchLogs {
      */
     roleArn?: RoleArn;
     /**
+     * The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream.
+     */
+    distribution?: Distribution;
+    /**
      * The creation time of the subscription filter.
      */
     creationTime?: Timestamp;
   }
   export type SubscriptionFilters = SubscriptionFilter[];
+  export type TagKey = string;
+  export type TagList = TagKey[];
+  export interface TagLogGroupRequest {
+    /**
+     * The name of the log group.
+     */
+    logGroupName: LogGroupName;
+    /**
+     * The key-value pairs to use for the tags.
+     */
+    tags: Tags;
+  }
+  export type TagValue = string;
+  export type Tags = {[key: string]: TagValue};
   export type TargetArn = string;
   export type TestEventMessages = EventMessage[];
   export interface TestMetricFilterRequest {
@@ -1025,6 +1088,16 @@ declare namespace CloudWatchLogs {
   }
   export type Timestamp = number;
   export type Token = string;
+  export interface UntagLogGroupRequest {
+    /**
+     * The name of the log group.
+     */
+    logGroupName: LogGroupName;
+    /**
+     * The tag keys. The corresponding tags are removed from the log group.
+     */
+    tags: TagList;
+  }
   export type Value = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

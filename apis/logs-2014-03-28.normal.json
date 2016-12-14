@@ -1,14 +1,14 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"logs-2014-03-28",
     "apiVersion":"2014-03-28",
     "endpointPrefix":"logs",
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"Amazon CloudWatch Logs",
     "signatureVersion":"v4",
-    "targetPrefix":"Logs_20140328"
+    "targetPrefix":"Logs_20140328",
+    "uid":"logs-2014-03-28"
   },
   "operations":{
     "CancelExportTask":{
@@ -235,7 +235,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, or metric namespace. The results are ASCII-sorted by filter name.</p>"
+      "documentation":"<p>Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, and metric namespace. The results are ASCII-sorted by filter name.</p>"
     },
     "DescribeSubscriptionFilters":{
       "name":"DescribeSubscriptionFilters",
@@ -282,6 +282,20 @@
       ],
       "documentation":"<p>Lists log events from the specified log stream. You can list all the log events or filter using a time range.</p> <p>By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). If the results include tokens, there are more log events available. You can get additional log events by specifying one of the tokens in a subsequent call.</p>"
     },
+    "ListTagsLogGroup":{
+      "name":"ListTagsLogGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsLogGroupRequest"},
+      "output":{"shape":"ListTagsLogGroupResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Lists the tags for the specified log group.</p> <p>To add tags, use <a>TagLogGroup</a>. To remove tags, use <a>UntagLogGroup</a>.</p>"
+    },
     "PutDestination":{
       "name":"PutDestination",
       "http":{
@@ -326,7 +340,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Uploads a batch of log events to the specified log stream.</p> <p>You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a>DescribeLogStreams</a>.</p> <p>The batch of events must satisfy the following constraints:</p> <ul> <li> <p>The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.</p> </li> <li> <p>None of the log events in the batch can be more than 2 hours in the future.</p> </li> <li> <p>None of the log events in the batch can be older than 14 days or the retention period of the log group.</p> </li> <li> <p>The log events in the batch must be in chronological ordered by their timestamp.</p> </li> <li> <p>The maximum number of log events in a batch is 10,000.</p> </li> <li> <p>A batch of log events in a single PutLogEvents request cannot span more than 24 hours. Otherwise, the PutLogEvents operation will fail.</p> </li> </ul>"
+      "documentation":"<p>Uploads a batch of log events to the specified log stream.</p> <p>You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a>DescribeLogStreams</a>.</p> <p>The batch of events must satisfy the following constraints:</p> <ul> <li> <p>The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.</p> </li> <li> <p>None of the log events in the batch can be more than 2 hours in the future.</p> </li> <li> <p>None of the log events in the batch can be older than 14 days or the retention period of the log group.</p> </li> <li> <p>The log events in the batch must be in chronological ordered by their timestamp (the time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC).</p> </li> <li> <p>The maximum number of log events in a batch is 10,000.</p> </li> <li> <p>A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.</p> </li> </ul>"
     },
     "PutMetricFilter":{
       "name":"PutMetricFilter",
@@ -375,6 +389,19 @@
       ],
       "documentation":"<p>Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through <a>PutLogEvents</a> and have them delivered to a specific destination. Currently, the supported destinations are:</p> <ul> <li> <p>An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>A logical destination that belongs to a different account, for cross-account delivery.</p> </li> <li> <p>An Amazon Kinesis Firehose stream that belongs to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.</p> </li> </ul> <p>There can only be one subscription filter associated with a log group.</p>"
     },
+    "TagLogGroup":{
+      "name":"TagLogGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagLogGroupRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"}
+      ],
+      "documentation":"<p>Adds or updates the specified tags for the specified log group.</p> <p>To list the tags for a log group, use <a>ListTagsLogGroup</a>. To remove tags, use <a>UntagLogGroup</a>.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html\">Tag Log Groups in Amazon CloudWatch Logs</a> in the <i>Amazon CloudWatch Logs User Guide</i>.</p>"
+    },
     "TestMetricFilter":{
       "name":"TestMetricFilter",
       "http":{
@@ -388,6 +415,18 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Tests the filter pattern of a metric filter against a sample of log event messages. You can use this operation to validate the correctness of a metric filter pattern.</p>"
+    },
+    "UntagLogGroup":{
+      "name":"UntagLogGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagLogGroupRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Removes the specified tags from the specified log group.</p> <p>To list the tags for a log group, use <a>ListTagsLogGroup</a>. To add tags, use <a>UntagLogGroup</a>.</p>"
     }
   },
   "shapes":{
@@ -461,6 +500,10 @@
         "logGroupName":{
           "shape":"LogGroupName",
           "documentation":"<p>The name of the log group.</p>"
+        },
+        "tags":{
+          "shape":"Tags",
+          "documentation":"<p>The key-value pairs to use for the tags.</p>"
         }
       }
     },
@@ -821,6 +864,13 @@
       "type":"list",
       "member":{"shape":"Destination"}
     },
+    "Distribution":{
+      "type":"string",
+      "enum":[
+        "Random",
+        "ByLogStream"
+      ]
+    },
     "EventId":{"type":"string"},
     "EventMessage":{
       "type":"string",
@@ -855,11 +905,11 @@
         },
         "from":{
           "shape":"Timestamp",
-          "documentation":"<p>The start time. Events with a timestamp prior to this time are not exported.</p>"
+          "documentation":"<p>The start time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this time are not exported.</p>"
         },
         "to":{
           "shape":"Timestamp",
-          "documentation":"<p>The end time. Events with a timestamp later than this time are not exported.</p>"
+          "documentation":"<p>The end time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.</p>"
         },
         "destination":{
           "shape":"ExportDestinationBucket",
@@ -954,11 +1004,11 @@
         },
         "startTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The start of the time range. Events with a timestamp prior to this time are not returned.</p>"
+          "documentation":"<p>The start of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this time are not returned.</p>"
         },
         "endTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The end of the time range. Events with a timestamp later than this time are not returned.</p>"
+          "documentation":"<p>The end of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not returned.</p>"
         },
         "filterPattern":{
           "shape":"FilterPattern",
@@ -1016,7 +1066,7 @@
         },
         "timestamp":{
           "shape":"Timestamp",
-          "documentation":"<p>The time the event occurred.</p>"
+          "documentation":"<p>The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>"
         },
         "message":{
           "shape":"EventMessage",
@@ -1054,11 +1104,11 @@
         },
         "startTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The start of the time range. Events with a timestamp earlier than this time are not included.</p>"
+          "documentation":"<p>The start of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this time are not included.</p>"
         },
         "endTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The end of the time range. Events with a timestamp later than this time are not included.</p>"
+          "documentation":"<p>The end of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not included.</p>"
         },
         "nextToken":{
           "shape":"NextToken",
@@ -1100,7 +1150,7 @@
       "members":{
         "timestamp":{
           "shape":"Timestamp",
-          "documentation":"<p>The time the event occurred.</p>"
+          "documentation":"<p>The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>"
         },
         "message":{
           "shape":"EventMessage",
@@ -1150,6 +1200,25 @@
       },
       "documentation":"<p>You have reached the maximum number of resources that can be created.</p>",
       "exception":true
+    },
+    "ListTagsLogGroupRequest":{
+      "type":"structure",
+      "required":["logGroupName"],
+      "members":{
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group.</p>"
+        }
+      }
+    },
+    "ListTagsLogGroupResponse":{
+      "type":"structure",
+      "members":{
+        "tags":{
+          "shape":"Tags",
+          "documentation":"<p>The tags.</p>"
+        }
+      }
     },
     "LogEventIndex":{"type":"integer"},
     "LogGroup":{
@@ -1202,11 +1271,11 @@
         },
         "firstEventTimestamp":{
           "shape":"Timestamp",
-          "documentation":"<p>The time of the first event.</p>"
+          "documentation":"<p>The time of the first event, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>"
         },
         "lastEventTimestamp":{
           "shape":"Timestamp",
-          "documentation":"<p>The time of the last event.</p>"
+          "documentation":"<p>The time of the last event, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>"
         },
         "lastIngestionTime":{
           "shape":"Timestamp",
@@ -1360,7 +1429,7 @@
       "members":{
         "timestamp":{
           "shape":"Timestamp",
-          "documentation":"<p>The time the event occurred.</p>"
+          "documentation":"<p>The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>"
         },
         "message":{
           "shape":"EventMessage",
@@ -1533,6 +1602,10 @@
         "roleArn":{
           "shape":"RoleArn",
           "documentation":"<p>The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.</p>"
+        },
+        "distribution":{
+          "shape":"Distribution",
+          "documentation":"<p>The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream. By default, log data is grouped by log stream. For a more even distribution, you can group log data randomly.</p>"
         }
       }
     },
@@ -1627,6 +1700,10 @@
           "shape":"RoleArn",
           "documentation":"<p/>"
         },
+        "distribution":{
+          "shape":"Distribution",
+          "documentation":"<p>The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream.</p>"
+        },
         "creationTime":{
           "shape":"Timestamp",
           "documentation":"<p>The creation time of the subscription filter.</p>"
@@ -1637,6 +1714,46 @@
     "SubscriptionFilters":{
       "type":"list",
       "member":{"shape":"SubscriptionFilter"}
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+)$"
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"TagKey"},
+      "min":1
+    },
+    "TagLogGroupRequest":{
+      "type":"structure",
+      "required":[
+        "logGroupName",
+        "tags"
+      ],
+      "members":{
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group.</p>"
+        },
+        "tags":{
+          "shape":"Tags",
+          "documentation":"<p>The key-value pairs to use for the tags.</p>"
+        }
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "Tags":{
+      "type":"map",
+      "key":{"shape":"TagKey"},
+      "value":{"shape":"TagValue"},
+      "max":50,
+      "min":1
     },
     "TargetArn":{
       "type":"string",
@@ -1676,6 +1793,23 @@
       "min":0
     },
     "Token":{"type":"string"},
+    "UntagLogGroupRequest":{
+      "type":"structure",
+      "required":[
+        "logGroupName",
+        "tags"
+      ],
+      "members":{
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group.</p>"
+        },
+        "tags":{
+          "shape":"TagList",
+          "documentation":"<p>The tag keys. The corresponding tags are removed from the log group.</p>"
+        }
+      }
+    },
     "Value":{"type":"string"}
   },
   "documentation":"<p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from EC2 instances, Amazon CloudTrail, or other sources. You can then retrieve the associated log data from CloudWatch Logs using the Amazon CloudWatch console, the CloudWatch Logs commands in the AWS CLI, the CloudWatch Logs API, or the CloudWatch Logs SDK.</p> <p>You can use CloudWatch Logs to:</p> <ul> <li> <p> <b>Monitor Logs from Amazon EC2 Instances in Real-time</b>: You can use CloudWatch Logs to monitor applications and systems using log data. For example, CloudWatch Logs can track the number of errors that occur in your application logs and send you a notification whenever the rate of errors exceeds a threshold you specify. CloudWatch Logs uses your log data for monitoring; so, no code changes are required. For example, you can monitor application logs for specific literal terms (such as \"NullReferenceException\") or count the number of occurrences of a literal term at a particular position in log data (such as \"404\" status codes in an Apache access log). When the term you are searching for is found, CloudWatch Logs reports the data to a Amazon CloudWatch metric that you specify.</p> </li> <li> <p> <b>Monitor Amazon CloudTrail Logged Events</b>: You can create alarms in Amazon CloudWatch and receive notifications of particular API activity as captured by CloudTrail and use the notification to perform troubleshooting.</p> </li> <li> <p> <b>Archive Log Data</b>: You can use CloudWatch Logs to store your log data in highly durable storage. You can change the log retention setting so that any log events older than this setting are automatically deleted. The CloudWatch Logs agent makes it easy to quickly send both rotated and non-rotated log data off of a host and into the log service. You can then access the raw log data when you need it.</p> </li> </ul>"

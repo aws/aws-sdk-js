@@ -37,7 +37,8 @@
         {"shape":"ResourceAlreadyExistsFault"},
         {"shape":"ResourceQuotaExceededFault"},
         {"shape":"InvalidResourceStateFault"},
-        {"shape":"ResourceNotFoundFault"}
+        {"shape":"ResourceNotFoundFault"},
+        {"shape":"AccessDeniedFault"}
       ],
       "documentation":"<p>Creates an endpoint using the provided settings.</p>"
     },
@@ -397,6 +398,22 @@
       ],
       "documentation":"<p>Modifies the settings for the specified replication subnet group.</p>"
     },
+    "ModifyReplicationTask":{
+      "name":"ModifyReplicationTask",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyReplicationTaskMessage"},
+      "output":{"shape":"ModifyReplicationTaskResponse"},
+      "errors":[
+        {"shape":"InvalidResourceStateFault"},
+        {"shape":"ResourceNotFoundFault"},
+        {"shape":"ResourceAlreadyExistsFault"},
+        {"shape":"KMSKeyNotAccessibleFault"}
+      ],
+      "documentation":"<p>Modifies the specified replication task.</p> <p>You can't modify the task endpoints. The task must be stopped before you can modify it. </p>"
+    },
     "RefreshSchemas":{
       "name":"RefreshSchemas",
       "http":{
@@ -549,15 +566,19 @@
       "members":{
         "CertificateIdentifier":{
           "shape":"String",
-          "documentation":"<p>The customer-assigned name of the certificate. Valid characters are [A-z_0-9].</p>"
+          "documentation":"<p>The customer-assigned name of the certificate. Valid characters are A-z and 0-9.</p>"
         },
         "CertificateCreationDate":{
           "shape":"TStamp",
-          "documentation":"<p>the date the certificate was created.</p>"
+          "documentation":"<p>The date that the certificate was created.</p>"
         },
         "CertificatePem":{
           "shape":"String",
-          "documentation":"<p>The contents of the .pem X.509 certificate file.</p>"
+          "documentation":"<p>The contents of the .pem X.509 certificate file for the certificate.</p>"
+        },
+        "CertificateWallet":{
+          "shape":"CertificateWallet",
+          "documentation":"<p>The location of the imported Oracle Wallet certificate for use with SSL.</p>"
         },
         "CertificateArn":{
           "shape":"String",
@@ -569,11 +590,11 @@
         },
         "ValidFromDate":{
           "shape":"TStamp",
-          "documentation":"<p>The beginning date the certificate is valid.</p>"
+          "documentation":"<p>The beginning date that the certificate is valid.</p>"
         },
         "ValidToDate":{
           "shape":"TStamp",
-          "documentation":"<p>the final date the certificate is valid.</p>"
+          "documentation":"<p>The final date that the certificate is valid.</p>"
         },
         "SigningAlgorithm":{
           "shape":"String",
@@ -593,6 +614,7 @@
         "locationName":"Certificate"
       }
     },
+    "CertificateWallet":{"type":"blob"},
     "Connection":{
       "type":"structure",
       "members":{
@@ -635,11 +657,7 @@
       "required":[
         "EndpointIdentifier",
         "EndpointType",
-        "EngineName",
-        "Username",
-        "Password",
-        "ServerName",
-        "Port"
+        "EngineName"
       ],
       "members":{
         "EndpointIdentifier":{
@@ -652,7 +670,7 @@
         },
         "EngineName":{
           "shape":"String",
-          "documentation":"<p>The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.</p>"
+          "documentation":"<p>The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.</p>"
         },
         "Username":{
           "shape":"String",
@@ -853,7 +871,7 @@
         },
         "ReplicationTaskSettings":{
           "shape":"String",
-          "documentation":"<p>Settings for the task, such as target metadata settings.</p>"
+          "documentation":"<p>Settings for the task, such as target metadata settings. For a complete list of task settings, see <a href=\"http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html\">Task Settings for AWS Database Migration Service Tasks</a>.</p>"
         },
         "CdcStartTime":{
           "shape":"TStamp",
@@ -882,7 +900,7 @@
       "members":{
         "CertificateArn":{
           "shape":"String",
-          "documentation":"<p>the Amazon Resource Name (ARN) of the deleted certificate.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the deleted certificate.</p>"
         }
       }
     },
@@ -891,7 +909,7 @@
       "members":{
         "Certificate":{
           "shape":"Certificate",
-          "documentation":"<p>The SSL certificate.</p>"
+          "documentation":"<p>The Secure Sockets Layer (SSL) certificate.</p>"
         }
       }
     },
@@ -1017,7 +1035,7 @@
         },
         "Certificates":{
           "shape":"CertificateList",
-          "documentation":"<p>The SSL certificates associated with the replication instance.</p>"
+          "documentation":"<p>The Secure Sockets Layer (SSL) certificates associated with the replication instance.</p>"
         }
       }
     },
@@ -1354,7 +1372,7 @@
         },
         "EngineName":{
           "shape":"String",
-          "documentation":"<p>The database engine name.</p>"
+          "documentation":"<p>The database engine name. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.</p>"
         },
         "Username":{
           "shape":"String",
@@ -1445,11 +1463,15 @@
       "members":{
         "CertificateIdentifier":{
           "shape":"String",
-          "documentation":"<p>The customer-assigned name of the certificate. Valid characters are [A-z_0-9].</p>"
+          "documentation":"<p>The customer-assigned name of the certificate. Valid characters are A-z and 0-9.</p>"
         },
         "CertificatePem":{
           "shape":"String",
-          "documentation":"<p>The contents of the .pem X.509 certificate file.</p>"
+          "documentation":"<p>The contents of the .pem X.509 certificate file for the certificate.</p>"
+        },
+        "CertificateWallet":{
+          "shape":"CertificateWallet",
+          "documentation":"<p>The location of the imported Oracle Wallet certificate for use with SSL.</p>"
         }
       }
     },
@@ -1568,7 +1590,7 @@
         },
         "EngineName":{
           "shape":"String",
-          "documentation":"<p>The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.</p>"
+          "documentation":"<p>The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.</p>"
         },
         "Username":{
           "shape":"String",
@@ -1704,6 +1726,47 @@
         "ReplicationSubnetGroup":{
           "shape":"ReplicationSubnetGroup",
           "documentation":"<p>The modified replication subnet group.</p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
+    "ModifyReplicationTaskMessage":{
+      "type":"structure",
+      "required":["ReplicationTaskArn"],
+      "members":{
+        "ReplicationTaskArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the replication task.</p>"
+        },
+        "ReplicationTaskIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The replication task identifier.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
+        },
+        "MigrationType":{
+          "shape":"MigrationTypeValue",
+          "documentation":"<p>The migration type.</p> <p>Valid values: full-load | cdc | full-load-and-cdc</p>"
+        },
+        "TableMappings":{
+          "shape":"String",
+          "documentation":"<p>The path of the JSON file that contains the table mappings. Preceed the path with \"file://\".</p> <p>For example, --table-mappings file://mappingfile.json</p>"
+        },
+        "ReplicationTaskSettings":{
+          "shape":"String",
+          "documentation":"<p>JSON file that contains settings for the task, such as target metadata settings.</p>"
+        },
+        "CdcStartTime":{
+          "shape":"TStamp",
+          "documentation":"<p>The start time for the Change Data Capture (CDC) operation.</p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
+    "ModifyReplicationTaskResponse":{
+      "type":"structure",
+      "members":{
+        "ReplicationTask":{
+          "shape":"ReplicationTask",
+          "documentation":"<p>The replication task that was modified.</p>"
         }
       },
       "documentation":"<p/>"
@@ -1926,6 +1989,10 @@
         "PubliclyAccessible":{
           "shape":"Boolean",
           "documentation":"<p> Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default value is <code>true</code>. </p>"
+        },
+        "SecondaryAvailabilityZone":{
+          "shape":"String",
+          "documentation":"<p>The availability zone of the standby replication instance in a Multi-AZ deployment.</p>"
         }
       },
       "documentation":"<p/>"
@@ -2049,6 +2116,10 @@
         "LastFailureMessage":{
           "shape":"String",
           "documentation":"<p>The last error (failure) message generated for the replication instance.</p>"
+        },
+        "StopReason":{
+          "shape":"String",
+          "documentation":"<p>The reason the replication task was stopped.</p>"
         },
         "ReplicationTaskCreationDate":{
           "shape":"TStamp",
@@ -2268,7 +2339,7 @@
       "members":{
         "EngineName":{
           "shape":"String",
-          "documentation":"<p>The database engine name.</p>"
+          "documentation":"<p>The database engine name. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.</p>"
         },
         "SupportsCDC":{
           "shape":"Boolean",
@@ -2424,5 +2495,5 @@
       }
     }
   },
-  "documentation":"<fullname>AWS Database Migration Service</fullname> <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL Server, Amazon Redshift, MariaDB, Amazon Aurora, and MySQL. The service supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to MySQL or SQL Server to PostgreSQL.</p>"
+  "documentation":"<fullname>AWS Database Migration Service</fullname> <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to MySQL or SQL Server to PostgreSQL.</p>"
 }

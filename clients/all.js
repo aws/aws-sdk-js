@@ -7,6 +7,7 @@ module.exports = {
   ApplicationAutoScaling: require('./applicationautoscaling'),
   AppStream: require('./appstream'),
   AutoScaling: require('./autoscaling'),
+  Batch: require('./batch'),
   Budgets: require('./budgets'),
   CloudFormation: require('./cloudformation'),
   CloudFront: require('./cloudfront'),
