@@ -19,6 +19,9 @@
     "name": "AutoScaling",
     "cors": true
   },
+  "batch": {
+    "name": "Batch"
+  },
   "budgets": {
     "name": "Budgets"
   },
