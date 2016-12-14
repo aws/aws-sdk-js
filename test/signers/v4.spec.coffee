@@ -194,6 +194,10 @@ describe 'AWS.Signers.V4', ->
       signer.request.headers = {'Authorization': 'foo'}
       expect(signer.canonicalHeaders()).to.equal('')
 
+    it 'should ignore X-Amzn-Trace-Id header', ->
+      signer.request.headers = {'X-Amzn-Trace-Id': 'foo'}
+      expect(signer.canonicalHeaders()).to.equal('')
+
     it 'should lowercase all header names (not values)', ->
       signer.request.headers = {'FOO': 'BAR'}
       expect(signer.canonicalHeaders()).to.equal('foo:BAR')
