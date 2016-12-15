@@ -1136,6 +1136,10 @@ describe 'AWS.CognitoIdentityCredentials', ->
         creds.params.LoginId = 'LOGINIDA'
         creds.clearCachedId()
 
+      it 'allows access to cached identityId even after a failed attempt to refresh credentials', ->
+        creds.setStorage('id', 'MYID')
+        expect(creds.identityId).to.equal('MYID')
+
   if typeof Promise == 'function'
     describe 'promises', ->
       err = null
