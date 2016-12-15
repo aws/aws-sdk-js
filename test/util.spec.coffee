@@ -555,10 +555,34 @@ describe 'AWS.util.base64', ->
       expect(base64.encode('foo')).to.equal('Zm9v')
       expect(base64.encode('ёŝ')).to.equal('0ZHFnQ==')
 
+    it 'encodes the given buffer', ->
+      expect(base64.encode(new AWS.util.Buffer('foo'))).to.equal('Zm9v')
+      expect(base64.encode(new AWS.util.Buffer('ёŝ'))).to.equal('0ZHFnQ==')
+
+    it 'throws if a number is supplied', ->
+      err = null
+      try
+        base64.encode(3.14)
+      catch e
+        err = e
+      expect(err.message).to.equal('Cannot base64 encode number 3.14')
+
   describe 'decode', ->
     it 'decodes the given string', ->
       expect(base64.decode('Zm9v').toString()).to.equal('foo')
       expect(base64.decode('0ZHFnQ==').toString()).to.equal('ёŝ')
+
+    it 'decodes the given buffer', ->
+      expect(base64.decode(new AWS.util.Buffer('Zm9v', 'base64')).toString()).to.equal('foo')
+      expect(base64.decode(new AWS.util.Buffer('0ZHFnQ==', 'base64')).toString()).to.equal('ёŝ')
+
+    it 'throws if a number is supplied', ->
+      err = null
+      try
+        base64.decode(3.14)
+      catch e
+        err = e
+      expect(err.message).to.equal('Cannot base64 decode number 3.14')
 
 describe 'AWS.util.hoistPayloadMember', ->
   hoist = AWS.util.hoistPayloadMember
