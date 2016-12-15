@@ -8,7 +8,7 @@
     "serviceFullName":"Amazon Cognito Identity Provider",
     "signatureVersion":"v4",
     "targetPrefix":"AWSCognitoIdentityProviderService",
-    "uid":"cognito-identity-2014-06-30"
+    "uid":"cognito-idp-2016-04-18"
   },
   "operations":{
     "AddCustomAttributes":{
@@ -28,6 +28,23 @@
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Adds additional user attributes to the user pool schema.</p>"
+    },
+    "AdminAddUserToGroup":{
+      "name":"AdminAddUserToGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminAddUserToGroupRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Adds the specified user to the specified group.</p> <p>Requires developer credentials.</p>"
     },
     "AdminConfirmSignUp":{
       "name":"AdminConfirmSignUp",
@@ -50,7 +67,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Confirms user registration as an admin without using a confirmation code. Works on any user.</p>"
+      "documentation":"<p>Confirms user registration as an admin without using a confirmation code. Works on any user.</p> <p>Requires developer credentials.</p>"
     },
     "AdminCreateUser":{
       "name":"AdminCreateUser",
@@ -95,7 +112,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Deletes a user as an administrator. Works on any user.</p>"
+      "documentation":"<p>Deletes a user as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>"
     },
     "AdminDeleteUserAttributes":{
       "name":"AdminDeleteUserAttributes",
@@ -113,7 +130,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Deletes the user attributes in a user pool as an administrator. Works on any user.</p>"
+      "documentation":"<p>Deletes the user attributes in a user pool as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>"
     },
     "AdminDisableUser":{
       "name":"AdminDisableUser",
@@ -131,7 +148,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Disables the specified user as an administrator. Works on any user.</p>"
+      "documentation":"<p>Disables the specified user as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>"
     },
     "AdminEnableUser":{
       "name":"AdminEnableUser",
@@ -149,7 +166,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Enables the specified user as an administrator. Works on any user.</p>"
+      "documentation":"<p>Enables the specified user as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>"
     },
     "AdminForgetDevice":{
       "name":"AdminForgetDevice",
@@ -167,7 +184,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Forgets the device, as an administrator.</p>"
+      "documentation":"<p>Forgets the device, as an administrator.</p> <p>Requires developer credentials.</p>"
     },
     "AdminGetDevice":{
       "name":"AdminGetDevice",
@@ -185,7 +202,7 @@
         {"shape":"InternalErrorException"},
         {"shape":"NotAuthorizedException"}
       ],
-      "documentation":"<p>Gets the device, as an administrator.</p>"
+      "documentation":"<p>Gets the device, as an administrator.</p> <p>Requires developer credentials.</p>"
     },
     "AdminGetUser":{
       "name":"AdminGetUser",
@@ -203,7 +220,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Gets the specified user by user name in a user pool as an administrator. Works on any user.</p>"
+      "documentation":"<p>Gets the specified user by user name in a user pool as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>"
     },
     "AdminInitiateAuth":{
       "name":"AdminInitiateAuth",
@@ -230,7 +247,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"UserNotConfirmedException"}
       ],
-      "documentation":"<p>Initiates the authentication flow, as an administrator.</p>"
+      "documentation":"<p>Initiates the authentication flow, as an administrator.</p> <p>Requires developer credentials.</p>"
     },
     "AdminListDevices":{
       "name":"AdminListDevices",
@@ -248,7 +265,42 @@
         {"shape":"InternalErrorException"},
         {"shape":"NotAuthorizedException"}
       ],
-      "documentation":"<p>Lists devices, as an administrator.</p>"
+      "documentation":"<p>Lists devices, as an administrator.</p> <p>Requires developer credentials.</p>"
+    },
+    "AdminListGroupsForUser":{
+      "name":"AdminListGroupsForUser",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminListGroupsForUserRequest"},
+      "output":{"shape":"AdminListGroupsForUserResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Lists the groups that the user belongs to.</p> <p>Requires developer credentials.</p>"
+    },
+    "AdminRemoveUserFromGroup":{
+      "name":"AdminRemoveUserFromGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminRemoveUserFromGroupRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Removes the specified user from the specified group.</p> <p>Requires developer credentials.</p>"
     },
     "AdminResetUserPassword":{
       "name":"AdminResetUserPassword",
@@ -270,7 +322,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Resets the specified user's password in a user pool as an administrator. Works on any user.</p> <p>When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password.</p>"
+      "documentation":"<p>Resets the specified user's password in a user pool as an administrator. Works on any user.</p> <p>When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password.</p> <p>Requires developer credentials.</p>"
     },
     "AdminRespondToAuthChallenge":{
       "name":"AdminRespondToAuthChallenge",
@@ -301,7 +353,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"UserNotConfirmedException"}
       ],
-      "documentation":"<p>Responds to an authentication challenge, as an administrator.</p>"
+      "documentation":"<p>Responds to an authentication challenge, as an administrator.</p> <p>Requires developer credentials.</p>"
     },
     "AdminSetUserSettings":{
       "name":"AdminSetUserSettings",
@@ -318,7 +370,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Sets all the user settings for a specified user name. Works on any user.</p>"
+      "documentation":"<p>Sets all the user settings for a specified user name. Works on any user.</p> <p>Requires developer credentials.</p>"
     },
     "AdminUpdateDeviceStatus":{
       "name":"AdminUpdateDeviceStatus",
@@ -337,7 +389,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Updates the device status as an administrator.</p>"
+      "documentation":"<p>Updates the device status as an administrator.</p> <p>Requires developer credentials.</p>"
     },
     "AdminUpdateUserAttributes":{
       "name":"AdminUpdateUserAttributes",
@@ -359,7 +411,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user.</p>"
+      "documentation":"<p>Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>"
     },
     "AdminUserGlobalSignOut":{
       "name":"AdminUserGlobalSignOut",
@@ -377,7 +429,7 @@
         {"shape":"UserNotFoundException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Signs out users from all devices, as an administrator.</p>"
+      "documentation":"<p>Signs out users from all devices, as an administrator.</p> <p>Requires developer credentials.</p>"
     },
     "ChangePassword":{
       "name":"ChangePassword",
@@ -481,6 +533,25 @@
       "documentation":"<p>Confirms registration of a user and handles the existing alias from a previous user.</p>",
       "authtype":"none"
     },
+    "CreateGroup":{
+      "name":"CreateGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateGroupRequest"},
+      "output":{"shape":"CreateGroupResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"GroupExistsException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Creates a new group in the specified user pool.</p> <p>Requires developer credentials.</p>"
+    },
     "CreateUserImportJob":{
       "name":"CreateUserImportJob",
       "http":{
@@ -516,6 +587,7 @@
         {"shape":"InvalidSmsRoleTrustRelationshipException"},
         {"shape":"InvalidEmailRoleAccessPolicyException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserPoolTaggingException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Creates a new Amazon Cognito user pool and sets the password policy for the pool.</p>"
@@ -537,6 +609,22 @@
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Creates the user pool client.</p>"
+    },
+    "DeleteGroup":{
+      "name":"DeleteGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteGroupRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Deletes a group. Currently only groups with no members can be deleted.</p> <p>Requires developer credentials.</p>"
     },
     "DeleteUser":{
       "name":"DeleteUser",
@@ -642,6 +730,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
+        {"shape":"UserPoolTaggingException"},
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Returns the configuration information and metadata of the specified user pool.</p>"
@@ -748,6 +837,23 @@
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Gets the device.</p>"
+    },
+    "GetGroup":{
+      "name":"GetGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetGroupRequest"},
+      "output":{"shape":"GetGroupResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Gets a group.</p> <p>Requires developer credentials.</p>"
     },
     "GetUser":{
       "name":"GetUser",
@@ -863,6 +969,23 @@
       ],
       "documentation":"<p>Lists the devices.</p>"
     },
+    "ListGroups":{
+      "name":"ListGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListGroupsRequest"},
+      "output":{"shape":"ListGroupsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Lists the groups associated with a user pool.</p> <p>Requires developer credentials.</p>"
+    },
     "ListUserImportJobs":{
       "name":"ListUserImportJobs",
       "http":{
@@ -929,6 +1052,23 @@
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Lists the users in the Amazon Cognito user pool.</p>"
+    },
+    "ListUsersInGroup":{
+      "name":"ListUsersInGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListUsersInGroupRequest"},
+      "output":{"shape":"ListUsersInGroupResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Lists the users in the specified group.</p> <p>Requires developer credentials.</p>"
     },
     "ResendConfirmationCode":{
       "name":"ResendConfirmationCode",
@@ -1092,6 +1232,23 @@
       ],
       "documentation":"<p>Updates the device status.</p>"
     },
+    "UpdateGroup":{
+      "name":"UpdateGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateGroupRequest"},
+      "output":{"shape":"UpdateGroupResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Updates the specified group with the specified attributes.</p> <p>Requires developer credentials.</p>"
+    },
     "UpdateUserAttributes":{
       "name":"UpdateUserAttributes",
       "http":{
@@ -1141,6 +1298,7 @@
         {"shape":"InternalErrorException"},
         {"shape":"InvalidSmsRoleAccessPolicyException"},
         {"shape":"InvalidSmsRoleTrustRelationshipException"},
+        {"shape":"UserPoolTaggingException"},
         {"shape":"InvalidEmailRoleAccessPolicyException"}
       ],
       "documentation":"<p>Updates the specified user pool with the specified attributes.</p>"
@@ -1212,6 +1370,28 @@
       },
       "documentation":"<p>Represents the response from the server for the request to add custom attributes.</p>"
     },
+    "AdminAddUserToGroupRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username",
+        "GroupName"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "Username":{
+          "shape":"UsernameType",
+          "documentation":"<p>The username for the user.</p>"
+        },
+        "GroupName":{
+          "shape":"GroupNameType",
+          "documentation":"<p>The group name.</p>"
+        }
+      }
+    },
     "AdminConfirmSignUpRequest":{
       "type":"structure",
       "required":[
@@ -1245,7 +1425,7 @@
         },
         "UnusedAccountValidityDays":{
           "shape":"AdminCreateUserUnusedAccountValidityDaysType",
-          "documentation":"<p>The user account expiration limit, in days, after which the account is no longer usable. To reset the account after that time limit, you must call AdminCreateUser again, specifying \"RESEND\" for the MessageAction parameter.</p>"
+          "documentation":"<p>The user account expiration limit, in days, after which the account is no longer usable. To reset the account after that time limit, you must call AdminCreateUser again, specifying \"RESEND\" for the MessageAction parameter. The default value for this paameter is 7.</p>"
         },
         "InviteMessageTemplate":{
           "shape":"MessageTemplateType",
@@ -1608,6 +1788,66 @@
         }
       },
       "documentation":"<p>Lists the device's response, as an administrator.</p>"
+    },
+    "AdminListGroupsForUserRequest":{
+      "type":"structure",
+      "required":[
+        "Username",
+        "UserPoolId"
+      ],
+      "members":{
+        "Username":{
+          "shape":"UsernameType",
+          "documentation":"<p>The username for the user.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "Limit":{
+          "shape":"QueryLimitType",
+          "documentation":"<p>The limit of the request to list groups.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationKey",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
+    },
+    "AdminListGroupsForUserResponse":{
+      "type":"structure",
+      "members":{
+        "Groups":{
+          "shape":"GroupListType",
+          "documentation":"<p>The groups that the user belongs to.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationKey",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
+    },
+    "AdminRemoveUserFromGroupRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username",
+        "GroupName"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "Username":{
+          "shape":"UsernameType",
+          "documentation":"<p>The username for the user.</p>"
+        },
+        "GroupName":{
+          "shape":"GroupNameType",
+          "documentation":"<p>The group name.</p>"
+        }
+      }
     },
     "AdminResetUserPasswordRequest":{
       "type":"structure",
@@ -2181,6 +2421,44 @@
       "min":1,
       "pattern":"[\\S]+"
     },
+    "CreateGroupRequest":{
+      "type":"structure",
+      "required":[
+        "GroupName",
+        "UserPoolId"
+      ],
+      "members":{
+        "GroupName":{
+          "shape":"GroupNameType",
+          "documentation":"<p>The name of the group. Must be unique.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionType",
+          "documentation":"<p>A string containing the description of the group.</p>"
+        },
+        "RoleArn":{
+          "shape":"ArnType",
+          "documentation":"<p>The role ARN for the group.</p>"
+        },
+        "Precedence":{
+          "shape":"PrecedenceType",
+          "documentation":"<p>A nonnegative integer value that specifies the precedence of this group relative to the other groups that a user can belong to in the user pool. Zero is the highest precedence value. Groups with lower <code>Precedence</code> values take precedence over groups with higher or null <code>Precedence</code> values. If a user belongs to two or more groups, it is the group with the lowest precedence value whose role ARN will be used in the <code>cognito:roles</code> and <code>cognito:preferred_role</code> claims in the user's tokens.</p> <p>Two groups can have the same <code>Precedence</code> value. If this happens, neither group takes precedence over the other. If two groups with the same <code>Precedence</code> have the same role ARN, that role is used in the <code>cognito:preferred_role</code> claim in tokens for users in each group. If the two groups have different role ARNs, the <code>cognito:preferred_role</code> claim is not set in users' tokens.</p> <p>The default <code>Precedence</code> value is null.</p>"
+        }
+      }
+    },
+    "CreateGroupResponse":{
+      "type":"structure",
+      "members":{
+        "Group":{
+          "shape":"GroupType",
+          "documentation":"<p>The group object for the group.</p>"
+        }
+      }
+    },
     "CreateUserImportJobRequest":{
       "type":"structure",
       "required":[
@@ -2235,7 +2513,7 @@
         },
         "RefreshTokenValidity":{
           "shape":"RefreshTokenValidityType",
-          "documentation":"<p>Refreshes the token validity.</p>"
+          "documentation":"<p>The validity of the refresh token, in days.</p>"
         },
         "ReadAttributes":{
           "shape":"ClientPermissionListType",
@@ -2318,6 +2596,10 @@
           "shape":"SmsConfigurationType",
           "documentation":"<p>The SMS configuration.</p>"
         },
+        "UserPoolTags":{
+          "shape":"UserPoolTagsType",
+          "documentation":"<p>The cost allocation tags for the user pool. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html\">Adding Cost Allocation Tags to Your User Pool</a> </p>"
+        },
         "AdminCreateUserConfig":{
           "shape":"AdminCreateUserConfigType",
           "documentation":"<p>The configuration for AdminCreateUser requests.</p>"
@@ -2352,6 +2634,23 @@
       "min":1
     },
     "DateType":{"type":"timestamp"},
+    "DeleteGroupRequest":{
+      "type":"structure",
+      "required":[
+        "GroupName",
+        "UserPoolId"
+      ],
+      "members":{
+        "GroupName":{
+          "shape":"GroupNameType",
+          "documentation":"<p>The name of the group.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        }
+      }
+    },
     "DeleteUserAttributesRequest":{
       "type":"structure",
       "required":["UserAttributeNames"],
@@ -2499,6 +2798,10 @@
         }
       },
       "documentation":"<p>Represents the response to describe the user pool.</p>"
+    },
+    "DescriptionType":{
+      "type":"string",
+      "max":2048
     },
     "DeviceConfigurationType":{
       "type":"structure",
@@ -2728,6 +3031,32 @@
       },
       "documentation":"<p>Gets the device response.</p>"
     },
+    "GetGroupRequest":{
+      "type":"structure",
+      "required":[
+        "GroupName",
+        "UserPoolId"
+      ],
+      "members":{
+        "GroupName":{
+          "shape":"GroupNameType",
+          "documentation":"<p>The name of the group.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        }
+      }
+    },
+    "GetGroupResponse":{
+      "type":"structure",
+      "members":{
+        "Group":{
+          "shape":"GroupType",
+          "documentation":"<p>The group object for the group.</p>"
+        }
+      }
+    },
     "GetUserAttributeVerificationCodeRequest":{
       "type":"structure",
       "required":["AttributeName"],
@@ -2800,6 +3129,58 @@
       "members":{
       },
       "documentation":"<p>The response to the request to sign out all devices.</p>"
+    },
+    "GroupExistsException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"MessageType"}
+      },
+      "documentation":"<p>This exception is thrown when Amazon Cognito encounters a group that already exists in the user pool.</p>",
+      "exception":true
+    },
+    "GroupListType":{
+      "type":"list",
+      "member":{"shape":"GroupType"}
+    },
+    "GroupNameType":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+    },
+    "GroupType":{
+      "type":"structure",
+      "members":{
+        "GroupName":{
+          "shape":"GroupNameType",
+          "documentation":"<p>The name of the group.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionType",
+          "documentation":"<p>A string containing the description of the group.</p>"
+        },
+        "RoleArn":{
+          "shape":"ArnType",
+          "documentation":"<p>The role ARN for the group.</p>"
+        },
+        "Precedence":{
+          "shape":"PrecedenceType",
+          "documentation":"<p>A nonnegative integer value that specifies the precedence of this group relative to the other groups that a user can belong to in the user pool. If a user belongs to two or more groups, it is the group with the highest precedence whose role ARN will be used in the <code>cognito:roles</code> and <code>cognito:preferred_role</code> claims in the user's tokens. Groups with higher <code>Precedence</code> values take precedence over groups with lower <code>Precedence</code> values or with null <code>Precedence</code> values.</p> <p>Two groups can have the same <code>Precedence</code> value. If this happens, neither group takes precedence over the other. If two groups with the same <code>Precedence</code> have the same role ARN, that role is used in the <code>cognito:preferred_role</code> claim in tokens for users in each group. If the two groups have different role ARNs, the <code>cognito:preferred_role</code> claim is not set in users' tokens.</p> <p>The default <code>Precedence</code> value is null.</p>"
+        },
+        "LastModifiedDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date the group was last modified.</p>"
+        },
+        "CreationDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date the group was created.</p>"
+        }
+      },
+      "documentation":"<p>The group type.</p>"
     },
     "InitiateAuthRequest":{
       "type":"structure",
@@ -3021,6 +3402,37 @@
       },
       "documentation":"<p>Represents the response to list devices.</p>"
     },
+    "ListGroupsRequest":{
+      "type":"structure",
+      "required":["UserPoolId"],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "Limit":{
+          "shape":"QueryLimitType",
+          "documentation":"<p>The limit of the request to list groups.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationKey",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
+    },
+    "ListGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "Groups":{
+          "shape":"GroupListType",
+          "documentation":"<p>The group objects for the groups.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationKey",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
+    },
     "ListOfStringTypes":{
       "type":"list",
       "member":{"shape":"StringType"}
@@ -3122,6 +3534,44 @@
         }
       },
       "documentation":"<p>Represents the response to list user pools.</p>"
+    },
+    "ListUsersInGroupRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "GroupName"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "GroupName":{
+          "shape":"GroupNameType",
+          "documentation":"<p>The name of the group.</p>"
+        },
+        "Limit":{
+          "shape":"QueryLimitType",
+          "documentation":"<p>The limit of the request to list users.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationKey",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
+    },
+    "ListUsersInGroupResponse":{
+      "type":"structure",
+      "members":{
+        "Users":{
+          "shape":"UsersListType",
+          "documentation":"<p>The users returned in the request to list users.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationKey",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
     },
     "ListUsersRequest":{
       "type":"structure",
@@ -3326,6 +3776,10 @@
     "PreSignedUrlType":{
       "type":"string",
       "max":2048,
+      "min":0
+    },
+    "PrecedenceType":{
+      "type":"integer",
       "min":0
     },
     "PreconditionNotMetException":{
@@ -3758,6 +4212,44 @@
       },
       "documentation":"<p>The response to the request to update the device status.</p>"
     },
+    "UpdateGroupRequest":{
+      "type":"structure",
+      "required":[
+        "GroupName",
+        "UserPoolId"
+      ],
+      "members":{
+        "GroupName":{
+          "shape":"GroupNameType",
+          "documentation":"<p>The name of the group.</p>"
+        },
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionType",
+          "documentation":"<p>A string containing the new description of the group.</p>"
+        },
+        "RoleArn":{
+          "shape":"ArnType",
+          "documentation":"<p>The new role ARN for the group. This is used for setting the <code>cognito:roles</code> and <code>cognito:preferred_role</code> claims in the token.</p>"
+        },
+        "Precedence":{
+          "shape":"PrecedenceType",
+          "documentation":"<p>The new precedence value for the group. For more information about this parameter, see <a href=\"API_CreateGroupRequeste.html\">CreateGroupRequest</a>.</p>"
+        }
+      }
+    },
+    "UpdateGroupResponse":{
+      "type":"structure",
+      "members":{
+        "Group":{
+          "shape":"GroupType",
+          "documentation":"<p>The group object for the group.</p>"
+        }
+      }
+    },
     "UpdateUserAttributesRequest":{
       "type":"structure",
       "required":["UserAttributes"],
@@ -3804,7 +4296,7 @@
         },
         "RefreshTokenValidity":{
           "shape":"RefreshTokenValidityType",
-          "documentation":"<p>The validity of the refresh token.</p>"
+          "documentation":"<p>The validity of the refresh token, in days.</p>"
         },
         "ReadAttributes":{
           "shape":"ClientPermissionListType",
@@ -3882,6 +4374,10 @@
         "SmsConfiguration":{
           "shape":"SmsConfigurationType",
           "documentation":"<p>SMS configuration.</p>"
+        },
+        "UserPoolTags":{
+          "shape":"UserPoolTagsType",
+          "documentation":"<p>The cost allocation tags for the user pool. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html\">Adding Cost Allocation Tags to Your User Pool</a> </p>"
         },
         "AdminCreateUserConfig":{
           "shape":"AdminCreateUserConfigType",
@@ -4049,7 +4545,7 @@
           "documentation":"<p>The client name from the user pool client description.</p>"
         }
       },
-      "documentation":"<p>The description of the user poool client.</p>"
+      "documentation":"<p>The description of the user pool client.</p>"
     },
     "UserPoolClientListType":{
       "type":"list",
@@ -4084,7 +4580,7 @@
         },
         "RefreshTokenValidity":{
           "shape":"RefreshTokenValidityType",
-          "documentation":"<p>The validity of the refresh token.</p>"
+          "documentation":"<p>The validity of the refresh token, in days.</p>"
         },
         "ReadAttributes":{
           "shape":"ClientPermissionListType",
@@ -4165,6 +4661,19 @@
       },
       "documentation":"<p>The type of policy in a user pool.</p>"
     },
+    "UserPoolTaggingException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"MessageType"}
+      },
+      "documentation":"<p>This exception gets thrown when a user pool tag cannot be set or updated.</p>",
+      "exception":true
+    },
+    "UserPoolTagsType":{
+      "type":"map",
+      "key":{"shape":"StringType"},
+      "value":{"shape":"StringType"}
+    },
     "UserPoolType":{
       "type":"structure",
       "members":{
@@ -4243,6 +4752,10 @@
         "SmsConfiguration":{
           "shape":"SmsConfigurationType",
           "documentation":"<p>The SMS configuration.</p>"
+        },
+        "UserPoolTags":{
+          "shape":"UserPoolTagsType",
+          "documentation":"<p>The cost allocation tags for the user pool. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html\">Adding Cost Allocation Tags to Your User Pool</a> </p>"
         },
         "SmsConfigurationFailure":{
           "shape":"StringType",

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.14-->
+<!--LATEST=2.7.15-->
 <!--ENTRYINSERT-->
+
+## 2.7.15
+* bugfix: Buffer: Update base64 encode/decode to use Buffer.fill when available and throw an error if a number is provided.
+* bugfix: XRay: Add X-Amzn-Trace-Id to list of unsigned headers to prevent signature mismatch errors if the header value is modified while the request is in flight.
+* feature: Cognito: Add new regions and endpoints for Amazon Cognito Identity, Amazon Cognito Sync, and Amazon Cognito Identity Provider.
+* feature: CognitoIdentityServiceProvider: User Pools now offers groups as an easy way to manage users and their permissions.
+* feature: SSM: Add support for Patch Baseline and Patch Compliance APIs
 
 ## 2.7.14
 * feature: Batch: AWS Batch is a batch computing service that lets customers define queues and compute environments and then submit work as batch jobs.

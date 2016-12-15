@@ -20,11 +20,19 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   addCustomAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse, AWSError>;
   /**
-   * Confirms user registration as an admin without using a confirmation code. Works on any user.
+   * Adds the specified user to the specified group. Requires developer credentials.
+   */
+  adminAddUserToGroup(params: CognitoIdentityServiceProvider.Types.AdminAddUserToGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds the specified user to the specified group. Requires developer credentials.
+   */
+  adminAddUserToGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Confirms user registration as an admin without using a confirmation code. Works on any user. Requires developer credentials.
    */
   adminConfirmSignUp(params: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
-   * Confirms user registration as an admin without using a confirmation code. Works on any user.
+   * Confirms user registration as an admin without using a confirmation code. Works on any user. Requires developer credentials.
    */
   adminConfirmSignUp(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
@@ -36,123 +44,139 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminCreateUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminCreateUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminCreateUserResponse, AWSError>;
   /**
-   * Deletes a user as an administrator. Works on any user.
+   * Deletes a user as an administrator. Works on any user. Requires developer credentials.
    */
   adminDeleteUser(params: CognitoIdentityServiceProvider.Types.AdminDeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a user as an administrator. Works on any user.
+   * Deletes a user as an administrator. Works on any user. Requires developer credentials.
    */
   adminDeleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the user attributes in a user pool as an administrator. Works on any user.
+   * Deletes the user attributes in a user pool as an administrator. Works on any user. Requires developer credentials.
    */
   adminDeleteUserAttributes(params: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse, AWSError>;
   /**
-   * Deletes the user attributes in a user pool as an administrator. Works on any user.
+   * Deletes the user attributes in a user pool as an administrator. Works on any user. Requires developer credentials.
    */
   adminDeleteUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse, AWSError>;
   /**
-   * Disables the specified user as an administrator. Works on any user.
+   * Disables the specified user as an administrator. Works on any user. Requires developer credentials.
    */
   adminDisableUser(params: CognitoIdentityServiceProvider.Types.AdminDisableUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableUserResponse, AWSError>;
   /**
-   * Disables the specified user as an administrator. Works on any user.
+   * Disables the specified user as an administrator. Works on any user. Requires developer credentials.
    */
   adminDisableUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableUserResponse, AWSError>;
   /**
-   * Enables the specified user as an administrator. Works on any user.
+   * Enables the specified user as an administrator. Works on any user. Requires developer credentials.
    */
   adminEnableUser(params: CognitoIdentityServiceProvider.Types.AdminEnableUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminEnableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminEnableUserResponse, AWSError>;
   /**
-   * Enables the specified user as an administrator. Works on any user.
+   * Enables the specified user as an administrator. Works on any user. Requires developer credentials.
    */
   adminEnableUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminEnableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminEnableUserResponse, AWSError>;
   /**
-   * Forgets the device, as an administrator.
+   * Forgets the device, as an administrator. Requires developer credentials.
    */
   adminForgetDevice(params: CognitoIdentityServiceProvider.Types.AdminForgetDeviceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Forgets the device, as an administrator.
+   * Forgets the device, as an administrator. Requires developer credentials.
    */
   adminForgetDevice(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets the device, as an administrator.
+   * Gets the device, as an administrator. Requires developer credentials.
    */
   adminGetDevice(params: CognitoIdentityServiceProvider.Types.AdminGetDeviceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse, AWSError>;
   /**
-   * Gets the device, as an administrator.
+   * Gets the device, as an administrator. Requires developer credentials.
    */
   adminGetDevice(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse, AWSError>;
   /**
-   * Gets the specified user by user name in a user pool as an administrator. Works on any user.
+   * Gets the specified user by user name in a user pool as an administrator. Works on any user. Requires developer credentials.
    */
   adminGetUser(params: CognitoIdentityServiceProvider.Types.AdminGetUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetUserResponse, AWSError>;
   /**
-   * Gets the specified user by user name in a user pool as an administrator. Works on any user.
+   * Gets the specified user by user name in a user pool as an administrator. Works on any user. Requires developer credentials.
    */
   adminGetUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetUserResponse, AWSError>;
   /**
-   * Initiates the authentication flow, as an administrator.
+   * Initiates the authentication flow, as an administrator. Requires developer credentials.
    */
   adminInitiateAuth(params: CognitoIdentityServiceProvider.Types.AdminInitiateAuthRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse, AWSError>;
   /**
-   * Initiates the authentication flow, as an administrator.
+   * Initiates the authentication flow, as an administrator. Requires developer credentials.
    */
   adminInitiateAuth(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse, AWSError>;
   /**
-   * Lists devices, as an administrator.
+   * Lists devices, as an administrator. Requires developer credentials.
    */
   adminListDevices(params: CognitoIdentityServiceProvider.Types.AdminListDevicesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListDevicesResponse, AWSError>;
   /**
-   * Lists devices, as an administrator.
+   * Lists devices, as an administrator. Requires developer credentials.
    */
   adminListDevices(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListDevicesResponse, AWSError>;
   /**
-   * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password.
+   * Lists the groups that the user belongs to. Requires developer credentials.
+   */
+  adminListGroupsForUser(params: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse, AWSError>;
+  /**
+   * Lists the groups that the user belongs to. Requires developer credentials.
+   */
+  adminListGroupsForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse, AWSError>;
+  /**
+   * Removes the specified user from the specified group. Requires developer credentials.
+   */
+  adminRemoveUserFromGroup(params: CognitoIdentityServiceProvider.Types.AdminRemoveUserFromGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the specified user from the specified group. Requires developer credentials.
+   */
+  adminRemoveUserFromGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password. Requires developer credentials.
    */
   adminResetUserPassword(params: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse, AWSError>;
   /**
-   * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password.
+   * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password. Requires developer credentials.
    */
   adminResetUserPassword(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse, AWSError>;
   /**
-   * Responds to an authentication challenge, as an administrator.
+   * Responds to an authentication challenge, as an administrator. Requires developer credentials.
    */
   adminRespondToAuthChallenge(params: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse, AWSError>;
   /**
-   * Responds to an authentication challenge, as an administrator.
+   * Responds to an authentication challenge, as an administrator. Requires developer credentials.
    */
   adminRespondToAuthChallenge(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse, AWSError>;
   /**
-   * Sets all the user settings for a specified user name. Works on any user.
+   * Sets all the user settings for a specified user name. Works on any user. Requires developer credentials.
    */
   adminSetUserSettings(params: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse, AWSError>;
   /**
-   * Sets all the user settings for a specified user name. Works on any user.
+   * Sets all the user settings for a specified user name. Works on any user. Requires developer credentials.
    */
   adminSetUserSettings(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse, AWSError>;
   /**
-   * Updates the device status as an administrator.
+   * Updates the device status as an administrator. Requires developer credentials.
    */
   adminUpdateDeviceStatus(params: CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse, AWSError>;
   /**
-   * Updates the device status as an administrator.
+   * Updates the device status as an administrator. Requires developer credentials.
    */
   adminUpdateDeviceStatus(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse, AWSError>;
   /**
-   * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user.
+   * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user. Requires developer credentials.
    */
   adminUpdateUserAttributes(params: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse, AWSError>;
   /**
-   * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user.
+   * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user. Requires developer credentials.
    */
   adminUpdateUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse, AWSError>;
   /**
-   * Signs out users from all devices, as an administrator.
+   * Signs out users from all devices, as an administrator. Requires developer credentials.
    */
   adminUserGlobalSignOut(params: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
-   * Signs out users from all devices, as an administrator.
+   * Signs out users from all devices, as an administrator. Requires developer credentials.
    */
   adminUserGlobalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
@@ -188,6 +212,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   confirmSignUp(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse, AWSError>;
   /**
+   * Creates a new group in the specified user pool. Requires developer credentials.
+   */
+  createGroup(params: CognitoIdentityServiceProvider.Types.CreateGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateGroupResponse, AWSError>;
+  /**
+   * Creates a new group in the specified user pool. Requires developer credentials.
+   */
+  createGroup(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateGroupResponse, AWSError>;
+  /**
    * Creates the user import job.
    */
   createUserImportJob(params: CognitoIdentityServiceProvider.Types.CreateUserImportJobRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserImportJobResponse, AWSError>;
@@ -211,6 +243,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Creates the user pool client.
    */
   createUserPoolClient(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserPoolClientResponse, AWSError>;
+  /**
+   * Deletes a group. Currently only groups with no members can be deleted. Requires developer credentials.
+   */
+  deleteGroup(params: CognitoIdentityServiceProvider.Types.DeleteGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a group. Currently only groups with no members can be deleted. Requires developer credentials.
+   */
+  deleteGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Allows a user to delete one's self.
    */
@@ -300,6 +340,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   getDevice(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetDeviceResponse, AWSError>;
   /**
+   * Gets a group. Requires developer credentials.
+   */
+  getGroup(params: CognitoIdentityServiceProvider.Types.GetGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetGroupResponse, AWSError>;
+  /**
+   * Gets a group. Requires developer credentials.
+   */
+  getGroup(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetGroupResponse, AWSError>;
+  /**
    * Gets the user attributes and metadata for a user.
    */
   getUser(params: CognitoIdentityServiceProvider.Types.GetUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserResponse, AWSError>;
@@ -340,6 +388,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   listDevices(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListDevicesResponse, AWSError>;
   /**
+   * Lists the groups associated with a user pool. Requires developer credentials.
+   */
+  listGroups(params: CognitoIdentityServiceProvider.Types.ListGroupsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListGroupsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListGroupsResponse, AWSError>;
+  /**
+   * Lists the groups associated with a user pool. Requires developer credentials.
+   */
+  listGroups(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListGroupsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListGroupsResponse, AWSError>;
+  /**
    * Lists the user import jobs.
    */
   listUserImportJobs(params: CognitoIdentityServiceProvider.Types.ListUserImportJobsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUserImportJobsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUserImportJobsResponse, AWSError>;
@@ -371,6 +427,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Lists the users in the Amazon Cognito user pool.
    */
   listUsers(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersResponse, AWSError>;
+  /**
+   * Lists the users in the specified group. Requires developer credentials.
+   */
+  listUsersInGroup(params: CognitoIdentityServiceProvider.Types.ListUsersInGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse, AWSError>;
+  /**
+   * Lists the users in the specified group. Requires developer credentials.
+   */
+  listUsersInGroup(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse, AWSError>;
   /**
    * Resends the confirmation (for confirmation of registration) to a specific user in the user pool.
    */
@@ -428,6 +492,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   updateDeviceStatus(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateDeviceStatusResponse, AWSError>;
   /**
+   * Updates the specified group with the specified attributes. Requires developer credentials.
+   */
+  updateGroup(params: CognitoIdentityServiceProvider.Types.UpdateGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateGroupResponse, AWSError>;
+  /**
+   * Updates the specified group with the specified attributes. Requires developer credentials.
+   */
+  updateGroup(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateGroupResponse, AWSError>;
+  /**
    * Allows a user to update a specific attribute (one at a time).
    */
   updateUserAttributes(params: CognitoIdentityServiceProvider.Types.UpdateUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse, AWSError>;
@@ -473,6 +545,20 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface AddCustomAttributesResponse {
   }
+  export interface AdminAddUserToGroupRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The username for the user.
+     */
+    Username: UsernameType;
+    /**
+     * The group name.
+     */
+    GroupName: GroupNameType;
+  }
   export interface AdminConfirmSignUpRequest {
     /**
      * The user pool ID for which you want to confirm user registration.
@@ -491,7 +577,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AllowAdminCreateUserOnly?: BooleanType;
     /**
-     * The user account expiration limit, in days, after which the account is no longer usable. To reset the account after that time limit, you must call AdminCreateUser again, specifying "RESEND" for the MessageAction parameter.
+     * The user account expiration limit, in days, after which the account is no longer usable. To reset the account after that time limit, you must call AdminCreateUser again, specifying "RESEND" for the MessageAction parameter. The default value for this paameter is 7.
      */
     UnusedAccountValidityDays?: AdminCreateUserUnusedAccountValidityDaysType;
     /**
@@ -731,6 +817,48 @@ declare namespace CognitoIdentityServiceProvider {
      * The pagination token.
      */
     PaginationToken?: SearchPaginationTokenType;
+  }
+  export interface AdminListGroupsForUserRequest {
+    /**
+     * The username for the user.
+     */
+    Username: UsernameType;
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The limit of the request to list groups.
+     */
+    Limit?: QueryLimitType;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: PaginationKey;
+  }
+  export interface AdminListGroupsForUserResponse {
+    /**
+     * The groups that the user belongs to.
+     */
+    Groups?: GroupListType;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: PaginationKey;
+  }
+  export interface AdminRemoveUserFromGroupRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The username for the user.
+     */
+    Username: UsernameType;
+    /**
+     * The group name.
+     */
+    GroupName: GroupNameType;
   }
   export interface AdminResetUserPasswordRequest {
     /**
@@ -1009,6 +1137,34 @@ declare namespace CognitoIdentityServiceProvider {
   export interface ConfirmSignUpResponse {
   }
   export type ConfirmationCodeType = string;
+  export interface CreateGroupRequest {
+    /**
+     * The name of the group. Must be unique.
+     */
+    GroupName: GroupNameType;
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * A string containing the description of the group.
+     */
+    Description?: DescriptionType;
+    /**
+     * The role ARN for the group.
+     */
+    RoleArn?: ArnType;
+    /**
+     * A nonnegative integer value that specifies the precedence of this group relative to the other groups that a user can belong to in the user pool. Zero is the highest precedence value. Groups with lower Precedence values take precedence over groups with higher or null Precedence values. If a user belongs to two or more groups, it is the group with the lowest precedence value whose role ARN will be used in the cognito:roles and cognito:preferred_role claims in the user's tokens. Two groups can have the same Precedence value. If this happens, neither group takes precedence over the other. If two groups with the same Precedence have the same role ARN, that role is used in the cognito:preferred_role claim in tokens for users in each group. If the two groups have different role ARNs, the cognito:preferred_role claim is not set in users' tokens. The default Precedence value is null.
+     */
+    Precedence?: PrecedenceType;
+  }
+  export interface CreateGroupResponse {
+    /**
+     * The group object for the group.
+     */
+    Group?: GroupType;
+  }
   export interface CreateUserImportJobRequest {
     /**
      * The job name for the user import job.
@@ -1043,7 +1199,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     GenerateSecret?: GenerateSecret;
     /**
-     * Refreshes the token validity.
+     * The validity of the refresh token, in days.
      */
     RefreshTokenValidity?: RefreshTokenValidityType;
     /**
@@ -1119,6 +1275,10 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SmsConfiguration?: SmsConfigurationType;
     /**
+     * The cost allocation tags for the user pool. For more information, see Adding Cost Allocation Tags to Your User Pool 
+     */
+    UserPoolTags?: UserPoolTagsType;
+    /**
      * The configuration for AdminCreateUser requests.
      */
     AdminCreateUserConfig?: AdminCreateUserConfigType;
@@ -1136,6 +1296,16 @@ declare namespace CognitoIdentityServiceProvider {
   export type CustomAttributeNameType = string;
   export type CustomAttributesListType = SchemaAttributeType[];
   export type DateType = Date;
+  export interface DeleteGroupRequest {
+    /**
+     * The name of the group.
+     */
+    GroupName: GroupNameType;
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+  }
   export interface DeleteUserAttributesRequest {
     /**
      * An array of strings representing the user attribute names you wish to delete.
@@ -1216,6 +1386,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPool?: UserPoolType;
   }
+  export type DescriptionType = string;
   export interface DeviceConfigurationType {
     /**
      * Indicates whether a challenge is required on a new device. Only applicable to a new device.
@@ -1341,6 +1512,22 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Device: DeviceType;
   }
+  export interface GetGroupRequest {
+    /**
+     * The name of the group.
+     */
+    GroupName: GroupNameType;
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+  }
+  export interface GetGroupResponse {
+    /**
+     * The group object for the group.
+     */
+    Group?: GroupType;
+  }
   export interface GetUserAttributeVerificationCodeRequest {
     /**
      * The access token returned by the server response to get the user attribute verification code.
@@ -1384,6 +1571,38 @@ declare namespace CognitoIdentityServiceProvider {
     AccessToken?: TokenModelType;
   }
   export interface GlobalSignOutResponse {
+  }
+  export type GroupListType = GroupType[];
+  export type GroupNameType = string;
+  export interface GroupType {
+    /**
+     * The name of the group.
+     */
+    GroupName?: GroupNameType;
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId?: UserPoolIdType;
+    /**
+     * A string containing the description of the group.
+     */
+    Description?: DescriptionType;
+    /**
+     * The role ARN for the group.
+     */
+    RoleArn?: ArnType;
+    /**
+     * A nonnegative integer value that specifies the precedence of this group relative to the other groups that a user can belong to in the user pool. If a user belongs to two or more groups, it is the group with the highest precedence whose role ARN will be used in the cognito:roles and cognito:preferred_role claims in the user's tokens. Groups with higher Precedence values take precedence over groups with lower Precedence values or with null Precedence values. Two groups can have the same Precedence value. If this happens, neither group takes precedence over the other. If two groups with the same Precedence have the same role ARN, that role is used in the cognito:preferred_role claim in tokens for users in each group. If the two groups have different role ARNs, the cognito:preferred_role claim is not set in users' tokens. The default Precedence value is null.
+     */
+    Precedence?: PrecedenceType;
+    /**
+     * The date the group was last modified.
+     */
+    LastModifiedDate?: DateType;
+    /**
+     * The date the group was created.
+     */
+    CreationDate?: DateType;
   }
   export interface InitiateAuthRequest {
     /**
@@ -1480,6 +1699,30 @@ declare namespace CognitoIdentityServiceProvider {
      */
     PaginationToken?: SearchPaginationTokenType;
   }
+  export interface ListGroupsRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The limit of the request to list groups.
+     */
+    Limit?: QueryLimitType;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: PaginationKey;
+  }
+  export interface ListGroupsResponse {
+    /**
+     * The group objects for the groups.
+     */
+    Groups?: GroupListType;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: PaginationKey;
+  }
   export type ListOfStringTypes = StringType[];
   export interface ListUserImportJobsRequest {
     /**
@@ -1548,6 +1791,34 @@ declare namespace CognitoIdentityServiceProvider {
      * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
      */
     NextToken?: PaginationKeyType;
+  }
+  export interface ListUsersInGroupRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The name of the group.
+     */
+    GroupName: GroupNameType;
+    /**
+     * The limit of the request to list users.
+     */
+    Limit?: QueryLimitType;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: PaginationKey;
+  }
+  export interface ListUsersInGroupResponse {
+    /**
+     * The users returned in the request to list users.
+     */
+    Users?: UsersListType;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: PaginationKey;
   }
   export interface ListUsersRequest {
     /**
@@ -1657,6 +1928,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type PasswordType = string;
   export type PoolQueryLimitType = number;
   export type PreSignedUrlType = string;
+  export type PrecedenceType = number;
   export type QueryLimit = number;
   export type QueryLimitType = number;
   export type RefreshTokenValidityType = number;
@@ -1871,6 +2143,34 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface UpdateDeviceStatusResponse {
   }
+  export interface UpdateGroupRequest {
+    /**
+     * The name of the group.
+     */
+    GroupName: GroupNameType;
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * A string containing the new description of the group.
+     */
+    Description?: DescriptionType;
+    /**
+     * The new role ARN for the group. This is used for setting the cognito:roles and cognito:preferred_role claims in the token.
+     */
+    RoleArn?: ArnType;
+    /**
+     * The new precedence value for the group. For more information about this parameter, see CreateGroupRequest.
+     */
+    Precedence?: PrecedenceType;
+  }
+  export interface UpdateGroupResponse {
+    /**
+     * The group object for the group.
+     */
+    Group?: GroupType;
+  }
   export interface UpdateUserAttributesRequest {
     /**
      * An array of name-value pairs representing user attributes.
@@ -1901,7 +2201,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ClientName?: ClientNameType;
     /**
-     * The validity of the refresh token.
+     * The validity of the refresh token, in days.
      */
     RefreshTokenValidity?: RefreshTokenValidityType;
     /**
@@ -1972,6 +2272,10 @@ declare namespace CognitoIdentityServiceProvider {
      * SMS configuration.
      */
     SmsConfiguration?: SmsConfigurationType;
+    /**
+     * The cost allocation tags for the user pool. For more information, see Adding Cost Allocation Tags to Your User Pool 
+     */
+    UserPoolTags?: UserPoolTagsType;
     /**
      * The configuration for AdminCreateUser requests.
      */
@@ -2079,7 +2383,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CreationDate?: DateType;
     /**
-     * The validity of the refresh token.
+     * The validity of the refresh token, in days.
      */
     RefreshTokenValidity?: RefreshTokenValidityType;
     /**
@@ -2131,6 +2435,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     PasswordPolicy?: PasswordPolicyType;
   }
+  export type UserPoolTagsType = {[key: string]: StringType};
   export interface UserPoolType {
     /**
      * The ID of the user pool.
@@ -2208,6 +2513,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The SMS configuration.
      */
     SmsConfiguration?: SmsConfigurationType;
+    /**
+     * The cost allocation tags for the user pool. For more information, see Adding Cost Allocation Tags to Your User Pool 
+     */
+    UserPoolTags?: UserPoolTagsType;
     /**
      * The reason why the SMS configuration cannot send the message(s) to your users.
      */

@@ -136,6 +136,21 @@
       ],
       "documentation":"<p>Creates a new Maintenance Window.</p>"
     },
+    "CreatePatchBaseline":{
+      "name":"CreatePatchBaseline",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreatePatchBaselineRequest"},
+      "output":{"shape":"CreatePatchBaselineResult"},
+      "errors":[
+        {"shape":"IdempotentParameterMismatch"},
+        {"shape":"ResourceLimitExceededException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Creates a patch baseline.</p>"
+    },
     "DeleteActivation":{
       "name":"DeleteActivation",
       "http":{
@@ -211,6 +226,20 @@
       ],
       "documentation":"<p>Delete a parameter from the system.</p>"
     },
+    "DeletePatchBaseline":{
+      "name":"DeletePatchBaseline",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeletePatchBaselineRequest"},
+      "output":{"shape":"DeletePatchBaselineResult"},
+      "errors":[
+        {"shape":"ResourceInUseException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Deletes a patch baseline.</p>"
+    },
     "DeregisterManagedInstance":{
       "name":"DeregisterManagedInstance",
       "http":{
@@ -224,6 +253,20 @@
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don’t plan to use Run Command on the server, we suggest uninstalling the SSM agent first.</p>"
+    },
+    "DeregisterPatchBaselineForPatchGroup":{
+      "name":"DeregisterPatchBaselineForPatchGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeregisterPatchBaselineForPatchGroupRequest"},
+      "output":{"shape":"DeregisterPatchBaselineForPatchGroupResult"},
+      "errors":[
+        {"shape":"InvalidResourceId"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Removes a patch group from a patch baseline.</p>"
     },
     "DeregisterTargetFromMaintenanceWindow":{
       "name":"DeregisterTargetFromMaintenanceWindow",
@@ -298,6 +341,19 @@
       ],
       "documentation":"<p>Provides details about all active and terminated Automation executions.</p>"
     },
+    "DescribeAvailablePatches":{
+      "name":"DescribeAvailablePatches",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeAvailablePatchesRequest"},
+      "output":{"shape":"DescribeAvailablePatchesResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Lists all patches that could possibly be included in a patch baseline.</p>"
+    },
     "DescribeDocument":{
       "name":"DescribeDocument",
       "http":{
@@ -343,6 +399,21 @@
       ],
       "documentation":"<p>All associations for the instance(s).</p>"
     },
+    "DescribeEffectivePatchesForPatchBaseline":{
+      "name":"DescribeEffectivePatchesForPatchBaseline",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeEffectivePatchesForPatchBaselineRequest"},
+      "output":{"shape":"DescribeEffectivePatchesForPatchBaselineResult"},
+      "errors":[
+        {"shape":"InvalidResourceId"},
+        {"shape":"DoesNotExistException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline.</p>"
+    },
     "DescribeInstanceAssociationsStatus":{
       "name":"DescribeInstanceAssociationsStatus",
       "http":{
@@ -374,6 +445,51 @@
         {"shape":"InvalidFilterKey"}
       ],
       "documentation":"<p>Describes one or more of your instances. You can use this to get information about instances like the operating system platform, the SSM agent version (Linux), status etc. If you specify one or more instance IDs, it returns information for those instances. If you do not specify instance IDs, it returns information for all your instances. If you specify an instance ID that is not valid or an instance that you do not own, you receive an error. </p>"
+    },
+    "DescribeInstancePatchStates":{
+      "name":"DescribeInstancePatchStates",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeInstancePatchStatesRequest"},
+      "output":{"shape":"DescribeInstancePatchStatesResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>Retrieves the high-level patch state of one or more instances.</p>"
+    },
+    "DescribeInstancePatchStatesForPatchGroup":{
+      "name":"DescribeInstancePatchStatesForPatchGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeInstancePatchStatesForPatchGroupRequest"},
+      "output":{"shape":"DescribeInstancePatchStatesForPatchGroupResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidFilter"},
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>Retrieves the high-level patch state for the instances in the specified patch group.</p>"
+    },
+    "DescribeInstancePatches":{
+      "name":"DescribeInstancePatches",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeInstancePatchesRequest"},
+      "output":{"shape":"DescribeInstancePatchesResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidInstanceId"},
+        {"shape":"InvalidFilter"},
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>Retrieves information about the patches on the specified instance and their state relative to the patch baseline being used for the instance.</p>"
     },
     "DescribeMaintenanceWindowExecutionTaskInvocations":{
       "name":"DescribeMaintenanceWindowExecutionTaskInvocations",
@@ -472,6 +588,46 @@
       ],
       "documentation":"<p>Get information about a parameter.</p>"
     },
+    "DescribePatchBaselines":{
+      "name":"DescribePatchBaselines",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribePatchBaselinesRequest"},
+      "output":{"shape":"DescribePatchBaselinesResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Lists the patch baselines in your AWS account.</p>"
+    },
+    "DescribePatchGroupState":{
+      "name":"DescribePatchGroupState",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribePatchGroupStateRequest"},
+      "output":{"shape":"DescribePatchGroupStateResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>Returns high-level aggregated patch compliance state for a patch group.</p>"
+    },
+    "DescribePatchGroups":{
+      "name":"DescribePatchGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribePatchGroupsRequest"},
+      "output":{"shape":"DescribePatchGroupsResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Lists all patch groups that have been registered with patch baselines.</p>"
+    },
     "GetAutomationExecution":{
       "name":"GetAutomationExecution",
       "http":{
@@ -502,6 +658,32 @@
         {"shape":"InvocationDoesNotExist"}
       ],
       "documentation":"<p>Returns detailed information about command execution for an invocation or plugin. </p>"
+    },
+    "GetDefaultPatchBaseline":{
+      "name":"GetDefaultPatchBaseline",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDefaultPatchBaselineRequest"},
+      "output":{"shape":"GetDefaultPatchBaselineResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Retrieves the default patch baseline.</p>"
+    },
+    "GetDeployablePatchSnapshotForInstance":{
+      "name":"GetDeployablePatchSnapshotForInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDeployablePatchSnapshotForInstanceRequest"},
+      "output":{"shape":"GetDeployablePatchSnapshotForInstanceResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-ApplyPatchBaseline Systems Manager document. </p>"
     },
     "GetDocument":{
       "name":"GetDocument",
@@ -619,6 +801,34 @@
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Get a list of parameters used by the AWS account.&gt;</p>"
+    },
+    "GetPatchBaseline":{
+      "name":"GetPatchBaseline",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetPatchBaselineRequest"},
+      "output":{"shape":"GetPatchBaselineResult"},
+      "errors":[
+        {"shape":"DoesNotExistException"},
+        {"shape":"InvalidResourceId"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Retrieves information about a patch baseline.</p>"
+    },
+    "GetPatchBaselineForPatchGroup":{
+      "name":"GetPatchBaselineForPatchGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetPatchBaselineForPatchGroupRequest"},
+      "output":{"shape":"GetPatchBaselineForPatchGroupResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Retrieves the patch baseline that should be used for the specified patch group.</p>"
     },
     "ListAssociations":{
       "name":"ListAssociations",
@@ -785,6 +995,38 @@
         {"shape":"UnsupportedParameterType"}
       ],
       "documentation":"<p>Add one or more paramaters to the system.</p>"
+    },
+    "RegisterDefaultPatchBaseline":{
+      "name":"RegisterDefaultPatchBaseline",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RegisterDefaultPatchBaselineRequest"},
+      "output":{"shape":"RegisterDefaultPatchBaselineResult"},
+      "errors":[
+        {"shape":"InvalidResourceId"},
+        {"shape":"DoesNotExistException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Defines the default patch baseline.</p>"
+    },
+    "RegisterPatchBaselineForPatchGroup":{
+      "name":"RegisterPatchBaselineForPatchGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RegisterPatchBaselineForPatchGroupRequest"},
+      "output":{"shape":"RegisterPatchBaselineForPatchGroupResult"},
+      "errors":[
+        {"shape":"AlreadyExistsException"},
+        {"shape":"DoesNotExistException"},
+        {"shape":"InvalidResourceId"},
+        {"shape":"ResourceLimitExceededException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Registers a patch baseline for a patch group.</p>"
     },
     "RegisterTargetWithMaintenanceWindow":{
       "name":"RegisterTargetWithMaintenanceWindow",
@@ -987,6 +1229,20 @@
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Assigns or changes an Amazon Identity and Access Management (IAM) role to the managed instance.</p>"
+    },
+    "UpdatePatchBaseline":{
+      "name":"UpdatePatchBaseline",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdatePatchBaselineRequest"},
+      "output":{"shape":"UpdatePatchBaselineResult"},
+      "errors":[
+        {"shape":"DoesNotExistException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Modifies an existing patch baseline. Fields not specified in the request are left unchanged.</p>"
     }
   },
   "shapes":{
@@ -1092,6 +1348,19 @@
     "AgentErrorCode":{
       "type":"string",
       "max":10
+    },
+    "AlreadyExistsException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>Error returned if an attempt is made to register a patch group with a patch baseline that is already registered with a different patch baseline.</p>",
+      "exception":true
+    },
+    "ApproveAfterDays":{
+      "type":"integer",
+      "max":100,
+      "min":0
     },
     "AssociatedInstances":{
       "type":"structure",
@@ -1559,6 +1828,23 @@
       "member":{"shape":"AutomationParameterValue"},
       "max":10,
       "min":0
+    },
+    "BaselineDescription":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "BaselineId":{
+      "type":"string",
+      "max":128,
+      "min":20,
+      "pattern":"^[a-zA-Z0-9_\\-:/]{20,128}$"
+    },
+    "BaselineName":{
+      "type":"string",
+      "max":128,
+      "min":3,
+      "pattern":"^[a-zA-Z0-9_\\-.]{3,128}$"
     },
     "BatchErrorMessage":{"type":"string"},
     "Boolean":{"type":"boolean"},
@@ -2124,6 +2410,50 @@
         }
       }
     },
+    "CreatePatchBaselineRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"BaselineName",
+          "documentation":"<p>The name of the patch baseline.</p>"
+        },
+        "GlobalFilters":{
+          "shape":"PatchFilterGroup",
+          "documentation":"<p>A set of global filters used to exclude patches from the baseline.</p>"
+        },
+        "ApprovalRules":{
+          "shape":"PatchRuleGroup",
+          "documentation":"<p>A set of rules used to include patches in the baseline.</p>"
+        },
+        "ApprovedPatches":{
+          "shape":"PatchIdList",
+          "documentation":"<p>A list of explicitly approved patches for the baseline.</p>"
+        },
+        "RejectedPatches":{
+          "shape":"PatchIdList",
+          "documentation":"<p>A list of explicitly rejected patches for the baseline.</p>"
+        },
+        "Description":{
+          "shape":"BaselineDescription",
+          "documentation":"<p>A description of the patch baseline.</p>"
+        },
+        "ClientToken":{
+          "shape":"ClientToken",
+          "documentation":"<p>Caller-provided idempotency token.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreatePatchBaselineResult":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the created patch baseline.</p>"
+        }
+      }
+    },
     "CreatedDate":{"type":"timestamp"},
     "CustomSchemaCountLimitExceededException":{
       "type":"structure",
@@ -2134,6 +2464,7 @@
       "exception":true
     },
     "DateTime":{"type":"timestamp"},
+    "DefaultBaseline":{"type":"boolean"},
     "DefaultInstanceName":{
       "type":"string",
       "max":256,
@@ -2226,6 +2557,25 @@
       "members":{
       }
     },
+    "DeletePatchBaselineRequest":{
+      "type":"structure",
+      "required":["BaselineId"],
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline to delete.</p>"
+        }
+      }
+    },
+    "DeletePatchBaselineResult":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the deleted patch baseline.</p>"
+        }
+      }
+    },
     "DeregisterManagedInstanceRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -2239,6 +2589,36 @@
     "DeregisterManagedInstanceResult":{
       "type":"structure",
       "members":{
+      }
+    },
+    "DeregisterPatchBaselineForPatchGroupRequest":{
+      "type":"structure",
+      "required":[
+        "BaselineId",
+        "PatchGroup"
+      ],
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline to deregister the patch group from.</p>"
+        },
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group that should be deregistered from the patch baseline.</p>"
+        }
+      }
+    },
+    "DeregisterPatchBaselineForPatchGroupResult":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline the patch group was deregistered from.</p>"
+        },
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group deregistered from the patch baseline.</p>"
+        }
       }
     },
     "DeregisterTargetFromMaintenanceWindowRequest":{
@@ -2415,6 +2795,37 @@
         }
       }
     },
+    "DescribeAvailablePatchesRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"PatchOrchestratorFilterList",
+          "documentation":"<p>Filters used to scope down the returned patches.</p>"
+        },
+        "MaxResults":{
+          "shape":"PatchBaselineMaxResults",
+          "documentation":"<p>The maximum number of patches to return (per page).</p>",
+          "box":true
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
+    "DescribeAvailablePatchesResult":{
+      "type":"structure",
+      "members":{
+        "Patches":{
+          "shape":"PatchList",
+          "documentation":"<p>An array of patches. Each entry in the array is a patch structure.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
     "DescribeDocumentPermissionRequest":{
       "type":"structure",
       "required":[
@@ -2496,6 +2907,38 @@
         }
       }
     },
+    "DescribeEffectivePatchesForPatchBaselineRequest":{
+      "type":"structure",
+      "required":["BaselineId"],
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline to retrieve the effective patches for.</p>"
+        },
+        "MaxResults":{
+          "shape":"PatchBaselineMaxResults",
+          "documentation":"<p>The maximum number of patches to return (per page).</p>",
+          "box":true
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
+    "DescribeEffectivePatchesForPatchBaselineResult":{
+      "type":"structure",
+      "members":{
+        "EffectivePatches":{
+          "shape":"EffectivePatchList",
+          "documentation":"<p>An array of patches and patch status.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
     "DescribeInstanceAssociationsStatusRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -2560,6 +3003,110 @@
         "NextToken":{
           "shape":"NextToken",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty. </p>"
+        }
+      }
+    },
+    "DescribeInstancePatchStatesForPatchGroupRequest":{
+      "type":"structure",
+      "required":["PatchGroup"],
+      "members":{
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group for which the patch state information should be retrieved.</p>"
+        },
+        "Filters":{
+          "shape":"InstancePatchStateFilterList",
+          "documentation":"<p>Each entry in the array is a structure containing:</p> <p>Key (string 1 ≤ length ≤ 200)</p> <p> Values (array containing a single string)</p> <p> Type (string “Equal”, “NotEqual”, “LessThan”, “GreaterThan”)</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        },
+        "MaxResults":{
+          "shape":"PatchComplianceMaxResults",
+          "documentation":"<p>The maximum number of patches to return (per page).</p>",
+          "box":true
+        }
+      }
+    },
+    "DescribeInstancePatchStatesForPatchGroupResult":{
+      "type":"structure",
+      "members":{
+        "InstancePatchStates":{
+          "shape":"InstancePatchStatesList",
+          "documentation":"<p>The high-level patch state for the requested instances. </p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
+    "DescribeInstancePatchStatesRequest":{
+      "type":"structure",
+      "required":["InstanceIds"],
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIdList",
+          "documentation":"<p>The ID of the instance whose patch state information should be retrieved.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        },
+        "MaxResults":{
+          "shape":"PatchComplianceMaxResults",
+          "documentation":"<p>The maximum number of instances to return (per page).</p>",
+          "box":true
+        }
+      }
+    },
+    "DescribeInstancePatchStatesResult":{
+      "type":"structure",
+      "members":{
+        "InstancePatchStates":{
+          "shape":"InstancePatchStateList",
+          "documentation":"<p>The high-level patch state for the requested instances.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
+    "DescribeInstancePatchesRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "documentation":"<p>The ID of the instance whose patch state information should be retrieved.</p>"
+        },
+        "Filters":{
+          "shape":"PatchOrchestratorFilterList",
+          "documentation":"<p>Each entry in the array is a structure containing:</p> <p>Key (string, 1 ≤ length ≤ 128)</p> <p>Values (array of strings 1 ≤ length ≤ 256)</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        },
+        "MaxResults":{
+          "shape":"PatchComplianceMaxResults",
+          "documentation":"<p>The maximum number of patches to return (per page).</p>",
+          "box":true
+        }
+      }
+    },
+    "DescribeInstancePatchesResult":{
+      "type":"structure",
+      "members":{
+        "Patches":{
+          "shape":"PatchComplianceDataList",
+          "documentation":"<p>Each entry in the array is a structure containing:</p> <p>Title (string)</p> <p>KBId (string)</p> <p>Classification (string)</p> <p>Severity (string)</p> <p>State (string – “INSTALLED”, “INSTALLED_OTHER”, “MISSING”, “NOT_APPLICABLE”, “FAILED”)</p> <p>InstalledTime (DateTime)</p> <p>InstalledBy (string)</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
       }
     },
@@ -2805,6 +3352,103 @@
         "Parameters":{
           "shape":"ParameterMetadataList",
           "documentation":"<p>Parameters returned by the request.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
+    "DescribePatchBaselinesRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"PatchOrchestratorFilterList",
+          "documentation":"<p>Each element in the array is a structure containing: </p> <p>Key: (string, “NAME_PREFIX” or “OWNER”)</p> <p>Value: (array of strings, exactly 1 entry, 1 ≤ length ≤ 255)</p>"
+        },
+        "MaxResults":{
+          "shape":"PatchBaselineMaxResults",
+          "documentation":"<p>The maximum number of patch baselines to return (per page).</p>",
+          "box":true
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
+    "DescribePatchBaselinesResult":{
+      "type":"structure",
+      "members":{
+        "BaselineIdentities":{
+          "shape":"PatchBaselineIdentityList",
+          "documentation":"<p>An array of PatchBaselineIdentity elements.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
+    "DescribePatchGroupStateRequest":{
+      "type":"structure",
+      "required":["PatchGroup"],
+      "members":{
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group whose patch snapshot should be retrieved.</p>"
+        }
+      }
+    },
+    "DescribePatchGroupStateResult":{
+      "type":"structure",
+      "members":{
+        "Instances":{
+          "shape":"Integer",
+          "documentation":"<p>The number of instances in the patch group.</p>"
+        },
+        "InstancesWithInstalledPatches":{
+          "shape":"Integer",
+          "documentation":"<p>The number of instances with installed patches.</p>"
+        },
+        "InstancesWithInstalledOtherPatches":{
+          "shape":"Integer",
+          "documentation":"<p>The number of instances with patches installed that aren’t defined in the patch baseline.</p>"
+        },
+        "InstancesWithMissingPatches":{
+          "shape":"Integer",
+          "documentation":"<p>The number of instances with missing patches from the patch baseline.</p>"
+        },
+        "InstancesWithFailedPatches":{
+          "shape":"Integer",
+          "documentation":"<p>The number of instances with patches from the patch baseline that failed to install.</p>"
+        },
+        "InstancesWithNotApplicablePatches":{
+          "shape":"Integer",
+          "documentation":"<p>The number of instances with patches that aren’t applicable.</p>"
+        }
+      }
+    },
+    "DescribePatchGroupsRequest":{
+      "type":"structure",
+      "members":{
+        "MaxResults":{
+          "shape":"PatchBaselineMaxResults",
+          "documentation":"<p>The maximum number of patch groups to return (per page).</p>",
+          "box":true
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
+    "DescribePatchGroupsResult":{
+      "type":"structure",
+      "members":{
+        "Mappings":{
+          "shape":"PatchGroupPatchBaselineMappingList",
+          "documentation":"<p>Each entry in the array contains:</p> <p>PatchGroup: string (1 ≤ length ≤ 256, Regex: ^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$)</p> <p>PatchBaselineIdentity: A PatchBaselineIdentity element. </p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3153,6 +3797,24 @@
       "max":5,
       "min":1
     },
+    "EffectivePatch":{
+      "type":"structure",
+      "members":{
+        "Patch":{
+          "shape":"Patch",
+          "documentation":"<p>Provides metadata for a patch, including information such as the KB ID, severity, classification and a URL for where more information can be obtained about the patch.</p>"
+        },
+        "PatchStatus":{
+          "shape":"PatchStatus",
+          "documentation":"<p>The status of the patch in a patch baseline. This includes information about whether the patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly rejected and the date the patch was or will be approved.</p>"
+        }
+      },
+      "documentation":"<p>The EffectivePatch structure defines metadata about a patch along with the approval state of the patch in a particular patch baseline. The approval state includes information about whether the patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly rejected and the date the patch was or will be approved.</p>"
+    },
+    "EffectivePatchList":{
+      "type":"list",
+      "member":{"shape":"EffectivePatch"}
+    },
     "ErrorCount":{"type":"integer"},
     "ExpirationDate":{"type":"timestamp"},
     "FailedCreateAssociation":{
@@ -3290,6 +3952,54 @@
         "StandardErrorUrl":{
           "shape":"Url",
           "documentation":"<p>The URL for the complete text written by the plugin to stderr. If the command has not finished executing, then this string is empty.</p>"
+        }
+      }
+    },
+    "GetDefaultPatchBaselineRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "GetDefaultPatchBaselineResult":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the default patch baseline.</p>"
+        }
+      }
+    },
+    "GetDeployablePatchSnapshotForInstanceRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "SnapshotId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "documentation":"<p>The ID of the instance for which the appropriate patch snapshot should be retrieved.</p>"
+        },
+        "SnapshotId":{
+          "shape":"SnapshotId",
+          "documentation":"<p>The user-defined snapshot ID.</p>"
+        }
+      }
+    },
+    "GetDeployablePatchSnapshotForInstanceResult":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "documentation":"<p>The ID of the instance.</p>"
+        },
+        "SnapshotId":{
+          "shape":"SnapshotId",
+          "documentation":"<p>The user-defined snapshot ID.</p>"
+        },
+        "SnapshotDownloadUrl":{
+          "shape":"SnapshotDownloadUrl",
+          "documentation":"<p>A pre-signed Amazon S3 URL that can be used to download the patch snapshot.</p>"
         }
       }
     },
@@ -3628,6 +4338,84 @@
         }
       }
     },
+    "GetPatchBaselineForPatchGroupRequest":{
+      "type":"structure",
+      "required":["PatchGroup"],
+      "members":{
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group whose patch baseline should be retrieved.</p>"
+        }
+      }
+    },
+    "GetPatchBaselineForPatchGroupResult":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline that should be used for the patch group.</p>"
+        },
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group.</p>"
+        }
+      }
+    },
+    "GetPatchBaselineRequest":{
+      "type":"structure",
+      "required":["BaselineId"],
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline to retrieve.</p>"
+        }
+      }
+    },
+    "GetPatchBaselineResult":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the retrieved patch baseline.</p>"
+        },
+        "Name":{
+          "shape":"BaselineName",
+          "documentation":"<p>The name of the patch baseline.</p>"
+        },
+        "GlobalFilters":{
+          "shape":"PatchFilterGroup",
+          "documentation":"<p>A set of global filters used to exclude patches from the baseline.</p>"
+        },
+        "ApprovalRules":{
+          "shape":"PatchRuleGroup",
+          "documentation":"<p>A set of rules used to include patches in the baseline.</p>"
+        },
+        "ApprovedPatches":{
+          "shape":"PatchIdList",
+          "documentation":"<p>A list of explicitly approved patches for the baseline.</p>"
+        },
+        "RejectedPatches":{
+          "shape":"PatchIdList",
+          "documentation":"<p>A list of explicitly rejected patches for the baseline.</p>"
+        },
+        "PatchGroups":{
+          "shape":"PatchGroupList",
+          "documentation":"<p>Patch groups included in the patch baseline.</p>"
+        },
+        "CreatedDate":{
+          "shape":"DateTime",
+          "documentation":"<p>The date the patch baseline was created.</p>"
+        },
+        "ModifiedDate":{
+          "shape":"DateTime",
+          "documentation":"<p>The date the patch baseline was last modified.</p>"
+        },
+        "Description":{
+          "shape":"BaselineDescription",
+          "documentation":"<p>A description of the patch baseline.</p>"
+        }
+      }
+    },
     "IPAddress":{
       "type":"string",
       "max":46,
@@ -3946,10 +4734,137 @@
       },
       "min":0
     },
+    "InstancePatchState":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "PatchGroup",
+        "BaselineId",
+        "OperationStartTime",
+        "OperationEndTime",
+        "Operation"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "documentation":"<p>The ID of the managed instance the high-level patch compliance information was collected for.</p>"
+        },
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group the managed instance belongs to.</p>"
+        },
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline used to patch the instance.</p>"
+        },
+        "SnapshotId":{
+          "shape":"SnapshotId",
+          "documentation":"<p>The ID of the patch baseline snapshot used during the patching operation when this compliance data was collected.</p>"
+        },
+        "OwnerInformation":{
+          "shape":"OwnerInformation",
+          "documentation":"<p>Placeholder information, this field will always be empty in the current release of the service.</p>"
+        },
+        "InstalledCount":{
+          "shape":"PatchInstalledCount",
+          "documentation":"<p>The number of patches from the patch baseline that are installed on the instance.</p>"
+        },
+        "InstalledOtherCount":{
+          "shape":"PatchInstalledOtherCount",
+          "documentation":"<p>The number of patches not specified in the patch baseline that are installed on the instance.</p>"
+        },
+        "MissingCount":{
+          "shape":"PatchMissingCount",
+          "documentation":"<p>The number of patches from the patch baseline that are applicable for the instance but aren’t currently installed.</p>"
+        },
+        "FailedCount":{
+          "shape":"PatchFailedCount",
+          "documentation":"<p>The number of patches from the patch baseline that were attempted to be installed during the last patching operation, but failed to install.</p>"
+        },
+        "NotApplicableCount":{
+          "shape":"PatchNotApplicableCount",
+          "documentation":"<p>The number of patches from the patch baseline that aren’t applicable for the instance and hence aren’t installed on the instance.</p>"
+        },
+        "OperationStartTime":{
+          "shape":"PatchOperationStartTime",
+          "documentation":"<p>The time the most recent patching operation was started on the instance.</p>"
+        },
+        "OperationEndTime":{
+          "shape":"PatchOperationEndTime",
+          "documentation":"<p>The time the most recent patching operation completed on the instance.</p>"
+        },
+        "Operation":{
+          "shape":"PatchOperationType",
+          "documentation":"<p>The type of patching operation that was performed: SCAN (assess patch compliance state) or INSTALL (install missing patches).</p>"
+        }
+      },
+      "documentation":"<p>Defines the high-level patch compliance state for a managed instance, providing information about the number of installed, missing, not applicable, and failed patches along with metadata about the operation when this information was gathered for the instance.</p>"
+    },
+    "InstancePatchStateFilter":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Values",
+        "Type"
+      ],
+      "members":{
+        "Key":{
+          "shape":"InstancePatchStateFilterKey",
+          "documentation":"<p>The key for the filter. Supported values are FailedCount, InstalledCount, InstalledOtherCount, MissingCount and NotApplicableCount.</p>"
+        },
+        "Values":{
+          "shape":"InstancePatchStateFilterValues",
+          "documentation":"<p>The value for the filter, must be an integer greater than or equal to 0.</p>"
+        },
+        "Type":{
+          "shape":"InstancePatchStateOperatorType",
+          "documentation":"<p>The type of comparison that should be performed for the value: Equal, NotEqual, LessThan or GreaterThan.</p>"
+        }
+      },
+      "documentation":"<p>Defines a filter used in DescribeInstancePatchStatesForPatchGroup used to scope down the information returned by the API.</p>"
+    },
+    "InstancePatchStateFilterKey":{
+      "type":"string",
+      "max":200,
+      "min":1
+    },
+    "InstancePatchStateFilterList":{
+      "type":"list",
+      "member":{"shape":"InstancePatchStateFilter"},
+      "max":4,
+      "min":0
+    },
+    "InstancePatchStateFilterValue":{"type":"string"},
+    "InstancePatchStateFilterValues":{
+      "type":"list",
+      "member":{"shape":"InstancePatchStateFilterValue"},
+      "max":1,
+      "min":1
+    },
+    "InstancePatchStateList":{
+      "type":"list",
+      "member":{"shape":"InstancePatchState"}
+    },
+    "InstancePatchStateOperatorType":{
+      "type":"string",
+      "enum":[
+        "Equal",
+        "NotEqual",
+        "LessThan",
+        "GreaterThan"
+      ]
+    },
+    "InstancePatchStatesList":{
+      "type":"list",
+      "member":{"shape":"InstancePatchState"},
+      "max":5,
+      "min":1
+    },
     "InstanceTagName":{
       "type":"string",
       "max":255
     },
+    "Integer":{"type":"integer"},
     "InternalServerError":{
       "type":"structure",
       "members":{
@@ -5509,6 +6424,369 @@
       "max":50,
       "min":1
     },
+    "Patch":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"PatchId",
+          "documentation":"<p>The ID of the patch (this is different than the Microsoft Knowledge Base ID).</p>"
+        },
+        "ReleaseDate":{
+          "shape":"DateTime",
+          "documentation":"<p>The date the patch was released.</p>"
+        },
+        "Title":{
+          "shape":"PatchTitle",
+          "documentation":"<p>The title of the patch.</p>"
+        },
+        "Description":{
+          "shape":"PatchDescription",
+          "documentation":"<p>The description of the patch.</p>"
+        },
+        "ContentUrl":{
+          "shape":"PatchContentUrl",
+          "documentation":"<p>The URL where more information can be obtained about the patch.</p>"
+        },
+        "Vendor":{
+          "shape":"PatchVendor",
+          "documentation":"<p>The name of the vendor providing the patch.</p>"
+        },
+        "ProductFamily":{
+          "shape":"PatchProductFamily",
+          "documentation":"<p>The product family the patch is applicable for (for example, Windows).</p>"
+        },
+        "Product":{
+          "shape":"PatchProduct",
+          "documentation":"<p>The specific product the patch is applicable for (for example, WindowsServer2016).</p>"
+        },
+        "Classification":{
+          "shape":"PatchClassification",
+          "documentation":"<p>The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).</p>"
+        },
+        "MsrcSeverity":{
+          "shape":"PatchMsrcSeverity",
+          "documentation":"<p>The severity of the patch (for example Critical, Important, Moderate).</p>"
+        },
+        "KbNumber":{
+          "shape":"PatchKbNumber",
+          "documentation":"<p>The Microsoft Knowledge Base ID of the patch.</p>"
+        },
+        "MsrcNumber":{
+          "shape":"PatchMsrcNumber",
+          "documentation":"<p>The ID of the MSRC bulletin the patch is related to.</p>"
+        },
+        "Language":{
+          "shape":"PatchLanguage",
+          "documentation":"<p>The language of the patch if it’s language-specific.</p>"
+        }
+      },
+      "documentation":"<p>Represents metadata about a patch.</p>"
+    },
+    "PatchBaselineIdentity":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline.</p>"
+        },
+        "BaselineName":{
+          "shape":"BaselineName",
+          "documentation":"<p>The name of the patch baseline.</p>"
+        },
+        "BaselineDescription":{
+          "shape":"BaselineDescription",
+          "documentation":"<p>The description of the patch baseline.</p>"
+        },
+        "DefaultBaseline":{
+          "shape":"DefaultBaseline",
+          "documentation":"<p>Whether this is the default baseline.</p>"
+        }
+      },
+      "documentation":"<p>Defines the basic information about a patch baseline.</p>"
+    },
+    "PatchBaselineIdentityList":{
+      "type":"list",
+      "member":{"shape":"PatchBaselineIdentity"}
+    },
+    "PatchBaselineMaxResults":{
+      "type":"integer",
+      "max":100,
+      "min":1
+    },
+    "PatchClassification":{"type":"string"},
+    "PatchComplianceData":{
+      "type":"structure",
+      "required":[
+        "Title",
+        "KBId",
+        "Classification",
+        "Severity",
+        "State",
+        "InstalledTime"
+      ],
+      "members":{
+        "Title":{
+          "shape":"PatchTitle",
+          "documentation":"<p>The title of the patch.</p>"
+        },
+        "KBId":{
+          "shape":"PatchKbNumber",
+          "documentation":"<p>The Microsoft Knowledge Base ID of the patch.</p>"
+        },
+        "Classification":{
+          "shape":"PatchClassification",
+          "documentation":"<p>The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).</p>"
+        },
+        "Severity":{
+          "shape":"PatchSeverity",
+          "documentation":"<p>The severity of the patch (for example, Critical, Important, Moderate).</p>"
+        },
+        "State":{
+          "shape":"PatchComplianceDataState",
+          "documentation":"<p>The state of the patch on the instance (INSTALLED, INSTALLED_OTHER, MISSING, NOT_APPLICABLE or FAILED).</p>"
+        },
+        "InstalledTime":{
+          "shape":"PatchInstalledTime",
+          "documentation":"<p>The date/time the patch was installed on the instance.</p>"
+        }
+      },
+      "documentation":"<p>Information about the state of a patch on a particular instance as it relates to the patch baseline used to patch the instance.</p>"
+    },
+    "PatchComplianceDataList":{
+      "type":"list",
+      "member":{"shape":"PatchComplianceData"}
+    },
+    "PatchComplianceDataState":{
+      "type":"string",
+      "enum":[
+        "INSTALLED",
+        "INSTALLED_OTHER",
+        "MISSING",
+        "NOT_APPLICABLE",
+        "FAILED"
+      ]
+    },
+    "PatchComplianceMaxResults":{
+      "type":"integer",
+      "max":100,
+      "min":10
+    },
+    "PatchContentUrl":{"type":"string"},
+    "PatchDeploymentStatus":{
+      "type":"string",
+      "enum":[
+        "APPROVED",
+        "PENDING_APPROVAL",
+        "EXPLICIT_APPROVED",
+        "EXPLICIT_REJECTED"
+      ]
+    },
+    "PatchDescription":{"type":"string"},
+    "PatchFailedCount":{"type":"integer"},
+    "PatchFilter":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Values"
+      ],
+      "members":{
+        "Key":{
+          "shape":"PatchFilterKey",
+          "documentation":"<p>The key for the filter (PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID)</p>"
+        },
+        "Values":{
+          "shape":"PatchFilterValueList",
+          "documentation":"<p>The value for the filter key.</p>"
+        }
+      },
+      "documentation":"<p>Defines a patch filter.</p>"
+    },
+    "PatchFilterGroup":{
+      "type":"structure",
+      "required":["PatchFilters"],
+      "members":{
+        "PatchFilters":{
+          "shape":"PatchFilterList",
+          "documentation":"<p>The set of patch filters that make up the group.</p>"
+        }
+      },
+      "documentation":"<p>A set of patch filters, typically used for approval rules.</p>"
+    },
+    "PatchFilterKey":{
+      "type":"string",
+      "enum":[
+        "PRODUCT",
+        "CLASSIFICATION",
+        "MSRC_SEVERITY",
+        "PATCH_ID"
+      ]
+    },
+    "PatchFilterList":{
+      "type":"list",
+      "member":{"shape":"PatchFilter"},
+      "max":4,
+      "min":0
+    },
+    "PatchFilterValue":{
+      "type":"string",
+      "max":64,
+      "min":1
+    },
+    "PatchFilterValueList":{
+      "type":"list",
+      "member":{"shape":"PatchFilterValue"},
+      "max":20,
+      "min":1
+    },
+    "PatchGroup":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "PatchGroupList":{
+      "type":"list",
+      "member":{"shape":"PatchGroup"}
+    },
+    "PatchGroupPatchBaselineMapping":{
+      "type":"structure",
+      "members":{
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group registered with the patch baseline.</p>"
+        },
+        "BaselineIdentity":{
+          "shape":"PatchBaselineIdentity",
+          "documentation":"<p>The patch baseline the patch group is registered with.</p>"
+        }
+      },
+      "documentation":"<p>The mapping between a patch group and the patch baseline the patch group is registered with.</p>"
+    },
+    "PatchGroupPatchBaselineMappingList":{
+      "type":"list",
+      "member":{"shape":"PatchGroupPatchBaselineMapping"}
+    },
+    "PatchId":{
+      "type":"string",
+      "pattern":"(^KB[0-9]{1,7}$)|(^MS[0-9]{2}\\-[0-9]{3}$)"
+    },
+    "PatchIdList":{
+      "type":"list",
+      "member":{"shape":"PatchId"},
+      "max":50,
+      "min":0
+    },
+    "PatchInstalledCount":{"type":"integer"},
+    "PatchInstalledOtherCount":{"type":"integer"},
+    "PatchInstalledTime":{"type":"timestamp"},
+    "PatchKbNumber":{"type":"string"},
+    "PatchLanguage":{"type":"string"},
+    "PatchList":{
+      "type":"list",
+      "member":{"shape":"Patch"}
+    },
+    "PatchMissingCount":{"type":"integer"},
+    "PatchMsrcNumber":{"type":"string"},
+    "PatchMsrcSeverity":{"type":"string"},
+    "PatchNotApplicableCount":{"type":"integer"},
+    "PatchOperationEndTime":{"type":"timestamp"},
+    "PatchOperationStartTime":{"type":"timestamp"},
+    "PatchOperationType":{
+      "type":"string",
+      "enum":[
+        "Scan",
+        "Install"
+      ]
+    },
+    "PatchOrchestratorFilter":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"PatchOrchestratorFilterKey",
+          "documentation":"<p>The key for the filter.</p>"
+        },
+        "Values":{
+          "shape":"PatchOrchestratorFilterValues",
+          "documentation":"<p>The value for the filter.</p>"
+        }
+      },
+      "documentation":"<p>Defines a filter used in Patch Manager APIs.</p>"
+    },
+    "PatchOrchestratorFilterKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "PatchOrchestratorFilterList":{
+      "type":"list",
+      "member":{"shape":"PatchOrchestratorFilter"},
+      "max":5,
+      "min":0
+    },
+    "PatchOrchestratorFilterValue":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "PatchOrchestratorFilterValues":{
+      "type":"list",
+      "member":{"shape":"PatchOrchestratorFilterValue"}
+    },
+    "PatchProduct":{"type":"string"},
+    "PatchProductFamily":{"type":"string"},
+    "PatchRule":{
+      "type":"structure",
+      "required":[
+        "PatchFilterGroup",
+        "ApproveAfterDays"
+      ],
+      "members":{
+        "PatchFilterGroup":{
+          "shape":"PatchFilterGroup",
+          "documentation":"<p>The patch filter group that defines the criteria for the rule.</p>"
+        },
+        "ApproveAfterDays":{
+          "shape":"ApproveAfterDays",
+          "documentation":"<p>The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline.</p>",
+          "box":true
+        }
+      },
+      "documentation":"<p>Defines an approval rule for a patch baseline.</p>"
+    },
+    "PatchRuleGroup":{
+      "type":"structure",
+      "required":["PatchRules"],
+      "members":{
+        "PatchRules":{
+          "shape":"PatchRuleList",
+          "documentation":"<p>The rules that make up the rule group.</p>"
+        }
+      },
+      "documentation":"<p>A set of rules defining the approval rules for a patch baseline.</p>"
+    },
+    "PatchRuleList":{
+      "type":"list",
+      "member":{"shape":"PatchRule"},
+      "max":10,
+      "min":0
+    },
+    "PatchSeverity":{"type":"string"},
+    "PatchStatus":{
+      "type":"structure",
+      "members":{
+        "DeploymentStatus":{
+          "shape":"PatchDeploymentStatus",
+          "documentation":"<p>The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED, EXPLICIT_REJECTED).</p>"
+        },
+        "ApprovalDate":{
+          "shape":"DateTime",
+          "documentation":"<p>The date the patch was approved (or will be approved if the status is PENDING_APPROVAL).</p>"
+        }
+      },
+      "documentation":"<p>Information about the approval status of a patch.</p>"
+    },
+    "PatchTitle":{"type":"string"},
+    "PatchVendor":{"type":"string"},
     "PingStatus":{
       "type":"string",
       "enum":[
@@ -5591,6 +6869,55 @@
     "PutParameterResult":{
       "type":"structure",
       "members":{
+      }
+    },
+    "RegisterDefaultPatchBaselineRequest":{
+      "type":"structure",
+      "required":["BaselineId"],
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline that should be the default patch baseline.</p>"
+        }
+      }
+    },
+    "RegisterDefaultPatchBaselineResult":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the default patch baseline.</p>"
+        }
+      }
+    },
+    "RegisterPatchBaselineForPatchGroupRequest":{
+      "type":"structure",
+      "required":[
+        "BaselineId",
+        "PatchGroup"
+      ],
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline to register the patch group with.</p>"
+        },
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group that should be registered with the patch baseline.</p>"
+        }
+      }
+    },
+    "RegisterPatchBaselineForPatchGroupResult":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline the patch group was registered with.</p>"
+        },
+        "PatchGroup":{
+          "shape":"PatchGroup",
+          "documentation":"<p>The name of the patch group registered with the patch baseline.</p>"
+        }
       }
     },
     "RegisterTargetWithMaintenanceWindowRequest":{
@@ -5740,6 +7067,14 @@
       }
     },
     "ResourceId":{"type":"string"},
+    "ResourceInUseException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>Error returned if an attempt is made to delete a patch baseline that is registered for a patch group.</p>",
+      "exception":true
+    },
     "ResourceLimitExceededException":{
       "type":"structure",
       "members":{
@@ -5909,6 +7244,13 @@
       }
     },
     "ServiceRole":{"type":"string"},
+    "SnapshotDownloadUrl":{"type":"string"},
+    "SnapshotId":{
+      "type":"string",
+      "max":36,
+      "min":36,
+      "pattern":"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
     "StandardErrorContent":{
       "type":"string",
       "max":8000
@@ -5922,7 +7264,7 @@
       "required":["DocumentName"],
       "members":{
         "DocumentName":{
-          "shape":"DocumentName",
+          "shape":"DocumentARN",
           "documentation":"<p>The name of the Automation document to use for this execution.</p>"
         },
         "DocumentVersion":{
@@ -6375,6 +7717,81 @@
     "UpdateManagedInstanceRoleResult":{
       "type":"structure",
       "members":{
+      }
+    },
+    "UpdatePatchBaselineRequest":{
+      "type":"structure",
+      "required":["BaselineId"],
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the patch baseline to update.</p>"
+        },
+        "Name":{
+          "shape":"BaselineName",
+          "documentation":"<p>The name of the patch baseline.</p>"
+        },
+        "GlobalFilters":{
+          "shape":"PatchFilterGroup",
+          "documentation":"<p>A set of global filters used to exclude patches from the baseline.</p>"
+        },
+        "ApprovalRules":{
+          "shape":"PatchRuleGroup",
+          "documentation":"<p>A set of rules used to include patches in the baseline.</p>"
+        },
+        "ApprovedPatches":{
+          "shape":"PatchIdList",
+          "documentation":"<p>A list of explicitly approved patches for the baseline.</p>"
+        },
+        "RejectedPatches":{
+          "shape":"PatchIdList",
+          "documentation":"<p>A list of explicitly rejected patches for the baseline.</p>"
+        },
+        "Description":{
+          "shape":"BaselineDescription",
+          "documentation":"<p>A description of the patch baseline.</p>"
+        }
+      }
+    },
+    "UpdatePatchBaselineResult":{
+      "type":"structure",
+      "members":{
+        "BaselineId":{
+          "shape":"BaselineId",
+          "documentation":"<p>The ID of the deleted patch baseline.</p>"
+        },
+        "Name":{
+          "shape":"BaselineName",
+          "documentation":"<p>The name of the patch baseline.</p>"
+        },
+        "GlobalFilters":{
+          "shape":"PatchFilterGroup",
+          "documentation":"<p>A set of global filters used to exclude patches from the baseline.</p>"
+        },
+        "ApprovalRules":{
+          "shape":"PatchRuleGroup",
+          "documentation":"<p>A set of rules used to include patches in the baseline.</p>"
+        },
+        "ApprovedPatches":{
+          "shape":"PatchIdList",
+          "documentation":"<p>A list of explicitly approved patches for the baseline.</p>"
+        },
+        "RejectedPatches":{
+          "shape":"PatchIdList",
+          "documentation":"<p>A list of explicitly rejected patches for the baseline.</p>"
+        },
+        "CreatedDate":{
+          "shape":"DateTime",
+          "documentation":"<p>The date when the patch baseline was created.</p>"
+        },
+        "ModifiedDate":{
+          "shape":"DateTime",
+          "documentation":"<p>The date when the patch baseline was last modified.</p>"
+        },
+        "Description":{
+          "shape":"BaselineDescription",
+          "documentation":"<p>A description of the Patch Baseline.</p>"
+        }
       }
     },
     "Url":{"type":"string"},
