@@ -12,6 +12,22 @@ declare class Discovery extends Service {
   constructor(options?: Discovery.Types.ClientConfiguration)
   config: Config & Discovery.Types.ClientConfiguration;
   /**
+   * Associates one or more configuration items with an application.
+   */
+  associateConfigurationItemsToApplication(params: Discovery.Types.AssociateConfigurationItemsToApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.AssociateConfigurationItemsToApplicationResponse) => void): Request<Discovery.Types.AssociateConfigurationItemsToApplicationResponse, AWSError>;
+  /**
+   * Associates one or more configuration items with an application.
+   */
+  associateConfigurationItemsToApplication(callback?: (err: AWSError, data: Discovery.Types.AssociateConfigurationItemsToApplicationResponse) => void): Request<Discovery.Types.AssociateConfigurationItemsToApplicationResponse, AWSError>;
+  /**
+   * Creates an application with the given name and description.
+   */
+  createApplication(params: Discovery.Types.CreateApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.CreateApplicationResponse) => void): Request<Discovery.Types.CreateApplicationResponse, AWSError>;
+  /**
+   * Creates an application with the given name and description.
+   */
+  createApplication(callback?: (err: AWSError, data: Discovery.Types.CreateApplicationResponse) => void): Request<Discovery.Types.CreateApplicationResponse, AWSError>;
+  /**
    * Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets. This API accepts a list of multiple configuration items.
    */
   createTags(params: Discovery.Types.CreateTagsRequest, callback?: (err: AWSError, data: Discovery.Types.CreateTagsResponse) => void): Request<Discovery.Types.CreateTagsResponse, AWSError>;
@@ -19,6 +35,14 @@ declare class Discovery extends Service {
    * Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets. This API accepts a list of multiple configuration items.
    */
   createTags(callback?: (err: AWSError, data: Discovery.Types.CreateTagsResponse) => void): Request<Discovery.Types.CreateTagsResponse, AWSError>;
+  /**
+   * Deletes a list of applications and their associations with configuration items.
+   */
+  deleteApplications(params: Discovery.Types.DeleteApplicationsRequest, callback?: (err: AWSError, data: Discovery.Types.DeleteApplicationsResponse) => void): Request<Discovery.Types.DeleteApplicationsResponse, AWSError>;
+  /**
+   * Deletes a list of applications and their associations with configuration items.
+   */
+  deleteApplications(callback?: (err: AWSError, data: Discovery.Types.DeleteApplicationsResponse) => void): Request<Discovery.Types.DeleteApplicationsResponse, AWSError>;
   /**
    * Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items.
    */
@@ -28,19 +52,19 @@ declare class Discovery extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: Discovery.Types.DeleteTagsResponse) => void): Request<Discovery.Types.DeleteTagsResponse, AWSError>;
   /**
-   * Lists AWS agents by ID or lists all agents associated with your user account if you did not specify an agent ID.
+   * Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an ID.
    */
   describeAgents(params: Discovery.Types.DescribeAgentsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
   /**
-   * Lists AWS agents by ID or lists all agents associated with your user account if you did not specify an agent ID.
+   * Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an ID.
    */
   describeAgents(callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
   /**
-   * Retrieves a list of attributes for a specific configuration ID. For example, the output for a server configuration item includes a list of attributes about the server, including host name, operating system, number of network cards, etc.
+   * Retrieves attributes for a list of configuration item IDs. All of the supplied IDs must be for the same asset type (server, application, process, or connection). Output fields are specific to the asset type selected. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, and number of network cards. For a complete list of outputs for each asset type, see Querying Discovered Configuration Items.
    */
   describeConfigurations(params: Discovery.Types.DescribeConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
   /**
-   * Retrieves a list of attributes for a specific configuration ID. For example, the output for a server configuration item includes a list of attributes about the server, including host name, operating system, number of network cards, etc.
+   * Retrieves attributes for a list of configuration item IDs. All of the supplied IDs must be for the same asset type (server, application, process, or connection). Output fields are specific to the asset type selected. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, and number of network cards. For a complete list of outputs for each asset type, see Querying Discovered Configuration Items.
    */
   describeConfigurations(callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
   /**
@@ -60,42 +84,74 @@ declare class Discovery extends Service {
    */
   describeTags(callback?: (err: AWSError, data: Discovery.Types.DescribeTagsResponse) => void): Request<Discovery.Types.DescribeTagsResponse, AWSError>;
   /**
-   * Exports all discovered configuration data to an Amazon S3 bucket or an application that enables you to view and evaluate the data. Data includes tags and tag associations, processes, connections, servers, and system performance. This API returns an export ID which you can query using the GetExportStatus API. The system imposes a limit of two configuration exports in six hours.
+   * Disassociates one or more configuration items from an application.
+   */
+  disassociateConfigurationItemsFromApplication(params: Discovery.Types.DisassociateConfigurationItemsFromApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse) => void): Request<Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse, AWSError>;
+  /**
+   * Disassociates one or more configuration items from an application.
+   */
+  disassociateConfigurationItemsFromApplication(callback?: (err: AWSError, data: Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse) => void): Request<Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse, AWSError>;
+  /**
+   * Exports all discovered configuration data to an Amazon S3 bucket or an application that enables you to view and evaluate the data. Data includes tags and tag associations, processes, connections, servers, and system performance. This API returns an export ID which you can query using the DescribeExportConfigurations API. The system imposes a limit of two configuration exports in six hours.
    */
   exportConfigurations(callback?: (err: AWSError, data: Discovery.Types.ExportConfigurationsResponse) => void): Request<Discovery.Types.ExportConfigurationsResponse, AWSError>;
   /**
-   * Retrieves a list of configurations items according to the criteria you specify in a filter. The filter criteria identify relationship requirements.
+   * Retrieves a short summary of discovered assets.
+   */
+  getDiscoverySummary(params: Discovery.Types.GetDiscoverySummaryRequest, callback?: (err: AWSError, data: Discovery.Types.GetDiscoverySummaryResponse) => void): Request<Discovery.Types.GetDiscoverySummaryResponse, AWSError>;
+  /**
+   * Retrieves a short summary of discovered assets.
+   */
+  getDiscoverySummary(callback?: (err: AWSError, data: Discovery.Types.GetDiscoverySummaryResponse) => void): Request<Discovery.Types.GetDiscoverySummaryResponse, AWSError>;
+  /**
+   * Retrieves a list of configuration items according to criteria you specify in a filter. The filter criteria identify relationship requirements.
    */
   listConfigurations(params: Discovery.Types.ListConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.ListConfigurationsResponse) => void): Request<Discovery.Types.ListConfigurationsResponse, AWSError>;
   /**
-   * Retrieves a list of configurations items according to the criteria you specify in a filter. The filter criteria identify relationship requirements.
+   * Retrieves a list of configuration items according to criteria you specify in a filter. The filter criteria identify relationship requirements.
    */
   listConfigurations(callback?: (err: AWSError, data: Discovery.Types.ListConfigurationsResponse) => void): Request<Discovery.Types.ListConfigurationsResponse, AWSError>;
   /**
-   * Instructs the specified agents to start collecting data. Agents can reside on host servers or virtual machines in your data center.
+   * Retrieves a list of servers which are one network hop away from a specified server.
+   */
+  listServerNeighbors(params: Discovery.Types.ListServerNeighborsRequest, callback?: (err: AWSError, data: Discovery.Types.ListServerNeighborsResponse) => void): Request<Discovery.Types.ListServerNeighborsResponse, AWSError>;
+  /**
+   * Retrieves a list of servers which are one network hop away from a specified server.
+   */
+  listServerNeighbors(callback?: (err: AWSError, data: Discovery.Types.ListServerNeighborsResponse) => void): Request<Discovery.Types.ListServerNeighborsResponse, AWSError>;
+  /**
+   * Instructs the specified agents or Connectors to start collecting data.
    */
   startDataCollectionByAgentIds(params: Discovery.Types.StartDataCollectionByAgentIdsRequest, callback?: (err: AWSError, data: Discovery.Types.StartDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StartDataCollectionByAgentIdsResponse, AWSError>;
   /**
-   * Instructs the specified agents to start collecting data. Agents can reside on host servers or virtual machines in your data center.
+   * Instructs the specified agents or Connectors to start collecting data.
    */
   startDataCollectionByAgentIds(callback?: (err: AWSError, data: Discovery.Types.StartDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StartDataCollectionByAgentIdsResponse, AWSError>;
   /**
-   * Instructs the specified agents to stop collecting data.
+   * Instructs the specified agents or Connectors to stop collecting data.
    */
   stopDataCollectionByAgentIds(params: Discovery.Types.StopDataCollectionByAgentIdsRequest, callback?: (err: AWSError, data: Discovery.Types.StopDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StopDataCollectionByAgentIdsResponse, AWSError>;
   /**
-   * Instructs the specified agents to stop collecting data.
+   * Instructs the specified agents or Connectors to stop collecting data.
    */
   stopDataCollectionByAgentIds(callback?: (err: AWSError, data: Discovery.Types.StopDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StopDataCollectionByAgentIdsResponse, AWSError>;
+  /**
+   * Updates metadata about an application.
+   */
+  updateApplication(params: Discovery.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.UpdateApplicationResponse) => void): Request<Discovery.Types.UpdateApplicationResponse, AWSError>;
+  /**
+   * Updates metadata about an application.
+   */
+  updateApplication(callback?: (err: AWSError, data: Discovery.Types.UpdateApplicationResponse) => void): Request<Discovery.Types.UpdateApplicationResponse, AWSError>;
 }
 declare namespace Discovery {
   export interface AgentConfigurationStatus {
     /**
-     * The agent ID.
+     * The agent/Connector ID.
      */
     agentId?: String;
     /**
-     * Information about the status of the StartDataCollection and StopDataCollection operations. The system has recorded the data collection operation. The agent receives this command the next time it polls for a new command. 
+     * Information about the status of the StartDataCollection and StopDataCollection operations. The system has recorded the data collection operation. The agent/Connector receives this command the next time it polls for a new command. 
      */
     operationSucceeded?: Boolean;
     /**
@@ -108,49 +164,80 @@ declare namespace Discovery {
   export type AgentIds = AgentId[];
   export interface AgentInfo {
     /**
-     * The agent ID.
+     * The agent or connector ID.
      */
     agentId?: AgentId;
     /**
-     * The name of the host where the agent resides. The host can be a server or virtual machine.
+     * The name of the host where the agent or connector resides. The host can be a server or virtual machine.
      */
     hostName?: String;
     /**
-     * Network details about the host where the agent resides.
+     * Network details about the host where the agent or connector resides.
      */
     agentNetworkInfoList?: AgentNetworkInfoList;
     /**
-     * This data type is currently not valid.
+     * The ID of the connector.
      */
     connectorId?: String;
     /**
-     * The agent version.
+     * The agent or connector version.
      */
     version?: String;
     /**
-     * The health of the agent.
+     * The health of the agent or connector.
      */
     health?: AgentStatus;
+    /**
+     * Time since agent or connector health was reported.
+     */
+    lastHealthPingTime?: String;
+    /**
+     * Status of the collection process for an agent or connector.
+     */
+    collectionStatus?: String;
+    /**
+     * Type of agent.
+     */
+    agentType?: String;
+    /**
+     * Agent's first registration time stamp in UTC.
+     */
+    registeredTime?: String;
   }
   export interface AgentNetworkInfo {
     /**
-     * The IP address for the host where the agent resides.
+     * The IP address for the host where the agent/Connector resides.
      */
     ipAddress?: String;
     /**
-     * The MAC address for the host where the agent resides.
+     * The MAC address for the host where the agent/Connector resides.
      */
     macAddress?: String;
   }
   export type AgentNetworkInfoList = AgentNetworkInfo[];
   export type AgentStatus = "HEALTHY"|"UNHEALTHY"|"RUNNING"|"UNKNOWN"|"BLACKLISTED"|"SHUTDOWN"|string;
   export type AgentsInfo = AgentInfo[];
+  export type ApplicationId = string;
+  export type ApplicationIdsList = ApplicationId[];
+  export interface AssociateConfigurationItemsToApplicationRequest {
+    /**
+     * The configuration ID of an application with which items are to be associated.
+     */
+    applicationConfigurationId: ApplicationId;
+    /**
+     * The ID of each configuration item to be associated with an application.
+     */
+    configurationIds: ConfigurationIdList;
+  }
+  export interface AssociateConfigurationItemsToApplicationResponse {
+  }
   export type Boolean = boolean;
+  export type BoxedInteger = number;
   export type Condition = string;
   export type Configuration = {[key: string]: String};
   export type ConfigurationId = string;
   export type ConfigurationIdList = ConfigurationId[];
-  export type ConfigurationItemType = "SERVER"|"PROCESS"|"CONNECTION"|string;
+  export type ConfigurationItemType = "SERVER"|"PROCESS"|"CONNECTION"|"APPLICATION"|string;
   export interface ConfigurationTag {
     /**
      * A type of IT asset that you want to tag.
@@ -177,6 +264,22 @@ declare namespace Discovery {
   export type Configurations = Configuration[];
   export type ConfigurationsDownloadUrl = string;
   export type ConfigurationsExportId = string;
+  export interface CreateApplicationRequest {
+    /**
+     * Name of the application to be created.
+     */
+    name: String;
+    /**
+     * Description of the application to be created.
+     */
+    description?: String;
+  }
+  export interface CreateApplicationResponse {
+    /**
+     * Configuration ID of an application to be created.
+     */
+    configurationId?: String;
+  }
   export interface CreateTagsRequest {
     /**
      * A list of configuration items that you want to tag.
@@ -188,6 +291,74 @@ declare namespace Discovery {
     tags: TagSet;
   }
   export interface CreateTagsResponse {
+  }
+  export interface CustomerAgentInfo {
+    /**
+     * Number of active discovery agents.
+     */
+    activeAgents: Integer;
+    /**
+     * Number of healthy discovery agents
+     */
+    healthyAgents: Integer;
+    /**
+     * Number of blacklisted discovery agents.
+     */
+    blackListedAgents: Integer;
+    /**
+     * Number of discovery agents with status SHUTDOWN.
+     */
+    shutdownAgents: Integer;
+    /**
+     * Number of unhealthy discovery agents.
+     */
+    unhealthyAgents: Integer;
+    /**
+     * Total number of discovery agents.
+     */
+    totalAgents: Integer;
+    /**
+     * Number of unknown discovery agents.
+     */
+    unknownAgents: Integer;
+  }
+  export interface CustomerConnectorInfo {
+    /**
+     * Number of active discovery connectors.
+     */
+    activeConnectors: Integer;
+    /**
+     * Number of healthy discovery connectors.
+     */
+    healthyConnectors: Integer;
+    /**
+     * Number of blacklisted discovery connectors.
+     */
+    blackListedConnectors: Integer;
+    /**
+     * Number of discovery connectors with status SHUTDOWN,
+     */
+    shutdownConnectors: Integer;
+    /**
+     * Number of unhealthy discovery connectors.
+     */
+    unhealthyConnectors: Integer;
+    /**
+     * Total number of discovery connectors.
+     */
+    totalConnectors: Integer;
+    /**
+     * Number of unknown discovery connectors.
+     */
+    unknownConnectors: Integer;
+  }
+  export interface DeleteApplicationsRequest {
+    /**
+     * Configuration ID of an application to be deleted.
+     */
+    configurationIds: ApplicationIdsList;
+  }
+  export interface DeleteApplicationsResponse {
   }
   export interface DeleteTagsRequest {
     /**
@@ -203,25 +374,29 @@ declare namespace Discovery {
   }
   export interface DescribeAgentsRequest {
     /**
-     * The agent IDs for which you want information. If you specify no IDs, the system returns information about all agents associated with your AWS user account.
+     * The agent or the Connector IDs for which you want information. If you specify no IDs, the system returns information about all agents/Connectors associated with your AWS user account.
      */
     agentIds?: AgentIds;
     /**
-     * The total number of agents to return. The maximum value is 100.
+     * You can filter the request using various logical operators and a key-value format. For example:   {"key": "collectionStatus", "value": "STARTED"}  For a complete list of filter options and guidance about using them with this action, see Managing AWS Application Discovery Service Agents and the AWS Application Discovery Connector .
+     */
+    filters?: Filters;
+    /**
+     * The total number of agents/Connectors to return in a single page of output. The maximum value is 100.
      */
     maxResults?: Integer;
     /**
-     * A token to start the list. Use this token to get the next set of results.
+     * Token to retrieve the next set of results. For example, if you previously specified 100 IDs for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults to 10, you received a set of 10 results along with a token. Use that token in this query to get the next set of 10.
      */
     nextToken?: NextToken;
   }
   export interface DescribeAgentsResponse {
     /**
-     * Lists AWS agents by ID or lists all agents associated with your user account if you did not specify an agent ID. The output includes agent IDs, IP addresses, media access control (MAC) addresses, agent health, host name where the agent resides, and the version number of each agent.
+     * Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an agent/Connector ID. The output includes agent/Connector IDs, IP addresses, media access control (MAC) addresses, agent/Connector health, host name where the agent/Connector resides, and the version number of each agent/Connector.
      */
     agentsInfo?: AgentsInfo;
     /**
-     * The call returns a token. Use this token to get the next set of results.
+     * Token to retrieve the next set of results. For example, if you specified 100 IDs for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.
      */
     nextToken?: NextToken;
   }
@@ -249,7 +424,7 @@ declare namespace Discovery {
      */
     maxResults?: Integer;
     /**
-     * A token to get the next set of results. For example, if you specified 100 IDs for DescribeConfigurationsRequest$configurationIds but set DescribeExportConfigurationsRequest$maxResults to 10, you will get results in a set of 10. Use the token in the query to get the next set of 10.
+     * A token to get the next set of results. For example, if you specified 100 IDs for DescribeExportConfigurationsRequest$exportIds but set DescribeExportConfigurationsRequest$maxResults to 10, you will get results in a set of 10. Use the token in the query to get the next set of 10.
      */
     nextToken?: NextToken;
   }
@@ -259,17 +434,17 @@ declare namespace Discovery {
      */
     exportsInfo?: ExportsInfo;
     /**
-     * A token to get the next set of results. For example, if you specified 100 IDs for DescribeConfigurationsRequest$configurationIds but set DescribeExportConfigurationsRequest$maxResults to 10, you will get results in a set of 10. Use the token in the query to get the next set of 10.
+     * A token to get the next set of results. For example, if you specified 100 IDs for DescribeExportConfigurationsRequest$exportIds but set DescribeExportConfigurationsRequest$maxResults to 10, you will get results in a set of 10. Use the token in the query to get the next set of 10.
      */
     nextToken?: NextToken;
   }
   export interface DescribeTagsRequest {
     /**
-     * You can filter the list using a key-value format. You can separate these items by using logical operators. Allowed filters include tagKey, tagValue, and configurationId. 
+     * You can filter the list using a key-value format. You can separate these items by using logical operators. Allowed filters include tagKey, tagValue, and configurationId.  For a complete list of filter options and guidance about using them with this action, see Managing AWS Application Discovery Service Agents and the AWS Application Discovery Connector .
      */
     filters?: TagFilters;
     /**
-     * The total number of items to return. The maximum value is 100.
+     * The total number of items to return in a single page of output. The maximum value is 100.
      */
     maxResults?: Integer;
     /**
@@ -286,6 +461,18 @@ declare namespace Discovery {
      * The call returns a token. Use this token to get the next set of results.
      */
     nextToken?: NextToken;
+  }
+  export interface DisassociateConfigurationItemsFromApplicationRequest {
+    /**
+     * Configuration ID of an application from which each item will be disassociated.
+     */
+    applicationConfigurationId: ApplicationId;
+    /**
+     * Configuration ID of each item be be disassociated from an application.
+     */
+    configurationIds: ConfigurationIdList;
+  }
+  export interface DisassociateConfigurationItemsFromApplicationResponse {
   }
   export interface ExportConfigurationsResponse {
     /**
@@ -322,7 +509,7 @@ declare namespace Discovery {
   export type ExportsInfo = ExportInfo[];
   export interface Filter {
     /**
-     * The name of the filter. The following filter names are allowed for SERVER configuration items.  Server     server.hostName     server.osName     server.osVersion     server.configurationid     server.agentid    The name of the filter. The following filter names are allowed for PROCESS configuration items.  Process     process.configurationid     process.name     process.commandLine     server.configurationid     server.hostName     server.osName     server.osVersion     server.agentId    The name of the filter. The following filter names are allowed for CONNECTION configuration items.  Connection     connection.sourceIp     connection.destinationIp     connection.destinationPort     sourceProcess.configurationId     sourceProcess.name     sourceProcess.commandLine     destinationProcess.configurationId     destinationProcess.name     destinationProcess.commandLine     sourceServer.configurationId     sourceServer.hostName     sourceServer.osName     sourceServer.osVersion     sourceServer.agentId     destinationServer.configurationId     destinationServer.hostName     destinationServer.osName     destinationServer.osVersion     destinationServer.agentId   
+     * The name of the filter.
      */
     name: String;
     /**
@@ -338,6 +525,34 @@ declare namespace Discovery {
   export type FilterValue = string;
   export type FilterValues = FilterValue[];
   export type Filters = Filter[];
+  export interface GetDiscoverySummaryRequest {
+  }
+  export interface GetDiscoverySummaryResponse {
+    /**
+     * Number of servers discovered.
+     */
+    servers?: Long;
+    /**
+     * Number of applications discovered.
+     */
+    applications?: Long;
+    /**
+     * Number of servers mapped to applications.
+     */
+    serversMappedToApplications?: Long;
+    /**
+     * Number of servers mapped to tags.
+     */
+    serversMappedtoTags?: Long;
+    /**
+     * Details about discovered agents, including agent status and health.
+     */
+    agentSummary?: CustomerAgentInfo;
+    /**
+     * Details about discovered connectors, including connector status and health.
+     */
+    connectorSummary?: CustomerConnectorInfo;
+  }
   export type Integer = number;
   export interface ListConfigurationsRequest {
     /**
@@ -345,7 +560,7 @@ declare namespace Discovery {
      */
     configurationType: ConfigurationItemType;
     /**
-     * You can filter the list using a key-value format. For example:   {"key": "serverType", "value": "webServer"}  You can separate these items by using logical operators. 
+     * You can filter the request using various logical operators and a key-value format. For example:   {"key": "serverType", "value": "webServer"}  For a complete list of filter options and guidance about using them with this action, see Querying Discovered Configuration Items. 
      */
     filters?: Filters;
     /**
@@ -353,9 +568,13 @@ declare namespace Discovery {
      */
     maxResults?: Integer;
     /**
-     * A token to start the list. Use this token to get the next set of results.
+     * Token to retrieve the next set of results. For example, if a previous call to ListConfigurations returned 100 items, but you set ListConfigurationsRequest$maxResults to 10, you received a set of 10 results along with a token. Use that token in this query to get the next set of 10.
      */
     nextToken?: NextToken;
+    /**
+     * Certain filter criteria return output that can be sorted in ascending or descending order. For a list of output characteristics for each filter, see Querying Discovered Configuration Items.
+     */
+    orderBy?: OrderByList;
   }
   export interface ListConfigurationsResponse {
     /**
@@ -363,33 +582,104 @@ declare namespace Discovery {
      */
     configurations?: Configurations;
     /**
-     * The call returns a token. Use this token to get the next set of results.
+     * Token to retrieve the next set of results. For example, if your call to ListConfigurations returned 100 items, but you set ListConfigurationsRequest$maxResults to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.
      */
     nextToken?: NextToken;
   }
+  export interface ListServerNeighborsRequest {
+    /**
+     * Configuration ID of the server for which neighbors are being listed.
+     */
+    configurationId: ConfigurationId;
+    /**
+     * Flag to indicate if port and protocol information is needed as part of the response.
+     */
+    portInformationNeeded?: Boolean;
+    /**
+     * List of configuration IDs to test for one-hop-away.
+     */
+    neighborConfigurationIds?: ConfigurationIdList;
+    /**
+     * Maximum number of results to return in a single page of output.
+     */
+    maxResults?: Integer;
+    /**
+     * Token to retrieve the next set of results. For example, if you previously specified 100 IDs for ListServerNeighborsRequest$neighborConfigurationIds but set ListServerNeighborsRequest$maxResults to 10, you received a set of 10 results along with a token. Use that token in this query to get the next set of 10.
+     */
+    nextToken?: String;
+  }
+  export interface ListServerNeighborsResponse {
+    /**
+     * List of distinct servers that are one hop away from the given server.
+     */
+    neighbors: NeighborDetailsList;
+    /**
+     * Token to retrieve the next set of results. For example, if you specified 100 IDs for ListServerNeighborsRequest$neighborConfigurationIds but set ListServerNeighborsRequest$maxResults to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.
+     */
+    nextToken?: String;
+    /**
+     * Count of distinct servers that are one hop away from the given server.
+     */
+    knownDependencyCount?: Long;
+  }
+  export type Long = number;
   export type Message = string;
+  export interface NeighborConnectionDetail {
+    /**
+     * ID of server that opened the network connection.
+     */
+    sourceServerId: ConfigurationId;
+    /**
+     * ID of the server that accepted the networker connection.
+     */
+    destinationServerId: ConfigurationId;
+    /**
+     * Destination network port for the connection.
+     */
+    destinationPort?: BoxedInteger;
+    /**
+     * Network protocol used for the connection.
+     */
+    transportProtocol?: String;
+    /**
+     * Number of open network connections with the neighboring server.
+     */
+    connectionsCount: Long;
+  }
+  export type NeighborDetailsList = NeighborConnectionDetail[];
   export type NextToken = string;
+  export interface OrderByElement {
+    /**
+     * Field to order on.
+     */
+    fieldName: String;
+    /**
+     * Ordering direction.
+     */
+    sortOrder?: orderString;
+  }
+  export type OrderByList = OrderByElement[];
   export interface StartDataCollectionByAgentIdsRequest {
     /**
-     * The IDs of the agents that you want to start collecting data. If you send a request to an AWS agent ID that you do not have permission to contact, according to your AWS account, the service does not throw an exception. Instead, it returns the error in the Description field. If you send a request to multiple agents and you do not have permission to contact some of those agents, the system does not throw an exception. Instead, the system shows Failed in the Description field.
+     * The IDs of the agents or Connectors that you want to start collecting data. If you send a request to an agent/Connector ID that you do not have permission to contact, according to your AWS account, the service does not throw an exception. Instead, it returns the error in the Description field. If you send a request to multiple agents/Connectors and you do not have permission to contact some of those agents/Connectors, the system does not throw an exception. Instead, the system shows Failed in the Description field.
      */
     agentIds: AgentIds;
   }
   export interface StartDataCollectionByAgentIdsResponse {
     /**
-     * Information about agents that were instructed to start collecting data. Information includes the agent ID, a description of the operation performed, and whether or not the agent configuration was updated.
+     * Information about agents or the Connector that were instructed to start collecting data. Information includes the agent/Connector ID, a description of the operation performed, and whether or not the agent/Connector configuration was updated.
      */
     agentsConfigurationStatus?: AgentConfigurationStatusList;
   }
   export interface StopDataCollectionByAgentIdsRequest {
     /**
-     * The IDs of the agents that you want to stop collecting data.
+     * The IDs of the agents or Connectors that you want to stop collecting data.
      */
     agentIds: AgentIds;
   }
   export interface StopDataCollectionByAgentIdsResponse {
     /**
-     * Information about agents that were instructed to stop collecting data. Information includes the agent ID, a description of the operation performed, and whether or not the agent configuration was updated.
+     * Information about agents or the Connector that were instructed to stop collecting data. Information includes the agent/Connector ID, a description of the operation performed, and whether or not the agent/Connector configuration was updated.
      */
     agentsConfigurationStatus?: AgentConfigurationStatusList;
   }
@@ -419,6 +709,23 @@ declare namespace Discovery {
   export type TagSet = Tag[];
   export type TagValue = string;
   export type TimeStamp = Date;
+  export interface UpdateApplicationRequest {
+    /**
+     * Configuration ID of the application to be updated.
+     */
+    configurationId: ApplicationId;
+    /**
+     * New name of the application to be updated.
+     */
+    name?: String;
+    /**
+     * New description of the application to be updated.
+     */
+    description?: String;
+  }
+  export interface UpdateApplicationResponse {
+  }
+  export type orderString = "ASC"|"DESC"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

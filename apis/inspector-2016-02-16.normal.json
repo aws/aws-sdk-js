@@ -1,14 +1,14 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"inspector-2016-02-16",
     "apiVersion":"2016-02-16",
     "endpointPrefix":"inspector",
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"Amazon Inspector",
     "signatureVersion":"v4",
-    "targetPrefix":"InspectorService"
+    "targetPrefix":"InspectorService",
+    "uid":"inspector-2016-02-16"
   },
   "operations":{
     "AddAttributesToFindings":{
@@ -1419,10 +1419,7 @@
       "type":"structure",
       "required":["assessmentTemplateArns"],
       "members":{
-        "assessmentTemplateArns":{
-          "shape":"BatchDescribeArnList",
-          "documentation":"<p>The ARN that specifiesthe assessment templates that you want to describe.</p>"
-        }
+        "assessmentTemplateArns":{"shape":"BatchDescribeArnList"}
       }
     },
     "DescribeAssessmentTemplatesResponse":{
@@ -2563,7 +2560,7 @@
         },
         "assessmentRunName":{
           "shape":"AssessmentRunName",
-          "documentation":"<p>You can specify the name for the assessment run, or you can use the auto-generated name that is based on the assessment template name. The name must be unique for the assessment template.</p>"
+          "documentation":"<p>You can specify the name for the assessment run. The name must be unique for the assessment template whose ARN is used to start the assessment run.</p>"
         }
       }
     },

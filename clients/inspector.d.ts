@@ -713,9 +713,6 @@ declare namespace Inspector {
     failedItems: FailedItems;
   }
   export interface DescribeAssessmentTemplatesRequest {
-    /**
-     * The ARN that specifiesthe assessment templates that you want to describe.
-     */
     assessmentTemplateArns: BatchDescribeArnList;
   }
   export interface DescribeAssessmentTemplatesResponse {
@@ -1298,7 +1295,7 @@ declare namespace Inspector {
      */
     assessmentTemplateArn: Arn;
     /**
-     * You can specify the name for the assessment run, or you can use the auto-generated name that is based on the assessment template name. The name must be unique for the assessment template.
+     * You can specify the name for the assessment run. The name must be unique for the assessment template whose ARN is used to start the assessment run.
      */
     assessmentRunName?: AssessmentRunName;
   }

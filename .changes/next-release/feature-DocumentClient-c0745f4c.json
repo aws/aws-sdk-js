@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "DocumentClient",
-  "description": "Add a constructor option to convert empty strings, sets, and binary strings to a Dynamo NULL typed field"
-}

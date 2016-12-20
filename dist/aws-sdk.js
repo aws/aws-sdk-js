@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.15
+// AWS SDK for JavaScript v2.7.16
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -10121,6 +10121,12 @@ module.exports={
   "pagination": {
     "DescribeTrails": {
       "result_key": "trailList"
+    },
+    "LookupEvents": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "Events"
     }
   }
 }
@@ -12991,6 +12997,9 @@ module.exports={
           "IdentityPoolId": {},
           "Roles": {
             "shape": "S17"
+          },
+          "RoleMappings": {
+            "shape": "S19"
           }
         }
       }
@@ -13166,6 +13175,9 @@ module.exports={
           "IdentityPoolId": {},
           "Roles": {
             "shape": "S17"
+          },
+          "RoleMappings": {
+            "shape": "S19"
           }
         }
       }
@@ -13295,6 +13307,46 @@ module.exports={
       "type": "map",
       "key": {},
       "value": {}
+    },
+    "S19": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "required": [
+          "Type"
+        ],
+        "members": {
+          "Type": {},
+          "AmbiguousRoleResolution": {},
+          "RulesConfiguration": {
+            "type": "structure",
+            "required": [
+              "Rules"
+            ],
+            "members": {
+              "Rules": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "Claim",
+                    "MatchType",
+                    "Value",
+                    "RoleARN"
+                  ],
+                  "members": {
+                    "Claim": {},
+                    "MatchType": {},
+                    "Value": {},
+                    "RoleARN": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -46543,14 +46595,14 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "inspector-2016-02-16",
     "apiVersion": "2016-02-16",
     "endpointPrefix": "inspector",
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon Inspector",
     "signatureVersion": "v4",
-    "targetPrefix": "InspectorService"
+    "targetPrefix": "InspectorService",
+    "uid": "inspector-2016-02-16"
   },
   "operations": {
     "AddAttributesToFindings": {
@@ -89789,7 +89841,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.15',
+  VERSION: '2.7.16',
 
 
   Signers: {},
@@ -90325,7 +90377,8 @@ var util = require('../core').util;
 var typeOf = require('./types').typeOf;
 var DynamoDBSet = require('./set');
 
-function convertInput(data) {
+function convertInput(data, options) {
+  options = options || {};
   if (typeOf(data) === 'Object') {
     var map = {M: {}};
     for (var key in data) {
@@ -90339,12 +90392,18 @@ function convertInput(data) {
     }
     return list;
   } else if (typeOf(data) === 'Set') {
-    return formatSet(data);
+    return formatSet(data, options);
   } else if (typeOf(data) === 'String') {
+    if (data.length === 0 && options.convertEmptyValues) {
+      return convertInput(null);
+    }
     return { 'S': data };
   } else if (typeOf(data) === 'Number') {
     return { 'N': data.toString() };
   } else if (typeOf(data) === 'Binary') {
+    if (data.length === 0 && options.convertEmptyValues) {
+      return convertInput(null);
+    }
     return { 'B': data };
   } else if (typeOf(data) === 'Boolean') {
     return {'BOOL': data};
@@ -90353,16 +90412,46 @@ function convertInput(data) {
   }
 }
 
-function formatSet(data) {
+function formatSet(data, options) {
+  options = options || {};
+  var values = data.values;
+  if (options.convertEmptyValues) {
+    values = filterEmptySetValues(data);
+    if (values.length === 0) {
+      return convertInput(null);
+    }
+  }
+
   var map = {};
   switch (data.type) {
-    case 'String': map['SS'] = data.values; break;
-    case 'Binary': map['BS'] = data.values; break;
-    case 'Number': map['NS'] = data.values.map(function (value) {
+    case 'String': map['SS'] = values; break;
+    case 'Binary': map['BS'] = values; break;
+    case 'Number': map['NS'] = values.map(function (value) {
       return value.toString();
     });
   }
   return map;
+}
+
+function filterEmptySetValues(set) {
+    var nonEmptyValues = [];
+    var potentiallyEmptyTypes = {
+        String: true,
+        Binary: true,
+        Number: false
+    };
+    if (potentiallyEmptyTypes[set.type]) {
+        for (var i = 0; i < set.values.length; i++) {
+            if (set.values[i].length === 0) {
+                continue;
+            }
+            nonEmptyValues.push(set.values[i]);
+        }
+
+        return nonEmptyValues;
+    }
+
+    return set.values;
 }
 
 function convertOutput(data) {
@@ -90450,7 +90539,7 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     var self = this;
     self.service = options.service;
     self.bindServiceObject(options);
-    self.attrValue =
+    self.attrValue = options.attrValue =
       self.service.api.operations.putItem.input.members.Item.value.shape;
   },
 
@@ -90573,7 +90662,7 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
 
 
   getTranslator: function() {
-    return new Translator({attrValue: this.attrValue});
+    return new Translator(this.options);
   },
 
 
@@ -90694,6 +90783,7 @@ var convert = require('./converter');
 var Translator = function(options) {
   options = options || {};
   this.attrValue = options.attrValue;
+  this.convertEmptyValues = Boolean(options.convertEmptyValues);
 };
 
 Translator.prototype.translateInput = function(value, shape) {
@@ -90711,7 +90801,7 @@ Translator.prototype.translate = function(value, shape) {
   if (!shape || value === undefined) return undefined;
 
   if (shape.shape === self.attrValue) {
-    return convert[self.mode](value);
+    return convert[self.mode](value, {convertEmptyValues: self.convertEmptyValues});
   }
   switch (shape.type) {
     case 'structure': return self.translateStructure(value, shape);

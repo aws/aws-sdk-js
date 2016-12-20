@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.15-->
+<!--LATEST=2.7.16-->
 <!--ENTRYINSERT-->
+
+## 2.7.16
+* feature: DocumentClient: Add a constructor option to convert empty strings, sets, and binary strings to a Dynamo NULL typed field
+* feature: Discovery: Adds new APIs to group discovered servers into Applications with get summary and neighbors. Includes additional filters for ListConfigurations and DescribeAgents API.
+* feature: CognitoIdentity: Added fine-grained role-based access control for Cognito identity pools. Developers can configure an identity pool to get the IAM role from an authenticated user's token, or they can configure rules that will map a user to a different role
 
 ## 2.7.15
 * bugfix: Buffer: Update base64 encode/decode to use Buffer.fill when available and throw an error if a number is provided.
