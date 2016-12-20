@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Promises",
+  "description": "Fixes issue introduced in v2.6.12. Calling AWS.config.setPromisesDependency(null) will once again force the SDK to use native promises if they are available."
+}
