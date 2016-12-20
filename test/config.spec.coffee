@@ -256,6 +256,18 @@ describe 'AWS.config', ->
       expect(utilSpy.calls.length).to.equal(1)
       expect(Array.isArray(utilSpy.calls[0].arguments[0])).to.be.true
       expect(utilSpy.calls[0].arguments[0].length).to.equal(4)
+    
+    if typeof Promise != 'undefined'
+      it 'reverts to native promises when null is passed', ->
+        # create fake promise constructor
+        P = ->
+        utilSpy = helpers.spyOn(AWS.util, 'addPromises')
+        AWS.config.setPromisesDependency(P);
+        expect(utilSpy.calls[0].arguments[1] == P).to.be.true
+        # revert promise
+        AWS.config.setPromisesDependency(null);
+        expect(utilSpy.calls[1].arguments[1] == Promise).to.be.true
+        expect(utilSpy.calls[1].arguments[1] == P).to.be.false
 
   describe 'getPromisesDependency', ->
     it 'returns PromisesDependency if set', ->
