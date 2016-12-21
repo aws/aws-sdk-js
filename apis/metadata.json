@@ -308,7 +308,8 @@
     "cors": true
   },
   "rekognition": {
-    "name": "Rekognition"
+    "name": "Rekognition",
+    "cors": true
   },
   "route53": {
     "name": "Route53",
