@@ -12,11 +12,11 @@ declare class Firehose extends Service {
   constructor(options?: Firehose.Types.ClientConfiguration)
   config: Config & Firehose.Types.ClientConfiguration;
   /**
-   * Creates a delivery stream.  CreateDeliveryStream is an asynchronous operation that immediately returns. The initial status of the delivery stream is CREATING. After the delivery stream is created, its status is ACTIVE and it now accepts data. Attempts to send data to a delivery stream that is not in the ACTIVE state cause an exception. To check the state of a delivery stream, use DescribeDeliveryStream. The name of a delivery stream identifies it. You can't have two delivery streams with the same name in the same region. Two delivery streams in different AWS accounts or different regions in the same AWS account can have the same name. By default, you can create up to 20 delivery streams per region. A delivery stream can only be configured with a single destination, Amazon S3, Amazon Elasticsearch Service, or Amazon Redshift. For correct CreateDeliveryStream request syntax, specify only one destination configuration parameter: either S3DestinationConfiguration, ElasticsearchDestinationConfiguration, or RedshiftDestinationConfiguration.  As part of S3DestinationConfiguration, optional values BufferingHints, EncryptionConfiguration, and CompressionFormat can be provided. By default, if no BufferingHints value is provided, Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. Note that BufferingHints is a hint, so there are some cases where the service cannot adhere to these conditions strictly; for example, record boundaries are such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3. A few notes about RedshiftDestinationConfiguration:   An Amazon Redshift destination requires an S3 bucket as intermediate location, as Firehose first delivers data to S3 and then uses COPY syntax to load data into an Amazon Redshift table. This is specified in the RedshiftDestinationConfiguration.S3Configuration parameter element.   The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.   We strongly recommend that the username and password provided is used exclusively for Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.   Firehose assumes the IAM role that is configured as part of destinations. The IAM role should allow the Firehose principal to assume the role, and the role should have permissions that allows the service to deliver the data. For more information, see Amazon S3 Bucket Access in the Amazon Kinesis Firehose Developer Guide.
+   * Creates a delivery stream. By default, you can create up to 20 delivery streams per region. This is an asynchronous operation that immediately returns. The initial status of the delivery stream is CREATING. After the delivery stream is created, its status is ACTIVE and it now accepts data. Attempts to send data to a delivery stream that is not in the ACTIVE state cause an exception. To check the state of a delivery stream, use DescribeDeliveryStream. A delivery stream is configured with a single destination: Amazon S3, Amazon Elasticsearch Service, or Amazon Redshift. You must specify only one of the following destination configuration parameters: ExtendedS3DestinationConfiguration, S3DestinationConfiguration, ElasticsearchDestinationConfiguration, or RedshiftDestinationConfiguration. When you specify S3DestinationConfiguration, you can also provide the following optional values: BufferingHints, EncryptionConfiguration, and CompressionFormat. By default, if no BufferingHints value is provided, Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. Note that BufferingHints is a hint, so there are some cases where the service cannot adhere to these conditions strictly; for example, record boundaries are such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3. A few notes about Amazon Redshift as a destination:   An Amazon Redshift destination requires an S3 bucket as intermediate location, as Firehose first delivers data to S3 and then uses COPY syntax to load data into an Amazon Redshift table. This is specified in the RedshiftDestinationConfiguration.S3Configuration parameter.   The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.   We strongly recommend that you use the user name and password you provide exclusively with Firehose, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.   Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Firehose principal to assume the role, and the role should have permissions that allows the service to deliver the data. For more information, see Amazon S3 Bucket Access in the Amazon Kinesis Firehose Developer Guide.
    */
   createDeliveryStream(params: Firehose.Types.CreateDeliveryStreamInput, callback?: (err: AWSError, data: Firehose.Types.CreateDeliveryStreamOutput) => void): Request<Firehose.Types.CreateDeliveryStreamOutput, AWSError>;
   /**
-   * Creates a delivery stream.  CreateDeliveryStream is an asynchronous operation that immediately returns. The initial status of the delivery stream is CREATING. After the delivery stream is created, its status is ACTIVE and it now accepts data. Attempts to send data to a delivery stream that is not in the ACTIVE state cause an exception. To check the state of a delivery stream, use DescribeDeliveryStream. The name of a delivery stream identifies it. You can't have two delivery streams with the same name in the same region. Two delivery streams in different AWS accounts or different regions in the same AWS account can have the same name. By default, you can create up to 20 delivery streams per region. A delivery stream can only be configured with a single destination, Amazon S3, Amazon Elasticsearch Service, or Amazon Redshift. For correct CreateDeliveryStream request syntax, specify only one destination configuration parameter: either S3DestinationConfiguration, ElasticsearchDestinationConfiguration, or RedshiftDestinationConfiguration.  As part of S3DestinationConfiguration, optional values BufferingHints, EncryptionConfiguration, and CompressionFormat can be provided. By default, if no BufferingHints value is provided, Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. Note that BufferingHints is a hint, so there are some cases where the service cannot adhere to these conditions strictly; for example, record boundaries are such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3. A few notes about RedshiftDestinationConfiguration:   An Amazon Redshift destination requires an S3 bucket as intermediate location, as Firehose first delivers data to S3 and then uses COPY syntax to load data into an Amazon Redshift table. This is specified in the RedshiftDestinationConfiguration.S3Configuration parameter element.   The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.   We strongly recommend that the username and password provided is used exclusively for Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.   Firehose assumes the IAM role that is configured as part of destinations. The IAM role should allow the Firehose principal to assume the role, and the role should have permissions that allows the service to deliver the data. For more information, see Amazon S3 Bucket Access in the Amazon Kinesis Firehose Developer Guide.
+   * Creates a delivery stream. By default, you can create up to 20 delivery streams per region. This is an asynchronous operation that immediately returns. The initial status of the delivery stream is CREATING. After the delivery stream is created, its status is ACTIVE and it now accepts data. Attempts to send data to a delivery stream that is not in the ACTIVE state cause an exception. To check the state of a delivery stream, use DescribeDeliveryStream. A delivery stream is configured with a single destination: Amazon S3, Amazon Elasticsearch Service, or Amazon Redshift. You must specify only one of the following destination configuration parameters: ExtendedS3DestinationConfiguration, S3DestinationConfiguration, ElasticsearchDestinationConfiguration, or RedshiftDestinationConfiguration. When you specify S3DestinationConfiguration, you can also provide the following optional values: BufferingHints, EncryptionConfiguration, and CompressionFormat. By default, if no BufferingHints value is provided, Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. Note that BufferingHints is a hint, so there are some cases where the service cannot adhere to these conditions strictly; for example, record boundaries are such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3. A few notes about Amazon Redshift as a destination:   An Amazon Redshift destination requires an S3 bucket as intermediate location, as Firehose first delivers data to S3 and then uses COPY syntax to load data into an Amazon Redshift table. This is specified in the RedshiftDestinationConfiguration.S3Configuration parameter.   The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.   We strongly recommend that you use the user name and password you provide exclusively with Firehose, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.   Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Firehose principal to assume the role, and the role should have permissions that allows the service to deliver the data. For more information, see Amazon S3 Bucket Access in the Amazon Kinesis Firehose Developer Guide.
    */
   createDeliveryStream(callback?: (err: AWSError, data: Firehose.Types.CreateDeliveryStreamOutput) => void): Request<Firehose.Types.CreateDeliveryStreamOutput, AWSError>;
   /**
@@ -52,19 +52,19 @@ declare class Firehose extends Service {
    */
   putRecord(callback?: (err: AWSError, data: Firehose.Types.PutRecordOutput) => void): Request<Firehose.Types.PutRecordOutput, AWSError>;
   /**
-   * Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use PutRecord. Applications using these operations are referred to as producers. Each PutRecordBatch request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. Note that if you use PutRecord and PutRecordBatch, the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see Amazon Kinesis Firehose Limits.  You must specify the name of the delivery stream and the data record when using PutRecord. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data, for example, a segment from a log file, geographic location data, web site clickstream data, and so on. Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (\n) or some other character unique within the data. This allows the consumer application(s) to parse individual data items when reading the data from the destination. The PutRecordBatch response includes a count of any failed records, FailedPutCount, and an array of responses, RequestResponses. The FailedPutCount value is a count of records that failed. Each entry in the RequestResponses array gives additional information of the processed record. Each entry in RequestResponses directly correlates with a record in the request array using the same ordering, from the top to the bottom of the request and response. RequestResponses always includes the same number of records as the request array. RequestResponses both successfully and unsuccessfully processed records. Firehose attempts to process all records in each PutRecordBatch request. A single record failure does not stop the processing of subsequent records. A successfully processed record includes a RecordId value, which is a unique value identified for the record. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error and is one of the following values: ServiceUnavailable or InternalFailure. ErrorMessage provides more detailed information about the error. If FailedPutCount is greater than 0 (zero), retry the request. A retry of the entire batch of records is possible; however, we strongly recommend that you inspect the entire response and resend only those records that failed processing. This minimizes duplicate records and also reduces the total bytes sent (and corresponding charges). If the PutRecordBatch operation throws a ServiceUnavailableException, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. Data records sent to Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.
+   * Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use PutRecord. Applications using these operations are referred to as producers. By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. Note that if you use PutRecord and PutRecordBatch, the limits are an aggregate across these two operations for each delivery stream. For more information about limits, see Amazon Kinesis Firehose Limits. Each PutRecordBatch request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed. You must specify the name of the delivery stream and the data record when using PutRecord. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data, for example, a segment from a log file, geographic location data, web site clickstream data, and so on. Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (\n) or some other character unique within the data. This allows the consumer application(s) to parse individual data items when reading the data from the destination. The PutRecordBatch response includes a count of failed records, FailedPutCount, and an array of responses, RequestResponses. Each entry in the RequestResponses array provides additional information about the processed record, and directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. RequestResponses includes both successfully and unsuccessfully processed records. Firehose attempts to process all records in each PutRecordBatch request. A single record failure does not stop the processing of subsequent records. A successfully processed record includes a RecordId value, which is unique for the record. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error, and is one of the following values: ServiceUnavailable or InternalFailure. ErrorMessage provides more detailed information about the error. If there is an internal server error or a timeout, the write might have completed or it might have failed. If FailedPutCount is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination. If PutRecordBatch throws ServiceUnavailableException, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. Data records sent to Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.
    */
   putRecordBatch(params: Firehose.Types.PutRecordBatchInput, callback?: (err: AWSError, data: Firehose.Types.PutRecordBatchOutput) => void): Request<Firehose.Types.PutRecordBatchOutput, AWSError>;
   /**
-   * Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use PutRecord. Applications using these operations are referred to as producers. Each PutRecordBatch request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. Note that if you use PutRecord and PutRecordBatch, the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see Amazon Kinesis Firehose Limits.  You must specify the name of the delivery stream and the data record when using PutRecord. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data, for example, a segment from a log file, geographic location data, web site clickstream data, and so on. Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (\n) or some other character unique within the data. This allows the consumer application(s) to parse individual data items when reading the data from the destination. The PutRecordBatch response includes a count of any failed records, FailedPutCount, and an array of responses, RequestResponses. The FailedPutCount value is a count of records that failed. Each entry in the RequestResponses array gives additional information of the processed record. Each entry in RequestResponses directly correlates with a record in the request array using the same ordering, from the top to the bottom of the request and response. RequestResponses always includes the same number of records as the request array. RequestResponses both successfully and unsuccessfully processed records. Firehose attempts to process all records in each PutRecordBatch request. A single record failure does not stop the processing of subsequent records. A successfully processed record includes a RecordId value, which is a unique value identified for the record. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error and is one of the following values: ServiceUnavailable or InternalFailure. ErrorMessage provides more detailed information about the error. If FailedPutCount is greater than 0 (zero), retry the request. A retry of the entire batch of records is possible; however, we strongly recommend that you inspect the entire response and resend only those records that failed processing. This minimizes duplicate records and also reduces the total bytes sent (and corresponding charges). If the PutRecordBatch operation throws a ServiceUnavailableException, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. Data records sent to Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.
+   * Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use PutRecord. Applications using these operations are referred to as producers. By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. Note that if you use PutRecord and PutRecordBatch, the limits are an aggregate across these two operations for each delivery stream. For more information about limits, see Amazon Kinesis Firehose Limits. Each PutRecordBatch request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed. You must specify the name of the delivery stream and the data record when using PutRecord. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data, for example, a segment from a log file, geographic location data, web site clickstream data, and so on. Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (\n) or some other character unique within the data. This allows the consumer application(s) to parse individual data items when reading the data from the destination. The PutRecordBatch response includes a count of failed records, FailedPutCount, and an array of responses, RequestResponses. Each entry in the RequestResponses array provides additional information about the processed record, and directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. RequestResponses includes both successfully and unsuccessfully processed records. Firehose attempts to process all records in each PutRecordBatch request. A single record failure does not stop the processing of subsequent records. A successfully processed record includes a RecordId value, which is unique for the record. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error, and is one of the following values: ServiceUnavailable or InternalFailure. ErrorMessage provides more detailed information about the error. If there is an internal server error or a timeout, the write might have completed or it might have failed. If FailedPutCount is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination. If PutRecordBatch throws ServiceUnavailableException, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. Data records sent to Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.
    */
   putRecordBatch(callback?: (err: AWSError, data: Firehose.Types.PutRecordBatchOutput) => void): Request<Firehose.Types.PutRecordBatchOutput, AWSError>;
   /**
-   * Updates the specified destination of the specified delivery stream. Note: Switching between Elasticsearch and other services is not supported. For Elasticsearch destination, you can only update an existing Elasticsearch destination with this operation. This operation can be used to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a given destination (for example, to change the bucket name of the Amazon S3 destination). The update may not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are normally effective within a few minutes. If the destination type is the same, Firehose merges the configuration parameters specified in the UpdateDestination request with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the update request, then the existing configuration parameters are retained. For example, in the Amazon S3 destination, if EncryptionConfiguration is not specified then the existing EncryptionConfiguration is maintained on the destination. If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Firehose does not merge any parameters. In this case, all parameters must be specified. Firehose uses the CurrentDeliveryStreamVersionId to avoid race conditions and conflicting merges. This is a required field in every request and the service only updates the configuration if the existing configuration matches the VersionId. After the update is applied successfully, the VersionId is updated, which can be retrieved with the DescribeDeliveryStream operation. The new VersionId should be uses to set CurrentDeliveryStreamVersionId in the next UpdateDestination operation.
+   * Updates the specified destination of the specified delivery stream. You can use this operation to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a destination (for example, to change the bucket name of the Amazon S3 destination). The update might not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are usually effective within a few minutes. Note that switching between Amazon ES and other services is not supported. For an Amazon ES destination, you can only update to another Amazon ES destination. If the destination type is the same, Firehose merges the configuration parameters specified with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the call, the existing values are retained. For example, in the Amazon S3 destination, if EncryptionConfiguration is not specified then the existing EncryptionConfiguration is maintained on the destination. If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Firehose does not merge any parameters. In this case, all parameters must be specified. Firehose uses CurrentDeliveryStreamVersionId to avoid race conditions and conflicting merges. This is a required field, and the service updates the configuration only if the existing configuration has a version ID that matches. After the update is applied successfully, the version ID is updated, and can be retrieved using DescribeDeliveryStream. You should use the new version ID to set CurrentDeliveryStreamVersionId in the next call.
    */
   updateDestination(params: Firehose.Types.UpdateDestinationInput, callback?: (err: AWSError, data: Firehose.Types.UpdateDestinationOutput) => void): Request<Firehose.Types.UpdateDestinationOutput, AWSError>;
   /**
-   * Updates the specified destination of the specified delivery stream. Note: Switching between Elasticsearch and other services is not supported. For Elasticsearch destination, you can only update an existing Elasticsearch destination with this operation. This operation can be used to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a given destination (for example, to change the bucket name of the Amazon S3 destination). The update may not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are normally effective within a few minutes. If the destination type is the same, Firehose merges the configuration parameters specified in the UpdateDestination request with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the update request, then the existing configuration parameters are retained. For example, in the Amazon S3 destination, if EncryptionConfiguration is not specified then the existing EncryptionConfiguration is maintained on the destination. If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Firehose does not merge any parameters. In this case, all parameters must be specified. Firehose uses the CurrentDeliveryStreamVersionId to avoid race conditions and conflicting merges. This is a required field in every request and the service only updates the configuration if the existing configuration matches the VersionId. After the update is applied successfully, the VersionId is updated, which can be retrieved with the DescribeDeliveryStream operation. The new VersionId should be uses to set CurrentDeliveryStreamVersionId in the next UpdateDestination operation.
+   * Updates the specified destination of the specified delivery stream. You can use this operation to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a destination (for example, to change the bucket name of the Amazon S3 destination). The update might not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are usually effective within a few minutes. Note that switching between Amazon ES and other services is not supported. For an Amazon ES destination, you can only update to another Amazon ES destination. If the destination type is the same, Firehose merges the configuration parameters specified with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the call, the existing values are retained. For example, in the Amazon S3 destination, if EncryptionConfiguration is not specified then the existing EncryptionConfiguration is maintained on the destination. If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Firehose does not merge any parameters. In this case, all parameters must be specified. Firehose uses CurrentDeliveryStreamVersionId to avoid race conditions and conflicting merges. This is a required field, and the service updates the configuration only if the existing configuration has a version ID that matches. After the update is applied successfully, the version ID is updated, and can be retrieved using DescribeDeliveryStream. You should use the new version ID to set CurrentDeliveryStreamVersionId in the next call.
    */
   updateDestination(callback?: (err: AWSError, data: Firehose.Types.UpdateDestinationOutput) => void): Request<Firehose.Types.UpdateDestinationOutput, AWSError>;
 }
@@ -74,7 +74,7 @@ declare namespace Firehose {
   export type BucketARN = string;
   export interface BufferingHints {
     /**
-     * Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. We recommend setting SizeInMBs to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec set SizeInMBs to be 10 MB or higher.
+     * Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. We recommend setting this parameter to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
      */
     SizeInMBs?: SizeInMBs;
     /**
@@ -88,11 +88,11 @@ declare namespace Firehose {
      */
     Enabled?: BooleanObject;
     /**
-     * The CloudWatch group name for logging. This value is required if Enabled is true.
+     * The CloudWatch group name for logging. This value is required if CloudWatch logging is enabled.
      */
     LogGroupName?: LogGroupName;
     /**
-     * The CloudWatch log stream name for logging. This value is required if Enabled is true.
+     * The CloudWatch log stream name for logging. This value is required if CloudWatch logging is enabled.
      */
     LogStreamName?: LogStreamName;
   }
@@ -108,26 +108,30 @@ declare namespace Firehose {
      */
     DataTableColumns?: DataTableColumns;
     /**
-     * Optional parameters to use with the Amazon Redshift COPY command. For more information, see the "Optional Parameters" section of Amazon Redshift COPY command. Some possible examples that would apply to Firehose are as follows.  delimiter '\t' lzop; - fields are delimited with "\t" (TAB character) and compressed using lzop.  delimiter '| - fields are delimited with "|" (this is the default delimiter).  delimiter '|' escape - the delimiter should be escaped.  fixedwidth 'venueid:3,venuename:25,venuecity:12,venuestate:2,venueseats:6' - fields are fixed width in the source, with each width specified after every column in the table.  JSON 's3://mybucket/jsonpaths.txt' - data is in JSON format, and the path specified is the format of the data. For more examples, see Amazon Redshift COPY command examples.
+     * Optional parameters to use with the Amazon Redshift COPY command. For more information, see the "Optional Parameters" section of Amazon Redshift COPY command. Some possible examples that would apply to Firehose are as follows:  delimiter '\t' lzop; - fields are delimited with "\t" (TAB character) and compressed using lzop.  delimiter '| - fields are delimited with "|" (this is the default delimiter).  delimiter '|' escape - the delimiter should be escaped.  fixedwidth 'venueid:3,venuename:25,venuecity:12,venuestate:2,venueseats:6' - fields are fixed width in the source, with each width specified after every column in the table.  JSON 's3://mybucket/jsonpaths.txt' - data is in JSON format, and the path specified is the format of the data. For more examples, see Amazon Redshift COPY command examples.
      */
     CopyOptions?: CopyOptions;
   }
   export type CopyOptions = string;
   export interface CreateDeliveryStreamInput {
     /**
-     * The name of the delivery stream.
+     * The name of the delivery stream. This name must be unique per AWS account in the same region. You can have multiple delivery streams with the same name if they are in different accounts or different regions.
      */
     DeliveryStreamName: DeliveryStreamName;
     /**
-     * The destination in Amazon S3. This value must be specified if ElasticsearchDestinationConfiguration or RedshiftDestinationConfiguration is specified (see restrictions listed above).
+     * [Deprecated] The destination in Amazon S3. You can specify only one destination.
      */
     S3DestinationConfiguration?: S3DestinationConfiguration;
     /**
-     * The destination in Amazon Redshift. This value cannot be specified if Amazon S3 or Amazon Elasticsearch is the desired destination (see restrictions listed above).
+     * The destination in Amazon S3. You can specify only one destination.
+     */
+    ExtendedS3DestinationConfiguration?: ExtendedS3DestinationConfiguration;
+    /**
+     * The destination in Amazon Redshift. You can specify only one destination.
      */
     RedshiftDestinationConfiguration?: RedshiftDestinationConfiguration;
     /**
-     * The destination in Amazon ES. This value cannot be specified if Amazon S3 or Amazon Redshift is the desired destination (see restrictions listed above).
+     * The destination in Amazon ES. You can specify only one destination.
      */
     ElasticsearchDestinationConfiguration?: ElasticsearchDestinationConfiguration;
   }
@@ -163,7 +167,7 @@ declare namespace Firehose {
      */
     DeliveryStreamStatus: DeliveryStreamStatus;
     /**
-     * Used when calling the UpdateDestination operation. Each time the destination is updated for the delivery stream, the VersionId is changed, and the current VersionId is required when updating the destination. This is so that the service knows it is applying the changes to the correct version of the delivery stream.
+     * Each time the destination is updated for a delivery stream, the version ID is changed, and the current version ID is required when updating the destination. This is so that the service knows it is applying the changes to the correct version of the delivery stream.
      */
     VersionId: DeliveryStreamVersionId;
     /**
@@ -197,7 +201,7 @@ declare namespace Firehose {
      */
     Limit?: DescribeDeliveryStreamInputLimit;
     /**
-     * Specifies the destination ID to start returning the destination information. Currently Firehose supports one destination per delivery stream.
+     * The ID of the destination to start returning the destination information. Currently Firehose supports one destination per delivery stream.
      */
     ExclusiveStartDestinationId?: DestinationId;
   }
@@ -214,9 +218,13 @@ declare namespace Firehose {
      */
     DestinationId: DestinationId;
     /**
-     * The Amazon S3 destination.
+     * [Deprecated] The destination in Amazon S3.
      */
     S3DestinationDescription?: S3DestinationDescription;
+    /**
+     * The destination in Amazon S3.
+     */
+    ExtendedS3DestinationDescription?: ExtendedS3DestinationDescription;
     /**
      * The destination in Amazon Redshift.
      */
@@ -234,7 +242,7 @@ declare namespace Firehose {
      */
     IntervalInSeconds?: ElasticsearchBufferingIntervalInSeconds;
     /**
-     * Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. We recommend setting SizeInMBs to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, set SizeInMBs to be 10 MB or higher.
+     * Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. We recommend setting this parameter to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
      */
     SizeInMBs?: ElasticsearchBufferingSizeInMBs;
   }
@@ -246,7 +254,7 @@ declare namespace Firehose {
      */
     RoleARN: RoleARN;
     /**
-     * The ARN of the Amazon ES domain. The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains , and DescribeElasticsearchDomainConfig after assuming RoleARN.
+     * The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after assuming the role specified in RoleARN.
      */
     DomainARN: ElasticsearchDomainARN;
     /**
@@ -258,24 +266,31 @@ declare namespace Firehose {
      */
     TypeName: ElasticsearchTypeName;
     /**
-     * The Elasticsearch index rotation period. Index rotation appends a timestamp to the IndexName to facilitate expiration of old data. For more information, see Index Rotation for Amazon Elasticsearch Service Destination. Default value is OneDay.
+     * The Elasticsearch index rotation period. Index rotation appends a timestamp to the IndexName to facilitate expiration of old data. For more information, see Index Rotation for Amazon Elasticsearch Service Destination. The default value is OneDay.
      */
     IndexRotationPeriod?: ElasticsearchIndexRotationPeriod;
     /**
-     * Buffering options. If no value is specified, ElasticsearchBufferingHints object default values are used. 
+     * The buffering options. If no value is specified, the default values for ElasticsearchBufferingHints are used.
      */
     BufferingHints?: ElasticsearchBufferingHints;
     /**
-     * Configures retry behavior in the event that Firehose is unable to deliver documents to Amazon ES. Default value is 300 (5 minutes).
+     * The retry behavior in the event that Firehose is unable to deliver documents to Amazon ES. The default value is 300 (5 minutes).
      */
     RetryOptions?: ElasticsearchRetryOptions;
     /**
      * Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly, Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with elasticsearch-failed/ appended to the key prefix. When set to AllDocuments, Firehose delivers all incoming records to Amazon S3, and also writes failed documents with elasticsearch-failed/ appended to the prefix. For more information, see Amazon S3 Backup for Amazon Elasticsearch Service Destination. Default value is FailedDocumentsOnly.
      */
     S3BackupMode?: ElasticsearchS3BackupMode;
+    /**
+     * The configuration for the intermediate Amazon S3 location from which Amazon ES obtains data.
+     */
     S3Configuration: S3DestinationConfiguration;
     /**
-     * Describes CloudWatch logging options for your delivery stream.
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
@@ -301,20 +316,27 @@ declare namespace Firehose {
      */
     IndexRotationPeriod?: ElasticsearchIndexRotationPeriod;
     /**
-     * Buffering options.
+     * The buffering options.
      */
     BufferingHints?: ElasticsearchBufferingHints;
     /**
-     * Elasticsearch retry options.
+     * The Amazon ES retry options.
      */
     RetryOptions?: ElasticsearchRetryOptions;
     /**
-     * Amazon S3 backup mode.
+     * The Amazon S3 backup mode.
      */
     S3BackupMode?: ElasticsearchS3BackupMode;
+    /**
+     * The Amazon S3 destination.
+     */
     S3DestinationDescription?: S3DestinationDescription;
     /**
-     * CloudWatch logging options.
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The CloudWatch logging options.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
@@ -324,7 +346,7 @@ declare namespace Firehose {
      */
     RoleARN?: RoleARN;
     /**
-     * The ARN of the Amazon ES domain. The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains , and DescribeElasticsearchDomainConfig after assuming RoleARN.
+     * The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after assuming the IAM role specified in RoleARN.
      */
     DomainARN?: ElasticsearchDomainARN;
     /**
@@ -336,20 +358,27 @@ declare namespace Firehose {
      */
     TypeName?: ElasticsearchTypeName;
     /**
-     * The Elasticsearch index rotation period. Index rotation appends a timestamp to the IndexName to facilitate the expiration of old data. For more information, see Index Rotation for Amazon Elasticsearch Service Destination. Default value is OneDay.
+     * The Elasticsearch index rotation period. Index rotation appends a timestamp to IndexName to facilitate the expiration of old data. For more information, see Index Rotation for Amazon Elasticsearch Service Destination. Default value is OneDay.
      */
     IndexRotationPeriod?: ElasticsearchIndexRotationPeriod;
     /**
-     * Buffering options. If no value is specified, ElasticsearchBufferingHints object default values are used. 
+     * The buffering options. If no value is specified, ElasticsearchBufferingHints object default values are used. 
      */
     BufferingHints?: ElasticsearchBufferingHints;
     /**
-     * Configures retry behavior in the event that Firehose is unable to deliver documents to Amazon ES. Default value is 300 (5 minutes).
+     * The retry behavior in the event that Firehose is unable to deliver documents to Amazon ES. Default value is 300 (5 minutes).
      */
     RetryOptions?: ElasticsearchRetryOptions;
+    /**
+     * The Amazon S3 destination.
+     */
     S3Update?: S3DestinationUpdate;
     /**
-     * Describes CloudWatch logging options for your delivery stream.
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
@@ -377,6 +406,132 @@ declare namespace Firehose {
   }
   export type ErrorCode = string;
   export type ErrorMessage = string;
+  export interface ExtendedS3DestinationConfiguration {
+    /**
+     * The ARN of the AWS credentials.
+     */
+    RoleARN: RoleARN;
+    /**
+     * The ARN of the S3 bucket.
+     */
+    BucketARN: BucketARN;
+    /**
+     * The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see Amazon S3 Object Name Format in the Amazon Kinesis Firehose Developer Guide.
+     */
+    Prefix?: Prefix;
+    /**
+     * The buffering option.
+     */
+    BufferingHints?: BufferingHints;
+    /**
+     * The compression format. If no value is specified, the default is UNCOMPRESSED.
+     */
+    CompressionFormat?: CompressionFormat;
+    /**
+     * The encryption configuration. If no value is specified, the default is no encryption.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * The CloudWatch logging options for your delivery stream.
+     */
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The Amazon S3 backup mode.
+     */
+    S3BackupMode?: S3BackupMode;
+    /**
+     * The configuration for backup in Amazon S3.
+     */
+    S3BackupConfiguration?: S3DestinationConfiguration;
+  }
+  export interface ExtendedS3DestinationDescription {
+    /**
+     * The ARN of the AWS credentials.
+     */
+    RoleARN: RoleARN;
+    /**
+     * The ARN of the S3 bucket.
+     */
+    BucketARN: BucketARN;
+    /**
+     * The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see Amazon S3 Object Name Format in the Amazon Kinesis Firehose Developer Guide.
+     */
+    Prefix?: Prefix;
+    /**
+     * The buffering option.
+     */
+    BufferingHints: BufferingHints;
+    /**
+     * The compression format. If no value is specified, the default is UNCOMPRESSED.
+     */
+    CompressionFormat: CompressionFormat;
+    /**
+     * The encryption configuration. If no value is specified, the default is no encryption.
+     */
+    EncryptionConfiguration: EncryptionConfiguration;
+    /**
+     * The CloudWatch logging options for your delivery stream.
+     */
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The Amazon S3 backup mode.
+     */
+    S3BackupMode?: S3BackupMode;
+    /**
+     * The configuration for backup in Amazon S3.
+     */
+    S3BackupDescription?: S3DestinationDescription;
+  }
+  export interface ExtendedS3DestinationUpdate {
+    /**
+     * The ARN of the AWS credentials.
+     */
+    RoleARN?: RoleARN;
+    /**
+     * The ARN of the S3 bucket.
+     */
+    BucketARN?: BucketARN;
+    /**
+     * The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see Amazon S3 Object Name Format in the Amazon Kinesis Firehose Developer Guide.
+     */
+    Prefix?: Prefix;
+    /**
+     * The buffering option.
+     */
+    BufferingHints?: BufferingHints;
+    /**
+     * The compression format. If no value is specified, the default is UNCOMPRESSED. 
+     */
+    CompressionFormat?: CompressionFormat;
+    /**
+     * The encryption configuration. If no value is specified, the default is no encryption.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * The CloudWatch logging options for your delivery stream.
+     */
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * Enables or disables Amazon S3 backup mode.
+     */
+    S3BackupMode?: S3BackupMode;
+    /**
+     * The Amazon S3 destination for backup.
+     */
+    S3BackupUpdate?: S3DestinationUpdate;
+  }
   export type IntervalInSeconds = number;
   export interface KMSEncryptionConfig {
     /**
@@ -411,6 +566,41 @@ declare namespace Firehose {
   export type NonNegativeIntegerObject = number;
   export type Password = string;
   export type Prefix = string;
+  export interface ProcessingConfiguration {
+    /**
+     * Enables or disables data processing.
+     */
+    Enabled?: BooleanObject;
+    /**
+     * The data processors.
+     */
+    Processors?: ProcessorList;
+  }
+  export interface Processor {
+    /**
+     * The type of processor.
+     */
+    Type: ProcessorType;
+    /**
+     * The processor parameters.
+     */
+    Parameters?: ProcessorParameterList;
+  }
+  export type ProcessorList = Processor[];
+  export interface ProcessorParameter {
+    /**
+     * The name of the parameter.
+     */
+    ParameterName: ProcessorParameterName;
+    /**
+     * The parameter value.
+     */
+    ParameterValue: ProcessorParameterValue;
+  }
+  export type ProcessorParameterList = ProcessorParameter[];
+  export type ProcessorParameterName = "LambdaArn"|"NumberOfRetries"|string;
+  export type ProcessorParameterValue = string;
+  export type ProcessorType = "Lambda"|string;
   export interface PutRecordBatchInput {
     /**
      * The name of the delivery stream.
@@ -423,11 +613,11 @@ declare namespace Firehose {
   }
   export interface PutRecordBatchOutput {
     /**
-     * The number of unsuccessfully written records.
+     * The number of records that might have failed processing.
      */
     FailedPutCount: NonNegativeIntegerObject;
     /**
-     * The results for the individual records. The index of each element matches the same index in which records were sent.
+     * The results array. For each record, the index of the response element is the same as the index used in the request array.
      */
     RequestResponses: PutRecordBatchResponseEntryList;
   }
@@ -492,15 +682,27 @@ declare namespace Firehose {
      */
     Password: Password;
     /**
-     * Configures retry behavior in the event that Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
+     * The retry behavior in the event that Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
      */
     RetryOptions?: RedshiftRetryOptions;
     /**
-     * The S3 configuration for the intermediate location from which Amazon Redshift obtains data. Restrictions are described in the topic for CreateDeliveryStream. The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.
+     * The configuration for the intermediate Amazon S3 location from which Amazon Redshift obtains data. Restrictions are described in the topic for CreateDeliveryStream. The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.
      */
     S3Configuration: S3DestinationConfiguration;
     /**
-     * Describes CloudWatch logging options for your delivery stream.
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The Amazon S3 backup mode.
+     */
+    S3BackupMode?: RedshiftS3BackupMode;
+    /**
+     * The configuration for backup in Amazon S3.
+     */
+    S3BackupConfiguration?: S3DestinationConfiguration;
+    /**
+     * The CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
@@ -522,7 +724,7 @@ declare namespace Firehose {
      */
     Username: Username;
     /**
-     * Configures retry behavior in the event that Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
+     * The retry behavior in the event that Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
      */
     RetryOptions?: RedshiftRetryOptions;
     /**
@@ -530,7 +732,19 @@ declare namespace Firehose {
      */
     S3DestinationDescription: S3DestinationDescription;
     /**
-     * Describes CloudWatch logging options for your delivery stream.
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The Amazon S3 backup mode.
+     */
+    S3BackupMode?: RedshiftS3BackupMode;
+    /**
+     * The configuration for backup in Amazon S3.
+     */
+    S3BackupDescription?: S3DestinationDescription;
+    /**
+     * The CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
@@ -556,7 +770,7 @@ declare namespace Firehose {
      */
     Password?: Password;
     /**
-     * Configures retry behavior in the event that Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
+     * The retry behavior in the event that Firehose is unable to deliver documents to Amazon Redshift. Default value is 3600 (60 minutes).
      */
     RetryOptions?: RedshiftRetryOptions;
     /**
@@ -564,7 +778,19 @@ declare namespace Firehose {
      */
     S3Update?: S3DestinationUpdate;
     /**
-     * Describes CloudWatch logging options for your delivery stream.
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The Amazon S3 backup mode.
+     */
+    S3BackupMode?: RedshiftS3BackupMode;
+    /**
+     * The Amazon S3 destination for backup.
+     */
+    S3BackupUpdate?: S3DestinationUpdate;
+    /**
+     * The CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
@@ -575,7 +801,9 @@ declare namespace Firehose {
      */
     DurationInSeconds?: RedshiftRetryDurationInSeconds;
   }
+  export type RedshiftS3BackupMode = "Disabled"|"Enabled"|string;
   export type RoleARN = string;
+  export type S3BackupMode = "Disabled"|"Enabled"|string;
   export interface S3DestinationConfiguration {
     /**
      * The ARN of the AWS credentials.
@@ -602,7 +830,7 @@ declare namespace Firehose {
      */
     EncryptionConfiguration?: EncryptionConfiguration;
     /**
-     * Describes CloudWatch logging options for your delivery stream.
+     * The CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
@@ -624,7 +852,7 @@ declare namespace Firehose {
      */
     BufferingHints: BufferingHints;
     /**
-     * The compression format. If no value is specified, the default is NOCOMPRESSION.
+     * The compression format. If no value is specified, the default is UNCOMPRESSED.
      */
     CompressionFormat: CompressionFormat;
     /**
@@ -632,7 +860,7 @@ declare namespace Firehose {
      */
     EncryptionConfiguration: EncryptionConfiguration;
     /**
-     * Describes CloudWatch logging options for your delivery stream.
+     * The CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
@@ -654,7 +882,7 @@ declare namespace Firehose {
      */
     BufferingHints?: BufferingHints;
     /**
-     * The compression format. If no value is specified, the default is NOCOMPRESSION. The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift destinations because they are not supported by the Amazon Redshift COPY operation that reads from the S3 bucket.
+     * The compression format. If no value is specified, the default is UNCOMPRESSED. The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift destinations because they are not supported by the Amazon Redshift COPY operation that reads from the S3 bucket.
      */
     CompressionFormat?: CompressionFormat;
     /**
@@ -662,7 +890,7 @@ declare namespace Firehose {
      */
     EncryptionConfiguration?: EncryptionConfiguration;
     /**
-     * Describes CloudWatch logging options for your delivery stream.
+     * The CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
@@ -674,7 +902,7 @@ declare namespace Firehose {
      */
     DeliveryStreamName: DeliveryStreamName;
     /**
-     * Obtain this value from the VersionId result of the DeliveryStreamDescription operation. This value is required, and helps the service to perform conditional operations. For example, if there is a interleaving update and this value is null, then the update destination fails. After the update is successful, the VersionId value is updated. The service then performs a merge of the old configuration with the new configuration.
+     * Obtain this value from the VersionId result of DeliveryStreamDescription. This value is required, and helps the service to perform conditional operations. For example, if there is a interleaving update and this value is null, then the update destination fails. After the update is successful, the VersionId value is updated. The service then performs a merge of the old configuration with the new configuration.
      */
     CurrentDeliveryStreamVersionId: DeliveryStreamVersionId;
     /**
@@ -682,9 +910,13 @@ declare namespace Firehose {
      */
     DestinationId: DestinationId;
     /**
-     * Describes an update for a destination in Amazon S3.
+     * [Deprecated] Describes an update for a destination in Amazon S3.
      */
     S3DestinationUpdate?: S3DestinationUpdate;
+    /**
+     * Describes an update for a destination in Amazon S3.
+     */
+    ExtendedS3DestinationUpdate?: ExtendedS3DestinationUpdate;
     /**
      * Describes an update for a destination in Amazon Redshift.
      */

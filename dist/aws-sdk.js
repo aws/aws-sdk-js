@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.16
+// AWS SDK for JavaScript v2.7.17
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -44771,7 +44771,6 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "firehose-2015-08-04",
     "apiVersion": "2015-08-04",
     "endpointPrefix": "firehose",
     "jsonVersion": "1.1",
@@ -44779,7 +44778,8 @@ module.exports={
     "serviceAbbreviation": "Firehose",
     "serviceFullName": "Amazon Kinesis Firehose",
     "signatureVersion": "v4",
-    "targetPrefix": "Firehose_20150804"
+    "targetPrefix": "Firehose_20150804",
+    "uid": "firehose-2015-08-04"
   },
   "operations": {
     "CreateDeliveryStream": {
@@ -44791,7 +44791,37 @@ module.exports={
         "members": {
           "DeliveryStreamName": {},
           "S3DestinationConfiguration": {
-            "shape": "S3"
+            "shape": "S3",
+            "deprecated": true
+          },
+          "ExtendedS3DestinationConfiguration": {
+            "type": "structure",
+            "required": [
+              "RoleARN",
+              "BucketARN"
+            ],
+            "members": {
+              "RoleARN": {},
+              "BucketARN": {},
+              "Prefix": {},
+              "BufferingHints": {
+                "shape": "S7"
+              },
+              "CompressionFormat": {},
+              "EncryptionConfiguration": {
+                "shape": "Sb"
+              },
+              "CloudWatchLoggingOptions": {
+                "shape": "Sf"
+              },
+              "ProcessingConfiguration": {
+                "shape": "Sk"
+              },
+              "S3BackupMode": {},
+              "S3BackupConfiguration": {
+                "shape": "S3"
+              }
+            }
           },
           "RedshiftDestinationConfiguration": {
             "type": "structure",
@@ -44807,18 +44837,25 @@ module.exports={
               "RoleARN": {},
               "ClusterJDBCURL": {},
               "CopyCommand": {
-                "shape": "Sl"
+                "shape": "Sv"
               },
               "Username": {
-                "shape": "Sp"
+                "shape": "Sz"
               },
               "Password": {
-                "shape": "Sq"
+                "shape": "S10"
               },
               "RetryOptions": {
-                "shape": "Sr"
+                "shape": "S11"
               },
               "S3Configuration": {
+                "shape": "S3"
+              },
+              "ProcessingConfiguration": {
+                "shape": "Sk"
+              },
+              "S3BackupMode": {},
+              "S3BackupConfiguration": {
                 "shape": "S3"
               },
               "CloudWatchLoggingOptions": {
@@ -44842,14 +44879,17 @@ module.exports={
               "TypeName": {},
               "IndexRotationPeriod": {},
               "BufferingHints": {
-                "shape": "Sy"
+                "shape": "S19"
               },
               "RetryOptions": {
-                "shape": "S11"
+                "shape": "S1c"
               },
               "S3BackupMode": {},
               "S3Configuration": {
                 "shape": "S3"
+              },
+              "ProcessingConfiguration": {
+                "shape": "Sk"
               },
               "CloudWatchLoggingOptions": {
                 "shape": "Sf"
@@ -44931,7 +44971,39 @@ module.exports={
                   "members": {
                     "DestinationId": {},
                     "S3DestinationDescription": {
-                      "shape": "S1i"
+                      "shape": "S1t"
+                    },
+                    "ExtendedS3DestinationDescription": {
+                      "type": "structure",
+                      "required": [
+                        "RoleARN",
+                        "BucketARN",
+                        "BufferingHints",
+                        "CompressionFormat",
+                        "EncryptionConfiguration"
+                      ],
+                      "members": {
+                        "RoleARN": {},
+                        "BucketARN": {},
+                        "Prefix": {},
+                        "BufferingHints": {
+                          "shape": "S7"
+                        },
+                        "CompressionFormat": {},
+                        "EncryptionConfiguration": {
+                          "shape": "Sb"
+                        },
+                        "CloudWatchLoggingOptions": {
+                          "shape": "Sf"
+                        },
+                        "ProcessingConfiguration": {
+                          "shape": "Sk"
+                        },
+                        "S3BackupMode": {},
+                        "S3BackupDescription": {
+                          "shape": "S1t"
+                        }
+                      }
                     },
                     "RedshiftDestinationDescription": {
                       "type": "structure",
@@ -44946,16 +45018,23 @@ module.exports={
                         "RoleARN": {},
                         "ClusterJDBCURL": {},
                         "CopyCommand": {
-                          "shape": "Sl"
+                          "shape": "Sv"
                         },
                         "Username": {
-                          "shape": "Sp"
+                          "shape": "Sz"
                         },
                         "RetryOptions": {
-                          "shape": "Sr"
+                          "shape": "S11"
                         },
                         "S3DestinationDescription": {
-                          "shape": "S1i"
+                          "shape": "S1t"
+                        },
+                        "ProcessingConfiguration": {
+                          "shape": "Sk"
+                        },
+                        "S3BackupMode": {},
+                        "S3BackupDescription": {
+                          "shape": "S1t"
                         },
                         "CloudWatchLoggingOptions": {
                           "shape": "Sf"
@@ -44971,14 +45050,17 @@ module.exports={
                         "TypeName": {},
                         "IndexRotationPeriod": {},
                         "BufferingHints": {
-                          "shape": "Sy"
+                          "shape": "S19"
                         },
                         "RetryOptions": {
-                          "shape": "S11"
+                          "shape": "S1c"
                         },
                         "S3BackupMode": {},
                         "S3DestinationDescription": {
-                          "shape": "S1i"
+                          "shape": "S1t"
+                        },
+                        "ProcessingConfiguration": {
+                          "shape": "Sk"
                         },
                         "CloudWatchLoggingOptions": {
                           "shape": "Sf"
@@ -45033,7 +45115,7 @@ module.exports={
         "members": {
           "DeliveryStreamName": {},
           "Record": {
-            "shape": "S1q"
+            "shape": "S22"
           }
         }
       },
@@ -45059,7 +45141,7 @@ module.exports={
           "Records": {
             "type": "list",
             "member": {
-              "shape": "S1q"
+              "shape": "S22"
             }
           }
         }
@@ -45101,7 +45183,33 @@ module.exports={
           "CurrentDeliveryStreamVersionId": {},
           "DestinationId": {},
           "S3DestinationUpdate": {
-            "shape": "S23"
+            "shape": "S2f",
+            "deprecated": true
+          },
+          "ExtendedS3DestinationUpdate": {
+            "type": "structure",
+            "members": {
+              "RoleARN": {},
+              "BucketARN": {},
+              "Prefix": {},
+              "BufferingHints": {
+                "shape": "S7"
+              },
+              "CompressionFormat": {},
+              "EncryptionConfiguration": {
+                "shape": "Sb"
+              },
+              "CloudWatchLoggingOptions": {
+                "shape": "Sf"
+              },
+              "ProcessingConfiguration": {
+                "shape": "Sk"
+              },
+              "S3BackupMode": {},
+              "S3BackupUpdate": {
+                "shape": "S2f"
+              }
+            }
           },
           "RedshiftDestinationUpdate": {
             "type": "structure",
@@ -45109,19 +45217,26 @@ module.exports={
               "RoleARN": {},
               "ClusterJDBCURL": {},
               "CopyCommand": {
-                "shape": "Sl"
+                "shape": "Sv"
               },
               "Username": {
-                "shape": "Sp"
+                "shape": "Sz"
               },
               "Password": {
-                "shape": "Sq"
+                "shape": "S10"
               },
               "RetryOptions": {
-                "shape": "Sr"
+                "shape": "S11"
               },
               "S3Update": {
-                "shape": "S23"
+                "shape": "S2f"
+              },
+              "ProcessingConfiguration": {
+                "shape": "Sk"
+              },
+              "S3BackupMode": {},
+              "S3BackupUpdate": {
+                "shape": "S2f"
               },
               "CloudWatchLoggingOptions": {
                 "shape": "Sf"
@@ -45137,13 +45252,16 @@ module.exports={
               "TypeName": {},
               "IndexRotationPeriod": {},
               "BufferingHints": {
-                "shape": "Sy"
+                "shape": "S19"
               },
               "RetryOptions": {
-                "shape": "S11"
+                "shape": "S1c"
               },
               "S3Update": {
-                "shape": "S23"
+                "shape": "S2f"
+              },
+              "ProcessingConfiguration": {
+                "shape": "Sk"
               },
               "CloudWatchLoggingOptions": {
                 "shape": "Sf"
@@ -45217,7 +45335,41 @@ module.exports={
         "LogStreamName": {}
       }
     },
-    "Sl": {
+    "Sk": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "Processors": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "Type"
+            ],
+            "members": {
+              "Type": {},
+              "Parameters": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "ParameterName",
+                    "ParameterValue"
+                  ],
+                  "members": {
+                    "ParameterName": {},
+                    "ParameterValue": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Sv": {
       "type": "structure",
       "required": [
         "DataTableName"
@@ -45228,15 +45380,15 @@ module.exports={
         "CopyOptions": {}
       }
     },
-    "Sp": {
+    "Sz": {
       "type": "string",
       "sensitive": true
     },
-    "Sq": {
+    "S10": {
       "type": "string",
       "sensitive": true
     },
-    "Sr": {
+    "S11": {
       "type": "structure",
       "members": {
         "DurationInSeconds": {
@@ -45244,7 +45396,7 @@ module.exports={
         }
       }
     },
-    "Sy": {
+    "S19": {
       "type": "structure",
       "members": {
         "IntervalInSeconds": {
@@ -45255,7 +45407,7 @@ module.exports={
         }
       }
     },
-    "S11": {
+    "S1c": {
       "type": "structure",
       "members": {
         "DurationInSeconds": {
@@ -45263,7 +45415,7 @@ module.exports={
         }
       }
     },
-    "S1i": {
+    "S1t": {
       "type": "structure",
       "required": [
         "RoleARN",
@@ -45288,7 +45440,7 @@ module.exports={
         }
       }
     },
-    "S1q": {
+    "S22": {
       "type": "structure",
       "required": [
         "Data"
@@ -45299,7 +45451,7 @@ module.exports={
         }
       }
     },
-    "S23": {
+    "S2f": {
       "type": "structure",
       "members": {
         "RoleARN": {},
@@ -84869,14 +85021,14 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "storagegateway-2013-06-30",
     "apiVersion": "2013-06-30",
     "endpointPrefix": "storagegateway",
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "AWS Storage Gateway",
     "signatureVersion": "v4",
-    "targetPrefix": "StorageGateway_20130630"
+    "targetPrefix": "StorageGateway_20130630",
+    "uid": "storagegateway-2013-06-30"
   },
   "operations": {
     "ActivateGateway": {
@@ -85044,6 +85196,7 @@ module.exports={
           },
           "SnapshotId": {},
           "TargetName": {},
+          "SourceVolumeARN": {},
           "NetworkInterfaceId": {},
           "ClientToken": {}
         }
@@ -85053,6 +85206,37 @@ module.exports={
         "members": {
           "VolumeARN": {},
           "TargetARN": {}
+        }
+      }
+    },
+    "CreateNFSFileShare": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ClientToken",
+          "GatewayARN",
+          "Role",
+          "LocationARN"
+        ],
+        "members": {
+          "ClientToken": {},
+          "NFSFileShareDefaults": {
+            "shape": "S15"
+          },
+          "GatewayARN": {},
+          "KMSEncrypted": {
+            "type": "boolean"
+          },
+          "KMSKey": {},
+          "Role": {},
+          "LocationARN": {},
+          "DefaultStorageClass": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FileShareARN": {}
         }
       }
     },
@@ -85178,7 +85362,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S1l"
+            "shape": "S1w"
           }
         }
       }
@@ -85219,6 +85403,23 @@ module.exports={
         "members": {
           "TargetARN": {},
           "InitiatorName": {}
+        }
+      }
+    },
+    "DeleteFileShare": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "FileShareARN"
+        ],
+        "members": {
+          "FileShareARN": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FileShareARN": {}
         }
       }
     },
@@ -85375,7 +85576,7 @@ module.exports={
         ],
         "members": {
           "VolumeARNs": {
-            "shape": "S2a"
+            "shape": "S2n"
           }
         }
       },
@@ -85399,7 +85600,10 @@ module.exports={
                 },
                 "SourceSnapshotId": {},
                 "VolumeiSCSIAttributes": {
-                  "shape": "S2i"
+                  "shape": "S2v"
+                },
+                "CreatedDate": {
+                  "type": "timestamp"
                 }
               }
             }
@@ -85497,6 +85701,48 @@ module.exports={
         }
       }
     },
+    "DescribeNFSFileShares": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "FileShareARNList"
+        ],
+        "members": {
+          "FileShareARNList": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NFSFileShareInfoList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "NFSFileShareDefaults": {
+                  "shape": "S15"
+                },
+                "FileShareARN": {},
+                "FileShareId": {},
+                "FileShareStatus": {},
+                "GatewayARN": {},
+                "KMSEncrypted": {
+                  "type": "boolean"
+                },
+                "KMSKey": {},
+                "Path": {},
+                "Role": {},
+                "LocationARN": {},
+                "DefaultStorageClass": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "DescribeSnapshotSchedule": {
       "input": {
         "type": "structure",
@@ -85530,7 +85776,7 @@ module.exports={
         ],
         "members": {
           "VolumeARNs": {
-            "shape": "S2a"
+            "shape": "S2n"
           }
         }
       },
@@ -85558,7 +85804,10 @@ module.exports={
                   "type": "boolean"
                 },
                 "VolumeiSCSIAttributes": {
-                  "shape": "S2i"
+                  "shape": "S2v"
+                },
+                "CreatedDate": {
+                  "type": "timestamp"
                 }
               }
             }
@@ -85571,7 +85820,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S1l"
+            "shape": "S1w"
           },
           "Marker": {},
           "Limit": {
@@ -85589,6 +85838,9 @@ module.exports={
               "members": {
                 "TapeARN": {},
                 "TapeBarcode": {},
+                "TapeCreatedDate": {
+                  "type": "timestamp"
+                },
                 "TapeSizeInBytes": {
                   "type": "long"
                 },
@@ -85651,7 +85903,7 @@ module.exports={
         "members": {
           "GatewayARN": {},
           "TapeARNs": {
-            "shape": "S1l"
+            "shape": "S1w"
           },
           "Marker": {},
           "Limit": {
@@ -85669,6 +85921,9 @@ module.exports={
               "members": {
                 "TapeARN": {},
                 "TapeBarcode": {},
+                "TapeCreatedDate": {
+                  "type": "timestamp"
+                },
                 "TapeSizeInBytes": {
                   "type": "long"
                 },
@@ -85804,6 +86059,37 @@ module.exports={
         }
       }
     },
+    "ListFileShares": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "GatewayARN": {},
+          "Limit": {
+            "type": "integer"
+          },
+          "Marker": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Marker": {},
+          "NextMarker": {},
+          "FileShareInfoList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "FileShareARN": {},
+                "FileShareId": {},
+                "FileShareStatus": {},
+                "GatewayARN": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "ListGateways": {
       "input": {
         "type": "structure",
@@ -85898,7 +86184,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S1l"
+            "shape": "S1w"
           },
           "Marker": {},
           "Limit": {
@@ -86261,6 +86547,31 @@ module.exports={
         }
       }
     },
+    "UpdateNFSFileShare": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "FileShareARN"
+        ],
+        "members": {
+          "FileShareARN": {},
+          "KMSEncrypted": {
+            "type": "boolean"
+          },
+          "KMSKey": {},
+          "NFSFileShareDefaults": {
+            "shape": "S15"
+          },
+          "DefaultStorageClass": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FileShareARN": {}
+        }
+      }
+    },
     "UpdateSnapshotSchedule": {
       "input": {
         "type": "structure",
@@ -86326,15 +86637,28 @@ module.exports={
         }
       }
     },
-    "S1l": {
+    "S15": {
+      "type": "structure",
+      "members": {
+        "FileMode": {},
+        "DirectoryMode": {},
+        "GroupId": {
+          "type": "long"
+        },
+        "OwnerId": {
+          "type": "long"
+        }
+      }
+    },
+    "S1w": {
       "type": "list",
       "member": {}
     },
-    "S2a": {
+    "S2n": {
       "type": "list",
       "member": {}
     },
-    "S2i": {
+    "S2v": {
       "type": "structure",
       "members": {
         "TargetARN": {},
@@ -89815,9 +90139,12 @@ AWS.Config = AWS.util.inherit({
 
   setPromisesDependency: function setPromisesDependency(dep) {
     PromisesDependency = dep;
+    if (dep === null && typeof Promise === 'function') {
+      PromisesDependency = Promise;
+    }
     var constructors = [AWS.Request, AWS.Credentials, AWS.CredentialProviderChain];
     if (AWS.S3 && AWS.S3.ManagedUpload) constructors.push(AWS.S3.ManagedUpload);
-    AWS.util.addPromises(constructors, dep);
+    AWS.util.addPromises(constructors, PromisesDependency);
   },
 
 
@@ -89841,7 +90168,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.16',
+  VERSION: '2.7.17',
 
 
   Signers: {},
