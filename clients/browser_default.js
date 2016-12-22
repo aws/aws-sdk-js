@@ -48,6 +48,7 @@ module.exports = {
   Polly: require('./polly'),
   RDS: require('./rds'),
   Redshift: require('./redshift'),
+  Rekognition: require('./rekognition'),
   Route53: require('./route53'),
   Route53Domains: require('./route53domains'),
   S3: require('./s3'),

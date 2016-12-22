@@ -12,19 +12,19 @@ declare class ECR extends Service {
   constructor(options?: ECR.Types.ClientConfiguration)
   config: Config & ECR.Types.ClientConfiguration;
   /**
-   * Check the availability of multiple image layers in a specified registry and repository.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Check the availability of multiple image layers in a specified registry and repository.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   batchCheckLayerAvailability(params: ECR.Types.BatchCheckLayerAvailabilityRequest, callback?: (err: AWSError, data: ECR.Types.BatchCheckLayerAvailabilityResponse) => void): Request<ECR.Types.BatchCheckLayerAvailabilityResponse, AWSError>;
   /**
-   * Check the availability of multiple image layers in a specified registry and repository.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Check the availability of multiple image layers in a specified registry and repository.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   batchCheckLayerAvailability(callback?: (err: AWSError, data: ECR.Types.BatchCheckLayerAvailabilityResponse) => void): Request<ECR.Types.BatchCheckLayerAvailabilityResponse, AWSError>;
   /**
-   * Deletes a list of specified images within a specified repository. Images are specified with either imageTag or imageDigest.
+   * Deletes a list of specified images within a specified repository. Images are specified with either imageTag or imageDigest. You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository. You can completely delete an image (and all of its tags) by specifying the image's digest in your request.
    */
   batchDeleteImage(params: ECR.Types.BatchDeleteImageRequest, callback?: (err: AWSError, data: ECR.Types.BatchDeleteImageResponse) => void): Request<ECR.Types.BatchDeleteImageResponse, AWSError>;
   /**
-   * Deletes a list of specified images within a specified repository. Images are specified with either imageTag or imageDigest.
+   * Deletes a list of specified images within a specified repository. Images are specified with either imageTag or imageDigest. You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository. You can completely delete an image (and all of its tags) by specifying the image's digest in your request.
    */
   batchDeleteImage(callback?: (err: AWSError, data: ECR.Types.BatchDeleteImageResponse) => void): Request<ECR.Types.BatchDeleteImageResponse, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class ECR extends Service {
    */
   batchGetImage(callback?: (err: AWSError, data: ECR.Types.BatchGetImageResponse) => void): Request<ECR.Types.BatchGetImageResponse, AWSError>;
   /**
-   * Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   completeLayerUpload(params: ECR.Types.CompleteLayerUploadRequest, callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
   /**
-   * Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   completeLayerUpload(callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class ECR extends Service {
    */
   deleteRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryPolicyResponse) => void): Request<ECR.Types.DeleteRepositoryPolicyResponse, AWSError>;
   /**
-   * Returns metadata about the images in a repository, including image size and creation date.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
+   * Returns metadata about the images in a repository, including image size, image tags, and creation date.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
    */
   describeImages(params: ECR.Types.DescribeImagesRequest, callback?: (err: AWSError, data: ECR.Types.DescribeImagesResponse) => void): Request<ECR.Types.DescribeImagesResponse, AWSError>;
   /**
-   * Returns metadata about the images in a repository, including image size and creation date.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
+   * Returns metadata about the images in a repository, including image size, image tags, and creation date.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
    */
   describeImages(callback?: (err: AWSError, data: ECR.Types.DescribeImagesResponse) => void): Request<ECR.Types.DescribeImagesResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class ECR extends Service {
    */
   getAuthorizationToken(callback?: (err: AWSError, data: ECR.Types.GetAuthorizationTokenResponse) => void): Request<ECR.Types.GetAuthorizationTokenResponse, AWSError>;
   /**
-   * Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   getDownloadUrlForLayer(params: ECR.Types.GetDownloadUrlForLayerRequest, callback?: (err: AWSError, data: ECR.Types.GetDownloadUrlForLayerResponse) => void): Request<ECR.Types.GetDownloadUrlForLayerResponse, AWSError>;
   /**
-   * Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   getDownloadUrlForLayer(callback?: (err: AWSError, data: ECR.Types.GetDownloadUrlForLayerResponse) => void): Request<ECR.Types.GetDownloadUrlForLayerResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class ECR extends Service {
    */
   getRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.GetRepositoryPolicyResponse) => void): Request<ECR.Types.GetRepositoryPolicyResponse, AWSError>;
   /**
-   * Notify Amazon ECR that you intend to upload an image layer.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Notify Amazon ECR that you intend to upload an image layer.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   initiateLayerUpload(params: ECR.Types.InitiateLayerUploadRequest, callback?: (err: AWSError, data: ECR.Types.InitiateLayerUploadResponse) => void): Request<ECR.Types.InitiateLayerUploadResponse, AWSError>;
   /**
-   * Notify Amazon ECR that you intend to upload an image layer.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Notify Amazon ECR that you intend to upload an image layer.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   initiateLayerUpload(callback?: (err: AWSError, data: ECR.Types.InitiateLayerUploadResponse) => void): Request<ECR.Types.InitiateLayerUploadResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class ECR extends Service {
    */
   listImages(callback?: (err: AWSError, data: ECR.Types.ListImagesResponse) => void): Request<ECR.Types.ListImagesResponse, AWSError>;
   /**
-   * Creates or updates the image manifest associated with an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Creates or updates the image manifest and tags associated with an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   putImage(params: ECR.Types.PutImageRequest, callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
-   * Creates or updates the image manifest associated with an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Creates or updates the image manifest and tags associated with an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   putImage(callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class ECR extends Service {
    */
   setRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
   /**
-   * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   uploadLayerPart(params: ECR.Types.UploadLayerPartRequest, callback?: (err: AWSError, data: ECR.Types.UploadLayerPartResponse) => void): Request<ECR.Types.UploadLayerPartResponse, AWSError>;
   /**
-   * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the docker CLI to pull, tag, and push images. 
+   * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   uploadLayerPart(callback?: (err: AWSError, data: ECR.Types.UploadLayerPartResponse) => void): Request<ECR.Types.UploadLayerPartResponse, AWSError>;
 }
@@ -227,6 +227,10 @@ declare namespace ECR {
      * A list of image ID references that correspond to images to describe. The format of the imageIds reference is imageTag=tag or imageDigest=digest.
      */
     imageIds: ImageIdentifierList;
+    /**
+     * The accepted media types for the request. Valid values: application/vnd.docker.distribution.manifest.v1+json | application/vnd.docker.distribution.manifest.v2+json | application/vnd.oci.image.manifest.v1+json 
+     */
+    acceptedMediaTypes?: MediaTypeList;
   }
   export interface BatchGetImageResponse {
     /**
@@ -341,7 +345,7 @@ declare namespace ECR {
   }
   export interface DescribeImagesRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.
+     * The AWS account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -572,13 +576,17 @@ declare namespace ECR {
      */
     layerDigest?: LayerDigest;
     /**
-     * The availability status of the image layer. Valid values are AVAILABLE and UNAVAILABLE.
+     * The availability status of the image layer.
      */
     layerAvailability?: LayerAvailability;
     /**
      * The size, in bytes, of the image layer.
      */
     layerSize?: LayerSizeInBytes;
+    /**
+     * The media type of the layer, such as application/vnd.docker.image.rootfs.diff.tar.gzip or application/vnd.oci.image.layer.v1.tar+gzip.
+     */
+    mediaType?: MediaType;
   }
   export type LayerAvailability = "AVAILABLE"|"UNAVAILABLE"|string;
   export type LayerDigest = string;
@@ -642,6 +650,8 @@ declare namespace ECR {
     nextToken?: NextToken;
   }
   export type MaxResults = number;
+  export type MediaType = string;
+  export type MediaTypeList = MediaType[];
   export type NextToken = string;
   export type PartSize = number;
   export type ProxyEndpoint = string;
@@ -659,6 +669,10 @@ declare namespace ECR {
      * The image manifest corresponding to the image to be uploaded.
      */
     imageManifest: ImageManifest;
+    /**
+     * The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
+     */
+    imageTag?: ImageTag;
   }
   export interface PutImageResponse {
     /**

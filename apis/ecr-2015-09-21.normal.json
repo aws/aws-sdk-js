@@ -25,7 +25,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ServerException"}
       ],
-      "documentation":"<p>Check the availability of multiple image layers in a specified registry and repository.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
+      "documentation":"<p>Check the availability of multiple image layers in a specified registry and repository.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
     "BatchDeleteImage":{
       "name":"BatchDeleteImage",
@@ -40,7 +40,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"RepositoryNotFoundException"}
       ],
-      "documentation":"<p>Deletes a list of specified images within a specified repository. Images are specified with either <code>imageTag</code> or <code>imageDigest</code>.</p>"
+      "documentation":"<p>Deletes a list of specified images within a specified repository. Images are specified with either <code>imageTag</code> or <code>imageDigest</code>.</p> <p>You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository.</p> <p>You can completely delete an image (and all of its tags) by specifying the image's digest in your request.</p>"
     },
     "BatchGetImage":{
       "name":"BatchGetImage",
@@ -75,7 +75,7 @@
         {"shape":"LayerAlreadyExistsException"},
         {"shape":"EmptyUploadException"}
       ],
-      "documentation":"<p>Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
+      "documentation":"<p>Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
     "CreateRepository":{
       "name":"CreateRepository",
@@ -139,7 +139,7 @@
         {"shape":"RepositoryNotFoundException"},
         {"shape":"ImageNotFoundException"}
       ],
-      "documentation":"<p>Returns metadata about the images in a repository, including image size and creation date.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>"
+      "documentation":"<p>Returns metadata about the images in a repository, including image size, image tags, and creation date.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>"
     },
     "DescribeRepositories":{
       "name":"DescribeRepositories",
@@ -185,7 +185,7 @@
         {"shape":"LayerInaccessibleException"},
         {"shape":"RepositoryNotFoundException"}
       ],
-      "documentation":"<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
+      "documentation":"<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
     "GetRepositoryPolicy":{
       "name":"GetRepositoryPolicy",
@@ -216,7 +216,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"RepositoryNotFoundException"}
       ],
-      "documentation":"<p>Notify Amazon ECR that you intend to upload an image layer.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
+      "documentation":"<p>Notify Amazon ECR that you intend to upload an image layer.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
     "ListImages":{
       "name":"ListImages",
@@ -249,7 +249,7 @@
         {"shape":"LayersNotFoundException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Creates or updates the image manifest associated with an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
+      "documentation":"<p>Creates or updates the image manifest and tags associated with an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
     "SetRepositoryPolicy":{
       "name":"SetRepositoryPolicy",
@@ -282,7 +282,7 @@
         {"shape":"UploadNotFoundException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Uploads an image layer part to Amazon ECR.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers. Use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
+      "documentation":"<p>Uploads an image layer part to Amazon ECR.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     }
   },
   "shapes":{
@@ -400,6 +400,10 @@
         "imageIds":{
           "shape":"ImageIdentifierList",
           "documentation":"<p>A list of image ID references that correspond to images to describe. The format of the <code>imageIds</code> reference is <code>imageTag=tag</code> or <code>imageDigest=digest</code>.</p>"
+        },
+        "acceptedMediaTypes":{
+          "shape":"MediaTypeList",
+          "documentation":"<p>The accepted media types for the request.</p> <p>Valid values: <code>application/vnd.docker.distribution.manifest.v1+json</code> | <code>application/vnd.docker.distribution.manifest.v2+json</code> | <code>application/vnd.oci.image.manifest.v1+json</code> </p>"
         }
       }
     },
@@ -568,7 +572,7 @@
       "members":{
         "registryId":{
           "shape":"RegistryId",
-          "documentation":"<p>The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation":"<p>The AWS account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName":{
           "shape":"RepositoryName",
@@ -967,11 +971,15 @@
         },
         "layerAvailability":{
           "shape":"LayerAvailability",
-          "documentation":"<p>The availability status of the image layer. Valid values are <code>AVAILABLE</code> and <code>UNAVAILABLE</code>.</p>"
+          "documentation":"<p>The availability status of the image layer.</p>"
         },
         "layerSize":{
           "shape":"LayerSizeInBytes",
           "documentation":"<p>The size, in bytes, of the image layer.</p>"
+        },
+        "mediaType":{
+          "shape":"MediaType",
+          "documentation":"<p>The media type of the layer, such as <code>application/vnd.docker.image.rootfs.diff.tar.gzip</code> or <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.</p>"
         }
       },
       "documentation":"<p>An object representing an Amazon ECR image layer.</p>"
@@ -1138,6 +1146,16 @@
       "max":100,
       "min":1
     },
+    "MediaType":{
+      "type":"string",
+      "pattern":"\\w{1,127}\\/[-+.\\w]{1,127}"
+    },
+    "MediaTypeList":{
+      "type":"list",
+      "member":{"shape":"MediaType"},
+      "max":100,
+      "min":1
+    },
     "NextToken":{"type":"string"},
     "PartSize":{
       "type":"long",
@@ -1163,6 +1181,10 @@
         "imageManifest":{
           "shape":"ImageManifest",
           "documentation":"<p>The image manifest corresponding to the image to be uploaded.</p>"
+        },
+        "imageTag":{
+          "shape":"ImageTag",
+          "documentation":"<p>The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.</p>"
         }
       }
     },

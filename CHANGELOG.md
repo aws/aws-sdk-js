@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.17-->
+<!--LATEST=2.7.18-->
 <!--ENTRYINSERT-->
+
+## 2.7.18
+* feature: Rekognition: CORS support added. Now a default service in the browser build of the JavaScript SDK.
+* feature: EC2: Adds cross region encrypted snapshot copying (CopyDBSnapshot).
+* feature: ECR: Amazon ECR now implements Docker Image Manifest V2, Schema 2 providing the ability to use multiple tags per image, support for storing Windows container images, and compatibility with the Open Container Initiative (OCI) image format. With this update, customers can also add tags to an image via PutImage and delete tags using BatchDeleteImage.
 
 ## 2.7.17
 * bugfix: Promises: Fixes issue introduced in v2.6.12. Calling AWS.config.setPromisesDependency(null) will once again force the SDK to use native promises if they are available.
