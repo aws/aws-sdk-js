@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.18-->
+<!--LATEST=2.7.19-->
 <!--ENTRYINSERT-->
+
+## 2.7.19
+* feature: APIGateway: This update introduces two new operations used to dynamically discover SDK types and what configuration each type accepts.
+* feature: ElasticBeanstalk: Adds a new feature for managing Application Version Lifecycle.
+* feature: IAM: Adds service-specific credentials to IAM service to make it easier to onboard CodeCommit customers. These are username/password credentials that work with a single service.
 
 ## 2.7.18
 * feature: Rekognition: CORS support added. Now a default service in the browser build of the JavaScript SDK.

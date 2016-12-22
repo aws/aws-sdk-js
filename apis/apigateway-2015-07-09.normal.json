@@ -1046,6 +1046,33 @@
       ],
       "documentation":"<p>Generates a client SDK for a <a>RestApi</a> and <a>Stage</a>.</p>"
     },
+    "GetSdkType":{
+      "name":"GetSdkType",
+      "http":{
+        "method":"GET",
+        "requestUri":"/sdktypes/{sdktype_id}"
+      },
+      "input":{"shape":"GetSdkTypeRequest"},
+      "output":{"shape":"SdkType"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
+    "GetSdkTypes":{
+      "name":"GetSdkTypes",
+      "http":{
+        "method":"GET",
+        "requestUri":"/sdktypes"
+      },
+      "input":{"shape":"GetSdkTypesRequest"},
+      "output":{"shape":"SdkTypes"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"TooManyRequestsException"}
+      ]
+    },
     "GetStage":{
       "name":"GetStage",
       "http":{
@@ -3771,6 +3798,37 @@
       },
       "documentation":"<p>Request a new generated client SDK for a <a>RestApi</a> and <a>Stage</a>.</p>"
     },
+    "GetSdkTypeRequest":{
+      "type":"structure",
+      "required":["id"],
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the queried <a>SdkType</a> instance.</p>",
+          "location":"uri",
+          "locationName":"sdktype_id"
+        }
+      },
+      "documentation":"<p>Get an <a>SdkType</a> instance.</p>"
+    },
+    "GetSdkTypesRequest":{
+      "type":"structure",
+      "members":{
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The position of the last fetched element in the <a>SdkTypes</a> collection.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of <a>SdkType</a> instances to be returned. </p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>Get the <a>SdkTypes</a> collection.</p>"
+    },
     "GetStageRequest":{
       "type":"structure",
       "required":[
@@ -4046,7 +4104,7 @@
         },
         "uri":{
           "shape":"String",
-          "documentation":"<p>Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href=\"https://www.ietf.org/rfc/rfc3986.txt\" target=\"_blank\">RFC-3986 specification</a>. For AWS integrations, the URI should be of the form <code>arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}</code>. <code>Region</code>, <code>subdomain</code> and <code>service</code> are used to determine the right endpoint. For AWS services that use the <code>Action=</code> query string parameter, <code>service_api</code> should be a valid action for the desired service. For RESTful AWS service APIs, <code>path</code> is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>.</p>"
+          "documentation":"<p>Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href=\"https://en.wikipedia.org/wiki/Uniform_Resource_Identifier\" target=\"_blank\">RFC-3986 specification</a>. For AWS integrations, the URI should be of the form <code>arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}</code>. <code>Region</code>, <code>subdomain</code> and <code>service</code> are used to determine the right endpoint. For AWS services that use the <code>Action=</code> query string parameter, <code>service_api</code> should be a valid action for the desired service. For RESTful AWS service APIs, <code>path</code> is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>.</p>"
         },
         "credentials":{
           "shape":"String",
@@ -4081,7 +4139,7 @@
           "documentation":"<p>Specifies the integration's responses.</p> <div class=\"remarks\"> <p/> <h4>Example: Get integration responses of a method</h4> <h5>Request</h5> <p/> <pre><code>GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash} </code></pre> <h5>Response</h5> <p>The successful response returns <code>200 OK</code> status and a payload as follows:</p> <pre><code>{ \"_links\": { \"curies\": { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html\", \"name\": \"integrationresponse\", \"templated\": true }, \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\", \"title\": \"200\" }, \"integrationresponse:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" }, \"integrationresponse:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" } }, \"responseParameters\": { \"method.response.header.Content-Type\": \"'application/xml'\" }, \"responseTemplates\": { \"application/json\": \"$util.urlDecode(\\\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\\\")\\n\" }, \"statusCode\": \"200\" }</code></pre> <p/> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
         }
       },
-      "documentation":"<p>Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration.</p> <div class=\"remarks\">In the API Gateway console, the built-in Lambda integration is an AWS integration.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a>, <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/.html\"/> </div>"
+      "documentation":"<p>Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration.</p> <div class=\"remarks\">In the API Gateway console, the built-in Lambda integration is an AWS integration.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
     },
     "IntegrationResponse":{
       "type":"structure",
@@ -4194,6 +4252,14 @@
       "type":"list",
       "member":{"shape":"RestApi"}
     },
+    "ListOfSdkConfigurationProperty":{
+      "type":"list",
+      "member":{"shape":"SdkConfigurationProperty"}
+    },
+    "ListOfSdkType":{
+      "type":"list",
+      "member":{"shape":"SdkType"}
+    },
     "ListOfStage":{
       "type":"list",
       "member":{"shape":"Stage"}
@@ -4287,6 +4353,10 @@
         "apiKeyRequired":{
           "shape":"NullableBoolean",
           "documentation":"<p>A boolean flag specifying whether a valid <a>ApiKey</a> is required to invoke this method.</p>"
+        },
+        "operationName":{
+          "shape":"String",
+          "documentation":"<p>A human-friendly operation identifier for the method. For example, you can assign the <code>operationName</code> of <code>ListPets</code> for the <code>GET /pets</code> method in <a href=\"http://petstore-demo-endpoint.execute-api.com/petstore/pets\">PetStore</a> example.</p>"
         },
         "requestParameters":{
           "shape":"MapOfStringToBoolean",
@@ -4634,6 +4704,10 @@
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the method required a valid <a>ApiKey</a>.</p>"
         },
+        "operationName":{
+          "shape":"String",
+          "documentation":"<p>A human-friendly operation identifier for the method. For example, you can assign the <code>operationName</code> of <code>ListPets</code> for the <code>GET /pets</code> method in <a href=\"http://petstore-demo-endpoint.execute-api.com/petstore/pets\">PetStore</a> example.</p>"
+        },
         "requestParameters":{
           "shape":"MapOfStringToBoolean",
           "documentation":"<p>A key-value map defining required or optional method request parameters that can be accepted by Amazon API Gateway. A key defines a method request parameter name matching the pattern of <code>method.request.{location}.{name}</code>, where <code>location</code> is <code>querystring</code>, <code>path</code>, or <code>header</code> and <code>name</code> is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (<code>true</code>) or optional (<code>false</code>). The method request parameter names defined here are available in <a>Integration</a> to be mapped to integration request parameters or body-mapping templates.</p>"
@@ -4844,6 +4918,32 @@
       },
       "documentation":"<p>Contains references to your APIs and links that guide you in how to interact with your collection. A collection offers a paginated view of your APIs.</p> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Create an API</a> </div>"
     },
+    "SdkConfigurationProperty":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of a an <a>SdkType</a> configuration property.</p>"
+        },
+        "friendlyName":{
+          "shape":"String",
+          "documentation":"<p>The user-friendly name of an <a>SdkType</a> configuration property.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of an <a>SdkType</a> configuration property.</p>"
+        },
+        "required":{
+          "shape":"Boolean",
+          "documentation":"<p>A boolean flag of an <a>SdkType</a> configuration property to indicate if the associated SDK configuration property is required (<code>true</code>) or not (<code>false</code>).</p>"
+        },
+        "defaultValue":{
+          "shape":"String",
+          "documentation":"<p>The default value of an <a>SdkType</a> configuration property.</p>"
+        }
+      },
+      "documentation":"<p>A configuration property of an SDK type.</p>"
+    },
     "SdkResponse":{
       "type":"structure",
       "members":{
@@ -4866,6 +4966,40 @@
       },
       "documentation":"<p>The binary blob response to <a>GetSdk</a>, which contains the generated SDK.</p>",
       "payload":"body"
+    },
+    "SdkType":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The identifier of an <a>SdkType</a> instance.</p>"
+        },
+        "friendlyName":{
+          "shape":"String",
+          "documentation":"<p>The user-friendly name of an <a>SdkType</a> instance.</p>"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>The description of an <a>SdkType</a>.</p>"
+        },
+        "configurationProperties":{
+          "shape":"ListOfSdkConfigurationProperty",
+          "documentation":"<p>A list of configuration properties of an <a>SdkType</a>.</p>"
+        }
+      },
+      "documentation":"<p>A type of SDK that API Gateway can generate.</p>"
+    },
+    "SdkTypes":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfSdkType",
+          "documentation":"<p>The set of <a>SdkType</a> items that comprise this view of the <a>SdkTypes</a> collection.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>The collection of <a>SdkType</a> instances.</p>"
     },
     "ServiceUnavailableException":{
       "type":"structure",

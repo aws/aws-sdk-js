@@ -524,6 +524,22 @@ declare class APIGateway extends Service {
    */
   getSdk(callback?: (err: AWSError, data: APIGateway.Types.SdkResponse) => void): Request<APIGateway.Types.SdkResponse, AWSError>;
   /**
+   * 
+   */
+  getSdkType(params: APIGateway.Types.GetSdkTypeRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkType) => void): Request<APIGateway.Types.SdkType, AWSError>;
+  /**
+   * 
+   */
+  getSdkType(callback?: (err: AWSError, data: APIGateway.Types.SdkType) => void): Request<APIGateway.Types.SdkType, AWSError>;
+  /**
+   * 
+   */
+  getSdkTypes(params: APIGateway.Types.GetSdkTypesRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkTypes) => void): Request<APIGateway.Types.SdkTypes, AWSError>;
+  /**
+   * 
+   */
+  getSdkTypes(callback?: (err: AWSError, data: APIGateway.Types.SdkTypes) => void): Request<APIGateway.Types.SdkTypes, AWSError>;
+  /**
    * Gets information about a Stage resource.
    */
   getStage(params: APIGateway.Types.GetStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
@@ -2039,6 +2055,22 @@ declare namespace APIGateway {
      */
     parameters?: MapOfStringToString;
   }
+  export interface GetSdkTypeRequest {
+    /**
+     * The identifier of the queried SdkType instance.
+     */
+    id: String;
+  }
+  export interface GetSdkTypesRequest {
+    /**
+     * The position of the last fetched element in the SdkTypes collection.
+     */
+    position?: String;
+    /**
+     * The maximum number of SdkType instances to be returned. 
+     */
+    limit?: NullableInteger;
+  }
   export interface GetStageRequest {
     /**
      * The identifier of the RestApi resource for the Stage resource to get information about.
@@ -2264,6 +2296,8 @@ declare namespace APIGateway {
   export type ListOfPatchOperation = PatchOperation[];
   export type ListOfResource = Resource[];
   export type ListOfRestApi = RestApi[];
+  export type ListOfSdkConfigurationProperty = SdkConfigurationProperty[];
+  export type ListOfSdkType = SdkType[];
   export type ListOfStage = Stage[];
   export type ListOfStageKeys = StageKey[];
   export type ListOfString = String[];
@@ -2298,6 +2332,10 @@ declare namespace APIGateway {
      * A boolean flag specifying whether a valid ApiKey is required to invoke this method.
      */
     apiKeyRequired?: NullableBoolean;
+    /**
+     * A human-friendly operation identifier for the method. For example, you can assign the operationName of ListPets for the GET /pets method in PetStore example.
+     */
+    operationName?: String;
     /**
      * A key-value map defining required or optional method request parameters that can be accepted by Amazon API Gateway. A key is a method request parameter name matching the pattern of method.request.{location}.{name}, where location is querystring, path, or header and name is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (true) or optional (false). The method request parameter names defined here are available in Integration to be mapped to integration request parameters or templates.
      */
@@ -2547,6 +2585,10 @@ declare namespace APIGateway {
      */
     apiKeyRequired?: Boolean;
     /**
+     * A human-friendly operation identifier for the method. For example, you can assign the operationName of ListPets for the GET /pets method in PetStore example.
+     */
+    operationName?: String;
+    /**
      * A key-value map defining required or optional method request parameters that can be accepted by Amazon API Gateway. A key defines a method request parameter name matching the pattern of method.request.{location}.{name}, where location is querystring, path, or header and name is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (true) or optional (false). The method request parameter names defined here are available in Integration to be mapped to integration request parameters or body-mapping templates.
      */
     requestParameters?: MapOfStringToBoolean;
@@ -2685,6 +2727,28 @@ declare namespace APIGateway {
      */
     items?: ListOfRestApi;
   }
+  export interface SdkConfigurationProperty {
+    /**
+     * The name of a an SdkType configuration property.
+     */
+    name?: String;
+    /**
+     * The user-friendly name of an SdkType configuration property.
+     */
+    friendlyName?: String;
+    /**
+     * The description of an SdkType configuration property.
+     */
+    description?: String;
+    /**
+     * A boolean flag of an SdkType configuration property to indicate if the associated SDK configuration property is required (true) or not (false).
+     */
+    required?: Boolean;
+    /**
+     * The default value of an SdkType configuration property.
+     */
+    defaultValue?: String;
+  }
   export interface SdkResponse {
     /**
      * The content-type header value in the HTTP response.
@@ -2698,6 +2762,31 @@ declare namespace APIGateway {
      * The binary blob response to GetSdk, which contains the generated SDK.
      */
     body?: _Blob;
+  }
+  export interface SdkType {
+    /**
+     * The identifier of an SdkType instance.
+     */
+    id?: String;
+    /**
+     * The user-friendly name of an SdkType instance.
+     */
+    friendlyName?: String;
+    /**
+     * The description of an SdkType.
+     */
+    description?: String;
+    /**
+     * A list of configuration properties of an SdkType.
+     */
+    configurationProperties?: ListOfSdkConfigurationProperty;
+  }
+  export interface SdkTypes {
+    position?: String;
+    /**
+     * The set of SdkType items that comprise this view of the SdkTypes collection.
+     */
+    items?: ListOfSdkType;
   }
   export interface Stage {
     /**

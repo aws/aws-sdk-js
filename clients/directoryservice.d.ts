@@ -20,11 +20,11 @@ declare class DirectoryService extends Service {
    */
   addIpRoutes(callback?: (err: AWSError, data: DirectoryService.Types.AddIpRoutesResult) => void): Request<DirectoryService.Types.AddIpRoutesResult, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
+   * Adds or overwrites one or more tags for the specified directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
    */
   addTagsToResource(params: DirectoryService.Types.AddTagsToResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.AddTagsToResourceResult) => void): Request<DirectoryService.Types.AddTagsToResourceResult, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified Amazon Directory Services directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
+   * Adds or overwrites one or more tags for the specified directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
    */
   addTagsToResource(callback?: (err: AWSError, data: DirectoryService.Types.AddTagsToResourceResult) => void): Request<DirectoryService.Types.AddTagsToResourceResult, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class DirectoryService extends Service {
    */
   enableRadius(callback?: (err: AWSError, data: DirectoryService.Types.EnableRadiusResult) => void): Request<DirectoryService.Types.EnableRadiusResult, AWSError>;
   /**
-   * Enables single-sign on for a directory.
+   * Enables single sign-on for a directory.
    */
   enableSso(params: DirectoryService.Types.EnableSsoRequest, callback?: (err: AWSError, data: DirectoryService.Types.EnableSsoResult) => void): Request<DirectoryService.Types.EnableSsoResult, AWSError>;
   /**
-   * Enables single-sign on for a directory.
+   * Enables single sign-on for a directory.
    */
   enableSso(callback?: (err: AWSError, data: DirectoryService.Types.EnableSsoResult) => void): Request<DirectoryService.Types.EnableSsoResult, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class DirectoryService extends Service {
    */
   listSchemaExtensions(callback?: (err: AWSError, data: DirectoryService.Types.ListSchemaExtensionsResult) => void): Request<DirectoryService.Types.ListSchemaExtensionsResult, AWSError>;
   /**
-   * Lists all tags on an Amazon Directory Services directory.
+   * Lists all tags on a directory.
    */
   listTagsForResource(params: DirectoryService.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListTagsForResourceResult) => void): Request<DirectoryService.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * Lists all tags on an Amazon Directory Services directory.
+   * Lists all tags on a directory.
    */
   listTagsForResource(callback?: (err: AWSError, data: DirectoryService.Types.ListTagsForResourceResult) => void): Request<DirectoryService.Types.ListTagsForResourceResult, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class DirectoryService extends Service {
    */
   removeIpRoutes(callback?: (err: AWSError, data: DirectoryService.Types.RemoveIpRoutesResult) => void): Request<DirectoryService.Types.RemoveIpRoutesResult, AWSError>;
   /**
-   * Removes tags from an Amazon Directory Services directory.
+   * Removes tags from a directory.
    */
   removeTagsFromResource(params: DirectoryService.Types.RemoveTagsFromResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.RemoveTagsFromResourceResult) => void): Request<DirectoryService.Types.RemoveTagsFromResourceResult, AWSError>;
   /**
-   * Removes tags from an Amazon Directory Services directory.
+   * Removes tags from a directory.
    */
   removeTagsFromResource(callback?: (err: AWSError, data: DirectoryService.Types.RemoveTagsFromResourceResult) => void): Request<DirectoryService.Types.RemoveTagsFromResourceResult, AWSError>;
   /**
@@ -340,7 +340,7 @@ declare namespace DirectoryService {
      */
     ResourceId: ResourceId;
     /**
-     * The tags to be assigned to the Amazon Directory Services directory.
+     * The tags to be assigned to the directory.
      */
     Tags: Tags;
   }
@@ -1391,7 +1391,7 @@ declare namespace DirectoryService {
      */
     CreateSnapshotBeforeSchemaExtension: CreateSnapshotBeforeSchemaExtension;
     /**
-     * The LDIF file represented as a string. The file size can be no larger than 1MB.
+     * The LDIF file represented as a string. To construct the LdifContent string, precede each line as it would be formatted in an ldif file with \n. See the example request below for more details. The file size can be no larger than 1MB.
      */
     LdifContent: LdifContent;
     /**

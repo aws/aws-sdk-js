@@ -465,6 +465,22 @@
       },
       "documentation":"<p>Updates the specified application to have the specified properties.</p> <note> <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear these properties, specify an empty string.</p> </note>"
     },
+    "UpdateApplicationResourceLifecycle":{
+      "name":"UpdateApplicationResourceLifecycle",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateApplicationResourceLifecycleMessage"},
+      "output":{
+        "shape":"ApplicationResourceLifecycleDescriptionMessage",
+        "resultWrapper":"UpdateApplicationResourceLifecycleResult"
+      },
+      "errors":[
+        {"shape":"InsufficientPrivilegesException"}
+      ],
+      "documentation":"<p>Modifies lifecycle settings for an application.</p>"
+    },
     "UpdateApplicationVersion":{
       "name":"UpdateApplicationVersion",
       "http":{
@@ -597,6 +613,10 @@
         "ConfigurationTemplates":{
           "shape":"ConfigurationTemplateNamesList",
           "documentation":"<p>The names of the configuration templates associated with this application.</p>"
+        },
+        "ResourceLifecycleConfig":{
+          "shape":"ApplicationResourceLifecycleConfig",
+          "documentation":"<p>The lifecycle settings for the application.</p>"
         }
       },
       "documentation":"<p>Describes the properties of an application.</p>"
@@ -655,6 +675,33 @@
     "ApplicationNamesList":{
       "type":"list",
       "member":{"shape":"ApplicationName"}
+    },
+    "ApplicationResourceLifecycleConfig":{
+      "type":"structure",
+      "members":{
+        "ServiceRole":{
+          "shape":"String",
+          "documentation":"<p>The ARN of an IAM service role that Elastic Beanstalk has permission to assume.</p>"
+        },
+        "VersionLifecycleConfig":{
+          "shape":"ApplicationVersionLifecycleConfig",
+          "documentation":"<p>The application version lifecycle configuration.</p>"
+        }
+      },
+      "documentation":"<p>The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.</p>"
+    },
+    "ApplicationResourceLifecycleDescriptionMessage":{
+      "type":"structure",
+      "members":{
+        "ApplicationName":{
+          "shape":"ApplicationName",
+          "documentation":"<p>The name of the application.</p>"
+        },
+        "ResourceLifecycleConfig":{
+          "shape":"ApplicationResourceLifecycleConfig",
+          "documentation":"<p>The lifecycle configuration.</p>"
+        }
+      }
     },
     "ApplicationVersionDescription":{
       "type":"structure",
@@ -725,6 +772,20 @@
         }
       },
       "documentation":"<p>Result message wrapping a list of application version descriptions.</p>"
+    },
+    "ApplicationVersionLifecycleConfig":{
+      "type":"structure",
+      "members":{
+        "MaxCountRule":{
+          "shape":"MaxCountRule",
+          "documentation":"<p>Specify a max count rule to restrict the number of application versions that are retained for an application.</p>"
+        },
+        "MaxAgeRule":{
+          "shape":"MaxAgeRule",
+          "documentation":"<p>Specify a max age rule to restrict the length of time that application versions are retained for an application.</p>"
+        }
+      },
+      "documentation":"<p>The application version lifecycle settings for an application. Defines the rules that Elastic Beanstalk applies to an application's versions in order to avoid hitting the per-region limit for application versions.</p> <p>When Elastic Beanstalk deletes an application version from its database, you can no longer deploy that version to an environment. The source bundle remains in S3 unless you configure the rule to delete it.</p>"
     },
     "ApplicationVersionProccess":{"type":"boolean"},
     "ApplicationVersionStatus":{
@@ -801,6 +862,7 @@
       "type":"list",
       "member":{"shape":"SolutionStackName"}
     },
+    "BoxedBoolean":{"type":"boolean"},
     "BoxedInt":{"type":"integer"},
     "BuildConfiguration":{
       "type":"structure",
@@ -1143,6 +1205,10 @@
         "Description":{
           "shape":"Description",
           "documentation":"<p>Describes the application.</p>"
+        },
+        "ResourceLifecycleConfig":{
+          "shape":"ApplicationResourceLifecycleConfig",
+          "documentation":"<p>Specify an application resource lifecycle configuration to prevent your application from accumulating too many versions.</p>"
         }
       },
       "documentation":"<p>Request to create an application.</p>"
@@ -2437,6 +2503,44 @@
       "max":100,
       "min":1
     },
+    "MaxAgeRule":{
+      "type":"structure",
+      "required":["Enabled"],
+      "members":{
+        "Enabled":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.</p>"
+        },
+        "MaxAgeInDays":{
+          "shape":"BoxedInt",
+          "documentation":"<p>Specify the number of days to retain an application versions.</p>"
+        },
+        "DeleteSourceFromS3":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.</p>"
+        }
+      },
+      "documentation":"<p>A lifecycle rule that deletes application versions after the specified number of days.</p>"
+    },
+    "MaxCountRule":{
+      "type":"structure",
+      "required":["Enabled"],
+      "members":{
+        "Enabled":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.</p>"
+        },
+        "MaxCount":{
+          "shape":"BoxedInt",
+          "documentation":"<p>Specify the maximum number of application versions to retain.</p>"
+        },
+        "DeleteSourceFromS3":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.</p>"
+        }
+      },
+      "documentation":"<p>A lifecycle rule that deletes the oldest application version when the maximum count is exceeded.</p>"
+    },
     "MaxRecords":{
       "type":"integer",
       "max":1000,
@@ -2994,6 +3098,23 @@
         }
       },
       "documentation":"<p>Request to update an application.</p>"
+    },
+    "UpdateApplicationResourceLifecycleMessage":{
+      "type":"structure",
+      "required":[
+        "ApplicationName",
+        "ResourceLifecycleConfig"
+      ],
+      "members":{
+        "ApplicationName":{
+          "shape":"ApplicationName",
+          "documentation":"<p>The name of the application.</p>"
+        },
+        "ResourceLifecycleConfig":{
+          "shape":"ApplicationResourceLifecycleConfig",
+          "documentation":"<p>The lifecycle configuration.</p>"
+        }
+      }
     },
     "UpdateApplicationVersionMessage":{
       "type":"structure",

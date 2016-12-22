@@ -260,6 +260,14 @@ declare class ElasticBeanstalk extends Service {
    */
   updateApplication(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
   /**
+   * Modifies lifecycle settings for an application.
+   */
+  updateApplicationResourceLifecycle(params: ElasticBeanstalk.Types.UpdateApplicationResourceLifecycleMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage, AWSError>;
+  /**
+   * Modifies lifecycle settings for an application.
+   */
+  updateApplicationResourceLifecycle(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage, AWSError>;
+  /**
    * Updates the specified application version to have the specified properties.  If a property (for example, description) is not provided, the value remains unchanged. To clear properties, specify an empty string. 
    */
   updateApplicationVersion(params: ElasticBeanstalk.Types.UpdateApplicationVersionMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
@@ -332,6 +340,10 @@ declare namespace ElasticBeanstalk {
      * The names of the configuration templates associated with this application.
      */
     ConfigurationTemplates?: ConfigurationTemplateNamesList;
+    /**
+     * The lifecycle settings for the application.
+     */
+    ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
   }
   export type ApplicationDescriptionList = ApplicationDescription[];
   export interface ApplicationDescriptionMessage {
@@ -366,6 +378,26 @@ declare namespace ElasticBeanstalk {
   }
   export type ApplicationName = string;
   export type ApplicationNamesList = ApplicationName[];
+  export interface ApplicationResourceLifecycleConfig {
+    /**
+     * The ARN of an IAM service role that Elastic Beanstalk has permission to assume.
+     */
+    ServiceRole?: String;
+    /**
+     * The application version lifecycle configuration.
+     */
+    VersionLifecycleConfig?: ApplicationVersionLifecycleConfig;
+  }
+  export interface ApplicationResourceLifecycleDescriptionMessage {
+    /**
+     * The name of the application.
+     */
+    ApplicationName?: ApplicationName;
+    /**
+     * The lifecycle configuration.
+     */
+    ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
+  }
   export interface ApplicationVersionDescription {
     /**
      * The name of the application to which the application version belongs.
@@ -421,6 +453,16 @@ declare namespace ElasticBeanstalk {
      */
     NextToken?: Token;
   }
+  export interface ApplicationVersionLifecycleConfig {
+    /**
+     * Specify a max count rule to restrict the number of application versions that are retained for an application.
+     */
+    MaxCountRule?: MaxCountRule;
+    /**
+     * Specify a max age rule to restrict the length of time that application versions are retained for an application.
+     */
+    MaxAgeRule?: MaxAgeRule;
+  }
   export type ApplicationVersionProccess = boolean;
   export type ApplicationVersionStatus = "Processed"|"Unprocessed"|"Failed"|"Processing"|"Building"|string;
   export interface ApplyEnvironmentManagedActionRequest {
@@ -465,6 +507,7 @@ declare namespace ElasticBeanstalk {
   export type AutoScalingGroupList = AutoScalingGroup[];
   export type AvailableSolutionStackDetailsList = SolutionStackDescription[];
   export type AvailableSolutionStackNamesList = SolutionStackName[];
+  export type BoxedBoolean = boolean;
   export type BoxedInt = number;
   export interface BuildConfiguration {
     /**
@@ -698,6 +741,10 @@ declare namespace ElasticBeanstalk {
      * Describes the application.
      */
     Description?: Description;
+    /**
+     * Specify an application resource lifecycle configuration to prevent your application from accumulating too many versions.
+     */
+    ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
   }
   export interface CreateApplicationVersionMessage {
     /**
@@ -1581,6 +1628,34 @@ declare namespace ElasticBeanstalk {
   }
   export type ManagedActionHistoryItems = ManagedActionHistoryItem[];
   export type ManagedActions = ManagedAction[];
+  export interface MaxAgeRule {
+    /**
+     * Specify true to apply the rule, or false to disable it.
+     */
+    Enabled: BoxedBoolean;
+    /**
+     * Specify the number of days to retain an application versions.
+     */
+    MaxAgeInDays?: BoxedInt;
+    /**
+     * Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
+     */
+    DeleteSourceFromS3?: BoxedBoolean;
+  }
+  export interface MaxCountRule {
+    /**
+     * Specify true to apply the rule, or false to disable it.
+     */
+    Enabled: BoxedBoolean;
+    /**
+     * Specify the maximum number of application versions to retain.
+     */
+    MaxCount?: BoxedInt;
+    /**
+     * Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
+     */
+    DeleteSourceFromS3?: BoxedBoolean;
+  }
   export type MaxRecords = number;
   export type Message = string;
   export type NextToken = string;
@@ -1883,6 +1958,16 @@ declare namespace ElasticBeanstalk {
      * A new description for the application. Default: If not specified, AWS Elastic Beanstalk does not update the description.
      */
     Description?: Description;
+  }
+  export interface UpdateApplicationResourceLifecycleMessage {
+    /**
+     * The name of the application.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The lifecycle configuration.
+     */
+    ResourceLifecycleConfig: ApplicationResourceLifecycleConfig;
   }
   export interface UpdateApplicationVersionMessage {
     /**
