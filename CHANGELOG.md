@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.19-->
+<!--LATEST=2.7.20-->
 <!--ENTRYINSERT-->
+
+## 2.7.20
+* feature: CodeDeploy: CodeDeploy supports IAM Session Arns in addition to IAM User Arns for on premise host authentication.
+* feature: ECS: Amazon EC2 Container Service (ECS) now supports the ability to customize the placement of tasks on container instances.
 
 ## 2.7.19
 * feature: APIGateway: This update introduces two new operations used to dynamically discover SDK types and what configuration each type accepts.

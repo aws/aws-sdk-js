@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.19
+// AWS SDK for JavaScript v2.7.20
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -10846,7 +10846,7 @@ module.exports={
         "members": {
           "deploymentConfigName": {},
           "minimumHealthyHosts": {
-            "shape": "S30"
+            "shape": "S31"
           }
         }
       },
@@ -10876,7 +10876,7 @@ module.exports={
             "shape": "S1b"
           },
           "autoScalingGroups": {
-            "shape": "S36"
+            "shape": "S37"
           },
           "serviceRoleArn": {},
           "triggerConfigurations": {
@@ -11035,7 +11035,7 @@ module.exports={
               "deploymentConfigId": {},
               "deploymentConfigName": {},
               "minimumHealthyHosts": {
-                "shape": "S30"
+                "shape": "S31"
               },
               "createTime": {
                 "type": "timestamp"
@@ -11289,11 +11289,11 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "instanceName",
-          "iamUserArn"
+          "instanceName"
         ],
         "members": {
           "instanceName": {},
+          "iamSessionArn": {},
           "iamUserArn": {}
         }
       }
@@ -11364,7 +11364,7 @@ module.exports={
             "shape": "S1b"
           },
           "autoScalingGroups": {
-            "shape": "S36"
+            "shape": "S37"
           },
           "serviceRoleArn": {},
           "triggerConfigurations": {
@@ -11696,6 +11696,7 @@ module.exports={
       "type": "structure",
       "members": {
         "instanceName": {},
+        "iamSessionArn": {},
         "iamUserArn": {},
         "instanceArn": {},
         "registerTime": {
@@ -11709,7 +11710,7 @@ module.exports={
         }
       }
     },
-    "S30": {
+    "S31": {
       "type": "structure",
       "members": {
         "value": {
@@ -11718,7 +11719,7 @@ module.exports={
         "type": {}
       }
     },
-    "S36": {
+    "S37": {
       "type": "list",
       "member": {}
     }
@@ -33857,7 +33858,6 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "ecs-2014-11-13",
     "apiVersion": "2014-11-13",
     "endpointPrefix": "ecs",
     "jsonVersion": "1.1",
@@ -33865,7 +33865,8 @@ module.exports={
     "serviceAbbreviation": "Amazon ECS",
     "serviceFullName": "Amazon EC2 Container Service",
     "signatureVersion": "v4",
-    "targetPrefix": "AmazonEC2ContainerServiceV20141113"
+    "targetPrefix": "AmazonEC2ContainerServiceV20141113",
+    "uid": "ecs-2014-11-13"
   },
   "operations": {
     "CreateCluster": {
@@ -33906,6 +33907,12 @@ module.exports={
           "role": {},
           "deploymentConfiguration": {
             "shape": "Sa"
+          },
+          "placementConstraints": {
+            "shape": "Sb"
+          },
+          "placementStrategy": {
+            "shape": "Se"
           }
         }
       },
@@ -33913,7 +33920,29 @@ module.exports={
         "type": "structure",
         "members": {
           "service": {
-            "shape": "Sc"
+            "shape": "Si"
+          }
+        }
+      }
+    },
+    "DeleteAttributes": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "attributes"
+        ],
+        "members": {
+          "cluster": {},
+          "attributes": {
+            "shape": "Sp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "attributes": {
+            "shape": "Sp"
           }
         }
       }
@@ -33952,7 +33981,7 @@ module.exports={
         "type": "structure",
         "members": {
           "service": {
-            "shape": "Sc"
+            "shape": "Si"
           }
         }
       }
@@ -33975,7 +34004,7 @@ module.exports={
         "type": "structure",
         "members": {
           "containerInstance": {
-            "shape": "Sp"
+            "shape": "S10"
           }
         }
       }
@@ -33994,7 +34023,7 @@ module.exports={
         "type": "structure",
         "members": {
           "taskDefinition": {
-            "shape": "S12"
+            "shape": "S1b"
           }
         }
       }
@@ -34004,7 +34033,7 @@ module.exports={
         "type": "structure",
         "members": {
           "clusters": {
-            "shape": "Sv"
+            "shape": "S16"
           }
         }
       },
@@ -34018,7 +34047,7 @@ module.exports={
             }
           },
           "failures": {
-            "shape": "S1w"
+            "shape": "S28"
           }
         }
       }
@@ -34032,7 +34061,7 @@ module.exports={
         "members": {
           "cluster": {},
           "containerInstances": {
-            "shape": "Sv"
+            "shape": "S16"
           }
         }
       },
@@ -34042,11 +34071,11 @@ module.exports={
           "containerInstances": {
             "type": "list",
             "member": {
-              "shape": "Sp"
+              "shape": "S10"
             }
           },
           "failures": {
-            "shape": "S1w"
+            "shape": "S28"
           }
         }
       }
@@ -34060,7 +34089,7 @@ module.exports={
         "members": {
           "cluster": {},
           "services": {
-            "shape": "Sv"
+            "shape": "S16"
           }
         }
       },
@@ -34070,11 +34099,11 @@ module.exports={
           "services": {
             "type": "list",
             "member": {
-              "shape": "Sc"
+              "shape": "Si"
             }
           },
           "failures": {
-            "shape": "S1w"
+            "shape": "S28"
           }
         }
       }
@@ -34093,7 +34122,7 @@ module.exports={
         "type": "structure",
         "members": {
           "taskDefinition": {
-            "shape": "S12"
+            "shape": "S1b"
           }
         }
       }
@@ -34107,7 +34136,7 @@ module.exports={
         "members": {
           "cluster": {},
           "tasks": {
-            "shape": "Sv"
+            "shape": "S16"
           }
         }
       },
@@ -34115,10 +34144,10 @@ module.exports={
         "type": "structure",
         "members": {
           "tasks": {
-            "shape": "S28"
+            "shape": "S2k"
           },
           "failures": {
-            "shape": "S1w"
+            "shape": "S28"
           }
         }
       }
@@ -34139,6 +34168,33 @@ module.exports={
         }
       }
     },
+    "ListAttributes": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "targetType"
+        ],
+        "members": {
+          "cluster": {},
+          "targetType": {},
+          "attributeName": {},
+          "attributeValue": {},
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "attributes": {
+            "shape": "Sp"
+          },
+          "nextToken": {}
+        }
+      }
+    },
     "ListClusters": {
       "input": {
         "type": "structure",
@@ -34153,7 +34209,7 @@ module.exports={
         "type": "structure",
         "members": {
           "clusterArns": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "nextToken": {}
         }
@@ -34164,6 +34220,7 @@ module.exports={
         "type": "structure",
         "members": {
           "cluster": {},
+          "filter": {},
           "nextToken": {},
           "maxResults": {
             "type": "integer"
@@ -34174,7 +34231,7 @@ module.exports={
         "type": "structure",
         "members": {
           "containerInstanceArns": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "nextToken": {}
         }
@@ -34195,7 +34252,7 @@ module.exports={
         "type": "structure",
         "members": {
           "serviceArns": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "nextToken": {}
         }
@@ -34217,7 +34274,7 @@ module.exports={
         "type": "structure",
         "members": {
           "families": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "nextToken": {}
         }
@@ -34240,7 +34297,7 @@ module.exports={
         "type": "structure",
         "members": {
           "taskDefinitionArns": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "nextToken": {}
         }
@@ -34266,9 +34323,31 @@ module.exports={
         "type": "structure",
         "members": {
           "taskArns": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "nextToken": {}
+        }
+      }
+    },
+    "PutAttributes": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "attributes"
+        ],
+        "members": {
+          "cluster": {},
+          "attributes": {
+            "shape": "Sp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "attributes": {
+            "shape": "Sp"
+          }
         }
       }
     },
@@ -34280,14 +34359,14 @@ module.exports={
           "instanceIdentityDocument": {},
           "instanceIdentityDocumentSignature": {},
           "totalResources": {
-            "shape": "Ss"
+            "shape": "S13"
           },
           "versionInfo": {
-            "shape": "Sr"
+            "shape": "S12"
           },
           "containerInstanceArn": {},
           "attributes": {
-            "shape": "Sy"
+            "shape": "Sp"
           }
         }
       },
@@ -34295,7 +34374,7 @@ module.exports={
         "type": "structure",
         "members": {
           "containerInstance": {
-            "shape": "Sp"
+            "shape": "S10"
           }
         }
       }
@@ -34312,10 +34391,13 @@ module.exports={
           "taskRoleArn": {},
           "networkMode": {},
           "containerDefinitions": {
-            "shape": "S13"
+            "shape": "S1c"
           },
           "volumes": {
-            "shape": "S1o"
+            "shape": "S1x"
+          },
+          "placementConstraints": {
+            "shape": "S22"
           }
         }
       },
@@ -34323,7 +34405,7 @@ module.exports={
         "type": "structure",
         "members": {
           "taskDefinition": {
-            "shape": "S12"
+            "shape": "S1b"
           }
         }
       }
@@ -34338,22 +34420,29 @@ module.exports={
           "cluster": {},
           "taskDefinition": {},
           "overrides": {
-            "shape": "S2a"
+            "shape": "S2m"
           },
           "count": {
             "type": "integer"
           },
-          "startedBy": {}
+          "startedBy": {},
+          "group": {},
+          "placementConstraints": {
+            "shape": "Sb"
+          },
+          "placementStrategy": {
+            "shape": "Se"
+          }
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "tasks": {
-            "shape": "S28"
+            "shape": "S2k"
           },
           "failures": {
-            "shape": "S1w"
+            "shape": "S28"
           }
         }
       }
@@ -34369,22 +34458,23 @@ module.exports={
           "cluster": {},
           "taskDefinition": {},
           "overrides": {
-            "shape": "S2a"
+            "shape": "S2m"
           },
           "containerInstances": {
-            "shape": "Sv"
+            "shape": "S16"
           },
-          "startedBy": {}
+          "startedBy": {},
+          "group": {}
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "tasks": {
-            "shape": "S28"
+            "shape": "S2k"
           },
           "failures": {
-            "shape": "S1w"
+            "shape": "S28"
           }
         }
       }
@@ -34405,7 +34495,7 @@ module.exports={
         "type": "structure",
         "members": {
           "task": {
-            "shape": "S29"
+            "shape": "S2l"
           }
         }
       }
@@ -34423,7 +34513,7 @@ module.exports={
           },
           "reason": {},
           "networkBindings": {
-            "shape": "S2f"
+            "shape": "S2r"
           }
         }
       },
@@ -34466,7 +34556,7 @@ module.exports={
         "type": "structure",
         "members": {
           "containerInstance": {
-            "shape": "Sp"
+            "shape": "S10"
           }
         }
       }
@@ -34493,7 +34583,7 @@ module.exports={
         "type": "structure",
         "members": {
           "service": {
-            "shape": "Sc"
+            "shape": "Si"
           }
         }
       }
@@ -34545,7 +34635,27 @@ module.exports={
         }
       }
     },
-    "Sc": {
+    "Sb": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "type": {},
+          "expression": {}
+        }
+      }
+    },
+    "Se": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "type": {},
+          "field": {}
+        }
+      }
+    },
+    "Si": {
       "type": "structure",
       "members": {
         "serviceArn": {},
@@ -34610,10 +34720,34 @@ module.exports={
         },
         "createdAt": {
           "type": "timestamp"
+        },
+        "placementConstraints": {
+          "shape": "Sb"
+        },
+        "placementStrategy": {
+          "shape": "Se"
         }
       }
     },
     "Sp": {
+      "type": "list",
+      "member": {
+        "shape": "Sq"
+      }
+    },
+    "Sq": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {},
+        "value": {},
+        "targetType": {},
+        "targetId": {}
+      }
+    },
+    "S10": {
       "type": "structure",
       "members": {
         "containerInstanceArn": {},
@@ -34622,13 +34756,13 @@ module.exports={
           "type": "long"
         },
         "versionInfo": {
-          "shape": "Sr"
+          "shape": "S12"
         },
         "remainingResources": {
-          "shape": "Ss"
+          "shape": "S13"
         },
         "registeredResources": {
-          "shape": "Ss"
+          "shape": "S13"
         },
         "status": {},
         "agentConnected": {
@@ -34642,11 +34776,11 @@ module.exports={
         },
         "agentUpdateStatus": {},
         "attributes": {
-          "shape": "Sy"
+          "shape": "Sp"
         }
       }
     },
-    "Sr": {
+    "S12": {
       "type": "structure",
       "members": {
         "agentVersion": {},
@@ -34654,7 +34788,7 @@ module.exports={
         "dockerVersion": {}
       }
     },
-    "Ss": {
+    "S13": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -34671,37 +34805,21 @@ module.exports={
             "type": "integer"
           },
           "stringSetValue": {
-            "shape": "Sv"
+            "shape": "S16"
           }
         }
       }
     },
-    "Sv": {
+    "S16": {
       "type": "list",
       "member": {}
     },
-    "Sy": {
-      "type": "list",
-      "member": {
-        "shape": "Sz"
-      }
-    },
-    "Sz": {
-      "type": "structure",
-      "required": [
-        "name"
-      ],
-      "members": {
-        "name": {},
-        "value": {}
-      }
-    },
-    "S12": {
+    "S1b": {
       "type": "structure",
       "members": {
         "taskDefinitionArn": {},
         "containerDefinitions": {
-          "shape": "S13"
+          "shape": "S1c"
         },
         "family": {},
         "taskRoleArn": {},
@@ -34710,18 +34828,21 @@ module.exports={
           "type": "integer"
         },
         "volumes": {
-          "shape": "S1o"
+          "shape": "S1x"
         },
         "status": {},
         "requiresAttributes": {
           "type": "list",
           "member": {
-            "shape": "Sz"
+            "shape": "Sq"
           }
+        },
+        "placementConstraints": {
+          "shape": "S22"
         }
       }
     },
-    "S13": {
+    "S1c": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -34738,7 +34859,7 @@ module.exports={
             "type": "integer"
           },
           "links": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "portMappings": {
             "type": "list",
@@ -34759,13 +34880,13 @@ module.exports={
             "type": "boolean"
           },
           "entryPoint": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "command": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "environment": {
-            "shape": "S18"
+            "shape": "S1h"
           },
           "mountPoints": {
             "type": "list",
@@ -34805,10 +34926,10 @@ module.exports={
             "type": "boolean"
           },
           "dnsServers": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "dnsSearchDomains": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "extraHosts": {
             "type": "list",
@@ -34825,7 +34946,7 @@ module.exports={
             }
           },
           "dockerSecurityOptions": {
-            "shape": "Sv"
+            "shape": "S16"
           },
           "dockerLabels": {
             "type": "map",
@@ -34869,7 +34990,7 @@ module.exports={
         }
       }
     },
-    "S18": {
+    "S1h": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -34879,7 +35000,7 @@ module.exports={
         }
       }
     },
-    "S1o": {
+    "S1x": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -34894,7 +35015,17 @@ module.exports={
         }
       }
     },
-    "S1w": {
+    "S22": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "type": {},
+          "expression": {}
+        }
+      }
+    },
+    "S28": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -34904,13 +35035,13 @@ module.exports={
         }
       }
     },
-    "S28": {
+    "S2k": {
       "type": "list",
       "member": {
-        "shape": "S29"
+        "shape": "S2l"
       }
     },
-    "S29": {
+    "S2l": {
       "type": "structure",
       "members": {
         "taskArn": {},
@@ -34918,7 +35049,7 @@ module.exports={
         "taskDefinitionArn": {},
         "containerInstanceArn": {},
         "overrides": {
-          "shape": "S2a"
+          "shape": "S2m"
         },
         "lastStatus": {},
         "desiredStatus": {},
@@ -34936,7 +35067,7 @@ module.exports={
               },
               "reason": {},
               "networkBindings": {
-                "shape": "S2f"
+                "shape": "S2r"
               }
             }
           }
@@ -34954,10 +35085,11 @@ module.exports={
         },
         "stoppedAt": {
           "type": "timestamp"
-        }
+        },
+        "group": {}
       }
     },
-    "S2a": {
+    "S2m": {
       "type": "structure",
       "members": {
         "containerOverrides": {
@@ -34967,10 +35099,10 @@ module.exports={
             "members": {
               "name": {},
               "command": {
-                "shape": "Sv"
+                "shape": "S16"
               },
               "environment": {
-                "shape": "S18"
+                "shape": "S1h"
               }
             }
           }
@@ -34978,7 +35110,7 @@ module.exports={
         "taskRoleArn": {}
       }
     },
-    "S2f": {
+    "S2r": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -90943,7 +91075,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.19',
+  VERSION: '2.7.20',
 
 
   Signers: {},

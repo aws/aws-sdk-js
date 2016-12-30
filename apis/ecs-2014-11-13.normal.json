@@ -1,7 +1,6 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"ecs-2014-11-13",
     "apiVersion":"2014-11-13",
     "endpointPrefix":"ecs",
     "jsonVersion":"1.1",
@@ -9,7 +8,8 @@
     "serviceAbbreviation":"Amazon ECS",
     "serviceFullName":"Amazon EC2 Container Service",
     "signatureVersion":"v4",
-    "targetPrefix":"AmazonEC2ContainerServiceV20141113"
+    "targetPrefix":"AmazonEC2ContainerServiceV20141113",
+    "uid":"ecs-2014-11-13"
   },
   "operations":{
     "CreateCluster":{
@@ -41,7 +41,22 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ClusterNotFoundException"}
       ],
-      "documentation":"<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS spawns another copy of the task in the specified cluster. To update an existing service, see <a>UpdateService</a>.</p> <p>In addition to maintaining the desired count of tasks in your service, you can optionally run your service behind a load balancer. The load balancer distributes traffic across the tasks that are associated with the service. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service Load Balancing</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> <p>You can optionally specify a deployment configuration for your service. During a deployment (which is triggered by changing the task definition or the desired count of a service with an <a>UpdateService</a> operation), the service scheduler uses the <code>minimumHealthyPercent</code> and <code>maximumPercent</code> parameters to determine the deployment strategy.</p> <p>The <code>minimumHealthyPercent</code> represents a lower limit on the number of your service's tasks that must remain in the <code>RUNNING</code> state during a deployment, as a percentage of the <code>desiredCount</code> (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a <code>desiredCount</code> of four tasks and a <code>minimumHealthyPercent</code> of 50%, the scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance it is hosted on is reported as healthy by the load balancer. The default value for <code>minimumHealthyPercent</code> is 50% in the console and 100% for the AWS CLI, the AWS SDKs, and the APIs.</p> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of your service's tasks that are allowed in the <code>RUNNING</code> or <code>PENDING</code> state during a deployment, as a percentage of the <code>desiredCount</code> (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service has a <code>desiredCount</code> of four tasks and a <code>maximumPercent</code> value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for <code>maximumPercent</code> is 200%.</p> <p>When the service scheduler launches new tasks, it attempts to balance them across the Availability Zones in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul>"
+      "documentation":"<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS spawns another copy of the task in the specified cluster. To update an existing service, see <a>UpdateService</a>.</p> <p>In addition to maintaining the desired count of tasks in your service, you can optionally run your service behind a load balancer. The load balancer distributes traffic across the tasks that are associated with the service. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service Load Balancing</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> <p>You can optionally specify a deployment configuration for your service. During a deployment (which is triggered by changing the task definition or the desired count of a service with an <a>UpdateService</a> operation), the service scheduler uses the <code>minimumHealthyPercent</code> and <code>maximumPercent</code> parameters to determine the deployment strategy.</p> <p>The <code>minimumHealthyPercent</code> represents a lower limit on the number of your service's tasks that must remain in the <code>RUNNING</code> state during a deployment, as a percentage of the <code>desiredCount</code> (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a <code>desiredCount</code> of four tasks and a <code>minimumHealthyPercent</code> of 50%, the scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance it is hosted on is reported as healthy by the load balancer. The default value for <code>minimumHealthyPercent</code> is 50% in the console and 100% for the AWS CLI, the AWS SDKs, and the APIs.</p> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of your service's tasks that are allowed in the <code>RUNNING</code> or <code>PENDING</code> state during a deployment, as a percentage of the <code>desiredCount</code> (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service has a <code>desiredCount</code> of four tasks and a <code>maximumPercent</code> value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for <code>maximumPercent</code> is 200%.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy with the <code>placementStrategy</code> parameter):</p> <ul> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul>"
+    },
+    "DeleteAttributes":{
+      "name":"DeleteAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteAttributesRequest"},
+      "output":{"shape":"DeleteAttributesResponse"},
+      "errors":[
+        {"shape":"ClusterNotFoundException"},
+        {"shape":"TargetNotFoundException"},
+        {"shape":"InvalidParameterException"}
+      ],
+      "documentation":"<p>Deletes one or more attributes from an Amazon ECS resource.</p>"
     },
     "DeleteCluster":{
       "name":"DeleteCluster",
@@ -201,6 +216,20 @@
       ],
       "documentation":"<note> <p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p> </note> <p>Returns an endpoint for the Amazon EC2 Container Service agent to poll for updates.</p>"
     },
+    "ListAttributes":{
+      "name":"ListAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListAttributesRequest"},
+      "output":{"shape":"ListAttributesResponse"},
+      "errors":[
+        {"shape":"ClusterNotFoundException"},
+        {"shape":"InvalidParameterException"}
+      ],
+      "documentation":"<p>Lists the attributes for Amazon ECS resources within a specified target type and cluster. When you specify a target type and cluster, <code>LisAttributes</code> returns a list of attribute objects, one for each attribute on each resource. You can filter the list of results to a single attribute name to only return results that have that name. You can also filter the results by attribute name and value, for example, to see which container instances in a cluster are running a Linux AMI (<code>ecs.os-type=linux</code>). </p>"
+    },
     "ListClusters":{
       "name":"ListClusters",
       "http":{
@@ -230,7 +259,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ClusterNotFoundException"}
       ],
-      "documentation":"<p>Returns a list of container instances in a specified cluster.</p>"
+      "documentation":"<p>Returns a list of container instances in a specified cluster. You can filter the results of a <code>ListContainerInstances</code> operation with cluster query language statements inside the <code>filter</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html\">Cluster Query Language</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
     },
     "ListServices":{
       "name":"ListServices",
@@ -295,6 +324,22 @@
       ],
       "documentation":"<p>Returns a list of tasks for a specified cluster. You can filter the results by family name, by a particular container instance, or by the desired status of the task with the <code>family</code>, <code>containerInstance</code>, and <code>desiredStatus</code> parameters.</p> <p>Recently-stopped tasks might appear in the returned results. Currently, stopped tasks appear in the returned results for at least one hour. </p>"
     },
+    "PutAttributes":{
+      "name":"PutAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutAttributesRequest"},
+      "output":{"shape":"PutAttributesResponse"},
+      "errors":[
+        {"shape":"ClusterNotFoundException"},
+        {"shape":"TargetNotFoundException"},
+        {"shape":"AttributeLimitExceededException"},
+        {"shape":"InvalidParameterException"}
+      ],
+      "documentation":"<p>Create or update an attribute on an Amazon ECS resource. If the attribute does not already exist on the given target, it is created; if it does exist, it is replaced with the new value.</p>"
+    },
     "RegisterContainerInstance":{
       "name":"RegisterContainerInstance",
       "http":{
@@ -338,7 +383,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ClusterNotFoundException"}
       ],
-      "documentation":"<p>Start a task using random placement and the default Amazon ECS scheduler. To use your own scheduler or place a task on a specific container instance, use <code>StartTask</code> instead.</p> <important> <p>The <code>count</code> parameter is limited to 10 tasks per call.</p> </important>"
+      "documentation":"<p>Starts a new task using the specified task definition.</p> <p>You can allow Amazon ECS to place tasks for you, or you can customize how Amazon ECS places tasks using placement constraints and placement strategies. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html\">Scheduling Tasks</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> <p>Alternatively, you can use <a>StartTask</a> to use your own scheduler or place tasks manually on specific container instances.</p>"
     },
     "StartTask":{
       "name":"StartTask",
@@ -354,7 +399,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ClusterNotFoundException"}
       ],
-      "documentation":"<p>Starts a new task from the specified task definition on the specified container instance or instances. To use the default Amazon ECS scheduler to place your task, use <code>RunTask</code> instead.</p> <important> <p>The list of container instances to start tasks on is limited to 10.</p> </important>"
+      "documentation":"<p>Starts a new task from the specified task definition on the specified container instance or instances.</p> <p>Alternatively, you can use <a>RunTask</a> to place tasks for you. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html\">Scheduling Tasks</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
     },
     "StopTask":{
       "name":"StopTask",
@@ -435,7 +480,7 @@
         {"shape":"ServiceNotFoundException"},
         {"shape":"ServiceNotActiveException"}
       ],
-      "documentation":"<p>Modifies the desired count, deployment configuration, or task definition used in a service.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>You can use <a>UpdateService</a> to modify your task definition and deploy a new version of your service.</p> <p>You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, <code>minimumHealthyPercent</code> and <code>maximumPercent</code>, to determine the deployment strategy.</p> <p>If the <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore the <code>desiredCount</code> temporarily during a deployment. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>minimumHealthyPercent</code> of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance it is hosted on is reported as healthy by the load balancer.</p> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>maximumPercent</code> value of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).</p> <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <p>When the service scheduler launches new tasks, it attempts to balance them across the Availability Zones in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul>"
+      "documentation":"<p>Modifies the desired count, deployment configuration, or task definition used in a service.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>You can use <a>UpdateService</a> to modify your task definition and deploy a new version of your service.</p> <p>You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, <code>minimumHealthyPercent</code> and <code>maximumPercent</code>, to determine the deployment strategy.</p> <p>If the <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore the <code>desiredCount</code> temporarily during a deployment. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>minimumHealthyPercent</code> of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance it is hosted on is reported as healthy by the load balancer.</p> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if your service has a <code>desiredCount</code> of four tasks, a <code>maximumPercent</code> value of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).</p> <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy with the <code>placementStrategy</code> parameter):</p> <ul> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul> <p>When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster with the following logic: </p> <ul> <li> <p>Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.</p> </li> <li> <p>Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.</p> </li> </ul>"
     }
   },
   "shapes":{
@@ -456,14 +501,29 @@
       "members":{
         "name":{
           "shape":"String",
-          "documentation":"<p>The name of the container instance attribute.</p>"
+          "documentation":"<p>The name of the attribute. Up to 128 letters (uppercase and lowercase), numbers, hyphens, underscores, and periods are allowed.</p>"
         },
         "value":{
           "shape":"String",
-          "documentation":"<p>The value of the container instance attribute (at this time, the value here is <code>Null</code>, but this could change in future revisions for expandability).</p>"
+          "documentation":"<p>The value of the attribute. Up to 128 letters (uppercase and lowercase), numbers, hyphens, underscores, periods, at signs (@), forward slashes, colons, and spaces are allowed.</p>"
+        },
+        "targetType":{
+          "shape":"TargetType",
+          "documentation":"<p>The type of the target with which to attach the attribute. This parameter is required if you use the short form ID for a resource instead of the full Amazon Resource Name (ARN).</p>"
+        },
+        "targetId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the target. You can specify the short form ID for a resource or the full Amazon Resource Name (ARN).</p>"
         }
       },
-      "documentation":"<p>The attributes applicable to a container instance when it is registered.</p>"
+      "documentation":"<p>Attributes are name-value pairs associated with various Amazon ECS objects. Attributes allow you to extend the Amazon ECS data model by adding custom metadata to your resources.</p>"
+    },
+    "AttributeLimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>You can apply up to 10 custom attributes per resource. You can view the attributes of a resource with <a>ListAttributes</a>. You can remove existing attributes on a resource with <a>DeleteAttributes</a>.</p>",
+      "exception":true
     },
     "Attributes":{
       "type":"list",
@@ -570,7 +630,7 @@
         },
         "reason":{
           "shape":"String",
-          "documentation":"<p>A short (255 max characters) human-readable string to provide additional detail about a running or stopped container.</p>"
+          "documentation":"<p>A short (255 max characters) human-readable string to provide additional details about a running or stopped container.</p>"
         },
         "networkBindings":{
           "shape":"NetworkBindings",
@@ -588,7 +648,7 @@
         },
         "image":{
           "shape":"String",
-          "documentation":"<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with <code> <i>repository-url</i>/<i>image</i>:<i>tag</i> </code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/\">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p> <ul> <li> <p>Images in official repositories on Docker Hub use a single name (for example, <code>ubuntu</code> or <code>mongo</code>).</p> </li> <li> <p>Images in other repositories on Docker Hub are qualified with an organization name (for example, <code>amazon/amazon-ecs-agent</code>).</p> </li> <li> <p>Images in other online repositories are qualified further by a domain name (for example, <code>quay.io/assemblyline/ubuntu</code>).</p> </li> </ul>"
+          "documentation":"<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with <code> <i>repository-url</i>/<i>image</i>:<i>tag</i> </code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/\">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p> <note> <p>Amazon ECS task definitions currently only support tags as image identifiers within a specified repository (and not <code>sha256</code> digests).</p> </note> <ul> <li> <p>Images in Amazon ECR repositories use the full registry and repository URI (for example, <code>012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;</code>). </p> </li> <li> <p>Images in official repositories on Docker Hub use a single name (for example, <code>ubuntu</code> or <code>mongo</code>).</p> </li> <li> <p>Images in other repositories on Docker Hub are qualified with an organization name (for example, <code>amazon/amazon-ecs-agent</code>).</p> </li> <li> <p>Images in other online repositories are qualified further by a domain name (for example, <code>quay.io/assemblyline/ubuntu</code>).</p> </li> </ul>"
         },
         "cpu":{
           "shape":"Integer",
@@ -684,7 +744,7 @@
         },
         "logConfiguration":{
           "shape":"LogConfiguration",
-          "documentation":"<p>The log configuration specification for the container. This parameter maps to <code>LogConfig</code> in the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/\">Docker Remote API</a> and the <code>--log-driver</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. By default, containers use the same logging driver that the Docker daemon uses; however the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see <a href=\"https://docs.docker.com/engine/admin/logging/overview/\">Configure logging drivers</a> in the Docker documentation.</p> <note> <p>Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon (shown in the <a>LogConfiguration</a> data type). Currently unsupported log drivers may be available in future releases of the Amazon ECS container agent.</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p> <note> <p>The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the <code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before containers placed on that instance can use these log configuration options. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>"
+          "documentation":"<p>The log configuration specification for the container. This parameter maps to <code>LogConfig</code> in the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/\">Docker Remote API</a> and the <code>--log-driver</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. By default, containers use the same logging driver that the Docker daemon uses; however the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see <a href=\"https://docs.docker.com/engine/admin/logging/overview/\">Configure logging drivers</a> in the Docker documentation.</p> <note> <p>Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon (shown in the <a>LogConfiguration</a> data type). Additional log drivers may be available in future releases of the Amazon ECS container agent.</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p> <note> <p>The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the <code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before containers placed on that instance can use these log configuration options. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>"
         }
       },
       "documentation":"<p>Container definitions are used in task definitions to describe the different containers that are launched as part of a task.</p>"
@@ -742,7 +802,7 @@
         },
         "attributes":{
           "shape":"Attributes",
-          "documentation":"<p>The attributes set for the container instance by the Amazon ECS container agent at instance registration.</p>"
+          "documentation":"<p>The attributes set for the container instance, either by the Amazon ECS container agent at instance registration or manually with the <a>PutAttributes</a> operation.</p>"
         }
       },
       "documentation":"<p>An EC2 instance that is running the Amazon ECS agent and has been registered with a cluster.</p>"
@@ -817,7 +877,7 @@
         },
         "loadBalancers":{
           "shape":"LoadBalancers",
-          "documentation":"<p>A load balancer object representing the load balancer to use with your service. Currently, you are limited to one load balancer per service. After you create a service, the load balancer name, container name, and container port specified in the service definition are immutable.</p> <p>For Elastic Load Balancing Classic load balancers, this object must contain the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance is registered with the load balancer specified here.</p> <p>For Elastic Load Balancing Application load balancers, this object must contain the load balancer target group ARN, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance and port combination is registered as a target in the target group specified here.</p>"
+          "documentation":"<p>A load balancer object representing the load balancer to use with your service. Currently, you are limited to one load balancer or target group per service. After you create a service, the load balancer name or target group ARN, container name, and container port specified in the service definition are immutable.</p> <p>For Elastic Load Balancing Classic load balancers, this object must contain the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance is registered with the load balancer specified here.</p> <p>For Elastic Load Balancing Application load balancers, this object must contain the load balancer target group ARN, the container name (as it appears in a container definition), and the container port to access from the load balancer. When a task from this service is placed on a container instance, the container instance and port combination is registered as a target in the target group specified here.</p>"
         },
         "desiredCount":{
           "shape":"BoxedInteger",
@@ -834,6 +894,14 @@
         "deploymentConfiguration":{
           "shape":"DeploymentConfiguration",
           "documentation":"<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.</p>"
+        },
+        "placementConstraints":{
+          "shape":"PlacementConstraints",
+          "documentation":"<p>An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints per task (this limit includes constraints in the task definition and those specified at run time). </p>"
+        },
+        "placementStrategy":{
+          "shape":"PlacementStrategies",
+          "documentation":"<p>The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules per service.</p>"
         }
       }
     },
@@ -843,6 +911,29 @@
         "service":{
           "shape":"Service",
           "documentation":"<p>The full description of your service following the create call.</p>"
+        }
+      }
+    },
+    "DeleteAttributesRequest":{
+      "type":"structure",
+      "required":["attributes"],
+      "members":{
+        "cluster":{
+          "shape":"String",
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to apply attributes. If you do not specify a cluster, the default cluster is assumed.</p>"
+        },
+        "attributes":{
+          "shape":"Attributes",
+          "documentation":"<p>The attributes to delete from your resource. You can specify up to 10 attributes per request. For custom attributes, specify the attribute name and target ID, but do not specify the value. If you specify the target ID using the short form, you must also specify the target type.</p>"
+        }
+      }
+    },
+    "DeleteAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "attributes":{
+          "shape":"Attributes",
+          "documentation":"<p>A list of attribute objects that were successfully deleted from your resource.</p>"
         }
       }
     },
@@ -1228,6 +1319,49 @@
       },
       "documentation":"<p>A key and value pair object.</p>"
     },
+    "ListAttributesRequest":{
+      "type":"structure",
+      "required":["targetType"],
+      "members":{
+        "cluster":{
+          "shape":"String",
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster to list attributes. If you do not specify a cluster, the default cluster is assumed.</p>"
+        },
+        "targetType":{
+          "shape":"TargetType",
+          "documentation":"<p>The type of the target with which to list attributes.</p>"
+        },
+        "attributeName":{
+          "shape":"String",
+          "documentation":"<p>The name of the attribute with which to filter the results. </p>"
+        },
+        "attributeValue":{
+          "shape":"String",
+          "documentation":"<p>The value of the attribute with which to filter results. You must also specify an attribute name to use this parameter.</p>"
+        },
+        "nextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated <code>ListAttributes</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
+        },
+        "maxResults":{
+          "shape":"BoxedInteger",
+          "documentation":"<p>The maximum number of cluster results returned by <code>ListAttributes</code> in paginated output. When this parameter is used, <code>ListAttributes</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListAttributes</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListAttributes</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>"
+        }
+      }
+    },
+    "ListAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "attributes":{
+          "shape":"Attributes",
+          "documentation":"<p>A list of attribute objects that meet the criteria of the request.</p>"
+        },
+        "nextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>nextToken</code> value to include in a future <code>ListAttributes</code> request. When the results of a <code>ListAttributes</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
     "ListClustersRequest":{
       "type":"structure",
       "members":{
@@ -1260,6 +1394,10 @@
         "cluster":{
           "shape":"String",
           "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to list. If you do not specify a cluster, the default cluster is assumed.</p>"
+        },
+        "filter":{
+          "shape":"String",
+          "documentation":"<p>You can filter the results of a <code>ListContainerInstances</code> operation with cluster query language statements. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html\">Cluster Query Language</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
         },
         "nextToken":{
           "shape":"String",
@@ -1565,6 +1703,57 @@
       "documentation":"<p>There is no update available for this Amazon ECS container agent. This could be because the agent is already running the latest version, or it is so old that there is no update path to the current version.</p>",
       "exception":true
     },
+    "PlacementConstraint":{
+      "type":"structure",
+      "members":{
+        "type":{
+          "shape":"PlacementConstraintType",
+          "documentation":"<p>The type of constraint. Use <code>distinctInstance</code> to ensure that each task in a particular group is running on a different container instance. Use <code>memberOf</code> to restrict selection to a group of valid candidates.</p>"
+        },
+        "expression":{
+          "shape":"String",
+          "documentation":"<p>A cluster query language expression to apply to the constraint. Note you cannot specify an expression if the constraint type is <code>distinctInstance</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html\">Cluster Query Language</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+        }
+      },
+      "documentation":"<p>An object representing a constraint on task placement. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html\">Task Placement Constraints</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+    },
+    "PlacementConstraintType":{
+      "type":"string",
+      "enum":[
+        "distinctInstance",
+        "memberOf"
+      ]
+    },
+    "PlacementConstraints":{
+      "type":"list",
+      "member":{"shape":"PlacementConstraint"}
+    },
+    "PlacementStrategies":{
+      "type":"list",
+      "member":{"shape":"PlacementStrategy"}
+    },
+    "PlacementStrategy":{
+      "type":"structure",
+      "members":{
+        "type":{
+          "shape":"PlacementStrategyType",
+          "documentation":"<p>The type of placement strategy. The <code>random</code> placement strategy randomly places tasks on available candidates. The <code>spread</code> placement strategy spreads placement across available candidates evenly based on the <code>field</code> parameter. The <code>binpack</code> strategy places tasks on available candidates that have the least available amount of the resource that is specified with the <code>field</code> parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).</p>"
+        },
+        "field":{
+          "shape":"String",
+          "documentation":"<p>The field to apply the placement strategy against. For the <code>spread</code> placement strategy, valid values are <code>instanceId</code> (or <code>host</code>, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as <code>attribute:ecs.availability-zone</code>. For the <code>binpack</code> placement strategy, valid values are <code>CPU and MEMORY</code>.</p>"
+        }
+      },
+      "documentation":"<p>The task placement strategy for a task or service. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html\">Task Placement Strategies</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+    },
+    "PlacementStrategyType":{
+      "type":"string",
+      "enum":[
+        "random",
+        "spread",
+        "binpack"
+      ]
+    },
     "PortMapping":{
       "type":"structure",
       "members":{
@@ -1586,6 +1775,29 @@
     "PortMappingList":{
       "type":"list",
       "member":{"shape":"PortMapping"}
+    },
+    "PutAttributesRequest":{
+      "type":"structure",
+      "required":["attributes"],
+      "members":{
+        "cluster":{
+          "shape":"String",
+          "documentation":"<p>The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to apply attributes. If you do not specify a cluster, the default cluster is assumed.</p>"
+        },
+        "attributes":{
+          "shape":"Attributes",
+          "documentation":"<p>The attributes to apply to your resource. You can specify up to 10 custom attributes per resource. You can specify up to 10 attributes in a single call.</p>"
+        }
+      }
+    },
+    "PutAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "attributes":{
+          "shape":"Attributes",
+          "documentation":"<p>The attributes applied to your resource.</p>"
+        }
+      }
     },
     "RegisterContainerInstanceRequest":{
       "type":"structure",
@@ -1655,6 +1867,10 @@
         "volumes":{
           "shape":"VolumeList",
           "documentation":"<p>A list of volume definitions in JSON format that containers in your task may use.</p>"
+        },
+        "placementConstraints":{
+          "shape":"TaskDefinitionPlacementConstraints",
+          "documentation":"<p>An array of placement constraint objects to use for the task. You can specify a maximum of 10 constraints per task (this limit includes constraints in the task definition and those specified at run time).</p>"
         }
       }
     },
@@ -1723,11 +1939,23 @@
         },
         "count":{
           "shape":"BoxedInteger",
-          "documentation":"<p>The number of instantiations of the specified task to place on your cluster.</p> <important> <p>The <code>count</code> parameter is limited to 10 tasks per call.</p> </important>"
+          "documentation":"<p>The number of instantiations of the specified task to place on your cluster. You can specify up to 10 tasks per call.</p>"
         },
         "startedBy":{
           "shape":"String",
           "documentation":"<p>An optional tag specified when a task is started. For example if you automatically trigger a task to run a batch process job, you could apply a unique identifier for that job to your task with the <code>startedBy</code> parameter. You can then identify which tasks belong to that job by filtering the results of a <a>ListTasks</a> call with the <code>startedBy</code> value. Up to 36 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.</p> <p>If a task is started by an Amazon ECS service, then the <code>startedBy</code> parameter contains the deployment ID of the service that starts it.</p>"
+        },
+        "group":{
+          "shape":"String",
+          "documentation":"<p>The task group to associate with the task. By default, if you do not specify a task group, the group <code>family:TASKDEF-FAMILY</code> is applied. </p>"
+        },
+        "placementConstraints":{
+          "shape":"PlacementConstraints",
+          "documentation":"<p>An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at run time).</p>"
+        },
+        "placementStrategy":{
+          "shape":"PlacementStrategies",
+          "documentation":"<p>The placement strategy objects to use for the task. You can specify a maximum of 5 strategy rules per task.</p>"
         }
       }
     },
@@ -1811,6 +2039,14 @@
         "createdAt":{
           "shape":"Timestamp",
           "documentation":"<p>The Unix timestamp for when the service was created.</p>"
+        },
+        "placementConstraints":{
+          "shape":"PlacementConstraints",
+          "documentation":"<p>The placement constraints for the tasks in the service.</p>"
+        },
+        "placementStrategy":{
+          "shape":"PlacementStrategies",
+          "documentation":"<p>The placement strategy that determines how tasks for the service are placed.</p>"
         }
       },
       "documentation":"<p>Details on a service within a cluster</p>"
@@ -1883,11 +2119,15 @@
         },
         "containerInstances":{
           "shape":"StringList",
-          "documentation":"<p>The container instance IDs or full Amazon Resource Name (ARN) entries for the container instances on which you would like to place your task.</p> <important> <p>The list of container instances to start tasks on is limited to 10.</p> </important>"
+          "documentation":"<p>The container instance IDs or full Amazon Resource Name (ARN) entries for the container instances on which you would like to place your task. You can specify up to 10 container instances.</p>"
         },
         "startedBy":{
           "shape":"String",
           "documentation":"<p>An optional tag specified when a task is started. For example if you automatically trigger a task to run a batch process job, you could apply a unique identifier for that job to your task with the <code>startedBy</code> parameter. You can then identify which tasks belong to that job by filtering the results of a <a>ListTasks</a> call with the <code>startedBy</code> value. Up to 36 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.</p> <p>If a task is started by an Amazon ECS service, then the <code>startedBy</code> parameter contains the deployment ID of the service that starts it.</p>"
+        },
+        "group":{
+          "shape":"String",
+          "documentation":"<p>The task group to associate with the task. By default, if you do not specify a task group, the default group is <code>family:TASKDEF-FAMILY</code>.</p>"
         }
       }
     },
@@ -2008,6 +2248,17 @@
         }
       }
     },
+    "TargetNotFoundException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The specified target could not be found. You can view your available container instances with <a>ListContainerInstances</a>. Amazon ECS container instances are cluster-specific and region-specific.</p>",
+      "exception":true
+    },
+    "TargetType":{
+      "type":"string",
+      "enum":["container-instance"]
+    },
     "Task":{
       "type":"structure",
       "members":{
@@ -2066,6 +2317,10 @@
         "stoppedAt":{
           "shape":"Timestamp",
           "documentation":"<p>The Unix timestamp for when the task was stopped (the task transitioned from the <code>RUNNING</code> state to the <code>STOPPED</code> state).</p>"
+        },
+        "group":{
+          "shape":"String",
+          "documentation":"<p>The task group associated with the task.</p>"
         }
       },
       "documentation":"<p>Details on a task in a cluster.</p>"
@@ -2108,6 +2363,10 @@
         "requiresAttributes":{
           "shape":"RequiresAttributes",
           "documentation":"<p>The container instance attributes required by your task.</p>"
+        },
+        "placementConstraints":{
+          "shape":"TaskDefinitionPlacementConstraints",
+          "documentation":"<p>An array of placement constraint objects to use for tasks. </p>"
         }
       },
       "documentation":"<p>Details of a task definition.</p>"
@@ -2119,6 +2378,28 @@
         "INACTIVE",
         "ALL"
       ]
+    },
+    "TaskDefinitionPlacementConstraint":{
+      "type":"structure",
+      "members":{
+        "type":{
+          "shape":"TaskDefinitionPlacementConstraintType",
+          "documentation":"<p>The type of constraint. The <code>DistinctInstance</code> constraint ensures that each task in a particular group is running on a different container instance. The <code>MemberOf</code> constraint restricts selection to be from a group of valid candidates.</p>"
+        },
+        "expression":{
+          "shape":"String",
+          "documentation":"<p>A cluster query language expression to apply to the constraint. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html\">Cluster Query Language</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+        }
+      },
+      "documentation":"<p>An object representing a constraint on task placement in the task definition. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html\">Task Placement Constraints</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+    },
+    "TaskDefinitionPlacementConstraintType":{
+      "type":"string",
+      "enum":["memberOf"]
+    },
+    "TaskDefinitionPlacementConstraints":{
+      "type":"list",
+      "member":{"shape":"TaskDefinitionPlacementConstraint"}
     },
     "TaskDefinitionStatus":{
       "type":"string",

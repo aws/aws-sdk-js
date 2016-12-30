@@ -36,11 +36,11 @@ declare class CodeDeploy extends Service {
    */
   batchGetApplications(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationsOutput, AWSError>;
   /**
-   * Get information about one or more deployment groups.
+   * Gets information about one or more deployment groups.
    */
   batchGetDeploymentGroups(params: CodeDeploy.Types.BatchGetDeploymentGroupsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentGroupsOutput, AWSError>;
   /**
-   * Get information about one or more deployment groups.
+   * Gets information about one or more deployment groups.
    */
   batchGetDeploymentGroups(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentGroupsOutput, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class CodeDeploy extends Service {
    */
   registerApplicationRevision(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Registers an on-premises instance.
+   * Registers an on-premises instance.  Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both. 
    */
   registerOnPremisesInstance(params: CodeDeploy.Types.RegisterOnPremisesInstanceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Registers an on-premises instance.
+   * Registers an on-premises instance.  Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both. 
    */
   registerOnPremisesInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -523,7 +523,7 @@ declare namespace CodeDeploy {
      */
     deploymentGroupName: DeploymentGroupName;
     /**
-     * If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation.  CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or the deployment group.  The predefined deployment configurations include the following:    CodeDeployDefault.AllAtOnce attempts to deploy an application revision to as many instances as possible at once. The status of the overall deployment will be displayed as Succeeded if the application revision is deployed to one or more of the instances. The status of the overall deployment will be displayed as Failed if the application revision is not deployed to any of the instances. Using an example of nine instances, CodeDeployDefault.AllAtOnce will attempt to deploy to all nine instances at once. The overall deployment will succeed if deployment to even a single instance is successful; it will fail only if deployments to all nine instances fail.     CodeDeployDefault.HalfAtATime deploys to up to half of the instances at a time (with fractions rounded down). The overall deployment succeeds if the application revision is deployed to at least half of the instances (with fractions rounded up); otherwise, the deployment fails. In the example of nine instances, it will deploy to up to four instances at a time. The overall deployment succeeds if deployment to five or more instances succeed; otherwise, the deployment fails. The deployment may be successfully deployed to some instances even if the overall deployment fails.    CodeDeployDefault.OneAtATime deploys the application revision to only one instance at a time. For deployment groups that contain more than one instance:   The overall deployment succeeds if the application revision is deployed to all of the instances. The exception to this rule is if deployment to the last instance fails, the overall deployment still succeeds. This is because AWS CodeDeploy allows only one instance at a time to be taken offline with the CodeDeployDefault.OneAtATime configuration.   The overall deployment fails as soon as the application revision fails to be deployed to any but the last instance. The deployment may be successfully deployed to some instances even if the overall deployment fails.   In an example using nine instances, it will deploy to one instance at a time. The overall deployment succeeds if deployment to the first eight instances is successful; the overall deployment fails if deployment to any of the first eight instances fails.   For deployment groups that contain only one instance, the overall deployment is successful only if deployment to the single instance is successful  
+     * If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation. CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or the deployment group. For more information about the predefined deployment configurations in AWS CodeDeploy, see see Working with Deployment Groups in AWS CodeDeploy in the AWS CodeDeploy User Guide.
      */
     deploymentConfigName?: DeploymentConfigName;
     /**
@@ -992,6 +992,7 @@ declare namespace CodeDeploy {
      */
     commitId?: CommitId;
   }
+  export type IamSessionArn = string;
   export type IamUserArn = string;
   export type InstanceArn = string;
   export type InstanceCount = number;
@@ -1001,6 +1002,10 @@ declare namespace CodeDeploy {
      * The name of the on-premises instance.
      */
     instanceName?: InstanceName;
+    /**
+     * The ARN of the IAM session associated with the on-premises instance.
+     */
+    iamSessionArn?: IamSessionArn;
     /**
      * The IAM user ARN associated with the on-premises instance.
      */
@@ -1292,9 +1297,13 @@ declare namespace CodeDeploy {
      */
     instanceName: InstanceName;
     /**
+     * The ARN of the IAM session to associate with the on-premises instance.
+     */
+    iamSessionArn?: IamSessionArn;
+    /**
      * The ARN of the IAM user to associate with the on-premises instance.
      */
-    iamUserArn: IamUserArn;
+    iamUserArn?: IamUserArn;
   }
   export type RegistrationStatus = "Registered"|"Deregistered"|string;
   export interface RemoveTagsFromOnPremisesInstancesInput {
@@ -1309,7 +1318,13 @@ declare namespace CodeDeploy {
   }
   export type Repository = string;
   export interface RevisionInfo {
+    /**
+     * Information about the location and type of an application revision.
+     */
     revisionLocation?: RevisionLocation;
+    /**
+     * Information about an application revision, including usage details and currently associated deployment groups.
+     */
     genericRevisionInfo?: GenericRevisionInfo;
   }
   export type RevisionInfoList = RevisionInfo[];
@@ -1318,7 +1333,13 @@ declare namespace CodeDeploy {
      * The type of application revision:   S3: An application revision stored in Amazon S3.   GitHub: An application revision stored in GitHub.  
      */
     revisionType?: RevisionLocationType;
+    /**
+     * Information about the location of application artifacts stored in Amazon S3. 
+     */
     s3Location?: S3Location;
+    /**
+     * Information about the location of application artifacts stored in GitHub.
+     */
     gitHubLocation?: GitHubLocation;
   }
   export type RevisionLocationList = RevisionLocation[];
