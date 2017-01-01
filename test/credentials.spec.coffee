@@ -173,19 +173,19 @@ if AWS.util.isNode()
         process.env.HOMEPATH = 'homepath'
         creds = new AWS.SharedIniFileCredentials()
         creds.get();
-        expect(creds.filename).to.equal('d:/homepath/.aws/credentials')
+        expect(creds.filename).to.match(/d:[\/\\]homepath[\/\\].aws[\/\\]credentials/)
 
       it 'uses default HOMEDRIVE of C:/', ->
         process.env.HOMEPATH = 'homepath'
         creds = new AWS.SharedIniFileCredentials()
         creds.get();
-        expect(creds.filename).to.equal('C:/homepath/.aws/credentials')
+        expect(creds.filename).to.match(/C:[\/\\]homepath[\/\\].aws[\/\\]credentials/)
 
       it 'uses USERPROFILE if HOME is not set', ->
         process.env.USERPROFILE = '/userprofile'
         creds = new AWS.SharedIniFileCredentials()
         creds.get();
-        expect(creds.filename).to.equal('/userprofile/.aws/credentials')
+        expect(creds.filename).to.match(/[\/\\]userprofile[\/\\].aws[\/\\]credentials/)
 
       it 'can override filename as a constructor argument', ->
         creds = new AWS.SharedIniFileCredentials(filename: '/etc/creds')
@@ -207,7 +207,7 @@ if AWS.util.isNode()
         creds = new AWS.SharedIniFileCredentials()
         creds.get();
         validateCredentials(creds)
-        expect(AWS.util.readFileSync.calls[0].arguments[0]).to.equal('/home/user/.aws/credentials')
+        expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
 
       it 'loads the default profile if AWS_PROFILE is empty', ->
         process.env.AWS_PROFILE = ''
@@ -271,10 +271,10 @@ if AWS.util.isNode()
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         new AWS.SharedIniFileCredentials().refresh (err) ->
-          expect(err.message).to.equal('Profile default not found in /home/user/.aws/credentials')
+          expect(err.message).to.match(/Profile default not found in [\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
 
         expect(-> new AWS.SharedIniFileCredentials().refresh()).
-          to.throw('Profile default not found in /home/user/.aws/credentials')
+          to.throw(/Profile default not found in [\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
 
   describe 'loadRoleProfile', ->
     beforeEach -> 
@@ -290,7 +290,7 @@ if AWS.util.isNode()
       helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
       creds = new AWS.SharedIniFileCredentials({disableAssumeRole: true})
       creds.refresh (err) ->
-        expect(err.message).to.equal('Role assumption profiles are disabled. Failed to load profile default from /home/user/.aws/credentials')
+        expect(err.message).to.match(/Role assumption profiles are disabled. Failed to load profile default from [\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
       
     it 'will fail if no source profile is specified', ->
       mock = '''
@@ -303,7 +303,7 @@ if AWS.util.isNode()
     
       creds = new AWS.SharedIniFileCredentials()
       creds.refresh (err) ->
-        expect(err.message).to.equal('source_profile is not set in /home/user/.aws/credentials using profile default')
+        expect(err.message).to.match(/source_profile is not set in [\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials using profile default/)
     
     it 'will fail if source profile config is not defined', ->
       mock = '''
@@ -317,7 +317,7 @@ if AWS.util.isNode()
       
       creds = new AWS.SharedIniFileCredentials()
       creds.refresh (err) ->
-        expect(err.message).to.equal('source_profile fake set in /home/user/.aws/credentials using profile default does not exist')
+        expect(err.message).to.match(/source_profile fake set in [\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials using profile default does not exist/)
     
     it 'will fail if source profile config lacks credentials', ->
       mock = '''
@@ -333,7 +333,7 @@ if AWS.util.isNode()
       
       creds = new AWS.SharedIniFileCredentials()
       creds.refresh (err) ->
-        expect(err.message).to.equal('Credentials not set in source_profile foo set in /home/user/.aws/credentials using profile default')
+        expect(err.message).to.match(/Credentials not set in source_profile foo set in [\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials using profile default/)
 
     it 'will return credentials for assumed role', (done) ->
       mock = '''
