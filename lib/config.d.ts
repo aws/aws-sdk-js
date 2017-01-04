@@ -63,14 +63,14 @@ export class Config extends ConfigBase {
      * @param {ConfigurationOptions} options - a map of option keys and values.
      * @param {boolean} allowUnknownKeys - Whether unknown keys can be set on the configuration object.
      */
-    update(options: ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions & {[key: string]: any}, allowUnknownKeys: true): void;
+    update(options: ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions & CredentialsOptions & {[key: string]: any}, allowUnknownKeys: true): void;
     /**
      * Updates the current configuration object with new options.
      * 
      * @param {ConfigurationOptions} options - a map of option keys and values.
      * @param {boolean} allowUnknownKeys - Defaults to false. Whether unknown keys can be set on the configuration object.
      */
-    update(options: ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions, allowUnknownKeys?: false): void;
+    update(options: ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions & CredentialsOptions, allowUnknownKeys?: false): void;
 }
 
 export type GlobalConfigInstance = Config & ConfigurationServicePlaceholders & APIVersions;
