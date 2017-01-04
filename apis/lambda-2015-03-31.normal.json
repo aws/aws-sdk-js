@@ -62,7 +62,7 @@
         {"shape":"TooManyRequestsException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Identifies a stream as an event source for a Lambda function. It can be either an Amazon Kinesis stream or an Amazon DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the stream.</p> <p>This association between a stream source and a Lambda function is called the event source mapping.</p> <important><p>This event source mapping is relevant only in the AWS Lambda pull model, where AWS Lambda invokes the function. For more information, go to <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a> in the <i>AWS Lambda Developer Guide</i>.</p> </important> <p>You provide mapping information (for example, which stream to read from and which Lambda function to invoke) in the request body.</p> <p>Each event source, such as an Amazon Kinesis or a DynamoDB stream, can be associated with multiple AWS Lambda function. A given Lambda function can be associated with multiple AWS event sources.</p> <p>If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:CreateEventSourceMapping</code> action.</p>"
+      "documentation":"<p>Identifies a stream as an event source for a Lambda function. It can be either an Amazon Kinesis stream or an Amazon DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the stream.</p> <p>This association between a stream source and a Lambda function is called the event source mapping.</p> <important><p>This event source mapping is relevant only in the AWS Lambda pull model, where AWS Lambda invokes the function. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a> in the <i>AWS Lambda Developer Guide</i>.</p> </important> <p>You provide mapping information (for example, which stream to read from and which Lambda function to invoke) in the request body.</p> <p>Each event source, such as an Amazon Kinesis or a DynamoDB stream, can be associated with multiple AWS Lambda function. A given Lambda function can be associated with multiple AWS event sources.</p> <p>If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:CreateEventSourceMapping</code> action.</p>"
     },
     "CreateFunction":{
       "name":"CreateFunction",
@@ -145,7 +145,7 @@
         {"shape":"TooManyRequestsException"},
         {"shape":"ServiceException"}
       ],
-      "documentation":"<p>Returns a customer's account settings.</p> <p>You can use this operation to retrieve Lambda limit information such as code size and concurrency limits. For more information on limits, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">AWS Lambda Limits</a>. You can also retrieve resource usage statistics such as code storage usage and function count.</p>"
+      "documentation":"<p>Returns a customer's account settings.</p> <p>You can use this operation to retrieve Lambda limits information, such as code size and concurrency limits. For more information about limits, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">AWS Lambda Limits</a>. You can also retrieve resource usage statistics, such as code storage usage and function count.</p>"
     },
     "GetAlias":{
       "name":"GetAlias",
@@ -465,7 +465,7 @@
         },
         "CodeSizeZipped":{
           "shape":"Long",
-          "documentation":"<p>Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using AWS S3 for uploading larger files. Default limit is 50 MB.</p>"
+          "documentation":"<p>Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using Amazon S3 for uploading larger files. Default limit is 50 MB.</p>"
         },
         "ConcurrentExecutions":{
           "shape":"Integer",
@@ -479,7 +479,7 @@
       "members":{
         "TotalCodeSize":{
           "shape":"Long",
-          "documentation":"<p>Total size, in megabytes, of the account's deployment packages per region.</p>"
+          "documentation":"<p>Total size, in bytes, of the account's deployment packages per region.</p>"
         },
         "FunctionCount":{
           "shape":"Long",
@@ -667,7 +667,7 @@
         },
         "StartingPosition":{
           "shape":"EventSourcePosition",
-          "documentation":"<p>The position in the stream where AWS Lambda should start reading. Valid only for Kinesis streams. For more information, go to <a href=\"http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType\">ShardIteratorType</a> in the <i>Amazon Kinesis API Reference</i>. </p>"
+          "documentation":"<p>The position in the stream where AWS Lambda should start reading. Valid only for Kinesis streams. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType\">ShardIteratorType</a> in the <i>Amazon Kinesis API Reference</i>. </p>"
         },
         "StartingPositionTimestamp":{
           "shape":"Date",
@@ -688,11 +688,11 @@
       "members":{
         "FunctionName":{
           "shape":"FunctionName",
-          "documentation":"<p>The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the <a>ListFunctions</a> API. Function names are used to specify functions to other AWS Lambda APIs, such as <a>Invoke</a>. </p>"
+          "documentation":"<p>The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the <a>ListFunctions</a> API. Function names are used to specify functions to other AWS Lambda API operations, such as <a>Invoke</a>. </p>"
         },
         "Runtime":{
           "shape":"Runtime",
-          "documentation":"<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To use earlier runtime (v0.10.42), set the value to \"nodejs\".</p> <note> <p>You can no longer create functions using the v0.10.42 runtime version as of November, 2016. Existing functions will be supported until early 2017 but we recommend you migrate them to nodejs4.3 runtime version as soon as possible.</p> </note>"
+          "documentation":"<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To use earlier runtime (v0.10.42), set the value to \"nodejs\".</p> <note> <p>You can no longer create functions using the v0.10.42 runtime version as of November, 2016. Existing functions will be supported until early 2017, but we recommend you migrate them to nodejs4.3 runtime version as soon as possible.</p> </note>"
         },
         "Role":{
           "shape":"RoleArn",
@@ -728,7 +728,7 @@
         },
         "DeadLetterConfig":{
           "shape":"DeadLetterConfig",
-          "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic. </p>"
+          "documentation":"<p>The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic. </p>"
         },
         "Environment":{"shape":"Environment"},
         "KMSKeyArn":{
@@ -744,10 +744,10 @@
       "members":{
         "TargetArn":{
           "shape":"ResourceArn",
-          "documentation":"<p>The ARN (Amazon Resource Value) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).</p>"
         }
       },
-      "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.</p>"
+      "documentation":"<p>The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>"
     },
     "DeleteAliasRequest":{
       "type":"structure",
@@ -964,7 +964,7 @@
       "members":{
         "ZipFile":{
           "shape":"Blob",
-          "documentation":"<p>The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, go to <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html\">Execution Permissions</a> in the <i>AWS Lambda Developer Guide</i>. </p>"
+          "documentation":"<p>The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html\">Execution Permissions</a> in the <i>AWS Lambda Developer Guide</i>. </p>"
         },
         "S3Bucket":{
           "shape":"S3Bucket",
@@ -1052,7 +1052,7 @@
         },
         "DeadLetterConfig":{
           "shape":"DeadLetterConfig",
-          "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.</p>"
+          "documentation":"<p>The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>"
         },
         "Environment":{
           "shape":"EnvironmentResponse",
@@ -1383,7 +1383,7 @@
         "Type":{"shape":"String"},
         "Message":{"shape":"String"}
       },
-      "documentation":"<p>Lambda was unable to decrypt the environment variables because KMS access was denied. Please check the Lambda function's KMS permissions.</p>",
+      "documentation":"<p>Lambda was unable to decrypt the environment variables because KMS access was denied. Check the Lambda function's KMS permissions.</p>",
       "error":{"httpStatusCode":502},
       "exception":true
     },
@@ -1393,7 +1393,7 @@
         "Type":{"shape":"String"},
         "Message":{"shape":"String"}
       },
-      "documentation":"<p>Lambda was unable to decrypt the environment variables because the KMS key used is disabled. Please check the Lambda function's KMS key settings.</p>",
+      "documentation":"<p>Lambda was unable to decrypt the environment variables because the KMS key used is disabled. Check the Lambda function's KMS key settings.</p>",
       "error":{"httpStatusCode":502},
       "exception":true
     },
@@ -1403,7 +1403,7 @@
         "Type":{"shape":"String"},
         "Message":{"shape":"String"}
       },
-      "documentation":"<p>Lambda was unable to decrypt the environment variables because the KMS key used is in an invalid state for Decrypt. Please check the function's KMS key settings.</p>",
+      "documentation":"<p>Lambda was unable to decrypt the environment variables because the KMS key used is in an invalid state for Decrypt. Check the function's KMS key settings.</p>",
       "error":{"httpStatusCode":502},
       "exception":true
     },
@@ -1417,7 +1417,7 @@
         "Type":{"shape":"String"},
         "Message":{"shape":"String"}
       },
-      "documentation":"<p>Lambda was unable to decrypt the environment variables because the KMS key was not found. Please check the function's KMS key settings. </p>",
+      "documentation":"<p>Lambda was unable to decrypt the environment variables because the KMS key was not found. Check the function's KMS key settings. </p>",
       "error":{"httpStatusCode":502},
       "exception":true
     },
@@ -1890,11 +1890,11 @@
         },
         "ZipFile":{
           "shape":"Blob",
-          "documentation":"<p>The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, go to <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html\">Execution Permissions</a> in the <i>AWS Lambda Developer Guide</i>. </p>"
+          "documentation":"<p>The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html\">Execution Permissions</a> in the <i>AWS Lambda Developer Guide</i>. </p>"
         },
         "S3Bucket":{
           "shape":"S3Bucket",
-          "documentation":"<p>Amazon S3 bucket name where the .zip file containing your deployment package is stored. This bucket must reside in the same AWS region where you are creating the Lambda function.</p>"
+          "documentation":"<p>Amazon S3 bucket name where the .zip file containing your deployment package is stored. This bucket must reside in the same AWS Region where you are creating the Lambda function.</p>"
         },
         "S3Key":{
           "shape":"S3Key",
@@ -1952,7 +1952,7 @@
         },
         "DeadLetterConfig":{
           "shape":"DeadLetterConfig",
-          "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.</p>"
+          "documentation":"<p>The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>"
         },
         "KMSKeyArn":{
           "shape":"KMSKeyArn",
@@ -2001,5 +2001,5 @@
     },
     "VpcId":{"type":"string"}
   },
-  "documentation":"<fullname>AWS Lambda</fullname> <p> <b>Overview</b> </p> <p>This is the <i>AWS Lambda API Reference</i>. The AWS Lambda Developer Guide provides additional information. For the service overview, go to <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/welcome.html\">What is AWS Lambda</a>, and for information about how the service works, go to <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a> in the <i>AWS Lambda Developer Guide</i>.</p>"
+  "documentation":"<fullname>AWS Lambda</fullname> <p> <b>Overview</b> </p> <p>This is the <i>AWS Lambda API Reference</i>. The AWS Lambda Developer Guide provides additional information. For the service overview, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/welcome.html\">What is AWS Lambda</a>, and for information about how the service works, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a> in the <i>AWS Lambda Developer Guide</i>.</p>"
 }

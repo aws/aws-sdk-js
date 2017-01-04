@@ -28,11 +28,11 @@ declare class Lambda extends Service {
    */
   createAlias(callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
   /**
-   * Identifies a stream as an event source for a Lambda function. It can be either an Amazon Kinesis stream or an Amazon DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the stream. This association between a stream source and a Lambda function is called the event source mapping. This event source mapping is relevant only in the AWS Lambda pull model, where AWS Lambda invokes the function. For more information, go to AWS Lambda: How it Works in the AWS Lambda Developer Guide.  You provide mapping information (for example, which stream to read from and which Lambda function to invoke) in the request body. Each event source, such as an Amazon Kinesis or a DynamoDB stream, can be associated with multiple AWS Lambda function. A given Lambda function can be associated with multiple AWS event sources. If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:CreateEventSourceMapping action.
+   * Identifies a stream as an event source for a Lambda function. It can be either an Amazon Kinesis stream or an Amazon DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the stream. This association between a stream source and a Lambda function is called the event source mapping. This event source mapping is relevant only in the AWS Lambda pull model, where AWS Lambda invokes the function. For more information, see AWS Lambda: How it Works in the AWS Lambda Developer Guide.  You provide mapping information (for example, which stream to read from and which Lambda function to invoke) in the request body. Each event source, such as an Amazon Kinesis or a DynamoDB stream, can be associated with multiple AWS Lambda function. A given Lambda function can be associated with multiple AWS event sources. If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:CreateEventSourceMapping action.
    */
   createEventSourceMapping(params: Lambda.Types.CreateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Identifies a stream as an event source for a Lambda function. It can be either an Amazon Kinesis stream or an Amazon DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the stream. This association between a stream source and a Lambda function is called the event source mapping. This event source mapping is relevant only in the AWS Lambda pull model, where AWS Lambda invokes the function. For more information, go to AWS Lambda: How it Works in the AWS Lambda Developer Guide.  You provide mapping information (for example, which stream to read from and which Lambda function to invoke) in the request body. Each event source, such as an Amazon Kinesis or a DynamoDB stream, can be associated with multiple AWS Lambda function. A given Lambda function can be associated with multiple AWS event sources. If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:CreateEventSourceMapping action.
+   * Identifies a stream as an event source for a Lambda function. It can be either an Amazon Kinesis stream or an Amazon DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the stream. This association between a stream source and a Lambda function is called the event source mapping. This event source mapping is relevant only in the AWS Lambda pull model, where AWS Lambda invokes the function. For more information, see AWS Lambda: How it Works in the AWS Lambda Developer Guide.  You provide mapping information (for example, which stream to read from and which Lambda function to invoke) in the request body. Each event source, such as an Amazon Kinesis or a DynamoDB stream, can be associated with multiple AWS Lambda function. A given Lambda function can be associated with multiple AWS event sources. If you are using versioning, you can specify a specific function version or an alias via the function name parameter. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:CreateEventSourceMapping action.
    */
   createEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class Lambda extends Service {
    */
   deleteFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns a customer's account settings. You can use this operation to retrieve Lambda limit information such as code size and concurrency limits. For more information on limits, see AWS Lambda Limits. You can also retrieve resource usage statistics such as code storage usage and function count.
+   * Returns a customer's account settings. You can use this operation to retrieve Lambda limits information, such as code size and concurrency limits. For more information about limits, see AWS Lambda Limits. You can also retrieve resource usage statistics, such as code storage usage and function count.
    */
   getAccountSettings(params: Lambda.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
   /**
-   * Returns a customer's account settings. You can use this operation to retrieve Lambda limit information such as code size and concurrency limits. For more information on limits, see AWS Lambda Limits. You can also retrieve resource usage statistics such as code storage usage and function count.
+   * Returns a customer's account settings. You can use this operation to retrieve Lambda limits information, such as code size and concurrency limits. For more information about limits, see AWS Lambda Limits. You can also retrieve resource usage statistics, such as code storage usage and function count.
    */
   getAccountSettings(callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
   /**
@@ -223,7 +223,7 @@ declare namespace Lambda {
      */
     CodeSizeUnzipped?: Long;
     /**
-     * Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using AWS S3 for uploading larger files. Default limit is 50 MB.
+     * Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using Amazon S3 for uploading larger files. Default limit is 50 MB.
      */
     CodeSizeZipped?: Long;
     /**
@@ -233,7 +233,7 @@ declare namespace Lambda {
   }
   export interface AccountUsage {
     /**
-     * Total size, in megabytes, of the account's deployment packages per region.
+     * Total size, in bytes, of the account's deployment packages per region.
      */
     TotalCodeSize?: Long;
     /**
@@ -343,7 +343,7 @@ declare namespace Lambda {
      */
     BatchSize?: BatchSize;
     /**
-     * The position in the stream where AWS Lambda should start reading. Valid only for Kinesis streams. For more information, go to ShardIteratorType in the Amazon Kinesis API Reference. 
+     * The position in the stream where AWS Lambda should start reading. Valid only for Kinesis streams. For more information, see ShardIteratorType in the Amazon Kinesis API Reference. 
      */
     StartingPosition: EventSourcePosition;
     /**
@@ -353,11 +353,11 @@ declare namespace Lambda {
   }
   export interface CreateFunctionRequest {
     /**
-     * The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the ListFunctions API. Function names are used to specify functions to other AWS Lambda APIs, such as Invoke. 
+     * The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the ListFunctions API. Function names are used to specify functions to other AWS Lambda API operations, such as Invoke. 
      */
     FunctionName: FunctionName;
     /**
-     * The runtime environment for the Lambda function you are uploading. To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use earlier runtime (v0.10.42), set the value to "nodejs".  You can no longer create functions using the v0.10.42 runtime version as of November, 2016. Existing functions will be supported until early 2017 but we recommend you migrate them to nodejs4.3 runtime version as soon as possible. 
+     * The runtime environment for the Lambda function you are uploading. To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use earlier runtime (v0.10.42), set the value to "nodejs".  You can no longer create functions using the v0.10.42 runtime version as of November, 2016. Existing functions will be supported until early 2017, but we recommend you migrate them to nodejs4.3 runtime version as soon as possible. 
      */
     Runtime: Runtime;
     /**
@@ -393,7 +393,7 @@ declare namespace Lambda {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic. 
+     * The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic. 
      */
     DeadLetterConfig?: DeadLetterConfig;
     Environment?: Environment;
@@ -405,7 +405,7 @@ declare namespace Lambda {
   export type _Date = Date;
   export interface DeadLetterConfig {
     /**
-     * The ARN (Amazon Resource Value) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).
+     * The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).
      */
     TargetArn?: ResourceArn;
   }
@@ -503,7 +503,7 @@ declare namespace Lambda {
   export type FunctionArn = string;
   export interface FunctionCode {
     /**
-     * The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, go to Execution Permissions in the AWS Lambda Developer Guide. 
+     * The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, see Execution Permissions in the AWS Lambda Developer Guide. 
      */
     ZipFile?: _Blob;
     /**
@@ -583,7 +583,7 @@ declare namespace Lambda {
      */
     VpcConfig?: VpcConfigResponse;
     /**
-     * The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
+     * The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**
@@ -917,11 +917,11 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, go to Execution Permissions in the AWS Lambda Developer Guide. 
+     * The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, see Execution Permissions in the AWS Lambda Developer Guide. 
      */
     ZipFile?: _Blob;
     /**
-     * Amazon S3 bucket name where the .zip file containing your deployment package is stored. This bucket must reside in the same AWS region where you are creating the Lambda function.
+     * Amazon S3 bucket name where the .zip file containing your deployment package is stored. This bucket must reside in the same AWS Region where you are creating the Lambda function.
      */
     S3Bucket?: S3Bucket;
     /**
@@ -972,7 +972,7 @@ declare namespace Lambda {
      */
     Runtime?: Runtime;
     /**
-     * The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
+     * The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**

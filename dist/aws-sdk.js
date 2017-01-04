@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.20
+// AWS SDK for JavaScript v2.7.21
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -87619,7 +87619,6 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "streams-dynamodb-2012-08-10",
     "apiVersion": "2012-08-10",
     "endpointPrefix": "streams.dynamodb",
     "jsonVersion": "1.0",
@@ -87627,7 +87626,8 @@ module.exports={
     "serviceFullName": "Amazon DynamoDB Streams",
     "signatureVersion": "v4",
     "signingName": "dynamodb",
-    "targetPrefix": "DynamoDBStreams_20120810"
+    "targetPrefix": "DynamoDBStreams_20120810",
+    "uid": "streams-dynamodb-2012-08-10"
   },
   "operations": {
     "DescribeStream": {
@@ -91075,7 +91075,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.20',
+  VERSION: '2.7.21',
 
 
   Signers: {},
@@ -91233,8 +91233,18 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     this.expired = true;
     this.params = params;
     this.data = null;
-    this.identityId = null;
+    this._identityId = null;
     this.loadCachedId();
+    var self = this;
+    Object.defineProperty(this, 'identityId', {
+      get: function() {
+        self.loadCachedId();
+        return self._identityId || self.params.IdentityId;
+      },
+      set: function(identityId) {
+        self._identityId = identityId;
+      }
+    });
   },
 
 
@@ -91242,7 +91252,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     var self = this;
     self.createClients();
     self.data = null;
-    self.identityId = null;
+    self._identityId = null;
     self.getId(function(err) {
       if (!err) {
         if (!self.params.RoleArn) {
@@ -91259,7 +91269,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 
   clearCachedId: function clearCache() {
-    this.identityId = null;
+    this._identityId = null;
     delete this.params.IdentityId;
 
     var poolId = this.params.IdentityPoolId;
@@ -91374,8 +91384,8 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 
   cacheId: function cacheId(data) {
-    this.identityId = data.IdentityId;
-    this.params.IdentityId = this.identityId;
+    this._identityId = data.IdentityId;
+    this.params.IdentityId = this._identityId;
 
     if (AWS.util.isBrowser()) {
       this.setStorage('id', data.IdentityId);
@@ -91613,35 +91623,36 @@ var DynamoDBSet = require('./set');
 
 function convertInput(data, options) {
   options = options || {};
-  if (typeOf(data) === 'Object') {
+  var type = typeOf(data);
+  if (type === 'Object') {
     var map = {M: {}};
     for (var key in data) {
-      map['M'][key] = convertInput(data[key]);
+      map['M'][key] = convertInput(data[key], options);
     }
     return map;
-  } else if (typeOf(data) === 'Array') {
+  } else if (type === 'Array') {
     var list = {L: []};
     for (var i = 0; i < data.length; i++) {
-      list['L'].push(convertInput(data[i]));
+      list['L'].push(convertInput(data[i], options));
     }
     return list;
-  } else if (typeOf(data) === 'Set') {
+  } else if (type === 'Set') {
     return formatSet(data, options);
-  } else if (typeOf(data) === 'String') {
+  } else if (type === 'String') {
     if (data.length === 0 && options.convertEmptyValues) {
       return convertInput(null);
     }
     return { 'S': data };
-  } else if (typeOf(data) === 'Number') {
+  } else if (type === 'Number') {
     return { 'N': data.toString() };
-  } else if (typeOf(data) === 'Binary') {
+  } else if (type === 'Binary') {
     if (data.length === 0 && options.convertEmptyValues) {
       return convertInput(null);
     }
     return { 'B': data };
-  } else if (typeOf(data) === 'Boolean') {
+  } else if (type === 'Boolean') {
     return {'BOOL': data};
-  } else if (typeOf(data) === 'null') {
+  } else if (type === 'null') {
     return {'NULL': true};
   }
 }

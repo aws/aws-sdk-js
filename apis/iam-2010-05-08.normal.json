@@ -2136,7 +2136,7 @@
         },
         "NewPassword":{
           "shape":"passwordType",
-          "documentation":"<p>The new password. The new password must conform to the AWS account's password policy, if one exists.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of almost any printable ASCII character from the space (\\u0020) through the end of the ASCII character range (\\u00FF). You can also include the tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D) characters. Although any of these characters are valid in a password, note that many tools, such as the AWS Management Console, might restrict the ability to enter certain characters because they have special meaning within that tool.</p>"
+          "documentation":"<p>The new password. The new password must conform to the AWS account's password policy, if one exists.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of almost any printable ASCII character from the space (\\u0020) through the end of the ASCII character range (\\u00FF). You can also include the tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D) characters. Although any of these characters are valid in a password, note that many tools, such as the AWS Management Console, might restrict the ability to enter certain characters because they have special meaning within that tool.</p>"
         }
       }
     },
@@ -2287,7 +2287,7 @@
         },
         "Password":{
           "shape":"passwordType",
-          "documentation":"<p>The new password for the user.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of almost any printable ASCII character from the space (\\u0020) through the end of the ASCII character range (\\u00FF). You can also include the tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D) characters. Although any of these characters are valid in a password, note that many tools, such as the AWS Management Console, might restrict the ability to enter certain characters because they have special meaning within that tool.</p>"
+          "documentation":"<p>The new password for the user.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of almost any printable ASCII character from the space (\\u0020) through the end of the ASCII character range (\\u00FF). You can also include the tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D) characters. Although any of these characters are valid in a password, note that many tools, such as the AWS Management Console, might restrict the ability to enter certain characters because they have special meaning within that tool.</p>"
         },
         "PasswordResetRequired":{
           "shape":"booleanType",
@@ -2354,7 +2354,7 @@
         },
         "PolicyDocument":{
           "shape":"policyDocumentType",
-          "documentation":"<p>The JSON policy document that you want to use as the content for the new policy.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The JSON policy document that you want to use as the content for the new policy.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         },
         "Description":{
           "shape":"policyDescriptionType",
@@ -2385,7 +2385,7 @@
         },
         "PolicyDocument":{
           "shape":"policyDocumentType",
-          "documentation":"<p>The JSON policy document that you want to use as the content for this new version of the policy.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The JSON policy document that you want to use as the content for this new version of the policy.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         },
         "SetAsDefault":{
           "shape":"booleanType",
@@ -2420,7 +2420,7 @@
         },
         "AssumeRolePolicyDocument":{
           "shape":"policyDocumentType",
-          "documentation":"<p>The trust relationship policy document that grants an entity permission to assume the role.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The trust relationship policy document that grants an entity permission to assume the role.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -3147,7 +3147,7 @@
       "members":{
         "PolicyInputList":{
           "shape":"SimulationPolicyListType",
-          "documentation":"<p>A list of policies for which you want the list of context keys referenced in those policies. Each document is specified as a string containing the complete, valid JSON text of an IAM policy.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>A list of policies for which you want the list of context keys referenced in those policies. Each document is specified as a string containing the complete, valid JSON text of an IAM policy.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -3171,7 +3171,7 @@
         },
         "PolicyInputList":{
           "shape":"SimulationPolicyListType",
-          "documentation":"<p>An optional list of additional policies for which you want the list of context keys that are referenced.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>An optional list of additional policies for which you want the list of context keys that are referenced.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -5083,7 +5083,7 @@
         },
         "PolicyDocument":{
           "shape":"policyDocumentType",
-          "documentation":"<p>The policy document.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The policy document.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -5105,7 +5105,7 @@
         },
         "PolicyDocument":{
           "shape":"policyDocumentType",
-          "documentation":"<p>The policy document.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The policy document.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -5127,7 +5127,7 @@
         },
         "PolicyDocument":{
           "shape":"policyDocumentType",
-          "documentation":"<p>The policy document.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The policy document.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -5698,7 +5698,7 @@
       "members":{
         "PolicyInputList":{
           "shape":"SimulationPolicyListType",
-          "documentation":"<p>A list of policy documents to include in the simulation. Each document is specified as a string containing the complete, valid JSON text of an IAM policy. Do not include any resource-based policies in this parameter. Any resource-based policy must be submitted with the <code>ResourcePolicy</code> parameter. The policies cannot be \"scope-down\" policies, such as you could include in a call to <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html\">GetFederationToken</a> or one of the <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> APIs to restrict what a user can do while using the temporary credentials.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>A list of policy documents to include in the simulation. Each document is specified as a string containing the complete, valid JSON text of an IAM policy. Do not include any resource-based policies in this parameter. Any resource-based policy must be submitted with the <code>ResourcePolicy</code> parameter. The policies cannot be \"scope-down\" policies, such as you could include in a call to <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html\">GetFederationToken</a> or one of the <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> APIs to restrict what a user can do while using the temporary credentials.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         },
         "ActionNames":{
           "shape":"ActionNameListType",
@@ -5710,7 +5710,7 @@
         },
         "ResourcePolicy":{
           "shape":"policyDocumentType",
-          "documentation":"<p>A resource-based policy to include in the simulation provided as a string. Each resource in the simulation is treated as if it had this policy attached. You can include only one resource-based policy in a simulation.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>A resource-based policy to include in the simulation provided as a string. Each resource in the simulation is treated as if it had this policy attached. You can include only one resource-based policy in a simulation.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         },
         "ResourceOwner":{
           "shape":"ResourceNameType",
@@ -5769,7 +5769,7 @@
         },
         "PolicyInputList":{
           "shape":"SimulationPolicyListType",
-          "documentation":"<p>An optional list of additional policy documents to include in the simulation. Each document is specified as a string containing the complete, valid JSON text of an IAM policy.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>An optional list of additional policy documents to include in the simulation. Each document is specified as a string containing the complete, valid JSON text of an IAM policy.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         },
         "ActionNames":{
           "shape":"ActionNameListType",
@@ -5781,7 +5781,7 @@
         },
         "ResourcePolicy":{
           "shape":"policyDocumentType",
-          "documentation":"<p>A resource-based policy to include in the simulation provided as a string. Each resource in the simulation is treated as if it had this policy attached. You can include only one resource-based policy in a simulation.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>A resource-based policy to include in the simulation provided as a string. Each resource in the simulation is treated as if it had this policy attached. You can include only one resource-based policy in a simulation.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         },
         "ResourceOwner":{
           "shape":"ResourceNameType",
@@ -5927,7 +5927,7 @@
         },
         "PolicyDocument":{
           "shape":"policyDocumentType",
-          "documentation":"<p>The policy that grants an entity permission to assume the role.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The policy that grants an entity permission to assume the role.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -5959,7 +5959,7 @@
         },
         "Password":{
           "shape":"passwordType",
-          "documentation":"<p>The new password for the specified IAM user.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D). However, the format can be further restricted by the account administrator by setting a password policy on the AWS account. For more information, see <a>UpdateAccountPasswordPolicy</a>.</p>"
+          "documentation":"<p>The new password for the specified IAM user.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D). However, the format can be further restricted by the account administrator by setting a password policy on the AWS account. For more information, see <a>UpdateAccountPasswordPolicy</a>.</p>"
         },
         "PasswordResetRequired":{
           "shape":"booleanObjectType",
@@ -6124,7 +6124,7 @@
         },
         "SSHPublicKeyBody":{
           "shape":"publicKeyMaterialType",
-          "documentation":"<p>The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -6156,15 +6156,15 @@
         },
         "CertificateBody":{
           "shape":"certificateBodyType",
-          "documentation":"<p>The contents of the public key certificate in PEM-encoded format.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The contents of the public key certificate in PEM-encoded format.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         },
         "PrivateKey":{
           "shape":"privateKeyType",
-          "documentation":"<p>The contents of the private key in PEM-encoded format.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The contents of the private key in PEM-encoded format.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         },
         "CertificateChain":{
           "shape":"certificateChainType",
-          "documentation":"<p>The contents of the certificate chain. This is typically a concatenation of the PEM-encoded public key certificates of the chain.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The contents of the certificate chain. This is typically a concatenation of the PEM-encoded public key certificates of the chain.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -6188,7 +6188,7 @@
         },
         "CertificateBody":{
           "shape":"certificateBodyType",
-          "documentation":"<p>The contents of the signing certificate.</p> <p>This parameter allows (per its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range (\\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
+          "documentation":"<p>The contents of the signing certificate.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of any printable ASCII character ranging from the space character (\\u0020) through end of the ASCII character range as well as the printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF). It also includes the special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D).</p>"
         }
       }
     },
@@ -6285,7 +6285,7 @@
         },
         "Base32StringSeed":{
           "shape":"BootstrapDatum",
-          "documentation":"<p> The Base32 seed defined as specified in <a href=\"http://www.ietf.org/rfc/rfc3548.txt\">RFC3548</a>. The <code>Base32StringSeed</code> is Base64-encoded. </p>"
+          "documentation":"<p> The Base32 seed defined as specified in <a href=\"https://tools.ietf.org/html/rfc3548.txt\">RFC3548</a>. The <code>Base32StringSeed</code> is Base64-encoded. </p>"
         },
         "QRCodePNG":{
           "shape":"BootstrapDatum",

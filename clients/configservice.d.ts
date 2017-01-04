@@ -1028,7 +1028,7 @@ declare namespace ConfigService {
     nextToken?: NextToken;
   }
   export type MaximumExecutionFrequency = "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours"|string;
-  export type MessageType = "ConfigurationItemChangeNotification"|"ConfigurationSnapshotDeliveryCompleted"|"ScheduledNotification"|string;
+  export type MessageType = "ConfigurationItemChangeNotification"|"ConfigurationSnapshotDeliveryCompleted"|"ScheduledNotification"|"OversizedConfigurationItemChangeNotification"|string;
   export type Name = string;
   export type NextToken = string;
   export type OrderingTimestamp = Date;
@@ -1169,7 +1169,7 @@ declare namespace ConfigService {
      */
     EventSource?: EventSource;
     /**
-     * The type of notification that triggers AWS Config to run an evaluation. You can specify the following notification types:  ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers a configuration item change notification.  ScheduledNotification - Triggers a periodic evaluation at the frequency specified for MaximumExecutionFrequency.  ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.
+     * The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:    ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.    ScheduledNotification - Triggers a periodic evaluation at the frequency specified for MaximumExecutionFrequency.    ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.   If you want your custom rule to be triggered by configuration changes, specify both ConfigurationItemChangeNotification and OversizedConfigurationItemChangeNotification. 
      */
     MessageType?: MessageType;
     /**
