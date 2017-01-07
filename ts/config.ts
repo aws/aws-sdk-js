@@ -30,6 +30,13 @@ AWS.config.update({
     credentials: new AWS.Credentials('accessKeyId', 'secretAccessKey', 'sessionToken')
 });
 
+// update credentials using direct CredentialsOptions
+AWS.config.update({
+    accessKeyId: 'accessKeyId',
+    secretAccessKey: 'secretAccessKey',
+    sessionToken: 'sessionToken'
+});
+
 // set all normal config
 AWS.config.update({
     apiVersion: "latest",
