@@ -24,6 +24,7 @@ export abstract class ConfigurationServicePlaceholders {
   cognitoidentityserviceprovider?: AWS.CognitoIdentityServiceProvider.Types.ClientConfiguration;
   cognitosync?: AWS.CognitoSync.Types.ClientConfiguration;
   configservice?: AWS.ConfigService.Types.ClientConfiguration;
+  cur?: AWS.CUR.Types.ClientConfiguration;
   datapipeline?: AWS.DataPipeline.Types.ClientConfiguration;
   devicefarm?: AWS.DeviceFarm.Types.ClientConfiguration;
   directconnect?: AWS.DirectConnect.Types.ClientConfiguration;
@@ -115,6 +116,7 @@ export interface ConfigurationServiceApiVersions {
   cognitoidentityserviceprovider?: AWS.CognitoIdentityServiceProvider.Types.apiVersion;
   cognitosync?: AWS.CognitoSync.Types.apiVersion;
   configservice?: AWS.ConfigService.Types.apiVersion;
+  cur?: AWS.CUR.Types.apiVersion;
   datapipeline?: AWS.DataPipeline.Types.apiVersion;
   devicefarm?: AWS.DeviceFarm.Types.apiVersion;
   directconnect?: AWS.DirectConnect.Types.apiVersion;

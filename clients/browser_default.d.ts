@@ -16,6 +16,7 @@ export import CognitoIdentity = require('./cognitoidentity');
 export import CognitoIdentityServiceProvider = require('./cognitoidentityserviceprovider');
 export import CognitoSync = require('./cognitosync');
 export import ConfigService = require('./configservice');
+export import CUR = require('./cur');
 export import DeviceFarm = require('./devicefarm');
 export import DirectConnect = require('./directconnect');
 export import DynamoDB = require('./dynamodb');

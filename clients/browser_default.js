@@ -20,6 +20,7 @@ module.exports = {
   CognitoIdentityServiceProvider: require('./cognitoidentityserviceprovider'),
   CognitoSync: require('./cognitosync'),
   ConfigService: require('./configservice'),
+  CUR: require('./cur'),
   DeviceFarm: require('./devicefarm'),
   DirectConnect: require('./directconnect'),
   DynamoDB: require('./dynamodb'),

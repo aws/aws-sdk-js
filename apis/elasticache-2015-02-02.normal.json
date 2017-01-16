@@ -1,12 +1,12 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"elasticache-2015-02-02",
     "apiVersion":"2015-02-02",
     "endpointPrefix":"elasticache",
     "protocol":"query",
     "serviceFullName":"Amazon ElastiCache",
     "signatureVersion":"v4",
+    "uid":"elasticache-2015-02-02",
     "xmlNamespace":"http://elasticache.amazonaws.com/doc/2015-02-02/"
   },
   "operations":{
@@ -1640,7 +1640,7 @@
         },
         "AuthToken":{
           "shape":"String",
-          "documentation":"<p>The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: '/', '\"', or \"@\". </p> </li> </ul> <p>For more information, see <a href=\"http://redis.io/commands/AUTH\">AUTH password</a> at Redis.</p>"
+          "documentation":"<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: '/', '\"', or \"@\". </p> </li> </ul> <p>For more information, see <a href=\"http://redis.io/commands/AUTH\">AUTH password</a> at Redis.</p>"
         }
       },
       "documentation":"<p>Represents the input of a CreateCacheCluster operation.</p>"
@@ -1842,7 +1842,7 @@
         },
         "AuthToken":{
           "shape":"String",
-          "documentation":"<p>The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: '/', '\"', or \"@\". </p> </li> </ul> <p>For more information, see <a href=\"http://redis.io/commands/AUTH\">AUTH password</a> at Redis.</p>"
+          "documentation":"<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>Cannot contain any of the following characters: '/', '\"', or \"@\". </p> </li> </ul> <p>For more information, see <a href=\"http://redis.io/commands/AUTH\">AUTH password</a> at Redis.</p>"
         }
       },
       "documentation":"<p>Represents the input of a <code>CreateReplicationGroup</code> operation.</p>"

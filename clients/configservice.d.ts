@@ -658,7 +658,7 @@ declare namespace ConfigService {
      */
     ComplianceTypes?: ComplianceTypes;
     /**
-     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: String;
   }
@@ -690,7 +690,7 @@ declare namespace ConfigService {
      */
     Limit?: Limit;
     /**
-     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: NextToken;
   }
@@ -734,7 +734,7 @@ declare namespace ConfigService {
      */
     ConfigRuleNames?: ConfigRuleNames;
     /**
-     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: String;
   }
@@ -887,7 +887,7 @@ declare namespace ConfigService {
      */
     Limit?: Limit;
     /**
-     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: NextToken;
   }
@@ -915,7 +915,7 @@ declare namespace ConfigService {
      */
     ComplianceTypes?: ComplianceTypes;
     /**
-     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: String;
   }

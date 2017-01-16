@@ -26,6 +26,7 @@ module.exports = {
   CognitoIdentityServiceProvider: require('./cognitoidentityserviceprovider'),
   CognitoSync: require('./cognitosync'),
   ConfigService: require('./configservice'),
+  CUR: require('./cur'),
   DataPipeline: require('./datapipeline'),
   DeviceFarm: require('./devicefarm'),
   DirectConnect: require('./directconnect'),
