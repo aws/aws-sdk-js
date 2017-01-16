@@ -116,6 +116,10 @@
     "name": "ConfigService",
     "cors": true
   },
+  "cur": {
+    "name": "CUR",
+    "cors": true
+  },
   "datapipeline": {
     "name": "DataPipeline"
   },
