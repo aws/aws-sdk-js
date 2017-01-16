@@ -29,7 +29,7 @@ describe('DynamoDb document client typeOf (internal)', function() {
     });
 
     it('should return "Binary" for buffers', function() {
-        expect(typeOf(Buffer.from('foo'))).to.equal('Binary');
+        expect(typeOf(new Buffer('foo'))).to.equal('Binary');
     });
 
     it('should return "Boolean" for booleans', function() {
