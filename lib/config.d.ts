@@ -172,6 +172,24 @@ export abstract class ConfigurationOptions {
      */
     credentials?: Credentials|CredentialsOptions
     /**
+     * AWS access key ID.
+     * 
+     * @deprecated
+     */
+    accessKeyId?: string
+    /**
+     * AWS secret access key.
+     * 
+     * @deprecated
+     */
+    secretAccessKey?: string
+    /**
+     * AWS session token.
+     * 
+     * @deprecated
+     */
+    sessionToken?: string
+    /**
      * A set of options to pass to the low-level HTTP request.
      */
     httpOptions?: HTTPOptions
