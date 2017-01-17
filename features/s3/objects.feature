@@ -28,6 +28,20 @@ Feature: Working with Objects in S3
     And the object "contentlength" should contain "foo"
 
   @multi-byte
+  Scenario: Putting multi-byte metadata
+    When I put a buffer containing "foo" to the key "mbmd" with the metadata key "mdkey" and value "voilà ça marche"
+    Then the object "mbmd" should exist
+    Then I get the object "mbmd"
+    And the object "mbmd" should contain "foo"
+
+  @multi-byte
+  Scenario: Putting multi-byte metadata
+    When I put "foo" to the key "mbmd" with the metadata key "mdkey" and value "voilà ça marche"
+    Then the object "mbmd" should exist
+    Then I get the object "mbmd"
+    And the object "mbmd" should contain "foo"
+
+  @multi-byte
   Scenario: Putting a multi-byte string to an object
     When I put "åß∂ƒ©" to the key "multi"
     Then the object "multi" should exist
