@@ -592,6 +592,26 @@ export namespace DocumentClient {
      */
     LastEvaluatedTableName?: TableName;
   }
+  export interface ListTagsOfResourceInput {
+    /**
+     * The Amazon DynamoDB resource with tags to be listed. This value is an Amazon Resource Name (ARN).
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * An optional string that, if supplied, must be copied from the output of a previous call to ListTagOfResource. When provided in this manner, this API fetches the next page of results.
+     */
+    NextToken?: NextTokenString;
+  }
+  export interface ListTagsOfResourceOutput {
+    /**
+     * The tags currently associated with the Amazon DynamoDB resource.
+     */
+    Tags?: TagList;
+    /**
+     * If this value is returned, there are additional results to be displayed. To retrieve them, call ListTagsOfResource again, with NextToken set to this value.
+     */
+    NextToken?: NextTokenString;
+  }
   export interface LocalSecondaryIndex {
     /**
      * The name of the local secondary index. The name must be unique among all other indexes on this table.
@@ -636,6 +656,7 @@ export namespace DocumentClient {
   export type LocalSecondaryIndexList = LocalSecondaryIndex[];
   export type Long = number;
   export type MapAttributeValue = {[key: string]: AttributeValue};
+  export type NextTokenString = string;
   export type NonKeyAttributeName = string;
   export type NonKeyAttributeNameList = NonKeyAttributeName[];
   export type NullAttributeValue = boolean;
@@ -836,6 +857,7 @@ export namespace DocumentClient {
      */
     ConsumedCapacity?: ConsumedCapacity;
   }
+  export type ResourceArnString = string;
   export type ReturnConsumedCapacity = "INDEXES"|"TOTAL"|"NONE"|string;
   export type ReturnItemCollectionMetrics = "SIZE"|"NONE"|string;
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
@@ -1006,6 +1028,40 @@ export namespace DocumentClient {
   export type TableName = string;
   export type TableNameList = TableName[];
   export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export interface Tag {
+    /**
+     * The key of the tag.Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value. 
+     */
+    Key: TagKeyString;
+    /**
+     * The value of the tag. Tag values are case-sensitive and can be null.
+     */
+    Value: TagValueString;
+  }
+  export type TagKeyList = TagKeyString[];
+  export type TagKeyString = string;
+  export type TagList = Tag[];
+  export interface TagResourceInput {
+    /**
+     * Identifies the Amazon DynamoDB resource to which tags should be added. This value is an Amazon Resource Name (ARN).
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * The tags to be assigned to the Amazon DynamoDB resource.
+     */
+    Tags: TagList;
+  }
+  export type TagValueString = string;
+  export interface UntagResourceInput {
+    /**
+     * The Amazon DyanamoDB resource the tags will be removed from. This value is an Amazon Resource Name (ARN).
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the Amazon DynamoDB resource.
+     */
+    TagKeys: TagKeyList;
+  }
   export type UpdateExpression = string;
   export interface UpdateGlobalSecondaryIndexAction {
     /**

@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3",
-  "description": "Convert string bodies to buffers to ensure correct encoding is used"
-}

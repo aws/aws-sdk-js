@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.22-->
+<!--LATEST=2.7.23-->
 <!--ENTRYINSERT-->
+
+## 2.7.23
+* bugfix: S3: Convert string bodies to buffers to ensure correct encoding is used
+* feature: DynamoDB: Adds support for tagging tables and indexes.
 
 ## 2.7.22
 * feature: CUR: The AWS Cost and Usage Report Service API allows you to enable and disable the Cost & Usage report, as well as modify the report name, the data granularity, and the delivery preferences.

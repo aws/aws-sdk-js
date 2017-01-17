@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.22
+// AWS SDK for JavaScript v2.7.23
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -20179,25 +20179,24 @@ module.exports={
     },
     "ListTables": {
       "input_token": "ExclusiveStartTableName",
-      "output_token": "LastEvaluatedTableName",
       "limit_key": "Limit",
+      "output_token": "LastEvaluatedTableName",
       "result_key": "TableNames"
     },
     "Query": {
       "input_token": "ExclusiveStartKey",
-      "output_token": "LastEvaluatedKey",
       "limit_key": "Limit",
+      "output_token": "LastEvaluatedKey",
       "result_key": "Items"
     },
     "Scan": {
       "input_token": "ExclusiveStartKey",
-      "output_token": "LastEvaluatedKey",
       "limit_key": "Limit",
+      "output_token": "LastEvaluatedKey",
       "result_key": "Items"
     }
   }
 }
-
 },{}],37:[function(require,module,exports){
 module.exports={
   "version": 2,
@@ -20558,6 +20557,27 @@ module.exports={
         }
       }
     },
+    "ListTagsOfResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Tags": {
+            "shape": "S35"
+          },
+          "NextToken": {}
+        }
+      }
+    },
     "PutItem": {
       "input": {
         "type": "structure",
@@ -20624,11 +20644,11 @@ module.exports={
             "type": "map",
             "key": {},
             "value": {
-              "shape": "S37"
+              "shape": "S3f"
             }
           },
           "QueryFilter": {
-            "shape": "S38"
+            "shape": "S3g"
           },
           "ConditionalOperator": {},
           "ScanIndexForward": {
@@ -20687,7 +20707,7 @@ module.exports={
           },
           "Select": {},
           "ScanFilter": {
-            "shape": "S38"
+            "shape": "S3g"
           },
           "ConditionalOperator": {},
           "ExclusiveStartKey": {
@@ -20730,6 +20750,37 @@ module.exports={
           },
           "ConsumedCapacity": {
             "shape": "Su"
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "Tags"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "Tags": {
+            "shape": "S35"
+          }
+        }
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "TagKeys": {
+            "type": "list",
+            "member": {}
           }
         }
       }
@@ -21266,7 +21317,21 @@ module.exports={
         "shape": "S8"
       }
     },
-    "S37": {
+    "S35": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "members": {
+          "Key": {},
+          "Value": {}
+        }
+      }
+    },
+    "S3f": {
       "type": "structure",
       "required": [
         "ComparisonOperator"
@@ -21278,11 +21343,11 @@ module.exports={
         "ComparisonOperator": {}
       }
     },
-    "S38": {
+    "S3g": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S37"
+        "shape": "S3f"
       }
     }
   }
@@ -72372,22 +72437,21 @@ module.exports={
 }
 },{}],112:[function(require,module,exports){
 module.exports={
-    "pagination": {
-        "ListCollections" : {
-            "input_token" : "NextToken",
-            "output_token" : "NextToken",
-            "limit_key" : "MaxResults",
-            "result_key" : "CollectionIds"
-        },
-        "ListFaces": {
-            "input_token" : "NextToken",
-            "output_token" : "NextToken",
-            "limit_key" : "MaxResults",
-            "result_key" : "Faces"
-        }
+  "pagination": {
+    "ListCollections": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "CollectionIds"
+    },
+    "ListFaces": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Faces"
     }
+  }
 }
-
 },{}],113:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -74674,36 +74738,35 @@ module.exports={
   "pagination": {
     "ListHealthChecks": {
       "input_token": "Marker",
-      "output_token": "NextMarker",
-      "more_results": "IsTruncated",
       "limit_key": "MaxItems",
+      "more_results": "IsTruncated",
+      "output_token": "NextMarker",
       "result_key": "HealthChecks"
     },
     "ListHostedZones": {
       "input_token": "Marker",
-      "output_token": "NextMarker",
-      "more_results": "IsTruncated",
       "limit_key": "MaxItems",
+      "more_results": "IsTruncated",
+      "output_token": "NextMarker",
       "result_key": "HostedZones"
     },
     "ListResourceRecordSets": {
-      "more_results": "IsTruncated",
-      "limit_key": "MaxItems",
-      "result_key": "ResourceRecordSets",
       "input_token": [
         "StartRecordName",
         "StartRecordType",
         "StartRecordIdentifier"
       ],
+      "limit_key": "MaxItems",
+      "more_results": "IsTruncated",
       "output_token": [
         "NextRecordName",
         "NextRecordType",
         "NextRecordIdentifier"
-      ]
+      ],
+      "result_key": "ResourceRecordSets"
     }
   }
 }
-
 },{}],115:[function(require,module,exports){
 module.exports={
   "version": 2,
@@ -91214,7 +91277,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.22',
+  VERSION: '2.7.23',
 
 
   Signers: {},

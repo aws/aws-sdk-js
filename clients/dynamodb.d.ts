@@ -85,6 +85,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   listTables(callback?: (err: AWSError, data: DynamoDB.Types.ListTablesOutput) => void): Request<DynamoDB.Types.ListTablesOutput, AWSError>;
   /**
+   * List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource up to 10 times per second, per account. For an overview on tagging DynamoDB resources, see Tagging for DynamoDB in the Amazon DynamoDB Developer Guide.
+   */
+  listTagsOfResource(params: DynamoDB.Types.ListTagsOfResourceInput, callback?: (err: AWSError, data: DynamoDB.Types.ListTagsOfResourceOutput) => void): Request<DynamoDB.Types.ListTagsOfResourceOutput, AWSError>;
+  /**
+   * List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource up to 10 times per second, per account. For an overview on tagging DynamoDB resources, see Tagging for DynamoDB in the Amazon DynamoDB Developer Guide.
+   */
+  listTagsOfResource(callback?: (err: AWSError, data: DynamoDB.Types.ListTagsOfResourceOutput) => void): Request<DynamoDB.Types.ListTagsOfResourceOutput, AWSError>;
+  /**
    * Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. In addition to putting an item, you can also return the item's attribute values in the same operation, using the ReturnValues parameter. When you add an item, the primary key attribute(s) are the only required attributes. Attribute values cannot be null. String and Binary type attributes must have lengths greater than zero. Set type attributes cannot be empty. Requests with empty values will be rejected with a ValidationException exception.  To prevent a new item from replacing an existing item, use a conditional expression that contains the attribute_not_exists function with the name of the attribute being used as the partition key for the table. Since every record must contain that attribute, the attribute_not_exists function will only succeed if no matching item exists.  For more information about PutItem, see Working with Items in the Amazon DynamoDB Developer Guide.
    */
   putItem(params: DynamoDB.Types.PutItemInput, callback?: (err: AWSError, data: DynamoDB.Types.PutItemOutput) => void): Request<DynamoDB.Types.PutItemOutput, AWSError>;
@@ -108,6 +116,22 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * The Scan operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a FilterExpression operation. If the total number of scanned items exceeds the maximum data set size limit of 1 MB, the scan stops and results are returned to the user as a LastEvaluatedKey value to continue the scan in a subsequent operation. The results also include the number of items exceeding the limit. A scan can result in no table data meeting the filter criteria.  By default, Scan operations proceed sequentially; however, for faster performance on a large table or secondary index, applications can request a parallel Scan operation by providing the Segment and TotalSegments parameters. For more information, see Parallel Scan in the Amazon DynamoDB Developer Guide. By default, Scan uses eventually consistent reads when accessing the data in a table; therefore, the result set might not include the changes to data in the table immediately before the operation began. If you need a consistent copy of the data, as of the time that the Scan begins, you can set the ConsistentRead parameter to true.
    */
   scan(callback?: (err: AWSError, data: DynamoDB.Types.ScanOutput) => void): Request<DynamoDB.Types.ScanOutput, AWSError>;
+  /**
+   * Associate a set of tags with an Amazon DynamoDB resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. You can call TagResource up to 5 times per second, per account.  For an overview on tagging DynamoDB resources, see Tagging for DynamoDB in the Amazon DynamoDB Developer Guide.
+   */
+  tagResource(params: DynamoDB.Types.TagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associate a set of tags with an Amazon DynamoDB resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. You can call TagResource up to 5 times per second, per account.  For an overview on tagging DynamoDB resources, see Tagging for DynamoDB in the Amazon DynamoDB Developer Guide.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the association of tags from an Amazon DynamoDB resource. You can call UntagResource up to 5 times per second, per account.  For an overview on tagging DynamoDB resources, see Tagging for DynamoDB in the Amazon DynamoDB Developer Guide.
+   */
+  untagResource(params: DynamoDB.Types.UntagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the association of tags from an Amazon DynamoDB resource. You can call UntagResource up to 5 times per second, per account.  For an overview on tagging DynamoDB resources, see Tagging for DynamoDB in the Amazon DynamoDB Developer Guide.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values). You can also return the item's attribute values in the same UpdateItem operation using the ReturnValues parameter.
    */
@@ -691,6 +715,26 @@ declare namespace DynamoDB {
      */
     LastEvaluatedTableName?: TableName;
   }
+  export interface ListTagsOfResourceInput {
+    /**
+     * The Amazon DynamoDB resource with tags to be listed. This value is an Amazon Resource Name (ARN).
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * An optional string that, if supplied, must be copied from the output of a previous call to ListTagOfResource. When provided in this manner, this API fetches the next page of results.
+     */
+    NextToken?: NextTokenString;
+  }
+  export interface ListTagsOfResourceOutput {
+    /**
+     * The tags currently associated with the Amazon DynamoDB resource.
+     */
+    Tags?: TagList;
+    /**
+     * If this value is returned, there are additional results to be displayed. To retrieve them, call ListTagsOfResource again, with NextToken set to this value.
+     */
+    NextToken?: NextTokenString;
+  }
   export interface LocalSecondaryIndex {
     /**
      * The name of the local secondary index. The name must be unique among all other indexes on this table.
@@ -735,6 +779,7 @@ declare namespace DynamoDB {
   export type LocalSecondaryIndexList = LocalSecondaryIndex[];
   export type Long = number;
   export type MapAttributeValue = {[key: string]: AttributeValue};
+  export type NextTokenString = string;
   export type NonKeyAttributeName = string;
   export type NonKeyAttributeNameList = NonKeyAttributeName[];
   export type NullAttributeValue = boolean;
@@ -935,6 +980,7 @@ declare namespace DynamoDB {
      */
     ConsumedCapacity?: ConsumedCapacity;
   }
+  export type ResourceArnString = string;
   export type ReturnConsumedCapacity = "INDEXES"|"TOTAL"|"NONE"|string;
   export type ReturnItemCollectionMetrics = "SIZE"|"NONE"|string;
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
@@ -1105,6 +1151,40 @@ declare namespace DynamoDB {
   export type TableName = string;
   export type TableNameList = TableName[];
   export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export interface Tag {
+    /**
+     * The key of the tag.Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value. 
+     */
+    Key: TagKeyString;
+    /**
+     * The value of the tag. Tag values are case-sensitive and can be null.
+     */
+    Value: TagValueString;
+  }
+  export type TagKeyList = TagKeyString[];
+  export type TagKeyString = string;
+  export type TagList = Tag[];
+  export interface TagResourceInput {
+    /**
+     * Identifies the Amazon DynamoDB resource to which tags should be added. This value is an Amazon Resource Name (ARN).
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * The tags to be assigned to the Amazon DynamoDB resource.
+     */
+    Tags: TagList;
+  }
+  export type TagValueString = string;
+  export interface UntagResourceInput {
+    /**
+     * The Amazon DyanamoDB resource the tags will be removed from. This value is an Amazon Resource Name (ARN).
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the Amazon DynamoDB resource.
+     */
+    TagKeys: TagKeyList;
+  }
   export type UpdateExpression = string;
   export interface UpdateGlobalSecondaryIndexAction {
     /**
