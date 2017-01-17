@@ -29,6 +29,22 @@ module.exports = function () {
     this.request('s3nochecksums', 'putObject', params, next);
   });
 
+  this.When(/^I put "([^"]*)" to the key "([^"]*)" with the metadata key "([^"]*)" and value "([^"]*)"$/, function(contents, key, mdKey, mdValue, next) {
+    var metadata = {};
+    metadata[mdKey] = mdValue;
+    var params = {Bucket: this.sharedBucket, Key: key, Body: contents, Metadata: metadata };
+    this.s3nochecksums = new this.AWS.S3({computeChecksums: false});
+    this.request('s3nochecksums', 'putObject', params, next);
+  });
+
+  this.When(/^I put a buffer containing "([^"]*)" to the key "([^"]*)" with the metadata key "([^"]*)" and value "([^"]*)"$/, function(contents, key, mdKey, mdValue, next) {
+    var metadata = {};
+    metadata[mdKey] = mdValue;
+    var params = {Bucket: this.sharedBucket, Key: key, Body: new Buffer(contents), Metadata: metadata };
+    this.s3nochecksums = new this.AWS.S3({computeChecksums: false});
+    this.request('s3nochecksums', 'putObject', params, next);
+  });
+
   this.Then(/^the object "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
     this.assert.equal(this.data.Body.toString().replace('\n', ''), contents);
     next();
