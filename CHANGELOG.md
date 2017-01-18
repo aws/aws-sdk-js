@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.23-->
+<!--LATEST=2.7.24-->
 <!--ENTRYINSERT-->
+
+## 2.7.24
+* bugfix: HTTP: Ensure that buffers are not created with Buffer.from in node 4.0-4.4
+* bugfix: core: Deprecate v2.7.23
 
 ## 2.7.23
 * bugfix: S3: Convert string bodies to buffers to ensure correct encoding is used
