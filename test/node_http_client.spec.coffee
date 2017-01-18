@@ -43,3 +43,23 @@ if AWS.util.isNode()
           expect(err.code).to.equal('TimeoutError')
           expect(err.message).to.equal('Connection timed out after 1ms')
           expect(numCalls).to.equal(1)
+
+      it 'converts strings to buffers', ->
+        body = 'foo'
+        req = {
+          body: body,
+          headers: {
+            'Content-Length': '3'
+          }
+        }
+
+        sent = null;
+        fakeStream = {
+          once: () -> {},
+          emit: () -> {},
+          end: (toSend) -> sent = toSend
+        }
+
+        http.writeBody(fakeStream, req);
+        expect(sent).not.to.equal(body)
+        expect(typeof sent.byteLength).not.to.equal('undefined')
