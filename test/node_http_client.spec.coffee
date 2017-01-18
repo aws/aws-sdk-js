@@ -62,4 +62,4 @@ if AWS.util.isNode()
 
         http.writeBody(fakeStream, req);
         expect(sent).not.to.equal(body)
-        expect(typeof sent.byteLength).not.to.equal('undefined')
+        expect(Buffer.isBuffer(sent)).to.equal(true)
