@@ -92,11 +92,11 @@ declare class RDS extends Service {
    */
   copyOptionGroup(callback?: (err: AWSError, data: RDS.Types.CopyOptionGroupResult) => void): Request<RDS.Types.CopyOptionGroupResult, AWSError>;
   /**
-   * Creates a new Amazon Aurora DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster. For more information on Amazon Aurora, see Aurora on Amazon RDS in the Amazon RDS User Guide. 
+   * Creates a new Amazon Aurora DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL DB instance. For more information on Amazon Aurora, see Aurora on Amazon RDS in the Amazon RDS User Guide. 
    */
   createDBCluster(params: RDS.Types.CreateDBClusterMessage, callback?: (err: AWSError, data: RDS.Types.CreateDBClusterResult) => void): Request<RDS.Types.CreateDBClusterResult, AWSError>;
   /**
-   * Creates a new Amazon Aurora DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster. For more information on Amazon Aurora, see Aurora on Amazon RDS in the Amazon RDS User Guide. 
+   * Creates a new Amazon Aurora DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL DB instance. For more information on Amazon Aurora, see Aurora on Amazon RDS in the Amazon RDS User Guide. 
    */
   createDBCluster(callback?: (err: AWSError, data: RDS.Types.CreateDBClusterResult) => void): Request<RDS.Types.CreateDBClusterResult, AWSError>;
   /**
@@ -1036,7 +1036,7 @@ declare namespace RDS {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * The Amazon Resource Name (ARN) of the source DB cluster if this DB cluster is created as a Read Replica.
+     * The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica.
      */
     ReplicationSourceIdentifier?: String;
     Tags?: TagList;
@@ -1902,6 +1902,10 @@ declare namespace RDS {
      * Contains one or more identifiers of the Read Replicas associated with this DB instance.
      */
     ReadReplicaDBInstanceIdentifiers?: ReadReplicaDBInstanceIdentifierList;
+    /**
+     * Contains one or more identifiers of Aurora DB clusters that are read replicas of this DB instance.
+     */
+    ReadReplicaDBClusterIdentifiers?: ReadReplicaDBClusterIdentifierList;
     /**
      * License model information for this DB instance.
      */
@@ -4122,6 +4126,7 @@ declare namespace RDS {
   export interface PurchaseReservedDBInstancesOfferingResult {
     ReservedDBInstance?: ReservedDBInstance;
   }
+  export type ReadReplicaDBClusterIdentifierList = String[];
   export type ReadReplicaDBInstanceIdentifierList = String[];
   export type ReadReplicaIdentifierList = String[];
   export interface RebootDBInstanceMessage {

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.24-->
+<!--LATEST=2.7.25-->
 <!--ENTRYINSERT-->
+
+## 2.7.25
+* feature: RDS: Updates AWS.RDS API to the latest version.
 
 ## 2.7.24
 * bugfix: HTTP: Ensure that buffers are not created with Buffer.from in node 4.0-4.4

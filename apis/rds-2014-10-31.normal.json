@@ -329,7 +329,7 @@
           "shape": "DBClusterNotFoundFault"
         }
       ],
-      "documentation": "<p>Creates a new Amazon Aurora DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>"
+      "documentation": "<p>Creates a new Amazon Aurora DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL DB instance.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>"
     },
     "CreateDBClusterParameterGroup": {
       "name": "CreateDBClusterParameterGroup",
@@ -2964,7 +2964,7 @@
         },
         "ReplicationSourceIdentifier": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the source DB cluster if this DB cluster is created as a Read Replica.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica.</p>"
         },
         "Tags": {
           "shape": "TagList"
@@ -4204,6 +4204,10 @@
         "ReadReplicaDBInstanceIdentifiers": {
           "shape": "ReadReplicaDBInstanceIdentifierList",
           "documentation": "<p>Contains one or more identifiers of the Read Replicas associated with this DB instance.</p>"
+        },
+        "ReadReplicaDBClusterIdentifiers": {
+          "shape": "ReadReplicaDBClusterIdentifierList",
+          "documentation": "<p>Contains one or more identifiers of Aurora DB clusters that are read replicas of this DB instance.</p>"
         },
         "LicenseModel": {
           "shape": "String",
@@ -7786,6 +7790,13 @@
         "ReservedDBInstance": {
           "shape": "ReservedDBInstance"
         }
+      }
+    },
+    "ReadReplicaDBClusterIdentifierList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "ReadReplicaDBClusterIdentifier"
       }
     },
     "ReadReplicaDBInstanceIdentifierList": {
