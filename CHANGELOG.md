@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.25-->
+<!--LATEST=2.7.26-->
 <!--ENTRYINSERT-->
+
+## 2.7.26
+* feature: EC2: Amazon EC2 Spot instances now support dedicated tenancy, providing the ability to run Spot instances single-tenant manner on physically isolated hardware within a VPC to satisfy security, privacy, or other compliance requirements. Dedicated Spot instances can be requested using RequestSpotInstances and RequestSpotFleet.
 
 ## 2.7.25
 * feature: RDS: Updates AWS.RDS API to the latest version.

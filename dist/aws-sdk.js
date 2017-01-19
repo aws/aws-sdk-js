@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.25
+// AWS SDK for JavaScript v2.7.26
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -32247,6 +32247,9 @@ module.exports={
         },
         "GroupName": {
           "locationName": "groupName"
+        },
+        "Tenancy": {
+          "locationName": "tenancy"
         }
       }
     },
@@ -32753,14 +32756,14 @@ module.exports={
     },
     "DescribeInstanceStatus": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "InstanceStatuses"
     },
     "DescribeInstances": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "Reservations"
     },
     "DescribeInternetGateways": {
@@ -32787,16 +32790,16 @@ module.exports={
     "DescribeReservedInstancesListings": {
       "result_key": "ReservedInstancesListings"
     },
-    "DescribeReservedInstancesOfferings": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "ReservedInstancesOfferings"
-    },
     "DescribeReservedInstancesModifications": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "result_key": "ReservedInstancesModifications"
+    },
+    "DescribeReservedInstancesOfferings": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "ReservedInstancesOfferings"
     },
     "DescribeRouteTables": {
       "result_key": "RouteTables"
@@ -32806,23 +32809,23 @@ module.exports={
     },
     "DescribeSnapshots": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "Snapshots"
+    },
+    "DescribeSpotFleetRequests": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "SpotFleetRequestConfigs"
     },
     "DescribeSpotInstanceRequests": {
       "result_key": "SpotInstanceRequests"
     },
-    "DescribeSpotFleetRequests": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "SpotFleetRequestConfigs"
-    },
     "DescribeSpotPriceHistory": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "SpotPriceHistory"
     },
     "DescribeSubnets": {
@@ -32830,27 +32833,27 @@ module.exports={
     },
     "DescribeTags": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "Tags"
     },
     "DescribeVolumeStatus": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "VolumeStatuses"
     },
     "DescribeVolumes": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "Volumes"
-    },
-    "DescribeVpcs": {
-      "result_key": "Vpcs"
     },
     "DescribeVpcPeeringConnections": {
       "result_key": "VpcPeeringConnections"
+    },
+    "DescribeVpcs": {
+      "result_key": "Vpcs"
     },
     "DescribeVpnConnections": {
       "result_key": "VpnConnections"
@@ -32860,7 +32863,6 @@ module.exports={
     }
   }
 }
-
 },{}],43:[function(require,module,exports){
 module.exports={
   "version": 2,
@@ -91281,7 +91283,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.25',
+  VERSION: '2.7.26',
 
 
   Signers: {},
