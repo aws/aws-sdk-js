@@ -306,12 +306,6 @@ describe 'AWS.S3', ->
           req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 + 1))
           expect(req.headers['Expect']).not.to.exist
 
-    describe 'casting bodies to buffers', ->
-      if AWS.util.isNode()
-        it 'casts string bodies to buffers to avoid a mismatch between header and body encoding', ->
-          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: 'foo')
-          expect(AWS.util.Buffer.isBuffer(req.body))
-
     describe 'with s3DisableBodySigning set to true', ->
 
       it 'will disable body signing when using signature version 4 and the endpoint uses https', ->
@@ -1490,4 +1484,5 @@ describe 'AWS.S3', ->
         done()
 
     it 'errors if ContentLength is passed as parameter', ->
-      expect(-> s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', ContentLength: 5)).to.throw(/ContentLength is not supported in pre-signed URLs/)
+      expect(-> s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', ContentLength: 5)).to.
+        throw(/ContentLength is not supported in pre-signed URLs/)
