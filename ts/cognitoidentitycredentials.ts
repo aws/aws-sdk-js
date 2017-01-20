@@ -23,7 +23,7 @@ const credOptions: CognitoIdentityCredentials.CognitoIdentityOptions = {
         'www.digits.com': 'DIGITSTOKEN'
     },
     LoginId: 'example@gmail.com'
-}
+};
 
 const creds5: CognitoIdentityCredentials = new CognitoIdentityCredentials(credOptions);
 
@@ -34,3 +34,12 @@ const creds6: CognitoIdentityCredentials = new CognitoIdentityCredentials(credOp
     },
     region: 'us-west-2'
 });
+
+const config: CognitoIdentityCredentials.ClientConfiguration = {
+    httpOptions: {
+        timeout: 50
+    },
+    region: 'us-west-2'
+};
+
+const creds7: CognitoIdentityCredentials = new CognitoIdentityCredentials(credOptions, config);

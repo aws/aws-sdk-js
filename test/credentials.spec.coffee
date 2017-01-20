@@ -693,6 +693,15 @@ describe 'AWS.WebIdentityCredentials', ->
       creds.createClients()
       expect(service).to.eql(creds.service)
 
+    it 'uses global config for service clients if client config ommitted', ->
+      creds.createClients();
+      expect(creds.service.config.httpOptions.timeout).to.equal(AWS.config.httpOptions.timeout)
+
+    it 'passes clientConfig to service clients', ->
+      creds = new AWS.WebIdentityCredentials({WebIdentityToken: 'token', RoleArn: 'arn'}, {httpOptions: {timeout: 50}})
+      creds.createClients();
+      expect(creds.service.config.httpOptions.timeout).to.equal(50);
+
   describe 'refresh', ->
     beforeEach -> setupClients()
 
@@ -896,16 +905,22 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.sts).to.eql(sts)
       expect(creds.webIdentityCredentials).to.eql(webIdentityCredentials)
 
-    it 'uses global config for cognito client if client congif ommitted', ->
+    it 'uses global config for service clients if client config ommitted', ->
       creds.createClients();
       expect(creds.cognito.config.region).to.equal(AWS.config.region);
       expect(creds.cognito.config.httpOptions.timeout).to.equal(AWS.config.httpOptions.timeout);
+      expect(creds.sts.config.httpOptions.timeout).to.equal(AWS.config.httpOptions.timeout)
+      creds.webIdentityCredentials.createClients();
+      expect(creds.webIdentityCredentials.service.config.httpOptions.timeout).to.equal(AWS.config.httpOptions.timeout)
 
-    it 'passes clientConfig to cognito client', ->
+    it 'passes clientConfig to service clients', ->
       creds = new AWS.CognitoIdentityCredentials(initParams, {region: 'us-west-2', httpOptions: {timeout: 50}})
       creds.createClients();
       expect(creds.cognito.config.region).to.equal('us-west-2');
       expect(creds.cognito.config.httpOptions.timeout).to.equal(50);
+      expect(creds.sts.config.httpOptions.timeout).to.equal(50);
+      creds.webIdentityCredentials.createClients();
+      expect(creds.webIdentityCredentials.service.config.httpOptions.timeout).to.equal(50);
 
   describe 'refresh', ->
     beforeEach -> setupClients()

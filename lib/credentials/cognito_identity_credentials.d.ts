@@ -38,5 +38,6 @@ export class CognitoIdentityCredentials extends Credentials {
 // Needed to expose interfaces on the class
 declare namespace CognitoIdentityCredentials {
     export type CognitoIdentityCredentialsInputs = CognitoIdentity.GetIdInput|CognitoIdentity.GetCredentialsForIdentityInput|CognitoIdentity.GetOpenIdTokenInput|STS.AssumeRoleWithWebIdentityRequest;
-    export type CognitoIdentityOptions = CognitoIdentityCredentialsInputs & {LoginId?: string}
+    export type CognitoIdentityOptions = CognitoIdentityCredentialsInputs & {LoginId?: string};
+    export type ClientConfiguration = ConfigurationOptions;
 }
