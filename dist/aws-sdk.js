@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.26
+// AWS SDK for JavaScript v2.7.27
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -64,21 +64,7 @@ module.exports={
                 "shape": "Sc"
               },
               "DomainValidationOptions": {
-                "type": "list",
-                "member": {
-                  "type": "structure",
-                  "required": [
-                    "DomainName"
-                  ],
-                  "members": {
-                    "DomainName": {},
-                    "ValidationEmails": {
-                      "type": "list",
-                      "member": {}
-                    },
-                    "ValidationDomain": {}
-                  }
-                }
+                "shape": "Sd"
               },
               "Serial": {},
               "Subject": {},
@@ -110,7 +96,20 @@ module.exports={
                 "member": {}
               },
               "FailureReason": {},
-              "Type": {}
+              "Type": {},
+              "RenewalSummary": {
+                "type": "structure",
+                "required": [
+                  "RenewalStatus",
+                  "DomainValidationOptions"
+                ],
+                "members": {
+                  "RenewalStatus": {},
+                  "DomainValidationOptions": {
+                    "shape": "Sd"
+                  }
+                }
+              }
             }
           }
         }
@@ -295,6 +294,24 @@ module.exports={
     "Sc": {
       "type": "list",
       "member": {}
+    },
+    "Sd": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "DomainName"
+        ],
+        "members": {
+          "DomainName": {},
+          "ValidationEmails": {
+            "type": "list",
+            "member": {}
+          },
+          "ValidationDomain": {},
+          "ValidationStatus": {}
+        }
+      }
     }
   }
 }
@@ -302,14 +319,13 @@ module.exports={
 module.exports={
   "pagination": {
     "ListCertificates": {
-      "limit_key": "MaxItems",
       "input_token": "NextToken",
+      "limit_key": "MaxItems",
       "output_token": "NextToken",
       "result_key": "CertificateSummaryList"
     }
   }
 }
-
 },{}],3:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -91283,7 +91299,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.26',
+  VERSION: '2.7.27',
 
 
   Signers: {},

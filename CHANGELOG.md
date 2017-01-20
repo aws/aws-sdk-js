@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.26-->
+<!--LATEST=2.7.27-->
 <!--ENTRYINSERT-->
+
+## 2.7.27
+* bugfix: Performance: This change reverts a request body cast in the node HTTP handler that caused a performance regression.
+* feature: ACM: Updated response elements for DescribeCertificate API in support of managed renewal.
 
 ## 2.7.26
 * feature: EC2: Amazon EC2 Spot instances now support dedicated tenancy, providing the ability to run Spot instances single-tenant manner on physically isolated hardware within a VPC to satisfy security, privacy, or other compliance requirements. Dedicated Spot instances can be requested using RequestSpotInstances and RequestSpotFleet.

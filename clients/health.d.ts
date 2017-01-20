@@ -107,7 +107,7 @@ declare namespace Health {
      */
     filter: EntityFilter;
     /**
-     * The locale (language) to return information in. The default is English.
+     * The locale (language) to return information in. English (en) is the default and the only supported value at this time.
      */
     locale?: locale;
     /**
@@ -115,7 +115,7 @@ declare namespace Health {
      */
     nextToken?: nextToken;
     /**
-     * The maximum number of items to return in one batch.
+     * The maximum number of items to return in one batch, between 10 and 100, inclusive.
      */
     maxResults?: maxResults;
   }
@@ -151,7 +151,7 @@ declare namespace Health {
      */
     aggregateField: eventAggregateField;
     /**
-     * The maximum number of items to return in one batch.
+     * The maximum number of items to return in one batch, between 10 and 100, inclusive.
      */
     maxResults?: maxResults;
     /**
@@ -176,7 +176,7 @@ declare namespace Health {
      */
     eventArns: eventArnList;
     /**
-     * The locale (language) to return information in. The default is English.
+     * The locale (language) to return information in. English (en) is the default and the only supported value at this time.
      */
     locale?: locale;
   }
@@ -197,7 +197,7 @@ declare namespace Health {
      */
     filter?: EventTypeFilter;
     /**
-     * The locale (language) to return information in. The default is English.
+     * The locale (language) to return information in. English (en) is the default and the only supported value at this time.
      */
     locale?: locale;
     /**
@@ -205,13 +205,13 @@ declare namespace Health {
      */
     nextToken?: nextToken;
     /**
-     * The maximum number of items to return in one batch.
+     * The maximum number of items to return in one batch, between 10 and 100, inclusive.
      */
     maxResults?: maxResults;
   }
   export interface DescribeEventTypesResponse {
     /**
-     * List of event types to be matched with.
+     * A list of event types that match the filter criteria. Event types have a category (issue, accountNotification, or scheduledChange), a service (for example, EC2, RDS, DATAPIPELINE, BILLING), and a code (in the format AWS_SERVICE_DESCRIPTION ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT).
      */
     eventTypes?: EventTypeList;
     /**
@@ -229,11 +229,11 @@ declare namespace Health {
      */
     nextToken?: nextToken;
     /**
-     * The maximum number of items to return in one batch.
+     * The maximum number of items to return in one batch, between 10 and 100, inclusive.
      */
     maxResults?: maxResults;
     /**
-     * The locale (language) to return information in. The default is English.
+     * The locale (language) to return information in. English (en) is the default and the only supported value at this time.
      */
     locale?: locale;
   }

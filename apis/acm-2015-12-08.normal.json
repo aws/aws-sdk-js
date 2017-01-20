@@ -53,7 +53,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidArnException"}
       ],
-      "documentation":"<p>Returns a list of the fields contained in the specified ACM Certificate. For example, this action returns the certificate status, a flag that indicates whether the certificate is associated with any other AWS service, and the date at which the certificate request was created. You specify the ACM Certificate on input by its Amazon Resource Name (ARN).</p>"
+      "documentation":"<p>Returns detailed metadata about the specified ACM Certificate.</p>"
     },
     "GetCertificate":{
       "name":"GetCertificate",
@@ -106,7 +106,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidArnException"}
       ],
-      "documentation":"<p>Lists the tags that have been applied to the ACM Certificate. Use the certificate ARN to specify the certificate. To add a tag to an ACM Certificate, use the <a>AddTagsToCertificate</a> action. To delete a tag, use the <a>RemoveTagsFromCertificate</a> action.</p>"
+      "documentation":"<p>Lists the tags that have been applied to the ACM Certificate. Use the certificate's Amazon Resource Name (ARN) to specify the certificate. To add a tag to an ACM Certificate, use the <a>AddTagsToCertificate</a> action. To delete a tag, use the <a>RemoveTagsFromCertificate</a> action.</p>"
     },
     "RemoveTagsFromCertificate":{
       "name":"RemoveTagsFromCertificate",
@@ -215,7 +215,7 @@
         },
         "DomainValidationOptions":{
           "shape":"DomainValidationList",
-          "documentation":"<p>Contains information about the email address or addresses used for domain validation. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>.</p>"
+          "documentation":"<p>Contains information about the initial validation of each domain name that occurs as a result of the <a>RequestCertificate</a> request. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>.</p>"
         },
         "Serial":{
           "shape":"String",
@@ -280,9 +280,13 @@
         "Type":{
           "shape":"CertificateType",
           "documentation":"<p>The source of the certificate. For certificates provided by ACM, this value is <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the <i>AWS Certificate Manager User Guide</i>.</p>"
+        },
+        "RenewalSummary":{
+          "shape":"RenewalSummary",
+          "documentation":"<p>Contains information about the status of ACM's <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for the certificate. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>.</p>"
         }
       },
-      "documentation":"<p>Contains detailed metadata about an ACM Certificate. This structure is returned in the response to a <a>DescribeCertificate</a> request.</p>"
+      "documentation":"<p>Contains metadata about an ACM certificate. This structure is returned in the response to a <a>DescribeCertificate</a> request.</p>"
     },
     "CertificateStatus":{
       "type":"string",
@@ -341,7 +345,7 @@
       "members":{
         "CertificateArn":{
           "shape":"Arn",
-          "documentation":"<p>String that contains an ACM Certificate ARN. The ARN must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the ACM Certificate. The ARN must have the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
         }
       }
     },
@@ -350,7 +354,7 @@
       "members":{
         "Certificate":{
           "shape":"CertificateDetail",
-          "documentation":"<p>Contains a <a>CertificateDetail</a> structure that lists the fields of an ACM Certificate.</p>"
+          "documentation":"<p>Metadata about an ACM certificate.</p>"
         }
       }
     },
@@ -366,24 +370,36 @@
       "min":1,
       "pattern":"^(\\*\\.)?(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$"
     },
+    "DomainStatus":{
+      "type":"string",
+      "enum":[
+        "PENDING_VALIDATION",
+        "SUCCESS",
+        "FAILED"
+      ]
+    },
     "DomainValidation":{
       "type":"structure",
       "required":["DomainName"],
       "members":{
         "DomainName":{
           "shape":"DomainNameString",
-          "documentation":"<p>Fully Qualified Domain Name (FQDN) of the form <code>www.example.com or </code> <code>example.com</code>.</p>"
+          "documentation":"<p>A fully qualified domain name (FQDN) in the certificate. For example, <code>www.example.com</code> or <code>example.com</code>.</p>"
         },
         "ValidationEmails":{
           "shape":"ValidationEmailList",
-          "documentation":"<p>A list of contact address for the domain registrant.</p>"
+          "documentation":"<p>A list of email addresses that ACM used to send domain validation emails.</p>"
         },
         "ValidationDomain":{
           "shape":"DomainNameString",
-          "documentation":"<p>The base validation domain that acts as the suffix of the email addresses that are used to send the emails.</p>"
+          "documentation":"<p>The domain name that ACM used to send domain validation emails.</p>"
+        },
+        "ValidationStatus":{
+          "shape":"DomainStatus",
+          "documentation":"<p>The validation status of the domain name.</p>"
         }
       },
-      "documentation":"<p>Structure that contains the domain name, the base validation domain to which validation email is sent, and the email addresses used to validate the domain identity.</p>"
+      "documentation":"<p>Contains information about the validation of each domain name in the certificate.</p>"
     },
     "DomainValidationList":{
       "type":"list",
@@ -400,14 +416,14 @@
       "members":{
         "DomainName":{
           "shape":"DomainNameString",
-          "documentation":"<p>Fully Qualified Domain Name (FQDN) of the certificate being requested.</p>"
+          "documentation":"<p>A fully qualified domain name (FQDN) in the certificate request.</p>"
         },
         "ValidationDomain":{
           "shape":"DomainNameString",
-          "documentation":"<p>The domain to which validation email is sent. This is the base validation domain that will act as the suffix of the email addresses. This must be the same as the <code>DomainName</code> value or a superdomain of the <code>DomainName</code> value. For example, if you requested a certificate for <code>site.subdomain.example.com</code> and specify a <b>ValidationDomain</b> of <code>subdomain.example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS for the base domain and the following five addresses:</p> <ul> <li> <p>admin@subdomain.example.com</p> </li> <li> <p>administrator@subdomain.example.com</p> </li> <li> <p>hostmaster@subdomain.example.com</p> </li> <li> <p>postmaster@subdomain.example.com</p> </li> <li> <p>webmaster@subdomain.example.com</p> </li> </ul>"
+          "documentation":"<p>The domain name that you want ACM to use to send you validation emails. This domain name is the suffix of the email addresses that you want ACM to use. This must be the same as the <code>DomainName</code> value or a superdomain of the <code>DomainName</code> value. For example, if you request a certificate for <code>testing.example.com</code>, you can specify <code>example.com</code> for this value. In that case, ACM sends domain validation emails to the following five addresses:</p> <ul> <li> <p>admin@example.com</p> </li> <li> <p>administrator@example.com</p> </li> <li> <p>hostmaster@example.com</p> </li> <li> <p>postmaster@example.com</p> </li> <li> <p>webmaster@example.com</p> </li> </ul>"
         }
       },
-      "documentation":"<p>This structure is used in the request object of the <a>RequestCertificate</a> action.</p>"
+      "documentation":"<p>Contains information about the domain names that you want ACM to use to send you emails to validate your ownership of the domain.</p>"
     },
     "DomainValidationOptionList":{
       "type":"list",
@@ -576,7 +592,7 @@
       "members":{
         "CertificateArn":{
           "shape":"Arn",
-          "documentation":"<p>String that contains the ARN of the ACM Certificate for which you want to list the tags. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
+          "documentation":"<p>String that contains the ARN of the ACM Certificate for which you want to list the tags. This has the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
         }
       }
     },
@@ -623,13 +639,40 @@
         }
       }
     },
+    "RenewalStatus":{
+      "type":"string",
+      "enum":[
+        "PENDING_AUTO_RENEWAL",
+        "PENDING_VALIDATION",
+        "SUCCESS",
+        "FAILED"
+      ]
+    },
+    "RenewalSummary":{
+      "type":"structure",
+      "required":[
+        "RenewalStatus",
+        "DomainValidationOptions"
+      ],
+      "members":{
+        "RenewalStatus":{
+          "shape":"RenewalStatus",
+          "documentation":"<p>The status of ACM's <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> of the certificate.</p>"
+        },
+        "DomainValidationOptions":{
+          "shape":"DomainValidationList",
+          "documentation":"<p>Contains information about the validation of each domain name in the certificate, as it pertains to ACM's <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a>. This is different from the initial validation that occurs as a result of the <a>RequestCertificate</a> request. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about the status of ACM's <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for the certificate. This structure exists only when the certificate type is <code>AMAZON_ISSUED</code>.</p>"
+    },
     "RequestCertificateRequest":{
       "type":"structure",
       "required":["DomainName"],
       "members":{
         "DomainName":{
           "shape":"DomainNameString",
-          "documentation":"<p>Fully qualified domain name (FQDN), such as www.example.com, of the site you want to secure with an ACM Certificate. Use an asterisk (*) to create a wildcard certificate that protects several sites in the same domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com.</p>"
+          "documentation":"<p>Fully qualified domain name (FQDN), such as www.example.com, of the site that you want to secure with an ACM Certificate. Use an asterisk (*) to create a wildcard certificate that protects several sites in the same domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com.</p>"
         },
         "SubjectAlternativeNames":{
           "shape":"DomainList",
@@ -641,7 +684,7 @@
         },
         "DomainValidationOptions":{
           "shape":"DomainValidationOptionList",
-          "documentation":"<p>The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>test.example.com</code> and specify <b>DomainValidationOptions</b> of <code>example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses:</p> <ul> <li> <p>admin@example.com</p> </li> <li> <p>administrator@example.com</p> </li> <li> <p>hostmaster@example.com</p> </li> <li> <p>postmaster@example.com</p> </li> <li> <p>webmaster@example.com</p> </li> </ul>"
+          "documentation":"<p>The domain name that you want ACM to use to send you emails to validate your ownership of the domain.</p>"
         }
       }
     },
@@ -676,7 +719,7 @@
         },
         "Domain":{
           "shape":"DomainNameString",
-          "documentation":"<p>The Fully Qualified Domain Name (FQDN) of the certificate that needs to be validated.</p>"
+          "documentation":"<p>The fully qualified domain name (FQDN) of the certificate that needs to be validated.</p>"
         },
         "ValidationDomain":{
           "shape":"DomainNameString",
