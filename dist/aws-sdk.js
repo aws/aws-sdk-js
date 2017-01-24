@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.7.27
+// AWS SDK for JavaScript v2.7.28
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -10322,6 +10322,30 @@ module.exports={
         }
       }
     },
+    "GetBlob": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName",
+          "blobId"
+        ],
+        "members": {
+          "repositoryName": {},
+          "blobId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "content"
+        ],
+        "members": {
+          "content": {
+            "type": "blob"
+          }
+        }
+      }
+    },
     "GetBranch": {
       "input": {
         "type": "structure",
@@ -10371,14 +10395,55 @@ module.exports={
               },
               "message": {},
               "author": {
-                "shape": "Sw"
+                "shape": "Sz"
               },
               "committer": {
-                "shape": "Sw"
+                "shape": "Sz"
               },
               "additionalData": {}
             }
           }
+        }
+      }
+    },
+    "GetDifferences": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName",
+          "afterCommitSpecifier"
+        ],
+        "members": {
+          "repositoryName": {},
+          "beforeCommitSpecifier": {},
+          "afterCommitSpecifier": {},
+          "beforePath": {},
+          "afterPath": {},
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "differences": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "beforeBlob": {
+                  "shape": "S1c"
+                },
+                "afterBlob": {
+                  "shape": "S1c"
+                },
+                "changeType": {}
+              }
+            }
+          },
+          "NextToken": {}
         }
       }
     },
@@ -10404,6 +10469,9 @@ module.exports={
     "GetRepositoryTriggers": {
       "input": {
         "type": "structure",
+        "required": [
+          "repositoryName"
+        ],
         "members": {
           "repositoryName": {}
         }
@@ -10413,7 +10481,7 @@ module.exports={
         "members": {
           "configurationId": {},
           "triggers": {
-            "shape": "S16"
+            "shape": "S1k"
           }
         }
       }
@@ -10433,7 +10501,7 @@ module.exports={
         "type": "structure",
         "members": {
           "branches": {
-            "shape": "S1a"
+            "shape": "S1o"
           },
           "nextToken": {}
         }
@@ -10468,10 +10536,14 @@ module.exports={
     "PutRepositoryTriggers": {
       "input": {
         "type": "structure",
+        "required": [
+          "repositoryName",
+          "triggers"
+        ],
         "members": {
           "repositoryName": {},
           "triggers": {
-            "shape": "S16"
+            "shape": "S1k"
           }
         }
       },
@@ -10485,10 +10557,14 @@ module.exports={
     "TestRepositoryTriggers": {
       "input": {
         "type": "structure",
+        "required": [
+          "repositoryName",
+          "triggers"
+        ],
         "members": {
           "repositoryName": {},
           "triggers": {
-            "shape": "S16"
+            "shape": "S1k"
           }
         }
       },
@@ -10571,7 +10647,7 @@ module.exports={
         "Arn": {}
       }
     },
-    "Sw": {
+    "Sz": {
       "type": "structure",
       "members": {
         "name": {},
@@ -10579,16 +10655,29 @@ module.exports={
         "date": {}
       }
     },
-    "S16": {
+    "S1c": {
+      "type": "structure",
+      "members": {
+        "blobId": {},
+        "path": {},
+        "mode": {}
+      }
+    },
+    "S1k": {
       "type": "list",
       "member": {
         "type": "structure",
+        "required": [
+          "name",
+          "destinationArn",
+          "events"
+        ],
         "members": {
           "name": {},
           "destinationArn": {},
           "customData": {},
           "branches": {
-            "shape": "S1a"
+            "shape": "S1o"
           },
           "events": {
             "type": "list",
@@ -10597,7 +10686,7 @@ module.exports={
         }
       }
     },
-    "S1a": {
+    "S1o": {
       "type": "list",
       "member": {}
     }
@@ -10605,18 +10694,23 @@ module.exports={
 }
 },{}],19:[function(require,module,exports){
 module.exports={
-    "pagination": {
-        "ListBranches": {
-            "input_token": "nextToken",
-            "output_token": "nextToken",
-            "result_key": "branches"
-        },
-        "ListRepositories": {
-            "input_token": "nextToken",
-            "output_token": "nextToken",
-            "result_key": "repositories"
-        }
+  "pagination": {
+    "GetDifferences": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken"
+    },
+    "ListBranches": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "result_key": "branches"
+    },
+    "ListRepositories": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "result_key": "repositories"
     }
+  }
 }
 },{}],20:[function(require,module,exports){
 module.exports={
@@ -34266,10 +34360,7 @@ module.exports={
         "type": "structure",
         "members": {
           "containerInstances": {
-            "type": "list",
-            "member": {
-              "shape": "S10"
-            }
+            "shape": "S2c"
           },
           "failures": {
             "shape": "S28"
@@ -34421,7 +34512,8 @@ module.exports={
           "nextToken": {},
           "maxResults": {
             "type": "integer"
-          }
+          },
+          "status": {}
         }
       },
       "output": {
@@ -34754,6 +34846,33 @@ module.exports={
         "members": {
           "containerInstance": {
             "shape": "S10"
+          }
+        }
+      }
+    },
+    "UpdateContainerInstancesState": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "containerInstances",
+          "status"
+        ],
+        "members": {
+          "cluster": {},
+          "containerInstances": {
+            "shape": "S16"
+          },
+          "status": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "containerInstances": {
+            "shape": "S2c"
+          },
+          "failures": {
+            "shape": "S28"
           }
         }
       }
@@ -35230,6 +35349,12 @@ module.exports={
           "arn": {},
           "reason": {}
         }
+      }
+    },
+    "S2c": {
+      "type": "list",
+      "member": {
+        "shape": "S10"
       }
     },
     "S2k": {
@@ -91299,7 +91424,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.7.27',
+  VERSION: '2.7.28',
 
 
   Signers: {},
@@ -91452,12 +91577,13 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   },
 
 
-  constructor: function CognitoIdentityCredentials(params) {
+  constructor: function CognitoIdentityCredentials(params, clientConfig) {
     AWS.Credentials.call(this);
     this.expired = true;
     this.params = params;
     this.data = null;
     this._identityId = null;
+    this._clientConfig = AWS.util.copy(clientConfig || {});
     this.loadCachedId();
     var self = this;
     Object.defineProperty(this, 'identityId', {
@@ -91599,11 +91725,15 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 
   createClients: function() {
+    var clientConfig = this._clientConfig;
     this.webIdentityCredentials = this.webIdentityCredentials ||
-      new AWS.WebIdentityCredentials(this.params);
-    this.cognito = this.cognito ||
-      new CognitoIdentity({params: this.params});
-    this.sts = this.sts || new STS();
+      new AWS.WebIdentityCredentials(this.params, clientConfig);
+    if (!this.cognito) {
+      var cognitoConfig = AWS.util.merge({}, clientConfig);
+      cognitoConfig.params = this.params;
+      this.cognito = new CognitoIdentity(cognitoConfig);
+    }
+    this.sts = this.sts || new STS(clientConfig);
   },
 
 
@@ -91758,9 +91888,9 @@ var STS = require('../../clients/sts');
 
 AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
 
-  constructor: function TemporaryCredentials(params) {
+  constructor: function TemporaryCredentials(params, masterCredentials) {
     AWS.Credentials.call(this);
-    this.loadMasterCredentials();
+    this.loadMasterCredentials(masterCredentials);
     this.expired = true;
 
     this.params = params || {};
@@ -91788,8 +91918,8 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
   },
 
 
-  loadMasterCredentials: function loadMasterCredentials() {
-    this.masterCredentials = AWS.config.credentials;
+  loadMasterCredentials: function loadMasterCredentials(masterCredentials) {
+    this.masterCredentials = masterCredentials || AWS.config.credentials;
     while (this.masterCredentials.masterCredentials) {
       this.masterCredentials = this.masterCredentials.masterCredentials;
     }
@@ -91809,12 +91939,13 @@ var STS = require('../../clients/sts');
 
 AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
-  constructor: function WebIdentityCredentials(params) {
+  constructor: function WebIdentityCredentials(params, clientConfig) {
     AWS.Credentials.call(this);
     this.expired = true;
     this.params = params;
     this.params.RoleSessionName = this.params.RoleSessionName || 'web-identity';
     this.data = null;
+    this._clientConfig = AWS.util.copy(clientConfig || {});
   },
 
 
@@ -91835,7 +91966,11 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 
   createClients: function() {
-    this.service = this.service || new STS({params: this.params});
+    if (!this.service) {
+      var stsConfig = AWS.util.merge({}, this._clientConfig);
+      stsConfig.params = this.params;
+      this.service = new STS(stsConfig);
+    }
   }
 
 });

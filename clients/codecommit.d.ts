@@ -12,19 +12,19 @@ declare class CodeCommit extends Service {
   constructor(options?: CodeCommit.Types.ClientConfiguration)
   config: Config & CodeCommit.Types.ClientConfiguration;
   /**
-   * Returns information about one or more repositories. The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.
+   * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
   batchGetRepositories(params: CodeCommit.Types.BatchGetRepositoriesInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchGetRepositoriesOutput) => void): Request<CodeCommit.Types.BatchGetRepositoriesOutput, AWSError>;
   /**
-   * Returns information about one or more repositories. The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.
+   * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
   batchGetRepositories(callback?: (err: AWSError, data: CodeCommit.Types.BatchGetRepositoriesOutput) => void): Request<CodeCommit.Types.BatchGetRepositoriesOutput, AWSError>;
   /**
-   * Creates a new branch in a repository and points the branch to a commit. Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation.
+   * Creates a new branch in a repository and points the branch to a commit.  Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation. 
    */
   createBranch(params: CodeCommit.Types.CreateBranchInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a new branch in a repository and points the branch to a commit. Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation.
+   * Creates a new branch in a repository and points the branch to a commit.  Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation. 
    */
   createBranch(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -36,13 +36,21 @@ declare class CodeCommit extends Service {
    */
   createRepository(callback?: (err: AWSError, data: CodeCommit.Types.CreateRepositoryOutput) => void): Request<CodeCommit.Types.CreateRepositoryOutput, AWSError>;
   /**
-   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned. Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.
+   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned. Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
    */
   deleteRepository(params: CodeCommit.Types.DeleteRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
   /**
-   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned. Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.
+   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned. Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
    */
   deleteRepository(callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
+  /**
+   * Returns the base-64 encoded content of an individual blob within a repository.
+   */
+  getBlob(params: CodeCommit.Types.GetBlobInput, callback?: (err: AWSError, data: CodeCommit.Types.GetBlobOutput) => void): Request<CodeCommit.Types.GetBlobOutput, AWSError>;
+  /**
+   * Returns the base-64 encoded content of an individual blob within a repository.
+   */
+  getBlob(callback?: (err: AWSError, data: CodeCommit.Types.GetBlobOutput) => void): Request<CodeCommit.Types.GetBlobOutput, AWSError>;
   /**
    * Returns information about a repository branch, including its name and the last commit ID.
    */
@@ -60,11 +68,19 @@ declare class CodeCommit extends Service {
    */
   getCommit(callback?: (err: AWSError, data: CodeCommit.Types.GetCommitOutput) => void): Request<CodeCommit.Types.GetCommitOutput, AWSError>;
   /**
-   * Returns information about a repository. The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.
+   * Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.
+   */
+  getDifferences(params: CodeCommit.Types.GetDifferencesInput, callback?: (err: AWSError, data: CodeCommit.Types.GetDifferencesOutput) => void): Request<CodeCommit.Types.GetDifferencesOutput, AWSError>;
+  /**
+   * Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.
+   */
+  getDifferences(callback?: (err: AWSError, data: CodeCommit.Types.GetDifferencesOutput) => void): Request<CodeCommit.Types.GetDifferencesOutput, AWSError>;
+  /**
+   * Returns information about a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
   getRepository(params: CodeCommit.Types.GetRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryOutput) => void): Request<CodeCommit.Types.GetRepositoryOutput, AWSError>;
   /**
-   * Returns information about a repository. The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.
+   * Returns information about a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
   getRepository(callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryOutput) => void): Request<CodeCommit.Types.GetRepositoryOutput, AWSError>;
   /**
@@ -108,19 +124,19 @@ declare class CodeCommit extends Service {
    */
   testRepositoryTriggers(callback?: (err: AWSError, data: CodeCommit.Types.TestRepositoryTriggersOutput) => void): Request<CodeCommit.Types.TestRepositoryTriggersOutput, AWSError>;
   /**
-   * Sets or changes the default branch name for the specified repository. If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.
+   * Sets or changes the default branch name for the specified repository.  If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change. 
    */
   updateDefaultBranch(params: CodeCommit.Types.UpdateDefaultBranchInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets or changes the default branch name for the specified repository. If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.
+   * Sets or changes the default branch name for the specified repository.  If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change. 
    */
   updateDefaultBranch(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets or changes the comment or description for a repository. The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.
+   * Sets or changes the comment or description for a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
   updateRepositoryDescription(params: CodeCommit.Types.UpdateRepositoryDescriptionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets or changes the comment or description for a repository. The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.
+   * Sets or changes the comment or description for a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
   updateRepositoryDescription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -152,6 +168,20 @@ declare namespace CodeCommit {
      */
     repositoriesNotFound?: RepositoryNotFoundList;
   }
+  export interface BlobMetadata {
+    /**
+     * The full ID of the blob.
+     */
+    blobId?: ObjectId;
+    /**
+     * The path to the blob and any associated file name, if any.
+     */
+    path?: Path;
+    /**
+     * The file mode permissions of the blob. File mode permission codes include:    100644 indicates read/write    100755 indicates read/write/execute    160000 indicates a submodule    120000 indicates a symlink  
+     */
+    mode?: Mode;
+  }
   export interface BranchInfo {
     /**
      * The name of the branch.
@@ -164,6 +194,7 @@ declare namespace CodeCommit {
   }
   export type BranchName = string;
   export type BranchNameList = BranchName[];
+  export type ChangeTypeEnum = "A"|"M"|"D"|string;
   export type CloneUrlHttp = string;
   export type CloneUrlSsh = string;
   export interface Commit {
@@ -176,15 +207,15 @@ declare namespace CodeCommit {
      */
     parents?: ParentList;
     /**
-     * The message associated with the specified commit.
+     * The commit message associated with the specified commit.
      */
     message?: Message;
     /**
-     * Information about the author of the specified commit.
+     * Information about the author of the specified commit. Information includes the date in timestamp format with GMT offset, the name of the author, and the email address for the author, as configured in Git.
      */
     author?: UserInfo;
     /**
-     * Information about the person who committed the specified commit, also known as the committer. For more information about the difference between an author and a committer in Git, see Viewing the Commit History in Pro Git by Scott Chacon and Ben Straub.
+     * Information about the person who committed the specified commit, also known as the committer. Information includes the date in timestamp format with GMT offset, the name of the committer, and the email address for the committer, as configured in Git. For more information about the difference between an author and a committer in Git, see Viewing the Commit History in Pro Git by Scott Chacon and Ben Straub.
      */
     committer?: UserInfo;
     /**
@@ -193,6 +224,7 @@ declare namespace CodeCommit {
     additionalData?: AdditionalData;
   }
   export type CommitId = string;
+  export type CommitName = string;
   export interface CreateBranchInput {
     /**
      * The name of the repository in which you want to create the new branch.
@@ -209,11 +241,11 @@ declare namespace CodeCommit {
   }
   export interface CreateRepositoryInput {
     /**
-     * The name of the new repository to be created. The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. For a full description of the limits on repository names, see Limits in the AWS CodeCommit User Guide. The suffix ".git" is prohibited.
+     * The name of the new repository to be created.  The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. For a full description of the limits on repository names, see Limits in the AWS CodeCommit User Guide. The suffix ".git" is prohibited. 
      */
     repositoryName: RepositoryName;
     /**
-     * A comment or description about the new repository. The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.
+     * A comment or description about the new repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
      */
     repositoryDescription?: RepositoryDescription;
   }
@@ -237,7 +269,38 @@ declare namespace CodeCommit {
      */
     repositoryId?: RepositoryId;
   }
+  export interface Difference {
+    /**
+     * Information about a beforeBlob data type object, including the ID, the file mode permission code, and the path.
+     */
+    beforeBlob?: BlobMetadata;
+    /**
+     * Information about an afterBlob data type object, including the ID, the file mode permission code, and the path.
+     */
+    afterBlob?: BlobMetadata;
+    /**
+     * Whether the change type of the difference is an addition (A), deletion (D), or modification (M).
+     */
+    changeType?: ChangeTypeEnum;
+  }
+  export type DifferenceList = Difference[];
   export type Email = string;
+  export interface GetBlobInput {
+    /**
+     * The name of the repository that contains the blob.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The ID of the blob, which is its SHA-1 pointer.
+     */
+    blobId: ObjectId;
+  }
+  export interface GetBlobOutput {
+    /**
+     * The content of the blob, usually a file.
+     */
+    content: blob;
+  }
   export interface GetBranchInput {
     /**
      * The name of the repository that contains the branch for which you want to retrieve information.
@@ -266,9 +329,49 @@ declare namespace CodeCommit {
   }
   export interface GetCommitOutput {
     /**
-     * Information about the specified commit.
+     * A commit data type object that contains information about the specified commit.
      */
     commit: Commit;
+  }
+  export interface GetDifferencesInput {
+    /**
+     * The name of the repository where you want to get differences.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, the full commit ID. Optional. If not specified, all changes prior to the afterCommitSpecifier value will be shown. If you do not use beforeCommitSpecifier in your request, consider limiting the results with maxResults.
+     */
+    beforeCommitSpecifier?: CommitName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit.
+     */
+    afterCommitSpecifier: CommitName;
+    /**
+     * The file path in which to check for differences. Limits the results to this path. Can also be used to specify the previous name of a directory or folder. If beforePath and afterPath are not specified, differences will be shown for all paths.
+     */
+    beforePath?: Path;
+    /**
+     * The file path in which to check differences. Limits the results to this path. Can also be used to specify the changed name of a directory or folder, if it has changed. If not specified, differences will be shown for all paths.
+     */
+    afterPath?: Path;
+    /**
+     * A non-negative integer used to limit the number of returned results.
+     */
+    MaxResults?: Limit;
+    /**
+     * An enumeration token that when provided in a request, returns the next batch of the results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetDifferencesOutput {
+    /**
+     * A differences data type object that contains information about the differences, including whether the difference is added, modified, or deleted (A, D, M).
+     */
+    differences?: DifferenceList;
+    /**
+     * An enumeration token that can be used in a request to return the next batch of the results.
+     */
+    NextToken?: NextToken;
   }
   export interface GetRepositoryInput {
     /**
@@ -286,7 +389,7 @@ declare namespace CodeCommit {
     /**
      * The name of the repository for which the trigger is configured.
      */
-    repositoryName?: RepositoryName;
+    repositoryName: RepositoryName;
   }
   export interface GetRepositoryTriggersOutput {
     /**
@@ -299,13 +402,14 @@ declare namespace CodeCommit {
     triggers?: RepositoryTriggersList;
   }
   export type LastModifiedDate = Date;
+  export type Limit = number;
   export interface ListBranchesInput {
     /**
      * The name of the repository that contains the branches.
      */
     repositoryName: RepositoryName;
     /**
-     * An enumeration token that allows the operation to batch the results. 
+     * An enumeration token that allows the operation to batch the results.
      */
     nextToken?: NextToken;
   }
@@ -315,7 +419,7 @@ declare namespace CodeCommit {
      */
     branches?: BranchNameList;
     /**
-     * An enumeration token that returns the batch of the results. 
+     * An enumeration token that returns the batch of the results.
      */
     nextToken?: NextToken;
   }
@@ -344,24 +448,26 @@ declare namespace CodeCommit {
     nextToken?: NextToken;
   }
   export type Message = string;
+  export type Mode = string;
   export type Name = string;
   export type NextToken = string;
   export type ObjectId = string;
   export type OrderEnum = "ascending"|"descending"|string;
   export type ParentList = ObjectId[];
+  export type Path = string;
   export interface PutRepositoryTriggersInput {
     /**
-     * The name of the repository where you want to create or update the trigger. 
+     * The name of the repository where you want to create or update the trigger.
      */
-    repositoryName?: RepositoryName;
+    repositoryName: RepositoryName;
     /**
-     * The JSON block of configuration information for each trigger. 
+     * The JSON block of configuration information for each trigger.
      */
-    triggers?: RepositoryTriggersList;
+    triggers: RepositoryTriggersList;
   }
   export interface PutRepositoryTriggersOutput {
     /**
-     * The system-generated unique ID for the create or update operation. 
+     * The system-generated unique ID for the create or update operation.
      */
     configurationId?: RepositoryTriggersConfigurationId;
   }
@@ -428,11 +534,11 @@ declare namespace CodeCommit {
     /**
      * The name of the trigger.
      */
-    name?: RepositoryTriggerName;
+    name: RepositoryTriggerName;
     /**
      * The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).
      */
-    destinationArn?: Arn;
+    destinationArn: Arn;
     /**
      * Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
      */
@@ -442,9 +548,9 @@ declare namespace CodeCommit {
      */
     branches?: BranchNameList;
     /**
-     * The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events.
+     * The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS).   The valid value "all" cannot be used with any other values. 
      */
-    events?: RepositoryTriggerEventList;
+    events: RepositoryTriggerEventList;
   }
   export type RepositoryTriggerCustomData = string;
   export type RepositoryTriggerEventEnum = "all"|"updateReference"|"createReference"|"deleteReference"|string;
@@ -470,11 +576,11 @@ declare namespace CodeCommit {
     /**
      * The name of the repository in which to test the triggers.
      */
-    repositoryName?: RepositoryName;
+    repositoryName: RepositoryName;
     /**
      * The list of triggers to test.
      */
-    triggers?: RepositoryTriggersList;
+    triggers: RepositoryTriggersList;
   }
   export interface TestRepositoryTriggersOutput {
     /**
@@ -530,6 +636,7 @@ declare namespace CodeCommit {
      */
     date?: _Date;
   }
+  export type blob = Buffer|Uint8Array|Blob|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

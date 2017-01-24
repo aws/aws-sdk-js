@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.27-->
+<!--LATEST=2.7.28-->
 <!--ENTRYINSERT-->
+
+## 2.7.28
+* feature: CognitoIdentityCredentials: Adds `clientConfig` as an optional parameter to the `CognitoIdentityCredentials` constructor. This parameter can be used to pass in client configuration to the underlying service clients.
+* feature: TemporaryCredentials: Allows passing of master credentials to the TemporaryCredentials provider.
+* feature: CodeCommit: Added new API to list the different files between 2 commits
+* feature: ECS: Amazon ECS now supports a state for container instances that can be used to drain a container instance in preparation for maintenance or cluster scale down.
 
 ## 2.7.27
 * bugfix: Performance: This change reverts a request body cast in the node HTTP handler that caused a performance regression.
