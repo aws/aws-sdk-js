@@ -610,6 +610,19 @@ describe 'AWS.TemporaryCredentials', ->
         expect(creds.masterCredentials.secretAccessKey).to.equal('SECRET')
       AWS.config.credentials = origCreds
 
+    it 'seeds masterCredentials from passed in credentials', ->
+      origCreds = AWS.config.credentials
+      # change global credentials
+      AWS.config.credentials = new AWS.Credentials('AKID', 'SECRET')
+      masterCreds = new AWS.Credentials('TEMPID', 'TEMPSECRET')
+      creds = new AWS.TemporaryCredentials(null, masterCreds)
+      expect(creds.masterCredentials.accessKeyId).to.equal('TEMPID')
+      expect(creds.masterCredentials.secretAccessKey).to.equal('TEMPSECRET')
+      # make sure global creds are unaltered
+      expect(AWS.config.credentials.accessKeyId).to.equal('AKID')
+      expect(AWS.config.credentials.secretAccessKey).to.equal('SECRET')
+      AWS.config.credentials = origCreds
+
 
   describe 'needsRefresh', ->
     it 'can be expired based on expire time from STS response', ->
