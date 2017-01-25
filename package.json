@@ -114,6 +114,7 @@
     "lint": "eslint lib dist-tools/*.js",
     "console": "./scripts/console",
     "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`",
-    "tstest": "tsc -p ./ts"
+    "tstest": "tsc -p ./ts",
+    "add-change": "node ./scripts/changelog/add-change.js"
   }
 }
