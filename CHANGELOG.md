@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.7.28-->
+<!--LATEST=2.8.0-->
 <!--ENTRYINSERT-->
+
+## 2.8.0
+* bugfix: RDS: Fixes issue wherein the wrong parameter name was used for cross region presigned urls.
+* feature: ELBv2: Application Load Balancers now support native Internet Protocol version 6 (IPv6) in an Amazon Virtual Private Cloud (VPC). With this ability, clients can now connect to the Application Load Balancer in a dual-stack mode via either IPv4 or IPv6.
+* feature: RDS: Adds cross region read replica copying.
 
 ## 2.7.28
 * feature: CognitoIdentityCredentials: Adds `clientConfig` as an optional parameter to the `CognitoIdentityCredentials` constructor. This parameter can be used to pass in client configuration to the underlying service clients.

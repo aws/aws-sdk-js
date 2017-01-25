@@ -28,11 +28,11 @@ declare class ELBv2 extends Service {
    */
   createListener(callback?: (err: AWSError, data: ELBv2.Types.CreateListenerOutput) => void): Request<ELBv2.Types.CreateListenerOutput, AWSError>;
   /**
-   * Creates an Application Load Balancer. To create listeners for your load balancer, use CreateListener. You can add security groups, subnets, and tags when you create your load balancer, or you can add them later using SetSecurityGroups, SetSubnets, and AddTags. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancers Guide. For more information, see Application Load Balancers in the Application Load Balancers Guide.
+   * Creates an Application Load Balancer. When you create a load balancer, you can specify security groups, subnets, IP address type, and tags. Otherwise, you could do so later using SetSecurityGroups, SetSubnets, SetIpAddressType, and AddTags. To create listeners for your load balancer, use CreateListener. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancers Guide. For more information, see Application Load Balancers in the Application Load Balancers Guide.
    */
   createLoadBalancer(params: ELBv2.Types.CreateLoadBalancerInput, callback?: (err: AWSError, data: ELBv2.Types.CreateLoadBalancerOutput) => void): Request<ELBv2.Types.CreateLoadBalancerOutput, AWSError>;
   /**
-   * Creates an Application Load Balancer. To create listeners for your load balancer, use CreateListener. You can add security groups, subnets, and tags when you create your load balancer, or you can add them later using SetSecurityGroups, SetSubnets, and AddTags. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancers Guide. For more information, see Application Load Balancers in the Application Load Balancers Guide.
+   * Creates an Application Load Balancer. When you create a load balancer, you can specify security groups, subnets, IP address type, and tags. Otherwise, you could do so later using SetSecurityGroups, SetSubnets, SetIpAddressType, and AddTags. To create listeners for your load balancer, use CreateListener. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancers Guide. For more information, see Application Load Balancers in the Application Load Balancers Guide.
    */
   createLoadBalancer(callback?: (err: AWSError, data: ELBv2.Types.CreateLoadBalancerOutput) => void): Request<ELBv2.Types.CreateLoadBalancerOutput, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class ELBv2 extends Service {
    */
   modifyTargetGroupAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyTargetGroupAttributesOutput) => void): Request<ELBv2.Types.ModifyTargetGroupAttributesOutput, AWSError>;
   /**
-   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it can't be in the stopped or running state when you register it. To remove a target from a target group, use DeregisterTargets.
+   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the running state when you register it. To remove a target from a target group, use DeregisterTargets.
    */
   registerTargets(params: ELBv2.Types.RegisterTargetsInput, callback?: (err: AWSError, data: ELBv2.Types.RegisterTargetsOutput) => void): Request<ELBv2.Types.RegisterTargetsOutput, AWSError>;
   /**
-   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it can't be in the stopped or running state when you register it. To remove a target from a target group, use DeregisterTargets.
+   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the running state when you register it. To remove a target from a target group, use DeregisterTargets.
    */
   registerTargets(callback?: (err: AWSError, data: ELBv2.Types.RegisterTargetsOutput) => void): Request<ELBv2.Types.RegisterTargetsOutput, AWSError>;
   /**
@@ -219,6 +219,14 @@ declare class ELBv2 extends Service {
    * Removes the specified tags from the specified resource. To list the current tags for your resources, use DescribeTags.
    */
   removeTags(callback?: (err: AWSError, data: ELBv2.Types.RemoveTagsOutput) => void): Request<ELBv2.Types.RemoveTagsOutput, AWSError>;
+  /**
+   * Sets the type of IP addresses used by the subnets of the specified Application Load Balancer.
+   */
+  setIpAddressType(params: ELBv2.Types.SetIpAddressTypeInput, callback?: (err: AWSError, data: ELBv2.Types.SetIpAddressTypeOutput) => void): Request<ELBv2.Types.SetIpAddressTypeOutput, AWSError>;
+  /**
+   * Sets the type of IP addresses used by the subnets of the specified Application Load Balancer.
+   */
+  setIpAddressType(callback?: (err: AWSError, data: ELBv2.Types.SetIpAddressTypeOutput) => void): Request<ELBv2.Types.SetIpAddressTypeOutput, AWSError>;
   /**
    * Sets the priorities of the specified rules. You can reorder the rules as long as there are no priority conflicts in the new order. Any existing rules that you do not specify retain their current priority.
    */
@@ -356,6 +364,10 @@ declare namespace ELBv2 {
      * One or more tags to assign to the load balancer.
      */
     Tags?: TagList;
+    /**
+     * The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use ipv4.
+     */
+    IpAddressType?: IpAddressType;
   }
   export interface CreateLoadBalancerOutput {
     /**
@@ -369,7 +381,7 @@ declare namespace ELBv2 {
      */
     ListenerArn: ListenerArn;
     /**
-     * A condition. Each condition has the field path-pattern and specifies one path pattern. A path pattern is case sensitive, can be up to 255 characters in length, and can contain any of the following characters:   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
+     * A condition. Each condition has the field path-pattern and specifies one path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters in a path pattern.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
      */
     Conditions: RuleConditionList;
     /**
@@ -675,6 +687,7 @@ declare namespace ELBv2 {
   export type HealthCheckThresholdCount = number;
   export type HealthCheckTimeoutSeconds = number;
   export type HttpCode = string;
+  export type IpAddressType = "ipv4"|"dualstack"|string;
   export type IsDefault = boolean;
   export type ListOfString = StringValue[];
   export interface Listener {
@@ -755,6 +768,10 @@ declare namespace ELBv2 {
      * The IDs of the security groups for the load balancer.
      */
     SecurityGroups?: SecurityGroups;
+    /**
+     * The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
+     */
+    IpAddressType?: IpAddressType;
   }
   export type LoadBalancerArn = string;
   export type LoadBalancerArns = LoadBalancerArn[];
@@ -982,7 +999,7 @@ declare namespace ELBv2 {
      */
     Field?: ConditionFieldName;
     /**
-     * The path pattern. You can specify a single path pattern. A path pattern is case sensitive, can be up to 255 characters in length, and can contain any of the following characters:   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
+     * The path pattern. You can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters in a path pattern.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
      */
     Values?: ListOfString;
   }
@@ -1002,6 +1019,22 @@ declare namespace ELBv2 {
   export type Rules = Rule[];
   export type SecurityGroupId = string;
   export type SecurityGroups = SecurityGroupId[];
+  export interface SetIpAddressTypeInput {
+    /**
+     * The Amazon Resource Name (ARN) of the load balancer.
+     */
+    LoadBalancerArn: LoadBalancerArn;
+    /**
+     * The IP address type. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use ipv4.
+     */
+    IpAddressType: IpAddressType;
+  }
+  export interface SetIpAddressTypeOutput {
+    /**
+     * The IP address type.
+     */
+    IpAddressType?: IpAddressType;
+  }
   export interface SetRulePrioritiesInput {
     /**
      * The rule priorities.
