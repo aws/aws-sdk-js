@@ -47,6 +47,7 @@ describe 'AWS.RDS', ->
        rds = new AWS.RDS({
          region: 'us-west-2',
          params: { SourceRegion: 'eu-central-1' }
+         paramValidation: true
        })
  
        spy = helpers.spyOn(rds, 'buildCrossRegionPresignedUrl').andCallThrough()
@@ -58,11 +59,12 @@ describe 'AWS.RDS', ->
          TargetDBSnapshotIdentifier: 'target_id'
        })
        req.build()
+       expect(req.response.error).to.equal(null)
        expect(spy.calls.length).to.equal(1)
        expect(req.params).to.eql({
          SourceDBSnapshotIdentifier: 'source_id',
          TargetDBSnapshotIdentifier: 'target_id',
-         PresignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=CopyDBSnapshot&DestinationRegion=us-west-2&SourceDBSnapshotIdentifier=source_id&TargetDBSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=d3b9491de565d0ff1bf94d518060ec4796dc1006e7413754c7e25e3539eccf09&X-Amz-SignedHeaders=host'
+         PreSignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=CopyDBSnapshot&DestinationRegion=us-west-2&SourceDBSnapshotIdentifier=source_id&TargetDBSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=d3b9491de565d0ff1bf94d518060ec4796dc1006e7413754c7e25e3539eccf09&X-Amz-SignedHeaders=host'
        })
        expect(req.httpRequest.endpoint.href).to.equal('https://rds.us-west-2.amazonaws.com/')
  
@@ -73,17 +75,19 @@ describe 'AWS.RDS', ->
          TargetDBSnapshotIdentifier: 'target_id'
        })
        req.build()
+       expect(req.response.error).to.equal(null)
        expect(spy.calls.length).to.equal(1)
        expect(req.params).to.eql({
          SourceDBSnapshotIdentifier: 'source_id',
          TargetDBSnapshotIdentifier: 'target_id',
-         PresignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=CopyDBSnapshot&DestinationRegion=us-west-2&SourceDBSnapshotIdentifier=source_id&TargetDBSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=d3b9491de565d0ff1bf94d518060ec4796dc1006e7413754c7e25e3539eccf09&X-Amz-SignedHeaders=host'
+         PreSignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=CopyDBSnapshot&DestinationRegion=us-west-2&SourceDBSnapshotIdentifier=source_id&TargetDBSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=d3b9491de565d0ff1bf94d518060ec4796dc1006e7413754c7e25e3539eccf09&X-Amz-SignedHeaders=host'
        })
        expect(req.httpRequest.endpoint.href).to.equal('https://rds.us-west-2.amazonaws.com/')
  
      it 'does not build presigned url for a non-supported operation', ->
        req = rds.describeDBSnapshots()
        req.build()
+       expect(req.response.error).to.equal(null)
        expect(spy.calls.length).to.equal(0)
        expect(req.params).to.eql({})
  
@@ -94,6 +98,7 @@ describe 'AWS.RDS', ->
          TargetDBSnapshotIdentifier: 'target_id'
        })
        req.build()
+       expect(req.response.error).to.equal(null)
        expect(spy.calls.length).to.equal(0)
        expect(req.params).to.eql({
          SourceDBSnapshotIdentifier: 'source_id',
@@ -104,15 +109,16 @@ describe 'AWS.RDS', ->
        req = rds.copyDBSnapshot({
          SourceDBSnapshotIdentifier: 'source_id',
          TargetDBSnapshotIdentifier: 'target_id',
-         PresignedUrl: 'presigned_url',
+         PreSignedUrl: 'presigned_url',
          SourceRegion: 'eu-central-1'
        })
        req.build()
+       expect(req.response.error).to.equal(null)
        expect(spy.calls.length).to.equal(0)
        expect(req.params).to.eql({
          SourceDBSnapshotIdentifier: 'source_id',
          TargetDBSnapshotIdentifier: 'target_id',
-         PresignedUrl: 'presigned_url'
+         PreSignedUrl: 'presigned_url'
        })
  
      it 'does not build presigned url when SourceRegion matches destination region', ->
@@ -122,6 +128,7 @@ describe 'AWS.RDS', ->
          SourceRegion: 'us-west-2'
        })
        req.build()
+       expect(req.response.error).to.equal(null)
        expect(spy.calls.length).to.equal(0)
        expect(req.params).to.eql({
          SourceDBSnapshotIdentifier: 'source_id',
@@ -140,11 +147,12 @@ describe 'AWS.RDS', ->
          }
          req = rds.copyDBSnapshot(params)
          req.build()
+         expect(req.response.error).to.equal(null)
          expect(spy.calls.length).to.equal(1)
          expect(req.params).to.eql({
            SourceDBSnapshotIdentifier: 'source_id',
            TargetDBSnapshotIdentifier: 'target_id',
-           PresignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=CopyDBSnapshot&DestinationRegion=us-west-2&SourceDBSnapshotIdentifier=source_id&TargetDBSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=d3b9491de565d0ff1bf94d518060ec4796dc1006e7413754c7e25e3539eccf09&X-Amz-SignedHeaders=host'
+           PreSignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=CopyDBSnapshot&DestinationRegion=us-west-2&SourceDBSnapshotIdentifier=source_id&TargetDBSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=d3b9491de565d0ff1bf94d518060ec4796dc1006e7413754c7e25e3539eccf09&X-Amz-SignedHeaders=host'
          })
          expect(params).to.eql({
            SourceDBSnapshotIdentifier: 'source_id',
@@ -157,21 +165,22 @@ describe 'AWS.RDS', ->
            SourceDBSnapshotIdentifier: 'source_id',
            TargetDBSnapshotIdentifier: 'target_id',
            SourceRegion: 'eu-central-1',
-           PresignedUrl: 'presigned_url'
+           PreSignedUrl: 'presigned_url'
          }
          req = rds.copyDBSnapshot(params)
          req.build()
+         expect(req.response.error).to.equal(null)
          expect(spy.calls.length).to.equal(0)
          expect(req.params).to.eql({
            SourceDBSnapshotIdentifier: 'source_id',
            TargetDBSnapshotIdentifier: 'target_id',
-           PresignedUrl: 'presigned_url'
+           PreSignedUrl: 'presigned_url'
          })
          expect(params).to.eql({
            SourceDBSnapshotIdentifier: 'source_id',
            TargetDBSnapshotIdentifier: 'target_id',
            SourceRegion: 'eu-central-1',
-           PresignedUrl: 'presigned_url'
+           PreSignedUrl: 'presigned_url'
          })
  
        it 'does not not modify user input when SourceRegion matches destination region', ->
@@ -182,6 +191,7 @@ describe 'AWS.RDS', ->
          }
          req = rds.copyDBSnapshot(params)
          req.build()
+         expect(req.response.error).to.equal(null)
          expect(spy.calls.length).to.equal(0)
          expect(req.params).to.eql({
            SourceDBSnapshotIdentifier: 'source_id',

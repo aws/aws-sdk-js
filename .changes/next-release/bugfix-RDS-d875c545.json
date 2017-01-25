@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "RDS",
+  "description": "Fixes issue wherein the wrong parameter name was used for cross region presigned urls."
+}
