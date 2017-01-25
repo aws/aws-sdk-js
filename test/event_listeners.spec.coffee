@@ -215,7 +215,7 @@ describe 'AWS.EventListeners', ->
       makeRequest(->)
       expect(options.timeout).to.equal(15)
 
-    it 'signs only once in normal case', ->
+    it 'signs only once in normal case', (done) ->
       signHandler = helpers.createSpy('sign')
       helpers.mockHttpResponse 200, {}, ['data']
 
@@ -225,8 +225,9 @@ describe 'AWS.EventListeners', ->
       request.signedAt = new Date(request.signedAt - 60 * 5 * 1000)
       request.send()
       expect(signHandler.calls.length).to.equal(1)
+      done()
 
-    it 'resigns if it took more than 10 min to get to send', ->
+    it 'resigns if it took more than 10 min to get to send', (done) ->
       signHandler = helpers.createSpy('sign')
       helpers.mockHttpResponse 200, {}, ['data']
 
@@ -236,13 +237,11 @@ describe 'AWS.EventListeners', ->
       request.signedAt = new Date(request.signedAt - 60 * 12 * 1000)
       request.send()
       expect(signHandler.calls.length).to.equal(2)
+      done()
 
   describe 'httpHeaders', ->
 
-    afterEach ->
-      AWS.config.systemClockOffset = 0
-
-    it 'applies clock skew offset when correcClockSkew is true', ->
+    it 'applies clock skew offset when correcClockSkew is true', (done) ->
       service = new MockService({maxRetries: 3, correctClockSkew: true})
       serverDate = new Date(new Date().getTime() - 300000)
       helpers.mockHttpResponse 200, {date: serverDate.toString()}, ''
@@ -251,33 +250,34 @@ describe 'AWS.EventListeners', ->
       response = request.send()
       offset = Math.abs(AWS.config.systemClockOffset)
       expect(offset > 299000 && offset < 310000).to.equal(true)
+      AWS.config.systemClockOffset = 0
+      done()
 
   describe 'httpData', ->
     beforeEach ->
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
 
-    it 'emits httpData event on each chunk', ->
+    it 'emits httpData event on each chunk', (done) ->
       calls = []
 
       # register httpData event
       request = makeRequest()
       request.on('httpData', (chunk) -> calls.push(chunk.toString()))
       request.send()
-
       expect(calls).to.eql(['FOO', 'BAR', 'BAZ', 'QUX'])
+      done()
 
-    it 'does not clear default httpData event if another is added', ->
+    it 'does not clear default httpData event if another is added', (done) ->
       request = makeRequest()
       request.on('httpData', ->)
       response = request.send()
-
       expect(response.httpResponse.body.toString()).to.equal('FOOBARBAZQUX')
+      done()
 
-    it 'disables httpData if createUnbufferedStream() is called', ->
+    it 'disables httpData if createUnbufferedStream() is called', (done) ->
       calls = []
       stream = null
       helpers.mockHttpResponse 200, {}, ['data1', 'data2', 'data3']
-
       request = makeRequest()
       request.on('httpData', (chunk) -> calls.push(chunk.toString()))
       request.on 'httpHeaders', (statusCode, headers) ->
@@ -285,6 +285,7 @@ describe 'AWS.EventListeners', ->
       request.send()
       expect(calls.length).to.equal(0)
       expect(stream).to.exist
+      done()
 
   if AWS.util.isNode() and AWS.HttpClient.streamsApiVersion > 1
     describe 'httpDownloadProgress', ->
