@@ -25,6 +25,9 @@
   "budgets": {
     "name": "Budgets"
   },
+  "clouddirectory": {
+    "name": "CloudDirectory"
+  },
   "cloudformation": {
     "name": "CloudFormation",
     "cors": true
