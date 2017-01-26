@@ -68,6 +68,14 @@ declare class CodeDeploy extends Service {
    */
   batchGetOnPremisesInstances(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetOnPremisesInstancesOutput, AWSError>;
   /**
+   * Starts the process of rerouting traffic from instances in the original environment to instances in thereplacement environment without waiting for a specified wait time to elapse. (Traffic rerouting, which is achieved by registering instances in the replacement environment with the load balancer, can start as soon as all instances have a status of Ready.) 
+   */
+  continueDeployment(params: CodeDeploy.Types.ContinueDeploymentInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts the process of rerouting traffic from instances in the original environment to instances in thereplacement environment without waiting for a specified wait time to elapse. (Traffic rerouting, which is achieved by registering instances in the replacement environment with the load balancer, can start as soon as all instances have a status of Ready.) 
+   */
+  continueDeployment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Creates an application.
    */
   createApplication(params: CodeDeploy.Types.CreateApplicationInput, callback?: (err: AWSError, data: CodeDeploy.Types.CreateApplicationOutput) => void): Request<CodeDeploy.Types.CreateApplicationOutput, AWSError>;
@@ -268,6 +276,14 @@ declare class CodeDeploy extends Service {
    */
   removeTagsFromOnPremisesInstances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is completed.
+   */
+  skipWaitTimeForInstanceTermination(params: CodeDeploy.Types.SkipWaitTimeForInstanceTerminationInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is completed.
+   */
+  skipWaitTimeForInstanceTermination(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Attempts to stop an ongoing deployment.
    */
   stopDeployment(params: CodeDeploy.Types.StopDeploymentInput, callback?: (err: AWSError, data: CodeDeploy.Types.StopDeploymentOutput) => void): Request<CodeDeploy.Types.StopDeploymentOutput, AWSError>;
@@ -311,6 +327,7 @@ declare namespace CodeDeploy {
      */
     instanceNames: InstanceNameList;
   }
+  export type AdditionalDeploymentStatusInfo = string;
   export interface Alarm {
     /**
      * The name of the alarm. Maximum length is 255 characters. Each alarm name can be used only once in a list of alarms.
@@ -482,9 +499,39 @@ declare namespace CodeDeploy {
      */
     instanceInfos?: InstanceInfoList;
   }
+  export interface BlueGreenDeploymentConfiguration {
+    /**
+     * Information about whether to terminate instances in the original fleet during a blue/green deployment.
+     */
+    terminateBlueInstancesOnDeploymentSuccess?: BlueInstanceTerminationOption;
+    /**
+     * Information about the action to take when newly provisioned instances are ready to receive traffic in a blue/green deployment.
+     */
+    deploymentReadyOption?: DeploymentReadyOption;
+    /**
+     * Information about how instances are provisioned for a replacement environment in a blue/green deployment.
+     */
+    greenFleetProvisioningOption?: GreenFleetProvisioningOption;
+  }
+  export interface BlueInstanceTerminationOption {
+    /**
+     * The action to take on instances in the original environment after a successful blue/green deployment.   TERMINATE: Instances are terminated after a specified wait time.   KEEP_ALIVE: Instances are left running after they are deregistered from the load balancer and removed from the deployment group.  
+     */
+    action?: InstanceAction;
+    /**
+     * The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.
+     */
+    terminationWaitTimeInMinutes?: Duration;
+  }
   export type Boolean = boolean;
   export type BundleType = "tar"|"tgz"|"zip"|string;
   export type CommitId = string;
+  export interface ContinueDeploymentInput {
+    /**
+     * The deployment ID of the blue/green deployment for which you want to start rerouting traffic to the replacement environment.
+     */
+    deploymentId?: DeploymentId;
+  }
   export interface CreateApplicationInput {
     /**
      * The name of the application. This name must be unique with the applicable IAM user or AWS account.
@@ -554,6 +601,18 @@ declare namespace CodeDeploy {
      * Configuration information for an automatic rollback that is added when a deployment group is created.
      */
     autoRollbackConfiguration?: AutoRollbackConfiguration;
+    /**
+     * Information about the type of deployment, standard or blue/green, that you want to run and whether to route deployment traffic behind a load balancer.
+     */
+    deploymentStyle?: DeploymentStyle;
+    /**
+     * Information about blue/green deployment options for a deployment group.
+     */
+    blueGreenDeploymentConfiguration?: BlueGreenDeploymentConfiguration;
+    /**
+     * Information about the load balancer used in a blue/green deployment.
+     */
+    loadBalancerInfo?: LoadBalancerInfo;
   }
   export interface CreateDeploymentGroupOutput {
     /**
@@ -586,6 +645,10 @@ declare namespace CodeDeploy {
      * If set to true, then if the deployment causes the ApplicationStop deployment lifecycle event to an instance to fail, the deployment to that instance will not be considered to have failed at that point and will continue on to the BeforeInstall deployment lifecycle event. If set to false or not specified, then if the deployment causes the ApplicationStop deployment lifecycle event to fail to an instance, the deployment to that instance will stop, and the deployment to that instance will be considered to have failed.
      */
     ignoreApplicationStopFailures?: Boolean;
+    /**
+     * Information about the instances that will belong to the replacement environment in a blue/green deployment.
+     */
+    targetInstances?: TargetInstances;
     /**
      * Configuration information for an automatic rollback that is added when a deployment is created.
      */
@@ -701,6 +764,18 @@ declare namespace CodeDeploy {
      * Information about the automatic rollback configuration associated with the deployment group.
      */
     autoRollbackConfiguration?: AutoRollbackConfiguration;
+    /**
+     * Information about the type of deployment, either standard or blue/green, you want to run and whether to route deployment traffic behind a load balancer.
+     */
+    deploymentStyle?: DeploymentStyle;
+    /**
+     * Information about blue/green deployment options for a deployment group.
+     */
+    blueGreenDeploymentConfiguration?: BlueGreenDeploymentConfiguration;
+    /**
+     * Information about the load balancer to use in a blue/green deployment.
+     */
+    loadBalancerInfo?: LoadBalancerInfo;
   }
   export type DeploymentGroupInfoList = DeploymentGroupInfo[];
   export type DeploymentGroupName = string;
@@ -775,7 +850,32 @@ declare namespace CodeDeploy {
      * Information about a deployment rollback.
      */
     rollbackInfo?: RollbackInfo;
+    /**
+     * Information about the type of deployment, either standard or blue/green, you want to run and whether to route deployment traffic behind a load balancer.
+     */
+    deploymentStyle?: DeploymentStyle;
+    /**
+     * Information about the instances that belong to the replacement environment in a blue/green deployment.
+     */
+    targetInstances?: TargetInstances;
+    /**
+     * Indicates whether the wait period set for the termination of instances in the original environment has started. Status is 'false' if the KEEP_ALIVE option is specified; otherwise, 'true' as soon as the termination wait period starts.
+     */
+    instanceTerminationWaitTimeStarted?: Boolean;
+    /**
+     * Information about blue/green deployment options for this deployment.
+     */
+    blueGreenDeploymentConfiguration?: BlueGreenDeploymentConfiguration;
+    /**
+     * Information about the load balancer used in this blue/green deployment.
+     */
+    loadBalancerInfo?: LoadBalancerInfo;
+    /**
+     * Provides information about the results of a deployment, such as whether instances in the original environment in a blue/green deployment were not terminated.
+     */
+    additionalDeploymentStatusInfo?: AdditionalDeploymentStatusInfo;
   }
+  export type DeploymentOption = "WITH_TRAFFIC_CONTROL"|"WITHOUT_TRAFFIC_CONTROL"|string;
   export interface DeploymentOverview {
     /**
      * The number of instances in the deployment in a pending state.
@@ -797,9 +897,35 @@ declare namespace CodeDeploy {
      * The number of instances in the deployment in a skipped state.
      */
     Skipped?: InstanceCount;
+    /**
+     * The number of instances in a replacement environment ready to receive traffic in a blue/green deployment.
+     */
+    Ready?: InstanceCount;
   }
-  export type DeploymentStatus = "Created"|"Queued"|"InProgress"|"Succeeded"|"Failed"|"Stopped"|string;
+  export type DeploymentReadyAction = "CONTINUE_DEPLOYMENT"|"STOP_DEPLOYMENT"|string;
+  export interface DeploymentReadyOption {
+    /**
+     * Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment.   CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment.   STOP_DEPLOYMENT: Do not register new instances with load balancer unless traffic is rerouted manually. If traffic is not rerouted manually before the end of the specified wait period, the deployment status is changed to Stopped.  
+     */
+    actionOnTimeout?: DeploymentReadyAction;
+    /**
+     * The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout
+     */
+    waitTimeInMinutes?: Duration;
+  }
+  export type DeploymentStatus = "Created"|"Queued"|"InProgress"|"Succeeded"|"Failed"|"Stopped"|"Ready"|string;
   export type DeploymentStatusList = DeploymentStatus[];
+  export interface DeploymentStyle {
+    /**
+     * Indicates whether to run a standard deployment or a blue/green deployment.
+     */
+    deploymentType?: DeploymentType;
+    /**
+     * Indicates whether to route deployment traffic behind a load balancer.
+     */
+    deploymentOption?: DeploymentOption;
+  }
+  export type DeploymentType = "IN_PLACE"|"BLUE_GREEN"|string;
   export type DeploymentsInfoList = DeploymentInfo[];
   export type DeploymentsList = DeploymentId[];
   export interface DeregisterOnPremisesInstanceInput {
@@ -827,6 +953,7 @@ declare namespace CodeDeploy {
      */
     logTail?: LogTail;
   }
+  export type Duration = number;
   export interface EC2TagFilter {
     /**
      * The tag filter key.
@@ -843,11 +970,19 @@ declare namespace CodeDeploy {
   }
   export type EC2TagFilterList = EC2TagFilter[];
   export type EC2TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE"|string;
+  export interface ELBInfo {
+    /**
+     * The name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment.
+     */
+    name?: ELBName;
+  }
+  export type ELBInfoList = ELBInfo[];
+  export type ELBName = string;
   export type ETag = string;
   export type ErrorCode = "DEPLOYMENT_GROUP_MISSING"|"APPLICATION_MISSING"|"REVISION_MISSING"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"NO_EC2_SUBSCRIPTION"|"OVER_MAX_INSTANCES"|"NO_INSTANCES"|"TIMEOUT"|"HEALTH_CONSTRAINTS_INVALID"|"HEALTH_CONSTRAINTS"|"INTERNAL_ERROR"|"THROTTLED"|"ALARM_ACTIVE"|"AGENT_ISSUE"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"AUTO_SCALING_CONFIGURATION"|"MANUAL_STOP"|string;
   export interface ErrorInformation {
     /**
-     * The error code:   APPLICATION_MISSING: The application was missing. This error code will most likely be raised if the application is deleted after the deployment is created but before it is started.   DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code will most likely be raised if the deployment group is deleted after the deployment is created but before it is started.   HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.   HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.   IAM_ROLE_MISSING: The service role cannot be accessed.   IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.   INTERNAL_ERROR: There was an internal error.   NO_EC2_SUBSCRIPTION: The calling account is not subscribed to the Amazon EC2 service.   NO_INSTANCES: No instance were specified, or no instance can be found.   OVER_MAX_INSTANCES: The maximum number of instance was exceeded.   THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.   TIMEOUT: The deployment has timed out.   REVISION_MISSING: The revision ID was missing. This error code will most likely be raised if the revision is deleted after the deployment is created but before it is started.  
+     * For information about additional error codes, see Error Codes for AWS CodeDeploy in the AWS CodeDeploy User Guide. The error code:   APPLICATION_MISSING: The application was missing. This error code will most likely be raised if the application is deleted after the deployment is created but before it is started.   DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code will most likely be raised if the deployment group is deleted after the deployment is created but before it is started.   HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.   HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.   IAM_ROLE_MISSING: The service role cannot be accessed.   IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.   INTERNAL_ERROR: There was an internal error.   NO_EC2_SUBSCRIPTION: The calling account is not subscribed to the Amazon EC2 service.   NO_INSTANCES: No instance were specified, or no instance can be found.   OVER_MAX_INSTANCES: The maximum number of instance was exceeded.   THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.   TIMEOUT: The deployment has timed out.   REVISION_MISSING: The revision ID was missing. This error code will most likely be raised if the revision is deleted after the deployment is created but before it is started.  
      */
     code?: ErrorCode;
     /**
@@ -992,8 +1127,16 @@ declare namespace CodeDeploy {
      */
     commitId?: CommitId;
   }
+  export type GreenFleetProvisioningAction = "DISCOVER_EXISTING"|"COPY_AUTO_SCALING_GROUP"|string;
+  export interface GreenFleetProvisioningOption {
+    /**
+     * The method used to add instances to a replacement environment.   DISCOVER_EXISTING: Use instances that already exist or will be created manually.   COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling group to define and create instances in a new Auto Scaling group.  
+     */
+    action?: GreenFleetProvisioningAction;
+  }
   export type IamSessionArn = string;
   export type IamUserArn = string;
+  export type InstanceAction = "TERMINATE"|"KEEP_ALIVE"|string;
   export type InstanceArn = string;
   export type InstanceCount = number;
   export type InstanceId = string;
@@ -1030,7 +1173,7 @@ declare namespace CodeDeploy {
   export type InstanceInfoList = InstanceInfo[];
   export type InstanceName = string;
   export type InstanceNameList = InstanceName[];
-  export type InstanceStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown"|string;
+  export type InstanceStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown"|"Ready"|string;
   export type InstanceStatusList = InstanceStatus[];
   export interface InstanceSummary {
     /**
@@ -1053,8 +1196,14 @@ declare namespace CodeDeploy {
      * A list of lifecycle events for this instance.
      */
     lifecycleEvents?: LifecycleEventList;
+    /**
+     * Information about which environment an instance belongs to in a blue/green deployment.   BLUE: The instance is part of the original environment.   GREEN: The instance is part of the replacement environment.  
+     */
+    instanceType?: InstanceType;
   }
   export type InstanceSummaryList = InstanceSummary[];
+  export type InstanceType = "Blue"|"Green"|string;
+  export type InstanceTypeList = InstanceType[];
   export type InstancesList = InstanceId[];
   export type Key = string;
   export type LifecycleErrorCode = "Success"|"ScriptMissing"|"ScriptNotExecutable"|"ScriptTimedOut"|"ScriptFailed"|"UnknownError"|string;
@@ -1193,6 +1342,10 @@ declare namespace CodeDeploy {
      * A subset of instances to list by status:   Pending: Include those instance with pending deployments.   InProgress: Include those instance where deployments are still in progress.   Succeeded: Include those instances with successful deployments.   Failed: Include those instance with failed deployments.   Skipped: Include those instance with skipped deployments.   Unknown: Include those instance with deployments in an unknown state.  
      */
     instanceStatusFilter?: InstanceStatusList;
+    /**
+     * The set of instances in a blue/green deployment, either those in the original environment ("BLUE") or those in the replacement environment ("GREEN"), for which you want to view instance information.
+     */
+    instanceTypeFilter?: InstanceTypeList;
   }
   export interface ListDeploymentInstancesOutput {
     /**
@@ -1261,6 +1414,12 @@ declare namespace CodeDeploy {
     nextToken?: NextToken;
   }
   export type ListStateFilterAction = "include"|"exclude"|"ignore"|string;
+  export interface LoadBalancerInfo {
+    /**
+     * An array containing information about the load balancer in Elastic Load Balancing to use in a blue/green deployment.
+     */
+    elbInfoList?: ELBInfoList;
+  }
   export type LogTail = string;
   export type Message = string;
   export interface MinimumHealthyHosts {
@@ -1323,7 +1482,7 @@ declare namespace CodeDeploy {
      */
     revisionLocation?: RevisionLocation;
     /**
-     * Information about an application revision, including usage details and currently associated deployment groups.
+     * Information about an application revision, including usage details and associated deployment groups.
      */
     genericRevisionInfo?: GenericRevisionInfo;
   }
@@ -1384,6 +1543,12 @@ declare namespace CodeDeploy {
     eTag?: ETag;
   }
   export type ScriptName = string;
+  export interface SkipWaitTimeForInstanceTerminationInput {
+    /**
+     * The ID of the blue/green deployment for which you want to skip the instance termination wait time.
+     */
+    deploymentId?: DeploymentId;
+  }
   export type SortOrder = "ascending"|"descending"|string;
   export interface StopDeploymentInput {
     /**
@@ -1433,6 +1598,16 @@ declare namespace CodeDeploy {
   export type TagFilterList = TagFilter[];
   export type TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE"|string;
   export type TagList = Tag[];
+  export interface TargetInstances {
+    /**
+     * The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment.
+     */
+    tagFilters?: EC2TagFilterList;
+    /**
+     * The names of one or more Auto Scaling groups to identify a replacement environment for a blue/green deployment.
+     */
+    autoScalingGroups?: AutoScalingGroupNameList;
+  }
   export interface TimeRange {
     /**
      * The start time of the time range.  Specify null to leave the start time open-ended. 
@@ -1459,7 +1634,7 @@ declare namespace CodeDeploy {
     triggerEvents?: TriggerEventTypeList;
   }
   export type TriggerConfigList = TriggerConfig[];
-  export type TriggerEventType = "DeploymentStart"|"DeploymentSuccess"|"DeploymentFailure"|"DeploymentStop"|"DeploymentRollback"|"InstanceStart"|"InstanceSuccess"|"InstanceFailure"|string;
+  export type TriggerEventType = "DeploymentStart"|"DeploymentSuccess"|"DeploymentFailure"|"DeploymentStop"|"DeploymentRollback"|"DeploymentReady"|"InstanceStart"|"InstanceSuccess"|"InstanceFailure"|"InstanceReady"|string;
   export type TriggerEventTypeList = TriggerEventType[];
   export type TriggerName = string;
   export type TriggerTargetArn = string;
@@ -1518,6 +1693,18 @@ declare namespace CodeDeploy {
      * Information for an automatic rollback configuration that is added or changed when a deployment group is updated.
      */
     autoRollbackConfiguration?: AutoRollbackConfiguration;
+    /**
+     * Information about the type of deployment, either standard or blue/green, you want to run and whether to route deployment traffic behind a load balancer.
+     */
+    deploymentStyle?: DeploymentStyle;
+    /**
+     * Information about blue/green deployment options for a deployment group.
+     */
+    blueGreenDeploymentConfiguration?: BlueGreenDeploymentConfiguration;
+    /**
+     * Information about the load balancer used in a blue/green deployment.
+     */
+    loadBalancerInfo?: LoadBalancerInfo;
   }
   export interface UpdateDeploymentGroupOutput {
     /**

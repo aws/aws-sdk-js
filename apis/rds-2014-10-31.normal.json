@@ -327,6 +327,12 @@
         },
         {
           "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "DBInstanceNotFoundFault"
+        },
+        {
+          "shape": "DBSubnetGroupDoesNotCoverEnoughAZs"
         }
       ],
       "documentation": "<p>Creates a new Amazon Aurora DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL DB instance.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>"
@@ -526,7 +532,7 @@
           "shape": "KMSKeyNotAccessibleFault"
         }
       ],
-      "documentation": "<p>Creates a DB instance for a DB instance running MySQL, MariaDB, or PostgreSQL that acts as a Read Replica of a source DB instance.</p> <p>All Read Replica DB instances are created as Single-AZ deployments with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified below.</p> <important> <p>The source DB instance must have backup retention enabled.</p> </important>"
+      "documentation": "<p>Creates a DB instance for a DB instance running MySQL, MariaDB, or PostgreSQL that acts as a Read Replica of a source DB instance.</p> <p>All Read Replica DB instances are created as Single-AZ deployments with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified below.</p> <important> <p>The source DB instance must have backup retention enabled.</p> </important> <p>You can create an encrypted Read Replica in a different AWS Region than the source DB instance. In that case, the region where you call the <code>CreateDBInstanceReadReplica</code> action is the destination region of the encrypted Read Replica. The source DB instance must be encrypted.</p> <p>To create an encrypted Read Replica in another AWS Region, you must provide the following values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS Key Management System (KMS) key identifier for the key to use to encrypt the Read Replica in the destination region.</p> </li> <li> <p> <code>PreSignedUrl</code> - A URL that contains a Signature Version 4 signed request for the <code> CreateDBInstanceReadReplica</code> API action in the AWS region that contains the source DB instance. The <code>PreSignedUrl</code> parameter must be used when encrypting a Read Replica from another AWS region.</p> <p>The presigned URL must be a valid request for the <code>CreateDBInstanceReadReplica</code> API action that can be executed in the source region that contains the encrypted DB instance. The presigned URL request must contain the following parameter values:</p> <ul> <li> <p> <code>DestinationRegion</code> - The AWS Region that the Read Replica is created in. This region is the same one where the <code>CreateDBInstanceReadReplica</code> action is called that contains this presigned URL. </p> <p> For example, if you create an encrypted Read Replica in the us-east-1 region, and the source DB instance is in the west-2 region, then you call the <code>CreateDBInstanceReadReplica</code> action in the us-east-1 region and provide a presigned URL that contains a call to the <code>CreateDBInstanceReadReplica</code> action in the us-west-2 region. For this example, the <code>DestinationRegion</code> in the presigned URL must be set to the us-east-1 region.</p> </li> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the Read Replica in the destination region. This is the same identifier for both the <code>CreateDBInstanceReadReplica</code> action that is called in the destination region, and the action contained in the presigned URL.</p> </li> <li> <p> <code>SourceDBInstanceIdentifier</code> - The DB instance identifier for the encrypted Read Replica to be created. This identifier must be in the Amazon Resource Name (ARN) format for the source region. For example, if you create an encrypted Read Replica from a DB instance in the us-west-2 region, then your <code>SourceDBInstanceIdentifier</code> would look like this example: <code> arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-instance-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\"> Signature Version 4 Signing Process</a>.</p> </li> <li> <p> <code>DBInstanceIdentifier</code> - The identifier for the encrypted Read Replica in the destination region.</p> </li> <li> <p> <code>SourceDBInstanceIdentifier</code> - The DB instance identifier for the encrypted Read Replica. This identifier must be in the ARN format for the source region and is the same value as the <code>SourceDBInstanceIdentifier</code> in the presigned URL. </p> </li> </ul>"
     },
     "CreateDBParameterGroup": {
       "name": "CreateDBParameterGroup",
@@ -1706,6 +1712,26 @@
         }
       ],
       "documentation": "<p> Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <note> <p>Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.</p> </note> <important> <p>After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href=\"https://console.aws.amazon.com/rds/\">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>"
+    },
+    "ModifyDBSnapshot": {
+      "name": "ModifyDBSnapshot",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyDBSnapshotMessage"
+      },
+      "output": {
+        "shape": "ModifyDBSnapshotResult",
+        "resultWrapper": "ModifyDBSnapshotResult"
+      },
+      "errors": [
+        {
+          "shape": "DBSnapshotNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Updates a manual DB snapshot, which can be encrypted or not encrypted, with a new engine version. You can update the engine version to either a new major or minor engine version. </p> <p>Amazon RDS supports upgrading a MySQL DB snapshot from MySQL 5.1 to MySQL 5.5.</p>"
     },
     "ModifyDBSnapshotAttribute": {
       "name": "ModifyDBSnapshotAttribute",
@@ -6932,6 +6958,30 @@
       "members": {
         "DBSnapshotAttributesResult": {
           "shape": "DBSnapshotAttributesResult"
+        }
+      }
+    },
+    "ModifyDBSnapshotMessage": {
+      "type": "structure",
+      "required": [
+        "DBSnapshotIdentifier"
+      ],
+      "members": {
+        "DBSnapshotIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the DB snapshot to modify.</p>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>The engine version to update the DB snapshot to. </p>"
+        }
+      }
+    },
+    "ModifyDBSnapshotResult": {
+      "type": "structure",
+      "members": {
+        "DBSnapshot": {
+          "shape": "DBSnapshot"
         }
       }
     },

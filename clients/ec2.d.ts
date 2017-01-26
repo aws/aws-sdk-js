@@ -2090,6 +2090,10 @@ declare namespace EC2 {
      * The ID of the Spot instance request.
      */
     SpotInstanceRequestId?: String;
+    /**
+     * The health status of the instance. If the status of both the instance status check and the system status check is impaired, the health status of the instance is unhealthy. Otherwise, the health status is healthy.
+     */
+    InstanceHealth?: InstanceHealthStatus;
   }
   export type ActiveInstanceSet = ActiveInstance[];
   export type ActivityStatus = "error"|"pending_fulfillment"|"pending_termination"|"fulfilled"|string;
@@ -7492,6 +7496,7 @@ declare namespace EC2 {
      */
     TargetEnvironment?: ExportEnvironment;
   }
+  export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
   export type InstanceIdSet = String[];
   export type InstanceIdStringList = String[];
   export interface InstanceIpv6Address {
@@ -10999,6 +11004,10 @@ declare namespace EC2 {
      * The type of request. Indicates whether the fleet will only request the target capacity or also attempt to maintain it. When you request a certain target capacity, the fleet will only place the required bids. It will not attempt to replenish Spot instances if capacity is diminished, nor will it submit bids in alternative Spot pools if capacity is not available. When you want to maintain a certain target capacity, fleet will place the required bids to meet this target capacity. It will also automatically replenish any interrupted instances. Default: maintain.
      */
     Type?: FleetType;
+    /**
+     * Indicates whether Spot fleet should replace unhealthy instances.
+     */
+    ReplaceUnhealthyInstances?: Boolean;
   }
   export type SpotFleetRequestConfigSet = SpotFleetRequestConfig[];
   export interface SpotInstanceRequest {

@@ -9,6 +9,7 @@ module.exports = {
   AutoScaling: require('./autoscaling'),
   Batch: require('./batch'),
   Budgets: require('./budgets'),
+  CloudDirectory: require('./clouddirectory'),
   CloudFormation: require('./cloudformation'),
   CloudFront: require('./cloudfront'),
   CloudHSM: require('./cloudhsm'),

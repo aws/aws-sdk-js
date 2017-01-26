@@ -2293,6 +2293,11 @@
           "shape":"String",
           "documentation":"<p>The ID of the Spot instance request.</p>",
           "locationName":"spotInstanceRequestId"
+        },
+        "InstanceHealth":{
+          "shape":"InstanceHealthStatus",
+          "documentation":"<p>The health status of the instance. If the status of both the instance status check and the system status check is <code>impaired</code>, the health status of the instance is <code>unhealthy</code>. Otherwise, the health status is <code>healthy</code>.</p>",
+          "locationName":"instanceHealth"
         }
       },
       "documentation":"<p>Describes a running instance in a Spot fleet.</p>"
@@ -10910,6 +10915,13 @@
       },
       "documentation":"<p>Describes an instance to export.</p>"
     },
+    "InstanceHealthStatus":{
+      "type":"string",
+      "enum":[
+        "healthy",
+        "unhealthy"
+      ]
+    },
     "InstanceIdSet":{
       "type":"list",
       "member":{
@@ -16712,6 +16724,11 @@
           "shape":"FleetType",
           "documentation":"<p>The type of request. Indicates whether the fleet will only <code>request</code> the target capacity or also attempt to <code>maintain</code> it. When you <code>request</code> a certain target capacity, the fleet will only place the required bids. It will not attempt to replenish Spot instances if capacity is diminished, nor will it submit bids in alternative Spot pools if capacity is not available. When you want to <code>maintain</code> a certain target capacity, fleet will place the required bids to meet this target capacity. It will also automatically replenish any interrupted instances. Default: <code>maintain</code>.</p>",
           "locationName":"type"
+        },
+        "ReplaceUnhealthyInstances":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether Spot fleet should replace unhealthy instances.</p>",
+          "locationName":"replaceUnhealthyInstances"
         }
       },
       "documentation":"<p>Describes the configuration of a Spot fleet request.</p>"

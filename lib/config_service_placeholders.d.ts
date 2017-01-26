@@ -7,6 +7,7 @@ export abstract class ConfigurationServicePlaceholders {
   autoscaling?: AWS.AutoScaling.Types.ClientConfiguration;
   batch?: AWS.Batch.Types.ClientConfiguration;
   budgets?: AWS.Budgets.Types.ClientConfiguration;
+  clouddirectory?: AWS.CloudDirectory.Types.ClientConfiguration;
   cloudformation?: AWS.CloudFormation.Types.ClientConfiguration;
   cloudfront?: AWS.CloudFront.Types.ClientConfiguration;
   cloudhsm?: AWS.CloudHSM.Types.ClientConfiguration;
@@ -99,6 +100,7 @@ export interface ConfigurationServiceApiVersions {
   autoscaling?: AWS.AutoScaling.Types.apiVersion;
   batch?: AWS.Batch.Types.apiVersion;
   budgets?: AWS.Budgets.Types.apiVersion;
+  clouddirectory?: AWS.CloudDirectory.Types.apiVersion;
   cloudformation?: AWS.CloudFormation.Types.apiVersion;
   cloudfront?: AWS.CloudFront.Types.apiVersion;
   cloudhsm?: AWS.CloudHSM.Types.apiVersion;

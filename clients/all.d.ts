@@ -5,6 +5,7 @@ export import AppStream = require('./appstream');
 export import AutoScaling = require('./autoscaling');
 export import Batch = require('./batch');
 export import Budgets = require('./budgets');
+export import CloudDirectory = require('./clouddirectory');
 export import CloudFormation = require('./cloudformation');
 export import CloudFront = require('./cloudfront');
 export import CloudHSM = require('./cloudhsm');
