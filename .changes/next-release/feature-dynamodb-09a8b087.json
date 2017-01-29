@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "dynamodb",
+  "description": "Add specific TypeScript typings for item attributes."
+}
