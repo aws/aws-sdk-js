@@ -82,7 +82,7 @@ npm test
 To run a particular test subset e.g. just the unit tests:
 
 ```
-npm run-script unit
+npm run unit
 ```
 
 See the implementation of the `test` script in `package.json` for more options.
@@ -95,7 +95,7 @@ Our goal with the changelog is to document all changes made with each version of
 When submitting a pull request, please run the `add-change` script and commit the resulting JSON file so that your change gets added to the changelog.
 From SDK root:
 ```
-npm run-script add-change
+npm run add-change
 ```
 
 See the [add-change cli notes](./scripts/changelog/README.md) for more information.
