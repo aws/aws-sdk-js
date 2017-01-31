@@ -107,6 +107,27 @@ There are a few known limitations with the bundled TypeScript definitions at thi
  * Service client typings reflect the latest `apiVersion`, regardless of which `apiVersion` is specified when creating a client.
  * Service-bound parameters use the `any` type.
 
+## Getting Help
+Please use these community resources for getting help. We use the GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them.
+ * Ask a question on [StackOverflow](https://stackoverflow.com/) and tag it with `aws-sdk-js`
+ * Come join the AWS JavaScript community on [gitter](https://gitter.im/aws/aws-sdk-js?source=orgpage)
+ * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home#/)
+ * If it turns out that you may have found a bug, please [open an issue](https://github.com/aws/aws-sdk-js/issues/new)
+
+## Opening Issues
+If you encounter a bug with the AWS SDK for JavaScript we would like to hear
+about it. Search the [existing issues](https://github.com/aws/aws-sdk-js/issues)
+and try to make sure your problem doesn’t already exist before opening a new
+issue. It’s helpful if you include the version of the SDK, Node.js or browser
+environment and OS you’re using. Please include a stack trace and reduced repro
+case when appropriate, too.
+
+The GitHub issues are intended for bug reports and feature requests. For help
+and questions with using the AWS SDK for JavaScript please make use of the
+resources listed in the [Getting Help](https://github.com/aws/aws-sdk-js#getting-help)
+section. There are limited resources available for handling issues and by
+keeping the list of open issues lean we can respond in a timely manner.
+
 ## Supported Services
 
 <p class="note"><strong>Note</strong>:
