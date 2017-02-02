@@ -94,3 +94,12 @@ var config = AWS.config.loadFromPath('/to/path');
 AWS.config.update({
    fake: 'fake' 
 }, true);
+
+// Test constructing with a CredentialProviderChain
+var options = {
+    credentialProvider: new AWS.CredentialProviderChain([
+        () => new AWS.EC2MetadataCredentials()
+    ])
+};
+var s3 = new AWS.S3(options);
+var ses = new AWS.SES(options);
