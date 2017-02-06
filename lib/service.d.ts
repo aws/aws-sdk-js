@@ -1,6 +1,7 @@
 import {Request} from './request';
 import {AWSError} from './error';
 import {ConfigurationOptions, ConfigBase} from './config';
+import {Endpoint} from './endpoint';
 export class Service {
     /**
      * Creates a new service object with a configuration object.
@@ -45,6 +46,11 @@ export class Service {
     apiVersions: string[];
 
     config: ConfigBase & ServiceConfigurationOptions;
+
+    /**
+     * An Endpoint object representing the endpoint URL for service requests.
+     */
+    endpoint: Endpoint;
 }
 
 export interface ServiceConfigurationOptions extends ConfigurationOptions {

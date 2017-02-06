@@ -1,5 +1,6 @@
 import S3 = require('../clients/s3');
 import fs = require('fs');
+import {Endpoint} from '../lib/endpoint';
 
 // Instantiate S3 without options
 var s3 = new S3();
@@ -161,3 +162,5 @@ var uploader2: S3.ManagedUpload = new S3.ManagedUpload(<S3.ManagedUpload.Managed
 uploader2.send((err, data) => {
 
 });
+
+var endpoint: Endpoint = s3.endpoint;
