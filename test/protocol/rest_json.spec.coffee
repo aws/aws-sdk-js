@@ -284,3 +284,14 @@ describe 'AWS.Protocol.RestJson', ->
       extractData ''
       expect(response.error).to.equal(null)
       expect(response.data).to.eql({})
+
+    it 'can handle null binary values', ->
+      defop output:
+        type: 'structure'
+        members:
+          bin: type: 'binary'
+          i: type: 'integer'
+      extractData '{"i": 1, "bin": null}'
+      expect(response.error).to.equal(null)
+      expect(response.data.i).to.equal(1)
+      expect(response.data.bin).to.equal(null)
