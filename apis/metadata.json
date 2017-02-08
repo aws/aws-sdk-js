@@ -270,6 +270,11 @@
     "name": "Lambda",
     "cors": true
   },
+  "lexruntime": {
+    "prefix": "runtime.lex",
+    "name": "LexRuntime",
+    "cors": true
+  },
   "lightsail": {
     "name": "Lightsail"
   },
