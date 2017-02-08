@@ -38,6 +38,7 @@ export import IotData = require('./iotdata');
 export import Kinesis = require('./kinesis');
 export import KMS = require('./kms');
 export import Lambda = require('./lambda');
+export import LexRuntime = require('./lexruntime');
 export import MachineLearning = require('./machinelearning');
 export import MarketplaceCommerceAnalytics = require('./marketplacecommerceanalytics');
 export import MobileAnalytics = require('./mobileanalytics');

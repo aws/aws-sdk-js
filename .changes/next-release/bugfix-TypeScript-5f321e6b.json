@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "TypeScript",
-  "description": "Add `credentialProvider` as an optional parameter of `ConfigurationOptions`."
-}

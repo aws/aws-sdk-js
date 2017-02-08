@@ -56,6 +56,7 @@ export import Kinesis = require('./kinesis');
 export import KinesisAnalytics = require('./kinesisanalytics');
 export import KMS = require('./kms');
 export import Lambda = require('./lambda');
+export import LexRuntime = require('./lexruntime');
 export import Lightsail = require('./lightsail');
 export import MachineLearning = require('./machinelearning');
 export import MarketplaceCommerceAnalytics = require('./marketplacecommerceanalytics');

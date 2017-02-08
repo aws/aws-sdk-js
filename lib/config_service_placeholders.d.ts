@@ -58,6 +58,7 @@ export abstract class ConfigurationServicePlaceholders {
   kinesisanalytics?: AWS.KinesisAnalytics.Types.ClientConfiguration;
   kms?: AWS.KMS.Types.ClientConfiguration;
   lambda?: AWS.Lambda.Types.ClientConfiguration;
+  lexruntime?: AWS.LexRuntime.Types.ClientConfiguration;
   lightsail?: AWS.Lightsail.Types.ClientConfiguration;
   machinelearning?: AWS.MachineLearning.Types.ClientConfiguration;
   marketplacecommerceanalytics?: AWS.MarketplaceCommerceAnalytics.Types.ClientConfiguration;
@@ -151,6 +152,7 @@ export interface ConfigurationServiceApiVersions {
   kinesisanalytics?: AWS.KinesisAnalytics.Types.apiVersion;
   kms?: AWS.KMS.Types.apiVersion;
   lambda?: AWS.Lambda.Types.apiVersion;
+  lexruntime?: AWS.LexRuntime.Types.apiVersion;
   lightsail?: AWS.Lightsail.Types.apiVersion;
   machinelearning?: AWS.MachineLearning.Types.apiVersion;
   marketplacecommerceanalytics?: AWS.MarketplaceCommerceAnalytics.Types.apiVersion;

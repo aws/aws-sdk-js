@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.9.0-->
+<!--LATEST=2.10.0-->
 <!--ENTRYINSERT-->
+
+## 2.10.0
+* bugfix: JSON: Fixes issue caused when trying to unmarshall null binary shapes.
+* bugfix: TypeScript: Add `credentialProvider` as an optional parameter of `ConfigurationOptions`.
+* feature: LexRuntime: Amazon Lex is a service for building conversational interactions into any application using voice or text.
 
 ## 2.9.0
 * feature: EC2: Adds instance health check functionality to replace unhealthy EC2 Spot fleet instances with fresh ones

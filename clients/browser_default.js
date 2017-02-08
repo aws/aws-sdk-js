@@ -42,6 +42,7 @@ module.exports = {
   Kinesis: require('./kinesis'),
   KMS: require('./kms'),
   Lambda: require('./lambda'),
+  LexRuntime: require('./lexruntime'),
   MachineLearning: require('./machinelearning'),
   MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
   MobileAnalytics: require('./mobileanalytics'),

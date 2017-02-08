@@ -60,6 +60,7 @@ module.exports = {
   KinesisAnalytics: require('./kinesisanalytics'),
   KMS: require('./kms'),
   Lambda: require('./lambda'),
+  LexRuntime: require('./lexruntime'),
   Lightsail: require('./lightsail'),
   MachineLearning: require('./machinelearning'),
   MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
