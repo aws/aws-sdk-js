@@ -1,6 +1,7 @@
 import S3 = require('../clients/s3');
 import fs = require('fs');
 import {Endpoint} from '../lib/endpoint';
+import {PresignedPost} from "../lib/services/s3";
 
 // Instantiate S3 without options
 var s3 = new S3();
@@ -164,3 +165,15 @@ uploader2.send((err, data) => {
 });
 
 var endpoint: Endpoint = s3.endpoint;
+
+let presignedPost: PresignedPost = s3.createPresignedPost({
+    Bucket: 'bucket',
+    Conditions: [
+        ['starts-with', '$key', ''],
+        ['content-length-range', 0, 1024 * 1024 * 1024],
+    ],
+    Fields: {
+        'acl': 'bucket-owner-full-control'
+    },
+    Expires: 900
+});

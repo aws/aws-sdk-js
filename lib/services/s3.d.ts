@@ -2,7 +2,7 @@ import {Service} from '../service';
 import {ManagedUpload} from '../s3/managed_upload';
 import S3 = require('../../clients/s3');
 
-interface PresignedPostParams {
+export interface PresignedPostParams {
     /**
      * The S3 bucket to which the form should upload an attached file.
      */
@@ -12,7 +12,7 @@ interface PresignedPostParams {
      * An array of conditions that must be met for the form upload to be
      * accepted by S3.
      */
-    Conditions?: Array<{[key: string]: string}|[string, string, string]>;
+    Conditions?: Array<{[key: string]: any}|[string, any, any]>;
 
     /**
      * The number of seconds for which the POST form's signed policy should be
@@ -25,10 +25,10 @@ interface PresignedPostParams {
      * (except 'key') will be included as exact match conditions in the
      * presigned policy.
      */
-    Fields?: {[key: string]: string};
+    Fields?: {[key: string]: any};
 }
 
-interface PresignedPostFields {
+export interface PresignedPostFields {
     /**
      * A base64-encoded policy detailing what constitutes an acceptable POST
      * upload. Composed of the conditions and expiration provided to
@@ -50,7 +50,7 @@ interface PresignedPostFields {
     [key: string]: string;
 }
 
-interface PresignedPost {
+export interface PresignedPost {
     /**
      * The URL that should be used as the action of the form.
      */
