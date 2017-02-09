@@ -15,12 +15,8 @@ cache:
 
 before_install:
   - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
-  - "export PATH=$PWD/travis-phantomjs:$PATH"
-  - "phantomjs --version"
-  - "if [ $(phantomjs --version) != '2.0.0' ]; then rm -rf $PWD/travis-phantomjs; mkdir -p $PWD/travis-phantomjs; fi"
-  - "if [ $(phantomjs --version) != '2.0.0' ]; then wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2; fi"
-  - "if [ $(phantomjs --version) != '2.0.0' ]; then tar -xvf $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -C $PWD/travis-phantomjs; fi"
-  - "phantomjs --version"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 
 script:
   - "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
