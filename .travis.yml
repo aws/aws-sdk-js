@@ -15,8 +15,6 @@ cache:
 
 before_install:
   - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
 
 script:
   - "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
