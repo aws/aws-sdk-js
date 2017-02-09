@@ -1,10 +1,12 @@
-AWS = require('./helpers').AWS
+helpers = require('./helpers')
+AWS = helpers.AWS
 
 describe 'AWS.HttpRequest', ->
 
   request = null
   agentHeader = null
-  if AWS.util.isBrowser()
+  isBrowser = AWS.util.isBrowser()
+  if isBrowser
     agentHeader = 'X-Amz-User-Agent'
   else
     agentHeader = 'User-Agent'
@@ -23,12 +25,6 @@ describe 'AWS.HttpRequest', ->
     it 'provides headers with a default user agent', ->
       headers = {}
       headers[agentHeader] = AWS.util.userAgent()
-      expect(request.headers).to.eql(headers)
-
-    it 'adds the customUserAgent to the user agent header if provided as string', ->
-      headers = {}
-      headers[agentHeader] = AWS.util.userAgent() + ' custom'
-      request = new AWS.HttpRequest('http://domain.com', '', 'custom')
       expect(request.headers).to.eql(headers)
 
     it 'defaults body to empty string', ->
@@ -63,3 +59,30 @@ describe 'AWS.HttpRequest', ->
       request.path = '/abc/xyz?mno=hjk'
       expect(request.search()).to.equal('mno=hjk')
 
+  describe 'getUserAgentHeaderName', ->
+    it 'provides the correct header for browser environments', ->
+      helpers.spyOn(AWS.util, 'isBrowser').andReturn true
+      expect(request.getUserAgentHeaderName()).to.equal('X-Amz-User-Agent')
+
+    it 'provides the correct header for node environments', ->
+      helpers.spyOn(AWS.util, 'isBrowser').andReturn false
+      expect(request.getUserAgentHeaderName()).to.equal('User-Agent')
+  
+  describe 'appendToUserAgent', ->
+    it 'always appends a string to a user agent', ->
+      headers = {}
+      headers[agentHeader] = AWS.util.userAgent() + ' custom'
+      request = new AWS.HttpRequest('http://domain.com')
+      request.appendToUserAgent('custom')
+      expect(request.headers).to.eql(headers)
+
+  describe 'getUserAgent', ->
+    it 'returns previously set user agent', ->
+      headers = request.headers
+      expect(request.getUserAgent()).to.equal(headers[agentHeader])
+      request.appendToUserAgent('one')
+      expect(headers[agentHeader]).to.match(/one$/)
+      expect(request.getUserAgent()).to.equal(headers[agentHeader])
+      request.appendToUserAgent('two')
+      expect(headers[agentHeader]).to.match(/two$/)
+      expect(request.getUserAgent()).to.equal(headers[agentHeader])

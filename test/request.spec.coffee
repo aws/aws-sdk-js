@@ -9,6 +9,12 @@ describe 'AWS.Request', ->
   beforeEach ->
     service = new MockService
 
+  describe 'constructor', ->
+    it 'sets custom user agent if provided in service config', ->
+      service.config.customUserAgent = 'custom'
+      req = service.makeRequest('mockMethod')
+      expect(req.httpRequest.getUserAgent()).to.match(/custom/)
+
   describe 'error handling', ->
     it 'throws errors out of callback', ->
       helpers.mockHttpResponse 200, {}, ''
@@ -240,6 +246,13 @@ describe 'AWS.Request', ->
         expect(data).to.equal('FOOBARBAZQUX')
         done()
 
+    it 'adds \'callback\' to user agent if a callback is provided', (done) ->
+      helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+      service.makeRequest('mockMethod').send (err, data) ->
+        expect(data).to.equal('FOOBARBAZQUX')
+        expect(this.request.httpRequest.getUserAgent()).to.match(/callback/)
+        done()
+
   describe 'abort', ->
     it 'allows aborting requests', (done) ->
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
@@ -267,6 +280,13 @@ describe 'AWS.Request', ->
       expect(typeof req.promise).to.equal('function')
       promise = req.promise()
       expect(promise instanceof P).to.equal(true)
+
+    it 'appends \'promise\' to the user agent', ->
+      P = ->
+      AWS.config.setPromisesDependency(P)
+      req = service.makeRequest('mockMethod')
+      promise = req.promise()
+      expect(req.httpRequest.getUserAgent()).to.match(/promise/)
 
   if AWS.util.isNode()
     describe 'createReadStream', ->
