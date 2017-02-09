@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "TypeScript",
-  "description": "Add `endpoint` property to AWS.S3 instance declaration."
-}

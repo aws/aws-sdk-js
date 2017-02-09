@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.10.0-->
+<!--LATEST=2.11.0-->
 <!--ENTRYINSERT-->
+
+## 2.11.0
+* bugfix: TypeScript: Add `endpoint` property to AWS.S3 instance declaration.
+* feature: EC2: This feature allows customers to associate an IAM profile to running instances that do not have any.
+* feature: Rekognition: DetectFaces and IndexFaces operations now return an estimate of the age of the face as an age range.
 
 ## 2.10.0
 * bugfix: JSON: Fixes issue caused when trying to unmarshall null binary shapes.

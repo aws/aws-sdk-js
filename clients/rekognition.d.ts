@@ -101,6 +101,16 @@ declare class Rekognition extends Service {
   searchFacesByImage(callback?: (err: AWSError, data: Rekognition.Types.SearchFacesByImageResponse) => void): Request<Rekognition.Types.SearchFacesByImageResponse, AWSError>;
 }
 declare namespace Rekognition {
+  export interface AgeRange {
+    /**
+     * The lowest estimated age.
+     */
+    Low?: UInteger;
+    /**
+     * The highest estimated age.
+     */
+    High?: UInteger;
+  }
   export type Attribute = "DEFAULT"|"ALL"|string;
   export type Attributes = Attribute[];
   export interface Beard {
@@ -329,6 +339,10 @@ declare namespace Rekognition {
      * Bounding box of the face.
      */
     BoundingBox?: BoundingBox;
+    /**
+     * The estimated age range, in years, for the face. Low represents the lowest estimated age and High represents the highest estimated age.
+     */
+    AgeRange?: AgeRange;
     /**
      * Indicates whether or not the face is smiling, and the confidence level in the determination.
      */

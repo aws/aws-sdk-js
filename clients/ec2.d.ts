@@ -76,6 +76,14 @@ declare class EC2 extends Service {
    */
   associateDhcpOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Associates an IAM instance profile with a running or stopped instance. You cannot associate more than one IAM instance profile with an instance.
+   */
+  associateIamInstanceProfile(params: EC2.Types.AssociateIamInstanceProfileRequest, callback?: (err: AWSError, data: EC2.Types.AssociateIamInstanceProfileResult) => void): Request<EC2.Types.AssociateIamInstanceProfileResult, AWSError>;
+  /**
+   * Associates an IAM instance profile with a running or stopped instance. You cannot associate more than one IAM instance profile with an instance.
+   */
+  associateIamInstanceProfile(callback?: (err: AWSError, data: EC2.Types.AssociateIamInstanceProfileResult) => void): Request<EC2.Types.AssociateIamInstanceProfileResult, AWSError>;
+  /**
    * Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table from the subnet later. A route table can be associated with multiple subnets. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   associateRouteTable(params: EC2.Types.AssociateRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.AssociateRouteTableResult) => void): Request<EC2.Types.AssociateRouteTableResult, AWSError>;
@@ -788,6 +796,14 @@ declare class EC2 extends Service {
    */
   describeHosts(callback?: (err: AWSError, data: EC2.Types.DescribeHostsResult) => void): Request<EC2.Types.DescribeHostsResult, AWSError>;
   /**
+   * Describes your IAM instance profile associations.
+   */
+  describeIamInstanceProfileAssociations(params: EC2.Types.DescribeIamInstanceProfileAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIamInstanceProfileAssociationsResult) => void): Request<EC2.Types.DescribeIamInstanceProfileAssociationsResult, AWSError>;
+  /**
+   * Describes your IAM instance profile associations.
+   */
+  describeIamInstanceProfileAssociations(callback?: (err: AWSError, data: EC2.Types.DescribeIamInstanceProfileAssociationsResult) => void): Request<EC2.Types.DescribeIamInstanceProfileAssociationsResult, AWSError>;
+  /**
    * Describes the ID format settings for your resources on a per-region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. The following resource types support longer IDs: instance | reservation | snapshot | volume.  These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the ModifyIdFormat command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   describeIdFormat(params: EC2.Types.DescribeIdFormatRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIdFormatResult) => void): Request<EC2.Types.DescribeIdFormatResult, AWSError>;
@@ -1268,6 +1284,14 @@ declare class EC2 extends Service {
    */
   disassociateAddress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Disassociates an IAM instance profile from a running or stopped instance. Use DescribeIamInstanceProfileAssociations to get the association ID.
+   */
+  disassociateIamInstanceProfile(params: EC2.Types.DisassociateIamInstanceProfileRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateIamInstanceProfileResult) => void): Request<EC2.Types.DisassociateIamInstanceProfileResult, AWSError>;
+  /**
+   * Disassociates an IAM instance profile from a running or stopped instance. Use DescribeIamInstanceProfileAssociations to get the association ID.
+   */
+  disassociateIamInstanceProfile(callback?: (err: AWSError, data: EC2.Types.DisassociateIamInstanceProfileResult) => void): Request<EC2.Types.DisassociateIamInstanceProfileResult, AWSError>;
+  /**
    * Disassociates a subnet from a route table. After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   disassociateRouteTable(params: EC2.Types.DisassociateRouteTableRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1604,6 +1628,14 @@ declare class EC2 extends Service {
    */
   releaseHosts(callback?: (err: AWSError, data: EC2.Types.ReleaseHostsResult) => void): Request<EC2.Types.ReleaseHostsResult, AWSError>;
   /**
+   * Replaces an IAM instance profile for the specified instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first. Use DescribeIamInstanceProfileAssociations to get the association ID.
+   */
+  replaceIamInstanceProfileAssociation(params: EC2.Types.ReplaceIamInstanceProfileAssociationRequest, callback?: (err: AWSError, data: EC2.Types.ReplaceIamInstanceProfileAssociationResult) => void): Request<EC2.Types.ReplaceIamInstanceProfileAssociationResult, AWSError>;
+  /**
+   * Replaces an IAM instance profile for the specified instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first. Use DescribeIamInstanceProfileAssociations to get the association ID.
+   */
+  replaceIamInstanceProfileAssociation(callback?: (err: AWSError, data: EC2.Types.ReplaceIamInstanceProfileAssociationResult) => void): Request<EC2.Types.ReplaceIamInstanceProfileAssociationResult, AWSError>;
+  /**
    * Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
    */
   replaceNetworkAclAssociation(params: EC2.Types.ReplaceNetworkAclAssociationRequest, callback?: (err: AWSError, data: EC2.Types.ReplaceNetworkAclAssociationResult) => void): Request<EC2.Types.ReplaceNetworkAclAssociationResult, AWSError>;
@@ -1716,11 +1748,11 @@ declare class EC2 extends Service {
    */
   revokeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Amazon EC2 Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   To ensure faster instance launches, break up large requests into smaller batches. For example, create 5 separate launch requests for 100 instances each instead of 1 launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. After launch, you can apply tags to your running instance (requires a resource ID). For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
+   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   To ensure faster instance launches, break up large requests into smaller batches. For example, create 5 separate launch requests for 100 instances each instead of 1 launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. After launch, you can apply tags to your running instance (requires a resource ID). For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   runInstances(params: EC2.Types.RunInstancesRequest, callback?: (err: AWSError, data: EC2.Types.Reservation) => void): Request<EC2.Types.Reservation, AWSError>;
   /**
-   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Amazon EC2 Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   To ensure faster instance launches, break up large requests into smaller batches. For example, create 5 separate launch requests for 100 instances each instead of 1 launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. After launch, you can apply tags to your running instance (requires a resource ID). For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
+   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   To ensure faster instance launches, break up large requests into smaller batches. For example, create 5 separate launch requests for 100 instances each instead of 1 launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. After launch, you can apply tags to your running instance (requires a resource ID). For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   runInstances(callback?: (err: AWSError, data: EC2.Types.Reservation) => void): Request<EC2.Types.Reservation, AWSError>;
   /**
@@ -2281,6 +2313,22 @@ declare namespace EC2 {
      */
     VpcId: String;
   }
+  export interface AssociateIamInstanceProfileRequest {
+    /**
+     * The IAM instance profile.
+     */
+    IamInstanceProfile: IamInstanceProfileSpecification;
+    /**
+     * The ID of the instance.
+     */
+    InstanceId: String;
+  }
+  export interface AssociateIamInstanceProfileResult {
+    /**
+     * Information about the IAM instance profile association.
+     */
+    IamInstanceProfileAssociation?: IamInstanceProfileAssociation;
+  }
   export interface AssociateRouteTableRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -2341,6 +2389,7 @@ declare namespace EC2 {
      */
     Ipv6CidrBlockAssociation?: VpcIpv6CidrBlockAssociation;
   }
+  export type AssociationIdList = String[];
   export interface AttachClassicLinkVpcRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -4385,6 +4434,34 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeIamInstanceProfileAssociationsRequest {
+    /**
+     * One or more IAM instance profile associations.
+     */
+    AssociationIds?: AssociationIdList;
+    /**
+     * One or more filters.    instance-id - The ID of the instance.    state - The state of the association (associating | associated | disassociating | disassociated).  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeIamInstanceProfileAssociationsResult {
+    /**
+     * Information about one or more IAM instance profile associations.
+     */
+    IamInstanceProfileAssociations?: IamInstanceProfileAssociationSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeIdFormatRequest {
     /**
      * The type of resource: instance | reservation | snapshot | volume 
@@ -5930,6 +6007,18 @@ declare namespace EC2 {
      */
     AssociationId?: String;
   }
+  export interface DisassociateIamInstanceProfileRequest {
+    /**
+     * The ID of the IAM instance profile association.
+     */
+    AssociationId: String;
+  }
+  export interface DisassociateIamInstanceProfileResult {
+    /**
+     * Information about the IAM instance profile association.
+     */
+    IamInstanceProfileAssociation?: IamInstanceProfileAssociation;
+  }
   export interface DisassociateRouteTableRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -6627,6 +6716,30 @@ declare namespace EC2 {
      */
     Id?: String;
   }
+  export interface IamInstanceProfileAssociation {
+    /**
+     * The ID of the association.
+     */
+    AssociationId?: String;
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+    /**
+     * The IAM instance profile.
+     */
+    IamInstanceProfile?: IamInstanceProfile;
+    /**
+     * The state of the association.
+     */
+    State?: IamInstanceProfileAssociationState;
+    /**
+     * The time the IAM instance profile was associated with the instance.
+     */
+    Timestamp?: DateTime;
+  }
+  export type IamInstanceProfileAssociationSet = IamInstanceProfileAssociation[];
+  export type IamInstanceProfileAssociationState = "associating"|"associated"|"disassociating"|"disassociated"|string;
   export interface IamInstanceProfileSpecification {
     /**
      * The Amazon Resource Name (ARN) of the instance profile.
@@ -9215,6 +9328,22 @@ declare namespace EC2 {
      */
     Unsuccessful?: UnsuccessfulItemList;
   }
+  export interface ReplaceIamInstanceProfileAssociationRequest {
+    /**
+     * The IAM instance profile.
+     */
+    IamInstanceProfile: IamInstanceProfileSpecification;
+    /**
+     * The ID of the existing IAM instance profile association.
+     */
+    AssociationId: String;
+  }
+  export interface ReplaceIamInstanceProfileAssociationResult {
+    /**
+     * Information about the IAM instance profile association.
+     */
+    IamInstanceProfileAssociation?: IamInstanceProfileAssociation;
+  }
   export interface ReplaceNetworkAclAssociationRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -11230,7 +11359,7 @@ declare namespace EC2 {
      */
     Code?: String;
     /**
-     * The message for the state change.    Server.SpotInstanceTermination: A Spot instance was terminated due to an increase in the market price.    Server.InternalError: An internal error occurred during instance launch, resulting in termination.    Server.InsufficientInstanceCapacity: There was insufficient instance capacity to satisfy the launch request.    Client.InternalError: A client error caused the instance to terminate on launch.    Client.InstanceInitiatedShutdown: The instance was shut down using the shutdown -h command from the instance.    Client.UserInitiatedShutdown: The instance was shut down using the Amazon EC2 API.    Client.VolumeLimitExceeded: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits.    Client.InvalidSnapshot.NotFound: The specified snapshot was not found.  
+     * The message for the state change.    Server.InsufficientInstanceCapacity: There was insufficient instance capacity to satisfy the launch request.    Server.InternalError: An internal error occurred during instance launch, resulting in termination.    Server.ScheduledStop: The instance was stopped due to a scheduled retirement.    Server.SpotInstanceTermination: A Spot instance was terminated due to an increase in the market price.    Client.InternalError: A client error caused the instance to terminate on launch.    Client.InstanceInitiatedShutdown: The instance was shut down using the shutdown -h command from the instance.    Client.UserInitiatedShutdown: The instance was shut down using the Amazon EC2 API.    Client.VolumeLimitExceeded: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits.    Client.InvalidSnapshot.NotFound: The specified snapshot was not found.  
      */
     Message?: String;
   }

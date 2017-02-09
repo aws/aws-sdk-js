@@ -232,6 +232,20 @@
       "documentation":"<p>You are not authorized to perform the action.</p>",
       "exception":true
     },
+    "AgeRange":{
+      "type":"structure",
+      "members":{
+        "Low":{
+          "shape":"UInteger",
+          "documentation":"<p>The lowest estimated age.</p>"
+        },
+        "High":{
+          "shape":"UInteger",
+          "documentation":"<p>The highest estimated age.</p>"
+        }
+      },
+      "documentation":"<p>Structure containing the estimated age range, in years, for a face.</p> <p>Rekognition estimates an age-range for faces detected in the input image. Estimated age ranges can overlap; a face of a 5 year old may have an estimated range of 4-6 whilst the face of a 6 year old may have an estimated range of 4-8.</p>"
+    },
     "Attribute":{
       "type":"string",
       "enum":[
@@ -589,6 +603,10 @@
         "BoundingBox":{
           "shape":"BoundingBox",
           "documentation":"<p>Bounding box of the face.</p>"
+        },
+        "AgeRange":{
+          "shape":"AgeRange",
+          "documentation":"<p>The estimated age range, in years, for the face. Low represents the lowest estimated age and High represents the highest estimated age.</p>"
         },
         "Smile":{
           "shape":"Smile",
