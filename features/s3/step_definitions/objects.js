@@ -139,6 +139,56 @@ module.exports = function () {
     }).on('error', callback.fail).end(data);
   });
 
+  this.Given(
+    /^I create a presigned form to POST the key "([^"]*)" with the data "([^"]*)"$/,
+    function (key, data, callback) {
+      var boundary = this.postBoundary = '----WebKitFormBoundaryLL0mBKIuuLUKr7be';
+      var conditions = [
+          ['starts-with', '$key', 'presigned-post-files/']
+        ],
+        params = {
+          Bucket: this.sharedBucket,
+          Conditions: conditions
+        };
+      var postData = this.s3.createPresignedPost(params);
+      postData.fields.key = 'presigned-post-files/${filename}';
+      var body = Object.keys(postData.fields).reduce(function(body, fieldName) {
+        body += '--' + boundary + '\r\n';
+        body += 'Content-Disposition: form-data; name="' + fieldName + '"\r\n\r\n';
+        return body + postData.fields[fieldName] + '\r\n';
+      }, '');
+      body += '--' + this.postBoundary + '\r\n';
+      body += 'Content-Disposition: form-data; name="file"; filename="' + key + '"\r\n';
+      body += 'Content-Type: text/plain\r\n\r\n';
+      body += data + '\r\n';
+      body += '--' + this.postBoundary + '\r\n';
+      body += 'Content-Disposition: form-data; name="submit"\r\n';
+      body += 'Content-Type: text/plain\r\n\r\n';
+      body += 'submit\r\n';
+      body += '--' + this.postBoundary + '--\r\n';
+      this.postBody = body;
+      this.postAction = postData.url;
+      callback();
+    }
+  );
+
+  this.Given(/^I POST the form$/, function (callback) {
+    var world = this;
+    var options = require('url').parse(this.postAction);
+    options.method = 'POST';
+    options.headers = {
+      'Content-Type': 'multipart/form-data; boundary=' + this.postBoundary,
+      'Content-Length': this.postBody.length
+    };
+    require('https').request(options, function(res) {
+      res.on('data', function (chunk) {
+        world.data += chunk.toString();
+      }).on('end', callback);
+    })
+      .on('error', callback.fail)
+      .end(this.postBody);
+  });
+
   this.Then(/^the HTTP response should equal "([^"]*)"$/, function(data, callback) {
     this.assert.equal(this.data, data);
     callback();

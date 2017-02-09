@@ -110,7 +110,6 @@ Feature: Working with Objects in S3
     Then the HTTP response should have a content length of 16
     And the MD5 checksum of the response data should equal the generated checksum
 
-
   @presigned
   Scenario: Putting to a pre-signed URL
     Given I get a pre-signed URL to PUT the key "presigned"
@@ -124,6 +123,15 @@ Feature: Working with Objects in S3
     Given I get a pre-signed URL to PUT the key "hello" with data "CHECKSUMMED"
     And I access the URL via HTTP PUT with data "NOT CHECKSUMMED"
     Then the HTTP response should contain "SignatureDoesNotMatch"
+
+  @presigned_post
+  Scenario: POSTing an object with a presigned form
+    Given I create a presigned form to POST the key "presignedPost" with the data "PRESIGNED POST CONTENTS"
+    And I POST the form
+    Then the object "presigned-post-files/presignedPost" should exist
+    When I get the object "presigned-post-files/presignedPost"
+    Then the object "presigned-post-files/presignedPost" should contain "PRESIGNED POST CONTENTS"
+    Then the HTTP response should have a content length of 23
 
   @streams
   Scenario: Streaming objects
