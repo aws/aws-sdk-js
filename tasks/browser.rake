@@ -79,8 +79,6 @@ namespace :browser do
        " -t coffeeify -i domain #{files} > #{$BROWSERIFY_TEST}")
     rm_f "test/helpers.js"
     rm_f "test/configuration.js"
-    sh "open test/browser/runner.html" if ENV['OPEN']
-    sh "phantomjs test/browser/runner.js"
   end
 
   task :dist_path do

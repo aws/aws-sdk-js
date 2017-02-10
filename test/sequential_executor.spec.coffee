@@ -82,7 +82,7 @@ describe 'AWS.SequentialExecutor', ->
       @emitter.emit('event1')
       expect(list).to.eql([1,2,3])
 
-    it 'does not stop emitting when error is returned', ->
+    it 'does not stop emitting when error is returned', (done) ->
       list = []
       @emitter.on 'event1', -> list.push(1)
       @emitter.on 'event1', -> list.push(2); throw 'error'
@@ -90,8 +90,9 @@ describe 'AWS.SequentialExecutor', ->
       @emitter.emit 'event1', [null], (err) ->
         expect(err.message).to.eql('error')
         expect(list).to.eql([1,2,3])
+        done()
 
-    it 'does not stop emitting when error is returned (async)', ->
+    it 'does not stop emitting when error is returned (async)', (done) ->
       list = []
       @emitter.on 'event1', -> list.push(1)
       @emitter.onAsync 'event1', (err, done) -> list.push(2); done('ERROR')
@@ -99,3 +100,4 @@ describe 'AWS.SequentialExecutor', ->
       @emitter.emit 'event1', [null], (err) ->
         expect(err.message).to.equal('ERROR')
         expect(list).to.eql([1,2,3])
+        done()
