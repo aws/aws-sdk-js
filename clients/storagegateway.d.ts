@@ -711,6 +711,10 @@ declare namespace StorageGateway {
      * The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
      */
     DefaultStorageClass?: StorageClass;
+    /**
+     * The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.
+     */
+    ClientList?: FileShareClientList;
   }
   export interface CreateNFSFileShareOutput {
     /**
@@ -1236,6 +1240,7 @@ declare namespace StorageGateway {
   export type ErrorCode = "ActivationKeyExpired"|"ActivationKeyInvalid"|"ActivationKeyNotFound"|"GatewayInternalError"|"GatewayNotConnected"|"GatewayNotFound"|"GatewayProxyNetworkConnectionBusy"|"AuthenticationFailure"|"BandwidthThrottleScheduleNotFound"|"Blocked"|"CannotExportSnapshot"|"ChapCredentialNotFound"|"DiskAlreadyAllocated"|"DiskDoesNotExist"|"DiskSizeGreaterThanVolumeMaxSize"|"DiskSizeLessThanVolumeSize"|"DiskSizeNotGigAligned"|"DuplicateCertificateInfo"|"DuplicateSchedule"|"EndpointNotFound"|"IAMNotSupported"|"InitiatorInvalid"|"InitiatorNotFound"|"InternalError"|"InvalidGateway"|"InvalidEndpoint"|"InvalidParameters"|"InvalidSchedule"|"LocalStorageLimitExceeded"|"LunAlreadyAllocated "|"LunInvalid"|"MaximumContentLengthExceeded"|"MaximumTapeCartridgeCountExceeded"|"MaximumVolumeCountExceeded"|"NetworkConfigurationChanged"|"NoDisksAvailable"|"NotImplemented"|"NotSupported"|"OperationAborted"|"OutdatedGateway"|"ParametersNotImplemented"|"RegionInvalid"|"RequestTimeout"|"ServiceUnavailable"|"SnapshotDeleted"|"SnapshotIdInvalid"|"SnapshotInProgress"|"SnapshotNotFound"|"SnapshotScheduleNotFound"|"StagingAreaFull"|"StorageFailure"|"TapeCartridgeNotFound"|"TargetAlreadyExists"|"TargetInvalid"|"TargetNotFound"|"UnauthorizedOperation"|"VolumeAlreadyExists"|"VolumeIdInvalid"|"VolumeInUse"|"VolumeNotFound"|"VolumeNotReady"|string;
   export type FileShareARN = string;
   export type FileShareARNList = FileShareARN[];
+  export type FileShareClientList = IPV4AddressCIDR[];
   export type FileShareId = string;
   export interface FileShareInfo {
     FileShareARN?: FileShareARN;
@@ -1277,6 +1282,7 @@ declare namespace StorageGateway {
   export type GatewayType = string;
   export type Gateways = GatewayInfo[];
   export type HourOfDay = number;
+  export type IPV4AddressCIDR = string;
   export type Initiator = string;
   export type Initiators = Initiator[];
   export type IqnName = string;
@@ -1453,6 +1459,7 @@ declare namespace StorageGateway {
      * The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
      */
     DefaultStorageClass?: StorageClass;
+    ClientList?: FileShareClientList;
   }
   export type NFSFileShareInfoList = NFSFileShareInfo[];
   export interface NetworkInterface {
@@ -1821,6 +1828,10 @@ declare namespace StorageGateway {
      * The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
      */
     DefaultStorageClass?: StorageClass;
+    /**
+     * The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.
+     */
+    ClientList?: FileShareClientList;
   }
   export interface UpdateNFSFileShareOutput {
     /**

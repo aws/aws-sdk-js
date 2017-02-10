@@ -1217,6 +1217,10 @@
         "DefaultStorageClass":{
           "shape":"StorageClass",
           "documentation":"<p>The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.</p>"
+        },
+        "ClientList":{
+          "shape":"FileShareClientList",
+          "documentation":"<p>The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.</p>"
         }
       },
       "documentation":"<p>CreateNFSFileShareInput</p>"
@@ -2137,6 +2141,13 @@
       "max":10,
       "min":1
     },
+    "FileShareClientList":{
+      "type":"list",
+      "member":{"shape":"IPV4AddressCIDR"},
+      "documentation":"<p>The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks. </p>",
+      "max":100,
+      "min":1
+    },
     "FileShareId":{
       "type":"string",
       "documentation":"<p>The ID of the file share. </p>",
@@ -2239,6 +2250,10 @@
       "type":"integer",
       "max":23,
       "min":0
+    },
+    "IPV4AddressCIDR":{
+      "type":"string",
+      "pattern":"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))?$"
     },
     "Initiator":{
       "type":"string",
@@ -2558,7 +2573,8 @@
         "DefaultStorageClass":{
           "shape":"StorageClass",
           "documentation":"<p>The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.</p>"
-        }
+        },
+        "ClientList":{"shape":"FileShareClientList"}
       },
       "documentation":"<p>The Unix file permissions and ownership information assigned, by default, to native S3 objects when Storage Gateway discovers them in S3 buckets.</p>"
     },
@@ -3226,6 +3242,10 @@
         "DefaultStorageClass":{
           "shape":"StorageClass",
           "documentation":"<p>The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.</p>"
+        },
+        "ClientList":{
+          "shape":"FileShareClientList",
+          "documentation":"<p>The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.</p>"
         }
       },
       "documentation":"<p>UpdateNFSFileShareInput</p>"

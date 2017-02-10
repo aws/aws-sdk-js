@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.11.0
+// AWS SDK for JavaScript v2.12.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -86849,7 +86849,10 @@ module.exports={
           "KMSKey": {},
           "Role": {},
           "LocationARN": {},
-          "DefaultStorageClass": {}
+          "DefaultStorageClass": {},
+          "ClientList": {
+            "shape": "S1d"
+          }
         }
       },
       "output": {
@@ -86981,7 +86984,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S1w"
+            "shape": "S1y"
           }
         }
       }
@@ -87195,7 +87198,7 @@ module.exports={
         ],
         "members": {
           "VolumeARNs": {
-            "shape": "S2n"
+            "shape": "S2p"
           }
         }
       },
@@ -87219,7 +87222,7 @@ module.exports={
                 },
                 "SourceSnapshotId": {},
                 "VolumeiSCSIAttributes": {
-                  "shape": "S2v"
+                  "shape": "S2x"
                 },
                 "CreatedDate": {
                   "type": "timestamp"
@@ -87355,7 +87358,10 @@ module.exports={
                 "Path": {},
                 "Role": {},
                 "LocationARN": {},
-                "DefaultStorageClass": {}
+                "DefaultStorageClass": {},
+                "ClientList": {
+                  "shape": "S1d"
+                }
               }
             }
           }
@@ -87395,7 +87401,7 @@ module.exports={
         ],
         "members": {
           "VolumeARNs": {
-            "shape": "S2n"
+            "shape": "S2p"
           }
         }
       },
@@ -87423,7 +87429,7 @@ module.exports={
                   "type": "boolean"
                 },
                 "VolumeiSCSIAttributes": {
-                  "shape": "S2v"
+                  "shape": "S2x"
                 },
                 "CreatedDate": {
                   "type": "timestamp"
@@ -87439,7 +87445,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S1w"
+            "shape": "S1y"
           },
           "Marker": {},
           "Limit": {
@@ -87522,7 +87528,7 @@ module.exports={
         "members": {
           "GatewayARN": {},
           "TapeARNs": {
-            "shape": "S1w"
+            "shape": "S1y"
           },
           "Marker": {},
           "Limit": {
@@ -87803,7 +87809,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S1w"
+            "shape": "S1y"
           },
           "Marker": {},
           "Limit": {
@@ -88181,7 +88187,10 @@ module.exports={
           "NFSFileShareDefaults": {
             "shape": "S15"
           },
-          "DefaultStorageClass": {}
+          "DefaultStorageClass": {},
+          "ClientList": {
+            "shape": "S1d"
+          }
         }
       },
       "output": {
@@ -88269,15 +88278,19 @@ module.exports={
         }
       }
     },
-    "S1w": {
+    "S1d": {
       "type": "list",
       "member": {}
     },
-    "S2n": {
+    "S1y": {
       "type": "list",
       "member": {}
     },
-    "S2v": {
+    "S2p": {
+      "type": "list",
+      "member": {}
+    },
+    "S2x": {
       "type": "structure",
       "members": {
         "TargetARN": {},
@@ -88348,7 +88361,6 @@ module.exports={
     }
   }
 }
-
 },{}],132:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -91851,7 +91863,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.11.0',
+  VERSION: '2.12.0',
 
 
   Signers: {},
@@ -93404,7 +93416,7 @@ AWS.Endpoint = inherit({
 AWS.HttpRequest = inherit({
 
 
-  constructor: function HttpRequest(endpoint, region, customUserAgent) {
+  constructor: function HttpRequest(endpoint, region) {
     endpoint = new AWS.Endpoint(endpoint);
     this.method = 'POST';
     this.path = endpoint.path || '/';
@@ -93412,17 +93424,31 @@ AWS.HttpRequest = inherit({
     this.body = '';
     this.endpoint = endpoint;
     this.region = region;
-    this.setUserAgent(customUserAgent);
+    this._userAgent = '';
+    this.setUserAgent();
   },
 
 
-  setUserAgent: function setUserAgent(customUserAgent) {
+  setUserAgent: function setUserAgent() {
+    this._userAgent = this.headers[this.getUserAgentHeaderName()] = AWS.util.userAgent();
+  },
+
+  getUserAgentHeaderName: function getUserAgentHeaderName() {
     var prefix = AWS.util.isBrowser() ? 'X-Amz-' : '';
-    var customSuffix = '';
-    if (typeof customUserAgent === 'string' && customUserAgent) {
-      customSuffix += ' ' + customUserAgent;
+    return prefix + 'User-Agent';
+  },
+
+
+  appendToUserAgent: function appendToUserAgent(agentPartial) {
+    if (typeof agentPartial === 'string' && agentPartial) {
+      this._userAgent += ' ' + agentPartial;
     }
-    this.headers[prefix + 'User-Agent'] = AWS.util.userAgent() + customSuffix;
+    this.headers[this.getUserAgentHeaderName()] = this._userAgent;
+  },
+
+
+  getUserAgent: function getUserAgent() {
+    return this._userAgent;
   },
 
 
@@ -95305,7 +95331,8 @@ AWS.Request = inherit({
     this.service = service;
     this.operation = operation;
     this.params = params || {};
-    this.httpRequest = new AWS.HttpRequest(endpoint, region, customUserAgent);
+    this.httpRequest = new AWS.HttpRequest(endpoint, region);
+    this.httpRequest.appendToUserAgent(customUserAgent);
     this.startTime = AWS.util.date.getDate();
 
     this.response = new AWS.Response(this);
@@ -95321,6 +95348,7 @@ AWS.Request = inherit({
 
   send: function send(callback) {
     if (callback) {
+      this.httpRequest.appendToUserAgent('callback');
       this.on('complete', function (resp) {
         callback.call(resp, resp.error, resp.data);
       });
@@ -95597,6 +95625,7 @@ AWS.Request = inherit({
 AWS.Request.addPromisesToClass = function addPromisesToClass(PromiseDependency) {
   this.prototype.promise = function promise() {
     var self = this;
+    this.httpRequest.appendToUserAgent('promise');
     return new PromiseDependency(function(resolve, reject) {
       self.on('complete', function(resp) {
         if (resp.error) {
