@@ -144,14 +144,14 @@ module.exports = function () {
     function (key, data, callback) {
       var boundary = this.postBoundary = '----WebKitFormBoundaryLL0mBKIuuLUKr7be';
       var conditions = [
-          ['starts-with', '$key', 'presigned-post-files/']
+          ['content-length-range', data.length - 1, data.length + 1]
         ],
         params = {
           Bucket: this.sharedBucket,
+          Fields: {key: key},
           Conditions: conditions
         };
       var postData = this.s3.createPresignedPost(params);
-      postData.fields.key = 'presigned-post-files/${filename}';
       var body = Object.keys(postData.fields).reduce(function(body, fieldName) {
         body += '--' + boundary + '\r\n';
         body += 'Content-Disposition: form-data; name="' + fieldName + '"\r\n\r\n';

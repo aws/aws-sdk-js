@@ -128,9 +128,9 @@ Feature: Working with Objects in S3
   Scenario: POSTing an object with a presigned form
     Given I create a presigned form to POST the key "presignedPost" with the data "PRESIGNED POST CONTENTS"
     And I POST the form
-    Then the object "presigned-post-files/presignedPost" should exist
-    When I get the object "presigned-post-files/presignedPost"
-    Then the object "presigned-post-files/presignedPost" should contain "PRESIGNED POST CONTENTS"
+    Then the object "presignedPost" should exist
+    When I get the object "presignedPost"
+    Then the object "presignedPost" should contain "PRESIGNED POST CONTENTS"
     Then the HTTP response should have a content length of 23
 
   @streams

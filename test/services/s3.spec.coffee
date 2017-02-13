@@ -1600,6 +1600,7 @@ describe 'AWS.S3', ->
     it 'should include user-provided fields as policy conditions', (done) ->
       s3 = new AWS.S3()
       fieldsToInclude =
+        key: 'users/userId/upload'
         acl: 'public-read',
         'Content-Type': 'image/jpeg',
         'x-amz-meta-foo': 'bar',
@@ -1623,37 +1624,5 @@ describe 'AWS.S3', ->
         Object.keys(fieldsToInclude).forEach((key) ->
           expect(data.fields[key]).to.equal(fieldsToInclude[key])
           expect(data.fields[key]).to.equal(conditions[key])
-        )
-        done()
-
-    it 'should not include the "key" field as a policy condition', (done) ->
-      s3 = new AWS.S3()
-      fieldsToInclude =
-        key: 'users/userId/${filename}'
-        acl: 'public-read',
-        'Content-Type': 'image/jpeg',
-        'x-amz-meta-foo': 'bar',
-        'x-amz-tagging': '''<Tagging>
-          <TagSet>
-            <Tag>
-              <Key>foo</Key>
-              <Value>bar</Value>
-            </Tag>
-          </TagSet>
-        </Tagging>'''
-
-      s3.createPresignedPost {Bucket: 'bucket', Fields: fieldsToInclude}, (err, data) ->
-        decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
-        conditions = {}
-        decoded.conditions.forEach((condition) ->
-          if typeof condition == 'object'
-            conditionKey = Object.keys(condition)[0]
-            conditions[conditionKey] = condition[conditionKey]
-        )
-        Object.keys(fieldsToInclude).forEach((key) ->
-          if key == 'key'
-            expect(conditions[key]).to.be.undefined
-          else
-            expect(data.fields[key]).to.equal(conditions[key])
         )
         done()
