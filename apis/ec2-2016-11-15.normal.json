@@ -1389,6 +1389,16 @@
       "output":{"shape":"DescribeVolumesResult"},
       "documentation":"<p>Describes the specified EBS volumes.</p> <p>If you are describing a long list of volumes, you can paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeVolumes</code> request to retrieve the remaining results.</p> <p>For more information about EBS volumes, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html\">Amazon EBS Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
+    "DescribeVolumesModifications":{
+      "name":"DescribeVolumesModifications",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeVolumesModificationsRequest"},
+      "output":{"shape":"DescribeVolumesModificationsResult"},
+      "documentation":"<p>Reports the current modification status of EBS volumes.</p> <p>Current-generation EBS volumes support modification of attributes including type, size, and (for <code>io1</code> volumes) IOPS provisioning while either attached to or detached from an instance. Following an action from the API or the console to modify a volume, the status of the modification may be <code>modifying</code>, <code>optimizing</code>, <code>completed</code>, or <code>failed</code>. If a volume has never been modified, then certain elements of the returned <code>VolumeModification</code> objects are null. </p> <p> You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html\">Amazon CloudWatch Events User Guide</a>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods\">Monitoring Volume Modifications\"</a>. </p>"
+    },
     "DescribeVpcAttribute":{
       "name":"DescribeVpcAttribute",
       "http":{
@@ -1844,6 +1854,16 @@
       "input":{"shape":"ModifySubnetAttributeRequest"},
       "documentation":"<p>Modifies a subnet attribute. You can only modify one attribute at a time.</p>"
     },
+    "ModifyVolume":{
+      "name":"ModifyVolume",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyVolumeRequest"},
+      "output":{"shape":"ModifyVolumeResult"},
+      "documentation":"<p>You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Linux</a>. For more information about modifying an EBS volume running Windows, see <a href=\"http://docs.aws.amazon.com/docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html\">Expanding the Storage Space of an EBS Volume on Windows</a>. </p> <p> When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux\">Extending a Linux File System</a>. For information about extending a Windows file system, see <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows\">Extending a Windows File System</a>. </p> <p> You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html\">Amazon CloudWatch Events User Guide</a>. You can also track the status of a modification using the <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumesModifications.html\"> <code>DescribeVolumesModifications</code> API</a>. For information about tracking status changes using either method, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods\">Monitoring Volume Modifications\"</a>. </p> <note> <p>With previous-generation volumes and instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information about modifying an EBS volume running Linux, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Linux</a>. For more information about modifying an EBS volume running Windows, see <a href=\"http://docs.aws.amazon.com/docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Windows</a>.</p> </note> <note> <p>If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume.</p> </note>"
+    },
     "ModifyVolumeAttribute":{
       "name":"ModifyVolumeAttribute",
       "http":{
@@ -1988,7 +2008,7 @@
       },
       "input":{"shape":"ReplaceIamInstanceProfileAssociationRequest"},
       "output":{"shape":"ReplaceIamInstanceProfileAssociationResult"},
-      "documentation":"<p>Replaces an IAM instance profile for the specified instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first.</p> <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association ID.</p>"
+      "documentation":"<p>Replaces an IAM instance profile for the specified running instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first.</p> <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association ID.</p>"
     },
     "ReplaceNetworkAclAssociation":{
       "name":"ReplaceNetworkAclAssociation",
@@ -7862,6 +7882,48 @@
       },
       "documentation":"<p>Contains the output of DescribeVolumeStatus.</p>"
     },
+    "DescribeVolumesModificationsRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "VolumeIds":{
+          "shape":"VolumeIdStringList",
+          "documentation":"<p>One or more volume IDs for which in-progress modifications will be described.</p>",
+          "locationName":"VolumeId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>One or more filters. Supported filters: <code>volume-id</code>, <code>modification-state</code>, <code>target-size</code>, <code>target-iops</code>, <code>target-volume-type</code>, <code>original-size</code>, <code>original-iops</code>, <code>original-volume-type</code>, <code>start-time</code>. </p>",
+          "locationName":"Filter"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>nextToken</code> value returned by a previous paginated request.</p>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of results (up to a limit of 500) to be returned in a paginated request.</p>"
+        }
+      }
+    },
+    "DescribeVolumesModificationsResult":{
+      "type":"structure",
+      "members":{
+        "VolumesModifications":{
+          "shape":"VolumeModificationList",
+          "documentation":"<p>A list of returned <a>VolumeModification</a> objects.</p>",
+          "locationName":"volumeModificationSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>Token for pagination, null if there are no more results </p>",
+          "locationName":"nextToken"
+        }
+      }
+    },
     "DescribeVolumesRequest":{
       "type":"structure",
       "members":{
@@ -7887,7 +7949,7 @@
         },
         "MaxResults":{
           "shape":"Integer",
-          "documentation":"<p>The maximum number of volume results returned by <code>DescribeVolumes</code> in paginated output. When this parameter is used, <code>DescribeVolumes</code> only returns <code>MaxResults</code> results in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeVolumes</code> request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned. If this parameter is not used, then <code>DescribeVolumes</code> returns all results. You cannot specify this parameter and the volume IDs parameter in the same request.</p>",
+          "documentation":"<p>The maximum number of volume results returned by <code>DescribeVolumes</code> in paginated output. When this parameter is used, <code>DescribeVolumes</code> only returns <code>MaxResults</code> results in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeVolumes</code> request with the returned <code>NextToken</code> value. This value can be between 5 and 500; if <code>MaxResults</code> is given a value larger than 500, only 500 results are returned. If this parameter is not used, then <code>DescribeVolumes</code> returns all results. You cannot specify this parameter and the volume IDs parameter in the same request.</p>",
           "locationName":"maxResults"
         }
       },
@@ -12480,6 +12542,39 @@
         }
       },
       "documentation":"<p>Contains the parameters for ModifyVolumeAttribute.</p>"
+    },
+    "ModifyVolumeRequest":{
+      "type":"structure",
+      "required":["VolumeId"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "VolumeId":{"shape":"String"},
+        "Size":{
+          "shape":"Integer",
+          "documentation":"<p>Target size in GiB of the volume to be modified. Target volume size must be greater than or equal to than the existing size of the volume. For information about available EBS volume sizes, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html</a>.</p> <p>Default: If no size is specified, the existing size is retained. </p>"
+        },
+        "VolumeType":{
+          "shape":"VolumeType",
+          "documentation":"<p>Target EBS volume type of the volume to be modified</p> <p>Valid values are <code>io1</code> | <code>gp2</code> | <code>sc1</code> | <code>st1</code> </p> <p> The API does not support modifications for volume type <code>standard</code>. You also cannot change the type of a volume to <code>standard</code>. </p>"
+        },
+        "Iops":{
+          "shape":"Integer",
+          "documentation":"<p>Target IOPS rate of the volume to be modified.</p> <p>Only valid for Provisioned IOPS SSD (<code>io1</code>) volumes. For more information about <code>io1</code> IOPS configuration, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops\">http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops</a>.</p>"
+        }
+      }
+    },
+    "ModifyVolumeResult":{
+      "type":"structure",
+      "members":{
+        "VolumeModification":{
+          "shape":"VolumeModification",
+          "documentation":"<p>A <a>VolumeModification</a> object.</p>",
+          "locationName":"volumeModification"
+        }
+      }
     },
     "ModifyVpcAttributeRequest":{
       "type":"structure",
@@ -18134,6 +18229,88 @@
         "shape":"Volume",
         "locationName":"item"
       }
+    },
+    "VolumeModification":{
+      "type":"structure",
+      "members":{
+        "VolumeId":{
+          "shape":"String",
+          "documentation":"<p>ID of the volume being modified.</p>",
+          "locationName":"volumeId"
+        },
+        "ModificationState":{
+          "shape":"VolumeModificationState",
+          "documentation":"<p>Current state of modification. Possible values are <code>modifying</code> | <code>optimizing</code> | <code>complete</code> | <code>failed</code>. Modification state is null for unmodified volumes. </p>",
+          "locationName":"modificationState"
+        },
+        "StatusMessage":{
+          "shape":"String",
+          "documentation":"<p>Generic status message on modification progress or failure.</p>",
+          "locationName":"statusMessage"
+        },
+        "TargetSize":{
+          "shape":"Integer",
+          "documentation":"<p>Target size of the volume being modified.</p>",
+          "locationName":"targetSize"
+        },
+        "TargetIops":{
+          "shape":"Integer",
+          "documentation":"<p>Target IOPS rate of the volume being modified.</p>",
+          "locationName":"targetIops"
+        },
+        "TargetVolumeType":{
+          "shape":"VolumeType",
+          "documentation":"<p>Target EBS volume type of the volume being modified.</p>",
+          "locationName":"targetVolumeType"
+        },
+        "OriginalSize":{
+          "shape":"Integer",
+          "documentation":"<p>Original size of the volume being modified.</p>",
+          "locationName":"originalSize"
+        },
+        "OriginalIops":{
+          "shape":"Integer",
+          "documentation":"<p>Original IOPS rate of the volume being modified.</p>",
+          "locationName":"originalIops"
+        },
+        "OriginalVolumeType":{
+          "shape":"VolumeType",
+          "documentation":"<p>Original EBS volume type of the volume being modified.</p>",
+          "locationName":"originalVolumeType"
+        },
+        "Progress":{
+          "shape":"Long",
+          "documentation":"<p>Modification progress from 0 to 100%.</p>",
+          "locationName":"progress"
+        },
+        "StartTime":{
+          "shape":"DateTime",
+          "documentation":"<p>Modification start time </p>",
+          "locationName":"startTime"
+        },
+        "EndTime":{
+          "shape":"DateTime",
+          "documentation":"<p>Modification completion or failure time.</p>",
+          "locationName":"endTime"
+        }
+      },
+      "documentation":"<p>Describes the modification status of an EBS volume.</p> <p>If the volume has never been modified, some element values will be null.</p>"
+    },
+    "VolumeModificationList":{
+      "type":"list",
+      "member":{
+        "shape":"VolumeModification",
+        "locationName":"item"
+      }
+    },
+    "VolumeModificationState":{
+      "type":"string",
+      "enum":[
+        "modifying",
+        "optimizing",
+        "completed",
+        "failed"
+      ]
     },
     "VolumeState":{
       "type":"string",

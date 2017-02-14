@@ -1140,6 +1140,14 @@ declare class EC2 extends Service {
    */
   describeVolumes(callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
   /**
+   * Reports the current modification status of EBS volumes. Current-generation EBS volumes support modification of attributes including type, size, and (for io1 volumes) IOPS provisioning while either attached to or detached from an instance. Following an action from the API or the console to modify a volume, the status of the modification may be modifying, optimizing, completed, or failed. If a volume has never been modified, then certain elements of the returned VolumeModification objects are null.   You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. For more information, see Monitoring Volume Modifications". 
+   */
+  describeVolumesModifications(params: EC2.Types.DescribeVolumesModificationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesModificationsResult) => void): Request<EC2.Types.DescribeVolumesModificationsResult, AWSError>;
+  /**
+   * Reports the current modification status of EBS volumes. Current-generation EBS volumes support modification of attributes including type, size, and (for io1 volumes) IOPS provisioning while either attached to or detached from an instance. Following an action from the API or the console to modify a volume, the status of the modification may be modifying, optimizing, completed, or failed. If a volume has never been modified, then certain elements of the returned VolumeModification objects are null.   You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. For more information, see Monitoring Volume Modifications". 
+   */
+  describeVolumesModifications(callback?: (err: AWSError, data: EC2.Types.DescribeVolumesModificationsResult) => void): Request<EC2.Types.DescribeVolumesModificationsResult, AWSError>;
+  /**
    * Describes the specified attribute of the specified VPC. You can specify only one attribute at a time.
    */
   describeVpcAttribute(params: EC2.Types.DescribeVpcAttributeRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcAttributeResult) => void): Request<EC2.Types.DescribeVpcAttributeResult, AWSError>;
@@ -1516,6 +1524,14 @@ declare class EC2 extends Service {
    */
   modifySubnetAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux. For more information about modifying an EBS volume running Windows, see Expanding the Storage Space of an EBS Volume on Windows.   When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see Extending a Linux File System. For information about extending a Windows file system, see Extending a Windows File System.   You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using the  DescribeVolumesModifications API. For information about tracking status changes using either method, see Monitoring Volume Modifications".   With previous-generation volumes and instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information about modifying an EBS volume running Linux, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux. For more information about modifying an EBS volume running Windows, see Modifying the Size, IOPS, or Type of an EBS Volume on Windows.   If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume. 
+   */
+  modifyVolume(params: EC2.Types.ModifyVolumeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVolumeResult) => void): Request<EC2.Types.ModifyVolumeResult, AWSError>;
+  /**
+   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux. For more information about modifying an EBS volume running Windows, see Expanding the Storage Space of an EBS Volume on Windows.   When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see Extending a Linux File System. For information about extending a Windows file system, see Extending a Windows File System.   You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using the  DescribeVolumesModifications API. For information about tracking status changes using either method, see Monitoring Volume Modifications".   With previous-generation volumes and instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information about modifying an EBS volume running Linux, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux. For more information about modifying an EBS volume running Windows, see Modifying the Size, IOPS, or Type of an EBS Volume on Windows.   If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume. 
+   */
+  modifyVolume(callback?: (err: AWSError, data: EC2.Types.ModifyVolumeResult) => void): Request<EC2.Types.ModifyVolumeResult, AWSError>;
+  /**
    * Modifies a volume attribute. By default, all I/O operations for the volume are suspended when the data on the volume is determined to be potentially inconsistent, to prevent undetectable, latent data corruption. The I/O access to the volume can be resumed by first enabling I/O access and then checking the data consistency on your volume. You can change the default behavior to resume I/O operations. We recommend that you change this only for boot volumes or for volumes that are stateless or disposable.
    */
   modifyVolumeAttribute(params: EC2.Types.ModifyVolumeAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1628,11 +1644,11 @@ declare class EC2 extends Service {
    */
   releaseHosts(callback?: (err: AWSError, data: EC2.Types.ReleaseHostsResult) => void): Request<EC2.Types.ReleaseHostsResult, AWSError>;
   /**
-   * Replaces an IAM instance profile for the specified instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first. Use DescribeIamInstanceProfileAssociations to get the association ID.
+   * Replaces an IAM instance profile for the specified running instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first. Use DescribeIamInstanceProfileAssociations to get the association ID.
    */
   replaceIamInstanceProfileAssociation(params: EC2.Types.ReplaceIamInstanceProfileAssociationRequest, callback?: (err: AWSError, data: EC2.Types.ReplaceIamInstanceProfileAssociationResult) => void): Request<EC2.Types.ReplaceIamInstanceProfileAssociationResult, AWSError>;
   /**
-   * Replaces an IAM instance profile for the specified instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first. Use DescribeIamInstanceProfileAssociations to get the association ID.
+   * Replaces an IAM instance profile for the specified running instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first. Use DescribeIamInstanceProfileAssociations to get the association ID.
    */
   replaceIamInstanceProfileAssociation(callback?: (err: AWSError, data: EC2.Types.ReplaceIamInstanceProfileAssociationResult) => void): Request<EC2.Types.ReplaceIamInstanceProfileAssociationResult, AWSError>;
   /**
@@ -2051,6 +2067,14 @@ declare class EC2 extends Service {
    * Waits for the vpcPeeringConnectionExists state by periodically calling the underlying EC2.describeVpcPeeringConnectionsoperation every 15 seconds (at most 40 times).
    */
   waitFor(state: "vpcPeeringConnectionExists", callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
+  /**
+   * Waits for the vpcPeeringConnectionDeleted state by periodically calling the underlying EC2.describeVpcPeeringConnectionsoperation every 15 seconds (at most 40 times).
+   */
+  waitFor(state: "vpcPeeringConnectionDeleted", params: EC2.Types.DescribeVpcPeeringConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
+  /**
+   * Waits for the vpcPeeringConnectionDeleted state by periodically calling the underlying EC2.describeVpcPeeringConnectionsoperation every 15 seconds (at most 40 times).
+   */
+  waitFor(state: "vpcPeeringConnectionDeleted", callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
 }
 declare namespace EC2 {
   export interface AcceptReservedInstancesExchangeQuoteRequest {
@@ -5602,6 +5626,38 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeVolumesModificationsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more volume IDs for which in-progress modifications will be described.
+     */
+    VolumeIds?: VolumeIdStringList;
+    /**
+     * One or more filters. Supported filters: volume-id, modification-state, target-size, target-iops, target-volume-type, original-size, original-iops, original-volume-type, start-time. 
+     */
+    Filters?: FilterList;
+    /**
+     * The nextToken value returned by a previous paginated request.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results (up to a limit of 500) to be returned in a paginated request.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeVolumesModificationsResult {
+    /**
+     * A list of returned VolumeModification objects.
+     */
+    VolumesModifications?: VolumeModificationList;
+    /**
+     * Token for pagination, null if there are no more results 
+     */
+    NextToken?: String;
+  }
   export interface DescribeVolumesRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -5620,7 +5676,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The maximum number of volume results returned by DescribeVolumes in paginated output. When this parameter is used, DescribeVolumes only returns MaxResults results in a single page along with a NextToken response element. The remaining results of the initial request can be seen by sending another DescribeVolumes request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned. If this parameter is not used, then DescribeVolumes returns all results. You cannot specify this parameter and the volume IDs parameter in the same request.
+     * The maximum number of volume results returned by DescribeVolumes in paginated output. When this parameter is used, DescribeVolumes only returns MaxResults results in a single page along with a NextToken response element. The remaining results of the initial request can be seen by sending another DescribeVolumes request with the returned NextToken value. This value can be between 5 and 500; if MaxResults is given a value larger than 500, only 500 results are returned. If this parameter is not used, then DescribeVolumes returns all results. You cannot specify this parameter and the volume IDs parameter in the same request.
      */
     MaxResults?: Integer;
   }
@@ -8392,6 +8448,31 @@ declare namespace EC2 {
      * Indicates whether the volume should be auto-enabled for I/O operations.
      */
     AutoEnableIO?: AttributeBooleanValue;
+  }
+  export interface ModifyVolumeRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    VolumeId: String;
+    /**
+     * Target size in GiB of the volume to be modified. Target volume size must be greater than or equal to than the existing size of the volume. For information about available EBS volume sizes, see http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html. Default: If no size is specified, the existing size is retained. 
+     */
+    Size?: Integer;
+    /**
+     * Target EBS volume type of the volume to be modified Valid values are io1 | gp2 | sc1 | st1   The API does not support modifications for volume type standard. You also cannot change the type of a volume to standard. 
+     */
+    VolumeType?: VolumeType;
+    /**
+     * Target IOPS rate of the volume to be modified. Only valid for Provisioned IOPS SSD (io1) volumes. For more information about io1 IOPS configuration, see http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops.
+     */
+    Iops?: Integer;
+  }
+  export interface ModifyVolumeResult {
+    /**
+     * A VolumeModification object.
+     */
+    VolumeModification?: VolumeModification;
   }
   export interface ModifyVpcAttributeRequest {
     /**
@@ -11786,6 +11867,58 @@ declare namespace EC2 {
   }
   export type VolumeIdStringList = String[];
   export type VolumeList = Volume[];
+  export interface VolumeModification {
+    /**
+     * ID of the volume being modified.
+     */
+    VolumeId?: String;
+    /**
+     * Current state of modification. Possible values are modifying | optimizing | complete | failed. Modification state is null for unmodified volumes. 
+     */
+    ModificationState?: VolumeModificationState;
+    /**
+     * Generic status message on modification progress or failure.
+     */
+    StatusMessage?: String;
+    /**
+     * Target size of the volume being modified.
+     */
+    TargetSize?: Integer;
+    /**
+     * Target IOPS rate of the volume being modified.
+     */
+    TargetIops?: Integer;
+    /**
+     * Target EBS volume type of the volume being modified.
+     */
+    TargetVolumeType?: VolumeType;
+    /**
+     * Original size of the volume being modified.
+     */
+    OriginalSize?: Integer;
+    /**
+     * Original IOPS rate of the volume being modified.
+     */
+    OriginalIops?: Integer;
+    /**
+     * Original EBS volume type of the volume being modified.
+     */
+    OriginalVolumeType?: VolumeType;
+    /**
+     * Modification progress from 0 to 100%.
+     */
+    Progress?: Long;
+    /**
+     * Modification start time 
+     */
+    StartTime?: DateTime;
+    /**
+     * Modification completion or failure time.
+     */
+    EndTime?: DateTime;
+  }
+  export type VolumeModificationList = VolumeModification[];
+  export type VolumeModificationState = "modifying"|"optimizing"|"completed"|"failed"|string;
   export type VolumeState = "creating"|"available"|"in-use"|"deleting"|"deleted"|"error"|string;
   export interface VolumeStatusAction {
     /**
