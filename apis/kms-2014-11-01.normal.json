@@ -81,7 +81,8 @@
         {"shape":"InvalidArnException"},
         {"shape":"UnsupportedOperationException"},
         {"shape":"KMSInternalException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"TagException"}
       ],
       "documentation":"<p>Creates a customer master key (CMK).</p> <p>You can use a CMK to encrypt small amounts of data (4 KiB or less) directly, but CMKs are more commonly used to encrypt data encryption keys (DEKs), which are used to encrypt raw data. For more information about DEKs and the difference between CMKs and DEKs, see the following:</p> <ul> <li> <p>The <a>GenerateDataKey</a> operation</p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service Concepts</a> in the <i>AWS Key Management Service Developer Guide</i> </p> </li> </ul>"
     },
@@ -436,6 +437,22 @@
       ],
       "documentation":"<p>Lists the customer master keys.</p>"
     },
+    "ListResourceTags":{
+      "name":"ListResourceTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListResourceTagsRequest"},
+      "output":{"shape":"ListResourceTagsResponse"},
+      "errors":[
+        {"shape":"KMSInternalException"},
+        {"shape":"NotFoundException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"InvalidMarkerException"}
+      ],
+      "documentation":"<p>Returns a list of all tags for the specified customer master key (CMK).</p>"
+    },
     "ListRetirableGrants":{
       "name":"ListRetirableGrants",
       "http":{
@@ -543,6 +560,39 @@
         {"shape":"KMSInvalidStateException"}
       ],
       "documentation":"<p>Schedules the deletion of a customer master key (CMK). You may provide a waiting period, specified in days, before deletion occurs. If you do not provide a waiting period, the default period of 30 days is used. When this operation is successful, the state of the CMK changes to <code>PendingDeletion</code>. Before the waiting period ends, you can use <a>CancelKeyDeletion</a> to cancel the deletion of the CMK. After the waiting period ends, AWS KMS deletes the CMK and all AWS KMS data associated with it, including all aliases that refer to it.</p> <important> <p>Deleting a CMK is a destructive and potentially dangerous operation. When a CMK is deleted, all data that was encrypted under the CMK is rendered unrecoverable. To restrict the use of a CMK without deleting it, use <a>DisableKey</a>.</p> </important> <p>For more information about scheduling a CMK for deletion, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html\">Deleting Customer Master Keys</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "errors":[
+        {"shape":"KMSInternalException"},
+        {"shape":"NotFoundException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TagException"}
+      ],
+      "documentation":"<p>Adds or overwrites one or more tags for the specified customer master key (CMK). </p> <p>Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.</p> <p>You cannot use the same tag key more than once per CMK. For example, consider a CMK with one tag whose tag key is <code>Purpose</code> and tag value is <code>Test</code>. If you send a <code>TagResource</code> request for this CMK with a tag key of <code>Purpose</code> and a tag value of <code>Prod</code>, it does not create a second tag. Instead, the original tag is overwritten with the new tag value.</p>"
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "errors":[
+        {"shape":"KMSInternalException"},
+        {"shape":"NotFoundException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"TagException"}
+      ],
+      "documentation":"<p>Removes the specified tag or tags from the specified customer master key (CMK). </p> <p>To remove a tag, you specify the tag key for each tag to remove. You do not specify the tag value. To overwrite the tag value for an existing tag, use <a>TagResource</a>.</p>"
     },
     "UpdateAlias":{
       "name":"UpdateAlias",
@@ -724,7 +774,7 @@
       "members":{
         "Policy":{
           "shape":"PolicyType",
-          "documentation":"<p>The key policy to attach to the CMK.</p> <p>If you specify a policy and do not set <code>BypassPolicyLockoutSafetyCheck</code> to true, the policy must meet the following criteria:</p> <ul> <li> <p>It must allow the principal making the <code>CreateKey</code> request to make a subsequent <a>PutKeyPolicy</a> request on the CMK. This reduces the likelihood that the CMK becomes unmanageable. For more information, refer to the scenario in the <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p> </li> <li> <p>The principal(s) specified in the key policy must exist and be visible to AWS KMS. When you create a new AWS principal (for example, an IAM user or role), you might need to enforce a delay before specifying the new principal in a key policy because the new principal might not immediately be visible to AWS KMS. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency\">Changes that I make are not always immediately visible</a> in the <i>IAM User Guide</i>.</p> </li> </ul> <p>If you do not specify a policy, AWS KMS attaches a default key policy to the CMK. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default Key Policy</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>The policy size limit is 32 KiB (32768 bytes).</p>"
+          "documentation":"<p>The key policy to attach to the CMK.</p> <p>If you specify a policy and do not set <code>BypassPolicyLockoutSafetyCheck</code> to true, the policy must meet the following criteria:</p> <ul> <li> <p>It must allow the principal that is making the <code>CreateKey</code> request to make a subsequent <a>PutKeyPolicy</a> request on the CMK. This reduces the likelihood that the CMK becomes unmanageable. For more information, refer to the scenario in the <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p> </li> <li> <p>The principals that are specified in the key policy must exist and be visible to AWS KMS. When you create a new AWS principal (for example, an IAM user or role), you might need to enforce a delay before specifying the new principal in a key policy because the new principal might not immediately be visible to AWS KMS. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency\">Changes that I make are not always immediately visible</a> in the <i>IAM User Guide</i>.</p> </li> </ul> <p>If you do not specify a policy, AWS KMS attaches a default key policy to the CMK. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default Key Policy</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>The policy size limit is 32 KiB (32768 bytes).</p>"
         },
         "Description":{
           "shape":"DescriptionType",
@@ -740,7 +790,11 @@
         },
         "BypassPolicyLockoutSafetyCheck":{
           "shape":"BooleanType",
-          "documentation":"<p>A flag to indicate whether to bypass the key policy lockout safety check.</p> <important> <p>Setting this value to true increases the likelihood that the CMK becomes unmanageable. Do not set this value to true indiscriminately.</p> <p>For more information, refer to the scenario in the <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p> </important> <p>Use this parameter only when you include a policy in the request and you intend to prevent the principal making the request from making a subsequent <a>PutKeyPolicy</a> request on the CMK.</p> <p>The default value is false.</p>"
+          "documentation":"<p>A flag to indicate whether to bypass the key policy lockout safety check.</p> <important> <p>Setting this value to true increases the likelihood that the CMK becomes unmanageable. Do not set this value to true indiscriminately.</p> <p>For more information, refer to the scenario in the <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p> </important> <p>Use this parameter only when you include a policy in the request and you intend to prevent the principal that is making the request from making a subsequent <a>PutKeyPolicy</a> request on the CMK.</p> <p>The default value is false.</p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>One or more tags. Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.</p> <p>Use this parameter to tag the CMK when it is created. Alternately, you can omit this parameter and instead tag the CMK after it is created using <a>TagResource</a>.</p>"
         }
       }
     },
@@ -1371,7 +1425,7 @@
     },
     "KeyIdType":{
       "type":"string",
-      "max":256,
+      "max":2048,
       "min":1
     },
     "KeyList":{
@@ -1487,11 +1541,11 @@
       "members":{
         "Limit":{
           "shape":"LimitType",
-          "documentation":"<p>When paginating results, specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <code>Truncated</code> element in the response is set to true.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
+          "documentation":"<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
         },
         "Marker":{
           "shape":"MarkerType",
-          "documentation":"<p>Use this parameter only when paginating results and only in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the response you just received.</p>"
+          "documentation":"<p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.</p>"
         }
       }
     },
@@ -1504,11 +1558,11 @@
         },
         "NextMarker":{
           "shape":"MarkerType",
-          "documentation":"<p>When <code>Truncated</code> is true, this value is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>"
+          "documentation":"<p>When <code>Truncated</code> is true, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
         },
         "Truncated":{
           "shape":"BooleanType",
-          "documentation":"<p>A flag that indicates whether there are more items in the list. If your results were truncated, you can use the <code>Marker</code> parameter to make a subsequent pagination request to retrieve more items in the list.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To retrieve more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.</p>"
         }
       }
     },
@@ -1518,11 +1572,11 @@
       "members":{
         "Limit":{
           "shape":"LimitType",
-          "documentation":"<p>When paginating results, specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <code>Truncated</code> element in the response is set to true.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
+          "documentation":"<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
         },
         "Marker":{
           "shape":"MarkerType",
-          "documentation":"<p>Use this parameter only when paginating results and only in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the response you just received.</p>"
+          "documentation":"<p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.</p>"
         },
         "KeyId":{
           "shape":"KeyIdType",
@@ -1539,11 +1593,11 @@
         },
         "NextMarker":{
           "shape":"MarkerType",
-          "documentation":"<p>When <code>Truncated</code> is true, this value is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>"
+          "documentation":"<p>When <code>Truncated</code> is true, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
         },
         "Truncated":{
           "shape":"BooleanType",
-          "documentation":"<p>A flag that indicates whether there are more items in the list. If your results were truncated, you can use the <code>Marker</code> parameter to make a subsequent pagination request to retrieve more items in the list.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To retrieve more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.</p>"
         }
       }
     },
@@ -1557,11 +1611,11 @@
         },
         "Limit":{
           "shape":"LimitType",
-          "documentation":"<p>When paginating results, specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <code>Truncated</code> element in the response is set to true.</p> <p>This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p> <p>Currently only 1 policy can be attached to a key.</p>"
+          "documentation":"<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p> <p>Currently only 1 policy can be attached to a key.</p>"
         },
         "Marker":{
           "shape":"MarkerType",
-          "documentation":"<p>Use this parameter only when paginating results and only in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the response you just received.</p>"
+          "documentation":"<p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.</p>"
         }
       }
     },
@@ -1574,11 +1628,11 @@
         },
         "NextMarker":{
           "shape":"MarkerType",
-          "documentation":"<p>When <code>Truncated</code> is true, this value is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>"
+          "documentation":"<p>When <code>Truncated</code> is true, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
         },
         "Truncated":{
           "shape":"BooleanType",
-          "documentation":"<p>A flag that indicates whether there are more items in the list. If your results were truncated, you can use the <code>Marker</code> parameter to make a subsequent pagination request to retrieve more items in the list.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To retrieve more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.</p>"
         }
       }
     },
@@ -1587,11 +1641,11 @@
       "members":{
         "Limit":{
           "shape":"LimitType",
-          "documentation":"<p>When paginating results, specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <code>Truncated</code> element in the response is set to true.</p> <p>This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p>"
+          "documentation":"<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p>"
         },
         "Marker":{
           "shape":"MarkerType",
-          "documentation":"<p>Use this parameter only when paginating results and only in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the response you just received.</p>"
+          "documentation":"<p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.</p>"
         }
       }
     },
@@ -1604,11 +1658,46 @@
         },
         "NextMarker":{
           "shape":"MarkerType",
-          "documentation":"<p>When <code>Truncated</code> is true, this value is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>"
+          "documentation":"<p>When <code>Truncated</code> is true, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
         },
         "Truncated":{
           "shape":"BooleanType",
-          "documentation":"<p>A flag that indicates whether there are more items in the list. If your results were truncated, you can use the <code>Marker</code> parameter to make a subsequent pagination request to retrieve more items in the list.</p>"
+          "documentation":"<p>A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To retrieve more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.</p>"
+        }
+      }
+    },
+    "ListResourceTagsRequest":{
+      "type":"structure",
+      "required":["KeyId"],
+      "members":{
+        "KeyId":{
+          "shape":"KeyIdType",
+          "documentation":"<p>A unique identifier for the CMK whose tags you are listing. You can use the unique key ID or the Amazon Resource Name (ARN) of the CMK. Examples:</p> <ul> <li> <p>Unique key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul>"
+        },
+        "Limit":{
+          "shape":"LimitType",
+          "documentation":"<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 50, inclusive. If you do not include a value, it defaults to 50.</p>"
+        },
+        "Marker":{
+          "shape":"MarkerType",
+          "documentation":"<p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.</p> <p>Do not attempt to construct this value. Use only the value of <code>NextMarker</code> from the truncated response you just received.</p>"
+        }
+      }
+    },
+    "ListResourceTagsResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>A list of tags. Each tag consists of a tag key and a tag value.</p>"
+        },
+        "NextMarker":{
+          "shape":"MarkerType",
+          "documentation":"<p>When <code>Truncated</code> is true, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent request.</p> <p>Do not assume or infer any information from this value.</p>"
+        },
+        "Truncated":{
+          "shape":"BooleanType",
+          "documentation":"<p>A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To retrieve more items, pass the value of the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a subsequent request.</p>"
         }
       }
     },
@@ -1618,11 +1707,11 @@
       "members":{
         "Limit":{
           "shape":"LimitType",
-          "documentation":"<p>When paginating results, specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <code>Truncated</code> element in the response is set to true.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
+          "documentation":"<p>Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer.</p> <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
         },
         "Marker":{
           "shape":"MarkerType",
-          "documentation":"<p>Use this parameter only when paginating results and only in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the response you just received.</p>"
+          "documentation":"<p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextMarker</code> from the truncated response you just received.</p>"
         },
         "RetiringPrincipal":{
           "shape":"PrincipalIdType",
@@ -1714,11 +1803,11 @@
         },
         "Policy":{
           "shape":"PolicyType",
-          "documentation":"<p>The key policy to attach to the CMK.</p> <p>If you do not set <code>BypassPolicyLockoutSafetyCheck</code> to true, the policy must meet the following criteria:</p> <ul> <li> <p>It must allow the principal making the <code>PutKeyPolicy</code> request to make a subsequent <code>PutKeyPolicy</code> request on the CMK. This reduces the likelihood that the CMK becomes unmanageable. For more information, refer to the scenario in the <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p> </li> <li> <p>The principal(s) specified in the key policy must exist and be visible to AWS KMS. When you create a new AWS principal (for example, an IAM user or role), you might need to enforce a delay before specifying the new principal in a key policy because the new principal might not immediately be visible to AWS KMS. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency\">Changes that I make are not always immediately visible</a> in the <i>IAM User Guide</i>.</p> </li> </ul> <p>The policy size limit is 32 KiB (32768 bytes).</p>"
+          "documentation":"<p>The key policy to attach to the CMK.</p> <p>If you do not set <code>BypassPolicyLockoutSafetyCheck</code> to true, the policy must meet the following criteria:</p> <ul> <li> <p>It must allow the principal that is making the <code>PutKeyPolicy</code> request to make a subsequent <code>PutKeyPolicy</code> request on the CMK. This reduces the likelihood that the CMK becomes unmanageable. For more information, refer to the scenario in the <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p> </li> <li> <p>The principals that are specified in the key policy must exist and be visible to AWS KMS. When you create a new AWS principal (for example, an IAM user or role), you might need to enforce a delay before specifying the new principal in a key policy because the new principal might not immediately be visible to AWS KMS. For more information, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency\">Changes that I make are not always immediately visible</a> in the <i>IAM User Guide</i>.</p> </li> </ul> <p>The policy size limit is 32 KiB (32768 bytes).</p>"
         },
         "BypassPolicyLockoutSafetyCheck":{
           "shape":"BooleanType",
-          "documentation":"<p>A flag to indicate whether to bypass the key policy lockout safety check.</p> <important> <p>Setting this value to true increases the likelihood that the CMK becomes unmanageable. Do not set this value to true indiscriminately.</p> <p>For more information, refer to the scenario in the <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p> </important> <p>Use this parameter only when you intend to prevent the principal making the request from making a subsequent <code>PutKeyPolicy</code> request on the CMK.</p> <p>The default value is false.</p>"
+          "documentation":"<p>A flag to indicate whether to bypass the key policy lockout safety check.</p> <important> <p>Setting this value to true increases the likelihood that the CMK becomes unmanageable. Do not set this value to true indiscriminately.</p> <p>For more information, refer to the scenario in the <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p> </important> <p>Use this parameter only when you intend to prevent the principal that is making the request from making a subsequent <code>PutKeyPolicy</code> request on the CMK.</p> <p>The default value is false.</p>"
         }
       }
     },
@@ -1829,6 +1918,67 @@
         }
       }
     },
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "TagKey",
+        "TagValue"
+      ],
+      "members":{
+        "TagKey":{
+          "shape":"TagKeyType",
+          "documentation":"<p>The key of the tag.</p>"
+        },
+        "TagValue":{
+          "shape":"TagValueType",
+          "documentation":"<p>The value of the tag.</p>"
+        }
+      },
+      "documentation":"<p>A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.</p>"
+    },
+    "TagException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessageType"}
+      },
+      "documentation":"<p>The request was rejected because one or more tags are not valid.</p>",
+      "exception":true
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKeyType"}
+    },
+    "TagKeyType":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "KeyId",
+        "Tags"
+      ],
+      "members":{
+        "KeyId":{
+          "shape":"KeyIdType",
+          "documentation":"<p>A unique identifier for the CMK you are tagging. You can use the unique key ID or the Amazon Resource Name (ARN) of the CMK. Examples:</p> <ul> <li> <p>Unique key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>One or more tags. Each tag consists of a tag key and a tag value.</p>"
+        }
+      }
+    },
+    "TagValueType":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "UnsupportedOperationException":{
       "type":"structure",
       "members":{
@@ -1836,6 +1986,23 @@
       },
       "documentation":"<p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this operation.</p>",
       "exception":true
+    },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "KeyId",
+        "TagKeys"
+      ],
+      "members":{
+        "KeyId":{
+          "shape":"KeyIdType",
+          "documentation":"<p>A unique identifier for the CMK from which you are removing tags. You can use the unique key ID or the Amazon Resource Name (ARN) of the CMK. Examples:</p> <ul> <li> <p>Unique key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul>"
+        },
+        "TagKeys":{
+          "shape":"TagKeyList",
+          "documentation":"<p>One or more tag keys. Specify only the tag keys, not the tag values.</p>"
+        }
+      }
     },
     "UpdateAliasRequest":{
       "type":"structure",

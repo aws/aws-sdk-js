@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.13.0-->
+<!--LATEST=2.14.0-->
 <!--ENTRYINSERT-->
+
+## 2.14.0
+* feature: KMS: This release of AWS Key Management Service introduces the ability to tag keys. Tagging keys can help you organize your keys and track your KMS costs in the cost allocation report. This release also increases the maximum length of a key ID to accommodate ARNs that include a long key alias.
 
 ## 2.13.0
 * feature: Ec2: Adds support for the new Modify Volumes apis.
