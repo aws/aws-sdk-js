@@ -190,19 +190,6 @@ describe 'QueryParamSerializer', ->
           ['Person.member.3', 'c'],
         ])
 
-      it 'ignores the list-member name', ->
-        rules =
-          Person:
-            type: 'list'
-            member:
-              locationName: 'Name'
-        params = serialize({Person:['a','b','c']}, rules)
-        expect(params).to.eql([
-          ['Person.member.1', 'a'],
-          ['Person.member.2', 'b'],
-          ['Person.member.3', 'c'],
-        ])
-
       it 'observes both list name and list member name', ->
         rules =
           People:
@@ -212,9 +199,9 @@ describe 'QueryParamSerializer', ->
               locationName: 'Name'
         params = serialize({People:['a','b','c']}, rules)
         expect(params).to.eql([
-          ['Person.member.1', 'a'],
-          ['Person.member.2', 'b'],
-          ['Person.member.3', 'c'],
+          ['Person.Name.1', 'a'],
+          ['Person.Name.2', 'b'],
+          ['Person.Name.3', 'c'],
         ])
 
   describe 'maps', -> # maps are hashes with user defined keys
