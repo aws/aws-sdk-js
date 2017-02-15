@@ -356,5 +356,59 @@
         }
       }
     ]
+  },
+  {
+    "description": "Idempotency token auto fill",
+    "metadata": {
+      "protocol": "ec2",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Token": {
+            "shape": "StringType",
+              "idempotencyToken": true
+          }
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Token": "abc123"
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {},
+          "body": "Action=OperationName&Version=2014-01-01&Token=abc123"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {},
+          "body": "Action=OperationName&Version=2014-01-01&Token=00000000-0000-4000-8000-000000000000"
+        }
+      }
+    ]
   }
 ]
