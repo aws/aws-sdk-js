@@ -1548,7 +1548,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The speNexcified token is invalid.</p>",
+      "documentation":"<p>The specified <code>ResultToken</code> is invalid.</p>",
       "exception":true
     },
     "InvalidRoleException":{
@@ -1784,6 +1784,10 @@
         "ResultToken":{
           "shape":"String",
           "documentation":"<p>An encrypted token that associates an evaluation with an AWS Config rule. Identifies the rule and the event that triggered the evaluation</p>"
+        },
+        "TestMode":{
+          "shape":"Boolean",
+          "documentation":"<p>Use this parameter to specify a test run for <code>PutEvaluations</code>. You can verify whether your AWS Lambda function will deliver evaluation results to AWS Config. No updates occur to your existing evaluations, and evaluation results are not sent to AWS Config.</p> <note> <p>When <code>TestMode</code> is <code>true</code>, <code>PutEvaluations</code> doesn't require a valid value for the <code>ResultToken</code> parameter, but the value cannot be null.</p> </note>"
         }
       },
       "documentation":"<p/>"

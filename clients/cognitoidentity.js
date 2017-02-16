@@ -9,6 +9,7 @@ require('../lib/services/cognitoidentity');
 Object.defineProperty(apiLoader.services['cognitoidentity'], '2014-06-30', {
   get: function get() {
     var model = require('../apis/cognito-identity-2014-06-30.min.json');
+    model.paginators = require('../apis/cognito-identity-2014-06-30.paginators.json').pagination;
     return model;
   },
   enumerable: true,

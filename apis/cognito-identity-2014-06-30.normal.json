@@ -374,6 +374,11 @@
         "ClientId":{
           "shape":"CognitoIdentityProviderClientId",
           "documentation":"<p>The client ID for the Amazon Cognito Identity User Pool.</p>"
+        },
+        "ServerSideTokenCheck":{
+          "shape":"CognitoIdentityProviderTokenCheck",
+          "documentation":"<p>TRUE if server-side token validation is enabled for the identity provider’s token.</p>",
+          "box":true
         }
       },
       "documentation":"<p>A provider representing an Amazon Cognito Identity User Pool and its client ID.</p>"
@@ -394,6 +399,7 @@
       "min":1,
       "pattern":"[\\w._:/-]+"
     },
+    "CognitoIdentityProviderTokenCheck":{"type":"boolean"},
     "ConcurrentModificationException":{
       "type":"structure",
       "members":{

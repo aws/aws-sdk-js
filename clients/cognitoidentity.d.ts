@@ -172,10 +172,15 @@ declare namespace CognitoIdentity {
      * The client ID for the Amazon Cognito Identity User Pool.
      */
     ClientId?: CognitoIdentityProviderClientId;
+    /**
+     * TRUE if server-side token validation is enabled for the identity provider’s token.
+     */
+    ServerSideTokenCheck?: CognitoIdentityProviderTokenCheck;
   }
   export type CognitoIdentityProviderClientId = string;
   export type CognitoIdentityProviderList = CognitoIdentityProvider[];
   export type CognitoIdentityProviderName = string;
+  export type CognitoIdentityProviderTokenCheck = boolean;
   export interface CreateIdentityPoolInput {
     /**
      * A string that you provide.
