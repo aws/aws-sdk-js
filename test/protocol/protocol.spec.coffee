@@ -27,6 +27,8 @@ tests = (svcName) ->
   setupTests svcName, 'output'
 
 setupTests = (svcName, type) ->
+  beforeEach ->
+    helpers.spyOn(AWS.util.uuid, 'v4').andReturn('00000000-0000-4000-8000-000000000000')
   describe svcName, ->
     describe type, ->
       values = protocols[svcName][type]
@@ -89,6 +91,9 @@ outputCase = (svc, _case, i, done) ->
     expect(resultData[k]).to.eql(v)
 
 formatData = (data, shape) ->
+  if data == null || data == undefined
+    return data
+
   if shape.type == 'structure'
     params = {}
     for key,value of data
