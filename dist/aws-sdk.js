@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.15.0
+// AWS SDK for JavaScript v2.16.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -19026,6 +19026,30 @@ module.exports={
         "shape": "S7"
       }
     },
+    "AllocateHostedConnection": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "connectionId",
+          "ownerAccount",
+          "bandwidth",
+          "connectionName",
+          "vlan"
+        ],
+        "members": {
+          "connectionId": {},
+          "ownerAccount": {},
+          "bandwidth": {},
+          "connectionName": {},
+          "vlan": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "shape": "S7"
+      }
+    },
     "AllocatePrivateVirtualInterface": {
       "input": {
         "type": "structure",
@@ -19061,7 +19085,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "Sm"
+        "shape": "Sp"
       }
     },
     "AllocatePublicVirtualInterface": {
@@ -19095,14 +19119,62 @@ module.exports={
               "customerAddress": {},
               "addressFamily": {},
               "routeFilterPrefixes": {
-                "shape": "Ss"
+                "shape": "Sv"
               }
             }
           }
         }
       },
       "output": {
-        "shape": "Sm"
+        "shape": "Sp"
+      }
+    },
+    "AssociateConnectionWithLag": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "connectionId",
+          "lagId"
+        ],
+        "members": {
+          "connectionId": {},
+          "lagId": {}
+        }
+      },
+      "output": {
+        "shape": "S7"
+      }
+    },
+    "AssociateHostedConnection": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "connectionId",
+          "parentConnectionId"
+        ],
+        "members": {
+          "connectionId": {},
+          "parentConnectionId": {}
+        }
+      },
+      "output": {
+        "shape": "S7"
+      }
+    },
+    "AssociateVirtualInterface": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "virtualInterfaceId",
+          "connectionId"
+        ],
+        "members": {
+          "virtualInterfaceId": {},
+          "connectionId": {}
+        }
+      },
+      "output": {
+        "shape": "Sp"
       }
     },
     "ConfirmConnection": {
@@ -19181,7 +19253,7 @@ module.exports={
         "type": "structure",
         "members": {
           "virtualInterface": {
-            "shape": "Sm"
+            "shape": "Sp"
           }
         }
       }
@@ -19197,7 +19269,8 @@ module.exports={
         "members": {
           "location": {},
           "bandwidth": {},
-          "connectionName": {}
+          "connectionName": {},
+          "lagId": {}
         }
       },
       "output": {
@@ -19215,11 +19288,35 @@ module.exports={
         "members": {
           "interconnectName": {},
           "bandwidth": {},
-          "location": {}
+          "location": {},
+          "lagId": {}
         }
       },
       "output": {
-        "shape": "S1d"
+        "shape": "S1j"
+      }
+    },
+    "CreateLag": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "numberOfConnections",
+          "location",
+          "connectionsBandwidth",
+          "lagName"
+        ],
+        "members": {
+          "numberOfConnections": {
+            "type": "integer"
+          },
+          "location": {},
+          "connectionsBandwidth": {},
+          "lagName": {},
+          "connectionId": {}
+        }
+      },
+      "output": {
+        "shape": "S1o"
       }
     },
     "CreatePrivateVirtualInterface": {
@@ -19257,7 +19354,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "Sm"
+        "shape": "Sp"
       }
     },
     "CreatePublicVirtualInterface": {
@@ -19289,14 +19386,14 @@ module.exports={
               "customerAddress": {},
               "addressFamily": {},
               "routeFilterPrefixes": {
-                "shape": "Ss"
+                "shape": "Sv"
               }
             }
           }
         }
       },
       "output": {
-        "shape": "Sm"
+        "shape": "Sp"
       }
     },
     "DeleteBGPPeer": {
@@ -19314,7 +19411,7 @@ module.exports={
         "type": "structure",
         "members": {
           "virtualInterface": {
-            "shape": "Sm"
+            "shape": "Sp"
           }
         }
       }
@@ -19350,6 +19447,20 @@ module.exports={
         }
       }
     },
+    "DeleteLag": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "lagId"
+        ],
+        "members": {
+          "lagId": {}
+        }
+      },
+      "output": {
+        "shape": "S1o"
+      }
+    },
     "DeleteVirtualInterface": {
       "input": {
         "type": "structure",
@@ -19383,7 +19494,7 @@ module.exports={
         "type": "structure",
         "members": {
           "loa": {
-            "shape": "S1u"
+            "shape": "S28"
           }
         }
       }
@@ -19396,7 +19507,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1x"
+        "shape": "S2b"
       }
     },
     "DescribeConnectionsOnInterconnect": {
@@ -19410,7 +19521,21 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1x"
+        "shape": "S2b"
+      }
+    },
+    "DescribeHostedConnections": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "connectionId"
+        ],
+        "members": {
+          "connectionId": {}
+        }
+      },
+      "output": {
+        "shape": "S2b"
       }
     },
     "DescribeInterconnectLoa": {
@@ -19429,7 +19554,7 @@ module.exports={
         "type": "structure",
         "members": {
           "loa": {
-            "shape": "S1u"
+            "shape": "S28"
           }
         }
       }
@@ -19447,10 +19572,45 @@ module.exports={
           "interconnects": {
             "type": "list",
             "member": {
-              "shape": "S1d"
+              "shape": "S1j"
             }
           }
         }
+      }
+    },
+    "DescribeLags": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "lagId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "lags": {
+            "type": "list",
+            "member": {
+              "shape": "S1o"
+            }
+          }
+        }
+      }
+    },
+    "DescribeLoa": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "connectionId"
+        ],
+        "members": {
+          "connectionId": {},
+          "providerName": {},
+          "loaContentType": {}
+        }
+      },
+      "output": {
+        "shape": "S28"
       }
     },
     "DescribeLocations": {
@@ -19493,7 +19653,7 @@ module.exports={
               "members": {
                 "resourceArn": {},
                 "tags": {
-                  "shape": "S2f"
+                  "shape": "S2x"
                 }
               }
             }
@@ -19532,10 +19692,26 @@ module.exports={
           "virtualInterfaces": {
             "type": "list",
             "member": {
-              "shape": "Sm"
+              "shape": "Sp"
             }
           }
         }
+      }
+    },
+    "DisassociateConnectionFromLag": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "connectionId",
+          "lagId"
+        ],
+        "members": {
+          "connectionId": {},
+          "lagId": {}
+        }
+      },
+      "output": {
+        "shape": "S7"
       }
     },
     "TagResource": {
@@ -19548,7 +19724,7 @@ module.exports={
         "members": {
           "resourceArn": {},
           "tags": {
-            "shape": "S2f"
+            "shape": "S2x"
           }
         }
       },
@@ -19576,6 +19752,24 @@ module.exports={
         "type": "structure",
         "members": {}
       }
+    },
+    "UpdateLag": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "lagId"
+        ],
+        "members": {
+          "lagId": {},
+          "lagName": {},
+          "minimumLinks": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "shape": "S1o"
+      }
     }
   },
   "shapes": {
@@ -19595,10 +19789,12 @@ module.exports={
         "partnerName": {},
         "loaIssueTime": {
           "type": "timestamp"
-        }
+        },
+        "lagId": {},
+        "awsDevice": {}
       }
     },
-    "Sm": {
+    "Sp": {
       "type": "structure",
       "members": {
         "ownerAccount": {},
@@ -19621,7 +19817,7 @@ module.exports={
         "customerRouterConfig": {},
         "virtualGatewayId": {},
         "routeFilterPrefixes": {
-          "shape": "Ss"
+          "shape": "Sv"
         },
         "bgpPeers": {
           "type": "list",
@@ -19642,7 +19838,7 @@ module.exports={
         }
       }
     },
-    "Ss": {
+    "Sv": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -19651,7 +19847,7 @@ module.exports={
         }
       }
     },
-    "S1d": {
+    "S1j": {
       "type": "structure",
       "members": {
         "interconnectId": {},
@@ -19662,10 +19858,43 @@ module.exports={
         "bandwidth": {},
         "loaIssueTime": {
           "type": "timestamp"
+        },
+        "lagId": {},
+        "awsDevice": {}
+      }
+    },
+    "S1o": {
+      "type": "structure",
+      "members": {
+        "connectionsBandwidth": {},
+        "numberOfConnections": {
+          "type": "integer"
+        },
+        "lagId": {},
+        "ownerAccount": {},
+        "lagName": {},
+        "lagState": {},
+        "location": {},
+        "region": {},
+        "minimumLinks": {
+          "type": "integer"
+        },
+        "awsDevice": {},
+        "connections": {
+          "shape": "S1q"
+        },
+        "allowsHostedConnections": {
+          "type": "boolean"
         }
       }
     },
-    "S1u": {
+    "S1q": {
+      "type": "list",
+      "member": {
+        "shape": "S7"
+      }
+    },
+    "S28": {
       "type": "structure",
       "members": {
         "loaContent": {
@@ -19674,18 +19903,15 @@ module.exports={
         "loaContentType": {}
       }
     },
-    "S1x": {
+    "S2b": {
       "type": "structure",
       "members": {
         "connections": {
-          "type": "list",
-          "member": {
-            "shape": "S7"
-          }
+          "shape": "S1q"
         }
       }
     },
-    "S2f": {
+    "S2x": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -19723,7 +19949,6 @@ module.exports={
     }
   }
 }
-
 },{}],36:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -92086,7 +92311,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.15.0',
+  VERSION: '2.16.0',
 
 
   Signers: {},
@@ -93171,7 +93396,6 @@ module.exports = {
 },{"../core":201}],213:[function(require,module,exports){
 var AWS = require('./core');
 var SequentialExecutor = require('./sequential_executor');
-var uuid = require('uuid');
 
 AWS.EventListeners = {
 
@@ -93211,7 +93435,7 @@ AWS.EventListeners = {
       var params = AWS.util.copy(req.params);
       for (var i = 0, iLen = idempotentMembers.length; i < iLen; i++) {
         if (!params[idempotentMembers[i]]) {
-          params[idempotentMembers[i]] = uuid.v4();
+          params[idempotentMembers[i]] = AWS.util.uuid.v4();
         }
       }
       req.params = params;
@@ -93601,7 +93825,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":201,"./protocol/json":226,"./protocol/query":227,"./protocol/rest":228,"./protocol/rest_json":229,"./protocol/rest_xml":230,"./sequential_executor":238,"util":273,"uuid":290}],214:[function(require,module,exports){
+},{"./core":201,"./protocol/json":226,"./protocol/query":227,"./protocol/rest":228,"./protocol/rest_json":229,"./protocol/rest_xml":230,"./sequential_executor":238,"util":273}],214:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -95326,7 +95550,7 @@ function serializeList(name, list, rules, fn) {
         name = parts.join('.');
       }
     } else {
-      suffix = '.member' + suffix;
+      suffix = '.' + (memberRules.name ? memberRules.name : 'member') + suffix;
     }
     serializeMember(name + suffix, v, memberRules, fn);
   });
@@ -99703,6 +99927,13 @@ var util = {
     };
 
     process.nextTick(sendRequest);
+  },
+
+
+  uuid: {
+    v4: function uuidV4() {
+      return require('uuid').v4();
+    }
   }
 
 };
@@ -99710,7 +99941,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require('_process'))
-},{"../apis/metadata.json":90,"./core":201,"_process":266,"fs":264}],262:[function(require,module,exports){
+},{"../apis/metadata.json":90,"./core":201,"_process":266,"fs":264,"uuid":290}],262:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
