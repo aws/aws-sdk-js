@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "TypeScript",
+  "description": "Enable the configuration credentials to be nulled so that the global config is not used."
+}

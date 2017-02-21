@@ -5,6 +5,11 @@ import {Endpoint} from '../lib/endpoint';
 // Instantiate S3 without options
 var s3 = new S3();
 
+// Instantiate S3 without using the global credentials
+new S3({
+    credentials: null
+});
+
 // Instantiate S3 with config
 var s3Config: S3.Types.ClientConfiguration = {
     apiVersion: '2006-03-01',

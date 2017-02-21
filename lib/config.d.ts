@@ -171,7 +171,7 @@ export abstract class ConfigurationOptions {
     /**
      * The AWS credentials to sign requests with.
      */
-    credentials?: Credentials|CredentialsOptions
+    credentials?: Credentials|CredentialsOptions|null
     /**
      * The provider chain used to resolve credentials if no static credentials property is set.
      */
