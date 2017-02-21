@@ -41,6 +41,15 @@
           "alias": "managed_upload"
         }
       ]
+    },
+    {
+      "path": "lib/s3/presigned_post",
+      "imports": [
+        {
+          "name": "PresignedPost",
+          "alias": "presigned_post"
+        }
+      ]
     }
   ]
 }
