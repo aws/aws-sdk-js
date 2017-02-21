@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.16.0-->
+<!--LATEST=2.17.0-->
 <!--ENTRYINSERT-->
+
+## 2.17.0
+* bugfix: TypeScript: Enable the configuration credentials to be nulled so that the global config is not used.
+* feature: EC2: Added the billingProduct parameter to the RegisterImage API.
 
 ## 2.16.0
 * feature: DirectConnect: This update will introduce the ability for Direct Connect customers to take advantage of Link Aggregation (LAG). This allows you to bundle many individual physical interfaces into a single logical interface, referred to as a LAG. This makes administration much simpler as the majority of configuration is done on the LAG while you are free to add or remove physical interfaces from the bundle as bandwidth demand increases or decreases. A concrete example of the simplification added by LAG is that customers need only a single BGP session as opposed to one session per physical connection.

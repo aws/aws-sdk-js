@@ -1397,7 +1397,7 @@
       },
       "input":{"shape":"DescribeVolumesModificationsRequest"},
       "output":{"shape":"DescribeVolumesModificationsResult"},
-      "documentation":"<p>Reports the current modification status of EBS volumes.</p> <p>Current-generation EBS volumes support modification of attributes including type, size, and (for <code>io1</code> volumes) IOPS provisioning while either attached to or detached from an instance. Following an action from the API or the console to modify a volume, the status of the modification may be <code>modifying</code>, <code>optimizing</code>, <code>completed</code>, or <code>failed</code>. If a volume has never been modified, then certain elements of the returned <code>VolumeModification</code> objects are null. </p> <p> You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html\">Amazon CloudWatch Events User Guide</a>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods\">Monitoring Volume Modifications\"</a>. </p>"
+      "documentation":"<p>Reports the current modification status of EBS volumes.</p> <p>Current-generation EBS volumes support modification of attributes including type, size, and (for <code>io1</code> volumes) IOPS provisioning while either attached to or detached from an instance. Following an action from the API or the console to modify a volume, the status of the modification may be <code>modifying</code>, <code>optimizing</code>, <code>completed</code>, or <code>failed</code>. If a volume has never been modified, then certain elements of the returned <code>VolumeModification</code> objects are null. </p> <p> You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/\">Amazon CloudWatch Events User Guide</a>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods\">Monitoring Volume Modifications\"</a>. </p>"
     },
     "DescribeVpcAttribute":{
       "name":"DescribeVpcAttribute",
@@ -1862,7 +1862,7 @@
       },
       "input":{"shape":"ModifyVolumeRequest"},
       "output":{"shape":"ModifyVolumeResult"},
-      "documentation":"<p>You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Linux</a>. For more information about modifying an EBS volume running Windows, see <a href=\"http://docs.aws.amazon.com/docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html\">Expanding the Storage Space of an EBS Volume on Windows</a>. </p> <p> When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux\">Extending a Linux File System</a>. For information about extending a Windows file system, see <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows\">Extending a Windows File System</a>. </p> <p> You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html\">Amazon CloudWatch Events User Guide</a>. You can also track the status of a modification using the <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumesModifications.html\"> <code>DescribeVolumesModifications</code> API</a>. For information about tracking status changes using either method, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods\">Monitoring Volume Modifications\"</a>. </p> <note> <p>With previous-generation volumes and instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information about modifying an EBS volume running Linux, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Linux</a>. For more information about modifying an EBS volume running Windows, see <a href=\"http://docs.aws.amazon.com/docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Windows</a>.</p> </note> <note> <p>If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume.</p> </note>"
+      "documentation":"<p>You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Linux</a>. For more information about modifying an EBS volume running Windows, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Windows</a>. </p> <p> When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux\">Extending a Linux File System</a>. For information about extending a Windows file system, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows\">Extending a Windows File System</a>. </p> <p> You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/\">Amazon CloudWatch Events User Guide</a>. You can also track the status of a modification using the <a>DescribeVolumesModifications</a> API. For information about tracking status changes using either method, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods\">Monitoring Volume Modifications</a>. </p> <note> <p>With previous-generation instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information about modifying an EBS volume running Linux, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Linux</a>. For more information about modifying an EBS volume running Windows, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html\">Modifying the Size, IOPS, or Type of an EBS Volume on Windows</a>.</p> </note> <note> <p>If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume.</p> </note>"
     },
     "ModifyVolumeAttribute":{
       "name":"ModifyVolumeAttribute",
@@ -1969,7 +1969,7 @@
       },
       "input":{"shape":"RegisterImageRequest"},
       "output":{"shape":"RegisterImageResult"},
-      "documentation":"<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating Your Own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <note> <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers the AMI in a single request, so you don't have to register the AMI yourself.</p> </note> <p>You can also use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_LaunchingInstanceFromSnapshot.html\">Launching an Instance from a Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <important> <p>Some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 <code>billingProduct</code> code associated with an AMI to verify subscription status for package updates. Creating an AMI from an EBS snapshot does not maintain this billing code, and subsequent instances launched from such an AMI will not be able to connect to package update infrastructure.</p> <p>Similarly, although you can create a Windows AMI from a snapshot, you can't successfully launch an instance from the AMI.</p> <p>To create Windows AMIs or to create AMIs for Linux operating systems that must retain AMI billing codes to work properly, see <a>CreateImage</a>.</p> </important> <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.</p> <note> <p>You can't register an image where a secondary (non-root) snapshot has AWS Marketplace product codes.</p> </note>"
+      "documentation":"<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating Your Own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <note> <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers the AMI in a single request, so you don't have to register the AMI yourself.</p> </note> <p>You can also use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using the block device mapping. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_LaunchingInstanceFromSnapshot.html\">Launching an Instance from a Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can't register an image where a secondary (non-root) snapshot has AWS Marketplace product codes.</p> <p>Some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. Creating an AMI from an EBS snapshot does not maintain this billing code, and subsequent instances launched from such an AMI will not be able to connect to package update infrastructure. To create an AMI that must retain billing codes, see <a>CreateImage</a>.</p> <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.</p>"
     },
     "RejectVpcPeeringConnection":{
       "name":"RejectVpcPeeringConnection",
@@ -3224,6 +3224,13 @@
         "cancelled_terminating",
         "modifying"
       ]
+    },
+    "BillingProductList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
     },
     "Blob":{"type":"blob"},
     "BlobAttributeValue":{
@@ -9429,6 +9436,7 @@
         },
         "ReservedInstanceValueRollup":{
           "shape":"ReservationValue",
+          "documentation":"<p>The cost associated with the Reserved Instance.</p>",
           "locationName":"reservedInstanceValueRollup"
         },
         "TargetConfigurationValueSet":{
@@ -9438,6 +9446,7 @@
         },
         "TargetConfigurationValueRollup":{
           "shape":"ReservationValue",
+          "documentation":"<p>The cost associated with the Reserved Instance.</p>",
           "locationName":"targetConfigurationValueRollup"
         },
         "PaymentDue":{
@@ -12558,11 +12567,11 @@
         },
         "VolumeType":{
           "shape":"VolumeType",
-          "documentation":"<p>Target EBS volume type of the volume to be modified</p> <p>Valid values are <code>io1</code> | <code>gp2</code> | <code>sc1</code> | <code>st1</code> </p> <p> The API does not support modifications for volume type <code>standard</code>. You also cannot change the type of a volume to <code>standard</code>. </p>"
+          "documentation":"<p>Target EBS volume type of the volume to be modified</p> <p> The API does not support modifications for volume type <code>standard</code>. You also cannot change the type of a volume to <code>standard</code>. </p> <p>Default: If no type is specified, the existing type is retained. </p>"
         },
         "Iops":{
           "shape":"Integer",
-          "documentation":"<p>Target IOPS rate of the volume to be modified.</p> <p>Only valid for Provisioned IOPS SSD (<code>io1</code>) volumes. For more information about <code>io1</code> IOPS configuration, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops\">http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops</a>.</p>"
+          "documentation":"<p>Target IOPS rate of the volume to be modified.</p> <p>Only valid for Provisioned IOPS SSD (<code>io1</code>) volumes. For more information about <code>io1</code> IOPS configuration, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops\">http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops</a>.</p> <p>Default: If no IOPS value is specified, the existing value is retained. </p>"
         }
       }
     },
@@ -14132,6 +14141,11 @@
           "shape":"String",
           "documentation":"<p>The ID of the RAM disk.</p>",
           "locationName":"ramdiskId"
+        },
+        "BillingProducts":{
+          "shape":"BillingProductList",
+          "documentation":"<p>The billing product codes.</p>",
+          "locationName":"BillingProduct"
         },
         "RootDeviceName":{
           "shape":"String",
@@ -18240,7 +18254,7 @@
         },
         "ModificationState":{
           "shape":"VolumeModificationState",
-          "documentation":"<p>Current state of modification. Possible values are <code>modifying</code> | <code>optimizing</code> | <code>complete</code> | <code>failed</code>. Modification state is null for unmodified volumes. </p>",
+          "documentation":"<p>Current state of modification. Modification state is null for unmodified volumes. </p>",
           "locationName":"modificationState"
         },
         "StatusMessage":{
