@@ -76,6 +76,14 @@ declare class ElasticBeanstalk extends Service {
    */
   createEnvironment(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
+   * Create a new version of your custom platform.
+   */
+  createPlatformVersion(params: ElasticBeanstalk.Types.CreatePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.CreatePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.CreatePlatformVersionResult, AWSError>;
+  /**
+   * Create a new version of your custom platform.
+   */
+  createPlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.CreatePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.CreatePlatformVersionResult, AWSError>;
+  /**
    * Creates the Amazon S3 storage location for the account. This location is used to store user log files.
    */
   createStorageLocation(callback?: (err: AWSError, data: ElasticBeanstalk.Types.CreateStorageLocationResultMessage) => void): Request<ElasticBeanstalk.Types.CreateStorageLocationResultMessage, AWSError>;
@@ -111,6 +119,14 @@ declare class ElasticBeanstalk extends Service {
    * Deletes the draft configuration associated with the running environment. Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using DescribeConfigurationSettings while the update is in progress or if the update fails. The DeploymentStatus for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action.
    */
   deleteEnvironmentConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified version of a custom platform.
+   */
+  deletePlatformVersion(params: ElasticBeanstalk.Types.DeletePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DeletePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DeletePlatformVersionResult, AWSError>;
+  /**
+   * Deletes the specified version of a custom platform.
+   */
+  deletePlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DeletePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DeletePlatformVersionResult, AWSError>;
   /**
    * Retrieve a list of application versions.
    */
@@ -200,9 +216,25 @@ declare class ElasticBeanstalk extends Service {
    */
   describeInstancesHealth(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
-   * Returns a list of the available solution stack names.
+   * Describes the version of the platform.
+   */
+  describePlatformVersion(params: ElasticBeanstalk.Types.DescribePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DescribePlatformVersionResult, AWSError>;
+  /**
+   * Describes the version of the platform.
+   */
+  describePlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DescribePlatformVersionResult, AWSError>;
+  /**
+   * Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.
    */
   listAvailableSolutionStacks(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListAvailableSolutionStacksResultMessage) => void): Request<ElasticBeanstalk.Types.ListAvailableSolutionStacksResultMessage, AWSError>;
+  /**
+   * Lists the available platforms.
+   */
+  listPlatformVersions(params: ElasticBeanstalk.Types.ListPlatformVersionsRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
+  /**
+   * Lists the available platforms.
+   */
+  listPlatformVersions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
   /**
    * Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.
    */
@@ -301,6 +333,7 @@ declare class ElasticBeanstalk extends Service {
   validateConfigurationSettings(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages, AWSError>;
 }
 declare namespace ElasticBeanstalk {
+  export type ARN = string;
   export interface AbortEnvironmentUpdateMessage {
     /**
      * This specifies the ID of the environment with the in-progress update that you want to cancel.
@@ -372,7 +405,7 @@ declare namespace ElasticBeanstalk {
      */
     StatusCodes?: StatusCodes;
     /**
-     * Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one milisecond resolution.
+     * Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one millisecond resolution.
      */
     Latency?: Latency;
   }
@@ -531,6 +564,12 @@ declare namespace ElasticBeanstalk {
      */
     TimeoutInMinutes?: BoxedInt;
   }
+  export interface Builder {
+    /**
+     * The ARN of the builder.
+     */
+    ARN?: ARN;
+  }
   export interface CPUUtilization {
     /**
      * Percentage of time that the CPU has spent in the User state over the last 10 seconds.
@@ -675,6 +714,10 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
+     * The ARN of the custom platform.
+     */
+    PlatformArn?: PlatformArn;
+    /**
      *  A list of ConfigurationOptionDescription. 
      */
     Options?: ConfigurationOptionDescriptionsList;
@@ -684,6 +727,10 @@ declare namespace ElasticBeanstalk {
      * The name of the solution stack this configuration set uses.
      */
     SolutionStackName?: SolutionStackName;
+    /**
+     * The ARN of the custom platform.
+     */
+    PlatformArn?: PlatformArn;
     /**
      * The name of the application associated with this configuration set.
      */
@@ -794,6 +841,10 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
+     * The ARN of the custome platform.
+     */
+    PlatformArn?: PlatformArn;
+    /**
      * If specified, AWS Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration.  Values specified in the OptionSettings parameter of this call overrides any values obtained from the SourceConfiguration.   If no configuration template is found, returns an InvalidParameterValue error.   Constraint: If both the solution stack name parameter and the source configuration parameters are specified, the solution stack of the source configuration template must match the specified solution stack name or else AWS Elastic Beanstalk returns an InvalidParameterCombination error. 
      */
     SourceConfiguration?: SourceConfiguration;
@@ -844,13 +895,17 @@ declare namespace ElasticBeanstalk {
      */
     VersionLabel?: VersionLabel;
     /**
-     *  The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an InvalidParameterValue error.   Condition: You must specify either this parameter or a SolutionStackName, but not both. If you specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination error. If you do not specify either, AWS Elastic Beanstalk returns a MissingRequiredParameter error. 
+     *  The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an InvalidParameterValue error. 
      */
     TemplateName?: ConfigurationTemplateName;
     /**
-     * This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.  Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination error. If you do not specify either, AWS Elastic Beanstalk returns a MissingRequiredParameter error. 
+     * This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.
      */
     SolutionStackName?: SolutionStackName;
+    /**
+     * The ARN of the custom platform.
+     */
+    PlatformArn?: PlatformArn;
     /**
      * If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.
      */
@@ -860,6 +915,38 @@ declare namespace ElasticBeanstalk {
      */
     OptionsToRemove?: OptionsSpecifierList;
   }
+  export interface CreatePlatformVersionRequest {
+    /**
+     * The name of your custom platform.
+     */
+    PlatformName: PlatformName;
+    /**
+     * The number, such as 1.0.2, for the new platform version.
+     */
+    PlatformVersion: PlatformVersion;
+    /**
+     * The location of the platform definition archive in Amazon S3.
+     */
+    PlatformDefinitionBundle: S3Location;
+    /**
+     * The name of the builder environment.
+     */
+    EnvironmentName?: EnvironmentName;
+    /**
+     * The configuration option settings to apply to the builder environment.
+     */
+    OptionSettings?: ConfigurationOptionSettingsList;
+  }
+  export interface CreatePlatformVersionResult {
+    /**
+     * Detailed information about the new version of the custom platform.
+     */
+    PlatformSummary?: PlatformSummary;
+    /**
+     * The builder used to create the custom platform.
+     */
+    Builder?: Builder;
+  }
   export interface CreateStorageLocationResultMessage {
     /**
      * The name of the Amazon S3 bucket created.
@@ -867,6 +954,17 @@ declare namespace ElasticBeanstalk {
     S3Bucket?: S3Bucket;
   }
   export type CreationDate = Date;
+  export interface CustomAmi {
+    /**
+     * The type of virtualization used to create the custom AMI.
+     */
+    VirtualizationType?: VirtualizationType;
+    /**
+     * THe ID of the image used to create the custom AMI.
+     */
+    ImageId?: ImageId;
+  }
+  export type CustomAmiList = CustomAmi[];
   export type DNSCname = string;
   export type DNSCnamePrefix = string;
   export interface DeleteApplicationMessage {
@@ -912,6 +1010,18 @@ declare namespace ElasticBeanstalk {
      * The name of the environment to delete the draft configuration from.
      */
     EnvironmentName: EnvironmentName;
+  }
+  export interface DeletePlatformVersionRequest {
+    /**
+     * The ARN of the version of the custom platform.
+     */
+    PlatformArn?: PlatformArn;
+  }
+  export interface DeletePlatformVersionResult {
+    /**
+     * Detailed information about the version of the custom platform.
+     */
+    PlatformSummary?: PlatformSummary;
   }
   export type DeleteSourceBundle = boolean;
   export interface Deployment {
@@ -974,6 +1084,10 @@ declare namespace ElasticBeanstalk {
      * The name of the solution stack whose configuration options you want to describe.
      */
     SolutionStackName?: SolutionStackName;
+    /**
+     * The ARN of the custom platform.
+     */
+    PlatformArn?: PlatformArn;
     /**
      * If specified, restricts the descriptions to only the specified options.
      */
@@ -1147,6 +1261,10 @@ declare namespace ElasticBeanstalk {
      */
     EnvironmentName?: EnvironmentName;
     /**
+     * The ARN of the version of the custom platform.
+     */
+    PlatformArn?: PlatformArn;
+    /**
      * If specified, AWS Elastic Beanstalk restricts the described events to include only those associated with this request ID.
      */
     RequestId?: RequestId;
@@ -1203,6 +1321,18 @@ declare namespace ElasticBeanstalk {
      */
     NextToken?: NextToken;
   }
+  export interface DescribePlatformVersionRequest {
+    /**
+     * The ARN of the version of the platform.
+     */
+    PlatformArn?: PlatformArn;
+  }
+  export interface DescribePlatformVersionResult {
+    /**
+     * Detailed information about the version of the platform.
+     */
+    PlatformDescription?: PlatformDescription;
+  }
   export type Description = string;
   export type Ec2InstanceId = string;
   export type EndpointURL = string;
@@ -1227,6 +1357,10 @@ declare namespace ElasticBeanstalk {
      *  The name of the SolutionStack deployed with this environment. 
      */
     SolutionStackName?: SolutionStackName;
+    /**
+     * The ARN of the custom platform.
+     */
+    PlatformArn?: PlatformArn;
     /**
      * The name of the configuration template used to originally launch this environment.
      */
@@ -1410,6 +1544,10 @@ declare namespace ElasticBeanstalk {
      */
     EnvironmentName?: EnvironmentName;
     /**
+     * The ARN of the custom platform.
+     */
+    PlatformArn?: PlatformArn;
+    /**
      * The web service request ID for the activity of this event.
      */
     RequestId?: RequestId;
@@ -1436,6 +1574,7 @@ declare namespace ElasticBeanstalk {
   export type FileTypeExtension = string;
   export type ForceTerminate = boolean;
   export type GroupName = string;
+  export type ImageId = string;
   export type IncludeDeleted = boolean;
   export type IncludeDeletedBackTo = Date;
   export interface Instance {
@@ -1536,6 +1675,30 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackDetails?: AvailableSolutionStackDetailsList;
   }
+  export interface ListPlatformVersionsRequest {
+    /**
+     * List only the platforms where the platform member value relates to one of the supplied values.
+     */
+    Filters?: PlatformFilters;
+    /**
+     * The maximum number of platform values returned in one call.
+     */
+    MaxRecords?: PlatformMaxRecords;
+    /**
+     * The starting index into the remaining list of platforms. Use the NextToken value from a previous ListPlatformVersion call.
+     */
+    NextToken?: Token;
+  }
+  export interface ListPlatformVersionsResult {
+    /**
+     * Detailed information about the platforms.
+     */
+    PlatformSummaryList?: PlatformSummaryList;
+    /**
+     * The starting index into the remaining list of platforms. if this value is not null, you can use it in a subsequent ListPlatformVersion call. 
+     */
+    NextToken?: Token;
+  }
   export interface Listener {
     /**
      * The protocol that is used by the Listener.
@@ -1570,6 +1733,7 @@ declare namespace ElasticBeanstalk {
   }
   export type LoadBalancerList = LoadBalancer[];
   export type LoadBalancerListenersDescription = Listener[];
+  export type Maintainer = string;
   export interface ManagedAction {
     /**
      * A unique identifier for the managed action.
@@ -1663,6 +1827,8 @@ declare namespace ElasticBeanstalk {
   export type NullableDouble = number;
   export type NullableInteger = number;
   export type NullableLong = number;
+  export type OperatingSystemName = string;
+  export type OperatingSystemVersion = string;
   export type OptionNamespace = string;
   export type OptionRestrictionMaxLength = number;
   export type OptionRestrictionMaxValue = number;
@@ -1692,6 +1858,163 @@ declare namespace ElasticBeanstalk {
     OptionName?: ConfigurationOptionName;
   }
   export type OptionsSpecifierList = OptionSpecification[];
+  export type PlatformArn = string;
+  export type PlatformCategory = string;
+  export interface PlatformDescription {
+    /**
+     * The ARN of the platform.
+     */
+    PlatformArn?: PlatformArn;
+    /**
+     * The AWS account ID of the person who created the platform.
+     */
+    PlatformOwner?: PlatformOwner;
+    /**
+     * The name of the platform.
+     */
+    PlatformName?: PlatformName;
+    /**
+     * The version of the platform.
+     */
+    PlatformVersion?: PlatformVersion;
+    /**
+     * The name of the solution stack used by the platform.
+     */
+    SolutionStackName?: SolutionStackName;
+    /**
+     * The status of the platform.
+     */
+    PlatformStatus?: PlatformStatus;
+    /**
+     * The date when the platform was created.
+     */
+    DateCreated?: CreationDate;
+    /**
+     * The date when the platform was last updated.
+     */
+    DateUpdated?: UpdateDate;
+    /**
+     * The category of the platform.
+     */
+    PlatformCategory?: PlatformCategory;
+    /**
+     * The description of the platform.
+     */
+    Description?: Description;
+    /**
+     * Information about the maintainer of the platform.
+     */
+    Maintainer?: Maintainer;
+    /**
+     * The operating system used by the platform.
+     */
+    OperatingSystemName?: OperatingSystemName;
+    /**
+     * The version of the operating system used by the platform.
+     */
+    OperatingSystemVersion?: OperatingSystemVersion;
+    /**
+     * The programming languages supported by the platform.
+     */
+    ProgrammingLanguages?: PlatformProgrammingLanguages;
+    /**
+     * The frameworks supported by the platform.
+     */
+    Frameworks?: PlatformFrameworks;
+    /**
+     * The custom AMIs supported by the platform.
+     */
+    CustomAmiList?: CustomAmiList;
+    /**
+     * The tiers supported by the platform.
+     */
+    SupportedTierList?: SupportedTierList;
+    /**
+     * The additions supported by the platform.
+     */
+    SupportedAddonList?: SupportedAddonList;
+  }
+  export interface PlatformFilter {
+    /**
+     * The custom platform attribute to which the filter values are applied. Valid Values: PlatformName | PlatformVersion | PlatformStatus | PlatformOwner 
+     */
+    Type?: PlatformFilterType;
+    /**
+     * The operator to apply to the Type with each of the Values.  Valid Values: = (equal to) | != (not equal to) | &lt; (less than) | &lt;= (less than or equal to) | &gt; (greater than) | &gt;= (greater than or equal to) | contains | begins_with | ends_with 
+     */
+    Operator?: PlatformFilterOperator;
+    /**
+     * The list of values applied to the custom platform attribute.
+     */
+    Values?: PlatformFilterValueList;
+  }
+  export type PlatformFilterOperator = string;
+  export type PlatformFilterType = string;
+  export type PlatformFilterValue = string;
+  export type PlatformFilterValueList = PlatformFilterValue[];
+  export type PlatformFilters = PlatformFilter[];
+  export interface PlatformFramework {
+    /**
+     * The name of the framework.
+     */
+    Name?: String;
+    /**
+     * The version of the framework.
+     */
+    Version?: String;
+  }
+  export type PlatformFrameworks = PlatformFramework[];
+  export type PlatformMaxRecords = number;
+  export type PlatformName = string;
+  export type PlatformOwner = string;
+  export interface PlatformProgrammingLanguage {
+    /**
+     * The name of the programming language.
+     */
+    Name?: String;
+    /**
+     * The version of the programming language.
+     */
+    Version?: String;
+  }
+  export type PlatformProgrammingLanguages = PlatformProgrammingLanguage[];
+  export type PlatformStatus = "Creating"|"Failed"|"Ready"|"Deleting"|"Deleted"|string;
+  export interface PlatformSummary {
+    /**
+     * The ARN of the platform.
+     */
+    PlatformArn?: PlatformArn;
+    /**
+     * The AWS account ID of the person who created the platform.
+     */
+    PlatformOwner?: PlatformOwner;
+    /**
+     * The status of the platform. You can create an environment from the platform once it is ready.
+     */
+    PlatformStatus?: PlatformStatus;
+    /**
+     * The category of platform.
+     */
+    PlatformCategory?: PlatformCategory;
+    /**
+     * The operating system used by the platform.
+     */
+    OperatingSystemName?: OperatingSystemName;
+    /**
+     * The version of the operating system used by the platform.
+     */
+    OperatingSystemVersion?: OperatingSystemVersion;
+    /**
+     * The tiers in which the platform runs.
+     */
+    SupportedTierList?: SupportedTierList;
+    /**
+     * The additions associated with the platform.
+     */
+    SupportedAddonList?: SupportedAddonList;
+  }
+  export type PlatformSummaryList = PlatformSummary[];
+  export type PlatformVersion = string;
   export interface Queue {
     /**
      * The name of the queue.
@@ -1877,6 +2200,10 @@ declare namespace ElasticBeanstalk {
     Status5xx?: NullableInteger;
   }
   export type String = string;
+  export type SupportedAddon = string;
+  export type SupportedAddonList = SupportedAddon[];
+  export type SupportedTier = string;
+  export type SupportedTierList = SupportedTier[];
   export interface SwapEnvironmentCNAMEsMessage {
     /**
      * The ID of the source environment.  Condition: You must specify at least the SourceEnvironmentID or the SourceEnvironmentName. You may also specify both. If you specify the SourceEnvironmentId, you must specify the DestinationEnvironmentId. 
@@ -1901,7 +2228,7 @@ declare namespace ElasticBeanstalk {
      */
     CPUUtilization?: CPUUtilization;
     /**
-     * Load average in the last 1-minute and 5-minute periods. For more information, see Operating System Metrics.
+     * Load average in the last 1-minute, 5-minute, and 15-minute periods. For more information, see Operating System Metrics.
      */
     LoadAverage?: LoadAverage;
   }
@@ -2044,6 +2371,10 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
+     * The ARN of the platform, if used.
+     */
+    PlatformArn?: PlatformArn;
+    /**
      * If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
      */
     OptionSettings?: ConfigurationOptionSettingsList;
@@ -2095,6 +2426,7 @@ declare namespace ElasticBeanstalk {
   export type VersionLabel = string;
   export type VersionLabels = VersionLabel[];
   export type VersionLabelsList = VersionLabel[];
+  export type VirtualizationType = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

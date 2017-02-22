@@ -268,11 +268,11 @@ declare class CloudDirectory extends Service {
    */
   listIndex(callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
   /**
-   * Lists all attributes associated with an object. This also supports common namespace prefix (key) listing. For example, if you want to retrieve all attributes associated with facet1, key can be facet1. If key is empty, all attributes are returned in a paginated list.
+   * Lists all attributes associated with an object. 
    */
   listObjectAttributes(params: CloudDirectory.Types.ListObjectAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectAttributesResponse) => void): Request<CloudDirectory.Types.ListObjectAttributesResponse, AWSError>;
   /**
-   * Lists all attributes associated with an object. This also supports common namespace prefix (key) listing. For example, if you want to retrieve all attributes associated with facet1, key can be facet1. If key is empty, all attributes are returned in a paginated list.
+   * Lists all attributes associated with an object. 
    */
   listObjectAttributes(callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectAttributesResponse) => void): Request<CloudDirectory.Types.ListObjectAttributesResponse, AWSError>;
   /**

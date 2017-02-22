@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.17.0-->
+<!--LATEST=2.18.0-->
 <!--ENTRYINSERT-->
+
+## 2.18.0
+* feature: GameLift: Allow developers to configure global queues for creating GameSessions. Allow PlayerData on PlayerSessions to store player-specific data.
+* feature: Route53: Added support for operations CreateVPCAssociationAuthorization and DeleteVPCAssociationAuthorization to throw a ConcurrentModification error when a conflicting modification occurs in parallel to the authorizations in place for a given hosted zone.
+* feature: ElasticBeanstalk: Elastic Beanstalk adds support for creating and managing custom platform.
 
 ## 2.17.0
 * bugfix: TypeScript: Enable the configuration credentials to be nulled so that the global config is not used.

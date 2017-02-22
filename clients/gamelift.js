@@ -8,6 +8,7 @@ AWS.GameLift = Service.defineService('gamelift', ['2015-10-01']);
 Object.defineProperty(apiLoader.services['gamelift'], '2015-10-01', {
   get: function get() {
     var model = require('../apis/gamelift-2015-10-01.min.json');
+    model.paginators = require('../apis/gamelift-2015-10-01.paginators.json').pagination;
     return model;
   },
   enumerable: true,

@@ -12,59 +12,67 @@ declare class GameLift extends Service {
   constructor(options?: GameLift.Types.ClientConfiguration)
   config: Config & GameLift.Types.ClientConfiguration;
   /**
-   * Creates an alias for a fleet. You can use an alias to anonymize your fleet by referencing an alias instead of a specific fleet when you create game sessions. Amazon GameLift supports two types of routing strategies for aliases: simple and terminal. Use a simple alias to point to an active fleet. Use a terminal alias to display a message to incoming traffic instead of routing players to an active fleet. This option is useful when a game server is no longer supported but you want to provide better messaging than a standard 404 error. To create a fleet alias, specify an alias name, routing strategy, and optional description. If successful, a new alias record is returned, including an alias ID, which you can reference when creating a game session. To reassign the alias to another fleet ID, call UpdateAlias.
+   * Creates an alias and sets a target fleet. A fleet alias can be used in place of a fleet ID, such as when calling CreateGameSession from a game client or game service or adding destinations to a game session queue. By changing an alias's target fleet, you can switch your players to the new fleet without changing any other component. In production, this feature is particularly useful to redirect your player base seamlessly to the latest game server update.  Amazon GameLift supports two types of routing strategies for aliases: simple and terminal. Use a simple alias to point to an active fleet. Use a terminal alias to display a message to incoming traffic instead of routing players to an active fleet. This option is useful when a game server is no longer supported but you want to provide better messaging than a standard 404 error. To create a fleet alias, specify an alias name, routing strategy, and optional description. If successful, a new alias record is returned, including an alias ID, which you can reference when creating a game session. To reassign the alias to another fleet ID, call UpdateAlias.
    */
   createAlias(params: GameLift.Types.CreateAliasInput, callback?: (err: AWSError, data: GameLift.Types.CreateAliasOutput) => void): Request<GameLift.Types.CreateAliasOutput, AWSError>;
   /**
-   * Creates an alias for a fleet. You can use an alias to anonymize your fleet by referencing an alias instead of a specific fleet when you create game sessions. Amazon GameLift supports two types of routing strategies for aliases: simple and terminal. Use a simple alias to point to an active fleet. Use a terminal alias to display a message to incoming traffic instead of routing players to an active fleet. This option is useful when a game server is no longer supported but you want to provide better messaging than a standard 404 error. To create a fleet alias, specify an alias name, routing strategy, and optional description. If successful, a new alias record is returned, including an alias ID, which you can reference when creating a game session. To reassign the alias to another fleet ID, call UpdateAlias.
+   * Creates an alias and sets a target fleet. A fleet alias can be used in place of a fleet ID, such as when calling CreateGameSession from a game client or game service or adding destinations to a game session queue. By changing an alias's target fleet, you can switch your players to the new fleet without changing any other component. In production, this feature is particularly useful to redirect your player base seamlessly to the latest game server update.  Amazon GameLift supports two types of routing strategies for aliases: simple and terminal. Use a simple alias to point to an active fleet. Use a terminal alias to display a message to incoming traffic instead of routing players to an active fleet. This option is useful when a game server is no longer supported but you want to provide better messaging than a standard 404 error. To create a fleet alias, specify an alias name, routing strategy, and optional description. If successful, a new alias record is returned, including an alias ID, which you can reference when creating a game session. To reassign the alias to another fleet ID, call UpdateAlias.
    */
   createAlias(callback?: (err: AWSError, data: GameLift.Types.CreateAliasOutput) => void): Request<GameLift.Types.CreateAliasOutput, AWSError>;
   /**
-   * Initializes a new build record and generates information required to upload a game build to Amazon GameLift. Once the build record has been created and its status is INITIALIZED, you can upload your game build.  Do not use this API action unless you are using your own Amazon Simple Storage Service (Amazon S3) client and need to manually upload your build files. Instead, to create a build, use the CLI command upload-build, which creates a new build record and uploads the build files in one step. (See the Amazon GameLift Developer Guide help on packaging and uploading your build.)   To create a new build, identify the operating system of the game server binaries. All game servers in a build must use the same operating system. Optionally, specify a build name and version; this metadata is stored with other properties in the build record and is displayed in the GameLift console (it is not visible to players). If successful, this action returns the newly created build record along with the Amazon S3 storage location and AWS account credentials. Use the location and credentials to upload your game build.
+   * Creates a new Amazon GameLift build from a set of game server binary files stored in an Amazon Simple Storage Service (Amazon S3) location. When using this API call, you must create a .zip file containing all of the build files and store it in an Amazon S3 bucket under your AWS account. For help on packaging your build files and creating a build, see Uploading Your Game to Amazon GameLift.  Use this API action ONLY if you are storing your game build files in an Amazon S3 bucket in your AWS account. To create a build using files stored in a directory, use the CLI command  upload-build , which uploads the build files from a file location you specify and creates a build.  To create a new build using CreateBuild, identify the storage location and operating system of your game build. You also have the option of specifying a build name and version. If successful, this action creates a new build record with an unique build ID and in INITIALIZED status. Use the API call DescribeBuild to check the status of your build. A build must be in READY status before it can be used to create fleets to host your game.
    */
   createBuild(params: GameLift.Types.CreateBuildInput, callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
-   * Initializes a new build record and generates information required to upload a game build to Amazon GameLift. Once the build record has been created and its status is INITIALIZED, you can upload your game build.  Do not use this API action unless you are using your own Amazon Simple Storage Service (Amazon S3) client and need to manually upload your build files. Instead, to create a build, use the CLI command upload-build, which creates a new build record and uploads the build files in one step. (See the Amazon GameLift Developer Guide help on packaging and uploading your build.)   To create a new build, identify the operating system of the game server binaries. All game servers in a build must use the same operating system. Optionally, specify a build name and version; this metadata is stored with other properties in the build record and is displayed in the GameLift console (it is not visible to players). If successful, this action returns the newly created build record along with the Amazon S3 storage location and AWS account credentials. Use the location and credentials to upload your game build.
+   * Creates a new Amazon GameLift build from a set of game server binary files stored in an Amazon Simple Storage Service (Amazon S3) location. When using this API call, you must create a .zip file containing all of the build files and store it in an Amazon S3 bucket under your AWS account. For help on packaging your build files and creating a build, see Uploading Your Game to Amazon GameLift.  Use this API action ONLY if you are storing your game build files in an Amazon S3 bucket in your AWS account. To create a build using files stored in a directory, use the CLI command  upload-build , which uploads the build files from a file location you specify and creates a build.  To create a new build using CreateBuild, identify the storage location and operating system of your game build. You also have the option of specifying a build name and version. If successful, this action creates a new build record with an unique build ID and in INITIALIZED status. Use the API call DescribeBuild to check the status of your build. A build must be in READY status before it can be used to create fleets to host your game.
    */
   createBuild(callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
-   * Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see Amazon EC2 Instance Types for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the ACTIVE status, it can begin hosting game sessions. To create a new fleet, provide a fleet name, an EC2 instance type, and a build ID of the game build to deploy. You can also configure the new fleet with the following settings: (1) a runtime configuration describing what server processes to run on each instance in the fleet (required to create fleet), (2) access permissions for inbound traffic, (3) fleet-wide game session protection, and (4) the location of default log files for GameLift to upload and store. If the CreateFleet call is successful, Amazon GameLift performs the following tasks:   Creates a fleet record and sets the status to NEW (followed by other statuses as the fleet is activated).   Sets the fleet's capacity to 1 "desired", which causes GameLift to start one new EC2 instance.   Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, GameLift staggers each launch by a few seconds.   Begins writing events to the fleet event log, which can be accessed in the GameLift console.   Sets the fleet's status to ACTIVE once one server process in the fleet is ready to host a game session.   After a fleet is created, use the following actions to change fleet properties and configuration:    UpdateFleetAttributes -- Update fleet metadata, including name and description.    UpdateFleetCapacity -- Increase or decrease the number of instances you want the fleet to maintain.    UpdateFleetPortSettings -- Change the IP address and port ranges that allow access to incoming traffic.    UpdateRuntimeConfiguration -- Change how server processes are launched in the fleet, including launch path, launch parameters, and the number of concurrent processes.  
+   * Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see Amazon EC2 Instance Types for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the ACTIVE status, it can begin hosting game sessions. To create a new fleet, provide a fleet name, an EC2 instance type, and a build ID of the game build to deploy. You can also configure the new fleet with the following settings: (1) a runtime configuration describing what server processes to run on each instance in the fleet (required to create fleet), (2) access permissions for inbound traffic, (3) fleet-wide game session protection, and (4) the location of default log files for Amazon GameLift to upload and store. If the CreateFleet call is successful, Amazon GameLift performs the following tasks:   Creates a fleet record and sets the status to NEW (followed by other statuses as the fleet is activated).   Sets the fleet's capacity to 1 "desired", which causes Amazon GameLift to start one new EC2 instance.   Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, Amazon GameLift staggers each launch by a few seconds.   Begins writing events to the fleet event log, which can be accessed in the Amazon GameLift console.   Sets the fleet's status to ACTIVE once one server process in the fleet is ready to host a game session.   After a fleet is created, use the following actions to change fleet properties and configuration:    UpdateFleetAttributes -- Update fleet metadata, including name and description.    UpdateFleetCapacity -- Increase or decrease the number of instances you want the fleet to maintain.    UpdateFleetPortSettings -- Change the IP address and port ranges that allow access to incoming traffic.    UpdateRuntimeConfiguration -- Change how server processes are launched in the fleet, including launch path, launch parameters, and the number of concurrent processes.    PutScalingPolicy -- Create or update rules that are used to set the fleet's capacity (autoscaling).  
    */
   createFleet(params: GameLift.Types.CreateFleetInput, callback?: (err: AWSError, data: GameLift.Types.CreateFleetOutput) => void): Request<GameLift.Types.CreateFleetOutput, AWSError>;
   /**
-   * Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see Amazon EC2 Instance Types for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the ACTIVE status, it can begin hosting game sessions. To create a new fleet, provide a fleet name, an EC2 instance type, and a build ID of the game build to deploy. You can also configure the new fleet with the following settings: (1) a runtime configuration describing what server processes to run on each instance in the fleet (required to create fleet), (2) access permissions for inbound traffic, (3) fleet-wide game session protection, and (4) the location of default log files for GameLift to upload and store. If the CreateFleet call is successful, Amazon GameLift performs the following tasks:   Creates a fleet record and sets the status to NEW (followed by other statuses as the fleet is activated).   Sets the fleet's capacity to 1 "desired", which causes GameLift to start one new EC2 instance.   Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, GameLift staggers each launch by a few seconds.   Begins writing events to the fleet event log, which can be accessed in the GameLift console.   Sets the fleet's status to ACTIVE once one server process in the fleet is ready to host a game session.   After a fleet is created, use the following actions to change fleet properties and configuration:    UpdateFleetAttributes -- Update fleet metadata, including name and description.    UpdateFleetCapacity -- Increase or decrease the number of instances you want the fleet to maintain.    UpdateFleetPortSettings -- Change the IP address and port ranges that allow access to incoming traffic.    UpdateRuntimeConfiguration -- Change how server processes are launched in the fleet, including launch path, launch parameters, and the number of concurrent processes.  
+   * Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see Amazon EC2 Instance Types for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the ACTIVE status, it can begin hosting game sessions. To create a new fleet, provide a fleet name, an EC2 instance type, and a build ID of the game build to deploy. You can also configure the new fleet with the following settings: (1) a runtime configuration describing what server processes to run on each instance in the fleet (required to create fleet), (2) access permissions for inbound traffic, (3) fleet-wide game session protection, and (4) the location of default log files for Amazon GameLift to upload and store. If the CreateFleet call is successful, Amazon GameLift performs the following tasks:   Creates a fleet record and sets the status to NEW (followed by other statuses as the fleet is activated).   Sets the fleet's capacity to 1 "desired", which causes Amazon GameLift to start one new EC2 instance.   Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, Amazon GameLift staggers each launch by a few seconds.   Begins writing events to the fleet event log, which can be accessed in the Amazon GameLift console.   Sets the fleet's status to ACTIVE once one server process in the fleet is ready to host a game session.   After a fleet is created, use the following actions to change fleet properties and configuration:    UpdateFleetAttributes -- Update fleet metadata, including name and description.    UpdateFleetCapacity -- Increase or decrease the number of instances you want the fleet to maintain.    UpdateFleetPortSettings -- Change the IP address and port ranges that allow access to incoming traffic.    UpdateRuntimeConfiguration -- Change how server processes are launched in the fleet, including launch path, launch parameters, and the number of concurrent processes.    PutScalingPolicy -- Create or update rules that are used to set the fleet's capacity (autoscaling).  
    */
   createFleet(callback?: (err: AWSError, data: GameLift.Types.CreateFleetOutput) => void): Request<GameLift.Types.CreateFleetOutput, AWSError>;
   /**
-   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must be in an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID, and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing session properties, including an IP address. By default, newly created game sessions allow new players to join. Use UpdateGameSession to change the game sessions player session creation policy. When creating a game session on a fleet with a resource limit creation policy, the request should include a creator ID. If none is provided, GameLift does not evaluate the fleet's resource limit creation policy.
+   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID, and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing session properties, including an IP address. By default, newly created game sessions allow new players to join. Use UpdateGameSession to change the game session's player session creation policy. When creating a game session on a fleet with a resource limit creation policy, the request should include a creator ID. If none is provided, Amazon GameLift does not evaluate the fleet's resource limit creation policy.
    */
   createGameSession(params: GameLift.Types.CreateGameSessionInput, callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionOutput) => void): Request<GameLift.Types.CreateGameSessionOutput, AWSError>;
   /**
-   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must be in an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID, and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing session properties, including an IP address. By default, newly created game sessions allow new players to join. Use UpdateGameSession to change the game sessions player session creation policy. When creating a game session on a fleet with a resource limit creation policy, the request should include a creator ID. If none is provided, GameLift does not evaluate the fleet's resource limit creation policy.
+   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID, and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing session properties, including an IP address. By default, newly created game sessions allow new players to join. Use UpdateGameSession to change the game session's player session creation policy. When creating a game session on a fleet with a resource limit creation policy, the request should include a creator ID. If none is provided, Amazon GameLift does not evaluate the fleet's resource limit creation policy.
    */
   createGameSession(callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionOutput) => void): Request<GameLift.Types.CreateGameSessionOutput, AWSError>;
   /**
-   * Adds a player to a game session and creates a player session record. A game session must be in an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot before players can be added to the session. To create a player session, specify a game session ID and player ID. If successful, the player is added to the game session and a new PlayerSession object is returned. 
+   * Establishes a new queue for processing requests for new game sessions. A queue identifies where new game sessions can be hosted--by specifying a list of fleet destinations--and how long a request can remain in the queue waiting to be placed before timing out. Requests for new game sessions are added to a queue by calling StartGameSessionPlacement and referencing the queue name. When processing a request for a game session, Amazon GameLift tries each destination in order until it finds one with available resources to host the new game session. A queue's default order is determined by how destinations are listed. This default order can be overridden in a game session placement request. To create a new queue, provide a name, timeout value, and a list of destinations. If successful, a new queue object is returned.
+   */
+  createGameSessionQueue(params: GameLift.Types.CreateGameSessionQueueInput, callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionQueueOutput) => void): Request<GameLift.Types.CreateGameSessionQueueOutput, AWSError>;
+  /**
+   * Establishes a new queue for processing requests for new game sessions. A queue identifies where new game sessions can be hosted--by specifying a list of fleet destinations--and how long a request can remain in the queue waiting to be placed before timing out. Requests for new game sessions are added to a queue by calling StartGameSessionPlacement and referencing the queue name. When processing a request for a game session, Amazon GameLift tries each destination in order until it finds one with available resources to host the new game session. A queue's default order is determined by how destinations are listed. This default order can be overridden in a game session placement request. To create a new queue, provide a name, timeout value, and a list of destinations. If successful, a new queue object is returned.
+   */
+  createGameSessionQueue(callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionQueueOutput) => void): Request<GameLift.Types.CreateGameSessionQueueOutput, AWSError>;
+  /**
+   * Adds a player to a game session and creates a player session record. Before a player can be added, a game session must have an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot. To add a group of players to a game session, use CreatePlayerSessions. To create a player session, specify a game session ID, player ID, and optionally a string of player data. If successful, the player is added to the game session and a new PlayerSession object is returned. Player sessions cannot be updated. 
    */
   createPlayerSession(params: GameLift.Types.CreatePlayerSessionInput, callback?: (err: AWSError, data: GameLift.Types.CreatePlayerSessionOutput) => void): Request<GameLift.Types.CreatePlayerSessionOutput, AWSError>;
   /**
-   * Adds a player to a game session and creates a player session record. A game session must be in an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot before players can be added to the session. To create a player session, specify a game session ID and player ID. If successful, the player is added to the game session and a new PlayerSession object is returned. 
+   * Adds a player to a game session and creates a player session record. Before a player can be added, a game session must have an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot. To add a group of players to a game session, use CreatePlayerSessions. To create a player session, specify a game session ID, player ID, and optionally a string of player data. If successful, the player is added to the game session and a new PlayerSession object is returned. Player sessions cannot be updated. 
    */
   createPlayerSession(callback?: (err: AWSError, data: GameLift.Types.CreatePlayerSessionOutput) => void): Request<GameLift.Types.CreatePlayerSessionOutput, AWSError>;
   /**
-   * Adds a group of players to a game session. Similar to CreatePlayerSession, this action allows you to add multiple players in a single call, which is useful for games that provide party and/or matchmaking features. A game session must be in an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot before players can be added to the session. To create player sessions, specify a game session ID and a list of player IDs. If successful, the players are added to the game session and a set of new PlayerSession objects is returned. 
+   * Adds a group of players to a game session. This action is useful with a team matching feature. Before players can be added, a game session must have an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot. To add a single player to a game session, use CreatePlayerSession. To create player sessions, specify a game session ID, a list of player IDs, and optionally a set of player data strings. If successful, the players are added to the game session and a set of new PlayerSession objects is returned. Player sessions cannot be updated.
    */
   createPlayerSessions(params: GameLift.Types.CreatePlayerSessionsInput, callback?: (err: AWSError, data: GameLift.Types.CreatePlayerSessionsOutput) => void): Request<GameLift.Types.CreatePlayerSessionsOutput, AWSError>;
   /**
-   * Adds a group of players to a game session. Similar to CreatePlayerSession, this action allows you to add multiple players in a single call, which is useful for games that provide party and/or matchmaking features. A game session must be in an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot before players can be added to the session. To create player sessions, specify a game session ID and a list of player IDs. If successful, the players are added to the game session and a set of new PlayerSession objects is returned. 
+   * Adds a group of players to a game session. This action is useful with a team matching feature. Before players can be added, a game session must have an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot. To add a single player to a game session, use CreatePlayerSession. To create player sessions, specify a game session ID, a list of player IDs, and optionally a set of player data strings. If successful, the players are added to the game session and a set of new PlayerSession objects is returned. Player sessions cannot be updated.
    */
   createPlayerSessions(callback?: (err: AWSError, data: GameLift.Types.CreatePlayerSessionsOutput) => void): Request<GameLift.Types.CreatePlayerSessionsOutput, AWSError>;
   /**
-   * Deletes an alias. This action removes all record of the alias; game clients attempting to access a server process using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.
+   * Deletes a fleet alias. This action removes all record of the alias. Game clients attempting to access a server process using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.
    */
   deleteAlias(params: GameLift.Types.DeleteAliasInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an alias. This action removes all record of the alias; game clients attempting to access a server process using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.
+   * Deletes a fleet alias. This action removes all record of the alias. Game clients attempting to access a server process using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.
    */
   deleteAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -84,6 +92,14 @@ declare class GameLift extends Service {
    */
   deleteFleet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a game session queue. This action means that any StartGameSessionPlacement requests that reference this queue will fail. To delete a queue, specify the queue name.
+   */
+  deleteGameSessionQueue(params: GameLift.Types.DeleteGameSessionQueueInput, callback?: (err: AWSError, data: GameLift.Types.DeleteGameSessionQueueOutput) => void): Request<GameLift.Types.DeleteGameSessionQueueOutput, AWSError>;
+  /**
+   * Deletes a game session queue. This action means that any StartGameSessionPlacement requests that reference this queue will fail. To delete a queue, specify the queue name.
+   */
+  deleteGameSessionQueue(callback?: (err: AWSError, data: GameLift.Types.DeleteGameSessionQueueOutput) => void): Request<GameLift.Types.DeleteGameSessionQueueOutput, AWSError>;
+  /**
    * Deletes a fleet scaling policy. This action means that the policy is no longer in force and removes all record of it. To delete a scaling policy, specify both the scaling policy name and the fleet ID it is associated with.
    */
   deleteScalingPolicy(params: GameLift.Types.DeleteScalingPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -92,11 +108,11 @@ declare class GameLift extends Service {
    */
   deleteScalingPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Retrieves properties for a specified alias. To get the alias, specify an alias ID. If successful, an Alias object is returned.
+   * Retrieves properties for a fleet alias. This operation returns all alias metadata and settings. To get just the fleet ID an alias is currently pointing to, use ResolveAlias.  To get alias properties, specify the alias ID. If successful, an Alias object is returned.
    */
   describeAlias(params: GameLift.Types.DescribeAliasInput, callback?: (err: AWSError, data: GameLift.Types.DescribeAliasOutput) => void): Request<GameLift.Types.DescribeAliasOutput, AWSError>;
   /**
-   * Retrieves properties for a specified alias. To get the alias, specify an alias ID. If successful, an Alias object is returned.
+   * Retrieves properties for a fleet alias. This operation returns all alias metadata and settings. To get just the fleet ID an alias is currently pointing to, use ResolveAlias.  To get alias properties, specify the alias ID. If successful, an Alias object is returned.
    */
   describeAlias(callback?: (err: AWSError, data: GameLift.Types.DescribeAliasOutput) => void): Request<GameLift.Types.DescribeAliasOutput, AWSError>;
   /**
@@ -108,11 +124,11 @@ declare class GameLift extends Service {
    */
   describeBuild(callback?: (err: AWSError, data: GameLift.Types.DescribeBuildOutput) => void): Request<GameLift.Types.DescribeBuildOutput, AWSError>;
   /**
-   * Retrieves the following information for the specified EC2 instance type:   maximum number of instances allowed per AWS account (service limit)   current usage level for the AWS account   Service limits vary depending on region. Available regions for GameLift can be found in the AWS Management Console for GameLift (see the drop-down list in the upper right corner).
+   * Retrieves the following information for the specified EC2 instance type:   maximum number of instances allowed per AWS account (service limit)   current usage level for the AWS account   Service limits vary depending on region. Available regions for Amazon GameLift can be found in the AWS Management Console for Amazon GameLift (see the drop-down list in the upper right corner).
    */
   describeEC2InstanceLimits(params: GameLift.Types.DescribeEC2InstanceLimitsInput, callback?: (err: AWSError, data: GameLift.Types.DescribeEC2InstanceLimitsOutput) => void): Request<GameLift.Types.DescribeEC2InstanceLimitsOutput, AWSError>;
   /**
-   * Retrieves the following information for the specified EC2 instance type:   maximum number of instances allowed per AWS account (service limit)   current usage level for the AWS account   Service limits vary depending on region. Available regions for GameLift can be found in the AWS Management Console for GameLift (see the drop-down list in the upper right corner).
+   * Retrieves the following information for the specified EC2 instance type:   maximum number of instances allowed per AWS account (service limit)   current usage level for the AWS account   Service limits vary depending on region. Available regions for Amazon GameLift can be found in the AWS Management Console for Amazon GameLift (see the drop-down list in the upper right corner).
    */
   describeEC2InstanceLimits(callback?: (err: AWSError, data: GameLift.Types.DescribeEC2InstanceLimitsOutput) => void): Request<GameLift.Types.DescribeEC2InstanceLimitsOutput, AWSError>;
   /**
@@ -164,11 +180,27 @@ declare class GameLift extends Service {
    */
   describeGameSessionDetails(callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionDetailsOutput) => void): Request<GameLift.Types.DescribeGameSessionDetailsOutput, AWSError>;
   /**
-   * Retrieves a set of one or more game sessions and properties. This action can be used in several ways: (1) provide a GameSessionId to request properties for a specific game session; (2) provide a FleetId or an AliasId to request properties for all game sessions running on a fleet. You can also use SearchGameSessions, which allows you to retrieve all game sessions or filter on certain criteria, but only returns game sessions with a status of ACTIVE. If you need to retrieve the protection policy for each game session, use DescribeGameSessionDetails. To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSession object is returned for each session matching the request.
+   * Retrieves properties and current status of a game session placement request. To get game session placement details, specify the placement ID. If successful, a GameSessionPlacement object is returned.
+   */
+  describeGameSessionPlacement(params: GameLift.Types.DescribeGameSessionPlacementInput, callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionPlacementOutput) => void): Request<GameLift.Types.DescribeGameSessionPlacementOutput, AWSError>;
+  /**
+   * Retrieves properties and current status of a game session placement request. To get game session placement details, specify the placement ID. If successful, a GameSessionPlacement object is returned.
+   */
+  describeGameSessionPlacement(callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionPlacementOutput) => void): Request<GameLift.Types.DescribeGameSessionPlacementOutput, AWSError>;
+  /**
+   * Retrieves the properties for one or more game session queues. When requesting multiple queues, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSessionQueue object is returned for each requested queue. When specifying a list of queues, objects are returned only for queues that currently exist in the region.
+   */
+  describeGameSessionQueues(params: GameLift.Types.DescribeGameSessionQueuesInput, callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionQueuesOutput) => void): Request<GameLift.Types.DescribeGameSessionQueuesOutput, AWSError>;
+  /**
+   * Retrieves the properties for one or more game session queues. When requesting multiple queues, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSessionQueue object is returned for each requested queue. When specifying a list of queues, objects are returned only for queues that currently exist in the region.
+   */
+  describeGameSessionQueues(callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionQueuesOutput) => void): Request<GameLift.Types.DescribeGameSessionQueuesOutput, AWSError>;
+  /**
+   * Retrieves a set of one or more game sessions. Request a specific game session or request all game sessions on a fleet. Alternatively, use SearchGameSessions to request a set of active game sessions that are filtered by certain criteria. To retrieve protection policy settings for game sessions, use DescribeGameSessionDetails. To get game sessions, specify one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSession object is returned for each game session matching the request.
    */
   describeGameSessions(params: GameLift.Types.DescribeGameSessionsInput, callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionsOutput) => void): Request<GameLift.Types.DescribeGameSessionsOutput, AWSError>;
   /**
-   * Retrieves a set of one or more game sessions and properties. This action can be used in several ways: (1) provide a GameSessionId to request properties for a specific game session; (2) provide a FleetId or an AliasId to request properties for all game sessions running on a fleet. You can also use SearchGameSessions, which allows you to retrieve all game sessions or filter on certain criteria, but only returns game sessions with a status of ACTIVE. If you need to retrieve the protection policy for each game session, use DescribeGameSessionDetails. To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSession object is returned for each session matching the request.
+   * Retrieves a set of one or more game sessions. Request a specific game session or request all game sessions on a fleet. Alternatively, use SearchGameSessions to request a set of active game sessions that are filtered by certain criteria. To retrieve protection policy settings for game sessions, use DescribeGameSessionDetails. To get game sessions, specify one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSession object is returned for each game session matching the request.
    */
   describeGameSessions(callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionsOutput) => void): Request<GameLift.Types.DescribeGameSessionsOutput, AWSError>;
   /**
@@ -188,11 +220,11 @@ declare class GameLift extends Service {
    */
   describePlayerSessions(callback?: (err: AWSError, data: GameLift.Types.DescribePlayerSessionsOutput) => void): Request<GameLift.Types.DescribePlayerSessionsOutput, AWSError>;
   /**
-   * Retrieves the current runtime configuration for the specified fleet. The runtime configuration tells GameLift how to launch server processes on instances in the fleet.
+   * Retrieves the current runtime configuration for the specified fleet. The runtime configuration tells Amazon GameLift how to launch server processes on instances in the fleet.
    */
   describeRuntimeConfiguration(params: GameLift.Types.DescribeRuntimeConfigurationInput, callback?: (err: AWSError, data: GameLift.Types.DescribeRuntimeConfigurationOutput) => void): Request<GameLift.Types.DescribeRuntimeConfigurationOutput, AWSError>;
   /**
-   * Retrieves the current runtime configuration for the specified fleet. The runtime configuration tells GameLift how to launch server processes on instances in the fleet.
+   * Retrieves the current runtime configuration for the specified fleet. The runtime configuration tells Amazon GameLift how to launch server processes on instances in the fleet.
    */
   describeRuntimeConfiguration(callback?: (err: AWSError, data: GameLift.Types.DescribeRuntimeConfigurationOutput) => void): Request<GameLift.Types.DescribeRuntimeConfigurationOutput, AWSError>;
   /**
@@ -212,11 +244,11 @@ declare class GameLift extends Service {
    */
   getGameSessionLogUrl(callback?: (err: AWSError, data: GameLift.Types.GetGameSessionLogUrlOutput) => void): Request<GameLift.Types.GetGameSessionLogUrlOutput, AWSError>;
   /**
-   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or watching activity in real time.  Access requires credentials that match the operating system of the instance. For a Windows instance, GameLift returns a username and password as strings for use with a Windows Remote Desktop client. For a Linux instance, GameLift returns a username and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request (see the example later in this topic). For more information on remote access, see Remotely Accessing an Instance. To request access to a specific instance, specify the IDs of the instance and the fleet it belongs to. If successful, an InstanceAccess object is returned containing the instance's IP address and a set of credentials.
+   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or watching activity in real time.  Access requires credentials that match the operating system of the instance. For a Windows instance, Amazon GameLift returns a user name and password as strings for use with a Windows Remote Desktop client. For a Linux instance, Amazon GameLift returns a user name and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request. (See the example later in this topic). For more information on remote access, see Remotely Accessing an Instance. To request access to a specific instance, specify the IDs of the instance and the fleet it belongs to. If successful, an InstanceAccess object is returned containing the instance's IP address and a set of credentials.
    */
   getInstanceAccess(params: GameLift.Types.GetInstanceAccessInput, callback?: (err: AWSError, data: GameLift.Types.GetInstanceAccessOutput) => void): Request<GameLift.Types.GetInstanceAccessOutput, AWSError>;
   /**
-   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or watching activity in real time.  Access requires credentials that match the operating system of the instance. For a Windows instance, GameLift returns a username and password as strings for use with a Windows Remote Desktop client. For a Linux instance, GameLift returns a username and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request (see the example later in this topic). For more information on remote access, see Remotely Accessing an Instance. To request access to a specific instance, specify the IDs of the instance and the fleet it belongs to. If successful, an InstanceAccess object is returned containing the instance's IP address and a set of credentials.
+   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or watching activity in real time.  Access requires credentials that match the operating system of the instance. For a Windows instance, Amazon GameLift returns a user name and password as strings for use with a Windows Remote Desktop client. For a Linux instance, Amazon GameLift returns a user name and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request. (See the example later in this topic). For more information on remote access, see Remotely Accessing an Instance. To request access to a specific instance, specify the IDs of the instance and the fleet it belongs to. If successful, an InstanceAccess object is returned containing the instance's IP address and a set of credentials.
    */
   getInstanceAccess(callback?: (err: AWSError, data: GameLift.Types.GetInstanceAccessOutput) => void): Request<GameLift.Types.GetInstanceAccessOutput, AWSError>;
   /**
@@ -252,11 +284,11 @@ declare class GameLift extends Service {
    */
   putScalingPolicy(callback?: (err: AWSError, data: GameLift.Types.PutScalingPolicyOutput) => void): Request<GameLift.Types.PutScalingPolicyOutput, AWSError>;
   /**
-   * Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.  Call this action only if you need credentials for a build created with CreateBuild . This is a rare situation; in most cases, builds are created using the CLI command upload-build, which creates a build record and also uploads build files.   Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the status of that build changes to READY. Once this happens, you must create a brand new build.
+   *  This API call is not currently in use.  Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.
    */
   requestUploadCredentials(params: GameLift.Types.RequestUploadCredentialsInput, callback?: (err: AWSError, data: GameLift.Types.RequestUploadCredentialsOutput) => void): Request<GameLift.Types.RequestUploadCredentialsOutput, AWSError>;
   /**
-   * Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.  Call this action only if you need credentials for a build created with CreateBuild . This is a rare situation; in most cases, builds are created using the CLI command upload-build, which creates a build record and also uploads build files.   Upload credentials are returned when you create the build, but they have a limited lifespan. You can get fresh credentials and use them to re-upload game files until the status of that build changes to READY. Once this happens, you must create a brand new build.
+   *  This API call is not currently in use.  Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.
    */
   requestUploadCredentials(callback?: (err: AWSError, data: GameLift.Types.RequestUploadCredentialsOutput) => void): Request<GameLift.Types.RequestUploadCredentialsOutput, AWSError>;
   /**
@@ -276,11 +308,27 @@ declare class GameLift extends Service {
    */
   searchGameSessions(callback?: (err: AWSError, data: GameLift.Types.SearchGameSessionsOutput) => void): Request<GameLift.Types.SearchGameSessionsOutput, AWSError>;
   /**
-   * Updates properties for an alias. To update properties, specify the alias ID to be updated and provide the information to be changed. To reassign an alias to another fleet, provide an updated routing strategy. If successful, the updated alias record is returned.
+   * Places a request for a new game session in a queue (see CreateGameSessionQueue). When processing a placement request, Amazon GameLift attempts to create a new game session on one of the fleets associated with the queue. If no resources are available, Amazon GameLift tries again with another and so on until resources are found or the placement request times out. A game session placement request can also request player sessions. When a new game session is successfully created, Amazon GameLift creates a player session for each player included in the request. When placing a game session, by default Amazon GameLift tries each fleet in the order they are listed in the queue configuration. Ideally, a queue's destinations are listed in preference order. Alternatively, when requesting a game session with players, you can also provide latency data for each player in relevant regions. Latency data indicates the performance lag a player experiences when connected to a fleet in the region. Amazon GameLift uses latency data to reorder the list of destinations to place the game session in a region with minimal lag. If latency data is provided for multiple players, Amazon GameLift calculates each region's average lag for all players and reorders to get the best game play across all players.  To place a new game session request, specify the queue name and a set of game session properties and settings. Also provide a unique ID (such as a UUID) for the placement. You'll use this ID to track the status of the placement request. Optionally, provide a set of IDs and player data for each player you want to join to the new game session. To optimize game play for the players, also provide latency data for all players. If successful, a new game session placement is created. To track the status of a placement request, call DescribeGameSessionPlacement and check the request's status. If the status is Fulfilled, a new game session has been created and a game session ARN and region are referenced. If the placement request times out, you have the option of resubmitting the request or retrying it with a different queue. 
+   */
+  startGameSessionPlacement(params: GameLift.Types.StartGameSessionPlacementInput, callback?: (err: AWSError, data: GameLift.Types.StartGameSessionPlacementOutput) => void): Request<GameLift.Types.StartGameSessionPlacementOutput, AWSError>;
+  /**
+   * Places a request for a new game session in a queue (see CreateGameSessionQueue). When processing a placement request, Amazon GameLift attempts to create a new game session on one of the fleets associated with the queue. If no resources are available, Amazon GameLift tries again with another and so on until resources are found or the placement request times out. A game session placement request can also request player sessions. When a new game session is successfully created, Amazon GameLift creates a player session for each player included in the request. When placing a game session, by default Amazon GameLift tries each fleet in the order they are listed in the queue configuration. Ideally, a queue's destinations are listed in preference order. Alternatively, when requesting a game session with players, you can also provide latency data for each player in relevant regions. Latency data indicates the performance lag a player experiences when connected to a fleet in the region. Amazon GameLift uses latency data to reorder the list of destinations to place the game session in a region with minimal lag. If latency data is provided for multiple players, Amazon GameLift calculates each region's average lag for all players and reorders to get the best game play across all players.  To place a new game session request, specify the queue name and a set of game session properties and settings. Also provide a unique ID (such as a UUID) for the placement. You'll use this ID to track the status of the placement request. Optionally, provide a set of IDs and player data for each player you want to join to the new game session. To optimize game play for the players, also provide latency data for all players. If successful, a new game session placement is created. To track the status of a placement request, call DescribeGameSessionPlacement and check the request's status. If the status is Fulfilled, a new game session has been created and a game session ARN and region are referenced. If the placement request times out, you have the option of resubmitting the request or retrying it with a different queue. 
+   */
+  startGameSessionPlacement(callback?: (err: AWSError, data: GameLift.Types.StartGameSessionPlacementOutput) => void): Request<GameLift.Types.StartGameSessionPlacementOutput, AWSError>;
+  /**
+   * Cancels a game session placement that is in Pending status. To stop a placement, provide the placement ID values. If successful, the placement is moved to Cancelled status.
+   */
+  stopGameSessionPlacement(params: GameLift.Types.StopGameSessionPlacementInput, callback?: (err: AWSError, data: GameLift.Types.StopGameSessionPlacementOutput) => void): Request<GameLift.Types.StopGameSessionPlacementOutput, AWSError>;
+  /**
+   * Cancels a game session placement that is in Pending status. To stop a placement, provide the placement ID values. If successful, the placement is moved to Cancelled status.
+   */
+  stopGameSessionPlacement(callback?: (err: AWSError, data: GameLift.Types.StopGameSessionPlacementOutput) => void): Request<GameLift.Types.StopGameSessionPlacementOutput, AWSError>;
+  /**
+   * Updates properties for a fleet alias. To update properties, specify the alias ID to be updated and provide the information to be changed. To reassign an alias to another fleet, provide an updated routing strategy. If successful, the updated alias record is returned.
    */
   updateAlias(params: GameLift.Types.UpdateAliasInput, callback?: (err: AWSError, data: GameLift.Types.UpdateAliasOutput) => void): Request<GameLift.Types.UpdateAliasOutput, AWSError>;
   /**
-   * Updates properties for an alias. To update properties, specify the alias ID to be updated and provide the information to be changed. To reassign an alias to another fleet, provide an updated routing strategy. If successful, the updated alias record is returned.
+   * Updates properties for a fleet alias. To update properties, specify the alias ID to be updated and provide the information to be changed. To reassign an alias to another fleet, provide an updated routing strategy. If successful, the updated alias record is returned.
    */
   updateAlias(callback?: (err: AWSError, data: GameLift.Types.UpdateAliasOutput) => void): Request<GameLift.Types.UpdateAliasOutput, AWSError>;
   /**
@@ -324,35 +372,50 @@ declare class GameLift extends Service {
    */
   updateGameSession(callback?: (err: AWSError, data: GameLift.Types.UpdateGameSessionOutput) => void): Request<GameLift.Types.UpdateGameSessionOutput, AWSError>;
   /**
-   * Updates the current runtime configuration for the specified fleet, which tells GameLift how to launch server processes on instances in the fleet. You can update a fleet's runtime configuration at any time after the fleet is created; it does not need to be in an ACTIVE status. To update runtime configuration, specify the fleet ID and provide a RuntimeConfiguration object with the updated collection of server process configurations. Each instance in a GameLift fleet checks regularly for an updated runtime configuration and changes how it launches server processes to comply with the latest version. Existing server processes are not affected by the update; they continue to run until they end, while GameLift simply adds new server processes to fit the current runtime configuration. As a result, the runtime configuration changes are applied gradually as existing processes shut down and new processes are launched in GameLift's normal process recycling activity.
+   * Updates settings for a game session queue, which determines how new game session requests in the queue are processed. To update settings, specify the queue name to be updated and provide the new settings. When updating destinations, provide a complete list of destinations.
+   */
+  updateGameSessionQueue(params: GameLift.Types.UpdateGameSessionQueueInput, callback?: (err: AWSError, data: GameLift.Types.UpdateGameSessionQueueOutput) => void): Request<GameLift.Types.UpdateGameSessionQueueOutput, AWSError>;
+  /**
+   * Updates settings for a game session queue, which determines how new game session requests in the queue are processed. To update settings, specify the queue name to be updated and provide the new settings. When updating destinations, provide a complete list of destinations.
+   */
+  updateGameSessionQueue(callback?: (err: AWSError, data: GameLift.Types.UpdateGameSessionQueueOutput) => void): Request<GameLift.Types.UpdateGameSessionQueueOutput, AWSError>;
+  /**
+   * Updates the current runtime configuration for the specified fleet, which tells Amazon GameLift how to launch server processes on instances in the fleet. You can update a fleet's runtime configuration at any time after the fleet is created; it does not need to be in an ACTIVE status. To update runtime configuration, specify the fleet ID and provide a RuntimeConfiguration object with the updated collection of server process configurations. Each instance in a Amazon GameLift fleet checks regularly for an updated runtime configuration and changes how it launches server processes to comply with the latest version. Existing server processes are not affected by the update; they continue to run until they end, while Amazon GameLift simply adds new server processes to fit the current runtime configuration. As a result, the runtime configuration changes are applied gradually as existing processes shut down and new processes are launched in Amazon GameLift's normal process recycling activity.
    */
   updateRuntimeConfiguration(params: GameLift.Types.UpdateRuntimeConfigurationInput, callback?: (err: AWSError, data: GameLift.Types.UpdateRuntimeConfigurationOutput) => void): Request<GameLift.Types.UpdateRuntimeConfigurationOutput, AWSError>;
   /**
-   * Updates the current runtime configuration for the specified fleet, which tells GameLift how to launch server processes on instances in the fleet. You can update a fleet's runtime configuration at any time after the fleet is created; it does not need to be in an ACTIVE status. To update runtime configuration, specify the fleet ID and provide a RuntimeConfiguration object with the updated collection of server process configurations. Each instance in a GameLift fleet checks regularly for an updated runtime configuration and changes how it launches server processes to comply with the latest version. Existing server processes are not affected by the update; they continue to run until they end, while GameLift simply adds new server processes to fit the current runtime configuration. As a result, the runtime configuration changes are applied gradually as existing processes shut down and new processes are launched in GameLift's normal process recycling activity.
+   * Updates the current runtime configuration for the specified fleet, which tells Amazon GameLift how to launch server processes on instances in the fleet. You can update a fleet's runtime configuration at any time after the fleet is created; it does not need to be in an ACTIVE status. To update runtime configuration, specify the fleet ID and provide a RuntimeConfiguration object with the updated collection of server process configurations. Each instance in a Amazon GameLift fleet checks regularly for an updated runtime configuration and changes how it launches server processes to comply with the latest version. Existing server processes are not affected by the update; they continue to run until they end, while Amazon GameLift simply adds new server processes to fit the current runtime configuration. As a result, the runtime configuration changes are applied gradually as existing processes shut down and new processes are launched in Amazon GameLift's normal process recycling activity.
    */
   updateRuntimeConfiguration(callback?: (err: AWSError, data: GameLift.Types.UpdateRuntimeConfigurationOutput) => void): Request<GameLift.Types.UpdateRuntimeConfigurationOutput, AWSError>;
 }
 declare namespace GameLift {
   export interface Alias {
     /**
-     * Unique identifier for a fleet alias.
+     * Unique identifier for an alias; alias IDs are unique within a region.
      */
     AliasId?: AliasId;
     /**
-     * Descriptive label associated with an alias. Alias names do not need to be unique.
+     * Descriptive label that is associated with an alias. Alias names do not need to be unique.
      */
     Name?: NonBlankAndLengthConstraintString;
+    /**
+     * Unique identifier for an alias; alias ARNs are unique across all regions.
+     */
+    AliasArn?: ArnStringModel;
     /**
      * Human-readable description of an alias.
      */
     Description?: FreeText;
+    /**
+     * Alias configuration for the alias, including routing type and settings.
+     */
     RoutingStrategy?: RoutingStrategy;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     CreationTime?: Timestamp;
     /**
-     * Time stamp indicating when this data object was last modified. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was last modified. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     LastUpdatedTime?: Timestamp;
   }
@@ -379,11 +442,11 @@ declare namespace GameLift {
      */
     BuildId?: BuildId;
     /**
-     * Descriptive label associated with a build. Build names do not need to be unique. It can be set using CreateBuild or UpdateBuild.
+     * Descriptive label that is associated with a build. Build names do not need to be unique. It can be set using CreateBuild or UpdateBuild.
      */
     Name?: FreeText;
     /**
-     * Version associated with this build. Version strings do not need to be unique to a build. This value can be set using CreateBuild or UpdateBuild.
+     * Version that is associated with this build. Version strings do not need to be unique. This value can be set using CreateBuild or UpdateBuild.
      */
     Version?: FreeText;
     /**
@@ -399,7 +462,7 @@ declare namespace GameLift {
      */
     OperatingSystem?: OperatingSystem;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     CreationTime?: Timestamp;
   }
@@ -409,7 +472,7 @@ declare namespace GameLift {
   export type ComparisonOperatorType = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
   export interface CreateAliasInput {
     /**
-     * Descriptive label associated with an alias. Alias names do not need to be unique.
+     * Descriptive label that is associated with an alias. Alias names do not need to be unique.
      */
     Name: NonBlankAndLengthConstraintString;
     /**
@@ -417,48 +480,51 @@ declare namespace GameLift {
      */
     Description?: NonZeroAndMaxString;
     /**
-     * Object specifying the fleet and routing type to use for the alias.
+     * Object that specifies the fleet and routing type to use for the alias.
      */
     RoutingStrategy: RoutingStrategy;
   }
   export interface CreateAliasOutput {
     /**
-     * Object containing the newly created alias record.
+     * Object that describes the newly created alias record.
      */
     Alias?: Alias;
   }
   export interface CreateBuildInput {
     /**
-     * Descriptive label associated with a build. Build names do not need to be unique. A build name can be changed later using UpdateBuild .
+     * Descriptive label that is associated with a build. Build names do not need to be unique. You can use UpdateBuild to change this value later. 
      */
     Name?: NonZeroAndMaxString;
     /**
-     * Version associated with this build. Version strings do not need to be unique to a build. A build version can be changed later using UpdateBuild .
+     * Version that is associated with this build. Version strings do not need to be unique. You can use UpdateBuild to change this value later. 
      */
     Version?: NonZeroAndMaxString;
+    /**
+     * Amazon S3 location of the game build files to be uploaded. The S3 bucket must be owned by the same AWS account that you're using to manage Amazon GameLift. It also must in the same region that you want to create a new build in. Before calling CreateBuild with this location, you must allow Amazon GameLift to access your Amazon S3 bucket (see Create a Build with Files in Amazon S3).
+     */
     StorageLocation?: S3Location;
     /**
-     * Operating system that the game server binaries are built to run on. This value determines the type of fleet resources that you can use for this build.
+     * Operating system that the game server binaries are built to run on. This value determines the type of fleet resources that you can use for this build. If your game build contains multiple executables, they all must run on the same operating system.
      */
     OperatingSystem?: OperatingSystem;
   }
   export interface CreateBuildOutput {
     /**
-     * Set of properties for the newly created build.
+     * The newly created build record, including a unique build ID and status. 
      */
     Build?: Build;
     /**
-     * AWS credentials required when uploading a game build to the storage location. These credentials have a limited lifespan and are valid only for the build they were issued for. If you need to get fresh credentials, call RequestUploadCredentials .
+     * This element is not currently in use.
      */
     UploadCredentials?: AwsCredentials;
     /**
-     * Amazon S3 path and key, identifying where the game build files are stored.
+     * Amazon S3 location specified in the request.
      */
     StorageLocation?: S3Location;
   }
   export interface CreateFleetInput {
     /**
-     * Descriptive label associated with a fleet. Fleet names do not need to be unique.
+     * Descriptive label that is associated with a fleet. Fleet names do not need to be unique.
      */
     Name: NonZeroAndMaxString;
     /**
@@ -466,7 +532,7 @@ declare namespace GameLift {
      */
     Description?: NonZeroAndMaxString;
     /**
-     * Unique identifier of the build to be deployed on the new fleet. The build must have been successfully uploaded to GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.
+     * Unique identifier for a build to be deployed on the new fleet. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.
      */
     BuildId: BuildId;
     /**
@@ -478,11 +544,11 @@ declare namespace GameLift {
      */
     ServerLaunchParameters?: NonZeroAndMaxString;
     /**
-     * Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the Amazon GameLift Developer Guide. If no default log path for a fleet is specified, GameLift will automatically upload logs stored on each instance at C:\game\logs (for Windows) or /local/game/logs (for Linux). Use the GameLift console to access stored logs. 
+     * This parameter is no longer used. Instead, to specify where Amazon GameLift should store log files once a server process shuts down, use the Amazon GameLift server API ProcessReady() and specify one or more directory paths in logParameters. See more information in the Server API Reference. 
      */
     LogPaths?: StringList;
     /**
-     * Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.
+     * Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.
      */
     EC2InstanceType: EC2InstanceType;
     /**
@@ -510,11 +576,11 @@ declare namespace GameLift {
   }
   export interface CreateGameSessionInput {
     /**
-     * Unique identifier for a fleet. Each request must reference either a fleet ID or alias ID, but not both.
+     * Unique identifier for a fleet to create a game session in. Each request must reference either a fleet ID or alias ID, but not both.
      */
     FleetId?: FleetId;
     /**
-     * Unique identifier for a fleet alias. Each request must reference either a fleet ID or alias ID, but not both.
+     * Unique identifier for an alias associated with the fleet to create a game session in. Each request must reference either a fleet ID or alias ID, but not both.
      */
     AliasId?: AliasId;
     /**
@@ -522,53 +588,81 @@ declare namespace GameLift {
      */
     MaximumPlayerSessionCount: WholeNumber;
     /**
-     * Descriptive label associated with a game session. Session names do not need to be unique.
+     * Descriptive label that is associated with a game session. Session names do not need to be unique.
      */
     Name?: NonZeroAndMaxString;
     /**
-     * Set of properties used to administer a game session. These properties are passed to the server process hosting it.
+     * Set of developer-defined properties for a game session. These properties are passed to the server process hosting the game session.
      */
     GameProperties?: GamePropertyList;
     /**
-     * Player ID identifying the person or entity creating the game session. This ID is used to enforce a resource protection policy (if one exists) that limits the number of concurrent active game sessions one player can have.
+     * $player-id; or entity creating the game session. This ID is used to enforce a resource protection policy (if one exists) that limits the number of concurrent active game sessions one player can have.
      */
     CreatorId?: NonZeroAndMaxString;
     /**
-     * Custom string to include in the game session ID, with a maximum length of 48 characters. If this parameter is set, GameLift creates a game session ID in the following format: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;custom ID string&gt;". For example, this full game session ID: "arn:aws:gamelift:us-west-2::gamesession/fleet-2ec2aae5-c2c7-43ca-b19d-8249fe5fddf2/my-game-session" includes the custom ID string "my-game-session". If this parameter is not set, GameLift creates a game session ID in the same format with an autogenerated ID string. 
+     * Custom string to include in the game session ID, with a maximum length of 48 characters. A game session ID has the following format: "arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet ID&gt;/&lt;game session ID&gt;". If provided, the custom string is used for the game session ID string. This value cannot be updated once a game session is created.
      */
     GameSessionId?: IdStringModel;
   }
   export interface CreateGameSessionOutput {
     /**
-     * Object containing the newly created game session record.
+     * Object that describes the newly created game session record.
      */
     GameSession?: GameSession;
   }
+  export interface CreateGameSessionQueueInput {
+    /**
+     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     */
+    Name: GameSessionQueueName;
+    /**
+     * Maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status.
+     */
+    TimeoutInSeconds?: WholeNumber;
+    /**
+     * List of fleets that can be used to fulfill game session placement requests in the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN. Destinations are listed in default preference order.
+     */
+    Destinations?: GameSessionQueueDestinationList;
+  }
+  export interface CreateGameSessionQueueOutput {
+    /**
+     * Object that describes the newly created game session queue.
+     */
+    GameSessionQueue?: GameSessionQueue;
+  }
   export interface CreatePlayerSessionInput {
     /**
-     * Unique identifier for the game session to add a player to. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
+     * Unique identifier for the game session to add a player to.
      */
     GameSessionId: ArnStringModel;
     /**
-     * Unique identifier for the player to be added.
+     * Unique identifier for a player. Player IDs are developer-defined.
      */
     PlayerId: NonZeroAndMaxString;
+    /**
+     * Developer-defined information related to a player. Amazon GameLift does not use this data, so it can be formatted as needed for use in the game.
+     */
+    PlayerData?: PlayerData;
   }
   export interface CreatePlayerSessionOutput {
     /**
-     * Object containing the newly created player session record.
+     * Object that describes the newly created player session record.
      */
     PlayerSession?: PlayerSession;
   }
   export interface CreatePlayerSessionsInput {
     /**
-     * Unique identifier for the game session to add players to. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
+     * Unique identifier for the game session to add players to.
      */
     GameSessionId: ArnStringModel;
     /**
      * List of unique identifiers for the players to be added.
      */
     PlayerIds: PlayerIdList;
+    /**
+     * Map of string pairs, each specifying a player ID and a set of developer-defined information related to the player. Amazon GameLift does not use this data, so it can be formatted as needed for use in the game. Player data strings for player IDs not included in the PlayerIds parameter are ignored. 
+     */
+    PlayerDataMap?: PlayerDataMap;
   }
   export interface CreatePlayerSessionsOutput {
     /**
@@ -584,23 +678,31 @@ declare namespace GameLift {
   }
   export interface DeleteBuildInput {
     /**
-     * Unique identifier for the build you want to delete.
+     * Unique identifier for a build to delete.
      */
     BuildId: BuildId;
   }
   export interface DeleteFleetInput {
     /**
-     * Unique identifier for the fleet you want to delete.
+     * Unique identifier for a fleet to be deleted.
      */
     FleetId: FleetId;
   }
+  export interface DeleteGameSessionQueueInput {
+    /**
+     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     */
+    Name: GameSessionQueueName;
+  }
+  export interface DeleteGameSessionQueueOutput {
+  }
   export interface DeleteScalingPolicyInput {
     /**
-     * Descriptive label associated with a scaling policy. Policy names do not need to be unique.
+     * Descriptive label that is associated with a scaling policy. Policy names do not need to be unique.
      */
     Name: NonZeroAndMaxString;
     /**
-     * Unique identifier for a fleet.
+     * Unique identifier for a fleet to be deleted.
      */
     FleetId: FleetId;
   }
@@ -612,13 +714,13 @@ declare namespace GameLift {
   }
   export interface DescribeAliasOutput {
     /**
-     * Object containing the requested alias.
+     * Object that contains the requested alias.
      */
     Alias?: Alias;
   }
   export interface DescribeBuildInput {
     /**
-     * Unique identifier of the build that you want to retrieve properties for.
+     * Unique identifier for a build to retrieve properties for.
      */
     BuildId: BuildId;
   }
@@ -630,19 +732,19 @@ declare namespace GameLift {
   }
   export interface DescribeEC2InstanceLimitsInput {
     /**
-     * Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions. Leave this parameter blank to retrieve limits for all types.
+     * Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions. Leave this parameter blank to retrieve limits for all types.
      */
     EC2InstanceType?: EC2InstanceType;
   }
   export interface DescribeEC2InstanceLimitsOutput {
     /**
-     * Object containing the maximum number of instances for the specified instance type.
+     * Object that contains the maximum number of instances for the specified instance type.
      */
     EC2InstanceLimits?: EC2InstanceLimitList;
   }
   export interface DescribeFleetAttributesInput {
     /**
-     * Unique identifiers for the fleet(s) that you want to retrieve attributes for. To request attributes for all fleets, leave this parameter empty.
+     * Unique identifier for a fleet(s) to retrieve attributes for. To request attributes for all fleets, leave this parameter empty.
      */
     FleetIds?: FleetIdList;
     /**
@@ -650,7 +752,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -660,13 +762,13 @@ declare namespace GameLift {
      */
     FleetAttributes?: FleetAttributesList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface DescribeFleetCapacityInput {
     /**
-     * Unique identifier for the fleet(s) you want to retrieve capacity information for. To request capacity information for all fleets, leave this parameter empty.
+     * Unique identifier for a fleet(s) to retrieve capacity information for. To request capacity information for all fleets, leave this parameter empty.
      */
     FleetIds?: FleetIdList;
     /**
@@ -674,7 +776,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -684,13 +786,13 @@ declare namespace GameLift {
      */
     FleetCapacity?: FleetCapacityList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface DescribeFleetEventsInput {
     /**
-     * Unique identifier for the fleet to get event logs for.
+     * Unique identifier for a fleet to get event logs for.
      */
     FleetId: FleetId;
     /**
@@ -706,7 +808,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -716,25 +818,25 @@ declare namespace GameLift {
      */
     Events?: EventList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface DescribeFleetPortSettingsInput {
     /**
-     * Unique identifier for the fleet you want to retrieve port settings for.
+     * Unique identifier for a fleet to retrieve port settings for.
      */
     FleetId: FleetId;
   }
   export interface DescribeFleetPortSettingsOutput {
     /**
-     * Object containing port settings for the requested fleet ID.
+     * Object that contains port settings for the requested fleet ID.
      */
     InboundPermissions?: IpPermissionsList;
   }
   export interface DescribeFleetUtilizationInput {
     /**
-     * Unique identifier for the fleet(s) you want to retrieve utilization data for. To request utilization data for all fleets, leave this parameter empty.
+     * Unique identifier for a fleet(s) to retrieve utilization data for. To request utilization data for all fleets, leave this parameter empty.
      */
     FleetIds?: FleetIdList;
     /**
@@ -742,7 +844,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -752,21 +854,21 @@ declare namespace GameLift {
      */
     FleetUtilization?: FleetUtilizationList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface DescribeGameSessionDetailsInput {
     /**
-     * Unique identifier for a fleet. Specify a fleet to retrieve information on all game sessions active on the fleet.
+     * Unique identifier for a fleet to retrieve all game sessions active on the fleet.
      */
     FleetId?: FleetId;
     /**
-     * Unique identifier for the game session to retrieve information on. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
+     * Unique identifier for the game session to retrieve.
      */
     GameSessionId?: ArnStringModel;
     /**
-     * Unique identifier for a fleet alias. Specify an alias to retrieve information on all game sessions active on the fleet.
+     * Unique identifier for an alias associated with the fleet to retrieve all game sessions for.
      */
     AliasId?: AliasId;
     /**
@@ -778,7 +880,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -788,21 +890,57 @@ declare namespace GameLift {
      */
     GameSessionDetails?: GameSessionDetailList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     */
+    NextToken?: NonZeroAndMaxString;
+  }
+  export interface DescribeGameSessionPlacementInput {
+    /**
+     * Unique identifier for a game session placement to retrieve.
+     */
+    PlacementId: IdStringModel;
+  }
+  export interface DescribeGameSessionPlacementOutput {
+    /**
+     * Object that describes the requested game session placement.
+     */
+    GameSessionPlacement?: GameSessionPlacement;
+  }
+  export interface DescribeGameSessionQueuesInput {
+    /**
+     * List of queue names to retrieve information for. To request settings for all queues, leave this parameter empty.
+     */
+    Names?: GameSessionQueueNameList;
+    /**
+     * Maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    Limit?: PositiveInteger;
+    /**
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     */
+    NextToken?: NonZeroAndMaxString;
+  }
+  export interface DescribeGameSessionQueuesOutput {
+    /**
+     * Collection of objects that describes the requested game session queues.
+     */
+    GameSessionQueues?: GameSessionQueueList;
+    /**
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface DescribeGameSessionsInput {
     /**
-     * Unique identifier for a fleet. Specify a fleet to retrieve information on all game sessions active on the fleet.
+     * Unique identifier for a fleet to retrieve all game sessions for.
      */
     FleetId?: FleetId;
     /**
-     * Unique identifier for the game session to retrieve information on. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
+     * Unique identifier for the game session to retrieve.
      */
     GameSessionId?: ArnStringModel;
     /**
-     * Unique identifier for a fleet alias. Specify an alias to retrieve information on all game sessions active on the fleet.
+     * Unique identifier for an alias associated with the fleet to retrieve all game sessions for. 
      */
     AliasId?: AliasId;
     /**
@@ -814,7 +952,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -824,17 +962,17 @@ declare namespace GameLift {
      */
     GameSessions?: GameSessionList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface DescribeInstancesInput {
     /**
-     * Unique identifier for a fleet. Specify the fleet to retrieve instance information for.
+     * Unique identifier for a fleet to retrieve instance information for.
      */
     FleetId: FleetId;
     /**
-     * Unique identifier for an instance. Specify an instance to retrieve information for or leave blank to get information on all instances in the fleet.
+     * Unique identifier for an instance to retrieve. Specify an instance ID or leave blank to retrieve all instances in the fleet.
      */
     InstanceId?: InstanceId;
     /**
@@ -842,7 +980,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -852,21 +990,21 @@ declare namespace GameLift {
      */
     Instances?: InstanceList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface DescribePlayerSessionsInput {
     /**
-     * Unique identifier for the game session to get player sessions for. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
+     * Unique identifier for the game session to retrieve player sessions for.
      */
     GameSessionId?: ArnStringModel;
     /**
-     * Unique identifier for a player.
+     * Unique identifier for a player to retrieve player sessions for.
      */
     PlayerId?: NonZeroAndMaxString;
     /**
-     * Unique identifier for a player session.
+     * Unique identifier for a player session to retrieve.
      */
     PlayerSessionId?: PlayerSessionId;
     /**
@@ -878,7 +1016,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. If a player session ID is specified, this parameter is ignored.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. If a player session ID is specified, this parameter is ignored.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -888,13 +1026,13 @@ declare namespace GameLift {
      */
     PlayerSessions?: PlayerSessionList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface DescribeRuntimeConfigurationInput {
     /**
-     * Unique identifier of the fleet to get the runtime configuration for.
+     * Unique identifier for a fleet to get the runtime configuration for.
      */
     FleetId: FleetId;
   }
@@ -906,7 +1044,7 @@ declare namespace GameLift {
   }
   export interface DescribeScalingPoliciesInput {
     /**
-     * Unique identifier for a fleet. Specify the fleet to retrieve scaling policies for.
+     * Unique identifier for a fleet to retrieve scaling policies for.
      */
     FleetId: FleetId;
     /**
@@ -918,7 +1056,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -928,10 +1066,21 @@ declare namespace GameLift {
      */
     ScalingPolicies?: ScalingPolicyList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
+  export interface DesiredPlayerSession {
+    /**
+     * Unique identifier for a player to associate with the player session.
+     */
+    PlayerId?: NonZeroAndMaxString;
+    /**
+     * Developer-defined information related to a player. Amazon GameLift does not use this data, so it can be formatted as needed for use in the game.
+     */
+    PlayerData?: PlayerData;
+  }
+  export type DesiredPlayerSessionList = DesiredPlayerSession[];
   export type Double = number;
   export interface EC2InstanceCounts {
     /**
@@ -965,7 +1114,7 @@ declare namespace GameLift {
   }
   export interface EC2InstanceLimit {
     /**
-     * Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.
+     * Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.
      */
     EC2InstanceType?: EC2InstanceType;
     /**
@@ -985,7 +1134,7 @@ declare namespace GameLift {
      */
     EventId?: NonZeroAndMaxString;
     /**
-     * Unique identifier for the resource, such as a fleet ID.
+     * Unique identifier for an event resource, such as a fleet ID.
      */
     ResourceId?: NonZeroAndMaxString;
     /**
@@ -997,11 +1146,11 @@ declare namespace GameLift {
      */
     Message?: NonEmptyString;
     /**
-     * Time stamp indicating when this event occurred. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this event occurred. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     EventTime?: Timestamp;
   }
-  export type EventCode = "GENERIC_EVENT"|"FLEET_CREATED"|"FLEET_DELETED"|"FLEET_SCALING_EVENT"|"FLEET_STATE_DOWNLOADING"|"FLEET_STATE_VALIDATING"|"FLEET_STATE_BUILDING"|"FLEET_STATE_ACTIVATING"|"FLEET_STATE_ACTIVE"|"FLEET_STATE_ERROR"|"FLEET_INITIALIZATION_FAILED"|"FLEET_BINARY_DOWNLOAD_FAILED"|"FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"|"FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"|"FLEET_VALIDATION_TIMED_OUT"|"FLEET_ACTIVATION_FAILED"|"FLEET_ACTIVATION_FAILED_NO_INSTANCES"|"FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"|"SERVER_PROCESS_INVALID_PATH"|"SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT"|"SERVER_PROCESS_PROCESS_READY_TIMEOUT"|"SERVER_PROCESS_CRASHED"|"SERVER_PROCESS_TERMINATED_UNHEALTHY"|"SERVER_PROCESS_FORCE_TERMINATED"|"SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"|string;
+  export type EventCode = "GENERIC_EVENT"|"FLEET_CREATED"|"FLEET_DELETED"|"FLEET_SCALING_EVENT"|"FLEET_STATE_DOWNLOADING"|"FLEET_STATE_VALIDATING"|"FLEET_STATE_BUILDING"|"FLEET_STATE_ACTIVATING"|"FLEET_STATE_ACTIVE"|"FLEET_STATE_ERROR"|"FLEET_INITIALIZATION_FAILED"|"FLEET_BINARY_DOWNLOAD_FAILED"|"FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"|"FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"|"FLEET_VALIDATION_TIMED_OUT"|"FLEET_ACTIVATION_FAILED"|"FLEET_ACTIVATION_FAILED_NO_INSTANCES"|"FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"|"SERVER_PROCESS_INVALID_PATH"|"SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT"|"SERVER_PROCESS_PROCESS_READY_TIMEOUT"|"SERVER_PROCESS_CRASHED"|"SERVER_PROCESS_TERMINATED_UNHEALTHY"|"SERVER_PROCESS_FORCE_TERMINATED"|"SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"|"GAME_SESSION_ACTIVATION_TIMEOUT"|string;
   export type EventList = Event[];
   export interface FleetAttributes {
     /**
@@ -1009,23 +1158,27 @@ declare namespace GameLift {
      */
     FleetId?: FleetId;
     /**
+     * Identifier for a fleet that is unique across all regions.
+     */
+    FleetArn?: ArnStringModel;
+    /**
      * Human-readable description of the fleet.
      */
     Description?: NonZeroAndMaxString;
     /**
-     * Descriptive label associated with a fleet. Fleet names do not need to be unique.
+     * Descriptive label that is associated with a fleet. Fleet names do not need to be unique.
      */
     Name?: NonZeroAndMaxString;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     CreationTime?: Timestamp;
     /**
-     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     TerminationTime?: Timestamp;
     /**
-     * Current status of the fleet. Possible fleet statuses include the following:    NEW – A new fleet has been defined and desired instances is set to 1.     DOWNLOADING/VALIDATING/BUILDING/ACTIVATING – GameLift is setting up the new fleet, creating new instances with the game build and starting server processes.    ACTIVE – Hosts can now accept game sessions.    ERROR – An error occurred when downloading, validating, building, or activating the fleet.    DELETING – Hosts are responding to a delete fleet request.    TERMINATED – The fleet no longer exists.  
+     * Current status of the fleet. Possible fleet statuses include the following:    NEW – A new fleet has been defined and desired instances is set to 1.     DOWNLOADING/VALIDATING/BUILDING/ACTIVATING – Amazon GameLift is setting up the new fleet, creating new instances with the game build and starting server processes.    ACTIVE – Hosts can now accept game sessions.    ERROR – An error occurred when downloading, validating, building, or activating the fleet.    DELETING – Hosts are responding to a delete fleet request.    TERMINATED – The fleet no longer exists.  
      */
     Status?: FleetStatus;
     /**
@@ -1033,15 +1186,15 @@ declare namespace GameLift {
      */
     BuildId?: BuildId;
     /**
-     * Path to a game server executable in the fleet's build, specified for fleets created prior to 2016-08-04 (or AWS SDK v. 0.12.16). Server launch paths for fleets created after this date are specified in the fleet's  RuntimeConfiguration .
+     * Path to a game server executable in the fleet's build, specified for fleets created prior to 2016-08-04 (or AWS SDK v. 0.12.16). Server launch paths for fleets created after this date are specified in the fleet's RuntimeConfiguration.
      */
     ServerLaunchPath?: NonZeroAndMaxString;
     /**
-     * Game server launch parameters specified for fleets created prior to 2016-08-04 (or AWS SDK v. 0.12.16). Server launch parameters for fleets created after this date are specified in the fleet's  RuntimeConfiguration .
+     * Game server launch parameters specified for fleets created prior to 2016-08-04 (or AWS SDK v. 0.12.16). Server launch parameters for fleets created after this date are specified in the fleet's RuntimeConfiguration.
      */
     ServerLaunchParameters?: NonZeroAndMaxString;
     /**
-     * Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the Amazon GameLift Developer Guide. If no default log path for a fleet is specified, GameLift will automatically upload logs that are stored on each instance at C:\game\logs (for Windows) or /local/game/logs (for Linux). Use the GameLift console to access stored logs. 
+     * Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the Amazon GameLift Developer Guide. If no default log path for a fleet is specified, Amazon GameLift will automatically upload logs that are stored on each instance at C:\game\logs (for Windows) or /local/game/logs (for Linux). Use the Amazon GameLift console to access stored logs. 
      */
     LogPaths?: StringList;
     /**
@@ -1064,7 +1217,7 @@ declare namespace GameLift {
      */
     FleetId?: FleetId;
     /**
-     * Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.
+     * Name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.
      */
     InstanceType?: EC2InstanceType;
     /**
@@ -1099,6 +1252,7 @@ declare namespace GameLift {
     MaximumPlayerSessionCount?: WholeNumber;
   }
   export type FleetUtilizationList = FleetUtilization[];
+  export type Float = number;
   export type FreeText = string;
   export interface GameProperty {
     /**
@@ -1115,23 +1269,23 @@ declare namespace GameLift {
   export type GamePropertyValue = string;
   export interface GameSession {
     /**
-     * Unique identifier for a game session. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
+     * Unique identifier for the game session. A game session ID has the following format: "arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet ID&gt;/&lt;game session ID&gt;".
      */
     GameSessionId?: NonZeroAndMaxString;
     /**
-     * Descriptive label associated with a game session. Session names do not need to be unique.
+     * Descriptive label that is associated with a game session. Session names do not need to be unique.
      */
     Name?: NonZeroAndMaxString;
     /**
-     * Unique identifier for a fleet.
+     * Unique identifier for a fleet the game session is running on.
      */
     FleetId?: FleetId;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     CreationTime?: Timestamp;
     /**
-     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     TerminationTime?: Timestamp;
     /**
@@ -1139,23 +1293,23 @@ declare namespace GameLift {
      */
     CurrentPlayerSessionCount?: WholeNumber;
     /**
-     * Maximum number of players allowed in the game session.
+     * Maximum number of players that can be connected simultaneously to the game session.
      */
     MaximumPlayerSessionCount?: WholeNumber;
     /**
-     * Current status of the game session. A game session must be in an ACTIVE status to have player sessions.
+     * Current status of the game session. A game session must have an ACTIVE status to have player sessions.
      */
     Status?: GameSessionStatus;
     /**
-     * Set of custom properties for the game session.
+     * Set of developer-defined properties for a game session. These properties are passed to the server process hosting the game session.
      */
     GameProperties?: GamePropertyList;
     /**
-     * IP address of the game session. To connect to a GameLift server process, an app needs both the IP address and port number.
+     * IP address of the game session. To connect to a Amazon GameLift server process, an app needs both the IP address and port number.
      */
     IpAddress?: IpAddress;
     /**
-     * Port number for the game session. To connect to a GameLift server process, an app needs both the IP address and port number.
+     * Port number for the game session. To connect to a Amazon GameLift server process, an app needs both the IP address and port number.
      */
     Port?: PortNumber;
     /**
@@ -1163,11 +1317,14 @@ declare namespace GameLift {
      */
     PlayerSessionCreationPolicy?: PlayerSessionCreationPolicy;
     /**
-     * Player ID of the person or entity that created the game session. This ID is used to enforce a resource protection policy (if one exists) that limits the number of concurrent active game sessions for a single player.
+     * Unique identifier for a player. This ID is used to enforce a resource protection policy (if one exists), that limits the number of game sessions a player can create.
      */
     CreatorId?: NonZeroAndMaxString;
   }
   export interface GameSessionDetail {
+    /**
+     * Object that describes a game session.
+     */
     GameSession?: GameSession;
     /**
      * Current status of protection for the game session.    NoProtection – The game session can be terminated during a scale-down event.    FullProtection – If the game session is in an ACTIVE status, it cannot be terminated during a scale-down event.  
@@ -1176,10 +1333,81 @@ declare namespace GameLift {
   }
   export type GameSessionDetailList = GameSessionDetail[];
   export type GameSessionList = GameSession[];
+  export interface GameSessionPlacement {
+    /**
+     * Unique identifier for a game session placement.
+     */
+    PlacementId?: IdStringModel;
+    /**
+     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     */
+    GameSessionQueueName?: GameSessionQueueName;
+    /**
+     * Current status of the game session placement request.    PENDING – The placement request is currently in the queue waiting to be processed.    FULFILLED – A new game session and player sessions (if requested) have been successfully created. Values for GameSessionArn and GameSessionRegion are available.     CANCELLED – The placement request was cancelled with a call to StopGameSessionPlacement.    TIMED_OUT – A new game session was not successfully created before the time limit expired. You can resubmit the placement request as needed.  
+     */
+    Status?: GameSessionPlacementState;
+    /**
+     * Set of developer-defined properties for a game session. These properties are passed to the server process hosting the game session.
+     */
+    GameProperties?: GamePropertyList;
+    /**
+     * Maximum number of players that can be connected simultaneously to the game session.
+     */
+    MaximumPlayerSessionCount?: WholeNumber;
+    /**
+     * Descriptive label that is associated with a game session. Session names do not need to be unique.
+     */
+    GameSessionName?: NonZeroAndMaxString;
+    /**
+     * Identifier for the game session created by this placement request. This value exists only if the game session placement status is Completed. This identifier is unique across all regions.
+     */
+    GameSessionArn?: NonZeroAndMaxString;
+    /**
+     * Name of the region where the game session created by this placement request is running. This value exists only if the game session placement status is Completed.
+     */
+    GameSessionRegion?: NonZeroAndMaxString;
+    /**
+     * Set of values, expressed in milliseconds, indicating the amount of latency that players experience when connected to AWS regions.
+     */
+    PlayerLatencies?: PlayerLatencyList;
+    /**
+     * Time stamp indicating when this request was placed in the queue. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
+     */
+    StartTime?: Timestamp;
+    /**
+     * Time stamp indicating when this request was completed, cancelled, or timed out.
+     */
+    EndTime?: Timestamp;
+  }
+  export type GameSessionPlacementState = "PENDING"|"FULFILLED"|"CANCELLED"|"TIMED_OUT"|string;
+  export interface GameSessionQueue {
+    /**
+     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     */
+    Name?: GameSessionQueueName;
+    /**
+     * Maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status.
+     */
+    TimeoutInSeconds?: WholeNumber;
+    /**
+     * List of fleets that can be used to fulfill game session placement requests in the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN. Destinations are listed in default preference order.
+     */
+    Destinations?: GameSessionQueueDestinationList;
+  }
+  export interface GameSessionQueueDestination {
+    /**
+     * Amazon Resource Name (ARN) assigned to fleet or fleet alias. ARNs, which include a fleet ID or alias ID and a region name, provide a unique identifier across all regions. 
+     */
+    DestinationArn?: ArnStringModel;
+  }
+  export type GameSessionQueueDestinationList = GameSessionQueueDestination[];
+  export type GameSessionQueueList = GameSessionQueue[];
+  export type GameSessionQueueName = string;
+  export type GameSessionQueueNameList = GameSessionQueueName[];
   export type GameSessionStatus = "ACTIVE"|"ACTIVATING"|"TERMINATED"|"TERMINATING"|"ERROR"|string;
   export interface GetGameSessionLogUrlInput {
     /**
-     * Unique identifier for the game session to get logs for. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
+     * Unique identifier for the game session to get logs for.
      */
     GameSessionId: ArnStringModel;
   }
@@ -1191,28 +1419,28 @@ declare namespace GameLift {
   }
   export interface GetInstanceAccessInput {
     /**
-     * Unique identifier for a fleet. Specify the fleet that contain the instance you want access to. The fleet can be in any of the following statuses: ACTIVATING, ACTIVE, or ERROR. Fleets with an ERROR status can be accessed for a few hours before being deleted.
+     * Unique identifier for a fleet that contains the instance you want access to. The fleet can be in any of the following statuses: ACTIVATING, ACTIVE, or ERROR. Fleets with an ERROR status may be accessible for a short time before they are deleted.
      */
     FleetId: FleetId;
     /**
-     * Unique identifier for an instance. Specify the instance you want to get access to. You can access an instance in any status.
+     * Unique identifier for an instance you want to get access to. You can access an instance in any status.
      */
     InstanceId: InstanceId;
   }
   export interface GetInstanceAccessOutput {
     /**
-     * Object containing connection information for a fleet instance, including IP address and access credentials.
+     * Object that contains connection information for a fleet instance, including IP address and access credentials.
      */
     InstanceAccess?: InstanceAccess;
   }
   export type IdStringModel = string;
   export interface Instance {
     /**
-     * Unique identifier for the fleet that the instance belongs to.
+     * Unique identifier for a fleet that the instance is in.
      */
     FleetId?: FleetId;
     /**
-     * Unique identifier for the instance.
+     * Unique identifier for an instance.
      */
     InstanceId?: InstanceId;
     /**
@@ -1228,21 +1456,21 @@ declare namespace GameLift {
      */
     Type?: EC2InstanceType;
     /**
-     * Current status of the instance. Possible statuses include the following:    PENDING – The instance is in the process of being created and launching server processes as defined in the fleet's runtime configuration.     ACTIVE – The instance has been successfully created and at least one server process has successfully launched and reported back to GameLift that it is ready to host a game session. The instance is now considered ready to host game sessions.     TERMINATING – The instance is in the process of shutting down. This may happen to reduce capacity during a scaling down event or to recycle resources in the event of a problem.  
+     * Current status of the instance. Possible statuses include the following:    PENDING – The instance is in the process of being created and launching server processes as defined in the fleet's runtime configuration.     ACTIVE – The instance has been successfully created and at least one server process has successfully launched and reported back to Amazon GameLift that it is ready to host a game session. The instance is now considered ready to host game sessions.     TERMINATING – The instance is in the process of shutting down. This may happen to reduce capacity during a scaling down event or to recycle resources in the event of a problem.  
      */
     Status?: InstanceStatus;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     CreationTime?: Timestamp;
   }
   export interface InstanceAccess {
     /**
-     * Unique identifier for the fleet containing the instance being accessed.
+     * Unique identifier for a fleet containing the instance being accessed.
      */
     FleetId?: FleetId;
     /**
-     * Unique identifier for the instance being accessed.
+     * Unique identifier for an instance being accessed.
      */
     InstanceId?: InstanceId;
     /**
@@ -1264,7 +1492,7 @@ declare namespace GameLift {
      */
     UserName?: NonEmptyString;
     /**
-     * Secret string. For Windows instances, the secret is a password. For Linux instances, it is a private key.
+     * Secret string. For Windows instances, the secret is a password for use with Windows Remote Desktop. For Linux instances, it is a private key (which must be saved as a .pem file) for use with SSH.
      */
     Secret?: NonEmptyString;
   }
@@ -1299,7 +1527,7 @@ declare namespace GameLift {
      */
     RoutingStrategyType?: RoutingStrategyType;
     /**
-     * Descriptive label associated with an alias. Alias names do not need to be unique.
+     * Descriptive label that is associated with an alias. Alias names do not need to be unique.
      */
     Name?: NonEmptyString;
     /**
@@ -1307,7 +1535,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
      */
     NextToken?: NonEmptyString;
   }
@@ -1317,7 +1545,7 @@ declare namespace GameLift {
      */
     Aliases?: AliasList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonEmptyString;
   }
@@ -1331,7 +1559,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
      */
     NextToken?: NonEmptyString;
   }
@@ -1341,13 +1569,13 @@ declare namespace GameLift {
      */
     Builds?: BuildList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonEmptyString;
   }
   export interface ListFleetsInput {
     /**
-     * Unique identifier of the build to return fleets for. Use this parameter to return only fleets using the specified build. To retrieve all fleets, leave this parameter empty.
+     * Unique identifier for a build to return fleets for. Use this parameter to return only fleets using the specified build. To retrieve all fleets, leave this parameter empty.
      */
     BuildId?: BuildId;
     /**
@@ -1355,34 +1583,51 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface ListFleetsOutput {
     /**
-     * Set of fleet IDs matching the list request. You can retrieve additional information about all returned fleets by passing this result set to a call to DescribeFleetAttributes, DescribeFleetCapacity, and DescribeFleetUtilization.
+     * Set of fleet IDs matching the list request. You can retrieve additional information about all returned fleets by passing this result set to a call to DescribeFleetAttributes, DescribeFleetCapacity, or DescribeFleetUtilization.
      */
     FleetIds?: FleetIdList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
-  export type MetricName = "ActivatingGameSessions"|"ActiveGameSessions"|"ActiveInstances"|"AvailablePlayerSessions"|"CurrentPlayerSessions"|"IdleInstances"|string;
+  export type MetricName = "ActivatingGameSessions"|"ActiveGameSessions"|"ActiveInstances"|"AvailablePlayerSessions"|"CurrentPlayerSessions"|"IdleInstances"|"QueueDepth"|"WaitTime"|string;
   export type NonBlankAndLengthConstraintString = string;
   export type NonBlankString = string;
   export type NonEmptyString = string;
   export type NonZeroAndMaxString = string;
   export type OperatingSystem = "WINDOWS_2012"|"AMAZON_LINUX"|string;
+  export type PlayerData = string;
+  export type PlayerDataMap = {[key: string]: PlayerData};
   export type PlayerIdList = NonZeroAndMaxString[];
+  export interface PlayerLatency {
+    /**
+     * Unique identifier for a player associated with the latency data.
+     */
+    PlayerId?: NonZeroAndMaxString;
+    /**
+     * Name of the region that is associated with the latency value.
+     */
+    RegionIdentifier?: NonZeroAndMaxString;
+    /**
+     * Amount of time that represents the time lag experienced by the player when connected to the specified region.
+     */
+    LatencyInMilliseconds?: Float;
+  }
+  export type PlayerLatencyList = PlayerLatency[];
   export interface PlayerSession {
     /**
      * Unique identifier for a player session.
      */
     PlayerSessionId?: PlayerSessionId;
     /**
-     * Unique identifier for a player.
+     * Unique identifier for a player that is associated with this player session.
      */
     PlayerId?: NonZeroAndMaxString;
     /**
@@ -1390,15 +1635,15 @@ declare namespace GameLift {
      */
     GameSessionId?: NonZeroAndMaxString;
     /**
-     * Unique identifier for a fleet.
+     * Unique identifier for a fleet that the player's game session is running on.
      */
     FleetId?: FleetId;
     /**
-     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     CreationTime?: Timestamp;
     /**
-     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+     * Time stamp indicating when this data object was terminated. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     TerminationTime?: Timestamp;
     /**
@@ -1410,9 +1655,13 @@ declare namespace GameLift {
      */
     IpAddress?: IpAddress;
     /**
-     * Port number for the game session. To connect to a GameLift server process, an app needs both the IP address and port number.
+     * Port number for the game session. To connect to a Amazon GameLift server process, an app needs both the IP address and port number.
      */
     Port?: PortNumber;
+    /**
+     * Developer-defined information related to a player. Amazon GameLift does not use this data, so it can be formatted as needed for use in the game. 
+     */
+    PlayerData?: PlayerData;
   }
   export type PlayerSessionCreationPolicy = "ACCEPT_ALL"|"DENY_ALL"|string;
   export type PlayerSessionId = string;
@@ -1424,11 +1673,11 @@ declare namespace GameLift {
   export type ProtectionPolicy = "NoProtection"|"FullProtection"|string;
   export interface PutScalingPolicyInput {
     /**
-     * Descriptive label associated with a scaling policy. Policy names do not need to be unique. A fleet can have only one scaling policy with the same name.
+     * Descriptive label that is associated with a scaling policy. Policy names do not need to be unique. A fleet can have only one scaling policy with the same name.
      */
     Name: NonZeroAndMaxString;
     /**
-     * Unique identity for the fleet to scale with this policy.
+     * Unique identifier for a fleet to apply this policy to.
      */
     FleetId: FleetId;
     /**
@@ -1458,13 +1707,13 @@ declare namespace GameLift {
   }
   export interface PutScalingPolicyOutput {
     /**
-     * Descriptive label associated with a scaling policy. Policy names do not need to be unique.
+     * Descriptive label that is associated with a scaling policy. Policy names do not need to be unique.
      */
     Name?: NonZeroAndMaxString;
   }
   export interface RequestUploadCredentialsInput {
     /**
-     * Unique identifier for the build you want to get credentials for.
+     * Unique identifier for a build to get credentials for.
      */
     BuildId: BuildId;
   }
@@ -1486,7 +1735,7 @@ declare namespace GameLift {
   }
   export interface ResolveAliasOutput {
     /**
-     * Fleet ID associated with the requested alias.
+     * Fleet identifier that is associated with the requested alias.
      */
     FleetId?: FleetId;
   }
@@ -1506,7 +1755,7 @@ declare namespace GameLift {
      */
     Type?: RoutingStrategyType;
     /**
-     * Unique identifier for a fleet.
+     * Unique identifier for a fleet that the alias points to.
      */
     FleetId?: FleetId;
     /**
@@ -1523,26 +1772,26 @@ declare namespace GameLift {
   }
   export interface S3Location {
     /**
-     * Amazon S3 bucket identifier.
+     * Amazon S3 bucket identifier. This is the name of your S3 bucket.
      */
     Bucket?: NonEmptyString;
     /**
-     * Amazon S3 bucket key.
+     * Name of the zip file containing your build files. 
      */
     Key?: NonEmptyString;
     /**
-     * Amazon resource number for the cross-account access role that allows GameLift access to the S3 bucket.
+     * Amazon Resource Name (ARN) for the access role that allows Amazon GameLift to access your S3 bucket.
      */
     RoleArn?: NonEmptyString;
   }
   export type ScalingAdjustmentType = "ChangeInCapacity"|"ExactCapacity"|"PercentChangeInCapacity"|string;
   export interface ScalingPolicy {
     /**
-     * Unique identity for the fleet associated with this scaling policy.
+     * Unique identifier for a fleet that is associated with this scaling policy.
      */
     FleetId?: FleetId;
     /**
-     * Descriptive label associated with a scaling policy. Policy names do not need to be unique.
+     * Descriptive label that is associated with a scaling policy. Policy names do not need to be unique.
      */
     Name?: NonZeroAndMaxString;
     /**
@@ -1570,7 +1819,7 @@ declare namespace GameLift {
      */
     EvaluationPeriods?: PositiveInteger;
     /**
-     * Name of the GameLift-defined metric that is used to trigger an adjustment.    ActivatingGameSessions – number of game sessions in the process of being created (game session status = ACTIVATING).    ActiveGameSessions – number of game sessions currently running (game session status = ACTIVE).    CurrentPlayerSessions – number of active or reserved player sessions (player session status = ACTIVE or RESERVED).     AvailablePlayerSessions – number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number does include game sessions that are not currently accepting players (game session PlayerSessionCreationPolicy = DENY_ALL).    ActiveInstances – number of instances currently running a game session.    IdleInstances – number of instances not currently running a game session.  
+     * Name of the Amazon GameLift-defined metric that is used to trigger an adjustment.    ActivatingGameSessions – number of game sessions in the process of being created (game session status = ACTIVATING).    ActiveGameSessions – number of game sessions currently running (game session status = ACTIVE).    CurrentPlayerSessions – number of active or reserved player sessions (player session status = ACTIVE or RESERVED).     AvailablePlayerSessions – number of player session slots currently available in active game sessions across the fleet, calculated by subtracting a game session's current player session count from its maximum player session count. This number does include game sessions that are not currently accepting players (game session PlayerSessionCreationPolicy = DENY_ALL).    ActiveInstances – number of instances currently running a game session.    IdleInstances – number of instances not currently running a game session.  
      */
     MetricName?: MetricName;
   }
@@ -1578,11 +1827,11 @@ declare namespace GameLift {
   export type ScalingStatusType = "ACTIVE"|"UPDATE_REQUESTED"|"UPDATING"|"DELETE_REQUESTED"|"DELETING"|"DELETED"|"ERROR"|string;
   export interface SearchGameSessionsInput {
     /**
-     * Unique identifier for a fleet. Each request must reference either a fleet ID or alias ID, but not both.
+     * Unique identifier for a fleet to search for active game sessions. Each request must reference either a fleet ID or alias ID, but not both.
      */
     FleetId?: FleetId;
     /**
-     * Unique identifier for a fleet alias. Each request must reference either a fleet ID or alias ID, but not both.
+     * Unique identifier for an alias associated with the fleet to search for active game sessions. Each request must reference either a fleet ID or alias ID, but not both.
      */
     AliasId?: AliasId;
     /**
@@ -1598,7 +1847,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token indicating the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1608,7 +1857,7 @@ declare namespace GameLift {
      */
     GameSessions?: GameSessionList;
     /**
-     * Token indicating where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1627,6 +1876,54 @@ declare namespace GameLift {
     ConcurrentExecutions: PositiveInteger;
   }
   export type ServerProcessList = ServerProcess[];
+  export interface StartGameSessionPlacementInput {
+    /**
+     * Unique identifier to assign to the new game session placement. This value is developer-defined. The value must be unique across all regions and cannot be reused unless you are resubmitting a cancelled or timed-out placement request.
+     */
+    PlacementId: IdStringModel;
+    /**
+     * Name of the queue to use to place the new game session.
+     */
+    GameSessionQueueName: GameSessionQueueName;
+    /**
+     * Set of developer-defined properties for a game session. These properties are passed to the server process hosting the game session.
+     */
+    GameProperties?: GamePropertyList;
+    /**
+     * Maximum number of players that can be connected simultaneously to the game session.
+     */
+    MaximumPlayerSessionCount: WholeNumber;
+    /**
+     * Descriptive label that is associated with a game session. Session names do not need to be unique.
+     */
+    GameSessionName?: NonZeroAndMaxString;
+    /**
+     * Set of values, expressed in milliseconds, indicating the amount of latency that players experience when connected to AWS regions. This information is relevant when requesting player sessions. Latency information provided for player IDs not included in DesiredPlayerSessions are ignored.
+     */
+    PlayerLatencies?: PlayerLatencyList;
+    /**
+     * Set of information on each player to create a player session for.
+     */
+    DesiredPlayerSessions?: DesiredPlayerSessionList;
+  }
+  export interface StartGameSessionPlacementOutput {
+    /**
+     * Object that describes the newly created game session placement. This object includes all the information provided in the request, as well as start/end time stamps and placement status. 
+     */
+    GameSessionPlacement?: GameSessionPlacement;
+  }
+  export interface StopGameSessionPlacementInput {
+    /**
+     * Unique identifier for a game session placement to cancel.
+     */
+    PlacementId: IdStringModel;
+  }
+  export interface StopGameSessionPlacementOutput {
+    /**
+     * Object that describes the cancelled game session placement, with cancelled status and an end time stamp. 
+     */
+    GameSessionPlacement?: GameSessionPlacement;
+  }
   export type StringList = NonZeroAndMaxString[];
   export type Timestamp = Date;
   export interface UpdateAliasInput {
@@ -1635,7 +1932,7 @@ declare namespace GameLift {
      */
     AliasId: AliasId;
     /**
-     * Descriptive label associated with an alias. Alias names do not need to be unique.
+     * Descriptive label that is associated with an alias. Alias names do not need to be unique.
      */
     Name?: NonBlankAndLengthConstraintString;
     /**
@@ -1643,43 +1940,43 @@ declare namespace GameLift {
      */
     Description?: NonZeroAndMaxString;
     /**
-     * Object specifying the fleet and routing type to use for the alias.
+     * Object that specifies the fleet and routing type to use for the alias.
      */
     RoutingStrategy?: RoutingStrategy;
   }
   export interface UpdateAliasOutput {
     /**
-     * Object containing the updated alias configuration.
+     * Object that contains the updated alias configuration.
      */
     Alias?: Alias;
   }
   export interface UpdateBuildInput {
     /**
-     * Unique identifier of the build you want to update.
+     * Unique identifier for a build to update.
      */
     BuildId: BuildId;
     /**
-     * Descriptive label associated with a build. Build names do not need to be unique.
+     * Descriptive label that is associated with a build. Build names do not need to be unique. 
      */
     Name?: NonZeroAndMaxString;
     /**
-     * Version associated with this build. Version strings do not need to be unique to a build.
+     * Version that is associated with this build. Version strings do not need to be unique.
      */
     Version?: NonZeroAndMaxString;
   }
   export interface UpdateBuildOutput {
     /**
-     * Object containing the updated build record.
+     * Object that contains the updated build record.
      */
     Build?: Build;
   }
   export interface UpdateFleetAttributesInput {
     /**
-     * Unique identifier for the fleet you want to update attribute metadata for.
+     * Unique identifier for a fleet to update attribute metadata for.
      */
     FleetId: FleetId;
     /**
-     * Descriptive label associated with a fleet. Fleet names do not need to be unique.
+     * Descriptive label that is associated with a fleet. Fleet names do not need to be unique.
      */
     Name?: NonZeroAndMaxString;
     /**
@@ -1697,13 +1994,13 @@ declare namespace GameLift {
   }
   export interface UpdateFleetAttributesOutput {
     /**
-     * Unique identifier for the updated fleet.
+     * Unique identifier for a fleet that was updated.
      */
     FleetId?: FleetId;
   }
   export interface UpdateFleetCapacityInput {
     /**
-     * Unique identifier for the fleet you want to update capacity for.
+     * Unique identifier for a fleet to update capacity for.
      */
     FleetId: FleetId;
     /**
@@ -1721,13 +2018,13 @@ declare namespace GameLift {
   }
   export interface UpdateFleetCapacityOutput {
     /**
-     * Unique identifier for the updated fleet.
+     * Unique identifier for a fleet that was updated.
      */
     FleetId?: FleetId;
   }
   export interface UpdateFleetPortSettingsInput {
     /**
-     * Unique identifier for the fleet you want to update port settings for.
+     * Unique identifier for a fleet to update port settings for.
      */
     FleetId: FleetId;
     /**
@@ -1741,21 +2038,21 @@ declare namespace GameLift {
   }
   export interface UpdateFleetPortSettingsOutput {
     /**
-     * Unique identifier for the updated fleet.
+     * Unique identifier for a fleet that was updated.
      */
     FleetId?: FleetId;
   }
   export interface UpdateGameSessionInput {
     /**
-     * Unique identifier for the game session to update. Game session ID format is as follows: "arn:aws:gamelift:&lt;region&gt;::gamesession/fleet-&lt;fleet ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a custom ID string (if one was specified when the game session was created) an autogenerated string. 
+     * Unique identifier for the game session to update.
      */
     GameSessionId: ArnStringModel;
     /**
-     * Maximum number of players that can be simultaneously connected to the game session.
+     * Maximum number of players that can be connected simultaneously to the game session.
      */
     MaximumPlayerSessionCount?: WholeNumber;
     /**
-     * Descriptive label associated with a game session. Session names do not need to be unique.
+     * Descriptive label that is associated with a game session. Session names do not need to be unique.
      */
     Name?: NonZeroAndMaxString;
     /**
@@ -1769,13 +2066,33 @@ declare namespace GameLift {
   }
   export interface UpdateGameSessionOutput {
     /**
-     * Object containing the updated game session metadata.
+     * Object that contains the updated game session metadata.
      */
     GameSession?: GameSession;
   }
+  export interface UpdateGameSessionQueueInput {
+    /**
+     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     */
+    Name: GameSessionQueueName;
+    /**
+     * Maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status.
+     */
+    TimeoutInSeconds?: WholeNumber;
+    /**
+     * List of fleets that can be used to fulfill game session placement requests in the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN. Destinations are listed in default preference order.
+     */
+    Destinations?: GameSessionQueueDestinationList;
+  }
+  export interface UpdateGameSessionQueueOutput {
+    /**
+     * Object that describes the newly updated game session queue.
+     */
+    GameSessionQueue?: GameSessionQueue;
+  }
   export interface UpdateRuntimeConfigurationInput {
     /**
-     * Unique identifier of the fleet to update runtime configuration for.
+     * Unique identifier for a fleet to update runtime configuration for.
      */
     FleetId: FleetId;
     /**

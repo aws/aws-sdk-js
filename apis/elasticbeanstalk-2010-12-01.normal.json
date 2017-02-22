@@ -141,6 +141,24 @@
       ],
       "documentation":"<p>Launches an environment for the specified application using the specified configuration.</p>"
     },
+    "CreatePlatformVersion":{
+      "name":"CreatePlatformVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreatePlatformVersionRequest"},
+      "output":{
+        "shape":"CreatePlatformVersionResult",
+        "resultWrapper":"CreatePlatformVersionResult"
+      },
+      "errors":[
+        {"shape":"InsufficientPrivilegesException"},
+        {"shape":"ElasticBeanstalkServiceException"},
+        {"shape":"TooManyPlatformsException"}
+      ],
+      "documentation":"<p>Create a new version of your custom platform.</p>"
+    },
     "CreateStorageLocation":{
       "name":"CreateStorageLocation",
       "http":{
@@ -205,6 +223,25 @@
       },
       "input":{"shape":"DeleteEnvironmentConfigurationMessage"},
       "documentation":"<p>Deletes the draft configuration associated with the running environment.</p> <p>Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using <a>DescribeConfigurationSettings</a> while the update is in progress or if the update fails. The <code>DeploymentStatus</code> for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action.</p>"
+    },
+    "DeletePlatformVersion":{
+      "name":"DeletePlatformVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeletePlatformVersionRequest"},
+      "output":{
+        "shape":"DeletePlatformVersionResult",
+        "resultWrapper":"DeletePlatformVersionResult"
+      },
+      "errors":[
+        {"shape":"OperationInProgressException"},
+        {"shape":"InsufficientPrivilegesException"},
+        {"shape":"ElasticBeanstalkServiceException"},
+        {"shape":"PlatformVersionStillReferencedException"}
+      ],
+      "documentation":"<p>Deletes the specified version of a custom platform.</p>"
     },
     "DescribeApplicationVersions":{
       "name":"DescribeApplicationVersions",
@@ -372,6 +409,23 @@
       ],
       "documentation":"<p>Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html\">enhanced health reporting</a>.</p>"
     },
+    "DescribePlatformVersion":{
+      "name":"DescribePlatformVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribePlatformVersionRequest"},
+      "output":{
+        "shape":"DescribePlatformVersionResult",
+        "resultWrapper":"DescribePlatformVersionResult"
+      },
+      "errors":[
+        {"shape":"InsufficientPrivilegesException"},
+        {"shape":"ElasticBeanstalkServiceException"}
+      ],
+      "documentation":"<p>Describes the version of the platform.</p>"
+    },
     "ListAvailableSolutionStacks":{
       "name":"ListAvailableSolutionStacks",
       "http":{
@@ -382,7 +436,24 @@
         "shape":"ListAvailableSolutionStacksResultMessage",
         "resultWrapper":"ListAvailableSolutionStacksResult"
       },
-      "documentation":"<p>Returns a list of the available solution stack names.</p>"
+      "documentation":"<p>Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.</p>"
+    },
+    "ListPlatformVersions":{
+      "name":"ListPlatformVersions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListPlatformVersionsRequest"},
+      "output":{
+        "shape":"ListPlatformVersionsResult",
+        "resultWrapper":"ListPlatformVersionsResult"
+      },
+      "errors":[
+        {"shape":"InsufficientPrivilegesException"},
+        {"shape":"ElasticBeanstalkServiceException"}
+      ],
+      "documentation":"<p>Lists the available platforms.</p>"
     },
     "RebuildEnvironment":{
       "name":"RebuildEnvironment",
@@ -547,6 +618,7 @@
     }
   },
   "shapes":{
+    "ARN":{"type":"string"},
     "AbortEnvironmentUpdateMessage":{
       "type":"structure",
       "members":{
@@ -662,7 +734,7 @@
         },
         "Latency":{
           "shape":"Latency",
-          "documentation":"<p>Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one milisecond resolution.</p>"
+          "documentation":"<p>Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one millisecond resolution.</p>"
         }
       },
       "documentation":"<p>Application request metrics for an AWS Elastic Beanstalk environment.</p>"
@@ -894,6 +966,16 @@
       },
       "documentation":"<p>Settings for an AWS CodeBuild build.</p>"
     },
+    "Builder":{
+      "type":"structure",
+      "members":{
+        "ARN":{
+          "shape":"ARN",
+          "documentation":"<p>The ARN of the builder.</p>"
+        }
+      },
+      "documentation":"<p>The builder used to build the custom platform.</p>"
+    },
     "CPUUtilization":{
       "type":"structure",
       "members":{
@@ -1112,6 +1194,10 @@
           "shape":"SolutionStackName",
           "documentation":"<p>The name of the solution stack these configuration options belong to.</p>"
         },
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the custom platform.</p>"
+        },
         "Options":{
           "shape":"ConfigurationOptionDescriptionsList",
           "documentation":"<p> A list of <a>ConfigurationOptionDescription</a>. </p>"
@@ -1125,6 +1211,10 @@
         "SolutionStackName":{
           "shape":"SolutionStackName",
           "documentation":"<p>The name of the solution stack this configuration set uses.</p>"
+        },
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the custom platform.</p>"
         },
         "ApplicationName":{
           "shape":"ApplicationName",
@@ -1274,6 +1364,10 @@
           "shape":"SolutionStackName",
           "documentation":"<p>The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values.</p> <p> Use <a>ListAvailableSolutionStacks</a> to obtain a list of available solution stacks. </p> <p> A solution stack name or a source configuration parameter must be specified, otherwise AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template.</p>"
         },
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the custome platform.</p>"
+        },
         "SourceConfiguration":{
           "shape":"SourceConfiguration",
           "documentation":"<p>If specified, AWS Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration.</p> <p> Values specified in the <code>OptionSettings</code> parameter of this call overrides any values obtained from the <code>SourceConfiguration</code>. </p> <p> If no configuration template is found, returns an <code>InvalidParameterValue</code> error. </p> <p> Constraint: If both the solution stack name parameter and the source configuration parameters are specified, the solution stack of the source configuration template must match the specified solution stack name or else AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p>"
@@ -1331,11 +1425,15 @@
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
-          "documentation":"<p> The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this parameter or a <code>SolutionStackName</code>, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p> The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>"
         },
         "SolutionStackName":{
           "shape":"SolutionStackName",
-          "documentation":"<p>This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.</p> <p> Condition: You must specify either this or a <code>TemplateName</code>, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>"
+          "documentation":"<p>This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.</p>"
+        },
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the custom platform.</p>"
         },
         "OptionSettings":{
           "shape":"ConfigurationOptionSettingsList",
@@ -1348,6 +1446,50 @@
       },
       "documentation":"<p/>"
     },
+    "CreatePlatformVersionRequest":{
+      "type":"structure",
+      "required":[
+        "PlatformName",
+        "PlatformVersion",
+        "PlatformDefinitionBundle"
+      ],
+      "members":{
+        "PlatformName":{
+          "shape":"PlatformName",
+          "documentation":"<p>The name of your custom platform.</p>"
+        },
+        "PlatformVersion":{
+          "shape":"PlatformVersion",
+          "documentation":"<p>The number, such as 1.0.2, for the new platform version.</p>"
+        },
+        "PlatformDefinitionBundle":{
+          "shape":"S3Location",
+          "documentation":"<p>The location of the platform definition archive in Amazon S3.</p>"
+        },
+        "EnvironmentName":{
+          "shape":"EnvironmentName",
+          "documentation":"<p>The name of the builder environment.</p>"
+        },
+        "OptionSettings":{
+          "shape":"ConfigurationOptionSettingsList",
+          "documentation":"<p>The configuration option settings to apply to the builder environment.</p>"
+        }
+      },
+      "documentation":"<p>Request to create a new platform version.</p>"
+    },
+    "CreatePlatformVersionResult":{
+      "type":"structure",
+      "members":{
+        "PlatformSummary":{
+          "shape":"PlatformSummary",
+          "documentation":"<p>Detailed information about the new version of the custom platform.</p>"
+        },
+        "Builder":{
+          "shape":"Builder",
+          "documentation":"<p>The builder used to create the custom platform.</p>"
+        }
+      }
+    },
     "CreateStorageLocationResultMessage":{
       "type":"structure",
       "members":{
@@ -1359,6 +1501,24 @@
       "documentation":"<p>Results of a <a>CreateStorageLocationResult</a> call.</p>"
     },
     "CreationDate":{"type":"timestamp"},
+    "CustomAmi":{
+      "type":"structure",
+      "members":{
+        "VirtualizationType":{
+          "shape":"VirtualizationType",
+          "documentation":"<p>The type of virtualization used to create the custom AMI.</p>"
+        },
+        "ImageId":{
+          "shape":"ImageId",
+          "documentation":"<p>THe ID of the image used to create the custom AMI.</p>"
+        }
+      },
+      "documentation":"<p>A custom AMI available to platforms.</p>"
+    },
+    "CustomAmiList":{
+      "type":"list",
+      "member":{"shape":"CustomAmi"}
+    },
     "DNSCname":{
       "type":"string",
       "max":255,
@@ -1442,6 +1602,24 @@
       },
       "documentation":"<p>Request to delete a draft environment configuration.</p>"
     },
+    "DeletePlatformVersionRequest":{
+      "type":"structure",
+      "members":{
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the version of the custom platform.</p>"
+        }
+      }
+    },
+    "DeletePlatformVersionResult":{
+      "type":"structure",
+      "members":{
+        "PlatformSummary":{
+          "shape":"PlatformSummary",
+          "documentation":"<p>Detailed information about the version of the custom platform.</p>"
+        }
+      }
+    },
     "DeleteSourceBundle":{"type":"boolean"},
     "Deployment":{
       "type":"structure",
@@ -1517,12 +1695,16 @@
           "shape":"SolutionStackName",
           "documentation":"<p>The name of the solution stack whose configuration options you want to describe.</p>"
         },
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the custom platform.</p>"
+        },
         "Options":{
           "shape":"OptionsSpecifierList",
           "documentation":"<p>If specified, restricts the descriptions to only the specified options.</p>"
         }
       },
-      "documentation":"<p>Result message containig a list of application version descriptions.</p>"
+      "documentation":"<p>Result message containing a list of application version descriptions.</p>"
     },
     "DescribeConfigurationSettingsMessage":{
       "type":"structure",
@@ -1730,6 +1912,10 @@
           "shape":"EnvironmentName",
           "documentation":"<p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment.</p>"
         },
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the version of the custom platform.</p>"
+        },
         "RequestId":{
           "shape":"RequestId",
           "documentation":"<p>If specified, AWS Elastic Beanstalk restricts the described events to include only those associated with this request ID.</p>"
@@ -1797,6 +1983,24 @@
       },
       "documentation":"<p>Detailed health information about the Amazon EC2 instances in an AWS Elastic Beanstalk environment.</p>"
     },
+    "DescribePlatformVersionRequest":{
+      "type":"structure",
+      "members":{
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the version of the platform.</p>"
+        }
+      }
+    },
+    "DescribePlatformVersionResult":{
+      "type":"structure",
+      "members":{
+        "PlatformDescription":{
+          "shape":"PlatformDescription",
+          "documentation":"<p>Detailed information about the version of the platform.</p>"
+        }
+      }
+    },
     "Description":{
       "type":"string",
       "max":200
@@ -1836,6 +2040,10 @@
         "SolutionStackName":{
           "shape":"SolutionStackName",
           "documentation":"<p> The name of the <code>SolutionStack</code> deployed with this environment. </p>"
+        },
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the custom platform.</p>"
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
@@ -2120,6 +2328,10 @@
           "shape":"EnvironmentName",
           "documentation":"<p>The name of the environment associated with this event.</p>"
         },
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the custom platform.</p>"
+        },
         "RequestId":{
           "shape":"RequestId",
           "documentation":"<p>The web service request ID for the activity of this event.</p>"
@@ -2185,6 +2397,7 @@
       "max":19,
       "min":1
     },
+    "ImageId":{"type":"string"},
     "IncludeDeleted":{"type":"boolean"},
     "IncludeDeletedBackTo":{"type":"timestamp"},
     "Instance":{
@@ -2360,6 +2573,36 @@
       },
       "documentation":"<p>A list of available AWS Elastic Beanstalk solution stacks.</p>"
     },
+    "ListPlatformVersionsRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"PlatformFilters",
+          "documentation":"<p>List only the platforms where the platform member value relates to one of the supplied values.</p>"
+        },
+        "MaxRecords":{
+          "shape":"PlatformMaxRecords",
+          "documentation":"<p>The maximum number of platform values returned in one call.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>The starting index into the remaining list of platforms. Use the <code>NextToken</code> value from a previous <code>ListPlatformVersion</code> call.</p>"
+        }
+      }
+    },
+    "ListPlatformVersionsResult":{
+      "type":"structure",
+      "members":{
+        "PlatformSummaryList":{
+          "shape":"PlatformSummaryList",
+          "documentation":"<p>Detailed information about the platforms.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>The starting index into the remaining list of platforms. if this value is not <code>null</code>, you can use it in a subsequent <code>ListPlatformVersion</code> call. </p>"
+        }
+      }
+    },
     "Listener":{
       "type":"structure",
       "members":{
@@ -2415,6 +2658,7 @@
       "type":"list",
       "member":{"shape":"Listener"}
     },
+    "Maintainer":{"type":"string"},
     "ManagedAction":{
       "type":"structure",
       "members":{
@@ -2559,6 +2803,8 @@
     "NullableDouble":{"type":"double"},
     "NullableInteger":{"type":"integer"},
     "NullableLong":{"type":"long"},
+    "OperatingSystemName":{"type":"string"},
+    "OperatingSystemVersion":{"type":"string"},
     "OperationInProgressException":{
       "type":"structure",
       "members":{
@@ -2610,6 +2856,222 @@
     "OptionsSpecifierList":{
       "type":"list",
       "member":{"shape":"OptionSpecification"}
+    },
+    "PlatformArn":{"type":"string"},
+    "PlatformCategory":{"type":"string"},
+    "PlatformDescription":{
+      "type":"structure",
+      "members":{
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the platform.</p>"
+        },
+        "PlatformOwner":{
+          "shape":"PlatformOwner",
+          "documentation":"<p>The AWS account ID of the person who created the platform.</p>"
+        },
+        "PlatformName":{
+          "shape":"PlatformName",
+          "documentation":"<p>The name of the platform.</p>"
+        },
+        "PlatformVersion":{
+          "shape":"PlatformVersion",
+          "documentation":"<p>The version of the platform.</p>"
+        },
+        "SolutionStackName":{
+          "shape":"SolutionStackName",
+          "documentation":"<p>The name of the solution stack used by the platform.</p>"
+        },
+        "PlatformStatus":{
+          "shape":"PlatformStatus",
+          "documentation":"<p>The status of the platform.</p>"
+        },
+        "DateCreated":{
+          "shape":"CreationDate",
+          "documentation":"<p>The date when the platform was created.</p>"
+        },
+        "DateUpdated":{
+          "shape":"UpdateDate",
+          "documentation":"<p>The date when the platform was last updated.</p>"
+        },
+        "PlatformCategory":{
+          "shape":"PlatformCategory",
+          "documentation":"<p>The category of the platform.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>The description of the platform.</p>"
+        },
+        "Maintainer":{
+          "shape":"Maintainer",
+          "documentation":"<p>Information about the maintainer of the platform.</p>"
+        },
+        "OperatingSystemName":{
+          "shape":"OperatingSystemName",
+          "documentation":"<p>The operating system used by the platform.</p>"
+        },
+        "OperatingSystemVersion":{
+          "shape":"OperatingSystemVersion",
+          "documentation":"<p>The version of the operating system used by the platform.</p>"
+        },
+        "ProgrammingLanguages":{
+          "shape":"PlatformProgrammingLanguages",
+          "documentation":"<p>The programming languages supported by the platform.</p>"
+        },
+        "Frameworks":{
+          "shape":"PlatformFrameworks",
+          "documentation":"<p>The frameworks supported by the platform.</p>"
+        },
+        "CustomAmiList":{
+          "shape":"CustomAmiList",
+          "documentation":"<p>The custom AMIs supported by the platform.</p>"
+        },
+        "SupportedTierList":{
+          "shape":"SupportedTierList",
+          "documentation":"<p>The tiers supported by the platform.</p>"
+        },
+        "SupportedAddonList":{
+          "shape":"SupportedAddonList",
+          "documentation":"<p>The additions supported by the platform.</p>"
+        }
+      },
+      "documentation":"<p>Detailed information about a platform.</p>"
+    },
+    "PlatformFilter":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"PlatformFilterType",
+          "documentation":"<p>The custom platform attribute to which the filter values are applied.</p> <p>Valid Values: <code>PlatformName</code> | <code>PlatformVersion</code> | <code>PlatformStatus</code> | <code>PlatformOwner</code> </p>"
+        },
+        "Operator":{
+          "shape":"PlatformFilterOperator",
+          "documentation":"<p>The operator to apply to the <code>Type</code> with each of the <code>Values</code>.</p> <p> Valid Values: <code>=</code> (equal to) | <code>!=</code> (not equal to) | <code>&lt;</code> (less than) | <code>&lt;=</code> (less than or equal to) | <code>&gt;</code> (greater than) | <code>&gt;=</code> (greater than or equal to) | <code>contains</code> | <code>begins_with</code> | <code>ends_with</code> </p>"
+        },
+        "Values":{
+          "shape":"PlatformFilterValueList",
+          "documentation":"<p>The list of values applied to the custom platform attribute.</p>"
+        }
+      },
+      "documentation":"<p>Specify criteria to restrict the results when listing custom platforms.</p> <p>The filter is evaluated as the expression:</p> <p> <code>Type</code> <code>Operator</code> <code>Values[i]</code> </p>"
+    },
+    "PlatformFilterOperator":{"type":"string"},
+    "PlatformFilterType":{"type":"string"},
+    "PlatformFilterValue":{"type":"string"},
+    "PlatformFilterValueList":{
+      "type":"list",
+      "member":{"shape":"PlatformFilterValue"}
+    },
+    "PlatformFilters":{
+      "type":"list",
+      "member":{"shape":"PlatformFilter"}
+    },
+    "PlatformFramework":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>The name of the framework.</p>"
+        },
+        "Version":{
+          "shape":"String",
+          "documentation":"<p>The version of the framework.</p>"
+        }
+      },
+      "documentation":"<p>A framework supported by the custom platform.</p>"
+    },
+    "PlatformFrameworks":{
+      "type":"list",
+      "member":{"shape":"PlatformFramework"}
+    },
+    "PlatformMaxRecords":{
+      "type":"integer",
+      "min":1
+    },
+    "PlatformName":{"type":"string"},
+    "PlatformOwner":{"type":"string"},
+    "PlatformProgrammingLanguage":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>The name of the programming language.</p>"
+        },
+        "Version":{
+          "shape":"String",
+          "documentation":"<p>The version of the programming language.</p>"
+        }
+      },
+      "documentation":"<p>A programming language supported by the platform.</p>"
+    },
+    "PlatformProgrammingLanguages":{
+      "type":"list",
+      "member":{"shape":"PlatformProgrammingLanguage"}
+    },
+    "PlatformStatus":{
+      "type":"string",
+      "enum":[
+        "Creating",
+        "Failed",
+        "Ready",
+        "Deleting",
+        "Deleted"
+      ]
+    },
+    "PlatformSummary":{
+      "type":"structure",
+      "members":{
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the platform.</p>"
+        },
+        "PlatformOwner":{
+          "shape":"PlatformOwner",
+          "documentation":"<p>The AWS account ID of the person who created the platform.</p>"
+        },
+        "PlatformStatus":{
+          "shape":"PlatformStatus",
+          "documentation":"<p>The status of the platform. You can create an environment from the platform once it is ready.</p>"
+        },
+        "PlatformCategory":{
+          "shape":"PlatformCategory",
+          "documentation":"<p>The category of platform.</p>"
+        },
+        "OperatingSystemName":{
+          "shape":"OperatingSystemName",
+          "documentation":"<p>The operating system used by the platform.</p>"
+        },
+        "OperatingSystemVersion":{
+          "shape":"OperatingSystemVersion",
+          "documentation":"<p>The version of the operating system used by the platform.</p>"
+        },
+        "SupportedTierList":{
+          "shape":"SupportedTierList",
+          "documentation":"<p>The tiers in which the platform runs.</p>"
+        },
+        "SupportedAddonList":{
+          "shape":"SupportedAddonList",
+          "documentation":"<p>The additions associated with the platform.</p>"
+        }
+      },
+      "documentation":"<p>Detailed information about a platform.</p>"
+    },
+    "PlatformSummaryList":{
+      "type":"list",
+      "member":{"shape":"PlatformSummary"}
+    },
+    "PlatformVersion":{"type":"string"},
+    "PlatformVersionStillReferencedException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>You cannot delete the platform version because there are still environments running on it.</p>",
+      "error":{
+        "code":"PlatformVersionStillReferencedException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
     },
     "Queue":{
       "type":"structure",
@@ -2827,10 +3289,7 @@
       "type":"list",
       "member":{"shape":"FileTypeExtension"}
     },
-    "SolutionStackName":{
-      "type":"string",
-      "max":100
-    },
+    "SolutionStackName":{"type":"string"},
     "SourceBuildInformation":{
       "type":"structure",
       "required":[
@@ -2923,6 +3382,16 @@
       "documentation":"<p>Represents the percentage of requests over the last 10 seconds that resulted in each type of status code response. For more information, see <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\">Status Code Definitions</a>.</p>"
     },
     "String":{"type":"string"},
+    "SupportedAddon":{"type":"string"},
+    "SupportedAddonList":{
+      "type":"list",
+      "member":{"shape":"SupportedAddon"}
+    },
+    "SupportedTier":{"type":"string"},
+    "SupportedTierList":{
+      "type":"list",
+      "member":{"shape":"SupportedTier"}
+    },
     "SwapEnvironmentCNAMEsMessage":{
       "type":"structure",
       "members":{
@@ -2954,7 +3423,7 @@
         },
         "LoadAverage":{
           "shape":"LoadAverage",
-          "documentation":"<p>Load average in the last 1-minute and 5-minute periods. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os\">Operating System Metrics</a>.</p>"
+          "documentation":"<p>Load average in the last 1-minute, 5-minute, and 15-minute periods. For more information, see <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os\">Operating System Metrics</a>.</p>"
         }
       },
       "documentation":"<p>CPU utilization and load average metrics for an Amazon EC2 instance.</p>"
@@ -3065,6 +3534,18 @@
       "documentation":"<p>The specified account has reached its limit of environments.</p>",
       "error":{
         "code":"TooManyEnvironmentsException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "TooManyPlatformsException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>You have exceeded the maximum number of allowed platforms associated with the account.</p>",
+      "error":{
+        "code":"TooManyPlatformsException",
         "httpStatusCode":400,
         "senderFault":true
       },
@@ -3208,6 +3689,10 @@
           "shape":"SolutionStackName",
           "documentation":"<p>This specifies the platform version that the environment will run after the environment is updated.</p>"
         },
+        "PlatformArn":{
+          "shape":"PlatformArn",
+          "documentation":"<p>The ARN of the platform, if used.</p>"
+        },
         "OptionSettings":{
           "shape":"ConfigurationOptionSettingsList",
           "documentation":"<p>If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.</p>"
@@ -3292,7 +3777,8 @@
     "VersionLabelsList":{
       "type":"list",
       "member":{"shape":"VersionLabel"}
-    }
+    },
+    "VirtualizationType":{"type":"string"}
   },
   "documentation":"<fullname>AWS Elastic Beanstalk</fullname> <p>AWS Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on the Amazon Web Services cloud.</p> <p>For more information about this product, go to the <a href=\"http://aws.amazon.com/elasticbeanstalk/\">AWS Elastic Beanstalk</a> details page. The location of the latest AWS Elastic Beanstalk WSDL is <a href=\"http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl\">http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>. To install the Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools that enable you to access the API, go to <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p> <p> <b>Endpoints</b> </p> <p>For a list of region-specific endpoints that AWS Elastic Beanstalk supports, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region\">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p>"
 }
