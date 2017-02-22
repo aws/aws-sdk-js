@@ -21,7 +21,7 @@ export class DocumentClient {
     /**
      * Creates a set of elements inferring the type of set from the type of the first element. Amazon DynamoDB currently supports the number sets, string sets, and binary sets. For more information about DynamoDB data types see the documentation on the Amazon DynamoDB Data Model.
      */
-    createSet(list: number[]|string[]|DocumentClient.binaryType[], options: DocumentClient.CreateSetOptions): void
+    createSet(list: number[]|string[]|DocumentClient.binaryType[], options?: DocumentClient.CreateSetOptions): DocumentClient.DynamoDbSet;
     /**
      * Returns the attributes of one or more items from one or more tables by delegating to AWS.DynamoDB.batchGetItem().
      */
@@ -78,7 +78,25 @@ export namespace DocumentClient {
          */
         validate?: boolean
     }
+
     export type binaryType = Buffer|File|Blob|ArrayBuffer|DataView|Int8Array|Uint8Array|Uint8ClampedArray|Int16Array|Uint16Array|Int32Array|Uint32Array|Float32Array|Float64Array|stream.Stream;
+
+    interface StringSet {
+        type: 'String';
+        values: Array<string>;
+    }
+
+    interface NumberSet {
+        type: 'Number';
+        values: Array<number>;
+    }
+
+    interface BinarySet {
+        type: 'Binary';
+        values: Array<binaryType>;
+    }
+
+    export type DynamoDbSet = StringSet|NumberSet|BinarySet;
 }
 
 export namespace DocumentClient {

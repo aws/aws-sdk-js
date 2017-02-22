@@ -9,6 +9,16 @@ const params: DynamoDB.DocumentClient.GetItemInput = {
     }
 };
 
+const set: DynamoDB.DocumentClient.DynamoDbSet = client.createSet(['string']);
+
+if (set.type === 'String') {
+    const string: string|undefined = set.values.pop();
+} else if (set.type === 'Number') {
+    const number: number|undefined = set.values.pop();
+} else {
+    const binary: DynamoDB.DocumentClient.binaryType|undefined = set.values.pop();
+}
+
 client.get(params, (err, data) => {
     
 });
