@@ -94,7 +94,7 @@ integrationTests ->
   describe 'Request.abort', ->
     it 'can abort a request', (done) ->
       req = s3.putObject Key: 'key', Body: 'body'
-      req.on 'send', (resp) -> resp.request.abort()
+      req.on 'httpHeaders', () -> this.abort()
       req.send (err) ->
         expect(err.name).to.equal('RequestAbortedError')
         done()
