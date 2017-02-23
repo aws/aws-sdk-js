@@ -5,6 +5,7 @@ import {DynamoDBCustomizations} from '../lib/services/dynamodb';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {DocumentClient as document_client} from '../lib/dynamodb/document_client';
+import {Converter as converter} from '../lib/dynamodb/converter';
 interface Blob {}
 declare class DynamoDB extends DynamoDBCustomizations {
   /**
@@ -167,6 +168,7 @@ declare class DynamoDB extends DynamoDBCustomizations {
 }
 declare namespace DynamoDB {
   export import DocumentClient = document_client;
+  export import Converter = converter;
 }
 declare namespace DynamoDB {
   export type AttributeAction = "ADD"|"PUT"|"DELETE"|string;
