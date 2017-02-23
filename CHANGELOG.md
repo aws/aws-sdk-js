@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.18.0-->
+<!--LATEST=2.19.0-->
 <!--ENTRYINSERT-->
+
+## 2.19.0
+* bugfix: XHR: Fixes an issue where the callback provided to an operation would not fire if a request was aborted after being sent. The bug only affected the browser SDK.
+* feature: S3: Added an instance method to S3 clients to create POST form data with presigned upload policies
+* feature: DynamoDB: Expose DynamoDB DocumentClient marshaller/unmarshaller as AWS.DynamoDB.Converter
 
 ## 2.18.0
 * feature: GameLift: Allow developers to configure global queues for creating GameSessions. Allow PlayerData on PlayerSessions to store player-specific data.
