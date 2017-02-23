@@ -19,6 +19,15 @@
           "alias": "document_client"
         }
       ]
+    },
+    {
+      "path": "lib/dynamodb/converter",
+      "imports": [
+        {
+          "name": "Converter",
+          "alias": "converter"
+        }
+      ]
     }
   ],
   "polly": [
