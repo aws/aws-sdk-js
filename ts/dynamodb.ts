@@ -19,7 +19,12 @@ if (set.type === 'String') {
     const binary: DynamoDB.DocumentClient.binaryType|undefined = set.values.pop();
 }
 
-const av: DynamoDB.AttributeValue = DynamoDB.Converter.input('string');
+const converter: DynamoDB.Converter = DynamoDB.Converter;
+const options: DynamoDB.Converter.ConverterOptions = {
+    convertEmptyValues: true,
+};
+
+const av: DynamoDB.AttributeValue = DynamoDB.Converter.input('string', options);
 const jsType: any = DynamoDB.Converter.output('string');
 client.get(params, (err, data) => {
     
