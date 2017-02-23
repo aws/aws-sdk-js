@@ -6,6 +6,7 @@ import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
 import {ManagedUpload as managed_upload} from '../lib/s3/managed_upload';
+import {PresignedPost as presigned_post} from '../lib/s3/presigned_post';
 interface Blob {}
 declare class S3 extends S3Customizations {
   /**
@@ -636,6 +637,7 @@ declare class S3 extends S3Customizations {
 }
 declare namespace S3 {
   export import ManagedUpload = managed_upload;
+  export import PresignedPost = presigned_post;
 }
 declare namespace S3 {
   export type AbortDate = Date;

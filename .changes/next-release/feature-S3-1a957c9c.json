@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "S3",
+  "description": "Added an instance method to S3 clients to create POST form data with presigned upload policies"
+}

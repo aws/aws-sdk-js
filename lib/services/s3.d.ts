@@ -1,6 +1,7 @@
 import {Service} from '../service';
 import {ManagedUpload} from '../s3/managed_upload';
 import S3 = require('../../clients/s3');
+
 export class S3Customizations extends Service {
     /**
      * Get a pre-signed URL for a given operation name.
@@ -10,6 +11,18 @@ export class S3Customizations extends Service {
      * Get a pre-signed URL for a given operation name.
      */
     getSignedUrl(operation: string, params: any): string;
+
+    /**
+     * Get the form fields and target URL for direct POST uploading.
+     */
+    createPresignedPost(
+        params: S3.PresignedPost.Params,
+        callback: (err: Error, data: S3.PresignedPost) => void
+    ): void;
+    /**
+     * Get the form fields and target URL for direct POST uploading.
+     */
+    createPresignedPost(params: S3.PresignedPost.Params): S3.PresignedPost;
 
     /**
      * Uploads an arbitrarily sized buffer, blob, or stream, using intelligent

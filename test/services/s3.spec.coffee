@@ -1486,3 +1486,143 @@ describe 'AWS.S3', ->
     it 'errors if ContentLength is passed as parameter', ->
       expect(-> s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', ContentLength: 5)).to.
         throw(/ContentLength is not supported in pre-signed URLs/)
+
+  describe 'createPresignedPost', ->
+    it 'should include a url and a hash of form fields', (done) ->
+      s3 = new AWS.S3()
+      s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
+        expect(data).to.include.keys('fields', 'url')
+        expect(data.url).to.be.a.string
+        expect(data.fields).to.be.an.object
+        done()
+
+    it 'should include a policy, signature, and signing metadata', (done) ->
+      s3 = new AWS.S3()
+      s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
+        expect(data.fields).to.include.keys(
+          'Policy',
+          'X-Amz-Signature',
+          'X-Amz-Algorithm',
+          'X-Amz-Date',
+          'X-Amz-Credential'
+        )
+        done()
+
+    it 'should specify the signing algorithm used', (done) ->
+      s3 = new AWS.S3()
+      s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
+        expect(data.fields['X-Amz-Algorithm']).to.equal('AWS4-HMAC-SHA256')
+        done()
+
+    it 'should use bound parameters for the bucket name', (done) ->
+      s3 = new AWS.S3(params: {Bucket: 'bucket'})
+      s3.createPresignedPost {}, (err, data) ->
+        expect(data.fields).to.include.keys('bucket')
+        expect(data.fields.bucket).to.equal('bucket')
+        done()
+
+    it 'should include the security token when present', (done) ->
+      token = 'baz'
+      credentials =
+        accessKeyId: 'foo'
+        secretAccessKey: 'bar'
+        sessionToken: token
+
+      s3 = new AWS.S3(credentials: credentials)
+      s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
+        expect(data.fields['X-Amz-Security-Token']).to.equal(token)
+        done()
+
+    it 'should provide a base64-encoded JSON policy document', (done) ->
+      s3 = new AWS.S3()
+      s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
+        decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
+        expect(decoded).to.be.an.object
+        expect(decoded).to.include.key('expiration', 'conditions')
+        done()
+
+    it 'should default to expiration in one hour', (done) ->
+      s3 = new AWS.S3()
+      s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
+        decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
+        expiration = new Date(decoded.expiration)
+        validForMs = expiration.valueOf() - (new Date()).valueOf()
+        # allow one second of leeway
+        expect(validForMs).to.be.above((60 * 60 - 1) * 1000)
+        expect(validForMs).to.be.below((60 * 60 + 1) * 1000)
+        done()
+
+    it 'should allow users to provide a custom expiration', (done) ->
+      customTtl = 900
+      s3 = new AWS.S3()
+      s3.createPresignedPost {Bucket: 'bucket', Expires: customTtl}, (err, data) ->
+        decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
+        expiration = new Date(decoded.expiration)
+        validForMs = expiration.valueOf() - (new Date()).valueOf()
+        # allow one second of leeway
+        expect(validForMs).to.be.above((customTtl - 1) * 1000)
+        expect(validForMs).to.be.below((customTtl + 1) * 1000)
+        done()
+
+    it 'should include signature metadata as conditions', (done) ->
+      s3 = new AWS.S3()
+      s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
+        decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
+        expect(decoded.conditions).to.be.an.array
+        found = {}
+        for index, condition of decoded.conditions
+          conditionKey = Object.keys(condition)[0]
+          found[conditionKey] = true
+          expect(condition[conditionKey]).to.equal(data.fields[conditionKey])
+
+        expect(found['X-Amz-Algorithm']).to.be.true
+        expect(found['X-Amz-Date']).to.be.true
+        expect(found['X-Amz-Credential']).to.be.true
+
+        done()
+
+    it 'should include user-provided conditions in the signed policy', (done) ->
+      s3 = new AWS.S3()
+      conditions = [
+        {'x-amz-server-side-encryption': 'AES256'},
+        ['starts-with', '$x-amz-meta-tag', ''],
+        {'acl': 'public-read'}
+      ]
+
+      s3.createPresignedPost {Bucket: 'bucket', Conditions: conditions}, (err, data) ->
+        decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
+        expect(decoded.conditions).to.be.an.array
+        expect(conditions[0]).to.deep.equal(decoded.conditions[0])
+        expect(conditions[1]).to.deep.equal(decoded.conditions[1])
+        expect(conditions[2]).to.deep.equal(decoded.conditions[2])
+        done()
+
+    it 'should include user-provided fields as policy conditions', (done) ->
+      s3 = new AWS.S3()
+      fieldsToInclude =
+        key: 'users/userId/upload'
+        acl: 'public-read',
+        'Content-Type': 'image/jpeg',
+        'x-amz-meta-foo': 'bar',
+        'x-amz-tagging': '''<Tagging>
+          <TagSet>
+            <Tag>
+              <Key>foo</Key>
+              <Value>bar</Value>
+            </Tag>
+          </TagSet>
+        </Tagging>'''
+
+      s3.createPresignedPost {Bucket: 'bucket', Fields: fieldsToInclude}, (err, data) ->
+        decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
+        conditions = {}
+        decoded.conditions.forEach((condition) ->
+          if typeof condition == 'object'
+            conditionKey = Object.keys(condition)[0]
+            conditions[conditionKey] = condition[conditionKey]
+        )
+        Object.keys(fieldsToInclude).forEach((key) ->
+          expect(data.fields[key]).to.equal(fieldsToInclude[key])
+          expect(data.fields[key]).to.equal(conditions[key])
+        )
+        done()

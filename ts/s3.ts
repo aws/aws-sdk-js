@@ -169,3 +169,18 @@ uploader2.send((err, data) => {
 });
 
 var endpoint: Endpoint = s3.endpoint;
+
+const presignedPost: S3.Types.PresignedPost = s3.createPresignedPost({
+    Bucket: 'bucket',
+    Conditions: [
+        ['starts-with', '$key', ''],
+        ['content-length-range', 0, 1024 * 1024 * 1024],
+    ],
+    Fields: {
+        'acl': 'bucket-owner-full-control'
+    },
+    Expires: 900
+});
+
+const url: string = presignedPost.url;
+const fields: S3.Types.PresignedPost.Fields = presignedPost.fields;
