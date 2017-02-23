@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "XHR",
+  "description": "Fixes an issue where the callback provided to an operation would not fire if a request was aborted after being sent. The bug only affected the browser SDK."
+}
