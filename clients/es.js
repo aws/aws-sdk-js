@@ -8,6 +8,7 @@ AWS.ES = Service.defineService('es', ['2015-01-01']);
 Object.defineProperty(apiLoader.services['es'], '2015-01-01', {
   get: function get() {
     var model = require('../apis/es-2015-01-01.min.json');
+    model.paginators = require('../apis/es-2015-01-01.paginators.json').pagination;
     return model;
   },
   enumerable: true,

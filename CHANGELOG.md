@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.19.0-->
+<!--LATEST=2.20.0-->
 <!--ENTRYINSERT-->
+
+## 2.20.0
+* feature: ES: Added three new API calls to expose Amazon Elasticsearch imposed limits.
 
 ## 2.19.0
 * bugfix: XHR: Fixes an issue where the callback provided to an operation would not fire if a request was aborted after being sent. The bug only affected the browser SDK.

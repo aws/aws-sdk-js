@@ -60,9 +60,33 @@ declare class ES extends Service {
    */
   describeElasticsearchDomains(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainsResponse) => void): Request<ES.Types.DescribeElasticsearchDomainsResponse, AWSError>;
   /**
+   *  Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the  DomainName  to know what Limits are supported for modifying. 
+   */
+  describeElasticsearchInstanceTypeLimits(params: ES.Types.DescribeElasticsearchInstanceTypeLimitsRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse) => void): Request<ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse, AWSError>;
+  /**
+   *  Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the  DomainName  to know what Limits are supported for modifying. 
+   */
+  describeElasticsearchInstanceTypeLimits(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse) => void): Request<ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse, AWSError>;
+  /**
    * Returns the name of all Elasticsearch domains owned by the current user's account. 
    */
   listDomainNames(callback?: (err: AWSError, data: ES.Types.ListDomainNamesResponse) => void): Request<ES.Types.ListDomainNamesResponse, AWSError>;
+  /**
+   * List all Elasticsearch instance types that are supported for given ElasticsearchVersion
+   */
+  listElasticsearchInstanceTypes(params: ES.Types.ListElasticsearchInstanceTypesRequest, callback?: (err: AWSError, data: ES.Types.ListElasticsearchInstanceTypesResponse) => void): Request<ES.Types.ListElasticsearchInstanceTypesResponse, AWSError>;
+  /**
+   * List all Elasticsearch instance types that are supported for given ElasticsearchVersion
+   */
+  listElasticsearchInstanceTypes(callback?: (err: AWSError, data: ES.Types.ListElasticsearchInstanceTypesResponse) => void): Request<ES.Types.ListElasticsearchInstanceTypesResponse, AWSError>;
+  /**
+   * List all supported Elasticsearch versions
+   */
+  listElasticsearchVersions(params: ES.Types.ListElasticsearchVersionsRequest, callback?: (err: AWSError, data: ES.Types.ListElasticsearchVersionsResponse) => void): Request<ES.Types.ListElasticsearchVersionsResponse, AWSError>;
+  /**
+   * List all supported Elasticsearch versions
+   */
+  listElasticsearchVersions(callback?: (err: AWSError, data: ES.Types.ListElasticsearchVersionsResponse) => void): Request<ES.Types.ListElasticsearchVersionsResponse, AWSError>;
   /**
    * Returns all tags for the given Elasticsearch domain.
    */
@@ -110,6 +134,17 @@ declare namespace ES {
      */
     TagList: TagList;
   }
+  export interface AdditionalLimit {
+    /**
+     *  Name of Additional Limit is specific to a given InstanceType and for each of it's  InstanceRole  etc.  Attributes and their details:   MaximumNumberOfDataNodesSupported This attribute will be present in Master node only to specify how much data nodes upto which given  ESPartitionInstanceType  can support as master node. MaximumNumberOfDataNodesWithoutMasterNode This attribute will be present in Data node only to specify how much data nodes of given  ESPartitionInstanceType  upto which you don't need any master nodes to govern them.  
+     */
+    LimitName?: LimitName;
+    /**
+     *  Value for given  AdditionalLimit$LimitName  . 
+     */
+    LimitValues?: LimitValueList;
+  }
+  export type AdditionalLimitList = AdditionalLimit[];
   export type AdvancedOptions = {[key: string]: String};
   export interface AdvancedOptionsStatus {
     /**
@@ -206,6 +241,23 @@ declare namespace ES {
      */
     DomainStatusList: ElasticsearchDomainStatusList;
   }
+  export interface DescribeElasticsearchInstanceTypeLimitsRequest {
+    /**
+     *  DomainName represents the name of the Domain that we are trying to modify. This should be present only if we are querying for Elasticsearch  Limits  for existing domain. 
+     */
+    DomainName?: DomainName;
+    /**
+     *  The instance type for an Elasticsearch cluster for which Elasticsearch  Limits  are needed. 
+     */
+    InstanceType: ESPartitionInstanceType;
+    /**
+     *  Version of Elasticsearch for which  Limits  are needed. 
+     */
+    ElasticsearchVersion: ElasticsearchVersionString;
+  }
+  export interface DescribeElasticsearchInstanceTypeLimitsResponse {
+    LimitsByRole?: LimitsByRole;
+  }
   export type DomainId = string;
   export interface DomainInfo {
     /**
@@ -244,7 +296,7 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
-  export type ESPartitionInstanceType = "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|string;
+  export type ESPartitionInstanceType = "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|"d2.xlarge.elasticsearch"|"d2.2xlarge.elasticsearch"|"d2.4xlarge.elasticsearch"|"d2.8xlarge.elasticsearch"|"c4.large.elasticsearch"|"c4.xlarge.elasticsearch"|"c4.2xlarge.elasticsearch"|"c4.4xlarge.elasticsearch"|"c4.8xlarge.elasticsearch"|"r4.large.elasticsearch"|"r4.xlarge.elasticsearch"|"r4.2xlarge.elasticsearch"|"r4.4xlarge.elasticsearch"|"r4.8xlarge.elasticsearch"|"r4.16xlarge.elasticsearch"|string;
   export interface ElasticsearchClusterConfig {
     /**
      * The instance type for an Elasticsearch cluster.
@@ -359,6 +411,8 @@ declare namespace ES {
     AdvancedOptions?: AdvancedOptions;
   }
   export type ElasticsearchDomainStatusList = ElasticsearchDomainStatus[];
+  export type ElasticsearchInstanceTypeList = ESPartitionInstanceType[];
+  export type ElasticsearchVersionList = ElasticsearchVersionString[];
   export interface ElasticsearchVersionStatus {
     /**
      *  Specifies the Elasticsearch version for the specified Elasticsearch domain.
@@ -371,12 +425,74 @@ declare namespace ES {
   }
   export type ElasticsearchVersionString = string;
   export type ErrorMessage = string;
+  export interface InstanceCountLimits {
+    MinimumInstanceCount?: MinimumInstanceCount;
+    MaximumInstanceCount?: MaximumInstanceCount;
+  }
+  export interface InstanceLimits {
+    InstanceCountLimits?: InstanceCountLimits;
+  }
+  export type InstanceRole = string;
   export type IntegerClass = number;
+  export type LimitName = string;
+  export type LimitValue = string;
+  export type LimitValueList = LimitValue[];
+  export interface Limits {
+    /**
+     * StorageType represents the list of storage related types and attributes that are available for given InstanceType. 
+     */
+    StorageTypes?: StorageTypeList;
+    InstanceLimits?: InstanceLimits;
+    /**
+     *  List of additional limits that are specific to a given InstanceType and for each of it's  InstanceRole  . 
+     */
+    AdditionalLimits?: AdditionalLimitList;
+  }
+  export type LimitsByRole = {[key: string]: Limits};
   export interface ListDomainNamesResponse {
     /**
      * List of Elasticsearch domain names.
      */
     DomainNames?: DomainInfoList;
+  }
+  export interface ListElasticsearchInstanceTypesRequest {
+    /**
+     * Version of Elasticsearch for which list of supported elasticsearch instance types are needed. 
+     */
+    ElasticsearchVersion: ElasticsearchVersionString;
+    /**
+     * DomainName represents the name of the Domain that we are trying to modify. This should be present only if we are querying for list of available Elasticsearch instance types when modifying existing domain. 
+     */
+    DomainName?: DomainName;
+    /**
+     *  Set this value to limit the number of results returned. Value provided must be greater than 30 else it wont be honored. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * NextToken should be sent in case if earlier API call produced result containing NextToken. It is used for pagination. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListElasticsearchInstanceTypesResponse {
+    /**
+     *  List of instance types supported by Amazon Elasticsearch service for given  ElasticsearchVersion  
+     */
+    ElasticsearchInstanceTypes?: ElasticsearchInstanceTypeList;
+    /**
+     * In case if there are more results available NextToken would be present, make further request to the same API with received NextToken to paginate remaining results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListElasticsearchVersionsRequest {
+    /**
+     *  Set this value to limit the number of results returned. Value provided must be greater than 10 else it wont be honored. 
+     */
+    MaxResults?: MaxResults;
+    NextToken?: NextToken;
+  }
+  export interface ListElasticsearchVersionsResponse {
+    ElasticsearchVersions?: ElasticsearchVersionList;
+    NextToken?: NextToken;
   }
   export interface ListTagsRequest {
     /**
@@ -390,6 +506,10 @@ declare namespace ES {
      */
     TagList?: TagList;
   }
+  export type MaxResults = number;
+  export type MaximumInstanceCount = number;
+  export type MinimumInstanceCount = number;
+  export type NextToken = string;
   export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string;
   export interface OptionStatus {
     /**
@@ -441,6 +561,28 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export type StorageSubTypeName = string;
+  export interface StorageType {
+    StorageTypeName?: StorageTypeName;
+    StorageSubTypeName?: StorageSubTypeName;
+    /**
+     * List of limits that are applicable for given storage type. 
+     */
+    StorageTypeLimits?: StorageTypeLimitList;
+  }
+  export interface StorageTypeLimit {
+    /**
+     *  Name of storage limits that are applicable for given storage type. If  StorageType  is ebs, following storage options are applicable  MinimumVolumeSize Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. MaximumVolumeSize Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. MaximumIops Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. MinimumIops Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable.  
+     */
+    LimitName?: LimitName;
+    /**
+     *  Values for the  StorageTypeLimit$LimitName  . 
+     */
+    LimitValues?: LimitValueList;
+  }
+  export type StorageTypeLimitList = StorageTypeLimit[];
+  export type StorageTypeList = StorageType[];
+  export type StorageTypeName = string;
   export type String = string;
   export type StringList = String[];
   export interface Tag {

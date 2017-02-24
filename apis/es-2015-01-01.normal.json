@@ -1,12 +1,12 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"es-2015-01-01",
     "apiVersion":"2015-01-01",
     "endpointPrefix":"es",
     "protocol":"rest-json",
     "serviceFullName":"Amazon Elasticsearch Service",
-    "signatureVersion":"v4"
+    "signatureVersion":"v4",
+    "uid":"es-2015-01-01"
   },
   "operations":{
     "AddTags":{
@@ -106,6 +106,24 @@
       ],
       "documentation":"<p>Returns domain configuration information about the specified Elasticsearch domains, including the domain ID, domain endpoint, and domain ARN.</p>"
     },
+    "DescribeElasticsearchInstanceTypeLimits":{
+      "name":"DescribeElasticsearchInstanceTypeLimits",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-01-01/es/instanceTypeLimits/{ElasticsearchVersion}/{InstanceType}"
+      },
+      "input":{"shape":"DescribeElasticsearchInstanceTypeLimitsRequest"},
+      "output":{"shape":"DescribeElasticsearchInstanceTypeLimitsResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"InvalidTypeException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"}
+      ],
+      "documentation":"<p> Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the <code> <a>DomainName</a> </code> to know what Limits are supported for modifying. </p>"
+    },
     "ListDomainNames":{
       "name":"ListDomainNames",
       "http":{
@@ -118,6 +136,38 @@
         {"shape":"ValidationException"}
       ],
       "documentation":"<p>Returns the name of all Elasticsearch domains owned by the current user's account. </p>"
+    },
+    "ListElasticsearchInstanceTypes":{
+      "name":"ListElasticsearchInstanceTypes",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-01-01/es/instanceTypes/{ElasticsearchVersion}"
+      },
+      "input":{"shape":"ListElasticsearchInstanceTypesRequest"},
+      "output":{"shape":"ListElasticsearchInstanceTypesResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"}
+      ],
+      "documentation":"<p>List all Elasticsearch instance types that are supported for given ElasticsearchVersion</p>"
+    },
+    "ListElasticsearchVersions":{
+      "name":"ListElasticsearchVersions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2015-01-01/es/versions"
+      },
+      "input":{"shape":"ListElasticsearchVersionsRequest"},
+      "output":{"shape":"ListElasticsearchVersionsResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"}
+      ],
+      "documentation":"<p>List all supported Elasticsearch versions</p>"
     },
     "ListTags":{
       "name":"ListTags",
@@ -208,6 +258,24 @@
         }
       },
       "documentation":"<p>Container for the parameters to the <code><a>AddTags</a></code> operation. Specify the tags that you want to attach to the Elasticsearch domain.</p>"
+    },
+    "AdditionalLimit":{
+      "type":"structure",
+      "members":{
+        "LimitName":{
+          "shape":"LimitName",
+          "documentation":"<p> Name of Additional Limit is specific to a given InstanceType and for each of it's <code> <a>InstanceRole</a> </code> etc. <br/> Attributes and their details: <br/> <ul> <li>MaximumNumberOfDataNodesSupported</li> This attribute will be present in Master node only to specify how much data nodes upto which given <code> <a>ESPartitionInstanceType</a> </code> can support as master node. <li>MaximumNumberOfDataNodesWithoutMasterNode</li> This attribute will be present in Data node only to specify how much data nodes of given <code> <a>ESPartitionInstanceType</a> </code> upto which you don't need any master nodes to govern them. </ul> </p>"
+        },
+        "LimitValues":{
+          "shape":"LimitValueList",
+          "documentation":"<p> Value for given <code> <a>AdditionalLimit$LimitName</a> </code> . </p>"
+        }
+      },
+      "documentation":"<p> List of limits that are specific to a given InstanceType and for each of it's <code> <a>InstanceRole</a> </code> . </p>"
+    },
+    "AdditionalLimitList":{
+      "type":"list",
+      "member":{"shape":"AdditionalLimit"}
     },
     "AdvancedOptions":{
       "type":"map",
@@ -382,6 +450,41 @@
       },
       "documentation":"<p>The result of a <code>DescribeElasticsearchDomains</code> request. Contains the status of the specified domains or all domains owned by the account.</p>"
     },
+    "DescribeElasticsearchInstanceTypeLimitsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceType",
+        "ElasticsearchVersion"
+      ],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "documentation":"<p> DomainName represents the name of the Domain that we are trying to modify. This should be present only if we are querying for Elasticsearch <code> <a>Limits</a> </code> for existing domain. </p>",
+          "location":"querystring",
+          "locationName":"domainName"
+        },
+        "InstanceType":{
+          "shape":"ESPartitionInstanceType",
+          "documentation":"<p> The instance type for an Elasticsearch cluster for which Elasticsearch <code> <a>Limits</a> </code> are needed. </p>",
+          "location":"uri",
+          "locationName":"InstanceType"
+        },
+        "ElasticsearchVersion":{
+          "shape":"ElasticsearchVersionString",
+          "documentation":"<p> Version of Elasticsearch for which <code> <a>Limits</a> </code> are needed. </p>",
+          "location":"uri",
+          "locationName":"ElasticsearchVersion"
+        }
+      },
+      "documentation":"<p> Container for the parameters to <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. </p>"
+    },
+    "DescribeElasticsearchInstanceTypeLimitsResponse":{
+      "type":"structure",
+      "members":{
+        "LimitsByRole":{"shape":"LimitsByRole"}
+      },
+      "documentation":"<p> Container for the parameters received from <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. </p>"
+    },
     "DisabledOperationException":{
       "type":"structure",
       "members":{
@@ -483,7 +586,22 @@
         "r3.4xlarge.elasticsearch",
         "r3.8xlarge.elasticsearch",
         "i2.xlarge.elasticsearch",
-        "i2.2xlarge.elasticsearch"
+        "i2.2xlarge.elasticsearch",
+        "d2.xlarge.elasticsearch",
+        "d2.2xlarge.elasticsearch",
+        "d2.4xlarge.elasticsearch",
+        "d2.8xlarge.elasticsearch",
+        "c4.large.elasticsearch",
+        "c4.xlarge.elasticsearch",
+        "c4.2xlarge.elasticsearch",
+        "c4.4xlarge.elasticsearch",
+        "c4.8xlarge.elasticsearch",
+        "r4.large.elasticsearch",
+        "r4.xlarge.elasticsearch",
+        "r4.2xlarge.elasticsearch",
+        "r4.4xlarge.elasticsearch",
+        "r4.8xlarge.elasticsearch",
+        "r4.16xlarge.elasticsearch"
       ]
     },
     "ElasticsearchClusterConfig":{
@@ -630,6 +748,16 @@
       "member":{"shape":"ElasticsearchDomainStatus"},
       "documentation":"<p>A list that contains the status of each requested Elasticsearch domain.</p>"
     },
+    "ElasticsearchInstanceTypeList":{
+      "type":"list",
+      "member":{"shape":"ESPartitionInstanceType"},
+      "documentation":"<p> List of instance types supported by Amazon Elasticsearch service. </p>"
+    },
+    "ElasticsearchVersionList":{
+      "type":"list",
+      "member":{"shape":"ElasticsearchVersionString"},
+      "documentation":"<p>List of supported elastic search versions. </p>"
+    },
     "ElasticsearchVersionStatus":{
       "type":"structure",
       "required":[
@@ -650,6 +778,22 @@
     },
     "ElasticsearchVersionString":{"type":"string"},
     "ErrorMessage":{"type":"string"},
+    "InstanceCountLimits":{
+      "type":"structure",
+      "members":{
+        "MinimumInstanceCount":{"shape":"MinimumInstanceCount"},
+        "MaximumInstanceCount":{"shape":"MaximumInstanceCount"}
+      },
+      "documentation":"<p> InstanceCountLimits represents the limits on number of instances that be created in Amazon Elasticsearch for given InstanceType. </p>"
+    },
+    "InstanceLimits":{
+      "type":"structure",
+      "members":{
+        "InstanceCountLimits":{"shape":"InstanceCountLimits"}
+      },
+      "documentation":"<p>InstanceLimits represents the list of instance related attributes that are available for given InstanceType. </p>"
+    },
+    "InstanceRole":{"type":"string"},
     "IntegerClass":{"type":"integer"},
     "InternalException":{
       "type":"structure",
@@ -675,6 +819,33 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "LimitName":{"type":"string"},
+    "LimitValue":{"type":"string"},
+    "LimitValueList":{
+      "type":"list",
+      "member":{"shape":"LimitValue"}
+    },
+    "Limits":{
+      "type":"structure",
+      "members":{
+        "StorageTypes":{
+          "shape":"StorageTypeList",
+          "documentation":"<p>StorageType represents the list of storage related types and attributes that are available for given InstanceType. </p>"
+        },
+        "InstanceLimits":{"shape":"InstanceLimits"},
+        "AdditionalLimits":{
+          "shape":"AdditionalLimitList",
+          "documentation":"<p> List of additional limits that are specific to a given InstanceType and for each of it's <code> <a>InstanceRole</a> </code> . </p>"
+        }
+      },
+      "documentation":"<p> Limits for given InstanceType and for each of it's role. <br/> Limits contains following <code> <a>StorageTypes,</a> </code> <code> <a>InstanceLimits</a> </code> and <code> <a>AdditionalLimits</a> </code> </p>"
+    },
+    "LimitsByRole":{
+      "type":"map",
+      "key":{"shape":"InstanceRole"},
+      "value":{"shape":"Limits"},
+      "documentation":"<p> Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>Data: If the given InstanceType is used as Data node</li> <li>Master: If the given InstanceType is used as Master node</li> </ul> </p>"
+    },
     "ListDomainNamesResponse":{
       "type":"structure",
       "members":{
@@ -684,6 +855,76 @@
         }
       },
       "documentation":"<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all Elasticsearch domains owned by this account.</p>"
+    },
+    "ListElasticsearchInstanceTypesRequest":{
+      "type":"structure",
+      "required":["ElasticsearchVersion"],
+      "members":{
+        "ElasticsearchVersion":{
+          "shape":"ElasticsearchVersionString",
+          "documentation":"<p>Version of Elasticsearch for which list of supported elasticsearch instance types are needed. </p>",
+          "location":"uri",
+          "locationName":"ElasticsearchVersion"
+        },
+        "DomainName":{
+          "shape":"DomainName",
+          "documentation":"<p>DomainName represents the name of the Domain that we are trying to modify. This should be present only if we are querying for list of available Elasticsearch instance types when modifying existing domain. </p>",
+          "location":"querystring",
+          "locationName":"domainName"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p> Set this value to limit the number of results returned. Value provided must be greater than 30 else it wont be honored. </p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>NextToken should be sent in case if earlier API call produced result containing NextToken. It is used for pagination. </p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      },
+      "documentation":"<p> Container for the parameters to the <code> <a>ListElasticsearchInstanceTypes</a> </code> operation. </p>"
+    },
+    "ListElasticsearchInstanceTypesResponse":{
+      "type":"structure",
+      "members":{
+        "ElasticsearchInstanceTypes":{
+          "shape":"ElasticsearchInstanceTypeList",
+          "documentation":"<p> List of instance types supported by Amazon Elasticsearch service for given <code> <a>ElasticsearchVersion</a> </code> </p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>In case if there are more results available NextToken would be present, make further request to the same API with received NextToken to paginate remaining results. </p>"
+        }
+      },
+      "documentation":"<p> Container for the parameters returned by <code> <a>ListElasticsearchInstanceTypes</a> </code> operation. </p>"
+    },
+    "ListElasticsearchVersionsRequest":{
+      "type":"structure",
+      "members":{
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p> Set this value to limit the number of results returned. Value provided must be greater than 10 else it wont be honored. </p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      },
+      "documentation":"<p> Container for the parameters to the <code> <a>ListElasticsearchVersions</a> </code> operation. <p> Use <code> <a>MaxResults</a> </code> to control the maximum number of results to retrieve in a single call. </p> <p> Use <code> <a>NextToken</a> </code> in response to retrieve more results. If the received response does not contain a NextToken, then there are no more results to retrieve. </p> </p>"
+    },
+    "ListElasticsearchVersionsResponse":{
+      "type":"structure",
+      "members":{
+        "ElasticsearchVersions":{"shape":"ElasticsearchVersionList"},
+        "NextToken":{"shape":"NextToken"}
+      },
+      "documentation":"<p> Container for the parameters for response received from <code> <a>ListElasticsearchVersions</a> </code> operation. </p>"
     },
     "ListTagsRequest":{
       "type":"structure",
@@ -707,6 +948,23 @@
         }
       },
       "documentation":"<p>The result of a <code>ListTags</code> operation. Contains tags for all requested Elasticsearch domains.</p>"
+    },
+    "MaxResults":{
+      "type":"integer",
+      "documentation":"<p> Set this value to limit the number of results returned. </p>",
+      "max":100
+    },
+    "MaximumInstanceCount":{
+      "type":"integer",
+      "documentation":"<p> Maximum number of Instances that can be instantiated for given InstanceType. </p>"
+    },
+    "MinimumInstanceCount":{
+      "type":"integer",
+      "documentation":"<p> Minimum number of Instances that can be instantiated for given InstanceType. </p>"
+    },
+    "NextToken":{
+      "type":"string",
+      "documentation":"<p> Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. </p>"
     },
     "OptionState":{
       "type":"string",
@@ -817,6 +1075,48 @@
         }
       },
       "documentation":"<p>Status of a daily automated snapshot.</p>"
+    },
+    "StorageSubTypeName":{
+      "type":"string",
+      "documentation":"<p> SubType of the given storage type. List of available sub-storage options: For \"instance\" storageType we wont have any storageSubType, in case of \"ebs\" storageType we will have following valid storageSubTypes <ol> <li>standard</li> <li>gp2</li> <li>io1</li> </ol> Refer <code><a>VolumeType</a></code> for more information regarding above EBS storage options. </p>"
+    },
+    "StorageType":{
+      "type":"structure",
+      "members":{
+        "StorageTypeName":{"shape":"StorageTypeName"},
+        "StorageSubTypeName":{"shape":"StorageSubTypeName"},
+        "StorageTypeLimits":{
+          "shape":"StorageTypeLimitList",
+          "documentation":"<p>List of limits that are applicable for given storage type. </p>"
+        }
+      },
+      "documentation":"<p>StorageTypes represents the list of storage related types and their attributes that are available for given InstanceType. </p>"
+    },
+    "StorageTypeLimit":{
+      "type":"structure",
+      "members":{
+        "LimitName":{
+          "shape":"LimitName",
+          "documentation":"<p> Name of storage limits that are applicable for given storage type. If <code> <a>StorageType</a> </code> is ebs, following storage options are applicable <ol> <li>MinimumVolumeSize</li> Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumVolumeSize</li> Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumIops</li> Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. <li>MinimumIops</li> Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. </ol> </p>"
+        },
+        "LimitValues":{
+          "shape":"LimitValueList",
+          "documentation":"<p> Values for the <code> <a>StorageTypeLimit$LimitName</a> </code> . </p>"
+        }
+      },
+      "documentation":"<p>Limits that are applicable for given storage type. </p>"
+    },
+    "StorageTypeLimitList":{
+      "type":"list",
+      "member":{"shape":"StorageTypeLimit"}
+    },
+    "StorageTypeList":{
+      "type":"list",
+      "member":{"shape":"StorageType"}
+    },
+    "StorageTypeName":{
+      "type":"string",
+      "documentation":"<p> Type of the storage. List of available storage options: <ol> <li>instance</li> Inbuilt storage available for the given Instance <li>ebs</li> Elastic block storage that would be attached to the given Instance </ol> </p>"
     },
     "String":{"type":"string"},
     "StringList":{
