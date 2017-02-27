@@ -306,6 +306,9 @@
   "opsworkscm": {
     "name": "OpsWorksCM"
   },
+  "organizations": {
+    "name": "Organizations"
+  },
   "pinpoint": {
     "name": "Pinpoint"
   },
