@@ -323,7 +323,7 @@ export namespace DocumentClient {
      */
     ReturnItemCollectionMetrics?: ReturnItemCollectionMetrics;
     /**
-     * A condition that must be satisfied in order for a conditional DeleteItem to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators:  = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN     Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
+     * A condition that must be satisfied in order for a conditional DeleteItem to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators: = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN      Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
      */
     ConditionExpression?: ConditionExpression;
     /**
@@ -398,6 +398,18 @@ export namespace DocumentClient {
      * The properties of the table.
      */
     Table?: TableDescription;
+  }
+  export interface DescribeTimeToLiveInput {
+    /**
+     * The name of the table to be described.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeTimeToLiveOutput {
+    /**
+     * 
+     */
+    TimeToLiveDescription?: TimeToLiveDescription;
   }
   export type ErrorMessage = string;
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
@@ -757,7 +769,7 @@ export namespace DocumentClient {
      */
     ConditionalOperator?: ConditionalOperator;
     /**
-     * A condition that must be satisfied in order for a conditional PutItem operation to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators:  = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN     Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
+     * A condition that must be satisfied in order for a conditional PutItem operation to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators: = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN      Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
      */
     ConditionExpression?: ConditionExpression;
     /**
@@ -1074,6 +1086,29 @@ export namespace DocumentClient {
     Tags: TagList;
   }
   export type TagValueString = string;
+  export type TimeToLiveAttributeName = string;
+  export interface TimeToLiveDescription {
+    /**
+     *  The Time to Live status for the table.
+     */
+    TimeToLiveStatus?: TimeToLiveStatus;
+    /**
+     *  The name of the Time to Live attribute for items in the table.
+     */
+    AttributeName?: TimeToLiveAttributeName;
+  }
+  export type TimeToLiveEnabled = boolean;
+  export interface TimeToLiveSpecification {
+    /**
+     * Indicates whether Time To Live is to be enabled (true) or disabled (false) on the table.
+     */
+    Enabled: TimeToLiveEnabled;
+    /**
+     * The name of the Time to Live attribute used to store the expiration time for items in the table.
+     */
+    AttributeName: TimeToLiveAttributeName;
+  }
+  export type TimeToLiveStatus = "ENABLING"|"DISABLING"|"ENABLED"|"DISABLED"|string;
   export interface UntagResourceInput {
     /**
      * The Amazon DyanamoDB resource the tags will be removed from. This value is an Amazon Resource Name (ARN).
@@ -1117,7 +1152,7 @@ export namespace DocumentClient {
      */
     ConditionalOperator?: ConditionalOperator;
     /**
-     * Use ReturnValues if you want to get the item attributes as they appeared either before or after they were updated. For UpdateItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - If UpdateItem overwrote an attribute name-value pair, then the content of the old item is returned.    UPDATED_OLD - The old versions of only the updated attributes are returned.    ALL_NEW - All of the attributes of the new version of the item are returned.    UPDATED_NEW - The new versions of only the updated attributes are returned.   There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No Read Capacity Units are consumed. Values returned are strongly consistent
+     * Use ReturnValues if you want to get the item attributes as they appeared either before or after they were updated. For UpdateItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - Returns all of the attributes of the item, as they appeared before the UpdateItem operation.    UPDATED_OLD - Returns only the updated attributes, as they appeared before the UpdateItem operation.    ALL_NEW - Returns all of the attributes of the item, as they appear after the UpdateItem operation.    UPDATED_NEW - Returns only the updated attributes, as they appear after the UpdateItem operation.   There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No Read Capacity Units are consumed. Values returned are strongly consistent
      */
     ReturnValues?: ReturnValue;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -1130,7 +1165,7 @@ export namespace DocumentClient {
      */
     UpdateExpression?: UpdateExpression;
     /**
-     * A condition that must be satisfied in order for a conditional update to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators:  = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN     Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
+     * A condition that must be satisfied in order for a conditional update to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators: = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN      Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
      */
     ConditionExpression?: ConditionExpression;
     /**
@@ -1183,6 +1218,22 @@ export namespace DocumentClient {
      * Represents the properties of the table.
      */
     TableDescription?: TableDescription;
+  }
+  export interface UpdateTimeToLiveInput {
+    /**
+     * The name of the table to be configured.
+     */
+    TableName: TableName;
+    /**
+     * Represents the settings used to enable or disable Time to Live for the specified table.
+     */
+    TimeToLiveSpecification: TimeToLiveSpecification;
+  }
+  export interface UpdateTimeToLiveOutput {
+    /**
+     * Represents the output of an UpdateTimeToLive operation.
+     */
+    TimeToLiveSpecification?: TimeToLiveSpecification;
   }
   export interface WriteRequest {
     /**

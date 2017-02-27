@@ -920,11 +920,11 @@ declare class IAM extends Service {
    */
   uploadSSHPublicKey(callback?: (err: AWSError, data: IAM.Types.UploadSSHPublicKeyResponse) => void): Request<IAM.Types.UploadSSHPublicKeyResponse, AWSError>;
   /**
-   * Uploads a server certificate entity for the AWS account. The server certificate entity includes a public key certificate, a private key, and an optional certificate chain, which should all be PEM-encoded. For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to Working with Server Certificates in the IAM User Guide. For information about the number of server certificates you can upload, see Limitations on IAM Entities and Objects in the IAM User Guide.  Because the body of the public key certificate, private key, and the certificate chain can be large, you should use POST rather than GET when calling UploadServerCertificate. For information about setting up signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the Query API with IAM, go to Calling the API by Making HTTP Query Requests in the IAM User Guide. 
+   * Uploads a server certificate entity for the AWS account. The server certificate entity includes a public key certificate, a private key, and an optional certificate chain, which should all be PEM-encoded. We recommend that you use AWS Certificate Manager to provision, manage, and deploy your server certificates. With ACM you can request a certificate, deploy it to AWS resources, and let ACM handle certificate renewals for you. Certificates provided by ACM are free. For more information about using ACM, see the AWS Certificate Manager User Guide. For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to Working with Server Certificates in the IAM User Guide. For information about the number of server certificates you can upload, see Limitations on IAM Entities and Objects in the IAM User Guide.  Because the body of the public key certificate, private key, and the certificate chain can be large, you should use POST rather than GET when calling UploadServerCertificate. For information about setting up signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the Query API with IAM, go to Calling the API by Making HTTP Query Requests in the IAM User Guide. 
    */
   uploadServerCertificate(params: IAM.Types.UploadServerCertificateRequest, callback?: (err: AWSError, data: IAM.Types.UploadServerCertificateResponse) => void): Request<IAM.Types.UploadServerCertificateResponse, AWSError>;
   /**
-   * Uploads a server certificate entity for the AWS account. The server certificate entity includes a public key certificate, a private key, and an optional certificate chain, which should all be PEM-encoded. For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to Working with Server Certificates in the IAM User Guide. For information about the number of server certificates you can upload, see Limitations on IAM Entities and Objects in the IAM User Guide.  Because the body of the public key certificate, private key, and the certificate chain can be large, you should use POST rather than GET when calling UploadServerCertificate. For information about setting up signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the Query API with IAM, go to Calling the API by Making HTTP Query Requests in the IAM User Guide. 
+   * Uploads a server certificate entity for the AWS account. The server certificate entity includes a public key certificate, a private key, and an optional certificate chain, which should all be PEM-encoded. We recommend that you use AWS Certificate Manager to provision, manage, and deploy your server certificates. With ACM you can request a certificate, deploy it to AWS resources, and let ACM handle certificate renewals for you. Certificates provided by ACM are free. For more information about using ACM, see the AWS Certificate Manager User Guide. For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to Working with Server Certificates in the IAM User Guide. For information about the number of server certificates you can upload, see Limitations on IAM Entities and Objects in the IAM User Guide.  Because the body of the public key certificate, private key, and the certificate chain can be large, you should use POST rather than GET when calling UploadServerCertificate. For information about setting up signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the Query API with IAM, go to Calling the API by Making HTTP Query Requests in the IAM User Guide. 
    */
   uploadServerCertificate(callback?: (err: AWSError, data: IAM.Types.UploadServerCertificateResponse) => void): Request<IAM.Types.UploadServerCertificateResponse, AWSError>;
   /**
@@ -1554,6 +1554,10 @@ declare namespace IAM {
      * A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. This list is used when the resource in a simulation is "*", either explicitly, or when the ResourceArns parameter blank. If you include a list of resources, then any missing context values are instead included under the ResourceSpecificResults section. To discover the context keys used by a set of policies, you can call GetContextKeysForCustomPolicy or GetContextKeysForPrincipalPolicy.
      */
     MissingContextValues?: ContextKeyNamesResultListType;
+    /**
+     * A structure that details how AWS Organizations and its service control policies affect the results of the simulation. Only applies if the simulated user's account is part of an organization.
+     */
+    OrganizationsDecisionDetail?: OrganizationsDecisionDetail;
     /**
      * Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller's IAM policy must grant access. See How IAM Roles Differ from Resource-based Policies 
      */
@@ -2767,6 +2771,12 @@ declare namespace IAM {
   }
   export type OpenIDConnectProviderListType = OpenIDConnectProviderListEntry[];
   export type OpenIDConnectProviderUrlType = string;
+  export interface OrganizationsDecisionDetail {
+    /**
+     * Specifies whether the simulated action is allowed by the AWS Organizations service control policies that impact the simulated user's account.
+     */
+    AllowedByOrganizations?: booleanType;
+  }
   export interface PasswordPolicy {
     /**
      * Minimum length to require for IAM user passwords.

@@ -41,6 +41,7 @@ export import Lambda = require('./lambda');
 export import LexRuntime = require('./lexruntime');
 export import MachineLearning = require('./machinelearning');
 export import MarketplaceCommerceAnalytics = require('./marketplacecommerceanalytics');
+export import MechanicalTurkRequester = require('./mechanicalturkrequester');
 export import MobileAnalytics = require('./mobileanalytics');
 export import OpsWorks = require('./opsworks');
 export import Polly = require('./polly');

@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.20.0
+// AWS SDK for JavaScript v2.21.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -20943,6 +20943,29 @@ module.exports={
         }
       }
     },
+    "DescribeTimeToLive": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "TableName"
+        ],
+        "members": {
+          "TableName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TimeToLiveDescription": {
+            "type": "structure",
+            "members": {
+              "TimeToLiveStatus": {},
+              "AttributeName": {}
+            }
+          }
+        }
+      }
+    },
     "GetItem": {
       "input": {
         "type": "structure",
@@ -21016,7 +21039,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Tags": {
-            "shape": "S35"
+            "shape": "S3a"
           },
           "NextToken": {}
         }
@@ -21088,11 +21111,11 @@ module.exports={
             "type": "map",
             "key": {},
             "value": {
-              "shape": "S3f"
+              "shape": "S3k"
             }
           },
           "QueryFilter": {
-            "shape": "S3g"
+            "shape": "S3l"
           },
           "ConditionalOperator": {},
           "ScanIndexForward": {
@@ -21151,7 +21174,7 @@ module.exports={
           },
           "Select": {},
           "ScanFilter": {
-            "shape": "S3g"
+            "shape": "S3l"
           },
           "ConditionalOperator": {},
           "ExclusiveStartKey": {
@@ -21208,7 +21231,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "Tags": {
-            "shape": "S35"
+            "shape": "S3a"
           }
         }
       }
@@ -21361,6 +21384,29 @@ module.exports={
         "members": {
           "TableDescription": {
             "shape": "S20"
+          }
+        }
+      }
+    },
+    "UpdateTimeToLive": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "TableName",
+          "TimeToLiveSpecification"
+        ],
+        "members": {
+          "TableName": {},
+          "TimeToLiveSpecification": {
+            "shape": "S4a"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TimeToLiveSpecification": {
+            "shape": "S4a"
           }
         }
       }
@@ -21761,7 +21807,7 @@ module.exports={
         "shape": "S8"
       }
     },
-    "S35": {
+    "S3a": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -21775,7 +21821,7 @@ module.exports={
         }
       }
     },
-    "S3f": {
+    "S3k": {
       "type": "structure",
       "required": [
         "ComparisonOperator"
@@ -21787,11 +21833,24 @@ module.exports={
         "ComparisonOperator": {}
       }
     },
-    "S3g": {
+    "S3l": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S3f"
+        "shape": "S3k"
+      }
+    },
+    "S4a": {
+      "type": "structure",
+      "required": [
+        "Enabled",
+        "AttributeName"
+      ],
+      "members": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "AttributeName": {}
       }
     }
   }
@@ -57118,6 +57177,11 @@ module.exports={
     "prefix": "meteringmarketplace",
     "name": "MarketplaceMetering"
   },
+  "mechanicalturkrequester": {
+    "prefix": "mturk-requester",
+    "name": "MechanicalTurkRequester",
+    "cors": true
+  },
   "mobileanalytics": {
     "name": "MobileAnalytics",
     "cors": true
@@ -57128,6 +57192,9 @@ module.exports={
   },
   "opsworkscm": {
     "name": "OpsWorksCM"
+  },
+  "organizations": {
+    "name": "Organizations"
   },
   "pinpoint": {
     "name": "Pinpoint"
@@ -57871,6 +57938,1343 @@ module.exports={
 }
 
 },{}],96:[function(require,module,exports){
+module.exports={
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2017-01-17",
+    "endpointPrefix": "mturk-requester",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "serviceFullName": "Amazon Mechanical Turk Requester Service",
+    "signatureVersion": "v4",
+    "targetPrefix": "MTurkRequesterServiceV20170117",
+    "uid": "mturk-requester-2017-01-17"
+  },
+  "operations": {
+    "AcceptQualificationRequest": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "QualificationRequestId"
+        ],
+        "members": {
+          "QualificationRequestId": {},
+          "IntegerValue": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "ApproveAssignment": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AssignmentId"
+        ],
+        "members": {
+          "AssignmentId": {},
+          "RequesterFeedback": {},
+          "OverrideRejection": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "AssociateQualificationWithWorker": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "QualificationTypeId",
+          "WorkerId"
+        ],
+        "members": {
+          "QualificationTypeId": {},
+          "WorkerId": {},
+          "IntegerValue": {
+            "type": "integer"
+          },
+          "SendNotification": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "CreateAdditionalAssignmentsForHIT": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITId"
+        ],
+        "members": {
+          "HITId": {},
+          "NumberOfAdditionalAssignments": {
+            "type": "integer"
+          },
+          "UniqueRequestToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "CreateHIT": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "LifetimeInSeconds",
+          "AssignmentDurationInSeconds",
+          "Reward",
+          "Title",
+          "Description"
+        ],
+        "members": {
+          "MaxAssignments": {
+            "type": "integer"
+          },
+          "AutoApprovalDelayInSeconds": {
+            "type": "long"
+          },
+          "LifetimeInSeconds": {
+            "type": "long"
+          },
+          "AssignmentDurationInSeconds": {
+            "type": "long"
+          },
+          "Reward": {},
+          "Title": {},
+          "Keywords": {},
+          "Description": {},
+          "Question": {},
+          "RequesterAnnotation": {},
+          "QualificationRequirements": {
+            "shape": "Si"
+          },
+          "UniqueRequestToken": {},
+          "AssignmentReviewPolicy": {
+            "shape": "Sp"
+          },
+          "HITReviewPolicy": {
+            "shape": "Sp"
+          },
+          "HITLayoutId": {},
+          "HITLayoutParameters": {
+            "shape": "Sv"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "HIT": {
+            "shape": "Sy"
+          }
+        }
+      }
+    },
+    "CreateHITType": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AssignmentDurationInSeconds",
+          "Reward",
+          "Title",
+          "Description"
+        ],
+        "members": {
+          "AutoApprovalDelayInSeconds": {
+            "type": "long"
+          },
+          "AssignmentDurationInSeconds": {
+            "type": "long"
+          },
+          "Reward": {},
+          "Title": {},
+          "Keywords": {},
+          "Description": {},
+          "QualificationRequirements": {
+            "shape": "Si"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "HITTypeId": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateHITWithHITType": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITTypeId",
+          "LifetimeInSeconds"
+        ],
+        "members": {
+          "HITTypeId": {},
+          "MaxAssignments": {
+            "type": "integer"
+          },
+          "LifetimeInSeconds": {
+            "type": "long"
+          },
+          "Question": {},
+          "RequesterAnnotation": {},
+          "UniqueRequestToken": {},
+          "AssignmentReviewPolicy": {
+            "shape": "Sp"
+          },
+          "HITReviewPolicy": {
+            "shape": "Sp"
+          },
+          "HITLayoutId": {},
+          "HITLayoutParameters": {
+            "shape": "Sv"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "HIT": {
+            "shape": "Sy"
+          }
+        }
+      }
+    },
+    "CreateQualificationType": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "Description",
+          "QualificationTypeStatus"
+        ],
+        "members": {
+          "Name": {},
+          "Keywords": {},
+          "Description": {},
+          "QualificationTypeStatus": {},
+          "RetryDelayInSeconds": {
+            "type": "long"
+          },
+          "Test": {},
+          "AnswerKey": {},
+          "TestDurationInSeconds": {
+            "type": "long"
+          },
+          "AutoGranted": {
+            "type": "boolean"
+          },
+          "AutoGrantedValue": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "QualificationType": {
+            "shape": "S19"
+          }
+        }
+      }
+    },
+    "CreateWorkerBlock": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "WorkerId",
+          "Reason"
+        ],
+        "members": {
+          "WorkerId": {},
+          "Reason": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteHIT": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITId"
+        ],
+        "members": {
+          "HITId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteQualificationType": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "QualificationTypeId"
+        ],
+        "members": {
+          "QualificationTypeId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteWorkerBlock": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "WorkerId"
+        ],
+        "members": {
+          "WorkerId": {},
+          "Reason": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DisassociateQualificationFromWorker": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "WorkerId",
+          "QualificationTypeId"
+        ],
+        "members": {
+          "WorkerId": {},
+          "QualificationTypeId": {},
+          "Reason": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "GetAccountBalance": {
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AvailableBalance": {},
+          "OnHoldBalance": {}
+        }
+      },
+      "idempotent": true
+    },
+    "GetAssignment": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AssignmentId"
+        ],
+        "members": {
+          "AssignmentId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Assignment": {
+            "shape": "S1o"
+          },
+          "HIT": {
+            "shape": "Sy"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "GetFileUploadURL": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AssignmentId",
+          "QuestionIdentifier"
+        ],
+        "members": {
+          "AssignmentId": {},
+          "QuestionIdentifier": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "FileUploadURL": {}
+        }
+      },
+      "idempotent": true
+    },
+    "GetHIT": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITId"
+        ],
+        "members": {
+          "HITId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "HIT": {
+            "shape": "Sy"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "GetQualificationScore": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "QualificationTypeId",
+          "WorkerId"
+        ],
+        "members": {
+          "QualificationTypeId": {},
+          "WorkerId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Qualification": {
+            "shape": "S1w"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "GetQualificationType": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "QualificationTypeId"
+        ],
+        "members": {
+          "QualificationTypeId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "QualificationType": {
+            "shape": "S19"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListAssignmentsForHIT": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITId"
+        ],
+        "members": {
+          "HITId": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          },
+          "AssignmentStatuses": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "NumResults": {
+            "type": "integer"
+          },
+          "Assignments": {
+            "type": "list",
+            "member": {
+              "shape": "S1o"
+            }
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListBonusPayments": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "HITId": {},
+          "AssignmentId": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NumResults": {
+            "type": "integer"
+          },
+          "NextToken": {},
+          "BonusPayments": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "WorkerId": {},
+                "BonusAmount": {},
+                "AssignmentId": {},
+                "Reason": {},
+                "GrantTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListHITs": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "NumResults": {
+            "type": "integer"
+          },
+          "HITs": {
+            "shape": "S2c"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListHITsForQualificationType": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "QualificationTypeId"
+        ],
+        "members": {
+          "QualificationTypeId": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "NumResults": {
+            "type": "integer"
+          },
+          "HITs": {
+            "shape": "S2c"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListQualificationRequests": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "QualificationTypeId": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NumResults": {
+            "type": "integer"
+          },
+          "NextToken": {},
+          "QualificationRequests": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "QualificationRequestId": {},
+                "QualificationTypeId": {},
+                "WorkerId": {},
+                "Test": {},
+                "Answer": {},
+                "SubmitTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListQualificationTypes": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "MustBeRequestable"
+        ],
+        "members": {
+          "Query": {},
+          "MustBeRequestable": {
+            "type": "boolean"
+          },
+          "MustBeOwnedByCaller": {
+            "type": "boolean"
+          },
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NumResults": {
+            "type": "integer"
+          },
+          "NextToken": {},
+          "QualificationTypes": {
+            "type": "list",
+            "member": {
+              "shape": "S19"
+            }
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListReviewPolicyResultsForHIT": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITId"
+        ],
+        "members": {
+          "HITId": {},
+          "PolicyLevels": {
+            "type": "list",
+            "member": {}
+          },
+          "RetrieveActions": {
+            "type": "boolean"
+          },
+          "RetrieveResults": {
+            "type": "boolean"
+          },
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "HITId": {},
+          "AssignmentReviewPolicy": {
+            "shape": "Sp"
+          },
+          "HITReviewPolicy": {
+            "shape": "Sp"
+          },
+          "AssignmentReviewReport": {
+            "shape": "S2q"
+          },
+          "HITReviewReport": {
+            "shape": "S2q"
+          },
+          "NextToken": {}
+        }
+      },
+      "idempotent": true
+    },
+    "ListReviewableHITs": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "HITTypeId": {},
+          "Status": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "NumResults": {
+            "type": "integer"
+          },
+          "HITs": {
+            "shape": "S2c"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListWorkerBlocks": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "NumResults": {
+            "type": "integer"
+          },
+          "WorkerBlocks": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "WorkerId": {},
+                "Reason": {}
+              }
+            }
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListWorkersWithQualificationType": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "QualificationTypeId"
+        ],
+        "members": {
+          "QualificationTypeId": {},
+          "Status": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "NumResults": {
+            "type": "integer"
+          },
+          "Qualifications": {
+            "type": "list",
+            "member": {
+              "shape": "S1w"
+            }
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "NotifyWorkers": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Subject",
+          "MessageText",
+          "WorkerIds"
+        ],
+        "members": {
+          "Subject": {},
+          "MessageText": {},
+          "WorkerIds": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NotifyWorkersFailureStatuses": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "NotifyWorkersFailureCode": {},
+                "NotifyWorkersFailureMessage": {},
+                "WorkerId": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "RejectAssignment": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AssignmentId"
+        ],
+        "members": {
+          "AssignmentId": {},
+          "RequesterFeedback": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "RejectQualificationRequest": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "QualificationRequestId"
+        ],
+        "members": {
+          "QualificationRequestId": {},
+          "Reason": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "SendBonus": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "WorkerId",
+          "BonusAmount",
+          "AssignmentId"
+        ],
+        "members": {
+          "WorkerId": {},
+          "BonusAmount": {},
+          "AssignmentId": {},
+          "Reason": {},
+          "UniqueRequestToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "SendTestEventNotification": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Notification",
+          "TestEventType"
+        ],
+        "members": {
+          "Notification": {
+            "shape": "S3j"
+          },
+          "TestEventType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateExpirationForHIT": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITId"
+        ],
+        "members": {
+          "HITId": {},
+          "ExpireAt": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateHITReviewStatus": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITId"
+        ],
+        "members": {
+          "HITId": {},
+          "Revert": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateHITTypeOfHIT": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITId",
+          "HITTypeId"
+        ],
+        "members": {
+          "HITId": {},
+          "HITTypeId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateNotificationSettings": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "HITTypeId"
+        ],
+        "members": {
+          "HITTypeId": {},
+          "Notification": {
+            "shape": "S3j"
+          },
+          "Active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateQualificationType": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "QualificationTypeId"
+        ],
+        "members": {
+          "QualificationTypeId": {},
+          "Description": {},
+          "QualificationTypeStatus": {},
+          "Test": {},
+          "AnswerKey": {},
+          "TestDurationInSeconds": {
+            "type": "long"
+          },
+          "RetryDelayInSeconds": {
+            "type": "long"
+          },
+          "AutoGranted": {
+            "type": "boolean"
+          },
+          "AutoGrantedValue": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "QualificationType": {
+            "shape": "S19"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "Si": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "QualificationTypeId",
+          "Comparator"
+        ],
+        "members": {
+          "QualificationTypeId": {},
+          "Comparator": {},
+          "IntegerValues": {
+            "type": "list",
+            "member": {
+              "type": "integer"
+            }
+          },
+          "LocaleValues": {
+            "type": "list",
+            "member": {
+              "shape": "Sn"
+            }
+          },
+          "RequiredToPreview": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "Sn": {
+      "type": "structure",
+      "required": [
+        "Country"
+      ],
+      "members": {
+        "Country": {},
+        "Subdivision": {}
+      }
+    },
+    "Sp": {
+      "type": "structure",
+      "members": {
+        "PolicyName": {},
+        "Parameters": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Key": {},
+              "Values": {
+                "shape": "Ss"
+              },
+              "MapEntries": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "Key": {},
+                    "Values": {
+                      "shape": "Ss"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Ss": {
+      "type": "list",
+      "member": {}
+    },
+    "Sv": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "Name": {},
+          "Value": {}
+        }
+      }
+    },
+    "Sy": {
+      "type": "structure",
+      "members": {
+        "HITId": {},
+        "HITTypeId": {},
+        "HITGroupId": {},
+        "HITLayoutId": {},
+        "CreationTime": {
+          "type": "timestamp"
+        },
+        "Title": {},
+        "Description": {},
+        "Question": {},
+        "Keywords": {},
+        "HITStatus": {},
+        "MaxAssignments": {
+          "type": "integer"
+        },
+        "Reward": {},
+        "AutoApprovalDelayInSeconds": {
+          "type": "long"
+        },
+        "Expiration": {
+          "type": "timestamp"
+        },
+        "AssignmentDurationInSeconds": {
+          "type": "long"
+        },
+        "RequesterAnnotation": {},
+        "QualificationRequirements": {
+          "shape": "Si"
+        },
+        "HITReviewStatus": {},
+        "NumberOfAssignmentsPending": {
+          "type": "integer"
+        },
+        "NumberOfAssignmentsAvailable": {
+          "type": "integer"
+        },
+        "NumberOfAssignmentsCompleted": {
+          "type": "integer"
+        }
+      }
+    },
+    "S19": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {},
+        "CreationTime": {
+          "type": "timestamp"
+        },
+        "Name": {},
+        "Description": {},
+        "Keywords": {},
+        "QualificationTypeStatus": {},
+        "Test": {},
+        "TestDurationInSeconds": {
+          "type": "long"
+        },
+        "AnswerKey": {},
+        "RetryDelayInSeconds": {
+          "type": "long"
+        },
+        "IsRequestable": {
+          "type": "boolean"
+        },
+        "AutoGranted": {
+          "type": "boolean"
+        },
+        "AutoGrantedValue": {
+          "type": "integer"
+        }
+      }
+    },
+    "S1o": {
+      "type": "structure",
+      "members": {
+        "AssignmentId": {},
+        "WorkerId": {},
+        "HITId": {},
+        "AssignmentStatus": {},
+        "AutoApprovalTime": {
+          "type": "timestamp"
+        },
+        "AcceptTime": {
+          "type": "timestamp"
+        },
+        "SubmitTime": {
+          "type": "timestamp"
+        },
+        "ApprovalTime": {
+          "type": "timestamp"
+        },
+        "RejectionTime": {
+          "type": "timestamp"
+        },
+        "Deadline": {
+          "type": "timestamp"
+        },
+        "Answer": {},
+        "RequesterFeedback": {}
+      }
+    },
+    "S1w": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {},
+        "WorkerId": {},
+        "GrantTime": {
+          "type": "timestamp"
+        },
+        "IntegerValue": {
+          "type": "integer"
+        },
+        "LocaleValue": {
+          "shape": "Sn"
+        },
+        "Status": {}
+      }
+    },
+    "S2c": {
+      "type": "list",
+      "member": {
+        "shape": "Sy"
+      }
+    },
+    "S2q": {
+      "type": "structure",
+      "members": {
+        "ReviewResults": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "ActionId": {},
+              "SubjectId": {},
+              "SubjectType": {},
+              "QuestionId": {},
+              "Key": {},
+              "Value": {}
+            }
+          }
+        },
+        "ReviewActions": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "ActionId": {},
+              "ActionName": {},
+              "TargetId": {},
+              "TargetType": {},
+              "Status": {},
+              "CompleteTime": {
+                "type": "timestamp"
+              },
+              "Result": {},
+              "ErrorCode": {}
+            }
+          }
+        }
+      }
+    },
+    "S3j": {
+      "type": "structure",
+      "required": [
+        "Destination",
+        "Transport"
+      ],
+      "members": {
+        "Destination": {},
+        "Transport": {},
+        "Version": {},
+        "EventTypes": {
+          "type": "list",
+          "member": {}
+        }
+      }
+    }
+  }
+}
+},{}],97:[function(require,module,exports){
+module.exports={
+  "pagination": {
+    "ListAssignmentsForHIT": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListBonusPayments": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListHITs": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListHITsForQualificationType": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListQualificationRequests": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListQualificationTypes": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListReviewPolicyResultsForHIT": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListReviewableHITs": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListWorkerBlocks": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListWorkersWithQualificationType": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    }
+  }
+}
+
+},{}],98:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -60013,7 +61417,7 @@ module.exports={
     }
   }
 }
-},{}],97:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeApps": {
@@ -60070,7 +61474,7 @@ module.exports={
   }
 }
 
-},{}],98:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -60367,7 +61771,7 @@ module.exports={
   }
 }
 
-},{}],99:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -60612,7 +62016,7 @@ module.exports={
     }
   }
 }
-},{}],100:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -62509,7 +63913,7 @@ module.exports={
     }
   }
 }
-},{}],101:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDBEngineVersions": {
@@ -62607,7 +64011,7 @@ module.exports={
     }
   }
 }
-},{}],102:[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -64636,7 +66040,7 @@ module.exports={
     }
   }
 }
-},{}],103:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDBEngineVersions": {
@@ -64747,7 +66151,7 @@ module.exports={
     }
   }
 }
-},{}],104:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -66912,9 +68316,9 @@ module.exports={
     }
   }
 }
-},{}],105:[function(require,module,exports){
-arguments[4][103][0].apply(exports,arguments)
-},{"dup":103}],106:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
+arguments[4][105][0].apply(exports,arguments)
+},{"dup":105}],108:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -67013,7 +68417,7 @@ module.exports={
   }
 }
 
-},{}],107:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -70597,9 +72001,9 @@ module.exports={
     }
   }
 }
-},{}],108:[function(require,module,exports){
-arguments[4][103][0].apply(exports,arguments)
-},{"dup":103}],109:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
+arguments[4][105][0].apply(exports,arguments)
+},{"dup":105}],111:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -70691,7 +72095,7 @@ module.exports={
   }
 }
 
-},{}],110:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -72999,7 +74403,7 @@ module.exports={
     }
   }
 }
-},{}],111:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeClusterParameterGroups": {
@@ -73095,7 +74499,7 @@ module.exports={
   }
 }
 
-},{}],112:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -73194,7 +74598,7 @@ module.exports={
   }
 }
 
-},{}],113:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -73776,7 +75180,7 @@ module.exports={
     }
   }
 }
-},{}],114:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListCollections": {
@@ -73793,7 +75197,7 @@ module.exports={
     }
   }
 }
-},{}],115:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -76074,7 +77478,7 @@ module.exports={
     }
   }
 }
-},{}],116:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListHealthChecks": {
@@ -76108,7 +77512,7 @@ module.exports={
     }
   }
 }
-},{}],117:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -76128,7 +77532,7 @@ module.exports={
   }
 }
 
-},{}],118:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -76877,7 +78281,7 @@ module.exports={
     }
   }
 }
-},{}],119:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 module.exports={
   "version": "1.0",
   "pagination": {
@@ -76896,7 +78300,7 @@ module.exports={
   }
 }
 
-},{}],120:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -76999,9 +78403,9 @@ module.exports={
     }
   }
 }
-},{}],121:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 arguments[4][21][0].apply(exports,arguments)
-},{"dup":21}],122:[function(require,module,exports){
+},{"dup":21}],124:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -81508,7 +82912,7 @@ module.exports={
     }
   }
 }
-},{}],123:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListBuckets": {
@@ -81576,7 +82980,7 @@ module.exports={
   }
 }
 
-},{}],124:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -81651,7 +83055,7 @@ module.exports={
   }
 }
 
-},{}],125:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -83045,7 +84449,7 @@ module.exports={
     }
   }
 }
-},{}],126:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -83669,7 +85073,7 @@ module.exports={
     }
   }
 }
-},{}],127:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListEndpointsByPlatformApplication": {
@@ -83700,7 +85104,7 @@ module.exports={
   }
 }
 
-},{}],128:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -84299,7 +85703,7 @@ module.exports={
     }
   }
 }
-},{}],129:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListQueues": {
@@ -84308,7 +85712,7 @@ module.exports={
   }
 }
 
-},{}],130:[function(require,module,exports){
+},{}],132:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -87487,7 +88891,7 @@ module.exports={
     }
   }
 }
-},{}],131:[function(require,module,exports){
+},{}],133:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeInstanceInformation": {
@@ -87529,7 +88933,7 @@ module.exports={
   }
 }
 
-},{}],132:[function(require,module,exports){
+},{}],134:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -89201,7 +90605,7 @@ module.exports={
     }
   }
 }
-},{}],133:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeCachediSCSIVolumes": {
@@ -89254,7 +90658,7 @@ module.exports={
     }
   }
 }
-},{}],134:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -89381,6 +90785,13 @@ module.exports={
                     },
                     "StreamViewType": {}
                   }
+                },
+                "userIdentity": {
+                  "type": "structure",
+                  "members": {
+                    "PrincipalId": {},
+                    "Type": {}
+                  }
                 }
               }
             }
@@ -89494,7 +90905,9 @@ module.exports={
     }
   }
 }
-},{}],135:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
+arguments[4][21][0].apply(exports,arguments)
+},{"dup":21}],138:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -89745,11 +91158,10 @@ module.exports={
     }
   }
 }
-},{}],136:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "waf-2015-08-24",
     "apiVersion": "2015-08-24",
     "endpointPrefix": "waf",
     "jsonVersion": "1.1",
@@ -89757,7 +91169,8 @@ module.exports={
     "serviceAbbreviation": "WAF",
     "serviceFullName": "AWS WAF",
     "signatureVersion": "v4",
-    "targetPrefix": "AWSWAF_20150824"
+    "targetPrefix": "AWSWAF_20150824",
+    "uid": "waf-2015-08-24"
   },
   "operations": {
     "CreateByteMatchSet": {
@@ -91029,7 +92442,9 @@ module.exports={
     }
   }
 }
-},{}],137:[function(require,module,exports){
+},{}],140:[function(require,module,exports){
+arguments[4][21][0].apply(exports,arguments)
+},{"dup":21}],141:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91049,7 +92464,7 @@ Object.defineProperty(apiLoader.services['acm'], '2015-12-08', {
 
 module.exports = AWS.ACM;
 
-},{"../apis/acm-2015-12-08.min.json":1,"../apis/acm-2015-12-08.paginators.json":2,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],138:[function(require,module,exports){
+},{"../apis/acm-2015-12-08.min.json":1,"../apis/acm-2015-12-08.paginators.json":2,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],142:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91070,7 +92485,7 @@ Object.defineProperty(apiLoader.services['apigateway'], '2015-07-09', {
 
 module.exports = AWS.APIGateway;
 
-},{"../apis/apigateway-2015-07-09.min.json":3,"../apis/apigateway-2015-07-09.paginators.json":4,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/apigateway":241}],139:[function(require,module,exports){
+},{"../apis/apigateway-2015-07-09.min.json":3,"../apis/apigateway-2015-07-09.paginators.json":4,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/apigateway":246}],143:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91090,7 +92505,7 @@ Object.defineProperty(apiLoader.services['applicationautoscaling'], '2016-02-06'
 
 module.exports = AWS.ApplicationAutoScaling;
 
-},{"../apis/application-autoscaling-2016-02-06.min.json":5,"../apis/application-autoscaling-2016-02-06.paginators.json":6,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],140:[function(require,module,exports){
+},{"../apis/application-autoscaling-2016-02-06.min.json":5,"../apis/application-autoscaling-2016-02-06.paginators.json":6,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],144:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91110,7 +92525,7 @@ Object.defineProperty(apiLoader.services['autoscaling'], '2011-01-01', {
 
 module.exports = AWS.AutoScaling;
 
-},{"../apis/autoscaling-2011-01-01.min.json":7,"../apis/autoscaling-2011-01-01.paginators.json":8,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],141:[function(require,module,exports){
+},{"../apis/autoscaling-2011-01-01.min.json":7,"../apis/autoscaling-2011-01-01.paginators.json":8,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],145:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 
@@ -91158,6 +92573,7 @@ module.exports = {
   LexRuntime: require('./lexruntime'),
   MachineLearning: require('./machinelearning'),
   MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
+  MechanicalTurkRequester: require('./mechanicalturkrequester'),
   MobileAnalytics: require('./mobileanalytics'),
   OpsWorks: require('./opsworks'),
   Polly: require('./polly'),
@@ -91176,7 +92592,7 @@ module.exports = {
   STS: require('./sts'),
   WAF: require('./waf')
 };
-},{"../lib/core":202,"../lib/node_loader":199,"./acm":137,"./apigateway":138,"./applicationautoscaling":139,"./autoscaling":140,"./cloudformation":142,"./cloudfront":143,"./cloudhsm":144,"./cloudtrail":145,"./cloudwatch":146,"./cloudwatchevents":147,"./cloudwatchlogs":148,"./codecommit":149,"./codedeploy":150,"./codepipeline":151,"./cognitoidentity":152,"./cognitoidentityserviceprovider":153,"./cognitosync":154,"./configservice":155,"./cur":156,"./devicefarm":157,"./directconnect":158,"./dynamodb":159,"./dynamodbstreams":160,"./ec2":161,"./ecr":162,"./ecs":163,"./elasticache":164,"./elasticbeanstalk":165,"./elastictranscoder":166,"./elb":167,"./elbv2":168,"./emr":169,"./firehose":170,"./gamelift":171,"./inspector":172,"./iot":173,"./iotdata":174,"./kinesis":175,"./kms":176,"./lambda":177,"./lexruntime":178,"./machinelearning":179,"./marketplacecommerceanalytics":180,"./mobileanalytics":181,"./opsworks":182,"./polly":183,"./rds":184,"./redshift":185,"./rekognition":186,"./route53":187,"./route53domains":188,"./s3":189,"./servicecatalog":190,"./ses":191,"./sns":192,"./sqs":193,"./ssm":194,"./storagegateway":195,"./sts":196,"./waf":197}],142:[function(require,module,exports){
+},{"../lib/core":207,"../lib/node_loader":204,"./acm":141,"./apigateway":142,"./applicationautoscaling":143,"./autoscaling":144,"./cloudformation":146,"./cloudfront":147,"./cloudhsm":148,"./cloudtrail":149,"./cloudwatch":150,"./cloudwatchevents":151,"./cloudwatchlogs":152,"./codecommit":153,"./codedeploy":154,"./codepipeline":155,"./cognitoidentity":156,"./cognitoidentityserviceprovider":157,"./cognitosync":158,"./configservice":159,"./cur":160,"./devicefarm":161,"./directconnect":162,"./dynamodb":163,"./dynamodbstreams":164,"./ec2":165,"./ecr":166,"./ecs":167,"./elasticache":168,"./elasticbeanstalk":169,"./elastictranscoder":170,"./elb":171,"./elbv2":172,"./emr":173,"./firehose":174,"./gamelift":175,"./inspector":176,"./iot":177,"./iotdata":178,"./kinesis":179,"./kms":180,"./lambda":181,"./lexruntime":182,"./machinelearning":183,"./marketplacecommerceanalytics":184,"./mechanicalturkrequester":185,"./mobileanalytics":186,"./opsworks":187,"./polly":188,"./rds":189,"./redshift":190,"./rekognition":191,"./route53":192,"./route53domains":193,"./s3":194,"./servicecatalog":195,"./ses":196,"./sns":197,"./sqs":198,"./ssm":199,"./storagegateway":200,"./sts":201,"./waf":202}],146:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91197,7 +92613,7 @@ Object.defineProperty(apiLoader.services['cloudformation'], '2010-05-15', {
 
 module.exports = AWS.CloudFormation;
 
-},{"../apis/cloudformation-2010-05-15.min.json":9,"../apis/cloudformation-2010-05-15.paginators.json":10,"../apis/cloudformation-2010-05-15.waiters2.json":11,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],143:[function(require,module,exports){
+},{"../apis/cloudformation-2010-05-15.min.json":9,"../apis/cloudformation-2010-05-15.paginators.json":10,"../apis/cloudformation-2010-05-15.waiters2.json":11,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],147:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91219,7 +92635,7 @@ Object.defineProperty(apiLoader.services['cloudfront'], '2016-11-25', {
 
 module.exports = AWS.CloudFront;
 
-},{"../apis/cloudfront-2016-11-25.min.json":12,"../apis/cloudfront-2016-11-25.paginators.json":13,"../apis/cloudfront-2016-11-25.waiters2.json":14,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/cloudfront":242}],144:[function(require,module,exports){
+},{"../apis/cloudfront-2016-11-25.min.json":12,"../apis/cloudfront-2016-11-25.paginators.json":13,"../apis/cloudfront-2016-11-25.waiters2.json":14,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/cloudfront":247}],148:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91238,7 +92654,7 @@ Object.defineProperty(apiLoader.services['cloudhsm'], '2014-05-30', {
 
 module.exports = AWS.CloudHSM;
 
-},{"../apis/cloudhsm-2014-05-30.min.json":15,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],145:[function(require,module,exports){
+},{"../apis/cloudhsm-2014-05-30.min.json":15,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],149:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91258,7 +92674,7 @@ Object.defineProperty(apiLoader.services['cloudtrail'], '2013-11-01', {
 
 module.exports = AWS.CloudTrail;
 
-},{"../apis/cloudtrail-2013-11-01.min.json":16,"../apis/cloudtrail-2013-11-01.paginators.json":17,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],146:[function(require,module,exports){
+},{"../apis/cloudtrail-2013-11-01.min.json":16,"../apis/cloudtrail-2013-11-01.paginators.json":17,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],150:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91279,7 +92695,7 @@ Object.defineProperty(apiLoader.services['cloudwatch'], '2010-08-01', {
 
 module.exports = AWS.CloudWatch;
 
-},{"../apis/monitoring-2010-08-01.min.json":93,"../apis/monitoring-2010-08-01.paginators.json":94,"../apis/monitoring-2010-08-01.waiters2.json":95,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],147:[function(require,module,exports){
+},{"../apis/monitoring-2010-08-01.min.json":93,"../apis/monitoring-2010-08-01.paginators.json":94,"../apis/monitoring-2010-08-01.waiters2.json":95,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],151:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91298,7 +92714,7 @@ Object.defineProperty(apiLoader.services['cloudwatchevents'], '2015-10-07', {
 
 module.exports = AWS.CloudWatchEvents;
 
-},{"../apis/events-2015-10-07.min.json":69,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],148:[function(require,module,exports){
+},{"../apis/events-2015-10-07.min.json":69,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],152:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91318,7 +92734,7 @@ Object.defineProperty(apiLoader.services['cloudwatchlogs'], '2014-03-28', {
 
 module.exports = AWS.CloudWatchLogs;
 
-},{"../apis/logs-2014-03-28.min.json":85,"../apis/logs-2014-03-28.paginators.json":86,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],149:[function(require,module,exports){
+},{"../apis/logs-2014-03-28.min.json":85,"../apis/logs-2014-03-28.paginators.json":86,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],153:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91338,7 +92754,7 @@ Object.defineProperty(apiLoader.services['codecommit'], '2015-04-13', {
 
 module.exports = AWS.CodeCommit;
 
-},{"../apis/codecommit-2015-04-13.min.json":18,"../apis/codecommit-2015-04-13.paginators.json":19,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],150:[function(require,module,exports){
+},{"../apis/codecommit-2015-04-13.min.json":18,"../apis/codecommit-2015-04-13.paginators.json":19,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],154:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91359,7 +92775,7 @@ Object.defineProperty(apiLoader.services['codedeploy'], '2014-10-06', {
 
 module.exports = AWS.CodeDeploy;
 
-},{"../apis/codedeploy-2014-10-06.min.json":20,"../apis/codedeploy-2014-10-06.paginators.json":21,"../apis/codedeploy-2014-10-06.waiters2.json":22,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],151:[function(require,module,exports){
+},{"../apis/codedeploy-2014-10-06.min.json":20,"../apis/codedeploy-2014-10-06.paginators.json":21,"../apis/codedeploy-2014-10-06.waiters2.json":22,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],155:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91378,7 +92794,7 @@ Object.defineProperty(apiLoader.services['codepipeline'], '2015-07-09', {
 
 module.exports = AWS.CodePipeline;
 
-},{"../apis/codepipeline-2015-07-09.min.json":23,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],152:[function(require,module,exports){
+},{"../apis/codepipeline-2015-07-09.min.json":23,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],156:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91399,7 +92815,7 @@ Object.defineProperty(apiLoader.services['cognitoidentity'], '2014-06-30', {
 
 module.exports = AWS.CognitoIdentity;
 
-},{"../apis/cognito-identity-2014-06-30.min.json":24,"../apis/cognito-identity-2014-06-30.paginators.json":25,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/cognitoidentity":243}],153:[function(require,module,exports){
+},{"../apis/cognito-identity-2014-06-30.min.json":24,"../apis/cognito-identity-2014-06-30.paginators.json":25,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/cognitoidentity":248}],157:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91418,7 +92834,7 @@ Object.defineProperty(apiLoader.services['cognitoidentityserviceprovider'], '201
 
 module.exports = AWS.CognitoIdentityServiceProvider;
 
-},{"../apis/cognito-idp-2016-04-18.min.json":26,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],154:[function(require,module,exports){
+},{"../apis/cognito-idp-2016-04-18.min.json":26,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],158:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91437,7 +92853,7 @@ Object.defineProperty(apiLoader.services['cognitosync'], '2014-06-30', {
 
 module.exports = AWS.CognitoSync;
 
-},{"../apis/cognito-sync-2014-06-30.min.json":27,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],155:[function(require,module,exports){
+},{"../apis/cognito-sync-2014-06-30.min.json":27,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],159:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91457,7 +92873,7 @@ Object.defineProperty(apiLoader.services['configservice'], '2014-11-12', {
 
 module.exports = AWS.ConfigService;
 
-},{"../apis/config-2014-11-12.min.json":28,"../apis/config-2014-11-12.paginators.json":29,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],156:[function(require,module,exports){
+},{"../apis/config-2014-11-12.min.json":28,"../apis/config-2014-11-12.paginators.json":29,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],160:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91477,7 +92893,7 @@ Object.defineProperty(apiLoader.services['cur'], '2017-01-06', {
 
 module.exports = AWS.CUR;
 
-},{"../apis/cur-2017-01-06.min.json":30,"../apis/cur-2017-01-06.paginators.json":31,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],157:[function(require,module,exports){
+},{"../apis/cur-2017-01-06.min.json":30,"../apis/cur-2017-01-06.paginators.json":31,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],161:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91497,7 +92913,7 @@ Object.defineProperty(apiLoader.services['devicefarm'], '2015-06-23', {
 
 module.exports = AWS.DeviceFarm;
 
-},{"../apis/devicefarm-2015-06-23.min.json":32,"../apis/devicefarm-2015-06-23.paginators.json":33,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],158:[function(require,module,exports){
+},{"../apis/devicefarm-2015-06-23.min.json":32,"../apis/devicefarm-2015-06-23.paginators.json":33,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],162:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91517,7 +92933,7 @@ Object.defineProperty(apiLoader.services['directconnect'], '2012-10-25', {
 
 module.exports = AWS.DirectConnect;
 
-},{"../apis/directconnect-2012-10-25.min.json":34,"../apis/directconnect-2012-10-25.paginators.json":35,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],159:[function(require,module,exports){
+},{"../apis/directconnect-2012-10-25.min.json":34,"../apis/directconnect-2012-10-25.paginators.json":35,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],163:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91549,7 +92965,7 @@ Object.defineProperty(apiLoader.services['dynamodb'], '2012-08-10', {
 
 module.exports = AWS.DynamoDB;
 
-},{"../apis/dynamodb-2011-12-05.min.json":36,"../apis/dynamodb-2011-12-05.paginators.json":37,"../apis/dynamodb-2011-12-05.waiters2.json":38,"../apis/dynamodb-2012-08-10.min.json":39,"../apis/dynamodb-2012-08-10.paginators.json":40,"../apis/dynamodb-2012-08-10.waiters2.json":41,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/dynamodb":244}],160:[function(require,module,exports){
+},{"../apis/dynamodb-2011-12-05.min.json":36,"../apis/dynamodb-2011-12-05.paginators.json":37,"../apis/dynamodb-2011-12-05.waiters2.json":38,"../apis/dynamodb-2012-08-10.min.json":39,"../apis/dynamodb-2012-08-10.paginators.json":40,"../apis/dynamodb-2012-08-10.waiters2.json":41,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/dynamodb":249}],164:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91560,6 +92976,7 @@ AWS.DynamoDBStreams = Service.defineService('dynamodbstreams', ['2012-08-10']);
 Object.defineProperty(apiLoader.services['dynamodbstreams'], '2012-08-10', {
   get: function get() {
     var model = require('../apis/streams.dynamodb-2012-08-10.min.json');
+    model.paginators = require('../apis/streams.dynamodb-2012-08-10.paginators.json').pagination;
     return model;
   },
   enumerable: true,
@@ -91568,7 +92985,7 @@ Object.defineProperty(apiLoader.services['dynamodbstreams'], '2012-08-10', {
 
 module.exports = AWS.DynamoDBStreams;
 
-},{"../apis/streams.dynamodb-2012-08-10.min.json":134,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],161:[function(require,module,exports){
+},{"../apis/streams.dynamodb-2012-08-10.min.json":136,"../apis/streams.dynamodb-2012-08-10.paginators.json":137,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],165:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91590,7 +93007,7 @@ Object.defineProperty(apiLoader.services['ec2'], '2016-11-15', {
 
 module.exports = AWS.EC2;
 
-},{"../apis/ec2-2016-11-15.min.json":42,"../apis/ec2-2016-11-15.paginators.json":43,"../apis/ec2-2016-11-15.waiters2.json":44,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/ec2":245}],162:[function(require,module,exports){
+},{"../apis/ec2-2016-11-15.min.json":42,"../apis/ec2-2016-11-15.paginators.json":43,"../apis/ec2-2016-11-15.waiters2.json":44,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/ec2":250}],166:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91610,7 +93027,7 @@ Object.defineProperty(apiLoader.services['ecr'], '2015-09-21', {
 
 module.exports = AWS.ECR;
 
-},{"../apis/ecr-2015-09-21.min.json":45,"../apis/ecr-2015-09-21.paginators.json":46,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],163:[function(require,module,exports){
+},{"../apis/ecr-2015-09-21.min.json":45,"../apis/ecr-2015-09-21.paginators.json":46,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],167:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91631,7 +93048,7 @@ Object.defineProperty(apiLoader.services['ecs'], '2014-11-13', {
 
 module.exports = AWS.ECS;
 
-},{"../apis/ecs-2014-11-13.min.json":47,"../apis/ecs-2014-11-13.paginators.json":48,"../apis/ecs-2014-11-13.waiters2.json":49,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],164:[function(require,module,exports){
+},{"../apis/ecs-2014-11-13.min.json":47,"../apis/ecs-2014-11-13.paginators.json":48,"../apis/ecs-2014-11-13.waiters2.json":49,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],168:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91652,7 +93069,7 @@ Object.defineProperty(apiLoader.services['elasticache'], '2015-02-02', {
 
 module.exports = AWS.ElastiCache;
 
-},{"../apis/elasticache-2015-02-02.min.json":50,"../apis/elasticache-2015-02-02.paginators.json":51,"../apis/elasticache-2015-02-02.waiters2.json":52,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],165:[function(require,module,exports){
+},{"../apis/elasticache-2015-02-02.min.json":50,"../apis/elasticache-2015-02-02.paginators.json":51,"../apis/elasticache-2015-02-02.waiters2.json":52,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],169:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91672,7 +93089,7 @@ Object.defineProperty(apiLoader.services['elasticbeanstalk'], '2010-12-01', {
 
 module.exports = AWS.ElasticBeanstalk;
 
-},{"../apis/elasticbeanstalk-2010-12-01.min.json":53,"../apis/elasticbeanstalk-2010-12-01.paginators.json":54,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],166:[function(require,module,exports){
+},{"../apis/elasticbeanstalk-2010-12-01.min.json":53,"../apis/elasticbeanstalk-2010-12-01.paginators.json":54,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],170:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91693,7 +93110,7 @@ Object.defineProperty(apiLoader.services['elastictranscoder'], '2012-09-25', {
 
 module.exports = AWS.ElasticTranscoder;
 
-},{"../apis/elastictranscoder-2012-09-25.min.json":63,"../apis/elastictranscoder-2012-09-25.paginators.json":64,"../apis/elastictranscoder-2012-09-25.waiters2.json":65,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],167:[function(require,module,exports){
+},{"../apis/elastictranscoder-2012-09-25.min.json":63,"../apis/elastictranscoder-2012-09-25.paginators.json":64,"../apis/elastictranscoder-2012-09-25.waiters2.json":65,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],171:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91714,7 +93131,7 @@ Object.defineProperty(apiLoader.services['elb'], '2012-06-01', {
 
 module.exports = AWS.ELB;
 
-},{"../apis/elasticloadbalancing-2012-06-01.min.json":55,"../apis/elasticloadbalancing-2012-06-01.paginators.json":56,"../apis/elasticloadbalancing-2012-06-01.waiters2.json":57,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],168:[function(require,module,exports){
+},{"../apis/elasticloadbalancing-2012-06-01.min.json":55,"../apis/elasticloadbalancing-2012-06-01.paginators.json":56,"../apis/elasticloadbalancing-2012-06-01.waiters2.json":57,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],172:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91734,7 +93151,7 @@ Object.defineProperty(apiLoader.services['elbv2'], '2015-12-01', {
 
 module.exports = AWS.ELBv2;
 
-},{"../apis/elasticloadbalancingv2-2015-12-01.min.json":58,"../apis/elasticloadbalancingv2-2015-12-01.paginators.json":59,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],169:[function(require,module,exports){
+},{"../apis/elasticloadbalancingv2-2015-12-01.min.json":58,"../apis/elasticloadbalancingv2-2015-12-01.paginators.json":59,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],173:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91755,7 +93172,7 @@ Object.defineProperty(apiLoader.services['emr'], '2009-03-31', {
 
 module.exports = AWS.EMR;
 
-},{"../apis/elasticmapreduce-2009-03-31.min.json":60,"../apis/elasticmapreduce-2009-03-31.paginators.json":61,"../apis/elasticmapreduce-2009-03-31.waiters2.json":62,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],170:[function(require,module,exports){
+},{"../apis/elasticmapreduce-2009-03-31.min.json":60,"../apis/elasticmapreduce-2009-03-31.paginators.json":61,"../apis/elasticmapreduce-2009-03-31.waiters2.json":62,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],174:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91774,7 +93191,7 @@ Object.defineProperty(apiLoader.services['firehose'], '2015-08-04', {
 
 module.exports = AWS.Firehose;
 
-},{"../apis/firehose-2015-08-04.min.json":70,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],171:[function(require,module,exports){
+},{"../apis/firehose-2015-08-04.min.json":70,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],175:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91794,7 +93211,7 @@ Object.defineProperty(apiLoader.services['gamelift'], '2015-10-01', {
 
 module.exports = AWS.GameLift;
 
-},{"../apis/gamelift-2015-10-01.min.json":71,"../apis/gamelift-2015-10-01.paginators.json":72,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],172:[function(require,module,exports){
+},{"../apis/gamelift-2015-10-01.min.json":71,"../apis/gamelift-2015-10-01.paginators.json":72,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],176:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91813,7 +93230,7 @@ Object.defineProperty(apiLoader.services['inspector'], '2016-02-16', {
 
 module.exports = AWS.Inspector;
 
-},{"../apis/inspector-2016-02-16.min.json":73,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],173:[function(require,module,exports){
+},{"../apis/inspector-2016-02-16.min.json":73,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],177:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91832,7 +93249,7 @@ Object.defineProperty(apiLoader.services['iot'], '2015-05-28', {
 
 module.exports = AWS.Iot;
 
-},{"../apis/iot-2015-05-28.min.json":74,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],174:[function(require,module,exports){
+},{"../apis/iot-2015-05-28.min.json":74,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],178:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91852,7 +93269,7 @@ Object.defineProperty(apiLoader.services['iotdata'], '2015-05-28', {
 
 module.exports = AWS.IotData;
 
-},{"../apis/iot-data-2015-05-28.min.json":75,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/iotdata":246}],175:[function(require,module,exports){
+},{"../apis/iot-data-2015-05-28.min.json":75,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/iotdata":251}],179:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91873,7 +93290,7 @@ Object.defineProperty(apiLoader.services['kinesis'], '2013-12-02', {
 
 module.exports = AWS.Kinesis;
 
-},{"../apis/kinesis-2013-12-02.min.json":76,"../apis/kinesis-2013-12-02.paginators.json":77,"../apis/kinesis-2013-12-02.waiters2.json":78,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],176:[function(require,module,exports){
+},{"../apis/kinesis-2013-12-02.min.json":76,"../apis/kinesis-2013-12-02.paginators.json":77,"../apis/kinesis-2013-12-02.waiters2.json":78,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],180:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91893,7 +93310,7 @@ Object.defineProperty(apiLoader.services['kms'], '2014-11-01', {
 
 module.exports = AWS.KMS;
 
-},{"../apis/kms-2014-11-01.min.json":79,"../apis/kms-2014-11-01.paginators.json":80,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],177:[function(require,module,exports){
+},{"../apis/kms-2014-11-01.min.json":79,"../apis/kms-2014-11-01.paginators.json":80,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],181:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91922,7 +93339,7 @@ Object.defineProperty(apiLoader.services['lambda'], '2015-03-31', {
 
 module.exports = AWS.Lambda;
 
-},{"../apis/lambda-2014-11-11.min.json":81,"../apis/lambda-2014-11-11.paginators.json":82,"../apis/lambda-2015-03-31.min.json":83,"../apis/lambda-2015-03-31.paginators.json":84,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],178:[function(require,module,exports){
+},{"../apis/lambda-2014-11-11.min.json":81,"../apis/lambda-2014-11-11.paginators.json":82,"../apis/lambda-2015-03-31.min.json":83,"../apis/lambda-2015-03-31.paginators.json":84,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],182:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91942,7 +93359,7 @@ Object.defineProperty(apiLoader.services['lexruntime'], '2016-11-28', {
 
 module.exports = AWS.LexRuntime;
 
-},{"../apis/runtime.lex-2016-11-28.min.json":120,"../apis/runtime.lex-2016-11-28.paginators.json":121,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],179:[function(require,module,exports){
+},{"../apis/runtime.lex-2016-11-28.min.json":122,"../apis/runtime.lex-2016-11-28.paginators.json":123,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],183:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91964,7 +93381,7 @@ Object.defineProperty(apiLoader.services['machinelearning'], '2014-12-12', {
 
 module.exports = AWS.MachineLearning;
 
-},{"../apis/machinelearning-2014-12-12.min.json":87,"../apis/machinelearning-2014-12-12.paginators.json":88,"../apis/machinelearning-2014-12-12.waiters2.json":89,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/machinelearning":247}],180:[function(require,module,exports){
+},{"../apis/machinelearning-2014-12-12.min.json":87,"../apis/machinelearning-2014-12-12.paginators.json":88,"../apis/machinelearning-2014-12-12.waiters2.json":89,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/machinelearning":252}],184:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -91983,7 +93400,27 @@ Object.defineProperty(apiLoader.services['marketplacecommerceanalytics'], '2015-
 
 module.exports = AWS.MarketplaceCommerceAnalytics;
 
-},{"../apis/marketplacecommerceanalytics-2015-07-01.min.json":90,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],181:[function(require,module,exports){
+},{"../apis/marketplacecommerceanalytics-2015-07-01.min.json":90,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],185:[function(require,module,exports){
+require('../lib/node_loader');
+var AWS = require('../lib/core');
+var Service = require('../lib/service');
+var apiLoader = require('../lib/api_loader');
+
+apiLoader.services['mechanicalturkrequester'] = {};
+AWS.MechanicalTurkRequester = Service.defineService('mechanicalturkrequester', ['2017-01-17']);
+Object.defineProperty(apiLoader.services['mechanicalturkrequester'], '2017-01-17', {
+  get: function get() {
+    var model = require('../apis/mturk-requester-2017-01-17.min.json');
+    model.paginators = require('../apis/mturk-requester-2017-01-17.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+
+module.exports = AWS.MechanicalTurkRequester;
+
+},{"../apis/mturk-requester-2017-01-17.min.json":96,"../apis/mturk-requester-2017-01-17.paginators.json":97,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],186:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92002,7 +93439,7 @@ Object.defineProperty(apiLoader.services['mobileanalytics'], '2014-06-05', {
 
 module.exports = AWS.MobileAnalytics;
 
-},{"../apis/mobileanalytics-2014-06-05.min.json":92,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],182:[function(require,module,exports){
+},{"../apis/mobileanalytics-2014-06-05.min.json":92,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],187:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92023,7 +93460,7 @@ Object.defineProperty(apiLoader.services['opsworks'], '2013-02-18', {
 
 module.exports = AWS.OpsWorks;
 
-},{"../apis/opsworks-2013-02-18.min.json":96,"../apis/opsworks-2013-02-18.paginators.json":97,"../apis/opsworks-2013-02-18.waiters2.json":98,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],183:[function(require,module,exports){
+},{"../apis/opsworks-2013-02-18.min.json":98,"../apis/opsworks-2013-02-18.paginators.json":99,"../apis/opsworks-2013-02-18.waiters2.json":100,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],188:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92043,7 +93480,7 @@ Object.defineProperty(apiLoader.services['polly'], '2016-06-10', {
 
 module.exports = AWS.Polly;
 
-},{"../apis/polly-2016-06-10.min.json":99,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/polly":248}],184:[function(require,module,exports){
+},{"../apis/polly-2016-06-10.min.json":101,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/polly":253}],189:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92093,7 +93530,7 @@ Object.defineProperty(apiLoader.services['rds'], '2014-10-31', {
 
 module.exports = AWS.RDS;
 
-},{"../apis/rds-2013-01-10.min.json":100,"../apis/rds-2013-01-10.paginators.json":101,"../apis/rds-2013-02-12.min.json":102,"../apis/rds-2013-02-12.paginators.json":103,"../apis/rds-2013-09-09.min.json":104,"../apis/rds-2013-09-09.paginators.json":105,"../apis/rds-2013-09-09.waiters2.json":106,"../apis/rds-2014-10-31.min.json":107,"../apis/rds-2014-10-31.paginators.json":108,"../apis/rds-2014-10-31.waiters2.json":109,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/rds":249}],185:[function(require,module,exports){
+},{"../apis/rds-2013-01-10.min.json":102,"../apis/rds-2013-01-10.paginators.json":103,"../apis/rds-2013-02-12.min.json":104,"../apis/rds-2013-02-12.paginators.json":105,"../apis/rds-2013-09-09.min.json":106,"../apis/rds-2013-09-09.paginators.json":107,"../apis/rds-2013-09-09.waiters2.json":108,"../apis/rds-2014-10-31.min.json":109,"../apis/rds-2014-10-31.paginators.json":110,"../apis/rds-2014-10-31.waiters2.json":111,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/rds":254}],190:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92114,7 +93551,7 @@ Object.defineProperty(apiLoader.services['redshift'], '2012-12-01', {
 
 module.exports = AWS.Redshift;
 
-},{"../apis/redshift-2012-12-01.min.json":110,"../apis/redshift-2012-12-01.paginators.json":111,"../apis/redshift-2012-12-01.waiters2.json":112,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],186:[function(require,module,exports){
+},{"../apis/redshift-2012-12-01.min.json":112,"../apis/redshift-2012-12-01.paginators.json":113,"../apis/redshift-2012-12-01.waiters2.json":114,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],191:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92134,7 +93571,7 @@ Object.defineProperty(apiLoader.services['rekognition'], '2016-06-27', {
 
 module.exports = AWS.Rekognition;
 
-},{"../apis/rekognition-2016-06-27.min.json":113,"../apis/rekognition-2016-06-27.paginators.json":114,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],187:[function(require,module,exports){
+},{"../apis/rekognition-2016-06-27.min.json":115,"../apis/rekognition-2016-06-27.paginators.json":116,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],192:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92156,7 +93593,7 @@ Object.defineProperty(apiLoader.services['route53'], '2013-04-01', {
 
 module.exports = AWS.Route53;
 
-},{"../apis/route53-2013-04-01.min.json":115,"../apis/route53-2013-04-01.paginators.json":116,"../apis/route53-2013-04-01.waiters2.json":117,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/route53":250}],188:[function(require,module,exports){
+},{"../apis/route53-2013-04-01.min.json":117,"../apis/route53-2013-04-01.paginators.json":118,"../apis/route53-2013-04-01.waiters2.json":119,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/route53":255}],193:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92176,7 +93613,7 @@ Object.defineProperty(apiLoader.services['route53domains'], '2014-05-15', {
 
 module.exports = AWS.Route53Domains;
 
-},{"../apis/route53domains-2014-05-15.min.json":118,"../apis/route53domains-2014-05-15.paginators.json":119,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],189:[function(require,module,exports){
+},{"../apis/route53domains-2014-05-15.min.json":120,"../apis/route53domains-2014-05-15.paginators.json":121,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],194:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92198,7 +93635,7 @@ Object.defineProperty(apiLoader.services['s3'], '2006-03-01', {
 
 module.exports = AWS.S3;
 
-},{"../apis/s3-2006-03-01.min.json":122,"../apis/s3-2006-03-01.paginators.json":123,"../apis/s3-2006-03-01.waiters2.json":124,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/s3":251}],190:[function(require,module,exports){
+},{"../apis/s3-2006-03-01.min.json":124,"../apis/s3-2006-03-01.paginators.json":125,"../apis/s3-2006-03-01.waiters2.json":126,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/s3":256}],195:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92217,7 +93654,7 @@ Object.defineProperty(apiLoader.services['servicecatalog'], '2015-12-10', {
 
 module.exports = AWS.ServiceCatalog;
 
-},{"../apis/servicecatalog-2015-12-10.min.json":125,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],191:[function(require,module,exports){
+},{"../apis/servicecatalog-2015-12-10.min.json":127,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],196:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92238,7 +93675,7 @@ Object.defineProperty(apiLoader.services['ses'], '2010-12-01', {
 
 module.exports = AWS.SES;
 
-},{"../apis/email-2010-12-01.min.json":66,"../apis/email-2010-12-01.paginators.json":67,"../apis/email-2010-12-01.waiters2.json":68,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],192:[function(require,module,exports){
+},{"../apis/email-2010-12-01.min.json":66,"../apis/email-2010-12-01.paginators.json":67,"../apis/email-2010-12-01.waiters2.json":68,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],197:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92258,7 +93695,7 @@ Object.defineProperty(apiLoader.services['sns'], '2010-03-31', {
 
 module.exports = AWS.SNS;
 
-},{"../apis/sns-2010-03-31.min.json":126,"../apis/sns-2010-03-31.paginators.json":127,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],193:[function(require,module,exports){
+},{"../apis/sns-2010-03-31.min.json":128,"../apis/sns-2010-03-31.paginators.json":129,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],198:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92279,7 +93716,7 @@ Object.defineProperty(apiLoader.services['sqs'], '2012-11-05', {
 
 module.exports = AWS.SQS;
 
-},{"../apis/sqs-2012-11-05.min.json":128,"../apis/sqs-2012-11-05.paginators.json":129,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/sqs":252}],194:[function(require,module,exports){
+},{"../apis/sqs-2012-11-05.min.json":130,"../apis/sqs-2012-11-05.paginators.json":131,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/sqs":257}],199:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92299,7 +93736,7 @@ Object.defineProperty(apiLoader.services['ssm'], '2014-11-06', {
 
 module.exports = AWS.SSM;
 
-},{"../apis/ssm-2014-11-06.min.json":130,"../apis/ssm-2014-11-06.paginators.json":131,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],195:[function(require,module,exports){
+},{"../apis/ssm-2014-11-06.min.json":132,"../apis/ssm-2014-11-06.paginators.json":133,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],200:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92319,7 +93756,7 @@ Object.defineProperty(apiLoader.services['storagegateway'], '2013-06-30', {
 
 module.exports = AWS.StorageGateway;
 
-},{"../apis/storagegateway-2013-06-30.min.json":132,"../apis/storagegateway-2013-06-30.paginators.json":133,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],196:[function(require,module,exports){
+},{"../apis/storagegateway-2013-06-30.min.json":134,"../apis/storagegateway-2013-06-30.paginators.json":135,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],201:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92339,7 +93776,7 @@ Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
 
 module.exports = AWS.STS;
 
-},{"../apis/sts-2011-06-15.min.json":135,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240,"../lib/services/sts":253}],197:[function(require,module,exports){
+},{"../apis/sts-2011-06-15.min.json":138,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245,"../lib/services/sts":258}],202:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -92350,6 +93787,7 @@ AWS.WAF = Service.defineService('waf', ['2015-08-24']);
 Object.defineProperty(apiLoader.services['waf'], '2015-08-24', {
   get: function get() {
     var model = require('../apis/waf-2015-08-24.min.json');
+    model.paginators = require('../apis/waf-2015-08-24.paginators.json').pagination;
     return model;
   },
   enumerable: true,
@@ -92358,7 +93796,7 @@ Object.defineProperty(apiLoader.services['waf'], '2015-08-24', {
 
 module.exports = AWS.WAF;
 
-},{"../apis/waf-2015-08-24.min.json":136,"../lib/api_loader":198,"../lib/core":202,"../lib/node_loader":199,"../lib/service":240}],198:[function(require,module,exports){
+},{"../apis/waf-2015-08-24.min.json":139,"../apis/waf-2015-08-24.paginators.json":140,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],203:[function(require,module,exports){
 var AWS = require('./core');
 
 AWS.apiLoader = function(svc, version) {
@@ -92371,7 +93809,7 @@ AWS.apiLoader = function(svc, version) {
 AWS.apiLoader.services = {};
 
 module.exports = AWS.apiLoader;
-},{"./core":202}],199:[function(require,module,exports){
+},{"./core":207}],204:[function(require,module,exports){
 (function (process){
 var util = require('./util');
 
@@ -92394,7 +93832,7 @@ if (typeof process === 'undefined') {
   };
 }
 }).call(this,require('_process'))
-},{"./api_loader":198,"./core":202,"./http/xhr":216,"./util":263,"./xml/browser_parser":264,"_process":268,"buffer/":276,"crypto-browserify":281,"querystring/":289,"url/":290}],200:[function(require,module,exports){
+},{"./api_loader":203,"./core":207,"./http/xhr":221,"./util":268,"./xml/browser_parser":269,"_process":273,"buffer/":281,"crypto-browserify":286,"querystring/":294,"url/":295}],205:[function(require,module,exports){
 var AWS = require('../core'),
     url = AWS.util.url,
     crypto = AWS.util.crypto.lib,
@@ -92549,7 +93987,7 @@ AWS.CloudFront.Signer = inherit({
 
 module.exports = AWS.CloudFront.Signer;
 
-},{"../core":202}],201:[function(require,module,exports){
+},{"../core":207}],206:[function(require,module,exports){
 var AWS = require('./core');
 require('./credentials');
 require('./credentials/credential_provider_chain');
@@ -92746,7 +94184,7 @@ AWS.Config = AWS.util.inherit({
 
 AWS.config = new AWS.Config();
 
-},{"./core":202,"./credentials":203,"./credentials/credential_provider_chain":205}],202:[function(require,module,exports){
+},{"./core":207,"./credentials":208,"./credentials/credential_provider_chain":210}],207:[function(require,module,exports){
 
 var AWS = { util: require('./util') };
 
@@ -92758,7 +94196,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.20.0',
+  VERSION: '2.21.0',
 
 
   Signers: {},
@@ -92821,7 +94259,7 @@ require('./param_validator');
 
 AWS.events = new AWS.SequentialExecutor();
 
-},{"./config":201,"./credentials":203,"./credentials/cognito_identity_credentials":204,"./credentials/credential_provider_chain":205,"./credentials/saml_credentials":206,"./credentials/temporary_credentials":207,"./credentials/web_identity_credentials":208,"./event_listeners":214,"./http":215,"./json/builder":217,"./json/parser":218,"./model/api":219,"./model/operation":221,"./model/paginator":222,"./model/resource_waiter":223,"./model/shape":224,"./param_validator":225,"./protocol/json":227,"./protocol/query":228,"./protocol/rest":229,"./protocol/rest_json":230,"./protocol/rest_xml":231,"./request":235,"./resource_waiter":236,"./response":237,"./sequential_executor":239,"./service":240,"./signers/request_signer":255,"./util":263,"./xml/builder":265}],203:[function(require,module,exports){
+},{"./config":206,"./credentials":208,"./credentials/cognito_identity_credentials":209,"./credentials/credential_provider_chain":210,"./credentials/saml_credentials":211,"./credentials/temporary_credentials":212,"./credentials/web_identity_credentials":213,"./event_listeners":219,"./http":220,"./json/builder":222,"./json/parser":223,"./model/api":224,"./model/operation":226,"./model/paginator":227,"./model/resource_waiter":228,"./model/shape":229,"./param_validator":230,"./protocol/json":232,"./protocol/query":233,"./protocol/rest":234,"./protocol/rest_json":235,"./protocol/rest_xml":236,"./request":240,"./resource_waiter":241,"./response":242,"./sequential_executor":244,"./service":245,"./signers/request_signer":260,"./util":268,"./xml/builder":270}],208:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -92897,7 +94335,7 @@ AWS.Credentials.deletePromisesFromClass = function deletePromisesFromClass() {
 
 AWS.util.addPromises(AWS.Credentials);
 
-},{"./core":202}],204:[function(require,module,exports){
+},{"./core":207}],209:[function(require,module,exports){
 var AWS = require('../core');
 var CognitoIdentity = require('../../clients/cognitoidentity');
 var STS = require('../../clients/sts');
@@ -93112,7 +94550,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   })()
 });
 
-},{"../../clients/cognitoidentity":152,"../../clients/sts":196,"../core":202}],205:[function(require,module,exports){
+},{"../../clients/cognitoidentity":156,"../../clients/sts":201,"../core":207}],210:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -93181,7 +94619,7 @@ AWS.CredentialProviderChain.deletePromisesFromClass = function deletePromisesFro
 
 AWS.util.addPromises(AWS.CredentialProviderChain);
 
-},{"../core":202}],206:[function(require,module,exports){
+},{"../core":207}],211:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -93215,7 +94653,7 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":196,"../core":202}],207:[function(require,module,exports){
+},{"../../clients/sts":201,"../core":207}],212:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -93266,7 +94704,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":196,"../core":202}],208:[function(require,module,exports){
+},{"../../clients/sts":201,"../core":207}],213:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -93309,7 +94747,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":196,"../core":202}],209:[function(require,module,exports){
+},{"../../clients/sts":201,"../core":207}],214:[function(require,module,exports){
 var AWS = require('../core');
 var util = AWS.util;
 var typeOf = require('./types').typeOf;
@@ -93452,7 +94890,7 @@ AWS.DynamoDB.Converter = {
 
 module.exports = AWS.DynamoDB.Converter;
 
-},{"../core":202,"./set":211,"./types":213}],210:[function(require,module,exports){
+},{"../core":207,"./set":216,"./types":218}],215:[function(require,module,exports){
 var AWS = require('../core');
 var Translator = require('./translator');
 var DynamoDBSet = require('./set');
@@ -93666,7 +95104,7 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
 
 module.exports = AWS.DynamoDB.DocumentClient;
 
-},{"../core":202,"./set":211,"./translator":212}],211:[function(require,module,exports){
+},{"../core":207,"./set":216,"./translator":217}],216:[function(require,module,exports){
 var util = require('../core').util;
 var typeOf = require('./types').typeOf;
 
@@ -93722,7 +95160,7 @@ var DynamoDBSet = util.inherit({
 
 module.exports = DynamoDBSet;
 
-},{"../core":202,"./types":213}],212:[function(require,module,exports){
+},{"../core":207,"./types":218}],217:[function(require,module,exports){
 var util = require('../core').util;
 var convert = require('./converter');
 
@@ -93804,7 +95242,7 @@ Translator.prototype.translateScalar = function(value, shape) {
 
 module.exports = Translator;
 
-},{"../core":202,"./converter":209}],213:[function(require,module,exports){
+},{"../core":207,"./converter":214}],218:[function(require,module,exports){
 var util = require('../core').util;
 
 function typeOf(data) {
@@ -93848,7 +95286,7 @@ module.exports = {
   isBinary: isBinary
 };
 
-},{"../core":202}],214:[function(require,module,exports){
+},{"../core":207}],219:[function(require,module,exports){
 var AWS = require('./core');
 var SequentialExecutor = require('./sequential_executor');
 
@@ -94280,7 +95718,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":202,"./protocol/json":227,"./protocol/query":228,"./protocol/rest":229,"./protocol/rest_json":230,"./protocol/rest_xml":231,"./sequential_executor":239,"util":275}],215:[function(require,module,exports){
+},{"./core":207,"./protocol/json":232,"./protocol/query":233,"./protocol/rest":234,"./protocol/rest_json":235,"./protocol/rest_xml":236,"./sequential_executor":244,"util":280}],220:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -94400,7 +95838,7 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":202}],216:[function(require,module,exports){
+},{"./core":207}],221:[function(require,module,exports){
 var AWS = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
@@ -94523,7 +95961,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
 
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":202,"../http":215,"events":267}],217:[function(require,module,exports){
+},{"../core":207,"../http":220,"events":272}],222:[function(require,module,exports){
 var util = require('../util');
 
 function JsonBuilder() { }
@@ -94581,7 +96019,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonBuilder;
 
-},{"../util":263}],218:[function(require,module,exports){
+},{"../util":268}],223:[function(require,module,exports){
 var util = require('../util');
 
 function JsonParser() { }
@@ -94647,7 +96085,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonParser;
 
-},{"../util":263}],219:[function(require,module,exports){
+},{"../util":268}],224:[function(require,module,exports){
 var Collection = require('./collection');
 var Operation = require('./operation');
 var Shape = require('./shape');
@@ -94712,7 +96150,7 @@ function Api(api, options) {
 
 module.exports = Api;
 
-},{"../util":263,"./collection":220,"./operation":221,"./paginator":222,"./resource_waiter":223,"./shape":224}],220:[function(require,module,exports){
+},{"../util":268,"./collection":225,"./operation":226,"./paginator":227,"./resource_waiter":228,"./shape":229}],225:[function(require,module,exports){
 var memoizedProperty = require('../util').memoizedProperty;
 
 function memoize(name, value, fn, nameTr) {
@@ -94734,7 +96172,7 @@ function Collection(iterable, options, fn, nameTr) {
 
 module.exports = Collection;
 
-},{"../util":263}],221:[function(require,module,exports){
+},{"../util":268}],226:[function(require,module,exports){
 var Shape = require('./shape');
 
 var util = require('../util');
@@ -94809,7 +96247,7 @@ function Operation(name, operation, options) {
 
 module.exports = Operation;
 
-},{"../util":263,"./shape":224}],222:[function(require,module,exports){
+},{"../util":268,"./shape":229}],227:[function(require,module,exports){
 var property = require('../util').property;
 
 function Paginator(name, paginator) {
@@ -94822,7 +96260,7 @@ function Paginator(name, paginator) {
 
 module.exports = Paginator;
 
-},{"../util":263}],223:[function(require,module,exports){
+},{"../util":268}],228:[function(require,module,exports){
 var util = require('../util');
 var property = util.property;
 
@@ -94854,7 +96292,7 @@ function ResourceWaiter(name, waiter, options) {
 
 module.exports = ResourceWaiter;
 
-},{"../util":263}],224:[function(require,module,exports){
+},{"../util":268}],229:[function(require,module,exports){
 var Collection = require('./collection');
 
 var util = require('../util');
@@ -95193,7 +96631,7 @@ Shape.shapes = {
 
 module.exports = Shape;
 
-},{"../util":263,"./collection":220}],225:[function(require,module,exports){
+},{"../util":268,"./collection":225}],230:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -95423,7 +96861,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":202}],226:[function(require,module,exports){
+},{"./core":207}],231:[function(require,module,exports){
 var AWS = require('../core');
 var rest = require('../protocol/rest');
 
@@ -95495,7 +96933,7 @@ AWS.Polly.Presigner = AWS.util.inherit({
     }
 });
 
-},{"../core":202,"../protocol/rest":229}],227:[function(require,module,exports){
+},{"../core":207,"../protocol/rest":234}],232:[function(require,module,exports){
 var util = require('../util');
 var JsonBuilder = require('../json/builder');
 var JsonParser = require('../json/parser');
@@ -95559,7 +96997,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":217,"../json/parser":218,"../util":263}],228:[function(require,module,exports){
+},{"../json/builder":222,"../json/parser":223,"../util":268}],233:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var QueryParamSerializer = require('../query/query_param_serializer');
@@ -95655,7 +97093,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":202,"../model/shape":224,"../query/query_param_serializer":232,"../util":263}],229:[function(require,module,exports){
+},{"../core":207,"../model/shape":229,"../query/query_param_serializer":237,"../util":268}],234:[function(require,module,exports){
 var util = require('../util');
 
 function populateMethod(req) {
@@ -95793,7 +97231,7 @@ module.exports = {
   generateURI: generateURI
 };
 
-},{"../util":263}],230:[function(require,module,exports){
+},{"../util":268}],235:[function(require,module,exports){
 var util = require('../util');
 var Rest = require('./rest');
 var Json = require('./json');
@@ -95861,7 +97299,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":217,"../json/parser":218,"../util":263,"./json":227,"./rest":229}],231:[function(require,module,exports){
+},{"../json/builder":222,"../json/parser":223,"../util":268,"./json":232,"./rest":234}],236:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var Rest = require('./rest');
@@ -95949,7 +97387,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":202,"../util":263,"./rest":229}],232:[function(require,module,exports){
+},{"../core":207,"../util":268,"./rest":234}],237:[function(require,module,exports){
 var util = require('../util');
 
 function QueryParamSerializer() {
@@ -96031,7 +97469,7 @@ function serializeMember(name, value, rules, fn) {
 
 module.exports = QueryParamSerializer;
 
-},{"../util":263}],233:[function(require,module,exports){
+},{"../util":268}],238:[function(require,module,exports){
 module.exports={
   "rules": {
     "*/*": {
@@ -96096,7 +97534,7 @@ module.exports={
   }
 }
 
-},{}],234:[function(require,module,exports){
+},{}],239:[function(require,module,exports){
 var util = require('./util');
 var regionConfig = require('./region_config.json');
 
@@ -96163,7 +97601,7 @@ function configureEndpoint(service) {
 
 module.exports = configureEndpoint;
 
-},{"./region_config.json":233,"./util":263}],235:[function(require,module,exports){
+},{"./region_config.json":238,"./util":268}],240:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var AcceptorStateMachine = require('./state_machine');
@@ -96556,7 +97994,7 @@ AWS.util.addPromises(AWS.Request);
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require('_process'))
-},{"./core":202,"./state_machine":262,"_process":268,"jmespath":286}],236:[function(require,module,exports){
+},{"./core":207,"./state_machine":267,"_process":273,"jmespath":291}],241:[function(require,module,exports){
 
 
 var AWS = require('./core');
@@ -96704,7 +98142,7 @@ AWS.ResourceWaiter = inherit({
   }
 });
 
-},{"./core":202,"jmespath":286}],237:[function(require,module,exports){
+},{"./core":207,"jmespath":291}],242:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 var jmespath = require('jmespath');
@@ -96792,7 +98230,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":202,"jmespath":286}],238:[function(require,module,exports){
+},{"./core":207,"jmespath":291}],243:[function(require,module,exports){
 var AWS = require('../core');
 var byteLength = AWS.util.string.byteLength;
 var Buffer = AWS.util.Buffer;
@@ -97233,7 +98671,7 @@ AWS.util.addPromises(AWS.S3.ManagedUpload);
 
 module.exports = AWS.S3.ManagedUpload;
 
-},{"../core":202}],239:[function(require,module,exports){
+},{"../core":207}],244:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -97382,7 +98820,7 @@ AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.
 
 module.exports = AWS.SequentialExecutor;
 
-},{"./core":202}],240:[function(require,module,exports){
+},{"./core":207}],245:[function(require,module,exports){
 var AWS = require('./core');
 var Api = require('./model/api');
 var regionConfig = require('./region_config');
@@ -97812,7 +99250,7 @@ AWS.util.update(AWS.Service, {
 });
 
 module.exports = AWS.Service;
-},{"./core":202,"./model/api":219,"./region_config":234}],241:[function(require,module,exports){
+},{"./core":207,"./model/api":224,"./region_config":239}],246:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.APIGateway.prototype, {
@@ -97842,7 +99280,7 @@ AWS.util.update(AWS.APIGateway.prototype, {
 });
 
 
-},{"../core":202}],242:[function(require,module,exports){
+},{"../core":207}],247:[function(require,module,exports){
 var AWS = require('../core');
 
 require('../cloudfront/signer');
@@ -97855,7 +99293,7 @@ AWS.util.update(AWS.CloudFront.prototype, {
 
 });
 
-},{"../cloudfront/signer":200,"../core":202}],243:[function(require,module,exports){
+},{"../cloudfront/signer":205,"../core":207}],248:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.CognitoIdentity.prototype, {
@@ -97872,7 +99310,7 @@ AWS.util.update(AWS.CognitoIdentity.prototype, {
   }
 });
 
-},{"../core":202}],244:[function(require,module,exports){
+},{"../core":207}],249:[function(require,module,exports){
 var AWS = require('../core');
 require('../dynamodb/document_client');
 
@@ -97917,7 +99355,7 @@ AWS.util.update(AWS.DynamoDB.prototype, {
   }
 });
 
-},{"../core":202,"../dynamodb/document_client":210}],245:[function(require,module,exports){
+},{"../core":207,"../dynamodb/document_client":215}],250:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.EC2.prototype, {
@@ -97974,7 +99412,7 @@ AWS.util.update(AWS.EC2.prototype, {
   }
 });
 
-},{"../core":202}],246:[function(require,module,exports){
+},{"../core":207}],251:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -98005,7 +99443,7 @@ AWS.util.update(AWS.IotData.prototype, {
 
 });
 
-},{"../core":202}],247:[function(require,module,exports){
+},{"../core":207}],252:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.MachineLearning.prototype, {
@@ -98026,9 +99464,9 @@ AWS.util.update(AWS.MachineLearning.prototype, {
 
 });
 
-},{"../core":202}],248:[function(require,module,exports){
+},{"../core":207}],253:[function(require,module,exports){
 require('../polly/presigner');
-},{"../polly/presigner":226}],249:[function(require,module,exports){
+},{"../polly/presigner":231}],254:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -98082,7 +99520,7 @@ var AWS = require('../core');
      });
    }
  });
-},{"../core":202}],250:[function(require,module,exports){
+},{"../core":207}],255:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Route53.prototype, {
@@ -98109,7 +99547,7 @@ AWS.util.update(AWS.Route53.prototype, {
   }
 });
 
-},{"../core":202}],251:[function(require,module,exports){
+},{"../core":207}],256:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('../signers/v4_credentials');
 
@@ -98839,7 +100277,7 @@ AWS.util.update(AWS.S3.prototype, {
   }
 });
 
-},{"../core":202,"../s3/managed_upload":238,"../signers/v4_credentials":261}],252:[function(require,module,exports){
+},{"../core":207,"../s3/managed_upload":243,"../signers/v4_credentials":266}],257:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.SQS.prototype, {
@@ -98954,7 +100392,7 @@ AWS.util.update(AWS.SQS.prototype, {
   }
 });
 
-},{"../core":202}],253:[function(require,module,exports){
+},{"../core":207}],258:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.STS.prototype, {
@@ -98979,7 +100417,7 @@ AWS.util.update(AWS.STS.prototype, {
   }
 });
 
-},{"../core":202}],254:[function(require,module,exports){
+},{"../core":207}],259:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -99084,7 +100522,7 @@ AWS.Signers.Presign = inherit({
 
 module.exports = AWS.Signers.Presign;
 
-},{"../core":202}],255:[function(require,module,exports){
+},{"../core":207}],260:[function(require,module,exports){
 var AWS = require('../core');
 
 var inherit = AWS.util.inherit;
@@ -99122,7 +100560,7 @@ require('./v4');
 require('./s3');
 require('./presign');
 
-},{"../core":202,"./presign":254,"./s3":256,"./v2":257,"./v3":258,"./v3https":259,"./v4":260}],256:[function(require,module,exports){
+},{"../core":207,"./presign":259,"./s3":261,"./v2":262,"./v3":263,"./v3https":264,"./v4":265}],261:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -99284,7 +100722,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":202}],257:[function(require,module,exports){
+},{"../core":207}],262:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -99329,7 +100767,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":202}],258:[function(require,module,exports){
+},{"../core":207}],263:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -99403,7 +100841,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":202}],259:[function(require,module,exports){
+},{"../core":207}],264:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -99425,7 +100863,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":202,"./v3":258}],260:[function(require,module,exports){
+},{"../core":207,"./v3":263}],265:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('./v4_credentials');
 var inherit = AWS.util.inherit;
@@ -99623,7 +101061,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":202,"./v4_credentials":261}],261:[function(require,module,exports){
+},{"../core":207,"./v4_credentials":266}],266:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -99692,7 +101130,7 @@ module.exports = {
   }
 };
 
-},{"../core":202}],262:[function(require,module,exports){
+},{"../core":207}],267:[function(require,module,exports){
 function AcceptorStateMachine(states, state) {
   this.currentState = state || null;
   this.states = states || {};
@@ -99736,7 +101174,7 @@ AcceptorStateMachine.prototype.addState = function addState(name, acceptState, f
 
 module.exports = AcceptorStateMachine;
 
-},{}],263:[function(require,module,exports){
+},{}],268:[function(require,module,exports){
 (function (process){
 
 var AWS;
@@ -100538,7 +101976,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require('_process'))
-},{"../apis/metadata.json":91,"./core":202,"_process":268,"fs":266,"uuid":292}],264:[function(require,module,exports){
+},{"../apis/metadata.json":91,"./core":207,"_process":273,"fs":271,"uuid":297}],269:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -100723,7 +102161,7 @@ function parseUnknown(xml) {
 
 module.exports = DomXmlParser;
 
-},{"../model/shape":224,"../util":263}],265:[function(require,module,exports){
+},{"../model/shape":229,"../util":268}],270:[function(require,module,exports){
 var util = require('../util');
 var builder = require('xmlbuilder');
 
@@ -100811,9 +102249,9 @@ function applyNamespaces(xml, shape) {
 
 module.exports = XmlBuilder;
 
-},{"../util":263,"xmlbuilder":309}],266:[function(require,module,exports){
+},{"../util":268,"xmlbuilder":314}],271:[function(require,module,exports){
 
-},{}],267:[function(require,module,exports){
+},{}],272:[function(require,module,exports){
 
 function EventEmitter() {
   this._events = this._events || {};
@@ -101077,7 +102515,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],268:[function(require,module,exports){
+},{}],273:[function(require,module,exports){
 var process = module.exports = {};
 
 
@@ -101242,7 +102680,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],269:[function(require,module,exports){
+},{}],274:[function(require,module,exports){
 (function (global){
 
 ;(function(root) {
@@ -101630,7 +103068,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],270:[function(require,module,exports){
+},{}],275:[function(require,module,exports){
 
 'use strict';
 
@@ -101692,7 +103130,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],271:[function(require,module,exports){
+},{}],276:[function(require,module,exports){
 
 'use strict';
 
@@ -101759,13 +103197,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],272:[function(require,module,exports){
+},{}],277:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":270,"./encode":271}],273:[function(require,module,exports){
+},{"./decode":275,"./encode":276}],278:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   module.exports = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor
@@ -101788,14 +103226,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],274:[function(require,module,exports){
+},{}],279:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],275:[function(require,module,exports){
+},{}],280:[function(require,module,exports){
 (function (process,global){
 
 var formatRegExp = /%[sdj%]/g;
@@ -102315,7 +103753,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":274,"_process":268,"inherits":273}],276:[function(require,module,exports){
+},{"./support/isBuffer":279,"_process":273,"inherits":278}],281:[function(require,module,exports){
 (function (global){
 
 
@@ -103970,7 +105408,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":277,"ieee754":278,"isarray":279}],277:[function(require,module,exports){
+},{"base64-js":282,"ieee754":283,"isarray":284}],282:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -104077,7 +105515,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],278:[function(require,module,exports){
+},{}],283:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -104163,14 +105601,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],279:[function(require,module,exports){
+},{}],284:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],280:[function(require,module,exports){
+},{}],285:[function(require,module,exports){
 var Buffer = require('buffer').Buffer;
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -104207,7 +105645,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 
 module.exports = { hash: hash };
 
-},{"buffer":276}],281:[function(require,module,exports){
+},{"buffer":281}],286:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -104305,7 +105743,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":282,"./rng":283,"./sha":284,"./sha256":285,"buffer":276}],282:[function(require,module,exports){
+},{"./md5":287,"./rng":288,"./sha":289,"./sha256":290,"buffer":281}],287:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -104452,7 +105890,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":280}],283:[function(require,module,exports){
+},{"./helpers":285}],288:[function(require,module,exports){
 (function() {
   var _global = this;
 
@@ -104482,7 +105920,7 @@ module.exports = function md5(buf) {
 
 }())
 
-},{}],284:[function(require,module,exports){
+},{}],289:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -104566,7 +106004,7 @@ module.exports = function sha1(buf) {
   return helpers.hash(buf, core_sha1, 20, true);
 };
 
-},{"./helpers":280}],285:[function(require,module,exports){
+},{"./helpers":285}],290:[function(require,module,exports){
 
 
 
@@ -104641,7 +106079,7 @@ module.exports = function sha256(buf) {
   return helpers.hash(buf, core_sha256, 32, true);
 };
 
-},{"./helpers":280}],286:[function(require,module,exports){
+},{"./helpers":285}],291:[function(require,module,exports){
 (function(exports) {
   "use strict";
 
@@ -106224,7 +107662,7 @@ module.exports = function sha256(buf) {
   exports.strictDeepEqual = strictDeepEqual;
 })(typeof exports === "undefined" ? this.jmespath = {} : exports);
 
-},{}],287:[function(require,module,exports){
+},{}],292:[function(require,module,exports){
 
 'use strict';
 
@@ -106282,7 +107720,7 @@ module.exports = function(qs, sep, eq, options) {
   return obj;
 };
 
-},{}],288:[function(require,module,exports){
+},{}],293:[function(require,module,exports){
 
 'use strict';
 
@@ -106328,9 +107766,9 @@ module.exports = function(obj, sep, eq, name) {
          encodeURIComponent(stringifyPrimitive(obj));
 };
 
-},{}],289:[function(require,module,exports){
-arguments[4][272][0].apply(exports,arguments)
-},{"./decode":287,"./encode":288,"dup":272}],290:[function(require,module,exports){
+},{}],294:[function(require,module,exports){
+arguments[4][277][0].apply(exports,arguments)
+},{"./decode":292,"./encode":293,"dup":277}],295:[function(require,module,exports){
 
 var punycode = require('punycode');
 
@@ -106897,7 +108335,7 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":269,"querystring":272}],291:[function(require,module,exports){
+},{"punycode":274,"querystring":277}],296:[function(require,module,exports){
 (function (global){
 
 var rng;
@@ -106927,7 +108365,7 @@ module.exports = rng;
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],292:[function(require,module,exports){
+},{}],297:[function(require,module,exports){
 var _rng = require('./lib/rng');
 
 var _byteToHex = [];
@@ -107049,7 +108487,7 @@ uuid.v4 = v4;
 
 module.exports = uuid;
 
-},{"./lib/rng":291}],293:[function(require,module,exports){
+},{"./lib/rng":296}],298:[function(require,module,exports){
 (function() {
   var XMLAttribute, create;
 
@@ -107082,7 +108520,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"lodash/object/create":352}],294:[function(require,module,exports){
+},{"lodash/object/create":357}],299:[function(require,module,exports){
 (function() {
   var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
 
@@ -107152,7 +108590,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLDeclaration":301,"./XMLDocType":302,"./XMLElement":303,"./XMLStringifier":307}],295:[function(require,module,exports){
+},{"./XMLDeclaration":306,"./XMLDocType":307,"./XMLElement":308,"./XMLStringifier":312}],300:[function(require,module,exports){
 (function() {
   var XMLCData, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -107202,7 +108640,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLNode":304,"lodash/object/create":352}],296:[function(require,module,exports){
+},{"./XMLNode":309,"lodash/object/create":357}],301:[function(require,module,exports){
 (function() {
   var XMLComment, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -107252,7 +108690,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLNode":304,"lodash/object/create":352}],297:[function(require,module,exports){
+},{"./XMLNode":309,"lodash/object/create":357}],302:[function(require,module,exports){
 (function() {
   var XMLDTDAttList, create;
 
@@ -107325,7 +108763,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"lodash/object/create":352}],298:[function(require,module,exports){
+},{"lodash/object/create":357}],303:[function(require,module,exports){
 (function() {
   var XMLDTDElement, create, isArray;
 
@@ -107378,7 +108816,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"lodash/lang/isArray":344,"lodash/object/create":352}],299:[function(require,module,exports){
+},{"lodash/lang/isArray":349,"lodash/object/create":357}],304:[function(require,module,exports){
 (function() {
   var XMLDTDEntity, create, isObject;
 
@@ -107467,7 +108905,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"lodash/lang/isObject":348,"lodash/object/create":352}],300:[function(require,module,exports){
+},{"lodash/lang/isObject":353,"lodash/object/create":357}],305:[function(require,module,exports){
 (function() {
   var XMLDTDNotation, create;
 
@@ -107528,7 +108966,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"lodash/object/create":352}],301:[function(require,module,exports){
+},{"lodash/object/create":357}],306:[function(require,module,exports){
 (function() {
   var XMLDeclaration, XMLNode, create, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -107602,7 +109040,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLNode":304,"lodash/lang/isObject":348,"lodash/object/create":352}],302:[function(require,module,exports){
+},{"./XMLNode":309,"lodash/lang/isObject":353,"lodash/object/create":357}],307:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
 
@@ -107795,7 +109233,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLCData":295,"./XMLComment":296,"./XMLDTDAttList":297,"./XMLDTDElement":298,"./XMLDTDEntity":299,"./XMLDTDNotation":300,"./XMLProcessingInstruction":305,"lodash/lang/isObject":348,"lodash/object/create":352}],303:[function(require,module,exports){
+},{"./XMLCData":300,"./XMLComment":301,"./XMLDTDAttList":302,"./XMLDTDElement":303,"./XMLDTDEntity":304,"./XMLDTDNotation":305,"./XMLProcessingInstruction":310,"lodash/lang/isObject":353,"lodash/object/create":357}],308:[function(require,module,exports){
 (function() {
   var XMLAttribute, XMLElement, XMLNode, XMLProcessingInstruction, create, every, isArray, isFunction, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -108010,7 +109448,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLAttribute":293,"./XMLNode":304,"./XMLProcessingInstruction":305,"lodash/collection/every":310,"lodash/lang/isArray":344,"lodash/lang/isFunction":346,"lodash/lang/isObject":348,"lodash/object/create":352}],304:[function(require,module,exports){
+},{"./XMLAttribute":298,"./XMLNode":309,"./XMLProcessingInstruction":310,"lodash/collection/every":315,"lodash/lang/isArray":349,"lodash/lang/isFunction":351,"lodash/lang/isObject":353,"lodash/object/create":357}],309:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isArray, isEmpty, isFunction, isObject,
     hasProp = {}.hasOwnProperty;
@@ -108345,7 +109783,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLCData":295,"./XMLComment":296,"./XMLDeclaration":301,"./XMLDocType":302,"./XMLElement":303,"./XMLRaw":306,"./XMLText":308,"lodash/lang/isArray":344,"lodash/lang/isEmpty":345,"lodash/lang/isFunction":346,"lodash/lang/isObject":348}],305:[function(require,module,exports){
+},{"./XMLCData":300,"./XMLComment":301,"./XMLDeclaration":306,"./XMLDocType":307,"./XMLElement":308,"./XMLRaw":311,"./XMLText":313,"lodash/lang/isArray":349,"lodash/lang/isEmpty":350,"lodash/lang/isFunction":351,"lodash/lang/isObject":353}],310:[function(require,module,exports){
 (function() {
   var XMLProcessingInstruction, create;
 
@@ -108397,7 +109835,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"lodash/object/create":352}],306:[function(require,module,exports){
+},{"lodash/object/create":357}],311:[function(require,module,exports){
 (function() {
   var XMLNode, XMLRaw, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -108447,7 +109885,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLNode":304,"lodash/object/create":352}],307:[function(require,module,exports){
+},{"./XMLNode":309,"lodash/object/create":357}],312:[function(require,module,exports){
 (function() {
   var XMLStringifier,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -108615,7 +110053,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{}],308:[function(require,module,exports){
+},{}],313:[function(require,module,exports){
 (function() {
   var XMLNode, XMLText, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -108665,7 +110103,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLNode":304,"lodash/object/create":352}],309:[function(require,module,exports){
+},{"./XMLNode":309,"lodash/object/create":357}],314:[function(require,module,exports){
 (function() {
   var XMLBuilder, assign;
 
@@ -108680,7 +110118,7 @@ module.exports = uuid;
 
 }).call(this);
 
-},{"./XMLBuilder":294,"lodash/object/assign":351}],310:[function(require,module,exports){
+},{"./XMLBuilder":299,"lodash/object/assign":356}],315:[function(require,module,exports){
 var arrayEvery = require('../internal/arrayEvery'),
     baseCallback = require('../internal/baseCallback'),
     baseEvery = require('../internal/baseEvery'),
@@ -108697,7 +110135,7 @@ function every(collection, predicate, thisArg) {
 
 module.exports = every;
 
-},{"../internal/arrayEvery":311,"../internal/baseCallback":313,"../internal/baseEvery":317,"../lang/isArray":344}],311:[function(require,module,exports){
+},{"../internal/arrayEvery":316,"../internal/baseCallback":318,"../internal/baseEvery":322,"../lang/isArray":349}],316:[function(require,module,exports){
 
 function arrayEvery(array, predicate) {
   var index = -1,
@@ -108713,7 +110151,7 @@ function arrayEvery(array, predicate) {
 
 module.exports = arrayEvery;
 
-},{}],312:[function(require,module,exports){
+},{}],317:[function(require,module,exports){
 var baseCopy = require('./baseCopy'),
     keys = require('../object/keys');
 
@@ -108741,7 +110179,7 @@ function baseAssign(object, source, customizer) {
 
 module.exports = baseAssign;
 
-},{"../object/keys":353,"./baseCopy":314}],313:[function(require,module,exports){
+},{"../object/keys":358,"./baseCopy":319}],318:[function(require,module,exports){
 var baseMatches = require('./baseMatches'),
     baseMatchesProperty = require('./baseMatchesProperty'),
     baseProperty = require('./baseProperty'),
@@ -108770,7 +110208,7 @@ function baseCallback(func, thisArg, argCount) {
 
 module.exports = baseCallback;
 
-},{"../utility/identity":357,"./baseMatches":324,"./baseMatchesProperty":325,"./baseProperty":326,"./bindCallback":329,"./isBindable":334}],314:[function(require,module,exports){
+},{"../utility/identity":362,"./baseMatches":329,"./baseMatchesProperty":330,"./baseProperty":331,"./bindCallback":334,"./isBindable":339}],319:[function(require,module,exports){
 
 function baseCopy(source, object, props) {
   if (!props) {
@@ -108789,7 +110227,7 @@ function baseCopy(source, object, props) {
 
 module.exports = baseCopy;
 
-},{}],315:[function(require,module,exports){
+},{}],320:[function(require,module,exports){
 (function (global){
 var isObject = require('../lang/isObject');
 
@@ -108809,7 +110247,7 @@ var baseCreate = (function() {
 module.exports = baseCreate;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../lang/isObject":348}],316:[function(require,module,exports){
+},{"../lang/isObject":353}],321:[function(require,module,exports){
 var baseForOwn = require('./baseForOwn'),
     isLength = require('./isLength'),
     toObject = require('./toObject');
@@ -108833,7 +110271,7 @@ function baseEach(collection, iteratee) {
 
 module.exports = baseEach;
 
-},{"./baseForOwn":319,"./isLength":337,"./toObject":342}],317:[function(require,module,exports){
+},{"./baseForOwn":324,"./isLength":342,"./toObject":347}],322:[function(require,module,exports){
 var baseEach = require('./baseEach');
 
 
@@ -108848,7 +110286,7 @@ function baseEvery(collection, predicate) {
 
 module.exports = baseEvery;
 
-},{"./baseEach":316}],318:[function(require,module,exports){
+},{"./baseEach":321}],323:[function(require,module,exports){
 var toObject = require('./toObject');
 
 
@@ -108869,7 +110307,7 @@ function baseFor(object, iteratee, keysFunc) {
 
 module.exports = baseFor;
 
-},{"./toObject":342}],319:[function(require,module,exports){
+},{"./toObject":347}],324:[function(require,module,exports){
 var baseFor = require('./baseFor'),
     keys = require('../object/keys');
 
@@ -108880,7 +110318,7 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"../object/keys":353,"./baseFor":318}],320:[function(require,module,exports){
+},{"../object/keys":358,"./baseFor":323}],325:[function(require,module,exports){
 var baseIsEqualDeep = require('./baseIsEqualDeep');
 
 
@@ -108900,7 +110338,7 @@ function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
 
 module.exports = baseIsEqual;
 
-},{"./baseIsEqualDeep":321}],321:[function(require,module,exports){
+},{"./baseIsEqualDeep":326}],326:[function(require,module,exports){
 var equalArrays = require('./equalArrays'),
     equalByTag = require('./equalByTag'),
     equalObjects = require('./equalObjects'),
@@ -108982,7 +110420,7 @@ function baseIsEqualDeep(object, other, equalFunc, customizer, isWhere, stackA, 
 
 module.exports = baseIsEqualDeep;
 
-},{"../lang/isArray":344,"../lang/isTypedArray":350,"./equalArrays":331,"./equalByTag":332,"./equalObjects":333}],322:[function(require,module,exports){
+},{"../lang/isArray":349,"../lang/isTypedArray":355,"./equalArrays":336,"./equalByTag":337,"./equalObjects":338}],327:[function(require,module,exports){
 
 function baseIsFunction(value) {
   return typeof value == 'function' || false;
@@ -108990,7 +110428,7 @@ function baseIsFunction(value) {
 
 module.exports = baseIsFunction;
 
-},{}],323:[function(require,module,exports){
+},{}],328:[function(require,module,exports){
 var baseIsEqual = require('./baseIsEqual');
 
 
@@ -109039,7 +110477,7 @@ function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"./baseIsEqual":320}],324:[function(require,module,exports){
+},{"./baseIsEqual":325}],329:[function(require,module,exports){
 var baseIsMatch = require('./baseIsMatch'),
     isStrictComparable = require('./isStrictComparable'),
     keys = require('../object/keys');
@@ -109080,7 +110518,7 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"../object/keys":353,"./baseIsMatch":323,"./isStrictComparable":339}],325:[function(require,module,exports){
+},{"../object/keys":358,"./baseIsMatch":328,"./isStrictComparable":344}],330:[function(require,module,exports){
 var baseIsEqual = require('./baseIsEqual'),
     isStrictComparable = require('./isStrictComparable');
 
@@ -109098,7 +110536,7 @@ function baseMatchesProperty(key, value) {
 
 module.exports = baseMatchesProperty;
 
-},{"./baseIsEqual":320,"./isStrictComparable":339}],326:[function(require,module,exports){
+},{"./baseIsEqual":325,"./isStrictComparable":344}],331:[function(require,module,exports){
 
 function baseProperty(key) {
   return function(object) {
@@ -109108,7 +110546,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],327:[function(require,module,exports){
+},{}],332:[function(require,module,exports){
 var identity = require('../utility/identity'),
     metaMap = require('./metaMap');
 
@@ -109120,7 +110558,7 @@ var baseSetData = !metaMap ? identity : function(func, data) {
 
 module.exports = baseSetData;
 
-},{"../utility/identity":357,"./metaMap":340}],328:[function(require,module,exports){
+},{"../utility/identity":362,"./metaMap":345}],333:[function(require,module,exports){
 
 function baseToString(value) {
   if (typeof value == 'string') {
@@ -109131,7 +110569,7 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{}],329:[function(require,module,exports){
+},{}],334:[function(require,module,exports){
 var identity = require('../utility/identity');
 
 
@@ -109163,7 +110601,7 @@ function bindCallback(func, thisArg, argCount) {
 
 module.exports = bindCallback;
 
-},{"../utility/identity":357}],330:[function(require,module,exports){
+},{"../utility/identity":362}],335:[function(require,module,exports){
 var bindCallback = require('./bindCallback'),
     isIterateeCall = require('./isIterateeCall');
 
@@ -109205,7 +110643,7 @@ function createAssigner(assigner) {
 
 module.exports = createAssigner;
 
-},{"./bindCallback":329,"./isIterateeCall":336}],331:[function(require,module,exports){
+},{"./bindCallback":334,"./isIterateeCall":341}],336:[function(require,module,exports){
 
 function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stackB) {
   var index = -1,
@@ -109246,7 +110684,7 @@ function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stack
 
 module.exports = equalArrays;
 
-},{}],332:[function(require,module,exports){
+},{}],337:[function(require,module,exports){
 
 var boolTag = '[object Boolean]',
     dateTag = '[object Date]',
@@ -109279,7 +110717,7 @@ function equalByTag(object, other, tag) {
 
 module.exports = equalByTag;
 
-},{}],333:[function(require,module,exports){
+},{}],338:[function(require,module,exports){
 var keys = require('../object/keys');
 
 
@@ -109340,7 +110778,7 @@ function equalObjects(object, other, equalFunc, customizer, isWhere, stackA, sta
 
 module.exports = equalObjects;
 
-},{"../object/keys":353}],334:[function(require,module,exports){
+},{"../object/keys":358}],339:[function(require,module,exports){
 var baseSetData = require('./baseSetData'),
     isNative = require('../lang/isNative'),
     support = require('../support');
@@ -109373,7 +110811,7 @@ function isBindable(func) {
 
 module.exports = isBindable;
 
-},{"../lang/isNative":347,"../support":356,"./baseSetData":327}],335:[function(require,module,exports){
+},{"../lang/isNative":352,"../support":361,"./baseSetData":332}],340:[function(require,module,exports){
 
 var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -109386,7 +110824,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],336:[function(require,module,exports){
+},{}],341:[function(require,module,exports){
 var isIndex = require('./isIndex'),
     isLength = require('./isLength'),
     isObject = require('../lang/isObject');
@@ -109412,7 +110850,7 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
-},{"../lang/isObject":348,"./isIndex":335,"./isLength":337}],337:[function(require,module,exports){
+},{"../lang/isObject":353,"./isIndex":340,"./isLength":342}],342:[function(require,module,exports){
 
 var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -109423,7 +110861,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],338:[function(require,module,exports){
+},{}],343:[function(require,module,exports){
 
 function isObjectLike(value) {
   return (value && typeof value == 'object') || false;
@@ -109431,7 +110869,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],339:[function(require,module,exports){
+},{}],344:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 
@@ -109441,7 +110879,7 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"../lang/isObject":348}],340:[function(require,module,exports){
+},{"../lang/isObject":353}],345:[function(require,module,exports){
 (function (global){
 var isNative = require('../lang/isNative');
 
@@ -109454,7 +110892,7 @@ var metaMap = WeakMap && new WeakMap;
 module.exports = metaMap;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../lang/isNative":347}],341:[function(require,module,exports){
+},{"../lang/isNative":352}],346:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('./isIndex'),
@@ -109491,7 +110929,7 @@ function shimKeys(object) {
 
 module.exports = shimKeys;
 
-},{"../lang/isArguments":343,"../lang/isArray":344,"../object/keysIn":354,"../support":356,"./isIndex":335,"./isLength":337}],342:[function(require,module,exports){
+},{"../lang/isArguments":348,"../lang/isArray":349,"../object/keysIn":359,"../support":361,"./isIndex":340,"./isLength":342}],347:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 
@@ -109501,7 +110939,7 @@ function toObject(value) {
 
 module.exports = toObject;
 
-},{"../lang/isObject":348}],343:[function(require,module,exports){
+},{"../lang/isObject":353}],348:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -109522,7 +110960,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{"../internal/isLength":337,"../internal/isObjectLike":338}],344:[function(require,module,exports){
+},{"../internal/isLength":342,"../internal/isObjectLike":343}],349:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isNative = require('./isNative'),
     isObjectLike = require('../internal/isObjectLike');
@@ -109546,7 +110984,7 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"../internal/isLength":337,"../internal/isObjectLike":338,"./isNative":347}],345:[function(require,module,exports){
+},{"../internal/isLength":342,"../internal/isObjectLike":343,"./isNative":352}],350:[function(require,module,exports){
 var isArguments = require('./isArguments'),
     isArray = require('./isArray'),
     isFunction = require('./isFunction'),
@@ -109570,7 +111008,7 @@ function isEmpty(value) {
 
 module.exports = isEmpty;
 
-},{"../internal/isLength":337,"../internal/isObjectLike":338,"../object/keys":353,"./isArguments":343,"./isArray":344,"./isFunction":346,"./isString":349}],346:[function(require,module,exports){
+},{"../internal/isLength":342,"../internal/isObjectLike":343,"../object/keys":358,"./isArguments":348,"./isArray":349,"./isFunction":351,"./isString":354}],351:[function(require,module,exports){
 (function (global){
 var baseIsFunction = require('../internal/baseIsFunction'),
     isNative = require('./isNative');
@@ -109595,7 +111033,7 @@ var isFunction = !(baseIsFunction(/x/) || (Uint8Array && !baseIsFunction(Uint8Ar
 module.exports = isFunction;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../internal/baseIsFunction":322,"./isNative":347}],347:[function(require,module,exports){
+},{"../internal/baseIsFunction":327,"./isNative":352}],352:[function(require,module,exports){
 var escapeRegExp = require('../string/escapeRegExp'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -109633,7 +111071,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{"../internal/isObjectLike":338,"../string/escapeRegExp":355}],348:[function(require,module,exports){
+},{"../internal/isObjectLike":343,"../string/escapeRegExp":360}],353:[function(require,module,exports){
 
 function isObject(value) {
   var type = typeof value;
@@ -109642,7 +111080,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],349:[function(require,module,exports){
+},{}],354:[function(require,module,exports){
 var isObjectLike = require('../internal/isObjectLike');
 
 
@@ -109661,7 +111099,7 @@ function isString(value) {
 
 module.exports = isString;
 
-},{"../internal/isObjectLike":338}],350:[function(require,module,exports){
+},{"../internal/isObjectLike":343}],355:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -109719,7 +111157,7 @@ function isTypedArray(value) {
 
 module.exports = isTypedArray;
 
-},{"../internal/isLength":337,"../internal/isObjectLike":338}],351:[function(require,module,exports){
+},{"../internal/isLength":342,"../internal/isObjectLike":343}],356:[function(require,module,exports){
 var baseAssign = require('../internal/baseAssign'),
     createAssigner = require('../internal/createAssigner');
 
@@ -109728,7 +111166,7 @@ var assign = createAssigner(baseAssign);
 
 module.exports = assign;
 
-},{"../internal/baseAssign":312,"../internal/createAssigner":330}],352:[function(require,module,exports){
+},{"../internal/baseAssign":317,"../internal/createAssigner":335}],357:[function(require,module,exports){
 var baseCopy = require('../internal/baseCopy'),
     baseCreate = require('../internal/baseCreate'),
     isIterateeCall = require('../internal/isIterateeCall'),
@@ -109745,7 +111183,7 @@ function create(prototype, properties, guard) {
 
 module.exports = create;
 
-},{"../internal/baseCopy":314,"../internal/baseCreate":315,"../internal/isIterateeCall":336,"./keys":353}],353:[function(require,module,exports){
+},{"../internal/baseCopy":319,"../internal/baseCreate":320,"../internal/isIterateeCall":341,"./keys":358}],358:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isNative = require('../lang/isNative'),
     isObject = require('../lang/isObject'),
@@ -109769,7 +111207,7 @@ var keys = !nativeKeys ? shimKeys : function(object) {
 
 module.exports = keys;
 
-},{"../internal/isLength":337,"../internal/shimKeys":341,"../lang/isNative":347,"../lang/isObject":348}],354:[function(require,module,exports){
+},{"../internal/isLength":342,"../internal/shimKeys":346,"../lang/isNative":352,"../lang/isObject":353}],359:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('../internal/isIndex'),
@@ -109815,7 +111253,7 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"../internal/isIndex":335,"../internal/isLength":337,"../lang/isArguments":343,"../lang/isArray":344,"../lang/isObject":348,"../support":356}],355:[function(require,module,exports){
+},{"../internal/isIndex":340,"../internal/isLength":342,"../lang/isArguments":348,"../lang/isArray":349,"../lang/isObject":353,"../support":361}],360:[function(require,module,exports){
 var baseToString = require('../internal/baseToString');
 
 
@@ -109832,7 +111270,7 @@ function escapeRegExp(string) {
 
 module.exports = escapeRegExp;
 
-},{"../internal/baseToString":328}],356:[function(require,module,exports){
+},{"../internal/baseToString":333}],361:[function(require,module,exports){
 (function (global){
 var isNative = require('./lang/isNative');
 
@@ -109877,7 +111315,7 @@ var support = {};
 module.exports = support;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./lang/isNative":347}],357:[function(require,module,exports){
+},{"./lang/isNative":352}],362:[function(require,module,exports){
 
 function identity(value) {
   return value;
@@ -109885,7 +111323,7 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],358:[function(require,module,exports){
+},{}],363:[function(require,module,exports){
 require('./browser_loader');
 
 var AWS = require('./core');
@@ -109896,5 +111334,5 @@ if (typeof self !== 'undefined') self.AWS = AWS;
 
 
 require('../clients/browser_default');
-},{"../clients/browser_default":141,"./browser_loader":199,"./core":202}]},{},[358]);
+},{"../clients/browser_default":145,"./browser_loader":204,"./core":207}]},{},[363]);
 

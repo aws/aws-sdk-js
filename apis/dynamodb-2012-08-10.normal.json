@@ -118,6 +118,20 @@
       ],
       "documentation":"<p>Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.</p> <note> <p>If you issue a <code>DescribeTable</code> request immediately after a <code>CreateTable</code> request, DynamoDB might return a <code>ResourceNotFoundException</code>. This is because <code>DescribeTable</code> uses an eventually consistent query, and the metadata for your table might not be available at that moment. Wait for a few seconds, and then try the <code>DescribeTable</code> request again.</p> </note>"
     },
+    "DescribeTimeToLive":{
+      "name":"DescribeTimeToLive",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTimeToLiveInput"},
+      "output":{"shape":"DescribeTimeToLiveOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Gives a description of the Time to Live (TTL) status on the specified table. </p>"
+    },
     "GetItem":{
       "name":"GetItem",
       "http":{
@@ -269,6 +283,22 @@
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.</p> <p>You can only perform one of the following operations at once:</p> <ul> <li> <p>Modify the provisioned throughput settings of the table.</p> </li> <li> <p>Enable or disable Streams on the table.</p> </li> <li> <p>Remove a global secondary index from the table.</p> </li> <li> <p>Create a new global secondary index on the table. Once the index begins backfilling, you can use <code>UpdateTable</code> to perform other operations.</p> </li> </ul> <p> <code>UpdateTable</code> is an asynchronous operation; while it is executing, the table status changes from <code>ACTIVE</code> to <code>UPDATING</code>. While it is <code>UPDATING</code>, you cannot issue another <code>UpdateTable</code> request. When the table returns to the <code>ACTIVE</code> state, the <code>UpdateTable</code> operation is complete.</p>"
+    },
+    "UpdateTimeToLive":{
+      "name":"UpdateTimeToLive",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateTimeToLiveInput"},
+      "output":{"shape":"UpdateTimeToLiveOutput"},
+      "errors":[
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Specify the lifetime of individual table items. The database automatically removes the item at the expiration of the item. The UpdateTimeToLive method will enable or disable TTL for the specified table. A successful <code>UpdateTimeToLive</code> call returns the current <code>TimeToLiveSpecification</code>; it may take up to one hour for the change to fully process. </p> <p>TTL compares the current time in epoch time format to the time stored in the TTL attribute of an item. If the epoch time value stored in the attribute is less than the current time, the item is marked as expired and subsequently deleted.</p> <note> <p> The epoch time format is the number of seconds elapsed since 12:00:00 AM January 1st, 1970 UTC. </p> </note> <p>DynamoDB deletes expired items on a best-effort basis to ensure availability of throughput for other data operations. </p> <important> <p>DynamoDB typically deletes expired items within two days of expiration. The exact duration within which an item gets deleted after expiration is specific to the nature of the workload. Items that have expired and not been deleted will still show up in reads, queries, and scans.</p> </important> <p>As items are deleted, they are removed from any Local Secondary Index and Global Secondary Index immediately in the same eventually consistent way as a standard delete operation.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html\">Time To Live</a> in the Amazon DynamoDB Developer Guide. </p>"
     }
   },
   "shapes":{
@@ -694,7 +724,7 @@
         },
         "ConditionExpression":{
           "shape":"ConditionExpression",
-          "documentation":"<p>A condition that must be satisfied in order for a conditional <code>DeleteItem</code> to succeed.</p> <p>An expression can contain any of the following:</p> <ul> <li> <p>Functions: <code>attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size</code> </p> <p>These function names are case-sensitive.</p> </li> <li> <p>Comparison operators: <code> = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN</code> </p> </li> <li> <p> Logical operators: <code>AND | OR | NOT</code> </p> </li> </ul> <p>For more information on condition expressions, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html\">Specifying Conditions</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+          "documentation":"<p>A condition that must be satisfied in order for a conditional <code>DeleteItem</code> to succeed.</p> <p>An expression can contain any of the following:</p> <ul> <li> <p>Functions: <code>attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size</code> </p> <p>These function names are case-sensitive.</p> </li> <li> <p>Comparison operators: <code>= | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN </code> </p> </li> <li> <p> Logical operators: <code>AND | OR | NOT</code> </p> </li> </ul> <p>For more information on condition expressions, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html\">Specifying Conditions</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
         },
         "ExpressionAttributeNames":{
           "shape":"ExpressionAttributeNameMap",
@@ -805,6 +835,25 @@
         }
       },
       "documentation":"<p>Represents the output of a <code>DescribeTable</code> operation.</p>"
+    },
+    "DescribeTimeToLiveInput":{
+      "type":"structure",
+      "required":["TableName"],
+      "members":{
+        "TableName":{
+          "shape":"TableName",
+          "documentation":"<p>The name of the table to be described.</p>"
+        }
+      }
+    },
+    "DescribeTimeToLiveOutput":{
+      "type":"structure",
+      "members":{
+        "TimeToLiveDescription":{
+          "shape":"TimeToLiveDescription",
+          "documentation":"<p/>"
+        }
+      }
     },
     "ErrorMessage":{"type":"string"},
     "ExpectedAttributeMap":{
@@ -1436,7 +1485,7 @@
         },
         "ConditionExpression":{
           "shape":"ConditionExpression",
-          "documentation":"<p>A condition that must be satisfied in order for a conditional <code>PutItem</code> operation to succeed.</p> <p>An expression can contain any of the following:</p> <ul> <li> <p>Functions: <code>attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size</code> </p> <p>These function names are case-sensitive.</p> </li> <li> <p>Comparison operators: <code> = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN</code> </p> </li> <li> <p> Logical operators: <code>AND | OR | NOT</code> </p> </li> </ul> <p>For more information on condition expressions, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html\">Specifying Conditions</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+          "documentation":"<p>A condition that must be satisfied in order for a conditional <code>PutItem</code> operation to succeed.</p> <p>An expression can contain any of the following:</p> <ul> <li> <p>Functions: <code>attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size</code> </p> <p>These function names are case-sensitive.</p> </li> <li> <p>Comparison operators: <code>= | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN </code> </p> </li> <li> <p> Logical operators: <code>AND | OR | NOT</code> </p> </li> </ul> <p>For more information on condition expressions, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html\">Specifying Conditions</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
         },
         "ExpressionAttributeNames":{
           "shape":"ExpressionAttributeNameMap",
@@ -1929,6 +1978,53 @@
       "max":256,
       "min":0
     },
+    "TimeToLiveAttributeName":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "TimeToLiveDescription":{
+      "type":"structure",
+      "members":{
+        "TimeToLiveStatus":{
+          "shape":"TimeToLiveStatus",
+          "documentation":"<p> The Time to Live status for the table.</p>"
+        },
+        "AttributeName":{
+          "shape":"TimeToLiveAttributeName",
+          "documentation":"<p> The name of the Time to Live attribute for items in the table.</p>"
+        }
+      },
+      "documentation":"<p>The description of the Time to Live (TTL) status on the specified table. </p>"
+    },
+    "TimeToLiveEnabled":{"type":"boolean"},
+    "TimeToLiveSpecification":{
+      "type":"structure",
+      "required":[
+        "Enabled",
+        "AttributeName"
+      ],
+      "members":{
+        "Enabled":{
+          "shape":"TimeToLiveEnabled",
+          "documentation":"<p>Indicates whether Time To Live is to be enabled (true) or disabled (false) on the table.</p>"
+        },
+        "AttributeName":{
+          "shape":"TimeToLiveAttributeName",
+          "documentation":"<p>The name of the Time to Live attribute used to store the expiration time for items in the table.</p>"
+        }
+      },
+      "documentation":"<p>Represents the settings used to enable or disable Time to Live for the specified table.</p>"
+    },
+    "TimeToLiveStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLING",
+        "DISABLING",
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "UntagResourceInput":{
       "type":"structure",
       "required":[
@@ -1994,7 +2090,7 @@
         },
         "ReturnValues":{
           "shape":"ReturnValue",
-          "documentation":"<p>Use <code>ReturnValues</code> if you want to get the item attributes as they appeared either before or after they were updated. For <code>UpdateItem</code>, the valid values are:</p> <ul> <li> <p> <code>NONE</code> - If <code>ReturnValues</code> is not specified, or if its value is <code>NONE</code>, then nothing is returned. (This setting is the default for <code>ReturnValues</code>.)</p> </li> <li> <p> <code>ALL_OLD</code> - If <code>UpdateItem</code> overwrote an attribute name-value pair, then the content of the old item is returned.</p> </li> <li> <p> <code>UPDATED_OLD</code> - The old versions of only the updated attributes are returned.</p> </li> <li> <p> <code>ALL_NEW</code> - All of the attributes of the new version of the item are returned.</p> </li> <li> <p> <code>UPDATED_NEW</code> - The new versions of only the updated attributes are returned.</p> </li> </ul> <p>There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No Read Capacity Units are consumed.</p> <p>Values returned are strongly consistent</p>"
+          "documentation":"<p>Use <code>ReturnValues</code> if you want to get the item attributes as they appeared either before or after they were updated. For <code>UpdateItem</code>, the valid values are:</p> <ul> <li> <p> <code>NONE</code> - If <code>ReturnValues</code> is not specified, or if its value is <code>NONE</code>, then nothing is returned. (This setting is the default for <code>ReturnValues</code>.)</p> </li> <li> <p> <code>ALL_OLD</code> - Returns all of the attributes of the item, as they appeared before the UpdateItem operation.</p> </li> <li> <p> <code>UPDATED_OLD</code> - Returns only the updated attributes, as they appeared before the UpdateItem operation.</p> </li> <li> <p> <code>ALL_NEW</code> - Returns all of the attributes of the item, as they appear after the UpdateItem operation.</p> </li> <li> <p> <code>UPDATED_NEW</code> - Returns only the updated attributes, as they appear after the UpdateItem operation.</p> </li> </ul> <p>There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No Read Capacity Units are consumed.</p> <p>Values returned are strongly consistent</p>"
         },
         "ReturnConsumedCapacity":{"shape":"ReturnConsumedCapacity"},
         "ReturnItemCollectionMetrics":{
@@ -2007,7 +2103,7 @@
         },
         "ConditionExpression":{
           "shape":"ConditionExpression",
-          "documentation":"<p>A condition that must be satisfied in order for a conditional update to succeed.</p> <p>An expression can contain any of the following:</p> <ul> <li> <p>Functions: <code>attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size</code> </p> <p>These function names are case-sensitive.</p> </li> <li> <p>Comparison operators: <code> = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN</code> </p> </li> <li> <p> Logical operators: <code>AND | OR | NOT</code> </p> </li> </ul> <p>For more information on condition expressions, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html\">Specifying Conditions</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+          "documentation":"<p>A condition that must be satisfied in order for a conditional update to succeed.</p> <p>An expression can contain any of the following:</p> <ul> <li> <p>Functions: <code>attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size</code> </p> <p>These function names are case-sensitive.</p> </li> <li> <p>Comparison operators: <code>= | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN </code> </p> </li> <li> <p> Logical operators: <code>AND | OR | NOT</code> </p> </li> </ul> <p>For more information on condition expressions, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html\">Specifying Conditions</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
         },
         "ExpressionAttributeNames":{
           "shape":"ExpressionAttributeNameMap",
@@ -2074,6 +2170,33 @@
         }
       },
       "documentation":"<p>Represents the output of an <code>UpdateTable</code> operation.</p>"
+    },
+    "UpdateTimeToLiveInput":{
+      "type":"structure",
+      "required":[
+        "TableName",
+        "TimeToLiveSpecification"
+      ],
+      "members":{
+        "TableName":{
+          "shape":"TableName",
+          "documentation":"<p>The name of the table to be configured.</p>"
+        },
+        "TimeToLiveSpecification":{
+          "shape":"TimeToLiveSpecification",
+          "documentation":"<p>Represents the settings used to enable or disable Time to Live for the specified table.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of an <code>UpdateTimeToLive</code> operation.</p>"
+    },
+    "UpdateTimeToLiveOutput":{
+      "type":"structure",
+      "members":{
+        "TimeToLiveSpecification":{
+          "shape":"TimeToLiveSpecification",
+          "documentation":"<p>Represents the output of an <code>UpdateTimeToLive</code> operation.</p>"
+        }
+      }
     },
     "WriteRequest":{
       "type":"structure",

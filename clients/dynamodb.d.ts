@@ -70,6 +70,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeTable(callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
   /**
+   * Gives a description of the Time to Live (TTL) status on the specified table. 
+   */
+  describeTimeToLive(params: DynamoDB.Types.DescribeTimeToLiveInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeTimeToLiveOutput) => void): Request<DynamoDB.Types.DescribeTimeToLiveOutput, AWSError>;
+  /**
+   * Gives a description of the Time to Live (TTL) status on the specified table. 
+   */
+  describeTimeToLive(callback?: (err: AWSError, data: DynamoDB.Types.DescribeTimeToLiveOutput) => void): Request<DynamoDB.Types.DescribeTimeToLiveOutput, AWSError>;
+  /**
    * The GetItem operation returns a set of attributes for the item with the given primary key. If there is no matching item, GetItem does not return any data and there will be no Item element in the response.  GetItem provides an eventually consistent read by default. If your application requires a strongly consistent read, set ConsistentRead to true. Although a strongly consistent read might take more time than an eventually consistent read, it always returns the last updated value.
    */
   getItem(params: DynamoDB.Types.GetItemInput, callback?: (err: AWSError, data: DynamoDB.Types.GetItemOutput) => void): Request<DynamoDB.Types.GetItemOutput, AWSError>;
@@ -149,6 +157,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table. You can only perform one of the following operations at once:   Modify the provisioned throughput settings of the table.   Enable or disable Streams on the table.   Remove a global secondary index from the table.   Create a new global secondary index on the table. Once the index begins backfilling, you can use UpdateTable to perform other operations.    UpdateTable is an asynchronous operation; while it is executing, the table status changes from ACTIVE to UPDATING. While it is UPDATING, you cannot issue another UpdateTable request. When the table returns to the ACTIVE state, the UpdateTable operation is complete.
    */
   updateTable(callback?: (err: AWSError, data: DynamoDB.Types.UpdateTableOutput) => void): Request<DynamoDB.Types.UpdateTableOutput, AWSError>;
+  /**
+   * Specify the lifetime of individual table items. The database automatically removes the item at the expiration of the item. The UpdateTimeToLive method will enable or disable TTL for the specified table. A successful UpdateTimeToLive call returns the current TimeToLiveSpecification; it may take up to one hour for the change to fully process.  TTL compares the current time in epoch time format to the time stored in the TTL attribute of an item. If the epoch time value stored in the attribute is less than the current time, the item is marked as expired and subsequently deleted.   The epoch time format is the number of seconds elapsed since 12:00:00 AM January 1st, 1970 UTC.   DynamoDB deletes expired items on a best-effort basis to ensure availability of throughput for other data operations.   DynamoDB typically deletes expired items within two days of expiration. The exact duration within which an item gets deleted after expiration is specific to the nature of the workload. Items that have expired and not been deleted will still show up in reads, queries, and scans.  As items are deleted, they are removed from any Local Secondary Index and Global Secondary Index immediately in the same eventually consistent way as a standard delete operation. For more information, see Time To Live in the Amazon DynamoDB Developer Guide. 
+   */
+  updateTimeToLive(params: DynamoDB.Types.UpdateTimeToLiveInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateTimeToLiveOutput) => void): Request<DynamoDB.Types.UpdateTimeToLiveOutput, AWSError>;
+  /**
+   * Specify the lifetime of individual table items. The database automatically removes the item at the expiration of the item. The UpdateTimeToLive method will enable or disable TTL for the specified table. A successful UpdateTimeToLive call returns the current TimeToLiveSpecification; it may take up to one hour for the change to fully process.  TTL compares the current time in epoch time format to the time stored in the TTL attribute of an item. If the epoch time value stored in the attribute is less than the current time, the item is marked as expired and subsequently deleted.   The epoch time format is the number of seconds elapsed since 12:00:00 AM January 1st, 1970 UTC.   DynamoDB deletes expired items on a best-effort basis to ensure availability of throughput for other data operations.   DynamoDB typically deletes expired items within two days of expiration. The exact duration within which an item gets deleted after expiration is specific to the nature of the workload. Items that have expired and not been deleted will still show up in reads, queries, and scans.  As items are deleted, they are removed from any Local Secondary Index and Global Secondary Index immediately in the same eventually consistent way as a standard delete operation. For more information, see Time To Live in the Amazon DynamoDB Developer Guide. 
+   */
+  updateTimeToLive(callback?: (err: AWSError, data: DynamoDB.Types.UpdateTimeToLiveOutput) => void): Request<DynamoDB.Types.UpdateTimeToLiveOutput, AWSError>;
   /**
    * Waits for the tableExists state by periodically calling the underlying DynamoDB.describeTableoperation every 20 seconds (at most 25 times).
    */
@@ -426,7 +442,7 @@ declare namespace DynamoDB {
      */
     ReturnItemCollectionMetrics?: ReturnItemCollectionMetrics;
     /**
-     * A condition that must be satisfied in order for a conditional DeleteItem to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators:  = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN     Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
+     * A condition that must be satisfied in order for a conditional DeleteItem to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators: = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN      Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
      */
     ConditionExpression?: ConditionExpression;
     /**
@@ -501,6 +517,18 @@ declare namespace DynamoDB {
      * The properties of the table.
      */
     Table?: TableDescription;
+  }
+  export interface DescribeTimeToLiveInput {
+    /**
+     * The name of the table to be described.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeTimeToLiveOutput {
+    /**
+     * 
+     */
+    TimeToLiveDescription?: TimeToLiveDescription;
   }
   export type ErrorMessage = string;
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
@@ -860,7 +888,7 @@ declare namespace DynamoDB {
      */
     ConditionalOperator?: ConditionalOperator;
     /**
-     * A condition that must be satisfied in order for a conditional PutItem operation to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators:  = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN     Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
+     * A condition that must be satisfied in order for a conditional PutItem operation to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators: = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN      Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
      */
     ConditionExpression?: ConditionExpression;
     /**
@@ -1177,6 +1205,29 @@ declare namespace DynamoDB {
     Tags: TagList;
   }
   export type TagValueString = string;
+  export type TimeToLiveAttributeName = string;
+  export interface TimeToLiveDescription {
+    /**
+     *  The Time to Live status for the table.
+     */
+    TimeToLiveStatus?: TimeToLiveStatus;
+    /**
+     *  The name of the Time to Live attribute for items in the table.
+     */
+    AttributeName?: TimeToLiveAttributeName;
+  }
+  export type TimeToLiveEnabled = boolean;
+  export interface TimeToLiveSpecification {
+    /**
+     * Indicates whether Time To Live is to be enabled (true) or disabled (false) on the table.
+     */
+    Enabled: TimeToLiveEnabled;
+    /**
+     * The name of the Time to Live attribute used to store the expiration time for items in the table.
+     */
+    AttributeName: TimeToLiveAttributeName;
+  }
+  export type TimeToLiveStatus = "ENABLING"|"DISABLING"|"ENABLED"|"DISABLED"|string;
   export interface UntagResourceInput {
     /**
      * The Amazon DyanamoDB resource the tags will be removed from. This value is an Amazon Resource Name (ARN).
@@ -1220,7 +1271,7 @@ declare namespace DynamoDB {
      */
     ConditionalOperator?: ConditionalOperator;
     /**
-     * Use ReturnValues if you want to get the item attributes as they appeared either before or after they were updated. For UpdateItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - If UpdateItem overwrote an attribute name-value pair, then the content of the old item is returned.    UPDATED_OLD - The old versions of only the updated attributes are returned.    ALL_NEW - All of the attributes of the new version of the item are returned.    UPDATED_NEW - The new versions of only the updated attributes are returned.   There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No Read Capacity Units are consumed. Values returned are strongly consistent
+     * Use ReturnValues if you want to get the item attributes as they appeared either before or after they were updated. For UpdateItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - Returns all of the attributes of the item, as they appeared before the UpdateItem operation.    UPDATED_OLD - Returns only the updated attributes, as they appeared before the UpdateItem operation.    ALL_NEW - Returns all of the attributes of the item, as they appear after the UpdateItem operation.    UPDATED_NEW - Returns only the updated attributes, as they appear after the UpdateItem operation.   There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No Read Capacity Units are consumed. Values returned are strongly consistent
      */
     ReturnValues?: ReturnValue;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -1233,7 +1284,7 @@ declare namespace DynamoDB {
      */
     UpdateExpression?: UpdateExpression;
     /**
-     * A condition that must be satisfied in order for a conditional update to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators:  = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN     Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
+     * A condition that must be satisfied in order for a conditional update to succeed. An expression can contain any of the following:   Functions: attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size  These function names are case-sensitive.   Comparison operators: = | &lt;&gt; | &lt; | &gt; | &lt;= | &gt;= | BETWEEN | IN      Logical operators: AND | OR | NOT    For more information on condition expressions, see Specifying Conditions in the Amazon DynamoDB Developer Guide.
      */
     ConditionExpression?: ConditionExpression;
     /**
@@ -1286,6 +1337,22 @@ declare namespace DynamoDB {
      * Represents the properties of the table.
      */
     TableDescription?: TableDescription;
+  }
+  export interface UpdateTimeToLiveInput {
+    /**
+     * The name of the table to be configured.
+     */
+    TableName: TableName;
+    /**
+     * Represents the settings used to enable or disable Time to Live for the specified table.
+     */
+    TimeToLiveSpecification: TimeToLiveSpecification;
+  }
+  export interface UpdateTimeToLiveOutput {
+    /**
+     * Represents the output of an UpdateTimeToLive operation.
+     */
+    TimeToLiveSpecification?: TimeToLiveSpecification;
   }
   export interface WriteRequest {
     /**

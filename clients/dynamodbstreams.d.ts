@@ -158,6 +158,16 @@ declare namespace DynamoDBStreams {
      */
     ShardIterator?: ShardIterator;
   }
+  export interface Identity {
+    /**
+     * A unique identifier for the entity that made the call. For Time To Live, the principalId is "dynamodb.amazonaws.com".
+     */
+    PrincipalId?: String;
+    /**
+     * The type of the identity. For Time To Live, the type is "Service".
+     */
+    Type?: String;
+  }
   export type KeySchema = KeySchemaElement[];
   export type KeySchemaAttributeName = string;
   export interface KeySchemaElement {
@@ -228,6 +238,10 @@ declare namespace DynamoDBStreams {
      * The main body of the stream record, containing all of the DynamoDB-specific fields.
      */
     dynamodb?: StreamRecord;
+    /**
+     * Items that are deleted by the Time to Live process after expiration have the following fields:    Records[].userIdentity.type "Service"   Records[].userIdentity.principalId "dynamodb.amazonaws.com"  
+     */
+    userIdentity?: Identity;
   }
   export type RecordList = Record[];
   export type SequenceNumber = string;

@@ -63,9 +63,11 @@ export abstract class ConfigurationServicePlaceholders {
   machinelearning?: AWS.MachineLearning.Types.ClientConfiguration;
   marketplacecommerceanalytics?: AWS.MarketplaceCommerceAnalytics.Types.ClientConfiguration;
   marketplacemetering?: AWS.MarketplaceMetering.Types.ClientConfiguration;
+  mechanicalturkrequester?: AWS.MechanicalTurkRequester.Types.ClientConfiguration;
   mobileanalytics?: AWS.MobileAnalytics.Types.ClientConfiguration;
   opsworks?: AWS.OpsWorks.Types.ClientConfiguration;
   opsworkscm?: AWS.OpsWorksCM.Types.ClientConfiguration;
+  organizations?: AWS.Organizations.Types.ClientConfiguration;
   pinpoint?: AWS.Pinpoint.Types.ClientConfiguration;
   polly?: AWS.Polly.Types.ClientConfiguration;
   rds?: AWS.RDS.Types.ClientConfiguration;
@@ -157,9 +159,11 @@ export interface ConfigurationServiceApiVersions {
   machinelearning?: AWS.MachineLearning.Types.apiVersion;
   marketplacecommerceanalytics?: AWS.MarketplaceCommerceAnalytics.Types.apiVersion;
   marketplacemetering?: AWS.MarketplaceMetering.Types.apiVersion;
+  mechanicalturkrequester?: AWS.MechanicalTurkRequester.Types.apiVersion;
   mobileanalytics?: AWS.MobileAnalytics.Types.apiVersion;
   opsworks?: AWS.OpsWorks.Types.apiVersion;
   opsworkscm?: AWS.OpsWorksCM.Types.apiVersion;
+  organizations?: AWS.Organizations.Types.apiVersion;
   pinpoint?: AWS.Pinpoint.Types.apiVersion;
   polly?: AWS.Polly.Types.apiVersion;
   rds?: AWS.RDS.Types.apiVersion;
