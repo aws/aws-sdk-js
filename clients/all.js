@@ -65,7 +65,7 @@ module.exports = {
   MachineLearning: require('./machinelearning'),
   MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
   MarketplaceMetering: require('./marketplacemetering'),
-  MechanicalTurkRequester: require('./mechanicalturkrequester'),
+  MTurk: require('./mturk'),
   MobileAnalytics: require('./mobileanalytics'),
   OpsWorks: require('./opsworks'),
   OpsWorksCM: require('./opsworkscm'),

@@ -45,7 +45,7 @@ module.exports = {
   LexRuntime: require('./lexruntime'),
   MachineLearning: require('./machinelearning'),
   MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
-  MechanicalTurkRequester: require('./mechanicalturkrequester'),
+  MTurk: require('./mturk'),
   MobileAnalytics: require('./mobileanalytics'),
   OpsWorks: require('./opsworks'),
   Polly: require('./polly'),

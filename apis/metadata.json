@@ -290,9 +290,9 @@
     "prefix": "meteringmarketplace",
     "name": "MarketplaceMetering"
   },
-  "mechanicalturkrequester": {
+  "mturk": {
     "prefix": "mturk-requester",
-    "name": "MechanicalTurkRequester",
+    "name": "MTurk",
     "cors": true
   },
   "mobileanalytics": {

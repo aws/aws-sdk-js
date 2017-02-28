@@ -63,7 +63,7 @@ export abstract class ConfigurationServicePlaceholders {
   machinelearning?: AWS.MachineLearning.Types.ClientConfiguration;
   marketplacecommerceanalytics?: AWS.MarketplaceCommerceAnalytics.Types.ClientConfiguration;
   marketplacemetering?: AWS.MarketplaceMetering.Types.ClientConfiguration;
-  mechanicalturkrequester?: AWS.MechanicalTurkRequester.Types.ClientConfiguration;
+  mturk?: AWS.MTurk.Types.ClientConfiguration;
   mobileanalytics?: AWS.MobileAnalytics.Types.ClientConfiguration;
   opsworks?: AWS.OpsWorks.Types.ClientConfiguration;
   opsworkscm?: AWS.OpsWorksCM.Types.ClientConfiguration;
@@ -159,7 +159,7 @@ export interface ConfigurationServiceApiVersions {
   machinelearning?: AWS.MachineLearning.Types.apiVersion;
   marketplacecommerceanalytics?: AWS.MarketplaceCommerceAnalytics.Types.apiVersion;
   marketplacemetering?: AWS.MarketplaceMetering.Types.apiVersion;
-  mechanicalturkrequester?: AWS.MechanicalTurkRequester.Types.apiVersion;
+  mturk?: AWS.MTurk.Types.apiVersion;
   mobileanalytics?: AWS.MobileAnalytics.Types.apiVersion;
   opsworks?: AWS.OpsWorks.Types.apiVersion;
   opsworkscm?: AWS.OpsWorksCM.Types.apiVersion;

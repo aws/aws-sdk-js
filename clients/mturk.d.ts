@@ -5,326 +5,326 @@ import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class MechanicalTurkRequester extends Service {
+declare class MTurk extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: MechanicalTurkRequester.Types.ClientConfiguration)
-  config: Config & MechanicalTurkRequester.Types.ClientConfiguration;
+  constructor(options?: MTurk.Types.ClientConfiguration)
+  config: Config & MTurk.Types.ClientConfiguration;
   /**
    *  The AcceptQualificationRequest operation approves a Worker's request for a Qualification.   Only the owner of the Qualification type can grant a Qualification request for that type.   A successful request for the AcceptQualificationRequest operation returns with no errors and an empty body. 
    */
-  acceptQualificationRequest(params: MechanicalTurkRequester.Types.AcceptQualificationRequestRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.AcceptQualificationRequestResponse) => void): Request<MechanicalTurkRequester.Types.AcceptQualificationRequestResponse, AWSError>;
+  acceptQualificationRequest(params: MTurk.Types.AcceptQualificationRequestRequest, callback?: (err: AWSError, data: MTurk.Types.AcceptQualificationRequestResponse) => void): Request<MTurk.Types.AcceptQualificationRequestResponse, AWSError>;
   /**
    *  The AcceptQualificationRequest operation approves a Worker's request for a Qualification.   Only the owner of the Qualification type can grant a Qualification request for that type.   A successful request for the AcceptQualificationRequest operation returns with no errors and an empty body. 
    */
-  acceptQualificationRequest(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.AcceptQualificationRequestResponse) => void): Request<MechanicalTurkRequester.Types.AcceptQualificationRequestResponse, AWSError>;
+  acceptQualificationRequest(callback?: (err: AWSError, data: MTurk.Types.AcceptQualificationRequestResponse) => void): Request<MTurk.Types.AcceptQualificationRequestResponse, AWSError>;
   /**
    *  The ApproveAssignment operation approves the results of a completed assignment.   Approving an assignment initiates two payments from the Requester's Amazon.com account     The Worker who submitted the results is paid the reward specified in the HIT.     Amazon Mechanical Turk fees are debited.     If the Requester's account does not have adequate funds for these payments, the call to ApproveAssignment returns an exception, and the approval is not processed. You can include an optional feedback message with the approval, which the Worker can see in the Status section of the web site.   You can also call this operation for assignments that were previous rejected and approve them by explicitly overriding the previous rejection. This only works on rejected assignments that were submitted within the previous 30 days and only if the assignment's related HIT has not been deleted. 
    */
-  approveAssignment(params: MechanicalTurkRequester.Types.ApproveAssignmentRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ApproveAssignmentResponse) => void): Request<MechanicalTurkRequester.Types.ApproveAssignmentResponse, AWSError>;
+  approveAssignment(params: MTurk.Types.ApproveAssignmentRequest, callback?: (err: AWSError, data: MTurk.Types.ApproveAssignmentResponse) => void): Request<MTurk.Types.ApproveAssignmentResponse, AWSError>;
   /**
    *  The ApproveAssignment operation approves the results of a completed assignment.   Approving an assignment initiates two payments from the Requester's Amazon.com account     The Worker who submitted the results is paid the reward specified in the HIT.     Amazon Mechanical Turk fees are debited.     If the Requester's account does not have adequate funds for these payments, the call to ApproveAssignment returns an exception, and the approval is not processed. You can include an optional feedback message with the approval, which the Worker can see in the Status section of the web site.   You can also call this operation for assignments that were previous rejected and approve them by explicitly overriding the previous rejection. This only works on rejected assignments that were submitted within the previous 30 days and only if the assignment's related HIT has not been deleted. 
    */
-  approveAssignment(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ApproveAssignmentResponse) => void): Request<MechanicalTurkRequester.Types.ApproveAssignmentResponse, AWSError>;
+  approveAssignment(callback?: (err: AWSError, data: MTurk.Types.ApproveAssignmentResponse) => void): Request<MTurk.Types.ApproveAssignmentResponse, AWSError>;
   /**
    *  The AssociateQualificationWithWorker operation gives a Worker a Qualification. AssociateQualificationWithWorker does not require that the Worker submit a Qualification request. It gives the Qualification directly to the Worker.   You can only assign a Qualification of a Qualification type that you created (using the CreateQualificationType operation).    Note: AssociateQualificationWithWorker does not affect any pending Qualification requests for the Qualification by the Worker. If you assign a Qualification to a Worker, then later grant a Qualification request made by the Worker, the granting of the request may modify the Qualification score. To resolve a pending Qualification request without affecting the Qualification the Worker already has, reject the request with the RejectQualificationRequest operation.  
    */
-  associateQualificationWithWorker(params: MechanicalTurkRequester.Types.AssociateQualificationWithWorkerRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.AssociateQualificationWithWorkerResponse) => void): Request<MechanicalTurkRequester.Types.AssociateQualificationWithWorkerResponse, AWSError>;
+  associateQualificationWithWorker(params: MTurk.Types.AssociateQualificationWithWorkerRequest, callback?: (err: AWSError, data: MTurk.Types.AssociateQualificationWithWorkerResponse) => void): Request<MTurk.Types.AssociateQualificationWithWorkerResponse, AWSError>;
   /**
    *  The AssociateQualificationWithWorker operation gives a Worker a Qualification. AssociateQualificationWithWorker does not require that the Worker submit a Qualification request. It gives the Qualification directly to the Worker.   You can only assign a Qualification of a Qualification type that you created (using the CreateQualificationType operation).    Note: AssociateQualificationWithWorker does not affect any pending Qualification requests for the Qualification by the Worker. If you assign a Qualification to a Worker, then later grant a Qualification request made by the Worker, the granting of the request may modify the Qualification score. To resolve a pending Qualification request without affecting the Qualification the Worker already has, reject the request with the RejectQualificationRequest operation.  
    */
-  associateQualificationWithWorker(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.AssociateQualificationWithWorkerResponse) => void): Request<MechanicalTurkRequester.Types.AssociateQualificationWithWorkerResponse, AWSError>;
+  associateQualificationWithWorker(callback?: (err: AWSError, data: MTurk.Types.AssociateQualificationWithWorkerResponse) => void): Request<MTurk.Types.AssociateQualificationWithWorkerResponse, AWSError>;
   /**
    *  The CreateAdditionalAssignmentsForHIT operation increases the maximum number of assignments of an existing HIT.   To extend the maximum number of assignments, specify the number of additional assignments.    HITs created with fewer than 10 assignments cannot be extended to have 10 or more assignments. Attempting to add assignments in a way that brings the total number of assignments for a HIT from fewer than 10 assignments to 10 or more assignments will result in an AWS.MechanicalTurk.InvalidMaximumAssignmentsIncrease exception.   HITs that were created before July 22, 2015 cannot be extended. Attempting to extend HITs that were created before July 22, 2015 will result in an AWS.MechanicalTurk.HITTooOldForExtension exception.    
    */
-  createAdditionalAssignmentsForHIT(params: MechanicalTurkRequester.Types.CreateAdditionalAssignmentsForHITRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateAdditionalAssignmentsForHITResponse) => void): Request<MechanicalTurkRequester.Types.CreateAdditionalAssignmentsForHITResponse, AWSError>;
+  createAdditionalAssignmentsForHIT(params: MTurk.Types.CreateAdditionalAssignmentsForHITRequest, callback?: (err: AWSError, data: MTurk.Types.CreateAdditionalAssignmentsForHITResponse) => void): Request<MTurk.Types.CreateAdditionalAssignmentsForHITResponse, AWSError>;
   /**
    *  The CreateAdditionalAssignmentsForHIT operation increases the maximum number of assignments of an existing HIT.   To extend the maximum number of assignments, specify the number of additional assignments.    HITs created with fewer than 10 assignments cannot be extended to have 10 or more assignments. Attempting to add assignments in a way that brings the total number of assignments for a HIT from fewer than 10 assignments to 10 or more assignments will result in an AWS.MechanicalTurk.InvalidMaximumAssignmentsIncrease exception.   HITs that were created before July 22, 2015 cannot be extended. Attempting to extend HITs that were created before July 22, 2015 will result in an AWS.MechanicalTurk.HITTooOldForExtension exception.    
    */
-  createAdditionalAssignmentsForHIT(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateAdditionalAssignmentsForHITResponse) => void): Request<MechanicalTurkRequester.Types.CreateAdditionalAssignmentsForHITResponse, AWSError>;
+  createAdditionalAssignmentsForHIT(callback?: (err: AWSError, data: MTurk.Types.CreateAdditionalAssignmentsForHITResponse) => void): Request<MTurk.Types.CreateAdditionalAssignmentsForHITResponse, AWSError>;
   /**
    * The CreateHIT operation creates a new Human Intelligence Task (HIT). The new HIT is made available for Workers to find and accept on the Amazon Mechanical Turk website.   This operation allows you to specify a new HIT by passing in values for the properties of the HIT, such as its title, reward amount and number of assignments. When you pass these values to CreateHIT, a new HIT is created for you, with a new HITTypeID. The HITTypeID can be used to create additional HITs in the future without needing to specify common parameters such as the title, description and reward amount each time.  An alternative way to create HITs is to first generate a HITTypeID using the CreateHITType operation and then call the CreateHITWithHITType operation. This is the recommended best practice for Requesters who are creating large numbers of HITs.  CreateHIT also supports several ways to provide question data: by providing a value for the Question parameter that fully specifies the contents of the HIT, or by providing a HitLayoutId and associated HitLayoutParameters.    If a HIT is created with 10 or more maximum assignments, there is an additional fee. For more information, see Amazon Mechanical Turk Pricing. 
    */
-  createHIT(params: MechanicalTurkRequester.Types.CreateHITRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateHITResponse) => void): Request<MechanicalTurkRequester.Types.CreateHITResponse, AWSError>;
+  createHIT(params: MTurk.Types.CreateHITRequest, callback?: (err: AWSError, data: MTurk.Types.CreateHITResponse) => void): Request<MTurk.Types.CreateHITResponse, AWSError>;
   /**
    * The CreateHIT operation creates a new Human Intelligence Task (HIT). The new HIT is made available for Workers to find and accept on the Amazon Mechanical Turk website.   This operation allows you to specify a new HIT by passing in values for the properties of the HIT, such as its title, reward amount and number of assignments. When you pass these values to CreateHIT, a new HIT is created for you, with a new HITTypeID. The HITTypeID can be used to create additional HITs in the future without needing to specify common parameters such as the title, description and reward amount each time.  An alternative way to create HITs is to first generate a HITTypeID using the CreateHITType operation and then call the CreateHITWithHITType operation. This is the recommended best practice for Requesters who are creating large numbers of HITs.  CreateHIT also supports several ways to provide question data: by providing a value for the Question parameter that fully specifies the contents of the HIT, or by providing a HitLayoutId and associated HitLayoutParameters.    If a HIT is created with 10 or more maximum assignments, there is an additional fee. For more information, see Amazon Mechanical Turk Pricing. 
    */
-  createHIT(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateHITResponse) => void): Request<MechanicalTurkRequester.Types.CreateHITResponse, AWSError>;
+  createHIT(callback?: (err: AWSError, data: MTurk.Types.CreateHITResponse) => void): Request<MTurk.Types.CreateHITResponse, AWSError>;
   /**
    *  The CreateHITType operation creates a new HIT type. This operation allows you to define a standard set of HIT properties to use when creating HITs. If you register a HIT type with values that match an existing HIT type, the HIT type ID of the existing type will be returned. 
    */
-  createHITType(params: MechanicalTurkRequester.Types.CreateHITTypeRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateHITTypeResponse) => void): Request<MechanicalTurkRequester.Types.CreateHITTypeResponse, AWSError>;
+  createHITType(params: MTurk.Types.CreateHITTypeRequest, callback?: (err: AWSError, data: MTurk.Types.CreateHITTypeResponse) => void): Request<MTurk.Types.CreateHITTypeResponse, AWSError>;
   /**
    *  The CreateHITType operation creates a new HIT type. This operation allows you to define a standard set of HIT properties to use when creating HITs. If you register a HIT type with values that match an existing HIT type, the HIT type ID of the existing type will be returned. 
    */
-  createHITType(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateHITTypeResponse) => void): Request<MechanicalTurkRequester.Types.CreateHITTypeResponse, AWSError>;
+  createHITType(callback?: (err: AWSError, data: MTurk.Types.CreateHITTypeResponse) => void): Request<MTurk.Types.CreateHITTypeResponse, AWSError>;
   /**
    *  The CreateHITWithHITType operation creates a new Human Intelligence Task (HIT) using an existing HITTypeID generated by the CreateHITType operation.   This is an alternative way to create HITs from the CreateHIT operation. This is the recommended best practice for Requesters who are creating large numbers of HITs.  CreateHITWithHITType also supports several ways to provide question data: by providing a value for the Question parameter that fully specifies the contents of the HIT, or by providing a HitLayoutId and associated HitLayoutParameters.    If a HIT is created with 10 or more maximum assignments, there is an additional fee. For more information, see Amazon Mechanical Turk Pricing.  
    */
-  createHITWithHITType(params: MechanicalTurkRequester.Types.CreateHITWithHITTypeRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateHITWithHITTypeResponse) => void): Request<MechanicalTurkRequester.Types.CreateHITWithHITTypeResponse, AWSError>;
+  createHITWithHITType(params: MTurk.Types.CreateHITWithHITTypeRequest, callback?: (err: AWSError, data: MTurk.Types.CreateHITWithHITTypeResponse) => void): Request<MTurk.Types.CreateHITWithHITTypeResponse, AWSError>;
   /**
    *  The CreateHITWithHITType operation creates a new Human Intelligence Task (HIT) using an existing HITTypeID generated by the CreateHITType operation.   This is an alternative way to create HITs from the CreateHIT operation. This is the recommended best practice for Requesters who are creating large numbers of HITs.  CreateHITWithHITType also supports several ways to provide question data: by providing a value for the Question parameter that fully specifies the contents of the HIT, or by providing a HitLayoutId and associated HitLayoutParameters.    If a HIT is created with 10 or more maximum assignments, there is an additional fee. For more information, see Amazon Mechanical Turk Pricing.  
    */
-  createHITWithHITType(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateHITWithHITTypeResponse) => void): Request<MechanicalTurkRequester.Types.CreateHITWithHITTypeResponse, AWSError>;
+  createHITWithHITType(callback?: (err: AWSError, data: MTurk.Types.CreateHITWithHITTypeResponse) => void): Request<MTurk.Types.CreateHITWithHITTypeResponse, AWSError>;
   /**
    *  The CreateQualificationType operation creates a new Qualification type, which is represented by a QualificationType data structure. 
    */
-  createQualificationType(params: MechanicalTurkRequester.Types.CreateQualificationTypeRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.CreateQualificationTypeResponse, AWSError>;
+  createQualificationType(params: MTurk.Types.CreateQualificationTypeRequest, callback?: (err: AWSError, data: MTurk.Types.CreateQualificationTypeResponse) => void): Request<MTurk.Types.CreateQualificationTypeResponse, AWSError>;
   /**
    *  The CreateQualificationType operation creates a new Qualification type, which is represented by a QualificationType data structure. 
    */
-  createQualificationType(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.CreateQualificationTypeResponse, AWSError>;
+  createQualificationType(callback?: (err: AWSError, data: MTurk.Types.CreateQualificationTypeResponse) => void): Request<MTurk.Types.CreateQualificationTypeResponse, AWSError>;
   /**
    * The CreateWorkerBlock operation allows you to prevent a Worker from working on your HITs. For example, you can block a Worker who is producing poor quality work. You can block up to 100,000 Workers.
    */
-  createWorkerBlock(params: MechanicalTurkRequester.Types.CreateWorkerBlockRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateWorkerBlockResponse) => void): Request<MechanicalTurkRequester.Types.CreateWorkerBlockResponse, AWSError>;
+  createWorkerBlock(params: MTurk.Types.CreateWorkerBlockRequest, callback?: (err: AWSError, data: MTurk.Types.CreateWorkerBlockResponse) => void): Request<MTurk.Types.CreateWorkerBlockResponse, AWSError>;
   /**
    * The CreateWorkerBlock operation allows you to prevent a Worker from working on your HITs. For example, you can block a Worker who is producing poor quality work. You can block up to 100,000 Workers.
    */
-  createWorkerBlock(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.CreateWorkerBlockResponse) => void): Request<MechanicalTurkRequester.Types.CreateWorkerBlockResponse, AWSError>;
+  createWorkerBlock(callback?: (err: AWSError, data: MTurk.Types.CreateWorkerBlockResponse) => void): Request<MTurk.Types.CreateWorkerBlockResponse, AWSError>;
   /**
    *  The DeleteHIT operation is used to delete HIT that is no longer needed. Only the Requester who created the HIT can delete it.   You can only dispose of HITs that are in the Reviewable state, with all of their submitted assignments already either approved or rejected. If you call the DeleteHIT operation on a HIT that is not in the Reviewable state (for example, that has not expired, or still has active assignments), or on a HIT that is Reviewable but without all of its submitted assignments already approved or rejected, the service will return an error.      HITs are automatically disposed of after 120 days.     After you dispose of a HIT, you can no longer approve the HIT's rejected assignments.     Disposed HITs are not returned in results for the ListHITs operation.     Disposing HITs can improve the performance of operations such as ListReviewableHITs and ListHITs.    
    */
-  deleteHIT(params: MechanicalTurkRequester.Types.DeleteHITRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.DeleteHITResponse) => void): Request<MechanicalTurkRequester.Types.DeleteHITResponse, AWSError>;
+  deleteHIT(params: MTurk.Types.DeleteHITRequest, callback?: (err: AWSError, data: MTurk.Types.DeleteHITResponse) => void): Request<MTurk.Types.DeleteHITResponse, AWSError>;
   /**
    *  The DeleteHIT operation is used to delete HIT that is no longer needed. Only the Requester who created the HIT can delete it.   You can only dispose of HITs that are in the Reviewable state, with all of their submitted assignments already either approved or rejected. If you call the DeleteHIT operation on a HIT that is not in the Reviewable state (for example, that has not expired, or still has active assignments), or on a HIT that is Reviewable but without all of its submitted assignments already approved or rejected, the service will return an error.      HITs are automatically disposed of after 120 days.     After you dispose of a HIT, you can no longer approve the HIT's rejected assignments.     Disposed HITs are not returned in results for the ListHITs operation.     Disposing HITs can improve the performance of operations such as ListReviewableHITs and ListHITs.    
    */
-  deleteHIT(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.DeleteHITResponse) => void): Request<MechanicalTurkRequester.Types.DeleteHITResponse, AWSError>;
+  deleteHIT(callback?: (err: AWSError, data: MTurk.Types.DeleteHITResponse) => void): Request<MTurk.Types.DeleteHITResponse, AWSError>;
   /**
    *  The DeleteQualificationType deletes a Qualification type and deletes any HIT types that are associated with the Qualification type.  This operation does not revoke Qualifications already assigned to Workers because the Qualifications might be needed for active HITs. If there are any pending requests for the Qualification type, Amazon Mechanical Turk rejects those requests. After you delete a Qualification type, you can no longer use it to create HITs or HIT types.  DeleteQualificationType must wait for all the HITs that use the deleted Qualification type to be deleted before completing. It may take up to 48 hours before DeleteQualificationType completes and the unique name of the Qualification type is available for reuse with CreateQualificationType. 
    */
-  deleteQualificationType(params: MechanicalTurkRequester.Types.DeleteQualificationTypeRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.DeleteQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.DeleteQualificationTypeResponse, AWSError>;
+  deleteQualificationType(params: MTurk.Types.DeleteQualificationTypeRequest, callback?: (err: AWSError, data: MTurk.Types.DeleteQualificationTypeResponse) => void): Request<MTurk.Types.DeleteQualificationTypeResponse, AWSError>;
   /**
    *  The DeleteQualificationType deletes a Qualification type and deletes any HIT types that are associated with the Qualification type.  This operation does not revoke Qualifications already assigned to Workers because the Qualifications might be needed for active HITs. If there are any pending requests for the Qualification type, Amazon Mechanical Turk rejects those requests. After you delete a Qualification type, you can no longer use it to create HITs or HIT types.  DeleteQualificationType must wait for all the HITs that use the deleted Qualification type to be deleted before completing. It may take up to 48 hours before DeleteQualificationType completes and the unique name of the Qualification type is available for reuse with CreateQualificationType. 
    */
-  deleteQualificationType(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.DeleteQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.DeleteQualificationTypeResponse, AWSError>;
+  deleteQualificationType(callback?: (err: AWSError, data: MTurk.Types.DeleteQualificationTypeResponse) => void): Request<MTurk.Types.DeleteQualificationTypeResponse, AWSError>;
   /**
    * The DeleteWorkerBlock operation allows you to reinstate a blocked Worker to work on your HITs. This operation reverses the effects of the CreateWorkerBlock operation. You need the Worker ID to use this operation. If the Worker ID is missing or invalid, this operation fails and returns the message “WorkerId is invalid.” If the specified Worker is not blocked, this operation returns successfully.
    */
-  deleteWorkerBlock(params: MechanicalTurkRequester.Types.DeleteWorkerBlockRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.DeleteWorkerBlockResponse) => void): Request<MechanicalTurkRequester.Types.DeleteWorkerBlockResponse, AWSError>;
+  deleteWorkerBlock(params: MTurk.Types.DeleteWorkerBlockRequest, callback?: (err: AWSError, data: MTurk.Types.DeleteWorkerBlockResponse) => void): Request<MTurk.Types.DeleteWorkerBlockResponse, AWSError>;
   /**
    * The DeleteWorkerBlock operation allows you to reinstate a blocked Worker to work on your HITs. This operation reverses the effects of the CreateWorkerBlock operation. You need the Worker ID to use this operation. If the Worker ID is missing or invalid, this operation fails and returns the message “WorkerId is invalid.” If the specified Worker is not blocked, this operation returns successfully.
    */
-  deleteWorkerBlock(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.DeleteWorkerBlockResponse) => void): Request<MechanicalTurkRequester.Types.DeleteWorkerBlockResponse, AWSError>;
+  deleteWorkerBlock(callback?: (err: AWSError, data: MTurk.Types.DeleteWorkerBlockResponse) => void): Request<MTurk.Types.DeleteWorkerBlockResponse, AWSError>;
   /**
    *  The DisassociateQualificationFromWorker revokes a previously granted Qualification from a user.   You can provide a text message explaining why the Qualification was revoked. The user who had the Qualification can see this message. 
    */
-  disassociateQualificationFromWorker(params: MechanicalTurkRequester.Types.DisassociateQualificationFromWorkerRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.DisassociateQualificationFromWorkerResponse) => void): Request<MechanicalTurkRequester.Types.DisassociateQualificationFromWorkerResponse, AWSError>;
+  disassociateQualificationFromWorker(params: MTurk.Types.DisassociateQualificationFromWorkerRequest, callback?: (err: AWSError, data: MTurk.Types.DisassociateQualificationFromWorkerResponse) => void): Request<MTurk.Types.DisassociateQualificationFromWorkerResponse, AWSError>;
   /**
    *  The DisassociateQualificationFromWorker revokes a previously granted Qualification from a user.   You can provide a text message explaining why the Qualification was revoked. The user who had the Qualification can see this message. 
    */
-  disassociateQualificationFromWorker(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.DisassociateQualificationFromWorkerResponse) => void): Request<MechanicalTurkRequester.Types.DisassociateQualificationFromWorkerResponse, AWSError>;
+  disassociateQualificationFromWorker(callback?: (err: AWSError, data: MTurk.Types.DisassociateQualificationFromWorkerResponse) => void): Request<MTurk.Types.DisassociateQualificationFromWorkerResponse, AWSError>;
   /**
    * The GetAccountBalance operation retrieves the amount of money in your Amazon Mechanical Turk account.
    */
-  getAccountBalance(params: MechanicalTurkRequester.Types.GetAccountBalanceRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetAccountBalanceResponse) => void): Request<MechanicalTurkRequester.Types.GetAccountBalanceResponse, AWSError>;
+  getAccountBalance(params: MTurk.Types.GetAccountBalanceRequest, callback?: (err: AWSError, data: MTurk.Types.GetAccountBalanceResponse) => void): Request<MTurk.Types.GetAccountBalanceResponse, AWSError>;
   /**
    * The GetAccountBalance operation retrieves the amount of money in your Amazon Mechanical Turk account.
    */
-  getAccountBalance(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetAccountBalanceResponse) => void): Request<MechanicalTurkRequester.Types.GetAccountBalanceResponse, AWSError>;
+  getAccountBalance(callback?: (err: AWSError, data: MTurk.Types.GetAccountBalanceResponse) => void): Request<MTurk.Types.GetAccountBalanceResponse, AWSError>;
   /**
    *  The GetAssignment operation retrieves the details of the specified Assignment. 
    */
-  getAssignment(params: MechanicalTurkRequester.Types.GetAssignmentRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetAssignmentResponse) => void): Request<MechanicalTurkRequester.Types.GetAssignmentResponse, AWSError>;
+  getAssignment(params: MTurk.Types.GetAssignmentRequest, callback?: (err: AWSError, data: MTurk.Types.GetAssignmentResponse) => void): Request<MTurk.Types.GetAssignmentResponse, AWSError>;
   /**
    *  The GetAssignment operation retrieves the details of the specified Assignment. 
    */
-  getAssignment(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetAssignmentResponse) => void): Request<MechanicalTurkRequester.Types.GetAssignmentResponse, AWSError>;
+  getAssignment(callback?: (err: AWSError, data: MTurk.Types.GetAssignmentResponse) => void): Request<MTurk.Types.GetAssignmentResponse, AWSError>;
   /**
    *  The GetFileUploadURL operation generates and returns a temporary URL. You use the temporary URL to retrieve a file uploaded by a Worker as an answer to a FileUploadAnswer question for a HIT. The temporary URL is generated the instant the GetFileUploadURL operation is called, and is valid for 60 seconds. You can get a temporary file upload URL any time until the HIT is disposed. After the HIT is disposed, any uploaded files are deleted, and cannot be retrieved. 
    */
-  getFileUploadURL(params: MechanicalTurkRequester.Types.GetFileUploadURLRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetFileUploadURLResponse) => void): Request<MechanicalTurkRequester.Types.GetFileUploadURLResponse, AWSError>;
+  getFileUploadURL(params: MTurk.Types.GetFileUploadURLRequest, callback?: (err: AWSError, data: MTurk.Types.GetFileUploadURLResponse) => void): Request<MTurk.Types.GetFileUploadURLResponse, AWSError>;
   /**
    *  The GetFileUploadURL operation generates and returns a temporary URL. You use the temporary URL to retrieve a file uploaded by a Worker as an answer to a FileUploadAnswer question for a HIT. The temporary URL is generated the instant the GetFileUploadURL operation is called, and is valid for 60 seconds. You can get a temporary file upload URL any time until the HIT is disposed. After the HIT is disposed, any uploaded files are deleted, and cannot be retrieved. 
    */
-  getFileUploadURL(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetFileUploadURLResponse) => void): Request<MechanicalTurkRequester.Types.GetFileUploadURLResponse, AWSError>;
+  getFileUploadURL(callback?: (err: AWSError, data: MTurk.Types.GetFileUploadURLResponse) => void): Request<MTurk.Types.GetFileUploadURLResponse, AWSError>;
   /**
    *  The GetHIT operation retrieves the details of the specified HIT. 
    */
-  getHIT(params: MechanicalTurkRequester.Types.GetHITRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetHITResponse) => void): Request<MechanicalTurkRequester.Types.GetHITResponse, AWSError>;
+  getHIT(params: MTurk.Types.GetHITRequest, callback?: (err: AWSError, data: MTurk.Types.GetHITResponse) => void): Request<MTurk.Types.GetHITResponse, AWSError>;
   /**
    *  The GetHIT operation retrieves the details of the specified HIT. 
    */
-  getHIT(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetHITResponse) => void): Request<MechanicalTurkRequester.Types.GetHITResponse, AWSError>;
+  getHIT(callback?: (err: AWSError, data: MTurk.Types.GetHITResponse) => void): Request<MTurk.Types.GetHITResponse, AWSError>;
   /**
    *  The GetQualificationScore operation returns the value of a Worker's Qualification for a given Qualification type.   To get a Worker's Qualification, you must know the Worker's ID. The Worker's ID is included in the assignment data returned by the ListAssignmentsForHIT operation.  Only the owner of a Qualification type can query the value of a Worker's Qualification of that type.
    */
-  getQualificationScore(params: MechanicalTurkRequester.Types.GetQualificationScoreRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetQualificationScoreResponse) => void): Request<MechanicalTurkRequester.Types.GetQualificationScoreResponse, AWSError>;
+  getQualificationScore(params: MTurk.Types.GetQualificationScoreRequest, callback?: (err: AWSError, data: MTurk.Types.GetQualificationScoreResponse) => void): Request<MTurk.Types.GetQualificationScoreResponse, AWSError>;
   /**
    *  The GetQualificationScore operation returns the value of a Worker's Qualification for a given Qualification type.   To get a Worker's Qualification, you must know the Worker's ID. The Worker's ID is included in the assignment data returned by the ListAssignmentsForHIT operation.  Only the owner of a Qualification type can query the value of a Worker's Qualification of that type.
    */
-  getQualificationScore(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetQualificationScoreResponse) => void): Request<MechanicalTurkRequester.Types.GetQualificationScoreResponse, AWSError>;
+  getQualificationScore(callback?: (err: AWSError, data: MTurk.Types.GetQualificationScoreResponse) => void): Request<MTurk.Types.GetQualificationScoreResponse, AWSError>;
   /**
    *  The GetQualificationTypeoperation retrieves information about a Qualification type using its ID. 
    */
-  getQualificationType(params: MechanicalTurkRequester.Types.GetQualificationTypeRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.GetQualificationTypeResponse, AWSError>;
+  getQualificationType(params: MTurk.Types.GetQualificationTypeRequest, callback?: (err: AWSError, data: MTurk.Types.GetQualificationTypeResponse) => void): Request<MTurk.Types.GetQualificationTypeResponse, AWSError>;
   /**
    *  The GetQualificationTypeoperation retrieves information about a Qualification type using its ID. 
    */
-  getQualificationType(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.GetQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.GetQualificationTypeResponse, AWSError>;
+  getQualificationType(callback?: (err: AWSError, data: MTurk.Types.GetQualificationTypeResponse) => void): Request<MTurk.Types.GetQualificationTypeResponse, AWSError>;
   /**
    *  The ListAssignmentsForHIT operation retrieves completed assignments for a HIT. You can use this operation to retrieve the results for a HIT.   You can get assignments for a HIT at any time, even if the HIT is not yet Reviewable. If a HIT requested multiple assignments, and has received some results but has not yet become Reviewable, you can still retrieve the partial results with this operation.   Use the AssignmentStatus parameter to control which set of assignments for a HIT are returned. The ListAssignmentsForHIT operation can return submitted assignments awaiting approval, or it can return assignments that have already been approved or rejected. You can set AssignmentStatus=Approved,Rejected to get assignments that have already been approved and rejected together in one result set.   Only the Requester who created the HIT can retrieve the assignments for that HIT.   Results are sorted and divided into numbered pages and the operation returns a single page of results. You can use the parameters of the operation to control sorting and pagination. 
    */
-  listAssignmentsForHIT(params: MechanicalTurkRequester.Types.ListAssignmentsForHITRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListAssignmentsForHITResponse) => void): Request<MechanicalTurkRequester.Types.ListAssignmentsForHITResponse, AWSError>;
+  listAssignmentsForHIT(params: MTurk.Types.ListAssignmentsForHITRequest, callback?: (err: AWSError, data: MTurk.Types.ListAssignmentsForHITResponse) => void): Request<MTurk.Types.ListAssignmentsForHITResponse, AWSError>;
   /**
    *  The ListAssignmentsForHIT operation retrieves completed assignments for a HIT. You can use this operation to retrieve the results for a HIT.   You can get assignments for a HIT at any time, even if the HIT is not yet Reviewable. If a HIT requested multiple assignments, and has received some results but has not yet become Reviewable, you can still retrieve the partial results with this operation.   Use the AssignmentStatus parameter to control which set of assignments for a HIT are returned. The ListAssignmentsForHIT operation can return submitted assignments awaiting approval, or it can return assignments that have already been approved or rejected. You can set AssignmentStatus=Approved,Rejected to get assignments that have already been approved and rejected together in one result set.   Only the Requester who created the HIT can retrieve the assignments for that HIT.   Results are sorted and divided into numbered pages and the operation returns a single page of results. You can use the parameters of the operation to control sorting and pagination. 
    */
-  listAssignmentsForHIT(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListAssignmentsForHITResponse) => void): Request<MechanicalTurkRequester.Types.ListAssignmentsForHITResponse, AWSError>;
+  listAssignmentsForHIT(callback?: (err: AWSError, data: MTurk.Types.ListAssignmentsForHITResponse) => void): Request<MTurk.Types.ListAssignmentsForHITResponse, AWSError>;
   /**
    *  The ListBonusPayments operation retrieves the amounts of bonuses you have paid to Workers for a given HIT or assignment. 
    */
-  listBonusPayments(params: MechanicalTurkRequester.Types.ListBonusPaymentsRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListBonusPaymentsResponse) => void): Request<MechanicalTurkRequester.Types.ListBonusPaymentsResponse, AWSError>;
+  listBonusPayments(params: MTurk.Types.ListBonusPaymentsRequest, callback?: (err: AWSError, data: MTurk.Types.ListBonusPaymentsResponse) => void): Request<MTurk.Types.ListBonusPaymentsResponse, AWSError>;
   /**
    *  The ListBonusPayments operation retrieves the amounts of bonuses you have paid to Workers for a given HIT or assignment. 
    */
-  listBonusPayments(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListBonusPaymentsResponse) => void): Request<MechanicalTurkRequester.Types.ListBonusPaymentsResponse, AWSError>;
+  listBonusPayments(callback?: (err: AWSError, data: MTurk.Types.ListBonusPaymentsResponse) => void): Request<MTurk.Types.ListBonusPaymentsResponse, AWSError>;
   /**
    *  The ListHITs operation returns all of a Requester's HITs. The operation returns HITs of any status, except for HITs that have been deleted of with the DeleteHIT operation or that have been auto-deleted. 
    */
-  listHITs(params: MechanicalTurkRequester.Types.ListHITsRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListHITsResponse) => void): Request<MechanicalTurkRequester.Types.ListHITsResponse, AWSError>;
+  listHITs(params: MTurk.Types.ListHITsRequest, callback?: (err: AWSError, data: MTurk.Types.ListHITsResponse) => void): Request<MTurk.Types.ListHITsResponse, AWSError>;
   /**
    *  The ListHITs operation returns all of a Requester's HITs. The operation returns HITs of any status, except for HITs that have been deleted of with the DeleteHIT operation or that have been auto-deleted. 
    */
-  listHITs(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListHITsResponse) => void): Request<MechanicalTurkRequester.Types.ListHITsResponse, AWSError>;
+  listHITs(callback?: (err: AWSError, data: MTurk.Types.ListHITsResponse) => void): Request<MTurk.Types.ListHITsResponse, AWSError>;
   /**
    *  The ListHITsForQualificationType operation returns the HITs that use the given Qualification type for a Qualification requirement. The operation returns HITs of any status, except for HITs that have been deleted with the DeleteHIT operation or that have been auto-deleted. 
    */
-  listHITsForQualificationType(params: MechanicalTurkRequester.Types.ListHITsForQualificationTypeRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListHITsForQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.ListHITsForQualificationTypeResponse, AWSError>;
+  listHITsForQualificationType(params: MTurk.Types.ListHITsForQualificationTypeRequest, callback?: (err: AWSError, data: MTurk.Types.ListHITsForQualificationTypeResponse) => void): Request<MTurk.Types.ListHITsForQualificationTypeResponse, AWSError>;
   /**
    *  The ListHITsForQualificationType operation returns the HITs that use the given Qualification type for a Qualification requirement. The operation returns HITs of any status, except for HITs that have been deleted with the DeleteHIT operation or that have been auto-deleted. 
    */
-  listHITsForQualificationType(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListHITsForQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.ListHITsForQualificationTypeResponse, AWSError>;
+  listHITsForQualificationType(callback?: (err: AWSError, data: MTurk.Types.ListHITsForQualificationTypeResponse) => void): Request<MTurk.Types.ListHITsForQualificationTypeResponse, AWSError>;
   /**
    *  The ListQualificationRequests operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. 
    */
-  listQualificationRequests(params: MechanicalTurkRequester.Types.ListQualificationRequestsRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListQualificationRequestsResponse) => void): Request<MechanicalTurkRequester.Types.ListQualificationRequestsResponse, AWSError>;
+  listQualificationRequests(params: MTurk.Types.ListQualificationRequestsRequest, callback?: (err: AWSError, data: MTurk.Types.ListQualificationRequestsResponse) => void): Request<MTurk.Types.ListQualificationRequestsResponse, AWSError>;
   /**
    *  The ListQualificationRequests operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. 
    */
-  listQualificationRequests(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListQualificationRequestsResponse) => void): Request<MechanicalTurkRequester.Types.ListQualificationRequestsResponse, AWSError>;
+  listQualificationRequests(callback?: (err: AWSError, data: MTurk.Types.ListQualificationRequestsResponse) => void): Request<MTurk.Types.ListQualificationRequestsResponse, AWSError>;
   /**
    *  The ListQualificationRequests operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. 
    */
-  listQualificationTypes(params: MechanicalTurkRequester.Types.ListQualificationTypesRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListQualificationTypesResponse) => void): Request<MechanicalTurkRequester.Types.ListQualificationTypesResponse, AWSError>;
+  listQualificationTypes(params: MTurk.Types.ListQualificationTypesRequest, callback?: (err: AWSError, data: MTurk.Types.ListQualificationTypesResponse) => void): Request<MTurk.Types.ListQualificationTypesResponse, AWSError>;
   /**
    *  The ListQualificationRequests operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. 
    */
-  listQualificationTypes(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListQualificationTypesResponse) => void): Request<MechanicalTurkRequester.Types.ListQualificationTypesResponse, AWSError>;
+  listQualificationTypes(callback?: (err: AWSError, data: MTurk.Types.ListQualificationTypesResponse) => void): Request<MTurk.Types.ListQualificationTypesResponse, AWSError>;
   /**
    *  The ListReviewPolicyResultsForHIT operation retrieves the computed results and the actions taken in the course of executing your Review Policies for a given HIT. For information about how to specify Review Policies when you call CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation can return results for both Assignment-level and HIT-level review results. 
    */
-  listReviewPolicyResultsForHIT(params: MechanicalTurkRequester.Types.ListReviewPolicyResultsForHITRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListReviewPolicyResultsForHITResponse) => void): Request<MechanicalTurkRequester.Types.ListReviewPolicyResultsForHITResponse, AWSError>;
+  listReviewPolicyResultsForHIT(params: MTurk.Types.ListReviewPolicyResultsForHITRequest, callback?: (err: AWSError, data: MTurk.Types.ListReviewPolicyResultsForHITResponse) => void): Request<MTurk.Types.ListReviewPolicyResultsForHITResponse, AWSError>;
   /**
    *  The ListReviewPolicyResultsForHIT operation retrieves the computed results and the actions taken in the course of executing your Review Policies for a given HIT. For information about how to specify Review Policies when you call CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation can return results for both Assignment-level and HIT-level review results. 
    */
-  listReviewPolicyResultsForHIT(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListReviewPolicyResultsForHITResponse) => void): Request<MechanicalTurkRequester.Types.ListReviewPolicyResultsForHITResponse, AWSError>;
+  listReviewPolicyResultsForHIT(callback?: (err: AWSError, data: MTurk.Types.ListReviewPolicyResultsForHITResponse) => void): Request<MTurk.Types.ListReviewPolicyResultsForHITResponse, AWSError>;
   /**
    *  The ListReviewableHITs operation retrieves the HITs with Status equal to Reviewable or Status equal to Reviewing that belong to the Requester calling the operation. 
    */
-  listReviewableHITs(params: MechanicalTurkRequester.Types.ListReviewableHITsRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListReviewableHITsResponse) => void): Request<MechanicalTurkRequester.Types.ListReviewableHITsResponse, AWSError>;
+  listReviewableHITs(params: MTurk.Types.ListReviewableHITsRequest, callback?: (err: AWSError, data: MTurk.Types.ListReviewableHITsResponse) => void): Request<MTurk.Types.ListReviewableHITsResponse, AWSError>;
   /**
    *  The ListReviewableHITs operation retrieves the HITs with Status equal to Reviewable or Status equal to Reviewing that belong to the Requester calling the operation. 
    */
-  listReviewableHITs(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListReviewableHITsResponse) => void): Request<MechanicalTurkRequester.Types.ListReviewableHITsResponse, AWSError>;
+  listReviewableHITs(callback?: (err: AWSError, data: MTurk.Types.ListReviewableHITsResponse) => void): Request<MTurk.Types.ListReviewableHITsResponse, AWSError>;
   /**
    * The ListWorkersBlocks operation retrieves a list of Workers who are blocked from working on your HITs.
    */
-  listWorkerBlocks(params: MechanicalTurkRequester.Types.ListWorkerBlocksRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListWorkerBlocksResponse) => void): Request<MechanicalTurkRequester.Types.ListWorkerBlocksResponse, AWSError>;
+  listWorkerBlocks(params: MTurk.Types.ListWorkerBlocksRequest, callback?: (err: AWSError, data: MTurk.Types.ListWorkerBlocksResponse) => void): Request<MTurk.Types.ListWorkerBlocksResponse, AWSError>;
   /**
    * The ListWorkersBlocks operation retrieves a list of Workers who are blocked from working on your HITs.
    */
-  listWorkerBlocks(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListWorkerBlocksResponse) => void): Request<MechanicalTurkRequester.Types.ListWorkerBlocksResponse, AWSError>;
+  listWorkerBlocks(callback?: (err: AWSError, data: MTurk.Types.ListWorkerBlocksResponse) => void): Request<MTurk.Types.ListWorkerBlocksResponse, AWSError>;
   /**
    *  The ListWorkersWithQualificationType operation returns all of the Workers that have been associated with a given Qualification type. 
    */
-  listWorkersWithQualificationType(params: MechanicalTurkRequester.Types.ListWorkersWithQualificationTypeRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListWorkersWithQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.ListWorkersWithQualificationTypeResponse, AWSError>;
+  listWorkersWithQualificationType(params: MTurk.Types.ListWorkersWithQualificationTypeRequest, callback?: (err: AWSError, data: MTurk.Types.ListWorkersWithQualificationTypeResponse) => void): Request<MTurk.Types.ListWorkersWithQualificationTypeResponse, AWSError>;
   /**
    *  The ListWorkersWithQualificationType operation returns all of the Workers that have been associated with a given Qualification type. 
    */
-  listWorkersWithQualificationType(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.ListWorkersWithQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.ListWorkersWithQualificationTypeResponse, AWSError>;
+  listWorkersWithQualificationType(callback?: (err: AWSError, data: MTurk.Types.ListWorkersWithQualificationTypeResponse) => void): Request<MTurk.Types.ListWorkersWithQualificationTypeResponse, AWSError>;
   /**
    *  The NotifyWorkers operation sends an email to one or more Workers that you specify with the Worker ID. You can specify up to 100 Worker IDs to send the same message with a single call to the NotifyWorkers operation. The NotifyWorkers operation will send a notification email to a Worker only if you have previously approved or rejected work from the Worker. 
    */
-  notifyWorkers(params: MechanicalTurkRequester.Types.NotifyWorkersRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.NotifyWorkersResponse) => void): Request<MechanicalTurkRequester.Types.NotifyWorkersResponse, AWSError>;
+  notifyWorkers(params: MTurk.Types.NotifyWorkersRequest, callback?: (err: AWSError, data: MTurk.Types.NotifyWorkersResponse) => void): Request<MTurk.Types.NotifyWorkersResponse, AWSError>;
   /**
    *  The NotifyWorkers operation sends an email to one or more Workers that you specify with the Worker ID. You can specify up to 100 Worker IDs to send the same message with a single call to the NotifyWorkers operation. The NotifyWorkers operation will send a notification email to a Worker only if you have previously approved or rejected work from the Worker. 
    */
-  notifyWorkers(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.NotifyWorkersResponse) => void): Request<MechanicalTurkRequester.Types.NotifyWorkersResponse, AWSError>;
+  notifyWorkers(callback?: (err: AWSError, data: MTurk.Types.NotifyWorkersResponse) => void): Request<MTurk.Types.NotifyWorkersResponse, AWSError>;
   /**
    *  The RejectAssignment operation rejects the results of a completed assignment.   You can include an optional feedback message with the rejection, which the Worker can see in the Status section of the web site. When you include a feedback message with the rejection, it helps the Worker understand why the assignment was rejected, and can improve the quality of the results the Worker submits in the future.   Only the Requester who created the HIT can reject an assignment for the HIT. 
    */
-  rejectAssignment(params: MechanicalTurkRequester.Types.RejectAssignmentRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.RejectAssignmentResponse) => void): Request<MechanicalTurkRequester.Types.RejectAssignmentResponse, AWSError>;
+  rejectAssignment(params: MTurk.Types.RejectAssignmentRequest, callback?: (err: AWSError, data: MTurk.Types.RejectAssignmentResponse) => void): Request<MTurk.Types.RejectAssignmentResponse, AWSError>;
   /**
    *  The RejectAssignment operation rejects the results of a completed assignment.   You can include an optional feedback message with the rejection, which the Worker can see in the Status section of the web site. When you include a feedback message with the rejection, it helps the Worker understand why the assignment was rejected, and can improve the quality of the results the Worker submits in the future.   Only the Requester who created the HIT can reject an assignment for the HIT. 
    */
-  rejectAssignment(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.RejectAssignmentResponse) => void): Request<MechanicalTurkRequester.Types.RejectAssignmentResponse, AWSError>;
+  rejectAssignment(callback?: (err: AWSError, data: MTurk.Types.RejectAssignmentResponse) => void): Request<MTurk.Types.RejectAssignmentResponse, AWSError>;
   /**
    *  The RejectQualificationRequest operation rejects a user's request for a Qualification.   You can provide a text message explaining why the request was rejected. The Worker who made the request can see this message.
    */
-  rejectQualificationRequest(params: MechanicalTurkRequester.Types.RejectQualificationRequestRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.RejectQualificationRequestResponse) => void): Request<MechanicalTurkRequester.Types.RejectQualificationRequestResponse, AWSError>;
+  rejectQualificationRequest(params: MTurk.Types.RejectQualificationRequestRequest, callback?: (err: AWSError, data: MTurk.Types.RejectQualificationRequestResponse) => void): Request<MTurk.Types.RejectQualificationRequestResponse, AWSError>;
   /**
    *  The RejectQualificationRequest operation rejects a user's request for a Qualification.   You can provide a text message explaining why the request was rejected. The Worker who made the request can see this message.
    */
-  rejectQualificationRequest(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.RejectQualificationRequestResponse) => void): Request<MechanicalTurkRequester.Types.RejectQualificationRequestResponse, AWSError>;
+  rejectQualificationRequest(callback?: (err: AWSError, data: MTurk.Types.RejectQualificationRequestResponse) => void): Request<MTurk.Types.RejectQualificationRequestResponse, AWSError>;
   /**
    *  The SendBonus operation issues a payment of money from your account to a Worker. This payment happens separately from the reward you pay to the Worker when you approve the Worker's assignment. The SendBonus operation requires the Worker's ID and the assignment ID as parameters to initiate payment of the bonus. You must include a message that explains the reason for the bonus payment, as the Worker may not be expecting the payment. Amazon Mechanical Turk collects a fee for bonus payments, similar to the HIT listing fee. This operation fails if your account does not have enough funds to pay for both the bonus and the fees. 
    */
-  sendBonus(params: MechanicalTurkRequester.Types.SendBonusRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.SendBonusResponse) => void): Request<MechanicalTurkRequester.Types.SendBonusResponse, AWSError>;
+  sendBonus(params: MTurk.Types.SendBonusRequest, callback?: (err: AWSError, data: MTurk.Types.SendBonusResponse) => void): Request<MTurk.Types.SendBonusResponse, AWSError>;
   /**
    *  The SendBonus operation issues a payment of money from your account to a Worker. This payment happens separately from the reward you pay to the Worker when you approve the Worker's assignment. The SendBonus operation requires the Worker's ID and the assignment ID as parameters to initiate payment of the bonus. You must include a message that explains the reason for the bonus payment, as the Worker may not be expecting the payment. Amazon Mechanical Turk collects a fee for bonus payments, similar to the HIT listing fee. This operation fails if your account does not have enough funds to pay for both the bonus and the fees. 
    */
-  sendBonus(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.SendBonusResponse) => void): Request<MechanicalTurkRequester.Types.SendBonusResponse, AWSError>;
+  sendBonus(callback?: (err: AWSError, data: MTurk.Types.SendBonusResponse) => void): Request<MTurk.Types.SendBonusResponse, AWSError>;
   /**
    *  The SendTestEventNotification operation causes Amazon Mechanical Turk to send a notification message as if a HIT event occurred, according to the provided notification specification. This allows you to test notifications without setting up notifications for a real HIT type and trying to trigger them using the website. When you call this operation, the service attempts to send the test notification immediately. 
    */
-  sendTestEventNotification(params: MechanicalTurkRequester.Types.SendTestEventNotificationRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.SendTestEventNotificationResponse) => void): Request<MechanicalTurkRequester.Types.SendTestEventNotificationResponse, AWSError>;
+  sendTestEventNotification(params: MTurk.Types.SendTestEventNotificationRequest, callback?: (err: AWSError, data: MTurk.Types.SendTestEventNotificationResponse) => void): Request<MTurk.Types.SendTestEventNotificationResponse, AWSError>;
   /**
    *  The SendTestEventNotification operation causes Amazon Mechanical Turk to send a notification message as if a HIT event occurred, according to the provided notification specification. This allows you to test notifications without setting up notifications for a real HIT type and trying to trigger them using the website. When you call this operation, the service attempts to send the test notification immediately. 
    */
-  sendTestEventNotification(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.SendTestEventNotificationResponse) => void): Request<MechanicalTurkRequester.Types.SendTestEventNotificationResponse, AWSError>;
+  sendTestEventNotification(callback?: (err: AWSError, data: MTurk.Types.SendTestEventNotificationResponse) => void): Request<MTurk.Types.SendTestEventNotificationResponse, AWSError>;
   /**
    *  The UpdateExpirationForHIT operation allows you update the expiration time of a HIT. If you update it to a time in the past, the HIT will be immediately expired. 
    */
-  updateExpirationForHIT(params: MechanicalTurkRequester.Types.UpdateExpirationForHITRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateExpirationForHITResponse) => void): Request<MechanicalTurkRequester.Types.UpdateExpirationForHITResponse, AWSError>;
+  updateExpirationForHIT(params: MTurk.Types.UpdateExpirationForHITRequest, callback?: (err: AWSError, data: MTurk.Types.UpdateExpirationForHITResponse) => void): Request<MTurk.Types.UpdateExpirationForHITResponse, AWSError>;
   /**
    *  The UpdateExpirationForHIT operation allows you update the expiration time of a HIT. If you update it to a time in the past, the HIT will be immediately expired. 
    */
-  updateExpirationForHIT(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateExpirationForHITResponse) => void): Request<MechanicalTurkRequester.Types.UpdateExpirationForHITResponse, AWSError>;
+  updateExpirationForHIT(callback?: (err: AWSError, data: MTurk.Types.UpdateExpirationForHITResponse) => void): Request<MTurk.Types.UpdateExpirationForHITResponse, AWSError>;
   /**
    *  The UpdateHITReviewStatus operation updates the status of a HIT. If the status is Reviewable, this operation can update the status to Reviewing, or it can revert a Reviewing HIT back to the Reviewable status. 
    */
-  updateHITReviewStatus(params: MechanicalTurkRequester.Types.UpdateHITReviewStatusRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateHITReviewStatusResponse) => void): Request<MechanicalTurkRequester.Types.UpdateHITReviewStatusResponse, AWSError>;
+  updateHITReviewStatus(params: MTurk.Types.UpdateHITReviewStatusRequest, callback?: (err: AWSError, data: MTurk.Types.UpdateHITReviewStatusResponse) => void): Request<MTurk.Types.UpdateHITReviewStatusResponse, AWSError>;
   /**
    *  The UpdateHITReviewStatus operation updates the status of a HIT. If the status is Reviewable, this operation can update the status to Reviewing, or it can revert a Reviewing HIT back to the Reviewable status. 
    */
-  updateHITReviewStatus(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateHITReviewStatusResponse) => void): Request<MechanicalTurkRequester.Types.UpdateHITReviewStatusResponse, AWSError>;
+  updateHITReviewStatus(callback?: (err: AWSError, data: MTurk.Types.UpdateHITReviewStatusResponse) => void): Request<MTurk.Types.UpdateHITReviewStatusResponse, AWSError>;
   /**
    *  The UpdateHITTypeOfHIT operation allows you to change the HITType properties of a HIT. This operation disassociates the HIT from its old HITType properties and associates it with the new HITType properties. The HIT takes on the properties of the new HITType in place of the old ones. 
    */
-  updateHITTypeOfHIT(params: MechanicalTurkRequester.Types.UpdateHITTypeOfHITRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateHITTypeOfHITResponse) => void): Request<MechanicalTurkRequester.Types.UpdateHITTypeOfHITResponse, AWSError>;
+  updateHITTypeOfHIT(params: MTurk.Types.UpdateHITTypeOfHITRequest, callback?: (err: AWSError, data: MTurk.Types.UpdateHITTypeOfHITResponse) => void): Request<MTurk.Types.UpdateHITTypeOfHITResponse, AWSError>;
   /**
    *  The UpdateHITTypeOfHIT operation allows you to change the HITType properties of a HIT. This operation disassociates the HIT from its old HITType properties and associates it with the new HITType properties. The HIT takes on the properties of the new HITType in place of the old ones. 
    */
-  updateHITTypeOfHIT(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateHITTypeOfHITResponse) => void): Request<MechanicalTurkRequester.Types.UpdateHITTypeOfHITResponse, AWSError>;
+  updateHITTypeOfHIT(callback?: (err: AWSError, data: MTurk.Types.UpdateHITTypeOfHITResponse) => void): Request<MTurk.Types.UpdateHITTypeOfHITResponse, AWSError>;
   /**
    *  The UpdateNotificationSettings operation creates, updates, disables or re-enables notifications for a HIT type. If you call the UpdateNotificationSettings operation for a HIT type that already has a notification specification, the operation replaces the old specification with a new one. You can call the UpdateNotificationSettings operation to enable or disable notifications for the HIT type, without having to modify the notification specification itself by providing updates to the Active status without specifying a new notification specification. To change the Active status of a HIT type's notifications, the HIT type must already have a notification specification, or one must be provided in the same call to UpdateNotificationSettings. 
    */
-  updateNotificationSettings(params: MechanicalTurkRequester.Types.UpdateNotificationSettingsRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateNotificationSettingsResponse) => void): Request<MechanicalTurkRequester.Types.UpdateNotificationSettingsResponse, AWSError>;
+  updateNotificationSettings(params: MTurk.Types.UpdateNotificationSettingsRequest, callback?: (err: AWSError, data: MTurk.Types.UpdateNotificationSettingsResponse) => void): Request<MTurk.Types.UpdateNotificationSettingsResponse, AWSError>;
   /**
    *  The UpdateNotificationSettings operation creates, updates, disables or re-enables notifications for a HIT type. If you call the UpdateNotificationSettings operation for a HIT type that already has a notification specification, the operation replaces the old specification with a new one. You can call the UpdateNotificationSettings operation to enable or disable notifications for the HIT type, without having to modify the notification specification itself by providing updates to the Active status without specifying a new notification specification. To change the Active status of a HIT type's notifications, the HIT type must already have a notification specification, or one must be provided in the same call to UpdateNotificationSettings. 
    */
-  updateNotificationSettings(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateNotificationSettingsResponse) => void): Request<MechanicalTurkRequester.Types.UpdateNotificationSettingsResponse, AWSError>;
+  updateNotificationSettings(callback?: (err: AWSError, data: MTurk.Types.UpdateNotificationSettingsResponse) => void): Request<MTurk.Types.UpdateNotificationSettingsResponse, AWSError>;
   /**
    *  The UpdateQualificationType operation modifies the attributes of an existing Qualification type, which is represented by a QualificationType data structure. Only the owner of a Qualification type can modify its attributes.   Most attributes of a Qualification type can be changed after the type has been created. However, the Name and Keywords fields cannot be modified. The RetryDelayInSeconds parameter can be modified or added to change the delay or to enable retries, but RetryDelayInSeconds cannot be used to disable retries.   You can use this operation to update the test for a Qualification type. The test is updated based on the values specified for the Test, TestDurationInSeconds and AnswerKey parameters. All three parameters specify the updated test. If you are updating the test for a type, you must specify the Test and TestDurationInSeconds parameters. The AnswerKey parameter is optional; omitting it specifies that the updated test does not have an answer key.   If you omit the Test parameter, the test for the Qualification type is unchanged. There is no way to remove a test from a Qualification type that has one. If the type already has a test, you cannot update it to be AutoGranted. If the Qualification type does not have a test and one is provided by an update, the type will henceforth have a test.   If you want to update the test duration or answer key for an existing test without changing the questions, you must specify a Test parameter with the original questions, along with the updated values.   If you provide an updated Test but no AnswerKey, the new test will not have an answer key. Requests for such Qualifications must be granted manually.   You can also update the AutoGranted and AutoGrantedValue attributes of the Qualification type.
    */
-  updateQualificationType(params: MechanicalTurkRequester.Types.UpdateQualificationTypeRequest, callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.UpdateQualificationTypeResponse, AWSError>;
+  updateQualificationType(params: MTurk.Types.UpdateQualificationTypeRequest, callback?: (err: AWSError, data: MTurk.Types.UpdateQualificationTypeResponse) => void): Request<MTurk.Types.UpdateQualificationTypeResponse, AWSError>;
   /**
    *  The UpdateQualificationType operation modifies the attributes of an existing Qualification type, which is represented by a QualificationType data structure. Only the owner of a Qualification type can modify its attributes.   Most attributes of a Qualification type can be changed after the type has been created. However, the Name and Keywords fields cannot be modified. The RetryDelayInSeconds parameter can be modified or added to change the delay or to enable retries, but RetryDelayInSeconds cannot be used to disable retries.   You can use this operation to update the test for a Qualification type. The test is updated based on the values specified for the Test, TestDurationInSeconds and AnswerKey parameters. All three parameters specify the updated test. If you are updating the test for a type, you must specify the Test and TestDurationInSeconds parameters. The AnswerKey parameter is optional; omitting it specifies that the updated test does not have an answer key.   If you omit the Test parameter, the test for the Qualification type is unchanged. There is no way to remove a test from a Qualification type that has one. If the type already has a test, you cannot update it to be AutoGranted. If the Qualification type does not have a test and one is provided by an update, the type will henceforth have a test.   If you want to update the test duration or answer key for an existing test without changing the questions, you must specify a Test parameter with the original questions, along with the updated values.   If you provide an updated Test but no AnswerKey, the new test will not have an answer key. Requests for such Qualifications must be granted manually.   You can also update the AutoGranted and AutoGrantedValue attributes of the Qualification type.
    */
-  updateQualificationType(callback?: (err: AWSError, data: MechanicalTurkRequester.Types.UpdateQualificationTypeResponse) => void): Request<MechanicalTurkRequester.Types.UpdateQualificationTypeResponse, AWSError>;
+  updateQualificationType(callback?: (err: AWSError, data: MTurk.Types.UpdateQualificationTypeResponse) => void): Request<MTurk.Types.UpdateQualificationTypeResponse, AWSError>;
 }
-declare namespace MechanicalTurkRequester {
+declare namespace MTurk {
   export interface AcceptQualificationRequestRequest {
     /**
      * The ID of the Qualification request, as returned by the GetQualificationRequests operation.
@@ -1677,8 +1677,8 @@ declare namespace MechanicalTurkRequester {
   }
   export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
   /**
-   * Contains interfaces for use with the MechanicalTurkRequester client.
+   * Contains interfaces for use with the MTurk client.
    */
-  export import Types = MechanicalTurkRequester;
+  export import Types = MTurk;
 }
-export = MechanicalTurkRequester;
+export = MTurk;
