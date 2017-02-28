@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.21.0
+// AWS SDK for JavaScript v2.22.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -57177,9 +57177,9 @@ module.exports={
     "prefix": "meteringmarketplace",
     "name": "MarketplaceMetering"
   },
-  "mechanicalturkrequester": {
+  "mturk": {
     "prefix": "mturk-requester",
-    "name": "MechanicalTurkRequester",
+    "name": "MTurk",
     "cors": true
   },
   "mobileanalytics": {
@@ -57945,7 +57945,8 @@ module.exports={
     "endpointPrefix": "mturk-requester",
     "jsonVersion": "1.1",
     "protocol": "json",
-    "serviceFullName": "Amazon Mechanical Turk Requester Service",
+    "serviceAbbreviation": "Amazon MTurk",
+    "serviceFullName": "Amazon Mechanical Turk",
     "signatureVersion": "v4",
     "targetPrefix": "MTurkRequesterServiceV20170117",
     "uid": "mturk-requester-2017-01-17"
@@ -92573,7 +92574,7 @@ module.exports = {
   LexRuntime: require('./lexruntime'),
   MachineLearning: require('./machinelearning'),
   MarketplaceCommerceAnalytics: require('./marketplacecommerceanalytics'),
-  MechanicalTurkRequester: require('./mechanicalturkrequester'),
+  MTurk: require('./mturk'),
   MobileAnalytics: require('./mobileanalytics'),
   OpsWorks: require('./opsworks'),
   Polly: require('./polly'),
@@ -92592,7 +92593,7 @@ module.exports = {
   STS: require('./sts'),
   WAF: require('./waf')
 };
-},{"../lib/core":207,"../lib/node_loader":204,"./acm":141,"./apigateway":142,"./applicationautoscaling":143,"./autoscaling":144,"./cloudformation":146,"./cloudfront":147,"./cloudhsm":148,"./cloudtrail":149,"./cloudwatch":150,"./cloudwatchevents":151,"./cloudwatchlogs":152,"./codecommit":153,"./codedeploy":154,"./codepipeline":155,"./cognitoidentity":156,"./cognitoidentityserviceprovider":157,"./cognitosync":158,"./configservice":159,"./cur":160,"./devicefarm":161,"./directconnect":162,"./dynamodb":163,"./dynamodbstreams":164,"./ec2":165,"./ecr":166,"./ecs":167,"./elasticache":168,"./elasticbeanstalk":169,"./elastictranscoder":170,"./elb":171,"./elbv2":172,"./emr":173,"./firehose":174,"./gamelift":175,"./inspector":176,"./iot":177,"./iotdata":178,"./kinesis":179,"./kms":180,"./lambda":181,"./lexruntime":182,"./machinelearning":183,"./marketplacecommerceanalytics":184,"./mechanicalturkrequester":185,"./mobileanalytics":186,"./opsworks":187,"./polly":188,"./rds":189,"./redshift":190,"./rekognition":191,"./route53":192,"./route53domains":193,"./s3":194,"./servicecatalog":195,"./ses":196,"./sns":197,"./sqs":198,"./ssm":199,"./storagegateway":200,"./sts":201,"./waf":202}],146:[function(require,module,exports){
+},{"../lib/core":207,"../lib/node_loader":204,"./acm":141,"./apigateway":142,"./applicationautoscaling":143,"./autoscaling":144,"./cloudformation":146,"./cloudfront":147,"./cloudhsm":148,"./cloudtrail":149,"./cloudwatch":150,"./cloudwatchevents":151,"./cloudwatchlogs":152,"./codecommit":153,"./codedeploy":154,"./codepipeline":155,"./cognitoidentity":156,"./cognitoidentityserviceprovider":157,"./cognitosync":158,"./configservice":159,"./cur":160,"./devicefarm":161,"./directconnect":162,"./dynamodb":163,"./dynamodbstreams":164,"./ec2":165,"./ecr":166,"./ecs":167,"./elasticache":168,"./elasticbeanstalk":169,"./elastictranscoder":170,"./elb":171,"./elbv2":172,"./emr":173,"./firehose":174,"./gamelift":175,"./inspector":176,"./iot":177,"./iotdata":178,"./kinesis":179,"./kms":180,"./lambda":181,"./lexruntime":182,"./machinelearning":183,"./marketplacecommerceanalytics":184,"./mobileanalytics":185,"./mturk":186,"./opsworks":187,"./polly":188,"./rds":189,"./redshift":190,"./rekognition":191,"./route53":192,"./route53domains":193,"./s3":194,"./servicecatalog":195,"./ses":196,"./sns":197,"./sqs":198,"./ssm":199,"./storagegateway":200,"./sts":201,"./waf":202}],146:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -93406,26 +93407,6 @@ var AWS = require('../lib/core');
 var Service = require('../lib/service');
 var apiLoader = require('../lib/api_loader');
 
-apiLoader.services['mechanicalturkrequester'] = {};
-AWS.MechanicalTurkRequester = Service.defineService('mechanicalturkrequester', ['2017-01-17']);
-Object.defineProperty(apiLoader.services['mechanicalturkrequester'], '2017-01-17', {
-  get: function get() {
-    var model = require('../apis/mturk-requester-2017-01-17.min.json');
-    model.paginators = require('../apis/mturk-requester-2017-01-17.paginators.json').pagination;
-    return model;
-  },
-  enumerable: true,
-  configurable: true
-});
-
-module.exports = AWS.MechanicalTurkRequester;
-
-},{"../apis/mturk-requester-2017-01-17.min.json":96,"../apis/mturk-requester-2017-01-17.paginators.json":97,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],186:[function(require,module,exports){
-require('../lib/node_loader');
-var AWS = require('../lib/core');
-var Service = require('../lib/service');
-var apiLoader = require('../lib/api_loader');
-
 apiLoader.services['mobileanalytics'] = {};
 AWS.MobileAnalytics = Service.defineService('mobileanalytics', ['2014-06-05']);
 Object.defineProperty(apiLoader.services['mobileanalytics'], '2014-06-05', {
@@ -93439,7 +93420,27 @@ Object.defineProperty(apiLoader.services['mobileanalytics'], '2014-06-05', {
 
 module.exports = AWS.MobileAnalytics;
 
-},{"../apis/mobileanalytics-2014-06-05.min.json":92,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],187:[function(require,module,exports){
+},{"../apis/mobileanalytics-2014-06-05.min.json":92,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],186:[function(require,module,exports){
+require('../lib/node_loader');
+var AWS = require('../lib/core');
+var Service = require('../lib/service');
+var apiLoader = require('../lib/api_loader');
+
+apiLoader.services['mturk'] = {};
+AWS.MTurk = Service.defineService('mturk', ['2017-01-17']);
+Object.defineProperty(apiLoader.services['mturk'], '2017-01-17', {
+  get: function get() {
+    var model = require('../apis/mturk-requester-2017-01-17.min.json');
+    model.paginators = require('../apis/mturk-requester-2017-01-17.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+
+module.exports = AWS.MTurk;
+
+},{"../apis/mturk-requester-2017-01-17.min.json":96,"../apis/mturk-requester-2017-01-17.paginators.json":97,"../lib/api_loader":203,"../lib/core":207,"../lib/node_loader":204,"../lib/service":245}],187:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = require('../lib/service');
@@ -94196,7 +94197,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.21.0',
+  VERSION: '2.22.0',
 
 
   Signers: {},
