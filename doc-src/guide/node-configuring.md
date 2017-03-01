@@ -79,6 +79,9 @@ You may configure credentials for multiple access keys in the same shared
 configuration file using *profiles*. This is discussed in the last part of
 this section.
 
+You can specify a different location for the shared credentials file
+by using the `AWS_CREDENTIAL_PROFILES_FILE` environment variable.
+
 ##### Creating the Shared Credentials File
 
 If you do not already have a shared credentials file, you can create one in
