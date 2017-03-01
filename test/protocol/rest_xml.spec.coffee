@@ -234,6 +234,13 @@ describe 'AWS.Protocol.RestXml', ->
       expect(response.error.message).to.equal(null)
       expect(response.data).to.equal(null)
 
+    it 'returns an empty error when the body cannot be parsed', ->
+      extractError JSON.stringify({"foo":"bar","fizz":["buzz", "pop"]})
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.code).to.equal(400)
+      expect(response.error.message).to.equal(null)
+      expect(response.data).to.equal(null)
+
     it 'extracts error when inside <Errors>', ->
       extractError """
       <SomeResponse>
