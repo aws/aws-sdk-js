@@ -87,7 +87,7 @@ class ApiDocumentor
 
   def generate_api(file, version_suffix = true)
     _, klass, version = *file.match($API_FILE_MATCH)
-    identifier, klass, dualstack = *class_info_for(klass.downcase)
+    identifier, klass, dualstack = *class_info_for(klass)
     name = version_suffix ? klass + '_' + version.gsub('-', '') : klass
     log.progress("Parsing AWS.#{klass} (#{version})")
     svc = YARD::CodeObjects::ClassObject.new(@root, name)
