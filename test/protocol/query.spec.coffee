@@ -99,6 +99,7 @@ describe 'AWS.Protocol.Query', ->
         </Error>
         """
       response.httpResponse.statusCode = 400
+      response.httpResponse.statusMessage = 'Bad Request'
       response.httpResponse.body = new Buffer(body)
       svc.extractError(response)
 
@@ -125,7 +126,7 @@ describe 'AWS.Protocol.Query', ->
     it 'returns an empty error when the body cannot be parsed', ->
       extractError JSON.stringify({"foo":"bar","fizz":["buzz", "pop"]})
       expect(response.error.code).to.equal(400)
-      expect(response.error.message).to.equal(null)
+      expect(response.error.message).to.equal('Bad Request')
       expect(response.data).to.equal(null)
 
     it 'extracts error when inside <Errors>', ->
