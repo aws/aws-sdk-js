@@ -3,7 +3,7 @@ fs = require('fs')
 evalCode = (code, preamble) ->
   eval """
     (function() {
-      var window = GLOBAL;
+      var window = global;
       #{preamble};
       return #{code};
     })();

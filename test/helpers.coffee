@@ -1,18 +1,18 @@
 AWS = null
-global = null
+topLevelScope = null
 ignoreRequire = require
 if typeof window == 'undefined'
   AWS = ignoreRequire('../lib/aws')
-  global = GLOBAL
+  topLevelScope = global
 else
   AWS = window.AWS
-  global = window
+  topLevelScope = window
 
-if global.jasmine
-  global.jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000
+if topLevelScope.jasmine
+  topLevelScope.jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000
 
 _it = it
-global.it = (label, fn) ->
+topLevelScope.it = (label, fn) ->
   if label.match(/\(no phantomjs\)/) and navigator and navigator.userAgent.match(/phantomjs/i)
     return
   _it(label, fn)
@@ -76,10 +76,10 @@ _spyOn = (obj, methodName) ->
 # Disable setTimeout for tests, but keep original in case test needs to use it
 # Warning: this might cause unpredictable results
 # TODO: refactor this out.
-global.setTimeoutOrig = global.setTimeout
-global.setTimeout = (fn) -> fn()
+topLevelScope.setTimeoutOrig = topLevelScope.setTimeout
+topLevelScope.setTimeout = (fn) -> fn()
 
-global.expect = require('chai').expect
+topLevelScope.expect = require('chai').expect
 
 matchXML = (xml1, xml2) ->
   results = []
