@@ -158,7 +158,8 @@ if AWS.util.isNode()
   describe 'AWS.SharedIniFileCredentials', ->
     beforeEach ->
       delete process.env.AWS_PROFILE
-      delete process.env.AWS_CREDENTIAL_PROFILES_FILE
+      delete process.env.AWS_SDK_LOAD_CONFIG
+      delete process.env.AWS_SHARED_CREDENTIALS_FILE
       delete process.env.HOME
       delete process.env.HOMEPATH
       delete process.env.HOMEDRIVE
@@ -210,8 +211,9 @@ if AWS.util.isNode()
         validateCredentials(creds)
         expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
 
-      it 'loads credentials from path defined in AWS_CREDENTIAL_PROFILES_FILE', ->
-        process.env.AWS_CREDENTIAL_PROFILES_FILE = '/path/to/aws/credentials'
+      it 'loads credentials from path defined in AWS_SHARED_CREDENTIALS_FILE if AWS_SDK_LOAD_CONFIG is set', ->
+        process.env.AWS_SDK_LOAD_CONFIG = '1'
+        process.env.AWS_SHARED_CREDENTIALS_FILE = '/path/to/aws/credentials'
         mock = '''
         [default]
         aws_access_key_id = akid
@@ -223,7 +225,23 @@ if AWS.util.isNode()
         creds = new AWS.SharedIniFileCredentials()
         creds.get();
         validateCredentials(creds)
-        expect(AWS.util.readFileSync.calls[0].arguments[0]).to.equal('/path/to/aws/credentials')
+        expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/)
+        expect(AWS.util.readFileSync.calls[1].arguments[0]).to.equal(process.env.AWS_SHARED_CREDENTIALS_FILE)
+
+      it 'loads credentials from ~/.aws/credentials if AWS_SDK_LOAD_CONFIG is not set', ->
+        process.env.AWS_SHARED_CREDENTIALS_FILE = '/path/to/aws/credentials'
+        mock = '''
+        [default]
+        aws_access_key_id = akid
+        aws_secret_access_key = secret
+        aws_session_token = session
+        '''
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+        creds = new AWS.SharedIniFileCredentials()
+        creds.get();
+        validateCredentials(creds)
+        expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
 
       it 'loads the default profile if AWS_PROFILE is empty', ->
         process.env.AWS_PROFILE = ''
