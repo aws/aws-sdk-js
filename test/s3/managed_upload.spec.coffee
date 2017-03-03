@@ -368,6 +368,60 @@ describe 'AWS.S3.ManagedUpload', ->
             expect(e.message).to.equal('message')
             done()
 
+        it 'can send a stream that is exactly equal to part size', (done) ->
+          partSize = 5 * 1024 * 1024
+          require('crypto').randomBytes partSize, (err, buf) ->
+            return done(err) if err
+
+            stream = AWS.util.buffer.toStream buf
+            reqs = helpers.mockResponses [
+              { data: UploadId: 'uploadId' }
+              { data: ETag: 'ETAG1' }
+            ]
+            upload = new AWS.S3.ManagedUpload({
+              partSize: partSize,
+              queueSize: 1,
+              params: { Body: stream }
+            })
+            upload.send (err) ->
+              return done(err) if err
+
+              expect(helpers.operationsForRequests(reqs)).to.eql [
+                's3.createMultipartUpload',
+                's3.uploadPart',
+                's3.completeMultipartUpload'
+              ]
+              done()
+
+        it 'can send a stream that is exactly divisible by part size', (done) ->
+          partSize = 5 * 1024 * 1024
+          streamSize = 2 * partSize
+          require('crypto').randomBytes streamSize, (err, buf) ->
+            return done(err) if err
+
+            stream = AWS.util.buffer.toStream buf
+            reqs = helpers.mockResponses [
+              { data: UploadId: 'uploadId' }
+              { data: ETag: 'ETAG1' }
+              { data: ETag: 'ETAG2' }
+              { data: ETag: 'FINAL_ETAG', Location: 'FINAL_LOCATION' }
+            ]
+            upload = new AWS.S3.ManagedUpload({
+              partSize: partSize,
+              queueSize: 1,
+              params: { Body: stream }
+            })
+            upload.send (err) ->
+              return done(err) if err
+
+              expect(helpers.operationsForRequests(reqs)).to.eql [
+                's3.createMultipartUpload'
+                's3.uploadPart'
+                's3.uploadPart'
+                's3.completeMultipartUpload'
+              ]
+              done()
+
     if typeof Promise == 'function'
       describe 'promise', ->
         thenFunction = (d) ->
