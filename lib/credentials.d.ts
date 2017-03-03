@@ -36,26 +36,26 @@ export class Credentials {
     /**
      * AWS access key ID.
      */
-    accessKeyId: string
+    accessKeyId: string;
     /**
      * Whether the credentials have been expired and require a refresh.
      * Used in conjunction with expireTime.
      */
-    expired: boolean
+    expired: boolean;
     /**
      * Time when credentials should be considered expired.
      * Used in conjunction with expired.
      */
-    expireTime: Date
-    static expiryWindow: number
+    expireTime: Date;
+    static expiryWindow: number;
     /**
      * AWS secret access key.
      */
-    secretAccessKey: string
+    secretAccessKey: string;
     /**
      * AWS session token.
      */
-    sessionToken: string
+    sessionToken: string;
 }
 
 interface CredentialsOptions {

@@ -664,6 +664,18 @@ describe 'AWS.TemporaryCredentials', ->
           creds.refresh ->
             expect(spy.calls.length).to.equal(4)
 
+    it 'should refresh expired master credentials when refreshing self', ->
+      masterCreds = new AWS.Credentials('akid', 'secret')
+      masterCreds.expired = true;
+      refreshSpy = helpers.spyOn(masterCreds, 'refresh')
+
+      creds = new AWS.TemporaryCredentials({RoleArn: 'ARN'}, masterCreds);
+      creds.createClients()
+      mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000),
+        RoleArn: 'ARN', RoleSessionName: 'temporary-credentials')
+      creds.refresh(->)
+      expect(refreshSpy.calls.length).to.equal(1)
+
 describe 'AWS.WebIdentityCredentials', ->
   creds = null
 
