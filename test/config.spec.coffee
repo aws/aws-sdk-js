@@ -50,6 +50,64 @@ describe 'AWS.Config', ->
         config = new AWS.Config()
         expect(config.region).to.equal('us-west-2')
 
+      describe 'shared config file', ->
+        beforeEach ->
+          os = require('os')
+          helpers.spyOn(os, 'homedir').andReturn('/home/user')
+
+        it 'grabs region from shared config if AWS_SDK_LOAD_CONFIG is set', ->
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          mock = '''
+          [default]
+          region = us-west-2
+          '''
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-west-2')
+          expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/)
+
+        it 'loads file from path specified in AWS_CONFIG_FILE if AWS_SDK_LOAD_CONFIG is set', ->
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          process.env.AWS_CONFIG_FILE = '/path/to/user/config/file'
+          mock = '''
+          [default]
+          region = us-west-2
+          '''
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-west-2')
+          expect(AWS.util.readFileSync.calls[0].arguments[0]).to.equal('/path/to/user/config/file')
+
+        it 'uses the profile specified in AWS_PROFILE', ->
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          process.env.AWS_PROFILE = 'foo'
+          mock = '''
+          [default]
+          region = us-west-1
+
+          [profile foo]
+          region = us-west-2
+          '''
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-west-2')
+          expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/)
+
+        it 'prefers AWS_REGION to the shared config file', ->
+          process.env.AWS_REGION = 'us-east-1'
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          mock = '''
+          [default]
+          region = us-west-2
+          '''
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-east-1')
+
     it 'can be set to a string', ->
       expect(configure(region: 'us-west-1').region).to.equal('us-west-1')
 

@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "EnvironmentVariable",
+  "description": "Load config from ~/.aws/config if AWS_SDK_LOAD_CONFIG is set"
+}
