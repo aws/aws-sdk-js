@@ -25,7 +25,8 @@
         {"shape":"InvalidStateException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
-      ]
+      ],
+      "documentation":"<p> Associates a new node with the Chef server. This command is an alternative to <code>knife bootstrap</code>. For more information about how to disassociate a node, see <a>DisassociateNode</a>.</p> <p> A node can can only be associated with servers that are in a <code>HEALTHY</code> state. Otherwise, an <code>InvalidStateException</code> is thrown. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. The AssociateNode API call can be integrated into Auto Scaling configurations, AWS Cloudformation templates, or the user data of a server's instance. </p> <p> Example: <code>aws opsworks-cm associate-node --server-name <i>MyServer</i> --node-name <i>MyManagedNode</i> --engine-attributes \"Name=<i>MyOrganization</i>,Value=default\" \"Name=<i>Chef_node_public_key</i>,Value=<i>Public_key_contents</i>\"</code> </p>"
     },
     "CreateBackup":{
       "name":"CreateBackup",
@@ -41,7 +42,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p> Creates an application-level backup of a server. While the server is <code>BACKING_UP</code>, the server can not be modified and no additional backup can be created. </p> <p> Backups can be created for <code>RUNNING</code>, <code>HEALTHY</code> and <code>UNHEALTHY</code> servers. </p> <p> This operation is asnychronous. </p> <p> By default 50 manual backups can be created. </p> <p> A <code>LimitExceededException</code> is thrown then the maximum number of manual backup is reached. A <code>InvalidStateException</code> is thrown when the server is not in any of RUNNING, HEALTHY, UNHEALTHY. A <code>ResourceNotFoundException</code> is thrown when the server is not found. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p>"
+      "documentation":"<p> Creates an application-level backup of a server. While the server is in the <code>BACKING_UP</code> state, the server cannot be changed, and no additional backup can be created. </p> <p> Backups can be created for servers in <code>RUNNING</code>, <code>HEALTHY</code>, and <code>UNHEALTHY</code> states. By default, you can create a maximum of 50 manual backups. </p> <p> This operation is asynchronous. </p> <p> A <code>LimitExceededException</code> is thrown when the maximum number of manual backups is reached. An <code>InvalidStateException</code> is thrown when the server is not in any of the following states: RUNNING, HEALTHY, or UNHEALTHY. A <code>ResourceNotFoundException</code> is thrown when the server is not found. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p>"
     },
     "CreateServer":{
       "name":"CreateServer",
@@ -57,7 +58,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p> Creates and immedately starts a new Server. The server can be used once it has reached the <code>HEALTHY</code> state. </p> <p> This operation is asnychronous. </p> <p> A <code>LimitExceededException</code> is thrown then the maximum number of server backup is reached. A <code>ResourceAlreadyExistsException</code> is raise when a server with the same name already exists in the account. A <code>ResourceNotFoundException</code> is thrown when a backupId is passed, but the backup does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p> <p> By default 10 servers can be created. A <code>LimitExceededException</code> is raised when the limit is exceeded. </p> <p> When no security groups are provided by using <code>SecurityGroupIds</code>, AWS OpsWorks creates a new security group. This security group opens the Chef server to the world on TCP port 443. If a KeyName is present, SSH access is enabled. SSH is also open to the world on TCP port 22. </p> <p>By default, the Chef Server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console. </p>"
+      "documentation":"<p> Creates and immedately starts a new server. The server is ready to use when it is in the <code>HEALTHY</code> state. By default, you can create a maximum of 10 servers. </p> <p> This operation is asynchronous. </p> <p> A <code>LimitExceededException</code> is thrown when you have created the maximum number of servers (10). A <code>ResourceAlreadyExistsException</code> is thrown when a server with the same name already exists in the account. A <code>ResourceNotFoundException</code> is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p> <p> If you do not specify a security group by adding the <code>SecurityGroupIds</code> parameter, AWS OpsWorks creates a new security group. The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p>By default, the Chef Server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console. </p>"
     },
     "DeleteBackup":{
       "name":"DeleteBackup",
@@ -72,7 +73,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p> Deletes a backup. You can delete both manual and automated backups. </p> <p> This operation is asynchronous. </p> <p> A <code>InvalidStateException</code> is thrown then a backup is already deleting. A <code>ResourceNotFoundException</code> is thrown when the backup does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p>"
+      "documentation":"<p> Deletes a backup. You can delete both manual and automated backups. This operation is asynchronous. </p> <p> An <code>InvalidStateException</code> is thrown when a backup deletion is already in progress. A <code>ResourceNotFoundException</code> is thrown when the backup does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p>"
     },
     "DeleteServer":{
       "name":"DeleteServer",
@@ -87,7 +88,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p> Deletes the server and the underlying AWS CloudFormation stack (including the server's EC2 instance). The server status updated to <code>DELETING</code>. Once the server is successfully deleted, it will no longer be returned by <code>DescribeServer</code> requests. If the AWS CloudFormation stack cannot be deleted, the server cannot be deleted. </p> <p> This operation is asynchronous. </p> <p> A <code>InvalidStateException</code> is thrown then a server is already deleting. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are invalid. </p> <p> </p>"
+      "documentation":"<p> Deletes the server and the underlying AWS CloudFormation stack (including the server's EC2 instance). When you run this command, the server state is updated to <code>DELETING</code>. After the server is deleted, it is no longer returned by <code>DescribeServer</code> requests. If the AWS CloudFormation stack cannot be deleted, the server cannot be deleted. </p> <p> This operation is asynchronous. </p> <p> An <code>InvalidStateException</code> is thrown when a server deletion is already in progress. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p> <p> </p>"
     },
     "DescribeAccountAttributes":{
       "name":"DescribeAccountAttributes",
@@ -112,7 +113,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p> Describes backups. The results are ordered by time, with newest backups first. If you do not specify a BackupId or ServerName, the command returns all backups. </p> <p> This operation is synchronous. </p> <p> A <code>ResourceNotFoundException</code> is thrown when the backup does not exist. A <code>ValidationException</code> is raised when parameters of the request are invalid. </p>"
+      "documentation":"<p> Describes backups. The results are ordered by time, with newest backups first. If you do not specify a BackupId or ServerName, the command returns all backups. </p> <p> This operation is synchronous. </p> <p> A <code>ResourceNotFoundException</code> is thrown when the backup does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     },
     "DescribeEvents":{
       "name":"DescribeEvents",
@@ -127,7 +128,7 @@
         {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p> Describes events for a specified server. Results are ordered by time, with newest events first. </p> <p> This operation is synchronous. </p> <p> A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are invalid. </p>"
+      "documentation":"<p> Describes events for a specified server. Results are ordered by time, with newest events first. </p> <p> This operation is synchronous. </p> <p> A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     },
     "DescribeNodeAssociationStatus":{
       "name":"DescribeNodeAssociationStatus",
@@ -140,7 +141,8 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
-      ]
+      ],
+      "documentation":"<p> Returns the current status of an existing association or disassociation request. </p> <p> A <code>ResourceNotFoundException</code> is thrown when no recent association or disassociation request with the specified token is found, or when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     },
     "DescribeServers":{
       "name":"DescribeServers",
@@ -155,7 +157,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p> Lists all configuration management servers that are identified with your account. Only the stored results from Amazon DynamoDB are returned. AWS OpsWorks for Chef Automate does not query other services. </p> <p> This operation is synchronous. </p> <p> A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are invalid. </p>"
+      "documentation":"<p> Lists all configuration management servers that are identified with your account. Only the stored results from Amazon DynamoDB are returned. AWS OpsWorks for Chef Automate does not query other services. </p> <p> This operation is synchronous. </p> <p> A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     },
     "DisassociateNode":{
       "name":"DisassociateNode",
@@ -169,7 +171,8 @@
         {"shape":"InvalidStateException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
-      ]
+      ],
+      "documentation":"<p> Disassociates a node from a Chef server, and removes the node from the Chef server's managed nodes. After a node is disassociated, the node key pair is no longer valid for accessing the Chef API. For more information about how to associate a node, see <a>AssociateNode</a>. </p> <p>A node can can only be disassociated from a server that is in a <code>HEALTHY</code> state. Otherwise, an <code>InvalidStateException</code> is thrown. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     },
     "RestoreServer":{
       "name":"RestoreServer",
@@ -184,7 +187,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p> Restores a backup to a server that is in a <code>RUNNING</code>, <code>FAILED</code>, or <code>HEALTHY</code> state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of all of the server's client devices should continue to work. </p> <p> This operation is asynchronous. </p> <p> A <code>InvalidStateException</code> is thrown when the server is not in a valid state. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are invalid. </p>"
+      "documentation":"<p> Restores a backup to a server that is in a <code>CONNECTION_LOST</code>, <code>HEALTHY</code>, <code>RUNNING</code>, <code>UNHEALTHY</code>, or <code>TERMINATED</code> state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work. </p> <p> This operation is asynchronous. </p> <p> An <code>InvalidStateException</code> is thrown when the server is not in a valid state. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     },
     "StartMaintenance":{
       "name":"StartMaintenance",
@@ -199,7 +202,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p> Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying cause of maintenance failure has been resolved. The server will switch to <code>UNDER_MAINTENANCE</code> state, while maintenace is in progress. </p> <p> Maintenace can only be started for <code>HEALTHY</code> and <code>UNHEALTHY</code> servers. A <code>InvalidStateException</code> is thrown otherwise. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are invalid. </p>"
+      "documentation":"<p> Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying cause of maintenance failure has been resolved. The server is in an <code>UNDER_MAINTENANCE</code> state while maintenance is in progress. </p> <p> Maintenance can only be started on servers in <code>HEALTHY</code> and <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is thrown. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     },
     "UpdateServer":{
       "name":"UpdateServer",
@@ -229,7 +232,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p> Updates engine specific attributes on a specified server. Server will enter the <code>MODIFYING</code> state when this operation is in progress. Only one update can take place at a time. </p> <p> This operation can be use to reset Chef Server main API key (<code>CHEF_PIVOTAL_KEY</code>). </p> <p> This operation is asynchronous. </p> <p> </p> <p> This operation can only be called for <code>HEALTHY</code> and <code>UNHEALTHY</code> servers. Otherwise a <code>InvalidStateException</code> is raised. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are invalid. </p>"
+      "documentation":"<p> Updates engine-specific attributes on a specified server. The server enters the <code>MODIFYING</code> state when this operation is in progress. Only one update can occur at a time. You can use this command to reset the Chef server's private key (<code>CHEF_PIVOTAL_KEY</code>). </p> <p> This operation is asynchronous. </p> <p> This operation can only be called for servers in <code>HEALTHY</code> or <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is raised. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>"
     }
   },
   "shapes":{
@@ -238,7 +241,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p> The attribute name. The following are supported attribute names. </p> <ul> <li> <p> <i>ServerLimit:</i> The number of servers that currently existing / maximal allowed. By default 10 servers can be created. </p> </li> <li> <p> <i>ManualBackupLimit:</i> The number of manual backups that currently exist / are maximal allowed. By default 50 manual backups can be created. </p> </li> </ul>"
+          "documentation":"<p> The attribute name. The following are supported attribute names. </p> <ul> <li> <p> <i>ServerLimit:</i> The number of current servers/maximum number of servers allowed. By default, you can have a maximum of 10 servers. </p> </li> <li> <p> <i>ManualBackupLimit:</i> The number of current manual backups/maximum number of backups allowed. By default, you can have a maximum of 50 manual backups saved. </p> </li> </ul>"
         },
         "Maximum":{
           "shape":"Integer",
@@ -246,7 +249,7 @@
         },
         "Used":{
           "shape":"Integer",
-          "documentation":"<p> The current usage, such as the current number of servers associated with the account. </p>"
+          "documentation":"<p> The current usage, such as the current number of servers that are associated with the account. </p>"
         }
       },
       "documentation":"<p>Stores account attributes. </p>"
@@ -254,24 +257,37 @@
     "AccountAttributes":{
       "type":"list",
       "member":{"shape":"AccountAttribute"},
-      "documentation":"<p> A list of the individual attributes. </p>"
+      "documentation":"<p> A list of individual account attributes. </p>"
     },
     "AssociateNodeRequest":{
       "type":"structure",
       "required":[
         "ServerName",
-        "NodeName"
+        "NodeName",
+        "EngineAttributes"
       ],
       "members":{
-        "ServerName":{"shape":"ServerName"},
-        "NodeName":{"shape":"NodeName"},
-        "EngineAttributes":{"shape":"EngineAttributes"}
+        "ServerName":{
+          "shape":"ServerName",
+          "documentation":"<p>The name of the server with which to associate the node. </p>"
+        },
+        "NodeName":{
+          "shape":"NodeName",
+          "documentation":"<p>The name of the Chef client node. </p>"
+        },
+        "EngineAttributes":{
+          "shape":"EngineAttributes",
+          "documentation":"<p>Engine attributes used for associating the node. </p> <p class=\"title\"> <b>Attributes accepted in a AssociateNode request:</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node is associated. By default only one organization named <code>default</code> can exist. </p> </li> <li> <p> <code>CHEF_NODE_PUBLIC_KEY</code>: A PEM-formatted public key. This key is required for the <code>chef-client</code> agent to access the Chef API. </p> </li> </ul>"
+        }
       }
     },
     "AssociateNodeResponse":{
       "type":"structure",
       "members":{
-        "NodeAssociationStatusToken":{"shape":"NodeAssociationStatusToken"}
+        "NodeAssociationStatusToken":{
+          "shape":"NodeAssociationStatusToken",
+          "documentation":"<p>Contains a token which can be passed to the <code>DescribeNodeAssociationStatus</code> API call to get the status of the association request. </p>"
+        }
       }
     },
     "AttributeName":{
@@ -338,11 +354,13 @@
         },
         "S3DataSize":{
           "shape":"Integer",
-          "documentation":"<p> The size of the backup, in bytes. The size is returned by the instance in the command results. </p>"
+          "documentation":"<p> This field is deprecated and is no longer used. </p>",
+          "deprecated":true
         },
         "S3DataUrl":{
           "shape":"String",
-          "documentation":"<p> The Amazon S3 URL of the backup's tar.gz file. </p>"
+          "documentation":"<p> This field is deprecated and is no longer used. </p>",
+          "deprecated":true
         },
         "S3LogUrl":{
           "shape":"String",
@@ -431,7 +449,7 @@
       "members":{
         "Backup":{
           "shape":"Backup",
-          "documentation":"<p>Backup created by request. </p>"
+          "documentation":"<p>Backup created by request.</p>"
         }
       }
     },
@@ -440,9 +458,14 @@
       "required":[
         "ServerName",
         "InstanceProfileArn",
+        "InstanceType",
         "ServiceRoleArn"
       ],
       "members":{
+        "AssociatePublicIpAddress":{
+          "shape":"Boolean",
+          "documentation":"<p> Associate a public IP address with a server that you are launching. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. </p>"
+        },
         "DisableAutomatedBackup":{
           "shape":"Boolean",
           "documentation":"<p> Enable or disable scheduled backups. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. </p>"
@@ -461,7 +484,7 @@
         },
         "EngineAttributes":{
           "shape":"EngineAttributes",
-          "documentation":"<p>Engine attributes on a specified server. </p> <p class=\"title\"> <b>Attributes accepted in a createServer request:</b> </p> <ul> <li> <p> <code>CHEF_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is not stored by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API.</p> </li> </ul>"
+          "documentation":"<p>Optional engine attributes on a specified server. </p> <p class=\"title\"> <b>Attributes accepted in a createServer request:</b> </p> <ul> <li> <p> <code>CHEF_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is not stored by AWS OpsWorks for Chef. This private key is required to access the Chef API. When no CHEF_PIVOTAL_KEY is set, one is generated and returned in the response. </p> </li> <li> <p> <code>CHEF_DELIVERY_ADMIN_PASSWORD</code>: The password for the administrative user in the Chef Automate GUI. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_DELIVERY_ADMIN_PASSWORD is set, one is generated and returned in the response.</p> </li> </ul>"
         },
         "BackupRetentionCount":{
           "shape":"BackupRetentionCountDefinition",
@@ -469,19 +492,19 @@
         },
         "ServerName":{
           "shape":"ServerName",
-          "documentation":"<p> The name of the server. The server name must be unique within your AWS account, within each region. Server names must start with a letter; then letters, numbers, or hyphens (-) are allowed, up to a maximum of 32 characters. </p>"
+          "documentation":"<p> The name of the server. The server name must be unique within your AWS account, within each region. Server names must start with a letter; then letters, numbers, or hyphens (-) are allowed, up to a maximum of 40 characters. </p>"
         },
         "InstanceProfileArn":{
           "shape":"InstanceProfileArn",
-          "documentation":"<p> The ARN of the instance profile that your Amazon EC2 instances use. Although the AWS OpsWorks console typically creates the instance profile for you, in this release of AWS OpsWorks for Chef Automate, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml. This template creates a stack that includes the instance profile you need. </p>"
+          "documentation":"<p> The ARN of the instance profile that your Amazon EC2 instances use. Although the AWS OpsWorks console typically creates the instance profile for you, if you are using API commands instead, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml. This template creates a CloudFormation stack that includes the instance profile you need. </p>"
         },
         "InstanceType":{
           "shape":"String",
-          "documentation":"<p> The Amazon EC2 instance type to use. Valid values must be specified in the following format: <code>^([cm][34]|t2).*</code> For example, <code>c3.large</code>. </p>"
+          "documentation":"<p> The Amazon EC2 instance type to use. Valid values must be specified in the following format: <code>^([cm][34]|t2).*</code> For example, <code>m4.large</code>. Valid values are <code>t2.medium</code>, <code>m4.large</code>, or <code>m4.2xlarge</code>. </p>"
         },
         "KeyPair":{
           "shape":"KeyPair",
-          "documentation":"<p> The Amazon EC2 key pair to set for the instance. You may specify this parameter to connect to your instances by using SSH. </p>"
+          "documentation":"<p> The Amazon EC2 key pair to set for the instance. This parameter is optional; if desired, you may specify this parameter to connect to your instances by using SSH. </p>"
         },
         "PreferredMaintenanceWindow":{
           "shape":"TimeWindowDefinition",
@@ -489,7 +512,7 @@
         },
         "PreferredBackupWindow":{
           "shape":"TimeWindowDefinition",
-          "documentation":"<p> The start time for a one-hour period during which AWS OpsWorks for Chef Automate backs up application-level data on your server if backups are enabled. Valid values must be specified in one of the following formats: </p> <ul> <li> <p> <code>HH:MM</code> for daily backups</p> </li> <li> <p> <code>DDD:HH:MM</code> for weekly backups</p> </li> </ul> <p>The specified time is in coordinated universal time (UTC). The default value is a random, daily start time.</p> <p> <b>Example:</b> <code>08:00</code>, which represents a daily start time of 08:00 UTC.</p> <p> <b>Example:</b> <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.)</p>"
+          "documentation":"<p> The start time for a one-hour period during which AWS OpsWorks for Chef Automate backs up application-level data on your server if automated backups are enabled. Valid values must be specified in one of the following formats: </p> <ul> <li> <p> <code>HH:MM</code> for daily backups</p> </li> <li> <p> <code>DDD:HH:MM</code> for weekly backups</p> </li> </ul> <p>The specified time is in coordinated universal time (UTC). The default value is a random, daily start time.</p> <p> <b>Example:</b> <code>08:00</code>, which represents a daily start time of 08:00 UTC.</p> <p> <b>Example:</b> <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.)</p>"
         },
         "SecurityGroupIds":{
           "shape":"Strings",
@@ -497,7 +520,7 @@
         },
         "ServiceRoleArn":{
           "shape":"ServiceRoleArn",
-          "documentation":"<p> The service role that the AWS OpsWorks for Chef Automate service backend uses to work with your account. Although the AWS OpsWorks console typically creates the service role for you, in this release of AWS OpsWorks for Chef Automate, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml. This template creates a stack that includes the service role that you need. </p>"
+          "documentation":"<p> The service role that the AWS OpsWorks for Chef Automate service backend uses to work with your account. Although the AWS OpsWorks management console typically creates the service role for you, if you are using the AWS CLI or API commands, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml. This template creates a CloudFormation stack that includes the service role that you need. </p>"
         },
         "SubnetIds":{
           "shape":"Strings",
@@ -635,13 +658,19 @@
       ],
       "members":{
         "NodeAssociationStatusToken":{"shape":"NodeAssociationStatusToken"},
-        "ServerName":{"shape":"ServerName"}
+        "ServerName":{
+          "shape":"ServerName",
+          "documentation":"<p>The name of the server from which to disassociate the node. </p>"
+        }
       }
     },
     "DescribeNodeAssociationStatusResponse":{
       "type":"structure",
       "members":{
-        "NodeAssociationStatus":{"shape":"NodeAssociationStatus"}
+        "NodeAssociationStatus":{
+          "shape":"NodeAssociationStatus",
+          "documentation":"<p>The status of the association or disassociation request. </p> <p class=\"title\"> <b>Possible values:</b> </p> <ul> <li> <p> <code>SUCCESS</code>: The association or disassociation succeeded. </p> </li> <li> <p> <code>FAILED</code>: The association or disassociation failed. </p> </li> <li> <p> <code>IN_PROGRESS</code>: The association or disassociation is still in progress. </p> </li> </ul>"
+        }
       }
     },
     "DescribeServersRequest":{
@@ -649,7 +678,7 @@
       "members":{
         "ServerName":{
           "shape":"ServerName",
-          "documentation":"<p>Describes the server with the specified ServerName. </p>"
+          "documentation":"<p>Describes the server with the specified ServerName.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -681,30 +710,47 @@
         "NodeName"
       ],
       "members":{
-        "ServerName":{"shape":"ServerName"},
-        "NodeName":{"shape":"NodeName"},
-        "EngineAttributes":{"shape":"EngineAttributes"}
+        "ServerName":{
+          "shape":"ServerName",
+          "documentation":"<p>The name of the server from which to disassociate the node. </p>"
+        },
+        "NodeName":{
+          "shape":"NodeName",
+          "documentation":"<p>The name of the Chef client node. </p>"
+        },
+        "EngineAttributes":{
+          "shape":"EngineAttributes",
+          "documentation":"<p>Engine attributes used for disassociating the node. </p> <p class=\"title\"> <b>Attributes accepted in a DisassociateNode request:</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node was associated. By default only one organization named <code>default</code> can exist. </p> </li> </ul>"
+        }
       }
     },
     "DisassociateNodeResponse":{
       "type":"structure",
       "members":{
-        "NodeAssociationStatusToken":{"shape":"NodeAssociationStatusToken"}
+        "NodeAssociationStatusToken":{
+          "shape":"NodeAssociationStatusToken",
+          "documentation":"<p>Contains a token which can be passed to the <code>DescribeNodeAssociationStatus</code> API call to get the status of the disassociation request. </p>"
+        }
       }
     },
     "EngineAttribute":{
       "type":"structure",
       "members":{
         "Name":{
-          "shape":"String",
+          "shape":"EngineAttributeName",
           "documentation":"<p>The name of the engine attribute. </p>"
         },
         "Value":{
-          "shape":"String",
+          "shape":"EngineAttributeValue",
           "documentation":"<p>The value of the engine attribute. </p>"
         }
       },
-      "documentation":"<p>A name/value pair that is specific to the engine of the server. </p>"
+      "documentation":"<p>A name and value pair that is specific to the engine of the server. </p>"
+    },
+    "EngineAttributeName":{"type":"string"},
+    "EngineAttributeValue":{
+      "type":"string",
+      "sensitive":true
     },
     "EngineAttributes":{
       "type":"list",
@@ -763,6 +809,7 @@
     "NextToken":{"type":"string"},
     "NodeAssociationStatus":{
       "type":"string",
+      "documentation":"<p>The status of the association or disassociation request. </p> <p class=\"title\"> <b>Possible values:</b> </p> <ul> <li> <p> <code>SUCCESS</code>: The association or disassociation succeeded. </p> </li> <li> <p> <code>FAILED</code>: The association or disassociation failed. </p> </li> <li> <p> <code>IN_PROGRESS</code>: The association or disassociation is still in progress. </p> </li> </ul>",
       "enum":[
         "SUCCESS",
         "FAILED",
@@ -772,6 +819,7 @@
     "NodeAssociationStatusToken":{"type":"string"},
     "NodeName":{
       "type":"string",
+      "documentation":"<p>The node name that is used by <code>chef-client</code> for a new node. For more information, see the <a href=\"http://docs.aws.amazon.com/https:/docs.chef.io/nodes.html#about-node-names\">Chef Documentation</a>. </p>",
       "pattern":"^[\\-\\p{Alnum}_:.]+$"
     },
     "ResourceAlreadyExistsException":{
@@ -813,11 +861,11 @@
         },
         "InstanceType":{
           "shape":"String",
-          "documentation":"<p> The type of the instance to create. Valid values must be specified in the following format: <code>^([cm][34]|t2).*</code> For example, <code>c3.large</code>. If you do not specify this parameter, RestoreServer uses the instance type from the specified backup. </p>"
+          "documentation":"<p> The type of the instance to create. Valid values must be specified in the following format: <code>^([cm][34]|t2).*</code> For example, <code>m4.large</code>. Valid values are <code>t2.medium</code>, <code>m4.large</code>, and <code>m4.2xlarge</code>. If you do not specify this parameter, RestoreServer uses the instance type from the specified backup. </p>"
         },
         "KeyPair":{
           "shape":"KeyPair",
-          "documentation":"<p> The name of the key pair to set on the new EC2 instance. This can be helpful if any of the administrators who manage the server no longer have the SSH key. </p>"
+          "documentation":"<p> The name of the key pair to set on the new EC2 instance. This can be helpful if the administrator no longer has the SSH key. </p>"
         }
       }
     },
@@ -829,6 +877,10 @@
     "Server":{
       "type":"structure",
       "members":{
+        "AssociatePublicIpAddress":{
+          "shape":"Boolean",
+          "documentation":"<p>Associate a public IP address with a server that you are launching. </p>"
+        },
         "BackupRetentionCount":{
           "shape":"Integer",
           "documentation":"<p>The number of automated backups to keep. </p>"
@@ -840,6 +892,10 @@
         "CreatedAt":{
           "shape":"Timestamp",
           "documentation":"<p>Time stamp of server creation. Example <code>2016-07-29T13:38:47.520Z</code> </p>"
+        },
+        "CloudFormationStackArn":{
+          "shape":"String",
+          "documentation":"<p>The ARN of the CloudFormation stack that was used to create the server. </p>"
         },
         "DisableAutomatedBackup":{
           "shape":"Boolean",
@@ -899,7 +955,7 @@
         },
         "Status":{
           "shape":"ServerStatus",
-          "documentation":"<p> The server's status. This field displays the states of actions in progress, such as creating, running, or backing up the server, as well as server health. </p>"
+          "documentation":"<p> The server's status. This field displays the states of actions in progress, such as creating, running, or backing up the server, as well as the server's health state. </p>"
         },
         "StatusReason":{
           "shape":"String",
@@ -959,9 +1015,11 @@
         "FAILED",
         "HEALTHY",
         "RUNNING",
+        "RESTORING",
         "SETUP",
         "UNDER_MAINTENANCE",
-        "UNHEALTHY"
+        "UNHEALTHY",
+        "TERMINATED"
       ]
     },
     "Servers":{
@@ -998,7 +1056,7 @@
     },
     "TimeWindowDefinition":{
       "type":"string",
-      "documentation":"<p> <code>DDD:HH:MM</code> (weekly start time) or <code>HH:MM</code> (daily start time). </p> <p> Time windows always use coordinated universal time (UTC). </p> <p> Valid strings for day of week (<code>DDD</code>) are: Mon, Tue, Wed, Thr, Fri, Sat, Sun. </p>",
+      "documentation":"<p> <code>DDD:HH:MM</code> (weekly start time) or <code>HH:MM</code> (daily start time). </p> <p> Time windows always use coordinated universal time (UTC). Valid strings for day of week (<code>DDD</code>) are: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thr</code>, <code>Fri</code>, <code>Sat</code>, or <code>Sun</code>.</p>",
       "pattern":"^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$"
     },
     "Timestamp":{"type":"timestamp"},
@@ -1073,5 +1131,5 @@
       "exception":true
     }
   },
-  "documentation":"<fullname>AWS OpsWorks for Chef Automate</fullname> <p> A service that runs and manages configuration management servers. </p> <p>Glossary of terms</p> <ul> <li> <p> <b>Server</b>: A server is a configuration management server, and can be highly-available. The configuration manager runs on your instances by using various AWS services, such as Amazon Elastic Compute Cloud (EC2), and potentially Amazon Relational Database Service (RDS). A server is a generic abstraction over the configuration manager that you want to use, much like Amazon RDS. In AWS OpsWorks for Chef Automate, you do not start or stop servers. After you create servers, they continue to run until they are deleted.</p> </li> <li> <p> <b>Engine</b>: The specific configuration manager that you want to use (such as <code>Chef</code>) is the engine.</p> </li> <li> <p> <b>Backup</b>: This is an application-level backup of the data that the configuration manager stores. A backup creates a .tar.gz file that is stored in an Amazon Simple Storage Service (S3) bucket in your account. AWS OpsWorks for Chef Automate creates the S3 bucket when you launch the first instance. A backup maintains a snapshot of all of a server's important attributes at the time of the backup.</p> </li> <li> <p> <b>Events</b>: Events are always related to a server. Events are written during server creation, when health checks run, when backups are created, etc. When you delete a server, the server's events are also deleted.</p> </li> <li> <p> <b>AccountAttributes</b>: Every account has attributes that are assigned in the AWS OpsWorks for Chef Automate database. These attributes store information about configuration limits (servers, backups, etc.) and your customer account. </p> </li> </ul> <p>Throttling limits</p> <p>All API operations allow for 5 requests per second with a burst of 10 requests per second.</p>"
+  "documentation":"<fullname>AWS OpsWorks for Chef Automate</fullname> <p> AWS OpsWorks for Chef Automate is a service that runs and manages configuration management servers. </p> <p> <b>Glossary of terms</b> </p> <ul> <li> <p> <b>Server</b>: A configuration management server that can be highly-available. The configuration manager runs on your instances by using various AWS services, such as Amazon Elastic Compute Cloud (EC2), and potentially Amazon Relational Database Service (RDS). A server is a generic abstraction over the configuration manager that you want to use, much like Amazon RDS. In AWS OpsWorks for Chef Automate, you do not start or stop servers. After you create servers, they continue to run until they are deleted.</p> </li> <li> <p> <b>Engine</b>: The specific configuration manager that you want to use (such as <code>Chef</code>) is the engine.</p> </li> <li> <p> <b>Backup</b>: This is an application-level backup of the data that the configuration manager stores. A backup creates a .tar.gz file that is stored in an Amazon Simple Storage Service (S3) bucket in your account. AWS OpsWorks for Chef Automate creates the S3 bucket when you launch the first instance. A backup maintains a snapshot of all of a server's important attributes at the time of the backup.</p> </li> <li> <p> <b>Events</b>: Events are always related to a server. Events are written during server creation, when health checks run, when backups are created, etc. When you delete a server, the server's events are also deleted.</p> </li> <li> <p> <b>AccountAttributes</b>: Every account has attributes that are assigned in the AWS OpsWorks for Chef Automate database. These attributes store information about configuration limits (servers, backups, etc.) and your customer account. </p> </li> </ul> <p> <b>Endpoints</b> </p> <p>AWS OpsWorks for Chef Automate supports the following endpoints, all HTTPS. You must connect to one of the following endpoints. Chef servers can only be accessed or managed within the endpoint in which they are created.</p> <ul> <li> <p>opsworks-cm.us-east-1.amazonaws.com</p> </li> <li> <p>opsworks-cm.us-west-2.amazonaws.com</p> </li> <li> <p>opsworks-cm.eu-west-1.amazonaws.com</p> </li> </ul> <p> <b>Throttling limits</b> </p> <p>All API operations allow for five requests per second with a burst of 10 requests per second.</p>"
 }

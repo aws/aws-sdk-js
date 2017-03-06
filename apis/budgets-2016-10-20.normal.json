@@ -57,7 +57,8 @@
         {"shape":"InternalErrorException"},
         {"shape":"InvalidParameterException"},
         {"shape":"CreationLimitExceededException"},
-        {"shape":"DuplicateRecordException"}
+        {"shape":"DuplicateRecordException"},
+        {"shape":"NotFoundException"}
       ],
       "documentation":"Create a new Subscriber for a notification"
     },
@@ -606,7 +607,7 @@
     "NotificationThreshold":{
       "type":"double",
       "documentation":"The threshold of the a notification. It should be a number between 0 and 100.",
-      "max":100,
+      "max":300,
       "min":0.1
     },
     "NotificationType":{
@@ -643,7 +644,7 @@
     "NumericValue":{
       "type":"string",
       "documentation":"A string to represent NumericValue.",
-      "pattern":"[0-9]+(\\.)?[0-9]*"
+      "pattern":"[0-9]*(\\.)?[0-9]+"
     },
     "Spend":{
       "type":"structure",
