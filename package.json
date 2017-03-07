@@ -25,6 +25,7 @@
     "istanbul": "*",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
+    "json-loader": "^0.5.4",
     "karma": "^1.4.1",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.2",
@@ -32,7 +33,8 @@
     "repl.history": "*",
     "semver": "*",
     "typescript": "2.0.8",
-    "uglify-js": "2.x"
+    "uglify-js": "2.x",
+    "webpack": "^1.14.0"
   },
   "dependencies": {
     "buffer": "4.9.1",
@@ -54,6 +56,16 @@
   },
   "browserify": {
     "transform": "./dist-tools/transform.js"
+  },
+  "react-native": {
+    "lib/aws.js": "./lib/react_native.js",
+    "lib/browser.js": "./lib/react_native.js",
+    "fs": "./lib/empty.js",
+    "uuid": "uuid/lib/rng-browser.js",
+    "./lib/node_loader.js": "./lib/react_native_loader.js",
+    "./lib/browser_loader.js": "./lib/react_native_loader.js",
+    "index.js": "./react-native.js",
+    "./support/isBuffer.js": "./support/isBufferBrowser.js"
   },
   "directories": {
     "lib": "lib"
@@ -120,6 +132,7 @@
     "console": "./scripts/console",
     "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`",
     "tstest": "tsc -p ./ts",
-    "add-change": "node ./scripts/changelog/add-change.js"
+    "add-change": "node ./scripts/changelog/add-change.js",
+    "build-react-native": "webpack --config dist-tools/webpack.config.js"
   }
 }
