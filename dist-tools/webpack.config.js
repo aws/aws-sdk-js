@@ -22,11 +22,11 @@ module.exports = {
          * JavaScript files.
          * When webpack comes across a 'require()' statement
          * where a json file is being imported, it will use
-         * the json-loader.  
+         * the json-loader.
          */
         loaders: [
             {
-                test: /\.json$/, 
+                test: /\.json$/,
                 loaders: ['json']
             }
         ]
