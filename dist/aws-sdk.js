@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.23.0
+// AWS SDK for JavaScript v2.24.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -68566,9 +68566,15 @@ module.exports={
         "members": {
           "SourceDBClusterSnapshotIdentifier": {},
           "TargetDBClusterSnapshotIdentifier": {},
+          "KmsKeyId": {},
+          "PreSignedUrl": {},
+          "CopyTags": {
+            "type": "boolean"
+          },
           "Tags": {
             "shape": "Sa"
-          }
+          },
+          "SourceRegion": {}
         }
       },
       "output": {
@@ -68576,7 +68582,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterSnapshot": {
-            "shape": "Su"
+            "shape": "Sv"
           }
         }
       }
@@ -68603,7 +68609,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBParameterGroup": {
-            "shape": "Sz"
+            "shape": "S10"
           }
         }
       }
@@ -68675,7 +68681,7 @@ module.exports={
         ],
         "members": {
           "AvailabilityZones": {
-            "shape": "Sv"
+            "shape": "Sw"
           },
           "BackupRetentionPeriod": {
             "type": "integer"
@@ -68705,7 +68711,9 @@ module.exports={
           "StorageEncrypted": {
             "type": "boolean"
           },
-          "KmsKeyId": {}
+          "KmsKeyId": {},
+          "PreSignedUrl": {},
+          "SourceRegion": {}
         }
       },
       "output": {
@@ -68765,7 +68773,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterSnapshot": {
-            "shape": "Su"
+            "shape": "Sv"
           }
         }
       }
@@ -68895,7 +68903,8 @@ module.exports={
           },
           "MonitoringRoleArn": {},
           "KmsKeyId": {},
-          "PreSignedUrl": {}
+          "PreSignedUrl": {},
+          "SourceRegion": {}
         }
       },
       "output": {
@@ -68930,7 +68939,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBParameterGroup": {
-            "shape": "Sz"
+            "shape": "S10"
           }
         }
       }
@@ -69128,7 +69137,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DBClusterSnapshot": {
-            "shape": "Su"
+            "shape": "Sv"
           }
         }
       }
@@ -69420,7 +69429,7 @@ module.exports={
           "DBClusterSnapshots": {
             "type": "list",
             "member": {
-              "shape": "Su",
+              "shape": "Sv",
               "locationName": "DBClusterSnapshot"
             }
           }
@@ -69640,7 +69649,7 @@ module.exports={
           "DBParameterGroups": {
             "type": "list",
             "member": {
-              "shape": "Sz",
+              "shape": "S10",
               "locationName": "DBParameterGroup"
             }
           }
@@ -70927,7 +70936,7 @@ module.exports={
         ],
         "members": {
           "AvailabilityZones": {
-            "shape": "Sv"
+            "shape": "Sw"
           },
           "BackupRetentionPeriod": {
             "type": "integer"
@@ -70984,7 +70993,7 @@ module.exports={
         ],
         "members": {
           "AvailabilityZones": {
-            "shape": "Sv"
+            "shape": "Sw"
           },
           "DBClusterIdentifier": {},
           "SnapshotIdentifier": {},
@@ -71315,11 +71324,11 @@ module.exports={
       },
       "wrapper": true
     },
-    "Su": {
+    "Sv": {
       "type": "structure",
       "members": {
         "AvailabilityZones": {
-          "shape": "Sv"
+          "shape": "Sw"
         },
         "DBClusterSnapshotIdentifier": {},
         "DBClusterIdentifier": {},
@@ -71353,13 +71362,13 @@ module.exports={
       },
       "wrapper": true
     },
-    "Sv": {
+    "Sw": {
       "type": "list",
       "member": {
         "locationName": "AvailabilityZone"
       }
     },
-    "Sz": {
+    "S10": {
       "type": "structure",
       "members": {
         "DBParameterGroupName": {},
@@ -71516,7 +71525,7 @@ module.exports={
           "type": "integer"
         },
         "AvailabilityZones": {
-          "shape": "Sv"
+          "shape": "Sw"
         },
         "BackupRetentionPeriod": {
           "type": "integer"
@@ -94198,7 +94207,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.23.0',
+  VERSION: '2.24.0',
 
 
   Signers: {},
@@ -99476,7 +99485,7 @@ require('../polly/presigner');
 var AWS = require('../core');
 
 
- var crossRegionOperations = ['copyDBSnapshot', 'createDBInstanceReadReplica'];
+ var crossRegionOperations = ['copyDBSnapshot', 'createDBInstanceReadReplica', 'createDBCluster', 'copyDBClusterSnapshot'];
 
  AWS.util.update(AWS.RDS.prototype, {
 
