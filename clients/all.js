@@ -95,5 +95,6 @@ module.exports = {
   XRay: require('./xray'),
   WAF: require('./waf'),
   WAFRegional: require('./wafregional'),
+  WorkDocs: require('./workdocs'),
   WorkSpaces: require('./workspaces')
 };

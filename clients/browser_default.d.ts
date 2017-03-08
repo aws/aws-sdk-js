@@ -59,3 +59,4 @@ export import SSM = require('./ssm');
 export import StorageGateway = require('./storagegateway');
 export import STS = require('./sts');
 export import WAF = require('./waf');
+export import WorkDocs = require('./workdocs');

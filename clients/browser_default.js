@@ -62,5 +62,6 @@ module.exports = {
   SSM: require('./ssm'),
   StorageGateway: require('./storagegateway'),
   STS: require('./sts'),
-  WAF: require('./waf')
+  WAF: require('./waf'),
+  WorkDocs: require('./workdocs')
 };

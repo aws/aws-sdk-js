@@ -91,4 +91,5 @@ export import SWF = require('./swf');
 export import XRay = require('./xray');
 export import WAF = require('./waf');
 export import WAFRegional = require('./wafregional');
+export import WorkDocs = require('./workdocs');
 export import WorkSpaces = require('./workspaces');
