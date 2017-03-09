@@ -75,7 +75,7 @@
         {"shape":"InvalidAttachmentException"},
         {"shape":"ValidationException"}
       ],
-      "documentation":"<p>Attaches an existing object to another object. An object can be accessed in two ways:</p> <ol> <li> <p>Using the path</p> </li> <li> <p>Using ObjectIdentifier</p> </li> </ol>"
+      "documentation":"<p>Attaches an existing object to another object. An object can be accessed in two ways:</p> <ol> <li> <p>Using the path</p> </li> <li> <p>Using <code>ObjectIdentifier</code> </p> </li> </ol>"
     },
     "AttachPolicy":{
       "name":"AttachPolicy",
@@ -295,7 +295,8 @@
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"DirectoryDeletedException"}
+        {"shape":"DirectoryDeletedException"},
+        {"shape":"RetryableConflictException"}
       ],
       "documentation":"<p>Deletes a directory. Only disabled directories can be deleted. A deleted directory cannot be undone. Exercise extreme caution when deleting directories.</p>"
     },
@@ -446,7 +447,8 @@
         {"shape":"InternalServiceException"},
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"RetryableConflictException"}
       ],
       "documentation":"<p>Disables the specified directory. Disabled directories cannot be read or written to. Only enabled directories can be disabled. Disabled directories may be reenabled.</p>"
     },
@@ -465,7 +467,8 @@
         {"shape":"InternalServiceException"},
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"RetryableConflictException"}
       ],
       "documentation":"<p>Enables the specified directory. Only disabled directories can be enabled. Once enabled, the directory can then be read and written to.</p>"
     },
@@ -746,6 +749,28 @@
       ],
       "documentation":"<p>Returns a paginated list of child objects associated with a given object.</p>"
     },
+    "ListObjectParentPaths":{
+      "name":"ListObjectParentPaths",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/object/parentpaths",
+        "responseCode":200
+      },
+      "input":{"shape":"ListObjectParentPathsRequest"},
+      "output":{"shape":"ListObjectParentPathsResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"DirectoryNotEnabledException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure\">Directory Structure</a>.</p> <p>Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined <code>MaxResults</code>, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to directory root are ignored from the target object.</p>"
+    },
     "ListObjectParents":{
       "name":"ListObjectParents",
       "http":{
@@ -814,7 +839,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotPolicyException"}
       ],
-      "documentation":"<p>Returns all of the ObjectIdentifiers to which a given policy is attached.</p>"
+      "documentation":"<p>Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.</p>"
     },
     "ListPublishedSchemaArns":{
       "name":"ListPublishedSchemaArns",
@@ -879,7 +904,7 @@
         {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the objectIdentifier for such objects. If policies are present, it returns objectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored.</p>"
+      "documentation":"<p>Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don't lead to the root from the target object are ignored.</p>"
     },
     "PublishSchema":{
       "name":"PublishSchema",
@@ -1008,7 +1033,7 @@
         {"shape":"FacetNotFoundException"},
         {"shape":"InvalidRuleException"}
       ],
-      "documentation":"<p>Does the following:</p> <ol> <li> <p>Adds new Attributes, Rules, or ObjectTypes.</p> </li> <li> <p>Updates existing Attributes, Rules, or ObjectTypes.</p> </li> <li> <p>Deletes existing Attributes, Rules, or ObjectTypes.</p> </li> </ol>"
+      "documentation":"<p>Does the following:</p> <ol> <li> <p>Adds new <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> <li> <p>Updates existing <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> <li> <p>Deletes existing <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> </ol>"
     },
     "UpdateObjectAttributes":{
       "name":"UpdateObjectAttributes",
@@ -1167,7 +1192,7 @@
       "members":{
         "AttachedObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>Attached ObjectIdentifier, which is the child ObjectIdentifier.</p>"
+          "documentation":"<p>Attached <code>ObjectIdentifier</code>, which is the child <code>ObjectIdentifier</code>.</p>"
         }
       }
     },
@@ -1228,7 +1253,7 @@
       "members":{
         "AttachedObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ObjectIdentifier of the object that was attached to the index.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the object that was attached to the index.</p>"
         }
       }
     },
@@ -1344,7 +1369,7 @@
       "members":{
         "attachedObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ObjectIdentifier of the object that has been attached.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the object that has been attached.</p>"
         }
       },
       "documentation":"<p>Represents the output batch AttachObject response operation.</p>"
@@ -1390,7 +1415,7 @@
           "documentation":"<p>ID associated with the object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a CreateObject response operation.</p>"
+      "documentation":"<p>Represents the output of a <code>CreateObject</code> response operation.</p>"
     },
     "BatchDeleteObject":{
       "type":"structure",
@@ -1401,13 +1426,13 @@
           "documentation":"<p>Reference that identifies the object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a DeleteObject operation.</p>"
+      "documentation":"<p>Represents the output of a <code>DeleteObject</code> operation.</p>"
     },
     "BatchDeleteObjectResponse":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Represents the output of a DeleteObject response operation.</p>"
+      "documentation":"<p>Represents the output of a <code>DeleteObject</code> response operation.</p>"
     },
     "BatchDetachObject":{
       "type":"structure",
@@ -1430,17 +1455,17 @@
           "documentation":"<p>The batch reference name. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches\">Batches</a> for more information.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a DetachObject operation.</p>"
+      "documentation":"<p>Represents the output of a <code>DetachObject</code> operation.</p>"
     },
     "BatchDetachObjectResponse":{
       "type":"structure",
       "members":{
         "detachedObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ObjectIdentifier of the detached object.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the detached object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a DetachObject response operation.</p>"
+      "documentation":"<p>Represents the output of a <code>DetachObject</code> response operation.</p>"
     },
     "BatchListObjectAttributes":{
       "type":"structure",
@@ -1452,28 +1477,28 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         },
         "MaxResults":{
           "shape":"NumberResults",
           "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a ListObjectAttributes operation.</p>"
+      "documentation":"<p>Represents the output of a <code>ListObjectAttributes</code> operation.</p>"
     },
     "BatchListObjectAttributesResponse":{
       "type":"structure",
       "members":{
         "Attributes":{
           "shape":"AttributeKeyAndValueList",
-          "documentation":"<p>Attributes map associated with the object. AttributeArn is the key; attribute value is the value.</p>"
+          "documentation":"<p>Attributes map associated with the object. <code>AttributeArn</code> is the key; attribute value is the value.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a ListObjectAttributes response operation.</p>"
+      "documentation":"<p>Represents the output of a <code>ListObjectAttributes</code> response operation.</p>"
     },
     "BatchListObjectChildren":{
       "type":"structure",
@@ -1485,28 +1510,28 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         },
         "MaxResults":{
           "shape":"NumberResults",
           "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a ListObjectChildren operation.</p>"
+      "documentation":"<p>Represents the output of a <code>ListObjectChildren</code> operation.</p>"
     },
     "BatchListObjectChildrenResponse":{
       "type":"structure",
       "members":{
         "Children":{
           "shape":"LinkNameToObjectIdentifierMap",
-          "documentation":"<p>Children structure, which is a map with key as the LinkName and ObjectIdentifier as the value.</p>"
+          "documentation":"<p>Children structure, which is a map with key as the <code>LinkName</code> and <code>ObjectIdentifier</code> as the value.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a ListObjectChildren response operation.</p>"
+      "documentation":"<p>Represents the output of a <code>ListObjectChildren</code> response operation.</p>"
     },
     "BatchOperationIndex":{"type":"integer"},
     "BatchReadException":{
@@ -1514,7 +1539,7 @@
       "members":{
         "Type":{
           "shape":"BatchReadExceptionType",
-          "documentation":"<p>Type of exception, such as InvalidArnException.</p>"
+          "documentation":"<p>Type of exception, such as <code>InvalidArnException</code>.</p>"
         },
         "Message":{
           "shape":"ExceptionMessage",
@@ -1546,7 +1571,7 @@
           "documentation":"<p>Returns a paginated list of child objects that are associated with a given object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a BatchRead operation.</p>"
+      "documentation":"<p>Represents the output of a <code>BatchRead</code> operation.</p>"
     },
     "BatchReadOperationList":{
       "type":"list",
@@ -1564,7 +1589,7 @@
           "documentation":"<p>Identifies which operation in a batch has failed.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a BatchRead response operation.</p>"
+      "documentation":"<p>Represents the output of a <code>BatchRead</code> response operation.</p>"
     },
     "BatchReadOperationResponseList":{
       "type":"list",
@@ -1616,7 +1641,7 @@
           "documentation":"<p>Returns a paginated list of child objects associated with a given object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a BatchRead success response operation.</p>"
+      "documentation":"<p>Represents the output of a <code>BatchRead</code> success response operation.</p>"
     },
     "BatchReferenceName":{"type":"string"},
     "BatchRemoveFacetFromObject":{
@@ -1659,7 +1684,7 @@
           "documentation":"<p>Attributes update structure.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a BatchUpdate operation. </p>"
+      "documentation":"<p>Represents the output of a <code>BatchUpdate</code> operation. </p>"
     },
     "BatchUpdateObjectAttributesResponse":{
       "type":"structure",
@@ -1669,7 +1694,7 @@
           "documentation":"<p>ID associated with the object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a BatchUpdate response operation.</p>"
+      "documentation":"<p>Represents the output of a <code>BatchUpdate</code> response operation.</p>"
     },
     "BatchWriteException":{
       "type":"structure",
@@ -1678,7 +1703,7 @@
         "Type":{"shape":"BatchWriteExceptionType"},
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>A BatchWrite exception has occurred.</p>",
+      "documentation":"<p>A <code>BatchWrite</code> exception has occurred.</p>",
       "exception":true
     },
     "BatchWriteExceptionType":{
@@ -1727,7 +1752,7 @@
           "documentation":"<p>Batch operation removing a facet from an object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a BatchWrite operation. </p>"
+      "documentation":"<p>Represents the output of a <code>BatchWrite</code> operation. </p>"
     },
     "BatchWriteOperationList":{
       "type":"list",
@@ -1765,7 +1790,7 @@
           "documentation":"<p>Result of a batch remove facet from object operation.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a BatchWrite response operation.</p>"
+      "documentation":"<p>Represents the output of a <code>BatchWrite</code> response operation.</p>"
     },
     "BatchWriteOperationResponseList":{
       "type":"list",
@@ -1934,7 +1959,7 @@
       "members":{
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ObjectIdentifier of the index created by this operation.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the index created by this operation.</p>"
         }
       }
     },
@@ -2119,7 +2144,7 @@
       "members":{
         "DetachedObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ObjectIdentifier of the object that was detached from the index.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the object that was detached from the index.</p>"
         }
       }
     },
@@ -2152,7 +2177,7 @@
       "members":{
         "DetachedObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ObjectIdentifier that was detached from the object.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> that was detached from the object.</p>"
         }
       }
     },
@@ -2198,7 +2223,7 @@
         },
         "State":{
           "shape":"DirectoryState",
-          "documentation":"<p>The state of the directory. Can be either Enabled, Disabled, or Deleted.</p>"
+          "documentation":"<p>The state of the directory. Can be either <code>Enabled</code>, <code>Disabled</code>, or <code>Deleted</code>.</p>"
         },
         "CreationDateTime":{
           "shape":"Date",
@@ -2319,7 +2344,7 @@
           "documentation":"<p>Object type associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.</p>"
         }
       },
-      "documentation":"<p>A structure that contains Name, ARN, Attributes, <a>Rule</a>s, and ObjectTypes.</p>"
+      "documentation":"<p>A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <a>Rule</a>s, and <code>ObjectTypes</code>.</p>"
     },
     "FacetAlreadyExistsException":{
       "type":"structure",
@@ -2348,7 +2373,7 @@
         },
         "RequiredBehavior":{
           "shape":"RequiredAttributeBehavior",
-          "documentation":"<p>The required behavior of the FacetAttribute.</p>"
+          "documentation":"<p>The required behavior of the <code>FacetAttribute</code>.</p>"
         }
       },
       "documentation":"<p>Attribute associated with the <a>Facet</a>.</p>"
@@ -2547,7 +2572,7 @@
         },
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ObjectIdentifier of the specified object.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the specified object.</p>"
         }
       }
     },
@@ -2585,7 +2610,7 @@
         },
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ObjectIdentifier of the object attached to the index.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the object attached to the index.</p>"
         }
       },
       "documentation":"<p>Represents an index and an attached object.</p>"
@@ -2644,7 +2669,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates that the NextToken value is not valid.</p>",
+      "documentation":"<p>Indicates that the <code>NextToken</code> value is not valid.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -2662,7 +2687,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates that the provided SchemaDoc value is not valid.</p>",
+      "documentation":"<p>Indicates that the provided <code>SchemaDoc</code> value is not valid.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -2978,7 +3003,7 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         },
         "MaxResults":{
           "shape":"NumberResults",
@@ -3001,7 +3026,7 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         }
       }
     },
@@ -3024,7 +3049,7 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         },
         "MaxResults":{
           "shape":"NumberResults",
@@ -3043,11 +3068,51 @@
       "members":{
         "Children":{
           "shape":"LinkNameToObjectIdentifierMap",
-          "documentation":"<p>Children structure, which is a map with key as the LinkName and ObjectIdentifier as the value.</p>"
+          "documentation":"<p>Children structure, which is a map with key as the LinkName and <code>ObjectIdentifier</code> as the value.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
+        }
+      }
+    },
+    "ListObjectParentPathsRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryArn",
+        "ObjectReference"
+      ],
+      "members":{
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the directory to which the parent path applies.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Reference that identifies the object whose parent paths are listed.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+        }
+      }
+    },
+    "ListObjectParentPathsResponse":{
+      "type":"structure",
+      "members":{
+        "PathToObjectIdentifiersList":{
+          "shape":"PathToObjectIdentifiersList",
+          "documentation":"<p>Returns the path to the <code>ObjectIdentifiers</code> associated with the directory.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
         }
       }
     },
@@ -3070,7 +3135,7 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         },
         "MaxResults":{
           "shape":"NumberResults",
@@ -3089,11 +3154,11 @@
       "members":{
         "Parents":{
           "shape":"ObjectIdentifierToLinkNameMap",
-          "documentation":"<p>Parent structure, which is a map with key as the ObjectIdentifier and LinkName as the value.</p>"
+          "documentation":"<p>Parent structure, which is a map with key as the <code>ObjectIdentifier</code> and LinkName as the value.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         }
       }
     },
@@ -3116,7 +3181,7 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         },
         "MaxResults":{
           "shape":"NumberResults",
@@ -3135,11 +3200,11 @@
       "members":{
         "AttachedPolicyIds":{
           "shape":"ObjectIdentifierList",
-          "documentation":"<p>List of policy ObjectIdentifiers, that are attached to the object.</p>"
+          "documentation":"<p>List of policy <code>ObjectIdentifiers</code>, that are attached to the object.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         }
       }
     },
@@ -3162,7 +3227,7 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         },
         "MaxResults":{
           "shape":"NumberResults",
@@ -3181,11 +3246,11 @@
       "members":{
         "ObjectIdentifiers":{
           "shape":"ObjectIdentifierList",
-          "documentation":"<p>List of ObjectIdentifiers to which the policy is attached.</p>"
+          "documentation":"<p>List of <code>ObjectIdentifiers</code> to which the policy is attached.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         }
       }
     },
@@ -3225,7 +3290,7 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Next token used for pagination. This is for future use. Currently pagination is not supported for tagging.</p>"
+          "documentation":"<p>The pagination token. This is for future use. Currently pagination is not supported for tagging.</p>"
         },
         "MaxResults":{
           "shape":"TagsNumberResults",
@@ -3278,11 +3343,11 @@
       "members":{
         "PolicyToPathList":{
           "shape":"PolicyToPathList",
-          "documentation":"<p>Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier, and PolicyType.</p>"
+          "documentation":"<p>Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p>Token used for pagination.</p>"
+          "documentation":"<p>The pagination token.</p>"
         }
       }
     },
@@ -3301,7 +3366,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Occurs when any invalid operations are performed on an object which is not a node, such as calling ListObjectChildren for a leaf node object.</p>",
+      "documentation":"<p>Occurs when any invalid operations are performed on an object which is not a node, such as calling <code>ListObjectChildren</code> for a leaf node object.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3317,7 +3382,7 @@
     "NumberAttributeValue":{"type":"string"},
     "NumberResults":{
       "type":"integer",
-      "min":0
+      "min":1
     },
     "ObjectAlreadyDetachedException":{
       "type":"structure",
@@ -3402,7 +3467,7 @@
       "members":{
         "Selector":{
           "shape":"SelectorObjectReference",
-          "documentation":"<p>Allows you to specify an object. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - Identifies the object by ObjectIdentifier</p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>"
+          "documentation":"<p>Allows you to specify an object. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - Identifies the object by <code>ObjectIdentifier</code> </p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>"
         }
       },
       "documentation":"<p>Reference that identifies an object.</p>"
@@ -3417,23 +3482,41 @@
       ]
     },
     "PathString":{"type":"string"},
+    "PathToObjectIdentifiers":{
+      "type":"structure",
+      "members":{
+        "Path":{
+          "shape":"PathString",
+          "documentation":"<p>The path used to identify the object starting from directory root.</p>"
+        },
+        "ObjectIdentifiers":{
+          "shape":"ObjectIdentifierList",
+          "documentation":"<p>Lists <code>ObjectIdentifiers</code> starting from directory root to the object in the request.</p>"
+        }
+      },
+      "documentation":"<p>Returns the path to the <code>ObjectIdentifiers</code> associated with the directory.</p>"
+    },
+    "PathToObjectIdentifiersList":{
+      "type":"list",
+      "member":{"shape":"PathToObjectIdentifiers"}
+    },
     "PolicyAttachment":{
       "type":"structure",
       "members":{
         "PolicyId":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ID of PolicyAttachment.</p>"
+          "documentation":"<p>The ID of <code>PolicyAttachment</code>.</p>"
         },
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The ObjectIdentifier associated with PolicyAttachment.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> associated with <code>PolicyAttachment</code>.</p>"
         },
         "PolicyType":{
           "shape":"PolicyType",
-          "documentation":"<p>The type of policy that can be associated with PolicyAttachment.</p>"
+          "documentation":"<p>The type of policy that can be associated with <code>PolicyAttachment</code>.</p>"
         }
       },
-      "documentation":"<p>Contains the PolicyType, PolicyId, and the ObjectIdentifier to which it is attached.</p>"
+      "documentation":"<p>Contains the <code>PolicyType</code>, <code>PolicyId</code>, and the <code>ObjectIdentifier</code> to which it is attached.</p>"
     },
     "PolicyAttachmentList":{
       "type":"list",
@@ -3662,7 +3745,7 @@
     "SchemaJsonDocument":{"type":"string"},
     "SchemaName":{
       "type":"string",
-      "max":50,
+      "max":32,
       "min":1,
       "pattern":"^[a-zA-Z0-9._-]*$"
     },
@@ -3878,7 +3961,7 @@
       "members":{
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>ObjectIdentifier of the updated object.</p>"
+          "documentation":"<p> <code>ObjectIdentifier</code> of the updated object.</p>"
         }
       }
     },

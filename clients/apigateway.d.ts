@@ -873,11 +873,11 @@ declare namespace APIGateway {
      */
     enabled?: Boolean;
     /**
-     * The date when the API Key was created, in ISO 8601 format.
+     * The timestamp when the API Key was created.
      */
     createdDate?: Timestamp;
     /**
-     * When the API Key was last updated, in ISO 8601 format.
+     * The timestamp when the API Key was last updated.
      */
     lastUpdatedDate?: Timestamp;
     /**
@@ -1006,11 +1006,11 @@ declare namespace APIGateway {
      */
     pemEncodedCertificate?: String;
     /**
-     * The date when the client certificate was created, in ISO 8601 format.
+     * The timestamp when the client certificate was created.
      */
     createdDate?: Timestamp;
     /**
-     * The date when the client certificate will expire, in ISO 8601 format.
+     * The timestamp when the client certificate will expire.
      */
     expirationDate?: Timestamp;
   }
@@ -1176,25 +1176,29 @@ declare namespace APIGateway {
   }
   export interface CreateDomainNameRequest {
     /**
-     * The name of the DomainName resource.
+     * (Required) The name of the DomainName resource.
      */
     domainName: String;
     /**
-     * The name of the certificate.
+     * The user-friendly name of the certificate.
      */
-    certificateName: String;
+    certificateName?: String;
     /**
-     * The body of the server certificate provided by your certificate authority.
+     * [Deprecated] The body of the server certificate provided by your certificate authority.
      */
-    certificateBody: String;
+    certificateBody?: String;
     /**
-     * Your certificate's private key.
+     * [Deprecated] Your certificate's private key.
      */
-    certificatePrivateKey: String;
+    certificatePrivateKey?: String;
     /**
-     * The intermediate certificates and optionally the root certificate, one after the other without any blank lines. If you include the root certificate, your certificate chain must start with intermediate certificates and end with the root certificate. Use the intermediate certificates that were provided by your certificate authority. Do not include any intermediaries that are not in the chain of trust path.
+     * [Deprecated] The intermediate certificates and optionally the root certificate, one after the other without any blank lines. If you include the root certificate, your certificate chain must start with intermediate certificates and end with the root certificate. Use the intermediate certificates that were provided by your certificate authority. Do not include any intermediaries that are not in the chain of trust path.
      */
-    certificateChain: String;
+    certificateChain?: String;
+    /**
+     * The reference to an AWS-managed certificate. AWS Certificate Manager is the only supported source.
+     */
+    certificateArn?: String;
   }
   export interface CreateModelRequest {
     /**
@@ -1559,7 +1563,7 @@ declare namespace APIGateway {
   }
   export interface DocumentationPartLocation {
     /**
-     * The type of API entity to which the documentation content applies. It is a valid and required field for API entity types of API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. Content inheritance does not apply to any entity of the API, AUTHROZER, MODEL, or RESOURCE type.
+     * The type of API entity to which the documentation content applies. It is a valid and required field for API entity types of API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. Content inheritance does not apply to any entity of the API, AUTHROZER, METHOD, MODEL, REQUEST_BODY, or RESOURCE type.
      */
     type: DocumentationPartType;
     /**
@@ -1619,7 +1623,11 @@ declare namespace APIGateway {
      */
     certificateName?: String;
     /**
-     * The date when the certificate was uploaded, in ISO 8601 format.
+     * The reference to an AWS-managed certificate. AWS Certificate Manager is the only supported source.
+     */
+    certificateArn?: String;
+    /**
+     * The timestamp when the certificate was uploaded.
      */
     certificateUploadDate?: Timestamp;
     /**
@@ -2704,7 +2712,7 @@ declare namespace APIGateway {
      */
     description?: String;
     /**
-     * The date when the API was created, in ISO 8601 format.
+     * The timestamp when the API was created.
      */
     createdDate?: Timestamp;
     /**
@@ -2830,11 +2838,11 @@ declare namespace APIGateway {
      */
     documentationVersion?: String;
     /**
-     * The date and time that the stage was created, in ISO 8601 format.
+     * The timestamp when the stage was created.
      */
     createdDate?: Timestamp;
     /**
-     * The date and time that information about the stage was last updated, in ISO 8601 format.
+     * The timestamp when the stage last updated.
      */
     lastUpdatedDate?: Timestamp;
   }

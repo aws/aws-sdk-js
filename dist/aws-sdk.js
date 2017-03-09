@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.25.0
+// AWS SDK for JavaScript v2.26.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -525,18 +525,15 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "domainName",
-          "certificateName",
-          "certificateBody",
-          "certificatePrivateKey",
-          "certificateChain"
+          "domainName"
         ],
         "members": {
           "domainName": {},
           "certificateName": {},
           "certificateBody": {},
           "certificatePrivateKey": {},
-          "certificateChain": {}
+          "certificateChain": {},
+          "certificateArn": {}
         }
       },
       "output": {
@@ -3609,6 +3606,7 @@ module.exports={
       "members": {
         "domainName": {},
         "certificateName": {},
+        "certificateArn": {},
         "certificateUploadDate": {
           "type": "timestamp"
         },
@@ -3964,73 +3962,72 @@ module.exports={
   "pagination": {
     "GetApiKeys": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
+      "output_token": "position",
       "result_key": "items"
     },
     "GetBasePathMappings": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
+      "output_token": "position",
       "result_key": "items"
     },
     "GetClientCertificates": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
+      "output_token": "position",
       "result_key": "items"
     },
     "GetDeployments": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
+      "output_token": "position",
       "result_key": "items"
     },
     "GetDomainNames": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
+      "output_token": "position",
       "result_key": "items"
     },
     "GetModels": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
+      "output_token": "position",
       "result_key": "items"
     },
     "GetResources": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
+      "output_token": "position",
       "result_key": "items"
     },
     "GetRestApis": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
+      "output_token": "position",
       "result_key": "items"
     },
     "GetUsage": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
-      "result_key": "items"
-    },
-    "GetUsagePlans": {
-      "input_token": "position",
       "output_token": "position",
-      "limit_key": "limit",
       "result_key": "items"
     },
     "GetUsagePlanKeys": {
       "input_token": "position",
-      "output_token": "position",
       "limit_key": "limit",
+      "output_token": "position",
+      "result_key": "items"
+    },
+    "GetUsagePlans": {
+      "input_token": "position",
+      "limit_key": "limit",
+      "output_token": "position",
       "result_key": "items"
     }
   }
 }
-
 },{}],5:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -95377,7 +95374,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.25.0',
+  VERSION: '2.26.0',
 
 
   Signers: {},

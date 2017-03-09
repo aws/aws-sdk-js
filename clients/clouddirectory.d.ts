@@ -28,11 +28,11 @@ declare class CloudDirectory extends Service {
    */
   applySchema(callback?: (err: AWSError, data: CloudDirectory.Types.ApplySchemaResponse) => void): Request<CloudDirectory.Types.ApplySchemaResponse, AWSError>;
   /**
-   * Attaches an existing object to another object. An object can be accessed in two ways:   Using the path   Using ObjectIdentifier  
+   * Attaches an existing object to another object. An object can be accessed in two ways:   Using the path   Using ObjectIdentifier   
    */
   attachObject(params: CloudDirectory.Types.AttachObjectRequest, callback?: (err: AWSError, data: CloudDirectory.Types.AttachObjectResponse) => void): Request<CloudDirectory.Types.AttachObjectResponse, AWSError>;
   /**
-   * Attaches an existing object to another object. An object can be accessed in two ways:   Using the path   Using ObjectIdentifier  
+   * Attaches an existing object to another object. An object can be accessed in two ways:   Using the path   Using ObjectIdentifier   
    */
   attachObject(callback?: (err: AWSError, data: CloudDirectory.Types.AttachObjectResponse) => void): Request<CloudDirectory.Types.AttachObjectResponse, AWSError>;
   /**
@@ -284,6 +284,14 @@ declare class CloudDirectory extends Service {
    */
   listObjectChildren(callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectChildrenResponse) => void): Request<CloudDirectory.Types.ListObjectChildrenResponse, AWSError>;
   /**
+   * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure. Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined MaxResults, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to directory root are ignored from the target object.
+   */
+  listObjectParentPaths(params: CloudDirectory.Types.ListObjectParentPathsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentPathsResponse) => void): Request<CloudDirectory.Types.ListObjectParentPathsResponse, AWSError>;
+  /**
+   * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure. Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined MaxResults, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to directory root are ignored from the target object.
+   */
+  listObjectParentPaths(callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentPathsResponse) => void): Request<CloudDirectory.Types.ListObjectParentPathsResponse, AWSError>;
+  /**
    * Lists parent objects associated with a given object in pagination fashion.
    */
   listObjectParents(params: CloudDirectory.Types.ListObjectParentsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentsResponse) => void): Request<CloudDirectory.Types.ListObjectParentsResponse, AWSError>;
@@ -324,11 +332,11 @@ declare class CloudDirectory extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CloudDirectory.Types.ListTagsForResourceResponse) => void): Request<CloudDirectory.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the objectIdentifier for such objects. If policies are present, it returns objectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored.
+   * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored.
    */
   lookupPolicy(params: CloudDirectory.Types.LookupPolicyRequest, callback?: (err: AWSError, data: CloudDirectory.Types.LookupPolicyResponse) => void): Request<CloudDirectory.Types.LookupPolicyResponse, AWSError>;
   /**
-   * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the objectIdentifier for such objects. If policies are present, it returns objectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored.
+   * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored.
    */
   lookupPolicy(callback?: (err: AWSError, data: CloudDirectory.Types.LookupPolicyResponse) => void): Request<CloudDirectory.Types.LookupPolicyResponse, AWSError>;
   /**
@@ -624,7 +632,7 @@ declare namespace CloudDirectory {
      */
     ObjectReference: ObjectReference;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
     /**
@@ -638,7 +646,7 @@ declare namespace CloudDirectory {
      */
     Attributes?: AttributeKeyAndValueList;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
   }
@@ -648,7 +656,7 @@ declare namespace CloudDirectory {
      */
     ObjectReference: ObjectReference;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
     /**
@@ -662,7 +670,7 @@ declare namespace CloudDirectory {
      */
     Children?: LinkNameToObjectIdentifierMap;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
   }
@@ -1461,7 +1469,7 @@ declare namespace CloudDirectory {
      */
     ObjectReference: ObjectReference;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
     /**
@@ -1479,7 +1487,7 @@ declare namespace CloudDirectory {
      */
     Attributes?: AttributeKeyAndValueList;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
   }
@@ -1493,7 +1501,7 @@ declare namespace CloudDirectory {
      */
     ObjectReference: ObjectReference;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
     /**
@@ -1511,7 +1519,35 @@ declare namespace CloudDirectory {
      */
     Children?: LinkNameToObjectIdentifierMap;
     /**
-     * Token used for pagination.
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListObjectParentPathsRequest {
+    /**
+     * The ARN of the directory to which the parent path applies.
+     */
+    DirectoryArn: Arn;
+    /**
+     * Reference that identifies the object whose parent paths are listed.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * Maximum number of items to be retrieved in a single call. This is an approximate number.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface ListObjectParentPathsResponse {
+    /**
+     * Returns the path to the ObjectIdentifiers associated with the directory.
+     */
+    PathToObjectIdentifiersList?: PathToObjectIdentifiersList;
+    /**
+     * The pagination token.
      */
     NextToken?: NextToken;
   }
@@ -1525,7 +1561,7 @@ declare namespace CloudDirectory {
      */
     ObjectReference: ObjectReference;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
     /**
@@ -1543,7 +1579,7 @@ declare namespace CloudDirectory {
      */
     Parents?: ObjectIdentifierToLinkNameMap;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
   }
@@ -1557,7 +1593,7 @@ declare namespace CloudDirectory {
      */
     ObjectReference: ObjectReference;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
     /**
@@ -1575,7 +1611,7 @@ declare namespace CloudDirectory {
      */
     AttachedPolicyIds?: ObjectIdentifierList;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
   }
@@ -1589,7 +1625,7 @@ declare namespace CloudDirectory {
      */
     PolicyReference: ObjectReference;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
     /**
@@ -1607,7 +1643,7 @@ declare namespace CloudDirectory {
      */
     ObjectIdentifiers?: ObjectIdentifierList;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
   }
@@ -1637,7 +1673,7 @@ declare namespace CloudDirectory {
      */
     ResourceArn: Arn;
     /**
-     * Next token used for pagination. This is for future use. Currently pagination is not supported for tagging.
+     * The pagination token. This is for future use. Currently pagination is not supported for tagging.
      */
     NextToken?: NextToken;
     /**
@@ -1679,7 +1715,7 @@ declare namespace CloudDirectory {
      */
     PolicyToPathList?: PolicyToPathList;
     /**
-     * Token used for pagination.
+     * The pagination token.
      */
     NextToken?: NextToken;
   }
@@ -1723,12 +1759,23 @@ declare namespace CloudDirectory {
   export type ObjectIdentifierToLinkNameMap = {[key: string]: LinkName};
   export interface ObjectReference {
     /**
-     * Allows you to specify an object. You can identify an object in one of the following ways:    $ObjectIdentifier - Identifies the object by ObjectIdentifier    /some/path - Identifies the object based on path    #SomeBatchReference - Identifies the object in a batch call  
+     * Allows you to specify an object. You can identify an object in one of the following ways:    $ObjectIdentifier - Identifies the object by ObjectIdentifier     /some/path - Identifies the object based on path    #SomeBatchReference - Identifies the object in a batch call  
      */
     Selector?: SelectorObjectReference;
   }
   export type ObjectType = "NODE"|"LEAF_NODE"|"POLICY"|"INDEX"|string;
   export type PathString = string;
+  export interface PathToObjectIdentifiers {
+    /**
+     * The path used to identify the object starting from directory root.
+     */
+    Path?: PathString;
+    /**
+     * Lists ObjectIdentifiers starting from directory root to the object in the request.
+     */
+    ObjectIdentifiers?: ObjectIdentifierList;
+  }
+  export type PathToObjectIdentifiersList = PathToObjectIdentifiers[];
   export interface PolicyAttachment {
     /**
      * The ID of PolicyAttachment.
@@ -1957,7 +2004,7 @@ declare namespace CloudDirectory {
   }
   export interface UpdateObjectAttributesResponse {
     /**
-     * ObjectIdentifier of the updated object.
+     *  ObjectIdentifier of the updated object.
      */
     ObjectIdentifier?: ObjectIdentifier;
   }
