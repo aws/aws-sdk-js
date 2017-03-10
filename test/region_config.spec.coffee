@@ -84,9 +84,9 @@ describe 'region_config.js', ->
       service = new MockService(region: 'us-west-2', useDualstack: true)
       expect(service.config.endpoint).to.equal('mockservice.us-west-2.amazonaws.com')
 
-describe 'region_config.json', ->
+describe 'region_config_data.json', ->
   it 'does not reference undefined patterns', ->
-    config = require('../lib/region_config.json')
+    config = require('../lib/region_config_data.json')
     for k,v of config.rules
       if typeof v == 'string'
         expect(config.patterns).to.haveOwnProperty(v)
