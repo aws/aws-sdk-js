@@ -9,26 +9,14 @@ node_js:
   - "6.1"
   - "node"
 
-cache:
-  directories:
-    - "travis-phantomjs"
-
 before_install:
   - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
 
 script:
-  - "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
-  - "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-
-env:
-  matrix:
-    - COVERAGE=1
+  - npm run lint
+  - npm run coverage
+  - npm run buildertest
+  - npm run browsertest
+  - node ./node_modules/.bin/codecov
 
 sudo: false
-
-# env:
-#   global:
-#     - secure: "..."
-#   matrix:
-#     - UNIT=1
-#     - AWS_REGION=us-east-1 INTEGRATION=1
