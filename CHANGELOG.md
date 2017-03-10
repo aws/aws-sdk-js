@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.26.0-->
+<!--LATEST=2.27.0-->
 <!--ENTRYINSERT-->
+
+## 2.27.0
+* bugfix: TemporaryCredentials: Ensure master credentials are not expired before using them to refresh temporary credentials
+* feature: CodeDeploy: Add paginators for Codedeploy
+* feature: EMR: This release includes support for instance fleets in Amazon EMR
 
 ## 2.26.0
 * feature: APIGateway: API Gateway has added support for ACM certificates on custom domain names. Both Amazon-issued certificates and uploaded third-part certificates are supported.

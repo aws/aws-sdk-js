@@ -12,6 +12,14 @@ declare class EMR extends Service {
   constructor(options?: EMR.Types.ClientConfiguration)
   config: Config & EMR.Types.ClientConfiguration;
   /**
+   * Adds an instance fleet to a running cluster.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x. 
+   */
+  addInstanceFleet(params: EMR.Types.AddInstanceFleetInput, callback?: (err: AWSError, data: EMR.Types.AddInstanceFleetOutput) => void): Request<EMR.Types.AddInstanceFleetOutput, AWSError>;
+  /**
+   * Adds an instance fleet to a running cluster.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x. 
+   */
+  addInstanceFleet(callback?: (err: AWSError, data: EMR.Types.AddInstanceFleetOutput) => void): Request<EMR.Types.AddInstanceFleetOutput, AWSError>;
+  /**
    * Adds one or more instance groups to a running cluster.
    */
   addInstanceGroups(params: EMR.Types.AddInstanceGroupsInput, callback?: (err: AWSError, data: EMR.Types.AddInstanceGroupsOutput) => void): Request<EMR.Types.AddInstanceGroupsOutput, AWSError>;
@@ -20,11 +28,11 @@ declare class EMR extends Service {
    */
   addInstanceGroups(callback?: (err: AWSError, data: EMR.Types.AddInstanceGroupsOutput) => void): Request<EMR.Types.AddInstanceGroupsOutput, AWSError>;
   /**
-   * AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Job Flow in the Amazon EMR Developer's Guide. A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
+   * AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow. If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Cluster in the Amazon EMR Management Guide. A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
    */
   addJobFlowSteps(params: EMR.Types.AddJobFlowStepsInput, callback?: (err: AWSError, data: EMR.Types.AddJobFlowStepsOutput) => void): Request<EMR.Types.AddJobFlowStepsOutput, AWSError>;
   /**
-   * AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Job Flow in the Amazon EMR Developer's Guide. A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
+   * AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow. If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Cluster in the Amazon EMR Management Guide. A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
    */
   addJobFlowSteps(callback?: (err: AWSError, data: EMR.Types.AddJobFlowStepsOutput) => void): Request<EMR.Types.AddJobFlowStepsOutput, AWSError>;
   /**
@@ -108,6 +116,14 @@ declare class EMR extends Service {
    */
   listClusters(callback?: (err: AWSError, data: EMR.Types.ListClustersOutput) => void): Request<EMR.Types.ListClustersOutput, AWSError>;
   /**
+   * Lists all available details about the instance fleets in a cluster.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. 
+   */
+  listInstanceFleets(params: EMR.Types.ListInstanceFleetsInput, callback?: (err: AWSError, data: EMR.Types.ListInstanceFleetsOutput) => void): Request<EMR.Types.ListInstanceFleetsOutput, AWSError>;
+  /**
+   * Lists all available details about the instance fleets in a cluster.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. 
+   */
+  listInstanceFleets(callback?: (err: AWSError, data: EMR.Types.ListInstanceFleetsOutput) => void): Request<EMR.Types.ListInstanceFleetsOutput, AWSError>;
+  /**
    * Provides all available details about the instance groups in a cluster.
    */
   listInstanceGroups(params: EMR.Types.ListInstanceGroupsInput, callback?: (err: AWSError, data: EMR.Types.ListInstanceGroupsOutput) => void): Request<EMR.Types.ListInstanceGroupsOutput, AWSError>;
@@ -139,6 +155,14 @@ declare class EMR extends Service {
    * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
    */
   listSteps(callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
+  /**
+   * Modifies the target On-Demand and target Spot capacities for the instance fleet with the specified InstanceFleetID within the cluster specified using ClusterID. The call either succeeds or fails atomically.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. 
+   */
+  modifyInstanceFleet(params: EMR.Types.ModifyInstanceFleetInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Modifies the target On-Demand and target Spot capacities for the instance fleet with the specified InstanceFleetID within the cluster specified using ClusterID. The call either succeeds or fails atomically.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. 
+   */
+  modifyInstanceFleet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * ModifyInstanceGroups modifies the number of nodes and configuration settings of an instance group. The input parameters include the new target instance count for the group and the instance group ID. The call will either succeed or fail atomically.
    */
@@ -172,35 +196,35 @@ declare class EMR extends Service {
    */
   removeTags(callback?: (err: AWSError, data: EMR.Types.RemoveTagsOutput) => void): Request<EMR.Types.RemoveTagsOutput, AWSError>;
   /**
-   * RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. After the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the job flow will transition to the WAITING state rather than shutting down after the steps have completed.  For additional protection, you can set the JobFlowInstancesConfig TerminationProtected parameter to TRUE to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Job Flow in the Amazon EMR Management Guide. For long running job flows, we recommend that you periodically store your results.
+   * RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the steps specified. After the steps complete, the cluster stops and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the cluster transitions to the WAITING state rather than shutting down after the steps have completed.  For additional protection, you can set the JobFlowInstancesConfig TerminationProtected parameter to TRUE to lock the cluster and prevent it from being terminated by API call, user intervention, or in the event of a job flow error. A maximum of 256 steps are allowed in each job flow. If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Cluster in the Amazon EMR Management Guide. For long running clusters, we recommend that you periodically store your results.  The instance fleets configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain InstanceFleets parameters or InstanceGroups parameters, but not both. 
    */
   runJobFlow(params: EMR.Types.RunJobFlowInput, callback?: (err: AWSError, data: EMR.Types.RunJobFlowOutput) => void): Request<EMR.Types.RunJobFlowOutput, AWSError>;
   /**
-   * RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. After the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the job flow will transition to the WAITING state rather than shutting down after the steps have completed.  For additional protection, you can set the JobFlowInstancesConfig TerminationProtected parameter to TRUE to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error. A maximum of 256 steps are allowed in each job flow. If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Job Flow in the Amazon EMR Management Guide. For long running job flows, we recommend that you periodically store your results.
+   * RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the steps specified. After the steps complete, the cluster stops and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the cluster transitions to the WAITING state rather than shutting down after the steps have completed.  For additional protection, you can set the JobFlowInstancesConfig TerminationProtected parameter to TRUE to lock the cluster and prevent it from being terminated by API call, user intervention, or in the event of a job flow error. A maximum of 256 steps are allowed in each job flow. If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Cluster in the Amazon EMR Management Guide. For long running clusters, we recommend that you periodically store your results.  The instance fleets configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain InstanceFleets parameters or InstanceGroups parameters, but not both. 
    */
   runJobFlow(callback?: (err: AWSError, data: EMR.Types.RunJobFlowOutput) => void): Request<EMR.Types.RunJobFlowOutput, AWSError>;
   /**
-   * SetTerminationProtection locks a job flow so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster. SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.  To terminate a job flow that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, seeProtecting a Job Flow from Termination in the Amazon EMR Guide. 
+   * SetTerminationProtection locks a cluster (job flow) so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a cluster is similar to calling the Amazon EC2 DisableAPITermination API on all EC2 instances in a cluster.  SetTerminationProtection is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.  To terminate a cluster that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, seeManaging Cluster Termination in the Amazon EMR Management Guide. 
    */
   setTerminationProtection(params: EMR.Types.SetTerminationProtectionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * SetTerminationProtection locks a job flow so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster. SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.  To terminate a job flow that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, seeProtecting a Job Flow from Termination in the Amazon EMR Guide. 
+   * SetTerminationProtection locks a cluster (job flow) so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a cluster is similar to calling the Amazon EC2 DisableAPITermination API on all EC2 instances in a cluster.  SetTerminationProtection is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.  To terminate a cluster that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, seeManaging Cluster Termination in the Amazon EMR Management Guide. 
    */
   setTerminationProtection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified job flows. This action works on running job flows. You can also set the visibility of a job flow when you launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers action can be called only by an IAM user who created the job flow or the AWS account that owns the job flow.
+   * Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
    */
   setVisibleToAllUsers(params: EMR.Types.SetVisibleToAllUsersInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified job flows. This action works on running job flows. You can also set the visibility of a job flow when you launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers action can be called only by an IAM user who created the job flow or the AWS account that owns the job flow.
+   * Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
    */
   setVisibleToAllUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. The maximum number of JobFlows allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 1-5 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances.
+   * TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the cluster is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the cluster was created. The maximum number of clusters allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the cluster, it may take up to 1-5 minutes for the cluster to completely terminate and release allocated resources, such as Amazon EC2 instances.
    */
   terminateJobFlows(params: EMR.Types.TerminateJobFlowsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. The maximum number of JobFlows allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 1-5 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances.
+   * TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the cluster is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the cluster was created. The maximum number of clusters allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the cluster, it may take up to 1-5 minutes for the cluster to completely terminate and release allocated resources, such as Amazon EC2 instances.
    */
   terminateJobFlows(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -219,9 +243,37 @@ declare class EMR extends Service {
    * Waits for the stepComplete state by periodically calling the underlying EMR.describeStepoperation every 30 seconds (at most 60 times).
    */
   waitFor(state: "stepComplete", callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
+  /**
+   * Waits for the clusterTerminated state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
+   */
+  waitFor(state: "clusterTerminated", params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
+  /**
+   * Waits for the clusterTerminated state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
+   */
+  waitFor(state: "clusterTerminated", callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
 }
 declare namespace EMR {
   export type ActionOnFailure = "TERMINATE_JOB_FLOW"|"TERMINATE_CLUSTER"|"CANCEL_AND_WAIT"|"CONTINUE"|string;
+  export interface AddInstanceFleetInput {
+    /**
+     * The unique identifier of the cluster.
+     */
+    ClusterId: XmlStringMaxLen256;
+    /**
+     * Specifies the configuration of the instance fleet.
+     */
+    InstanceFleet: InstanceFleetConfig;
+  }
+  export interface AddInstanceFleetOutput {
+    /**
+     * The unique identifier of the cluster.
+     */
+    ClusterId?: XmlStringMaxLen256;
+    /**
+     * The unique identifier of the instance fleet.
+     */
+    InstanceFleetId?: InstanceFleetId;
+  }
   export interface AddInstanceGroupsInput {
     /**
      * Instance groups to add.
@@ -317,7 +369,7 @@ declare namespace EMR {
   export type AutoScalingPolicyState = "PENDING"|"ATTACHING"|"ATTACHED"|"DETACHING"|"DETACHED"|"FAILED"|string;
   export interface AutoScalingPolicyStateChangeReason {
     /**
-     * The code indicating the reason for the change in status.USER_REQUEST indicates that the scaling policy status was changed by a user. PROVISION_FAILURE indicates that the status change was because the policy failed to provision. CLEANUP_FAILURE indicates something unclean happened.--&gt;
+     * The code indicating the reason for the change in status.USER_REQUEST indicates that the scaling policy status was changed by a user. PROVISION_FAILURE indicates that the status change was because the policy failed to provision. CLEANUP_FAILURE indicates an error.
      */
     Code?: AutoScalingPolicyStateChangeReasonCode;
     /**
@@ -328,7 +380,7 @@ declare namespace EMR {
   export type AutoScalingPolicyStateChangeReasonCode = "USER_REQUEST"|"PROVISION_FAILURE"|"CLEANUP_FAILURE"|string;
   export interface AutoScalingPolicyStatus {
     /**
-     * 
+     * Indicates the status of the automatic scaling policy.
      */
     State?: AutoScalingPolicyState;
     /**
@@ -357,8 +409,17 @@ declare namespace EMR {
   }
   export type BootstrapActionDetailList = BootstrapActionDetail[];
   export interface CancelStepsInfo {
+    /**
+     * The encrypted StepId of a step.
+     */
     StepId?: StepId;
+    /**
+     * The status of a CancelSteps Request. The value may be SUBMITTED or FAILED.
+     */
     Status?: CancelStepsRequestStatus;
+    /**
+     * The reason for the failure if the CancelSteps request fails.
+     */
     Reason?: String;
   }
   export type CancelStepsInfoList = CancelStepsInfo[];
@@ -435,6 +496,10 @@ declare namespace EMR {
      */
     Ec2InstanceAttributes?: Ec2InstanceAttributes;
     /**
+     *  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.  The instance group configuration of the cluster. A value of INSTANCE_GROUP indicates a uniform instance group configuration. A value of INSTANCE_FLEET indicates an instance fleets configuration.
+     */
+    InstanceCollectionType?: InstanceCollectionType;
+    /**
      * The path to the Amazon S3 location where logs for this cluster are stored.
      */
     LogUri?: String;
@@ -459,7 +524,7 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
-     * Indicates whether the job flow is visible to all IAM users of the AWS account associated with the job flow. If this value is set to true, all IAM users of that AWS account can view and manage the job flow if they have the proper policy permissions set. If this value is false, only the IAM user that created the cluster can view and manage it. This value can be changed using the SetVisibleToAllUsers action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to true, all IAM users of that AWS account can view and manage the cluster if they have the proper policy permissions set. If this value is false, only the IAM user that created the cluster can view and manage it. This value can be changed using the SetVisibleToAllUsers action.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -475,7 +540,7 @@ declare namespace EMR {
      */
     ServiceRole?: String;
     /**
-     * An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
+     * An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
      */
     NormalizedInstanceHours?: Integer;
     /**
@@ -541,7 +606,7 @@ declare namespace EMR {
      */
     Status?: ClusterStatus;
     /**
-     * An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
+     * An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
      */
     NormalizedInstanceHours?: Integer;
   }
@@ -578,15 +643,15 @@ declare namespace EMR {
   export type ComparisonOperator = "GREATER_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN"|"LESS_THAN_OR_EQUAL"|string;
   export interface Configuration {
     /**
-     * The classification of a configuration. For more information see, Amazon EMR Configurations. 
+     * The classification within a configuration.
      */
     Classification?: String;
     /**
-     * A list of configurations you apply to this configuration object.
+     * A list of additional configurations to apply within a configuration object.
      */
     Configurations?: ConfigurationList;
     /**
-     * A set of properties supplied to the Configuration object.
+     * A set of properties specified within a configuration classification.
      */
     Properties?: StringMap;
   }
@@ -743,15 +808,23 @@ declare namespace EMR {
      */
     Ec2KeyName?: String;
     /**
-     * To launch the job flow in Amazon VPC, set this parameter to the identifier of the Amazon VPC subnet where you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal AWS cloud, outside of a VPC. Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus, you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a VPC.
+     * To launch the cluster in Amazon VPC, set this parameter to the identifier of the Amazon VPC subnet where you want the cluster to launch. If you do not specify this value, the cluster is launched in the normal AWS cloud, outside of a VPC. Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus, you cannot specify the cc1.4xlarge instance type for nodes of a cluster launched in a VPC.
      */
     Ec2SubnetId?: String;
     /**
-     * The Availability Zone in which the cluster will run.
+     * Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Amazon EMR chooses the EC2 subnet with the best performance and cost characteristics from among the list of RequestedEc2SubnetIds and launches all cluster instances within that subnet. If this value is not specified, and the account supports EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses Requested
+     */
+    RequestedEc2SubnetIds?: XmlStringMaxLen256List;
+    /**
+     * The Availability Zone in which the cluster will run. 
      */
     Ec2AvailabilityZone?: String;
     /**
-     * The IAM role that was specified when the job flow was launched. The EC2 instances of the job flow assume this role.
+     * Applies to clusters configured with the The list of availability zones to choose from. The service will choose the availability zone with the best mix of available capacity and lowest cost to launch the cluster. If you do not specify this value, the cluster is launched in any availability zone that the customer account has access to.
+     */
+    RequestedEc2AvailabilityZones?: XmlStringMaxLen256List;
+    /**
+     * The IAM role that was specified when the cluster was launched. The EC2 instances of the cluster assume this role.
      */
     IamInstanceProfile?: String;
     /**
@@ -861,10 +934,155 @@ declare namespace EMR {
      */
     InstanceGroupId?: String;
     /**
+     * The unique identifier of the instance fleet to which an EC2 instance belongs.
+     */
+    InstanceFleetId?: InstanceFleetId;
+    /**
+     * The instance purchasing option. Valid values are ON_DEMAND or SPOT. 
+     */
+    Market?: MarketType;
+    /**
+     * The EC2 instance type, for example m3.xlarge.
+     */
+    InstanceType?: InstanceType;
+    /**
      * The list of EBS volumes that are attached to this instance.
      */
     EbsVolumes?: EbsVolumeList;
   }
+  export type InstanceCollectionType = "INSTANCE_FLEET"|"INSTANCE_GROUP"|string;
+  export interface InstanceFleet {
+    /**
+     * The unique identifier of the instance fleet.
+     */
+    Id?: InstanceFleetId;
+    /**
+     * A friendly name for the instance fleet.
+     */
+    Name?: XmlStringMaxLen256;
+    /**
+     * The current status of the instance fleet. 
+     */
+    Status?: InstanceFleetStatus;
+    /**
+     * The node type that the instance fleet hosts. Valid values are MASTER, CORE, or TASK. 
+     */
+    InstanceFleetType?: InstanceFleetType;
+    /**
+     * The target capacity of On-Demand units for the instance fleet, which determines how many On-Demand instances to provision. When the instance fleet launches, Amazon EMR tries to provision On-Demand instances as specified by InstanceTypeConfig. Each instance configuration has a specified WeightedCapacity. When an On-Demand instance is provisioned, the WeightedCapacity units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a WeightedCapacity of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units. You can use InstanceFleet$ProvisionedOnDemandCapacity to determine the Spot capacity units that have been provisioned for the instance fleet.  If not specified or set to 0, only Spot instances are provisioned for the instance fleet using TargetSpotCapacity. At least one of TargetSpotCapacity and TargetOnDemandCapacity should be greater than 0. For a master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and its value must be 1. 
+     */
+    TargetOnDemandCapacity?: WholeNumber;
+    /**
+     * The target capacity of Spot units for the instance fleet, which determines how many Spot instances to provision. When the instance fleet launches, Amazon EMR tries to provision Spot instances as specified by InstanceTypeConfig. Each instance configuration has a specified WeightedCapacity. When a Spot instance is provisioned, the WeightedCapacity units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a WeightedCapacity of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units. You can use InstanceFleet$ProvisionedSpotCapacity to determine the Spot capacity units that have been provisioned for the instance fleet.  If not specified or set to 0, only On-Demand instances are provisioned for the instance fleet. At least one of TargetSpotCapacity and TargetOnDemandCapacity should be greater than 0. For a master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and its value must be 1. 
+     */
+    TargetSpotCapacity?: WholeNumber;
+    /**
+     * The number of On-Demand units that have been provisioned for the instance fleet to fulfill TargetOnDemandCapacity. This provisioned capacity might be less than or greater than TargetOnDemandCapacity.
+     */
+    ProvisionedOnDemandCapacity?: WholeNumber;
+    /**
+     * The number of Spot units that have been provisioned for this instance fleet to fulfill TargetSpotCapacity. This provisioned capacity might be less than or greater than TargetSpotCapacity.
+     */
+    ProvisionedSpotCapacity?: WholeNumber;
+    /**
+     * The specification for the instance types that comprise an instance fleet. Up to five unique instance specifications may be defined for each instance fleet. 
+     */
+    InstanceTypeSpecifications?: InstanceTypeSpecificationList;
+    /**
+     * Describes the launch specification for an instance fleet. 
+     */
+    LaunchSpecifications?: InstanceFleetProvisioningSpecifications;
+  }
+  export interface InstanceFleetConfig {
+    /**
+     * The friendly name of the instance fleet.
+     */
+    Name?: XmlStringMaxLen256;
+    /**
+     * The node type that the instance fleet hosts. Valid values are MASTER,CORE,and TASK.
+     */
+    InstanceFleetType: InstanceFleetType;
+    /**
+     * The target capacity of On-Demand units for the instance fleet, which determines how many On-Demand instances to provision. When the instance fleet launches, Amazon EMR tries to provision On-Demand instances as specified by InstanceTypeConfig. Each instance configuration has a specified WeightedCapacity. When an On-Demand instance is provisioned, the WeightedCapacity units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a WeightedCapacity of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.  If not specified or set to 0, only Spot instances are provisioned for the instance fleet using TargetSpotCapacity. At least one of TargetSpotCapacity and TargetOnDemandCapacity should be greater than 0. For a master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and its value must be 1. 
+     */
+    TargetOnDemandCapacity?: WholeNumber;
+    /**
+     * The target capacity of Spot units for the instance fleet, which determines how many Spot instances to provision. When the instance fleet launches, Amazon EMR tries to provision Spot instances as specified by InstanceTypeConfig. Each instance configuration has a specified WeightedCapacity. When a Spot instance is provisioned, the WeightedCapacity units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a WeightedCapacity of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.  If not specified or set to 0, only On-Demand instances are provisioned for the instance fleet. At least one of TargetSpotCapacity and TargetOnDemandCapacity should be greater than 0. For a master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and its value must be 1. 
+     */
+    TargetSpotCapacity?: WholeNumber;
+    /**
+     * The instance type configurations that define the EC2 instances in the instance fleet.
+     */
+    InstanceTypeConfigs?: InstanceTypeConfigList;
+    /**
+     * The launch specification for the instance fleet.
+     */
+    LaunchSpecifications?: InstanceFleetProvisioningSpecifications;
+  }
+  export type InstanceFleetConfigList = InstanceFleetConfig[];
+  export type InstanceFleetId = string;
+  export type InstanceFleetList = InstanceFleet[];
+  export interface InstanceFleetModifyConfig {
+    /**
+     * A unique identifier for the instance fleet.
+     */
+    InstanceFleetId: InstanceFleetId;
+    /**
+     * The target capacity of On-Demand units for the instance fleet. For more information see InstanceFleetConfig$TargetOnDemandCapacity.
+     */
+    TargetOnDemandCapacity?: WholeNumber;
+    /**
+     * The target capacity of Spot units for the instance fleet. For more information, see InstanceFleetConfig$TargetSpotCapacity.
+     */
+    TargetSpotCapacity?: WholeNumber;
+  }
+  export interface InstanceFleetProvisioningSpecifications {
+    /**
+     * The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.
+     */
+    SpotSpecification: SpotProvisioningSpecification;
+  }
+  export type InstanceFleetState = "PROVISIONING"|"BOOTSTRAPPING"|"RUNNING"|"RESIZING"|"SUSPENDED"|"TERMINATING"|"TERMINATED"|string;
+  export interface InstanceFleetStateChangeReason {
+    /**
+     * A code corresponding to the reason the state change occurred.
+     */
+    Code?: InstanceFleetStateChangeReasonCode;
+    /**
+     * An explanatory message.
+     */
+    Message?: String;
+  }
+  export type InstanceFleetStateChangeReasonCode = "INTERNAL_ERROR"|"VALIDATION_ERROR"|"INSTANCE_FAILURE"|"CLUSTER_TERMINATED"|string;
+  export interface InstanceFleetStatus {
+    /**
+     * A code representing the instance fleet status.
+     */
+    State?: InstanceFleetState;
+    /**
+     * Provides status change reason details for the instance fleet.
+     */
+    StateChangeReason?: InstanceFleetStateChangeReason;
+    /**
+     * Provides historical timestamps for the instance fleet, including the time of creation, the time it became ready to run jobs, and the time of termination.
+     */
+    Timeline?: InstanceFleetTimeline;
+  }
+  export interface InstanceFleetTimeline {
+    /**
+     * The time and date the instance fleet was created.
+     */
+    CreationDateTime?: _Date;
+    /**
+     * The time and date the instance fleet was ready to run jobs.
+     */
+    ReadyDateTime?: _Date;
+    /**
+     * The time and date the instance fleet terminated.
+     */
+    EndDateTime?: _Date;
+  }
+  export type InstanceFleetType = "MASTER"|"CORE"|"TASK"|string;
   export interface InstanceGroup {
     /**
      * The identifier of the instance group.
@@ -1144,6 +1362,64 @@ declare namespace EMR {
     EndDateTime?: _Date;
   }
   export type InstanceType = string;
+  export interface InstanceTypeConfig {
+    /**
+     * An EC2 instance type, such as m3.xlarge. 
+     */
+    InstanceType: InstanceType;
+    /**
+     * The number of units that a provisioned instance of this type provides toward fulfilling the target capacities defined in InstanceFleetConfig. This value is 1 for a master instance fleet, and must be greater than 0 for core and task instance fleets. 
+     */
+    WeightedCapacity?: WholeNumber;
+    /**
+     * The bid price for each EC2 Spot instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%. 
+     */
+    BidPrice?: XmlStringMaxLen256;
+    /**
+     * The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by InstanceType. Expressed as a number between 0 and 1000 (for example, 20 specifies 20%). If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+     */
+    BidPriceAsPercentageOfOnDemandPrice?: NonNegativeDouble;
+    /**
+     * The configuration of Amazon Elastic Block Storage (EBS) attached to each instance as defined by InstanceType. 
+     */
+    EbsConfiguration?: EbsConfiguration;
+    /**
+     * A configuration classification that applies when provisioning cluster instances, which can include configurations for applications and software that run on the cluster.
+     */
+    Configurations?: ConfigurationList;
+  }
+  export type InstanceTypeConfigList = InstanceTypeConfig[];
+  export interface InstanceTypeSpecification {
+    /**
+     * The EC2 instance type, for example m3.xlarge.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The number of units that a provisioned instance of this type provides toward fulfilling the target capacities defined in InstanceFleetConfig. Capacity values represent performance characteristics such as vCPUs, memory, or I/O. If not specified, the default value is 1.
+     */
+    WeightedCapacity?: WholeNumber;
+    /**
+     * The bid price for each EC2 Spot instance type as defined by InstanceType. Expressed in USD.
+     */
+    BidPrice?: XmlStringMaxLen256;
+    /**
+     * The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by InstanceType. Expressed as a number (for example, 20 specifies 20%).
+     */
+    BidPriceAsPercentageOfOnDemandPrice?: NonNegativeDouble;
+    /**
+     * A configuration classification that applies when provisioning cluster instances, which can include configurations for applications and software bundled with Amazon EMR.
+     */
+    Configurations?: ConfigurationList;
+    /**
+     * The configuration of Amazon Elastic Block Storage (EBS) attached to each instance as defined by InstanceType.
+     */
+    EbsBlockDevices?: EbsBlockDeviceList;
+    /**
+     * Evaluates to TRUE when the specified InstanceType is EBS-optimized.
+     */
+    EbsOptimized?: BooleanObject;
+  }
+  export type InstanceTypeSpecificationList = InstanceTypeSpecification[];
   export type Integer = number;
   export interface JobFlowDetail {
     /**
@@ -1183,7 +1459,7 @@ declare namespace EMR {
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     * Specifies whether the job flow is visible to all IAM users of the AWS account associated with the job flow. If this value is set to true, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the job flow. If it is set to false, only the IAM user that created the job flow can view and manage it. This value can be changed using the SetVisibleToAllUsers action.
+     * Specifies whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to true, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to false, only the IAM user that created the cluster can view and manage it. This value can be changed using the SetVisibleToAllUsers action.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -1242,37 +1518,45 @@ declare namespace EMR {
      */
     SlaveInstanceType?: InstanceType;
     /**
-     * The number of EC2 instances used to execute the job flow.
+     * The number of EC2 instances in the cluster.
      */
     InstanceCount?: Integer;
     /**
-     * Configuration for the job flow's instance groups.
+     * Configuration for the instance groups in a cluster.
      */
     InstanceGroups?: InstanceGroupConfigList;
+    /**
+     *  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.  Describes the EC2 instances and instance configurations for clusters that use the instance fleet configuration.
+     */
+    InstanceFleets?: InstanceFleetConfigList;
     /**
      * The name of the EC2 key pair that can be used to ssh to the master node as the user called "hadoop."
      */
     Ec2KeyName?: XmlStringMaxLen256;
     /**
-     * The Availability Zone the job flow will run in.
+     * The Availability Zone in which the cluster runs.
      */
     Placement?: PlacementType;
     /**
-     * Specifies whether the job flow should be kept alive after completing all steps.
+     * Specifies whether the cluster should remain available after completing all steps.
      */
     KeepJobFlowAliveWhenNoSteps?: Boolean;
     /**
-     * Specifies whether to lock the job flow to prevent the Amazon EC2 instances from being terminated by API call, user intervention, or in the event of a job flow error.
+     * Specifies whether to lock the cluster to prevent the Amazon EC2 instances from being terminated by API call, user intervention, or in the event of a job-flow error.
      */
     TerminationProtected?: Boolean;
     /**
-     * The Hadoop version for the job flow. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
+     * The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
      */
     HadoopVersion?: XmlStringMaxLen256;
     /**
-     * To launch the job flow in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal Amazon Web Services cloud, outside of an Amazon VPC. Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a Amazon VPC.
+     * Applies to clusters that use the uniform instance group configuration. To launch the cluster in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where you want the cluster to launch. If you do not specify this value, the cluster launches in the normal Amazon Web Services cloud, outside of an Amazon VPC, if the account launching the cluster supports EC2 Classic networks in the region where the cluster launches. Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus you cannot specify the cc1.4xlarge instance type for clusters launched in an Amazon VPC.
      */
     Ec2SubnetId?: XmlStringMaxLen256;
+    /**
+     * Applies to clusters that use the instance fleet configuration. When multiple EC2 subnet IDs are specified, Amazon EMR evaluates them and launches instances in the optimal subnet.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. 
+     */
+    Ec2SubnetIds?: XmlStringMaxLen256List;
     /**
      * The identifier of the Amazon EC2 security group for the master node.
      */
@@ -1316,35 +1600,35 @@ declare namespace EMR {
      */
     InstanceCount: Integer;
     /**
-     * Details about the job flow's instance groups.
+     * Details about the instance groups in a cluster.
      */
     InstanceGroups?: InstanceGroupDetailList;
     /**
-     * An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented one time for every hour that an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
+     * An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour that an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
      */
     NormalizedInstanceHours?: Integer;
     /**
-     * The name of an Amazon EC2 key pair that can be used to ssh to the master node of job flow.
+     * The name of an Amazon EC2 key pair that can be used to ssh to the master node.
      */
     Ec2KeyName?: XmlStringMaxLen256;
     /**
-     * For job flows launched within Amazon Virtual Private Cloud, this value specifies the identifier of the subnet where the job flow was launched.
+     * For clusters launched within Amazon Virtual Private Cloud, this is the identifier of the subnet where the cluster was launched.
      */
     Ec2SubnetId?: XmlStringMaxLen256;
     /**
-     * The Amazon EC2 Availability Zone for the job flow.
+     * The Amazon EC2 Availability Zone for the cluster.
      */
     Placement?: PlacementType;
     /**
-     * Specifies whether the job flow should terminate after completing all steps.
+     * Specifies whether the cluster should remain available after completing all steps.
      */
     KeepJobFlowAliveWhenNoSteps?: Boolean;
     /**
-     * Specifies whether the Amazon EC2 instances in the cluster are protected from termination by API calls, user intervention, or in the event of a job flow error.
+     * Specifies whether the Amazon EC2 instances in the cluster are protected from termination by API calls, user intervention, or in the event of a job-flow error.
      */
     TerminationProtected?: Boolean;
     /**
-     * The Hadoop version for the job flow.
+     * The Hadoop version for the cluster.
      */
     HadoopVersion?: XmlStringMaxLen256;
   }
@@ -1407,6 +1691,26 @@ declare namespace EMR {
      */
     Marker?: Marker;
   }
+  export interface ListInstanceFleetsInput {
+    /**
+     * The unique identifier of the cluster.
+     */
+    ClusterId: ClusterId;
+    /**
+     * The pagination token that indicates the next set of results to retrieve.
+     */
+    Marker?: Marker;
+  }
+  export interface ListInstanceFleetsOutput {
+    /**
+     * The list of instance fleets for the cluster and given filters.
+     */
+    InstanceFleets?: InstanceFleetList;
+    /**
+     * The pagination token that indicates the next set of results to retrieve.
+     */
+    Marker?: Marker;
+  }
   export interface ListInstanceGroupsInput {
     /**
      * The identifier of the cluster for which to list the instance groups.
@@ -1440,6 +1744,14 @@ declare namespace EMR {
      * The type of instance group for which to list the instances.
      */
     InstanceGroupTypes?: InstanceGroupTypeList;
+    /**
+     * The unique identifier of the instance fleet.
+     */
+    InstanceFleetId?: InstanceFleetId;
+    /**
+     * The node type of the instance fleet. For example MASTER, CORE, or TASK.
+     */
+    InstanceFleetType?: InstanceFleetType;
     /**
      * A list of instance states that will filter the instances returned with this request.
      */
@@ -1516,6 +1828,16 @@ declare namespace EMR {
     Value?: String;
   }
   export type MetricDimensionList = MetricDimension[];
+  export interface ModifyInstanceFleetInput {
+    /**
+     * The unique identifier of the cluster.
+     */
+    ClusterId: ClusterId;
+    /**
+     * The unique identifier of the instance fleet.
+     */
+    InstanceFleet: InstanceFleetModifyConfig;
+  }
   export interface ModifyInstanceGroupsInput {
     /**
      * The ID of the cluster to which the instance group belongs.
@@ -1530,9 +1852,13 @@ declare namespace EMR {
   export type NonNegativeDouble = number;
   export interface PlacementType {
     /**
-     * The Amazon EC2 Availability Zone for the job flow.
+     * The Amazon EC2 Availability Zone for the cluster. AvailabilityZone is used for uniform instance groups, while AvailabilityZones (plural) is used for instance fleets.
      */
-    AvailabilityZone: XmlString;
+    AvailabilityZone?: XmlString;
+    /**
+     * When multiple Availability Zones are specified, Amazon EMR evaluates them and launches instances in the optimal Availability Zone. AvailabilityZones is used for instance fleets, while AvailabilityZone (singular) is used for uniform instance groups.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. 
+     */
+    AvailabilityZones?: XmlStringMaxLen256List;
   }
   export interface PutAutoScalingPolicyInput {
     /**
@@ -1609,23 +1935,23 @@ declare namespace EMR {
      */
     ReleaseLabel?: XmlStringMaxLen256;
     /**
-     * A specification of the number and type of Amazon EC2 instances on which to run the job flow.
+     * A specification of the number and type of Amazon EC2 instances.
      */
     Instances: JobFlowInstancesConfig;
     /**
-     * A list of steps to be executed by the job flow.
+     * A list of steps to run.
      */
     Steps?: StepConfigList;
     /**
-     * A list of bootstrap actions that will be run before Hadoop is started on the cluster nodes.
+     * A list of bootstrap actions to run before Hadoop starts on the cluster nodes.
      */
     BootstrapActions?: BootstrapActionConfigList;
     /**
-     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.  A list of strings that indicates third-party software to use with the job flow. For more information, see Use Third Party Applications with Amazon EMR. Currently supported values are:   "mapr-m3" - launch the job flow using MapR M3 Edition.   "mapr-m5" - launch the job flow using MapR M5 Edition.  
+     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.  A list of strings that indicates third-party software to use. For more information, see Use Third Party Applications with Amazon EMR. Currently supported values are:   "mapr-m3" - launch the job flow using MapR M3 Edition.   "mapr-m5" - launch the job flow using MapR M5 Edition.  
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.  A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see Launch a Job Flow on the MapR Distribution for Hadoop. Currently supported values are:   "mapr-m3" - launch the cluster using MapR M3 Edition.   "mapr-m5" - launch the cluster using MapR M5 Edition.   "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.   "mapr-m7" - launch the cluster using MapR M7 Edition.   "hunk" - launch the cluster with the Hunk Big Data Analtics Platform.   "hue"- launch the cluster with Hue installed.   "spark" - launch the cluster with Apache Spark installed.   "ganglia" - launch the cluster with the Ganglia Monitoring System installed.  
+     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.  A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the Amazon EMR Developer Guide. Supported values are:   "mapr-m3" - launch the cluster using MapR M3 Edition.   "mapr-m5" - launch the cluster using MapR M5 Edition.   "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.   "mapr-m7" - launch the cluster using MapR M7 Edition.   "hunk" - launch the cluster with the Hunk Big Data Analtics Platform.   "hue"- launch the cluster with Hue installed.   "spark" - launch the cluster with Apache Spark installed.   "ganglia" - launch the cluster with the Ganglia Monitoring System installed.  
      */
     NewSupportedProducts?: NewSupportedProductsList;
     /**
@@ -1637,7 +1963,7 @@ declare namespace EMR {
      */
     Configurations?: ConfigurationList;
     /**
-     * Whether the job flow is visible to all IAM users of the AWS account associated with the job flow. If this value is set to true, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the job flow. If it is set to false, only the IAM user that created the job flow can view and manage it.
+     * Whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to true, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to false, only the IAM user that created the cluster can view and manage it.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -1741,11 +2067,11 @@ declare namespace EMR {
   export type SecurityGroupsList = XmlStringMaxLen256[];
   export interface SetTerminationProtectionInput {
     /**
-     *  A list of strings that uniquely identify the job flows to protect. This identifier is returned by RunJobFlow and can also be obtained from DescribeJobFlows . 
+     *  A list of strings that uniquely identify the clusters to protect. This identifier is returned by RunJobFlow and can also be obtained from DescribeJobFlows . 
      */
     JobFlowIds: XmlStringList;
     /**
-     * A Boolean that indicates whether to protect the job flow and prevent the Amazon EC2 instances in the cluster from shutting down due to API calls, user intervention, or job-flow error.
+     * A Boolean that indicates whether to protect the cluster and prevent the Amazon EC2 instances in the cluster from shutting down due to API calls, user intervention, or job-flow error.
      */
     TerminationProtected: Boolean;
   }
@@ -1755,7 +2081,7 @@ declare namespace EMR {
      */
     JobFlowIds: XmlStringList;
     /**
-     * Whether the specified job flows are visible to all IAM users of the AWS account associated with the job flow. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the job flows. If it is set to False, only the IAM user that created a job flow can view and manage it.
+     * Whether the specified clusters are visible to all IAM users of the AWS account associated with the cluster. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the clusters. If it is set to False, only the IAM user that created a cluster can view and manage it.
      */
     VisibleToAllUsers: Boolean;
   }
@@ -1771,7 +2097,7 @@ declare namespace EMR {
   }
   export interface SimpleScalingPolicyConfiguration {
     /**
-     * The way in which EC2 instances are added (if ScalingAdjustment is a positive number) or terminated (if ScalingAdjustment is a negative number) each time the scaling activity is triggered. CHANGE_IN_CAPACITY is the default. CHANGE_IN_CAPACITY indicates that the EC2 instance count increments or decrements by ScalingAdjustment, which should be expressed as an integer. PERCENT_CHANGE_IN_CAPACITY indicates the instance count increments or decrements by the percentage specified by ScalingAdjustment, which should be expressed as a decimal, for example, 0.20 indicates an increase in 20% increments of cluster capacity. EXACT_CAPACITY indicates the scaling activity results in an instance group with the number of EC2 instances specified by ScalingAdjustment, which should be expressed as a positive integer.
+     * The way in which EC2 instances are added (if ScalingAdjustment is a positive number) or terminated (if ScalingAdjustment is a negative number) each time the scaling activity is triggered. CHANGE_IN_CAPACITY is the default. CHANGE_IN_CAPACITY indicates that the EC2 instance count increments or decrements by ScalingAdjustment, which should be expressed as an integer. PERCENT_CHANGE_IN_CAPACITY indicates the instance count increments or decrements by the percentage specified by ScalingAdjustment, which should be expressed as a decimal. For example, 0.20 indicates an increase in 20% increments of cluster capacity. EXACT_CAPACITY indicates the scaling activity results in an instance group with the number of EC2 instances specified by ScalingAdjustment, which should be expressed as a positive integer.
      */
     AdjustmentType?: AdjustmentType;
     /**
@@ -1783,6 +2109,21 @@ declare namespace EMR {
      */
     CoolDown?: Integer;
   }
+  export interface SpotProvisioningSpecification {
+    /**
+     * The spot provisioning timeout period in minutes. If Spot instances are not provisioned within this time period, the TimeOutAction is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.
+     */
+    TimeoutDurationMinutes: WholeNumber;
+    /**
+     * The action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND to fulfill the remaining capacity.
+     */
+    TimeoutAction: SpotProvisioningTimeoutAction;
+    /**
+     * The defined duration for Spot instances (also known as Spot blocks) in minutes. When specified, the Spot instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates. 
+     */
+    BlockDurationMinutes?: WholeNumber;
+  }
+  export type SpotProvisioningTimeoutAction = "SWITCH_TO_ON_DEMAND"|"TERMINATE_CLUSTER"|string;
   export type Statistic = "SAMPLE_COUNT"|"AVERAGE"|"SUM"|"MINIMUM"|"MAXIMUM"|string;
   export interface Step {
     /**
@@ -1808,15 +2149,15 @@ declare namespace EMR {
   }
   export interface StepConfig {
     /**
-     * The name of the job flow step.
+     * The name of the step.
      */
     Name: XmlStringMaxLen256;
     /**
-     * The action to take if the job flow step fails.
+     * The action to take if the step fails.
      */
     ActionOnFailure?: ActionOnFailure;
     /**
-     * The JAR file used for the job flow step.
+     * The JAR file used for the step.
      */
     HadoopJarStep: HadoopJarStepConfig;
   }
@@ -1835,7 +2176,7 @@ declare namespace EMR {
   export type StepExecutionState = "PENDING"|"RUNNING"|"CONTINUE"|"COMPLETED"|"CANCELLED"|"FAILED"|"INTERRUPTED"|string;
   export interface StepExecutionStatusDetail {
     /**
-     * The state of the job flow step.
+     * The state of the step.
      */
     State: StepExecutionState;
     /**
@@ -1971,9 +2312,11 @@ declare namespace EMR {
      */
     SizeInGB: Integer;
   }
+  export type WholeNumber = number;
   export type XmlString = string;
   export type XmlStringList = XmlString[];
   export type XmlStringMaxLen256 = string;
+  export type XmlStringMaxLen256List = XmlStringMaxLen256[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
