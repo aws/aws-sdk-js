@@ -122,7 +122,7 @@ export class Request<D, E> {
      * @param {string} event - httpHeaders: triggered when headers are sent by the remote server.
      * @param {function} listener - Callback to run when the headers are sent by the remote server.
      */
-    on(event: "httpHeaders", listener: (statusCode: number, headers: {[key: string]: string}, response: Response<D, E>) => void): Request<D, E>;
+    on(event: "httpHeaders", listener: (statusCode: number, headers: {[key: string]: string}, response: Response<D, E>, statusMessage: string) => void): Request<D, E>;
     /**
      * Adds a listener that is triggered when data is sent by the remote server.
      * 

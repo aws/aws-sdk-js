@@ -79,6 +79,7 @@ describe 'AWS.Protocol.Json', ->
   describe 'extractError', ->
     extractError = (body) ->
       response.httpResponse.statusCode = 500
+      response.httpResponse.statusMessage = 'Internal Server Error'
       response.httpResponse.body = new Buffer(body)
       svc.extractError(response)
 
@@ -100,6 +101,14 @@ describe 'AWS.Protocol.Json', ->
       expect(response.error.code).to.equal('UnknownError')
       expect(response.error.statusCode).to.equal(500)
       expect(response.error.message).to.equal('500')
+      expect(response.data).to.equal(null)
+
+    it 'returns the status code when the body is not valid JSON', ->
+      extractError '<html><body><b>Http/1.1 Service Unavailable</b></body> </html>'
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.code).to.equal('UnknownError')
+      expect(response.error.statusCode).to.equal(500)
+      expect(response.error.message).to.equal('Internal Server Error')
       expect(response.data).to.equal(null)
 
     it 'returns UnknownError when the error type is not set', ->

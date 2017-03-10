@@ -86,7 +86,7 @@ describe 'AWS.util.date', ->
   describe 'getDate', ->
     it 'should return current date by default', ->
       now = {}
-      obj = if AWS.util.isNode() then GLOBAL else window
+      obj = if AWS.util.isNode() then global else window
       helpers.spyOn(obj, 'Date').andCallFake -> now
       expect(util.getDate()).to.equal(now)
 
@@ -95,7 +95,7 @@ describe 'AWS.util.date', ->
 
       beforeEach ->
         [date, mocked, config] = [Date, false, AWS.config]
-        obj = if AWS.util.isNode() then GLOBAL else window
+        obj = if AWS.util.isNode() then global else window
         helpers.spyOn(obj, 'Date').andCallFake (t) ->
           if mocked
             new date(t)

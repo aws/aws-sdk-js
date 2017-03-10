@@ -23,6 +23,10 @@ export class HttpResponse {
      */
     statusCode: number;
     /**
+     * The HTTP status message of the response (e.g., 'Bad Request', 'Not Found')
+     */
+    statusMessage: string;
+    /**
      * Whether this response is being streamed at a low-level.
      */
     streaming: boolean;
