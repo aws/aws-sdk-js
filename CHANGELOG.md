@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.27.0-->
+<!--LATEST=2.28.0-->
 <!--ENTRYINSERT-->
+
+## 2.28.0
+* feature: DeviceFarm: Network shaping allows users to simulate network connections and conditions while testing their Android, iOS, and web apps with AWS Device Farm.
+* feature: CloudWatchEvents: This update extends Target Data Type for configuring Target behavior during invocation.
 
 ## 2.27.0
 * bugfix: TemporaryCredentials: Ensure master credentials are not expired before using them to refresh temporary credentials

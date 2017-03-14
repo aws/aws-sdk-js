@@ -12,59 +12,59 @@ declare class CloudWatchEvents extends Service {
   constructor(options?: CloudWatchEvents.Types.ClientConfiguration)
   config: Config & CloudWatchEvents.Types.ClientConfiguration;
   /**
-   * Deletes a rule. You must remove all targets from a rule using RemoveTargets before you can delete the rule.  Note: When you delete a rule, incoming events might still continue to match to the deleted rule. Please allow a short period of time for changes to take effect. 
+   * Deletes the specified rule. You must remove all targets from a rule using RemoveTargets before you can delete the rule. When you delete a rule, incoming events might continue to match to the deleted rule. Please allow a short period of time for changes to take effect.
    */
   deleteRule(params: CloudWatchEvents.Types.DeleteRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a rule. You must remove all targets from a rule using RemoveTargets before you can delete the rule.  Note: When you delete a rule, incoming events might still continue to match to the deleted rule. Please allow a short period of time for changes to take effect. 
+   * Deletes the specified rule. You must remove all targets from a rule using RemoveTargets before you can delete the rule. When you delete a rule, incoming events might continue to match to the deleted rule. Please allow a short period of time for changes to take effect.
    */
   deleteRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describes the details of the specified rule.
+   * Describes the specified rule.
    */
   describeRule(params: CloudWatchEvents.Types.DescribeRuleRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribeRuleResponse) => void): Request<CloudWatchEvents.Types.DescribeRuleResponse, AWSError>;
   /**
-   * Describes the details of the specified rule.
+   * Describes the specified rule.
    */
   describeRule(callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribeRuleResponse) => void): Request<CloudWatchEvents.Types.DescribeRuleResponse, AWSError>;
   /**
-   * Disables a rule. A disabled rule won't match any events, and won't self-trigger if it has a schedule expression.  Note: When you disable a rule, incoming events might still continue to match to the disabled rule. Please allow a short period of time for changes to take effect. 
+   * Disables the specified rule. A disabled rule won't match any events, and won't self-trigger if it has a schedule expression. When you disable a rule, incoming events might continue to match to the disabled rule. Please allow a short period of time for changes to take effect.
    */
   disableRule(params: CloudWatchEvents.Types.DisableRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disables a rule. A disabled rule won't match any events, and won't self-trigger if it has a schedule expression.  Note: When you disable a rule, incoming events might still continue to match to the disabled rule. Please allow a short period of time for changes to take effect. 
+   * Disables the specified rule. A disabled rule won't match any events, and won't self-trigger if it has a schedule expression. When you disable a rule, incoming events might continue to match to the disabled rule. Please allow a short period of time for changes to take effect.
    */
   disableRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables a rule. If the rule does not exist, the operation fails.  Note: When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Please allow a short period of time for changes to take effect. 
+   * Enables the specified rule. If the rule does not exist, the operation fails. When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Please allow a short period of time for changes to take effect.
    */
   enableRule(params: CloudWatchEvents.Types.EnableRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables a rule. If the rule does not exist, the operation fails.  Note: When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Please allow a short period of time for changes to take effect. 
+   * Enables the specified rule. If the rule does not exist, the operation fails. When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Please allow a short period of time for changes to take effect.
    */
   enableRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Lists the names of the rules that the given target is put to. You can see which of the rules in Amazon CloudWatch Events can invoke a specific target in your account. If you have more rules in your account than the given limit, the results will be paginated. In that case, use the next token returned in the response and repeat ListRulesByTarget until the NextToken in the response is returned as null.
+   * Lists the rules for the specified target. You can see which of the rules in Amazon CloudWatch Events can invoke a specific target in your account.
    */
   listRuleNamesByTarget(params: CloudWatchEvents.Types.ListRuleNamesByTargetRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.ListRuleNamesByTargetResponse) => void): Request<CloudWatchEvents.Types.ListRuleNamesByTargetResponse, AWSError>;
   /**
-   * Lists the names of the rules that the given target is put to. You can see which of the rules in Amazon CloudWatch Events can invoke a specific target in your account. If you have more rules in your account than the given limit, the results will be paginated. In that case, use the next token returned in the response and repeat ListRulesByTarget until the NextToken in the response is returned as null.
+   * Lists the rules for the specified target. You can see which of the rules in Amazon CloudWatch Events can invoke a specific target in your account.
    */
   listRuleNamesByTarget(callback?: (err: AWSError, data: CloudWatchEvents.Types.ListRuleNamesByTargetResponse) => void): Request<CloudWatchEvents.Types.ListRuleNamesByTargetResponse, AWSError>;
   /**
-   * Lists the Amazon CloudWatch Events rules in your account. You can either list all the rules or you can provide a prefix to match to the rule names. If you have more rules in your account than the given limit, the results will be paginated. In that case, use the next token returned in the response and repeat ListRules until the NextToken in the response is returned as null.
+   * Lists your Amazon CloudWatch Events rules. You can either list all the rules or you can provide a prefix to match to the rule names.
    */
   listRules(params: CloudWatchEvents.Types.ListRulesRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.ListRulesResponse) => void): Request<CloudWatchEvents.Types.ListRulesResponse, AWSError>;
   /**
-   * Lists the Amazon CloudWatch Events rules in your account. You can either list all the rules or you can provide a prefix to match to the rule names. If you have more rules in your account than the given limit, the results will be paginated. In that case, use the next token returned in the response and repeat ListRules until the NextToken in the response is returned as null.
+   * Lists your Amazon CloudWatch Events rules. You can either list all the rules or you can provide a prefix to match to the rule names.
    */
   listRules(callback?: (err: AWSError, data: CloudWatchEvents.Types.ListRulesResponse) => void): Request<CloudWatchEvents.Types.ListRulesResponse, AWSError>;
   /**
-   * Lists of targets assigned to the rule.
+   * Lists the targets assigned to the specified rule.
    */
   listTargetsByRule(params: CloudWatchEvents.Types.ListTargetsByRuleRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.ListTargetsByRuleResponse) => void): Request<CloudWatchEvents.Types.ListTargetsByRuleResponse, AWSError>;
   /**
-   * Lists of targets assigned to the rule.
+   * Lists the targets assigned to the specified rule.
    */
   listTargetsByRule(callback?: (err: AWSError, data: CloudWatchEvents.Types.ListTargetsByRuleResponse) => void): Request<CloudWatchEvents.Types.ListTargetsByRuleResponse, AWSError>;
   /**
@@ -76,59 +76,60 @@ declare class CloudWatchEvents extends Service {
    */
   putEvents(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutEventsResponse) => void): Request<CloudWatchEvents.Types.PutEventsResponse, AWSError>;
   /**
-   * Creates or updates a rule. Rules are enabled by default, or based on value of the State parameter. You can disable a rule using DisableRule.  Note: When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Please allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule will trigger on matching events as well as on a schedule.  Note: Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. 
+   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Please allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
    */
   putRule(params: CloudWatchEvents.Types.PutRuleRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.PutRuleResponse) => void): Request<CloudWatchEvents.Types.PutRuleResponse, AWSError>;
   /**
-   * Creates or updates a rule. Rules are enabled by default, or based on value of the State parameter. You can disable a rule using DisableRule.  Note: When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Please allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule will trigger on matching events as well as on a schedule.  Note: Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. 
+   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Please allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
    */
   putRule(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutRuleResponse) => void): Request<CloudWatchEvents.Types.PutRuleResponse, AWSError>;
   /**
-   * Adds target(s) to a rule. Targets are the resources that can be invoked when a rule is triggered. For example, AWS Lambda functions, Amazon Kinesis streams, and built-in targets. Updates the target(s) if they are already associated with the role. In other words, if there is already a target with the given target ID, then the target associated with that ID is updated. In order to be able to make API calls against the resources you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For Amazon Kinesis streams, CloudWatch Events relies on IAM roles. For more information, see Permissions for Sending Events to Targets in the Amazon CloudWatch Developer Guide. Input and InputPath are mutually-exclusive and optional parameters of a target. When a rule is triggered due to a matched event, if for a target:  Neither Input nor InputPath is specified, then the entire event is passed to the target in JSON form.  InputPath is specified in the form of JSONPath (e.g. $.detail), then only the part of the event specified in the path is passed to the target (e.g. only the detail part of the event is passed).   Input is specified in the form of a valid JSON, then the matched event is overridden with this constant.   Note: When you add targets to a rule, when the associated rule triggers, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect. 
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. Example targets include EC2 instances, AWS Lambda functions, Amazon Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines, and built-in targets. Note that creating rules with built-in targets is supported only in the AWS Management Console. For some target types, PutTargets provides target-specific parameters. If the target is an Amazon Kinesis stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For EC2 instances, Amazon Kinesis streams, and AWS Step Functions state machines, CloudWatch Events relies on IAM roles that you specify in the RoleARN argument in PutTarget. For more information, see Authentication and Access Control in the Amazon CloudWatch Events User Guide.  Input, InputPath and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON form (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).    If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect.
    */
   putTargets(params: CloudWatchEvents.Types.PutTargetsRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.PutTargetsResponse) => void): Request<CloudWatchEvents.Types.PutTargetsResponse, AWSError>;
   /**
-   * Adds target(s) to a rule. Targets are the resources that can be invoked when a rule is triggered. For example, AWS Lambda functions, Amazon Kinesis streams, and built-in targets. Updates the target(s) if they are already associated with the role. In other words, if there is already a target with the given target ID, then the target associated with that ID is updated. In order to be able to make API calls against the resources you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For Amazon Kinesis streams, CloudWatch Events relies on IAM roles. For more information, see Permissions for Sending Events to Targets in the Amazon CloudWatch Developer Guide. Input and InputPath are mutually-exclusive and optional parameters of a target. When a rule is triggered due to a matched event, if for a target:  Neither Input nor InputPath is specified, then the entire event is passed to the target in JSON form.  InputPath is specified in the form of JSONPath (e.g. $.detail), then only the part of the event specified in the path is passed to the target (e.g. only the detail part of the event is passed).   Input is specified in the form of a valid JSON, then the matched event is overridden with this constant.   Note: When you add targets to a rule, when the associated rule triggers, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect. 
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. Example targets include EC2 instances, AWS Lambda functions, Amazon Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines, and built-in targets. Note that creating rules with built-in targets is supported only in the AWS Management Console. For some target types, PutTargets provides target-specific parameters. If the target is an Amazon Kinesis stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For EC2 instances, Amazon Kinesis streams, and AWS Step Functions state machines, CloudWatch Events relies on IAM roles that you specify in the RoleARN argument in PutTarget. For more information, see Authentication and Access Control in the Amazon CloudWatch Events User Guide.  Input, InputPath and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON form (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).    If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect.
    */
   putTargets(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutTargetsResponse) => void): Request<CloudWatchEvents.Types.PutTargetsResponse, AWSError>;
   /**
-   * Removes target(s) from a rule so that when the rule is triggered, those targets will no longer be invoked.  Note: When you remove a target, when the associated rule triggers, removed targets might still continue to be invoked. Please allow a short period of time for changes to take effect. 
+   * Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked. When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Please allow a short period of time for changes to take effect.
    */
   removeTargets(params: CloudWatchEvents.Types.RemoveTargetsRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.RemoveTargetsResponse) => void): Request<CloudWatchEvents.Types.RemoveTargetsResponse, AWSError>;
   /**
-   * Removes target(s) from a rule so that when the rule is triggered, those targets will no longer be invoked.  Note: When you remove a target, when the associated rule triggers, removed targets might still continue to be invoked. Please allow a short period of time for changes to take effect. 
+   * Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked. When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Please allow a short period of time for changes to take effect.
    */
   removeTargets(callback?: (err: AWSError, data: CloudWatchEvents.Types.RemoveTargetsResponse) => void): Request<CloudWatchEvents.Types.RemoveTargetsResponse, AWSError>;
   /**
-   * Tests whether an event pattern matches the provided event.  Note: Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. 
+   * Tests whether the specified event pattern matches the provided event. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
    */
   testEventPattern(params: CloudWatchEvents.Types.TestEventPatternRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.TestEventPatternResponse) => void): Request<CloudWatchEvents.Types.TestEventPatternResponse, AWSError>;
   /**
-   * Tests whether an event pattern matches the provided event.  Note: Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. 
+   * Tests whether the specified event pattern matches the provided event. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
    */
   testEventPattern(callback?: (err: AWSError, data: CloudWatchEvents.Types.TestEventPatternResponse) => void): Request<CloudWatchEvents.Types.TestEventPatternResponse, AWSError>;
 }
 declare namespace CloudWatchEvents {
+  export type Arn = string;
   export type Boolean = boolean;
   export interface DeleteRuleRequest {
     /**
-     * The name of the rule to be deleted.
+     * The name of the rule.
      */
     Name: RuleName;
   }
   export interface DescribeRuleRequest {
     /**
-     * The name of the rule you want to describe details for.
+     * The name of the rule.
      */
     Name: RuleName;
   }
   export interface DescribeRuleResponse {
     /**
-     * The rule's name.
+     * The name of the rule.
      */
     Name?: RuleName;
     /**
-     * The Amazon Resource Name (ARN) associated with the rule.
+     * The Amazon Resource Name (ARN) of the rule.
      */
     Arn?: RuleArn;
     /**
@@ -144,7 +145,7 @@ declare namespace CloudWatchEvents {
      */
     State?: RuleState;
     /**
-     * The rule's description.
+     * The description of the rule.
      */
     Description?: RuleDescription;
     /**
@@ -154,13 +155,23 @@ declare namespace CloudWatchEvents {
   }
   export interface DisableRuleRequest {
     /**
-     * The name of the rule you want to disable.
+     * The name of the rule.
      */
     Name: RuleName;
   }
+  export interface EcsParameters {
+    /**
+     * The ARN of the task definition to use if the event target is an Amazon ECS cluster. 
+     */
+    TaskDefinitionArn: Arn;
+    /**
+     * The number of tasks to create based on the TaskDefinition. The default is one.
+     */
+    TaskCount?: LimitMin1;
+  }
   export interface EnableRuleRequest {
     /**
-     * The name of the rule that you want to enable.
+     * The name of the rule.
      */
     Name: RuleName;
   }
@@ -171,15 +182,33 @@ declare namespace CloudWatchEvents {
   export type EventResource = string;
   export type EventResourceList = EventResource[];
   export type EventTime = Date;
+  export interface InputTransformer {
+    /**
+     * Map of JSON paths to be extracted from the event. These are key-value pairs, where each value is a JSON path.
+     */
+    InputPathsMap?: TransformerPaths;
+    /**
+     * Input template where you can use the values of the keys from InputPathsMap to customize the data sent to the target.
+     */
+    InputTemplate: TransformerInput;
+  }
+  export type InputTransformerPathKey = string;
   export type Integer = number;
+  export interface KinesisParameters {
+    /**
+     * The JSON path to be extracted from the event and used as the partition key. For more information, see Amazon Kinesis Streams Key Concepts in the Amazon Kinesis Streams Developer Guide.
+     */
+    PartitionKeyPath: TargetPartitionKeyPath;
+  }
   export type LimitMax100 = number;
+  export type LimitMin1 = number;
   export interface ListRuleNamesByTargetRequest {
     /**
-     * The Amazon Resource Name (ARN) of the target resource that you want to list the rules for.
+     * The Amazon Resource Name (ARN) of the target resource.
      */
     TargetArn: TargetArn;
     /**
-     * The token returned by a previous call to indicate that there is more data available.
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
     /**
@@ -189,11 +218,11 @@ declare namespace CloudWatchEvents {
   }
   export interface ListRuleNamesByTargetResponse {
     /**
-     * List of rules names that can invoke the given target.
+     * The names of the rules that can invoke the given target.
      */
     RuleNames?: RuleNameList;
     /**
-     * Indicates that there are additional results to retrieve.
+     * Indicates whether there are additional results to retrieve. If there are no more results, the value is null.
      */
     NextToken?: NextToken;
   }
@@ -203,7 +232,7 @@ declare namespace CloudWatchEvents {
      */
     NamePrefix?: RuleName;
     /**
-     * The token returned by a previous call to indicate that there is more data available.
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
     /**
@@ -213,21 +242,21 @@ declare namespace CloudWatchEvents {
   }
   export interface ListRulesResponse {
     /**
-     * List of rules matching the specified criteria.
+     * The rules that match the specified criteria.
      */
     Rules?: RuleResponseList;
     /**
-     * Indicates that there are additional results to retrieve.
+     * Indicates whether there are additional results to retrieve. If there are no more results, the value is null.
      */
     NextToken?: NextToken;
   }
   export interface ListTargetsByRuleRequest {
     /**
-     * The name of the rule whose targets you want to list.
+     * The name of the rule.
      */
     Rule: RuleName;
     /**
-     * The token returned by a previous call to indicate that there is more data available.
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
     /**
@@ -237,11 +266,11 @@ declare namespace CloudWatchEvents {
   }
   export interface ListTargetsByRuleResponse {
     /**
-     * Lists the targets assigned to the rule.
+     * The targets assigned to the rule.
      */
     Targets?: TargetList;
     /**
-     * Indicates that there are additional results to retrieve.
+     * Indicates whether there are additional results to retrieve. If there are no more results, the value is null.
      */
     NextToken?: NextToken;
   }
@@ -254,7 +283,7 @@ declare namespace CloudWatchEvents {
   }
   export interface PutEventsRequestEntry {
     /**
-     * Timestamp of event, per RFC3339. If no timestamp is provided, the timestamp of the PutEvents call will be used.
+     * The timestamp of the event, per RFC3339. If no timestamp is provided, the timestamp of the PutEvents call is used.
      */
     Time?: EventTime;
     /**
@@ -270,7 +299,7 @@ declare namespace CloudWatchEvents {
      */
     DetailType?: String;
     /**
-     * In the JSON sense, an object containing fields, which may also contain nested sub-objects. No constraints are imposed on its contents.
+     * In the JSON sense, an object containing fields, which may also contain nested subobjects. No constraints are imposed on its contents.
      */
     Detail?: String;
   }
@@ -281,21 +310,21 @@ declare namespace CloudWatchEvents {
      */
     FailedEntryCount?: Integer;
     /**
-     * A list of successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry will have the event ID in it. If not, then the ErrorCode and ErrorMessage can be used to identify the problem with the entry.
+     * The successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry has the event ID in it. Otherwise, you can use the error code and error message to identify the problem with the entry.
      */
     Entries?: PutEventsResultEntryList;
   }
   export interface PutEventsResultEntry {
     /**
-     * The ID of the event submitted to Amazon CloudWatch Events.
+     * The ID of the event.
      */
     EventId?: EventId;
     /**
-     * The error code representing why the event submission failed on this entry.
+     * The error code that indicates why the event submission failed.
      */
     ErrorCode?: ErrorCode;
     /**
-     * The error message explaining why the event submission failed on this entry.
+     * The error message that explains why the event submission failed.
      */
     ErrorMessage?: ErrorMessage;
   }
@@ -328,17 +357,17 @@ declare namespace CloudWatchEvents {
   }
   export interface PutRuleResponse {
     /**
-     * The Amazon Resource Name (ARN) that identifies the rule.
+     * The Amazon Resource Name (ARN) of the rule.
      */
     RuleArn?: RuleArn;
   }
   export interface PutTargetsRequest {
     /**
-     * The name of the rule you want to add targets to.
+     * The name of the rule.
      */
     Rule: RuleName;
     /**
-     * List of targets you want to update or add to the rule.
+     * The targets to update or add to the rule.
      */
     Targets: TargetList;
   }
@@ -348,32 +377,32 @@ declare namespace CloudWatchEvents {
      */
     FailedEntryCount?: Integer;
     /**
-     * An array of failed target entries.
+     * The failed target entries.
      */
     FailedEntries?: PutTargetsResultEntryList;
   }
   export interface PutTargetsResultEntry {
     /**
-     * The ID of the target submitted to Amazon CloudWatch Events.
+     * The ID of the target.
      */
     TargetId?: TargetId;
     /**
-     * The error code representing why the target submission failed on this entry.
+     * The error code that indicates why the target addition failed.
      */
     ErrorCode?: ErrorCode;
     /**
-     * The error message explaining why the target submission failed on this entry.
+     * The error message that explains why the target addition failed.
      */
     ErrorMessage?: ErrorMessage;
   }
   export type PutTargetsResultEntryList = PutTargetsResultEntry[];
   export interface RemoveTargetsRequest {
     /**
-     * The name of the rule you want to remove targets from.
+     * The name of the rule.
      */
     Rule: RuleName;
     /**
-     * The list of target IDs to remove from the rule.
+     * The IDs of the targets to remove from the rule.
      */
     Ids: TargetIdList;
   }
@@ -383,21 +412,21 @@ declare namespace CloudWatchEvents {
      */
     FailedEntryCount?: Integer;
     /**
-     * An array of failed target entries.
+     * The failed target entries.
      */
     FailedEntries?: RemoveTargetsResultEntryList;
   }
   export interface RemoveTargetsResultEntry {
     /**
-     * The ID of the target requested to be removed by Amazon CloudWatch Events.
+     * The ID of the target.
      */
     TargetId?: TargetId;
     /**
-     * The error code representing why the target removal failed on this entry.
+     * The error code that indicates why the target removal failed.
      */
     ErrorCode?: ErrorCode;
     /**
-     * The error message explaining why the target removal failed on this entry.
+     * The error message that explains why the target removal failed.
      */
     ErrorMessage?: ErrorMessage;
   }
@@ -405,7 +434,7 @@ declare namespace CloudWatchEvents {
   export type RoleArn = string;
   export interface Rule {
     /**
-     * The rule's name.
+     * The name of the rule.
      */
     Name?: RuleName;
     /**
@@ -417,7 +446,7 @@ declare namespace CloudWatchEvents {
      */
     EventPattern?: EventPattern;
     /**
-     * The rule's state.
+     * The state of the rule.
      */
     State?: RuleState;
     /**
@@ -429,7 +458,7 @@ declare namespace CloudWatchEvents {
      */
     ScheduleExpression?: ScheduleExpression;
     /**
-     * The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
+     * The Amazon Resource Name (ARN) of the role that is used for target invocation.
      */
     RoleArn?: RoleArn;
   }
@@ -439,25 +468,65 @@ declare namespace CloudWatchEvents {
   export type RuleNameList = RuleName[];
   export type RuleResponseList = Rule[];
   export type RuleState = "ENABLED"|"DISABLED"|string;
+  export interface RunCommandParameters {
+    /**
+     * Currently, we support including only one RunCommandTarget block, which specifies either an array of InstanceIds or a tag.
+     */
+    RunCommandTargets: RunCommandTargets;
+  }
+  export interface RunCommandTarget {
+    /**
+     * Can be either tag: tag-key or InstanceIds.
+     */
+    Key: RunCommandTargetKey;
+    /**
+     * If Key is tag: tag-key, Values is a list of tag values. If Key is InstanceIds, Values is a list of Amazon EC2 instance IDs.
+     */
+    Values: RunCommandTargetValues;
+  }
+  export type RunCommandTargetKey = string;
+  export type RunCommandTargetValue = string;
+  export type RunCommandTargetValues = RunCommandTargetValue[];
+  export type RunCommandTargets = RunCommandTarget[];
   export type ScheduleExpression = string;
   export type String = string;
   export interface Target {
     /**
-     * The unique target assignment ID.
+     * The ID of the target.
      */
     Id: TargetId;
     /**
-     * The Amazon Resource Name (ARN) associated of the target.
+     * The Amazon Resource Name (ARN) of the target.
      */
     Arn: TargetArn;
     /**
-     * Valid JSON text passed to the target. For more information about JSON text, see The JavaScript Object Notation (JSON) Data Interchange Format.
+     * The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered. If one rule triggers multiple targets, you can use a different IAM role for each target.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. For more information, see The JavaScript Object Notation (JSON) Data Interchange Format.
      */
     Input?: TargetInput;
     /**
      * The value of the JSONPath that is used for extracting part of the matched event when passing it to the target. For more information about JSON paths, see JSONPath.
      */
     InputPath?: TargetInputPath;
+    /**
+     * Settings to enable you to provide custom input to a target based on certain event data. You can extract one or more key-value pairs from the event and then use that data to send customized input to the target.
+     */
+    InputTransformer?: InputTransformer;
+    /**
+     * The custom parameter you can use to control shard assignment, when the target is an Amazon Kinesis stream. If you do not include this parameter, the default is to use the eventId as the partition key.
+     */
+    KinesisParameters?: KinesisParameters;
+    /**
+     * Parameters used when you are using the rule to invoke Amazon EC2 Run Command.
+     */
+    RunCommandParameters?: RunCommandParameters;
+    /**
+     * Contains the Amazon ECS task definition and task count to be used, if the event target is an Amazon ECS task. For more information about Amazon ECS tasks, see Task Definitions  in the Amazon EC2 Container Service Developer Guide.
+     */
+    EcsParameters?: EcsParameters;
   }
   export type TargetArn = string;
   export type TargetId = string;
@@ -465,13 +534,14 @@ declare namespace CloudWatchEvents {
   export type TargetInput = string;
   export type TargetInputPath = string;
   export type TargetList = Target[];
+  export type TargetPartitionKeyPath = string;
   export interface TestEventPatternRequest {
     /**
-     * The event pattern you want to test.
+     * The event pattern.
      */
     EventPattern: EventPattern;
     /**
-     * The event in the JSON format to test against the event pattern.
+     * The event, in JSON format, to test against the event pattern.
      */
     Event: String;
   }
@@ -481,6 +551,8 @@ declare namespace CloudWatchEvents {
      */
     Result?: Boolean;
   }
+  export type TransformerInput = string;
+  export type TransformerPaths = {[key: string]: TargetInputPath};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

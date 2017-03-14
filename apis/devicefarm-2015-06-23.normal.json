@@ -27,6 +27,22 @@
       ],
       "documentation":"<p>Creates a device pool.</p>"
     },
+    "CreateNetworkProfile":{
+      "name":"CreateNetworkProfile",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateNetworkProfileRequest"},
+      "output":{"shape":"CreateNetworkProfileResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Creates a network profile.</p>"
+    },
     "CreateProject":{
       "name":"CreateProject",
       "http":{
@@ -90,6 +106,22 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.</p>"
+    },
+    "DeleteNetworkProfile":{
+      "name":"DeleteNetworkProfile",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteNetworkProfileRequest"},
+      "output":{"shape":"DeleteNetworkProfileResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Deletes a network profile.</p>"
     },
     "DeleteProject":{
       "name":"DeleteProject",
@@ -234,6 +266,22 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about a job.</p>"
+    },
+    "GetNetworkProfile":{
+      "name":"GetNetworkProfile",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetNetworkProfileRequest"},
+      "output":{"shape":"GetNetworkProfileResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Returns information about a network profile.</p>"
     },
     "GetOfferingStatus":{
       "name":"GetOfferingStatus",
@@ -427,6 +475,22 @@
         {"shape":"ServiceAccountException"}
       ],
       "documentation":"<p>Gets information about jobs.</p>"
+    },
+    "ListNetworkProfiles":{
+      "name":"ListNetworkProfiles",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListNetworkProfilesRequest"},
+      "output":{"shape":"ListNetworkProfilesResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Returns the list of available network profiles.</p>"
     },
     "ListOfferingTransactions":{
       "name":"ListOfferingTransactions",
@@ -689,6 +753,22 @@
       ],
       "documentation":"<p>Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).</p>"
     },
+    "UpdateNetworkProfile":{
+      "name":"UpdateNetworkProfile",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateNetworkProfileRequest"},
+      "output":{"shape":"UpdateNetworkProfileResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Updates the network profile with specific settings.</p>"
+    },
     "UpdateProject":{
       "name":"UpdateProject",
       "http":{
@@ -726,6 +806,14 @@
         "unmeteredRemoteAccessDevices":{
           "shape":"PurchasedDevicesMap",
           "documentation":"<p>Returns the unmetered remote access devices you have purchased or want to purchase.</p>"
+        },
+        "maxJobTimeoutMinutes":{
+          "shape":"JobTimeoutMinutes",
+          "documentation":"<p>The maximum number of minutes a test run will execute before it times out.</p>"
+        },
+        "defaultJobTimeoutMinutes":{
+          "shape":"JobTimeoutMinutes",
+          "documentation":"<p>The default number of minutes (at the account level) a test run will execute before it times out. Default value is 60 minutes.</p>"
         }
       },
       "documentation":"<p>A container for account-level settings within AWS Device Farm.</p>"
@@ -919,6 +1007,72 @@
       },
       "documentation":"<p>Represents the result of a create device pool request.</p>"
     },
+    "CreateNetworkProfileRequest":{
+      "type":"structure",
+      "required":[
+        "projectArn",
+        "name"
+      ],
+      "members":{
+        "projectArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the project for which you want to create a network profile.</p>"
+        },
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name you wish to specify for the new network profile.</p>"
+        },
+        "description":{
+          "shape":"Message",
+          "documentation":"<p>The description of the network profile.</p>"
+        },
+        "type":{
+          "shape":"NetworkProfileType",
+          "documentation":"<p>The type of network profile you wish to create. Valid values are listed below.</p>"
+        },
+        "uplinkBandwidthBits":{
+          "shape":"Long",
+          "documentation":"<p>The data throughput rate in bits per second, as an integer from 0 to 104857600.</p>"
+        },
+        "downlinkBandwidthBits":{
+          "shape":"Long",
+          "documentation":"<p>The data throughput rate in bits per second, as an integer from 0 to 104857600.</p>"
+        },
+        "uplinkDelayMs":{
+          "shape":"Long",
+          "documentation":"<p>Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "downlinkDelayMs":{
+          "shape":"Long",
+          "documentation":"<p>Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "uplinkJitterMs":{
+          "shape":"Long",
+          "documentation":"<p>Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "downlinkJitterMs":{
+          "shape":"Long",
+          "documentation":"<p>Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "uplinkLossPercent":{
+          "shape":"PercentInteger",
+          "documentation":"<p>Proportion of transmitted packets that fail to arrive from 0 to 100 percent.</p>"
+        },
+        "downlinkLossPercent":{
+          "shape":"PercentInteger",
+          "documentation":"<p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>"
+        }
+      }
+    },
+    "CreateNetworkProfileResult":{
+      "type":"structure",
+      "members":{
+        "networkProfile":{
+          "shape":"NetworkProfile",
+          "documentation":"<p>The network profile that is returned by the create network profile request.</p>"
+        }
+      }
+    },
     "CreateProjectRequest":{
       "type":"structure",
       "required":["name"],
@@ -926,6 +1080,10 @@
         "name":{
           "shape":"Name",
           "documentation":"<p>The project's name.</p>"
+        },
+        "defaultJobTimeoutMinutes":{
+          "shape":"JobTimeoutMinutes",
+          "documentation":"<p>Sets the execution timeout value (in minutes) for a project. All test runs in this project will use the specified execution timeout value unless overridden when scheduling a run.</p>"
         }
       },
       "documentation":"<p>Represents a request to the create project operation.</p>"
@@ -1045,6 +1203,21 @@
       },
       "documentation":"<p>Represents the result of a delete device pool request.</p>"
     },
+    "DeleteNetworkProfileRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the network profile you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteNetworkProfileResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteProjectRequest":{
       "type":"structure",
       "required":["arn"],
@@ -1148,7 +1321,10 @@
           "shape":"CPU",
           "documentation":"<p>Information about the device's CPU.</p>"
         },
-        "resolution":{"shape":"Resolution"},
+        "resolution":{
+          "shape":"Resolution",
+          "documentation":"<p>The resolution of the device.</p>"
+        },
         "heapSize":{
           "shape":"Long",
           "documentation":"<p>The device's heap size, expressed in bytes.</p>"
@@ -1255,7 +1431,10 @@
     "DevicePoolCompatibilityResult":{
       "type":"structure",
       "members":{
-        "device":{"shape":"Device"},
+        "device":{
+          "shape":"Device",
+          "documentation":"<p>The device (phone or tablet) that you wish to return information about.</p>"
+        },
         "compatible":{
           "shape":"Boolean",
           "documentation":"<p>Whether the result was compatible with the device pool.</p>"
@@ -1287,6 +1466,16 @@
       "member":{"shape":"Device"}
     },
     "Double":{"type":"double"},
+    "ExecutionConfiguration":{
+      "type":"structure",
+      "members":{
+        "jobTimeoutMinutes":{
+          "shape":"JobTimeoutMinutes",
+          "documentation":"<p>The number of minutes a test run will execute before it times out.</p>"
+        }
+      },
+      "documentation":"<p>Represents configuration information about a test run, such as the execution timeout (in minutes).</p>"
+    },
     "ExecutionResult":{
       "type":"string",
       "enum":[
@@ -1327,7 +1516,10 @@
     "GetAccountSettingsResult":{
       "type":"structure",
       "members":{
-        "accountSettings":{"shape":"AccountSettings"}
+        "accountSettings":{
+          "shape":"AccountSettings",
+          "documentation":"<p>The account settings.</p>"
+        }
       },
       "documentation":"<p>Represents the account settings return values from the <code>GetAccountSettings</code> request.</p>"
     },
@@ -1378,7 +1570,10 @@
     "GetDevicePoolResult":{
       "type":"structure",
       "members":{
-        "devicePool":{"shape":"DevicePool"}
+        "devicePool":{
+          "shape":"DevicePool",
+          "documentation":"<p>An object containing information about the requested device pool.</p>"
+        }
       },
       "documentation":"<p>Represents the result of a get device pool request.</p>"
     },
@@ -1396,7 +1591,10 @@
     "GetDeviceResult":{
       "type":"structure",
       "members":{
-        "device":{"shape":"Device"}
+        "device":{
+          "shape":"Device",
+          "documentation":"<p>An object containing information about the requested device.</p>"
+        }
       },
       "documentation":"<p>Represents the result of a get device request.</p>"
     },
@@ -1414,9 +1612,31 @@
     "GetJobResult":{
       "type":"structure",
       "members":{
-        "job":{"shape":"Job"}
+        "job":{
+          "shape":"Job",
+          "documentation":"<p>An object containing information about the requested job.</p>"
+        }
       },
       "documentation":"<p>Represents the result of a get job request.</p>"
+    },
+    "GetNetworkProfileRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the network profile you want to return information about.</p>"
+        }
+      }
+    },
+    "GetNetworkProfileResult":{
+      "type":"structure",
+      "members":{
+        "networkProfile":{
+          "shape":"NetworkProfile",
+          "documentation":"<p>The network profile.</p>"
+        }
+      }
     },
     "GetOfferingStatusRequest":{
       "type":"structure",
@@ -1460,7 +1680,10 @@
     "GetProjectResult":{
       "type":"structure",
       "members":{
-        "project":{"shape":"Project"}
+        "project":{
+          "shape":"Project",
+          "documentation":"<p>The project you wish to get information about.</p>"
+        }
       },
       "documentation":"<p>Represents the result of a get project request.</p>"
     },
@@ -1499,7 +1722,10 @@
     "GetRunResult":{
       "type":"structure",
       "members":{
-        "run":{"shape":"Run"}
+        "run":{
+          "shape":"Run",
+          "documentation":"<p>The run you wish to get results from.</p>"
+        }
       },
       "documentation":"<p>Represents the result of a get run request.</p>"
     },
@@ -1517,7 +1743,10 @@
     "GetSuiteResult":{
       "type":"structure",
       "members":{
-        "suite":{"shape":"Suite"}
+        "suite":{
+          "shape":"Suite",
+          "documentation":"<p>A collection of one or more tests.</p>"
+        }
       },
       "documentation":"<p>Represents the result of a get suite request.</p>"
     },
@@ -1535,7 +1764,10 @@
     "GetTestResult":{
       "type":"structure",
       "members":{
-        "test":{"shape":"Test"}
+        "test":{
+          "shape":"Test",
+          "documentation":"<p>A test condition that is evaluated.</p>"
+        }
       },
       "documentation":"<p>Represents the result of a get test request.</p>"
     },
@@ -1553,7 +1785,10 @@
     "GetUploadResult":{
       "type":"structure",
       "members":{
-        "upload":{"shape":"Upload"}
+        "upload":{
+          "shape":"Upload",
+          "documentation":"<p>An app or a set of one or more tests to upload or that have been uploaded.</p>"
+        }
       },
       "documentation":"<p>Represents the result of a get upload request.</p>"
     },
@@ -1607,7 +1842,10 @@
     "InstallToRemoteAccessSessionResult":{
       "type":"structure",
       "members":{
-        "appUpload":{"shape":"Upload"}
+        "appUpload":{
+          "shape":"Upload",
+          "documentation":"<p>An app to upload or that has been uploaded.</p>"
+        }
       },
       "documentation":"<p>Represents the response from the server after AWS Device Farm makes a request to install to a remote access session.</p>"
     },
@@ -1655,7 +1893,10 @@
           "shape":"Message",
           "documentation":"<p>A message about the job's result.</p>"
         },
-        "device":{"shape":"Device"},
+        "device":{
+          "shape":"Device",
+          "documentation":"<p>The device (phone or tablet).</p>"
+        },
         "deviceMinutes":{
           "shape":"DeviceMinutes",
           "documentation":"<p>Represents the total (metered or unmetered) minutes used by the job.</p>"
@@ -1663,6 +1904,7 @@
       },
       "documentation":"<p>Represents a device.</p>"
     },
+    "JobTimeoutMinutes":{"type":"integer"},
     "Jobs":{
       "type":"list",
       "member":{"shape":"Job"}
@@ -1803,6 +2045,37 @@
         }
       },
       "documentation":"<p>Represents the result of a list jobs request.</p>"
+    },
+    "ListNetworkProfilesRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the project for which you want to list network profiles.</p>"
+        },
+        "type":{
+          "shape":"NetworkProfileType",
+          "documentation":"<p>The type of network profile you wish to return information about. Valid values are listed below.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
+    },
+    "ListNetworkProfilesResult":{
+      "type":"structure",
+      "members":{
+        "networkProfiles":{
+          "shape":"NetworkProfiles",
+          "documentation":"<p>A list of the available network profiles.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
     },
     "ListOfferingTransactionsRequest":{
       "type":"structure",
@@ -2131,6 +2404,71 @@
       "max":256,
       "min":0
     },
+    "NetworkProfile":{
+      "type":"structure",
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the network profile.</p>"
+        },
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the network profile.</p>"
+        },
+        "description":{
+          "shape":"Message",
+          "documentation":"<p>The description of the network profile.</p>"
+        },
+        "type":{
+          "shape":"NetworkProfileType",
+          "documentation":"<p>The type of network profile. Valid values are listed below.</p>"
+        },
+        "uplinkBandwidthBits":{
+          "shape":"Long",
+          "documentation":"<p>The data throughput rate in bits per second, as an integer from 0 to 104857600.</p>"
+        },
+        "downlinkBandwidthBits":{
+          "shape":"Long",
+          "documentation":"<p>The data throughput rate in bits per second, as an integer from 0 to 104857600.</p>"
+        },
+        "uplinkDelayMs":{
+          "shape":"Long",
+          "documentation":"<p>Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "downlinkDelayMs":{
+          "shape":"Long",
+          "documentation":"<p>Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "uplinkJitterMs":{
+          "shape":"Long",
+          "documentation":"<p>Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "downlinkJitterMs":{
+          "shape":"Long",
+          "documentation":"<p>Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "uplinkLossPercent":{
+          "shape":"PercentInteger",
+          "documentation":"<p>Proportion of transmitted packets that fail to arrive from 0 to 100 percent.</p>"
+        },
+        "downlinkLossPercent":{
+          "shape":"PercentInteger",
+          "documentation":"<p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>"
+        }
+      },
+      "documentation":"<p>An array of settings that describes characteristics of a network profile.</p>"
+    },
+    "NetworkProfileType":{
+      "type":"string",
+      "enum":[
+        "CURATED",
+        "PRIVATE"
+      ]
+    },
+    "NetworkProfiles":{
+      "type":"list",
+      "member":{"shape":"NetworkProfile"}
+    },
     "NotEligibleException":{
       "type":"structure",
       "members":{
@@ -2257,6 +2595,11 @@
       "max":1024,
       "min":4
     },
+    "PercentInteger":{
+      "type":"integer",
+      "max":100,
+      "min":0
+    },
     "Problem":{
       "type":"structure",
       "members":{
@@ -2319,6 +2662,10 @@
         "name":{
           "shape":"Name",
           "documentation":"<p>The project's name.</p>"
+        },
+        "defaultJobTimeoutMinutes":{
+          "shape":"JobTimeoutMinutes",
+          "documentation":"<p>The default number of minutes (at the project level) a test run will execute before it times out. Default value is 60 minutes.</p>"
         },
         "created":{
           "shape":"DateTime",
@@ -2439,12 +2786,18 @@
           "shape":"DateTime",
           "documentation":"<p>The date and time the remote access session was stopped.</p>"
         },
-        "device":{"shape":"Device"},
+        "device":{
+          "shape":"Device",
+          "documentation":"<p>The device (phone or tablet) used in the remote access session.</p>"
+        },
         "billingMethod":{
           "shape":"BillingMethod",
           "documentation":"<p>The billing method of the remote access session. Possible values include <code>METERED</code> or <code>UNMETERED</code>. For more information about metered devices, see <a href=\"http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology\">AWS Device Farm terminology</a>.\"</p>"
         },
-        "deviceMinutes":{"shape":"DeviceMinutes"},
+        "deviceMinutes":{
+          "shape":"DeviceMinutes",
+          "documentation":"<p>The number of minutes a device is used in a remote access sesssion (including setup and teardown minutes).</p>"
+        },
         "endpoint":{
           "shape":"String",
           "documentation":"<p>The endpoint for the remote access sesssion.</p>"
@@ -2588,6 +2941,10 @@
         "deviceMinutes":{
           "shape":"DeviceMinutes",
           "documentation":"<p>Represents the total (metered or unmetered) minutes used by the test run.</p>"
+        },
+        "networkProfile":{
+          "shape":"NetworkProfile",
+          "documentation":"<p>The network profile being used for a test run.</p>"
         }
       },
       "documentation":"<p>Represents an app on a set of devices with a specific test and configuration.</p>"
@@ -2705,6 +3062,10 @@
         "configuration":{
           "shape":"ScheduleRunConfiguration",
           "documentation":"<p>Information about the settings for the run to be scheduled.</p>"
+        },
+        "executionConfiguration":{
+          "shape":"ExecutionConfiguration",
+          "documentation":"<p>Specifies configuration information about a test run, such as the execution timeout (in minutes).</p>"
         }
       },
       "documentation":"<p>Represents a request to the schedule run operation.</p>"
@@ -2788,7 +3149,10 @@
     "StopRunResult":{
       "type":"structure",
       "members":{
-        "run":{"shape":"Run"}
+        "run":{
+          "shape":"Run",
+          "documentation":"<p>The run that was stopped.</p>"
+        }
       },
       "documentation":"<p>Represents the results of your stop run attempt.</p>"
     },
@@ -2983,9 +3347,75 @@
     "UpdateDevicePoolResult":{
       "type":"structure",
       "members":{
-        "devicePool":{"shape":"DevicePool"}
+        "devicePool":{
+          "shape":"DevicePool",
+          "documentation":"<p>The device pool you just updated.</p>"
+        }
       },
       "documentation":"<p>Represents the result of an update device pool request.</p>"
+    },
+    "UpdateNetworkProfileRequest":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the project that you wish to update network profile settings.</p>"
+        },
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the network profile about which you are returning information.</p>"
+        },
+        "description":{
+          "shape":"Message",
+          "documentation":"<p>The descriptoin of the network profile about which you are returning information.</p>"
+        },
+        "type":{
+          "shape":"NetworkProfileType",
+          "documentation":"<p>The type of network profile you wish to return information about. Valid values are listed below.</p>"
+        },
+        "uplinkBandwidthBits":{
+          "shape":"Long",
+          "documentation":"<p>The data throughput rate in bits per second, as an integer from 0 to 104857600.</p>"
+        },
+        "downlinkBandwidthBits":{
+          "shape":"Long",
+          "documentation":"<p>The data throughput rate in bits per second, as an integer from 0 to 104857600.</p>"
+        },
+        "uplinkDelayMs":{
+          "shape":"Long",
+          "documentation":"<p>Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "downlinkDelayMs":{
+          "shape":"Long",
+          "documentation":"<p>Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "uplinkJitterMs":{
+          "shape":"Long",
+          "documentation":"<p>Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "downlinkJitterMs":{
+          "shape":"Long",
+          "documentation":"<p>Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.</p>"
+        },
+        "uplinkLossPercent":{
+          "shape":"PercentInteger",
+          "documentation":"<p>Proportion of transmitted packets that fail to arrive from 0 to 100 percent.</p>"
+        },
+        "downlinkLossPercent":{
+          "shape":"PercentInteger",
+          "documentation":"<p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>"
+        }
+      }
+    },
+    "UpdateNetworkProfileResult":{
+      "type":"structure",
+      "members":{
+        "networkProfile":{
+          "shape":"NetworkProfile",
+          "documentation":"<p>A list of the available network profiles.</p>"
+        }
+      }
     },
     "UpdateProjectRequest":{
       "type":"structure",
@@ -2998,6 +3428,10 @@
         "name":{
           "shape":"Name",
           "documentation":"<p>A string representing the new name of the project that you are updating.</p>"
+        },
+        "defaultJobTimeoutMinutes":{
+          "shape":"JobTimeoutMinutes",
+          "documentation":"<p>The number of minutes a test run in the project will execute before it times out.</p>"
         }
       },
       "documentation":"<p>Represents a request to the update project operation.</p>"
@@ -3005,7 +3439,10 @@
     "UpdateProjectResult":{
       "type":"structure",
       "members":{
-        "project":{"shape":"Project"}
+        "project":{
+          "shape":"Project",
+          "documentation":"<p>The project you wish to update.</p>"
+        }
       },
       "documentation":"<p>Represents the result of an update project request.</p>"
     },

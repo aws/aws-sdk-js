@@ -8,6 +8,7 @@ AWS.CloudWatchEvents = Service.defineService('cloudwatchevents', ['2014-02-03*',
 Object.defineProperty(apiLoader.services['cloudwatchevents'], '2015-10-07', {
   get: function get() {
     var model = require('../apis/events-2015-10-07.min.json');
+    model.paginators = require('../apis/events-2015-10-07.paginators.json').pagination;
     return model;
   },
   enumerable: true,
