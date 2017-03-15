@@ -201,7 +201,7 @@ describe 'AWS.ResourceWaiter', ->
       helpers.mockResponses resps
 
       waiter = new AWS.ResourceWaiter(db, 'tableExists')
-      waiter.wait {delay: delay, maxAttempts: maxAttempts}, (e, d) -> resp = this; err = e; data = d
+      waiter.wait {$waiter: {delay: delay, maxAttempts: maxAttempts}}, (e, d) -> resp = this; err = e; data = d
       expect(data).to.equal(null)
       expect(err.code).to.equal('ResourceNotReady')
       expect(resp.retryCount).to.equal(maxAttempts)
