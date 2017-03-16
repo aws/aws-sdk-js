@@ -389,6 +389,64 @@ describe 'AWS.Service', ->
         expect(customService.makeUnauthenticatedRequest.calls.length).to.equal(1)
         done()
 
+  describe 'getSignerClass', ->
+    getVersion = (signer) ->
+      if (signer == AWS.Signers.S3)
+        return 's3'
+      else if (signer == AWS.Signers.V4)
+        return 'v4'
+      else if (signer == AWS.Signers.V2)
+        return 'v2'
+
+    afterEach ->
+      service = new AWS.Lambda()
+      service.api.signatureVersion = 'v4'
+
+    it 'should return signer based on service signatureVersion', (done) ->
+      service = new AWS.Lambda()
+      service.api.signatureVersion = 'v2'
+      #remove global config option
+      delete service.config.signatureVersion
+      expect(getVersion(service.getSignerClass())).to.equal('v2')
+      done()
+
+    it 'should prefer operation authtype over service signatureVersion', (done) ->
+      service = new AWS.Lambda()
+      service.api.signatureVersion = 'v2'
+      #remove global config option
+      delete service.config.signatureVersion
+      req = service.makeRequest('updateFunctionCode', {FunctionName: 'fake', ZipFile: new Buffer('fake')})
+      expect(getVersion(service.getSignerClass(req))).to.equal('v2')
+      service.api.operations.updateFunctionCode.authtype = 'v4'
+      req = service.makeRequest('updateFunctionCode', {FunctionName: 'fake', ZipFile: new Buffer('fake')})
+      expect(getVersion(service.getSignerClass(req))).to.equal('v4')
+      done()
+      
+    it 'should prefer user config over all else', (done) ->
+      # user config
+      service = new AWS.Lambda({signatureVersion: 'v2'})
+      # service config
+      service.api.signatureVersion = 'v3'
+      # operation config
+      service.api.operations.updateFunctionCode.authtype = 'v4'
+      req = service.makeRequest('updateFunctionCode', {FunctionName: 'fake', ZipFile: new Buffer('fake')})
+      expect(getVersion(service.getSignerClass())).to.equal('v2')
+      expect(getVersion(service.getSignerClass(req))).to.equal('v2')
+      done()
+
+    it 'should respect v4-unsigned-body', (done) ->
+      service = new AWS.Lambda()
+      service.api.signatureVersion = 'v2'
+      #remove global config option
+      delete service.config.signatureVersion
+      service.api.operations.updateFunctionCode.authtype = 'v4-unsigned-body'
+      req = service.makeRequest('updateFunctionCode', {FunctionName: 'fake', ZipFile: new Buffer('fake')})
+      expect(getVersion(service.getSignerClass())).to.equal('v2')
+      expect(getVersion(service.getSignerClass(req))).to.equal('v4')
+      req.build ->
+        expect(req.httpRequest.headers['X-Amz-Content-Sha256']).to.equal('UNSIGNED-PAYLOAD')
+        done()
+
   describe 'customizeRequests', ->
     it 'should accept nullable types', ->
       didError = false
