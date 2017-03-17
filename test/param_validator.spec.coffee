@@ -255,6 +255,15 @@ describe 'AWS.ParamValidator', ->
       expectError param: {}
       expectError param: []
 
+    it 'accepts anything JSON-encodable if the member is a JSONValue', ->
+      input = members: param: {type: 'string', jsonvalue: true}
+      expectValid param: '{"foo":"bar"}'
+      expectValid param: 123
+      expectValid param: {}
+      expectValid param: []
+      expectValid param: true
+      expectValid param: null
+
   describe 'float', ->
     beforeEach ->
       input = members: param: type: 'float'
