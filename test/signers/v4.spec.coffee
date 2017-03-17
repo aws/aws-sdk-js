@@ -43,6 +43,20 @@ describe 'AWS.Signers.V4', ->
       expect(signer.signatureCache).to.equal(true)
       expect(signer.operation).to.equal(operation)
 
+    it 'can set signatureCache to false', ->
+      req = buildRequest()
+      operation = {fake: 'bag'}
+      signer = buildSigner(req, {
+        signatureCache: false
+      })
+      expect(signer.signatureCache).to.equal(false)
+
+    it 'defaults signatureCache to true', ->
+      req = buildRequest()
+      operation = {fake: 'bag'}
+      signer = buildSigner(req)
+      expect(signer.signatureCache).to.equal(true)
+
   describe 'addAuthorization', ->
     headers = {
       'Content-Type': 'application/x-amz-json-1.0',
