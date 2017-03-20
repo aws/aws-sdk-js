@@ -52,6 +52,14 @@ declare class Pinpoint extends Service {
    */
   deleteCampaign(callback?: (err: AWSError, data: Pinpoint.Types.DeleteCampaignResponse) => void): Request<Pinpoint.Types.DeleteCampaignResponse, AWSError>;
   /**
+   * Deletes the event stream for an app.
+   */
+  deleteEventStream(params: Pinpoint.Types.DeleteEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEventStreamResponse) => void): Request<Pinpoint.Types.DeleteEventStreamResponse, AWSError>;
+  /**
+   * Deletes the event stream for an app.
+   */
+  deleteEventStream(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEventStreamResponse) => void): Request<Pinpoint.Types.DeleteEventStreamResponse, AWSError>;
+  /**
    * Deletes the GCM channel for an app.
    */
   deleteGcmChannel(params: Pinpoint.Types.DeleteGcmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteGcmChannelResponse) => void): Request<Pinpoint.Types.DeleteGcmChannelResponse, AWSError>;
@@ -100,11 +108,11 @@ declare class Pinpoint extends Service {
    */
   getCampaignActivities(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignActivitiesResponse) => void): Request<Pinpoint.Types.GetCampaignActivitiesResponse, AWSError>;
   /**
-   * Returns information about your campaign versions.
+   * Returns information about a specific version of a campaign.
    */
   getCampaignVersion(params: Pinpoint.Types.GetCampaignVersionRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionResponse) => void): Request<Pinpoint.Types.GetCampaignVersionResponse, AWSError>;
   /**
-   * Returns information about your campaign versions.
+   * Returns information about a specific version of a campaign.
    */
   getCampaignVersion(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionResponse) => void): Request<Pinpoint.Types.GetCampaignVersionResponse, AWSError>;
   /**
@@ -131,6 +139,14 @@ declare class Pinpoint extends Service {
    * Returns information about an endpoint.
    */
   getEndpoint(callback?: (err: AWSError, data: Pinpoint.Types.GetEndpointResponse) => void): Request<Pinpoint.Types.GetEndpointResponse, AWSError>;
+  /**
+   * Returns the event stream for an app.
+   */
+  getEventStream(params: Pinpoint.Types.GetEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEventStreamResponse) => void): Request<Pinpoint.Types.GetEventStreamResponse, AWSError>;
+  /**
+   * Returns the event stream for an app.
+   */
+  getEventStream(callback?: (err: AWSError, data: Pinpoint.Types.GetEventStreamResponse) => void): Request<Pinpoint.Types.GetEventStreamResponse, AWSError>;
   /**
    * Returns information about the GCM channel for an app.
    */
@@ -196,6 +212,14 @@ declare class Pinpoint extends Service {
    */
   getSegments(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentsResponse) => void): Request<Pinpoint.Types.GetSegmentsResponse, AWSError>;
   /**
+   * Use to create or update the event stream for an app.
+   */
+  putEventStream(params: Pinpoint.Types.PutEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
+  /**
+   * Use to create or update the event stream for an app.
+   */
+  putEventStream(callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
+  /**
    * Use to update the APNs channel for an app.
    */
   updateApnsChannel(params: Pinpoint.Types.UpdateApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
@@ -228,11 +252,11 @@ declare class Pinpoint extends Service {
    */
   updateEndpoint(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointResponse) => void): Request<Pinpoint.Types.UpdateEndpointResponse, AWSError>;
   /**
-   * Use to update your endpoints.
+   * Use to update a batch of endpoints.
    */
   updateEndpointsBatch(params: Pinpoint.Types.UpdateEndpointsBatchRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointsBatchResponse) => void): Request<Pinpoint.Types.UpdateEndpointsBatchResponse, AWSError>;
   /**
-   * Use to update your endpoints.
+   * Use to update a batch of endpoints.
    */
   updateEndpointsBatch(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointsBatchResponse) => void): Request<Pinpoint.Types.UpdateEndpointsBatchResponse, AWSError>;
   /**
@@ -264,11 +288,17 @@ declare namespace Pinpoint {
     PrivateKey?: __string;
   }
   export interface APNSChannelResponse {
+    /**
+     * The ID of the application to which the channel applies.
+     */
     ApplicationId?: __string;
     /**
      * When was this segment created
      */
     CreationDate?: __string;
+    /**
+     * The unique channel ID.
+     */
     Id?: __string;
     /**
      * Is this channel archived
@@ -339,6 +369,14 @@ Valid values: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, COMPLETED
      * The total number of endpoints to which the campaign successfully delivered messages.
      */
     SuccessfulEndpointCount?: __integer;
+    /**
+     * The total number of timezones completed.
+     */
+    TimezonesCompletedCount?: __integer;
+    /**
+     * The total number of unique timezones present in the segment.
+     */
+    TimezonesTotalCount?: __integer;
     /**
      * The total number of endpoints to which the campaign attempts to deliver messages.
      */
@@ -523,6 +561,15 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   export interface DeleteCampaignResponse {
     CampaignResponse: CampaignResponse;
   }
+  export interface DeleteEventStreamRequest {
+    /**
+     * ApplicationId
+     */
+    ApplicationId: __string;
+  }
+  export interface DeleteEventStreamResponse {
+    EventStream: EventStream;
+  }
   export interface DeleteGcmChannelRequest {
     ApplicationId: __string;
   }
@@ -540,7 +587,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   export type Duration = "HR_24"|"DAY_7"|"DAY_14"|"DAY_30"|string;
   export interface EndpointBatchItem {
     /**
-     * The address or token of the endpoint.
+     * The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
      */
     Address?: __string;
     /**
@@ -565,6 +612,9 @@ Valid values: APNS, GCM
      * The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated.
      */
     EndpointStatus?: __string;
+    /**
+     * The unique Id for the Endpoint in the batch.
+     */
     Id?: __string;
     /**
      * The endpoint location attributes.
@@ -659,7 +709,7 @@ NONE – User receives no messages.
   }
   export interface EndpointRequest {
     /**
-     * The address or token of the endpoint.
+     * The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
      */
     Address?: __string;
     /**
@@ -710,7 +760,7 @@ NONE – User receives no messages.
   }
   export interface EndpointResponse {
     /**
-     * The address or token of the endpoint.
+     * The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
      */
     Address?: __string;
     /**
@@ -771,23 +821,51 @@ NONE – User receives no messages.
      */
     RequestId?: __string;
     /**
-     * The ShardId of endpoint
-     */
-    ShardId?: __string;
-    /**
      * Custom user-specific attributes that your app reports to Amazon Pinpoint.
      */
     User?: EndpointUser;
+    /**
+     * The ShardId of endpoint
+     */
+    ShardId?: __string;
   }
   export interface EndpointUser {
     /**
-     * Custom attributesd specific to the user.
+     * Custom attributes specific to the user.
      */
     UserAttributes?: MapOfListOf__string;
     /**
      * The unique ID of the user.
      */
     UserId?: __string;
+  }
+  export interface EventStream {
+    /**
+     * The ID of the application from which events should be published.
+     */
+    ApplicationId?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
+ Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
+ Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
+     */
+    DestinationStreamArn?: __string;
+    /**
+     * The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream.
+     */
+    ExternalId?: __string;
+    /**
+     * The date the event stream was last updated in ISO 8601 format.
+     */
+    LastModifiedDate?: __string;
+    /**
+     * The IAM user who last modified the event stream.
+     */
+    LastUpdatedBy?: __string;
+    /**
+     * The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
+     */
+    RoleArn?: __string;
   }
   export type Format = "CSV"|"JSON"|string;
   export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string;
@@ -798,6 +876,9 @@ NONE – User receives no messages.
     ApiKey?: __string;
   }
   export interface GCMChannelResponse {
+    /**
+     * The ID of the application to which the channel applies.
+     */
     ApplicationId?: __string;
     /**
      * When was this segment created
@@ -807,6 +888,9 @@ NONE – User receives no messages.
      * The GCM API key from Google.
      */
     Credential?: __string;
+    /**
+     * The unique channel ID.
+     */
     Id?: __string;
     /**
      * Is this channel archived
@@ -888,6 +972,15 @@ NONE – User receives no messages.
   }
   export interface GetEndpointResponse {
     EndpointResponse: EndpointResponse;
+  }
+  export interface GetEventStreamRequest {
+    /**
+     * ApplicationId
+     */
+    ApplicationId: __string;
+  }
+  export interface GetEventStreamResponse {
+    EventStream: EventStream;
   }
   export interface GetGcmChannelRequest {
     ApplicationId: __string;
@@ -1152,7 +1245,13 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
     Url?: __string;
   }
   export interface MessageBody {
+    /**
+     * The error message returned from the API.
+     */
     Message?: __string;
+    /**
+     * The unique message body ID.
+     */
     RequestID?: __string;
   }
   export interface MessageConfiguration {
@@ -1168,6 +1267,19 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      * The message that the campaign delivers to GCM channels. Overrides the default message.
      */
     GCMMessage?: Message;
+  }
+  export interface PutEventStreamRequest {
+    /**
+     * ApplicationId
+     */
+    ApplicationId: __string;
+    /**
+     * EventStream to write.
+     */
+    WriteEventStream: WriteEventStream;
+  }
+  export interface PutEventStreamResponse {
+    EventStream: EventStream;
   }
   export interface QuietTime {
     /**
@@ -1297,9 +1409,12 @@ UTC-11
     Demographic?: SegmentDemographics;
     /**
      * The segment location attributes.
-
      */
     Location?: SegmentLocation;
+    /**
+     * Custom segment user attributes.
+     */
+    UserAttributes?: MapOfAttributeDimension;
   }
   export interface SegmentImportResource {
     /**
@@ -1535,6 +1650,22 @@ EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
      */
     TreatmentName?: __string;
   }
+  export interface WriteEventStream {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
+ Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
+ Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
+     */
+    DestinationStreamArn?: __string;
+    /**
+     * The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream.
+     */
+    ExternalId?: __string;
+    /**
+     * The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
+     */
+    RoleArn?: __string;
+  }
   export interface WriteSegmentRequest {
     /**
      * The segment dimensions attributes.
@@ -1571,6 +1702,7 @@ EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
   export type __double = number;
   export type __integer = number;
   export type __string = string;
+  export type __timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

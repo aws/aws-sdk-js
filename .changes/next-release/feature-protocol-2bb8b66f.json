@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "protocol",
-  "description": "The SDK can now support JSON-value string shapes in headers"
-}

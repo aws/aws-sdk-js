@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.28.0-->
+<!--LATEST=2.29.0-->
 <!--ENTRYINSERT-->
+
+## 2.29.0
+* feature: protocol: The SDK can now support JSON-value string shapes in headers
+* feature: Pinpoint: Added ability to segment endpoints by user attributes in addition to endpoint attributes.
+* feature: Pinpoint: Added functionality to publish raw app analytics and campaign events data as events streams to Kinesis and Kinesis Firehose.
+* feature: ELBv2: Adding waiters for LoadBalancers in ELBv2.
+* feature: MarketplaceCommerceAnalytics: This update adds a new data set, us_sales_and_use_tax_records, which enables AWS Marketplace sellers to programmatically access to their U.S. Sales and Use Tax report data.
 
 ## 2.28.0
 * feature: DeviceFarm: Network shaping allows users to simulate network connections and conditions while testing their Android, iOS, and web apps with AWS Device Farm.

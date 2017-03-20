@@ -8,6 +8,7 @@ AWS.MarketplaceCommerceAnalytics = Service.defineService('marketplacecommerceana
 Object.defineProperty(apiLoader.services['marketplacecommerceanalytics'], '2015-07-01', {
   get: function get() {
     var model = require('../apis/marketplacecommerceanalytics-2015-07-01.min.json');
+    model.paginators = require('../apis/marketplacecommerceanalytics-2015-07-01.paginators.json').pagination;
     return model;
   },
   enumerable: true,

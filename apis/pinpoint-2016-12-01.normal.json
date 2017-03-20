@@ -184,6 +184,34 @@
       } ],
       "documentation" : "Deletes a campaign."
     },
+    "DeleteEventStream" : {
+      "name" : "DeleteEventStream",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/v1/apps/{application-id}/eventstream",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "DeleteEventStreamRequest"
+      },
+      "output" : {
+        "shape" : "DeleteEventStreamResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Deletes the event stream for an app."
+    },
     "DeleteGcmChannel" : {
       "name" : "DeleteGcmChannel",
       "http" : {
@@ -427,7 +455,7 @@
         "shape" : "TooManyRequestsException",
         "documentation" : "429 response"
       } ],
-      "documentation" : "Returns information about your campaign versions."
+      "documentation" : "Returns information about a specific version of a campaign."
     },
     "GetCampaignVersions" : {
       "name" : "GetCampaignVersions",
@@ -533,6 +561,34 @@
         "documentation" : "429 response"
       } ],
       "documentation" : "Returns information about an endpoint."
+    },
+    "GetEventStream" : {
+      "name" : "GetEventStream",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/eventstream",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetEventStreamRequest"
+      },
+      "output" : {
+        "shape" : "GetEventStreamResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Returns the event stream for an app."
     },
     "GetGcmChannel" : {
       "name" : "GetGcmChannel",
@@ -814,6 +870,34 @@
       } ],
       "documentation" : "Used to get information about your segments."
     },
+    "PutEventStream" : {
+      "name" : "PutEventStream",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/v1/apps/{application-id}/eventstream",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutEventStreamRequest"
+      },
+      "output" : {
+        "shape" : "PutEventStreamResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Use to create or update the event stream for an app."
+    },
     "UpdateApnsChannel" : {
       "name" : "UpdateApnsChannel",
       "http" : {
@@ -987,7 +1071,7 @@
         "shape" : "TooManyRequestsException",
         "documentation" : "429 response"
       } ],
-      "documentation" : "Use to update your endpoints."
+      "documentation" : "Use to update a batch of endpoints."
     },
     "UpdateGcmChannel" : {
       "name" : "UpdateGcmChannel",
@@ -1072,20 +1156,23 @@
           "shape" : "__string",
           "documentation" : "The certificate private key."
         }
-      }
+      },
+      "documentation" : "Apple Push Notification Service channel definition."
     },
     "APNSChannelResponse" : {
       "type" : "structure",
       "members" : {
         "ApplicationId" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The ID of the application to which the channel applies."
         },
         "CreationDate" : {
           "shape" : "__string",
           "documentation" : "When was this segment created"
         },
         "Id" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The unique channel ID."
         },
         "IsArchived" : {
           "shape" : "__boolean",
@@ -1107,7 +1194,8 @@
           "shape" : "__integer",
           "documentation" : "Version of channel"
         }
-      }
+      },
+      "documentation" : "Apple Distribution Push Notification Service channel definition."
     },
     "Action" : {
       "type" : "string",
@@ -1120,7 +1208,8 @@
           "shape" : "ListOfActivityResponse",
           "documentation" : "List of campaign activities"
         }
-      }
+      },
+      "documentation" : "Activities for campaign."
     },
     "ActivityResponse" : {
       "type" : "structure",
@@ -1161,6 +1250,14 @@
           "shape" : "__integer",
           "documentation" : "The total number of endpoints to which the campaign successfully delivered messages."
         },
+        "TimezonesCompletedCount" : {
+          "shape" : "__integer",
+          "documentation" : "The total number of timezones completed."
+        },
+        "TimezonesTotalCount" : {
+          "shape" : "__integer",
+          "documentation" : "The total number of unique timezones present in the segment."
+        },
         "TotalEndpointCount" : {
           "shape" : "__integer",
           "documentation" : "The total number of endpoints to which the campaign attempts to deliver messages."
@@ -1169,7 +1266,8 @@
           "shape" : "__string",
           "documentation" : "The ID of a variation of the campaign used for A/B testing."
         }
-      }
+      },
+      "documentation" : "Activity definition"
     },
     "ApplicationSettingsResource" : {
       "type" : "structure",
@@ -1190,7 +1288,8 @@
           "shape" : "QuietTime",
           "documentation" : "The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own."
         }
-      }
+      },
+      "documentation" : "Application settings."
     },
     "AttributeDimension" : {
       "type" : "structure",
@@ -1203,7 +1302,8 @@
           "shape" : "ListOf__string",
           "documentation" : "The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type."
         }
-      }
+      },
+      "documentation" : "Custom attibute dimension"
     },
     "AttributeType" : {
       "type" : "string",
@@ -1213,9 +1313,15 @@
       "type" : "structure",
       "members" : {
         "Message" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The error message returned from the API."
+        },
+        "RequestID" : {
+          "shape" : "__string",
+          "documentation" : "The unique message body ID."
         }
       },
+      "documentation" : "Simple message object.",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 400
@@ -1232,7 +1338,8 @@
           "shape" : "__integer",
           "documentation" : "The maximum total number of messages that the campaign can send."
         }
-      }
+      },
+      "documentation" : "Campaign Limits are used to limit the number of messages that can be sent to a user."
     },
     "CampaignResponse" : {
       "type" : "structure",
@@ -1313,7 +1420,8 @@
           "shape" : "__integer",
           "documentation" : "The campaign version number."
         }
-      }
+      },
+      "documentation" : "Campaign definition"
     },
     "CampaignState" : {
       "type" : "structure",
@@ -1322,7 +1430,8 @@
           "shape" : "CampaignStatus",
           "documentation" : "The status of the campaign, or the status of a treatment that belongs to an A/B test campaign.\n\nValid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED"
         }
-      }
+      },
+      "documentation" : "State of the Campaign"
     },
     "CampaignStatus" : {
       "type" : "string",
@@ -1339,7 +1448,8 @@
           "shape" : "__string",
           "documentation" : "The string that you use in a subsequent request to get the next page of results in a paginated response."
         }
-      }
+      },
+      "documentation" : "List of available campaigns."
     },
     "ChannelType" : {
       "type" : "string",
@@ -1467,6 +1577,30 @@
       "required" : [ "CampaignResponse" ],
       "payload" : "CampaignResponse"
     },
+    "DeleteEventStreamRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id",
+          "documentation": "ApplicationId"
+        }
+      },
+      "required" : [ "ApplicationId" ],
+      "documentation": "DeleteEventStream Request"
+    },
+    "DeleteEventStreamResponse" : {
+      "type" : "structure",
+      "members" : {
+        "EventStream" : {
+          "shape" : "EventStream"
+        }
+      },
+      "required" : [ "EventStream" ],
+      "payload" : "EventStream",
+      "documentation": "DeleteEventStream Response"
+    },
     "DeleteGcmChannelRequest" : {
       "type" : "structure",
       "members" : {
@@ -1527,7 +1661,7 @@
       "members" : {
         "Address" : {
           "shape" : "__string",
-          "documentation" : "The address or token of the endpoint."
+          "documentation" : "The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId)."
         },
         "Attributes" : {
           "shape" : "MapOfListOf__string",
@@ -1550,7 +1684,8 @@
           "documentation" : "The endpoint status. Can be either ACTIVE or INACTIVE. Will be set to INACTIVE if a delivery fails. Will be set to ACTIVE if the address is updated."
         },
         "Id" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The unique Id for the Endpoint in the batch."
         },
         "Location" : {
           "shape" : "EndpointLocation",
@@ -1572,7 +1707,8 @@
           "shape" : "EndpointUser",
           "documentation" : "Custom user-specific attributes that your app reports to Amazon Pinpoint."
         }
-      }
+      },
+      "documentation" : "Endpoint update request"
     },
     "EndpointBatchRequest" : {
       "type" : "structure",
@@ -1581,7 +1717,8 @@
           "shape" : "ListOfEndpointBatchItem",
           "documentation" : "List of items to update. Maximum 100 items"
         }
-      }
+      },
+      "documentation" : "Endpoint batch update request."
     },
     "EndpointDemographic" : {
       "type" : "structure",
@@ -1618,7 +1755,8 @@
           "shape" : "__string",
           "documentation" : "The timezone of the endpoint. Specified as a tz database value, such as Americas/Los_Angeles."
         }
-      }
+      },
+      "documentation" : "Endpoint demographic data"
     },
     "EndpointLocation" : {
       "type" : "structure",
@@ -1647,14 +1785,15 @@
           "shape" : "__string",
           "documentation" : "The region of the endpoint location. For example, corresponds to a state in US."
         }
-      }
+      },
+      "documentation" : "Endpoint location data"
     },
     "EndpointRequest" : {
       "type" : "structure",
       "members" : {
         "Address" : {
           "shape" : "__string",
-          "documentation" : "The address or token of the endpoint."
+          "documentation" : "The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId)."
         },
         "Attributes" : {
           "shape" : "MapOfListOf__string",
@@ -1696,14 +1835,15 @@
           "shape" : "EndpointUser",
           "documentation" : "Custom user-specific attributes that your app reports to Amazon Pinpoint."
         }
-      }
+      },
+      "documentation" : "Endpoint update request"
     },
     "EndpointResponse" : {
       "type" : "structure",
       "members" : {
         "Address" : {
           "shape" : "__string",
-          "documentation" : "The address or token of the endpoint."
+          "documentation" : "The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId)."
         },
         "ApplicationId" : {
           "shape" : "__string",
@@ -1757,36 +1897,74 @@
           "shape" : "__string",
           "documentation" : "The unique ID for the most recent request to update the endpoint."
         },
-        "ShardId" : {
-          "shape" : "__string",
-          "documentation" : "The ShardId of endpoint"
-        },
         "User" : {
           "shape" : "EndpointUser",
           "documentation" : "Custom user-specific attributes that your app reports to Amazon Pinpoint."
+        },
+        "ShardId" : {
+          "shape" : "__string",
+          "documentation" : "The ShardId of endpoint"
         }
-      }
+      },
+      "documentation" : "Endpoint response"
     },
     "EndpointUser" : {
       "type" : "structure",
       "members" : {
         "UserAttributes" : {
           "shape" : "MapOfListOf__string",
-          "documentation" : "Custom attributesd specific to the user."
+          "documentation" : "Custom attributes specific to the user."
         },
         "UserId" : {
           "shape" : "__string",
           "documentation" : "The unique ID of the user."
         }
-      }
+      },
+      "documentation" : "Endpoint user specific custom userAttributes"
+    },
+    "EventStream" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "documentation" : "The ID of the application from which events should be published."
+        },
+        "DestinationStreamArn" : {
+          "shape" : "__string",
+          "documentation" : "The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.\n Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME\n Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME"
+        },
+        "ExternalId" : {
+          "shape" : "__string",
+          "documentation" : "The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream."
+        },
+        "LastModifiedDate" : {
+          "shape" : "__string",
+          "documentation" : "The date the event stream was last updated in ISO 8601 format."
+        },
+        "LastUpdatedBy" : {
+          "shape" : "__string",
+          "documentation" : "The IAM user who last modified the event stream."
+        },
+        "RoleArn" : {
+          "shape" : "__string",
+          "documentation" : "The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account."
+        }
+      },
+      "documentation" : "Model for an event publishing subscription export."
     },
     "ForbiddenException" : {
       "type" : "structure",
       "members" : {
         "Message" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The error message returned from the API."
+        },
+        "RequestID" : {
+          "shape" : "__string",
+          "documentation" : "The unique message body ID."
         }
       },
+      "documentation" : "Simple message object.",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 403
@@ -1807,13 +1985,15 @@
           "shape" : "__string",
           "documentation" : "Platform credential API key from Google."
         }
-      }
+      },
+      "documentation" : "Google Cloud Messaging credentials"
     },
     "GCMChannelResponse" : {
       "type" : "structure",
       "members" : {
         "ApplicationId" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The ID of the application to which the channel applies."
         },
         "CreationDate" : {
           "shape" : "__string",
@@ -1824,7 +2004,8 @@
           "documentation" : "The GCM API key from Google."
         },
         "Id" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The unique channel ID."
         },
         "IsArchived" : {
           "shape" : "__boolean",
@@ -1846,7 +2027,8 @@
           "shape" : "__integer",
           "documentation" : "Version of channel"
         }
-      }
+      },
+      "documentation" : "Google Cloud Messaging channel definition"
     },
     "GetApnsChannelRequest" : {
       "type" : "structure",
@@ -2075,6 +2257,30 @@
       },
       "required" : [ "EndpointResponse" ],
       "payload" : "EndpointResponse"
+    },
+    "GetEventStreamRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id",
+          "documentation": "ApplicationId"
+        }
+      },
+      "required" : [ "ApplicationId" ],
+      "documentation": "GetEventStream Request"
+    },
+    "GetEventStreamResponse" : {
+      "type" : "structure",
+      "members" : {
+        "EventStream" : {
+          "shape" : "EventStream"
+        }
+      },
+      "required" : [ "EventStream" ],
+      "payload" : "EventStream",
+      "documentation": "GetEventStream Response"
     },
     "GetGcmChannelRequest" : {
       "type" : "structure",
@@ -2456,15 +2662,22 @@
           "shape" : "__string",
           "documentation" : "The string that you use in a subsequent request to get the next page of results in a paginated response."
         }
-      }
+      },
+      "documentation" : "Import job list."
     },
     "InternalServerErrorException" : {
       "type" : "structure",
       "members" : {
         "Message" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The error message returned from the API."
+        },
+        "RequestID" : {
+          "shape" : "__string",
+          "documentation" : "The unique message body ID."
         }
       },
+      "documentation" : "Simple message object.",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 500
@@ -2594,12 +2807,15 @@
       "type" : "structure",
       "members" : {
         "Message" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The error message returned from the API."
         },
         "RequestID" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The unique message body ID."
         }
-      }
+      },
+      "documentation" : "Simple message object."
     },
     "MessageConfiguration" : {
       "type" : "structure",
@@ -2616,15 +2832,22 @@
           "shape" : "Message",
           "documentation" : "The message that the campaign delivers to GCM channels. Overrides the default message."
         }
-      }
+      },
+      "documentation" : "Message configuration for a campaign."
     },
     "MethodNotAllowedException" : {
       "type" : "structure",
       "members" : {
         "Message" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The error message returned from the API."
+        },
+        "RequestID" : {
+          "shape" : "__string",
+          "documentation" : "The unique message body ID."
         }
       },
+      "documentation" : "Simple message object.",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 405
@@ -2634,13 +2857,48 @@
       "type" : "structure",
       "members" : {
         "Message" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The error message returned from the API."
+        },
+        "RequestID" : {
+          "shape" : "__string",
+          "documentation" : "The unique message body ID."
         }
       },
+      "documentation" : "Simple message object.",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 404
       }
+    },
+    "PutEventStreamRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id",
+          "documentation": "ApplicationId"
+        },
+        "WriteEventStream" : {
+          "shape" : "WriteEventStream",
+          "documentation": "EventStream to write."
+        }
+      },
+      "required" : [ "ApplicationId", "WriteEventStream" ],
+      "payload" : "WriteEventStream",
+      "documentation": "PutEventStream Request"
+    },
+    "PutEventStreamResponse" : {
+      "type" : "structure",
+      "members" : {
+        "EventStream" : {
+          "shape" : "EventStream"
+        }
+      },
+      "required" : [ "EventStream" ],
+      "payload" : "EventStream",
+      "documentation": "PutEventStream Response"
     },
     "QuietTime" : {
       "type" : "structure",
@@ -2653,7 +2911,8 @@
           "shape" : "__string",
           "documentation" : "The default start time for quiet time in ISO 8601 format."
         }
-      }
+      },
+      "documentation" : "Quiet Time"
     },
     "RecencyDimension" : {
       "type" : "structure",
@@ -2666,7 +2925,8 @@
           "shape" : "RecencyType",
           "documentation" : "The recency dimension type:\nACTIVE – Users who have used your app within the specified duration are included in the segment.\nINACTIVE – Users who have not used your app within the specified duration are included in the segment."
         }
-      }
+      },
+      "documentation" : "Define how a segment based on recency of use."
     },
     "RecencyType" : {
       "type" : "string",
@@ -2699,7 +2959,8 @@
           "shape" : "__string",
           "documentation" : "The starting UTC offset for the schedule if the value for isLocalTime is true\n\nValid values: \nUTC\nUTC+01\nUTC+02\nUTC+03\nUTC+03:30\nUTC+04\nUTC+04:30\nUTC+05\nUTC+05:30\nUTC+05:45\nUTC+06\nUTC+06:30\nUTC+07\nUTC+08\nUTC+09\nUTC+09:30\nUTC+10\nUTC+10:30\nUTC+11\nUTC+12\nUTC+13\nUTC-02\nUTC-03\nUTC-04\nUTC-05\nUTC-06\nUTC-07\nUTC-08\nUTC-09\nUTC-10\nUTC-11"
         }
-      }
+      },
+      "documentation" : "Shcedule that defines when a campaign is run."
     },
     "SegmentBehaviors" : {
       "type" : "structure",
@@ -2708,7 +2969,8 @@
           "shape" : "RecencyDimension",
           "documentation" : "The recency of use."
         }
-      }
+      },
+      "documentation" : "Segment behavior dimensions"
     },
     "SegmentDemographics" : {
       "type" : "structure",
@@ -2733,7 +2995,8 @@
           "shape" : "SetDimension",
           "documentation" : "The device platform criteria for the segment."
         }
-      }
+      },
+      "documentation" : "Segment demographic dimensions"
     },
     "SegmentDimensions" : {
       "type" : "structure",
@@ -2752,9 +3015,14 @@
         },
         "Location" : {
           "shape" : "SegmentLocation",
-          "documentation" : "The segment location attributes.\n"
+          "documentation" : "The segment location attributes."
+        },
+        "UserAttributes" : {
+          "shape" : "MapOfAttributeDimension",
+          "documentation" : "Custom segment user attributes."
         }
-      }
+      },
+      "documentation" : "Segment dimensions"
     },
     "SegmentImportResource" : {
       "type" : "structure",
@@ -2779,7 +3047,8 @@
           "shape" : "__integer",
           "documentation" : "The number of endpoints that were successfully imported to create this segment."
         }
-      }
+      },
+      "documentation" : "Segment import definition."
     },
     "SegmentLocation" : {
       "type" : "structure",
@@ -2788,7 +3057,8 @@
           "shape" : "SetDimension",
           "documentation" : "The country filter according to ISO 3166-1 Alpha-2 codes."
         }
-      }
+      },
+      "documentation" : "Segment location dimensions"
     },
     "SegmentResponse" : {
       "type" : "structure",
@@ -2829,7 +3099,8 @@
           "shape" : "__integer",
           "documentation" : "The segment version number."
         }
-      }
+      },
+      "documentation" : "Segment definition."
     },
     "SegmentType" : {
       "type" : "string",
@@ -2846,7 +3117,8 @@
           "shape" : "__string",
           "documentation" : "An identifier used to retrieve the next page of results. The token is null if no additional pages exist."
         }
-      }
+      },
+      "documentation" : "Segments in your account."
     },
     "SetDimension" : {
       "type" : "structure",
@@ -2859,15 +3131,22 @@
           "shape" : "ListOf__string",
           "documentation" : "The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type."
         }
-      }
+      },
+      "documentation" : "Dimension specification of a segment."
     },
     "TooManyRequestsException" : {
       "type" : "structure",
       "members" : {
         "Message" : {
-          "shape" : "__string"
+          "shape" : "__string",
+          "documentation" : "The error message returned from the API."
+        },
+        "RequestID" : {
+          "shape" : "__string",
+          "documentation" : "The unique message body ID."
         }
       },
+      "documentation" : "Simple message object.",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 429
@@ -2904,7 +3183,8 @@
           "shape" : "__string",
           "documentation" : "The custom name of a variation of the campaign used for A/B testing."
         }
-      }
+      },
+      "documentation" : "Treatment resource"
     },
     "UpdateApnsChannelRequest" : {
       "type" : "structure",
@@ -3107,7 +3387,8 @@
           "shape" : "QuietTime",
           "documentation" : "The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own."
         }
-      }
+      },
+      "documentation" : "Creating application setting request"
     },
     "WriteCampaignRequest" : {
       "type" : "structure",
@@ -3160,7 +3441,26 @@
           "shape" : "__string",
           "documentation" : "The custom name of a variation of the campaign used for A/B testing."
         }
-      }
+      },
+      "documentation" : "Used to create a campaign."
+    },
+    "WriteEventStream" : {
+      "type" : "structure",
+      "members" : {
+        "DestinationStreamArn" : {
+          "shape" : "__string",
+          "documentation" : "The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.\n Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME\n Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME"
+        },
+        "ExternalId" : {
+          "shape" : "__string",
+          "documentation" : "The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream."
+        },
+        "RoleArn" : {
+          "shape" : "__string",
+          "documentation" : "The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account."
+        }
+      },
+      "documentation" : "Request to save an EventStream."
     },
     "WriteSegmentRequest" : {
       "type" : "structure",
@@ -3173,7 +3473,8 @@
           "shape" : "__string",
           "documentation" : "The name of segment"
         }
-      }
+      },
+      "documentation" : "Segment definition."
     },
     "WriteTreatmentResource" : {
       "type" : "structure",
@@ -3198,7 +3499,8 @@
           "shape" : "__string",
           "documentation" : "The custom name of a variation of the campaign used for A/B testing."
         }
-      }
+      },
+      "documentation" : "Used to create a campaign treatment."
     },
     "__boolean" : {
       "type" : "boolean"
@@ -3211,6 +3513,9 @@
     },
     "__string" : {
       "type" : "string"
+    },
+    "__timestamp" : {
+      "type" : "timestamp"
     }
   }
 }
