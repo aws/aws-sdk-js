@@ -71,6 +71,7 @@ describe 'AWS.EventListeners', ->
       AWS.util.arrayEach errorHandler.calls, (call) ->
         expect(call.arguments[0]).to.be.instanceOf(Error)
         expect(call.arguments[0].code).to.equal('CredentialsError')
+        expect(call.arguments[0].name).to.equal('CredentialsError')
         expect(call.arguments[0].message).to.match(/Missing credentials/)
 
     it 'sends error event if credentials are not set', ->
@@ -82,6 +83,7 @@ describe 'AWS.EventListeners', ->
       AWS.util.arrayEach errorHandler.calls, (call) ->
         expect(call.arguments[0] ).to.be.instanceOf(Error)
         expect(call.arguments[0].code).to.equal('CredentialsError')
+        expect(call.arguments[0].name).to.equal('CredentialsError')
         expect(call.arguments[0].message).to.match(/Missing credentials/)
 
     it 'does not validate credentials if request is not signed', ->
