@@ -337,6 +337,54 @@ describe 'AWS.S3.ManagedUpload', ->
         expect(data.Bucket).to.equal('bucket')
         done()
 
+    describe 'Location', ->
+      it 'returns paths with simple string keys for single part uploads', (done) ->
+        reqs = helpers.mockResponses [
+          data: ETag: 'ETAG'
+        ]
+        send {Body: smallbody, ContentEncoding: 'encoding', Key: 'file.ext'}, ->
+          expect(err).not.to.exist
+          expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/file.ext')
+          done()
+
+      it 'returns paths with simple string keys for multipart uploads', (done) ->
+        reqs = helpers.mockResponses [
+          { data: UploadId: 'uploadId' }
+          { data: ETag: 'ETAG1' }
+          { data: ETag: 'ETAG2' }
+          { data: ETag: 'ETAG3' }
+          { data: ETag: 'ETAG4' }
+          { data: ETag: 'FINAL_ETAG', Location: 'https://bucket.s3.mock-region.amazonaws.com/file.ext' }
+        ]
+        send {Body: bigbody, ContentEncoding: 'encoding', Key: 'file.ext'}, ->
+          expect(err).not.to.exist
+          expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/file.ext')
+          done()
+
+      it 'returns paths with subfolder keys for single part uploads', (done) ->
+        reqs = helpers.mockResponses [
+          data: ETag: 'ETAG'
+        ]
+        send {Body: smallbody, ContentEncoding: 'encoding', Key: 'directory/subdirectory/file.ext'}, ->
+          expect(err).not.to.exist
+          expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/directory/subdirectory/file.ext')
+          done()
+
+      it 'returns paths with subfolder keys for multipart uploads', (done) ->
+        reqs = helpers.mockResponses [
+          { data: UploadId: 'uploadId' }
+          { data: ETag: 'ETAG1' }
+          { data: ETag: 'ETAG2' }
+          { data: ETag: 'ETAG3' }
+          { data: ETag: 'ETAG4' }
+          { data: ETag: 'FINAL_ETAG', Location: 'https://bucket.s3.mock-region.amazonaws.com/directory%2Fsubdirectory%2Ffile.ext' }
+        ]
+        send {Body: bigbody, ContentEncoding: 'encoding', Key: 'folder/file.ext'}, ->
+          expect(err).not.to.exist
+          expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/directory/subdirectory/file.ext')
+          done()
+
+
     if AWS.util.isNode()
       describe 'streaming', ->
         it 'sends a small stream in a single putObject', (done) ->
