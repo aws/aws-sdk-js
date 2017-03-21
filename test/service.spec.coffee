@@ -337,6 +337,30 @@ describe 'AWS.Service', ->
       service.config.maxRetries = undefined
       expect(service.numRetries()).to.equal(13)
 
+  describe 'retryDelays', ->
+    beforeEach ->
+      helpers.spyOn(Math, 'random').andReturn 1
+
+    it 'has a default delay base of 100 ms', ->
+      client = new AWS.Service({})
+      expectedDelays = [100, 200, 400 ]
+      actualDelays = (client.retryDelays(i) for i in [0..client.numRetries()-1])
+      expect(actualDelays).to.eql(expectedDelays)
+
+    it 'can accept a user-defined delay base', ->
+      client = new AWS.Service({retryDelayOptions: {base: 200}})
+      expectedDelays = [ 200, 400, 800 ]
+      actualDelays = (client.retryDelays(i) for i in [0..client.numRetries()-1])
+      expect(actualDelays).to.eql(expectedDelays)
+    
+    it 'can accept a user-defined custom backoff', ->
+      customBackoff = (retryCount) ->
+        return 100 * retryCount
+      client = new AWS.Service({retryDelayOptions: {customBackoff: customBackoff}})
+      expectedDelays = [ 0, 100, 200 ]
+      actualDelays = (client.retryDelays(i) for i in [0..client.numRetries()-1])
+      expect(actualDelays).to.eql(expectedDelays)
+
   describe 'defineMethods', ->
     operations = null
     serviceConstructor = null

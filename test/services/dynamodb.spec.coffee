@@ -31,13 +31,13 @@ describe 'AWS.DynamoDB', ->
       helpers.spyOn(Math, 'random').andReturn 1
 
     it 'has a custom backoff function', ->
-      expectedDelays = [ 0, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800 ]
+      expectedDelays = [ 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600 ]
       actualDelays = (client.retryDelays(i) for i in [0..client.numRetries()-1])
       expect(actualDelays).to.eql(expectedDelays)
 
     it 'can accept a user-defined delay base', ->
       service = ddb({retryDelayOptions: {base: 100}})
-      expectedDelays = [ 0, 100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600 ]
+      expectedDelays = [ 100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200 ]
       actualDelays = (service.retryDelays(i) for i in [0..service.numRetries()-1])
       expect(actualDelays).to.eql(expectedDelays)
     
