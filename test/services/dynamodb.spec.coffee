@@ -27,10 +27,26 @@ describe 'AWS.DynamoDB', ->
       expect(ddb({ maxRetries: 2 }).numRetries()).to.equal(2)
 
   describe 'retryDelays', ->
+    beforeEach ->
+      helpers.spyOn(Math, 'random').andReturn 1
 
     it 'has a custom backoff function', ->
       expectedDelays = [ 0, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800 ]
       actualDelays = (client.retryDelays(i) for i in [0..client.numRetries()-1])
+      expect(actualDelays).to.eql(expectedDelays)
+
+    it 'can accept a user-defined delay base', ->
+      service = ddb({retryDelayOptions: {base: 100}})
+      expectedDelays = [ 0, 100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600 ]
+      actualDelays = (service.retryDelays(i) for i in [0..service.numRetries()-1])
+      expect(actualDelays).to.eql(expectedDelays)
+    
+    it 'can accept a user-defined custom backoff', ->
+      customBackoff = (retryCount) ->
+        return 100 * retryCount
+      service = ddb({retryDelayOptions: {customBackoff: customBackoff}})
+      expectedDelays = [ 0, 100, 200, 300, 400, 500, 600, 700, 800, 900 ]
+      actualDelays = (service.retryDelays(i) for i in [0..service.numRetries()-1])
       expect(actualDelays).to.eql(expectedDelays)
 
   describe 'CRC32 check', ->
