@@ -190,3 +190,24 @@ describe 'AWS.ResourceWaiter', ->
       expect(err).to.equal(null)
       expect(data).to.not.eql(null)
       expect(resp.retryCount).to.equal(2)
+
+    it 'supports custom delay and maxAttempts', ->
+      err = null; data = null; resp = null
+      db = new AWS.DynamoDB
+      maxAttempts = 50
+      delay = 5
+      resps = ({data: {Table: {TableStatus: 'LOADING'}}} for _ in [1..maxAttempts+1])
+      resps.push({data: {Table: {TableStatus: 'ACTIVE'}}})
+      helpers.mockResponses resps
+
+      waiter = new AWS.ResourceWaiter(db, 'tableExists')
+      waiter.wait {$waiter: {delay: delay, maxAttempts: maxAttempts}}, (e, d) -> resp = this; err = e; data = d
+      expect(data).to.equal(null)
+      expect(err.code).to.equal('ResourceNotReady')
+      expect(resp.retryCount).to.equal(maxAttempts)
+      expect(resp.error.retryDelay).to.equal(delay * 1000)
+
+      # Ensure custom settings aren't persisted in future waiters
+      waiter = new AWS.ResourceWaiter(db, 'tableExists')
+      expect(waiter.config.maxAttempts).to.equal(25);
+      expect(waiter.config.delay).to.equal(20);

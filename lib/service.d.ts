@@ -2,6 +2,19 @@ import {Request} from './request';
 import {AWSError} from './error';
 import {ConfigurationOptions, ConfigBase} from './config';
 import {Endpoint} from './endpoint';
+
+interface WaiterConfiguration {
+    /**
+     * The number of seconds to wait between requests
+     */
+    delay?: number;
+
+    /**
+     * The maximum number of requests to send while waiting
+     */
+    maxAttempts?: number;
+}
+
 export class Service {
     /**
      * Creates a new service object with a configuration object.
@@ -37,7 +50,7 @@ export class Service {
     /**
      * Waits for a given state.
      */
-    waitFor(state: string, params?: {[key: string]: any}, callback?: (err: AWSError, data: any) => void): Request<any, AWSError>;
+    waitFor(state: string, params?: {[key: string]: any, $waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: any) => void): Request<any, AWSError>;
     waitFor(state: string, callback?: (err: AWSError, data: any) => void): Request<any, AWSError>;
 
     /**
