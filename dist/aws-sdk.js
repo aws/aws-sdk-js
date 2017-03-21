@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.29.0
+// AWS SDK for JavaScript v2.30.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -19266,7 +19266,8 @@ module.exports={
       },
       "output": {
         "shape": "S7"
-      }
+      },
+      "deprecated": true
     },
     "AllocateHostedConnection": {
       "input": {
@@ -19739,7 +19740,8 @@ module.exports={
             "shape": "S28"
           }
         }
-      }
+      },
+      "deprecated": true
     },
     "DescribeConnections": {
       "input": {
@@ -19764,7 +19766,8 @@ module.exports={
       },
       "output": {
         "shape": "S2b"
-      }
+      },
+      "deprecated": true
     },
     "DescribeHostedConnections": {
       "input": {
@@ -19799,7 +19802,8 @@ module.exports={
             "shape": "S28"
           }
         }
-      }
+      },
+      "deprecated": true
     },
     "DescribeInterconnects": {
       "input": {
@@ -95776,7 +95780,9 @@ AWS.Config = AWS.util.inherit({
 
     function credError(msg, err) {
       return new AWS.util.error(err || new Error(), {
-        code: 'CredentialsError', message: msg
+        code: 'CredentialsError',
+        message: msg,
+        name: 'CredentialsError'
       });
     }
 
@@ -95953,7 +95959,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.29.0',
+  VERSION: '2.30.0',
 
 
   Signers: {},
@@ -96521,17 +96527,9 @@ function convertInput(data, options) {
   options = options || {};
   var type = typeOf(data);
   if (type === 'Object') {
-    var map = {M: {}};
-    for (var key in data) {
-      map['M'][key] = convertInput(data[key], options);
-    }
-    return map;
+    return formatMap(data, options);
   } else if (type === 'Array') {
-    var list = {L: []};
-    for (var i = 0; i < data.length; i++) {
-      list['L'].push(convertInput(data[i], options));
-    }
-    return list;
+    return formatList(data, options);
   } else if (type === 'Set') {
     return formatSet(data, options);
   } else if (type === 'String') {
@@ -96550,7 +96548,30 @@ function convertInput(data, options) {
     return { BOOL: data };
   } else if (type === 'null') {
     return { NULL: true };
+  } else if (type !== 'undefined' && type !== 'Function') {
+    return formatMap(data, options);
   }
+}
+
+
+function formatList(data, options) {
+  var list = {L: []};
+  for (var i = 0; i < data.length; i++) {
+    list['L'].push(convertInput(data[i], options));
+  }
+  return list;
+}
+
+
+function formatMap(data, options) {
+  var map = {M: {}};
+  for (var key in data) {
+    var formatted = convertInput(data[key], options);
+    if (formatted !== void 0) {
+      map['M'][key] = formatted;
+    }
+  }
+  return map;
 }
 
 

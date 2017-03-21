@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.29.0-->
+<!--LATEST=2.30.0-->
 <!--ENTRYINSERT-->
+
+## 2.30.0
+* feature: DynamoDb: Allow objects with inheritance chains to be converted to MapAttributeValues instead of undefined
+* bugfix: CredentialsError: Update AWS.Config.getCredentials to overwrite the name (in addition to message and code) of errors thrown by underlying credential providers.
 
 ## 2.29.0
 * feature: protocol: The SDK can now support JSON-value string shapes in headers
