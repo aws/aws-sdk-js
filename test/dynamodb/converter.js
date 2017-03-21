@@ -77,6 +77,30 @@ describe('AWS.DynamoDB.Converter', function() {
         expect(input([])).to.deep.equal({L: []});
       });
 
+      it(
+        'should convert descendents of Array to ListAttributeValues',
+        function() {
+          var MyArray = function() {
+            var array = [];
+            array.__proto__ = MyArray.prototype;
+            return array;
+          };
+          MyArray.prototype = new Array;
+          var arrayInstance = new MyArray();
+
+          expect(Array.isArray(arrayInstance)).to.be.true;
+
+          arrayInstance.push('a', 2, false, null);
+
+          expect(input(arrayInstance)).to.deep.equal({L: [
+            {S: 'a'},
+            {N: '2'},
+            {BOOL: false},
+            {NULL: true}
+          ]});
+        }
+      );
+
       it('should convert list members to AttributeValues', function() {
         expect(input(['a', 1, true, null, {}])).to.deep.equal({L: [
           {S: 'a'},
@@ -106,6 +130,74 @@ describe('AWS.DynamoDB.Converter', function() {
       it('should convert maps to MapAttributeValues', function() {
         expect(input({})).to.deep.equal({M: {}});
       });
+
+      it(
+        'should convert objects with inheritance chains to MapAttributeValues',
+        function() {
+          var MyPrototype = function() {
+            this.foo = 'bar';
+          };
+          var MyDescendent = function () {
+            MyPrototype.call(this);
+            this.fizz = 'buzz';
+          };
+          MyDescendent.prototype = Object.create(MyPrototype.prototype);
+          MyDescendent.prototype.snap = ['crackle', 'pop'];
+
+          var myInstance = new MyDescendent();
+          myInstance.quux = true;
+
+          expect(input(myInstance)).to.deep.equal({
+            M: {
+              foo: {S: 'bar'},
+              fizz: {S: 'buzz'},
+              snap: {L: [{S: 'crackle'}, {S: 'pop'}]},
+              quux: {BOOL: true}
+            }
+          });
+        }
+      );
+
+      it(
+        'should convert objects created with AWS.util.inherit to MapAttributeValues',
+        function () {
+          var MyClass = AWS.util.inherit({}, {
+            constructor: function () {
+              this.foo = 'bar';
+            }
+          });
+
+          expect(input(new MyClass())).to.deep.equal({M: {foo: {S: 'bar'}}});
+        }
+      );
+
+      if (AWS.util.isNode()) {
+        it(
+          'should convert objects created with util.inherits to MapAttributeValues',
+          function () {
+            var util = require('util');
+
+            var Cat = function() {
+              this.purrs = true;
+            };
+
+            var Tabby = function() {
+              Cat.call(this);
+              this.favoriteFood = 'fancy feast';
+            };
+
+            util.inherits(Tabby, Cat);
+
+            Cat.prototype.legs = 4;
+
+            expect(input(new Tabby())).to.deep.equal({M: {
+              purrs: {BOOL: true},
+              favoriteFood: {S: 'fancy feast'},
+              legs: {N: '4'}
+            }});
+          }
+        );
+      }
 
       it('should convert map members to AttributeValues', function() {
         expect(input({a: 'a', b: 1, c: true, d: null, e: ['s']})).to.deep.equal({

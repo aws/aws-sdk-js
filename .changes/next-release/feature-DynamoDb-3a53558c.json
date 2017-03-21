@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "DynamoDb",
+  "description": "Allow objects with inheritance chains to be converted to MapAttributeValues instead of undefined"
+}
