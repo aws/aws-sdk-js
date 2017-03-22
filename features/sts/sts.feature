@@ -4,7 +4,7 @@ Feature: AWS Security Token Service
 
   I want to use AWS Security Token Service
 
-  @requiresakid
+  @requiresakid @nosession
   Scenario: Get a session token
     Given I get an STS session token with a duration of 900 seconds
     Then the result should contain an access key ID and secret access key

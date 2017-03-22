@@ -1,5 +1,5 @@
 # language: en
-@importexport @requiresakid
+@importexport @requiresakid @nosession
 Feature: AWS Import/Export
 
   I want to use AWS Import/Export
