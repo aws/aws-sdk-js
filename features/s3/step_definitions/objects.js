@@ -102,8 +102,11 @@ module.exports = function () {
   });
 
   this.When(/^I get a pre\-signed URL to GET the key "([^"]*)"$/, function(key, callback) {
-    this.signedUrl = this.s3.getSignedUrl('getObject', {Bucket: this.sharedBucket, Key: key});
-    callback();
+    var world = this;
+    this.s3.getSignedUrl('getObject', {Bucket: this.sharedBucket, Key: key}, function(err, url) {
+      world.signedUrl = url;
+      callback();
+    });
   });
 
   this.When(/^I access the URL via HTTP GET$/, function(callback) {
@@ -117,10 +120,13 @@ module.exports = function () {
   });
 
   this.Given(/^I get a pre\-signed URL to PUT the key "([^"]*)"(?: with data "([^"]*)")?$/, function(key, body, callback) {
+    var world = this;
     var params = {Bucket: this.sharedBucket, Key: key};
     if (body) params.Body = body;
-    this.signedUrl = this.s3.getSignedUrl('putObject', params);
-    callback();
+    this.s3.getSignedUrl('putObject', params, function(err, url) {
+      world.signedUrl = url;
+      callback();
+    });
   });
 
   this.Given(/^I access the URL via HTTP PUT with data "([^"]*)"$/, function(body, callback) {
@@ -142,6 +148,7 @@ module.exports = function () {
   this.Given(
     /^I create a presigned form to POST the key "([^"]*)" with the data "([^"]*)"$/,
     function (key, data, callback) {
+      var world = this;
       var boundary = this.postBoundary = '----WebKitFormBoundaryLL0mBKIuuLUKr7be';
       var conditions = [
           ['content-length-range', data.length - 1, data.length + 1]
@@ -151,24 +158,25 @@ module.exports = function () {
           Fields: {key: key},
           Conditions: conditions
         };
-      var postData = this.s3.createPresignedPost(params);
-      var body = Object.keys(postData.fields).reduce(function(body, fieldName) {
-        body += '--' + boundary + '\r\n';
-        body += 'Content-Disposition: form-data; name="' + fieldName + '"\r\n\r\n';
-        return body + postData.fields[fieldName] + '\r\n';
-      }, '');
-      body += '--' + this.postBoundary + '\r\n';
-      body += 'Content-Disposition: form-data; name="file"; filename="' + key + '"\r\n';
-      body += 'Content-Type: text/plain\r\n\r\n';
-      body += data + '\r\n';
-      body += '--' + this.postBoundary + '\r\n';
-      body += 'Content-Disposition: form-data; name="submit"\r\n';
-      body += 'Content-Type: text/plain\r\n\r\n';
-      body += 'submit\r\n';
-      body += '--' + this.postBoundary + '--\r\n';
-      this.postBody = body;
-      this.postAction = postData.url;
-      callback();
+      this.s3.createPresignedPost(params, function(err, postData) {
+        var body = Object.keys(postData.fields).reduce(function(body, fieldName) {
+          body += '--' + boundary + '\r\n';
+          body += 'Content-Disposition: form-data; name="' + fieldName + '"\r\n\r\n';
+          return body + postData.fields[fieldName] + '\r\n';
+        }, '');
+        body += '--' + world.postBoundary + '\r\n';
+        body += 'Content-Disposition: form-data; name="file"; filename="' + key + '"\r\n';
+        body += 'Content-Type: text/plain\r\n\r\n';
+        body += data + '\r\n';
+        body += '--' + world.postBoundary + '\r\n';
+        body += 'Content-Disposition: form-data; name="submit"\r\n';
+        body += 'Content-Type: text/plain\r\n\r\n';
+        body += 'submit\r\n';
+        body += '--' + world.postBoundary + '--\r\n';
+        world.postBody = body;
+        world.postAction = postData.url;
+        callback();
+      });
     }
   );
 
