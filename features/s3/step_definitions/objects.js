@@ -162,20 +162,20 @@ module.exports = function () {
         var body = Object.keys(postData.fields).reduce(function(body, fieldName) {
           body += '--' + boundary + '\r\n';
           body += 'Content-Disposition: form-data; name="' + fieldName + '"\r\n\r\n';
-            return body + postData.fields[fieldName] + '\r\n';
-          }, '');
-          body += '--' + world.postBoundary + '\r\n';
-          body += 'Content-Disposition: form-data; name="file"; filename="' + key + '"\r\n';
-          body += 'Content-Type: text/plain\r\n\r\n';
-          body += data + '\r\n';
-          body += '--' + world.postBoundary + '\r\n';
-          body += 'Content-Disposition: form-data; name="submit"\r\n';
-          body += 'Content-Type: text/plain\r\n\r\n';
-          body += 'submit\r\n';
-          body += '--' + world.postBoundary + '--\r\n';
-          world.postBody = body;
-          world.postAction = postData.url;
-          callback();
+          return body + postData.fields[fieldName] + '\r\n';
+        }, '');
+        body += '--' + world.postBoundary + '\r\n';
+        body += 'Content-Disposition: form-data; name="file"; filename="' + key + '"\r\n';
+        body += 'Content-Type: text/plain\r\n\r\n';
+        body += data + '\r\n';
+        body += '--' + world.postBoundary + '\r\n';
+        body += 'Content-Disposition: form-data; name="submit"\r\n';
+        body += 'Content-Type: text/plain\r\n\r\n';
+        body += 'submit\r\n';
+        body += '--' + world.postBoundary + '--\r\n';
+        world.postBody = body;
+        world.postAction = postData.url;
+        callback();
       });
     }
   );
