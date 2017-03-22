@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Waiter",
-  "description": "Allow customization of a waiter using a special `$waiter` key"
-}

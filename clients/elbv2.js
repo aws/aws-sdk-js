@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['elbv2'], '2015-12-01', {
   get: function get() {
     var model = require('../apis/elasticloadbalancingv2-2015-12-01.min.json');
     model.paginators = require('../apis/elasticloadbalancingv2-2015-12-01.paginators.json').pagination;
+    model.waiters = require('../apis/elasticloadbalancingv2-2015-12-01.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

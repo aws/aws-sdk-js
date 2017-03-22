@@ -860,7 +860,7 @@ declare namespace Lambda {
   }
   export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"java8"|"python2.7"|"dotnetcore1.0"|"nodejs4.3-edge"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"java8"|"python2.7"|"dotnetcore1.0"|"nodejs4.3-edge"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;

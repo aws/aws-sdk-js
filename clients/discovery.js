@@ -8,6 +8,7 @@ AWS.Discovery = Service.defineService('discovery', ['2015-11-01']);
 Object.defineProperty(apiLoader.services['discovery'], '2015-11-01', {
   get: function get() {
     var model = require('../apis/discovery-2015-11-01.min.json');
+    model.paginators = require('../apis/discovery-2015-11-01.paginators.json').pagination;
     return model;
   },
   enumerable: true,

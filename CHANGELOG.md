@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.30.0-->
+<!--LATEST=2.31.0-->
 <!--ENTRYINSERT-->
+
+## 2.31.0
+* feature: DynamoDB: Adds ability to customize retry delays for DynamoDB. This previously worked for all services except DynamoDB. Also adds jitter to DynamoDB retries. See `AWS.Config.retryDelayOptions` for more information.
+* feature: Waiter: Allow customization of a waiter using a special `$waiter` key
+* feature: Lambda: Adds support for new runtime Node.js v6.10 for AWS Lambda service. :tada:
+* feature: ELBv2: Adding waiters for Elastic Load Balancing V2
+* feature: Discovery: Adds export configuration options to the API.
 
 ## 2.30.0
 * feature: DynamoDb: Allow objects with inheritance chains to be converted to MapAttributeValues instead of undefined

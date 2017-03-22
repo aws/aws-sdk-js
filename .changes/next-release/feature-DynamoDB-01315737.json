@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "DynamoDB",
-  "description": "Adds ability to customize retry delays for DynamoDB. This previously worked for all services except DynamoDB. Also adds jitter to DynamoDB retries. See `AWS.Config.retryDelayOptions` for more information."
-}
