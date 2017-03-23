@@ -592,3 +592,19 @@ describe 'AWS.S3.ManagedUpload', ->
             ]
           })
           done()
+
+      it 'should throw when tags are not provided as an array', (done) ->
+        reqs = helpers.mockResponses [
+          data: ETag: 'ETAG'
+        ]
+
+        try
+          upload = new AWS.S3.ManagedUpload(
+            service: s3
+            params: {Body: smallbody}
+            tags: 'tag1=value1&tag2=value2&%C3%A9tiquette=valeur%20%C3%A0%20%C3%AAtre%20encod%C3%A9'
+          )
+          done(new Error('AWS.S3.ManagedUpload should have thrown when passed a string for tags'))
+        catch e
+          done()
+
