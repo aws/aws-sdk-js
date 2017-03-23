@@ -97,7 +97,7 @@ describe 'AWS.S3', ->
         return 'v4'
       else if (signer == AWS.Signers.V2)
         return 'v2'
-    
+
     describe 'when using presigned requests', ->
       req = null
 
@@ -152,7 +152,7 @@ describe 'AWS.S3', ->
         it 'user does not specify a signatureVersion and region supports v2', (done) ->
           s3 = new AWS.S3({region: 'us-east-1'})
           expect(getVersion(s3.getSignerClass())).to.equal('s3')
-          done()  
+          done()
 
       describe 'will return a v4 signer when', ->
 
@@ -247,21 +247,21 @@ describe 'AWS.S3', ->
     describe 'with useAccelerateEndpoint and dualstack set to true', ->
       beforeEach ->
         s3 = new AWS.S3(useAccelerateEndpoint: true, useDualstack: true)
- 
+
       it 'changes the hostname to use s3-accelerate for dns-comaptible buckets', ->
         req = build('getObject', {Bucket: 'foo', Key: 'bar'})
         expect(req.endpoint.hostname).to.equal('foo.s3-accelerate.dualstack.amazonaws.com')
- 
+
       it 'overrides s3BucketEndpoint configuration when s3BucketEndpoint is set', ->
         s3 = new AWS.S3(useAccelerateEndpoint: true, useDualstack: true, s3BucketEndpoint: true, endpoint: 'foo.region.amazonaws.com')
         req = build('getObject', {Bucket: 'foo', Key: 'baz'})
         expect(req.endpoint.hostname).to.equal('foo.s3-accelerate.dualstack.amazonaws.com')
- 
+
       describe 'does not use s3-accelerate.dualstack or s3-accelerate', ->
         it 'on dns-incompatible buckets', ->
           req = build('getObject', {Bucket: 'foo.baz', Key: 'bar'})
           expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
- 
+
         it 'on excluded operations', ->
           req = build('listBuckets')
           expect(req.endpoint.hostname).to.not.contain('s3-accelerate')
@@ -902,7 +902,7 @@ describe 'AWS.S3', ->
         s3.bucketRegionCache.name = 'eu-west-1'
         fn()
       req = callNetworkingErrorListener()
-      expect(spy.calls.length).to.equal(1)  
+      expect(spy.calls.length).to.equal(1)
       expect(regionReq.httpRequest.region).to.equal('us-east-1')
       expect(regionReq.httpRequest.endpoint.hostname).to.equal('name.s3.amazonaws.com')
       expect(req.httpRequest.region).to.equal('eu-west-1')
@@ -1253,7 +1253,7 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3()
       params = Bucket: 'name'
       s3.bucketRegionCache.name = 'rg-fake-1'
-      helpers.mockHttpResponse 204, {}, '' 
+      helpers.mockHttpResponse 204, {}, ''
       s3.deleteBucket params, ->
         expect(s3.bucketRegionCache.name).to.not.exist
 
@@ -1323,7 +1323,7 @@ describe 'AWS.S3', ->
         req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream.Stream, ContentLength: 10)
         req.send (err) ->
           expect(err).not.to.exist
-          done()          
+          done()
 
       it 'opens separate stream if a file object is provided (signed payload)', (done) ->
         hash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
@@ -1542,26 +1542,20 @@ describe 'AWS.S3', ->
         done()
 
     it 'should default to expiration in one hour', (done) ->
+      helpers.spyOn(AWS.util.date, 'getDate').andReturn(new Date(946684800 * 1000))
       s3 = new AWS.S3()
       s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
         decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
-        expiration = new Date(decoded.expiration)
-        validForMs = expiration.valueOf() - (new Date()).valueOf()
-        # allow one second of leeway
-        expect(validForMs).to.be.above((60 * 60 - 1) * 1000)
-        expect(validForMs).to.be.below((60 * 60 + 1) * 1000)
+        expect(decoded.expiration).to.equal('2000-01-01T01:00:00Z')
         done()
 
     it 'should allow users to provide a custom expiration', (done) ->
+      helpers.spyOn(AWS.util.date, 'getDate').andReturn(new Date(946684800 * 1000))
       customTtl = 900
       s3 = new AWS.S3()
       s3.createPresignedPost {Bucket: 'bucket', Expires: customTtl}, (err, data) ->
         decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
-        expiration = new Date(decoded.expiration)
-        validForMs = expiration.valueOf() - (new Date()).valueOf()
-        # allow one second of leeway
-        expect(validForMs).to.be.above((customTtl - 1) * 1000)
-        expect(validForMs).to.be.below((customTtl + 1) * 1000)
+        expect(decoded.expiration).to.equal('2000-01-01T00:15:00Z')
         done()
 
     it 'should include signature metadata as conditions', (done) ->

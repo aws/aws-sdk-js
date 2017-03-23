@@ -126,11 +126,25 @@ s3.putObject({
     Body: fs.createReadStream('/fake/path')
 });
 
-const upload = s3.upload({
-    Bucket: 'BUCKET',
-    Key: 'KEY',
-    Body: new Buffer('some data')
-});
+const upload = s3.upload(
+    {
+        Bucket: 'BUCKET',
+        Key: 'KEY',
+        Body: new Buffer('some data')
+    },
+    {
+        tags: [
+            {
+                Key: 'key',
+                Value: 'value',
+            },
+            {
+                Key: 'otherKey',
+                Value: 'otherValue',
+            },
+        ],
+    }
+);
 
 // test managed upload promise support
 upload.promise()

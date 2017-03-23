@@ -530,3 +530,81 @@ describe 'AWS.S3.ManagedUpload', ->
           return upload.promise().then(thenFunction).catch(catchFunction).then ->
             expect(data).not.to.exist
             expect(err.message).to.equal('ERROR')
+
+    describe 'tagging', ->
+      it 'should embed tags in PutObject request for single part uploads', (done) ->
+        reqs = helpers.mockResponses [
+          data: ETag: 'ETAG'
+        ]
+
+        upload = new AWS.S3.ManagedUpload(
+          service: s3
+          params: {Body: smallbody}
+          tags: [
+            {Key: 'tag1', Value: 'value1'}
+            {Key: 'tag2', Value: 'value2'}
+            {Key: 'étiquette', Value: 'valeur à être encodé'}
+          ]
+        )
+
+        send {}, ->
+          expect(err).not.to.exist
+          expect(reqs[0].httpRequest.headers['x-amz-tagging']).to.equal('tag1=value1&tag2=value2&%C3%A9tiquette=valeur%20%C3%A0%20%C3%AAtre%20encod%C3%A9')
+          done()
+
+      it 'should send a PutObjectTagging request following a successful multipart upload with tags', (done) ->
+        reqs = helpers.mockResponses [
+          { data: UploadId: 'uploadId' }
+          { data: ETag: 'ETAG1' }
+          { data: ETag: 'ETAG2' }
+          { data: ETag: 'ETAG3' }
+          { data: ETag: 'ETAG4' }
+          { data: ETag: 'FINAL_ETAG', Location: 'FINAL_LOCATION' }
+          {}
+        ]
+
+        upload = new AWS.S3.ManagedUpload(
+          service: s3
+          params: {Body: bigbody}
+          tags: [
+            {Key: 'tag1', Value: 'value1'}
+            {Key: 'tag2', Value: 'value2'}
+            {Key: 'étiquette', Value: 'valeur à être encodé'}
+          ]
+        )
+
+        send {}, ->
+          expect(helpers.operationsForRequests(reqs)).to.eql [
+            's3.createMultipartUpload'
+            's3.uploadPart'
+            's3.uploadPart'
+            's3.uploadPart'
+            's3.uploadPart'
+            's3.completeMultipartUpload'
+            's3.putObjectTagging'
+          ]
+          expect(err).not.to.exist
+          expect(reqs[6].params.Tagging).to.deep.equal({
+            TagSet: [
+              {Key: 'tag1', Value: 'value1'}
+              {Key: 'tag2', Value: 'value2'}
+              {Key: 'étiquette', Value: 'valeur à être encodé'}
+            ]
+          })
+          done()
+
+      it 'should throw when tags are not provided as an array', (done) ->
+        reqs = helpers.mockResponses [
+          data: ETag: 'ETAG'
+        ]
+
+        try
+          upload = new AWS.S3.ManagedUpload(
+            service: s3
+            params: {Body: smallbody}
+            tags: 'tag1=value1&tag2=value2&%C3%A9tiquette=valeur%20%C3%A0%20%C3%AAtre%20encod%C3%A9'
+          )
+          done(new Error('AWS.S3.ManagedUpload should have thrown when passed a string for tags'))
+        catch e
+          done()
+
