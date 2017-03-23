@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.31.0
+// AWS SDK for JavaScript v2.32.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -4365,25 +4365,24 @@ module.exports={
   "pagination": {
     "DescribeScalableTargets": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "ScalableTargets"
-    },
-    "DescribeScalingPolicies": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "ScalingPolicies"
     },
     "DescribeScalingActivities": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "ScalingActivities"
+    },
+    "DescribeScalingPolicies": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "ScalingPolicies"
     }
   }
 }
-
 },{}],7:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -9842,6 +9841,9 @@ module.exports={
     "GetEventSelectors": {
       "input": {
         "type": "structure",
+        "required": [
+          "TrailName"
+        ],
         "members": {
           "TrailName": {}
         }
@@ -10045,6 +10047,10 @@ module.exports={
     "PutEventSelectors": {
       "input": {
         "type": "structure",
+        "required": [
+          "TrailName",
+          "EventSelectors"
+        ],
         "members": {
           "TrailName": {},
           "EventSelectors": {
@@ -96005,7 +96011,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.31.0',
+  VERSION: '2.32.0',
 
 
   Signers: {},
@@ -100145,6 +100151,13 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     if (options.queueSize) this.queueSize = options.queueSize;
     if (options.partSize) this.partSize = options.partSize;
     if (options.leavePartsOnError) this.leavePartsOnError = true;
+    if (options.tags) {
+      if (!Array.isArray(options.tags)) {
+        throw new Error('Tags must be specified as an array; ' +
+          typeof options.tags + ' provided.');
+      }
+      this.tags = options.tags;
+    }
 
     if (this.partSize < this.minPartSize) {
       throw new Error('partSize must be greater than ' +
@@ -100378,7 +100391,11 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
 
     var partNumber = ++self.totalPartNumbers;
     if (self.isDoneChunking && partNumber === 1) {
-      var req = self.service.putObject({Body: chunk});
+      var params = {Body: chunk};
+      if (this.tags) {
+        params.Tagging = this.getTaggingHeader();
+      }
+      var req = self.service.putObject(params);
       req._managedUpload = self;
       req.on('httpUploadProgress', self.progress).send(self.finishSinglePart);
       return null;
@@ -100415,6 +100432,17 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     } else { // multipart is created, just send
       self.uploadPart(chunk, partNumber);
     }
+  },
+
+
+  getTaggingHeader: function getTaggingHeader() {
+    var kvPairStrings = [];
+    for (var i = 0; i < this.tags.length; i++) {
+      kvPairStrings.push(AWS.util.uriEscape(this.tags[i].Key) + '=' +
+        AWS.util.uriEscape(this.tags[i].Value));
+    }
+
+    return kvPairStrings.join('&');
   },
 
 
@@ -100504,8 +100532,18 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     var self = this;
     var completeParams = { MultipartUpload: { Parts: self.completeInfo.slice(1) } };
     self.service.completeMultipartUpload(completeParams, function(err, data) {
-      if (err) return self.cleanup(err);
-      else self.callback(err, data);
+      if (err) {
+        return self.cleanup(err);
+      }
+
+      if (Array.isArray(self.tags)) {
+        self.service.putObjectTagging(
+          {Tagging: {TagSet: self.tags}},
+          self.callback
+        );
+      } else {
+        self.callback(err, data);
+      }
     });
   },
 

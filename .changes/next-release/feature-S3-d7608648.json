@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "S3",
-  "description": "Adds a means of specifying tags to apply to objects of any size uploaded with AWS.S3.ManagedUploader"
-}
