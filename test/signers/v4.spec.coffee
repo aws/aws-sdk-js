@@ -8,18 +8,8 @@ buildRequest = ->
   req.httpRequest.headers['X-Amz-User-Agent'] = 'aws-sdk-js/0.1'
   req.httpRequest
 
-buildSigner = (request, signatureCache) ->
-  if typeof signatureCache != 'boolean'
-    signatureCache = true
-  return new AWS.Signers.V4(request || buildRequest(), 'dynamodb', signatureCache)
-
-buildSignerFromService = (signatureCache) ->
-  if typeof signatureCache != 'boolean'
-    signatureCache = true
-  ddb = new AWS.DynamoDB({region: 'region', endpoint: 'localhost', apiVersion: '2011-12-05'})
-  signer = buildSigner(null, signatureCache)
-  signer.setServiceClientId(ddb._clientId)
-  return signer
+buildSigner = (request, options) ->
+  return new AWS.Signers.V4(request || buildRequest(), 'dynamodb', options)
 
 describe 'AWS.Signers.V4', ->
   date = new Date(1935346573456)
@@ -42,6 +32,31 @@ describe 'AWS.Signers.V4', ->
       req = buildRequest()
       signer = buildSigner(req)
       expect(signer.request).to.equal(req)
+
+    it 'can accept an options object', ->
+      req = buildRequest()
+      operation = {fake: 'bag'}
+      signer = buildSigner(req, {
+        signatureCache: true,
+        operation: operation
+      })
+      expect(signer.signatureCache).to.equal(true)
+      expect(signer.operation).to.equal(operation)
+
+    it 'can set signatureCache to false', ->
+      req = buildRequest()
+      operation = {fake: 'bag'}
+      signer = buildSigner(req, {
+        signatureCache: false
+      })
+      expect(signer.signatureCache).to.equal(false)
+
+    it 'defaults signatureCache to true', ->
+      req = buildRequest()
+      operation = {fake: 'bag'}
+      signer = buildSigner(req)
+      expect(signer.signatureCache).to.equal(true)
+
   describe 'addAuthorization', ->
     headers = {
       'Content-Type': 'application/x-amz-json-1.0',
