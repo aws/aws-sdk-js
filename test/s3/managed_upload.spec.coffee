@@ -632,6 +632,7 @@ describe 'AWS.S3.ManagedUpload', ->
             's3.putObjectTagging'
           ]
           expect(err).not.to.exist
+          expect(data.Location).to.equal('FINAL_LOCATION')
           expect(reqs[6].params.Tagging).to.deep.equal({
             TagSet: [
               {Key: 'tag1', Value: 'value1'}
