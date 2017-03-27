@@ -337,6 +337,54 @@ describe 'AWS.S3.ManagedUpload', ->
         expect(data.Bucket).to.equal('bucket')
         done()
 
+    describe 'Location', ->
+      it 'returns paths with simple string keys for single part uploads', (done) ->
+        reqs = helpers.mockResponses [
+          data: ETag: 'ETAG'
+        ]
+        send {Body: smallbody, ContentEncoding: 'encoding', Key: 'file.ext'}, ->
+          expect(err).not.to.exist
+          expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/file.ext')
+          done()
+
+      it 'returns paths with simple string keys for multipart uploads', (done) ->
+        reqs = helpers.mockResponses [
+          { data: UploadId: 'uploadId' }
+          { data: ETag: 'ETAG1' }
+          { data: ETag: 'ETAG2' }
+          { data: ETag: 'ETAG3' }
+          { data: ETag: 'ETAG4' }
+          { data: ETag: 'FINAL_ETAG', Location: 'https://bucket.s3.mock-region.amazonaws.com/file.ext' }
+        ]
+        send {Body: bigbody, ContentEncoding: 'encoding', Key: 'file.ext'}, ->
+          expect(err).not.to.exist
+          expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/file.ext')
+          done()
+
+      it 'returns paths with subfolder keys for single part uploads', (done) ->
+        reqs = helpers.mockResponses [
+          data: ETag: 'ETAG'
+        ]
+        send {Body: smallbody, ContentEncoding: 'encoding', Key: 'directory/subdirectory/file.ext'}, ->
+          expect(err).not.to.exist
+          expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/directory/subdirectory/file.ext')
+          done()
+
+      it 'returns paths with subfolder keys for multipart uploads', (done) ->
+        reqs = helpers.mockResponses [
+          { data: UploadId: 'uploadId' }
+          { data: ETag: 'ETAG1' }
+          { data: ETag: 'ETAG2' }
+          { data: ETag: 'ETAG3' }
+          { data: ETag: 'ETAG4' }
+          { data: ETag: 'FINAL_ETAG', Location: 'https://bucket.s3.mock-region.amazonaws.com/directory%2Fsubdirectory%2Ffile.ext' }
+        ]
+        send {Body: bigbody, ContentEncoding: 'encoding', Key: 'folder/file.ext'}, ->
+          expect(err).not.to.exist
+          expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/directory/subdirectory/file.ext')
+          done()
+
+
     if AWS.util.isNode()
       describe 'streaming', ->
         it 'sends a small stream in a single putObject', (done) ->
@@ -584,6 +632,7 @@ describe 'AWS.S3.ManagedUpload', ->
             's3.putObjectTagging'
           ]
           expect(err).not.to.exist
+          expect(data.Location).to.equal('FINAL_LOCATION')
           expect(reqs[6].params.Tagging).to.deep.equal({
             TagSet: [
               {Key: 'tag1', Value: 'value1'}
@@ -591,6 +640,40 @@ describe 'AWS.S3.ManagedUpload', ->
               {Key: 'étiquette', Value: 'valeur à être encodé'}
             ]
           })
+          done()
+
+      it 'return errors from PutObjectTagging request following a successful multipart upload with tags', (done) ->
+        reqs = helpers.mockResponses [
+          { data: UploadId: 'uploadId' }
+          { data: ETag: 'ETAG1' }
+          { data: ETag: 'ETAG2' }
+          { data: ETag: 'ETAG3' }
+          { data: ETag: 'ETAG4' }
+          { data: ETag: 'FINAL_ETAG', Location: 'FINAL_LOCATION' }
+          { error: { code: 'InvalidRequest' }, data: null }
+        ]
+
+        upload = new AWS.S3.ManagedUpload(
+          service: s3
+          params: {Body: bigbody}
+          tags: [
+            {Key: 'tag1', Value: 'value1'}
+            {Key: 'tag2', Value: 'value2'}
+            {Key: 'étiquette', Value: 'valeur à être encodé'}
+          ]
+        )
+
+        send {}, ->
+          expect(helpers.operationsForRequests(reqs)).to.eql [
+            's3.createMultipartUpload'
+            's3.uploadPart'
+            's3.uploadPart'
+            's3.uploadPart'
+            's3.uploadPart'
+            's3.completeMultipartUpload'
+            's3.putObjectTagging'
+          ]
+          expect(err.code).to.equal('InvalidRequest')
           done()
 
       it 'should throw when tags are not provided as an array', (done) ->
