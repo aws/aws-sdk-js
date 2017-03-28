@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.32.0-->
+<!--LATEST=2.33.0-->
 <!--ENTRYINSERT-->
+
+## 2.33.0
+* feature: core: Adds support for 'v4' and 'v4-unsigned-body' authtype traits.
+* bugfix: ManagedUpload: Ensures multi-part upload locations are URI-decoded to match single-part upload locations.
 
 ## 2.32.0
 * feature: S3: Adds a means of specifying tags to apply to objects of any size uploaded with AWS.S3.ManagedUploader

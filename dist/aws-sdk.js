@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.32.0
+// AWS SDK for JavaScript v2.33.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -87653,7 +87653,7 @@ module.exports={
           "BaselineIdentities": {
             "type": "list",
             "member": {
-              "shape": "S96"
+              "shape": "S97"
             }
           },
           "NextToken": {}
@@ -87714,7 +87714,7 @@ module.exports={
               "members": {
                 "PatchGroup": {},
                 "BaselineIdentity": {
-                  "shape": "S96"
+                  "shape": "S97"
                 }
               }
             }
@@ -87884,7 +87884,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Sa4"
+            "shape": "Sa5"
           },
           "ResultAttributes": {
             "type": "list",
@@ -87931,7 +87931,7 @@ module.exports={
                       "CaptureTime": {},
                       "ContentHash": {},
                       "Content": {
-                        "shape": "San"
+                        "shape": "Sao"
                       }
                     }
                   }
@@ -88148,7 +88148,7 @@ module.exports={
         ],
         "members": {
           "Names": {
-            "shape": "Sbf"
+            "shape": "Sbg"
           },
           "WithDecryption": {
             "type": "boolean"
@@ -88170,7 +88170,7 @@ module.exports={
             }
           },
           "InvalidParameters": {
-            "shape": "Sbf"
+            "shape": "Sbg"
           }
         }
       }
@@ -88300,7 +88300,7 @@ module.exports={
           },
           "NextToken": {},
           "Filters": {
-            "shape": "Sby"
+            "shape": "Sbz"
           },
           "Details": {
             "type": "boolean"
@@ -88356,7 +88356,7 @@ module.exports={
                 },
                 "ServiceRole": {},
                 "NotificationConfig": {
-                  "shape": "Scb"
+                  "shape": "Scc"
                 }
               }
             }
@@ -88376,7 +88376,7 @@ module.exports={
           },
           "NextToken": {},
           "Filters": {
-            "shape": "Sby"
+            "shape": "Sbz"
           }
         }
       },
@@ -88386,7 +88386,7 @@ module.exports={
           "Commands": {
             "type": "list",
             "member": {
-              "shape": "Scj"
+              "shape": "Sck"
             }
           },
           "NextToken": {}
@@ -88490,7 +88490,7 @@ module.exports={
           "InstanceId": {},
           "TypeName": {},
           "Filters": {
-            "shape": "Sa4"
+            "shape": "Sa5"
           },
           "NextToken": {},
           "MaxResults": {
@@ -88506,7 +88506,7 @@ module.exports={
           "SchemaVersion": {},
           "CaptureTime": {},
           "Entries": {
-            "shape": "San"
+            "shape": "Sao"
           },
           "NextToken": {}
         }
@@ -88581,7 +88581,7 @@ module.exports={
                 "CaptureTime": {},
                 "ContentHash": {},
                 "Content": {
-                  "shape": "San"
+                  "shape": "Sao"
                 }
               }
             }
@@ -88778,7 +88778,7 @@ module.exports={
           "MaxErrors": {},
           "ServiceRoleArn": {},
           "NotificationConfig": {
-            "shape": "Scb"
+            "shape": "Scc"
           }
         }
       },
@@ -88786,7 +88786,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Command": {
-            "shape": "Scj"
+            "shape": "Sck"
           }
         }
       }
@@ -89421,7 +89421,7 @@ module.exports={
         "S3Region": {}
       }
     },
-    "S96": {
+    "S97": {
       "type": "structure",
       "members": {
         "BaselineId": {},
@@ -89432,7 +89432,7 @@ module.exports={
         }
       }
     },
-    "Sa4": {
+    "Sa5": {
       "type": "list",
       "member": {
         "locationName": "InventoryFilter",
@@ -89453,7 +89453,7 @@ module.exports={
         }
       }
     },
-    "San": {
+    "Sao": {
       "type": "list",
       "member": {
         "type": "map",
@@ -89461,11 +89461,11 @@ module.exports={
         "value": {}
       }
     },
-    "Sbf": {
+    "Sbg": {
       "type": "list",
       "member": {}
     },
-    "Sby": {
+    "Sbz": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -89479,7 +89479,7 @@ module.exports={
         }
       }
     },
-    "Scb": {
+    "Scc": {
       "type": "structure",
       "members": {
         "NotificationArn": {},
@@ -89490,7 +89490,7 @@ module.exports={
         "NotificationType": {}
       }
     },
-    "Scj": {
+    "Sck": {
       "type": "structure",
       "members": {
         "CommandId": {},
@@ -89529,7 +89529,7 @@ module.exports={
         },
         "ServiceRole": {},
         "NotificationConfig": {
-          "shape": "Scb"
+          "shape": "Scc"
         }
       }
     }
@@ -89538,45 +89538,44 @@ module.exports={
 },{}],136:[function(require,module,exports){
 module.exports={
   "pagination": {
+    "DescribeActivations": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "ActivationList"
+    },
     "DescribeInstanceInformation": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "InstanceInformationList"
     },
     "ListAssociations": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "Associations"
     },
     "ListCommandInvocations": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "CommandInvocations"
     },
     "ListCommands": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "Commands"
     },
     "ListDocuments": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxResults",
+      "output_token": "NextToken",
       "result_key": "DocumentIdentifiers"
-    },
-    "DescribeActivations": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "ActivationList"
     }
   }
 }
-
 },{}],137:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -96011,7 +96010,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.32.0',
+  VERSION: '2.33.0',
 
 
   Signers: {},
@@ -97178,9 +97177,15 @@ AWS.EventListeners = {
 
     addAsync('COMPUTE_SHA256', 'afterBuild', function COMPUTE_SHA256(req, done) {
       req.haltHandlersOnError();
-      if (!req.service.api.signatureVersion) return done(); // none
+      var operation = req.service.api.operations[req.operation];
+      var authtype = operation ? operation.authtype : '';
+      if (!req.service.api.signatureVersion && !authtype) return done(); // none
       if (req.service.getSignerClass(req) === AWS.Signers.V4) {
         var body = req.httpRequest.body || '';
+        if (authtype.indexOf('unsigned-body') >= 0) {
+          req.httpRequest.headers['X-Amz-Content-Sha256'] = 'UNSIGNED-PAYLOAD';
+          return done();
+        }
         AWS.util.computeSha256(body, function(err, sha) {
           if (err) {
             done(err);
@@ -97224,7 +97229,9 @@ AWS.EventListeners = {
 
     addAsync('SIGN', 'sign', function SIGN(req, done) {
       var service = req.service;
-      if (!service.api.signatureVersion) return done(); // none
+      var operation = req.service.api.operations[req.operation];
+      var authtype = operation ? operation.authtype : '';
+      if (!service.api.signatureVersion && !authtype) return done(); // none
 
       service.config.getCredentials(function (err, credentials) {
         if (err) {
@@ -97237,7 +97244,10 @@ AWS.EventListeners = {
           var SignerClass = service.getSignerClass(req);
           var signer = new SignerClass(req.httpRequest,
             service.api.signingName || service.api.endpointPrefix,
-           service.config.signatureCache);
+            {
+              signatureCache: service.config.signatureCache,
+              operation: operation
+            });
           signer.setServiceClientId(service._clientId);
 
           delete req.httpRequest.headers['Authorization'];
@@ -100536,10 +100546,20 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
         return self.cleanup(err);
       }
 
+      if (data && typeof data.Location === 'string') {
+        data.Location = data.Location.replace(/%2F/g, '/');
+      }
+
       if (Array.isArray(self.tags)) {
         self.service.putObjectTagging(
           {Tagging: {TagSet: self.tags}},
-          self.callback
+          function(e, d) {
+            if (e) {
+              self.callback(e);
+            } else {
+              self.callback(e, data);
+            }
+          }
         );
       } else {
         self.callback(err, data);
@@ -100949,10 +100969,14 @@ AWS.Service = inherit({
   },
 
 
-  getSignerClass: function getSignerClass() {
+  getSignerClass: function getSignerClass(request) {
     var version;
+    var operation = request ? request.service.api.operations[request.operation] : null;
+    var authtype = operation ? operation.authtype : '';
     if (this.config.signatureVersion) {
       version = this.config.signatureVersion;
+    } else if (authtype === 'v4' || authtype === 'v4-unsigned-body') {
+      version = 'v4';
     } else {
       version = this.api.signatureVersion;
     }
@@ -102805,10 +102829,12 @@ var expiresHeader = 'presigned-expires';
 
 
 AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
-  constructor: function V4(request, serviceName, signatureCache) {
+  constructor: function V4(request, serviceName, options) {
     AWS.Signers.RequestSigner.call(this, request);
     this.serviceName = serviceName;
-    this.signatureCache = signatureCache;
+    options = options || {};
+    this.signatureCache = typeof options.signatureCache === 'boolean' ? options.signatureCache : true;
+    this.operation = options.operation;
   },
 
   algorithm: 'AWS4-HMAC-SHA256',
@@ -102961,10 +102987,11 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
   },
 
   hexEncodedBodyHash: function hexEncodedBodyHash() {
-    if (this.isPresigned() && this.serviceName === 's3' && !this.request.body) {
+    var request = this.request;
+    if (this.isPresigned() && this.serviceName === 's3' && !request.body) {
       return 'UNSIGNED-PAYLOAD';
-    } else if (this.request.headers['X-Amz-Content-Sha256']) {
-      return this.request.headers['X-Amz-Content-Sha256'];
+    } else if (request.headers['X-Amz-Content-Sha256']) {
+      return request.headers['X-Amz-Content-Sha256'];
     } else {
       return this.hexEncodedHash(this.request.body || '');
     }
