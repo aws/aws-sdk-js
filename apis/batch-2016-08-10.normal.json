@@ -37,7 +37,7 @@
         {"shape":"ClientException"},
         {"shape":"ServerException"}
       ],
-      "documentation":"<p>Creates an AWS Batch compute environment. You can create <code>MANAGED</code> or <code>UNMANAGED</code>compute environments.</p> <p>In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use the latest Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand instances in your managed compute environment, or you can use Amazon EC2 Spot instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price.</p> <p>In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html\">Container Instance AMIs</a> in the <i>Amazon EC2 Container Service Developer Guide</i>. After you have created your unmanaged compute environment, you can use the <a>DescribeComputeEnvironments</a> operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html\">Launching an Amazon ECS Container Instance</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
+      "documentation":"<p>Creates an AWS Batch compute environment. You can create <code>MANAGED</code> or <code>UNMANAGED</code> compute environments.</p> <p>In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use the latest Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand instances in your managed compute environment, or you can use Amazon EC2 Spot instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price.</p> <p>In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html\">Container Instance AMIs</a> in the <i>Amazon EC2 Container Service Developer Guide</i>. After you have created your unmanaged compute environment, you can use the <a>DescribeComputeEnvironments</a> operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html\">Launching an Amazon ECS Container Instance</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
     },
     "CreateJobQueue":{
       "name":"CreateJobQueue",
@@ -237,6 +237,54 @@
     }
   },
   "shapes":{
+    "AttemptContainerDetail":{
+      "type":"structure",
+      "members":{
+        "containerInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon ECS container instance that hosts the job attempt.</p>"
+        },
+        "taskArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the job attempt.</p>"
+        },
+        "exitCode":{
+          "shape":"Integer",
+          "documentation":"<p>The exit code for the job attempt. A non-zero exit code is considered a failure.</p>"
+        },
+        "reason":{
+          "shape":"String",
+          "documentation":"<p>A short (255 max characters) human-readable string to provide additional details about a running or stopped container.</p>"
+        }
+      },
+      "documentation":"<p>An object representing the details of a container that is part of a job attempt.</p>"
+    },
+    "AttemptDetail":{
+      "type":"structure",
+      "members":{
+        "container":{
+          "shape":"AttemptContainerDetail",
+          "documentation":"<p>Details about the container in this job attempt.</p>"
+        },
+        "startedAt":{
+          "shape":"Long",
+          "documentation":"<p>The Unix timestamp for when the attempt was started (when the task transitioned from the <code>PENDING</code> state to the <code>RUNNING</code> state).</p>"
+        },
+        "stoppedAt":{
+          "shape":"Long",
+          "documentation":"<p>The Unix timestamp for when the attempt was stopped (when the task transitioned from the <code>RUNNING</code> state to the <code>STOPPED</code> state).</p>"
+        },
+        "statusReason":{
+          "shape":"String",
+          "documentation":"<p>A short, human-readable string to provide additional details about the current status of the job attempt.</p>"
+        }
+      },
+      "documentation":"<p>An object representing a job attempt.</p>"
+    },
+    "AttemptDetails":{
+      "type":"list",
+      "member":{"shape":"AttemptDetail"}
+    },
     "Boolean":{"type":"boolean"},
     "CEState":{
       "type":"string",
@@ -517,6 +565,10 @@
         "containerInstanceArn":{
           "shape":"String",
           "documentation":"<p>The Amazon Resource Name (ARN) of the container instance on which the container is running.</p>"
+        },
+        "taskArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job.</p>"
         }
       },
       "documentation":"<p>An object representing the details of a container that is part of a job.</p>"
@@ -916,6 +968,10 @@
           "shape":"ParametersMap",
           "documentation":"<p>Default parameters or parameter substitution placeholders that are set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a <code>SubmitJob</code> request override any corresponding parameter defaults from the job definition.</p>"
         },
+        "retryStrategy":{
+          "shape":"RetryStrategy",
+          "documentation":"<p>The retry strategy to use for failed jobs that are submitted with this job definition.</p>"
+        },
         "containerProperties":{
           "shape":"ContainerProperties",
           "documentation":"<p>An object with various properties specific to container-based jobs. </p>"
@@ -972,6 +1028,10 @@
           "shape":"JobStatus",
           "documentation":"<p>The current status for the job.</p>"
         },
+        "attempts":{
+          "shape":"AttemptDetails",
+          "documentation":"<p>A list of job attempts associated with this job.</p>"
+        },
         "statusReason":{
           "shape":"String",
           "documentation":"<p>A short, human-readable string to provide additional details about the current status of the job. </p>"
@@ -979,6 +1039,10 @@
         "createdAt":{
           "shape":"Long",
           "documentation":"<p>The Unix timestamp for when the job was created (when the task entered the <code>PENDING</code> state). </p>"
+        },
+        "retryStrategy":{
+          "shape":"RetryStrategy",
+          "documentation":"<p>The retry strategy to use for this job if an attempt fails.</p>"
         },
         "startedAt":{
           "shape":"Long",
@@ -1157,7 +1221,7 @@
           "documentation":"<p>The name of the volume to mount.</p>"
         }
       },
-      "documentation":"<p>Details on a volume mount point that is used in a job's container properties.</p>"
+      "documentation":"<p>Details on a Docker volume mount point that is used in a job's container properties.</p>"
     },
     "MountPoints":{
       "type":"list",
@@ -1190,6 +1254,10 @@
         "containerProperties":{
           "shape":"ContainerProperties",
           "documentation":"<p>An object with various properties specific for container-based jobs. This parameter is required if the <code>type</code> parameter is <code>container</code>.</p>"
+        },
+        "retryStrategy":{
+          "shape":"RetryStrategy",
+          "documentation":"<p>The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here.</p>"
         }
       }
     },
@@ -1214,6 +1282,16 @@
           "documentation":"<p>The revision of the job definition.</p>"
         }
       }
+    },
+    "RetryStrategy":{
+      "type":"structure",
+      "members":{
+        "attempts":{
+          "shape":"Integer",
+          "documentation":"<p>The number of times to move a job to the <code>RUNNABLE</code> status. You may specify between 1 and 10 attempts. If <code>attempts</code> is greater than one, the job is retried if it fails until it has moved to <code>RUNNABLE</code> that many times.</p>"
+        }
+      },
+      "documentation":"<p>The retry strategy associated with a job.</p>"
     },
     "ServerException":{
       "type":"structure",
@@ -1240,7 +1318,7 @@
       "members":{
         "jobName":{
           "shape":"String",
-          "documentation":"<p>The name of the job.</p>"
+          "documentation":"<p>The name of the job. A name must be 1 to 128 characters in length.</p> <p>Pattern: ^[a-zA-Z0-9_]+$</p>"
         },
         "jobQueue":{
           "shape":"String",
@@ -1248,7 +1326,7 @@
         },
         "dependsOn":{
           "shape":"JobDependencyList",
-          "documentation":"<p>A list of job names or IDs on which this job depends. A job can depend upon a maximum of 100 jobs. </p>"
+          "documentation":"<p>A list of job IDs on which this job depends. A job can depend upon a maximum of 100 jobs. </p>"
         },
         "jobDefinition":{
           "shape":"String",
@@ -1261,6 +1339,10 @@
         "containerOverrides":{
           "shape":"ContainerOverrides",
           "documentation":"<p>A list of container overrides in JSON format that specify the name of a container in the specified job definition and the overrides it should receive. You can override the default command for a container (that is specified in the job definition or the Docker image) with a <code>command</code> override. You can also override existing environment variables (that are specified in the job definition or Docker image) on a container or add new environment variables to it with an <code>environment</code> override.</p>"
+        },
+        "retryStrategy":{
+          "shape":"RetryStrategy",
+          "documentation":"<p>The retry strategy to use for failed jobs from this <a>SubmitJob</a> operation. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition.</p>"
         }
       }
     },

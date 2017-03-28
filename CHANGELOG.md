@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.33.0-->
+<!--LATEST=2.34.0-->
 <!--ENTRYINSERT-->
+
+## 2.34.0
+* features: Batch: Customers can now provide a retryStrategy as part of the RegisterJobDefinition and SubmitJob API calls.
+* features: EC2: Customers can now tag their Amazon EC2 Instances and Amazon EBS Volumes at the time of their creation.
 
 ## 2.33.0
 * feature: core: Adds support for 'v4' and 'v4-unsigned-body' authtype traits.

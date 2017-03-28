@@ -20,11 +20,11 @@ declare class Batch extends Service {
    */
   cancelJob(callback?: (err: AWSError, data: Batch.Types.CancelJobResponse) => void): Request<Batch.Types.CancelJobResponse, AWSError>;
   /**
-   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGEDcompute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use the latest Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand instances in your managed compute environment, or you can use Amazon EC2 Spot instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon EC2 Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon EC2 Container Service Developer Guide.
+   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use the latest Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand instances in your managed compute environment, or you can use Amazon EC2 Spot instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon EC2 Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon EC2 Container Service Developer Guide.
    */
   createComputeEnvironment(params: Batch.Types.CreateComputeEnvironmentRequest, callback?: (err: AWSError, data: Batch.Types.CreateComputeEnvironmentResponse) => void): Request<Batch.Types.CreateComputeEnvironmentResponse, AWSError>;
   /**
-   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGEDcompute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use the latest Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand instances in your managed compute environment, or you can use Amazon EC2 Spot instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon EC2 Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon EC2 Container Service Developer Guide.
+   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use the latest Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand instances in your managed compute environment, or you can use Amazon EC2 Spot instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon EC2 Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon EC2 Container Service Developer Guide.
    */
   createComputeEnvironment(callback?: (err: AWSError, data: Batch.Types.CreateComputeEnvironmentResponse) => void): Request<Batch.Types.CreateComputeEnvironmentResponse, AWSError>;
   /**
@@ -141,6 +141,43 @@ declare class Batch extends Service {
   updateJobQueue(callback?: (err: AWSError, data: Batch.Types.UpdateJobQueueResponse) => void): Request<Batch.Types.UpdateJobQueueResponse, AWSError>;
 }
 declare namespace Batch {
+  export interface AttemptContainerDetail {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon ECS container instance that hosts the job attempt.
+     */
+    containerInstanceArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the job attempt.
+     */
+    taskArn?: String;
+    /**
+     * The exit code for the job attempt. A non-zero exit code is considered a failure.
+     */
+    exitCode?: Integer;
+    /**
+     * A short (255 max characters) human-readable string to provide additional details about a running or stopped container.
+     */
+    reason?: String;
+  }
+  export interface AttemptDetail {
+    /**
+     * Details about the container in this job attempt.
+     */
+    container?: AttemptContainerDetail;
+    /**
+     * The Unix timestamp for when the attempt was started (when the task transitioned from the PENDING state to the RUNNING state).
+     */
+    startedAt?: Long;
+    /**
+     * The Unix timestamp for when the attempt was stopped (when the task transitioned from the RUNNING state to the STOPPED state).
+     */
+    stoppedAt?: Long;
+    /**
+     * A short, human-readable string to provide additional details about the current status of the job attempt.
+     */
+    statusReason?: String;
+  }
+  export type AttemptDetails = AttemptDetail[];
   export type Boolean = boolean;
   export type CEState = "ENABLED"|"DISABLED"|string;
   export type CEStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;
@@ -333,6 +370,10 @@ declare namespace Batch {
      * The Amazon Resource Name (ARN) of the container instance on which the container is running.
      */
     containerInstanceArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job.
+     */
+    taskArn?: String;
   }
   export interface ContainerOverrides {
     /**
@@ -614,6 +655,10 @@ declare namespace Batch {
      */
     parameters?: ParametersMap;
     /**
+     * The retry strategy to use for failed jobs that are submitted with this job definition.
+     */
+    retryStrategy?: RetryStrategy;
+    /**
      * An object with various properties specific to container-based jobs. 
      */
     containerProperties?: ContainerProperties;
@@ -645,6 +690,10 @@ declare namespace Batch {
      */
     status: JobStatus;
     /**
+     * A list of job attempts associated with this job.
+     */
+    attempts?: AttemptDetails;
+    /**
      * A short, human-readable string to provide additional details about the current status of the job. 
      */
     statusReason?: String;
@@ -652,6 +701,10 @@ declare namespace Batch {
      * The Unix timestamp for when the job was created (when the task entered the PENDING state). 
      */
     createdAt?: Long;
+    /**
+     * The retry strategy to use for this job if an attempt fails.
+     */
+    retryStrategy?: RetryStrategy;
     /**
      * The Unix timestamp for when the job was started (when the task transitioned from the PENDING state to the RUNNING state). 
      */
@@ -793,6 +846,10 @@ declare namespace Batch {
      * An object with various properties specific for container-based jobs. This parameter is required if the type parameter is container.
      */
     containerProperties?: ContainerProperties;
+    /**
+     * The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a SubmitJob operation overrides the retry strategy defined here.
+     */
+    retryStrategy?: RetryStrategy;
   }
   export interface RegisterJobDefinitionResponse {
     /**
@@ -808,11 +865,17 @@ declare namespace Batch {
      */
     revision: Integer;
   }
+  export interface RetryStrategy {
+    /**
+     * The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts. If attempts is greater than one, the job is retried if it fails until it has moved to RUNNABLE that many times.
+     */
+    attempts?: Integer;
+  }
   export type String = string;
   export type StringList = String[];
   export interface SubmitJobRequest {
     /**
-     * The name of the job.
+     * The name of the job. A name must be 1 to 128 characters in length. Pattern: ^[a-zA-Z0-9_]+$
      */
     jobName: String;
     /**
@@ -820,7 +883,7 @@ declare namespace Batch {
      */
     jobQueue: String;
     /**
-     * A list of job names or IDs on which this job depends. A job can depend upon a maximum of 100 jobs. 
+     * A list of job IDs on which this job depends. A job can depend upon a maximum of 100 jobs. 
      */
     dependsOn?: JobDependencyList;
     /**
@@ -835,6 +898,10 @@ declare namespace Batch {
      * A list of container overrides in JSON format that specify the name of a container in the specified job definition and the overrides it should receive. You can override the default command for a container (that is specified in the job definition or the Docker image) with a command override. You can also override existing environment variables (that are specified in the job definition or Docker image) on a container or add new environment variables to it with an environment override.
      */
     containerOverrides?: ContainerOverrides;
+    /**
+     * The retry strategy to use for failed jobs from this SubmitJob operation. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition.
+     */
+    retryStrategy?: RetryStrategy;
   }
   export interface SubmitJobResponse {
     /**
