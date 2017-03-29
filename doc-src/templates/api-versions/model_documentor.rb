@@ -404,8 +404,13 @@ class ExampleShapeVisitor
   end
 
   def visit_string(node, required = false)
-    value = node['enum'] ? node['enum'].join(' | ') : 'STRING_VALUE'
-    "'#{value}'"
+    if node['jsonvalue']
+      "any /* This value will be JSON encoded on your behalf with JSON.stringify() */"
+    elsif node['enum']
+      node['enum'].join(' | ')
+    else
+      "'STRING_VALUE'"
+    end
   end
 
   def visit_integer(node, required = false)
