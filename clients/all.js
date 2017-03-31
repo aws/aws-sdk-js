@@ -75,6 +75,7 @@ module.exports = {
   RDS: require('./rds'),
   Redshift: require('./redshift'),
   Rekognition: require('./rekognition'),
+  ResourceGroupsTaggingAPI: require('./resourcegroupstaggingapi'),
   Route53: require('./route53'),
   Route53Domains: require('./route53domains'),
   S3: require('./s3'),

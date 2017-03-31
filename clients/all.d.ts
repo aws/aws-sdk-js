@@ -71,6 +71,7 @@ export import Polly = require('./polly');
 export import RDS = require('./rds');
 export import Redshift = require('./redshift');
 export import Rekognition = require('./rekognition');
+export import ResourceGroupsTaggingAPI = require('./resourcegroupstaggingapi');
 export import Route53 = require('./route53');
 export import Route53Domains = require('./route53domains');
 export import S3 = require('./s3');

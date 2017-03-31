@@ -73,6 +73,7 @@ export abstract class ConfigurationServicePlaceholders {
   rds?: AWS.RDS.Types.ClientConfiguration;
   redshift?: AWS.Redshift.Types.ClientConfiguration;
   rekognition?: AWS.Rekognition.Types.ClientConfiguration;
+  resourcegroupstaggingapi?: AWS.ResourceGroupsTaggingAPI.Types.ClientConfiguration;
   route53?: AWS.Route53.Types.ClientConfiguration;
   route53domains?: AWS.Route53Domains.Types.ClientConfiguration;
   s3?: AWS.S3.Types.ClientConfiguration;
@@ -170,6 +171,7 @@ export interface ConfigurationServiceApiVersions {
   rds?: AWS.RDS.Types.apiVersion;
   redshift?: AWS.Redshift.Types.apiVersion;
   rekognition?: AWS.Rekognition.Types.apiVersion;
+  resourcegroupstaggingapi?: AWS.ResourceGroupsTaggingAPI.Types.apiVersion;
   route53?: AWS.Route53.Types.apiVersion;
   route53domains?: AWS.Route53Domains.Types.apiVersion;
   s3?: AWS.S3.Types.apiVersion;
