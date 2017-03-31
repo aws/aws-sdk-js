@@ -73,7 +73,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"LinkNameAlreadyInUseException"},
         {"shape":"InvalidAttachmentException"},
-        {"shape":"ValidationException"}
+        {"shape":"ValidationException"},
+        {"shape":"FacetValidationException"}
       ],
       "documentation":"<p>Attaches an existing object to another object. An object can be accessed in two ways:</p> <ol> <li> <p>Using the path</p> </li> <li> <p>Using <code>ObjectIdentifier</code> </p> </li> </ol>"
     },
@@ -721,7 +722,8 @@
         {"shape":"DirectoryNotEnabledException"},
         {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"InvalidNextTokenException"}
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"FacetValidationException"}
       ],
       "documentation":"<p>Lists all attributes associated with an object. </p>"
     },
@@ -1482,6 +1484,10 @@
         "MaxResults":{
           "shape":"NumberResults",
           "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+        },
+        "FacetFilter":{
+          "shape":"SchemaFacet",
+          "documentation":"<p>Used to filter the list of object attributes associated with a certain facet.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>ListObjectAttributes</code> operation.</p>"
@@ -3014,6 +3020,10 @@
           "documentation":"<p>Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.</p>",
           "location":"header",
           "locationName":"x-amz-consistency-level"
+        },
+        "FacetFilter":{
+          "shape":"SchemaFacet",
+          "documentation":"<p>Used to filter the list of object attributes associated with a certain facet.</p>"
         }
       }
     },

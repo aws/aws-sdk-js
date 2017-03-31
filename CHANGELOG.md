@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.35.0-->
+<!--LATEST=2.36.0-->
 <!--ENTRYINSERT-->
+
+## 2.36.0
+* feature: CloudDirectory: ListObjectAttributes now supports filtering by facet.
 
 ## 2.35.0
 * feature: CloudFormation: Adding paginators for ListExports and ListImports

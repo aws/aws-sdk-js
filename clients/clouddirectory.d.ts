@@ -639,6 +639,10 @@ declare namespace CloudDirectory {
      * Maximum number of items to be retrieved in a single call. This is an approximate number.
      */
     MaxResults?: NumberResults;
+    /**
+     * Used to filter the list of object attributes associated with a certain facet.
+     */
+    FacetFilter?: SchemaFacet;
   }
   export interface BatchListObjectAttributesResponse {
     /**
@@ -1480,6 +1484,10 @@ declare namespace CloudDirectory {
      * Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
      */
     ConsistencyLevel?: ConsistencyLevel;
+    /**
+     * Used to filter the list of object attributes associated with a certain facet.
+     */
+    FacetFilter?: SchemaFacet;
   }
   export interface ListObjectAttributesResponse {
     /**
