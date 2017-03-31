@@ -23,12 +23,14 @@ Feature: S3 Managed Upload
     And the object "large_upload_buffer" should exist
     And the ContentLength should equal 20971520
 
+  @streaming
   Scenario: Uploading an empty stream
     When I use S3 managed upload to upload an empty stream to the key "empty_upload_stream"
     Then the multipart upload should succeed
     Then the object "empty_upload_stream" should exist
     And the ContentLength should equal 0
 
+  @streaming
   Scenario: Uploading a small stream
     When I use S3 managed upload to upload a small stream to the key "small_upload_stream"
     Then the multipart upload should succeed
@@ -36,6 +38,7 @@ Feature: S3 Managed Upload
     Then the object "small_upload_stream" should exist
     And the ContentLength should equal 1048576
 
+  @streaming
   Scenario: Uploading a large stream
     When I use S3 managed upload to upload a large stream to the key "large_upload_stream"
     Then the multipart upload should succeed
