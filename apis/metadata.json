@@ -48,7 +48,8 @@
       "2016-08-01*",
       "2016-08-20*",
       "2016-09-07*",
-      "2016-09-29*"
+      "2016-09-29*",
+      "2016-11-25*"
     ],
     "cors": true
   },
@@ -330,6 +331,9 @@
   "rekognition": {
     "name": "Rekognition",
     "cors": true
+  },
+  "resourcegroupstaggingapi": {
+    "name": "ResourceGroupsTaggingAPI"
   },
   "route53": {
     "name": "Route53",
