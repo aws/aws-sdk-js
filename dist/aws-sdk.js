@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.36.0
+// AWS SDK for JavaScript v2.37.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -80974,6 +80974,96 @@ module.exports={
     "uid": "runtime.lex-2016-11-28"
   },
   "operations": {
+    "PostContent": {
+      "http": {
+        "requestUri": "/bot/{botName}/alias/{botAlias}/user/{userId}/content"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "botName",
+          "botAlias",
+          "userId",
+          "contentType",
+          "inputStream"
+        ],
+        "members": {
+          "botName": {
+            "location": "uri",
+            "locationName": "botName"
+          },
+          "botAlias": {
+            "location": "uri",
+            "locationName": "botAlias"
+          },
+          "userId": {
+            "location": "uri",
+            "locationName": "userId"
+          },
+          "sessionAttributes": {
+            "jsonvalue": true,
+            "location": "header",
+            "locationName": "x-amz-lex-session-attributes"
+          },
+          "contentType": {
+            "location": "header",
+            "locationName": "Content-Type"
+          },
+          "accept": {
+            "location": "header",
+            "locationName": "Accept"
+          },
+          "inputStream": {
+            "shape": "S8"
+          }
+        },
+        "payload": "inputStream"
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "contentType": {
+            "location": "header",
+            "locationName": "Content-Type"
+          },
+          "intentName": {
+            "location": "header",
+            "locationName": "x-amz-lex-intent-name"
+          },
+          "slots": {
+            "jsonvalue": true,
+            "location": "header",
+            "locationName": "x-amz-lex-slots"
+          },
+          "sessionAttributes": {
+            "jsonvalue": true,
+            "location": "header",
+            "locationName": "x-amz-lex-session-attributes"
+          },
+          "message": {
+            "location": "header",
+            "locationName": "x-amz-lex-message"
+          },
+          "dialogState": {
+            "location": "header",
+            "locationName": "x-amz-lex-dialog-state"
+          },
+          "slotToElicit": {
+            "location": "header",
+            "locationName": "x-amz-lex-slot-to-elicit"
+          },
+          "inputTranscript": {
+            "location": "header",
+            "locationName": "x-amz-lex-input-transcript"
+          },
+          "audioStream": {
+            "shape": "S8"
+          }
+        },
+        "payload": "audioStream"
+      },
+      "authtype": "v4-unsigned-body"
+    },
     "PostText": {
       "http": {
         "requestUri": "/bot/{botName}/alias/{botAlias}/user/{userId}/text"
@@ -81000,7 +81090,7 @@ module.exports={
             "locationName": "userId"
           },
           "sessionAttributes": {
-            "shape": "S5"
+            "shape": "Se"
           },
           "inputText": {}
         }
@@ -81010,10 +81100,10 @@ module.exports={
         "members": {
           "intentName": {},
           "slots": {
-            "shape": "S5"
+            "shape": "Se"
           },
           "sessionAttributes": {
-            "shape": "S5"
+            "shape": "Se"
           },
           "message": {},
           "dialogState": {},
@@ -81056,7 +81146,11 @@ module.exports={
     }
   },
   "shapes": {
-    "S5": {
+    "S8": {
+      "type": "blob",
+      "streaming": true
+    },
+    "Se": {
       "type": "map",
       "key": {},
       "value": {}
@@ -98065,7 +98159,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.36.0',
+  VERSION: '2.37.0',
 
 
   Signers: {},

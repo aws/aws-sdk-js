@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.36.0-->
+<!--LATEST=2.37.0-->
 <!--ENTRYINSERT-->
+
+## 2.37.0
+* feature: LexRuntime: Adds support to PostContent for speech input
 
 ## 2.36.0
 * feature: CloudDirectory: ListObjectAttributes now supports filtering by facet.
