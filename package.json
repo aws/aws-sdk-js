@@ -42,8 +42,8 @@
     "sax": "1.1.5",
     "url": "0.10.3",
     "uuid": "3.0.0",
-    "xml2js": "0.4.15",
-    "xmlbuilder": "2.6.2"
+    "xml2js": "^0.4.17",
+    "xmlbuilder": "^8.2.0"
   },
   "main": "lib/aws.js",
   "browser": {
