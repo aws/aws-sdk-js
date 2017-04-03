@@ -276,7 +276,9 @@ eof
   end
 
   def load_examples(name, version)
-    paths = Dir[File.join($APIS_DIR, "#{name}-#{version}.examples.json")]
+    @info ||= JSON.parse(File.read(File.join($APIS_DIR, 'metadata.json')))
+    prefix = @info[name]['prefix'] || name
+    paths = Dir[File.join($APIS_DIR, "#{prefix}-#{version}.examples.json")]
     unless paths.empty?
       json = JSON.parse(File.read(paths[0]))
       json['examples']

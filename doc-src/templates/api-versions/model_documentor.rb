@@ -104,14 +104,18 @@ class MethodDocumentor
 
     @lines << "@param params [Object]"
     @lines += shapes(api, operation['input'], options).map {|line| "  " + line }
-
     if examples
       examples.each do |example|
-        @lines << "@example #{example['title']}"
-        @lines << ""
-        @lines << " /* #{example['description']} */"
-        @lines << ""
-        @lines << generate_shared_example(api, example, klass, method_name(operation_name)).split("\n").map {|line| "  " + line}
+        begin
+          sharedExample = generate_shared_example(api, example, klass, method_name(operation_name)).split("\n").map {|line| "  " + line}
+          @lines << "@example #{example['title']}"
+          @lines << ""
+          @lines << " /* #{example['description']} */"
+          @lines << ""
+          @lines << sharedExample
+        rescue => exception
+          puts "[warn]: Error encountered generating example for #{klass}.#{operation_name}: #{exception}"
+        end
       end
     end
 
