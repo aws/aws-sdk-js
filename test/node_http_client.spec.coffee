@@ -52,3 +52,39 @@ if AWS.util.isNode()
           expect(err.code).to.equal('TimeoutError')
           expect(err.message).to.equal('Socket timed out without establishing a connection')
           expect(numCalls).to.equal(1)
+
+      describe 'connectTimeout', ->
+        timeoutId = 'TIMEOUT_ID'
+        oldSetTimeout = global.setTimeout
+        oldClearTimeout = global.clearTimeout
+        setTimeoutSpy = null
+        clearTimeoutSpy = null
+
+        beforeEach ->
+          setTimeoutSpy = helpers.spyOn(global, 'setTimeout')
+            .andReturn(timeoutId)
+          clearTimeoutSpy = helpers.spyOn(global, 'clearTimeout')
+            .andCallFake(() -> {})
+
+        afterEach ->
+          global.setTimeout = oldSetTimeout
+          global.clearTimeout = oldClearTimeout
+
+        it 'clears timeouts once the connection has been established', ->
+          EventEmitter = require('events')
+          mockStream = new EventEmitter()
+          mockStream.setTimeout = () -> {}
+          mockStream.end = () -> {}
+          httpModule = require('http')
+          helpers.spyOn(httpModule, 'request').andReturn(mockStream)
+
+          req = new AWS.HttpRequest 'http://1.1.1.1'
+          http.handleRequest req, {connectTimeout: 120000}, null, () -> {}
+
+          mockSocket = new EventEmitter()
+          mockSocket.connecting = true;
+          mockStream.emit('socket', mockSocket)
+          expect(setTimeoutSpy.calls.length).to.equal(1)
+          mockSocket.emit('connect')
+          expect(clearTimeoutSpy.calls.length).to.equal(1)
+          expect(clearTimeoutSpy.calls[0].arguments[0]).to.equal(timeoutId)
