@@ -43,3 +43,12 @@ if AWS.util.isNode()
           expect(err.code).to.equal('TimeoutError')
           expect(err.message).to.equal('Connection timed out after 1ms')
           expect(numCalls).to.equal(1)
+
+      it 'supports connectTimeout in httpOptions', ->
+        numCalls = 0
+        req = new AWS.HttpRequest 'http://1.1.1.1'
+        http.handleRequest req, {connectTimeout: 1}, null, (err) ->
+          numCalls += 1
+          expect(err.code).to.equal('TimeoutError')
+          expect(err.message).to.equal('Socket timed out without establishing a connection')
+          expect(numCalls).to.equal(1)
