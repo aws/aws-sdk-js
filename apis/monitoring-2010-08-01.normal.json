@@ -1,13 +1,13 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"monitoring-2010-08-01",
     "apiVersion":"2010-08-01",
     "endpointPrefix":"monitoring",
     "protocol":"query",
     "serviceAbbreviation":"CloudWatch",
     "serviceFullName":"Amazon CloudWatch",
     "signatureVersion":"v4",
+    "uid":"monitoring-2010-08-01",
     "xmlNamespace":"http://monitoring.amazonaws.com/doc/2010-08-01/"
   },
   "operations":{
@@ -103,7 +103,7 @@
         {"shape":"InvalidParameterCombinationException"},
         {"shape":"InternalServiceFault"}
       ],
-      "documentation":"<p>Gets statistics for the specified metric.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of 60 seconds (1 minute) are available for 15 days</p> </li> <li> <p>Data points with a period of 300 seconds (5 minute) are available for 63 days</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months)</p> </li> </ul> <p>Note that CloudWatch started retaining 5-minute and 1-hour metric data as of 9 July 2016.</p> <p>The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, Amazon CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. A period can be as short as one minute (60 seconds). Note that data points are not returned in chronological order.</p> <p>Amazon CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, Amazon CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.</p> <p>For a list of metrics and dimensions supported by AWS services, see the <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html\">Amazon CloudWatch Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+      "documentation":"<p>Gets statistics for the specified metric.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of 60 seconds (1 minute) are available for 15 days</p> </li> <li> <p>Data points with a period of 300 seconds (5 minute) are available for 63 days</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months)</p> </li> </ul> <p>Note that CloudWatch started retaining 5-minute and 1-hour metric data as of 9 July 2016.</p> <p>The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, Amazon CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. A period can be as short as one minute (60 seconds). Note that data points are not returned in chronological order.</p> <p>Amazon CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, Amazon CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you cannot retrieve percentile statistics for this data unless one of the following conditions is true:</p> <ul> <li> <p>The SampleCount of the statistic set is 1</p> </li> <li> <p>The Min and the Max of the statistic set are equal</p> </li> </ul> <p>For a list of metrics and dimensions supported by AWS services, see the <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html\">Amazon CloudWatch Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
     },
     "ListMetrics":{
       "name":"ListMetrics",
@@ -147,7 +147,7 @@
         {"shape":"InvalidParameterCombinationException"},
         {"shape":"InternalServiceFault"}
       ],
-      "documentation":"<p>Publishes metric data points to Amazon CloudWatch. Amazon CloudWatch associates the data points with the specified metric. If the specified metric does not exist, Amazon CloudWatch creates the metric. When Amazon CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a>ListMetrics</a>.</p> <p>Each <code>PutMetricData</code> request is limited to 8 KB in size for HTTP GET requests and is limited to 40 KB in size for HTTP POST requests.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, Amazon CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (e.g., NaN, +Infinity, -Infinity) are not supported.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a>GetMetricStatistics</a> from the time they are submitted.</p>"
+      "documentation":"<p>Publishes metric data points to Amazon CloudWatch. Amazon CloudWatch associates the data points with the specified metric. If the specified metric does not exist, Amazon CloudWatch creates the metric. When Amazon CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a>ListMetrics</a>.</p> <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, Amazon CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (e.g., NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. For more information on specifying dimensions, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a>GetMetricStatistics</a> from the time they are submitted.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you cannot retrieve percentile statistics for this data unless one of the following conditions is true:</p> <ul> <li> <p>The SampleCount of the statistic set is 1</p> </li> <li> <p>The Min and the Max of the statistic set are equal</p> </li> </ul>"
     },
     "SetAlarmState":{
       "name":"SetAlarmState",
@@ -515,6 +515,11 @@
       "max":255,
       "min":1
     },
+    "EvaluateLowSampleCountPercentile":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
     "EvaluationPeriods":{
       "type":"integer",
       "min":1
@@ -550,7 +555,7 @@
         },
         "Dimensions":{
           "shape":"Dimensions",
-          "documentation":"<p>The dimensions. CloudWatch treats each unique combination of dimensions as a separate metric. You can't retrieve statistics using combinations of dimensions that were not specially published. You must specify the same dimensions that were used when the metrics were created. For an example, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations\">Dimension Combinations</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+          "documentation":"<p>The dimensions. If the metric contains multiple dimensions, you must include a value for each dimension. CloudWatch treats each unique combination of dimensions as a separate metric. You can't retrieve statistics using combinations of dimensions that were not specially published. You must specify the same dimensions that were used when the metrics were created. For an example, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations\">Dimension Combinations</a> in the <i>Amazon CloudWatch User Guide</i>. For more information on specifying dimensions, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
         },
         "StartTime":{
           "shape":"Timestamp",
@@ -861,7 +866,9 @@
         "ComparisonOperator":{
           "shape":"ComparisonOperator",
           "documentation":"<p>The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.</p>"
-        }
+        },
+        "TreatMissingData":{"shape":"TreatMissingData"},
+        "EvaluateLowSampleCountPercentile":{"shape":"EvaluateLowSampleCountPercentile"}
       },
       "documentation":"<p>Represents an alarm.</p>",
       "xmlOrder":[
@@ -886,7 +893,9 @@
         "EvaluationPeriods",
         "Threshold",
         "ComparisonOperator",
-        "ExtendedStatistic"
+        "ExtendedStatistic",
+        "TreatMissingData",
+        "EvaluateLowSampleCountPercentile"
       ]
     },
     "MetricAlarms":{
@@ -1044,6 +1053,14 @@
         "ComparisonOperator":{
           "shape":"ComparisonOperator",
           "documentation":"<p> The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.</p>"
+        },
+        "TreatMissingData":{
+          "shape":"TreatMissingData",
+          "documentation":"<p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code> </p>"
+        },
+        "EvaluateLowSampleCountPercentile":{
+          "shape":"EvaluateLowSampleCountPercentile",
+          "documentation":"<p> Used only for alarms based on percentiles. If you specify <code>ignore</code>, the alarm state will not change during periods with too few data points to be statistically significant. If you specify <code>evaluate</code> or omit this parameter, the alarm will always be evaluated and possibly change state no matter how many data points are available. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples\">Percentile-Based CloudWatch Alarms and Low Data Samples</a>.</p> <p>Valid Values: <code>evaluate | ignore</code> </p>"
         }
       }
     },
@@ -1211,7 +1228,12 @@
       "min":1
     },
     "Threshold":{"type":"double"},
-    "Timestamp":{"type":"timestamp"}
+    "Timestamp":{"type":"timestamp"},
+    "TreatMissingData":{
+      "type":"string",
+      "max":255,
+      "min":1
+    }
   },
   "documentation":"<p>Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the applications you run on AWS in real-time. You can use CloudWatch to collect and track metrics, which are the variables you want to measure for your resources and applications.</p> <p>CloudWatch alarms send notifications or automatically make changes to the resources you are monitoring based on rules that you define. For example, you can monitor the CPU usage and disk reads and writes of your Amazon Elastic Compute Cloud (Amazon EC2) instances and then use this data to determine whether you should launch additional instances to handle increased load. You can also use this data to stop under-used instances to save money.</p> <p>In addition to monitoring the built-in metrics that come with AWS, you can monitor your own custom metrics. With CloudWatch, you gain system-wide visibility into resource utilization, application performance, and operational health.</p>"
 }
