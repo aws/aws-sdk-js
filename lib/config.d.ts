@@ -91,6 +91,7 @@ export interface HTTPOptions {
      * The maximum time in milliseconds that the connection phase of the request
      * should be allowed to take. This only limits the connection phase and has
      * no impact once the socket has established a connection.
+     * Used in node.js environments only.
      */
     connectTimeout?: number;
     /**
