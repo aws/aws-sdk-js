@@ -48,7 +48,7 @@ if AWS.util.isNode()
 
       it 'supports connectTimeout in httpOptions', ->
         numCalls = 0
-        req = new AWS.HttpRequest 'http://1.1.1.1'
+        req = new AWS.HttpRequest 'http://10.255.255.255'
         http.handleRequest req, {connectTimeout: 1}, null, (err) ->
           numCalls += 1
           expect(err.code).to.equal('TimeoutError')
@@ -83,7 +83,7 @@ if AWS.util.isNode()
           httpModule.request = oldRequest
 
         it 'clears timeouts once the connection has been established', ->
-          req = new AWS.HttpRequest 'http://1.1.1.1'
+          req = new AWS.HttpRequest 'http://10.255.255.255'
           http.handleRequest req, {connectTimeout: 120000}, null, () -> {}
 
           mockSocket = new EventEmitter()
