@@ -1,5 +1,7 @@
 helpers = require('./helpers')
 AWS = helpers.AWS
+EventEmitter = require('events').EventEmitter
+httpModule = require('http')
 
 if AWS.util.isNode()
   describe 'AWS.NodeHttpClient', ->
@@ -43,3 +45,51 @@ if AWS.util.isNode()
           expect(err.code).to.equal('TimeoutError')
           expect(err.message).to.equal('Connection timed out after 1ms')
           expect(numCalls).to.equal(1)
+
+      it 'supports connectTimeout in httpOptions', ->
+        numCalls = 0
+        req = new AWS.HttpRequest 'http://10.255.255.255'
+        http.handleRequest req, {connectTimeout: 1}, null, (err) ->
+          numCalls += 1
+          expect(err.code).to.equal('TimeoutError')
+          expect(err.message).to.equal('Socket timed out without establishing a connection')
+          expect(numCalls).to.equal(1)
+
+      describe 'connectTimeout', ->
+        timeoutId = 'TIMEOUT_ID'
+        oldSetTimeout = global.setTimeout
+        oldClearTimeout = global.clearTimeout
+        setTimeoutSpy = null
+        clearTimeoutSpy = null
+
+        oldRequest = httpModule.request
+        requestSpy = null
+        mockClientRequest = null
+
+        beforeEach ->
+          setTimeoutSpy = helpers.spyOn(global, 'setTimeout')
+            .andReturn(timeoutId)
+          clearTimeoutSpy = helpers.spyOn(global, 'clearTimeout')
+            .andCallFake(() -> {})
+          mockClientRequest = new EventEmitter()
+          mockClientRequest.setTimeout = () -> {}
+          mockClientRequest.end = () -> {}
+          requestSpy = helpers.spyOn(httpModule, 'request')
+            .andReturn(mockClientRequest)
+
+        afterEach ->
+          global.setTimeout = oldSetTimeout
+          global.clearTimeout = oldClearTimeout
+          httpModule.request = oldRequest
+
+        it 'clears timeouts once the connection has been established', ->
+          req = new AWS.HttpRequest 'http://10.255.255.255'
+          http.handleRequest req, {connectTimeout: 120000}, null, () -> {}
+
+          mockSocket = new EventEmitter()
+          mockSocket.connecting = true;
+          mockClientRequest.emit('socket', mockSocket)
+          expect(setTimeoutSpy.calls.length).to.equal(1)
+          mockSocket.emit('connect')
+          expect(clearTimeoutSpy.calls.length).to.equal(1)
+          expect(clearTimeoutSpy.calls[0].arguments[0]).to.equal(timeoutId)

@@ -15,20 +15,20 @@ export class ConfigBase extends ConfigurationOptions{
      * Loads configuration data from a JSON file into this config object.
      * Loading configuration willr eset all existing configuration on the object.
      * This feature is not supported in the browser environment of the SDK.
-     * 
+     *
      * @param {string} path - the path relative to your process's current working directory to load configuration from.
      */
     loadFromPath(path: string): ConfigBase;
     /**
      * Updates the current configuration object with new options.
-     * 
+     *
      * @param {ConfigurationOptions} options - a map of option keys and values.
      * @param {boolean} allowUnknownKeys - Whether unknown keys can be set on the configuration object.
      */
     update(options: ConfigurationOptions & {[key: string]: any}, allowUnknownKeys: true): void;
     /**
      * Updates the current configuration object with new options.
-     * 
+     *
      * @param {ConfigurationOptions} options - a map of option keys and values.
      * @param {boolean} allowUnknownKeys - Defaults to false. Whether unknown keys can be set on the configuration object.
      */
@@ -54,20 +54,20 @@ export class Config extends ConfigBase {
      * Loads configuration data from a JSON file into this config object.
      * Loading configuration willr eset all existing configuration on the object.
      * This feature is not supported in the browser environment of the SDK.
-     * 
+     *
      * @param {string} path - the path relative to your process's current working directory to load configuration from.
      */
     loadFromPath(path: string): Config & ConfigurationServicePlaceholders & APIVersions;
     /**
      * Updates the current configuration object with new options.
-     * 
+     *
      * @param {ConfigurationOptions} options - a map of option keys and values.
      * @param {boolean} allowUnknownKeys - Whether unknown keys can be set on the configuration object.
      */
     update(options: ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions & {[key: string]: any}, allowUnknownKeys: true): void;
     /**
      * Updates the current configuration object with new options.
-     * 
+     *
      * @param {ConfigurationOptions} options - a map of option keys and values.
      * @param {boolean} allowUnknownKeys - Defaults to false. Whether unknown keys can be set on the configuration object.
      */
@@ -80,31 +80,38 @@ export interface HTTPOptions {
     /**
      * the URL to proxy requests through.
      */
-    proxy?: string
+    proxy?: string;
     /**
      * the Agent object to perform HTTP requests with.
      * Used for connection pooling.
      * Defaults to the global agent (http.globalAgent) for non-SSL connections.
      */
-    agent?: httpAgent | httpsAgent
+    agent?: httpAgent | httpsAgent;
+    /**
+     * The maximum time in milliseconds that the connection phase of the request
+     * should be allowed to take. This only limits the connection phase and has
+     * no impact once the socket has established a connection.
+     * Used in node.js environments only.
+     */
+    connectTimeout?: number;
     /**
      * The number of milliseconds to wait before giving up on a connection attempt.
      * Defaults to two minutes (120000).
      */
-    timeout?: number
+    timeout?: number;
     /**
      * Whether the SDK will send asynchronous HTTP requests.
      * Used in the browser environment only.
      * Set to false to send requests synchronously.
      * Defaults to true (async on).
      */
-    xhrAsync?: boolean
+    xhrAsync?: boolean;
     /**
      * Sets the 'withCredentials' property of an XMLHttpRequest object.
      * Used in the browser environment only.
      * Defaults to false.
      */
-    xhrWithCredentials?: boolean
+    xhrWithCredentials?: boolean;
 }
 export interface Logger {
     write?: (chunk: any, encoding?: string, callback?: () => void) => void
@@ -112,7 +119,7 @@ export interface Logger {
 }
 export interface ParamValidation {
     /**
-     * Validates that a value meets the min constraint. 
+     * Validates that a value meets the min constraint.
      * This is enabled by default when paramValidation is set to true.
      */
     min?: boolean
@@ -131,12 +138,12 @@ export interface ParamValidation {
 }
 export interface RetryDelayOptions {
     /**
-     * The base number of milliseconds to use in the exponential backoff for operation retries. 
+     * The base number of milliseconds to use in the exponential backoff for operation retries.
      * Defaults to 100 ms.
      */
     base?: number
     /**
-     * A custom function that accepts a retry count and returns the amount of time to delay in milliseconds. 
+     * A custom function that accepts a retry count and returns the amount of time to delay in milliseconds.
      * The base option will be ignored if this option is supplied.
      */
     customBackoff?: (retryCount: number) => number
@@ -178,19 +185,19 @@ export abstract class ConfigurationOptions {
     credentialProvider?: CredentialProviderChain
     /**
      * AWS access key ID.
-     * 
+     *
      * @deprecated
      */
     accessKeyId?: string
     /**
      * AWS secret access key.
-     * 
+     *
      * @deprecated
      */
     secretAccessKey?: string
     /**
      * AWS session token.
-     * 
+     *
      * @deprecated
      */
     sessionToken?: string
@@ -211,8 +218,8 @@ export abstract class ConfigurationOptions {
      */
     maxRetries?: number
     /**
-     * Returns whether input parameters should be validated against the operation description before sending the request. 
-     * Defaults to true. 
+     * Returns whether input parameters should be validated against the operation description before sending the request.
+     * Defaults to true.
      * Pass a map to enable any of the following specific validation features: min|max|pattern|enum
      */
     paramValidation?: ParamValidation|boolean
