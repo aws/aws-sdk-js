@@ -12,11 +12,11 @@ declare class ElastiCache extends Service {
   constructor(options?: ElastiCache.Types.ClientConfiguration)
   config: Config & ElastiCache.Types.ClientConfiguration;
   /**
-   * Adds up to 10 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.  When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see Using Cost Allocation Tags in Amazon ElastiCache in the ElastiCache User Guide.
+   * Adds up to 50 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.  When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see Using Cost Allocation Tags in Amazon ElastiCache in the ElastiCache User Guide.
    */
   addTagsToResource(params: ElastiCache.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
-   * Adds up to 10 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.  When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see Using Cost Allocation Tags in Amazon ElastiCache in the ElastiCache User Guide.
+   * Adds up to 50 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.  When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see Using Cost Allocation Tags in Amazon ElastiCache in the ElastiCache User Guide.
    */
   addTagsToResource(callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class ElastiCache extends Service {
    */
   createCacheCluster(callback?: (err: AWSError, data: ElastiCache.Types.CreateCacheClusterResult) => void): Request<ElastiCache.Types.CreateCacheClusterResult, AWSError>;
   /**
-   * Creates a new cache parameter group. A cache parameter group is a collection of parameters that you apply to all of the nodes in a cache cluster.
+   * Creates a new Amazon ElastiCache cache parameter group. An ElastiCache cache parameter group is a collection of parameters and their values that are applied to all of the nodes in any cache cluster or replication group using the CacheParameterGroup. A newly created CacheParameterGroup is an exact duplicate of the default parameter group for the CacheParameterGroupFamily. To customize the newly created CacheParameterGroup you can change the values of specific parameters. For more information, see:    ModifyCacheParameterGroup in the ElastiCache API Reference.    Parameters and Parameter Groups in the ElastiCache User Guide.  
    */
   createCacheParameterGroup(params: ElastiCache.Types.CreateCacheParameterGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.CreateCacheParameterGroupResult) => void): Request<ElastiCache.Types.CreateCacheParameterGroupResult, AWSError>;
   /**
-   * Creates a new cache parameter group. A cache parameter group is a collection of parameters that you apply to all of the nodes in a cache cluster.
+   * Creates a new Amazon ElastiCache cache parameter group. An ElastiCache cache parameter group is a collection of parameters and their values that are applied to all of the nodes in any cache cluster or replication group using the CacheParameterGroup. A newly created CacheParameterGroup is an exact duplicate of the default parameter group for the CacheParameterGroupFamily. To customize the newly created CacheParameterGroup you can change the values of specific parameters. For more information, see:    ModifyCacheParameterGroup in the ElastiCache API Reference.    Parameters and Parameter Groups in the ElastiCache User Guide.  
    */
   createCacheParameterGroup(callback?: (err: AWSError, data: ElastiCache.Types.CreateCacheParameterGroupResult) => void): Request<ElastiCache.Types.CreateCacheParameterGroupResult, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class ElastiCache extends Service {
    */
   createCacheSubnetGroup(callback?: (err: AWSError, data: ElastiCache.Types.CreateCacheSubnetGroupResult) => void): Request<ElastiCache.Types.CreateCacheSubnetGroupResult, AWSError>;
   /**
-   * Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group. A Redis (cluster mode disabled) replication group is a collection of cache clusters, where one of the cache clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas. A Redis (cluster mode enabled) replication group is a collection of 1 to 15 node groups (shards). Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes. Writes to the primary are asynchronously propagated to the replicas. Redis (cluster mode enabled) replication groups partition the data across node groups (shards). When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled) replication group after it has been created.  This operation is valid for Redis only. 
+   * Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group. A Redis (cluster mode disabled) replication group is a collection of cache clusters, where one of the cache clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas. A Redis (cluster mode enabled) replication group is a collection of 1 to 15 node groups (shards). Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes. Writes to the primary are asynchronously propagated to the replicas. Redis (cluster mode enabled) replication groups partition the data across node groups (shards). When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled) replication group after it has been created. However, if you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis' enhanced backup and restore. For more information, see Restoring From a Backup with Cluster Resizing in the ElastiCache User Guide.  This operation is valid for Redis only. 
    */
   createReplicationGroup(params: ElastiCache.Types.CreateReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.CreateReplicationGroupResult) => void): Request<ElastiCache.Types.CreateReplicationGroupResult, AWSError>;
   /**
-   * Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group. A Redis (cluster mode disabled) replication group is a collection of cache clusters, where one of the cache clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas. A Redis (cluster mode enabled) replication group is a collection of 1 to 15 node groups (shards). Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes. Writes to the primary are asynchronously propagated to the replicas. Redis (cluster mode enabled) replication groups partition the data across node groups (shards). When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled) replication group after it has been created.  This operation is valid for Redis only. 
+   * Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group. A Redis (cluster mode disabled) replication group is a collection of cache clusters, where one of the cache clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas. A Redis (cluster mode enabled) replication group is a collection of 1 to 15 node groups (shards). Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes. Writes to the primary are asynchronously propagated to the replicas. Redis (cluster mode enabled) replication groups partition the data across node groups (shards). When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled) replication group after it has been created. However, if you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis' enhanced backup and restore. For more information, see Restoring From a Backup with Cluster Resizing in the ElastiCache User Guide.  This operation is valid for Redis only. 
    */
   createReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.CreateReplicationGroupResult) => void): Request<ElastiCache.Types.CreateReplicationGroupResult, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class ElastiCache extends Service {
    */
   deleteSnapshot(callback?: (err: AWSError, data: ElastiCache.Types.DeleteSnapshotResult) => void): Request<ElastiCache.Types.DeleteSnapshotResult, AWSError>;
   /**
-   * Returns information about all provisioned cache clusters if no cache cluster identifier is specified, or about a specific cache cluster if a cache cluster identifier is supplied. By default, abbreviated information about the cache clusters are returned. You can use the optional ShowDetails flag to retrieve detailed information about the cache nodes associated with the cache clusters. These details include the DNS address and port for the cache node endpoint. If the cluster is in the CREATING state, only cluster-level information is displayed until all of the nodes are successfully provisioned. If the cluster is in the DELETING state, only cluster-level information is displayed. If cache nodes are currently being added to the cache cluster, node endpoint information and creation time for the additional nodes are not displayed until they are completely provisioned. When the cache cluster state is available, the cluster is ready for use. If cache nodes are currently being removed from the cache cluster, no endpoint information for the removed nodes is displayed.
+   * Returns information about all provisioned cache clusters if no cache cluster identifier is specified, or about a specific cache cluster if a cache cluster identifier is supplied. By default, abbreviated information about the cache clusters is returned. You can use the optional ShowCacheNodeInfo flag to retrieve detailed information about the cache nodes associated with the cache clusters. These details include the DNS address and port for the cache node endpoint. If the cluster is in the creating state, only cluster-level information is displayed until all of the nodes are successfully provisioned. If the cluster is in the deleting state, only cluster-level information is displayed. If cache nodes are currently being added to the cache cluster, node endpoint information and creation time for the additional nodes are not displayed until they are completely provisioned. When the cache cluster state is available, the cluster is ready for use. If cache nodes are currently being removed from the cache cluster, no endpoint information for the removed nodes is displayed.
    */
   describeCacheClusters(params: ElastiCache.Types.DescribeCacheClustersMessage, callback?: (err: AWSError, data: ElastiCache.Types.CacheClusterMessage) => void): Request<ElastiCache.Types.CacheClusterMessage, AWSError>;
   /**
-   * Returns information about all provisioned cache clusters if no cache cluster identifier is specified, or about a specific cache cluster if a cache cluster identifier is supplied. By default, abbreviated information about the cache clusters are returned. You can use the optional ShowDetails flag to retrieve detailed information about the cache nodes associated with the cache clusters. These details include the DNS address and port for the cache node endpoint. If the cluster is in the CREATING state, only cluster-level information is displayed until all of the nodes are successfully provisioned. If the cluster is in the DELETING state, only cluster-level information is displayed. If cache nodes are currently being added to the cache cluster, node endpoint information and creation time for the additional nodes are not displayed until they are completely provisioned. When the cache cluster state is available, the cluster is ready for use. If cache nodes are currently being removed from the cache cluster, no endpoint information for the removed nodes is displayed.
+   * Returns information about all provisioned cache clusters if no cache cluster identifier is specified, or about a specific cache cluster if a cache cluster identifier is supplied. By default, abbreviated information about the cache clusters is returned. You can use the optional ShowCacheNodeInfo flag to retrieve detailed information about the cache nodes associated with the cache clusters. These details include the DNS address and port for the cache node endpoint. If the cluster is in the creating state, only cluster-level information is displayed until all of the nodes are successfully provisioned. If the cluster is in the deleting state, only cluster-level information is displayed. If cache nodes are currently being added to the cache cluster, node endpoint information and creation time for the additional nodes are not displayed until they are completely provisioned. When the cache cluster state is available, the cluster is ready for use. If cache nodes are currently being removed from the cache cluster, no endpoint information for the removed nodes is displayed.
    */
   describeCacheClusters(callback?: (err: AWSError, data: ElastiCache.Types.CacheClusterMessage) => void): Request<ElastiCache.Types.CacheClusterMessage, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class ElastiCache extends Service {
    */
   listAllowedNodeTypeModifications(callback?: (err: AWSError, data: ElastiCache.Types.AllowedNodeTypeModificationsMessage) => void): Request<ElastiCache.Types.AllowedNodeTypeModificationsMessage, AWSError>;
   /**
-   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. You can have a maximum of 10 cost allocation tags on an ElastiCache resource. For more information, see Using Cost Allocation Tags in Amazon ElastiCache.
+   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see Using Cost Allocation Tags in Amazon ElastiCache.
    */
   listTagsForResource(params: ElastiCache.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
-   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. You can have a maximum of 10 cost allocation tags on an ElastiCache resource. For more information, see Using Cost Allocation Tags in Amazon ElastiCache.
+   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see Using Cost Allocation Tags in Amazon ElastiCache.
    */
   listTagsForResource(callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
@@ -316,6 +316,14 @@ declare class ElastiCache extends Service {
    */
   revokeCacheSecurityGroupIngress(callback?: (err: AWSError, data: ElastiCache.Types.RevokeCacheSecurityGroupIngressResult) => void): Request<ElastiCache.Types.RevokeCacheSecurityGroupIngressResult, AWSError>;
   /**
+   * Represents the input of a TestFailover operation which test automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).  Note the following    A customer can use this operation to test automatic failover on up to 5 shards (called node groups in the ElastiCache API and AWS CLI) in any rolling 24-hour period.   If calling this operation on shards in different clusters (called replication groups in the API and CLI), the calls can be made concurrently.     If calling this operation multiple times on different shards in the same Redis (cluster mode enabled) replication group, the first node replacement must complete before a subsequent call can be made.   To determine whether the node replacement is complete you can check Events using the Amazon ElastiCache console, the AWS CLI, or the ElastiCache API. Look for the following automatic failover related events, listed here in order of occurrance:   Replication group message: Test Failover API called for node group &lt;node-group-id&gt;    Cache cluster message: Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed    Replication group message: Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed    Cache cluster message: Recovering cache nodes &lt;node-id&gt;    Cache cluster message: Finished recovery for cache nodes &lt;node-id&gt;    For more information see:    Viewing ElastiCache Events in the ElastiCache User Guide     DescribeEvents in the ElastiCache API Reference     Also see, Testing Multi-AZ with Automatic Failover in the ElastiCache User Guide.
+   */
+  testFailover(params: ElastiCache.Types.TestFailoverMessage, callback?: (err: AWSError, data: ElastiCache.Types.TestFailoverResult) => void): Request<ElastiCache.Types.TestFailoverResult, AWSError>;
+  /**
+   * Represents the input of a TestFailover operation which test automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).  Note the following    A customer can use this operation to test automatic failover on up to 5 shards (called node groups in the ElastiCache API and AWS CLI) in any rolling 24-hour period.   If calling this operation on shards in different clusters (called replication groups in the API and CLI), the calls can be made concurrently.     If calling this operation multiple times on different shards in the same Redis (cluster mode enabled) replication group, the first node replacement must complete before a subsequent call can be made.   To determine whether the node replacement is complete you can check Events using the Amazon ElastiCache console, the AWS CLI, or the ElastiCache API. Look for the following automatic failover related events, listed here in order of occurrance:   Replication group message: Test Failover API called for node group &lt;node-group-id&gt;    Cache cluster message: Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed    Replication group message: Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed    Cache cluster message: Recovering cache nodes &lt;node-id&gt;    Cache cluster message: Finished recovery for cache nodes &lt;node-id&gt;    For more information see:    Viewing ElastiCache Events in the ElastiCache User Guide     DescribeEvents in the ElastiCache API Reference     Also see, Testing Multi-AZ with Automatic Failover in the ElastiCache User Guide.
+   */
+  testFailover(callback?: (err: AWSError, data: ElastiCache.Types.TestFailoverResult) => void): Request<ElastiCache.Types.TestFailoverResult, AWSError>;
+  /**
    * Waits for the cacheClusterAvailable state by periodically calling the underlying ElastiCache.describeCacheClustersoperation every 15 seconds (at most 40 times). Wait until ElastiCache cluster is available.
    */
   waitFor(state: "cacheClusterAvailable", params: ElastiCache.Types.DescribeCacheClustersMessage, callback?: (err: AWSError, data: ElastiCache.Types.CacheClusterMessage) => void): Request<ElastiCache.Types.CacheClusterMessage, AWSError>;
@@ -361,6 +369,9 @@ declare namespace ElastiCache {
     Tags: TagList;
   }
   export interface AllowedNodeTypeModificationsMessage {
+    /**
+     * A string list, each element of which specifies a cache node type which you can use to scale your cache cluster or replication group. When scaling up a Redis cluster or replication group using ModifyCacheCluster or ModifyReplicationGroup, use a value from this list for the CacheNodeType parameter.
+     */
     ScaleUpModifications?: NodeTypeList;
   }
   export interface AuthorizeCacheSecurityGroupIngressMessage {
@@ -396,6 +407,9 @@ declare namespace ElastiCache {
      * The user-supplied identifier of the cache cluster. This identifier is a unique key that identifies a cache cluster.
      */
     CacheClusterId?: String;
+    /**
+     * Represents a Memcached cluster endpoint which, if Automatic Discovery is enabled on the cluster, can be used by an application to connect to any node in the cluster. The configuration endpoint will always have .cfg in it. Example: mem-3.9dvc4r.cfg.usw2.cache.amazonaws.com:11211 
+     */
     ConfigurationEndpoint?: Endpoint;
     /**
      * The URL of the web page where you can download the latest ElastiCache client library.
@@ -905,7 +919,7 @@ declare namespace ElastiCache {
      */
     AutomaticFailoverEnabled?: BooleanOptional;
     /**
-     * The number of clusters this replication group initially has. This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead. If Multi-AZ is enabled, the value of this parameter must be at least 2. The maximum permitted value for NumCacheClusters is 6 (primary plus 5 replicas).
+     * The number of clusters this replication group initially has. This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead. If AutomaticFailoverEnabled is true, the value of this parameter must be at least 2. If AutomaticFailoverEnabled is false you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6. The maximum permitted value for NumCacheClusters is 6 (primary plus 5 replicas).
      */
     NumCacheClusters?: IntegerOptional;
     /**
@@ -921,7 +935,7 @@ declare namespace ElastiCache {
      */
     ReplicasPerNodeGroup?: IntegerOptional;
     /**
-     * A list of node group (shard) configuration options. Each node group (shard) configuration has the following: Slots, PrimaryAvailabilityZone, ReplicaAvailabilityZones, ReplicaCount. If you're creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to configure one node group (shard) or you can omit this parameter.
+     * A list of node group (shard) configuration options. Each node group (shard) configuration has the following: Slots, PrimaryAvailabilityZone, ReplicaAvailabilityZones, ReplicaCount. If you're creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter.
      */
     NodeGroupConfiguration?: NodeGroupConfigurationList;
     /**
@@ -957,7 +971,7 @@ declare namespace ElastiCache {
      */
     Tags?: TagList;
     /**
-     * A list of Amazon Resource Names (ARN) that uniquely identify the Redis RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the replication group. The Amazon S3 object name in the ARN cannot contain any commas. The list must match the number of node groups (shards) in the replication group, which means you cannot repartition.  This parameter is only valid if the Engine parameter is redis.  Example of an Amazon S3 ARN: arn:aws:s3:::my_bucket/snapshot1.rdb 
+     * A list of Amazon Resource Names (ARN) that uniquely identify the Redis RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new replication group. The Amazon S3 object name in the ARN cannot contain any commas. The new replication group will have the number of node groups (console: shards) specified by the parameter NumNodeGroups or the number of node groups configured by NodeGroupConfiguration regardless of the number of ARNs specified here.  This parameter is only valid if the Engine parameter is redis.  Example of an Amazon S3 ARN: arn:aws:s3:::my_bucket/snapshot1.rdb 
      */
     SnapshotArns?: SnapshotArnsList;
     /**
@@ -1087,6 +1101,10 @@ declare namespace ElastiCache {
      * An optional flag that can be included in the DescribeCacheCluster request to retrieve information about the individual cache nodes.
      */
     ShowCacheNodeInfo?: BooleanOptional;
+    /**
+     * An optional flag that can be included in the DescribeCacheCluster request to show only nodes (API/CLI: clusters) that are not members of a replication group. In practice, this mean Memcached and single node Redis clusters.
+     */
+    ShowCacheClustersNotInReplicationGroups?: BooleanOptional;
   }
   export interface DescribeCacheEngineVersionsMessage {
     /**
@@ -1201,15 +1219,15 @@ declare namespace ElastiCache {
      */
     SourceType?: SourceType;
     /**
-     * The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
+     * The beginning of the time interval to retrieve events for, specified in ISO 8601 format.  Example: 2017-03-30T07:03:49.555Z
      */
     StartTime?: TStamp;
     /**
-     * The end of the time interval for which to retrieve events, specified in ISO 8601 format.
+     * The end of the time interval for which to retrieve events, specified in ISO 8601 format.  Example: 2017-03-30T07:03:49.555Z
      */
     EndTime?: TStamp;
     /**
-     * The number of minutes' worth of events to retrieve.
+     * The number of minutes worth of events to retrieve.
      */
     Duration?: IntegerOptional;
     /**
@@ -1600,6 +1618,10 @@ declare namespace ElastiCache {
      * A valid cache node type that you want to scale this replication group to.
      */
     CacheNodeType?: String;
+    /**
+     * The name of the Node Group (called shard in the console).
+     */
+    NodeGroupId?: String;
   }
   export interface ModifyReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -1628,7 +1650,7 @@ declare namespace ElastiCache {
   }
   export interface NodeGroupConfiguration {
     /**
-     * A string that specifies the keyspaces as a series of comma separated values. Keyspaces are 0 to 16,383. The string is in the format startkey-endkey. Example: "0-3999" 
+     * A string that specifies the keyspace for a particular node group. Keyspaces range from 0 to 16,383. The string is in the format startkey-endkey. Example: "0-3999" 
      */
     Slots?: String;
     /**
@@ -1874,6 +1896,14 @@ declare namespace ElastiCache {
      * The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard). Example: 05:00-09:00  If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.  Note: This parameter is only valid if the Engine parameter is redis.
      */
     SnapshotWindow?: String;
+    /**
+     * A flag indicating whether or not this replication group is cluster enabled; i.e., whether its data can be partitioned across multiple shards (API/CLI: node groups). Valid values: true | false 
+     */
+    ClusterEnabled?: BooleanOptional;
+    /**
+     * The name of the compute and memory capacity node type for each node in the replication group.
+     */
+    CacheNodeType?: String;
   }
   export type ReplicationGroupList = ReplicationGroup[];
   export interface ReplicationGroupMessage {
@@ -2162,11 +2192,11 @@ declare namespace ElastiCache {
   export type TStamp = Date;
   export interface Tag {
     /**
-     * The key for the tag.
+     * The key for the tag. May not be null.
      */
     Key?: String;
     /**
-     * The tag's value. May not be null.
+     * The tag's value. May be null.
      */
     Value?: String;
   }
@@ -2176,6 +2206,19 @@ declare namespace ElastiCache {
      * A list of cost allocation tags as key-value pairs.
      */
     TagList?: TagList;
+  }
+  export interface TestFailoverMessage {
+    /**
+     * The name of the replication group (console: cluster) whose automatic failover is being tested by this operation.
+     */
+    ReplicationGroupId: String;
+    /**
+     * The name of the node group (called shard in the console) in this replication group on which automatic failover is to be tested. You may test automatic failover on up to 5 node groups in any rolling 24-hour period.
+     */
+    NodeGroupId: String;
+  }
+  export interface TestFailoverResult {
+    ReplicationGroup?: ReplicationGroup;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

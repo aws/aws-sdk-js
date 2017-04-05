@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.38.0
+// AWS SDK for JavaScript v2.39.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -38947,6 +38947,9 @@ module.exports={
           "Marker": {},
           "ShowCacheNodeInfo": {
             "type": "boolean"
+          },
+          "ShowCacheClustersNotInReplicationGroups": {
+            "type": "boolean"
           }
         }
       },
@@ -39491,7 +39494,8 @@ module.exports={
             "type": "integer"
           },
           "SnapshotWindow": {},
-          "CacheNodeType": {}
+          "CacheNodeType": {},
+          "NodeGroupId": {}
         }
       },
       "output": {
@@ -39613,6 +39617,28 @@ module.exports={
         "members": {
           "CacheSecurityGroup": {
             "shape": "S8"
+          }
+        }
+      }
+    },
+    "TestFailover": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ReplicationGroupId",
+          "NodeGroupId"
+        ],
+        "members": {
+          "ReplicationGroupId": {},
+          "NodeGroupId": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "TestFailoverResult",
+        "type": "structure",
+        "members": {
+          "ReplicationGroup": {
+            "shape": "S1m"
           }
         }
       }
@@ -39983,7 +40009,11 @@ module.exports={
         "SnapshotRetentionLimit": {
           "type": "integer"
         },
-        "SnapshotWindow": {}
+        "SnapshotWindow": {},
+        "ClusterEnabled": {
+          "type": "boolean"
+        },
+        "CacheNodeType": {}
       },
       "wrapper": true
     },
@@ -40105,79 +40135,78 @@ module.exports={
   "pagination": {
     "DescribeCacheClusters": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "CacheClusters"
     },
     "DescribeCacheEngineVersions": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "CacheEngineVersions"
     },
     "DescribeCacheParameterGroups": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "CacheParameterGroups"
     },
     "DescribeCacheParameters": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "Parameters"
     },
     "DescribeCacheSecurityGroups": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "CacheSecurityGroups"
     },
     "DescribeCacheSubnetGroups": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "CacheSubnetGroups"
     },
     "DescribeEngineDefaultParameters": {
       "input_token": "Marker",
-      "output_token": "EngineDefaults.Marker",
       "limit_key": "MaxRecords",
+      "output_token": "EngineDefaults.Marker",
       "result_key": "EngineDefaults.Parameters"
     },
     "DescribeEvents": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "Events"
+    },
+    "DescribeReplicationGroups": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "ReplicationGroups"
     },
     "DescribeReservedCacheNodes": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "ReservedCacheNodes"
     },
     "DescribeReservedCacheNodesOfferings": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "ReservedCacheNodesOfferings"
-    },
-    "DescribeReplicationGroups": {
-      "input_token": "Marker",
-      "output_token": "Marker",
-      "limit_key": "MaxRecords",
-      "result_key": "ReplicationGroups"
     },
     "DescribeSnapshots": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "Snapshots"
     }
   }
 }
-
 },{}],55:[function(require,module,exports){
 module.exports={
     "version":2,
@@ -98164,7 +98193,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.38.0',
+  VERSION: '2.39.0',
 
 
   Signers: {},
