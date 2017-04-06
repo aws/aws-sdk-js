@@ -284,7 +284,7 @@
       "errors":[
         {"shape":"SSLPolicyNotFoundException"}
       ],
-      "documentation":"<p>Describes the specified policies or all policies used for SSL negotiation.</p> <p>Note that the only supported policy at this time is ELBSecurityPolicy-2015-05.</p>"
+      "documentation":"<p>Describes the specified policies or all policies used for SSL negotiation.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies\">Security Policies</a> in the <i>Application Load Balancers Guide</i>.</p>"
     },
     "DescribeTags":{
       "name":"DescribeTags",
@@ -303,7 +303,7 @@
         {"shape":"ListenerNotFoundException"},
         {"shape":"RuleNotFoundException"}
       ],
-      "documentation":"<p>Describes the tags for the specified resources.</p>"
+      "documentation":"<p>Describes the tags for the specified resources. You can describe the tags for one or more Application Load Balancers and target groups.</p>"
     },
     "DescribeTargetGroupAttributes":{
       "name":"DescribeTargetGroupAttributes",
@@ -381,7 +381,7 @@
         {"shape":"UnsupportedProtocolException"},
         {"shape":"TooManyRegistrationsForTargetIdException"}
       ],
-      "documentation":"<p>Modifies the specified properties of the specified listener.</p> <p>Any properties that you do not specify retain their current values. However, changing the protocol from HTTPS to HTTP removes the security policy and SSL certificate properties. If you change the protocol from HTTP to HTTPS, you must add the security policy.</p>"
+      "documentation":"<p>Modifies the specified properties of the specified listener.</p> <p>Any properties that you do not specify retain their current values. However, changing the protocol from HTTPS to HTTP removes the security policy and SSL certificate properties. If you change the protocol from HTTP to HTTPS, you must add the security policy and server certificate.</p>"
     },
     "ModifyLoadBalancerAttributes":{
       "name":"ModifyLoadBalancerAttributes",
@@ -736,7 +736,7 @@
       "members":{
         "Name":{
           "shape":"LoadBalancerName",
-          "documentation":"<p>The name of the load balancer.</p> <p>This name must be unique within your AWS account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.</p>"
+          "documentation":"<p>The name of the load balancer.</p> <p>This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.</p>"
         },
         "Subnets":{
           "shape":"Subnets",
@@ -784,7 +784,7 @@
         },
         "Conditions":{
           "shape":"RuleConditionList",
-          "documentation":"<p>A condition. Each condition has the field <code>path-pattern</code> and specifies one path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters in a path pattern.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ \" ' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>"
+          "documentation":"<p>A condition. Each condition specifies a field name and a single value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ \" ' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>"
         },
         "Priority":{
           "shape":"RulePriority",
@@ -816,7 +816,7 @@
       "members":{
         "Name":{
           "shape":"TargetGroupName",
-          "documentation":"<p>The name of the target group.</p>"
+          "documentation":"<p>The name of the target group.</p> <p>This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.</p>"
         },
         "Protocol":{
           "shape":"ProtocolEnum",
@@ -1015,7 +1015,7 @@
       "members":{
         "LoadBalancerArns":{
           "shape":"LoadBalancerArns",
-          "documentation":"<p>The Amazon Resource Names (ARN) of the load balancers.</p>"
+          "documentation":"<p>The Amazon Resource Names (ARN) of the load balancers. You can specify up to 20 load balancers in a single call.</p>"
         },
         "Names":{
           "shape":"LoadBalancerNames",
@@ -1212,7 +1212,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>A load balancer with the specified name already exists for this account.</p>",
+      "documentation":"<p>A load balancer with the specified name already exists.</p>",
       "error":{
         "code":"DuplicateLoadBalancerName",
         "httpStatusCode":400,
@@ -1559,7 +1559,7 @@
       "members":{
         "HttpCode":{
           "shape":"HttpCode",
-          "documentation":"<p>The HTTP codes. The default value is 200. You can specify multiple values (for example, \"200,202\") or a range of values (for example, \"200-299\").</p>"
+          "documentation":"<p>The HTTP codes. You can specify values between 200 and 499. The default value is 200. You can specify multiple values (for example, \"200,202\") or a range of values (for example, \"200-299\").</p>"
         }
       },
       "documentation":"<p>Information to use when checking for a successful response from a target.</p>"
@@ -1582,7 +1582,7 @@
         },
         "SslPolicy":{
           "shape":"SslPolicyName",
-          "documentation":"<p>The security policy that defines which ciphers and protocols are supported.</p>"
+          "documentation":"<p>The security policy that defines which protocols and ciphers are supported. For more information, see <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies\">Security Policies</a> in the <i>Application Load Balancers Guide</i>.</p>"
         },
         "Certificates":{
           "shape":"CertificateList",
@@ -1876,11 +1876,11 @@
       "members":{
         "Field":{
           "shape":"ConditionFieldName",
-          "documentation":"<p>The only possible value is <code>path-pattern</code>.</p>"
+          "documentation":"<p>The name of the field. The possible values are <code>host-header</code> and <code>path-pattern</code>.</p>"
         },
         "Values":{
           "shape":"ListOfString",
-          "documentation":"<p>The path pattern. You can specify a single path pattern.</p> <p>A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters in a path pattern.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ \" ' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>"
+          "documentation":"<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ \" ' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>"
         }
       },
       "documentation":"<p>Information about a condition for a rule.</p>"
