@@ -124,19 +124,19 @@ declare class ELBv2 extends Service {
    */
   describeRules(callback?: (err: AWSError, data: ELBv2.Types.DescribeRulesOutput) => void): Request<ELBv2.Types.DescribeRulesOutput, AWSError>;
   /**
-   * Describes the specified policies or all policies used for SSL negotiation. Note that the only supported policy at this time is ELBSecurityPolicy-2015-05.
+   * Describes the specified policies or all policies used for SSL negotiation. For more information, see Security Policies in the Application Load Balancers Guide.
    */
   describeSSLPolicies(params: ELBv2.Types.DescribeSSLPoliciesInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeSSLPoliciesOutput) => void): Request<ELBv2.Types.DescribeSSLPoliciesOutput, AWSError>;
   /**
-   * Describes the specified policies or all policies used for SSL negotiation. Note that the only supported policy at this time is ELBSecurityPolicy-2015-05.
+   * Describes the specified policies or all policies used for SSL negotiation. For more information, see Security Policies in the Application Load Balancers Guide.
    */
   describeSSLPolicies(callback?: (err: AWSError, data: ELBv2.Types.DescribeSSLPoliciesOutput) => void): Request<ELBv2.Types.DescribeSSLPoliciesOutput, AWSError>;
   /**
-   * Describes the tags for the specified resources.
+   * Describes the tags for the specified resources. You can describe the tags for one or more Application Load Balancers and target groups.
    */
   describeTags(params: ELBv2.Types.DescribeTagsInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeTagsOutput) => void): Request<ELBv2.Types.DescribeTagsOutput, AWSError>;
   /**
-   * Describes the tags for the specified resources.
+   * Describes the tags for the specified resources. You can describe the tags for one or more Application Load Balancers and target groups.
    */
   describeTags(callback?: (err: AWSError, data: ELBv2.Types.DescribeTagsOutput) => void): Request<ELBv2.Types.DescribeTagsOutput, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class ELBv2 extends Service {
    */
   describeTargetHealth(callback?: (err: AWSError, data: ELBv2.Types.DescribeTargetHealthOutput) => void): Request<ELBv2.Types.DescribeTargetHealthOutput, AWSError>;
   /**
-   * Modifies the specified properties of the specified listener. Any properties that you do not specify retain their current values. However, changing the protocol from HTTPS to HTTP removes the security policy and SSL certificate properties. If you change the protocol from HTTP to HTTPS, you must add the security policy.
+   * Modifies the specified properties of the specified listener. Any properties that you do not specify retain their current values. However, changing the protocol from HTTPS to HTTP removes the security policy and SSL certificate properties. If you change the protocol from HTTP to HTTPS, you must add the security policy and server certificate.
    */
   modifyListener(params: ELBv2.Types.ModifyListenerInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerOutput) => void): Request<ELBv2.Types.ModifyListenerOutput, AWSError>;
   /**
-   * Modifies the specified properties of the specified listener. Any properties that you do not specify retain their current values. However, changing the protocol from HTTPS to HTTP removes the security policy and SSL certificate properties. If you change the protocol from HTTP to HTTPS, you must add the security policy.
+   * Modifies the specified properties of the specified listener. Any properties that you do not specify retain their current values. However, changing the protocol from HTTPS to HTTP removes the security policy and SSL certificate properties. If you change the protocol from HTTP to HTTPS, you must add the security policy and server certificate.
    */
   modifyListener(callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerOutput) => void): Request<ELBv2.Types.ModifyListenerOutput, AWSError>;
   /**
@@ -361,7 +361,7 @@ declare namespace ELBv2 {
   }
   export interface CreateLoadBalancerInput {
     /**
-     * The name of the load balancer. This name must be unique within your AWS account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
+     * The name of the load balancer. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
      */
     Name: LoadBalancerName;
     /**
@@ -397,7 +397,7 @@ declare namespace ELBv2 {
      */
     ListenerArn: ListenerArn;
     /**
-     * A condition. Each condition has the field path-pattern and specifies one path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters in a path pattern.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
+     * A condition. Each condition specifies a field name and a single value. If the field name is host-header, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   - .   * (matches 0 or more characters)   ? (matches exactly 1 character)   If the field name is path-pattern, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
      */
     Conditions: RuleConditionList;
     /**
@@ -417,7 +417,7 @@ declare namespace ELBv2 {
   }
   export interface CreateTargetGroupInput {
     /**
-     * The name of the target group.
+     * The name of the target group. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
      */
     Name: TargetGroupName;
     /**
@@ -559,7 +559,7 @@ declare namespace ELBv2 {
   }
   export interface DescribeLoadBalancersInput {
     /**
-     * The Amazon Resource Names (ARN) of the load balancers.
+     * The Amazon Resource Names (ARN) of the load balancers. You can specify up to 20 load balancers in a single call.
      */
     LoadBalancerArns?: LoadBalancerArns;
     /**
@@ -823,7 +823,7 @@ declare namespace ELBv2 {
   export type Marker = string;
   export interface Matcher {
     /**
-     * The HTTP codes. The default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").
+     * The HTTP codes. You can specify values between 200 and 499. The default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").
      */
     HttpCode: HttpCode;
   }
@@ -841,7 +841,7 @@ declare namespace ELBv2 {
      */
     Protocol?: ProtocolEnum;
     /**
-     * The security policy that defines which ciphers and protocols are supported.
+     * The security policy that defines which protocols and ciphers are supported. For more information, see Security Policies in the Application Load Balancers Guide.
      */
     SslPolicy?: SslPolicyName;
     /**
@@ -1011,11 +1011,11 @@ declare namespace ELBv2 {
   export type RuleArns = RuleArn[];
   export interface RuleCondition {
     /**
-     * The only possible value is path-pattern.
+     * The name of the field. The possible values are host-header and path-pattern.
      */
     Field?: ConditionFieldName;
     /**
-     * The path pattern. You can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters in a path pattern.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
+     * The condition value. If the field name is host-header, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   - .   * (matches 0 or more characters)   ? (matches exactly 1 character)   If the field name is path-pattern, you can specify a single path pattern (for example, /img/*). A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
      */
     Values?: ListOfString;
   }

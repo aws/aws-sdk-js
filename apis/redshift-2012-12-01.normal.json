@@ -1,12 +1,12 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"redshift-2012-12-01",
     "apiVersion":"2012-12-01",
     "endpointPrefix":"redshift",
     "protocol":"query",
     "serviceFullName":"Amazon Redshift",
     "signatureVersion":"v4",
+    "uid":"redshift-2012-12-01",
     "xmlNamespace":"http://redshift.amazonaws.com/doc/2012-12-01/"
   },
   "operations":{
@@ -670,7 +670,8 @@
       },
       "errors":[
         {"shape":"ReservedNodeOfferingNotFoundFault"},
-        {"shape":"UnsupportedOperationFault"}
+        {"shape":"UnsupportedOperationFault"},
+        {"shape":"DependentServiceUnavailableFault"}
       ],
       "documentation":"<p>Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to <a>PurchaseReservedNodeOffering</a> to reserve one or more nodes for your Amazon Redshift cluster. </p> <p> For more information about reserved node offerings, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html\">Purchasing Reserved Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
@@ -686,7 +687,8 @@
         "resultWrapper":"DescribeReservedNodesResult"
       },
       "errors":[
-        {"shape":"ReservedNodeNotFoundFault"}
+        {"shape":"ReservedNodeNotFoundFault"},
+        {"shape":"DependentServiceUnavailableFault"}
       ],
       "documentation":"<p>Returns the descriptions of the reserved nodes.</p>"
     },
@@ -838,6 +840,23 @@
       ],
       "documentation":"<p>Enables the automatic copy of snapshots from one region to another region for a specified cluster.</p>"
     },
+    "GetClusterCredentials":{
+      "name":"GetClusterCredentials",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetClusterCredentialsMessage"},
+      "output":{
+        "shape":"ClusterCredentials",
+        "resultWrapper":"GetClusterCredentialsResult"
+      },
+      "errors":[
+        {"shape":"ClusterNotFoundFault"},
+        {"shape":"UnsupportedOperationFault"}
+      ],
+      "documentation":"<p>Returns a database user name and temporary password with temporary authorization to log in to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log in. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Generating IAM Database User Credentials in the Amazon Redshift Cluster Management Guide.</p> <p>The IAM user or role that executes GetClusterCredentials must have an IAM policy attached that allows the <code>redshift:GetClusterCredentials</code> action with access to the <code>dbuser</code> resource on the cluster. The user name specified for <code>dbuser</code> in the IAM policy and the user name specified for the <code>DbUser</code> parameter must match.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>"
+    },
     "ModifyCluster":{
       "name":"ModifyCluster",
       "http":{
@@ -854,6 +873,7 @@
         {"shape":"InvalidClusterSecurityGroupStateFault"},
         {"shape":"ClusterNotFoundFault"},
         {"shape":"NumberOfNodesQuotaExceededFault"},
+        {"shape":"NumberOfNodesPerClusterLimitExceededFault"},
         {"shape":"ClusterSecurityGroupNotFoundFault"},
         {"shape":"ClusterParameterGroupNotFoundFault"},
         {"shape":"InsufficientClusterCapacityFault"},
@@ -1151,6 +1171,10 @@
         "AccountId":{
           "shape":"String",
           "documentation":"<p>The identifier of an AWS customer account authorized to restore a snapshot.</p>"
+        },
+        "AccountAlias":{
+          "shape":"String",
+          "documentation":"<p>The identifier of an AWS support account authorized to restore a snapshot. For AWS support, the identifier is <code>amazon-redshift-support</code>. </p>"
         }
       },
       "documentation":"<p>Describes an AWS customer account authorized to restore a snapshot.</p>"
@@ -1244,7 +1268,7 @@
         },
         "AccountWithRestoreAccess":{
           "shape":"String",
-          "documentation":"<p>The identifier of the AWS customer account authorized to restore the specified snapshot.</p>"
+          "documentation":"<p>The identifier of the AWS customer account authorized to restore the specified snapshot.</p> <p>To share a snapshot with AWS support, specify amazon-redshift-support.</p>"
         }
       },
       "documentation":"<p/>"
@@ -1437,6 +1461,24 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "ClusterCredentials":{
+      "type":"structure",
+      "members":{
+        "DbUser":{
+          "shape":"String",
+          "documentation":"<p>A database user name that is authorized to log on to the database <code>DbName</code> using the password <code>DbPassword</code>. If the <code>DbGroups</code> parameter is specifed, <code>DbUser</code> is added to the listed groups for the current session. The user name is prefixed with <code>IAM:</code> for an existing user name or <code>IAMA:</code> if the user was auto-created. </p>"
+        },
+        "DbPassword":{
+          "shape":"SensitiveString",
+          "documentation":"<p>A temporary password that authorizes the user name returned by <code>DbUser</code> to log on to the database <code>DbName</code>. </p>"
+        },
+        "Expiration":{
+          "shape":"TStamp",
+          "documentation":"<p>The date and time <code>DbPassword</code> expires.</p>"
+        }
+      },
+      "documentation":"<p>Temporary credentials with authorization to log in to an Amazon Redshift database. </p>"
     },
     "ClusterIamRole":{
       "type":"structure",
@@ -2427,6 +2469,13 @@
       },
       "documentation":"<p>Contains the output from the <code>CreateTags</code> action. </p>"
     },
+    "DbGroupList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"DbGroup"
+      }
+    },
     "DefaultClusterParameters":{
       "type":"structure",
       "members":{
@@ -2594,6 +2643,18 @@
       "documentation":"<p>The request cannot be completed because a dependent service is throttling requests made by Amazon Redshift on your behalf. Wait and retry the request.</p>",
       "error":{
         "code":"DependentServiceRequestThrottlingFault",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "DependentServiceUnavailableFault":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Your request cannot be completed because a dependent internal service is temporarily unavailable. Wait 30 to 60 seconds and try again.</p>",
+      "error":{
+        "code":"DependentServiceUnavailableFault",
         "httpStatusCode":400,
         "senderFault":true
       },
@@ -3439,6 +3500,40 @@
         }
       },
       "documentation":"<p/>"
+    },
+    "GetClusterCredentialsMessage":{
+      "type":"structure",
+      "required":[
+        "DbUser",
+        "ClusterIdentifier"
+      ],
+      "members":{
+        "DbUser":{
+          "shape":"String",
+          "documentation":"<p>The name of a database user. If a user name matching <code>DbUser</code> exists in the database, the temporary user credentials have the same permissions as the existing user. If <code>DbUser</code> doesn't exist in the database and <code>Autocreate</code> is <code>True</code>, a new user is created using the value for <code>DbUser</code> with PUBLIC permissions. If a database user matching the value for <code>DbUser</code> doesn't exist and <code>Autocreate</code> is <code>False</code>, then the command succeeds but the connection attempt will fail because the user doesn't exist in the database.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html\">CREATE USER</a> in the Amazon Redshift Database Developer Guide. </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 128 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain only lowercase letters.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>"
+        },
+        "DbName":{
+          "shape":"String",
+          "documentation":"<p>The name of a database that <code>DbUser</code> is authorized to log on to. If <code>DbName</code> is not specified, <code>DbUser</code> can log in to any existing database.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain only lowercase letters.</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>"
+        },
+        "ClusterIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The unique identifier of the cluster that contains the database for which your are requesting credentials. This parameter is case sensitive.</p>"
+        },
+        "DurationSeconds":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>The number of seconds until the returned temporary password expires.</p> <p>Constraint: minimum 900, maximum 3600.</p> <p>Default: 900</p>"
+        },
+        "AutoCreate":{
+          "shape":"BooleanOptional",
+          "documentation":"<p>Create a database user with the name specified for <code>DbUser</code> if one does not exist.</p>"
+        },
+        "DbGroups":{
+          "shape":"DbGroupList",
+          "documentation":"<p>A list of the names of existing database groups that <code>DbUser</code> will join for the current session. If not specified, the new user is added only to PUBLIC.</p>"
+        }
+      },
+      "documentation":"<p>The request parameters to get cluster credentials.</p>"
     },
     "HsmClientCertificate":{
       "type":"structure",
@@ -5008,6 +5103,10 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "SensitiveString":{
+      "type":"string",
+      "sensitive":true
     },
     "Snapshot":{
       "type":"structure",

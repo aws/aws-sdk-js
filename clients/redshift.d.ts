@@ -396,6 +396,14 @@ declare class Redshift extends Service {
    */
   enableSnapshotCopy(callback?: (err: AWSError, data: Redshift.Types.EnableSnapshotCopyResult) => void): Request<Redshift.Types.EnableSnapshotCopyResult, AWSError>;
   /**
+   * Returns a database user name and temporary password with temporary authorization to log in to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log in. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Generating IAM Database User Credentials in the Amazon Redshift Cluster Management Guide. The IAM user or role that executes GetClusterCredentials must have an IAM policy attached that allows the redshift:GetClusterCredentials action with access to the dbuser resource on the cluster. The user name specified for dbuser in the IAM policy and the user name specified for the DbUser parameter must match. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
+   */
+  getClusterCredentials(params: Redshift.Types.GetClusterCredentialsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
+  /**
+   * Returns a database user name and temporary password with temporary authorization to log in to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log in. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Generating IAM Database User Credentials in the Amazon Redshift Cluster Management Guide. The IAM user or role that executes GetClusterCredentials must have an IAM policy attached that allows the redshift:GetClusterCredentials action with access to the dbuser resource on the cluster. The user name specified for dbuser in the IAM policy and the user name specified for the DbUser parameter must match. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
+   */
+  getClusterCredentials(callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
+  /**
    * Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.
    */
   modifyCluster(params: Redshift.Types.ModifyClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
@@ -546,6 +554,10 @@ declare namespace Redshift {
      * The identifier of an AWS customer account authorized to restore a snapshot.
      */
     AccountId?: String;
+    /**
+     * The identifier of an AWS support account authorized to restore a snapshot. For AWS support, the identifier is amazon-redshift-support. 
+     */
+    AccountAlias?: String;
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
   export interface AuthorizeClusterSecurityGroupIngressMessage {
@@ -579,7 +591,7 @@ declare namespace Redshift {
      */
     SnapshotClusterIdentifier?: String;
     /**
-     * The identifier of the AWS customer account authorized to restore the specified snapshot.
+     * The identifier of the AWS customer account authorized to restore the specified snapshot. To share a snapshot with AWS support, specify amazon-redshift-support.
      */
     AccountWithRestoreAccess: String;
   }
@@ -728,6 +740,20 @@ declare namespace Redshift {
      * A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.
      */
     IamRoles?: ClusterIamRoleList;
+  }
+  export interface ClusterCredentials {
+    /**
+     * A database user name that is authorized to log on to the database DbName using the password DbPassword. If the DbGroups parameter is specifed, DbUser is added to the listed groups for the current session. The user name is prefixed with IAM: for an existing user name or IAMA: if the user was auto-created. 
+     */
+    DbUser?: String;
+    /**
+     * A temporary password that authorizes the user name returned by DbUser to log on to the database DbName. 
+     */
+    DbPassword?: SensitiveString;
+    /**
+     * The date and time DbPassword expires.
+     */
+    Expiration?: TStamp;
   }
   export interface ClusterIamRole {
     /**
@@ -1281,6 +1307,7 @@ declare namespace Redshift {
      */
     Tags: TagList;
   }
+  export type DbGroupList = String[];
   export interface DefaultClusterParameters {
     /**
      * The name of the cluster parameter group family to which the engine default parameters apply.
@@ -2003,6 +2030,32 @@ declare namespace Redshift {
      * A list of Event instances. 
      */
     Events?: EventList;
+  }
+  export interface GetClusterCredentialsMessage {
+    /**
+     * The name of a database user. If a user name matching DbUser exists in the database, the temporary user credentials have the same permissions as the existing user. If DbUser doesn't exist in the database and Autocreate is True, a new user is created using the value for DbUser with PUBLIC permissions. If a database user matching the value for DbUser doesn't exist and Autocreate is False, then the command succeeds but the connection attempt will fail because the user doesn't exist in the database. For more information, see CREATE USER in the Amazon Redshift Database Developer Guide.  Constraints:   Must be 1 to 128 alphanumeric characters or hyphens   Must contain only lowercase letters.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
+     */
+    DbUser: String;
+    /**
+     * The name of a database that DbUser is authorized to log on to. If DbName is not specified, DbUser can log in to any existing database. Constraints:   Must be 1 to 64 alphanumeric characters or hyphens   Must contain only lowercase letters.   Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
+     */
+    DbName?: String;
+    /**
+     * The unique identifier of the cluster that contains the database for which your are requesting credentials. This parameter is case sensitive.
+     */
+    ClusterIdentifier: String;
+    /**
+     * The number of seconds until the returned temporary password expires. Constraint: minimum 900, maximum 3600. Default: 900
+     */
+    DurationSeconds?: IntegerOptional;
+    /**
+     * Create a database user with the name specified for DbUser if one does not exist.
+     */
+    AutoCreate?: BooleanOptional;
+    /**
+     * A list of the names of existing database groups that DbUser will join for the current session. If not specified, the new user is added only to PUBLIC.
+     */
+    DbGroups?: DbGroupList;
   }
   export interface HsmClientCertificate {
     /**
@@ -2807,6 +2860,7 @@ declare namespace Redshift {
   export interface RotateEncryptionKeyResult {
     Cluster?: Cluster;
   }
+  export type SensitiveString = string;
   export interface Snapshot {
     /**
      * The snapshot identifier that is provided in the request.

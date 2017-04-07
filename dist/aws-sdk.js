@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.39.0
+// AWS SDK for JavaScript v2.40.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -74793,12 +74793,12 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "redshift-2012-12-01",
     "apiVersion": "2012-12-01",
     "endpointPrefix": "redshift",
     "protocol": "query",
     "serviceFullName": "Amazon Redshift",
     "signatureVersion": "v4",
+    "uid": "redshift-2012-12-01",
     "xmlNamespace": "http://redshift.amazonaws.com/doc/2012-12-01/"
   },
   "operations": {
@@ -76109,6 +76109,46 @@ module.exports={
         }
       }
     },
+    "GetClusterCredentials": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DbUser",
+          "ClusterIdentifier"
+        ],
+        "members": {
+          "DbUser": {},
+          "DbName": {},
+          "ClusterIdentifier": {},
+          "DurationSeconds": {
+            "type": "integer"
+          },
+          "AutoCreate": {
+            "type": "boolean"
+          },
+          "DbGroups": {
+            "type": "list",
+            "member": {
+              "locationName": "DbGroup"
+            }
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "GetClusterCredentialsResult",
+        "type": "structure",
+        "members": {
+          "DbUser": {},
+          "DbPassword": {
+            "type": "string",
+            "sensitive": true
+          },
+          "Expiration": {
+            "type": "timestamp"
+          }
+        }
+      }
+    },
     "ModifyCluster": {
       "input": {
         "type": "structure",
@@ -76201,7 +76241,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S57",
+        "shape": "S5b",
         "resultWrapper": "ModifyClusterParameterGroupResult"
       }
     },
@@ -76346,7 +76386,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S57",
+        "shape": "S5b",
         "resultWrapper": "ResetClusterParameterGroupResult"
       }
     },
@@ -76599,7 +76639,8 @@ module.exports={
             "locationName": "AccountWithRestoreAccess",
             "type": "structure",
             "members": {
-              "AccountId": {}
+              "AccountId": {},
+              "AccountAlias": {}
             }
           }
         },
@@ -77088,7 +77129,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S57": {
+    "S5b": {
       "type": "structure",
       "members": {
         "ParameterGroupName": {},
@@ -77102,97 +77143,96 @@ module.exports={
   "pagination": {
     "DescribeClusterParameterGroups": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "ParameterGroups"
     },
     "DescribeClusterParameters": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "Parameters"
     },
     "DescribeClusterSecurityGroups": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "ClusterSecurityGroups"
     },
     "DescribeClusterSnapshots": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "Snapshots"
     },
     "DescribeClusterSubnetGroups": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "ClusterSubnetGroups"
     },
     "DescribeClusterVersions": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "ClusterVersions"
     },
     "DescribeClusters": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "Clusters"
     },
     "DescribeDefaultClusterParameters": {
       "input_token": "Marker",
-      "output_token": "DefaultClusterParameters.Marker",
       "limit_key": "MaxRecords",
+      "output_token": "DefaultClusterParameters.Marker",
       "result_key": "DefaultClusterParameters.Parameters"
     },
     "DescribeEventSubscriptions": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "EventSubscriptionsList"
     },
     "DescribeEvents": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "Events"
     },
     "DescribeHsmClientCertificates": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "HsmClientCertificates"
     },
     "DescribeHsmConfigurations": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "HsmConfigurations"
     },
     "DescribeOrderableClusterOptions": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "OrderableClusterOptions"
     },
     "DescribeReservedNodeOfferings": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "ReservedNodeOfferings"
     },
     "DescribeReservedNodes": {
       "input_token": "Marker",
-      "output_token": "Marker",
       "limit_key": "MaxRecords",
+      "output_token": "Marker",
       "result_key": "ReservedNodes"
     }
   }
 }
-
 },{}],120:[function(require,module,exports){
 module.exports={
   "version": 2,
@@ -98193,7 +98233,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.39.0',
+  VERSION: '2.40.0',
 
 
   Signers: {},
