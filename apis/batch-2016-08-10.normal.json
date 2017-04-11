@@ -454,6 +454,10 @@
           "shape":"StringList",
           "documentation":"<p>The instances types that may launched.</p>"
         },
+        "imageId":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.</p>"
+        },
         "subnets":{
           "shape":"StringList",
           "documentation":"<p>The VPC subnets into which the compute resources are launched. </p>"

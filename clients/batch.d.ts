@@ -267,6 +267,10 @@ declare namespace Batch {
      */
     instanceTypes: StringList;
     /**
+     * The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
+     */
+    imageId?: String;
+    /**
      * The VPC subnets into which the compute resources are launched. 
      */
     subnets: StringList;

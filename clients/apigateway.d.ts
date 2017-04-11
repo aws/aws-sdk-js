@@ -76,6 +76,14 @@ declare class APIGateway extends Service {
    */
   createModel(callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
+   * Creates a ReqeustValidator of a given RestApi.
+   */
+  createRequestValidator(params: APIGateway.Types.CreateRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  /**
+   * Creates a ReqeustValidator of a given RestApi.
+   */
+  createRequestValidator(callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  /**
    * Creates a Resource resource.
    */
   createResource(params: APIGateway.Types.CreateResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
@@ -219,6 +227,14 @@ declare class APIGateway extends Service {
    * Deletes a model.
    */
   deleteModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a RequestValidator of a given RestApi.
+   */
+  deleteRequestValidator(params: APIGateway.Types.DeleteRequestValidatorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a RequestValidator of a given RestApi.
+   */
+  deleteRequestValidator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Resource resource.
    */
@@ -483,6 +499,22 @@ declare class APIGateway extends Service {
    * Describes existing Models defined for a RestApi resource.
    */
   getModels(callback?: (err: AWSError, data: APIGateway.Types.Models) => void): Request<APIGateway.Types.Models, AWSError>;
+  /**
+   * Gets a RequestValidator of a given RestApi.
+   */
+  getRequestValidator(params: APIGateway.Types.GetRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  /**
+   * Gets a RequestValidator of a given RestApi.
+   */
+  getRequestValidator(callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  /**
+   * Gets the RequestValidators collection of a given RestApi.
+   */
+  getRequestValidators(params: APIGateway.Types.GetRequestValidatorsRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidators) => void): Request<APIGateway.Types.RequestValidators, AWSError>;
+  /**
+   * Gets the RequestValidators collection of a given RestApi.
+   */
+  getRequestValidators(callback?: (err: AWSError, data: APIGateway.Types.RequestValidators) => void): Request<APIGateway.Types.RequestValidators, AWSError>;
   /**
    * Lists information about a resource.
    */
@@ -787,6 +819,14 @@ declare class APIGateway extends Service {
    * Changes information about a model.
    */
   updateModel(callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
+  /**
+   * Updates a RequestValidator of a given RestApi.
+   */
+  updateRequestValidator(params: APIGateway.Types.UpdateRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  /**
+   * Updates a RequestValidator of a given RestApi.
+   */
+  updateRequestValidator(callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
    * Changes information about a Resource resource.
    */
@@ -1222,6 +1262,24 @@ declare namespace APIGateway {
      */
     contentType: String;
   }
+  export interface CreateRequestValidatorRequest {
+    /**
+     * [Required] The identifier of the RestApi for which the RequestValidator is created.
+     */
+    restApiId: String;
+    /**
+     * The name of the to-be-created RequestValidator.
+     */
+    name?: String;
+    /**
+     * A Boolean flag to indicate whether to validate request body according to the configured model schema for the method (true) or not (false).
+     */
+    validateRequestBody?: Boolean;
+    /**
+     * A Boolean flag to indicate whether to validate request parameters, true, or not false.
+     */
+    validateRequestParameters?: Boolean;
+  }
   export interface CreateResourceRequest {
     /**
      * The identifier of the RestApi for the resource. 
@@ -1470,6 +1528,16 @@ declare namespace APIGateway {
      */
     modelName: String;
   }
+  export interface DeleteRequestValidatorRequest {
+    /**
+     * [Required] The identifier of the RestApi from which the given RequestValidator is deleted.
+     */
+    restApiId: String;
+    /**
+     * [Required] The identifier of the RequestValidator to be deleted.
+     */
+    requestValidatorId: String;
+  }
   export interface DeleteResourceRequest {
     /**
      * The RestApi identifier for the Resource resource.
@@ -1697,7 +1765,7 @@ declare namespace APIGateway {
   }
   export interface GetApiKeysRequest {
     /**
-     * The position of the current ApiKeys resource to get information about.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
@@ -1733,11 +1801,11 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * If not all Authorizer resources in the response were present, the position will specify where to start the next page of results.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * Limit the number of Authorizer resources in the response.
+     * The maximum number of returned results per page.
      */
     limit?: NullableInteger;
   }
@@ -1757,11 +1825,11 @@ declare namespace APIGateway {
      */
     domainName: String;
     /**
-     * The position of the current BasePathMapping resource in the collection to get information about.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The maximum number of BasePathMapping resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.
+     * The maximum number of returned results per page. The value is 25 by default and could be between 1 - 500.
      */
     limit?: NullableInteger;
   }
@@ -1773,11 +1841,11 @@ declare namespace APIGateway {
   }
   export interface GetClientCertificatesRequest {
     /**
-     * The position of the current ClientCertificate resource in the collection to get information about.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The maximum number of ClientCertificate resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.
+     * The maximum number of returned results per page. The value is 25 by default and could be between 1 - 500.
      */
     limit?: NullableInteger;
   }
@@ -1797,11 +1865,11 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * The position of the current Deployment resource in the collection to get information about.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The maximum number of Deployment resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.
+     * The maximum number of returned results per page. The value is 25 by default and could be between 1 - 500.
      */
     limit?: NullableInteger;
   }
@@ -1833,11 +1901,11 @@ declare namespace APIGateway {
      */
     path?: String;
     /**
-     * The position of the to-be-retrieved documentation part in the DocumentationParts collection.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The size of the paged results.
+     * The maximum number of returned results per page.
      */
     limit?: NullableInteger;
   }
@@ -1857,11 +1925,11 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * The position of the returned DocumentationVersion in the DocumentationVersions collection.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The page size of the returned documentation versions.
+     * The maximum number of returned results per page.
      */
     limit?: NullableInteger;
   }
@@ -1873,11 +1941,11 @@ declare namespace APIGateway {
   }
   export interface GetDomainNamesRequest {
     /**
-     * The position of the current domain names to get information about.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The maximum number of DomainName resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.
+     * The maximum number of returned results per page. The value is 25 by default and could be between 1 - 500.
      */
     limit?: NullableInteger;
   }
@@ -1997,11 +2065,35 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * The position of the next set of results in the Models resource to get information about.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The maximum number of models in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.
+     * The maximum number of returned results per page. The value is 25 by default and could be between 1 - 500.
+     */
+    limit?: NullableInteger;
+  }
+  export interface GetRequestValidatorRequest {
+    /**
+     * [Required] The identifier of the RestApi to which the specified RequestValidator belongs.
+     */
+    restApiId: String;
+    /**
+     * [Required] The identifier of the RequestValidator to be retrieved.
+     */
+    requestValidatorId: String;
+  }
+  export interface GetRequestValidatorsRequest {
+    /**
+     * [Required] The identifier of a RestApi to which the RequestValidators collection belongs.
+     */
+    restApiId: String;
+    /**
+     * The current pagination position in the paged result set.
+     */
+    position?: String;
+    /**
+     * The maximum number of returned results per page.
      */
     limit?: NullableInteger;
   }
@@ -2021,11 +2113,11 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * The position of the next set of results in the current Resources resource to get information about.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The maximum number of Resource resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.
+     * The maximum number of returned results per page. The value is 25 by default and could be between 1 - 500.
      */
     limit?: NullableInteger;
   }
@@ -2037,11 +2129,11 @@ declare namespace APIGateway {
   }
   export interface GetRestApisRequest {
     /**
-     * The position of the current RestApis resource in the collection to get information about.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The maximum number of RestApi resources in the collection to get information about. The default limit is 25. It should be an integer between 1 - 500.
+     * The maximum number of returned results per page. The value is 25 by default and could be between 1 - 500.
      */
     limit?: NullableInteger;
   }
@@ -2071,11 +2163,11 @@ declare namespace APIGateway {
   }
   export interface GetSdkTypesRequest {
     /**
-     * The position of the last fetched element in the SdkTypes collection.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The maximum number of SdkType instances to be returned. 
+     * The maximum number of returned results per page.
      */
     limit?: NullableInteger;
   }
@@ -2115,11 +2207,11 @@ declare namespace APIGateway {
      */
     usagePlanId: String;
     /**
-     * A query parameter specifying the zero-based index specifying the position of a usage plan key.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * A query parameter specifying the maximum number usage plan keys returned by the GET request.
+     * The maximum number of returned results per page.
      */
     limit?: NullableInteger;
     /**
@@ -2135,7 +2227,7 @@ declare namespace APIGateway {
   }
   export interface GetUsagePlansRequest {
     /**
-     * The zero-based array index specifying the position of the to-be-retrieved UsagePlan resource.
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
@@ -2143,7 +2235,7 @@ declare namespace APIGateway {
      */
     keyId?: String;
     /**
-     * The number of UsagePlan resources to be returned as the result.
+     * The maximum number of returned results per page.
      */
     limit?: NullableInteger;
   }
@@ -2165,11 +2257,11 @@ declare namespace APIGateway {
      */
     endDate: String;
     /**
-     * Position
+     * The current pagination position in the paged result set.
      */
     position?: String;
     /**
-     * The maximum number of results to be returned.
+     * The maximum number of returned results per page.
      */
     limit?: NullableInteger;
   }
@@ -2302,6 +2394,7 @@ declare namespace APIGateway {
   export type ListOfLong = Long[];
   export type ListOfModel = Model[];
   export type ListOfPatchOperation = PatchOperation[];
+  export type ListOfRequestValidator = RequestValidator[];
   export type ListOfResource = Resource[];
   export type ListOfRestApi = RestApi[];
   export type ListOfSdkConfigurationProperty = SdkConfigurationProperty[];
@@ -2329,7 +2422,7 @@ declare namespace APIGateway {
      */
     httpMethod?: String;
     /**
-     * The method's authorization type.
+     * The method's authorization type. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, CUSTOM for using a custom authorizer, or COGNITO_USER_POOLS for using a Cognito user pool.
      */
     authorizationType?: String;
     /**
@@ -2340,6 +2433,10 @@ declare namespace APIGateway {
      * A boolean flag specifying whether a valid ApiKey is required to invoke this method.
      */
     apiKeyRequired?: NullableBoolean;
+    /**
+     * The identifier of a RequestValidator for request validation.
+     */
+    requestValidatorId?: String;
     /**
      * A human-friendly operation identifier for the method. For example, you can assign the operationName of ListPets for the GET /pets method in PetStore example.
      */
@@ -2419,7 +2516,7 @@ declare namespace APIGateway {
   }
   export interface MethodSnapshot {
     /**
-     * Specifies the type of authorization used for the method.
+     * The method's authorization type. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, CUSTOM for using a custom authorizer, or COGNITO_USER_POOLS for using a Cognito user pool.
      */
     authorizationType?: String;
     /**
@@ -2469,7 +2566,7 @@ declare namespace APIGateway {
      */
     path?: String;
     /**
-     * The new target value of the update operation. 
+     * The new target value of the update operation. When using AWS CLI to update a property of a JSON value, enclose the JSON object with a pair of single quotes in a Linux shell, e.g., '{"a": ...}'. In a Windows shell, see Using JSON for Parameters.
      */
     value?: String;
     /**
@@ -2581,7 +2678,7 @@ declare namespace APIGateway {
      */
     httpMethod: String;
     /**
-     * Specifies the type of authorization used for the method.
+     * The method's authorization type. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, CUSTOM for using a custom authorizer, or COGNITO_USER_POOLS for using a Cognito user pool.
      */
     authorizationType: String;
     /**
@@ -2604,6 +2701,10 @@ declare namespace APIGateway {
      * Specifies the Model resources used for the request's content type. Request models are represented as a key/value map, with a content type as the key and a Model name as the value.
      */
     requestModels?: MapOfStringToString;
+    /**
+     * The identifier of a RequestValidator for validating the method request.
+     */
+    requestValidatorId?: String;
   }
   export interface PutMethodResponseRequest {
     /**
@@ -2669,6 +2770,31 @@ declare namespace APIGateway {
      */
     period?: QuotaPeriodType;
   }
+  export interface RequestValidator {
+    /**
+     * The identifier of this RequestValidator.
+     */
+    id?: String;
+    /**
+     * The name of this RequestValidator
+     */
+    name?: String;
+    /**
+     * A Boolean flag to indicate whether to validate a request body according to the configured Model schema.
+     */
+    validateRequestBody?: Boolean;
+    /**
+     * A Boolean flag to indicate whether to validate request parameters (true) or not (false).
+     */
+    validateRequestParameters?: Boolean;
+  }
+  export interface RequestValidators {
+    position?: String;
+    /**
+     * The current page of RequestValidator resources in the RequestValidators collection.
+     */
+    items?: ListOfRequestValidator;
+  }
   export interface Resource {
     /**
      * The resource's identifier.
@@ -2687,7 +2813,7 @@ declare namespace APIGateway {
      */
     path?: String;
     /**
-     * Gets an API resource's method of a given HTTP verb.  The resource methods are a map of methods indexed by methods' HTTP verbs enabled on the resource. This method map is included in the 200 OK response of the GET /restapis/{restapi_id}/resources/{resource_id} or GET /restapis/{restapi_id}/resources/{resource_id}?embed=methods request. Example: Get the GET method of an API resource Request GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160608T031827Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160608/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash} Response { "_links": { "curies": [ { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html", "name": "integration", "templated": true }, { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html", "name": "integrationresponse", "templated": true }, { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html", "name": "method", "templated": true }, { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html", "name": "methodresponse", "templated": true } ], "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" }, "integration:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "method:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" }, "method:integration": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "method:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" }, "method:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" }, "methodresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}", "templated": true } }, "apiKeyRequired": false, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": { "method:integration": { "_links": { "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "integration:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "integration:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" }, "integration:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "integrationresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}", "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": { "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" }, "requestTemplates": { "application/json": "{\n}" }, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": { "integration:responses": { "_links": { "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" }, "integrationresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'" }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n" }, "statusCode": "200" } } }, "method:responses": { "_links": { "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" } }, "responseModels": { "application/json": "Empty" }, "responseParameters": { "method.response.header.Content-Type": false }, "statusCode": "200" } } } If the OPTIONS is enabled on the resource, you can follow the example here to get that method. Just replace the GET of the last path segment in the request URL with OPTIONS.   
+     * Gets an API resource's method of a given HTTP verb.  The resource methods are a map of methods indexed by methods' HTTP verbs enabled on the resource. This method map is included in the 200 OK response of the GET /restapis/{restapi_id}/resources/{resource_id} or GET /restapis/{restapi_id}/resources/{resource_id}?embed=methods request. Example: Get the GET method of an API resource Request GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20170223T031827Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20170223/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash} Response { "_links": { "curies": [ { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html", "name": "integration", "templated": true }, { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html", "name": "integrationresponse", "templated": true }, { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html", "name": "method", "templated": true }, { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html", "name": "methodresponse", "templated": true } ], "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" }, "integration:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "method:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" }, "method:integration": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "method:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" }, "method:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" }, "methodresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}", "templated": true } }, "apiKeyRequired": false, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": { "method:integration": { "_links": { "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "integration:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "integration:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" }, "integration:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" }, "integrationresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}", "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": { "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" }, "requestTemplates": { "application/json": "{\n}" }, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": { "integration:responses": { "_links": { "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" }, "integrationresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'" }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n" }, "statusCode": "200" } } }, "method:responses": { "_links": { "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" } }, "responseModels": { "application/json": "Empty" }, "responseParameters": { "method.response.header.Content-Type": false }, "statusCode": "200" } } } If the OPTIONS is enabled on the resource, you can follow the example here to get that method. Just replace the GET of the last path segment in the request URL with OPTIONS.   
      */
     resourceMethods?: MapOfMethod;
   }
@@ -3190,6 +3316,20 @@ declare namespace APIGateway {
      * The name of the model to update.
      */
     modelName: String;
+    /**
+     * A list of update operations to be applied to the specified resource and in the order specified in this list.
+     */
+    patchOperations?: ListOfPatchOperation;
+  }
+  export interface UpdateRequestValidatorRequest {
+    /**
+     * [Required] The identifier of the RestApi for which the given RequestValidator is updated.
+     */
+    restApiId: String;
+    /**
+     * [Required] The identifier of RequestValidator to be updated.
+     */
+    requestValidatorId: String;
     /**
      * A list of update operations to be applied to the specified resource and in the order specified in this list.
      */
