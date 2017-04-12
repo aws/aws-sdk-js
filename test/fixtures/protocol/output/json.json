@@ -231,7 +231,7 @@
         }
       },
       "MapType": {
-        "type": "string",
+        "type": "map",
         "key": { "shape": "StringType" },
         "value": { "shape": "StringType" }
       }

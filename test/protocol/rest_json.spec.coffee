@@ -223,6 +223,11 @@ describe 'AWS.Protocol.RestJson', ->
       svc.extractData(response)
 
     it 'JSON parses http response bodies', ->
+      defop output:
+        type: 'structure'
+        members:
+          a: type: 'integer'
+          b: type: 'string'
       extractData '{"a":1, "b":"xyz"}'
       expect(response.error).to.equal(null)
       expect(response.data).to.eql({a:1, b:'xyz'})
@@ -245,7 +250,7 @@ describe 'AWS.Protocol.RestJson', ->
         type: 'structure'
         payload: 'Body'
         members:
-          Body: location: 'body', type: 'binary'
+          Body: location: 'body', type: 'string'
 
       extractData 'foobar'
       expect(response.error).to.equal(null)
