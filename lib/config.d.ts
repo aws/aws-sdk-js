@@ -176,6 +176,10 @@ export abstract class ConfigurationOptions {
      */
     correctClockSkew?: boolean
     /**
+     * Custom User-Agent
+     */
+    customUserAgent?: string
+    /**
      * The AWS credentials to sign requests with.
      */
     credentials?: Credentials|CredentialsOptions|null
