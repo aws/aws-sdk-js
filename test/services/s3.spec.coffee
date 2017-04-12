@@ -1620,3 +1620,13 @@ describe 'AWS.S3', ->
           expect(data.fields[key]).to.equal(conditions[key])
         )
         done()
+
+  describe 'getBucketPolicy', ->
+    it 'converts the body to a string', (done) ->
+      policy = JSON.stringify({key: 'value', foo: 'bar', fizz: 1})
+      body = new Buffer(policy)
+      helpers.mockHttpResponse 200, {}, body
+      s3.getBucketPolicy (err, data) ->
+        expect(Buffer.isBuffer(data.Policy)).to.be.false;
+        expect(data.Policy).to.eql(policy)
+        done()

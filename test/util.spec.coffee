@@ -566,10 +566,10 @@ describe 'AWS.util.base64', ->
       catch e
         err = e
       expect(err.message).to.equal('Cannot base64 encode number 3.14')
-    
+
     it 'does not encode null', ->
       expect(base64.encode(null)).to.eql(null)
-    
+
     it 'does not encode undefined', ->
       expect(base64.encode(undefined)).to.eql(undefined)
 
@@ -592,7 +592,7 @@ describe 'AWS.util.base64', ->
 
     it 'does not decode null', ->
       expect(base64.decode(null)).to.eql(null)
-    
+
     it 'does not decode undefined', ->
       expect(base64.decode(undefined)).to.eql(undefined)
 
@@ -639,7 +639,7 @@ describe 'AWS.util.hoistPayloadMember', ->
           'payload': 'Stream'
           'members': 'Stream': 'shape': 'BlobStream'
         'BlobStream':
-          'type': 'blob'
+          'type': 'binary'
           'streaming': true
     httpResp =
       'status_code': 200

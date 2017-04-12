@@ -17,7 +17,10 @@ describe 'AWS.JSON.Parser', ->
   describe 'parse', ->
 
     it 'returns an empty document when there are no params', ->
-      expect(parse({}, '{}')).to.eql({})
+      rules =
+        type: 'structure'
+        members: {}
+      expect(parse(rules, '{}')).to.eql({})
 
     describe 'structures', ->
       rules =
