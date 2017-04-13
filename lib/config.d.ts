@@ -176,7 +176,9 @@ export abstract class ConfigurationOptions {
      */
     correctClockSkew?: boolean
     /**
-     * Custom User-Agent
+     * Sets a custom User-Agent string.
+     * In node environments this will set the User-Agent header, but
+     * browser environments this will set the X-Amz-User-Agent header.
      */
     customUserAgent?: string
     /**
