@@ -281,6 +281,15 @@ describe 'AWS.Request', ->
       promise = req.promise()
       expect(promise instanceof P).to.equal(true)
 
+    if typeof Promise != 'undefined'
+      it 'promise', (done) ->
+        AWS.config.setPromisesDependency()
+        helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+        service.makeRequest('mockMethod').promise().then (data) ->
+          expect(data.$response).to.be.defined
+          done()
+        return undefined
+
     it 'appends \'promise\' to the user agent', ->
       P = ->
       AWS.config.setPromisesDependency(P)

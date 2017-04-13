@@ -16,7 +16,7 @@ request.send(function(err, data) {
 
 // test request event listeners
 request.on('error', function(err, response) {
-    
+
 });
 request.on('build', function(request) {
     console.log(request.httpRequest.method);
@@ -28,3 +28,15 @@ request.on('complete', function(response) {
         response.data.content;
     }
 });
+
+// test promises
+request.promise().then(
+    data => {
+        console.log(data.content);
+        console.log(data.$response.requestId);
+        console.log(data.$response.hasNextPage());
+    },
+    error => {
+        console.error(error);
+    }
+);
