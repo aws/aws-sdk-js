@@ -186,6 +186,7 @@ if AWS.util.isNode()
 
         new AWS.SharedIniFileCredentials()
         expect(os.homedir.calls.length).to.equal(1)
+        expect(AWS.util.readFileSync.calls.length).to.equal(1)
         expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/\/foo\/bar\/baz[\/\\].aws[\/\\]credentials/)
 
       it 'throws an error if HOME/HOMEPATH/USERPROFILE are not set', ->
@@ -196,24 +197,28 @@ if AWS.util.isNode()
         process.env.HOMEDRIVE = 'd:/'
         process.env.HOMEPATH = 'homepath'
         creds = new AWS.SharedIniFileCredentials()
-        creds.get();
+        creds.get()
+        expect(AWS.util.readFileSync.calls.length).to.equal(1)
         expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/d:[\/\\]homepath[\/\\].aws[\/\\]credentials/)
 
       it 'uses default HOMEDRIVE of C:/', ->
         process.env.HOMEPATH = 'homepath'
         creds = new AWS.SharedIniFileCredentials()
-        creds.get();
+        creds.get()
+        expect(AWS.util.readFileSync.calls.length).to.equal(1)
         expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/C:[\/\\]homepath[\/\\].aws[\/\\]credentials/)
 
       it 'uses USERPROFILE if HOME is not set', ->
         process.env.USERPROFILE = '/userprofile'
         creds = new AWS.SharedIniFileCredentials()
-        creds.get();
+        creds.get()
+        expect(AWS.util.readFileSync.calls.length).to.equal(1)
         expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/[\/\\]userprofile[\/\\].aws[\/\\]credentials/)
 
       it 'can override filename as a constructor argument', ->
         creds = new AWS.SharedIniFileCredentials(filename: '/etc/creds')
-        creds.get();
+        creds.get()
+        expect(AWS.util.readFileSync.calls.length).to.equal(1)
         expect(AWS.util.readFileSync.calls[0].arguments[0]).to.equal('/etc/creds')
 
     describe 'loading', ->
@@ -264,6 +269,36 @@ if AWS.util.isNode()
         creds.get();
         validateCredentials(creds)
         expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/)
+
+      it 'prefers credentials from ~/.aws/credentials if AWS_SDK_LOAD_CONFIG is set', ->
+        process.env.AWS_SDK_LOAD_CONFIG = '1'
+        mock = '''
+        [default]
+        aws_access_key_id = akid
+        aws_secret_access_key = secret
+        aws_session_token = session
+        '''
+        helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
+          if path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
+            '''
+            [default]
+            aws_access_key_id = akid
+            aws_secret_access_key = secret
+            aws_session_token = session
+            '''
+          else
+            '''
+            [default]
+            aws_access_key_id = AKIAIOSFODNN7EXAMPLE
+            aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+            '''
+
+        creds = new AWS.SharedIniFileCredentials()
+        creds.get();
+        validateCredentials(creds)
+        expect(creds.accessKeyId).to.equal('akid')
+        expect(creds.secretAccessKey).to.equal('secret')
+        expect(creds.sessionToken).to.equal('session')
 
       it 'loads credentials from ~/.aws/credentials if AWS_SDK_LOAD_CONFIG is not set', ->
         process.env.AWS_SHARED_CREDENTIALS_FILE = '/path/to/aws/credentials'
@@ -362,9 +397,10 @@ if AWS.util.isNode()
           to.throw(/^Profile default not found/)
 
   describe 'loadRoleProfile', ->
-    beforeEach -> 
-      process.env.HOME = '/home/user'
-    
+    beforeEach ->
+      os = require('os')
+      helpers.spyOn(os, 'homedir').andReturn('/home/user')
+
     it 'will fail if assume role is disabled', ->
       mock = '''
       [default]
@@ -376,7 +412,7 @@ if AWS.util.isNode()
       creds = new AWS.SharedIniFileCredentials({disableAssumeRole: true})
       creds.refresh (err) ->
         expect(err.message).to.match(/^Role assumption profiles are disabled. Failed to load profile default/)
-      
+
     it 'will fail if no source profile is specified', ->
       mock = '''
       [default]
@@ -385,11 +421,11 @@ if AWS.util.isNode()
       role_arn = arn
       '''
       helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
-    
+
       creds = new AWS.SharedIniFileCredentials()
       creds.refresh (err) ->
         expect(err.message).to.equal('source_profile is not set using profile default')
-    
+
     it 'will fail if source profile config is not defined', ->
       mock = '''
       [default]
@@ -399,11 +435,11 @@ if AWS.util.isNode()
       source_profile = fake
       '''
       helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
-      
+
       creds = new AWS.SharedIniFileCredentials()
       creds.refresh (err) ->
         expect(err.message).to.match(/source_profile fake using profile default does not exist/)
-    
+
     it 'will fail if source profile config lacks credentials', ->
       mock = '''
       [default]
@@ -415,7 +451,7 @@ if AWS.util.isNode()
       aws_access_key_id = akid2
       '''
       helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
-      
+
       creds = new AWS.SharedIniFileCredentials()
       creds.refresh (err) ->
         expect(err.message).to.match(/Credentials not set in source_profile foo using profile default/)
@@ -446,6 +482,84 @@ if AWS.util.isNode()
         </AssumeRoleResult>
       </AssumeRoleResponse>
       '''
+      creds = new AWS.SharedIniFileCredentials()
+      expect(creds.roleArn).to.equal('arn')
+      creds.refresh (err) ->
+        expect(creds.accessKeyId).to.equal('KEY')
+        expect(creds.secretAccessKey).to.equal('SECRET')
+        expect(creds.sessionToken).to.equal('TOKEN')
+        expect(creds.expireTime).to.eql(new Date(0))
+        done()
+
+    it 'will assume a role from the credentials file whose source profile is defined in the config file', (done) ->
+      process.env.AWS_SDK_LOAD_CONFIG = '1'
+      helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
+        if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/))
+          '''
+          [default]
+          aws_access_key_id = akid
+          aws_secret_access_key = secret
+          role_arn = arn
+          source_profile = foo
+          '''
+        else
+          '''
+          [profile foo]
+          aws_access_key_id = akid2
+          aws_secret_access_key = secret2
+          '''
+      helpers.mockHttpResponse 200, {}, '''
+      <AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
+        <AssumeRoleResult>
+          <Credentials>
+            <AccessKeyId>KEY</AccessKeyId>
+            <SecretAccessKey>SECRET</SecretAccessKey>
+            <SessionToken>TOKEN</SessionToken>
+            <Expiration>1970-01-01T00:00:00.000Z</Expiration>
+          </Credentials>
+        </AssumeRoleResult>
+      </AssumeRoleResponse>
+      '''
+      debugger;
+      creds = new AWS.SharedIniFileCredentials()
+      expect(creds.roleArn).to.equal('arn')
+      creds.refresh (err) ->
+        expect(creds.accessKeyId).to.equal('KEY')
+        expect(creds.secretAccessKey).to.equal('SECRET')
+        expect(creds.sessionToken).to.equal('TOKEN')
+        expect(creds.expireTime).to.eql(new Date(0))
+        done()
+
+    it 'will assume a role from the config file whose source profile is defined in the credentials file', (done) ->
+      process.env.AWS_SDK_LOAD_CONFIG = '1'
+      helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
+        if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/))
+          '''
+          [default]
+          aws_access_key_id = akid
+          aws_secret_access_key = secret
+          role_arn = arn
+          source_profile = foo
+          '''
+        else
+          '''
+          [foo]
+          aws_access_key_id = akid2
+          aws_secret_access_key = secret2
+          '''
+      helpers.mockHttpResponse 200, {}, '''
+      <AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
+        <AssumeRoleResult>
+          <Credentials>
+            <AccessKeyId>KEY</AccessKeyId>
+            <SecretAccessKey>SECRET</SecretAccessKey>
+            <SessionToken>TOKEN</SessionToken>
+            <Expiration>1970-01-01T00:00:00.000Z</Expiration>
+          </Credentials>
+        </AssumeRoleResult>
+      </AssumeRoleResponse>
+      '''
+      debugger;
       creds = new AWS.SharedIniFileCredentials()
       expect(creds.roleArn).to.equal('arn')
       creds.refresh (err) ->
@@ -980,13 +1094,13 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.params.IdentityId).not.to.exist
 
   describe 'clearIdOnNotAuthorized', ->
-    
+
     it 'should call clearCachedId if user is not authorized', ->
       clearCache = helpers.spyOn(creds,'clearCachedId')
       idErr = {code: 'NotAuthorizedException'}
       creds.clearIdOnNotAuthorized(idErr)
       expect(clearCache.calls.length).to.equal(1)
-      
+
     it 'should not call clearCachedId if user is authorized', ->
       clearCache = helpers.spyOn(creds,'clearCachedId')
       idErr = {code: 'TEST'}
