@@ -176,6 +176,12 @@ export abstract class ConfigurationOptions {
      */
     correctClockSkew?: boolean
     /**
+     * Sets a custom User-Agent string.
+     * In node environments this will set the User-Agent header, but
+     * browser environments this will set the X-Amz-User-Agent header.
+     */
+    customUserAgent?: string
+    /**
      * The AWS credentials to sign requests with.
      */
     credentials?: Credentials|CredentialsOptions|null
