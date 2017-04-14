@@ -399,10 +399,10 @@ class ExampleShapeVisitor
   end
 
   def visit_map(node, required = false)
-    data = indent("someKey: " + traverse(node['value']))
+    data = indent("'<#{node['key']['shape']}>': " + traverse(node['value']))
     lines = ["{" + mark_rec_shape(node) + (required ? " /* required */" : "")]
     lines << data + ","
-    lines << "  /* anotherKey: ... */"
+    lines << "  /* '<#{node['key']['shape']}>': ... */"
     lines << "}"
     lines.join("\n")
   end
