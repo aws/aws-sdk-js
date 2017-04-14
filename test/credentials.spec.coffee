@@ -1,5 +1,6 @@
 helpers = require('./helpers')
 AWS = helpers.AWS
+STS = require('../clients/sts')
 
 validateCredentials = (creds, key, secret, session) ->
   expect(creds.accessKeyId).to.equal(key || 'akid')
@@ -272,12 +273,6 @@ if AWS.util.isNode()
 
       it 'prefers credentials from ~/.aws/credentials if AWS_SDK_LOAD_CONFIG is set', ->
         process.env.AWS_SDK_LOAD_CONFIG = '1'
-        mock = '''
-        [default]
-        aws_access_key_id = akid
-        aws_secret_access_key = secret
-        aws_session_token = session
-        '''
         helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
           if path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
             '''
@@ -497,16 +492,14 @@ if AWS.util.isNode()
         if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/))
           '''
           [default]
-          aws_access_key_id = akid
-          aws_secret_access_key = secret
           role_arn = arn
           source_profile = foo
           '''
         else
           '''
           [profile foo]
-          aws_access_key_id = akid2
-          aws_secret_access_key = secret2
+          aws_access_key_id = akid
+          aws_secret_access_key = secret
           '''
       helpers.mockHttpResponse 200, {}, '''
       <AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
@@ -520,10 +513,15 @@ if AWS.util.isNode()
         </AssumeRoleResult>
       </AssumeRoleResponse>
       '''
-      debugger;
       creds = new AWS.SharedIniFileCredentials()
+      stsCtorSpy = helpers.spyOn(AWS, 'STS').andCallThrough()
       expect(creds.roleArn).to.equal('arn')
       creds.refresh (err) ->
+        expect(stsCtorSpy.calls.length).to.equal(1)
+        sourceCreds = stsCtorSpy.calls[0].arguments[0].credentials
+        expect(sourceCreds.accessKeyId).to.equal('akid')
+        expect(sourceCreds.secretAccessKey).to.equal('secret')
+
         expect(creds.accessKeyId).to.equal('KEY')
         expect(creds.secretAccessKey).to.equal('SECRET')
         expect(creds.sessionToken).to.equal('TOKEN')
@@ -536,16 +534,14 @@ if AWS.util.isNode()
         if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/))
           '''
           [default]
-          aws_access_key_id = akid
-          aws_secret_access_key = secret
           role_arn = arn
           source_profile = foo
           '''
         else
           '''
           [foo]
-          aws_access_key_id = akid2
-          aws_secret_access_key = secret2
+          aws_access_key_id = akid
+          aws_secret_access_key = secret
           '''
       helpers.mockHttpResponse 200, {}, '''
       <AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
@@ -559,10 +555,15 @@ if AWS.util.isNode()
         </AssumeRoleResult>
       </AssumeRoleResponse>
       '''
-      debugger;
       creds = new AWS.SharedIniFileCredentials()
+      stsCtorSpy = helpers.spyOn(AWS, 'STS').andCallThrough()
       expect(creds.roleArn).to.equal('arn')
       creds.refresh (err) ->
+        expect(stsCtorSpy.calls.length).to.equal(1)
+        sourceCreds = stsCtorSpy.calls[0].arguments[0].credentials
+        expect(sourceCreds.accessKeyId).to.equal('akid')
+        expect(sourceCreds.secretAccessKey).to.equal('secret')
+
         expect(creds.accessKeyId).to.equal('KEY')
         expect(creds.secretAccessKey).to.equal('SECRET')
         expect(creds.sessionToken).to.equal('TOKEN')
