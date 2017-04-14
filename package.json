@@ -35,7 +35,7 @@
     "uglify-js": "2.x"
   },
   "dependencies": {
-    "buffer": "4.9.1",
+    "buffer": "5.0.6",
     "crypto-browserify": "1.0.9",
     "jmespath": "0.15.0",
     "querystring": "0.2.0",
