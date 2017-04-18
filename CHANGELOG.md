@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.41.0-->
+<!--LATEST=2.42.0-->
 <!--ENTRYINSERT-->
+
+## 2.42.0
+* bugfix: Parser: Makes casting payload blobs to strings an exceptional behavior rather than the default
+* feature: Lambda: You can use tags to group and filter your Lambda functions, making it easier to analyze them for billing allocation purposes. For more information, see Tagging Lambda Functions.  You can now write or upgrade your Lambda functions using Python version 3.6. For more information, see Programming Model for Authoring Lambda Functions in Python. Note: Features will be rolled out in the US regions on 4/19.
 
 ## 2.41.0
 * feature: APIGateway: API Gateway request validators

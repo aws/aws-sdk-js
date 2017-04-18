@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Parser",
-  "description": "Makes casting payload blobs to strings an exceptional behavior rather than the default"
-}
