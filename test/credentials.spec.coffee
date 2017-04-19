@@ -295,6 +295,23 @@ if AWS.util.isNode()
         expect(creds.secretAccessKey).to.equal('secret')
         expect(creds.sessionToken).to.equal('session')
 
+      it 'will not merge profiles across the config and credentials file', ->
+        process.env.AWS_SDK_LOAD_CONFIG = '1'
+        helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
+          if path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
+            '''
+            [default]
+            aws_access_key_id = AKIAIOSFODNN7EXAMPLE
+            '''
+          else
+            '''
+            [default]
+            aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+            '''
+
+        creds = new AWS.SharedIniFileCredentials()
+        creds.get((err, data) -> expect(err).to.be.defined);
+
       it 'loads credentials from ~/.aws/credentials if AWS_SDK_LOAD_CONFIG is not set', ->
         process.env.AWS_SHARED_CREDENTIALS_FILE = '/path/to/aws/credentials'
         mock = '''
@@ -514,11 +531,11 @@ if AWS.util.isNode()
       </AssumeRoleResponse>
       '''
       creds = new AWS.SharedIniFileCredentials()
-      stsCtorSpy = helpers.spyOn(AWS, 'STS').andCallThrough()
+      credsCtorSpy = helpers.spyOn(AWS, 'Credentials').andCallThrough()
       expect(creds.roleArn).to.equal('arn')
       creds.refresh (err) ->
-        expect(stsCtorSpy.calls.length).to.equal(1)
-        sourceCreds = stsCtorSpy.calls[0].arguments[0].credentials
+        expect(credsCtorSpy.calls.length).to.equal(1)
+        sourceCreds = credsCtorSpy.calls[0].arguments[0]
         expect(sourceCreds.accessKeyId).to.equal('akid')
         expect(sourceCreds.secretAccessKey).to.equal('secret')
 
@@ -556,11 +573,11 @@ if AWS.util.isNode()
       </AssumeRoleResponse>
       '''
       creds = new AWS.SharedIniFileCredentials()
-      stsCtorSpy = helpers.spyOn(AWS, 'STS').andCallThrough()
+      credsCtorSpy = helpers.spyOn(AWS, 'Credentials').andCallThrough()
       expect(creds.roleArn).to.equal('arn')
       creds.refresh (err) ->
-        expect(stsCtorSpy.calls.length).to.equal(1)
-        sourceCreds = stsCtorSpy.calls[0].arguments[0].credentials
+        expect(credsCtorSpy.calls.length).to.equal(1)
+        sourceCreds = credsCtorSpy.calls[0].arguments[0]
         expect(sourceCreds.accessKeyId).to.equal('akid')
         expect(sourceCreds.secretAccessKey).to.equal('secret')
 
