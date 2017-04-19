@@ -569,7 +569,7 @@
         },
         "SourceArn":{
           "shape":"Arn",
-          "documentation":"<p>This is optional; however, when granting a source permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) as its value. This ensures that only events generated from the specified source can invoke the function.</p> <important> <p>If you add a permission for the source without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function from that source.</p> </important>"
+          "documentation":"<p>This is optional; however, when granting permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) as its value. This ensures that only events generated from the specified source can invoke the function.</p> <important> <p>If you add a permission without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function.</p> </important>"
         },
         "SourceAccount":{
           "shape":"SourceOwner",
@@ -776,12 +776,16 @@
         },
         "DeadLetterConfig":{
           "shape":"DeadLetterConfig",
-          "documentation":"<p>The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic. </p>"
+          "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic. </p>"
         },
         "Environment":{"shape":"Environment"},
         "KMSKeyArn":{
           "shape":"KMSKeyArn",
           "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If not provided, AWS Lambda will use a default service key.</p>"
+        },
+        "TracingConfig":{
+          "shape":"TracingConfig",
+          "documentation":"<p>The parent object that contains your function's tracing settings.</p>"
         },
         "Tags":{
           "shape":"Tags",
@@ -799,7 +803,7 @@
           "documentation":"<p>The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue (DLQ).</p>"
         }
       },
-      "documentation":"<p>The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>"
+      "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.</p>"
     },
     "DeleteAliasRequest":{
       "type":"structure",
@@ -1104,7 +1108,7 @@
         },
         "DeadLetterConfig":{
           "shape":"DeadLetterConfig",
-          "documentation":"<p>The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>"
+          "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.</p>"
         },
         "Environment":{
           "shape":"EnvironmentResponse",
@@ -1113,6 +1117,10 @@
         "KMSKeyArn":{
           "shape":"KMSKeyArn",
           "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If empty, it means you are using the AWS Lambda default service key.</p>"
+        },
+        "TracingConfig":{
+          "shape":"TracingConfigResponse",
+          "documentation":"<p>The parent object that contains your function's tracing settings.</p>"
         }
       },
       "documentation":"<p>A complex type that describes function metadata.</p>"
@@ -1923,6 +1931,33 @@
       "error":{"httpStatusCode":429},
       "exception":true
     },
+    "TracingConfig":{
+      "type":"structure",
+      "members":{
+        "Mode":{
+          "shape":"TracingMode",
+          "documentation":"<p>Can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with \"sampled=1\". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.</p>"
+        }
+      },
+      "documentation":"<p>The parent object that contains your function's tracing settings.</p>"
+    },
+    "TracingConfigResponse":{
+      "type":"structure",
+      "members":{
+        "Mode":{
+          "shape":"TracingMode",
+          "documentation":"<p>The tracing mode associated with your Lambda function.</p>"
+        }
+      },
+      "documentation":"<p>Parent object of the tracing information associated with your Lambda function.</p>"
+    },
+    "TracingMode":{
+      "type":"string",
+      "enum":[
+        "Active",
+        "PassThrough"
+      ]
+    },
     "UnsupportedMediaTypeException":{
       "type":"structure",
       "members":{
@@ -2082,11 +2117,15 @@
         },
         "DeadLetterConfig":{
           "shape":"DeadLetterConfig",
-          "documentation":"<p>The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>"
+          "documentation":"<p>The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.</p>"
         },
         "KMSKeyArn":{
           "shape":"KMSKeyArn",
           "documentation":"<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If you elect to use the AWS Lambda default service key, pass in an empty string (\"\") for this parameter.</p>"
+        },
+        "TracingConfig":{
+          "shape":"TracingConfig",
+          "documentation":"<p>The parent object that contains your function's tracing settings.</p>"
         }
       },
       "documentation":"<p/>"

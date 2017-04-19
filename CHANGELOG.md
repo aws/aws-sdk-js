@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.42.0-->
+<!--LATEST=2.43.0-->
 <!--ENTRYINSERT-->
+
+## 2.43.0
+* feature: APIGateway: Add support for "embed" property.
+* feature: CodeStar: AWS CodeStar is a cloud-based service for creating, managing, and working with software development projects on AWS. An AWS CodeStar project creates and integrates AWS services for your project development toolchain. AWS CodeStar also manages the permissions required for project users.
+* feature: EC2: Adds support for creating an Amazon FPGA Image (AFI) from a specified design checkpoint (DCP).
+* feature: IAM: This changes introduces a new IAM role type, Service Linked Role, which works like a normal role but must be managed via services' control. 
+* feature: Lambda: Lambda integration with CloudDebugger service to enable customers to enable tracing for the Lambda functions and send trace information to the CloudDebugger service.
+* feature: LexModelBuildingService: Amazon Lex is a service for building conversational interfaces into any application using voice and text.
+* feature: Polly: API Update for Amazon Polly: Add support for speech marks
+* feature: Rekognition: Given an image, the API detects explicit or suggestive adult content in the image and returns a list of corresponding labels with confidence scores, as well as a taxonomy (parent-child relation) for each label.
 
 ## 2.42.0
 * bugfix: Parser: Makes casting payload blobs to strings an exceptional behavior rather than the default

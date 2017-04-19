@@ -284,7 +284,7 @@ declare namespace Lambda {
      */
     Principal: Principal;
     /**
-     * This is optional; however, when granting a source permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) as its value. This ensures that only events generated from the specified source can invoke the function.  If you add a permission for the source without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function from that source. 
+     * This is optional; however, when granting permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) as its value. This ensures that only events generated from the specified source can invoke the function.  If you add a permission without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function. 
      */
     SourceArn?: Arn;
     /**
@@ -417,7 +417,7 @@ declare namespace Lambda {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic. 
+     * The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic. 
      */
     DeadLetterConfig?: DeadLetterConfig;
     Environment?: Environment;
@@ -425,6 +425,10 @@ declare namespace Lambda {
      * The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If not provided, AWS Lambda will use a default service key.
      */
     KMSKeyArn?: KMSKeyArn;
+    /**
+     * The parent object that contains your function's tracing settings.
+     */
+    TracingConfig?: TracingConfig;
     /**
      * The list of tags (key-value pairs) assigned to the new function.
      */
@@ -611,7 +615,7 @@ declare namespace Lambda {
      */
     VpcConfig?: VpcConfigResponse;
     /**
-     * The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+     * The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**
@@ -622,6 +626,10 @@ declare namespace Lambda {
      * The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If empty, it means you are using the AWS Lambda default service key.
      */
     KMSKeyArn?: KMSKeyArn;
+    /**
+     * The parent object that contains your function's tracing settings.
+     */
+    TracingConfig?: TracingConfigResponse;
   }
   export type FunctionList = FunctionConfiguration[];
   export type FunctionName = string;
@@ -933,6 +941,19 @@ declare namespace Lambda {
   export type ThrottleReason = "ConcurrentInvocationLimitExceeded"|"FunctionInvocationRateLimitExceeded"|"CallerRateLimitExceeded"|string;
   export type Timeout = number;
   export type Timestamp = string;
+  export interface TracingConfig {
+    /**
+     * Can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
+     */
+    Mode?: TracingMode;
+  }
+  export interface TracingConfigResponse {
+    /**
+     * The tracing mode associated with your Lambda function.
+     */
+    Mode?: TracingMode;
+  }
+  export type TracingMode = "Active"|"PassThrough"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN (Amazon Resource Name) of the function.
@@ -1040,13 +1061,17 @@ declare namespace Lambda {
      */
     Runtime?: Runtime;
     /**
-     * The parent object that contains the target Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+     * The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**
      * The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If you elect to use the AWS Lambda default service key, pass in an empty string ("") for this parameter.
      */
     KMSKeyArn?: KMSKeyArn;
+    /**
+     * The parent object that contains your function's tracing settings.
+     */
+    TracingConfig?: TracingConfig;
   }
   export type Version = string;
   export interface VpcConfig {

@@ -186,7 +186,7 @@ declare namespace Polly {
     NextToken?: NextToken;
   }
   export type NextToken = string;
-  export type OutputFormat = "mp3"|"ogg_vorbis"|"pcm"|string;
+  export type OutputFormat = "json"|"mp3"|"ogg_vorbis"|"pcm"|string;
   export interface PutLexiconInput {
     /**
      * Name of the lexicon. The name must follow the regular express format [0-9A-Za-z]{1,20}. That is, the name is a case-sensitive alphanumeric string up to 20 characters long. 
@@ -202,19 +202,25 @@ declare namespace Polly {
   export type RequestCharacters = number;
   export type SampleRate = string;
   export type Size = number;
+  export type SpeechMarkType = "sentence"|"ssml"|"viseme"|"word"|string;
+  export type SpeechMarkTypeList = SpeechMarkType[];
   export interface SynthesizeSpeechInput {
     /**
      * List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see PutLexicon.
      */
     LexiconNames?: LexiconNameList;
     /**
-     *  The audio format in which the resulting stream will be encoded. 
+     *  The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. 
      */
     OutputFormat: OutputFormat;
     /**
      *  The audio frequency specified in Hz.  The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050".   Valid values for pcm are "8000" and "16000" The default value is "16000". 
      */
     SampleRate?: SampleRate;
+    /**
+     * The type of speech marks returned for the input text.
+     */
+    SpeechMarkTypes?: SpeechMarkTypeList;
     /**
      *  Input text to synthesize. If you specify ssml as the TextType, follow the SSML format for the input text. 
      */
@@ -234,7 +240,7 @@ declare namespace Polly {
      */
     AudioStream?: AudioStream;
     /**
-     *  Specifies the type audio stream. This should reflect the OutputFormat parameter in your request.     If you request mp3 as the OutputFormat, the ContentType returned is audio/mpeg.     If you request ogg_vorbis as the OutputFormat, the ContentType returned is audio/ogg.     If you request pcm as the OutputFormat, the ContentType returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.     
+     *  Specifies the type audio stream. This should reflect the OutputFormat parameter in your request.     If you request mp3 as the OutputFormat, the ContentType returned is audio/mpeg.     If you request ogg_vorbis as the OutputFormat, the ContentType returned is audio/ogg.     If you request pcm as the OutputFormat, the ContentType returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.    If you request json as the OutputFormat, the ContentType returned is audio/json.    
      */
     ContentType?: ContentType;
     /**

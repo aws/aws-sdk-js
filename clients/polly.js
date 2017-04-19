@@ -9,6 +9,7 @@ require('../lib/services/polly');
 Object.defineProperty(apiLoader.services['polly'], '2016-06-10', {
   get: function get() {
     var model = require('../apis/polly-2016-06-10.min.json');
+    model.paginators = require('../apis/polly-2016-06-10.paginators.json').pagination;
     return model;
   },
   enumerable: true,

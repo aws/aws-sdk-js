@@ -97,5 +97,7 @@ module.exports = {
   WAF: require('./waf'),
   WAFRegional: require('./wafregional'),
   WorkDocs: require('./workdocs'),
-  WorkSpaces: require('./workspaces')
+  WorkSpaces: require('./workspaces'),
+  CodeStar: require('./codestar'),
+  LexModelBuildingService: require('./lexmodelbuildingservice')
 };

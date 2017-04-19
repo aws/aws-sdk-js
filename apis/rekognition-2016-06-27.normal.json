@@ -125,6 +125,25 @@
       ],
       "documentation":"<p>Detects instances of real-world labels within an image (JPEG or PNG) provided as input. This includes objects like flower, tree, and table; events like wedding, graduation, and birthday party; and concepts like landscape, evening, and nature. For an example, see <a>get-started-exercise-detect-labels</a>.</p> <p> For each object, scene, and concept the API returns one or more labels. Each label provides the object name, and the level of confidence that the image contains the object. For example, suppose the input image has a lighthouse, the sea, and a rock. The response will include all three labels, one for each object. </p> <p> <code>{Name: lighthouse, Confidence: 98.4629}</code> </p> <p> <code>{Name: rock,Confidence: 79.2097}</code> </p> <p> <code> {Name: sea,Confidence: 75.061}</code> </p> <p> In the preceding example, the operation returns one label for each of the three objects. The operation can also return multiple labels for the same object in the image. For example, if the input image shows a flower (for example, a tulip), the operation might return the following three labels. </p> <p> <code>{Name: flower,Confidence: 99.0562}</code> </p> <p> <code>{Name: plant,Confidence: 99.0562}</code> </p> <p> <code>{Name: tulip,Confidence: 99.0562}</code> </p> <p>In this example, the detection algorithm more precisely identifies the flower as a tulip.</p> <p>You can provide the input image as an S3 object or as base64-encoded bytes. In response, the API returns an array of labels. In addition, the response also includes the orientation correction. Optionally, you can specify <code>MinConfidence</code> to control the confidence threshold for the labels returned. The default is 50%. You can also add the <code>MaxLabels</code> parameter to limit the number of labels returned. </p> <note> <p>If the object detected is a person, the operation doesn't provide the same facial details that the <a>DetectFaces</a> operation provides.</p> </note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectLabels</code> action. </p>"
     },
+    "DetectModerationLabels":{
+      "name":"DetectModerationLabels",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetectModerationLabelsRequest"},
+      "output":{"shape":"DetectModerationLabelsResponse"},
+      "errors":[
+        {"shape":"InvalidS3ObjectException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ImageTooLargeException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ProvisionedThroughputExceededException"}
+      ],
+      "documentation":"<p>Detects explicit or suggestive adult content in a specified .jpeg or .png image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate. For information about moderation labels, see <a>howitworks-moderateimage</a>.</p>"
+    },
     "IndexFaces":{
       "name":"IndexFaces",
       "http":{
@@ -492,7 +511,7 @@
         },
         "MinConfidence":{
           "shape":"Percent",
-          "documentation":"<p>Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with confidence lower than this specified value.</p> <p>If <code>minConfidence</code> is not specified, the operation returns labels with a confidence values greater than or equal to 50 percent.</p>"
+          "documentation":"<p>Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with confidence lower than this specified value.</p> <p>If <code>MinConfidence</code> is not specified, the operation returns labels with a confidence values greater than or equal to 50 percent.</p>"
         }
       }
     },
@@ -506,6 +525,26 @@
         "OrientationCorrection":{
           "shape":"OrientationCorrection",
           "documentation":"<p> Amazon Rekognition returns the orientation of the input image that was detected (clockwise direction). If your application displays the image, you can use this value to correct the orientation. If Amazon Rekognition detects that the input image was rotated (for example, by 90 degrees), it first corrects the orientation before detecting the labels. </p> <note> <p>If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil.</p> </note>"
+        }
+      }
+    },
+    "DetectModerationLabelsRequest":{
+      "type":"structure",
+      "required":["Image"],
+      "members":{
+        "Image":{"shape":"Image"},
+        "MinConfidence":{
+          "shape":"Percent",
+          "documentation":"<p>Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with a confidence level lower than this specified value.</p> <p>If you don't specify <code>MinConfidence</code>, the operation returns labels with confidence values greater than or equal to 50 percent.</p>"
+        }
+      }
+    },
+    "DetectModerationLabelsResponse":{
+      "type":"structure",
+      "members":{
+        "ModerationLabels":{
+          "shape":"ModerationLabels",
+          "documentation":"<p>A list of labels for explicit or suggestive adult content found in the image. The list includes the top-level label and each child label detected in the image. This is useful for filtering specific categories of content. </p>"
         }
       }
     },
@@ -783,7 +822,7 @@
       "members":{
         "CollectionId":{
           "shape":"CollectionId",
-          "documentation":"<p>ID of an existing collection to which you want to add the faces that are detected in the input images.</p>"
+          "documentation":"<p>The ID of an existing collection to which you want to add the faces that are detected in the input images.</p>"
         },
         "Image":{"shape":"Image"},
         "ExternalImageId":{
@@ -792,7 +831,7 @@
         },
         "DetectionAttributes":{
           "shape":"Attributes",
-          "documentation":"<p>A list of facial attributes you want to be returned. This can be the default list of attributes or all attributes. If you don't specify a value for <code>Attributes</code> or if you specify <code>[\"DEFAULT\"]</code>, the API returns the following subset of facial attributes: <code>BoundingBox</code>, <code>Confidence</code>, <code>Pose</code>, <code>Quality</code> and <code>Landmarks</code>. If you provide <code>[\"ALL\"]</code>, all facial attributes are returned but the operation will take longer to complete.</p> <p>If you provide both, <code>[\"ALL\", \"DEFAULT\"]</code>, the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). </p>"
+          "documentation":"<p>A list of facial attributes that you want to be returned. This can be the default list of attributes or all attributes. If you don't specify a value for <code>Attributes</code> or if you specify <code>[\"DEFAULT\"]</code>, the API returns the following subset of facial attributes: <code>BoundingBox</code>, <code>Confidence</code>, <code>Pose</code>, <code>Quality</code> and <code>Landmarks</code>. If you provide <code>[\"ALL\"]</code>, all facial attributes are returned but the operation will take longer to complete.</p> <p>If you provide both, <code>[\"ALL\", \"DEFAULT\"]</code>, the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). </p>"
         }
       }
     },
@@ -976,6 +1015,28 @@
       "type":"integer",
       "max":4096,
       "min":1
+    },
+    "ModerationLabel":{
+      "type":"structure",
+      "members":{
+        "Confidence":{
+          "shape":"Percent",
+          "documentation":"<p>Specifies the confidence that Amazon Rekognition has that the label has been correctly identified.</p> <p>If you don't specify the <code>MinConfidence</code> parameter in the call to <code>DetectModerationLabels</code>, the operation returns labels with a confidence value greater than or equal to 50 percent.</p>"
+        },
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>The label name for the type of content detected in the image.</p>"
+        },
+        "ParentName":{
+          "shape":"String",
+          "documentation":"<p>The name for the parent label. Labels at the top-level of the hierarchy have the parent label <code>\"\"</code>.</p>"
+        }
+      },
+      "documentation":"<p>Provides information about a single type of moderated content found in an image. Each type of moderated content has a label within a hierarchical taxonomy. For more information, see <a>howitworks-moderateimage</a>.</p>"
+    },
+    "ModerationLabels":{
+      "type":"list",
+      "member":{"shape":"ModerationLabel"}
     },
     "MouthOpen":{
       "type":"structure",

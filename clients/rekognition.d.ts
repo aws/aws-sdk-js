@@ -60,6 +60,14 @@ declare class Rekognition extends Service {
    */
   detectLabels(callback?: (err: AWSError, data: Rekognition.Types.DetectLabelsResponse) => void): Request<Rekognition.Types.DetectLabelsResponse, AWSError>;
   /**
+   * Detects explicit or suggestive adult content in a specified .jpeg or .png image. Use DetectModerationLabels to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content. To filter images, use the labels returned by DetectModerationLabels to determine which types of content are appropriate. For information about moderation labels, see howitworks-moderateimage.
+   */
+  detectModerationLabels(params: Rekognition.Types.DetectModerationLabelsRequest, callback?: (err: AWSError, data: Rekognition.Types.DetectModerationLabelsResponse) => void): Request<Rekognition.Types.DetectModerationLabelsResponse, AWSError>;
+  /**
+   * Detects explicit or suggestive adult content in a specified .jpeg or .png image. Use DetectModerationLabels to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content. To filter images, use the labels returned by DetectModerationLabels to determine which types of content are appropriate. For information about moderation labels, see howitworks-moderateimage.
+   */
+  detectModerationLabels(callback?: (err: AWSError, data: Rekognition.Types.DetectModerationLabelsResponse) => void): Request<Rekognition.Types.DetectModerationLabelsResponse, AWSError>;
+  /**
    * Detects faces in the input image and adds them to the specified collection.   Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations.  If you provide the optional externalImageID for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image.  In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image If you request all facial attributes (using the detectionAttributes parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mount) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata.  For an example, see example2. This operation requires permissions to perform the rekognition:IndexFaces action.
    */
   indexFaces(params: Rekognition.Types.IndexFacesRequest, callback?: (err: AWSError, data: Rekognition.Types.IndexFacesResponse) => void): Request<Rekognition.Types.IndexFacesResponse, AWSError>;
@@ -268,7 +276,7 @@ declare namespace Rekognition {
      */
     MaxLabels?: UInteger;
     /**
-     * Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with confidence lower than this specified value. If minConfidence is not specified, the operation returns labels with a confidence values greater than or equal to 50 percent.
+     * Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with confidence lower than this specified value. If MinConfidence is not specified, the operation returns labels with a confidence values greater than or equal to 50 percent.
      */
     MinConfidence?: Percent;
   }
@@ -281,6 +289,19 @@ declare namespace Rekognition {
      *  Amazon Rekognition returns the orientation of the input image that was detected (clockwise direction). If your application displays the image, you can use this value to correct the orientation. If Amazon Rekognition detects that the input image was rotated (for example, by 90 degrees), it first corrects the orientation before detecting the labels.   If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil. 
      */
     OrientationCorrection?: OrientationCorrection;
+  }
+  export interface DetectModerationLabelsRequest {
+    Image: Image;
+    /**
+     * Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with a confidence level lower than this specified value. If you don't specify MinConfidence, the operation returns labels with confidence values greater than or equal to 50 percent.
+     */
+    MinConfidence?: Percent;
+  }
+  export interface DetectModerationLabelsResponse {
+    /**
+     * A list of labels for explicit or suggestive adult content found in the image. The list includes the top-level label and each child label detected in the image. This is useful for filtering specific categories of content. 
+     */
+    ModerationLabels?: ModerationLabels;
   }
   export interface Emotion {
     /**
@@ -449,7 +470,7 @@ declare namespace Rekognition {
   }
   export interface IndexFacesRequest {
     /**
-     * ID of an existing collection to which you want to add the faces that are detected in the input images.
+     * The ID of an existing collection to which you want to add the faces that are detected in the input images.
      */
     CollectionId: CollectionId;
     Image: Image;
@@ -458,7 +479,7 @@ declare namespace Rekognition {
      */
     ExternalImageId?: ExternalImageId;
     /**
-     * A list of facial attributes you want to be returned. This can be the default list of attributes or all attributes. If you don't specify a value for Attributes or if you specify ["DEFAULT"], the API returns the following subset of facial attributes: BoundingBox, Confidence, Pose, Quality and Landmarks. If you provide ["ALL"], all facial attributes are returned but the operation will take longer to complete. If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). 
+     * A list of facial attributes that you want to be returned. This can be the default list of attributes or all attributes. If you don't specify a value for Attributes or if you specify ["DEFAULT"], the API returns the following subset of facial attributes: BoundingBox, Confidence, Pose, Quality and Landmarks. If you provide ["ALL"], all facial attributes are returned but the operation will take longer to complete. If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). 
      */
     DetectionAttributes?: Attributes;
   }
@@ -544,6 +565,21 @@ declare namespace Rekognition {
     NextToken?: String;
   }
   export type MaxFaces = number;
+  export interface ModerationLabel {
+    /**
+     * Specifies the confidence that Amazon Rekognition has that the label has been correctly identified. If you don't specify the MinConfidence parameter in the call to DetectModerationLabels, the operation returns labels with a confidence value greater than or equal to 50 percent.
+     */
+    Confidence?: Percent;
+    /**
+     * The label name for the type of content detected in the image.
+     */
+    Name?: String;
+    /**
+     * The name for the parent label. Labels at the top-level of the hierarchy have the parent label "".
+     */
+    ParentName?: String;
+  }
+  export type ModerationLabels = ModerationLabel[];
   export interface MouthOpen {
     /**
      * Boolean value that indicates whether the mouth on the face is open or not.

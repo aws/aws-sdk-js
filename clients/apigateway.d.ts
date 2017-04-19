@@ -1858,6 +1858,10 @@ declare namespace APIGateway {
      * The identifier of the Deployment resource to get information about.
      */
     deploymentId: String;
+    /**
+     * A query parameter to retrieve the specified embedded resources of the returned Deployment resource in the response. In a REST API call, this embed parameter value is a list of comma-separated strings, as in GET /restapis/{restapi_id}/deployments/{deployment_id}?embed=var1,var2. The SDK and other platform-dependent libraries might use a different format for the list. Currently, this request supports only retrieval of the embedded API summary this way. Hence, the parameter value must be a single-valued list containing only the "apisummary" string. For example, GET /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary.
+     */
+    embed?: ListOfString;
   }
   export interface GetDeploymentsRequest {
     /**
@@ -2106,6 +2110,10 @@ declare namespace APIGateway {
      * The identifier for the Resource resource.
      */
     resourceId: String;
+    /**
+     * A query parameter to retrieve the specified resources embedded in the returned Resource representation in the response. This embed parameter value is a list of comma-separated strings. Currently, the request supports only retrieval of the embedded Method resources this way. The query parameter value must be a single-valued list and contain the "methods" string. For example, GET /restapis/{restapi_id}/resources/{resource_id}?embed=methods.
+     */
+    embed?: ListOfString;
   }
   export interface GetResourcesRequest {
     /**
@@ -2120,6 +2128,10 @@ declare namespace APIGateway {
      * The maximum number of returned results per page. The value is 25 by default and could be between 1 - 500.
      */
     limit?: NullableInteger;
+    /**
+     * A query parameter used to retrieve the specified resources embedded in the returned Resources resource in the response. This embed parameter value is a list of comma-separated strings. Currently, the request supports only retrieval of the embedded Method resources this way. The query parameter value must be a single-valued list and contain the "methods" string. For example, GET /restapis/{restapi_id}/resources?embed=methods.
+     */
+    embed?: ListOfString;
   }
   export interface GetRestApiRequest {
     /**
