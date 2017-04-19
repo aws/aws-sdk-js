@@ -1,5 +1,6 @@
 helpers = require('./helpers')
 AWS = helpers.AWS
+SharedIniFile = require('../lib/shared_ini')
 
 configure = (options) -> new AWS.Config(options)
 
@@ -49,6 +50,116 @@ describe 'AWS.Config', ->
         process.env.AMAZON_REGION = 'us-west-1'
         config = new AWS.Config()
         expect(config.region).to.equal('us-west-2')
+
+      describe 'shared config file', ->
+        beforeEach ->
+          os = require('os')
+          helpers.spyOn(os, 'homedir').andReturn('/home/user')
+
+        it 'grabs region from shared credentials file if AWS_SDK_LOAD_CONFIG is set', ->
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
+            if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/))
+              '''
+              [default]
+              region = us-west-2
+              '''
+            else
+              '''
+              [default]
+              region = eu-east-1
+              '''
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-west-2')
+
+        it 'loads file from path specified in AWS_SHARED_CREDENTIALS_FILE if AWS_SDK_LOAD_CONFIG is set', ->
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          process.env.AWS_SHARED_CREDENTIALS_FILE = '/path/to/user/config/file'
+          helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
+            if (path == '/path/to/user/config/file')
+              '''
+              [default]
+              region = us-west-2
+              '''
+            else
+              '''
+              [default]
+              region = eu-east-1
+              '''
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-west-2')
+
+        it 'grabs region from shared config if AWS_SDK_LOAD_CONFIG is set', ->
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
+            if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/))
+              '''
+              [default]
+              region = us-west-2
+              '''
+            else
+              '''
+              [default]
+              aws_access_key_id = AKIAIOSFODNN7EXAMPLE
+              aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+              '''
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-west-2')
+
+        it 'loads file from path specified in AWS_CONFIG_FILE if AWS_SDK_LOAD_CONFIG is set', ->
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          process.env.AWS_CONFIG_FILE = '/path/to/user/config/file'
+          helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
+            if (path == '/path/to/user/config/file')
+              '''
+              [default]
+              region = us-west-2
+              '''
+            else
+              '''
+              [default]
+              aws_access_key_id = AKIAIOSFODNN7EXAMPLE
+              aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+              '''
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-west-2')
+
+        it 'uses the profile specified in AWS_PROFILE', ->
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          process.env.AWS_PROFILE = 'foo'
+          helpers.spyOn(AWS.util, 'readFileSync').andCallFake (path) ->
+            if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/))
+              '''
+              [default]
+              region = us-west-1
+
+              [profile foo]
+              region = us-west-2
+              '''
+            else
+              '''
+              [default]
+              region = eu-east-1
+              '''
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-west-2')
+
+        it 'prefers AWS_REGION to the shared config file', ->
+          process.env.AWS_REGION = 'us-east-1'
+          process.env.AWS_SDK_LOAD_CONFIG = '1'
+          mock = '''
+          [default]
+          region = us-west-2
+          '''
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+          config = new AWS.Config()
+          expect(config.region).to.equal('us-east-1')
 
     it 'can be set to a string', ->
       expect(configure(region: 'us-west-1').region).to.equal('us-west-1')

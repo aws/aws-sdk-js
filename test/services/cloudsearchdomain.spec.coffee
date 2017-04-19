@@ -46,6 +46,7 @@ describe 'AWS.CloudSearchDomain', ->
 
     it 'does NOT sign request if credentials are NOT provided', ->
       cds.config.credentials = null
+      cds.config.credentialProvider = null
       params = { query: 'foo' }
       req = build('search', params)
       expect(req.headers).not.to.have.property('Authorization')

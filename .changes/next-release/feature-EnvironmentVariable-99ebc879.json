@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "EnvironmentVariable",
+  "description": "Add support for specifying the location of the shared config file via the AWS_CONFIG_FILE environment variable. This variable is only honored if AWS_SDK_LOAD_CONFIG is set to a truthy value."
+}
