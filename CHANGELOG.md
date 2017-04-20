@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.43.0-->
+<!--LATEST=2.44.0-->
 <!--ENTRYINSERT-->
+
+## 2.44.0
+* feature: DeviceFarm: API Update for AWS Device Farm: Support for Deals and Promotions 
+* feature: ELBv2: Adding LoadBalancersDeleted waiter for Elasticloadbalancingv2
+* feature: EnvironmentVariable: Load config from ~/.aws/config if AWS_SDK_LOAD_CONFIG is set
+* feature: EnvironmentVariable: Add support for specifying the location of the shared config file via the AWS_CONFIG_FILE environment variable. This variable is only honored if AWS_SDK_LOAD_CONFIG is set to a truthy value.
+* feature: EnvironmentVariable: Add support for the AWS_SHARED_CREDENTIALS_FILE environment variable if AWS_SDK_LOAD_CONFIG is set
+* feature: Promises: Binds response object to the data object with which successful request promises are resolved
 
 ## 2.43.0
 * feature: APIGateway: Add support for "embed" property.

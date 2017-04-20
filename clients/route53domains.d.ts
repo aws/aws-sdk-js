@@ -68,19 +68,19 @@ declare class Route53Domains extends Service {
    */
   getContactReachabilityStatus(callback?: (err: AWSError, data: Route53Domains.Types.GetContactReachabilityStatusResponse) => void): Request<Route53Domains.Types.GetContactReachabilityStatusResponse, AWSError>;
   /**
-   * This operation returns detailed information about the domain. The domain's contact information is also returned as part of the output.
+   * This operation returns detailed information about a specified domain that is associated with the current AWS account. Contact information for the domain is also returned as part of the output.
    */
   getDomainDetail(params: Route53Domains.Types.GetDomainDetailRequest, callback?: (err: AWSError, data: Route53Domains.Types.GetDomainDetailResponse) => void): Request<Route53Domains.Types.GetDomainDetailResponse, AWSError>;
   /**
-   * This operation returns detailed information about the domain. The domain's contact information is also returned as part of the output.
+   * This operation returns detailed information about a specified domain that is associated with the current AWS account. Contact information for the domain is also returned as part of the output.
    */
   getDomainDetail(callback?: (err: AWSError, data: Route53Domains.Types.GetDomainDetailResponse) => void): Request<Route53Domains.Types.GetDomainDetailResponse, AWSError>;
   /**
-   * The GetDomainSuggestions operation returns a list of suggested domain names given a string, which can either be a domain name or simply a word or phrase (without spaces).  Parameters: DomainName (string): The basis for your domain suggestion search, a string with (or without) top-level domain specified. SuggestionCount (int): The number of domain suggestions to be returned, maximum 50, minimum 1. OnlyAvailable (bool): If true, availability check will be performed on suggestion results, and only available domains will be returned. If false, suggestions will be returned without checking whether the domain is actually available, and caller will have to call checkDomainAvailability for each suggestion to determine availability for registration.  
+   * The GetDomainSuggestions operation returns a list of suggested domain names given a string, which can either be a domain name or simply a word or phrase (without spaces).
    */
   getDomainSuggestions(params: Route53Domains.Types.GetDomainSuggestionsRequest, callback?: (err: AWSError, data: Route53Domains.Types.GetDomainSuggestionsResponse) => void): Request<Route53Domains.Types.GetDomainSuggestionsResponse, AWSError>;
   /**
-   * The GetDomainSuggestions operation returns a list of suggested domain names given a string, which can either be a domain name or simply a word or phrase (without spaces).  Parameters: DomainName (string): The basis for your domain suggestion search, a string with (or without) top-level domain specified. SuggestionCount (int): The number of domain suggestions to be returned, maximum 50, minimum 1. OnlyAvailable (bool): If true, availability check will be performed on suggestion results, and only available domains will be returned. If false, suggestions will be returned without checking whether the domain is actually available, and caller will have to call checkDomainAvailability for each suggestion to determine availability for registration.  
+   * The GetDomainSuggestions operation returns a list of suggested domain names given a string, which can either be a domain name or simply a word or phrase (without spaces).
    */
   getDomainSuggestions(callback?: (err: AWSError, data: Route53Domains.Types.GetDomainSuggestionsResponse) => void): Request<Route53Domains.Types.GetDomainSuggestionsResponse, AWSError>;
   /**
@@ -116,27 +116,27 @@ declare class Route53Domains extends Service {
    */
   listTagsForDomain(callback?: (err: AWSError, data: Route53Domains.Types.ListTagsForDomainResponse) => void): Request<Route53Domains.Types.ListTagsForDomainResponse, AWSError>;
   /**
-   * This operation registers a domain. Domains are registered by the AWS registrar partner, Gandi. For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:  Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers. Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration. Optionally enables privacy protection, so WHOIS queries return contact information for our registrar partner, Gandi, instead of the information you entered for registrant, admin, and tech contacts. If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email. Charges your AWS account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing. 
+   * This operation registers a domain. Domains are registered by the AWS registrar partner, Gandi. For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information for our registrar partner, Gandi, instead of the information you entered for registrant, admin, and tech contacts.   If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your AWS account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
    */
   registerDomain(params: Route53Domains.Types.RegisterDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.RegisterDomainResponse) => void): Request<Route53Domains.Types.RegisterDomainResponse, AWSError>;
   /**
-   * This operation registers a domain. Domains are registered by the AWS registrar partner, Gandi. For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:  Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers. Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration. Optionally enables privacy protection, so WHOIS queries return contact information for our registrar partner, Gandi, instead of the information you entered for registrant, admin, and tech contacts. If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email. Charges your AWS account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing. 
+   * This operation registers a domain. Domains are registered by the AWS registrar partner, Gandi. For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information for our registrar partner, Gandi, instead of the information you entered for registrant, admin, and tech contacts.   If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your AWS account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
    */
   registerDomain(callback?: (err: AWSError, data: Route53Domains.Types.RegisterDomainResponse) => void): Request<Route53Domains.Types.RegisterDomainResponse, AWSError>;
   /**
-   * This operation renews a domain for the specified number of years. The cost of renewing your domain is billed to your AWS account. We recommend that you renew your domain several weeks before the expiration date. Some TLD registries delete domains before the expiration date if you haven't renewed far enough in advance. For more information about renewing domain registration, see Renewing Registration for a Domain in the Amazon Route 53 documentation.
+   * This operation renews a domain for the specified number of years. The cost of renewing your domain is billed to your AWS account. We recommend that you renew your domain several weeks before the expiration date. Some TLD registries delete domains before the expiration date if you haven't renewed far enough in advance. For more information about renewing domain registration, see Renewing Registration for a Domain in the Amazon Route 53 Developer Guide.
    */
   renewDomain(params: Route53Domains.Types.RenewDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.RenewDomainResponse) => void): Request<Route53Domains.Types.RenewDomainResponse, AWSError>;
   /**
-   * This operation renews a domain for the specified number of years. The cost of renewing your domain is billed to your AWS account. We recommend that you renew your domain several weeks before the expiration date. Some TLD registries delete domains before the expiration date if you haven't renewed far enough in advance. For more information about renewing domain registration, see Renewing Registration for a Domain in the Amazon Route 53 documentation.
+   * This operation renews a domain for the specified number of years. The cost of renewing your domain is billed to your AWS account. We recommend that you renew your domain several weeks before the expiration date. Some TLD registries delete domains before the expiration date if you haven't renewed far enough in advance. For more information about renewing domain registration, see Renewing Registration for a Domain in the Amazon Route 53 Developer Guide.
    */
   renewDomain(callback?: (err: AWSError, data: Route53Domains.Types.RenewDomainResponse) => void): Request<Route53Domains.Types.RenewDomainResponse, AWSError>;
   /**
-   * For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact. 
+   * For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact.
    */
   resendContactReachabilityEmail(params: Route53Domains.Types.ResendContactReachabilityEmailRequest, callback?: (err: AWSError, data: Route53Domains.Types.ResendContactReachabilityEmailResponse) => void): Request<Route53Domains.Types.ResendContactReachabilityEmailResponse, AWSError>;
   /**
-   * For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact. 
+   * For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact.
    */
   resendContactReachabilityEmail(callback?: (err: AWSError, data: Route53Domains.Types.ResendContactReachabilityEmailResponse) => void): Request<Route53Domains.Types.ResendContactReachabilityEmailResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class Route53Domains extends Service {
    */
   retrieveDomainAuthCode(callback?: (err: AWSError, data: Route53Domains.Types.RetrieveDomainAuthCodeResponse) => void): Request<Route53Domains.Types.RetrieveDomainAuthCodeResponse, AWSError>;
   /**
-   * This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered with the AWS registrar partner, Gandi. For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see Transferring Registration for a Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide. If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time. Caution! If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable. If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn't complete successfully, the domain registrant will be notified by email.
+   * This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered with the AWS registrar partner, Gandi. For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see Transferring Registration for a Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide. If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time.  If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.  If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn't complete successfully, the domain registrant will be notified by email.
    */
   transferDomain(params: Route53Domains.Types.TransferDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.TransferDomainResponse) => void): Request<Route53Domains.Types.TransferDomainResponse, AWSError>;
   /**
-   * This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered with the AWS registrar partner, Gandi. For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see Transferring Registration for a Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide. If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time. Caution! If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable. If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn't complete successfully, the domain registrant will be notified by email.
+   * This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered with the AWS registrar partner, Gandi. For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see Transferring Registration for a Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide. If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time.  If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.  If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn't complete successfully, the domain registrant will be notified by email.
    */
   transferDomain(callback?: (err: AWSError, data: Route53Domains.Types.TransferDomainResponse) => void): Request<Route53Domains.Types.TransferDomainResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class Route53Domains extends Service {
    */
   updateDomainContactPrivacy(callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainContactPrivacyResponse) => void): Request<Route53Domains.Types.UpdateDomainContactPrivacyResponse, AWSError>;
   /**
-   * This operation replaces the current set of name servers for the domain with the specified set of name servers. If you use Amazon Route 53 as your DNS service, specify the four name servers in the delegation set for the hosted zone for the domain.  If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
+   * This operation replaces the current set of name servers for the domain with the specified set of name servers. If you use Amazon Route 53 as your DNS service, specify the four name servers in the delegation set for the hosted zone for the domain. If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
    */
   updateDomainNameservers(params: Route53Domains.Types.UpdateDomainNameserversRequest, callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainNameserversResponse) => void): Request<Route53Domains.Types.UpdateDomainNameserversResponse, AWSError>;
   /**
-   * This operation replaces the current set of name servers for the domain with the specified set of name servers. If you use Amazon Route 53 as your DNS service, specify the four name servers in the delegation set for the hosted zone for the domain.  If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
+   * This operation replaces the current set of name servers for the domain with the specified set of name servers. If you use Amazon Route 53 as your DNS service, specify the four name servers in the delegation set for the hosted zone for the domain. If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
    */
   updateDomainNameservers(callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainNameserversResponse) => void): Request<Route53Domains.Types.UpdateDomainNameserversResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Route53Domains extends Service {
    */
   updateTagsForDomain(callback?: (err: AWSError, data: Route53Domains.Types.UpdateTagsForDomainResponse) => void): Request<Route53Domains.Types.UpdateTagsForDomainResponse, AWSError>;
   /**
-   * This operation returns all the domain-related billing records for the current AWS account for a specified period
+   * Returns all the domain-related billing records for the current AWS account for a specified period
    */
   viewBilling(params: Route53Domains.Types.ViewBillingRequest, callback?: (err: AWSError, data: Route53Domains.Types.ViewBillingResponse) => void): Request<Route53Domains.Types.ViewBillingResponse, AWSError>;
   /**
-   * This operation returns all the domain-related billing records for the current AWS account for a specified period
+   * Returns all the domain-related billing records for the current AWS account for a specified period
    */
   viewBilling(callback?: (err: AWSError, data: Route53Domains.Types.ViewBillingResponse) => void): Request<Route53Domains.Types.ViewBillingResponse, AWSError>;
 }
@@ -200,23 +200,23 @@ declare namespace Route53Domains {
   export type AddressLine = string;
   export interface BillingRecord {
     /**
-     * The name of a domain. Type: String
+     * The name of the domain that the billing record applies to. If the domain name contains characters other than a-z, 0-9, and - (hyphen), such as an internationalized domain name, then this value is in Punycode. For more information, see DNS Domain Name Format in the Amazon Route 53 Developer Guidezzz.
      */
     DomainName?: DomainName;
     /**
-     * The operation that you were charged for. Type: String Valid values:  REGISTER_DOMAIN TRANSFER_IN_DOMAIN RENEW_DOMAIN CHANGE_DOMAIN_OWNER  
+     * The operation that you were charged for.
      */
     Operation?: OperationType;
     /**
-     * The ID of the invoice that is associated with the billing record. Type: String
+     * The ID of the invoice that is associated with the billing record.
      */
     InvoiceId?: InvoiceId;
     /**
-     * The date that the operation was billed, in Unix format. Type: Double
+     * The date that the operation was billed, in Unix format.
      */
     BillDate?: Timestamp;
     /**
-     * The price that you were charged for the operation, in US dollars. Type: Double Example value: 12.0
+     * The price that you were charged for the operation, in US dollars. Example value: 12.0
      */
     Price?: Price;
   }
@@ -224,7 +224,7 @@ declare namespace Route53Domains {
   export type Boolean = boolean;
   export interface CheckDomainAvailabilityRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The name of the domain that you want to get availability for. Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.
      */
     DomainName: DomainName;
     /**
@@ -234,66 +234,66 @@ declare namespace Route53Domains {
   }
   export interface CheckDomainAvailabilityResponse {
     /**
-     * Whether the domain name is available for registering.  You can only register domains designated as AVAILABLE.  Type: String Valid values:  AVAILABLE – The domain name is available. AVAILABLE_RESERVED – The domain name is reserved under specific conditions. AVAILABLE_PREORDER – The domain name is available and can be preordered. UNAVAILABLE – The domain name is not available. UNAVAILABLE_PREMIUM – The domain name is not available. UNAVAILABLE_RESTRICTED – The domain name is forbidden. RESERVED – The domain name has been reserved for another person or organization. DONT_KNOW – The TLD registry didn't reply with a definitive answer about whether the domain name is available. Amazon Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later. 
+     * Whether the domain name is available for registering.  You can only register domains designated as AVAILABLE.  Valid values:  AVAILABLE  The domain name is available.  AVAILABLE_RESERVED  The domain name is reserved under specific conditions.  AVAILABLE_PREORDER  The domain name is available and can be preordered.  DONT_KNOW  The TLD registry didn't reply with a definitive answer about whether the domain name is available. Amazon Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later.  PENDING  The TLD registry didn't return a response in the expected amount of time. When the response is delayed, it usually takes just a few extra seconds. You can resubmit the request immediately.  RESERVED  The domain name has been reserved for another person or organization.  UNAVAILABLE  The domain name is not available.  UNAVAILABLE_PREMIUM  The domain name is not available.  UNAVAILABLE_RESTRICTED  The domain name is forbidden.  
      */
     Availability: DomainAvailability;
   }
   export type City = string;
   export interface ContactDetail {
     /**
-     * First name of contact. Type: String Default: None Constraints: Maximum 255 characters. Parents: RegistrantContact, AdminContact, TechContact  Required: Yes
+     * First name of contact.
      */
     FirstName?: ContactName;
     /**
-     * Last name of contact. Type: String Default: None Constraints: Maximum 255 characters. Parents: RegistrantContact, AdminContact, TechContact Required: Yes
+     * Last name of contact.
      */
     LastName?: ContactName;
     /**
-     * Indicates whether the contact is a person, company, association, or public organization. If you choose an option other than PERSON, you must enter an organization name, and you can&apos;t enable privacy protection for the contact. Type: String Default: None Constraints: Maximum 255 characters. Valid values: PERSON | COMPANY | ASSOCIATION | PUBLIC_BODY Parents: RegistrantContact, AdminContact, TechContact  Required: Yes
+     * Indicates whether the contact is a person, company, association, or public organization. If you choose an option other than PERSON, you must enter an organization name, and you can't enable privacy protection for the contact.
      */
     ContactType?: ContactType;
     /**
-     * Name of the organization for contact types other than PERSON. Type: String Default: None Constraints: Maximum 255 characters. Contact type must not be PERSON. Parents: RegistrantContact, AdminContact, TechContact Required: No
+     * Name of the organization for contact types other than PERSON.
      */
     OrganizationName?: ContactName;
     /**
-     * First line of the contact&apos;s address. Type: String Default: None Constraints: Maximum 255 characters. Parents: RegistrantContact, AdminContact, TechContact Required: Yes
+     * First line of the contact's address.
      */
     AddressLine1?: AddressLine;
     /**
-     * Second line of contact&apos;s address, if any. Type: String Default: None Constraints: Maximum 255 characters. Parents: RegistrantContact, AdminContact, TechContact Required: No
+     * Second line of contact's address, if any.
      */
     AddressLine2?: AddressLine;
     /**
-     * The city of the contact&apos;s address. Type: String Default: None Constraints: Maximum 255 characters. Parents: RegistrantContact, AdminContact, TechContact Required: Yes
+     * The city of the contact's address.
      */
     City?: City;
     /**
-     * The state or province of the contact&apos;s city. Type: String Default: None Constraints: Maximum 255 characters. Parents: RegistrantContact, AdminContact, TechContact Required: No
+     * The state or province of the contact's city.
      */
     State?: State;
     /**
-     * Code for the country of the contact&apos;s address. Type: String Default: None Constraints: Maximum 255 characters. Parents: RegistrantContact, AdminContact, TechContact Required: Yes
+     * Code for the country of the contact's address.
      */
     CountryCode?: CountryCode;
     /**
-     * The zip or postal code of the contact&apos;s address. Type: String Default: None Constraints: Maximum 255 characters. Parents: RegistrantContact, AdminContact, TechContact Required: No
+     * The zip or postal code of the contact's address.
      */
     ZipCode?: ZipCode;
     /**
-     * The phone number of the contact. Type: String Default: None Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code>]". For example, a US phone number might appear as "+1.1234567890". Parents: RegistrantContact, AdminContact, TechContact Required: Yes
+     * The phone number of the contact. Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code&gt;]". For example, a US phone number might appear as "+1.1234567890".
      */
     PhoneNumber?: ContactNumber;
     /**
-     * Email address of the contact. Type: String Default: None Constraints: Maximum 254 characters. Parents: RegistrantContact, AdminContact, TechContact  Required: Yes
+     * Email address of the contact.
      */
     Email?: Email;
     /**
-     * Fax number of the contact. Type: String Default: None Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code]". For example, a US phone number might appear as "+1.1234567890". Parents: RegistrantContact, AdminContact, TechContact Required: No
+     * Fax number of the contact. Constraints: Phone number must be specified in the format "+[country dialing code].[number including any area code]". For example, a US phone number might appear as "+1.1234567890".
      */
     Fax?: ContactNumber;
     /**
-     * A list of name-value pairs for parameters required by certain top-level domains. Type: Complex Default: None Parents: RegistrantContact, AdminContact, TechContact Children: Name, Value Required: No
+     * A list of name-value pairs for parameters required by certain top-level domains.
      */
     ExtraParams?: ExtraParamList;
   }
@@ -305,30 +305,33 @@ declare namespace Route53Domains {
   export type DNSSec = string;
   export interface DeleteTagsForDomainRequest {
     /**
-     * The domain for which you want to delete one or more tags. The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Hyphens are allowed only when they&apos;re surrounded by letters, numbers, or other hyphens. You can&apos;t specify a hyphen at the beginning or end of a label. To specify an Internationalized Domain Name, you must convert the name to Punycode. Required: Yes
+     * The domain for which you want to delete one or more tags.
      */
     DomainName: DomainName;
     /**
-     * A list of tag keys to delete. Type: A list that contains the keys of the tags that you want to delete. Default: None Required: No'>
+     * A list of tag keys to delete.
      */
     TagsToDelete: TagKeyList;
   }
   export interface DeleteTagsForDomainResponse {
   }
   export interface DisableDomainAutoRenewRequest {
+    /**
+     * The name of the domain that you want to disable automatic renewal for.
+     */
     DomainName: DomainName;
   }
   export interface DisableDomainAutoRenewResponse {
   }
   export interface DisableDomainTransferLockRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The name of the domain that you want to remove the transfer lock for.
      */
     DomainName: DomainName;
   }
   export interface DisableDomainTransferLockResponse {
     /**
-     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail. Type: String Default: None Constraints: Maximum 255 characters.
+     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
      */
     OperationId: OperationId;
   }
@@ -338,25 +341,31 @@ declare namespace Route53Domains {
   export type DomainStatus = string;
   export type DomainStatusList = DomainStatus[];
   export interface DomainSuggestion {
+    /**
+     * A suggested domain name.
+     */
     DomainName?: DomainName;
+    /**
+     * Whether the domain name is available for registering.  You can register only the domains that are designated as AVAILABLE.  Valid values:  AVAILABLE  The domain name is available.  AVAILABLE_RESERVED  The domain name is reserved under specific conditions.  AVAILABLE_PREORDER  The domain name is available and can be preordered.  DONT_KNOW  The TLD registry didn't reply with a definitive answer about whether the domain name is available. Amazon Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later.  PENDING  The TLD registry didn't return a response in the expected amount of time. When the response is delayed, it usually takes just a few extra seconds. You can resubmit the request immediately.  RESERVED  The domain name has been reserved for another person or organization.  UNAVAILABLE  The domain name is not available.  UNAVAILABLE_PREMIUM  The domain name is not available.  UNAVAILABLE_RESTRICTED  The domain name is forbidden.  
+     */
     Availability?: String;
   }
   export type DomainSuggestionsList = DomainSuggestion[];
   export interface DomainSummary {
     /**
-     * The name of a domain. Type: String
+     * The name of the domain that the summary information applies to.
      */
     DomainName: DomainName;
     /**
-     * Indicates whether the domain is automatically renewed upon expiration. Type: Boolean Valid values: True | False
+     * Indicates whether the domain is automatically renewed upon expiration.
      */
     AutoRenew?: Boolean;
     /**
-     * Indicates whether a domain is locked from unauthorized transfer to another party. Type: Boolean Valid values: True | False
+     * Indicates whether a domain is locked from unauthorized transfer to another party.
      */
     TransferLock?: Boolean;
     /**
-     * Expiration date of the domain in Coordinated Universal Time (UTC). Type: Long
+     * Expiration date of the domain in Coordinated Universal Time (UTC).
      */
     Expiry?: Timestamp;
   }
@@ -364,30 +373,33 @@ declare namespace Route53Domains {
   export type DurationInYears = number;
   export type Email = string;
   export interface EnableDomainAutoRenewRequest {
+    /**
+     * The name of the domain that you want to enable automatic renewal for.
+     */
     DomainName: DomainName;
   }
   export interface EnableDomainAutoRenewResponse {
   }
   export interface EnableDomainTransferLockRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The name of the domain that you want to set the transfer lock for.
      */
     DomainName: DomainName;
   }
   export interface EnableDomainTransferLockResponse {
     /**
-     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail. Type: String Default: None Constraints: Maximum 255 characters.
+     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
      */
     OperationId: OperationId;
   }
   export type ErrorMessage = string;
   export interface ExtraParam {
     /**
-     * Name of the additional parameter required by the top-level domain. Type: String Default: None Valid values: DUNS_NUMBER | BRAND_NUMBER | BIRTH_DEPARTMENT | BIRTH_DATE_IN_YYYY_MM_DD | BIRTH_COUNTRY | BIRTH_CITY | DOCUMENT_NUMBER | AU_ID_NUMBER | AU_ID_TYPE | CA_LEGAL_TYPE | CA_BUSINESS_ENTITY_TYPE |ES_IDENTIFICATION | ES_IDENTIFICATION_TYPE | ES_LEGAL_FORM | FI_BUSINESS_NUMBER | FI_ID_NUMBER | IT_PIN | RU_PASSPORT_DATA | SE_ID_NUMBER | SG_ID_NUMBER | VAT_NUMBER Parent: ExtraParams Required: Yes
+     * Name of the additional parameter required by the top-level domain.
      */
     Name: ExtraParamName;
     /**
-     * Values corresponding to the additional parameter names required by some top-level domains. Type: String Default: None Constraints: Maximum 2048 characters. Parent: ExtraParams Required: Yes
+     * Values corresponding to the additional parameter names required by some top-level domains.
      */
     Value: ExtraParamValue;
   }
@@ -397,7 +409,7 @@ declare namespace Route53Domains {
   export type FIAuthKey = string;
   export interface GetContactReachabilityStatusRequest {
     /**
-     * The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid. Type: String Default: None Required: Yes
+     * The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid.
      */
     domainName?: DomainName;
   }
@@ -407,71 +419,71 @@ declare namespace Route53Domains {
      */
     domainName?: DomainName;
     /**
-     * Whether the registrant contact has responded. PENDING indicates that we sent the confirmation email and haven't received a response yet, DONE indicates that we sent the email and got confirmation from the registrant contact, and EXPIRED indicates that the time limit expired before the registrant contact responded.  Type: String Valid values: PENDING, DONE, EXPIRED
+     * Whether the registrant contact has responded. Values include the following:  PENDING  We sent the confirmation email and haven't received a response yet.  DONE  We sent the email and got confirmation from the registrant contact.  EXPIRED  The time limit expired before the registrant contact responded.  
      */
     status?: ReachabilityStatus;
   }
   export interface GetDomainDetailRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The name of the domain that you want to get detailed information about.
      */
     DomainName: DomainName;
   }
   export interface GetDomainDetailResponse {
     /**
-     * The name of a domain. Type: String
+     * The name of a domain.
      */
     DomainName: DomainName;
     /**
-     * The name of the domain. Type: String
+     * The name of the domain.
      */
     Nameservers: NameserverList;
     /**
-     * Specifies whether the domain registration is set to renew automatically. Type: Boolean
+     * Specifies whether the domain registration is set to renew automatically.
      */
     AutoRenew?: Boolean;
     /**
-     * Provides details about the domain administrative contact.  Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams
+     * Provides details about the domain administrative contact.
      */
     AdminContact: ContactDetail;
     /**
-     * Provides details about the domain registrant.  Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams
+     * Provides details about the domain registrant.
      */
     RegistrantContact: ContactDetail;
     /**
-     * Provides details about the domain technical contact. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams
+     * Provides details about the domain technical contact.
      */
     TechContact: ContactDetail;
     /**
-     * Specifies whether contact information for the admin contact is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean
+     * Specifies whether contact information for the admin contact is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
      */
     AdminPrivacy?: Boolean;
     /**
-     * Specifies whether contact information for the registrant contact is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean
+     * Specifies whether contact information for the registrant contact is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
      */
     RegistrantPrivacy?: Boolean;
     /**
-     * Specifies whether contact information for the tech contact is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean
+     * Specifies whether contact information for the tech contact is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
      */
     TechPrivacy?: Boolean;
     /**
-     * Name of the registrar of the domain as identified in the registry. Amazon Route 53 domains are registered by registrar Gandi. The value is "GANDI SAS".  Type: String
+     * Name of the registrar of the domain as identified in the registry. Amazon Route 53 domains are registered by registrar Gandi. The value is "GANDI SAS". 
      */
     RegistrarName?: RegistrarName;
     /**
-     * The fully qualified name of the WHOIS server that can answer the WHOIS query for the domain. Type: String
+     * The fully qualified name of the WHOIS server that can answer the WHOIS query for the domain.
      */
     WhoIsServer?: RegistrarWhoIsServer;
     /**
-     * Web address of the registrar. Type: String
+     * Web address of the registrar.
      */
     RegistrarUrl?: RegistrarUrl;
     /**
-     * Email address to contact to report incorrect contact information for a domain, to report that the domain is being used to send spam, to report that someone is cybersquatting on a domain name, or report some other type of abuse.  Type: String
+     * Email address to contact to report incorrect contact information for a domain, to report that the domain is being used to send spam, to report that someone is cybersquatting on a domain name, or report some other type of abuse.
      */
     AbuseContactEmail?: Email;
     /**
-     * Phone number for reporting abuse.  Type: String
+     * Phone number for reporting abuse.
      */
     AbuseContactPhone?: ContactNumber;
     /**
@@ -491,7 +503,7 @@ declare namespace Route53Domains {
      */
     ExpirationDate?: Timestamp;
     /**
-     * Reseller of the domain. Domains registered or transferred using Amazon Route 53 domains will have "Amazon" as the reseller.  Type: String
+     * Reseller of the domain. Domains registered or transferred using Amazon Route 53 domains will have "Amazon" as the reseller. 
      */
     Reseller?: Reseller;
     /**
@@ -499,43 +511,55 @@ declare namespace Route53Domains {
      */
     DnsSec?: DNSSec;
     /**
-     * An array of domain name status codes, also known as Extensible Provisioning Protocol (EPP) status codes. ICANN, the organization that maintains a central database of domain names, has developed a set of domain name status codes that tell you the status of a variety of operations on a domain name, for example, registering a domain name, transferring a domain name to another registrar, renewing the registration for a domain name, and so on. All registrars use this same set of status codes. For a current list of domain name status codes and an explanation of what each code means, go to the ICANN website and search for epp status codes. (Search on the ICANN website; web searches sometimes return an old version of the document.) Type: Array of String
+     * An array of domain name status codes, also known as Extensible Provisioning Protocol (EPP) status codes. ICANN, the organization that maintains a central database of domain names, has developed a set of domain name status codes that tell you the status of a variety of operations on a domain name, for example, registering a domain name, transferring a domain name to another registrar, renewing the registration for a domain name, and so on. All registrars use this same set of status codes. For a current list of domain name status codes and an explanation of what each code means, go to the ICANN website and search for epp status codes. (Search on the ICANN website; web searches sometimes return an old version of the document.)
      */
     StatusList?: DomainStatusList;
   }
   export interface GetDomainSuggestionsRequest {
+    /**
+     * A domain name that you want to use as the basis for a list of possible domain names. The domain name must contain a top-level domain (TLD), such as .com, that Amazon Route 53 supports. For a list of TLDs, see Domains that You Can Register with Amazon Route 53 in the Amazon Route 53 Developer Guide.
+     */
     DomainName: DomainName;
+    /**
+     * The number of suggested domain names that you want Amazon Route 53 to return.
+     */
     SuggestionCount: Integer;
+    /**
+     * If OnlyAvailable is true, Amazon Route 53 returns only domain names that are available. If OnlyAvailable is false, Amazon Route 53 returns domain names without checking whether they're available to be registered. To determine whether the domain is available, you can call checkDomainAvailability for each suggestion.
+     */
     OnlyAvailable: Boolean;
   }
   export interface GetDomainSuggestionsResponse {
+    /**
+     * A list of possible domain names. If you specified true for OnlyAvailable in the request, the list contains only domains that are available for registration.
+     */
     SuggestionsList?: DomainSuggestionsList;
   }
   export interface GetOperationDetailRequest {
     /**
-     * The identifier for the operation for which you want to get the status. Amazon Route 53 returned the identifier in the response to the original request. Type: String Default: None Required: Yes
+     * The identifier for the operation for which you want to get the status. Amazon Route 53 returned the identifier in the response to the original request.
      */
     OperationId: OperationId;
   }
   export interface GetOperationDetailResponse {
     /**
-     * The identifier for the operation. Type: String
+     * The identifier for the operation.
      */
     OperationId?: OperationId;
     /**
-     * The current status of the requested operation in the system. Type: String
+     * The current status of the requested operation in the system.
      */
     Status?: OperationStatus;
     /**
-     * Detailed information on the status including possible errors. Type: String
+     * Detailed information on the status including possible errors.
      */
     Message?: ErrorMessage;
     /**
-     * The name of a domain. Type: String
+     * The name of a domain.
      */
     DomainName?: DomainName;
     /**
-     * The type of operation that was requested. Type: String
+     * The type of operation that was requested.
      */
     Type?: OperationType;
     /**
@@ -551,41 +575,41 @@ declare namespace Route53Domains {
   export type LangCode = string;
   export interface ListDomainsRequest {
     /**
-     * For an initial request for a list of domains, omit this element. If the number of domains that are associated with the current AWS account is greater than the value that you specified for MaxItems, you can use Marker to return additional domains. Get the value of NextPageMarker from the previous response, and submit another request that includes the value of NextPageMarker in the Marker element. Type: String Default: None Constraints: The marker must match the value specified in the previous request.  Required: No
+     * For an initial request for a list of domains, omit this element. If the number of domains that are associated with the current AWS account is greater than the value that you specified for MaxItems, you can use Marker to return additional domains. Get the value of NextPageMarker from the previous response, and submit another request that includes the value of NextPageMarker in the Marker element. Constraints: The marker must match the value specified in the previous request.
      */
     Marker?: PageMarker;
     /**
-     * Number of domains to be returned. Type: Integer Default: 20 Constraints: A numeral between 1 and 100. Required: No
+     * Number of domains to be returned. Default: 20
      */
     MaxItems?: PageMaxItems;
   }
   export interface ListDomainsResponse {
     /**
-     * A summary of domains. Type: Complex type containing a list of domain summaries. Children: AutoRenew, DomainName, Expiry, TransferLock
+     * A summary of domains.
      */
     Domains: DomainSummaryList;
     /**
-     * If there are more domains than you specified for MaxItems in the request, submit another request and include the value of NextPageMarker in the value of Marker. Type: String Parent: Operations
+     * If there are more domains than you specified for MaxItems in the request, submit another request and include the value of NextPageMarker in the value of Marker.
      */
     NextPageMarker?: PageMarker;
   }
   export interface ListOperationsRequest {
     /**
-     * For an initial request for a list of operations, omit this element. If the number of operations that are not yet complete is greater than the value that you specified for MaxItems, you can use Marker to return additional operations. Get the value of NextPageMarker from the previous response, and submit another request that includes the value of NextPageMarker in the Marker element. Type: String Default: None Required: No
+     * For an initial request for a list of operations, omit this element. If the number of operations that are not yet complete is greater than the value that you specified for MaxItems, you can use Marker to return additional operations. Get the value of NextPageMarker from the previous response, and submit another request that includes the value of NextPageMarker in the Marker element.
      */
     Marker?: PageMarker;
     /**
-     * Number of domains to be returned. Type: Integer Default: 20 Constraints: A value between 1 and 100. Required: No
+     * Number of domains to be returned. Default: 20
      */
     MaxItems?: PageMaxItems;
   }
   export interface ListOperationsResponse {
     /**
-     * Lists summaries of the operations. Type: Complex type containing a list of operation summaries Children: OperationId, Status, SubmittedDate, Type
+     * Lists summaries of the operations.
      */
     Operations: OperationSummaryList;
     /**
-     * If there are more operations than you specified for MaxItems in the request, submit another request and include the value of NextPageMarker in the value of Marker. Type: String Parent: Operations
+     * If there are more operations than you specified for MaxItems in the request, submit another request and include the value of NextPageMarker in the value of Marker.
      */
     NextPageMarker?: PageMarker;
   }
@@ -597,17 +621,17 @@ declare namespace Route53Domains {
   }
   export interface ListTagsForDomainResponse {
     /**
-     * A list of the tags that are associated with the specified domain. Type: A complex type containing a list of tags Each tag includes the following elements.  Key The key (name) of a tag. Type: String  Value The value of a tag. Type: String  
+     * A list of the tags that are associated with the specified domain.
      */
     TagList: TagList;
   }
   export interface Nameserver {
     /**
-     * The fully qualified host name of the name server. Type: String Constraint: Maximum 255 characterss Parent: Nameservers
+     * The fully qualified host name of the name server. Constraint: Maximum 255 characters
      */
     Name: HostName;
     /**
-     * Glue IP address of a name server entry. Glue IP addresses are required only when the name of the name server is a subdomain of the domain. For example, if your domain is example.com and the name server for the domain is ns.example.com, you need to specify the IP address for ns.example.com. Type: List of IP addresses. Constraints: The list can contain only one IPv4 and one IPv6 address. Parent: Nameservers
+     * Glue IP address of a name server entry. Glue IP addresses are required only when the name of the name server is a subdomain of the domain. For example, if your domain is example.com and the name server for the domain is ns.example.com, you need to specify the IP address for ns.example.com. Constraints: The list can contain only one IPv4 and one IPv6 address.
      */
     GlueIps?: GlueIpList;
   }
@@ -616,15 +640,15 @@ declare namespace Route53Domains {
   export type OperationStatus = "SUBMITTED"|"IN_PROGRESS"|"ERROR"|"SUCCESSFUL"|"FAILED"|string;
   export interface OperationSummary {
     /**
-     * Identifier returned to track the requested action. Type: String
+     * Identifier returned to track the requested action.
      */
     OperationId: OperationId;
     /**
-     * The current status of the requested operation in the system. Type: String
+     * The current status of the requested operation in the system.
      */
     Status: OperationStatus;
     /**
-     * Type of the action requested. Type: String Valid values: REGISTER_DOMAIN | DELETE_DOMAIN | TRANSFER_IN_DOMAIN | UPDATE_DOMAIN_CONTACT | UPDATE_NAMESERVER | CHANGE_PRIVACY_PROTECTION | DOMAIN_LOCK
+     * Type of the action requested.
      */
     Type: OperationType;
     /**
@@ -640,7 +664,7 @@ declare namespace Route53Domains {
   export type ReachabilityStatus = "PENDING"|"DONE"|"EXPIRED"|string;
   export interface RegisterDomainRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The domain name that you want to register. Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.
      */
     DomainName: DomainName;
     /**
@@ -648,41 +672,41 @@ declare namespace Route53Domains {
      */
     IdnLangCode?: LangCode;
     /**
-     * The number of years the domain will be registered. Domains are registered for a minimum of one year. The maximum period depends on the top-level domain. Type: Integer Default: 1 Valid values: Integer from 1 to 10 Required: Yes
+     * The number of years that you want to register the domain for. Domains are registered for a minimum of one year. The maximum period depends on the top-level domain. For the range of valid values for your domain, see Domains that You Can Register with Amazon Route 53 in the Amazon Route 53 Developer Guide. Default: 1
      */
     DurationInYears: DurationInYears;
     /**
-     * Indicates whether the domain will be automatically renewed (true) or not (false). Autorenewal only takes effect after the account is charged. Type: Boolean Valid values: true | false Default: true Required: No
+     * Indicates whether the domain will be automatically renewed (true) or not (false). Autorenewal only takes effect after the account is charged. Default: true 
      */
     AutoRenew?: Boolean;
     /**
-     * Provides detailed contact information. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams Required: Yes
+     * Provides detailed contact information.
      */
     AdminContact: ContactDetail;
     /**
-     * Provides detailed contact information. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams Required: Yes
+     * Provides detailed contact information.
      */
     RegistrantContact: ContactDetail;
     /**
-     * Provides detailed contact information. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams Required: Yes
+     * Provides detailed contact information.
      */
     TechContact: ContactDetail;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean Default: true Valid values: true | false Required: No
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
      */
     PrivacyProtectAdminContact?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean Default: true Valid values: true | false Required: No
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
      */
     PrivacyProtectRegistrantContact?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean Default: true Valid values: true | false Required: No
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
      */
     PrivacyProtectTechContact?: Boolean;
   }
   export interface RegisterDomainResponse {
     /**
-     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail. Type: String Default: None Constraints: Maximum 255 characters.
+     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
      */
     OperationId: OperationId;
   }
@@ -691,23 +715,29 @@ declare namespace Route53Domains {
   export type RegistrarWhoIsServer = string;
   export type RegistryDomainId = string;
   export interface RenewDomainRequest {
+    /**
+     * The name of the domain that you want to renew.
+     */
     DomainName: DomainName;
     /**
-     * The number of years that you want to renew the domain for. The maximum number of years depends on the top-level domain. For the range of valid values for your domain, see Domains that You Can Register with Amazon Route 53 in the Amazon Route 53 documentation. Type: Integer Default: 1 Valid values: Integer from 1 to 10 Required: No
+     * The number of years that you want to renew the domain for. The maximum number of years depends on the top-level domain. For the range of valid values for your domain, see Domains that You Can Register with Amazon Route 53 in the Amazon Route 53 Developer Guide. Default: 1
      */
     DurationInYears?: DurationInYears;
     /**
-     * The year when the registration for the domain is set to expire. This value must match the current expiration date for the domain. Type: Integer Default: None Valid values: Integer Required: Yes
+     * The year when the registration for the domain is set to expire. This value must match the current expiration date for the domain.
      */
     CurrentExpiryYear: CurrentExpiryYear;
   }
   export interface RenewDomainResponse {
+    /**
+     * The identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
+     */
     OperationId: OperationId;
   }
   export type Reseller = string;
   export interface ResendContactReachabilityEmailRequest {
     /**
-     * The name of the domain for which you want Amazon Route 53 to resend a confirmation email to the registrant contact. Type: String Default: None Required: Yes
+     * The name of the domain for which you want Amazon Route 53 to resend a confirmation email to the registrant contact.
      */
     domainName?: DomainName;
   }
@@ -721,19 +751,19 @@ declare namespace Route53Domains {
      */
     emailAddress?: Email;
     /**
-     * True if the email address for the registrant contact has already been verified, and false otherwise. If the email address has already been verified, we don't send another confirmation email.
+     *  True if the email address for the registrant contact has already been verified, and false otherwise. If the email address has already been verified, we don't send another confirmation email.
      */
     isAlreadyVerified?: Boolean;
   }
   export interface RetrieveDomainAuthCodeRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The name of the domain that you want to get an authorization code for.
      */
     DomainName: DomainName;
   }
   export interface RetrieveDomainAuthCodeResponse {
     /**
-     * The authorization code for the domain. Type: String
+     * The authorization code for the domain.
      */
     AuthCode: DomainAuthCode;
   }
@@ -741,11 +771,11 @@ declare namespace Route53Domains {
   export type String = string;
   export interface Tag {
     /**
-     * The key (name) of a tag. Type: String Default: None Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@" Constraints: Each key can be 1-128 characters long. Required: Yes
+     * The key (name) of a tag. Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@" Constraints: Each key can be 1-128 characters long.
      */
     Key?: TagKey;
     /**
-     * The value of a tag. Type: String Default: None Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@" Constraints: Each value can be 0-256 characters long. Required: Yes
+     * The value of a tag. Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@" Constraints: Each value can be 0-256 characters long.
      */
     Value?: TagValue;
   }
@@ -756,7 +786,7 @@ declare namespace Route53Domains {
   export type Timestamp = Date;
   export interface TransferDomainRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The name of the domain that you want to transfer to Amazon Route 53. Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.
      */
     DomainName: DomainName;
     /**
@@ -764,103 +794,103 @@ declare namespace Route53Domains {
      */
     IdnLangCode?: LangCode;
     /**
-     * The number of years the domain will be registered. Domains are registered for a minimum of one year. The maximum period depends on the top-level domain. Type: Integer Default: 1 Valid values: Integer from 1 to 10 Required: Yes
+     * The number of years that you want to register the domain for. Domains are registered for a minimum of one year. The maximum period depends on the top-level domain. Default: 1
      */
     DurationInYears: DurationInYears;
     /**
-     * Contains details for the host and glue IP addresses. Type: Complex Children: GlueIps, Name Required: No
+     * Contains details for the host and glue IP addresses.
      */
     Nameservers?: NameserverList;
     /**
-     * The authorization code for the domain. You get this value from the current registrar. Type: String Required: Yes
+     * The authorization code for the domain. You get this value from the current registrar.
      */
     AuthCode?: DomainAuthCode;
     /**
-     * Indicates whether the domain will be automatically renewed (true) or not (false). Autorenewal only takes effect after the account is charged. Type: Boolean Valid values: true | false Default: true Required: No
+     * Indicates whether the domain will be automatically renewed (true) or not (false). Autorenewal only takes effect after the account is charged. Default: true
      */
     AutoRenew?: Boolean;
     /**
-     * Provides detailed contact information. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams Required: Yes
+     * Provides detailed contact information.
      */
     AdminContact: ContactDetail;
     /**
-     * Provides detailed contact information. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams Required: Yes
+     * Provides detailed contact information.
      */
     RegistrantContact: ContactDetail;
     /**
-     * Provides detailed contact information. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams Required: Yes
+     * Provides detailed contact information.
      */
     TechContact: ContactDetail;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean Default: true Valid values: true | false Required: No
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
      */
     PrivacyProtectAdminContact?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean Default: true Valid values: true | false Required: No
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
      */
     PrivacyProtectRegistrantContact?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean Default: true Valid values: true | false Required: No
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
      */
     PrivacyProtectTechContact?: Boolean;
   }
   export interface TransferDomainResponse {
     /**
-     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail. Type: String Default: None Constraints: Maximum 255 characters.
+     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
      */
     OperationId: OperationId;
   }
   export interface UpdateDomainContactPrivacyRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The name of the domain that you want to update the privacy setting for.
      */
     DomainName: DomainName;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean Default: None Valid values: true | false Required: No
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
      */
     AdminPrivacy?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean Default: None Valid values: true | false Required: No
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
      */
     RegistrantPrivacy?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Type: Boolean Default: None Valid values: true | false Required: No
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
      */
     TechPrivacy?: Boolean;
   }
   export interface UpdateDomainContactPrivacyResponse {
     /**
-     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail. Type: String Default: None Constraints: Maximum 255 characters.
+     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
      */
     OperationId: OperationId;
   }
   export interface UpdateDomainContactRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The name of the domain that you want to update contact information for.
      */
     DomainName: DomainName;
     /**
-     * Provides detailed contact information. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams Required: Yes
+     * Provides detailed contact information.
      */
     AdminContact?: ContactDetail;
     /**
-     * Provides detailed contact information. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams Required: Yes
+     * Provides detailed contact information.
      */
     RegistrantContact?: ContactDetail;
     /**
-     * Provides detailed contact information. Type: Complex Children: FirstName, MiddleName, LastName, ContactType, OrganizationName, AddressLine1, AddressLine2, City, State, CountryCode, ZipCode, PhoneNumber, Email, Fax, ExtraParams Required: Yes
+     * Provides detailed contact information.
      */
     TechContact?: ContactDetail;
   }
   export interface UpdateDomainContactResponse {
     /**
-     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail. Type: String Default: None Constraints: Maximum 255 characters.
+     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
      */
     OperationId: OperationId;
   }
   export interface UpdateDomainNameserversRequest {
     /**
-     * The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported. Required: Yes
+     * The name of the domain that you want to change name servers for.
      */
     DomainName: DomainName;
     /**
@@ -868,23 +898,23 @@ declare namespace Route53Domains {
      */
     FIAuthKey?: FIAuthKey;
     /**
-     * A list of new name servers for the domain. Type: Complex Children: Name, GlueIps Required: Yes
+     * A list of new name servers for the domain.
      */
     Nameservers: NameserverList;
   }
   export interface UpdateDomainNameserversResponse {
     /**
-     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail. Type: String Default: None Constraints: Maximum 255 characters.
+     * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
      */
     OperationId: OperationId;
   }
   export interface UpdateTagsForDomainRequest {
     /**
-     * The domain for which you want to add or update tags. The name of a domain. Type: String Default: None Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Hyphens are allowed only when they&apos;re surrounded by letters, numbers, or other hyphens. You can&apos;t specify a hyphen at the beginning or end of a label. To specify an Internationalized Domain Name, you must convert the name to Punycode. Required: Yes
+     * The domain for which you want to add or update tags.
      */
     DomainName: DomainName;
     /**
-     * A list of the tag keys and values that you want to add or update. If you specify a key that already exists, the corresponding value will be replaced. Type: A complex type containing a list of tags Default: None Required: No'> Each tag includes the following elements:  Key The key (name) of a tag. Type: String Default: None Valid values: Unicode characters including alphanumeric, space, and ".:/=+\-@" Constraints: Each key can be 1-128 characters long. Required: Yes  Value The value of a tag. Type: String Default: None Valid values: Unicode characters including alphanumeric, space, and ".:/=+\-@" Constraints: Each value can be 0-256 characters long. Required: Yes  
+     * A list of the tag keys and values that you want to add or update. If you specify a key that already exists, the corresponding value will be replaced.
      */
     TagsToUpdate?: TagList;
   }
@@ -892,29 +922,29 @@ declare namespace Route53Domains {
   }
   export interface ViewBillingRequest {
     /**
-     * The beginning date and time for the time period for which you want a list of billing records. Specify the date in Unix time format. Type: Double Default: None Required: Yes
+     * The beginning date and time for the time period for which you want a list of billing records. Specify the date in Unix time format.
      */
     Start?: Timestamp;
     /**
-     * The end date and time for the time period for which you want a list of billing records. Specify the date in Unix time format. Type: Double Default: None Required: Yes
+     * The end date and time for the time period for which you want a list of billing records. Specify the date in Unix time format.
      */
     End?: Timestamp;
     /**
-     * For an initial request for a list of billing records, omit this element. If the number of billing records that are associated with the current AWS account during the specified period is greater than the value that you specified for MaxItems, you can use Marker to return additional billing records. Get the value of NextPageMarker from the previous response, and submit another request that includes the value of NextPageMarker in the Marker element.  Type: String Default: None Constraints: The marker must match the value of NextPageMarker that was returned in the previous response. Required: No
+     * For an initial request for a list of billing records, omit this element. If the number of billing records that are associated with the current AWS account during the specified period is greater than the value that you specified for MaxItems, you can use Marker to return additional billing records. Get the value of NextPageMarker from the previous response, and submit another request that includes the value of NextPageMarker in the Marker element.  Constraints: The marker must match the value of NextPageMarker that was returned in the previous response.
      */
     Marker?: PageMarker;
     /**
-     * The number of billing records to be returned. Type: Integer Default: 20 Constraints: A value between 1 and 100. Required: No
+     * The number of billing records to be returned. Default: 20
      */
     MaxItems?: PageMaxItems;
   }
   export interface ViewBillingResponse {
     /**
-     * If there are more billing records than you specified for MaxItems in the request, submit another request and include the value of NextPageMarker in the value of Marker. Type: String Parent: BillingRecords
+     * If there are more billing records than you specified for MaxItems in the request, submit another request and include the value of NextPageMarker in the value of Marker.
      */
     NextPageMarker?: PageMarker;
     /**
-     * A summary of billing records. Type: Complex type containing a list of billing record summaries. Children: DomainName, Operation, InvoiceId, BillDate and Price
+     * A summary of billing records.
      */
     BillingRecords?: BillingRecords;
   }

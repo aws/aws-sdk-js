@@ -492,6 +492,23 @@
       ],
       "documentation":"<p>Returns the list of available network profiles.</p>"
     },
+    "ListOfferingPromotions":{
+      "name":"ListOfferingPromotions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListOfferingPromotionsRequest"},
+      "output":{"shape":"ListOfferingPromotionsResult"},
+      "errors":[
+        {"shape":"ArgumentException"},
+        {"shape":"NotFoundException"},
+        {"shape":"NotEligibleException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ServiceAccountException"}
+      ],
+      "documentation":"<p>Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a <code>NotEligible</code> error if the caller is not permitted to invoke the operation. Contact <a href=\"mailto:aws-devicefarm-support@amazon.com\">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.</p>"
+    },
     "ListOfferingTransactions":{
       "name":"ListOfferingTransactions",
       "http":{
@@ -811,6 +828,14 @@
           "shape":"JobTimeoutMinutes",
           "documentation":"<p>The maximum number of minutes a test run will execute before it times out.</p>"
         },
+        "trialMinutes":{
+          "shape":"TrialMinutes",
+          "documentation":"<p>Information about an AWS account's usage of free trial device minutes.</p>"
+        },
+        "maxSlots":{
+          "shape":"MaxSlotMap",
+          "documentation":"<p>The maximum number of device slots that the AWS account can purchase. Each maximum is expressed as an <code>offering-id:number</code> pair, where the <code>offering-id</code> represents one of the IDs returned by the <code>ListOfferings</code> command.</p>"
+        },
         "defaultJobTimeoutMinutes":{
           "shape":"JobTimeoutMinutes",
           "documentation":"<p>The default number of minutes (at the account level) a test run will execute before it times out. Default value is 60 minutes.</p>"
@@ -818,6 +843,7 @@
       },
       "documentation":"<p>A container for account-level settings within AWS Device Farm.</p>"
     },
+    "AccountsCleanup":{"type":"boolean"},
     "AmazonResourceName":{
       "type":"string",
       "min":32
@@ -826,6 +852,7 @@
       "type":"list",
       "member":{"shape":"AmazonResourceName"}
     },
+    "AppPackagesCleanup":{"type":"boolean"},
     "ArgumentException":{
       "type":"structure",
       "members":{
@@ -1367,7 +1394,8 @@
         "PLATFORM",
         "FORM_FACTOR",
         "MANUFACTURER",
-        "REMOTE_ACCESS_ENABLED"
+        "REMOTE_ACCESS_ENABLED",
+        "APPIUM_VERSION"
       ]
     },
     "DeviceFormFactor":{
@@ -1472,6 +1500,14 @@
         "jobTimeoutMinutes":{
           "shape":"JobTimeoutMinutes",
           "documentation":"<p>The number of minutes a test run will execute before it times out.</p>"
+        },
+        "accountsCleanup":{
+          "shape":"AccountsCleanup",
+          "documentation":"<p>True if account cleanup is enabled at the beginning of the test; otherwise, false.</p>"
+        },
+        "appPackagesCleanup":{
+          "shape":"AppPackagesCleanup",
+          "documentation":"<p>True if app package cleanup is enabled at the beginning of the test; otherwise, false.</p>"
         }
       },
       "documentation":"<p>Represents configuration information about a test run, such as the execution timeout (in minutes).</p>"
@@ -1538,6 +1574,10 @@
         "testType":{
           "shape":"TestType",
           "documentation":"<p>The test type for the specified device pool.</p> <p>Allowed values include the following:</p> <ul> <li> <p>BUILTIN_FUZZ: The built-in fuzz type.</p> </li> <li> <p>BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.</p> </li> <li> <p>APPIUM_JAVA_JUNIT: The Appium Java JUnit type.</p> </li> <li> <p>APPIUM_JAVA_TESTNG: The Appium Java TestNG type.</p> </li> <li> <p>APPIUM_PYTHON: The Appium Python type.</p> </li> <li> <p>APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.</p> </li> <li> <p>APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.</p> </li> <li> <p>APPIUM_WEB_PYTHON: The Appium Python type for Web apps.</p> </li> <li> <p>CALABASH: The Calabash type.</p> </li> <li> <p>INSTRUMENTATION: The Instrumentation type.</p> </li> <li> <p>UIAUTOMATION: The uiautomation type.</p> </li> <li> <p>UIAUTOMATOR: The uiautomator type.</p> </li> <li> <p>XCTEST: The XCode test type.</p> </li> <li> <p>XCTEST_UI: The XCode UI test type.</p> </li> </ul>"
+        },
+        "test":{
+          "shape":"ScheduleRunTest",
+          "documentation":"<p>Information about the uploaded test to be run against the device pool.</p>"
         }
       },
       "documentation":"<p>Represents a request to the get device pool compatibility operation.</p>"
@@ -1812,7 +1852,7 @@
         },
         "type":{
           "shape":"DeviceAttribute",
-          "documentation":"<p>The type of incompatibility.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The ARN.</p> </li> <li> <p>FORM_FACTOR: The form factor (for example, phone or tablet).</p> </li> <li> <p>MANUFACTURER: The manufacturer.</p> </li> <li> <p>PLATFORM: The platform (for example, Android or iOS).</p> </li> </ul>"
+          "documentation":"<p>The type of incompatibility.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The ARN.</p> </li> <li> <p>FORM_FACTOR: The form factor (for example, phone or tablet).</p> </li> <li> <p>MANUFACTURER: The manufacturer.</p> </li> <li> <p>PLATFORM: The platform (for example, Android or iOS).</p> </li> <li> <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.</p> </li> <li> <p>APPIUM_VERSION: The Appium version for the test.</p> </li> </ul>"
         }
       },
       "documentation":"<p>Represents information about incompatibility.</p>"
@@ -2074,6 +2114,28 @@
         "nextToken":{
           "shape":"PaginationToken",
           "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
+    },
+    "ListOfferingPromotionsRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
+        }
+      }
+    },
+    "ListOfferingPromotionsResult":{
+      "type":"structure",
+      "members":{
+        "offeringPromotions":{
+          "shape":"OfferingPromotions",
+          "documentation":"<p>Information about the offering promotions.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>An identifier to be used in the next call to this operation, to return the next set of items in the list.</p>"
         }
       }
     },
@@ -2375,6 +2437,11 @@
       "documentation":"<p>Represents a latitude and longitude pair, expressed in geographic coordinate system degrees (for example 47.6204, -122.3491).</p> <p>Elevation is currently not supported.</p>"
     },
     "Long":{"type":"long"},
+    "MaxSlotMap":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"Integer"}
+    },
     "Message":{
       "type":"string",
       "max":16384,
@@ -2521,6 +2588,28 @@
       "type":"string",
       "min":32
     },
+    "OfferingPromotion":{
+      "type":"structure",
+      "members":{
+        "id":{
+          "shape":"OfferingPromotionIdentifier",
+          "documentation":"<p>The ID of the offering promotion.</p>"
+        },
+        "description":{
+          "shape":"Message",
+          "documentation":"<p>A string describing the offering promotion.</p>"
+        }
+      },
+      "documentation":"<p>Represents information about an offering promotion.</p>"
+    },
+    "OfferingPromotionIdentifier":{
+      "type":"string",
+      "min":4
+    },
+    "OfferingPromotions":{
+      "type":"list",
+      "member":{"shape":"OfferingPromotion"}
+    },
     "OfferingStatus":{
       "type":"structure",
       "members":{
@@ -2558,6 +2647,10 @@
         "transactionId":{
           "shape":"TransactionIdentifier",
           "documentation":"<p>The transaction ID of the offering transaction.</p>"
+        },
+        "offeringPromotionId":{
+          "shape":"OfferingPromotionIdentifier",
+          "documentation":"<p>The ID that corresponds to a device offering promotion.</p>"
         },
         "createdOn":{
           "shape":"DateTime",
@@ -2688,6 +2781,10 @@
         "quantity":{
           "shape":"Integer",
           "documentation":"<p>The number of device slots you wish to purchase in an offering request.</p>"
+        },
+        "offeringPromotionId":{
+          "shape":"OfferingPromotionIdentifier",
+          "documentation":"<p>The ID of the offering promotion to be applied to the purchase.</p>"
         }
       },
       "documentation":"<p>Represents a request for a purchase offering.</p>"
@@ -2852,11 +2949,11 @@
       "members":{
         "attribute":{
           "shape":"DeviceAttribute",
-          "documentation":"<p>The rule's stringified attribute. For example, specify the value as <code>\"\\\"abc\\\"\"</code>.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The ARN.</p> </li> <li> <p>FORM_FACTOR: The form factor (for example, phone or tablet).</p> </li> <li> <p>MANUFACTURER: The manufacturer.</p> </li> <li> <p>PLATFORM: The platform (for example, Android or iOS).</p> </li> </ul>"
+          "documentation":"<p>The rule's stringified attribute. For example, specify the value as <code>\"\\\"abc\\\"\"</code>.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The ARN.</p> </li> <li> <p>FORM_FACTOR: The form factor (for example, phone or tablet).</p> </li> <li> <p>MANUFACTURER: The manufacturer.</p> </li> <li> <p>PLATFORM: The platform (for example, Android or iOS).</p> </li> <li> <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.</p> </li> <li> <p>APPIUM_VERSION: The Appium version for the test.</p> </li> </ul>"
         },
         "operator":{
           "shape":"RuleOperator",
-          "documentation":"<p>The rule's operator.</p> <ul> <li> <p>EQUALS: The equals operator.</p> </li> <li> <p>GREATER_THAN: The greater-than operator.</p> </li> <li> <p>IN: The in operator.</p> </li> <li> <p>LESS_THAN: The less-than operator.</p> </li> <li> <p>NOT_IN: The not-in operator.</p> </li> </ul>"
+          "documentation":"<p>The rule's operator.</p> <ul> <li> <p>EQUALS: The equals operator.</p> </li> <li> <p>GREATER_THAN: The greater-than operator.</p> </li> <li> <p>IN: The in operator.</p> </li> <li> <p>LESS_THAN: The less-than operator.</p> </li> <li> <p>NOT_IN: The not-in operator.</p> </li> <li> <p>CONTAINS: The contains operator.</p> </li> </ul>"
         },
         "value":{
           "shape":"String",
@@ -2872,7 +2969,8 @@
         "LESS_THAN",
         "GREATER_THAN",
         "IN",
-        "NOT_IN"
+        "NOT_IN",
+        "CONTAINS"
       ]
     },
     "Rules":{
@@ -3098,7 +3196,7 @@
         },
         "parameters":{
           "shape":"TestParameters",
-          "documentation":"<p>The test's parameters, such as test framework parameters and fixture settings.</p>"
+          "documentation":"<p>The test's parameters, such as the following test framework parameters and fixture settings:</p> <p>For Calabash tests:</p> <ul> <li> <p>profile: A cucumber profile, for example, \"my_profile_name\".</p> </li> <li> <p>tags: You can limit execution to features or scenarios that have (or don't have) certain tags, for example, \"@smoke\" or \"@smoke,~@wip\".</p> </li> </ul> <p>For Appium tests (all types):</p> <ul> <li> <p>appium_version: The Appium version. Currently supported values are \"1.4.16\", \"1.6.3\", \"latest\", and \"default\".</p> <ul> <li> <p>“latest” will run the latest Appium version supported by Device Farm (1.6.3).</p> </li> <li> <p>For “default”, Device Farm will choose a compatible version of Appium for the device. The current behavior is to run 1.4.16 on Android devices and iOS 9 and earlier, 1.6.3 for iOS 10 and later.</p> </li> <li> <p>This behavior is subject to change.</p> </li> </ul> </li> </ul> <p>For Fuzz tests (Android only):</p> <ul> <li> <p>event_count: The number of events, between 1 and 10000, that the UI fuzz test should perform.</p> </li> <li> <p>throttle: The time, in ms, between 0 and 1000, that the UI fuzz test should wait between events.</p> </li> <li> <p>seed: A seed to use for randomizing the UI fuzz test. Using the same seed value between tests ensures identical event sequences.</p> </li> </ul> <p>For Explorer tests:</p> <ul> <li> <p>username: A username to use if the Explorer encounters a login form. If not supplied, no username will be inserted.</p> </li> <li> <p>password: A password to use if the Explorer encounters a login form. If not supplied, no password will be inserted.</p> </li> </ul> <p>For Instrumentation:</p> <ul> <li> <p>filter: A test filter string. Examples:</p> <ul> <li> <p>Running a single test case: \"com.android.abc.Test1\"</p> </li> <li> <p>Running a single test: \"com.android.abc.Test1#smoke\"</p> </li> <li> <p>Running multiple tests: \"com.android.abc.Test1,com.android.abc.Test2\"</p> </li> </ul> </li> </ul> <p>For XCTest and XCTestUI:</p> <ul> <li> <p>filter: A test filter string. Examples:</p> <ul> <li> <p>Running a single test class: \"LoginTests\"</p> </li> <li> <p>Running a multiple test classes: \"LoginTests,SmokeTests\"</p> </li> <li> <p>Running a single test: \"LoginTests/testValid\"</p> </li> <li> <p>Running multiple tests: \"LoginTests/testValid,LoginTests/testInvalid\"</p> </li> </ul> </li> </ul> <p>For UIAutomator:</p> <ul> <li> <p>filter: A test filter string. Examples:</p> <ul> <li> <p>Running a single test case: \"com.android.abc.Test1\"</p> </li> <li> <p>Running a single test: \"com.android.abc.Test1#smoke\"</p> </li> <li> <p>Running multiple tests: \"com.android.abc.Test1,com.android.abc.Test2\"</p> </li> </ul> </li> </ul>"
         }
       },
       "documentation":"<p>Represents additional test settings.</p>"
@@ -3292,6 +3390,20 @@
     "TransactionIdentifier":{
       "type":"string",
       "min":32
+    },
+    "TrialMinutes":{
+      "type":"structure",
+      "members":{
+        "total":{
+          "shape":"Double",
+          "documentation":"<p>The total number of free trial minutes that the account started with.</p>"
+        },
+        "remaining":{
+          "shape":"Double",
+          "documentation":"<p>The number of free trial minutes remaining in the account.</p>"
+        }
+      },
+      "documentation":"<p>Represents information about free trial device minutes for an AWS account.</p>"
     },
     "URL":{
       "type":"string",

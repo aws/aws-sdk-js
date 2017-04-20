@@ -252,6 +252,14 @@ declare class DeviceFarm extends Service {
    */
   listNetworkProfiles(callback?: (err: AWSError, data: DeviceFarm.Types.ListNetworkProfilesResult) => void): Request<DeviceFarm.Types.ListNetworkProfilesResult, AWSError>;
   /**
+   * Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a NotEligible error if the caller is not permitted to invoke the operation. Contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
+   */
+  listOfferingPromotions(params: DeviceFarm.Types.ListOfferingPromotionsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingPromotionsResult) => void): Request<DeviceFarm.Types.ListOfferingPromotionsResult, AWSError>;
+  /**
+   * Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a NotEligible error if the caller is not permitted to invoke the operation. Contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
+   */
+  listOfferingPromotions(callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingPromotionsResult) => void): Request<DeviceFarm.Types.ListOfferingPromotionsResult, AWSError>;
+  /**
    * Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
   listOfferingTransactions(params: DeviceFarm.Types.ListOfferingTransactionsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingTransactionsResult) => void): Request<DeviceFarm.Types.ListOfferingTransactionsResult, AWSError>;
@@ -416,12 +424,22 @@ declare namespace DeviceFarm {
      */
     maxJobTimeoutMinutes?: JobTimeoutMinutes;
     /**
+     * Information about an AWS account's usage of free trial device minutes.
+     */
+    trialMinutes?: TrialMinutes;
+    /**
+     * The maximum number of device slots that the AWS account can purchase. Each maximum is expressed as an offering-id:number pair, where the offering-id represents one of the IDs returned by the ListOfferings command.
+     */
+    maxSlots?: MaxSlotMap;
+    /**
      * The default number of minutes (at the account level) a test run will execute before it times out. Default value is 60 minutes.
      */
     defaultJobTimeoutMinutes?: JobTimeoutMinutes;
   }
+  export type AccountsCleanup = boolean;
   export type AmazonResourceName = string;
   export type AmazonResourceNames = AmazonResourceName[];
+  export type AppPackagesCleanup = boolean;
   export interface Artifact {
     /**
      * The artifact's ARN.
@@ -764,7 +782,7 @@ declare namespace DeviceFarm {
      */
     fleetName?: String;
   }
-  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|string;
+  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"APPIUM_VERSION"|string;
   export type DeviceFormFactor = "PHONE"|"TABLET"|string;
   export interface DeviceMinutes {
     /**
@@ -827,6 +845,14 @@ declare namespace DeviceFarm {
      * The number of minutes a test run will execute before it times out.
      */
     jobTimeoutMinutes?: JobTimeoutMinutes;
+    /**
+     * True if account cleanup is enabled at the beginning of the test; otherwise, false.
+     */
+    accountsCleanup?: AccountsCleanup;
+    /**
+     * True if app package cleanup is enabled at the beginning of the test; otherwise, false.
+     */
+    appPackagesCleanup?: AppPackagesCleanup;
   }
   export type ExecutionResult = "PENDING"|"PASSED"|"WARNED"|"FAILED"|"SKIPPED"|"ERRORED"|"STOPPED"|string;
   export type ExecutionStatus = "PENDING"|"PENDING_CONCURRENCY"|"PENDING_DEVICE"|"PROCESSING"|"SCHEDULING"|"PREPARING"|"RUNNING"|"COMPLETED"|"STOPPING"|string;
@@ -852,6 +878,10 @@ declare namespace DeviceFarm {
      * The test type for the specified device pool. Allowed values include the following:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.   APPIUM_WEB_PYTHON: The Appium Python type for Web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
      */
     testType?: TestType;
+    /**
+     * Information about the uploaded test to be run against the device pool.
+     */
+    test?: ScheduleRunTest;
   }
   export interface GetDevicePoolCompatibilityResult {
     /**
@@ -1009,7 +1039,7 @@ declare namespace DeviceFarm {
      */
     message?: Message;
     /**
-     * The type of incompatibility. Allowed values include:   ARN: The ARN.   FORM_FACTOR: The form factor (for example, phone or tablet).   MANUFACTURER: The manufacturer.   PLATFORM: The platform (for example, Android or iOS).  
+     * The type of incompatibility. Allowed values include:   ARN: The ARN.   FORM_FACTOR: The form factor (for example, phone or tablet).   MANUFACTURER: The manufacturer.   PLATFORM: The platform (for example, Android or iOS).   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   APPIUM_VERSION: The Appium version for the test.  
      */
     type?: DeviceAttribute;
   }
@@ -1192,6 +1222,22 @@ declare namespace DeviceFarm {
     networkProfiles?: NetworkProfiles;
     /**
      * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListOfferingPromotionsRequest {
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListOfferingPromotionsResult {
+    /**
+     * Information about the offering promotions.
+     */
+    offeringPromotions?: OfferingPromotions;
+    /**
+     * An identifier to be used in the next call to this operation, to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
   }
@@ -1398,6 +1444,7 @@ declare namespace DeviceFarm {
     longitude: Double;
   }
   export type Long = number;
+  export type MaxSlotMap = {[key: string]: Integer};
   export type Message = string;
   export type Metadata = string;
   export interface MonetaryAmount {
@@ -1486,6 +1533,18 @@ declare namespace DeviceFarm {
     recurringCharges?: RecurringCharges;
   }
   export type OfferingIdentifier = string;
+  export interface OfferingPromotion {
+    /**
+     * The ID of the offering promotion.
+     */
+    id?: OfferingPromotionIdentifier;
+    /**
+     * A string describing the offering promotion.
+     */
+    description?: Message;
+  }
+  export type OfferingPromotionIdentifier = string;
+  export type OfferingPromotions = OfferingPromotion[];
   export interface OfferingStatus {
     /**
      * The type specified for the offering status.
@@ -1514,6 +1573,10 @@ declare namespace DeviceFarm {
      * The transaction ID of the offering transaction.
      */
     transactionId?: TransactionIdentifier;
+    /**
+     * The ID that corresponds to a device offering promotion.
+     */
+    offeringPromotionId?: OfferingPromotionIdentifier;
     /**
      * The date on which an offering transaction was created.
      */
@@ -1598,6 +1661,10 @@ declare namespace DeviceFarm {
      * The number of device slots you wish to purchase in an offering request.
      */
     quantity?: Integer;
+    /**
+     * The ID of the offering promotion to be applied to the purchase.
+     */
+    offeringPromotionId?: OfferingPromotionIdentifier;
   }
   export interface PurchaseOfferingResult {
     /**
@@ -1715,11 +1782,11 @@ declare namespace DeviceFarm {
   }
   export interface Rule {
     /**
-     * The rule's stringified attribute. For example, specify the value as "\"abc\"". Allowed values include:   ARN: The ARN.   FORM_FACTOR: The form factor (for example, phone or tablet).   MANUFACTURER: The manufacturer.   PLATFORM: The platform (for example, Android or iOS).  
+     * The rule's stringified attribute. For example, specify the value as "\"abc\"". Allowed values include:   ARN: The ARN.   FORM_FACTOR: The form factor (for example, phone or tablet).   MANUFACTURER: The manufacturer.   PLATFORM: The platform (for example, Android or iOS).   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   APPIUM_VERSION: The Appium version for the test.  
      */
     attribute?: DeviceAttribute;
     /**
-     * The rule's operator.   EQUALS: The equals operator.   GREATER_THAN: The greater-than operator.   IN: The in operator.   LESS_THAN: The less-than operator.   NOT_IN: The not-in operator.  
+     * The rule's operator.   EQUALS: The equals operator.   GREATER_THAN: The greater-than operator.   IN: The in operator.   LESS_THAN: The less-than operator.   NOT_IN: The not-in operator.   CONTAINS: The contains operator.  
      */
     operator?: RuleOperator;
     /**
@@ -1727,7 +1794,7 @@ declare namespace DeviceFarm {
      */
     value?: String;
   }
-  export type RuleOperator = "EQUALS"|"LESS_THAN"|"GREATER_THAN"|"IN"|"NOT_IN"|string;
+  export type RuleOperator = "EQUALS"|"LESS_THAN"|"GREATER_THAN"|"IN"|"NOT_IN"|"CONTAINS"|string;
   export type Rules = Rule[];
   export interface Run {
     /**
@@ -1892,7 +1959,7 @@ declare namespace DeviceFarm {
      */
     filter?: Filter;
     /**
-     * The test's parameters, such as test framework parameters and fixture settings.
+     * The test's parameters, such as the following test framework parameters and fixture settings: For Calabash tests:   profile: A cucumber profile, for example, "my_profile_name".   tags: You can limit execution to features or scenarios that have (or don't have) certain tags, for example, "@smoke" or "@smoke,~@wip".   For Appium tests (all types):   appium_version: The Appium version. Currently supported values are "1.4.16", "1.6.3", "latest", and "default".   “latest” will run the latest Appium version supported by Device Farm (1.6.3).   For “default”, Device Farm will choose a compatible version of Appium for the device. The current behavior is to run 1.4.16 on Android devices and iOS 9 and earlier, 1.6.3 for iOS 10 and later.   This behavior is subject to change.     For Fuzz tests (Android only):   event_count: The number of events, between 1 and 10000, that the UI fuzz test should perform.   throttle: The time, in ms, between 0 and 1000, that the UI fuzz test should wait between events.   seed: A seed to use for randomizing the UI fuzz test. Using the same seed value between tests ensures identical event sequences.   For Explorer tests:   username: A username to use if the Explorer encounters a login form. If not supplied, no username will be inserted.   password: A password to use if the Explorer encounters a login form. If not supplied, no password will be inserted.   For Instrumentation:   filter: A test filter string. Examples:   Running a single test case: "com.android.abc.Test1"   Running a single test: "com.android.abc.Test1#smoke"   Running multiple tests: "com.android.abc.Test1,com.android.abc.Test2"     For XCTest and XCTestUI:   filter: A test filter string. Examples:   Running a single test class: "LoginTests"   Running a multiple test classes: "LoginTests,SmokeTests"   Running a single test: "LoginTests/testValid"   Running multiple tests: "LoginTests/testValid,LoginTests/testInvalid"     For UIAutomator:   filter: A test filter string. Examples:   Running a single test case: "com.android.abc.Test1"   Running a single test: "com.android.abc.Test1#smoke"   Running multiple tests: "com.android.abc.Test1,com.android.abc.Test2"    
      */
     parameters?: TestParameters;
   }
@@ -2018,6 +2085,16 @@ declare namespace DeviceFarm {
   export type TestType = "BUILTIN_FUZZ"|"BUILTIN_EXPLORER"|"APPIUM_JAVA_JUNIT"|"APPIUM_JAVA_TESTNG"|"APPIUM_PYTHON"|"APPIUM_WEB_JAVA_JUNIT"|"APPIUM_WEB_JAVA_TESTNG"|"APPIUM_WEB_PYTHON"|"CALABASH"|"INSTRUMENTATION"|"UIAUTOMATION"|"UIAUTOMATOR"|"XCTEST"|"XCTEST_UI"|string;
   export type Tests = Test[];
   export type TransactionIdentifier = string;
+  export interface TrialMinutes {
+    /**
+     * The total number of free trial minutes that the account started with.
+     */
+    total?: Double;
+    /**
+     * The number of free trial minutes remaining in the account.
+     */
+    remaining?: Double;
+  }
   export type URL = string;
   export interface UniqueProblem {
     /**

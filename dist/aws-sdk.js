@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.43.0
+// AWS SDK for JavaScript v2.44.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -19978,6 +19978,24 @@ module.exports={
               "maxJobTimeoutMinutes": {
                 "type": "integer"
               },
+              "trialMinutes": {
+                "type": "structure",
+                "members": {
+                  "total": {
+                    "type": "double"
+                  },
+                  "remaining": {
+                    "type": "double"
+                  }
+                }
+              },
+              "maxSlots": {
+                "type": "map",
+                "key": {},
+                "value": {
+                  "type": "integer"
+                }
+              },
               "defaultJobTimeoutMinutes": {
                 "type": "integer"
               }
@@ -20033,17 +20051,20 @@ module.exports={
         "members": {
           "devicePoolArn": {},
           "appArn": {},
-          "testType": {}
+          "testType": {},
+          "test": {
+            "shape": "S21"
+          }
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "compatibleDevices": {
-            "shape": "S20"
+            "shape": "S25"
           },
           "incompatibleDevices": {
-            "shape": "S20"
+            "shape": "S25"
           }
         }
       }
@@ -20062,7 +20083,7 @@ module.exports={
         "type": "structure",
         "members": {
           "job": {
-            "shape": "S26"
+            "shape": "S2b"
           }
         }
       }
@@ -20097,10 +20118,10 @@ module.exports={
         "type": "structure",
         "members": {
           "current": {
-            "shape": "S2d"
+            "shape": "S2i"
           },
           "nextPeriod": {
-            "shape": "S2d"
+            "shape": "S2i"
           },
           "nextToken": {}
         }
@@ -20158,7 +20179,7 @@ module.exports={
         "type": "structure",
         "members": {
           "run": {
-            "shape": "S2u"
+            "shape": "S2z"
           }
         }
       }
@@ -20177,7 +20198,7 @@ module.exports={
         "type": "structure",
         "members": {
           "suite": {
-            "shape": "S2x"
+            "shape": "S32"
           }
         }
       }
@@ -20196,7 +20217,7 @@ module.exports={
         "type": "structure",
         "members": {
           "test": {
-            "shape": "S30"
+            "shape": "S35"
           }
         }
       }
@@ -20337,7 +20358,7 @@ module.exports={
           "jobs": {
             "type": "list",
             "member": {
-              "shape": "S26"
+              "shape": "S2b"
             }
           },
           "nextToken": {}
@@ -20369,6 +20390,30 @@ module.exports={
         }
       }
     },
+    "ListOfferingPromotions": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "offeringPromotions": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "id": {},
+                "description": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
     "ListOfferingTransactions": {
       "input": {
         "type": "structure",
@@ -20382,7 +20427,7 @@ module.exports={
           "offeringTransactions": {
             "type": "list",
             "member": {
-              "shape": "S3q"
+              "shape": "S40"
             }
           },
           "nextToken": {}
@@ -20402,7 +20447,7 @@ module.exports={
           "offerings": {
             "type": "list",
             "member": {
-              "shape": "S2h"
+              "shape": "S2m"
             }
           },
           "nextToken": {}
@@ -20471,7 +20516,7 @@ module.exports={
           "runs": {
             "type": "list",
             "member": {
-              "shape": "S2u"
+              "shape": "S2z"
             }
           },
           "nextToken": {}
@@ -20524,7 +20569,7 @@ module.exports={
           "suites": {
             "type": "list",
             "member": {
-              "shape": "S2x"
+              "shape": "S32"
             }
           },
           "nextToken": {}
@@ -20548,7 +20593,7 @@ module.exports={
           "tests": {
             "type": "list",
             "member": {
-              "shape": "S30"
+              "shape": "S35"
             }
           },
           "nextToken": {}
@@ -20584,16 +20629,16 @@ module.exports={
                       "type": "structure",
                       "members": {
                         "run": {
-                          "shape": "S4m"
+                          "shape": "S4w"
                         },
                         "job": {
-                          "shape": "S4m"
+                          "shape": "S4w"
                         },
                         "suite": {
-                          "shape": "S4m"
+                          "shape": "S4w"
                         },
                         "test": {
-                          "shape": "S4m"
+                          "shape": "S4w"
                         },
                         "device": {
                           "shape": "Sv"
@@ -20642,14 +20687,15 @@ module.exports={
           "offeringId": {},
           "quantity": {
             "type": "integer"
-          }
+          },
+          "offeringPromotionId": {}
         }
       },
       "output": {
         "type": "structure",
         "members": {
           "offeringTransaction": {
-            "shape": "S3q"
+            "shape": "S40"
           }
         }
       }
@@ -20668,7 +20714,7 @@ module.exports={
         "type": "structure",
         "members": {
           "offeringTransaction": {
-            "shape": "S3q"
+            "shape": "S40"
           }
         }
       }
@@ -20687,20 +20733,7 @@ module.exports={
           "devicePoolArn": {},
           "name": {},
           "test": {
-            "type": "structure",
-            "required": [
-              "type"
-            ],
-            "members": {
-              "type": {},
-              "testPackageArn": {},
-              "filter": {},
-              "parameters": {
-                "type": "map",
-                "key": {},
-                "value": {}
-              }
-            }
+            "shape": "S21"
           },
           "configuration": {
             "type": "structure",
@@ -20752,6 +20785,12 @@ module.exports={
             "members": {
               "jobTimeoutMinutes": {
                 "type": "integer"
+              },
+              "accountsCleanup": {
+                "type": "boolean"
+              },
+              "appPackagesCleanup": {
+                "type": "boolean"
               }
             }
           }
@@ -20761,7 +20800,7 @@ module.exports={
         "type": "structure",
         "members": {
           "run": {
-            "shape": "S2u"
+            "shape": "S2z"
           }
         }
       }
@@ -20799,7 +20838,7 @@ module.exports={
         "type": "structure",
         "members": {
           "run": {
-            "shape": "S2u"
+            "shape": "S2z"
           }
         }
       }
@@ -21079,7 +21118,23 @@ module.exports={
         "type": "integer"
       }
     },
-    "S20": {
+    "S21": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "type": {},
+        "testPackageArn": {},
+        "filter": {},
+        "parameters": {
+          "type": "map",
+          "key": {},
+          "value": {}
+        }
+      }
+    },
+    "S25": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -21103,7 +21158,7 @@ module.exports={
         }
       }
     },
-    "S26": {
+    "S2b": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -21121,7 +21176,7 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S27"
+          "shape": "S2c"
         },
         "message": {},
         "device": {
@@ -21132,7 +21187,7 @@ module.exports={
         }
       }
     },
-    "S27": {
+    "S2c": {
       "type": "structure",
       "members": {
         "total": {
@@ -21158,19 +21213,19 @@ module.exports={
         }
       }
     },
-    "S2d": {
+    "S2i": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S2f"
+        "shape": "S2k"
       }
     },
-    "S2f": {
+    "S2k": {
       "type": "structure",
       "members": {
         "type": {},
         "offering": {
-          "shape": "S2h"
+          "shape": "S2m"
         },
         "quantity": {
           "type": "integer"
@@ -21180,7 +21235,7 @@ module.exports={
         }
       }
     },
-    "S2h": {
+    "S2m": {
       "type": "structure",
       "members": {
         "id": {},
@@ -21193,7 +21248,7 @@ module.exports={
             "type": "structure",
             "members": {
               "cost": {
-                "shape": "S2l"
+                "shape": "S2q"
               },
               "frequency": {}
             }
@@ -21201,7 +21256,7 @@ module.exports={
         }
       }
     },
-    "S2l": {
+    "S2q": {
       "type": "structure",
       "members": {
         "amount": {
@@ -21210,7 +21265,7 @@ module.exports={
         "currencyCode": {}
       }
     },
-    "S2u": {
+    "S2z": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -21229,7 +21284,7 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S27"
+          "shape": "S2c"
         },
         "message": {},
         "totalJobs": {
@@ -21247,7 +21302,7 @@ module.exports={
         }
       }
     },
-    "S2x": {
+    "S32": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -21265,7 +21320,7 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S27"
+          "shape": "S2c"
         },
         "message": {},
         "deviceMinutes": {
@@ -21273,7 +21328,7 @@ module.exports={
         }
       }
     },
-    "S30": {
+    "S35": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -21291,7 +21346,7 @@ module.exports={
           "type": "timestamp"
         },
         "counters": {
-          "shape": "S27"
+          "shape": "S2c"
         },
         "message": {},
         "deviceMinutes": {
@@ -21299,22 +21354,23 @@ module.exports={
         }
       }
     },
-    "S3q": {
+    "S40": {
       "type": "structure",
       "members": {
         "offeringStatus": {
-          "shape": "S2f"
+          "shape": "S2k"
         },
         "transactionId": {},
+        "offeringPromotionId": {},
         "createdOn": {
           "type": "timestamp"
         },
         "cost": {
-          "shape": "S2l"
+          "shape": "S2q"
         }
       }
     },
-    "S4m": {
+    "S4w": {
       "type": "structure",
       "members": {
         "arn": {},
@@ -44329,6 +44385,24 @@ module.exports={
           "state": "retry",
           "matcher": "error",
           "expected": "LoadBalancerNotFound"
+        }
+      ]
+    },
+    "LoadBalancersDeleted": {
+      "delay": 15,
+      "operation": "DescribeLoadBalancers",
+      "maxAttempts": 40,
+      "acceptors": [
+        {
+          "state": "retry",
+          "matcher": "pathAll",
+          "argument": "LoadBalancers[].State.Code",
+          "expected": "active"
+        },
+        {
+          "matcher": "error",
+          "expected": "LoadBalancerNotFound",
+          "state": "success"
         }
       ]
     }
@@ -80717,14 +80791,14 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "route53domains-2014-05-15",
     "apiVersion": "2014-05-15",
     "endpointPrefix": "route53domains",
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon Route 53 Domains",
     "signatureVersion": "v4",
-    "targetPrefix": "Route53Domains_v20140515"
+    "targetPrefix": "Route53Domains_v20140515",
+    "uid": "route53domains-2014-05-15"
   },
   "operations": {
     "CheckDomainAvailability": {
@@ -81464,23 +81538,21 @@ module.exports={
 }
 },{}],128:[function(require,module,exports){
 module.exports={
-  "version": "1.0",
   "pagination": {
     "ListDomains": {
-      "limit_key": "MaxItems",
       "input_token": "Marker",
+      "limit_key": "MaxItems",
       "output_token": "NextPageMarker",
       "result_key": "Domains"
     },
     "ListOperations": {
-      "limit_key": "MaxItems",
       "input_token": "Marker",
+      "limit_key": "MaxItems",
       "output_token": "NextPageMarker",
       "result_key": "Operations"
     }
   }
 }
-
 },{}],129:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -98682,7 +98754,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.43.0',
+  VERSION: '2.44.0',
 
 
   Signers: {},
@@ -102542,7 +102614,9 @@ AWS.Request.addPromisesToClass = function addPromisesToClass(PromiseDependency) 
         if (resp.error) {
           reject(resp.error);
         } else {
-          resolve(resp.data);
+          var data = AWS.util.copy(resp.data);
+          data.$response = resp;
+          resolve(data);
         }
       });
       self.runTo();
@@ -106631,8 +106705,19 @@ var util = {
     if (rules.payload && resp.data[rules.payload]) {
       resp.data[rules.payload] = resp.data[rules.payload].toString();
     }
-  }
+  },
 
+
+  defaultProfile: 'default',
+
+
+  configOptInEnv: 'AWS_SDK_LOAD_CONFIG',
+
+
+  sharedCredentialsFileEnv: 'AWS_SHARED_CREDENTIALS_FILE',
+
+
+  sharedConfigFileEnv: 'AWS_CONFIG_FILE'
 };
 
 module.exports = util;

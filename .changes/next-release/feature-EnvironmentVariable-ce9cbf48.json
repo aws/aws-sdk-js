@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "EnvironmentVariable",
-  "description": "Add support for the AWS_SHARED_CREDENTIALS_FILE environment variable if AWS_SDK_LOAD_CONFIG is set"
-}

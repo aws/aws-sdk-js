@@ -261,7 +261,7 @@
         {"shape":"KMSInternalException"},
         {"shape":"KMSInvalidStateException"}
       ],
-      "documentation":"<p>Returns a data encryption key that you can use in your application to encrypt data locally.</p> <p>You must specify the customer master key (CMK) under which to generate the data key. You must also specify the length of the data key using either the <code>KeySpec</code> or <code>NumberOfBytes</code> field. You must specify one field or the other, but not both. For common key lengths (128-bit and 256-bit symmetric keys), we recommend that you use <code>KeySpec</code>.</p> <p>This operation returns a plaintext copy of the data key in the <code>Plaintext</code> field of the response, and an encrypted copy of the data key in the <code>CiphertextBlob</code> field. The data key is encrypted under the CMK specified in the <code>KeyId</code> field of the request.</p> <p>We recommend that you use the following pattern to encrypt data locally in your application:</p> <ol> <li> <p>Use this operation (<code>GenerateDataKey</code>) to retrieve a data encryption key.</p> </li> <li> <p>Use the plaintext data encryption key (returned in the <code>Plaintext</code> field of the response) to encrypt data locally, then erase the plaintext data key from memory.</p> </li> <li> <p>Store the encrypted data key (returned in the <code>CiphertextBlob</code> field of the response) alongside the locally encrypted data.</p> </li> </ol> <p>To decrypt data locally:</p> <ol> <li> <p>Use the <a>Decrypt</a> operation to decrypt the encrypted data key into a plaintext copy of the data key.</p> </li> <li> <p>Use the plaintext data key to decrypt data locally, then erase the plaintext data key from memory.</p> </li> </ol> <p>To return only an encrypted copy of the data key, use <a>GenerateDataKeyWithoutPlaintext</a>. To return an arbitrary unpredictable byte string, use <a>GenerateRandom</a>.</p> <p>If you use the optional <code>EncryptionContext</code> field, you must store at least enough information to be able to reconstruct the full encryption context when you later send the ciphertext to the <a>Decrypt</a> operation. It is a good practice to choose an encryption context that you can reconstruct on the fly to better secure the ciphertext. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html\">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+      "documentation":"<p>Returns a data encryption key that you can use in your application to encrypt data locally.</p> <p>You must specify the customer master key (CMK) under which to generate the data key. You must also specify the length of the data key using either the <code>KeySpec</code> or <code>NumberOfBytes</code> field. You must specify one field or the other, but not both. For common key lengths (128-bit and 256-bit symmetric keys), we recommend that you use <code>KeySpec</code>.</p> <p>This operation returns a plaintext copy of the data key in the <code>Plaintext</code> field of the response, and an encrypted copy of the data key in the <code>CiphertextBlob</code> field. The data key is encrypted under the CMK specified in the <code>KeyId</code> field of the request.</p> <p>We recommend that you use the following pattern to encrypt data locally in your application:</p> <ol> <li> <p>Use this operation (<code>GenerateDataKey</code>) to retrieve a data encryption key.</p> </li> <li> <p>Use the plaintext data encryption key (returned in the <code>Plaintext</code> field of the response) to encrypt data locally, then erase the plaintext data key from memory.</p> </li> <li> <p>Store the encrypted data key (returned in the <code>CiphertextBlob</code> field of the response) alongside the locally encrypted data.</p> </li> </ol> <p>To decrypt data locally:</p> <ol> <li> <p>Use the <a>Decrypt</a> operation to decrypt the encrypted data key into a plaintext copy of the data key.</p> </li> <li> <p>Use the plaintext data key to decrypt data locally, then erase the plaintext data key from memory.</p> </li> </ol> <p>To return only an encrypted copy of the data key, use <a>GenerateDataKeyWithoutPlaintext</a>. To return a random byte string that is cryptographically secure, use <a>GenerateRandom</a>.</p> <p>If you use the optional <code>EncryptionContext</code> field, you must store at least enough information to be able to reconstruct the full encryption context when you later send the ciphertext to the <a>Decrypt</a> operation. It is a good practice to choose an encryption context that you can reconstruct on the fly to better secure the ciphertext. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html\">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
     },
     "GenerateDataKeyWithoutPlaintext":{
       "name":"GenerateDataKeyWithoutPlaintext",
@@ -295,7 +295,7 @@
         {"shape":"DependencyTimeoutException"},
         {"shape":"KMSInternalException"}
       ],
-      "documentation":"<p>Generates an unpredictable byte string.</p>"
+      "documentation":"<p>Returns a random byte string that is cryptographically secure.</p> <p>For more information about entropy and random number generation, see the <a href=\"https://d0.awsstatic.com/whitepapers/KMS-Cryptographic-Details.pdf\">AWS Key Management Service Cryptographic Details</a> whitepaper.</p>"
     },
     "GetKeyPolicy":{
       "name":"GetKeyPolicy",
@@ -744,7 +744,7 @@
         },
         "Constraints":{
           "shape":"GrantConstraints",
-          "documentation":"<p>The conditions under which the operations permitted by the grant are allowed.</p> <p>You can use this value to allow the operations permitted by the grant only when a specified encryption context is present. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html\">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+          "documentation":"<p>A structure that you can use to allow certain operations in the grant only when the desired encryption context is present. For more information about encryption context, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html\">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
         },
         "GrantTokens":{
           "shape":"GrantTokenList",
@@ -1108,7 +1108,7 @@
       "members":{
         "Plaintext":{
           "shape":"PlaintextType",
-          "documentation":"<p>The unpredictable byte string.</p>"
+          "documentation":"<p>The random byte string.</p>"
         }
       }
     },
@@ -1205,14 +1205,14 @@
       "members":{
         "EncryptionContextSubset":{
           "shape":"EncryptionContextType",
-          "documentation":"<p>Contains a list of key-value pairs, a subset of which must be present in the encryption context of a subsequent operation permitted by the grant. When a subsequent operation permitted by the grant includes an encryption context that matches this list or is a subset of this list, the grant allows the operation. Otherwise, the operation is not allowed.</p>"
+          "documentation":"<p>A list of key-value pairs, all of which must be present in the encryption context of certain subsequent operations that the grant allows. When certain subsequent operations allowed by the grant include encryption context that matches this list or is a superset of this list, the grant allows the operation. Otherwise, the grant does not allow the operation.</p>"
         },
         "EncryptionContextEquals":{
           "shape":"EncryptionContextType",
-          "documentation":"<p>Contains a list of key-value pairs that must be present in the encryption context of a subsequent operation permitted by the grant. When a subsequent operation permitted by the grant includes an encryption context that matches this list, the grant allows the operation. Otherwise, the operation is not allowed.</p>"
+          "documentation":"<p>A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows. When certain subsequent operations allowed by the grant include encryption context that matches this list, the grant allows the operation. Otherwise, the grant does not allow the operation.</p>"
         }
       },
-      "documentation":"<p>A structure for specifying the conditions under which the operations permitted by the grant are allowed.</p> <p>You can use this structure to allow the operations permitted by the grant only when a specified encryption context is present. For more information about encryption context, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html\">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+      "documentation":"<p>A structure that you can use to allow certain operations in the grant only when the desired encryption context is present. For more information about encryption context, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html\">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>Grant constraints apply only to operations that accept encryption context as input. For example, the <code> <a>DescribeKey</a> </code> operation does not accept encryption context as input. A grant that allows the <code>DescribeKey</code> operation does so regardless of the grant constraints. In constrast, the <code> <a>Encrypt</a> </code> operation accepts encryption context as input. A grant that allows the <code>Encrypt</code> operation does so only when the encryption context of the <code>Encrypt</code> operation satisfies the grant constraints.</p>"
     },
     "GrantIdType":{
       "type":"string",
@@ -1260,7 +1260,7 @@
         },
         "Constraints":{
           "shape":"GrantConstraints",
-          "documentation":"<p>The conditions under which the grant's operations are allowed.</p>"
+          "documentation":"<p>A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows.</p>"
         }
       },
       "documentation":"<p>Contains information about an entry in a list of grants.</p>"

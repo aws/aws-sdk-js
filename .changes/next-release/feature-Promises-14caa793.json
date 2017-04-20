@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Promises",
-  "description": "Binds response object to the data object with which successful request promises are resolved"
-}
