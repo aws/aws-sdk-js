@@ -188,7 +188,8 @@ if AWS.util.isNode()
         new AWS.SharedIniFileCredentials()
         expect(os.homedir.calls.length).to.equal(1)
         expect(AWS.util.readFileSync.calls.length).to.equal(1)
-        expect(AWS.util.readFileSync.calls[0].arguments[0]).to.match(/\/foo\/bar\/baz[\/\\].aws[\/\\]credentials/)
+        expect(AWS.util.readFileSync.calls[0].arguments[0]).to
+          .match(/[\/\\]foo[\/\\]bar[\/\\]baz[\/\\].aws[\/\\]credentials/)
 
       it 'throws an error if HOME/HOMEPATH/USERPROFILE are not set', ->
         expect(-> new AWS.SharedIniFileCredentials().refresh()).
