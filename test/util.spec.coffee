@@ -603,7 +603,7 @@ describe 'AWS.util.hoistPayloadMember', ->
   buildService = (api) ->
     service = new AWS.Service endpoint: 'http://localhost', apiConfig: api
 
-  it 'hoists structure payload members', ->
+  it 'hoists structure payload members', (done) ->
     api =
       'metadata': 'protocol': 'rest-xml'
       'operations': 'sample': 'output': 'shape': 'OutputShape'
@@ -624,10 +624,43 @@ describe 'AWS.util.hoistPayloadMember', ->
     buildService(api)
     helpers.mockHttpResponse httpResp.status_code, httpResp.headers, httpResp.body
     req = service.sample()
-    req.send()
-    hoist(req.response)
-    expect(req.response.data.Foo).to.eql('abc')
-    expect(req.response.data.Data.Foo).to.eql('abc')
+    req.send((err, data) -> 
+      hoist(req.response)
+      expect(data.Foo).to.eql('abc')
+      expect(data.Data.Foo).to.eql('abc')
+      done()
+    )
+    
+
+  if typeof Promise != 'undefined'
+      it 'hoists structure payload members', ->
+        AWS.config.setPromisesDependency();
+        api =
+          'metadata': 'protocol': 'rest-xml'
+          'operations': 'sample': 'output': 'shape': 'OutputShape'
+          'shapes':
+            'OutputShape':
+              'type': 'structure'
+              'payload': 'Data'
+              'members':
+                'Data': 'shape': 'SingleStructure'
+            'StringType': 'type': 'string'
+            'SingleStructure':
+              'type': 'structure'
+              'members': 'Foo': 'shape': 'StringType'
+        httpResp =
+          'status_code': 200
+          'headers': 'X-Foo': 'baz'
+          'body': '<OperationNameResponse><Foo>abc</Foo></OperationNameResponse>'
+        buildService(api)
+        helpers.mockHttpResponse httpResp.status_code, httpResp.headers, httpResp.body
+        req = service.sample()
+        res = req.promise()
+        res.then((data) -> 
+          hoist(req.response)
+          expect(data.Foo).to.eql('abc')
+          expect(data.Data.Foo).to.eql('abc')
+        )
 
   it 'does not hoist streaming payload members', ->
     api =
