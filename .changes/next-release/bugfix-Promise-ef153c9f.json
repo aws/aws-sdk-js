@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Promise",
-  "description": "Fixes an issue introduced in v2.44.0 where payload members on some CloudFront and S3 operations weren't hoisted when using promises. This issue was introduced in and could affect users that were accessing fields on a response that weren't documented, but were available for backwards compatibility."
-}

@@ -22,7 +22,8 @@
       "output":{"shape":"AssociateFleetResult"},
       "errors":[
         {"shape":"LimitExceededException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Associate a fleet to a stack.</p>"
     },
@@ -39,7 +40,8 @@
         {"shape":"ResourceNotAvailableException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InvalidRoleException"}
+        {"shape":"InvalidRoleException"},
+        {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Creates a new fleet.</p>"
     },
@@ -53,7 +55,8 @@
       "output":{"shape":"CreateStackResult"},
       "errors":[
         {"shape":"LimitExceededException"},
-        {"shape":"ResourceAlreadyExistsException"}
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Create a new stack.</p>"
     },
@@ -68,7 +71,8 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceNotAvailableException"},
-        {"shape":"OperationNotPermittedException"}
+        {"shape":"OperationNotPermittedException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>Creates a URL to start an AppStream 2.0 streaming session for a user. By default, the URL is valid only for 1 minute from the time that it is generated.</p>"
     },
@@ -82,7 +86,8 @@
       "output":{"shape":"DeleteFleetResult"},
       "errors":[
         {"shape":"ResourceInUseException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Deletes a fleet.</p>"
     },
@@ -96,7 +101,8 @@
       "output":{"shape":"DeleteStackResult"},
       "errors":[
         {"shape":"ResourceInUseException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Deletes the stack. After this operation completes, the environment can no longer be activated, and any reservations made for the stack are released.</p>"
     },
@@ -134,7 +140,10 @@
       },
       "input":{"shape":"DescribeSessionsRequest"},
       "output":{"shape":"DescribeSessionsResult"},
-      "documentation":"<p>Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items.</p>"
+      "errors":[
+        {"shape":"InvalidParameterCombinationException"}
+      ],
+      "documentation":"<p>Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.</p>"
     },
     "DescribeStacks":{
       "name":"DescribeStacks",
@@ -159,7 +168,8 @@
       "output":{"shape":"DisassociateFleetResult"},
       "errors":[
         {"shape":"ResourceInUseException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Disassociates a fleet from a stack.</p>"
     },
@@ -203,7 +213,9 @@
       "output":{"shape":"StartFleetResult"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"OperationNotPermittedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Starts a fleet.</p>"
     },
@@ -216,7 +228,8 @@
       "input":{"shape":"StopFleetRequest"},
       "output":{"shape":"StopFleetResult"},
       "errors":[
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Stops a fleet.</p>"
     },
@@ -232,9 +245,12 @@
         {"shape":"ResourceInUseException"},
         {"shape":"LimitExceededException"},
         {"shape":"InvalidRoleException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceNotAvailableException"},
+        {"shape":"InvalidParameterCombinationException"},
+        {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Updates an existing fleet. All the attributes except the fleet name can be updated in the <b>STOPPED</b> state. Only <b>ComputeCapacity</b> and <b>ImageName</b> can be updated in any other state. </p>"
+      "documentation":"<p>Updates an existing fleet. All the attributes except the fleet name can be updated in the <b>STOPPED</b> state. When a fleet is in the <b>RUNNING</b> state, only <code>DisplayName</code> and <code>ComputeCapacity</code> can be updated. A fleet cannot be updated in a status of <b>STARTING</b> or <b>STOPPING</b>.</p>"
     },
     "UpdateStack":{
       "name":"UpdateStack",
@@ -316,7 +332,15 @@
       "members":{
       }
     },
+    "AuthenticationType":{
+      "type":"string",
+      "enum":[
+        "API",
+        "SAML"
+      ]
+    },
     "Boolean":{"type":"boolean"},
+    "BooleanObject":{"type":"boolean"},
     "ComputeCapacity":{
       "type":"structure",
       "required":["DesiredInstances"],
@@ -350,6 +374,14 @@
         }
       },
       "documentation":"<p>The capacity information for the fleet.</p>"
+    },
+    "ConcurrentModificationException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>An API error occurred, please try again.</p>",
+      "exception":true
     },
     "CreateFleetRequest":{
       "type":"structure",
@@ -395,6 +427,10 @@
         "DisplayName":{
           "shape":"DisplayName",
           "documentation":"<p>The display name of the fleet.</p>"
+        },
+        "EnableDefaultInternetAccess":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Enable/Disable default Internet access from fleet.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for the new fleet to create.</p>"
@@ -582,6 +618,10 @@
         "Limit":{
           "shape":"Integer",
           "documentation":"<p>The size of each page of results. The default value is 20 and the maximum supported value is 50.</p>"
+        },
+        "AuthenticationType":{
+          "shape":"AuthenticationType",
+          "documentation":"<p>The authentication method of the user. It can be <code>API</code> for a user authenticated using a streaming url or <code>SAML</code> for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.</p>"
         }
       }
     },
@@ -654,7 +694,10 @@
       "type":"string",
       "max":100
     },
-    "ErrorMessage":{"type":"string"},
+    "ErrorMessage":{
+      "type":"string",
+      "documentation":"<p>The error message in the exception.</p>"
+    },
     "ExpireSessionRequest":{
       "type":"structure",
       "required":["SessionId"],
@@ -732,6 +775,10 @@
         "FleetErrors":{
           "shape":"FleetErrors",
           "documentation":"<p>The list of fleet errors is appended to this list.</p>"
+        },
+        "EnableDefaultInternetAccess":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Default Internet access from the fleet. True (Enabled), False (Disabled).</p>"
         }
       },
       "documentation":"<p>Contains the parameters for a fleet.</p>"
@@ -812,6 +859,10 @@
           "shape":"VisibilityType",
           "documentation":"<p>The visibility of an image to the user; images can be public or private.</p>"
         },
+        "ImageBuilderSupported":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether an image builder can be launched from this image.</p>"
+        },
         "Platform":{
           "shape":"PlatformType",
           "documentation":"<p>The operating system platform of the image.</p>"
@@ -870,6 +921,14 @@
       ]
     },
     "Integer":{"type":"integer"},
+    "InvalidParameterCombinationException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>Indicates an incorrect combination of parameters, or a missing parameter.</p>",
+      "exception":true
+    },
     "InvalidRoleException":{
       "type":"structure",
       "members":{
@@ -1025,6 +1084,10 @@
         "State":{
           "shape":"SessionState",
           "documentation":"<p>The current state of the streaming session.</p>"
+        },
+        "AuthenticationType":{
+          "shape":"AuthenticationType",
+          "documentation":"<p>The authentication method of the user for whom the session was created. It can be <code>API</code> for a user authenticated using a streaming url or <code>SAML</code> for a SAML federated user.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for a streaming session.</p>"
@@ -1163,6 +1226,10 @@
         "DisplayName":{
           "shape":"DisplayName",
           "documentation":"<p>The name displayed to end users on the AppStream 2.0 portal.</p>"
+        },
+        "EnableDefaultInternetAccess":{
+          "shape":"BooleanObject",
+          "documentation":"<p>Enable/Disable default Internet access from fleet.</p>"
         }
       }
     },
@@ -1223,7 +1290,7 @@
           "documentation":"<p>The list of subnets to which a network interface is established from the fleet instance.</p>"
         }
       },
-      "documentation":"<p>The VPC in which the fleet is launched.</p>"
+      "documentation":"<p>VPC configuration information.</p>"
     }
   },
   "documentation":"<fullname>Amazon AppStream 2.0</fullname> <p>API documentation for Amazon AppStream 2.0.</p>"

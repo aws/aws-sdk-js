@@ -76,11 +76,11 @@ declare class AppStream extends Service {
    */
   describeImages(callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
-   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the nextToken parameter in a subsequent call to this operation to retrieve the next set of items.
+   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the nextToken parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.
    */
   describeSessions(params: AppStream.Types.DescribeSessionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
-   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the nextToken parameter in a subsequent call to this operation to retrieve the next set of items.
+   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the nextToken parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.
    */
   describeSessions(callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class AppStream extends Service {
    */
   stopFleet(callback?: (err: AWSError, data: AppStream.Types.StopFleetResult) => void): Request<AppStream.Types.StopFleetResult, AWSError>;
   /**
-   * Updates an existing fleet. All the attributes except the fleet name can be updated in the STOPPED state. Only ComputeCapacity and ImageName can be updated in any other state. 
+   * Updates an existing fleet. All the attributes except the fleet name can be updated in the STOPPED state. When a fleet is in the RUNNING state, only DisplayName and ComputeCapacity can be updated. A fleet cannot be updated in a status of STARTING or STOPPING.
    */
   updateFleet(params: AppStream.Types.UpdateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
-   * Updates an existing fleet. All the attributes except the fleet name can be updated in the STOPPED state. Only ComputeCapacity and ImageName can be updated in any other state. 
+   * Updates an existing fleet. All the attributes except the fleet name can be updated in the STOPPED state. When a fleet is in the RUNNING state, only DisplayName and ComputeCapacity can be updated. A fleet cannot be updated in a status of STARTING or STOPPING.
    */
   updateFleet(callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
@@ -217,7 +217,9 @@ declare namespace AppStream {
   }
   export interface AssociateFleetResult {
   }
+  export type AuthenticationType = "API"|"SAML"|string;
   export type Boolean = boolean;
+  export type BooleanObject = boolean;
   export interface ComputeCapacity {
     /**
      * The desired number of streaming instances.
@@ -279,6 +281,10 @@ declare namespace AppStream {
      * The display name of the fleet.
      */
     DisplayName?: DisplayName;
+    /**
+     * Enable/Disable default Internet access from fleet.
+     */
+    EnableDefaultInternetAccess?: BooleanObject;
   }
   export interface CreateFleetResult {
     /**
@@ -411,6 +417,10 @@ declare namespace AppStream {
      * The size of each page of results. The default value is 20 and the maximum supported value is 50.
      */
     Limit?: Integer;
+    /**
+     * The authentication method of the user. It can be API for a user authenticated using a streaming url or SAML for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.
+     */
+    AuthenticationType?: AuthenticationType;
   }
   export interface DescribeSessionsResult {
     /**
@@ -518,6 +528,10 @@ declare namespace AppStream {
      * The list of fleet errors is appended to this list.
      */
     FleetErrors?: FleetErrors;
+    /**
+     * Default Internet access from the fleet. True (Enabled), False (Disabled).
+     */
+    EnableDefaultInternetAccess?: BooleanObject;
   }
   export interface FleetError {
     /**
@@ -558,6 +572,10 @@ declare namespace AppStream {
      * The visibility of an image to the user; images can be public or private.
      */
     Visibility?: VisibilityType;
+    /**
+     * Indicates whether an image builder can be launched from this image.
+     */
+    ImageBuilderSupported?: Boolean;
     /**
      * The operating system platform of the image.
      */
@@ -658,6 +676,10 @@ declare namespace AppStream {
      * The current state of the streaming session.
      */
     State: SessionState;
+    /**
+     * The authentication method of the user for whom the session was created. It can be API for a user authenticated using a streaming url or SAML for a SAML federated user.
+     */
+    AuthenticationType?: AuthenticationType;
   }
   export type SessionList = Session[];
   export type SessionState = "ACTIVE"|"PENDING"|"EXPIRED"|string;
@@ -745,6 +767,10 @@ declare namespace AppStream {
      * The name displayed to end users on the AppStream 2.0 portal.
      */
     DisplayName?: DisplayName;
+    /**
+     * Enable/Disable default Internet access from fleet.
+     */
+    EnableDefaultInternetAccess?: BooleanObject;
   }
   export interface UpdateFleetResult {
     /**

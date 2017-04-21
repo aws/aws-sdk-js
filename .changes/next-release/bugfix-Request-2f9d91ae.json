@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Request",
-  "description": "Make `$response` property of resolved promise value non-enumerable to prevent serialization errors"
-}

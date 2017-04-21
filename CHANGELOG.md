@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.44.0-->
+<!--LATEST=2.45.0-->
 <!--ENTRYINSERT-->
+
+## 2.45.0
+* bugfix: Promise: Fixes an issue introduced in v2.44.0 where payload members on some CloudFront and S3 operations weren't hoisted when using promises. This issue was introduced in and could affect users that were accessing fields on a response that weren't documented, but were available for backwards compatibility.
+* bugfix: Request: Make `$response` property of resolved promise value non-enumerable to prevent serialization errors
+* feature: AppStream: The new feature named "Default Internet Access" will enable Internet access from AppStream 2.0 instances - image builders and fleet instances. Admins will check a flag either through AWS management console for AppStream 2.0 or through API while creating an image builder or while creating/updating a fleet.
+* feature: Kinesis: Adds a new waiter, StreamNotExists, to Kinesis.
 
 ## 2.44.0
 * feature: DeviceFarm: API Update for AWS Device Farm: Support for Deals and Promotions 
