@@ -1,5 +1,5 @@
-var AWS = require('../../index');
 var helpers = require('../helpers');
+var AWS = helpers.AWS;
 var Buffer = AWS.util.Buffer;
 
 describe('AWS.IotData', function() {
