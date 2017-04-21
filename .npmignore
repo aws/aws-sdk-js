@@ -2,9 +2,14 @@
 .eslintrc
 .travis.yml
 .gitignore
+.jshintrc
+.npmignore
+.tesselinclude
 apis/*.normal.json
+bower.json
 configuration
 configuration.sample
+codecov.yml
 coverage
 doc
 doc-src
@@ -12,8 +17,10 @@ eslint-rules
 Gemfile
 Gemfile.lock
 features
+karma.conf.js
 Rakefile
 test
+testem.json
 tasks
 ts
 vendor
