@@ -161,7 +161,7 @@ export class Request<D, E> {
     /**
      * Returns a 'thenable' promise.
      */
-    promise(): Promise<D & {$response: Response<D, E>}>
+    promise(): Promise<PromiseResult<D, E>>
     /**
      * The time that the request started.
      */
@@ -172,6 +172,8 @@ export class Request<D, E> {
     httpRequest: HttpRequest;
 
 }
+
+export type PromiseResult<D, E> = D & {$response: Response<D, E>};
 
 export interface Progress {
     loaded: number;

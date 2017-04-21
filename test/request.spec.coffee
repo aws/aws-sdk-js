@@ -287,6 +287,7 @@ describe 'AWS.Request', ->
         helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
         service.makeRequest('mockMethod').promise().then (data) ->
           expect(data.$response.httpResponse.statusCode).to.equal(200)
+          expect(JSON.stringify(data)).to.be.ok;
 
     it 'appends \'promise\' to the user agent', ->
       P = ->
