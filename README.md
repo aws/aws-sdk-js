@@ -45,6 +45,19 @@ into a terminal window:
 npm install aws-sdk
 ```
 
+### In React Native
+To use the SDK in a react native project, first install the SDK using npm:
+
+```sh
+npm install aws-sdk
+```
+
+Then within your application, you can reference the react native compatible version of the SDK with the following:
+
+```javascript
+var AWS = require('aws-sdk/dist/aws-sdk-react-native');
+```
+
 ### Using Bower
 
 You can also use [Bower](http://bower.io) to install the SDK by typing the
