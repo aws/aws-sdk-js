@@ -41,6 +41,17 @@
       ]
     }
   ],
+  "rds": [
+    {
+      "path": "lib/rds/signer",
+      "imports": [
+        {
+          "name": "Signer",
+          "alias": "signer"
+        }
+      ]
+    }
+  ],
   "s3": [
     {
       "path": "lib/s3/managed_upload",
