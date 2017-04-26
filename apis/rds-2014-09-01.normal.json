@@ -1,14 +1,14 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2013-09-09",
+    "apiVersion":"2014-09-01",
     "endpointPrefix":"rds",
     "protocol":"query",
     "serviceAbbreviation":"Amazon RDS",
     "serviceFullName":"Amazon Relational Database Service",
     "signatureVersion":"v4",
-    "uid":"rds-2013-09-09",
-    "xmlNamespace":"http://rds.amazonaws.com/doc/2013-09-09/"
+    "uid":"rds-2014-09-01",
+    "xmlNamespace":"http://rds.amazonaws.com/doc/2014-09-01/"
   },
   "operations":{
     "AddSourceIdentifierToSubscription":{
@@ -57,6 +57,23 @@
         {"shape":"AuthorizationQuotaExceededFault"}
       ]
     },
+    "CopyDBParameterGroup":{
+      "name":"CopyDBParameterGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyDBParameterGroupMessage"},
+      "output":{
+        "shape":"CopyDBParameterGroupResult",
+        "resultWrapper":"CopyDBParameterGroupResult"
+      },
+      "errors":[
+        {"shape":"DBParameterGroupNotFoundFault"},
+        {"shape":"DBParameterGroupAlreadyExistsFault"},
+        {"shape":"DBParameterGroupQuotaExceededFault"}
+      ]
+    },
     "CopyDBSnapshot":{
       "name":"CopyDBSnapshot",
       "http":{
@@ -73,6 +90,23 @@
         {"shape":"DBSnapshotNotFoundFault"},
         {"shape":"InvalidDBSnapshotStateFault"},
         {"shape":"SnapshotQuotaExceededFault"}
+      ]
+    },
+    "CopyOptionGroup":{
+      "name":"CopyOptionGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyOptionGroupMessage"},
+      "output":{
+        "shape":"CopyOptionGroupResult",
+        "resultWrapper":"CopyOptionGroupResult"
+      },
+      "errors":[
+        {"shape":"OptionGroupAlreadyExistsFault"},
+        {"shape":"OptionGroupNotFoundFault"},
+        {"shape":"OptionGroupQuotaExceededFault"}
       ]
     },
     "CreateDBInstance":{
@@ -98,7 +132,9 @@
         {"shape":"InvalidSubnet"},
         {"shape":"InvalidVPCNetworkStateFault"},
         {"shape":"ProvisionedIopsNotAvailableInAZFault"},
-        {"shape":"OptionGroupNotFoundFault"}
+        {"shape":"OptionGroupNotFoundFault"},
+        {"shape":"StorageTypeNotSupportedFault"},
+        {"shape":"AuthorizationNotFoundFault"}
       ]
     },
     "CreateDBInstanceReadReplica":{
@@ -128,7 +164,8 @@
         {"shape":"ProvisionedIopsNotAvailableInAZFault"},
         {"shape":"OptionGroupNotFoundFault"},
         {"shape":"DBSubnetGroupNotAllowedFault"},
-        {"shape":"InvalidDBSubnetGroupFault"}
+        {"shape":"InvalidDBSubnetGroupFault"},
+        {"shape":"StorageTypeNotSupportedFault"}
       ]
     },
     "CreateDBParameterGroup":{
@@ -629,7 +666,9 @@
         {"shape":"InvalidVPCNetworkStateFault"},
         {"shape":"ProvisionedIopsNotAvailableInAZFault"},
         {"shape":"OptionGroupNotFoundFault"},
-        {"shape":"DBUpgradeDependencyFailureFault"}
+        {"shape":"DBUpgradeDependencyFailureFault"},
+        {"shape":"StorageTypeNotSupportedFault"},
+        {"shape":"AuthorizationNotFoundFault"}
       ]
     },
     "ModifyDBParameterGroup":{
@@ -820,7 +859,9 @@
         {"shape":"DBSubnetGroupDoesNotCoverEnoughAZs"},
         {"shape":"InvalidSubnet"},
         {"shape":"ProvisionedIopsNotAvailableInAZFault"},
-        {"shape":"OptionGroupNotFoundFault"}
+        {"shape":"OptionGroupNotFoundFault"},
+        {"shape":"StorageTypeNotSupportedFault"},
+        {"shape":"AuthorizationNotFoundFault"}
       ]
     },
     "RestoreDBInstanceToPointInTime":{
@@ -848,7 +889,9 @@
         {"shape":"DBSubnetGroupDoesNotCoverEnoughAZs"},
         {"shape":"InvalidSubnet"},
         {"shape":"ProvisionedIopsNotAvailableInAZFault"},
-        {"shape":"OptionGroupNotFoundFault"}
+        {"shape":"OptionGroupNotFoundFault"},
+        {"shape":"StorageTypeNotSupportedFault"},
+        {"shape":"AuthorizationNotFoundFault"}
       ]
     },
     "RevokeDBSecurityGroupIngress":{
@@ -961,8 +1004,7 @@
     "AvailabilityZone":{
       "type":"structure",
       "members":{
-        "Name":{"shape":"String"},
-        "ProvisionedIopsCapable":{"shape":"Boolean"}
+        "Name":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -982,6 +1024,26 @@
         "CharacterSetDescription":{"shape":"String"}
       }
     },
+    "CopyDBParameterGroupMessage":{
+      "type":"structure",
+      "required":[
+        "SourceDBParameterGroupIdentifier",
+        "TargetDBParameterGroupIdentifier",
+        "TargetDBParameterGroupDescription"
+      ],
+      "members":{
+        "SourceDBParameterGroupIdentifier":{"shape":"String"},
+        "TargetDBParameterGroupIdentifier":{"shape":"String"},
+        "TargetDBParameterGroupDescription":{"shape":"String"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CopyDBParameterGroupResult":{
+      "type":"structure",
+      "members":{
+        "DBParameterGroup":{"shape":"DBParameterGroup"}
+      }
+    },
     "CopyDBSnapshotMessage":{
       "type":"structure",
       "required":[
@@ -998,6 +1060,26 @@
       "type":"structure",
       "members":{
         "DBSnapshot":{"shape":"DBSnapshot"}
+      }
+    },
+    "CopyOptionGroupMessage":{
+      "type":"structure",
+      "required":[
+        "SourceOptionGroupIdentifier",
+        "TargetOptionGroupIdentifier",
+        "TargetOptionGroupDescription"
+      ],
+      "members":{
+        "SourceOptionGroupIdentifier":{"shape":"String"},
+        "TargetOptionGroupIdentifier":{"shape":"String"},
+        "TargetOptionGroupDescription":{"shape":"String"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CopyOptionGroupResult":{
+      "type":"structure",
+      "members":{
+        "OptionGroup":{"shape":"OptionGroup"}
       }
     },
     "CreateDBInstanceMessage":{
@@ -1035,7 +1117,10 @@
         "OptionGroupName":{"shape":"String"},
         "CharacterSetName":{"shape":"String"},
         "PubliclyAccessible":{"shape":"BooleanOptional"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"},
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "CreateDBInstanceReadReplicaMessage":{
@@ -1055,7 +1140,8 @@
         "OptionGroupName":{"shape":"String"},
         "PubliclyAccessible":{"shape":"BooleanOptional"},
         "Tags":{"shape":"TagList"},
-        "DBSubnetGroupName":{"shape":"String"}
+        "DBSubnetGroupName":{"shape":"String"},
+        "StorageType":{"shape":"String"}
       }
     },
     "CreateDBInstanceReadReplicaResult":{
@@ -1249,7 +1335,9 @@
         "CharacterSetName":{"shape":"String"},
         "SecondaryAvailabilityZone":{"shape":"String"},
         "PubliclyAccessible":{"shape":"Boolean"},
-        "StatusInfos":{"shape":"DBInstanceStatusInfoList"}
+        "StatusInfos":{"shape":"DBInstanceStatusInfoList"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -1520,7 +1608,9 @@
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupName":{"shape":"String"},
         "PercentProgress":{"shape":"Integer"},
-        "SourceRegion":{"shape":"String"}
+        "SourceRegion":{"shape":"String"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -2347,7 +2437,10 @@
         "AutoMinorVersionUpgrade":{"shape":"BooleanOptional"},
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupName":{"shape":"String"},
-        "NewDBInstanceIdentifier":{"shape":"String"}
+        "NewDBInstanceIdentifier":{"shape":"String"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"},
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "ModifyDBInstanceResult":{
@@ -2630,7 +2723,9 @@
         "AvailabilityZones":{"shape":"AvailabilityZoneList"},
         "MultiAZCapable":{"shape":"Boolean"},
         "ReadReplicaCapable":{"shape":"Boolean"},
-        "Vpc":{"shape":"Boolean"}
+        "Vpc":{"shape":"Boolean"},
+        "StorageType":{"shape":"String"},
+        "SupportsIops":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -2681,7 +2776,8 @@
         "MultiAZ":{"shape":"BooleanOptional"},
         "EngineVersion":{"shape":"String"},
         "Iops":{"shape":"IntegerOptional"},
-        "DBInstanceIdentifier":{"shape":"String"}
+        "DBInstanceIdentifier":{"shape":"String"},
+        "StorageType":{"shape":"String"}
       }
     },
     "PointInTimeRestoreNotEnabledFault":{
@@ -2945,7 +3041,10 @@
         "Engine":{"shape":"String"},
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupName":{"shape":"String"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"},
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "RestoreDBInstanceFromDBSnapshotResult":{
@@ -2977,7 +3076,10 @@
         "Engine":{"shape":"String"},
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupName":{"shape":"String"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"},
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "RestoreDBInstanceToPointInTimeResult":{
@@ -3086,6 +3188,18 @@
       "documentation":"<p>Request would result in user exceeding the allowed amount of storage available across all DB instances.</p>",
       "error":{
         "code":"StorageQuotaExceeded",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "StorageTypeNotSupportedFault":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p> <i>StorageType</i> specified cannot be associated with the DB Instance. </p>",
+      "error":{
+        "code":"StorageTypeNotSupported",
         "httpStatusCode":400,
         "senderFault":true
       },
