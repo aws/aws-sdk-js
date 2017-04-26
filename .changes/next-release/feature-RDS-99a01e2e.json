@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "RDS",
-  "description": "Adds AWS.RDS.Signer class to generate auth tokens for connecting to a database."
-}
