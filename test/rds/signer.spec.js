@@ -53,7 +53,7 @@ describe('AWS.RDS.Signer', function() {
             });
         });
  
-        it('will not error if all fields are accessible', function() {
+        it('will not error if all fields are accessible with credentials', function() {
             var didError = false;
             try {
                 var token = rdsSigner.getAuthToken(testOptions);
