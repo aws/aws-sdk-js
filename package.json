@@ -32,7 +32,8 @@
     "repl.history": "*",
     "semver": "*",
     "typescript": "2.0.8",
-    "uglify-js": "2.x"
+    "uglify-js": "2.x",
+    "webpack": "^2.4.1"
   },
   "dependencies": {
     "buffer": "4.9.1",
@@ -54,6 +55,16 @@
   },
   "browserify": {
     "transform": "./dist-tools/transform.js"
+  },
+  "react-native": {
+    "lib/aws.js": "../react-native.js",
+    "lib/browser.js": "../react-native.js",
+    "fs": "./lib/empty.js",
+    "uuid/lib/rng": "uuid/lib/rng-browser.js",
+    "./lib/node_loader.js": "./lib/react-native-loader.js",
+    "./lib/browser_loader.js": "./lib/react-native-loader.js",
+    "index.js": "./react-native.js",
+    "./support/isBuffer.js": "./support/isBufferBrowser.js"
   },
   "directories": {
     "lib": "lib"
@@ -110,7 +121,7 @@
     "waf"
   ],
   "scripts": {
-    "test": "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
+    "test": "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && npm -s run-script react-native-test && ([ -f configuration ] && npm -s run-script integration || true)",
     "unit": "mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds",
     "browsertest": "rake browser:test && karma start",
@@ -120,6 +131,8 @@
     "console": "./scripts/console",
     "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`",
     "tstest": "tsc -p ./ts",
-    "add-change": "node ./scripts/changelog/add-change.js"
+    "add-change": "node ./scripts/changelog/add-change.js",
+    "build-react-native": "webpack --config dist-tools/webpack.config.rn.js",
+    "react-native-test": "npm -s run-script build-react-native && rake reactnative:test && karma start"
   }
 }
