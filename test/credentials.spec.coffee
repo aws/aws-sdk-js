@@ -191,6 +191,16 @@ if AWS.util.isNode()
         expect(AWS.util.readFileSync.calls[0].arguments[0]).to
           .match(/[\/\\]foo[\/\\]bar[\/\\]baz[\/\\].aws[\/\\]credentials/)
 
+      it 'should prefer $HOME to os.homedir', ->
+        process.env.HOME = '/home/user'
+        helpers.spyOn(os, 'homedir').andReturn(process.env.HOME + '/foo/bar')
+
+        new AWS.SharedIniFileCredentials()
+        expect(os.homedir.calls.length).to.equal(0)
+        expect(AWS.util.readFileSync.calls.length).to.equal(1)
+        expect(AWS.util.readFileSync.calls[0].arguments[0]).to
+          .match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)
+
       it 'throws an error if HOME/HOMEPATH/USERPROFILE are not set', ->
         expect(-> new AWS.SharedIniFileCredentials().refresh()).
           to.throw('Cannot load credentials, HOME path not set')
